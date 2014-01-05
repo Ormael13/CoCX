@@ -918,15 +918,15 @@ public function dildoFuckRubi():void {
 	
 	//(Normal/Incubus Rubi)
 	if(!rubiBimbo()) {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell he's eagerly waiting his turn.  You get on your hands and knees and crawl over him, pressing the dildo against his skin, letting the drug do its magic.  His skin flushes and he curls his spine impulsively.");
+		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting [rubi eir] turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
 	}
 	//(Bimbo Rubi) 
 	else {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell she's eagerly waiting her turn.  You get on your hands and knees and crawl over her, pressing the dildo against her skin, letting the drug do its magic.  Her skin flushes and she curls her spine impulsively.");
+		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting her turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
 	}
  	
 	//(Normal/Incubus Rubi) 
-	if(!rubiBimbo()) outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting him get a taste by pressing the tip against those luscious ruby red lips.  They part shakily and his tongue reaches out to taste the dildo.  He apparently finds it pleasing, because he immediately wraps his lips around the tip, sucking and bobbing on it like it was a real cock.");
+	if(!rubiBimbo()) outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting " + rubiMF("him","her") + " get a taste by pressing the tip against those luscious ruby red lips.  They part shakily and [rubi eir] tongue reaches out to taste the dildo.  He apparently finds it pleasing, because he immediately wraps his lips around the tip, sucking and bobbing on it like it was a real cock.");
 	//(Bimbo Rubi) 
 	else outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting her get a taste by pressing the tip against those luscious ruby red lips.  They easily part, and her tongue takes a long slurp, just to taste the dildo.  She apparently finds it pleasing, because she immediately wraps her lips around the tip, sucking and bobbing on it like it was a real cock.");
 	
@@ -990,7 +990,10 @@ public function dildoFuckRubi():void {
 	
 	outputText("\n\nAbsolutely exhausted, you lay there limply, as does Rubi, as if you're both afraid to move and potentially awaken the monstrous dildo again.  With a satisfied sigh, however, you sit up and carefully pull out the shrinking dildo from the both of you.  A pink, cum-like liquid pours from both of your abused holes, pooling together into one puddle between you.");
 	
-	outputText("\n\nRubi rubs " + rubiMF("his asshole","her pussy") + " with a slight smile on [rubi eir] face, and says, \"<i>Well, that was interesting.</i>\"  You laugh at the understatement of the century, and stand, helping Rubi up off the couch as well.");
+	outputText("\n\nRubi rubs [rubi eir] ");
+	if(flags[kFLAGS.RUBI_NO_CUNT] == 0) outputText("pussy");
+	else outputText("asshole");
+	outputText(" with a slight smile on [rubi eir] face, and says, \"<i>Well, that was interesting.</i>\"  You laugh at the understatement of the century, and stand, helping Rubi up off the couch as well.");
 	
 	outputText("\n\nThe two of you head to the bathroom, leaking pink cum as you go, and share a quick shower, before getting to the task of cleaning up the evidence of your playtime.  Once it's been satisfactorily cleaned, you give Rubi a little kiss and head off back to camp, supremely sated.");
 	stats(0,0,0,0,0,0,-100,0);
@@ -2417,6 +2420,7 @@ public function getFuckedByRubi():void {
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("blunted, musky tip");
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
+	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + flags[kFLAGS.RUBI_COCK_TYPE] + "</b>  ")
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");
@@ -2431,7 +2435,7 @@ public function getFuckedByRubi():void {
 	else outputText("g-spot");
 	outputText(", and one by one your limbs start to tingle.  In and out, [rubi ey] goes, and you can feel something building inside you.");
 
-	outputText("\n\nYour arms tingle, hands gripping at the sheets in an attempt to anchor yourself.  Your [legs] shiver as goose bumps rise on your flesh.  One leg spasms wildly, unwilling to follow your brain's commands in the face of this rising pleasure.  Your head spins, awash in feelings of bliss and something else... could it be love?  You bite your lip, your face contorting into a look of needful desperation.  Love for this demon-tainted " + rubiMF("boy","girl") + ", for this person who's shared their secrets, their life with you?  Your mind grows foggy, and at this point not even you are certain of the true answer buried under all of these sensations.  The look on Rubi's face, however, is as plain as day.  Adoration pours from [rubi em] as [rubi ey] pounds away, fucking your [vagOrAss] faster and faster with each measure, careful thrust.");
+	outputText("\n\nYour arms tingle, hands gripping at the sheets in an attempt to anchor yourself.  Your [legs] shiver as goose bumps rise on your flesh.  One leg spasms wildly, unwilling to follow your brain's commands in the face of this rising pleasure.  Your head spins, awash in feelings of bliss and something else... could it be love?  You bite your lip, your face contorting into a look of needful desperation.  Love for this demon-tainted " + rubiMF("boy","girl") + ", for this person who's shared their secrets, their life with you?  Your mind grows foggy, and at this point not even you are certain of the true answer buried under all of these sensations.  The look on Rubi's face, however, is as plain as day.  Adoration pours from [rubi em] as [rubi ey] pounds away, fucking your [vagOrAss] faster and faster with each measured, careful thrust.");
 	
 	outputText("\n\nSeveral things happen in quick succession.  First, your lover glances down at you with that same look [rubi ey]'s used all day.  That questioning, submissive look, the look that just minutes ago said, \"<i>Can I fuck you?\</i>\"  Now it says, through the guise of those sparkling ");
 	if(flags[kFLAGS.RUBI_EYE_TYPE] == 0 || rubiBimbo()) outputText("green");
@@ -2469,7 +2473,7 @@ public function getFuckedByRubi():void {
 	}
 	//(Blueballs 10)
 	else outputText("Your insides rumble dangerously and your stomach actually swells up, gaining a noticeable paunch as Rubi's lavish load coats your insides, filling every available nook and cranny and even creating new ones.  What doesn't fit slips out of your abused hole in a flood, coating the bed and floor beneath you in a slick, white glaze.  ");
-	outputText("Rubi doesn't stop there, however, [rubi ey] continues to assail your [vagOrAss], bringing you to several more miniature, body-shaking orgasms, until [rubi ey] just can't handle any more, and [rubi ey] pulls out, [rubi eir] cock still rather erect and looking cozy in its jacket-like foreskin.");
+	outputText("Rubi doesn't stop there, however; [rubi ey] continues to assail your [vagOrAss], bringing you to several more miniature, body-shaking orgasms, until [rubi ey] just can't handle any more, and [rubi ey] pulls out, [rubi eir] cock still rather erect and looking cozy in its jacket-like foreskin.");
 	
 	outputText("\n\nYou waggle a finger at [rubi em] hazily, and [rubi ey] climbs up onto the bed next to you.  You wrap your arms around [rubi em] and kiss [rubi em] passionately before pulling [rubi em] into a cuddling hug.  The two of you drift off into a short nap, contentedly wrapped up in each other's arms.");
 	stats(0,0,0,0,0,2,-100,0);

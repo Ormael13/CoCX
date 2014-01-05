@@ -35,7 +35,7 @@ public function hellHoundWormCannon():void {
 	else {
 		outputText("You sidestep the gush of wormy fluid, letting it splatter against the rocks behind you.", false);
 		//(If infested +10 lust:  
-		if(player.hasStatusAffect("infested") >= 0) {
+		if(player.hasStatusAffect("infested") >= 0 && player.hasCock()) {
 			outputText("  Despite avoiding the torrent of infected seed, your own wormy ", false);
 			if(player.balls > 0) outputText(ballsDescriptLight(), false);
 			else outputText(multiCockDescriptLight(), false);
@@ -79,7 +79,7 @@ public function infestedHellhoundLossRape():void {
 		return;
 	}
 	//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
-	else if(player.hasStatusAffect("infested") < 0 && player.biggestCockArea() >= 40) {
+	else if(player.hasStatusAffect("infested") < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
 		//(LUST)
 		if(player.lust > 99) {
 			outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);

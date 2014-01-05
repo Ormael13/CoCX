@@ -269,6 +269,7 @@ public function antColiseumFight():void {
 		outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 		outputText("\n\nYou're fighting a tentacle beast!");
 		startCombat(new TentacleBeast());
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	//►[Fight #2]
 	else if(flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
@@ -283,6 +284,7 @@ public function antColiseumFight():void {
 			monster.str += 25;
 			monster.lustVuln = 0.84;
 		}
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	//►[Fight #3]
 	else {
@@ -293,6 +295,7 @@ public function antColiseumFight():void {
 		outputText("\n\nYou're fighting a gnoll!");
 		flags[kFLAGS.MET_ANT_ARENA_GNOLL]++;
 		startCombat(new Gnoll());
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	monster.createStatusAffect("PhyllaFight",0,0,0,0);
 	doNext(1);
@@ -2429,7 +2432,7 @@ public function phyllasKidsChildren():void {
 	else if(flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING] < 40) outputText("\n\n\"<i>We've made considerable progress as you can no doubt tell.  Most of our children are completely capable of digging their own tunnels and with as many as we have, the progress is quite fast.  A few of them have even taken your name.  I mean, I hope you don't mind.  I started running out of names around the one hundredth egg.</i>\"");
 	//If birthing for more than 40 days:
 	else {
-		outputText("\n\n\"<i>The colony is as big and wonderful as I ever hoped it would be. I've now toned back on my egg laying to keep our colony at a sustainable level.  This colony even rivals my mother's - in fact, I think it's a little bigger.</i>\"  You hear a very prideful tone her voice.  Though she seems thrilled, Phylla can tell that you don't really feel the same way; her mother's colony was massive and you consider you might have let this go on a little too long.");
+		outputText("\n\n\"<i>The colony is as big and wonderful as I ever hoped it would be. I've now toned back on my egg laying to keep our colony at a sustainable level.  This colony even rivals my mother's - in fact, I think it's a little bigger.</i>\"  You hear a very prideful tone in her voice.  Though she seems thrilled, Phylla can tell that you don't really feel the same way; her mother's colony was massive and you consider the possibility that you might have let this go on a little too long.");
 	}
 	outputText("\n\nClearly she sees you're not at ease and tries to reassure you.  \"<i>We don't have an arena like my mother did; I have no reason for such a thing.  I mean, unless it would make you feel more comfortable down here...</i>\"  That's the last thing that would make you comfortable; you could have died in that arena and you'll be damned if you ever see another one again.  \"<i>Well, your children are happy.  They're living out their lives in peace and prosperity.  All thanks to you.</i>\"");
 	
