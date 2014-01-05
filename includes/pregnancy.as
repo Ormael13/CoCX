@@ -1241,7 +1241,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birf if its time... to ANAL EGGS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 23) {
-		birthFrogEggsAnal();
+		frogGirlScene.birthFrogEggsAnal();
 		displayedUpdate = true;
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType = 0;
@@ -1393,7 +1393,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birf if its time... to FROG EGGS
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 23) {
-		layFrogEggs();
+		frogGirlScene.layFrogEggs();
 		displayedUpdate = true;
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;

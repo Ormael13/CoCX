@@ -1396,7 +1396,7 @@ private function arianSexMenu(output:Boolean = true):void {
 //Modified by AnalXP.
 //PC must have a cock that fits (cock area 50 or less)
 private function giveArianAnal():void {
-	var x = player.cockThatFits(50);
+	var x:int = player.cockThatFits(50);
 	clearOutput();
 	arianHealth(3);
 	flags[kFLAGS.ARIAN_ANAL_XP] += 10;

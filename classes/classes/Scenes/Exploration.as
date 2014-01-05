@@ -1385,7 +1385,7 @@ package classes.Scenes
 				kGAMECLASS.helSexualAmbush();
 				return;
 			}
-			if (player.buttPregnancyIncubation == 0 && rand(3) == 0) kGAMECLASS.findTheFrogGirl();
+			if (player.buttPregnancyIncubation == 0 && rand(3) == 0) kGAMECLASS.frogGirlScene.findTheFrogGirl();
 			else if (rand(2) == 0) kGAMECLASS.chameleonGirlScene.encounterChameleon();
 			else {
 				clearOutput();

@@ -111,6 +111,12 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		// Scenes/
+		public var exploration:Exploration = new Exploration();
+		// Scenes/Areas/Bog/
+		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
+		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
+
 		// Named NPC Scenes (excluding dungeon bosses)
 		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
@@ -123,7 +129,6 @@
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
-		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var fetishCultistScene:FetishCultistScene = new FetishCultistScene();
@@ -149,7 +154,6 @@
 		// Other scenes
 		public var testContent:TestContent = new TestContent();
 		public var antsScene:AntsScene = new AntsScene();
-		public var exploration:Exploration = new Exploration();
 
 		include "../../includes/april_fools.as";
 		include "../../includes/auntNancy.as";
@@ -174,7 +178,6 @@
 		include "../../includes/fapArena.as";
 		include "../../includes/fellatrix.as";
 		include "../../includes/fera.as";
-		include "../../includes/froggirl.as";
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
 		include "../../includes/gargoyle.as";
