@@ -25,7 +25,7 @@
 			}
 			if (hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.phyllaTentacleDefeat();
+				game.antsScene.phyllaTentacleDefeat();
 			}
 			else {
 				if(!hpVictory && player.gender > 0) {
@@ -43,7 +43,7 @@
 				if (hasStatusAffect("PhyllaFight") >= 0) {
 					removeStatusAffect("PhyllaFight");
 					outputText("...and make it into the nearby tunnel.  ");
-					game.phyllaTentaclePCLoss();
+					game.antsScene.phyllaTentaclePCLoss();
 				} else
 					game.eventParser(5074);
 			} else {
@@ -51,7 +51,7 @@
 				if(hasStatusAffect("PhyllaFight") >= 0) {
 					removeStatusAffect("PhyllaFight");
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
-					game.phyllaTentaclePCLoss();
+					game.antsScene.phyllaTentaclePCLoss();
 				} else
 					doNext(5074);
 			}

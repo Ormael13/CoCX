@@ -127,7 +127,7 @@ public function telAdreMenu():void {
 	   return;
 	}
 	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0) {
-		meetArian();
+		arianScene.meetArian();
 		return;
 	}
 	//Display Tel'adre menu options//
@@ -158,7 +158,7 @@ public function telAdreMenu():void {
 		}
 	}
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
-	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !arianFollower()) homes = true;
+	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !arianScene.arianFollower()) homes = true;
 	if(homes) homeB = 3993;
 	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
@@ -167,7 +167,7 @@ public function telAdreMenu():void {
 	addButton(2,"Bar",enterBarTelAdre);
 	addButton(3,"Gym",gymDesc);
 	if(homeB > 0) addButton(4,"Homes",eventParser,homeB);
-	if(flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5,"Park",visitThePark);
+	if(flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5,"Park",arianScene.visitThePark);
 	addButton(6,"Pawn",oswaldPawn);
 	addButton(7,"Tower",visitZeMagesTower);
 	addButton(8,"Weapons",weaponShop);
@@ -202,7 +202,7 @@ public function houses():void {
 		}
 	}
 	menu();
-	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !arianFollower()) addButton(0,"Arian's",visitAriansHouse);
+	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !arianScene.arianFollower()) addButton(0,"Arian's",arianScene.visitAriansHouse);
 	if(orphanage) addButton(1,"Orphanage",orphanageIntro);
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",visitTheHouse);
 	addButton(9,"Back",telAdreMenu);

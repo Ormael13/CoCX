@@ -1,4 +1,12 @@
-﻿// ARIAN_FOLLOWER:int = 933;
+﻿package classes.Scenes.Places.TelAdre{
+	import classes.BaseContent;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+// ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
 // ARIAN_HEALTH:int = 935; //Higher is better.
 // ARIAN_ANAL_XP:int = 936;
@@ -82,8 +90,12 @@ Naga TF
 Corruption Path (Arian's body is drastically altered, but [Arian eir] personality only suffers minor alterations.)
 (Unlikely) Boon and Laika
 */
+public class ArianScene extends BaseContent
+{
+	public function ArianScene(){
 
-public function arianCockSize():Number {
+	}
+private function arianCockSize():Number {
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] < 0 || flags[kFLAGS.ARIAN_COCK_SIZE] > 3) return 0;
 	else if(flags[kFLAGS.ARIAN_COCK_SIZE] == 1) return 9;
 	else if(flags[kFLAGS.ARIAN_COCK_SIZE] == 2) return 16;
@@ -93,7 +105,7 @@ public function arianCockSize():Number {
 public function arianFollower():Boolean {
 	return flags[kFLAGS.ARIAN_FOLLOWER] > 0;
 }
-public function arianMF(boy:String,girl:String):String {
+private function arianMF(boy:String,girl:String):String {
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 		if(flags[kFLAGS.ARIAN_VAGINA] > 0) return girl;
 		else return boy;
@@ -108,7 +120,7 @@ public function arianHealth(arg:Number = 0):Number {
 	}
 	return flags[kFLAGS.ARIAN_HEALTH];
 }
-public function arianChestAdjective():String {
+private function arianChestAdjective():String {
 	var buffer:String = "";
 	var temp:int = rand(10);
 	if(flags[kFLAGS.ARIAN_BREASTS] == 0) return "";
@@ -134,8 +146,8 @@ public function arianChestAdjective():String {
 	}
 	return buffer;
 }
-public function arianChest():String {
-	var buffer:String = ""
+private function arianChest():String {
+	var buffer:String = "";
 	//Men get no cool descriptions!
 	if(flags[kFLAGS.ARIAN_BREASTS] == 0) return "chest";
 	
@@ -166,7 +178,7 @@ public function meetArian():void {
 }
 
 //[=Don't Help=]
-public function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
+private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 	clearOutput();
 	outputText("Not liking the risks it presents - after all, they could be a mugger, or have something nasty and highly contagious - you keep on walking.  You've not gone too far before a pair of figures, elegantly dressed ferret-morphs, nearly slam into you, running quickly.  You shout at them to watch where they're going, but they ignore you, instead heading straight for the alleyway you just passed.  You watch as they grab the hooded figure and pull them to their feet.  The ferrets start chattering at their target; though you can't make out precisely what they're saying, it sounds like a scolding, even as they take a bottle from a pouch they're carrying and make the hooded figure drink it.  The cloaked man's coughs start to subside, and they promptly take an arm each and half-lead, half-carry him away.  You wonder what that was all about, but decide it doesn't matter and press on.");
 	//Disable the bitch if appropriate.
@@ -179,7 +191,7 @@ public function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 }
 
 //[=Help=]
-public function helpArianWhenYouMeetHim():void {
+private function helpArianWhenYouMeetHim():void {
 	clearOutput();
 	outputText("You approach the hooded figure with caution, asking if they're alright; it feels a little silly to say that, but you can't think of much else to say.");
 	
@@ -220,7 +232,7 @@ public function helpArianWhenYouMeetHim():void {
 //But you can just spam it if you want, there is no schedule and Arian will magically be at the park whenever you go there.
 //Use variable ArianPark to determine the number of visits.
 public function visitThePark():void {
-	clearOutput()
+	clearOutput();
 	outputText("As you enter the ragged remnants of the park, you spot the sickly lizan, Arian, sitting at his usual bench, and greet him.  \"<i>Oh, hello there [name].  Good to see you.</i>\"  He waves lazily.");
 	
 	//Visit 1
@@ -242,7 +254,7 @@ public function visitThePark():void {
 		
 		outputText("\n\nHow is that so?");
 		//(PC has at least 1 Black or White Magic spell:)
-		if (hasSpells()) {
+		if (player.hasSpells()) {
 			outputText("  You thought spellcasting merely took fatigue and the proper mindset, not life force, and you express that sentiment to the lizan.");
 		}
 		
@@ -520,7 +532,7 @@ public function visitAriansHouse():void {
 	}
 }
 
-public function arianHomeMenu():void {
+private function arianHomeMenu():void {
 	menu();
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0,"Next",arianStoryDialogue2);
@@ -539,11 +551,11 @@ public function arianHomeMenu():void {
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(9,"Back",telAdreMenu);
-		else addButton(9,"Back",campLoversMenu);
+		else addButton(9,"Back",kGAMECLASS.campLoversMenu);
 	}
 }
 
-public function dontSleepWithArian():void {
+private function dontSleepWithArian():void {
 	clearOutput();
 	outputText("You decide not to sleep with Arian at night, for now.");
 	flags[kFLAGS.SLEEP_WITH] = "";
@@ -551,7 +563,7 @@ public function dontSleepWithArian():void {
 }
 
 //[=Eavesdrop=]
-public function eavesDropOnArian():void {
+private function eavesDropOnArian():void {
 	clearOutput();
 	outputText("You sidle up to the door, pressing your ear against the wood and start to listen intently.");
 	outputText("\n\n\"<i>Curse my illness... curse my dreams... oh, [name]... if only you knew....</i>\"  Arian pants and moans, the distinct fapping sound of a hand slapping reaches your ears.  \"<i>Ah! The things you do to me... the things I wish you would do to me... ah....</i>\"");
@@ -562,7 +574,7 @@ public function eavesDropOnArian():void {
 }
 
 //[=Peep=]
-public function peepOnArian():void {
+private function peepOnArian():void {
 	clearOutput();
 	outputText("Curious, you decide to take a little peek through the lock; you press yourself against it as best you can, looking through into the bedroom beyond.  True to what your ears heard, the sickly albino's health has improved enough for him to focus on more... carnal matters.  Naked from the waist down, he sits on the edge of his bed, groinal slit disgorging a single, average-sized phallus.  Maybe 6 inches long, it's a bright purple-red color, covered in strange lumps");
 	if(player.lizardCocks() > 0) outputText(" just like yours");
@@ -579,7 +591,7 @@ public function peepOnArian():void {
 }
 
 //[=Leave=]
-public function leaveFappingArian():void {
+private function leaveFappingArian():void {
 	clearOutput();
 	outputText("You decide to let Arian have some privacy and leave for the moment... after all what the lizan mage does in his free time is not really your business....");
 	outputText("\n\nAs you make your way back to the entryway, Boon sees you and asks, \"<i>Leaving already? Usually you stay with master Arian for at least an hour... what happened?</i>\"");
@@ -591,7 +603,7 @@ public function leaveFappingArian():void {
 }
 
 //[=Barge in=]
-public function bargeInOnArian():void {
+private function bargeInOnArian():void {
 	clearOutput();
 	outputText("With a wry smirk you turn the knob and find that Arian's door is unlocked; without missing a beat, you open the door and step in right in time to see a sticky rope of pre paint Arian's slender belly as he scrambles to cover himself up.");
 	outputText("\n\n\"<i>[name]!  W-Wait.... I can explain!  I swear I... I... oh, Marae!</i>\"  He hides himself under the covers of his bed, his white-scaled face red with shame.");
@@ -643,7 +655,7 @@ public function bargeInOnArian():void {
 }
 
 //[=Like Male=]
-public function hermsLikeMaleArian():void {
+private function hermsLikeMaleArian():void {
 	clearOutput();
 	outputText("You tell him that's not the case for you; you don't have a problem with him being a guy.  In fact, you think he looks very cute, earning you a nervous smile.  Arian relaxes, letting you look over his body and decide what you want to do....");
 	//(Should you penetrate him or mount him?)
@@ -654,7 +666,7 @@ public function hermsLikeMaleArian():void {
 	addButton(1,"Get Penetrated",getPenetratedByArianAndHisHitlerMustache);
 }
 //[=Prefer Female=]
-public function hermsLikeFemaleArian():void {
+private function hermsLikeFemaleArian():void {
 	clearOutput();
 	outputText("You tell him that while you do like to play with guys once in awhile, you prefer girls.");
 	outputText("\n\n\"<i>So... you'd prefer if I was a girl... right?</i>\"");
@@ -675,7 +687,7 @@ public function hermsLikeFemaleArian():void {
 }
 
 //[=Don't mind=]
-public function youDontMindBeingGayForArian():void {
+private function youDontMindBeingGayForArian():void {
 	clearOutput();
 	outputText("You tell him that you don't have a problem with males, as long as they're cute.  You smile at him.  \"<i>You... do you really think I'm cute?</i>\"");
 	outputText("\n\nYou nod, it's not everyday you see a grown man acting like a hopeless virgin.  At the mention of the word ‘virgin' Arian recoils.... Surprised by this development you ask him if he really is a virgin.");
@@ -686,7 +698,7 @@ public function youDontMindBeingGayForArian():void {
 	addButton(0,"Next",giveArianAnal);
 }
 //[=Like Girls=]
-public function youLikeGirlsNotSickLizardDudes():void {
+private function youLikeGirlsNotSickLizardDudes():void {
 	clearOutput();
 	outputText("You tell him that you prefer females.... Arian looks at you expectantly.  \"<i>So... if I was a girl... then you wouldn't mind?</i>\"");
 	outputText("\n\nYou scratch your chin in thought; and let him know that if he was a girl, then you wouldn't mind at all.  \"<i>Okay then... I... I'll do it!</i>\"");
@@ -711,7 +723,7 @@ public function youLikeGirlsNotSickLizardDudes():void {
 //They should happen whenever Arian reaches a new threshold.
 //All of them occur only once.
 //((if ArianHealth >= 10) && (ArianSDialogue == 0))//May give Vitality T. and Arian will accept it.
-public function arianStoryDialogue1():void {
+private function arianStoryDialogue1():void {
 	arianHealth(1);
 	clearOutput();
 	outputText("You feel like you'd like to know a bit more about Arian, so you ask if he would mind sharing some of his history with you.  After all, as a survivor from at least the early days of the demon war, and a wizard to boot, he's got to have some stories up his voluminous sleeves.");
@@ -772,7 +784,7 @@ public function arianStoryDialogue1():void {
 
 ////((if ArianHealth >= 20) && (ArianSDialogue == 1)) 
 //Can sex Arian.
-public function arianStoryDialogue2():void {
+private function arianStoryDialogue2():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("You look Arian over, remarking that he seems to be getting better after all.");
@@ -796,7 +808,7 @@ public function arianStoryDialogue2():void {
 }
 
 //=Drop It=
-public function arianStory2DropIt():void {
+private function arianStory2DropIt():void {
 	clearOutput();
 	outputText("Though you do feel a little curious, you decide to stop making him uncomfortable, and tell him that it's okay, you'll let him get some sleep now.");
 	outputText("\n\n\"<i>Thanks, [name].  I'll see you later then.</i>\"  Arian tucks himself in.  You watch until he's settled in, and then start the trek back to your home-away-from home in the Marethian wilderness.");
@@ -804,7 +816,7 @@ public function arianStory2DropIt():void {
 }
 
 //=Pry=
-public function arianStoryPry():void {
+private function arianStoryPry():void {
 	clearOutput();
 	outputText("Oh, no, you're not letting him wriggle out of this that easily.  You playfully tap his nose and tell him he should come clean and confess");
 	if (player.cor < 40) outputText("; he'll sleep better with the burden off his conscience");
@@ -816,7 +828,7 @@ public function arianStoryPry():void {
 
 //((if ArianHealth >= 30) && (ArianSDialogue == 2))
  //Will Teach Magic
-public function arianDialogue3():void {
+private function arianDialogue3():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("Before you can say anything, Arian asks you, \"<i><i>[name], I've been wondering....  Do you have any interest in magic?  You've done so much for me; I believe I should return the favor somehow.</i></i>\"");
@@ -829,7 +841,7 @@ public function arianDialogue3():void {
 }
 
 //=Yes=
-public function yesArianShouldMagicTeach():void {
+private function yesArianShouldMagicTeach():void {
 	clearOutput();
 	outputText("You tell [Arian em] that sounds fascinating.  You'd love to learn how to cast spells the way [Arian ey] can, and you're grateful he wants to take you on as an apprentice.  Especially when [Arian ey]'s already so busy with the ones [Arian ey] already has.  Arian rubs the back of his neck.  \"<i><i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i></i>\"  [Arian Ey] smiles at you.  \"<i><i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i></i>\"");
 	
@@ -841,7 +853,7 @@ public function yesArianShouldMagicTeach():void {
 }
 
 //=No=
-public function noArianShouldntMagicTeach():void {
+private function noArianShouldntMagicTeach():void {
 	clearOutput();
 	outputText("You think it over for a moment, and then tell Arian that while you are flattered by the offer and willing to consider it, you can't say that you want to study magic right this moment.  You'd like to discuss it at some other time, please.");
 	outputText("\n\nArian nods happily.  \"<i><i>Certainly, I'd be happy to be of some help to you.  So... is there something you'd like to do today?</i></i>\"");
@@ -852,7 +864,7 @@ public function noArianShouldntMagicTeach():void {
 
 //((if ArianHealth >= 50) && (ArianSDialogue == 3))
 //Give Talisman, Imbue unlocked.
-public function arianImbue():void {
+private function arianImbue():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("Before you can say anything, Arian gasps, \"<i><i>Oh, [name].  I have a surprise for you.</i></i>\"  Arian says with a smile.");
@@ -892,7 +904,7 @@ public function arianImbue():void {
 }
 
 //=Yes=
-public function yesPlotSexArian():void {
+private function yesPlotSexArian():void {
 	clearOutput();
 	outputText("You approach the awkwardly amorous lizan and place your arms around [Arian eir] neck.  Leaning in close, you whisper into [Arian eir] ear that [Arian ey] only had to ask.");
 	//(Display Sex Menu)
@@ -900,7 +912,7 @@ public function yesPlotSexArian():void {
 }
 
 //=No=
-public function noPlotSexNauArian():void {
+private function noPlotSexNauArian():void {
 	clearOutput();
 	outputText("You apologize to the lizan, telling [Arian em] that you aren't in the mood right now....");
 	outputText("\n\nArian looks a bit disappointed, but doesn't press the issue.  \"<i><i>Oh... Okay then, but... maybe, next time?</i></i>\" [Arian ey] asks hopefully, smiling nervously despite [Arian eir] embarrassment....");
@@ -913,7 +925,7 @@ public function noPlotSexNauArian():void {
 
 //((if ArianHealth >= 75) && (ArianSDialogue == 4))
  //Will treat Corruption.
-public function arianPlot4():void {
+private function arianPlot4():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("Before you can say anything, Arian says, \"<i><i>Oh, I have good news, [name]!</i></i>\"");
@@ -931,7 +943,7 @@ public function arianPlot4():void {
 }
 
 //((if ArianHealth == 100) && (ArianSDialogue == 5))
-public function arianPlot5():void {
+private function arianPlot5():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("Before you can say anything, Arian stops you.  \"<i><i>I've been meaning to ask you something, [name].  I've been feeling a lot better lately; in fact, I may be even better than I was before.</i></i>\"  Arian blushes.");
@@ -941,7 +953,7 @@ public function arianPlot5():void {
 	outputText("\n\nYou explain to Arian about the portal, and your mission as the champion - how due to your duties, you cannot just move here and live with [Arian em].");
 	
 	outputText("\n\nArian quickly adds, \"<i><i>Oh... No....  You wouldn't be moving here.  I would be the one moving in with you....");
-	if(companionsCount() > 1) outputText("  There are other people living with you already, so what's one more?  Right?");
+	if(kGAMECLASS.companionsCount() > 1) outputText("  There are other people living with you already, so what's one more?  Right?");
 	outputText("</i></i>\"");
 	
 	outputText("\n\nYou ponder [Arian eir] request...  On one hand, having someone who understands magic would be of great help for your quest, and you've come to enjoy Arian's company, but what about Boon and Laika?");
@@ -958,7 +970,7 @@ public function arianPlot5():void {
 }
 
 //[=Accept=]
-public function acceptArianMovingIntoCamp():void {
+private function acceptArianMovingIntoCamp():void {
 	clearOutput();
 	outputText("You tell Arian you'd be delighted to have [Arian em] move in with you.  Arian's face lights up like a kid's who's been given a bucket of candy.  \"<i><i>Really!?  Great!  I'll pack my stuff and we can go right away!</i></i>\"");
 	
@@ -968,7 +980,7 @@ public function acceptArianMovingIntoCamp():void {
 }
 
 //[=Deny=]
-public function denyAriansMoveIn():void {
+private function denyAriansMoveIn():void {
 	clearOutput();
 	outputText("You tell Arian you'd like some time to think about it.  Arian looks disappointed at first, but smiles at you all the same.  \"<i><i>I understand... no pressure....  So, what are we going to do today?</i></i>\"");
 	
@@ -977,7 +989,7 @@ public function denyAriansMoveIn():void {
 }
 
 //Talk
-public function talkToArianChoices():void {
+private function talkToArianChoices():void {
 	clearOutput();
 	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i><i>I love talking with you; so what do you want to talk about?</i></i>\"");
 
@@ -992,7 +1004,7 @@ public function talkToArianChoices():void {
 //Magic:
 //Magic Lessons, teaches white magic and increases int. Up to 100.
 //Gain a pretty nice boost, 4 lessons per day, only.
-public function arianMagicLessons():void {
+private function arianMagicLessons():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("You ask Arian if [Arian ey] wouldn't mind giving you some magic lessons.");
@@ -1093,7 +1105,7 @@ public function arianMagicLessons():void {
 }
 //Sex:
 //Available after the first time you have sex. (ArianVirgin > 0)
-public function arianSexingTalk():void {
+private function arianSexingTalk():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("You smirk knowingly at [Arian em] and ask how does [Arian ey] feels about sex now that [Arian ey]'s had [Arian eir] first time?");
@@ -1205,7 +1217,7 @@ public function arianSexingTalk():void {
 
 		
 //[=Yes=]
-public function yesYouButtslutIllFuckYou():void {
+private function yesYouButtslutIllFuckYou():void {
 	clearOutput();
 	outputText("How could you refuse such a request?  You tell [Arian em] to strip and get ready.");
 	outputText("\n\nArian jumps to the task and eagerly strips, laying down in bed and swaying [Arian eir] tail back and forth as [Arian ey] waits for you to do the same.");
@@ -1215,14 +1227,14 @@ public function yesYouButtslutIllFuckYou():void {
 }
 
 //[=No=]
-public function goddamnitNoYouButtSlut():void {
+private function goddamnitNoYouButtSlut():void {
 	clearOutput();
 	outputText("You apologise, but you really can't do that right now.  Arian looks a bit disappointed, but smiles at you all the same.  \"<i>Oh... okay.  Next time then?</i>\"");
 	outputText("\n\nYou nod.");
 	sexTalkFinish(false);
 }
 
-public function sexTalkFinish(newl:Boolean = false):void {
+private function sexTalkFinish(newl:Boolean = false):void {
 	if(newl) clearOutput();
 	else outputText("\n\n");
 	outputText("Satisfied with your little chat, you pat the lizan's head and excuse yourself, heading back to camp.");
@@ -1231,7 +1243,7 @@ public function sexTalkFinish(newl:Boolean = false):void {
 
 //Invite to Camp:
 //Only available if ArianHealth == 100.
-public function inviteArianToCamp():void {
+private function inviteArianToCamp():void {
 	clearOutput();
 	outputText("You ask the lizan if [Arian ey] still really wants to leave [Arian eir] comfortable home in the city and come out to live with you in your little camp in the wastelands?");
 	outputText("\n\n\"<i>Of course I do!</i>\" Arian says enthusiastically.");
@@ -1276,7 +1288,7 @@ public function inviteArianToCamp():void {
 	addButton(0,"Next",takeYerLizardHomePartII);
 }
 
-public function takeYerLizardHomePartII():void {
+private function takeYerLizardHomePartII():void {
 	clearOutput();
 	outputText("Upon arriving at the camp, the first thing Arian notices is the shimmering portal.  \"<i>Is this... where you came from?</i>\" Arian asks.");
 	outputText("\n\nYou nod your head and confirm that, yes, this was your doorway from your world into Mareth.");
@@ -1295,7 +1307,7 @@ public function takeYerLizardHomePartII():void {
 	outputText("\n\nAs you walk inside you can't help but gasp in amazement... clearly you have underestimated the lizan.  The inside of the tent is pretty big comparing to the outside, and you see all the tools and facilities one would need to live in the wilderness with relative comfort.");
 	
 	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in [Arian eir] house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lightning up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
-	if(followersCount() > 1) outputText(" and your companions");
+	if(kGAMECLASS.followersCount() > 1) outputText(" and your companions");
 	outputText(".");
 	
 	outputText("\n\n\"<i>So what do you think?  Cozy?</i>\" Arian asks.");
@@ -1312,7 +1324,7 @@ public function takeYerLizardHomePartII():void {
 
 //Sex
 //ArianHealth must be at least 20 before you can even pick Sex as an option.
-public function arianSexMenu(output:Boolean = true):void {
+private function arianSexMenu(output:Boolean = true):void {
 	if(output) {
 		clearOutput();
 		outputText("You ask Arian if [Arian ey] feels strong enough to do a little lovemaking.");
@@ -1383,7 +1395,8 @@ public function arianSexMenu(output:Boolean = true):void {
 //Give Anal:
 //Modified by AnalXP.
 //PC must have a cock that fits (cock area 50 or less)
-public function giveArianAnal():void { 
+private function giveArianAnal():void {
+	var x = player.cockThatFits(50);
 	clearOutput();
 	arianHealth(3);
 	flags[kFLAGS.ARIAN_ANAL_XP] += 10;
@@ -1668,7 +1681,7 @@ public function giveArianAnal():void {
 
 //Get Blown:
 //PC must have a cock.
-public function getBlownByArian():void {
+private function getBlownByArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -1757,7 +1770,8 @@ public function getBlownByArian():void {
 //Penetrate:
 //Arian must be herm/female.
 //PC must have a cock that fits (cock area 50 or less)
-public function penetrateArian():void {
+private function penetrateArian():void {
+	var x:int = player.cockThatFits(50);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -1876,7 +1890,7 @@ public function penetrateArian():void {
 
 //Get Anal:
 //Arian must have a cock.
-public function getButtWreckedByArian():void {
+private function getButtWreckedByArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -1922,7 +1936,7 @@ public function getButtWreckedByArian():void {
 	
 	outputText("\n\nWell, that would be a shame; it might be a little rough, but you'll have to make do with what you've got.  With that in mind, you cease your stroking, and start sliding yourself up Arian's body, until your [ass] is positioned above [Arian eir] jutting prick.  With slow, deliberate motions, you slowly start to impale yourself upon it...");
 	
-	buttChange(arianCockSize(),true,true,false);
+	player.buttChange(arianCockSize(),true,true,false);
 	
 	outputText("\n\n\"<i>Argh!  T-this is too much!</i>\"  With a groan of pleasure Arian shoots [Arian eir] cum into your bowels, lubricating it enough to allow you to easily slide down onto [Arian eir] shaft.");
 	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) {
@@ -2009,7 +2023,7 @@ public function getButtWreckedByArian():void {
 		//(if PC has a cock){
 		if(player.hasCock()) {
 			dynStats("sen", 2, "lus=", 0);
-			slimeFeed();
+			player.slimeFeed();
 			//[Yes: Play the \"<i>PC fucks Arian's ass</i>\" scene]
 			//[No: You tell Arian you've had enough fun for now; maybe later, after you've both recovered.]
 			menu();
@@ -2031,7 +2045,7 @@ public function getButtWreckedByArian():void {
 
 //Blow:
 //Arian must have a cock.
-public function suckAriansDick():void {
+private function suckAriansDick():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2126,7 +2140,7 @@ public function suckAriansDick():void {
 //Get Penetrated:
 //PC must have a vagina.
 //Arian must have a cock.
-public function getPenetratedByArianAndHisHitlerMustache():void {
+private function getPenetratedByArianAndHisHitlerMustache():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2190,8 +2204,8 @@ public function getPenetratedByArianAndHisHitlerMustache():void {
 		
 		outputText("\n\nYou take hold of [Arian eir] arms and pull [Arian em] up towards you, making the lizan lose [Arian eir] balance and fully penetrate you.");
 		//(Enlargement/Virginity loss messages)
-		cuntChange(arianCockSize(),true,true,false);
-		buttChange(arianCockSize(),true,true,false);
+		player.cuntChange(arianCockSize(),true,true,false);
+		player.buttChange(arianCockSize(),true,true,false);
 		
 		outputText("\n\nThe lizan moans in shock at the deed, as if [Arian ey] still can't believe this is actually happening.  [Arian Eir] fingers clutch you tightly, but [Arian ey] doesn't make any further motions - more likely [Arian ey] can't bring himself to thrust just yet, still full of that nervous virgin behavior.");
 	}
@@ -2211,7 +2225,7 @@ public function getPenetratedByArianAndHisHitlerMustache():void {
 		
 		outputText("\n\nArian lets out a tiny squeak of shock at the pinching sensation, which instinctively makes [Arian em] thrust [Arian emself] forward, embedding [Arian emself] in you to the hilt.");
 		//(Enlargement/Virginity loss messages)
-		cuntChange(arianCockSize(),true,true,false);
+		player.cuntChange(arianCockSize(),true,true,false);
 		
 		outputText("\n\nYou gasp in pleasure at the sudden intrusion; then hug your lizan lover closer, stroking [Arian eir] back.  You ask if that was so difficult?");
 		
@@ -2283,7 +2297,7 @@ public function getPenetratedByArianAndHisHitlerMustache():void {
 //Double Pen Arian:
 //PC must have at least 2 cocks that fit. That means two cocks with a cock area of <= 50.
 //This isn't meant to give AnalXP, but given the fact that Arian's ass will get pen'd it would also be justified. Up to you Fen!
-public function doublePenetrateArian():void {
+private function doublePenetrateArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2419,7 +2433,7 @@ public function doublePenetrateArian():void {
 //Docking
 //ArianCockSize needs to be below 3. (ArianDblCock does not affect this decision.) 
 //PC cock area must be <= 30.
-public function arianDocking():void {
+private function arianDocking():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2519,7 +2533,7 @@ public function arianDocking():void {
 }
 
 //Give Item
-public function giveArianAnItem():void {
+private function giveArianAnItem():void {
 	clearOutput();
 	outputText("Thinking about the many items in your possession, you ask if Arian would be willing to take something for you?");
 	
@@ -2571,7 +2585,7 @@ public function giveArianAnItem():void {
 //Vitality Tincture:
 //increases ArianHealth by 4.
 //Remove this option once Arian's health hits 100.
-public function arianVitalityTincture():void {
+private function arianVitalityTincture():void {
 	clearOutput();
 	outputText("Fishing around amongst your pockets, you withdraw a vial of that strange potion Giacomo peddles and offer it to the sickly lizan, explaining it will bolster [Arian eir] constitution and fill [Arian em] with permanent vitality.");
 	
@@ -2601,7 +2615,7 @@ public function arianVitalityTincture():void {
 //Increase Cock(s) size. Gives one cock if Arian lacks any.
 //If cock(s) size is maxed, next dose reduces breast size.
 //If at min breast size, next dose reverts Arian to male. (Lose breasts and vagina.)
-public function giveIncubusDraftToArian():void {
+private function giveIncubusDraftToArian():void {
 	clearOutput();
 	consumeItem("P.Draft",1);
 	outputText("Fishing around in your pockets, your hand closes on the vial of purified incubus draft.  You offer this to Arian, asking ");
@@ -2741,7 +2755,7 @@ public function giveIncubusDraftToArian():void {
 //Gives Vagina and Breasts, also feminine curves if Arian was male.
 //Extra doses increase breasts size.
 //If breasts is at maximum size, extra doses reduce Cock Size. Removing first the second cock and then the first one if necessary.
-public function succubiMilkForArian():void {
+private function succubiMilkForArian():void {
 	clearOutput();
 	consumeItem("P.S.Mlk",1);
 	outputText("Fishing out the bottle of purified demon's milk, you ask if Arian is willing to get ");
@@ -2857,12 +2871,11 @@ public function succubiMilkForArian():void {
 	}
 	//Display Sex Options.
 	arianSexMenu(false);
-	return;
 }
 //Lactaid:
 //Triggers Scene with temporary lactation
 //If Arian has breasts, Increases breasts size by 1.
-public function giveArianLactaid():void {
+private function giveArianLactaid():void {
 	clearOutput();
 	consumeItem("Lactaid",1);
 	outputText("Your hand closes around the vial of lactation-inducing potion that is Lactaid.  You almost reject it automatically, but then you stop and think.  There's odder things in this world, after all.  You remove the vial and ask Arian if [Arian ey] would be willing to let you see what lizan milk tastes like.");
@@ -2886,7 +2899,7 @@ public function giveArianLactaid():void {
 	}
 	else { //Lizard milk! Recover some HP and fatigue.
 		fatigue(-15);
-		HPChange(maxHP() * .2,false);
+		HPChange(player.maxHP() * .2,false);
 		outputText("\n\nAfter some time, Arian begins panting, sweating as her body temperature goes up.  \"<i>I feel... hot.</i>\"  In an attempt to lower her body temperature, Arian discards her robes and lays down on her bed, fanning herself with her clawed hands.");
 		
 		outputText("\n\nYou approach her cautiously, asking if she's okay.");
@@ -2933,7 +2946,7 @@ public function giveArianLactaid():void {
 //Reducto:
 //Reduces the size of a part
 //Has a Back option, it displays no text, just cancels the interaction and goes back to previous menu.
-public function giveArianReducto():void {
+private function giveArianReducto():void {
 	clearOutput();
 	outputText("Eyeing Arian up and down, you fish your pouches for a tube of Reducto.  Once you've found it, you hand it over to Arian and tell [Arian em] you'd like [Arian em] to reduce something for you.");
 	outputText("\n\n\"<i>Umm... sure, which part?</i>\"");
@@ -2947,7 +2960,7 @@ public function giveArianReducto():void {
 
 //Breasts:
 //Cannot go flat
-public function useReductoOnAriansBreasts():void {
+private function useReductoOnAriansBreasts():void {
 	clearOutput();
 	consumeItem("Reducto",1);
 	outputText("You point at Arian's ");
@@ -2975,7 +2988,7 @@ public function useReductoOnAriansBreasts():void {
 //Cock(s):
 //Removes 2nd cock if at minimum size.
 //Cannot remove cocks.
-public function useReductoOnArianCocks():void {
+private function useReductoOnArianCocks():void {
 	clearOutput();
 	consumeItem("Reducto",1);
 	outputText("You point at [Arian eir] crotch, mentioning that you'd like [Arian em] to be smaller.");
@@ -3039,7 +3052,7 @@ public function useReductoOnArianCocks():void {
 //Sphincter:
 //Lose AnalXP, can't reduce it past 1.
 //How much AnalXP should be lost per use is up to Fen.
-public function useReductoOnAriansAsshole():void {
+private function useReductoOnAriansAsshole():void {
 	clearOutput();
 	consumeItem("Reducto",1);
 	outputText("You ask Arian to hand the tube of reducto back over to you, telling [Arian em] that you want to make [Arian em] a little tighter when you do [Arian em] from behind.  The lizard-");
@@ -3108,7 +3121,7 @@ public function useReductoOnAriansAsshole():void {
 //Reptilum:
 //Makes Arian horny and high, like giving catnip to a cat in some ways. 
 //Chance to make Arian grow a second dick, if [Arian ey] has only one. (high chance: 50%)
-public function giveArianReptilum():void {
+private function giveArianReptilum():void {
 	clearOutput();
 	consumeItem("Reptlum",1);
 	outputText("Fingering the vial of reptilium, you smirk to yourself.  Quickly wiping it off your face, you instruct Arian to close [Arian eir] eyes and open [Arian eir] mouth, as you have a special surprise for [Arian em].");
@@ -3244,7 +3257,7 @@ public function giveArianReptilum():void {
 //Not with the power of friendship, but with magic!
 //Balancing it is up to Fen.
 //Reduce corruption, maybe libido, once per day.
-public function treatCorruption():void {
+private function treatCorruption():void {
 	clearOutput();
 	outputText("You ask Arian if [Arian ey] thinks [Arian ey] can help you reduce some of the taint that has infected your soul.");
 	
@@ -3290,7 +3303,7 @@ public function treatCorruption():void {
 //if PC doesn't have the sufficient materials, option doesn't show up.
 //Perhaps introduce a cooldown to the talisman?
 //Ultimately, balance is in Fen's hands.
-public function imbueTalisman():void {
+private function imbueTalisman():void {
 	clearOutput();
 	outputText("You tell Arian that, if it's not too much trouble, you'd like [Arian em] to ");
 	if(player.hasKeyItem("Arian's Talisman") >= 0) outputText("place a spell in the enchanted talisman [Arian ey] created for you");
@@ -3316,7 +3329,7 @@ public function imbueTalisman():void {
 	addButton(9,"Back",arianHomeMenu);
 }
 
-public function arianSpellPlace(spell:String):void {
+private function arianSpellPlace(spell:String):void {
 	clearOutput();
 	outputText("You tell Arian that you want [Arian em] to place the " + spell + " spell in your talisman for you.");
 	
@@ -3353,7 +3366,7 @@ public function arianSpellPlace(spell:String):void {
 	}
 	doNext(13);
 }
-public function clearCharges():void {
+private function clearCharges():void {
 	if(player.hasStatusAffect("Shielding Spell") >= 0) player.removeStatusAffect("Shielding Spell");
 	if(player.hasStatusAffect("Immolation Spell") >= 0) player.removeStatusAffect("Immolation Spell");
 }
@@ -3417,7 +3430,6 @@ public function sleepWithArian(newl:Boolean = false):void {
 		menu();
 		addButton(0,"Listen",listenToLowAnalXPArian);
 		addButton(1,"Sleep",dontListenToLowAnalXPArian);
-		return;
 	}
 	//(else if AnalXP <66)
 	else if(flags[kFLAGS.ARIAN_ANAL_XP] < 66) {
@@ -3427,7 +3439,6 @@ public function sleepWithArian(newl:Boolean = false):void {
 		menu();
 		addButton(0,"Listen",listenToMediumAnalXPArian);
 		addButton(1,"Sleep",dontListenToMediumAnalXPArian);
-		return;
 	}
 	else { //AnalXP <= 100
 		outputText("\n\nYou wake up, confused and wondering what's disturbing your sleep.  When you wake up, you almost think Arian's also awake; [Arian ey]'s insistently moaning in pleasure, grinding [Arian eir] ass feverishly against your crotch, tail thrashing around wildly.  Why, that little cheeky lizard; [Arian ey]'s having a wet dream!");
@@ -3436,20 +3447,19 @@ public function sleepWithArian(newl:Boolean = false):void {
 		menu();
 		addButton(0,"Tease",TeaseHighAnalXPArian);
 		addButton(1,"Sleep",dontTeaseHighAnalXPArian);
-		return;
 	}
 }
 
 //[=Sleep=]
-public function dontListenToLowAnalXPArian():void {
+private function dontListenToLowAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 
 //[=Listen=]
-public function listenToLowAnalXPArian():void {
+private function listenToLowAnalXPArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_MORNING] = 1;
 	outputText("You turn you head to try and catch what Arian might be dreaming about.");
@@ -3469,19 +3479,19 @@ public function listenToLowAnalXPArian():void {
 	outputText("\n\nYou wonder if maybe Arian always dreamed of being a baker instead of a wizard.  Or if [Arian ey] just had a midnight craving for pastry.  With a soft sigh, you make yourself settle down and try to get back to sleep.");
 	dynStats("lus", 15);
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 
 //[=Sleep=]
-public function dontListenToMediumAnalXPArian():void {
+private function dontListenToMediumAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
-	sleepRecovery(false);
+	kGAMECLASS.sleepRecovery(false);
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 //[=Listen=]
-public function listenToMediumAnalXPArian():void {
+private function listenToMediumAnalXPArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_MORNING] = 1;
 	outputText("You turn you head to try and catch what Arian might be dreaming about.");
@@ -3513,19 +3523,19 @@ public function listenToMediumAnalXPArian():void {
 	}
 	dynStats("lus", 15);
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 
 //[=Sleep=]
-public function dontTeaseHighAnalXPArian():void {
+private function dontTeaseHighAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 
 //[=Tease=]
-public function TeaseHighAnalXPArian():void {
+private function TeaseHighAnalXPArian():void {
 	clearOutput();
 	
 	if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
@@ -3565,7 +3575,7 @@ public function TeaseHighAnalXPArian():void {
 		dynStats("lus", 15);
 	}
 	menu();
-	addButton(0,"Next",sleepWrapper);
+	addButton(0,"Next",kGAMECLASS.sleepWrapper);
 }
 //Waking up
 //Always happens the morning after sleeping with Arian.
@@ -3808,7 +3818,7 @@ public function arianEggingEvent():void {
 }
 
 //Pick a color
-public function pickAnEggArian(color:String = "pink"):void {
+private function pickAnEggArian(color:String = "pink"):void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_EGG_COLOR] = color;
 	outputText("You tell Arian you'd like her to make you a " + color + " egg.");
@@ -3821,7 +3831,7 @@ public function pickAnEggArian(color:String = "pink"):void {
 	doNext(13);
 }
 //Leave
-public function leaveEggs():void {
+private function leaveEggs():void {
 	clearOutput();
 	outputText("You tell her that you don't want any colored eggs from her this month.  The lizan nods, deciding it's not necessary for her to spell out that this means she'll just produce ordinary eggs and eat them for breakfast after she's laid them.  \"<i>So, do you want something?</i>\" she asks.");
 	doNext(13);
@@ -3891,7 +3901,7 @@ public function arianLaysEggs():void {
 	takeItem();
 }
 //DildoFun
-public function arianDildoFun():void {
+private function arianDildoFun():void {
 	//As usual, nothing we write is centaur compatible.
 	//Cocks are going to be more or less forgotten here.
 	//PC must have the dildo sex toy from Giacomo to access this scene
@@ -3998,4 +4008,6 @@ public function arianDildoFun():void {
 	outputText("\n\nYou heave a sigh of contentment and authoritatively drag your little lizan slut into your arms, wrapping yourself around her in a cuddle and making it quite clear you don't intend to let her go anywhere anytime soon.  Fortunately, she seems quite eager to be there, and so you shut your eyes and allow yourself to slowly drift off to sleep.  Before you fully embrace unconsciousness, though, you place a gentle hand on Arian's pussy, stroking her softly - not to arouse her yet again, but just to let her feel a loving touch there, in the place that brings you both such pleasures....");
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
+}
+}
 }

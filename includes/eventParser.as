@@ -1833,7 +1833,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			if(flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
 			if(flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
-			if(arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
+			if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
 			flags[kFLAGS.ARIAN_LESSONS] = 0;
 			flags[kFLAGS.ARIAN_TREATMENT] = 0;
 			flags[kFLAGS.BROOKE_MET_TODAY] = 0;
@@ -1841,10 +1841,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 				if(flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 			}
-			if(phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
+			if(antsScene.phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 			if(flags[kFLAGS.MIDAS_JERKED] > 0) flags[kFLAGS.MIDAS_JERKED] = 0;
 			if(flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
-			if(phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
+			if(antsScene.phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
 			if(flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
 			if(flags[kFLAGS.SHEILA_PREG] > 0) flags[kFLAGS.SHEILA_PREG]++;
 			if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;

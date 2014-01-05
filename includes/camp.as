@@ -28,19 +28,19 @@ public function camp():void {
 		fixHistory();
 		return;
 	}
-	if(arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
+	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
 		hideMenus();
-		wakeUpAfterArianSleep();
+		arianScene.wakeUpAfterArianSleep();
 		return;
 	}
-	if(arianFollower() && flags[kFLAGS.ARIAN_EGG_EVENT] >= 30) {
+	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_EVENT] >= 30) {
 		hideMenus();
-		arianEggingEvent();
+		arianScene.arianEggingEvent();
 		return;
 	}
-	if(arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] >= 24 && flags[kFLAGS.ARIAN_VAGINA] > 0) {
+	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] >= 24 && flags[kFLAGS.ARIAN_VAGINA] > 0) {
 		hideMenus();
-		arianLaysEggs();
+		arianScene.arianLaysEggs();
 		return;
 	}
 	if(flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
@@ -319,12 +319,7 @@ public function camp():void {
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
 	//Build explore menus
-	var desert:* = 0;
-	var lake:* = 0;
-	var forest:* = 0;
-	var mountain:* = 0;
 	var farm:* = 0;
-	var jojo:* = 0;
 	var placesNum:* = 0;
 	var followers:* = 0;
 	var lovers:* = 0;
@@ -332,10 +327,6 @@ public function camp():void {
 	var storage:* = 0;
 	if(stash()) storage = 2951;
 	if(places(false)) placesNum = 71; 
-	if(foundDesert) desert = 3;
-	if(foundMountain) mountain = 6;
-	if(foundForest) forest = 4;
-	if(foundLake) lake = 5;
 	if(whitney > 0) farm = 7;
 	//Clear stuff
 	if(player.hasStatusAffect("Slime Craving Output") >= 0) player.removeStatusAffect("Slime Craving Output");
@@ -534,7 +525,7 @@ public function camp():void {
 		outputText("\n\n", false);
 	}
 	//►[Added Campsite Description]
-	if(phyllaWaifu()) {
+	if(antsScene.phyllaWaifu()) {
 		outputText("You see Phylla's anthill in the distance.  Every now and then you see");
 		//If PC has children w/ Phylla:
 		if(flags[kFLAGS.ANT_KIDS] > 0) outputText(" one of your many children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
@@ -736,7 +727,7 @@ public function hasSlaves():Boolean {
 }
 public function loversCount():Number {
 	var counter:Number = 0;
-	if(arianFollower()) counter++;
+	if(arianScene.arianFollower()) counter++;
 	if(followerHel()) counter++;
 	//Izma!
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) counter++;
@@ -808,8 +799,7 @@ public function campLoversMenu():void {
 		else if(model.time.hours == 12) outputText("Isabella is cooking a slab of meat over the fire.  From the smell that's wafting this way, you think it's beef.  Idly, you wonder if she realizes just how much like her chosen food animal she has become.", false);
 		else if(model.time.hours == 13) {
 			outputText("Isabella ", false);
-			var izzyCreeps:Array = new Array();
-			var choice:* = 0;
+			var izzyCreeps:Array = [];
 			//Build array of choices for izzy to talk to
 			if(player.hasStatusAffect("Camp Rathazul") >= 0)
 				izzyCreeps[izzyCreeps.length] = 0;
@@ -824,7 +814,7 @@ public function campLoversMenu():void {
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
 			//Select!
-			choice = rand(izzyCreeps.length);
+			var choice:* = rand(izzyCreeps.length);
 				
 			if(izzyCreeps[choice] == 0) outputText("is sitting down with Rathazul, chatting amiably about the weather.", false);
 			else if(izzyCreeps[choice] == 1) outputText("is sitting down with Jojo, smiling knowingly as the mouse struggles to keep his eyes on her face.", false);
@@ -890,18 +880,18 @@ public function campLoversMenu():void {
 	else if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
 		outputText("Amily's bed of grass and herbs lies empty, the mouse-woman still absent from her sojourn to meet your other lover.\n\n", false);
 	}
-	if(arianFollower()) outputText("Arian's tent is here, if you'd like to go inside.\n\n");
+	if(arianScene.arianFollower()) outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 	//choices("Amily",amilyEvent,"Helia",hel,"Isabella",isabellaButt,"Izma",izmaEvent,"Kiha",kihaButt,"Marble",marbleEvent,"Nieve",nieve,"",0,"",0,"Back",1);	
 	menu();
 	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
-	if(arianFollower()) addButton(1,"Arian",visitAriansHouse);
+	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
 	if(hel > 0) addButton(2,"Helia",eventParser,hel);
 	if(isabellaButt > 0) addButton(3,"Isabella",eventParser,isabellaButt);
 	if(izmaEvent > 0) addButton(4,"Izma",eventParser,izmaEvent);
 	if(kihaButt > 0) addButton(5,"Kiha",eventParser,kihaButt);
 	if(marbleEvent > 0) addButton(6,"Marble",eventParser,marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
-	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",introductionToPhyllaFollower);
+	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",antsScene.introductionToPhyllaFollower);
 	addButton(9,"Back",eventParser,1);
 }
 public function campSlavesMenu():void {
@@ -1139,8 +1129,8 @@ public function doSleep(clrScreen:Boolean = true):void {
 				return;
 			}
 		}
-		else if(flags[kFLAGS.SLEEP_WITH] == "Arian" && arianFollower()) {
-			sleepWithArian();
+		else if(flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
+			arianScene.sleepWithArian();
 			return;
 		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower())) {
@@ -1187,7 +1177,6 @@ public function doSleep(clrScreen:Boolean = true):void {
 		else outputText("You lie down to resume sleeping for the remaining hour.\n", true);
 	}
 	goNext(timeQ, true);
-	return;
 }
 //For shit that breaks normal sleep processing.
 public function sleepWrapper():void {
@@ -1410,10 +1399,7 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		 
-		if(owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[kFLAGS.BAZAAR_ENTERED]) 
-			return true;
-		else return false;
+		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
 	}
 	//Make choices
 	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre, "TownRuins",ruins,"Back",1);

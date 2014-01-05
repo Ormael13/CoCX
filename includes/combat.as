@@ -5947,7 +5947,7 @@ public function immolationSpell():void {
 	temp = doDamage(temp);
 	outputText(" (" + temp + ")\n\n");
 	player.removeStatusAffect("Immolation Spell");
-	clearTalisman();
+	arianScene.clearTalisman();
 	enemyAI();
 }
 
@@ -5956,6 +5956,6 @@ public function shieldingSpell():void {
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
 	player.createStatusAffect("Shielding",0,0,0,0);
 	player.removeStatusAffect("Shielding Spell");
-	clearTalisman();
+	arianScene.clearTalisman();
 	enemyAI();
 }

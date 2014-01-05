@@ -347,7 +347,7 @@ package classes.Scenes.Areas.Plains
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.phyllaPCBeatsGnoll();
+				game.antsScene.phyllaPCBeatsGnoll();
 				return;
 			}
 			game.gnollScene.defeatHyena();
@@ -357,7 +357,7 @@ package classes.Scenes.Areas.Plains
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.phyllaGnollBeatsPC();
+				game.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);

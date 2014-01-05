@@ -2528,7 +2528,7 @@ public function displayStats(e:MouseEvent = null):void
 	if(player.hasVagina()) outputText("<b>Vaginal Looseness: </b>" + Math.round(player.looseness()) + "\n");
 	
 	outputText("<b><u>\nInterpersonal Stats</u></b>\n", false);
-	if(flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianHealth()) + "\n");
+	if(flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianScene.arianHealth()) + "\n");
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter: </b>" + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
 	if(benoitAffection() > 0) outputText("<b>" + benoitMF("Benoit","Benoite") + " Affection: </b>" + Math.round(benoitAffection()) + "%\n");
 	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid: </b>" + flags[kFLAGS.BENOIT_EGGS] + "\n");

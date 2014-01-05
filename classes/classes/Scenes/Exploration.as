@@ -625,7 +625,7 @@ package classes.Scenes
 			}
 			//Ant colony debug chances
 			if (player.level >= 5 && flags[kFLAGS.ANT_WAIFU] == 0 && (player.exploredDesert % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
-				kGAMECLASS.antColonyEncounter();
+				kGAMECLASS.antsScene.antColonyEncounter();
 				return;
 			}
 			//int over 50?  Chance of alice encounter!

@@ -23,7 +23,7 @@
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
 				outputText("You defeat a minotaur!  ", true);
-				game.phyllaBeatAMino();
+				game.antsScene.phyllaBeatAMino();
 			} else {
 				game.minoVictoryRapeChoices();
 			}
@@ -33,7 +33,7 @@
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.phyllaPCLostToMino();
+				game.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
 				game.cleanupAfterCombat();

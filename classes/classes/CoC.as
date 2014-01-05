@@ -42,6 +42,7 @@
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.Farm.*;
 	import classes.Scenes.Places.Owca.*;
+	import classes.Scenes.Places.TelAdre.*;
 	import classes.Scenes.Quests.UrtaQuest.*;
 	import coc.view.MainView;
 
@@ -114,6 +115,7 @@
 		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
+		public var arianScene:ArianScene = new ArianScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var emberScene:EmberScene = new EmberScene();
@@ -146,11 +148,10 @@
 		// Bazaar scenes
 		// Other scenes
 		public var testContent:TestContent = new TestContent();
+		public var antsScene:AntsScene = new AntsScene();
 		public var exploration:Exploration = new Exploration();
 
-		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";
-		include "../../includes/arian.as";
 		include "../../includes/auntNancy.as";
 		include "../../includes/bakery.as";
 
