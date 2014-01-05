@@ -246,6 +246,7 @@
 		include "../../includes/urta.as";
 		include "../../includes/urtaPregs.as";
 		include "../../includes/urtaQuest.as";
+		include "../../includes/urtaHeatRut.as";
 		include "../../includes/valaria.as";
 		include "../../includes/valentines.as";
 		include "../../includes/wanderer.as";
@@ -379,7 +380,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3f8";
+			ver = "0.8.4.0";
 			version = ver + " (<b>Fixes and Uma Blowjob Training</b>)";
 
 			//Indicates if building for mobile?
