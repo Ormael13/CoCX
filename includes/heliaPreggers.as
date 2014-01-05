@@ -1072,9 +1072,9 @@ public function helSpawnStopFucking():void {
 	
 	outputText("\n\n\"<i>That's why you </i>shouldn't<i> be bringing men home.  Or women.  Or anything else, kiddo.");
 	//If No Hel Love:
-	if(flags[kFLAGS.HEL_LOVE] != 0) outputText("  You don't want to be a whore like your mother, do you?  The girl that everyone's had a ride with.</i>\"");
+	if(flags[kFLAGS.HEL_LOVE] != 0) outputText("  You don't want to be a whore like your mother, do you?  The girl that everyone's had a ride with.");
 	//if HelLove:
-	if(flags[kFLAGS.HEL_LOVE] == 1) outputText("  I'm not going to a raise a whore, " + flags[kFLAGS.HELSPAWN_NAME] + ".  Your mother's made mistakes, sure, but...</i>\" you sigh.");
+	if(flags[kFLAGS.HEL_LOVE] == 1) outputText("  I'm not going to a raise a whore, " + flags[kFLAGS.HELSPAWN_NAME] + ".  Your mother's made mistakes, sure, but...</i>\" you sigh.  \"<i>");
 	outputText("  You don't have to be that person, " + flags[kFLAGS.HELSPAWN_NAME] + ".  Don't just give yourself out to the first person that asks, you know?  Save it for someone you really care about.  Trust me, it'll be worth it.</i>\"");
 	outputText("\n\nYou spend a bit more time with the chastened, and hopefully now more chaste, salamander girl before putting her to bed.  Stroking her hair, you slip back to your own bunk, hoping she'll take what you've said to heart.");
 	//{HelspawnChaste +10}
@@ -1288,8 +1288,8 @@ public function incestWithHelspawn():void {
 //[Oh God EW]
 public function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 	clearOutput();
-	outputText("You spew the stew onto the ground and grab a nearby waterskin, trying to flush the taste from your mouth.  Kiha and " + flags[kFLAGS.HELSPAWN_NAME] + " look on with horror as you wipe your mouth and begin to try and coherently explain just how god awful whatever that... STUFF... you just put in your mouth was.  Shock turns to anger before you’re halfway through admonishing the pair of scaly redheads, Kiha scowls at you and snatches the ladle from you.");
-	outputText("\n\n\"<i>Oh, what the fuck do you know anyway you big ass!  It's perfectly fine, isn't it " + flags[kFLAGS.HELSPAWN_NAME] + "?</i>\" she growls, spooning up a mouthful of the stuff before you can stop her.  A heartbeat after she swallows, Kiha goes completely stiff; her eyes growing as wide as saucers as they water.  She collapses backwards, falling onto her back with a muted <i>THUD</i>.");
+	outputText("You spew the stew onto the ground and grab a nearby waterskin, trying to flush the taste from your mouth.  Kiha and " + flags[kFLAGS.HELSPAWN_NAME] + " look on with horror as you wipe your mouth and begin to try and coherently explain just how god awful whatever that... STUFF... you just put in your mouth was.  Shock turns to anger before you’re halfway through admonishing the pair of scaly redheads.  Kiha scowls at you and snatches the ladle from you.");
+	outputText("\n\n\"<i>Oh, what the fuck do you know anyway, you big ass!  It's perfectly fine, isn't it " + flags[kFLAGS.HELSPAWN_NAME] + "?</i>\" she growls, spooning up a mouthful of the stuff before you can stop her.  A heartbeat after she swallows, Kiha goes completely stiff; her eyes growing as wide as saucers as they water.  She collapses backwards, falling onto her back with a muted <i>THUD</i>.");
 	
 	outputText("\n\n\"<i>K-Kiha?</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " yelps, watching the dragoness collapse into a pile of limp scales and leather.  \"<i>Are you okay?  Is she okay, " + championRef() + "?</i>\"");
 	
