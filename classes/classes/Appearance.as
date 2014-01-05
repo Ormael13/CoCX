@@ -1488,7 +1488,7 @@
 			}
 			if (i_creature.vaginaType() == 5 && Math.floor(Math.random() * 2) == 0)
 			{
-				if (haveDescription) description += ", ";
+				if (description != "") description += ", ";
 				options = ["black",
 						"onyx",
 						"ebony",
