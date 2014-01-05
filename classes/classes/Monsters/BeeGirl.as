@@ -39,6 +39,8 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
 				game.simpleChoices("B. Feed", 2484,"",0,"",0,"",0,"Leave",5007);
+			} else {
+				game.finishCombat();
 			}
 		}
 
