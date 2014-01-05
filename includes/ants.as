@@ -269,6 +269,7 @@ public function antColiseumFight():void {
 		outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 		outputText("\n\nYou're fighting a tentacle beast!");
 		startCombat(new TentacleBeast());
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	//►[Fight #2]
 	else if(flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
@@ -283,6 +284,7 @@ public function antColiseumFight():void {
 			monster.str += 25;
 			monster.lustVuln = 0.84;
 		}
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	//►[Fight #3]
 	else {
@@ -293,6 +295,7 @@ public function antColiseumFight():void {
 		outputText("\n\nYou're fighting a gnoll!");
 		flags[kFLAGS.MET_ANT_ARENA_GNOLL]++;
 		startCombat(new Gnoll());
+		monster.createStatusAffect("No Loot",0,0,0,0);
 	}
 	monster.createStatusAffect("PhyllaFight",0,0,0,0);
 	doNext(1);

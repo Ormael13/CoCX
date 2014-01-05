@@ -23,7 +23,10 @@ public function xmasBitchEncounter():void {
 	else {
 		outputText("Confused by her appearance and the fact that she already knows you by name, you dumbly ask how she can possibly know who you are.\n\n", false);
 
-		outputText("She giggles, \"<i>Oh silly, don't you know what time of year it is?  We've got EVERYONE on our list, even Kelt, though he's getting coal this year.</i>\"\n\n", false);
+		outputText("She giggles, \"<i>Oh silly, don't you know what time of year it is?  We've got EVERYONE on our list, even ");
+		if(flags[kFLAGS.KELT_BREAK_LEVEL] == 4) outputText("Kelt, though he's getting coal this year");
+		else outputText("Kelly, though I think she's getting a big fat dildo this year");
+		outputText(".</i>\"\n\n", false);
 	}
 	outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n", false);
 	if(player.cor >= 90 || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
