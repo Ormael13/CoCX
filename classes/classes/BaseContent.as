@@ -27,6 +27,11 @@
 			return kGAMECLASS.isHolidays();
 		}
 
+		protected function isEaster():Boolean
+		{
+			return kGAMECLASS.isEaster();
+		}
+
 		protected function get date():Date
 		{
 			return kGAMECLASS.date;

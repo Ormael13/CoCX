@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places.TelAdre{
+﻿package classes.Scenes.NPCs{
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;

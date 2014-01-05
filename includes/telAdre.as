@@ -160,10 +160,10 @@ public function telAdreMenu():void {
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !arianScene.arianFollower()) homes = true;
 	if(homes) homeB = 3993;
-	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
+	choices("Shops",armorShops,"Bakery",bakeryScene.bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
 	addButton(0,"Shops",armorShops);
-	addButton(1,"Bakery",bakeryuuuuuu);
+	addButton(1,"Bakery",bakeryScene.bakeryuuuuuu);
 	addButton(2,"Bar",enterBarTelAdre);
 	addButton(3,"Gym",gymDesc);
 	if(homeB > 0) addButton(4,"Homes",eventParser,homeB);

@@ -116,6 +116,8 @@
 		// Scenes/Areas/Bog/
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
+		// Scenes/Places/TelAdre/
+		public var bakeryScene:BakeryScene = new BakeryScene();
 
 		// Named NPC Scenes (excluding dungeon bosses)
 		public var umasShop:UmasShop = new UmasShop();
@@ -157,7 +159,6 @@
 
 		include "../../includes/april_fools.as";
 		include "../../includes/auntNancy.as";
-		include "../../includes/bakery.as";
 
 		include "../../includes/benoit.as";
 		include "../../includes/brooke.as";

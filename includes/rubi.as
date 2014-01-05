@@ -487,7 +487,7 @@ public function approachRubiScenes():void {
 	else outputText("\n<b>You cannot afford milk.</b>");
 	if(flags[kFLAGS.RUBI_ADMITTED_GENDER] >= 1) place = 3898;
 	//[Milk] [Tea] [Chat] [Rubi's Place (Relationship 20+)] [Leave]
-	simpleChoices("Milk",milk,"Tea",tea,"Chat",3897,"Rubi's Place",place,"Leave",2836);
+	simpleChoices("Milk",milk,"Tea",tea,"Chat",3897,"Rubi's Place",place,"Leave",bakeryScene.bakeryuuuuuu);
 }
 
 //Choose Milk?

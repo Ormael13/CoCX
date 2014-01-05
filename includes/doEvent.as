@@ -2932,7 +2932,7 @@ public function doEvent(eventNo:Number):void
 		//[doughnuts] – some thickness, lots of – tone. (+hips and butt!)
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 5;
-		nomnomnom();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2831)
@@ -2940,7 +2940,7 @@ public function doEvent(eventNo:Number):void
 		//[cookies] – thickness and a little – tone (+hips)
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cookies";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
-		nomnomnom();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2832)
@@ -2948,7 +2948,7 @@ public function doEvent(eventNo:Number):void
 		//[brownies] – lots of thickness (chance of +butt)
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "brownies";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
-		nomnomnom();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2833)
@@ -2956,7 +2956,7 @@ public function doEvent(eventNo:Number):void
 		//[cupcakes] – lots of – tone (chance of +hips)
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
-		nomnomnom();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2834)
@@ -2964,7 +2964,7 @@ public function doEvent(eventNo:Number):void
 		//[pound cake] – even split of + thickness and – tone.  (+butt)
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "pound cake";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
-		nomnomnom();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2835)
@@ -2972,12 +2972,7 @@ public function doEvent(eventNo:Number):void
 		//[mino cum eclair] – helps your cravings and – tone!, LUST!
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "eclair";
 		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 10;
-		nomnomnom();
-		return;
-	}
-	else if (eventNo == 2836)
-	{
-		bakeryuuuuuu();
+		bakeryScene.nomnomnom();
 		return;
 	}
 	else if (eventNo == 2837)
@@ -3154,11 +3149,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2934)
 	{
 		handOverIngredientsItBeBakingTimeYo();
-		return;
-	}
-	else if (eventNo == 2939)
-	{
-		buySlutCake();
 		return;
 	}
 	else if (eventNo == 2940)
@@ -4276,12 +4266,6 @@ public function doEvent(eventNo:Number):void
 		askJoeyAboutOffer();
 		return;
 	}
-	else if (eventNo == 3580)
-	{
-		buyFoxBerry();
-		return;
-	}
-	
 	else if (eventNo == 3587)
 	{
 		heliaFollowerMenu();
@@ -5094,16 +5078,12 @@ public function doEvent(eventNo:Number):void
 	{
 		houses();
 	}
-	
-	else if (eventNo == 3997)
-	{
-		ingredientsMenu();
-	}
-	else 
+	else
 	{
 		//Problem here. Lots of the old code relies on the fall through to proceed forward. Prime offender is the
 		//the 2000 EventNo imp meeting stuff after choosing your history. This needs some tinkering to get working correctly.
 		//errorPrint(eventNo); // Dump the system state to the window so the player can file a decent bug-report
+		trace("ERROR Event "+eventNo+" not found");
 	}
 
 }

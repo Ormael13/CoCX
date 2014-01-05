@@ -2861,7 +2861,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2836);
+				"Abandon", bakeryScene.bakeryuuuuuu);
 	}
 	else if (menuLoc == 20)
 	{
@@ -2991,7 +2991,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3997);
+				"Abandon", bakeryScene.ingredientsMenu);
 	}
 	//otherwise business as usual!
 	else
@@ -6657,7 +6657,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 19) {
-		doNext(bakeryuuuuuu);
+		doNext(bakeryScene.bakeryuuuuuu);
 		return;
 	}
 	if(menuLoc == 20) {
@@ -6697,7 +6697,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 29) {
-		doNext(ingredientsMenu);
+		doNext(bakeryScene.ingredientsMenu);
 		return;
 	}
 	if(menuLoc == 2) doNext(13);
