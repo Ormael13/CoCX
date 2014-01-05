@@ -831,7 +831,7 @@ public function approachNieve():void {
 	outputText("\n\nNieve stops, gives you a friendly hug, and asks, \"<i>What can I do for you, [Master]?</i>\"");
 	menu();
 	addButton(0,"Sex",nieveSexMenu);
-	addButton(4,"Back",campLoversMenu);
+	addButton(4,"Back",camp.campLoversMenu);
 }
 
 //Sex Menu
@@ -854,7 +854,7 @@ public function nieveSexMenu():void {
 	//Any Gender
 	//Nieve's cock is 9x1.5
 	if(flags[kFLAGS.NIEVE_GENDER] == 1 && player.lust >= 33) addButton(1,"Get Fucked",nieveFucksYou);
-	addButton(9,"Back",campLoversMenu);
+	addButton(9,"Back",camp.campLoversMenu);
 }
 
 //Lick Her
@@ -1236,7 +1236,7 @@ private function fixNieveMouth(arg:int = 1):void {
 
 //The Return of Nieve
 //Occurs during winter if the PC has Nieve's tear.
-private function returnOfNieve():void {
+public function returnOfNieve():void {
 	clearOutput();
 	outputText("As you awake in the morning you find yourself shivering slightly.  A cool breeze sweeps over your camp, while in the distance jingling bells can be heard.  How odd.  You haven't heard bells like that since...");
 	outputText("\n\nYour heart skips a beat.");

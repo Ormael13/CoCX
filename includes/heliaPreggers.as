@@ -118,7 +118,7 @@ public function heliaBonusPointsAward():void {
 	
 	outputText("\n\nYou nod, rubbing the sleep out of your eyes as you stagger up onto your [feet].  You note that Hel's wrapped her old cloak tightly around herself, held closed so that nothing but her face is visible.  You start to ask what's up, but Hel shushes you, saying she needs to talk to you privately.  ");
 	//{If Hel's the only one at camp: 
-	if(companionsCount() == 1) outputText("You cock an eyebrow, saying that you're already alone, but she shakes her head, saying she needs somewhere private, away from prying eyes.  ");
+	if(camp.companionsCount() == 1) outputText("You cock an eyebrow, saying that you're already alone, but she shakes her head, saying she needs somewhere private, away from prying eyes.  ");
 	outputText("You nod your assent, and let her help you up and lead you away from camp.  You follow Hel through the darkness, stumbling after her until you're hidden away beneath the old ruined wall a stone's throw from the perimeter.  Safely tucked away beneath the shadow of the wall, Hel takes your hands in hers and hesitantly, says, \"<i>Look, I don't... this isn't easy for me, okay?  But I have to tell you something, [name].  And it's important, alright?  To me, anyway. I wouldn't bring it up if I could deal with it myself, honest.  But I can't and... and I'm afraid, [name].</i>\"");
 	
 	outputText("\n\nYou squeeze Helia's hands and reassure her as best you can, saying she can tell you anything.  She looks away, blushing hotly; beneath her cloak, the radiant fire of her long tail shines brighter, casting a pale glow even through the heavy fabric.  You ask again what's wrong, and with a little coaxing, Hel looks up, her bright crimson eyes staring into yours.");
@@ -867,7 +867,7 @@ public function helSpawnChoosesAFightingStyle():void {
 	clearOutput();
 	spriteSelect(68);
 	outputText("As you make your way back to camp, you begin to hear the sounds of fighting from ahead.  Readying your [weapon], you pick up the pace until your campsite comes into view.  You relax, seeing that it's only " + flags[kFLAGS.HELSPAWN_NAME] + " and her mother.  Helia's standing near the center of camp, ");
-	if(companionsCount() > 3) outputText("apparently having cleared out most of your other followers for the moment, ");
+	if(camp.companionsCount() > 3) outputText("apparently having cleared out most of your other followers for the moment, ");
 	outputText("her sword held at a guard pose between herself and a training dummy. " + flags[kFLAGS.HELSPAWN_NAME] + " stands a few feet behind her mother, watching intently as Hel paces around the dummy, breathing hard.");
 	
 	outputText("\n\nSuddenly, the towering salamander screams a deafening battlecry and lunges forward, nearly topping the dummy in a mad bull rush before swinging her scimitar in a flurry of crushing blows that send bits of pieces of dummy flying in all directions.  There isn't much left by the time Hel's finally finished with it, slumping over the fallen mannequin as she huffs and puffs, completely out of breath.");
@@ -1122,7 +1122,7 @@ public function helspawnsMainMenu():void {
 	//[Sex] {?}
 	//[Appearance]
 	addButton(8,"Appearance",helSpawnsAppearanceScreen);
-	addButton(9,"Back",campFollowers);
+	addButton(9,"Back",camp.campFollowers);
 }
 
 //Hug
@@ -1627,7 +1627,7 @@ public function hakonAndKiriComeVisit():void {
 	spriteSelect(68);
 	flags[kFLAGS.HAKON_AND_KIRI_VISIT] = 1;
 	outputText("As you're returning to camp, you notice Helia running around like a chicken with her head cut off, fussing about damn near everything in her part of the camp");
-	if(companionsCount() > 1) outputText(" and everyone else's too, much to their chagrin");
+	if(camp.companionsCount() > 1) outputText(" and everyone else's too, much to their chagrin");
 	outputText(". As she's furtively polishing off her giant still, trying to get the dingy old thing to shine, you approach and clear your throat. She gives a sharp yelp and spins around, but seems to relax as she sees it's just you.");
 	outputText("\n\n\"<i>H-hey, [name],</i>\" she says nervously.  \"<i>Just in time.  I was about to go looking for you.  Uh, so...</i>\"");
 	

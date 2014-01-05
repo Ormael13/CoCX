@@ -116,6 +116,7 @@
 		include "../../includes/appearanceDefs.as";
 
 		// Scenes/
+		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
@@ -156,7 +157,6 @@
 
 		include "../../includes/april_fools.as";
 
-		include "../../includes/camp.as";
 		include "../../includes/cinnabar.as";
 		include "../../includes/cotton.as";
 		include "../../includes/dreams.as";

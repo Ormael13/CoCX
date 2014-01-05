@@ -1642,7 +1642,7 @@ public function izmaFollowerMenu():void {
 		deDickT = "Go Herm";
 		deDickB = 3472;
 	}
-	choices("Appearance",izmaPearance,"Books",IzmaCampBooks,"Children",kids,"Sex",sex,"Talk",talkWivIzma,"Tooth",gatASharkTooth,"",0,"",0,deDickT,deDickB,"Back",campLoversMenu);
+	choices("Appearance",izmaPearance,"Books",IzmaCampBooks,"Children",kids,"Sex",sex,"Talk",talkWivIzma,"Tooth",gatASharkTooth,"",0,"",0,deDickT,deDickB,"Back",camp.campLoversMenu);
 }
 
 //Get a tiger shark tooth

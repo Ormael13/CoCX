@@ -548,7 +548,7 @@ private function arianHomeMenu():void {
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(9,"Back",kGAMECLASS.telAdre.telAdreMenu);
-		else addButton(9,"Back",kGAMECLASS.campLoversMenu);
+		else addButton(9,"Back",camp.campLoversMenu);
 	}
 }
 
@@ -950,7 +950,7 @@ private function arianPlot5():void {
 	outputText("\n\nYou explain to Arian about the portal, and your mission as the champion - how due to your duties, you cannot just move here and live with [Arian em].");
 	
 	outputText("\n\nArian quickly adds, \"<i><i>Oh... No....  You wouldn't be moving here.  I would be the one moving in with you....");
-	if(kGAMECLASS.companionsCount() > 1) outputText("  There are other people living with you already, so what's one more?  Right?");
+	if(camp.companionsCount() > 1) outputText("  There are other people living with you already, so what's one more?  Right?");
 	outputText("</i></i>\"");
 	
 	outputText("\n\nYou ponder [Arian eir] request...  On one hand, having someone who understands magic would be of great help for your quest, and you've come to enjoy Arian's company, but what about Boon and Laika?");
@@ -1304,7 +1304,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("\n\nAs you walk inside you can't help but gasp in amazement... clearly you have underestimated the lizan.  The inside of the tent is pretty big comparing to the outside, and you see all the tools and facilities one would need to live in the wilderness with relative comfort.");
 	
 	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in [Arian eir] house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lightning up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
-	if(kGAMECLASS.followersCount() > 1) outputText(" and your companions");
+	if(camp.followersCount() > 1) outputText(" and your companions");
 	outputText(".");
 	
 	outputText("\n\n\"<i>So what do you think?  Cozy?</i>\" Arian asks.");
@@ -3452,7 +3452,7 @@ private function dontListenToLowAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 
 //[=Listen=]
@@ -3476,16 +3476,16 @@ private function listenToLowAnalXPArian():void {
 	outputText("\n\nYou wonder if maybe Arian always dreamed of being a baker instead of a wizard.  Or if [Arian ey] just had a midnight craving for pastry.  With a soft sigh, you make yourself settle down and try to get back to sleep.");
 	dynStats("lus", 15);
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 
 //[=Sleep=]
 private function dontListenToMediumAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
-	kGAMECLASS.sleepRecovery(false);
+	camp.sleepRecovery(false);
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 //[=Listen=]
 private function listenToMediumAnalXPArian():void {
@@ -3520,7 +3520,7 @@ private function listenToMediumAnalXPArian():void {
 	}
 	dynStats("lus", 15);
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 
 //[=Sleep=]
@@ -3528,7 +3528,7 @@ private function dontTeaseHighAnalXPArian():void {
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 
 //[=Tease=]
@@ -3572,7 +3572,7 @@ private function TeaseHighAnalXPArian():void {
 		dynStats("lus", 15);
 	}
 	menu();
-	addButton(0,"Next",kGAMECLASS.sleepWrapper);
+	addButton(0,"Next",camp.sleepWrapper);
 }
 //Waking up
 //Always happens the morning after sleeping with Arian.

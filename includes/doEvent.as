@@ -2705,7 +2705,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2951)
 	{
-		stash(false);
+		camp.stash(false);
 	}
 	else if (eventNo == 2957)
 	{

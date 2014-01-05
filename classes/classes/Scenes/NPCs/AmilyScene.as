@@ -2494,13 +2494,13 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//outputText("Options:\nAppearance\nTalk\nMake Love\n", false);
 				//MOAR OPTIONS: Give Present\nAlchemy\nTeach Blowpipe
-				choices("Appearance",amilyAppearance,"Talk",talkToAmilyCamp,"Make Love",fuckTheMouseBitch,"Give Present",giveAmilyAPresent,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",kGAMECLASS.campLoversMenu);
+				choices("Appearance",amilyAppearance,"Talk",talkToAmilyCamp,"Make Love",fuckTheMouseBitch,"Give Present",giveAmilyAPresent,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",camp.campLoversMenu);
 			}
 			//Corrupt
 			else {
 				//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
-				choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",kGAMECLASS.campSlavesMenu);
+				choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",camp.campSlavesMenu);
 			}
 		}
 

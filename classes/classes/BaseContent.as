@@ -1,6 +1,8 @@
 ﻿package classes 
 {
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Camp;
+
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
 	import coc.view.MainView;
@@ -22,7 +24,16 @@
 			
 		}
 
-		protected  function isHalloween():Boolean
+		public function get camp():Camp {
+			return kGAMECLASS.camp;
+		}
+
+		public function goNext(time:Number,defNext:Boolean):Boolean
+		{
+			return kGAMECLASS.goNext(time,defNext);
+		}
+
+		protected function isHalloween():Boolean
 		{
 			return kGAMECLASS.isHalloween();
 		}
@@ -55,6 +66,11 @@
 		protected function inCombat():Boolean
 		{
 			return kGAMECLASS.inCombat();
+		}
+
+		protected function showStats():void
+		{
+			kGAMECLASS.showStats();
 		}
 
 		protected function statScreenRefresh():void
@@ -119,6 +135,10 @@
 			kGAMECLASS.menu();
 		}
 
+		protected function hideMenus():void
+		{
+			kGAMECLASS.hideMenus();
+		}
 		protected function choices(text1:String, butt1:*,
 								text2:String, butt2:*,
 								text3:String, butt3:*,
@@ -408,6 +428,7 @@
 		{
 			return kGAMECLASS.hasItem(itemName,minQuantity);
 		}
+
 
 		protected function consumeItem(itemName:String, quantity:Number):Boolean
 		{

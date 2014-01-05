@@ -107,10 +107,9 @@ public function processJackFrostEvent():void {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 2;
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
-		return;
 	}
 	//No followers
-	else if(companionsCount() == 0) {
+	else if(camp.companionsCount() == 0) {
 		//Only if PC really has NO ONE to be with. aka: ForeverAlone.gif
 		outputText("You sigh... this really reminds you of back home... you only wish you had someone to share this feeling with... Well, there is no reason you shouldn't enjoy yourself while it snows, so you set about rolling a big ball of snow to make a snowman out of...");
 		//Skip to next day...
@@ -118,7 +117,6 @@ public function processJackFrostEvent():void {
 		HPChange(maxHP(),false);
 		fatigue(-100);
 		doNext(16);
-		return;
 	}
 	//Rathazul
 	else if(player.hasStatusAffect("Camp Rathazul") >= 0 && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
@@ -520,15 +518,15 @@ public function processJackFrostEvent():void {
 		outputText("This small holiday of yours was much needed.  You feel reinvigorated and even more determined to put an end to this struggle with demons.");
 		outputText("\n\nThe only thing left to end this day is a feast.  Though your family is not here to join you, at least you won't be dining alone.");
 		//(if One sexable follower)
-		if(loversCount() + slavesCount() == 1) {
+		if(camp.loversCount() + camp.slavesCount() == 1) {
 			outputText("\n\nYou take care of the preparations and cooking, whipping up a delightful meal for you and your companion.  You can tell that you were not the only one needing this break, and judging by the way your companions eyes you as the two of you eat... it seems the day is not over yet...");
 		}
 		//(if no sexable follower)
-		else if(loversCount() + slavesCount() == 0) {
+		else if(camp.loversCount() + camp.slavesCount() == 0) {
 			outputText("\n\nYou take care of the preparations and cooking, whipping up a delightful meal for you and your companion");
-			if(companionsCount() > 1) outputText("s");
+			if(camp.companionsCount() > 1) outputText("s");
 			outputText(".  You can tell that you were not the only one needing this break... but unfortunately all good things must come to an end, and so you bid your companion");
-			if(companionsCount() > 1) outputText("s");
+			if(camp.companionsCount() > 1) outputText("s");
 			outputText(" good night and retire for the night.");
 		}
 		////more than one sexable follower.

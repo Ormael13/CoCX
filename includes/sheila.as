@@ -3687,7 +3687,7 @@ public function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	//if nightwatch, normal night's sleep
 	//if no nightwatch, 4 hours sleep and suppress any imp rapes
 	//lparchive.org/Deadly-Premonition
-	sleepRecovery(false);
+	camp.sleepRecovery(false);
 	model.time.hours = 7;
 	doNext(1);
 }
@@ -4029,11 +4029,13 @@ public function pregDemonSheilaOtherSex():void {
 		startCombat(new Sheila());
 	}
 	//(if no cock)
-	else {
+	else if (player.hasVagina()){
 		outputText("\"<i>Well, that doesn't sound as good as having your amazing self inside me, but I'll take what I can get, love.</i>\"  Sheila snuggles closer to your arm, using one hand to turn your fingers out and slip them between her soft, hot labia, then kisses you on the cheek.  \"<i>So, what do you have in mind?  I'm all yours.</i>\"  She pulls your fingers out and sits down on the grass, spreading her thighs and looking at you expectantly.");
 		//go to fight if cock, else plus lust and present victory sex menu
 		dynStats("lus", 15);
 		beatUpDemonSheila(false);
+	} else {
+		doNext(13);
 	}
 }
 

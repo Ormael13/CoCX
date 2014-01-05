@@ -237,7 +237,7 @@ public function milkyMenu():void {
 	if(flags[kFLAGS.MILK_SIZE] < 2) addButton(2,"Milk Bath",milkBathTime);
 	if(flags[kFLAGS.MILK_SIZE] < 2 && player.hasKeyItem("Super Reducto") >= 0) addButton(3,"Reducto",superReductoUsage);
 	if(flags[kFLAGS.MILK_SIZE] > 0 && player.lust >= 33 && player.hasCock()) addButton(5,"Titfuck",titFuckDatMilkSlut);
-	addButton(9,"Back",campSlavesMenu);
+	addButton(9,"Back",camp.campSlavesMenu);
 }
 
 //Appearance

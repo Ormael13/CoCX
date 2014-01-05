@@ -434,7 +434,7 @@ public function wakeUpWithUrtaAfterStaying():void {
 	model.time.hours = 6;
 	statScreenRefresh();
 	dynStats("lus=", 0);
-	sleepRecovery(false);
+	camp.sleepRecovery(false);
 	//PC Wakes with Urta
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
 	if(flags[kFLAGS.URTA_KIDS_MALES] == 1) outputText("son");
@@ -678,7 +678,7 @@ public function acceptUrtaLevelSixPreggoHelps():void {
 	
 	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your tent to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
 	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your bedroll alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
-	sleepRecovery(false);
+	camp.sleepRecovery(false);
 	model.time.days++;
 	model.time.hours = 6;
 	doNext(13);

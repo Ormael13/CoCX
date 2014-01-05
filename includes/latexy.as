@@ -166,7 +166,7 @@ public function meanGooGirlRecruitment():void {
 public function PCCarriedGooBackHome():void {
 	clearOutput();
 	outputText("You set the once-goo down in a secluded section of your camp");
-	if(companionsCount() > 0) outputText(", away from prying eyes");
+	if(camp.companionsCount() > 0) outputText(", away from prying eyes");
 	outputText(".  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
 	if(player.totalCocks() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your " + multiCockDescriptLight() + " with her juices.");
 	outputText("\n\nSurprisingly, she has hair, or what passes for hair for a woman made entirely of supple, inorganic semi-solids.  Her tresses hang down past her shoulders, slender strands that are as reflective as her skin.  Unlike her skin, the latex-goo's hair seems perpetually oily, slippery and lubricated.  Hesitantly, you extend a hand to touch, carefully caressing a few of the rubbery strands.  Their texture is smooth and slick, unlike any hair you've ever had the pleasure of touching.");
@@ -560,7 +560,7 @@ public function approachLatexy():void {
 	outputText("\n<b>Happiness %:</b> " + Math.round(gooHappiness()));
 	outputText("\n<b>Obedience %:</b> " + Math.round(gooObedience()));
 	menu();
-	addButton(9,"Back",campSlavesMenu);
+	addButton(9,"Back",camp.campSlavesMenu);
 	addButton(0,"Feed Her",feedLatexy);
 	if(player.gender > 0 && player.lust >= 33) addButton(1,"Use Her",useLatexy);
 	addButton(3,"Breast Size",setLatexysBustSize);

@@ -2363,7 +2363,7 @@ public function getHugeEggsInCawk():void {
 		outputText("\n\nRemoving your [armor], you settle down ");
 		if(player.cor < 33) {
 			outputText("in your bedroll");
-			if(hasCompanions()) outputText(", hoping one of your companions sees");
+			if(camp.hasCompanions()) outputText(", hoping one of your companions sees");
 		}
 		else if(player.cor < 66) outputText("behind a rock to hide your sight if not sound");
 		else outputText("in the wastes just outside of camp to be out of sight and mind");

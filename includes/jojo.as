@@ -95,7 +95,7 @@ public function corruptCampJojo():void {
 	var sex:Number = 0;
 	if(player.gender > 0 && player.lust >= 33) sex = 2138;
 	if(player.hasStatusAffect("hairdresser meeting") >= 0) hairCare = 3166;
-	choices("Sex",sex,"TentacleSex",tent,"Milk Him",milkHim,"TentacleMilk",tentaMilk,"HairCare",hairCare,"Lay Eggs",eggs,"",0,"",0,"",0,"Back",campSlavesMenu);
+	choices("Sex",sex,"TentacleSex",tent,"Milk Him",milkHim,"TentacleMilk",tentaMilk,"HairCare",hairCare,"Lay Eggs",eggs,"",0,"",0,"",0,"Back",camp.campSlavesMenu);
 }
 /*OLD FOLLOWER JOJO CODE
 	if(player.hasStatusAffect("Tentacle Jojo") >= 0) {

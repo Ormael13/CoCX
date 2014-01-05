@@ -311,7 +311,7 @@ public function helFollowersIntro():void {
 	}
 	else {
 		flags[kFLAGS.HEL_INTROS_LEVEL] = 9001;
-		camp();
+		camp.doCamp();
 		return;
 	}
 	menu();
@@ -492,7 +492,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		if(flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
 			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 && !helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",haveAKid);
 		}
-		addButton(9,"Back",campLoversMenu)
+		addButton(9,"Back",camp.campLoversMenu)
 	}
 	else if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1) {
 		if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) {
@@ -900,7 +900,7 @@ public function hugASmokeyTail():void {
 		outputText("\n\nHel smiles prettily as you give your assent.  <i>\"On a night like this, there's no one I'd rather be with, [name]...\"</i>\n\n");
 		flags[kFLAGS.SLEEP_WITH] = "Helia";
 		menu();
-		addButton(0,"Next",doSleep);
+		addButton(0,"Next",camp.doSleep);
 		return;
 	}
 	//[If PC is >8ft tall]
@@ -1961,7 +1961,7 @@ public function goWithHelia():void {
 	//{If Kiha, Isabella, and/or Valeria are at camp:}
 	if(isabellaFollower() || followerKiha() || flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
 		outputText("  Looking over your shoulder as you depart, though, you notice that camp looks particularly... empty. Perhaps your other camp-mate");
-		if(companionsCount() > 1) outputText("s are");
+		if(camp.companionsCount() > 1) outputText("s are");
 		else outputText(" is");
 		outputText(" out, too? You shrug. You and Hel aren't the only ones with lives, you suppose.");
 	}

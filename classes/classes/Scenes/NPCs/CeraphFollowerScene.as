@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 				if (output) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			}
 			else sexMenu = ceraphSexMenu;
-			choices("Sex", sexMenu, "", 0, "", 0, "", 0, "Partswap", giveFollowerBodyBits, "Roleplay", rp, "Get Fetish", gainFetish, "RemoveFetish", loseFetish, dickToggle, cawkTawgle, "Leave", kGAMECLASS.campSlavesMenu);
+			choices("Sex", sexMenu, "", 0, "", 0, "", 0, "Partswap", giveFollowerBodyBits, "Roleplay", rp, "Get Fetish", gainFetish, "RemoveFetish", loseFetish, dickToggle, cawkTawgle, "Leave", camp.campSlavesMenu);
 		}
 
 		private function ceraphSexMenu():void
@@ -852,7 +852,7 @@ package classes.Scenes.NPCs
 			outputText("You wave the imps away and tell them that you're not interested.  One of the imps protests, \"<i>But, " + player.mf("Master", "Mistress") + "-</i>\"  You cut him off before he has a chance to finish, saying that you wanted Ceraph, not some human girl!  Then, you toss the potion away and tell them to take the girl away.\n\n", false);
 
 			outputText("\"<i>Y-Yes, " + player.mf("Master", "Mistress") + "...</i>\" the imps reply meekly, pulling on the collar to drag the girl away.", false);
-			doNext(kGAMECLASS.campSlavesMenu);
+			doNext(camp.campSlavesMenu);
 		}
 
 //[=Yes=]
@@ -1408,7 +1408,7 @@ package classes.Scenes.NPCs
 			outputText("You tell her to be gone; you wanted Ceraph, not some lowly slave that can't even be bothered to show you proper respect.  You order her to tell Ceraph not to waste your time with undisciplined servants that she's too inept to properly break.\n\n", false);
 
 			outputText("\"<i>Oohoh, Mistress is certain to be FURIOUS with Zetsuko...</i>\" she says, licking her lips and showing off the numerous studs that line her normal tongue as well.  \"<i>Zetsuko cannot wait...</i>\"", false);
-			doNext(kGAMECLASS.campSlavesMenu);
+			doNext(camp.campSlavesMenu);
 		}
 
 		private function giveFollowerBodyBits():void

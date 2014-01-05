@@ -253,7 +253,7 @@ public function followerSophieMainScreen():void {
 			addButton(8,"NoSleepWith",sleepWithSophieToggle);
 			outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
 		}
-		addButton(9,"Back",campFollowers);
+		addButton(9,"Back",camp.campFollowers);
 		return;
 	}
 	else {
@@ -274,7 +274,7 @@ public function followerSophieMainScreen():void {
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",daughterCheckup);
 	}
-	addButton(9,"Back",campFollowers);
+	addButton(9,"Back",camp.campFollowers);
 }
 
 //[Sex]
@@ -857,7 +857,7 @@ public function sophieRecruitmentFinale():void {
 	outputText("\n\n\"<i>I know you're probably busy championing and all, so I'll try and stay out of your hair.  Just be sure to show Momma Sophie some sugar, okay?</i>\"");
 	
 	outputText("\n\nYou nod and welcome her to your camp");
-	if(companionsCount() >= 3) outputText(", sure to introduce her to the other denizens along the way and smooth over any ruffled feathers before things escalate.  Sophie does a good job helping with that.  She seems to have a natural ability to defuse angry situations, something she attributes to raising her many daughters");
+	if(camp.companionsCount() >= 3) outputText(", sure to introduce her to the other denizens along the way and smooth over any ruffled feathers before things escalate.  Sophie does a good job helping with that.  She seems to have a natural ability to defuse angry situations, something she attributes to raising her many daughters");
 	outputText(".");
 	outputText("\n\n(<b>Sophie is now available in the followers tab!</b>)");
 	flags[kFLAGS.SOPHIE_RECRUITED_PURE] = 1;

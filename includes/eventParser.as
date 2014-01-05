@@ -93,7 +93,7 @@ public function doSystem(eventNo:Number):void {
 			}
 			menuLoc = 0;
 			flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
-			camp();
+			camp.doCamp();
 			return;
 
 
@@ -135,7 +135,7 @@ public function doSystem(eventNo:Number):void {
 
 		case 11:
 			//Rest
-			rest();
+			camp.rest();
 			return;
 
 
@@ -214,14 +214,14 @@ public function doSystem(eventNo:Number):void {
 		case 40:
 			//Use wait command
 			//See camp.as
-			doWait();
+			camp.doWait();
 			return;
 
 
 		case 41:
 			//Use sleep command
 			//in camp.as
-			doSleep();
+			camp.doSleep();
 			return;
 
 
@@ -308,14 +308,14 @@ public function doSystem(eventNo:Number):void {
 
 		case 71:
 			//Places menu
-			places(true);
+			camp.places(true);
 			return;
 
 
 		case 74:
 			//Camp followers screen
 			doNext(1);
-			campFollowers();
+			camp.campFollowers();
 			return;
 
 
@@ -2356,7 +2356,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//Normal night succubi shit
 					else {
 						doNext(1);
-						nightSuccubiRepeat();
+						camp.nightSuccubiRepeat();
 					}
 				}
 				else {

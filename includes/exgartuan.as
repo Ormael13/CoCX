@@ -947,7 +947,7 @@ public function exgartuanBulgeTortureIV():void {
 		outputText("the single piece of your " + player.armorName, false);
 	outputText(".  As you rise to your feet, a few streams of cum run down your " + player.legs() + ".", false);
 	//[If any followers]
-	if(hasCompanions()) outputText("  For a moment, you consider asking someone outside if they remember anything from last night.  But you decide it better to just keep it to yourself, afraid of what you might find out.", false);
+	if(camp.hasCompanions()) outputText("  For a moment, you consider asking someone outside if they remember anything from last night.  But you decide it better to just keep it to yourself, afraid of what you might find out.", false);
 	//[else]
 	else outputText("  You glance around at your tent, searching for anything that may clue you in on what transpired last night.  After a few moments, however, you decide it better to just move on with your day.", false);
 	outputText("  You pay one more glance to Exgartuan, the " + cockDescript(0) + " comfortably resting away in your outfit.\n\n", false);

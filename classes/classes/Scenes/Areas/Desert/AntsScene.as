@@ -656,7 +656,7 @@ package classes.Scenes.Areas.Desert
 			}
 			outputText("\n\nThe link fades not long after you both have settled down, and Phylla hums her approval as she kisses your neck lovingly.  You smile back, but never knew how strong one's maternal instincts could really be.  Hearing primal drives that are not your own was almost deafening.  Yet, you can't help but feel an appreciation for such an understanding that has been shown to you.");
 			//PC has other waifus:
-			if (kGAMECLASS.loversCount() > 1) outputText("\n\nSo this is what your other lovers must feel.");
+			if (camp.loversCount() > 1) outputText("\n\nSo this is what your other lovers must feel.");
 			outputText("\n\nYou drift off to sleep not long after, while Phylla demonstrates her appreciation for the intimacy you two just shared, kissing your body and rubbing you sensually as you doze off.");
 			dynStats("lus=", 0);
 			menu();
@@ -1048,7 +1048,7 @@ package classes.Scenes.Areas.Desert
 			if (flags[kFLAGS.ANT_KIDS] > 0) addButton(3, "Children", phyllasKidsChildren);
 			addButton(4, "Appearance", phyllaPearance);
 			addButton(5, "Find Gems", phyllaDigsForGems);
-			addButton(9, "Back", kGAMECLASS.campLoversMenu);
+			addButton(9, "Back", camp.campLoversMenu);
 
 			flags[kFLAGS.PHYLLA_CAMP_VISITS]++;
 		}

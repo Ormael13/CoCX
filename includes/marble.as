@@ -1613,7 +1613,7 @@ public function interactWithMarbleAtCamp():void {
 			"Playtime",playtime,
 			"Break Up",breakUpWithMarble,
 			"",0,
-			"Back",campLoversMenu);
+			"Back",camp.campLoversMenu);
 }
 
 public function marbleTalkOverhaul():void {

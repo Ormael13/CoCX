@@ -1182,7 +1182,7 @@ public function callSlaveVapula(output:Boolean = true):void {
 	//Requires bipedal-ness
 	if(flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = 3959;
 	else threesome = 3768;
-	choices("Appearance",3750,"Talk",3751,"Feed",mFeed,"Feed(Dildo)",fFeed,"Threesome",threesome,"Spank",spank,"",0,"",0,"",0,"Leave",campSlavesMenu);
+	choices("Appearance",3750,"Talk",3751,"Feed",mFeed,"Feed(Dildo)",fFeed,"Threesome",threesome,"Spank",spank,"",0,"",0,"",0,"Leave",camp.campSlavesMenu);
 }
 
 //Vapula Appearance - this bitch is purpler than a Nigerian (Z)
@@ -1930,8 +1930,8 @@ public function spankVapulaLikeABoss():void {
 	outputText("\n\n\"<i>Be still, you whimpering, useless excuse for a demon!</i>\" you command.  Unsurprisingly, she continues to struggle.");
 	outputText("\n\nVapula cries,  \"<i>Lemme go!  Can't we just go double team some people and forget about all this?</i>\"  Her violet eyes crane hopefully towards you, and she wears a winning smile across the smooth curves of her lips.  For a moment, you reconsider your plans, but then again, she earned this when she forced herself on you.  Upon seeing the resolve in your gaze, her struggles start anew, but you have her firm - she's not going anywhere.");
 	outputText("\n\nOnce you have the rebellious succubus well in hand, you lift your right palm high in the air, upraised and ready to drop.  The moment seems to drag on for a while, and once your female slave is trembling with worry, you bring it down hard.  SMACK!  The hit rings out through your camp");
-	if(companionsCount() > 2) outputText(", drawing the eyes of your other companions.");
-	else if(companionsCount() == 2) outputText(", drawing the attention of your other companion.");
+	if(camp.companionsCount() > 2) outputText(", drawing the eyes of your other companions.");
+	else if(camp.companionsCount() == 2) outputText(", drawing the attention of your other companion.");
 	else outputText(", echoing off the sentinel-like rocks that seem to ring your encampment.");
 	outputText("  Her tail goes wild at the impact, whipping around in a frenzy and actually managing to slap your cheek!  That bitch!");
 	outputText("\n\nThis time, your hand cocks and releases in a split-second, coming down with even more force than before.  Vapula screams, \"<i>Ow! Stop it, by Lethice, please!</i>\"  This time, her thrashing, spaded tail stays obediently low, harmlessly cutting through the air so as not to irritate you.");
