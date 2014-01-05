@@ -12,6 +12,7 @@ public class TelAdre extends BaseContent{
 	public var auntNancy:AuntNancy = new AuntNancy();
 	public var bakeryScene:BakeryScene = new BakeryScene();
 	public var umasShop:UmasShop = new UmasShop();
+	public var brooke:Brooke = new Brooke();
 
 	public function TelAdre()
 	{
@@ -1612,7 +1613,7 @@ private function weightLifting():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		addButton(0,"\"Showers\"",kGAMECLASS.exploreShowers);
-		addButton(1,"Showers",kGAMECLASS.repeatChooseShower);
+		addButton(1,"Showers",brooke.repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
 	else doYesNo(kGAMECLASS.exploreShowers,13);
@@ -1698,7 +1699,7 @@ private function goJogging():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		addButton(0,"\"Showers\"",kGAMECLASS.exploreShowers);
-		addButton(1,"Showers",kGAMECLASS.repeatChooseShower);
+		addButton(1,"Showers",brooke.repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
 	else doYesNo(kGAMECLASS.exploreShowers,13);

@@ -2539,7 +2539,7 @@ public function displayStats(e:MouseEvent = null):void
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter: </b>" + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
 	if(bazaar.benoit.benoitAffection() > 0) outputText("<b>" + bazaar.benoit.benoitMF("Benoit","Benoite") + " Affection: </b>" + Math.round(bazaar.benoit.benoitAffection()) + "%\n");
 	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid: </b>" + flags[kFLAGS.BENOIT_EGGS] + "\n");
-	if(flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(brookeAffection()) + "\n");
+	if(flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(telAdre.brooke.brookeAffection()) + "\n");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0) outputText("<b>Body Parts Taken By Ceraph: </b>" + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n", false);
 	if(flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton: </b>" + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
 	if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn: </b>" + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);

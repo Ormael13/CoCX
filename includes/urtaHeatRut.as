@@ -136,7 +136,7 @@ function notInterestedInUburDrunkUrtaRuts():void {
 	stats(0,0,0,0,0,0,5+player.lib/20,0,false);
 	//to Tel'Adre bar menu
 	menu();
-	addButton(0,"Next",barTelAdre);
+	addButton(0,"Next",telAdre.barTelAdre);
 }
 
 //[=Interested=]
@@ -146,9 +146,9 @@ function interestedInUburDrunkurtaRuts():void {
 	outputText("You raise an eyebrow and ask Urta if she minds telling you the reason for such attention and how exactly do you smell like.");
 
 	//Rut And Heat:
-	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) outputText("\n\n\"<i>Gods, sexy!  You smell like you walked in here to make babies - like you want to grab the girls and the herms and plough them full of cum, even as you let the guys and the herms stuff your greedy cunt full of baby juice and make you just as pregnant.  It's the best smell ever...</i>\"")
+	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) outputText("\n\n\"<i>Gods, sexy!  You smell like you walked in here to make babies - like you want to grab the girls and the herms and plough them full of cum, even as you let the guys and the herms stuff your greedy cunt full of baby juice and make you just as pregnant.  It's the best smell ever...</i>\"");
 	//Rut:
-	else if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText("\n\n\"<i>Well, let me put it like this: you smell like you walked in here to grab every girl here by the hips and breed them all for hours on end, until the whole lot of them's knocked up</i>\"");
+	else if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText("\n\n\"<i>Well, let me put it like this: you smell like you walked in here to grab every girl here by the hips and breed them all for hours on end, until the whole lot of them's knocked up</i>\"");
 
 	else if(player.hasStatusAffect("heat") >= 0 && player.hasVagina()) outputText("\n\n\"<i>Well, let me put it like this: You smell like you walked in here to tease and flirt with every man and herm in the place... stride into the middle of the floor like a queen, then pull off your clothes and bend over to let yourself be fucked and bred for hours until you were well and truly knocked up.</i>\"")
 

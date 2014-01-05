@@ -159,7 +159,6 @@
 
 		include "../../includes/april_fools.as";
 
-		include "../../includes/brooke.as";
 		include "../../includes/bunbun.as";
 		include "../../includes/camp.as";
 		include "../../includes/cinnabar.as";
