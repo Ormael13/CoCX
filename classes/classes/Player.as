@@ -1,7 +1,7 @@
 package classes
 {
 	import classes.GlobalFlags.kFLAGS;
-	import classes.content.UmasShop;
+	import classes.Scenes.Places.TelAdre.UmasShop;
 
 	/**
 	 * ...

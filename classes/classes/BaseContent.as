@@ -22,6 +22,11 @@
 			
 		}
 
+		protected function isValentine():Boolean
+		{
+			return kGAMECLASS.isValentine();
+		}
+
 		protected function isHolidays():Boolean
 		{
 			return kGAMECLASS.isHolidays();
@@ -30,6 +35,11 @@
 		protected function isEaster():Boolean
 		{
 			return kGAMECLASS.isEaster();
+		}
+
+		protected function isThanksgiving():Boolean
+		{
+			return kGAMECLASS.isThanksgiving();
 		}
 
 		protected function get date():Date
@@ -149,6 +159,11 @@
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
 		{
 			kGAMECLASS.addButton(pos, text, func1, arg1);
+		}
+
+		protected function hasButton(arg:*):Boolean
+		{
+			return kGAMECLASS.hasButton(arg);
 		}
 		
 		protected function rand(maxVal:Number):Number
@@ -397,6 +412,11 @@
 		protected function itemLongName(shortName1:String):String
 		{
 			return kGAMECLASS.itemLongName(shortName1);
+		}
+
+		protected function itemValue(item:String):Number
+		{
+			return kGAMECLASS.itemValue(item);
 		}
 
 		protected function takeItem():void{
@@ -687,16 +707,19 @@
 		// before passing it into addbutton etc.
 		// Going the string route also makes it... not awful to call into other content classes too - split string on . and chain
 		// lookups into objects ie "umasShop.firstVisitPart1" -> kGAMECLASS["umasShop"].["firstVisitPart1"]()
+		// @aimozg: but kGAMECLASS.umasShop.firstVisistPart1 instead of String is compile-time safe.
 		// Clearly this isn't going to fly long term, but it's... functional for now.
+
+		/* @aimozg commented this out because telAdre
 		protected function get armorShops():Function
 		{
 			return kGAMECLASS.armorShops;
 		}
-		
+
 		protected function get telAdreMenu():Function
 		{
 			return kGAMECLASS.telAdreMenu;
-		}
+		}*/
 
 	}
 

@@ -1090,8 +1090,8 @@ package classes.Scenes.Areas.Lake.Boat
 
 			//Tutor, N.Watch, and Evict require the anemone to be present
 			menu();
-			addButton(0, "Item", eventParser, item);
-			if (weaponB > 0) addButton(1, weaponT, eventParser, weaponB);
+			addButton(0, "Item", item);
+			if (weaponB > 0) addButton(1, weaponT, weaponB);
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
 				if (flags[kFLAGS.ANEMONE_WEAPON] != 0 && player.fatigue <= 90) addButton(3, "Tutor", tutorAnemoneKid);
 				else if (player.fatigue > 90) outputText("\n\nYou're too tired to tutor Kid A.");

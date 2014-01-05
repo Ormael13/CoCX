@@ -352,7 +352,7 @@ public function rogarThirdPhase():void {
 		}
 		
 		//return to bar menu
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	//((androgynous or masculine and breasts <= A-cup))
@@ -441,7 +441,7 @@ public function rogarPhaseFour():void {
 	else if((player.biggestTitSize() >= 2) && flags[kFLAGS.ROGAR_WARNING] == 1) {
 		outputText("Ro'gar the orc is here drinking again, but as you catch his eye, a pained expression flashes across his face as he looks over your form.  It's clear he doesn't relish the prospect of talking to you right now, but knowing him, he's too polite to say so.  The wind spills from your sails and your icebreaker slips from your mind - answering him with a simple glance of resignation is the most you can manage.  He gives you a weak smile and returns to his drink.", false);
 		//return to bar menu
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 	}
 	//(andro or masculine with tits <= A)
 	else {
@@ -496,7 +496,7 @@ public function noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice():void {
 	spriteSelect(86);
 	outputText("You smile at the orc, but tell him that you're not really in the mood to hang out right now.  He looks crestfallen, but nods at you.  \"<i>Well, I understan'.  I'll be seein' ya later, then.</i>\"", false);
 	//Bar menu!
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 //(([Get Anal], Scenario 1a: give up the buttcherry (buttvirgins only)))

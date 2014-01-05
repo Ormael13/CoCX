@@ -1,14 +1,11 @@
 ﻿package classes.Scenes.Places.TelAdre{
-import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-public class BakeryScene extends BaseContent {
+import classes.GlobalFlags.kGAMECLASS;
+public class BakeryScene extends TelAdreAbstractContent {
 
 	public function BakeryScene()
 	{
 	}
-
 // LAST_EASTER_YEAR:int = 823;
 
 //[First time approach]
@@ -55,13 +52,13 @@ public function bakeryuuuuuu():void {
 	outputText("What do you do?");
 	addButton(0,"Check Menu",checkBakeryMenu);
 	addButton(1,"Talk",talkBakeryMenu);
-	addButton(9,"Leave",telAdreMenu);
+	addButton(9,"Leave",telAdre.telAdreMenu);
 }
 
 private function checkBakeryMenu():void {
 	clearOutput();
 	//var used for minotaur cum eclair in the menu
-	var minoCum:Number = 0;
+	var minoCum:Function = null;
 	var gcupcake:Function = null;
 	//Turn on cum eclairs if PC is an addict!
 	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] == 0) {
@@ -76,7 +73,7 @@ private function checkBakeryMenu():void {
 	outputText("Pound Cake - 4 gems.\n", false);
 	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {
 		outputText("\'Special\' Eclair - 10 gems.\n", false);
-		minoCum = 2835;
+		minoCum = createCallBackFunction2(nomnomnom, "eclair", 10);
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
@@ -90,15 +87,15 @@ private function checkBakeryMenu():void {
 	outputText("\nWhat will you order?", false);
 	
 	menu();
-	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
+	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4),"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
 	
-	addButton(0,"Brownies",eventParser,2832);
-	addButton(1,"Cookies",eventParser,2831);
-	addButton(2,"Cupcakes",eventParser,2833);
-	addButton(3,"Doughnuts",eventParser,2830);
-	addButton(4,"Pound Cake",eventParser,2834);
-	if(minoCum > 0) addButton(5,"SpecialEclair",eventParser,minoCum);
-	addButton(6,"GiantCupcake",eventParser,gcupcake);
+	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "doughnuts", 5));
+	addButton(1,"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4));
+	addButton(2,"Cupcakes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
+	addButton(3,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5));
+	addButton(4,"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4));
+	addButton(5,"SpecialEclair",minoCum);
+	addButton(6,"GiantCupcake",gcupcake);
 	addButton(8,"Ingredients",ingredientsMenu);
 	addButton(9,"Leave",bakeryuuuuuu);
 }
@@ -110,7 +107,7 @@ public function ingredientsMenu():void {
 	outputText("Ringtail Fig - 5 gems.\n");
 	outputText("Mouse Cocoa - 10 gems.\n");
 	menu();
-	addButton(0,"Fox Berry",eventParser,buyFoxBerry);
+	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
 	addButton(2,"Mouse Cocoa",buyCocoa);
 	addButton(9,"Back",checkBakeryMenu);
@@ -149,7 +146,7 @@ private function talkAboutBrownies():void {
 	
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,2832);
+	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "brownies", 3));
 	addButton(1,"No",talkToBaker);
 }
 
@@ -159,7 +156,7 @@ private function talkAboutCookies():void {
 	outputText("The baker nods at you.  \"<i>Cookies good.  Cookies easy, only need butter, sugar, flour, egg, and fig.  Mix batter and put in little circles, mash up figs, put figs in centers of circles, put other circle on top.  Cook cookie.  Also able to just put whatever into batter and make chocolate cookie or anything else, but fig most popular and cheapest.</i>\"  He smiles proudly and gestures toward the four-gem cookie display.  Do you buy one?");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,2831);
+	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "cookies", 4));
 	addButton(1,"No",talkToBaker);
 }
 
@@ -173,7 +170,7 @@ private function talkAboutCupcakes():void {
 	outputText("\n\n\"<i>Too popular, too cheap.  Always making cupcakes, no time to experiment on recipes.  Want to raise price but cupcakes are best seller and customers get mad.</i>\"  A bell rings.  Sighing again, he walks over to the oven and opens it, then pulls out a tray of un-iced cupcakes.  \"<i>See?  Making now.  You buying one?  Four... no, still three gems I guess.</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,2833);
+	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
 	addButton(1,"No",talkToBaker);
 }
 
@@ -185,7 +182,7 @@ private function talkAboutDoughnuts():void {
 	outputText("\n\n\"<i>Fry in hot oil until brown and delicious, lift out with spatula.  Penetrate jam doughnuts with pastry bag and squirt jam like cum into breeding cow... sorry.</i>\"  He frowns.  \"<i>Take longer to make than other things, even cupcakes.  Can't make batches as big because so many kinds.  So doughnuts cost more - five gems.  Still, lots of fun to pound and fry and stuff.  Sell lots when watch shifts change; watchmen come in and clean out doughnut trays.  Want to buy one before next rush starts?</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,2830);
+	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "doughnuts", 5));
 	addButton(1,"No",talkToBaker);
 }
 
@@ -195,7 +192,7 @@ private function talkToBakerAboutPoundCake():void {
 	outputText("The minotaur snorts again, \"<i>'Baker's Special' pound cake is easy... mix butter and shortening, then sugar and eggs.  Put in little salt and whatever dry stuff needed, like fruits or chocolate.  Add milk too.  Put in narrow pan, bake long time.  Can't make batter in bulk though, got to have lots of varieties since not one is more popular than others.  So costs four gems; not as cheap as batch items.  Want a piece?</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,2834);
+	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "pound cake", 4));
 	addButton(1,"No",talkToBaker);
 }
 
@@ -266,7 +263,7 @@ private function buyFig():void {
 
 
 private function talkBakeryMenu():void {
-	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",telAdreMenu);
+	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",2831,"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",telAdreMenu);
 	clearOutput();
 	outputText("Who will you talk to?\n");
 	var rubiT:String = "Waitress";
@@ -302,7 +299,9 @@ private function rubiWrapper(rubiB:int = 0):void {
 }
 
 
-public function nomnomnom():void {
+public function nomnomnom(name:String,price:Number):void {
+	flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = name;
+	flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = price;
 	outputText("", true);
 	if(player.gems < flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) {
 		outputText("You don't have enough gems to order that!", false);
@@ -429,7 +428,7 @@ private function easterBakeSale():void {
 	menu();
 	addButton(3,"Check Menu",checkBakeryMenu);
 	addButton(0,"Offer Help",easterBakeSaleHelp);
-	addButton(4,"Leave",telAdreMenu);
+	addButton(4,"Leave",telAdre.telAdreMenu);
 }
 
 private function easterBakeSaleHelp():void {

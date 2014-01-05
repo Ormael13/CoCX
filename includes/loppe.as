@@ -75,7 +75,7 @@ public function noLoppeInterest():void {
 	//(disable repeat and NPC)
 	flags[kFLAGS.LOPPE_DISABLED] = 1;
 	menu();
-	addButton(0,"Next",barTelAdre);
+	addButton(0,"Next",telAdre.barTelAdre);
 }
 
 //[=Not Now=]
@@ -84,7 +84,7 @@ public function mebbeLaterToLoppe():void {
 	outputText("You're not really in the mood for this right now, so you leave the bar.");
 	//(go to T'A main menu, repeat event in 15 days.)
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
 
 //[=Yes=]
@@ -144,7 +144,7 @@ public function notReallyInterestedInLoppe():void {
 	
 	outputText("\n\n\"<i>Dammit, came on too strong...</i>\"");
 	menu();
-	addButton(0,"Next",barTelAdre);
+	addButton(0,"Next",telAdre.barTelAdre);
 }
 
 //[=Sure=]
@@ -277,7 +277,7 @@ public function loppeGenericMeetings():void {
 	addButton(0,"Appearance",appearanceOfLoppe);
 	addButton(1,"Talk",talkWithLoppe);
 	addButton(2,"Sex",loppeSexChoice);
-	addButton(4,"Leave",telAdreMenu);
+	addButton(4,"Leave",telAdre.telAdreMenu);
 	//Leave (Return to Tel'Adre menu)
 }
 
@@ -707,7 +707,7 @@ public function chatWithLoppeAboutHerMom():void {
 	
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0) 
 	{
-		addButton(0, "Visit Mom", umasShop.firstVisitPart1);
+		addButton(0, "Visit Mom", telAdre.umasShop.firstVisitPart1);
 		addButton(1, "Mebbe Later", eventParser, 13);
 	}
 	else
@@ -1931,7 +1931,7 @@ public function beATeaseAndLeaveLoppeAfterSexInvite():void {
 	outputText("\n\nYou nod your head, quietly redress yourself, and exit.");
 	dynStats("lus", 5+rand(5));
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
 
 //Fondle&Tease (rewritten and edited)(C)

@@ -16,6 +16,7 @@ public function eventParser(eventNo:*):void {
 	}
 	else if (eventNo is int)
 	{
+		trace("Numeric eventNo "+eventNo+" replace it with function");
 		//Clear sprite if not in combat
 		if(!inCombat() && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat
@@ -2862,7 +2863,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...
-	umasShop.updateBonusDuration(time);
+	telAdre.umasShop.updateBonusDuration(time);
 	if (player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME) >= 0)
 	{
 		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.MASSAGE_BONUS_NAME));

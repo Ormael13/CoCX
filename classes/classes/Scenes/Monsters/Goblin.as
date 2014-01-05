@@ -131,7 +131,7 @@
 					game.dynStats("lus=", 0);
 					doNext(game.cleanupAfterCombat);
 				} else {
-					game.eventParser(game.goblinScene.goblinRapesPlayer);
+					game.goblinScene.goblinRapesPlayer();
 				}
 			} else if (short == "goblin broodmother"){
 				game.urtaLosesToGoblin();

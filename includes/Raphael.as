@@ -1225,7 +1225,7 @@ public function orphanageIntro():void {
 			menu();
 			addButton(0,"Talk",talkWithRedFoxLooksOutHesASpy);
 			addButton(1,"Sex",raphaelOrphanageSexMenu);
-			addButton(4,"Leave",telAdreMenu);
+			addButton(4,"Leave",telAdre.telAdreMenu);
 			//build a menu here!
 		}
 		else {
@@ -1233,7 +1233,7 @@ public function orphanageIntro():void {
 			outputText("You walk into the alley to the side of the orphanage and look up expectantly, brushing by shady looking teens who enjoy patting you down, but leaving you and your possessions alone otherwise.  They seem to make a game out of it.  It's hard to see if any of the rooms are lit because it's still quite bright outside.  There probably aren't.  Still, you begin to search for the one rope out of many that will hoist you up there by pulling it.  You stay clear of the other ones, not quite sure what they'd do, but half expect them to fire a crossbow bolt or drop an anvil on your head.  Anxious, you grab the right one and hold on tight when you pull it, but oddly enough, nothing happens.  You're sure it's the right one, but something is preventing the system from kicking into gear.  You shake your head and step back in silent admiration.  You're not sure what mechanical marvel is responsible for it, but the orphanage must be decked with all manner of clever contraptions that even manage to factor time into the system.");
 			//[nothing happens]
 			menu();
-			addButton(0,"Back",telAdreMenu);
+			addButton(0,"Back",telAdre.telAdreMenu);
 		}
 	}
 	//PLACEHOLDER UNTIL VIXENS ARE DONE
@@ -1397,5 +1397,5 @@ public function raphaelOrphanageSexMenu():void {
 	menu();
 	addButton(0,"Cunnilingus",cunnilingusWithRaphael);
 	addButton(1,"Ride Him",girlOnTopOfRedFoxesOhMy);
-	addButton(4,"Leave",telAdreMenu);
+	addButton(4,"Leave",telAdre.telAdreMenu);
 }

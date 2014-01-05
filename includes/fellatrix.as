@@ -31,7 +31,7 @@ public function fellatrixBarApproach():void {
 		outputText("You nod slightly, glancing back at Dominika, then shrug.", false);
 		//TO THE BAR
 		cheatTime(1);
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	//[First encounter]
@@ -63,7 +63,7 @@ public function fellatrixBarApproach():void {
 			outputText("You make your way over to Dominika's table and start up a conversation with the modestly dressed woman. You share exploits and knowledge, but can't help but feel like she's being somewhat distant. She glances out to the distance more than once, and drums her fingers on the table. You make conversation for a little while longer, but realize that it's not really going to go anywhere, and excuse yourself.", false);
 		}
 		cheatTime(1);
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	//Second encounter]
@@ -92,7 +92,7 @@ public function turnDownDominikasKnowledge():void {
 	outputText("", true);
 	outputText("\"<i>Fair enough,</i>\" Dominika nods. \"<i>Let me know if you change your mind.</i>\" The two of you make small talk for a while longer, before you decide to get back to work and excuse yourself.\n\n", false);
 	cheatTime(1);
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 //[\"<i>Sure</i>\"]
 public function acceptDominikasKnowledge():void {
@@ -286,7 +286,7 @@ public function declineFellatrixOralSUPERHARDCORE():void {
 	//(Dominika does not appear again.)
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] = -1;
 	cheatTime(1);
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 

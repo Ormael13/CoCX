@@ -205,7 +205,7 @@ public function urtaBarApproach():void {
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) {
 		outputText("You approach Urta, but she slams her bottle down on the table hard enough to make it rattle.  She slurs, \"<i>Jusht... stay away from me.  I don't want any company right now.</i>\"\n\n", false);
 		outputText("There's nothing to do but leave....", false);
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	//Post Scylla discussion
@@ -290,7 +290,7 @@ public function urtaBarApproach():void {
 				temp = 3840;
 			}
 			//As per normal drunk-fawks
-			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
+			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",barTelAdre);
 			menu();
 			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",eventParser,2296);
@@ -300,7 +300,7 @@ public function urtaBarApproach():void {
 				outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",barTelAdre);
+			addButton(9,"Leave",telAdre.barTelAdre);
 			return;
 		}
 	}
@@ -311,7 +311,7 @@ public function urtaBarApproach():void {
 		outputText("You spend a moment looking over your shoulder, but can't for the life of you figure out what she was freaking out about.  She must be really drunk!  You turn back to scold her, but Urta has vanished!  She must have left in a hurry – she left her bottle of \"<i>John Doe</i>\" behind, and still half-full.  The bar's back-door swings closed, maybe she went that way.  What do you do?", false);
 		
 		//(LEAVE HER TABLE) (DRINK HER BOOZE) (BACKDOOR)
-		simpleChoices("Backdoor",urtaFollowedOutBack,"Drink Booze",drinkUrtasBooze,"",0,"",0,"Leave",barTelAdre);
+		simpleChoices("Backdoor",urtaFollowedOutBack,"Drink Booze",drinkUrtasBooze,"",0,"",0,"Leave",telAdre.barTelAdre);
 		return;
 	}
 	//[URTA FRIEND APPROACH]
@@ -327,7 +327,7 @@ public function urtaBarApproach():void {
 			if(flags[kFLAGS.URTA_TIMES_EGG_PREGGED] == 0) outputText("\n\nHmm... sounds like she wants to fuck almost as badly as you want to get these eggs out of you.  And, besides, didn't Urta say to you once that she's basically barren and sterile?  You'd be doing her a favor by letting her carry your eggs, wouldn't you?  Let's see if she's drunk enough to let you fill her full...");
 			temp = 3840;
 		}
-		//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
+		//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",barTelAdre);
 		menu();
 		addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 		addButton(1,"Anal Ride",eventParser,2296);
@@ -337,7 +337,7 @@ public function urtaBarApproach():void {
 			outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 			addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 		}
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 		return;
 	}
 	//[URTA COMFORTABLE WITH HOR-COCK]
@@ -358,12 +358,12 @@ public function urtaBarApproach():void {
 		else outputText("\n\nYou don't think it's likely Urta would agree to host your eggs in her present state; wait until she's turned down her inhibitions before asking.");
 	}
 	//[Under Table BJ] [Public Jerkoff onto your face] [Public Buttfucking (Receiver)] [Tender lovemaking @ Urtas] [Minotaur Cum-Addict Special?] [TABLE FUCK]
-	//simpleChoices("Hidden BJ",2295,"Urta's Place",2300,"",0,"",0,"Leave",2256);
+	//simpleChoices("Hidden BJ",2295,"Urta's Place",2300,"",0,"",0,"Leave",barTelAdre);
 	menu();
 	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",slurpFawkesCocksForFunAndInflation);
 	else addButton(0,"Hidden BJ",eventParser,2295);
 	addButton(1,"Urta's Place",eventParser,2300);
-	addButton(4,"Leave",barTelAdre);
+	addButton(4,"Leave",telAdre.barTelAdre);
 }
 
 public function drinkUrtasBooze():void {
@@ -500,7 +500,7 @@ public function watchUrtaJerkIt():void {
 	outputText("You guess you'd better head back into the bar...", false);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = -1;
 	cheatTime(1);
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 //[MASTURBATE WITH HER]
@@ -812,7 +812,7 @@ public function takeUrtaInTheButtPublically():void {
 	var tooBig:Boolean = false;
 	if(player.cor < 30 && flags[kFLAGS.PC_FETISH] == 0) {
 		outputText("No way!  You're not going to do that in front of EVERYONE.", false);
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	slimeFeed();
@@ -2122,7 +2122,7 @@ public function urtaAndScyllaBoningLikeBitchesSober():void {
 	}
 	outputText("  Whatever you do, with Scylla involved, it's sure to get out of hand.");
 	//[Fuck Nun Nipple] [Fuck Urta] [Get Worshipped]
-	simpleChoices("Fuck Fox",fuck,"Worshipped",worship,"",0,"",0,"Back",barTelAdre);
+	simpleChoices("Fuck Fox",fuck,"Worshipped",worship,"",0,"",0,"Back",telAdre.barTelAdre);
 }
 //Fuck Urta while scylla sucks sober
 public function fuckUrtaWhileScyllaSucksSober():void {

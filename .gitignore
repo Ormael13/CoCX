@@ -13,3 +13,4 @@ dist/CorruptionofChampionsAIR.apk
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
 *.sol
+*.swc

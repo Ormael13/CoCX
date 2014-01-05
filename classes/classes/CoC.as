@@ -15,6 +15,7 @@
 	import classes.ItemSlotClass;
 	import classes.PerkClass;
 	import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
+	import classes.Scenes.Places.TelAdre;
 	import classes.StatusAffectClass;
 	import classes.VaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
@@ -95,8 +96,6 @@
 		include "../../includes/eventParser.as";
 		
 		include "../../includes/followerInteractions.as";
-		include "../../includes/telAdre.as";
-		
 		include "../../includes/bazaar.as";
 		
 		include "../../includes/eventTest.as";
@@ -116,11 +115,10 @@
 		// Scenes/Areas/Bog/
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
-		// Scenes/Places/TelAdre/
-		public var bakeryScene:BakeryScene = new BakeryScene();
+		// Scenes/Places/
+		public var telAdre:TelAdre = new TelAdre();
 
 		// Named NPC Scenes (excluding dungeon bosses)
-		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var arianScene:ArianScene = new ArianScene();
@@ -154,11 +152,11 @@
 		// Tel'Adre scenes
 		// Bazaar scenes
 		// Other scenes
+		[Scene]
 		public var testContent:TestContent = new TestContent();
 		public var antsScene:AntsScene = new AntsScene();
 
 		include "../../includes/april_fools.as";
-		include "../../includes/auntNancy.as";
 
 		include "../../includes/benoit.as";
 		include "../../includes/brooke.as";

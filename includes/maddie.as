@@ -18,7 +18,7 @@ public function procMaddieOneIntro():void {
 	else {
 		outputText("You walk into the bakery and a burly, hair-covered arm grabs your shoulder.  The familiar voice of a minotaur barks, \"<i>You.  You can help.  Come.</i>\"  You turn, but he's already walking towards an 'employees only' door.  Do you follow?", false);
 	}
-	doYesNo(followMinotaurIntoBackroom,bakeryScene.bakeryuuuuuu);
+	doYesNo(followMinotaurIntoBackroom,telAdre.bakeryScene.bakeryuuuuuu);
 }
 //[Follow] 
 public function followMinotaurIntoBackroom():void {
@@ -52,7 +52,7 @@ public function nopeAintGotNoneODemSpeculIngredimathings():void {
 	if(player.cor > 50) outputText("starting a fight inside Tel'Adre", false);
 	else outputText("overstaying your welcome", false);
 	outputText(" – you depart.", false);
-	doNext(bakeryScene.bakeryuuuuuu);
+	doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }
 //[Yes – baking]
 public function handOverIngredientsItBeBakingTimeYo():void {
@@ -121,7 +121,7 @@ public function runAwayMaddieFollowup():void {
 	outputText("", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
 	outputText("You return to a strange sight indeed.  Urta and Edryn are leading a procession of over thirty city guards, arranged in a loose circle around the cupcake-girl.  Her comparatively tiny, tin-foil fez is gone, along with most of her blue-iced 'armor'.  She looks weak, pathetic, and beaten as she's prodded with spears and escorted from the city, never to return again.  Vanilla-scented tears stain the pavement behind her, leaving a trail the whole way back to the bakery.\n\n", false);
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 	
 //[TRY TO TALK]
@@ -230,5 +230,5 @@ public function bakeryEpilogue():void {
 	outputText("\"<i>Thanks.  Figured out what went wrong with Maddie's help.  Made masterpiece.  Buy giant cupcake sometime.  Delicious!  Promise it's safe and non-addictive.  Expensive though.  Ingredients rare.\n\n", false);
 	outputText("-X</i>\"", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 4;
-	doNext(bakeryScene.bakeryuuuuuu);
+	doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }

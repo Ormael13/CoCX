@@ -1,8 +1,10 @@
-﻿package classes.content 
+﻿package classes.Scenes.Places.TelAdre
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Places.TelAdre;
+
 	/**
 	 * Whee!
 	 * (No @ tag for coder)
@@ -21,10 +23,10 @@
 	 * I'm also VERY tempted to say the bonuses from massages and acpuncture sessions should be dropped, and they should be turned into like a HP recovery/fatigue recovery deal.
 	 * Massage recovers 50% of missing health in an hour, Acpuncture recovers 30% of current fatigue in an hour?
 	 */
-	public class UmasShop extends BaseContent
+	public class UmasShop extends TelAdreAbstractContent
 	{
 		private var _loppeTalks:Array;
-		
+
 		public function UmasShop() 
 		{
 			initLoppeTalks();
@@ -212,7 +214,7 @@
 			}
 			
 			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
-			addButton(9, "Leave", telAdreMenu);
+			addButton(9, "Leave", telAdre.telAdreMenu);
 		}
 		
 		/**

@@ -487,7 +487,7 @@ public function scyllaPtVLeave():void {
 	if(player.cor > 30) dynStats("cor", -1);
 	outputText("You just don't feel right about interrupting and opt to take the high road, leaving them to their counseling. Nearly-forgotten warmth fills your chest and you smile with pride, despite yourself. You came here as a Champion to purge corruption and- despite every temptation- you acted like a good friend ought to. You walk back downstairs, with your head held high, and order a drink.", false);
 	cheatTime(1);
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 //[Take Advantage]	(First time and Repeat)
@@ -1417,7 +1417,7 @@ public function scyllasFlyingSolo():void {
 	//[Feed] [Leave]
 	menu();
 	addButton(0,"Feed",feedScyllaSomeJizzDatJunkieNeedsIt);
-	addButton(4,"Back",barTelAdre);
+	addButton(4,"Back",telAdre.barTelAdre);
 }
  
 //[Feed]

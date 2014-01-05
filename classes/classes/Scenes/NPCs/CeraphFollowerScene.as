@@ -109,11 +109,11 @@ package classes.Scenes.NPCs
 			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			menu();
 			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
-			addButton(0, "Defeat Her", eventParser, kGAMECLASS.ceraphScene.winRapeChoices);
-			addButton(1, "Lose to Her", eventParser, kGAMECLASS.ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
-			addButton(5, "Dominika", eventParser, dominika);
-			addButton(6, "Marble Play", eventParser, marbles);
-			addButton(7, "Urta Play", eventParser, urta);
+			addButton(0, "Defeat Her", kGAMECLASS.ceraphScene.winRapeChoices);
+			addButton(1, "Lose to Her", kGAMECLASS.ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
+			addButton(5, "Dominika", dominika);
+			addButton(6, "Marble Play", marbles);
+			addButton(7, "Urta Play", urta);
 			//choices("Defeat Her",winRapeChoices,"Lose to Her",ceraphRapesYouBADDAWGYODIGGITY,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",ceraphFollowerAppearance);
 			addButton(9, "Back", ceraphFollowerAppearance);
 		}

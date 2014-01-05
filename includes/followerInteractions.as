@@ -510,7 +510,7 @@ public function askAboutAmily():void {
 	//after 1400 and Urta's on duty:
 	if(model.time.hours > 14) {
 		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around, but don't get much of a response.  One cat-boy drinking at the bar haltingly suggests he may have noticed someone like that earlier in the day, but that was before Urta went on duty.  You thank him for the info.", false);
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	//before Urta goes on duty at 1400:

@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Swamp
 			//The other 50% will start combat and then immediately attempt to run.
 			else {
 				startCombat(new FemaleSpiderMorph());
-				eventParser(kGAMECLASS.runAway);
+				kGAMECLASS.runAway();
 			}
 		}
 

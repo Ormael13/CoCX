@@ -91,7 +91,7 @@
 
 		override protected function performCombatAction():void
 		{
-			game.eventParser(Appearance.randomChoice(special1, special2));
+			Appearance.randomChoice(special1, special2)();
 		}
 
 		public function FetishCultist()
@@ -110,7 +110,7 @@
 			init11Armor("fetishy outfit");
 			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(2,5+rand(10));
-			initX_Specials(cultistRaisePlayerLust,cultistLustTransfer,cultistRaisePlayerLust);
+			initX_Specials(cultistRaisePlayerLust,cultistLustTransfer);
 		}
 
 	}

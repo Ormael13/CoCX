@@ -281,7 +281,7 @@ public function acceptYoga():void {
 	var option4:Function =null;
 	if(player.fatigue > 80) {
 		outputText("You're wayyy too tired to do any yoga right now.", false);
-		doNext(telAdreMenu);
+		doNext(telAdre.telAdreMenu);
 		return;
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems < 10) {

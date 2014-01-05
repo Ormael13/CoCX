@@ -1373,7 +1373,7 @@ public function places(display:Boolean):Boolean {
 	var farm:* = 0;
 	var boat:* = 0;
 	var barber:* = 0;
-	var telAdre:* = 0;
+	var telAdre2:* = 0;
 	var ruins:* = 0;
 	var bazaar:* = 0;
 	var owca:* = 0;
@@ -1386,7 +1386,7 @@ public function places(display:Boolean):Boolean {
 	//turn on ruins
 	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
 	//turn on teladre
-	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre = 2211;
+	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre2 = telAdre.telAdreMenu;
 	if(player.hasStatusAffect("hairdresser meeting") >= 0) barber = 2169;
 	//turn on boat
 	if(player.hasStatusAffect("Boat Discovery") >= 0) boat = 2079;
@@ -1399,10 +1399,10 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
+		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
 	}
 	//Make choices
-	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre, "TownRuins",ruins,"Back",1);
+	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2, "TownRuins",ruins,"Back",1);
 	return true;
 }
 

@@ -1151,7 +1151,7 @@ public function leaveHeckelEncounter():void {
 	outputText("Well, whatever.  You came here looking for Heckel, and she's not here, as far as you can tell.  You turn around and leave the gym, without investigating the cause of the commotion.");
 	//Return to Tel'Adre, no time loss
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
  
 //[=Butterfly=]

@@ -23,7 +23,6 @@ public function doEvent(eventNo:Number):void
 			outputText("the urge to ram your cock down his throat.  The strangeness of the thought surprises you.\n\n", false);
 		speech("I'm amazed you aren't already chasing down my cock, human.  The last Champion was an eager whore for me by the time she woke up.  This lust draft made sure of it.", "The Imp");
 		doNext(2001);
-		//return;
 	}
 	else if (eventNo == 2001)
 	{
@@ -33,14 +32,12 @@ public function doEvent(eventNo:Number):void
 		speech("FOOL!  You could have had pleasure unending...but should we ever cross paths again you will regret humiliating me!  Remember the name Zetaz, as you'll soon face the wrath of my master!", "The Imp");
 		outputText("\nYour pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.", false);
 		doNext(2002);
-		//return;
 	}
 	else if (eventNo == 2002)
 	{
 		hideUpDown();
 		outputText("\nYou look around, surveying the hellish landscape as you plot your next move.  The portal is a few yards away, nestled between a formation of rocks.  It does not seem to exude the arousing influence it had on the other side.  The ground and sky are both tinted different shades of red, though the earth beneath your feet feels as normal as any other lifeless patch of dirt.   You settle on the idea of making a camp here and fortifying this side of the portal.  No demons will ravage your beloved hometown on your watch.\n\nIt does not take long to set up your tent and a few simple traps.  You'll need to explore and gather more supplies to fortify it any further.  Perhaps you will even manage to track down the demons who have been abducting the other champions!", true);
 		doNext(1);
-		//return;
 	}
 	//Meditate w/Jojo
 	else if (eventNo == 2003)
@@ -93,14 +90,12 @@ public function doEvent(eventNo:Number):void
 		else
 			outputText("\n\nHe bows his head sadly and dismisses you.", false);
 		doNext(14);
-		return;
 	}
 	//Begin the jojo rapingz
 	else if (eventNo == 2004)
 	{
 		jojoRape();
 		doNext(13);
-		return;
 	}
 	//Encounter sand-witch
 	else if (eventNo == 2005)
@@ -121,7 +116,6 @@ public function doEvent(eventNo:Number):void
 		}
 		else
 			doYesNo(2006, 2007);
-		return;
 	}
 	//SANDVICH MAGICK
 	else if (eventNo == 2006)
@@ -191,14 +185,12 @@ public function doEvent(eventNo:Number):void
 					outputText("You wish you had said no, so you could fuck with her and her magnificent quartet of breasts some more.", false);
 			}
 			doNext(13);
-			return;
 		}
 		else
 		{
 			outputText("She smiles wickedly and intones, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!", false);
 			player.hairColor = "sandy blonde";
 			doNext(13);
-			return;
 		}
 	}
 	//SANDWITCH COMMMMBAAAAT
@@ -207,7 +199,6 @@ public function doEvent(eventNo:Number):void
 		spriteSelect(50);
 		outputText("With an inarticulate scream of rage, the Sand Witch attacks!", true);
 		startCombat(new SandWitch());
-		return;
 	}
 	//Minotaur shows up...rape?
 	else if (eventNo == 2008)
@@ -306,7 +297,6 @@ public function doEvent(eventNo:Number):void
 			return;
 		}
 		startCombat(new TentacleBeast());
-		return;
 	}
 	//Tentacle continuation!
 	else if (eventNo == 2010)
@@ -389,7 +379,6 @@ public function doEvent(eventNo:Number):void
 		else
 			doNext(13);
 		
-		return;
 	}
 	//Tentacle rape continuation for females (pg3!)
 	else if (eventNo == 2011)
@@ -446,7 +435,6 @@ public function doEvent(eventNo:Number):void
 		else
 			doNext(13);
 		
-		return;
 	}
 	//Flower fun-times
 	else if (eventNo == 2012)
@@ -540,7 +528,6 @@ public function doEvent(eventNo:Number):void
 			dynStats("sen", 4, "lus=", 0, "cor", 1);
 		}
 		doNext(13);
-		return;
 	}
 	//Tentacle fun-times
 	else if (eventNo == 2013)
@@ -725,7 +712,6 @@ public function doEvent(eventNo:Number):void
 			}
 			doNext(13);
 		}
-		return;
 	}
 	
 	//A WILD GIACOMO APPEARS
@@ -789,7 +775,6 @@ public function doEvent(eventNo:Number):void
 			statScreenRefresh();
 			giacomo++;
 		}
-		return;
 	}
 	//Potion list!
 	else if (eventNo == 2016)
@@ -1170,7 +1155,6 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("\n\nGiacomo sighs, indicating you need " + String(20 - player.gems) + " more gems to purchase this item.", true);
 			doNext(2018);
-			return;
 		}
 		else
 		{
@@ -1208,7 +1192,6 @@ public function doEvent(eventNo:Number):void
 		doNext(2018);
 		player.gems -= 30;
 		statScreenRefresh();
-		return;
 	}
 	//Natural SelfStim Belt Sales Pitch
 	else if (eventNo == 2039)
@@ -1251,7 +1234,6 @@ public function doEvent(eventNo:Number):void
 		doNext(2018);
 		player.gems -= 40;
 		statScreenRefresh();
-		return;
 	}
 	//Onahole Sales Pitch
 	else if (eventNo == 2041)
@@ -1294,7 +1276,6 @@ public function doEvent(eventNo:Number):void
 		doNext(2018);
 		player.gems -= 20;
 		statScreenRefresh();
-		return;
 	}
 	//Delux Onahole Sales Pitch
 	else if (eventNo == 2044)
@@ -1324,7 +1305,6 @@ public function doEvent(eventNo:Number):void
 		doNext(2018);
 		player.gems -= 50;
 		statScreenRefresh();
-		return;
 	}
 	//Onahole multi-cock continuation!
 	else if (eventNo == 2046)
@@ -1385,7 +1365,6 @@ public function doEvent(eventNo:Number):void
 		doNext(2018);
 		player.gems -= 150;
 		statScreenRefresh();
-		return;
 	}
 	//Deluxe Onahole Futa continuation
 	else if (eventNo == 2050)
@@ -1444,7 +1423,6 @@ public function doEvent(eventNo:Number):void
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
-		return;
 	}
 	//Purify Succubi Milk
 	else if (eventNo == 2072)
@@ -1463,7 +1441,6 @@ public function doEvent(eventNo:Number):void
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
-		return;
 	}
 	//Purify Succubi's Delight
 	else if (eventNo == 2073)
@@ -1482,7 +1459,6 @@ public function doEvent(eventNo:Number):void
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
-		return;
 	}
 	
 	//Grab marae's boob!
@@ -1497,18 +1473,15 @@ public function doEvent(eventNo:Number):void
 	{
 		outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
 		doNext(13);
-		return;
 	}
 	else if (eventNo == 2079)
 	{
 		exploration.boatExplore();
-		return;
 	}
 	else if (eventNo == 2080)
 	{
 		startCombat(new TentacleBeast());
 		eventParser(1);
-		return;
 	}
 	//Remove worms
 	else if (eventNo == 2081)
@@ -1572,7 +1545,6 @@ public function doEvent(eventNo:Number):void
 		player.removeStatusAffect("infested");
 		dynStats("sen", -1, "lus", -99, "cor", -15);
 		doNext(13);
-		return;
 	}
 	//Treeboob fun-times
 	else if (eventNo == 2084)
@@ -1626,13 +1598,11 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2085)
 	{
 		marblePicksYouUpInitially();
-		return;
 	}
 	else if (eventNo == 2086)
 	{
 		doNext(13);
 		resistMarbleInitially();
-		return;
 	}
 	
 	else if (eventNo == 2112)
@@ -1640,33 +1610,28 @@ public function doEvent(eventNo:Number):void
 		outputText("", true);
 		marbleSex2Continued(1);
 		doNext(13);
-		return;
 	}
 	else if (eventNo == 2113)
 	{
 		outputText("", true);
 		marbleSex2Continued(2);
 		doNext(13);
-		return;
 	}
 	else if (eventNo == 2124)
 	{
 		outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.", true);
 		player.createStatusAffect("Camp Rathazul", 0, 0, 0, 0);
 		doNext(13);
-		return;
 	}
 	else if (eventNo == 2125)
 	{
 		outputText("Rathazul wheezes out a sigh, and nods.\n\n\"<i>Perhaps I'll still be of some use out here after all,</i>\" he mutters as he packs up his camp and prepares to head to another spot along the lake.", true);
 		doNext(13);
-		return;
 	}
 	else if (eventNo == 2127)
 	{
 		marbleSexExpanded();
 		doNext(1);
-		return;
 	}
 	else if (eventNo == 2128)
 	{
@@ -1693,57 +1658,48 @@ public function doEvent(eventNo:Number):void
 			temp3 = 2272;
 		outputText("What item do you want to give Marble?", true);
 		choices("Lactaid", temp2, "OviElixir", temp3, "P.Incub Dr", temp4, "Pink Egg", temp5, "L.Pink Egg", temp6, "ProBova", temp7, "", 0, "", 0, "", 0, "Back", 2133);
-		return;
 	}
 	else if (eventNo == 2129)
 	{
 		marbleGathered();
-		return;
 	}
 	else if (eventNo == 2131)
 	{
 		gotMilk();
-		return;
 	}
 	
 	else if (eventNo == 2133)
 	{
 		interactWithMarbleAtCamp();
-		return;
 	}
 	else if (eventNo == 2134)
 	{
 		doNext(1);
 		jojoSprite();
 		jojoMutationOfferYes();
-		return;
 	}
 	else if (eventNo == 2135)
 	{
 		doNext(1);
 		jojoSprite();
 		jojoMutationOfferNo();
-		return;
 	}
 	else if (eventNo == 2136)
 	{
 		doNext(1);
 		jojoSprite();
 		mutateJojo();
-		return;
 	}
 	else if (eventNo == 2137)
 	{
 		doNext(1);
 		jojoSprite();
 		useTentacleJojo();
-		return;
 	}
 	else if (eventNo == 2138)
 	{
 		jojoSprite();
 		masturbateJojo();
-		return;
 	}
 	else if (eventNo == 2142)
 	{
@@ -1751,7 +1707,6 @@ public function doEvent(eventNo:Number):void
 		spriteSelect(23);
 		outputText("Giacomo smiles widely as you look through his wares seeing a strange looking device sitting there. \"<i>Ahh, I see you have spotted our latest piece of equipment. Members of the third gender had a hard time finding enough pleasure to suit their special needs. With this little device, you will never have to worry about satisfying your needs ever again.</i>\" He grins widely at you. \"<i>The deluxe dual belt will have you shaking in the throes of orgasm hours after a simple stim belt would leave you dry. You will cum in this thing, and it will leave you running back to it anytime you need sexual gratification. Everything else may as well be sandpaper on your skin. Simply flick this switch here on the side to start it up and send yourself to heaven. And you can have it for the low price of 50 gems.</i>\" He smiles again at you. \"<i>So, shall I hand it over to you?</i>\" he asks.", false);
 		doYesNo(2143, 2018);
-		return;
 	}
 	else if (eventNo == 2143)
 	{
@@ -1834,7 +1789,6 @@ public function doEvent(eventNo:Number):void
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
-		return;
 	}
 	
 	//Move Jojo into camp
@@ -1850,7 +1804,6 @@ public function doEvent(eventNo:Number):void
 		outputText("You offer Jojo the chance to stay at your camp.  He cocks his head to the side and thinks, stroking his mousey whiskers.\n\n\"<i>Yes, it would be wise.   We would be safer together, and if you like I could keep watch at night to keep some of the creatures away.  I'll gather my things and be right there!</i>\"\n\nJojo scurries into the bushes, disappearing in a flash.  Knowing him, he'll be at camp before you!", true);
 		player.createStatusAffect("PureCampJojo", 0, 0, 0, 0);
 		doNext(13);
-		return;
 	}
 	//Jojo in camp
 	else if (eventNo == 2150)
@@ -1891,7 +1844,6 @@ public function doEvent(eventNo:Number):void
 		//normal menu
 		else
 			simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
-		return;
 	}
 	//New meditate
 	else if (eventNo == 2151)
@@ -1934,7 +1886,6 @@ public function doEvent(eventNo:Number):void
 			dynStats("lib", -1);
 		doNext(13);
 		player.createStatusAffect("Meditated", 1, 0, 0, 0);
-		return;
 	}
 	//Jojo defense toggle
 	else if (eventNo == 2152)
@@ -1952,7 +1903,6 @@ public function doEvent(eventNo:Number):void
 			outputText("You ask the monk if he could guard the camp for you at night.  He smiles politely.  \"<i>Certainly, [name].</i>\"");
 		}
 		doNext(2150);
-		return;
 	}
 	//Take Jojo out and rape
 	else if (eventNo == 2153)
@@ -1967,37 +1917,31 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2154)
 	{
 		goblinHairDresserFacefuck();
-		return;
 	}
 	//Cut short
 	else if (eventNo == 2159)
 	{
 		cutShort();
-		return;
 	}
 	//Cut Med
 	else if (eventNo == 2160)
 	{
 		cutMedium();
-		return;
 	}
 	//CutLong
 	else if (eventNo == 2161)
 	{
 		cutLong();
-		return;
 	}
 	//Lengthen Hair
 	else if (eventNo == 2162)
 	{
 		hairGrow();
-		return;
 	}
 	//Dyes
 	else if (eventNo == 2163)
 	{
 		dyeMenu();
-		return;
 	}
 	//Blue dye
 	else if (eventNo == 2164)
@@ -2005,7 +1949,6 @@ public function doEvent(eventNo:Number):void
 		outputText("", true);
 		shortName = "BlueDye";
 		takeItem();
-		return;
 	}
 	//orange dye
 	else if (eventNo == 2165)
@@ -2013,7 +1956,6 @@ public function doEvent(eventNo:Number):void
 		outputText("", true);
 		shortName = "OrangDy";
 		takeItem();
-		return;
 	}
 	//Pink Dye
 	else if (eventNo == 2166)
@@ -2021,7 +1963,6 @@ public function doEvent(eventNo:Number):void
 		outputText("", true);
 		shortName = "PinkDye";
 		takeItem();
-		return;
 	}
 	//Purple dye
 	else if (eventNo == 2167)
@@ -2029,14 +1970,12 @@ public function doEvent(eventNo:Number):void
 		outputText("", true);
 		shortName = "PurpDye";
 		takeItem();
-		return;
 	}
 	//Shop menu
 	else if (eventNo == 2168)
 	{
 		outputText("", true);
 		hairDressingMainMenu();
-		return;
 	}
 	//Shop encounter
 	else if (eventNo == 2169)
@@ -2044,13 +1983,11 @@ public function doEvent(eventNo:Number):void
 		if (player.hasStatusAffect("hairdresser meeting") >= 0)
 		{
 			hairDresserRepeatGreeting();
-			return;
 		}
 		else
 		{
 			player.createStatusAffect("hairdresser meeting", 0, 0, 0, 0);
 			hairDresserGreeting();
-			return;
 		}
 	}
 	
@@ -2058,14 +1995,12 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2175)
 	{
 		whitneyMilkerHookup(false);
-		return;
 	}
 	//Rathazul Armor Crafting
 	else if (eventNo == 2180)
 	{
 		doNext(13);
 		craftCarapace();
-		return;
 	}
 	
 	//Buy breast-milker from whitney
@@ -2077,7 +2012,6 @@ public function doEvent(eventNo:Number):void
 		player.createKeyItem("Breast Milker - Installed At Whitney's Farm", 0, 0, 0, 0);
 		player.gems -= 250;
 		statScreenRefresh();
-		return;
 	}
 	//[NO]
 	else if (eventNo == 2183)
@@ -2093,7 +2027,6 @@ public function doEvent(eventNo:Number):void
 			dynStats("int", .5);
 		if (player.inte < 40)
 			dynStats("int", .5);
-		return;
 	}
 	//Continuing mino voyeurism
 	else if (eventNo == 2190)
@@ -2114,406 +2047,203 @@ public function doEvent(eventNo:Number):void
 		//Lust!
 		dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());
 		doNext(13);
-		return;
 	}
 	//Bad end for going full demon
 	else if (eventNo == 2191)
 	{
 		demonBadEnd();
-		return;
 	}
 	
 	else if (eventNo == 2203)
 	{
 		outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</b>\"", true);
 		startCombat(new Tamani());
-		return;
-	}
-	else if (eventNo == 2211)
-	{
-		telAdreMenu();
-		return;
-	}
-	
-	else if (eventNo == 2215)
-	{
-		clitPierce();
-		return;
-	}
-	else if (eventNo == 2216)
-	{
-		dickPierce();
-		return;
-	}
-	else if (eventNo == 2217)
-	{
-		earPierce();
-		return;
-	}
-	else if (eventNo == 2218)
-	{
-		eyebrowPierce();
-		return;
-	}
-	else if (eventNo == 2219)
-	{
-		lipPierce();
-		return;
-	}
-	else if (eventNo == 2220)
-	{
-		nipplePierce();
-		return;
-	}
-	else if (eventNo == 2221)
-	{
-		nosePierce();
-		return;
-	}
-	else if (eventNo == 2222)
-	{
-		tonguePierce();
-		return;
-	}
-	else if (eventNo == 2223)
-	{
-		vulvaPierce();
-		return;
-	}
-	else if (eventNo == 2239)
-	{
-		aboutYara();
-		return;
-	}
-	else if (eventNo == 2241)
-	{
-		removeClitPierce();
-		return;
-	}
-	else if (eventNo == 2242)
-	{
-		removeCockPierce();
-		return;
-	}
-	else if (eventNo == 2243)
-	{
-		removeEarsPierce();
-		return;
-	}
-	else if (eventNo == 2244)
-	{
-		removeEyebrowPierce();
-		return;
-	}
-	else if (eventNo == 2245)
-	{
-		removeLipPierce();
-		return;
-	}
-	else if (eventNo == 2246)
-	{
-		removeNipplesPierce();
-		return;
-	}
-	else if (eventNo == 2247)
-	{
-		removeNosePierce();
-		return;
-	}
-	else if (eventNo == 2248)
-	{
-		removeTonguePierce();
-		return;
-	}
-	else if (eventNo == 2249)
-	{
-		removeVulvaPierce();
-		return;
-	}
-	else if (eventNo == 2250)
-	{
-		chooseAdvancedMaterials();
-		return;
-	}
-	
-	else if (eventNo == 2256)
-	{
-		barTelAdre();
-		return;
 	}
 	else if (eventNo == 2257)
 	{
 		edrynBarTalk();
-		return;
 	}
 	else if (eventNo == 2260)
 	{
 		keltResistancePussyOut();
-		return;
 	}
 	else if (eventNo == 2264)
 	{
 		sharkGirlGetsDildoed();
-		return;
 	}
 	else if (eventNo == 2265)
 	{
 		sandwitchGetsDildoed();
-		return;
 	}
 	else if (eventNo == 2266)
 	{
 		succubusGetsDildoed();
-		return;
 	}
 	else if (eventNo == 2269)
 	{
 		giveMarbleLactaid();
-		return;
 	}
 	else if (eventNo == 2270)
 	{
 		MarblepinkEgg();
-		return;
 	}
 	else if (eventNo == 2271)
 	{
 		MarbleLPinkEgg();
-		return;
 	}
 	else if (eventNo == 2272)
 	{
 		marbleOvulatesLikeMadDawg();
-		return;
 	}
 	else if (eventNo == 2273)
 	{
 		MarbleDigsDraftsYo();
-		return;
-	}
-	else if (eventNo == 2274)
-	{
-		armorShop();
-		return;
-	}
-	else if (eventNo == 2276)
-	{
-		shortName = "ChBikni";
-		armorBuy();
-		return;
-	}
-	else if (eventNo == 2277)
-	{
-		shortName = "FullChn";
-		armorBuy();
-		return;
-	}
-	else if (eventNo == 2278)
-	{
-		shortName = "FullPlt";
-		armorBuy();
-		return;
-	}
-	else if (eventNo == 2279)
-	{
-		shortName = "IndecSt";
-		armorBuy();
-		return;
-	}
-	else if (eventNo == 2280)
-	{
-		shortName = "LthrRob";
-		armorBuy();
-		return;
-	}
-	else if (eventNo == 2281)
-	{
-		shortName = "ScaleMl";
-		armorBuy();
-		return;
 	}
 	else if (eventNo == 2284)
 	{
 		urtaBarApproach();
-		return;
 	}
 	else if (eventNo == 2295)
 	{
 		blowUrtaUnderTable();
-		return;
 	}
 	else if (eventNo == 2296)
 	{
 		takeUrtaInTheButtPublically();
-		return;
 	}
 	else if (eventNo == 2297)
 	{
 		getAPublicFacialFromUrta();
-		return;
 	}
 	else if (eventNo == 2300)
 	{
 		goBackToUrtasForLuvinz();
-		return;
 	}
 	else if (eventNo == 2301)
 	{
 		rideUrtaTenderFemale();
-		return;
 	}
 	else if (eventNo == 2302)
 	{
 		dudeFuckingUrtasCooch();
-		return;
 	}
 	else if (eventNo == 2305)
 	{
 		tenderTakeItUpTheAssFromUrta();
-		return;
 	}
-	// ....Yeah. Too many if-elses cause flashDevelop's mxmlc to shit itself.
-	// Therefore, split this into two big if-statem
-	if (eventNo == 2337)
+	else if (eventNo == 2337)
 	{
 		outputText("", true);
 		shortName = "ExtSerm";
 		takeItem();
-		return;
 	}
 	else if (eventNo == 2350)
 	{
 		eatUrtaOutNomNomPussy();
-		return;
 	}
 	else if (eventNo == 2354)
 	{
 		blowUrtaUnderTheTableLuv();
-		return;
 	}
 	else if (eventNo == 2355)
 	{
 		rideUrtasCoochLoveyDovey();
-		return;
 	}
 	else if (eventNo == 2356)
 	{
 		rideUrtaInButtAtHomeLove();
-		return;
 	}
 	
 	else if (eventNo == 2367)
 	{
 		urtasCoochiNeedsFuckedLove();
-		return;
 	}
 	else if (eventNo == 2371)
 	{
 		amilyScene.exploreVillageRuin();
-		return;
 	}
 	else if (eventNo == 2382)
 	{
 		amilyScene.sexWithAmily();
-		return;
 	}
 	else if (eventNo == 2399)
 	{
 		//No sex after
 		amilyScene.talkWithCuntIMeanAmily(false);
-		return;
 	}
 	else if (eventNo == 2400)
 	{
 		//sex after
 		amilyScene.talkWithCuntIMeanAmily(true);
-		return;
 	}
 	else if (eventNo == 2405)
 	{
 		amilyScene.amilySexHappens();
-		return;
 	}
 	else if (eventNo == 2409)
 	{
 		amilyScene.sitAndWatchAmilySex();
-		return;
 	}
 	else if (eventNo == 2410)
 	{
 		amilyScene.caressAmilyHaveSex();
-		return;
 	}
 	else if (eventNo == 2427)
 	{
 		amilyScene.amilyFollowerEncounter();
-		return;
 	}
 	else if (eventNo == 2429)
 	{
 		amilyScene.talkToAmilyCamp();
-		return;
 	}
 	else if (eventNo == 2435)
 	{
 		lumiLabChoices();
-		return;
 	}
 	
 	else if (eventNo == 2447)
 	{
 		talkToScylla();
-		return;
 	}
 	else if (eventNo == 2453)
 	{
 		amilyScene.giveAmilyPureIncubusDraft();
-		return;
 	}
 	else if (eventNo == 2456)
 	{
 		amilyScene.giveAmilyPurifiedSuccubusMilk();
-		return;
 	}
 	else if (eventNo == 2457)
 	{
 		amilyScene.giveAmilyAPinkEgg();
-		return;
 	}
 	else if (eventNo == 2458)
 	{
 		amilyScene.giveAmilyAWhiteEgg();
-		return;
 	}
 	else if (eventNo == 2459)
 	{
 		amilyScene.giveAmilyABrownEgg();
-		return;
 	}
 	else if (eventNo == 2460)
 	{
 		amilyScene.giveAmilyAPurpleEgg();
-		return;
 	}
 	else if (eventNo == 2461)
 	{
 		amilyScene.giveAmilySomePants();
-		return;
 	}
 	else if (eventNo == 2479)
 	{
 		fightTamanisDaughters(true);
-		return;
 	}
 	else if (eventNo == 2480)
 	{
 		rapeOozeWithMilk();
-		return;
 	}
 	else if (eventNo == 2483)
 	{
 		minotaurDrinksMilkNewsAtEleven();
-		return;
 	}
 	else if (eventNo == 2486)
 	{
@@ -2523,251 +2253,161 @@ public function doEvent(eventNo:Number):void
 			campRathazul();
 		else
 			encounterRathazul();
-		return;
 	}
 	else if (eventNo == 2487)
 	{
 		catAutoLick();
-		return;
 	}
 	else if (eventNo == 2493)
 	{
 		arousedByPregdryn();
-		return;
 	}
 	else if (eventNo == 2495)
 	{
 		fuckPregEdryn();
-		return;
 	}
 	
 	else if (eventNo == 2498)
 	{
 		jojoSprite();
 		agreeToHelpAmilyFixJojo();
-		return;
 	}
 	else if (eventNo == 2499)
 	{
 		jojoSprite();
 		tellAmilyToFuckOffRuinedJojo();
-		return;
 	}
 	else if (eventNo == 2500)
 	{
 		jojoSprite();
 		AmilyLeavesBirdJojoTentacles();
-		return;
 	}
 	else if (eventNo == 2502)
 	{
 		jojoSprite();
 		stopJojoDeathInTheNameOfLove();
-		return;
 	}
 	else if (eventNo == 2503)
 	{
 		jojoSprite();
 		whyWouldDoThis();
-		return;
 	}
 	else if (eventNo == 2504)
 	{
 		jojoSprite();
 		tellRathazulYouOwnJojo();
-		return;
 	}
 	else if (eventNo == 2505)
 	{
 		jojoSprite();
 		tellRathazulYouCanHandleIt();
-		return;
 	}
 	else if (eventNo == 2506)
 	{
 		jojoSprite();
 		TellRathazulJojoIsHarmless();
-		return;
 	}
 	else if (eventNo == 2512)
 	{
 		BlameMarblezSweetVagoozle();
-		return;
 	}
 	else if (eventNo == 2523)
 	{
 		shootDownSophieSex();
-		return;
 	}
 	else if (eventNo == 2528)
 	{
 		cramANippleInIt();
-		return;
 	}
 	else if (eventNo == 2533)
 	{
 		maleVictorySophieRape();
-		return;
 	}
 	else if (eventNo == 2534)
 	{
 		maleVictorySophieRapeHUGE();
-		return;
 	}
 	else if (eventNo == 2535)
 	{
 		sophieVictoryPussyGrind();
-		return;
 	}
 	else if (eventNo == 2536)
 	{
 		fuckDatClit();
-		return;
 	}
 	else if (eventNo == 2539)
 	{
 		tooBigForOwnGoodSophieLossRape();
-		return;
-	}
-	else if (eventNo == 2553)
-	{
-		weaponShop();
-		return;
-	}
-	else if (eventNo == 2554)
-	{
-		shortName = "W.Staff";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2556)
-	{
-		shortName = "W.Stick";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2557)
-	{
-		shortName = "Claymor";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2558)
-	{
-		shortName = "Warhamr";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2559)
-	{
-		shortName = "Katana ";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2560)
-	{
-		shortName = "Spear  ";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2561)
-	{
-		shortName = "Whip   ";
-		weaponBuy();
-		return;
-	}
-	else if (eventNo == 2562)
-	{
-		shortName = "S.Gaunt";
-		weaponBuy();
-		return;
 	}
 	else if (eventNo == 2563)
 	{
 		scyllaAdictsAnonV();
-		return;
 	}
 	else if (eventNo == 2571)
 	{
 		scyllaPtVMilk();
-		return;
 	}
 	else if (eventNo == 2576)
 	{
 		scyllaPtVCum();
-		return;
 	}
 	else if (eventNo == 2581)
 	{
 		scyllaPtVSex();
-		return;
 	}
 	else if (eventNo == 2594)
 	{
 		freeValazLooseCoochie();
-		return;
 	}
 	else if (eventNo == 2595)
 	{
 		useVala();
-		return;
 	}
 	else if (eventNo == 2597)
 	{
 		healVala();
-		return;
 	}
 	else if (eventNo == 2599)
 	{
 		ValaGetsSexed();
-		return;
 	}
 	else if (eventNo == 2609)
 	{
 		loseToValaMaleIIGape();
-		return;
 	}
 	else if (eventNo == 2614)
 	{
 		leftValaAlone();
-		return;
 	}
 	else if (eventNo == 2617)
 	{
 		useValaOHYEAHSNAPINTOASLIMJIM();
-		return;
 	}
 	else if (eventNo == 2619)
 	{
 		wakeValaUpBeforeYouGoGo();
-		return;
 	}
 	else if (eventNo == 2621)
 	{
 		chooseValaInBar();
-		return;
 	}
 	
 	else if (eventNo == 2625)
 	{
 		cleansedValaRepeatBrainFucking();
-		return;
 	}
 	
 	else if (eventNo == 2633)
 	{
 		endZetaz();
-		return;
 	}
 	else if (eventNo == 2634)
 	{
 		sexualTortureTightenZetaz();
-		return;
 	}
 	else if (eventNo == 2635)
 	{
 		sexualTortureReleaseZetaz();
-		return;
 	}
 	else if (eventNo == 2638)
 	{
@@ -2775,79 +2415,66 @@ public function doEvent(eventNo:Number):void
 		shortName = "BonStrp";
 		flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
 		takeItem();
-		return;
 	}
 	else if (eventNo == 2639)
 	{
 		spriteSelect(52);
 		theSeanShopOffer();
-		return;
 	}
 	else if (eventNo == 2640)
 	{
 		spriteSelect(52);
 		incubusDeal();
-		return;
 	}
 	else if (eventNo == 2641)
 	{
 		spriteSelect(52);
 		incubusNoDeal();
-		return;
 	}
 	else if (eventNo == 2642)
 	{
 		spriteSelect(52);
 		incubusShop();
-		return;
 	}
 	else if (eventNo == 2643)
 	{
 		spriteSelect(52);
 		shortName = "NumbRox";
 		incubusBuy();
-		return;
 	}
 	else if (eventNo == 2644)
 	{
 		spriteSelect(52);
 		shortName = "SensDrf";
 		incubusBuy();
-		return;
 	}
 	else if (eventNo == 2645)
 	{
 		spriteSelect(52);
 		shortName = "Reducto";
 		incubusBuy();
-		return;
 	}
 	else if (eventNo == 2646)
 	{
 		spriteSelect(52);
 		incubusTransact();
-		return;
 	}
 	else if (eventNo == 2649)
 	{
 		bunbunFucksYourVag();
-		return;
 	}
 	else if (eventNo == 2651)
 	{
 		bunbunGetsFucked();
-		return;
 	}
 	else if (eventNo == 2652)
 	{
 		bunbun69();
-		return;
 	}
 	else if (eventNo == 2653)
 	{
 		shortName = "SucWhip";
 		incubusBuy();
-		return;
 	}
 	else if (eventNo == 2696)
 	{
@@ -2868,127 +2495,63 @@ public function doEvent(eventNo:Number):void
 			shortName = "MinoCum";
 			takeItem();
 		}
-		return;
 	}
 	else if (eventNo == 2697)
 	{
 		scyllaAndUrtaSittingInATree();
-		return;
 	}
 	else if (eventNo == 2705)
 	{
 		Scylla6();
-		return;
 	}
 	else if (eventNo == 2708)
 	{
 		lactateAndKickAss();
-		return;
 	}
 	else if (eventNo == 2718)
 	{
 		Scylla6NoMilkSubmit();
-		return;
 	}
 	else if (eventNo == 2739)
 	{
 		fellatrixBarApproach();
-		return;
 	}
 	else if (eventNo == 2756)
 	{
 		amilyScene.girlyGirlMouseSex();
-		return;
 	}
 	else if (eventNo == 2757)
 	{
 		amilyScene.hermilyOnFemalePC();
-		return;
 	}
 	else if (eventNo == 2768)
 	{
 		amilyScene.makeAmilyAHerm();
-		return;
 	}
 	else if (eventNo == 2775)
 	{
 		amilyScene.makeChildren();
-		return;
 	}
 	else if (eventNo == 2800)
 	{
 		amilyScene.giveCorruptAmilySuccubusDelight();
-		return;
 	}
 	
 	else if (eventNo == 2819)
 	{
 		cottonTantricSex();
-		return;
-	}
-	
-	else if (eventNo == 2830)
-	{
-		//[doughnuts] – some thickness, lots of – tone. (+hips and butt!)
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 5;
-		bakeryScene.nomnomnom();
-		return;
-	}
-	else if (eventNo == 2831)
-	{
-		//[cookies] – thickness and a little – tone (+hips)
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cookies";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
-		bakeryScene.nomnomnom();
-		return;
-	}
-	else if (eventNo == 2832)
-	{
-		//[brownies] – lots of thickness (chance of +butt)
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "brownies";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
-		bakeryScene.nomnomnom();
-		return;
-	}
-	else if (eventNo == 2833)
-	{
-		//[cupcakes] – lots of – tone (chance of +hips)
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
-		bakeryScene.nomnomnom();
-		return;
-	}
-	else if (eventNo == 2834)
-	{
-		//[pound cake] – even split of + thickness and – tone.  (+butt)
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "pound cake";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
-		bakeryScene.nomnomnom();
-		return;
-	}
-	else if (eventNo == 2835)
-	{
-		//[mino cum eclair] – helps your cravings and – tone!, LUST!
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "eclair";
-		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 10;
-		bakeryScene.nomnomnom();
-		return;
 	}
 	else if (eventNo == 2837)
 	{
 		sandFacial();
-		return;
 	}
 	else if (eventNo == 2838)
 	{
 		mudFacial();
-		return;
 	}
 	else if (eventNo == 2844)
 	{
 		greetHeckel();
-		return;
 	}
 	
 	else if (eventNo == 2855)
@@ -3003,160 +2566,129 @@ public function doEvent(eventNo:Number):void
 			}
 		}
 		enterTheBazaarAndMenu();
-		return;
 	}
 	else if (eventNo == 2856)
 	{
 		theSlipperySqueeze();
-		return;
 	}
 	else if (eventNo == 2857)
 	{
 		joeyMassage();
-		return;
 	}
 	else if (eventNo == 2860)
 	{
 		cinnabarGreeting();
-		return;
 	}
 	else if (eventNo == 2862)
 	{
 		cinnabarGetsFUKKKKED();
-		return;
 	}
 	else if (eventNo == 2866)
 	{
 		cinnabarMultiCockPortalFuckFest();
-		return;
 	}
 	else if (eventNo == 2876)
 	{
 		Roxanne1stApproach();
-		return;
 	}
 	else if (eventNo == 2877)
 	{
 		RoxanneChooseApproachOrRepeat();
-		return;
 	}
 	else if (eventNo == 2879)
 	{
 		roxanneGivesABlowjob();
-		return;
 	}
 	else if (eventNo == 2880)
 	{
 		roxanneCunnilingus();
-		return;
 	}
 	else if (eventNo == 2884)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
 		roxanneDrinkingContest();
-		return;
 	}
 	else if (eventNo == 2887)
 	{
 		joeyAndrogyny();
-		return;
 	}
 	else if (eventNo == 2889)
 	{
 		readSharkCuntManual();
-		return;
 	}
 	else if (eventNo == 2891)
 	{
 		sharkEdgingGuideLOL();
-		return;
 	}
 	else if (eventNo == 2893)
 	{
 		sharkgirlPronz();
-		return;
 	}
 	else if (eventNo == 2903)
 	{
 		victoryPenisIzma();
-		return;
 	}
 	else if (eventNo == 2904)
 	{
 		useVagooOnIzmaWin();
-		return;
 	}
 	else if (eventNo == 2911)
 	{
 		nonFightIzmaSmexPAINUS();
-		return;
 	}
 	else if (eventNo == 2912)
 	{
 		nonFightIzmaSmexASS();
-		return;
 	}
 	else if (eventNo == 2913)
 	{
 		nonFightIzmaSmexCUNTPUSSYSNATCHQUIM();
-		return;
 	}
 	else if (eventNo == 2914)
 	{
 		meetIzmaAtLake();
-		return;
 	}
 	else if (eventNo == 2922)
 	{
 		izmaFollowerMenu();
-		return;
 	}
 	else if (eventNo == 2924)
 	{
 		izmaSexMenu();
-		return;
 	}
 	else if (eventNo == 2925)
 	{
 		followerIzmaMountsPC();
-		return;
 	}
 	else if (eventNo == 2926)
 	{
 		followerIzmaTakesItInPooper();
-		return;
 	}
 	else if (eventNo == 2927)
 	{
 		followerIzmaTakesItInVagoo();
-		return;
 	}
 	else if (eventNo == 2928)
 	{
 		followerIzmaTakesIt69();
-		return;
 	}
 	else if (eventNo == 2931)
 	{
 		chooseToFlirtWithIzma();
-		return;
 	}
 	else if (eventNo == 2933)
 	{
 		nopeAintGotNoneODemSpeculIngredimathings();
-		return;
 	}
 	else if (eventNo == 2934)
 	{
 		handOverIngredientsItBeBakingTimeYo();
-		return;
 	}
 	else if (eventNo == 2940)
 	{
 		spriteSelect(23);
 		outputText("Giacomo holds up the book with a small degree of reverence. The cover is leather, with the lettering stitched in by hand. \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a strange book indeed. I traded for it in the east, where they practice a form of exercise known as yoga. This volume in particular deals with those of, shall we say, unusual body shapes. Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat. Care to broaden your horizons?</i>\"", true);
 		doYesNo(2941, 2017);
-		return;
 	}
 	else if (eventNo == 2941)
 	{
@@ -3177,167 +2709,131 @@ public function doEvent(eventNo:Number):void
 		player.gems -= 100;
 		statScreenRefresh();
 		doNext(2017);
-		return;
 	}
 	else if (eventNo == 2943)
 	{
 		izmaKidsPlaytime();
-		return;
 	}
 	else if (eventNo == 2945)
 	{
 		childToggle();
-		return;
 	}
 	else if (eventNo == 2946)
 	{
 		inCampRideIzmasDickDongTheWitchIsDead();
-		return;
 	}
 	else if (eventNo == 2948)
 	{
 		campCuntManual();
-		return;
 	}
 	else if (eventNo == 2949)
 	{
 		entropyGuideByStephenHawking();
-		return;
 	}
 	else if (eventNo == 2950)
 	{
 		stephenHawkingPorn();
-		return;
 	}
 	else if (eventNo == 2951)
 	{
 		stash(false);
-		return;
 	}
 	else if (eventNo == 2957)
 	{
 		izzyGivesSmallWangsFreeOral();
-		return;
 	}
 	else if (eventNo == 2962)
 	{
 		victoryLactation69();
-		return;
 	}
 	else if (eventNo == 2963)
 	{
 		PCVictoryOnIsabellaButtsex();
-		return;
 	}
 	else if (eventNo == 2964)
 	{
 		victoryAgainstIzzzzzySixtyNine();
-		return;
 	}
 	else if (eventNo == 2965)
 	{
 		tooBigVictoryTittyFuckingFuntimesWithMilk();
-		return;
 	}
 	else if (eventNo == 2966)
 	{
 		vaginalProdNPokeIsabella();
-		return;
 	}
 	else if (eventNo == 2967)
 	{
 		tinyVictoryTittyFuckingFuntimesWithMilk();
-		return;
 	}
 	else if (eventNo == 2968)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] = 1;
 		isabellaGreeting();
-		return;
-	}
-	else if (eventNo == 2970)
-	{
-		interactWithAuntNancy();
-		return;
 	}
 	else if (eventNo == 2978)
 	{
 		approachLilium();
-		return;
 	}
 	else if (eventNo == 2979)
 	{
 		payForLilium();
-		return;
 	}
 	else if (eventNo == 2981)
 	{
 		buttFuckTongueJeorb();
-		return;
 	}
 	else if (eventNo == 2982)
 	{
 		liliumDickRidah();
-		return;
 	}
 	else if (eventNo == 2983)
 	{
 		liliumNippleFuck();
-		return;
 	}
 	else if (eventNo == 2997)
 	{
 		startCombat(new MaleSpiderMorph());
 		eventParser(1);
 		spriteSelect(74);
-		return;
 	}
 	else if (eventNo == 2998)
 	{
 		RathazulArmorMenu();
-		return;
 	}
 	else if (eventNo == 2999)
 	{
 		craftSilkArmor();
-		return;
 	}
 	else if (eventNo == 3000)
 	{
 		commissionSilkArmorForReal();
-		return;
 	}
 	else if (eventNo == 3002)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 1;
 		chooseArmorOrRobes();
-		return;
 	}
 	else if (eventNo == 3004)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 2;
 		chooseArmorOrRobes();
-		return;
 	}
 	else if (eventNo == 3028)
 	{
 		approachBimboSophieInCamp();
-		return;
 	}
 	else if (eventNo == 3034)
 	{
 		beBimboSophiesSugarDaddy();
-		return;
 	}
 	else if (eventNo == 3035)
 	{
 		beBimboSophiesSugarMommy();
-		return;
 	}
 	else if (eventNo == 3036)
 	{
 		bimbotizeMeCaptainSophie();
-		return;
 	}
 	else if (eventNo == 3041)
 	{
@@ -3349,1623 +2845,1270 @@ public function doEvent(eventNo:Number):void
 			ceraphFollowerScene.encounterZetsuko();
 		else
 			ceraphFollowerScene.ceraphFollowerAppearance();
-		return;
 	}
 	else if (eventNo == 3058)
 	{
 		overHearDemonsAboutSyrena();
-		return;
 	}
 	else if (eventNo == 3077)
 	{
 		gotInShapeComedyDeclineLottie();
-		return;
 	}
 	else if (eventNo == 3081)
 	{
 		analLottieMilkshake();
-		return;
 	}
 	else if (eventNo == 3082)
 	{
 		getSuckedOffByAHamSandwich();
-		return;
 	}
 	else if (eventNo == 3107)
 	{
 		lottieFatLoserCulminationLeaveComedyChoice();
-		return;
 	}
 	else if (eventNo == 3110)
 	{
 		ewLottieNo();
-		return;
 	}
 	else if (eventNo == 3113)
 	{
 		charlottesWebComedyBullshit();
-		return;
 	}
 	else if (eventNo == 3133)
 	{
 		giveLottieAnItem();
-		return;
 	}
 	else if (eventNo == 3135)
 	{
 		feedLottieLaBova();
-		return;
 	}
 	else if (eventNo == 3136)
 	{
 		giveLottieGroPlus();
-		return;
 	}
 	else if (eventNo == 3137)
 	{
 		giveLottieReducto();
-		return;
 	}
 	else if (eventNo == 3138)
 	{
 		hamSammitchTimeBIATCH();
-		return;
 	}
 	else if (eventNo == 3139)
 	{
 		lottieFuck();
-		return;
 	}
 	else if (eventNo == 3140)
 	{
 		lottieRepeatDoggieStyle();
-		return;
 	}
 	else if (eventNo == 3141)
 	{
 		lottieRepeatWalkies();
-		return;
 	}
 	else if (eventNo == 3142)
 	{
 		lottieRepeatCowGirl();
-		return;
 	}
 	else if (eventNo == 3143)
 	{
 		lottieRepeatQuickie();
-		return;
 	}
 	else if (eventNo == 3144)
 	{
 		lottieRepeatThreesome();
-		return;
 	}
 	else if (eventNo == 3145)
 	{
 		lottieRepeatSUPERNEATORARES();
-		return;
 	}
 	else if (eventNo == 3146)
 	{
 		lottieRepeatBackwardsAssCowgirl();
-		return;
 	}
 	else if (eventNo == 3147)
 	{
 		lottieRepeatFEMDOMFEMFDOM();
-		return;
 	}
 	else if (eventNo == 3148)
 	{
 		hugTheShitOutOfYourHam();
-		return;
 	}
 	else if (eventNo == 3149)
 	{
 		encounterLottie(true);
-		return;
 	}
 	else if (eventNo == 3150)
 	{
 		negotiate();
-		return;
 	}
 	else if (eventNo == 3157)
 	{
 		victoryMinotaurGangTitFuck();
-		return;
 	}
 	else if (eventNo == 3158)
 	{
 		victoryAllThePenetrationsMinotaurGangBang();
-		return;
 	}
 	else if (eventNo == 3159)
 	{
 		forceMinitaurToGiveOral(0);
-		return;
 	}
 	else if (eventNo == 3160)
 	{
 		forceMinitaurToGiveOral(1);
-		return;
 	}
 	else if (eventNo == 3161)
 	{
 		victoryBJNippleFuckMinotaurGang();
-		return;
 	}
 	else if (eventNo == 3163)
 	{
 		milkJojoFirst();
-		return;
 	}
 	else if (eventNo == 3164)
 	{
 		repeatMilkJojo();
-		return;
 	}
 	else if (eventNo == 3165)
 	{
 		repeatMilkJojo(true); //Tentacle version
-		return;
 	}
 	else if (eventNo == 3166)
 	{
 		jojoPaysForPerms();
-		return;
 	}
 	else if (eventNo == 3167)
 	{
 		fapArenaGOOOO();
-		return;
 	}
 	else if (eventNo == 3169)
 	{
 		fapResults(1);
-		return;
 	}
 	else if (eventNo == 3170)
 	{
 		fapResults(2);
-		return;
 	}
 	else if (eventNo == 3171)
 	{
 		fapResults(3);
-		return;
 	}
 	else if (eventNo == 3172)
 	{
 		amilyScene.amilyDefurryOfferAtCamp();
-		return;
 	}
 	else if (eventNo == 3174)
 	{
 		amilyScene.amilyNoFur();
-		return;
 	}
 	else if (eventNo == 3179)
 	{
 		payKihaTribute();
-		return;
 	}
 	else if (eventNo == 3181)
 	{
 		tsundereMasturbationChristmasCarol();
-		return;
 	}
 	else if (eventNo == 3182)
 	{
 		kihaVictoryPomfTail();
-		return;
 	}
 	else if (eventNo == 3183)
 	{
 		victoryDickKiha();
-		return;
 	}
 	else if (eventNo == 3185)
 	{
 		rapeKihaWithWORDS();
-		return;
 	}
 	else if (eventNo == 3187)
 	{
 		askAboutAmily();
-		return;
 	}
 	else if (eventNo == 3190)
 	{
 		amilyUrtaSex();
-		return;
 	}
 	else if (eventNo == 3194)
 	{
 		missingoSex();
-		return;
 	}
 	else if (eventNo == 3195)
 	{
 		missingoSex2();
-		return;
 	}
 	else if (eventNo == 3196)
 	{
 		missingoSex3();
-		return;
 	}
 	else if (eventNo == 3197)
 	{
 		missingoSex4();
-		return;
 	}
 	
 	else if (eventNo == 3200)
 	{
 		minotaurBlowjob();
-		return;
 	}
 	else if (eventNo == 3201)
 	{
 		itsOkayUrtaAmilyIsHot();
-		return;
 	}
 	else if (eventNo == 3202)
 	{
 		crushUrtasHeart();
-		return;
 	}
 	else if (eventNo == 3212)
 	{
 		nowOnVickiLake();
-		return;
 	}
 	else if (eventNo == 3213)
 	{
 		sharkbustersVictory();
-		return;
 	}
 	else if (eventNo == 3216)
 	{
 		ghostGooGurlzDuckfaces();
-		return;
 	}
 	else if (eventNo == 3219)
 	{
 		genderlessGhostBuster();
-		return;
 	}
 	else if (eventNo == 3220)
 	{
 		penisLossThatIsntALoss();
-		return;
 	}
 	else if (eventNo == 3223)
 	{
 		ghostGinaWinSexings();
-		return;
 	}
 	else if (eventNo == 3224)
 	{
 		hermaphroditeGhostsCumEctoplasm();
-		return;
 	}
 	else if (eventNo == 3243)
 	{
 		callForFollowerIsabella();
-		return;
 	}
 	else if (eventNo == 3244)
 	{
 		isabellasAccentCoaching();
-		return;
 	}
 	else if (eventNo == 3245)
 	{
 		toggleIsabellasMorningWoodChopping();
-		return;
 	}
 	else if (eventNo == 3246)
 	{
 		repeatGermanBratwurstInCamp();
-		return;
 	}
 	else if (eventNo == 3247)
 	{
 		tentacleBoneFollowerIzzy();
-		return;
 	}
 	else if (eventNo == 3253)
 	{
 		getMilk();
-		return;
 	}
 	else if (eventNo == 3256)
 	{
 		sparring(1);
-		return;
 	}
 	else if (eventNo == 3257)
 	{
 		sparring(2);
-		return;
 	}
 	else if (eventNo == 3258)
 	{
 		isabellaBurps();
-		return;
 	}
 	else if (eventNo == 3270)
 	{
 		analRapuzulaKiha();
-		return;
 	}
 	else if (eventNo == 3276)
 	{
 		declineHelSexings();
-		return;
 	}
 	else if (eventNo == 3277)
 	{
 		beatUpHelAndStealHerWalletFromHerVagina();
-		return;
 	}
 	else if (eventNo == 3278)
 	{
 		fuckHelsAss();
-		return;
 	}
 	else if (eventNo == 3279)
 	{
 		helBlowsYou();
-		return;
 	}
 	else if (eventNo == 3280)
 	{
 		dpHel();
-		return;
 	}
 	else if (eventNo == 3281)
 	{
 		getLickedByHel();
-		return;
 	}
 	else if (eventNo == 3282)
 	{
 		helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora();
-		return;
 	}
 	else if (eventNo == 3283)
 	{
 		helTailPegging();
-		return;
 	}
 	else if (eventNo == 3284)
 	{
 		nagaCoilsUpHel();
-		return;
 	}
 	else if (eventNo == 3285)
 	{
 		nagaCoilsUpAnalNaga();
-		return;
 	}
 	else if (eventNo == 3286)
 	{
 		mountHel();
-		return;
 	}
 	else if (eventNo == 3287)
 	{
 		helVaginaTaur69();
-		return;
 	}
 	else if (eventNo == 3288)
 	{
 		helPossessionShitPoopCock();
-		return;
 	}
 	else if (eventNo == 3289)
 	{
 		rapingHelsAssMeansYourCorruptCauseAnalIsEvil();
-		return;
 	}
 	else if (eventNo == 3297)
 	{
 		berserkMode();
-		return;
 	}
 	else if (eventNo == 3299)
 	{
 		askHelAboutAttackingYou();
-		return;
 	}
 	else if (eventNo == 3303)
 	{
 		helDefeatedNormal(true);
-		return;
 	}
 	else if (eventNo == 3312)
 	{
 		stuffIzzyAndSalamanderWithDicks();
-		return;
 	}
 	else if (eventNo == 3314)
 	{
 		izzySallyThreeSomeVagoozlaz();
-		return;
 	}
 	else if (eventNo == 3316)
 	{
 		katherineGreeting();
-		return;
 	}
 	else if (eventNo == 3317)
 	{
 		visitKatherine();
-		return;
 	}
 	else if (eventNo == 3328)
 	{
 		useReductoOnKat();
-		return;
 	}
 	else if (eventNo == 3329)
 	{
 		useRedoctoOnKatsKnot();
-		return;
 	}
 	else if (eventNo == 3330)
 	{
 		useReductoOnKatsKock();
-		return;
 	}
 	else if (eventNo == 3331)
 	{
 		reductoBallSize();
-		return;
 	}
 	else if (eventNo == 3332)
 	{
 		giveKatABulbousPepper();
-		return;
 	}
 	else if (eventNo == 3333)
 	{
 		giveKatADoublePepper();
-		return;
 	}
 	else if (eventNo == 3334)
 	{
 		giveKatAOverlyLargePepper();
-		return;
 	}
 	else if (eventNo == 3335)
 	{
 		katherineSex();
-		return;
 	}
 	else if (eventNo == 3337)
 	{
 		katPenetrate();
-		return;
 	}
 	else if (eventNo == 3340)
 	{
 		penetrateKatsVag();
-		return;
 	}
 	else if (eventNo == 3341)
 	{
 		pcPenetratesKatAnally();
-		return;
 	}
 	else if (eventNo == 3342)
 	{
 		suckNFuck();
-		return;
 	}
 	else if (eventNo == 3343)
 	{
 		letKatKnotYou();
-		return;
 	}
 	else if (eventNo == 3344)
 	{
 		letKatKnotYourCuntPussyFuck();
-		return;
 	}
 	else if (eventNo == 3346)
 	{
 		getDoublePennedByKat();
-		return;
 	}
 	else if (eventNo == 3347)
 	{
 		suckedNFuckedByKat();
-		return;
 	}
 	else if (eventNo == 3349)
 	{
 		giveKatOralPenisWingWang();
-		return;
 	}
 	else if (eventNo == 3350)
 	{
 		katherineGivesPCOralAllDayLongDotJPG();
-		return;
 	}
 	else if (eventNo == 3353)
 	{
 		katDoubleHelixCraziness();
-		return;
 	}
 	else if (eventNo == 3354)
 	{
 		suckleTacularKats();
-		return;
 	}
 	else if (eventNo == 3355)
 	{
 		approachHelAtZeBitch();
-		return;
 	}
 	else if (eventNo == 3357)
 	{
 		helEdrynThreeSomeStartYerEngines();
-		return;
 	}
 	else if (eventNo == 3359)
 	{
 		tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK();
-		return;
 	}
 	else if (eventNo == 3360)
 	{
 		tamaniAnalShits();
-		return;
 	}
 	else if (eventNo == 3367)
 	{
 		ifrisAndLottieGetsNTRedLiftingWeights();
-		return;
 	}
 	else if (eventNo == 3373)
 	{
 		rogarThirdPhase();
-		return;
 	}
 	else if (eventNo == 3374)
 	{
 		rogarPhaseFour();
-		return;
 	}
 	else if (eventNo == 3376)
 	{
 		loseButtGinity();
-		return;
 	}
 	else if (eventNo == 3377)
 	{
 		fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim();
-		return;
 	}
 	else if (eventNo == 3378)
 	{
 		brobrobrobro();
-		return;
 	}
 	else if (eventNo == 3381)
 	{
 		frotWithRogar();
-		return;
 	}
 	else if (eventNo == 3383)
 	{
 		disciplineEldestMinotaurSon();
-		return;
 	}
 	else if (eventNo == 3396)
 	{
 		amilyScene.urtaXAmilyCuntPussyVagSQUICK();
-		return;
 	}
 	else if (eventNo == 3397)
 	{
 		amilyScene.threesomeAmilUrtaCAWKS();
-		return;
 	}
 	else if (eventNo == 3400)
 	{
 		amilyScene.dateNightFirstTime();
-		return;
-	}
-	else if (eventNo == 3407)
-	{
-		letsDoYaraSex(true);
-		return;
-	}
-	else if (eventNo == 3408)
-	{
-		letsDoYaraSex(false);
-		return;
 	}
 	else if (eventNo == 3409)
 	{
 		meditate();
-		return;
 	}
 	else if (eventNo == 3414)
 	{
 		centaurGirlsGetHorseAids();
-		return;
 	}
 	else if (eventNo == 3415)
 	{
 		centaurDudesGetHorseAids();
-		return;
 	}
 	else if (eventNo == 3416)
 	{
 		lottiesThirtyMinutePigGasm();
-		return;
 	}
 	else if (eventNo == 3426)
 	{
 		talkToFriendlyKiha();
-		return;
 	}
 	else if (eventNo == 3431)
 	{
 		hangOutWithKiha();
-		return;
 	}
 	else if (eventNo == 3432)
 	{
 		itsGood();
-		return;
 	}
 	else if (eventNo == 3433)
 	{
 		blechKihaYourCooking();
-		return;
 	}
 	
 	else if (eventNo == 3435)
 	{
 		encounterKiha();
-		return;
 	}
 	else if (eventNo == 3436)
 	{
 		ghostboobiesKiha();
-		return;
 	}
 	else if (eventNo == 3437)
 	{
 		giveKihaIncubusDraft();
-		return;
 	}
 	else if (eventNo == 3438)
 	{
 		fuckKihaWithATentacle();
-		return;
 	}
 	else if (eventNo == 3439)
 	{
 		fuckKihasVagInCamp();
-		return;
 	}
 	else if (eventNo == 3440)
 	{
 		boneTheShitOutofKihaHolesWithHorsecock();
-		return;
 	}
 	else if (eventNo == 3441)
 	{
 		savinTheAnalForKiha();
-		return;
 	}
 	else if (eventNo == 3442)
 	{
 		kihaGirlGirlSex();
-		return;
 	}
 	else if (eventNo == 3443)
 	{
 		kihaPlaysWithBigassCocksFemDomAhoy();
-		return;
 	}
 	else if (eventNo == 3444)
 	{
 		inviteKihaForDickings();
-		return;
 	}
 	else if (eventNo == 3446)
 	{
 		dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis();
-		return;
 	}
 	else if (eventNo == 3449)
 	{
 		valaCumBath();
-		return;
 	}
 	else if (eventNo == 3452)
 	{
 		BJRidesGETYOUONE();
-		return;
 	}
 	else if (eventNo == 3453)
 	{
 		fillAmilysMouth();
-		return;
 	}
 	else if (eventNo == 3454)
 	{
 		stuffAmilysMouthWithPostBJCUM();
-		return;
 	}
 	else if (eventNo == 3455)
 	{
 		fillJojosMouthWithHotStickyCum();
-		return;
 	}
 	else if (eventNo == 3457)
 	{
 		amilyScene.fuckIncestCunts();
-		return;
 	}
 	else if (eventNo == 3458)
 	{
 		amilyScene.fuckIncestCunts(true);
-		return;
 	}
 	else if (eventNo == 3472)
 	{
 		izmaDickToggle();
-		return;
 	}
 	else if (eventNo == 3473)
 	{
 		removeIzmasPenis();
-		return;
 	}
 	else if (eventNo == 3479)
 	{
 		followerIzmaMountsPC(true);
-		return;
 	}
 	else if (eventNo == 3485)
 	{
 		fuckIzmasPussyDominate();
-		return;
 	}
 	else if (eventNo == 3489)
 	{
 		radarIzmaAnalDominant();
-		return;
 	}
 	else if (eventNo == 3493)
 	{
 		fuckIsabella();
-		return;
 	}
 	
 	else if (eventNo == 3496)
 	{
 		urtaDialogueMenu();
-		return;
 	}
 	
 	else if (eventNo == 3498)
 	{
 		urtaDiscussesTheWatch();
-		return;
 	}
 	
 	else if (eventNo == 3500)
 	{
 		urtaDiscussAlcoholDrinkMore();
-		return;
 	}
 	else if (eventNo == 3504)
 	{
 		urtaDiscussesFamily();
-		return;
 	}
 	else if (eventNo == 3505)
 	{
 		urtaDiscussesSexAndROmance();
-		return;
 	}
 	else if (eventNo == 3508)
 	{
 		urtaDiscussesEmployment();
-		return;
 	}
 	else if (eventNo == 3509)
 	{
 		urtaDiscussesPrejudice();
-		return;
 	}
 	else if (eventNo == 3523)
 	{
 		spankTheShitOutOfUrtaAndMakeHerCreamHerselfFromProstateStimulationAloneLikeTheHornyDrunkenSlutSheReallyIs();
-		return;
 	}
 	else if (eventNo == 3524)
 	{
 		approachNiamh();
-		return;
 	}
 	else if (eventNo == 3525)
 	{
 		getANiamhBeer();
-		return;
 	}
 	else if (eventNo == 3532)
 	{
 		maybeLaterNiamh();
-		return;
 	}
 	else if (eventNo == 3533)
 	{
 		taintNiamh(true);
-		return;
 	}
 	else if (eventNo == 3537)
 	{
 		bazaarNiamh();
-		return;
 	}
 	else if (eventNo == 3542)
 	{
 		seanBimboBrewing();
-		return;
 	}
 	else if (eventNo == 3543)
 	{
 		yeahSeanLetsBimbooze();
-		return;
 	}
 	else if (eventNo == 3557)
 	{
 		marbleNomNoms();
-		return;
 	}
 	else if (eventNo == 3559)
 	{
 		atNightAskMarbleForSomeSexMaybe();
-		return;
 	}
 	else if (eventNo == 3560)
 	{
 		forceFeedMarble();
-		return;
 	}
 	else if (eventNo == 3569)
 	{
 		giveMarbleTheProBovas4Sho();
-		return;
 	}
 	else if (eventNo == 3570)
 	{
 		giveMarbleTailjobRelease();
-		return;
 	}
 	else if (eventNo == 3571)
 	{
 		marbleKidsPlaytime();
-		return;
 	}
 	else if (eventNo == 3572)
 	{
 		askJoeyAboutOffer();
-		return;
 	}
 	else if (eventNo == 3587)
 	{
 		heliaFollowerMenu();
-		return;
 	}
 	else if (eventNo == 3588)
 	{
 		valeriaFollower();
-		return;
 	}
 	else if (eventNo == 3593)
 	{
 		followersValeriaSex();
-		return;
 	}
 	else if (eventNo == 3594)
 	{
 		valeriaDickToggle();
-		return;
 	}
 	else if (eventNo == 3595)
 	{
 		valeriaGetFucked();
-		return;
 	}
 	else if (eventNo == 3596)
 	{
 		gooFlation();
-		return;
 	}
 	else if (eventNo == 3597)
 	{
 		penetrateValeria();
-		return;
 	}
 	else if (eventNo == 3598)
 	{
 		valeriaSexDominated();
-		return;
 	}
 	else if (eventNo == 3607)
 	{
 		acceptRebeccsPlea(true, true);
-		return;
 	}
 	else if (eventNo == 3608)
 	{
 		acceptRebeccsPlea(false, true);
-		return;
 	} else if (eventNo == 3610)
 	{
 		intoTheDemonPit(true);
-		return;
 	}
 	else if (eventNo == 3611)
 	{
 		intoTheDemonPit(false);
-		return;
 	}
 	else if (eventNo == 3612)
 	{
 		fightZeDemons(true);
-		return;
 	}
 	else if (eventNo == 3613)
 	{
 		fightZeDemons(false);
-		return;
 	}
 	else if (eventNo == 3617)
 	{
 		rapeZeVapula();
-		return;
 	}
 	else if (eventNo == 3618)
 	{
 		owcaTavern();
-		return;
-	}
-	if (false == 3620)
-	{
-		buyOwcaShit("MinoCum");
-		return;
-	}
-	if (false == 3621)
-	{
-		buyOwcaShit("BroBrew");
-		return;
-	}
-	if (false == 3622)
-	{
-		buyOwcaShit("Gob.Ale");
-		return;
-	}
-	if (false == 3623)
-	{
-		buyOwcaShit("SheepMk");
-		return;
 	}
 	else if (eventNo == 3624)
 	{
 		herds();
-		return;
 	}
 	
 	else if (eventNo == 3629)
 	{
 		rapeRebecc(false);
-		return;
 	}
 	else if (eventNo == 3630)
 	{
 		rapeRebecc(true);
-		return;
 	}
 	
 	else if (eventNo == 3634)
 	{
 		owcaBuySetup("MinoCum");
-		return;
 	}
 	else if (eventNo == 3635)
 	{
 		owcaBuySetup("Gob.Ale");
-		return;
 	}
 	else if (eventNo == 3636)
 	{
 		owcaBuySetup("BroBrew");
-		return;
 	}
 	else if (eventNo == 3637)
 	{
 		owcaBuySetup("SheepMk");
-		return;
 	}
 	else if (eventNo == 3639)
 	{
 		torchOwcaMotherFuckers();
-		return;
 	}
 	else if (eventNo == 3649)
 	{
 		shouldrasButtBigginator();
-		return;
 	}
 	else if (eventNo == 3650)
 	{
 		shouldraGivesYaSomeFukkinTeats();
-		return;
 	}
 	else if (eventNo == 3651)
 	{
 		shouldraCockBloating101();
-		return;
 	}
 	else if (eventNo == 3652)
 	{
 		shouldraGrowsYoClit();
-		return;
 	}
 	else if (eventNo == 3653)
 	{
 		shouldraGrowsYoTits();
-		return;
 	}
 	else if (eventNo == 3654)
 	{
 		groBallsBiggaGHOSTYSTYLE();
-		return;
 	}
 	else if (eventNo == 3655)
 	{
 		shouldraGroPlus();
-		return;
 	}
 	else if (eventNo == 3658)
 	{
 		shouldraReductoMenu();
-		return;
 	}
 	else if (eventNo == 3659)
 	{
 		shouldraReductosYourBallsUpInsideYa();
-		return;
 	}
 	else if (eventNo == 3660)
 	{
 		shouldraReductosYourTits();
-		return;
 	}
 	else if (eventNo == 3661)
 	{
 		clittyVanishingActShouldra();
-		return;
 	}
 	else if (eventNo == 3662)
 	{
 		shouldraMakesCocksDisappear();
-		return;
 	}
 	else if (eventNo == 3663)
 	{
 		shrinkDemNipplzForYoGhost();
-		return;
 	}
 	else if (eventNo == 3664)
 	{
 		shrinkDatBootyForYoGhost();
-		return;
 	}
 	else if (eventNo == 3665)
 	{
 		shouldraFollowerScreen();
-		return;
 	}
 	else if (eventNo == 3668)
 	{
 		shouldraAndValaGetBigger();
-		return;
 	}
 	else if (eventNo == 3669)
 	{
 		shouldraMeetsCorruptVala();
-		return;
 	}
 	else if (eventNo == 3670)
 	{
 		sandWitchGetsGhostly();
-		return;
 	}
 	else if (eventNo == 3672)
 	{
 		nongenderlessAnalShouldraMasturbation();
-		return;
 	}
 	else if (eventNo == 3673)
 	{
 		shouldraSexMenu();
-		return;
 	}
 	else if (eventNo == 3686)
 	{
 		goAlongWIthShouldrasEatingSpree();
-		return;
 	}
 	else if (eventNo == 3688)
 	{
 		pumpkinFuck();
-		return;
 	}
 	else if (eventNo == 3727)
 	{
 		mountPumpkin();
-		return;
 	}
 	else if (eventNo == 3748)
 	{
 		enslaveVapulaWithYourWang();
-		return;
 	}
 	else if (eventNo == 3749)
 	{
 		callSlaveVapula();
-		return;
 	}
 	else if (eventNo == 3750)
 	{
 		fapulaFapfapfapAppearance();
-		return;
 	}
 	else if (eventNo == 3751)
 	{
 		talkToVapulaForSomeReason();
-		return;
 	}
 	else if (eventNo == 3752)
 	{
 		toggleCeruleanVapulaAssist();
-		return;
 	}
 	else if (eventNo == 3753)
 	{
 		toggleVapulaHaremFucks();
-		return;
 	}
 	else if (eventNo == 3754)
 	{
 		feedVapulaACupOfJizz();
-		return;
 	}
 	else if (eventNo == 3757)
 	{
 		vapulaAndIzmaThreeSome();
-		return;
 	}
 	else if (eventNo == 3758)
 	{
 		jojoButtFuckTrain();
-		return;
 	}
 	else if (eventNo == 3759)
 	{
 		vapulaJojoThreesomes();
-		return;
 	}
 	else if (eventNo == 3760)
 	{
 		NTRSomeJojos();
-		return;
 	}
 	else if (eventNo == 3761)
 	{
 		vapulaAndAmilyThreesome();
-		return;
 	}
 	else if (eventNo == 3764)
 	{
 		vapulaSophieThreesomeSelect();
-		return;
 	}
 	else if (eventNo == 3767)
 	{
 		vapulaCeraphThreesome();
-		return;
 	}
 	else if (eventNo == 3768)
 	{
 		vapulaThreesomeMenu();
-		return;
 	}
 	else if (eventNo == 3769)
 	{
 		chixFeedVapulaBlehblehIVantToZuckYourSpooo();
-		return;
 	}
 	else if (eventNo == 3771)
 	{
 		teaseVapula();
-		return;
 	}
-	
-	// See other comment about mxmlc shitting on big if-statements
 	else if (eventNo == 3786)
 	{
 		benoitIntro();
-		return;
 	}
 	else if (eventNo == 3787)
 	{
 		benoitsBuyMenu();
-		return;
 	}
 	else if (eventNo == 3788)
 	{
 		benoitSellMenu();
-		return;
 	}
 	else if (eventNo == 3789)
 	{
 		benoitTransactBuy(1);
-		return;
 	}
 	else if (eventNo == 3790)
 	{
 		benoitTransactBuy(2);
-		return;
 	}
 	else if (eventNo == 3791)
 	{
 		benoitTransactBuy(3);
-		return;
 	}
 	else if (eventNo == 3793)
 	{
 		benoitSellTransact(1);
-		return;
 	}
 	else if (eventNo == 3794)
 	{
 		benoitSellTransact(2);
-		return;
 	}
 	else if (eventNo == 3795)
 	{
 		benoitSellTransact(3);
-		return;
 	}
 	else if (eventNo == 3796)
 	{
 		benoitSellTransact(4);
-		return;
 	}
 	else if (eventNo == 3797)
 	{
 		benoitSellTransact(5);
-		return;
 	}
 	else if (eventNo == 3798)
 	{
 		talkToBenoit();
-		return;
 	}
 	else if (eventNo == 3803)
 	{
 		stuffDatTurkeyWithSpoo();
-		return;
 	}
 	else if (eventNo == 3804)
 	{
 		spitRoastThatTurkey();
-		return;
 	}
 	else if (eventNo == 3805)
 	{
 		thatllDoTurkey();
-		return;
 	}
 	else if (eventNo == 3809)
 	{
 		eggySuggest();
-		return;
 	}
 	else if (eventNo == 3814)
 	{
 		tryToConvertToBassyWomb();
-		return;
-	}
-	if (false == 3815)
-	{
-		//ARG: later:Boolean
-		suggestSexAfterBasiWombed(true);
-		return;
 	}
 	else if (eventNo == 3816)
 	{
 		//ARG: later:Boolean
 		suggestSexAfterBasiWombed(false);
-		return;
 	}
 	else if (eventNo == 3822)
 	{
 		saveTheSandTarps();
-		return;
 	}
 	else if (eventNo == 3823)
 	{
 		dontSaveTheTarps();
-		return;
 	}
 	else if (eventNo == 3825)
 	{
 		nagaThreesomeWithSandTrap();
-		return;
 	}
 	else if (eventNo == 3826)
 	{
 		stickWangInSandgina();
-		return;
 	}
 	else if (eventNo == 3827)
 	{
 		rideDatSandTarpLikeIts1999();
-		return;
 	}
 	else if (eventNo == 3828)
 	{
 		useSandTarpsHands();
-		return;
 	}
 	else if (eventNo == 3834)
 	{
 		eggUpANagaSpiderLike();
-		return;
 	}
 	else if (eventNo == 3837)
 	{
 		tamaniBeaten();
-		return;
 	}
 	else if (eventNo == 3838)
 	{
 		layEggsInAMinotaurSpiderLike();
-		return;
 	}
 	else if (eventNo == 3840)
 	{
 		giveTheFoxSomeEggs();
-		return;
 	}
 	else if (eventNo == 3845)
 	{
 		ovipositSandWitches();
-		return;
 	}
 	else if (eventNo == 3846)
 	{
 		beePositANagaPlease();
-		return;
 	}
 	else if (eventNo == 3850)
 	{
 		beeEggsInCorruptJojo();
-		return;
 	}
 	else if (eventNo == 3851)
 	{
 		getHugeEggsInCawk();
-		return;
 	}
 	else if (eventNo == 3855)
 	{
 		fuckFuckingFuckFlowerP2();
-		return;
 	}
 	else if (eventNo == 3856)
 	{
 		rideDatFuckingFukkFlowerP2();
-		return;
 	}
 	else if (eventNo == 3857)
 	{
 		fuckTheFlower();
-		return;
 	}
 	else if (eventNo == 3859)
 	{
 		rideTheWalrusP3();
-		return;
 	}
 	else if (eventNo == 3860)
 	{
 		torchP3Tree();
-		return;
 	}
 	else if (eventNo == 3861)
 	{
 		treeMenu();
-		return;
 	}
 	else if (eventNo == 3863)
 	{
 		fuckHolliInZeFlowerPuss();
-		return;
 	}
 	else if (eventNo == 3864)
 	{
 		haveAMapleSyrupSnack();
-		return;
 	}
 	else if (eventNo == 3865)
 	{
 		level4RideHollisTentacruels();
-		return;
 	}
 	else if (eventNo == 3866)
 	{
 		eatHolliFruit();
-		return;
 	}
 	else if (eventNo == 3867)
 	{
 		askHolliToWatch();
-		return;
 	}
 	else if (eventNo == 3868)
 	{
 		begHolli4Watches();
-		return;
 	}
 	else if (eventNo == 3870)
 	{
 		consensualSatyrFuck(0);
-		return;
 	}
 	else if (eventNo == 3874)
 	{
 		trickZeSatyr();
-		return;
 	}
 	else if (eventNo == 3875)
 	{
 		skipForeplay();
-		return;
 	}
 	else if (eventNo == 3876)
 	{
 		femaleTakesAdvantageOfSatyr();
-		return;
 	}
 	else if (eventNo == 3877)
 	{
 		malesTakeAdvantageOfSatyrs();
-		return;
 	}
 	else if (eventNo == 3879)
 	{
 		giveRubiClothes("ClssyCl");
-		return;
 	}
 	else if (eventNo == 3880)
 	{
 		giveRubiClothes("RbbrClt");
-		return;
 	}
 	else if (eventNo == 3881)
 	{
 		giveRubiClothes("AdvClth");
-		return;
 	}
 	else if (eventNo == 3882)
 	{
 		giveRubiClothes("TubeTop");
-		return;
 	}
 	else if (eventNo == 3883)
 	{
 		giveRubiClothes("T.BSuit");
-		return;
 	}
 	else if (eventNo == 3884)
 	{
 		giveRubiClothes("B.Dress");
-		return;
 	}
 	else if (eventNo == 3885)
 	{
 		giveRubiClothes("LthrPnt");
-		return;
 	}
 	else if (eventNo == 3886)
 	{
 		giveRubiClothes("NurseCl");
-		return;
 	}
 	else if (eventNo == 3887)
 	{
 		giveRubiClothes("S.Swmwr");
-		return;
 	}
 	else if (eventNo == 3893)
 	{
 		cheatingRubi();
-		return;
 	}
 	else if (eventNo == 3894)
 	{
 		approachRubiScenes();
-		return;
 	}
 	else if (eventNo == 3895)
 	{
 		buyRubiMilk();
-		return;
 	}
 	else if (eventNo == 3896)
 	{
 		getTeaFromRubi();
-		return;
 	}
 	else if (eventNo == 3897)
 	{
 		chatWithRubi();
-		return;
 	}
 	else if (eventNo == 3898)
 	{
 		rubisFuckingHouseYouPervert();
-		return;
 	}
 	else if (eventNo == 3899)
 	{
 		fuckRubi();
-		return;
 	}
 	else if (eventNo == 3900)
 	{
 		dildoFuckRubi();
-		return;
 	}
 	else if (eventNo == 3901)
 	{
 		teaseRubi();
-		return;
 	}
 	else if (eventNo == 3902)
 	{
 		releaseRubi();
-		return;
 	}
 	
 	else if (eventNo == 3904)
 	{
 		dontCareAboutNoCheatingRubis();
-		return;
 	}
 	else if (eventNo == 3905)
 	{
 		findBimboCheatster();
-		return;
 	}
 	else if (eventNo == 3950)
 	{
@@ -5076,14 +4219,14 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3993)
 	{
-		houses();
+		telAdre.houses();
 	}
 	else
 	{
 		//Problem here. Lots of the old code relies on the fall through to proceed forward. Prime offender is the
 		//the 2000 EventNo imp meeting stuff after choosing your history. This needs some tinkering to get working correctly.
-		//errorPrint(eventNo); // Dump the system state to the window so the player can file a decent bug-report
-		trace("ERROR Event "+eventNo+" not found");
+		errorPrint(eventNo); // Dump the system state to the window so the player can file a decent bug-report
+		//trace("ERROR Event "+eventNo+" not found");
 	}
 
 }

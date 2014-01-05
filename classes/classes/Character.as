@@ -1,6 +1,6 @@
 ﻿package classes 
 {
-	import classes.content.UmasShop;
+	import classes.Scenes.Places.TelAdre.UmasShop;
 
 	/**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.

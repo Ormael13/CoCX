@@ -1134,7 +1134,7 @@ package classes.Scenes.Areas.Forest
 			//[Feeder]
 			if (player.hasPerk("Feeder") >= 0)
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
-			addButton(9, "Leave", eventParser, cleanupAfterCombat);
+			addButton(9, "Leave", cleanupAfterCombat);
 		}
 
 		private function kitsuneButton(button:int, nam:String, func:*):int

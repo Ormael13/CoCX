@@ -1,9 +1,14 @@
+package classes.Scenes.Places.TelAdre {
+import classes.GlobalFlags.kFLAGS;
+
 //NECESSARY FLAGS:
 //263 - Met nancy
 //264 - Nancy relationship level
 //265 - Talk Nancy
 //266 - Times boned
-
+public class AuntNancy extends TelAdreAbstractContent{
+	public function AuntNancy(){
+	}
 //[Introduction Blurb:
 //(appears in the Wet Bitch between 6:00 and 14:00)]
 public function auntNancy(display:Boolean = true):Boolean {
@@ -54,12 +59,12 @@ public function interactWithAuntNancy():void {
 		//[If MetNancy < 1, MetNancy += 1]
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] < 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] = 1;
 		//[Choice: Strong, Light]
-		simpleChoices("Strong",strongStuff,"Light",lightStuff,"",0,"",0,"Leave",barTelAdre);
+		simpleChoices("Strong",strongStuff,"Light",lightStuff,"",0,"",0,"Leave",telAdre.barTelAdre);
 	}
 }
 
 //[Strong:]
-public function strongStuff():void {
+private function strongStuff():void {
 	outputText("", true);
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
@@ -92,7 +97,7 @@ public function strongStuff():void {
 	doNext(13);
 }
 //[Light:]
-public function lightStuff():void {
+private function lightStuff():void {
 	outputText("", true);
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
@@ -161,7 +166,7 @@ public function lightStuff():void {
 }
 
 //[If Decline]
-public function declineAuntNancyMassage():void {
+private function declineAuntNancyMassage():void {
 	outputText("", true);
 	outputText("Aunt Nancy listens as you politely turn her down, and nods her head, the hungry look fading from her eyes.  \"<i>I understand completely.  Sorry to have bothered you.</i>\"  She starts to walk out of the bar, stops, and turns back to size you up again.  \"<i>Of course,</i>\" she says, \"<i>if you ever change your mind... just come by whenever my shift's over.</i>\"\n\n", false);
 
@@ -171,12 +176,12 @@ public function declineAuntNancyMassage():void {
 }
 
 //[If Agree]
-public function timeForAuntNancySpiderCooch():void {
+private function timeForAuntNancySpiderCooch():void {
 	outputText("", true);
 	outputText("You look the still-beautiful spider-lady in the eye, and, half-mesmerized, nod in agreement.  She smiles broadly (and, you can't help but notice, quite lewdly) and puts one of her lower arms through one of yours, while putting the upper one on your shoulder.  \"<i>Well then,</i>\" Aunt Nancy says, \"<i>I suppose we should be off.</i>\"\n\n", false);
 
 	outputText("She leads you through the streets of Tel'Adre, weaving through crowds and back alleys, before you finally end up just outside a modest little adobe building tucked away in a side street.  Slowly, she wraps all four of her arms around you, giving you a gentle hug", false);
-	if(player.biggestTitSize() >= 1) outputText(" and taking the opportunity to grope your " + allBreastsDescript() + " right through your " + player.armorName, false);
+	if(player.biggestTitSize() >= 1) outputText(" and taking the opportunity to grope your " + player.allBreastsDescript() + " right through your " + player.armorName, false);
 	outputText(".\n\n", false);
 
 	outputText("\"<i>Come in to my parlor,</i>\" she whispers into your ear, licking it gently before sticking the tip of her long tongue into the hole before pressing her soft lips against the lobe of it.\n\n", false);
@@ -187,7 +192,7 @@ public function timeForAuntNancySpiderCooch():void {
 	dynStats("lus", 1);
 	doNext(auntNancyPoonPartII);
 }
-public function auntNancyPoonPartII():void {
+private function auntNancyPoonPartII():void {
 	outputText("", true);
 	outputText("Slowly, you follow Aunt Nancy into her home. Inside, the building is fairly dark and gloomy, even in the middle of the day, with thick curtains of unidentifiable white matter keeping most of the sun outside. Blinded, your vision still attuned to the bright desert, you can discern little of the house's insides before you hear a sudden skittering sound behind you and, as you turn to face it, are pushed further into the gloom. Your heel is caught by a thick strand of what feels like rope, and you fall flat onto your back, arms and legs splayed out to either side of you, as you land on some sort of taut net.\n\n", false);
 
@@ -292,7 +297,7 @@ public function auntNancyPoonPartII():void {
 		
 		//[If PC is lactating, and there are no dicks of autotitfucking size available:]
 		if(!titFucked && player.biggestLactation() >= 1) {
-			outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices.  She lowers her head and wraps her soft, lovely lips around the tip of one of your " + allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
+			outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices.  She lowers her head and wraps her soft, lovely lips around the tip of one of your " + player.allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
 		}
 		//[If no cocks are of titfucking size and # Cocks <= 4 or if there are cocks of titfucking size and # Cocks <= 3 (If Nancy still has free hands)]
 		if(!titFucked || (titFucked && player.cockTotal() <= 2)) {
@@ -318,7 +323,7 @@ public function auntNancyPoonPartII():void {
 
 		outputText("It feels wonderful.  You lie back and moan, enjoying the smooth, silky insides of her pussy, feeling tiny feelers occasionally caress and pull at your fingers inside of her.\n\n", false);
 		//[If PC is lactating:]
-		if(player.biggestLactation() >= 1) outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices. She lowers her head and wraps her soft, lovely lips around the tip of one of your " + allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
+		if(player.biggestLactation() >= 1) outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices. She lowers her head and wraps her soft, lovely lips around the tip of one of your " + player.allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
 	}
 	//[If the PC has no genitals at all:]
 	else {
@@ -337,12 +342,12 @@ public function auntNancyPoonPartII():void {
 		outputText("It feels wonderful.  You lie back and moan, enjoying the smooth, silky insides of her pussy, feeling tiny feelers occasionally caress and pull at your fingers inside of her.\n\n", false);
 
 		//[If PC is lactating:]
-		if(player.biggestLactation() >= 1) outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices. She lowers her head and wraps her soft, lovely lips around the tip of one of your " + allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
+		if(player.biggestLactation() >= 1) outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices. She lowers her head and wraps her soft, lovely lips around the tip of one of your " + player.allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
 	}
 	doNext(auntNancyPoonPartIII);
 }
 
-public function auntNancyPoonPartIII():void {
+private function auntNancyPoonPartIII():void {
 	outputText("", true);
 	//[If PC has a cock]
 	if(player.hasCock()) {
@@ -437,7 +442,7 @@ public function auntNancyPoonPartIII():void {
 	//[Next Page, Time += 200]
 	doNext(auntNancyPoonPartIV);
 }
-public function auntNancyPoonPartIV():void {
+private function auntNancyPoonPartIV():void {
 	outputText("", true);
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	
@@ -472,4 +477,6 @@ public function auntNancyPoonPartIV():void {
 	//Increment times boned!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] += 1;
 	doNext(14);
+}
+}
 }

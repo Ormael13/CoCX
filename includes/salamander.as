@@ -1697,7 +1697,7 @@ public function runAwayFromFoxGirls():void {
 	spriteSelect(68);
 	outputText("", true);
 	outputText("You graciously excuse yourself, saying that you forgot something back at camp.  All three girls say \"<i>Awwww</i>\" in unison, but don't make any special effort to keep you from going.  As you head out, you look over your shoulder in time to see Hel give you a little wink as the fox-herms clamber into her lap.  At least someone's getting laid today.\n\n", false);
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 //Foursome Scene Intro (First & Repeat)

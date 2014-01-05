@@ -87,7 +87,7 @@
 				outputText("\n\nThe infested hellhound's heads both grin happily as it advances towards you...", false);
 				doNext(game.infestedHellhoundScene.infestedHellhoundLossRape);
 			} else if (hpVictory) {
-				game.eventParser(game.infestedHellhoundScene.infestedHellhoundLossRape);
+				game.infestedHellhoundScene.infestedHellhoundLossRape();
 			} else {
 				game.infestedHellhoundScene.infestedHellhoundLossRape();
 			}

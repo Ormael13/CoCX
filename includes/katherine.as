@@ -116,7 +116,7 @@ public function katherineMenu():void {
 	//[Sex] [Talk] [Appearance] [Give Item]
 	var sex:int = 0;
 	if(player.lust >= 33) sex = 3335;
-	simpleChoices("Sex",sex,"Talk",talkToKatherine,"Appearance",katherinesAppearance,"Give Item",giveKatherineAnItem,"Back",telAdreMenu);
+	simpleChoices("Sex",sex,"Talk",talkToKatherine,"Appearance",katherinesAppearance,"Give Item",giveKatherineAnItem,"Back",telAdre.telAdreMenu);
 }
 //Talk
 public function talkToKatherine():void {
@@ -141,7 +141,7 @@ public function katherineDefur():void {
 
 	outputText("You click your tongue reflexively.  Politely thanking Katherine for the talk, you turn and walk away.\n\n", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Her History
@@ -161,7 +161,7 @@ public function katherinesHistory():void {
 
 	outputText("You're skeptical, but reason there's nothing you can do about it right now.  Politely thanking Katherine for the talk, you turn and walk away.", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Gang
@@ -195,7 +195,7 @@ public function askKatherineAboutGang():void {
 
 	outputText("Politely thanking Katherine for the talk, you turn and walk away.\n\n", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Dog Cock
@@ -217,7 +217,7 @@ public function askKatherineAboutDogCock():void {
 
 	outputText("Politely thanking Katherine for the chat, you turn and walk away.", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Vagrancy
@@ -229,7 +229,7 @@ public function askKatherineAboutVagrancy():void {
 
 	outputText("You can't help wondering how much of that is true and how much of that is prejudice.  Politely thanking Katherine for the talk, you turn and walk away.", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Love & Lust
@@ -245,7 +245,7 @@ public function askKatherineAboutLoveAndLust():void {
 
 	outputText("Politely thanking Katherine for the talk, you turn and walk away.", false);
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdreMenu);
+	doNext(telAdre.telAdreMenu);
 }
 
 //Katherine Appearance:

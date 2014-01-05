@@ -2133,7 +2133,7 @@ public function doItems(eventNo:Number):void {
 				"", 0, 
 				"", 0, 
 				"", 0, 
-				"Back", 2211);
+				"Back", telAdre.telAdreMenu);
 	}
 	
 	//Sell item from slots
@@ -2171,7 +2171,7 @@ public function doItems(eventNo:Number):void {
 		
 		slotTmp.removeOneItem()
 
-		doNext(oswaldPawn);
+		doNext(telAdre.oswaldPawn);
 		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
@@ -2196,64 +2196,6 @@ public function doItems(eventNo:Number):void {
 		}
 		dynStats("lib", -2, "lus", -10);
 		itemGoNext();
-	}
-	//Item shopppeeeeeeee
-	if(eventNo == 1072) {
-		tailorShoppe();
-		return;
-	}
-	if(eventNo == 1073) {
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1074) {
-		debitClothes();
-		return;
-	}
-	if(eventNo == 1075) {
-		shortName = "ClssyCl";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1076) {
-		shortName = "RbbrClt";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1077) {
-		shortName = "AdvClth";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1078) {
-		shortName = "TubeTop";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1079) {
-		shortName = "Overall";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1080) {
-		shortName = "B.Dress";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1081) {
-		shortName = "T.BSuit";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1082) {
-		shortName = "M.Robes";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1083) {
-		shortName = "LthrPnt";
-		buyClothes();
-		return;
 	}
 	//Gray dye
 	if(eventNo == 1084) {
@@ -2757,7 +2699,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2274);
+				"Abandon", telAdre.armorShop);
 	}
 	else if (menuLoc == 11) 
 	{
@@ -2809,7 +2751,7 @@ public function takeItem():void {
 				"", 0,
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2553);
+				"Abandon", telAdre.weaponShop);
 	}
 	else if (menuLoc == 16)
 	{
@@ -2861,7 +2803,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", bakeryScene.bakeryuuuuuu);
+				"Abandon", telAdre.bakeryScene.bakeryuuuuuu);
 	}
 	else if (menuLoc == 20)
 	{
@@ -2926,7 +2868,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2256);
+				"Abandon", telAdre.barTelAdre);
 	}
 	else if (menuLoc == 25)
 	{
@@ -2991,7 +2933,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", bakeryScene.ingredientsMenu);
+				"Abandon", telAdre.bakeryScene.ingredientsMenu);
 	}
 	//otherwise business as usual!
 	else
@@ -6612,12 +6554,12 @@ public function itemGoNext():void {
 	}
 	//Tailor shop
 	if(menuLoc == 10) {
-		doNext(1072);
+		doNext(telAdre.tailorShoppe);
 		return;
 	}
 	//Armor shop
 	if(menuLoc == 9) {
-		doNext(armorShop);
+		doNext(telAdre.armorShop);
 		return;
 	}
 	if(menuLoc == 11) {
@@ -6641,7 +6583,7 @@ public function itemGoNext():void {
 	}
 	//Weapon shop
 	if(menuLoc == 15) {
-		doNext(weaponShop);
+		doNext(telAdre.weaponShop);
 		return;
 	}
 	if(menuLoc == 16) {
@@ -6657,7 +6599,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 19) {
-		doNext(bakeryScene.bakeryuuuuuu);
+		doNext(telAdre.bakeryScene.bakeryuuuuuu);
 		return;
 	}
 	if(menuLoc == 20) {
@@ -6677,7 +6619,7 @@ public function itemGoNext():void {
 		return;		
 	}
 	if(menuLoc == 24) {
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	if(menuLoc == 25) {
@@ -6697,7 +6639,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 29) {
-		doNext(bakeryScene.ingredientsMenu);
+		doNext(telAdre.bakeryScene.ingredientsMenu);
 		return;
 	}
 	if(menuLoc == 2) doNext(13);

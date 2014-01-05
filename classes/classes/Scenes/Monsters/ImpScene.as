@@ -63,13 +63,13 @@ package classes.Scenes.Monsters
 			if(nipFuck==null && femaleRape==null && maleRape==null && feeder==null && bikiniTits==null && !eggDump) cleanupAfterCombat();
 			else {
 				menu();
-				addButton(0,"Male Fuck",eventParser,maleRape);
-				addButton(1,"Female Fuck",eventParser,femaleRape);
-				addButton(2,"NippleFuck",eventParser,nipFuck);
-				addButton(3,"Breastfeed",eventParser,feeder);
-				addButton(4,"B.Titfuck",eventParser,bikiniTits);
+				addButton(0,"Male Fuck",maleRape);
+				addButton(1,"Female Fuck",femaleRape);
+				addButton(2,"NippleFuck",nipFuck);
+				addButton(3,"Breastfeed",feeder);
+				addButton(4,"B.Titfuck",bikiniTits);
 				if(eggDump > 0) addButton(8,"Oviposit",putBeeEggsInAnImpYouMonster);
-				addButton(9,"Leave",eventParser,cleanupAfterCombat);
+				addButton(9,"Leave",cleanupAfterCombat);
 				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 			}
 		}
@@ -1481,7 +1481,7 @@ package classes.Scenes.Monsters
 				//Leave // Rape]
 				menu();
 				if(player.lust >= 33) addButton(0,"Sex",sexAnImpLord);
-				addButton(9,"Leave",eventParser,cleanupAfterCombat);
+				addButton(9,"Leave",cleanupAfterCombat);
 			}
 		}
 		public function loseToAnImpLord():void {
@@ -1506,7 +1506,7 @@ package classes.Scenes.Monsters
 			
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
-			addButton(9,"Leave",eventParser,cleanupAfterCombat);
+			addButton(9,"Leave",cleanupAfterCombat);
 			if(player.lust >= 33) {
 				if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
 				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);

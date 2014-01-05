@@ -1430,7 +1430,7 @@ public function loseToMinerva():void {
 		outputText("\n\n\"<i>W-well... don't worry, Minerva is going to take care of you, just tell me how you want it, all right?</i>\" she says earnestly, clearly intending to finish what she started and help you with your battle induced lust.");
 		//Take PC to sex menu
 		minervaSexMenu(false);
-		addButton(9,"Leave",eventParser,cleanupAfterCombat);
+		addButton(9,"Leave",cleanupAfterCombat);
 	}
 }
 
@@ -1450,7 +1450,7 @@ public function beatUpDatSharpie():void {
 		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
 		outputText("\n\nShe's looking up at you with her debilitating lust clear in her eyes.  \"<i>W-well... think you could help little old me with this...  Just tell me what to do, I need it so badly.</i>\"");
 		minervaSexMenu(false);
-		addButton(9,"Leave",eventParser,cleanupAfterCombat);
+		addButton(9,"Leave",cleanupAfterCombat);
 	}
 }
 

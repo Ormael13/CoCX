@@ -665,7 +665,7 @@ public function perkDescription(perkName:String = ""):String {
 		default:
 			var checkChildren:String;
 			
-			checkChildren = umasShop.listPerkDescription(perkName);
+			checkChildren = telAdre.umasShop.listPerkDescription(perkName);
 			
 			if (checkChildren != "")
 			{
@@ -1906,13 +1906,14 @@ import flash.utils.Dictionary;
 private var funcLookups:Dictionary = null;
 
 
-private function buildFuncLookupDict():void
+private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 {
 	import flash.sampler.*;
 	import flash.utils.*;
 	trace("Building function <-> function name mapping table");
 	// get all methods contained
-	var typeDesc:XML = describeType(this);
+	if (object == null) object = this;
+	var typeDesc:XML = describeType(object);
 	//trace("TypeDesc - ", typeDesc)
 
 	for each (var node:XML in typeDesc..method) 
@@ -1922,12 +1923,18 @@ private function buildFuncLookupDict():void
 		// that is not null (null = doesn't exist) and 
 		// is strictly equal to the function we search the name of
 		//trace("this[node.@name] = ", this[node.@name], " node.@name = ", node.@name)
-		if (this[node.@name] != null)
-			this.funcLookups[this[node.@name]] = node.@name;
-		
-		
+		if (object[node.@name] != null)
+			this.funcLookups[object[node.@name]] = prefix+node.@name;
 	}
-	this.funcLookups
+	for each (node in typeDesc..variable)
+	{
+		if (node.@type.toString().indexOf("classes.Scenes") == 0 ||
+				node.metadata.@name.contains("Scene")){
+			if (object[node.@name]!=null){
+				buildFuncLookupDict(object[node.@name],node.@name+".");
+			}
+		}
+	}
 }
 
 public function getFunctionName(f:Function):String
@@ -2152,7 +2159,7 @@ public function choices(text1:String, butt1:*,
 
 	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
-		if(buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
+		if(buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
 			mainView.hideBottomButton( tmpJ );
 		}
 		else {

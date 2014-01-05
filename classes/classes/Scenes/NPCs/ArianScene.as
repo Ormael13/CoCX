@@ -2,9 +2,6 @@
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -187,7 +184,7 @@ private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 	}
 	//Player enters Tel'Adre main screen
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
 }
 
 //[=Help=]
@@ -550,7 +547,7 @@ private function arianHomeMenu():void {
 		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
-		if(!arianFollower()) addButton(9,"Back",telAdreMenu);
+		if(!arianFollower()) addButton(9,"Back",kGAMECLASS.telAdre.telAdreMenu);
 		else addButton(9,"Back",kGAMECLASS.campLoversMenu);
 	}
 }

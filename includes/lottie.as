@@ -146,7 +146,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 0 && (player.isNaga() || player.isTaur() || player.tone < 50)) {
 			outputText("\"<i>Hey, " + player.short + "! I...I'm really glad I talked about myself with you, you're a really great friend, y'know. I really think I can achieve something this time, if I work hard!</i>\" You smile and tell her how glad you are that she's doing this. Lottie responds with a delighted expression, and continues to talk. \"<i>Anyway, I've been trying to look for a personal trainer, but it's kinda difficult, heh. I mean... I'm sure there's lots of trainers here and all, but I – I'd prefer someone I know personally, right?</i>\" She looks up at you expectantly, but then looks back towards the floor. </i>\"But I guess we can't always have what we want.</i>\"\n\n", false);
 			//(Note: No options but 'leave' are available until you meet requirements.)
-			simpleChoices("",0,"",0,"",0,"",0,"Leave",gymDesc);
+			simpleChoices("",0,"",0,"",0,"",0,"Leave",telAdre.gymDesc);
 			return;
 		}
 		//[Normal Encounter, If became met requirements]
@@ -262,7 +262,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		}
 	}
 	//[Appearance][Talk][Exercise][Give Item][Sex][Hug]
-	choices("Appearance",lotteryAppearance,"Talk",talkToPigSlut,"Exercise",lottieExercise,"Give Item",item,"Sex",sex,"Hug",hug,"",0,"",0,"",0,"Leave",gymDesc);
+	choices("Appearance",lotteryAppearance,"Talk",talkToPigSlut,"Exercise",lottieExercise,"Give Item",item,"Sex",sex,"Hug",hug,"",0,"",0,"",0,"Leave",telAdre.gymDesc);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00300] = lottieMorale();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] = lottieTone();
 }

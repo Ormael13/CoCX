@@ -52,7 +52,7 @@
 				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n", false);
 				game.cleanupAfterCombat();
 			} else {
-				game.eventParser(game.beeGirlScene.beeRapesYou);
+				game.beeGirlScene.beeRapesYou();
 			}
 		}
 

@@ -58,7 +58,7 @@ package classes.Scenes
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", eventParser, exploreHighMountain);
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", exploreHighMountain);
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", exploreBog);
 			addButton(4, "Previous", goBackToPageI);
 			addButton(9, "Back", eventParser, 1);
@@ -591,7 +591,7 @@ package classes.Scenes
 					kGAMECLASS.carapaceFind();
 					return;
 				}
-				eventParser(kGAMECLASS.beeGirlScene.beeEncounter);
+				kGAMECLASS.beeGirlScene.beeEncounter();
 			}
 		}
 
@@ -615,7 +615,7 @@ package classes.Scenes
 				return;
 			}
 			if ((player.exploredDesert == 20 && player.hasStatusAffect("Tel'Adre") < 0) || (rand(20) == 0 && player.statusAffectv1("Tel'Adre") == 0)) {
-				kGAMECLASS.discoverTelAdre();
+				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}
 			if (flags[kFLAGS.EGG_WITCH_COUNTER] >= 4 && flags[kFLAGS.EGG_WITCH_TYPE] > 0 && rand(4) == 0) {

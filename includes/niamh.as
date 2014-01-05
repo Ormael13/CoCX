@@ -207,7 +207,7 @@ public function talkToNiamh():void {
 	//[Beer] [Leave]
 	var beer:Function =null;
 	if(player.gems >= 2) 
-		beer = getANiamhBeer
+		beer = getANiamhBeer;
 	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",13);
 }
 //Leave
@@ -215,7 +215,7 @@ public function leaveNiamh():void {
 	clearOutput();
 	outputText("You decide that you don't really want to talk to this strange cat-girl and, as politely as possible, excuse yourself.");
 	//Player returns to Wet Bitch menu
-	doNext(barTelAdre);
+	doNext(telAdre.barTelAdre);
 }
 
 //Black Cat Beer

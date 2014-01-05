@@ -684,9 +684,9 @@ package classes.Scenes.NPCs
 			//Reset rape count if lost
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] = 0;
 			spriteSelect(7);
-			if (flags[kFLAGS.PC_FETISH] == 0) eventParser(loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow);
-			else if (flags[kFLAGS.PC_FETISH] == 1) eventParser(loseToCeraphAnGetPierced2);
-			else if (flags[kFLAGS.PC_FETISH] == 2) eventParser(getPiercedByCeraphLoss3);
+			if (flags[kFLAGS.PC_FETISH] == 0) loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow();
+			else if (flags[kFLAGS.PC_FETISH] == 1) loseToCeraphAnGetPierced2();
+			else if (flags[kFLAGS.PC_FETISH] == 2) getPiercedByCeraphLoss3();
 			else {
 				ceraphRapesYouBADDAWGYODIGGITY();
 			}

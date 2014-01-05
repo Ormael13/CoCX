@@ -433,7 +433,7 @@ public function getWinterPudding():void {
 	clearOutput();
 	if(player.gems < 35) {
 		outputText("Sadly, the pudding isn't free, and it looks like you don't have the 35 gems you'd need to try a bite!");
-		doNext(bakeryScene.bakeryuuuuuu);
+		doNext(telAdre.bakeryScene.bakeryuuuuuu);
 		return;
 	}
 	player.gems -= 35;
@@ -467,7 +467,7 @@ public function getWinterPudding():void {
 		player.hornType = HORNS_ANTLERS;
 		player.horns = 4 + rand(12);
 	}
-	doNext(bakeryScene.bakeryuuuuuu);
+	doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }
 
 //4. Donto's Polar Pete

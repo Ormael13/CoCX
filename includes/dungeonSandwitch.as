@@ -373,7 +373,7 @@ public function yoYouBeatUpSomeSandWitchesYOUMONSTER():void {
 		if(player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
 	}
 	//Present PC with Leave and Orgy options
-	addButton(9,"Leave",eventParser,cleanupAfterCombat);
+	addButton(9,"Leave",cleanupAfterCombat);
 }
 
 //Dicked Win Sex
@@ -1283,7 +1283,7 @@ public function cumWitchDefeated():void {
 	
 	if(inCombat()) {
 		if(monster.HP >= 1) addButton(9,"Leave",declineSandWitch);
-		else addButton(9,"Leave",eventParser,cleanupAfterCombat);
+		else addButton(9,"Leave",cleanupAfterCombat);
 	}
 	else addButton(9,"Back",eventParser,1);
 }

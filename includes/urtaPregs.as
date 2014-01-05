@@ -72,7 +72,6 @@ public function urtaSexMenu():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",eventParser,2354);
 			addButton(2,"Eat Out",eventParser,2350);
-			return;
 		}
 		//FRIEND
 		else {
@@ -80,7 +79,7 @@ public function urtaSexMenu():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",slurpFawkesCocksForFunAndInflation);
 			else addButton(0,"Hidden BJ",eventParser,2295);
 			addButton(1,"Urta's Place",eventParser,2300);
-			addButton(4,"Leave",barTelAdre);
+			addButton(4,"Leave",telAdre.barTelAdre);
 		}
 	}
 	//DRUNK
@@ -95,13 +94,13 @@ public function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",barTelAdre);
+			addButton(9,"Leave",telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
 			temp = 0;
 			if(player.canOviposit()) temp = 3840;
-			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
+			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",barTelAdre);
 			menu();
 			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",eventParser,2296);
@@ -110,8 +109,7 @@ public function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",barTelAdre);
-			return;
+			addButton(9,"Leave",telAdre.barTelAdre);
 		}
 	}
 }
@@ -144,7 +142,7 @@ public function urtaPreggoApproached():void {
 			//Display Urta Sexings or Urta Talking as appropriate
 			addButton(0,"Talk",urtaDialogueMenu);
 		}
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//2: 
 	else if(flags[kFLAGS.URTA_INCUBATION] < 96) {
@@ -154,7 +152,7 @@ public function urtaPreggoApproached():void {
 		//Display both Urta Sex Options and Urta Talk Options
 		addButton(0,"Sex",urtaSexMenu);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//3: 
 	else if(flags[kFLAGS.URTA_INCUBATION] < 144) {
@@ -165,7 +163,7 @@ public function urtaPreggoApproached():void {
 		//Pregnant Sex options should probably start displaying either here or in the next stage.
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//4:
 	else if(flags[kFLAGS.URTA_INCUBATION] < 192) {
@@ -175,7 +173,7 @@ public function urtaPreggoApproached():void {
 		else outputText("She places the glass down and licks her lips.  \"<i>Mmm... that stuff tastes a lot better than you think, especially when you're pregnant.  So, sexy, what brings you here?  Wanted to check up on us?</i>\"  She pats her belly with a smile.  \"<i>Or did you maybe want to talk?  ...Or perhaps <b>talk</b> a little?</i>\"  She grins wickedly.");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//5:
 	else if(flags[kFLAGS.URTA_INCUBATION] < 240) {
@@ -185,7 +183,7 @@ public function urtaPreggoApproached():void {
 		else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.   \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//6: 
 	else if(flags[kFLAGS.URTA_INCUBATION] < 288) {
@@ -193,7 +191,7 @@ public function urtaPreggoApproached():void {
 		outputText("\n\nMore pre drips from her length, and she notices you with a start, \"<i>Oh, [name]!  I was just thinking of you!  I never knew pregnancy could make me feel so... sexual.  Being so full of life just seems to make my male half want to make even more, if you know what I mean.  Please, tell me you're here for a quickie?</i>\"  She fidgets.  \"<i>I guess we could talk too... if you want.</i>\"");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",barTelAdre);
+		addButton(9,"Leave",telAdre.barTelAdre);
 	}
 	//7:
 	else if(flags[kFLAGS.URTA_INCUBATION] < 336) {
@@ -846,7 +844,7 @@ public function urtaSpecialDeliveries():void {
 	flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 1;
 	//(Return to TA menu.)
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
 
 //New Talk Topic: Her House
@@ -1939,7 +1937,7 @@ public function noBathTiemPlease():void {
 	outputText("\"<i>I see, in that case excuse me,</i>\"  She says with a blank expression.  Looks like you don't have any business here for now, so you decide to leave.");
 	//(Back to TA/Camp)
 	menu();
-	addButton(0,"Next",telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
 public function urtaKidsText(male:String = "",female:String = "", plural:String = ""):String {
 	if(urtaKids() == 1) {
@@ -2351,7 +2349,7 @@ public function visitTheHouse():void {
 	addButton(2,"Sex",sexWithLianna);
 	addButton(4,"Kids",pickKidSceneHere);
 	
-	addButton(9,"Back",telAdreMenu);
+	addButton(9,"Back",telAdre.telAdreMenu);
 }
 
 //Lianna
@@ -2627,7 +2625,7 @@ public function acceptARandomGenderFromASkunk():void {
 		if(player.balls == 0) {
 			outputText("\n\nYou feel strange as a pair of lumps form at the base of your newly acquired dick, these lumps quickly grow to sag, forming an excess of skin.  Moments later you groan as a pair of weighty nuts fills your new ballsack, instantly filling it up with some cum.  It's not much to look at, being only 1 inch in diameter, but it certainly seems productive.  Small dollops of pre escape your new cock in agreement.");
 			player.balls = 2;
-			player.ballSize = 1;;
+			player.ballSize = 1;
 		}
 		player.createCock();
 		player.cocks[0].cockLength = 4;
