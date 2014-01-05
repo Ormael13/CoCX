@@ -364,6 +364,9 @@ public function itemUse(shortName1:String):void {
 
 public function dropItem(monsterName:String):void {
 	shortName = "NULL";
+	if(monster.hasStatusAffect("No Loot") >= 0) {
+		return;
+	}
 	if(monster.short == "Hel" || monster.short == "salamander") {
 		if(rand(10) < 7) shortName = "Reptlum";
 		if(rand(20) == 0) shortName = "ChBikni";
@@ -5143,7 +5146,7 @@ public function caninePepper(type:Number = 0):void {
 			outputText("bounding through the woods, hunting with your master.  Feeling the wind in your fur and the thrill of the hunt coursing through your veins intoxicates you.  You have your nose to the ground, tracking your quarry as you run, until a heavenly scent stops you in your tracks.", false);
 			dynStats("lus", 5 + player.lib/20);
 			//break1
-			if(player.cor < 33) outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
+			if(player.cor < 33 || !player.hasCock()) outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
 			else {
 				outputText("  Heart pounding, your shaft pops free of its sheath on instinct, as you take off after the new scent.  Caught firmly in the grip of a female's heat, you ignore your master's cry as you disappear into the wild, " + dogDescript(0) + " growing harder as you near your quarry.  You burst through a bush, spotting a white-furred female.  She drops, exposing her dripping fem-sex to you, the musky scent of her sex channeling straight through your nose and sliding into your " + dogDescript(0) + ".", false);
 				dynStats("lus", 5 + player.lib/20);

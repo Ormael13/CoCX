@@ -736,7 +736,7 @@ public function nieveComesToLife():void {
 	outputText("\n\n" + nieveMF("His","Her") + " eyes, ");
 	if(flags[kFLAGS.NIEVE_MOUTH] == "gems") outputText("glittering purple");
 	else outputText("coal black");
-	outputText(" orbs, fall on you, as if registering you for the first time.  Then a hint of recognition hits " + nieveMF("him","her") + ".  \"<i>Oh!  [Master]!  You're my [master]!</i>\"  In a flash " + nieveMF("he","she") + "'s standing, looking pleased as punch, with " + nieveMF("his","her") + " hands clasped excitedly in front of " + nieveMF("his","her") + ".");
+	outputText(" orbs, fall on you, as if registering you for the first time.  Then a hint of recognition hits " + nieveMF("him","her") + ".  \"<i>Oh!  [Master]!  You're my [master]!</i>\"  In a flash " + nieveMF("he","she") + "'s standing, looking pleased as punch, with " + nieveMF("his","her") + " hands clasped excitedly in front of " + nieveMF("himself","herself") + ".");
 	
 	outputText("\n\nNow it's your time to look confused.  You again ask this strange person who they are, and where " + nieveMF("he","she") + "'s from.");
 	

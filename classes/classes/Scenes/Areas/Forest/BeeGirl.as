@@ -41,7 +41,9 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
 				game.simpleChoices("B. Feed", game.beeGirlScene.milkAndHoneyAreKindaFunny,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
-			}
+			} else {
+                game.finishCombat();
+            }
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -56,6 +58,7 @@
 
 		public function BeeGirl()
 		{
+			super();
 			init01Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			init03BreastRows("DD");

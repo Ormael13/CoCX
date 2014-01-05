@@ -37,7 +37,7 @@
 			else {
 				outputText("You sidestep the gush of wormy fluid, letting it splatter against the rocks behind you.", false);
 				//(If infested +10 lust:  
-				if (player.hasStatusAffect("infested") >= 0 ) {
+				if (player.hasStatusAffect("infested") >= 0  && player.hasCock()) {
 					if (player.hasCock()) {
 						outputText("  Despite avoiding the torrent of infected seed, your own wormy ", false);
 						if (player.balls > 0) outputText(ballsDescriptLight(), false);

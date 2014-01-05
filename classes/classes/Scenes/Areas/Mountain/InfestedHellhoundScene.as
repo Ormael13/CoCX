@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 			}
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
-			else if (player.hasStatusAffect("infested") < 0 && player.biggestCockArea() >= 40) {
+			else if (player.hasStatusAffect("infested") < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
 				if (player.lust > 99) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);

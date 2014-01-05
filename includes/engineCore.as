@@ -1459,11 +1459,11 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Spear  ") != -1 || buttonText.indexOf("Spear") != -1) {
 		toolTipText = "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  (ATK: 8) (Cost: 450)";
 	}
-	if(buttonText.indexOf("Tail Whip") != -1) {
-		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
-	}
 	if(buttonText.indexOf("Whip   ") != -1 || buttonText.indexOf("Whip") != -1) {
 		toolTipText = "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it! (ATK: 5) (Cost: 500)";
+	}
+	if(buttonText.indexOf("Tail Whip") != -1) {
+		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
 	}
 	if(buttonText.indexOf("S.Gaunt") != -1 || buttonText.indexOf("S.Gauntlet") != -1) {
 		toolTipText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
@@ -1896,7 +1896,6 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("ASPLODE") != -1) {                        
 		toolTipText = "MAKE SHIT ASPLODE";
 	}
-
 	return toolTipText;
 }
 
