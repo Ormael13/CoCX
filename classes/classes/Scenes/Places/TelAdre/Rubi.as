@@ -107,10 +107,10 @@ public function rubiAffection(delt:Number = 0):Number {
 	return flags[kFLAGS.RUBI_AFFECTION];
 }
 
-private function rubiCock():String {
+public function rubiCock():String {
 	return kGAMECLASS.NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], 50);
 }
-private function rubiBreasts():String {
+public function rubiBreasts():String {
 	var ret:String = "pair of ";
 
 
@@ -135,7 +135,7 @@ public function rubiCapacity():Number {
 		bonus += 200;		// MAKE IT FIT
 	return 24 + bonus;
 }
-private function rubiMF(man:String,woman:String):String {
+public function rubiMF(man:String,woman:String):String {
 	if(flags[kFLAGS.RUBI_ADMITTED_GENDER] < 1) return woman;
 	else {
 		if(flags[kFLAGS.RUBI_SHE] == 1) return woman;

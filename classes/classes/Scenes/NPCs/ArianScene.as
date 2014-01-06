@@ -102,7 +102,7 @@ private function arianCockSize():Number {
 public function arianFollower():Boolean {
 	return flags[kFLAGS.ARIAN_FOLLOWER] > 0;
 }
-private function arianMF(boy:String,girl:String):String {
+public function arianMF(boy:String,girl:String):String {
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 		if(flags[kFLAGS.ARIAN_VAGINA] > 0) return girl;
 		else return boy;
@@ -117,7 +117,7 @@ public function arianHealth(arg:Number = 0):Number {
 	}
 	return flags[kFLAGS.ARIAN_HEALTH];
 }
-private function arianChestAdjective():String {
+public function arianChestAdjective():String {
 	var buffer:String = "";
 	var temp:int = rand(10);
 	if(flags[kFLAGS.ARIAN_BREASTS] == 0) return "";
@@ -143,7 +143,7 @@ private function arianChestAdjective():String {
 	}
 	return buffer;
 }
-private function arianChest():String {
+public function arianChest():String {
 	var buffer:String = "";
 	//Men get no cool descriptions!
 	if(flags[kFLAGS.ARIAN_BREASTS] == 0) return "chest";

@@ -1,5 +1,6 @@
-﻿
-		// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
+﻿import classes.CoC;
+
+// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
 		// http://en.wikipedia.org/wiki/Spivak_pronoun
 		//
 		// Cheat Table:
@@ -13,18 +14,18 @@
 
 		public var arianLookups:Object = // For subject: "arian"
 		{
-			"man"		: function(thisPtr:*):* {return thisPtr.arianMF("man","woman")},
+			"man"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("man","woman")},
 			// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
 			// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
 
-			"ey"		: function(thisPtr:*):* {return thisPtr.arianMF("he","she")},
-			"em"		: function(thisPtr:*):* {return thisPtr.arianMF("him","her")},
-			"eir"		: function(thisPtr:*):* {return thisPtr.arianMF("his","her")},
-			"eirs"		: function(thisPtr:*):* {return thisPtr.arianMF("his","hers")},
-			"emself"	: function(thisPtr:*):* {return thisPtr.arianMF("himself","herself")},
+			"ey"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("he","she")},
+			"em"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("him","her")},
+			"eir"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("his","her")},
+			"eirs"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("his","hers")},
+			"emself"	: function(thisPtr:CoC):String {return thisPtr.arianScene.arianMF("himself","herself")},
 
-			"chestadj"	: function(thisPtr:*):* {return thisPtr.arianChestAdjective()},
-			"chest"		: function(thisPtr:*):* {return thisPtr.arianChest()}
+			"chestadj"	: function(thisPtr:CoC):String {return thisPtr.arianScene.arianChestAdjective()},
+			"chest"		: function(thisPtr:CoC):String {return thisPtr.arianScene.arianChest()}
 		}
 		// Arian unhandled terms (I have not decided how to support them yet):
 		// arianMF("mas","mis")
@@ -35,16 +36,16 @@
 
 		public var rubiLookups:Object = // For subject: "rubi"
 		{
-			"man"		: function(thisPtr:*):* {return thisPtr.rubiMF("man","woman")},
+			"man"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("man","woman")},
 
-			"ey"		: function(thisPtr:*):* {return thisPtr.rubiMF("he","she")},
-			"em"		: function(thisPtr:*):* {return thisPtr.rubiMF("him","her")},
-			"eir"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","her")},
-			"eirs"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","hers")},
-			"emself"	: function(thisPtr:*):* {return thisPtr.rubiMF("himself","herself")},
+			"ey"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("he","she")},
+			"em"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("him","her")},
+			"eir"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("his","her")},
+			"eirs"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("his","hers")},
+			"emself"	: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiMF("himself","herself")},
 
-			"cock"		: function(thisPtr:*):* {return thisPtr.rubiCock()},
-			"breasts"	: function(thisPtr:*):* {return thisPtr.rubiBreasts()}
+			"cock"		: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiCock()},
+			"breasts"	: function(thisPtr:CoC):String {return thisPtr.telAdre.rubi.rubiBreasts()}
 
 		}
 		//Rubi unhandled terms :
