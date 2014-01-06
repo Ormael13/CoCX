@@ -218,7 +218,6 @@ package classes.Scenes.Areas.Forest
 			init12Combat(120,20,0.9,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(6,rand(10) + 10);
 			initX_Tail(TAIL_TYPE_FOX);
-			initX_Specials(5029);
 
 		}
 

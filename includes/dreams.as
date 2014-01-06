@@ -39,7 +39,7 @@ public function dreamSelect():Boolean {
 		temp--;
 	}
 	//Two chances if addicted, three if with perk!
-	if(minotaurAddicted()) {
+	if(player.minotaurAddicted()) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) choices[choices.length] = 6;

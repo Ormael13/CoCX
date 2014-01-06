@@ -25,7 +25,7 @@
 				outputText("You defeat a minotaur!  ", true);
 				game.desert.antsScene.phyllaBeatAMino();
 			} else {
-				game.minoVictoryRapeChoices();
+				game.mountain.minotaurScene.minoVictoryRapeChoices();
 			}
 		}
 
@@ -38,7 +38,7 @@
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
 				game.cleanupAfterCombat();
 			} else
-				game.eventParser(5031);
+				game.eventParser(game.mountain.minotaurScene.getRapedByMinotaur);
 		}
 
 		override public function get long():String
@@ -69,12 +69,10 @@
 			init08Face(FACE_COW_MINOTAUR);
 			init10Weapon(hasAxe?"axe":"fist",hasAxe?"cleave":"punch");
 			init11Armor("thick fur");
-			init12Combat(0,this.ballSize * 3,hasAxe?0.84:0.87,TEMPERMENT_LUSTY_GRAPPLES);
+			init12Combat(20 + rand(this.ballSize*2),this.ballSize * 3,hasAxe?0.84:0.87,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(hasAxe?6:5,rand(5) + 5);
-			initX_Specials(5029);
+			initX_Specials(game.mountain.minotaurScene.minoPheromones);
 			initX_Tail(TAIL_TYPE_COW);
-			//Extra ball description!
-			this.lust                                  = 20 + rand(this.ballSize*2);
 		}
 
 	}

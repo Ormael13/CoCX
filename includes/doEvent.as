@@ -203,7 +203,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2008)
 	{
 		// This event body was almost entirely an older version of the scene we're going to call instead
-		getRapedByMinotaur(true);
+		mountain.minotaurScene.getRapedByMinotaur(true);
 	}
 	//Tentacle's appear!
 	else if (eventNo == 2009)
@@ -2234,10 +2234,6 @@ public function doEvent(eventNo:Number):void
 	{
 		rapeOozeWithMilk();
 	}
-	else if (eventNo == 2483)
-	{
-		minotaurDrinksMilkNewsAtEleven();
-	}
 	else if (eventNo == 2486)
 	{
 		player.gems += 50;
@@ -2998,11 +2994,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3197)
 	{
 		missingoSex4();
-	}
-	
-	else if (eventNo == 3200)
-	{
-		minotaurBlowjob();
 	}
 	else if (eventNo == 3201)
 	{
@@ -3820,10 +3811,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3837)
 	{
 		tamaniBeaten();
-	}
-	else if (eventNo == 3838)
-	{
-		layEggsInAMinotaurSpiderLike();
 	}
 	else if (eventNo == 3840)
 	{

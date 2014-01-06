@@ -197,7 +197,6 @@
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
 		include "../../includes/minerva.as";
-		include "../../includes/minotaur.as";
 		include "../../includes/minotaurGang.as";
 		include "../../includes/naga.as";
 		include "../../includes/oasis.as";

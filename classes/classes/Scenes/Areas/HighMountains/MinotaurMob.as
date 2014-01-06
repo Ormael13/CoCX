@@ -58,7 +58,7 @@ package classes.Scenes.Areas.HighMountains
 			if(level > 14) level = 14;
 			init13Level(level,rand(15) + 45);
 			initX_Tail(TAIL_TYPE_COW);
-			initX_Specials(5029);
+			initX_Specials(game.mountain.minotaurScene.minoPheromones);
 
 		}
 	}

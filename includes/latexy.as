@@ -908,7 +908,7 @@ public function minotaurCumFeedingGoo(nice:Boolean = false):void {
 	clearOutput();
 	consumeItem("MinoCum",1);
 	outputText("You pull a vial of minotaur cum from the pouches at your waist");
-	if(minotaurNeed() || minotaurAddicted()) outputText(" and hungrily lick at your lips, always eager to take such a treat yourself");
+	if(player.minotaurNeed() || player.minotaurAddicted()) outputText(" and hungrily lick at your lips, always eager to take such a treat yourself");
 	outputText(".  The latex woman ");
 	if(flags[kFLAGS.TIMES_FED_LATEXY_MINO_CUM] > 0) outputText("claps in excitement, her dark-as-night nipples perking up immediately.  She hasn't forgotten her last taste of the heady treat.");
 	else outputText(" tilts her head in confusion, though when she realizes that it's cum you carry, her dark-as-night nipples perk up.");
@@ -953,13 +953,13 @@ public function minotaurCumFeedingGoo(nice:Boolean = false):void {
 	//{Both}
 	//{if not hard, minus obedience}
 	outputText("\n\nNodding, you uncork the bottle and hand it to her.  She immediately throws it back like a sailor with a shot, throat working silently to pass the liquid load directly into her belly.  " + flags[kFLAGS.GOO_NAME] + " burps loudly, her breath inundated with spunk-scent");
-	if(minotaurNeed()) {
+	if(player.minotaurNeed()) {
 		outputText(" that makes you flush with an echoing need of your own.  Without meaning to, you pounce her, licking every trace of the heavenly minotaur spunk from her lips and licking the smallest of leftovers from inside her.  Your slave");
 		if(gooHappiness() < 33) outputText(" reluctantly returns the kiss, seeming to tolerate it more than anything else.  You barely notice, lust drunk as you are.");
 		else if(gooHappiness() < 66) outputText(" seems surprised at first but quickly comes to enjoy it, swapping cummy spit with passion.");
 		else outputText(" eagerly returns the kiss, frenching you with abandon.  Her tongue happily pushes the leftover jizz into your mouth.");
 		outputText("  You pull back, panting and unsated, wishing you had drank it yourself");
-		minoCumAddiction(2);
+		player.minoCumAddiction(2);
 	}
 	outputText(".");
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " smiles up at you, giving you a rather long and sensual hug as thanks.  Then, as you watch, her smile broadens.  Her bright eyes dull, the irises dilating into vacant dinner plates.  Your latex pet's hairless snatch puffs up and begins to drool, hot and heavy.  Panting now, she moans, smiling and blissful.  Without another word, she pumps her hand into her cunt, burying her fist up to the wrist in pliant pussy.  Syrupy latex gushes out around it as she finger-fucks herself, giving her body and mind over to the numbing pleasure that the drugged spunk you gifted her has granted.  In seconds, she cums, splattering the ground with inky moisture.  She screams your name and thrusts in again, up to her own elbow.  This sets off another messy orgasm, even larger than the first.");

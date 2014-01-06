@@ -501,20 +501,11 @@ public function doCombat(eventNum:Number):void
 			}
 			doNext(5025);
 	}
-			//Mino special pheromone attack.
-	if(eventNum == 5029) {
-			minoPheromones();
-	}
 			//Rape minotaur
 	if(eventNum == 5030) {
 			//minoRape();
 			cleanupAfterCombat();
 	}
-			//Get raped by minotaur
-	if(eventNum == 5031) {
-			getRapedByMinotaur();
-	}
-
 			//Sand witch gets raped
 	if(eventNum == 5032) {
 			sandwitchRaped();
@@ -1290,14 +1281,6 @@ public function doCombat(eventNum:Number):void
 		superWhisperAttack();
 		return;
 	}
-	if(eventNum == 5131) {
-		minoGetsTitFucked();
-		return;
-	}
-	if(eventNum == 5132) {
-		takeMinoCumDirectly();
-		return;
-	}
 	if(eventNum == 5138) {
 		sophieKissAttack();
 		return;
@@ -1329,26 +1312,6 @@ public function doCombat(eventNum:Number):void
 	}
 	if(eventNum == 5150) {
 		kick();
-		return;
-	}
-	if(eventNum == 5151) {
-		rapeMinotaurTentacles();
-		return;
-	}
-	if(eventNum == 5152) {
-		minoUrethralPen();
-		return;
-	}
-	if(eventNum == 5153) {
-		bumRapeaMinotaur();
-		return;
-	}
-	if(eventNum == 5154) {
-		girlRapeAMinotaur();
-		return;
-	}
-	if(eventNum == 5155) {
-		minotaurGetsRapedByHerms();
 		return;
 	}
 	if(eventNum == 5156) {

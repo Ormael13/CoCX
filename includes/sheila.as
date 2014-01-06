@@ -4625,6 +4625,10 @@ public function beatUpDemonSheila(output:Boolean = true):void {
 		cleanupAfterCombat();
 		return;
 	}
+	if (player.gender == 0){
+		cleanupAfterCombat();
+		return;
+	}
 	//if lust high enough, display choices [Missionary][Big Dick+Thighs][Penetration, In Spades][Nipple Kisses][Anal Hate-fuck(req >= 75 corr and monster lust >99 or monster HP < 1 to appear)]
 	menu();
 	//Win - [Missionary] - for the purpose of procreation
@@ -4637,7 +4641,7 @@ public function beatUpDemonSheila(output:Boolean = true):void {
 	//penis envy, go!
 	if(player.hasCock() && player.biggestCockArea() > 56) addButton(2,"UseHerThighs",bigDickAndThighs);
 	//Win - [Penetration, in Spades] - for self-loathing vaginas
-	if(player.hasVagina()) addButton(3,"Clit-Fuck",winAgainstDemoNSheilaForVaginas);		
+	if(player.hasVagina()) addButton(3,"Clit-Fuck",winAgainstDemoNSheilaForVaginas);
 }
 
 //Win - [Missionary] - for the purpose of procreation

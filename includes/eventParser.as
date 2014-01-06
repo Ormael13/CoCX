@@ -1024,7 +1024,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("Kelt",2,-0.15);
 		}
 		//Mino cum update.
-		if(minoCumUpdate()) needNext = true;
+		if(mountain.minotaurScene.minoCumUpdate()) needNext = true;
 		//Repeated warnings!
 		else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) {
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);

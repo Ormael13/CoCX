@@ -76,7 +76,7 @@ public function firstMinervaEncounter():void {
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:
-	if(minotaurAddicted()) outputText(".  With any luck, you might even find a hunky minotaur to scratch that burning itch in your mind");
+	if(player.minotaurAddicted()) outputText(".  With any luck, you might even find a hunky minotaur to scratch that burning itch in your mind");
 	outputText(".  Trudging on, you make your way up and up the mountain, passing the occasional harpy nest as you climb and traverse along the mountain paths.  Just when it looks like you're going to hit the clouds, you catch sight of a trail that you had never really noticed before.");
 	//Choice
 	//[Ignore Path] [Take Path]
