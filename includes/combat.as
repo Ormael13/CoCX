@@ -606,44 +606,6 @@ public function doCombat(eventNum:Number):void
 			monster.lust -= 13;
 			doNext(1);
 	}
-			//Victory Sex (Slime)
-	if(eventNum == 5041) {
-			//Service for lower corruption
-			if (player.cor <= 33) {
-				outputText("", true);
-				if (player.lust < 60) serviceLowCorruption();
-				else serviceLowCorruptionHighLust();
-			}
-			//higher corruption raaaaeeeep
-			else {
-				outputText("", true);
-				//male or futa
-				if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) maleRapesOoze();
-				//female or futa
-				else if (player.gender > 0) femaleRapesOoze();
-			}
-			cleanupAfterCombat();
-			return;
-	}
-			//Losing Sex (Slime)
-	if(eventNum == 5042) {
-			outputText("", true);
-			doNext(1);
-			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-				temp = rand(3);
-				if (temp == 0) oozeRapesYouVaginally();
-				if (temp == 1) oozeRapesYouOrally();
-				if (temp == 2) oozeButtRapesYou();
-			}
-			//Everybody else
-			else {
-				temp = rand(2);
-				if (temp == 0) oozeRapesYouOrally();
-				if (temp == 1) oozeButtRapesYou();
-			}
-			cleanupAfterCombat();
-			return;
-	}
 			//Demon pack attack
 	if(eventNum == 5043) {
 			//return to combat menu when finished

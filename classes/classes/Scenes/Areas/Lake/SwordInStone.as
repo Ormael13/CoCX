@@ -1,4 +1,16 @@
-﻿public function findSwordInStone():void {
+﻿package classes.Scenes.Areas.Lake{
+import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kFLAGS;
+import classes.BaseContent;
+import classes.Appearance;
+import classes.CockTypesEnum;
+public class SwordInStone extends AbstractLakeContent{
+
+	public function SwordInStone()
+	{
+	}
+
+	public function findSwordInStone():void {
 	if(player.hasStatusAffect("FactoryOverload") < 0) {
 		//Encounter it!
 		outputText("While walking along the lake, the glint of metal catches your eye.  You drop into a combat stance, readying your " + player.weaponName + " for another fight.   Your eyes dart about, searching for the source of the light. You feel rather foolish when you locate the source of the reflection.  It came from a sword lodged hilt-deep in the trunk of a tree.  You relax a bit, approaching the odd sight to get a better look.\n\n", true);
@@ -14,7 +26,7 @@
 	}
 }
 
-public function tryToTakeSwordInStone():void {
+private function tryToTakeSwordInStone():void {
 	outputText("", true);
 	//if corrupted...
 	if(player.cor >= 25) {
@@ -38,4 +50,6 @@ public function tryToTakeSwordInStone():void {
 		takeItem();
 		player.createStatusAffect("Took Blessed Sword",0,0,0,0);
 	}
+}
+}
 }

@@ -180,7 +180,6 @@
 		include "../../includes/izma.as";
 		include "../../includes/jasun.as";
 		include "../../includes/jojo.as";
-		include "../../includes/kaiju.as";
 		include "../../includes/katherine.as";
 		include "../../includes/kelly.as";
 		include "../../includes/kelt.as";
@@ -194,7 +193,6 @@
 		include "../../includes/marble.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
-		include "../../includes/ooze.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";
@@ -211,7 +209,6 @@
 		include "../../includes/sheila.as";
 		include "../../includes/shouldra.as";
 		include "../../includes/shouldraFollower.as";
-		include "../../includes/swordInStone.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";

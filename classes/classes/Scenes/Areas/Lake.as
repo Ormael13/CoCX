@@ -16,6 +16,9 @@ package classes.Scenes.Areas
 		public var fetishCultistScene:FetishCultistScene = new FetishCultistScene();
 		public var fetishZealotScene:FetishZealotScene = new FetishZealotScene();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
+		public var greenSlimeScene:GreenSlimeScene = new GreenSlimeScene();
+		public var kaiju:Kaiju = new Kaiju();
+		public var swordInStone:SwordInStone = new SwordInStone();
 		public function Lake()
 		{
 		}
@@ -100,7 +103,7 @@ package classes.Scenes.Areas
 			}
 			//Pre-emptive chance of discovering the Beautiful Sword
 			else if (select == 10) {
-				kGAMECLASS.findSwordInStone();
+				swordInStone.findSwordInStone();
 			}
 			//Pre-emptive chance of finding the boat
 			else if (select == 11) {
@@ -184,7 +187,7 @@ package classes.Scenes.Areas
 			}
 			else if (select == 1) {
 				if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0) {
-					kGAMECLASS.kaijuMeeting();
+					kaiju.kaijuMeeting();
 					return;
 				}
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ", true);

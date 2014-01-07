@@ -2225,10 +2225,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.giveAmilySomePants();
 	}
-	else if (eventNo == 2480)
-	{
-		rapeOozeWithMilk();
-	}
 	else if (eventNo == 2486)
 	{
 		player.gems += 50;
