@@ -18,7 +18,12 @@ package classes.Scenes.Areas
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var essrayle:Essrayle = new Essrayle();
+		public var faerie:Faerie = new Faerie();
 		public var kitsuneScene:KitsuneScene = new KitsuneScene();
+		public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
+		public var tamaniScene:TamaniScene = new TamaniScene();
+		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public function Forest()
 		{
 		}
@@ -62,15 +67,15 @@ package classes.Scenes.Areas
 			//Tamani 20% encounter rate
 			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
 				if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani") / 2) >= 12) {
-					kGAMECLASS.encounterTamanisDaughters();
+					tamaniDaughtersScene.encounterTamanisDaughters();
 				}
 				else
-					kGAMECLASS.encounterTamani();
+					tamaniScene.encounterTamani();
 				return;
 			}
 			//Faerie
 			if (chooser == 0) {
-				kGAMECLASS.encounterFaerie();
+				faerie.encounterFaerie();
 				return;
 			}
 			//Tentacle monster
@@ -191,7 +196,7 @@ package classes.Scenes.Areas
 			}
 			//Essy every 20 explores or so
 			if ((rand(100) <= 3) && player.gender > 0 && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0 || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)) {
-				kGAMECLASS.essrayleMeetingI();
+				essrayle.essrayleMeetingI();
 				return;
 			}
 			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
@@ -245,10 +250,10 @@ package classes.Scenes.Areas
 					//Tamani 25% of all goblin encounters encounter rate
 					if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
 						if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani") / 2) >= 12) {
-							kGAMECLASS.encounterTamanisDaughters();
+							tamaniDaughtersScene.encounterTamanisDaughters();
 						}
 						else
-							kGAMECLASS.encounterTamani();
+							tamaniScene.encounterTamani();
 						return;
 					}
 					if (player.gender > 0) {

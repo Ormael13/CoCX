@@ -1,4 +1,16 @@
-﻿//const TIMES_OVIPOSITED_TAMANI:int = 581;
+﻿package classes.Scenes.Areas.Forest{
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Appearance;
+import classes.CockTypesEnum;
+public class TamaniScene extends BaseContent{
+
+	public function TamaniScene()
+	{
+	}
+
+//const TIMES_OVIPOSITED_TAMANI:int = 581;
 //const TAMANI_TIME_OUT:int = 580;
 
 /*NOTES:
@@ -21,7 +33,7 @@ Males:
 	-If the player loses to the 'brood', brood encounters become more frequent.
 	-If the player lose 3 times, game over as breeding stud.
 */
-public function tamaniChest():String {
+internal function tamaniChest():String {
 	var descript:String = "";
 	if(player.statusAffectv4("Tamani") <= 1) {
 		if(rand(2) == 0) descript = "ample ";
@@ -60,7 +72,7 @@ public function tamaniChest():String {
 }
 
 //[Encounter Tamani – female]
-public function tamaniFemaleEncounter():void {
+private function tamaniFemaleEncounter():void {
 	spriteSelect(56);
 	player.createStatusAffect("Tamani Female Encounter",0,0,0,0);
 	outputText("", true);
@@ -71,7 +83,7 @@ public function tamaniFemaleEncounter():void {
 }
 
 //(Umm OK?)
-public function tamaniFemaleYes():void {
+private function tamaniFemaleYes():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("\"<i>That's what I thought,</i>\" says the goblin as she fishes around in her pouches, \"<i>but I'm not cruel, I'll give you my best dildo so you can keep your hot little box stuffed all the time.</i>\"\n\n", false);
@@ -84,7 +96,7 @@ public function tamaniFemaleYes():void {
 	doNext(13);
 }
 //[No] 
-public function tamaniFemaleNo(): void {
+private function tamaniFemaleNo(): void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("The goblin harrumphs, \"<i>We'll see about that slut.  I'll be knocked up from every monster and stud this side of the mountain.  Hell, just grow one dick, and see how fast Tamani's legs get wrapped around you!</i>\"\n\n", false);
@@ -96,7 +108,7 @@ public function tamaniFemaleNo(): void {
 }
 //[Encounter Tamani – HAZ COCK]
 //[First Time]
-public function tamaniMaleFirstEncounter():void {
+private function tamaniMaleFirstEncounter():void {
 	spriteSelect(56);
 	player.createStatusAffect("Tamani",-500,0,0,0);
 	outputText("", true);
@@ -106,7 +118,7 @@ public function tamaniMaleFirstEncounter():void {
 	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"Refuse",tamaniFirstTimeRefusal,"",0,"",0,"",0);
 }
 //[Fuck Her – Consentual First Time]
-public function tamaniFirstTimeConsentual():void {
+private function tamaniFirstTimeConsentual():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -162,7 +174,7 @@ public function tamaniFirstTimeConsentual():void {
 }
 
 //[Refuse – First Time Meeting]
-public function tamaniFirstTimeRefusal():void {
+private function tamaniFirstTimeRefusal():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.boyGirl() + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n", false);
@@ -172,7 +184,7 @@ public function tamaniFirstTimeRefusal():void {
 	dynStats("lus", 5);
 }
 //[No Means No]
-public function tamaniSecondRefusal(): void {
+private function tamaniSecondRefusal(): void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("The goblin pouts, anger clouding her cute little features.  She turns and storms off, clearly pissed at you, \"<i>Think about it.  Next time that dick better ache for me, or I'll MAKE you want it.</i>\"\n\n", false);
@@ -181,7 +193,7 @@ public function tamaniSecondRefusal(): void {
 }
 
 //[REPEAT MALE ENCOUNTER]
-public function tamaniMaleRepeatEncounter():void {
+private function tamaniMaleRepeatEncounter():void {
 	spriteSelect(56);
 	outputText("", true);
 	//(IF FUCKED - check to see if she's pregnant or has given birth) 
@@ -202,7 +214,7 @@ public function tamaniMaleRepeatEncounter():void {
 
 //[Let Her (Or Combat Rape)]
 //[let her]
-public function tamaniSexLetHer():void {
+internal function tamaniSexLetHer():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -412,7 +424,7 @@ public function tamaniSexLetHer():void {
 }
 
 //[NORMAL COMBAT – LOSS TEXT]
-public function tamaniSexLost():void {
+internal function tamaniSexLost():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -456,7 +468,7 @@ public function tamaniSexLost():void {
 	
 //[NORMAL COMBAT – VICTORY RAEEP]
 //Shove her face in the mud and fuck her
-public function tamaniSexWon():void {
+internal function tamaniSexWon():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	var x:Number = player.cockThatFits(90);
@@ -531,7 +543,7 @@ public function tamaniSexWon():void {
 }
 
 //[REPEAT MALE PREGNANT ENCOUNTER]
-public function tamaniPregnantEncounter():void {
+private function tamaniPregnantEncounter():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n", false);
@@ -541,14 +553,14 @@ public function tamaniPregnantEncounter():void {
 }
 
 //[Refuse]
-public function tamaniPregnantRefusal():void {
+private function tamaniPregnantRefusal():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("She bursts into tears and waddles away crying.  You aren't sure if you should feel bad or not.", false);
 	doNext(13);
 }
 //[FUCK HER PREGGERS – Consentual]
-public function tamaniPregnantFuck():void {
+private function tamaniPregnantFuck():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani's eyes light up and she pounces you, somehow managing to jump up and latch onto your chest despite the weight of her burgeoning pregnancy.  The two of you overbalance as her weight carries you to the ground, flat on your back.   Your " + buttDescript() + " hurts a little from the impact but it's the last thing on your mind.  More important are the milk-dribbling twin mounds pressing tightly against your ", false);
@@ -597,7 +609,7 @@ public function tamaniPregnantFuck():void {
 }
 
 //[Birth Encounter]
-public function tamaniPoopsOutBabies():void {
+private function tamaniPoopsOutBabies():void {
 	spriteSelect(56);
 	var daughters:* = player.statusAffectv3("Tamani");
 	outputText("", true);
@@ -641,7 +653,7 @@ public function tamaniPoopsOutBabies():void {
 	doNext(13);
 }
 
-public function tamaniKnockUp():void {
+internal function tamaniKnockUp():void {
 	//Already preggers
 	if(player.statusAffectv1("Tamani") > -500) {
 		
@@ -692,68 +704,9 @@ public function encounterTamani():void {
 	}
 }
 //TAMANI HYPNO SHIT
-//New Tease option:
-public function tamaniHypnoTease():void {
-	var selector:Number = rand(3);
-	//Choose 1 of 3 variations
-	if(selector == 0) outputText("Tamani smiles and shifts her leather straps, pulling one into the puffy gash that is her vagina.  She groans out loud, sliding the studded leather band into her outer lips and sawing it along her clit.  Her whole body blushes as she pulls it free, running a fingertip up the now wet strip of leather, \"<i>Mmm, can't you see how much my pussy needs a man inside it?  Be a good husband and fuck Tamani full!  You know you want to.</i>\"\n\n", false);
-	if(selector == 1) outputText("Tamani saunters up to you, sliding her fingers down to each side of her pussy and spreading them.  Your eyes are drawn to her honeyed tunnel, unable to look away she gets closer.  She whispers, \"<i>Your cock knows what it needs.  Just be a good husband and obey your dick, it KNOWS how badly you need mistress's pussy.</i>\"\n\n", false);
-	if(selector == 2) outputText("Tamani turns around and bends down, pressing her hands into the dirt as she kicks her legs apart.  Your stare open-mouthed at her bouncy ass-cheeks and the tantalizingly wet entrance of her slit.  She smirks and offers, \"<i>You've cum so many times inside me, why resist when you can give in and feel that pleasure again today?  Come on husband, don't make Tamani beg...</i>\"\n\n", false);
-	
-	//REACTIONS
-	//LOW HYPNO VALUE:
-	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 5) {
-		selector = rand(3);
-		if(selector == 0) outputText("You reluctantly pull your stare away from the heavenly entrance between her legs.  There's an urge to walk over to her and plunge yourself inside her over and over, but you dismiss it.", false);
-		if(selector == 1) outputText("You find it hard to pull your gaze from her inviting twat, but you manage.  You shake your head, clearing away thoughts of fertilizing your wife.  Her rhetoric must be getting to you.", false);
-		if(selector == 2) outputText("No matter the case, her actions shifted a fair bit of your blood-flow to your groin.", false);
-	}
-	//MEDIUM HYPNO VALUE:
-	else if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) {
-		selector = rand(2);
-		if(selector == 0) {
-			outputText("With effort you manage to wrench your eyes away from the inviting folds of Tamani's vagina.  ", false);
-			if(player.totalCocks() > 1) outputText("Each of y", false);
-			else outputText("Y", false);
-			outputText("our " + multiCockDescriptLight(), false);
-			if(player.lust > 80) outputText(" drips pre-cum", false);
-			else if(player.lust > 40) outputText(" grows harder", false);
-			else outputText(" hardens", false);
-			outputText(" from the sexual sight, and you feel a compulsion to rush to your wife and take her on the spot.  Obviously she's not really your wife, but after so many fuckings it kind of makes sense to think of her that way.", false);
-			if(player.lust < 70) outputText("  Still, you don't want to fuck her right now!", false);
-		}
-		else {
-			outputText("Struggling, you pull your eyes back into your head and away from Tamani's gorgeous slit.  You shudder, feeling ", false);
-			if(player.totalCocks () > 1) outputText("each of ", false);
-			outputText("your " + multiCockDescriptLight(), false);
-			if(player.lust <= 41) outputText(" thicken perceptibly", false);
-			else if(player.lust <= 81) outputText(" twitch eagerly", false);
-			else outputText("drip pre-cum", false);
-			outputText(", responding to the overly sensual goblin's body.  You start to approach her, but stop yourself, realizing you were about to pick up your wife and fuck her on the spot.  You know she's not really your wife, but you have a hard time thinking of her as anything else, save for maybe your mistress.", false);
-			if(player.lust < 70) outputText("  Regardless, you're resolute in your desire not to fuck her right now!", false);
-		}
-	}
-	//HIGH HYPNO VALUE
-	else {
-		selector = rand(2);
-		if(selector == 0) {
-			outputText("You barely manage to step yourself from lunging forward to bury your mouth between your mistress's legs.  Hard and trembling between your legs, ", false);
-			if(player.totalCocks() > 1) outputText("each of ", false);
-			outputText("your " + multiCockDescriptLight() + " aches with need.  You battle with the compulsion to kneel before your short, stacked mistress and perform your duties as her breeder husband.", false);
-		}
-		else {
-			outputText("You wrench your gaze from the juicy mound before you with great difficulty.  The desire to submit to your wife and fuck her on the spot rages through your body, melting your resistance into liquid lust and pooling it in your groin.  ", false);
-			if(player.totalCocks() > 1) outputText("Each of y", false);
-			else outputText("Y", false);
-			outputText("our " + multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
-		}
-	}
-	dynStats("lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));
-	combatRoundOver();
-}
 
 //[GIVE IN TO TAMANI'S HYPNO SHENANIGANS]
-public function getRapedByTamaniYouHypnoSlut():void {
+internal function getRapedByTamaniYouHypnoSlut():void {
 	spriteSelect(56);
 	outputText("", true);
 	//Find a dick that fits
@@ -885,7 +838,7 @@ public function getRapedByTamaniYouHypnoSlut():void {
 	else doNext(13);
 }
 
-public function tamaniAnalShits():void {
+internal function tamaniAnalShits():void {
 	spriteSelect(56);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	outputText("", true);
@@ -905,7 +858,7 @@ public function tamaniAnalShits():void {
 	cleanupAfterCombat();
 }
 
-public function tamaniBeaten():void {
+internal function tamaniBeaten():void {
 	clearOutput();
 	outputText("With the goblin defeated, you're finally free to tend to your body's true desires, even if they may be different than the ones the goblin was intent on stoking.  You shed your [armor] like a second skin, shrugging out of the offending garments with ease.  With your nude form revealed, Tamani ");
 	if(player.hasCock()) outputText("licks her lips in anticipation, eyes locked on [eachCock]");
@@ -941,7 +894,7 @@ public function tamaniBeaten():void {
 }
 	
 //Butts McGee Facesitting Tamaniz
-public function preferTamaniFemdom():void {
+private function preferTamaniFemdom():void {
 	clearOutput();
 	//Tamani Facesit
 	//===========Tamani============
@@ -953,7 +906,7 @@ public function preferTamaniFemdom():void {
 	addButton(1,"Refuse",declineZeFacesits);
 }
 //(("Refuse" choice))
-public function declineZeFacesits():void {
+private function declineZeFacesits():void {
 	clearOutput();
 	outputText("You tell her you're not interested.");
 	outputText("\n\nThe curvy goblin kicks you with a snarl, making you instinctively grab at one [leg] and hop around on the other - until she kicks it too, knocking you down.  \"<i>Fine, bitch. Have it your way. But if I find you taking <b>my</b> cocks again, you're going to be in trouble!</i>\"  She darts off before you can get a word in edgewise, leaving you alone.");
@@ -962,7 +915,7 @@ public function declineZeFacesits():void {
 }
 
 //(("Accept" choice))
-public function acceptTamaniFacesits():void {
+private function acceptTamaniFacesits():void {
 	clearOutput();
 	outputText("You eye the goblin's wide hips again before you nod, anticipating the idea.");
 	outputText("\n\nTamani's impish smirk blooms into a wide grin, and the little goblin gently shoves you.  \"<i>Lay down, then!</i>\" she tells you.  You decide to comply, reaching for your [armor] - but she stops your hand.  \"<i>No need to strip, skank. Just lay down,</i>\" she tells you, pushing again.  You shrug and comply with her request, finding a comfortable spot on the ground to lay on, and then look over at her.");
@@ -983,4 +936,6 @@ public function acceptTamaniFacesits():void {
 	outputText("\n\nYou withdraw your fingers from her ass and let go of her clit, and the little green fuck-doll topples over, falling into the dirt and muttering something incoherently. You sit up and look, admiring the sight of her fat green ass sticking up in the air with her juices still dripping down her thighs, and decide to walk away from the clearly unconscious goblin.");
 	dynStats("lus", 20+player.lib/20);
 	doNext(13);
+}
+}
 }

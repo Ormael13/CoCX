@@ -1228,10 +1228,10 @@ private function oldbarTelAdre():void {
 		else misc1Name = "Niamh";
 		misc1 = 3524;
 	}
-	var hel:Number = 0;
+	var hel:Function = null;
 	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && (!kGAMECLASS.followerHel() || flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1)) {
 		edryn.helAppearance();
-		hel = 3355;
+		hel = edryn.approachHelAtZeBitch;
 	}
 	//Everyone's favorite Vala!
 	var vala:Number = 0;

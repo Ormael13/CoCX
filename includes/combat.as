@@ -863,32 +863,6 @@ public function doCombat(eventNum:Number):void
 			enemyAI();
 			return;
 	}
-			//Tentacle physical attack
-	if(eventNum == 5072) {
-			tentaclePhysicalAttack();
-			return;
-	}
-			//Tentacle entwine attack
-	if(eventNum == 5073) {
-			tentacleEntwine();
-			return;
-	}
-			//Tentacle rapes you
-	if(eventNum == 5074) {
-			outputText("", true);
-			tentacleLossRape();
-			return;
-	}
-			//Tentacle Bad End
-	if(eventNum == 5075) {
-			futaTentacleBadEnd();
-			return;
-	}
-			//Tentacle Bad End2
-	if(eventNum == 5076) {
-			futaTentacleEpilogue();
-			return;
-	}
 			//Tentacle Struggle
 	if(eventNum == 5077) {
 			if (monster.hasStatusAffect("Minotaur Entangled") >= 0) {
@@ -980,11 +954,6 @@ public function doCombat(eventNum:Number):void
 				}
 			}
 			enemyAI();
-	}
-			//Tentacle gets raped
-	if(eventNum == 5078) {
-			tentacleVictoryRape();
-			return;
 	}
 			//Fire bow - Requires 25 fatigue
 	if(eventNum == 5079) {

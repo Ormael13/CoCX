@@ -1,4 +1,19 @@
-﻿//New Status:
+﻿package classes.Scenes.Areas.Forest{
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+import classes.Appearance;
+import classes.CockTypesEnum;
+public class TamainsDaughtersScene extends BaseContent {
+
+	public function TamainsDaughtersScene()
+	{
+	}
+
+//New Status:
 //+Tamani's Husband – (Still need too big loss scene and centaur version)
 //--Every point in it adds to lust gain per turn vs Tamani or Tamani/wdaughters
 //--Slight alteration to some scenes
@@ -45,7 +60,7 @@
 //21- 40 DD
 //41 –60 E
 //30+ - F mother fucker!
-public function tdCup():String {
+private function tdCup():String {
 	var gobs:Number = player.statusAffectv2("Tamani");
 	if(gobs < 20) return "C";
 	else if(gobs < 30) return "D";
@@ -67,7 +82,7 @@ public function encounterTamanisDaughters():void {
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight",2479, "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight",createCallBackFunction(fightTamanisDaughters,true), "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
 		return;
 	}
 	outputText("While roaming along, you find your path ahead blocked by ", false);
@@ -88,7 +103,7 @@ public function encounterTamanisDaughters():void {
 }
 
 //[Play Dumb]
-public function playDumbToTamanisDaughters():void {
+private function playDumbToTamanisDaughters():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("You shrug and ask, \"<i>What exactly is it you want again?  I'm not sure you have the right " + player.mf("guy","person") + ".</i>\"\n\n", false);
@@ -110,7 +125,7 @@ public function playDumbToTamanisDaughters():void {
 }
 
 //[Fight Them]
-public function fightTamanisDaughters(tamani:Boolean = false):void {
+private function fightTamanisDaughters(tamani:Boolean = false):void {
 	outputText("", true);
 	
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n", false);
@@ -135,7 +150,7 @@ public function fightTamanisDaughters(tamani:Boolean = false):void {
 //(Combat is 1 attack per 10 girls + 1x Tamani attack)
 
 //[Fuck them]
-public function fuckYoDaughtersHomie():void {
+private function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
@@ -316,7 +331,7 @@ public function fuckYoDaughtersHomie():void {
 }
 
 //[Let them]
-public function legTamanisDaughtersRAEPYou():void {
+private function legTamanisDaughtersRAEPYou():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
@@ -402,7 +417,7 @@ public function legTamanisDaughtersRAEPYou():void {
 			//increase hypno value
 			flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 			//preggo up tamani
-			tamaniKnockUp();
+			kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
 		}
 		//NO TAMANI:  
 		else {
@@ -656,7 +671,7 @@ public function legTamanisDaughtersRAEPYou():void {
 
 			outputText("Your mistress steps away, swaying her more-than ample hips from side to side as she saunters off.  You shake your head, feeling a little out of sorts, but before get a chance to puzzle it out, the exhaustion of the encounter overwhelms you, blacking you out.", false);
 			//knock up tamani chance
-			tamaniKnockUp();
+			kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
 			//increase hypno value
 			flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 		}
@@ -669,7 +684,7 @@ public function legTamanisDaughtersRAEPYou():void {
 }
 
 //[Lose Combat, Get Your Dick DRAINED]
-public function tamaniDaughtersCombatLossDrain():void {
+private function tamaniDaughtersCombatLossDrain():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	outputText("", true);
@@ -808,7 +823,7 @@ public function tamaniDaughtersCombatLossDrain():void {
 	dynStats("str", -.5,"int", -.5, "lib", 1, "lus=", 0, "cor", 1);
 }
 
-public function tamaniDaughtersBadEndChoice():void {
+private function tamaniDaughtersBadEndChoice():void {
 	spriteSelect(57);
 	outputText("The next morning your unfocused eyes blink open, and you find yourself in the same situation as before.  Thankfully your orgasm has been allowed to end, though you still feel dopey and unfocused from whatever is flowing into you.  You manage to twist your head around to get a better look at the situation and discover a pair of IV's lodged in your arms.  Twisting your body, you realize you can still feel the drug-enema tube lodged in your " + assholeDescript() + ".  Oddly, it's hard to feel worried or concerned about the situation.\n\n", false);
 	
@@ -820,7 +835,7 @@ public function tamaniDaughtersBadEndChoice():void {
 	simpleChoices("Yes",tamaniDaughtersYesBadEndMePlease,"No",tamaniDaughtersDeclineBadEnd,"Individual",tamanisDaughtersFillIndividuallyBADEND,"",0,"",0);
 }
 //[Yes]
-public function tamaniDaughtersYesBadEndMePlease():void {
+private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your " + multiCockDescriptLight() + " spew", false);
@@ -833,7 +848,7 @@ public function tamaniDaughtersYesBadEndMePlease():void {
 }
 
 //[NO]
-public function tamaniDaughtersDeclineBadEnd():void {
+private function tamaniDaughtersDeclineBadEnd():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Seriously!?</i>\" exclaims the pregnant slut, \"<i>What kind of person wouldn't want to cum all the time?  Fuck, just the idea of it is making me drip!</i>\"\n\n", false);
@@ -846,7 +861,7 @@ public function tamaniDaughtersDeclineBadEnd():void {
 	cleanupAfterCombat();
 }
 //[Rather Fill Individually]
-public function tamanisDaughtersFillIndividuallyBADEND():void {
+private function tamanisDaughtersFillIndividuallyBADEND():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Really?</i>\" asks the pregnant goblin before she exclaims, \"<i>You do love us!  Oh Dad, once mom comes home will you fuck all of us?  I want to feel you make love to my drippy, pregnant pussy while she watches!</i>\"\n\n", false);
@@ -871,7 +886,7 @@ public function tamanisDaughtersFillIndividuallyBADEND():void {
 }
 
 //[Lose to Daughters With Tamani There]
-public function loseToDaughtersWithTamaniThere():void {
+private function loseToDaughtersWithTamaniThere():void {
 	spriteSelect(57);
 	outputText("", true);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
@@ -971,7 +986,7 @@ public function loseToDaughtersWithTamaniThere():void {
 	}
 	//Chance of tamani pregnancy, chance of daughter preggers
 	knockUpDaughters();
-	tamaniKnockUp();
+	kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "lus=", 0, "cor", 1);
@@ -980,7 +995,7 @@ public function loseToDaughtersWithTamaniThere():void {
 }
 
 
-public function knockUpDaughters():void {
+private function knockUpDaughters():void {
 	//Already preggers
 	if(flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
 		
@@ -1003,7 +1018,7 @@ public function knockUpDaughters():void {
 	}
 }
 
-public function combatWinAgainstDaughters():void {
+internal function combatWinAgainstDaughters():void {
 	spriteSelect(57);
 	if(monster.HP < 1) {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.", true);
@@ -1026,12 +1041,12 @@ public function combatWinAgainstDaughters():void {
 	}
 }
 
-public function loseToDaughters():void {
+internal function loseToDaughters():void {
 	spriteSelect(57);
 	if(player.lust > 99) {
 		//worms r gross mmmmkay?
 		if(player.hasStatusAffect("infested") >= 0) {
-			infestOrgasm();
+			kGAMECLASS.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
 			dynStats("lus=", 0);
 		}
@@ -1071,4 +1086,5 @@ public function loseToDaughters():void {
 		}
 	}
 }
-
+}
+}

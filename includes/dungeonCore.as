@@ -4,7 +4,7 @@
 	var text1:String = "";
 	var choice2:Number = 0;
 	var text2:String = "";
-	var choice3:Number = 0;
+	var choice3:* = 0;
 	var text3:String = "";
 	var choice4:Number = 0;
 	var text4:String = "";
@@ -766,13 +766,13 @@
 			if(flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] > 0) {
 				outputText("\n\n<b>Your attention is immediately drawn to Essrayle...</b>");
 				menu();
-				addButton(0,"Next",essyWitchVictory);
+				addButton(0,"Next",forest.essrayle.essyWitchVictory);
 				flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] = 1;
 				return;
 			}
 			outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
 			text3 = "Essrayle";
-			choice3 = 11162;
+			choice3 = forest.essrayle.approachTrappedEssy;
 		}
 		text1 = "North";
 		choice1 = 11139;

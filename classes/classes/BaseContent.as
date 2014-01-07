@@ -313,6 +313,10 @@
 		protected  function buttDescript():String {
 			return kGAMECLASS.buttDescript();
 		}
+
+		protected function assholeOrPussy():String {
+			return kGAMECLASS.assholeOrPussy();
+		}
 		
 		protected  function eButtDescript():String {
 			return kGAMECLASS.eButtDescript();

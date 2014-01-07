@@ -5,7 +5,8 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+	import classes.Scenes.Areas.Forest.Tamani;
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -93,10 +94,6 @@
 			}
 		}
 		protected function goblinTeaseAttack():void {
-			if(short == "Tamani" && flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
-				game.tamaniHypnoTease();
-				return;
-			}
 			var det:Number = rand(3);
 			if(det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
 			if(det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She caresses her snatch and gives you a come hither look.", false);

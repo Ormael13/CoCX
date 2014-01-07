@@ -9,7 +9,6 @@ public function doEvent(eventNo:Number):void
 	var temp5:Number = 0;
 	var temp6:Number = 0;
 	var temp7:Number = 0;
-	var temp8:Number = 0;
 	//New game gooooooo!
 	if (eventNo == 2000)
 	{
@@ -292,7 +291,7 @@ public function doEvent(eventNo:Number):void
 		if (player.cor > 50)
 		{
 			outputText("Do you joyfully submit or fight back?\n\n", false);
-			simpleChoices("Fight", 2080, "Submit", 5074, "", 0, "", 0, "", 0);
+			simpleChoices("Fight", 2080, "Submit", forest.tentacleBeastScene.tentacleLossRape, "", 0, "", 0, "", 0);
 			return;
 		}
 		startCombat(new TentacleBeast());
@@ -2226,10 +2225,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.giveAmilySomePants();
 	}
-	else if (eventNo == 2479)
-	{
-		fightTamanisDaughters(true);
-	}
 	else if (eventNo == 2480)
 	{
 		rapeOozeWithMilk();
@@ -2847,14 +2842,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.lottie.lottieFuck();
 	}
-	else if (eventNo == 3140)
-	{
-		telAdre.lottie.lottieRepeatDoggieStyle();
-	}
-	else if (eventNo == 3141)
-	{
-		telAdre.lottie.lottieRepeatWalkies();
-	}
 	else if (eventNo == 3142)
 	{
 		telAdre.lottie.lottieRepeatCowGirl();
@@ -2862,14 +2849,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3143)
 	{
 		telAdre.lottie.lottieRepeatQuickie();
-	}
-	else if (eventNo == 3144)
-	{
-		telAdre.lottie.lottieRepeatThreesome();
-	}
-	else if (eventNo == 3145)
-	{
-		telAdre.lottie.lottieRepeatSUPERNEATORARES();
 	}
 	else if (eventNo == 3146)
 	{
@@ -3218,26 +3197,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3354)
 	{
 		suckleTacularKats();
-	}
-	else if (eventNo == 3355)
-	{
-		telAdre.edryn.approachHelAtZeBitch();
-	}
-	else if (eventNo == 3357)
-	{
-		telAdre.edryn.helEdrynThreeSomeStartYerEngines();
-	}
-	else if (eventNo == 3359)
-	{
-		telAdre.lottie.tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK();
-	}
-	else if (eventNo == 3360)
-	{
-		tamaniAnalShits();
-	}
-	else if (eventNo == 3367)
-	{
-		telAdre.lottie.ifrisAndLottieGetsNTRedLiftingWeights();
 	}
 	else if (eventNo == 3373)
 	{
@@ -3763,10 +3722,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3805)
 	{
 		thatllDoTurkey();
-	}
-	else if (eventNo == 3837)
-	{
-		tamaniBeaten();
 	}
 	else if (eventNo == 3840)
 	{

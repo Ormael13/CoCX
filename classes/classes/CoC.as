@@ -163,9 +163,7 @@
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
-		include "../../includes/essrayle.as";
 		include "../../includes/exgartuan.as";
-		include "../../includes/faerie.as";
 		include "../../includes/fapArena.as";
 		include "../../includes/fera.as";
 		include "../../includes/fuckingTree.as";
@@ -217,10 +215,7 @@
 		include "../../includes/shouldraFollower.as";
 		include "../../includes/swordInStone.as";
 		include "../../includes/symGear.as";
-		include "../../includes/tamani.as";
 		include "../../includes/tamaniDildo.as";
-		include "../../includes/tamanisDaughters.as";
-		include "../../includes/tentacle.as";
 		include "../../includes/thanksgiving.as";
 		include "../../includes/urta.as";
 		include "../../includes/urtaPregs.as";

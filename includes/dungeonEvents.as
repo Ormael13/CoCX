@@ -1368,10 +1368,6 @@ public function doDungeon(eventNo:Number):void {
 		friendlyCumWitchBlessing();
 		return;
 	}
-	if(eventNo == 11162) {
-		approachTrappedEssy();
-		return;
-	}
 	if(eventNo == 11163) {
 		fuckDatSphinx();
 		return;

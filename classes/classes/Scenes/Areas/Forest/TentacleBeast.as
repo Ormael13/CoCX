@@ -14,7 +14,44 @@
 
 	public class TentacleBeast extends Monster
 	{
-
+		private function tentaclePhysicalAttack():void {
+			outputText("The shambling horror throws its tentacles at you with a murderous force.\n", false);
+			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			if(temp < 0) temp = 0;
+			//Miss
+			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.", false);
+			}
+			//Hit
+			else {
+				temp = player.takeDamage(temp);
+				outputText("The tentacles crash upon your body mercilessly for " + temp + " damage.", false);
+			}
+			combatRoundOver();
+		}
+		private function tentacleEntwine():void {
+			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n", false);
+			//Not Trapped yet
+			if(player.hasStatusAffect("TentacleBind") < 0) {
+				//Success
+				if(int(Math.random()*(((player.spe)/2))) > 15 || (player.hasPerk("Evade") >= 0 && int(Math.random()*(((player.spe)/2))) > 15)) {
+					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n", false);
+				}
+				//Fail
+				else {
+					outputText("While you attempt to avoid the onslaught of pseudopods, one catches you around your " + player.foot() + " and drags you to the ground. You attempt to reach for it to pull it off only to have all of the other tentacles grab you in various places and immobilize you in the air. You are trapped and helpless!!!\n\n", false);
+					//Male/Herm Version:
+					if(player.hasCock()) outputText("The creature, having immobilized you, coils a long tendril about your penis. You shudder as the creature begins stroking your cock like a maid at a dairy farm in an attempt to provoke a response from you. Unable to resist, your " + player.cockDescript(0) + " easily becomes erect, signaling the creature you are responsive to harsher stimulation.\n", false);
+					//Female Version:
+					else if(player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your " + player.clitDescript() + ".\n", false);
+					//Genderless
+					else outputText("The creature quickly positions a long tentacle against your " + game.assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
+					game.dynStats("lus", (8+player.sens/20));
+					player.createStatusAffect("TentacleBind",0,0,0,0);
+				}
+			}
+			combatRoundOver();
+		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -30,7 +67,7 @@
 			else {
 				if(!hpVictory && player.gender > 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					game.doYesNo(5078,game.cleanupAfterCombat);
+					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}
@@ -46,7 +83,7 @@
 					outputText("...and make it into the nearby tunnel.  ");
 					game.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					game.eventParser(5074);
+					game.forest.tentacleBeastScene.tentacleLossRape();
 			} else {
 				outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
 				if(hasStatusAffect("PhyllaFight") >= 0) {
@@ -54,7 +91,7 @@
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
 					game.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					doNext(5074);
+					doNext(game.forest.tentacleBeastScene.tentacleLossRape);
 			}
 		}
 
@@ -82,7 +119,7 @@
 			init11Armor("rubbery skin",1);
 			init12Combat(350,10,0.8,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(6,rand(15)+5);
-			initX_Specials(5072,5073,5072);
+			initX_Specials(tentaclePhysicalAttack,tentacleEntwine,tentaclePhysicalAttack);
 
 
 			initX_Tail(TAIL_TYPE_DEMONIC);

@@ -1231,9 +1231,9 @@ private function lottieExercise():void {
 private function lottieWeights():void {
 	spriteSelect(36);
 	outputText("", true);
-	var NTR:Number = 0;
+	var NTR:Function = null;
 	if(lottieMorale() <= 30 && flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] > 0 && player.str >= 75 && player.tone >= 60 && player.cumQ() >= 1000)
-		NTR = 3367;
+		NTR = ifrisAndLottieGetsNTRedLiftingWeights;
 	//[If Figure 0 – 70]
 	if(lottieTone() <= 70) {
 		outputText("Lottie looks at you nervously as you tell her you've decided on doing a little lifting today. Obviously not having that in mind, she takes your advice regardless and trots over to the weights, met with the gaze of several other, far more muscular members. Nervously walking along the wall of equipment, she picks up one of the smallest weights and begins lifting as hard as she can, audibly grunting as she manages a few reps. Not wanting to be outdone, you follow her and walk over to the weight gear – many of the other lifters are already snickering as you stand near the smaller weights. Lottie looks over to you nervously, not wanting to embarrass herself. You'd prefer not to be embarrassed either. Should you pick one of the larger weights and show off your skills, or ignore the lifters and train with Lottie?", false);
@@ -1575,10 +1575,10 @@ public function hamSammitchTimeBIATCH():void {
 
 public function lottieFuck():void {
 	spriteSelect(36);
-	var tentacle:Number = 0;
+	var tentacle:Function = null;
 	var thirtyMinute:Number = 0;
 	if(silly() && player.hasCock()) thirtyMinute = 3416;
-	if(player.tentacleCocks() > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 2) tentacle = 3359;
+	if(player.tentacleCocks() > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 2) tentacle = tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK;
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("", true);
@@ -1588,14 +1588,14 @@ public function lottieFuck():void {
 		
 		outputText("You turn Lottie around to face you, telling her you've decided you're going to take her for a vigorous work out. She only pants with anticipation.", false);
 		//[Anal][Oral] – [Doggystyle][Walkies][Threesome][Netorare]
-		var dog:Number = 0;
-		var walk:Number = 0;
-		var three:Number = 0;
-		var neatrares:Number = 0;
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00310] > 0) dog = 3140;
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00311] > 0) walk = 3141;
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] > 0) three = 3144;
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] > 0) neatrares = 3145;
+		var dog:Function = null;
+		var walk:Function = null;
+		var three:Function = null;
+		var neatrares:Function = null;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00310] > 0) dog = lottieRepeatDoggieStyle;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00311] > 0) walk = lottieRepeatWalkies;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] > 0) three = lottieRepeatThreesome;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] > 0) neatrares = lottieRepeatSUPERNEATORARES;
 		
 		choices("Anal",analLottieMilkshake,"Oral",getSuckedOffByAHamSandwich,"Tentacle",tentacle,"",0,"",0,"Doggystyle",dog,"Walkies",walk,"Threesome",three,"Netorare",neatrares,"30Minute",thirtyMinute);
 	}

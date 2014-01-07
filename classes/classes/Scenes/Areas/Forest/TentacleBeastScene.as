@@ -1,11 +1,24 @@
-﻿//Tentacle Encounter - beware legalese!
+﻿package classes.Scenes.Areas.Forest{
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+public class TentacleBeastScene extends BaseContent{
+
+
+	public function TentacleBeastScene()
+	{
+	}
+
+//Tentacle Encounter - beware legalese!
 /*
  LICENSE 
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him
 to this project permission to alter the text to conform with current and new game
-public functions, only. Dxasmodeus grants exclusive rights to Fenoxo to add upon events to meet with 
+private functions, only. Dxasmodeus grants exclusive rights to Fenoxo to add upon events to meet with 
 suggestions made by consumers as to new content. Dxasmodeus retains exclusive rights to alter 
 or change the core contents of the events and no other developer may alter, change or use the events without
 permission from dxasmodeus except where otherwise specified in this license. Fenoxo agrees to 
@@ -40,47 +53,9 @@ ENFORCEMENT
 
 This license supercedes all previous licenses and remains in force.
 */
-public function tentaclePhysicalAttack():void {
-	outputText("The shambling horror throws its tentacles at you with a murderous force.\n", false);
-	temp = int((monster.str + monster.weaponAttack) - Math.random()*(player.tou) - player.armorDef);
-	if(temp < 0) temp = 0;
-	//Miss
-	if(temp == 0 || (player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80)) {
-		outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.", false);
-	}
-	//Hit
-	else {
-		temp = takeDamage(temp);
-		outputText("The tentacles crash upon your body mercilessly for " + temp + " damage.", false);
-	}
-	combatRoundOver();
-}
-public function tentacleEntwine():void {
-	outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n", false);
-	//Not Trapped yet
-	if(player.hasStatusAffect("TentacleBind") < 0) {
-		//Success
-		if(int(Math.random()*(((player.spe)/2))) > 15 || (player.hasPerk("Evade") >= 0 && int(Math.random()*(((player.spe)/2))) > 15)) {
-			outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n", false);
-		}
-		//Fail
-		else {
-			outputText("While you attempt to avoid the onslaught of pseudopods, one catches you around your " + player.foot() + " and drags you to the ground. You attempt to reach for it to pull it off only to have all of the other tentacles grab you in various places and immobilize you in the air. You are trapped and helpless!!!\n\n", false);
-			//Male/Herm Version:
-			if(player.hasCock()) outputText("The creature, having immobilized you, coils a long tendril about your penis. You shudder as the creature begins stroking your cock like a maid at a dairy farm in an attempt to provoke a response from you. Unable to resist, your " + cockDescript(0) + " easily becomes erect, signaling the creature you are responsive to harsher stimulation.\n", false);
-			//Female Version:
-			else if(player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your " + clitDescript() + ".\n", false);
-			//Genderless
-			else outputText("The creature quickly positions a long tentacle against your " + assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
-			dynStats("lus", (8+player.sens/20));
-			player.createStatusAffect("TentacleBind",0,0,0,0);
-		}
-	}
-	combatRoundOver();
-}
 
 
-public function tentacleEntice():void {
+private function tentacleEntice():void {
 	//Spoiler for Entice Attack Male/Herm: 
 	if(player.gender == 1 || player.gender == 3) {
 		if(rand(2) == 0) {
@@ -106,10 +81,10 @@ public function tentacleEntice():void {
 			outputText("You begin shaking your hips and grabbing your " + allBreastsDescript() + " to distract the creature. However, the near-miss from the tentacle it attempted to swat you with convinces you of its desire to beat your ass, rather than fuck it.\n\n", false);
 		}
 	}
-	combatRoundOver();
+	kGAMECLASS.combatRoundOver();
 }
 
-public function tentacleVictoryRape():void {
+internal function tentacleVictoryRape():void {
 	outputText("", true);
 	spriteSelect(100);
 	//Male/Herm
@@ -148,7 +123,7 @@ public function tentacleVictoryRape():void {
 
 //Spoiler for Bad End-Tentacle Monster: 
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
-public function futaTentacleBadEnd():void {
+private function futaTentacleBadEnd():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n", false);
@@ -158,13 +133,13 @@ public function futaTentacleBadEnd():void {
 	outputText("You pass out, only to awaken briefly to the constant sensation of semen flowing out of your body.  Were it not for the tentacle force-feeding you, you would weakly moan with pleasure at the feeling of constant orgasm.  You slip in and out of consciousness countless times. When lucid, you can only enjoy the fact you are STILL blowing a load.\n\n", false);
 	outputText("However, you become lucid once and notice that you are no longer cumming. In fact, you feel a harsh warmth all over your body. Blinding light pierces you despite having your eyes closed. You also notice the absence of the tentacle from both your mouth and your ass. You also hear voices, yet you cannot make it out. A sharp, acrid smell invades your nostrils, rousing you to full wakefullness. You feel terribly weak and the light still prevents you from opening your eyes. However, for the most part, you are awake and cognizant of your environment.", false);
 	//Goto rape #2
-	doNext(5076);
+	doNext(futaTentacleEpilogue);
 }
-public function futaTentacleEpilogue():void {
+private function futaTentacleEpilogue():void {
 	outputText("", true);
 	spriteSelect(100);
 	//[Met Giacomo at least once]
-	if(giacomo > 0) {
+	if(kGAMECLASS.giacomo > 0) {
 		outputText("\"<i>Well, well, well. You aren't a total loss, I see.</i>\", says a sharp, masculine voice.\n\n", false);
 		outputText("While the fog of your brain has yet to lift completely, you recognize the voice to be the seedy merchant, Giacomo.\n\n", false);
 		outputText("\"<i>It is a good thing I happened to be out and about today.</i>\", Giacomo says. \"<i>I was testing out a new weapon to sell and I happened to see one of those nasty tentacle beasties. I had no idea they captured prey! Hell, you must have spent a few months inside that thing feeding it!</i>\"\n\n", false);
@@ -186,6 +161,7 @@ public function futaTentacleEpilogue():void {
 }
 
 public function tentacleLossRape():void {
+	clearOutput();
 	spriteSelect(100);
 	//Genderless madness
 	if(player.gender == 0) {
@@ -486,7 +462,7 @@ public function tentacleLossRape():void {
 		if(player.cockTotal() > 1) outputText(multiCockDescriptLight() + " immediately become fully erect and leak pre-cum liberally from their tips.  ", false);
 		else outputText("member immediately becomes fully erect and pre-cum leaks liberally from your tip.  ", false);
 		outputText("  " + num2Text((player.totalNipples())) + " thorny tentacles pierce your nipples, and you feel as if someone shot acid into your tits, which immediately begin to swell.", false);
-		growTits(1,player.breastRows.length, false, 2);
+		player.growTits(1,player.breastRows.length, false, 2);
 		outputText("\n\nRealizing what is about to happen, you try to struggle. The beast responds by slamming you to the ground a few times, stunning you. In your daze you see a monstrous, hollow tentacle poised over your ", false);
 		if(player.cockTotal() > 1) outputText("furious cocks.  ", false);
 		else outputText("furious cock.  ", false);
@@ -500,7 +476,7 @@ public function tentacleLossRape():void {
 
 
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
-public function centaurGenderlessRetardation():void {
+private function centaurGenderlessRetardation():void {
 	outputText("", true);
 	spriteSelect(100);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
@@ -561,13 +537,13 @@ public function centaurGenderlessRetardation():void {
 
 		outputText("\"<i>Q.E.D., MOTHERFUCKER!</i>\" it shouts, gesticulating in the air wildly with its tentacles as it turns and clumps back into the dense brush.", false);
 	}
-	takeDamage(5);
+	player.takeDamage(5);
 	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
 
 //Naga v. Tentacle Monster:
-public function genderlessHilarityForNagaKenDolls():void {
+private function genderlessHilarityForNagaKenDolls():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n", false);
@@ -581,13 +557,13 @@ public function genderlessHilarityForNagaKenDolls():void {
 	outputText("Sensing an opportunity to get out of this situation, you respond with your own series of hisses and hand gestures as if to say you have no idea what the beast wants.  It responds with a sigh and you're released from its grip, landing on the ground in a bit of a heap.\n\n", false);
 
 	outputText("\"<i>Fucking tourists.</i>\"  It slams its tentacles down in a brutal blow, knocking you out.", false);
-	takeDamage(15);
+	player.takeDamage(15);
 	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
 
 //Goo v. Tentacle Monster:
-public function tentacularGenderGooTimes():void {
+private function tentacularGenderGooTimes():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n", false);
@@ -614,4 +590,5 @@ public function tentacularGenderGooTimes():void {
 	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
-
+}
+}

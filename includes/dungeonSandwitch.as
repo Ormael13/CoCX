@@ -2298,7 +2298,7 @@ public function sandWitchMotherFriendlyMenu():void {
 
 public function slavesDiscussion():void {
 	menu();
-	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",askMotherToReleaseEssy);
+	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",forest.essrayle.askMotherToReleaseEssy);
 	if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves);
 }
 
@@ -2335,7 +2335,7 @@ public function sandMotherPOMenu():void {
 		addButton(5,"Get LaBova",takeLaBovaOrLactaid, false);
 		addButton(6,"Get Lactaid",takeLaBovaOrLactaid);
 	}
-	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",askMotherToReleaseEssy);
+	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",forest.essrayle.askMotherToReleaseEssy);
 	addButton(9,"Leave",eventParser,1);
 }
 

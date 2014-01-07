@@ -483,11 +483,11 @@ public function helAppearance():void {
 //\"<i>Hel</i>\" in Wet Bitch Menu (First Time)
 public function approachHelAtZeBitch():void {
 	outputText("", true);
-	var edryn:Number = 0;
+	var edryn:Function = null;
 	if(edrynBar() && player.cockThatFits(300) >= 0 && player.statusAffectv1("Edryn") >= 4)
-		edryn = 3357;
+		edryn = helEdrynThreeSomeStartYerEngines;
 	
-	if(edryn > 0 && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
+	if(edryn != null && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way.  \"<i>Well, fancy meeting you here, ", false);
 		if(player.femininity < 49) outputText("handsome", false);
 		else outputText("beautiful", false);
