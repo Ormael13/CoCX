@@ -2,6 +2,7 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 
 	use namespace kGAMECLASS;
@@ -959,7 +960,7 @@ package classes
 				if(spacingsB) outputText("  ");
 			}
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
-			if(display) {
+			if(display && stretched) {
 				//Virgins get different formatting
 				if(devirgined) {
 					//If no spaces after virgin loss
@@ -1274,6 +1275,155 @@ package classes
 		}
 		public function minotaurNeed():Boolean {
 			return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
+		}
+
+		public function clearStatuses(visibility:Boolean):void
+		{
+			while(hasStatusAffect("Web") >= 0) {
+				spe += statusAffectv1("Web");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("Web");
+			}
+			if(hasStatusAffect("Shielding") >= 0) removeStatusAffect("Shielding");
+			if(hasStatusAffect("Holli Constrict") >= 0) removeStatusAffect("Holli Constrict");
+			if(hasStatusAffect("lust stones") >= 0) removeStatusAffect("lust stones");
+			if(kGAMECLASS.monster.hasStatusAffect("sandstorm") >= 0) kGAMECLASS.monster.removeStatusAffect("sandstorm");
+			if(hasStatusAffect("Sealed") >= 0) {
+				removeStatusAffect("Sealed");
+			}
+			if(hasStatusAffect("Berzerking") >= 0) {
+				removeStatusAffect("Berzerking");
+				kGAMECLASS.applyArmorStats(armorName, false);
+				weaponAttack = kGAMECLASS.fixedDamage(weaponName);
+			}
+			if(kGAMECLASS.monster.hasStatusAffect("Tail Whip") >= 0) {
+				kGAMECLASS.monster.removeStatusAffect("Tail Whip");
+				kGAMECLASS.applyArmorStats(armorName, false);
+			}
+			if(hasStatusAffect("UBERWEB") >= 0) removeStatusAffect("UBERWEB");
+			if(hasStatusAffect("Drider Kiss") >= 0) removeStatusAffect("Drider Kiss");
+			if(hasStatusAffect("Web-Silence") >= 0) removeStatusAffect("Web-Silence");
+			if(hasStatusAffect("GooArmorSilence") >= 0) removeStatusAffect("GooArmorSilence");
+			if(hasStatusAffect("Bound") >= 0) removeStatusAffect("Bound");
+			if(hasStatusAffect("GooArmorBind") >= 0) removeStatusAffect("GooArmorBind");
+			if(hasStatusAffect("Whispered") >= 0) removeStatusAffect("Whispered");
+			if(hasStatusAffect("Akbal Speed") >= 0) {
+				kGAMECLASS.dynStats("spe", statusAffectv1("Akbal Speed") * -1);
+				removeStatusAffect("Akbal Speed");
+			}		
+			if(hasStatusAffect("Amily Venom") >= 0) {
+				kGAMECLASS.dynStats("str", statusAffectv1("Amily Venom"),"spe", statusAffectv2("Amily Venom"));
+				removeStatusAffect("Amily Venom");
+			}
+			while(hasStatusAffect("Blind") >= 0) {
+				removeStatusAffect("Blind");
+			}
+			if(hasStatusAffect("Sheila Oil") >= 0) {
+				removeStatusAffect("Sheila Oil");
+			}
+			if(kGAMECLASS.monster.hasStatusAffect("Twu Wuv") >= 0) {
+				inte += kGAMECLASS.monster.statusAffectv1("Twu Wuv");
+				kGAMECLASS.statScreenRefresh();
+				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
+				// inteDown.visible = false;
+				// inteUp.visible = true;		
+			}
+			if(hasStatusAffect("Naga Venom") >= 0) {
+				spe += statusAffectv1("Naga Venom");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				//stats(0,0,statusAffectv1("Naga Venom"),0,0,0,0,0);
+				removeStatusAffect("Naga Venom");
+			}
+			if(hasStatusAffect("TentacleBind") >= 0) removeStatusAffect("TentacleBind");
+			if(hasStatusAffect("Naga Bind") >= 0) removeStatusAffect("Naga Bind");
+			if(hasStatusAffect("Stone Lust") >= 0) {
+				removeStatusAffect("Stone Lust");
+			}
+			removeStatusAffect("FirstAttack");
+			if(hasStatusAffect("Temporary Heat") >= 0) removeStatusAffect("Temporary Heat");
+			if(hasStatusAffect("NoFlee") >= 0) removeStatusAffect("NoFlee");
+			if(hasStatusAffect("Poison") >= 0) removeStatusAffect("Poison");
+			if(hasStatusAffect("Isabella Stunned") >= 0) removeStatusAffect("Isabella Stunned");
+			if(hasStatusAffect("Stunned") >= 0) removeStatusAffect("Stunned");
+			if(hasStatusAffect("Confusion") >= 0) removeStatusAffect("Confusion");
+			if(hasStatusAffect("Throat Punch") >= 0) removeStatusAffect("Throat Punch");
+			if(hasStatusAffect("Kiss of Death") >= 0) removeStatusAffect("Kiss of Death");
+			if(hasStatusAffect("Acid Slap") >= 0) removeStatusAffect("Acid Slap");
+			if(hasStatusAffect("GooBind") >= 0) removeStatusAffect("GooBind");
+			if(hasStatusAffect("HarpyBind") >= 0) removeStatusAffect("HarpyBind");
+			if(hasStatusAffect("Called Shot") >= 0) {
+				spe += statusAffectv1("Called Shot");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speDown.visible = false;
+				// speUp.visible = true;
+				removeStatusAffect("Called Shot");
+			}
+			if(hasStatusAffect("DemonSeed") >= 0) {
+				removeStatusAffect("DemonSeed");
+			}
+			if(hasStatusAffect("paralyze venom") >= 0) {
+				str += statusAffects[hasStatusAffect("paralyze venom")].value1;
+				spe += statusAffects[hasStatusAffect("paralyze venom")].value2;
+				removeStatusAffect("paralyze venom");
+			}
+			if(hasStatusAffect("lust venom") >= 0) {
+				removeStatusAffect("lust venom");
+			}
+			if(hasStatusAffect("infestAttempted") >= 0) {
+				removeStatusAffect("infestAttempted");
+			}
+			if(hasStatusAffect("Might") >= 0) {
+				kGAMECLASS.dynStats("str", -statusAffectv1("Might"),"tou", -statusAffectv2("Might"));
+				removeStatusAffect("Might");
+			}
+			if(hasStatusAffect("Charge Weapon") >= 0) {
+				weaponAttack -= statusAffectv1("Charge Weapon");
+				removeStatusAffect("Charge Weapon");
+			}
+			if(hasStatusAffect("Disarmed") >= 0) {
+				removeStatusAffect("Disarmed");
+				if(weaponName == "fists") {
+					weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
+					weaponAttack = kGAMECLASS.fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+				}
+				else {
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = kGAMECLASS.lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+				}
+			}
+			if(hasStatusAffect("Anemone Venom") >= 0) {
+				str += statusAffectv1("Anemone Venom");
+				spe += statusAffectv2("Anemone Venom");
+				//Make sure nothing got out of bounds
+				kGAMECLASS.dynStats("cor", 0);
+		
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
+				// speUp.visible = true;
+				// strUp.visible = true;
+				removeStatusAffect("Anemone Venom");
+			}
+			if(hasStatusAffect("Gnoll Spear") >= 0) {
+				spe += statusAffectv1("Gnoll Spear");
+				//Make sure nothing got out of bounds
+				kGAMECLASS.dynStats("cor", 0);
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("Gnoll Spear");
+			}
+			if(hasStatusAffect("Basilisk Compulsion") >= 0) removeStatusAffect("Basilisk Compulsion");
+			if(hasStatusAffect("BasiliskSlow") >= 0) {
+				spe += statusAffectv1("BasiliskSlow");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("BasiliskSlow");
+			}
+			while(hasStatusAffect("Izma Bleed") >= 0) removeStatusAffect("Izma Bleed");
 		}
 	}
 }

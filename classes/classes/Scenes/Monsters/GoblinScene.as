@@ -250,7 +250,8 @@ package classes.Scenes.Monsters
 			if (player.hasStatusAffect("Feeder") >= 0) {
 				feeder = kGAMECLASS.giveGoblinAMilkMustache;
 			}
-			if (player.lust >= 33 && player.gender > 0 && fitsFuck + cuntFuck + tooBig + corruptTooBig + buttseks + feeder + spiderCondom + eggs > 0) {
+			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
 				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			}

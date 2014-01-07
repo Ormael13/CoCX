@@ -27,11 +27,11 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			outputText("", true);
 			//Load monster stats so we can display things like eye/hide color!
-			startCombat(new CorruptedDrider());
+			var drider:CorruptedDrider = new CorruptedDrider();
 			//First time
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277] == 0) {
 				outputText("While you explore the swamp, the sun's light withers and fades.  You look up through the mossy trees, but the sky is totally blocked from sight.  It's nearly as purple as twilight here, but you press on, brushing aside old spider-webs as you go.  Faintly, you can hear the sound of skittering legs moving around you, but with the way the damp air muffles everything, it's impossible to tell from which direction.\n\n", false);
-				outputText("You catch a blur of movement to the side, but by the time you turn for a better look, it's gone.  How odd.  Turning your eyes back to your path, you're shocked to see the form of a massive spider-woman in front of you.  She isn't just some humanoid spider-morph - she's a full-fledged drider, with a giant spider's body from the waist down and eight spindly legs supporting her.  Her eyes practically glow bright " + monster.skinTone + " while her venom-soaked lips twist into a cruel, confident smile.\n\n", false);
+				outputText("You catch a blur of movement to the side, but by the time you turn for a better look, it's gone.  How odd.  Turning your eyes back to your path, you're shocked to see the form of a massive spider-woman in front of you.  She isn't just some humanoid spider-morph - she's a full-fledged drider, with a giant spider's body from the waist down and eight spindly legs supporting her.  Her eyes practically glow bright " + drider.skinTone + " while her venom-soaked lips twist into a cruel, confident smile.\n\n", false);
 
 				outputText("\"<i>My, what lovely prey I seem to have found tonight,</i>\" croons the drider.\n\n", false);
 
@@ -53,6 +53,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and this one looks to be no different.", false);
 			}
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277]++;
+			startCombat(drider);
 		}
 
 

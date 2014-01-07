@@ -1,4 +1,13 @@
-﻿public function oasisEncounter():void {
+﻿package classes.Scenes.Areas.Desert {
+	import classes.GlobalFlags.kFLAGS;
+	import classes.BaseContent;
+	public class Oasis extends BaseContent{
+
+		public function Oasis()
+		{
+		}
+
+		public function oasisEncounter():void {
 	spriteSelect(46);
 	//Find oasis, sit there.
 	outputText("You wander in the desert for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small watering hole surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to drink, freshen up and paddle your " + player.legs() + " in the cooling water, so you settle into what little shade you can find for a quick break.\n\n", true);
@@ -8,10 +17,16 @@
 	outputText("The group is composed of roughly twenty tan skinned demons, mostly humanoid in shape with many and varied corruptions across the group. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that require a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.The small tribe carry no weapons and what little clothing they wear is well shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders. You assume from his clothing and the size of his equipment that this male is the leader. He, along with the others, is in good spirits and they all look fairly non-threatening, although you've learned not to trust anything that looks non-threatening in this place. Especially if it can carry its cock over its shoulder.\n\n", false);
 	//OH noes! Cheese it!
 	outputText("The demons don't notice you until they are quite close, the glare of the surrounding sand making you very difficult to see in the shade of your scrappy bush. They ignore you, intent on the refreshing waters of the oasis, but you can't stay hidden forever. A small keen eyed demon eventually spots you and lets out a  cry of alarm, pointing you out to the others. More eyes than twenty heads should really possess are now pointed straight at you.\n\n<b>What do you do?</b>", false);
-	simpleChoices("Talk",5046,"Fight",5047,"",0,"",0,"Leave",5051);
+	simpleChoices("Talk",oasisTalk,"Fight",chooseToFight,"",0,"",0,"Leave",oasisRunAway);
 }
 
-public function oasisRunAway():void {
+		private function chooseToFight():void{
+			startCombat(new DemonPack());
+			eventParser(1);
+			spriteSelect(46);
+		}
+
+private function oasisRunAway():void {
 	spriteSelect(46);
 	//Run away successfully if fast enough.  80 speed = autosuccess.
 	if(player.spe > 15 && player.spe/2 > rand(40)) {
@@ -25,17 +40,17 @@ public function oasisRunAway():void {
 	}
 }
 
-public function oasisTalk():void {
+private function oasisTalk():void {
 	spriteSelect(46);
 	//Nice weather...
 	outputText("You rise cautiously from the shade of your scraggly little bush and look over the demons arrayed before you. Briefly you wonder how exactly conversations start in a desert oasis, before settling on 'nice weather we're having.' The reaction is mixed. Some laugh, some stare in utter confusion. The ludicrously endowed leader in the snakeskin cloak throws his head back and produces a deep, thundering laugh. When he regains his composure he brings his head back around to level a deadly smile full of sharp teeth in your direction. 'Yes,' he says '...nice.'\n\n", true);
 	//Offer...
 	outputText("At this your repertoire of desert conversation topics is exhausted and it occurs to you that it may be easier to break the ice somewhere it is possible for ice to form. At the edge of slipping over into awkward silence the leader speaks. 'It is quite the strike of fortune that you would come to us just as we were to rest and feast. Perhaps you wish to partake with us?' A flash of panic runs over your mind, and you turn over the phrase a few times in your head. After a few seconds you conclude that 'partake with us' really cannot mean 'be a delicious entree' and entertain the thought of staying to feast.  As if sensing your hesitation the leader speaks again. 'We have not feasted in a long time, and we do hunger for it so.  This one promises to be a feast of grand proportions, and it should be a shame for you to miss such an opportunity.\n\n", false);
 	outputText("<b>Do you stay or try to leave?</b>", false);
-	simpleChoices("Stay",5050,"",0,"",0,"",0,"Leave",5049);
+	simpleChoices("Stay",oasisTalkAccept,"",0,"",0,"",0,"Leave",oasisTalkDecline);
 }
 
-public function oasisTalkDecline():void {
+private function oasisTalkDecline():void {
 	spriteSelect(46);
 	outputText("You consider the invitation, but do your best to politely decline. The little giggle this produces in a small implike creature in the back of the group send chills down your spine and you turn to go, but as you do so you catch the eye of the leader. His grin has widened, as if he knows something that you do not. With a deliberate slowness he starts to chuckle, and your worst fears are confirmed when you hear the words 'Silly creature. The offer to feast is never denied. Take it alive and kicking.'\n\n", true);
 	//MORTAL KOMBAAAAAT
@@ -43,7 +58,7 @@ public function oasisTalkDecline():void {
 	startCombat(new DemonPack());
 	doNext(1);
 }
-public function oasisTalkAccept():void {
+private function oasisTalkAccept():void {
 	spriteSelect(46);
 	//You slut!
 	outputText("The leader smiles in genuine delight and excited chatter rises up from the group of demons. 'This is excellent. It has been so long since we last had one of your kind join us.' Behind him the demons begin to slide free of their tattered rags, hardening, dampening and licking their lips. As the leader steps forward to caress the curves and angles of your body you begin to suspect that the hunger this feast is to satisfy is not for food, but all that is forgotten as the demons swarm silently around you and you stumble back onto the hot sand, ", true);
@@ -58,7 +73,7 @@ public function oasisTalkAccept():void {
 	//TO THE SECKSIN!
 	doNext(oasisSexing);
 }
-public function oasisSexing():void {
+internal function oasisSexing():void {
 	spriteSelect(46);
 	player.slimeFeed();
 	//New screen
@@ -172,7 +187,7 @@ public function oasisSexing():void {
 }
 
 //Desert Tribe Bad End
-public function oasisBadEnd():void {
+private function oasisBadEnd():void {
 	spriteSelect(46);
 	//You get this ending if you are a fully corrupt female/herm/centaur with low intelligence and had over 5-10 'Feast' encounters with the Desert Tribe, once the leader starts laying a claim on you because of your large clit
 	outputText("You fuck for hours, 'feasting' with the demons. Pain, pleasure and exhaustion intermingle; no matter how hard you try to cling to consciousness, you are in no state to concentrate enough to succeed. You dangle over the edge for what seems like eternity before an orgasm stronger than any other hits you like a solid wall. You black out...\n\n", true);
@@ -199,11 +214,13 @@ public function oasisBadEnd():void {
 	outputText("Flushing red in embarrassment at his words, you reluctantly follow after the leader and the rest of the tribe in obedience. You mull over what the leader had just said in your mind, and can't help but wonder what your future will be like if you remained with them.", false);
 	doNext(oasisBadEndEpilogue);
 }
-public function oasisBadEndEpilogue():void {
+private function oasisBadEndEpilogue():void {
 	spriteSelect(46);
 	outputText("After one year", true);
 	if(player.gender <= 1) outputText(" and a few doses of fermented succubi milk", false);
 	outputText("...\n\n", false);
 	outputText("A year has gone by since the day you became a slave. You find yourself sitting at the feet of your master wearing nothing but a black collar around your neck. Your belly extends out in front of you, filled to the brim with your master's baby. You smile, happy to be here to please your master and carry his young as memories of your past and your mission fade deep into the depths of your mind. Your only mission in life now is to service your master and the other members of the tribe in whatever they ask, without question or hesitation. As the tribe prepares for the next 'Feast', a commotion at the other side of the encampment catches your attention. The guards bring forth a human captive they found wandering in the oasis, and you smile dimly as you watch master invite the stranger to join them all in the Feast...", false);
 	eventParser(5035);
+}
+	}
 }

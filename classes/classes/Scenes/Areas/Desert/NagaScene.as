@@ -1,4 +1,25 @@
-﻿//NAGA STATUS
+﻿package classes.Scenes.Areas.Desert {
+	import classes.GlobalFlags.kFLAGS;
+	import classes.BaseContent;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class NagaScene extends BaseContent{
+	public function NagaScene(){
+
+	}
+//NAGA STATUS
 //v1 - players last fuck was as naga - 1 = true, 0 = false
 //v2 - player has ever fucked as a naga.  1 = true, 0 = false
 public function nagaEncounter():void {
@@ -94,7 +115,7 @@ public function nagaEncounter():void {
 			outputText("The tip of your tail slides into her soft folds, eliciting a gasp from her. You press further into her, feeling the walls of her pussy tighten over the length of your improvised shaft. Now that you are free of any length constraints, you decide you can now finish her off with the most intense orgasm she has ever had. Your scaly tail slowly crawls inside the depths of your friend, taking its time to tickle every lump, to tease all the sensitive bits while she grips you with all of her strength. Your friend pulls herself to your body, hugging you tight and squishing her breasts against your own. She wraps her arms around you, and begins to whisper things into your ear, \"<i>P-please... more... deeper...</i>\"\n\n", false);
 			outputText("You simply run your tongue around her ear, gently nibbling on it as you slowly impale your naga lover on your thick, nimble tail. Her tail whips back and forth across the sand as she slowly succumbs to the intense pleasure of your deep, intimate penetration. You begin to wriggle your own tail inside your naga friend and her response is immediate. First, she shudders as a chill of excitement rushes up her spine. As the sensation overwhelms her, she lets out a wail of satisfaction followed by a series of loud moans in time with your tail's various jerks and twists inside her. As the naga girl begins to climax, driven over the edge by your tail's intense sensations, her tail begins to flick about wildly. In a stroke of genius, you manage to grab the end of her tail, holding it more or less steady against your own " + clitDescript() + ". As her tail wiggles back and forth, it drives your " + clitDescript() + " insane, rubbing it back and forth over and over again. You prolong your friend's climax by driving your wriggling tail ever deeper insider her and soon you find yourself close to orgasm. As you feel your own climax commence, you clench your teeth and lean against your partner, your breasts mashing together and your juices beginning to intermingle. As you both begin to calm down again, chests heaving, the only thing you can think to do is kiss your partner.\n\n", false);
     		outputText("She returns your kiss, but while you are distracted she prepares herself to help you in the same way you helped her. She begins to rub her tail along your " + vaginaDescript(0) + ", getting it wet. As you feel her scaly member begin to slide inside your own " + vaginaDescript(0) + ", the very thought gets you excited. Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her. As you continue to passionately kiss each other, your tongues wrapping around one another and your arms wrapped around each other's warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. The both of you collapse upon the sand, too focused on one another to care about the surroundings.  That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the sand next to your friend, and you can't help but notice how cute she looks asleep. Your tails are still buried within one another, testament to the intensity of your lovemaking. You loved until the both of you collapsed, side by side, juices dripping out into the dry desert sands. You slowly remove your tail from inside her body, and simultaneously pull hers from your " + vaginaDescript(0) + ". You kiss her on the cheek, and are just close enough to hear her whisper, \"<i>Will we ever meet again?</i>\"  You lean in close, and whisper a simple \"<i>Yes.</i>\" Then, you leave her to her well-deserved rest, and slowly meander back to your camp, your brain still intoxicated with passion.\n\n", false);
-			cuntChange(30,true,false,true);
+			player.cuntChange(30,true,false,true);
 			dynStats("lus=", 0);
 			outputText("You think it would be a very good idea to come to the desert more often.", false);
 			doNext(15);
@@ -137,77 +158,7 @@ public function nagaEncounter():void {
 	startCombat(new Naga());
 }
 
-//2a)  Ability -  Poison Bite - poisons player
-public function nagaPoisonBiteAttack():void {
-	//(Deals damage over 4-5 turns, invariably reducing 
-	//your speed. It wears off once combat is over.)
-	outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
-	if(player.hasStatusAffect("Naga Venom") < 0) {
-		outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
-		if(player.spe > 4) {
-			//stats(0,0,-3,0,0,0,0,0);
-			player.spe -= 3;
-			mainView.statsView.showStatDown( 'spe' );
-			// speUp.visible = false;
-			// speDown.visible = true;
-			player.createStatusAffect("Naga Venom",3,0,0,0);		
-		}
-		else {
-			player.createStatusAffect("Naga Venom",0,0,0,0);		
-			takeDamage(5+rand(5));
-		}
-		takeDamage(5+rand(5));
-	}
-	else {
-		outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.", false);
-		if(player.spe > 3) {
-			//stats(0,0,-2,0,0,0,0,0);
-			player.spe -= 2;
-			mainView.statsView.showStatDown( 'spe' );
-			// speUp.visible = false;
-			// speDown.visible = true;
-			player.addStatusValue("Naga Venom",1,2);		
-		}
-		else takeDamage(5+rand(5));
-		takeDamage(5+rand(5));
-	}
-	combatRoundOver();
-}
-
-//2b)  Ability - Constrict - entangles player, raises lust 
-//every turn until you break free
-public function nagaConstrict():void {
-	outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
-	player.createStatusAffect("Naga Bind",0,0,0,0); 
-	takeDamage(2+rand(4));
-	combatRoundOver();  
-}
-
-//2c) Abiliy - Tail Whip - minus ??? HP 
-//(base it on toughness?)
-public function nagaTailWhip():void {
-	outputText("The naga tenses and twists herself forcefully.  ", false);
-	//[if evaded]
-	if((player.hasPerk("Evade") && rand(6) == 0)) {
-		outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
-	}
-	else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + monster.a + monster.short + "'s tail-whip.", false);
-	}
-	else if(player.spe > rand(300)) {
-		outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
-	}
-	else {
-		outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side.", false);
-		var damage:Number = 10;
-		if(player.armorDef < 10) damage += 10 - player.armorDef;
-		damage += rand(3);
-		damage = takeDamage(damage);
-		outputText(" (" + damage + ")", false);
-	}
-	combatRoundOver();
-}
-public function gooNagaRape():void {
+private function gooNagaRape():void {
 	outputText("", true);
 	dynStats("lus=", 0);
 	outputText("You look over at the prone form of the naga lying in the sand, her ", false);
@@ -302,7 +253,7 @@ public function gooNagaRape():void {
 }
 
 //3) Victory male
-public function nagaVictoryMale():void {
+private function nagaVictoryMale():void {
 	outputText("", true);
 	dynStats("lus=", 0);
 	//Male or 50% herms
@@ -389,7 +340,7 @@ public function nagaVictoryMale():void {
 	return;
 }
 
-public function nagaVictoryFemale():void {
+private function nagaVictoryFemale():void {
 	outputText("", true);
 	//4) Victory female
 	if(player.hasVagina()) {
@@ -406,7 +357,7 @@ public function nagaVictoryFemale():void {
 				if(player.gender == 3) outputText("  As her tail gently squeezes your body, it draws your own " + multiCockDescriptLight() + " up against your body, her soft underbelly stimulating the sensitive skin.", false);
 				outputText("  With the added support, you are able to move your arm away from her stomach, moving your hand down to her covered snatch. It isn't hard to find as there is practically a river of her juices dripping from it. You peel away the scaly covering, and reveal her soaking wet lovehole. As you begin to play with her engorged clit, her soft moans begin to become more pronounced and you can feel her tail begin to wrap more tightly around your body. You feel a strange sensation as her tail brushes past your own " + vaginaDescript(0) + ", causing you to tense up a bit. It seems that she noticed, because she does it again a few seconds later. As she begins to rub your " + vaginaDescript(0) + " with her tail, your body begins to betray your own lusts.\n\n", false);
 				outputText("She begins to gently toy with your " + clitDescript() + " using the very end of her tail, flicking it back and forth. You can't help but start moaning softly yourself. You respond by slowly teasing two of your fingers inside her waiting pussy, slowly beginning to move them in and out. As you begin to accelerate the motion of your fingers, the naga steps it up as well, sliding the tip of her tail inside your " + vaginaDescript(0) + ".  ", false);
-				cuntChange(20,true,false,true);
+				player.cuntChange(20,true,false,true);
 				outputText("You and the naga remain entwined like this for what seems like hours; your fingers buried inside her pussy, her tail buried inside yours", false);
 				//(If PC is Herm i.e. Has a cock(s)){
 				if(player.gender == 3) outputText(" and your " + multiCockDescriptLight() + " constantly stimulated by the tail wrapped around your body", false);
@@ -419,7 +370,7 @@ public function nagaVictoryFemale():void {
 		//a) Uncorrupted
 		if(player.cor < 50) {
 			outputText("The lust within you builds as you view the naga lying slumped on the ground in front of you, her coils twitching and tailtip marking the sand. Stepping forward, you gather her human half into your arms and she moans weakly as your breasts rub against hers. Smiling, you languidly lick her neck, her skin smooth and dry beneath your tongue.  Reaching down, you grab the end of her tail and bring it to your dripping pussy, rubbing it back and forth across your entrance.  Reviving under your caresses, the beautiful snake-lady rises, slowly circling you, winding herself around you again and again as you continue to use her tailtip to stimulate yourself. She comes to a stop, her coils now loosely around half your body, as she once again faces you, her tail twitching hungrily in your grasp.  You lean forward to kiss her, caught up in the moment, not caring of her fangs, as her tail twitches out of your grasp and suddenly spears upwards; you gasp and moan in pleasure as it dives into your moist pussy.  ", false);
-			cuntChange(20,true,false,true);
+			player.cuntChange(20,true,false,true);
 			outputText("Once again grinding your body against hers, your stiff nipples rub against one another, eliciting more moans from the both of you.  Her coils tighten slowly, squeezing your body in a tight hug as her tail thrashes wildly inside you, driving you closer and closer to your limit.  With a scream of ecstasy, you climax, your juices spurting out and coating her tail, your arms squeeze her tightly as you continue to cum.  The naga slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, before slithering off into the sands, your moisture on her scales quickly drying in the arid desert heat.\n\n", false);
 		}
 		//b) Corrupted
@@ -447,7 +398,7 @@ public function nagaVictoryFemale():void {
 	return;
 }
 
-public function nagaVictoryGenderless():void {
+private function nagaVictoryGenderless():void {
 	outputText("", true);
 	//c)Centaur
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
@@ -487,7 +438,7 @@ public function nagaVictoryGenderless():void {
 	return;    	
 }
 
-public function nagaFUCKSJOOOOOO():void {
+internal function nagaFUCKSJOOOOOO():void {
 	outputText("", true);
 	//BIMBO!  LIKE, TOTALLY AWESOME AND CUM!
 	//[Naga-on-Female Bimbo Loss Scene]
@@ -500,22 +451,22 @@ public function nagaFUCKSJOOOOOO():void {
 
 		outputText("You continue your assault on her love canal as the naga's moans gradually become louder. Her hands make their way to your head and she curls her fingers through your " + hairDescript() + " to get a better grip on your air-filled head as you bring your mouth up to her clit. You give one final, slow lick up the length of her pussy and twirl your tongue around her now engorged bud. The naga involuntarily bucks her hips into your face as you start to suck on her " + clitDescript() + ". As you continue to play with her clit, she begins to lose control, grinding her soaking pussy against your face. She forces herself onto you so hard, it becomes hard to breathe, but thankfully you've had a bit of practice with this sort of thing, so the warm juices of her excited love-slit don't bother you. After a while, you attempt to pull away from her hot snatch, pulling your mouth from her swollen clit. She pushes you back down upon it. You roll your eyes and giggle lightly, sending vibrations through her clit that make her moan. The feeling of your warm, wet, bimbo lips as they rub against her clit is apparently just enough for her as it pushes her past her limit, sending her into a passionate orgasm. You finally pull away from her as her body is wracked with powerful contractions, wiping the excess ladycum from your face, which is stuck in a dumb-looking, open mouthed stare.\n\n", false);
 
-		outputText("After the naga manages to calm herself, her breathing becoming regular and her muscles loosening up, she smiles a genuine grin and hisses something to you. She leans in close, her head only inches from your and suddenly shifts her tone, adopting a much more seductive one. She pulls you into an upright position, facing her, your " + allBreastsDescript() + " pushed up by her snake-like coils. Your " + vaginaDescript(0) + " rubs against her tail's scaly skin as she moves her own body closer to yours. She wraps the end of her tail around so that it stands erect between the two of you. The naga hisses something at you, and, seeing the brain-dead look on your face, begins to demonstrate what she means. She leans in close to her tail and begins to run her thin tongue along its length, as far as she can. Now THIS you are able to, like, understand! You run your tongue along her smooth, scaly, tail-tip.\n\n", false);
+		outputText("After the naga manages to calm herself, her breathing becoming regular and her muscles loosening up, she smiles a genuine grin and hisses something to you. She leans in close, her head only inches from your and suddenly shifts her tone, adopting a much more seductive one. She pulls you into an upright position, facing her, your " + player.allBreastsDescript() + " pushed up by her snake-like coils. Your " + vaginaDescript(0) + " rubs against her tail's scaly skin as she moves her own body closer to yours. She wraps the end of her tail around so that it stands erect between the two of you. The naga hisses something at you, and, seeing the brain-dead look on your face, begins to demonstrate what she means. She leans in close to her tail and begins to run her thin tongue along its length, as far as she can. Now THIS you are able to, like, understand! You run your tongue along her smooth, scaly, tail-tip.\n\n", false);
 
 		outputText("You do your, like, very best to follow her lead, but you just, like, don't get why she's doing it! Eventually, she stops, and nudges you to do so as well. Like... whatever...\n\n", false);
 
-		outputText("The naga then lies flat on the sandy ground, pulling you down with her. She lays you down on her body, face up, with your head resting on her soft breasts. She reaches around your body, placing her soft hands on your own " + allBreastsDescript() + ", gently holding you in place as her tail moves closer to your " + vaginaDescript(0) + ". Her now slick tail begins to rub against your clit and as the scaly skin runs along your " + clitDescript() + ", you begin to moan air-headedly. There is no holding it back, this feeling is one of the best you have experienced. Her tail continues to flick and rub your clit as you begin to buck your hips gently. The naga pokes and rubs at your hard clit for some time, eventually driving you to the first of many coming orgasms. After your breath has become even again and your muscles have relaxed, the naga resumes her advances. She begins to rub the tip of her tail up and down along your " + vaginaDescript(0) + ", and you FINALLY get what she is trying to do.\n\n", false);
+		outputText("The naga then lies flat on the sandy ground, pulling you down with her. She lays you down on her body, face up, with your head resting on her soft breasts. She reaches around your body, placing her soft hands on your own " + player.allBreastsDescript() + ", gently holding you in place as her tail moves closer to your " + vaginaDescript(0) + ". Her now slick tail begins to rub against your clit and as the scaly skin runs along your " + clitDescript() + ", you begin to moan air-headedly. There is no holding it back, this feeling is one of the best you have experienced. Her tail continues to flick and rub your clit as you begin to buck your hips gently. The naga pokes and rubs at your hard clit for some time, eventually driving you to the first of many coming orgasms. After your breath has become even again and your muscles have relaxed, the naga resumes her advances. She begins to rub the tip of her tail up and down along your " + vaginaDescript(0) + ", and you FINALLY get what she is trying to do.\n\n", false);
 
 		outputText("As the tail begins to penetrate you, you cannot help but let out another passionate, bimbo-like moan.", false);
 		//Take virginity.  Proper stretching further down.
-		cuntChange(1,true,true,false);
+		player.cuntChange(1,true,true,false);
 		outputText("  The scaly skin rubs at your soft vaginal walls like nothing else you have experienced, and the feeling begins to drive you mad with pleasure. It only takes a few minutes of this gentle tail-fucking to drive you to another climax. This time, however, the naga doesn't wait for your recovery. Instead, she responds by plunging deeper, forcing her ever-thickening tail deeper inside your " + vaginaDescript(0) + ". As she stuffs more and more of her scaly tail inside you, her hands begin to work on your " + nippleDescript(0) + "s, gently caressing and massaging them.\n\n", false); 
 
 		//[If Lactating]
 		if(player.lactationQ() >= 50 && player.biggestLactation() >= 1) outputText("Your warm milk is leaking from your " + nippleDescript(0) + "s the entire time, coating your skin and soaking her hands. At one point, she withdraws a hand and licks the milk from it. You can only assume that she liked it, as she begins to focus even more on your breasts.\n\n", false);
 		//-------
 		
-		outputText("The naga lifts you from her body with her tail, placing you onto the warm sand where she had been laying. She moves her own body above yours, her tail buried deep inside your " + vaginaDescript(0) + " the entire time. She holds you in place with one hand, her other hand moving to resume playing with your " + allBreastsDescript() + ". She moves her head in, her hot breath washing over your neck, and looks up into your eyes for a moment. She smiles, giggles, and then wraps her mouth around your " + nippleDescript(0) + ", letting her slender tongue tickle your sensitive areola.\n\n", false);
+		outputText("The naga lifts you from her body with her tail, placing you onto the warm sand where she had been laying. She moves her own body above yours, her tail buried deep inside your " + vaginaDescript(0) + " the entire time. She holds you in place with one hand, her other hand moving to resume playing with your " + player.allBreastsDescript() + ". She moves her head in, her hot breath washing over your neck, and looks up into your eyes for a moment. She smiles, giggles, and then wraps her mouth around your " + nippleDescript(0) + ", letting her slender tongue tickle your sensitive areola.\n\n", false);
 		//-----
 		
 		//[If lactating] 
@@ -531,10 +482,10 @@ public function nagaFUCKSJOOOOOO():void {
 		
 		outputText("As the tip of her tail finally comes to rest against your cervix, you find yourself succumbing to another orgasm, your slutty wails of pleasure encouraging the naga to continue. As you begin to calm down again, you believe that this is the deepest the naga will go, although your brain works really hard and comes up with a desire for MORE depth...", false);
 		//PROPER stretched.
-		cuntChange((player.vaginalCapacity() + 5),true,true,false);
+		player.cuntChange((player.vaginalCapacity() + 5),true,true,false);
 		outputText("\n\n", false);
 		
-		outputText("Then, like, your wish totally comes true! The naga's tail begins to bash itself against your cervix, searching for the weak point. Her hands hold you steady as her thrust begin to increase in intensity. It's not long into this rough tail-fucking that you find yourself on the verge of orgasm again, totally turned on by the sight of your own " + allBreastsDescript() + " bouncing as she fucks you. The naga grits her teeth, and, with one last, powerful thrust, forces her tail inside of your womb, pushing through your well-pounded, well-used cervix. She manages to stuff enough tail inside you to cause a visible bulge in your stomach. This combination of sensations is too much for your tiny brain, and sends your head spinning as your climax reaches its peak. Your already weak mind slips even further, your vision fading. The last thing you see is the naga's smiling face, her cheeks flushed and her eyes full of passion.", false);
+		outputText("Then, like, your wish totally comes true! The naga's tail begins to bash itself against your cervix, searching for the weak point. Her hands hold you steady as her thrust begin to increase in intensity. It's not long into this rough tail-fucking that you find yourself on the verge of orgasm again, totally turned on by the sight of your own " + player.allBreastsDescript() + " bouncing as she fucks you. The naga grits her teeth, and, with one last, powerful thrust, forces her tail inside of your womb, pushing through your well-pounded, well-used cervix. She manages to stuff enough tail inside you to cause a visible bulge in your stomach. This combination of sensations is too much for your tiny brain, and sends your head spinning as your climax reaches its peak. Your already weak mind slips even further, your vision fading. The last thing you see is the naga's smiling face, her cheeks flushed and her eyes full of passion.", false);
 	}
 	//a) male (slightly modified could be good for centaurs 
 	//too)
@@ -715,7 +666,7 @@ public function nagaFUCKSJOOOOOO():void {
 			outputText("  As the tip of her tail finally comes to rest against your cervix, you find yourself succumbing to another orgasm, your wails of pleasure encouraging the naga to continue. As you begin to calm down again, you believe that this is the deepest the naga will go. Then, as she reaches her hand to grab your other shoulder, you realize she still has plans. Her tail begins to bash itself against your cervix, the tip searching for the weak point. Her hands hold you steady, as her thrusts begin to increase in intensity, sometimes even shaking your entire body. It is not long into this rough tail-fuck that you find yourself on the verge of orgasm yet again, as the scaly surface of her tail rubs across the soft flesh of your " + vaginaDescript(0) + ".  The naga grits her teeth, and, with one last, powerful thrust, forces her tail inside your womb, forcing her way through your cervix. She manages to stuff enough tail inside you to cause a visible bulge in your stomach. This combination of sensations is enough to send your head spinning and as your climax reaches its peak, you feel your mind begin to weaken, your vision fading. The last thing you see is the naga's smiling face, her cheeks flushed and her eyes full of passion.", false);
 		}
 		outputText("  ", false);
-		cuntChange(40,true);
+		player.cuntChange(40,true);
 	}
 	//d) genderless
 	else {
@@ -740,27 +691,27 @@ public function nagaFUCKSJOOOOOO():void {
 	cleanupAfterCombat();
 }
 
-public function nagaRapeChoice():void {
+internal function nagaRapeChoice():void {
 	if(monster.HP < 1) outputText("You've defeated the naga!  ", true);
 	else outputText("The naga writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ", true);
 	
-	var eggs:int = 0;
-	if(player.canOvipositSpider()) eggs = 3834;
-	if(player.canOvipositBee() && player.gender > 0) eggs = 3846;
+	var eggs:Function = null;
+	if(player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
+	if(player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
 	if(player.lust >= 33) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
 		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			if(player.gender == 0) simpleChoices("Yes",5115,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 1) simpleChoices("Yes",5113,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 2) simpleChoices("Yes",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+			if(player.gender == 0) simpleChoices("Yes",nagaVictoryGenderless,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 1) simpleChoices("Yes",nagaVictoryMale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 2) simpleChoices("Yes",nagaVictoryFemale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 3) simpleChoices("As Male",nagaVictoryMale,"As Female",nagaVictoryFemale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 			return;	
 		}
 		else {
-			if(player.gender == 0) simpleChoices("Yes",5115,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
-			if(player.gender == 1) simpleChoices("Yes",5113,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
-			if(player.gender == 2) simpleChoices("Yes",5114,"",0,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
-			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+			if(player.gender == 0) simpleChoices("Yes",nagaVictoryGenderless,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
+			if(player.gender == 1) simpleChoices("Yes",nagaVictoryMale,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
+			if(player.gender == 2) simpleChoices("Yes",nagaVictoryFemale,"",0,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+			if(player.gender == 3) simpleChoices("As Male",nagaVictoryMale,"As Female",nagaVictoryFemale,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 			return;	
 		}
 	}
@@ -769,7 +720,7 @@ public function nagaRapeChoice():void {
 
 public function nagaPlayerConstrict():void {
 	outputText("", true);
-	if(player.fatigue + physicalCost(10) > 100) {
+	if(player.fatigue + kGAMECLASS.physicalCost(10) > 100) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
 		menuLoc = 1;
 		doNext(5000);
@@ -779,7 +730,7 @@ public function nagaPlayerConstrict():void {
 	if(monster.plural) {
 		outputText("You launch yourself at " + monster.a+monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.", true);
 		outputText("\n\n", false);
-		enemyAI();
+		kGAMECLASS.enemyAI();
 		return;
 	}
 	if(monster.short == "pod") {
@@ -792,14 +743,14 @@ public function nagaPlayerConstrict():void {
 	//Amily!
 	if(monster.hasStatusAffect("Concentration") >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
-		enemyAI();
+		kGAMECLASS.enemyAI();
 		return;
 	}
 	//WRAP IT UPPP
 	if(rand(player.spe + 40) > monster.spe) {
 		if(monster.short == "demons") {
 			outputText("You look at the crowd for a moment, wondering which of their number you should wrap up. Your glance lands upon a random demon amongst the crowd. You quickly slither through the demon crowd as it closes in around you and launch yourself towards your chosen prey. You grab him out of the sea of monsters, wrap your long snake tail around his form and squeeze tightly, grinning as you hear his roars of pleasure turn to cries of distress.", false);
-		} 
+		}
 		//(Otherwise)
 		else {
 			outputText("You launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2+ ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.", false);
@@ -808,50 +759,50 @@ public function nagaPlayerConstrict():void {
 	}
 	//Failure
 	else {
-		//Failure (-10 HPs) - 
+		//Failure (-10 HPs) -
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back.", false);
-		takeDamage(5);
+		player.takeDamage(5);
 		if(player.HP <= 0) {
-			doNext(endHpLoss);
+			doNext(kGAMECLASS.endHpLoss);
 			return;
 		}
 	}
 	outputText("\n\n", false);
-	enemyAI();
+	kGAMECLASS.enemyAI();
 }
 
 public function naggaSqueeze():void {
 	outputText("", true);
-	//Squeeze - 
+	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified.", false);
     monster.HP -= monster.eMaxHP() * (.10 + rand(15)/100);           
-	//Enemy faints - 
+	//Enemy faints -
 	if(monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ", false);
-		if(monster.short == "demons") 
+		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.", false);
 		outputText("\n\n", false);
-		doNext(endHpVictory);
+		doNext(kGAMECLASS.endHpVictory);
 		return;
 	}
 	outputText("\n\n", false);
-	enemyAI();
+	kGAMECLASS.enemyAI();
 }
 //Tease
 public function naggaTease():void {
 	outputText("", true);
-	//(if poisoned) 
-	if(monster.hasStatusAffect("Naga Venom") >= 0) 
+	//(if poisoned)
+	if(monster.hasStatusAffect("Naga Venom") >= 0)
 	{
 		outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n", false);
 	}
-	else if(monster.gender == 0) 
+	else if(monster.gender == 0)
 	{
 		outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n", false);
 	}
 	//(Otherwise)
 	else {
-		fatigueRecovery();
+		kGAMECLASS.fatigueRecovery();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
@@ -917,17 +868,17 @@ public function naggaTease():void {
     	//Specific cases for slimes and demons, as the normal ones would make no sense
         if(monster.short == "demons") {
 			outputText("As you stimulate one of their brethren, the other demons can't help but to feel more aroused by this sight, all wishing to touch and feel the contact of your smooth, scaly body.", false);
-		} 
+		}
 		else if(monster.short == "slime") {
 			outputText("You attempt to stimulate the slime despite its lack of any sex organs. Somehow, it works!", false);
 		}
 		//Normal cases for other monsters
 		else {
-			if(monster.gender == 1) 
+			if(monster.gender == 1)
 			{
 				outputText("Your nimble tail begins to gently stroke his " + eCockDescript(0) + ", and you can see it on his face as he tries to hold back the fact that it feels good.", false);
 			}
-			if(monster.gender == 2) 
+			if(monster.gender == 2)
 			{
 				outputText("Your nimble tail manages to work its way between her legs, grinding your tail's scaly skin against her clit. She appears to enjoy it, but it is obvious she is trying to hide it from you.", false);
 			}
@@ -944,22 +895,22 @@ public function naggaTease():void {
 				damage *= 1.15;
 			}
 			monster.teased(damage);
-			teaseXP(1);
+			kGAMECLASS.teaseXP(1);
 		}
 		//Nuttin honey
 		else {
-			teaseXP(5);
+			kGAMECLASS.teaseXP(5);
 			outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 		}
 		outputText("\n\n", false);
 		//OLD
 		//monster.lust += 5 + rand(15);
 		if(monster.lust > 99) {
-			doNext(endLustVictory);
+			doNext(kGAMECLASS.endLustVictory);
 			return;
 		}
 	}
-	enemyAI();
+	kGAMECLASS.enemyAI();
 }
 
 public function nagaLeggoMyEggo():void {
@@ -967,11 +918,11 @@ public function nagaLeggoMyEggo():void {
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.", false);
 	outputText("\n\n", false);
 	monster.removeStatusAffect("Constricted");
-	enemyAI();
+	kGAMECLASS.enemyAI();
 }
 
 
-public function eggUpANagaSpiderLike():void {
+private function eggUpANagaSpiderLike():void {
 	clearOutput();
 	outputText("As the shiny-scaled girl collapses against the sand, you scramble forward, panting not so much with the exertion of the fight as with lust and excitement.  Surely a creature as large as her has enough room to fit all your eggs?  You feel so full, and it's been so long since you last had release.");
 	
@@ -1006,7 +957,7 @@ public function eggUpANagaSpiderLike():void {
 }
 
 //Bee Naga Scene: Finished (Fenoxo) (edited)
-public function beePositANagaPlease():void {
+private function beePositANagaPlease():void {
 	clearOutput();
 	outputText("You advance on the snake-woman before you with barely-concealed lust, a gradual trickle of your fluid drooling from the ovipositor slit behind you.  She recoils away in fear of your alien appearance, but in her current state she's unfit to put up more than a token resistance.  You round on her and help her up into a tender embrace, looking into her eyes as if to say, \"<i>It's okay, this won't hurt.</i>\"  She doesn't understand the words, but her searching, reptilian eyes slowly lose their fire at your reassuring gaze.");
 	outputText("\n\nGingerly, you caress her sinuous, scaled body, exploring the curvy flow of muscle as scales down to the slight, almost imperceptible flare of her humanoid waist.  She squirms against you, her tail lashing in the sands to either side, thumping anxiously.  Soon, your curious fingers find her soft opening, hidden amongst the scales, and as you press inside, you find a second set of wet lips along with a harder, pill-shaped organ that can only be a clit.  The woman's fanged mouth parts in a wordless expression of pleasure, and as you have her distracted, you let your stinger slide through the scales on her underbelly.");
@@ -1045,4 +996,6 @@ public function beePositANagaPlease():void {
 	player.dumpEggs();
 	dynStats("lus=", 0);
 	cleanupAfterCombat();
+}
+	}
 }

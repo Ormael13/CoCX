@@ -31,8 +31,9 @@
 				if(!hpVictory && player.gender > 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
 					game.doYesNo(5078,game.cleanupAfterCombat);
+				} else {
+					game.cleanupAfterCombat();
 				}
-				game.cleanupAfterCombat();
 			}
 		}
 

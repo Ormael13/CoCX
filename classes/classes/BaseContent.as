@@ -241,6 +241,10 @@
 		{
 			return kGAMECLASS.allChestDesc();
 		}
+		protected function allBreastsDescript():String
+		{
+			return kGAMECLASS.allBreastsDescript();
+		}
 		
 		protected function sMultiCockDesc():String
 		{
@@ -438,6 +442,12 @@
 		{
 			// Bullshit to unroll the incoming array
 			kGAMECLASS.dynStats.apply(null, args);
+		}
+		protected function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
+			return player.cuntChange(cArea,display,spacingsF,spacingsB);
+		}
+		protected function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
+			return player.buttChange(cArea,display,spacingsF,spacingsB);
 		}
 
 		protected function hasItem(itemName:String, minQuantity:Number):Boolean

@@ -2979,22 +2979,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyUrtaSex();
 	}
-	else if (eventNo == 3194)
-	{
-		missingoSex();
-	}
-	else if (eventNo == 3195)
-	{
-		missingoSex2();
-	}
-	else if (eventNo == 3196)
-	{
-		missingoSex3();
-	}
-	else if (eventNo == 3197)
-	{
-		missingoSex4();
-	}
 	else if (eventNo == 3201)
 	{
 		itsOkayUrtaAmilyIsHot();
@@ -3780,34 +3764,6 @@ public function doEvent(eventNo:Number):void
 	{
 		thatllDoTurkey();
 	}
-	else if (eventNo == 3822)
-	{
-		saveTheSandTarps();
-	}
-	else if (eventNo == 3823)
-	{
-		dontSaveTheTarps();
-	}
-	else if (eventNo == 3825)
-	{
-		nagaThreesomeWithSandTrap();
-	}
-	else if (eventNo == 3826)
-	{
-		stickWangInSandgina();
-	}
-	else if (eventNo == 3827)
-	{
-		rideDatSandTarpLikeIts1999();
-	}
-	else if (eventNo == 3828)
-	{
-		useSandTarpsHands();
-	}
-	else if (eventNo == 3834)
-	{
-		eggUpANagaSpiderLike();
-	}
 	else if (eventNo == 3837)
 	{
 		tamaniBeaten();
@@ -3815,14 +3771,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3840)
 	{
 		giveTheFoxSomeEggs();
-	}
-	else if (eventNo == 3845)
-	{
-		ovipositSandWitches();
-	}
-	else if (eventNo == 3846)
-	{
-		beePositANagaPlease();
 	}
 	else if (eventNo == 3850)
 	{
@@ -4015,10 +3963,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3960)
 	{
 		amilyScene.amilySwimFuckIntro();
-	}
-	else if (eventNo == 3962)
-	{
-		sandwitchSpanking();
 	}
 	else if (eventNo == 3964)
 	{

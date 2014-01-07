@@ -18,7 +18,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.lust >= 33){
-				game.beatSandwitch();
+				game.desert.sandWitchScene.beatSandwitch();
 			} else {
 				game.finishCombat();
 			}
@@ -32,7 +32,7 @@
 				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.", false);
 				game.cleanupAfterCombat();
 			} else {
-				game.sandwitchRape();
+				game.desert.sandWitchScene.sandwitchRape();
 			}
 		}
 

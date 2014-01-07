@@ -13,6 +13,10 @@ package classes.Scenes.Areas
 	public class Desert extends BaseContent
 	{
 		public var antsScene:AntsScene = new AntsScene();
+		public var nagaScene:NagaScene = new NagaScene();
+		public var oasis:Oasis = new Oasis();
+		public var sandTrapScene:SandTrapScene = new SandTrapScene();
+		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public function Desert()
 		{
 		}
@@ -40,8 +44,8 @@ package classes.Scenes.Areas
 				return;
 			}
 			if (flags[kFLAGS.EGG_WITCH_COUNTER] >= 4 && flags[kFLAGS.EGG_WITCH_TYPE] > 0 && rand(4) == 0) {
-				if (flags[kFLAGS.EGG_WITCH_TYPE] == 2) kGAMECLASS.sammitchBirthsDriders();
-				else kGAMECLASS.witchBirfsSomeBees();
+				if (flags[kFLAGS.EGG_WITCH_TYPE] == 2) sandWitchScene.sammitchBirthsDriders();
+				else sandWitchScene.witchBirfsSomeBees();
 				return;
 			}
 			//Ant colony debug chances
@@ -105,14 +109,14 @@ package classes.Scenes.Areas
 					args[args.length] = -8008;
 				}
 				else {
-					choices[choices.length] = kGAMECLASS.oasisEncounter;
+					choices[choices.length] = oasis.oasisEncounter;
 					args[args.length] = -8008;
 				}
 			}
-			choices[choices.length] = kGAMECLASS.nagaEncounter;
+			choices[choices.length] = nagaScene.nagaEncounter;
 			args[args.length] = -8008;
 			if (rand(2) == 0) {
-				choices[choices.length] = kGAMECLASS.encounterASandTarp;
+				choices[choices.length] = sandTrapScene.encounterASandTarp;
 				args[args.length] = -8008;
 			}
 			var select:int = rand(choices.length);

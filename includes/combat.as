@@ -158,7 +158,7 @@ public function doCombat(eventNum:Number):void
 				} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
 					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
 				} else if (monster.hasStatusAffect("Constricted") >= 0) {
-					simpleChoices("Squeeze", 5119, "Tease", 5120, "", 0, "", 0, "Release", 5121);
+					simpleChoices("Squeeze", desert.nagaScene.naggaSqueeze, "Tease", desert.nagaScene.naggaTease, "", 0, "", 0, "Release", desert.nagaScene.nagaLeggoMyEggo);
 				} else if (player.hasStatusAffect("Bound") >= 0) {
 					simpleChoices("Struggle", (monster as Ceraph).ceraphBindingStruggle, "Wait", (monster as Ceraph).ceraphBoundWait, "", 0, "", 0, "", 0);
 				} else if (player.hasStatusAffect("GooArmorBind") >= 0) {
@@ -185,7 +185,7 @@ public function doCombat(eventNum:Number):void
 			temp3 = 0;
 			temp4 = 0;
 			temp5 = 0;
-			var temp6:Number = 0;
+			var temp6:* = 0;
 			var temp7:Number = 0;
 			var temp8:Number = 0;
 			var button3Text:String = "Constrict";
@@ -223,7 +223,7 @@ public function doCombat(eventNum:Number):void
 				button1Text = "Kiss";
 			}
 			//Constrict
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = 5118;
+			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = desert.nagaScene.nagaPlayerConstrict;
 			//Kick attackuuuu
 			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 				temp6 = 5150;
@@ -506,18 +506,6 @@ public function doCombat(eventNum:Number):void
 			//minoRape();
 			cleanupAfterCombat();
 	}
-			//Sand witch gets raped
-	if(eventNum == 5032) {
-			sandwitchRaped();
-	}
-			//Bewbage rape
-	if(eventNum == 5033) {
-			sandwitchBewbs();
-	}
-			//Fucky rape
-	if(eventNum == 5034) {
-			sandwitchSex();
-	}
 			//Bee Sting Attack
 	if(eventNum == 5036) {
 			//Blind dodge change
@@ -727,38 +715,6 @@ public function doCombat(eventNum:Number):void
 			dynStats("lus", 10 + player.sens / 10);
 			combatRoundOver();
 	}
-			//Raise demons lust to 100 & fuck them
-	if(eventNum == 5045) {
-			outputText("You open your arms and step into the throng of eager demons. They jump eagerly to touch you, becoming more and more lust-frenzied every second. You take the nearest demon and throw it to the ground and without a moment's thought the rest of the group leap to join you in a thoughtless madness of lust...", true);
-			doNext(5048);
-	}
-			//Chat with demon group
-	if(eventNum == 5046) {
-			oasisTalk();
-	}
-			//start combat
-	if(eventNum == 5047) {
-			startCombat(new DemonPack());
-			eventParser(1);
-			spriteSelect(46);
-	}
-			//Demonic orgy sex start
-	if(eventNum == 5048) {
-			oasisSexing();
-			return;
-	}
-			//Try to run after talking
-	if(eventNum == 5049) {
-			oasisTalkDecline();
-	}
-			//Accept orgy
-	if(eventNum == 5050) {
-			oasisTalkAccept();
-	}
-			//Run
-	if(eventNum == 5051) {
-			oasisRunAway();
-	}
 			//Encounte worms
 	if(eventNum == 5052) {
 			if (player.hasStatusAffect("metWorms") >= 0) {
@@ -825,7 +781,7 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			else if (monster.hasStatusAffect("level") >= 0) {
-				sandTrapWait();
+				(monster as SandTrap).sandTrapWait();
 				return;
 			}
 			else if (monster.hasStatusAffect("Minotaur Entangled") >= 0) {
@@ -1217,60 +1173,8 @@ public function doCombat(eventNum:Number):void
 		bite();
 		return;
 	}
-	if(eventNum == 5109) {
-		nagaPoisonBiteAttack();
-		return;
-	}
-	if(eventNum == 5110) {
-		nagaConstrict();
-		return;
-	}
-	if(eventNum == 5111) {
-		nagaTailWhip();
-		return;
-	}
-	if(eventNum == 5112) {
-		nagaRapeChoice();
-		return;
-	}
-	if(eventNum == 5113) {
-		nagaVictoryMale();
-		return;
-	}
-	if(eventNum == 5114) {
-		nagaVictoryFemale();
-		return;
-	}
-	if(eventNum == 5115) {
-		nagaVictoryGenderless();
-		return;
-	}
-	if(eventNum == 5116) {
-		nagaFUCKSJOOOOOO();
-		return;
-	}
 	if(eventNum == 5117) {
 		nagaBiteAttack();
-		return;
-	}
-	if(eventNum == 5118) {
-		nagaPlayerConstrict();
-		return;
-	}
-	if(eventNum == 5119) {
-		naggaSqueeze();
-		return;
-	}
-	if(eventNum == 5120) {
-		naggaTease();
-		return;
-	}
-	if(eventNum == 5121) {
-		nagaLeggoMyEggo();
-		return;
-	}
-	if(eventNum == 5122) {
-		gooNagaRape();
 		return;
 	}
 	if(eventNum == 5123) {
@@ -1501,7 +1405,7 @@ public function attack():void {
 	}
 	if(monster.hasStatusAffect("level") >= 0 && player.hasStatusAffect("FirstAttack") < 0) {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
-		trapLevel(-4);
+		(monster as SandTrap).trapLevel(-4);
 	}
 	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.hasStatusAffect("FirstAttack") >= 0) player.removeStatusAffect("FirstAttack");
@@ -1997,152 +1901,7 @@ public function awardPlayer():void
 
 //Clear statuses
 public function clearStatuses(visibility:Boolean):void {
-	while(player.hasStatusAffect("Web") >= 0) {
-		player.spe += player.statusAffectv1("Web");
-		mainView.statsView.showStatUp( 'spe' );
-		// speUp.visible = true;
-		// speDown.visible = false;
-		player.removeStatusAffect("Web");
-	}
-	if(player.hasStatusAffect("Shielding") >= 0) player.removeStatusAffect("Shielding");
-	if(player.hasStatusAffect("Holli Constrict") >= 0) player.removeStatusAffect("Holli Constrict");
-	if(player.hasStatusAffect("lust stones") >= 0) player.removeStatusAffect("lust stones");
-	if(monster.hasStatusAffect("sandstorm") >= 0) monster.removeStatusAffect("sandstorm");
-	if(player.hasStatusAffect("Sealed") >= 0) {
-		player.removeStatusAffect("Sealed");
-	}
-	if(player.hasStatusAffect("Berzerking") >= 0) {
-		player.removeStatusAffect("Berzerking");
-		applyArmorStats(player.armorName, false);
-		player.weaponAttack = fixedDamage(player.weaponName);
-	}
-	if(monster.hasStatusAffect("Tail Whip") >= 0) {
-		monster.removeStatusAffect("Tail Whip");
-		applyArmorStats(player.armorName, false);
-	}
-	if(player.hasStatusAffect("UBERWEB") >= 0) player.removeStatusAffect("UBERWEB");
-	if(player.hasStatusAffect("Drider Kiss") >= 0) player.removeStatusAffect("Drider Kiss");
-	if(player.hasStatusAffect("Web-Silence") >= 0) player.removeStatusAffect("Web-Silence");
-	if(player.hasStatusAffect("GooArmorSilence") >= 0) player.removeStatusAffect("GooArmorSilence");
-	if(player.hasStatusAffect("Bound") >= 0) player.removeStatusAffect("Bound");
-	if(player.hasStatusAffect("GooArmorBind") >= 0) player.removeStatusAffect("GooArmorBind");
-	if(player.hasStatusAffect("Whispered") >= 0) player.removeStatusAffect("Whispered");
-	if(player.hasStatusAffect("Akbal Speed") >= 0) {
-		dynStats("spe", player.statusAffectv1("Akbal Speed") * -1);
-		player.removeStatusAffect("Akbal Speed");
-	}		
-	if(player.hasStatusAffect("Amily Venom") >= 0) {
-		dynStats("str", player.statusAffectv1("Amily Venom"),"spe", player.statusAffectv2("Amily Venom"));
-		player.removeStatusAffect("Amily Venom");
-	}
-	while(player.hasStatusAffect("Blind") >= 0) {
-		player.removeStatusAffect("Blind");
-	}
-	if(player.hasStatusAffect("Sheila Oil") >= 0) {
-		player.removeStatusAffect("Sheila Oil");
-	}
-	if(monster.hasStatusAffect("Twu Wuv") >= 0) {
-		player.inte += monster.statusAffectv1("Twu Wuv");
-		statScreenRefresh();
-		mainView.statsView.showStatUp( 'inte' );
-		// inteDown.visible = false;
-		// inteUp.visible = true;		
-	}
-	if(player.hasStatusAffect("Naga Venom") >= 0) {
-		player.spe += player.statusAffectv1("Naga Venom");
-		mainView.statsView.showStatUp( 'spe' );
-		// speUp.visible = true;
-		// speDown.visible = false;
-		//stats(0,0,player.statusAffectv1("Naga Venom"),0,0,0,0,0);
-		player.removeStatusAffect("Naga Venom");
-	}
-	if(player.hasStatusAffect("TentacleBind") >= 0) player.removeStatusAffect("TentacleBind");
-	if(player.hasStatusAffect("Naga Bind") >= 0) player.removeStatusAffect("Naga Bind");
-	if(player.hasStatusAffect("Stone Lust") >= 0) {
-		player.removeStatusAffect("Stone Lust");
-	}
-	player.removeStatusAffect("FirstAttack");
-	if(player.hasStatusAffect("Temporary Heat") >= 0) player.removeStatusAffect("Temporary Heat");
-	if(player.hasStatusAffect("NoFlee") >= 0) player.removeStatusAffect("NoFlee");
-	if(player.hasStatusAffect("Poison") >= 0) player.removeStatusAffect("Poison");
-	if(player.hasStatusAffect("Isabella Stunned") >= 0) player.removeStatusAffect("Isabella Stunned");
-	if(player.hasStatusAffect("Stunned") >= 0) player.removeStatusAffect("Stunned");
-	if(player.hasStatusAffect("Confusion") >= 0) player.removeStatusAffect("Confusion");
-	if(player.hasStatusAffect("Throat Punch") >= 0) player.removeStatusAffect("Throat Punch");
-	if(player.hasStatusAffect("Kiss of Death") >= 0) player.removeStatusAffect("Kiss of Death");
-	if(player.hasStatusAffect("Acid Slap") >= 0) player.removeStatusAffect("Acid Slap");
-	if(player.hasStatusAffect("GooBind") >= 0) player.removeStatusAffect("GooBind");
-	if(player.hasStatusAffect("HarpyBind") >= 0) player.removeStatusAffect("HarpyBind");
-	if(player.hasStatusAffect("Called Shot") >= 0) {
-		player.spe += player.statusAffectv1("Called Shot");
-		
-		mainView.statsView.showStatUp( 'spe' );
-		// speDown.visible = false;
-		// speUp.visible = true;
-		player.removeStatusAffect("Called Shot");
-	}
-	if(player.hasStatusAffect("DemonSeed") >= 0) {
-		player.removeStatusAffect("DemonSeed");
-	}
-	if(player.hasStatusAffect("paralyze venom") >= 0) {
-		player.str += player.statusAffects[player.hasStatusAffect("paralyze venom")].value1
-		player.spe += player.statusAffects[player.hasStatusAffect("paralyze venom")].value2
-		player.removeStatusAffect("paralyze venom");
-	}
-	if(player.hasStatusAffect("lust venom") >= 0) {
-		player.removeStatusAffect("lust venom");
-	}
-	if(player.hasStatusAffect("infestAttempted") >= 0) {
-		player.removeStatusAffect("infestAttempted");
-	}
-	if(player.hasStatusAffect("Might") >= 0) {
-		dynStats("str", -player.statusAffectv1("Might"),"tou", -player.statusAffectv2("Might"));
-		player.removeStatusAffect("Might");
-	}
-	if(player.hasStatusAffect("Charge Weapon") >= 0) {
-		player.weaponAttack -= player.statusAffectv1("Charge Weapon");
-		player.removeStatusAffect("Charge Weapon");
-	}
-	if(player.hasStatusAffect("Disarmed") >= 0) {
-		player.removeStatusAffect("Disarmed");
-		if(player.weaponName == "fists") {
-			player.weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
-			player.weaponAttack = fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
-		}
-		else {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
-		}
-	}
-	if(player.hasStatusAffect("Anemone Venom") >= 0) {
-		player.str += player.statusAffectv1("Anemone Venom");
-		player.spe += player.statusAffectv2("Anemone Venom");
-		//Make sure nothing got out of bounds
-		dynStats("cor", 0);
-
-		mainView.statsView.showStatUp( 'spe' );
-		mainView.statsView.showStatUp( 'str' );
-		// speUp.visible = true;
-		// strUp.visible = true;
-		player.removeStatusAffect("Anemone Venom");
-	}
-	if(player.hasStatusAffect("Gnoll Spear") >= 0) {
-		player.spe += player.statusAffectv1("Gnoll Spear");
-		//Make sure nothing got out of bounds
-		dynStats("cor", 0);
-		mainView.statsView.showStatUp( 'spe' );
-		// speUp.visible = true;
-		// speDown.visible = false;
-		player.removeStatusAffect("Gnoll Spear");
-	}
-	if(player.hasStatusAffect("Basilisk Compulsion") >= 0) player.removeStatusAffect("Basilisk Compulsion");
-	if(player.hasStatusAffect("BasiliskSlow") >= 0) {
-		player.spe += player.statusAffectv1("BasiliskSlow");
-		mainView.statsView.showStatUp( 'spe' );
-		// speUp.visible = true;
-		// speDown.visible = false;
-		player.removeStatusAffect("BasiliskSlow");
-	}
-	while(player.hasStatusAffect("Izma Bleed") >= 0) player.removeStatusAffect("Izma Bleed");
+	player.clearStatuses(visibility);
 }
 //Update combat status effects
 public function combatStatusesUpdate():void {
@@ -4258,8 +4017,8 @@ public function combatRoundOver():Boolean {
 		return true;
 	}
 	if(monster.hasStatusAffect("level") >= 0) {
-		if(trapLevel() <= 1) {
-			sandtrapmentLoss();
+		if((monster as SandTrap).trapLevel() <= 1) {
+			desert.sandTrapScene.sandtrapmentLoss();
 			return true;
 		}
 	}
@@ -5624,7 +5383,7 @@ public function physicalSpecials():void {
 	var butt1:Number = 0;
 	var butt2:Number = 0;
 	var butt3:Number = 0;
-	var butt4:Number = 0;
+	var butt4:* = 0;
 	var butt5:Number = 0;
 	var butt6:Number = 0;
 	var butt7:Number = 0;
@@ -5664,7 +5423,7 @@ public function physicalSpecials():void {
 	}
 	//Constrict
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-		butt4 = 5118;
+		butt4 = desert.nagaScene.nagaPlayerConstrict;
 		b4T = "Constrict";
 	}
 	//Kick attackuuuu
@@ -5831,7 +5590,6 @@ public function kitsuneTerror():void {
 	}
 	else outputText("  The dark fog recedes as quickly as it rolled in as they push back your illusions, resisting your hypnotic influence.\n\n");
 	enemyAI();
-	return;
 }
 
 //Illusion
@@ -5872,7 +5630,6 @@ public function kitsuneIllusion():void {
 	}
 	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");
 	enemyAI();
-	return;
 }
 
 //special attack: tail whip? could unlock button for use by dagrons too

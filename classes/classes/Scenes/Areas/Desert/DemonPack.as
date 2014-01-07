@@ -36,8 +36,13 @@
 				game.cleanupAfterCombat();
 			} else {
 				outputText("  Do you rape them?", true);
-				game.doYesNo(5045, game.cleanupAfterCombat);
+				game.doYesNo(rapeDemons, game.cleanupAfterCombat);
 			}
+		}
+
+		private function rapeDemons():void{
+			outputText("You open your arms and step into the throng of eager demons. They jump eagerly to touch you, becoming more and more lust-frenzied every second. You take the nearest demon and throw it to the ground and without a moment's thought the rest of the group leap to join you in a thoughtless madness of lust...", true);
+			doNext(game.desert.oasis.oasisSexing);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -51,7 +56,7 @@
 				game.cleanupAfterCombat();
 			} else if (hpVictory){
 				outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
-				doNext(5048);
+				doNext(game.desert.oasis.oasisSexing);
 			} else {
 				outputText("You struggle to keep your mind on the fight and fail to do so. ", true);
 				if (pcCameWorms){
@@ -68,7 +73,7 @@
 					outputText(game.vaginaDescript(0) + " burns ", false);
 				}
 				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.", false);
-				doNext(5048);
+				doNext(game.desert.oasis.oasisSexing);
 			}
 		}
 

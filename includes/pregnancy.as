@@ -1262,7 +1262,7 @@ public function updatePregnancy():Boolean {
 	}
 	//GIVE BIRF TO TRAPS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 4) {
-		birfSandTarps();
+		desert.sandTrapScene.birfSandTarps();
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType=0;
 		if(player.buttRating < 17) {

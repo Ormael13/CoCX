@@ -198,8 +198,6 @@
 		include "../../includes/milkWaifu.as";
 		include "../../includes/minerva.as";
 		include "../../includes/minotaurGang.as";
-		include "../../includes/naga.as";
-		include "../../includes/oasis.as";
 		include "../../includes/ooze.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
@@ -210,8 +208,6 @@
 		include "../../includes/runa.as";
 		include "../../includes/salamander.as";
 		include "../../includes/salon.as";
-		include "../../includes/sandtrap.as";
-		include "../../includes/sandwitch.as";
 		include "../../includes/satyr.as";
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";
