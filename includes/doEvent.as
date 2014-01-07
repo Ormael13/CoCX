@@ -1905,84 +1905,6 @@ public function doEvent(eventNo:Number):void
 		outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...", true);
 		doNext(2004);
 	}
-	//Hair dresser BJ
-	else if (eventNo == 2154)
-	{
-		goblinHairDresserFacefuck();
-	}
-	//Cut short
-	else if (eventNo == 2159)
-	{
-		cutShort();
-	}
-	//Cut Med
-	else if (eventNo == 2160)
-	{
-		cutMedium();
-	}
-	//CutLong
-	else if (eventNo == 2161)
-	{
-		cutLong();
-	}
-	//Lengthen Hair
-	else if (eventNo == 2162)
-	{
-		hairGrow();
-	}
-	//Dyes
-	else if (eventNo == 2163)
-	{
-		dyeMenu();
-	}
-	//Blue dye
-	else if (eventNo == 2164)
-	{
-		outputText("", true);
-		shortName = "BlueDye";
-		takeItem();
-	}
-	//orange dye
-	else if (eventNo == 2165)
-	{
-		outputText("", true);
-		shortName = "OrangDy";
-		takeItem();
-	}
-	//Pink Dye
-	else if (eventNo == 2166)
-	{
-		outputText("", true);
-		shortName = "PinkDye";
-		takeItem();
-	}
-	//Purple dye
-	else if (eventNo == 2167)
-	{
-		outputText("", true);
-		shortName = "PurpDye";
-		takeItem();
-	}
-	//Shop menu
-	else if (eventNo == 2168)
-	{
-		outputText("", true);
-		hairDressingMainMenu();
-	}
-	//Shop encounter
-	else if (eventNo == 2169)
-	{
-		if (player.hasStatusAffect("hairdresser meeting") >= 0)
-		{
-			hairDresserRepeatGreeting();
-		}
-		else
-		{
-			player.createStatusAffect("hairdresser meeting", 0, 0, 0, 0);
-			hairDresserGreeting();
-		}
-	}
-	
 	//Hook up cock milker
 	else if (eventNo == 2175)
 	{
@@ -2122,12 +2044,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2305)
 	{
 		tenderTakeItUpTheAssFromUrta();
-	}
-	else if (eventNo == 2337)
-	{
-		outputText("", true);
-		shortName = "ExtSerm";
-		takeItem();
 	}
 	else if (eventNo == 2350)
 	{
@@ -2444,26 +2360,6 @@ public function doEvent(eventNo:Number):void
 		shortName = "SucWhip";
 		incubusBuy();
 	}
-	else if (eventNo == 2696)
-	{
-		if (player.gems < 60)
-		{
-			outputText("You can't afford any minotaur cum right now!", true);
-			if (flags[kFLAGS.SALON_PAID] == 0)
-				doNext(2169);
-			else
-				salonPurchaseMenu();
-		}
-		else
-		{
-			menuLoc = 2;
-			player.gems -= 60;
-			outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ", true);
-			statScreenRefresh();
-			shortName = "MinoCum";
-			takeItem();
-		}
-	}
 	else if (eventNo == 2697)
 	{
 		scyllaAndUrtaSittingInATree();
@@ -2508,14 +2404,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2819)
 	{
 		telAdre.cotton.cottonTantricSex();
-	}
-	else if (eventNo == 2837)
-	{
-		sandFacial();
-	}
-	else if (eventNo == 2838)
-	{
-		mudFacial();
 	}
 	else if (eventNo == 2844)
 	{

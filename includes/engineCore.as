@@ -2467,8 +2467,8 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b>Lottie's Encouragement: </b>" + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);
 		outputText("<b>Lottie's Figure: </b>" + telAdre.lottie.lottieTone() + " (higher is better)\n", false);
 	}
-	if(lynnetteApproval() != 0) {
-		outputText("<b>Lynnette's Approval: </b>" + lynnetteApproval() + "\n");
+	if(mountain.salon.lynnetteApproval() != 0) {
+		outputText("<b>Lynnette's Approval: </b>" + mountain.salon.lynnetteApproval() + "\n");
 		outputText("<b>Lynnette Children: </b>" + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
 	}
 	//Mino sons

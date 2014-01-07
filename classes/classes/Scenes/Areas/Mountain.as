@@ -17,6 +17,7 @@ package classes.Scenes.Areas
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var salon:Salon = new Salon();
 		public function Mountain()
 		{
 		}
@@ -270,7 +271,7 @@ package classes.Scenes.Areas
 			}
 			//Hairdresser
 			if (chooser == 4) {
-				kGAMECLASS.hairDresser();
+				salon.hairDresser();
 			}
 		}
 		private function joinBeingAMinoCumSlut():void

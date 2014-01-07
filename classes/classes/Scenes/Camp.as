@@ -1445,7 +1445,7 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
 	//turn on teladre
 	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.hasStatusAffect("hairdresser meeting") >= 0) barber = 2169;
+	if(player.hasStatusAffect("hairdresser meeting") >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
 	//turn on boat
 	if(player.hasStatusAffect("Boat Discovery") >= 0) _boat = kGAMECLASS.boat.boatExplore;
 	
