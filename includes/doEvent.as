@@ -1,3 +1,4 @@
+import classes.GlobalFlags.kGAMECLASS;
 
 //Event No's 2000 4999 use this function
 
@@ -3057,30 +3058,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3354)
 	{
 		suckleTacularKats();
-	}
-	else if (eventNo == 3373)
-	{
-		rogarThirdPhase();
-	}
-	else if (eventNo == 3374)
-	{
-		rogarPhaseFour();
-	}
-	else if (eventNo == 3376)
-	{
-		loseButtGinity();
-	}
-	else if (eventNo == 3377)
-	{
-		fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim();
-	}
-	else if (eventNo == 3378)
-	{
-		brobrobrobro();
-	}
-	else if (eventNo == 3381)
-	{
-		frotWithRogar();
 	}
 	else if (eventNo == 3400)
 	{

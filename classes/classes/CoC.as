@@ -197,7 +197,6 @@
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";
 		include "../../includes/rathazul.as";
-		include "../../includes/rogar.as";
 		include "../../includes/roxanne.as";
 		include "../../includes/runa.as";
 		include "../../includes/salamander.as";

@@ -1,6 +1,6 @@
 ﻿package classes 
 {
-	import classes.Scenes.Areas.Swamp.Kiha;
+	import classes.Scenes.NPCs.Kiha;
 
 	/**
 	 * ...

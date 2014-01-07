@@ -15,6 +15,7 @@ package classes.Scenes.Areas
 		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
+		public var rogar:Rogar = new Rogar();
 		public function Swamp()
 		{
 		}
@@ -70,7 +71,7 @@ package classes.Scenes.Areas
 					corruptedDriderScene.driderEncounter();
 					break;
 				case 3:
-					kGAMECLASS.encounterRogarSwamp();
+					rogar.encounterRogarSwamp();
 					break;
 				case 4:
 					//Kiha follower gets to explore her territory!

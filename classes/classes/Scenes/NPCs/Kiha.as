@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.Swamp
+package classes.Scenes.NPCs
 {
 	import classes.CoC;
 	import classes.Monster;
