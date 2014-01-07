@@ -1370,14 +1370,14 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		satyrBirth(true);
+		plains.satyrScene.satyrBirth(true);
 	}
 	//Satyr butt preg
 	if(player.buttPregnancyType == 19 && player.buttPregnancyIncubation == 1) {
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType = 0;
 		displayedUpdate = true;
-		satyrBirth(false);
+		plains.satyrScene.satyrBirth(false);
 	}
 	if(player.pregnancyType == 18 && player.pregnancyIncubation <= 2) {
 		if(model.time.hours != 5 && model.time.hours != 6) {

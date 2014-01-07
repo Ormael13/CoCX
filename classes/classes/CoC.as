@@ -201,7 +201,6 @@
 		include "../../includes/roxanne.as";
 		include "../../includes/runa.as";
 		include "../../includes/salamander.as";
-		include "../../includes/satyr.as";
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";
 		include "../../includes/sharkgirls.as";

@@ -3631,26 +3631,6 @@ public function doEvent(eventNo:Number):void
 	{
 		begHolli4Watches();
 	}
-	else if (eventNo == 3870)
-	{
-		consensualSatyrFuck(0);
-	}
-	else if (eventNo == 3874)
-	{
-		trickZeSatyr();
-	}
-	else if (eventNo == 3875)
-	{
-		skipForeplay();
-	}
-	else if (eventNo == 3876)
-	{
-		femaleTakesAdvantageOfSatyr();
-	}
-	else if (eventNo == 3877)
-	{
-		malesTakeAdvantageOfSatyrs();
-	}
 	else if (eventNo == 3879)
 	{
 		telAdre.rubi.giveRubiClothes("ClssyCl");

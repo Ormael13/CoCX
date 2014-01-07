@@ -15,6 +15,7 @@ package classes.Scenes.Areas
 		public var bunnyGirl:BunnyGirl = new BunnyGirl();
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
+		public var satyrScene:SatyrScene = new SatyrScene();
 
 		public function Plains()
 		{
@@ -85,8 +86,8 @@ package classes.Scenes.Areas
 				choices[choices.length] = kGAMECLASS.encounterAJerkInThePlains;
 				choices[choices.length] = kGAMECLASS.encounterAJerkInThePlains;
 			}
-			choices[choices.length] = kGAMECLASS.satyrEncounter;
-			choices[choices.length] = kGAMECLASS.satyrEncounter;
+			choices[choices.length] = satyrScene.satyrEncounter;
+			choices[choices.length] = satyrScene.satyrEncounter;
 			if (flags[kFLAGS.SHEILA_CLOCK] >= 0) {
 				choices[choices.length] = kGAMECLASS.sheilaEncounterRouter;
 				choices[choices.length] = kGAMECLASS.sheilaEncounterRouter;

@@ -38,12 +38,12 @@ private function salonFavoritesPaymentMenu():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = goblinHairDresserFacefuck;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",eventParser,blow);
+	addButton(0,"Goblin Blow",blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	addButton(8,"Buy MinoCum",minoCum);
 	addButton(9,"Back",favoriteSalonMenu);
 }
 
@@ -55,12 +55,12 @@ private function salonPaymentMenu():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = buyMinoCum;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",eventParser,blow);
+	addButton(0,"Goblin Blow",blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	addButton(8,"Buy MinoCum",minoCum);
 	addButton(9,"Leave",eventParser,13);
 	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
@@ -108,14 +108,14 @@ public function salonPurchaseMenu():void {
 	else if(player.femininity > 0 && player.hasPerk("Androgyny") >= 0) sandFacial2 = sandFacial;
 	
 	menu();
-	addButton(0,"Cut Short",eventParser,cutShort2);
-	addButton(1,"Cut Med.",eventParser,cutMedium2);
-	addButton(2,"Cut Long",eventParser,cutLong2);
-	addButton(3,"Lengthen",eventParser,lengthening);
-	addButton(4,"Buy Products",eventParser,dyeMenu);
-	addButton(5,"Buy MinoCum",eventParser,minoCum);
-	addButton(7,"Mud Facial",eventParser,mudFacial2);
-	addButton(8,"Sand Facial",eventParser,sandFacial2);
+	addButton(0,"Cut Short",cutShort2);
+	addButton(1,"Cut Med.",cutMedium2);
+	addButton(2,"Cut Long",cutLong2);
+	addButton(3,"Lengthen",lengthening);
+	addButton(4,"Buy Products",dyeMenu);
+	addButton(5,"Buy MinoCum",minoCum);
+	addButton(7,"Mud Facial",mudFacial2);
+	addButton(8,"Sand Facial",sandFacial2);
 	addButton(9,"Leave",eventParser,13);
 }
 

@@ -1,4 +1,16 @@
-﻿//const SATYR_KIDS:int = 603;
+﻿package classes.Scenes.Areas.Plains{
+import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
+import classes.CockTypesEnum;
+import classes.BaseContent;
+public class SatyrScene extends BaseContent{
+
+	public function SatyrScene()
+	{
+	}
+
+//const SATYR_KIDS:int = 603;
 //Game Implementation (code from here)
 //Fight Encounter (Z)
 //Happens either in the plains or the swamp.
@@ -9,114 +21,6 @@ Note: Satyrs actively increase their own lust in order to use their lust charge,
 */
 
 
-public function satyrAI():void {
-	if(monster.lust >= 75 && rand(2) == 0) highLustChugRape();
-	else if(monster.lust < 75 && rand(2) == 0) {
-		if(rand(2) == 0) satyrBate();
-		else bottleChug();
-	}
-	else if(monster.hasStatusAffect("Charged") < 0) satyrCharge();
-	else {
-		satyrAttack();
-		monster.removeStatusAffect("Charged");
-	}
-}
-	
-	
-	
-//Attacks (Z)
-public function satyrAttack():void {
-	outputText("The satyr swings at you with one knuckled fist.  ");
-	//Blind dodge change
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
-		outputText(monster.capitalA + monster.short + " completely misses you with a blind punch!\n", false);
-	}
-	//Evade: 
-	else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
-		outputText("He snarls as you duck his blow and it swishes harmlessly through the air.");
-	}
-	else {
-		var damage:Number = int((monster.str + monster.weaponAttack) - rand(player.tou));
-		if(damage > 0) {
-			damage = takeDamage(damage);
-			outputText("It feels like you just got hit with a wooden club! (" + damage + ")");
-		}
-		else outputText("You successfully block it.");
-	}
-	combatRoundOver();
-}
-		
-public function satyrBate():void {
-	outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
-	//(small Libido based Lust increase, and increase monster lust)
-	dynStats("lus", (player.lib/5)+4);
-	monster.lust += 5;
-	combatRoundOver();
-}
-
-public function satyrCharge():void {
-	outputText("Lowering his horns, the satyr digs his hooves on the ground and begins snorting; he's obviously up to something.  ");
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
-		outputText(monster.capitalA + monster.short + " completely misses you due to blindness!\n", false);
-	}
-	else if(combatMiss()) {
-		outputText("He charges at you with a loud bleat, but you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-		monster.HP -= 5;
-	}
-	else if(combatEvade()) {
-		outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-		monster.HP -= 5;
-	}
-	else if(combatFlexibility()) {
-		outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-		monster.HP -= 5;
-	}
-	else if(combatMisdirect()) {
-		outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-		monster.HP -= 5;
-	}
-	else {
-		var damage:Number = int((monster.str + monster.weaponAttack) - rand(player.tou));
-		if(damage > 0) {
-			damage = takeDamage(damage);
-			outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-			if(player.hasPerk("Resolute") < 0) {
-				outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
-				player.createStatusAffect("Stunned",0,0,0,0);
-			}
-			//stun PC + hp damage if hit, monster hp damage dependent on str if miss
-			outputText(" (" + damage + ")");
-		}
-		else outputText("He charges at you, but you successfully deflect it at the last second.");
-	}
-	combatRoundOver();
-}
-	
-public function bottleChug():void {
-	outputText("He whips a bottle of wine seemingly from nowhere and begins chugging it down, then lets out a bellowing belch towards you.  The smell is so horrible you cover your nose in disgust, yet you feel hot as you inhale some of the fetid scent.");
-	//(damage PC lust very slightly and raise the satyr's lust.)
-	dynStats("lus", (player.lib/5));
-	monster.lust += 5;
-	combatRoundOver();
-}
-
-//5:(Only executed at high lust) 
-public function highLustChugRape():void {
-	outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
-		outputText(monster.capitalA + monster.short + " completely misses you due to blindness!\n", false);
-	}
-	else if(combatMiss() || combatFlexibility() || combatMisdirect() || combatEvade()) {
-		outputText("As he charges you, you grab him by the horns and spin around, sending him away.");
-	}
-	else {
-		outputText("You fall with a <b>THUD</b> and the Satyr doesn't even bother to undress you before he begins rubbing his massive cock on your body until he comes, soiling your [armor] and " + player.skinFurScales() + " with slimy, hot cum.  As it rubs into your body, you shiver with unwanted arousal.");
-		//large-ish sensitivity based lust increase if hit.)(This also relieves him of some of his lust, though not completely.)
-		monster.lust -= 50;
-		dynStats("lus", (player.sens/5+20));
-	}
-	combatRoundOver();
-}
 
 public function satyrEncounter(location:int = 0):void {
 	clearOutput();
@@ -137,13 +41,13 @@ public function satyrEncounter(location:int = 0):void {
 		else outputText("sodden expanse of the swamp");
 		outputText(" when you hear strange music emanating not far from where you are.  Do you investigate?");
 		//[Yes][No]
-		if(location == 0) doYesNo(3870,13);
-		else doYesNo(3870,13);
+		if(location == 0) doYesNo(createCallBackFunction(consensualSatyrFuck,0),13);
+		else doYesNo(createCallBackFunction(consensualSatyrFuck,0),13);
 	}
 }
 
 //[=Yes=]
-public function consensualSatyrFuck(loc:int = 0):void {
+private function consensualSatyrFuck(loc:int = 0):void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You decide to search for the source of the music.");
@@ -169,17 +73,17 @@ public function consensualSatyrFuck(loc:int = 0):void {
 	outputText("\n\nIt suddenly dawns upon you that this satyr might not have the most noble intentions... you're pretty sure there's some sort of aphrodisiac inside this beverage he offered you, judging by the heat that spreads through your body.");
 	//Trick him only available to High Int PCs and Skip Foreplay only available to High Libido PCs.
 
-	var trick:int = 0;
+	var trick:Function = null;
 	//(if High Int)
 	if(player.inte > 60 && player.lust <= 99) {
 		outputText("\n\nPerhaps you could trick him into knocking himself out with it?");
-		trick = 3874;
+		trick = trickZeSatyr;
 	}
-	var foreplay:int = 0;
+	var foreplay:Function = null;
 	//(if High Libido)
 	if(player.lib > 60) {
 		outputText("\n\nThat cock of his looks yummy, though... there's no need for all this ruse, you're pretty sure you know how to handle a dick; maybe you should skip foreplay and let him fill you up...");
-		foreplay = 3875;
+		foreplay = skipForeplay;
 	}
 	//What should you do?
 	//[Trick him] [Keep Drinking] [Skip Foreplay] [Leave]
@@ -187,7 +91,7 @@ public function consensualSatyrFuck(loc:int = 0):void {
 }
 
 //[=Keep Drinking=]
-public function keepDrinking():void {
+private function keepDrinking():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You grin at the satyr's encouragement and continue drinking, setting on a slower pace so you won't spill any more; shortly you pass him the empty skin and ask for more.");
@@ -212,21 +116,22 @@ public function keepDrinking():void {
 }
 
 //[=Leave=]
-public function leavePartySatyr():void {
+private function leavePartySatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You thank the satyr for his generosity, but you don't think you can handle this kind of booze, so you get up and start on your way back to your camp.");
 	
 	outputText("\n\nThere is a sudden loud, indignant bleat from behind you, and you hear something suddenly charging clumsily forward.  Though you only realise this when something slams into your back, knocking you to the ground.  When you roll around, you find the satyr standing over you, face contorted in fury.  \"<i>Nobody leaves me until I'm done with them!</i>\" he roars, and attacks you again!\n\n");
-	
-	startCombat(new Satyr());
+
+	var satyr:Satyr = new Satyr();
+	startCombat(satyr);
 	doNext(1);
 	//proc first attack;
-	satyrCharge();
+	satyr.satyrCharge();
 	//(Initiate combat with frenzied satyr, on the first round PC suffers the effects of a satyr charge (some HP lost and stunned))
 }
 //[=Trick Him=]
-public function trickZeSatyr():void {
+private function trickZeSatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You come up with a plan and pretend to start drinking again; once you notice the satyr is distracted, you quickly spill most of your drink on the floor and return an empty skin to him.");
@@ -248,7 +153,7 @@ public function trickZeSatyr():void {
 	doNext(13);
 }
 //[=Skip Foreplay=]
-public function skipForeplay():void {
+private function skipForeplay():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You smirk and crawl towards the satyr, discarding the skin of alcohol and knocking over several dishes and bottle in your way.  Once you're close enough, you roughly grab at his massive shaft and begin stroking it.  \"<i>We both know where this is headed...</i>\" you whisper, \"<i>so why not skip the foreplay?</i>\"");
@@ -262,7 +167,7 @@ public function skipForeplay():void {
 //Sex Scenes
 //Loss Rape (Z)
 //If PC has a vagina, Satyrs will use that. If not, use ass instead.
-public function loseToSatyr():void {
+internal function loseToSatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	//[Lust loss
@@ -319,28 +224,28 @@ public function loseToSatyr():void {
 }
 
 //Victory Rapes
-public function defeatASatyr():void {
+internal function defeatASatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	//Lust Victory
 	if(monster.lust > 99) outputText("The satyr collapses to its caprine knees, bleating in dismay as it paws frantically at its huge cock, oblivious to everything in its need to get off.  Already, pre-cum is fountaining from the goat-man's shaft, his jerking motions smearing the pungent sexual fluid across the crown.");
 	//HP Victory
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
-	var butt:int = 0;
-	var faces:int = 0;
+	var butt:Function = null;
+	var faces:Function = null;
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("\n\nYou wonder if you should give the satyr some sort of payback for attempting to rape you... do you take advantage of the helpless goat-man?");
 		//[Male][Female][Leave]
-		if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) butt = 3877;
+		if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) butt = malesTakeAdvantageOfSatyrs;
 		else if(player.hasCock()) outputText("\n\nYou're too big to fuck his ass...");
-		if(player.hasVagina()) faces = 3876;
+		if(player.hasVagina()) faces = femaleTakesAdvantageOfSatyr;
 	}
-	var bikiniTits:int = 0;
-	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+	var bikiniTits:Function = null;
+	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
 	simpleChoices("FuckHisButt",butt,"Ride Face",faces,"B.Titfuck",bikiniTits,"",0,"Leave",cleanupAfterCombat);
 }
 //Female (Z)
-public function femaleTakesAdvantageOfSatyr():void {
+private function femaleTakesAdvantageOfSatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("You eye his massive shaft speculatively, then decide against it.  Why should he receive the true pleasures of your cunt when he attacked you so rudely?  No, if there will be anyone taking pleasure from this, it will be you alone.  With that in mind, you cast aside your [armor] in the most imperious manner you can muster, until you are standing stark naked.");
@@ -374,7 +279,7 @@ public function femaleTakesAdvantageOfSatyr():void {
 }
 	
 //Male (Z)
-public function malesTakeAdvantageOfSatyrs():void {
+private function malesTakeAdvantageOfSatyrs():void {
 	clearOutput();
 	spriteSelect(98);
 	var x:int = player.cockThatFits(monster.analCapacity());
@@ -413,7 +318,7 @@ public function malesTakeAdvantageOfSatyrs():void {
 //Willing Sex (Z)
 //from skip foreplay
 //always impregnates PC
-public function willinglyBoneSatyr():void {
+private function willinglyBoneSatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	outputText("The satyr eyes you up and down hungrily; his hands move to grope your [chest], gently tweaking your [nipples], then he moves down towards your ");
@@ -490,7 +395,7 @@ public function willinglyBoneSatyr():void {
 
 
 //Pregnancy Stuff (Z)
-public function satyrPreggo():void {
+private function satyrPreggo():void {
 	if(player.hasVagina()) {
 		if(player.pregnancyIncubation == 0 && player.pregnancyType == 0) {
 			player.knockUp(19,160);
@@ -536,115 +441,5 @@ public function satyrBirth(vag:Boolean):void {
 }
 
 
-//Catch a Satyr using the corrupt glade and either leave or have your way with him.
-//Suggested to Fen as the MaleXMale submission.
-//Will be standalone
-public function trappedSatyr():void {
-	outputText("", true);
-	spriteSelect(99);
-	outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n", false);
-
-	outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.\n\n", false);
-
-	//(Player lacks a penis: 
-	if(!player.hasCock()) {
-		outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.", false);
-		doNext(13);
-	}
-	//Player returns to camp)
-	//(Player has penis: 
-	else {
-		outputText("You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n\n", false);
-		//[Yes] [No]
-		simpleChoices("Ravage",rapeSatyr,"",0,"",0,"",0,"Leave",ignoreSatyr);
-	}
 }
-
-//[=No=]
-public function ignoreSatyr():void {
-	outputText("", true);
-	spriteSelect(99);
-	outputText("You shake your head, ", false);
-	if(player.cor < 50) outputText("disgusted by the strange thoughts this place seems to put into your mind", false);
-	else outputText("not feeling inclined to rape some satyr butt right now", false);
-	outputText(", and silently leave him to his pleasures.", false);
-	dynStats("lus", 5+player.lib/20);
-	doNext(13);
-}
-//Player returns to camp
-public function rapeSatyr():void {
-	outputText("", true);
-	spriteSelect(99);
-	var x:Number = player.biggestCockIndex();
-	
-	//(Low Corruption)
-	if(player.cor < 33) outputText("For a moment you hesitate... taking someone from behind without their consent seems wrong... but then again you doubt a satyr would pass on the opportunity if you were in his position.", false);
-	//(Medium Corruption)
-	else if(player.cor < 66) outputText("You smirk; normally you would have given this some thought, but the idea of free booty is all you need to make a decision.", false);
-	//High Corruption
-	else outputText("You grin; this is not even a choice!  Passing on free anal is just not something a decent person does, is it?", false);
-	
-	outputText("  You silently strip your " + player.armorName + " and ", false);
-	if(player.isNaga()) outputText("slither", false);
-	else outputText("sneak", false);
-	
-	outputText(" towards the distracted satyr; stopping a few feet away, you stroke your " + cockDescript(x) + ", urging it to full erection and coaxing a few beads of pre, which you smear along your " + cockHead(x) + ".  With no warning, you lunge forward, grabbing and pulling his hips towards your " + cockDescript(x) + " and shoving as much of yourself inside his tight ass as you can.\n\n", false);
-	
-	outputText("The satyr lets out a startled yelp, struggling against you, but between his awkward position and the mutant flower ravenously sucking on his sizable cock, he's helpless.\n\n", false);
-	
-	outputText("You slap his butt with a open palm, leaving a clear mark on his taut behind.  He bleats, bucking wildly, but this serves only to slam his butt into your crotch until the flower hungrily sucks him back, sliding him off your prick.  You smile as a wicked idea hits you; you hit his ass again and again, making him buck into your throbbing " + Appearance.cockNoun(player.cocks[x].cockType) + ", while the flower keeps pulling him back inside; effectively making the satyr fuck himself.\n\n", false);
-	
-	outputText("Eventually, his bleating and screaming start to annoy you, so you silence him by grabbing at his horns and shoving his head to the side, into one of the breast-like growths nearby.  The satyr unthinkingly latches onto the floral nipple and starts to suckle, quieting him as you hoped.  You're not sure why, but he starts to voluntarily buck back and forth between you and the flower; maybe he's getting into the spirit of things, or maybe the vegetal teat he's pulling on has introduced an aphrodisiac chemical after so many violent attempts to pull out of the kindred flower.\n\n", false);
-	
-	outputText("You resolve not think about it right now and just enjoy pounding the satyr's ass.  With his bucking you're able to thrust even farther into his tight puckered cherry, ", false);
-	if(player.cockArea(x) >= 100) outputText("stretching it all out of normal proportion and ruining it for whomever might happen to use it next.", false);
-	else outputText("stretching it to fit your " + cockDescript(x) + " like a condom.", false);
-	outputText("  Your groin throbs, ", false);
-	if(player.balls > 0) outputText("your balls churn, ", false);
-	outputText("and you grunt as you feel the first shots of cum flowing along " + sMultiCockDesc() + ", only to pour out into", false);
-	if(player.cockTotal() > 1) outputText(" and onto", false);
-	outputText(" the satyr's abused ass; you continue pounding him even as you climax, causing rivulets of cum to run down his cheeks and legs.\n\n", false);
-	
-	outputText("Still slurping obscenely on the fake breast, the satyr groans and murmurs; you're not sure how much of a role the sap he's swallowing or the cunt-flower on his cock is playing, but it looks like he's actually enjoying himself now.", false);
-	
-	//(Low Cum Amount)
-	if(player.cumQ() < 250) outputText("  As much as you'd love to fill his belly so full of spunk he'd look pregnant, you just can't muster any more, and pull out with a sigh.\n\n", false);
-	//(Medium Cum Amount)
-	else if(player.cumQ() < 1000) outputText("  You cum and cum, filling every crevice of his anal passage with warm jism, the slutty goatman doesn't seem to mind this in the least.  When you're finally spent, you pull out with a sigh, and watch as your cum backflows out of his ass to fall on the grass below.\n\n", false);
-	//(Large Cum Amount)
-	else outputText("  You cum and cum, filling every crevice of his anal passage with warm jism, and the slutty goatman doesn't seem to mind this in the least - yet.  You push him to his limits; cum backflows out of his ass and around your spewing prick, but still you dump more and more of your heavy load inside your now-willing cock-sleeve, inflating his belly like a balloon.  When you're finally spent, you pull out with a sigh and look at your handiwork; cum pours out of his ass like an open tap and his belly is absolutely bulging, making him look pregnant.\n\n", false);
-	
-	outputText("The satyr is too absorbed in his own fucking of the plant-pussy, and his nursing of the tree boob to bewail your absence", false);
-	if(player.cumQ() >= 1000) outputText(", although his eyes have widened perceptibly along with the stretching of his stomach", false);
-	outputText(".\n\n", false);
-
-	outputText("You can't help but smile inwardly at the helpless goatman's eagerness, and decide to stick around and watch him a little longer.  It's not everyday you see a creature like him at your mercy.  Every once in awhile you egg him on with a fresh slapping of his butt. The satyr grumbles and huffs, but continues to thrust and rut mindlessly into the vegetative pussy feeding on his cock. You don't think it'll be long before he cums...\n\n", false);
-	
-	outputText("As you watch the lewd display, you feel your arousal building and your " + cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?", false);
-	dynStats("lus=", 0);
-	//[Again][Leave]
-	simpleChoices("Again",secondSatyrFuck,"",0,"",0,"",0,"Leave",dontRepeatFuckSatyr);
-}
-
-//[=Leave=]
-public function dontRepeatFuckSatyr():void {
-	outputText("", true);
-	spriteSelect(99);
-	outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your " + player.armorName + " and leave the rutting satyr behind.\n\n", false);
-	doNext(13);
-}
-//[=Again=]
-public function secondSatyrFuck():void {
-	outputText("", true);
-	outputText("There's no harm in using the helpless goat once more... This time though, you decide you'll use his mouth.  With a yank on his horns, you forcefully dislodge him from the breast-plant and force him to his knees, turning his head towards you; he doesn't put up much resistance and when you present your erect shaft to him, he licks his lips in excitement and latches onto your " + cockDescript(x) + ".\n\n", false);
-
-	outputText("His mouth is exquisite; it feels slippery and warm and his lips are soft while his tongue wriggles about your shaft, trying to embrace and massage it.  He gloms onto your manhood with eager hunger, desperate to ravish you with his mouth.  Quivers of pleasure ripple and shudder through his body as he slobbers and gulps - and no wonder!  From the remnants of sap still in his mouth, you can feel currents of arousal tingling down your cock; if he's been drinking it straight, his mouth must be as sensitive as a cunt from the effects of this stuff.\n\n", false);
-
-	outputText("Having had your first orgasm mere minutes ago, you don't last long.  Within a few moments of his beginning you flood his mouth with a second load of cum, pulling out to paint his face with the last couple jets.\n\n", false);
-
-	outputText("With a great, garbled cry, the satyr cums on his own, gurgling through the sap-tinted cum drooling from his mouth as he spews into the waiting opening of his rapacious plant lover.  It swells and bloats as it gorges itself on his thick, stinking seed, stretching its stem until it is almost spherical, finally releasing him to collapse on his knees, free at last of the plant's grip.  He moans and bleats softly, leaking cummy sap from his chin onto his hairy chest, too overwhelmed by the combined fucking of yourself and the flower and too poisoned by whatever aphrodisiac he's been slurping on to move.\n\n", false);
-
-	outputText("You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your " + player.armorName + " and leave the passed-out satyr behind as you go back to your camp.", false);
-	dynStats("lib", 1, "sen", -5, "lus=", 0);
-	doNext(13);
 }
