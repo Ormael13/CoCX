@@ -1,4 +1,12 @@
-﻿//const MINERVA_LOVE:int = 813;
+﻿package classes.Scenes.Areas.HighMountains {
+import classes.BaseContent;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
+import classes.CockTypesEnum;
+public class MinervaScene extends BaseContent {
+//const MINERVA_LOVE:int = 813;
 //const MINERVA_BACKSTORY:int = 814;
 //const MINERVA_BACKSTORY_LEARNED:int = 815;
 //const TIMES_MINERVA_SEXED:int = 816;
@@ -10,13 +18,13 @@
 
 //-Tainted Minerva vaginal capacity: 90
 //-Tainted Minerva anal capacity: 100
-public function minervaVCapacity():Number {
+private function minervaVCapacity():Number {
 	return 90;
 }
-public function minervaACapacity():Number {
+private function minervaACapacity():Number {
 	return 100;
 }
-public function minervaRomanced():Boolean {
+private function minervaRomanced():Boolean {
 	return (flags[kFLAGS.MINERVA_LOVE] == 1);
 }
 
@@ -35,7 +43,7 @@ public function minervaRomanced():Boolean {
 //Minerva appearance (normal) 
 //http://i46.tinypic.com/20z1f1x.jpg
 
-public function minervaAppearance():void {
+private function minervaAppearance():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Minerva is a siren. She stands 8'5\" with navy blue skin and a white belly, neck and inner thighs. Orange and white stripes adorn her legs, tail and back.  Her head is topped with fiery red orange hair that frames her face with well kept bangs and also slide down her back in a pair of long braids.  Her eyes are bright electric blue on pure black sclera.  The siren's body is adorned with an expansive array of golden studs and rings, one through an eyebrow, a pair on her lips and even one in her nose.  From her ears hangs large hoop earrings while a trio of studs sits higher up.  Along the fin that tips her tail are a set of five gold rings linked together by a fine silver chain.");
@@ -68,11 +76,11 @@ public function encounterMinerva():void {
 
 //Basic intros
 //1-1 First Encounter.
-public function firstMinervaEncounter():void {
+private function firstMinervaEncounter():void {
 	clearOutput();
 	outputText("Returning to the mountains, you begin to climb; the usual search for loot and, perhaps, some harpies driving your upward efforts.  Perhaps you'll run into");
 	//If Sophie Bimbo=0:
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !sophieFollower()) outputText(" that matronly harpy, Sophie");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !kGAMECLASS.sophieFollower()) outputText(" that matronly harpy, Sophie");
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:
@@ -85,14 +93,14 @@ public function firstMinervaEncounter():void {
 	addButton(2,"Ignore Path",ignoreMinervasPath);
 }
 //[Ignore Path]
-public function ignoreMinervasPath():void {
+private function ignoreMinervasPath():void {
 	clearOutput();
 	outputText("Deciding to play it safe, you turn away from the new path and continue your search elsewhere.");
 	// PC returns to camp.
 	doNext(13);
 }
 //[Take Path]
-public function takeMinervasPath():void {
+private function takeMinervasPath():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Knowing that a new path could lead to great things, you can't help but wonder where this one could lead.");
@@ -163,7 +171,7 @@ public function takeMinervasPath():void {
 }
 
 //[Follow]
-public function followMinerva():void {
+private function followMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Deciding that you want to know more about Minerva, you follow her into the tower.  \"<i>So, now that you're inside, would you like to talk?  Or perhaps to partake in some of the peaches that grow on my trees?</i>\" she asks, looking at you with interest.");
@@ -178,7 +186,7 @@ public function followMinerva():void {
 }
 
 //[Leave](for first encounter options)
-public function leaveMinervasFirstEncounter():void {
+private function leaveMinervasFirstEncounter():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You decide that you don't want to risk going into Minerva's lair as, for all you know, it could be a trap.  Therefore, you turn around and skedaddle back down the mountain.  As you leave, Minerva turns and watches you for a bit, a sad look on her face before she turns back and heads inside her home, alone.");
@@ -187,7 +195,7 @@ public function leaveMinervasFirstEncounter():void {
 }
 
 //1-2 Repeat Encounter 1.  Use any time.
-public function repeatEncounterMinerva():void {
+private function repeatEncounterMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
@@ -210,7 +218,7 @@ public function repeatEncounterMinerva():void {
 }
 
 //1-3 Repeat Encounter 2.  Use if 3rd+ time visiting Minerva.
-public function minervaThirdPlusEncounter():void {
+private function minervaThirdPlusEncounter():void {
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
@@ -234,7 +242,7 @@ public function minervaThirdPlusEncounter():void {
 
 //Romancing scenes encounter with all sub scenes.
 //1-1 Cute Encounter. Minerva has taken a special liking to the pc by talking to her 5 times.
-public function minervaAfterFiveTalksRomancing():void {
+private function minervaAfterFiveTalksRomancing():void {
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
@@ -260,7 +268,7 @@ public function minervaAfterFiveTalksRomancing():void {
 }
 
 //[Flight]
-public function goForASkyRideWithMinervaHeartBaring():void {
+private function goForASkyRideWithMinervaHeartBaring():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You grin with excitement and");
@@ -286,7 +294,7 @@ public function goForASkyRideWithMinervaHeartBaring():void {
 }
 
 //Opening her heart
-public function minervaOpensHerHeartAndDisplaysHerVentricals():void {
+private function minervaOpensHerHeartAndDisplaysHerVentricals():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Holding you gently in her arms as she looks deeply into your eyes, the siren stammers, \"<i>H-hey... I've been meaning to talk to you about something.  I've been thinking about you... and me...  You're the first real person to come here.  I mean, the harpies come around to get me to breed them, but that's all they're really interested in.  But you... you keep coming back, and it's not always sex with you.  You talk to me and spend time with me... you're actually interested.  I've been alone for a long time with no one but a couple of birdbrained harpies talk to.  Until you came around, that is- you changed all that.</i>\"");
@@ -300,7 +308,7 @@ public function minervaOpensHerHeartAndDisplaysHerVentricals():void {
 }
 
 //Kiss
-public function yeahSureMinervaILikeYouAndShit():void {
+private function yeahSureMinervaILikeYouAndShit():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You already know your answer.  Smiling, you lean in and kiss the siren's glossy black lips, an act which prolongs the blush on her face, though it doesn't take long for Minerva to recover.  She pushes you off of her and tackles you into the pool.  Sitting on top of you, the redhead smirks down at you before grabbing onto your shoulder and forcing you into a welcome kiss, her long, demonic tongue quickly snaking into your mouth to deepen the passionate smooch.");
@@ -317,7 +325,7 @@ public function yeahSureMinervaILikeYouAndShit():void {
 }
 
 //[Reject]
-public function rejectMinervasLove():void {
+private function rejectMinervasLove():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You stare at Minerva awkwardly as she waits for your response, her electric blue eyes looking at you with hope.  ");
@@ -335,7 +343,7 @@ public function rejectMinervasLove():void {
 
 
 //[Land]
-public function dontFlyWithWithMeYouCrazyBitch():void {
+private function dontFlyWithWithMeYouCrazyBitch():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You look down at the ground with a little uncertainty; you're already so high up.  Looking back at the grinning siren, you rapidly shake your head.  You very much don't want to be flying, especially not with such a gut clenching fall beneath you.  Minerva's grin lessens somewhat, clearly a bit disappointed that you don't want to go flying with her.  She nods despite her disappointment, and glides back down to the tower ground, setting you down on the soft moss that surrounds the pure hot spring.");
@@ -353,14 +361,14 @@ public function dontFlyWithWithMeYouCrazyBitch():void {
 	addButton(9,"Leave",eventParser,13);
 }
 
-public function fightMinerva():void {
+private function fightMinerva():void {
 	startCombat(new Minerva(),true);
 	spriteSelect(95);
 	eventParser(1);
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
-public function repeatableMinervaRomanceScene():void {
+private function repeatableMinervaRomanceScene():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You make your way back up the mountain, passing the usual harpy nests as you go.  Climbing through the clouds, you reach a height that has only become easier thanks to the repeated effort.  You make your way back up the mountain, passing the usual harpy nests as you go, looking for the oasis tower that you know has to be around here somewhere in the thick mountain mists. The promise of a respite from your climb, along with food and company, compels you to continue until you finally reach the oasis tower.  Without pausing to catch your breath you head for the tower, the desire to see your siren lover beating out the nagging fatigue you feel from the tough climb.  Your legs are pumping hard as you hoof it down the path, soon enough happening upon the shape of the ruined tower that encloses Minerva's oasis.");
@@ -379,9 +387,8 @@ public function repeatableMinervaRomanceScene():void {
 }
 
 
-public function minervaTalkSelect(bath:Boolean = true):void {
-	var choices:Array = new Array();
-	choices[choices.length] = talkingToMinervaAboutBackstory;
+private function minervaTalkSelect(bath:Boolean = true):void {
+	var choices:Array = [talkingToMinervaAboutBackstory];
 	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
 		//Force first time to talk about her early backstory!
 		if(flags[kFLAGS.MINERVA_BACKSTORY] == 0) {
@@ -419,7 +426,7 @@ public function minervaTalkSelect(bath:Boolean = true):void {
 //3-1 Talk Scene 1 - talks about back story pt1 to pt3
 //-repeatable
 //Scenes occur in order, starting with part 1 and reset after part 3 is told. Talking is still somewhat random but backstory scenes will trigger in order. 
-public function talkingToMinervaAboutBackstory():void {
+private function talkingToMinervaAboutBackstory():void {
 	clearOutput();
 	spriteSelect(95);
 	//PART 1
@@ -494,7 +501,7 @@ public function talkingToMinervaAboutBackstory():void {
 
 //3-2 Talk Scene 2 - talks about the spring  
 //-repeatable
-public function talkAboutTheSpringWithMinerva():void {
+private function talkAboutTheSpringWithMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Telling Minerva that you want to sit down and talk brings a pleasant smile to her face. The siren is more than happy to talk with you.  \"<i>Really?  You want to talk with me?  All right, well, what do you want to know?</i>\"  she asks as she sits down, cross-legged on the soft, pillowy moss across from you.  Looking at the spring, you feel an inkling urging its way up from inside you, and riveting questions begin to form in your mind.  Minerva has been here for a while... maybe she knows something about it?");
@@ -513,7 +520,7 @@ public function talkAboutTheSpringWithMinerva():void {
 }
 
 //3-3 Talking Scene 3 - talks about her shark girl daughter
-public function talkWithMinervaAboutSharkGirlDaughter():void {
+private function talkWithMinervaAboutSharkGirlDaughter():void {
 	clearOutput();
 	spriteSelect(95);
 	//- requires that backstory has been told
@@ -542,7 +549,7 @@ public function talkWithMinervaAboutSharkGirlDaughter():void {
 
 //3-4 Talk Scene 4 - talks about her corruption
 //- romance yes only or if you trick her into thinking you love her. - Repeatable until Minerva is purified or corrupted
-public function talkToMinervaAboutHerCorruption():void {
+private function talkToMinervaAboutHerCorruption():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Telling Mineva that you just want to talk brings a smile to her face, the siren eager to speak with you.  Guiding you over to a soft spot of moss by the spring, she sits next to you and looks into the pond, her smile slowly fading as she looks into the clear waters.");
@@ -561,7 +568,7 @@ public function talkToMinervaAboutHerCorruption():void {
 
 //3-5 Motherhood
 //-talks about how she wishes to be a real mother, have an actual loving family and not made from being raped- repeatable
-public function minervaMotherhood():void {
+private function minervaMotherhood():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Telling Minerva that you want to sit down and talk with her seems to astonish her; she certainly didn't expect you to just want a chat.  After her initial surprise, she smiles pleasantly.  \"<i>Really?  You want to talk with me?  All right, well, what do you want to know?</i>\"  she asks as she sits down cross-legged on the soft moss across from you.");
@@ -608,7 +615,7 @@ public function minervaMotherhood():void {
 }
 
 //3-6 Bath Time - romance only
-public function bathTimeTalkWithMinerva():void {
+private function bathTimeTalkWithMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Telling Minerva that you want to sit down and talk with her brings a smile to her lips; she certainly didn't expect you to want to just chat, but is clearly happy to talk.  \"<i>Really?  You want to talk with me?  All right, well, what do you want to know?</i>\"  she asks, before looking off to the side, clearly distracted.  \"<i>You know... if you don't mind, instead of talking, we could take a bath together.  Relax and just spend some time together,</i>\" she says with a hopeful look on her face.");
@@ -619,7 +626,7 @@ public function bathTimeTalkWithMinerva():void {
 }
 
 //[No] // add and take to another talking scene
-public function noBathTime():void {
+private function noBathTime():void {
 	clearOutput();
 	outputText("Looking down, she sighs, a brief moment passes before she returns her attention to you.  \"<i>Well, that's all right, maybe next time.  So you wanted to talk; what would you like to know?</i>\"");
 	menu();
@@ -627,7 +634,7 @@ public function noBathTime():void {
 }
 
 //[Yes]
-public function bathTimeWithMinerva():void {
+private function bathTimeWithMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Seeing how hopeful she is makes you chuckle; you have to admit, a bath with the curvy siren would be nice.  Nodding and agreeing to bathe together brings a bright, sharky smile to Minerva's face.  Her black, glossy lips split nearly ear to ear, showing how excited she is with your request.  \"<i>R-really?!  That's great!  Oh, I'm so happy,</i>\" she states joyously, suddenly blushing and playing with one of her long, orange-red bangs.  \"<i>I mean... Thank you, I was really hoping to spend some quality time together.</i>\"");
@@ -650,7 +657,7 @@ public function bathTimeWithMinerva():void {
 
 //SEX SCENES!!!!!!!!!
 //PC Chooses Sex from Minerva's Options:
-public function minervaSexMenu(display:Boolean = true):void {
+private function minervaSexMenu(display:Boolean = true):void {
 	if(display) {
 		clearOutput();
 		spriteSelect(95);
@@ -701,7 +708,7 @@ public function minervaSexMenu(display:Boolean = true):void {
 
 //4-1= sex scene 1 male/herm:  Anal
 //-pc pushes Minerva down onto her chest ass up and fucks her ass = needs penis
-public function fuckMinervasAsshole():void {
+private function fuckMinervasAsshole():void {
 	clearOutput();
 	spriteSelect(95);
 	var x:int = player.cockThatFits(minervaACapacity());
@@ -770,7 +777,7 @@ public function fuckMinervasAsshole():void {
 
 //4-2= sex scene 2:  Cowgirl
 //normal/pure  - Cowgirl position, Minerva on top needs penis.
-public function minervaCowgirlSex():void {
+private function minervaCowgirlSex():void {
 	clearOutput();
 	spriteSelect(95);
 	var x:int = player.cockThatFits(minervaVCapacity());
@@ -871,7 +878,9 @@ public function minervaCowgirlSex():void {
 
 //SEX SCENE 2.5 female/herm: LAP SEX
 //PC in Minerva's lap getting fucked by Minerva:
-public function minervaLapSex():void {
+private function minervaLapSex():void {
+	var x:int = player.cockThatFits(minervaACapacity());
+	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.TIMES_MINERVA_SEXED]++;
@@ -957,7 +966,7 @@ public function minervaLapSex():void {
 //4-5= sex scene 4: Hermy oral 
 //(tool tip: There is a LITTLE bit of ball kissing on the pc's part)
 //any- PC goes down on Minerva for some oral fun.
-public function goDownOnAHermAndLoveItYouDirtySlutYou():void {
+private function goDownOnAHermAndLoveItYouDirtySlutYou():void {
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.TIMES_MINERVA_SEXED]++;
@@ -993,7 +1002,7 @@ public function goDownOnAHermAndLoveItYouDirtySlutYou():void {
 }
 
 // Balls
-public function lickMinervasBalls():void {
+private function lickMinervasBalls():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Not even close to being done, you tease her some more.  The tip of your tongue dances along her outer lips before moving down to her smooth, hairless sack to give her male parts some extra attention.  Kissing her swollen, taut scrotum, you slowly lick and tease it as your hands work her rock hard shaft.  Her fat, sperm-filled balls react to your touch, swelling and pulling up as if getting ready to blow.  You can swear you can hear the poor, hefty testicles audibly churning with their thick creamy seed, eager to stuff some poor woman's pussy and impregnate them.  Closing your eyes, you latch on, sucking the tight sack and teasing the sensitive orbs inside.  \"<i>H-hey, careful down there!  Those things are fragile!</i>\"  she squawks in delight as you take your time giving the juicy pair some much-needed attention.");
@@ -1001,7 +1010,7 @@ public function lickMinervasBalls():void {
 }
 
 // No Balls and continuation
-public function noBallsMinervaAndContinuation(clear:Boolean = true):void {
+private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	if(clear) clearOutput();
 	else outputText("\n\n");
 	spriteSelect(95);
@@ -1034,7 +1043,9 @@ public function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	
 //4-6= sex scene 6: Blow job!
 //any - Minerva sucks off male/herm = needs penis
-public function letMinervaSuckYouOff():void {
+private function letMinervaSuckYouOff():void {
+	var x:int = player.cockThatFits(minervaVCapacity());
+	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.TIMES_MINERVA_SEXED]++;
@@ -1107,7 +1118,9 @@ public function letMinervaSuckYouOff():void {
 
 //4-4= sex scene 4:  hand held behind
 //any- pc fucks Minerva, holding min's wrists from behind
-public function fuckMinervaWithHerHandsBehindHerBack():void {
+private function fuckMinervaWithHerHandsBehindHerBack():void {
+	var x:int = player.cockThatFits(minervaVCapacity());
+	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.TIMES_MINERVA_SEXED]++;
@@ -1169,7 +1182,7 @@ public function fuckMinervaWithHerHandsBehindHerBack():void {
 	
 //4-9= sex scene 9: lesing out
 //pure/normal - pc gets eaten out
-public function pcGetsEatenOutByMinerva():void {
+private function pcGetsEatenOutByMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Starting with her long legs, and moving up to her wide, flared hips, your eyes travel past the thick bulge in her shorts, going up her scarred belly to the siren's perky DD-cup breasts before finally reaching her face.");
@@ -1244,172 +1257,8 @@ public function pcGetsEatenOutByMinerva():void {
 	else doNext(13);
 }
 
-//Normal Attacks for all Minerva Types
-//Shark-bite:
-public function minervaBite():void {
-	outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
-	var damage:int = int((monster.str + 85) - rand(player.tou) - player.armorDef);
-	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
-		outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
-	}
-	//[else block]
-	else if(damage <= 0) outputText("  Your hands lash out, knocking her head to the side as she tries to bite you.  With the bite deflected, Minerva makes a loud chomping sound as she only bites the air.");
-	//[if attack lands] 
-	else {
-		outputText("  Her teeth dig right into your arm!  It's a bit of a struggle, but you're able to free yourself.  The damage doesn't look too serious. ");
-		damage = takeDamage(damage);
-		outputText("(" + damage + ")");
-	}
-	combatRoundOver();
-}
 
-//Flying kick:
-public function minervaKnowsKungfu():void {
-	outputText("The blue beauty flaps her wings and launches herself into the air.  Once she's gained as much altitude as she can, she dive-bombs you, her demon-clawed feet leading the attack.");
-	
-	var damage:int = int((monster.str + monster.weaponAttack+100) - rand(player.tou) - player.armorDef);
-	monster.spe -= 70;
-	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
-		outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
-	}
-	//[else block] 
-	else if(damage <= 0) outputText("  Steadying yourself, you reach up, grabbing hold of Minerva as she attempts to land a heavy blow on you.  Grunting hard, you pull against her and toss the siren aside completely, halting her attack.");
-	//[if attack lands]
-	else {
-		outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting.");
-		damage = takeDamage(damage);
-		outputText(" (" + damage + ")");
-	}	
-	monster.spe += 70;
-	combatRoundOver();
-}
-
-//Tail-whip
-public function tailWhip():void {
-	var damage:int = int((monster.str+35) - rand(player.tou) - player.armorDef);
-
-	outputText("She runs at you, holding the weapon like she's about to chop into your side.  You brace yourself, but when she's only a few feet away, she starts to turn her body.");
-	//[else block] 
-	if(damage <= 0) outputText("  Lashing out with a fierce kick you intercept the tail-whip, your [foot] impacting against her strong appendage and totally neutralizing its momentum.");
-
-	//[if attack lands]
-	else {
-		outputText("  Her shark tail whacks you, knocking you to the ground.  You quickly struggle back into position");
-		if(player.armorDef > 0) outputText(", but your defense has been reduced");
-		outputText("!");
-    	damage = takeDamage(damage);
-		outputText(" (" + damage + ")");
-		if(monster.hasStatusAffect("Tail Whip") >= 0) monster.addStatusValue("Tail Whip",1,10);
-		else monster.createStatusAffect("Tail Whip",10,0,0,0);
-	}
-	combatRoundOver();
-}
-
-//Halberd stab:
-public function minervaUsesHalberdStab():void {
-	outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
-	var damage:int = int((monster.str+monster.weaponAttack) - rand(player.tou));
-
-	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
-	
-	//[else block]
-	else if(damage < 0) outputText("  With all your strength, you swing your [weapon], the blow landing on the side of Minerva's halberd and deflecting the goring strike away from you.");
-	
-	//[if attack lands]
-	else {
-		outputText("  She pierces you right in the shoulder!  You wince in pain and step back, out of her reach again.");
-		damage = takeDamage(damage);
-		outputText(" (" + damage + ")");
-	}
-	combatRoundOver();
-}
-
-//Halberd CHOP:
-public function minervaUsesHalberdCHOP():void {
-	outputText("She moves in close, practically right in front of you and raises the halberd.");
-	var damage:int = int((monster.str+100) - rand(player.tou) - player.armorDef);
-
-	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
-	
-	//[else block]
-	else if(damage < 0) outputText("  In a mad show of pure skill, you lift your hands, clamping them down on the cheeks of the halberd blade and stop Minerva's attack cold, bewildering the siren in the process.");
-	
-	//[if attack lands]
-	else {
-		outputText("  You don't have time to avoid the downward chop and the axe head lands right in your shoulder blade!  You cry out in pain, but you can still move your arm despite the brutal blow.");
-		damage = takeDamage(damage);
-		outputText(" (" + damage + ")");
-	}
-	combatRoundOver();
-}
-
-//White Fire
-public function kiteFire():void {
-	outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that!");
-	var damage:int = int(10+(monster.inte/3 + rand(monster.inte/2)) * 1.5);
-	damage = takeDamage(damage);
-	outputText(" (" + damage + ")");
-	combatRoundOver();
-}
-
-//Lust Attacks for tainted Minerva
-//Booty-shorts
-public function bootyShortInYoFaceSon():void {
-	outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did.");
-	dynStats("lus", 20+player.lib/10+rand(5));
-	combatRoundOver();
-}
-
-//Lust Attacks for all Minervas
-//Pole licking
-public function lickDatPole():void {
-	outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\"");
-	dynStats("lus", 20+player.lib/10+rand(5));
-	combatRoundOver();
-}
-
-//Special attack
-public function sirensSong():void {
-	//The Siren's Song (2-part attack) (Rarely used or when she's desperate aka: Less than 10% hp)
-	//[part 1]
-	if(monster.hasStatusAffect("Siren Song") < 0) {
-		outputText("Minerva begins to hum a pleasant tune.  It might be better to stand back to see what she's up to!");
-		monster.createStatusAffect("Siren Song",0,0,0,0);
-	}
-	//[part 2]
-	else {
-		outputText("Her hum becomes a song.  A magnificent song without words, a sound that should be impossible for any human, or creature for that matter, to make naturally.");
-		//If wait: 
-		if(flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) outputText("  You cover your ears before she even opens her lips, wary of its power.  Judging by the dim feeling of pleasure simmering through you with the little sound you're picking up regardless, it probably was for the better.");
-		//No wait - insta loss:
-		else {
-			outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
-			player.lust = 100;
-		}
-		monster.removeStatusAffect("Siren Song");
-	}
-	combatRoundOver();
-}
-
-public function minervaAI():void {
-	if(monster.hasStatusAffect("Siren Song") >= 0) sirensSong();
-	else if(rand(25) == 0 || (monster.HP < 100 && rand(2) == 0)) sirensSong();
-	//Else choose randomly!
-	else {
-		var choices:Array = new Array();
-		choices[choices.length] = lickDatPole;
-		choices[choices.length] = bootyShortInYoFaceSon;
-		choices[choices.length] = kiteFire;
-		choices[choices.length] = minervaUsesHalberdCHOP;
-		choices[choices.length] = minervaUsesHalberdStab;
-		choices[choices.length] = tailWhip;
-		choices[choices.length] = minervaKnowsKungfu;
-		choices[choices.length] = minervaBite;
-		choices[rand(choices.length)]();
-	}
-}
-
-public function loseToMinerva():void {
+internal function loseToMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	//PC loss by physical
@@ -1435,7 +1284,7 @@ public function loseToMinerva():void {
 }
 
 //Victory text for tainted
-public function beatUpDatSharpie():void {
+internal function beatUpDatSharpie():void {
 	clearOutput();
 	spriteSelect(95);
 	//Win by damage
@@ -1456,7 +1305,7 @@ public function beatUpDatSharpie():void {
 
 //Item/oasis interactions
 //Purity/Corruption Peach
-public function eatSomethingYouCunt():void {
+private function eatSomethingYouCunt():void {
 	clearOutput();
 	spriteSelect(95);
 	//Acquiring: 
@@ -1477,7 +1326,7 @@ C. Mint - Eating the sprig of raw mint is a bit of a stretch, but you manage to 
 // -3 Libido, -10 Lust, intelligence +2
 */
 //Spring Water
-public function getADrinkYouBitch():void {
+private function getADrinkYouBitch():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You ask Minerva if she's okay with allowing you to drink from her spring.  She replies with a nod, a smile and a casual wave towards the pool.  Making it quite clear that you can drink your fill.");
@@ -1497,3 +1346,5 @@ Using
 The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.
 // Corruption - 3 to 4, lower fatigue by 5 or 10, heal health by 20 per level.
 */
+}
+}

@@ -14,6 +14,8 @@ package classes.Scenes.Areas
 	{
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
 		public var harpyScene:HarpyScene = new HarpyScene();
+		public var minervaScene:MinervaScene = new MinervaScene();
+		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public function HighMountains()
 		{
 		}
@@ -39,13 +41,13 @@ package classes.Scenes.Areas
 			}
 			//Minerva
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
-				kGAMECLASS.encounterMinerva();
+				minervaScene.encounterMinerva();
 				return;
 			}
 			//25% minotaur sons!
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
 				spriteSelect(44);
-				kGAMECLASS.meetMinotaurSons();
+				minotaurMobScene.meetMinotaurSons();
 				return;
 			}
 			//Harpy odds!

@@ -2866,30 +2866,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.lottie.encounterLottie(true);
 	}
-	else if (eventNo == 3150)
-	{
-		negotiate();
-	}
-	else if (eventNo == 3157)
-	{
-		victoryMinotaurGangTitFuck();
-	}
-	else if (eventNo == 3158)
-	{
-		victoryAllThePenetrationsMinotaurGangBang();
-	}
-	else if (eventNo == 3159)
-	{
-		forceMinitaurToGiveOral(0);
-	}
-	else if (eventNo == 3160)
-	{
-		forceMinitaurToGiveOral(1);
-	}
-	else if (eventNo == 3161)
-	{
-		victoryBJNippleFuckMinotaurGang();
-	}
 	else if (eventNo == 3163)
 	{
 		milkJojoFirst();
@@ -3221,18 +3197,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3381)
 	{
 		frotWithRogar();
-	}
-	else if (eventNo == 3383)
-	{
-		disciplineEldestMinotaurSon();
-	}
-	else if (eventNo == 3396)
-	{
-		amilyScene.urtaXAmilyCuntPussyVagSQUICK();
-	}
-	else if (eventNo == 3397)
-	{
-		amilyScene.threesomeAmilUrtaCAWKS();
 	}
 	else if (eventNo == 3400)
 	{

@@ -663,10 +663,10 @@ public function amilyUrtaSex():void {
 	outputText("Once the three of you are in a empty room, you lock the door behind you as Urta and Amily both strip down, eyeing each other and you with equal attention.  \"<i>So... are you going to partake?  Or just watch?</i>\" Amily asks, hesitantly.", false);
 	
 	//Watch (only game in town for now, so suppress the choice buttons and route right to this)
-	var dick:Number = 0;
-	var vag:Number = 0;
-	if(player.hasVagina()) vag = 3396;
-	if(player.hasCock()) dick = 3397;
+	var dick:Function = null;
+	var vag:Function = null;
+	if(player.hasVagina()) vag = amilyScene.urtaXAmilyCuntPussyVagSQUICK;
+	if(player.hasCock()) dick = amilyScene.threesomeAmilUrtaCAWKS;
 	simpleChoices("Use Dick",dick,"Use Vag",vag,"",0,"",0,"Watch",amilyUrtaSexWatch);
 }
 public function amilyUrtaSexWatch():void {

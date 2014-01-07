@@ -194,8 +194,6 @@
 		include "../../includes/marble.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
-		include "../../includes/minerva.as";
-		include "../../includes/minotaurGang.as";
 		include "../../includes/ooze.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
