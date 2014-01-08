@@ -13,12 +13,19 @@ package classes.Scenes.Places.Owca
 
 		override protected function performCombatAction():void
 		{
-			game.vapulaAI();
+			str = 40;
+			weaponAttack = 10;
+			createStatusAffect("attacks", 4, 0, 0, 0);
+			eAttack();
+			str = 80;
+			weaponAttack = 40;
+			eAttack();
+			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.defeetVapulasHorde();
+			game.owca.defeetVapulasHorde();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -27,7 +34,7 @@ package classes.Scenes.Places.Owca
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
 				doNext(game.endLustLoss);
 			} else {
-				game.loseOrSubmitToVapula();
+				game.owca.loseOrSubmitToVapula();
 			}
 		}
 

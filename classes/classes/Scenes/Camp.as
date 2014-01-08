@@ -1,7 +1,6 @@
 ﻿package classes.Scenes{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
@@ -333,14 +332,14 @@ public function doCamp():void {
 		return;
 	}
 	//Amily and/or Jojo freakout about Vapula!!
-	if(kGAMECLASS.vapulaSlave() && (player.hasStatusAffect("PureCampJojo") >= 0 || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))) {
+	if(vapulaSlave() && (player.hasStatusAffect("PureCampJojo") >= 0 || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))) {
 		//Jojo but not Amily
 		if(player.hasStatusAffect("PureCampJojo") >= 0 && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))
-			kGAMECLASS.mouseWaifuFreakout(false,true);
+			vapula.mouseWaifuFreakout(false,true);
 		//Amily but not Jojo
-		else if((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt())) kGAMECLASS.mouseWaifuFreakout(true,false);
+		else if((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt())) vapula.mouseWaifuFreakout(true,false);
 		//Both
-		else kGAMECLASS.mouseWaifuFreakout(true,true);
+		else vapula.mouseWaifuFreakout(true,true);
 		hideMenus();
 		return;
 	}
@@ -751,7 +750,7 @@ public function followersCount():Number {
 public function slavesCount():Number {
 	var counter:Number = 0;
 	if(latexGooFollower()) counter++;
-	if(kGAMECLASS.vapulaSlave()) counter++;
+	if(vapulaSlave()) counter++;
 	if(campCorruptJojo()) counter++;
 	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) counter++;
 	//Bimbo sophie
@@ -928,16 +927,16 @@ public function campLoversMenu():void {
 }
 public function campSlavesMenu():void {
 	clearOutput();
-	var vapula:Number = 0;
+	var vapula2:Function = null;
 	var amilyEvent:Number = 0;
 	var ceraph:Number = 0;
 	var sophieEvent:Function = null;
 	var jojoEvent:Function = null;
 	var goo:Function = null;
-	if(kGAMECLASS.vapulaSlave()) {
-		kGAMECLASS.vapulaSlaveFlavorText();
+	if(vapulaSlave()) {
+		vapula.vapulaSlaveFlavorText();
 		outputText("\n\n");
-		vapula = 3749;
+		vapula2 = vapula.callSlaveVapula;
 	}
 	//Bimbo Sophie
 	if(bimboSophie()) {
@@ -970,7 +969,7 @@ public function campSlavesMenu():void {
 	if(ceraph > 0) addButton(1,"Ceraph",eventParser,ceraph);
 	addButton(2,"Jojo",jojoEvent);
 	addButton(3,"Sophie",sophieEvent);
-	if(vapula > 0) addButton(4,"Vapula",eventParser,vapula);
+	addButton(4,"Vapula",vapula2);
 	if(kGAMECLASS.milkSlave()) addButton(7,flags[kFLAGS.MILK_NAME],kGAMECLASS.milkyMenu);
 	addButton(8,flags[kFLAGS.GOO_NAME],goo);
 	addButton(9,"Back",eventParser,1);
@@ -1413,7 +1412,7 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) 
 		dungeonsArg = dungeons;
 	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
-		owca = kGAMECLASS.gangbangVillageStuff;
+		owca = kGAMECLASS.owca.gangbangVillageStuff;
 	
 	//turn on ruins
 	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;

@@ -2794,71 +2794,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.niamh.yeahSeanLetsBimbooze();
 	}
-	else if (eventNo == 3607)
-	{
-		acceptRebeccsPlea(true, true);
-	}
-	else if (eventNo == 3608)
-	{
-		acceptRebeccsPlea(false, true);
-	} else if (eventNo == 3610)
-	{
-		intoTheDemonPit(true);
-	}
-	else if (eventNo == 3611)
-	{
-		intoTheDemonPit(false);
-	}
-	else if (eventNo == 3612)
-	{
-		fightZeDemons(true);
-	}
-	else if (eventNo == 3613)
-	{
-		fightZeDemons(false);
-	}
-	else if (eventNo == 3617)
-	{
-		rapeZeVapula();
-	}
-	else if (eventNo == 3618)
-	{
-		owcaTavern();
-	}
-	else if (eventNo == 3624)
-	{
-		herds();
-	}
-	
-	else if (eventNo == 3629)
-	{
-		rapeRebecc(false);
-	}
-	else if (eventNo == 3630)
-	{
-		rapeRebecc(true);
-	}
-	
-	else if (eventNo == 3634)
-	{
-		owcaBuySetup("MinoCum");
-	}
-	else if (eventNo == 3635)
-	{
-		owcaBuySetup("Gob.Ale");
-	}
-	else if (eventNo == 3636)
-	{
-		owcaBuySetup("BroBrew");
-	}
-	else if (eventNo == 3637)
-	{
-		owcaBuySetup("SheepMk");
-	}
-	else if (eventNo == 3639)
-	{
-		torchOwcaMotherFuckers();
-	}
 	else if (eventNo == 3688)
 	{
 		pumpkinFuck();
@@ -2866,74 +2801,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3727)
 	{
 		mountPumpkin();
-	}
-	else if (eventNo == 3748)
-	{
-		enslaveVapulaWithYourWang();
-	}
-	else if (eventNo == 3749)
-	{
-		callSlaveVapula();
-	}
-	else if (eventNo == 3750)
-	{
-		fapulaFapfapfapAppearance();
-	}
-	else if (eventNo == 3751)
-	{
-		talkToVapulaForSomeReason();
-	}
-	else if (eventNo == 3752)
-	{
-		toggleCeruleanVapulaAssist();
-	}
-	else if (eventNo == 3753)
-	{
-		toggleVapulaHaremFucks();
-	}
-	else if (eventNo == 3754)
-	{
-		feedVapulaACupOfJizz();
-	}
-	else if (eventNo == 3757)
-	{
-		vapulaAndIzmaThreeSome();
-	}
-	else if (eventNo == 3758)
-	{
-		jojoButtFuckTrain();
-	}
-	else if (eventNo == 3759)
-	{
-		vapulaJojoThreesomes();
-	}
-	else if (eventNo == 3760)
-	{
-		NTRSomeJojos();
-	}
-	else if (eventNo == 3761)
-	{
-		vapulaAndAmilyThreesome();
-	}
-	else if (eventNo == 3764)
-	{
-		vapulaSophieThreesomeSelect();
-	}
-	else if (eventNo == 3767)
-	{
-		vapulaCeraphThreesome();
-	}
-	else if (eventNo == 3768)
-	{
-		vapulaThreesomeMenu();
-	}
-	else if (eventNo == 3769)
-	{
-		chixFeedVapulaBlehblehIVantToZuckYourSpooo();
-	}
-	else if (eventNo == 3771)
-	{
-		teaseVapula();
 	}
 	else if (eventNo == 3803)
 	{
@@ -3062,10 +2929,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3957)
 	{
 		dockWithUrtaUnderScyllasSoberSupervision();
-	}
-	else if (eventNo == 3959)
-	{
-		spankVapulaLikeABoss();
 	}
 	else if (eventNo == 3960)
 	{

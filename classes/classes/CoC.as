@@ -158,10 +158,12 @@
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
 		public var valeria:Valeria = new Valeria();
+		public var vapula:Vapula = new Vapula();
 		// Scenes/Places/
 		public var bazaar:Bazaar = new Bazaar();
 		public var boat:Boat = new Boat();
 		public var farm:Farm = new Farm();
+		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre = new TelAdre();
 
 		// Other scenes
@@ -177,7 +179,6 @@
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
-		include "../../includes/gangbangVillage.as";
 		include "../../includes/items.as";
 		include "../../includes/izma.as";
 		include "../../includes/jasun.as";

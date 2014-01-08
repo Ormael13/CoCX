@@ -14,17 +14,19 @@ package classes.Scenes.Places.Owca
 
 		override protected function performCombatAction():void
 		{
-			game.farmersAI();
+			createStatusAffect("attacks",4,0,0,0);
+			eAttack();
+			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.beatUpOwca();
+			game.owca.beatUpOwca();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.loseToOwca();
+			game.owca.loseToOwca();
 		}
 
 		public function Farmers()

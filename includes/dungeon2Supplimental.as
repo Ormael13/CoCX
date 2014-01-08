@@ -2418,7 +2418,7 @@ public function valaBigYou():void {
 	menu();
 	addButton(0,"Dom Me",bigValaDomsPC);
 	if(player.hasCock()) addButton(1,"Lick Me",bigValaLicksOffDudes);
-	if(vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
+	if(vapula.vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
 		addButton(2,"Dom Vapula",valaDommyVapula3Some)
 		addButton(3,"Vapula3Some",valaLoveyVapula3Some);
 	}

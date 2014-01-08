@@ -226,9 +226,13 @@ package classes.Scenes.NPCs
 			return kGAMECLASS.valeria;
 		}
 		// Vapula
+		protected function get vapula():Vapula
+		{
+			return kGAMECLASS.vapula;
+		}
 		public function vapulaSlave():Boolean
 		{
-			return kGAMECLASS.vapulaSlave();
+			return kGAMECLASS.vapula.vapulaSlave();
 		}
 
 	}

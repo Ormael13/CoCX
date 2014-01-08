@@ -673,8 +673,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 		}
 		//Vapula gives a dildo
-		if(vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2) {
-			vapulaGivesPCAPresent();
+		if(vapula.vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2) {
+			vapula.vapulaGivesPCAPresent();
 			needNext = true;
 		}
 		//Niamh counters
@@ -1873,7 +1873,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
 			bazaar.benoit.updateBenoitInventory();
 			if(player.pregnancyIncubation <= 0) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
-			if(vapulaSlave()) {
+			if(vapula.vapulaSlave()) {
 				if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
 				else flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 			}
@@ -2144,7 +2144,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		if(flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6) {
-			femaleVapulaRecruitmentPartII();
+			vapula.femaleVapulaRecruitmentPartII();
 			return true;
 		}
 		var ceraph:Number = 0;
@@ -2266,7 +2266,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(temp > 7) temp = 7;
 		if(player.hasPerk("Pierced: Lethite") >= 0) temp += 4;
 		if(player.hasStatusAffect("heat") >= 0) temp += 2;
-		if(vapulaSlave()) temp += 7;
+		if(vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
 				anemoneScene.goblinNightAnemone();
@@ -2335,8 +2335,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(model.time.hours == 2 && vapulaSlave() && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
-			vapulaForceFeeds();
+		if(model.time.hours == 2 && vapula.vapulaSlave() && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+			vapula.vapulaForceFeeds();
 			return true;
 		}
 		//Dreams on hour 3.
@@ -2345,8 +2345,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Call secksins!
 				if(player.hasStatusAffect("repeatSuccubi") >= 0) {
 					//VapulaSurprise
-					if(vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
-						vapulaAssistsCeruleanSuccubus();
+					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
+						vapula.vapulaAssistsCeruleanSuccubus();
 					//Normal night succubi shit
 					else {
 						doNext(1);

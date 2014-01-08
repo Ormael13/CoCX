@@ -2864,7 +2864,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3618);
+				"Abandon", owca.owcaTavern);
 	}
 	else if (menuLoc == 26)
 	{
@@ -6606,7 +6606,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 25) {
-		doNext(owcaTavern);
+		doNext(owca.owcaTavern);
 		return;
 	}
 	if(menuLoc == 26) {
