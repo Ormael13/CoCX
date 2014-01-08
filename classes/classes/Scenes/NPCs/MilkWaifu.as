@@ -1,4 +1,14 @@
-﻿//New Variables
+﻿package classes.Scenes.NPCs {
+import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class MilkWaifu extends NPCAwareContent{
+
+	public function MilkWaifu()
+	{
+	}
+//New Variables
 //" + flags[kFLAGS.MILK_NAME] + ": This slut's name. Can't call her Bath Slut forever. Unless you do.
 //[MilkySize]: Does Milky have GIANT HUGE BOOBS that she can't fucking walk with, does she have a big plump set of HHH cups you can smother yourself and your big fat cock with, or a more reasonable DD bust, the perfect size to drink from, titfuck, and play with all day long.
 
@@ -6,110 +16,10 @@
 //const MILK_SIZE:int = 870;
 //const MET_MILK_SLAVE:int = 871;
 
-public function milkSlave():Boolean {
-	if(flags[kFLAGS.MILK_NAME] is String) return true;
-	return false;
+override public function milkSlave():Boolean {
+	return flags[kFLAGS.MILK_NAME] is String;
 }
 
-//Getting a Milk Slut, Purity Style
-//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
-public function freeSlaves():void {
-	clearOutput();
-	outputText("Thinking back to the poor, mind-broken tittymonster of a bath girl you met here in the witches' coven, you tell the Sand Mother it's about time to free her and any other slaves she's got hidden away.");
-	
-	outputText("\n\nThe Sand Mother cocks an eyebrow at you, and makes a rather haughty scoff from atop her throne.  \"<i>You may have beaten my guardians, but what makes you think you can just order something like that, outsider?  The slaves are vital to the workings of the coven; we can't simply </i>release<i> them.</i>\"");
-	
-	if(player.inte <= 20) {
-		outputText("\n\nYou start to respond, stop, and have to think for a moment.  You spend a good long minute contemplating, before shrugging.  You're sure there's a convincing argument against this, but can't think of it at the moment.");
-		//[Back to menu
-		doNext(1);
-		return;
-	}
-	// Else:
-	outputText("\n\nYou shake your head. The witches claim to be opposed to the demons, yet what do they do?  They attack travelers who don't submit, enslave those who resist, and Marae knows what else.  This cannot stand.  The Sand Mother's no better than the demons if she's a slaver, keeping people like the poor milk girl as little more than cattle.");
-	
-	outputText("\n\nThe Sand Mother scowls, and rises from her throne.  \"<i>Come with me,</i>\" she says, ushering you from the room and through the many corridors of her subterranean haven.  Eventually, she brings you to the bath chamber.  Huddled in the corner is the huge-breasted girl, dozing lightly until the elder witch clears her throat.  In an instant, the girl's up and crawling meekly over, hands supporting her massive teats as she mewls, \"<i>Bath time, Mistress?</i>\"");
-	
-	outputText("\n\n\"<i>No, girl,</i>\" the witch says, eliciting a confused look from the slave girl.  \"<i>Why don't you tell your friend here just how much you want to be free, girl. Use your words.</i>\"");
-	
-	outputText("\n\n\"<i>M-mistress?</i>\" the slave girl says, head cocked to the side.  \"<i>I...</i>\" she whines, visibly struggling to form a few simple words before giving up and repeating her milky mantra: \"<i>Bath time?</i>\"");
-	
-	outputText("\n\nThe Sand Mother shakes her head and turns back to you.  \"<i>She's addled, [name].  Even if I were to let her go, she'd just be snatched up by the demons or some wandering pervert.  Gods know there's no shortage of either.  Releasing her into the wilds is more cruel than keeping her penned, where at least she's cared for - and useful, too.  She fulfils a function amongst us, dear [name], and for that she is honored and tended to.  All her needs are met, and she wants for nothing.  Can you in good conscious demand her release, dooming her to rape and torment and corruption?</i>\"");
-	
-	//[Yes] [No] [Gimme her]
-	menu();
-	addButton(0,"Yes",yesDemandMilkRelease);
-	addButton(1,"No",noDemandMilkRelease);
-	addButton(2,"Gimme Her",gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire);
-}
-
-//Yes (No Change)
-public function yesDemandMilkRelease():void {
-	clearOutput();
-	outputText("You tell the Sand Mother that everyone deserves freedom, even if they're addle-minded, or useful.  She can't just <i>keep people</i> because she feels like they're better off in her care.");
-	outputText("\n\nShe sighs, shaking her head sadly as she starts back toward the throne room.  \"<i>You're a bleeding heart idealist, [name].  You'd condemn the girl to torment for the sake of your petty morality.  There's no room for sentimentality these days.  Every soul I keep from becoming a demon, even if I keep them in chains, is on my conscious.  yet I bear that weight gladly, [name].  Perhaps one day, when you're ready to take on that same responsibility, you'll understand.</i>\"");
-	//[PC is left in Milk Room]
-	dungeonLoc = 33;
-	doNext(1);
-}
-
-//No (No Change)
-public function noDemandMilkRelease():void {
-	clearOutput();
-	outputText("You suppose not, when she puts it that way.  The poor girl's probably better off here than in the clutches of the demons.  Seeing you relent, the Sand Mother smiles and pats your shoulder.  \"<i>I'm glad you can see things my way, [name].  There is wisdom in you.  Come, let us speak of other things,</i>\" she says, leading you back to her throne room.");
-	doNext(1);
-}
-
-//Gimme her (Gimme dat delicious milk slut)
-public function gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire():void {
-	clearOutput();
-	outputText("You have a better idea: give the girl to you.  You can care for and protect her in your camp, but also give her at least as much freedom as is safe in these dire times.");
-	
-	outputText("\n\nThe Sand Mother sighs, shaking her head sadly.  \"<i>You're an idealist, [name].  But there is wisdom in your words.  Perhaps...  perhaps you are correct.  However, she is quite useful to our coven.  Perhaps I could be persuaded to part with her, if certain recompense was made.  Two thousand gems should be sufficient.</i>\"  The sorceress looks at you, awaiting your answer.");
-	
-	if(player.gems < 2000) {
-		outputText("\n\n<b>You haven't got that much.</b>");
-	}
-	menu();
-	//[2 Expensive][Buy Her]
-	addButton(0,"2 Expensive",TwoExpensive4Me);
-	if(player.gems >= 2000) addButton(1,"Buy Her",BuyHer);
-}
-
-public function TwoExpensive4Me():void {
-	clearOutput();
-	outputText("You explain that you can't afford that much.");
-	outputText("\n\nThe Sand Mother shrugs and says, \"<i>Then ask after her when you do.</i>\"  She doesn't stick around long enough for you to reply, leaving you standing there with the milk girl.");
-	outputText("\n\n\"<i>Bath time?</i>\"");
-	dungeonLoc = 33;
-	doNext(1);
-}
-	
-public function BuyHer():void {
-	clearOutput();
-	player.gems -= 2000;
-	outputText("You hand over two thousand of your hard-earned gems.");
-	
-	outputText("\n\nThe Sand Mother quips, \"<i>Very well, take the girl.  Give her freedom, and keep her safe.  She has more than earned a life of ease after years of faithful service.  The others we keep...  there is a city not far from here.  I will deliver my other servants there in the night.  Perhaps they will find solace in the arms of the last free city in Mareth.</i>\"");
-	
-	outputText("\n\n\"<i>Mistress?</i>\" the milk girl says, looking between you and the Sand Mother.");
-	
-	outputText("\n\nSmiling beatifically, the Mother kneels down and pats the slave's cheek.  \"<i>You're free now, daughter.  [name] will take you from here, to someplace where you can be free and safe.  Do you understand, darling?  I'm no longer your mistress.</i>\"");
-	
-	outputText("\n\nA confused moment later, the idea seems to dawn on her milk-addled mind.  The slave girl turns to you, trying desperately to stand under the weight of her gigantic udders.  \"<i>[Master]?</i>\"");
-	
-	outputText("\n\n\"<i>No, no,</i>\" you say, moving to support her tremendous teats' weight, \"<i>Not [master], [name].  Understand?  I'm [name].</i>\"");
-	
-	outputText("\n\n\"<i>[name]!</i>\" she echoes with childish glee, finally able to stand upright with your aid.");
-	
-	outputText("\n\nOpening the chamber's door for you, the Sand Mother adds, \"<i>I will send a few of my daughters to your camp with her... trappings.  You'll need to milk her frequently, and that deluge of lactation must go somewhere; a big bowl, if you like.  If nothing else, your camp and any other followers you accrue will never lack for milk.</i>\"");
-	
-	outputText("\n\nYou thank the Sand Mother for her understanding, and the kindness she's shown your milky friend.  She nods, a wry smile on her dusky lips as you steady the milkmaid, helping her out of the room she's called home for gods know how long, and out into the desert sands - to camp.  To her new home.");
-	
-	//[Next] (To Arriving At Camp)
-	menu();
-	addButton(0,"Next",arriveWithLacticWaifuAtCamp);
-}
 
 //Arriving at Camp
 public function arriveWithLacticWaifuAtCamp():void {
@@ -127,9 +37,9 @@ public function arriveWithLacticWaifuAtCamp():void {
 }
 
 
-public function nameZeMilkBath():void 
+private function nameZeMilkBath():void 
 {
-	if (this.testingBlockExiting)
+	if (kGAMECLASS.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go
@@ -189,7 +99,7 @@ public function nameZeMilkBath():void
 		
 		//[Next time Rath's at camp and PC accesses Milky's meny, play the Arrival w/ Rath scene, sans first sentence]
 	}
-	inDungeon = false;
+	kGAMECLASS.inDungeon = false;
 	doNext(13);
 }
 
@@ -241,7 +151,7 @@ public function milkyMenu():void {
 }
 
 //Appearance
-public function milkWriteFuAppearance():void {
+private function milkWriteFuAppearance():void {
 	clearOutput();
 	outputText("" + flags[kFLAGS.MILK_NAME] + " is a five-foot-five human female, with darkly tanned skin and ebony hair.  ");
 	if(flags[kFLAGS.MILK_SIZE] >= 2) outputText("Over her supple body, she wears a simple cloth shift which cuts off just above her knees, hiding her newly-gained modesty, with a pair of silk painties and a simple bra beneath it.  ");
@@ -262,7 +172,7 @@ public function milkWriteFuAppearance():void {
 }
 
 //Reducto
-public function superReductoUsage():void {
+private function superReductoUsage():void {
 	clearOutput();
 	outputText("You tell " + flags[kFLAGS.MILK_NAME] + " that it's about time she got rid of those massive tits of hers.  She cocks her head to the side, looking at you without comprehension.  You fish the giant vial of Reducto Rath gave you from your pack and hold it up for her to examine.  She hesitantly takes it from your hand and rolls it around, sniffing at the foul-smelling stuff.  She turns up her nose at it.");
 	
@@ -303,7 +213,7 @@ public function superReductoUsage():void {
 		
 		outputText("\n\n\"<i>Everything's foggy,</i>\" she groans, \"<i>But clearer, now.  So much clearer,</i>\" she breathes, smiling at you.  \"<i>Thank you, [name].</i>\"");
 		
-		outputText("\n\nYou tell her it was your pleasure.  ")
+		outputText("\n\nYou tell her it was your pleasure.  ");
 		//{If Rath is at camp: 
 		outputText("Rathazul approaches, clearly having seen the preceeding events.  He smiles warmly at the two of you, clearly happy to have helped.  Wordlessly, the old rat produces a folded set of garments: a cloth shift with intricate embroidery, and a pair of expensive-looking women's underthings, handing them over to " + flags[kFLAGS.MILK_NAME] + ".  She looks from the gift of clothing to the alchemist, and taking them, plants an affectionate kiss on his old brow.  He chuckles, blushing.  \"<i>I'm sorry I don't have more to give you, poor dear,</i>\" Rath says, starting to shuffle away.  \"<i>Still, I think I've held onto those long enough.</i>\"");
 		
@@ -315,7 +225,7 @@ public function superReductoUsage():void {
 }
 	
 //Milk Bath (HHH or Giant boobs only)
-public function milkBathTime():void {
+private function milkBathTime():void {
 	clearOutput();
 	outputText("Tussling " + flags[kFLAGS.MILK_NAME] + "'s hair, you tell her her breasts look a bit full.  She smiles up at you eagerly as you disrobe.  Once nude, you hop down inside and say, \"<i>Bath Time.</i>\"");
 	outputText("\n\nWith trembling anticipation, " + flags[kFLAGS.MILK_NAME] + " reaches down for her ");
@@ -368,7 +278,7 @@ public function milkBathTime():void {
 }
 
 //[Next] (Relax)
-public function relaxWithMilkWaifu():void {
+private function relaxWithMilkWaifu():void {
 	clearOutput();
 	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".   You spend the better part of an hour lounging, letting your cares float away in " + flags[kFLAGS.MILK_NAME] + "'s endless white bounty.   Finally though, you pull out the tub's plug and climb out, finding a towel nearby.   Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 	//(+Lust, -Fatigue)
@@ -378,7 +288,7 @@ public function relaxWithMilkWaifu():void {
 }
 
 //[Communal Bath] (PC must have 3+ of the following followers)
-public function communalBath():void {
+private function communalBath():void {
 	clearOutput();
 	outputText("As you relax in the tub, you decide it's hardly fair to have all this milk and just hog it to yourself.  You sit up and give a sharp whistle, getting the attention of the rest of camp.  \"<i>Jump on in, everyone!</i>\" you shout, quickly grabbing " + flags[kFLAGS.MILK_NAME] + " by the waist and dragging her in.  She tumbles into her own lactation with a sharp cry of surprise, breaching a moment later with a splutter.");
 	//If PC has Isabella: 
@@ -423,12 +333,12 @@ public function communalBath():void {
 	outputText("\n\nThe lot of you carry on like this for nearly an hour, enjoying what little relaxation you're able to get in these dark times.  Eventually, though, you know you must return to your duties.  You and your companions one by one pull yourselves out of the pool, stopping to help " + flags[kFLAGS.MILK_NAME] + " and her bloated breasts; towels are passed around between joking and flirting hands, a few are even cracked over bare skin, making girls scream and yelp.  The camp is soon a mess of laughing and playing, with you in the center of it, teasing your lovers between shameless gropes and playful caresses.");
 	
 	fatigue(-40);
-	HPChange(maxHP()*.33,false);
+	HPChange(player.maxHP()*.33,false);
 	doNext(13);
 }
 
 //[Milk Girl]
-public function pullInZeMilkGirl():void {
+private function pullInZeMilkGirl():void {
 	clearOutput();
 	outputText("You call out to " + flags[kFLAGS.MILK_NAME] + " before she can wander away, and wade over to the side of the tub, leaving your face a few scant inches from her hefty milkers.  She smiles as you reach up, nuzzling her cheek into your hand, purring your name happily.");
 	
@@ -471,18 +381,18 @@ public function pullInZeMilkGirl():void {
 }
 	
 //	[Don't]
-public function dontFuckTheMilkWaifu():void {
+private function dontFuckTheMilkWaifu():void {
 	clearOutput();
 	outputText("You allow the girl to continue for a long, long while until your entire body feels deeply refreshed, her milk having soaked thoroughly into your body and making you feel fresh and revitalized.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she slips into your arms and presses her lips to yours.  Chuckling to yourself, you hold the girl as tight against yourself as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	dynStats("lus", 10+player.sens/10, "resisted", false);
-	HPChange(maxHP()*.33,false);
+	HPChange(player.maxHP()*.33,false);
 	fatigue(-20);
 	doNext(13);
 }
 
 //[Fuck Her] (PC has a Dick)
-public function fuckTheMilkWaifu():void {
+private function fuckTheMilkWaifu():void {
 	clearOutput();
 	outputText("You turn around and pull the milk-slut against you, her massive teats pressing hard against your [chest] until they spurt.  You stroke her cheeks, bringing her lips up to yours.  Her hand finds your [cock] again, stroking you with mounting speed as your tongue finds its way into her mouth, your hands wandering down to grope her sizable ass and flared, breeder's hips.  Your lover sighs heavily, breath filled with lust as you push her up against the rim of the tub, her legs spreading wide for easy access to her milk-lubed cunt.  She locks her arms around your shoulders, moaning happily as you press into her, your [cock] slipping easily into her sodden box.");
 	
@@ -500,12 +410,12 @@ public function fuckTheMilkWaifu():void {
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked thoroughly into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank " + flags[kFLAGS.MILK_NAME] + " for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tight as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	dynStats("lus=", 0);
-	HPChange(maxHP()*.33,false);
+	HPChange(player.maxHP()*.33,false);
 	doNext(13);
 }
 
 //[Fuck Her] (PC has Cooch & C+cups)
-public function beARugMunchingMilkDyke():void {
+private function beARugMunchingMilkDyke():void {
 	clearOutput();
 	outputText("You turn around in the milky pool, pulling the cute little milkmaid tight against you.  She gasps with surprise, but settles as soon as you press your lips to hers, your hands wandering across her huge teats and supple, milky body.  She nuzzles up against you, head resting on your [chest] as you hold her against yourself, stroking her dark hair.  After a few moments of such a simple pleasure, " + flags[kFLAGS.MILK_NAME] + " shifts her cheek along your breast, wrapping her full, dusky lips around your [nipple].  You let out a long moan as she suckles gently, ");
 	if(player.lactationQ() >= 200) outputText("drawing out a trickle of milk from your motherly reserves.  She gulps deeply, smiling up at you as a trickle of your milk runs down her chin, dripping into the pool of her own");
@@ -522,12 +432,12 @@ public function beARugMunchingMilkDyke():void {
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tight as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	dynStats("lus=", 0);
-	HPChange(maxHP()*.33,false);
+	HPChange(player.maxHP()*.33,false);
 	doNext(13);
 }
 	
 //[Drink & Masturbate]
-public function drinkAndFapturbate():void {
+private function drinkAndFapturbate():void {
 	clearOutput();
 	outputText("\"<i>Wait,</i>\" you call out to the ebony woman, letting the milk obscure your hands as you begin to masturbate, \"I want a drink.</i>\"  Sheepishly, " + flags[kFLAGS.MILK_NAME] + " obligingly shifts back toward you, presenting her huge teats.");
 	outputText("\n\n\"<i>Sorry, [name],</i>\" she whines, still meek as ever, \"<i>Drink more.</i>\"");
@@ -580,7 +490,7 @@ public function drinkAndFapturbate():void {
 	doNext(13);
 }
 
-public function nyanCatMilkTime():void {
+private function nyanCatMilkTime():void {
 	clearOutput();
 	//Milk Time!  (HHH Boobs ver.)
 	if(flags[kFLAGS.MILK_SIZE] == 1)
@@ -637,7 +547,7 @@ public function nyanCatMilkTime():void {
 }
 
 //[Finish Normally]
-public function finishMilkNormall():void {
+private function finishMilkNormall():void {
 	clearOutput();
 	outputText("You whisper a few soothing words into " + flags[kFLAGS.MILK_NAME] + "'s ear, but are unrelenting in your task.  With squeezing and kneading fingers, you continue to coax the milk from her tits until she's practically white with flowing cream.  A few minutes later though, you can physically feel her explode over the edge of bliss: the stream of milk from her stiff nipples doubles, blasting an arc several feet long as her voice breaks, a shrill cry to the heavens; " + flags[kFLAGS.MILK_NAME] + "'s entire body shudders, her legs nearly giving out as the boobgasm rocks her slender frame.");
 	
@@ -648,7 +558,7 @@ public function finishMilkNormall():void {
 	doNext(13);
 }
 //[Suckle]
-public function suckleDatMilk():void {
+private function suckleDatMilk():void {
 	clearOutput();
 	outputText("You release " + flags[kFLAGS.MILK_NAME] + "'s breasts, giving her a moment to catch her breath as you pull her up onto your lap, turning her to face you.  She looks at you with lust-marred eyes, breath hot and heavy on your " + player.skinFurScales() + " as you gently caress her heaving bosom.  You wrap your fingers around her left teat, coaxing out the slightest of trickles before bringing it to your waiting lips.  You kiss her reddened peak, tongue rolling across the peak of her teat, rewarded with a strong gush of sweet cream that bulges your cheeks before you can swallow.  It's as if she never runs dry; an ever-flowing stream of milk pours from her breast, forcing you to swallow again and again, barely able to keep up until cream trickles down your cheeks.");
 	
@@ -664,7 +574,7 @@ public function suckleDatMilk():void {
 	doNext(13);
 }
 //[Fuck Her] (Needs a dick what fits)
-public function fuckDatMilkSlat():void {
+private function fuckDatMilkSlat():void {
 	clearOutput();
 	var x:int = player.cockThatFits(50);
 	outputText("Sitting behind the milky girl, chest pressed to her back tight enough to feel her every breath, you can't help but feel " + flags[kFLAGS.MILK_NAME] + "s full, round ass brushing against your " + cockDescript(x) + ".  Responding to her touch, your prick begins to stiffen, filling out through your [armor] and into the valley of " + flags[kFLAGS.MILK_NAME] + "'s ass.  She gasps ever so slightly when she feels your prick pushing against her silky undergarments, but you can feel her heart race, her flesh heating as she starts to move her ass more deliberately, rubbing you from stem to head.");
@@ -683,7 +593,7 @@ public function fuckDatMilkSlat():void {
 }
 
 //Titfuck (ie, an Excuse for Savin to use "Lactic Lust" because Fen just taught him that and he has fallen in love) (Requires DD or HHH tittehs & a dick)
-public function titFuckDatMilkSlut():void {
+private function titFuckDatMilkSlut():void {
 	clearOutput();
 	outputText("You sit down beside " + flags[kFLAGS.MILK_NAME] + " and give her a little push onto her back.  A tiny gasp escapes her lips, but is silenced as you move over top her and giver her a long, tongue-filled kiss.  Her surprise turns into a lusty moan as you ");
 	if(flags[kFLAGS.MILK_SIZE] == 2) outputText("pull off her shift and bra");
@@ -711,4 +621,6 @@ public function titFuckDatMilkSlut():void {
 	fatigue(-10);
 	doNext(13);
 	
+}
+	}
 }

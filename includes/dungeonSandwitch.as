@@ -27,7 +27,6 @@ public function enterBoobsDungeon():void {
 	inDungeon = true;
 	dungeonLoc = 23;
 	eventParser(1);
-	return;
 }
 public function fightCumWitch():void {
 	clearOutput();
@@ -534,7 +533,7 @@ public function gangrush():void {
 //High hit chance
 public function headbuttABitch():void {
 	outputText("The crowd parts, and a stockier, sturdier sorceress ambles out, fists up and head cocked back.  She makes to punch at you before pulling her fist at the last second, snapping her head forward in a powerful headbutt!  You barely have time to react!");
-	var damage:int = Math.round((monster.str + monster.weaponAttack + 10) - rand(player.tou) - player.armorDef);;
+	var damage:int = Math.round((monster.str + monster.weaponAttack + 10) - rand(player.tou) - player.armorDef);
 	//Dodge
 	if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 		outputText("\nThrowing yourself out of the way, you manage to avoid the hit.  Your foe doesn't seem nearly as pleased while she fades back in between her sisters.");
@@ -651,7 +650,7 @@ public function sandWitchMobAI():void {
 public function cumWitchAI():void {
 	//Hurt!
 	if(monster.HPRatio() < .6) {
-		sandWitchCuntHeals();;
+		sandWitchCuntHeals();
 		return;
 	}
 	
@@ -1071,7 +1070,6 @@ public function repeatLoseToCumWitchForDudes():void {
 		dynStats("lus=", 100, "resisted", false);
 		addButton(0,"Facial",tooBigCumWitchLossFacial);
 		addButton(1,"No Facial",tooBigCumWitchLossNoFacial);
-		return;
 	}
 	else {
 		//*Dick Fits Male Loss Scene
@@ -1717,7 +1715,7 @@ public function riddleGameGo():void {
 }
 
 public function riddlePicker():void {
-	var choices:Array = new Array();
+	var choices:Array = [];
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleOne && flags[kFLAGS.RIDDLE_TWO] != riddleOne) choices[choices.length] = riddleOne;
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleTwo && flags[kFLAGS.RIDDLE_TWO] != riddleTwo) choices[choices.length] = riddleTwo;
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleThree && flags[kFLAGS.RIDDLE_TWO] != riddleThree) choices[choices.length] = riddleThree;
@@ -2301,6 +2299,105 @@ public function slavesDiscussion():void {
 	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",forest.essrayle.askMotherToReleaseEssy);
 	if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves);
 }
+//Getting a Milk Slut, Purity Style
+//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
+private function freeSlaves():void {
+	clearOutput();
+	outputText("Thinking back to the poor, mind-broken tittymonster of a bath girl you met here in the witches' coven, you tell the Sand Mother it's about time to free her and any other slaves she's got hidden away.");
+
+	outputText("\n\nThe Sand Mother cocks an eyebrow at you, and makes a rather haughty scoff from atop her throne.  \"<i>You may have beaten my guardians, but what makes you think you can just order something like that, outsider?  The slaves are vital to the workings of the coven; we can't simply </i>release<i> them.</i>\"");
+
+	if(player.inte <= 20) {
+		outputText("\n\nYou start to respond, stop, and have to think for a moment.  You spend a good long minute contemplating, before shrugging.  You're sure there's a convincing argument against this, but can't think of it at the moment.");
+		//[Back to menu
+		doNext(1);
+		return;
+	}
+	// Else:
+	outputText("\n\nYou shake your head. The witches claim to be opposed to the demons, yet what do they do?  They attack travelers who don't submit, enslave those who resist, and Marae knows what else.  This cannot stand.  The Sand Mother's no better than the demons if she's a slaver, keeping people like the poor milk girl as little more than cattle.");
+
+	outputText("\n\nThe Sand Mother scowls, and rises from her throne.  \"<i>Come with me,</i>\" she says, ushering you from the room and through the many corridors of her subterranean haven.  Eventually, she brings you to the bath chamber.  Huddled in the corner is the huge-breasted girl, dozing lightly until the elder witch clears her throat.  In an instant, the girl's up and crawling meekly over, hands supporting her massive teats as she mewls, \"<i>Bath time, Mistress?</i>\"");
+
+	outputText("\n\n\"<i>No, girl,</i>\" the witch says, eliciting a confused look from the slave girl.  \"<i>Why don't you tell your friend here just how much you want to be free, girl. Use your words.</i>\"");
+
+	outputText("\n\n\"<i>M-mistress?</i>\" the slave girl says, head cocked to the side.  \"<i>I...</i>\" she whines, visibly struggling to form a few simple words before giving up and repeating her milky mantra: \"<i>Bath time?</i>\"");
+
+	outputText("\n\nThe Sand Mother shakes her head and turns back to you.  \"<i>She's addled, [name].  Even if I were to let her go, she'd just be snatched up by the demons or some wandering pervert.  Gods know there's no shortage of either.  Releasing her into the wilds is more cruel than keeping her penned, where at least she's cared for - and useful, too.  She fulfils a function amongst us, dear [name], and for that she is honored and tended to.  All her needs are met, and she wants for nothing.  Can you in good conscious demand her release, dooming her to rape and torment and corruption?</i>\"");
+
+	//[Yes] [No] [Gimme her]
+	menu();
+	addButton(0,"Yes",yesDemandMilkRelease);
+	addButton(1,"No",noDemandMilkRelease);
+	addButton(2,"Gimme Her",gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire);
+}
+
+//Yes (No Change)
+private function yesDemandMilkRelease():void {
+	clearOutput();
+	outputText("You tell the Sand Mother that everyone deserves freedom, even if they're addle-minded, or useful.  She can't just <i>keep people</i> because she feels like they're better off in her care.");
+	outputText("\n\nShe sighs, shaking her head sadly as she starts back toward the throne room.  \"<i>You're a bleeding heart idealist, [name].  You'd condemn the girl to torment for the sake of your petty morality.  There's no room for sentimentality these days.  Every soul I keep from becoming a demon, even if I keep them in chains, is on my conscious.  yet I bear that weight gladly, [name].  Perhaps one day, when you're ready to take on that same responsibility, you'll understand.</i>\"");
+	//[PC is left in Milk Room]
+	kGAMECLASS.dungeonLoc = 33;
+	doNext(1);
+}
+
+//No (No Change)
+private function noDemandMilkRelease():void {
+	clearOutput();
+	outputText("You suppose not, when she puts it that way.  The poor girl's probably better off here than in the clutches of the demons.  Seeing you relent, the Sand Mother smiles and pats your shoulder.  \"<i>I'm glad you can see things my way, [name].  There is wisdom in you.  Come, let us speak of other things,</i>\" she says, leading you back to her throne room.");
+	doNext(1);
+}
+
+//Gimme her (Gimme dat delicious milk slut)
+private function gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire():void {
+	clearOutput();
+	outputText("You have a better idea: give the girl to you.  You can care for and protect her in your camp, but also give her at least as much freedom as is safe in these dire times.");
+
+	outputText("\n\nThe Sand Mother sighs, shaking her head sadly.  \"<i>You're an idealist, [name].  But there is wisdom in your words.  Perhaps...  perhaps you are correct.  However, she is quite useful to our coven.  Perhaps I could be persuaded to part with her, if certain recompense was made.  Two thousand gems should be sufficient.</i>\"  The sorceress looks at you, awaiting your answer.");
+
+	if(player.gems < 2000) {
+		outputText("\n\n<b>You haven't got that much.</b>");
+	}
+	menu();
+	//[2 Expensive][Buy Her]
+	addButton(0,"2 Expensive",TwoExpensive4Me);
+	if(player.gems >= 2000) addButton(1,"Buy Her",BuyHer);
+}
+
+private function TwoExpensive4Me():void {
+	clearOutput();
+	outputText("You explain that you can't afford that much.");
+	outputText("\n\nThe Sand Mother shrugs and says, \"<i>Then ask after her when you do.</i>\"  She doesn't stick around long enough for you to reply, leaving you standing there with the milk girl.");
+	outputText("\n\n\"<i>Bath time?</i>\"");
+	kGAMECLASS.dungeonLoc = 33;
+	doNext(1);
+}
+
+private function BuyHer():void {
+	clearOutput();
+	player.gems -= 2000;
+	outputText("You hand over two thousand of your hard-earned gems.");
+
+	outputText("\n\nThe Sand Mother quips, \"<i>Very well, take the girl.  Give her freedom, and keep her safe.  She has more than earned a life of ease after years of faithful service.  The others we keep...  there is a city not far from here.  I will deliver my other servants there in the night.  Perhaps they will find solace in the arms of the last free city in Mareth.</i>\"");
+
+	outputText("\n\n\"<i>Mistress?</i>\" the milk girl says, looking between you and the Sand Mother.");
+
+	outputText("\n\nSmiling beatifically, the Mother kneels down and pats the slave's cheek.  \"<i>You're free now, daughter.  [name] will take you from here, to someplace where you can be free and safe.  Do you understand, darling?  I'm no longer your mistress.</i>\"");
+
+	outputText("\n\nA confused moment later, the idea seems to dawn on her milk-addled mind.  The slave girl turns to you, trying desperately to stand under the weight of her gigantic udders.  \"<i>[Master]?</i>\"");
+
+	outputText("\n\n\"<i>No, no,</i>\" you say, moving to support her tremendous teats' weight, \"<i>Not [master], [name].  Understand?  I'm [name].</i>\"");
+
+	outputText("\n\n\"<i>[name]!</i>\" she echoes with childish glee, finally able to stand upright with your aid.");
+
+	outputText("\n\nOpening the chamber's door for you, the Sand Mother adds, \"<i>I will send a few of my daughters to your camp with her... trappings.  You'll need to milk her frequently, and that deluge of lactation must go somewhere; a big bowl, if you like.  If nothing else, your camp and any other followers you accrue will never lack for milk.</i>\"");
+
+	outputText("\n\nYou thank the Sand Mother for her understanding, and the kindness she's shown your milky friend.  She nods, a wry smile on her dusky lips as you steady the milkmaid, helping her out of the room she's called home for gods know how long, and out into the desert sands - to camp.  To her new home.");
+
+	//[Next] (To Arriving At Camp)
+	menu();
+	addButton(0,"Next",milkWaifu.arriveWithLacticWaifuAtCamp);
+}
 
 public function sexWithFriendlySandMother():void {
 	menu();
@@ -2505,7 +2602,7 @@ public function sandWitchMotherAI():void {
 		gigaFire2();
 		return;
 	}
-	var choices:Array = new Array();
+	var choices:Array = [];
 	if(player.hasStatusAffect("Whispered") < 0) choices[choices.length] = getWhispered;
 	choices[choices.length] = eatALightningBolt;
 	choices[choices.length] = sandMotherTelekinesis;

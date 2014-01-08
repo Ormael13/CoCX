@@ -194,7 +194,11 @@ package classes.Scenes.NPCs
 		// Milk slave
 		public function milkSlave():Boolean
 		{
-			return kGAMECLASS.milkSlave();
+			return kGAMECLASS.milkWaifu.milkSlave();
+		}
+		protected function get milkWaifu():MilkWaifu
+		{
+			return kGAMECLASS.milkWaifu;
 		}
 		// Raphael
 		protected function raphael():Raphael

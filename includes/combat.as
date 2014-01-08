@@ -1059,31 +1059,6 @@ public function doCombat(eventNum:Number):void
 			fantasize();
 			return;
 	}
-	//Shark special attack
-	if(eventNum == 5097) {
-		sharkTease();
-		return;
-}
-	//Shark bad end
-	if(eventNum == 5098) {
-		sharkBadEnd();
-		return;
-	}
-	//Shark bad end2
-	if(eventNum == 5099) {
-		sharkBadEnd2();
-		return;
-	}
-	//Shark rape with dick
-	if(eventNum == 5100) {
-		sharkgirlDickFuck();
-		return;
-	}
-	//Shark 69
-	if(eventNum == 5101) {
-		sharkgirlSixtyNine();
-		return;
-	}
 	//bite attack
 	if(eventNum == 5102) {
 		bite();

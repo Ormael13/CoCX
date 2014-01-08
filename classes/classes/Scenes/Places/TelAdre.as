@@ -209,7 +209,7 @@ private function armorShops():void {
 	menu();
 	addButton(0,"Blacksmith",armorShop);
 	addButton(1,"Piercing",piercingStudio);
-	addButton(2, "Tailor", eventParser, tailorShoppe);
+	addButton(2, "Tailor", tailorShoppe);
 
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{

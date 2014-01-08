@@ -152,6 +152,7 @@
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
 		public var marbleScene:MarbleScene = new MarbleScene();
+		public var milkWaifu:MilkWaifu = new MilkWaifu();
 		public var raphael:Raphael = new Raphael();
 		public var rathazul:Rathazul = new Rathazul();
 		public var sheilaScene:SheilaScene = new SheilaScene();
@@ -188,18 +189,14 @@
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/items.as";
-		include "../../includes/marae.as";
 		include "../../includes/masturbation.as";
-		include "../../includes/milkWaifu.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
-		include "../../includes/sharkgirls.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";
 		include "../../includes/valentines.as";
-		include "../../includes/wanderer.as";
 		include "../../includes/worms.as";
 		include "../../includes/xmas_bitch.as";
 		include "../../includes/xmas_gats_not_an_angel.as";

@@ -1,10 +1,20 @@
-﻿public function wandererRouter():void {
+﻿package classes.Scenes.Areas.Desert {
+	import classes.GlobalFlags.kFLAGS;
+	import classes.BaseContent;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class Wanderer extends BaseContent{
+
+		public function Wanderer()
+		{
+		}
+
+		public function wandererRouter():void {
 	spriteSelect(42);
 	//First meeting...
 	if(player.hasStatusAffect("meet wanderer") < 0) {
 		wandererFirstMeeting();
 		player.createStatusAffect("meet wanderer",0,0,0,0);
-		return;
 	}
 	//Repeat offense!
 	else {
@@ -20,12 +30,11 @@
 		}
 		//No choose made repeat meeting
 		wandererRepeatMeeting();
-		return;
 	}
 }
 
 //Encounter the wanderer for the first time
-public function wandererFirstMeeting():void {
+private function wandererFirstMeeting():void {
 	//Each outputtext is a paragraph
 	outputText("A small plume of dust rises in the distance, betraying the position of something else moving amongst the sandy dunes.   It grows larger as it approaches your position, revealing a bulky distorted shape lurking inside the cloud.  You cautiously approach, preparing to face some new demonic monstrosity.   As the sandy cloud parts, the blurred figure resolves itself into two distinct outlines.\n\n", true);
 	outputText("On the left is a man carrying a heavily loaded wheelbarrow and struggling not to stumble in the sandy desert soil.  Slightly behind and to the right of the man is a shapely woman, her demonic origins plain to anyone who notices the spikes on her head.  As they near the man notices your presence and calls out, \"<i>Ho, traveler!  Fine day isn't it?</i>\"\n\n", false);
@@ -34,25 +43,25 @@ public function wandererFirstMeeting():void {
 	simpleChoices("Help Him",wandererHelpHim,"",0,"",0,"",0,"Leave",wandererLeave);
 }
 //Leave
-public function wandererLeave():void {
+private function wandererLeave():void {
 	spriteSelect(42);
 	outputText("Marcus looks disappointed and sighs, hefting his wheelbarrow and waddling away.  Lucia bounces after him, looking like the cat that got the cream.  You wonder what all that was about.   What a strange land.", true);
 	doNext(13);
 }
 //Repeated encounter if he left
-public function wandererRepeatMeeting():void {
+private function wandererRepeatMeeting():void {
 	spriteSelect(42);
 	outputText("Marcus waves to you as he crests a nearby dune, yelling a greeting.  \"<i>Hey traveler!  Do you have a moment to help a man with a question of theological and moral imperatives?</i>\"\n\nHis succubus accomplice, Lucia, snorts in disdain.", true);
 	simpleChoices("Yes",wandererHelpHim,"",0,"",0,"",0,"Leave",wandererLeave);
 }
 //Volunteer to help
-public function wandererHelpHim():void {
+private function wandererHelpHim():void {
 	spriteSelect(42);
 	outputText("\"<i>Oh good!</i>\" he exclaims as he begins elaborating.  \"<i>My dear succubus here is growing tired of our arrangement, and she wants me to give up the last of my humanity and become a demon like her.  I'm not really sure I want to lose my soul, but at the same time, I know enough about their kind to know I'd REALLY enjoy being an incubus, if you know what I mean.  Before I make the plunge, I'd like a second opinion – what do you think?</i>\"\n\nHe glances over his shoulder with almost a small measure of fear.", true);
 	simpleChoices("Go Demon",wandererGoDemon,"Stay Human",wandererStayHuman,"",0,"",0,"",0);
 }
 //Ask marcus to stay human
-public function wandererStayHuman():void {
+private function wandererStayHuman():void {
 	spriteSelect(42);
 	outputText("\"<i>You little mortal fuckwit!</i>\" screams Lucia before turning to her human lover, \"<i>Don't listen to the foolish mortal, love; think of the fun we could have together!</i>\"\n\n", true);
 	outputText("Marcus shakes his head sadly, \"<i>", false);
@@ -66,7 +75,7 @@ public function wandererStayHuman():void {
 	doNext(13);
 }
 //Ask marcus to go demon
-public function wandererGoDemon():void {
+private function wandererGoDemon():void {
 	spriteSelect(42);
 	outputText("Lucia breaks into a mischievious smile as you suggest taking her up on her offer.  She sashays over to you, flesh jiggling enticingly the whole way.  She leans close, sliding a slender finger down the center of your chest.  \"<i>Thank you for this.  Should we meet again, I promise rewards fit to make a whore faint.</i>\"\n\n", true);
 	outputText("Marcus raises an eyebrow at the exchange, but smiles as his demonic lover returns to his side.  Lucia winks again, and huge wings explode from her back.  She grabs Marcus, who bleats in surprise, and lifts off, flying away with her prize to her lair.", false);
@@ -76,7 +85,7 @@ public function wandererGoDemon():void {
 }
 
 //Demonic epilogue v1
-public function wandererDemonEpilogue():void {
+private function wandererDemonEpilogue():void {
 	spriteSelect(42);
 	if(player.hasStatusAffect("wanderer demon") >= 0) {
 		//First time...
@@ -110,7 +119,7 @@ public function wandererDemonEpilogue():void {
 	}
 }
 //Human Epilogue 1
-public function wandererEpilogueHuman():void {
+private function wandererEpilogueHuman():void {
 	spriteSelect(42);
 	if(player.hasStatusAffect("wanderer human") >= 0) {
 		//Human Epilogue 1
@@ -132,4 +141,6 @@ public function wandererEpilogueHuman():void {
 			takeItem();
 		}
 	}
+}
+}
 }

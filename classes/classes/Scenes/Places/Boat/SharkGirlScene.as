@@ -1,4 +1,13 @@
-﻿/*Codex: Shark girls and tiger shark girls
+﻿package classes.Scenes.Places.Boat{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+public class SharkGirlScene extends AbstractBoatContent{
+
+	public function SharkGirlScene()
+	{
+	}
+
+	/*Codex: Shark girls and tiger shark girls
 
 Gender: Mostly female, though there are males and herms. Due to the nature of their conception, the vast majority of tiger sharks are herms.
 
@@ -56,26 +65,10 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):* {
 	spriteSelect(70);
 }
 
-//Lust-based attacks:
-public function sharkTease():void {
-	spriteSelect(70);
-	if(rand(2) == 0) {
-		outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\"", false);
-		//(Small health damage, medium lust build).
-		takeDamage(4+rand(4));
-		dynStats("lus", (10+(player.lib/20)));
-	}
-	else {
-		outputText("You pull your " + player.weaponName + " back, getting a running start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you to the ground.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\"", false);
-		//(Small health damage, medium lust build)
-		takeDamage(4+rand(4));
-		dynStats("lus", (5+(player.lib/10)));
-	}
-	combatRoundOver();	
-}
+
 
 //Victory Sex. Herms should get a choice between the two scenes:
-public function sharkWinChoices():void {
+internal function sharkWinChoices():void {
 	spriteSelect(70);
 	//HP Win
 	if(monster.HP < 1) {
@@ -90,20 +83,20 @@ public function sharkWinChoices():void {
 		outputText("  Do you have your way with her or leave?", false);
 		temp = 0;
 		if(player.hasKeyItem("Deluxe Dildo") >= 0) temp = 2264;
-		if(player.gender == 1) simpleChoices("Use Dick",5100,"Pussy w/69",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+		if(player.gender == 1) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
 		if(player.gender == 2) {
-			simpleChoices("Yes",5101,"",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+			simpleChoices("Yes",sharkgirlSixtyNine,"",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
 		}
 		if(player.gender == 3) {
-			if(player.isNaga()) simpleChoices("Use Dick",5100,"Pussy Oral",5101,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
-			else simpleChoices("Use Dick",5100,"Pussy w/69",5101,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+			if(player.isNaga()) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy Oral",sharkgirlSixtyNine,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+			else simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",sharkgirlSixtyNine,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
 		}
 	}
 	else cleanupAfterCombat();
 }
 
 //Male and Herm: 
-public function sharkgirlDickFuck():void {
+private function sharkgirlDickFuck():void {
 	player.addStatusValue("Shark-Girl",1,1);
 	outputText("", true);
 	spriteSelect(70);
@@ -138,7 +131,7 @@ public function sharkgirlDickFuck():void {
 	if(player.cor < 33) dynStats("cor", 1);
 }
 
-public function sharkgirlSixtyNine():void {
+private function sharkgirlSixtyNine():void {
 	outputText("", true);
 	spriteSelect(70);
 	//Nagas don't actually get to 69!
@@ -177,7 +170,7 @@ public function sharkgirlSixtyNine():void {
 //Shark girl Bad End.
 //Requirements: Have vaginal sex with 7 Shark girls in one day (Loss rape for males also counts toward this)
 //Scene triggers automatically after the seventh Shark girl
-public function sharkBadEnd():void {
+private function sharkBadEnd():void {
 	outputText("", true);
 	spriteSelect(70);
 	outputText("Several weeks pass by and you once again find yourself at the lake, your loins aching for another shark girl to swim by. Just thinking of their incredible sexual organs and the sense of domination you get from them makes you feel aroused. Sadly though, there's no sign of one, so you instead decide to take a nap.\n\n", false);
@@ -185,11 +178,11 @@ public function sharkBadEnd():void {
 	outputText("They are surprisingly strong given their stature, and even a Minotaur would have trouble prying them all off. Combined with a strong wave of arousal flooding your body, you find it rather hard to focus on anything. They must've funnelled a few Lust Drafts down your throat while you were sleeping.\n\n", false);
 	outputText("\"<i>Wh-what's going on?</i>\" you ask, your voice shifting between arousal and fear. The young girl straddling your chest giggles while drawing circles on your skin with her finger, \"<i>Aw daddy, don't be scared. You're gonna play with your kids! Doesn't that sound fun?</i>\" Another adds, \"<i>Since you seem to love knocking up us shark girls, we figured you'd like to make a living out of it...</i>\" Your eyes widen slightly and you ask her, \"<i>What do you mean by that?</i>\"\n\n", false);
 	outputText("The girls look at each other and grin before the one straddling you pulls out an odd-looking Shark's Tooth. \"<i>Oh you'll see. Open wide...!</i>\"", false);
-	doNext(5099);
+	doNext(sharkBadEnd2);
 }
 
 //[Next]
-public function sharkBadEnd2():void {
+private function sharkBadEnd2():void {
 	outputText("", true);
 	spriteSelect(70);
 	outputText("Several months and mutations later...\n\n", false);
@@ -256,7 +249,7 @@ Putting it on: (Lust increases)
 [If dick is 7+ inches OR balls are apple-sized] You do your best to put the thong on, and while the material is very stretchy, it's simply far too uncomfortable to even try. Maybe if you shrunk your male parts down a little... [/]  
 -------------------------------*/
 //Loss Rape scenes:
-public function sharkLossRape():void {
+internal function sharkLossRape():void {
 	outputText("", true);
 	spriteSelect(70);
 	//Genderless:
@@ -313,4 +306,6 @@ public function sharkLossRape():void {
 		return;
 	}
 	doNext(1);
+}
+}
 }

@@ -1,11 +1,14 @@
-﻿public function discoverBoat():void {
-	player.createStatusAffect("Boat Discovery",0,0,0,0);
-	outputText("You journey around the lake, seeking demons to fight", true);
-	if(player.cor > 60) outputText(" or fuck", false);
-	outputText(".  The air is fresh, and the grass is cool and soft under your feet.   Soft waves lap against the muddy sand of the lake-shore, as if radiating outward from the lake.   You pass around a few bushes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n", false);
-	outputText("<b>You have discovered the lake boat!</b>\n(You may return and use the boat to explore the lake's interior by using the 'places' menu.)", false);
-	doNext(13);
-}
+﻿package classes.Scenes.Places.Boat{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.CockTypesEnum;
+import classes.Appearance;
+public class Marae extends AbstractBoatContent{
+
+	public function Marae()
+	{
+	}
+
 public function encounterMarae():void {
 	spriteSelect(40);
 	outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your " + player.legs() + ".  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ", false);
@@ -52,7 +55,6 @@ public function encounterMarae():void {
 				if(player.hasStatusAffect("Marae's Quest Start") >= 0) {
 					outputText("Marae reminds you, \"<i>You need to disable the demon's factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"", false);
 					doNext(13);
-					return;
 				}
 				//If not
 				else {
@@ -73,7 +75,6 @@ public function encounterMarae():void {
 						simpleChoices("Boob",2075,"",0,"",0,"",0,"Leave",13);
 					}
 					else doNext(13);
-					return;
 				}
 			}
 		}
@@ -87,7 +88,7 @@ public function encounterMarae():void {
 			outputText("\"<i>Thank you,</i>\" she says, breaking the hug and turning back to her tree, \"<i>The onslaught has lessened, and I feel more myself already.  Let me thank you for your heroic deeds.</i>\"\n\n", false);
 			outputText("She plunges a hand inside the tree and pulls out a small pearl.  \"<i>This is a pearl from the very depths of the lake, infused with my purity.  If you eat it, it will grant you my aid in resisting the lust and corruption of this land.</i>\"\n\n", false);
 			outputText("Marae pushes the pearl into your hand, and closes your fingers over it gently.  \"<i>Go now, there is still much to be done.  With luck we will not need each other again,</i>\" commands the goddess as she slips back into her tree.  ", false);
-			shortName = "P.Pearl"
+			shortName = "P.Pearl";
 			takeItem();
 			player.createStatusAffect("Marae Complete",0,0,0,0);
 		}
@@ -115,7 +116,7 @@ public function encounterMarae():void {
 	}	
 }
 
-public function maraeBadEnd():void {
+private function maraeBadEnd():void {
 	spriteSelect(40);
 	outputText("", true);
 	if(player.hasStatusAffect("Met Corrupt Marae") < 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n", false);
@@ -164,7 +165,7 @@ public function maraeBadEnd():void {
 	eventParser(5035);
 }
 
-public function maraeStealLethicite():void {
+private function maraeStealLethicite():void {
 	spriteSelect(40);
 	outputText("", true);
 	//(SUCCESS) 
@@ -211,7 +212,7 @@ public function maraeStealLethicite():void {
 			if(player.gender == 0) {
 				outputText("hairless crotch.  She holds the tentacle back a moment and raises her free hand.  It begins to glow and shimmer as she points to your groin.  Warmth explodes in your crotch as a wriggling wet gash opens up - <b>your new vagina</b>.  ", false);
 				player.createVagina();
-				genderCheck();
+				player.genderCheck();
 			}
 			else outputText(vaginaDescript(0) + ".  ", false);
 			outputText("She guides the tentacle forwards, letting it brush your nether-lips.  Without any guidance from its mistress, the bulbous plant-member buries itself inside you, sliding in easily until it's pushing hard against your womb.  A quick blast of fluid sends cramps spasming up your gut, forcing your cervix to dilate.  It wastes no time, flowing into your unprotected womb.  As soon as it reaches the back of your womb, thick bulges begin sliding down the exposed portion of the tentacle.  It stretches you wide, almost painfully so, as they pass through your lips and work up your passage.  They begin exploding in your cunt, one after the other, cum-bombs bursting in your womb, filling you to the brink.  Your belly swells out, giving you the appearance of a pregnant woman.  Finished with its nasty work, the plant-prick pulls free leaving your puffy pussy lips slightly agape.  A small runner of a thick green substance slowly slides out.", false);
@@ -278,7 +279,7 @@ public function level2MaraeEncounter():void {
 	}
 }
 	
-public function MaraeIIStageII():void {
+private function MaraeIIStageII():void {
 	spriteSelect(40);
 	outputText("", true);
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -418,7 +419,7 @@ public function MaraeIIStageII():void {
 	doNext(MaraePt2RoundIIIPrizes);
 }
 
-public function MaraePt2RoundIIIPrizes():void {
+private function MaraePt2RoundIIIPrizes():void {
 	spriteSelect(40);
 	outputText("", true);
 	//[EPILOGUE]
@@ -519,9 +520,11 @@ public function MaraePt2RoundIIIPrizes():void {
 	doNext(14);
 }
 
-public function MaraeIIFlyAway():void {
+private function MaraeIIFlyAway():void {
 	spriteSelect(40);
 	outputText("", true);
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
 	doNext(13);
+}
+}
 }

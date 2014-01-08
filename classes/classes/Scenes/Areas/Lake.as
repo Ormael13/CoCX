@@ -107,7 +107,7 @@ package classes.Scenes.Areas
 			}
 			//Pre-emptive chance of finding the boat
 			else if (select == 11) {
-				kGAMECLASS.discoverBoat();
+				kGAMECLASS.boat.discoverBoat();
 			}
 			//Meet Izma every 8 attempts
 			else if (select == 5) {

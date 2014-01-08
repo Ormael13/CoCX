@@ -2,7 +2,6 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 
 	public class SandWitchScene extends BaseContent{
 

@@ -17,6 +17,7 @@ package classes.Scenes.Areas
 		public var oasis:Oasis = new Oasis();
 		public var sandTrapScene:SandTrapScene = new SandTrapScene();
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
+		public var wanderer:Wanderer = new Wanderer();
 		public function Desert()
 		{
 		}
@@ -99,7 +100,7 @@ package classes.Scenes.Areas
 				args[args.length] = -8008;
 			}
 			//Encounter Marcus
-			choices[choices.length] = kGAMECLASS.wandererRouter;
+			choices[choices.length] = wanderer.wandererRouter;
 			args[args.length] = -8008;
 			choices[choices.length] = walkingDesertStatBoost;
 			args[args.length] = -8008;

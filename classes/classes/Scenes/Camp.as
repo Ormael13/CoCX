@@ -88,9 +88,9 @@ public function doCamp():void {
 		kGAMECLASS.processJackFrostEvent();
 		return;
 	}
-	if(player.hasKeyItem("Super Reducto") < 0 && kGAMECLASS.milkSlave() && player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
+	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
 		hideMenus();
-		kGAMECLASS.ratducto();
+		milkWaifu.ratducto();
 		return;
 	}
 	if(kGAMECLASS.nieveHoliday() && model.time.hours == 6) {
@@ -756,7 +756,7 @@ public function slavesCount():Number {
 	//Bimbo sophie
 	if(bimboSophie()) counter++;
 	if(ceraphIsFollower()) counter++;
-	if(kGAMECLASS.milkSlave()) counter++;
+	if(milkSlave()) counter++;
 	return counter;
 }
 public function loversCount():Number {
@@ -959,7 +959,7 @@ public function campSlavesMenu():void {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 		amilyEvent = 2427;
 	}
-	if(kGAMECLASS.milkSlave()) {
+	if(milkSlave()) {
 		outputText("Your well-endowed, dark-skinned milk-girl is here.  She flicks hopeful eyes towards you whenever she thinks she has your attention.\n\n");
 	}
 	
@@ -970,7 +970,7 @@ public function campSlavesMenu():void {
 	addButton(2,"Jojo",jojoEvent);
 	addButton(3,"Sophie",sophieEvent);
 	addButton(4,"Vapula",vapula2);
-	if(kGAMECLASS.milkSlave()) addButton(7,flags[kFLAGS.MILK_NAME],kGAMECLASS.milkyMenu);
+	if(milkSlave()) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
 	addButton(8,flags[kFLAGS.GOO_NAME],goo);
 	addButton(9,"Back",eventParser,1);
 }
