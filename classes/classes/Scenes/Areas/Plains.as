@@ -26,7 +26,7 @@ package classes.Scenes.Areas
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 			//Dem Kangasluts!  Force Sheila relationship phase!
 			if (flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {
-				kGAMECLASS.sheilaXPThreeSexyTime();
+				kGAMECLASS.sheilaScene.sheilaXPThreeSexyTime();
 				return;
 			}
 			//Add some holiday cheer
@@ -89,8 +89,8 @@ package classes.Scenes.Areas
 			choices[choices.length] = satyrScene.satyrEncounter;
 			choices[choices.length] = satyrScene.satyrEncounter;
 			if (flags[kFLAGS.SHEILA_CLOCK] >= 0) {
-				choices[choices.length] = kGAMECLASS.sheilaEncounterRouter;
-				choices[choices.length] = kGAMECLASS.sheilaEncounterRouter;
+				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
+				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
 			}
 			//Pick one
 			choices[rand(choices.length)]();

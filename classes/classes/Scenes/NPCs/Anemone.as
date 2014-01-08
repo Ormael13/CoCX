@@ -43,7 +43,7 @@ package classes.Scenes.NPCs
 				if (player.str < 2) game.dynStats("lus", 2);
 				//Lose a point of str.
 				else {
-					game.mainView.statsView.showStatDown("str");
+					showStatDown("str");
 					// strDown.visible = true;
 					// strUp.visible = false;
 					player.str--;
@@ -53,7 +53,7 @@ package classes.Scenes.NPCs
 				if (player.spe < 2) game.dynStats("lus", 2);
 				//Lose a point of spe.
 				else {
-					game.mainView.statsView.showStatDown("spe");
+					showStatDown("spe");
 					// speDown.visible = true;
 					// speUp.visible = false;
 					player.spe--;

@@ -55,7 +55,7 @@ private function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				game.mainView.statsView.showStatDown( 'spe' );
+				showStatDown( 'spe' );
 				// speDown.visible = true;
 				// speUp.visible = false;
 			}
@@ -66,7 +66,7 @@ private function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				game.mainView.statsView.showStatDown( 'spe' );
+				showStatDown( 'spe' );
 				// speDown.visible = true;
 				// speUp.visible = false;
 			}

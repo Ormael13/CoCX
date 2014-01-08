@@ -152,6 +152,7 @@
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
 		public var marbleScene:MarbleScene = new MarbleScene();
+		public var sheilaScene:SheilaScene = new SheilaScene();
 		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 		public var shouldraScene:ShouldraScene = new ShouldraScene();
 		public var sophieBimbo:SophieBimbo = new SophieBimbo();
@@ -201,7 +202,6 @@
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";
 		include "../../includes/sharkgirls.as";
-		include "../../includes/sheila.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";

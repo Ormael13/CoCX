@@ -19,6 +19,10 @@
 		protected final function combatRoundOver():void{
 			game.combatRoundOver();
 		}
+		protected final function cleanupAfterCombat():void
+		{
+			game.cleanupAfterCombat();
+		}
 		protected final function showStatDown(a:String):void{
 			game.mainView.statsView.showStatDown(a);
 		}

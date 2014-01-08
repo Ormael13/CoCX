@@ -207,14 +207,14 @@ package classes.Scenes.NPCs
 					poison--;
 					if (player.str >= 2) {
 						player.str--;
-						game.mainView.statsView.showStatDown("str");
+						showStatDown("str");
 						// strDown.visible = true;
 						// strUp.visible = false;
 						player.addStatusValue("Amily Venom", 1, 1);
 					}
 					if (player.spe >= 2) {
 						player.spe--;
-						game.mainView.statsView.showStatDown("spe");
+						showStatDown("spe");
 						// speDown.visible = true;
 						// speUp.visible = false;
 						player.addStatusValue("Amily Venom", 2, 1);

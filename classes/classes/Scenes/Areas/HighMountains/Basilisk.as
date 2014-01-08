@@ -13,7 +13,7 @@ package classes.Scenes.Areas.HighMountains
 	public class Basilisk extends Monster 
 	{
 
-		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
+		public function basiliskSpeed(player:Player,amount:Number = 0):void {
 			if(player.spe - amount < 1) {
 				amount = player.spe - 1;
 				if(amount < 0) amount = 0;
@@ -21,7 +21,7 @@ package classes.Scenes.Areas.HighMountains
 			player.spe -= amount;
 			if(player.hasStatusAffect("BasiliskSlow") >= 0) player.addStatusValue("BasiliskSlow",1,amount);
 			else player.createStatusAffect("BasiliskSlow",amount,0,0,0);
-			kGAMECLASS.mainView.statsView.showStatDown( 'spe' );
+			showStatDown( 'spe' );
 			// speUp.visible = false;
 			// speDown.visible = true;
 		}

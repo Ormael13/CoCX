@@ -176,6 +176,10 @@ package classes.Scenes.NPCs
 			return kGAMECLASS.milkSlave();
 		}
 		// Sheila
+		protected function get sheilaScene():SheilaScene
+		{
+			return kGAMECLASS.sheilaScene;
+		}
 		// Shouldra
 		protected function get shouldraFollower():ShouldraFollower
 		{

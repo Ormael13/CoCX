@@ -2477,8 +2477,8 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 0) outputText("<b>Owca's Attitude: </b>" + flags[kFLAGS.OWCAS_ATTITUDE] + "\n");
 	if(flags[kFLAGS.SHEILA_XP] != 0) {
-		outputText("<b>Sheila's Corruption: </b>" + sheilaCorruption());
-		if(sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
+		outputText("<b>Sheila's Corruption: </b>" + sheilaScene.sheilaCorruption());
+		if(sheilaScene.sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
 		outputText("\n");
 	}
 	if(player.hasStatusAffect("Kelt") >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {

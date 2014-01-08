@@ -24,7 +24,7 @@
 				if(player.spe > 4) {
 					//stats(0,0,-3,0,0,0,0,0);
 					player.spe -= 3;
-					game.mainView.statsView.showStatDown( 'spe' );
+					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
 					player.createStatusAffect("Naga Venom",3,0,0,0);		
@@ -40,7 +40,7 @@
 				if(player.spe > 3) {
 					//stats(0,0,-2,0,0,0,0,0);
 					player.spe -= 2;
-					game.mainView.statsView.showStatDown( 'spe' );
+					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
 					player.addStatusValue("Naga Venom",1,2);		
