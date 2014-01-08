@@ -42,7 +42,7 @@ public function updatePregnancy():Boolean {
 			displayedUpdate = sandPregUpdate();
 		}
 		if(player.pregnancyType == 21) {
-			displayedUpdate = urtaPregooUpdates();
+			displayedUpdate = urtaPregs.urtaPregooUpdates();
 		}
 		//Cotton Pregnancy! - 350 days long
 		if(player.pregnancyType == 20) {			
@@ -1315,7 +1315,7 @@ public function updatePregnancy():Boolean {
 	}
 	if(player.pregnancyType == 21 && player.pregnancyIncubation == 1) {
 		displayedUpdate = true;
-		PCGivesBirf();
+		urtaPregs.PCGivesBirf();
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 	}
@@ -1328,7 +1328,7 @@ public function updatePregnancy():Boolean {
 	if(player.pregnancyType == 12 && player.pregnancyIncubation == 1) {
 		displayedUpdate = true;
 		//Located in izma.as!
-		pcPopsOutASharkTot();
+		izmaScene.pcPopsOutASharkTot();
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 	}

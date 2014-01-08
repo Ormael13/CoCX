@@ -1,7 +1,11 @@
 package classes.Scenes.Places.TelAdre {
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
-public class Lottie extends TelAdreAbstractContent {
+	import classes.GlobalFlags.kGAMECLASS;
+
+	use namespace kGAMECLASS;
+
+	public class Lottie extends TelAdreAbstractContent {
 public function Lottie(){
 
 }
@@ -1998,7 +2002,7 @@ private function lottieAndIfrisNTREpilogue():void {
 	outputText("A dry wind across your face rouses you from your peaceful sleep.  It seems you're outside the walls of Tel'Adre.  All your equipment is sitting to the right of you, and when you gather the pile of your gear you find a note underneath.\n\n", false);
 
 	outputText("\"<i>Dear " + player.short + ",\n\nSleep well?  I hope so, considering I found you snoring on top of two luscious babes.  Don't worry about getting in trouble at the gym.  Most of the staff and customers were too busy getting themselves off to be angry or offended, though I have to admit I'm a bit jealous.  The little piggy and that tight piece of red ass are both safe in their homes.  ", false);
-	if(!urtaLove()) {
+	if(!kGAMECLASS.urta.urtaLove()) {
 		outputText("Of course, I had to fine you for public indecency - you really ought to watch how you behave, lest someone take you for a demon agent.  Next time, try and keep it in your pants.\n\n-Urta, Captain of the Guard", false);
 		if(player.gems > 0) {
 			player.gems -= 200;

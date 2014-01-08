@@ -2438,7 +2438,7 @@ public function displayStats(e:MouseEvent = null):void
 		outputText(sophie + "\n");
 	}
 	if(player.statusAffectv2("Tamani") > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2("Tamani") + " (after all forms of natural selection)\n", false);
-	if(urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaKids() + "\n");
+	if(urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaPregs.urtaKids() + "\n");
 	if(flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
 	if(emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
 	if(emberScene.emberChildren() > 0) {
@@ -2489,7 +2489,7 @@ public function displayStats(e:MouseEvent = null):void
 	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
 	
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
+		if(urta.urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
 		else if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
 		else if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");

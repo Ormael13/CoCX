@@ -1260,7 +1260,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			//(If Izma at Camp)
-			if (kGAMECLASS.izmaFollower() && flags[kFLAGS.PHYLLA_IZMA_TALK] == 0) {
+			if (kGAMECLASS.izmaScene.izmaFollower() && flags[kFLAGS.PHYLLA_IZMA_TALK] == 0) {
 				flags[kFLAGS.PHYLLA_IZMA_TALK] = 1;
 				outputText("Phylla seems to be a little distant today as you sit down to talk.  You point it out to her and she cautiously asks about Izma.");
 				outputText("\n\n\"<i>I k-know there's someone else at your camp.  I mean... I don't want to pretend I'm the only one you'll ever mate with, but this one is special.  I mean, I can feel it inside here.</i>\"  She points to your head with the two arms on her right side, and her head with the two arms on her left side. Seeing you don't deny it, Phylla's eyes well up as she tries to hold back tears.  \"<i>I d-don't know why you didn't tell me you had others staying closer to you...</i>\"");

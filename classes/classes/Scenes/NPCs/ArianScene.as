@@ -87,7 +87,7 @@ Naga TF
 Corruption Path (Arian's body is drastically altered, but [Arian eir] personality only suffers minor alterations.)
 (Unlikely) Boon and Laika
 */
-public class ArianScene extends BaseContent
+public class ArianScene extends NPCAwareContent
 {
 	public function ArianScene(){
 
@@ -99,7 +99,7 @@ private function arianCockSize():Number {
 	else return 36;
 }
 
-public function arianFollower():Boolean {
+override public function arianFollower():Boolean {
 	return flags[kFLAGS.ARIAN_FOLLOWER] > 0;
 }
 public function arianMF(boy:String,girl:String):String {
@@ -184,7 +184,7 @@ private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 	}
 	//Player enters Tel'Adre main screen
 	menu();
-	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(0,"Next",telAdre.telAdreMenu);
 }
 
 //[=Help=]
@@ -547,7 +547,7 @@ private function arianHomeMenu():void {
 		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
-		if(!arianFollower()) addButton(9,"Back",kGAMECLASS.telAdre.telAdreMenu);
+		if(!arianFollower()) addButton(9,"Back",telAdre.telAdreMenu);
 		else addButton(9,"Back",camp.campLoversMenu);
 	}
 }

@@ -1,11 +1,22 @@
-﻿function urtaQuestDone():Boolean {
+﻿package classes.Scenes.NPCs{
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class UrtaHeatRut extends NPCAwareContent {
+
+		public function UrtaHeatRut()
+		{
+		}
+private function urtaQuestDone():Boolean {
 	return (flags[kFLAGS.URTA_QUEST_STATUS] == 1);
 }
 
 //[Approach Sober Urta]
-function approachSoberUrtaHeatRutProc():void {
+internal function approachSoberUrtaHeatRutProc():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("As you walk over to the table where your foxy herm-lover sits, you think you see eyes following you, your presence attracting an unusual amount of attention. ");
 	if(player.hasStatusAffect("heat") >= 0 && player.hasStatusAffect("rut") >= 0 && player.hasCock() && player.hasVagina()) outputText(" Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
 	else if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText(" Males stare at you with a hint of challenge in their eyes, whilst females eye you attentively. Herms don't seem sure whether they want to fight you or fuck you.");
@@ -36,7 +47,7 @@ function approachSoberUrtaHeatRutProc():void {
 	if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText(" focus is on the hips of the fox-morph");
 	else outputText(" focus on catching a glimpse of that amazing cock, and you keep imagining what can she do with it");
 	outputText(".  Your aggressive hormonal state demands that you ");
-	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) outputText(" put a baby in her, then let her put a baby in you")
+	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) outputText(" put a baby in her, then let her put a baby in you");
 	else if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText(" put a baby in her so she can push it out of those beautiful hips");
 	else outputText(" put that beautiful big cock into your needy [vagina]");
 	//[If Urta's fertility quest wasnât done]
@@ -61,7 +72,7 @@ function approachSoberUrtaHeatRutProc():void {
 		outputText("\n\nUrta looks like she's aboat to say something, but then she stops, confusion pushing aside horniness, if only for the moment.  \"<i>I... What are you going to use?  Your cock?  Your pussy?</i>\" she asks, panting with eagerness to begin.");
 		//[Cock] [Pussy])
 		menu();
-		if(player.cockThatFits(urtaCapacity()) >= 0) addButton(0,"Cock",sateRutWithSoberUrta);
+		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Cock",sateRutWithSoberUrta);
 		else addButton(0,"Cock",sateRutWithSoberUrtaButHuegDicked);
 		addButton(1,"Pussy",soberUrtaSatingPCHeat);
 	}
@@ -76,9 +87,9 @@ function approachSoberUrtaHeatRutProc():void {
 
 		outputText("\n\nYou shed your [armor] as you approach the willing fox-morph with your cock in hand");
 		if(player.hasVagina()) outputText(" and your pussy dripping and eager");
-		outputText(".")
+		outputText(".");
 		menu();
-		if(player.cockThatFits(urtaCapacity()) >= 0) addButton(0,"Next",sateRutWithSoberUrta);
+		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Next",sateRutWithSoberUrta);
 		else addButton(0,"Next",sateRutWithSoberUrtaButHuegDicked);
 	}
 	//Player in heat:
@@ -93,9 +104,9 @@ function approachSoberUrtaHeatRutProc():void {
 
 
 //[Approach Drunken Urta]
-function approachDrunkenUrta():void {
+internal function approachDrunkenUrta():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("As you walk over to the table where your foxy herm-lover sits, you think you see eyes following you, your presence attracting an unusual amount of attention.");
 	//Player in heat and rut:
 	if(player.hasStatusAffect("heat") >= 0 && player.hasStatusAffect("rut") >= 0 && player.hasCock() && player.hasVagina()) outputText("  Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
@@ -118,9 +129,9 @@ function approachDrunkenUrta():void {
 
 
 //[=Not interested=]
-function notInterestedInUburDrunkUrtaRuts():void {
+private function notInterestedInUburDrunkUrtaRuts():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You say it's her who seems to be different today, and gently push her away, before apologizing and making your leave.  ");
 	if(player.faceType == 2) outputText("Your nose does seem to pick up that Urta was and still is getting unusually aroused behind you.  ");
 	if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText("[EachCock] twitches in protest at you leaving a willing lay behind.  ");
@@ -133,16 +144,16 @@ function notInterestedInUburDrunkUrtaRuts():void {
 	//[Medium lust increase]
 	else outputText("Your condition does seem kind of protesting against leaving such a willing lay behind, but it isn't time to be indulging it.");
 
-	stats(0,0,0,0,0,0,5+player.lib/20,0,false);
+	dynStats("lust+",5+player.lib/20,"resist",false);
 	//to Tel'Adre bar menu
 	menu();
 	addButton(0,"Next",telAdre.barTelAdre);
 }
 
 //[=Interested=]
-function interestedInUburDrunkurtaRuts():void {
+private function interestedInUburDrunkurtaRuts():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You raise an eyebrow and ask Urta if she minds telling you the reason for such attention and how exactly do you smell like.");
 
 	//Rut And Heat:
@@ -150,7 +161,7 @@ function interestedInUburDrunkurtaRuts():void {
 	//Rut:
 	else if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText("\n\n\"<i>Well, let me put it like this: you smell like you walked in here to grab every girl here by the hips and breed them all for hours on end, until the whole lot of them's knocked up</i>\"");
 
-	else if(player.hasStatusAffect("heat") >= 0 && player.hasVagina()) outputText("\n\n\"<i>Well, let me put it like this: You smell like you walked in here to tease and flirt with every man and herm in the place... stride into the middle of the floor like a queen, then pull off your clothes and bend over to let yourself be fucked and bred for hours until you were well and truly knocked up.</i>\"")
+	else if(player.hasStatusAffect("heat") >= 0 && player.hasVagina()) outputText("\n\n\"<i>Well, let me put it like this: You smell like you walked in here to tease and flirt with every man and herm in the place... stride into the middle of the floor like a queen, then pull off your clothes and bend over to let yourself be fucked and bred for hours until you were well and truly knocked up.</i>\"");
 
 	//If player is in both heat and rut: 
 	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) {
@@ -173,10 +184,10 @@ function interestedInUburDrunkurtaRuts():void {
 	}
 }
 //(If in heat OR rut, or did not pick Watch)
-function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):void {
+private function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):void {
 	if(newl) clearOutput();
 	else outputText("\n\n");
-	urtaSprite();
+	urta.urtaSprite();
 
 	outputText("Suddenly, Urta's hand dashes to ");
 	//[if players has balls]
@@ -190,7 +201,7 @@ function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):void {
 
 	outputText("\n\nThe fox herself shuts you up immediately by smashing her lips against yours and forcing her tongue inside your mouth.  You can't help but be excited by her aggressiveness");
 	if(chosenSex == 1) outputText(", and [eachCock] already gets hard in your [armor].");
-	else outputText(", and you feel the inside of your [armor] rapidly slickened by your [vagina]'s excitement.")
+	else outputText(", and you feel the inside of your [armor] rapidly slickened by your [vagina]'s excitement.");
 
 	outputText("\n\nYou're a bit surprised by the reaction, and while you're still putty in her hands, Urta pushes you onto the bar table with strength nigh-impossible for her frame.  You feel wood under your back.  Her tail unfolds and presents her already erect equine penis to you, ");
 	//Player in both : 
@@ -214,7 +225,7 @@ function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):void {
 
 	menu();
 	if(chosenSex == 1) {
-		if(player.cockThatFits(urtaCapacity()) >= 0) addButton(0,"Next",drunkUrtaRidesARutPCsCock);
+		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Next",drunkUrtaRidesARutPCsCock);
 		else addButton(0,"Next",sateRutWithDrunkUrtaWithHugeDick);
 	}
 	else addButton(0,"Next",drunkenUrtaFucksPCInHeat);
@@ -222,9 +233,9 @@ function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):void {
 
 //[If player is in Heat AND Rut and chooses "Watch"]
 //[Watch Drunken Urta Jerk Off]
-function watchDrunkRuturtaJerkoff():void {
+private function watchDrunkRuturtaJerkoff():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You decide that you want to see the proud captain of Tel'adre's Watch reduced to a horny mess in the middle of the public, and so just take a few steps back and watch.");
 
 	outputText("\n\nUrta's massive, equine phallus is so blatantly obvious that at last she ");
@@ -245,22 +256,22 @@ function watchDrunkRuturtaJerkoff():void {
 }
 
 //[=Stop Teasing=]
-function stopTeasingDatHornyFox():void {
+private function stopTeasingDatHornyFox():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You decide there's no point taking things too far - besides, Urta seems just about ready to pop now, especially with how she's frantically suckling at her own cockhead.");
 
 	outputText("\n\nAnd pop she does; pulling her head free from her cock with an audible popping sound, she throws it back with a howl more befitting a wolf than a fox as her swollen prick finally unloads its cargo, a fountain of foxy spooge spewing thick and slimy into the air and raining down all over her, plastering her from head to toe in her own jism, even as her cunt spasms and gushes fluid under her.  She cums and cums, drenching herself in herm-spunk until her legs give out and she falls flat onto her shapely rear, her cock giving one last ejaculate before it and she both fall limp onto the floor in the pool of cum.");
 
 	outputText("\n\nSeeing her lying there so still makes you concerned and you quickly approach; you didn't want to kill her!  Thankfully, she's still breathing; she just passed out from the overload and from drinking too much.  Looking around you, you can see that an orgy is starting to break out around you, and you quickly make a break for it.  As you go, you can't help but wonder what in the world you were thinking...");
-	stats(0,0,0,0,0,0,20 + player.lib/5,0);
+	dynStats("lust+",20 + player.lib/5);
 	doNext(13);
 }
 
 //[=Keep Teasing=]
-function keepTeasingDatHornyFawkes():void {
+private function keepTeasingDatHornyFawkes():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You smirk; things are just starting to get fun around here, why would you stop now?  You start to amp up your routine even more, flaunting your scents and your goods for all the bar's occupants, not just the drunken fox-herm feverishly jerking herself off in front of you.  You can't recall if you've ever danced before coming to Mareth, but you don't think you do too bad as you perform an amateur strip-dance for the audience around you, slowly peeling off your [armor] and sensuously discarding them, bending over to let Urta and any other cock-bearing character present in the bar get a good look at your [vagina], ");
 	if(player.balls > 0) outputText("lewdly cupping and fondling your [balls], ");
 	outputText("slowly beginning to stroke and caress your " + multiCockDescriptLight() + " for the benefit of those who bear vaginas.");
@@ -279,18 +290,18 @@ function keepTeasingDatHornyFawkes():void {
 	outputText(" from the racous orgy that is the Wet Bitch; truly an auspicious name.");
 
 	//PC loses 1 hour, returns to TelâAdre, gains 15 lust, heat/rut unaffected//
-	stats(0,0,0,0,0,0,15 + player.lib/10,0);
+	dynStats("lust+",15 + player.lib/10);
 	doNext(13);
 }
 
 
 //Sober Urta Variants 
 //Sober Urta has a 45% chance to end rut/heat, depending on which one she's sating, and a 5% chance to intensify it with no modifications to the PCs attributes.
-function soberUrtaSatingPCHeat():void {
+private function soberUrtaSatingPCHeat():void {
 	//If she's Lover Urta, her vaginal capacity increases to cock area 66 (or at least it's what we planned).
 	//Quote:[Sate Heat with Sober Urta]
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 
 	outputText("As she presses your back against the wall, you spread your [legs] wide, allowing Urta easy access to your awaiting womanhood");
 	//[If herm]:
@@ -412,18 +423,18 @@ function soberUrtaSatingPCHeat():void {
 
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
-	stats(0,0,0,0,1,-2,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lib",1,"sen-",2,"lus=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
 	doNext(13);
 }
 
 //Quote:[=Sate Rut with Sober Urta: Cock Too Big=]
-function sateRutWithSoberUrtaButHuegDicked():void {
+private function sateRutWithSoberUrtaButHuegDicked():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	var x:int = player.biggestCockIndex();
 	outputText("Urta observes your approaching " + cockDescript(x) + " with a hungry, eager expression. Without taking her eyes off of it, she flips up her ");
 	if(!urtaLove()) outputText("skirt");
@@ -460,16 +471,17 @@ function sateRutWithSoberUrtaButHuegDicked():void {
 
 		outputText("\n\n\"<i>Mmm... you taste nice, lover.  Still, I'd much rather feed this into the hole where it belongs, so why don't you try and shrink this monster down, huh?</i>\" she suggests.  Rising to her feet, with surprisingly vulpine shake of her body and a soft sigh, she turns and heads home, her erection bobbing up and down before her; evidently, she's intending to use some of her toys to find some release of her own. You re-dress and head back yourself, trying to make sense of your inhuman breeding rut.");
 	}
-	stats(0,0,0,0,1,-2,-100,0);
+	dynStats("lib+",1,"sen-",2,"lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
 	doNext(13);
 	///Player returns to Tel'Adre Menu, usual one hor passes//
 }
 
 //Quote:[=Sate Rut with Sober Urta=]
-function sateRutWithSoberUrta():void {
+private function sateRutWithSoberUrta():void {
+	var x:int = player.biggestCockIndex();
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("Urta observes your approaching package with a hungry, eager expression. Without taking her eyes off of it, she flips up her skirt, her huge horse-cock whipping up to slap between her breasts, pre already dribbling down the tip.");
 
 	outputText("\n\nThe sight makes you halt your advance.  Not out of disgust with Urta's body - how could you be, when you have have sex to her before now?  No, the problem is that you can't figure out how to approach her - those apple-sized balls of hers are in the way.");
@@ -509,9 +521,9 @@ function sateRutWithSoberUrta():void {
 		outputText("\n\nYou ask Urta what she's going to do; you didn't have the chance to use a condom.");
 		if(flags[kFLAGS.URTA_FERTILE] == 1) outputText("\n\n\"<i>We'll just have to hope then, won't we, [name]?</i>\"");
 		else outputText("\n\n\"<i>I'm not likely to get pregnant with all the birth control I'm on right now, even with all that cum in me.</i>\"\n\nFeeling relieved, you turn and head out into the streets of the city.");
-		knockUpUrtaChance();
-		knockUpUrtaChance();
-		knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
 	}
 	else {
 		outputText("\n\nShe saunters over you and waves a finger under your nose in playful mockery.  ");
@@ -523,7 +535,7 @@ function sateRutWithSoberUrta():void {
 	//usual one hour passess, player is back in TelâAdre//
 	//Knock up urta if appropriate.
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
-	stats(0,0,0,0,1,-2,-100,0);
+	dynStats("lib+",1,"sen-",2,"lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
 	doNext(13);
 }
@@ -534,9 +546,9 @@ function sateRutWithSoberUrta():void {
 
 //Quote:[Drunken Urta Fucks Vagina]
 //This scene only plays if the character is in heat, or is in both heat and rut and chose "Pussy"
-function drunkenUrtaFucksPCInHeat():void {
+private function drunkenUrtaFucksPCInHeat():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("You simply smile at her, inhaling deeply through your nose; you can swear you can smell her herm-musk, wafting off of her as strongly as your own pheromones must be wafting off of you.  That wonderful, earthy, primordial scent, the odor of a healthy breeder ready and willing to mate... there's nothing like it.");
 	//(Fertility Quest not done:
 	if(!urtaQuestDone()) outputText("  You know that she can't give you babies... but, honestly, at this moment, you couldn't care less. Her wonderful stallion cock is there and ready and it's all for you.");
@@ -601,18 +613,18 @@ function drunkenUrtaFucksPCInHeat():void {
 		player.knockUp(21,515,25);
 	}
 	//player returns to camp and loses 4 hours//
-	stats(0,0,0,0,2,-4,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lib",2,"sen",-4,"lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
 	doNext(15);
 }
 
 //[Sate Rut with Drunken Urta â Cock too big]
-function sateRutWithDrunkUrtaWithHugeDick():void {
+private function sateRutWithDrunkUrtaWithHugeDick():void {
 	clearOutput();
-	urtaSprite();
+	urta.urtaSprite();
 	outputText("Urta climbs on top of you, pressing her wet slit against the head of your cock.  She does attempt to get it inside, but the pain of being stretched quickly makes her realize that even if she managed to, the fuck would be less than enjoyable and more than a little painful.  She groans and growls in frustration, pulling herself off you and pressing her apple-sized balls ");
 	if(player.balls > 0) outputText("against your own [balls]");
 	else if(player.hasVagina()) outputText("against your [clit]");
@@ -650,16 +662,17 @@ function sateRutWithDrunkUrtaWithHugeDick():void {
 
 	outputText("\n\nRealizing thereâs no point in talking to her and just somewhat sated, you return to your camp.");
 	//[+1 Libido, -1 Sensitivity; No effect on your rut]
-	stats(0,0,0,0,1,-1,-100,0);
+	dynStats("lib",1,"sen",-1,"lust=",0);
 	//player returns to TelâAdre and loses 1 hour
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
 	doNext(13);
 }
 
 //Quote:[Drunken Urta Fucks Cock]
-function drunkUrtaRidesARutPCsCock():void {
+private function drunkUrtaRidesARutPCsCock():void {
 	clearOutput();
-	urtaSprite();
+	var x:int = player.biggestCockIndex();
+	urta.urtaSprite();
 	outputText("You decide not to fight the situation â truthfully, the promises given by the sight of the hot hermaphrodite vixen climbing on top of you ignite your lusts and sing to your rut in ways you don't think you'd be able to safely ignore.");
 
 	outputText("\n\nUrta lifts her balls and presses your already hard cock against her black pussy lips, justifying your decision.  Slowly, you feel your tip sink into her, then the rest of your memer, as she releases a soft moan.  She keeps pressing down, forcing your " + cockDescript(x) + " inside her wet gash until you feel her butt pressed against your ");
@@ -837,9 +850,9 @@ function drunkUrtaRidesARutPCsCock():void {
 		if(flags[kFLAGS.URTA_FERTILE] != 1) outputText("\n\n\"<i>Don't worry love, I'm on enough contraceptives that we shouldn't have to worry,</i>\" Urta admits.");
 		else outputText("\n\n\"<i>We did, didn't we?  It would be nice, wouldn't it?  If everytime you got in a rutting mood you could just drill another baby into me...  I really wanted it, [name]!  I love you!</i>\"");
 		outputText("\n\nYou nod and tell her you understand.");
-		knockUpUrtaChance();
-		knockUpUrtaChance();
-		knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
+		urtaPregs.knockUpUrtaChance();
 	}
 	outputText("\n\nShe ");
 	if(!urtaLove()) outputText("winks at you as you get ready to leave.  I hope I'll get to play with you again soon.</i>\"");
@@ -852,13 +865,13 @@ function drunkUrtaRidesARutPCsCock():void {
 	outputText("\n\nSatisfied even if your body hurts all over and your " + cockDescript(x) + " seems empty, dry, burning, and almost ruptured.  You leave the house with a small smile on your face, and a strong stench of sexual fluids following you back to the camp.");
 
 	//player returns to camp and loses 4 hours//
-	stats(0,0,0,0,2,-10,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lib",2,"sen-",10,"lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
+	dynStats("lust=",0);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
 	doNext(15);
@@ -876,3 +889,5 @@ Intensify: As you walk away, you groan as you realise that you feel hornier than
 //Drunken Urta Variants 
 //Quote:Drunken Urta always affects heat/rut when penetration is involved (meaning she doesn't in her frottage scene and watch-her-masturbate scene), and has a 50% chance to either extinguish it or intensify it.
 //When penetration is involved, sex with Drunken Urta while in Heat/Rut increases both Toughness and Libido by 2 points and lowers Sensitivity by 4 points. Player often loses more than 1 hour and has to return to camp, rather than stay in TelâAdre. When getting penetrated, Urta's vaginal capacity is bumped up to 72.
+}
+}

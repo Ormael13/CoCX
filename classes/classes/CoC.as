@@ -98,7 +98,6 @@
 		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
 		
-		include "../../includes/followerInteractions.as";
 
 		include "../../includes/eventTest.as";
 		
@@ -115,6 +114,7 @@
 		// Scenes/
 		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
+		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -146,17 +146,23 @@
 		public var holliScene:HolliScene = new HolliScene();
 		public var isabellaScene:IsabellaScene = new IsabellaScene();
 		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
+		public var izmaScene:IzmaScene = new IzmaScene();
 		public var jojoScene:JojoScene = new JojoScene();
 		public var kihaFollower:KihaFollower = new KihaFollower();
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
 		public var marbleScene:MarbleScene = new MarbleScene();
+		public var raphael:Raphael = new Raphael();
+		public var rathazul:Rathazul = new Rathazul();
 		public var sheilaScene:SheilaScene = new SheilaScene();
 		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 		public var shouldraScene:ShouldraScene = new ShouldraScene();
 		public var sophieBimbo:SophieBimbo = new SophieBimbo();
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
+		public var urta:Urta = new Urta();
+		public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
+		public var urtaPregs:UrtaPregs = new UrtaPregs();
 		public var valeria:Valeria = new Valeria();
 		public var vapula:Vapula = new Vapula();
 		// Scenes/Places/
@@ -165,6 +171,8 @@
 		public var farm:Farm = new Farm();
 		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre = new TelAdre();
+		// Scenes/Quests/
+		public var urtaQuest:UrtaQuest = new UrtaQuest();
 
 		// Other scenes
 		[Scene]
@@ -180,7 +188,6 @@
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/items.as";
-		include "../../includes/izma.as";
 		include "../../includes/jasun.as";
 		include "../../includes/katherine.as";
 		include "../../includes/library.as";
@@ -189,8 +196,6 @@
 		include "../../includes/milkWaifu.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
-		include "../../includes/Raphael.as";
-		include "../../includes/rathazul.as";
 		include "../../includes/runa.as";
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";
@@ -198,10 +203,6 @@
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";
-		include "../../includes/urta.as";
-		include "../../includes/urtaPregs.as";
-		include "../../includes/urtaQuest.as";
-		include "../../includes/urtaHeatRut.as";
 		include "../../includes/valentines.as";
 		include "../../includes/wanderer.as";
 		include "../../includes/worms.as";

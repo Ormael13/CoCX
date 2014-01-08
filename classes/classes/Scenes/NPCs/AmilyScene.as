@@ -1661,7 +1661,7 @@ package classes.Scenes.NPCs
 
 				outputText("\"<i>Shark Girls? Near as I can tell, they used to be a village of humans who lived right here on the lake... then the lake got polluted, and turned them all into... well, what they are now.</i>\"\n\n", false);
 
-				if(!kGAMECLASS.izmaFollower()) outputText("She looks pensive.  \"<i>Odd... I don't think they have any males left, but on very rare occasions I've seen these weird tiger-striped Shark Girls... and they always had huge cocks and balls as well.  But, whether female or herm, they seem to only care about fighting and fucking... and from the way I've seen them going at it, I don't think they see any difference between the two any more.</i>\"\n\n", false);
+				if(!izmaFollower()) outputText("She looks pensive.  \"<i>Odd... I don't think they have any males left, but on very rare occasions I've seen these weird tiger-striped Shark Girls... and they always had huge cocks and balls as well.  But, whether female or herm, they seem to only care about fighting and fucking... and from the way I've seen them going at it, I don't think they see any difference between the two any more.</i>\"\n\n", false);
 
 				outputText("You ask her if she has any advice on fighting them.\n\n", false);
 
@@ -2425,13 +2425,13 @@ package classes.Scenes.NPCs
 			}
 			//Jojo + Amily Spar
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
-				kGAMECLASS.pureJojoAndAmilySpar();
+				finter.pureJojoAndAmilySpar();
 				return;
 			}
 			//Amily
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_WAIT_FOR_PC_FIX_JOJO] == 1 && hasItem("PurHony",1) && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.JOJO_FIXED_STATUS] == 0)
 			{
-				kGAMECLASS.fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM();
+				finter.fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM();
 				return;
 			}
 			outputText("", true);
@@ -2480,7 +2480,7 @@ package classes.Scenes.NPCs
 		private function amilyMenu(output:Boolean = true):void {
 			var date:Number = 0;
 			//If no fight yet, have option to introduce Urta and Amily
-			if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !kGAMECLASS.urtaBusy())
+			if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !kGAMECLASS.urtaQuest.urtaBusy())
 			{
 				if(output)outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n", false);
 				date = 3400;
@@ -2663,7 +2663,7 @@ package classes.Scenes.NPCs
 					bText = "MakeBabies";
 					babies = 2775;
 					//Send make babies to an appropriate override
-					if(kGAMECLASS.izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
+					if(izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
 						babies = 3989;
 					}
 				}
@@ -2675,11 +2675,11 @@ package classes.Scenes.NPCs
 				}
 			}
 			var urta:Number = 0;
-			if(flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !kGAMECLASS.urtaBusy()) urta = 3190;
+			if(flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !kGAMECLASS.urtaQuest.urtaBusy()) urta = 3190;
 			var swim:int = 0;
 			if(flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) swim = 3960;
 			var threesome:int = 0;
-			if(kGAMECLASS.izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] > 0 && player.hasCock())
+			if(izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] > 0 && player.hasCock())
 			{
 				outputText("You could see if Amily and Izma are up for another round of Amily's fertility potion, though contraceptives won't matter at all once she takes that.\n");
 				threesome = 3990;
@@ -5544,7 +5544,7 @@ package classes.Scenes.NPCs
 
 				outputText("\"<i>Those are Shark Girls, " + player.mf("master","mistress") + ". I think, they used to be a village of humans who lived on the lake... then the lake was contaminated, and they all turned into the lovely sharks they are now,</i>\" Amily says with a smile.\n\n", false);
 
-				if(!kGAMECLASS.izmaFollower()) outputText("Amily looks pensive, trying to recall something. \"<i>I don't think they have any males left, but on very rare occasions I've seen these weird tiger-striped Shark Girls.</i>\" Her tail begins moving from side to side, moisture beginning to drip from her. \"<i>They have these huge cock and huge balls, and the only thing they care about is fighting and fucking. I think both things are the same for them,</i>\" she says, panting a bit.\n\n", false);
+				if(!izmaFollower()) outputText("Amily looks pensive, trying to recall something. \"<i>I don't think they have any males left, but on very rare occasions I've seen these weird tiger-striped Shark Girls.</i>\" Her tail begins moving from side to side, moisture beginning to drip from her. \"<i>They have these huge cock and huge balls, and the only thing they care about is fighting and fucking. I think both things are the same for them,</i>\" she says, panting a bit.\n\n", false);
 
 				outputText("She looks at you with lust-filled eyes. \"<i>" + player.mf("Master","Mistress") + ", let's fuck like them; spank me, hit me and then fuck me. Cum all over me, make me feel like the cumslut that I am,</i>\" she begs, openly panting.\n\n", false);
 

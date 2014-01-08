@@ -1719,9 +1719,6 @@ public function doItems(eventNo:Number):void {
 		player.addStatusValue("metRathazul",2,1);
 		return;
 	}
-	if(eventNo == 1022) {
-		buyDyes();
-	}
 	if(eventNo == 1023) {
 		placeInStorage(1);
 	}

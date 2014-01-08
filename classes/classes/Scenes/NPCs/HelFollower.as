@@ -1038,7 +1038,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 		}
 	}
 	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-	if(inCombat()) addButton(9,"Leave",eventParser,cleanupAfterCombat);
+	if(inCombat()) addButton(9,"Leave",cleanupAfterCombat);
 	else addButton(9,"Back",heliaFollowerMenu);
 }
 

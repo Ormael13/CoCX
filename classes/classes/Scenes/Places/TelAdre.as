@@ -2,8 +2,6 @@
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.TelAdre.*;
 
 	/**
@@ -129,7 +127,7 @@ private function telAdreCrystal():void {
 private function telAdreTour():void {
 	player.changeStatusValue("Tel'Adre",1,1);
 	outputText("", true);
-	kGAMECLASS.urtaSprite();
+	kGAMECLASS.urta.urtaSprite();
 	outputText("Urta leads you into the streets of Tel'Adre, giving you a brief run-down of her and her city, \"<i>You see, about two decades back, the demons were chewing their way through every settlement and civilization in Mareth.  The covenant, a group of powerful magic-users, realized direct confrontation was doomed to fail.  They hid us in the desert with their magic, and the demons can't corrupt what they can't find.  So we're safe, for now.</i>\"\n\n", false);
 	outputText("The two of you find yourselves in the center of a busy intersection.  Urta explains that this is the main square of the city, and that, although the city is large, a goodly portion of it remains empty.  Much of the population left to assist other settlements in resisting the demons and was lost.  She brushes a lock of stray hair from her eye and guides you down the road, making sure to point out her favorite pub - \"The Wet Bitch\".  You ", false);
 	if(player.cor < 25) outputText("blush", false);
@@ -146,12 +144,12 @@ public function telAdreMenu():void {
 		kGAMECLASS.crazyVDayShenanigansByVenithil();
 		return;
 	}
-	if(!kGAMECLASS.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
 		urtaIsABadass();
 		return;
 	}
-	if(!kGAMECLASS.urtaBusy() && flags[kFLAGS.URTA_INCUBATION] >= 192 && rand(30) == 0) {
-		kGAMECLASS.urtaIsAPregnantCopScene();
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.URTA_INCUBATION] >= 192 && rand(30) == 0) {
+		kGAMECLASS.urtaPregs.urtaIsAPregnantCopScene();
 	   return;
 	}
 	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0) {
@@ -165,7 +163,7 @@ public function telAdreMenu():void {
 	//Urta must be pregnant to trigger this scene.
 	//Play this scene upon entering Tel'Adre.
 	if(flags[kFLAGS.URTA_INCUBATION] > 50 && rand(4) == 0 && flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] == 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) {
-		kGAMECLASS.urtaSpecialDeliveries();
+		kGAMECLASS.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
@@ -177,7 +175,7 @@ public function telAdreMenu():void {
 	var homes:Boolean = false;
 	var homeB:Function = null;
 	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2) {
-		if(kGAMECLASS.RaphaelLikes())
+		if(kGAMECLASS.raphael.RaphaelLikes())
 		{
 			homes = true;
 		}
@@ -185,7 +183,7 @@ public function telAdreMenu():void {
 			outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
 		}
 	}
-	if(kGAMECLASS.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
+	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) homes = true;
 	if(homes) homeB = houses;
 	choices("Shops",armorShops,"Bakery",bakeryScene.bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",kGAMECLASS.visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
@@ -219,11 +217,11 @@ private function armorShops():void {
 public function houses():void {
 	clearOutput();
 	outputText("Whose home will you visit?");
-	var orphanage:int = 0;
+	var orphanage:Function = null;
 	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2) {
-		if(kGAMECLASS.RaphaelLikes())
+		if(kGAMECLASS.raphael.RaphaelLikes())
 		{
-			orphanage = 3975;
+			orphanage = kGAMECLASS.raphael.orphanageIntro;
 		}
 		else {
 			outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
@@ -231,8 +229,8 @@ public function houses():void {
 	}
 	menu();
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(0,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
-	if(orphanage) addButton(1,"Orphanage",kGAMECLASS.orphanageIntro);
-	if(kGAMECLASS.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",kGAMECLASS.visitTheHouse);
+	addButton(1,"Orphanage",kGAMECLASS.raphael.orphanageIntro);
+	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",kGAMECLASS.urtaPregs.visitTheHouse);
 	addButton(9,"Back",telAdreMenu);
 }
 
@@ -975,7 +973,7 @@ public function barTelAdre():void {
 	menu();	
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
-		button = anotherButton(button,"Ask4Amily",kGAMECLASS.askAboutAmily);
+		button = anotherButton(button,"Ask4Amily",kGAMECLASS.followerInteractions.askAboutAmily);
 	}
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
@@ -1093,10 +1091,10 @@ public function barTelAdre():void {
 		button = anotherButton(button,"ScyllaCats",kGAMECLASS.katherineGreeting);
 	}
 	//URTA	
-	if(!kGAMECLASS.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
+		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urta.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urta.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
@@ -1109,14 +1107,14 @@ public function barTelAdre():void {
 				}
 			}
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
-			button = anotherButton(button,"Back Room",eventParser,2697);
+			button = anotherButton(button,"Back Room",kGAMECLASS.urta.scyllaAndUrtaSittingInATree);
 		}
-		else if(kGAMECLASS.urtaBarDescript()) {
+		else if(kGAMECLASS.urta.urtaBarDescript()) {
 			if(flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && flags[kFLAGS.URTA_INCUBATION] > 0) {
-				kGAMECLASS.urtaIsHappyAboutPregnancyAtTheBar();
+				kGAMECLASS.urtaPregs.urtaIsHappyAboutPregnancyAtTheBar();
 				return;
 			}
-			button = anotherButton(button,"Urta",kGAMECLASS.urtaBarApproach);
+			button = anotherButton(button,"Urta",kGAMECLASS.urta.urtaBarApproach);
 		}
 	}
 	//VALA
@@ -1128,7 +1126,7 @@ public function barTelAdre():void {
 private function oldbarTelAdre():void {
 	hideUpDown();
 	var edryn2:Number = 0;
-	var urta:Number = 0;
+	var urta2:Function = null;
 	var misc1:Number = 0;
 	var misc1Name:String = "";
 	outputText("", true);
@@ -1140,7 +1138,7 @@ private function oldbarTelAdre():void {
 	if(player.humanScore() <= 3) outputText("despite your altered appearance, ", false);
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.", false);
 	//Hours of operation decrease after birth
-	if(!kGAMECLASS.urtaBusy()) {
+	if(!kGAMECLASS.urtaQuest.urtaBusy()) {
 		if(edryn.edrynBar()) {
 			//Edryn panic appearance!
 			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) {
@@ -1238,13 +1236,13 @@ private function oldbarTelAdre():void {
 	//Everyone's favorite Vala!
 	var vala:Number = 0;
 	//Backroom urta
-	var backroom:Number = 0;
+	var backroom:* = 0;
 	var backroomT:String = "Backrooms";
 	if(kGAMECLASS.purifiedFaerieBitchBar()) vala = 2621;
-	if(!kGAMECLASS.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urta.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urta.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
@@ -1258,18 +1256,18 @@ private function oldbarTelAdre():void {
 			}
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
 			if(misc1Name == "Scylla") misc1 = 0;
-			urta = 0;
-			backroom = 2697;
+			urta2 = null;
+			backroom = kGAMECLASS.urta.scyllaAndUrtaSittingInATree;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
 		}
-		else if(kGAMECLASS.urtaBarDescript()) {
+		else if(kGAMECLASS.urta.urtaBarDescript()) {
 			if(flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && flags[kFLAGS.URTA_INCUBATION] > 0) {
-				kGAMECLASS.urtaIsHappyAboutPregnancyAtTheBar();
+				kGAMECLASS.urtaPregs.urtaIsHappyAboutPregnancyAtTheBar();
 				return;
 			}
-			urta = 2284;
+			urta2 = kGAMECLASS.urta.urtaBarApproach;
 		}
-		else urta = 0;
+		else urta2 = null;
 	}
 	//Ask about Amily!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
@@ -1305,7 +1303,7 @@ private function oldbarTelAdre():void {
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}		
 	var kath:Number = 0;
-	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
+	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta2,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
 
 public function tailorShoppe():void {
@@ -1468,7 +1466,7 @@ private function urtaIsABadass():void {
 //[Invetigate]
 private function watchUrtaBeABadass():void {
 	outputText("", true);
-	kGAMECLASS.urtaSprite();
+	kGAMECLASS.urta.urtaSprite();
 	outputText("You shoulder past the bulky centaurs, ignore the rough fur of the nearby wolves and hounds as it brushes against you, and press your way through to the center of the crowd.  Eventually the throng parts, revealing the embattled combatants.  A snarling wolf, nearly eight feet tall, towers over Urta.  The comparatively diminutive fox-woman is girded in light leather armor and dripping with sweat.  The larger wolf-man is staggering about, and his dark brown fur is matted with blood.\n\n", false);
 	
 	outputText("The bigger canid charges, snarling, with his claws extended.  Urta sidesteps and pivots, her momentum carrying her foot around in a vicious kick.  Her foot hits the side of the beast's knee hard enough to buckle it, and the wolf goes down on his knees with an anguished cry.  Urta slips under his arm and twists, turning his slump into a fall.  A cloud of dust rises from the heavy thud of the beast's body as it slams into the cobblestone street.\n\n", false);

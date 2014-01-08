@@ -1288,7 +1288,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !isUrta()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -1816,7 +1816,7 @@ public function combatStatusesUpdate():void {
 		}
 	}
 	if(monster.hasStatusAffect("Milky Urta") >= 0) {
-		milkyUrtaTic();
+		urtaQuest.milkyUrtaTic();
 	}
 	
 	//Countdown
@@ -4959,7 +4959,7 @@ public function runAway():void {
 		doNext(13);
 		return;
 	}
-	if(monster.hasStatusAffect("Generic Run Disabled") >= 0 || isUrta()) {
+	if(monster.hasStatusAffect("Generic Run Disabled") >= 0 || urtaQuest.isUrta()) {
 		menuLoc = 3;
 		outputText("You can't escape from this fight!");
 		doNext(5000);
@@ -5266,8 +5266,8 @@ public function magicalSpecials():void {
 	addButton(9,"Back",eventParser,5000);
 }
 public function physicalSpecials():void {
-	if(isUrta()) {
-		urtaSpecials();
+	if(urtaQuest.isUrta()) {
+		urtaQuest.urtaSpecials();
 		return;
 	}
 	menuLoc = 3;

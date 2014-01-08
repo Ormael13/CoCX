@@ -888,7 +888,7 @@ private function historyOfGargoylesB():void {
 private function gargoyleHistoryC():void {
 	clearOutput();
 	//(PC has both Isabella and Izma as followers)
-	if(kGAMECLASS.izmaFollower() && kGAMECLASS.isabellaFollowerScene.isabellaFollower()) {
+	if(kGAMECLASS.izmaScene.izmaFollower() && kGAMECLASS.isabellaFollowerScene.isabellaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a mountain range and lake.  Those last two are populated by savage beasts, minotaurs, cow-girls, anemone, and shark-people, both of whom will rend your flesh or rape you half to death.</i>\"");
 		outputText("\n\nWhoa, there. You stop " + flags[kFLAGS.GAR_NAME] + " and explain to her that some of your lovers – mates, even – are just such beasts.  You tell her a little bit about Izma and Isabella, enforcing the fact that they're both not only quite friendly, but sweet as well.  They're just regular people");
 		if(gargoyleConfidence() > 50) outputText(" just like her");
@@ -912,7 +912,7 @@ private function gargoyleHistoryC():void {
 		addButton(1,"Doesn'tCount",gargoyleDoesntCountAsAWaifu);
 	}
 	//(If PC has Izma as a follower)
-	else if(kGAMECLASS.izmaFollower()) {
+	else if(kGAMECLASS.izmaScene.izmaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a great mountain range.  There is a lake not far from here, if I recall; a race of very dangerous shark-folk live there.</i>\"  With a chuckle, you tell " + flags[kFLAGS.GAR_NAME] + " that you're more than well aware of that; indeed, you consider one such creature to be your mate, your beta.  She makes a slight gasp, and gushes out an apology.  \"<i>I'm so sorry, Master!  I hadn't realized... I thought...</i>\" she falls silent for a moment, then says shyly, \"<i>I wasn't aware Master had a girlfriend.</i>\"  Obviously, knowing that she's not your only lady-friend has upset the poor thing.");
 		
 		outputText("\n\nWell. What do you say to that: that you're not exclusive with Izma, or that she doesn't count, being a statue and all?");

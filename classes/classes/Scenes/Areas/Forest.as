@@ -429,7 +429,7 @@ package classes.Scenes.Areas
 			if (chooser == 3) {
 				if (rand(10) == 0) {
 					menuLoc = 2;
-					kGAMECLASS.carapaceFind();
+					kGAMECLASS.rathazul.carapaceFind();
 					return;
 				}
 				beeGirlScene.beeEncounter();

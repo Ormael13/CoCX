@@ -5,6 +5,9 @@ package classes.Scenes.NPCs
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.FollowerInteractions;
+	import classes.Scenes.Places.TelAdre;
 
 	/**
 	 * Contains handy references to scenes and methods
@@ -14,6 +17,16 @@ package classes.Scenes.NPCs
 		public function NPCAwareContent()
 		{
 
+		}
+		// Common scenes
+		protected function get telAdre():TelAdre
+		{
+			return kGAMECLASS.telAdre;
+		}
+		// Follower interactions
+		protected function get finter():FollowerInteractions
+		{
+			return kGAMECLASS.followerInteractions;
 		}
 
 		// Amily
@@ -67,6 +80,10 @@ package classes.Scenes.NPCs
 			return kGAMECLASS.emberScene.emberMF(man,woman);
 		}
 		// Exgartuan
+		protected function get exgartuan():Exgartuan
+		{
+			return kGAMECLASS.exgartuan;
+		}
 		// Helia
 		protected function get helScene():HelScene
 		{
@@ -123,7 +140,11 @@ package classes.Scenes.NPCs
 		// Izma
 		public function izmaFollower():Boolean
 		{
-			return kGAMECLASS.izmaFollower();
+			return kGAMECLASS.izmaScene.izmaFollower();
+		}
+		protected function get izmaScene():IzmaScene
+		{
+			return kGAMECLASS.izmaScene;
 		}
 		// Jojo
 		protected function get jojoScene():JojoScene
@@ -175,6 +196,20 @@ package classes.Scenes.NPCs
 		{
 			return kGAMECLASS.milkSlave();
 		}
+		// Raphael
+		protected function raphael():Raphael
+		{
+			return kGAMECLASS.raphael;
+		}
+		public function RaphaelLikes():Boolean
+		{
+			return kGAMECLASS.raphael.RaphaelLikes();
+		}
+		// Rathazul
+		protected function rathazul():Rathazul
+		{
+			return kGAMECLASS.rathazul;
+		}
 		// Sheila
 		protected function get sheilaScene():SheilaScene
 		{
@@ -219,6 +254,22 @@ package classes.Scenes.NPCs
 		public function sophieFollower():Boolean
 		{
 			return kGAMECLASS.sophieFollowerScene.sophieFollower();
+		}
+		// Urta
+		public function urtaLove(love:Number = 0):Boolean {
+			return kGAMECLASS.urta.urtaLove(love);
+		}
+		protected function get urta():Urta
+		{
+			return kGAMECLASS.urta;
+		}
+		protected function get urtaPregs():UrtaPregs
+		{
+			return kGAMECLASS.urtaPregs;
+		}
+		protected function get urtaHeatRut():UrtaHeatRut
+		{
+			return kGAMECLASS.urtaHeatRut;
 		}
 		// Valeria
 		protected function get valeria():Valeria

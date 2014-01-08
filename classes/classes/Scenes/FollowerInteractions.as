@@ -1,4 +1,15 @@
-﻿ //[Amily meets pure Jojo - ]
+﻿package classes.Scenes{
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.NPCs.NPCAwareContent;
+	import classes.GlobalFlags.kFLAGS;
+
+	public class FollowerInteractions extends NPCAwareContent {
+
+		public function FollowerInteractions()
+		{
+		}
+
+//[Amily meets pure Jojo - ]
 public function amilyMeetsPureJojo():void {
 	//set flag for amily met pure jojo
 	flags[kFLAGS.AMILY_MET_PURE_JOJO]++;
@@ -106,7 +117,7 @@ public function fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM():void {
 }
 	
 //[Find note from jojo @ followers menu after pufying him]
-public function findJojosNote():void {
+internal function findJojosNote():void {
 	flags[kFLAGS.JOJO_FIXED_STATUS] = 2;
 	outputText("", true);
 	outputText("There is a note left on your bedroll. You pick it up and unseal it – it's from Jojo!\n\n", false);
@@ -150,7 +161,7 @@ public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 		simpleChoices("Explain",aerisDies,"Flip Bird",2500,"",0,"",0,"",0);
 	}
 }
-public function AmilyLeavesBirdJojoTentacles():void { 
+public function AmilyLeavesBirdJojoTentacles():void {
 	outputText("", true);
 	outputText("You flip her the bird.  She was a shitty fuck anyways.  Amily's eyes flood with tears, but her expression hardens with rage.  The mouse yells, \"<i>Like I'd want to stay with a demon like you anyway!</i>\"  She turns and jogs off into the distance.  Amily stops just before you lose sight of her and looks over her shoulder with tears in her eyes.  You've utterly crushed her heart.  She starts jogging again and disappears from your life forever.  Meanwhile, Jojo begins to stir.  It appears he'll be ready to serve soon...\n\n", false);
 		
@@ -168,7 +179,7 @@ public function AmilyLeavesBirdJojoTentacles():void {
 
 //(Uncorrupt)
 //[Choose Amily – Aeris (I mean Jojo) Dies]
-public function aerisDies():void {
+private function aerisDies():void {
 	outputText("", true);
 	outputText("Amily listens impassively at first, but as you explain the situation, she comes around to understand you a little better.  She walks to your side and gives you a kiss on the cheek and explains, \"<i>There's no way to fix him.  What's been done can't be undone by any magic or item.  I have to put him out of misery and stop him from corrupting anything else.</i>\"\n\n", false);
 	
@@ -262,7 +273,7 @@ public function amilyAsksAboutRathazulsVillage():void {
 }
 
 //[Rathazul and Corrupt/Tentacle Jojo] – Occurs instead of camp
-public function rathazulFreaksOverJojo():void {
+internal function rathazulFreaksOverJojo():void {
 	outputText("", true);
 	flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT]++;
 	outputText("Rathazul comes up to you with a serious, worried expression.  You ask him what's wrong, and he explains, \"<i>There is a creature in the woods.  I've seen glimpses of it numerous times, and I believe it to be some kind of demon-tainted mouse.  We must deal with it, lest it strike while we are unawares!</i>\"\n\n", false);
@@ -330,7 +341,7 @@ public function catchRathazulNapping():void {
 	doNext(2150);
 }
 
-public function marbleVsAmilyFreakout():void {
+internal function marbleVsAmilyFreakout():void {
 	outputText("", true);
 	flags[kFLAGS.AMILY_NOT_FREAKED_OUT]++;
 	//Marble is in camp first
@@ -347,7 +358,7 @@ public function marbleVsAmilyFreakout():void {
 }
 
 //Stay silent like a douche
-public function marbleIsPissyAndYourTooDumbToTalk():void {
+private function marbleIsPissyAndYourTooDumbToTalk():void {
 	outputText("", true);
 	//Stay silent (A1)
 	outputText("You can't think of anything to say to her at this point, and can do nothing but stare.  Marble then turns to Amily and yells, \"<i>I'm " + player.mf("his","her") + " lover too.  " + player.mf("He","She") + " didn't tell you about me, did " + player.mf("he","she") + "?</i>\"  Amily looks at Marble for a few moments before looking back at you with tears in her eyes.  She says, \"<i>I know what kind of world this is, but I'd think you'd at least tell me about someone like her.  Did our kids together mean nothing to you?</i>\"  At this point, Marble's hammer flies to the ready in her hands.  She practically screams, \"<i>YOU HAD KIDS TOGETHER?!?!</i>\" her hammer flying to the ready in her hands.\n\n", false);
@@ -378,7 +389,7 @@ public function marbleIsPissyAndYourTooDumbToTalk():void {
 	doNext(13);
 }
 
-public function beAPimpMarbleLovesIt():void {
+private function beAPimpMarbleLovesIt():void {
 	outputText("", true);
 	//Pimp (B1)
 	outputText("You look at both of them in the eyes in turn before replying, \"<i>Come on girls, there is plenty of me to go around!</i>\"  ", false);
@@ -398,7 +409,7 @@ public function beAPimpMarbleLovesIt():void {
 	}
 }
 //Pimp -> PC is not addicted -> serious (B4)
-public function srslyPimpinGuyz():void {
+private function srslyPimpinGuyz():void {
 	outputText("", true);
 	outputText("\"<i>Yes I'm serious.  What, you don't think I can take both of you?</i>\" you say while putting your hands on your hips and swinging them around.  The two of them almost scream as one before descending upon you.  In an instant you're hit with a dart from Amily, causing your body to lock up, just before Marble brings her hammer down onto your head in a massive overhead swing and everything goes black.\n\n", false);
 	
@@ -426,14 +437,14 @@ public function srslyPimpinGuyz():void {
 	doNext(16);
 }
 //Pimp -> PC is not addicted -> just joking (B5)
-public function jokeAboutPimpularness():void {
+private function jokeAboutPimpularness():void {
 	outputText("", true);
 	outputText("You assure them that you thought a joke might help them calm down.  The two of them seem to disagree with you on that sentiment, but wait for you to say something else.", false);
 	//Player chooses stay silent (A1) or explain (C1)
 	simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
 }
 
-public function LucyYouGotSomeSplainingToDo():void {
+private function LucyYouGotSomeSplainingToDo():void {
 	outputText("", true);
 	//Explain (C1)
 	outputText("You spend some time trying to explain to the two of them why you never told either of them about each other.  ", false);
@@ -474,7 +485,7 @@ public function BlameMarblezSweetVagoozle():void {
 }
 
 //Explain -> blame Amily
-public function blameAmilysDumbMouseCunt():void {
+private function blameAmilysDumbMouseCunt():void {
 	//----Quiet Browser should write this part----
 	outputText("You turn to Amily and tell her point blank that she's the one who is in the wrong here. She claimed to be a pure individual, free of all corruption in this world and begging you for your help, but instead she tricked you, seduced you into being unfaithful to your lover, Marble, and making you into her breeding stud and pleasure toy - and then she had the audacity to try and claim you and her had some connection, when it was nothing but trickery and lies on her part. At this tirade, Amily looks first hurt, then outraged, then livid; it's only when Marble silently and defiantly positions herself beside you, holding her hammer and ready to charge, that the female mouse-morph removes her hand from the handle of her knife. Blinking back tears, she starts scurrying around the camp as fast as she can, gathering up all of her few belongings and then heading for the edge of the camp as fast as she can. She halts at the edge, turning to face the two of you, and starts screaming a tirade of the most profane obscenities she can muster, blistering your ears with imprecations about your sexual tastes, habits and skills, your lineage, your personal hygiene and your talents before vanishing into the undergrowth whilst you're both stunned by the litany of swearing and trying to wrap your mind around some of the things she said. Particularly the one about the greasy maggots, the centaur stallion, the candied apple and the plunger. It's pretty obvious she's never coming back.", true);
 	//end event, Amily leaves the camp permanently
@@ -492,7 +503,7 @@ public function blameAmilysDumbMouseCunt():void {
 //urtaLove()
 	
 //AMILY_VISITING_URTA = 346;
-public function amilyUrtaReaction():void {
+internal function amilyUrtaReaction():void {
 	outputText("", true);
 	outputText("As you finish making your way back to camp, Amily surprises you from behind a rock, her arms folded across her chest.  \"<i>Hey, remember when you told me about that city in the desert?  I decided to check it out.</i>\"  You don't remember, but you're too busy absorbing the implications to respond.  \"<i>You'll never guess what I heard!  It seems someone just like you has been seen in the company of one of their prominent citizens,</i>\" she continues.  \"<i>I can't say I didn't expect something like this might happen.  I mean... she's not some demon, right?  Still... I thought we had something special, " + player.short + ".</i>\"  As you try to formulate a reply, she seizes her tail and twists it pensively in her hands, already deciding her next move.  \"<i>I-I've got to meet her... to know what you see in her.</i>\"\n\n", false);
 	
@@ -510,7 +521,7 @@ public function askAboutAmily():void {
 	//after 1400 and Urta's on duty:
 	if(model.time.hours > 14) {
 		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around, but don't get much of a response.  One cat-boy drinking at the bar haltingly suggests he may have noticed someone like that earlier in the day, but that was before Urta went on duty.  You thank him for the info.", false);
-		doNext(telAdre.barTelAdre);
+		doNext(kGAMECLASS.telAdre.barTelAdre);
 		return;
 	}
 	//before Urta goes on duty at 1400:
@@ -535,7 +546,7 @@ public function askAboutAmily():void {
 	}
 }
 		
-public function askAboutAmilyPt2():void {
+private function askAboutAmilyPt2():void {
 	outputText("", true);
 	outputText("Amily breaks the kiss and gives Urta a drunkenly affectionate smile, gently stroking her cheek.  \"<i>Mmm... I wish " + player.short + " had introduced ush earlier... I think we're gonna be good friendsh,</i>\" she slurs.  Urta simply nods, giving her a goofy grin but clearly miles away, mentally. The mouse promptly yawns, dropping the now empty bottle to the floor, shuts her eyes and snuggles up to Urta, who cuddles her close and also drifts off.\n\n", false);
 
@@ -547,7 +558,7 @@ public function askAboutAmilyPt2():void {
 	//Tag that Urta needs to freak out!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 1;
 }
-public function cheatingSloots():void {
+private function cheatingSloots():void {
 	outputText("", true);
 	outputText("You kick open the door and roar, \"<i>What the fuck is this!?</i>\"  Both Amily and Urta turn to you and look at you with puzzled expressions before the severity of the situation seeps into their alcohol-fuzzed consciousnesses.  Almost simultaneously, they yell, \"<i>" + player.short + "!</i>\" and stumble apart drunkenly, leaking each other's slime all over the floor.  Urta slurs, \"<i>We didn't mean to... it jusht... happened...</i>\"\n\n", false);
 	outputText("You growl and turn to Amily, who quietly squeaks, \"<i>I thought... I thought if I knew her better *hic* I could find a way to save what we had... *burp* I am REALLLY out of it, but I thought... ya know, if I was willing to sleep with her too that we could all be happy together.</i>\"\n\n", false);
@@ -556,14 +567,14 @@ public function cheatingSloots():void {
 	//[Let Them Be] [End It]
 	simpleChoices("Let It Be",letTheSlootsFuck,"End It",endThisMadness,"",0,"",0,"",0);
 }
-public function letTheSlootsFuck():void {
+private function letTheSlootsFuck():void {
 	outputText("", true);
 	outputText("You chuckle and tell them you understand, though they had better include you in the future.  Drunken relief spreads across their faces when you give them a wink and step out.  Soon you hear the sloppy sounds of sex and giggles about how great their lover is.", false);
 	dynStats("lus", 75);
 	doNext(13);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 }
-public function endThisMadness():void {
+private function endThisMadness():void {
 	outputText("", true);
 	outputText("You slam your fist into the wall and rage at the two cheating bitches.  Did they really think you wouldn't notice them screwing around on you behind your back?  You tell them that no, this is not going to make things better, and you scowl at Amily as you tell her that her excuse is piss-poor.  Looking towards Urta, you shout that she needs to think and stop letting her pecker lead her around.  For fuck's sake, she's nearly as bad as the monsters in the wilds!\n\n", false);
 	
@@ -605,7 +616,7 @@ public function amilyUrtaMorningAfter():void {
 }
 
 //[Be totally a dick]
-public function beADickToAmily():void {
+private function beADickToAmily():void {
 	outputText("", true);
 	outputText("With a wicked, shit-eating grin, you tease Amily about falling into the trap she set for you.  Her expression hardens, winces breaking her frown as her hangover thrums every time you laugh.\n\n", false);
 
@@ -628,7 +639,7 @@ public function beADickToAmily():void {
 }
 
 //[Smile and nod]
-public function smileAndNodToAmilyXUrta():void {
+private function smileAndNodToAmilyXUrta():void {
 	outputText("", true);
 	outputText("You grin and tell her that you're not surprised she hit it off so well with Urta.  She breaks into an uneasy calm as you tell her that the scene was actually kind of hot, and that you won't hold it against her... though you hint that you'd like to be there if the two of them ever feel like going at it again.\n\n", false);
 
@@ -669,7 +680,7 @@ public function amilyUrtaSex():void {
 	if(player.hasCock()) dick = amilyScene.threesomeAmilUrtaCAWKS;
 	simpleChoices("Use Dick",dick,"Use Vag",vag,"",0,"",0,"Watch",amilyUrtaSexWatch);
 }
-public function amilyUrtaSexWatch():void {
+private function amilyUrtaSexWatch():void {
 	outputText("", true);
 
 	outputText("You tell the two that, this time, you're content to just watch.  You head over to one end of the couch and sit down, leaning back and waiting for them to begin.\n\n", false);
@@ -711,4 +722,6 @@ public function amilyUrtaSexWatch():void {
 	outputText("By this point, you are feeling very turned on indeed, but you can't bring yourself to disturb them.  Instead, you simply grin again and leave them to recover.", false);
 	dynStats("lus", 50);
 	doNext(13);
+}
+}
 }

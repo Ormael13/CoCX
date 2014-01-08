@@ -111,7 +111,7 @@ package classes.Scenes.Areas
 			}
 			//Meet Izma every 8 attempts
 			else if (select == 5) {
-				kGAMECLASS.meetIzmaAtLake();
+				kGAMECLASS.izmaScene.meetIzmaAtLake();
 			}
 			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
 			else if (select == 8) {
@@ -263,7 +263,7 @@ package classes.Scenes.Areas
 				fetishCultistScene.fetishCultistEncounter();
 			}
 			else if (select == 6) {
-				kGAMECLASS.encounterRathazul();
+				kGAMECLASS.rathazul.encounterRathazul();
 			}
 			else {
 				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen about it.");

@@ -1932,7 +1932,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 //[Consensual - Vaginal Sex] (req. cock <= 32 area):
 private function consentacleVagSexForKangarooSlutBitches():void {
 	clearOutput();
-	var x:int = player.cockThatFits(x);
+	var x:int = player.cockThatFits(48);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("Sheila doffs her hat and lowers her light eyes shyly as you lean in, then looks up and puts her arms around your neck as you slip your own about her waist.  She blushes a bit, then leans in as well; you quickly capture her lips with a small kiss, then another.  The tiniest murmur escapes as you break away from this second kiss, and then she's diving in again, locking her mouth together with yours and exploring it with her tongue.  You return her passionate kiss with one of your own as your hand drifts up from her waist, under her shirt. It reaches her semi-erect nipple quickly and you begin pinching and rubbing it between your fingers; her mouth quivers on yours as you tease, then eventually breaks away as she tilts her head back and lets out a low moan.  Taking the opportunity to escape from her kisses, you move your mouth down her long neck as your fingers trace the outline of her teat.");
 	

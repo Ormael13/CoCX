@@ -296,38 +296,38 @@ public function doCamp():void {
 		return;
 	}
 	//Amily + Urta freakout!
-	if(!kGAMECLASS.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
-		kGAMECLASS.amilyUrtaReaction();
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
+		finter.amilyUrtaReaction();
 		hideMenus();
 		return;
 	}
 	//Find jojo's note!
 	if(flags[kFLAGS.JOJO_FIXED_STATUS] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
-		kGAMECLASS.findJojosNote();
+		finter.findJojosNote();
 		hideMenus();
 		return;
 	}
 	//Rathazul freaks out about jojo
 	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && campCorruptJojo()) {
-		kGAMECLASS.rathazulFreaksOverJojo();
+		finter.rathazulFreaksOverJojo();
 		hideMenus();
 		return;
 	}
 	//Izma/Marble freakout - marble moves in
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 1) {
-		kGAMECLASS.newMarbleMeetsIzma();
+		izmaScene.newMarbleMeetsIzma();
 		hideMenus();
 		return;
 	}
 	//Izma/Amily freakout - Amily moves in
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] == 1) {
-		kGAMECLASS.newAmilyMeetsIzma();
+		izmaScene.newAmilyMeetsIzma();
 		hideMenus();
 		return;
 	}
 	//Amily/Marble Freakout
 	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
-		kGAMECLASS.marbleVsAmilyFreakout();
+		finter.marbleVsAmilyFreakout();
 		hideMenus();
 		return;
 	}
@@ -553,7 +553,7 @@ public function doCamp():void {
 	//Pure Jojo
 	if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 	//Izma
-	if(kGAMECLASS.izmaFollower()) {
+	if(izmaFollower()) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover.  It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric.  Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.  ", false);
 		temp = rand(3);
 		//Text 1} I
@@ -776,7 +776,7 @@ public function loversCount():Number {
 public function campLoversMenu():void {
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
-	var izmaEvent:Number = 0;
+	var izmaEvent:Function = null;
 	var kihaButt:Function = null;
 	var amilyEvent:Number = 0;
 	var hel:Function = null;
@@ -871,7 +871,7 @@ public function campLoversMenu():void {
 	//Izma
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n", false);
-		izmaEvent = 2922;
+		izmaEvent = izmaScene.izmaFollowerMenu;
 	}
 	//MARBLE
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
@@ -918,7 +918,7 @@ public function campLoversMenu():void {
 	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
 	addButton(2,"Helia",hel);
 	addButton(3,"Isabella",isabellaButt);
-	if(izmaEvent > 0) addButton(4,"Izma",eventParser,izmaEvent);
+	addButton(4,"Izma",izmaEvent);
 	addButton(5,"Kiha",kihaButt);
 	addButton(6,"Marble",marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
@@ -1100,7 +1100,7 @@ public function doWait():void {
 
 public function doSleep(clrScreen:Boolean = true):void {
 	if(flags[kFLAGS.URTA_INCUBATION] >= 384 && model.time.hours >= 20 && model.time.hours < 2) {
-		kGAMECLASS.preggoUrtaGivingBirth();
+		urtaPregs.preggoUrtaGivingBirth();
 		return;
 	}
 	campQ = true;

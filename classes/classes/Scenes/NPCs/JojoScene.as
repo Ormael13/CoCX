@@ -70,12 +70,12 @@ public function corruptCampJojo():void {
 	}
 	//Oh shit goes down! (Wiv Tentacles)
 	if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
-		kGAMECLASS.amilyDiscoversJojoWithTentaclesAndShitOhBoy();
+		finter.amilyDiscoversJojoWithTentaclesAndShitOhBoy();
 		return;
 	}
 	//Oh shit goes down! (No tentacles)
 	else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
-		kGAMECLASS.amilyIsPissedAtYouForRuiningJojo();
+		finter.amilyIsPissedAtYouForRuiningJojo();
 		return;
 	}
 	//Offer lethicite jojo tf if the player is ready

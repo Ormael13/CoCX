@@ -456,7 +456,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.HEL_PREGNANCY_INCUBATION]--;
 			if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) flags[kFLAGS.HEL_PREGNANCY_INCUBATION] = 1;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
+		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
 		player.weaponAttack = fixedDamage(player.weaponName);
 		applyArmorStats(player.armorName,false);
@@ -491,7 +491,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] > 300) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 24;
 		}
 		//Urta Letters
-		if(flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) getUrtaLetter();
+		if(flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) urtaPregs.getUrtaLetter();
 		//Urta Pregs
 		if(flags[kFLAGS.URTA_INCUBATION] > 0) flags[kFLAGS.URTA_INCUBATION]++;
 		if(flags[kFLAGS.KELLY_INCUBATION] > 0) {
@@ -954,7 +954,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Urta egg freak out
 		if(model.time.hours > 6 && model.time.hours < 18 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] < 12 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0) {
 			outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
-			urtaChewsOutPC(false);
+			urta.urtaChewsOutPC(false);
 		}
 		//Count down rathazul event timers
 		if(flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] > 0) {
@@ -1909,7 +1909,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
 			//Fix 'hangs' - PC is at the bottom of the dress countdown
-			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
+			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && raphael.RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
 			//Countdown to next faerie orgy
 			if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] > 0) {
 				flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
@@ -2072,7 +2072,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.EDRYN_BIRF_COUNTDOWN]--;
 			if(flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] <= 0) {
 				flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] = 0;
-				urtaAndEdrynGodChildEpilogue();
+				urtaQuest.urtaAndEdrynGodChildEpilogue();
 				return true;
 			}
 		}
@@ -2139,8 +2139,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Amily X Urta morning after.
-		if(!urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
-			amilyUrtaMorningAfter();
+		if(!urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
+			followerInteractions.amilyUrtaMorningAfter();
 			return true;
 		}
 		if(flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6) {
@@ -2591,11 +2591,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Countdown to finale not currently engaged!
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) {
 				//If the PC meets his criteria!
-				if(RaphaelLikes()) {
+				if(raphael.RaphaelLikes()) {
 					//Not yet met!  MEETING TIEM!
 					if(flags[kFLAGS.RAPHAEL_MET] == 0) {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(meetRaphael);
+						doNext(raphael.meetRaphael);
 						return true;
 					}
 					//Already met!
@@ -2603,13 +2603,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						//Not given dress yet
 						if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(RaphaelDress);
+							doNext(raphael.RaphaelDress);
 							return true;
 						}
 						//Dress followup - Call picnic date prologue!
 						if(player.armorName == "red, high-society bodysuit"  && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(RaphaelEncounterIIDressFollowup);
+							doNext(raphael.RaphaelEncounterIIDressFollowup);
 							return true;
 						}
 					}
@@ -2626,7 +2626,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//shot down yet?
 					if(flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0 && player.armorName == "red, high-society bodysuit") {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(RaphaelEncounterIIDressFollowup);
+						doNext(raphael.RaphaelEncounterIIDressFollowup);
 						return true;
 					}
 					
@@ -2635,7 +2635,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//FINALE
 			else if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) {
 				outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-				doNext(quiksilverFawkesEndGame);
+				doNext(raphael.quiksilverFawkesEndGame);
 				return true;
 			}
 		}
@@ -2671,13 +2671,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Sophie Izma 3some
-		if(sophieBimbo.bimboSophie() && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+		if(sophieBimbo.bimboSophie() && izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
 			flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
 			sophieBimbo.sophieAndIzmaPlay();
 			return true;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
-			izmaDomsLatexy();
+		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+			izmaScene.izmaDomsLatexy();
 			return true;
 		}
 		//Ember preg updates!

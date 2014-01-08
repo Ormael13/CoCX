@@ -227,11 +227,6 @@
 			return kGAMECLASS.outputList();
 		}
 		
-		protected function urtaLove(value:Number = 0):Boolean
-		{
-			return kGAMECLASS.urtaLove(value);
-		}
-		
 		protected function sackDescript():String
 		{
 			return kGAMECLASS.sackDescript();
@@ -501,6 +496,10 @@
 
 		protected function takeItem():void{
 			kGAMECLASS.takeItem();
+		}
+		protected function destroyItems(itemName:String, numOfItemToRemove:Number):Boolean
+		{
+			return kGAMECLASS.destroyItems(itemName,numOfItemToRemove);
 		}
 
 		protected function silly():Boolean

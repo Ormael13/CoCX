@@ -1,15 +1,9 @@
-import classes.GlobalFlags.kGAMECLASS;
 
 //Event No's 2000 4999 use this function
 
 public function doEvent(eventNo:Number):void
 {
 	var temp2:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	var temp6:Number = 0;
-	var temp7:Number = 0;
 	//New game gooooooo!
 	if (eventNo == 2000)
 	{
@@ -1380,18 +1374,13 @@ public function doEvent(eventNo:Number):void
 	}
 	//Do you help the wanderer?
 	
-	//Let Rathazul craft armor
-	else if (eventNo == 2069)
-	{
-		craftOozeArmor();
-	}
 	//Encounter Rathazul
 	else if (eventNo == 2070)
 	{
 		if (player.hasStatusAffect("Camp Rathazul") >= 0)
-			campRathazul();
+			rathazul.campRathazul();
 		else
-			encounterRathazul();
+			rathazul.encounterRathazul();
 	}
 	//Purify Incubi Draft
 	else if (eventNo == 2071)
@@ -1767,13 +1756,13 @@ public function doEvent(eventNo:Number):void
 		//Amily meets Jojo:
 		if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower())
 		{
-			amilyMeetsPureJojo();
+			followerInteractions.amilyMeetsPureJojo();
 			return;
 		}
 		//Rathazul & Jojo
 		if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0)
 		{
-			catchRathazulNapping();
+			followerInteractions.catchRathazulNapping();
 			return;
 		}
 		var jojoDefense:String = "N.Watch:";
@@ -1871,7 +1860,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2180)
 	{
 		doNext(13);
-		craftCarapace();
+		rathazul.craftCarapace();
 	}
 	
 	//Buy breast-milker from whitney
@@ -1945,59 +1934,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2266)
 	{
 		succubusGetsDildoed();
-	}
-	else if (eventNo == 2284)
-	{
-		urtaBarApproach();
-	}
-	else if (eventNo == 2295)
-	{
-		blowUrtaUnderTable();
-	}
-	else if (eventNo == 2296)
-	{
-		takeUrtaInTheButtPublically();
-	}
-	else if (eventNo == 2297)
-	{
-		getAPublicFacialFromUrta();
-	}
-	else if (eventNo == 2300)
-	{
-		goBackToUrtasForLuvinz();
-	}
-	else if (eventNo == 2301)
-	{
-		rideUrtaTenderFemale();
-	}
-	else if (eventNo == 2302)
-	{
-		dudeFuckingUrtasCooch();
-	}
-	else if (eventNo == 2305)
-	{
-		tenderTakeItUpTheAssFromUrta();
-	}
-	else if (eventNo == 2350)
-	{
-		eatUrtaOutNomNomPussy();
-	}
-	else if (eventNo == 2354)
-	{
-		blowUrtaUnderTheTableLuv();
-	}
-	else if (eventNo == 2355)
-	{
-		rideUrtasCoochLoveyDovey();
-	}
-	else if (eventNo == 2356)
-	{
-		rideUrtaInButtAtHomeLove();
-	}
-	
-	else if (eventNo == 2367)
-	{
-		urtasCoochiNeedsFuckedLove();
 	}
 	else if (eventNo == 2371)
 	{
@@ -2074,9 +2010,9 @@ public function doEvent(eventNo:Number):void
 		player.gems += 50;
 		statScreenRefresh();
 		if (player.hasStatusAffect("Camp Rathazul") >= 0)
-			campRathazul();
+			rathazul.campRathazul();
 		else
-			encounterRathazul();
+			rathazul.encounterRathazul();
 	}
 	else if (eventNo == 2487)
 	{
@@ -2094,46 +2030,46 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2498)
 	{
 		jojoScene.jojoSprite();
-		agreeToHelpAmilyFixJojo();
+		followerInteractions.agreeToHelpAmilyFixJojo();
 	}
 	else if (eventNo == 2499)
 	{
 		jojoScene.jojoSprite();
-		tellAmilyToFuckOffRuinedJojo();
+		followerInteractions.tellAmilyToFuckOffRuinedJojo();
 	}
 	else if (eventNo == 2500)
 	{
 		jojoScene.jojoSprite();
-		AmilyLeavesBirdJojoTentacles();
+		followerInteractions.AmilyLeavesBirdJojoTentacles();
 	}
 	else if (eventNo == 2502)
 	{
 		jojoScene.jojoSprite();
-		stopJojoDeathInTheNameOfLove();
+		followerInteractions.stopJojoDeathInTheNameOfLove();
 	}
 	else if (eventNo == 2503)
 	{
 		jojoScene.jojoSprite();
-		whyWouldDoThis();
+		followerInteractions.whyWouldDoThis();
 	}
 	else if (eventNo == 2504)
 	{
 		jojoScene.jojoSprite();
-		tellRathazulYouOwnJojo();
+		followerInteractions.tellRathazulYouOwnJojo();
 	}
 	else if (eventNo == 2505)
 	{
 		jojoScene.jojoSprite();
-		tellRathazulYouCanHandleIt();
+		followerInteractions.tellRathazulYouCanHandleIt();
 	}
 	else if (eventNo == 2506)
 	{
 		jojoScene.jojoSprite();
-		TellRathazulJojoIsHarmless();
+		followerInteractions.TellRathazulJojoIsHarmless();
 	}
 	else if (eventNo == 2512)
 	{
-		BlameMarblezSweetVagoozle();
+		followerInteractions.BlameMarblezSweetVagoozle();
 	}
 	else if (eventNo == 2563)
 	{
@@ -2260,10 +2196,6 @@ public function doEvent(eventNo:Number):void
 		shortName = "SucWhip";
 		incubusBuy();
 	}
-	else if (eventNo == 2697)
-	{
-		scyllaAndUrtaSittingInATree();
-	}
 	else if (eventNo == 2705)
 	{
 		Scylla6();
@@ -2328,70 +2260,6 @@ public function doEvent(eventNo:Number):void
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
 		bazaar.roxanne.roxanneDrinkingContest();
 	}
-	else if (eventNo == 2889)
-	{
-		readSharkCuntManual();
-	}
-	else if (eventNo == 2891)
-	{
-		sharkEdgingGuideLOL();
-	}
-	else if (eventNo == 2893)
-	{
-		sharkgirlPronz();
-	}
-	else if (eventNo == 2903)
-	{
-		victoryPenisIzma();
-	}
-	else if (eventNo == 2904)
-	{
-		useVagooOnIzmaWin();
-	}
-	else if (eventNo == 2911)
-	{
-		nonFightIzmaSmexPAINUS();
-	}
-	else if (eventNo == 2912)
-	{
-		nonFightIzmaSmexASS();
-	}
-	else if (eventNo == 2913)
-	{
-		nonFightIzmaSmexCUNTPUSSYSNATCHQUIM();
-	}
-	else if (eventNo == 2914)
-	{
-		meetIzmaAtLake();
-	}
-	else if (eventNo == 2922)
-	{
-		izmaFollowerMenu();
-	}
-	else if (eventNo == 2924)
-	{
-		izmaSexMenu();
-	}
-	else if (eventNo == 2925)
-	{
-		followerIzmaMountsPC();
-	}
-	else if (eventNo == 2926)
-	{
-		followerIzmaTakesItInPooper();
-	}
-	else if (eventNo == 2927)
-	{
-		followerIzmaTakesItInVagoo();
-	}
-	else if (eventNo == 2928)
-	{
-		followerIzmaTakesIt69();
-	}
-	else if (eventNo == 2931)
-	{
-		chooseToFlirtWithIzma();
-	}
 	else if (eventNo == 2933)
 	{
 		telAdre.maddie.nopeAintGotNoneODemSpeculIngredimathings();
@@ -2426,30 +2294,6 @@ public function doEvent(eventNo:Number):void
 		statScreenRefresh();
 		doNext(2017);
 	}
-	else if (eventNo == 2943)
-	{
-		izmaKidsPlaytime();
-	}
-	else if (eventNo == 2945)
-	{
-		childToggle();
-	}
-	else if (eventNo == 2946)
-	{
-		inCampRideIzmasDickDongTheWitchIsDead();
-	}
-	else if (eventNo == 2948)
-	{
-		campCuntManual();
-	}
-	else if (eventNo == 2949)
-	{
-		entropyGuideByStephenHawking();
-	}
-	else if (eventNo == 2950)
-	{
-		stephenHawkingPorn();
-	}
 	else if (eventNo == 2951)
 	{
 		camp.stash(false);
@@ -2465,27 +2309,15 @@ public function doEvent(eventNo:Number):void
 		eventParser(1);
 		spriteSelect(74);
 	}
-	else if (eventNo == 2998)
-	{
-		RathazulArmorMenu();
-	}
-	else if (eventNo == 2999)
-	{
-		craftSilkArmor();
-	}
-	else if (eventNo == 3000)
-	{
-		commissionSilkArmorForReal();
-	}
 	else if (eventNo == 3002)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 1;
-		chooseArmorOrRobes();
+		rathazul.chooseArmorOrRobes();
 	}
 	else if (eventNo == 3004)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 2;
-		chooseArmorOrRobes();
+		rathazul.chooseArmorOrRobes();
 	}
 	else if (eventNo == 3041)
 	{
@@ -2580,19 +2412,11 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3187)
 	{
-		askAboutAmily();
+		followerInteractions.askAboutAmily();
 	}
 	else if (eventNo == 3190)
 	{
-		amilyUrtaSex();
-	}
-	else if (eventNo == 3201)
-	{
-		itsOkayUrtaAmilyIsHot();
-	}
-	else if (eventNo == 3202)
-	{
-		crushUrtasHeart();
+		followerInteractions.amilyUrtaSex();
 	}
 	else if (eventNo == 3316)
 	{
@@ -2714,58 +2538,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.fuckIncestCunts(true);
 	}
-	else if (eventNo == 3472)
-	{
-		izmaDickToggle();
-	}
-	else if (eventNo == 3473)
-	{
-		removeIzmasPenis();
-	}
-	else if (eventNo == 3479)
-	{
-		followerIzmaMountsPC(true);
-	}
-	else if (eventNo == 3485)
-	{
-		fuckIzmasPussyDominate();
-	}
-	else if (eventNo == 3489)
-	{
-		radarIzmaAnalDominant();
-	}
-	else if (eventNo == 3496)
-	{
-		urtaDialogueMenu();
-	}
-	else if (eventNo == 3498)
-	{
-		urtaDiscussesTheWatch();
-	}
-	else if (eventNo == 3500)
-	{
-		urtaDiscussAlcoholDrinkMore();
-	}
-	else if (eventNo == 3504)
-	{
-		urtaDiscussesFamily();
-	}
-	else if (eventNo == 3505)
-	{
-		urtaDiscussesSexAndROmance();
-	}
-	else if (eventNo == 3508)
-	{
-		urtaDiscussesEmployment();
-	}
-	else if (eventNo == 3509)
-	{
-		urtaDiscussesPrejudice();
-	}
-	else if (eventNo == 3523)
-	{
-		spankTheShitOutOfUrtaAndMakeHerCreamHerselfFromProstateStimulationAloneLikeTheHornyDrunkenSlutSheReallyIs();
-	}
 	else if (eventNo == 3524)
 	{
 		telAdre.niamh.approachNiamh();
@@ -2813,10 +2585,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3805)
 	{
 		thatllDoTurkey();
-	}
-	else if (eventNo == 3840)
-	{
-		giveTheFoxSomeEggs();
 	}
 	else if (eventNo == 3851)
 	{
@@ -2922,14 +2690,6 @@ public function doEvent(eventNo:Number):void
 	{
 		layEggsInYerTits();
 	}
-	else if (eventNo == 3956)
-	{
-		fuckUrtaWhileScyllaSucksSober();
-	}
-	else if (eventNo == 3957)
-	{
-		dockWithUrtaUnderScyllasSoberSupervision();
-	}
 	else if (eventNo == 3960)
 	{
 		amilyScene.amilySwimFuckIntro();
@@ -2946,33 +2706,13 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.heckel.dominateHeckel();
 	}
-	else if (eventNo == 3967)
-	{
-		condomlessUrtaInHouseSmex();
-	}
 	else if (eventNo == 3968)
 	{
 		chickenHarpy();
 	}
-	else if (eventNo == 3975)
-	{
-		orphanageIntro();
-	}
 	else if (eventNo == 3978)
 	{
 		shareTentaclesWithScylla();
-	}
-	else if (eventNo == 3985)
-	{
-		infertilityQuestions();
-	}
-	else if (eventNo == 3986)
-	{
-		urtaFertilityDiscussion();
-	}
-	else if (eventNo == 3987)
-	{
-		purifySomething();
 	}
 	else if (eventNo == 3988)
 	{

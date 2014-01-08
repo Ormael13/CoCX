@@ -1,7 +1,7 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.CoC;
 	import classes.Cock;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Scenes.Areas.Desert.Naga;
 
@@ -35,17 +35,72 @@ package classes.Scenes.Quests.UrtaQuest
 
 		override protected function performCombatAction():void
 		{
-			game.nagaSiriusRadioAI();
+			var attack:int = rand(4);
+			if (player.hasStatusAffect("Blind") >= 0) attack = rand(3);
+			if (attack == 0) eAttack();
+			if (attack == 1) poisonBite();
+			if (attack == 2) manNagaTease();
+			if (attack == 3) nagaSpitAttack();
+		}
+
+		private function manNagaTease():void
+		{
+			outputText("The snake-man stares deeply into your eyes, seemingly looking past them, and for a moment your body goes numb.");
+//Miss:
+			if (rand(10) == 0) {
+				outputText("  You blink and shake yourself free of the effects of the snake-man's penetrating gaze.");
+				combatRoundOver();
+			}
+//Hit (Blind):
+			if (hasStatusAffect("Blind") >= 0) {
+				outputText("  Though your vision is still blurry, you feel yourself being sucked into the golden depths of those pupils, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
+				kGAMECLASS.dynStats("lus", (5 + player.lib / 10 - player.inte / 20));
+			}
+			//Hit:
+			else {
+				outputText("  Those pools of yellow suck you into their golden depths, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
+				kGAMECLASS.dynStats("lus", (10 + player.lib / 7 - player.inte / 20));
+			}
+			combatRoundOver();
+		}
+
+		private function nagaSpitAttack():void
+		{
+			outputText("Hissing loudly, Sirius suddenly curls his lips and spits at your eyes!  ");
+//{Hit:
+			if (spe / 20 + rand(20) + 1 > player.spe / 20 + 10) {
+				outputText("The vile spray hits your eyes and you scream in pain, clawing fiercely at your burning, watering, weeping eyes.  <b>You can't see!  It'll be much harder to fight in this state, but at the same time, his hypnosis won't be so effective...</b>");
+				player.createStatusAffect("Blind", 3, 0, 0, 0);
+			}
+			//Miss:
+			else outputText("You quickly lean to the side, narrowly avoiding being blinded by the snake-man's spit!");
+			combatRoundOver();
+		}
+
+		private function poisonBite():void
+		{
+			outputText("With a loud and vicious hiss, Sirius suddenly lunges at you, mouth distended impossibly wide and revealing four needle-like fangs dripping with venom!  ");
+//Miss:
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+				outputText("You dodge just in the nick of time, and deliver a punishing blow with the butt of your halberd as Sirius soars past, forcing him to slither past you to make himself ready to defend himself again.");
+				combatRoundOver();
+			}
+//Hit:
+			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain.");
+			var damage:Number = 40 + rand(20);
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.urtaBeatsUpSiriusRadio();
+			game.urtaQuest.urtaBeatsUpSiriusRadio();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.urtaLosesToSirriusSnakeRadio();
+			game.urtaQuest.urtaLosesToSirriusSnakeRadio();
 		}
 
 		public function Sirius()
