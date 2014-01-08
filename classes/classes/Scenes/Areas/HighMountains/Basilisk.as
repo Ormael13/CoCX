@@ -13,7 +13,7 @@ package classes.Scenes.Areas.HighMountains
 	public class Basilisk extends Monster 
 	{
 
-		public function basiliskSpeed(player:Player,amount:Number = 0):void {
+		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
 			if(player.spe - amount < 1) {
 				amount = player.spe - 1;
 				if(amount < 0) amount = 0;

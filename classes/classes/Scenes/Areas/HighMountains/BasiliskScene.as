@@ -39,7 +39,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight.  Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you.  With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again.  You recoil and ready yourself to fight it as best you can.\n\n", false);
 				var basilisk:Basilisk = new Basilisk();
 				//(spd loss)
-				basilisk.basiliskSpeed(player,5);
+				Basilisk.basiliskSpeed(player,5);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
 				startCombat(basilisk);
 			}

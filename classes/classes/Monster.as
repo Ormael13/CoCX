@@ -1,5 +1,6 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.Kiha;
 
 	/**
@@ -23,8 +24,8 @@
 		{
 			game.cleanupAfterCombat();
 		}
-		protected final function showStatDown(a:String):void{
-			game.mainView.statsView.showStatDown(a);
+		protected static function showStatDown(a:String):void{
+			kGAMECLASS.mainView.statsView.showStatDown(a);
 		}
 		protected final function statScreenRefresh():void {
 			game.statScreenRefresh();
