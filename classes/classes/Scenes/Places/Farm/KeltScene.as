@@ -1,4 +1,13 @@
-﻿/*Kelt the Centaur Archer
+﻿package classes.Scenes.Places.Farm {
+	import classes.CockTypesEnum;
+
+	public class KeltScene extends AbstractFarmContent{
+
+	public function KeltScene()
+	{
+	}
+
+	/*Kelt the Centaur Archer
 A Corruption of Champions Event by Ourakun
 
 Foreword
@@ -41,7 +50,7 @@ STATUSES:
 "Kelt" - v1 = Archery, v2 = Submissiveness, v3 = total encounters.
 "KeltOff" - Turns off Kelt */
 
-public function bowSkill(diff:Number):Number {
+private function bowSkill(diff:Number):Number {
 	player.addStatusValue("Kelt",1,diff);
 	if(player.statusAffectv1("Kelt") >= 100) player.changeStatusValue("Kelt",1,100);
 	return player.statusAffectv1("Kelt");
@@ -57,7 +66,6 @@ public function keltEncounter():void {
 	if(player.hasStatusAffect("Kelt") < 0) {
 		player.createStatusAffect("Kelt",0,0,1,0);
 		keltFirstTime();
-		return;
 	}
 	//Repeated encounter
 	else {
@@ -96,13 +104,12 @@ public function keltEncounter():void {
 		//Remaining events
 		if(player.statusAffectv3("Kelt") > 4) {
 			keltMainEncounter();
-			return;
 		}
 	}
 }
 
 //Introduction
-public function keltFirstTime():void {
+private function keltFirstTime():void {
 	outputText("As you approach Whitney's farm, you notice a figure in the pastures, way in the distance.  It seems to be someone riding a horse, to your surprise... possibly even Whitney herself.  You hadn't expected to find real horses in this forsaken realm.  If you could somehow trade for one, it would be a real help.  Energized by the idea, you hop the fence, approaching the distant figure.\r\r", false);
 	outputText("As you get closer, however, the figure comes into view.  The rider is not Whitney, but rather a muscular man.  And the horse has no head... where its head should be is... with a start, you realize that this is no horse and rider.  The figure is a large, male centaur!\r\r", false);
 	outputText("Wariness growing, you slow down.  But it is too late... the centaur has seen you.  With a snort, he gallops closer, imposingly tall.  You drop into a fighting stance, ready if he should attack you, and the centaur draws to a halt a few feet away.\r\rHe looks scornfully at you, and laughs, ", false);
@@ -113,7 +120,7 @@ public function keltFirstTime():void {
 	doNext(13);
 }
 //Naked Requirement
-public function keltRequiresNakedness():void {
+private function keltRequiresNakedness():void {
 	outputText("Once more, you encounter Kelt the centaur at Whitney's farm.  You approach him to ask for another archery lesson, but Kelt is already scowling at you as you draw near.\r\r", false);
 	outputText("\"<i>I can't teach you like this,</i>\" he sneers.  \"<i>Your balance is all fucked up.  I know colts who can shoot better than you.  You really want to learn the skill?  Then you're gonna have to practice like a centaur.  You'd never see me wearing armor!</i>\"\r\r", false);
 	outputText("He slaps a hand on his bare chest proudly, and you realize that he means for you to strip down naked.  When you protest, his eyes narrow with irritation, and his sneer becomes more cruel.\r\r", false);
@@ -134,7 +141,7 @@ public function keltRequiresNakedness():void {
 }
 
 //Naked Requirement, Never
-public function keltRefuseNakedness():void {
+private function keltRefuseNakedness():void {
 	spriteSelect(35);
 	outputText("You adamantly refuse, determined to not give this arrogant centaur the satisfaction.  Kelt sneers at you derisively, and gives you several pieces of advice as to what could fit up your rear end.  As his insults grow more colorful, you turn and leave; his mocking laughter follows behind you.  You resolve to not bother with him anymore.\r\r(Somehow you know you'll never encounter him again.)", true);
 	//(Kelt never encountered again)
@@ -142,7 +149,7 @@ public function keltRefuseNakedness():void {
 	doNext(13);
 }
 //Naked Requirement, Eagerly
-public function keltEagerlyGetNaked():void {
+private function keltEagerlyGetNaked():void {
 	doNext(13);
 	spriteSelect(35);
 	outputText("", true);
@@ -197,7 +204,7 @@ public function keltEagerlyGetNaked():void {
 }
 
 //Naked Requirement, Reluctantly
-public function keltReluctantlyGetNaked():void {
+private function keltReluctantlyGetNaked():void {
 
 	doNext(13);
 	spriteSelect(35);
@@ -251,7 +258,7 @@ public function keltReluctantlyGetNaked():void {
 }
 
 //Blowjob Requirement
-public function keltRequiresBlowjobs():void {
+private function keltRequiresBlowjobs():void {
 	spriteSelect(35);
 	player.createStatusAffect("KeltBJ",0,0,0,0);
 	outputText("Crossing the field of Whitney's farm, your heart begins to beat a little bit faster as you spy Kelt the centaur off in the distance.  You can't help but admire his powerful flanks and his proud stature as he runs freely.  Perhaps a little pleased with yourself, you also take a good look at his dangling equipment, sheathed yet sizable.  The sight is entrancing.\r\r", false);
@@ -283,7 +290,7 @@ public function keltRequiresBlowjobs():void {
 }
 
 //Blowjob Requirement, Never
-public function keltBlowjobRequirementNever(newl:Boolean = true):void {
+private function keltBlowjobRequirementNever(newl:Boolean = true):void {
 	spriteSelect(35);
 	if(newl) outputText("", true);
 	outputText("You struggle, trying to hold onto your fragmented thoughts. Something about Kelt's scent, or presence, is overwhelming.  The temptation to give in is almost overpowering, but you set your teeth, close your eyes, and furiously try to ignore your hammering heart.\r\r", false);
@@ -300,7 +307,7 @@ public function keltBlowjobRequirementNever(newl:Boolean = true):void {
 }
 
 //Blowjob Requirement, Shamefully
-public function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
+private function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 	spriteSelect(35);
 	if(newl) outputText("", true);
 	player.slimeFeed();
@@ -328,7 +335,7 @@ public function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 }
 
 //Blowjob Requirement, Eagerly
-public function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
+private function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	spriteSelect(35);
 	// This is never called with arguments, so newl will always be true. Can this be simplified?
 	if(newl) outputText("", true);
@@ -358,7 +365,7 @@ public function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 }
 
 //Normal Encounter
-public function keltMainEncounter():void {
+private function keltMainEncounter():void {
 	spriteSelect(35);
 	outputText("Once more, you encounter Kelt the centaur at Whitney's farm.  He smirks at you, and asks if the fool has come once more to learn from the master.\r\r", false);
 	//(Submissive 0-30: 
@@ -381,7 +388,7 @@ public function keltMainEncounter():void {
 	keltMainEncounter2();
 }
 	
-public function keltMainEncounterAfterNakedReq():void {
+private function keltMainEncounterAfterNakedReq():void {
 	//After naked requirement
 	//(Naked On)
 	if(player.hasStatusAffect("NakedOn") >= 0) {
@@ -440,7 +447,7 @@ public function keltMainEncounterAfterNakedReq():void {
 }
 
 //Normal Encounter 2
-public function keltMainEncounter2():void {
+private function keltMainEncounter2():void {
 	//Used for randomization
 	var temporary:Number = 0;
 	//(No bow equipped)
@@ -462,7 +469,7 @@ public function keltMainEncounter2():void {
 	keltMainEncounter3();
 }
 
-public function keltMainEncounter3():void {
+private function keltMainEncounter3():void {
 	var temporary:Number = 0;
 	//(Clothed)
 	if(player.hasStatusAffect("NakedOn") < 0) {
@@ -611,7 +618,7 @@ public function keltMainEncounter3():void {
 	doNext(13);
 }
 
-public function keltMainEncounterPostBlowjob():void {
+private function keltMainEncounterPostBlowjob():void {
 	//(Blowjob Requirement On)
 	if(player.hasStatusAffect("BlowjobOn") >= 0) {
 		//(Submissiveness 75+, Lust 60+)
@@ -631,7 +638,7 @@ public function keltMainEncounterPostBlowjob():void {
 			outputText("Kelt doesn't hesitate.  With an almost primal snarl, he rams his cock forward, anxious to sink himself deep into your ass.  With no lube and no foreplay, you let out a cry as the massive cock splits you open.  Fortunately, it drools precum eagerly into your backside, making the next thrust easier, though no less forceful.  Kelt shows no mercy, trying to fit himself inside your ");
 			if(player.tallness < 112) outputText("smaller ");
 			outputText("body with no concern for your well being.", false);
-			buttChange(70,true, true, false)
+			buttChange(70,true, true, false);
 			outputText("\r\r", false);
 			outputText("You can't help it... at the thought of being used as his worthless fucktoy, you suffer a mild orgasm of your own, crying out your submission to this powerful creature.", false);
 			//(Penis: 
@@ -701,7 +708,7 @@ public function keltMainEncounterPostBlowjob():void {
 }
 	
 //(Resist)
-public function keltResistGivingBJ():void {
+private function keltResistGivingBJ():void {
 	spriteSelect(35);
 	outputText("", true);
 	outputText("Summoning what remains of your fragmented willpower, you resist the need, apologizing to Kelt and turning to walk away.  It hurts to do so, aching within your chest with an almost physical need to go back; to apologize and kneel before him worshipfully.\r\r", false);
@@ -713,7 +720,7 @@ public function keltResistGivingBJ():void {
 	doNext(13);
 }
 //(Submit)
-public function keltSubmitGivingBJ():void {
+private function keltSubmitGivingBJ():void {
 	spriteSelect(35);
 	player.slimeFeed();
 	outputText("", true);
@@ -726,13 +733,13 @@ public function keltSubmitGivingBJ():void {
 	doNext(continueAfterBJ);
 }
 //Continue training post BJ
-public function continueAfterBJ():void {
+private function continueAfterBJ():void {
 	spriteSelect(35);
 	outputText("After a brief rest, you manage to get back to practicing archery.  ", true);
 	keltMainEncounter3();
 }
 //(Reluctant Blowjob)
-public function keltReluctantGivingBJ():void {
+private function keltReluctantGivingBJ():void {
 	spriteSelect(35);
 	player.slimeFeed();
 	outputText("", true);
@@ -751,7 +758,7 @@ public function keltReluctantGivingBJ():void {
 
 //Bad Ends
 //(Centaur)
-public function keltCentaurBadEnd():void {
+private function keltCentaurBadEnd():void {
 	spriteSelect(35);
 	outputText("", true);
 	outputText("You trot towards the farm, pleased with the way your powerful centaur form moves.  You have only one thought in your mind... showing up Kelt for all those insults he tossed out.  After all that, it should be quite satisfying to hear him admire your new equine form, so like his.  A rogue thought pushes through your head that maybe he will do more than just admire it, and a shiver of pleasure runs through you, despite yourself.\r\r", false);
@@ -802,7 +809,7 @@ public function keltCentaurBadEnd():void {
 }
 
 //(Human) bad end
-public function keltSubmissiveBadEnd():void {
+private function keltSubmissiveBadEnd():void {
 	spriteSelect(35);
 	outputText("", true);
 	outputText("You race towards the farm, only one thought on your mind.  Kelt... your master, your love, your hunger.  Your head is filled with thoughts of his cock, and you fancifully dream of how he will use it on you today.  Once, you had a mission of some kind... an important duty.  The stray thought vanishes almost instantly, though.  Of course you have a duty!  To be fucked by Kelt, whenever he wants to!\r\r", false);
@@ -818,7 +825,7 @@ public function keltSubmissiveBadEnd():void {
 }
 
 //Bad End 2
-public function keltBadEndEpilogue():void {
+private function keltBadEndEpilogue():void {
 	spriteSelect(35);
 	outputText("", true);
 	outputText("The next year, after a few suggested mutations from your master...\r\rThe heroine hesitatingly moved forward, crossing the field with the sort of practiced caution that had so far kept her safe in this strange land.  The farm should be somewhere nearby, if she had figured things correctly.  Of course, who could tell with this ever-shifting landscape?\r\r", false);
@@ -836,7 +843,7 @@ public function keltBadEndEpilogue():void {
 	eventParser(5035);
 }
 //Requires 40+ int & 70+ corruption to resist his 'aura'.
-public function keltResistance():void {
+private function keltResistance():void {
 	spriteSelect(35);
 	outputText("You close your eyes, ", true);
 	if(player.faceType == FACE_HORSE || player.faceType == FACE_DOG) outputText("a low growl building in the back of your throat", false);
@@ -845,7 +852,7 @@ public function keltResistance():void {
 	outputText("An idea on how to put him in his place slowly forms in the back of your mind, though you're sure pulling it off would humiliate the puffed-up centaur into never his showing his face around the farm again.  Do you do it?", false);
 	doYesNo(fuckKeltsShitUp,keltResistancePussyOut);
 }
-public function keltResistancePussyOut():void {
+private function keltResistancePussyOut():void {
 	spriteSelect(35);
 	outputText("You suppress your anger for now.  Yes; Kelt's an asshole, but he's taught you a lot, and would it hurt to humor the cute stud?  You shake your head, uncomfortable with the out-of-place thought.  You leave in a hurry, unable to face your master.", true);
 	//(+2 submission)
@@ -853,7 +860,7 @@ public function keltResistancePussyOut():void {
 	doNext(13);
 }
 
-public function fuckKeltsShitUp():void {
+private function fuckKeltsShitUp():void {
 	spriteSelect(35);
 	outputText("", true);
 	//If naga folks
@@ -981,4 +988,6 @@ public function fuckKeltsShitUp():void {
 	dynStats("int", 2, "lus=", 0, "cor", 4);
 	player.createStatusAffect("KeltOff",0,0,0,0);
 	doNext(13);
+}
+}
 }

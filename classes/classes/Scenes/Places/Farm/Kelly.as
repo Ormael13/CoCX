@@ -1,4 +1,15 @@
-﻿//const KELT_BREAK_LEVEL:int = 725;
+﻿package classes.Scenes.Places.Farm{
+	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class Kelly extends AbstractFarmContent{
+
+	public function Kelly()
+	{
+	}
+
+//const KELT_BREAK_LEVEL:int = 725;
 //const KELLY_CUNT_TYPE:int = 726;
 //const NEVER_RESIST_KELT:int = 727;
 //const WHITNEY_FLIPPED_OUT_OVER_KELLY:int = 728;
@@ -30,7 +41,7 @@ Kelt will first try to turn himself back male, in order to continue the mind bre
 
 Every encounter raises corruption by 5, except the last one that raises corruption by 8. In order to achieve the last encounter your corruption level must not be lower than it was at the third encounter.*/
 
-public function hasPinkEgg():Boolean {
+private function hasPinkEgg():Boolean {
 	return (hasItem("PinkEgg",1) || hasItem("L.PnkEg",1));
 }
 
@@ -40,14 +51,14 @@ public function breakingKeltOptions():void {
 	clearOutput();
 	spriteSelect(35);
 	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2("Kelt") >= 40 || player.hasStatusAffect("Kelt") < 0) {
-		keltEncounter();
+		farm.keltScene.keltEncounter();
 		return;
 	}
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] > 0) {
 		if(!player.hasCock()) {
 			outputText("You can't keep trying to break Kelt without the proper tool to do it with.");
 			menu();
-			addButton(0,"Next",farmExploreEncounter);
+			addButton(0,"Next",farm.farmExploreEncounter);
 			return;
 		}
 		resistKeltsBSBreakHimIntro();
@@ -55,13 +66,13 @@ public function breakingKeltOptions():void {
 	}
 	outputText("Having met Kelt, you know he's liable to subject you to plenty of abuse in exchange for training.  Are you going to endure it, resist, or never resist?");
 	menu();
-	addButton(0,"Endure",keltEncounter);
+	addButton(0,"Endure",farm.keltScene.keltEncounter);
 	addButton(1,"Resist",resistKeltsBSBreakHimIntro);
 	addButton(2,"Never",neverBreakKeltIntoKelly);
 }
 
 //Resist
-public function resistKeltsBSBreakHimIntro():void {
+private function resistKeltsBSBreakHimIntro():void {
 	clearOutput();
 	spriteSelect(35);
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
@@ -70,17 +81,16 @@ public function resistKeltsBSBreakHimIntro():void {
 		if(!(hasItem("SucMilk",15) || (hasItem("SucMilk",10) && hasPinkEgg()) || (hasItem("P.S.Mlk",10) && hasPinkEgg()) || hasItem("P.S.Mlk",15))) {
 			outputText("Unfortunately, you don't have anything that could be useful to tame his arrogant maleness.  You want items that would make his disgracious horsecock and balls shrink.  A nice set of breasts on his human chest would be fine, too.  You know you're going to need A LOT of such items - or very potent ones.");
 			menu();
-			addButton(0,"Next",farmExploreEncounter);
+			addButton(0,"Next",farm.farmExploreEncounter);
 		}
 		else {
 			outputText("\n\nDo you take his maleness down and teach him the lesson he deserves?");
 			//Yes/Not Yet/Never
 			menu();
 			addButton(0,"Yes",breakKeltGo);
-			addButton(1,"Not Yet",farmExploreEncounter);
+			addButton(1,"Not Yet",farm.farmExploreEncounter);
 			addButton(2,"Never",neverBreakKeltIntoKelly);
 		}
-		return;
 	}
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) {
 		outputText("You set out to go get Kelt, eager to teach this slut another lesson of your own.  You explore the farm for a bit before spotting the centaur behind the barn.  However, Kelt seems to have changed since last time: he somehow changed back his gender.  That rebellious little bitch!  Although he doesn't look as aggressively masculine as before, and his chest still bears some man-tits, he has gotten back his stern, rude face and you can clearly see a fat prick hanging from his backside.  It doesn't seem to be as big as it was before, though.  He must have grown it in a hurry.");
@@ -90,12 +100,11 @@ public function resistKeltsBSBreakHimIntro():void {
 			outputText("\n\nYou'd gladly teach him another lesson so he can keep his true gender and learn his place, but you don't have anything to turn him female again.  You should fetch appropriate items to begin the 'lesson'.</i>\"");
 			//back to farm]
 			menu();
-			addButton(0,"Next",farmExploreEncounter);
+			addButton(0,"Next",farm.farmExploreEncounter);
 			return;
 		}
 		menu();
 		addButton(0,"Next",secondKeltBreaking);
-		return;
 	}
 	//Third encounter
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) {
@@ -105,7 +114,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		{
 			outputText("You must acquire enough Succubi Milk to remove any male remnants off Kelly's body before confronting 'him' again.");
 			menu();
-			addButton(0,"Next",farmExploreEncounter);
+			addButton(0,"Next",farm.farmExploreEncounter);
 			return;
 		}
 		outputText("\n\nYou casually approach the centaur, shaking a vial of Succubi milk with a broad grin; your intentions are clear.  Kelt whinnies, his voice higher than ever, \"<i>Not again!</i>\"  A puff of a very feminine odor reaches your nostrils - nothing at all like the masculine scent he usually exudes.  Is he coming to like this?");
@@ -113,17 +122,14 @@ public function resistKeltsBSBreakHimIntro():void {
 		//[Start Combat]
 		startCombat(new Kelt());
 		spriteSelect(35);
-		return;
 	}
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 3) {
 		spriteSelect(-1);
 		finalKeltBreaking();
-		return;
 	}
 	else {
 		spriteSelect(-1);
 		approachKelly();
-		return;
 	}
 }
 
@@ -131,18 +137,18 @@ public function resistKeltsBSBreakHimIntro():void {
 //Not Now: Nothing happens. The PC may carry on lessons like normal and they can still begin the mind-breaking process whenever they wish as long as they meet the above requirements.
 //Yes: Carry on the mindbreak
 
-public function neverBreakKeltIntoKelly():void {
+private function neverBreakKeltIntoKelly():void {
 	clearOutput();
 	spriteSelect(35);
 	flags[kFLAGS.NEVER_RESIST_KELT] = 1;
 	outputText("You decide that trying to break Kelt is something you'd never want to do.  Besides, he's teaching you a useful skill, and there's just something charming about that bastard...");
 	menu();
-	addButton(0,"Go To Kelt",keltEncounter);
+	addButton(0,"Go To Kelt",farm.keltScene.keltEncounter);
 	addButton(1,"Go Home",eventParser,13);
 }
 
 
-public function breakKeltGo():void {
+private function breakKeltGo():void {
 	clearOutput();
 	spriteSelect(35);
 	outputText("You approach the uppity centaur with glinting eyes, determined to take him down.  Kelt mistakes your anger for desire and sneers.");
@@ -273,7 +279,7 @@ public function breakKeltGo():void {
 
 //Second encounter
 /*10 succubi milk (or 1 pink egg - large or small - and 5 succubi milk) */
-public function secondKeltBreaking():void {
+private function secondKeltBreaking():void {
 	clearOutput();
 	spriteSelect(35);
 	outputText("You stroll up to Kelt, not afraid to tame the beastman a second time.  As soon as he spots you, he snorts and tramples the floor furiously.  At the same time, he turns his head back as if he was ready to gallop at any moment.  Torn between his fear of you and his desire for revenge, he doesn't dare charge you, but he doesn't move away either.  You profit from his indecision to walk straight up to him until you are face to face.  But his masculine visage doesn't appeal to you, for your main focus is the tool hanging between his hind legs.");
@@ -293,104 +299,9 @@ public function secondKeltBreaking():void {
 	spriteSelect(35);
 }
 
-//Trample - once every five turns
-public function keltTramplesJoo():void {
-	outputText("Before you know what's what, Kelt is galloping toward you, kicking up a cloud of dust in his wake.  He's trying to trample you!  ");
-	//Miss: 
-	if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
-		outputText("You roll out of the way at the last moment, avoiding his dangerous hooves.");
-		combatRoundOver();
-		return;
-	}
-	
-	//Determine damage - str modified by enemy toughness!
-	var damage:int = Math.round((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
-	if(damage > 0) damage = takeDamage(damage);
-
-	//Block: 
-	if(damage <= 0) {
-		outputText("Incredibly, you brace yourself and dig in your [feet].  Kelt slams into you, but you grind his momentum to a half.  His mouth flaps uncomprehendingly for a moment before he backs up, flushing from being so close to you.");
-		monster.lust += 5;
-	}
-	//Hit: 
-	else {
-		outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  (" + damage + ")");
-	}
-	combatRoundOver();
-}
-
-//Arrow Attack
-public function keltShootBow():void {
-	monster.createStatusAffect("Bow Cooldown",3,0,0,0);
-	outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
-	
-	//Miss: 
-	if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
-		outputText("You manage to avoid the missile by the skin of your teeth!");
-		combatRoundOver();
-		return;
-	}
-	
-	var damage:Number = 0;
-	damage = int((20 + monster.str/3 + 100) + monster.spe/3 - rand(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	if(damage == 0) {
-		outputText("You deflect the hit, preventing it from damaging you.");
-		combatRoundOver();
-		return;
-	}
-	//Hit: 
-	damage = takeDamage(damage);
-	outputText("The arrow bites into you before you can react. (" + damage + ")");
-	combatRoundOver();
-}
-
-//Aura Arouse
-public function KellyuraAttack():void {
-	var select:int = rand(3);
-	//(1) 
-	if(select == 0) outputText("Kelt flashes his cockiest smile and gestures downward.  \"<i>Did you forget why you're here, slut?  Taking me by surprise once doesn't make you any less of a whore.</i>\"");
-	//(2) 
-	else if(select == 2) outputText("Grinning, Kelt runs by, trailing a cloud of his musk and pheremones behind you.  You have to admit, they get you a little hot under the collar...");
-	//(3)
-	else {
-		outputText("Kelt snarls, \"<i>Why don't you just masturbate like the slut that you are until I come over there and punish you?</i>\"  ");
-		if(player.lust >= 80) outputText("Your hand moves towards your groin seemingly of its own volition.");
-		else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
-	}
-	dynStats("lus", player.lib/5 + rand(10));
-	combatRoundOver();
-}
-
-//Attacks as normal + daydream "attack"
-//DayDream "Attack"
-public function dayDreamKelly():void {
-	if(rand(2) == 0) outputText("Kelt pauses mid-draw, looking you up and down.  He licks his lips for a few moments before shaking his head to rouse himself from his lusty stupor.  He must miss the taste of your sperm.");
-	else outputText("Flaring 'his' nostrils, Kelt inhales deeply, his eyelids fluttering closed as he gives a rather lady-like moan.   His hands roam over his stiff nipples, tweaking them slightly before he recovers.");
-	monster.lust += 5;
-	combatRoundOver();
-}
-
-
-
-public function kellyAI():void {
-	if(monster.statusAffectv1("Bow Cooldown") > 0) {
-		monster.addStatusValue("Bow Cooldown",1,-1);
-		if(monster.statusAffectv1("Bow Cooldown") <= 0) monster.removeStatusAffect("Bow Cooldown");
-	}
-	else {
-		if(rand(2) == 0 && flags[kFLAGS.KELT_BREAK_LEVEL] >= 2) dayDreamKelly();
-		else keltShootBow();
-		return;
-	}
-	var select:int = rand(5);
-	if(select <= 1) monster.eAttack();
-	else if(select <= 3) KellyuraAttack();
-	else keltTramplesJoo();
-}
 
 //Defeat Him In Fight #1
-public function defeatKellyNDBREAKHIM():void {
+internal function defeatKellyNDBREAKHIM():void {
 	clearOutput();
 	//Cut these: You swing your [weapon], ready to use force against the restless centaur if necessary.
 	//Cut these: \"<i>Easy now, okay? You don't have your bow, and you know what I can do with my [weapon]. Now if you just calm down I promise I'll be much nicer this time.</i>\"
@@ -432,7 +343,7 @@ public function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nShe bursts into tears again, any attempt at a reply breaking off into another sob. You cockslap her repeatedly as you roar, \"<i>Do you think I have time to waste on whiny bitches like you?  You're even lucky I'm taking care of finding you a proper name.  I should call you Cumbucket or Sugarcunt because that's exactly what you are.  So what do you think?  Do you want to be called Cumbucket, Cumbucket?</i>\"");
 	
 	//(Silly:)
-	if(silly() && amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
+	if(silly() && kGAMECLASS.amilyScene.amilyFollower() && kGAMECLASS.amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
 	
 	outputText("\n\nThe broken centauress manages to shake her head convulsively.  Satisfied, you stop slapping her.");
 	
@@ -494,7 +405,7 @@ public function defeatKellyNDBREAKHIM():void {
 }
 
 //Win Second Fight (Third Feminizing Encounter):
-public function breakingKeltNumeroThree():void {
+internal function breakingKeltNumeroThree():void {
 	clearOutput();
 	if(monster.HP < 1) outputText("Slumping down, ");
 	else outputText("Moaning, ");
@@ -581,7 +492,7 @@ public function breakingKeltNumeroThree():void {
 
 //Fourth encounter
 /*This one requires you not to have lost any corruption since the last encounter you had with her (so if you did, just get back to your former corruption level).*/
-public function finalKeltBreaking():void {
+private function finalKeltBreaking():void {
 	clearOutput();
 	outputText("You resolutely walk up to the centaur slut for her final lesson.  This time you don't even need to find her: she rushes to you on her own, her eyes glinting with need.");
 	outputText("\n\n\"<i>[Master], [Master]!  You're finally here.  I-I haven't been sleeping well since you left.  I've been dreaming about you... about your cock.  I haven't been able to eat properly, it's like I'm in a state of constant hunger that can't be satisfied... except by you.</i>\"");
@@ -659,14 +570,14 @@ public function finalKeltBreaking():void {
 
 
 //Kelt Defeats PC after 1st Breaking But Before Last
-public function keltFucksShitUp():void {
+internal function keltFucksShitUp():void {
 	clearOutput();
 	outputText("As you collapse, defeated, Kelt saunters up, shouldering his bow.  \"<i>Who's the bitch now,</i>\" he taunts, rearing back as his voice cracks in a rather emasculated manner.  \"<i>You are!</i>\"  His hooves come down on your back, and concussive waves of pain roll through your body as you're trampled black and blue.  Then, you see blackness.");
 	menu();
 	addButton(0,"Next",keltFucksShitUpII);
 	
 }
-public function keltFucksShitUpII():void {
+private function keltFucksShitUpII():void {
 	clearOutput();
 	outputText("You awaken at the periphery of the farm, thankful to be alive.  Kelt is nowhere to be seen.  You have to wonder if Whitney saved you or the dumb beast was too stupid to finish you off.  Whatever the case, you head back to camp to lick your wounds.  <b>The worst indignity of all is that he broke a lot of your succubi milks.</b>  He'll likely have regained some more of his maleness by the time you're ready to attempt teaching him another lesson.");
 	consumeItem("SucMilk",5);
@@ -679,7 +590,7 @@ public function keltFucksShitUpII():void {
 
 
 //Appearance
-public function kellyAppearance():void {
+private function kellyAppearance():void {
 	clearOutput();
 	outputText("Kelly is a 6 foot 3 inch tall centauress with a svelte body and generous curves.  Her feminine face is pretty human in appearance, and her lovely traits would be adorably innocent if it weren't for her emerald eyes shining with lusty need whenever she looks at you.  Plump lips that seem to have been made for cock-sucking adorn her hungry mouth.  A long, single " + flags[kFLAGS.KELLY_HAIR_COLOR]);
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
@@ -726,7 +637,7 @@ public function kellyAppearance():void {
 	menu();
 	addButton(0,"Next",approachKelly);
 }
-public function approachKelly():void {
+private function approachKelly():void {
 	clearOutput();
 	//Fix hair color!
 	if(flags[kFLAGS.KELLY_HAIR_COLOR] == 0) flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
@@ -798,7 +709,7 @@ public function approachKelly():void {
 	addButton(9,"Leave",eventParser,13);
 }
 
-public function kellySexMenu():void {
+private function kellySexMenu():void {
 	menu();
 	if(player.hasCock() && player.lust >= 33) {
 		if(player.cockThatFits(300) >= 0 || flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
@@ -823,7 +734,7 @@ public function kellySexMenu():void {
 //Vaginal
 //Virginity paragraph
 //[Not Virginal]
-public function fuckKellysCunt():void {
+private function fuckKellysCunt():void {
 	clearOutput();
 	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	var x:int = player.cockThatFits(300);
@@ -891,7 +802,7 @@ public function fuckKellysCunt():void {
 
 //Centaur on Centaur Sex
 /*Requires a centaur lower body.*/
-public function taurOnTaurSexKelly():void {
+private function taurOnTaurSexKelly():void {
 	clearOutput();
 	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	var x:int = player.cockThatFits(300);
@@ -943,7 +854,7 @@ public function taurOnTaurSexKelly():void {
 //Tentacle
 //Requires two or more tentacle dicks.
 
-public function tentaFuckKelly():void {
+private function tentaFuckKelly():void {
 	clearOutput();
 	outputText("With a mischievous grin, you remove your [armor], fully revealing your " + multiCockDescriptLight() + ".  The plant-like appendages wriggle around the horny centauress, inspecting her body from every angle.  You feel your own lust rising as the tentacle peckers grow harder, their green heads turning pink in arousal.  Kelly stammers, confused: \"<i>W-what are you-</i>\"");
 	
@@ -1005,7 +916,7 @@ public function tentaFuckKelly():void {
 }
 
 //Makes her cunt become horse-like.
-public function giveKellyEquinum():void {
+private function giveKellyEquinum():void {
 	clearOutput();
 	outputText("Taking the long, flared vial in your hand, you get a wicked idea - what if you gave your personal mare-slave a cunt that was better suited to her depraved, animalistic shape?  What if you turned that pretty, pink pussy into a slobbering, black mare-cunt?");
 	
@@ -1025,7 +936,7 @@ public function giveKellyEquinum():void {
 	addButton(0,"Next",approachKelly);
 }
 //Succubi Milk - Rehumanizes Her Pussy
-public function giveKellySuccubiMilk():void {
+private function giveKellySuccubiMilk():void {
 	clearOutput();
 	outputText("You produce a vial of succubi milk and dangle it before Kelly, the ivory demon-juice sloshing audibly inside.  Kelly licks her lips immediately, running her hands across her perky nipples without meaning to.  She asks, \"<i>[Master], is that what I think it is?</i>\"");
 	
@@ -1044,7 +955,7 @@ public function giveKellySuccubiMilk():void {
 }
 
 //Punish(C)
-public function punishKelly():void {
+private function punishKelly():void {
 	clearOutput();
 	flags[kFLAGS.TIMES_PUNISHED_KELLY]++;
 	//First time: 
@@ -1089,7 +1000,7 @@ public function punishKelly():void {
 
 //Rimjob/Ride/Riding crop
 //Rimjob(C)
-public function getARimjobFromKelly():void {
+private function getARimjobFromKelly():void {
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
@@ -1160,7 +1071,7 @@ public function getARimjobFromKelly():void {
 
 //Ride(C)
 //(Assumes Kelly is at camp; minor revisions required otherwise)
-public function rideKellyForPunishment():void {
+private function rideKellyForPunishment():void {
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
@@ -1256,7 +1167,7 @@ public function rideKellyForPunishment():void {
 				outputText("\n\nYou wish you could live forever in these luscious moments; it is so indefinably right to be reared over your eager submissive, encompassing her with your own flesh as you penetrate her deep wetness, both your human and horse parts cry out for it; mounting her, breeding her, imprinting yourself upon her and making her yours.  Neither of you are in any condition to keep it up for long though, and after five minutes of this fevered fucking you groan as you clutch Kelly's breasts hard and pour yourself into her, your " + cockDescript(x) + " surging line after line of cum into her.  She moans breathily and happily to the heavenly sensation of being filled with your seed, her vagina milking you for every drop it can get.  You don't even know how many times she orgasmed; her pussy dribbled and gushed the entire time you were inside her.");
 			}
 		}
-		kellyPreggers()
+		kellyPreggers();
 		//All go to: 
 		outputText("\n\nFinally, you withdraw; you take a long moment to catch your breath before turning to Kelly.  She is panting hard too as she watches you slowly and carefully dismantle the riding gear off her.  The last thing you take off her is the ball bit; you remove it from her mouth, trailing saliva, interested to hear what will come out.");
 		
@@ -1393,7 +1304,7 @@ public function rideKellyForPunishment():void {
 }
 
 
-public function takeKellysVirginity():void {
+private function takeKellysVirginity():void {
 	clearOutput();
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1473,7 +1384,7 @@ public function takeKellysVirginity():void {
 
 //TFs
 //Canine Pepper
-public function giveKellyAPepper():void {
+private function giveKellyAPepper():void {
 	clearOutput();
 	//First: 
 	if(flags[kFLAGS.KELLY_TIMES_PEPPERED] == 0) {
@@ -1515,7 +1426,7 @@ public function giveKellyAPepper():void {
 //Titjob
 //[Requires: Not a centaur]
 //[If [dick0] larger than 18 inches: Requires Kelly have 4 breasts]
-public function kellyTitJob():void {
+private function kellyTitJob():void {
 	clearOutput();
 	
 	var x:int;
@@ -1567,7 +1478,7 @@ public function kellyTitJob():void {
 
 //Preggers
 /*Chance for Kelta to be pregnant is 1% for every 20 mL, capping at 80%.*/
-public function kellyPreggers():void {
+private function kellyPreggers():void {
 	if(flags[kFLAGS.KELLY_INCUBATION] > 0) return;
 	var x:int = Math.round(player.cumQ() / 20);
 	if(x > 80) x = 80;
@@ -1580,7 +1491,7 @@ public function kellyPreggers():void {
 	
 //Sex scene
 //notice this could be adapted into a normal scene minus the paragraph referring to her pregnancy
-public function kellyPregSex():void {
+private function kellyPregSex():void {
 	clearOutput();
 	var x:int;
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) x = player.biggestCockIndex();
@@ -1628,7 +1539,7 @@ public function kellyPopsOutARunt():void {
 }
 
 //Talk n Hand
-public function talkNHandToKelly():void {
+private function talkNHandToKelly():void {
 	clearOutput();
 	//First: You tell her you'd just like to talk.
 	if(flags[kFLAGS.KELLY_TALK_N_HAND_TIMES] == 0) {
@@ -1648,7 +1559,7 @@ public function talkNHandToKelly():void {
 	}
 	//Repeat: 
 	else {
-		outputText("You tell her you'd like to... talk.")
+		outputText("You tell her you'd like to... talk.");
 		outputText("\n\nGrinning, your centaur slave ");
 		if(!player.isTaur()) {
 			outputText("slides off the lower half of your [armor] as you set yourself down and then grasps your cock");
@@ -1756,7 +1667,7 @@ public function talkNHandToKelly():void {
 }
 //Reward
 //Requirements: PC used “punish” at least once, 3+ days have gone by and “punish” has not proced*
-public function rewardKelly():void {
+private function rewardKelly():void {
 	flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 1;
 	clearOutput();
 	//First time: 
@@ -1788,7 +1699,7 @@ public function rewardKelly():void {
 
 //Hair Dye
 //Requires: Black dye, purple dye, blonde dye, pink dye, brown dye in inventory.  Dye can't be given if her hair is that colour already, e.g. brown can't be given straight away
-public function dyeKellysBitchAssHair(color:String = ""):void {
+private function dyeKellysBitchAssHair(color:String = ""):void {
 	clearOutput();
 	outputText("You tell her you've brought her a gift as you rummage around in your pockets.  Kelly looks apprehensive but pleasant surprise forms on her face when she catches the small vial of dye you throw at her.");
 	outputText("\n\n\"<i>Oh wow, thanks [Master]! It's been ages since I did my hair.");
@@ -1842,7 +1753,7 @@ public function dyeKellysBitchAssHair(color:String = ""):void {
  
 //Apple Sauce
 //Req Dick that fits.
-public function giveKellyAppleSauce():void {
+private function giveKellyAppleSauce():void {
 	clearOutput();
 	//First time:
 	if(flags[kFLAGS.KELLY_TIMES_APPLESAUCED] == 0) {
@@ -1976,7 +1887,7 @@ public function giveKellyAppleSauce():void {
 }
 
 //Blowjob
-public function kellyBJsAhoy():void {
+private function kellyBJsAhoy():void {
 	clearOutput();
 	outputText("You step into Kelly, a question fading on her lips as you put your arms around her waist and answer it by drawing her face into yours.  You kiss her hungrily, pushing your tongue into her hot mouth.  It's almost an instinctive reaction - it's difficult to look at her face and not be drawn to her plump, pert lips, to not want to touch them, to use them.  And godsdamn, does she know how to use them.  She responds to your kiss in kind, humming blissfully as she eagerly accepts your tongue, rolling and curling it with her own, entwined like two lovers, drawing it further into her warm wetness as her pillowy boobs push into your [chest], her sweet, horny smell invading your nostrils as her overfull lips mash into your own, rubbing at your philtrum gently.");
 	outputText("\n\nYou are already ragingly hard, [eachCock] throbbing to the idea of those warm, expert folds of flesh sliding over ");
@@ -2202,5 +2113,5 @@ public function kellyBJsAhoy():void {
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
-
-
+}
+}

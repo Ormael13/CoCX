@@ -498,7 +498,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.KELLY_INCUBATION]--;
 			if(flags[kFLAGS.KELLY_INCUBATION] < 1) {
 				flags[kFLAGS.KELLY_INCUBATION] = 0;
-				kellyPopsOutARunt();
+				farm.kelly.kellyPopsOutARunt();
 				needNext = true;
 			}
 		}

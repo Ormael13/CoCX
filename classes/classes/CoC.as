@@ -127,15 +127,12 @@
 		public var mountain:Mountain = new Mountain();
 		public var plains:Plains = new Plains();
 		public var swamp:Swamp = new Swamp();
+		// Scenes/Monsters/
+		public var goblinScene:GoblinScene = new GoblinScene();
+		public var impScene:ImpScene = new ImpScene();
 		// Scenes/NPC/
-		public var anemoneScene:AnemoneScene = new AnemoneScene();
-		// Scenes/Places/
-		public var bazaar:Bazaar = new Bazaar();
-		public var boat:Boat = new Boat();
-		public var telAdre:TelAdre = new TelAdre();
-
-		// Named NPC Scenes (excluding dungeon bosses)
 		public var amilyScene:AmilyScene = new AmilyScene();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
@@ -159,9 +156,12 @@
 		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
 		public var sophieScene:SophieScene = new SophieScene();
 		public var valeria:Valeria = new Valeria();
-		// Nameless monster scenes
-		public var goblinScene:GoblinScene = new GoblinScene();
-		public var impScene:ImpScene = new ImpScene();
+		// Scenes/Places/
+		public var bazaar:Bazaar = new Bazaar();
+		public var boat:Boat = new Boat();
+		public var farm:Farm = new Farm();
+		public var telAdre:TelAdre = new TelAdre();
+
 		// Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
 		// Exploration scenes
@@ -185,8 +185,6 @@
 		include "../../includes/izma.as";
 		include "../../includes/jasun.as";
 		include "../../includes/katherine.as";
-		include "../../includes/kelly.as";
-		include "../../includes/kelt.as";
 		include "../../includes/library.as";
 		include "../../includes/lilium.as";
 		include "../../includes/lumi.as";
@@ -211,7 +209,6 @@
 		include "../../includes/urtaHeatRut.as";
 		include "../../includes/valentines.as";
 		include "../../includes/wanderer.as";
-		include "../../includes/whitneyFarm.as";
 		include "../../includes/worms.as";
 		include "../../includes/xmas_bitch.as";
 		include "../../includes/xmas_gats_not_an_angel.as";

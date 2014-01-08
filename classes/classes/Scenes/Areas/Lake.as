@@ -243,10 +243,10 @@ package classes.Scenes.Areas
 							}
 						}
 						//If you havent met whitney enough to know the farm....
-						else kGAMECLASS.farmExploreEncounter();
+						else kGAMECLASS.farm.farmExploreEncounter();
 					}
 					//If you havent met whitney, you can find the farm....
-					else kGAMECLASS.farmExploreEncounter();
+					else kGAMECLASS.farm.farmExploreEncounter();
 				}
 			}
 			else if (select == 3) {

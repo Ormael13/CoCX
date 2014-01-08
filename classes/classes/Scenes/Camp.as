@@ -1,6 +1,7 @@
 ﻿package classes.Scenes{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
@@ -1424,13 +1425,13 @@ public function places(display:Boolean):Boolean {
 	
 	//Turn on main farm encounter!
 	if(player.hasStatusAffect("Met Whitney") >= 0) {
-		if(player.statusAffects[player.hasStatusAffect("Met Whitney")].value1 > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = 2068;
+		if(player.statusAffects[player.hasStatusAffect("Met Whitney")].value1 > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
 	}
 	//Turn on bazaar encounter
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
+		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
 	}
 	//Make choices
 	choices("Bazaar",bazaar,"Boat", _boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2, "TownRuins",ruins,"Back",1);
