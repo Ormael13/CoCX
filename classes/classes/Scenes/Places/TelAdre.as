@@ -18,11 +18,16 @@
 		public var edryn:Edryn = new Edryn();
 		public var heckel:Heckel = new Heckel();
 		public var ifris:Ifris = new Ifris();
+		public var jasun:Jasun = new Jasun();
+		public var katherine:Katherine = new Katherine();
+		public var library:Library = new Library();
 		public var loppe:Loppe = new Loppe();
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
 		public var rubi:Rubi = new Rubi();
+		public var scylla:Scylla = new Scylla();
+		public var sexMachine:SexMachine = new SexMachine();
 		public var umasShop:UmasShop = new UmasShop();
 
 		public function TelAdre()
@@ -186,7 +191,7 @@ public function telAdreMenu():void {
 	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) homes = true;
 	if(homes) homeB = houses;
-	choices("Shops",armorShops,"Bakery",bakeryScene.bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",kGAMECLASS.visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
+	choices("Shops",armorShops,"Bakery",bakeryScene.bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",library.visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
 	addButton(0,"Shops",armorShops);
 	addButton(1,"Bakery",bakeryScene.bakeryuuuuuu);
@@ -195,7 +200,7 @@ public function telAdreMenu():void {
 	addButton(4,"Homes",homeB);
 	if(flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5,"Park",kGAMECLASS.arianScene.visitThePark);
 	addButton(6,"Pawn",oswaldPawn);
-	addButton(7,"Tower",kGAMECLASS.visitZeMagesTower);
+	addButton(7,"Tower",library.visitZeMagesTower);
 	addButton(8,"Weapons",weaponShop);
 	addButton(9,"Leave",eventParser,13);
 }
@@ -229,7 +234,7 @@ public function houses():void {
 	}
 	menu();
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(0,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
-	addButton(1,"Orphanage",kGAMECLASS.raphael.orphanageIntro);
+	addButton(1,"Orphanage",orphanage);
 	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",kGAMECLASS.urtaPregs.visitTheHouse);
 	addButton(9,"Back",telAdreMenu);
 }
@@ -1051,44 +1056,44 @@ public function barTelAdre():void {
 		if(player.longestCockLength() >= 12) {
 			if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
-				button = anotherButton(button,"Nun",kGAMECLASS.talkToScylla);
+				button = anotherButton(button,"Nun",scylla.talkToScylla);
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
 				outputText("", true);
-				kGAMECLASS.scyllaRoundII();
+				scylla.scyllaRoundII();
 				return;
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
 				outputText("", true);
-				kGAMECLASS.scyllaRoundThreeCUM();
+				scylla.scyllaRoundThreeCUM();
 				return;
 			}
 			//Round 4 goes here
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
-				kGAMECLASS.scyllaRoundIVGo();
+				scylla.scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
-				button = anotherButton(button,"Scylla",kGAMECLASS.Scylla6);
+				button = anotherButton(button,"Scylla",scylla.Scylla6);
 			}
 			//Round 5 - repeatable!
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
-				button = anotherButton(button,"Scylla",kGAMECLASS.scyllaAdictsAnonV);
+				button = anotherButton(button,"Scylla",scylla.scyllaAdictsAnonV);
 			}			
 			//Round 2.5 Repeatable
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
-				button = anotherButton(button,"Scylla",kGAMECLASS.scyllasFlyingSolo);
+				button = anotherButton(button,"Scylla",scylla.scyllasFlyingSolo);
 			}
 		}
 	}
 	//Nun cat stuff!
 	if((model.time.hours > 8 || model.time.hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
-		kGAMECLASS.catMorphIntr();
-		button = anotherButton(button,"ScyllaCats",kGAMECLASS.katherineGreeting);
+		katherine.catMorphIntr();
+		button = anotherButton(button,"ScyllaCats",katherine.katherineGreeting);
 	}
 	//URTA	
 	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
@@ -1127,7 +1132,7 @@ private function oldbarTelAdre():void {
 	hideUpDown();
 	var edryn2:Number = 0;
 	var urta2:Function = null;
-	var misc1:Number = 0;
+	var misc1:Function = null;
 	var misc1Name:String = "";
 	outputText("", true);
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
@@ -1174,8 +1179,8 @@ private function oldbarTelAdre():void {
 	//Nun cat stuff!
 	if((model.time.hours > 8 || model.time.hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
 		misc1Name = "ScyllaCats";
-		misc1 = 3316;
-		kGAMECLASS.catMorphIntr();
+		misc1 = katherine.katherineGreeting;
+		katherine.catMorphIntr();
 	}
 	//Scylla - requires dungeon shut down
 	if(player.totalCocks() > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
@@ -1184,49 +1189,49 @@ private function oldbarTelAdre():void {
 		if(player.longestCockLength() >= 12) {
 			if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
-				misc1 = 2447;
+				misc1 = scylla.talkToScylla;
 				misc1Name = "Nun";
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
 				outputText("", true);
-				kGAMECLASS.scyllaRoundII();
+				scylla.scyllaRoundII();
 				return;
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
 				outputText("", true);
-				kGAMECLASS.scyllaRoundThreeCUM();
+				scylla.scyllaRoundThreeCUM();
 				return;
 			}
 			//Round 4 goes here
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
-				kGAMECLASS.scyllaRoundIVGo();
+				scylla.scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				misc1Name = "Scylla";
-				misc1 = 2705;
+				misc1 = scylla.Scylla6;
 			}
 			//Round 5 - repeatable!
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
-				misc1 = 2563;
+				misc1 = scylla.scyllaAdictsAnonV;
 			}			
 			//Round 2.5 Repeatable
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				misc1Name = "Scylla";
-				misc1 = 3992;
+				misc1 = scylla.scyllasFlyingSolo;
 			}
 		}
 	}
-	if(model.time.hours >= 8 && model.time.hours <= 16 && (misc1 == 0 || (rand(2) == 0 && misc1 != 2705)) && flags[kFLAGS.NIAMH_STATUS] == 0) {
+	if(model.time.hours >= 8 && model.time.hours <= 16 && (misc1 == null || (rand(2) == 0 && misc1 != scylla.Scylla6)) && flags[kFLAGS.NIAMH_STATUS] == 0) {
 		niamh.telAdreNiamh();
 		if(flags[kFLAGS.MET_NIAMH] == 0) misc1Name = "Beer Cat";
 		else misc1Name = "Niamh";
-		misc1 = 3524;
+		misc1 = niamh.approachNiamh;
 	}
 	var hel:Function = null;
 	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && (!kGAMECLASS.helFollower.followerHel() || flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1)) {
@@ -1255,7 +1260,7 @@ private function oldbarTelAdre():void {
 				}
 			}
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
-			if(misc1Name == "Scylla") misc1 = 0;
+			if(misc1Name == "Scylla") misc1 = null;
 			urta2 = null;
 			backroom = kGAMECLASS.urta.scyllaAndUrtaSittingInATree;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
@@ -1553,7 +1558,7 @@ private function gymMenu():void {
 	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) 
 		loppe2 = loppe.loppeGenericMeetings;
 	
-	choices("ChangeRoom",kGAMECLASS.changingRoom,
+	choices("ChangeRoom",jasun.changingRoom,
 			cottonB,cotton2,
 			hyenaB,hyena,
 			ifrisB,ifris2,
@@ -1619,11 +1624,11 @@ private function weightLifting():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",kGAMECLASS.exploreShowers);
+		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
 		addButton(1,"Showers",brooke.repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
-	else doYesNo(kGAMECLASS.exploreShowers,13);
+	else doYesNo(sexMachine.exploreShowers,13);
 }
 
 private function goJogging():void {
@@ -1705,11 +1710,11 @@ private function goJogging():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",kGAMECLASS.exploreShowers);
+		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
 		addButton(1,"Showers",brooke.repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
-	else doYesNo(kGAMECLASS.exploreShowers,13);
+	else doYesNo(sexMachine.exploreShowers,13);
 }
 
 private function yaraSex(girl:Boolean = true):void {

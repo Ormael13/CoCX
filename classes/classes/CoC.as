@@ -188,17 +188,12 @@
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/items.as";
-		include "../../includes/jasun.as";
-		include "../../includes/katherine.as";
-		include "../../includes/library.as";
 		include "../../includes/marae.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
-		include "../../includes/scylla.as";
-		include "../../includes/sexMachine.as";
 		include "../../includes/sharkgirls.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";

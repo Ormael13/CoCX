@@ -1857,6 +1857,9 @@ public function createCallBackFunction(func:Function, arg:*):Function
 {
 	if( arg == -9000 || arg == null )
 	{
+		if (func == eventParser && CoC_Settings.haltOnErrors){
+			throw new Error("createCallBackFunction(eventParser,"+arg+")");
+		}
 		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 

@@ -1,4 +1,13 @@
-﻿//Jasun, the Male Shark-Morph
+﻿package classes.Scenes.Places.TelAdre{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+public class Jasun extends TelAdreAbstractContent{
+
+	public function Jasun()
+	{
+	}
+
+//Jasun, the Male Shark-Morph
 //It's important to provide some context for what I'm trying to achieve with this submission. My submission involves one character right now, the most important of the characters I'd like to write up if I had a bit more time. Additionally, given more time I'd probably write a scene for when Urta visits the gym, but given only a few days this is what I came up with. The character I have is met at the 'Changing Rooms', which would be an option to go to once you've paid to get in and such. This paves the way for encountering other people at the gym so you don't have to keep stuffing new characters into different hours at the bar (this is especially reasonable because not all of the characters would even make sense to encounter them at the bar).
 //If you insist on not having the changing room, which is totally your prerogative, and you like the character enough to have it win anything, I'd be more than happy to adjust the text to satisfy whatever implementation you desire.
 //Also, if this gets picked as the winner, I'd really like to expand it in the future to have race-specific text for shark-girls. They don't get any real work done specifically for them and I think they deserve it. I'd have written it into this, but really, working 8 hours a day and only having a few days to write for this contest limited the amount of work I could do on it. All I have to say is this: UNDERWATER SEX SCENE! Hopefully what's here is awesome enough for purposes of this contest, though!
@@ -35,7 +44,7 @@ public function changingRoom():void {
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
-public function meetJasun():void {
+private function meetJasun():void {
 	outputText("", true);
 	spriteSelect(33);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
@@ -152,7 +161,7 @@ public function meetJasun():void {
 	}
 }
 
-public function meetJasun2():void {
+private function meetJasun2():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("You and he walk together for what can't be a very long time. He winds around the back side of the gym, avoiding the weightlifting room and going past the track altogether. You didn't even know that there were areas of the gym beyond what you had previously seen. He easily pushes aside a very thick door with one arm ", false);
@@ -166,7 +175,7 @@ public function meetJasun2():void {
 }
 
 //IF YOU TURN AWAY
-public function turnAwayFromAdj():void {
+private function turnAwayFromAdj():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("\"<i>I understand,</i>\" he says dejectedly. He steps up and walks back toward the door. He perks up at the last minute, not letting his being rejected hurt his pride in the least, and says, \"<i>If you ever would like to swim, you know where to find me. Farewell.</i>\" He stands at the door and waits for you to leave before leaping into the water alone, as he has done no doubt many times in the past.\n\n", false);
@@ -177,7 +186,7 @@ public function turnAwayFromAdj():void {
 }
 
 //IF YOU ACCEPT
-public function acceptJasunsAdvances():void {
+private function acceptJasunsAdvances():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("He smiles wider as you put your hand into his. He leaps into the pool with a finesse unrivaled and lets go of you just as you're over the edge and dive in yourself. You giggle and throw about your hair in the water, gleeful at being able to swim somewhere without fear of being attacked by assorted demons, slimes, or what-have-you. You swim swiftly through the water and manage to catch up to him as he rounds the second corner of his first lap. He's completely shocked at your adroitness in the water, and smiles a wicked and toothed grin as he speeds up, no longer content to hold back. You struggle to keep up, but find that he is simply designed for this kind of thing. Seeing that you are trying so hard, he lets up again, content with the challenge you've provided as you round out your first lap. He isn't even panting when he holds up and turns toward you. You're so focused on your swimming that you ram right into his chest, bonking your head and causing you to scowl a little and contort in the water to come up. As you come up, rubbing your head, you find that you are intimately close to Jasun and immediately blush.\n\n", false);
@@ -189,7 +198,7 @@ public function acceptJasunsAdvances():void {
 	doNext(jasunSecks);
 }
 
-public function jasunSecks():void {
+private function jasunSecks():void {
 	outputText("", true);
 	spriteSelect(33);
 	//Increment 'times had sex'
@@ -222,5 +231,5 @@ public function jasunSecks():void {
 	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
-
-
+}
+}

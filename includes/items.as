@@ -2118,7 +2118,7 @@ public function doItems(eventNo:Number):void {
 			outputText("\n" + int(itemValue(itemSlot5.shortName)/2) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
 		}
 		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) 
-			kath = visitKatherine;
+			kath = telAdre.katherine.visitKatherine;
 
 		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1,
 				(itemSlot2.shortName + " x" + itemSlot2.quantity), temp2,

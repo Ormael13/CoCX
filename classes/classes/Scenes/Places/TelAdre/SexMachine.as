@@ -1,4 +1,13 @@
-﻿public function exploreShowers():void {
+﻿package classes.Scenes.Places.TelAdre{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+public class SexMachine extends TelAdreAbstractContent{
+
+	public function SexMachine()
+	{
+	}
+
+public function exploreShowers():void {
 	outputText("", true);
 	/*if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
@@ -26,13 +35,13 @@
 }
 
 //[If you decide to leave.]
-public function leaveShowers():void {
+private function leaveShowers():void {
 	outputText("", true);
 	outputText("You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.", false);
 	doNext(13);
 }
 
-public function useTheSexMachine():void {
+private function useTheSexMachine():void {
 	outputText("", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 2;
 	//[If you decide to mess with the machine: Male]
@@ -248,4 +257,6 @@ public function useTheSexMachine():void {
 	fatigue(10);
 	dynStats("lus=", 0);
 	doNext(13);
+}
+	}
 }

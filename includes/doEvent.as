@@ -1973,10 +1973,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.talkToAmilyCamp();
 	}
-	else if (eventNo == 2447)
-	{
-		talkToScylla();
-	}
 	else if (eventNo == 2453)
 	{
 		amilyScene.giveAmilyPureIncubusDraft();
@@ -2070,22 +2066,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2512)
 	{
 		followerInteractions.BlameMarblezSweetVagoozle();
-	}
-	else if (eventNo == 2563)
-	{
-		scyllaAdictsAnonV();
-	}
-	else if (eventNo == 2571)
-	{
-		scyllaPtVMilk();
-	}
-	else if (eventNo == 2576)
-	{
-		scyllaPtVCum();
-	}
-	else if (eventNo == 2581)
-	{
-		scyllaPtVSex();
 	}
 	else if (eventNo == 2594)
 	{
@@ -2195,18 +2175,6 @@ public function doEvent(eventNo:Number):void
 	{
 		shortName = "SucWhip";
 		incubusBuy();
-	}
-	else if (eventNo == 2705)
-	{
-		Scylla6();
-	}
-	else if (eventNo == 2708)
-	{
-		lactateAndKickAss();
-	}
-	else if (eventNo == 2718)
-	{
-		Scylla6NoMilkSubmit();
 	}
 	else if (eventNo == 2739)
 	{
@@ -2418,94 +2386,6 @@ public function doEvent(eventNo:Number):void
 	{
 		followerInteractions.amilyUrtaSex();
 	}
-	else if (eventNo == 3316)
-	{
-		katherineGreeting();
-	}
-	else if (eventNo == 3317)
-	{
-		visitKatherine();
-	}
-	else if (eventNo == 3328)
-	{
-		useReductoOnKat();
-	}
-	else if (eventNo == 3329)
-	{
-		useRedoctoOnKatsKnot();
-	}
-	else if (eventNo == 3330)
-	{
-		useReductoOnKatsKock();
-	}
-	else if (eventNo == 3331)
-	{
-		reductoBallSize();
-	}
-	else if (eventNo == 3332)
-	{
-		giveKatABulbousPepper();
-	}
-	else if (eventNo == 3333)
-	{
-		giveKatADoublePepper();
-	}
-	else if (eventNo == 3334)
-	{
-		giveKatAOverlyLargePepper();
-	}
-	else if (eventNo == 3335)
-	{
-		katherineSex();
-	}
-	else if (eventNo == 3337)
-	{
-		katPenetrate();
-	}
-	else if (eventNo == 3340)
-	{
-		penetrateKatsVag();
-	}
-	else if (eventNo == 3341)
-	{
-		pcPenetratesKatAnally();
-	}
-	else if (eventNo == 3342)
-	{
-		suckNFuck();
-	}
-	else if (eventNo == 3343)
-	{
-		letKatKnotYou();
-	}
-	else if (eventNo == 3344)
-	{
-		letKatKnotYourCuntPussyFuck();
-	}
-	else if (eventNo == 3346)
-	{
-		getDoublePennedByKat();
-	}
-	else if (eventNo == 3347)
-	{
-		suckedNFuckedByKat();
-	}
-	else if (eventNo == 3349)
-	{
-		giveKatOralPenisWingWang();
-	}
-	else if (eventNo == 3350)
-	{
-		katherineGivesPCOralAllDayLongDotJPG();
-	}
-	else if (eventNo == 3353)
-	{
-		katDoubleHelixCraziness();
-	}
-	else if (eventNo == 3354)
-	{
-		suckleTacularKats();
-	}
 	else if (eventNo == 3400)
 	{
 		amilyScene.dateNightFirstTime();
@@ -2537,10 +2417,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3458)
 	{
 		amilyScene.fuckIncestCunts(true);
-	}
-	else if (eventNo == 3524)
-	{
-		telAdre.niamh.approachNiamh();
 	}
 	else if (eventNo == 3525)
 	{
@@ -2710,10 +2586,6 @@ public function doEvent(eventNo:Number):void
 	{
 		chickenHarpy();
 	}
-	else if (eventNo == 3978)
-	{
-		shareTentaclesWithScylla();
-	}
 	else if (eventNo == 3988)
 	{
 		lustyMaidenPaizuri();
@@ -2729,10 +2601,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3991)
 	{
 		amilyScene.amilyNurseCheckup();
-	}
-	else if (eventNo == 3992)
-	{
-		scyllasFlyingSolo();
 	}
 	else if (eventNo == 3993)
 	{
