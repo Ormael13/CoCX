@@ -1,4 +1,12 @@
-﻿//I dunno about the term 'satanic streetwalker', and it 
+﻿package classes.Scenes.Places.Bazaar{
+import classes.GlobalFlags.kFLAGS;
+public class Lilium extends BazaarAbstractContent{
+
+	public function Lilium()
+	{
+	}
+
+//I dunno about the term 'satanic streetwalker', and it
 //probably needs to increment your corruption if you're fucking
 //a proper demon. -Z
 
@@ -11,21 +19,21 @@
 //267 Times Bought Smexin'
 
 //#########AREA TEXT#########
-public function LiliumText(output:Boolean = false):Number {
+public function LiliumText(output:Boolean = false):Function {
 	if(output) {
 		//Before paying:
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.", false);
 		//After paying:
 		else outputText("\n\nYou can see Lilium standing in her usual spot.", false);
 	}
-	if(model.time.hours >= 17) return 2978;
-	return 0;
+	if(model.time.hours >= 17) return approachLilium;
+	return null;
 }
 
-public function approachLilium():void {
+private function approachLilium():void {
 	outputText("", true);
 	spriteSelect(93);
-	var pay:Number = 0;
+	var pay:Function = null;
 	//#########FIRST TIME INTRODUCTION#########
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) {
 		outputText("As you approach the demon woman, her gaze shifts to you, and she runs her eyes down your body, scrutinizing you.  You respond in kind, taking in her form.  Two nearly foot-long horns grow up and out of her forehead, one of which is adorned with a shiny, silver band.  Her dark hair spills across her bare shoulders in loose coils and her black lipstick and heavy eyeshadow contrast with the paleness of her skin.  A black underbust corset wraps around her waist, leaving her breasts exposed, and long black gloves adorn her arms up to the shoulder.  She also wears a crinoline skirt with an opening at the front which reveals her smooth bare legs, a tail which wraps around her thigh like a garter, and her crotch, which sports an average cock curiously clad in a lacy sock in spite of her otherwise brazen exposure.\n\n", false);
@@ -43,12 +51,12 @@ public function approachLilium():void {
 		outputText("\"<i>Back again?  I thought I was finally rid of you!</i>\"  Lilium teases, but you can see the eager smile on her face.  \"<i>Is this visit business or pleasure?  I'm hoping both.</i>\"\n\n", false);
 	}
 	if(player.gems < 200) outputText("<b>You remember that you haven't got the 200 gems for her services right now.  Maybe next time.</b>", false);
-	else pay = 2979;
+	else pay = payForLilium;
 	simpleChoices("Pay",pay,"",0,"",0,"",0,"Leave",leaveLilium);
 }
 
 
-public function payForLilium():void {
+private function payForLilium():void {
 	outputText("", true);
 	spriteSelect(93);
 	//#########GENDERLESS SCENE######### REQUIRES unsexed (hah)
@@ -81,17 +89,17 @@ public function payForLilium():void {
 	player.gems -= 200;
 	statScreenRefresh();
 	//Sex Menu here
-	var buttFuck:Number = 0;
-	var nippleFuck:Number = 0;
-	var rideHer:Number = 0;
-	if(player.hasCock() && player.tongueType >= TONUGE_DEMONIC) buttFuck = 2981;
-	if(player.hasCock()) nippleFuck = 2983;
-	if(player.hasVagina()) rideHer = 2982;
+	var buttFuck:Function = null;
+	var nippleFuck:Function = null;
+	var rideHer:Function = null;
+	if(player.hasCock() && player.tongueType >= TONUGE_DEMONIC) buttFuck = buttFuckTongueJeorb;
+	if(player.hasCock()) nippleFuck = liliumNippleFuck;
+	if(player.hasVagina()) rideHer = liliumDickRidah;
 	simpleChoices("Buttfuck",buttFuck,"Ride Her",rideHer,"Nipple-Fuck",nippleFuck,"",0,"",0);
 }
 
 //- Leave:
-public function leaveLilium():void {
+private function leaveLilium():void {
 	outputText("", true);
 	spriteSelect(93);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
@@ -100,7 +108,7 @@ public function leaveLilium():void {
 }
 
 //#########BUTTFUCK + TONGUEJOB SCENE######### REQUIRES PENIS AND LONG DEMONIC TONGUE
-public function buttFuckTongueJeorb():void {
+private function buttFuckTongueJeorb():void {
 	outputText("", true);
 	spriteSelect(93);
 	var x:Number = player.cockThatFits(40);
@@ -141,7 +149,7 @@ public function buttFuckTongueJeorb():void {
 }
 
 //#########DICK RIDE SCENE######### REQUIRES VAGINA
-public function liliumDickRidah():void {
+private function liliumDickRidah():void {
 	outputText("", true);
 	spriteSelect(93);
 	outputText("Lilium takes you to a secluded spot away from the Bazaar.  She removes her corset and skirt and slips the lacy cock sock off her cock and you eagerly remove your own " + player.armorName + ".\n\n", false);
@@ -196,7 +204,7 @@ public function liliumDickRidah():void {
 }
 
 //#########NIPPLE FUCK SCENE######### REQUIRES PENIS
-public function liliumNippleFuck():void {
+private function liliumNippleFuck():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	
@@ -251,4 +259,6 @@ public function liliumNippleFuck():void {
 	outputText("You get dressed again and begin to leave; as you look back over shoulder, Lilium - still seated and leaning against the wall - blows you a kiss.", false);
 	dynStats("lus=", 0);
 	doNext(13);
+}
+}
 }

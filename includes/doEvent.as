@@ -2328,26 +2328,10 @@ public function doEvent(eventNo:Number):void
 		}
 		bazaar.enterTheBazaarAndMenu();
 	}
-	else if (eventNo == 2876)
-	{
-		Roxanne1stApproach();
-	}
-	else if (eventNo == 2877)
-	{
-		RoxanneChooseApproachOrRepeat();
-	}
-	else if (eventNo == 2879)
-	{
-		roxanneGivesABlowjob();
-	}
-	else if (eventNo == 2880)
-	{
-		roxanneCunnilingus();
-	}
 	else if (eventNo == 2884)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
-		roxanneDrinkingContest();
+		bazaar.roxanne.roxanneDrinkingContest();
 	}
 	else if (eventNo == 2889)
 	{
@@ -2480,26 +2464,6 @@ public function doEvent(eventNo:Number):void
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] = 1;
 		isabellaScene.isabellaGreeting();
 	}
-	else if (eventNo == 2978)
-	{
-		approachLilium();
-	}
-	else if (eventNo == 2979)
-	{
-		payForLilium();
-	}
-	else if (eventNo == 2981)
-	{
-		buttFuckTongueJeorb();
-	}
-	else if (eventNo == 2982)
-	{
-		liliumDickRidah();
-	}
-	else if (eventNo == 2983)
-	{
-		liliumNippleFuck();
-	}
 	else if (eventNo == 2997)
 	{
 		startCombat(new MaleSpiderMorph());
@@ -2610,22 +2574,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3149)
 	{
 		telAdre.lottie.encounterLottie(true);
-	}
-	else if (eventNo == 3167)
-	{
-		fapArenaGOOOO();
-	}
-	else if (eventNo == 3169)
-	{
-		fapResults(1);
-	}
-	else if (eventNo == 3170)
-	{
-		fapResults(2);
-	}
-	else if (eventNo == 3171)
-	{
-		fapResults(3);
 	}
 	else if (eventNo == 3172)
 	{

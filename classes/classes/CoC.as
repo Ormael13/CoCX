@@ -177,7 +177,6 @@
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
-		include "../../includes/fapArena.as";
 		include "../../includes/fera.as";
 		include "../../includes/gangbangVillage.as";
 		include "../../includes/gargoyle.as";
@@ -186,7 +185,6 @@
 		include "../../includes/jasun.as";
 		include "../../includes/katherine.as";
 		include "../../includes/library.as";
-		include "../../includes/lilium.as";
 		include "../../includes/lumi.as";
 		include "../../includes/marae.as";
 		include "../../includes/masturbation.as";
@@ -195,7 +193,6 @@
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";
 		include "../../includes/rathazul.as";
-		include "../../includes/roxanne.as";
 		include "../../includes/runa.as";
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";

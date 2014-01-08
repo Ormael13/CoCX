@@ -1,4 +1,16 @@
-﻿public function fapAppearance(display:Boolean = true):void {
+﻿package classes.Scenes.Places.Bazaar{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.CockTypesEnum;
+import classes.CoC_Settings;
+import classes.Appearance;
+public class FapArena extends BazaarAbstractContent{
+
+	public function FapArena()
+	{
+	}
+
+	public function fapAppearance(display:Boolean = true):void {
 	if(display) {
 		//[Paragraph: Bazaar description, 1st time]
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00339] == 0) outputText("\n\nThere is a gigantic tent standing in the clearing, with a large crowd gathering around it.   Perhaps you could investigate and see what is going on inside.", false);
@@ -79,7 +91,7 @@ public function fapArenaGOOOO():void {
 	//end of condition about PC's first time, display the following
 }
 	
-public function fapArenaPageII():void {
+private function fapArenaPageII():void {
 	outputText("", true);
 	var x:Number = player.longestCock();
 	
@@ -117,7 +129,7 @@ public function fapArenaPageII():void {
 	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
 	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
-	var r:Number = lustPercent()/100;
+	var r:Number = kGAMECLASS.lustPercent()/100;
 	//The game does a roll between 0 and 100, call it N.
 	var n:Number = rand(100);
 	//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
@@ -127,15 +139,16 @@ public function fapArenaPageII():void {
 	//If ST > 30, the PC wins.
 	//Otherwise the PC's rating is ST, rounded up.]
 	//[if the player loses]
-	if(st <= 0) doNext(3171);
+	if(st <= 0) doNext(createCallBackFunction(fapResults,3));
 	//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
-	else if(st < 29.5) doNext(3170);
+	else if(st < 29.5) doNext(createCallBackFunction(fapResults,2));
 	//[else, the player wins]
-	else doNext(3169);
+	else doNext(createCallBackFunction(fapResults,1));
 }
 
-public function fapResults(place:Number = 3):void {
+private function fapResults(place:Number = 3):void {
 	outputText("", true);
+	var x:Number = player.longestCock();
 	var num:Number = rand(50) + 5;
 	var tent:Boolean = false;
 	//Loses
@@ -424,8 +437,9 @@ public function fapResults(place:Number = 3):void {
 }
 
 //[SPECIAL: if player has an extra tentacle dick more than 40 inches long OR if the player has lost and has a unique tentacle dick, add this paragraph before the PC cums]
-public function tentacleFapSpecial(place:Number):void {
+private function tentacleFapSpecial(place:Number):void {
 	temp = player.cocks.length;
+	var x:Number = player.longestCock();
 	while(temp > 0) {
 		temp--;
 		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
@@ -451,8 +465,9 @@ public function tentacleFapSpecial(place:Number):void {
 	}
 }
 //[in both cases, special paragraph for cumming with tentacle dick]
-public function tentacleFapCum():Boolean {
+private function tentacleFapCum():Boolean {
 	temp = player.cocks.length;
+	var x:Number = player.longestCock();
 	while(temp > 0) {
 		temp--;
 		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
@@ -463,4 +478,6 @@ public function tentacleFapCum():Boolean {
 		return true;
 	}
 	return false;
+}
+}
 }

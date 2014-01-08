@@ -1,4 +1,16 @@
-﻿//Roxanne Poisontail
+﻿package classes.Scenes.Places.Bazaar{
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.CockTypesEnum;
+import classes.CoC_Settings;
+import classes.Appearance;
+public class Roxanne extends BazaarAbstractContent{
+
+	public function Roxanne()
+	{
+	}
+
+//Roxanne Poisontail
 //-no hair, 
 //-stand roughly 5'11\" in height, 
 //-wang = 20" long at smallest
@@ -34,20 +46,20 @@ WIN:
 //227 -Drinking Contest Bonus Score
 
 //[Drinking Table Appearance]
-public function RoxanneAppearance():Number {
+public function RoxanneAppearance():Function {
 	//When she there?
 	if(model.time.hours > 12 && model.time.hours < 19) {
 		//(Not Met) 
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
 		//Met) 
 		else outputText("\n\nRoxanne and her usual crew are sitting at a table, drinking and telling bawdy stories near the fire.", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) return 2876;
-		else return 2877;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) return Roxanne1stApproach;
+		else return RoxanneChooseApproachOrRepeat;
 	}
-	return 0;
+	return null;
 }
 //[Drinking Table Approach, Not Met Yet]	
-public function Roxanne1stApproach():void {
+private function Roxanne1stApproach():void {
 	outputText("", true);
 	spriteSelect(78);
 	outputText("You hesitantly approach the drinking lizard-folk, taking note of their unusual garments and appearance.  They all wear black jackets with silver trim, tight-fitting leather pants, and tall, black boots.  Oddly, the most feminine of them appears to be the leader.  Her jacket is filled out with large, well-rounded DD-cup breasts, and her boots forgo the traditional shape for a sluttier, higher heel.  Her scales are a dark purple, glittering darkly in the light, and while her head has a lizard-like shape, a pair of dragon-like horns bulge from the back of her skull in place of hair.  The other lizans all appear to be males, but they act as if they're quite intimidated by the feminine leader.\n\n", false);
@@ -57,7 +69,7 @@ public function Roxanne1stApproach():void {
 }
 
 //[Approach] – Flag as Met
-public function RoxanneChooseApproachOrRepeat():void {
+private function RoxanneChooseApproachOrRepeat():void {
 	spriteSelect(78);
 	outputText("", true);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) {
@@ -109,7 +121,6 @@ public function RoxanneChooseApproachOrRepeat():void {
 	//Clear the 'are you losing the contest intionally flag'
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0;
 	simpleChoices("Yes",roxanneDrinkingContest,"No",2855,"Lose",2884,"",0,"",0);
-	return;
 }
 
 public function roxanneDrinkingContest():void {
@@ -190,16 +201,16 @@ public function roxanneDrinkingContest():void {
 		outputText("Laughing uproariously, you watch with a bemused expression while Roxanne tries to stumble up to the tap, tripping over her tail three times before she finally manages to ask for another mug.  The partly-corrupted deer-taur shakes his head and folds his arms across his chest.  She's been cut off!  You win!  The lecherous lizan stamps her heeled boot in the dirt before tramping back over to you, hips swaying drunkenly.  She trips on her tail again, this time falling face-first into your lap.  Hiccuping drunkenly, Roxanne slurs, \"<i>Well at leasht I don't havta go far to give you your winningshh, huh?</i>\"\n\n", false);
 		outputText("The other lizans are looking at you with a watchful eye.  It looks like you'll have to stick by the terms of the contest.  What manner of oral service do you make her provide?", false);
 		//[Fellatio] [Cunnilingus] [Rimming]
-		var fellatio:Number = 0;
-		var cunnilingus:Number = 0;
-		if(player.hasCock()) fellatio = 2879;
-		if(player.hasVagina()) cunnilingus = 2880;
+		var fellatio:Function = null;
+		var cunnilingus:Function = null;
+		if(player.hasCock()) fellatio = roxanneGivesABlowjob;
+		if(player.hasVagina()) cunnilingus = roxanneCunnilingus;
 		simpleChoices("Cunnilingus",cunnilingus,"Fellatio",fellatio,"Rimming",roxanneRimjob,"",0,"",0);
 	}
 }
 
 //[GET A JOB OF BLOWNESS]
-public function roxanneGivesABlowjob():void {
+private function roxanneGivesABlowjob():void {
 	spriteSelect(78);
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
@@ -243,7 +254,7 @@ public function roxanneGivesABlowjob():void {
 	doNext(13);
 }
 //[Receive Oral – Vaginalingus]
-public function roxanneCunnilingus():void {
+private function roxanneCunnilingus():void {
 	spriteSelect(78);
 	outputText("", true);
 	outputText("You shimmy out of your " + player.armorName + " and lean back, exposing your " + vaginaDescript() + " to the drunken lizan's maw.  She wobbles back and forth for a moment, clutching at your " + player.legs() + " to steady herself before she leans in, brushing her scaled nose against your vulva.  You shudder from the sudden contact with her scales, but she doesn't rush it, instead huffing and sniffing at the moist entrance.  Her alcohol-lidded eyes gaze up at you, the bleary orbs slightly confused as her jaw slowly opens to release her tongue.\n\n", false);
@@ -288,7 +299,7 @@ public function roxanneCunnilingus():void {
 	doNext(13);
 }
 //[Receive Oral – SkyrRimjoooooooob]
-public function roxanneRimjob():void {
+private function roxanneRimjob():void {
 	spriteSelect(78);
 	outputText("", true);
 	outputText("You shimmy out of your " + player.armorName + " and smirk, turning around to lean onto the table", false);
@@ -341,7 +352,7 @@ public function roxanneRimjob():void {
 }
 
 //[OH SHIT YOU SO DRUNK AND GETTING REAMED BY LIZARD CAWK]
-public function roxanneReamsYouNormal():void {
+private function roxanneReamsYouNormal():void {
 	spriteSelect(78);
 	outputText("", true);
 	outputText("A foot interposes itself between you and the table, and a shove sends you flopping onto the booze-soaked planks face-down, the last few inches of descent slowed by Roxanne's firm hands.  A scaled digit digs under your " + player.armorName + ", pulling and tugging.  As each piece is forcibly removed, you're left more and more naked, totally exposed to the heat of the fire and the smooth scales of the lizan's body.  The room lurches when you to try to move and stop her, and you flop back down, ignoring the drunken spin of your surroundings.  Laughing heartily, the pirate leans over you to pin your hands to the table.  While her position has the intended effect of restraining you, it also gives you the enviable ability to feel Roxanne's iron-hard nipples pressing into your back.\n\n", false);
@@ -422,7 +433,7 @@ public function roxanneReamsYouNormal():void {
 }
 
 //[Roxanne HAS A FUCKING TORPEDO DICK BUTTFUCK]
-public function roxanneFucksYourAssOHGODITSHUGE():void {
+private function roxanneFucksYourAssOHGODITSHUGE():void {
 	spriteSelect(78);
 	outputText("", true);
 	outputText("Gosh, Roxanne is so strong... she's such a good friend to help you into her wagon, even while she has to drag the weight of her huge prick.  The lizan spins you in her arms and kisses you full on the face, her massive tongue battering through your lips to explore the recesses of your still-slack mouth.  A moment later, your sluggish reflexes catch up to the kiss, and you lick and suck at her tongue, clinging to the ", false);
@@ -484,7 +495,7 @@ public function roxanneFucksYourAssOHGODITSHUGE():void {
 	doNext(15);
 }
 	
-public function applyHangover():void {
+private function applyHangover():void {
 	//Status: Hangover.  
 	//v1 = hours left.
 	//v2 = strength taken
@@ -540,7 +551,7 @@ public function applyHangover():void {
 }
 
 //PC has a big butt and loses to normal Roxanne
-public function bigBootyRoxanneContestLoss():void {
+private function bigBootyRoxanneContestLoss():void {
 	spriteSelect(78);
 	clearOutput();
 	outputText("Gods, your head is swimming!  The room is pitching from side to side, and you " + player.mf("chuckle","giggle") + " as you idly wonder if this is what it would be like aboard Roxanne's ship.  Still, the well-endowed shemale doesn't seem to mind your tipsy bumbling in the slightest.  She hooks her hands under your [butt] and squeezes the spacious ass-flesh appreciatively, then growls, \"<i>Such a nice, round ass; perfect for stuffing with cock!  You're wasted as a champion.  You'd make a better cabin-" + player.mf("boy","girl") + ",</i>\" into your ear as she drags you towards her wagon.");
@@ -569,4 +580,6 @@ public function bigBootyRoxanneContestLoss():void {
 	dynStats("int", -1, "lus=", 0);
 	applyHangover();
 	doNext(15);
+}
+}
 }
