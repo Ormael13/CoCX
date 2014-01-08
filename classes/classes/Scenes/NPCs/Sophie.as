@@ -56,7 +56,7 @@
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + game.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-				else if(player.lust < 100) outputText(SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
+				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
 				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
 			}
 			else {
@@ -66,7 +66,7 @@
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + game.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-				else if(player.lust < 100) outputText(SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
+				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
 				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
 			}
 		}
