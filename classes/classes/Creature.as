@@ -1,16 +1,9 @@
 ﻿//CoC Creature.as
 package classes
 {
-	//import classes.CockClass;
-	import classes.Cock;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.VaginaClass;
-	import classes.BreastRowClass;
-	import classes.AssClass;
-	import classes.PerkClass;
-	import classes.StatusAffectClass;
-	import classes.KeyItemClass;
-	
+
+	//import classes.CockClass;
 	public class Creature
 	{
 
@@ -18,6 +11,9 @@ package classes
 
 		public function get game():CoC {
 			return kGAMECLASS;
+		}
+		public function get flags():DefaultDict {
+			return game.flags;
 		}
 
 		//Variables
@@ -290,12 +286,12 @@ package classes
 		{
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			cocks = new Array();
-			vaginas = new Array();
+			cocks = [];
+			vaginas = [];
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
-			breastRows = new Array();
-			perks = new Array();
-			statusAffects = new Array();
+			breastRows = [];
+			perks = [];
+			statusAffects = [];
 			//keyItems = new Array();
 		}
 		
@@ -307,8 +303,8 @@ package classes
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
-			var keySlot:Number = 0
-			var counter:Number = 0
+			var keySlot:Number = 0;
+			var counter:Number = 0;
 			//Start the array if its the first bit
 			if (perks.length == 0)
 			{
@@ -2744,12 +2740,10 @@ package classes
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
 		{
 			if (ctype == null) ctype = CockTypesEnum.HUMAN;
-			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness+", ctype = "+ctype);
 			if (cocks.length >= 10)
 				return false;
 			var newCock:Cock = new Cock(clength, cthickness,ctype);
 			//var newCock:cockClass = new cockClass();
-			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
 			cocks[cocks.length-1].cockThickness = cthickness;
 			cocks[cocks.length-1].cockLength = clength;
@@ -2892,6 +2886,1062 @@ package classes
 					this.cocks[i].cockType = CockTypesEnum.ParseConstantByIndex(this.cocks[i].cockType.Index);
 				}
 			}
+		}
+
+		public function buttChangeNoDisplay(cArea:Number):Boolean {
+			var stretched:Boolean = false;
+			//cArea > capacity = autostreeeeetch half the time.
+			if(cArea >= analCapacity() && rand(2) == 0) {
+				if(ass.analLooseness >= 5) {}
+				else ass.analLooseness++;
+				stretched = true;
+				//Reset butt stretchin recovery time
+				if(hasStatusAffect("ButtStretched") >= 0) changeStatusValue("ButtStretched",1,0);
+			}
+			//If within top 10% of capacity, 25% stretch
+			if(cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//if within 75th to 90th percentile, 10% stretch
+			if(cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rand(10) == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//Anti-virgin
+			if(ass.analLooseness == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//Delay un-stretching
+			if(cArea >= .5 * analCapacity()) {
+				//Butt Stretched used to determine how long since last enlargement
+				if(hasStatusAffect("ButtStretched") < 0) createStatusAffect("ButtStretched",0,0,0,0);
+				//Reset the timer on it to 0 when restretched.
+				else changeStatusValue("ButtStretched",1,0);
+			}
+			if(stretched) {
+				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
+			}
+			return stretched;
+		}
+
+		public function cuntChangeNoDisplay(cArea:Number):Boolean{
+			if(vaginas.length == 0) return false;
+			var stretched:Boolean = false;
+			var devirgined:Boolean = false;
+			if(hasPerk("Fera's Boon - Milking Twat") < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			//cArea > capacity = autostreeeeetch.
+			if(cArea >= vaginalCapacity()) {
+				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+				else vaginas[0].vaginalLooseness++;
+				stretched = true;
+			}
+			//If within top 10% of capacity, 50% stretch
+			else if(cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
+				vaginas[0].vaginalLooseness++;
+				stretched = true;
+			}
+			//if within 75th to 90th percentile, 25% stretch
+			else if(cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
+				vaginas[0].vaginalLooseness++;
+				stretched = true;
+				}
+			}
+			//If virgin
+			if(vaginas[0].virgin) {
+				vaginas[0].virgin = false;
+				devirgined = true;
+			}
+			//Delay anti-stretching
+			if(cArea >= .5 * vaginalCapacity()) {
+				//Cunt Stretched used to determine how long since last enlargement
+				if(hasStatusAffect("CuntStretched") < 0) createStatusAffect("CuntStretched",0,0,0,0);
+				//Reset the timer on it to 0 when restretched.
+				else changeStatusValue("CuntStretched",1,0);
+			}
+			if(stretched) {
+				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
+			}
+			return stretched;
+		}
+
+		public function bonusFertility():Number
+		{
+			var counter:Number = 0;
+			if (hasPerk("heat") >= 0)
+				counter += perks[hasPerk("heat")].value1;
+			if (hasPerk("Fertility+") >= 0)
+				counter += 15;
+			if (hasPerk("Marae's Gift - Fertility") >= 0)
+				counter += 50;
+			if (hasPerk("Fera's Boon - Breeding Bitch") >= 0)
+				counter += 30;
+			if (hasPerk("Magical Fertility") >= 0)
+				counter += 10;
+			counter += perkv2("Elven Bounty");
+			counter += perkv1("Pierced: Fertite");
+			return counter;
+		}
+
+		public function totalFertility():Number
+		{
+			return (bonusFertility() + fertility);
+		}
+
+		public function isBiped():Boolean
+		{
+			//Naga/Centaur
+			if (lowerBody == 3 || lowerBody == 4)
+				return false;
+			if (lowerBody == 8 || lowerBody == 11)
+				return false;
+			return true;
+		}
+
+		public function isNaga():Boolean
+		{
+			if (lowerBody == 3)
+				return true;
+			return false;
+		}
+
+		public function isTaur():Boolean
+		{
+			if (lowerBody == 4 || lowerBody == 11)
+				return true;
+			return false;
+		}
+
+		public function isDrider():Boolean
+		{
+			return (lowerBody == 16);
+		}
+
+		public function isGoo():Boolean
+		{
+			if (lowerBody == 8)
+				return true;
+			return false;
+		}
+
+		public function legs():String
+		{
+			var select:Number = 0;
+			//lowerBody:
+			//0 - normal
+			if (lowerBody == 0)
+				return "legs";
+			//1 - hooves
+			if (lowerBody == 1)
+				return "legs";
+			//2 - paws
+			if (lowerBody == 2)
+				return "legs";
+			//3 - snakelike body
+			if (lowerBody == 3)
+				return "snake-like coils";
+			//4 - centaur!
+			if (lowerBody == 4)
+				return "four legs";
+			//8 - goo shit
+			if (lowerBody == 8)
+				return "mounds of goo";
+			//PONY
+			if (lowerBody == 11)
+				return "cute pony-legs";
+			//Bunnah!
+			if (lowerBody == 12) {
+				select = Math.floor(Math.random() * (5));
+				if (select == 0)
+					return "fuzzy, bunny legs";
+				else if (select == 1)
+					return "fur-covered legs";
+				else if (select == 2)
+					return "furry legs";
+				else
+					return "legs";
+			}
+			if (lowerBody == 13) {
+				select = Math.floor(Math.random() * (5));
+				if (select == 0)
+					return "bird-like legs";
+				else if (select == 1)
+					return "feathered legs";
+				else
+					return "legs";
+			}
+			if (lowerBody == 17) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "fox-like legs";
+				else if (select == 1)
+					return "legs";
+				else if (select == 2)
+					return "legs";
+				else
+					return "vulpine legs";
+			}
+			if (lowerBody == 19) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "raccoon-like legs";
+				else
+					return "legs";
+			}
+
+			return "legs";
+		}
+
+		public function skinFurScales():String
+		{
+			var skinzilla:String = "";
+			//Adjectives first!
+			if (skinAdj != "")
+				skinzilla += skinAdj + ", ";
+			//Fur handled a little differently since it uses
+			//haircolor
+			if (skinType == 1)
+				skinzilla += hairColor + " ";
+			else
+				skinzilla += skinTone + " ";
+			skinzilla += skinDesc;
+			return skinzilla;
+		}
+
+		public function leg():String
+		{
+			var select:Number = 0;
+			//lowerBody:
+			//0 - normal
+			if (lowerBody == 0)
+				return "leg";
+			//1 - hooves
+			if (lowerBody == 1)
+				return "leg";
+			//2 - paws
+			if (lowerBody == 2)
+				return "leg";
+			//3 - snakelike body
+			if (lowerBody == 3)
+				return "snake-tail";
+			//4 - centaur!
+			if (lowerBody == 4)
+				return "equine leg";
+			//8 - goo shit
+			if (lowerBody == 8)
+				return "mound of goo";
+			//PONY
+			if (lowerBody == 11)
+				return "cartoonish pony-leg";
+			//BUNNAH
+			if (lowerBody == 12) {
+				select = Math.random() * (5);
+				if (select == 0)
+					return "fuzzy, bunny leg";
+				else if (select == 1)
+					return "fur-covered leg";
+				else if (select == 2)
+					return "furry leg";
+				else
+					return "leg";
+			}
+			if (lowerBody == 13) {
+				select = Math.floor(Math.random() * (5));
+				if (select == 0)
+					return "bird-like leg";
+				else if (select == 1)
+					return "feathered leg";
+				else
+					return "leg";
+			}
+			if (lowerBody == 17) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "fox-like leg";
+				else if (select == 1)
+					return "leg";
+				else if (select == 2)
+					return "leg";
+				else
+					return "vulpine leg";
+			}
+			if (lowerBody == 19) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "raccoon-like leg";
+				else
+					return "leg";
+			}
+			return "leg";
+		}
+
+		public function feet():String
+		{
+			var select:Number = 0;
+			//lowerBody:
+			//0 - normal
+			if (lowerBody == 0)
+				return "feet";
+			//1 - hooves
+			if (lowerBody == 1)
+				return "hooves";
+			//2 - paws
+			if (lowerBody == 2)
+				return "paws";
+			//3 - snakelike body
+			if (lowerBody == 3)
+				return "coils";
+			//4 - centaur!
+			if (lowerBody == 4)
+				return "hooves";
+			//5 - demonic heels
+			if (lowerBody == 5)
+				return "demonic high-heels";
+			//6 - demonic claws
+			if (lowerBody == 6)
+				return "demonic foot-claws";
+			//8 - goo shit
+			if (lowerBody == 8)
+				return "slimey cillia";
+			if (lowerBody == 11)
+				return "flat pony-feet";
+			//BUNNAH
+			if (lowerBody == 12) {
+				select = rand(5);
+				if (select == 0)
+					return "large bunny feet";
+				else if (select == 1)
+					return "rabbit feet";
+				else if (select == 2)
+					return "large feet";
+				else
+					return "feet";
+			}
+			if (lowerBody == 13) {
+				select = Math.floor(Math.random() * (5));
+				if (select == 0)
+					return "taloned feet";
+				else
+					return "feet";
+			}
+			if (lowerBody == 14)
+				return "foot-paws";
+			if (lowerBody == 17) {
+				select = rand(4);
+				if (select == 0)
+					return "paws";
+				else if (select == 1)
+					return "soft, padded paws";
+				else if (select == 2)
+					return "fox-like feet";
+				else
+					return "paws";
+			}
+			if (lowerBody == 19) {
+				select = Math.floor(Math.random() * (3));
+				if (select == 0)
+					return "raccoon-like feet";
+				else if (select == 1)
+					return "long-toed paws";
+				else if (select == 2)
+					return "feet";
+				else
+					return "paws";
+			}
+			return "feet";
+		}
+
+		public function foot():String
+		{
+			var select:Number = 0;
+			//lowerBody:
+			//0 - normal
+			if (lowerBody == 0)
+				return "foot";
+			//1 - hooves
+			if (lowerBody == 1)
+				return "hoof";
+			//2 - paws
+			if (lowerBody == 2)
+				return "paw";
+			//3 - snakelike body
+			if (lowerBody == 3)
+				return "coiled tail";
+			//4 - centaur!
+			if (lowerBody == 4)
+				return "hoof";
+			//8 - goo shit
+			if (lowerBody == 8)
+				return "slimey undercarriage";
+			//PONY
+			if (lowerBody == 11)
+				return "flat pony-foot";
+			//BUNNAH
+			if (lowerBody == 12) {
+				select = Math.random() * (5);
+				if (select == 0)
+					return "large bunny foot";
+				else if (select == 1)
+					return "rabbit foot";
+				else if (select == 2)
+					return "large foot";
+				else
+					return "foot";
+			}
+			if (lowerBody == 13) {
+				select = Math.floor(Math.random() * (5));
+				if (select == 0)
+					return "taloned foot";
+				else
+					return "foot";
+			}
+			if (lowerBody == 17) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "paw";
+				else if (select == 1)
+					return "soft, padded paw";
+				else if (select == 2)
+					return "fox-like foot";
+				else
+					return "paw";
+			}
+			if (lowerBody == 14)
+				return "foot-paw";
+			if (lowerBody == 19) {
+				select = Math.floor(Math.random() * (3));
+				if (select == 0)
+					return "raccoon-like foot";
+				else if (select == 1)
+					return "long-toed paw";
+				else if (select == 2)
+					return "foot";
+				else
+					return "paw";
+			}
+			return "foot";
+		}
+
+		public function canOvipositSpider():Boolean
+		{
+			if (eggs() >= 10 && hasPerk("Spider Ovipositor") >= 0 && isDrider() && tailType == 5)
+				return true;
+			return false;
+		}
+
+		public function canOvipositBee():Boolean
+		{
+			if (eggs() >= 10 && hasPerk("Bee Ovipositor") >= 0 && tailType == 6)
+				return true;
+			return false;
+		}
+
+		public function canOviposit():Boolean
+		{
+			if (canOvipositSpider() || canOvipositBee())
+				return true;
+			return false;
+		}
+
+		public function eggs():int
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return -1;
+			else if (hasPerk("Spider Ovipositor") >= 0)
+				return perkv1("Spider Ovipositor");
+			else
+				return perkv1("Bee Ovipositor");
+		}
+
+		public function addEggs(arg:int = 0):int
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return -1;
+			else {
+				if (hasPerk("Spider Ovipositor") >= 0) {
+					addPerkValue("Spider Ovipositor", 1, arg);
+					if (eggs() > 50)
+						changePerkValue("Spider Ovipositor", 1, 50);
+					return perkv1("Spider Ovipositor");
+				}
+				else {
+					addPerkValue("Bee Ovipositor", 1, arg);
+					if (eggs() > 50)
+						changePerkValue("Bee Ovipositor", 1, 50);
+					return perkv1("Bee Ovipositor");
+				}
+			}
+		}
+
+		public function dumpEggs():void
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return;
+			setEggs(0);
+			//Sets fertile eggs = regular eggs (which are 0)
+			fertilizeEggs();
+		}
+
+		public function setEggs(arg:int = 0):int
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return -1;
+			else {
+				if (hasPerk("Spider Ovipositor") >= 0) {
+					changePerkValue("Spider Ovipositor", 1, arg);
+					if (eggs() > 50)
+						changePerkValue("Spider Ovipositor", 1, 50);
+					return perkv1("Spider Ovipositor");
+				}
+				else {
+					changePerkValue("Bee Ovipositor", 1, arg);
+					if (eggs() > 50)
+						changePerkValue("Bee Ovipositor", 1, 50);
+					return perkv1("Bee Ovipositor");
+				}
+			}
+		}
+
+		public function fertilizedEggs():int
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return -1;
+			else if (hasPerk("Spider Ovipositor") >= 0)
+				return perkv2("Spider Ovipositor");
+			else
+				return perkv2("Bee Ovipositor");
+		}
+
+		public function fertilizeEggs():int
+		{
+			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+				return -1;
+			else if (hasPerk("Spider Ovipositor") >= 0)
+				changePerkValue("Spider Ovipositor", 2, eggs());
+			else
+				changePerkValue("Bee Ovipositor", 2, eggs());
+			return fertilizedEggs();
+		}
+
+		public function increaseCock(increase:Number, cockNum:Number):Number
+		{
+			if (hasPerk("Big Cock") >= 0)
+				increase *= perks[hasPerk("Big Cock")].value1;
+			if (hasPerk("Phallic Potential") >= 0)
+				increase *= 1.5;
+			if (hasPerk("Phallic Restraint") >= 0)
+				increase *= .25;
+			return cocks[cockNum].growCock(increase);
+		}
+
+		public function breastCup(rowNum:Number):String
+		{
+			if (breastRows[rowNum].breastRating < 1)
+				return "flat, manly breast";
+			else if (breastRows[rowNum].breastRating < 2)
+				return "A-cup";
+			else if (breastRows[rowNum].breastRating < 3)
+				return "B-cup";
+			else if (breastRows[rowNum].breastRating < 4)
+				return "C-cup";
+			else if (breastRows[rowNum].breastRating < 5)
+				return "D-cup";
+			else if (breastRows[rowNum].breastRating < 6)
+				return "DD-cup";
+			else if (breastRows[rowNum].breastRating < 7)
+				return "big DD-cup";
+			else if (breastRows[rowNum].breastRating < 8)
+				return "E-cup";
+			else if (breastRows[rowNum].breastRating < 9)
+				return "big E-cup";
+			else if (breastRows[rowNum].breastRating < 10)
+				return "EE-cup";
+			else if (breastRows[rowNum].breastRating < 11)
+				return "big EE-cup";
+			else if (breastRows[rowNum].breastRating < 12)
+				return "F-cup";
+			else if (breastRows[rowNum].breastRating < 13)
+				return "big F-cup";
+			else if (breastRows[rowNum].breastRating < 14)
+				return "FF-cup";
+			else if (breastRows[rowNum].breastRating < 15)
+				return "big FF-cup";
+			else if (breastRows[rowNum].breastRating < 16)
+				return "G-cup";
+			else if (breastRows[rowNum].breastRating < 17)
+				return "big G-cup";
+			else if (breastRows[rowNum].breastRating < 18)
+				return "GG-cup";
+			else if (breastRows[rowNum].breastRating < 19)
+				return "big GG-cup";
+			else if (breastRows[rowNum].breastRating < 20)
+				return "H-cup";
+			else if (breastRows[rowNum].breastRating < 21)
+				return "big H-cup";
+			else if (breastRows[rowNum].breastRating < 22)
+				return "HH-cup";
+			else if (breastRows[rowNum].breastRating < 23)
+				return "big HH-cup";
+			else if (breastRows[rowNum].breastRating < 24)
+				return "HHH-cup";
+			else if (breastRows[rowNum].breastRating < 25)
+				return "I-cup";
+			else if (breastRows[rowNum].breastRating < 26)
+				return "big I-cup";
+			else if (breastRows[rowNum].breastRating < 27)
+				return "II-cup";
+			else if (breastRows[rowNum].breastRating < 28)
+				return "big II-cup";
+			else if (breastRows[rowNum].breastRating < 29)
+				return "J-cup";
+			else if (breastRows[rowNum].breastRating < 30)
+				return "big J-cup";
+			else if (breastRows[rowNum].breastRating < 31)
+				return "JJ-cup";
+			else if (breastRows[rowNum].breastRating < 32)
+				return "big JJ-cup";
+			else if (breastRows[rowNum].breastRating < 33)
+				return "K-cup";
+			else if (breastRows[rowNum].breastRating < 34)
+				return "big K-cup";
+			else if (breastRows[rowNum].breastRating < 35)
+				return "KK-cup";
+			else if (breastRows[rowNum].breastRating < 36)
+				return "big KK-cup";
+			else if (breastRows[rowNum].breastRating < 37)
+				return "L-cup";
+			else if (breastRows[rowNum].breastRating < 38)
+				return "big L-cup";
+			else if (breastRows[rowNum].breastRating < 39)
+				return "LL-cup";
+			else if (breastRows[rowNum].breastRating < 40)
+				return "big LL-cup";
+			else if (breastRows[rowNum].breastRating < 41)
+				return "M-cup";
+			else if (breastRows[rowNum].breastRating < 42)
+				return "big M-cup";
+			else if (breastRows[rowNum].breastRating < 43)
+				return "MM-cup";
+			else if (breastRows[rowNum].breastRating < 44)
+				return "big MM-cup";
+			else if (breastRows[rowNum].breastRating < 45)
+				return "MMM-cup";
+			else if (breastRows[rowNum].breastRating < 46)
+				return "large MMM-cup";
+			else if (breastRows[rowNum].breastRating < 47)
+				return "N-cup";
+			else if (breastRows[rowNum].breastRating < 48)
+				return "large N-cup";
+			else if (breastRows[rowNum].breastRating < 49)
+				return "NN-cup";
+			else if (breastRows[rowNum].breastRating < 50)
+				return "large NN-cup";
+			else if (breastRows[rowNum].breastRating < 51)
+				return "O-cup";
+			else if (breastRows[rowNum].breastRating < 52)
+				return "large O-cup";
+			else if (breastRows[rowNum].breastRating < 53)
+				return "OO-cup";
+			else if (breastRows[rowNum].breastRating < 54)
+				return "large OO-cup";
+			else if (breastRows[rowNum].breastRating < 55)
+				return "P-cup";
+			else if (breastRows[rowNum].breastRating < 56)
+				return "large P-cup";
+			else if (breastRows[rowNum].breastRating < 57)
+				return "PP-cup";
+			else if (breastRows[rowNum].breastRating < 58)
+				return "large PP-cup";
+			else if (breastRows[rowNum].breastRating < 59)
+				return "Q-cup";
+			else if (breastRows[rowNum].breastRating < 60)
+				return "large Q-cup";
+			else if (breastRows[rowNum].breastRating < 61)
+				return "QQ-cup";
+			else if (breastRows[rowNum].breastRating < 62)
+				return "large QQ-cup";
+			else if (breastRows[rowNum].breastRating < 63)
+				return "R-cup";
+			else if (breastRows[rowNum].breastRating < 64)
+				return "large R-cup";
+			else if (breastRows[rowNum].breastRating < 65)
+				return "RR-cup";
+			else if (breastRows[rowNum].breastRating < 66)
+				return "large RR-cup";
+			else if (breastRows[rowNum].breastRating < 67)
+				return "S-cup";
+			else if (breastRows[rowNum].breastRating < 68)
+				return "large S-cup";
+			else if (breastRows[rowNum].breastRating < 69)
+				return "SS-cup";
+			else if (breastRows[rowNum].breastRating < 70)
+				return "large SS-cup";
+			else if (breastRows[rowNum].breastRating < 71)
+				return "T-cup";
+			else if (breastRows[rowNum].breastRating < 72)
+				return "large T-cup";
+			else if (breastRows[rowNum].breastRating < 73)
+				return "TT-cup";
+			else if (breastRows[rowNum].breastRating < 74)
+				return "large TT-cup";
+			else if (breastRows[rowNum].breastRating < 75)
+				return "U-cup";
+			else if (breastRows[rowNum].breastRating < 76)
+				return "large U-cup";
+			else if (breastRows[rowNum].breastRating < 77)
+				return "UU-cup";
+			else if (breastRows[rowNum].breastRating < 78)
+				return "large UU-cup";
+			else if (breastRows[rowNum].breastRating < 79)
+				return "V-cup";
+			else if (breastRows[rowNum].breastRating < 80)
+				return "large V-cup";
+			else if (breastRows[rowNum].breastRating < 81)
+				return "VV-cup";
+			else if (breastRows[rowNum].breastRating < 82)
+				return "large VV-cup";
+			else if (breastRows[rowNum].breastRating < 83)
+				return "W-cup";
+			else if (breastRows[rowNum].breastRating < 84)
+				return "large W-cup";
+			else if (breastRows[rowNum].breastRating < 85)
+				return "WW-cup";
+			else if (breastRows[rowNum].breastRating < 86)
+				return "large WW-cup";
+			else if (breastRows[rowNum].breastRating < 87)
+				return "X-cup";
+			else if (breastRows[rowNum].breastRating < 88)
+				return "large X-cup";
+			else if (breastRows[rowNum].breastRating < 89)
+				return "XX-cup";
+			else if (breastRows[rowNum].breastRating < 90)
+				return "large XX-cup";
+			else if (breastRows[rowNum].breastRating < 91)
+				return "Y-cup";
+			else if (breastRows[rowNum].breastRating < 92)
+				return "large Y-cup";
+			else if (breastRows[rowNum].breastRating < 93)
+				return "YY-cup";
+			else if (breastRows[rowNum].breastRating < 94)
+				return "large YY-cup";
+			else if (breastRows[rowNum].breastRating < 95)
+				return "Z-cup";
+			else if (breastRows[rowNum].breastRating < 96)
+				return "large Z-cup";
+			else if (breastRows[rowNum].breastRating < 97)
+				return "ZZ-cup";
+			else if (breastRows[rowNum].breastRating < 98)
+				return "large ZZ-cup";
+			else if (breastRows[rowNum].breastRating < 99)
+				return "ZZZ-cup";
+			else if (breastRows[rowNum].breastRating < 100)
+				return "large ZZZ-cup";
+			/*else if(breastRows[rowNum].breastRating < 20) return "watermelon-sized cup";
+			 else if(breastRows[rowNum].breastRating < 35) return "tent-sized cup";
+			 else if(breastRows[rowNum].breastRating < 60) return "truck-sized cup";
+			 else if(breastRows[rowNum].breastRating < 100) return "parachute-sized cup";*/
+			else
+				return "game-breaking cup";
+			return "Error-Cup (breastSize Error Number: " + breastRows[rowNum].breastRating;
+			//watermelon-sized
+			//tent sized
+			//truck sized
+			//parachute sized
+			//pool-sized
+			//hanger-sized
+			//town-sized
+			//city-sized
+			//state-sized
+			//continent-sized
+			//planet-sized
+			//WTFISTHISWHYISNTITGAMEOVER?
+		}
+
+		public function bRows():Number
+		{
+			return breastRows.length;
+		}
+
+		public function totalBreasts():Number
+		{
+			var counter:Number = breastRows.length;
+			var total:Number = 0;
+			while (counter > 0) {
+				counter--;
+				total += breastRows[counter].breasts;
+			}
+			return total;
+		}
+
+		public function totalNipples():Number
+		{
+			var counter:Number = breastRows.length;
+			var total:Number = 0;
+			while (counter > 0) {
+				counter--;
+				total += breastRows[counter].nipplesPerBreast * breastRows[counter].breasts;
+			}
+			return total;
+		}
+
+		public function smallestTitSize():Number
+		{
+			if (breastRows.length == 0)
+				return -1;
+			var counter:Number = breastRows.length;
+			var index:Number = 0;
+			while (counter > 0) {
+				counter--;
+				if (breastRows[index].breastRating > breastRows[counter].breastRating)
+					index = counter;
+			}
+			return breastRows[index].breastRating;
+		}
+
+		public function smallestTitRow():Number
+		{
+			if (breastRows.length == 0)
+				return -1;
+			var counter:Number = breastRows.length;
+			var index:Number = 0;
+			while (counter > 0) {
+				counter--;
+				if (breastRows[index].breastRating > breastRows[counter].breastRating)
+					index = counter;
+			}
+			return index;
+		}
+
+		public function biggestTitRow():Number
+		{
+			var counter:Number = breastRows.length;
+			var index:Number = 0;
+			while (counter > 0) {
+				counter--;
+				if (breastRows[index].breastRating < breastRows[counter].breastRating)
+					index = counter;
+			}
+			return index;
+		}
+
+		public function averageBreastSize():Number
+		{
+			var counter:Number = breastRows.length;
+			var average:Number = 0;
+			while (counter > 0) {
+				counter--;
+				average += breastRows[counter].breastRating;
+			}
+			if (breastRows.length == 0)
+				return 0;
+			return (average / breastRows.length);
+		}
+
+		public function averageCockThickness():Number
+		{
+			var counter:Number = cocks.length;
+			var average:Number = 0;
+			while (counter > 0) {
+				counter--;
+				average += cocks[counter].cockThickness;
+			}
+			if (cocks.length == 0)
+				return 0;
+			return (average / cocks.length);
+		}
+
+		public function averageNippleLength():Number
+		{
+			var counter:Number = breastRows.length;
+			var average:Number = 0;
+			while (counter > 0) {
+				counter--;
+				average += (breastRows[counter].breastRating / 10 + .2);
+			}
+			return (average / breastRows.length);
+		}
+
+		public function averageVaginalLooseness():Number
+		{
+			var counter:Number = vaginas.length;
+			var average:Number = 0;
+			//If the player has no vaginas
+			if (vaginas.length == 0)
+				return 2;
+			while (counter > 0) {
+				counter--;
+				average += vaginas[counter].vaginalLooseness;
+			}
+			return (average / vaginas.length);
+		}
+
+		public function averageVaginalWetness():Number
+		{
+			//If the player has no vaginas
+			if (vaginas.length == 0)
+				return 2;
+			var counter:Number = vaginas.length;
+			var average:Number = 0;
+			while (counter > 0) {
+				counter--;
+				average += vaginas[counter].vaginalWetness;
+			}
+			return (average / vaginas.length);
+		}
+
+		public function averageCockLength():Number
+		{
+			var counter:Number = cocks.length;
+			var average:Number = 0;
+			while (counter > 0) {
+				counter--;
+				average += cocks[counter].cockLength;
+			}
+			if (cocks.length == 0)
+				return 0;
+			return (average / cocks.length);
+		}
+
+		public function canTitFuck():Boolean
+		{
+			var counter:Number = breastRows.length;
+			var index:Number = 0;
+			while (counter > 0) {
+				counter--;
+				if (breastRows[index].breasts < breastRows[counter].breasts && breastRows[counter].breastRating > 3)
+					index = counter;
+			}
+			if (breastRows[index].breasts >= 2 && breastRows[index].breastRating > 3)
+				return true;
+			return false;
+		}
+
+		public function mostBreastsPerRow():Number
+		{
+			var counter:Number = breastRows.length;
+			var index:Number = 0;
+			while (counter > 0) {
+				counter--;
+				if (breastRows[index].breasts < breastRows[counter].breasts)
+					index = counter;
+			}
+			return breastRows[index].breasts;
+		}
+
+		public function averageNipplesPerBreast():Number
+		{
+			var counter:Number = breastRows.length;
+			var breasts:Number = 0;
+			var nipples:Number = 0;
+			while (counter > 0) {
+				counter--;
+				breasts += breastRows[counter].breasts;
+				nipples += breastRows[counter].nipplesPerBreast * breastRows[counter].breasts;
+			}
+			if (breasts == 0)
+				return 0;
+			return Math.floor(nipples / breasts);
+		}
+
+		public function allBreastsDescript():String
+		{
+			return Appearance.allBreastsDescript(this);
+		}
+
+		public function SMultiCockDesc():String
+		{
+			return Appearance.cockMultiDesc(this, true, false);
+		}
+
+		public function vaginaDescript(idx:int = 0):String
+		{
+			return Appearance.vaginaDescript(this, 0)
+		}
+
+		public function nippleDescript(rowIdx:int):String
+		{
+			return Appearance.nippleDescription(this, rowIdx);
+		}
+
+		public function chestDesc():String
+		{
+			return Appearance.chestDesc(this);
+		}
+
+		public function clitDescript():String {
+			return Appearance.clitDescription(this);
+		}
+
+		public function assholeOrPussy():String
+		{
+			return Appearance.assholeOrPussy(this);
+		}
+
+		public function multiCockDescriptLight():String
+		{
+			return Appearance.cockMultiLDescriptionShort(this);
+		}
+
+		public function ballsDescriptLight(forcedSize:Boolean = true):String
+		{
+			return Appearance.ballsDescription(forcedSize, true, this);
+		}
+
+		public function breastDescript(rowNum:int):String
+		{
+			//ERROR PREVENTION
+			if (breastRows.length - 1 < rowNum) {
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, breastDescript() working with invalid breastRow</b>";
+			}
+			if (breastRows.length == 0) {
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, breastDescript() called when no breasts are present.</b>";
+			}
+			var temp14:int = Math.random() * 3;
+			var descript:String = "";
+			if (breastRows[rowNum].breastRating == 0) return "flat breasts";
+			//50% of the time size-descript them
+			if (rand(2) == 0) descript += breastSize(breastRows[rowNum].breastRating);
+			//Nouns!
+			temp14 = rand(10);
+			if (temp14 == 0) descript += "breasts";
+			if (temp14 == 1) {
+				if (breastRows[rowNum].lactationMultiplier > 2) descript += "milk-udders";
+				else descript += "breasts";
+			}
+			if (temp14 == 2) {
+				if (breastRows[rowNum].lactationMultiplier > 1.5) descript += "milky ";
+				if (breastRows[rowNum].breastRating > 4) descript += "tits";
+				else descript += "breasts";
+			}
+			if (temp14 == 3) {
+				//if(breastRows[rowNum].breastRating > 6) descript += "rack";
+				descript += "breasts";
+			}
+			if (temp14 == 4) descript += "tits";
+			if (temp14 == 5) descript += "tits";
+			if (temp14 == 6) descript += "tits";
+			if (temp14 == 7) {
+				if (breastRows[rowNum].lactationMultiplier >= 1 && breastRows[rowNum].lactationMultiplier < 2.5) descript += "milk jugs";
+				if (breastRows[rowNum].lactationMultiplier >= 2.5) descript += "udders";
+				if (breastRows[rowNum].lactationMultiplier < 1) descript += "jugs";
+			}
+			if (temp14 == 8) {
+				if (breastRows[rowNum].breastRating > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if (temp14 == 9) {
+				if (breastRows[rowNum].breastRating > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			return descript;
+		}
+
+		private function breastSize(val:Number):String
+		{
+			return Appearance.breastSize(val);
 		}
 	}
 }

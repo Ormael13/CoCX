@@ -163,7 +163,7 @@ public function eventTesterGo():void
 public function eventTesterExit():void 
 {
 	mainView.hideTestInputPanel();
-	eventParser(debugPane);
+	debugPane();
 
 	return;
 }

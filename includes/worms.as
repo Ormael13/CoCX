@@ -45,7 +45,7 @@ public function wormsFirstTime():void {
 	outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n", false);
 	outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.", false);
 	doNext(13);
-	stats(0,0,0,0,0,0,-10,0);	
+	dynStats("lus", -10);
 	player.createStatusAffect("metWorms",0,0,0,0);
 }
 
@@ -79,7 +79,7 @@ public function infest1():void {
 	outputText("Crying out in shock, you feel the fat worm push its way, inch by inch, into your urethra. Your nerves light up like a Christmas tree as each individual cell tells you of the creature's presence and movement deeper into your body. The fat beast easily finds its way into your prostate and settles within the organ. As it settles, it begins flailing inside your sex. The sensations shift from shock to grotesque pleasure as your body only senses the stimulation conductive to orgasmic response. Your groin cramps and bloats quickly by the torrent of semen building within you and the invader's presence. Obviously sensitive to your fluids, you feel the worm thrash around some more, causing your body to respond by making more semen. The flopping creature quickly erodes any orgasmic discipline you are capable of and with a great shrill cry, you force lances of cum into the air, launching goo and worms alike in a sick display of forced pleasure. After you empty your body of spunk, the remaining worms become hyperaggressive.\n\n", false);
 	outputText("Excited by the feel of your fluids on them, many smaller worms push their way into your penis. Your cock distends as the worms fight to get inside you and to the source of the milk that has so excited them. Your prostate quickly fills up with the squirming creatures. The discomfort in your bloated bludgeon and the ceaseless stimulation of your organs causes your body to produce more cum. However, you find yourself unable to climax as the invaders rest inside your body submerged in your salty lust. The rest of the colony disperses, having accomplished its true goal of infesting your body.\n\n", false);
 	if(player.cor < 25) {
-		stats(0,0,0,0,0,0,0,1);
+		dynStats("cor", 1);
 		player.cor = 25;
 	}
 	trace("GET INFESTED HERE");
@@ -87,16 +87,16 @@ public function infest1():void {
 	else {
 		if(flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
 		player.createStatusAffect("infested",0,0,0,0);
-		stats(0,0,0,0,0,0,0,0);
+		dynStats("cor", 0);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //spontaneous orgasm - chance to avoid being raped by monsters who would care.
 public function infestOrgasm():void {
 	spriteSelect(76);
 	outputText("The ceaseless squirming of your uninvited guests send your body into paroxysms. Collapsing to your knees, you immediately begin pushing gouts of dick milk out of your body. You feel tremendous pressure in your pelvis and in your cock as you realize that you are pushing worms out with each torrent of cum! Stream upon stream of cum breaks free from the prison of your body, carrying some of the worms inside you with it. Once the orgasm passes, you collapse to the ground, totally spent. Before you pass out, you feel the unfortunate presence of the fat worm still in your body.", true);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	//Check infestation and update it
 	if(player.hasStatusAffect("infested") >= 0) {
 		//Increment infestation number
@@ -160,7 +160,7 @@ public function wormsEntice():void {
 	//SUCCESS
 	if(player.lust < 50) {
 		outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n", false);
-		stats(0,0,0,0,0,0,10+player.lib/20+player.cor/20,0);
+		dynStats("lus", 10+player.lib/20+player.cor/20);
 	}
 	else {
 		outputText("The worm colony shambles over to you and attempts to grapple you. Attempting to dodge, you fail to get away fast enough and fall to the ground engulfed by the mass. You are completely covered in the slimy worms!!! Incapable of avoiding any of their movements, you feel their slime coat every inch of your body and you feel the struggle and strain of each individual worm as they crawl all over you. You immediately begin flailing wildly as you cannot even breathe!", false);
@@ -206,7 +206,7 @@ public function playerInfest():void {
 	if(monster.hasStatusAffect("Twu Wuv") >= 0) {
 		outputText("You expose yourself and attempt to focus on expelling your squirming pets toward Sheila but as you picture launching a flood of parasites from [eachCock], the fantasy she sent returns to you, breaking your concentration!  Your hand darts automatically to your crotch, stroking [oneCock] as you imagine unloading into her cunt... only with effort do you pull it away!\n\n");
 		outputText("\"<i>Oh, my,</i>\" the demon teases.  \"<i>You don't have to masturbate yourself, [name]... I'll be happy to do it for you.</i>\"\n\n");
-		stats(0,0,0,0,0,0,5 + player.sens/10,0,false);
+		dynStats("lus", 5 + player.sens/10, "resisted", false);
 		enemyAI();
 		return;
 	}
@@ -217,7 +217,7 @@ public function playerInfest():void {
 		if(monster.lust > 70) {
 			outputText("Your load washes over the " + monster.short + " and " + monster.pronoun1 + " stops dead in " + monster.pronoun3 + " tracks as " + monster.pronoun1 + " chokes and sputters to clear the cum from " + monster.pronoun3 + " face and nose to breathe. The " + monster.short + " stumbles, attempting to stand in your fresh cum puddle and quickly busts its ass on the ground. The worms quickly take over and swarm around the " + monster.short + "' s " + eCockDescript(0) + ". With wild hunger, the worms easily push into the " + monster.short + "'s urethra and begin venturing into your victim's body. The " + monster.short + " begins to convulse wildly as " + monster.pronoun3 + " body begins to react to the squirming invaders. The " + monster.short + " quickly peaks and cum flies in all directions, along with some worms. You laugh hysterically as the " + monster.short + " must now endure the endless orgasms your new pets provide. You choose to unload one last batch on your fallen foe to ensure a good infestation and walk away to leave the " + monster.short + " in the hell of endless pleasure.\n", false);
 			monster.lust = 100;
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		else {
@@ -235,7 +235,7 @@ public function playerInfest():void {
 	else {
 		outputText("While your fluids bathe the " + monster.short + " in your salty lust, the worms take no interest in your foe and scurry off.\n", true);
 	}
-	stats(0,0,0,0,0,0,-20,0);
+	dynStats("lus", -20);
 	enemyAI();
 }
 
@@ -289,10 +289,10 @@ public function nightTimeInfestation():void {
 	if(player.hasStatusAffect("infested") >= 0) {trace("BWUH?");}
 	else {
 		player.createStatusAffect("infested",0,0,0,0);
-		stats(0,0,0,0,0,0,0,0);
+		dynStats("cor", 0);
 	}
 	if(player.cor < 25) {
-		stats(0,0,0,0,0,0,0,2);
+		dynStats("cor", 2);
 		player.cor = 25;
 	}
 	doNext(1);

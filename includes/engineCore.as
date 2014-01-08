@@ -26,27 +26,18 @@
 // model.maxHP = maxHP;
 
 public function maxHP():Number {
-	var max:Number = 0;
-	max += int(player.tou*2 + 50);
-	if(player.hasPerk("Tank") >= 0) max += 50;
-	if (player.hasPerk("Tank 2") >= 0) max += Math.round(player.tou);
-	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-	if(player.level <= 20) max += player.level * 15;
-	else max += 20 * 15;
-	max = Math.round(max);
-	if(max > 999) max = 999;
-	return max;
+	return player.maxHP();
 }
 
 public function silly():Boolean {
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) return true;
-	return false
+	return flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
+
 }
 
 public function clearList():void {
-	list = new Array();
+	list = [];
 }
-public var list:Array = new Array();
+public var list:Array = [];
 public function addToList(arg:*):void {
 	list[list.length] = arg;
 }
@@ -64,7 +55,7 @@ public function outputList():String {
 			stuff += ", and ";
 		}
 	}
-	list = new Array();
+	list = [];
 	return stuff;        
 }
 
@@ -264,7 +255,7 @@ public function perkLongDescription(perkName:String = ""):String {
 		case "Tank":
 			return "You choose the 'Tank' perk, giving you an additional 50 hp!";
 		case "Strong Back 2: Strong Harder":
-			return "You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot."
+			return "You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.";
 		case "Strong Back":
 			return "You choose the 'Strong Back' perk, enabling a fourth item slot.";
 		case "Tactician":
@@ -286,13 +277,11 @@ public function perkLongDescription(perkName:String = ""):String {
 		default:
 			return "An error occurred when loading the long perk description.  Please post a bug report on the bug report forums at forum.fenoxo.com.";
 	}
-	return "broken.";
 }
 public function perkDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "History: Whore":
 			return "Seductive experience causes your tease attacks to be 15% more effective.";
-			break;
 		case "History: Slut":
 			return "Sexual experience has made you more able to handle large insertions and more resistant to stretching.";
 		case "Pure and Loving":
@@ -301,267 +290,180 @@ public function perkDescription(perkName:String = ""):String {
 			return "Your sensual attitude towards love and romance makes your tease ability slightly more effective.";
 		case "One Track Mind":
 			return "Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.";
-			break;
 		case "Brawler":
 			return "Brawling experience allows you to make two unarmed attacks in a turn.";
-			break;
 		case "Corrupted Nine-tails":
 			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.";
-			break;
 		case "Enlightened Nine-tails":
 			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.";
-			break;
 		case "History: Alchemist":
 			return "Alchemical experience makes items more reactive to your body.";
-			break;
 		case "History: Fighter":
 			return "Past full of conflict increases physical damage dealt by 10%.";
-			break;
 		case "History: Healer":
 			return "Healing experience increases HP gains by 20%.";
-			break;
 		case "History: Religious":
 			return "Replaces masturbate with meditate when corruption less than or equal to 66.";
-			break;
 		case "History: Scholar":
 			return "Time spent focusing your mind makes spellcasting 20% less fatiguing.";
-			break;
 		case "History: Smith":
 			return "Knowledge of armor and fitting increases armor effectiveness by roughly 10%.";
-			break;
 		case "History: Slacker":
 			return "Regenerate fatigue 20% faster.";
-			break;
 		case "Slime Core":
 			return "Grants more control over your slimy body, allowing you to go twice as long without fluids.";
-			break;
 		case "Flexibility":
 			return "Grants cat-like flexibility.  Useful for dodging and 'fun'.";
-			break;
 		case "Thick Skin":
 			return "Toughens your dermis to provide 2 points of armor.";
-			break;
 		case "Bunny Eggs":
 			return "Laying eggs has become a normal part of your bunny-body's routine.";
-			break;
 		case "Basilisk Womb":
 			return "Enables your eggs to be properly fertilized into basilisks of both genders!";
-			break;
 		case "Oviposition":
 			return "Causes you to regularly lay eggs when not otherwise pregnant.";
-			break;
 		case "Dragonfire":
 			return "Allows access to a dragon breath attack.";
-			break;
 		case "Futa Form":
 			return "Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.";
-			break;
 		case "Futa Faculties":
-			return "It's super hard to think about stuff that like, isn't working out or fucking!"
-			break;
+			return "It's super hard to think about stuff that like, isn't working out or fucking!";
 		case "Bulge Armor":
 			return "Grants a 5 point damage bonus to dick-based tease attacks.";
-			break;
 		case "Slutty Seduction":
 			return "Increases odds of successfully teasing and lust damage of successful teases by " + player.perkv1("Slutty Seduction") + " points.";
-			break;
 		case "Blood Mage":
 			return "Spellcasting now consumes health instead of fatigue!";
-			break;
 		case "Purity Blessing":
 			return "Reduces the rate at which your corruption, libido, and lust increase.";
-			break;
 		case "Wizard's Endurance":
 			return "Reduces fatigue cost of spells by " + player.perkv1("Wizard's Endurance") + "%.";
-			break;
 		case "Wizard's Focus":
 			return "Increases your spell effect modifier by " + player.perkv1("Wizard's Focus") * 100 + "%.";
-			break;
 		case "Strong":
 			return "Gains strength 25% faster.";
-			break;
 		case "Tough":
 			return "Gains toughness 25% faster.";
-			break;
 		case "Fast":
 			return "Gains speed 25% faster.";
-			break;
 		case "Smart":
 			return "Gains intelligence 25% faster.";
-			break;
 		case "Lusty":
 			return "Gains lust 25% faster.";
-			break;
 		case "Sensitive":
 			return "Gains sensitivity 25% faster.";
-			break;
 		case "Big Cock":
 			return "Gains cock size 25% faster and with less limitations.";
-			break;
 		case "Messy Orgasms":
 			return "Produces 50% more cum volume.";
-			break;
 		case "Big Tits":
 			return "Makes your tits grow larger more easily.";
-			break;
 		case "Big Clit":
 			return "Allows your clit to grow larger more easily and faster.";
-			break;
 		case "Fertile":
 			return "Makes you 15% more likely to become pregnant.";
-			break;
 		case "Wet Pussy":
 			return "Keeps your pussy wet and provides a bonus to capacity.";
-			break;
 		case "Marble Resistant":
 			return "Provides resistance to the addictive effects of bottled LaBova milk.";
-			break;
 		case "Marble's Milk":
 			return "Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.";
-			break;
 		case "Minotaur Cum Addict":
 			return "Causes you to crave minotaur cum frequently.  You cannot shake this addiction.";
-			break;
 		case "Misdirection":
 			return "Grants additional evasion chances while wearing Raphael's red bodysuit.";
-			break;
 		case "Omnibus' Gift":
 			return "Increases minimum lust but provides some lust resistance.";
-			break;
 		case "Pierced: Crimstone":
 			return "Increases minimum lust by " + Math.round(player.perkv1("Pierced: Crimstone")) + ".";
 		case "Pent Up":
 			return "Increases minimum lust by " + Math.round(player.perkv1("Pent Up")) + " and makes you more vulnerable to seduction.";
-			break;
 		case "Midas Cock":
 			return "Increases the gems awarded from victory in battle.";
-			break;
 		case "Phallic Potential":
 			return "Increases the effects of penis-enlarging transformations.";
-			break;
 		case "Phallic Restraint":
 			return "Reduces the effects of penis-enlarging transformations.";
-			break;
 		case "Lusty Regeneration":
 			return "Regenerates 1% of HP per round in combat and 2% of HP per hour.";
-			break;
 		case "Pierced: Fertite":
 			return "Increases cum production by " + Math.round(2*player.perkv1("Pierced: Fertite")) + "% and fertility by " + Math.round(player.perkv1("Pierced: Fertite")) + ".";
-			break;
 		case "Pierced: Furrite":
 			return "Increases chances of encountering 'furry' foes.";
-			break;
 		case "Pierced: Lethite":
 			return "Increases chances of encountering demonic foes.";
-			break;
 		case "Harpy Womb":
 			return "Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.";
-			break;
 		case "Hellfire":
 			return "Grants a corrupted fire breath attack, like the hellhounds in the mountains.";
-			break;
 		case "Incorporeality":
 			return "Allows you to fade into a ghost-like state and temporarily possess others.";
-			break;
 		case "Luststick Adapted":
 			return "Grants immunity to the lust-increasing effects of lust-stick and allows its use.";
-			break;
 		case "Pilgrim's Bounty":
 			return "Causes you to always cum as hard as if you had max lust.";
-			break;
 		case "Cornucopia":
 			return "Vaginal and Anal capacities increased by 30.";
-			break;
 		case "Spider Ovipositor":
 			return "Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.";
-			break;
 		case "Bee Ovipositor":
 			return "Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.";
-			break;
 		case "Fera's Boon - Alpha":
 			return "Increases the rate your cum builds up and cum production in general.";
-			break;
 		case "Fera's Boon - Breeding Bitch":
 			return "Increases fertility and reduces the time it takes to birth young.";
-			break;
 		case "Marae's Gift - Stud":
 			return "Increases your cum production and potency greatly.";
-			break;
 		case "Marae's Gift - Fertility":
 			return "Greatly increases fertility and halves base pregnancy speed.";
-			break;
 		case "Marae's Gift - Profractory":
 			return "Causes your cum to build up at 3x the normal rate.";
-			break;
 		case "Marae's Gift - Buttslut":
 			return "Makes your anus provide lubrication when aroused.";
-			break;
 		case "Feeder":
 			return "Lactation does not decrease and gives a compulsion to breastfeed others.";
-			break;
 		case "Fire Lord":
 			return "Akbal's blessings grant the ability to breathe burning green flames.";
-			break;
 		case "Whispered":
 			return "Akbal's blessings grant limited telepathy that can induce fear.";
-			break;
 		case "Bro Brains":
 			return "Makes thou... thin... fuck, that shit's for nerds.";
-			break;
 		case "Bro Body":
 			return "Grants an ubermasculine body that's sure to impress.";
-			break;
 		case "Bimbo Body":
 			return "Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.";
-			break;
 		case "Bimbo Brains":
 			return "Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!";
-			break;
 		case "Brood Mother":
 			return "Pregnancy moves twice as fast as a normal woman's.";
-			break;
 		case "Diapause":
 			return "Pregnancy does not advance normally, but develops quickly after taking in fluids.";
-			break;
 		case "Elven Bounty":
 			return "Increases fertility by " + player.perkv2("Elven Bounty") + "% and cum production by " + player.perkv1("Elven Bounty") + "mLs.";
-			break;
 		case "Androgyny":
 			return "No gender limits on facial masculinity or femininity.";
-			break;
 		case "Pretend Strength Perk":
 			return "Pretend I am telling you about how this works.";
-			break;
 		case "Resistance":
 			return "Reduces lust gain by 10%.";
-			break;
 		case "Arousing Aura":
 			return "Exude a lust-inducing aura (Req's corruption of 70 or more)";
-			break;
 		case "Sadist":
 			return "Deal 20% more damage, but gain lust at the same time.";
-			break;
 		case "Masochist":
 			return "Take 30% less physical damage but gain lust when damage.";
-			break;
 		case "Well Adjusted":
 			return "You gain half as much lust as time passes in Mareth.";
-			break;
 		case "Medicine":
 			return "Grants 15% chance per round of cleansing poisons/drugs from your body.";
-			break;
 		case "Channeling":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Agility":
 			return "Boosts armor points by a portion of your speed on light/medium armors.";
-			break;
 		case "Speedy Recovery":
 			return "Regain fatigue 50% faster.";
-			break;
 		case "Regeneration 2":
 			return "Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.";
-			break;
 		case "Fera's Boon - Seeder":
 			return "Increases cum output by 1,000 mLs.";
 		case "Fera's Boon - Wide Open":
@@ -570,111 +472,81 @@ public function perkDescription(perkName:String = ""):String {
 			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Spellcasting Affinity":
 			return "Reduces spell costs by " + player.perkv1("Spellcasting Affinity") + "%.";
-			break;
 		case "Tank 2":
 			return "+1 extra HP per point of toughness.";
-			break;
 		case "Weapon Mastery":
 			if(player.str > 60) return "Doubles damage bonus of weapons classified as 'Large'.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		case "Thunderous Strikes":
 			return "+20% 'Attack' damage while strength is at or above 80.";
-			break;
 		case "Acclimation":
 			return "Reduces lust gain by 15%.";
-			break;
 		case "Double Attack":
 			if(player.spe < 50) return "<b>You're too slow to double attack!</b>";
 			else if(player.str < 61) return "Allows you to perform two melee attacks per round.";
 			else return "<b>You are stronger than double attack allows.  Too choose between reduced strength double-attacks and a single strong attack, access \"Dbl Options\" in the perks menu.</b>";
-			break;
 		case "Mage":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Spellpower":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Nymphomania":
 			return "Raises minimum lust by up to 30.";
-			break;
 		case "Precision":
 			return "Reduces enemy armor by 10. (Req's 25+ Intelligence)";
-			break;
 		case "Seduction":
 			return "Upgrades your tease attack, making it more effective.";
-			break;
 		case "Corrupted Libido":
 			return "Reduces lust gain by 10%.";
-			break;
 		case "Hot Blooded":
 			return "Raises minimum lust by up to 20.";
-			break;
 		case "Fertility+":
 			return "Increases fertility rating by 15 and cum volume by up to 50%.";
-			break;
 		case "Magical Fertility":
 			return "10% higher chance of pregnancy and increased pregnancy speed.";
-			break;
 		case "Magical Virility":
 			return "200 mLs more cum per orgasm and enhanced virility.";
-			break;
 		case "Runner":
 			return "Increases chances of escaping combat.";
-			break;
 		case "Evade":
 			return "Increases chances of evading enemy attacks.";
-			break;
 		case "Regeneration":
 			return "Regenerates 2% of max HP/hour and 1% of max HP/round.";
-			break;
 		case "Iron Man":
 			return "Reduces the fatigue cost of physical specials by 50%.";
 		case "Tank":
 			return "Raises max HP by 50.";
-			break;
 		case "Strong Back 2: Strong Harder":
-			return "Enables fifth item slot."
-			break;
+			return "Enables fifth item slot.";
 		case "Strong Back":
 			return "Enables fourth item slot.";
-			break;
 		case "Tactician":
 			if(player.inte >= 50) return "Increases critical hit chance by up to 10% (Intelligence-based).";
 			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-			break;
 		case "Archmage":
 			if(player.inte >= 75) return "Increases base spell strength by 50%.";
 			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-			break;
 		case "Lunging Attacks":
 			if(player.spe >= 75) return "Grants 50% armor penetration for standard attacks.";
 			else return "<b>You are too slow to benefit from this perk.</b>";
-			break;
 		case "Lightning Strikes":
 			if(player.spe >= 60) return "Increases the attack damage for non-heavy weapons.</b>";
 			else return "<b>You are too slow to benefit from this perk.</b>";
-			break;
 		case "Immovable Object":
 			if(player.tou >= 75) return "Grants 20% physical damage reduction.</b>";
 			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-			break;
 		case "Resolute":
 			if(player.tou >= 75) return "Grants immunity to stuns and some statuses.</b>";
 			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-			break;
 		case "Berzerker":
 			if(player.str >= 75) return "Grants 'Berzerk' ability.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		case "Brutal Blows":
 			if(player.str >= 75) return "Reduces enemy armor with each hit.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		default:
 			var checkChildren:String;
 			
-			checkChildren = umasShop.listPerkDescription(perkName);
+			checkChildren = telAdre.umasShop.listPerkDescription(perkName);
 			
 			if (checkChildren != "")
 			{
@@ -687,7 +559,6 @@ public function perkDescription(perkName:String = ""):String {
 			
 			break;
 	}
-	return "broken.";
 }
 public function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
@@ -734,7 +605,7 @@ public function doubleAttackOptions():void {
 		addButton(0,"All Double",doubleAttackForce);
 		addButton(1,"Dynamic",doubleAttackDynamic);
 	}
-	var e:MouseEvent
+	var e:MouseEvent;
 	addButton(4,"Back",displayPerks,e);
 }
 
@@ -798,183 +669,191 @@ public function perkBuyMenu():void {
 		doNext(115);
 		return;
 	}
-	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	mainView.aCb.x = 210;
-	mainView.aCb.y = 108;
-	mainView.aCb.visible = true;
-	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);	
+	if (testingBlockExiting){
+		tempPerk = perkList[rand(perkList.length)].label;
+		doNext(114);
+	} else {
+		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
+		mainView.aCb.x = 210;
+		mainView.aCb.y = 108;
+		mainView.aCb.visible = true;
+		mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+	}
 }
 public function buildPerkList():void {
-	perkList = new Array();
+	perkList = [];
 	//STRENGTH PERKS
-	if(player.hasPerk("Strong Back") < 0 && player.str >= 25) {
-		perkList[perkList.length] = {label:"Strong Back"};
+	if(player.str >= 25) {
+		perkList.push({label:"Strong Back"});
 	}
-	if(player.hasPerk("Strong Back") >= 0 && player.hasPerk("Strong Back 2: Strong Harder") < 0 && player.str >= 50) {
-		perkList[perkList.length] = {label:"Strong Back 2: Strong Harder"};
+	if(player.hasPerk("Strong Back") >= 0 && player.str >= 50) {
+		perkList.push({label:"Strong Back 2: Strong Harder"});
 	}
 	//Tier 1 Strength Perks
 	if(player.level >= 6) {
 		//Thunderous Strikes - +20% basic attack damage while str > 80.
-		if(player.hasPerk("Thunderous Strikes") < 0 && player.str >= 80) {
-			perkList[perkList.length] = {label:"Thunderous Strikes"};
+		if(player.str >= 80) {
+			perkList.push({label:"Thunderous Strikes"});
 		}
 		//Weapon Mastery - Doubles weapon damage bonus of 'large' type weapons. (Minotaur Axe, M. Hammer, etc)
-		if(player.hasPerk("Weapon Mastery") < 0 && player.str > 60) {
-			perkList[perkList.length] = {label:"Weapon Mastery"};
+		if(player.str > 60) {
+			perkList.push({label:"Weapon Mastery"});
 		}
-		if(player.hasPerk("Brutal Blows") < 0 && player.str >= 75)
-			perkList[perkList.length] = {label:"Brutal Blows"}
+		if(player.str >= 75)
+			perkList.push({label:"Brutal Blows"});
 	}
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Berzerker") < 0 && player.str >= 75)
-			perkList[perkList.length] = {label:"Berzerker"};
+		if(player.str >= 75)
+			perkList.push({label:"Berzerker"});
 	}
 	//slot 2 - toughness perk 1
 	if(player.hasPerk("Tank") < 0 && player.tou >= 25) {
-		perkList[perkList.length] = {label:"Tank"};
+		perkList.push({label:"Tank"});
 	}
 	//slot 2 - regeneration perk
-	if(player.hasPerk("Tank") >= 0 && player.hasPerk("Regeneration") < 0 && player.tou >= 50) {
-		perkList[perkList.length] = {label:"Regeneration"};
+	if(player.hasPerk("Tank") >= 0 && player.tou >= 50) {
+		perkList.push({label:"Regeneration"});
 	}
 	//Tier 1 Toughness Perks
 		if(player.level >= 6) {
-		if(player.hasPerk("Tank 2") < 0 && player.hasPerk("Tank") >= 0 && player.tou >= 60) {
-			perkList[perkList.length] = {label:"Tank 2"};
+		if(player.hasPerk("Tank") >= 0 && player.tou >= 60) {
+			perkList.push({label:"Tank 2"});
 		}
-		if(player.hasPerk("Regeneration 2") < 0 && player.hasPerk("Regeneration") >= 0 && player.tou >= 70) {
-			perkList[perkList.length] = {label:"Regeneration 2"};
+		if(player.hasPerk("Regeneration") >= 0 && player.tou >= 70) {
+			perkList.push({label:"Regeneration 2"});
 		}
-		if(player.hasPerk("Immovable Object") < 0 && player.tou >= 75) {
-			perkList[perkList.length] = {label:"Immovable Object"};
+		if(player.tou >= 75) {
+			perkList.push({label:"Immovable Object"});
 		}
 	}
 	//Tier 2 Toughness Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Resolute") < 0 && player.tou >= 75) {
-			perkList[perkList.length] = {label:"Resolute"};
+		if(player.tou >= 75) {
+			perkList.push({label:"Resolute"});
 		}
-		if(player.hasPerk("Iron Man") < 0 && player.tou >= 60) {
-			perkList[perkList.length] = {label:"Iron Man"};
+		if(player.tou >= 60) {
+			perkList.push({label:"Iron Man"});
 		}
 	}
 	//slot 3 - speed perk
-	if(player.hasPerk("Evade") < 0 && player.spe >= 25) {
-			perkList[perkList.length] = {label:"Evade"};
+	if(player.spe >= 25) {
+			perkList.push({label:"Evade"});
 	}
 	//slot 3 - run perk
-	if(player.hasPerk("Runner") < 0 && player.spe >= 25) {
-			perkList[perkList.length] = {label:"Runner"};
+	if(player.spe >= 25) {
+			perkList.push({label:"Runner"});
 	}
 	//slot 3 - Double Attack perk
-	if(player.hasPerk("Evade") >= 0 && player.hasPerk("Runner") >= 0 && player.hasPerk("Double Attack") < 0 && player.spe >= 50) {
-			perkList[perkList.length] = {label:"Double Attack"};
+	if(player.hasPerk("Evade") >= 0 && player.hasPerk("Runner") >= 0 && player.spe >= 50) {
+			perkList.push({label:"Double Attack"});
 	}
 	//Tier 1 Speed Perks
 	if(player.level >= 6) {
 		//Speedy Recovery - Regain Fatigue 50% faster speed.
-		if(player.hasPerk("Evade") >= 0 && player.hasPerk("Speedy Recovery") < 0 && player.spe >= 60) {
-			perkList[perkList.length] = {label:"Speedy Recovery"};
+		if(player.hasPerk("Evade") >= 0 && player.spe >= 60) {
+			perkList.push({label:"Speedy Recovery"});
 		}
 		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
-		if(player.spe > 75 && player.hasPerk("Agility") < 0 && player.hasPerk("Runner") >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
-			perkList[perkList.length] = {label:"Agility"};
+		if(player.spe > 75 && player.hasPerk("Runner") >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
+			perkList.push({label:"Agility"});
 		}
-		if(player.hasPerk("Lightning Strikes") < 0 && player.spe >= 60) {
-			perkList[perkList.length] = {label:"Lightning Strikes"};
+		if(player.spe >= 60) {
+			perkList.push({label:"Lightning Strikes"});
 		}
 	}
 	//Tier 2 Speed Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Lunging Attacks") < 0 && player.spe >= 75) {
-			perkList[perkList.length] = {label:"Lunging Attacks"};
+		if(player.spe >= 75) {
+			perkList.push({label:"Lunging Attacks"});
 		}
 	}
 	//Slot 4 - precision - -10 enemy toughness for damage calc
-	if(player.hasPerk("Precision") < 0 && player.inte >= 25) {
-			perkList[perkList.length] = {label:"Precision"};
+	if(player.inte >= 25) {
+			perkList.push({label:"Precision"});
 	}
 	//Spellpower - boosts spell power
-	if(player.hasPerk("Spellpower") < 0 && player.inte >= 50) {
-			perkList[perkList.length] = {label:"Spellpower"};
+	if(player.inte >= 50) {
+			perkList.push({label:"Spellpower"});
 	}
-	if(player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") < 0 && player.inte >= 50) {
-			perkList[perkList.length] = {label:"Mage"};
+	if(player.hasPerk("Spellpower") >= 0 && player.inte >= 50) {
+			perkList.push({label:"Mage"});
 	}
 	//Tier 1 Intelligence Perks
 	if(player.level >= 6) {
-		if(player.hasPerk("Tactician") < 0 && player.inte >= 50)
-			perkList[perkList.length] = {label:"Tactician"};
-		if(spellCount() > 0 && player.hasPerk("Channeling") < 0 && player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") >= 0 && player.inte >= 60) {
-			perkList[perkList.length] = {label:"Channeling"};
+		if(player.inte >= 50)
+			perkList.push({label:"Tactician"});
+		if(spellCount() > 0 && player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") >= 0 && player.inte >= 60) {
+			perkList.push({label:"Channeling"});
 		}
-		if(player.hasPerk("Medicine") < 0 && player.inte >= 60) {
-			perkList[perkList.length] = {label:"Medicine"};
+		if(player.inte >= 60) {
+			perkList.push({label:"Medicine"});
 		}
 	}
 	//Tier 2 Intelligence perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Mage") >= 0 && player.hasPerk("Archmage") < 0 && player.inte >= 75) {
-			perkList[perkList.length] = {label:"Archmage"};
+		if(player.hasPerk("Mage") >= 0 && player.inte >= 75) {
+			perkList.push({label:"Archmage"});
 		}
 	}
 	//LIBIDO PERKZ
 	//slot 5 - libido perks
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
-	if(player.hasPerk("Fertility+") < 0 && player.lib >= 25) {
-			perkList[perkList.length] = {label:"Fertility+"};
+	if(player.lib >= 25) {
+			perkList.push({label:"Fertility+"});
 	}
 	//Slot 5 - minimum libido
-	if(player.hasPerk("Hot Blooded") < 0 && player.lib >= 50) {
-			perkList[perkList.length] = {label:"Hot Blooded"};
+	if(player.lib >= 50) {
+			perkList.push({label:"Hot Blooded"});
 	}
 	//Tier 1 Libido Perks
 	if(player.level >= 6) {
 		//Slot 5 - minimum libido
-		if(player.hasPerk("Well Adjusted") < 0 && player.lib >= 60) {
-			perkList[perkList.length] = {label:"Well Adjusted"};
+		if(player.lib >= 60) {
+			perkList.push({label:"Well Adjusted"});
 		}
 		//Slot 5 - minimum libido
-		if(player.hasPerk("Masochist") < 0 && player.lib >= 60 && player.cor >= 50) {
-			perkList[perkList.length] = {label:"Masochist"};
+		if(player.lib >= 60 && player.cor >= 50) {
+			perkList.push({label:"Masochist"});
 		}
 	}
 	//Corruption Perks - slot 7
 	//Slot 7 - Corrupted Libido - lust raises 10% slower.
-	if(player.hasPerk("Corrupted Libido") < 0 && player.cor >= 25) {
-			perkList[perkList.length] = {label:"Corrupted Libido"};
+	if(player.cor >= 25) {
+			perkList.push({label:"Corrupted Libido"});
 	}
 	//Slot 7 - Seduction (Must have seduced Jojo
 	if(player.hasPerk("Seduction") < 0 && player.cor >= 50 && monk >= 5) {
-			perkList[perkList.length] = {label:"Seduction"};
+			perkList.push({label:"Seduction"});
 	}
 	//Slot 7 - Nymphomania
-	else if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 75 && player.hasPerk("Nymphomania") < 0) {
-			perkList[perkList.length] = {label:"Nymphomania"};
+	else if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 75) {
+			perkList.push({label:"Nymphomania"});
 	}
 	//Slot 7 - UNFINISHED :3
-	if(minLust() >= 20 && player.hasPerk("Acclimation") < 0 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 50) {
-			perkList[perkList.length] = {label:"Acclimation"};
+	if(minLust() >= 20 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 50) {
+			perkList.push({label:"Acclimation"});
 	}
 	//Tier 1 Corruption Perks - acclimation over-rides
 	else if(player.level >= 6)
 	{
-		if(player.hasPerk("Sadist") < 0 && player.cor >= 60 && player.hasPerk("Corrupted Libido") >= 0) {
-			perkList[perkList.length] = {label:"Sadist"};
+		if(player.cor >= 60 && player.hasPerk("Corrupted Libido") >= 0) {
+			perkList.push({label:"Sadist"});
 		}
-		if(player.hasPerk("Arousing Aura") < 0 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 70) {
-			perkList[perkList.length] = {label:"Arousing Aura"};
+		if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 70) {
+			perkList.push({label:"Arousing Aura"});
 		}
 	}
 	//Tier 1 Misc Perks
 	if(player.level >= 6) {
-		if(player.hasPerk("Resistance") < 0) {
-			perkList[perkList.length] = {label:"Resistance"};
-		}
+		perkList.push({label:"Resistance"});
 	}
+	// FILTER PERKS
+	perkList = perkList.filter(
+			function(perk:*,idx:int,array:Array):Boolean{
+				return player.hasPerk(perk.label) < 0;
+			});
 	mainView.aCb.dataProvider = new DataProvider(perkList); 
 }
 
@@ -1902,18 +1781,17 @@ public function getButtonToolTipText( buttonText :String ) :String
 
 
 // Hah, finally a place where a dictionary is actually required!
-import classes.Character;
 import flash.utils.Dictionary;
 private var funcLookups:Dictionary = null;
 
 
-private function buildFuncLookupDict():void
+private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 {
-	import flash.sampler.*;
 	import flash.utils.*;
-	trace("Building function <-> function name mapping table");
+	trace("Building function <-> function name mapping table for "+((object==null)?"CoC.":prefix));
 	// get all methods contained
-	var typeDesc:XML = describeType(this);
+	if (object == null) object = this;
+	var typeDesc:XML = describeType(object);
 	//trace("TypeDesc - ", typeDesc)
 
 	for each (var node:XML in typeDesc..method) 
@@ -1923,12 +1801,18 @@ private function buildFuncLookupDict():void
 		// that is not null (null = doesn't exist) and 
 		// is strictly equal to the function we search the name of
 		//trace("this[node.@name] = ", this[node.@name], " node.@name = ", node.@name)
-		if (this[node.@name] != null)
-			this.funcLookups[this[node.@name]] = node.@name;
-		
-		
+		if (object[node.@name] != null)
+			this.funcLookups[object[node.@name]] = prefix+node.@name;
 	}
-	this.funcLookups
+	for each (node in typeDesc..variable)
+	{
+		if (node.@type.toString().indexOf("classes.Scenes.") == 0 ||
+				node.metadata.@name.contains("Scene")){
+			if (object[node.@name]!=null){
+				buildFuncLookupDict(object[node.@name],node.@name+".");
+			}
+		}
+	}
 }
 
 public function getFunctionName(f:Function):String
@@ -1939,7 +1823,7 @@ public function getFunctionName(f:Function):String
 	if (this.funcLookups == null)
 	{
 		trace("Rebuilding lookup object");
-		this.funcLookups = new Dictionary()
+		this.funcLookups = new Dictionary();
 		this.buildFuncLookupDict();
 	}
 
@@ -1955,7 +1839,7 @@ public function getFunctionName(f:Function):String
 
 private function logFunctionInfo(func:Function, arg:* = null):void
 {
-	var logStr:String = ""
+	var logStr:String = "";
 	if (arg is Function)
 	{
 		logStr += "Calling = " + getFunctionName(func) + " Param = " +  getFunctionName(arg);
@@ -1965,37 +1849,46 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 		logStr += "Calling = " + getFunctionName(func) + " Param = " +  arg;
 	}
 	CoC_Settings.appendButtonEvent(logStr);
-	// trace(logStr)
+	trace(logStr)
 }
 
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
 public function createCallBackFunction(func:Function, arg:*):Function
 {
-
 	if( arg == -9000 || arg == null )
 	{
-		return function _addButtonCallback():* 
+		if (func == eventParser && CoC_Settings.haltOnErrors){
+			throw new Error("createCallBackFunction(eventParser,"+arg+")");
+		}
+		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
-				logFunctionInfo(func, arg)
+				logFunctionInfo(func, arg);
 			return func(); 
 		};
 	}
 	else
 	{
-
-		return function _addButtonCallback():* 
+		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
-				logFunctionInfo(func, arg)
+				logFunctionInfo(func, arg);
 			return func( arg ); 
 		};
 	}
-	
+}
+public function createCallBackFunction2(func:Function,...args):Function
+{
+	return function():*
+	{
+		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
+		return func.apply(null,args);
+	}
 }
 
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
+	if (func1==null) return;
 	var callback :Function,
 	toolTipText :String;
 
@@ -2147,11 +2040,15 @@ public function choices(text1:String, butt1:*,
 
 	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
-		if(buttonEvents[tmpJ] == 0) {
+		if(buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
 			mainView.hideBottomButton( tmpJ );
 		}
 		else {
-			callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
+			if (buttonEvents[tmpJ] is Number) {
+				callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
+			} else {
+				callback = createCallBackFunction(buttonEvents[tmpJ], null);
+			}
 			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
 
 			mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
@@ -2454,61 +2351,8 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 public function changeFatigue(changeF:Number):void {
 	fatigue(changeF);
 }
-//Determine minimum lust
 public function minLust():Number {
-	var min:Number = 0;
-	//Bimbo body boosts minimum lust by 40
-	if(player.hasStatusAffect("Bimbo Champagne") >= 0 || player.hasPerk("Bimbo Body") >= 0 || player.hasPerk("Bro Body") >= 0 || player.hasPerk("Futa Form") >= 0) {
-		if(min > 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 40;
-	}
-	//Omnibus' Gift
-	if(player.hasPerk("Omnibus' Gift") >= 0) {
-		if(min > 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 35;                
-	}
-	//Nymph perk raises to 30
-	if(player.hasPerk("Nymphomania") >= 0) {
-		if(min >= 40) min += 10;
-		else if(min > 0) min += 15;
-		else min += 30;
-	}
-	//Oh noes anemone!
-	if(player.hasStatusAffect("Anemone Arousal") >= 0) {
-		if(min >= 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 30;
-	}
-	//Hot blooded perk raises min lust!
-	if(player.hasPerk("Hot Blooded") >= 0) {
-		if(min > 0) min += player.perks[player.hasPerk("Hot Blooded")].value1 / 2;
-		else min += player.perks[player.hasPerk("Hot Blooded")].value1;
-	}
-	if(player.hasPerk("Luststick Adapted") > 0) {
-		if(min < 50) min += 10;
-		else min += 5;                
-	}
-	//Add points for Crimstone
-	min += player.perkv1("Pierced: Crimstone");
-	min += player.perkv1("Pent Up");
-	//Harpy Lipstick status forces minimum lust to be at least 50.
-	if(min < 50 && player.hasStatusAffect("Luststick") >= 0) min = 50;
-	//SHOULDRA BOOSTS
-	//+20
-	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168) {
-		min += 20;
-		if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
-			min += 30;
-	}
-	//SPOIDAH BOOSTS
-	if(player.eggs() >= 20) {
-		min += 10;
-		if(player.eggs() >= 40) min += 10;
-	}
-	if(min < 30 && player.armorName == "lusty maiden's armor") min = 30;
-	return min;
+	return player.minLust();
 }
 
 public function displayStats(e:MouseEvent = null):void
@@ -2572,11 +2416,11 @@ public function displayStats(e:MouseEvent = null):void
 	if(player.hasVagina()) outputText("<b>Vaginal Looseness: </b>" + Math.round(player.looseness()) + "\n");
 	
 	outputText("<b><u>\nInterpersonal Stats</u></b>\n", false);
-	if(flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianHealth()) + "\n");
+	if(flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianScene.arianHealth()) + "\n");
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter: </b>" + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
-	if(benoitAffection() > 0) outputText("<b>" + benoitMF("Benoit","Benoite") + " Affection: </b>" + Math.round(benoitAffection()) + "%\n");
+	if(bazaar.benoit.benoitAffection() > 0) outputText("<b>" + bazaar.benoit.benoitMF("Benoit","Benoite") + " Affection: </b>" + Math.round(bazaar.benoit.benoitAffection()) + "%\n");
 	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid: </b>" + flags[kFLAGS.BENOIT_EGGS] + "\n");
-	if(flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(brookeAffection()) + "\n");
+	if(flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(telAdre.brooke.brookeAffection()) + "\n");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0) outputText("<b>Body Parts Taken By Ceraph: </b>" + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n", false);
 	if(flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton: </b>" + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
 	if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn: </b>" + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
@@ -2597,37 +2441,37 @@ public function displayStats(e:MouseEvent = null):void
 		outputText(sophie + "\n");
 	}
 	if(player.statusAffectv2("Tamani") > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2("Tamani") + " (after all forms of natural selection)\n", false);
-	if(urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaKids() + "\n");
+	if(urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaPregs.urtaKids() + "\n");
 	if(flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
-	if(emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberAffection()) + "%\n");
-	if(emberChildren() > 0) {
+	if(emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
+	if(emberScene.emberChildren() > 0) {
 		outputText("<b>Ember Offspring (Males): </b>" + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
 		outputText("<b>Ember Offspring (Females): </b>" + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
 		outputText("<b>Ember Offspring (Herms): </b>" + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
 	}
 	if(flags[kFLAGS.EMBER_EGGS] > 0) outputText("<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n");
-	if(helAffection() > 0) outputText("<b>Helia Affection: </b>" + Math.round(helAffection()) + "%\n");
-	if(helAffection() >= 100) outputText("<b>Helia Bonus Points: </b>" + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
+	if(helFollower.helAffection() > 0) outputText("<b>Helia Affection: </b>" + Math.round(helFollower.helAffection()) + "%\n");
+	if(helFollower.helAffection() >= 100) outputText("<b>Helia Bonus Points: </b>" + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
 	if(flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 		outputText("<b>Isabella Affection:</b> ", false);
-		if(!isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
+		if(!isabellaFollowerScene.isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
 		else outputText("100%\n", false);
 	}
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
-		outputText("<b>Kid A's Confidence:</b> " + kidAXP() + "%\n");
+		outputText("<b>Kid A's Confidence:</b> " + anemoneScene.kidAXP() + "%\n");
 	}
 	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
-		if(followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
+		if(kihaFollower.followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
 		else outputText("<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n", false);
 	}
 	if(flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL]+ flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	//Lottie stuff
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
-		outputText("<b>Lottie's Encouragement: </b>" + lottieMorale() + " (higher is better)\n", false);
-		outputText("<b>Lottie's Figure: </b>" + lottieTone() + " (higher is better)\n", false);
+		outputText("<b>Lottie's Encouragement: </b>" + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);
+		outputText("<b>Lottie's Figure: </b>" + telAdre.lottie.lottieTone() + " (higher is better)\n", false);
 	}
-	if(lynnetteApproval() != 0) {
-		outputText("<b>Lynnette's Approval: </b>" + lynnetteApproval() + "\n");
+	if(mountain.salon.lynnetteApproval() != 0) {
+		outputText("<b>Lynnette's Approval: </b>" + mountain.salon.lynnetteApproval() + "\n");
 		outputText("<b>Lynnette Children: </b>" + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
 	}
 	//Mino sons
@@ -2636,19 +2480,19 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 0) outputText("<b>Owca's Attitude: </b>" + flags[kFLAGS.OWCAS_ATTITUDE] + "\n");
 	if(flags[kFLAGS.SHEILA_XP] != 0) {
-		outputText("<b>Sheila's Corruption: </b>" + sheilaCorruption());
-		if(sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
+		outputText("<b>Sheila's Corruption: </b>" + sheilaScene.sheilaCorruption());
+		if(sheilaScene.sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
 		outputText("\n");
 	}
 	if(player.hasStatusAffect("Kelt") >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		if(player.statusAffectv2("Kelt") >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
 		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2("Kelt")/130*100) + "%\n", false);
 	}
-	if(rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(rubiAffection()) + "%\n");
-	if(rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(rubiCapacity()) + "%\n");
+	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(telAdre.rubi.rubiAffection()) + "%\n");
+	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
 	
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
+		if(urta.urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
 		else if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
 		else if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");
@@ -2743,13 +2587,12 @@ public function applyOperator(old:Number, op:String, val:Number):Number {
 
 public function testDynStatsEvent():void {
 	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n",true);
-	dynStats("str", 0, "tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
+	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
 	doNext(1);
 }
 
-//TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
 public function dynStats(... args):void
 {
@@ -2760,10 +2603,10 @@ public function dynStats(... args):void
 		return;
 	}
 	
-	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
-	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
-	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
-	var argOps:Array = 			new Array(  "+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "=");   // Default operators
+	var argNamesFull:Array 	= 	["strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"]; // In case somebody uses full arg names etc
+	var argNamesShort:Array = 	["str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"]; // Arg names
+	var argVals:Array = 		[0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false]; // Default arg values
+	var argOps:Array = 			["+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "="];   // Default operators
 	
 	for (var i:int = 0; i < args.length; i += 2)
 	{
@@ -2773,7 +2616,7 @@ public function dynStats(... args):void
 			if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
 			{
 				trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
-				return;
+				continue;
 			}
 			
 			var argIndex:int = -1;
@@ -2790,13 +2633,15 @@ public function dynStats(... args):void
 				if ("+-*/=".indexOf(argsi.charAt(argsi.length - 1)) != -1) {
 					argIndex = argNamesFull.indexOf(argsi.slice(0, argsi.length - 1));
 					if (argIndex != -1) argOps[argIndex] = argsi.charAt(argsi.length - 1);
+				} else {
+					argIndex = argNamesFull.indexOf(argsi);
 				}
 			}
 			
 			if (argIndex == -1) // Shit fucked up, welp
 			{
 				trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
-				return;
+				continue;
 			}
 			else // Stuff the value into our "values" array
 			{
@@ -2810,14 +2655,14 @@ public function dynStats(... args):void
 		}
 	}
 	// Got this far, we have values to statsify
-	var newStr = applyOperator(player.str, argOps[0], argVals[0]);
-	var newTou = applyOperator(player.tou, argOps[1], argVals[1]);
-	var newSpe = applyOperator(player.spe, argOps[2], argVals[2]);
-	var newInte = applyOperator(player.inte, argOps[3], argVals[3]);
-	var newLib = applyOperator(player.lib, argOps[4], argVals[4]);
-	var newSens = applyOperator(player.sens, argOps[5], argVals[5]);
-	var newLust = applyOperator(player.lust, argOps[6], argVals[6]);
-	var newCor = applyOperator(player.cor, argOps[7], argVals[7]);
+	var newStr:Number = applyOperator(player.str, argOps[0], argVals[0]);
+	var newTou:Number = applyOperator(player.tou, argOps[1], argVals[1]);
+	var newSpe:Number = applyOperator(player.spe, argOps[2], argVals[2]);
+	var newInte:Number = applyOperator(player.inte, argOps[3], argVals[3]);
+	var newLib:Number = applyOperator(player.lib, argOps[4], argVals[4]);
+	var newSens:Number = applyOperator(player.sens, argOps[5], argVals[5]);
+	var newLust:Number = applyOperator(player.lust, argOps[6], argVals[6]);
+	var newCor:Number = applyOperator(player.cor, argOps[7], argVals[7]);
 	// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
 	// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
 	stats(newStr - player.str,
@@ -2827,6 +2672,7 @@ public function dynStats(... args):void
 		  newLib - player.lib,
 		  newSens - player.sens,
 		  newLust - player.lust,
+		  newCor - player.cor,
 		  argVals[8],argVals[9]);
 	
 }

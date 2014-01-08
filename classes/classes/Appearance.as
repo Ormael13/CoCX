@@ -1,5 +1,6 @@
 ﻿package classes
 {
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Player;
 	import classes.Monster;
 	import classes.CoC_Settings;
@@ -1410,7 +1411,7 @@
 			else return "base";
 		}
 
-		public static function vaginaDescription(i_creature:Creature, i_vaginaIndex:Number = 0):String
+		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0):String
 		{
 			if (i_vaginaIndex > (i_creature.vaginas.length - 1))
 			{
@@ -2000,7 +2001,7 @@
 			return description;
 		}
 
-		public static function assholeDescription(i_creature:Creature):String
+		public static function assholeDescript(i_creature:Creature):String
 		{
 			var description:String = "";
 			//66% wetness description
@@ -2443,5 +2444,268 @@
 			if (n<12) return n+"\"";
 			return n+"\" ("+feetsAndInches(n)+")";
 		}
+
+		public static function allBreastsDescript(creature:Creature):String
+		{
+			var storage:String = "";
+			if(creature.breastRows.length == 0) return "unremarkable chest muscles ";
+			if(creature.breastRows.length == 2) {
+				//if(player.totalBreasts() == 4) storage += "quartet of ";
+				storage += "two rows of ";
+			}
+			if(creature.breastRows.length == 3) {
+				if(rand(2) == 0) storage += "three rows of ";
+				else storage += "multi-layered ";
+			}
+			if(creature.breastRows.length == 4) {
+				if(rand(2) == 0) storage += "four rows of ";
+				else storage += "four-tiered ";
+			}
+			if(creature.breastRows.length == 5) {
+				if(rand(2) == 0) storage += "five rows of ";
+				else storage += "five-tiered ";
+			}
+			storage += biggestBreastSizeDescript(creature);
+			return storage;
+
+		}
+
+		public static function biggestBreastSizeDescript(creature:Creature):String
+		{
+			var temp14:int = Math.random()*3;
+			var descript:String = "";
+			var temp142:int = creature.biggestTitRow();
+			//ERROR PREVENTION
+			if(creature.breastRows.length - 1 < temp142)
+			{
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, biggestBreastSizeDescript() working with invalid breastRow</b>";
+			}
+			else if(temp142 < 0)
+			{
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "ERROR SHIT SON!  BIGGESTBREASTSIZEDESCRIPT PASSED NEGATIVE!";
+			}
+			if(creature.breastRows[temp142].breastRating < 1) return "flat breasts";
+			//50% of the time size-descript them
+			if(rand(2) == 0) descript += breastSize(creature.breastRows[temp142].breastRating);
+			//Nouns!
+			temp14 = rand(10);
+			if(temp14 == 0) descript += "breasts";
+			if(temp14 == 1) {
+				if(creature.breastRows[temp142].lactationMultiplier > 2) descript += "milk-udders";
+				else descript += "breasts";
+			}
+			if(temp14 == 2) {
+				if(creature.breastRows[temp142].lactationMultiplier > 1.5) descript += "milky ";
+				if(creature.breastRows[temp142].breastRating > 4) descript += "tits";
+				else descript += "breasts";
+			}
+			if(temp14 == 3) {
+				//if(player.breastRows[temp142].breastRating > 6) descript += "rack";
+				descript += "breasts";
+			}
+			if(temp14 == 4) descript += "tits";
+			if(temp14 == 5) descript += "tits";
+			if(temp14 == 6) descript += "tits";
+			if(temp14 == 7) {
+				if(creature.breastRows[temp142].lactationMultiplier >= 1 && creature.breastRows[temp142].lactationMultiplier < 2.5) descript += "milk jugs";
+				if(creature.breastRows[temp142].lactationMultiplier >= 2.5) descript += "udders";
+				if(creature.breastRows[temp142].lactationMultiplier < 1) descript += "jugs";
+			}
+			if(temp14 == 8) {
+				if(creature.breastRows[temp142].breastRating > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if(temp14 == 9) {
+				if(creature.breastRows[temp142].breastRating > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			return descript;
+		}
+
+		public static function breastSize(val:Number):String {
+			var descript:String = "";
+			//Catch all for dudes.
+			if(val < 1) return "manly ";
+			//Small - A->B
+			if(val <= 2)
+			{
+				descript += randomChoice("palmable ", "tight ", "perky ", "baseball-sized ");
+			}
+			//C-D
+			else if(val <= 4)
+			{
+				descript += randomChoice("nice ", "hand-filling ", "well-rounded ", "supple ", "softball-sized ");
+			}
+			//DD->big EE
+			else if(val < 11)
+			{
+				descript += randomChoice("big ", "large ", "pillowy ", "jiggly ", "volleyball-sized ");
+			}
+			//F->big FF
+			else if(val < 15)
+			{
+				descript += randomChoice("soccerball-sized ", "hand-overflowing ", "generous ", "jiggling ");
+			}
+			//G -> HHH
+			else if(val < 24) {
+				descript += randomChoice("basketball-sized ", "whorish ", "cushiony ", "wobbling ");
+			}
+			//I -> KK
+			else if(val < 35) {
+				descript += randomChoice("massive motherly ", "luscious ", "smothering ", "prodigious ");
+			}
+			//K- > MMM+
+			else {
+				descript += randomChoice("mountainous ", "monumental ", "back-breaking ", "exercise-ball-sized ", "immense ");
+			}
+			return descript;
+		}
+
+		public static function chestDesc(creature:Creature):String
+		{
+			if(creature.biggestTitSize() < 1) return "chest";
+			else return biggestBreastSizeDescript(creature);
+		}
+
+		public static function assholeOrPussy(creature:Creature):String
+		{
+			if(creature.hasVagina()) return vaginaDescript(creature,0);
+			return assholeDescript(creature);
+		}
+
+
+		public static function multiCockDescriptLight(creature:Creature):String
+		{
+			if(creature.cocks.length < 1)
+			{
+
+			if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<B>Error: multiCockDescriptLight() called with no penises present.</B>";
+
+			}
+			//Get cock counts
+			var descript:String="";
+			var currCock:Number = 0;
+			var totCock:Number = creature.cocks.length;
+			var dogCocks:Number = 0;
+			var horseCocks:Number = 0;
+			var normalCocks:Number = 0;
+			var normalCockKey:Number = 0;
+			var dogCockKey:Number = 0;
+			var horseCockKey:Number = 0;
+			var averageLength:Number = 0;
+			var averageThickness:Number = 0;
+			var same:Boolean = true;
+			//For temp14 random values
+			var rando:Number = 0;
+			var descripted:Boolean = false;
+			//If one, return normal cock descript
+			if(totCock == 1) return creature.cockDescript(0);
+			//Count cocks & Prep average totals
+			while(currCock <= totCock-1) {
+				if(creature.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+					normalCocks++;
+					normalCockKey = currCock;
+				}
+				if(creature.cocks[currCock].cockType == CockTypesEnum.HORSE) {
+					horseCocks++;
+					horseCockKey = currCock;
+				}
+				if(creature.cocks[currCock].cockType == CockTypesEnum.DOG) {
+					dogCocks++;
+					dogCockKey = currCock;
+				}
+				averageLength += creature.cocks[currCock].cockLength;
+				averageThickness += creature.cocks[currCock].cockThickness;
+				//If cocks are matched make sure they still are
+				if(same && currCock > 0 && creature.cocks[currCock].cockType != creature.cocks[currCock-1].cockType) same = false;
+				currCock++;
+			}
+			//Crunch averages
+			averageLength /= currCock;
+			averageThickness /= currCock;
+			//Quantity descriptors
+			if(creature.cockTotal() == 1) {
+				if(dogCocks == 1) return dogDescript(0);
+				if(horseCocks == 1) return horseDescript(0);
+				if(normalCocks == 1) return creature.cockDescript(0);
+				//Failsafe
+				return creature.cockDescript(0);
+			}
+			if(currCock == 2) {
+				//For cocks that are the same
+				if(same) {
+					descript += randomChoice("pair of ", "two ", "brace of ", "matching ", "twin ");
+					descript += cockAdjective(creature);
+					if(normalCocks == 2) descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
+					if(horseCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
+					if(dogCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
+					//Failsafe
+					if(creature.cocks[0].cockType.Index > 2) descript += ", " + Appearance.cockNoun(creature.cocks[0].cockType) + "s";
+				}
+				//Nonidentical
+				else {
+					descript += randomChoice("pair of ", "two ", "brace of ");
+					descript += cockAdjective(creature) + ", ";
+					descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+				}
+			}
+			if(currCock == 3) {
+				//For samecocks
+				if(same) {
+					descript += randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
+					descript += cockAdjective(creature);
+					if(normalCocks == 3) descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
+					if(horseCocks == 3) descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
+					if(dogCocks == 3) descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
+					//Tentacles
+					if (creature.cocks[0].cockType.Index > 2) descript += ", " + Appearance.cockNoun(creature.cocks[0].cockType) + "s";
+				}
+				else {
+					descript += randomChoice("three ", "group of ");
+					descript += cockAdjective(creature) + ", ";
+					descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+				}
+			}
+			//Large numbers of cocks!
+			if(currCock > 3)
+			{
+				descript += randomChoice("bundle of ", "obscene group of ", "cluster of ", "wriggling bunch of ");
+				//Cock adjectives and nouns
+				descripted = false;
+				//Same
+				if(same) {
+					if(currCock == normalCocks) {
+						descript += cockAdjective(creature) + " ";
+						descript += Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
+						descripted = true;
+					}
+					if(currCock == dogCocks) {
+						descript += cockAdjective(creature) + ", ";
+						descript += Appearance.cockNoun(CockTypesEnum.DOG) + "s";
+						descripted = true;
+					}
+					if(currCock == horseCocks) {
+						descript += cockAdjective(creature) + ", ";
+						descript += Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
+						descripted = true;
+					}
+					if(creature.cocks[0].cockType.Index > 2) {
+						descript += cockAdjective(creature) + ", ";
+						descript += Appearance.cockNoun(creature.cocks[0].cockType) + "s";
+						descripted = true;
+					}
+				}
+				//If mixed
+				if(!descripted) {
+					descript += cockAdjective(creature) + ", ";
+					descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+				}
+			}
+			return descript;
+		}
+
 	}
 }

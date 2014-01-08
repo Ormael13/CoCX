@@ -1,4 +1,6 @@
-﻿// import classes.ItemSlotClass;
+﻿import classes.GlobalFlags.kGAMECLASS;
+
+// import classes.ItemSlotClass;
 
 //const FOX_BAD_END_WARNING:int = 477;
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -335,8 +337,8 @@ public function itemUse(shortName1:String):void {
 	else if(shortName1 == "I.Robes") equipArmor("inquisitor's robes");
 	else if(shortName1 == "I.Corst") equipArmor("inquisitor's corset");
 	else if(shortName1 == "S.Blade") equipWeapon("inscribed spellblade");
-	else if(shortName1 == "BC Beer") blackCatBeerEffects();
-	else if(shortName1 == "BimboCh") bimboChampagne(true,true);
+	else if(shortName1 == "BC Beer") telAdre.niamh.blackCatBeerEffects();
+	else if(shortName1 == "BimboCh") telAdre.niamh.bimboChampagne(true,true);
 	else if(shortName1 == "FoxBery") foxTF();
 	else if(shortName1 == "VixVigr") foxTF(true);
 	else if(shortName1 == "GooArmr") equipArmor("goo armor");
@@ -347,7 +349,7 @@ public function itemUse(shortName1:String):void {
 	else if(shortName1 == "DrgnEgg") eatEmberEgg();
 	else if(shortName1 == "BimboSk") equipArmor("bimbo skirt");
 	else if(shortName1 == "PeppWht") peppermintWhite();
-	else if(shortName1 == "GldStat") kitsuneStatue();
+	else if(shortName1 == "GldStat") forest.kitsuneScene.kitsuneStatue();
 	else if(shortName1 == "FoxJewl") foxJewel();
 	else if(shortName1 == "MystJwl") foxJewel(true);
 	else if(shortName1 == "KitGift") kitsunesGift();
@@ -596,7 +598,7 @@ public function dropItem(monsterName:String):void {
 		shortName = "FoxJewl";
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphFollowerScene.ceraphIsFollower()) {
 		shortName = "SeductA";
 	}
 	
@@ -947,7 +949,6 @@ public function equipWeapon(weaponName:String):void {
 			takeItem();
 		}
 	}
-	return;
 }
 public function lootWeaponName(oldWeaponName:String):String {
 	var wName:String = "";	
@@ -983,7 +984,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 		player.armorDef = 0;
 		player.armorPerk = "";
 		player.armorValue = 0;
-		if(!ceraphIsFollower()) {
+		if(!ceraphFollowerScene.ceraphIsFollower()) {
 			if(output) {
 				outputText("After struggling to get it on, you feel a sudden shift in your scandalous new armor.  To your horror, it begins folding into itself, revealing more and more of your " + player.skinDesc + " and the comfortable underclothes you had on underneath it.  The transforming armor gradually covers less and less of you until it's little more than a pair of huge nipple-coverings and a silver chain.  A loud KA-CHUNK startles you, and then you're screaming as you feel something stabbing through your nipples.  Goosebumps cover your flesh as you twist in unexpected agony.\n\n", false);  
 				outputText("After you've had a chance to recover, you inspect your abused nipples and discover that your armor has totally disappeared.  The only thing left behind is a pair of seamless black nipple-studs, embedded into your vulnerable flesh.  There doesn't appear to be any way to remove them either.  Thankfully, your comfortable underclothes have been unaffected by the sudden disappearance of your armor.  The thought of having to run around naked stays stubbornly locked in your mind, and you mentally curse the demon for what she's done to you.\n\n", false);
@@ -1044,7 +1045,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 			
 			outputText("You feel sexy.  And pious.\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of fatigue!)\n\n", false);
 			//+lust
-			stats(0,0,0,0,0,0,5,0);
+			dynStats("lus", 5);
 		}
 		player.armorPerk = "Light";
 		player.armorValue = itemValue("inquisitor's corset");
@@ -1254,14 +1255,14 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",6,0,0,0,"Your revealing swimwear allows you access to 'Seduce', an improved form of 'Tease'.");
 		player.armorValue = itemValue("slutty swimwear");
 		//Putting it on: (Lust increases)
-		if(output) stats(0,0,0,0,0,0,5,0);
+		if(output) dynStats("lus", 5);
 		if(output) {
 			//[flat-chested]  
 			if(player.biggestTitSize() < 1) outputText("You feel rather stupid putting the top part on like this, but you're willing to bear with it. It could certainly be good for distracting.  ", false);  
 			//[breasts]
 			else {
 				outputText("The bikini top clings tightly to your bustline, sending a shiver of pleasure through your body. It serves to turn you on quite nicely.  ", false);
-				stats(0,0,0,0,0,0,5,0);
+				dynStats("lus", 5);
 			}
 			//[no dick]
 			if(player.totalCocks() == 0) {
@@ -1279,7 +1280,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 				else {
 					outputText("You grunt in discomfort, your " + multiCockDescriptLight() + " flopping free from the thong's confines. The tight material rubbing against your dicks does manage to turn you on slightly.  ", false);
 				}
-				stats(0,0,0,0,0,0,5,0);
+				dynStats("lus", 5);
 				if(player.biggestCockArea() >= 20) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + cockDescript(0) + " has popped out of the top, completely exposed.  Maybe if you shrunk your male parts down a little...", false);
 				//[If dick is 7+ inches OR balls are apple-sized]
 				else if(player.ballSize > 5) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + ballsDescriptLight() + " hang on the sides, exposed.  Maybe if you shrunk your male parts down a little...", false);
@@ -1512,7 +1513,6 @@ public function equipArmor(armorName:String, output:Boolean = true):void {
 	if(oldArmorName == "comfortable underclothes") {
 		itemGoNext();
 	}
-	return;
 }
 public function doItems(eventNo:Number):void {
 	var temp1:* = 0;
@@ -1550,8 +1550,8 @@ public function doItems(eventNo:Number):void {
 		}
 		if(!inCombat() && inDungeon == 0) {
 			if(player.hasKeyItem("Dragon Egg") >= 0) {
-				emberCampDesc();
-				ember = 3701;
+				emberScene.emberCampDesc();
+				ember = emberScene.emberEggInteraction;
 			}
 			if(nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
 				if(flags[kFLAGS.NIEVE_STAGE] == 1) outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -1559,7 +1559,7 @@ public function doItems(eventNo:Number):void {
 				nieve = 3964;
 			}
 			if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && inDungeon == 0) {
-				fuckPlant = 3861;
+				fuckPlant = holliScene.treeMenu;
 				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) plantT = "Tree";
 				//Blurb in Items Screen
 				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
@@ -1623,7 +1623,6 @@ public function doItems(eventNo:Number):void {
 
 	if ((eventNo == 1011) || (eventNo == 1012) || (eventNo == 1013) || (eventNo == 1014) || (eventNo == 1015))
 	{
-		var slotTmp:ItemSlotClass;
 		switch (eventNo)
 		{
 			case 1011:
@@ -1642,7 +1641,7 @@ public function doItems(eventNo:Number):void {
 				slotTmp = itemSlot5;
 				break;
 		}
-		var shortName_ = slotTmp.shortName;
+		var shortName_:String = slotTmp.shortName;
 		if(!debug) slotTmp.removeOneItem();
 
 		itemUse(shortName_);
@@ -1720,9 +1719,6 @@ public function doItems(eventNo:Number):void {
 		player.addStatusValue("metRathazul",2,1);
 		return;
 	}
-	if(eventNo == 1022) {
-		buyDyes();
-	}
 	if(eventNo == 1023) {
 		placeInStorage(1);
 	}
@@ -1789,7 +1785,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//Gro+ Ballzzzz
 	if(eventNo == 1039) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n", true);
 		//1 in 4 BIG growth.
 		if(rand(4) == 0) {
@@ -1802,30 +1798,30 @@ public function doItems(eventNo:Number):void {
 			outputText("You feel your testicles shift, pulling the skin of your " + sackDescript() + " a little bit as they grow to " + ballsDescriptLight() + ".  ", false);
 		}
 		if(player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.", false);
-		stats(0,0,0,0,0,0,10,0);
+		dynStats("lus", 10);
 		itemGoNext();
 	}
 	//Gro+ Breasts
 	if(eventNo == 1040) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into the flesh of your " + allBreastsDescript() + " injecting each with a portion of the needle.\n\n", true);
 		if(player.breastRows.length == 1) growTits((1+rand(5)),1,true,1);
 		else growTits(1+rand(2),player.breastRows.length,true,1);
-		stats(0,0,0,0,0,0,10,0);
+		dynStats("lus", 10);
 		itemGoNext();
 	}
 	//Clit
 	if(eventNo == 1041) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n", true);
 		player.clitLength++;
 		outputText("Your " + clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.", false);
-		stats(0,0,0,0,0,2,10,0);
+		dynStats("sen", 2, "lus", 10);
 		itemGoNext();
 	}
 	//COCK!
 	if(eventNo == 1042) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into the base of your " + multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n", true);
 		if(player.cocks.length == 1) {
 			outputText("Your " + cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ", false);
@@ -1846,17 +1842,17 @@ public function doItems(eventNo:Number):void {
 				player.cocks[i].cockThickness += .5;
 			}
 		}
-		stats(0,0,0,0,0,2,10,0);
+		dynStats("sen", 2, "lus", 10);
 		itemGoNext();
 	}
 	//NURPLES
 	if(eventNo == 1043) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into each of your " + nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n", true);
 		//Grow nipples
 		outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n", false); 
 		player.nippleLength += (rand(2) + 3)/10;
-		stats(0,0,0,0,0,0,15,0);
+		dynStats("lus", 15);
 		//NIPPLECUNTZZZ
 		if(!player.hasFuckableNipples() && rand(4) == 0) {
 			temp = player.breastRows.length;
@@ -1963,7 +1959,7 @@ public function doItems(eventNo:Number):void {
 		if(player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.", false);
-		stats(0,0,0,0,-2,0,-10,0);
+		dynStats("lib", -2, "lus", -10);
 		itemGoNext();
 	}
 	//Reducto Breasts
@@ -1975,7 +1971,7 @@ public function doItems(eventNo:Number):void {
 			shrinkTits();
 		}
 		outputText("\nThe last of it wicks away into your skin, completing the changes.", false);
-		stats(0,0,0,0,0,-2,-5,0);
+		dynStats("sen", -2, "lus", -5);
 		itemGoNext();
 	}
 	//Clit
@@ -1985,7 +1981,7 @@ public function doItems(eventNo:Number):void {
 		//Set clitlength down to 2 digits in length
 		player.clitLength = int(player.clitLength * 100)/100;
 		outputText("Your " + clitDescript() + " shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.", false);
-		stats(0,0,0,0,0,2,10,0);
+		dynStats("sen", 2, "lus", 10);
 		itemGoNext();
 	}
 	//COCK!
@@ -2010,7 +2006,7 @@ public function doItems(eventNo:Number):void {
 				player.cocks[ii].cockThickness  *= 2/3;
 			}
 		}
-		stats(0,0,0,0,0,-2,-10,0);
+		dynStats("sen", -2, "lus", -10);
 		itemGoNext();
 	}
 	//Buy reducto
@@ -2067,7 +2063,7 @@ public function doItems(eventNo:Number):void {
 			outputText("Your " + nippleDescript(0) + "s get smaller and smaller, stopping when they are roughly half their previous size.", false);
 			player.nippleLength /= 2;
 		}
-		stats(0,0,0,0,0,-5,-5,0);
+		dynStats("sen", -5, "lus", -5);
 		itemGoNext();
 		return;
 	}
@@ -2122,7 +2118,7 @@ public function doItems(eventNo:Number):void {
 			outputText("\n" + int(itemValue(itemSlot5.shortName)/2) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
 		}
 		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) 
-			kath = visitKatherine;
+			kath = telAdre.katherine.visitKatherine;
 
 		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1,
 				(itemSlot2.shortName + " x" + itemSlot2.quantity), temp2,
@@ -2133,7 +2129,7 @@ public function doItems(eventNo:Number):void {
 				"", 0, 
 				"", 0, 
 				"", 0, 
-				"Back", 2211);
+				"Back", telAdre.telAdreMenu);
 	}
 	
 	//Sell item from slots
@@ -2141,7 +2137,6 @@ public function doItems(eventNo:Number):void {
 	//   slot 1               slot 2                slot 3               slot 4               slot 5
 	{
 
-		var slotTmp:ItemSlotClass;
 
 		switch (eventNo)
 		{
@@ -2169,9 +2164,9 @@ public function doItems(eventNo:Number):void {
 		else 
 			outputText("You hand over " + itemLongName(slotTmp.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		
-		slotTmp.removeOneItem()
+		slotTmp.removeOneItem();
 
-		doNext(oswaldPawn);
+		doNext(telAdre.oswaldPawn);
 		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
@@ -2194,66 +2189,8 @@ public function doItems(eventNo:Number):void {
 			if(player.buttRating < 1) player.buttRating = 1;
 			outputText("After a few seconds your " + buttDescript() + " has shrunk to a much smaller size!", false);
 		}
-		stats(0,0,0,0,-2,0,-10,0);
+		dynStats("lib", -2, "lus", -10);
 		itemGoNext();
-	}
-	//Item shopppeeeeeeee
-	if(eventNo == 1072) {
-		tailorShoppe();
-		return;
-	}
-	if(eventNo == 1073) {
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1074) {
-		debitClothes();
-		return;
-	}
-	if(eventNo == 1075) {
-		shortName = "ClssyCl";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1076) {
-		shortName = "RbbrClt";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1077) {
-		shortName = "AdvClth";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1078) {
-		shortName = "TubeTop";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1079) {
-		shortName = "Overall";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1080) {
-		shortName = "B.Dress";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1081) {
-		shortName = "T.BSuit";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1082) {
-		shortName = "M.Robes";
-		buyClothes();
-		return;
-	}
-	if(eventNo == 1083) {
-		shortName = "LthrPnt";
-		buyClothes();
-		return;
 	}
 	//Gray dye
 	if(eventNo == 1084) {
@@ -2362,21 +2299,6 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1116) {
 		retrieveFromRacks(8, true);
 	}	
-	if(eventNo == 1117) {
-		placeInAnemone(1);
-	}
-	if(eventNo == 1118) {
-		placeInAnemone(2);
-	}
-	if(eventNo == 1119) {
-		placeInAnemone(3);
-	}
-	if(eventNo == 1120) {
-		placeInAnemone(4);
-	}
-	if(eventNo == 1121) {
-		placeInAnemone(5);
-	}
 	if(eventNo == 1122) {
 		outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 		if(player.hipRating >= 15) {
@@ -2392,7 +2314,7 @@ public function doItems(eventNo:Number):void {
 			if(player.hipRating < 1) player.hipRating = 1;
 			outputText("After a few seconds your [hips] have shrunk to a much smaller size!", false);
 		}
-		stats(0,0,0,0,-2,0,-10,0);
+		dynStats("lib", -2, "lus", -10);
 		itemGoNext();
 	}
 }
@@ -2757,7 +2679,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2274);
+				"Abandon", telAdre.armorShop);
 	}
 	else if (menuLoc == 11) 
 	{
@@ -2783,7 +2705,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2435);
+				"Abandon", lumi.lumiLabChoices);
 	}
 	else if (menuLoc == 14)
 	{
@@ -2809,7 +2731,7 @@ public function takeItem():void {
 				"", 0,
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2553);
+				"Abandon", telAdre.weaponShop);
 	}
 	else if (menuLoc == 16)
 	{
@@ -2861,7 +2783,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2836);
+				"Abandon", telAdre.bakeryScene.bakeryuuuuuu);
 	}
 	else if (menuLoc == 20)
 	{
@@ -2926,7 +2848,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2256);
+				"Abandon", telAdre.barTelAdre);
 	}
 	else if (menuLoc == 25)
 	{
@@ -2939,7 +2861,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3618);
+				"Abandon", owca.owcaTavern);
 	}
 	else if (menuLoc == 26)
 	{
@@ -2952,7 +2874,7 @@ public function takeItem():void {
 				"", 0,
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3787);
+				"Abandon", bazaar.benoit.benoitsBuyMenu);
 	}
 	else if (menuLoc == 27)
 	{
@@ -2991,7 +2913,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3997);
+				"Abandon", telAdre.bakeryScene.ingredientsMenu);
 	}
 	//otherwise business as usual!
 	else
@@ -3153,7 +3075,7 @@ public function destroyItems(itemName:String, numOfItemToRemove:Number):Boolean
 }
 //Cerulean P.
 public function ceruleanPotion():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Repeat genderless encounters
 	if(player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 		outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
@@ -3176,11 +3098,11 @@ public function ceruleanPotion():void {
 }
 //Vitality Tincture
 public function vitalityTincture():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more fit and healthy.", true);
 	//str change
 	temp = rand(3);
-	stats(temp, 0, 0, 0, 0, 0, 0, 0);
+	dynStats("str", temp);
 	//Garunteed toughness if no str
 	if(temp == 0) {
 		temp = rand(3);
@@ -3188,22 +3110,22 @@ public function vitalityTincture():void {
 	}
 	else temp = rand(3);
 	//tou change
-	stats(0, temp, 0, 0, 0, 0, 0, 0);
+	dynStats("tou", temp);
 	//Chance of fitness change
 	if(HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.", false);
 	if(rand(3) == 0) outputText(player.modTone(95,3), false);
 }
 //Scholar's Tea
 public function scholarsTea():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.", true);
 	if(rand(3) == 0) outputText(player.modTone(15,1), false);
-	stats(0, 0, 0, (2.5 + rand(5)), 0, 0, 0, 0);
+	dynStats("int", (2.5 + rand(5)));
 }
 
 /* ITEMZZZZZ FUNCTIONS GO HERE */
 public function incubiDraft(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	var rando:Number = rand(100);
@@ -3225,8 +3147,8 @@ public function incubiDraft(tainted:Boolean):void {
 			if(temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.", false);
 			if(temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.", false);
 			if(temp > 2) outputText("  You smile and idly stroke your lengthening " + cockDescript(0) + " as a few more inches sprout.", false);
-			if(tainted) stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 1);
-			else stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 0);
+			if(tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp*3, "cor", 1);
+			else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp*3);
 			if(player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your " + cockDescript(0) + " returns to its normal coloration.", false);
 			else outputText("  With the transformation complete, your " + cockDescript(0) + " throbs in an almost happy way as it goes flaccid once more.", false);
 		}
@@ -3242,8 +3164,8 @@ public function incubiDraft(tainted:Boolean):void {
 			}
 			if(int(Math.random()*4) == 0) temp3 = player.cocks[temp2].growCock(3);
 			else temp3 = player.cocks[temp2].growCock(1);
-			if(tainted) stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 1);
-			else stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 0);
+			if(tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp*3, "cor", 1);
+			else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp*3);
 			//Grammar police for 2 cocks
 			if(player.cockTotal() == 2) outputText("\n\nBoth of your " + multiCockDescriptLight() + " become shockingly hard, swollen and twitching as they turn a shiny inhuman purple in color.  They spasm, dripping thick ropes of hot demon-like pre-cum along their lengths as your shortest " + cockDescript(temp2) + " begins to grow.", false);
 			//For more than 2
@@ -3262,8 +3184,8 @@ public function incubiDraft(tainted:Boolean):void {
 			player.cocks[0].cockThickness = 1;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
-			if(tainted) stats(0,0,0,0,3,5,10,5);
-			else stats(0,0,0,0,3,5,10,0);
+			if(tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 5);
+			else dynStats("lib", 3, "sen", 5, "lus", 10);
 		}
 		//TIT CHANGE 25% chance of shrinkage
 		if(rand(4) == 0) {
@@ -3295,8 +3217,8 @@ public function incubiDraft(tainted:Boolean):void {
 				if(player.cocks.length ==1) outputText("\n\nYour cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 				if(player.cocks.length > 1) outputText("\n\nYour cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 			}
-			if(tainted) stats(0,0,0,0,3,5,10,3);
-			else stats(0,0,0,0,3,5,10,0);
+			if(tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
+			else dynStats("lib", 3, "sen", 5, "lus", 10);
 		}
 		if(player.cocks.length == 1) {
 			outputText("\n\nYour cock fills to its normal size and begins growing... ", false);
@@ -3316,8 +3238,8 @@ public function incubiDraft(tainted:Boolean):void {
 				if(player.cocks.length ==1) outputText("  Your cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 				if(player.cocks.length > 1) outputText("  Your cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 			}
-			if(tainted) stats(0,0,0,0,3,5,10,3);
-			else stats(0,0,0,0,3,5,10,0);
+			if(tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
+			else dynStats("lib", 3, "sen", 5, "lus", 10);
 		}
 		if(player.cocks.length == 0) {
 			player.createCock();
@@ -3325,8 +3247,8 @@ public function incubiDraft(tainted:Boolean):void {
 			player.cocks[0].cockThickness = 1;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
-			if(tainted) stats(0,0,0,0,3,5,10,3);
-			else stats(0,0,0,0,3,5,10,0);
+			if(tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
+			else dynStats("lib", 3, "sen", 5, "lus", 10);
 		}
 		//Shrink breasts a more
 		//TIT CHANGE 50% chance of shrinkage
@@ -3340,8 +3262,8 @@ public function incubiDraft(tainted:Boolean):void {
 			if(int(Math.random()*10) < int(player.cor/25)) {
 				outputText("\n\n", false);
 				growDemonCock(rand(2)+2);
-				if(tainted) stats(0,0,0,0,3,5,10,5);
-				else stats(0,0,0,0,3,5,10,0);
+				if(tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 5);
+				else dynStats("lib", 3, "sen", 5, "lus", 10);
 			}
 			else {
 				growDemonCock(1);
@@ -3376,7 +3298,7 @@ public function growDemonCock(growCocks:Number):void {
 		outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(temp) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ", false); 
 	}
 	if(temp > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.\n\nNearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 }
 public function tatteredScroll():void {
 	outputText("Your wobbly " + player.legs() + " give out underneath you as your body's willpower seems to evaporate, your mouth reading the words on the scroll with a backwards sounding sing-song voice.\n\n", true);	
@@ -3388,12 +3310,12 @@ public function tatteredScroll():void {
 			player.breastRows[0].breasts = 2;
 			player.breastRows[0].breastRating = 3;
 			if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
-			stats(0, 0, 0, 0, 0, 2, 1, 0);
+			dynStats("sen", 2, "lus", 1);
 		}
 		if(player.biggestTitSize() > 0 && player.biggestTitSize() < 3) {
 			outputText("Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.  ", false);
 			player.breastRows[0].breastRating = 3;
-			stats(0, 0, 0, 0, 0, 1, 1, 0);
+			dynStats("sen", 1, "lus", 1);
 		}
 		if(player.averageNipplesPerBreast() < 1) {
 			outputText("A dark spot appears on each breast, rapidly forming into a sensitive nipple.  ", false);
@@ -3404,7 +3326,7 @@ public function tatteredScroll():void {
 				if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nippleLength = .2;
 				player.breastRows[0].nipplesPerBreast = 1;
 			}
-			stats(0, 0, 0, 0, 0, 2, 1, 0);
+			dynStats("sen", 2, "lus", 1);
 		}
 		if(player.biggestLactation() > 0) {
 			outputText("A strong pressure builds in your chest, painful in its intensity.  You yank down your top as ", false);
@@ -3417,12 +3339,12 @@ public function tatteredScroll():void {
 				player.boostLactation(.7);
 				outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ", false);
 			}
-			stats(0, 0, 0, 0, 1, 4, 15, 0);
+			dynStats("lib", 1, "sen", 4, "lus", 15);
 		}
 		if(player.biggestLactation() == 0) {
 			outputText("A pleasurable release suddenly erupts from your nipples!  Twin streams of milk are spraying from your breasts, soaking into the ground immediately.  It stops all too soon, though a voice in your head assures you that you can lactate quite often now.  ", false);
 			player.boostLactation(1);
-			stats(0, 0, 0, 0, .5, 1, 10, 0);
+			dynStats("lib", .5, "sen", 1, "lus", 10);
 		}
 		outputText("\n\nYour mouth curls into a sick smile and, with a voice that isn't your own, speaks, \"<i>I ALWAYS get what I want, dear...</i>\"", false);
 		doNext(13);
@@ -3437,14 +3359,14 @@ public function tatteredScroll():void {
 		//RAEP
 		spriteSelect(50);
 		outputText("\n\nYou hear the soft impact of clothes hitting the ground behind you, and turn to see that the sand witch has found you! You cannot resist a peek at your uninvited guest, beholding a curvy dark-skinned beauty, her form dominated by a quartet of lactating breasts.  Somewhere in your lust-fogged mind you register the top two as something close to double-Ds, and her lower pair to be about Cs.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns around and drops, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far possible while suckling her clit.  Dimly you feel the milk spattering over you, splashing off you and into the cracked earth.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
-		stats(0,0,0,0,1,5,-100,0);
-		slimeFeed();
+		dynStats("lib", 1, "sen", 5, "lus=", 0);
+		player.slimeFeed();
 	}
 }
 public function minotaurCum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Minotaur cum addiction
-	minoCumAddiction(7);
+	player.minoCumAddiction(7);
 	outputText("", true);
 	outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
 	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
@@ -3454,11 +3376,11 @@ public function minotaurCum():void {
 	outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 	//-Raises lust by 10.
 	//-Raises sensitivity
-	stats(0,0,0,0,0,1,10,0);
+	dynStats("sen", 1, "lus", 10);
 	//-Raises corruption by 1 to 50, then by .5 to 75, then by .25 to 100.
-	if(player.cor < 50) stats(0,0,0,0,0,0,0,1);
-	else if(player.cor < 75) stats(0,0,0,0,0,0,0,.5);
-	else stats(0,0,0,0,0,0,0,.25);
+	if(player.cor < 50) dynStats("cor", 1);
+	else if(player.cor < 75) dynStats("cor", .5);
+	else dynStats("cor", .25);
 	outputText("\n\nIntermittent waves of numbness wash through your body, turning into a warm tingling that makes you feel sensitive all over.  The warmth flows through you, converging in your loins and bubbling up into lust.", false);
 	if(player.totalCocks() > 0) {
 		outputText("  ", false);
@@ -3478,7 +3400,7 @@ public function minotaurCum():void {
 	//(Minotaur fantasy)
 	if(gameState == 0 && rand(10) == 1) {
 		outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
-		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER]/5,0);
+		dynStats("lib", 1, "lus", rand(5)+player.cor/20+flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER]/5);
 	}
 	//(Healing – if hurt and uber-addicted (hasperk))
 	if(player.HP < maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
@@ -3492,7 +3414,7 @@ public function minotaurCum():void {
 	}
 }
 public function minotaurBlood():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -3515,21 +3437,21 @@ public function minotaurBlood():void {
 		if(player.str <= 50) {
 			outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.", false); 
 			//very weak players gain more
-			if(player.str <= 20) stats(3,0,0,0,0,0,0,0);
-			else stats(2,0,0,0,0,0,0,0);
+			if(player.str <= 20) dynStats("str", 3);
+			else dynStats("str", 2);
 		}
 		//stronger characters gain less
 		else {
 			//small growth if over 75
-			if(player.str >= 75) stats(.5,0,0,0,0,0,0,0);
+			if(player.str >= 75) dynStats("str", .5);
 			//faster from 50-75
-			else stats(1,0,0,0,0,0,0,0);
+			else dynStats("str", 1);
 			outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!", false);
 		}
 		//Chance of speed drop
 		if(rand(2) == 0 && player.str > 50) {
 			outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.", false);
-			stats(0,0,-1,0,0,0,0,0);
+			dynStats("spe", -1);
 		}
 		changes++;
 	}
@@ -3539,30 +3461,30 @@ public function minotaurBlood():void {
 		if(player.tou <= 50) {
 			outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.", false); 
 			//very weak players gain more
-			if(player.tou <= 20) stats(0,3,0,0,0,0,0,0);
-			else stats(0,2,0,0,0,0,0,0);
+			if(player.tou <= 20) dynStats("tou", 3);
+			else dynStats("tou", 2);
 		}
 		//stronger characters gain less
 		else {
 			//small growth if over 75
-			if(player.tou >= 75) stats(0,.5,0,0,0,0,0,0);
+			if(player.tou >= 75) dynStats("tou", .5);
 			//faster from 50-75
-			else stats(0,1,0,0,0,0,0,0);
+			else dynStats("tou", 1);
 			outputText("\n\nYour tough hide grows slightly thicker.", false);
 		}
 		//chance of less sensitivity
 		if(rand(2) == 0 && player.sens > 10) {
 			if(player.tou > 75) {
 				outputText("\n\nIt becomes much harder to feel anything through your leathery skin.", false);
-				stats(0,0,0,0,0,-3,0,0);
+				dynStats("sen", -3);
 			}
 			if(player.tou <= 75 && player.tou > 50) {
 				outputText("\n\nThe level of sensation from your skin diminishes noticeably.", false);
-				stats(0,0,0,0,0,-2,0,0);
+				dynStats("sen", -2);
 			}
 			if(player.tou <= 50) {
 				outputText("\n\nYour sense of touch diminishes due to your tougher hide.", false);
-				stats(0,0,0,0,0,-3,0,0);
+				dynStats("sen", -3);
 			}
 		}
 		changes++;
@@ -3575,13 +3497,13 @@ public function minotaurBlood():void {
 			player.balls = 2;
 			player.ballSize = 1;
 			outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.", false);
-			stats(0,0,0,0,2,0,5,0);
+			dynStats("lib", 2, "lus", 5);
 		}
 		else {
 			player.ballSize++;
 			if(player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 			if(player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
-			stats(0,0,0,0,1,0,3,0);
+			dynStats("lib", 1, "lus", 3);
 		}
 		changes++;
 	}
@@ -3609,7 +3531,7 @@ public function minotaurBlood():void {
 			if(player.skinType != SKIN_TYPE_FUR) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 			outputText("<b>  You now have hooves in place of your feet!</b>", false);
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			stats(0,0,1,0,0,0,0,0);
+			dynStats("spe", 1);
 			changes++;
 		}
 	}
@@ -3646,7 +3568,7 @@ public function minotaurBlood():void {
 		if(player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
 		else outputText(player.skinTone + " " + player.skinDesc, false);
 		outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-		stats(0,0,0,0,0,-5,0,0);
+		dynStats("sen", -5);
 		player.removeBreastRow(player.breastRows.length-1,1);
 	}
 	//Shrink boobages till they are normal
@@ -3737,8 +3659,8 @@ public function minotaurBlood():void {
 			//Text for dogdicks
 			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 			player.cocks[0].cockType = CockTypesEnum.HORSE;
-			player.increaseCock(4, 0)
-			stats(0, 0, 0, 0, 5, 4, 35, 0);
+			player.increaseCock(4, 0);
+			dynStats("lib", 5, "sen", 4, "lus", 35);
 			outputText("<b>  You now have a horse-penis.</b>", false);
 			changes++;
 		}
@@ -3755,12 +3677,12 @@ public function minotaurBlood():void {
 			player.addStatusValue("rut",2,5);
 			outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
 			player.addStatusValue("rut",3,48);
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		else {
 			player.createStatusAffect("rut",150,5,100,0);
 			outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 	}
 	//Anti-masturbation status
@@ -3810,7 +3732,7 @@ public function minotaurBlood():void {
 						outputText("\n\nYou feel a pressure in your head around your horns, but they don't grow any larger.  ", false);
 						outputText("Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.", false);
 						player.hoursSinceCum += 200;
-						stats(0,0,0,0,0,0,20,0);
+						dynStats("lus", 20);
 					}
 					else {
 						outputText("\n\nYour small horns get a bit bigger, stopping as medium sized nubs.", false);
@@ -3835,7 +3757,7 @@ public function minotaurBlood():void {
 					if(rand(2) == 0 && changes < changeLimit) {
 						outputText("  Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.", false);
 						player.hoursSinceCum += 200;
-						stats(0,0,0,0,0,0,20,0);
+						dynStats("lus", 20);
 					}
 					changes++;
 				}
@@ -3899,12 +3821,12 @@ public function minotaurBlood():void {
 			player.hoursSinceCum += 200;
 		}
 		HPChange(50, true);
-		stats(0,0,0,0,0,0,50,0);
+		dynStats("lus", 50);
 	}
 	
 }
 public function equinum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -3988,7 +3910,7 @@ public function equinum():void {
 		}
 		//NOT MAXXED
 		else {
-			stats(1,0,0,0,0,0,0,0);
+			dynStats("str", 1);
 			outputText("\n\nYour muscles clench and surge, making you feel as strong as a horse.", false);
 			changes++;
 		}
@@ -4003,7 +3925,7 @@ public function equinum():void {
 		}
 		//NOT MAXXED
 		else {
-			stats(0,1.25,0,0,0,0,0,0);
+			dynStats("tou", 1.25);
 			outputText("\n\nYour body suddenly feels tougher and more resilient.", false);
 			changes++;
 		}
@@ -4014,27 +3936,27 @@ public function equinum():void {
 			outputText("\n\nYou let out a throaty \"Neiiiigh\" as your animalistic instincts take over.", false);
 		}
 		if(player.inte < 10 && player.inte > 5) {
-			stats(0,0,0,-1,0,0,0,0);
+			dynStats("int", -1);
 			outputText("\n\nYou smile vacantly as you drink the potion, knowing you're just a big dumb animal who loves to fuck.", false);
 			changes++;
 		}
 		if(player.inte <= 20 && player.inte >= 10) {
-			stats(0,0,0,-2,0,0,0,0);
+			dynStats("int", -2);
 			outputText("\n\nYou find yourself looking down at the empty bottle in your hand and realize you haven't thought ANYTHING since your first sip.", false);
 			changes++;
 		}
 		if(player.inte <= 30 && player.inte > 20) {
-			stats(0,0,0,-3,0,0,0,0);
+			dynStats("int", -3);
 			outputText("\n\nYou smile broadly as your cares seem to melt away.  A small part of you worries that you're getting dumber.", false);
 			changes++;
 		}
 		if(player.inte <= 50 && player.inte > 30) {
-			stats(0,0,0,-4,0,0,0,0);
+			dynStats("int", -4);
 			outputText("\n\nIt becomes harder to keep your mind focused as your intellect diminishes.", false);
 			changes++;
 		}
 		if(player.inte > 50) {
-			stats(0,0,0,-5,0,0,0,0);
+			dynStats("int", -5);
 			outputText("\n\nYour usually intelligent mind feels much more sluggish.", false);
 			changes++;
 		}
@@ -4078,34 +4000,34 @@ public function equinum():void {
 					temp = player.addHorseCock();
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
-					stats(0, 0, 0, 0, 5, 4, 35, 0);
+					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(player.cocks[0].cockType == CockTypesEnum.DOG) {
 					temp = player.addHorseCock();
 					outputText("\n\nYour " + dogDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
-					stats(0, 0, 0, 0, 5, 4, 35, 0);
+					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 					temp = player.addHorseCock();
 					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
-					stats(0, 0, 0, 0, 5, 4, 35, 0);
+					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(player.cocks[0].cockType.Index > 4) {
 					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp = player.addHorseCock();
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
-					stats(0, 0, 0, 0, 5, 4, 35, 0);
+					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>", false);
 			}
 			//MULTICOCK
 			else {
-				stats(0, 0, 0, 0, 5, 4, 35, 0);
+				dynStats("lib", 5, "sen", 4, "lus", 35);
 				temp = player.addHorseCock();
 				outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(99) + " darkening to a mottled brown and black pattern.", false);
 				if(temp == -1) 
@@ -4130,7 +4052,7 @@ public function equinum():void {
 			if(player.cocks.length == 1) {
 				temp2 = player.increaseCock(rand(3) + 1, 0);
 				temp = 0;
-				stats(0, 0, 0, 0, 0, 1, 10, 0);
+				dynStats("sen", 1, "lus", 10);
 			}
 			//Multicock
 			else {
@@ -4139,7 +4061,7 @@ public function equinum():void {
 				//temp = current smallest
 				temp3 = player.cocks.length;
 				temp2 = 9999;
-				temp = 0
+				temp = 0;
 				while(temp3 > 0)
 				{
 					temp3--;
@@ -4152,7 +4074,7 @@ public function equinum():void {
 				//Grow smallest cock!
 				//temp2 changes to growth amount
 				temp2 = player.increaseCock(rand(4) + 1, temp);
-				stats(0, 0, 0, 0, 0, 1, 10, 0);
+				dynStats("sen", 1, "lus", 10);
 			}
 			outputText("\n\n", false);
 			if(temp2 > 2) outputText("Your " + cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.", false);
@@ -4171,7 +4093,7 @@ public function equinum():void {
 				}
 			}
 			temp = temp3;				
-			player.cocks[temp].thickenCock(.5)
+			player.cocks[temp].thickenCock(.5);
 			outputText("\n\nYour " + horseDescript(temp) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right", false);
 			if(player.cor + player.lib < 50) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + horseDescript(temp) + " plowing them relentlessly, stuffing them pregnant with cum", false);
 			if(player.cor + player.lib >= 50 && player.cor + player.lib < 80) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum", false);
@@ -4182,7 +4104,7 @@ public function equinum():void {
 			if(player.cor >=30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.", false);
 			if(player.cor >=60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.", false);
 			if(player.cor >=90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.", false);
-			stats(0,0,0,0,.5,0,10,0);
+			dynStats("lib", .5, "lus", 10);
 		}			
 		//Chance of ball growth if not 3" yet
 		if(rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
@@ -4190,13 +4112,13 @@ public function equinum():void {
 				player.balls = 2;
 				player.ballSize = 1;
 				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.", false);
-				stats(0,0,0,0,2,0,5,0);
+				dynStats("lib", 2, "lus", 5);
 			}
 			else {
 				player.ballSize++;
 				if(player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 				if(player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
-				stats(0,0,0,0,1,0,3,0);
+				dynStats("lib", 1, "lus", 3);
 			}
 			changes++;
 		}
@@ -4265,13 +4187,13 @@ public function equinum():void {
 				player.statusAffects[temp].value1 += 5;
 				player.statusAffects[temp].value2 += 5;
 				player.statusAffects[temp].value3 += 48;
-				stats(0,0,0,0,5,0,0,0,false,true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 				player.createStatusAffect("heat", 10, 15, 48, 0);
-				stats(0,0,0,0,15,0,0,0,false,true);
+				dynStats("lib", 15, "resisted", false, "noBimbo", true);
 			}
 			changes++;
 		}
@@ -4331,7 +4253,7 @@ public function equinum():void {
 		if(player.gender > 0) {
 			outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.", false);
 		}
-		stats(0,0,3,0,0,0,0,0);
+		dynStats("spe", 3);
 		player.lowerBody = LOWER_BODY_TYPE_CENTAUR;
 	}
 	//Remove odd eyes
@@ -4412,12 +4334,12 @@ public function equinum():void {
 	if(changes == 0) {
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(20, true);
-		stats(0,0,0,0,0,0,3,0);
+		dynStats("lus", 3);
 	}
 	
 }
 public function succubiMilk(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	var rando:Number = Math.random()*100;
@@ -4454,8 +4376,8 @@ public function succubiMilk(tainted:Boolean):void {
 			else outputText("  You feel a strange sexual pleasure, but your " + multiCockDescript() + " remain unaffected.", false);
 		}
 	}
-	if(tainted) stats(0,0,1,0,0,0,3,1);
-	else stats(0,0,1,0,0,0,3,0);
+	if(tainted) dynStats("spe", 1, "lus", 3, "cor", 1);
+	else dynStats("spe", 1, "lus", 3);
 	//Breast growth (maybe cock reduction!)
 	if(rando <= 75) {
 		//Temp stores the level of growth...
@@ -4493,7 +4415,7 @@ public function succubiMilk(tainted:Boolean):void {
 				if(player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
 				if(player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
 			}
-			temp3 += player.cocks[temp].growCock((rand(3)+1)*-1)
+			temp3 += player.cocks[temp].growCock((rand(3)+1)*-1);
 			outputText("\n\n", false);
 			lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 2) {
@@ -4529,7 +4451,7 @@ public function succubiMilk(tainted:Boolean):void {
 				player.cocks[temp].cockLength -= .5;
 				temp3 -= .5;
 			}
-			temp3 = player.cocks[temp].growCock(-1 *(rand(3)+1))
+			temp3 = player.cocks[temp].growCock(-1 *(rand(3)+1));
 			lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 3) {
 				outputText("  ", false);
@@ -4542,14 +4464,14 @@ public function succubiMilk(tainted:Boolean):void {
 			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING){
 				if(player.vaginas.length == 1) outputText("Your " + vaginaDescript(0) + " gushes fluids down your leg as you spontaneously orgasm.", false);
 				else outputText("Your " + vaginaDescript(0) + "s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.", false);
-				if(tainted) stats(0, 0, 0, 0, 0, 0, -100, 1);
-				else stats(0, 0, 0, 0, 0, 0, -100, 0);
+				if(tainted) dynStats("lus=", 0, "cor", 1);
+				else dynStats("lus=", 0);
 			}
 			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) {
 				if(player.vaginas.length == 1) outputText("Your pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your " + vaginaDescript(0) + ".  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.", false);
 				if(player.vaginas.length > 1) outputText("Your pussies feel hot and juicy, aroused and tender.  You cannot resist plunging your hands inside your " + vaginaDescript(0) + "s.  You quiver around your fingers, squirting copious fluids over yourself and the ground.  The fluids quickly disappear into the dirt.", false);
-				if(tainted) stats(0, 0, 0, 0, 0, 0, -100, 1);
-				else stats(0, 0, 0, 0, 0, 0, -100, 0);
+				if(tainted) dynStats("lus=", 0, "cor", 1);
+				else dynStats("lus=", 0);
 			}
 			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) {
 				if(player.vaginas.length == 1) outputText("You feel a sudden trickle of fluid down your leg.  You smell it and realize it's your pussy-juice.  Your " + vaginaDescript(0) + " now drools lubricant constantly down your leg.", false);
@@ -4583,7 +4505,7 @@ public function succubiMilk(tainted:Boolean):void {
 					temp+=2;
 					player.clitLength += (rand(4)+2)/10;
 				}
-				stats(0,0,0,0,0,3,8,0);
+				dynStats("sen", 3, "lus", 8);
 			}
 			else {
 				player.createVagina();
@@ -4601,8 +4523,8 @@ public function succubiMilk(tainted:Boolean):void {
 			if(temp == 3 || temp == 4 || temp == 5) player.skinTone = "purple";
 			if(temp > 5) player.skinTone = "blue";
 			outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>", false);
-			if(tainted) stats(0,0,0,0,0,0,0,1);
-			else stats(0,0,0,0,0,0,0,0);
+			if(tainted) dynStats("cor", 1);
+			else dynStats("cor", 0);
 		}
 	}
 	//Demonic changes - higher chance with higher corruption.
@@ -4688,24 +4610,24 @@ public function caninePepper(type:Number = 0):void {
 		outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>", false);
 	}
 	if(type == 3) {
-		stats(0,0,0,0,2+rand(4),0,5+rand(5),2+rand(4));
+		dynStats("lib", 2+rand(4), "lus", 5+rand(5), "cor", 2+rand(4));
 		outputText("\n\nYou feel yourself relaxing as gentle warmth spreads through your body.  Honestly you don't think you'd mind running into a demon or monster right now, they'd make for good entertainment.", false);
 		if(player.cor <50) outputText("  You shake your head, blushing hotly.  Where did that thought come from?", false);
 	}
 	if(player.str < 50 && rand(3) == 0) {
-		stats((1*crit),0,0,0,0,0,0,0);
+		dynStats("str", (crit));
 		if(crit > 1) outputText("\n\nYour muscles ripple and grow, bulging outwards.", false);
 		else outputText("\n\nYour muscles feel more toned.", false);
 		changes++;
 	}
 	if(player.spe < 30 && rand(3) == 0 && changes < changeLimit) {
-		stats(0,0,(1*crit),0,0,0,0,0);
+		dynStats("spe", (crit));
 		if(crit > 1) outputText("\n\nYou find your muscles responding quicker, faster, and you feel an odd desire to go for a walk.", false);
 		else outputText("\n\nYou feel quicker.", false);
 		changes++;
 	}
 	if(player.inte > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
-		stats(0,0,0,(-1*crit),0,0,0,0);
+		dynStats("int", (-1*crit));
 		outputText("\n\nYou feel ", false);
 		if(crit > 1) outputText("MUCH ", false);
 		outputText("dumber.", false);
@@ -4753,7 +4675,7 @@ public function caninePepper(type:Number = 0):void {
 					player.cocks[0].cockType = CockTypesEnum.DOG;
 					player.cocks[1].knotMultiplier = 1.7;
 					player.cocks[1].cockType = CockTypesEnum.DOG;
-					stats(0,0,0,0,0,0,50,0);
+					dynStats("lus", 50);
 				}
 				//1 dick - grow 1 and convert 1
 				else if(player.cockTotal() == 1) {
@@ -4764,7 +4686,7 @@ public function caninePepper(type:Number = 0):void {
 					player.createCock(7 + rand(7),1.5 + rand(10)/10);
 					player.cocks[1].knotMultiplier = 1.7;
 					player.cocks[1].cockType = CockTypesEnum.DOG;
-					stats(0,0,0,0,2,0,50,0);
+					dynStats("lib", 2, "lus", 50);
 				}
 				//2 dicks+ - convert first 2 to doggie-dom
 				else {
@@ -4773,7 +4695,7 @@ public function caninePepper(type:Number = 0):void {
 					player.cocks[1].cockType = CockTypesEnum.DOG;
 					player.cocks[0].knotMultiplier = 1.4;
 					player.cocks[0].knotMultiplier = 1.4;
-					stats(0,0,0,0,2,0,50,0);
+					dynStats("lib", 2, "lus", 50);
 				}
 			}
 			//If player has 1 dogdicks
@@ -4784,7 +4706,7 @@ public function caninePepper(type:Number = 0):void {
 					player.createCock(7 + rand(7),1.5 + rand(10)/10);
 					player.cocks[1].cockType = CockTypesEnum.DOG;
 					player.cocks[1].knotMultiplier = 1.4;
-					stats(0,0,0,0,2,0,50,0);
+					dynStats("lib", 2, "lus", 50);
 				}
 				//if player has more
 				if(player.cockTotal() >= 1) {
@@ -4800,7 +4722,7 @@ public function caninePepper(type:Number = 0):void {
 						player.cocks[0].cockType = CockTypesEnum.DOG;
 						player.cocks[0].knotMultiplier = 1.4;
 					}
-					stats(0,0,0,0,2,0,50,0);
+					dynStats("lib", 2, "lus", 50);
 				}
 			}
 		}		
@@ -4812,7 +4734,7 @@ public function caninePepper(type:Number = 0):void {
 		if(player.cockTotal() > 0) {
 			//biggify knots
 			if(player.dogCocks() > 0) {
-				temp = 0
+				temp = 0;
 				//set temp2 to first dogdick for initialization
 				while(temp < player.cocks.length) {
 					if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
@@ -4838,7 +4760,7 @@ public function caninePepper(type:Number = 0):void {
 				if(temp3 < .06) outputText("Your " + dogDescript(temp2) + " feels unusually tight in your sheath as your knot grows.", false);
 				if(temp3 >= .06 && temp3 <= .12) outputText("Your " + dogDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.", false);
 				if(temp3 > .12) outputText("Your " + dogDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.", false);
-				stats(0,0,0,0,0,.5,5*crit,0);			
+				dynStats("sen", .5, "lus", 5*crit);
 			}
 			//Grow dogdick with big knot
 			else {
@@ -4856,7 +4778,7 @@ public function caninePepper(type:Number = 0):void {
 			outputText("\n\nA spike of pain doubles you up, nearly making you vomit.  You stay like that, nearly crying, as a palpable sense of relief suddenly washes over you.  You look down and realize you now have a small sack, complete with two relatively small balls.", false);
 			player.balls = 2;
 			player.ballSize = 1;
-			stats(0,0,0,0,2,0,-10,0);
+			dynStats("lib", 2, "lus", -10);
 		}
 		else {
 			//Makes your balls biggah!
@@ -4866,7 +4788,7 @@ public function caninePepper(type:Number = 0):void {
 			//Texts
 			if(player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 			if(player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
-			stats(0,0,0,0,1,0,3,0);
+			dynStats("lib", 1, "lus", 3);
 		}		
 	}
 	//Sexual Stuff Now
@@ -4879,7 +4801,7 @@ public function caninePepper(type:Number = 0):void {
 	if(player.cocks.length > 0) {
 		//Grow knot on smallest knotted dog cock
 		if(type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
-			temp = 0
+			temp = 0;
 			//set temp2 to first dogdick for initialization
 			while(temp < player.cocks.length) {
 				if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
@@ -4904,7 +4826,7 @@ public function caninePepper(type:Number = 0):void {
 			if(temp3 < .06) outputText("\n\nYour " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.", false);
 			if(temp3 >= .06 && temp3 <= .12) outputText("\n\nYour " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.", false);
 			if(temp3 > .12) outputText("\n\nYour " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.", false);
-			stats(0,0,0,0,0,.5,5*crit,0);			
+			dynStats("sen", .5, "lus", 5*crit);
 			changes++;
 		}
 		//Cock Xform if player has free cocks.
@@ -4925,7 +4847,7 @@ public function caninePepper(type:Number = 0):void {
 			//Hooooman
 			if(player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(temp3) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
-				stats(0,0,0,0,0,10,5*crit,0);
+				dynStats("sen", 10, "lus", 5*crit);
 			}
 			//Horse
 			if(player.cocks[temp3].cockType == CockTypesEnum.HORSE) {
@@ -4935,23 +4857,23 @@ public function caninePepper(type:Number = 0):void {
 				else player.cocks[temp3].cockLength -= .5;
 				player.cocks[temp3].cockThickness += .5;
 
-				stats(0,0,0,0,0,4,5*crit,0);
+				dynStats("sen", 4, "lus", 5*crit);
 			}
 			//Tentacular Tuesday!
 			if(player.cocks[temp3].cockType == CockTypesEnum.TENTACLE) {
 				outputText("\n\nYour " + cockDescript(temp3) + " coils in on itself, reshaping and losing its plant-like coloration as it thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>", false);
-				stats(0,0,0,0,0,4,5*crit,0);
+				dynStats("sen", 4, "lus", 5*crit);
 			}
 			//Misc
 			if(player.cocks[temp3].cockType.Index > 4) {
 				outputText("\n\nYour " + cockDescript(temp3) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>", false);
-				stats(0,0,0,0,0,4,5*crit,0);
+				dynStats("sen", 4, "lus", 5*crit);
 			}
 			temp = 0;
 			//Demon
 			if(player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
 				outputText("\n\nYour " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.", false);
-				stats(0,0,0,0,0,1,2*crit,0);
+				dynStats("sen", 1, "lus", 2*crit);
 				temp = 1;
 			}
 			//Xform it!
@@ -4988,7 +4910,7 @@ public function caninePepper(type:Number = 0):void {
 			if(player.cocks.length == 1) {
 				temp2 = player.increaseCock(rand(4) + 3, 0);
 				temp = 0;
-				stats(0, 0, 0, 0, 0, 1, 10, 0);
+				dynStats("sen", 1, "lus", 10);
 			}
 			//Multicock
 			else {
@@ -4997,7 +4919,7 @@ public function caninePepper(type:Number = 0):void {
 				//temp = current smallest
 				temp3 = player.cocks.length;
 				temp2 = 9999;
-				temp = 0
+				temp = 0;
 				while(temp3 > 0)
 				{
 					temp3--;
@@ -5010,7 +4932,7 @@ public function caninePepper(type:Number = 0):void {
 				//Grow smallest cock!
 				//temp2 changes to growth amount
 				temp2 = player.increaseCock(rand(4) + 3, temp);
-				stats(0, 0, 0, 0, 0, 1, 10, 0);
+				dynStats("sen", 1, "lus", 10);
 				if(player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
 			}
 			if(temp2 > 2) outputText("\n\nYour " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.", false);
@@ -5045,12 +4967,12 @@ public function caninePepper(type:Number = 0):void {
 					if(player.breastRows[0].breastRating -1 == 0) outputText("\n\nA second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.", false);
 					else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(temp) + "s.", false);
 					outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.", false);
-					stats(0,0,0,0,0,6,5,0);
+					dynStats("sen", 6, "lus", 5);
 					changes++;
 				}
 				//Many breast Rows - requires larger primary tits...
 				if(player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
-					stats(0,0,0,0,0,6,5,0);
+					dynStats("sen", 6, "lus", 5);
 					//New row's size = the size of the row above -1
 					player.breastRows[temp].breastRating = player.breastRows[temp-1].breastRating - 1;
 					//If second row are super small but primary row is huge it could go negative.
@@ -5066,11 +4988,11 @@ public function caninePepper(type:Number = 0):void {
 				if(crit > 1) {
 					if(crit > 2) {
 						outputText("  You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.", false);
-						stats(0,0,0,0,0,6,15,0)
+						dynStats("sen", 6, "lus", 15, "cor", 0)
 					}
 					else {
 						outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.", false);
-						stats(0,0,0,0,0,3,10,0);
+						dynStats("sen", 3, "lus", 10);
 					}
 				}
 				
@@ -5114,7 +5036,7 @@ public function caninePepper(type:Number = 0):void {
 		player.createBreastRow();
 		player.breastRows[0].breastRating = 2;
 		player.breastRows[0].breasts = 2;
-		stats(0,0,0,0,0,4,6,0);
+		dynStats("sen", 4, "lus", 6);
 		changes++;
 	}
 	//Go into heat
@@ -5127,13 +5049,13 @@ public function caninePepper(type:Number = 0):void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
 			player.createStatusAffect("heat", 10, 15, 72, 0);
-			stats(0,0,0,0,15,0,0,0,false,true);
+			dynStats("lib", 15, "resisted", false, "noBimbo", true);
 		}
 		changes++;
 	}
@@ -5144,17 +5066,17 @@ public function caninePepper(type:Number = 0):void {
 		//cawk fantasies
 		if(player.gender <= 1 || (player.gender == 3 && rand(2) == 0)) {
 			outputText("bounding through the woods, hunting with your master.  Feeling the wind in your fur and the thrill of the hunt coursing through your veins intoxicates you.  You have your nose to the ground, tracking your quarry as you run, until a heavenly scent stops you in your tracks.", false);
-			stats(0,0,0,0,0,0,5 + player.lib/20,0);
+			dynStats("lus", 5 + player.lib/20);
 			//break1
 			if(player.cor < 33 || !player.hasCock()) outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
 			else {
 				outputText("  Heart pounding, your shaft pops free of its sheath on instinct, as you take off after the new scent.  Caught firmly in the grip of a female's heat, you ignore your master's cry as you disappear into the wild, " + dogDescript(0) + " growing harder as you near your quarry.  You burst through a bush, spotting a white-furred female.  She drops, exposing her dripping fem-sex to you, the musky scent of her sex channeling straight through your nose and sliding into your " + dogDescript(0) + ".", false);
-				stats(0,0,0,0,0,0,5 + player.lib/20,0);
+				dynStats("lus", 5 + player.lib/20);
 				//Break 2
 				if(player.cor < 66) outputText("\nYou blink a few times, the fantasy fading as you master yourself.  That daydream was so strange, yet so hot.", false);
 				else {
 					outputText("  Unable to wait any longer, you mount her, pressing your bulging knot against her vulva as she yips in pleasure. The heat of her sex is unreal, the tight passage gripping you like a vice as you jackhammer against her, biting her neck gently in spite of the violent pounding.", false);
-					stats(0,0,0,0,0,0,5 + player.lib/20,0);
+					dynStats("lus", 5 + player.lib/20);
 					//break3
 					if(player.cor < 80) {
 						if(player.vaginas.length > 0) outputText("\nYou reluctantly pry your hand from your aching " + vaginaDescript(0) + " as you drag yourself out of your fantasy.", false);
@@ -5162,7 +5084,7 @@ public function caninePepper(type:Number = 0):void {
 					}
 					else {
 						outputText("  At last your knot pops into her juicy snatch, splattering her groin with a smattering of her arousal.  The scents of your mating reach a peak as the velvet vice around your " + dogDescript(0) + " quivers in the most indescribably pleasant way.  You clamp down on her hide as your whole body tenses, unleashing a torrent of cum into her sex.  Each blast is accompanied by a squeeze of her hot passage, milking you of the last of your spooge.  Your " + player.legs() + " give out as your fantasy nearly brings you to orgasm, the sudden impact with the ground jarring you from your daydream.", false);
-						stats(0,0,0,0,0,0,5 + player.lib/20,0);
+						dynStats("lus", 5 + player.lib/20);
 					}
 				}
 			}
@@ -5170,28 +5092,28 @@ public function caninePepper(type:Number = 0):void {
 		//Pure female fantasies
 		else if(player.hasVagina()) {
 			outputText("wagging your dripping " + vaginaDescript(0) + " before a pack of horny wolves, watching their shiny red doggie-pricks practically jump out of their sheaths at your fertile scent.", false);
-			stats(0,0,0,0,0,0,5 + player.lib/20,0);
+			dynStats("lus", 5 + player.lib/20);
 			//BREAK 1
 			if(player.cor < 33) {
 				outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
 			}
 			else {
 				outputText("  In moments they begin their advance, plunging their pointed beast-dicks into you, one after another.  You yip and howl with pleasure as each one takes his turn knotting you.", false);
-				stats(0,0,0,0,0,0,5 + player.lib/20,0);
+				dynStats("lus", 5 + player.lib/20);
 				//BREAK 2
 				if(player.cor <= 66) {
 					outputText("\nYou blink a few times, the fantasy fading as you master yourself.  That daydream was so strange, yet so hot.", false);
 				}
 				else {
 					outputText("  The feeling of all that hot wolf-spooge spilling from your overfilled snatch and running down your thighs is heavenly, nearly making you orgasm on the spot.  You see the alpha of the pack is hard again, and his impressive member is throbbing with the need to breed you.", false);
-					stats(0,0,0,0,0,0,5 + player.lib/20,0);
+					dynStats("lus", 5 + player.lib/20);
 					//break3
 					if(player.cor < 80) {
 						outputText("\nYou reluctantly pry your hand from your aching " + vaginaDescript(0) + " as you drag yourself out of your fantasy.", false);
 					}
 					else {
 						outputText("  You growl with discomfort as he pushes into your abused wetness, stretching you tightly, every beat of his heart vibrating through your nethers.  With exquisite force, he buries his knot in you and begins filling you with his potent seed, impregnating you for sure.  Your knees give out as your fantasy nearly brings you to orgasm, the sudden impact with the ground jarring you from your daydream.", false);
-						stats(0,0,0,0,0,0,5 + player.lib/20,0);
+						dynStats("lus", 5 + player.lib/20);
 					}
 				}
 			}
@@ -5199,28 +5121,28 @@ public function caninePepper(type:Number = 0):void {
 		else 
 		{
 			outputText("wagging your [asshole] before a pack of horny wolves, watching their shiny red doggie-pricks practically jump out of their sheaths at you after going so long without a female in the pack.");
-			stats(0,0,0,0,0,0,5 + player.lib/20,0);
+			dynStats("lus", 5 + player.lib/20);
 			//BREAK 1
 			if(player.cor < 33) {
 				outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
 			}
 			else {
 				outputText("  In moments they begin their advance, plunging their pointed beast-dicks into you, one after another.  You yip and howl with pleasure as each one takes his turn knotting you.", false);
-				stats(0,0,0,0,0,0,5 + player.lib/20,0);
+				dynStats("lus", 5 + player.lib/20);
 				//BREAK 2
 				if(player.cor <= 66) {
 					outputText("\nYou blink a few times, the fantasy fading as you master yourself.  That daydream was so strange, yet so hot.", false);
 				}
 				else {
 					outputText("  The feeling of all that hot wolf-spooge spilling from your overfilled ass and running down your thighs is heavenly, nearly making you orgasm on the spot.  You see the alpha of the pack is hard again, and his impressive member is throbbing with the need to spend his lust on you.", false);
-					stats(0,0,0,0,0,0,5 + player.lib/20,0);
+					dynStats("lus", 5 + player.lib/20);
 					//break3
 					if(player.cor < 80) {
 						outputText("\nYou reluctantly pry your hand from your aching asshole as you drag yourself out of your fantasy.", false);
 					}
 					else {
 						outputText("  You growl with discomfort as he pushes into your abused, wet hole, stretching you tightly, every beat of his heart vibrating through your hindquarters.  With exquisite force, he buries his knot in you and begins filling you with his potent seed, impregnating you for sure.  Your knees give out as your fantasy nearly brings you to orgasm, the sudden impact with the ground jarring you from your daydream.", false);
-						stats(0,0,0,0,0,0,5 + player.lib/20,0);
+						dynStats("lus", 5 + player.lib/20);
 					}
 				}
 			}
@@ -5310,14 +5232,14 @@ public function caninePepper(type:Number = 0):void {
 	if(player.skinType == SKIN_TYPE_FUR && changes < changeLimit && rand(3) == 0) 
 	{
 		outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.", false);
-		stats(0,4,0,0,0,-3,0,0);
+		dynStats("tou", 4, "sen", -3);
 		changes++;
 	}
 	//If no changes yay
 	if(changes == 0) {
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(20, true);
-		stats(0,0,0,0,0,0,3,0);
+		dynStats("lus", 3);
 	}
 	
 }
@@ -5332,7 +5254,7 @@ public function impFood():void {
 		}
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(30 + player.tou/3, true);
-		stats(0,0,0,0,0,0,3,1);
+		dynStats("lus", 3, "cor", 1);
 		//Shrinkage!
 		if(rand(2) == 0 && player.tallness > 42) {
 			outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n", false);
@@ -5351,7 +5273,7 @@ public function impFood():void {
 	else {
 		outputText("The food tastes... corrupt, for lack of a better word.\n", false);
 		HPChange(20 + player.tou/3, true);
-		stats(0,0,0,0,0,0,3,1);
+		dynStats("lus", 3, "cor", 1);
 	}
 	//Red skin!
 	if(rand(30) == 0 && player.skinTone != "red") {
@@ -5369,7 +5291,7 @@ public function impFood():void {
 	}	
 }
 public function pureHoney(pure:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -5390,11 +5312,11 @@ public function pureHoney(pure:Boolean):void {
 		else if(player.cor > 20) outputText("A prickling pain spreads throughout your skull.  ", false);
 		else outputText("You feel a mildly unpleasant tingling inside your skull.  ", false);
 		if(player.cor > 0) outputText("It quickly passes, leaving you more clearheaded", false);
-		stats(0,0,0,0,0,0,0,-(1+(player.cor/20)));
+		dynStats("cor", -(1+(player.cor/20)));
 		//Libido Reduction
 		if(player.cor > 0 && changes < changeLimit && rand(1.5) ==0 && player.lib > 40) {
 			outputText(" and settling your overcharged sex-drive a bit.", false);
-			stats(0,0,0,0,-3,0,-20,0);
+			dynStats("lib", -3, "lus", -20);
 			changes++;
 		}
 		else if(player.cor > 0) outputText(".", false);
@@ -5411,7 +5333,7 @@ public function pureHoney(pure:Boolean):void {
 	if(changes < changeLimit && rand(2) == 0 && player.inte < 80) {
 		temp = 80-player.inte;
 		if(temp < .33) temp = .33;
-		stats(0,0,0,(80-player.inte)/10,0,0,0,0);
+		dynStats("int", (80-player.inte)/10);
 		outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.", false);
 		changes++;
 	}
@@ -5443,7 +5365,7 @@ public function pureHoney(pure:Boolean):void {
 		if(player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
 		else outputText(player.skinTone + " " + player.skinDesc, false);
 		outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-		stats(0,0,0,0,0,-5,0,0);
+		dynStats("sen", -5);
 		player.removeBreastRow(player.breastRows.length-1,1);
 	}
 	//Antennae
@@ -5534,7 +5456,7 @@ public function pureHoney(pure:Boolean):void {
 }
 
 public function succubisDelight(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
 	//Determine crit multiplier (x2 or x3)
@@ -5560,8 +5482,8 @@ public function succubisDelight(tainted:Boolean):void {
 		if(player.cor < 30) temp++;
 		//Corrupts the very corrupt slower
 		if(player.cor >= 90) temp = .5;
-		if(tainted) stats(0,0,0,0,0,0,0,temp);
-		else stats(0,0,0,0,0,0,0,0);
+		if(tainted) dynStats("cor", temp);
+		else dynStats("cor", 0);
 		changes++;
 	}
 	//Makes your balls biggah! (Or cummultiplier higher if futa!)
@@ -5573,7 +5495,7 @@ public function succubisDelight(tainted:Boolean):void {
 		//Texts
 		if(player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 		if(player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
-		stats(0,0,0,0,1,0,3,0);
+		dynStats("lib", 1, "lus", 3);
 	}
 	//Boost cum multiplier
 	if(changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
@@ -5591,7 +5513,7 @@ public function succubisDelight(tainted:Boolean):void {
 				if(player.balls == 0) outputText("\n\nYou feel a churning inside your body as something inside you changes.", false);
 				if(player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ".  It quickly settles, leaving them feeling somewhat more dense.", false);
 				if(crit > 1) outputText("  A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.", false);
-				stats(0,0,0,0,1,0,0,0);
+				dynStats("lib", 1);
 			}
 			changes++;
 		}
@@ -5607,7 +5529,7 @@ public function succubisDelight(tainted:Boolean):void {
 	}
 }
 public function succubisDream():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
 	//Determine crit multiplier (x2 or x3)
@@ -5633,7 +5555,7 @@ public function succubisDream():void {
 		if(player.cor < 30) temp++;
 		//Corrupts the very corrupt slower
 		if(player.cor >= 90) temp = .5;
-		stats(0,0,0,0,0,0,0,temp+2);
+		dynStats("cor", temp+2);
 		changes++;
 	}
 	//NEW BALLZ
@@ -5658,7 +5580,7 @@ public function succubisDream():void {
 		//Texts
 		if(player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 		if(player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
-		stats(0,0,0,0,1,0,3,0);
+		dynStats("lib", 1, "lus", 3);
 	}
 	//Boost cum multiplier
 	if(changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
@@ -5676,7 +5598,7 @@ public function succubisDream():void {
 				if(player.balls == 0) outputText("\n\nYou feel a churning inside your body as something inside you changes.", false);
 				if(player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ".  It quickly settles, leaving them feeling somewhat more dense.", false);
 				if(crit > 1) outputText("  A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.", false);
-				stats(0,0,0,0,1,0,0,0);
+				dynStats("lib", 1);
 			}
 			changes++;
 		}
@@ -5737,7 +5659,7 @@ EGG TYPES-
 6 - 
 */
 public function ovipositionElixer():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	//Females!
 	if(player.vaginas.length > 0) { 
@@ -5913,7 +5835,7 @@ public function blueEgg(large:Boolean):void {
 					if(player.cocks.length ==1) outputText("\n\nYour " + multiCockDescriptLight() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 					if(player.cocks.length > 1) outputText("\n\nYour " + multiCockDescriptLight() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 				}
-				stats(0,0,0,0,1,1,20,0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 			}
 			//SINGLEZ
 			if(player.cocks.length == 1) {
@@ -5934,7 +5856,7 @@ public function blueEgg(large:Boolean):void {
 					if(player.cocks.length ==1) outputText("  Your " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 					if(player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 				}
-				stats(0,0,0,0,1,1,20,0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 			}
 			
 		}
@@ -5994,7 +5916,7 @@ public function blueEgg(large:Boolean):void {
 					if(player.cocks.length ==1) outputText("\n\nYour " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 					if(player.cocks.length > 1) outputText("\n\nYour " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 				}
-				stats(0,0,0,0,1,1,20,0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 			}
 			//SINGLEZ
 			if(player.cocks.length == 1) {
@@ -6015,7 +5937,7 @@ public function blueEgg(large:Boolean):void {
 					if(player.cocks.length ==1) outputText("  Your " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
 					if(player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 				}
-				stats(0,0,0,0,1,1,20,0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 			}
 			
 		}
@@ -6035,7 +5957,7 @@ public function whiteEgg(large:Boolean):void {
 		if(player.nippleLength < 3 && player.biggestTitSize() > 0) {
 			outputText("\n\nYour nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've gotten almost a quarter inch longer.", false); 
 			player.nippleLength += .2;
-			stats(0,0,0,0,0,0,15,0);
+			dynStats("lus", 15);
 		}
 	}
 	//LARGE
@@ -6044,7 +5966,7 @@ public function whiteEgg(large:Boolean):void {
 		if(player.nippleLength < 3 && player.biggestTitSize() > 0) {
 			outputText("\n\nYour nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.", false); 
 			player.nippleLength += (rand(2) + 3)/10;
-			stats(0,0,0,0,0,0,15,0);
+			dynStats("lus", 15);
 		}
 		//NIPPLECUNTZZZ
 		temp = player.breastRows.length;
@@ -6087,13 +6009,13 @@ public function blackRubberEgg(large:Boolean):void {
 					outputText("\n\nYour scalp tingles and your " + hairDescript() + " thickens, the strands merging into ", false);
 					outputText(" thick rubbery hair.", false);
 					player.hairColor = "rubbery " + player.hairColor;
-					stats(0,0,0,0,0,0,0,2);
+					dynStats("cor", 2);
 				}
 				if(player.skinDesc == "skin" && player.skinAdj == "latex") {
 					outputText("\n\nYour scalp tingles and your " + hairDescript() + " thickens, the strands merging into ", false);
 					outputText(" shiny latex hair.", false);
 					player.hairColor = "latex-textured " + player.hairColor;
-					stats(0,0,0,0,0,0,0,2);
+					dynStats("cor", 2);
 				}		
 			}
 		}
@@ -6116,7 +6038,7 @@ public function blackRubberEgg(large:Boolean):void {
 			flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 			if(player.cor < 66) outputText("You feel like some kind of freak.", false);
 			else outputText("You feel like some kind of sexy " + player.skinDesc + " love-doll.", false);
-			stats(0,0,-3,0,0,8,10,2);			
+			dynStats("spe", -3, "sen", 8, "lus", 10, "cor", 2);
 		}
 		//Change skin to normal if not flawless!
 		if((player.skinAdj != "smooth" && player.skinAdj != "latex" && player.skinAdj != "rubber") || player.skinDesc != "skin") {
@@ -6139,13 +6061,13 @@ public function blackRubberEgg(large:Boolean):void {
 					outputText("\n\nYour scalp tingles and your " + hairDescript() + " thickens, the strands merging into ", false);
 					outputText(" thick rubbery hair.", false);
 					player.hairColor = "rubbery " + player.hairColor;
-					stats(0,0,0,0,0,0,0,2);
+					dynStats("cor", 2);
 				}
 				if(player.skinAdj == "latex" && player.skinDesc == "skin") {
 					outputText("\n\nYour scalp tingles and your " + hairDescript() + " thickens, the strands merging into ", false);
 					outputText(" shiny latex hair.", false);
 					player.hairColor = "latex-textured " + player.hairColor;
-					stats(0,0,0,0,0,0,0,2);
+					dynStats("cor", 2);
 				}				
 			}
 		}
@@ -6165,7 +6087,7 @@ public function hairDye(color:String):void {
 	outputText("You now have " + hairDescript() + ".", false);
 	if(player.lust > 50) {
 		outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.", false);
-		stats(0,0,0,0,0,0,-15,0);
+		dynStats("lus", -15);
 	}
 }
 //Store - let you select an item slot, then a storage slot.
@@ -6201,7 +6123,7 @@ public function chooseRetrievalSlot():void {
 	var temp6:Number = 0;
 	var temp7:Number = 0;
 	var temp8:Number = 0;
-	var slotDescs:Array = new Array("","","","","","","","","","","","","","","","");
+	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
 	temp = itemStorage.length;
 	while(temp > 0) {
 		temp--;
@@ -6513,7 +6435,7 @@ public function chooseRacksSlot(armor:Boolean = false):void {
 	var temp7:Number = 0;
 	var temp8:Number = 0;
 	var temp9:Number = 0;
-	var slotDescs:Array = new Array("","","","","","","","","","","","","","","","");
+	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
 	//Set goals
 	var goal:Number = 0;
 	if(armor) goal = 9;
@@ -6612,12 +6534,12 @@ public function itemGoNext():void {
 	}
 	//Tailor shop
 	if(menuLoc == 10) {
-		doNext(1072);
+		doNext(telAdre.tailorShoppe);
 		return;
 	}
 	//Armor shop
 	if(menuLoc == 9) {
-		doNext(armorShop);
+		doNext(telAdre.armorShop);
 		return;
 	}
 	if(menuLoc == 11) {
@@ -6626,12 +6548,12 @@ public function itemGoNext():void {
 	}
 	//Lumi's potion shop
 	if(menuLoc == 12) {
-		doNext(lumiShop);
+		doNext(lumi.lumiShop);
 		return;
 	}
 	//Lumi's enhancement shop
 	if(menuLoc == 13) {
-		doNext(lumiEnhance);
+		doNext(lumi.lumiEnhance);
 		return;
 	}
 	//Late night looting
@@ -6641,7 +6563,7 @@ public function itemGoNext():void {
 	}
 	//Weapon shop
 	if(menuLoc == 15) {
-		doNext(weaponShop);
+		doNext(telAdre.weaponShop);
 		return;
 	}
 	if(menuLoc == 16) {
@@ -6657,7 +6579,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 19) {
-		doNext(bakeryuuuuuu);
+		doNext(telAdre.bakeryScene.bakeryuuuuuu);
 		return;
 	}
 	if(menuLoc == 20) {
@@ -6677,15 +6599,15 @@ public function itemGoNext():void {
 		return;		
 	}
 	if(menuLoc == 24) {
-		doNext(barTelAdre);
+		doNext(telAdre.barTelAdre);
 		return;
 	}
 	if(menuLoc == 25) {
-		doNext(owcaTavern);
+		doNext(owca.owcaTavern);
 		return;
 	}
 	if(menuLoc == 26) {
-		doNext(benoitsBuyMenu);
+		doNext(bazaar.benoit.benoitsBuyMenu);
 		return;
 	}
 	if(menuLoc == 27) {
@@ -6697,7 +6619,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 29) {
-		doNext(ingredientsMenu);
+		doNext(telAdre.bakeryScene.ingredientsMenu);
 		return;
 	}
 	if(menuLoc == 2) doNext(13);
@@ -6706,7 +6628,7 @@ public function itemGoNext():void {
 
 public function purePearl():void {
 	outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.", true);
-	stats(0,0,0,0,-5,0,-25,-10);
+	dynStats("lib", -5, "lus", -25, "cor", -10);
 	if(player.hasPerk("Purity Blessing") < 0) player.createPerk("Purity Blessing",0,0,0,0,"Reduces the rate at which your corruption, libido, and lust increase.");
 }
 
@@ -6748,8 +6670,8 @@ public function reducto():void {
 
 
 public function lactaid():void {
-	slimeFeed();
-	var i:Number = 0
+	player.slimeFeed();
+	var i:Number = 0;
 	outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.", true);
 	//Bump up size!
 	if(player.averageBreastSize() < 8) {
@@ -6773,7 +6695,7 @@ public function lactaid():void {
 			player.breastRows[i].lactationMultiplier+=1 + rand(10)/10;
 		}
 	}
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("lus", 10);
 	if(rand(3) == 0) {
 		outputText(player.modFem(95,1), false);
 	}
@@ -6790,16 +6712,11 @@ EGG TYPES-
 4 - white - breast growth.  If lactating increases lactation.
 5 - rubbery black*/
 public function eggShifter(eggCode:Number):void {
-	if(player.hasStatusAffect("eggs") >= 0) {
-		player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
-	}
-	else {
-		return;
-	}
+	if (player.hasStatusAffect("eggs") >= 0) player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
 }
 
 public function useMarbleMilk():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Bottle of Marble's milk - item
 	//Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
 	outputText("", true);
@@ -6819,12 +6736,12 @@ public function useMarbleMilk():void {
 		}
 	}
 	//Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
-	marbleStatusChange(0,5);
+	marbleScene.marbleStatusChange(0,5);
 	//Does not apply the 'Marble's Milk' effect
 	//Purge withdrawl
 	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 		player.removeStatusAffect("MarbleWithdrawl");
-		stats(0,5,0,5,0,0,0,0);
+		dynStats("tou", 5, "int", 5);
 		outputText("You no longer feel the symptoms of withdrawal.\n\n", false);
 	}
 	//Heals the player 70-100 health
@@ -6856,7 +6773,7 @@ If the player's nipples are larger than 1 inch in length, this item is guarantee
 Very small chance to increase fertility (normally this increase would only happen when the player forces a creature to drink their milk).
 */
 public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -6886,7 +6803,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 		else {
 			if(rand(2) == 0) outputText("\n\nThere is a slight pain as you feel your muscles shift somewhat.  Their appearance does not change much, but you feel much stronger.", false);
 			else outputText("\n\nYou feel your muscles tighten and clench as they become slightly more pronounced.", false);
-			stats(temp/10,0,0,0,0,0,0,0);
+			dynStats("str", temp/10);
 			changes++;
 		}
 	}
@@ -6897,7 +6814,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 		else {
 			if(rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.", false);
 			else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.", false);
-			stats(0,temp/10,0,0,0,0,0,0);
+			dynStats("tou", temp/10);
 			changes++;
 			
 		}
@@ -6908,14 +6825,14 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			outputText("\n\nThe body mass you've gained is making your movements more sluggish.", false);
 			changes++;
 			temp = (player.spe - 30)/10;
-			stats(0,0,-temp,0,0,0,0,0);
+			dynStats("spe", -temp);
 		}
 	}
 	//Increase Corr, up to a max of 50.
 	if(tainted) {
 		temp = 50 - player.cor;
 		if(temp < 0) temp = 0;
-		stats(0,0,0,0,0,0,0,temp/10);
+		dynStats("cor", temp/10);
 	}
 	//Sex bits - Duderiffic
 	if(player.totalCocks() > 0 && rand(2) == 0) {
@@ -6964,7 +6881,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			
 			changes++;
 			genderCheck();
-			stats(0,0,0,0,0,0,10,0);
+			dynStats("lus", 10);
 		}
 	}
 	//Sex bits - girly
@@ -6976,7 +6893,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 		else outputText("\n\nYou feel a little weight added to your chest as your " + breastDescript(0) + " seem to inflate and settle in a larger size.", false);
 		growTits(1 + rand(3), 1, false, 3);
 		changes++;
-		stats(0,0,0,0,0,.5,0,0);
+		dynStats("sen", .5);
 		boobsGrew = true;
 	}
 	//-Remove feathery hair (copy for equinum, canine peppers, Labova)
@@ -6993,7 +6910,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 		outputText("\n\nYou gasp as your " + breastDescript(0) + " feel like they are filling up with something.  Within moments, a drop of milk leaks from your " + breastDescript(0) + "; <b> you are now lactating</b>.", false);
 		player.breastRows[0].lactationMultiplier = 1.25;
 		changes++;
-		stats(0,0,0,0,0,.5,0,0);
+		dynStats("sen", .5);
 	}
 	//Quad nipples and other 'special enhanced things.
 	if(enhanced) {
@@ -7048,7 +6965,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			if((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
 				outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.", false);
 				player.nippleLength += .25;
-				stats(0,0,0,0,0,.5,0,0);
+				dynStats("sen", .5);
 			}
 			changes++;
 		}
@@ -7062,7 +6979,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			if((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
 				outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.", false);
 				player.nippleLength += .25;
-				stats(0,0,0,0,0,.5,0,0);
+				dynStats("sen", .5);
 			}
 			changes++;
 		}
@@ -7074,7 +6991,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 				if((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
 					outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.", false);
 					player.nippleLength += .25;
-					stats(0,0,0,0,0,.5,0,0);
+					dynStats("sen", .5);
 				}
 				changes++;
 			}
@@ -7082,7 +6999,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 				if(rand(2) == 0) outputText("\n\nYour breasts suddenly feel less full, it seems you aren't lactating at quite the level you were.", false);
 				else outputText("\n\nThe insides of your breasts suddenly feel bloated.  There is a spray of milk from them, and they settle closer to a more natural level of lactation.", false);
 				changes++;
-				stats(0,0,0,0,0,.5,0,0);
+				dynStats("sen", .5);
 				player.boostLactation(-1);
 			}
 		}
@@ -7108,10 +7025,10 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			//Cunt Stretched used to determine how long since last enlargement
 			if(player.hasStatusAffect("CuntStretched") < 0) player.createStatusAffect("CuntStretched",0,0,0,0);
 			//Reset the timer on it to 0 when restretched.
-			else player.changeStatusValue("CuntStretched",1,0);;
+			else player.changeStatusValue("CuntStretched",1,0);
 			player.vaginas[0].vaginalLooseness++;
 			changes++;
-			stats(0,0,0,0,0,0,10,0);
+			dynStats("lus", 10);
 		}
 	}
 	//General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
@@ -7161,7 +7078,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			if(player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 			outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			stats(0,0,0,0,0,0,0,0);
+			dynStats("cor", 0);
 			changes++;
 		}
 	}
@@ -7267,19 +7184,19 @@ public function blackSpellbook():void {
 	outputText("You open the small black book, and discover it to be an instructional book on the use of black magic.  Most of it is filled with generic information about black magic - how it is drawn from emotions (typically lust), and how it has the power to affect bodies and emotions.  It also warns against using it on oneself, as it is difficult to draw on your emotions while meddling with your own body.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.", true);
 	if(player.inte < 30) {
 		outputText("\n\nYou feel greatly enlightened by your time spent reading.", false);
-		stats(0,0,0,4,0,0,0,0);
+		dynStats("int", 4);
 	}
 	else if(player.inte < 60) {
 		outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.", false);
-		stats(0,0,0,2,0,0,0,0);
+		dynStats("int", 2);
 	}
 	else if(player.inte < 80) {
 		outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.", false);
-		stats(0,0,0,1,0,0,0,0);
+		dynStats("int", 1);
 	}
 	else {
 		outputText("\n\nThe contents of the book did little for your already considerable intellect.", false);
-		stats(0,0,0,.6,0,0,0,0);
+		dynStats("int", .6);
 	}
 	//Smart enough for arouse and doesnt have it
 	if(player.inte >= 25 && player.hasStatusAffect("Knows Arouse") < 0) {
@@ -7297,7 +7214,6 @@ public function blackSpellbook():void {
 	if(player.inte >= 40 && player.hasStatusAffect("Knows Might") < 0) {
 		outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
 		player.createStatusAffect("Knows Might",0,0,0,0);
-		return;
 	}
 }
 
@@ -7305,19 +7221,19 @@ public function whiteSpellbook():void {
 	outputText("You open the white tome, and discover it to be an instructional book on the use of white magic.  Most of it is filled with generic information about white magic - how it is drawn for mental focus, is difficult to use when tired or aroused, and can be used to create and control energy.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.", true);
 	if(player.inte < 30) {
 		outputText("\n\nYou feel greatly enlightened by your time spent reading.", false);
-		stats(0,0,0,4,0,0,0,0);
+		dynStats("int", 4);
 	}
 	else if(player.inte < 60) {
 		outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.", false);
-		stats(0,0,0,2,0,0,0,0);
+		dynStats("int", 2);
 	}
 	else if(player.inte < 80) {
 		outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.", false);
-		stats(0,0,0,1,0,0,0,0);
+		dynStats("int", 1);
 	}
 	else {
 		outputText("\n\nThe contents of the book did little for your already considerable intellect.", false);
-		stats(0,0,0,.6,0,0,0,0);
+		dynStats("int", .6);
 	}
 	//Smart enough for arouse and doesnt have it
 	if(player.inte >= 25 && player.hasStatusAffect("Knows Charge") < 0) {
@@ -7335,17 +7251,16 @@ public function whiteSpellbook():void {
 	if(player.inte >= 40 && player.hasStatusAffect("Knows Whitefire") < 0) {
 		outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
 		player.createStatusAffect("Knows Whitefire",0,0,0,0);
-		return;
 	}
 }
 
 public function lustDraft(fuck:Boolean = false):void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You drink the ", true);
 	if(fuck) outputText("red", false);
 	else outputText("pink", false);
 	outputText(" potion, and its unnatural warmth immediately flows to your groin.", false);	
-	stats(0,0,0,0,0,0,(30 + rand(player.lib/10)),0,false);
+	dynStats("lus", (30 + rand(player.lib/10)), "resisted", false);
 	
 	//Heat/Rut for those that can have them if "fuck draft"
 	if(fuck) { 
@@ -7360,13 +7275,13 @@ public function lustDraft(fuck:Boolean = false):void {
 					player.statusAffects[temp].value1 += 10;
 					player.statusAffects[temp].value2 += 10;
 					player.statusAffects[temp].value3 += 96;
-					stats(0,0,0,0,10,0,0,0,false,true);
+					dynStats("lib", 10, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
 					player.createStatusAffect("heat", 20, 20, 96, 0);
-					stats(0,0,0,0,20,0,0,0,false,true);
+					dynStats("lib", 20, "resisted", false, "noBimbo", true);
 				}
 			}
 		}
@@ -7382,11 +7297,11 @@ public function lustDraft(fuck:Boolean = false):void {
 				player.addStatusValue("rut",2,5);
 				player.addStatusValue("rut",3,48);
 				outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-				stats(0,0,0,0,5,0,0,0,false,true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			else {
 				player.createStatusAffect("rut",150,5,100,0);
-				stats(0,0,0,0,5,0,0,0,false,true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
 			}
 		}
@@ -7406,13 +7321,13 @@ public function lustDraft(fuck:Boolean = false):void {
 		if(player.gender == 0) outputText("body begins to quiver with orgasmic bliss.  ", false);
 		outputText("Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.", false);
 		//increase player libido, and maybe sensitivity too?
-		stats(0,0,0,0,2,1,-100,0);
+		dynStats("lib", 2, "sen", 1, "lus=", 0);
 	}
 	if(player.lust > 100) player.lust = 100;
 	outputText("\n\n", false);
 }
 public function goblinAle():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
 	var counter:Number = 0;
@@ -7422,20 +7337,20 @@ public function goblinAle():void {
 	if(rand(5) == 0) changeLimit++;
 	if(player.hasPerk("History: Alchemist") >= 0) changeLimit++;
 	outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.", true);
-	stats(0,0,0,0,0,0,15,0);
+	dynStats("lus", 15);
 	//Stronger
 	if(player.str > 50) {
-		stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 70) stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 90) stats(-2,0,0,0,0,0,0,0);
+		dynStats("str", -1);
+		if(player.str > 70) dynStats("str", -1);
+		if(player.str > 90) dynStats("str", -2);
 		outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.", false);
 	}
 	///Less tough
 	if(player.tou > 50) {
 		outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.", false);
-		stats(0,-1,0,0,0,0,0,0);
-		if(player.tou > 70) stats(0,-1,0,0,0,0,0,0);
-		if(player.tou > 90) stats(0,-2,0,0,0,0,0,0);
+		dynStats("tou", -1);
+		if(player.tou > 70) dynStats("tou", -1);
+		if(player.tou > 90) dynStats("tou", -2);
 	}
 	//antianemone corollary:
 	if(changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
@@ -7452,7 +7367,7 @@ public function goblinAle():void {
 	}
 	//Speed boost
 	if(rand(3) == 0 && player.spe < 50 && changes < changeLimit) {
-		stats(0,0,1 + rand(2),0,0,0,0,0);
+		dynStats("spe", 1 + rand(2));
 		outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.", false);
 		changes++;
 	}
@@ -7499,7 +7414,7 @@ public function goblinAle():void {
 				player.cocks[0].cockLength -= .5;
 				temp3 -= .5;
 			}
-			temp3 += player.cocks[0].growCock((rand(3)+1)*-1)
+			temp3 += player.cocks[0].growCock((rand(3)+1)*-1);
 			lengthChange(temp3, 1);
 		}
 	}	
@@ -7541,7 +7456,7 @@ public function goblinAle():void {
 		if(player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
 		else outputText(player.skinTone + " " + player.skinDesc, false);
 		outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-		stats(0,0,0,0,0,-5,0,0);
+		dynStats("sen", -5);
 		player.removeBreastRow(player.breastRows.length-1,1);
 	}
 	//Skin/fur
@@ -7613,17 +7528,17 @@ public function gooGasmic():void {
 	//Stat changes
 	//libido up to 80
 	if(player.lib < 80) {
-		stats(0,0,0,0,(.5 + (90-player.lib)/10),0,player.lib/2,0);
+		dynStats("lib", (.5 + (90-player.lib)/10), "lus", player.lib/2);
 		outputText("\n\nBlushing and feeling horny, you make sure to rub it over your chest and erect nipples, letting the strange slimy fluid soak into you.", false);
 	}
 	//sensitivity moves towards 50
 	if(player.sens < 50) {
 		outputText("\n\nThe slippery slime soaks into your " + player.skinDesc + ", making it tingle with warmth, sensitive to every touch.", false);
-		stats(0,0,0,0,0,1,0,0);
+		dynStats("sen", 1);
 	}
 	else if(player.sens > 50) {
 		outputText("\n\nThe slippery slime numbs your " + player.skinDesc + " slightly, leaving behind only gentle warmth.", false);
-		stats(0,0,0,0,0,-1,0,0);
+		dynStats("sen", -1);
 	}
 	/*Calculate goopiness
 	var goopiness:Number = 0;
@@ -7668,7 +7583,7 @@ public function gooGasmic():void {
 			else player.hairColor = "emerald";
 			outputText(player.hairColor + ".");
 		}
-		stats(0,0,0,0,0,0,10,0);
+		dynStats("lus", 10);
 		return;
 	}
 	//1.Goopy skin
@@ -7726,7 +7641,7 @@ public function gooGasmic():void {
 	else if(player.tallness < 100 && rand(3) <= 1) {
 		outputText("\n\nYour gel-like body swells up from the intake of additional slime.  If you had to guess, you'd bet you were about two inches taller.", false);
 		player.tallness += 2;
-		stats(1,1,0,0,0,0,0,0);
+		dynStats("str", 1,"tou", 1);
 	}
 	//Big slime girl
 	else {
@@ -7756,22 +7671,6 @@ public function slimeBadEnd():void {
 }
 
 
-//Slime feeding
-public function slimeFeed():void {
-	if(player.hasStatusAffect("Slime Craving") >= 0) {
-		//Reset craving value
-		player.changeStatusValue("Slime Craving",1,0);
-		//Flag to display feed update and restore stats in event parser
-		if(player.hasStatusAffect("Slime Craving Feed") < 0) {
-			player.createStatusAffect("Slime Craving Feed",0,0,0,0);
-		}
-	}
-	if(player.hasPerk("Diapause") >= 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
-	}
-}
-
 
 public function sharkTooth(type:Number = 0):void {
 	var changes:Number = 0;
@@ -7784,31 +7683,31 @@ public function sharkTooth(type:Number = 0):void {
 	//STATS
 	//Increase strength 1-2 points (Up to 50) (60 for tiger)
 	if(((player.str < 60 && type == 1) || player.str < 50) && rand(3) == 0) {
-		stats(1+rand(2),0,0,0,0,0,0,0);
+		dynStats("str", 1+rand(2));
 		outputText("\n\nA painful ripple passes through the muscles of your body.  It takes you a few moments, but you quickly realize you're a little bit stronger now.", false);
 		changes++;
 	}
 	//Increase Speed 1-3 points (Up to 75) (100 for tigers)
 	if(((player.spe < 100 && type == 1) || player.spe < 75) && rand(3) == 0) {
-		stats(0,0,1+rand(3),0,0,0,0,0);
+		dynStats("spe", 1+rand(3));
 		changes++;
 		outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.", false);
 	}
 	//Reduce sensitivity 1-3 Points (Down to 25 points)
 	if(player.sens > 25 && rand(1.5) == 0 && changes < changeLimit) {
-		stats(0,0,0,0,0,(-1 - rand(3)),0,0);
+		dynStats("sen", (-1 - rand(3)));
 		changes++;
 		outputText("\n\nIt takes a while, but you eventually realize your body has become less sensitive.", false);
 	}
 	//Increase Libido 2-4 points (Up to 75 points) (100 for tigers)
 	if(((player.lib < 100 && type == 1) || player.lib < 75) && rand(3) == 0 && changes < changeLimit) {
-		stats(0,0,0,0,(1+rand(3)),0,0,0);
+		dynStats("lib", (1+rand(3)));
 		changes++;
 		outputText("\n\nA blush of red works its way across your skin as your sex drive kicks up a notch.", false);	
 	}
 	//Decrease intellect 1-3 points (Down to 40 points)
 	if(player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
-		stats(0,0,0,-(1+rand(3)),0,0,0,0);
+		dynStats("int", -(1+rand(3)));
 		changes++;
 		outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.", false);
 	}	
@@ -7824,7 +7723,7 @@ public function sharkTooth(type:Number = 0):void {
 		else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 		player.createVagina();
 		player.clitLength = .25;
-		stats(0,0,0,0,0,10,0,0);
+		dynStats("sen", 10);
 		genderCheck();
 	}
 	//WANG GROWTH - TIGGERSHARK ONLY
@@ -7840,7 +7739,7 @@ public function sharkTooth(type:Number = 0):void {
 		}
 		outputText("!", false);
 		player.createCock(7,1.4);
-		stats(0,0,0,0,4,5,20,0);
+		dynStats("lib", 4, "sen", 5, "lus", 20);
 		genderCheck();
 		changes++;
 	}
@@ -7855,7 +7754,7 @@ public function sharkTooth(type:Number = 0):void {
 			player.balls = 2;
 			player.ballSize = 2;
 		}
-		stats(0,0,0,0,2,3,10,0);
+		dynStats("lib", 2, "sen", 3, "lus", 10);
 		changes++;
 	}
 	//Transformations:
@@ -7953,7 +7852,7 @@ This also means that someone who's already reached the maximum numbers of dicks 
 */
 
 public function snakeOil():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -7966,7 +7865,7 @@ public function snakeOil():void {
 	if(gameState == 0) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.", false);
 	//+ speed to 70!
 	if(player.spe < 70 && rand(2) == 0) {
-		stats(0,0,(2-(player.spe/10/5)),0,0,0,0,0);
+		dynStats("spe", (2-(player.spe/10/5)));
 		outputText("\n\nYour muscles quiver, feeling ready to strike as fast as a snake!", false);
 		if(player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.", false);
 		changes++;
@@ -7989,7 +7888,7 @@ public function snakeOil():void {
 		if(player.tongueType == TONUGE_HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.", false);
 		else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.", false);
 		player.tongueType = TONUGE_SNAKE;
-		stats(0,0,0,0,0,5,0,0);
+		dynStats("sen", 5);
 		changes++;
 	}
 	//9c) III The fangs
@@ -8165,8 +8064,8 @@ public function Hummus():void {
 	}
 	else player.breastRows[0].breastRating = 0;
 	player.gills = false;
-	player.removeStatusAffect("Uniball")
-	player.removeStatusAffect("Black Nipples")
+	player.removeStatusAffect("Uniball");
+	player.removeStatusAffect("Black Nipples");
 	player.vaginaType(0);
 }
 
@@ -8198,13 +8097,13 @@ public function coal():void {
 				player.statusAffects[temp].value1 += 10;
 				player.statusAffects[temp].value2 += 10;
 				player.statusAffects[temp].value3 += 96;
-				stats(0,0,0,0,10,0,0,0,false,true);
+				dynStats("lib", 10, "resisted", false, "noBimbo", true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
 				player.createStatusAffect("heat", 20, 20, 96, 0);
-				stats(0,0,0,0,20,0,0,0,false,true);
+				dynStats("lib", 20, "resisted", false, "noBimbo", true);
 			}
 			changes++;
 		}
@@ -8221,12 +8120,12 @@ public function coal():void {
 			player.addStatusValue("rut",2,5);
 			player.addStatusValue("rut",3,48);
 			outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		else {
 			player.createStatusAffect("rut",150,5,100,0);
 			outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		changes++;
 	}
@@ -8261,17 +8160,17 @@ public function catTransformation():void {
 		//low speed
 		if(player.spe <= 30) {
 			outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.", false);
-			stats(0,0,2,0,0,0,0,0);
+			dynStats("spe", 2);
 		}
 		//medium speed 
 		else if(player.spe <= 60) {
 			outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.", false);
-			stats(0,0,1,0,0,0,0,0);
+			dynStats("spe", 1);
 		}
 		//high speed 
 		else {
 			outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.", false);
-			stats(0,0,.5,0,0,0,0,0);
+			dynStats("spe", .5);
 		}
 		changes++;
 	}
@@ -8279,20 +8178,20 @@ public function catTransformation():void {
 	if(player.str < 40 && rand(3) == 0 && changes < changeLimit) {
 		if(rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.", false);
 		else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.", false);
-		stats(1,0,0,0,0,0,0,0);
+		dynStats("str", 1);
 		changes++;
 	}
 	//Strength ALWAYS drops if over 60
 	//Does not add to change total
 	else if(player.str > 60 && rand(2) == 0) {
 		outputText("\n\nShivers run from your head to your toes, leaving you feeling weak.  Looking yourself over, your muscles seemed to have lost some bulk.", false);
-		stats(-2,0,0,0,0,0,0,0);
+		dynStats("str", -2);
 	}
 	//Toughness drops if over 50
 	//Does not add to change total
 	if(player.tou > 50 && rand(2) == 0) {
 		outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.", false);
-		stats(0,-2,0,0,0,0,0,0);
+		dynStats("tou", -2);
 	}
 	//Intelliloss
 	if(rand(4) == 0 && changes < changeLimit) {
@@ -8313,7 +8212,7 @@ public function catTransformation():void {
 		}
 		//High intelligence 
 		else outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.", false);
-		stats(0,0,0,-1,0,0,0,0);
+		dynStats("int", -1);
 		changes++;
 	}
 	//Libido gain
@@ -8332,7 +8231,7 @@ public function catTransformation():void {
 			if(player.lust > 60) outputText("even more ", false);
 			outputText("turned on.", false);
 		}
-		stats(0,0,0,0,1,.25,0,0);
+		dynStats("lib", 1, "sen", .25);
 		changes++;		
 	}
 	//Sexual changes would go here if I wasn't a tard. 
@@ -8347,7 +8246,7 @@ public function catTransformation():void {
 			else outputText("fill ", false);
 			outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,15,0,false,true);
+			dynStats("lib", 15, "lus", 15, "resisted", false, "noBimbo", true);
 
 		}
 		//Intensify cat heat
@@ -8358,7 +8257,7 @@ public function catTransformation():void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,5,0,false,true);
+			dynStats("lib", 5, "lus", 5, "resisted", false, "noBimbo", true);
 
 		}
 		changes++;
@@ -8456,7 +8355,7 @@ public function catTransformation():void {
 			}
 			//(big sensitivity boost)
 			outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.", false);
-			stats(0,0,0,0,0,5,0,0);
+			dynStats("sen", 5);
 			//Make note of other dicks changing
 			if(temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
 			changes++;
@@ -8540,7 +8439,7 @@ public function catTransformation():void {
 	if(changes == 0) {
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(50, true);
-		stats(0,0,0,0,0,0,3,0);
+		dynStats("lus", 3);
 	}
 	if(changes < changeLimit) {
 		if(rand(2) == 0) outputText(player.modThickness(5,2), false);
@@ -8551,7 +8450,7 @@ public function catTransformation():void {
 }
 
 public function reptilum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//init variables
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -8570,13 +8469,13 @@ public function reptilum():void {
 	//-Reduces speed down to 50.
 	if(player.spe > 50 && changes < changeLimit && rand(4) == 0) {
 		outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.", false);
-		stats(0,0,-1,0,0,0,0,0);
+		dynStats("spe", -1);
 		changes++;
 	}
 	//-Reduces sensitivity.
 	if(player.sens > 20 && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nThe sensation of prickly pins and needles moves over your body, leaving your senses a little dulled in its wake.", false);
-		stats(0,0,0,0,0,-1,0,0);
+		dynStats("sen", -1);
 		changes++;
 	}
 	//Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
@@ -8593,11 +8492,11 @@ public function reptilum():void {
 		//(TARDS)
 		else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.", false);
 		//+3 lib if less than 50
-		if(player.lib < 50) stats(0,0,0,0,1,0,0,0);
+		if(player.lib < 50) dynStats("lib", 1);
 		//+2 lib if less than 75
-		if(player.lib < 75) stats(0,0,0,0,1,0,0,0);
+		if(player.lib < 75) dynStats("lib", 1);
 		//+1 if above 75.
-		stats(0,0,0,0,1,0,0,0);
+		dynStats("lib", 1);
 		changes++;
 	}
 	//-Raises toughness to 70 
@@ -8606,17 +8505,17 @@ public function reptilum():void {
 		//(+3)
 		if(player.tou < 40) {
 			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher your hide has gotten.", false);
-			stats(0,3,0,0,0,0,0,0);
+			dynStats("tou", 3);
 		}
 		//(+2)
 		else if(player.tou < 55) {
 			outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.", false);
-			stats(0,2,0,0,0,0,0,0);
+			dynStats("tou", 2);
 		}
 		//(+1) 
 		else {
 			outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skinDesc + " getting tough enough to make you feel invincible.", false);
-			stats(0,1,0,0,0,0,0,0);
+			dynStats("tou", 1);
 		}
 		changes++;
 	}
@@ -8648,7 +8547,7 @@ public function reptilum():void {
 		}
 		else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 		changes++;
-		stats(0,0,0,0,3,0,10,0);
+		dynStats("lib", 3, "lus", 10);
 	}
 	//(CHANGE OTHER DICK)
 	//Requires 1 lizard cock, multiple cocks
@@ -8672,7 +8571,7 @@ public function reptilum():void {
 		}
 		else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 		changes++;
-		stats(0,0,0,0,3,0,10,0);
+		dynStats("lib", 3, "lus", 10);
 	}
 	//-Grows second lizard dick if only 1 dick
 	if(player.lizardCocks() == 1 && player.totalCocks()  == 1 && rand(4) == 0 && changes < changeLimit) {
@@ -8686,7 +8585,7 @@ public function reptilum():void {
 		player.cocks[1].cockLength = player.cocks[0].cockLength;
 		player.cocks[1].cockThickness = player.cocks[0].cockThickness;
 		changes++;
-		stats(0,0,0,0,3,0,10,0);
+		dynStats("lib", 3, "lus", 10);
 	}
 	//--Worms leave if 100% lizard dicks? 
 	//Require mammals?
@@ -8714,7 +8613,7 @@ public function reptilum():void {
 			else player.breastRows[temp2].breastRating = 0;
 		}
 		//(+2 speed)
-		stats(0,0,0,0,2,0,0,0);
+		dynStats("lib", 2);
 		changes++;
 	}
 	//-Lactation stoppage.
@@ -8931,7 +8830,7 @@ public function reptilum():void {
 	if(changes == 0) {
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(50, true);
-		stats(0,0,0,0,0,0,3,0);
+		dynStats("lus", 3);
 	}
 }
 
@@ -8960,7 +8859,6 @@ public function wingStick():void {
 		monster.HP -= damage;
 		if(monster.HP < 0) monster.HP = 0;
 	}
-	return;
 }
 
 public function neonPinkEgg(pregnantChange:Boolean = false):void {
@@ -8994,16 +8892,16 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 		else if(player.spe < 65) outputText("\n\nThe tight, ready feeling you've grown accustomed to seems to intensify, and you know in the back of your mind that you've become even faster.", false);
 		else outputText("\n\nSomething changes in your physique, and you grunt, chopping an arm through the air experimentally.  You seem to move even faster than before, confirming your suspicions.", false);
 		changes++;
-		if(player.spe < 35) stats(0,0,1,0,0,0,0,0);
-		stats(0,0,1,0,0,0,0,0);
+		if(player.spe < 35) dynStats("spe", 1);
+		dynStats("spe", 1);
 	}
 	//Boost libido
 	if(changes < changeLimit && rand(5) == 0) {
 		changes++;
-		stats(0,0,0,0,1,0,(5+player.lib/7),0);
-		if(player.lib < 30) stats(0,0,0,0,1,0,0,0);
-		if(player.lib < 40) stats(0,0,0,0,1,0,0,0);
-		if(player.lib < 60) stats(0,0,0,0,1,0,0,0);
+		dynStats("lib", 1, "lus", (5+player.lib/7));
+		if(player.lib < 30) dynStats("lib", 1);
+		if(player.lib < 40) dynStats("lib", 1);
+		if(player.lib < 60) dynStats("lib", 1);
 		//Lower ones are gender specific for some reason
 		if(player.lib < 60) {
 			//(Cunts or assholes!
@@ -9015,7 +8913,7 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 					else if(player.cor < 90) outputText("You pant a little and wonder where the nearest fertile male is.", false);
 					else outputText("You grunt and groan with desire and disappointment.  You should get bred soon!", false);
 				}
-				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
+				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + player.assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
 			}
 			//WANGS!
 			if(player.hasCock()) {
@@ -9061,11 +8959,11 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 		//(low)
 		if(rand(3) != 2) {
 			outputText("The feeling of small breezes blowing over your " + player.skinDesc + " gets a little bit stronger.  How strange.  You pinch yourself and nearly jump when it hurts a tad more than you'd think. You've gotten more sensitive!", false);
-			stats(0,0,0,0,0,5,0,0);
+			dynStats("sen", 5);
 		}
 		//(BIG boost 1/3 chance)
 		else {
-			stats(0,0,0,0,0,15,0,0);
+			dynStats("sen", 15);
 			outputText("Every movement of your body seems to bring heightened waves of sensation that make you woozy.  Your " + player.armorName + " rubs your " + nippleDescript(0) + "s deliciously", false);
 			if(player.hasFuckableNipples()) {
 				outputText(", sticking to the ", false);
@@ -9150,9 +9048,9 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 	if((player.balls > 0 || player.hasCock()) && player.cumQ() < 3000 && rand(3) == 0 && changeLimit > 1) {
 		changes++;
 		player.cumMultiplier += 3 + rand(7);
-		if(player.cumQ() >= 250) stats(0,0,0,0,0,0,3,0);
-		if(player.cumQ() >= 750) stats(0,0,0,0,0,0,4,0);
-		if(player.cumQ() >= 2000) stats(0,0,0,0,0,0,5,0);
+		if(player.cumQ() >= 250) dynStats("lus", 3);
+		if(player.cumQ() >= 750) dynStats("lus", 4);
+		if(player.cumQ() >= 2000) dynStats("lus", 5);
 		//Balls
 		if(player.balls > 0) {
 			//(Small cum quantity) < 50
@@ -9242,10 +9140,10 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 	//FAILSAAAAFE
 	if(changes == 0) {
 		if(player.lib < 100) changes++;
-		stats(0,0,0,0,1,0,(5+player.lib/7),0);
-		if(player.lib < 30) stats(0,0,0,0,1,0,0,0);
-		if(player.lib < 40) stats(0,0,0,0,1,0,0,0);
-		if(player.lib < 60) stats(0,0,0,0,1,0,0,0);
+		dynStats("lib", 1, "lus", (5+player.lib/7));
+		if(player.lib < 30) dynStats("lib", 1);
+		if(player.lib < 40) dynStats("lib", 1);
+		if(player.lib < 60) dynStats("lib", 1);
 		//Lower ones are gender specific for some reason
 		if(player.lib < 60) {
 			//(Cunts or assholes!
@@ -9257,7 +9155,7 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 					else if(player.cor < 90) outputText("You pant a little and wonder where the nearest fertile male is.", false);
 					else outputText("You grunt and groan with desire and disappointment.  You should get bred soon!", false);
 				}
-				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
+				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + player.assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
 			}
 			//WANGS!
 			if(player.hasCock()) {
@@ -9320,16 +9218,16 @@ public function goldenSeed(type:Number = 0):void {
 		if(player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.", false);
 		else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.", false);
 		//Speed gains diminish as it rises.
-		if(player.spe < 40) stats(0,0,.5,0,0,0,0,0);
-		if(player.spe < 75) stats(0,0,.5,0,0,0,0,0);
-		stats(0,0,.5,0,0,0,0,0);
+		if(player.spe < 40) dynStats("spe", .5);
+		if(player.spe < 75) dynStats("spe", .5);
+		dynStats("spe", .5);
 	}
 	//-Toughness decrease to 50
 	if(player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
 		changes++;
 		if(rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.", false);
 		else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?", false);
-		stats(0,-1,0,0,0,0,0,0);
+		dynStats("tou", -1);
 	}
 	//antianemone corollary:
 	if(changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
@@ -9346,19 +9244,19 @@ public function goldenSeed(type:Number = 0):void {
 		//(hi str – 50+)
 		else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.", false);
 		//Faster until 40 str.
-		if(player.str < 40) stats(.5,0,0,0,0,0,0,0);
-		stats(.5,0,0,0,0,0,0,0);
+		if(player.str < 40) dynStats("str", .5);
+		dynStats("str", .5);
 	}
 	//-Libido increase to 90
 	if((player.lib < 90 || rand(3) == 0) && rand(3) == 0 && changes < changeLimit) {
 		changes++;
-		if(player.lib < 90) stats(0,0,0,0,1,0,0,0);
+		if(player.lib < 90) dynStats("lib", 1);
 		//(sub 40 lib)
 		if(player.lib < 40) {
 			outputText("\n\nA passing flush colors your " + player.face() + " for a second as you daydream about sex. You blink it away, realizing the item seems to have affected your libido.", false);
 			if(player.hasVagina()) outputText(" The moistness of your " + vaginaDescript() + " seems to agree.", false);
 			else if(player.hasCock()) outputText(" The hardness of " + sMultiCockDesc() + " seems to agree.", false);
-			stats(0,0,0,0,0,0,5,0);
+			dynStats("lus", 5);
 		}
 		//(sub 75 lib)
 		else if(player.lib < 75) outputText("\n\nHeat, blessed heat, works through you from head to groin, leaving you to shudder and fantasize about the sex you could be having right now.\n\n", false);
@@ -9368,7 +9266,7 @@ public function goldenSeed(type:Number = 0):void {
 		else outputText("\n\nYou groan, something about the seed rubbing your libido in just the right way to make you horny. Panting heavily, you sigh and fantasize about the sex you could be having.\n\n", false);
 		//(fork to fantasy)
 		if(player.lib >= 40) {
-			stats(0,0,0,0,0,0,(player.lib/5+10),0);
+			dynStats("lus", (player.lib/5+10));
 			//(herm – either or!)
 			//Cocks!
 			if(player.hasCock() && (player.gender != 3 || rand(2) == 0)) {
@@ -9419,7 +9317,7 @@ public function goldenSeed(type:Number = 0):void {
 		else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 		player.createVagina();
 		player.clitLength = .25;
-		stats(0,0,0,0,0,10,0,0);
+		dynStats("sen", 10);
 		genderCheck();
 	}
 	//-Remove extra breast rows
@@ -9432,7 +9330,7 @@ public function goldenSeed(type:Number = 0):void {
 		if(player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
 		else outputText(player.skinTone + " " + player.skinDesc, false);
 		outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-		stats(0,0,0,0,0,-5,0,0);
+		dynStats("sen", -5);
 		player.removeBreastRow(player.breastRows.length-1,1);
 	}
 	//-Shrink tits if above DDs.
@@ -9666,8 +9564,8 @@ public function kangaFruit(type:Number = 0):void {
 	//-Speed to 70
 	if(player.spe < 70 && rand(3) == 0) {
 		//2 points up if below 40!
-		if(player.spe < 40) stats(0,0,1,0,0,0,0,0);
-		stats(0,0,1,0,0,0,0,0);
+		if(player.spe < 40) dynStats("spe", 1);
+		dynStats("spe", 1);
 		outputText("\n\nYour legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.", false);
 		changes++;
 	}
@@ -9680,7 +9578,7 @@ public function kangaFruit(type:Number = 0):void {
 		else if(player.inte > 10) outputText("\n\nYour mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.", false);
 		//gain dumb (10-1 int):
 		else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?", false);
-		stats(0,0,0,-1,0,0,0,0);
+		dynStats("int", -1);
 	}
 	//****************
 	//Appearance Effects:
@@ -9882,31 +9780,31 @@ public function sweetGossamer(type:Number = 0):void {
 	//(If speed<70, increases speed)
 	if(player.spe < 70 && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYour reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air.  A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire.  Why would you ever want to do something like that?", false);
-		stats(0,0,1.5,0,0,0,0,0);
+		dynStats("spe", 1.5);
 		changes++;
 	}
 	//(If speed>80, decreases speed down to minimum of 80)
 	if(player.spe > 80 && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou feel like resting high in the trees and waiting for your unsuspecting prey to wander below so you can take them without having to exert yourself.  What an odd thought!", false);
-		stats(0,0,-1.5,0,0,0,0,0);
+		dynStats("spe", -1.5);
 		changes++;
 	}
 	//(increases sensitivity)
 	if(changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nThe hairs on your arms and legs stand up straight for a few moments, detecting the airflow around you. Touch appears to be more receptive from now on.", false);
-		stats(0,0,0,0,0,1,0,0);
+		dynStats("sen", 1);
 		changes++;
 	}
 	//(Increase libido)
 	if(changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou suddenly feel slightly needier, and your loins stir in quiet reminder that they could be seen to. The aftertaste hangs on your tongue and your teeth.  You wish there had been more.", false);
-		stats(0,0,0,0,1,0,0,0);
+		dynStats("lib", 1);
 		changes++;
 	}
 	//(increase toughness to 60)
 	if(changes < changeLimit && rand(3) == 0 && player.tou < 60) {
 		outputText("\n\nStretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs.  How strange.  You probe at yourself, and while your " + player.skinFurScales() + " doesn't feel much different, the underlying flesh does seem tougher.", false);
-		stats(0,1,0,0,0,0,0,0);
+		dynStats("tou", 1);
 		changes++;
 	}
 	//(decrease strength to 70)
@@ -9914,7 +9812,7 @@ public function sweetGossamer(type:Number = 0):void {
 		outputText("\n\nLethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ", false);
 		if(player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!", false);
 		else outputText("Well, maybe you should put your nice, heavy abdomen to work.", false);
-		stats(-1,0,0,0,0,0,0,0);
+		dynStats("str", -1);
 		changes++;
 	}
 	//****************
@@ -9930,7 +9828,7 @@ public function sweetGossamer(type:Number = 0):void {
 	if(player.hasVagina()) {
 		if(player.looseness() > 1 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nWith a gasp, you feel your " + vaginaDescript(0) + " tightening, making you leak sticky girl-juice. After a few seconds, it stops, and you rub on your " + vaginaDescript(0) + " excitedly. You can't wait to try this out!", false);
-			stats(0,0,0,0,2,0,25,0);
+			dynStats("lib", 2, "lus", 25);
 			changes++;
 			player.vaginas[0].vaginalLooseness--;
 		}
@@ -9938,7 +9836,7 @@ public function sweetGossamer(type:Number = 0):void {
 	//(tightens asshole to 1, increases lust)
 	if(player.ass.analLooseness > 1 && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou let out a small cry as your " + assholeDescript() + " shrinks, becoming smaller and tighter. When it's done, you feel much hornier and eager to stretch it out again.", false);
-		stats(0,0,0,0,2,0,25,0);
+		dynStats("lib", 2, "lus", 25);
 		changes++;
 		player.ass.analLooseness--;
 	}
@@ -10017,7 +9915,7 @@ public function sweetGossamer(type:Number = 0):void {
 		if(player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
 		else outputText(player.skinTone + " " + player.skinDesc, false);
 		outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-		stats(0,0,0,0,0,-5,0,0);
+		dynStats("sen", -5);
 		player.removeBreastRow(player.breastRows.length-1,1);
 	}
 	//-Nipples reduction to 1 per tit.
@@ -10042,7 +9940,7 @@ public function sweetGossamer(type:Number = 0):void {
 		player.eyeType = EYES_FOUR_SPIDER_EYES;
 		changes++;
 		outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!", false);
-		stats(0,0,0,5,0,0,0,0);
+		dynStats("int", 5);
 	}
 	//(Gain spider fangs)
 	if(player.faceType == FACE_HUMAN && player.skinType == SKIN_TYPE_PLAIN && changes < changeLimit && rand(4) == 0) {
@@ -10145,7 +10043,7 @@ public function applyLustStick():void {
 			else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.", false);
 			outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.\n\n", false);		
 		}
-		stats(0,0,0,0,0,0,1,0);
+		dynStats("lus", 1);
 	}
 	else {
 		outputText("You look at the tube of lipstick, but get the idea it would be a pretty bad idea to smear a thick coating of cock-hardening aphrodisiacs over your own lips.  ");
@@ -10193,12 +10091,12 @@ public function broBrew():void {
 		outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!", false);
 		if(player.inte > 35) {
 			player.inte = 35;
-			stats(0,0,0,-0.1,0,0,0,0);
+			dynStats("int", -0.1);
 			
 		}
 		if(player.lib < 50) {
 			player.lib = 50;
-			stats(0,0,0,0,.1,0,0,0);
+			dynStats("lib", .1);
 		}
 		outputText("\n\n", false);
 		if(player.hasPerk("Bimbo Brains") >= 0) outputText("<b>(Lost Perks - Bimbo Brains, Bimbo Body)\n", false);
@@ -10312,7 +10210,7 @@ public function broBrew():void {
 		player.removePerk("Feeder");
 	}
 	if(player.inte > 21) player.inte = 21;
-	stats(33,33,0,-1,4,0,40,0);
+	dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);
 }
 
 
@@ -10333,15 +10231,15 @@ public function ectoplasm():void {
 	//Effect script 1:  (higher intelligence)  
 	if(player.inte < 100 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.", false);
-		stats(0,0,0,1,0,0,0,0);
-		if(player.inte < 50) stats(0,0,0,1,0,0,0,0);
+		dynStats("int", 1);
+		if(player.inte < 50) dynStats("int", 1);
 		changes++;
 	}
 	//Effect script 2:  (lower sensitivity)
 	if(player.sens >= 20 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nWoah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.", false);
-		stats(0,0,0,0,0,-2,0,0);
-		if(player.sens >= 75) stats(0,0,0,0,0,-2,0,0);
+		dynStats("sen", -2);
+		if(player.sens >= 75) dynStats("sen", -2);
 		changes++;
 	}
 	//Effect script 3:  (higher libido)  
@@ -10350,8 +10248,8 @@ public function ectoplasm():void {
 		if(player.lib < 50) outputText("\n\nIdly, you drop a hand to your crotch as", false);
 		else outputText("\n\nWith a substantial amount of effort, you resist the urge to stroke yourself as", false);
 		outputText(" a trace amount of the ghost girl's lust is transferred into you.  How horny IS she, you have to wonder...", false);
-		stats(0,0,0,0,1,0,0,0);
-		if(player.lib < 50) stats(0,0,0,0,1,0,0,0);
+		dynStats("lib", 1);
+		if(player.lib < 50) dynStats("lib", 1);
 		changes++;
 	}
 	//Effect script a:  (human wang)  
@@ -10429,20 +10327,20 @@ public function shriveledTentacle():void {
 	//- toughess up, sensitivity down
 	if(rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
 		outputText("\n\nYour skin feels clammy and a little rubbery.  You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips.  Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!", false);
-		stats(0,1,0,0,0,-1,0,0);
+		dynStats("tou", 1, "sen", -1);
 		changes++;
 	}
 	//- speed down
 	if(rand(3) == 0 && player.spe > 40 && changes < changeLimit) {
 		outputText("\n\nA pinprick sensation radiates from your stomach down to your knees, as though your legs were falling asleep.  Wobbling slightly, you stand up and take a few stumbling steps to work the blood back into them.  The sensation fades, but your grace fails to return and you stumble again.  You'll have to be a little more careful moving around for a while.", false);
 		changes++;
-		stats(0,0,-1,0,0,0,0,0);
+		dynStats("spe", -1);
 	}
 	//- corruption increases by 1 up to low threshold (~20)
 	if(rand(3) == 0 && player.cor < 20 && changes < changeLimit) {
 		outputText("\n\nYou shiver, a sudden feeling of cold rushing through your extremities.", false);
 		changes++;
-		stats(0,0,0,0,0,0,0,1);
+		dynStats("cor", 1);
 	}
 	//-always increases lust by a function of sensitivity
 	//"The tingling of the tentacle 
@@ -10555,12 +10453,12 @@ public function bimboLiquer():void {
 		player.createPerk("Futa Form",0,0,0,0,"");
 		if(player.inte > 35) {
 			player.inte = 35;
-			stats(0,0,0,-0.1,0,0,0,0);
+			dynStats("int", -0.1);
 			
 		}
 		if(player.lib < 50) {
 			player.lib = 50;
-			stats(0,0,0,0,.1,0,0,0);
+			dynStats("lib", .1);
 		}
 	}
 	else {
@@ -10626,7 +10524,7 @@ public function bimboLiquer():void {
 			player.breastRows[0].breastRating += 5+rand(5);
 			outputText(", admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple, " + player.breastCup(0) + " boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand ");
 		}
-		stats(0,0,0,0,0,20,0,0);
+		dynStats("sen", 20);
 		outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + vaginaDescript(0) + " like no tomorrow.  By now, your " + clitDescript() + " is throbbing, and you give it an experimental ", false);
 		if(player.clitLength >= 3) outputText("jerk ", false);
 		else outputText("caress ", false);
@@ -10655,10 +10553,10 @@ public function bimboLiquer():void {
 			outputText("Like, weirdest of all, your muscles seem to be vanishing!  Before your eyes, all muscle tone vanishes, leaving your body soft and gently curvy.  You poke yourself and giggle!  Everyone's totally going to want to, like, rub up against you at every opportunity.  Your thighs are so soft you bet you could squeeze a pair of dicks to orgasm without even touching your moist cunny.");
 			player.tone = 0;
 			if(player.str >= 30) {
-				if(player.str >= 70) stats(-10,0,0,0,0,0,0,0);
-				if(player.str >= 90) stats(-10,0,0,0,0,0,0,0);
-				if(player.str >= 50) stats(-10,0,0,0,0,0,0,0);
-				stats(-5,0,0,0,0,0,0,0);
+				if(player.str >= 70) dynStats("str", -10);
+				if(player.str >= 90) dynStats("str", -10);
+				if(player.str >= 50) dynStats("str", -10);
+				dynStats("str", -5);
 				outputText("  It does get a bit harder to carry yourself around with your diminished strength, but that's, like, what big strong hunks are for anyways!  You can just flirt until one of them volunteers to help out or something!  Besides, you don't need to be strong to jerk off cocks or finger slutty pussies!");
 			}
 			outputText("\n\n");
@@ -10672,7 +10570,7 @@ public function bimboLiquer():void {
 			player.createPerk("Bimbo Brains",0,0,0,0,"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!");
 			if(player.inte > 21) player.inte = 21;
 		}
-		stats(0,0,0,-1,4,25,-100,0);
+		dynStats("int", -1, "lib", 4, "sen", 25, "lus=", 0);
 		//FULL ON BITCHFACE
 		player.modFem(100,100);
 		//Body
@@ -10718,7 +10616,7 @@ public function numbRocks():void {
 	}
 	else if(rand(4) == 0 && player.inte > 15) {
 		outputText("\n\nNumbness clouds your mind, making you feel slow witted and dull.  Maybe these candies weren't such a exceptio... fantas... good idea.", false);
-		stats(0,0,0,-(1+rand(5)),0,0,0,0);
+		dynStats("int", -(1+rand(5)));
 	}
 	if(player.hasPerk("Thick Skin") < 0 && player.sens < 30 && rand(4) == 0) {
 		outputText("Slowly, ", false);
@@ -10729,7 +10627,7 @@ public function numbRocks():void {
 		player.armorDef += 2;
 	}
 	outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.", false);
-	stats(0,0,0,0,0,-3,0,0);
+	dynStats("sen", -3);
 	if(player.sens < 1) player.sens = 1;
 }
 
@@ -10755,7 +10653,7 @@ public function sensitivityDraft():void {
 		outputText("You shiver and think of how much better it'll make sex and masturbation.", false);
 	}
 	else outputText("You worry it'll make it harder to resist the attentions of a demon.", false);
-	stats(0,0,0,0,0,10,5,0);
+	dynStats("sen", 10, "lus", 5);
 }
 
 public function foxTF(enhanced:Boolean = false):void {
@@ -10791,30 +10689,30 @@ public function foxTF(enhanced:Boolean = false):void {
 	//[increase Intelligence, Libido and Sensitivity]
 	if(changes < changeLimit && rand(3) == 0 && (player.lib < 80 || player.inte < 80 || player.sens < 80) ) {
 		outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
-		if(player.inte < 80) stats(0,0,0,4,0,0,0,0);
-		if(player.lib < 80) stats(0,0,0,0,1,0,0,0);
-		if(player.sens < 80) stats(0,0,0,0,0,1,0,0);
+		if(player.inte < 80) dynStats("int", 4);
+		if(player.lib < 80) dynStats("lib", 1);
+		if(player.sens < 80) dynStats("sen", 1);
 		//gain small lust also
-		stats(0,0,0,0,0,0,10,0);
+		dynStats("lus", 10);
 		changes++;
 	}
 	//[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
 	if(changes < changeLimit && rand(3) == 0 && player.str > 40) {
 		outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-		stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 60) stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 80) stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 90) stats(-1,0,0,0,0,0,0,0);
+		dynStats("str", -1);
+		if(player.str > 60) dynStats("str", -1);
+		if(player.str > 80) dynStats("str", -1);
+		if(player.str > 90) dynStats("str", -1);
 		changes++;
 	}
 	//[decrease Toughness] (to some floor) // 20 or so was my thought here
 	if(changes < changeLimit && rand(3) == 0 && player.tou > 30) {
 		if(player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
 		else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-		stats(0,-1,0,0,0,0,0,0);
-		if(player.str > 60) stats(0,-1,0,0,0,0,0,0);
-		if(player.str > 80) stats(0,-1,0,0,0,0,0,0);
-		if(player.str > 90) stats(0,-1,0,0,0,0,0,0);
+		dynStats("tou", -1);
+		if(player.str > 60) dynStats("tou", -1);
+		if(player.str > 80) dynStats("tou", -1);
+		if(player.str > 90) dynStats("tou", -1);
 		changes++;
 	}
 
@@ -10886,7 +10784,7 @@ public function foxTF(enhanced:Boolean = false):void {
 			if(player.cocks[select].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(select) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
 				player.cocks[select].cockThickness += .3;
-				stats(0,0,0,0,0,10,5,0);
+				dynStats("sen", 10, "lus", 5);
 			}
 			//Horse
 			else if(player.cocks[select].cockType == CockTypesEnum.HORSE) {
@@ -10896,17 +10794,17 @@ public function foxTF(enhanced:Boolean = false):void {
 				else player.cocks[select].cockLength -= .5;
 				player.cocks[select].cockThickness += .5;
 				
-				stats(0,0,0,0,0,4,5,0);
+				dynStats("sen", 4, "lus", 5);
 			}
 			//Tentacular Tuesday!
 			else if(player.cocks[select].cockType == CockTypesEnum.TENTACLE) {
 				outputText("\n\nYour " + cockDescript(select) + " coils in on itself, reshaping and losing it's plant-like coloration as thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>", false);
-				stats(0,0,0,0,0,4,10,0);
+				dynStats("sen", 4, "lus", 10);
 			}
 			//Misc
 			else {
 				outputText("\n\nYour " + cockDescript(select) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>", false);
-				stats(0,0,0,0,0,4,10,0);
+				dynStats("sen", 4, "lus", 10);
 			}
 			player.cocks[select].cockType = CockTypesEnum.DOG;
 			player.cocks[select].knotMultiplier = 1.25;
@@ -10956,7 +10854,7 @@ public function foxTF(enhanced:Boolean = false):void {
 		player.breastRows[player.bRows()-1].nipplesPerBreast = player.breastRows[player.bRows()-2].nipplesPerBreast;
 		if(player.hasFuckableNipples()) player.breastRows[player.bRows()-1].fuckable = true;
 		player.breastRows[player.bRows()-1].lactationMultiplier = player.breastRows[player.bRows()-2].lactationMultiplier;
-		stats(0,0,0,0,0,2,30,0);
+		dynStats("sen", 2, "lus", 30);
 		changes++;
 	}
 	//Find out if tits are eligible for evening
@@ -10986,7 +10884,7 @@ public function foxTF(enhanced:Boolean = false):void {
 				tits = true;
 				changes++;
 			}
-			stats(0,0,0,0,0,2,10,0);
+			dynStats("sen", 2, "lus", 10);
 		}
 	}
 	//HEAT!
@@ -10998,13 +10896,13 @@ public function foxTF(enhanced:Boolean = false):void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,0,0,false,true);
+			dynStats("lib", 15, "resisted", false, "noBimbo", true);
 		}
 		changes++;
 	}
@@ -11105,19 +11003,19 @@ public function godMead():void {
 
 	//Libido: No desc., always increases.
 	//Corruption: No desc., always decreases.
-	stats(0,0,0,0,1,0,0,-1);
+	dynStats("lib", 1, "cor", -1);
 	//Health/HP(Large increase; always occurs): 
 	outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
 	HPChange(Math.round(maxHP() * .33),false);
 	if(rand(3) == 0) {
 		outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 		if(silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
-		stats(1,0,0,0,0,0,0,0);
+		dynStats("str", 1);
 	}
 	//Tough: 
 	else {
 		outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
-		stats(0,1,0,0,0,0,0,0);
+		dynStats("tou", 1);
 	}
 	//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
 	//[If player already has beard] A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.
@@ -11128,7 +11026,7 @@ public function sheepMilk():void {
 	outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated", true);
 	//-30 fatigue, -2 libido, -10 lust]
 	fatigue(-30);
-	stats(0,0,0,0,-.25,0,-10,-0.5);
+	dynStats("lib", -.25, "lus", -10, "cor", -0.5);
 }
 
 //Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
@@ -11271,16 +11169,16 @@ public function foxJewel(mystic:Boolean = false):void {
 	if(player.inte < 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
 		outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
 		//Raise INT, Lib, Sens. and +10 LUST
-		stats(0,0,0,2,1,2,10,0);
+		dynStats("int", 2, "lib", 1, "sen", 2, "lus", 10);
 		changes++;
 	}
 	//[decrease Strength toward 15]
 	if(player.str > 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 		outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-		stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 70) stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 50) stats(-1,0,0,0,0,0,0,0);
-		if(player.str > 30) stats(-1,0,0,0,0,0,0,0);
+		dynStats("str", -1);
+		if(player.str > 70) dynStats("str", -1);
+		if(player.str > 50) dynStats("str", -1);
+		if(player.str > 30) dynStats("str", -1);
 		changes++;
 	}
 	//[decrease Toughness toward 20]
@@ -11289,15 +11187,15 @@ public function foxJewel(mystic:Boolean = false):void {
 		if(player.tou <= 66) outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
  		//from 66 or greater toughness
 		else outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-		stats(0,-1,0,0,0,0,0,0);
-		if(player.tou > 66) stats(0,-1,0,0,0,0,0,0);
+		dynStats("tou", -1);
+		if(player.tou > 66) dynStats("tou", -1);
 		changes++;
 	}
 	if(mystic && changes < changeLimit && rand(2) == 0 && player.cor < 100) {
 		if(player.cor < 33) outputText("\n\nA sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
 		else if(player.cor < 66) outputText("\n\nA tingling wave of sensation rolls through you, but you have no idea what exactly just changed.  It must not have been that important.");
 		else outputText("\n\nThoughts of mischief roll across your consciousness, unbounded by your conscience or any concern for others.  You should really have some fun - who cares who it hurts, right?");
-		stats(0,0,0,0,0,0,0,1);
+		dynStats("cor", 1);
 	}
 
 
@@ -11414,7 +11312,7 @@ public function foxJewel(mystic:Boolean = false):void {
 		outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
 		outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants two magical special attacks.)");
 		player.createPerk("Corrupted Nine-tails",0,0,0,0);
-		stats(0,0,0,0,2,0,10,10);
+		dynStats("lib", 2, "lus", 10, "cor", 10);
 		player.tailVenom = 9;
 	}
  
@@ -11600,7 +11498,7 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		
 		outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 		//Increase INT and Libido, +10 LUST
-		stats(0,0,0,4,0,2,10,0);
+		dynStats("int", 4, "sen", 2, "lus", 10);
 		doNext(1000);
 		return;
 	}
@@ -11621,7 +11519,7 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		
 		outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
 		//Advance time 1 hour, -20 LUST
-		stats(0,0,0,0,0,0,-20,0);
+		dynStats("lus", -20);
 		doNext(1000);
 		return;
 	}
@@ -11630,7 +11528,7 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
 		outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
 		//+100 LUST
-		stats(0,0,0,0,0,0,100,0,false);
+		dynStats("lus=", 100, "resisted", false);
 		doNext(1000);
 		return;
 	}
@@ -11639,7 +11537,7 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
 		outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
 		// -15 STR and -15 TUF
-		stats(-5,-5,0,0,0,0,0,0);
+		dynStats("str", -5,"tou", -5);
 		doNext(1000);
 		return;
 	}
@@ -11766,7 +11664,7 @@ public function lustyMaidensArmor():void {
 		outputText("You slide the bikini top over your more than ample chest, shivering at the touch of the cold metal on your sensitive nipples.  It stretches taut around each of your globes, and by the time you're snapping the narrow leather strap behind your back, the exotic metal bra has grown warm enough to make your chest tingle pleasantly.  Your hands find their way to your jiggling, gilded mounds and grab hold, fingers sinking into the shimmering flesh without meaning to.  Your nipples scrape along a diaphanous inner lining so pleasantly that a moan slips out of your mouth as you admire how your cleavage bulges out above the glittery cups.  A narrow band of steel with a shiny black leather thong underneath connects the two halfs of the top, padded for comfort but pulled away from you by the sheer size of your straining bosoms.");
 		outputText("\n\nAs you examine the material, you realize that leather band isn't just padding.  It's as slippery as butter on grease and has a subtle indentation, one that would let it perfectly cushion something round, thick... and throbbing.  Your cheeks color when you catch yourself thinking of titfucking some beast while dressed in this outfit, taking a thick load of monster or dick-girl seed right over your cleavage, face, and hair.  You could even line it up with your mouth and drink down a few swallows if you wanted to.");
 		outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
-		stats(0,0,0,0,0,0,25,0,false);
+		dynStats("lus", 25, "resisted", false);
 		outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are moulded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
 		if(player.hasCock() || player.balls > 0) {
 			outputText("that it won't fit you ");
@@ -11806,7 +11704,7 @@ public function lustyMaidensArmor():void {
 		if(player.wetness() >= 3) outputText("  The moisture you normally drip seems to soak right into the gusset instead of running down your [legs] like normal, giving you a much more chaste appearance in spite of the lewd garments that even now seem to shape your femininity and [butt] into perfectly arousing shapes.");
 		
 		outputText("\n\nLast is the chain skirt - perhaps the easiest part to put on.  It's barely three inches long, such that it exposes your [butt] almost entirely, and when you bend over, fully.  The bottom of your vaginal crease can be spied as well, and should you desire to show yourself off, a simple stretch or tug would put you completely on display.  You wiggle about, watching the reflective material ripple almost hypnotically, one hand still on your boobs, mauling at your own tits with passion.  THIS is how a chaste champion should dress - perfectly modest but full of erotic energy to overwhelm her enemies with!\n\n");
-		if(player.lib < 50) stats(0,0,0,0,1,1,0,0);
+		if(player.lib < 50) dynStats("lib", 1, "sen", 1);
 	}
 	equipArmor("lusty maiden's armor",false);
 }
@@ -11853,16 +11751,16 @@ public function lustyMaidenPaizuri():void {
 	
 	outputText("\n\nThe stink of sperm slowly fades as you move, almost seeming to absorb into your skin.  It leaves you with a healthy glow and a surety to your movements, sure that your revealing armor is going to protect you.");
 	//Slimefeed, minus slight corruption if PC is a virgin, raise sensitivity
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.BIKINI_ARMOR_BONUS] += 2;
 	if(flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
-	stats(0,0,0,0,0,2,-100,0);
-	if(player.hasVirginVagina()) stats(0,0,0,0,0,0,0,-1);
+	dynStats("sen", 2, "lus=", 0);
+	if(player.hasVirginVagina()) dynStats("cor", -1);
 	//If minotaur, increase addiction slightly.
-	if(monster.short == "minotaur") minoCumAddiction(3);
+	if(monster.short == "minotaur") player.minoCumAddiction(3);
 	if(monster.short == "Ceraph") flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 	//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -11877,8 +11775,8 @@ public function fishFillet():void {
 	//Increase HP by quite a bit!)
 	//(Slight chance at increasing Toughness?)
 	//(If lake has been tainted, +1 Corruption?)
-	if(player.hasStatusAffect("FactoryOverload") >= 0) stats(0,0,0,0,0,0,0,0.5);
-	stats(0,0,0,0,0,0,0,0.1);
+	if(player.hasStatusAffect("FactoryOverload") >= 0) dynStats("cor", 0.5);
+	dynStats("cor", 0.1);
 	HPChange(Math.round(maxHP() * .25),false);
 }
 
@@ -11900,26 +11798,26 @@ public function trapOil():void {
 	//Speed Increase:
 	if(player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nYou feel fleet and lighter on your toes; you sense you could dodge, dart or skip away from anything.");
-		stats(0,0,1,0,0,0,0,0);
+		dynStats("spe", 1);
 		changes++;
 	}
 	//Strength Loss: 
 	else if(player.str > 40 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
-		stats(-1,0,0,0,0,0,0,0);
+		dynStats("str", -1);
 		changes++;
 	}
 	//Sensitivity Increase: 
 	if(player.sens < 70 && player.hasCock() && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nA light breeze brushes over you and your skin tingles.  You have become more sensitive to physical sensation.");
-		stats(0,0,0,0,0,5,0,0);
+		dynStats("sen", 5);
 		changes++;
 	}
 	//Libido Increase:
 	if(player.lib < 70 && player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nYou feel your blood quicken and rise, and a desire to... hunt builds within you.");
-		stats(0,0,0,0,2,0,0,0);
-		if(player.lib < 30) stats(0,0,0,0,2,0,0,0);
+		dynStats("lib", 2);
+		if(player.lib < 30) dynStats("lib", 2);
 		changes++;
 	}
 	//Body Mass Loss: 
@@ -12028,12 +11926,12 @@ public function trapOil():void {
 		//buttChange(30,false,false,false);
 		if(player.ass.analLooseness < 3) player.ass.analLooseness++;
 		changes++;
-		stats(0,0,0,0,0,2,0,0);
+		dynStats("sen", 2);
 	}
 	//Fertility Decrease: 
 	if(player.hasVagina() && rand(4) == 0 && changes < changeLimit) {
 		outputText("\n\nThe vague numbness in your skin sinks slowly downwards, and you put a hand on your lower stomach as the sensation centres itself there.  ");
-		stats(0,0,0,0,0,-2,0,0);
+		dynStats("sen", -2);
 		//High fertility:
 		if(player.fertility >= 30) outputText("It feels like your overcharged reproductive organs have simmered down a bit.");
 		//Average fertility:
@@ -12134,7 +12032,7 @@ public function trapOil():void {
 		if(player.cor < 50) outputText("  After a few cautious touches you decide it doesn't feel any different- it does certainly look odd, though.");
 		else outputText("  After a few cautious touches you decide it doesn't feel any different - the sheer bizarreness of it is a big turn on though, and you feel it beginning to shine with anticipation at the thought of using it.");
 		outputText("  <b>Your vagina is now ebony in color.</b>");
-		stats(0,0,0,0,0,2,10,0);
+		dynStats("sen", 2, "lus", 10);
 		player.vaginaType(5);
 		changes++;
 	}
@@ -12178,7 +12076,7 @@ public function purpleFruitEssrayle():void {
 		}
 	}
 	//[Player gains quad nipples, milk production and libido way up]
-	stats(0,0,0,0,5,0,0,0);
+	dynStats("lib", 5);
 	player.boostLactation(3 * player.bRows());
 }
 
@@ -12203,21 +12101,21 @@ public function ringtailFig():void {
 	if(player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nYou twitch and turn your head this way and that, feeling a bit more alert.  This will definitely help when defending your personal space from violators.");
 		changes++;
-		if(player.spe < 40) stats(0,0,1,0,0,0,0,0);
-		stats(0,0,1,0,0,0,0,0);
+		if(player.spe < 40) dynStats("spe", 1);
+		dynStats("spe", 1);
 	}
 	//gain sensitivity
 	if(player.sens < 80 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\nThe wrinkled rind suddenly feels alarmingly distinct in your hands, and you drop the remnants of the fruit.  Wonderingly, you touch yourself with a finger - you can feel even the lightest pressure on your " + player.skinFurScales() + " much more clearly now!");
-		if(player.sens < 60) stats(0,0,0,0,0,2,0,0);
-		stats(0,0,0,0,0,2,0,0);
+		if(player.sens < 60) dynStats("sen", 2);
+		dynStats("sen", 2);
 		changes++;
 	}
 	//lose toughness to floor of 50
 	if(rand(4) && player.tou > 50 && changes < changeLimit) {
 		outputText("\n\nYou find yourself wishing you could just sit around and eat all day, and spend a while lazing about and doing nothing before you can rouse yourself to get moving.");
-		if(player.tou > 75) stats(0,-1,0,0,0,0,0,0);
-		stats(0,-1,0,0,0,0,0,0);
+		if(player.tou > 75) dynStats("tou", -1);
+		dynStats("tou", -1);
 		changes++;
 	}
 	
@@ -12228,7 +12126,7 @@ public function ringtailFig():void {
 			outputText("\n\nYour [balls] inflate, stretching the skin of your sack.  Exposing them, you can see that they've grown several inches!  How magical!");
 			changes++;
 			player.ballSize += 2 + rand(3);
-			stats(0,0,0,0,1,0,0,0);
+			dynStats("lib", 1);
 		}
 		//gain balls up to 2 (only if full-coon face and fur; no dick required)
 		if(player.balls == 0 && player.skinType == SKIN_TYPE_FUR && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
@@ -12281,7 +12179,7 @@ public function ringtailFig():void {
 		//from naga non-feet (gain fatigue and lose lust)
 		if(player.isNaga()) {
 			outputText("\n\nYour body straightens and telescopes suddenly and without the length of your snake half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs!  The tattered snake-skin continues melding into your groin as you examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.");
-			stats(0,0,0,0,0,0,-30,0);
+			dynStats("lus", -30);
 			fatigue(5);
 		}
 		//from amoeba non-feet
@@ -12379,7 +12277,7 @@ public function mouseCocoa():void {
 		if(!player.isTaur()) outputText("\n\nYou tap your [feet] idly against the rock you sit upon as you enjoy the treat; it takes several minutes before you realize you don't reach as far down as you did when you sat down!  In shock, you jerk upright and leap off, nearly falling forward as your body moves more responsively than before!  Experimentally, you move in place as you look down at your now-closer [feet]; the sensation of a more compact agility stays with you.");
 		//horse
 		else outputText("\n\nYou trot idly in place as you eat, moving quicker and quicker as you become increasingly bored; on one step, the ground sneaks up on you and you hit it sharply, expecting a few more inches before contact!  Looking down, you notice better resolution than before - you can make out the dirt a bit more clearly.  It looks like you just shed some height, but... you're feeling too jittery to care.  You just want to run around.");
-		stats(0,0,1,0,0,0,0,0);
+		dynStats("spe", 1);
 		player.tallness--;
 		if(player.tallness > 60) player.tallness--;
 		if(player.tallness > 70) player.tallness--;
@@ -12392,9 +12290,9 @@ public function mouseCocoa():void {
 	if(player.tou > 50 && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou feel a bit less sturdy, both physically and mentally.  In fact, you'd prefer to have somewhere to hide for the time being, until your confidence returns.  The next few minutes are passed in a mousey funk - even afterward, you can't quite regain the same sense of invincibility you had before.");
 		changes++;
-		stats(0,-1,0,0,0,0,0,0);
-		if(player.tou >= 75) stats(0,-1,0,0,0,0,0,0);
-		if(player.tou >= 90) stats(0,-1,0,0,0,0,0,0);
+		dynStats("tou", -1);
+		if(player.tou >= 75) dynStats("tou", -1);
+		if(player.tou >= 90) dynStats("tou", -1);
 	}
 	
 	//SEXYYYYYYYYYYY
@@ -12411,7 +12309,7 @@ public function mouseCocoa():void {
 		else outputText("pull your hand back out");
 		outputText(".");
 		//adds some lust
-		stats(0,0,0,0,0,0,10 + player.sens/5,0);
+		dynStats("lus", 10 + player.sens/5);
 		if(player.vaginalCapacity() < 100 && player.hasVagina()) {
 			if(player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity",0,0,0,0);
 			player.addStatusValue("Bonus vCapacity", 1, 5);
@@ -12437,7 +12335,7 @@ public function mouseCocoa():void {
 			else {
 				outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
 				//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
-				minoCumAddiction(5);
+				player.minoCumAddiction(5);
 				player.knockUp(2,432,175);
 				consumeItem("MinoCum",1);
 			}
@@ -12445,13 +12343,13 @@ public function mouseCocoa():void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0,false,true);
+			dynStats("lib", 5, "resisted", false, "noBimbo", true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,0,0,false,true);
+			dynStats("lib", 15, "resisted", false, "noBimbo", true);
 			player.fertility++;
 		}
 		changes++;

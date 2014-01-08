@@ -1,7 +1,11 @@
 package classes
 {
 	import classes.GlobalFlags.kFLAGS;
-	import classes.content.UmasShop;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Places.TelAdre.UmasShop;
+
+	use namespace kGAMECLASS;
 
 	/**
 	 * ...
@@ -9,6 +13,11 @@ package classes
 	 */
 	public class Player extends Character
 	{
+		protected final function outputText(text:String, clear:Boolean = false):void
+		{
+			game.outputText(text, clear);
+		}
+		
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;
@@ -39,7 +48,7 @@ package classes
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
-			if (game.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 			if (hasStatusAffect("Shielding") >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
@@ -51,7 +60,7 @@ package classes
 			//Take damage you masochist!
 			if (hasPerk("Masochist") >= 0 && lib >= 60) {
 				damage = Math.round(damage * .7);
-				game.stats(0, 0, 0, 0, 0, 0, 2, 0);
+				game.dynStats("lus", 2);
 				//Dont let it round too far down!
 				if (damage < 1) damage = 1;
 			}
@@ -86,8 +95,8 @@ package classes
 			if (damage>0){
 				HP -= damage;
 				game.mainView.statsView.showStatDown('hp');
-				if (game.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					game.stats(0, 0, 0, 0, 0, 0, int(damage / 2), 0);
+				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					game.dynStats("lus", int(damage / 2));
 				}
 				//Prevent negatives
 				if (HP<=0){
@@ -933,11 +942,488 @@ package classes
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
 			var total:Number = 0;
 			if (hasStatusAffect("Lactation Endurance") < 0)
-				createStatusAffect("Lactation Endurance", 1, 0, 0, 0);
+				createStatusAffect("Lactation EnNumbere", 1, 0, 0, 0);
 			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1("Lactation Endurance") * totalBreasts();
 			if (statusAffectv1("Lactation Reduction") >= 48)
 				total = total * 1.5;
 			return total;
+		}
+
+		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
+			if (vaginas.length==0) return false;
+			var wasVirgin:Boolean = vaginas[0].virgin;
+			var stretched:Boolean = cuntChangeNoDisplay(cArea);
+			var devirgined:Boolean = wasVirgin && !vaginas[0].virgin;
+			if (devirgined){
+				if(spacingsF) outputText("  ");
+				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>", false);
+				if(spacingsB) outputText("  ");
+			}
+			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
+			if(display && stretched) {
+				//Virgins get different formatting
+				if(devirgined) {
+					//If no spaces after virgin loss
+					if(!spacingsB) outputText("  ");
+				}
+				//Non virgins as usual
+				else if(spacingsF) outputText("  ");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
+				if(spacingsB) outputText("  ");
+			}
+			return stretched;
+		}
+
+		public function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean
+		{
+			var stretched:Boolean = buttChangeNoDisplay(cArea);
+			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
+			if(stretched && display) {
+				if(spacingsF) outputText("  ");
+				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
+				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
+				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
+				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
+				if(ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
+				if(spacingsB) outputText("  ");
+			}
+			return stretched;
+		}
+
+		public function slimeFeed():void{
+			if(hasStatusAffect("Slime Craving") >= 0) {
+				//Reset craving value
+				changeStatusValue("Slime Craving",1,0);
+				//Flag to display feed update and restore stats in event parser
+				if(hasStatusAffect("Slime Craving Feed") < 0) {
+					createStatusAffect("Slime Craving Feed",0,0,0,0);
+				}
+			}
+			if(hasPerk("Diapause") >= 0) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+			}
+
+		}
+		
+		public function minoCumAddiction(raw:Number = 10):void {
+			//Increment minotaur cum intake count
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
+			//Fix if variables go out of range.
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
+			
+			//Turn off withdrawal
+			//if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 1;
+			//Reset counter
+			flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] = 0;
+			//If highly addicted, rises slower
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
+			//If in withdrawl, readdiction is potent!
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
+			raw = Math.round(raw * 100)/100;
+			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
+			//PUT SOME CAPS ON DAT' SHIT
+			if(raw > 50) raw = 20;
+			if(raw < -50) raw = -20;
+			//Recheck to make sure shit didn't break
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
+		
+		}
+
+		public function hasSpells():Boolean
+		{
+			return spellCount()>0;
+		}
+
+		public function spellCount():Number
+		{
+			return ["Knows Arouse","Knows Heal","Knows Might","Knows Charge","Knows Blind","Knows Whitefire"]
+					.filter(function(item:String,index:int,array:Array):Boolean{
+						return this.hasStatusAffect(item)>0;},this)
+					.length;
+		}
+
+		public function hairDescript():String
+		{
+			return Appearance.hairDescription(this);
+		}
+
+		public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number):void
+		{
+			if(breastRows.length == 0) return;
+			//GrowthType 1 = smallest grows
+			//GrowthType 2 = Top Row working downward
+			//GrowthType 3 = Only top row
+			var temp2:Number = 0;
+			var temp3:Number = 0;
+			//Chance for "big tits" perked characters to grow larger!
+			if(hasPerk("Big Tits") >= 0 && rand(3) == 0 && amount < 1) amount=1;
+			var temp:uint = breastRows.length;
+			if(growthType == 1) {
+				//Select smallest breast, grow it, move on
+				while(rowsGrown > 0) {
+					//Temp = counter
+					temp = breastRows.length;
+					//Temp2 = smallest tits index
+					temp2 = 0;
+					//Find smallest row
+					while(temp > 0) {
+						temp--;
+						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					}
+					//Temp 3 tracks total amount grown
+					temp3 += amount;
+					trace("Breastrow chosen for growth: " + String(temp2) + ".");
+					//Reuse temp to store growth amount for diminishing returns.
+					temp = amount;
+					//Diminishing returns!
+					if(breastRows[temp2].breastRating > 3) {
+						if(hasPerk("Big Tits") < 0) temp/=1.5;
+						else temp/=1.3;
+					}
+					if(breastRows[temp2].breastRating > 7) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					if(breastRows[temp2].breastRating > 9) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					if(breastRows[temp2].breastRating > 12) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					//Grow!
+					breastRows[temp2].breastRating += temp;
+					rowsGrown--;
+				}
+			}
+			//Diminishing returns!
+			if(breastRows[0].breastRating > 3) {
+				if(hasPerk("Big Tits") < 0) amount/=1.5;
+				else amount/=1.3;
+			}
+			if(breastRows[0].breastRating > 7) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}
+			if(breastRows[0].breastRating > 12) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}
+			/*if(breastRows[0].breastRating > 12) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}*/
+			if(growthType == 2) {
+				temp = 0;
+				temp2 = 0;
+				//Start at top and keep growing down, back to top if hit bottom before done.
+				while(rowsGrown > 0) {
+					if(temp+1 > breastRows.length) temp = 0;
+					breastRows[temp].breastRating += amount;
+					trace("Breasts increased by " + amount + " on row " + temp);
+					temp++;
+					temp3 += amount;
+					rowsGrown--;
+				}
+			}
+			if(growthType == 3) {
+				while(rowsGrown > 0) {
+					rowsGrown--;
+					breastRows[0].breastRating += amount;
+					temp3 += amount;
+				}
+			}
+			//Breast Growth Finished...talk about changes.
+			if(display) {
+				if(growthType < 3) {
+					if(amount <= 2) {
+						if(breastRows.length > 1) outputText("Your rows of " + breastDescript(0) + " jiggle with added weight, growing a bit larger.", false); 
+						if(breastRows.length == 1) outputText("Your " + breastDescript(0) + " jiggle with added weight as they expand, growing a bit larger.", false);
+					}
+					if(amount > 2 && amount <= 4) {
+						if(breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your rows of " + breastDescript(0) + " expand significantly.", false);
+						if(breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
+					}
+					if(amount > 4) {
+						if(breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
+						if(breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
+					}
+					if(biggestTitSize() >= 8.5 && nippleLength < 2) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 2;
+					}
+					if(biggestTitSize() >= 7 && nippleLength < 1) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 1;
+					}
+					if(biggestTitSize() >= 5 && nippleLength < .75) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .75;
+					}
+					if(biggestTitSize() >= 3 && nippleLength < .5) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .5;
+					}
+				}
+				else
+				{
+					if(amount <= 2) {
+						if(breastRows.length > 1) outputText("Your top row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
+						if(breastRows.length == 1) outputText("Your row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
+					}
+					if(amount > 2 && amount <= 4) {
+						if(breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your top row of " + breastDescript(0) + " expand significantly.", false);
+						if(breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
+					}
+					if(amount > 4) {
+						if(breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your top row of " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
+						if(breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tinglng in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
+					}
+					if(biggestTitSize() >= 8.5 && nippleLength < 2) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 2;
+					}
+					if(biggestTitSize() >= 7 && nippleLength < 1) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 1;
+					}
+					if(biggestTitSize() >= 5 && nippleLength < .75) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .75;
+					}
+					if(biggestTitSize() >= 3 && nippleLength < .5) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .5;
+					}
+				}
+			}
+		}
+
+		//Determine minimum lust
+		public function minLust():Number
+		{
+			var min:Number = 0;
+			//Bimbo body boosts minimum lust by 40
+			if(hasStatusAffect("Bimbo Champagne") >= 0 || hasPerk("Bimbo Body") >= 0 || hasPerk("Bro Body") >= 0 || hasPerk("Futa Form") >= 0) {
+				if(min > 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 40;
+			}
+			//Omnibus' Gift
+			if(hasPerk("Omnibus' Gift") >= 0) {
+				if(min > 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 35;                
+			}
+			//Nymph perk raises to 30
+			if(hasPerk("Nymphomania") >= 0) {
+				if(min >= 40) min += 10;
+				else if(min > 0) min += 15;
+				else min += 30;
+			}
+			//Oh noes anemone!
+			if(hasStatusAffect("Anemone Arousal") >= 0) {
+				if(min >= 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 30;
+			}
+			//Hot blooded perk raises min lust!
+			if(hasPerk("Hot Blooded") >= 0) {
+				if(min > 0) min += perks[hasPerk("Hot Blooded")].value1 / 2;
+				else min += perks[hasPerk("Hot Blooded")].value1;
+			}
+			if(hasPerk("Luststick Adapted") > 0) {
+				if(min < 50) min += 10;
+				else min += 5;                
+			}
+			//Add points for Crimstone
+			min += perkv1("Pierced: Crimstone");
+			min += perkv1("Pent Up");
+			//Harpy Lipstick status forces minimum lust to be at least 50.
+			if(min < 50 && hasStatusAffect("Luststick") >= 0) min = 50;
+			//SHOULDRA BOOSTS
+			//+20
+			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168) {
+				min += 20;
+				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
+					min += 30;
+			}
+			//SPOIDAH BOOSTS
+			if(eggs() >= 20) {
+				min += 10;
+				if(eggs() >= 40) min += 10;
+			}
+			if(min < 30 && armorName == "lusty maiden's armor") min = 30;
+			return min;
+		}
+
+		public function minotaurAddicted():Boolean {
+			return hasPerk("Minotaur Cum Addict") >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
+		}
+		public function minotaurNeed():Boolean {
+			return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
+		}
+
+		public function clearStatuses(visibility:Boolean):void
+		{
+			while(hasStatusAffect("Web") >= 0) {
+				spe += statusAffectv1("Web");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("Web");
+			}
+			if(hasStatusAffect("Shielding") >= 0) removeStatusAffect("Shielding");
+			if(hasStatusAffect("Holli Constrict") >= 0) removeStatusAffect("Holli Constrict");
+			if(hasStatusAffect("lust stones") >= 0) removeStatusAffect("lust stones");
+			if(kGAMECLASS.monster.hasStatusAffect("sandstorm") >= 0) kGAMECLASS.monster.removeStatusAffect("sandstorm");
+			if(hasStatusAffect("Sealed") >= 0) {
+				removeStatusAffect("Sealed");
+			}
+			if(hasStatusAffect("Berzerking") >= 0) {
+				removeStatusAffect("Berzerking");
+				kGAMECLASS.applyArmorStats(armorName, false);
+				weaponAttack = kGAMECLASS.fixedDamage(weaponName);
+			}
+			if(kGAMECLASS.monster.hasStatusAffect("Tail Whip") >= 0) {
+				kGAMECLASS.monster.removeStatusAffect("Tail Whip");
+				kGAMECLASS.applyArmorStats(armorName, false);
+			}
+			if(hasStatusAffect("UBERWEB") >= 0) removeStatusAffect("UBERWEB");
+			if(hasStatusAffect("Drider Kiss") >= 0) removeStatusAffect("Drider Kiss");
+			if(hasStatusAffect("Web-Silence") >= 0) removeStatusAffect("Web-Silence");
+			if(hasStatusAffect("GooArmorSilence") >= 0) removeStatusAffect("GooArmorSilence");
+			if(hasStatusAffect("Bound") >= 0) removeStatusAffect("Bound");
+			if(hasStatusAffect("GooArmorBind") >= 0) removeStatusAffect("GooArmorBind");
+			if(hasStatusAffect("Whispered") >= 0) removeStatusAffect("Whispered");
+			if(hasStatusAffect("Akbal Speed") >= 0) {
+				kGAMECLASS.dynStats("spe", statusAffectv1("Akbal Speed") * -1);
+				removeStatusAffect("Akbal Speed");
+			}		
+			if(hasStatusAffect("Amily Venom") >= 0) {
+				kGAMECLASS.dynStats("str", statusAffectv1("Amily Venom"),"spe", statusAffectv2("Amily Venom"));
+				removeStatusAffect("Amily Venom");
+			}
+			while(hasStatusAffect("Blind") >= 0) {
+				removeStatusAffect("Blind");
+			}
+			if(hasStatusAffect("Sheila Oil") >= 0) {
+				removeStatusAffect("Sheila Oil");
+			}
+			if(kGAMECLASS.monster.hasStatusAffect("Twu Wuv") >= 0) {
+				inte += kGAMECLASS.monster.statusAffectv1("Twu Wuv");
+				kGAMECLASS.statScreenRefresh();
+				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
+				// inteDown.visible = false;
+				// inteUp.visible = true;		
+			}
+			if(hasStatusAffect("Naga Venom") >= 0) {
+				spe += statusAffectv1("Naga Venom");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				//stats(0,0,statusAffectv1("Naga Venom"),0,0,0,0,0);
+				removeStatusAffect("Naga Venom");
+			}
+			if(hasStatusAffect("TentacleBind") >= 0) removeStatusAffect("TentacleBind");
+			if(hasStatusAffect("Naga Bind") >= 0) removeStatusAffect("Naga Bind");
+			if(hasStatusAffect("Stone Lust") >= 0) {
+				removeStatusAffect("Stone Lust");
+			}
+			removeStatusAffect("FirstAttack");
+			if(hasStatusAffect("Temporary Heat") >= 0) removeStatusAffect("Temporary Heat");
+			if(hasStatusAffect("NoFlee") >= 0) removeStatusAffect("NoFlee");
+			if(hasStatusAffect("Poison") >= 0) removeStatusAffect("Poison");
+			if(hasStatusAffect("Isabella Stunned") >= 0) removeStatusAffect("Isabella Stunned");
+			if(hasStatusAffect("Stunned") >= 0) removeStatusAffect("Stunned");
+			if(hasStatusAffect("Confusion") >= 0) removeStatusAffect("Confusion");
+			if(hasStatusAffect("Throat Punch") >= 0) removeStatusAffect("Throat Punch");
+			if(hasStatusAffect("Kiss of Death") >= 0) removeStatusAffect("Kiss of Death");
+			if(hasStatusAffect("Acid Slap") >= 0) removeStatusAffect("Acid Slap");
+			if(hasStatusAffect("GooBind") >= 0) removeStatusAffect("GooBind");
+			if(hasStatusAffect("HarpyBind") >= 0) removeStatusAffect("HarpyBind");
+			if(hasStatusAffect("Called Shot") >= 0) {
+				spe += statusAffectv1("Called Shot");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speDown.visible = false;
+				// speUp.visible = true;
+				removeStatusAffect("Called Shot");
+			}
+			if(hasStatusAffect("DemonSeed") >= 0) {
+				removeStatusAffect("DemonSeed");
+			}
+			if(hasStatusAffect("paralyze venom") >= 0) {
+				str += statusAffects[hasStatusAffect("paralyze venom")].value1;
+				spe += statusAffects[hasStatusAffect("paralyze venom")].value2;
+				removeStatusAffect("paralyze venom");
+			}
+			if(hasStatusAffect("lust venom") >= 0) {
+				removeStatusAffect("lust venom");
+			}
+			if(hasStatusAffect("infestAttempted") >= 0) {
+				removeStatusAffect("infestAttempted");
+			}
+			if(hasStatusAffect("Might") >= 0) {
+				kGAMECLASS.dynStats("str", -statusAffectv1("Might"),"tou", -statusAffectv2("Might"));
+				removeStatusAffect("Might");
+			}
+			if(hasStatusAffect("Charge Weapon") >= 0) {
+				weaponAttack -= statusAffectv1("Charge Weapon");
+				removeStatusAffect("Charge Weapon");
+			}
+			if(hasStatusAffect("Disarmed") >= 0) {
+				removeStatusAffect("Disarmed");
+				if(weaponName == "fists") {
+					weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
+					weaponAttack = kGAMECLASS.fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+				}
+				else {
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = kGAMECLASS.lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+				}
+			}
+			if(hasStatusAffect("Anemone Venom") >= 0) {
+				str += statusAffectv1("Anemone Venom");
+				spe += statusAffectv2("Anemone Venom");
+				//Make sure nothing got out of bounds
+				kGAMECLASS.dynStats("cor", 0);
+		
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
+				// speUp.visible = true;
+				// strUp.visible = true;
+				removeStatusAffect("Anemone Venom");
+			}
+			if(hasStatusAffect("Gnoll Spear") >= 0) {
+				spe += statusAffectv1("Gnoll Spear");
+				//Make sure nothing got out of bounds
+				kGAMECLASS.dynStats("cor", 0);
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("Gnoll Spear");
+			}
+			if(hasStatusAffect("Basilisk Compulsion") >= 0) removeStatusAffect("Basilisk Compulsion");
+			if(hasStatusAffect("BasiliskSlow") >= 0) {
+				spe += statusAffectv1("BasiliskSlow");
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				// speUp.visible = true;
+				// speDown.visible = false;
+				removeStatusAffect("BasiliskSlow");
+			}
+			while(hasStatusAffect("Izma Bleed") >= 0) removeStatusAffect("Izma Bleed");
 		}
 	}
 }

@@ -8,7 +8,7 @@
 
 	import classes.AssClass;
 	import classes.BreastRowClass;
-	
+
 	import classes.Player;
 	import classes.Cock;
 	import classes.Creature;
@@ -21,7 +21,33 @@
 
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
-	import classes.Monsters.*;		// import all the various monsters
+	import classes.Scenes.*;
+	import classes.Scenes.Areas.*;
+	import classes.Scenes.Areas.Bog.*
+	import classes.Scenes.Areas.Desert.*
+	import classes.Scenes.Areas.Forest.*
+	import classes.Scenes.Areas.HighMountains.*
+	import classes.Scenes.Areas.Lake.*
+	import classes.Scenes.Areas.Mountain.*
+	import classes.Scenes.Areas.Plains.*
+	import classes.Scenes.Areas.Swamp.*
+	import classes.Scenes.Camp.*;
+	import classes.Scenes.Dungeons.*;
+	import classes.Scenes.Dungeons.DeepCave.*;
+	import classes.Scenes.Dungeons.DesertCave.*;
+	import classes.Scenes.Dungeons.Factory.*;
+	import classes.Scenes.Dungeons.HelDungeon.*;
+	import classes.Scenes.Explore.*;
+	import classes.Scenes.Monsters.*;
+	import classes.Scenes.NPCs.*;
+	import classes.Scenes.Places.*;
+	import classes.Scenes.Places.Bazaar.*;
+	import classes.Scenes.Places.Boat.*;
+	import classes.Scenes.Places.Farm.*;
+	import classes.Scenes.Places.Owca.*;
+	import classes.Scenes.Places.TelAdre.*;
+	import classes.Scenes.Quests.*;
+	import classes.Scenes.Quests.UrtaQuest.*;
 	import coc.view.MainView;
 
 	import coc.model.GameModel;
@@ -29,13 +55,13 @@
 
 	// Class based content? In my CoC?! It's more likely than you think!
 	import classes.content.*;
-	import fl.controls.ComboBox; 
-	import fl.data.DataProvider; 
+	import fl.controls.ComboBox;
+	import fl.data.DataProvider;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.events.*
 	import flash.net.FileReference;
-	import flash.net.navigateToURL; 
+	import flash.net.navigateToURL;
 	import flash.net.registerClassAlias;
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
@@ -72,12 +98,7 @@
 		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
 		
-		include "../../includes/exploration.as";
-		include "../../includes/followerInteractions.as";
-		include "../../includes/telAdre.as";
-		
-		include "../../includes/bazaar.as";
-		
+
 		include "../../includes/eventTest.as";
 		
 		
@@ -90,132 +111,92 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		// Scenes/
+		public var camp:Camp = new Camp();
+		public var exploration:Exploration = new Exploration();
+		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
+		// Scenes/Areas/
+		public var bog:Bog = new Bog();
+		public var desert:Desert = new Desert();
+		public var forest:Forest = new Forest();
+		public var highMountains:HighMountains = new HighMountains();
+		public var lake:Lake = new Lake();
+		public var mountain:Mountain = new Mountain();
+		public var plains:Plains = new Plains();
+		public var swamp:Swamp = new Swamp();
+		// Scenes/Dungeons
+		public var brigidScene:BrigidScene = new BrigidScene();
+		// Scenes/Explore/
+		public var gargoyle:Gargoyle = new Gargoyle();
+		public var lumi:Lumi = new Lumi();
+		// Scenes/Monsters/
+		public var goblinScene:GoblinScene = new GoblinScene();
+		public var impScene:ImpScene = new ImpScene();
+		// Scenes/NPC/
+		public var amilyScene:AmilyScene = new AmilyScene();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
+		public var arianScene:ArianScene = new ArianScene();
+		public var ceraphScene:CeraphScene = new CeraphScene();
+		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
+		public var emberScene:EmberScene = new EmberScene();
+		public var exgartuan:Exgartuan = new Exgartuan();
+		public var helFollower:HelFollower = new HelFollower();
+		public var helScene:HelScene = new HelScene();
+		public var helSpawnScene:HelSpawnScene = new HelSpawnScene();
+		public var holliScene:HolliScene = new HolliScene();
+		public var isabellaScene:IsabellaScene = new IsabellaScene();
+		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
+		public var izmaScene:IzmaScene = new IzmaScene();
+		public var jojoScene:JojoScene = new JojoScene();
+		public var kihaFollower:KihaFollower = new KihaFollower();
+		public var kihaScene:KihaScene = new KihaScene();
+		public var latexGirl:LatexGirl = new LatexGirl();
+		public var marbleScene:MarbleScene = new MarbleScene();
+		public var milkWaifu:MilkWaifu = new MilkWaifu();
+		public var raphael:Raphael = new Raphael();
+		public var rathazul:Rathazul = new Rathazul();
+		public var sheilaScene:SheilaScene = new SheilaScene();
+		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
+		public var shouldraScene:ShouldraScene = new ShouldraScene();
+		public var sophieBimbo:SophieBimbo = new SophieBimbo();
+		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
+		public var sophieScene:SophieScene = new SophieScene();
+		public var urta:Urta = new Urta();
+		public var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
+		public var urtaPregs:UrtaPregs = new UrtaPregs();
+		public var valeria:Valeria = new Valeria();
+		public var vapula:Vapula = new Vapula();
+		// Scenes/Places/
+		public var bazaar:Bazaar = new Bazaar();
+		public var boat:Boat = new Boat();
+		public var farm:Farm = new Farm();
+		public var owca:Owca = new Owca();
+		public var telAdre:TelAdre = new TelAdre();
+		// Scenes/Quests/
+		public var urtaQuest:UrtaQuest = new UrtaQuest();
+
+		// Other scenes
+		[Scene]
 		public var testContent:TestContent = new TestContent();
-		public var umasShop:UmasShop = new UmasShop();
-		
-		include "../../includes/akbal.as";
-		include "../../includes/amily.as";
-		include "../../includes/anemone.as";
-		include "../../includes/ants.as";
+
 		include "../../includes/april_fools.as";
-		include "../../includes/arian.as";
-		include "../../includes/auntNancy.as";
-		include "../../includes/bakery.as";
-		include "../../includes/basilisk.as";
-		include "../../includes/bee.as";
-		include "../../includes/benoit.as";
-		include "../../includes/brooke.as";
-		include "../../includes/bunbun.as";
-		include "../../includes/camp.as";
-		include "../../includes/ceraph.as";
-		include "../../includes/ceraphFollower.as";
-		include "../../includes/chameleons.as";
-		include "../../includes/cinnabar.as";
-		include "../../includes/cotton.as";
+
 		include "../../includes/dreams.as";
-		include "../../includes/drider.as";
 		include "../../includes/dungeon2Supplimental.as";
 		include "../../includes/dungeonCore.as";
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
-		include "../../includes/edryn.as";
-		include "../../includes/ember.as";
-		include "../../includes/essrayle.as";
-		include "../../includes/exgartuan.as";
-		include "../../includes/faerie.as";
-		include "../../includes/fapArena.as";
-		include "../../includes/fellatrix.as";
 		include "../../includes/fera.as";
-		include "../../includes/fetishCultist.as";
-		include "../../includes/fetishZealot.as";
-		include "../../includes/froggirl.as";
-		include "../../includes/fuckingTree.as";
-		include "../../includes/gangbangVillage.as";
-		include "../../includes/gargoyle.as";
-		include "../../includes/gnoll.as";
-		include "../../includes/gnoll_alternate.as";
-		include "../../includes/goblin.as";
-		include "../../includes/gooGirl.as";
-		include "../../includes/harpy.as";
-		include "../../includes/harpySophie.as";
-		include "../../includes/harpySophieBimbo.as";
-		include "../../includes/harpySophieFollower.as";
-		include "../../includes/heckel.as";
-		include "../../includes/heliaFollower.as";
-		include "../../includes/heliaPreggers.as";
-		include "../../includes/hellhound.as";
-		include "../../includes/hellhoundInfested.as";
-		include "../../includes/ifris.as";
-		include "../../includes/imp.as";
-		include "../../includes/isabella.as";
-		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
-		include "../../includes/izma.as";
-		include "../../includes/jasun.as";
-		include "../../includes/jojo.as";
-		include "../../includes/kaiju.as";
-		include "../../includes/katherine.as";
-		include "../../includes/kelly.as";
-		include "../../includes/kelt.as";
-		include "../../includes/kiha.as";
-		include "../../includes/kihaFollower.as";
-		include "../../includes/kitsunes.as";
-		include "../../includes/latexy.as";
-		include "../../includes/library.as";
-		include "../../includes/lilium.as";
-		include "../../includes/loppe.as";
-		include "../../includes/lottie.as";
-		include "../../includes/lumi.as";
-		include "../../includes/maddie.as";
-		include "../../includes/marae.as";
-		include "../../includes/marble.as";
 		include "../../includes/masturbation.as";
-		include "../../includes/milkWaifu.as";
-		include "../../includes/minerva.as";
-		include "../../includes/minotaur.as";
-		include "../../includes/minotaurGang.as";
-		include "../../includes/naga.as";
-		include "../../includes/niamh.as";
-		include "../../includes/oasis.as";
-		include "../../includes/ooze.as";
-		//include "../../includes/parser.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
-		include "../../includes/Raphael.as";
-		include "../../includes/rathazul.as";
-		include "../../includes/rogar.as";
-		include "../../includes/roxanne.as";
-		include "../../includes/rubi.as";
 		include "../../includes/runa.as";
-		include "../../includes/salamander.as";
-		include "../../includes/salon.as";
-		include "../../includes/sandtrap.as";
-		include "../../includes/sandwitch.as";
-		include "../../includes/satyr.as";
-		include "../../includes/scylla.as";
-		include "../../includes/sexMachine.as";
-		include "../../includes/sharkgirls.as";
-		include "../../includes/sheila.as";
-		include "../../includes/shouldra.as";
-		include "../../includes/shouldraFollower.as";
-		include "../../includes/spiderMorph.as";
-		include "../../includes/spiderMorphMale.as";
-		include "../../includes/swordInStone.as";
 		include "../../includes/symGear.as";
-		include "../../includes/tamani.as";
 		include "../../includes/tamaniDildo.as";
-		include "../../includes/tamanisDaughters.as";
-		include "../../includes/tentacle.as";
 		include "../../includes/thanksgiving.as";
-		include "../../includes/urta.as";
-		include "../../includes/urtaPregs.as";
-		include "../../includes/urtaQuest.as";
-		include "../../includes/urtaHeatRut.as";
-		include "../../includes/valaria.as";
 		include "../../includes/valentines.as";
-		include "../../includes/wanderer.as";
-		include "../../includes/whitneyFarm.as";
 		include "../../includes/worms.as";
 		include "../../includes/xmas_bitch.as";
 		include "../../includes/xmas_gats_not_an_angel.as";
@@ -287,6 +268,12 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
+
+		// holidayz
+		public function isEaster():Boolean
+		{
+			return plains.bunnyGirl.isItEaster();
+		}
 
 		public function CoC()
 		{
@@ -486,8 +473,8 @@
 
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
 
-			itemStorage = new Array();
-			gearStorage = new Array();
+			itemStorage = [];
+			gearStorage = [];
 			shortName = "";
 			//}endregion
 
@@ -507,8 +494,8 @@
 			temp = 0;
 
 			//Used to set what each action buttons displays and does.
-			args = new Array();
-			funcs = new Array();
+			args = [];
+			funcs = [];
 
 			//Used for stat tracking to keep up/down arrows correct.
 			oldStats = {};
@@ -562,11 +549,7 @@
 
 		public function run():void
 		{
-
-		
 			mainMenu();
-
-
 			this.stop();
 		}
 	}

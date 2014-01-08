@@ -1,108 +1,8 @@
 ﻿public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
-	if(player.vaginas.length == 0) return false;
-	var stretched:Boolean = false;
-	var devirgined:Boolean = false;
-	if(player.hasPerk("Fera's Boon - Milking Twat") < 0 || player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
-	//cArea > capacity = autostreeeeetch.
-	if(cArea >= player.vaginalCapacity()) {
-		if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
-		else player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-	}
-	//If within top 10% of capacity, 50% stretch
-	else if(cArea >= .9 * player.vaginalCapacity() && rand(2) == 0) {
-		player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-	}
-	//if within 75th to 90th percentile, 25% stretch
-	else if(cArea >= .75 * player.vaginalCapacity() && rand(4) == 0) {
-		player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-		}
-	}
-	//If virgin
-	if(player.vaginas[0].virgin) {
-		if(spacingsF) outputText("  ", false);
-		outputText("<b>Your hymen is torn, robbing you of your virginity.</b>", false);
-		if(spacingsB) outputText("  ", false);
-		player.vaginas[0].virgin = false;
-		devirgined = true;
-	}
-	//Delay anti-stretching
-	if(cArea >= .5 * player.vaginalCapacity()) {
-		//Cunt Stretched used to determine how long since last enlargement
-		if(player.hasStatusAffect("CuntStretched") < 0) player.createStatusAffect("CuntStretched",0,0,0,0);
-		//Reset the timer on it to 0 when restretched.
-		else player.changeStatusValue("CuntStretched",1,0);
-	}
-	if(stretched) {
-		trace("CUNT STRETCHED TO " + (player.vaginas[0].vaginalLooseness) + ".");
-		//STRETCH SUCCESSFUL - begin flavor text if outputting it!
-		if(display) {
-			//Virgins get different formatting
-			if(devirgined) {
-				//If no spaces after virgin loss
-				if(!spacingsB) outputText("  ", false);
-			}
-			//Non virgins as usual
-			else if(spacingsF) outputText("  ", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + vaginaDescript(0) + " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched so wide that it gapes continually.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, the lips now wide enough to gape slightly.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now a little loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " is stretched out to a more normal size.</b>", false);
-			if(spacingsB) outputText("  ", false);
-		}
-	}
-	return stretched;
+	return player.cuntChange(cArea,display,spacingsF,spacingsB);
 }
 public function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
-	var stretched:Boolean = false;
-	//cArea > capacity = autostreeeeetch half the time.
-	if(cArea >= player.analCapacity() && rand(2) == 0) {
-		if(player.ass.analLooseness >= 5) {}
-		else player.ass.analLooseness++;
-		stretched = true;
-		//Reset butt stretchin recovery time
-		if(player.hasStatusAffect("ButtStretched") >= 0) player.changeStatusValue("ButtStretched",1,0);
-	}
-	//If within top 10% of capacity, 25% stretch
-	if(cArea < player.analCapacity() && cArea >= .9*player.analCapacity() && rand(4) == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//if within 75th to 90th percentile, 10% stretch
-	if(cArea < .9 * player.analCapacity() && cArea >= .75 * player.analCapacity() && rand(10) == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//Anti-virgin
-	if(player.ass.analLooseness == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//Delay un-stretching
-	if(cArea >= .5 * player.analCapacity()) {
-		//Butt Stretched used to determine how long since last enlargement
-		if(player.hasStatusAffect("ButtStretched") < 0) player.createStatusAffect("ButtStretched",0,0,0,0);
-		//Reset the timer on it to 0 when restretched.
-		else player.changeStatusValue("ButtStretched",1,0);
-	}
-	if(stretched) {
-		trace("BUTT STRETCHED TO " + (player.ass.analLooseness) + ".");
-		//STRETCH SUCCESSFUL - begin flavor text if outputting it!
-		if(display) {
-			if(spacingsF) outputText("  ", false);
-			if(player.ass.analLooseness == 5) outputText("<b>Your " + assholeDescript() + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>", false);
-			if(player.ass.analLooseness == 4) outputText("<b>Your " + assholeDescript() + " becomes so stretched that it gapes continually.</b>", false);
-			if(player.ass.analLooseness == 3) outputText("<b>Your " + assholeDescript() + " is now very loose.</b>", false);
-			if(player.ass.analLooseness == 2) outputText("<b>Your " + assholeDescript() + " is now a little loose.</b>", false);
-			if(player.ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
-			if(spacingsB) outputText("  ", false);
-		}
-	}
-	return stretched;
+	return player.buttChange(cArea,display,spacingsF,spacingsB);
 }
 
 
@@ -123,155 +23,7 @@ public function genderCheck():void {
 
 //Many transformations are part of items, see items.as
 public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number):void {
-	if(player.breastRows.length == 0) return;
-	//GrowthType 1 = smallest grows
-	//GrowthType 2 = Top Row working downward
-	//GrowthType 3 = Only top row
-	var temp2:Number = 0;
-	var temp3:Number = 0;
-	//Chance for "big tits" perked characters to grow larger!
-	if(player.hasPerk("Big Tits") >= 0 && rand(3) == 0 && amount < 1) amount=1;
-	temp = player.breastRows.length;
-	if(growthType == 1) {
-		//Select smallest breast, grow it, move on
-		while(rowsGrown > 0) {
-			//Temp = counter
-			temp = player.breastRows.length;
-			//Temp2 = smallest tits index
-			temp2 = 0;
-			//Find smallest row
-			while(temp > 0) {
-				temp--;
-				if(player.breastRows[temp].breastRating < player.breastRows[temp2].breastRating) temp2 = temp;
-			}
-			//Temp 3 tracks total amount grown
-			temp3 += amount;
-			trace("Breastrow chosen for growth: " + String(temp2) + ".");
-			//Reuse temp to store growth amount for diminishing returns.
-			temp = amount;
-			//Diminishing returns!
-			if(player.breastRows[temp2].breastRating > 3) {
-				if(player.hasPerk("Big Tits") < 0) temp/=1.5;
-				else temp/=1.3;
-			}
-			if(player.breastRows[temp2].breastRating > 7) { 
-				if(player.hasPerk("Big Tits") < 0) temp/=2;
-				else temp /= 1.5;
-			}
-			if(player.breastRows[temp2].breastRating > 9) { 
-				if(player.hasPerk("Big Tits") < 0) temp/=2;
-				else temp /= 1.5;
-			}
-			if(player.breastRows[temp2].breastRating > 12) { 
-				if(player.hasPerk("Big Tits") < 0) temp/=2;
-				else temp /= 1.5;
-			}
-			//Grow!
-			player.breastRows[temp2].breastRating += temp;
-			rowsGrown--;
-		}
-	}
-	//Diminishing returns!
-	if(player.breastRows[0].breastRating > 3) {
-		if(player.hasPerk("Big Tits") < 0) amount/=1.5;
-		else amount/=1.3;
-	}
-	if(player.breastRows[0].breastRating > 7) { 
-		if(player.hasPerk("Big Tits") < 0) amount/=2;
-		else amount /= 1.5;
-	}
-	if(player.breastRows[0].breastRating > 12) { 
-		if(player.hasPerk("Big Tits") < 0) amount/=2;
-		else amount /= 1.5;
-	}
-	/*if(player.breastRows[0].breastRating > 12) { 
-		if(player.hasPerk("Big Tits") < 0) amount/=2;
-		else amount /= 1.5;
-	}*/
-	if(growthType == 2) {
-		temp = 0;
-		temp2 = 0;
-		//Start at top and keep growing down, back to top if hit bottom before done.
-		while(rowsGrown > 0) {
-			if(temp+1 > player.breastRows.length) temp = 0;
-			player.breastRows[temp].breastRating += amount;
-			trace("Breasts increased by " + amount + " on row " + temp);
-			temp++;
-			temp3 += amount;
-			rowsGrown--;
-		}
-	}
-	if(growthType == 3) {
-		while(rowsGrown > 0) {
-			rowsGrown--;
-			player.breastRows[0].breastRating += amount;
-			temp3 += amount;
-		}
-	}
-	//Breast Growth Finished...talk about changes.
-	if(display) {
-		if(growthType < 3) {
-			if(amount <= 2) {
-				if(player.breastRows.length > 1) outputText("Your rows of " + breastDescript(0) + " jiggle with added weight, growing a bit larger.", false); 
-				if(player.breastRows.length == 1) outputText("Your " + breastDescript(0) + " jiggle with added weight as they expand, growing a bit larger.", false);
-			}
-			if(amount > 2 && amount <= 4) {
-				if(player.breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your rows of " + breastDescript(0) + " expand significantly.", false);
-				if(player.breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
-			}
-			if(amount > 4) {
-				if(player.breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
-				if(player.breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
-			}
-			if(player.biggestTitSize() >= 8.5 && player.nippleLength < 2) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = 2;
-			}
-			if(player.biggestTitSize() >= 7 && player.nippleLength < 1) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = 1;
-			}
-			if(player.biggestTitSize() >= 5 && player.nippleLength < .75) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = .75;
-			}
-			if(player.biggestTitSize() >= 3 && player.nippleLength < .5) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = .5;
-			}
-		}
-		else
-		{
-			if(amount <= 2) {
-				if(player.breastRows.length > 1) outputText("Your top row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
-				if(player.breastRows.length == 1) outputText("Your row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
-			}
-			if(amount > 2 && amount <= 4) {
-				if(player.breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your top row of " + breastDescript(0) + " expand significantly.", false);
-				if(player.breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
-			}
-			if(amount > 4) {
-				if(player.breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your top row of " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
-				if(player.breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tinglng in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
-			}
-			if(player.biggestTitSize() >= 8.5 && player.nippleLength < 2) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = 2;
-			}
-			if(player.biggestTitSize() >= 7 && player.nippleLength < 1) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = 1;
-			}
-			if(player.biggestTitSize() >= 5 && player.nippleLength < .75) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = .75;
-			}
-			if(player.biggestTitSize() >= 3 && player.nippleLength < .5) {
-				outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-				player.nippleLength = .5;
-			}
-		}
-	}
+	player.growTits(amount,rowsGrown,display,growthType);
 }
 				
 public function shrinkTits():void {
@@ -421,7 +173,7 @@ public function demonChanges():void {
 			outputText("<b>Your tail is now demonic in appearance.</b>", false);
 		}
 		else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
-		stats(0, 0, 0, 0, 0, 0, 0, 4);
+		dynStats("cor", 4);
 		player.tailType = TAIL_TYPE_DEMONIC;	
 	}
 	//grow horns!
@@ -435,7 +187,7 @@ public function demonChanges():void {
 			if(player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
 			player.horns++;
 			player.horns++;
-			stats(0, 0, 0, 0, 0, 0, 0, 3);
+			dynStats("cor", 3);
 		}
 		//Text for shifting horns
 		else if(player.hornType > HORNS_DEMON) {
@@ -443,7 +195,7 @@ public function demonChanges():void {
 			outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
 			player.horns = 2;
 			player.hornType = HORNS_DEMON;
-			stats(0, 0, 0, 0, 0, 0, 0, 3);
+			dynStats("cor", 3);
 		}		
 	}
 	//Nipples Turn Back:

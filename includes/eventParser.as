@@ -1,4 +1,6 @@
-﻿//Used to jump the fuck out of pregnancy scenarios for menus.
+﻿import classes.GlobalFlags.kFLAGS;
+
+//Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
@@ -14,10 +16,11 @@ public function eventParser(eventNo:*):void {
 	}
 	else if (eventNo is int)
 	{
+		//trace("Numeric eventNo "+eventNo+" replace it with function");
 		//Clear sprite if not in combat
-		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
+		if(!inCombat() && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat
-		//if(!inCombat() && eventNo != 5007) clearImages();
+		//if(!inCombat() && eventNo != cleanupAfterCombat) clearImages();
 		//Reset newgame buttons till back at camp
 		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
 		if(eventNo != 1) {
@@ -69,291 +72,318 @@ public function doSystem(eventNo:Number):void {
 		return;
 	}
 
-	if(eventNo != 1) 
+	if(eventNo != 1)
 	{
 		hideMenus();
 	}
-	if(eventNo == 1) {
-		mainView.nameBox.visible = false;
-		if(gameState == 1 || gameState == 2) {
+	switch (eventNo) {
+		case 1:
+			mainView.nameBox.visible = false;
+			if (gameState == 1 || gameState == 2) {
+				menuLoc = 0;
+				eventParser(5000);
+				return;
+			}
+			//Clear restriction on item overlaps if not in combat
+			plotFight = false;
+			if (inDungeon) {
+				menuLoc = 0;
+				dungeonRoom(dungeonLoc);
+				return;
+			}
 			menuLoc = 0;
-			eventParser(5000);
+			flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
+			camp.doCamp();
 			return;
-		}
-		//Clear restriction on item overlaps if not in combat
-		plotFight =false;
-		if(inDungeon) {
-			menuLoc = 0;
-			dungeonRoom(dungeonLoc);
-			return;
-		}
-		menuLoc = 0;
-		flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
-		camp();
-		return;
-	}
-	if(eventNo == 2) 
-	{
-		doExplore();
-		return;
-	}
-	if(eventNo == 3) 
-	{
-		exploreDesert();
-		return;
-	}
-	if(eventNo == 4) 
-	{
-		exploreForest();
-		return;
-	}
-	if(eventNo == 5) 
-	{
-		exploreLake();
-		return;
-	}
-	if(eventNo == 6) 
-	{
-		exploreMountain();
-		return;
-	}
-	//Masturbate
-	if(eventNo == 10) {
-		if(player.hasStatusAffect("dysfunction") >= 0) {
-			outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true); 
-			doNext(1);
-			return;
-		}
-		masturbateGo();
-		return;
-	}
-	//Rest
-	if(eventNo == 11) { 
-		rest();
-		return;
-	}
-	//Explore new zones
-	if(eventNo == 12)
-	{
-		tryDiscover();	
-		return;
-	}
-	//Pass an hour
-	if(eventNo == 13) {
-		outputText("An hour passes...\n", true);
-		timeQ = 1;
-		goNext(1, false);
-		return;
-	}
-	if(eventNo == 14) {
-		outputText("Two hours pass...\n", true);
-		timeQ = 2;
-		goNext(2, false);
-		return;
-	}
-	if(eventNo == 15) {
-		outputText("Four hours pass...\n", true);
-		timeQ = 4;
-		goNext(4, false);
-		return;
-	}
-	if(eventNo == 16) {
-		outputText("Eight hours pass...\n", true);
-		timeQ = 8;
-		goNext(8, false);
-		return;
-	}
-	if(eventNo == 17) {
-		outputText("", true);
-		goNext(24, false);
-		return;
-	}
-	//Load menu
-	if(eventNo == 19 ) {
-		loadScreen();
-		return;
-	}
-	//Save Menu
-	if(eventNo == 20) {
-		saveScreen();
-		return;
-	}
-	if(eventNo == -20)
-	{
-		saveGameObject(null, true);
-		return;
-	}
-	if(eventNo == -21)
-	{
-		openSave();
-		showStats();
-		statScreenRefresh();
-		return;
-	}
-	if(eventNo == 30) 	// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
-	{
-		var f:MouseEvent;
-		saveLoad(f);
-		return;
-	}
-	//Use wait command
-	if(eventNo == 40) {
-		//See camp.as
-		doWait();
-		return;
-	}
-	//Use sleep command
-	if(eventNo == 41) {
-		//in camp.as
-		doSleep();
-		return;
-	}
-	//Choose masturbate options
-	if(eventNo == 42) {
-		masturbateMenu();
-		return;
-	}
-	//Jojo as a cumsleeve
-	if(eventNo == 43) {
-		corruptCampJojo();
-		return;
-	}
-	//Gain +5 Str due to level
-	if(eventNo == 44) {
-		stats(5,0,0,0,0,0,0,0);
-		outputText("Your muscles feel significantly stronger from your time adventuring.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 Toughness due to level
-	if(eventNo == 45) {
-		stats(0,5,0,0,0,0,0,0);
-		trace("HP: " + player.HP + " MAX HP: " + maxHP());
-		statScreenRefresh();
-		outputText("You feel tougher from all the fights you have endured.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 Intelligence due to level
-	if(eventNo == 46) {
-		stats(0,0,0,5,0,0,0,0);
-		outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 speed due to level
-	if(eventNo == 47) {
-		stats(0,0,5,0,0,0,0,0);
-		outputText("Your time in combat has driven you to move faster.", true);
-		doNext(116);
-		return;
-	}
-	//Use Onahole
-	if(eventNo == 48) {
-		onaholeUse();
-		return;
-	}
-	//Use Stimbelt
-	if(eventNo == 49) 
-	{
-		stimBeltUse();
-		return;
-	}
-	if(eventNo == 50) {
-		deluxeOnaholeUse();
-		return;
-	}
-	if(eventNo == 51) {
-		allNaturalOnaholeUse();
-		return;
-	}
-	if(eventNo == 52) {
-		allNaturalStimBeltUse();
-		return;
-	}
-	//turn on/off autosave
-	if(eventNo == 65) {
-		var e:MouseEvent;
-		if(player.autoSave) player.autoSave = false;
-		else player.autoSave = true;
-		saveLoad(e);
-		return;
-	}
-	//Places menu
-	if(eventNo == 71) 
-	{
-		places(true);
-		return;
-	}
-	//Camp followers screen
-	if(eventNo == 74) {
-		doNext(1);
-		campFollowers();
-		return;
-	}
-	if(eventNo == 79) {
-		deluxeDildo();
-		return;
-	}
-	if(eventNo == 80) {
-		exploreDeepwoods();
-		return;		
-	}
-	if(eventNo == 82) {
-		deleteScreen();
-		return;
-	}
-	if(eventNo == 94) {
-		//located in exploration.as
-		debugOptions();
-		return;
-	}
-	if(eventNo == 95) {
-		//located in exploration.as
-		exploreHighMountain();
-		return;
-	}
 
-	//located in exploration.as
-	if(eventNo == 97) {
-		explorePlains();
-		return;
-	}
-	if(eventNo == 111) {
-		exploreSwamp();
-		return;
-	}
-	if (eventNo == 114) {
-		stage.focus = null;
-		mainView.aCb.visible = false;
-		applyPerk(tempPerk);
-		return;
-	}
-	if (eventNo == 115) {
-		stage.focus = null;
-		mainView.aCb.visible = false;
-		eventParser(1);
-		return;
-	}
-	if(eventNo == 116) {
-		perkBuyMenu();
-		return;
-	}
-	if(eventNo == 118) {
-		if(!monster.hasVagina()) monster.createVagina();
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-		monster.ass.analLooseness = 3;
-		outputText(mainView.eventTestInput.text, true, true);
-		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		mainView.eventTestInput.x = -10207.5;
-		mainView.eventTestInput.y = -1055.1;
-		return;
-	}
-	if(eventNo == 119) {
-		mainView.eventTestInput.x = -10207.5;
-		mainView.eventTestInput.y = -1055.1;
-		eventParser(mainMenu);
-		return;
+
+		case 2:
+			exploration.doExplore();
+			return;
+
+
+		case 3:
+			desert.exploreDesert();
+			return;
+
+
+		case 4:
+			forest.exploreForest();
+			return;
+
+
+		case 5:
+			lake.exploreLake();
+			return;
+
+
+		case 6:
+			mountain.exploreMountain();
+			return;
+
+
+		case 10:
+			//Masturbate
+			if (player.hasStatusAffect("dysfunction") >= 0) {
+				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true);
+				doNext(1);
+				return;
+			}
+			masturbateGo();
+			return;
+
+
+		case 11:
+			//Rest
+			camp.rest();
+			return;
+
+
+		case 12:
+			//Explore new zones
+			exploration.tryDiscover();
+			return;
+
+
+		case 13:
+			//Pass an hour
+			outputText("An hour passes...\n", true);
+			timeQ = 1;
+			goNext(1, false);
+			return;
+
+
+		case 14:
+			outputText("Two hours pass...\n", true);
+			timeQ = 2;
+			goNext(2, false);
+			return;
+
+
+		case 15:
+			outputText("Four hours pass...\n", true);
+			timeQ = 4;
+			goNext(4, false);
+			return;
+
+
+		case 16:
+			outputText("Eight hours pass...\n", true);
+			timeQ = 8;
+			goNext(8, false);
+			return;
+
+
+		case 17:
+			outputText("", true);
+			goNext(24, false);
+			return;
+
+
+		case 19:
+			//Load menu
+			loadScreen();
+			return;
+
+
+		case 20:
+			//Save Menu
+			saveScreen();
+			return;
+
+
+		case -20:
+			saveGameObject(null, true);
+			return;
+
+
+		case -21:
+			openSave();
+			showStats();
+			statScreenRefresh();
+			return;
+
+
+		case 30:
+			// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
+			var f:MouseEvent;
+			saveLoad(f);
+			return;
+
+
+		case 40:
+			//Use wait command
+			//See camp.as
+			camp.doWait();
+			return;
+
+
+		case 41:
+			//Use sleep command
+			//in camp.as
+			camp.doSleep();
+			return;
+
+
+		case 42:
+			//Choose masturbate options
+			masturbateMenu();
+			return;
+
+
+		case 44:
+			//Gain +5 Str due to level
+			dynStats("str", 5);
+			outputText("Your muscles feel significantly stronger from your time adventuring.", true);
+			doNext(116);
+			return;
+
+
+		case 45:
+			//Gain +5 Toughness due to level
+			dynStats("tou", 5);
+			trace("HP: " + player.HP + " MAX HP: " + maxHP());
+			statScreenRefresh();
+			outputText("You feel tougher from all the fights you have endured.", true);
+			doNext(116);
+			return;
+
+
+		case 46:
+			//Gain +5 Intelligence due to level
+			dynStats("int", 5);
+			outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
+			doNext(116);
+			return;
+
+
+		case 47:
+			//Gain +5 speed due to level
+			dynStats("spe", 5);
+			outputText("Your time in combat has driven you to move faster.", true);
+			doNext(116);
+			return;
+
+
+		case 48:
+			//Use Onahole
+			onaholeUse();
+			return;
+
+
+		case 49:
+			//Use Stimbelt
+			stimBeltUse();
+			return;
+
+
+		case 50:
+			deluxeOnaholeUse();
+			return;
+
+
+		case 51:
+			allNaturalOnaholeUse();
+			return;
+
+
+		case 52:
+			allNaturalStimBeltUse();
+			return;
+
+
+		case 65:
+			//turn on/off autosave
+			var e:MouseEvent;
+			player.autoSave = !player.autoSave;
+			saveLoad(e);
+			return;
+
+
+		case 71:
+			//Places menu
+			camp.places(true);
+			return;
+
+
+		case 74:
+			//Camp followers screen
+			doNext(1);
+			camp.campFollowers();
+			return;
+
+
+		case 79:
+			deluxeDildo();
+			return;
+
+
+		case 80:
+			forest.exploreDeepwoods();
+			return;
+
+
+		case 82:
+			deleteScreen();
+			return;
+
+
+		case 94:
+			exploration.debugOptions();
+			return;
+
+
+		case 95:
+			highMountains.exploreHighMountain();
+			return;
+
+
+		case 97:
+			plains.explorePlains();
+			return;
+
+
+		case 111:
+			swamp.exploreSwamp();
+			return;
+
+
+		case 114:
+			stage.focus = null;
+			mainView.aCb.visible = false;
+			applyPerk(tempPerk);
+			return;
+
+
+		case 115:
+			stage.focus = null;
+			mainView.aCb.visible = false;
+			eventParser(1);
+			return;
+
+
+		case 116:
+			perkBuyMenu();
+			return;
+
+
+		case 118:
+			if (!monster.hasVagina()) monster.createVagina();
+			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
+			monster.ass.analLooseness = 3;
+			outputText(mainView.eventTestInput.text, true, true);
+			simpleChoices("Again", 117, "", 0, "", 0, "", 0, "Quit", mainMenu);
+			mainView.eventTestInput.x = -10207.5;
+			mainView.eventTestInput.y = -1055.1;
+			return;
+
+
+		case 119:
+			mainView.eventTestInput.x = -10207.5;
+			mainView.eventTestInput.y = -1055.1;
+			mainMenu();
+			return;
+
 	}
 
 	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
@@ -426,7 +456,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.HEL_PREGNANCY_INCUBATION]--;
 			if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) flags[kFLAGS.HEL_PREGNANCY_INCUBATION] = 1;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
+		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
 		player.weaponAttack = fixedDamage(player.weaponName);
 		applyArmorStats(player.armorName,false);
@@ -443,16 +473,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
 		if(player.hasPerk("Well Adjusted") < 0) {
 			//Raise lust
-			stats(0,0,0,0,0,0,player.lib * 0.04,0, false);
+			dynStats("lus", player.lib * 0.04, "resisted", false);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) stats(0,0,0,0,0,0,player.lib * 0.02,0, false);
+			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.02, "resisted", false);
 		}
 		//Well adjusted perk
 		else {
 			//Raise lust
-			stats(0,0,0,0,0,0,player.lib * 0.02,0);
+			dynStats("lus", player.lib * 0.02);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) stats(0,0,0,0,0,0,player.lib * 0.01,0, false);
+			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.01, "resisted", false);
 		}
 		//Rathazul crafting countdown
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] > 1) {
@@ -461,14 +491,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] > 300) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 24;
 		}
 		//Urta Letters
-		if(flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) getUrtaLetter();
+		if(flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) urtaPregs.getUrtaLetter();
 		//Urta Pregs
 		if(flags[kFLAGS.URTA_INCUBATION] > 0) flags[kFLAGS.URTA_INCUBATION]++;
 		if(flags[kFLAGS.KELLY_INCUBATION] > 0) {
 			flags[kFLAGS.KELLY_INCUBATION]--;
 			if(flags[kFLAGS.KELLY_INCUBATION] < 1) {
 				flags[kFLAGS.KELLY_INCUBATION] = 0;
-				kellyPopsOutARunt();
+				farm.kelly.kellyPopsOutARunt();
 				needNext = true;
 			}
 		}
@@ -477,7 +507,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("gooStuffed",1,-1);
 			if (player.statusAffectv1("gooStuffed") <= 0) 
 			{
-				birthOutDatGooSlut();
+				valeria.birthOutDatGooSlut();
 				needNext = true;
 			}
 			
@@ -492,11 +522,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("Ember Napping",1,-1);
 			if(player.statusAffectv1("Ember Napping") <= 0) player.removeStatusAffect("Ember Napping");
 		}
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
-			sophieDaughterDebimboUpdate();
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
+			sophieFollowerScene.sophieDaughterDebimboUpdate();
 			needNext = true;
 		}
-		if(bimboSophie() || sophieFollower()) {
+		if(sophieBimbo.bimboSophie() || sophieFollowerScene.sophieFollower()) {
 			if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 				flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER]--;
 				if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] < 1) flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 1;
@@ -510,10 +540,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] == 100) {
 					outputText("\nLooking around for your developing daughter, you find that she and your ");
-					if(bimboSophie()) outputText("boisterous bimbo ");
+					if(sophieBimbo.bimboSophie()) outputText("boisterous bimbo ");
 					else outputText("mature harpy ");
 					outputText("are spending some quality mother-daughter time together.  Sophie is helping the young girl with her make up, showing her how to use that golden luststick that her people are so fond of.  You're not too sure how appropriate that is for your daughter, but then again, this is what harpies do right?  Aside from the lusty lipstick, your live-in");
-					if(bimboSophie()) outputText(" bimbo ");
+					if(sophieBimbo.bimboSophie()) outputText(" bimbo ");
 					else outputText(", avian girlfriend ");
 					outputText("moves on to her hair and nails, all the while gabbing on and on about you, and about all the daughters she plans to have.");
 					outputText("\n\nYour daughter is growing up so fast!  Already, her body is developing, breasts budding into supple bumps on her chest.  Her hips are starting to swell into the trademark birthing hips and round grabbable ass harpies are famous for.\n");
@@ -523,7 +553,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) {
 				flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN]--;
 				if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] <= 0) {
-					sophiesEggHatches();
+					sophieBimbo.sophiesEggHatches();
 					needNext = true;
 				}
 			}
@@ -533,7 +563,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Sophie Pregnancy Stage Alerts
 				//Small Bump*
 				if(flags[kFLAGS.SOPHIE_INCUBATION] == 150) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nSophie sits by herself on your comfy bedroll.  The feathery female seems to have taken a liking to your place of rest.  Your bird-brained love-slave clearly desires to be as close to you, or at least your fatherly scent, as much as possible.  Lost in her lusty fantasies, she caresses the gentle bump in her belly, the telltale sign that your virile seed has worked its magic on her egg-bearing womb.  One of her hands idly slips between her legs, fingers gently playing with her wet snatch as her other rubs her tummy.");
 						outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The blond bimbo puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.\n");
 					}
@@ -542,11 +572,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The matron puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.\n");
 					}
 					needNext = true;
-					stats(0,0,0,0,0,0,3,0);
+					dynStats("lus", 3);
 				}
 				//Medium Bump*
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 120) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nAs usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her puffy lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles, and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 						outputText("\n\n\"<i>There you are [name]!  Like, look at me!  Your egg is getting <b>soooo</b> big inside me!  Like, just look at how big and sexy I am!</i>\"  the bimbo brained woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful bimbo-like breasts have only gotten bigger thanks to her pregnancy.  \"<i>Thanks for getting me all pregnant and stuff!</i>\"\n");
 					}
@@ -554,12 +584,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\nAs usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles, and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 						outputText("\n\n\"<i>Hey there [name].  Look at me!  That egg has gotten so big inside me.  You have no idea how good this feels,</i>\" the confident woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful breasts have only gotten bigger thanks to her pregnancy.  \"<i>Maybe in a month or so, I'll let you do it all over again...</i>\"\n");
 					}
-					stats(0,0,0,0,0,0,5,0);
+					dynStats("lus", 5);
 					needNext = true;
 				}
 				//Big Belly Bump*
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 100) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nOnce again, your pregnant bimbo lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With your feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her plump bimbo lips blowing you a kiss as she looks at you with lusty eyes.");
 						outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, the excited, happy bimbo flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>Ohhh!  It's gonna be soon, momma Sophie's gonna like, lay this nice big egg for you, babe!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy's going to stay niiice and tight for you, babe!</i>\"\n");
 					}
@@ -567,11 +597,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\nOnce again, your pregnant harpy lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With the feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her pursed lips blowing you a kiss as she looks at you with lusty eyes.");
 						outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, she flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>It's gonna be time soon...  Before you know it, I'll be popping out this big, swollen egg, and you'll be right there to see it!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy is going to be ready for you as soon as it comes out!</i>\"\n");
 					}
-					stats(0,0,0,0,0,0,5,0);
+					dynStats("lus", 5);
 					needNext = true;
 				}
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 0) {
-					sophieBirthsEgg();
+					sophieBimbo.sophieBirthsEgg();
 					needNext = true;
 				}
 			}
@@ -579,8 +609,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.SOPHIE_HEAT_COUNTER] <= 0) {
 				//Not pregnant and PC has dick? INTO SEASON HOOOO
 				if(player.hasCock() && flags[kFLAGS.SOPHIE_INCUBATION] <= 0) {
-					if(bimboSophie()) sophieGoesIntoSeason();
-					else sophieFollowerGoesIntoSeas();
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
+					else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 					needNext = true;
 					flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;
 				}
@@ -594,15 +624,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.SOPHIE_HEAT_COUNTER]--;
 				//Expire heat if impregged
 				if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_HEAT_COUNTER] >= 552) {
-					if(bimboSophie()) sophieGotKnockedUp();
-					else sophieFertilityKnockedUpExpired()
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieGotKnockedUp();
+					else sophieFollowerScene.sophieFertilityKnockedUpExpired();
 					flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 551;
 					needNext = true;
 				}
 				//Expire heat if counted down to
 				else if(flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552) {
-					if(bimboSophie()) sophieSeasonExpiration();
-					else sophieFertilityExpired();
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieSeasonExpiration();
+					else sophieFollowerScene.sophieFertilityExpired();
 					needNext = true;
 				}
 			}
@@ -612,7 +642,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(flags[kFLAGS.ANEMONE_KID] > 0) {
 			if(flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
-				kidABabysitsCows();
+				anemoneScene.kidABabysitsCows();
 				needNext = true;
 			}
 			if(flags[kFLAGS.KID_SITTER] == 1 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
@@ -621,13 +651,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else if(flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
 		}
 		if(flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] >= 1) flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN]--;
-		if(followerShouldra() && player.statusAffectv1("Exgartuan") == 1 && player.hasCock() && rand(10) == 0) {
+		if(shouldraFollower.followerShouldra() && player.statusAffectv1("Exgartuan") == 1 && player.hasCock() && rand(10) == 0) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 1) {
 				needNext = true;
-				exgartumonAndShouldraFightPartII();
+				shouldraFollower.exgartumonAndShouldraFightPartII();
 			}
 			else if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 2) {
-				exgartumonAndShouldraFightPartIII();
+				shouldraFollower.exgartumonAndShouldraFightPartIII();
 				needNext = true;
 			}
 		}
@@ -635,7 +665,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] > 0) {
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN]--;
 			if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] <= 0) {
-				amilyLaysEggsLikeABitch();
+				amilyScene.amilyLaysEggsLikeABitch();
 				needNext = true;
 			}
 		}
@@ -643,8 +673,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 		}
 		//Vapula gives a dildo
-		if(vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2) {
-			vapulaGivesPCAPresent();
+		if(vapula.vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2) {
+			vapula.vapulaGivesPCAPresent();
 			needNext = true;
 		}
 		//Niamh counters
@@ -653,7 +683,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
 			player.addStatusValue("Bimbo Champagne",1,-1);
 			if(player.statusAffectv1("Bimbo Champagne") <= 0) {
-				removeBimboChampagne();
+				telAdre.niamh.removeBimboChampagne();
 				needNext = true;
 			}
 		}
@@ -726,7 +756,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.str += player.statusAffectv2("Hangover");
 				player.spe += player.statusAffectv3("Hangover");
 				player.inte += player.statusAffectv4("Hangover");
-				stats(0,0,0,0,0,0,0,0);
+				dynStats("cor", 0);
 				//Clear status
 				player.removeStatusAffect("Hangover");
 				needNext = true;
@@ -735,27 +765,27 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.statusAffectv1("Black Cat Beer") > 0) {
 			player.addStatusValue("Black Cat Beer",1,-1);
 			if(player.statusAffectv1("Black Cat Beer") <= 0) {
-				blackCatBeerExpires();
+				telAdre.niamh.blackCatBeerExpires();
 				needNext = true;
 			}
 		}
 		//EMBER STUFF
-		if(followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
+		if(emberScene.followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
 			//Mino cum freakout - PC partly addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.hasPerk("Minotaur Cum Addict") < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
-				minotaurJizzFreakout();
+				emberScene.minotaurJizzFreakout();
 				needNext = true;
 			}
 			//Ember is freaking out about addiction, but PC no longer addicted!
 			else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
-				emberGetOverFreakingOutAboutMinoJizz();
+				emberScene.emberGetOverFreakingOutAboutMinoJizz();
 				needNext = true;
 			}
 			//At max lust, count up - if ten hours lusty, ember yells at ya!
 			if(player.lust >= 100 && player.gender > 0) {
 				flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
 				if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
-					emberBitchesAtYouAboutLustiness();
+					emberScene.emberBitchesAtYouAboutLustiness();
 					needNext = true;
 				}
 			}
@@ -763,7 +793,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] = 0;
 			
 		}
-		cottonPregUpdates();
+		telAdre.cotton.cottonPregUpdates();
 		//Fix femininity ratings if out of whack!
 		if(player.hasPerk("Androgyny") < 0) 
 			textHolder = player.fixFemininity();
@@ -797,11 +827,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			trace("MINO KID GROWN");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] = 30;
 		}
-		if(followerShouldra()) {
+		if(shouldraFollower.followerShouldra()) {
 			flags[kFLAGS.SHOULDRA_SLEEP_TIMER]--;
-			if(shouldersWarnings()) needNext = true;
+			if(shouldraFollower.shouldersWarnings()) needNext = true;
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] == 0 || (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < 0 && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] % 16 == 0)) {
-				shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
+				shouldraFollower.shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
 				needNext = true;
 			}
 			   
@@ -818,7 +848,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] > 0) {
 			flags[kFLAGS.JOJO_EGGCUBATE_COUNT]--;
 			if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] == 1) {
-				jojoLaysEggs();
+				jojoScene.jojoLaysEggs();
 				needNext = true;
 			}
 		}
@@ -857,10 +887,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("LustyTongue") >= 0) {
 			if(rand(5) == 0) {
 				outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.", false);
-				stats(0,0,0,0,0,0,2+rand(15),0);
+				dynStats("lus", 2+rand(15));
 				if(player.lust >= 100) {
 					outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.", false);
-					stats(0,0,0,0,0,2,-100,0);
+					dynStats("sen", 2, "lus=", 0);
 					//Tongue orgasming makes it last longer.
 					player.changeStatusValue("LustyTongue",1,player.statusAffectv1("LustyTongue")+10);
 					
@@ -894,7 +924,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 					needNext = true;
 				}
-				stats(0,0,0,0,0,0,.1,0);
+				dynStats("lus", .1);
 				player.lust += 20;
 				if(player.lust > 100) player.lust = 100;
 			}
@@ -924,7 +954,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Urta egg freak out
 		if(model.time.hours > 6 && model.time.hours < 18 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] < 12 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0) {
 			outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
-			urtaChewsOutPC(false);
+			urta.urtaChewsOutPC(false);
 		}
 		//Count down rathazul event timers
 		if(flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] > 0) {
@@ -988,7 +1018,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("Kelt",2,-0.15);
 		}
 		//Mino cum update.
-		if(minoCumUpdate()) needNext = true;
+		if(mountain.minotaurScene.minoCumUpdate()) needNext = true;
 		//Repeated warnings!
 		else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) {
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
@@ -1019,7 +1049,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//if in camp and birthing, display scene!
 		if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 1) {
 			outputText("\n", false);
-			amilyPopsOutKidsInCamp();
+			amilyScene.amilyPopsOutKidsInCamp();
 			flags[kFLAGS.AMILY_INCUBATION] = 0;
 			outputText("\n", false);
 			needNext = true;
@@ -1098,7 +1128,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(temp < 40 && player.eggs() >= 40) {
 						//-Speed
 						outputText("\nYour lower half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...\n\n<b>Minimum Lust raised!</b>\n");
-						stats(0,0,-1,0,0,0,0,0);
+						dynStats("spe", -1);
 						needNext = true;
 					}
 				}
@@ -1124,7 +1154,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//-Speed
 					if(temp < 40 && player.eggs() >= 40) {
 						outputText("\nYour bee half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its sweet, slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...\n");
-						stats(0,0,-1,0,0,0,0,0);
+						dynStats("spe", -1);
 						needNext = true;
 					}
 				}
@@ -1201,7 +1231,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffects[player.hasStatusAffect("heat")].value3 <= 1 || player.vaginas.length == 0) 
 			{
 				//Remove bonus libido from heat
-				stats(0,0,0,0,-player.statusAffects[player.hasStatusAffect("heat")].value2,0,0,0,false,true);
+				dynStats("lib", -player.statusAffects[player.hasStatusAffect("heat")].value2, "resisted", false, "noBimbo", true);
 				//remove heat
 				player.removeStatusAffect("heat");
 				if(player.lib < 1) player.lib = 1;
@@ -1232,7 +1262,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffectv3("rut") <= 1 || player.totalCocks() == 0) 
 			{
 				//Remove bonus libido from rut
-				stats(0,0,0,0,-player.statusAffectv2("rut"),0,0,0,false,true);
+				dynStats("lib", -player.statusAffectv2("rut"), "resisted", false, "noBimbo", true);
 				//remove heat
 				player.removeStatusAffect("rut");
 				if(player.lib < 10) player.lib = 10;
@@ -1259,7 +1289,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.balls = 2;
 					player.ballSize = 3;
 				}
-				stats(0,0,0,-1,0,5,15,0);
+				dynStats("int", -1, "sen", 5, "lus", 15);
 				outputText("</b>\n", false);
 				needNext = true;
 			}
@@ -1285,14 +1315,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
-				stats(0,0,0,-1,0,0,15,0);
+				dynStats("int", -1, "lus", 15);
 			}
 			//Vagoo
 			if(!player.hasVagina()) {
 				player.createVagina();
 				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Damn!  There's a wet little slit opening up, and it's all tingly!  It feels so good, why would you have ever gotten rid of it?</b>\n", false);
 				else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n", false);
-				stats(0,0,0,-1,0,10,15,0);
+				dynStats("int", -1, "sen", 10, "lus", 15);
 				needNext = true;
 			}
 		}
@@ -1305,7 +1335,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.hasPerk("Bimbo Brains") >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
-				stats(0,0,0,-1,0,0,15,0);
+				dynStats("int", -1, "lus", 15);
 			}
 			//Vagoo
 			if(!player.hasVagina()) {
@@ -1317,14 +1347,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hipRating < 12) {
 				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 				else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
-				stats(0,0,0,-1,0,0,0,0);
+				dynStats("int", -1);
 				player.hipRating = 12;
 				needNext = true;
 			}
 			if(player.buttRating < 12) {
 				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
 				else outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  Oh, no!  You thought that having a big, bloated bimbo-butt was a thing of the past, but with how it's tingling under your groping fingertips, you have no doubt that you're about to see the second coming of your sexy ass.  Wait, how did your fingers get down there?  You pull your hands away somewhat guiltily as you feel your buttcheeks expanding.  Each time you bounce and shake your new derriere, you moan softly in enjoyment.  Damnit!  You force yourself to stop just as your ass does, but when you set off again, you can feel it bouncing behind you with every step.  At least it'll help you tease your foes a little more effectively...\n");
-				stats(0,0,0,-1,0,0,10,0);
+				dynStats("int", -1, "lus", 10);
 				player.buttRating = 12;
 				needNext = true;
 			}
@@ -1387,7 +1417,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.statusAffectv2("Feeder") >= 72 && model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);
 					temp = (2 + (((player.statusAffectv2("Feeder")) - 70) / 20));
-					stats(0,0,0,0,0,temp,0,0);
+					dynStats("sen", temp);
 					needNext = true;
 				}
 			}
@@ -1399,8 +1429,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
 					outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n", false);
 					needNext = true;
-					stats(0,0,0,0,0,0,2+player.sens/10,0);
-					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility * 1/4));
+					dynStats("lus", 2+player.sens/10);
+					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility/4));
 					//Lower chances
 					player.addStatusValue("worm plugged",1,-1);
 					//Remove if too low
@@ -1438,7 +1468,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(player.statusAffectv2("Exgartuan") == 0) 
 					{
 						outputText("\n<b>", false);
-						exgartuanBored();
+						exgartuan.exgartuanBored();
 						needNext = true;
 						outputText("</b>\n", false);
 					}
@@ -1451,17 +1481,17 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					{	
 						if(player.hasStatusAffect("infested") >= 0 ) {
 							outputText("\n<b>", false);
-							exgartuanWormCure();
+							exgartuan.exgartuanWormCure();
 							needNext = true;
 							outputText("</b>\n", false);	
 						}
 						else if(rand(10) == 0 && (player.armorName == "sexy black chitin armor-plating" || player.armorName == "glistening gel-armor plates" || player.armorName == "leather armor segments" || player.armorName == "comfortable clothes" || player.armorName == "bondage patient clothes" || player.armorName == "crotch-revealing clothes" || player.armorName == "cute servant's clothes" || player.armorName == "maid's clothes" || player.armorName == "servant's clothes" || player.armorName == "maid's clothes" || player.armorName == "practically indecent steel armor" || player.armorName == "red, high-society bodysuit" || player.armorName == "spider-silk armor" || player.armorName == "slutty swimwear" || player.armorName == "full-body chainmail" || player.armorName == "revealing chainmail bikini" || player.armorName == "full platemail" || player.armorName == "scale-mail armor" || player.armorName == "black leather armor surrounded by voluminous robes" || player.armorName == "rubber fetish clothes" || player.armorName == "green adventurer's clothes" || player.armorName == "white shirt and overalls")) {
 							outputText("\n<b>", false);
-							exgartuanArmorShift();
+							exgartuan.exgartuanArmorShift();
 							needNext = true;
 							outputText("</b>\n", false);	
 						}
-						else stats(0,0,0,0,0,0,1+rand(2),0);
+						else dynStats("lus", 1+rand(2));
 					}
 					//Chick stuff
 					if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() >= 12) {
@@ -1470,7 +1500,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 							// lactation messing with!
 							if(rand(3) == 0) {
 								outputText("\n<b>", false);
-								exgartuanLactationAdjustment();
+								exgartuan.exgartuanLactationAdjustment();
 								outputText("</b>\n", false);	
 								needNext = true;
 							}
@@ -1481,12 +1511,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 									outputText("Your hands knead and caress your " + breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away", false);
 									if(player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions", false);
 									outputText(".", false);
-									stats(0,0,0,0,0,0,5+player.sens/10,0);
+									dynStats("lus", 5+player.sens/10);
 								}
 								needNext = true;
 								outputText("</b>\n", false);	
 							}
-							else stats(0,0,0,0,0,0,1+rand(2),0);
+							else dynStats("lus", 1+rand(2));
 						}
 					}
 				}
@@ -1504,7 +1534,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("Jizzpants") >= 0) {
 			outputText("\nYour " + player.armorName + " squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n", false);
 			needNext = true;
-			stats(0,0,0,0,0,0,10 + player.sens/5,0);
+			dynStats("lus", 10 + player.sens/5);
 			player.removeStatusAffect("Jizzpants");
 		}
 		//Marble's Milk Status!
@@ -1514,7 +1544,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Remove the status and stat boosts when time runs out on the milk
 			if(player.statusAffectv1("Marbles Milk") <= 0) {
 				needNext = true;
-				stats((-1 * player.statusAffectv2("Marbles Milk")),(-1 * player.statusAffectv3("Marbles Milk")),0,0,0,0,0,0);
+				dynStats("str", (-1 * player.statusAffectv2("Marbles Milk")),"tou", (-1 * player.statusAffectv3("Marbles Milk")));
 				player.removeStatusAffect("Marbles Milk");
 				//Text for when Marble's Milk effect wears off:
 				//[addiction is 10 or less] 
@@ -1536,7 +1566,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n", false);
 						//If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
 						player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
-						stats(0,-5,0,-5,0,0,0,0);
+						dynStats("tou", -5, "int", -5);
 					}
 				}
 			}			
@@ -1550,7 +1580,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n", false);
 					needNext = true;
 					player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
-					stats(0,-5,0,-5,0,0,0,0);
+					dynStats("tou", -5, "int", -5);
 				}
 			}
 		}
@@ -1562,7 +1592,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 			if(player.statusAffectv2("Marble") <= 25) {
 				player.removeStatusAffect("MarbleWithdrawl");
-				stats(0,5,0,5,0,0,0,0);
+				dynStats("tou", 5, "int", 5);
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
 			}
@@ -1571,7 +1601,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
 				player.removeStatusAffect("MarbleWithdrawl");
-				stats(0,5,0,5,0,0,0,0);
+				dynStats("tou", 5, "int", 5);
 			}
 		}
 		//Bottled Milk Countdown
@@ -1597,7 +1627,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		else if(player.biggestLactation() > 0 && player.hasStatusAffect("Feeder") < 0 && player.pregnancyIncubation == 0) {
 			player.addStatusValue("Lactation Reduction",1,1);
-			trace("LACTATION REDUCTION" + player.statusAffectv1("Lactation Reduction") + " Biggest Lactation: " + player.biggestLactation() + ".");
 			if(player.statusAffectv1("Lactation Reduction") >= 48) {
 				if(player.hasStatusAffect("Lactation Reduc0") < 0) {
 					player.createStatusAffect("Lactation Reduc0",0,0,0,0);
@@ -1607,7 +1636,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				player.boostLactation(-(.5*player.breastRows.length)/24);
-				trace(player.biggestLactation());
 				if(player.biggestLactation() <= 2.5 && player.hasStatusAffect("Lactation Reduc1") < 0) {
 					outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n", false);
 					player.createStatusAffect("Lactation Reduc1",0,0,0,0);
@@ -1729,7 +1757,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n", false);
 						needNext = true;
 					}
-					stats(-.1,0,-.1,0,0,0,2,0);
+					dynStats("str", -.1,"spe", -.1, "lus", 2);
 					//Keep track of how much has been taken from speed/strength
 					player.addStatusValue("Slime Craving",2,.1);
 					//Bad end!
@@ -1745,13 +1773,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 			growTits(1,player.bRows(),false,2);
 			needNext = true;
-			stats(0,0,0,0,0,0,10,0);
+			dynStats("lus", 10);
 		}
 		//Slime feeding stuff
 		if(player.hasStatusAffect("Slime Craving Feed") >= 0) {
 			outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n", false);
 			//Boost speed and restore hp/toughness
-			stats(player.statusAffectv2("Slime Craving") * .5,0,player.statusAffectv2("Slime Craving"),0,0,0,0,0);
+			dynStats("str", player.statusAffectv2("Slime Craving") * .5,"spe", player.statusAffectv2("Slime Craving"));
 			//Remove feed succuss status so it can be reset
 			player.removeStatusAffect("Slime Craving Feed");
 			//Reset stored hp/toughness values
@@ -1764,18 +1792,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.tailVenom += player.tailRecharge;
 			if(player.tailVenom > 100) player.tailVenom = 100;
 		}
-		if(model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0) {
-			sleepyNightMareHel();
+		if(model.time.hours == 3 && helFollower.followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0) {
+			helFollower.sleepyNightMareHel();
 		}
 		//Luststick resistance unlock
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.hasPerk("Luststick Adapted") < 0) {
-			unlockResistance();
+			sophieBimbo.unlockResistance();
 			needNext = true;
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
-			bimboSophieLustStickSurprise();
+		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+			sophieBimbo.bimboSophieLustStickSurprise();
 			needNext = true;
 		}
 		if(flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
@@ -1800,7 +1828,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			if(flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
 			if(flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
-			if(arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
+			if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
 			flags[kFLAGS.ARIAN_LESSONS] = 0;
 			flags[kFLAGS.ARIAN_TREATMENT] = 0;
 			flags[kFLAGS.BROOKE_MET_TODAY] = 0;
@@ -1808,10 +1836,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 				if(flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 			}
-			if(phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
+			if(desert.antsScene.phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 			if(flags[kFLAGS.MIDAS_JERKED] > 0) flags[kFLAGS.MIDAS_JERKED] = 0;
 			if(flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
-			if(phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
+			if(desert.antsScene.phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
 			if(flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
 			if(flags[kFLAGS.SHEILA_PREG] > 0) flags[kFLAGS.SHEILA_PREG]++;
 			if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
@@ -1843,9 +1871,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//if(flags[kFLAGS.RUBI_ORGASM_DENIAL] > 0) flags[kFLAGS.RUBI_BLU_BALLS]++;
 			if(flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 			flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
-			updateBenoitInventory();
+			bazaar.benoit.updateBenoitInventory();
 			if(player.pregnancyIncubation <= 0) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
-			if(vapulaSlave()) {
+			if(vapula.vapulaSlave()) {
 				if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
 				else flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 			}
@@ -1860,7 +1888,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
 			flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 			//Isabella milk
-			if(isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0) {
+			if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0) {
 				flags[kFLAGS.ISABELLA_MILKED_YET]++;
 			}
 			//Reduce lust-stick resistance building
@@ -1881,7 +1909,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
 			//Fix 'hangs' - PC is at the bottom of the dress countdown
-			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
+			if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && raphael.RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
 			//Countdown to next faerie orgy
 			if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] > 0) {
 				flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
@@ -1899,12 +1927,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 			}
 			//Latex goo follower daily updates
-			if(latexGooFollower()) {
-				gooFluid(-2, false);
-				if(gooFluid() < 50) gooHappiness(-1,false);
-				if(gooFluid() < 25) gooHappiness(-1,false);
-				if(gooHappiness() < 75) gooObedience(-1,false);
-				if(gooHappiness() >= 90) gooObedience(1,false);
+			if(latexGirl.latexGooFollower()) {
+				latexGirl.gooFluid(-2, false);
+				if(latexGirl.gooFluid() < 50) latexGirl.gooHappiness(-1,false);
+				if(latexGirl.gooFluid() < 25) latexGirl.gooHappiness(-1,false);
+				if(latexGirl.gooHappiness() < 75) latexGirl.gooObedience(-1,false);
+				if(latexGirl.gooHappiness() >= 90) latexGirl.gooObedience(1,false);
 			}
 			//Marble Preggo Counter
 			if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
@@ -1962,7 +1990,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Lower addiction by 1 every day.
 			if(player.hasStatusAffect("Marble") >= 0) {
-				if(player.statusAffectv2("Marble") > 0) marbleStatusChange(0,-1);
+				if(player.statusAffectv2("Marble") > 0) marbleScene.marbleStatusChange(0,-1);
 			}
 			//Lower shark girl counter
 			if(player.statusAffectv1("Shark-Girl") > 0) player.addStatusValue("Shark-Girl",1,-1);
@@ -2021,12 +2049,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(model.time.hours == 6) {
 			//Pure amily flips her shit and moves out!
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
-				farewellNote();
+				amilyScene.farewellNote();
 				needNext = true;
 			}
 			//Amily moves back in once uncorrupt.
 			if(flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
-				amilyReturns();
+				amilyScene.amilyReturns();
 				needNext = true;
 			}
 		}
@@ -2036,7 +2064,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//BIG EVENTS GO IN HERE
 		//MARBLE POOPS BAYBEEZ
 		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1) {
-			marblePoopsBaybees();
+			marbleScene.marblePoopsBaybees();
 			return true;
 		}		
 		//Helia's morning surprise!  TOP PRIORITY!
@@ -2044,25 +2072,25 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.EDRYN_BIRF_COUNTDOWN]--;
 			if(flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] <= 0) {
 				flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] = 0;
-				urtaAndEdrynGodChildEpilogue();
+				urtaQuest.urtaAndEdrynGodChildEpilogue();
 				return true;
 			}
 		}
-		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0) {
-			sophieFollowerIntro();
+		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !sophieBimbo.bimboSophie() && !sophieFollowerScene.sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0) {
+			sophieFollowerScene.sophieFollowerIntro();
 			return true;
 		}
-		if(model.time.hours == 23 && followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
-			heliaBonusPointsAward();
+		if(model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+			helSpawnScene.heliaBonusPointsAward();
 			return true;
 		}
-		if(model.time.hours == 8 && followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1) {
-			helGotKnockedUp();
+		if(model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1) {
+			helSpawnScene.helGotKnockedUp();
 			return true;
 		}
-		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helAffection() >= 100 &&
+		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helFollower.helAffection() >= 100 &&
 		   flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2) {
-			heliaFollowerIntro();
+			helFollower.heliaFollowerIntro();
 			return true;   
 		}
 		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6) {
@@ -2071,17 +2099,17 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Helspawn night smex!
 		if(flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
-			helspawnIsASlut();
+			helSpawnScene.helspawnIsASlut();
 			return true;
 		}		
 		//Ghostgirl recruitment priority
 		if(flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
-			morningShouldraAlert();
+			shouldraFollower.morningShouldraAlert();
 			return true;
 		}
 		//Ghostgirl pissed off dreams
-		if(followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
-			nightTimeShouldraRapesThePC();
+		if(shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
+			shouldraFollower.nightTimeShouldraRapesThePC();
 			return true;
 		}
 		//Ghostgirl madness
@@ -2090,19 +2118,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
 				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0) {
-					paladinModeFollowup();
+					shouldraScene.paladinModeFollowup();
 					return true;
 				}
 			}
 		}
 		if(player.hasStatusAffect("Ember Napping") < 0) {
 			//Ember get's a whiff of fuckscent and knocks up PC!
-			if(followerEmber() && player.hasVagina() && player.hasStatusAffect("heat") >= 0 && player.pregnancyIncubation == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
-				emberRapesYourHeatness();
+			if(emberScene.followerEmber() && player.hasVagina() && player.hasStatusAffect("heat") >= 0 && player.pregnancyIncubation == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
+				emberScene.emberRapesYourHeatness();
 				return true;
 			}
-			else if(followerEmber() && player.hasCock() && player.hasStatusAffect("rut") >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
-				emberRapesYourHeatness();
+			else if(emberScene.followerEmber() && player.hasCock() && player.hasStatusAffect("rut") >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
+				emberScene.emberRapesYourHeatness();
 				return true;
 			}
 		}
@@ -2111,12 +2139,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Amily X Urta morning after.
-		if(!urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
-			amilyUrtaMorningAfter();
+		if(!urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
+			followerInteractions.amilyUrtaMorningAfter();
 			return true;
 		}
 		if(flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6) {
-			femaleVapulaRecruitmentPartII();
+			vapula.femaleVapulaRecruitmentPartII();
 			return true;
 		}
 		var ceraph:Number = 0;
@@ -2130,10 +2158,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		else if(temp >= 5) ceraph = 3;
 		//DREAMS
 		//Shouldra dreams here
-		if(followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && model.time.hours == 3) {
+		if(shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && model.time.hours == 3) {
 			flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN]--;
 			if(flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] <= 0) {
-				shouldraDream1();
+				shouldraFollower.shouldraDream1();
 				return true;
 			}
 		}
@@ -2155,8 +2183,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			stats(0,0,0,0,0,0,-100,0);
-			stats(0,0,0,0,0,0,20,0);
+			dynStats("lus=", 0);
+			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 			//Hey whoever, maybe you write them? -Z
@@ -2178,8 +2206,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			stats(0,0,0,0,0,0,-100,0);
-			stats(0,0,0,0,0,0,20,0);
+			dynStats("lus=", 0);
+			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 			//Hey whoever, maybe you write them? -Z
@@ -2188,14 +2216,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(model.time.hours == 3) {
 			//Plot dreams here
 			if(ceraph > 0 && model.time.days % ceraph == 0) {
-				ceraphBodyPartDreams();
+				ceraphScene.ceraphBodyPartDreams();
 				doNext(1);
 				return true;
 			}
 			//Dominika Dream
 			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] < 4) {
 				outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n", false);
-				fellatrixDream();
+				telAdre.dominika.fellatrixDream();
 				doNext(1);
 				return true;
 			}
@@ -2205,8 +2233,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				doNext(1);
 				return true;
 			}
-			else if(kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-				kidADreams();
+			else if(anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+				anemoneScene.kidADreams();
 				doNext(1);
 				flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 				return true;
@@ -2238,23 +2266,23 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(temp > 7) temp = 7;
 		if(player.hasPerk("Pierced: Lethite") >= 0) temp += 4;
 		if(player.hasStatusAffect("heat") >= 0) temp += 2;
-		if(vapulaSlave()) temp += 7;
+		if(vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
-				goblinNightAnemone();
+				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
 			else if(temp > rand(100) && player.hasStatusAffect("Defense: Canopy") < 0) {
-				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !followerKiha())) {
-					impGangabangaEXPLOSIONS();
+				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
+					impScene.impGangabangaEXPLOSIONS();
 					doNext(1);
 					return true;
 				}
-				else if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && followerKiha()) {
+				else if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
 					outputText("\n<b>You find charred imp carcasses all around the camp once you wake.  It looks like Kiha repelled a swarm of the little bastards.</b>\n");
 					needNext = true;
 				}
-				else if(flags[kFLAGS.HEL_GUARDING] > 0 && followerHel()) {
+				else if(flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
 					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 					needNext = true;
 				}
@@ -2273,11 +2301,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//wormgasms
 			else if(flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.hasStatusAffect("infested") < 0) {
-				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
+				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
 					nightTimeInfestation();
 					return true;
 				}
-				else if(flags[kFLAGS.HEL_GUARDING] > 0 && followerHel()) {
+				else if(flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
@@ -2292,23 +2320,23 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Chance of threesomes!
-		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
+		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
 			trace("ISABELLA/HELL TEST");
 			//Hell/Izzy threesome intro
 			if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 				spriteSelect(31);
-				followrIzzyxSallyThreesomePretext();
+				helScene.followrIzzyxSallyThreesomePretext();
 				return true;
 			}
 			//Propah threesomes here!
 			else if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
 				spriteSelect(31);
-				isabellaXHelThreeSomeCampStart();
+				helScene.isabellaXHelThreeSomeCampStart();
 				return true;
 			}
 		}
-		if(model.time.hours == 2 && vapulaSlave() && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
-			vapulaForceFeeds();
+		if(model.time.hours == 2 && vapula.vapulaSlave() && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+			vapula.vapulaForceFeeds();
 			return true;
 		}
 		//Dreams on hour 3.
@@ -2317,12 +2345,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Call secksins!
 				if(player.hasStatusAffect("repeatSuccubi") >= 0) {
 					//VapulaSurprise
-					if(vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
-						vapulaAssistsCeruleanSuccubus();
+					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
+						vapula.vapulaAssistsCeruleanSuccubus();
 					//Normal night succubi shit
 					else {
 						doNext(1);
-						nightSuccubiRepeat();
+						camp.nightSuccubiRepeat();
 					}
 				}
 				else {
@@ -2344,25 +2372,25 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Exgartuan night time surprise!
 			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
 				outputText("\n", false);
-				exgartuanSleepSurprise();;
+				exgartuan.exgartuanSleepSurprise();
 				return true;
 			}
 			//Boobgartuan night time surprise!
 			if(player.statusAffectv1("Exgartuan") == 2 && rand(3) == 0 && player.statusAffectv2("Exgartuan") == 0) {
 				outputText("\n", false);
-				boobGartuanSURPRISE();
+				exgartuan.boobGartuanSURPRISE();
 				return true;
 			}
 		}
 		//MORNING FUX
-		if(model.time.hours == 6 && bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
+		if(model.time.hours == 6 && sophieBimbo.bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 			outputText("\n<b><u>Something odd happens that morning...</u></b>");
-			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 120) fuckYoPregnantHarpyWaifu(true);
-			else sophieFenCraftedSex(true);
+			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 120) sophieBimbo.fuckYoPregnantHarpyWaifu(true);
+			else sophieBimbo.sophieFenCraftedSex(true);
 			return true;
 		}
-		if(model.time.hours == 6 && sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
-			sophieSmallDongTeases();
+		if(model.time.hours == 6 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
+			sophieFollowerScene.sophieSmallDongTeases();
 			return true;
 		}
 		//MARBLE STUFF
@@ -2372,7 +2400,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
 			//(reduce corr by 5)
-			stats(0,0,0,0,0,0,0,-5);
+			dynStats("cor", -5);
 			//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal)
 			player.createPerk("Marble Resistant",0,0,0,0,"You know how to avoid the addictive qualities of Marble's milk.");
 			//After player ends Addiction:
@@ -2394,7 +2422,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2430,10 +2458,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Affection 70+, version 2
 				if(player.statusAffectv1("Marble") >= 70) {
 					outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>now, no one will mind if I disappear.</i>\"  You look at her in surprise and quickly grab her arms.  You tell her with no uncertainty that if she disappeared, you would forever miss her.  You don't care about her milk, it doesn't matter; it is her as a person that matters to you.  You wouldn't have done all those things or spent all that time together if you didn't care about her.  She bursts into tears and hugs you tightly to her breasts.\n\n", false);
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2460,7 +2488,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Clear withdrawl
 			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 				player.removeStatusAffect("MarbleWithdrawl");
-				stats(0,5,0,5,0,0,0,0);
+				dynStats("tou", 5, "int", 5);
 			}
 			//Clear marble's milk status
 			if(player.hasStatusAffect("Marbles Milk") >= 0) {
@@ -2468,7 +2496,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Boost stats if not under its affects
 			else {
-				stats(5,10,0,0,0,0,0,0);
+				dynStats("str", 5,"tou", 10);
 			}
 			//Post-addiction flavors
 			//Marble liked you addicted
@@ -2478,7 +2506,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>I was hoping you might help me out with my chores. Then I'll see about getting you some milk.</i>\"  The idea of working for her milk seems oddly right, and you put a huge effort into helping Marble with her chores.  Afterwards, Marble gladly agrees to give you her milk. While you are nursing from her, she starts to talk: \"<i>Sweetie, I've been thinking.  I think you should stay here with me from now on, since you need my milk to survive.</i>\"  She starts to stroke your head.  \"<i>You always do such a good job with the chores too; do you really want to do anything else?</i>\"  You try to pull back from her and tell her about your quest, but she keeps your mouth from straying from her breast.  \"<i>No, of course you don't.</i>\"  She says with finality, and you feel your need to do anything else fade....\n\n", false);
 					//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>Mmm, if you need me so much, then I want you to move in with me on the farm,</i>\" she says happily above you.  \"<i>That way, I can take care of you and you can help me, and we'll both be happy.</i>\"  You panic a bit; while you'd certainly be happy to have the source of her delicious milk at your fingertips, leaving the portal unguarded means the demons will be free to set up shop there again!  Marble responds to your squirming by tightening her arms and says, \"<i>Ah, ah, remember, sweetie; you need my milk and I control whether or not you can drink it.  I'm happy to share it, but if I'm being so generous, I think the least you could do is make it easier for me.  I don't think living here and helping me with the farmwork is too much to ask, do you?</i>\"  Her face contorts into an open-mouthed smile and her eyes glitter.  You sigh into her chest, she's right, there isn't much you can do about it now...");
-					doNext(marbleBadEndFollowup);
+					doNext(marbleScene.marbleBadEndFollowup);
 					return true;
 				}
 				//Affection 50-79, type 1:
@@ -2492,11 +2520,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.statusAffectv1("Marble") >= 80) {
 					outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n", false);
 					//(player chose yes) do after addiction sex event
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
@@ -2517,7 +2545,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
 					//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.   \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
-					doNext(marbleBadEndFollowup);
+					doNext(marbleScene.marbleBadEndFollowup);
 					return true;
 				}
 				//Affection < 80, type 2:
@@ -2530,11 +2558,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				else {
 					outputText("Marble's face falls at your words.  \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You shake your head and tell her it wasn't something either of you could stop.  Despite what you said before, what happened happened.  You care too much for her to let her feel bad about it, and you tell her you forgive her for the part she played in getting you addicted to her milk.  She bursts into tears and hugs you tightly to her breasts, before letting you drink your morning milk.  Afterwards she looks at you intently. \"<i>Can we do something special?</i>\" she asks you, suggestively.  You agree without having to give it any thought.\n\n", false);
 					//(player chose yes) do after addiction sex event
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
@@ -2563,11 +2591,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Countdown to finale not currently engaged!
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) {
 				//If the PC meets his criteria!
-				if(RaphaelLikes()) {
+				if(raphael.RaphaelLikes()) {
 					//Not yet met!  MEETING TIEM!
 					if(flags[kFLAGS.RAPHAEL_MET] == 0) {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(meetRaphael);
+						doNext(raphael.meetRaphael);
 						return true;
 					}
 					//Already met!
@@ -2575,13 +2603,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						//Not given dress yet
 						if(flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(RaphaelDress);
+							doNext(raphael.RaphaelDress);
 							return true;
 						}
 						//Dress followup - Call picnic date prologue!
 						if(player.armorName == "red, high-society bodysuit"  && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(RaphaelEncounterIIDressFollowup);
+							doNext(raphael.RaphaelEncounterIIDressFollowup);
 							return true;
 						}
 					}
@@ -2598,7 +2626,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//shot down yet?
 					if(flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0 && player.armorName == "red, high-society bodysuit") {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(RaphaelEncounterIIDressFollowup);
+						doNext(raphael.RaphaelEncounterIIDressFollowup);
 						return true;
 					}
 					
@@ -2607,34 +2635,34 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//FINALE
 			else if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) {
 				outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-				doNext(quiksilverFawkesEndGame);
+				doNext(raphael.quiksilverFawkesEndGame);
 				return true;
 			}
 		}
 		//Cotton's cereal overlapps marbleliciousness
 		if(model.time.hours == 6 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 0;
-			nomSomeTitMilkCereal();
+			telAdre.cotton.nomSomeTitMilkCereal();
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(model.time.hours == 6 && isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
+		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
-			isabellaMorningWakeupCall();
+			isabellaFollowerScene.isabellaMorningWakeupCall();
 			return true;
 		}
 		//Morning Marble Meetings
 		if(model.time.hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
 			//Marble is at camp
 			if(player.hasStatusAffect("Camp Marble") >= 0) {
-				postAddictionCampMornings(false);
+				marbleScene.postAddictionCampMornings(false);
 				needNext = true;
 			}
 			//Marble isn't at camp
 			else {
 				//Marble is still available at farm
 				if(player.hasStatusAffect("No More Marble") < 0) {
-					postAddictionFarmMornings();
+					marbleScene.postAddictionFarmMornings();
 					threshhold--;
 					needNext = true;
 				}
@@ -2643,19 +2671,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Sophie Izma 3some
-		if(bimboSophie() && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+		if(sophieBimbo.bimboSophie() && izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
 			flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
-			sophieAndIzmaPlay();
+			sophieBimbo.sophieAndIzmaPlay();
 			return true;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
-			izmaDomsLatexy();
+		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+			izmaScene.izmaDomsLatexy();
 			return true;
 		}
 		//Ember preg updates!
-		if(emberPregUpdate()) needNext = true;
+		if(emberScene.emberPregUpdate()) needNext = true;
 		if(flags[kFLAGS.EMBER_INCUBATION] == 1) {
-			emberGivesBirth();
+			emberScene.emberGivesBirth();
 			needNext = true;
 		}
 		//No diapause?  Normal!
@@ -2829,7 +2857,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...
-	umasShop.updateBonusDuration(time);
+	telAdre.umasShop.updateBonusDuration(time);
 	if (player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME) >= 0)
 	{
 		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.MASSAGE_BONUS_NAME));

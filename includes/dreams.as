@@ -39,7 +39,7 @@ public function dreamSelect():Boolean {
 		temp--;
 	}
 	//Two chances if addicted, three if with perk!
-	if(minotaurAddicted()) {
+	if(player.minotaurAddicted()) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) choices[choices.length] = 6;
@@ -89,7 +89,7 @@ public function dreamSelect():Boolean {
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
 	}
-	if(kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
+	if(anemoneScene.kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
 		choices[choices.length] = 15;
 		choices[choices.length] = 15;
 		choices[choices.length] = 15;
@@ -113,10 +113,10 @@ public function dreamSelect():Boolean {
 	else outputText("\nYou barely rest, spending most of the time touching yourself and dreaming of ", false);
 	//LUST CHANGES
 	//Well adjusted cuts gain in half!
-	if(player.hasPerk("Well Adjusted") < 0) stats(0,0,0,0,0,0,(-dreamtemp/2),0);
+	if(player.hasPerk("Well Adjusted") < 0) dynStats("lus", (-dreamtemp/2));
 	//Lust change!
-	stats(0,0,0,0,0,0,dreamtemp,0);
-	if(player.hasPerk("Lusty") >= 0) stats(0,0,0,0,0,0,dreamtemp/3,0);
+	dynStats("lus", dreamtemp);
+	if(player.hasPerk("Lusty") >= 0) dynStats("lus", dreamtemp/3);
 	//ACTUAL DREAM TEXTS
 	if(dreamtemp > 5) {
 		//Roll for dream!
@@ -292,7 +292,7 @@ public function dreamSelect():Boolean {
 		}
 		else if(daydream == 15) {
 			outputText("something unusual...\n");
-			kidADreams();
+			anemoneScene.kidADreams();
 		}
 		else if(daydream == 16) {
 			if(player.gender <= 1) {
@@ -315,12 +315,12 @@ public function dreamSelect():Boolean {
 					//end dream
 					//lust increase
 				}
-				stats(0,0,0,0,0,0,25,0);
+				dynStats("lus", 25);
 			}
 			else {
 				//Female Trap Dream: 
 				outputText("odd things...\nYou find it difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at your supple tomboy body.   You dream of rough leather on your skin, tough cotton tight upon your [fullChest] and the smell of medicinal alcohol in your nose.  You dream of swaggering down the roads of your old home town, meeting the eyes of everyone you pass, daring them to ask; you dream of haunting bars and parties in a perpetual twilight, sweet talking every girl you see with casual, lust charged ease.  Women want you and men want to be you in the whirl of your sleeping mind.  There is a buzz running through these thoughts and images which energises and stupefies you; you find yourself charging through dream after tantalising dream, exhausting yet somehow never satisfying yourself.");
-				stats(0,0,0,0,0,0,25,0);
+				dynStats("lus", 25);
 			}
 		}
 		else if(daydream == 17) {
@@ -423,8 +423,8 @@ public function dayTenDreams():void {
 			outputText("You wake up in a sweat.  Fuck.", false);
 		}
 	}
-	if(player.cor < 50) stats(0,0,0,0,0,0,10,0);
-	else stats(0,0,0,0,0,0,25,0);
+	if(player.cor < 50) dynStats("lus", 10);
+	else dynStats("lus", 25);
 }
 
 public function fuckedUpCockDreamChange():void {
@@ -465,7 +465,7 @@ public function displacerDreamII():void {
 	
 	outputText("\n\nA soft \"sssht\" noise comes from behind you, that hole in the metal cave opening up once more.  Curious, you twist around so that you and your alien lover are butt-to-butt, and trot towards the doorway, dragging her along with you, though she's too blissed out to care.");
 	outputText("\n\nAs you pass through the doorway, your vision suddenly goes white... and you wake up with a start.");
-	stats(0,0,0,0,2,2,-100,0);
+	dynStats("lib", 2, "sen", 2, "lus=", 0);
 	menu();
 	addButton(0,"Next",displacerDreamIII);
 }

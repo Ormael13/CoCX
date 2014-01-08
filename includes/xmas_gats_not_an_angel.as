@@ -199,7 +199,7 @@ public function theWorstEndingEverDotJPG():void {
 	outputText("\n\nAfter a few moments, you decide to don your [armor] once again, leaving the mishap behind as you return to camp.  There's no telling if what you did was ultimately right or wrong in the grand scheme of things, but dwelling over North or Carol isn't going to get you anywhere any time soon.");
 	//[if (corruption > 49) 
 	if(player.cor > 49) outputText("  More importantly, you have some unsatisfied, pent up lust that you'd like to expend.");
-	stats(0,0,0,0,0,0,2+player.lib/10+player.cor/10,10,false);
+	dynStats("lus", 2+player.lib/10+player.cor/10, "cor", 10, "resisted", false);
 	doNext(13);
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 	player.removeKeyItem("North Star Key");
@@ -272,7 +272,7 @@ public function fuckTheAngelBadEndPartII():void {
 	outputText("\n\nThankfully, you're out of that mess and heading for camp. That slut is cold.");
 	//[End of event. Possible expansions include finding her as a difficult combat encounter, or raping her while she sleeps.]
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
-	stats(0,0,0,0,0,0,-100,10);
+	dynStats("lus=", 0, "cor", 10);
 	doNext(13);
 }
 
@@ -338,7 +338,7 @@ public function stayForPretendNTRGoodWinjobSex():void {
 	outputText("\n\nThat being accomplished, the knight kicks his applications up a notch, breaking away from the throbbing and stimulated button and zooming straight toward the depths of her glistening and inviting folds.  She coos throatily, back arching and tongue lolling, as North penetrates and wriggles further into her pussy.  Blossoms of fog issue from the giantess's mouth with increased frequency as North tunnels deeper and deeper inside her; you idly marvel at how effective the little knight's tactics prove on his enormous lover.");
 	outputText("\n\nWith a cry of simple pleasure, the giantess's arms buckle under her and she falls back, tumbling from her perch on the cliff and landing back-first.  Unable to sit idle while North has all the fun, she takes matters in her own hands, cupping a breast in one hand while the other slips down between her legs.  Her moans only intensify once she gets into the squeezing and caressing, scattering snow in all directions as she squirms along the valley, crying her pleasure for all to hear.");
 	//LUST GAIN +20: IF 100:
-	stats(0,0,0,0,0,0,10+player.lib/10,0,false);
+	dynStats("lus", 10+player.lib/10, "resisted", false);
 	outputText("\n\n");
 	if(player.lust >= 100) {
 		outputText("Despite yourself, your hands slowly begin crawling into your [armor] in pursuit of your naughty bits.  ");
@@ -357,7 +357,7 @@ public function stayForPretendNTRGoodWinjobSex():void {
 	//IF MASTURBATED: 
 	if(player.lust >= 100) {
 		outputText("\n\nYou take the opportunity to do up your [armor] before either of them notices.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 	}
 	//[Next]
 	menu();

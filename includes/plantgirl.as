@@ -333,7 +333,7 @@ shudder from the sensation of your [asshole]'s tightness.  Once the floral creat
 	outputText(" as she cries out in a fierce moan, her cock convulsing as she thrusts wildly against you and planting her hot seed deep into you.  The sensual act finally over, your head droops down as you pant heavily; the plant girl slumps her head down onto your shoulder and uses you to hold herself up.  She's breathing heavily in your ear while regaining some of her energy and composure.");
 	
 	outputText("\n\nAfter twenty minutes of groping your body and licking your ears, the feminine creature pulls her cock out of your [asshole] and leaves it dangling close to your [butt].  Her sappy spunk starts to leak out, and finally the vines around your legs release.  You're free to return to camp at this point, but the sperm leaking out of your butthole could make the journey back an uncomfortable one; cum stained clothing can get pretty annoying to walk in after all...");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -373,7 +373,7 @@ public function trappedFlowerSexBlowjobAhoy():void {
 	outputText("\n\nAs you regain your composure, the plant woman pets your head and stares at you with apologetic eyes. With a nod at her regret for treating you so roughly, you take the cock in your mouth and begin to lick it up and down, and swirl your tongue around the head of the plant woman's penis.  You hear her moan and begin to stroke your head and you work on her member.  You bob your head back and forth earnestly along her length, and you can feel her pre-cum mixing with your saliva.  The plant woman blushes as she gazes down on your lustful expression while you taste every contour of her prick and swallow her sweet secretions. Not wanting to be neglectful, you cease your oral efforts and slide your tongue down her shaft, towards her gouge and licking it sensually.  The creature's moment of respite is fleeting as you quickly dart back upwards and take her cock back down your craw.  She giggles as your enthusiastic efforts and gently begins to guide your head back and forth  along her shaft, soliciting a series of pleasured hums as you feel her glans brush past your tongue and swallow her pre-cum.");
 	outputText("\n\nSoon, she begins to buck against your face and all you want to do is take her engorged member as far as you can down your throat.  As the act draws nears the end, she begins to pant heavily, and her thrusts become diminished.  Her cock begins to twitch, and you can tell what is coming.");
 	outputText("\n\nShe moans wildly with every subsequent thrust, and then buries her cock deep in your mouth, arousal overtaking you as her sappy seed gushes down your throat.  With a few more hearty thrusts and moans of sexual relief, she sighs and pulls her cock out of your mouth, trailing semen along the side of your lips as she does so.  Smiling, she caresses your stomach as her lips seek yours for a salty kiss.  After a while, the vines restraining you release and drop you to the ground, and the plant woman wonders off into the Deep Woods.  You wonder what will happen to the seeds now in your stomach.  You head back to camp, thinking about your encounter with the plant woman as you walk.");
-	stats(0,0,0,0,0,0,50,0,false);
+	dynStats("lus", 50, "resisted", false);
 	doNext(13);
 }
 
@@ -457,7 +457,7 @@ public function trappedPlantSexPussyGOOO():void {
 	
 	outputText("\n\nHer eyes glaze over as your life juices push up into her baby maker.  With a heavy, satisfied sigh, you slump in your vine prison. Panting and moaning, the plant woman buries her face against the left side of your neck, beads of sweat drip down both your faces and neck, and she all too eagerly laps yours up with her tongue.  It all seems like it's all over and you can get on to gentle foreplay; however, she begins to gyrate against you once against, causing you to groan in annoyance.  Smirking, the plant woman rides you like a bull despite the fact that you already made your \"contribution\" to her.  Intent on reaching orgasm herself, she fucks you wildly for several more minutes until she creams your cock in vaginal fluids and your left over spunk.  The vines that bind you shake in unison along with the plant woman as she climaxes, causing you both to drop a few centimeters in the air.  You look around with worry as the plant woman closes her eyes, drifting off to a land of dreams and peaceful sleep.  Twitching once more, the vines continue to drop you several centimeters toward the ground until the creature completes her journey into slumber.");
 	outputText("\n\nYour eyes go wide as the sensation of falling registers, and you twist your body as the vegetation suddenly drop you.  As you fall towards the earth on your side, the vines that held you tense around the tree trunks and thankfully slow your descent.  You hit the ground with a soft thud, grunting and groaning as the force of the impact takes your breath away.  The plant woman follows shortly thereafter, bouncing against the ground as she hits.  The fall wasn't that high up, so other than a few bruises you'll both be okay after your little impromptu drop. Pulling yourself free of the creepers, you climb to your feet and grab your gear, quickly donning it so you can get back to camp. As you walk, you feel your earthly lover's spunk drool down your leg, causing you to groan as it seeps into your [armor]. It's going to be an annoying walk back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -606,7 +606,7 @@ public function trappedPlantSexBlowMe():void {
 		outputText(" skin.  Content with your 'donation', the plant woman releases your cock");
 		if(player.cockTotal() > 1) outputText("s");
 		outputText(" from her mouth with a loud pop; leaving trails of drool and semen on her chin as she does so.  The vines holding you retract from around your limbs and allows you to suit up and leave, whilst she cradles her sated stomach and hums to herself.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 	}
 	else {
 		//(If all cocks exceed 24 inches, and two to three cocks measure 6 inches in diameter or less total: 
@@ -629,7 +629,7 @@ public function trappedPlantSexBlowMe():void {
 		if(player.cumQ() < 500) outputText("covered");
 		else outputText("drenched");
 		outputText(" in your salty seed as she grins like a fool; obviously dumbfounded at her sheer dumb luck to find  a virile specimen such as yourself. The vines holding you retract, allowing your drained body to slowly fall to the ground. Panting heavily, you lie stomach first against the ground and collect your composure as the plant woman walks up to you and strokes your back and hair. She stays at your side until you muster the will and energy to pull yourself to your feet; at which point she helps you to your [armor] and helps you to put it back on. With a smile, she sees you off as you head back to camp.  “Strange that she didn't leave you and let something else have fun with me”, you wonder in your head as you leave the deep woods.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 	}
 	doNext(13);
 }
@@ -707,7 +707,7 @@ public function plantAnalGivingTheDick():void {
 	outputText("\n\nAfter a bit of time passes, you work up the strength to stand and pull your cock");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" from her body.  Surprisingly, no cum (yours or otherwise) leaks out of her love button... weird.  With your lust quenched, you decide to head back to camp and get back to... whatever you were doing.  As you put your [armor] back on, the plant woman slips in quietly and kisses you tenderly on the neck.  Smiling, you wave to the delicate plant woman and make for camp.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -862,7 +862,7 @@ public function struggle69Plant(pt:int = 1):void {
 		//(End to 69! scene, got a BJ)
 		outputText("\n\nSatisfied with the amount of cream she's withdrawn from your testicles, the vine prison lowers you to the ground and retreats into the woods around you, allowing you to rise to the gaze of the plant woman, smirking and giving you a longing look... like she can't wait for next time. Content that the persistent aching need of release has been sated, you re-equip your [armor] and head back to camp, leaving the creature to laze about and feel the warmth of you in her stomach.");
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -903,7 +903,7 @@ public function struggleFailPlantPussyFuckAllow():void {
 	//(PC is lactating:
 	if(player.isLactating()) outputText(", whetting her appetite for milk ");
 	outputText(" as she draws closer and closer to the natural conclusion of your union.  Engrossed with sexual fury, you can barely make out the expression on your lover's face, but it becomes apparent that her flushed, overwhelmed features are foreshadowing her pending release.  With a groan of satisfaction, the creature burrows her spasming dick deep inside of you as your [vagina] ignites with the warmth of her seed along your interior.  Thick globs of cum can be felt impacting all around the inside of your nether parts, and you squeeze down hard on her, intent on keeping as much of her inside of you as possible.  The plant woman thrusts a few more times against your thighs with a few more labored moans, and drives her semen further into you before both of you utter an agreeable sigh of accomplishment.  You two hang there for a time before the vines retract and lower you to the ground, the plant woman pulling out and giving you that 'see you around' gesture as she takes off into the wood.  With smug satisfaction, you replace your discarded [armor] and head back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -981,8 +981,8 @@ public function defeatOrDomPlantAndCuntFuck():void {
 		//(HP restored +50).
 		//9999 add HP
 	}
-	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	dynStats("sen", -1, "lus=", 0);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1016,8 +1016,8 @@ public function victoryOverPlantGalWithPCCockCorrupted(newl:Boolean = false):voi
 	else outputText("\n\n");
 	outputText("After an eternity of ravaging her pussy, you feel your load building up pressure and getting ready to explode.  You tighten your grip on the plant woman's hair and with one last thrust fill her womb with your corrupted semen.  You jerk her hair back, forcing her head back towards your mouth as you begin to neck her.  \"<i>AuuughhhAHHHHHHHHHHHHHHH!</i>\" she screams out as you pull on her hair, with her pussy clamping down on your " + cockDescript(x) + ".  Her fuck hole ever so eager to receive your seed, her body convulses violently as you continue to fire more semen into the floral vixen's cervix.  The excretion is too much, and with a groan, you pass out on top of her.");
 	outputText("\n\nWhen you awaken, the plant woman is still in the same position as you left her.  She snores quietly, with some moans escaping her mouth and smiling on occasion.  You pull your flaccid dick out of her, and begin to put your [armor] back on.  You turn back to the woman and notice that there isn't any evidence of semen on the ground.  “Bitch must really like my cream.  Can't say I blame her...” you say to yourself.  You leave the plant woman tied up and bound; she'll find a way out of that knot... or maybe something else will stumble upon her... who knows?");
-	stats(0,0,0,0,0,0,-100,0);
-	if(inCombat()) eventParser(5007);
+	dynStats("lus=", 0);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -1088,8 +1088,8 @@ public function victoryDefeatPlantGirlGetBJMainSCREENON():void
 	//_____________________________________________________________________________
 	//Continued...
 	outputText("\n\nWith your orgasm concluded, she takes your penis into her mouth and laps up the remaining cum off and out of your shaft.  You place your hands on her shoulders to hold yourself up as she milks you dry of semen, and after a few minutes of wet, loud slurping, the plant woman pops your cock out of her mouth and begins to kiss up your [legs].  She continues up your chest and then gives you a quick peck on the cheek before taking off.  After catching your breath, you put your [armor] back on and head back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	dynStats("lus=", 0);
+	cleanupAfterCombat();
 }
 
 //[Victory: oral (tentacle dick that is longer than 24 inches)] (V and D 1.2tc, respectively)
@@ -1125,8 +1125,8 @@ public function plantGirlPCWinGetTentacleBJ():void {
 	//(V and D 1.2tc) conclusion
 	//(V and D 1.2tc) conclusion: 
 	outputText("After a few minutes, you gather enough strength to rise to your feet and pull your flaccid cock from her mouth.  Content, she gives it one last lick before passing out into a deep sleep.  You smile and put your [armor] back on, eager to get back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	dynStats("lus=", 0);
+	cleanupAfterCombat();
 }
 
 //[Victory (light side)  or Dominant Let's Fuck!: Anal 
@@ -1177,8 +1177,8 @@ public function beatPlantGirlDomLetsFuckAnal():void {
 		outputText(".  She slumps against you, lost in pleasure and sensation as you drench her interior with hot, sticky cum.  The plant woman's nectar-flavored milk shoots forth from her breasts and coats the ground in front of the both of you, causing her to shake and moan furiously.");
 		if(player.hasVagina()) outputText("Your [vagina] obliges, and a few steams of lady spunk flow from your [clit] and intertwine with the fauna creature's fluids on the ground.");
 		outputText("  As the plant woman comes down from her climax, you lick your hands clean of her nectar and pull out from her.  You shoot her a look of appreciation, and she fires back a look of utter contentment and bliss.  You leave her to recuperate from the act and head back to camp.");
-		stats(0,0,0,0,0,0,-100,0);
-		eventParser(5007);
+		dynStats("lus=", 0);
+		cleanupAfterCombat();
 	}
 	//(Dominant Let's Fuck! (giving anal) D 1.3
 	else {
@@ -1197,7 +1197,7 @@ public function beatPlantGirlDomLetsFuckAnal():void {
 		outputText("\n\nWith a distressed moan escaping from her mouth, her body jitters against your own; the sensation of something wet starts to run down");
 		if(player.balls > 0) outputText(" your balls [balls] and");
 		outputText(" your [leg], and the nectar like scent of her pussy juices hits you with pungent force as you breathe it in.  Content and quite exhausted, you start the delicate task of pulling your " + cockDescript(x) + " out of her rectum, taking a little bit more at a time out of her until you hear a loud, wet pop from her rump.  Your flaccid and battered penis flops out, signalling what should be the flood of semen from her lovely hole...yet nothing comes out. Curiously, you edge yourself under her and go to spread her cheeks, intent on seeing what the holdup is.  However, caution stops you from doing so; images of getting hit with your spunky drool flood your mind, and you opt to shrug it off. With a pleased wave to the creature, you gear back up and head back to camp. The floral creature gives a weak wave back, no doubt lost in the bliss of having her anus pleasured so well.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 		eventParser(13);
 	}
 	flags[kFLAGS.TIMES_FUCKED_PLANTGIRLS_ASS]++;
@@ -1258,8 +1258,8 @@ public function pcBeatsPlantgirlAndCorruptAssFuckPt2(tail:Boolean = false):void 
 	outputText(" and playing with her breasts as you pump her ass with all of your might.  You can no longer control the timing of your orgasm, and you howl in savage delight as you bottom out in this plant creature's sphincter.  She cries out so loud that you swear she almost ruptures your ear drums, slamming against you in a uncontainable thrashing orgasm.  You place your hands on the top of her thighs and push downward, intent on burying your cock");
 	if(y >= 0) outputText("s");
 	outputText(" deep in her ass as you fill her up with your tainted splooge.  She quivers violently; her body intent on getting some room but you will have none of it.  You keep her pinned against your lap until you have finished cumming and pull out of her, wiping yourself off with her hair as you proceed to replace your [armor].  The plant woman lies against the ground, now utterly dominated and unable to move.  As you walk away, you hear a rustling in the bush near her.  You let out a loud laugh as you picture an imp or tentacle monster emerging and proceeding to pick up where you left off.  As much as you would like to stick around and find out what fate lies in store for her, you have other things to do.  You turn and head back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);	
+	dynStats("lus=", 0);
+	cleanupAfterCombat();
 }
 
 //Victory (light side) or Dominant Let's Fuck!: Suck her dick
@@ -1294,8 +1294,8 @@ public function victorySuckPlantgirlsDick():void {
 	//(Victory and Dominant scenes converge here, V and D 1.4: 
 	outputText("\n\nWith eager enthusiasm you take the creature's cock into your mouth, allowing your tongue to make contact first as her penis slides along the top of it.  In one swift motion her dick slides past your tongue and hits the back of your throat, of which you intend to bury her cock against.  As you press it against your esophagus you twist your head, moaning in pleasure at the sensation and feeling of her in your mouth. You hear a loud gasp as you twist your head, and the plant woman places her hands on the back of your head as her body shakes. “She's definitely enjoying it so far,” you think to yourself.  You pull back a bit as you form a tight seal around her with your lips, sucking and stroking the top of her shaft with your tongue.  Pre-cum leaks from her liberally as you rock your head back and forth, sliding down your throat as you gasp and swallow in-between sucking her cock.  The taste of her reminds you of a herbal mix the village doctor had you ingest before you began your journey.");
 	outputText("\n\nYou pick up speed after a few minutes, having had enough samples of her lady cum; you want the full course.  You place your hands against her hips and begin deep-throating her cock as hard as you can. The plant woman cries out and her legs start to wobble.  The sound of sporadic heavy breathing is soon replaced by frequent wailing from your partner.  You begin to bob back and forth as fast as you can and the feminine creature falls to the ground, overcome by your efforts.  Giggling at her “predicament”, you take the length of her cock into your mouth, allowing it in as slowly as you can.  The creature's eyes go wide, and she screams in orgasm while ramming her cock in as far as she can.  A sappy, sticky load erupts forth from her urethra and strikes you in the tonsil, causing a ticklish sensation.  You almost gag from it as the floral vixen continues bucking her pelvis against your head, now held in a passionate embrace between her thighs.  Stroking your head contently, she finishes shooting thick streams of cum down into your throat as you swallow her lady fluids.  You stare up at her with an appreciative look in your eyes, and the plant-like woman responds by sticking her thumb in her mouth and sucking on the bottom of it, grinning as the last of her cum subsides into your waiting mouth.  Popping her penis out of her mouth, you wipe your lips clean as you grab for your [armor]. You wave to the plant creature as you head back to camp, her sappy load giving you a feeling of fullness in your stomach as you walk.");
-	stats(0,0,0,0,0,0,10+player.lib/5,0);
-	if(inCombat()) eventParser(5007);
+	dynStats("lus", 10+player.lib/5);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1366,8 +1366,8 @@ public function beatPlantGirlAndTakePlantCockInButt():void {
 	if(player.hasVagina()) outputText("vaginal muscles clamping down and drooling pussy juice all over the plant woman's lap");
 	if(player.gender == 0) outputText("twitching futilely around the plant-girl's swollen seeder");
 	outputText(".  With a groan, you collapse against the creature's chest, desperately trying to catch your breath from the taxing ordeal.  The plant woman hums approvingly, stroking your hair as your body ascends and descends from her own because of your heavy breathing.  After some time, you are able to muster the strength to pull yourself off of the plant creature, her cock slipping out of your ass and unleashing a flood of sappy jism from your anus.  Content, she passes out into a deep sleep.  You grin to yourself, putting your [armor] back on and heading back to camp.");
-	stats(0,0,0,0,0,0,-100,0);
-	if(inCombat()) eventParser(5007);
+	dynStats("lus=", 0);
+	if(inCombat()) cleanupAfterCombat();
 	doNext(13);
 }
 

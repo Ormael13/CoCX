@@ -29,7 +29,7 @@
 		public var run:Boolean
 		private var _excludeMenuKeys:Boolean;
 		private var _catchOutputTextErrors:Boolean;
-		private var _mainClassPtr:*;
+		private var _mainClassPtr:CoC;
 		private var _stage:Stage;
 		private var debug:Boolean;
 		private var buttons:Array;
@@ -42,7 +42,7 @@
 			  *                 properly synthesize fake key events
 		 * @param   debug       Emit debugging trace statements
 		 */
-		public function ChaosMonkey(mainClass:*, debug = false)
+		public function ChaosMonkey(mainClass:*, debug:Boolean = false)
 		{
 			this.debug = debug;
 			this._excludeMenuKeys = true;
@@ -59,7 +59,7 @@
 			return inArr[ Math.floor( Math.random() * inArr.length ) ];
 		}
 
-		private function initAvailableKeysList()
+		private function initAvailableKeysList():void
 		{
 			/*
 			 * 83	-- s				-- Display stats if main menu button displayed
@@ -88,37 +88,37 @@
 			 * 36	-- Home				-- Cycle the background of the maintext area
 			*/
 
-			var blockedButtons = new Array(112,     // Quicksave buttons
+			var blockedButtons:Array = [112,     // Quicksave buttons
 											113,
 											114,
 											115,
 											116,
-											
+
 											117,     // Quickload buttons
 											118,
 											119,
 											120,
 											121,
-											
+
 											// 83,      // -- Display stats if main menu button displayed
 											// 76,      // -- Level up if level up button displayed
 											 8,      // -- Go to "Main" menu if in game
 											68,      // -- Open saveload if in game
 											// 65,      // -- Open apperance if in game
-											36);      // -- Cycle the background of the maintext area
+											36];      // -- Cycle the background of the maintext area
 
-			if (this.debug) trace("Getting available key events")
+			if (this.debug) trace("Getting available key events");
 			var controlMethods:Array;
 			
-			this.buttons = new Array()
+			this.buttons = [];
 
-			controlMethods = this._mainClassPtr.inputManager.GetControlMethods()
+			controlMethods = this._mainClassPtr.inputManager.GetControlMethods();
 			
-			if (this.debug) trace(controlMethods)
-			if (this.debug) trace(blockedButtons)
+			if (this.debug) trace(controlMethods);
+			if (this.debug) trace(blockedButtons);
 
-			if (this.debug) trace("ControlMethods = ", this.buttons)
-			for (var button in controlMethods)
+			if (this.debug) trace("ControlMethods = ", this.buttons);
+			for (var button:String in controlMethods)
 			{
 				if (controlMethods[button] != exitKeyCode)   // prevent the monkey from exiting itself by blocking it from adding the exit key-code to the key array
 				{
@@ -134,7 +134,7 @@
 
 			}
 
-			if (this.debug) trace(this.buttons)
+			if (this.debug) trace(this.buttons);
 			if (this.debug) trace(blockedButtons)
 		}
 
@@ -143,7 +143,7 @@
 		{
 			public function catchGlobalError(event:UncaughtErrorEvent):void
 			{
-				this.stopMonkey()
+				this.stopMonkey();
 
 				import flash.events.ErrorEvent;
 
@@ -270,17 +270,17 @@
 
 		}
 
-		public function createChaos(blockSaves:Boolean = true)
+		public function createChaos(blockSaves:Boolean = true):void
 		{
 
-			trace("Starting monkey")
+			trace("Starting monkey");
 			//this._mainClassPtr.encounteredErrorFlag = false;
 			this.engageMonkey();
 			// Pull in key list from the InputManager
-			this.initAvailableKeysList()
+			this.initAvailableKeysList();
 
 			// setup exit handler
-			this.setupExitKey()
+			this.setupExitKey();
 			
 			// Tie the random keypress generator to the EXIT_FRAME event, which
 			// runs at the end of each render cycle (it's not *quite* an ON_IDLE event
@@ -289,7 +289,7 @@
 		}
 
 		private var oldTime:Number = 0;
-		private function checkTime()
+		private function checkTime():void
 		{
 			if (this._mainClassPtr.time.totalTime - this.oldTime < 0)
 			{
@@ -300,10 +300,10 @@
 		}
 
 		// KeyHandler(e:KeyboardEvent)
-		public function throwAMonkeyAtIt(e:*)
+		public function throwAMonkeyAtIt(e:*):void
 		{
 
-			this.checkTime()
+			this.checkTime();
 			
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{

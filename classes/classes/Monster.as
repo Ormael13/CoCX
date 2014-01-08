@@ -1,6 +1,7 @@
 ﻿package classes 
 {
-	import classes.Monsters.Kiha;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.NPCs.Kiha;
 
 	/**
 	 * ...
@@ -8,12 +9,41 @@
 	 */
 	public class Monster extends Creature 
 	{
+
 		protected final function get player():Player
 		{
 			return game.player;
 		}
 		protected final function outputText(text:String,clear:Boolean=false):void{
 			game.outputText(text,clear);
+		}
+		protected final function combatRoundOver():void{
+			game.combatRoundOver();
+		}
+		protected final function cleanupAfterCombat():void
+		{
+			game.cleanupAfterCombat();
+		}
+		protected static function showStatDown(a:String):void{
+			kGAMECLASS.mainView.statsView.showStatDown(a);
+		}
+		protected final function statScreenRefresh():void {
+			game.statScreenRefresh();
+		}
+		protected final function doNext(eventNo:*):void {
+			game.doNext(eventNo);
+		}
+		protected final function combatMiss():Boolean {
+			return game.combatMiss();
+		}
+		protected final function combatEvade():Boolean {
+			return game.combatEvade();
+		}
+		protected final function combatFlexibility():Boolean {
+			return game.combatFlexibility();
+		}
+		protected final function combatMisdirect():Boolean {
+			return game.combatMisdirect();
 		}
 		//For enemies
 		public var bonusHP:Number = 0;
@@ -47,10 +77,10 @@
 		*/
 		public var temperment:Number = TEMPERMENT_AVOID_GRAPPLES;
 		
-		//Used for special attacks. Event codes EVERYWHERE
-		public var special1:Number = 0;
-		public var special2:Number = 0;
-		public var special3:Number = 0;
+		//Used for special attacks.
+		public var special1:* = 0;
+		public var special2:* = 0;
+		public var special3:* = 0;
 		
 		//he
 		public var pronoun1:String = "";
@@ -284,9 +314,9 @@
 				this.pronoun3 = "his";
 			}
 			if (cocks == null) cocks=[new Cock()];
-			if (cocks is Cock) cocks=[cocks]
+			if (cocks is Cock) cocks=[cocks];
 			else if (!(cocks is Array)) {
-				trace(this.short+".init02Male("+typeof(c)+")");
+				trace(this.short+".init02Male("+typeof(cocks)+")");
 				cocks = [new Cock()];
 			}
 			if (cocks.length==0){
@@ -347,9 +377,10 @@
 				for (var i:int = 0; i<rows.length; i++){
 					var row:* = rows[i];
 					if (!(row is Array)) row = [row,1];
+					if (row.length==1) row.push(1);
 					var size:Number;
 					if (row[0] is Number) size = row[0];
-					else if (row[0] is String) size = Appearance.breastCupInverse(row[0])
+					else if (row[0] is String) size = Appearance.breastCupInverse(row[0]);
 					else {
 						trace("init03BreastRows.size is "+typeof(row[0]));
 						size = 0;
@@ -480,7 +511,7 @@
 			skipInit(13);
 		}
 
-		protected function initX_Specials(special1:int=0,special2:int=0,special3:int=0):void
+		protected function initX_Specials(special1:*=0,special2:*=0,special3:*=0):void
 		{
 			this.special1 = special1;
 			this.special2 = special2;
@@ -671,7 +702,7 @@
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusAffect("Exgartuan") >= 0 && game.player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
-				if (game.exgartuanCombatUpdate()) game.outputText("\n\n", false);
+				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
 			}
 			if (hasStatusAffect("Constricted") >= 0) {
 				if (!handleConstricted()) return;
@@ -757,25 +788,108 @@
 		 */
 		protected function performCombatAction():void
 		{
-			var select:Number = 1;
-			if (special1 > 0) select++;
-			if (special2 > 0) select++;
-			if (special3 > 0) select++;
-			var rando:int = int(Math.random() * select);
-			if (rando == 0) game.eAttack();
-			if (rando == 1 && special1 > 0) game.eventParser(special1);
-			if (rando == 2 && special2 > 0) game.eventParser(special2);
-			if (rando == 3 && special3 > 0) game.eventParser(special3);
+			var actions:Array = [eAttack,special1,special2,special3].filter(
+					function(special:*,idx:int,array:Array):Boolean{
+						return special != 0 && special != null;
+					}
+			);
+			var rando:int = int(Math.random() * (actions.length));
+			var action:* = actions[rando];
+			if (action is Number) game.eventParser(action);
+			else if (action is Function) action();
+			else trace("monster tried to do "+typeof(action));
 		}
 
 		/**
-		 * All branches of this method should end either with choose/doNext,
-		 * or with default 'awardPlayer' or 'finishCombat'. The latter displays
+		 * All branches of this method should end either with choose/doNext/menu,
+		 * or with default 'awardPlayer' or 'finishCombat'. The latter also displays
 		 * default message like "you defeat %s" or "%s falls and starts masturbating"
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
 			game.finishCombat();
+		}
+
+		/**
+		 * All branches of this method should end either with choose/doNext/menu,
+		 * or with default 'cleanupAfterCombat', 'penalizePlayer' or 'finishCombat'. The latter also displays
+		 * default message like "you fall unconscious" or
+		 */
+		public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (hpVictory){
+				player.HP = 1;
+				outputText("Your wounds are too great to bear, and you fall unconscious.", true);
+			} else {
+				outputText("Your desire reaches uncontrollable levels, and you Numberopenly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
+				player.lust = 0;
+			}
+			game.gameState = 0;
+			game.clearStatuses(false);
+			var temp:Number = rand(10) + 1;
+			if(temp > player.gems) temp = player.gems;
+			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
+			player.gems -= temp;
+			game.doNext(16);
+		}
+
+		/**
+		 * Display tease reaction message. Then call applyTease() to increase lust.
+		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
+		 */
+		public function teased(lustDelta:Number):void
+		{
+			outputDefaultTeaseReaction(lustDelta);
+			if(lustDelta > 0) {
+				//Imp mob uber interrupt!
+			  	if(hasStatusAffect("ImpUber") >= 0) { // TODO move to proper class
+					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
+					//(-5% of max enemy HP)
+					HP -= bonusHP * .05;
+					lust -= 15;
+					removeStatusAffect("ImpUber");
+					createStatusAffect("ImpSkip",0,0,0,0);
+				}
+			}
+			applyTease(lustDelta);
+		}
+
+		protected function outputDefaultTeaseReaction(lustDelta:Number):void
+		{
+			if (plural) {
+				if (lustDelta == 0) outputText("\n\n" + capitalA + short + " seem unimpressed.", false);
+				if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " look intrigued by what " + pronoun1 + " see.", false);
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seem to be enjoying the show.", false);
+				if (lustDelta >= 10 && lustDelta < 15) outputText("\n" + capitalA + short + " openly stroke " + pronoun2 + "selves as " + pronoun1 + " watch you.", false);
+				if (lustDelta >= 15 && lustDelta < 20) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filled with longing.", false);
+				if (lustDelta >= 20) outputText("\n" + capitalA + short + " lick " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " bodies.", false);
+			}
+			else {
+				if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.", false);
+				if (lustDelta > 0 && lustDelta < 4) {
+					if (plural) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " see.", false);
+					else outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.", false);
+				}
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.", false);
+				if (lustDelta >= 10 && lustDelta < 15) {
+					if (plural) outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "selves as " + pronoun1 + " watch you.", false);
+					else outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "self as " + pronoun1 + " watches you.", false);
+				}
+				if (lustDelta >= 15 && lustDelta < 20) {
+					if (plural) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filling with longing.", false);
+					else outputText("\n" + capitalA + short + " flushes hotly with desire, " + pronoun3 + " eyes filled with longing.", false);
+				}
+				if (lustDelta >= 20) {
+					if (plural) outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own bodies.", false);
+					else outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own body.", false);
+				}
+			}
+		}
+
+		protected function applyTease(lustDelta:Number):void{
+			lust += lustDelta;
+			lustDelta = Math.round(lustDelta * 10)/10;
+			outputText(" (" + lustDelta + ")", false);
 		}
 
 		public function generateDebugDescription():String{
@@ -864,16 +978,20 @@
 			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
 			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
 			if (special1 || special2 || special3){
-				result+=Hehas+"special attacks with magical numbers "+
-						[special1,special2,special3]
+				result+=Hehas+[special1,special2,special3]
 								.filter(function(x:*,index:int,array:Array):Boolean{return x>0})
-								.join(",")
-						+".\n"
+								.length
+						+" special attacks.\n"
 			} else {
 				result+=Hehas+"no special attacks.\n";
 			}
 
 			return result;
+		}
+
+		protected function clearOutput():void
+		{
+			game.clearOutput();
 		}
 	}
 }

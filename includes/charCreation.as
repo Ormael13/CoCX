@@ -707,7 +707,7 @@ public function doCreation(eventNo:Number):void {
 		else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ", false);
 		outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...", false);
 		showStats();
-		stats(0,0,0,0,0,0,+15,0);
+		dynStats("lus", +15);
 		doNext(2000);
 		return;
 	}
@@ -844,7 +844,7 @@ public function createStorage():Boolean {
 //Clear storage slots
 public function clearStorage():void {
 	//Various Errors preventing action
-	if(itemStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
+	if(itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + itemStorage.length + " storage slots.");
 		itemStorage.splice(0, itemStorage.length);
@@ -852,7 +852,7 @@ public function clearStorage():void {
 }
 public function clearGearStorage():void {
 	//Various Errors preventing action
-	if(gearStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
+	if(gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + gearStorage.length + " storage slots.");
 		gearStorage.splice(0, gearStorage.length);
@@ -861,7 +861,7 @@ public function clearGearStorage():void {
 
 public function initializeGearStorage():void {
 	//Completely empty storage array
-	if(gearStorage.length == 0) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+	if(gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
 		gearStorage.splice(0, gearStorage.length);

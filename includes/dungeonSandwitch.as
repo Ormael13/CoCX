@@ -27,7 +27,6 @@ public function enterBoobsDungeon():void {
 	inDungeon = true;
 	dungeonLoc = 23;
 	eventParser(1);
-	return;
 }
 public function fightCumWitch():void {
 	clearOutput();
@@ -137,8 +136,8 @@ public function getMockedForSmallDongBySammitchMob():void {
 	if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 		outputText("\n\nYou wake up hours later outside the dungeon with all your belongs and surprisingly not missing any gems.");
 		inDungeon = false;
-		stats(0,0,0,0,1,-1,-100,0);
-		eventParser(5007);
+		dynStats("lib", 1, "sen", -1, "lus=", 0);
+		cleanupAfterCombat();
 	}
 	//[Bad end for small cocks]
 	outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
@@ -146,7 +145,7 @@ public function getMockedForSmallDongBySammitchMob():void {
 	outputText("\n\nYour only saving grace are the new witches who came of age throughout the years and join the rest of their sisters in the fun.  A lot of them seem to like you, and sometimes they use you to practice spells.  Your hair has been sandy blond for a long time now, and your chest has been leaking milk too.  Besides the spells, they like to practice fucking with you.  They are nice and gentle at first but become more demanding and demeaning as time goes on, up until they forget about you.");
 	
 	//[END]
-	stats(0,0,0,0,1,-1,-100,0);
+	dynStats("lib", 1, "sen", -1, "lus=", 0);
 	eventParser(5035);
 	player.HP = maxHP();
 }
@@ -214,7 +213,7 @@ public function femaleGirlsLoseToSammitches():void {
 	outputText("\n\nYou cum, seemingly without any build-up, and then it happens again, and again... It just comes and keeps coming.");
 
 	outputText("\n\nThe next few hours are a blur.  You remember being on your knees then sucking a cock while your pussy is licked, stroking three cocks with your hands and [feet] and even being completely upside down at one point.  Then things gradually fade to black...");
-	stats(0,0,0,0,1,0,-100,0);
+	dynStats("lib", 1, "lus=", 0);
 	//[Next]
 	menu();
 	if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) addButton(0,"Next",sandWitchMobNotBadEnd);
@@ -226,8 +225,8 @@ public function sandWitchMobNotBadEnd():void {
 	clearOutput();
 	outputText("You wake up hours later outside the dungeon with all your belongings, surprisingly not missing any gems.");
 	inDungeon = false;
-	stats(0,0,0,0,1,-1,-100,0);
-	eventParser(5007);
+	dynStats("lib", 1, "sen", -1, "lus=", 0);
+	cleanupAfterCombat();
 }
 
 //[Sand-witch mob Bad end for Females]
@@ -324,7 +323,7 @@ public function memeberedFolksFindTrueWuv():void {
 	
 	outputText("\n\nA slobbery cunt trails its moist juices on your cheek tenderly, and her voices proudly say, \"<i>You must really like me!  Wow, what a relief.  You seem pretty busy, and ummm... that feels really, REALLY good, so I think I'll just- unghhhhh...</i>\"  She pants a few times.  \"<i>...uh, feed you while you feed me!  My juices are supposed to make you cummy and horny enough to keep up with me.  Isn't that great?</i>\"");
 	outputText("\n\nYou nod into her pussy as the immense, swelling load inside you grows larger yet.  Feeding her is going to be lots of fun...");
-	stats(0,0,0,0,5,0,-100,0);
+	dynStats("lib", 5, "lus=", 0);
 	//[Nest]
 	menu();
 	addButton(0,"Next",memeberedFolksFindTrueWuv2);
@@ -341,7 +340,7 @@ public function memeberedFolksFindTrueWuv2():void {
 	outputText("\n\nJuice gushes out between her thighs as her nostrils flare, drinking down days of distilled pheromones.  Her skin flushes red and her knees quake.  Grabbing hold of the doorway for support, she meekly gurgles, \"<i>Oh gods,</i>\" before cumming again, splattering her juices all over the floor.  With her tongue lolling out, she maintains the strength of mind to advance through the fuck-mist and grab you around the shoulders.  Ophelia plucks a number of bottles from Dara's waist with her limbs, but otherwise, she doesn't resist.  Her voice bubbles happily even as you're pulled out of her cunt, \"<i>I'll see you soon, love.  I'm sure our owners have some more things to teach us both before we meet again!</i>\"");
 	outputText("\n\nDara slams the door and collapses onto you, both bodies tumbling to the floor.  Her face lands on your hips, just close enough that her lips and nose rub along [oneCock].  The tanned, tattooed beauty moans out loud, shivering with untapped need while her dual cunts drool like sieves.  She climbs atop you with a second thought, taking you in the middle of the hall while her sisters watch, many of them already jilling off after catching a hint of the sealed-off breeding aroma.  \"<i>Fuckfuckfuckfuckohgodsitssogooooood....</i>\" Dara cries.  Her sexual utterances are muffled by a second pair of curvy hips when Bernice sits on your face, rubbing your nose against her stiff clit while her juices gush down your throat.");
 	outputText("\n\nYour body is well trained by its time in captivity, and you immediately and messily orgasm for your feminine overlords.  Your hands are stuffed up waiting, well-stretched pussies as you thrash in sensual ecstasy.  Bliss and conditioning take over, forcing you to slurp and lick, to please the pussy before you while cumming for another.  The Sand Witches seemed to have expected something like this, but not to such a powerful degree.  They make the most of the situation by fucking you, one after another.  Sometimes they fist their creamed-cunts on you or make out with you while you're breeding their sisters.  Other times, you're only dealing with fresh, unfucked pussies.");
-	stats(0,0,0,0,5,0,-100,0);
+	dynStats("lib", 5, "lus=", 0);
 	//[Next]
 	menu();
 	addButton(0,"Next",memeberedFolksFindTrueWuv3);	
@@ -352,7 +351,7 @@ public function memeberedFolksFindTrueWuv3():void {
 	outputText("You wake from your stupor in a room full of sex toys, some of them being used by the busty witches.  It doesn't take long for one of them to see your state, offer you food and a drink, and present her sopping cunts to you.  You note that these women are both pregnant, but their libidos have obviously gone through the roof.  Thrusting inside her immediately, you gorge yourself on the proffered nourishment and do your duty as a captive love-slave, pleasing their holes again and again until they're so full of your cum that it slops from their lips in lewd waves with every virile ejaculation.");
 	outputText("\n\nSometimes, when you seem unhappy, they let you spend the night with Ophelia.  She's as attentive and caring as when you first met, even if she has grown larger and more powerful.  Her sweet personality shines through despite her inhuman appearance, and she'll tenderly milk you all night long while the two of you share stories of your lives.");
 	outputText("\n\nEventually, she's deemed purified enough to traverse the caves on her own, and though Ophelia does not lactate, the sisters make great use of her fluids.  Your monstrous lover spends most of her time with you, however.  Your adventure ended, but you found a love who genuinely treasures you and ensures that you get to experience dozens of orgasms an hour for days at a time...");
-	stats(0,0,0,0,5,0,-100,0);
+	dynStats("lib", 5, "lus=", 0);
 	//GAME OVER
 	eventParser(5035);
 }
@@ -373,7 +372,7 @@ public function yoYouBeatUpSomeSandWitchesYOUMONSTER():void {
 		if(player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
 	}
 	//Present PC with Leave and Orgy options
-	addButton(9,"Leave",eventParser,5007);
+	addButton(9,"Leave",cleanupAfterCombat);
 }
 
 //Dicked Win Sex
@@ -454,8 +453,8 @@ public function dicksHaveSexWithAWitch():void {
 		
 		outputText("\n\nFinishing up, you pull yourself out of her tits wipe up with her robes, tossing the musky robes on her face as she begins to sluttily keen in an orgasm of her own.  Now to explore the rest of this desert rat cellar.");
 	}
-	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	dynStats("sen", -1, "lus=", 0);
+	cleanupAfterCombat();
 }
 	
 //*Sapphic Win Sex
@@ -512,8 +511,8 @@ public function forceCunnilingusRimjobClitAndNipple():void {
 	else if(player.lactationQ() < 200) outputText(" slowly suckle you");
 	outputText(" while you come down from your high.  Why couldn't they have just done this to start?");
 	outputText("\n\nAfter that morale boost, you climb out of the writhing orgy of fem-flesh and dust yourself off, ready to explore further inside this den of inequity.");
-	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	dynStats("sen", -1, "lus=", 0);
+	cleanupAfterCombat();
 }
 
 //Sand Witch Mob Attacks:
@@ -524,7 +523,7 @@ public function gangrush():void {
 	//3-5 attacks.at half strength
 	monster.str -= 10;
 	monster.createStatusAffect("attacks",2 + rand(3),0,0,0);
-	eAttack();
+	monster.eAttack();
 	monster.str += 10;
 	
 }
@@ -534,7 +533,7 @@ public function gangrush():void {
 //High hit chance
 public function headbuttABitch():void {
 	outputText("The crowd parts, and a stockier, sturdier sorceress ambles out, fists up and head cocked back.  She makes to punch at you before pulling her fist at the last second, snapping her head forward in a powerful headbutt!  You barely have time to react!");
-	var damage:int = Math.round((monster.str + monster.weaponAttack + 10) - rand(player.tou) - player.armorDef);;
+	var damage:int = Math.round((monster.str + monster.weaponAttack + 10) - rand(player.tou) - player.armorDef);
 	//Dodge
 	if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 		outputText("\nThrowing yourself out of the way, you manage to avoid the hit.  Your foe doesn't seem nearly as pleased while she fades back in between her sisters.");
@@ -607,7 +606,7 @@ public function sandstonesAreCool():void {
 			
 		}
 		player.createStatusAffect("lust stones",bonus,0,0,0);
-		stats(0,0,0,0,0,0,bonus * 2 + 5 + player.sens/7,0);
+		dynStats("lus", bonus * 2 + 5 + player.sens/7);
 	}
 	//[If attack misses]
 	else {
@@ -622,7 +621,7 @@ public function sandstonesAreCool():void {
 public function drankSomeMialk():void {
 	outputText("One of the blonde beauties turns to another and asks, \"<i>A drink, sister?  Fighting this intruder has given me a powerful thirst.</i>\"  The other woman wordlessly opens her robe, baring her breasts, exposing four heaving, milk-fueled mounds to the air before the other woman claims a nipple for herself.  Three others crowd in on the exposed teats, their rumps shaking contentedly as they grab a quick snack.");
 	outputText("\n\nAfter wiping the excess from their lips, they close their robes and resume a fighting stance, seeming healthier than before.");
-	stats(0,0,0,0,0,0,4 + player.lib/10,0);
+	dynStats("lus", 4 + player.lib/10);
 	//+ 30 HP, +light lust damage to PC and mob
 	monster.addHP(30);
 	combatRoundOver();
@@ -651,7 +650,7 @@ public function sandWitchMobAI():void {
 public function cumWitchAI():void {
 	//Hurt!
 	if(monster.HPRatio() < .6) {
-		sandWitchCuntHeals();;
+		sandWitchCuntHeals();
 		return;
 	}
 	
@@ -710,7 +709,7 @@ public function bukkakeAttack():void {
 		}
 		hits--;
 	}
-	stats(0,0,0,0,0,0,damage+bonus,0);
+	dynStats("lus", damage+bonus);
 	combatRoundOver();
 }
 
@@ -719,7 +718,7 @@ public function cumMagicAttack():void {
 	//*Used on males only, casts spell that causes balls to temporarily swell and increase lust by a moderate amount.  Unavoidable.
 	outputText("Gesticulating with her free hand, the Cum Witch utters impossible to pronounce words before closing her fingers tightly into a fist.  That same instant, you feel an onset of warmth in your [balls], a spreading heat that makes you tremble with growing lust.  A second later, [eachCock] is throbbing, and a runner of cum trickles from the [cockHead], a hint of your temporarily-enhanced virility.");
 	//(15-30 lust, based on libido)
-	stats(0,0,0,0,0,0,5+player.lib/12,0);
+	dynStats("lus", 5+player.lib/12);
 	player.hoursSinceCum += 100;
 	combatRoundOver();
 }
@@ -733,7 +732,7 @@ public function cumHungerAttack():void {
 		return;
 	}
 	outputText("It worms around your uterus, tickling it faintly before gently kneading your ovaries.  Your [legs] go weak as your womb throbs, hungering for something to fill it.  A trickle of wetness squirts from your [vagina] as the magic fades, and you squirm as your lust rises. If only something would make you pregnant!  Your eyes dart unbidden to the Witch's groin before you yank them away.");
-	stats(0,0,0,0,0,0,5+player.lib/12,0);
+	dynStats("lus", 5+player.lib/12);
 	combatRoundOver();
 }
 
@@ -776,7 +775,7 @@ public function cocknosisAttack():void {
 	else {
 		outputText("The Witch smirks, though you're too focused on her cock to see, and she continues, \"<i>Good " + player.mf("boy","girl") + ".  Watch it sway.  You're so focused on my cock now that the world is just falling away around it, sinking into nothingness, leaving only that wonderful cock behind for you to watch.  And since it's filling your view, you can feel it filling your mind as well, can't you?</i>\"");
 		outputText("\n\nYou nod, your view rigidly attached to her equally rigid tool as you utterly and completely fixate on her penis, admiring its curves, its thickness, and the way it seems to pulsate happily for you whenever you look at it just right.  The Witch keeps talking, but it's her dick that's important.  You start to drool as your " + player.skin() + " flushes and your body heats.  Gods, her cock is gorgeous.  Reaching down, you begin to masturbate without thinking.  You don't know why, but it just feels like the right thing to do.");
-		stats(0,0,0,0,0,0,20,0);
+		dynStats("lus", 20);
 		if(player.lust <= 99) outputText("\n\nYou bump against something, startling yourself out of the cocknosis before you can completely fall for it.  Still, you keep seeing her dick every time you close your eyes, and your body is very turned on from how you were touching yourself.");
 		else outputText("\n\nYou play with yourself until you're on the very edge of orgasm.  At that moment, a loud *SNAP* startles you back to wakefulness, and as you look down at the cock bobbing just a few inches away, you realize it's hopeless.  You can't fight this.");
 		outputText("\n\nThe witch smiles knowingly.");
@@ -869,7 +868,7 @@ public function turnIntoASammitch():void {
 	outputText("\n\nThe other woman looks a little confused at this, but when she sees your wide, excited eyes, she reluctantly nods.  There's a flash of irritation at your presence, but it fades when your lover offers, \"<i>Don't be sour, I saved some for you, hun.  Why don't you take your sister to the mother, and when you come back, I'll make sure to pack all three of your cunts, okay?</i>\"");
 	
 	outputText("\n\nThis seems to placate the four-breasted, three-pussied woman, a wide grin breaking out on her face.  She helps you up and leads you from the room to your new life, the last thing you see as you go a subtle wink from the Cum Witch...");
-	stats(0,0,0,0,100,100,-100,0);
+	dynStats("lib", 100, "sen", 100, "lus=", 0);
 	//Next
 	menu();
 	addButton(0,"Next",chicksLoseToSandWitchesBadEndFinale);
@@ -936,7 +935,7 @@ public function cumWitchCumPumpBadEnd():void {
 	//[NEXT]
 	menu();
 	addButton(0,"Next",beACumPumpPartII);
-	stats(0,0,0,0,100,100,-100,0);
+	dynStats("lib", 100, "sen", 100, "lus=", 0);
 }
 
 public function beACumPumpPartII():void {
@@ -953,7 +952,7 @@ public function beACumPumpPartII():void {
 	outputText(".  Of course, the wicked witch only releases you at this point.  \"<i>Do I look like one of the cum-hungry wenches around here?</i>\"");
 	
 	//add lust
-	stats(0,0,0,0,0,0,100,0,false);
+	dynStats("lus=", 100, "resisted", false);
 	
 	outputText("\n\nAt that, a few nagging worries surge up to the forefront of your lust-addled thoughts.  You were hypnotized!  Worse than that, you can barely remember anything, let alone how you got here.  In addition, though less pressing, she's done something to you that'll make you only father females.  You don't remember much, but you know that's not quite right.  You jump up and nearly fall over your own [feet] in your hurry to get away from this woman - alluring and arousing as she is.  Pressing your back flat against the wall, you begin breathing faster and faster as you wrack your consciousness for an explanation.");
 	
@@ -1068,10 +1067,9 @@ public function repeatLoseToCumWitchForDudes():void {
 		
 		outputText("\n\nSo if you avoid a facial she'll steal some of your semen production, but if you take it, she'll make you MORE virile.  While you're mulling it over, she's still grinding on you, distracting you with flashes of salacious delight.  The clock is ticking, and if you don't pick soon, she might pick for you.");
 		//[Facial] [No Facial]
-		stats(0,0,0,0,0,0,100,0,false);
+		dynStats("lus=", 100, "resisted", false);
 		addButton(0,"Facial",tooBigCumWitchLossFacial);
 		addButton(1,"No Facial",tooBigCumWitchLossNoFacial);
-		return;
 	}
 	else {
 		//*Dick Fits Male Loss Scene
@@ -1116,9 +1114,9 @@ public function repeatLoseToCumWitchForDudes():void {
 		
 		outputText("\n\nYou black out when she prods your groin with a fresh tingle of magic, launching a torrent of jism a dozen feet into the air in the process.");
 		
-		stats(0,0,0,0,0,5,-100,0);
+		dynStats("sen", 5, "lus=", 0);
 		if(player.cumQ() < 60000) player.cumMultiplier += 2;
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -1152,8 +1150,8 @@ public function tooBigCumWitchLossFacial():void {
 	}
 	else player.cumMultiplier+=2;
 	if(player.ballSize < 7) player.ballSize++;
-	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	dynStats("lib", 1, "sen", 1, "lus=", 0);
+	cleanupAfterCombat();
 }
 
 //Avoid The Too Big Loss Facial
@@ -1172,8 +1170,8 @@ public function tooBigCumWitchLossNoFacial():void {
 	//Big-ish cum multiplier loss!  Lose some ball size if they're huge
 	if(player.ballSize > 5) player.ballSize -= Math.round(player.ballSize * 0.333);
 	player.cumMultiplier = Math.round(player.cumMultiplier * .75);
-	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	dynStats("lus=", 0);
+	cleanupAfterCombat();
 }
 //TDM's generic loss to cum witch scene
 //requires that the PC have a dick that can fit inside the cum witch's vagina.  The scene can be used with herms.
@@ -1233,12 +1231,12 @@ public function TDMsLoseToCumWitchScene():void {
 	outputText("\n\nThe woman covered in your combined spunk rises up off of your body and dons her significantly whiter robes.  She wipes off her face, revealing that same cryptic, knowing smile once more, before gently touching your head and whispering something in your ear.  Another spell grips your body, and you drift off into a deep sleep.");
 	
 	//Decrease PC's strength by 2 for every digit of cum production they have after 100 (I can provide an algorithm for that if you need it, it is very simple), set lust to 0, increase cum production multiplier by 1
-	stats(-1,0,0,0,0,0,-100,0);
+	dynStats("str", -1,"lus=", 0);
 	player.cumMultiplier++;
-	if(player.cumQ() >= 200) stats(-1,0,0,0,0,0,0,0);
-	if(player.cumQ() >= 3000) stats(-1,0,0,0,0,0,0,0);
+	if(player.cumQ() >= 200) dynStats("str", -1);
+	if(player.cumQ() >= 3000) dynStats("str", -1);
 	//Usual loss text+gem loss.
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1257,7 +1255,7 @@ public function defeatedByCumWitch():void {
 		else if(player.hasVagina()) {
 			savinMakesAwesomeFemdom();
 		}
-		else eventParser(5007);
+		else cleanupAfterCombat();
 	}
 }
 
@@ -1283,7 +1281,7 @@ public function cumWitchDefeated():void {
 	
 	if(inCombat()) {
 		if(monster.HP >= 1) addButton(9,"Leave",declineSandWitch);
-		else addButton(9,"Leave",eventParser,5007);
+		else addButton(9,"Leave",cleanupAfterCombat);
 	}
 	else addButton(9,"Back",eventParser,1);
 }
@@ -1292,7 +1290,7 @@ public function cumWitchDefeated():void {
 public function declineSandWitch():void {
 	clearOutput();
 	outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(1);
 }
 
@@ -1332,8 +1330,8 @@ public function menFuckUpSomeCumWitch():void {
 		//(cum, then +5 lust){preg check for sammitches}
 		//sand witch preg
 		player.knockUp(22,360,90);
-		stats(0,0,0,0,0,0,-100,0);
-		stats(0,0,0,0,0,0,5,0);
+		dynStats("lus=", 0);
+		dynStats("lus", 5);
 	}
 	//DP Males
 	else if(y >= 0) {
@@ -1352,7 +1350,7 @@ public function menFuckUpSomeCumWitch():void {
 		else outputText("washes out of your dual cum-slits in a tidal wave, flooding the hungry holes with your virile seed.  You cum and cum, spunking up the witch's belly.  First it bulges slightly, but all too soon you have it rounded into a pregnant dome.");
 		outputText("  The bouncing girl-cock above the woman's gushing pussy does a fine job of painting her belly and bust white.  It spurts rope after rope onto her chocolate-toned flesh, and soon she looks more like an icing-drizzled tart than a formidable foe.");
 		outputText("\n\nFeeling empty and sated, you unsheath your double dongs to reveal the fruits of your labors - a pair of juicy creampies, one vertical, the other small, puckered, and oozing.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 	}
 	//Regular Dicking
 	else {
@@ -1382,14 +1380,14 @@ public function menFuckUpSomeCumWitch():void {
 		if(player.cor < 33) outputText("  You hope she learned something from the experience, but knowing most people in this strange land, she'll go right back to her rotten ways.");
 		else if(player.cor < 66) outputText("  You wonder if she'll learn anything from this and shrug nonchalantly.  Who cares?");
 		else outputText("  You smirk as you wonder if she'll learn anything from this.  You hope not - it's a fun lesson to teach.");
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("lus=", 0);
 	}
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1426,13 +1424,13 @@ public function maleTooBigVictorySex():void {
 	outputText("\n\nYou aren't done!  Not by a long shot!  This dark creature blessed you with unholy levels of virility, and you aren't going to waste it.  You stand away and butt your " + cockHead(x) + " into her nether-lips, and the remainder of your orgasm is injected directly into the woman's waiting womb.  Her belly rounds into a nice, gravid bump that carries her cock up with it, and you're given the first chance to see the results of the cum witch's own orgasm.  The dark, glossy cock is absolutely soaked in sperm, while her balls are wreathed in churned up, frothy cum.  Once you've made her uterus a swollen dome, you aim up and drizzle the last ropes atop her pathetic, half-limp dick.");
 	
 	outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the " + player.skin() + " you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1465,13 +1463,13 @@ public function ladyVictorySex():void {
 	outputText("\n\nYou recover after a few minutes and rise up, legs shaking at the overpowering sensation of the witch's withdrawing phallus, but you make it up with spunk pouring from your [vagina].  What a victory!");
 	
 	player.knockUp(22,360,90);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1505,13 +1503,13 @@ public function tentacleVictoryGangbangCumWitch():void {
 	
 	outputText("\n\nYou retract your spent shafts and smirk at the backflow of bukkake that bursts from the cum witch's soiled loins.  She's utterly wrecked, dominated by dick in every sense.  What delicious irony that a sorceress should be taken with the very type of organ she glorifies!  Getting dressed, you give her a lazy wave and invite her to try again some other time.");
 	
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1575,8 +1573,8 @@ public function resistSavinStuff():void {
 	outputText("\n\n\"<i>Yes, oh yes,</i>\" the witch groans, falling back against the cum-covered dunes, her milky chest heaving, adding to the organic mess.  \"<i>Let me be the father of your children... you'll be an excellent mother, and our children will be glorious.</i>\"");
 	
 	outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
-	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	dynStats("sen", 2, "lus=", 0);
+	cleanupAfterCombat();
 	//knock up hurrrr
 	player.knockUp(22,360,90);
 }
@@ -1592,8 +1590,8 @@ public function doNotResistSavin():void {
 	outputText("\n\nFinally, the endless orgasm fades, and the witch groans with contentment, falling back against the cum-covered dunes, her milky chest heaving, adding to the organic mess.  \"<i>Let me be the father of your children... you'll be an excellent mother, and our children will be glorious.</i>\"");
 	
 	outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
-	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	dynStats("sen", 2, "lus=", 0);
+	cleanupAfterCombat();
 	//knock up hurrrr
 	player.knockUp(22,360,90);
 }
@@ -1688,7 +1686,7 @@ public function lionpaws(skipped:Boolean = false):void {
 	if(player.cumQ() < 250) outputText(" leg.");
 	else outputText(" stained-white fur in a futile attempt to get some of your cum off.");
 	
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("sen", -2, "lus=", 0);
 	menu();
 	if(skipped) {
 		inDungeon = false;
@@ -1717,7 +1715,7 @@ public function riddleGameGo():void {
 }
 
 public function riddlePicker():void {
-	var choices:Array = new Array();
+	var choices:Array = [];
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleOne && flags[kFLAGS.RIDDLE_TWO] != riddleOne) choices[choices.length] = riddleOne;
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleTwo && flags[kFLAGS.RIDDLE_TWO] != riddleTwo) choices[choices.length] = riddleTwo;
 	if(flags[kFLAGS.RIDDLE_ONE] != riddleThree && flags[kFLAGS.RIDDLE_TWO] != riddleThree) choices[choices.length] = riddleThree;
@@ -2040,7 +2038,7 @@ public function getBlown(submit:Boolean = false):void {
 	outputText(" geysering into the air, raining back down in a pool around you and the now cum-covered sphinx.");
 	
 	outputText("\n\n\"<i>Enjoy yourself?</i>\" the milk-white leonine girl asks, dropping to her knees beside you, a hand resting on your heaving chest.  You give her a weak thumbs-up, and stagger to your [feet].");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	menu();
 	if(submit) {
 		inDungeon = false;
@@ -2087,7 +2085,7 @@ public function forceDildos():void {
 	
 	outputText("\n\nYou collapse as the dildos fade into nothing inside you, leaving you feeling empty to your very core.  \"<i>Enjoy yourself?</i>\" the spunk-covered leonine girl asks, dropping to her knees beside you, a hand resting on your heaving chest.  You give her a weak thumbs-up, and stagger to your [feet].");
 	//(DIsplay Options: Leave, Enter)
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	menu();
 	addButton(0,"Enter",openZeDoorToParadize);
 	addButton(4,"Leave",eventParser,11150);
@@ -2157,7 +2155,7 @@ public function fuckDatLionPussah():void {
 	outputText("but you finally gather the strength to haul yourself up onto your [feet].");
 	
 	outputText("\n\n\"<i>Well, that's certainly not what I had in mind,</i>\" Sanura says, recomposing herself after that vicious fucking.  \"<i>But I can't say I can complain.</i>\"  Neither can you, you smirk to yourself.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	menu();
 	addButton(0,"Enter",openZeDoorToParadize);
 	addButton(4,"Leave",eventParser,11150);
@@ -2256,7 +2254,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 	outputText(".  Eventually, she gives a mighty, sphincter-stretching lurch and ejects from your [butt], painting it white on the way out.");
 	outputText("\n\nYou collapse in a well-fucked heap while Sanura's extra addition fades away.  She lays down next to you, fanning her face with her wings as you try to recover.  Her arm rubs one of your cheeks, still sensitive from whatever magic was in her balls, and she says, \"<i>That was great fun.  Let's do it again sometime?</i>\"");
 	outputText("\n\nYou muster the strength for a thumbs up, a dopey smile still painted on your face.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	inDungeon = false;
 	menu();
 	addButton(0,"Next",eventParser,13);
@@ -2298,8 +2296,107 @@ public function sandWitchMotherFriendlyMenu():void {
 
 public function slavesDiscussion():void {
 	menu();
-	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",askMotherToReleaseEssy);
+	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",forest.essrayle.askMotherToReleaseEssy);
 	if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves);
+}
+//Getting a Milk Slut, Purity Style
+//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
+private function freeSlaves():void {
+	clearOutput();
+	outputText("Thinking back to the poor, mind-broken tittymonster of a bath girl you met here in the witches' coven, you tell the Sand Mother it's about time to free her and any other slaves she's got hidden away.");
+
+	outputText("\n\nThe Sand Mother cocks an eyebrow at you, and makes a rather haughty scoff from atop her throne.  \"<i>You may have beaten my guardians, but what makes you think you can just order something like that, outsider?  The slaves are vital to the workings of the coven; we can't simply </i>release<i> them.</i>\"");
+
+	if(player.inte <= 20) {
+		outputText("\n\nYou start to respond, stop, and have to think for a moment.  You spend a good long minute contemplating, before shrugging.  You're sure there's a convincing argument against this, but can't think of it at the moment.");
+		//[Back to menu
+		doNext(1);
+		return;
+	}
+	// Else:
+	outputText("\n\nYou shake your head. The witches claim to be opposed to the demons, yet what do they do?  They attack travelers who don't submit, enslave those who resist, and Marae knows what else.  This cannot stand.  The Sand Mother's no better than the demons if she's a slaver, keeping people like the poor milk girl as little more than cattle.");
+
+	outputText("\n\nThe Sand Mother scowls, and rises from her throne.  \"<i>Come with me,</i>\" she says, ushering you from the room and through the many corridors of her subterranean haven.  Eventually, she brings you to the bath chamber.  Huddled in the corner is the huge-breasted girl, dozing lightly until the elder witch clears her throat.  In an instant, the girl's up and crawling meekly over, hands supporting her massive teats as she mewls, \"<i>Bath time, Mistress?</i>\"");
+
+	outputText("\n\n\"<i>No, girl,</i>\" the witch says, eliciting a confused look from the slave girl.  \"<i>Why don't you tell your friend here just how much you want to be free, girl. Use your words.</i>\"");
+
+	outputText("\n\n\"<i>M-mistress?</i>\" the slave girl says, head cocked to the side.  \"<i>I...</i>\" she whines, visibly struggling to form a few simple words before giving up and repeating her milky mantra: \"<i>Bath time?</i>\"");
+
+	outputText("\n\nThe Sand Mother shakes her head and turns back to you.  \"<i>She's addled, [name].  Even if I were to let her go, she'd just be snatched up by the demons or some wandering pervert.  Gods know there's no shortage of either.  Releasing her into the wilds is more cruel than keeping her penned, where at least she's cared for - and useful, too.  She fulfils a function amongst us, dear [name], and for that she is honored and tended to.  All her needs are met, and she wants for nothing.  Can you in good conscious demand her release, dooming her to rape and torment and corruption?</i>\"");
+
+	//[Yes] [No] [Gimme her]
+	menu();
+	addButton(0,"Yes",yesDemandMilkRelease);
+	addButton(1,"No",noDemandMilkRelease);
+	addButton(2,"Gimme Her",gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire);
+}
+
+//Yes (No Change)
+private function yesDemandMilkRelease():void {
+	clearOutput();
+	outputText("You tell the Sand Mother that everyone deserves freedom, even if they're addle-minded, or useful.  She can't just <i>keep people</i> because she feels like they're better off in her care.");
+	outputText("\n\nShe sighs, shaking her head sadly as she starts back toward the throne room.  \"<i>You're a bleeding heart idealist, [name].  You'd condemn the girl to torment for the sake of your petty morality.  There's no room for sentimentality these days.  Every soul I keep from becoming a demon, even if I keep them in chains, is on my conscious.  yet I bear that weight gladly, [name].  Perhaps one day, when you're ready to take on that same responsibility, you'll understand.</i>\"");
+	//[PC is left in Milk Room]
+	kGAMECLASS.dungeonLoc = 33;
+	doNext(1);
+}
+
+//No (No Change)
+private function noDemandMilkRelease():void {
+	clearOutput();
+	outputText("You suppose not, when she puts it that way.  The poor girl's probably better off here than in the clutches of the demons.  Seeing you relent, the Sand Mother smiles and pats your shoulder.  \"<i>I'm glad you can see things my way, [name].  There is wisdom in you.  Come, let us speak of other things,</i>\" she says, leading you back to her throne room.");
+	doNext(1);
+}
+
+//Gimme her (Gimme dat delicious milk slut)
+private function gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire():void {
+	clearOutput();
+	outputText("You have a better idea: give the girl to you.  You can care for and protect her in your camp, but also give her at least as much freedom as is safe in these dire times.");
+
+	outputText("\n\nThe Sand Mother sighs, shaking her head sadly.  \"<i>You're an idealist, [name].  But there is wisdom in your words.  Perhaps...  perhaps you are correct.  However, she is quite useful to our coven.  Perhaps I could be persuaded to part with her, if certain recompense was made.  Two thousand gems should be sufficient.</i>\"  The sorceress looks at you, awaiting your answer.");
+
+	if(player.gems < 2000) {
+		outputText("\n\n<b>You haven't got that much.</b>");
+	}
+	menu();
+	//[2 Expensive][Buy Her]
+	addButton(0,"2 Expensive",TwoExpensive4Me);
+	if(player.gems >= 2000) addButton(1,"Buy Her",BuyHer);
+}
+
+private function TwoExpensive4Me():void {
+	clearOutput();
+	outputText("You explain that you can't afford that much.");
+	outputText("\n\nThe Sand Mother shrugs and says, \"<i>Then ask after her when you do.</i>\"  She doesn't stick around long enough for you to reply, leaving you standing there with the milk girl.");
+	outputText("\n\n\"<i>Bath time?</i>\"");
+	kGAMECLASS.dungeonLoc = 33;
+	doNext(1);
+}
+
+private function BuyHer():void {
+	clearOutput();
+	player.gems -= 2000;
+	outputText("You hand over two thousand of your hard-earned gems.");
+
+	outputText("\n\nThe Sand Mother quips, \"<i>Very well, take the girl.  Give her freedom, and keep her safe.  She has more than earned a life of ease after years of faithful service.  The others we keep...  there is a city not far from here.  I will deliver my other servants there in the night.  Perhaps they will find solace in the arms of the last free city in Mareth.</i>\"");
+
+	outputText("\n\n\"<i>Mistress?</i>\" the milk girl says, looking between you and the Sand Mother.");
+
+	outputText("\n\nSmiling beatifically, the Mother kneels down and pats the slave's cheek.  \"<i>You're free now, daughter.  [name] will take you from here, to someplace where you can be free and safe.  Do you understand, darling?  I'm no longer your mistress.</i>\"");
+
+	outputText("\n\nA confused moment later, the idea seems to dawn on her milk-addled mind.  The slave girl turns to you, trying desperately to stand under the weight of her gigantic udders.  \"<i>[Master]?</i>\"");
+
+	outputText("\n\n\"<i>No, no,</i>\" you say, moving to support her tremendous teats' weight, \"<i>Not [master], [name].  Understand?  I'm [name].</i>\"");
+
+	outputText("\n\n\"<i>[name]!</i>\" she echoes with childish glee, finally able to stand upright with your aid.");
+
+	outputText("\n\nOpening the chamber's door for you, the Sand Mother adds, \"<i>I will send a few of my daughters to your camp with her... trappings.  You'll need to milk her frequently, and that deluge of lactation must go somewhere; a big bowl, if you like.  If nothing else, your camp and any other followers you accrue will never lack for milk.</i>\"");
+
+	outputText("\n\nYou thank the Sand Mother for her understanding, and the kindness she's shown your milky friend.  She nods, a wry smile on her dusky lips as you steady the milkmaid, helping her out of the room she's called home for gods know how long, and out into the desert sands - to camp.  To her new home.");
+
+	//[Next] (To Arriving At Camp)
+	menu();
+	addButton(0,"Next",milkWaifu.arriveWithLacticWaifuAtCamp);
 }
 
 public function sexWithFriendlySandMother():void {
@@ -2335,7 +2432,7 @@ public function sandMotherPOMenu():void {
 		addButton(5,"Get LaBova",takeLaBovaOrLactaid, false);
 		addButton(6,"Get Lactaid",takeLaBovaOrLactaid);
 	}
-	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",askMotherToReleaseEssy);
+	if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",forest.essrayle.askMotherToReleaseEssy);
 	addButton(9,"Leave",eventParser,1);
 }
 
@@ -2388,7 +2485,7 @@ public function explainYourSelfToZeSandBitch():void {
 	
 	outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 	//(No new PG.  Corrupt version)
-	if(player.cor > player.inte || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+	if(player.cor > player.inte || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 		outputText("  \"<i>There is some truth to your tale, [name], but I am a Sand Mother.  We are schooled in the art of sussing out the corrupt or unclean.  If we could not detect disguised demons and demonic agents, we would not flourish as we do now, and this great desert would not be on the cusp of resurrection.</i>\"");
 		outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 		outputText("\n\nThere's no way out, it's a fight!");
@@ -2490,7 +2587,7 @@ public function eatALightningBolt():void {
 public function getWhispered():void {
 	outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
 	player.createStatusAffect("Whispered",0,0,0,0);
-	stats(0,0,0,0,0,0,15,0);
+	dynStats("lus", 15);
 	combatRoundOver();
 }
 //Notes:
@@ -2505,7 +2602,7 @@ public function sandWitchMotherAI():void {
 		gigaFire2();
 		return;
 	}
-	var choices:Array = new Array();
+	var choices:Array = [];
 	if(player.hasStatusAffect("Whispered") < 0) choices[choices.length] = getWhispered;
 	choices[choices.length] = eatALightningBolt;
 	choices[choices.length] = sandMotherTelekinesis;
@@ -2614,9 +2711,9 @@ public function tentacleGangBang():void {
 	}
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 	flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("lus=", 0, "cor", 1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //*Fuck Her Cunt
 //>Sets to resisting with options for repeat rapes.
@@ -2691,9 +2788,9 @@ public function fuckTheSandMothersCunt():void {
 		flags[kFLAGS.SAND_WITCHES_COWED] = 1;
 	}
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("lus=", 0, "cor", 1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //*ScissorAnDrink
@@ -2740,9 +2837,9 @@ public function scissorAndDrink():void {
 		flags[kFLAGS.SAND_WITCHES_COWED] = 1;
 	}
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("lus=", 0, "cor", 1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 	
 //*Lose Male Loss
@@ -2820,7 +2917,7 @@ public function loseToSandMotherBadEnd():void {
 	if(!player.hasVagina()) outputText("[butt]");
 	else outputText("uterus");
 	outputText(".  She gives a contented sigh and slides out, followed by a noisily-spurting torrents of her virile seed.  Gods, even though she fucks you like this all the time, it feels as good as the first time she stuffed you full.  You're so lucky she's willing to give you so much after sharing with the coven all day!  You cradle your pregnant-feeling middle and giggle out a thank you, slumping back into the puddling spooge.  With heavy eyelids, you bid farewell to wakefulness, slumbering fitfully after your ordeal.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	//[Next]
 	menu();
 	addButton(0,"Next",menLoseToQueenMotherVolI);
@@ -2919,7 +3016,7 @@ public function loseToSandMother():void {
 	
 	outputText("\n\nThe chocolate witch stands up with her somewhat-stiff cock hanging between her thighs and dripping the collective juices of your cunt and her cum, \"<i>I have filled her with a new purpose.</i>\"  She stares down at your sweat-stained body that tingles with the afterglow of sex.  \"<i>Now to the matter of her flesh.</i>\"");
 	
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	menu();
 	addButton(0,"Next",sandMotherBadEndsLadiesEpilogue);
 }
@@ -3097,7 +3194,7 @@ public function friendlySandMotherFuck():void {
 	outputText("\n\nSeparating from her produces sensations so strong that your [legs] nearly fold underneath you, peaking along with a wet 'schluuuuck'.  You stagger back, panting for breath as you admire the creampied prize ahead.  The Sand Mother is a panting, milky mess that's wallowing in a puddle of her own cum.  After a few moments, she stops fondling herself and moaning, gradually lowering the hem of her stained robe as a content, blissful expression settles on her face.");
 	outputText("\n\n\"<i>Thank you, Champion.  Perhaps you wouldn't mind helping me again with this some time in the future...</i>\"");
 	flags[kFLAGS.TIMES_FRIENDLY_FUCKED_SAND_MOTHER]++;
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -3170,7 +3267,7 @@ public function lesboMilkFilling():void {
 	
 	outputText("\n\nSighing, you eventually disentangle yourself from the satisfied enchantress, but not before giving her a long, wet kiss.");
 	outputText("\n\n\"<i>Perhaps we can tend to our needs the next time they get out of hand,</i>\" she suggests.  Yes, you just might have to. ");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 	
@@ -3540,7 +3637,7 @@ public function cumWitchBlessed(virility:Boolean = true):void {
 		player.createPerk("Magical Fertility",0,0,0,0,"Fucking cheater-nozzle.");
 	}
 	flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] = 1;
-	stats(0,0,0,0,1,-5,-100,0);
+	dynStats("lib", 1, "sen", -5, "lus=", 0);
 	outputText("</b>");
 	doNext(1);
 }
@@ -3550,7 +3647,7 @@ public function knockUpSomeDoubleStuffedSandWitches():void {
 	clearOutput();
 	outputText("Figuring these horny, pregnant sluts should be more than receptive to a little sex, you shed your [armor].\n\n");
 	outputText("The heavily pregnant sand witches all stare at your [cock biggest] with rapt attention before they begin crawling towards you.  \"<i>Please!</i>\" each of them cry out.  \"<i>Too horny!  Too many hormones!</i>\"  Some of them crawl on their hands and knees with their quadruple breasts and pregnant bellies dragging along the ground.  \"<i>We need more!</i>\"  One cries out.  \"<i>More cock!</i>\" cries another.  \"<i>More children!</i>\" begs a third rubbing her belly.  \"<i>Fill us!</i>\" chants one before the others chime in.  \"<i>Yes; Fill us! Fill us!  Fill us!</i>\"  They paw at your genitals with sexual hunger burning in their eyes.  The smell of wet pussies permeates the air, encouraging your body's own arousal.");
-	stats(0,0,0,0,0,0,33,0);
+	dynStats("lus", 33);
 	//[FUCK ONE] *Requires at least one Cock of appropriate size and enough lust.
 	menu();
 	if(player.cockThatFits(50) < 0) outputText("\n\n<b>You're too damned big to fuck any of them.</b>");
@@ -3662,7 +3759,7 @@ public function fuckOneSandWitch():void {
 		if(player.cockTotal() == 1) outputText("s");
 		outputText(" to release loads of cum.  Ropes of your white jizz splash over the witch's bare belly and naked breasts.  With both hands you stroke your " + cockDescript(x) + " until it has soaked the tanned beauty from head to foot in your cum.  The other witches quickly set upon the exhausted girl, licking the cum from her breasts and scooping it out of her various valleys of cleavage to slop against their own pussies in the desperate hope of seeding their own extra wombs.");
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(1);
 }
 
@@ -3742,7 +3839,7 @@ public function fuckTwoPregWitches():void {
 	}
 	//{if cumVeryHigh through cumExtreme}
 	else outputText("\n\nThe excessive quantities of cum allow you to easily slide your shafts out of the wanton holes.  A pool of your jizz surrounds your [feet] and the legs of the witches.  Several sensitive strokes of your cocks allow you to blast a few more loads across the two piles of tits that call themselves witches.  The splashes of cum thoroughly soak them, and the rest of the pregnant horny sand witches descend upon the two girls, licking and scrapping at the coatings of cum in the desperate hopes that they might be able to scoop some into their own secondary, empty wombs.  The horde of quad-breasted pregger witches proceeds to wrestle with each other in a pile of tits and cum.");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(1);
 }
 
@@ -3909,7 +4006,7 @@ public function fuckAllThePregWitches():void {
 	
 	outputText("\n\nFinally finished, you stand in a pool of your own jizz and stare down at the piles of tits and bellies that allegedly are women but for all intent and purpose have become nothing more than sacks of flesh filled with milk, babies, and cum.  Each of them is covered in a layer of sweat and splooge, and small mewing cries of satisfied delight emanate from somewhere underneath those heavy orbs.  You can't help but wonder how long it'll take for them to give birth so that you can once again knock them up with the broods of children that their bodies are so obviously intended to produce.");
 	
-	stats(0,0,0,0,0,-3,-100,0);
+	dynStats("sen", -3, "lus=", 0);
 	doNext(1);
 }
 
@@ -3945,7 +4042,7 @@ public function finishMilkBath():void {
 	clearOutput();
 	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".  Yet, you have work to do, and eventually, you tire of relaxing in the sand witches' endless white bounty.  You pull out the tub's plug and climb out, finding a towel on the wall.  Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 	//(+Lust, -Fatigue)
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("lus", 10);
 	fatigue(-50);
 	doNext(1);
 }
@@ -3985,7 +4082,7 @@ public function grabTheMilkGirl():void {
 	}
 	//[Fuck Her](PC must have gender; if cooch, also C+ cups) [Don't]
 	menu();
-	stats(0,0,0,0,0,0,33,0,false);
+	dynStats("lus", 33, "resisted", false);
 	if(player.hasCock()) addButton(0,"Dick Fuck",fuckMilkbabeWithPenor);
 	if(player.hasVagina() && player.biggestTitSize() >= 3) addButton(1,"Lady Fuck",ladyFucks);
 	addButton(2,"Don't Fuck",dontFuckMilkBathBabe);
@@ -4023,7 +4120,7 @@ public function fuckMilkbabeWithPenor():void {
 	
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tightly as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 	//[+Lust, +HP, -Fatigue]
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	fatigue(-15);
 	doNext(1);
 }
@@ -4046,7 +4143,7 @@ public function ladyFucks():void {
 	outputText(".  You run your fingers through the girl's hair, urging her sexual skills on as your chest heaves and quavers, riding out the massive boobgasm as fem-cum spurts from your cunt and into the milky pool below.");
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tightly as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 	//[+Lust, +HP, -Fatigue]
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("lus=", 0);
 	doNext(1);
 	fatigue(-15);
 	doNext(1);
@@ -4096,7 +4193,7 @@ public function drinkNFap():void {
 	outputText("\n\nA drawn out, low coo of contentment emanates from the other girl as you separate from her, and she bashfully whispers, \"<i>Thank you,</i>\" as she drags her gigantic tits over the puddly, milk-slicked floor.  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
 	
 	fatigue(-15);
-	stats(0,0,0,0,0,-3,-100,0);
+	dynStats("sen", -3, "lus=", 0);
 	doNext(1);
 }
 

@@ -1,7 +1,5 @@
-﻿import classes.Cock;
+﻿import classes.Appearance;
 import classes.CockTypesEnum;
-import classes.Appearance;
-import classes.Player;
 
 public function sackDescript():String
 {
@@ -20,8 +18,7 @@ public function sheathDesc():String {
 	return Appearance.sheathDescription(player);
 }
 public function chestDesc():String {
-	if(player.biggestTitSize() < 1) return "chest";
-	else return biggestBreastSizeDescript();
+	return Appearance.chestDesc(player);
 }
 public function allChestDesc():String {
 	if(player.biggestTitSize() < 1) return "chest";
@@ -66,10 +63,10 @@ public function simpleBallsDescript():String {
 }
 
 public function assholeDescript():String {
-	return Appearance.assholeDescription(player);
+	return Appearance.assholeDescript(player);
 }
 public function eAssholeDescript():String {
-	return Appearance.assholeDescription(monster);
+	return Appearance.assholeDescript(monster);
 }
 		
 public function hipDescript():String {
@@ -152,7 +149,7 @@ public function clitDescript():String {
 
 //Vaginas + Descript
 public function vaginaDescript(vaginaNum:Number = 0):String {
-	return Appearance.vaginaDescription(player, vaginaNum);
+	return Appearance.vaginaDescript(player, vaginaNum);
 }
 
 //Allvagina descript
@@ -306,133 +303,7 @@ public function multiCockDescript():String {
 }
 
 public function multiCockDescriptLight():String {
-	if(player.cocks.length < 1)
-	{
-		
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "<B>Error: multiCockDescriptLight() called with no penises present.</B>";
-		
-	}
-	//Get cock counts
-	var descript:String="";
-	var currCock:Number = 0;
-	var totCock:Number = player.cocks.length;
-	var dogCocks:Number = 0;
-	var horseCocks:Number = 0;
-	var normalCocks:Number = 0;
-	var normalCockKey:Number = 0;
-	var dogCockKey:Number = 0;
-	var horseCockKey:Number = 0;
-	var averageLength:Number = 0;
-	var averageThickness:Number = 0;
-	var same:Boolean = true;
-	//For temp14 random values
-	var rando:Number = 0;
-	var descripted:Boolean = false;
-	//If one, return normal cock descript
-	if(totCock == 1) return cockDescript(0);
-	//Count cocks & Prep average totals
-	while(currCock <= totCock-1) {
-		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
-			normalCocks++;
-			normalCockKey = currCock;
-		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) {
-			horseCocks++;
-			horseCockKey = currCock;
-		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.DOG) {
-			dogCocks++;
-			dogCockKey = currCock;
-		}
-		averageLength += player.cocks[currCock].cockLength;
-		averageThickness += player.cocks[currCock].cockThickness;
-		//If cocks are matched make sure they still are
-		if(same && currCock > 0 && player.cocks[currCock].cockType != player.cocks[currCock-1].cockType) same = false;
-		currCock++;
-	}
-	//Crunch averages
-	averageLength /= currCock;
-	averageThickness /= currCock;
-	//Quantity descriptors
-	if(player.cockTotal() == 1) {
-		if(dogCocks == 1) return dogDescript(0);
-		if(horseCocks == 1) return horseDescript(0);
-		if(normalCocks == 1) return cockDescript(0);
-		//Failsafe
-		return cockDescript(0);
-	}
-	if(currCock == 2) {
-		//For cocks that are the same
-		if(same) {
-			descript += randomChoice("pair of ", "two ", "brace of ", "matching ", "twin ");
-			descript += cockAdjective();
-			if(normalCocks == 2) descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-			if(horseCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-			if(dogCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-			//Failsafe
-			if(player.cocks[0].cockType.Index > 2) descript += ", " + Appearance.cockNoun(player.cocks[0].cockType) + "s";
-		}
-		//Nonidentical
-		else {
-			descript += randomChoice("pair of ", "two ", "brace of ");
-			descript += cockAdjective() + ", ";
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
-		}
-	}
-	if(currCock == 3) {
-		//For samecocks
-		if(same) {
-			descript += randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
-			descript += cockAdjective();
-			if(normalCocks == 3) descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-			if(horseCocks == 3) descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-			if(dogCocks == 3) descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-			//Tentacles
-			if (player.cocks[0].cockType.Index > 2) descript += ", " + Appearance.cockNoun(player.cocks[0].cockType) + "s";
-		}
-		else {
-			descript += randomChoice("three ", "group of ");
-			descript += cockAdjective() + ", ";
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
-		}
-	}
-	//Large numbers of cocks!
-	if(currCock > 3)
-	{
-		descript += randomChoice("bundle of ", "obscene group of ", "cluster of ", "wriggling bunch of ");
-		//Cock adjectives and nouns
-		descripted = false;
-		//Same
-		if(same) {
-			if(currCock == normalCocks) {
-				descript += cockAdjective() + " ";	
-				descript += Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-				descripted = true;
-			}
-			if(currCock == dogCocks) {
-				descript += cockAdjective() + ", ";
-				descript += Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-				descripted = true;
-			}
-			if(currCock == horseCocks) {
-				descript += cockAdjective() + ", ";
-				descript += Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-				descripted = true;			
-			}
-			if(player.cocks[0].cockType.Index > 2) {
-				descript += cockAdjective() + ", ";
-				descript += Appearance.cockNoun(player.cocks[0].cockType) + "s";
-				descripted = true;			
-			}
-		}
-		//If mixed
-		if(!descripted) {
-			descript += cockAdjective() + ", ";
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
-		}
-	}	
-	return descript;
+	return Appearance.multiCockDescriptLight(player);
 }
 public function eMultiCockDescriptLight():String {
 	if(monster.cocks.length < 1) 
@@ -1048,40 +919,7 @@ public function snakeDescript(cockNum:Number):String
 }
 //Vaginas + Descript
 public function eVaginaDescript(vaginaNum:Number):String {
-	var vag:String="";
-	var keyNum:Number = monster.vaginas.length-1;
-	var rand:Number = 0;
-	//If no vaginas back the fuck out
-	if(keyNum < 0) 
-	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "VAGINA ERROR";
-	}
-	//tightness descript - 40% display rate
-	if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) rand = 61;
-	if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE || monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) rand = 10;
-	if(int(Math.random()*100) + rand > 60) {
-		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_TIGHT || monster.vaginas[vaginaNum].virgin) vag+="virgin ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) vag+="loose ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING) vag+="very loose ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) vag+="gaping ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vag+="gaping-wide ";
-	}
-	//wetness descript - 30% display rate
-	if(int(Math.random()*100 > 70)) {
-		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_DRY) vag+="dry ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_WET) vag+="wet ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_SLICK) vag+="slick ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_DROOLING) vag+="drooling ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_SLAVERING) vag+="slavering ";
-	}
-	//cunt names
-	rand = int(Math.random()*8);
-	if(rand == 0) vag+="vagina";
-	if(rand == 1 || rand == 2 || rand == 6) vag+="pussy";
-	if(rand == 3 || rand == 4 || rand == 5) vag+="cunt";
-	if(rand == 7)  vag+="fuck-hole";
-	return vag;
+	return Appearance.vaginaDescript(monster,vaginaNum);
 }
 
 //Enemy cock description - value of random cock or 1000 for normal, 1001 horse, 1002 dog.
@@ -1089,171 +927,19 @@ public function eCockDescript(cockIndex:Number = 0):String {
 	return Appearance.cockDescriptionShort(cockIndex, monster);
 }
 public function allBreastsDescript():String {
-	var storage:String = "";
-	if(player.breastRows.length == 0) return "unremarkable chest muscles ";
-	if(player.breastRows.length == 2) {
-		//if(player.totalBreasts() == 4) storage += "quartet of ";
-		storage += "two rows of ";
-	}
-	if(player.breastRows.length == 3) {
-		if(rand(2) == 0) storage += "three rows of ";
-		else storage += "multi-layered ";
-	}
-	if(player.breastRows.length == 4) {
-		if(rand(2) == 0) storage += "four rows of ";
-		else storage += "four-tiered ";
-	}
-	if(player.breastRows.length == 5) {
-		if(rand(2) == 0) storage += "five rows of ";
-		else storage += "five-tiered ";
-	}	
-	storage += biggestBreastSizeDescript();
-	return storage;
+	return Appearance.allBreastsDescript(player);
 }
 	
 public function biggestBreastSizeDescript():String {
-	var temp14:int = Math.random()*3;
-	var descript:String = "";
-	var temp142:int = player.biggestTitRow();
-	//ERROR PREVENTION
-	if(player.breastRows.length - 1 < temp142) 
-	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "<b>ERROR, biggestBreastSizeDescript() working with invalid breastRow</b>";
-	}
-	else if(temp142 < 0) 
-	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "ERROR SHIT SON!  BIGGESTBREASTSIZEDESCRIPT PASSED NEGATIVE!";
-	}
-	if(player.breastRows[temp142].breastRating < 1) return "flat breasts";
-	//50% of the time size-descript them
-	if(rand(2) == 0) descript += breastSize(player.breastRows[temp142].breastRating);
-	//Nouns!
-	temp14 = rand(10);
-	if(temp14 == 0) descript += "breasts";
-	if(temp14 == 1) {
-		if(player.breastRows[temp142].lactationMultiplier > 2) descript += "milk-udders";
-		else descript += "breasts";
-	}
-	if(temp14 == 2) {
-		if(player.breastRows[temp142].lactationMultiplier > 1.5) descript += "milky ";
-		if(player.breastRows[temp142].breastRating > 4) descript += "tits";
-		else descript += "breasts";
-	}
-	if(temp14 == 3) {
-		//if(player.breastRows[temp142].breastRating > 6) descript += "rack";
-		descript += "breasts";
-	}
-	if(temp14 == 4) descript += "tits";
-	if(temp14 == 5) descript += "tits";
-	if(temp14 == 6) descript += "tits";
-	if(temp14 == 7) {
-		if(player.breastRows[temp142].lactationMultiplier >= 1 && player.breastRows[temp142].lactationMultiplier < 2.5) descript += "milk jugs";
-		if(player.breastRows[temp142].lactationMultiplier >= 2.5) descript += "udders";
-		if(player.breastRows[temp142].lactationMultiplier < 1) descript += "jugs";
-	}
-	if(temp14 == 8) {
-		if(player.breastRows[temp142].breastRating > 6) descript += "love-pillows";
-		else descript += "boobs";
-	}
-	if(temp14 == 9) {
-		if(player.breastRows[temp142].breastRating > 6) descript += "tits";
-		else descript += "breasts";
-	}
-	return descript;
+	return Appearance.biggestBreastSizeDescript(player);
 }
 
 public function breastSize(val:Number):String {
-	var descript:String = "";
-	var choice:Number = 0;
-	//Catch all for dudes.
-	if(val < 1) return "manly ";
-	//Small - A->B
-	if(val <= 2)
-	{
-		descript += randomChoice("palmable ", "tight ", "perky ", "baseball-sized ");
-	}
-	//C-D
-	else if(val <= 4)
-	{
-		descript += randomChoice("nice ", "hand-filling ", "well-rounded ", "supple ", "softball-sized ");
-	}
-	//DD->big EE
-	else if(val < 11)
-	{
-		descript += randomChoice("big ", "large ", "pillowy ", "jiggly ", "volleyball-sized ");
-	}
-	//F->big FF
-	else if(val < 15) 
-	{
-		descript += randomChoice("soccerball-sized ", "hand-overflowing ", "generous ", "jiggling ");
-	}
-	//G -> HHH
-	else if(val < 24) {
-		descript += randomChoice("basketball-sized ", "whorish ", "cushiony ", "wobbling ");
-	}
-	//I -> KK
-	else if(val < 35) {
-		descript += randomChoice("massive motherly ", "luscious ", "smothering ", "prodigious ");
-	}
-	//K- > MMM+
-	else {
-		descript += randomChoice("mountainous ", "monumental ", "back-breaking ", "exercise-ball-sized ", "immense ");
-	}
-	return descript;
+	return Appearance.breastSize(val);
 }
 public function breastDescript(rowNum:Number):String
 {
-	//ERROR PREVENTION
-	if(player.breastRows.length - 1 < rowNum) 
-	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "<b>ERROR, breastDescript() working with invalid breastRow</b>";
-	}
-	if(player.breastRows.length == 0) 
-	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
-		return "<b>ERROR, breastDescript() called when no breasts are present.</b>";
-	}
-	var temp14:int = Math.random()*3;
-	var descript:String = "";
-	if(player.breastRows[rowNum].breastRating == 0) return "flat breasts";
-	//50% of the time size-descript them
-	if(rand(2) == 0) descript += breastSize(player.breastRows[rowNum].breastRating);
-	//Nouns!
-	temp14 = rand(10);
-	if(temp14 == 0) descript += "breasts";
-	if(temp14 == 1) {
-		if(player.breastRows[rowNum].lactationMultiplier > 2) descript += "milk-udders";
-		else descript += "breasts";
-	}
-	if(temp14 == 2) {
-		if(player.breastRows[rowNum].lactationMultiplier > 1.5) descript += "milky ";
-		if(player.breastRows[rowNum].breastRating > 4) descript += "tits";
-		else descript += "breasts";
-	}
-	if(temp14 == 3) {
-		//if(player.breastRows[rowNum].breastRating > 6) descript += "rack";
-		descript += "breasts";
-	}
-	if(temp14 == 4) descript += "tits";
-	if(temp14 == 5) descript += "tits";
-	if(temp14 == 6) descript += "tits";
-	if(temp14 == 7) {
-		if(player.breastRows[rowNum].lactationMultiplier >= 1 && player.breastRows[rowNum].lactationMultiplier < 2.5) descript += "milk jugs";
-		if(player.breastRows[rowNum].lactationMultiplier >= 2.5) descript += "udders";
-		if(player.breastRows[rowNum].lactationMultiplier < 1) descript += "jugs";
-	}
-	if(temp14 == 8) {
-		if(player.breastRows[rowNum].breastRating > 6) descript += "love-pillows";
-		else descript += "boobs";
-	}
-	if(temp14 == 9) {
-		if(player.breastRows[rowNum].breastRating > 6) descript += "tits";
-		else descript += "breasts";
-	}
-	return descript;
+	return player.breastDescript(rowNum);
 }
 public function cockHead(cockNum:Number = 0):String {
 	var temp:int;
