@@ -3,14 +3,11 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.Scenes.*;
-	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 
-	public class CeraphFollowerScene extends BaseContent
+	public class CeraphFollowerScene extends NPCAwareContent
 	{
 		public function CeraphFollowerScene()
 		{
@@ -22,7 +19,7 @@ package classes.Scenes.NPCs
 //Capacity = 115;
 
 //Is Ceraph a follower?
-		public function ceraphIsFollower():Boolean
+		override public function ceraphIsFollower():Boolean
 		{
 			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] > 0;
 		}
@@ -109,8 +106,8 @@ package classes.Scenes.NPCs
 			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			menu();
 			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
-			addButton(0, "Defeat Her", kGAMECLASS.ceraphScene.winRapeChoices);
-			addButton(1, "Lose to Her", kGAMECLASS.ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
+			addButton(0, "Defeat Her", ceraphScene.winRapeChoices);
+			addButton(1, "Lose to Her", ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
 			addButton(5, "Dominika", dominika);
 			addButton(6, "Marble Play", marbles);
 			addButton(7, "Urta Play", urta);
@@ -147,12 +144,12 @@ package classes.Scenes.NPCs
 				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
-					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
+					dicking = ceraphScene.maleFuckCeraphsPussy;
+					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
 				var cunting:Function =null;
-				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
+				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 
 
 				simpleChoices("Collar Her", collarCeraph, "Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "Leave", cleanupAfterCombat);
@@ -209,12 +206,12 @@ package classes.Scenes.NPCs
 				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
-					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
+					dicking = ceraphScene.maleFuckCeraphsPussy;
+					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
 				var cunting:Function =null;
-				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
+				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", 0, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -246,12 +243,12 @@ package classes.Scenes.NPCs
 				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
-					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
+					dicking = ceraphScene.maleFuckCeraphsPussy;
+					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
 				var cunting:Function =null;
-				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
+				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", 0, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -761,7 +758,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n", false);
 
 			outputText("Pounding you faster and faster, you can feel her cock swelling within you dangerously. Rutting frantically, she leans down, pressing her smooth sienna skin against your jizz-soaked back, her tits rubbing the fox-girl's spunk into your " + player.skin() + ". Lowering her head, she whispers into your ear, \"<i>No condoms for sneaky bitches who spike drinks,</i>\" her husky voice right on the edge.  \"<i>Fur isn't the only thing I've lost. I'm potent again,</i>\" she drunkenly insists. \"<i>I can feel it in my big, swollen balls.", false);
-			if (kGAMECLASS.amilyScene.amilyFollower() || kGAMECLASS.marbleFollower() || kGAMECLASS.izmaFollower()) outputText("  After I knock you up, try explaining the fox tails on your kids to those other bitches.", false);
+			if (amilyFollower() || marbleFollower() || izmaFollower()) outputText("  After I knock you up, try explaining the fox tails on your kids to those other bitches.", false);
 			outputText("</i>\"  Reaching out to brace herself, Urta grabs your shoulder with her left hand, but her right goes wild and she ends up hooking her fingers in your mouth, jerking your cheek to the side. With the added grip, she wriggles deeper, the remaining inches snaking into your uterus until the elephantine flare rubs against your cervix, the bottom ridge of her fleshy sheath teasingly flicking against your swollen clit. Sensations crash over you: the gentle curves of her fit abdomen stroking your ass, her wobbling chest pressing button-stiff nipples into your back, the sweet taste of your tongue stroking the fingers in your mouth. It is too much and your body clenches down in a gushing orgasm on the invading member, drool leaking from your gaping mouth as your heavily lidded eyes lose focus, allowing the fox-girl to use you to her heart's content.\n\n", false);
 
 			outputText("When she cums for the third time, you can feel the blast directly on your cervix, the force of her load parting the muscled sphincter, ropes of newly virile seed flooding your womb.  The weight of her distended scrotum pulses between your thighs and your belly bulges under the impregnating torrent. Urta's body tenses as she inundates your depths with the excess of her loins, the influx cascading through your uterus to burst like a tide, your body flush with her pouring jizz.", false);
@@ -1894,9 +1891,9 @@ package classes.Scenes.NPCs
 			//Choose one of the following at random
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0)
 				choices[choices.length] = 0;
-			if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2)
+			if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2)
 				choices[choices.length] = 1;
-			else if (kGAMECLASS.campCorruptJojo())
+			else if (campCorruptJojo())
 				choices[choices.length] = 1;
 			choices[choices.length] = 2;
 
@@ -1942,7 +1939,7 @@ package classes.Scenes.NPCs
 			//Corrupt Jojo or Amily
 			else if (select == 1) {
 				//Both
-				if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && kGAMECLASS.campCorruptJojo()) {
+				if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) {
 					//Both Corrupt Jojo & Amily
 					outputText("\n\nBefore long, you come across both of your corrupt, mouse-like slaves.  They stop fondling each other's genitals long enough to ask, \"<i>[Master], what are you doing?</i>\"");
 					outputText("\n\nCeraph looks down at you with her hand tight on your leash.");
@@ -1953,7 +1950,7 @@ package classes.Scenes.NPCs
 					outputText("\n\n\"<i>[Master] is Ceraph's pet?  Then... then, we're her pets too...</i>\" Amily says as the spokeswoman for the group.  They both proceed to drop down on all fours and crawl up alongside you.  Ceraph nonchalantly tears off strips of Amily's clothing and fixes them into a pair of improvised collars, connected to her whip with simple knots.  The four of you then continue the walk together, though you're scolded again and again when you let the mice rub up against you sensually.  Having sister and brother pets is somewhat comforting, but being constantly exposed to their sexual scent is more than distracting.  Ceraph squirts the two of you with water a half-dozen times to keep you from fucking, and each time the shame is greater.  You really are a pet, one that can't even keep " + player.mf("his", "her") + " most basic needs in check.");
 				}
 				else {
-					var jojo:Boolean = kGAMECLASS.campCorruptJojo();
+					var jojo:Boolean = campCorruptJojo();
 					outputText("Before long, your corrupt, mouse-like slave sees you awkwardly clambering after the purple-hued dominatrix.  ");
 					if (jojo) outputText("He");
 					else outputText("She");
@@ -1984,17 +1981,17 @@ package classes.Scenes.NPCs
 				}
 				//Mice finisher
 				outputText("\n\nYou go for an exhausting walk around the nearby wasteland with your companion");
-				if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && kGAMECLASS.campCorruptJojo()) outputText("s");
+				if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("s");
 				outputText(", and you thoroughly enjoy the degrading experience.  Lust and humiliation are all jumbled up inside you into one big mass of sex, such that getting turned on from this humiliates you, and being humiliated gets you even more aroused");
 				outputText(".  It's an endless feedback loop of sexual excitement that has you about to blow, except you're back in camp.  The collar is untied, and your owner's sweet voice whispers, \"<i>Good walk, pet.</i>\" before vanishing into the wind.");
 
 				outputText("\n\n");
-				if (kGAMECLASS.campCorruptJojo()) {
+				if (campCorruptJojo()) {
 					outputText("Jojo");
-					if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText(" and ");
+					if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText(" and ");
 				}
-				if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText("Amily");
-				if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && kGAMECLASS.campCorruptJojo()) outputText("look around uncertainly before darting back to their usual places, knowing you'll give the command if you want them to take care of your desires.");
+				if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText("Amily");
+				if (amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("look around uncertainly before darting back to their usual places, knowing you'll give the command if you want them to take care of your desires.");
 				else outputText("looks around uncertainly before darting back to the usual places, knowing you'll give the command if you want a slave to take care of your desires.");
 			}
 			//Generic

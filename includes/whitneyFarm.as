@@ -167,21 +167,21 @@ public function workFarm():void {
 	outputText("", true);
 	//In withdrawl odds are higher.
 	if(player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("MarbleWithdrawl") >= 0) {
-		if(player.statusAffectv3("Marble") == 1) addictedEncounterHappy();
-		else encounterMarbleAshamedAddiction();
+		if(player.statusAffectv3("Marble") == 1) marbleScene.addictedEncounterHappy();
+		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
 	}
 	//1/3 chance of marblez
 	if(rand(3) == 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") > 0) {
 		//Rapez Override normal
 		if(player.hasStatusAffect("Marble Rape Attempted") >= 0 || flags[kFLAGS.MARBLE_WARNING] == 3) {
-			marbleAfterRapeBattle();
+			marbleScene.marbleAfterRapeBattle();
 			player.createStatusAffect("No More Marble",0,0,0,0);
 			return;
 		}
 		//Angry meeting
 		if(flags[kFLAGS.MARBLE_WARNING] == 1) {
-			marbleWarningStateMeeting();
+			marbleScene.marbleWarningStateMeeting();
 			return;
 		}
 		if(player.hasStatusAffect("Marble") >= 0) {
@@ -189,33 +189,33 @@ public function workFarm():void {
 			if(player.statusAffectv3("Marble") == 0) {
 				marbling = rand(2);
 				//Help out Marble, version 1 (can occur anytime before the player becomes addicted):
-				if(marbling == 0) helpMarble1();
+				if(marbling == 0) marbleScene.helpMarble1();
 				//Help out Marble, version 2 (can occur anytime before Marble knows about her milk):
-				if(marbling == 1) helpMarble2();
+				if(marbling == 1) marbleScene.helpMarble2();
 				return;
 			}
 			else {
 				if(player.hasPerk("Marble Resistant") >= 0) {
 					//(work with Marble when helping)
-					postAddictionFarmHelpings();
+					marbleScene.postAddictionFarmHelpings();
 					return;
 				}
 				if(player.statusAffectv3("Marble") == 1) {
 					if(player.hasStatusAffect("MarbleWithdrawl") >= 0) marbling = 0;
 					else marbling = 1;
 					//While Addicted Events type 1 (Marble likes her addictive milk):
-					if(marbling == 0) addictedEncounterHappy();
+					if(marbling == 0) marbleScene.addictedEncounterHappy();
 					//Exploration event while addicted (event triggered while addicted, but not suffering withdrawal):
-					else marbleEncounterAddictedNonWithdrawl();
+					else marbleScene.marbleEncounterAddictedNonWithdrawl();
 					return;
 				}
 				else {
 					if(player.hasStatusAffect("MarbleWithdrawl") >= 0) marbling = 0;
 					else marbling = 1;
 					//While Addicted Events type 2 (Marble is ashamed):
-					if(marbling == 0) encounterMarbleAshamedAddiction();
+					if(marbling == 0) marbleScene.encounterMarbleAshamedAddiction();
 					//Exploration event while addicted (event triggered while addicted, but not suffering withdrawal):
-					else marbleEncounterAddictedNonWithdrawlAshamed();
+					else marbleScene.marbleEncounterAddictedNonWithdrawlAshamed();
 					return;
 				}
 			}
@@ -270,14 +270,13 @@ public function meetMarble():void {
 		//Meet Marble while exploring version 1 (can occur anytime before the player becomes addicted):
 		//Higher chance after talk texts have been exhausted
 		if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] >= 7) 
-			encounterMarbleExploring();
+			marbleScene.encounterMarbleExploring();
 		//Meet Marble while exploring version 2 (can occur anytime before the player becomes addicted):
-		else encounterMarbleExploring2();
-		return;
+		else marbleScene.encounterMarbleExploring2();
 	}
 	else {
 		if(player.hasPerk("Marble Resistant") >= 0) {
-			postAddictionFarmExplorings();
+			marbleScene.postAddictionFarmExplorings();
 			return;
 		}
 		//PC Likes it
@@ -285,19 +284,17 @@ public function meetMarble():void {
 			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) marbling = 0;
 			else marbling = 1;
 			//While Addicted Events type 1 (Marble likes her addictive milk):
-			if(marbling == 0) addictedEncounterHappy();
+			if(marbling == 0) marbleScene.addictedEncounterHappy();
 			//Exploration event while addicted (event triggered while addicted, but not suffering withdrawal):
-			else marbleEncounterAddictedNonWithdrawl();
-			return;
+			else marbleScene.marbleEncounterAddictedNonWithdrawl();
 		}
 		else {
 			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) marbling = 0;
 			else marbling = 1;
 			//While Addicted Events type 2 (Marble is ashamed):
-			if(marbling == 0) encounterMarbleAshamedAddiction();
+			if(marbling == 0) marbleScene.encounterMarbleAshamedAddiction();
 			//Exploration event while addicted (event triggered while addicted, but not suffering withdrawal):
-			else marbleEncounterAddictedNonWithdrawlAshamed();
-			return;
+			else marbleScene.marbleEncounterAddictedNonWithdrawlAshamed();
 		}
 	}
 }
@@ -308,7 +305,7 @@ public function exploreFarm():void {
 	
 	//Marble after-rape
 	if(player.hasStatusAffect("Marble Rape Attempted") >= 0 && player.hasStatusAffect("No More Marble") < 0) {
-		marbleAfterRapeBattle();
+		marbleScene.marbleAfterRapeBattle();
 		player.createStatusAffect("No More Marble",0,0,0,0);
 		return;
 	}
@@ -318,14 +315,14 @@ public function exploreFarm():void {
 		return;
 	}
 	//Free Isabella Milkings!
-	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
-		findIzzyMilking();
+	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
+		isabellaFollowerScene.findIzzyMilking();
 		return;
 	}
 	//Meet Marble First Time
 	if(player.hasStatusAffect("Marble") < 0 && player.hasStatusAffect("No More Marble") < 0) {
 		doNext(13);
-		encounterMarbleInitially();
+		marbleScene.encounterMarbleInitially();
 		return;
 	}
 	//Meet kelt 1st time
@@ -336,8 +333,8 @@ public function exploreFarm():void {
 	}
 	//In withdrawl odds are higher.
 	if(player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("MarbleWithdrawl") >= 0) {
-		if(player.statusAffectv3("Marble") == 1) addictedEncounterHappy();
-		else encounterMarbleAshamedAddiction();
+		if(player.statusAffectv3("Marble") == 1) marbleScene.addictedEncounterHappy();
+		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
 	}
 	explore = rand(3);
@@ -413,7 +410,6 @@ public function exploreFarm():void {
 	else {
 		outputText("You wander around, unable to find anything entertaining on this patch of rural bliss.", true);
 		doNext(13);
-		return;
 	}
 }
 

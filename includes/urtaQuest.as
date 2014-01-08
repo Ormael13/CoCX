@@ -450,7 +450,7 @@ public function fuckHelAndKitsunesAsUrta():void {
 	//If PC has a cock: 
 	if(player2.hasCock()) {
 		outputText("  \"<i>I've got a better one ");
-		if(followerHel()) outputText("at home");
+		if(helFollower.followerHel()) outputText("at home");
 		else outputText("at my beck and call");
 		outputText(", you know...  But we've got that in common, don't we?  Mmm, maybe we can share it some day?  A horny girl like you'd just love that, woudn't you? Getting to worship " + player2.mf("his","her") + " cock beside me while my tail fills your ass so full you scream....</i>");
 	}
@@ -3027,11 +3027,11 @@ public function getKnockedUpWithGodChild():void {
 	outputText(" balls, slathering them with slick spunk.");
 	
 	var ballWorship:Array = [];
-	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
-	if(bimboSophie()) ballWorship[ballWorship.length] = 2;
-	if(followerHel()) ballWorship[ballWorship.length] = 3;
-	if(latexGooFollower()) ballWorship[ballWorship.length] = 4;
+	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	if(sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
+	if(helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
+	if(latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;
 	if(ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
@@ -3044,7 +3044,7 @@ public function getKnockedUpWithGodChild():void {
 	//{If Jojo/Amily pet} 
 	else if(choice == 1) {
 		outputText("\n\nUrta gasps when a tongue finds its way around her balls.  Looking back, she sees a visage you'd recognize anywhere; the mousy head of your pet, ");
-		if(campCorruptJojo()) outputText("Jojo");
+		if(jojoScene.campCorruptJojo()) outputText("Jojo");
 		else outputText("Amily");
 		outputText(".  The smooth mouse-tongue hungrily devours Urta's excess seed, accompanied by pleased giggles when the weighty orbs twitch with barely restrained pleasure.  Again and again, the mouth muscle smears itself over every messy, slime-soaked fold, leaving nothing but a polished veneer of mouse-spit in its wake.  The sounds of masturbation accompany the ball-worship, leaving you no doubt about your pet's current state.  They love it, and when Urta turns back to you with a smile, you realize she doesn't mind either.");
 	}

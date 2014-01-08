@@ -8,7 +8,7 @@
 	var text3:String = "";
 	var choice4:Number = 0;
 	var text4:String = "";
-	var choice5:Number = 0;
+	var choice5:* = 0;
 	var text5:String = "";
 	var choice6:Number = 0;
 	var text6:String = "";
@@ -386,9 +386,9 @@
 					text4 = "Use";
 					choice4 = 2595;
 				}
-				if(player.lust >= 33 && followerShouldra()) {
+				if(player.lust >= 33 && shouldraFollower.followerShouldra()) {
 					text5 = "ShouldraVala";
-					choice5 = 3669;
+					choice5 = shouldraFollower.shouldraMeetsCorruptVala;
 				}
 			}
 			//Zetaz defeated 

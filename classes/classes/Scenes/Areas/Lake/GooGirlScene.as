@@ -3,9 +3,9 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.BaseContent;
 	import classes.CoC_Settings;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 
 	public class GooGirlScene extends AbstractLakeContent
@@ -284,8 +284,8 @@ package classes.Scenes.Areas.Lake
 				var sex3N:Function =null;
 				var sex4S:String = "";
 				var sex4N:Function =null;
-				var valeria:* = kGAMECLASS.valeriaAndGooThreeStuff;
-				if (player.armorName != "goo armor" || player.hasStatusAffect("gooStuffed") >= 0) valeria = 0;
+				var valeria:Function = kGAMECLASS.valeria.valeriaAndGooThreeStuff;
+				if (player.armorName != "goo armor" || player.hasStatusAffect("gooStuffed") >= 0) valeria = null;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {
@@ -314,11 +314,11 @@ package classes.Scenes.Areas.Lake
 					sex4S = "Breastfeed";
 					sex4N = victoryRapeAGooGalAsFeeder;
 				}
-				var gooTF:int = 0;
+				var gooTF:Function = null;
 				//corrupt chances
 				if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
 					if (player.cor < 50 && (hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && (hasItem("BlackEg", 1) || hasItem("L.BlkEg", 1))) {
-						kGAMECLASS.pureGooRecruitmentStart();
+						kGAMECLASS.latexGirl.pureGooRecruitmentStart();
 						return;
 					}
 					else if (flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
@@ -334,11 +334,11 @@ package classes.Scenes.Areas.Lake
 						}
 						if ((hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && (hasItem("BlackEg", 1) || hasItem("L.BlkEg", 1))) {
 							outputText("  Good thing you have those handy!");
-							gooTF = 3969;
+							gooTF = kGAMECLASS.latexGirl.meanGooGirlRecruitment;
 						}
 					}
 				}
-				if (valeria != 0) {
+				if (valeria != null) {
 					outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");

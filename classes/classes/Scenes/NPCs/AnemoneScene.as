@@ -3,13 +3,11 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.Scenes.Places.Boat.*;
 	import classes.Appearance;
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Lake.AbstractLakeContent;
 
 	public class AnemoneScene extends BaseContent
 	{
@@ -307,7 +305,7 @@ package classes.Scenes.NPCs
 			if (player.hipRating > 6) outputText("  You make good use of your " + hipDescript() + ", too, giving a little shimmy to show off your pronounced curves.", false);
 			outputText("  The anemone's crotch, by the time you're finished, glistens with fluid from both her sexes; it's probably as wet as it was when she was underwater.  You lean into the anemone and give her a deep kiss, ", false);
 			//[(breast0>C)
-			if (player.biggestTitSize() > 2) outputText("making sure to let your " + kGAMECLASS.allBreastsDescript() + " rub up against hers, ", false);
+			if (player.biggestTitSize() > 2) outputText("making sure to let your " + player.allBreastsDescript() + " rub up against hers, ", false);
 			outputText("then pull apart from her and ", false);
 			//[(goddamn centaur)
 			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("turn away, kneeling down to display your animalistic, musky pussy readily.", false);

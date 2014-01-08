@@ -31,13 +31,13 @@ package classes.Scenes.Areas
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//KIHA X HEL THREESOME!
-			if (!kGAMECLASS.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
-				kGAMECLASS.kihaXSalamander();
+			if (!kGAMECLASS.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
+				kGAMECLASS.kihaFollower.kihaXSalamander();
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] % 40 == 0)) {
@@ -75,8 +75,8 @@ package classes.Scenes.Areas
 					break;
 				case 4:
 					//Kiha follower gets to explore her territory!
-					if (kGAMECLASS.followerKiha()) kGAMECLASS.kihaExplore();
-					else kGAMECLASS.encounterKiha();
+					if (kGAMECLASS.kihaFollower.followerKiha()) kGAMECLASS.kihaScene.kihaExplore();
+					else kGAMECLASS.kihaScene.encounterKiha();
 					break;
 				default:
 					outputText("New explore code fucked up.  YOU BONED (TELL FEN)");

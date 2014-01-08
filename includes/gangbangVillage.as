@@ -1059,7 +1059,7 @@ public function vapulaSlaveFlavorText():void {
 		outputText(", pumping as fast as she can.  In her feverish display of lust she doesn't even notice you.");
 	}
 	if(choice == 5) {
-		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(bimboSophie())) choice = 6;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(sophieBimbo.bimboSophie())) choice = 6;
 		//if harem fucking is on)
 		else outputText("Vapula is fingering herself while eating out Sophie, your harpy slut.  The dumb avian matron keeps moaning like she's in heat while the succubus furiously assaults her lush fuck-hole; both of their pair of wings flap in rhythm as they feel their pleasure rising in waves.");
 	}
@@ -1070,10 +1070,10 @@ public function vapulaSlaveFlavorText():void {
 	}
 	if(choice == 7) {
 		//if C. Jojo and harem fucking is on)
-		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !campCorruptJojo()) choice = 8;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !jojoScene.campCorruptJojo()) choice = 8;
 		else {
 			outputText("You routinely hear screams of pleasure outside the camp, as well as some frantic male squeaks coming from Jojo, your ");
-			if(tentacleJojo()) outputText("tentacled ");
+			if(jojoScene.tentacleJojo()) outputText("tentacled ");
 			outputText("mouse pet.  Vapula seems to be having a lot of fun with your fuck-toy!");
 		}
 	}
@@ -1299,10 +1299,10 @@ public function vapulaThreesomeMenu():void {
 	//Option: Izma
 	var izma:int = 0;
 	if(player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
-		if(campCorruptJojo()) jojo = 3759;
+		if(jojoScene.campCorruptJojo()) jojo = 3759;
 		if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) amily = 3761;
 		if(ceraphFollowerScene.ceraphIsFollower() && player.hasCock()) ceraph = 3767;
-		if(bimboSophie()) sophie = 3764;
+		if(sophieBimbo.bimboSophie()) sophie = 3764;
 		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = 3757;
 	}
 	choices("Amily",amily,"Ceraph",ceraph,"Sophie",sophie,"Jojo",jojo,"Izma",izma,"",0,"",0,"",0,"",0,"Back",callSlaveVapula);
@@ -1449,7 +1449,7 @@ public function vapulaSophieThreeSome():void {
 	outputText("\n\nWhen you're all done, you dismount.  Your mouth is filled with the succubus' essence, and Gods it tastes good.  You tell Vapula to get off Sophie's butt too; as soon as she does the bimbo completely clenches and relaxes before falling into a deep slumber, her stretched anus still exposed as she snores and wallows in a pool of juices, mostly her own.  \"<i>Finish your meal</i>\", you tell Vapula.  The tired succubus complies and proceeds to suck the last remaining bits of escaping goo from the harpy's tight anal contraction.  Then, she keeps licking and squeezing your " + cockDescript(x) + " until it shines, completely polished with succubus saliva.");
 	outputText("\n\n\"<i>Enough. You should rest now.</i>\"  Nodding, Vapula heads toward her leaf-bed in order to recover from the intense threesome and digest her copious meal.");
 	//lust set to 50, lipstick affect (if no adaptation)
-	luststickApplication(10);
+	sophieScene.luststickApplication(10);
 	dynStats("lus=", 0, "cor", 2);
 	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
@@ -1609,7 +1609,7 @@ public function NTRSomeJojos():void {
 		outputText(" being filled with cock.");
 		
 		outputText("\n\nIncapable of bearing such a teasing treatment, Jojo starts to weep sofly as he ragingly tries to get rid of his shameful erection.  He strokes his broad mouse dong with unusual ferocity, his eyes consumed with frustrated lust and humiliation.  His eyes bulge, his balls swell, his hips rock back and forth, ");
-		if(tentacleJojo()) outputText("his tentacles start flying toward his ass, ");
+		if(jojoScene.tentacleJojo()) outputText("his tentacles start flying toward his ass, ");
 		outputText("his-");
 		outputText("\n\n\"<i>No.</i>\"");
 		
@@ -1643,7 +1643,7 @@ public function NTRSomeJojos():void {
 		outputText("\n\n\"<i>No, really, her whole body is perfect.</i>\"  You run your hands all over the succubus curves, pinching here and caressing here.");
 		outputText("\n\n\"<i>And gods, that tight anus!  Oh, Jojo, if you knew how cock-hungry she is...</i>\" And with a wicked, wanton smile, you rail Vapula's ass with your artificial cock, filling the entirety of her interior with dick substitute as you watch the monk.  The poor mousy slut has completely given in to his lust; he has fallen on his knees and is now stroking himself feverishly, unable to break your gaze.  You start pounding Vapula's butt; with each thrust you moan as your end saws into your dripping hole, letting your mouse pet know how much you enjoy it.  As for Vapula, the slutty demoness is clearly enjoying her anal treatment, the sight of a poor bitch masturbating to her being all the more arousing to her.  She also stares at him with longing eyes, as if to provoke him with her nude, horny body being fucked by someone else.  Soon she is screaming in utter ecstasy and starts babbling meaningless dirty talk.  \"<i>Fuckfuck me...oh yessssssssssssss...more! MORE!</i>\"  She's clearly acting as a naughty bitch!  You wonder if the presence of a shy creature is not helping release her inner wantonness.  Shrugging it off, you decide to focus on the nice purple body impaling itself on your dildo and pound her harder, the obscene device releasing streams of its sap as it surges in and out of Vapula's pucker.  With a mighty push, you put Vapula on all fours and lean down in order to touch more of her supple body, grabbing hold of her plump breasts, pinching her hard nipples between the gaps in your fingers as you begin to batter into her as hard as you can.  Your purple slut is now dying with pleasure, her tongue hanging and her eyes staring behind Jojo as the monk squeaks pitifully in his pathetic self-stroking.");
 		outputText("\n\nStill looking at Jojo, you keep taunting him as you ravage Vapula's anus.  \"<i>Do you want to know if I feel good to her? Darling, tell our mouse pet how good you feel.</i>\"\n\n\"<i>Oh, yes... YES! Like that! Deeper! YES! Harde-aargh...</i>\"  Unable to think properly under the intense butt-fucking she's receiving, her eyes roll and she becomes oblivious of everything but being filled with cock.  Incapable of bearing such a teasing treatment, Jojo starts to weep sofly as he ragingly tries to get rid of his shameful erection.  He strokes his broad mouse dong with unusual ferocity, his eyes consumed with frustrated lust and humiliation. His eyes bulge, his balls swell, his hips rock back and forth, ");
-		if(tentacleJojo()) outputText("his tentacles start flying toward his ass, ");
+		if(jojoScene.tentacleJojo()) outputText("his tentacles start flying toward his ass, ");
 		outputText("his-");
 		outputText("\n\n\"<i>No.</i>\"");
 		
@@ -1675,7 +1675,7 @@ public function jojoButtFuckTrain():void {
 	if(player.cockArea(x) > 100) outputText("  You can actually feel his internal organs being bumped against your meat as your " + cockDescript(x) + " stretches his colon beyond its normal size and thrusts in and out like a charging mammoth.");
 	outputText("\n\nYou pump him full of your junk as he does the same to the buttslut in front of him.  You can't tell who yelps louder, but these bitches seem to enjoy the butt-fucking they're receiving.  This only entices you to fuck Jojo harder, knowing that the might of your thrusts will propagate down Vapula's butt; you ruthlessly smash your groin against Jojo's butt, pulling his arms harder at each thrust and oblivious of the mouse's pain in your passionate embrace.  Besides, the monk slut is probably getting off on getting manhandled like that.  You reach around and grab Vapula's breasts, holding her tight and crushing Jojo between the two of you as you keep ravaging his butt with repeated assaults.");
 	//[if tentacle Jojo]
-	if(tentacleJojo()) {
+	if(jojoScene.tentacleJojo()) {
 		outputText("\n\nBetween two butt-assaults, you order your pet to put his pretty appendages to some use for once: your ass needs to be taken care of too.  Jojo doesn't seem to react.  You first think he didn't hear you over Vapula's screams and the mad thuds of groins being clasped against butts, but you are soon relieved as you feel some tubular appendage tickling your buttocks.  Encouraging him, you thrust deeper in his own butt, inviting him to return the favor.  Your efforts are rewarded as you feel your own anus being savagely violated by some fat penile flora, sap-like slime being spilled down your legs.  The cock fucks you hard and rough, speeding up and slowing down irregularly as Jojo tries to muster his stamina.  At the same time, another of these green rods finds its way toward your mouth; you eagerly suck the tip like a popsickle and it immediately shoves itself down your throat.  Your neck bulges obscenely from the huge dick-intrusion, but you don't care; his cock tastes too sweet.");
 		//[if vagina]
 		if(player.hasVagina()) outputText("  Last but not least, a soft cock-knock at the entrance of your " + vaginaDescript() + " signals an incoming intrusion.  If your mouth weren't so full of cock you would sigh in relief as your aching pussy is thoroughly penetrated.");
@@ -1703,7 +1703,7 @@ public function jojoButtFuckTrain():void {
 	if(n1 >= 0) {
 		outputText("\n\nYou pound Vapula and Jojo harder than ever, riding the butt-fuck wave and creating delightful disruptions in the whole train as you fill both sluts with your junk over and over again.  You keep pumping, the tightness of either hole threatening to send you over the edge at every thrust.");
 		//[if Jojo has tentacle dicks]
-		if(tentacleJojo()) outputText("  You enjoy this absolutely crazy display of corrupted debauchery: you, getting dick and giving dick to the same creature as well as indirectly and directly violating multiple holes with your junk.  An endless circle of loop-fuck feeding itself through lust and dicklesh.  How weird the three of you would provide to an external observer, locked as you are in this train of penetrating dicks!  None of you can moan to express the sheer bliss you're all feeling, as your mouths are filled with dick; you can't slow down, as both your sluts are taken in an insane frenzy, always willing to fill more cock in some hole.  All you can do is pump faster and faster until the final release.");
+		if(jojoScene.tentacleJojo()) outputText("  You enjoy this absolutely crazy display of corrupted debauchery: you, getting dick and giving dick to the same creature as well as indirectly and directly violating multiple holes with your junk.  An endless circle of loop-fuck feeding itself through lust and dicklesh.  How weird the three of you would provide to an external observer, locked as you are in this train of penetrating dicks!  None of you can moan to express the sheer bliss you're all feeling, as your mouths are filled with dick; you can't slow down, as both your sluts are taken in an insane frenzy, always willing to fill more cock in some hole.  All you can do is pump faster and faster until the final release.");
 	}
 	outputText("\n\nYou wish this blissful state of mind and pleasure would last forever, and you're sure both your butt-fuck partners are feeling the same way; sadly, your stamina has a limit, and theirs does too.  You feel your spooge flowing all through your genitals, ready to be unloaded.  With a silent groan, you give Jojo one last pound before utterly blasting him with spunk.  You paint his anal walls white");
 	//[if second multicock] 
@@ -1712,7 +1712,7 @@ public function jojoButtFuckTrain():void {
 	if(n3 >= 0) outputText("and Jojo's too");
 	outputText(".  You feel that Jojo's release is coming too.  With a powerful thrust, he squirts his own mouse semen down Vapula's waiting ass");
 	//[if tentacle Jojo]
-	if(tentacleJojo()) outputText("; his tentacles absolutely drench your every hole with greenish mousey-cum");
+	if(jojoScene.tentacleJojo()) outputText("; his tentacles absolutely drench your every hole with greenish mousey-cum");
 	outputText(".  Vapula's own orgasm also starts kicking in, the feeling of hot cum flooding her interior being too much for her horny body to bear.");
 	outputText("\n\nYou all spend a few minutes in utter ecstasy, thinking of nothing but the steady flow of sexual juices flowing in and out of various bodies.  You all focus on two things: giving everything you've got and keeping everything you're receiving.  Jojo, the nexus of this network of cum-flows, thrashes savagely as his genitals throb with need and his ass spasms reflexively; the poor thing is clearly getting unbearable pleasure and can't control his own movements anymore.  Your own orgasm brings you to a new level of ecstasy as your " + cockDescript(x) + " keeps pulsating and releasing torrents of baby-batter.  At last, when the cum-flow finally ebbs, you rest on Jojo's back for a while, cock buried deep in his ass.  He does the same to Vapula, but you're too exhausted to care.  Besides, the naughty little pet deserved a reward.  You all fall over, sloshing in a newly-formed puddle of thick sexual fluids, and rest for a while.  As you're about to fall asleep you whisper in Jojo's ear, \"<i>Good job slut...</i>\"  Your last vision is the mouse's head nodding in contentment.");
 	outputText("\n\nWhen you wake up, Jojo is gone, and Vapula is still snoring deep in the cum puddle, her body entirely coated with dried semen.  You cock-slap the purple succubus to wake her and tell her she might as well clean your " + cockDescript(x) + " since the cowardly mouse left.  She nods weakly and her mouth opens, visibly waiting for your sloppy dick to fill her since she's too tired to sit up.  Sighing, you lower your junk into a proper sucking position; her tongue seems to be working on its own as it licks your meat clean of any dirty juice left.  You try to shove more dickflesh inside her throat but you can see she's too winded to perform any elaborate blowjob.  Shrugging in mild disappointment, you leave the purple slut as she carelessly wallows in the cum puddle; you head toward a stream to get cleaned up.");

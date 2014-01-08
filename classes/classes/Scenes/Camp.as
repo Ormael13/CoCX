@@ -1,31 +1,13 @@
 ﻿package classes.Scenes{
-	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
 
-	public class Camp extends BaseContent{
-		private function get arianScene():ArianScene {
-			return kGAMECLASS.arianScene;
-		}
-		private function get amilyScene():AmilyScene {
-			return kGAMECLASS.amilyScene;
-		}
-		private function get anemoneScene():AnemoneScene {
-			return kGAMECLASS.anemoneScene;
-		}
-		private function get emberScene():EmberScene {
-			return kGAMECLASS.emberScene;
-		}
+	public class Camp extends NPCAwareContent{
 
-		private function get timeQ():Number
-		{
-			return kGAMECLASS.timeQ;
-		}
-		private function set timeQ(value:Number):void
+		protected function set timeQ(value:Number):void
 		{
 			kGAMECLASS.timeQ = value;
 		}
@@ -86,17 +68,17 @@ public function doCamp():void {
 		fixHistory();
 		return;
 	}
-	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
+	if(arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
 		hideMenus();
 		arianScene.wakeUpAfterArianSleep();
 		return;
 	}
-	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_EVENT] >= 30) {
+	if(arianFollower() && flags[kFLAGS.ARIAN_EGG_EVENT] >= 30) {
 		hideMenus();
 		arianScene.arianEggingEvent();
 		return;
 	}
-	if(arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] >= 24 && flags[kFLAGS.ARIAN_VAGINA] > 0) {
+	if(arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] >= 24 && flags[kFLAGS.ARIAN_VAGINA] > 0) {
 		hideMenus();
 		arianScene.arianLaysEggs();
 		return;
@@ -129,79 +111,79 @@ public function doCamp():void {
 			return;
 		}
 	}
-	if(kGAMECLASS.isHeliaBirthday() && kGAMECLASS.followerHel() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
+	if(helFollower.isHeliaBirthday() && kGAMECLASS.helScene.followerHel() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
 		hideMenus();
-		kGAMECLASS.heliasBirthday();
+		helFollower.heliasBirthday();
 		return;
 	}
-	if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] >= 1 && kGAMECLASS.followerHel()) {
+	if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] >= 1 && kGAMECLASS.helScene.followerHel()) {
 		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 300 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 0) {
 			hideMenus();
-			kGAMECLASS.bulgyCampNotice();
+			helSpawnScene.bulgyCampNotice();
 			return;
 		}
 		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 200 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 1) {
 			hideMenus();
-			kGAMECLASS.heliaSwollenNotice();
+			helSpawnScene.heliaSwollenNotice();
 			return;
 		}
 		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 100 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 2) {
 			hideMenus();
-			kGAMECLASS.heliaGravidity();
+			helSpawnScene.heliaGravidity();
 			return;
 		}
 		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 1 && (model.time.hours == 6 || model.time.hours == 7)) {
 			hideMenus();
-			kGAMECLASS.heliaBirthtime();
+			helSpawnScene.heliaBirthtime();
 			return;
 		}
 	}
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7) {
 		hideMenus();
-		kGAMECLASS.helSpawnGraduation();
+		helSpawnScene.helSpawnGraduation();
 		return;
 	}
-	if(model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && kGAMECLASS.helspawnFollower()) {
+	if(model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 20 == 0 || model.time.hours == 12) && flags[kFLAGS.HELSPAWN_DADDY] == 2 && helSpawnScene.helspawnFollower()) {
 		hideMenus();
-		kGAMECLASS.maiVisitsHerKids();
+		helSpawnScene.maiVisitsHerKids();
 		return;
 	}
-	if(model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && kGAMECLASS.helspawnFollower())
+	if(model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower())
 	{
 		hideMenus();
-		kGAMECLASS.spiderBrosGift();
+		helSpawnScene.spiderBrosGift();
 		return;
 	}
-	if(model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && kGAMECLASS.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
+	if(model.time.hours >= 10 && model.time.hours <= 18 && (model.time.days % 15 == 0 || model.time.hours == 12) && helSpawnScene.helspawnFollower() && flags[kFLAGS.HAKON_AND_KIRI_VISIT] == 0) {
 		hideMenus();
-		kGAMECLASS.hakonAndKiriComeVisit();
+		helSpawnScene.hakonAndKiriComeVisit();
 		return;
 	}
 	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && flags[kFLAGS.HELSPAWN_DISCOVER_BOOZE] == 0 && (rand(10) == 0 || flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 6)) {
 		hideMenus();
-		kGAMECLASS.helspawnDiscoversBooze();
+		helSpawnScene.helspawnDiscoversBooze();
 		return;
 	}
 	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && flags[kFLAGS.HELSPAWN_WEAPON] == 0 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 3 && model.time.hours >= 10 && model.time.hours <= 18) {
 		hideMenus();
-		kGAMECLASS.helSpawnChoosesAFightingStyle();
+		helSpawnScene.helSpawnChoosesAFightingStyle();
 		return;
 	}
 	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 6 || model.time.hours == 7) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 1) {
-		kGAMECLASS.helspawnAllGrownUp();
+		helSpawnScene.helspawnAllGrownUp();
 		return;
 	}
-	if((kGAMECLASS.sophieFollower() || kGAMECLASS.bimboSophie()) && flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] == 1) {
+	if((sophieFollower() || bimboSophie()) && flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] == 1) {
 		flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 0;
-		kGAMECLASS.sophieKidMaturation();
+		sophieBimbo.sophieKidMaturation();
 		hideMenus();
 		return;
 	}
 	//Bimbo Sophie Move In Request!
-	if(kGAMECLASS.bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 140)
+	if(bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 140)
 	{
 		hideMenus();
-		kGAMECLASS.sophieMoveInAttempt();
+		sophieBimbo.sophieMoveInAttempt();
 		return;
 	}
 	if(!kGAMECLASS.nieveHoliday() && model.time.hours == 6 && flags[kFLAGS.NIEVE_STAGE] > 0) {
@@ -233,41 +215,41 @@ public function doCamp():void {
 	}
 	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 0 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
-			kGAMECLASS.getASprout();
+			holliScene.getASprout();
 			hideMenus();
 			return;
 		}
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 7) {
-			kGAMECLASS.fuckPlantGrowsToLevel2();
+			holliScene.fuckPlantGrowsToLevel2();
 			hideMenus();
 			return;
 		}
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 25) {
-			kGAMECLASS.flowerGrowsToP3();
+			holliScene.flowerGrowsToP3();
 			hideMenus();
 			return;
 		}
 		//Level 4 growth
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 40) {
-			kGAMECLASS.treePhaseFourGo();
+			holliScene.treePhaseFourGo();
 			hideMenus();
 			return;
 		}
 	}
 	//Jojo treeflips!
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
-		kGAMECLASS.JojoTransformAndRollOut();
+		holliScene.JojoTransformAndRollOut();
 		hideMenus();
 		return;
 	}
 	//Amily flips out
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
-		kGAMECLASS.amilyHatesTreeFucking();
+		holliScene.amilyHatesTreeFucking();
 		hideMenus();
 		return;
 	}
 	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 1 && flags[kFLAGS.AMILY_TREE_FLIPOUT] == 1 && !amilyScene.amilyFollower() && flags[kFLAGS.AMILY_VISITING_URTA] == 0) {
-		kGAMECLASS.amilyComesBack();
+		holliScene.amilyComesBack();
 		flags[kFLAGS.AMILY_TREE_FLIPOUT] = 2;
 		hideMenus();
 		return;
@@ -289,14 +271,14 @@ public function doCamp():void {
 		return;
 	}
 	//Izzys tits asplode
-	if(kGAMECLASS.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 10 && player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
-		kGAMECLASS.milktasticLacticLactation();
+	if(isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 10 && player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
+		isabellaFollowerScene.milktasticLacticLactation();
 		hideMenus();
 		return;
 	}
 	//Marble meets follower izzy when moving in
-	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && kGAMECLASS.isabellaFollower() && player.hasStatusAffect("Camp Marble") >= 0) {
-		kGAMECLASS.angryMurble();
+	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.hasStatusAffect("Camp Marble") >= 0) {
+		isabellaFollowerScene.angryMurble();
 		hideMenus();
 		return;
 	}
@@ -308,8 +290,8 @@ public function doCamp():void {
 		return;
 	}
 	//Bimbo Sophie finds ovi elixer in chest!
-	if(kGAMECLASS.bimboSophie() && hasItemInStorage("OviElix") && rand(5) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0 && player.gender > 0) {
-		kGAMECLASS.sophieEggApocalypse();
+	if(bimboSophie() && hasItemInStorage("OviElix") && rand(5) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0 && player.gender > 0) {
+		sophieBimbo.sophieEggApocalypse();
 		hideMenus();
 		return;
 	}
@@ -326,7 +308,7 @@ public function doCamp():void {
 		return;
 	}
 	//Rathazul freaks out about jojo
-	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && kGAMECLASS.campCorruptJojo()) {
+	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && campCorruptJojo()) {
 		kGAMECLASS.rathazulFreaksOverJojo();
 		hideMenus();
 		return;
@@ -362,14 +344,14 @@ public function doCamp():void {
 		return;
 	}
 	//Go through Helia's first time move in interactions if  you haven't yet.
-	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 && kGAMECLASS.followerHel() && flags[kFLAGS.HEL_INTROS_LEVEL] == 0) {
-		kGAMECLASS.helFollowersIntro();
+	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 && kGAMECLASS.helScene.followerHel() && flags[kFLAGS.HEL_INTROS_LEVEL] == 0) {
+		helFollower.helFollowersIntro();
 		hideMenus();
 		return;
 	}
 	//If you've gone through Hel's first time actions and Issy moves in without being okay with threesomes.
-	if(flags[kFLAGS.HEL_INTROS_LEVEL] > 9000 && kGAMECLASS.followerHel() && kGAMECLASS.isabellaFollower() && flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-		kGAMECLASS.angryHelAndIzzyCampHelHereFirst();
+	if(flags[kFLAGS.HEL_INTROS_LEVEL] > 9000 && kGAMECLASS.helScene.followerHel() && isabellaFollower() && flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
+		helFollower.angryHelAndIzzyCampHelHereFirst();
 		hideMenus();
 		return;		
 	}
@@ -426,7 +408,7 @@ public function doCamp():void {
 	//Isabella upgrades camp level!
 
 
-	if(kGAMECLASS.isabellaFollower()) {
+	if(isabellaFollower()) {
 		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.", false);
 		if(model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
 	}
@@ -488,14 +470,14 @@ public function doCamp():void {
 	//Ember's anti-minotaur crusade!
 	if(flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
 		//Modified Camp Description
-		outputText("Since Ember began " + emberScene.emberMF("his","her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his","her") + " den.  There're quite a lot of them.\n\n");
+		outputText("Since Ember began " + emberMF("his","her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his","her") + " den.  There're quite a lot of them.\n\n");
 	}
 	//Dat tree!
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
 		outputText("On the outer edges, half-hidden behind a rock, is a large, very healthy tree.  It grew fairly fast, but seems to be fully developed now.  Holli, Marae's corrupt spawn, lives within.\n\n");
 	}
 	//BIMBO SOPHAH
-	if(kGAMECLASS.bimboSophie()) kGAMECLASS.sophieCampLines();
+	if(bimboSophie()) sophieBimbo.sophieCampLines();
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two-handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
@@ -567,7 +549,7 @@ public function doCamp():void {
 	}
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
-	if(kGAMECLASS.campCorruptJojo()) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
+	if(campCorruptJojo()) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 	//Pure Jojo
 	if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 	//Izma
@@ -760,53 +742,44 @@ public function followersCount():Number {
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if(player.hasStatusAffect("PureCampJojo") >= 0) counter++;
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) counter++;
-	if(kGAMECLASS.followerShouldra()) counter++;
-	if(kGAMECLASS.sophieFollower()) counter++;
-	if(kGAMECLASS.helspawnFollower()) counter++;
+	if(followerShouldra()) counter++;
+	if(sophieFollower()) counter++;
+	if(helspawnFollower()) counter++;
 	return counter;
-}
-private function hasFollowers():Boolean {
-	return followersCount() > 0;
 }
 public function slavesCount():Number {
 	var counter:Number = 0;
-	if(kGAMECLASS.latexGooFollower()) counter++;
+	if(latexGooFollower()) counter++;
 	if(kGAMECLASS.vapulaSlave()) counter++;
-	if(kGAMECLASS.campCorruptJojo()) counter++;
+	if(campCorruptJojo()) counter++;
 	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) counter++;
 	//Bimbo sophie
-	if(kGAMECLASS.bimboSophie()) counter++;
-	if(kGAMECLASS.ceraphFollowerScene.ceraphIsFollower()) counter++;
+	if(bimboSophie()) counter++;
+	if(ceraphIsFollower()) counter++;
 	if(kGAMECLASS.milkSlave()) counter++;
 	return counter;
-}
-private function hasSlaves():Boolean {
-	return slavesCount() > 0;
 }
 public function loversCount():Number {
 	var counter:Number = 0;
 	if(arianScene.arianFollower()) counter++;
-	if(kGAMECLASS.followerHel()) counter++;
+	if(followerHel()) counter++;
 	//Izma!
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) counter++;
-	if(kGAMECLASS.isabellaFollower()) counter++;
+	if(isabellaFollower()) counter++;
 	if(player.hasStatusAffect("Camp Marble") >= 0) counter++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
-	if(kGAMECLASS.followerKiha()) counter++;
+	if(followerKiha()) counter++;
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
-private function hasLovers():Boolean {
-	return loversCount() > 0;
-}
 public function campLoversMenu():void {
-	var isabellaButt:Number = 0;
-	var marbleEvent:Number = 0;
+	var isabellaButt:Function = null;
+	var marbleEvent:Function = null;
 	var izmaEvent:Number = 0;
-	var kihaButt:Number = 0;
+	var kihaButt:Function = null;
 	var amilyEvent:Number = 0;
-	var hel:Number = 0;
+	var hel:Function = null;
 	var nieve:int = 0;
 	clearOutput();
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -814,7 +787,7 @@ public function campLoversMenu():void {
 		outputText("\n\n");
 		nieve = 3965;
 	}
-	if(kGAMECLASS.followerHel()) {
+	if(kGAMECLASS.helScene.followerHel()) {
 		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
 			//Hel @ Camp: Follower Menu
 			//(6-7) 
@@ -834,19 +807,19 @@ public function campLoversMenu():void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		hel = 3587;
+		hel = helFollower.heliaFollowerMenu;
 	}
 	//Kiha!
-	if(kGAMECLASS.followerKiha()) {
+	if(followerKiha()) {
 		//(6-7) 
 		if(model.time.hours < 7) outputText("Kiha is sitting near the fire, her axe laying across her knees as she polishes it.[pg]");
 		else if(model.time.hours < 19) outputText("Kiha's out right now, likely patrolling for demons to exterminate.  You're sure a loud call could get her attention.\n\n");
 		else outputText("Kiha is utterly decimating a set of practice dummies she's set up out on the edge of camp.  All of them have crudely drawn horns. Most of them are on fire.\n\n");
-		kihaButt = 3435;
+		kihaButt = kihaScene.encounterKiha;
 	}
 	//Isabella
-	if(kGAMECLASS.isabellaFollower()) {
-		isabellaButt = 3243;
+	if(isabellaFollower()) {
+		isabellaButt = isabellaFollowerScene.callForFollowerIsabella;
 		if(model.time.hours >= 21 || model.time.hours <= 5) outputText("Isabella is sound asleep in her bunk and quietly snoring.", false);
 		else if(model.time.hours == 6) outputText("Isabella is busy eating some kind of grain-based snack for breakfast.  The curly-haired cow-girl gives you a smile when she sees you look her way.", false);
 		else if(model.time.hours == 7) outputText("Isabella, the red-headed cow-girl, is busy with a needle and thread, fixing up some of her clothes.", false);
@@ -915,7 +888,7 @@ public function campLoversMenu():void {
 			outputText("Marble herself is wandering around the camp right now.", false);
 		}
 		if(temp < 3) outputText("  You're sure she'd be back in moments if you needed her.", false);
-		marbleEvent = 2133;
+		marbleEvent = marbleScene.interactWithMarbleAtCamp;
 		outputText("\n\n", false);
 	}
 	//AMILY
@@ -943,11 +916,11 @@ public function campLoversMenu():void {
 	menu();
 	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
 	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
-	if(hel > 0) addButton(2,"Helia",eventParser,hel);
-	if(isabellaButt > 0) addButton(3,"Isabella",eventParser,isabellaButt);
+	addButton(2,"Helia",hel);
+	addButton(3,"Isabella",isabellaButt);
 	if(izmaEvent > 0) addButton(4,"Izma",eventParser,izmaEvent);
-	if(kihaButt > 0) addButton(5,"Kiha",eventParser,kihaButt);
-	if(marbleEvent > 0) addButton(6,"Marble",eventParser,marbleEvent);
+	addButton(5,"Kiha",kihaButt);
+	addButton(6,"Marble",marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
 	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",kGAMECLASS.desert.antsScene.introductionToPhyllaFollower);
 	addButton(9,"Back",eventParser,1);
@@ -957,29 +930,29 @@ public function campSlavesMenu():void {
 	var vapula:Number = 0;
 	var amilyEvent:Number = 0;
 	var ceraph:Number = 0;
-	var sophieEvent:Number = 0;
-	var jojoEvent:Number = 0;
-	var goo:int = 0;
+	var sophieEvent:Function = null;
+	var jojoEvent:Function = null;
+	var goo:Function = null;
 	if(kGAMECLASS.vapulaSlave()) {
 		kGAMECLASS.vapulaSlaveFlavorText();
 		outputText("\n\n");
 		vapula = 3749;
 	}
 	//Bimbo Sophie
-	if(kGAMECLASS.bimboSophie()) {
-		kGAMECLASS.sophieCampLines();
-		sophieEvent = 3028;
+	if(bimboSophie()) {
+		sophieBimbo.sophieCampLines();
+		sophieEvent = sophieBimbo.approachBimboSophieInCamp;
 	}
-	if(kGAMECLASS.latexGooFollower()) {
+	if(latexGooFollower()) {
 		outputText(flags[kFLAGS.GOO_NAME] + " lurks in a secluded section of rocks, only venturing out when called for or when she needs to gather water from the stream.\n\n");
-		goo = 3970;
+		goo = latexGirl.approachLatexy;
 	}
-	if(kGAMECLASS.ceraphFollowerScene.ceraphIsFollower()) ceraph = 3041;
+	if(ceraphIsFollower()) ceraph = 3041;
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
-	if(kGAMECLASS.campCorruptJojo()) {
+	if(campCorruptJojo()) {
 		outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
-		jojoEvent = 43;
+		jojoEvent = jojoScene.corruptCampJojo;
 	}
 	//Modified Camp/Follower List Description:
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
@@ -994,19 +967,19 @@ public function campSlavesMenu():void {
 	menu();
 	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
 	if(ceraph > 0) addButton(1,"Ceraph",eventParser,ceraph);
-	if(jojoEvent > 0) addButton(2,"Jojo",eventParser,jojoEvent);
-	if(sophieEvent > 0) addButton(3,"Sophie",eventParser,sophieEvent);
+	addButton(2,"Jojo",jojoEvent);
+	addButton(3,"Sophie",sophieEvent);
 	if(vapula > 0) addButton(4,"Vapula",eventParser,vapula);
 	if(kGAMECLASS.milkSlave()) addButton(7,flags[kFLAGS.MILK_NAME],kGAMECLASS.milkyMenu);
-	if(goo > 0) addButton(8,flags[kFLAGS.GOO_NAME],eventParser,goo);
+	addButton(8,flags[kFLAGS.GOO_NAME],goo);
 	addButton(9,"Back",eventParser,1);
 }
 
 public function campFollowers():void {
 	var rathazulEvent:Number = 0;
 	var jojoEvent:Number = 0;
-	var valeria:Number = 0;
-	var shouldra:Number = 0;
+	var valeria2:Function = null;
+	var shouldra:Function = null;
 	var ember:Function = null;
 	clearOutput();
 	gameState = 0;
@@ -1016,8 +989,8 @@ public function campFollowers():void {
 		emberScene.emberCampDesc();
 		ember = emberScene.emberCampMenu;
 	}
-	if(kGAMECLASS.followerShouldra()) {
-		shouldra = 3665;
+	if(followerShouldra()) {
+		shouldra = shouldraFollower.shouldraFollowerScreen;
 	}
 	//Pure Jojo
 	if(player.hasStatusAffect("PureCampJojo") >= 0) {
@@ -1035,7 +1008,7 @@ public function campFollowers():void {
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
-	if(kGAMECLASS.sophieFollower()) {
+	if(sophieFollower()) {
 		if(rand(5) == 0) outputText("Sophie is sitting by herself, applying yet another layer of glittering lip gloss to her full lips.\n\n");
 		else if(rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 		else if(rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
@@ -1055,17 +1028,17 @@ public function campFollowers():void {
 			else outputText("them");
 			outputText(" about hunting and gathering techniques.  Considering their unusual upbringing, it can't be as easy for them...\n\n");
 		}
-		addButton(5,"Sophie",kGAMECLASS.followerSophieMainScreen);
+		addButton(5,"Sophie",sophieFollowerScene.followerSophieMainScreen);
 	}
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria = 3588;
+	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria2 = valeria.valeriaFollower;
 //choices("Ember",ember,"Jojo",jojoEvent,"Rathazul",rathazulEvent,"Shouldra",shouldra,"Valeria",valeria,"",0,"",0,"",0,"",0,"Back",1);	
 	addButton(0,"Ember",ember);
-	if(kGAMECLASS.helspawnFollower()) addButton(1,flags[kFLAGS.HELSPAWN_NAME],kGAMECLASS.helspawnsMainMenu);
+	if(helspawnFollower()) addButton(1,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.helspawnsMainMenu);
 	if(jojoEvent > 0) addButton(2,"Jojo",eventParser,jojoEvent);
 	if(rathazulEvent > 0) addButton(3,"Rathazul",eventParser,rathazulEvent);
-	if(shouldra > 0) addButton(4,"Shouldra",eventParser,shouldra);
+	addButton(4,"Shouldra",shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
-	if(valeria > 0) addButton(6,"Valeria",eventParser,valeria);
+	addButton(6,"Valeria",valeria2);
 	addButton(9,"Back",eventParser,1);
 }
 
@@ -1154,26 +1127,26 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/*       ONE TIME SPECIAL EVENTS                                  */
 		/******************************************************************/
 		//HEL SLEEPIES!
-		if(kGAMECLASS.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
+		if(helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
 			kGAMECLASS.heliaDiscovery();
 			sleepRecovery(false);
 			return;
 		}
 		//Shouldra xgartuan fight
-		if(player.hasCock() && kGAMECLASS.followerShouldra() && player.statusAffectv1("Exgartuan") == 1) {
+		if(player.hasCock() && followerShouldra() && player.statusAffectv1("Exgartuan") == 1) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
-				kGAMECLASS.shouldraAndExgartumonFightGottaCatchEmAll();
+				shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 				sleepRecovery(false);
 				return;
 			}
 			else if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 3) {
-				kGAMECLASS.exgartuMonAndShouldraShowdown();
+				shouldraFollower.exgartuMonAndShouldraShowdown();
 				sleepRecovery(false);
 				return;
 			}
 		}
-		if(player.hasCock() && kGAMECLASS.followerShouldra() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == -0.5) {
-			kGAMECLASS.keepShouldraPartIIExgartumonsUndeatH();
+		if(player.hasCock() && followerShouldra() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == -0.5) {
+			shouldraFollower.keepShouldraPartIIExgartumonsUndeatH();
 			sleepRecovery(false);
 			return;
 		}
@@ -1182,7 +1155,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		//Marble Sleepies
 		if(player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
-			if(kGAMECLASS.marbleNightSleepFlavor()) {
+			if(marbleScene.marbleNightSleepFlavor()) {
 				sleepRecovery(false);
 				return;
 			}
@@ -1191,7 +1164,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			arianScene.sleepWithArian();
 			return;
 		}
-		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (kGAMECLASS.bimboSophie() || kGAMECLASS.sophieFollower())) {
+		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower())) {
 			//Night Time Snuggle Alerts!*
 			//(1) 
 			if(rand(4) == 0) {
@@ -1220,7 +1193,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			outputText("\n");
 		}
 		else {
-			if(flags[kFLAGS.SLEEP_WITH] == "Helia" && kGAMECLASS.followerHel()) {
+			if(flags[kFLAGS.SLEEP_WITH] == "Helia" && kGAMECLASS.helScene.followerHel()) {
 				outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
 			}
 			//Normal sleep message

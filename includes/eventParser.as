@@ -231,12 +231,6 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
-		case 43:
-			//Jojo as a cumsleeve
-			corruptCampJojo();
-			return;
-
-
 		case 44:
 			//Gain +5 Str due to level
 			dynStats("str", 5);
@@ -462,7 +456,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.HEL_PREGNANCY_INCUBATION]--;
 			if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) flags[kFLAGS.HEL_PREGNANCY_INCUBATION] = 1;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
+		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
 		player.weaponAttack = fixedDamage(player.weaponName);
 		applyArmorStats(player.armorName,false);
@@ -513,7 +507,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("gooStuffed",1,-1);
 			if (player.statusAffectv1("gooStuffed") <= 0) 
 			{
-				birthOutDatGooSlut();
+				valeria.birthOutDatGooSlut();
 				needNext = true;
 			}
 			
@@ -528,11 +522,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("Ember Napping",1,-1);
 			if(player.statusAffectv1("Ember Napping") <= 0) player.removeStatusAffect("Ember Napping");
 		}
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
-			sophieDaughterDebimboUpdate();
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
+			sophieFollowerScene.sophieDaughterDebimboUpdate();
 			needNext = true;
 		}
-		if(bimboSophie() || sophieFollower()) {
+		if(sophieBimbo.bimboSophie() || sophieFollowerScene.sophieFollower()) {
 			if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 				flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER]--;
 				if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] < 1) flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 1;
@@ -546,10 +540,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] == 100) {
 					outputText("\nLooking around for your developing daughter, you find that she and your ");
-					if(bimboSophie()) outputText("boisterous bimbo ");
+					if(sophieBimbo.bimboSophie()) outputText("boisterous bimbo ");
 					else outputText("mature harpy ");
 					outputText("are spending some quality mother-daughter time together.  Sophie is helping the young girl with her make up, showing her how to use that golden luststick that her people are so fond of.  You're not too sure how appropriate that is for your daughter, but then again, this is what harpies do right?  Aside from the lusty lipstick, your live-in");
-					if(bimboSophie()) outputText(" bimbo ");
+					if(sophieBimbo.bimboSophie()) outputText(" bimbo ");
 					else outputText(", avian girlfriend ");
 					outputText("moves on to her hair and nails, all the while gabbing on and on about you, and about all the daughters she plans to have.");
 					outputText("\n\nYour daughter is growing up so fast!  Already, her body is developing, breasts budding into supple bumps on her chest.  Her hips are starting to swell into the trademark birthing hips and round grabbable ass harpies are famous for.\n");
@@ -559,7 +553,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) {
 				flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN]--;
 				if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] <= 0) {
-					sophiesEggHatches();
+					sophieBimbo.sophiesEggHatches();
 					needNext = true;
 				}
 			}
@@ -569,7 +563,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Sophie Pregnancy Stage Alerts
 				//Small Bump*
 				if(flags[kFLAGS.SOPHIE_INCUBATION] == 150) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nSophie sits by herself on your comfy bedroll.  The feathery female seems to have taken a liking to your place of rest.  Your bird-brained love-slave clearly desires to be as close to you, or at least your fatherly scent, as much as possible.  Lost in her lusty fantasies, she caresses the gentle bump in her belly, the telltale sign that your virile seed has worked its magic on her egg-bearing womb.  One of her hands idly slips between her legs, fingers gently playing with her wet snatch as her other rubs her tummy.");
 						outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The blond bimbo puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.\n");
 					}
@@ -582,7 +576,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				//Medium Bump*
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 120) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nAs usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her puffy lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles, and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 						outputText("\n\n\"<i>There you are [name]!  Like, look at me!  Your egg is getting <b>soooo</b> big inside me!  Like, just look at how big and sexy I am!</i>\"  the bimbo brained woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful bimbo-like breasts have only gotten bigger thanks to her pregnancy.  \"<i>Thanks for getting me all pregnant and stuff!</i>\"\n");
 					}
@@ -595,7 +589,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				//Big Belly Bump*
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 100) {
-					if(bimboSophie()) {
+					if(sophieBimbo.bimboSophie()) {
 						outputText("\nOnce again, your pregnant bimbo lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With your feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her plump bimbo lips blowing you a kiss as she looks at you with lusty eyes.");
 						outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, the excited, happy bimbo flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>Ohhh!  It's gonna be soon, momma Sophie's gonna like, lay this nice big egg for you, babe!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy's going to stay niiice and tight for you, babe!</i>\"\n");
 					}
@@ -607,7 +601,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 0) {
-					sophieBirthsEgg();
+					sophieBimbo.sophieBirthsEgg();
 					needNext = true;
 				}
 			}
@@ -615,8 +609,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.SOPHIE_HEAT_COUNTER] <= 0) {
 				//Not pregnant and PC has dick? INTO SEASON HOOOO
 				if(player.hasCock() && flags[kFLAGS.SOPHIE_INCUBATION] <= 0) {
-					if(bimboSophie()) sophieGoesIntoSeason();
-					else sophieFollowerGoesIntoSeas();
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
+					else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 					needNext = true;
 					flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;
 				}
@@ -630,15 +624,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.SOPHIE_HEAT_COUNTER]--;
 				//Expire heat if impregged
 				if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_HEAT_COUNTER] >= 552) {
-					if(bimboSophie()) sophieGotKnockedUp();
-					else sophieFertilityKnockedUpExpired();
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieGotKnockedUp();
+					else sophieFollowerScene.sophieFertilityKnockedUpExpired();
 					flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 551;
 					needNext = true;
 				}
 				//Expire heat if counted down to
 				else if(flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552) {
-					if(bimboSophie()) sophieSeasonExpiration();
-					else sophieFertilityExpired();
+					if(sophieBimbo.bimboSophie()) sophieBimbo.sophieSeasonExpiration();
+					else sophieFollowerScene.sophieFertilityExpired();
 					needNext = true;
 				}
 			}
@@ -657,13 +651,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else if(flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
 		}
 		if(flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] >= 1) flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN]--;
-		if(followerShouldra() && player.statusAffectv1("Exgartuan") == 1 && player.hasCock() && rand(10) == 0) {
+		if(shouldraFollower.followerShouldra() && player.statusAffectv1("Exgartuan") == 1 && player.hasCock() && rand(10) == 0) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 1) {
 				needNext = true;
-				exgartumonAndShouldraFightPartII();
+				shouldraFollower.exgartumonAndShouldraFightPartII();
 			}
 			else if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 2) {
-				exgartumonAndShouldraFightPartIII();
+				shouldraFollower.exgartumonAndShouldraFightPartIII();
 				needNext = true;
 			}
 		}
@@ -833,11 +827,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			trace("MINO KID GROWN");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] = 30;
 		}
-		if(followerShouldra()) {
+		if(shouldraFollower.followerShouldra()) {
 			flags[kFLAGS.SHOULDRA_SLEEP_TIMER]--;
-			if(shouldersWarnings()) needNext = true;
+			if(shouldraFollower.shouldersWarnings()) needNext = true;
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] == 0 || (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < 0 && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] % 16 == 0)) {
-				shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
+				shouldraFollower.shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
 				needNext = true;
 			}
 			   
@@ -854,7 +848,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] > 0) {
 			flags[kFLAGS.JOJO_EGGCUBATE_COUNT]--;
 			if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] == 1) {
-				jojoLaysEggs();
+				jojoScene.jojoLaysEggs();
 				needNext = true;
 			}
 		}
@@ -1474,7 +1468,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(player.statusAffectv2("Exgartuan") == 0) 
 					{
 						outputText("\n<b>", false);
-						exgartuanBored();
+						exgartuan.exgartuanBored();
 						needNext = true;
 						outputText("</b>\n", false);
 					}
@@ -1487,13 +1481,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					{	
 						if(player.hasStatusAffect("infested") >= 0 ) {
 							outputText("\n<b>", false);
-							exgartuanWormCure();
+							exgartuan.exgartuanWormCure();
 							needNext = true;
 							outputText("</b>\n", false);	
 						}
 						else if(rand(10) == 0 && (player.armorName == "sexy black chitin armor-plating" || player.armorName == "glistening gel-armor plates" || player.armorName == "leather armor segments" || player.armorName == "comfortable clothes" || player.armorName == "bondage patient clothes" || player.armorName == "crotch-revealing clothes" || player.armorName == "cute servant's clothes" || player.armorName == "maid's clothes" || player.armorName == "servant's clothes" || player.armorName == "maid's clothes" || player.armorName == "practically indecent steel armor" || player.armorName == "red, high-society bodysuit" || player.armorName == "spider-silk armor" || player.armorName == "slutty swimwear" || player.armorName == "full-body chainmail" || player.armorName == "revealing chainmail bikini" || player.armorName == "full platemail" || player.armorName == "scale-mail armor" || player.armorName == "black leather armor surrounded by voluminous robes" || player.armorName == "rubber fetish clothes" || player.armorName == "green adventurer's clothes" || player.armorName == "white shirt and overalls")) {
 							outputText("\n<b>", false);
-							exgartuanArmorShift();
+							exgartuan.exgartuanArmorShift();
 							needNext = true;
 							outputText("</b>\n", false);	
 						}
@@ -1506,7 +1500,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 							// lactation messing with!
 							if(rand(3) == 0) {
 								outputText("\n<b>", false);
-								exgartuanLactationAdjustment();
+								exgartuan.exgartuanLactationAdjustment();
 								outputText("</b>\n", false);	
 								needNext = true;
 							}
@@ -1798,18 +1792,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.tailVenom += player.tailRecharge;
 			if(player.tailVenom > 100) player.tailVenom = 100;
 		}
-		if(model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0) {
-			sleepyNightMareHel();
+		if(model.time.hours == 3 && helFollower.followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0) {
+			helFollower.sleepyNightMareHel();
 		}
 		//Luststick resistance unlock
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.hasPerk("Luststick Adapted") < 0) {
-			unlockResistance();
+			sophieBimbo.unlockResistance();
 			needNext = true;
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
-			bimboSophieLustStickSurprise();
+		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+			sophieBimbo.bimboSophieLustStickSurprise();
 			needNext = true;
 		}
 		if(flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
@@ -1894,7 +1888,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
 			flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 			//Isabella milk
-			if(isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0) {
+			if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0) {
 				flags[kFLAGS.ISABELLA_MILKED_YET]++;
 			}
 			//Reduce lust-stick resistance building
@@ -1933,12 +1927,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 			}
 			//Latex goo follower daily updates
-			if(latexGooFollower()) {
-				gooFluid(-2, false);
-				if(gooFluid() < 50) gooHappiness(-1,false);
-				if(gooFluid() < 25) gooHappiness(-1,false);
-				if(gooHappiness() < 75) gooObedience(-1,false);
-				if(gooHappiness() >= 90) gooObedience(1,false);
+			if(latexGirl.latexGooFollower()) {
+				latexGirl.gooFluid(-2, false);
+				if(latexGirl.gooFluid() < 50) latexGirl.gooHappiness(-1,false);
+				if(latexGirl.gooFluid() < 25) latexGirl.gooHappiness(-1,false);
+				if(latexGirl.gooHappiness() < 75) latexGirl.gooObedience(-1,false);
+				if(latexGirl.gooHappiness() >= 90) latexGirl.gooObedience(1,false);
 			}
 			//Marble Preggo Counter
 			if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
@@ -1996,7 +1990,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Lower addiction by 1 every day.
 			if(player.hasStatusAffect("Marble") >= 0) {
-				if(player.statusAffectv2("Marble") > 0) marbleStatusChange(0,-1);
+				if(player.statusAffectv2("Marble") > 0) marbleScene.marbleStatusChange(0,-1);
 			}
 			//Lower shark girl counter
 			if(player.statusAffectv1("Shark-Girl") > 0) player.addStatusValue("Shark-Girl",1,-1);
@@ -2070,7 +2064,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//BIG EVENTS GO IN HERE
 		//MARBLE POOPS BAYBEEZ
 		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1) {
-			marblePoopsBaybees();
+			marbleScene.marblePoopsBaybees();
 			return true;
 		}		
 		//Helia's morning surprise!  TOP PRIORITY!
@@ -2082,21 +2076,21 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0) {
-			sophieFollowerIntro();
+		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !sophieBimbo.bimboSophie() && !sophieFollowerScene.sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0) {
+			sophieFollowerScene.sophieFollowerIntro();
 			return true;
 		}
-		if(model.time.hours == 23 && followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
-			heliaBonusPointsAward();
+		if(model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+			helSpawnScene.heliaBonusPointsAward();
 			return true;
 		}
-		if(model.time.hours == 8 && followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1) {
-			helGotKnockedUp();
+		if(model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1) {
+			helSpawnScene.helGotKnockedUp();
 			return true;
 		}
-		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helAffection() >= 100 &&
+		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helFollower.helAffection() >= 100 &&
 		   flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2) {
-			heliaFollowerIntro();
+			helFollower.heliaFollowerIntro();
 			return true;   
 		}
 		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6) {
@@ -2105,17 +2099,17 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Helspawn night smex!
 		if(flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
-			helspawnIsASlut();
+			helSpawnScene.helspawnIsASlut();
 			return true;
 		}		
 		//Ghostgirl recruitment priority
 		if(flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
-			morningShouldraAlert();
+			shouldraFollower.morningShouldraAlert();
 			return true;
 		}
 		//Ghostgirl pissed off dreams
-		if(followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
-			nightTimeShouldraRapesThePC();
+		if(shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
+			shouldraFollower.nightTimeShouldraRapesThePC();
 			return true;
 		}
 		//Ghostgirl madness
@@ -2124,7 +2118,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
 				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0) {
-					paladinModeFollowup();
+					shouldraScene.paladinModeFollowup();
 					return true;
 				}
 			}
@@ -2164,10 +2158,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		else if(temp >= 5) ceraph = 3;
 		//DREAMS
 		//Shouldra dreams here
-		if(followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && model.time.hours == 3) {
+		if(shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && model.time.hours == 3) {
 			flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN]--;
 			if(flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] <= 0) {
-				shouldraDream1();
+				shouldraFollower.shouldraDream1();
 				return true;
 			}
 		}
@@ -2279,16 +2273,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				needNext = true;
 			}
 			else if(temp > rand(100) && player.hasStatusAffect("Defense: Canopy") < 0) {
-				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !followerKiha())) {
+				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
 					impScene.impGangabangaEXPLOSIONS();
 					doNext(1);
 					return true;
 				}
-				else if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && followerKiha()) {
+				else if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
 					outputText("\n<b>You find charred imp carcasses all around the camp once you wake.  It looks like Kiha repelled a swarm of the little bastards.</b>\n");
 					needNext = true;
 				}
-				else if(flags[kFLAGS.HEL_GUARDING] > 0 && followerHel()) {
+				else if(flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
 					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 					needNext = true;
 				}
@@ -2307,11 +2301,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//wormgasms
 			else if(flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.hasStatusAffect("infested") < 0) {
-				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
+				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
 					nightTimeInfestation();
 					return true;
 				}
-				else if(flags[kFLAGS.HEL_GUARDING] > 0 && followerHel()) {
+				else if(flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
@@ -2326,18 +2320,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Chance of threesomes!
-		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
+		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
 			trace("ISABELLA/HELL TEST");
 			//Hell/Izzy threesome intro
 			if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 				spriteSelect(31);
-				followrIzzyxSallyThreesomePretext();
+				helScene.followrIzzyxSallyThreesomePretext();
 				return true;
 			}
 			//Propah threesomes here!
 			else if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
 				spriteSelect(31);
-				isabellaXHelThreeSomeCampStart();
+				helScene.isabellaXHelThreeSomeCampStart();
 				return true;
 			}
 		}
@@ -2378,25 +2372,25 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Exgartuan night time surprise!
 			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
 				outputText("\n", false);
-				exgartuanSleepSurprise();
+				exgartuan.exgartuanSleepSurprise();
 				return true;
 			}
 			//Boobgartuan night time surprise!
 			if(player.statusAffectv1("Exgartuan") == 2 && rand(3) == 0 && player.statusAffectv2("Exgartuan") == 0) {
 				outputText("\n", false);
-				boobGartuanSURPRISE();
+				exgartuan.boobGartuanSURPRISE();
 				return true;
 			}
 		}
 		//MORNING FUX
-		if(model.time.hours == 6 && bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
+		if(model.time.hours == 6 && sophieBimbo.bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 			outputText("\n<b><u>Something odd happens that morning...</u></b>");
-			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 120) fuckYoPregnantHarpyWaifu(true);
-			else sophieFenCraftedSex(true);
+			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 120) sophieBimbo.fuckYoPregnantHarpyWaifu(true);
+			else sophieBimbo.sophieFenCraftedSex(true);
 			return true;
 		}
-		if(model.time.hours == 6 && sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
-			sophieSmallDongTeases();
+		if(model.time.hours == 6 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
+			sophieFollowerScene.sophieSmallDongTeases();
 			return true;
 		}
 		//MARBLE STUFF
@@ -2428,7 +2422,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2464,10 +2458,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Affection 70+, version 2
 				if(player.statusAffectv1("Marble") >= 70) {
 					outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>now, no one will mind if I disappear.</i>\"  You look at her in surprise and quickly grab her arms.  You tell her with no uncertainty that if she disappeared, you would forever miss her.  You don't care about her milk, it doesn't matter; it is her as a person that matters to you.  You wouldn't have done all those things or spent all that time together if you didn't care about her.  She bursts into tears and hugs you tightly to her breasts.\n\n", false);
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2512,7 +2506,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>I was hoping you might help me out with my chores. Then I'll see about getting you some milk.</i>\"  The idea of working for her milk seems oddly right, and you put a huge effort into helping Marble with her chores.  Afterwards, Marble gladly agrees to give you her milk. While you are nursing from her, she starts to talk: \"<i>Sweetie, I've been thinking.  I think you should stay here with me from now on, since you need my milk to survive.</i>\"  She starts to stroke your head.  \"<i>You always do such a good job with the chores too; do you really want to do anything else?</i>\"  You try to pull back from her and tell her about your quest, but she keeps your mouth from straying from her breast.  \"<i>No, of course you don't.</i>\"  She says with finality, and you feel your need to do anything else fade....\n\n", false);
 					//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>Mmm, if you need me so much, then I want you to move in with me on the farm,</i>\" she says happily above you.  \"<i>That way, I can take care of you and you can help me, and we'll both be happy.</i>\"  You panic a bit; while you'd certainly be happy to have the source of her delicious milk at your fingertips, leaving the portal unguarded means the demons will be free to set up shop there again!  Marble responds to your squirming by tightening her arms and says, \"<i>Ah, ah, remember, sweetie; you need my milk and I control whether or not you can drink it.  I'm happy to share it, but if I'm being so generous, I think the least you could do is make it easier for me.  I don't think living here and helping me with the farmwork is too much to ask, do you?</i>\"  Her face contorts into an open-mouthed smile and her eyes glitter.  You sigh into her chest, she's right, there isn't much you can do about it now...");
-					doNext(marbleBadEndFollowup);
+					doNext(marbleScene.marbleBadEndFollowup);
 					return true;
 				}
 				//Affection 50-79, type 1:
@@ -2526,11 +2520,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.statusAffectv1("Marble") >= 80) {
 					outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n", false);
 					//(player chose yes) do after addiction sex event
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
@@ -2551,7 +2545,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
 					//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.   \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
-					doNext(marbleBadEndFollowup);
+					doNext(marbleScene.marbleBadEndFollowup);
 					return true;
 				}
 				//Affection < 80, type 2:
@@ -2564,11 +2558,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				else {
 					outputText("Marble's face falls at your words.  \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You shake your head and tell her it wasn't something either of you could stop.  Despite what you said before, what happened happened.  You care too much for her to let her feel bad about it, and you tell her you forgive her for the part she played in getting you addicted to her milk.  She bursts into tears and hugs you tightly to her breasts, before letting you drink your morning milk.  Afterwards she looks at you intently. \"<i>Can we do something special?</i>\" she asks you, suggestively.  You agree without having to give it any thought.\n\n", false);
 					//(player chose yes) do after addiction sex event
-					marbleAddictionSex(false);
+					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect("Camp Marble",0,0,0,0);
-					if(isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
@@ -2652,23 +2646,23 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(model.time.hours == 6 && isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
+		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
-			isabellaMorningWakeupCall();
+			isabellaFollowerScene.isabellaMorningWakeupCall();
 			return true;
 		}
 		//Morning Marble Meetings
 		if(model.time.hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
 			//Marble is at camp
 			if(player.hasStatusAffect("Camp Marble") >= 0) {
-				postAddictionCampMornings(false);
+				marbleScene.postAddictionCampMornings(false);
 				needNext = true;
 			}
 			//Marble isn't at camp
 			else {
 				//Marble is still available at farm
 				if(player.hasStatusAffect("No More Marble") < 0) {
-					postAddictionFarmMornings();
+					marbleScene.postAddictionFarmMornings();
 					threshhold--;
 					needNext = true;
 				}
@@ -2677,12 +2671,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Sophie Izma 3some
-		if(bimboSophie() && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+		if(sophieBimbo.bimboSophie() && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
 			flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
-			sophieAndIzmaPlay();
+			sophieBimbo.sophieAndIzmaPlay();
 			return true;
 		}
-		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
 			izmaDomsLatexy();
 			return true;
 		}

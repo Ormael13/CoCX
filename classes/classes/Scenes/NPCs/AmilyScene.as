@@ -4,12 +4,11 @@
 package classes.Scenes.NPCs
 {
 	import classes.Appearance;
-	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class AmilyScene extends BaseContent
+	public class AmilyScene extends NPCAwareContent
 	{
 		/*Amily the Mousegirl Breeder
 		 * Plus human stuff
@@ -96,7 +95,7 @@ package classes.Scenes.NPCs
 		// NEW EVENTS:
 		// 3172 = Ask to defur Amily
 		// 3174 = Defur Amily at camp (both corrupt/noncorrupt)
-		public function amilyFollower():Boolean {
+		override public function amilyFollower():Boolean {
 			if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 				//Amily not a follower while visiting Urta
 				return !(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2);
@@ -143,8 +142,8 @@ package classes.Scenes.NPCs
 		public function exploreVillageRuin():void {
 			outputText("", true);
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !kGAMECLASS.followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
-				kGAMECLASS.shouldraGreeting();
+			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+				shouldraScene.shouldraGreeting();
 				return;
 			}
 			//20% chance of playing with a rack
@@ -273,7 +272,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n", false);
 
 					//[Jojo previously encountered]
-					if(kGAMECLASS.monk > 0) {
+					if(monk > 0) {
 						outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n", false);
 					}
 					//[Jojo not previously encountered]
@@ -335,7 +334,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n", false);
 
 					//[Jojo previously encountered]
-					if(kGAMECLASS.monk > 0) {
+					if(monk > 0) {
 						outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n", false);
 					}
 					//[Jojo not previously encountered]
@@ -399,7 +398,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n", false);
 
 					//[Jojo previously encountered]
-					if(kGAMECLASS.monk > 0) {
+					if(monk > 0) {
 						outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n", false);
 					}
 					//[Jojo not previously encountered]
@@ -451,7 +450,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n", false);
 
 					//[Jojo previously encountered]
-					if(kGAMECLASS.monk > 0) {
+					if(monk > 0) {
 						outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n", false);
 					}
 					//[Jojo not previously encountered]
@@ -4244,7 +4243,7 @@ package classes.Scenes.NPCs
 
 			outputText("\"<i>Torturing myself you say? I think you're right. Maybe I should see if ", false);
 			//[(if Jojo's corrupt)
-			if(kGAMECLASS.monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText("Jojo wants to play,", false);
+			if(monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText("Jojo wants to play,", false);
 			//(else)
 			else outputText("I can't find someone else to play with,", false);
 			outputText("</i>\" you say, nonchalantly attempting to pull away from her. \"<i>No!</i>\" Amily screams; her legs tighten about your waist with such force that she actually lifts herself off of the ground in her eagerness to plant herself firmly against your crotch, rubbing her slavering pussy against you. \"<i>Mine! My fuck! Mine!</i>\" she squeaks indignantly. You laugh at how far you've pushed your little mouse slave.  Sliding your " + cockDescript(0) + " against her pussy, you bend down and grope her breasts roughly, drawing a desperate moan from her; slowly you get closer to her ears, then whisper, \"<i>Go ahead,</i>\" while humping against her to further excite her.\n\n", false);

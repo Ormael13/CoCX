@@ -4,6 +4,7 @@ package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Edryn extends TelAdreAbstractContent {
 public function Edryn(){
@@ -513,7 +514,7 @@ public function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n", false);
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some",edryn,"Fox Girls",kGAMECLASS.heliaPlusFoxyFluffs,"",0,"",0,"Leave",leaveHelInZeBitch);
+	simpleChoices("Edryn3Some",edryn,"Fox Girls",kGAMECLASS.helScene.heliaPlusFoxyFluffs,"",0,"",0,"Leave",leaveHelInZeBitch);
 }
 
 //First Time - Leave
@@ -588,7 +589,7 @@ private function threesomeEdrynAndHel():void {
 
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n", false);
 	dynStats("lus=", 0);
-	kGAMECLASS.helAffection(5);
+	kGAMECLASS.helFollower.helAffection(5);
 	doNext(13);
 }
 

@@ -424,9 +424,9 @@ public function drinkUrtasBoozeLetHer():void {
 	outputText("With surprising strength, the inebriated fox pushes you against an old bench, flat onto your ", false);
 	if(player.biggestTitSize() > 1) outputText("tits", false);
 	else outputText("belly", false);
-	outputText(".  She pulls at your " + player.armorName + " until your crotch is completely exposed and vulnerable, revealing your " + assholeOrPussy(), false); 
+	outputText(".  She pulls at your " + player.armorName + " until your crotch is completely exposed and vulnerable, revealing your " + player.assholeOrPussy(), false); 
 	if(player.cockTotal() > 0) outputText(" and " + multiCockDescript(), false);
-	outputText(".  Urta snuggles close, brushing her nose along your thighs before plunging her tongue deep into your " + assholeOrPussy() + " in one powerful, drunken lick.  She slurps and licks, humming away until you're ", false);
+	outputText(".  Urta snuggles close, brushing her nose along your thighs before plunging her tongue deep into your " + player.assholeOrPussy() + " in one powerful, drunken lick.  She slurps and licks, humming away until you're ", false);
 	if(player.hasVagina()) outputText("wet", false);
 	else if(player.totalCocks() > 0) outputText("suitably lubricated and leaking pre", false);
 	else  outputText("suitably lubricated", false);
@@ -436,7 +436,7 @@ public function drinkUrtasBoozeLetHer():void {
 	cuntChange(60,true,true,false);
 	outputText("\n\n", false);
 	
-	outputText("\"<i>Mmmm I shhoulda ushed a condom, you're gonna be a messssss!</i>\" she cries as she climbs atop her sexual peak, mounting it just like she's mounting your " + assholeOrPussy() + ".  You're spread wide, the equine member rammed tightly ", false);
+	outputText("\"<i>Mmmm I shhoulda ushed a condom, you're gonna be a messssss!</i>\" she cries as she climbs atop her sexual peak, mounting it just like she's mounting your " + player.assholeOrPussy() + ".  You're spread wide, the equine member rammed tightly ", false);
 	if(player.hasVagina()) outputText("against your cervix as the tip presses firmly against it", false);
 	else outputText("into your rectum", false);
 	outputText(", unloading a thick batch of cream directly into your ", false);
@@ -621,7 +621,7 @@ public function urtaFuckHer():void {
 		outputText("Urta nods, numbed by the unexpected and forward nature of your offer.  She looks up hopefully and pries her hands away from the twitching behemoth in her loins, waiting to see how you intend to deal with it.  You approach her and turn, straddling your " + player.legs() + " over her, watching her expression as you lower yourself down, ", false);
 		if(player.tailType == TAIL_TYPE_HORSE || player.tailType == TAIL_TYPE_DOG) outputText("swishing your tail across her taut nipples", false);
 		else outputText("making her wait", false);
-		outputText(".  Eventually the blunted tip of Urta's horse-cock presses against your " + assholeOrPussy() + ".  Agonizingly, you force yourself to relax and lower yourself down on the mottled pink and black shaft.\n\n", false);
+		outputText(".  Eventually the blunted tip of Urta's horse-cock presses against your " + player.assholeOrPussy() + ".  Agonizingly, you force yourself to relax and lower yourself down on the mottled pink and black shaft.\n\n", false);
 		
 		outputText("The horse-cock spreads you wide, filling you past the point of fullness as you sink further and further along its length.  Urta groans happily, her hips twitching involuntarily and forcing more of the monster-sized cock inside you.", false);
 		if(player.hasVagina()) {
@@ -651,7 +651,7 @@ public function urtaFuckHer():void {
 		
 		outputText("The substantial flare forms a perfect plug inside you and your belly distends slightly as you're packed full of foxy-horse-cum.  Your own lusts keep your hips moving, grinding and squeezing the shaft inside you as it packs you full of Urta's seed.  Your orgasm explodes through your hips and your " + player.legs() + " give out underneath you, dropping you down onto the fox-girl as the pair of you cum together.  Whiteness begins squirting out around her shaft as her prick begins softening inside you.  You sigh happily, content but too nerveless to stand for the moment.  Peeking over your shoulder and seeing Urta's satisfied expression, you guess she feels about the same.\n\n", false);
 		
-		outputText("Once the horse-dick inside you has sufficiently softened, you stand up, gasping as a rush of spooge escapes from your " + assholeOrPussy() + " now that the 'plug' is removed.  Urta gives you a cocky grin as she's soaked with her fluids, moments before she starts staggering back to her feet.  She wipes up with her clothes and tosses them into the garbage, then wobbles up to a loose brick in the wall and pulls it free, revealing a hidden compartment filled with sets of replacement clothes.  She removes a tight skirt and sheer top, both a bit more revealing than what she wore in the bar earlier, and hurriedly dresses herself.\n\n", false);
+		outputText("Once the horse-dick inside you has sufficiently softened, you stand up, gasping as a rush of spooge escapes from your " + player.assholeOrPussy() + " now that the 'plug' is removed.  Urta gives you a cocky grin as she's soaked with her fluids, moments before she starts staggering back to her feet.  She wipes up with her clothes and tosses them into the garbage, then wobbles up to a loose brick in the wall and pulls it free, revealing a hidden compartment filled with sets of replacement clothes.  She removes a tight skirt and sheer top, both a bit more revealing than what she wore in the bar earlier, and hurriedly dresses herself.\n\n", false);
 	
 		outputText("Urta blows you a kiss as you put your own gear back together and flounces back to the bar, calling out, \"<i>We should do thish again shoon!</i>\"\n\n", false);
 		

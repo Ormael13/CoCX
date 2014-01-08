@@ -25,17 +25,6 @@
 
 
 
-public function followerHel():Boolean {
-	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) return true;
-	//This is a temporary fix
-	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) return false;
-	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0) return true;
-	return false;
-}
-
-public function fuckBuddyHel():Boolean {
-	return (flags[kFLAGS.HEL_FUCKBUDDY] == 1);
-}
 
 //Introduction Scene -- Helia's Discovery
 //Requirements: 
@@ -94,7 +83,7 @@ public function noDungeon():void {
 	flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] = 1;
 	flags[kFLAGS.HEL_FUCKBUDDY] = 0;
 	flags[kFLAGS.HEL_AFFECTION] = 0;
-	helAffection(-70);
+	helFollower.helAffection(-70);
 	doNext(1);
 }
 
@@ -165,7 +154,7 @@ public function goToHeliaDungeon2():void {
 	outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
 	outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
 	//(NEXT)
-	dungeonLoc = 17
+	dungeonLoc = 17;
 	inDungeon = true;
 	doNext(1);
 }
@@ -236,7 +225,7 @@ public function struggleAtGooBind():void {
 		//(If fail 5 times, go to defeat scene)
 		player.addStatusValue("GooArmorBind",1,1);
 		if(player.statusAffectv1("GooArmorBind") >= 5) {
-			if(monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
+			if(monster.hasStatusAffect("spar") >= 0) valeria.pcWinsValeriaSparDefeat();
 			else gooArmorBeatsUpPC();
 			return;
 		}

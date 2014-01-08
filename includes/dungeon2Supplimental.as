@@ -757,7 +757,7 @@ public function valaGetsSexedPtDuece():void {
 		trace("X IS MOTHERFUCKER: " + x);
 		//(small-to-medium girth dicks) 
 		if(x >= 0) {
-			outputText("Vala's pussy surrounds you like a quivering mouth, but she's simply too used for you to get much friction. The fairy barely even notices, grinding her front against you, tits rubbing your chest like a liquid massage, cream leaking down your torso. She hooks her legs around your " + buttDescript() + " and, using her wings, lifts up before dropping down again. Although she's too loose for your preference, the girl seems to be getting off just fine by using your " + cockDescript(x) + " as a fucking post. You spot the wooden rack to one side of the room and the variety of carved dildos worked into the pegging ladder. A wicked thought crosses your mind, but lacking any other options, you guess you could at least give it a try. Pulling the fairy over to the lacquered bench, you choose one that seems like a likely fit and position your " + assholeOrPussy() + " over the carved cock. When the fairy drops herself onto you next, she forces you down with her, penetrating you on the peg. It proves to be a bit thicker than you realized, however, and you gasp at the weight that settles into your gut. You try to get up and select a smaller peg, but the fairy's jack-hammering flight keeps you rooted on the post. Your " + cockDescript(x) + " swells from the stimulation your ", false);
+			outputText("Vala's pussy surrounds you like a quivering mouth, but she's simply too used for you to get much friction. The fairy barely even notices, grinding her front against you, tits rubbing your chest like a liquid massage, cream leaking down your torso. She hooks her legs around your " + buttDescript() + " and, using her wings, lifts up before dropping down again. Although she's too loose for your preference, the girl seems to be getting off just fine by using your " + cockDescript(x) + " as a fucking post. You spot the wooden rack to one side of the room and the variety of carved dildos worked into the pegging ladder. A wicked thought crosses your mind, but lacking any other options, you guess you could at least give it a try. Pulling the fairy over to the lacquered bench, you choose one that seems like a likely fit and position your " + player.assholeOrPussy() + " over the carved cock. When the fairy drops herself onto you next, she forces you down with her, penetrating you on the peg. It proves to be a bit thicker than you realized, however, and you gasp at the weight that settles into your gut. You try to get up and select a smaller peg, but the fairy's jack-hammering flight keeps you rooted on the post. Your " + cockDescript(x) + " swells from the stimulation your ", false);
 			if(player.hasVagina()) outputText("cunt", false);
 			else outputText("prostate", false);
 			outputText(" is receiving and the fairy's frenzied pace becomes your own. You lift off as quickly as possible just so that her descent will shove the full length of the polished wood back inside your clenching ", false);
@@ -1210,8 +1210,8 @@ public function leftValaAlone():void {
 	var Wake:Number = 0;
 	if(player.gender > 0) Use = 2617;
 	if(player.gender > 0) Wake = 2619;
-	var shouldra:int = 0;
-	if(player.lust >= 33 && followerShouldra()) shouldra = 3669;
+	var shouldra:Function = null;
+	if(player.lust >= 33 && shouldraFollower.followerShouldra()) shouldra = shouldraFollower.shouldraMeetsCorruptVala;
 	simpleChoices("Fix Her",tryToHealVala,"Use",Use,"Wake",Wake,"ShouldraVala",shouldra,"Leave",1);
 }
 
@@ -1474,7 +1474,7 @@ public function chooseValaInBar():void {
 		if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0)
 			addButton(1,"Faeries",faerieOrgyFuck);		
 	}
-	if(flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && followerShouldra())
+	if(flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && shouldraFollower.followerShouldra())
 		addButton(3,"Big You",valaBigYou);
 	addButton(0,"You",cleansedValaRepeatBrainFucking);
 	if(cumBath > 0) 
@@ -1740,7 +1740,7 @@ public function zetazAI():void {
 	var rando:Number=1;
 	//Exgartuan gets to do stuff!
 	if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
-		exgartuanCombatUpdate();
+		exgartuan.exgartuanCombatUpdate();
 		outputText("\n\n", false);
 	}
 	if(monster.hasStatusAffect("Constricted") >= 0) {

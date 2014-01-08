@@ -52,8 +52,8 @@ package classes.Scenes.Areas
 				}
 			}
 			//Hel jumps you for sex.
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			//Every 5th exploration encounters d2 if hasnt been met yet and factory done
@@ -174,8 +174,8 @@ package classes.Scenes.Areas
 				if (temp == 2) chooser = 3;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			//Raise Jojo chances for furrite
@@ -283,14 +283,14 @@ package classes.Scenes.Areas
 						return;
 					}
 					kGAMECLASS.monk = 1;
-					kGAMECLASS.jojoSprite();
+					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your " + player.feet() + " swept out from under you, and land hard on your back.\n\n", false);
 					outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.", false);
 					outputText("\n\n\"<i>I'm sorry, I sensed a great deal of corruption, and thought a demon or monster had come to my woods,</i>\" says the mouse, \"<i>Oh, where are my manners!</i>\"\n\nHe helps you to your feet and introduces himself as Jojo.  Now that you have a good look at him, it is obvious this mouse is some kind of monk, dressed in robes, holy symbols, and draped with prayer beads.\n\nHe smiles knowingly, \"<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>\"", false);
 					outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
 					if (player.gender > 0) {
 						trace("Gender != 0");
-						simpleChoices("Accept", 2003, "Rape Him", kGAMECLASS.jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
+						simpleChoices("Accept", 2003, "Rape Him", kGAMECLASS.jojoScene.jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
 					}
 					else {
 						trace("Gender == 0");
@@ -306,20 +306,20 @@ package classes.Scenes.Areas
 						return;
 					}
 					if (player.hasStatusAffect("infested") >= 0) {
-						kGAMECLASS.jojoSprite();
+						kGAMECLASS.jojoScene.jojoSprite();
 						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 						outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-						if (player.gender > 0) simpleChoices("Purge", 2083, "Meditate", 2003, "Rape", kGAMECLASS.jojoRape, "", 0, "Leave", 13);
+						if (player.gender > 0) simpleChoices("Purge", 2083, "Meditate", 2003, "Rape", kGAMECLASS.jojoScene.jojoRape, "", 0, "Leave", 13);
 						else simpleChoices("Purge", 2083, "Meditate", 2003, "Rape", 0, "", 0, "Leave", 13);
 						return;
 					}
-					kGAMECLASS.jojoSprite();
+					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"", false);
-					if (player.gender > 0) simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", kGAMECLASS.jojoRape, "", 0);
+					if (player.gender > 0) simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", kGAMECLASS.jojoScene.jojoRape, "", 0);
 					else simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", 0, "", 0);
 				}
 				if (kGAMECLASS.monk >= 2) {
-					kGAMECLASS.jojoSprite();
+					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("You are enjoying a peaceful walk through the woods when Jojo drops out of the trees ahead, ", true);
 					if (kGAMECLASS.monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.", false);
 					if (kGAMECLASS.monk == 3) outputText("unsteady on his feet, but looking for a fight!", false);

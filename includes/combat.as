@@ -1,4 +1,5 @@
-﻿import classes.Monster;
+﻿import classes.GlobalFlags.kGAMECLASS;
+import classes.Monster;
 
 import coc.view.MainView;
 
@@ -369,7 +370,7 @@ public function doCombat(eventNum:Number):void
 	}
 			//Monk RAEP
 	if(eventNum == 5023) {
-			jojoRape();
+			jojoScene.jojoRape();
 			cleanupAfterCombat();
 	}
 			//Lose to Jojo
@@ -784,7 +785,7 @@ public function doCombat(eventNum:Number):void
 				outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you. You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest. More and more goo latches onto you - you'll have to fight to get out of this.");
 				player.addStatusValue("GooArmorBind", 1, 1);
 				if (player.statusAffectv1("GooArmorBind") >= 5) {
-					if (monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
+					if (monster.hasStatusAffect("spar") >= 0) valeria.pcWinsValeriaSparDefeat();
 					else gooArmorBeatsUpPC();
 					return;
 				}
@@ -798,7 +799,7 @@ public function doCombat(eventNum:Number):void
 				combatRoundOver();
 				return;
 			} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
-				waitForHolliConstrict(true);
+				(monster as Holli).waitForHolliConstrict(true);
 				return;
 			}
 			else if (player.hasStatusAffect("TentacleBind") >= 0) {
@@ -846,7 +847,7 @@ public function doCombat(eventNum:Number):void
 				(monster as Kitsune).kitsuneStruggle();
 				return;
 			} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
-				struggleOutOfHolli();
+				(monster as Holli).struggleOutOfHolli();
 				return;
 			}
 			else if (monster.hasStatusAffect("QueenBind") >= 0) {
@@ -1058,22 +1059,6 @@ public function doCombat(eventNum:Number):void
 			fantasize();
 			return;
 	}
-	if(eventNum == 5092) {
-			marbleSpecialAttackOne();
-			return;
-	}
-	if(eventNum == 5093) {
-			marbleSpecialAttackTwo();
-			return;
-	}
-	if(eventNum == 5094) {
-			marbleFightWin();
-			return;
-		}
-	if(eventNum == 5095) {
-		marbleFightLose();
-			return;
-		}
 	//Shark special attack
 	if(eventNum == 5097) {
 		sharkTease();
@@ -1114,26 +1099,6 @@ public function doCombat(eventNum:Number):void
 	}
 	if(eventNum == 5124) {
 		superWhisperAttack();
-		return;
-	}
-	if(eventNum == 5138) {
-		sophieKissAttack();
-		return;
-	}
-	if(eventNum == 5139) {
-		sophieHarpyBoatsPC();
-		return;
-	}
-	if(eventNum == 5140) {
-		sophieCompulsionAttack();
-		return;
-	}
-	if(eventNum == 5141) {
-		talonsSophie();
-		return;
-	}
-	if(eventNum == 5142) {
-		batterAttackSophie();
 		return;
 	}
 	if(eventNum == 5143) {
@@ -4370,14 +4335,12 @@ public function hellFire():void {
 		}
 	}
 	outputText("\n", false);
-	if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) lightHolliOnFireMagically();
+	if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) (monster as Holli).lightHolliOnFireMagically();
 	if(monster.HP < 1) {
 		doNext(endHpVictory);
-		return;
 	}
 	else if(monster.lust >= 99) {
 		doNext(endLustVictory);
-		return;
 	}
 	else enemyAI();
 }
@@ -4676,7 +4639,6 @@ public function superWhisperAttack():void {
 	outputText("You reach for your enemy's mind, watching as its sudden fear petrifies your foe.\n\n", false);
 	monster.createStatusAffect("Fear",1,0,0,0);
 	enemyAI();
-	return;
 }
 
 //Attack used:
@@ -4764,7 +4726,7 @@ public function dragonBreath():void {
 		outputText(" (" + damage + ")");
 	}
 	outputText("\n\n");
-	if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) lightHolliOnFireMagically();
+	if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) (monster as Holli).lightHolliOnFireMagically();
 	combatRoundOver();
 }
 
@@ -4842,11 +4804,10 @@ public function fireballuuuuu():void {
 		}
 		outputText("(" + damage + ")\n\n", false);
 		monster.HP -= damage;
-		if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) lightHolliOnFireMagically();
+		if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) (monster as Holli).lightHolliOnFireMagically();
 	}
 	if(monster.HP < 1) {
 		doNext(endHpVictory);
-		return;
 	}
 	else enemyAI();
 }
@@ -4950,7 +4911,6 @@ public function kissAttack():void {
 	monster.lust += Math.round(monster.lustVuln * damage);
 	//Sets up for end of combat, and if not, goes to AI.
 	if(!combatRoundOver()) enemyAI();
-	return;
 }
 public function possess():void {
 	outputText("", true);
@@ -5155,7 +5115,7 @@ public function runAway():void {
 	//FAIL FLEE
 	else {
 		if(monster.short == "Holli") {
-			escapeFailWithHolli();
+			(monster as Holli).escapeFailWithHolli();
 			return;
 		}
 		//Flyers get special failure message.

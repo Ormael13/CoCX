@@ -697,7 +697,7 @@
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusAffect("Exgartuan") >= 0 && game.player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
-				if (game.exgartuanCombatUpdate()) game.outputText("\n\n", false);
+				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
 			}
 			if (hasStatusAffect("Constricted") >= 0) {
 				if (!handleConstricted()) return;
@@ -973,11 +973,10 @@
 			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
 			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
 			if (special1 || special2 || special3){
-				result+=Hehas+"special attacks with magical numbers "+
-						[special1,special2,special3]
+				result+=Hehas+[special1,special2,special3]
 								.filter(function(x:*,index:int,array:Array):Boolean{return x>0})
-								.join(",")
-						+".\n"
+								.length
+						+" special attacks.\n"
 			} else {
 				result+=Hehas+"no special attacks.\n";
 			}

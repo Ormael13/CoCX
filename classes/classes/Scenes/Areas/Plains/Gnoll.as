@@ -232,7 +232,7 @@ package classes.Scenes.Areas.Plains
 			var rando:Number = 1;
 //Exgartuan gets to do stuff!
 			if (player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
-				game.exgartuanCombatUpdate();
+				game.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n", false);
 			}
 			if (hasStatusAffect("Constricted") >= 0) {

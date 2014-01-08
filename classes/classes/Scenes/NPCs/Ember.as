@@ -1,6 +1,5 @@
 package classes.Scenes.NPCs
 {
-	import classes.CoC;
 	import classes.Cock;
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;

@@ -160,7 +160,7 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Jojo
-	else if((player.hasStatusAffect("PureCampJojo") >= 0 || campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
+	else if((player.hasStatusAffect("PureCampJojo") >= 0 || jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
 		//Pure
 		if(player.hasStatusAffect("PureCampJojo") >= 0) {
 			outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
@@ -382,7 +382,7 @@ public function processJackFrostEvent():void {
 	}
 	//Helia
 	//if she ain't a follower and is a lover, just have her visit.
-	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (fuckBuddyHel() || followerHel())) {
+	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (helScene.fuckBuddyHel() || helFollower.followerHel())) {
 		
 		outputText("\"<i>Hey, champ, what's going on here?</i>\"  Helia calls as she sees you approach.  Gentle trails of steam are wafting from the salamander's body as her own internal heat melts any snow that builds up on her.");
 		outputText("\n\nYou greet your salamander lover, telling her you found a way to make it snow on your camp... so you were just planning on having a snow-day play-day on your camp, while it lasts.");
@@ -448,51 +448,50 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Isabella
-	else if(isabellaFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 10) {
+	else if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 10) {
 		outputText("The bovine adventurer Isabella is staring at the snow around her with a sad look on her face, one hand gently raised to catch snowflakes.  She watches them gather in her palm and heaves a huge sigh.  You quietly approach her and ask what's wrong; is she homesick?");
 		outputText("\n\n\"<i>");
-		if(isabellaAccent()) outputText("Da, [name], I am,");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("Da, [name], I am,");
 		else outputText("Yes, [name], I am,");
 		outputText("</i>\" she replies.  ");
-		if(isabellaAccent()) outputText("\"<i>Back home, in mine land, it vould be snowing all over at this time of year, and ve vould be having big vinter festival to celebrate ze ending of old year and coming of new year.  This land, it is so dry and hot...  I had forgotten it, but seeing zis snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Back home, in mine land, it vould be snowing all over at this time of year, and ve vould be having big vinter festival to celebrate ze ending of old year and coming of new year.  This land, it is so dry and hot...  I had forgotten it, but seeing zis snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
 		else outputText("\"<i>Back home, in my old land, it would be snowing all over at this time of year, and we would be having a big winter festival to celebrate the ending of the old year and the coming of the new one.  This land, it's so dry and hot...  I had forgotten it, but seeing this snow makes me remember it and all I have lost by being stuck here.</i>\"  She sighs.");
 
 		outputText("\n\nYes, you agree.  It does bring back memories.  Though you don't know if you've been in this world quite as long as Isabella has.  You chuckle to yourself.  If you were back in your village, you and your family would be gathering for a big feast, playing in the snow, drinking, laughing... all the jolly good stuff.  Still, at least you're not alone here in Mareth.  You look at Isabella with a smile.");
 		
-		if(isabellaAccent()) outputText("\n\n\"<i>So, you are having a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, da, it is good zat ve have found each other and so must not be lonely at zis time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>So, you are having a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, da, it is good zat ve have found each other and so must not be lonely at zis time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
 		else outputText("\n\n\"<i>So, you have a celebration at this time of year too?  How coincidental,</i>\" she muses, but then favors you with a friendly smile.  \"<i>But, yeah, it's good that we have found each other and have each other's company at this time of year.</i>\"  Then she sighs, \"<i>I could use a nice hot cup of yochalot, though.</i>\"");
 		outputText("\n\nYochalot?  You ask in curiosity.");
-		if(isabellaAccent()) outputText("\n\n\"<i>Da, yochalot.  It is very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year, ja?</i>\"");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Da, yochalot.  It is very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year, ja?</i>\"");
 		else outputText("\n\n\"<i>Yep! Yochalot.  It's a very sweet, tasty treat, made from grinding up special bean seeds.  We add powder to warm milk and it is most yummy, mmm...</i>\"  Isabella makes a show of rubbing her hands over her belly with a delighted smile.  \"<i>I would always have a great big mug of hot yochalot at this time of year.</i>\"");
 		outputText("\n\nYochalot... sounds a lot like chocolate...  Still, you'd like to try it sometime.  You tell the cow-girl as much.");
 		
-		if(isabellaAccent()) outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, mein little sweety, but I am having no yochalot on me - I drank ze last of mine some time ago, and I do not think zey have such thing in this vorld any more.  At least, none that has not been tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, mein little sweety, but I am having no yochalot on me - I drank ze last of mine some time ago, and I do not think zey have such thing in this vorld any more.  At least, none that has not been tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
 		else outputText("\n\nAt this, she looks crestfallen.  \"<i>I am sorry, my little sweet, but I don't have any yochalot on me - I drank the last of mine some time ago, and I don't think they have such thing in this world any more.  At least, none that have not been doubtlessly tampered with, like the demons have ruined so many other nice things.</i>\"  She scowls.  \"<i>The only thing I could be offering you is nice, warm milk, fresh from the tap, so to speak.</i>\"  She pats her hefty quad-nippled boobs to make it clear where the milk would come from.");
 		
 		outputText("\n\nPity, but then again, Isabella's milk is pretty tasty.  You confess you're feeling at least a bit chilly, so, you ask the cow-girl if she wouldn't mind warming you up with some of her sweet-tasting milk?");
 		
-		if(isabellaAccent()) outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, mein sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I vill give you all ze milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you are wanting to drink mein milk, zen you are not needing zis subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, mein sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I vill give you all ze milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you are wanting to drink mein milk, zen you are not needing zis subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
 		else outputText("\n\nIsabella looks surprised, and then grins mischievously.  \"<i>Okay then, sweet,</i>\" she says, calmly exposing her breasts.  \"<i>I will give you all the milk you could want,</i>\" she adds, then suddenly lunges for you, grabbing your head and pulling you into a headlock that, not so coincidentally, mashes your face against her naked boobs.  \"<i>Naughty, cheeky [name]!  If you want to drink my milk, then you don't need this subterfuge to get me in the mood,</i>\" she chortles good-naturedly as she finishes, her homesickness evidently forgotten with the diversion you've presented her.");
 
 		outputText("\n\nSeeing as you're already so conveniently positioned, you waste no time in opening your mouth and taking her four nipples into your mouth, suckling in earnest, as the cow-girl's tasty milk fills your mouth and belly.  You momentarily stop your nursing to lick a stray drop of milk that has escaped your mouth, smiling to Isabella, you tell her that her milk truly hits the spot.  You can already feel yourself getting warmer.");
 		
-		if(isabellaAccent()) outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you vere not vanting mein milk, you vere wanting to be cheering me up, da?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you vere not vanting mein milk, you vere wanting to be cheering me up, da?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
 		else outputText("\n\nIsabella smiles and cuddles you against her bosom.  \"<i>Be honest; you weren't wanting my milk, you wanted to cheer me up, huh?</i>\" she laughs.  Busted!  You laugh yourself, though your plan seems to have worked pretty well, and you're not complaining about the bellyful of tasty milk you've gotten either.  You burp sheepishly, for emphasis.");
 		
-		if(isabellaAccent()) outputText("\n\n\"<i>You are just ze sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Vell, if you are liking mein milk so much, perhaps you should have some more, da?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>You are just ze sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Vell, if you are liking mein milk so much, perhaps you should have some more, da?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
 		else outputText("\n\n\"<i>You are just the sweetest little thing, aren't you, [name]?</i>\"  Isabella laughs, her breasts jiggling heavily from the force.  \"<i>Well, if you are liking my milk so much, perhaps you should have some more, yeah?</i>\"  She grins, gently lifting one breast with a free hand to better offer it to you.");
 		
 		outputText("\n\nSounds like a plan, you tell the cow-girl.  You take the offered tit in your hands and proceed to bury yourself into the pillowy mound, latching onto her nipples and draining them of all its contents as fast as you can without choking.");
 		
-		if(isabellaAccent()) outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Da, zat ist good, [name].  I love to empty zese big boobs of mine, but I am loving you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
+		if(isabellaFollowerScene.isabellaAccent()) outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Da, zat ist good, [name].  I love to empty zese big boobs of mine, but I am loving you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
 		else outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Yeah, that's good, [name].  I love to empty these big boobs of mine, but I think I love you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 11;
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
-		return;
 	}
 	//Kiha
-	else if(followerKiha() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 11) {
+	else if(kihaFollower.followerKiha() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 11) {
 		outputText("\"<i>Ah-ah-ahchoo!</i>\"");
 		outputText("\n\n\"<i>Bless you,</i>\" you say to Kiha as you approach the dragon-girl.");
 		outputText("\n\nKiha sniffles and wipes her nose on her arm when she sees you.  \"<i>[name], what is this weird white stuff?  It's cold and wet and - achoo!</i>\"  She sneezes again, spraying a gout of flame across the camp.  \"<i>And the flakes keep flying up my nose,</i>\" she snuffles.");
@@ -511,7 +510,6 @@ public function processJackFrostEvent():void {
 		menu();
 		if(player.hasCock() && player.cockThatFits(67) >= 0) addButton(0,"Fuck Her",kihaXmasFuck);
 		addButton(1,"Finger Her",kihaXmasFingering);
-		return;
 	}
 	//Feast time! Just a collection of words on the pleasant day...
 	else {
@@ -538,7 +536,6 @@ public function processJackFrostEvent():void {
 		fatigue(-100);
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 		doNext(16);
-		return;
 	}
 }
 

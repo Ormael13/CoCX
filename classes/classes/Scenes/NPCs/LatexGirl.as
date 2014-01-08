@@ -1,4 +1,19 @@
-﻿//const GOO_TFED_MEAN:int = 654;
+﻿package classes.Scenes.NPCs{
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.BaseContent;
+	import classes.Appearance;
+	import classes.CockTypesEnum;
+
+	public class LatexGirl extends NPCAwareContent
+	{
+
+		public function LatexGirl()
+		{
+		}
+
+//const GOO_TFED_MEAN:int = 654;
 //const GOO_TFED_NICE:int = 655;
 //const GOO_NAME:int = 656;
 //const GOO_SLAVE_RECRUITED:int = 657;
@@ -90,18 +105,18 @@ public function gooObedience(arg:Number = 0, output:Boolean = true):Number {
 	}
 	return flags[kFLAGS.GOO_OBEDIENCE];
 }
-public function gooTits():String {
+private function gooTits():String {
 	return npcBreastDescript(gooTitSize());
 }
-public function gooCock():String {
+private function gooCock():String {
 	return NPCCockDescript(flags[kFLAGS.GOO_DICK_TYPE],flags[kFLAGS.GOO_DICK_LENGTH]);
 }
-public function latexGooFollower():Boolean {
-	if(flags[kFLAGS.GOO_SLAVE_RECRUITED] > 0) return true;
-	return false;
+public override function latexGooFollower():Boolean {
+	return flags[kFLAGS.GOO_SLAVE_RECRUITED] > 0;
+
 }
 
-public function gooTitSize():Number {
+private function gooTitSize():Number {
 	//If tits are lowered
 	if(flags[kFLAGS.GOO_FLUID_AMOUNT]/2 >= flags[kFLAGS.GOO_PREFERRED_TIT_SIZE] && flags[kFLAGS.GOO_PREFERRED_TIT_SIZE] > 0) 
 		return flags[kFLAGS.GOO_PREFERRED_TIT_SIZE];
@@ -163,7 +178,7 @@ public function meanGooGirlRecruitment():void {
 
 //Goo -> Latex Aftermath:
 //PC Carried Her Back:
-public function PCCarriedGooBackHome():void {
+private function PCCarriedGooBackHome():void {
 	clearOutput();
 	outputText("You set the once-goo down in a secluded section of your camp");
 	if(camp.companionsCount() > 0) outputText(", away from prying eyes");
@@ -184,7 +199,7 @@ public function PCCarriedGooBackHome():void {
 	menu();
 	addButton(0,"Next",PCCarriedGooBackHomeII);
 }
-public function PCCarriedGooBackHomeII():void {
+private function PCCarriedGooBackHomeII():void {
 	clearOutput();
 	outputText("\"<i>Call me what you want, my name doesn't matter.</i>\"");
 	outputText("\n\nWhat will you name her?");
@@ -196,9 +211,9 @@ public function PCCarriedGooBackHomeII():void {
 	mainView.nameBox.x = mainView.mainText.x + 5;
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
-public function nameZeLatexGoo():void 
+private function nameZeLatexGoo():void 
 {
-	if (this.testingBlockExiting)
+	if (kGAMECLASS.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go
@@ -293,7 +308,7 @@ public function encounterLeftBehindGooSlave():void {
 	menu();
 	addButton(0,"Next",encounterLeftBehindGooSlaveII);
 }
-public function encounterLeftBehindGooSlaveII():void {
+private function encounterLeftBehindGooSlaveII():void {
 	clearOutput();
 	outputText("\"<i>Call me what you want, my name doesn't matter.</i>\"");
 	outputText("\n\nWhat will you name her?");
@@ -330,13 +345,13 @@ public function pureGooRecruitmentStart():void {
 	addButton(4,"Leave Her",leaveTheLatexGooGirl);
 }
 //Leave Her(F)
-public function leaveTheLatexGooGirl():void {
+private function leaveTheLatexGooGirl():void {
 	clearOutput();
 	outputText("You don't have the time to deal with this... thing.  You put the girl down on the shore and head on back to camp.  Hopefully, whatever finds her won't be TOO horrible.");
 	doNext(13);
 }
 //Take her Home(F)
-public function niceGuysTakeLatexHome():void {
+private function niceGuysTakeLatexHome():void {
 	clearOutput();
 	//{Intelligent:}
 	if(player.inte >= 60) {
@@ -367,7 +382,7 @@ public function niceGuysTakeLatexHome():void {
 	addButton(0,"Next",pureGooGalRecruitAftermath);
 }
 //PURE Aftermath(F)
-public function pureGooGalRecruitAftermath():void {
+private function pureGooGalRecruitAftermath():void {
 	clearOutput();
 	outputText("You set the once-goo down in a secluded section of your camp.  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
 	if(player.cockTotal() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your " + multiCockDescriptLight() + " with her juices.");
@@ -382,7 +397,7 @@ public function pureGooGalRecruitAftermath():void {
 	menu();
 	addButton(0,"Next",pureGooGalRecruitAftermathII);
 }
-public function pureGooGalRecruitAftermathII():void {
+private function pureGooGalRecruitAftermathII():void {
 	clearOutput();
 	outputText("\"<i>Call me what you want, my name doesn't matter.</i>\"");
 	outputText("\n\nWhat will you name her?");
@@ -397,7 +412,7 @@ public function pureGooGalRecruitAftermathII():void {
 }
 
 //After Naming Latexy(F):
-public function nameZeLatexGooNice():void {
+private function nameZeLatexGooNice():void {
 	if(mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
@@ -442,7 +457,7 @@ public function nameZeLatexGooNice():void {
 	addButton(1,"Boot Her", bootOutNiceGoo);
 }
 //Boot her Out(F):
-public function bootOutNiceGoo():void {
+private function bootOutNiceGoo():void {
 	clearOutput();
 	outputText("You did your civic duty bringing her back with you, but taking care of her in the long term... that's asking too much.  \"<i>I understand,</i>\" she says, bowing her head sadly as she struggles unsteadily to her feet.  \"<i>It's all right.  You've done more than enough, really.  I'll go.  Hopefully some of my sisters in the lake will be willing to help me, even if I'm so... so different... from them, now.  Goodbye, my friend.  Maybe we'll meet again sometime.</i>\"");
 	outputText("\n\nShe's gone a moment later, waving over her shoulder as she unsteadily walks back toward the lake.");
@@ -451,7 +466,7 @@ public function bootOutNiceGoo():void {
 }
 
 //Keep Her(F):
-public function niceGuysKeepTheirGooGals():void {
+private function niceGuysKeepTheirGooGals():void {
 	clearOutput();
 	outputText("You take her by the chin, tilting her head up to look at you.  Of course you'll help her.  How could you not?  Overjoyed by your answer, " + flags[kFLAGS.GOO_NAME] + " throws her slender arms around you, pulling herself up so that her slick black lips press against yours.  \"<i>Oh, thank you! Thank you!</i>\" she cries, kissing you again.  Suddenly realizing what she's done, though, the latex-girl releases you and slips back against her rock, looking abashedly away.  \"<i>I'm sorry, I just...  Thank you.  I'm not going to just be a burden on you, I promise!  I don't know how much I can do, but so long as I'm here...  Just ask, for anything, and I promise I'll do my best.  It's the least I can do to pay you back for being so kind to me.</i>\"");
 	outputText("\n\nYou smile, telling that seeing her safe and sound will be payment enough.  Speaking of which, what exactly is she going to need -- what can you do to help her now?  \"<i>All I used to need to survive was liquid, but... not that much.  Not any more,</i>\" " + flags[kFLAGS.GOO_NAME] + " says.  \"<i>I can already tell that I'm not losing it like I used to... but I still hunger for... well, juices.  I can probably live on water, but I won't be healthy that way.  I'll need you to, well, uh... feed me");
@@ -567,7 +582,7 @@ public function approachLatexy():void {
 	addButton(4,"Dick Options",changeGooDick);
 }
 
-public function useLatexy():void {
+private function useLatexy():void {
 	clearOutput();
 	outputText("How will you use your pet?");
 	menu();
@@ -581,7 +596,7 @@ public function useLatexy():void {
 }
 
 //Setting Dick Type(F)
-public function changeGooDick():void {
+private function changeGooDick():void {
 	clearOutput();
 	//Supah High obedience slut!
 	if(gooObedience() >= 60) {
@@ -634,7 +649,7 @@ public function changeGooDick():void {
 	addButton(9,"Back",approachLatexy);
 }
 	
-public function latexyEatsADickItem(item:String = ""):void {
+private function latexyEatsADickItem(item:String = ""):void {
 	consumeItem(item,1);
 	clearOutput();
 	outputText(flags[kFLAGS.GOO_NAME] + " uses your proffered item without a second though.  Surprisingly she doesn't seem to react in any way, aside from closing her eyes and taking on a look of incredible concentration.  ");
@@ -680,7 +695,7 @@ public function latexyEatsADickItem(item:String = ""):void {
 	addButton(0,"Next",approachLatexy);
 }
 //Setting Preferred Bust Size(F)
-public function setLatexysBustSize():void {
+private function setLatexysBustSize():void {
 	clearOutput();
 	outputText("You ask " + flags[kFLAGS.GOO_NAME] + " if she wouldn't mind keeping her tits around a certain size.");
 	//Low Obedience
@@ -708,7 +723,7 @@ public function setLatexysBustSize():void {
 	if(flags[kFLAGS.GOO_PREFERRED_TIT_SIZE] != 0) addButton(7,"Whatever",changeLatexyTits,0);
 	addButton(9,"Back",approachLatexy);
 }
-public function gooTitClass(arg:int):int {
+private function gooTitClass(arg:int):int {
 	if(arg >= 35) return 7;
 	else if(arg >= 24) return 6;
 	else if(arg >= 15) return 5;
@@ -720,7 +735,7 @@ public function gooTitClass(arg:int):int {
 
 
 //She Changes Her Bust Size(F)
-public function changeLatexyTits(arg:int = 0):void {
+private function changeLatexyTits(arg:int = 0):void {
 	clearOutput();
 	//PC wants tits bigger than current preferred and fluid not sufficient to reach new size
 	if(gooTitClass(arg) > gooTitClass(flags[kFLAGS.GOO_PREFERRED_TIT_SIZE]) && gooTitClass(flags[kFLAGS.GOO_FLUID_AMOUNT]/2) < gooTitClass(arg)) {
@@ -788,7 +803,7 @@ public function changeLatexyTits(arg:int = 0):void {
 //Can be fed directly or indirectly.  
 //Direct feeding boosts happiness a fair bit but reduces obedience until obedience is over 50.
 //Indirect feeding increases happiness somewhat.
-public function feedLatexy():void {
+private function feedLatexy():void {
 	clearOutput();
 	outputText("How will you feed her?");
 	if(player.lust < 33 && player.gender > 0) outputText("  You aren't aroused enough to try and feed her any sexual fluids.");
@@ -809,7 +824,7 @@ public function feedLatexy():void {
 }
 
 //Feed Cum Indirectly(F)
-public function feedLatexyCumIndirectly():void {
+private function feedLatexyCumIndirectly():void {
 	clearOutput();
 	//{1st Time, any indirect scene:  
 	if(flags[kFLAGS.GOO_INDIRECT_FED] == 0) {
@@ -861,7 +876,7 @@ public function feedLatexyCumIndirectly():void {
 	doNext(13);
 }
 //Feed Lady-Cum Indirectly(F)
-public function feedLatexyGirlCumIndirectly():void {
+private function feedLatexyGirlCumIndirectly():void {
 	clearOutput();
 	//{1st Time, any indirect scene:  
 	if(flags[kFLAGS.GOO_INDIRECT_FED] == 0) {
@@ -904,7 +919,7 @@ public function feedLatexyGirlCumIndirectly():void {
 	doNext(13);
 }
 //Feed Her Minotaur Cum {Nice Vs Hard}:(F)
-public function minotaurCumFeedingGoo(nice:Boolean = false):void {
+private function minotaurCumFeedingGoo(nice:Boolean = false):void {
 	clearOutput();
 	consumeItem("MinoCum",1);
 	outputText("You pull a vial of minotaur cum from the pouches at your waist");
@@ -974,7 +989,7 @@ public function minotaurCumFeedingGoo(nice:Boolean = false):void {
 }
 
 //Feed Cum Directly(F)
-public function feedLatexyCumDirectly():void {
+private function feedLatexyCumDirectly():void {
 	clearOutput();
 	outputText("Opening your [armor], you let [eachCock] flop free.  " + flags[kFLAGS.GOO_NAME] + " looks down immediately, " + flags[kFLAGS.GOO_EYES] + " eyes locking tightly to [oneCock], raptly watching it stiffen with rising lust.  You take it in hand to heft its weight.  Explaining that this is to be her meal, you give it an encouraging shake.  After all, what kind of master would you be if you didn't feed your goo-girl?");
 	//HUNGRY: 
@@ -1049,7 +1064,7 @@ public function feedLatexyCumDirectly():void {
 	}
 }
 
-public function maleDirectFeedLatexGooGoneWrong():void {
+private function maleDirectFeedLatexGooGoneWrong():void {
 	clearOutput();
 	if(player.cockTotal() > 1) {
 		outputText("A flawless hand wraps around ");
@@ -1088,7 +1103,7 @@ public function maleDirectFeedLatexGooGoneWrong():void {
 	addButton(0,"Next",feedCumDirectEpilogue);
 }
 //[Next]
-public function feedCumDirectEpilogue():void {
+private function feedCumDirectEpilogue():void {
 	clearOutput();
 	outputText("You wake with your mouth so dry that it feels like sandpaper.  Looking around, you see " + flags[kFLAGS.GOO_NAME] + " slumbering in the corner, looking rather... full and fecund, plump with weight.  You feel equally, obnoxiously empty.  Your groin is tingling painfully from the forceful draining.  Staggering away toward some water, you realize you'll have to raise her obedience if you want her to stop on command.  Letting her drink so deeply probably didn't help either.");
 	temp = 50
@@ -1101,7 +1116,7 @@ public function feedCumDirectEpilogue():void {
 	doNext(15);
 }
 //Feed Lady-Cum Direct(F)
-public function feedLatexyGirlCumDirect():void {
+private function feedLatexyGirlCumDirect():void {
 	clearOutput();
 	outputText("Gently shimmying out of your [armor], you languidly stretch and offhandedly mention that it's feeding time.");
 	if(player.hasCock()) {
@@ -1178,7 +1193,7 @@ public function feedLatexyGirlCumDirect():void {
 	}
 }
 
-public function letLatexGooDrainCuntDry():void {
+private function letLatexGooDrainCuntDry():void {
 	clearOutput();
 	outputText(flags[kFLAGS.GOO_NAME] + "'s face remains firmly, stubbornly attached to your loins.  No matter how you writhe or push against her, she stays latched onto your [vagina].  The near supernatural pleasure has turned your arms to jello, and you slump back ineffectually after a few attempts at freedom.  The " + flags[kFLAGS.GOO_EYES] + " of your hungry pet's eyes watches you, unblinking.  Mercilessly, she tongues your sodden slit to another orgasm.  The slippery latex lips slip and slide across your womanhood as sexual ecstasy subsumes your thoughts, eyes rolling back as your mind dedicates the whole of its power to simply experiencing the pleasure that's thrust upon you.");
 	outputText("\n\nWordlessly, you writhe on " + flags[kFLAGS.GOO_NAME] + " until the orgasm finally releases you from its grip.  Your pet goo pulls back, even withdrawing her tongue from your well-juiced box.  Her fist doesn't waste any time in replacing in.  In fact, as the smooth limb slides home, you can feel the bulkiest parts smoothing, shaping it into a cylindrical object with a noticeable ridge just above the 'wrist'.  " + flags[kFLAGS.GOO_NAME] + " giggles, \"<i>Gosh, you taste good, and we goo girls... we love to drink.  Mmm...</i>\"  Her voice trails into a hum of delight as she digests your newest offering, eventually returning to say, \"<i>Your little slit here seems awful happy, [name]... I don't want to stop, and it's so sweet, so delectable...  Swallowing your cum makes my pussy gush and my stomach purr.  You don't mind if I sample a few more swallows do you?</i>\"");
@@ -1193,7 +1208,7 @@ public function letLatexGooDrainCuntDry():void {
 }
 
 //[Next]
-public function feedCumDirectEpilogueGirls():void {
+private function feedCumDirectEpilogueGirls():void {
 	clearOutput();
 	outputText("You wake with your mouth so dry that it feels like sandpaper.  Looking around, you see " + flags[kFLAGS.GOO_NAME] + " slumbering in the corner, looking rather... full and fecund, plump with weight.  You feel equally, obnoxiously empty.  Your groin is tingling painfully from the forceful suckling.  Staggering away toward some water, you realize you'll have to raise her obedience if you want her to stop on command.  Letting her drink so deeply probably didn't help either.");
 	gooFluid(50 + player.wetness() * 8);
@@ -1206,7 +1221,7 @@ public function feedCumDirectEpilogueGirls():void {
 /*Savin Says: Disobedient Pets get Punished with Gentle Loving PC-Dom (FEMALE)(F)*/
 
 //[Display option to \"<i>Assert Control</i>\" with Moderate strength check if achieve Femdom end to direct feed scene: \"<i>You're strong enough to pull her off before she utterly dominates you!</i>\"]
-public function assertControlOverCuntDrainingLatexGoo():void {
+private function assertControlOverCuntDrainingLatexGoo():void {
 	if(player.str < 40 || player.str/10 + rand(20) + 1 < 9) {
 		letLatexGooDrainCuntDry();
 		return;
@@ -1240,7 +1255,7 @@ public function assertControlOverCuntDrainingLatexGoo():void {
 
 //Savin Says: Disobedient Pets get Punished with Gentle Loving PC-Dom (MALE)
 //[Display option to \"<i>Assert Control</i>\" with Moderate strength check if achieve Femdom end to direct feed scene: \"<i>You're strong enough to pull her off before she utterly dominates you!</i>\"]
-public function tryToAssertMaleDomWhileLatexGooDrains():void {
+private function tryToAssertMaleDomWhileLatexGooDrains():void {
 	if(player.str < 40 || player.str/10 + rand(20) + 1 < 9) {
 		maleDirectFeedLatexGooGoneWrong();
 		return;
@@ -1277,7 +1292,7 @@ public function tryToAssertMaleDomWhileLatexGooDrains():void {
 //Dominant Fucking Her(F)
 //Requires obedience of 60+
 //Female Dominant Fuck (Goo No Futa)(F)
-public function femalePCDomFucksLatexGoo():void {
+private function femalePCDomFucksLatexGoo():void {
 	clearOutput();
 	outputText("You start to undress, remarking to " + flags[kFLAGS.GOO_NAME] + " that you've got an itch she'd be great at scratching.  As if your language wasn't clear enough, you ");
 	if(player.balls > 0) outputText("lift your [sack] out of the way to ");
@@ -1346,7 +1361,7 @@ public function femalePCDomFucksLatexGoo():void {
 	doNext(13);
 }
 //Female Dominant Fuck (Goo IS Futa)(F)
-public function femalePCDomFucksLatexGooFuta():void {
+private function femalePCDomFucksLatexGooFuta():void {
 	clearOutput();
 	outputText("You begin to remove your [armor] under " + flags[kFLAGS.GOO_NAME] + "'s curious eye.  She asks, \"<i>[name], what are you doing?</i>\"");
 	outputText("\n\nWith a salacious wiggle of your [hips], you tell her that you're going to fuck her - to ride her shining pole to orgasm after orgasm.  " + flags[kFLAGS.GOO_NAME] + "'s " + gooCock() + " immediately stiffens, hard and proud.  ");
@@ -1446,7 +1461,7 @@ public function femalePCDomFucksLatexGooFuta():void {
 }
 
 //Male Dominant Fuck(F)
-public function malePCDomFucksLatexGoo():void {
+private function malePCDomFucksLatexGoo():void {
 	clearOutput();
 	outputText("You open your [armor] to expose your " + multiCockDescriptLight() + " to your latex-based lover.  She eyes it with unabashed affection and licks her lips unthinkingly, already tasting the flavor of semen on her tongue.  " + flags[kFLAGS.GOO_NAME] + " jolts out of her reverie to ask, \"<i>What are you doing");
 	if(gooObedience() > 50) outputText(", [Master]");
@@ -1481,19 +1496,19 @@ public function malePCDomFucksLatexGoo():void {
 	outputText(", you grab her by the head and pull her forward.  She gets the idea and spreads her mouth into a wide 'O', just in time for [oneCock] to pop inside, sliding through the onyx opening with an accompanying groan of delight from your throat.  Your lover's gooey neck allows you to enter it, ");
 	if(player.biggestCockArea() < 80) outputText("easily encompassing your erection");
 	else outputText("gleefully stretching into a mold of your erection as it passes into her core");
-	outputText(".  Past her mouth, her insides become far less solid.  It feels like a mass of warm goo that deep inside her, and combined with the feel of her slippery tongue caressing the underside of your " + cockDescript(x) + ", you feel like you're in heaven.");
+	outputText(".  Past her mouth, her insides become far less solid.  It feels like a mass of warm goo that deep inside her, and combined with the feel of her slippery tongue caressing the underside of your " + cockDescript(0) + ", you feel like you're in heaven.");
 	if(player.cockTotal() > 1) {
 		outputText("  It gets even better when she grabs your remaining member");
 		if(player.cockTotal() > 2) outputText("s");
 		outputText(" and starts to pump with sure strokes.");
 	}
-	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + "'s vibrant " + flags[kFLAGS.GOO_EYES] + " eyes look up at you as her cheeks hollow to provide suction.  You groan again, this time slowly pulling her head back.  As she withdraws, her slick black spit drips from your dick, though much of it gradually hardens into a reflective sheath for your tool.  You draw her off until only your " + cockHead(x) + " remains inside that suckling pleasure-hole.  Then, you slam her down, fucking her mouth");
+	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + "'s vibrant " + flags[kFLAGS.GOO_EYES] + " eyes look up at you as her cheeks hollow to provide suction.  You groan again, this time slowly pulling her head back.  As she withdraws, her slick black spit drips from your dick, though much of it gradually hardens into a reflective sheath for your tool.  You draw her off until only your " + cockHead(0) + " remains inside that suckling pleasure-hole.  Then, you slam her down, fucking her mouth");
 	if(player.biggestCockArea() >= 10 && player.biggestCockArea() < 50) outputText(" and throat");
 	else if(player.biggestCockArea() >= 50) outputText(", throat, and body");
 	outputText(" with quick strokes.  Faster and faster you bounce her on your loins");
 	if(player.biggestCockArea() >= 80) outputText(", amazed that she can take so much so easily");
 	outputText(".  Best of all, her eyes never stop looking up at you, imploring you to cum, to release and stuff her face with spunk.");
-	outputText("\n\nWith her looking at you like that, fuck... you're cumming!  You pull her lips tight into your abdominal " + player.skinFurScales() + " and release the boiling bliss within you.  Your jizz jumps out of you in thick ropes, as if it was seeking to escape all this time and just now found freedom.  " + flags[kFLAGS.GOO_NAME] + " smiles around your " + cockDescript(x) + " as it pumps its virile goo down her throat, and she grabs hold of your [butt] to press herself against you harder.");
+	outputText("\n\nWith her looking at you like that, fuck... you're cumming!  You pull her lips tight into your abdominal " + player.skinFurScales() + " and release the boiling bliss within you.  Your jizz jumps out of you in thick ropes, as if it was seeking to escape all this time and just now found freedom.  " + flags[kFLAGS.GOO_NAME] + " smiles around your " + cockDescript(0) + " as it pumps its virile goo down her throat, and she grabs hold of your [butt] to press herself against you harder.");
 	if(player.cumQ() >= 500) outputText("  Squirts of spooge run out of her nostrils after a particularly potent blast, but " + flags[kFLAGS.GOO_NAME] + " doesn't mind or even break her gaze.");
 	if(player.cumQ() >= 1000) outputText("  Your copious spunk rounds her belly, but most of that liquid weight transfers to her tits, hips, and ass in moments.");
 	if(player.cumQ() >= 4000) outputText("  That isn't enough to keep up with your potency.  A moment later, the corners of her mouth begin to ooze alabaster, squirting out with each pulse.  Poor girl.");
@@ -1507,22 +1522,22 @@ public function malePCDomFucksLatexGoo():void {
 	if(player.balls > 0) outputText("balls");
 	else outputText("cock");
 	outputText(".  She whines, but wiggles back in your direction, staying locked on her target in spite of the punishment.  An ebony slit, so warm and wet that it feels like it's blowing steam onto your erection, closes the few inches of separating air.");
-	outputText("\n\nThe teases have the desired effect on you, and you yank her down on your " + cockDescript(x) + ".  Like her mouth and throat, her cunt quickly goes gooey once you get past her feminine lips.  Inside, she feels like a combination of warm gelatin and vagina, having all the flexibility and yielding nature of the former combined with the exquisitely textured interior of the latter.  The sensuous, smooth surface of " + flags[kFLAGS.GOO_NAME] + "'s ass rubs over your [hips] as her cunt swallows the entirety of your prick.  Tendrils of inescapable excitement worm their way up your spine, fed by your stiff manhood's orgasm-induced sensitivity.  They send you into what can only be described as a sexual frenzy.");
-	outputText("\n\nYou grab " + flags[kFLAGS.GOO_NAME] + "'s hair and pull in between strokes, forcing her to arch her back and display her body in a more pleasing manner.  Smack, smack, smack...  Your [hips] clap against her, growing faster with every moment.  Your hapless fuck-partner whines from pain and excitement, gushing black wetness across your [legs] as she cums.   You spank her rounded bottom again, and as the ripples of your vibration massage your " + cockDescript(x) + ", you cum again.  Her slick snatch greedily devours the first few spurts your body can offer up.  It even massages your length from root to " + cockHead(x) + " to coax out more.");
+	outputText("\n\nThe teases have the desired effect on you, and you yank her down on your " + cockDescript(0) + ".  Like her mouth and throat, her cunt quickly goes gooey once you get past her feminine lips.  Inside, she feels like a combination of warm gelatin and vagina, having all the flexibility and yielding nature of the former combined with the exquisitely textured interior of the latter.  The sensuous, smooth surface of " + flags[kFLAGS.GOO_NAME] + "'s ass rubs over your [hips] as her cunt swallows the entirety of your prick.  Tendrils of inescapable excitement worm their way up your spine, fed by your stiff manhood's orgasm-induced sensitivity.  They send you into what can only be described as a sexual frenzy.");
+	outputText("\n\nYou grab " + flags[kFLAGS.GOO_NAME] + "'s hair and pull in between strokes, forcing her to arch her back and display her body in a more pleasing manner.  Smack, smack, smack...  Your [hips] clap against her, growing faster with every moment.  Your hapless fuck-partner whines from pain and excitement, gushing black wetness across your [legs] as she cums.   You spank her rounded bottom again, and as the ripples of your vibration massage your " + cockDescript(0) + ", you cum again.  Her slick snatch greedily devours the first few spurts your body can offer up.  It even massages your length from root to " + cockHead(0) + " to coax out more.");
 	if(player.cumQ() >= 1000) outputText("  This quickly bloats her into a pregnant-looking state, and after her last injection, she has nowhere to metabolize it all.");
 	if(player.cumQ() >= 2000) outputText("  You keep going until a torrent of alabaster seed is running out of her cunt around your cock.  Glorious.");
 	if(flags[kFLAGS.GOO_DICK_LENGTH] > 0) outputText("  The " + gooCock() + " below noisily fires inky loads into the dirt, where it's quickly absorbed.");
 	
-	outputText("\n\nStaggering back, you rest against a boulder.  In the process, your " + cockDescript(x) + " exits " + flags[kFLAGS.GOO_NAME] + "'s swelteringly sticky slit.  Webs of glittering black lube dangle from your tip to her entrance, mixed with spermy strands of semen.  Transfixed, you watch them break, one by one snapping back to the closest set of genitals.  A bubbly voice cheers, \"<i>That's number two!");
+	outputText("\n\nStaggering back, you rest against a boulder.  In the process, your " + cockDescript(0) + " exits " + flags[kFLAGS.GOO_NAME] + "'s swelteringly sticky slit.  Webs of glittering black lube dangle from your tip to her entrance, mixed with spermy strands of semen.  Transfixed, you watch them break, one by one snapping back to the closest set of genitals.  A bubbly voice cheers, \"<i>That's number two!");
 	if(player.cumQ() >= 1000) outputText("  And so messy!  I don't know if I can hold any more!");
 	outputText("</i>\"  A hand that appears to be wearing a latex glove smears the juices that hang from " + flags[kFLAGS.GOO_NAME] + "'s mound up and through her crack, coating her asshole with your leftover sperm.");
 	outputText("\n\nYou're breathing hard and more than a little exhausted from cumming back to back.  Still, there's a bubbly latex butt just a few feet away, bouncing back and forth hypnotically.  You did say you were going to cream all three holes, didn't you?");
 	outputText("\n\n\"<i>Come on, [Master],</i>\" " + flags[kFLAGS.GOO_NAME] + " cheers, \"<i>I'm all ready for your cock... just put it in and I'll take all the cum you've got.</i>\"");
-	outputText("\n\nLike hell!  You stagger up from your impromptu brace and grab hold of your sensuous slut once again, this time lining up with her asshole.  You're in charge here, and by gods, you're going to outfuck her!  You spank her bottom on the cheek you've ignored up to now, setting it bouncing.  Before the waves of enticing jiggles can settle, you lurch your [hips] forward and stuff your " + cockDescript(x) + " straight into the crinkled latex asshole.  The ebony pucker stretches obscenely around your girth, much tighter than the other two holes you've plumbed today.  Inch after inch of semi-turgid dick-flesh passes into the goo-woman's anus, but not without some difficulty.");
-	outputText("\n\nOnce fully inside, her tight sphincter clamps on your " + cockDescript(x) + " like a cock-ring, trapping the blood inside so that it gets harder and harder.  Your erection has no trouble returning to full mast with her anal aid, and with freshened lust, you begin to bounce that sable booty on your manhood.  Beyond the tight circle, the familiar, pliant goo you've come to love begins to massage you with liquid pressure.  Waves of force roll all along your length, lapping at it like a dozen tongues, all while you're kept super-hard by her entrance.");
+	outputText("\n\nLike hell!  You stagger up from your impromptu brace and grab hold of your sensuous slut once again, this time lining up with her asshole.  You're in charge here, and by gods, you're going to outfuck her!  You spank her bottom on the cheek you've ignored up to now, setting it bouncing.  Before the waves of enticing jiggles can settle, you lurch your [hips] forward and stuff your " + cockDescript(0) + " straight into the crinkled latex asshole.  The ebony pucker stretches obscenely around your girth, much tighter than the other two holes you've plumbed today.  Inch after inch of semi-turgid dick-flesh passes into the goo-woman's anus, but not without some difficulty.");
+	outputText("\n\nOnce fully inside, her tight sphincter clamps on your " + cockDescript(0) + " like a cock-ring, trapping the blood inside so that it gets harder and harder.  Your erection has no trouble returning to full mast with her anal aid, and with freshened lust, you begin to bounce that sable booty on your manhood.  Beyond the tight circle, the familiar, pliant goo you've come to love begins to massage you with liquid pressure.  Waves of force roll all along your length, lapping at it like a dozen tongues, all while you're kept super-hard by her entrance.");
 	outputText("\n\nAgain and again, you claim your prize's anal star.  Your hips seem to go on autopilot, plumbing that black butthole with rough passion.  Squirts of gooey ink and leftover, smeared spunk dribble out as you fuck her, and you grab hold of her " + gooTits() + ", as if a handhold would help you wrangle the unruly pleasure any better.  " + flags[kFLAGS.GOO_NAME] + " moans, \"<i>Oh, [name]!  Fuck my ass!  Spank me and abuse me, then cum in my ass and tell me how I'm yours!</i>\"");
 	outputText("\n\nYou growl and slap her tit for daring to order you around.  It makes her butt squeeze you even harder.  Still, you figure a slut with a little initiative is a good slut, and she showed initiative to beg so creatively.  You reward her by giving her what she wants.  SMACK!  Your hand falls on her backside with a broad blow that you can feel all the way inside her.  She whimpers and drips in answer, so you do it again, this time on the other side.  A bigger rain of drips escapes her this time.  You work the blows into your rhythm - bounce in, bounce out, slap, bounce in, bounce out, slap...  Fuck, she's too tight, and you're too sensitive to hold it in.");
-	outputText("\n\nYou cry out, \"<i>Here it comes!</i>\" and hilt yourself inside your latex pet, pinching her nipples hard as you begin to unload inside her.  She trembles beneath you, whining in a high-pitched voice as you whisper, \"<i>My pet...</i>\" into her ear.  While your cock does its best to inseminate the gooey woman, you keep whispering to her, explaining that she is yours, body and soul, to be used and abused.  You even begin to mention kinky ways you can take advantage of her unique form, filling her mind with ideas for future submission as your " + cockDescript(x) + " fills the rest of her.");
+	outputText("\n\nYou cry out, \"<i>Here it comes!</i>\" and hilt yourself inside your latex pet, pinching her nipples hard as you begin to unload inside her.  She trembles beneath you, whining in a high-pitched voice as you whisper, \"<i>My pet...</i>\" into her ear.  While your cock does its best to inseminate the gooey woman, you keep whispering to her, explaining that she is yours, body and soul, to be used and abused.  You even begin to mention kinky ways you can take advantage of her unique form, filling her mind with ideas for future submission as your " + cockDescript(0) + " fills the rest of her.");
 	if(player.cumQ() >= 1000) outputText("  Almost immediately, cream drips out around her ass and over your [legs].  She's just too full to take much more - your cum has nowhere to go but out!");
 	if(player.cumQ() >= 2000) {
 		outputText("  You cum so much that your spunk forms a nice sized ");
@@ -1534,7 +1549,7 @@ public function malePCDomFucksLatexGoo():void {
 	if(player.cumQ() >= 1000) outputText("of mixed fluids");
 	else outputText("of her own leftover sex-juice");
 	outputText(".  Every now and again, her butt lifts slightly and jiggles, then lowers.  She's whimpering and twitching, riding the aftershocks of her own orgasm.  You're exhausted, but you stand triumphant.  You fucked your latex slave in all three of her holes and outlasted her to boot.");
-	outputText("\n\nAs you get dressed, you realize your " + cockDescript(x) + " is totally clean.  It appears glossy, as if shined with spit, but there is no latex residue on it.  Somehow, her asshole must have absorbed her dried girl-cum and saliva back into her.  You didn't expect to get cleaner from anal sex, but it certainly let you end on a high note.  You get dressed with a swagger in your step and head back to the center of camp.");
+	outputText("\n\nAs you get dressed, you realize your " + cockDescript(0) + " is totally clean.  It appears glossy, as if shined with spit, but there is no latex residue on it.  Somehow, her asshole must have absorbed her dried girl-cum and saliva back into her.  You didn't expect to get cleaner from anal sex, but it certainly let you end on a high note.  You get dressed with a swagger in your step and head back to the center of camp.");
 	outputText("\n\nIn your absence, a tired voice sighs, \"<i>That's... three.</i>\"");
 	temp = 15;
 	dynStats("sen", -2, "lus=", 0);
@@ -1552,7 +1567,7 @@ public function malePCDomFucksLatexGoo():void {
 //Savin Really Wants to Breastfeed Latexy Because He's a Weird Milk Fetishist Like That
 //Mmm milk
 //[Requirements: PC must be lactating, of course, and have C+ cup tits. Also high Happiness because I like lovey dovey stuff, okay?]
-public function feedLatexySomeMilk():void {
+private function feedLatexySomeMilk():void {
 	clearOutput();
 	outputText("You cup your hands under your milk-laden breasts and ask " + flags[kFLAGS.GOO_NAME] + " if she's hungry.");
 	//{Not hungry}
@@ -1606,4 +1621,6 @@ public function feedLatexySomeMilk():void {
 	dynStats("sen", 2, "lus=", 0);
 	doNext(13);
 	
+}
+}
 }

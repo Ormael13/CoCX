@@ -11,8 +11,7 @@
   //creates Izmacounter and sets value to 1 if it doesn't exist)
   
 public function izmaFollower():Boolean {
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) return true;
-	return false;
+	return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1;
 }
 
 public function meetIzmaAtLake():void {
@@ -1716,7 +1715,7 @@ public function izmaSexMenu():void {
 	if(getVagooFucked > 0) addButton(5,"RideIzmaCock",eventParser,getVagooFucked);
 	if(sixty > 0) addButton(6,"Sixtynine",eventParser,sixty);
 	addButton(7,"Kids",childToggle);
-	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
+	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
 	addButton(9,"Back",izmaFollowerMenu);
 	
 }
@@ -3342,7 +3341,7 @@ public function izmaDomsLatexyPartI():void {
 	outputText("Izma growls while she pumps away at her erection, saying, \"<i>Yeah, you like that, don't ya ink-slut?</i>\"");
 	
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " bites her lower lip and ");
-	if(gooObedience() > 50) outputText("eagerly");
+	if(latexGirl.gooObedience() > 50) outputText("eagerly");
 	else outputText("sheepishly");
 	outputText(" nods, gushing a few fresh dribbles of moisture around her wrist at the admission.");
 	outputText("\n\n\"<i>Oh really?</i>\" Izma teases, \"<i>I should've known.</i>\"  Crinkling her nose, the tigershark-girl continues, \"<i>You can practically smell how much of a beta you are.  I bet when you used to be a goo-girl you probably fantasized about being stuck in a bottle for herms and dudes to fuck, didn'tcha?</i>\"  Izma flicks your goo-slut's bulging, black ");
@@ -3350,8 +3349,8 @@ public function izmaDomsLatexyPartI():void {
 	else outputText("clit");
 	outputText(" with a toe, drawing a pleasured gasp from the submissive.");
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " shudders as she pushes her hand in and out of herself.  Her whole forearm is dripping with onyx moisture, and the noisy squelches are easy to hear from where you're watching.  \"<i>Yes... I'm a slutty, submissive girl...  Can I have your cum, mistress Izma?  Please?  I'm putting on such a good show!</i>\"");
-	if(gooObedience() < 50) outputText("  A look of annoyance flashes across her face as soon as she says it, like she didn't really want to say that so openly.");
-	else if(gooObedience() <= 80) outputText("  A conflicted look flashes across her face as soon as the words slip out, but there's no taking them back.");
+	if(latexGirl.gooObedience() < 50) outputText("  A look of annoyance flashes across her face as soon as she says it, like she didn't really want to say that so openly.");
+	else if(latexGirl.gooObedience() <= 80) outputText("  A conflicted look flashes across her face as soon as the words slip out, but there's no taking them back.");
 	else outputText("  A hungry look flashes in her eyes as soon as the words leave her mouth, and she licks her lips hungrily.");
 	outputText("  A particularly powerful thrust inside herself has " + flags[kFLAGS.GOO_NAME] + " whining, her eyelids fluttering closed as she cries, \"<i>Oh, [name]!</i>\"");
 	
@@ -3362,7 +3361,7 @@ public function izmaDomsLatexyPartI():void {
 	
 	outputText("\n\n\"<i>Oooh, fuck, quit sucking so hard,</i>\" Izma tries to command, but it winds up sounding more like begging.  ");
 	//OBEDIENCE FAIL
-	if(gooObedience()/5 + gooFluid()/5 + rand(20) < 10) {
+	if(latexGirl.gooObedience()/5 + latexGirl.gooFluid()/5 + rand(20) < 10) {
 		outputText("" + flags[kFLAGS.GOO_NAME] + " grows and sucks harder, cheeks hollowed with suckling hunger.  You can see them stretch and go even more concave with rhythmic pulsations, vacuum-tight around the orange shaft.  Izma moans and tries to pull out, but she barely manages to extract an inch before her whole length is noisily pulled back in.  The shark-girl tries to pry the slutty, hungry little goo off of herself again and again, but each time, all she winds up doing is getting sensuous devoured again and again.  " + flags[kFLAGS.GOO_NAME] + " gives her four balls another appreciative squeeze, and Izma's eyes suddenly roll back, helpless again the hungry sluts impressive oral talents.");
 		
 		outputText("\n\n\"<i>C-c-cumming!  Ohhhh by the gods, yes!  Ungh!</i>\" Izma cries as her hips begin to weakly thrust against their onyx prison, smushing " + flags[kFLAGS.GOO_NAME] + "'s lips into her toned middle.  The smooth, latex sheath around her sack trembles, wrinkling as Izma's balls pull tight against her, and then, " + flags[kFLAGS.GOO_NAME] + " is gurgling noisily, massaging all four of those cum factories as they pour their cargo straight into her throat, feeding her the warm, soupy cum she craves.  They stay locked like that for upwards of a minute, Izma occassionally trying to talk but usually just babbling contently while she's milked for every drop.");

@@ -140,17 +140,30 @@
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var emberScene:EmberScene = new EmberScene();
+		public var exgartuan:Exgartuan = new Exgartuan();
+		public var helFollower:HelFollower = new HelFollower();
+		public var helScene:HelScene = new HelScene();
+		public var helSpawnScene:HelSpawnScene = new HelSpawnScene();
+		public var holliScene:HolliScene = new HolliScene();
+		public var isabellaScene:IsabellaScene = new IsabellaScene();
+		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
+		public var jojoScene:JojoScene = new JojoScene();
+		public var kihaFollower:KihaFollower = new KihaFollower();
+		public var kihaScene:KihaScene = new KihaScene();
+		public var latexGirl:LatexGirl = new LatexGirl();
+		public var marbleScene:MarbleScene = new MarbleScene();
+		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
+		public var shouldraScene:ShouldraScene = new ShouldraScene();
+		public var sophieBimbo:SophieBimbo = new SophieBimbo();
+		public var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();
+		public var sophieScene:SophieScene = new SophieScene();
+		public var valeria:Valeria = new Valeria();
 		// Nameless monster scenes
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
-		// Factory scenes
-		// Desert cave scenes
-		// Zetaz lair scenes
-		// Harpy Dungeon scenes
+		// Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
 		// Exploration scenes
-		// Tel'Adre scenes
-		// Bazaar scenes
 		// Other scenes
 		[Scene]
 		public var testContent:TestContent = new TestContent();
@@ -163,34 +176,20 @@
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
-		include "../../includes/exgartuan.as";
 		include "../../includes/fapArena.as";
 		include "../../includes/fera.as";
-		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
 		include "../../includes/gargoyle.as";
-		include "../../includes/harpySophie.as";
-		include "../../includes/harpySophieBimbo.as";
-		include "../../includes/harpySophieFollower.as";
-		include "../../includes/heliaFollower.as";
-		include "../../includes/heliaPreggers.as";
-		include "../../includes/isabella.as";
-		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
 		include "../../includes/izma.as";
 		include "../../includes/jasun.as";
-		include "../../includes/jojo.as";
 		include "../../includes/katherine.as";
 		include "../../includes/kelly.as";
 		include "../../includes/kelt.as";
-		include "../../includes/kiha.as";
-		include "../../includes/kihaFollower.as";
-		include "../../includes/latexy.as";
 		include "../../includes/library.as";
 		include "../../includes/lilium.as";
 		include "../../includes/lumi.as";
 		include "../../includes/marae.as";
-		include "../../includes/marble.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
 		include "../../includes/perkPicker.as";
@@ -199,13 +198,10 @@
 		include "../../includes/rathazul.as";
 		include "../../includes/roxanne.as";
 		include "../../includes/runa.as";
-		include "../../includes/salamander.as";
 		include "../../includes/scylla.as";
 		include "../../includes/sexMachine.as";
 		include "../../includes/sharkgirls.as";
 		include "../../includes/sheila.as";
-		include "../../includes/shouldra.as";
-		include "../../includes/shouldraFollower.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";
@@ -213,7 +209,6 @@
 		include "../../includes/urtaPregs.as";
 		include "../../includes/urtaQuest.as";
 		include "../../includes/urtaHeatRut.as";
-		include "../../includes/valaria.as";
 		include "../../includes/valentines.as";
 		include "../../includes/wanderer.as";
 		include "../../includes/whitneyFarm.as";

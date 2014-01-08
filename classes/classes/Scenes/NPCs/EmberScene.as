@@ -3,14 +3,10 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 
-	use namespace kGAMECLASS;
-
-	public class EmberScene extends BaseContent
+	public class EmberScene extends NPCAwareContent
 	{
 		public function EmberScene()
 		{
@@ -80,13 +76,13 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.EMBER_COR];
 		}
 
-		public function followerEmber():Boolean
+		override public function followerEmber():Boolean
 		{
 			return flags[kFLAGS.EMBER_HATCHED] > 0;
 
 		}
 
-		public function emberMF(man:String, woman:String):String
+		override public function emberMF(man:String, woman:String):String
 		{
 			if (flags[kFLAGS.EMBER_GENDER] == 1) return man;
 			else return woman;
@@ -1050,7 +1046,7 @@ package classes.Scenes.NPCs
 					if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  You should have more pride than to let some brainless cunt like that have her way with you!");
 				}
 				//(If Jojo isn't in the camp & not corrupt) 
-				else if (rand(2) == 0 && kGAMECLASS.monk <= 1 && player.hasStatusAffect("PureCampJojo") < 0) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
+				else if (rand(2) == 0 && monk <= 1 && player.hasStatusAffect("PureCampJojo") < 0) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
 				else outputText("one glade I touched down in to catch myself a nice brace of plump coneys, when all of a sudden this... this thing made out of flailing vines and fruit attacks me.  It went up in a puff of smoke once I torched it, of course.");
 			}
 			else if (choice == 2) {
@@ -1302,7 +1298,7 @@ package classes.Scenes.NPCs
 			outputText("\nYou try to hold a conversation with Ember, but it's hard for you to concentrate; you keep thinking about the delicious, soul-burning taste of hot, salty minotaur cum, straight from the bull-man's cock.  Inevitably, Ember asks you what the matter is and, salivating, you paint the picture for her.");
 			outputText("\n\nEmber suddenly throws back " + emberMF("his", "her") + " head with a terrible roar of fury that rattles the very rocks underfoot.  \"<i>I'll kill them!  I'll bash their brains out - I'll rip off their stinking hairy hides!  I'll gorge myself on their flesh and pick my teeth with their horns!  Nobody will poison you like that - nobody!</i>\"");
 			outputText("\n\nBefore you can do anything, the livid dragon spreads " + emberMF("his", "her") + " wings.  \"<i>When I return I will watch you carefully, to see that you beat this... addiction.</i>\" " + emberMF("He", "She") + " flies away, heading in the direction of the mountains.  You've never seen " + emberMF("him", "her") + " so mad before...");
-			if (kGAMECLASS.followerKiha()) outputText("\n\nKiha saunters up and smirks.  \"<i>I thought I had a temper.</i>\"");
+			if (followerKiha()) outputText("\n\nKiha saunters up and smirks.  \"<i>I thought I had a temper.</i>\"");
 			flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] = 1;
 			outputText("\n");
 		}

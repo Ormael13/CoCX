@@ -15,8 +15,8 @@ public function bakeryuuuuuu():void {
 		easterBakeSale();
 		return;
 	}
-	if(rand(10) <= 1 && kGAMECLASS.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
-		kGAMECLASS.shouldraBakeryIntro();
+	if(rand(10) <= 1 && kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
+		kGAMECLASS.shouldraFollower.shouldraBakeryIntro();
 		return;
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]++;

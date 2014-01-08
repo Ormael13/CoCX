@@ -40,8 +40,8 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			//Find Niamh
@@ -60,15 +60,15 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Chance of threesomes!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !kGAMECLASS.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
 				//Hell/Izzy threesome intro
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-					kGAMECLASS.salamanderXIsabellaPlainsIntro();
+					kGAMECLASS.helScene.salamanderXIsabellaPlainsIntro();
 					return;
 				}
 				//Propah threesomes here!
 				else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-					kGAMECLASS.isabellaXHelThreeSomePlainsStart();
+					kGAMECLASS.helScene.isabellaXHelThreeSomePlainsStart();
 					return;
 				}
 			}
@@ -79,12 +79,12 @@ package classes.Scenes.Areas
 				bunnyGirl.bunnbunbunMeet, bunnyGirl.bunnbunbunMeet];
 
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) {
-				choices[choices.length] = kGAMECLASS.isabellaGreeting;
-				choices[choices.length] = kGAMECLASS.isabellaGreeting;
+				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
+				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
 			}
-			if (!kGAMECLASS.followerHel()) {
-				choices[choices.length] = kGAMECLASS.encounterAJerkInThePlains;
-				choices[choices.length] = kGAMECLASS.encounterAJerkInThePlains;
+			if (!kGAMECLASS.helScene.followerHel()) {
+				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
+				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
 			}
 			choices[choices.length] = satyrScene.satyrEncounter;
 			choices[choices.length] = satyrScene.satyrEncounter;

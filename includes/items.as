@@ -1557,7 +1557,7 @@ public function doItems(eventNo:Number):void {
 				nieve = 3964;
 			}
 			if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && inDungeon == 0) {
-				fuckPlant = 3861;
+				fuckPlant = holliScene.treeMenu;
 				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) plantT = "Tree";
 				//Blurb in Items Screen
 				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
@@ -3660,7 +3660,7 @@ public function minotaurBlood():void {
 			//Text for dogdicks
 			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 			player.cocks[0].cockType = CockTypesEnum.HORSE;
-			player.increaseCock(4, 0)
+			player.increaseCock(4, 0);
 			dynStats("lib", 5, "sen", 4, "lus", 35);
 			outputText("<b>  You now have a horse-penis.</b>", false);
 			changes++;
@@ -4062,7 +4062,7 @@ public function equinum():void {
 				//temp = current smallest
 				temp3 = player.cocks.length;
 				temp2 = 9999;
-				temp = 0
+				temp = 0;
 				while(temp3 > 0)
 				{
 					temp3--;
@@ -4094,7 +4094,7 @@ public function equinum():void {
 				}
 			}
 			temp = temp3;				
-			player.cocks[temp].thickenCock(.5)
+			player.cocks[temp].thickenCock(.5);
 			outputText("\n\nYour " + horseDescript(temp) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right", false);
 			if(player.cor + player.lib < 50) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + horseDescript(temp) + " plowing them relentlessly, stuffing them pregnant with cum", false);
 			if(player.cor + player.lib >= 50 && player.cor + player.lib < 80) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum", false);
@@ -4416,7 +4416,7 @@ public function succubiMilk(tainted:Boolean):void {
 				if(player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
 				if(player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
 			}
-			temp3 += player.cocks[temp].growCock((rand(3)+1)*-1)
+			temp3 += player.cocks[temp].growCock((rand(3)+1)*-1);
 			outputText("\n\n", false);
 			lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 2) {
@@ -4452,7 +4452,7 @@ public function succubiMilk(tainted:Boolean):void {
 				player.cocks[temp].cockLength -= .5;
 				temp3 -= .5;
 			}
-			temp3 = player.cocks[temp].growCock(-1 *(rand(3)+1))
+			temp3 = player.cocks[temp].growCock(-1 *(rand(3)+1));
 			lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 3) {
 				outputText("  ", false);
@@ -4616,13 +4616,13 @@ public function caninePepper(type:Number = 0):void {
 		if(player.cor <50) outputText("  You shake your head, blushing hotly.  Where did that thought come from?", false);
 	}
 	if(player.str < 50 && rand(3) == 0) {
-		dynStats("str", (1*crit));
+		dynStats("str", (crit));
 		if(crit > 1) outputText("\n\nYour muscles ripple and grow, bulging outwards.", false);
 		else outputText("\n\nYour muscles feel more toned.", false);
 		changes++;
 	}
 	if(player.spe < 30 && rand(3) == 0 && changes < changeLimit) {
-		dynStats("spe", (1*crit));
+		dynStats("spe", (crit));
 		if(crit > 1) outputText("\n\nYou find your muscles responding quicker, faster, and you feel an odd desire to go for a walk.", false);
 		else outputText("\n\nYou feel quicker.", false);
 		changes++;
@@ -4735,7 +4735,7 @@ public function caninePepper(type:Number = 0):void {
 		if(player.cockTotal() > 0) {
 			//biggify knots
 			if(player.dogCocks() > 0) {
-				temp = 0
+				temp = 0;
 				//set temp2 to first dogdick for initialization
 				while(temp < player.cocks.length) {
 					if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
@@ -4802,7 +4802,7 @@ public function caninePepper(type:Number = 0):void {
 	if(player.cocks.length > 0) {
 		//Grow knot on smallest knotted dog cock
 		if(type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
-			temp = 0
+			temp = 0;
 			//set temp2 to first dogdick for initialization
 			while(temp < player.cocks.length) {
 				if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
@@ -4920,7 +4920,7 @@ public function caninePepper(type:Number = 0):void {
 				//temp = current smallest
 				temp3 = player.cocks.length;
 				temp2 = 9999;
-				temp = 0
+				temp = 0;
 				while(temp3 > 0)
 				{
 					temp3--;
@@ -6124,7 +6124,7 @@ public function chooseRetrievalSlot():void {
 	var temp6:Number = 0;
 	var temp7:Number = 0;
 	var temp8:Number = 0;
-	var slotDescs:Array = new Array("","","","","","","","","","","","","","","","");
+	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
 	temp = itemStorage.length;
 	while(temp > 0) {
 		temp--;
@@ -6436,7 +6436,7 @@ public function chooseRacksSlot(armor:Boolean = false):void {
 	var temp7:Number = 0;
 	var temp8:Number = 0;
 	var temp9:Number = 0;
-	var slotDescs:Array = new Array("","","","","","","","","","","","","","","","");
+	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
 	//Set goals
 	var goal:Number = 0;
 	if(armor) goal = 9;
@@ -6672,7 +6672,7 @@ public function reducto():void {
 
 public function lactaid():void {
 	player.slimeFeed();
-	var i:Number = 0
+	var i:Number = 0;
 	outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.", true);
 	//Bump up size!
 	if(player.averageBreastSize() < 8) {
@@ -6713,12 +6713,7 @@ EGG TYPES-
 4 - white - breast growth.  If lactating increases lactation.
 5 - rubbery black*/
 public function eggShifter(eggCode:Number):void {
-	if(player.hasStatusAffect("eggs") >= 0) {
-		player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
-	}
-	else {
-		return;
-	}
+	if (player.hasStatusAffect("eggs") >= 0) player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
 }
 
 public function useMarbleMilk():void {
@@ -6742,7 +6737,7 @@ public function useMarbleMilk():void {
 		}
 	}
 	//Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
-	marbleStatusChange(0,5);
+	marbleScene.marbleStatusChange(0,5);
 	//Does not apply the 'Marble's Milk' effect
 	//Purge withdrawl
 	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
@@ -7031,7 +7026,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			//Cunt Stretched used to determine how long since last enlargement
 			if(player.hasStatusAffect("CuntStretched") < 0) player.createStatusAffect("CuntStretched",0,0,0,0);
 			//Reset the timer on it to 0 when restretched.
-			else player.changeStatusValue("CuntStretched",1,0);;
+			else player.changeStatusValue("CuntStretched",1,0);
 			player.vaginas[0].vaginalLooseness++;
 			changes++;
 			dynStats("lus", 10);
@@ -7220,7 +7215,6 @@ public function blackSpellbook():void {
 	if(player.inte >= 40 && player.hasStatusAffect("Knows Might") < 0) {
 		outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
 		player.createStatusAffect("Knows Might",0,0,0,0);
-		return;
 	}
 }
 
@@ -7258,7 +7252,6 @@ public function whiteSpellbook():void {
 	if(player.inte >= 40 && player.hasStatusAffect("Knows Whitefire") < 0) {
 		outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
 		player.createStatusAffect("Knows Whitefire",0,0,0,0);
-		return;
 	}
 }
 
@@ -7422,7 +7415,7 @@ public function goblinAle():void {
 				player.cocks[0].cockLength -= .5;
 				temp3 -= .5;
 			}
-			temp3 += player.cocks[0].growCock((rand(3)+1)*-1)
+			temp3 += player.cocks[0].growCock((rand(3)+1)*-1);
 			lengthChange(temp3, 1);
 		}
 	}	
@@ -8072,8 +8065,8 @@ public function Hummus():void {
 	}
 	else player.breastRows[0].breastRating = 0;
 	player.gills = false;
-	player.removeStatusAffect("Uniball")
-	player.removeStatusAffect("Black Nipples")
+	player.removeStatusAffect("Uniball");
+	player.removeStatusAffect("Black Nipples");
 	player.vaginaType(0);
 }
 
@@ -8867,7 +8860,6 @@ public function wingStick():void {
 		monster.HP -= damage;
 		if(monster.HP < 0) monster.HP = 0;
 	}
-	return;
 }
 
 public function neonPinkEgg(pregnantChange:Boolean = false):void {
@@ -8922,7 +8914,7 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 					else if(player.cor < 90) outputText("You pant a little and wonder where the nearest fertile male is.", false);
 					else outputText("You grunt and groan with desire and disappointment.  You should get bred soon!", false);
 				}
-				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
+				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + player.assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
 			}
 			//WANGS!
 			if(player.hasCock()) {
@@ -9164,7 +9156,7 @@ public function neonPinkEgg(pregnantChange:Boolean = false):void {
 					else if(player.cor < 90) outputText("You pant a little and wonder where the nearest fertile male is.", false);
 					else outputText("You grunt and groan with desire and disappointment.  You should get bred soon!", false);
 				}
-				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
+				else outputText("\n\nYour mouth rolls open as you start to pant with desire.  Did it get hotter?  Your hand reaches down to your " + player.assholeOrPussy() + ", and you're struck by just how empty it feels.  The desire to be filled, not by a hand or a finger but by a virile male, rolls through you like a wave, steadily increasing your desire for sex.", false);
 			}
 			//WANGS!
 			if(player.hasCock()) {

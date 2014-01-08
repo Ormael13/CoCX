@@ -53,7 +53,7 @@ package classes.Scenes.Areas.Forest
 				else {
 					outputText("Struggling, you pull your eyes back into your head and away from Tamani's gorgeous slit.  You shudder, feeling ", false);
 					if(player.totalCocks () > 1) outputText("each of ", false);
-					outputText("your " + multiCockDescriptLight(), false);
+					outputText("your " + player.multiCockDescriptLight(), false);
 					if(player.lust <= 41) outputText(" thicken perceptibly", false);
 					else if(player.lust <= 81) outputText(" twitch eagerly", false);
 					else outputText("drip pre-cum", false);
@@ -67,13 +67,13 @@ package classes.Scenes.Areas.Forest
 				if(selector == 0) {
 					outputText("You barely manage to step yourself from lunging forward to bury your mouth between your mistress's legs.  Hard and trembling between your legs, ", false);
 					if(player.totalCocks() > 1) outputText("each of ", false);
-					outputText("your " + multiCockDescriptLight() + " aches with need.  You battle with the compulsion to kneel before your short, stacked mistress and perform your duties as her breeder husband.", false);
+					outputText("your " + player.multiCockDescriptLight() + " aches with need.  You battle with the compulsion to kneel before your short, stacked mistress and perform your duties as her breeder husband.", false);
 				}
 				else {
 					outputText("You wrench your gaze from the juicy mound before you with great difficulty.  The desire to submit to your wife and fuck her on the spot rages through your body, melting your resistance into liquid lust and pooling it in your groin.  ", false);
 					if(player.totalCocks() > 1) outputText("Each of y", false);
 					else outputText("Y", false);
-					outputText("our " + multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
+					outputText("our " + player.multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
 				}
 			}
 			game.dynStats("lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));

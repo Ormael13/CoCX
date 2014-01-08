@@ -991,7 +991,7 @@ public function suckedNFuckedByKat():void {
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" forward until she's hovering at the entrance to your ", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1 && player.hasVagina()) outputText(vaginaDescript() + " and " + assholeDescript(), false);
-	else outputText(assholeOrPussy(), false);
+	else outputText(player.assholeOrPussy(), false);
 	outputText(".  Taking a bit of the pre-cum drooling from your prick, she slathers it over her cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(".  Then, without further ado, she slides herself into you.", false);

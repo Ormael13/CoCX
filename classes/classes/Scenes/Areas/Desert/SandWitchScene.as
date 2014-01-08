@@ -2,6 +2,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class SandWitchScene extends BaseContent{
 
@@ -475,8 +476,8 @@ internal function beatSandwitch():void {
 	var temp3:* = 0;
 	if(silly()) temp3 = missingoSex;
 	if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2265;
-	var shouldra:int = 0;
-	if(kGAMECLASS.followerShouldra() && player.gender > 0) shouldra = 3670;
+	var shouldra:Function = null;
+	if(kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = kGAMECLASS.shouldraFollower.sandWitchGetsGhostly;
 	//doYesNo(sandwitchRaped, cleanupAfterCombat);
 	var ovi:Function = null;
 	if(player.gender > 0 && player.canOviposit()) ovi = ovipositSandWitches;

@@ -30,8 +30,8 @@ package classes.Scenes.Areas
 			if (kGAMECLASS.poniesYN()) return;
 
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			if (player.exploredLake % 20 == 0) {
@@ -72,7 +72,7 @@ package classes.Scenes.Areas
 			//UNCOMMON EVENTS
 			//Goo finding!
 			if (rand(30) == 0 && flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0) {
-				kGAMECLASS.encounterLeftBehindGooSlave();
+				kGAMECLASS.latexGirl.encounterLeftBehindGooSlave();
 				return;
 			}
 			//Chance of dick-dragging! OLD:10% + 10% per two foot up to 30%

@@ -875,7 +875,7 @@ public function historyOfGargoylesB():void {
 public function gargoyleHistoryC():void {
 	clearOutput();
 	//(PC has both Isabella and Izma as followers)
-	if(izmaFollower() && isabellaFollower()) {
+	if(izmaFollower() && isabellaFollowerScene.isabellaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a mountain range and lake.  Those last two are populated by savage beasts, minotaurs, cow-girls, anemone, and shark-people, both of whom will rend your flesh or rape you half to death.</i>\"");
 		outputText("\n\nWhoa, there. You stop " + flags[kFLAGS.GAR_NAME] + " and explain to her that some of your lovers – mates, even – are just such beasts.  You tell her a little bit about Izma and Isabella, enforcing the fact that they're both not only quite friendly, but sweet as well.  They're just regular people");
 		if(gargoyleConfidence() > 50) outputText(" just like her");

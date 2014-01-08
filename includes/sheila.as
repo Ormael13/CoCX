@@ -4779,7 +4779,7 @@ public function analHateFuck():void {
 	//[Tear Her Up][Call Jojo]
 	menu();
 	addButton(0,"TearHerUp",sheilaAnalHateFuckAGoGo);
-	if(campCorruptJojo()) addButton(1,"Call Jojo",analHateFucksWithJojo);
+	if(jojoScene.campCorruptJojo()) addButton(1,"Call Jojo",analHateFucksWithJojo);
 }
 
 //[Demon Victory Sex - Anal Hate-fuck - Tear Her Up]

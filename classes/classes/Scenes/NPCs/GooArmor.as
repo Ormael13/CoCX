@@ -1,13 +1,13 @@
-package classes.Scenes.Dungeons.HelDungeon
+package classes.Scenes.NPCs
 {
-	import classes.CoC;
 	import classes.Monster;
-	
+	import classes.Scenes.Areas.Lake.GooGirl;
+
 	/**
 	 * ...
 	 * @author aimozg
 	 */
-	public class GooArmor extends Monster 
+	public class GooArmor extends GooGirl
 	{
 
 		override protected function performCombatAction():void
@@ -17,7 +17,7 @@ package classes.Scenes.Dungeons.HelDungeon
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (hasStatusAffect("spar") >= 0) game.pcWinsValeriaSpar();
+			if (hasStatusAffect("spar") >= 0) game.valeria.pcWinsValeriaSpar();
 			else game.beatUpGooArmor();
 		}
 
@@ -27,13 +27,14 @@ package classes.Scenes.Dungeons.HelDungeon
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
 				doNext(game.endLustLoss);
 			} else {
-				if(hasStatusAffect("spar") >= 0) game.pcWinsValeriaSparDefeat();
+				if(hasStatusAffect("spar") >= 0) game.valeria.pcWinsValeriaSparDefeat();
 				else game.gooArmorBeatsUpPC();
 			}
 		}
 
 		public function GooArmor()
 		{
+			super(false);
 			init01Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
 			init03BreastRows("C");

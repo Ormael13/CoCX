@@ -72,7 +72,7 @@ public function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
-	
+
 	outputText(<![CDATA[
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
@@ -111,7 +111,7 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
 	if(isValentine())
 		outputText("\n\n<b>It's Valentine's!</b>");
-	if(isHeliaBirthday())
+	if(helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 

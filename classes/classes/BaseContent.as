@@ -29,10 +29,18 @@
 		{
 			kGAMECLASS.cheatTime(time);
 		}
+		protected function get timeQ():Number
+		{
+			return kGAMECLASS.timeQ;
+		}
 
 		protected function Num2Text(number:int):String
 		{
 			return kGAMECLASS.Num2Text(number);
+		}
+		protected  function num2Text2(number:int):String
+		{
+			return kGAMECLASS.num2Text2(number);
 		}
 
 		protected function get camp():Camp {
@@ -206,6 +214,18 @@
 		{
 			return kGAMECLASS.rand(maxVal);
 		}
+
+		protected function clearList():void{
+			kGAMECLASS.clearList();
+		}
+
+		protected function addToList(arg:*):void{
+			kGAMECLASS.addToList(arg);
+		}
+
+		protected function outputList():String{
+			return kGAMECLASS.outputList();
+		}
 		
 		protected function urtaLove(value:Number = 0):Boolean
 		{
@@ -315,7 +335,11 @@
 		}
 
 		protected function assholeOrPussy():String {
-			return kGAMECLASS.assholeOrPussy();
+			return Appearance.assholeOrPussy(player);
+		}
+
+		protected function npcBreastDescript(size:Number):String {
+			return kGAMECLASS.npcBreastDescript(size);
 		}
 		
 		protected  function eButtDescript():String {

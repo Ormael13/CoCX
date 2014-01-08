@@ -31,12 +31,12 @@ package classes.Scenes.Areas
 				return;
 			}
 			if (rand(40) == 0) {
-				kGAMECLASS.fountainEncounter();
+				kGAMECLASS.exgartuan.fountainEncounter();
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.followerHel()) {
-				kGAMECLASS.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			if ((player.exploredDesert == 20 && player.hasStatusAffect("Tel'Adre") < 0) || (rand(20) == 0 && player.statusAffectv1("Tel'Adre") == 0)) {

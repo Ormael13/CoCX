@@ -1,4 +1,13 @@
-﻿//EXGARTUAN STATUS
+﻿package classes.Scenes.NPCs{
+import classes.GlobalFlags.kFLAGS;
+import classes.CockTypesEnum;
+public class Exgartuan extends NPCAwareContent {
+
+	public function Exgartuan()
+	{
+	}
+
+//EXGARTUAN STATUS
 //v1 - Location - 1 = dick, 2 = tits
 //v2 - Sleep counter - 0 = awake, positive numbers = hours of sleep
 //const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int = 413;
@@ -56,7 +65,7 @@ public function fountainEncounter():void {
 	doYesNo(drinkFountainEndowment,13);
 }
 
-public function drinkFountainEndowment():void {
+private function drinkFountainEndowment():void {
 	outputText("", true);
 	var changed:Boolean = false
 	player.slimeFeed();
@@ -123,7 +132,7 @@ public function drinkFountainEndowment():void {
 	}
 	doNext(13);
 }
-public function exgartuanInfestDick():void {
+private function exgartuanInfestDick():void {
 	spriteSelect(15);
 	//(+Demon dick possession – not demoncocked)
 	if(player.cocks[0].cockType != CockTypesEnum.DEMON) {
@@ -151,7 +160,7 @@ public function exgartuanInfestDick():void {
 	}
 	player.createStatusAffect("Exgartuan",1,0,0,0);
 }
-public function exgartuanInfestTits():void {
+private function exgartuanInfestTits():void {
 	outputText("\n\nYour " + allBreastsDescript() + " jiggle as they grow MUCH larger, turning into obscene mounds that shake with every motion of your body.  All your " + nippleDescript(0) + "s puff up with them, gaining volume to match their new, larger homes.  They feel hot and ache to be touched.", false);
 	temp = player.breastRows.length;
 	while(temp > 0) {
@@ -671,7 +680,7 @@ public function exgartuanBeeRape():void {
 }
 
 //[Free Her] (negates some corruption gain)
-public function freeBeePostRape():void {
+private function freeBeePostRape():void {
 	outputText("", true);
 	outputText("You take pity on the slut and untie her.  Hopefully she'll recover before something worse finds her.  You'd hate to let a tentacle-beast get your sloppy seconds.", false);
 	doNext(13);
@@ -679,7 +688,7 @@ public function freeBeePostRape():void {
 }
 
 //[Leave Her]
-public function leaveBeePostRape():void {
+private function leaveBeePostRape():void {
 	outputText("", true);
 	outputText("You smile cruelly and give her glittering vulva a gentle smack before you walk away, leaving her tied up there.  Maybe some lonely imps will find a use for her...", false);
 	doNext(13);
@@ -834,7 +843,7 @@ public function exgartuanSleepSurprise():void {
 	player.changeStatusValue("Exgartuan",2,25);
 	doNext(1);
 }
-public function exgartuanBulgeTortureII():void {
+private function exgartuanBulgeTortureII():void {
 	outputText("", true);
 	outputText("After what feels like only a few minutes, you begin to feel as if you were sizzling beneath your sheets.  After a few half-hearted tosses and turns, inhibited by your bulging lower half, you surrender and throw off your covers.  At this point, you are almost wide awake, too focused on your increased breathing and uncomfortable temperature.  A few more moments slip by before you realize what's going on, alerted by your involuntary reach for your cock to find any sort of relief: you're getting horny.  As to how it's happening, you aren't entirely clear yet.  But it certainly isn't new to you nor is it strange for this to be happening in a place as strange as Mareth.  For all you know, this could be some natural occurrence brought in by the weather or a nearby tree or something.  Like pollen... except you want to have sex instead of suffer from congestion.\n\n", false);
 	
@@ -868,7 +877,7 @@ public function exgartuanBulgeTortureII():void {
 	dynStats("lus=", 1000);
 	doNext(exgartuanBulgeTortureIII);
 }
-public function exgartuanBulgeTortureIII():void {
+private function exgartuanBulgeTortureIII():void {
 	outputText("", true);
 	outputText("Fueled by pure spite and just a hint of loathing, you begin to regain some sort of composure through controlled breathing and what little concentration you can manage.  A few minutes of counting stitches in the top of your tent is all you accomplish, however; your once dormant limp " + cockDescript(0) + " is showing a sign of life. Your eyes widen as you feel your possessed pole stiffen up, pressing hard against your " + player.armorName + " as it grows out along with your dick, still impossibly clinging to its every facet.  It stops after only gaining a few inches, but not before driving the fight right back out of you.  Thread-counting is the last thing in your head as you quickly sit right back up, instinctually grasping for your cock.  But the situation refuses to change; your " + player.armorName + " is just as exceedingly resilient as it was before.\n\n", false);
 	
@@ -937,7 +946,7 @@ public function exgartuanBulgeTortureIII():void {
 	doNext(exgartuanBulgeTortureIV);
 }
 
-public function exgartuanBulgeTortureIV():void {
+private function exgartuanBulgeTortureIV():void {
 	outputText("", true);
 	outputText("You wake the next morning, nestled inside your bedroll.  Realizing where you are, a relaxing feeling of easiness washes over you.  You throw off your cover to greet the day, only becoming confused as it peels off your sticky skin.  You glance down at your waist, still wearing ", false);
 	//[if armorname IS NOT EQUAL TO \"<i>crotch-hugging slutty swimwear</i>\" OR \"<i>crotch-hugging revealing chainmail bikini</i>\"]
@@ -1004,7 +1013,7 @@ public function boobGartuanSURPRISE():void {
 	doNext(boobgartuanSurprise2);
 }
 
-public function boobgartuanSurprise2():void {
+private function boobgartuanSurprise2():void {
 	spriteSelect(15);
 	outputText("", true);
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
@@ -1053,7 +1062,7 @@ public function boobgartuanSurprise2():void {
 	doNext(boobgartuanSurprise3);
 }
 //[new page.  occurrence ≥1 starts here]
-public function boobgartuanSurprise3():void {
+private function boobgartuanSurprise3():void {
 	outputText("", true);
 	//[if occurrence ==0]
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
@@ -1299,4 +1308,6 @@ public function exgartuanNagaStoleMyMasturbation():void {
 	player.changeStatusValue("Exgartuan",2,(16+rand(7)));
 	dynStats("lib", .25, "lus=", 0);
 	doNext(13);
+}
+}
 }

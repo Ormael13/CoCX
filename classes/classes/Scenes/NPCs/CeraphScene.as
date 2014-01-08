@@ -3,13 +3,10 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 
-	public class CeraphScene extends BaseContent
+	public class CeraphScene extends NPCAwareContent
 	{
 		public function CeraphScene()
 		{
@@ -92,7 +89,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			outputText("", true);
 			//UBER-Fullbodypenetration
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1("Exgartuan") == 1 || kGAMECLASS.monk >= 5)) {
+			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1("Exgartuan") == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
@@ -642,7 +639,7 @@ package classes.Scenes.NPCs
 				if (player.lust < 34) player.lust = 34;
 			}
 			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] >= 4) {
-				kGAMECLASS.ceraphFollowerScene.submissiveCeraphOffer();
+				ceraphFollowerScene.submissiveCeraphOffer();
 				return;
 			}
 			//Normal stuff here

@@ -1,4 +1,16 @@
-﻿//Harpy MILF.  Hellzyeah
+﻿package classes.Scenes.NPCs{
+import classes.GlobalFlags.kFLAGS;
+import classes.BaseContent;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Areas.HighMountains.Harpy;
+	import classes.CoC_Settings;
+public class SophieScene extends BaseContent {
+
+	public function SophieScene()
+	{
+	}
+
+//Harpy MILF.  Hellzyeah
 //-More fertile than average harpy.
 //-In 'Upper Mountain' area (High Mountain?)
 //-Blurb about other harpies flying away as PC approaches.
@@ -24,9 +36,13 @@ Lasts 4-8 hours.
 //50% chance to boost lust by 20-21(not reduced) every hour
 //Forces minimum lust to be at least 50.
 
+		private function get sophieBimbo():SophieBimbo{
+			return kGAMECLASS.sophieBimbo;
+		}
+
 //[Discovery]
 public function meetSophie():void {
-	sophieSprite();
+	sophieBimbo.sophieSprite();
 	//increment met tag
 	flags[kFLAGS.MET_SOPHIE_COUNTER]++;
 	outputText("", true);
@@ -52,7 +68,7 @@ public function meetSophie():void {
 
 //[Repeat Meeting]
 public function meetSophieRepeat():void {
-	sophieSprite();
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	//(Pissed)
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
@@ -119,7 +135,7 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
 			simpleChoices("Yes",cramANippleInIt,"No",shootDownSophieSex,"Fight Her",FirstTimeSophieForceSex,"",0,"",0);
-			//No(2528,2523);
+			//No(cramANippleInIt,shootDownSophieSex);
 			//[Yes][No]
 			return;
 		}
@@ -128,29 +144,29 @@ public function meetSophieRepeat():void {
 	outputText("SOMETHING SCREWY HAPPENED IN SOPHIE'S MEETING", true);
 	return;
 }
-public function consensualSexSelector():void {
-	sophieSprite();
+private function consensualSexSelector():void {
+	sophieBimbo.sophieSprite();
 	if(player.cockThatFits(232) < 0) consensualSophieSexNoFit();
 	else consensualHotSophieDickings();
 }
 
-public function fightSophie():void {
-	sophieSprite();
+private function fightSophie():void {
+	sophieBimbo.sophieSprite();
 	startCombat(new Sophie());
 	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
 	eventParser(1);
 }
 
 //[Yes]
-public function repeatBreastFeeding():void {
-	sophieSprite();
+private function repeatBreastFeeding():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You agree and climb the rest of the way up to her nest, finding Sophie waiting for you there.", false);
 	//– to consentual breastfeeding.
 	doNext(cramANippleInIt);
 }
 //Normal Harpy Fight
-public function PCIgnoresSophieAndHarpyIsFought():void {
+private function PCIgnoresSophieAndHarpyIsFought():void {
 	outputText("A harpy wings out of the sky and attacks!", true);
 	startCombat(new Harpy());
 	spriteSelect(26);
@@ -159,8 +175,8 @@ public function PCIgnoresSophieAndHarpyIsFought():void {
 
 
 //[Looking for Demons]
-public function sophieLookingForDemons():void {
-	sophieSprite();
+private function sophieLookingForDemons():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie throws her head back and laughs. \"<i>Don't worry about any demons here.  Any time a demon is dumb enough to wander too close to our nests, we give him a 'foot-job' he won't forget.</i>\"  To illustrate, the busty harpy lifts her leg and proudly displays her razor-sharp talons.", false);
 	//Check her out if you're in the mood or dirty-minded
@@ -185,8 +201,8 @@ public function sophieLookingForDemons():void {
 	doYesNo(consensualSexSelector,shootDownSophieSex);
 }
 //[No]
-public function shootDownSophieSex():void {
-	sophieSprite();
+private function shootDownSophieSex():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.", false);
 	doNext(13);
@@ -195,8 +211,8 @@ public function shootDownSophieSex():void {
 }
 
 //[Sex]
-public function sophieMeetingChoseSex():void {
-	sophieSprite();
+private function sophieMeetingChoseSex():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	//(FEMALE\Unsexed)(Genderless –  forces Leave.)
 	if(player.totalCocks() == 0) {
@@ -223,8 +239,8 @@ public function sophieMeetingChoseSex():void {
 	}
 }
 //	[Stay&Sex] – starts combat
-public function FirstTimeSophieForceSex():void {
-	sophieSprite();
+private function FirstTimeSophieForceSex():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You say, \"<i>I'm not going anywhere until I'm satisfied.  Don't worry, I'll be sure to give you a few licks back.</i>\"\n\n", false);
 	
@@ -235,8 +251,8 @@ public function FirstTimeSophieForceSex():void {
 }
 
 //[Got Lost]
-public function sophieMeetingGotLost():void {
-	sophieSprite();
+private function sophieMeetingGotLost():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You explain that you were exploring the mountains and sheepishly admit that you got lost.  Sophie giggles, \"<i>Well then, you're fortunate I was here.  Some of the other girls, they might have taken advantage of you.  The younger harpies are so busy getting fertilized and laying eggs that they don't have much appreciation for good company and pleasant conversation like I do.</i>\"\n\n", false);
 	
@@ -264,8 +280,8 @@ public function sophieMeetingGotLost():void {
 }
 	
 //[Foraging For Supplies]
-public function tellSophieYoureForagingForStuff():void {
-	sophieSprite();
+private function tellSophieYoureForagingForStuff():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You explain to her that you were merely searching for supplies that would aid you in your quest.  Sophie's eyes narrow dangerously as she warns you, \"<i>Don't even think of our eggs as food!  Of course, I'm sure a cute little morsel like you would never do that.  What's this about a quest?</i>\"\n\n", false);
 	
@@ -278,8 +294,8 @@ public function tellSophieYoureForagingForStuff():void {
 }
 	
 //[Harpy Breastfeeding]
-public function cramANippleInIt():void {
-	sophieSprite();
+private function cramANippleInIt():void {
+	sophieBimbo.sophieSprite();
 	player.boostLactation(.01);
 	outputText("", true);
 	//Not a combat win
@@ -385,8 +401,8 @@ public function cramANippleInIt():void {
 }
 
 //[Consensual Secks – Requires Dick]
-public function consensualHotSophieDickings():void {
-	sophieSprite();
+private function consensualHotSophieDickings():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	var x:Number = player.cockThatFits(232);
@@ -520,8 +536,8 @@ public function consensualHotSophieDickings():void {
 }
 
 //[Yes]
-public function postSophieSexSnuggle():void {
-	sophieSprite();
+private function postSophieSexSnuggle():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You sprawl out in Sophie's nest and allow her to wrap her wings about you protectively.  Her hands stay busy the entire time, alternatively masturbating ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
@@ -551,8 +567,8 @@ public function postSophieSexSnuggle():void {
 }
 
 //[No]
-public function postSexSophieSnuggleTurnedDown():void {
-	sophieSprite();
+private function postSexSophieSnuggleTurnedDown():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("You turn down her offer and assure her that you'll be fine.  Sophie giggles while you try to get dressed, and you see her amber eyes watching you as try to climb back down the mountain with a stiffy.  She seems greatly amused by your predicament.", false);
 	//(+sensitivity, +libido
@@ -561,8 +577,8 @@ public function postSexSophieSnuggleTurnedDown():void {
 }
 	
 //[Consentual Sex No Fito]
-public function consensualSophieSexNoFit():void {
-	sophieSprite();
+private function consensualSophieSexNoFit():void {
+	sophieBimbo.sophieSprite();
 	var x:Number = player.biggestCockIndex();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	outputText("", true);
@@ -648,7 +664,7 @@ public function consensualSophieSexNoFit():void {
 	doYesNo(postSophieSexSnuggle,postSexSophieSnuggleTurnedDown);
 	//Go to same yes or no as 'fits' options.
 }
-public function sophieFucked(dicked:Boolean = true):void {
+private function sophieFucked(dicked:Boolean = true):void {
 	//knock up if not knocked up
 	if(flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] <= 0 && dicked) {
 		flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] = 48 + rand(48);
@@ -698,262 +714,45 @@ public function luststickApplication(hours:Number = 4):void {
 }
 
 
-//Combat Attacks
-//ON DICK'ED PCz
-//Kiss (Only used on males) - +10 lust on kiss.  25% chance
-//per round of increasing lust by 20.  Repeat kisses add
-//+20 lust.  Each kiss adds 2 hours to length of status
-//affect.
-public function sophieKissAttack():void {
-	sophieSprite();
-	outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ", false);
-	//Blind dodge change
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
-		outputText(monster.capitalA + monster.short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n", false);
-		return;
-	}
-	//Determine if dodged!
-	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
-		outputText("Sophie changes direction in a flash, trying to slip inside your guard, but you manage to sidestep the incredibly fast harpy's attack.\n", false);
-		return;
-	}
-	//Determine if evaded
-	if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
-		outputText("Using your skills at evading attacks, you anticipate and sidestep " + monster.a + monster.short + "'s attack.\n", false);
-		return;
-	}
-	if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + monster.a + monster.short + "'s attack.\n", false);
-		return;
-	}
-	//Determine if cat'ed
-	if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
-		outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "", false);
-		outputText("'s attack.\n", false);
-		return;
-	}
-	//YOU GOT HIT SON
-	outputText("Before you can react, she gives you a chaste peck on the lips.  The harpy pulls back with a sultry smile, watching you expectantly.", false);
-	
-	//Already affected by it
-	if(player.hasStatusAffect("Luststick") >= 0) {
-		outputText("  Blood rushes to " + sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
-		luststickApplication(2);
-		dynStats("lus", (12+player.lib/10));
-		if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
-		else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
-		else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-		else if(player.lust < 100) outputText(SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-		else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
-	}
-	else {
-		outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ", false);
-		luststickApplication(2);
-		dynStats("lus", 8+player.lib/10);
-		if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
-		else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
-		else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
-		else if(player.lust < 100) outputText(SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-		else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
-	}
-}
-
-//Harpy-Boating (Only used on males)
-//Takes off and flies directly at PC, locking her hips 
-//around PC's torso and smothering the PC with breasts 
-//for a few moments.
-//Easily dodged with evade or flexibility.
-public function sophieHarpyBoatsPC():void {
-	sophieSprite();
-	outputText(monster.capitalA + monster.short + " flaps her wings and launches herself forwards with her talons up.  ", false);
-	//Blind dodge change
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
-		outputText(monster.capitalA + monster.short + "'s talons are easy to avoid thanks to her blindness!\n", false);
-		return;
-	}
-	//Determine if dodged!
-	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
-		outputText(monster.a + monster.short + "'s movements are incredibly fast but you manage to sidestep them.\n", false);
-		return;
-	}
-	//Determine if evaded
-	if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
-		outputText("Using your skills at evading attacks, you determine " + monster.a + monster.short + " is aiming for your upper body and slide under the attack.\n", false);
-		return;
-	}
-	if(player.hasPerk("Misdirection") >= 0 && rand(100) < 40 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + monster.a + monster.short + "'s attack.\n", false);
-		return;
-	}
-	//Determine if cat'ed
-	if(player.hasPerk("Flexibility") >= 0 && rand(100) < 40) {
-		outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "", false);
-		outputText("'s attack.\n", false);
-		return;
-	}
-	//YOU GOT HIT SON
-	outputText("She hits you hard, nearly bowling you over.  Thankfully, her talons passed to either side of your torso.  They lock together behind your back and your face is pulled tightly into Sophie's smotheringly large mounds!", false);
-	if(rand(2) == 0) outputText("  She jiggles them around you pleasantly and coos, \"<i>Don't fight it baby.  Just let your body do what comes naturally.</i>\"\n", false);
-	else outputText("  She runs her long fingernails through your hair as she whispers, \"<i>Why fight it?  I'll make you feel so good.  Just relax and play with momma Sophie's tits.</i>\"\n", false);
-	dynStats("lus", (13 + player.sens/10));
-}
-
-//Compulsion (Male Only)
-public function sophieCompulsionAttack():void {
-	sophieSprite();
-	outputText("Sophie spreads her thick thighs and slips four fingers into her slippery sex.  She commands, \"<i>Touch yourself for me.  Be a good pet and masturbate for me.</i>\"  ", false);
-	//Autosucceeds if player inte < 40
-	//autofails if player inte > 80
-	//Player fails:
-	if(player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
-		outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.", false);
-		outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.", false);
-		dynStats("lus", (15 + player.cor/20 + player.lib/20));
-	}
-	//Player resists
-	else {
-		outputText("You can feel her words carrying the force of a magical compulsion behind them, but you focus your willpower and overcome it.", false);
-	}
-}
-
-//ON FEMALE PCz
-//Talons (Female Only)
-//High damage attack easily avoided by evade/flexibility.
-public function talonsSophie():void {
-	sophieSprite();
-	outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ", false);
-	var damage:Number = 0;
-	//Blind dodge change
-	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
-		outputText(monster.capitalA + monster.short + "'s talons are easy to avoid thanks to her blindness!\n", false);
-		return;
-	}
-	//Determine if dodged!
-	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
-		outputText(monster.a + monster.short + "'s tears through the air, but you manage to just barely dodge it.\n", false);
-		return;
-	}
-	//Determine if evaded
-	if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
-		outputText("Using your skills at evading attacks, you watch " + monster.a + monster.short + " and deftly sidestep her brutal talons.\n", false);
-		return;
-	}
-	if(player.hasPerk("Misdirection") >= 0 && rand(100) < 30 && player.armorName == "red, high-society bodysuit") {
-		outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + monster.a + monster.short + "'s attack.\n", false);
-		return;
-	}
-	//Determine if cat'ed
-	if(player.hasPerk("Flexibility") >= 0 && rand(100) < 40) {
-		outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "", false);
-		outputText("'s attack.\n", false);
-		return;
-	}
-	outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skinDesc + " with her razor-sharp talons! ", false);
-	//Determine damage - str modified by enemy toughness!
-	damage = int((monster.str + monster.weaponAttack) - Math.random()*(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	damage += 40;
-	damage = takeDamage(damage);
-	outputText("(" + damage + ")\n", false);
-	
-}
-//Batter (Female Only)
-//Batters PC with wings – 4x attack impossible to dodge.*/
-public function batterAttackSophie():void {
-	sophieSprite();
-	var damage:Number = 0;
-	outputText("Sophie comes at you in a flurry of beating wings!  There's no way to dodge the flurry of strikes!\n", false);
-	
-	//Determine damage - str modified by enemy toughness!
-	damage = int((monster.str) - Math.random()*(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	damage = takeDamage(damage);
-	outputText("Her left primary wing batters your head! (" + damage + ")\n", false);
-	//Determine damage - str modified by enemy toughness!
-	damage = int((monster.str) - Math.random()*(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	damage = takeDamage(damage);
-	outputText("Her right, wing-like arm slaps at your torso! (" + damage + ")\n", false);
-	//Determine damage - str modified by enemy toughness!
-	damage = int((monster.str) - Math.random()*(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	damage = takeDamage(damage);
-	outputText("Her other feathery arm punches at your shoulder! (" + damage + ")\n", false);
-	//Determine damage - str modified by enemy toughness!
-	damage = int((monster.str) - Math.random()*(player.tou) - player.armorDef);
-	if(damage < 0) damage = 0;
-	damage = takeDamage(damage);
-	outputText("Her right wing slams into the other side of your head! (" + damage + ")\n", false);
-}
-public function sophieAI():void {
-	sophieSprite();
-	var select:Number=1;
-	var rando:Number=1;	
-	//Update attacks for girls/neuters
-	if(!player.hasCock() || monster.hasStatusAffect("bimboBrawl") >= 0) {
-		//Talons
-		monster.special1 = 5141;
-		//Batter
-		monster.special2 = 5142;
-		//Clear
-		monster.special3 = 0;
-	}
-	//Dicks ahoy
-	else {
-		//kiss
-		monster.special1 = 5138;
-		//harpy-boating
-		monster.special2 = 5139;
-		//compulsion
-		monster.special3 = 5140;
-	}
-	if(player.hasCock() && monster.hasStatusAffect("bimboBrawl") < 0) rando = 1 + rand(3);
-	else rando = 1 + rand(2);
-	
-	if(rando == 1) eventParser(monster.special1);
-	if(rando == 2) eventParser(monster.special2);
-	if(rando == 3) eventParser(monster.special3);
-	
-	combatRoundOver();
-}
 
 
-public function sophieLostCombat():void {
-	sophieSprite();
+
+internal function sophieLostCombat():void {
+	sophieBimbo.sophieSprite();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	outputText("Sophie is down!  ", true);
 	if(monster.HP < 1) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.", false);
 	else outputText("She's too turned on to be a threat and is happily masturbating.", false);
 	//RAEP OPTIONS
 	if(player.gender != 0) {
-		var dickRape:Number = 0;
-		var clitFuck:Number = 0;
-		var cuntFuck:Number = 0;
-		var bimbo:Number = 0;
+		var dickRape:Function = null;
+		var clitFuck:Function = null;
+		var cuntFuck:Function = null;
+		var bimbo:Function = null;
 		if(player.lust >= 33 && player.totalCocks() > 0) {
 			//Set dick rape to correct scene.
 			//Too big
-			if(player.cockThatFits(232) == -1) dickRape = 2534;
+			if(player.cockThatFits(232) == -1) {dickRape = maleVictorySophieRapeHUGE;}
 			//Fits
-			else dickRape = 2533;
+			else dickRape = maleVictorySophieRape;
 		}
 		//Girl options!
 		if(player.lust >= 33 && player.hasVagina()) {
 			//All girls get cuntfuck
-			cuntFuck = 2535;
+			cuntFuck = sophieVictoryPussyGrind;
 			//big clit girls
-			if(player.clitLength >= 5) clitFuck = 2536;
+			if(player.clitLength >= 5) clitFuck = fuckDatClit;
 		}
-		if(hasItem("BimboLq",1)) bimbo = 3036;
+		if(hasItem("BimboLq",1)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
 	}
-	if(dickRape + cuntFuck + clitFuck + bimbo > 0) {
+	if(dickRape != null || cuntFuck != null || clitFuck != null || bimbo != null) {
 		outputText("  What do you do to her?", false);
 		simpleChoices("Use Dick",dickRape,"Scissor",cuntFuck,"Fuck wClit",clitFuck,"Bimbo Her",bimbo,"Leave",cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 }
-public function sophieWonCombat():void {
-	sophieSprite();
+internal function sophieWonCombat():void {
+	sophieBimbo.sophieSprite();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	if(player.hasCock()) {
 		if(player.cockThatFits(232) < 0) tooBigForOwnGoodSophieLossRape();
@@ -966,8 +765,8 @@ public function sophieWonCombat():void {
 }
 //COMBAT STUFF HOOOO/
 //Male 'Normal' – throw on back and grab ankles, force over head and fuck
-public function maleVictorySophieRape():void {
-	sophieSprite();
+private function maleVictorySophieRape():void {
+	sophieBimbo.sophieSprite();
 	var x:Number = player.cockThatFits(232);
 	outputText("", true);
 	outputText("Sophie is ", false);
@@ -1000,8 +799,8 @@ public function maleVictorySophieRape():void {
 }
 	
 //Male 'Doesn't Fit'
-public function maleVictorySophieRapeHUGE():void {
-	sophieSprite();
+private function maleVictorySophieRapeHUGE():void {
+	sophieBimbo.sophieSprite();
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	
@@ -1056,8 +855,8 @@ public function maleVictorySophieRapeHUGE():void {
 }
 
 //Female Pussy Grind
-public function sophieVictoryPussyGrind():void {
-	sophieSprite();
+private function sophieVictoryPussyGrind():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie is ", false);
 	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.", false);
@@ -1114,8 +913,8 @@ public function sophieVictoryPussyGrind():void {
 }
 	
 //Female Clit-Fucking
-public function fuckDatClit():void {
-	sophieSprite();
+private function fuckDatClit():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie is ", false);
 	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.", false);
@@ -1157,8 +956,8 @@ public function fuckDatClit():void {
 	
 //LOSS SCENES
 //Tiny Wang Emasculation
-public function tinyDickSupremeSophieLoss():void {
-	sophieSprite();
+private function tinyDickSupremeSophieLoss():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie looks down at your ", false);
 	if(player.HP < 1) outputText("defeated", false);
@@ -1208,8 +1007,8 @@ public function tinyDickSupremeSophieLoss():void {
 }
 
 //Normal Sized Wang Rape – Kisstacular + Hypno
-public function normalLossRapuuuuSophie():void {
-	sophieSprite();
+private function normalLossRapuuuuSophie():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	var x:Number = player.cockThatFits(232);
 	
@@ -1253,8 +1052,8 @@ public function normalLossRapuuuuSophie():void {
 }
 
 //Too Big – Get knocked out and wake up with your dick covered in kisses.  Status for 16 hours (8 more after waking up)
-public function tooBigForOwnGoodSophieLossRape():void {
-	sophieSprite();
+private function tooBigForOwnGoodSophieLossRape():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	
@@ -1267,8 +1066,8 @@ public function tooBigForOwnGoodSophieLossRape():void {
 	cleanupAfterCombat();
 }
 //No Dong – You wake up at the bottom of the mountain.
-public function SophieLossRapeNoDonguuuu():void {
-	sophieSprite();
+private function SophieLossRapeNoDonguuuu():void {
+	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Utterly defeated, you collapse.   Sophie doesn't let up, and batters you mercilessly with her wings until you lose consciousness.\n\n", false);
 	
@@ -1282,4 +1081,6 @@ public function SophieLossRapeNoDonguuuu():void {
 	}
 	//Increase pissed time
 	else flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
+}
+}
 }

@@ -46,7 +46,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Your " + cockDescript(0) + " wriggles free of your " + player.armorName + ", as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n", false);
 					outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + cockDescript(0) + ".  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, " + player.short + "?  I need some honeyyy!</i>\"\n\n", false);
 					outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?", false);
-					doYesNo(kGAMECLASS.exgartuanBeeRape, 13);
+					doYesNo(kGAMECLASS.exgartuan.exgartuanBeeRape, 13);
 					return;
 				}
 				else {

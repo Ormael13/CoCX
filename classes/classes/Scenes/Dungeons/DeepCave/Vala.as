@@ -8,7 +8,7 @@ package classes.Scenes.Dungeons.DeepCave
 	 * ...
 	 * @author aimozg
 	 */
-	public class Vala extends GooGirl
+	public class Vala extends Monster
 	{
 
 		override protected function performCombatAction():void
@@ -34,7 +34,6 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function Vala()
 		{
-			super(true);
 			init01Names("", "Vala", "vala", "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.");
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_GAPING_WIDE,25);
 			init03BreastRows("E");

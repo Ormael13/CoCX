@@ -2447,18 +2447,18 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b>Ember Offspring (Herms): </b>" + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
 	}
 	if(flags[kFLAGS.EMBER_EGGS] > 0) outputText("<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n");
-	if(helAffection() > 0) outputText("<b>Helia Affection: </b>" + Math.round(helAffection()) + "%\n");
-	if(helAffection() >= 100) outputText("<b>Helia Bonus Points: </b>" + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
+	if(helFollower.helAffection() > 0) outputText("<b>Helia Affection: </b>" + Math.round(helFollower.helAffection()) + "%\n");
+	if(helFollower.helAffection() >= 100) outputText("<b>Helia Bonus Points: </b>" + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
 	if(flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 		outputText("<b>Isabella Affection:</b> ", false);
-		if(!isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
+		if(!isabellaFollowerScene.isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
 		else outputText("100%\n", false);
 	}
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
 		outputText("<b>Kid A's Confidence:</b> " + anemoneScene.kidAXP() + "%\n");
 	}
 	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
-		if(followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
+		if(kihaFollower.followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
 		else outputText("<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n", false);
 	}
 	if(flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL]+ flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
