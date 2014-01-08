@@ -2037,11 +2037,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.talkToAmilyCamp();
 	}
-	else if (eventNo == 2435)
-	{
-		lumiLabChoices();
-	}
-	
 	else if (eventNo == 2447)
 	{
 		talkToScylla();

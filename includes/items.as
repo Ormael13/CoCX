@@ -1,4 +1,6 @@
-﻿// import classes.ItemSlotClass;
+﻿import classes.GlobalFlags.kGAMECLASS;
+
+// import classes.ItemSlotClass;
 
 //const FOX_BAD_END_WARNING:int = 477;
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -2706,7 +2708,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 2435);
+				"Abandon", lumi.lumiLabChoices);
 	}
 	else if (menuLoc == 14)
 	{
@@ -6549,12 +6551,12 @@ public function itemGoNext():void {
 	}
 	//Lumi's potion shop
 	if(menuLoc == 12) {
-		doNext(lumiShop);
+		doNext(lumi.lumiShop);
 		return;
 	}
 	//Lumi's enhancement shop
 	if(menuLoc == 13) {
-		doNext(lumiEnhance);
+		doNext(lumi.lumiEnhance);
 		return;
 	}
 	//Late night looting

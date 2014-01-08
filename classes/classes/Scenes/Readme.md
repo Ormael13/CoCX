@@ -45,7 +45,7 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 ### Notes
 
 1. **Locations** that share many common scenes could be joined in one package, like **Forest** and **Deepwoods**.
-2. Events for **Explore** -> **Explore** could be placed directly into _Scenes/Areas_.
+2. Events for **Explore** -> **Explore** should be placed into _Scenes/Explore_.
 
 ## NPCs
 

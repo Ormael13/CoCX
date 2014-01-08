@@ -1,4 +1,13 @@
-﻿public function lumiEncounter():void {
+﻿package classes.Scenes.Explore{
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+public class Lumi extends BaseContent{
+
+	public function Lumi()
+	{
+	}
+
+	public function lumiEncounter():void {
 	outputText("", true);
 	//1st time lumi meeting
 	if(flags[kFLAGS.LUMI_MET] == 0) {
@@ -53,7 +62,7 @@ public function lumiShop():void {
 }
 
 //Lust Draft
-public function lumiLustDraftPitch():void {
+private function lumiLustDraftPitch():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
@@ -62,7 +71,7 @@ public function lumiLustDraftPitch():void {
 	doYesNo(lumiPurchase,lumiShop);
 }
 //Goblin Ale
-public function lumiPitchGobboAle():void {
+private function lumiPitchGobboAle():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
@@ -71,7 +80,7 @@ public function lumiPitchGobboAle():void {
 	doYesNo(lumiPurchase,lumiShop);
 }
 //Ovi Elixir
-public function lumiPitchOviElixer():void {
+private function lumiPitchOviElixer():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
@@ -81,7 +90,7 @@ public function lumiPitchOviElixer():void {
 }
 
 
-public function lumiPurchase():void {
+private function lumiPurchase():void {
 	spriteSelect(37);
 	outputText("", true);
 	//After choosing, and PC has enough gems
@@ -153,45 +162,44 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	else {
 		outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n", false);
 		//The player chooses an item that can be enhanced from a list, regardless of which is chosen, the text for the next part is the same.
-		choices("FoxBery",fox,"Fox Jewel",kitsune,"GoldenSeed",seed,"KangaFruit",kanga,"L.Draft",lustDraft,"LaBova",laBova,"OviElix",oviElix,"SDelite",succuDelight,"",0,"Back",2435);
+		choices("FoxBery",fox,"Fox Jewel",kitsune,"GoldenSeed",seed,"KangaFruit",kanga,"L.Draft",lustDraft,"LaBova",laBova,"OviElix",oviElix,"SDelite",succuDelight,"",0,"Back",lumiLabChoices);
 		return true;
 	}
-	return false;
 }
-public function lumiEnhanceLaBova():void {
+private function lumiEnhanceLaBova():void {
 	shortName = "LaBova ";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceSDelight():void {
+private function lumiEnhanceSDelight():void {
 	shortName = "SDelite";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceOviElix():void {
+private function lumiEnhanceOviElix():void {
 	shortName = "OviElix";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceDraft():void {
+private function lumiEnhanceDraft():void {
 	shortName = "L.Draft";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceGoldenSeed():void {
+private function lumiEnhanceGoldenSeed():void {
 	shortName = "GldSeed";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceKanga():void {
+private function lumiEnhanceKanga():void {
 	shortName = "KangaFt";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceFox():void {
+private function lumiEnhanceFox():void {
 	shortName = "FoxBery";
 	lumiEnhanceGo();
 }
-public function lumiEnhanceFoxJewel():void {
+private function lumiEnhanceFoxJewel():void {
 	shortName = "FoxJewl";
 	lumiEnhanceGo();
 }
 
-public function lumiEnhanceGo():void {
+private function lumiEnhanceGo():void {
 	spriteSelect(37);
 	trace("LUMI ENHANCE");
 	var nextItem:String = "";
@@ -235,4 +243,6 @@ public function lumiEnhanceGo():void {
 	shortName = nextItem;
 	menuLoc = 13;
 	takeItem();
+}
+}
 }

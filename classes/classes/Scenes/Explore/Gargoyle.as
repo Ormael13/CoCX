@@ -1,4 +1,17 @@
-﻿//const GAR_NAME:int = 825;
+﻿package classes.Scenes.Explore{
+import classes.BaseContent;
+import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+public class Gargoyle extends BaseContent{
+
+	public function Gargoyle()
+	{
+	}
+
+//const GAR_NAME:int = 825;
 //const GAR_CONFIDENCE:int = 826;
 //const RITUAL_INTRO:int = 827;
 //const KINKY_RITUALS_SPOKEN:int = 828;
@@ -6,7 +19,7 @@
 //const GAR_CATHEDRAL:int = 830;
 //const GAR_NAME_TALKS:int = 831;
 
-public function gargoyleConfidence(arg:Number = 0):Number {
+private function gargoyleConfidence(arg:Number = 0):Number {
 	if(arg != 0) {
 		flags[kFLAGS.GAR_CONFIDENCE] += arg;
 		if(flags[kFLAGS.GAR_CONFIDENCE] > 100) flags[kFLAGS.GAR_CONFIDENCE] = 100;
@@ -36,7 +49,7 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 }
 
 //(Advance time by 1 hour) 
-public function gargoyleMeeting2():void {
+private function gargoyleMeeting2():void {
 	clearOutput();
 	outputText("You finally close the distance between yourself and the strange structure, which begins to take shape ahead.  Though it's half-buried under what must be years of built-up sand and debris, you can clearly make out high stone walls supported by vaulted arches, broken every so often by the shattered remains of stained-glass windows and a pair of utterly destroyed oaken doors nearly hidden behind a row of tall marble pillars, many of which have long since crumbled.  High above the ground, you can see a pair of tall, slender towers reaching up to the heavens, one of which has been nearly obliterated by some unimaginably powerful impact, leaving it a stump compared to its twin.  From the rooftops, strange shapes look down upon you – stone statues made in the image of demons, dragons, and other monsters.");
 	
@@ -63,7 +76,7 @@ public function gargoyleMeeting2():void {
 }
 
 //[b]Don't Break[/b]
-public function dontBreakThatShit():void {
+private function dontBreakThatShit():void {
 	clearOutput();
 	outputText("Oh, no.  Nope.  Nuh-uh.  Not going to happen.  You're not falling for that trick!  No, siree.  As soon as you chop those chains, it'll probably just come to life and try to kill - or rape - you.  Feeling rather smart, you turn on a heel and exit the cathedral – there's nothing else to see right now.");
 
@@ -73,7 +86,7 @@ public function dontBreakThatShit():void {
 }
 
 //[b]Break Chains[/b]
-public function breakZeChains():void {
+private function breakZeChains():void {
 	clearOutput();
 	//Introduces two new values: " + flags[kFLAGS.GAR_NAME] + ", the gargoyle's name, given by the Champion, and Confidence, a value that has a base score of 0 (submissive/slave) rising to 100 (equal). Negatives are possible.
 	outputText("You swing your [weapon] up over your head and strike the chains.");
@@ -101,8 +114,8 @@ public function breakZeChains():void {
 	addButton(0,"Next",nameZeGargoyle);
 }
 
-public function nameZeGargoyle():void {
-	if (this.testingBlockExiting)
+private function nameZeGargoyle():void {
+	if (kGAMECLASS.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go
@@ -133,7 +146,7 @@ public function nameZeGargoyle():void {
 	gargoyleStarterMenu();	
 }
 
-public function gargoyleStarterMenu():void {
+private function gargoyleStarterMenu():void {
 	//(Display options [Funny Order], [Carnal Order]. and [Talk])
 	menu();
 	addButton(0,"Funny Order",giveGargoyleAFunnyOrder);
@@ -142,7 +155,7 @@ public function gargoyleStarterMenu():void {
 }
 
 //[b]Funny Order[/b]
-public function giveGargoyleAFunnyOrder():void {
+private function giveGargoyleAFunnyOrder():void {
 	clearOutput();
 	outputText("If she's so intent on playing the servant, you suppose you can play along.  Summoning up your most commanding voice, you snap, \"<i>ROLL OVER!</i>\"");
 	outputText("\n\nTo her credit, " + flags[kFLAGS.GAR_NAME] + " hesitates only for a moment before dropping to the floor and rolling belly-up, limbs upraised like a puppy in training.  Stifling a chuckle, you lean down and do just that, giving her a quick belly rub.  Her skin is cool to the touch, and impeccably smooth, as you might expect from a marble statue.  Seemingly pleased, " + flags[kFLAGS.GAR_NAME] + " scrambles back to a low crouch before you, awaiting your next command.");
@@ -150,7 +163,7 @@ public function giveGargoyleAFunnyOrder():void {
 }
 
 //[b]Carnal Order[/b]
-public function carnalOrder():void {
+private function carnalOrder():void {
 	clearOutput();
 	outputText("Well, well. " + flags[kFLAGS.GAR_NAME] + " seems willing to follow any order you give, no matter how carnal, and you could not help but notice her rather <i>arousing</i> attributes earlier.  Smirking wickedly, you command your new gargoyle to finger herself.");
 	
@@ -162,7 +175,7 @@ public function carnalOrder():void {
 }
 
 //[b]Talk (First Time)[/b]
-public function firstGargoyleTalk():void {
+private function firstGargoyleTalk():void {
 	clearOutput();
 	outputText("You decide against giving " + flags[kFLAGS.GAR_NAME] + " an order for now.  Instead, you right a nearby toppled pew and seat yourself across from the crouching gargoyle, returning her intense stare with one of your own.");
 	outputText("\n\n\"<i>Why were you chained up?</i>\" you finally ask, glancing at the shattered bonds on the ground.");
@@ -185,7 +198,7 @@ public function firstGargoyleTalk():void {
 }
 
 //[b]Berate[/b]
-public function berateTheGargoyle():void {
+private function berateTheGargoyle():void {
 	clearOutput();
 	//(Confidence - 10)
 	gargoyleConfidence(-10);
@@ -197,7 +210,7 @@ public function berateTheGargoyle():void {
 }
 
 //[b]Reassure[/b]
-public function reassureTheGargoyle():void {
+private function reassureTheGargoyle():void {
 	clearOutput();
 	//(Confidence +10)
 	outputText("You can't help but feel sorry for the poor gargoyle.  It isn't hard to figure out what happened, and in truth, she reminds you a bit of yourself – and of the consequences if you ever fail.  You reach over and put a hand on her smooth, cold shoulder.  As reassuringly as you can, you tell her that you are [name], the Champion of Ingnam.  Your duty isn't entirely dissimilar to what hers was, while you hope you'll never know what she's gone through, you can certainly sympathize.");
@@ -267,7 +280,7 @@ public function returnToCathedral(woken:Boolean = false):void {
 }
 
 //[b]Sex[/b]
-public function gargoyleSexMenu():void {
+private function gargoyleSexMenu():void {
 	clearOutput();
 	outputText("You approach " + flags[kFLAGS.GAR_NAME] + " and tell her you have some... pressure that needs relieving.");
 	//(if Confidence =< 69:
@@ -305,7 +318,7 @@ public function gargoyleSexMenu():void {
 }
 
 //[b]Anal[/b]
-public function gargoyleAnal():void {
+private function gargoyleAnal():void {
 	clearOutput();
 	outputText("You tell her to get on all fours as you shed your [armor], unleashing your already-hardening cock.  Nervously, the gargoyle does as you command, quickly finding a clear bit of floor and getting on her hands and knees.  You kneel down behind her, peeling her taut ass-cheeks apart to reveal her tight slit and the marble ring of her tiny asshole.  Grinning, you slather up your forefinger with your tongue, lubing it up as best you can before pressing it to her backdoor.");
 	
@@ -339,7 +352,7 @@ public function gargoyleAnal():void {
 
 //[b]Vaginal[/b]
 //no limits
-public function gargoyleCoochiiGetsPlowed():void {
+private function gargoyleCoochiiGetsPlowed():void {
 	clearOutput();
 	var x:int = player.cockThatFits(60);
 	if(x < 0) x = player.smallestCockIndex();
@@ -369,7 +382,7 @@ public function gargoyleCoochiiGetsPlowed():void {
 }
 
 //[b]Tit-Fuck[/b]
-public function titFuckTheGargoyle():void {
+private function titFuckTheGargoyle():void {
 	clearOutput();
 	outputText("You situate yourself on a pew and spread your legs.  You pat your thighs, telling " + flags[kFLAGS.GAR_NAME] + " to sit between your legs as you fish out your [cock biggest].  She approaches, hesitantly placing herself on the floor between your legs as you recline and stroke your shaft to full hardness.  You let the gargoyle sit there, watching you wide-eyed as you continue to masturbate.  Though you're only preparing for the main act, you can't help but enjoy the sensation of such a basic sexual act, made all the more pleasurable by the creature at your feet, her face barely an inch from your cock's head as you stroke yourself.");
 	
@@ -396,7 +409,7 @@ public function titFuckTheGargoyle():void {
 
 //[b]Strap-On[/b]
 //(Coding this one may be a *little* complex)
-public function strapOnGargoyle():void {
+private function strapOnGargoyle():void {
 	clearOutput();
 	outputText("Giving a quick look around the ruins, you tell " + flags[kFLAGS.GAR_NAME] + " to go find something that can bring you two a little <i>closer</i>.");
 	
@@ -435,7 +448,7 @@ public function strapOnGargoyle():void {
 
 //[b]Tail Fuck[/b]
 //Requires Vag
-public function tailFuckGargoyleScene():void {
+private function tailFuckGargoyleScene():void {
 	clearOutput();
 	outputText("Without warning, you grab " + flags[kFLAGS.GAR_NAME] + "'s thick, spiked tail and give it a playful yank.  She lets out a surprised \"<i>EEP,</i>\" but settles down after you tell her to cop a squat and stiffen it up.  Obediently, she assumes a low crouch and stiffens her tail into a “U” shape between her legs, its tip pointed straight up between your belly and her face.  You ruffle her hair and strip out of your [armor], soon standing nude before the gargoyle.  At a command from you, the brutal stone spikes protruding from her tail's tip retract, leaving the appendage a smooth, cool surface.");
 	
@@ -459,7 +472,7 @@ public function tailFuckGargoyleScene():void {
 }
 
 //[b]Use Her – Male/Herm[/b]
-public function useGargoyleMaleHerm():void {
+private function useGargoyleMaleHerm():void {
 	clearOutput();
 	outputText("You approach the motionless statue with a lustful look in your eye. Quickly, you strip out of your [armor] and circle around the frozen girl.  With some effort, you're able to lift her heavy, spiked tail out of the way, revealing the tight cunt hidden between her legs.  You drop to your knees behind the gargoyle and bury your face in her crack, slurping at her vag, getting it nice and moist in preparation for your cock.");
 	outputText("\n\nTo your surprise, the gargoyle does not even respond to your tongue as you slide it inside her.  She's completely motionless – even the walls of her love canal are still as you spread your saliva around inside her.  After a few minutes of preparation, you grab your [cock biggest] and slide on home.  Despite her natural tightness, it's relatively easy going thanks to the liberal lubrication you applied moments ago, and soon you're buried up to the hilt inside the gargoyle.  You give a few quick thrusts into her tight, smooth hole that quickly build up to a fast, hard fucking.");
@@ -475,7 +488,7 @@ public function useGargoyleMaleHerm():void {
 }
 
 //[b]Use Her (Female)[/b]
-public function useHerGargoyleFemale():void {
+private function useHerGargoyleFemale():void {
 	clearOutput();
 	outputText("You casually strip out of your [armor] and start to tease your cunt as you circle around the crouching gargoyle.  You lament her lack of male genitalia, but that will by no means stop you from sating your lust on the gargoyle.  You grab her tail, itself only just flexible enough to reposition thanks to her rigor-mortis-like state, and bend its tip to face straight up.");
 	
@@ -491,7 +504,7 @@ public function useHerGargoyleFemale():void {
 }
 
 //[b]Ritual (First Time)[/b]
-public function ritualGargoyle():void {
+private function ritualGargoyle():void {
 	clearOutput();
 	if(flags[kFLAGS.RITUAL_INTRO] == 0) {
 		flags[kFLAGS.RITUAL_INTRO] = 1;
@@ -515,7 +528,7 @@ public function ritualGargoyle():void {
 
 //[b]Body[/b]
 //(PC decreases Libido and Sensitivity. Suffers 20% Max HP damage, to a minimum of 1 pt. remaining)
-public function bodyRitual():void {
+private function bodyRitual():void {
 	clearOutput();
 	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you could stand to reverse some of the corruption that has affected your body.  With an solemn nod, she takes you to a side alcove near the altar and instructs you to spread your arms and legs.  Hesitantly, you do so, and from the floor and ceiling " + flags[kFLAGS.GAR_NAME] + " produces leather straps with rough looped straps.  Before you can react, she binds your arms and legs, spreading you eagle against the cold stone wall.");
 	
@@ -523,7 +536,7 @@ public function bodyRitual():void {
 	
 	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[kFLAGS.GAR_NAME] + " chanting: \"<i>With pain comes purity... CRACK!  With agony comes enlightenment... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[kFLAGS.GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
 	dynStats("lib", -.5, "sen", -2);
-	takeDamage(Math.round(maxHP()/2));
+	player.takeDamage(Math.round(player.maxHP()/2));
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	menu();
 	addButton(0,"Nothing",noReactionToBodyRitual);
@@ -532,7 +545,7 @@ public function bodyRitual():void {
 }
 
 //[b]Nothing[/b]
-public function noReactionToBodyRitual():void {
+private function noReactionToBodyRitual():void {
 	clearOutput();
 	outputText("You simply lie still and try to recover from " + flags[kFLAGS.GAR_NAME] + "'s \"gentle ministrations.\"  After a few minutes, you've caught your breath and, gathering your possessions, make your way out of the Cathedral without another word.  Damn, you're sore.");
 	doNext(13);
@@ -541,7 +554,7 @@ public function noReactionToBodyRitual():void {
 
 //[b]Revenge[/b]
 //(Confidence -5)
-public function gargoyleRevengeAfterBodyRitual():void {
+private function gargoyleRevengeAfterBodyRitual():void {
 	clearOutput();
 	outputText("Seeing " + flags[kFLAGS.GAR_NAME] + " just standing over you, gloating, causes you to sneer and lash out.  You strike her dead-center in the chest, throwing her back against the tree-idol at the church's head.  She slumps to the floor, looking meekly away from you.  While she's stunned, you gather your [armor] and stagger out of the Cathedral.");
 	//(Return PC to camp, advance time 1 hour)
@@ -551,7 +564,7 @@ public function gargoyleRevengeAfterBodyRitual():void {
 
 //[b]Cuddle[/b]
 //(Confidence +5)
-public function gargoyleCuddleAfterBodyRitual():void {
+private function gargoyleCuddleAfterBodyRitual():void {
 	clearOutput();
 	outputText("Despite the pain she's caused you, you know " + flags[kFLAGS.GAR_NAME] + " did it at your command – and hell, it could only have helped you.  Before she can react, you reach up and pull the gray gargoyle down into a kiss, pressing firmly against her soft, cold lips.  She makes a cute little gasp, but soon relaxes into your hold, allowing you to shift her weight so that she's nearly lying atop you.  You sigh contentedly and wrap your gargoyle in a tight hug, holding her close for the few minutes it takes you to recover.  When you're feeling up to it, you rustle her hair and thank her for her... gentle ministrations.  If she could blush, you're sure she would be as she looks upon you with gleaming fiery eyes.  You gather your belongings and exit the Cathedral.");
 	//(Return PC to camp, advance time 1 hour)
@@ -561,7 +574,7 @@ public function gargoyleCuddleAfterBodyRitual():void {
 
 //[b]“Mind”[/b]
 //(PC Decreases Corruption and Lust, increases Intelligence)
-public function mindGargoyleRitual():void {
+private function mindGargoyleRitual():void {
 	clearOutput();
 	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you've been plagued with dirty thoughts, and would like to undo some of the corruption that's spread to your mind.  " + flags[kFLAGS.GAR_NAME] + " nods respectfully and tells you to kneel before the altar. You do so, assuming a low, supplicating stance before the tree-idol at the Cathedral's head as the gargoyle picks up the bowl of water and raises it on high.");
 	outputText("\n\n\"<i>Blessed is " + player.mf("he","she") + " who seeks purity,</i>\" she says, closing her eyes and bowing her head, \"<i>Blessed is " + player.mf("he","she") + " who seeks wisdom; and blessed is " + player.mf("he","she") + " who lusts after holiness and virtue before pleasures of the flesh.</i>\"");
@@ -569,14 +582,14 @@ public function mindGargoyleRitual():void {
 	
 	outputText("\n\nYou do so, taking a long drought of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
 	dynStats("lus", -10, "cor", -.5);
-	//takeDamage(Math.round(maxHP()/2));
+	//player.takeDamage(Math.round(player.maxHP()/2));
 	fatigue(50);
 	doNext(13);
 }
 
 //[b]Banishment[/b]
 //(PC is cleared of Worms and/or Exgartuan)
-public function banishmentGargoyleRitual():void {
+private function banishmentGargoyleRitual():void {
 	clearOutput();
 	outputText("Talking about " + flags[kFLAGS.GAR_NAME] + "'s rituals, you explain that you seem to have picked up ");
 	if(player.hasStatusAffect("Exgartuan") >= 0) outputText("a hitchhiker");
@@ -611,7 +624,7 @@ public function banishmentGargoyleRitual():void {
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
 	if(player.hasStatusAffect("Exgartuan") >= 0) player.removeStatusAffect("Exgartuan");
 	else player.removeStatusAffect("infested");
-	takeDamage(Math.round(maxHP()/3));
+	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	addButton(0,"Nothing",dontFreakOutAfterBanishment);
@@ -620,7 +633,7 @@ public function banishmentGargoyleRitual():void {
 }
 
 //[b]Nothing[/b]
-public function dontFreakOutAfterBanishment():void {
+private function dontFreakOutAfterBanishment():void {
 	clearOutput();
 	outputText("You simply lie still and try to recover from " + flags[kFLAGS.GAR_NAME] + "'s “gentle ministrations. ” After a few minutes, you've caught your breath and, gathering your possessions, make your way out of the Cathedral without another word. Damn, you're sore.");
 	//(Return PC to camp, advance time 1 hour)
@@ -629,7 +642,7 @@ public function dontFreakOutAfterBanishment():void {
 
 //[b]Revenge[/b]
 //(Confidence -5)
-public function getRevengeForBanishments():void {
+private function getRevengeForBanishments():void {
 	clearOutput();
 	outputText("Seeing " + flags[kFLAGS.GAR_NAME] + " just standing over you, gloating, causes you to sneer and lash out.  You strike her dead-center in the chest, throwing her back against the tree-idol at the church's head.  She slumps to the floor, looking meekly away from you.  While she's stunned, you gather your [armor] and stagger out of the Cathedral.");
 	//(Return PC to camp, advance time 1 hour)
@@ -639,7 +652,7 @@ public function getRevengeForBanishments():void {
 
 //[b]Cuddle[/b]
 //(Confidence +5)
-public function cuddleForBanishments():void {
+private function cuddleForBanishments():void {
 	clearOutput();
 	outputText("Despite the pain she's caused you, you know " + flags[kFLAGS.GAR_NAME] + " did it at your command – and hell, it could only have helped you.  Before she can react, you reach up and pull the gray gargoyle down into your lap, hugging her around the waist and putting a quick kiss into the nape of her neck.  Giggling, she wraps her tail around you, giving you a gentle squeeze as she nuzzles into your chest.  You stay like that for a few minutes, cuddling the cute gargoyle, but eventually you know you need to check on things back at camp.  When you're feeling up to it, you rustle her hair and thank her for her... gentle ministrations.  If she could blush, you're sure she would be as she looks upon you with gleaming fiery eyes.  You gather your belongings and exit the Cathedral.");
 	//(Return PC to camp, advance time 1 hour)
@@ -648,7 +661,7 @@ public function cuddleForBanishments():void {
 }
 //[b]Kinky Rituals (First Time)[/b]
 //(While Confidence 70+)
-public function gargoyleKinkyRituals():void {
+private function gargoyleKinkyRituals():void {
 	clearOutput();
 	if(flags[kFLAGS.KINKY_RITUALS_SPOKEN] == 0) {
 		outputText("You broach the subject of rituals to your gargoyle and are met with a surprisingly coy smile from her.  You ask her what's on her mind, to which " + flags[kFLAGS.GAR_NAME] + " chuckles and says, \"<i>I've been thinking, Master. If you so desire, it may be possible to... enhance... the rituals that I've been using.</i>\"");
@@ -670,7 +683,7 @@ public function gargoyleKinkyRituals():void {
 }
 
 //[b]Body[/b]
-public function kinkyBodyRitual():void {
+private function kinkyBodyRitual():void {
 	clearOutput();
 	//(Confidence +2)
 	//(PC decreases Libido and Sensitivity. Suffers 20% Max HP damage, to a minimum of 1 pt. remaining)
@@ -699,14 +712,14 @@ public function kinkyBodyRitual():void {
 	outputText("\n\nYou spend a few minutes cuddling with " + flags[kFLAGS.GAR_NAME] + ", but sadly, you know you can't leave your camp unattended for too long.  Giving her a pat on the head and a kiss on the brow, you gather up your clothes and head on back to camp.");
 	dynStats("tou", .5, "lib", -.5, "sen", -2);
 	gargoyleConfidence(2);
-	takeDamage(Math.round(maxHP()/2));
+	player.takeDamage(Math.round(player.maxHP()/2));
 	doNext(13);
 }
 	
 //[b]Mind[/b]
 //(Confidence +2)
 //(PC Decreases Corruption and Lust, increases Intelligence)
-public function mindRitualPervy():void {
+private function mindRitualPervy():void {
 	clearOutput();
 	gargoyleConfidence(2);
 	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you've been plagued with dirty thoughts, and would like to undo some of the corruption that's spread to your mind.  With a deep nod conveying both a respect for your choice and an eagerness to engage in the ritual, " + flags[kFLAGS.GAR_NAME] + " tells you to kneel before the altar.  You do so, assuming a low, supplicating stance before the tree-idol at the Cathedral's head as the gargoyle clears off the altar save for the humble bowl of water.");
@@ -728,7 +741,7 @@ public function mindRitualPervy():void {
 
 //[b]Banish[/b]
 //(Confidence +2)
-public function banishPervRitual():void {
+private function banishPervRitual():void {
 	clearOutput();
 	//(PC is cleared of Worms and/or Exgartuan)
 	outputText("You explain to " + flags[kFLAGS.GAR_NAME] + " that you seem to have picked up ");
@@ -775,7 +788,7 @@ public function banishPervRitual():void {
 	//(Return PC to camp, advance time 1 hour)
 	if(player.hasStatusAffect("Exgartuan") >= 0) player.removeStatusAffect("Exgartuan");
 	else player.removeStatusAffect("infested");
-	takeDamage(Math.round(maxHP()/3));
+	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	gargoyleConfidence(2);
 	doNext(13);
@@ -783,7 +796,7 @@ public function banishPervRitual():void {
 
 
 //[b]Talk[/b]
-public function talkToGargoyle(output:Boolean = true):void {
+private function talkToGargoyle(output:Boolean = true):void {
 	if(output) {
 		clearOutput();
 		outputText("You take a seat on one of the sanctuary's pews, motioning for " + flags[kFLAGS.GAR_NAME] + " to join you.");
@@ -803,7 +816,7 @@ public function talkToGargoyle(output:Boolean = true):void {
 	addButton(4,"Back",returnToCathedral);
 }
 
-public function historyGo():void {
+private function historyGo():void {
 	if(flags[kFLAGS.GAR_HISTORY] == 0) {
 		flags[kFLAGS.GAR_HISTORY] = 1;
 		talkToGargoyleHistoryA();
@@ -819,7 +832,7 @@ public function historyGo():void {
 }
 
 //[b]History A[/b]
-public function talkToGargoyleHistoryA():void {
+private function talkToGargoyleHistoryA():void {
 	clearOutput();
 	
 	outputText("You ask " + flags[kFLAGS.GAR_NAME] + " what she can tell you about the history of Mareth.  She shrugs lightly.  \"<i>I can't tell you much, Master.  I've spent my entire life on these grounds.  Most of what I know was doctrine taught by the church. Is that acceptable?</i>\"");
@@ -833,7 +846,7 @@ public function talkToGargoyleHistoryA():void {
 }
 
 //[b]Berate[/b]
-public function berateGargoyleForBeingDumb():void {
+private function berateGargoyleForBeingDumb():void {
 	clearOutput();
 	//(Confidence -5)
 	gargoyleConfidence(-5);
@@ -843,7 +856,7 @@ public function berateGargoyleForBeingDumb():void {
 }
 
 //[b]Comfort[/b]
-public function comfortGargoyleDumbness():void {
+private function comfortGargoyleDumbness():void {
 	clearOutput();
 	//(Confidence +3)
 	gargoyleConfidence(10);
@@ -856,7 +869,7 @@ public function comfortGargoyleDumbness():void {
 }
 
 //[b]History B[/b]
-public function historyOfGargoylesB():void {
+private function historyOfGargoylesB():void {
 	clearOutput();
 	outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the demons coming to Mareth");
 	if(gargoyleConfidence() >= 70) outputText(" if she's up to it");
@@ -872,10 +885,10 @@ public function historyOfGargoylesB():void {
 }
 	
 //[b]History C[/b]
-public function gargoyleHistoryC():void {
+private function gargoyleHistoryC():void {
 	clearOutput();
 	//(PC has both Isabella and Izma as followers)
-	if(izmaFollower() && isabellaFollowerScene.isabellaFollower()) {
+	if(kGAMECLASS.izmaFollower() && kGAMECLASS.isabellaFollowerScene.isabellaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a mountain range and lake.  Those last two are populated by savage beasts, minotaurs, cow-girls, anemone, and shark-people, both of whom will rend your flesh or rape you half to death.</i>\"");
 		outputText("\n\nWhoa, there. You stop " + flags[kFLAGS.GAR_NAME] + " and explain to her that some of your lovers – mates, even – are just such beasts.  You tell her a little bit about Izma and Isabella, enforcing the fact that they're both not only quite friendly, but sweet as well.  They're just regular people");
 		if(gargoyleConfidence() > 50) outputText(" just like her");
@@ -899,7 +912,7 @@ public function gargoyleHistoryC():void {
 		addButton(1,"Doesn'tCount",gargoyleDoesntCountAsAWaifu);
 	}
 	//(If PC has Izma as a follower)
-	else if(izmaFollower()) {
+	else if(kGAMECLASS.izmaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a great mountain range.  There is a lake not far from here, if I recall; a race of very dangerous shark-folk live there.</i>\"  With a chuckle, you tell " + flags[kFLAGS.GAR_NAME] + " that you're more than well aware of that; indeed, you consider one such creature to be your mate, your beta.  She makes a slight gasp, and gushes out an apology.  \"<i>I'm so sorry, Master!  I hadn't realized... I thought...</i>\" she falls silent for a moment, then says shyly, \"<i>I wasn't aware Master had a girlfriend.</i>\"  Obviously, knowing that she's not your only lady-friend has upset the poor thing.");
 		
 		outputText("\n\nWell. What do you say to that: that you're not exclusive with Izma, or that she doesn't count, being a statue and all?");
@@ -919,7 +932,7 @@ public function gargoyleHistoryC():void {
 
 //MARBLE
 //[b]Not Exclusive[/b]
-public function marbleAintExclusiveBiatch():void {
+private function marbleAintExclusiveBiatch():void {
 	clearOutput();
 	outputText("You run a hand through " + flags[kFLAGS.GAR_NAME] + "'s hair and reassure her that being with Marble won't affect the way you interact with her – you're more than able to be fond of many girls at once.  This doesn't seem to entirely please her, but neither does she throw a tantrum, so you suppose that's good enough.");
 	returnToCathedral(true);
@@ -927,7 +940,7 @@ public function marbleAintExclusiveBiatch():void {
 
 //[b]Doesn't Count[/b]
 //(Confidence -5)
-public function gargoyleDoesntCountAsAWaifu():void {
+private function gargoyleDoesntCountAsAWaifu():void {
 	clearOutput();
 	outputText("You scoff and tell her not to worry – it's not like you're cheating on Marble by being around her, after all.  She's just a statue – a toy, really. Her head sinks low, and the little gargoyle lets out a shudder that might just have been a sob.  You shake your head and change the subject.");
 	//(Return PC to " + flags[kFLAGS.GAR_NAME] + "'s main menu)
@@ -936,14 +949,14 @@ public function gargoyleDoesntCountAsAWaifu():void {
 }
 //IZMA
 //[b]Not Exclusive[/b]
-public function sharkgirlsArentExclusiveBiatch():void {
+private function sharkgirlsArentExclusiveBiatch():void {
 	clearOutput();
 	outputText("You run a hand through " + flags[kFLAGS.GAR_NAME] + "'s hair and reassure her that being with Izma won't affect the way you interact with her – you're more than able to be fond of many girls at once.  This doesn't seem to entirely please her, but neither does she throw a tantrum, so you suppose that's good enough.");
 	returnToCathedral(true);
 }
 
 //[b]Doesn't Count[/b]
-public function gargoylesDontCountAsSharkWaifus():void {
+private function gargoylesDontCountAsSharkWaifus():void {
 	clearOutput();
 	//(Confidence -5)
 	gargoyleConfidence(-5);
@@ -955,7 +968,7 @@ public function gargoylesDontCountAsSharkWaifus():void {
 
 //IZMA & ISABELLA
 //[b]Dodge[/b]
-public function izmaAndIsabellaDodge():void {
+private function izmaAndIsabellaDodge():void {
 	clearOutput();
 	//(Confidence -5)
 	gargoyleConfidence(-5);
@@ -966,7 +979,7 @@ public function izmaAndIsabellaDodge():void {
 
 //[b]Slave[/b]
 //(Confidence -15)
-public function gargoylesAreSlavesYo():void {
+private function gargoylesAreSlavesYo():void {
 	clearOutput();
 	gargoyleConfidence(-15);
 	outputText("Well, really, what is she but a slave?  She's just a toy when you want sexual release, a servant to perform rituals at your demand, and a bit of eye-candy besides.  She's not even a real person – not really.  You tell her that, quite bluntly.  She makes no response, verbally at least, but she does give off a sob-like shudder and curls up into a little ball where she sits, hiding her face from you.");
@@ -975,7 +988,7 @@ public function gargoylesAreSlavesYo():void {
 	doNext(13);
 }
 //[b]Girlfriend[/b]
-public function gargoylesAreGirlfriends():void {
+private function gargoylesAreGirlfriends():void {
 	//(Confidence +15)
 	clearOutput();
 	
@@ -992,7 +1005,7 @@ public function gargoylesAreGirlfriends():void {
 	addButton(4,"Leave",eventParser,13);
 }
 
-public function cathedralTalks():void {
+private function cathedralTalks():void {
 	if(flags[kFLAGS.GAR_CATHEDRAL] == 0) {
 		flags[kFLAGS.GAR_CATHEDRAL]++;
 		talkCathedralA();
@@ -1009,7 +1022,7 @@ public function cathedralTalks():void {
 
 
 //[b]Cathedral A[/b]
-public function talkCathedralA():void {
+private function talkCathedralA():void {
 	clearOutput();
 	outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little about the Cathedral around you.  She visibly brightens at the idea.  \"<i>This is the greatest structure for miles around,</i>\" she claims proudly, motioning toward the vaulted ceiling and the remaining stained glass windows.  \"<i>Well, it isn't much to look at now, Master, but it was magnificent.  People came from all around to pray here.  It was wonderful...</i>\" she trails off, looking misty-eyed into the distance, remembering.");
 	
@@ -1024,7 +1037,7 @@ public function talkCathedralA():void {
 
 //[b]Pointless[/b]
 //(Confidence -2)
-public function pointlessGargoylesArePointless():void {
+private function pointlessGargoylesArePointless():void {
 	clearOutput();
 	gargoyleConfidence(-5);
 	outputText("You roll your eyes and try to explain how foolish that is.  It's a building in the middle of nowhere; the demons sure as hell don't care about it, especially when there are no people around to corrupt or enslave.  You command her not to waste her time repairing the building any more than is necessary to make it bearable for you when you're there; anything more than that is effort wasted.");
@@ -1038,7 +1051,7 @@ public function pointlessGargoylesArePointless():void {
 
 //[b]Encourage[/b]
 //(Confidence +2)
-public function encourageGargoyleWaifuToDoSomething():void {
+private function encourageGargoyleWaifuToDoSomething():void {
 	clearOutput();
 	gargoyleConfidence(10);
 	outputText("You give " + flags[kFLAGS.GAR_NAME] + " a pat on the head and tell her it's a wonderful idea.  She makes a happy squeak and immediately flutters over to a pile of debris and starts cleaning it up.  Before you know it, the little gargoyle's on a roll, whistling a jaunty tune as she starts repairing some of the more obvious damage.  Seeing her so engrossed, you can't help but smile.  You wander over and start to give her a hand.");
@@ -1050,7 +1063,7 @@ public function encourageGargoyleWaifuToDoSomething():void {
 }
 
 //[b]Cathedral B[/b]
-public function cathedralBTalk():void {
+private function cathedralBTalk():void {
 	clearOutput();
 	outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit more about the religion that called the Cathedral its home.  Happily, this seems to be an engaging topic for the little gargoyle, who eagerly explains: \"<i>They worshiped a pantheon of gods – the beings that inhabited this world before the animal-morphs were raised up, and long before the demons came.  Marae was the chief goddess,</i>\" she says, nodding to the tree-shaped icon at the head of the sanctuary.  \"<i>She taught the people rituals to better their lives, rituals to purify their minds and bodies, and even helped them learn the basics of life.  These gods were creators, raising up the animals of the world to intelligence, mirroring that of the humans.  For that, they were worshiped and... in some cases, imitated.</i>\"");
 	
@@ -1062,7 +1075,7 @@ public function cathedralBTalk():void {
 }
 
 //[b]Cathedral C[/b]
-public function cathedralC():void {
+private function cathedralC():void {
 	clearOutput();
 	outputText("As you sit down with " + flags[kFLAGS.GAR_NAME] + " to talk, you remember her words when you first met indicating that she could not – or would not – leave the Cathedral, even if you asked her to.   You ask her about that.");
 	outputText("\n\n\"<i>Master,</i>\" " + flags[kFLAGS.GAR_NAME] + " says, now looking you straight in the eye, \"<i>the Cathedral is my home, the only home I've ever known.  Even if I could leave, I would not want to");
@@ -1085,7 +1098,7 @@ public function cathedralC():void {
 
 //[b]Comfort[/b]
 //(Comfort +10)
-public function comfortGargoyle():void {
+private function comfortGargoyle():void {
 	clearOutput();
 	outputText("You pick " + flags[kFLAGS.GAR_NAME] + " up and wrap her in a tight hug, telling her that's everything's going to be all right and that you're here for her.  She makes a happy, girlish squeal and hugs you back, quickly wrapping her legs around your waist and planting a kiss on your cheek.  You sit back down, resting her on your lap, and ruffle her hair.  She grins and hugs you tighter until you're almost struggling to breathe.");
 	outputText("\n\n\"<i>Thank you, Master,</i>\" she whispers into your ear, giving it a little kiss.  \"<i>I'll always be here for you, too.  I swear it.</i>\"");
@@ -1102,7 +1115,7 @@ public function comfortGargoyle():void {
 
 //[b]Berate[/b]
 //(Confidence -10)
-public function berateDatGargoyle4SomeSavin():void {
+private function berateDatGargoyle4SomeSavin():void {
 	clearOutput();
 	outputText("Right.  Because becoming a living footstool for you was TOTALLY worth everyone she ever knew being raped out of their minds.  You give " + flags[kFLAGS.GAR_NAME] + " a hard swat and remind her exactly how moronic she's being.  She recoils, shying away from you as you stand up and head for the door.  Over your shoulder, you tell her you're glad she's bound here – that way she can't fuck up and get you killed, too.");
 	//(Return PC to camp, advance time 1 hour)
@@ -1110,7 +1123,7 @@ public function berateDatGargoyle4SomeSavin():void {
 	doNext(13);
 }
 
-public function talkAboutGarName():void {
+private function talkAboutGarName():void {
 	if(flags[kFLAGS.GAR_NAME_TALKS] == 0) {
 		flags[kFLAGS.GAR_NAME_TALKS] = 1;
 		garNameA();
@@ -1128,7 +1141,7 @@ public function talkAboutGarName():void {
 
 //[b]" + flags[kFLAGS.GAR_NAME] + " A[/b]
 //(Confidence +3)
-public function garNameA():void {
+private function garNameA():void {
 	clearOutput();
 	outputText("Curious about your gargoyle, you ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about her life before you arrived.  She makes a nervous chuckle at the request, and shyly says, \"<i>Master is too kind...  I am no one special...</i>\"");
 	
@@ -1159,7 +1172,7 @@ public function garNameA():void {
 }
 
 //[b]" + flags[kFLAGS.GAR_NAME] + " B[/b]
-public function garNameB():void {
+private function garNameB():void {
 	clearOutput();
 	//(Confidence +3)
 	outputText("Settling in for what could be a long talk, you ask " + flags[kFLAGS.GAR_NAME] + " if she's finally ready to tell you about her last Master.  She sighs heavily, but with a bit of encouragement, she begins to speak: \"<i>Master was... an unusual specimen, I should think.  She was so very beautiful, so very gentle,</i>\" the gargoyle says, almost wistfully.");
@@ -1177,7 +1190,7 @@ public function garNameB():void {
 }
 
 //[b]" + flags[kFLAGS.GAR_NAME] + " C[/b]
-public function garNameC():void {
+private function garNameC():void {
 	//(Confidence +3)
 	gargoyleConfidence(5);
 	clearOutput();
@@ -1197,7 +1210,7 @@ public function garNameC():void {
 
 //[b]Comfort[/b]
 //(Confidence +15)
-public function comfortGarNameC():void {
+private function comfortGarNameC():void {
 	clearOutput();
 	outputText("You pull " + flags[kFLAGS.GAR_NAME] + " onto your lap and run your hand through her hair.  You tell her that she's wrong – dead wrong.  She is a person, and she is not helpless.  She's anything but.");
 	
@@ -1218,7 +1231,7 @@ public function comfortGarNameC():void {
 
 //[b]Berate[/b]
 //(Confidence -10)
-public function berateGargoyleC():void {
+private function berateGargoyleC():void {
 	clearOutput();
 	outputText("You laugh, and tell " + flags[kFLAGS.GAR_NAME] + " exactly what you think about her – that for a talking lump of rock, she's too damn talkative and way the hell too emotional about everything.  She sits there, very quietly, listening to your every word.  She even nods, from time to time, agreeing with you!  You're not sure if that makes you angrier or not.");
 	
@@ -1234,7 +1247,7 @@ public function berateGargoyleC():void {
 }
 
 //[b]Appearance[/b]
-public function gargoyleAppearance():void {
+private function gargoyleAppearance():void {
 	clearOutput();
 	outputText("" + flags[kFLAGS.GAR_NAME] + " is a gray marble statue that, through magics you can't quite grasp, has been animated.");
 	outputText("\n\nShe stands roughly six feet tall, with a slender, girly frame.  She wears no clothes, seemingly possessing no modesty at all, and uses her brutally spiked tail as a weapon.  She has a cute, somewhat angular face that is very feminine.  Her skin and hair are a light shade of gray, though she has solid, ruby-red eyes which ");
@@ -1251,4 +1264,6 @@ public function gargoyleAppearance():void {
 
 	outputText("\n\nShe has a tight asshole between her soft butt cheeks, right where it belongs.");
 	returnToCathedral(true);
+}
+}
 }

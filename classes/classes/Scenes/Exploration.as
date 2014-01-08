@@ -7,8 +7,6 @@ package classes.Scenes
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 
@@ -131,13 +129,13 @@ package classes.Scenes
 				}
 				else if (choosey == 1) {
 					player.explored++;
-					kGAMECLASS.lumiEncounter();
+					kGAMECLASS.lumi.lumiEncounter();
 					return;
 				}
 				else if (choosey == 2 || debug) {
 					player.explored++;
-					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoylesTheShowNowOnWBNetwork();
-					else kGAMECLASS.returnToCathedral();
+					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
+					else kGAMECLASS.gargoyle.returnToCathedral();
 					return;
 				}
 				//Monster - 50/50 imp/gob split.

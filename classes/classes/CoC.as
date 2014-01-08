@@ -14,10 +14,6 @@
 	import classes.Creature;
 	import classes.ItemSlotClass;
 	import classes.PerkClass;
-	import classes.Scenes.Areas.Plains;
-	import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
-	import classes.Scenes.Places.Bazaar;
-	import classes.Scenes.Places.TelAdre;
 	import classes.StatusAffectClass;
 	import classes.VaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
@@ -41,6 +37,7 @@
 	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.Scenes.Dungeons.Factory.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
+	import classes.Scenes.Explore.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.*;
@@ -127,6 +124,11 @@
 		public var mountain:Mountain = new Mountain();
 		public var plains:Plains = new Plains();
 		public var swamp:Swamp = new Swamp();
+		// Scenes/Dungeons
+		public var brigidScene:BrigidScene = new BrigidScene();
+		// Scenes/Explore/
+		public var gargoyle:Gargoyle = new Gargoyle();
+		public var lumi:Lumi = new Lumi();
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
@@ -162,9 +164,6 @@
 		public var farm:Farm = new Farm();
 		public var telAdre:TelAdre = new TelAdre();
 
-		// Dungeons
-		public var brigidScene:BrigidScene = new BrigidScene();
-		// Exploration scenes
 		// Other scenes
 		[Scene]
 		public var testContent:TestContent = new TestContent();
@@ -179,13 +178,11 @@
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/gangbangVillage.as";
-		include "../../includes/gargoyle.as";
 		include "../../includes/items.as";
 		include "../../includes/izma.as";
 		include "../../includes/jasun.as";
 		include "../../includes/katherine.as";
 		include "../../includes/library.as";
-		include "../../includes/lumi.as";
 		include "../../includes/marae.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/milkWaifu.as";
