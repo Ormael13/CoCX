@@ -10,8 +10,8 @@ if [ "$STAGE" = "setup" ]; then
 	if [ ! -d "$DIRECTORY" ]; then
 		git clone "git@github.com:herp-a-derp/CoC-Alpha.git" ../binRepo
 	else
-		(cd ../binRepo && git pull)
-		(cd ../binRepo && git reset --hard HEAD)
+		(cd ../binRepo && git fetch origin)
+		(cd ../binRepo && git reset --hard origin/master)
 		(cd ../binRepo && rm CoC*.swf)
 		(cd ../binRepo && rm CoC*.apk)
 
