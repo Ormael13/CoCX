@@ -1855,6 +1855,9 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
 public function createCallBackFunction(func:Function, arg:*):Function
 {
+	if (func == null && CoC_Settings.haltOnErrors){
+		throw new Error("createCallBackFunction(null,"+arg+")");
+	}
 	if( arg == -9000 || arg == null )
 	{
 		if (func == eventParser && CoC_Settings.haltOnErrors){
@@ -1879,6 +1882,9 @@ public function createCallBackFunction(func:Function, arg:*):Function
 }
 public function createCallBackFunction2(func:Function,...args):Function
 {
+	if (func == null && CoC_Settings.haltOnErrors){
+		throw new Error("createCallBackFunction(null,"+args+")");
+	}
 	return function():*
 	{
 		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
@@ -1951,14 +1957,14 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 		var callback :Function, toolTipText :String;
 
 		
-		callback = createCallBackFunction(func1, arg1);
-
-		toolTipText = getButtonToolTipText( label );
 
 		
 		if( func != null )
 		{
-			// This is a kind of messy hack because I want to log the button events, so I can do better debugging. 
+			callback = createCallBackFunction(func1, arg1);
+
+			toolTipText = getButtonToolTipText( label );
+			// This is a kind of messy hack because I want to log the button events, so I can do better debugging.
 			// therefore, we wrap the callback function in a shim function that does event-logging, and
 			// *then* calls the relevant callback.
 
