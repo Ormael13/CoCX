@@ -895,6 +895,7 @@ public function onFileSelected(evt:Event):void
 public function onFileLoaded(evt:Event):void
 {
 	var tempFileRef:FileReference = FileReference(evt.target);
+	trace("File target = ", evt.target);
 	loader = new URLLoader();
 	loader.dataFormat = URLLoaderDataFormat.BINARY;
 	loader.addEventListener(Event.COMPLETE, onDataLoaded);
@@ -924,8 +925,18 @@ public function onDataLoaded(evt:Event):void
 		// I want to be able to write some debug stuff to the GUI during the loading process
 		// Therefore, we clear the display *before* calling loadGameObject
 		outputText("", true);
-
-		loadGameObject(loader.data.readObject());
+		trace("OnDataLoaded! - Reading data", loader, loader.data.readObject);
+		var tmpObj:Object = loader.data.readObject();
+		trace("Read in object = ", tmpObj);
+		
+		CONFIG::debug 
+		{
+			if (tmpObj == null)
+			{
+				throw new Error("Bad Save load?"); // Re throw error in debug mode.
+			}
+		}
+		loadGameObject(tmpObj);
 		outputText("Loaded Save");
 	}
 	catch (rangeError:RangeError)
@@ -936,6 +947,8 @@ public function onDataLoaded(evt:Event):void
 	catch (error:Error)
 	{
 		outputText("<b>!</b> Unhandled Exception", true);
+		outputText("[pg]Failed to load save. The file may be corrupt!");
+
 		doNext(30);
 	}
 	statScreenRefresh();
@@ -971,6 +984,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	import classes.StatusAffectClass;
 	
 	var counter:Number = player.cocks.length;
+	trace("Loading save!", saveFile)
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
 	var saveFile:* = saveData;
