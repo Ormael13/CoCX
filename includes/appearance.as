@@ -571,8 +571,8 @@ public function appearance(e:MouseEvent = null):void
 	else if(player.tailType == TAIL_TYPE_FOX) 
 	{
 		if(player.tailVenom == 1) 
-			outputText("  A swishing, colorful fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-		else outputText("  " + Num2Text(player.tailVenom) + " swishing, colorful fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+			outputText("  A swishing " + player.hairColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.hairColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 	}
 	else if(player.tailType == TAIL_TYPE_DRACONIC) 
 	{
