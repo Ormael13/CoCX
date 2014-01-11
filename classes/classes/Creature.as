@@ -1748,10 +1748,8 @@ package classes
 			{
 				counter--;
 				if (breastRows[counter].fuckable)
-					index = counter;
+					return true;
 			}
-			if (breastRows[index].fuckable)
-				return true;
 			return false;
 		}
 		
@@ -1773,10 +1771,8 @@ package classes
 			{
 				counter--;
 				if (breastRows[counter].nipplesPerBreast > 0)
-					index = counter;
+					return true;
 			}
-			if (breastRows[index].nipplesPerBreast > 0)
-				return true;
 			return false;
 		}
 		
