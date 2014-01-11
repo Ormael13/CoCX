@@ -31,12 +31,12 @@ internal function approachSoberUrtaHeatRutProc():void {
 	else outputText("  You keep reminding yourself what Urta is packing between her legs and how much precious semen it can give, and can't help but want to try that now");
 	outputText(".  Not to mention, with or without the monster between her legs, her body is sexy as hell.");
 
-	outputText("\n\n\"<i>Well, you do help me with my own releases, so I suppose that's fair....");
+	outputText("\n\n\"<i>Well, you do help me with my own releases, so I suppose that's fair....");
 	if(player.hasStatusAffect("heat") >= 0 && player.hasVagina()) outputText("  You... smell good, so I at least hope you're not here to tease me.");
-	outputText("</i>\"  She leans closer to you, and ");
+	outputText("</i>\"  She leans closer to you, and ");
 	if(player.hasStatusAffect("rut") >= 0 && player.hasCock()) outputText("your eyes are quickly drawn to her full breasts as she whispers something to you. You're too hypnotized to care.");
 	else outputText("you lose yourself in your imagination about having Urta take you raw and pump you full of sperm.  There's a faint voice you hear, and you realize it's Urta's as you snap back to reality.");
-	outputText("  She coughs and repeats herself.  \"<i>Are you here because of your, um, condition? Youâ'd prefer to blow off some steam with ");
+	outputText("  She coughs and repeats herself.  \"<i>Are you here because of your, um, condition? Youâ'd prefer to blow off some steam with ");
 	if(urtaLove()) outputText("your adorable, hot vixen");
 	else outputText("someone you know and trust");
 	outputText(", right?</i>\"");
@@ -54,7 +54,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	if(!urtaQuestDone()) outputText(", even if something keeps reminding you that's impossible.");
 	else outputText(".");
 
-	outputText("\n\n\"<i>You know, [name] I'm glad to see you as always.  ");
+	outputText("\n\n\"<i>You know, [name] I'm glad to see you as always.  ");
 	if(urtaLove()) outputText("  I'm really thankful you managed to control yourself and see me with this.  You know that if you need me, I'm always ready to help, love.</i>\"");
 	else outputText("  I'm really flattered you thought of me when in such a state!</i>\"");
 
@@ -64,7 +64,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	else outputText("[vagina]");
 	outputText(" against her backside.");
 
-	outputText("\n\n\"<i>Um, you know, I'm horny, too, but at least wait till we get to my place...</i>\"");
+	outputText("\n\n\"<i>Um, you know, I'm horny, too, but at least wait till we get to my place...</i>\"");
 
 	//Player in heat and rut:
 	if(player.hasStatusAffect("rut") >= 0 && player.hasStatusAffect("heat") >= 0 && player.hasCock() && player.hasVagina()) {
@@ -83,7 +83,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 		else outputText("  Your [cock biggest] begins to seep precum into your clothes");
 		outputText(", so you decide to dispose of them as you force Urta against a wall.");
 
-		outputText("\n\n\"<i>Okay, fine. I had it coming,</i>\" Urta says, though she doesn't sound very unenthusiastic about the prospect of having sex in the alley and, from the stiffness of her cock and wetness of her pussy, her body looks even less opposed to it.");
+		outputText("\n\n\"<i>Okay, fine. I had it coming,</i>\" Urta says, though she doesn't sound very unenthusiastic about the prospect of having sex in the alley and, from the stiffness of her cock and wetness of her pussy, her body looks even less opposed to it.");
 
 		outputText("\n\nYou shed your [armor] as you approach the willing fox-morph with your cock in hand");
 		if(player.hasVagina()) outputText(" and your pussy dripping and eager");
@@ -332,7 +332,7 @@ private function soberUrtaSatingPCHeat():void {
 	}
 	outputText(", letting you have a few moments to get used to her mammoth member and accommodate it.");
 	
-	outputText("\n\n\"<i>Ready to get fucked, lover?</i>\"  She pushes your back against the wall before withdrawing her hips and her cock, and then pushes back in, making you yell from the stimulation.  She starts to pound you with long, deep strokes, her giant hermhood stretching you wide and making it hard to feel or think about anything else other than pleasure.  Urta licks your [nipples] as she continues to pound into you, and you feel a fast-approaching orgasm.  The sexy hermaphrodite vixen rams herself into you a few more times before you let yourself go and announce your ecstasy to the walls of the empty alley.");
+	outputText("\n\n\"<i>Ready to get fucked, lover?</i>\"  She pushes your back against the wall before withdrawing her hips and her cock, and then pushes back in, making you yell from the stimulation.  She starts to pound you with long, deep strokes, her giant hermhood stretching you wide and making it hard to feel or think about anything else other than pleasure.  Urta licks your [nipples] as she continues to pound into you, and you feel a fast-approaching orgasm.  The sexy hermaphrodite vixen rams herself into you a few more times before you let yourself go and announce your ecstasy to the walls of the empty alley.");
 	if(player.hasCock()) outputText(" Cum rushes out of [eachCock] and onto the soft fur of Urta's abdomen, then starts leaking out slowly in time with her thrusts.");
 	outputText(" Your cunt clamps down tighter onto Urta as you orgasm,");
 	if(player.wetness() >= 4) outputText(" pussy juice shooting out around her member, coating Urta's fur and soaking her balls and the base of her cock.");
@@ -486,7 +486,7 @@ private function sateRutWithSoberUrta():void {
 
 	outputText("\n\nThe sight makes you halt your advance.  Not out of disgust with Urta's body - how could you be, when you have have sex to her before now?  No, the problem is that you can't figure out how to approach her - those apple-sized balls of hers are in the way.");
 
-	outputText("\n\nUrta looks at you, and then starts to push herself up off of the wall, obviously intending to turn herself around and present her rear to you for ease of access.  As the realisation comes in, you suddenly move, pinning her back against the boards.  She looks at you, askance, and opens her mouth to speak, when you interrupt her by kissing her.  As your tongues tangle inside her mouth, you reach down and grab her balls.  They are too big to be palmed in one hand, and you jiggle them accidentally.  Urta moans and whimpers at the stimulation and for several long moments you stroke and caress her cum-swollen testicles, pre starting to pour from her flared cock-tip, smearing her beautiful big DD-cup breasts and your own [chest] alike.  You can feel her nipples rubbing against yours, sparks of electricity surging through you both at the contact.  Finally, though, you manage to awkwardly hoist up her balls, allowing your cockdescript access to her drooling black netherlips.");
+	outputText("\n\nUrta looks at you, and then starts to push herself up off of the wall, obviously intending to turn herself around and present her rear to you for ease of access.  As the realisation comes in, you suddenly move, pinning her back against the boards.  She looks at you, askance, and opens her mouth to speak, when you interrupt her by kissing her.  As your tongues tangle inside her mouth, you reach down and grab her balls.  They are too big to be palmed in one hand, and you jiggle them accidentally.  Urta moans and whimpers at the stimulation and for several long moments you stroke and caress her cum-swollen testicles, pre starting to pour from her flared cock-tip, smearing her beautiful big DD-cup breasts and your own [chest] alike.  You can feel her nipples rubbing against yours, sparks of electricity surging through you both at the contact.  Finally, though, you manage to awkwardly hoist up her balls, allowing your " + cockDescript(x) + " access to her drooling black netherlips.");
 
 	//(Regular: 
 	if(!urtaLove()) outputText("\n\n\"<i>Yes - give it to me!</i>\"");

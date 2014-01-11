@@ -2326,6 +2326,11 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	//Flag the game as being "in combat"
 	gameState = 1;
 	monster = monster_;
+	if(monster.short == "Ember") {
+		monster.pronoun1 = emberScene.emberMF("he","she");
+		monster.pronoun2 = emberScene.emberMF("him","her");
+		monster.pronoun3 = emberScene.emberMF("his","her");
+	}
 	//Reduce enemy def if player has precision!
 	if(player.hasPerk("Precision") >= 0 && player.inte >= 25) {
 		if(monster.armorDef <= 10) monster.armorDef = 0;

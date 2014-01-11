@@ -122,7 +122,7 @@ internal function loseToSalamander():void {
 		x = player.cockThatFits(85);
 		outputText("The salamander pulls off your " + player.armorName + " with practiced speed, ", false);
 		if(player.gender == 3) outputText("revealing your " + vaginaDescript(0) + " and ", false);
-		outputText("letting your " + cockDescript(x) + " flops free, already hardened and ready for action.  She kneels down, straddling you, and grasps your " + cockDescript(x) + " firmly in both of her smoothly scaled, clawed hands.  You're nervous for a moment, eyes flickering to her long, sharp nails.  Seeing the concern in your eye, she laughs amicably.  \"<i>Hey, don't worry, lover.  I wouldn't ruin a perfectly good cock like this...  At least, not without getting a sample first...</i>\" she says, grinning.  For emphasis, she leans down and gives your " + cockDescript(x) + " a slow, sensuous lick with her long, forked tongue.\n\n", false);
+		outputText("letting your " + cockDescript(x) + " flop free, already hardened and ready for action.  She kneels down, straddling you, and grasps your " + cockDescript(x) + " firmly in both of her smoothly scaled, clawed hands.  You're nervous for a moment, eyes flickering to her long, sharp nails.  Seeing the concern in your eye, she laughs amicably.  \"<i>Hey, don't worry, lover.  I wouldn't ruin a perfectly good cock like this...  At least, not without getting a sample first...</i>\" she says, grinning.  For emphasis, she leans down and gives your " + cockDescript(x) + " a slow, sensuous lick with her long, forked tongue.\n\n", false);
 
 		outputText("She moans lustily at the taste of cockflesh, and begins to pump your " + cockDescript(0) + " with one hand as her other wanders up and begins to caress her heavy tits, grasping one for a moment, then reaching over and tweaking the other's nipple so hard she winces.  She continues the show for a good minute or two, pumping your cock in time with her self-pleasuring.  You're as hard as you'll ever be, and when you manage to tear your gaze away from her luscious tits, you can see trickles of moisture running down her thighs, signaling her own readiness for you.\n\n", false);
 
@@ -219,7 +219,7 @@ private function helDefeatedNormal(clear:Boolean = false):void {
 	spriteSelect(68);
 	if(clear) outputText("", true);
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
-		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>That was fucking AWESOME!</i>\" she shouts, bursting into sudden, hearty laughter.  A moment ago, you were worried for your life, but the sight of the enraged berzerker breaking into laughter can't help but make you grin, yourself.\n\n", false);
+		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>That was fucking AWESOME!</i>\" she shouts, bursting into sudden, hearty laughter.  A moment ago, you were worried for your life, but the sight of the enraged berzerker breaking into laughter can't help but make you grin yourself.\n\n", false);
 
 		outputText("\"<i>Oh, man,</i>\" she says, shaking her head so hard that her long hair whips about her.  \"<i>You have some killer moves, friend.  I know 'taurs that'd go a month without sticking their cocks in anything to kick ass like you do.  Hey, look, sorry I jumped you.  When I get my blood up, I can't help but just swing at anything that moves, you know?</i>\"\n\n", false);
 
@@ -754,7 +754,7 @@ private function helPossessionShitPoopCock():void {
 
 	outputText("Your eyes go wide as the base of your cock distends, cum now pouring out of it.  You yank your cock out of the hot depths, trying desperately to jerk whatever in the hell is now working its way up your shaft out.\n\n", false);
 
-	outputText("Inside your mind, you hear the bunny-girl stammer, \"<i>Egg egg egg egg...GONNA EGG!</i>\"\n\n", false);
+	outputText("Inside your mind, you hear the bunny-girl stammer, \"<i>Egg egg egg egg... GONNA EGG!</i>\"\n\n", false);
 
 	outputText("Fucking eggs!  Now wracked by a mind-numbing pleasure, you can only watch passively as the salamander throws you onto your back and clamps your bunny-cock between her massive tits.  \"<i>Since you were nice enough not to let this thing cum inside me,</i>\" she says with a grin, flicking your now-distended shaft as she pumps it between her breasts, \"<i>I'll be a good girl and help you get rid of your little problem.</i>\"\n\n", false);
 
@@ -805,9 +805,9 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	if(y >= 0) outputText(" and vagina", false);
 	outputText(".\n\n", false);
 
-	outputText("Just as you're about to pull out for the next thrust, you catch her looking over her shoulders, rage and hatred painted all over her features.  Well, you can't let that stand, can you?  You reach forward and grab a fistfull of her hair, yanking her head violently back.  She yelps, and squeezes down magnificently upon your cock", false);
+	outputText("Just as you're about to pull out for the next thrust, you catch her looking over her shoulders, rage and hatred painted all over her features.  Well, you can't let that stand, can you?  You reach forward and grab a fistful of her hair, yanking her head violently back.  She yelps, and squeezes down magnificently upon your cock", false);
 	if(y >= 0) outputText("s", false);
-	outputText(", milking you with her taut muscles.  You grin wickedly before pulling out until your cock's head is all that's left buried inside her, and grunt with pleasure as you thrust all the way back inside her in one massive thrust.  She screams again, no longer completely in pain but pleasure, her tongue lolling from her mouth as her muscles constrict tightly around you.  You pull out, thrust back in, and then again.  You keep this up for a long minute, pounding away at her asshole as she begins to moan like a whore, groping her tit with one hand and ravaging her clit with the other.\n\n", false);
+	outputText(", milking you with her taut muscles.  You grin wickedly before pulling out until your cock's head is all that's left buried inside her, and grunt with pleasure as you thrust all the way back inside her in one massive thrust.  She screams again, this time in a mix of pain and pleasure, her tongue lolling from her mouth as her muscles constrict tightly around you.  You pull out, thrust back in, and then repeat again.  You keep this up for a long minute, pounding away at her asshole as she begins to moan like a whore, groping her tit with one hand and ravaging her clit with the other.\n\n", false);
 	
 	outputText("\"<i>Oh, yeah, fuck my ass! Just like that!</i>\"  She screams, clamping down on your cock as her orgasm comes.  You shove yourself all the way in as her girlcum splatters onto your [legs], spurting from her cunt.  Her cries of rage-turned-ecstasy only make your own orgasm all the better.  You give her a few last seconds of violent pounding before you roar and explode within her, pumping your cum deep inside her ass", false);
 	if(y >= 0) outputText(" and vag", false);
@@ -863,7 +863,7 @@ private function helMinotaurThreesome():void {
 	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 0;
 	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 0;
 	outputText("", true);
-	outputText("As you wander the grasslands, you wipe your brow in the hot air, wondering where the normal denizens hereabouts have gotten off to – normally you've encountered SOMETHING by now.  Your mind turns faintly toward your salamander friend, if you can call her that after the disjointed encounters you've had, and if the stirring in your loins is any indication, you're fairly sure you kind of miss her.\n\n", false);
+	outputText("As you wander the grasslands, you wipe your brow in the hot air, wondering where the normal denizens hereabouts have gotten off to – normally you'd have encountered SOMETHING by now.  Your mind turns faintly toward your salamander friend, if you can call her that after the disjointed encounters you've had, and if the stirring in your loins is any indication, you're fairly sure you kind of miss her.\n\n", false);
 
 	outputText("You continue to walk aimlessly for a few minutes, straying a bit nearer to the mountains than you normally go on the plains.  As you continue to walk, however, you hear a sudden cow-like bellow!  You drop into a combat stance and raise your " + player.weaponName + ", almost sure the roar must be a long-ranging minotaur, but you can see nothing.  You perk your ears, and start to trace the sound as it repeats again, and again.  Your gaze fixes on a nearby hill and you quickly run to its peak, ready to intervene in whatever attack is afoot.\n\n", false);
 
@@ -872,7 +872,7 @@ private function helMinotaurThreesome():void {
 	outputText("She notices your approach over her shoulder, and stops groping her hefty tits just long enough to wave. \"<i>Hey, lover!  I – gah! – I'd normally swing a sword your way but – oh YEAH! – I'm a bit – come on, you limp-dick bastard!  FUCK ME! – busy at the moment.</i>\"\n\n", false);
 
 	outputText("You can't help but laugh at the absurdity of it.  She grins over her shoulder at you, but stops to gasp as the minotaur between her legs bucks his hips, burying his dick deep in her welcoming cunt.  \"<i>Well, don't just stand there, killer!  ", false);
-	if(player.hasCock()) outputText("I've got another hole, needs filling!</i>\"", false);
+	if(player.hasCock()) outputText("I've got another hole needs filling!</i>\"", false);
 	else outputText("There's enough 'taur to go around, so come on!</i>\"", false);
 
 	///Player's Options:
@@ -901,7 +901,7 @@ private function fuckHerAss():void {
 
 	outputText("You move to put your hands on her hips, but recoil when you feel rough, furred hands already firmly in place there.  \"<i>Heh, sorry lover,</i>\" the salamander says, sheepish.  \"<i>First come, first serve!</i>\"  As if to make it up to you, though, she takes your hands in hers and guides them up to her big E-cups, giving you something to hold on to as she starts to ride the bull's cock even faster, taking your cock in and out of her hot asshole again and again.\n\n", false);
 
-	outputText("Realizing your role here is mostly passive, you buck your hips in time with hers and start to play with her tits, relishing in the dual feeling of a vice-tight ass around your " + cockDescript(x) + " and the soft, malleable flesh of the salamander's tits in your hands.  \"<i>Oh, yeah, boys!</i>\" she cries, arching her back and humping wildly.  \"<i>Deeper!  Yeah, come on, deeper!</i>\" she screams, grabbing your hands and slamming down your cock and the taur's, burying them as deep inside her as they can go, again and again.  \"<i>Just like that!  Fuck my holes, fuck my holes, fuckfuckfuck FUCK ME!</i>\"\n\n", false);
+	outputText("Realizing your role here is mostly passive, you buck your hips in time with hers and start to play with her tits, relishing in the dual feeling of a vice-tight ass around your " + cockDescript(x) + " and the soft, malleable flesh of the salamander's tits in your hands.  \"<i>Oh, yeah, boys!</i>\" she cries, arching her back and humping wildly.  \"<i>Deeper!  Yeah, come on, deeper!</i>\" she screams, grabbing your hands and slamming down on your cock and the taur's, burying them as deep inside her as they can go, again and again.  \"<i>Just like that!  Fuck my holes, fuck my holes, fuckfuckfuck FUCK ME!</i>\"\n\n", false);
 	
 	outputText("She screams to the high heavens as she cums, spasming in your grasp, holding your hands tightly as she bucks and bounces on the cocks inside her, soaring to a mind-numbing orgasm.  Her muscles tighten, clamping you hard as you continue to fuck her ass, but the bull can't take it.  He bellows loudly and squeezes the salamander's hips, shooting his load inside her so forcefully that a few streaks squirt back out at him, coating his chest.\n\n", false);
 
@@ -909,7 +909,7 @@ private function fuckHerAss():void {
 
 	outputText("After a moment of stillness, the salamander tightens her hold on your hands and rolls off the 'taur, taking you with her so that she's lying on your chest, your cock still buried in her ass.  After taking a minute to recover, the minotaur shakily lurches to his feet and tosses a sack full of gems at his new friend before staggering off.\n\n", false);
 
-	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fist-full of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.", false);
+	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fistful of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.", false);
 	//(reduce PC lust)
 	dynStats("sen", -2, "lus=", 0);
 	flags[kFLAGS.HEL_AFFECTION]++;
@@ -1329,7 +1329,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 
 	outputText("Her areolae are massive, some three inches across, though they still seem small in comparison to her mounds.  Each of the four nipples she's presented to you is already starting to bead with little drops of milk, and you can't help but flick your tongue across them, lapping up the droplets and sending a shudder up the cow-girl's spine.  Before she has a chance to recover, you see out of the corner of your eye Hel slipping her tail up into Isabella's skirt, and the cow-girl lets out a sharp, high gasp.\n\n", false);
 
-	outputText("You withhold comment, though, as she's grabbing the back of both your heads and smashing your faces into her milky teats, forcing you and Hel to drink or suffocate.  You open wide, taking the four nipples into your mouth all at once, and are immediately rewarded with a stream of creamy, delicious milk at the first suck.  You have to chug to keep up with the massive flow coming from her breasts, seeming to make no dent her in her nigh-endless supply no matter how long you suckle from her.  What you do succeed in doing is causing Isabella to roll her head back and let out an ecstatic moan, smashing your face further into her leaking milk-jug.\n\n", false);
+	outputText("You withhold comment, though, as she's grabbing the back of both your heads and smashing your faces into her milky teats, forcing you and Hel to drink or suffocate.  You open wide, taking the four nipples into your mouth all at once, and are immediately rewarded with a stream of creamy, delicious milk at the first suck.  You have to chug to keep up with the massive flow coming from her breasts, seeming to make no dent in her nigh-endless supply no matter how long you suckle from her.  What you do succeed in doing is causing Isabella to roll her head back and let out an ecstatic moan, smashing your face further into her leaking milk-jug.\n\n", false);
 
 	outputText("Suddenly, you're rocketing toward the ground!  Isabella lands on her back with a thud and a low moo, soon joined by you and Hel, who is still locked onto Isabella's teat with a ferocious determination.  Panting, the busty shield maiden gasps out, ", false);
 	if(isabellaAccent()) outputText("\"<i>I vant you.  I need you.  Both of you.  Here and now.</i>\"\n\n", false);
@@ -1519,7 +1519,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 	//(IF HERM)
 	if(player.hasCock()) outputText("As you continue to lick Hel out, you feel a sudden crawling sensation across your belly. Looking down with alarm, you see her armored tail snaking its way across you.  It wraps around " + oMultiCockDesc() + ", coiling tightly, though it refuses to move.  Groaning, you try to buck your hips into her coiled tail, but Isabella's grasp on your " + hipDescript() + " prevents you from moving more than an inch.  Frustrated, you try to pleasure your tightly-bound cock somehow, but cannot even get your hands around it.  Giving up, you return to licking Hel's cunny, and are immediately rewarded by a hard jerk of your cock.  Now you get it!  You start licking the salamander out with redoubled effort, with a stroke for every lick.\n\n", false);
 
-	outputText("Isabella has, meanwhile, utterly buried herself in your groin.  You knew her tongue granted her immense oral abilities by virtue of its size and shape, but her skill in wielding it is driving you wild.  She's going slowly, but that's only making each long, luscious stroke of her cow-tongue even better, tantalizing you between licks.  Mercifully, she slides a pair of her fingers into your " + vaginaDescript() + ", working them into your-now-sopping-wet box between tongue-thrusts.\n\n", false);
+	outputText("Meanwhile, Isabella has utterly buried herself in your groin.  You knew her tongue granted her immense oral abilities by virtue of its size and shape, but her skill in wielding it is driving you wild.  She's going slowly, but that's only making each long, luscious stroke of her cow-tongue even better, tantalizing you between licks.  Mercifully, she slides a pair of her fingers into your " + vaginaDescript() + ", working them into your-now-sopping-wet box between tongue-thrusts.\n\n", false);
 
 	outputText("The combination of the cow-girl's finger-and-tongue fuck", false);
 	//(IF HERM: 
@@ -1642,7 +1642,7 @@ internal function foxyFluffGirlsFuckSex():void {
 	
 	outputText("The twins pick you and Hel up and toss you onto the bed, falling side by side on your backs.  The twins loom over you, with Mai stroking her knotty cock as it nears your waiting " + vaginaDescript() + ".  Seeing Miko flop her cock down on Hel's waiting cunt, you take the salamander by the hand and grit your teeth in anticipation.\n\n", false);
 
-	outputText("Grasping your " + hipDescript() + ", Mai slides her doggy cock into you in one slow, languid motion, pushing in until her thick, swollen knot presses against your lips.  You moan as her shaft gently strokes your walls, dribbling pre enough to get you nice and lubricated as she goes.  With her knot against your lips, Mai gives a few quick, forceful strokes into you before withdrawing to the tip, leaving only half an inch of her red cock inside you before slamming home, ramming her knot into you in one mighty thrust.", false);
+	outputText("Grasping your " + hipDescript() + ", Mai slides her doggy cock into you in one slow, languid motion, pushing in until her thick, swollen knot presses against your lips.  You moan as her shaft gently strokes your walls, dribbling enough pre to get you nice and lubricated as she goes.  With her knot against your lips, Mai gives a few quick, forceful strokes into you before withdrawing to the tip, leaving only half an inch of her red cock inside you before slamming home, ramming her knot into you in one mighty thrust.", false);
 	cuntChange(24,true,true,false);
 	outputText("\n\n");
 
