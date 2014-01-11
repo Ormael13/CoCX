@@ -420,7 +420,8 @@ private function soberUrtaSatingPCHeat():void {
 	}
 
 	//([Regular Urta]"You probably should learn to control yourself well enough so that next time, we can get clean at my home, not to mention fucking in the middle of the street is just:"/[Lover Urta]â Baby, next time, at least wait until we get back home, okay? Not to mention, when you provoke me, you're completely irresistible, so try to be considerate: It was amazing, though. I love you.â She says, as she kisses you gently on the lips.)
-
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	urtaLove(1);
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
 	dynStats("lib",1,"sen-",2,"lus=",0);
@@ -428,6 +429,7 @@ private function soberUrtaSatingPCHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
+
 	doNext(13);
 }
 
@@ -532,6 +534,8 @@ private function sateRutWithSoberUrta():void {
 		outputText("  I'd rather do something like this in the privacy of my home than in the middle of the street.</i>\"");
 		outputText("\n\nYou smirk and tell her you'll make no promises.  She gives your [butt] a smack that echoes off of the walls, then saunters away.  Feeling relieved, you turn and head out into the streets of the city.");
 	}
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+	urtaLove(1);
 	//usual one hour passess, player is back in TelâAdre//
 	//Knock up urta if appropriate.
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
@@ -618,6 +622,8 @@ private function drunkenUrtaFucksPCInHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	urtaLove(1);
 	doNext(15);
 }
 
@@ -665,6 +671,8 @@ private function sateRutWithDrunkUrtaWithHugeDick():void {
 	dynStats("lib",1,"sen",-1,"lust=",0);
 	//player returns to TelâAdre and loses 1 hour
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	urtaLove(1);
 	doNext(13);
 }
 
@@ -872,6 +880,8 @@ private function drunkUrtaRidesARutPCsCock():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
 	doNext(15);
