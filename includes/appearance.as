@@ -1178,7 +1178,7 @@ public function appearance(e:MouseEvent = null):void
 	if(player.ass) 
 	{
 		outputText("\n", false);
-		outputText("You have one " + assholeDescript() + ", placed between your " + buttDescript() + "-cheeks where it belongs.\n", false);
+		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
 	}
 	//Piercings!
 	if(player.eyebrowPierced > 0) 
