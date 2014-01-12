@@ -40,6 +40,10 @@ package classes.Scenes.Areas.Swamp
 			init11Armor("exoskeleton",14,"",50);
 			init12Combat(200,20,.6,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(13,rand(10) + 10);
+			init14WeightedDrop()
+					.add(consumables.S_GOSSR,5)
+					.add(useables.T_SSILK,1)
+					.add(null,4);
 			initX_Tail(TAIL_TYPE_SPIDER_ADBOMEN);
 		}
 		

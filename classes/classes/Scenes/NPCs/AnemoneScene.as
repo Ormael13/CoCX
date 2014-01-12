@@ -1124,7 +1124,7 @@ package classes.Scenes.NPCs
 			spriteSelect(71);
 			var choice:Number;
 			outputText("You reach down and pick up her present.  Today, she's left you ");
-			if (kidAXP() == 0) shortName = "DryTent";
+			if (kidAXP() == 0) shortName = MutagenLib.DRY_TENTACLE;
 			else if (kidAXP() < 50) {
 				///[IncubusDraft/SuccubusMilk/ImpFood/MinoBlood/LargeAxe]
 				choice = rand(8);
@@ -1321,7 +1321,7 @@ package classes.Scenes.NPCs
 				kidAXP(5);
 			}
 			//[Beautiful Sword]
-			else if (flags[kFLAGS.ANEMONE_WEAPON] == "B.Sword") {
+			else if (flags[kFLAGS.ANEMONE_WEAPON] == weapons.BEAUTIFUL_SWORD.id) {
 				outputText("\n\nThe sword seems to dance in the air, as though it were the perfect weight and balance for your daughter.  She delivers several playful thrusts at you and though you deflect all but the last, that one slips by your guard.  The girl's eyes widen as the point lunges at your breast, but it delivers barely a scratch before twisting away.");
 				outputText("\n\nPerhaps anemones are a bit too corrupt to use the sword effectively?");
 				//(HP -1, KidXP - 2)

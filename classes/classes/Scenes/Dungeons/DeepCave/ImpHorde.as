@@ -52,6 +52,7 @@
 			init11Armor("skin");
 			init12Combat(450,10,.5,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,20 + rand(25));
+			init14FixedDrop(armors.NURSES_OUTFIT);
 			initX_Wings(WING_TYPE_IMP,"imp wings");
 
 		}

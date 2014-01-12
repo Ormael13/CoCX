@@ -110,6 +110,11 @@
 			init11Armor("fetishy outfit");
 			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(2,5+rand(10));
+			init14WeightedDrop()
+					.add(consumables.LABOVA_,1)
+					.add(weapons.RIDING_CROP,1)
+					.add(consumables.OVIELIX,2)
+					.add(consumables.L_DRAFT,6);
 			initX_Specials(cultistRaisePlayerLust,cultistLustTransfer);
 		}
 

@@ -157,13 +157,13 @@ public function allVaginaDescript():String {
 	if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
 	if (player.vaginas.length > 1) return (vaginaDescript(rand(player.vaginas.length - 1)) + "s");
 	
-	if (CoC_Settings.haltOnErrors) throw new Error("ERROR: allVaginaDescript called with no vaginas.");
+	CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
 	return "ERROR: allVaginaDescript called with no vaginas.";
 }
 public function multiCockDescript():String {
 	if(player.cocks.length < 1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: multiCockDescript() called with no penises present.</B>";
 	}
 	//Get cock counts
@@ -308,7 +308,7 @@ public function multiCockDescriptLight():String {
 public function eMultiCockDescriptLight():String {
 	if(monster.cocks.length < 1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: eMultiCockDescriptLight() called with no penises present.</B>";
 	}
 	//Get cock counts
@@ -436,12 +436,12 @@ public function eMultiCockDescriptLight():String {
 public function eCockHead(cockNum:Number = 0):String {
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "ERROR";
 	}
 	if(cockNum > monster.cocks.length-1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "ERROR";
 	}
 	if(monster.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
@@ -614,7 +614,7 @@ public function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_co
 {
 	//Just in case...
 	//TODO Remove if never called
-	if (CoC_Settings.haltOnErrors) throw new Error("");
+	CoC_Settings.error("");
 	trace("ERROR: Someone is still calling cockAdjectives with an integer cock type");
 	var cockType:CockTypesEnum = CockTypesEnum.ParseConstantByIndex(int(i_cockType));
 	return Appearance.cockAdjectives(i_cockLength, i_cockThickness, cockType, player);
@@ -631,17 +631,17 @@ public function humanDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: humanDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to kangaDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to kangaDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -655,17 +655,17 @@ public function kangaDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: kangaDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to kangaDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to kangaDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -678,17 +678,17 @@ public function dogDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to dogDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dogDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -701,17 +701,17 @@ public function foxDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to foxDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to foxDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -724,17 +724,17 @@ public function tentacleDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to tentacleDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to tentacleDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -749,17 +749,17 @@ public function demonDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to demonDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to demonDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -779,17 +779,17 @@ public function horseDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to horseDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to horseDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -803,17 +803,17 @@ public function catDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: catDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to catDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to catDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -827,17 +827,17 @@ public function anemoneDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: anemoneDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to anemoneDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to anemoneDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -850,17 +850,17 @@ public function dragonDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to dragonDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dragonDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -874,17 +874,17 @@ public function displacerDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to dragonDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dragonDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -899,17 +899,17 @@ public function snakeDescript(cockNum:Number):String
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<b>ERROR: snakeDescript Called But No Cock Present</b>";
 	}
 	if(cockNum > (player.cocks.length - 1)) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cock number (" + cockNum + ") passed to snakeDescript()</b>";
 	}
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to snakeDescript()</b>";
 	}
 	//50% of the time add a descriptor
@@ -945,12 +945,12 @@ public function cockHead(cockNum:Number = 0):String {
 	var temp:int;
 	if(cockNum < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "ERROR";
 	}
 	if(cockNum > player.cocks.length-1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		return "ERROR";
 	}
 	if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) {

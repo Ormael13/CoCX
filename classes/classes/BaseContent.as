@@ -2,6 +2,10 @@
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.ArmorLib;
+	import classes.Items.ConsumableLib;
+	import classes.Items.UseableLib;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.Camp;
 
 	import coc.model.GameModel;
@@ -110,6 +114,11 @@
 		protected function hideUpDown():void
 		{
 			kGAMECLASS.hideUpDown();
+		}
+
+		protected function curry(func:Function,...args):Function
+		{
+			return kGAMECLASS.curry.apply(null,[func].concat(args));
 		}
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
@@ -473,35 +482,6 @@
 			return player.buttChange(cArea,display,spacingsF,spacingsB);
 		}
 
-		protected function hasItem(itemName:String, minQuantity:Number):Boolean
-		{
-			return kGAMECLASS.hasItem(itemName,minQuantity);
-		}
-
-
-		protected function consumeItem(itemName:String, quantity:Number):Boolean
-		{
-			return kGAMECLASS.consumeItem(itemName,quantity);
-		}
-
-		protected function itemLongName(shortName1:String):String
-		{
-			return kGAMECLASS.itemLongName(shortName1);
-		}
-
-		protected function itemValue(item:String):Number
-		{
-			return kGAMECLASS.itemValue(item);
-		}
-
-		protected function takeItem():void{
-			kGAMECLASS.takeItem();
-		}
-		protected function destroyItems(itemName:String, numOfItemToRemove:Number):Boolean
-		{
-			return kGAMECLASS.destroyItems(itemName,numOfItemToRemove);
-		}
-
 		protected function silly():Boolean
 		{
 			return kGAMECLASS.silly();
@@ -517,10 +497,6 @@
 			kGAMECLASS.fatigue(mod,type);
 		}
 
-		protected function isWeapon(shortName:String):Boolean
-		{
-			return kGAMECLASS.isWeapon(shortName);
-		}
 
 		protected function get eventParser():Function
 		{
@@ -596,7 +572,20 @@
 		{
 			kGAMECLASS.monster = val;
 		}
-		
+
+		protected function get consumables():ConsumableLib{
+			return kGAMECLASS.consumables;
+		}
+		protected function get useables():UseableLib{
+			return kGAMECLASS.useables;
+		}
+		protected function get weapons():WeaponLib{
+			return kGAMECLASS.weapons;
+		}
+		protected function get armors():ArmorLib{
+			return kGAMECLASS.armors;
+		}
+
 		protected function get itemSwapping():Boolean
 		{
 			return kGAMECLASS.itemSwapping;
@@ -637,54 +626,9 @@
 			kGAMECLASS.gameState = val;
 		}
 
-		protected function get itemSlot1():ItemSlotClass
+		protected function get itemSlots():Array
 		{
-			return kGAMECLASS.itemSlot1;
-		}
-		
-		protected function get itemSlot2():ItemSlotClass
-		{
-			return kGAMECLASS.itemSlot2;
-		}
-		
-		protected function get itemSlot3():ItemSlotClass
-		{
-			return kGAMECLASS.itemSlot3;
-		}
-		
-		protected function get itemSlot4():ItemSlotClass
-		{
-			return kGAMECLASS.itemSlot4;
-		}
-		
-		protected function get itemSlot5():ItemSlotClass
-		{
-			return kGAMECLASS.itemSlot5;
-		}
-		
-		protected function set itemSlot1(val:ItemSlotClass):void
-		{
-			kGAMECLASS.itemSlot1 = val;
-		}
-		
-		protected function set itemSlot2(val:ItemSlotClass):void
-		{
-			kGAMECLASS.itemSlot2 = val;
-		}
-		
-		protected function set itemSlot3(val:ItemSlotClass):void
-		{
-			kGAMECLASS.itemSlot3 = val;
-		}
-		
-		protected function set itemSlot4(val:ItemSlotClass):void
-		{
-			kGAMECLASS.itemSlot4 = val;
-		}
-		
-		protected function set itemSlot5(val:ItemSlotClass):void
-		{
-			kGAMECLASS.itemSlot5 = val;
+			return kGAMECLASS.player.itemSlots;
 		}
 		
 		protected function get itemStorage():Array

@@ -71,6 +71,14 @@
 			init11Armor("thick fur");
 			init12Combat(20 + rand(this.ballSize*2),this.ballSize * 3,hasAxe?0.84:0.87,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(hasAxe?6:5,rand(5) + 5);
+			if (hasAxe) {
+				init14FixedDrop(consumables.MINOBLO);
+			} else {
+				init14ChainedDrop()
+						.add(consumables.MINOCUM, 1 / 5)
+						.add(consumables.MINOBLO, 1 / 2)
+						.elseDrop(null);
+			}
 			initX_Specials(game.mountain.minotaurScene.minoPheromones);
 			initX_Tail(TAIL_TYPE_COW);
 		}

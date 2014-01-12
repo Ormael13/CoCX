@@ -69,6 +69,10 @@
 			init11Armor("gelatinous skin");
 			init12Combat(30, 30, 1, Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(2, rand(5) + 1);
+			init14ChainedDrop()
+					.add(weapons.PIPE, 1 / 10)
+					.add(consumables.WETCLTH, 1 / 2)
+					.elseDrop(useables.GREENGL);
 			initX_Specials(5040, 5039, 5039);
 		}
 

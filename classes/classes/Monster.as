@@ -1,7 +1,15 @@
 ﻿package classes 
 {
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.ArmorLib;
+	import classes.Items.ConsumableLib;
+	import classes.Items.UseableLib;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.NPCs.Kiha;
+	import classes.internals.RandomDrop;
+	import classes.internals.ChainedDrop;
+	import classes.internals.WeightedDrop;
+	import classes.ItemType;
 
 	/**
 	 * ...
@@ -45,6 +53,18 @@
 		protected final function combatMisdirect():Boolean {
 			return game.combatMisdirect();
 		}
+		protected function get consumables():ConsumableLib{
+			return game.consumables;
+		}
+		protected function get useables():UseableLib{
+			return game.useables;
+		}
+		protected function get weapons():WeaponLib{
+			return game.weapons;
+		}
+		protected function get armors():ArmorLib{
+			return game.armors;
+		}
 		//For enemies
 		public var bonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
@@ -55,6 +75,11 @@
 		public function set long(value:String):void
 		{
 			_long = value;
+		}
+
+		public function set armorDef(value:Number):void
+		{
+			setArmorDef(value);
 		}
 
 		//Is a creature a 'plural' encounter - mob, etc.
@@ -100,6 +125,8 @@
 			if (pronoun3=="") return "";
 			return pronoun3.substr(0,1).toUpperCase()+pronoun3.substr(1);
 		}
+
+		public var drop:RandomDrop = new ChainedDrop();
 
 		public function Monster()
 		{
@@ -257,7 +284,7 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array = new Array(13).map(function():*{return false});
+		public var initsCalled:Array = new Array(14).map(function():*{return false});
 
 		public function isFullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;
@@ -473,20 +500,20 @@
 
 		protected function init10Weapon(weaponName:String,weaponVerb:String,weaponAttack:Number=0,weaponPerk:String="",weaponValue:Number=0):void
 		{
-			this.weaponName = weaponName;
-			this.weaponVerb = weaponVerb;
-			this.weaponAttack = weaponAttack;
-			this.weaponPerk = weaponPerk;
-			this.weaponValue = weaponValue;
+			setWeaponName(weaponName);
+			setWeaponVerb(weaponVerb);
+			setWeaponAttack(weaponAttack);
+			setWeaponPerk(weaponPerk);
+			setWeaponValue(weaponValue);
 			skipInit(10);
 		}
 
 		protected function init11Armor(armorName:String,armorDef:Number=0,armorPerk:String="",armorValue:Number=0):void
 		{
-			this.armorName = armorName;
-			this.armorDef = armorDef;
-			this.armorPerk = armorPerk;
-			this.armorValue = armorValue;
+			setArmorName(armorName);
+			setArmorDef(armorDef);
+			setArmorPerk(armorPerk);
+			setArmorValue(armorValue);
 			skipInit(11);
 		}
 
@@ -509,6 +536,57 @@
 			this.gems = gems;
 			this.XP=totalXP()+additionalXP;
 			skipInit(13);
+		}
+
+		protected function init14FixedDrop(fixedDrop:ItemType=null):void
+		{
+			skipInit(14);
+			this.drop = new WeightedDrop(fixedDrop,1);
+		}
+
+		/**
+		 * Initializes droplist as a weighted droplist. Call .add(item,weight) of the
+		 * returned value to add them to list.
+		 *
+		 * Example:
+		 * init14WeightedDrop()
+		 * 		.add(A,2)
+		 * 		.add(B,10)
+		 * 		.add(C,1)
+		 * 	will drop B 10 times more often than C, and 5 times more often than A.
+		 * 	To be precise, \forall add(A_i,w_i): P(A_i)=w_i/\sum_j w_j
+		 */
+		protected function init14WeightedDrop():WeightedDrop
+		{
+			skipInit(14);
+			return this.drop as WeightedDrop;
+		}
+
+		/**
+		 * Initializes droplist as a chained-check droplist. Call .add(item,chance) of the
+		 * returned value to add them to list. Call .elseDrop(item) or pass it as method arg to set
+		 * default value (if all checks will fail).
+		 *
+		 * Example 1:
+		 * init14ChainedDrop(A)
+		 * 		.add(B,0.01)
+		 * 		.add(C,0.5)
+		 * 	will FIRST check B vs 0.01 chance,
+		 * 	if it fails, C vs 0.5 chance,
+		 * 	else A
+		 *
+		 * 	Example 2:
+		 * 	init14ChainedDrop()
+		 * 		.add(B,0.01)
+		 * 		.add(C,0.5)
+		 * 		.elseDrop(A)
+		 * 	for same result
+		 */
+		protected function init14ChainedDrop(defaultDrop:ItemType=null):ChainedDrop
+		{
+			this.drop = new ChainedDrop(defaultDrop);
+			skipInit(14);
+			return this.drop as ChainedDrop;
 		}
 
 		protected function initX_Specials(special1:*=0,special2:*=0,special3:*=0):void

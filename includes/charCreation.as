@@ -1,8 +1,8 @@
 ﻿import classes.DefaultDict;
 
 public function newGameGo(e:MouseEvent = null):void {
-	funcs = new Array();
-	args = new Array();
+	funcs = [];
+	args = [];
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
@@ -109,16 +109,16 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.exploredMountain = 0;
 	player.exploredLake = 0;
 	//Inventory clear
-	itemSlot1.unlocked = true;
-	itemSlot1.emptySlot();
-	itemSlot2.unlocked = true;
-	itemSlot2.emptySlot();
-	itemSlot3.unlocked = true;
-	itemSlot3.emptySlot();
-	itemSlot4.unlocked = false;
-	itemSlot4.emptySlot();
-	itemSlot5.unlocked = false;
-	itemSlot5.emptySlot();
+	player.itemSlot1.unlocked = true;
+	player.itemSlot1.emptySlot();
+	player.itemSlot2.unlocked = true;
+	player.itemSlot2.emptySlot();
+	player.itemSlot3.unlocked = true;
+	player.itemSlot3.emptySlot();
+	player.itemSlot4.unlocked = false;
+	player.itemSlot4.emptySlot();
+	player.itemSlot5.unlocked = false;
+	player.itemSlot5.emptySlot();
 	//PIERCINGS
 	player.nipplesPierced = 0;
 	player.nipplesPShort = "";
@@ -151,28 +151,13 @@ public function newGameGo(e:MouseEvent = null):void {
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0;
-		player.armorName= oldPlayer.armorName;
-		player.weaponName= oldPlayer.weaponName;
-		player.weaponVerb= oldPlayer.weaponVerb;
-		player.armorDef= oldPlayer.armorDef;
-		player.armorPerk= oldPlayer.armorPerk;
-		player.weaponAttack= fixedDamage(player.weaponName);
-		player.weaponPerk= oldPlayer.weaponPerk;
-		player.weaponValue= oldPlayer.weaponValue;
-		player.armorValue= oldPlayer.armorValue;
-		applyArmorStats(player.armorName, false);
+		player.armor= oldPlayer.armor;
+		player.weapon= oldPlayer.weapon;
 	}
 	//Clothes clear
 	else {
-		player.armorName= "comfortable clothes";
-		player.weaponName= "fists";
-		player.weaponVerb= "punch";
-		player.armorDef= 0;
-		player.armorPerk= "";
-		player.weaponAttack= 0;
-		player.weaponPerk= "";
-		player.weaponValue= 0;
-		player.armorValue= 0;
+		player.armor = armors.COMFORTABLE_CLOTHES;
+		player.weapon = WeaponLib.FISTS;
 	}
 	//Clear plot storage array!
 	flags = new DefaultDict();

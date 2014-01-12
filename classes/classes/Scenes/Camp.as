@@ -61,7 +61,7 @@ public function doCamp():void {
 		return;
 	}
 	//Clear out Izma's saved loot status
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 	//History perk backup
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
 		hideMenus();

@@ -231,7 +231,7 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 	if(sacrifice) {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268] = player.weaponName;
+		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 		player.weaponName = "fists";
 		player.weaponAttack = 0;
 		monster.createStatusAffect("Bow Disabled",0,0,0,0);

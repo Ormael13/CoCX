@@ -47,6 +47,10 @@ package classes.Scenes.Monsters
 			init11Armor("leathery skin",5);
 			init12Combat(100,30,.65,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(7,rand(15) + 25);
+			init14WeightedDrop().
+					add(consumables.MINOBLO,1).
+					add(consumables.LABOVA_,1).
+					add(consumables.INCUBID,6);
 			initX_Wings(WING_TYPE_IMP);
 			initX_Specials(5019);
 

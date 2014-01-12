@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake
 {
 	import classes.Cock;
+	import classes.Items.ArmorLib;
 	import classes.Monster;
 	
 	/**
@@ -104,6 +105,11 @@
 			init11Armor("religious clothes",5);
 			init12Combat(0,25,0.75,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(5,5+rand(10));
+			init14WeightedDrop()
+					.add(armors.COMFORTABLE_CLOTHES,1)
+					.add(consumables.L_DRAFT,4)
+					.add(weapons.LUST_DAGGER,1)
+					.add(null,4);
 			initX_Specials(zealotSpecial1,zealotSpecial2);
 		}
 

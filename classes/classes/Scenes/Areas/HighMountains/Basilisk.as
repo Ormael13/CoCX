@@ -97,6 +97,7 @@ package classes.Scenes.Areas.HighMountains
 			init11Armor("scales",10,"",70);
 			init12Combat(200,30,.5,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,rand(10) + 10);
+			init14ChainedDrop().add(consumables.REPTLUM,0.9);
 			initX_Tail(TAIL_TYPE_COW,0,0);
 		}
 		

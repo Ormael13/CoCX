@@ -217,6 +217,7 @@ package classes.Scenes.Areas.Forest
 			init11Armor("skin");
 			init12Combat(120,20,0.9,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(6,rand(10) + 10);
+			init14FixedDrop(consumables.FOXJEWL);
 			initX_Tail(TAIL_TYPE_FOX);
 
 		}

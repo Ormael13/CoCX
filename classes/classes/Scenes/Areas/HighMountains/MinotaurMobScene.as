@@ -355,7 +355,7 @@ private function nonAddictMinotaurGangBang():void {
 	}
 	outputText("You black out at that point, but when you wake up soaked in cum with a bottle of it next to you, you know it was a good night.", false);
 	//Force cum bottle loot!
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "MinoCum";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "MinoCum";
 	//Preggers chance!
 	player.knockUp(2,432,75);
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus=", 0, "cor", 1);
@@ -365,7 +365,7 @@ private function nonAddictMinotaurGangBang():void {
 	else {
 		menuLoc = 18;
 		outputText("\n\n", false);
-		shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
+		shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
 		takeItem();
 	}
 }
@@ -687,7 +687,7 @@ private function victoryMinotaurGangTitFuck():void {
 		}
 	}
 	//Force cum bottle loot!
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "MinoCum";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "MinoCum";
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", .5);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
@@ -695,7 +695,7 @@ private function victoryMinotaurGangTitFuck():void {
 	else {
 		menuLoc = 2;
 		outputText("\n\n", false);
-		shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
+		shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
 		takeItem();
 	}
 }

@@ -108,6 +108,7 @@ package classes.Scenes.NPCs
 			init11Armor("comfortable clothes");
 			init12Combat(30,10,1,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(4,0);
+			init14ChainedDrop().add(consumables.ECTOPLS,1/3);
 			initX_Specials();
 
 

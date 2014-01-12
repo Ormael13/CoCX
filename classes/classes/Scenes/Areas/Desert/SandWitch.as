@@ -52,6 +52,14 @@
 			init11Armor("robes");
 			init12Combat(20,30,1,TEMPERMENT_LUSTY_GRAPPLES,0);
 			init13Level(3,rand(15) + 5);
+			init14WeightedDrop().addMany(1,
+					consumables.TSCROLL,
+					consumables.OVIELIX,
+					consumables.LACTAID,
+					consumables.LABOVA_,
+					consumables.W__BOOK,
+					consumables.B__BOOK,
+					null);
 			initX_Specials(5020,special2,special3);
 
 

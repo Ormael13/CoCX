@@ -90,6 +90,7 @@
 			init11Armor("pod");
 			init12Combat(450,10,0,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,1,80);
+			init14FixedDrop(weapons.JEWELED_RAPIER);
 			initX_Specials(special1,special2,special3);
 		}
 

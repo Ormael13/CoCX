@@ -172,6 +172,10 @@ package classes.Scenes.Areas.Swamp
 				init12Combat(250,30,.4,TEMPERMENT_RANDOM_GRAPPLES);
 				init13Level(14,rand(10) + 20);
 			}
+			init14WeightedDrop()
+					.add(consumables.B_GOSSR,5)
+					.add(useables.T_SSILK,1)
+					.add(null,4);
 		}
 
 	}

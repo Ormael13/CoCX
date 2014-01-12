@@ -239,7 +239,7 @@ public static const UNKNOWN_FLAG_NUMBER_00230:int                               
 public static const IZMA_TIMES_FOUGHT_AND_WON:int                                   =  231; // Izma fight
 public static const UNKNOWN_FLAG_NUMBER_00232:int                                   =  232; // Times Talked At shark pussy
 public static const UNKNOWN_FLAG_NUMBER_00233:int                                   =  233; // Izma worm scare (1 = Izma has been scared off by worms)
-public static const UNKNOWN_FLAG_NUMBER_00234:int                                   =  234; // Izma loot storage - Izma saved loot status
+public static const BONUS_ITEM_AFTER_COMBAT_ID:int                                     =  234; // Izma loot storage - Izma saved loot status
 public static const UNKNOWN_FLAG_NUMBER_00235:int                                   =  235; // Taken Izma gloves
 public static const UNKNOWN_FLAG_NUMBER_00236:int                                   =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
 public static const UNKNOWN_FLAG_NUMBER_00237:int                                   =  237; // Izma + Marble Freakout Status = (Above)
@@ -273,8 +273,8 @@ public static const UNKNOWN_FLAG_NUMBER_00264:int                               
 public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
 public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
 public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
-public static const UNKNOWN_FLAG_NUMBER_00268:int                                   =  268; // weapon storage
-public static const UNKNOWN_FLAG_NUMBER_00269:int                                   =  269; // weapon damage
+public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
+public static const PLAYER_DISARMED_WEAPON_ATTACK:int                                   =  269; // weapon damage
 public static const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
 public static const UNKNOWN_FLAG_NUMBER_00271:int                                   =  271; // Spider Preggo Timer
 public static const UNKNOWN_FLAG_NUMBER_00272:int                                   =  272; // Times Explored Swamp

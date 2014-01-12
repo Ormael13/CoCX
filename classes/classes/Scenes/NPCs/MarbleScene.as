@@ -1579,7 +1579,7 @@ public function interactWithMarbleAtCamp():void {
 	bottom row, the milk and gathered buttons do not appear if Marble has 
 	nothing to give for them, the talk button does not appear if the player's 
 	corruption is >=50, or if Marble's corruption is >=60.*/
-	if(kGAMECLASS.hasLessItems("M. Milk", 5)) milkEvent = gotMilk;
+	if(kGAMECLASS.itemCount("M. Milk")< 5) milkEvent = gotMilk;
 	//Determine if marble has an item for the player
 	if(player.hasStatusAffect("MarbleHasItem") >= 0) gatherEvent = marbleGathered;
 	//The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted

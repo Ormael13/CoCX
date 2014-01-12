@@ -1,5 +1,6 @@
 package classes.Scenes.NPCs
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.Scenes.Areas.Lake.GooGirl;
 
@@ -48,6 +49,8 @@ package classes.Scenes.NPCs
 			init11Armor("armor",50);
 			init12Combat(500,0,.35,Monster.TEMPERMENT_LOVE_GRAPPLES,fatigue);
 			init13Level(16,rand(25)+40);
+			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) init14FixedDrop(consumables.NUMBROX);
+			else init14FixedDrop();
 		}
 		
 	}

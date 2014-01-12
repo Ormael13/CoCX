@@ -100,6 +100,7 @@ package classes.Scenes.NPCs
 			init11Armor("clammy skin");
 			init12Combat(120,30,.9,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(4,rand(5) + 1);
+			init14FixedDrop(consumables.DRYTENT);
 		}
 		
 	}

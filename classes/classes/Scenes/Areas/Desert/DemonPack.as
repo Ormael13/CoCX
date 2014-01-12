@@ -105,6 +105,12 @@
 			init11Armor("demonic skin");
 			init12Combat(200,30,1,TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(6,rand(25)+10);
+			init14WeightedDrop()
+					.addMany(1,
+							consumables.SUCMILK,
+							consumables.INCUBID,
+							consumables.OVIELIX,
+							consumables.B__BOOK);
 			initX_Specials(5043,5044);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Horns(HORNS_DEMON);

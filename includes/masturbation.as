@@ -2270,7 +2270,7 @@ public function catAutoLick():void {
 	}
 	else 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		outputText("404 ERROR - FAP NOT FOUND");
 	}
 	//Stats & next event
@@ -2668,7 +2668,7 @@ public function tentacleSelfFuck():void {
 	}
 	if(x == -1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		outputText("ERROR");
 		doNext(13);
 		return;
@@ -2826,7 +2826,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	}
 	if(x == -1) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		outputText("ERROR");
 		doNext(13);
 		return;
@@ -2901,7 +2901,7 @@ public function gildedCockTurbate():void {
 	//Did I fuck up?
 	if(x < 0) 
 	{
-		if (CoC_Settings.haltOnErrors) throw new Error("");
+		CoC_Settings.error("");
 		outputText("ERROR, NO GILDED COCK.");
 		doNext(13);
 		return;

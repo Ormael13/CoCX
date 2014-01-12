@@ -72,16 +72,8 @@ public function customPCSetup():void {
 		player.clitLength = 0.2;
 		player.femininity = 85;
 		//Beautiful Sword
-		player.weaponName = "beautiful sword";
-		player.weaponAttack = fixedDamage("beautiful sword");
-		player.weaponVerb = "slash";
-		player.weaponPerk = "holySword";
-		player.weaponValue = itemValue("beautiful sword");
-		player.weaponAttack = fixedDamage("beautiful sword");
-		player.armorName = "spider-silk armor";
-		player.armorDef = 25;
-		player.armorPerk = "";
-		player.armorValue = itemValue("spider-silk armor");
+		player.weapon = weapons.BEAUTIFUL_SWORD;
+		player.armor = armors.SPIDERSILK_ARMOR;
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 		player.createStatusAffect("Kelt",100,0,0,0);		
 		player.createKeyItem("Bow",0,0,0,0);
@@ -110,8 +102,8 @@ public function customPCSetup():void {
 		player.createPerk("Smart", 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
 		player.createPerk("History: Scholar", 0, 0, 0, 0,"You cheated.");
 		player.createPerk("Strong Back",0,0,0,0,"Cheating Nerd!");
-		itemSlot4.unlocked = true;
-		itemSlot5.unlocked = true;
+		player.itemSlot4.unlocked = true;
+		player.itemSlot5.unlocked = true;
 		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0,"Cheating Nerd!");
 		player.createPerk("History: Slacker",0,0,0,0,"Cheating Nerd!");
 		player.str += 4;
@@ -122,20 +114,12 @@ public function customPCSetup():void {
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 	}
 	if(player.short == "Leah") {
-		player.armorName = "leather armor segments";
-		player.armorDef = 5;
-		player.armorPerk = "Light";
-		player.armorValue = itemValue("leather armor segments");
+		player.armor = armors.LEATHER_ARMOR_SEGMENTS;
 		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
-		player.weaponName = "wizard's staff";
-		player.weaponVerb = "smack";
-		player.weaponValue = itemValue("wizard's staff");
-		player.weaponAttack = fixedDamage("wizard's staff");
-		itemSlot1.shortName = "B. Book";
-		itemSlot1.quantity = 1;
-		itemSlot1.shortName = "W. Book";
-		itemSlot1.quantity = 2;
-		
+		player.weapon = weapons.WIZARDS_STAFF;
+		player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
+		player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
+
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 4;
@@ -352,17 +336,10 @@ public function customPCSetup():void {
 		player.earType = EARS_DOG;
 		////"	"I'm picturing a tall, feminine German-Shepherd morph, solid white and gorgeous. She has both sets of genitals, with no balls, and a large set of breasts. She wields a large claymore and is dressed in a full chain vest and pants. 
 		//large claymore (and the strength to use it)
-		player.weaponName = "large claymore";
-		player.weaponVerb = "cleaving sword-slash";
-		player.weaponPerk = "Large";
-		player.weaponValue = itemValue("large claymore");
-		player.weaponAttack = fixedDamage("large claymore");
+		player.weapon = weapons.LARGE_CLAYMORE;
 		player.str = 40;
 		//full chain
-		player.armorName = "full-body chainmail";
-		player.armorDef = 8;
-		player.armorPerk = "Medium";
-		player.armorValue = itemValue("full-body chainmail");
+		player.armor = armors.FULL_CHAINMAIL;
 		outputText("As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side...");
 	}
 	if(player.short == "Galatea") {
@@ -391,35 +368,24 @@ public function customPCSetup():void {
 
 		//Equipment: 
     	//Weapon: Warhammer
-		player.weaponName = "huge warhammer";
-		player.weaponVerb = "smash";
-		player.weaponPerk = "Large";
-		player.weaponValue = itemValue("huge warhammer");
-		player.weaponAttack = fixedDamage("huge warhammer");
+		player.weapon = weapons.HUGE_WARHAMMER;
     	//Armor: Lusty shit
-		player.armorName = "lusty maiden's armor";
-		player.armorPerk = "Light";
-		player.armorDef = 9 + flags[kFLAGS.BIKINI_ARMOR_BONUS];
+		player.armor = armors.LUSTY_MAIDENS_ARMOR;
 		player.createPerk("Slutty Seduction",10 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-		player.armorValue = itemValue("lusty maiden's armor");
 
 		//Stats: (if possible)
   		//Strength: 90
-		player.str = 90
+		player.str = 90;
   		//Fertility: 100
 		player.fertility = 100;
 		player.cor = 25;
 		//Inventory: Lactaid, GroPlus, BimboLq
-		itemSlot1.shortName = "Lactaid";
-		itemSlot1.quantity = 5;
-		itemSlot2.shortName = "GroPlus";
-		itemSlot2.quantity = 5;
-		itemSlot3.shortName = "BimboLq";
-		itemSlot3.quantity = 1;
-		itemSlot4.unlocked = true;
-		itemSlot4.shortName = "BimboSk";
-		itemSlot4.quantity = 1;
-		itemSlot5.unlocked = true;
+		player.itemSlot1.setItemAndQty(consumables.LACTAID,5);
+		player.itemSlot2.setItemAndQty(consumables.GROPLUS,5);
+		player.itemSlot3.setItemAndQty(consumables.BIMBOLQ,1);
+		player.itemSlot4.unlocked = true;
+		player.itemSlot4.setItemAndQty(armors.BIMBO_SKIRT,1);
+		player.itemSlot5.unlocked = true;
 		outputText("You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam.");
 	}
 	if(player.short == "Siveen") {
@@ -608,10 +574,10 @@ public function customPCSetup():void {
 		player.createPerk("Smart",0,0,0,0);
 		//History- Schooling
 		player.createPerk("History: Scholar",0,0,0,0);
-		itemSlot1.quantity = 1;
-		itemSlot2.quantity = 1;
-		itemSlot1.shortName = "W. Book";
-		itemSlot2.shortName = "B. Book";
+		player.itemSlot1.quantity = 1;
+		player.itemSlot2.quantity = 1;
+		player.itemSlot1.shortName = "W. Book";
+		player.itemSlot2.shortName = "B. Book";
 			
 		player.gender = 2;
 		player.tallness = 64;

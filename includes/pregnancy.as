@@ -1903,6 +1903,6 @@ public function eggDescript(plural:Boolean = true):String {
 		else descript += "egg";
 		return descript;
 	}
-	if (CoC_Settings.haltOnErrors) throw new Error("");
+	CoC_Settings.error("");
 	return "EGG ERRORZ";
 }

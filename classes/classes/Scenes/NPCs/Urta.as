@@ -178,7 +178,7 @@ public function urtaBarDescript():Boolean {
 		else outputText("Her half-hard horse-cock is plainly visible to anyone who spares her a glance, barely contained by a pair of tightly woven fishnet stockings.  She's looking at you and wiggling a finger your way...", false);
 		return true;
 	}	
-	if (CoC_Settings.haltOnErrors) throw new Error("");
+	CoC_Settings.error("");
 	trace("URTA Error: Bar descript encountered unexpected scenario.");
 	return false;
 }

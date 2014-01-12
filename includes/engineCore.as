@@ -864,11 +864,11 @@ public function applyPerk(pName:String = ""):void {
 	switch(tempPerk) {
 		case "Strong Back 2: Strong Harder":
 			player.createPerk("Strong Back 2: Strong Harder",0,0,0,0, "Enables fifth item slot.");
-			itemSlot5.unlocked = true;
+			player.itemSlot5.unlocked = true;
 			break;
 		case "Strong Back":
 			player.createPerk("Strong Back",0,0,0,0, "Enables fourth item slot.");
-			itemSlot4.unlocked = true;
+			player.itemSlot4.unlocked = true;
 			break;
 		case "Tank":
 			player.createPerk("Tank",0,0,0,0,"Raises max HP by 50.");
@@ -1108,292 +1108,41 @@ public function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "The Nymphomania perk allows your corruption to have it's way with your lust, keeping you constantly aroused.  Your lust will never drop below 30 with this perk.";
 	}
 	//Items
-	if(buttonText.indexOf("MinoBlo") != -1) {
-		toolTipText = "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.";
-	}
-	if(buttonText.indexOf("GroPlus") != -1) {
-		toolTipText = "This is a small needle with a resevoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.";
-	}
-	if(buttonText.indexOf("ImpFood") != -1) {
-		toolTipText = "This is a small parcel of reddish-brown bread stuffed with some kind of meat.  It smells delicious.";
-	}
-	if(buttonText.indexOf("Shark.T") != -1) {
-		toolTipText = "A glinting white tooth, very sharp and intimidating.";
-	}
-	if(buttonText.indexOf("ExtSerm") != -1) {
-		toolTipText = "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows.";
-	}
-	if(buttonText.indexOf("ProBova") != -1) {
-		toolTipText = "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.";
-	}
-	if(buttonText.indexOf("MinoCum") != -1) {
-		toolTipText = "This bottle of minotaur cum looks thick and viscous.  You know it has narcotic properties, but aside from that its effects are relatively unknown.";
-	}
-	if(buttonText.indexOf("PurPeac") != -1) {
-		toolTipText = "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it.";
-	}
-	if(buttonText.indexOf("MouseCo") != -1) {
-		toolTipText = "A handful of rare aromatic beans with sharp creases in the middle, making them look like small mouse ears.  Allegedly very popular and plentiful before the mice-folk were wiped out.";
-	}
-	if(buttonText.indexOf("RingFig") != -1) {
-		toolTipText = "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.";
-	}
-	if(buttonText.indexOf("Equinum") != -1) {
-		toolTipText = "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.";
-	}
-	if(buttonText.indexOf("PrFruit") != -1) {
-		toolTipText = "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.";
-	}
-	if(buttonText.indexOf("TrapOil") != -1) {
-		toolTipText = "A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.";
-	}
-	if(buttonText.indexOf("FishFil") != -1) {
-		toolTipText = "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.";
-	}
-	if(buttonText.indexOf("Debimbo") != -1) {
-		if(player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0)
-			toolTipText = "This should totally like, fix your brain and stuff.  You don't really think anything is wrong with your head - it feels all pink and giggly all the time.";
-		else
-			toolTipText = "This draft is concocted from five scholar's teas and who knows what else.  Supposedly it will correct the stupifying effects of Bimbo Liqueur.";
-	}
-	if(buttonText.indexOf("FoxJewl") != -1) {
-		toolTipText = "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.";
-	}
-	if(buttonText.indexOf("MystJwl") != -1) {
-		toolTipText = "The flames within this jewel glow brighter than before, and have taken on a sinister purple hue.  It has been enhanced to increase its potency, allowing it to transform you more easily, but may have odd side-effects...";
-	}
-	if(buttonText.indexOf("KitGift") != -1) {
-		toolTipText = "A small square package given to you by a forest kitsune.  It is wrapped up in plain white paper and tied with a string.  Who knows what's inside?";
-	}
-	if(buttonText.indexOf("GldStat") != -1) {
-		toolTipText = "An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.";
-	}
-	if(buttonText.indexOf("DrgnEgg") != -1) {
-		toolTipText = "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.";
-	}
-	if(buttonText.indexOf("DrgnShl") != -1) {
-		toolTipText = "A durable shield that has been forged from the remains of the dragon egg you found in the swamp. Absorbs any fluid attacks you can catch, rendering them useless.";
-	}
-	if(buttonText.indexOf("SheepMk") != -1) {
-		toolTipText = "This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful.";
-	}
-	if(buttonText.indexOf("E.Staff") != -1) {
-		toolTipText = "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.";
-	}
-	if(buttonText.indexOf("FoxBery") != -1) {
-		toolTipText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
-	}
-	if(buttonText.indexOf("FoxBery") != -1) {
-		toolTipText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
-	}
-	if(buttonText.indexOf("VixVigr") != -1) {
-		toolTipText = "This small medicine bottle contains something called \"Vixen's Vigor\", supposedly distilled from common fox-berries.  It is supposed to be a great deal more potent, and a small warning label warns of \"extra boobs\", whatever that means.";
-	}
-	if(buttonText.indexOf("BC Beer") != -1) {
-		toolTipText = "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.";
-	}
-	if(buttonText.indexOf("I.Robes") != -1) {
-		toolTipText = "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.";
-	}
-	if(buttonText.indexOf("I.Corst") != -1) {
-		toolTipText = "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.";
-	}
-	if(buttonText.indexOf("S.Blade") != -1) {
-		toolTipText = "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.";
-	}
-	if(buttonText.indexOf("DryTent") != -1) {
-		toolTipText = "A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.";
-	}
-	if(buttonText.indexOf("IzyMilk") != -1) {
-		toolTipText = "This is a bottle of Isabella's milk.  Isabella seems fairly certain it will invigorate you.";
-	}
-	if(buttonText.indexOf("EctoPls") != -1) {
-		toolTipText = "The green-tinted, hardly corporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it.";
-	}
-	if(buttonText.indexOf("T.SSilk") != -1) {
-		toolTipText = "This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest.  You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea?";
-	}
-	if(buttonText.indexOf("SS.Robe") != -1) {
-		toolTipText = "This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.";
-	}
-	if(buttonText.indexOf("SSArmor") != -1) {
-		toolTipText = "This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.";
-	}
-	if(buttonText.indexOf("S.Gossr") != -1) {
-		toolTipText = "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
-	}
-	if(buttonText.indexOf("B.Gossr") != -1) {
-		toolTipText = "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
-	}
-	if(buttonText.indexOf("TSTooth") != -1) {
-		toolTipText = "This looks like a normal shark tooth, though with an odd purple glow.";
-	}
-	
-
-	if(buttonText.indexOf("KangaFt") != -1) {
-		toolTipText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.";
-	}
-	if(buttonText.indexOf("MghtyVg") != -1) {
-		toolTipText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.  It glows slightly from Lumi's enhancements.";
-	}
-	if(buttonText.indexOf("GldSeed") != -1) {
-		toolTipText = "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.";
-	}
-	if(buttonText.indexOf("MagSeed") != -1) {
-		toolTipText = "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.";
-	}
-	if(buttonText.indexOf("R.BdySt") != -1) {
-		toolTipText = "A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.";
-	}
-	if(buttonText.indexOf("BroBrew") != -1) {
-		toolTipText = "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.\"";
-	}
-	if(buttonText.indexOf("BimboLq") != -1) {
-		toolTipText = "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.";
-	}        
-	if(buttonText.indexOf("H.Gaunt") != -1) {
-		toolTipText = "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.";
-	}
-	if(buttonText.indexOf("SensDrf") != -1) {
-		toolTipText = "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.";
-	}
-	if(buttonText.indexOf("NumbRox") != -1) {
-		toolTipText = "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.";
-	}
-	if(buttonText.indexOf("BonStrp") != -1) {
-		toolTipText = "These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.";
-	}
-	if(buttonText.indexOf("NurseCl") != -1) {
-		toolTipText = "This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.";
-	}
-	if(buttonText.indexOf("GooArmr") != -1) {
-		toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!";
-	}
-	if(buttonText.indexOf("LMArmor") != -1) {
-		toolTipText = "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"";
-	}
-	if(buttonText.indexOf("JRapier") != -1) {
-		toolTipText = "This jeweled rapier is ancient but untarnished.  The hilt is wonderfully made, and fits your hand like a tailored glove.  The blade is shiny and perfectly designed for stabbing.";
-	}
-	if(buttonText.indexOf("RRapier") != -1) {
-		toolTipText = "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.";
-	}
-	if(buttonText.indexOf("SucWhip") != -1 || buttonText.indexOf("Demon Whip") != -1) {
+	if(buttonText.indexOf("Demon Whip") != -1) {
 		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
 	}
-	if(buttonText.indexOf("Reptlum") != -1) {
-		toolTipText = "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.";
-	}
-	if(buttonText.indexOf("W.Fruit") != -1) {
-		toolTipText = "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.";
-	}
-	
-	if(buttonText.indexOf("Gob.Ale") != -1 || buttonText == "GoblinAle") {
+	if(buttonText == "GoblinAle") {
 		toolTipText = "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.";
-	}
-	//"Hummus "
-	if(buttonText.indexOf("Hummus ") != -1) {
-		toolTipText = "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.";
-	}
-	
-	if(buttonText.indexOf("LthrRob") != -1) {
-		toolTipText = "This is a suit of flexible leather armor with a voluminous set of concealing black robes.";
-	}
-	if(buttonText.indexOf("ScaleMl") != -1) {
-		toolTipText = "This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.";
-	}
-	if(buttonText.indexOf("FullPlt") != -1) {
-		toolTipText = "A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.";
-	}
-	if(buttonText.indexOf("BimboSk") != -1) {
-		toolTipText = "A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.";
-	}
-	if(buttonText.indexOf("SeductA") != -1) {
-		toolTipText = "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.";
-	}
-	if(buttonText.indexOf("IndecSt") != -1) {
-		toolTipText = "This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.";
-	}
-	if(buttonText.indexOf("W.Robes") != -1) {
-		toolTipText = "These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.";
-	}
-	if(buttonText.indexOf("W.Staff") != -1) {
-		toolTipText = "This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use. (ATK: 3)";
 	}
 	if(buttonText.indexOf("W. Staff") != -1) {
 		toolTipText = "An oddly bent piece of solid wood favored by spell-casters.  It is said to be made of from one of Marae's roots and allow for easier magic use. (ATK: 3) (Cost: 350)";
 	}
-	
-	if(buttonText.indexOf("W.Stick") != -1 || buttonText.indexOf("Wingstick") != -1) {
-		toolTipText = "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)";
-	}
-	if(buttonText.indexOf("Claymor") != -1 || buttonText.indexOf("L.Claymore") != -1) {
+	if(buttonText.indexOf("L.Claymore") != -1) {
 		toolTipText = "A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)";
 	}
-	if(buttonText.indexOf("Warhamr") != -1 || buttonText.indexOf("Warhammer") != -1) {
+	if(buttonText.indexOf("Warhammer") != -1) {
 		toolTipText = "A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)";
 	}
-	if(buttonText.indexOf("Katana ") != -1 || buttonText.indexOf("Katana") != -1) {
+	if(buttonText.indexOf("Katana") != -1) {
 		toolTipText = "A curved bladed weapon that cuts through flesh with the greatest of ease. (ATK: 10) (Cost: 500)";
 	}
-	if(buttonText.indexOf("Spear  ") != -1 || buttonText.indexOf("Spear") != -1) {
+	if(buttonText.indexOf("Spear") != -1) {
 		toolTipText = "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  (ATK: 8) (Cost: 450)";
 	}
-	if(buttonText.indexOf("Whip   ") != -1 || buttonText.indexOf("Whip") != -1) {
+	if(buttonText.indexOf("Whip") != -1) {
 		toolTipText = "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it! (ATK: 5) (Cost: 500)";
 	}
 	if(buttonText.indexOf("Tail Whip") != -1) {
 		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
 	}
-	if(buttonText.indexOf("S.Gaunt") != -1 || buttonText.indexOf("S.Gauntlet") != -1) {
+	if(buttonText.indexOf("S.Gauntlet") != -1) {
 		toolTipText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
 	}
-	
-	if(buttonText.indexOf("FullChn") != -1) {
-		toolTipText = "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.";
-	}
-	if(buttonText.indexOf("ChBikni") != -1) {
-		toolTipText = "A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.";
-	}
-	
-	if(buttonText.indexOf("SnakOil") != -1) {
-		toolTipText = "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.";
-	}
-	if(buttonText.indexOf("L.Daggr") != -1) {
-		toolTipText = "A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.";
-	}
-	if(buttonText.indexOf("KnottyP") != -1) {
-		toolTipText = "This knotted pepper is very swollen, with a massive, distended knot near the base.";
-	}
-	if(buttonText.indexOf("BulbyPp") != -1) {
-		toolTipText = "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.";
-	}
-	if(buttonText.indexOf("BlackPp") != -1) {
-		toolTipText = "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...";
-	}
-	if(buttonText.indexOf("DblPepp") != -1) {
-		toolTipText = "This canine pepper is actually two that have grown together due to some freak coincidence.";
-	}
-	if(buttonText.indexOf("LargePp") != -1) {
-		toolTipText = "This large canine pepper is much bigger than any normal peppers you've seen.";
-	}
-	if(buttonText.indexOf("WetClth") != -1) {
-		toolTipText = "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.";
-	}
-	if(buttonText.indexOf("B.Chitn") != -1) {
-		toolTipText = "A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.";
-	}
-	if(buttonText.indexOf("BeeArmr") != -1) {
-		toolTipText = "A suit of armor cleverly fashioned from giant bee chitin.";
-	}
-	if(buttonText.indexOf("Vital T") != -1 || buttonText.indexOf("Vitality T.") != -1) {
+	if(buttonText.indexOf("Vitality T.") != -1) {
 		toolTipText = "This potent tea is supposedly good for the strengthening the body.";
 	}
-	if(buttonText.indexOf("Smart T") != -1 || buttonText.indexOf("Scholars T.") != -1) {
+	if(buttonText.indexOf("Scholars T.") != -1) {
 		toolTipText = "This powerful brew supposedly has mind-strengthening effects.";
-	}
-	if(buttonText.indexOf("L.Hammr") != -1) {
-		toolTipText = "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.";
 	}
 	if(buttonText.indexOf("Dual Belt") != -1) {
 		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
@@ -1404,184 +1153,19 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Fake Mare") != -1) {
 		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
-	if(buttonText.indexOf("P.LBova") != -1) {
-		toolTipText = "A bottle containing a misty fluid with a grainy texture; it has a long neck and a ball-like base.  The label has a stylized picture of a well-endowed cow-girl nursing two guys while they jerk themselves off. It has been purified by Rathazul.";
-	}
-	if(buttonText.indexOf("L.Draft") != -1 || buttonText == "LustDraft") {
+	if(buttonText == "LustDraft") {
 		toolTipText = "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.";
 	}
-	if(buttonText.indexOf("F.Draft") != -1) {
-		toolTipText = "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.";
-	}
-	if(buttonText.indexOf("Pipe") != -1) {
-		toolTipText = "This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool. (ATK: +5) (Cost: 25)";
-	}
-	if(buttonText.indexOf("Lactaid") != -1) {
-		toolTipText = "Judging by the name printed on this bottle, 'Lactaid' probably has an effect on the ability to lactate, and you doubt that effect is a reduction.";
-	}
-	if(buttonText.indexOf("W. Book") != -1) {
-		toolTipText = "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.";
-	}
-	if(buttonText.indexOf("B. Book") != -1) {
-		toolTipText = "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.";
-	}
-	if(buttonText.indexOf("LeathrA") != -1) {
-		toolTipText = "This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)";
-	}
-	if(buttonText.indexOf("LaBova ") != -1) {
-		toolTipText = "A bottle containing a misty fluid with a grainy texture, it has a long neck and a ball-like base.  The label has a stylized picture of a well endowed cowgirl nursing two guys while they jerk themselves off.";
-	}
-	
-	if(buttonText.indexOf("SDelite") != -1) {
-		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time.";
-	}
-	if(buttonText.indexOf("S.Dream") != -1) {
-		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.";
-	}
-	if(buttonText.indexOf("GreenGl") != -1) {
-		toolTipText = "This tough substance has no obvious use that you can discern.";
-	}
-	if(buttonText.indexOf("PSDelit") != -1) {
-		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.";
-	}
-	if(buttonText.indexOf("Reducto") != -1) {
-		toolTipText = "This container full of paste can be used to shrink a body part down by a significant amount.";
-	}
-	if(buttonText.indexOf("OviElix") != -1 || buttonText == "OviElixir") {
+	if(buttonText == "OviElixir") {
 		toolTipText = "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.";
 	}
-	if(buttonText.indexOf("PurHony") != -1) {
-		toolTipText = "This fine crystal vial is filled with a thick amber liquid that glitters in the light.  You can smell a sweet scent, even though it is tightly corked.";
-	}
-	if(buttonText.indexOf("BeeHony") != -1) {
-		toolTipText = "This fine crystal vial is filled with a thick amber liquid that glitters dully in the light.  You can smell a sweet scent, even though it is tightly corked.";
-	}
-	if(buttonText.indexOf("CanineP") != -1) {
-		toolTipText = "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.";
-	}
-	if(buttonText.indexOf("SucMilk") != -1) {                        
-		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"";
-	}
-	if(buttonText.indexOf("P.S.Mlk") != -1) {                        
-		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.";
-	}
-	if(buttonText.indexOf("Cerul P") != -1 || buttonText.indexOf("Cerulean P.") != -1) {                        
+	if(buttonText.indexOf("Cerulean P.") != -1) {
 		toolTipText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
-	}
-	if(buttonText.indexOf("PeppWht") != -1) {                        
-		toolTipText = "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.";
-	}
-	if(buttonText.indexOf("IncubiD") != -1) {                        
-		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.";
-	}
-	//"M. Milk"
-	if(buttonText.indexOf("M. Milk") != -1) {                        
-		toolTipText = "A clear bottle of milk from Marble's breasts. It smells delicious.";
-	}
-	if(buttonText.indexOf("P.Draft") != -1) {                        
-		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.";
-	}
-	if(buttonText.indexOf("TScroll") != -1) {                        
-		toolTipText = "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.";
-	}
-	if(buttonText.indexOf("BrownEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("L.BrnEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("PurplEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("L.PrpEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("BlueEgg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("L.BluEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("PinkEgg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("NPnkEgg") != -1) {                        
-		toolTipText = "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.";
-	}
-	if(buttonText.indexOf("L.PnkEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("WhiteEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("L.WhtEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("BlackEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-	}
-	if(buttonText.indexOf("L.BlkEg") != -1) {                        
-		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.  For all you know, it could turn you into rubber!";
-	}
-	if(buttonText.indexOf("RidingC") != -1) {                        
-		toolTipText = "This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)";
-	}
-	if(buttonText.indexOf("L. Axe ") != -1) {                        
-		toolTipText = "This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)";
-	}
-	if(buttonText.indexOf("GelArmr") != -1) {                        
-		toolTipText = "This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)";
-	}
-	if(buttonText.indexOf("B.Sword") != -1) {                        
-		toolTipText = "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  (ATK: +Varies) (Cost: 400)";
-	}
-	if(buttonText.indexOf("C.Cloth") != -1) {                        
-		toolTipText = "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)";
-	}
-	if(buttonText.indexOf("ClssyCl") != -1) {                        
-		toolTipText = "A set of classy suitclothes.";
-	}
-	if(buttonText.indexOf("RbbrClt") != -1) {                        
-		toolTipText = "A revealing set of fetish-wear.  Upgrades tease attack to seduce.";
-	}
-	if(buttonText.indexOf("FurLoin") != -1) {                        
-		toolTipText = "A pair of loincloths to cover your crotch and " + buttDescript() + ".  Typically worn by people named 'Conan'.";
-	}
-	if(buttonText.indexOf("AdvClth") != -1) {                        
-		toolTipText = "A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!";
-	}
-	if(buttonText.indexOf("TubeTop") != -1) {                        
-		toolTipText = "A clingy tube top and VERY short shorts.";
-	}
-	if(buttonText.indexOf("Overall") != -1) {                        
-		toolTipText = "A simple white shirt and overalls.";
-	}
-
-	if(buttonText.indexOf("B.Dress") != -1) {                        
-		toolTipText = "A long ballroom dress patterned with sequins.  Perfect for important occassions.";
-	}
-	if(buttonText.indexOf("T.BSuit") != -1) {                        
-		toolTipText = "A semi-transparent bodysuit.";
-	}
-	if(buttonText.indexOf("M.Robes") != -1) {                        
-		toolTipText = "A set of modest robes, not dissimilar from what the monks back home would wear.";
-	}
-	if(buttonText.indexOf("LthrPnt") != -1) {                        
-		toolTipText = "A flowing silk shirt and tight black leather pants.  Suave!";
-	}
-	if(buttonText.indexOf("S.Swmwr") != -1) {
-		toolTipText = "An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.";
-	}
-	if(buttonText.indexOf("Red Dye") != -1 || buttonText.indexOf("Blond D") != -1 || 
-	buttonText.indexOf("Black D") != -1 || buttonText.indexOf("Brown D") != -1 || 
-		buttonText.indexOf("AuburnD") != -1 || buttonText.indexOf("GrayDye") != -1 ||
-		buttonText.indexOf("PinkDye") != -1 || buttonText.indexOf("BlueDye") != -1 ||
-		buttonText.indexOf("OrangDy") != -1 || buttonText.indexOf("PurpDye") != -1) {                        
-		toolTipText = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
 	}
 	//Combat
 	//COMBAT
 	//combat
+	//wombat
 	if (buttonText == "Attack") {
 		if (gameState != 1) toolTipText = "";
 		else toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
@@ -1852,11 +1436,21 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 	trace(logStr)
 }
 
+// curryFunction(f,args1)(args2)=f(args1.concat(args2))
+// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
+public function curry(func:Function,...args):Function
+{
+	if (func == null) CoC_Settings.error("carryFunction(null,"+args+")");
+	return function (...args2){
+		func.apply(null,args.concat(args2));
+	};
+}
+
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
 public function createCallBackFunction(func:Function, arg:*):Function
 {
-	if (func == null && CoC_Settings.haltOnErrors){
-		throw new Error("createCallBackFunction(null,"+arg+")");
+	if (func == null) {
+		CoC_Settings.error("createCallBackFunction(null," + arg + ")");
 	}
 	if( arg == -9000 || arg == null )
 	{
@@ -1882,8 +1476,8 @@ public function createCallBackFunction(func:Function, arg:*):Function
 }
 public function createCallBackFunction2(func:Function,...args):Function
 {
-	if (func == null && CoC_Settings.haltOnErrors){
-		throw new Error("createCallBackFunction(null,"+args+")");
+	if (func == null){
+		CoC_Settings.error("createCallBackFunction(null,"+args+")");
 	}
 	return function():*
 	{

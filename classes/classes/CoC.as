@@ -8,6 +8,7 @@
 
 	import classes.AssClass;
 	import classes.BreastRowClass;
+	import classes.Items.*;
 
 	import classes.Player;
 	import classes.Cock;
@@ -16,7 +17,11 @@
 	import classes.PerkClass;
 	import classes.StatusAffectClass;
 	import classes.VaginaClass;
-	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
+	import classes.ImageManager;
+
+	import flash.system.WorkerEvent;
+
+	// This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
@@ -111,9 +116,16 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		// Items/
+		public var mutations:Mutations = new Mutations();
+		public var consumables:ConsumableLib = new ConsumableLib();
+		public var useables:UseableLib = new UseableLib();
+		public var weapons:WeaponLib = new WeaponLib();
+		public var armors:ArmorLib = new ArmorLib();
 		// Scenes/
 		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
+		public var inventoryScene:InventoryScene = new InventoryScene();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
@@ -188,7 +200,6 @@
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
-		include "../../includes/items.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
@@ -249,12 +260,6 @@
 		public var sand:Number;
 		public var giacomo:Number;
 		public var beeProgress:Number;
-		public var itemSlot1:ItemSlotClass;
-		public var itemSlot2:ItemSlotClass;
-		public var itemSlot3:ItemSlotClass;
-		public var itemSlot4:ItemSlotClass;
-		public var itemSlot5:ItemSlotClass;
-		public var itemSlots:Array;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
 		public var shortName:String;
@@ -462,16 +467,6 @@
 			sand = 0;
 			giacomo = 0;
 			beeProgress = 0;
-
-			//Item things
-			itemSlot1 = new ItemSlotClass();
-			itemSlot2 = new ItemSlotClass();
-			itemSlot3 = new ItemSlotClass();
-			itemSlot4 = new ItemSlotClass();
-			itemSlot5 = new ItemSlotClass();
-			
-
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
 
 			itemStorage = [];
 			gearStorage = [];

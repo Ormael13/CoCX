@@ -23,9 +23,7 @@ package classes.Scenes.Areas.Lake
 			var g:GooGirl = monster as GooGirl;
 			if (g == null) {
 				trace(monster.short+", not GooGirl!");
-				if (CoC_Settings.haltOnErrors){
-					throw new Error(monster.short+", not GooGirl!");
-				}
+				CoC_Settings.error(monster.short+", not GooGirl!");
 				g = new GooGirl();
 			}
 			return g;

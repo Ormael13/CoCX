@@ -151,6 +151,13 @@
 			init11Armor("leather straps");
 			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(1,rand(5) + 5);
+			init14WeightedDrop().
+					add(consumables.GOB_ALE,5).
+					addMany(1,consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE,1);
 			initX_Specials(goblinDrugAttack,goblinTeaseAttack);
 		}
 

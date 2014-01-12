@@ -118,6 +118,10 @@
 			init11Armor("scales",5);
 			init12Combat(0,30,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(2,rand(5) + 8);
+			init14WeightedDrop().
+					add(null,1).
+					add(consumables.REPTLUM,5).
+					add(consumables.SNAKOIL,4);
 			initX_Specials(nagaPoisonBiteAttack,nagaConstrict,nagaTailWhip);
 
 

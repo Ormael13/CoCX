@@ -381,6 +381,10 @@ package classes.Scenes.Areas.Plains
 			init11Armor("skin",2);
 			init12Combat(250,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(14,10 + rand(5));
+			init14ChainedDrop().
+					add(consumables.REDUCTO,1/5).
+					add(consumables.SUCMILK,1/2).
+					elseDrop(consumables.BLACK_D);
 		}
 		
 	}

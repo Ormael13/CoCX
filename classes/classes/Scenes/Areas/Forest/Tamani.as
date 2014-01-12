@@ -142,6 +142,18 @@ package classes.Scenes.Areas.Forest
 			init11Armor("leather straps");
 			init12Combat(40,40,0.9,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(4,rand(25) + 5);
+			init14WeightedDrop()
+					.add(consumables.GOB_ALE,4)
+					.addMany(1,
+							consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE,
+							consumables.INCUBID,
+							consumables.REDUCTO,
+							consumables.L_BLUEG,
+							null);
 			initX_Specials(goblinDrugAttack,goblinTeaseAttack);
 		}
 		

@@ -1,4 +1,6 @@
-﻿import flash.net.FileReference;
+﻿import classes.ItemType;
+
+import flash.net.FileReference;
 import flash.events.Event;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
@@ -81,7 +83,7 @@ public function loadScreen():void
 			{
 				slots[i] = function() : void 		// Anonymous functions FTW
 				{
-					trace("Loading save with name", saveFileNames[i], "at index", i)
+					trace("Loading save with name", saveFileNames[i], "at index", i);
 					if (loadGame(saveFileNames[i])) 
 					{
 						doNext(1);
@@ -123,7 +125,7 @@ public function saveScreen():void
 		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r", false);
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", false);
 	
-	var saveFuncs:Array = new Array();
+	var saveFuncs:Array = [];
 	
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
@@ -136,7 +138,7 @@ public function saveScreen():void
 		{
 			saveFuncs[i] = function() : void 		// Anonymous functions FTW
 			{
-				trace("Saving game with name", saveFileNames[i], "at index", i)
+				trace("Saving game with name", saveFileNames[i], "at index", i);
 				saveGame(saveFileNames[i]);
 			}
 		})(i);
@@ -242,7 +244,7 @@ public function deleteScreen():void
 	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
 	
 
-	var delFuncs:Array = new Array();
+	var delFuncs:Array = [];
 	
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
@@ -294,7 +296,7 @@ public function purgeTheMutant():void
 {
 	var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
 	trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-	var blah:Array = new Array("been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found");
+	var blah:Array = ["been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found"];
 	
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
@@ -412,9 +414,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	var backup:SharedObject;
 	if (isFile)
 	{
-		saveFile = new Object();
+		saveFile = {};
 		
-		saveFile.data = new Object();
+		saveFile.data = {};
 	}
 	else
 	{
@@ -458,7 +460,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	try
 	{
 		//flags
-		saveFile.data.flags = new Array();
+		saveFile.data.flags = [];
 		for (var i:int = 0; i < flags.length; i++)
 		{
 			// Don't save unset/default flags
@@ -573,19 +575,19 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		   myLocalData.data.girlEffectArray.push(new Array());
 		 }*/
 		
-		saveFile.data.cocks = new Array();
-		saveFile.data.vaginas = new Array();
-		saveFile.data.breastRows = new Array();
-		saveFile.data.perks = new Array();
-		saveFile.data.statusAffects = new Array();
-		saveFile.data.ass = new Array();
-		saveFile.data.keyItems = new Array();
-		saveFile.data.itemStorage = new Array();
-		saveFile.data.gearStorage = new Array();
+		saveFile.data.cocks = [];
+		saveFile.data.vaginas = [];
+		saveFile.data.breastRows = [];
+		saveFile.data.perks = [];
+		saveFile.data.statusAffects = [];
+		saveFile.data.ass = [];
+		saveFile.data.keyItems = [];
+		saveFile.data.itemStorage = [];
+		saveFile.data.gearStorage = [];
 		//Set array
 		for (i = 0; i < player.cocks.length; i++)
 		{
-			saveFile.data.cocks.push(new Array());
+			saveFile.data.cocks.push([]);
 		}
 		//Populate Array
 		for (i = 0; i < player.cocks.length; i++)
@@ -602,7 +604,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set Vaginal Array
 		for (i = 0; i < player.vaginas.length; i++)
 		{
-			saveFile.data.vaginas.push(new Array());
+			saveFile.data.vaginas.push([]);
 		}
 		//Populate Vaginal Array
 		for (i = 0; i < player.vaginas.length; i++)
@@ -624,7 +626,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set Breast Array
 		for (i = 0; i < player.breastRows.length; i++)
 		{
-			saveFile.data.breastRows.push(new Array());
+			saveFile.data.breastRows.push([]);
 				//trace("Saveone breastRow");
 		}
 		//Populate Breast Array
@@ -642,7 +644,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set Perk Array
 		for (i = 0; i < player.perks.length; i++)
 		{
-			saveFile.data.perks.push(new Array());
+			saveFile.data.perks.push([]);
 				//trace("Saveone Perk");
 		}
 		//Populate Perk Array
@@ -660,7 +662,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set Status Array
 		for (i = 0; i < player.statusAffects.length; i++)
 		{
-			saveFile.data.statusAffects.push(new Array());
+			saveFile.data.statusAffects.push([]);
 				//trace("Saveone statusAffects");
 		}
 		//Populate Status Array
@@ -676,7 +678,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
 		{
-			saveFile.data.keyItems.push(new Array());
+			saveFile.data.keyItems.push([]);
 				//trace("Saveone keyItem");
 		}
 		//Populate keyItem Array
@@ -692,30 +694,30 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Set storage slot array
 		for (i = 0; i < itemStorage.length; i++)
 		{
-			saveFile.data.itemStorage.push(new Array());
+			saveFile.data.itemStorage.push([]);
 		}
 		
 		//Populate storage slot array
 		for (i = 0; i < itemStorage.length; i++)
 		{
-			saveFile.data.itemStorage[i].shortName = itemStorage[i].shortName;
+			saveFile.data.itemStorage[i].shortName = itemStorage[i].itype.id;
 			saveFile.data.itemStorage[i].quantity = itemStorage[i].quantity;
 			saveFile.data.itemStorage[i].unlocked = itemStorage[i].unlocked;
 		}
 		//Set gear slot array
 		for (i = 0; i < gearStorage.length; i++)
 		{
-			saveFile.data.gearStorage.push(new Array());
+			saveFile.data.gearStorage.push([]);
 		}
 		
 		//Populate gear slot array
 		for (i = 0; i < gearStorage.length; i++)
 		{
-			saveFile.data.gearStorage[i].shortName = gearStorage[i].shortName;
+			saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;
 			saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
 			saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
 		}
-		saveFile.data.ass.push(new Array());
+		saveFile.data.ass.push([]);
 		saveFile.data.ass.analWetness = player.ass.analWetness;
 		saveFile.data.ass.analLooseness = player.ass.analLooseness;
 		saveFile.data.ass.fullness = player.ass.fullness;
@@ -744,27 +746,26 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.beeProgress = beeProgress;
 		
 		//ITEMZ. Item1s
-		saveFile.data.itemSlot1 = new Array();
-		saveFile.data.itemSlot1.quantity = itemSlot1.quantity;
-		saveFile.data.itemSlot1.shortName = itemSlot1.shortName;
-		saveFile.data.itemSlot1.unlocked = itemSlot1.unlocked;
-		saveFile.data.itemSlot2 = new Array();
-		saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
-		saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
-		saveFile.data.itemSlot2.shortName = itemSlot2.shortName;
-		saveFile.data.itemSlot2.unlocked = itemSlot2.unlocked;
-		saveFile.data.itemSlot3 = new Array();
-		saveFile.data.itemSlot3.quantity = itemSlot3.quantity;
-		saveFile.data.itemSlot3.shortName = itemSlot3.shortName;
-		saveFile.data.itemSlot3.unlocked = itemSlot3.unlocked;
-		saveFile.data.itemSlot4 = new Array();
-		saveFile.data.itemSlot4.quantity = itemSlot4.quantity;
-		saveFile.data.itemSlot4.shortName = itemSlot4.shortName;
-		saveFile.data.itemSlot4.unlocked = itemSlot4.unlocked;
-		saveFile.data.itemSlot5 = new Array();
-		saveFile.data.itemSlot5.quantity = itemSlot5.quantity;
-		saveFile.data.itemSlot5.shortName = itemSlot5.shortName;
-		saveFile.data.itemSlot5.unlocked = itemSlot5.unlocked;
+		saveFile.data.itemSlot1 = [];
+		saveFile.data.itemSlot1.quantity = player.itemSlot1.quantity;
+		saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;
+		saveFile.data.itemSlot1.unlocked = player.itemSlot1.unlocked;
+		saveFile.data.itemSlot2 = [];
+		saveFile.data.itemSlot2.quantity = player.itemSlot2.quantity;
+		saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;
+		saveFile.data.itemSlot2.unlocked = player.itemSlot2.unlocked;
+		saveFile.data.itemSlot3 = [];
+		saveFile.data.itemSlot3.quantity = player.itemSlot3.quantity;
+		saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;
+		saveFile.data.itemSlot3.unlocked = player.itemSlot3.unlocked;
+		saveFile.data.itemSlot4 = [];
+		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
+		saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;
+		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
+		saveFile.data.itemSlot5 = [];
+		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
+		saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;
+		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
 		
 		// Keybinds
 		saveFile.data.controls = inputManager.SaveBindsToObj();
@@ -1001,7 +1002,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		clearStorage();
 		clearGearStorage();
 		player.short = saveFile.data.short;
-		player.a = saveFile.data.a
+		player.a = saveFile.data.a;
 		//player.long = saveFile.data.long;
 		//player.capitalA = saveFile.data.capitalA;
 		//player.temperment = saveFile.data.temperment;
@@ -1024,10 +1025,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//If at initial title
 		if (sprite)
 			flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
-		if (easy)
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = true;
-		else
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = false;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = easy;
 		if (silly)
 			flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
 		
@@ -1430,10 +1428,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				createStorage();
-				itemStorage[i].placeItemWQuantity(saveFile.data.itemStorage[i].quantity, saveFile.data.itemStorage[i].shortName);
-				itemStorage[i].unlocked = saveFile.data.itemStorage[i].unlocked;
-				if (itemStorage[i].shortName.indexOf("Gro+") != -1)
-					itemStorage[i].shortName = "GroPlus";
+				var storage:ItemSlotClass = itemStorage[i];
+				if (saveFile.data.itemStorage[i].shortName.indexOf("Gro+") != -1)
+					saveFile.data.itemStorage[i].shortName = "GroPlus";
+				storage.setItemAndQty(ItemType.lookupItem(saveFile.data.itemStorage[i].shortName), saveFile.data.itemStorage[i].quantity);
+				storage.unlocked = saveFile.data.itemStorage[i].unlocked;
 			}
 		}
 		//Set gear slot array
@@ -1446,22 +1445,23 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			for (i = 0; i < saveFile.data.gearStorage.length && gearStorage.length < 20; i++)
 			{
-				gearStorage.push(new Array());
+				gearStorage.push([]);
 					//trace("Initialize a slot for one of the item storage locations to load.");
 			}
 			//Populate storage slot array
 			for (i = 0; i < saveFile.data.gearStorage.length && i < gearStorage.length; i++)
 			{
 				//trace("Populating a storage slot save with data");
+				storage = gearStorage[i];
 				if (saveFile.data.gearStorage[i].shortName == undefined)
-					gearStorage[i].shortName = "";
+					storage.emptySlot();
 				else
-					gearStorage[i].shortName = saveFile.data.gearStorage[i].shortName;
+					storage.itype = ItemType.lookupItem(saveFile.data.gearStorage[i].shortName);
 				if (saveFile.data.gearStorage[i].quantity == undefined)
-					gearStorage[i].quantity = 0;
+					storage.emptySlot();
 				else
-					gearStorage[i].quantity = saveFile.data.gearStorage[i].quantity;
-				gearStorage[i].unlocked = saveFile.data.gearStorage[i].unlocked;
+					storage.quantity = saveFile.data.gearStorage[i].quantity;
+				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
 		//player.cocks = saveFile.data.cocks;
@@ -1504,33 +1504,33 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			beeProgress = saveFile.data.beeProgress;
 		
 		//ITEMZ. Item1
-		itemSlot1.quantity = saveFile.data.itemSlot1.quantity;
-		itemSlot1.shortName = saveFile.data.itemSlot1.shortName;
-		itemSlot1.unlocked = saveFile.data.itemSlot1.unlocked;
-		itemSlot2.quantity = saveFile.data.itemSlot2.quantity;
-		itemSlot2.shortName = saveFile.data.itemSlot2.shortName;
-		itemSlot2.unlocked = saveFile.data.itemSlot2.unlocked;
-		itemSlot3.quantity = saveFile.data.itemSlot3.quantity;
-		itemSlot3.shortName = saveFile.data.itemSlot3.shortName;
-		itemSlot3.unlocked = saveFile.data.itemSlot3.unlocked;
-		itemSlot4.quantity = saveFile.data.itemSlot4.quantity;
-		itemSlot4.shortName = saveFile.data.itemSlot4.shortName;
-		itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
-		itemSlot5.quantity = saveFile.data.itemSlot5.quantity;
-		itemSlot5.shortName = saveFile.data.itemSlot5.shortName;
-		itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
-		if (itemSlot1.shortName.indexOf("Gro+") != -1)
-			itemSlot1.shortName = "GroPlus";
-		if (itemSlot2.shortName.indexOf("Gro+") != -1)
-			itemSlot2.shortName = "GroPlus";
-		if (itemSlot3.shortName.indexOf("Gro+") != -1)
-			itemSlot3.shortName = "GroPlus";
-		if (itemSlot4.shortName.indexOf("Gro+") != -1)
-			itemSlot4.shortName = "GroPlus";
-		if (itemSlot5.shortName.indexOf("Gro+") != -1)
-			itemSlot5.shortName = "GroPlus";
-		
-		unFuckSave()
+		if (saveFile.data.itemSlot1.shortName.indexOf("Gro+") != -1)
+			saveFile.data.itemSlot1.shortName = "GroPlus";
+		if (saveFile.data.itemSlot2.shortName.indexOf("Gro+") != -1)
+			saveFile.data.itemSlot2.shortName = "GroPlus";
+		if (saveFile.data.itemSlot3.shortName.indexOf("Gro+") != -1)
+			saveFile.data.itemSlot3.shortName = "GroPlus";
+		if (saveFile.data.itemSlot4.shortName.indexOf("Gro+") != -1)
+			saveFile.data.itemSlot4.shortName = "GroPlus";
+		if (saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
+			saveFile.data.itemSlot5.shortName = "GroPlus";
+		player.itemSlot1.quantity = saveFile.data.itemSlot1.quantity;
+		player.itemSlot1.itype = ItemType.lookupItem(saveFile.data.itemSlot1.shortName);
+		player.itemSlot1.unlocked = saveFile.data.itemSlot1.unlocked;
+		player.itemSlot2.quantity = saveFile.data.itemSlot2.quantity;
+		player.itemSlot2.itype = ItemType.lookupItem(saveFile.data.itemSlot2.shortName);
+		player.itemSlot2.unlocked = saveFile.data.itemSlot2.unlocked;
+		player.itemSlot3.quantity = saveFile.data.itemSlot3.quantity;
+		player.itemSlot3.itype = ItemType.lookupItem(saveFile.data.itemSlot3.shortName);
+		player.itemSlot3.unlocked = saveFile.data.itemSlot3.unlocked;
+		player.itemSlot4.quantity = saveFile.data.itemSlot4.quantity;
+		player.itemSlot4.itype = ItemType.lookupItem(saveFile.data.itemSlot4.shortName);
+		player.itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
+		player.itemSlot5.quantity = saveFile.data.itemSlot5.quantity;
+		player.itemSlot5.itype = ItemType.lookupItem(saveFile.data.itemSlot5.shortName);
+		player.itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
+
+		unFuckSave();
 		
 		// Control Bindings
 		if (saveFile.data.controls != undefined)

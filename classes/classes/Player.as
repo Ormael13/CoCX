@@ -2,7 +2,10 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armor;
+	import classes.Items.ArmorLib;
+	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 
 	use namespace kGAMECLASS;
@@ -40,9 +43,96 @@ package classes
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
+		// Inventory
+		public var itemSlot1:ItemSlotClass;
+		public var itemSlot2:ItemSlotClass;
+		public var itemSlot3:ItemSlotClass;
+		public var itemSlot4:ItemSlotClass;
+		public var itemSlot5:ItemSlotClass;
+		public var itemSlots:Array;
+
+		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		override public function get armorName():String {
+			return _armor.longName;
+		}
+		override public function get armorDef():Number {
+			return _armor.def;
+		}
+		override public function get armorPerk():String {
+			return _armor.perk;
+		}
+		override public function get armorValue():Number {
+			return _armor.value;
+		}
+		private var _weapon:Weapon = WeaponLib.FISTS;
+		override public function get weaponName():String {
+			return _weapon.longName;
+		}
+		override public function get weaponVerb():String {
+			return _weapon.verb;
+		}
+		override public function get weaponAttack():Number {
+			return _weapon.attack;
+		}
+		override public function get weaponPerk():String {
+			return _weapon.perk || "";
+		}
+		override public function get weaponValue():Number {
+			return _weapon.value;
+		}
+
+		public function get armor():Armor
+		{
+			return _armor;
+		}
+
+		public function set armor(value:Armor):void
+		{
+			if (value == null){
+				CoC_Settings.error(short+".armor is set to null");
+				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			}
+			value.equip(this);
+		}
+
+		// in case you don't want to call the value.equip
+		public function setArmorHiddenField(value:Armor):void
+		{
+			this._armor = value;
+		}
+
+		public function get weapon():Weapon
+		{
+			return _weapon;
+		}
+
+		public function set weapon(value:Weapon):void
+		{
+			if (value == null){
+				CoC_Settings.error(short+".weapon is set to null");
+				value = WeaponLib.FISTS;
+			}
+			_weapon = value;
+		}
+
+		// in case you don't want to call the value.equip
+		public function setWeaponHiddenField(value:Weapon):void
+		{
+			this._weapon = value;
+		}
+
 		// Hacky workaround shit for ByteArray.readObject
 		public function Player()
 		{
+			//Item things
+			itemSlot1 = new ItemSlotClass();
+			itemSlot2 = new ItemSlotClass();
+			itemSlot3 = new ItemSlotClass();
+			itemSlot4 = new ItemSlotClass();
+			itemSlot5 = new ItemSlotClass();
+
+
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
 		}
 
 		public function reduceDamage(damage:Number):Number{
@@ -382,7 +472,7 @@ package classes
 			if (lowerBody == 5 || lowerBody == 6)
 				demonCounter++;
 			if (demonCocks() > 0)
-				demonCounter++
+				demonCounter++;
 			return demonCounter;
 		}
 		
@@ -1386,12 +1476,11 @@ package classes
 			}
 			if(hasStatusAffect("Disarmed") >= 0) {
 				removeStatusAffect("Disarmed");
-				if(weaponName == "fists") {
-					weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
-					weaponAttack = kGAMECLASS.fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+				if(weapon == WeaponLib.FISTS) {
+					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
 				}
 				else {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = kGAMECLASS.lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
+					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
 			}
 			if(hasStatusAffect("Anemone Venom") >= 0) {
@@ -1425,5 +1514,96 @@ package classes
 			}
 			while(hasStatusAffect("Izma Bleed") >= 0) removeStatusAffect("Izma Bleed");
 		}
+
+		public function consumeItem(itype:ItemType, amount:int=1):Boolean
+		{
+			var consumed:Boolean = false;
+			var slot:*;
+			while (amount > 0)
+			{
+				if(!hasItem(itype,1))
+				{
+					CoC_Settings.error("ERROR: consumeItem in items.as attempting to find an item to remove when the player has none.");
+					break;
+				}
+				trace("FINDING A NEW SLOT! (ITEMS LEFT: " + amount + ")");
+				slot = getLowestSlot(itype);
+				while (slot != undefined && amount > 0 && slot.quantity > 0)
+				{
+					amount--;
+					slot.quantity--;
+					if(slot.quantity == 0) slot.emptySlot();
+					trace("EATIN' AN ITEM");
+				}
+				//If on slot 5 and it doesn't have any more to take, break out!
+				if(slot == undefined) amount = -1
+
+			}
+			if(amount == 0) consumed = true;
+			return consumed;
+		}
+
+		public function getLowestSlot(itype:ItemType):ItemSlotClass
+		{
+			var minslot:ItemSlotClass = undefined;
+			for each (var slot:ItemSlotClass in itemSlots){
+				if (slot.itype == itype){
+					if (minslot == undefined || slot.quantity<minslot.quantity){
+						minslot = slot;
+					}
+				}
+			}
+			return minslot;
+		}
+		public function hasItem(itype:ItemType, minQuantity:Number=1):Boolean {
+			return itemCount(itype)>=minQuantity;
+		}
+		public function itemCount(itype:ItemType):int {
+			var count:int = 0;
+			for each (var itemSlot:ItemSlotClass in itemSlots){
+				if (itemSlot.itype == itype) count += itemSlot.quantity;
+			}
+			return count;
+		}
+
+		// 0..5 or -1 if no
+		public function roomInExistingStack(itype:ItemType):Number {
+			for (var i:int = 0; i<itemSlots.length; i++){
+				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+					return i;
+			}
+			return -1;
+		}
+
+		public function itemSlot(idx:int):ItemSlotClass
+		{
+			return itemSlots[idx];
+		}
+
+		// 0..5 or -1 if no
+		public function emptySlot():Number {
+		    for (var i:int = 0; i<itemSlots.length;i++){
+				if (itemSlot(i).isEmpty()) return i;
+			}
+			return -1;
+		}
+
+
+		public function destroyItems(itype:ItemType, numOfItemToRemove:Number):Boolean
+		{
+			for (var slotNum:int = 0; slotNum < itemSlots.length; slotNum += 1)
+			{
+				if(itemSlot(slotNum).itype == itype)
+				{
+					while(itemSlot(slotNum).quantity > 0 && numOfItemToRemove > 0)
+					{
+						itemSlot(slotNum).removeOneItem();
+						numOfItemToRemove--;
+					}
+				}
+			}
+			return numOfItemToRemove <= 0;
+		}
+
 	}
 }

@@ -49,6 +49,7 @@ package classes.Scenes.Dungeons.DeepCave
 			init11Armor("leathery skin");
 			init12Combat(350,40,.35,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(12,rand(55) + 150,100);
+			init14FixedDrop(consumables.BIMBOLQ);
 			initX_Specials(special1,special2,special3);
 			initX_Wings(WING_TYPE_IMP,"small");
 		}

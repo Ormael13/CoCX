@@ -188,6 +188,10 @@
 			init11Armor("shimmering pelt",5);
 			init12Combat(20,30,0.8,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(6,15);
+			init14WeightedDrop().
+					add(consumables.INCUBID,6).
+					add(consumables.W_FRUIT,3).
+					add(weapons.PIPE,1);
 			initX_Specials(akbalLustAttack,akbalSpecial,akbalHeal);
 			initX_Tail(TAIL_TYPE_DOG);
 		}

@@ -276,12 +276,8 @@ private function startUrtaQuest():void {
 	player.createPerk("History: Fighter",0,0,0,0,"");
 	
 	//GEAR!
-	player.weaponName = "halberd";
-	player.weaponVerb = "slash";
-	player.weaponPerk = "Large";
-	player.weaponValue = 10;
-	player.weaponAttack = kGAMECLASS.fixedDamage("halberd");
-	player.armorName = "leather armor segments";
+	player.weapon = weapons.HALBERD;
+	player.armor = armors.LEATHER_ARMOR_SEGMENTS;
 	kGAMECLASS.applyArmorStats("leather armor segments",false);
 	//DISPLAY SOME SHIT YO
 	clearOutput();

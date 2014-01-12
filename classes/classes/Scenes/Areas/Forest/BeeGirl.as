@@ -72,6 +72,12 @@
 			init11Armor("chitin",9);
 			init12Combat(0,20 + rand(40),0.9,TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(4,rand(15) + 1);
+			init14WeightedDrop()
+					.add(consumables.BEEHONY,4)
+					.add(consumables.OVIELIX,1)
+					.addMany(1,consumables.W__BOOK,
+							useables.B_CHITN,
+							null,1);
 			initX_Antennae(ANTENNAE_BEE);
 			initX_Wings(WING_TYPE_BEE_LIKE_SMALL);
 			initX_Tail(TAIL_TYPE_BEE_ABDOMEN,100);

@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Forest
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Player;
 	import classes.Scenes.Monsters.Imp;
 
 	public class KitsuneScene extends BaseContent
@@ -228,7 +229,7 @@ package classes.Scenes.Areas.Forest
 			outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
 			if (inCombat()) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "KitGift";
+				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "KitGift";
 				cleanupAfterCombat();
 			}
 			else {
@@ -1622,7 +1623,7 @@ package classes.Scenes.Areas.Forest
 			consumeItem("OviElix", 1);
 			outputText("\"<i>Take good care of my little eggies, darling!</i>\"");
 			//{replace normal kitsune loot tables with randomly colored eggs}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = shortName;
+			flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = shortName;
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
 			cleanupAfterCombat();
@@ -2363,16 +2364,11 @@ package classes.Scenes.Areas.Forest
 		}
 
 //Use:
-		public function kitsuneStatue():void
+		public function kitsuneStatue(player:Player):void
 		{
 			clearOutput();
 			outputText("You pull out the gold statue and turn it around in your hands a few times, carefully examining the intricate filigree and inscriptions covering the masterfully crafted idol.  Whoever made this certainly put a lot of time and love into their craft." + ((player.cor < 50) ? "  Examining the painstaking detail that went into it, you feel a slight pang of guilt for having stolen it from its rightful place.  You push the thoughts away, reasoning that it won't be missed - after all, the owner was long gone before you arrived." : "") + "\n\n");
 			outputText("It's not much use to you other than decoration, but based on the craftsmanship alone you judge that you could get a fair price for it if you pawned it off.");
-			if (!debug) {
-				shortName = "GldStat";
-				takeItem();
-				itemSwapping = true;
-			}
 		}
 	}
 }

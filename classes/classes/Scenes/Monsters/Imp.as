@@ -100,6 +100,10 @@
 			init11Armor("leathery skin");
 			init12Combat(0, 40, 1, 1);
 			init13Level(1, rand(5) + 5);
+			init14WeightedDrop().
+					add(consumables.SUCMILK,3).
+					add(consumables.INCUBID,3).
+					add(consumables.IMPFOOD,4);
 			initX_Specials(5019);
 			initX_Wings(WING_TYPE_IMP);
 

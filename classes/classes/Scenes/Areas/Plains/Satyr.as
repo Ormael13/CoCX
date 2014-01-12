@@ -153,6 +153,7 @@ package classes.Scenes.Areas.Plains
 			init11Armor("thick fur");
 			init12Combat(300,20,0.30,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(14,rand(25) + 25);
+			init14ChainedDrop().add(consumables.INCUBID,1/2);
 			initX_Tail(TAIL_TYPE_COW);
 
 		}

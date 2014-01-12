@@ -190,7 +190,7 @@ internal function loseToSalamander():void {
 }
 
 
-internal function beatUpHel():void {
+public function beatUpHel():void {
 	spriteSelect(68);
 	outputText("", true);
 	//Various intros

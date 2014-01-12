@@ -156,6 +156,13 @@
 			init11Armor("thick fur");
 			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(5,10+rand(10));
+			init14WeightedDrop()
+					.add(consumables.CANINEP, 3)
+					.addMany(1, consumables.BULBYPP,
+							consumables.KNOTTYP,
+							consumables.BLACKPP,
+							consumables.DBLPEPP,
+							consumables.LARGEPP);
 			initX_Tail(TAIL_TYPE_DOG);
 			initX_Specials(hellhoundFire,hellhoundScent);
 		}

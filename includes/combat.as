@@ -84,9 +84,9 @@ public function cleanupAfterCombat():void {
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
 			}
 			//Bonus lewts
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
-				outputText("  Somehow you came away from the encounter with " + itemLongName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
-				shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
+			if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
+				outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n", false);
+				shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
 				menuLoc = 18;
 				takeItem();
 			}
@@ -1751,6 +1751,95 @@ public function finishCombat():void
 		outputText("You smile as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
 	}
 	awardPlayer();
+}
+public function dropItem(monsterName:String):void {
+	shortName = "NULL";
+	if(monster.hasStatusAffect("No Loot") >= 0) {
+		return;
+	}
+	if(monsterName == "Akbitch") {	}
+	if(monsterName == "tit-fucked Minotaur") {
+		shortName = "MinoCum";
+	}
+	if(monsterName == "minotaur") {
+		if(monster.weaponName == "axe") {
+			if(rand(2) == 0) {
+				//50% breakage!
+				if(rand(2) == 0) {
+					shortName = "L. Axe ";
+					if(player.tallness < 78) {
+						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ", false);
+						if(rand(2) == 0) shortName = "NULL";
+						else shortName = "SDelite";
+					}
+					//Not too tall, dont rob of axe!
+					else plotFight = true;
+				}
+				else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ", false);
+			}
+			else shortName = "MinoBlo";
+		}
+	}
+	if(monsterName == "bee-girl") {
+		//force honey drop if milked
+		if(flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
+			if(rand(2) == 0) shortName = "BeeHony";
+			else shortName = "PurHony";
+			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
+		}
+	}
+	if(monsterName == "Jojo" && monk > 4) {
+		if(rand(2) == 0) shortName = "IncubiD";
+		else {
+			if(rand(2) == 0) shortName = "B. Book";
+			else shortName = "SucMilk";
+		}
+	}
+	if(monsterName == "harpy") {
+		if(rand(10) == 0) shortName = "W.Robes";
+		else if(rand(3) == 0 && player.hasPerk("Luststick Adapted") >= 0) shortName = "LustStk";
+		else shortName = "GldSeed";
+
+	}
+	if(monsterName == "Sophie") {
+		if(rand(10) == 0) shortName = "W.Robes";
+		else if(rand(2) == 0 && player.hasPerk("Luststick Adapted") >= 0) shortName = "LustStk";
+		else shortName = "GldSeed";
+	}
+	//Chance of armor if at level 1 pierce fetish
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphFollowerScene.ceraphIsFollower()) {
+		shortName = "SeductA";
+	}
+
+	if(!plotFight && rand(200) == 0 && player.level >= 7) shortName = "BroBrew";
+	if(!plotFight && rand(200) == 0 && player.level >= 7) shortName = "BimboLq";
+	//Chance of eggs if Easter!
+	if(!plotFight && rand(6) == 0 && isEaster()) {
+		temp = rand(13);
+		if(temp == 0) shortName ="BrownEg";
+		if(temp == 1) shortName ="L.BrnEg";
+		if(temp == 2) shortName ="PurplEg";
+		if(temp == 3) shortName ="L.PrpEg";
+		if(temp == 4) shortName ="BlueEgg";
+		if(temp == 5) shortName ="L.BluEg";
+		if(temp == 6) shortName ="PinkEgg";
+		if(temp == 7) shortName ="NPnkEgg";
+		if(temp == 8) shortName ="L.PnkEg";
+		if(temp == 9) shortName ="L.WhtEg";
+		if(temp == 10) shortName ="WhiteEg";
+		if(temp == 11) shortName ="BlackEg";
+		if(temp == 12) shortName ="L.BlkEg";
+	}
+	//Bonus loot overrides others
+	if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
+		shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
+	}
+	//if(debug) shortName = "OviElix";
+	if(shortName != "NULL") {
+		outputText("\nThere is " + itemLongName(shortName) + " on your defeated opponent.  ", false);
+		if(!inDungeon) menuLoc = 2;
+		takeItem();
+	}
 }
 public function awardPlayer():void
 {

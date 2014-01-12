@@ -317,6 +317,13 @@ package classes.Scenes.NPCs
 			init11Armor("clothes",4);
 			init12Combat(bonusHP,lust,lustVuln,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(14,rand(5) + 5);
+			if (game.flags[kFLAGS.SHEILA_DEMON]>0){
+				init14FixedDrop(consumables.KANGAFT);
+			} else {
+				init14ChainedDrop(consumables.KANGAFT).
+						add(consumables.SUCMILK,1/3).
+						add(consumables.INCUBID,1/2);
+			}
 			initX_Tail(TAIL_TYPE_KANGAROO);
 
 		}

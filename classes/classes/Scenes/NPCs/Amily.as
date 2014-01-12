@@ -68,7 +68,7 @@ package classes.Scenes.NPCs
 						outputText(" [Flexibility]", false);
 						break;
 					default:
-						if (CoC_Settings.haltOnErrors) throw new Error("");
+						CoC_Settings.error();
 						outputText(" <b>[ERROR]</b>", false);
 						break;
 				}
@@ -192,7 +192,7 @@ package classes.Scenes.NPCs
 						outputText(" [Flexibility]", false);
 						break;
 					default:
-						if (CoC_Settings.haltOnErrors) throw new Error("");
+						CoC_Settings.error("");
 						outputText(" <b>[ERROR]</b>", false);
 						break;
 				}

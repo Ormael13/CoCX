@@ -1,5 +1,9 @@
 ﻿package classes 
 {
+	import classes.Items.Armor;
+	import classes.Items.ArmorLib;
+	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 
 	/**
@@ -9,7 +13,7 @@
 	public class Character extends Creature 
 	{
 		private var _femininity:Number = 50;
-		
+
 		// This is the easiest way I could think of to apply "flat" bonuses to certain stats without having to write a whole shitload of crazyshit
 		// I think a better long-term solution may be to hang function references off the end of the statusAffect class and move all of the value
 		// calculation into methods of ContentClasses, so rather than having walls of logic, we just call the method reference with a value, and get back the modified value.
@@ -338,7 +342,7 @@
 				return "beard";
 			else
 			{
-				//if (CoC_Settings.haltOnErrors) throw new Error("");
+				//CoC_Settings.error("");
 				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL FEN IMMEDIATELY.</b>";
 			}
 		}
@@ -813,6 +817,13 @@
 			if (max > 999) max = 999;
 			return max;
 		}
+
+		public function buttDescript():String
+		{
+			return Appearance.buttDescription(this);
+		}
+
+
 	}
 
 }

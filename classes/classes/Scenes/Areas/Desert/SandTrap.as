@@ -128,6 +128,7 @@ package classes.Scenes.Areas.Desert
 			init11Armor("chitin",20);
 			init12Combat(100,20,.55,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(4,2 + rand(5));
+			init14ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 		}
 		

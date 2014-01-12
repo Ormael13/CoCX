@@ -344,6 +344,7 @@ package classes.Scenes.Areas.Plains
 			init11Armor("skin",2);
 			init12Combat(250,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,10 + rand(5));
+			init14ChainedDrop().add(consumables.GROPLUS,1/5).add(consumables.INCUBID,1/2).elseDrop(consumables.BROWN_D);
 			initX_Specials(hyenaJavelinAttack,hyenaSnapKicku,hyenaArousalAttack);
 		}
 	}

@@ -308,7 +308,7 @@ private function maleRapesOoze():void {
 				break;
 		   default: //error text
 				outputText("tip", false);
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+				CoC_Settings.error("");
 				trace("ERROR: Penis type not supported, defaulting to tip.");
 				break;
 		}

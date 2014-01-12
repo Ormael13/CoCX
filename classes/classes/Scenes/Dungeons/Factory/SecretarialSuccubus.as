@@ -56,6 +56,7 @@ package classes.Scenes.Dungeons.Factory
 			init11Armor("demonic skin",4);
 			init12Combat(100,30,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(7,rand(25)+10,50);
+			init14FixedDrop(consumables.LACTAID);
 			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Specials(11020,11021,11022);

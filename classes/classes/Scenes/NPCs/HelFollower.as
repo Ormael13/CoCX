@@ -533,7 +533,7 @@ private function heliaOptions():void {
 	addButton(0,"Discuss",talkToHel);
 	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail);
 	else addButton(2,"Hug",hugASmokeyTail);
-	if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && hasItem("Gob.Ale",1)) addButton(3,"Anal Train",heliaGapeSceneChoices);
+	if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE,1)) addButton(3,"Anal Train",heliaGapeSceneChoices);
 	addButton(5,"Bathe",takeABath);
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid);
 	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle);
@@ -1861,7 +1861,7 @@ private function giveHeliaAnalTraining():void {
 	}
 	outputText("</i>”");
 	
-	consumeItem("Gob.Ale",1);
+	player.consumeItem(consumables.GOB_ALE,1);
 	dynStats("sen", -1, "lus=", 0);
 	doNext(13);	
 }
@@ -1873,7 +1873,7 @@ private function heliaGapeSceneChoices():void {
 
 //Anal Training #2
 private function heliaAnalTrainingPartTwo():void {
-	consumeItem("Gob.Ale",1);
+	player.consumeItem(consumables.GOB_ALE,1);
 	clearOutput();
 	outputText("Pulling out another bottle of ale you dangle it before the slutty salamander, saying, “<i>A present for my favorite buttslut.</i>”");
 	outputText("\n\nHelia grabs it out of your hand and produces one of her own, clinking the two bottles together with a wink. “<i>Thanks lover mine, but I bumped into a goblin myself not long ago. Being spit on my tail loosened her pouch strings nearly as much as her twat. She had so much fun that she even helped me modify this beasty with the features my other plug had.</i>” Helia kicks an absolutely massive equine dong with her foot. “<i>Got it from a shop in Tel’Adre. Supposedly it’s designed as a toy for centaur mares that have had gotten a bit big after a few births.... I’m told it’s a life size mold taken off some green imp-morph. Crazy rght?</i>”");

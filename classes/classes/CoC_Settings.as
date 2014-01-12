@@ -14,6 +14,23 @@
 		public static var haltOnErrors:Boolean = false;
 		public static var buttonEvents:Array = new Array();
 		private static const bufferSize:int = 50;
+
+		/**
+		 * trace("ERROR "+description);
+		 * If haltOnErrors=true, throws Error
+		 */
+		public static function error(description:String=""):void {
+			trace("ERROR "+description);
+			if (haltOnErrors) throw Error(description);
+		}
+
+		/**
+		 * trace("ERROR Abstract method call: "+clazz+"."+method+"(). "+description);
+		 * If haltOnErrors=true, throws Error
+		 */
+		public static function errorAMC(clazz:String,method:String,description:String=""):void{
+			error("Abstract method call: "+clazz+"."+method+"(). "+description);
+		}
 		
 		public static function appendButtonEvent(inString:String):void
 		{
