@@ -924,23 +924,20 @@ public function dildoFuckRubi():void {
 	if(player.hasFuckableNipples()) outputText("You let the dildo meander up your body until it reaches your breasts, and with a bit of a grin you insert the tip right into one nipple, enjoying the feeling of your breasts swell up with arousal.  You do the same with the other nipple, and take a minute going back and forth.  ");
 	outputText("Finally you bring the dildo up to your mouth, licking the juices off of it, eagerly downing the goblin sex-drug.");
 	
-	//(Normal/Incubus Rubi)
-	if(!rubiBimbo()) {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting [rubi eir] turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
-	}
-	//(Bimbo Rubi) 
-	else {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting her turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
-	}
+	outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting [rubi eir] turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
+ 	
+ 	outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting [rubi eir] get a taste by pressing the tip against those luscious ruby red lips.  ");
  	
 	//(Normal/Incubus Rubi) 
-	if(!rubiBimbo()) outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting " + rubiMF("him","her") + " get a taste by pressing the tip against those luscious ruby red lips.  They part shakily and [rubi eir] tongue reaches out to taste the dildo.  He apparently finds it pleasing, because he immediately wraps his lips around the tip, sucking and bobbing on it like it was a real cock.");
+	if(!rubiBimbo()) outputText("They part shakily and [rubi eir] tongue reaches out to taste the dildo.  ");
 	//(Bimbo Rubi) 
-	else outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting her get a taste by pressing the tip against those luscious ruby red lips.  They easily part, and her tongue takes a long slurp, just to taste the dildo.  She apparently finds it pleasing, because she immediately wraps her lips around the tip, sucking and bobbing on it like it was a real cock.");
+	else outputText("They easily part, and [rubi eir] tongue takes a long slurp, just to taste the dildo.  ");
+	
+	outputText("[rubi Ey] apparently finds it pleasing, because [rubi ey] immediately wraps [rubi eir] lips around the tip, sucking and bobbing on it like it was a real cock.");
 	
 	outputText("\n\nYou actually have to yank it out of Rubi's mouth, and tell [rubi em] that there's one way you can both get a little pleasure out of this.  You urge Rubi to lie down, and you reach down, pressing the tip of the dildo ");
-	if(!rubiBimbo()) outputText("against his tight ass");
-	else outputText("against her tight pussy");
+	if(flags[kFLAGS.RUBI_NO_CUNT] == 1) outputText("against [rubi eir] tight ass");
+	else outputText("against [rubi eir] tight pussy");
 	outputText(", which resists a little at first, but once the drug has a moment to work, it slips right in.  Rubi actually coos a little as it slips inside.");
 	
 	outputText("\n\nYou also lie down, and align the other end with your [vagOrAss], and slip it inside.  Warmth radiates outwards as the drug takes full effect, your whole body becoming aroused.");
@@ -964,7 +961,7 @@ public function dildoFuckRubi():void {
 		else outputText("demonic cock");
 		outputText(" twitches, launching jets of cum onto [rubi eir] stomach, chest and face.  In [rubi eir] sex-filled stupor, [rubi ey] eagerly swallows down whatever lands in [rubi eir] mouth, and actually uses [rubi eir] fingers to collect the rest , gulping that down as well.");
 	}
-	//(Bimbo Rubi)
+	//(Bimbo/Female Rubi)
 	else {
 		outputText("\n\n[rubi Eir] body shudders and convulses, and though you can't see or feel it, you're confident [rubi eir] pussy is clenching down tightly on the dildo, as it suddenly becomes very hard to thrust into [rubi em] with it.  With an orgasmic scream of \"<i>Oh yes!  Yes!</i>\"  and a spray of femjuices, Rubi collapses, exhausted.");
 	}
