@@ -213,7 +213,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	if(totalOffers > 0) {
 		var armor:Function = null;
-		if(beeArmor > 0 && gelArmor != null && silk > 0) armor = RathazulArmorMenu;
+		if(beeArmor > 0 || gelArmor != null || silk > 0) armor = RathazulArmorMenu;
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
