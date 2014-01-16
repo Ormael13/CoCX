@@ -2314,7 +2314,7 @@ public function winRapeAMinoLordAsUrta():void {
 	
 	outputText("\n\nThe tainted milk-slut frowns, but does not slow her masturbation.  Even now, her spaded tail continues to feed itself into her asshole, and her fingers have not stopped their relentless teases.  She's an expert at teasing her body.  The spreading blush leaves no doubt about that.");
 	
-	outputText("\n\nYou resume your steady push, easily compressing the bull's soft internal organ with your blunt cock-hammer.  He shifts slightly, but holds still when you grab his tail for leverage and push harder.  His prostate bows under the pressure.  Then, when it's almost painful to keep thrusting, it gives, letting you ram four inches inside seconds.  He pants, his voice high-pitched.  You can definitely feel his asshole clenching from that, and what's more, you can hear a torrent of fluid spraying from his cock-tip.");
+	outputText("\n\nYou resume your steady push, easily compressing the bull's soft internal organ with your blunt cock-hammer.  He shifts slightly, but holds still when you grab his tail for leverage and push harder.  His prostate bows under the pressure.  Then, when it's almost painful to keep thrusting, it gives, letting you ram four inches inside in seconds.  He pants, his voice high-pitched.  You can definitely feel his asshole clenching from that, and what's more, you can hear a torrent of fluid spraying from his cock-tip.");
 	
 	outputText("\n\n\"<i>Ride that bull, girl,</i>\" the succubus cheers, surprisingly encouragingly.  You glance her way to see why, and are greeted by a view of a virtual waterfall of lubricant, gushing from between her thighs.  She's on the very cusp of orgasm, holding herself back for the eventual climax to this show.");
 	

@@ -330,21 +330,21 @@ private function useReductoOnKat():void {
 private function useRedoctoOnKatsKnot():void {
 	outputText("", true);
 	outputText("You gently reach out and start to stroke her sheath up and down, feeling the long bone of ", false);
-	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("each of her canine cocks, and rubbing one finger across the exposed tips.  The cat wriggles and squirms, and quickly blooms under your care, until all " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches of both shafts are exposed.  Knot just barely visible as a bulge at the base of each cock, you start to stroke them next.  Katherine coos and moans as your fingers glide up and down, and the responsive flesh starts to swell like red, hard balloons.  They puff up and up, swelling to full size, " + flags[kFLAGS.KATHERINE_KNOT_THICKNESS] + " inches in diameter.  With subjects prepared, you stop, leaving Katherine hovering at the edge of release.\n\n", false);
-	else outputText("her canine cock, and rubbing one finger across the exposed tip.  The cat wriggles and squirms, and quickly blooms under your care, until all " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches of her shaft is exposed.  Knot just barely visible as a bulge at the base of her cock, you start to stroke them next.  Katherine coos and moans as your fingers glide up and down, and the responsive flesh starts to swell like a red, hard balloon.  It puff up and up, swelling to full size, " + flags[kFLAGS.KATHERINE_KNOT_THICKNESS] + " inches in diameter.  With subjects prepared, you stop, leaving Katherine hovering at the edge of release.\n\n", false);
+	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("each of her canine cocks, and rubbing one finger across the exposed tips.  The cat wriggles and squirms, and quickly blooms under your care, until all " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches of both shafts are exposed.  Her knots just barely visible as a bulge at the base of each cock, you start to stroke them next.  Katherine coos and moans as your fingers glide up and down, and the responsive flesh starts to swell like red, hard balloons.  They puff up and up, swelling to full size, " + flags[kFLAGS.KATHERINE_KNOT_THICKNESS] + " inches in diameter.  With the subjects prepared, you stop, leaving Katherine hovering at the edge of release.\n\n", false);
+	else outputText("her canine cock, and rubbing one finger across the exposed tip.  The cat wriggles and squirms, and quickly blooms under your care, until all " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches of her shaft is exposed.  Knot just barely visible as a bulge at the base of her cock, you start to stroke it next.  Katherine coos and moans as your fingers glide up and down, and the responsive flesh starts to swell like a red, hard balloon.  It puffs up and up, swelling to full size, " + flags[kFLAGS.KATHERINE_KNOT_THICKNESS] + " inches in diameter.  With the subject prepared, you stop, leaving Katherine hovering at the edge of release.\n\n", false);
 
 	outputText("She is, however, too wound up to do anything, so you are forced to take the Reducto from her slack fingers and smear the foul-smelling gunk across her knot", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) {
 		outputText("s.  She gasps and suddenly lets out a yowl, her cocks visibly spasming as her knots shrink... and then promptly begins spurting cum, which you ", false);
 		if(player.lib > 50) outputText("joyously attempt to catch in your mouth like rain", false);
 		else outputText("narrowly dodge in surprise", false);
-		outputText(", at the expense of dropping and spilling what's left of the salve.  The hard flesh shrinks until the width has dropped by two whole inches, at which the salve's effects wear off and her climax finishes... though, given that her knots remain swollen and her cocks remain erect, you think she could probably go again.\n\n", false);
+		outputText(", at the expense of dropping and spilling what's left of the salve.  The hard flesh shrinks until the width has dropped by two whole inches, at which point the salve's effects wear off and her climax finishes... though, given that her knots remain swollen and her cocks remain erect, you think she could probably go again.\n\n", false);
 	}
 	else {
 		outputText(".  She gasps and suddenly lets out a yowl, her cock visibly spasming as her knot shrinks... and then promptly begins spurting cum, which you ", false);
 		if(player.lib > 50) outputText("joyously attempt to catch in your mouth like rain", false);
 		else outputText("narrowly dodge in surprise", false);
-		outputText(", at the expense of dropping and spilling what's left of the salve.  The hard flesh shrinks until the width has dropped by two whole inches, at which the salve's effects wear off and her climax finishes... though, given that her knot remains swollen and her cock remains erect, you think she could probably go again.\n\n", false);
+		outputText(", at the expense of dropping and spilling what's left of the salve.  The hard flesh shrinks until the width has dropped by two whole inches, at which point the salve's effects wear off and her climax finishes... though, given that her knot remains swollen and her cock remains erect, you think she could probably go again.\n\n", false);
 	}
 	
 	outputText("She rewards you with a glowing, orgasmic smile.  \"<i>That was... incredible.  Thank you so much for the present... did you want to do anything else?  Maybe... have a little fun?</i>\" she asks, her voice low and husky with desire.\n\n", false);
@@ -390,8 +390,8 @@ private function useReductoOnKatsKock():void {
 	outputText("as you apply a goodly amount of paste, smearing it over every inch of the twitching cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" and mingling it with the copious pre-cum from her errant masturbation.  Suddenly a gasp interrupts the chorus of low moans from your felid companion, as the effects begin.  Her shaft", false);
-	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
-	outputText(" spasm and shrink, ", false);
+	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s spasm and shrink, ", false);
+	else outputText(" spasms and shrinks, ", false);
 	if(player.lib > 50) outputText("still pushing out the aftershocks of her climax onto her belly, ", false);
 	outputText("ending up two inches shorter than before.\n\n", false);
 
@@ -458,7 +458,7 @@ private function giveKatADoublePepper():void {
 
 		outputText("\"<i>Double your fun, huh?  Okay... this is a really weird thing, but if it makes you happy,</i>\" she notes.  She takes the pepper and, pausing only to slip her pants down to expose her sheath, polishes the pepper off with a smack of her lips for good measure.  \"<i>Mmm... Not bad. Oh!</i>\"  She gasps and then arches her back suddenly.\n\n", false);
 
-		outputText("Your gaze goes to her crotch, where her canine cock slides  free with deceptive slowness, crowning itself at " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches and filling its knot to " + flags[kFLAGS.KATHERINE_BALL_SIZE] + " inches thick  as the knot pops free.  Then the sheath's opening stretches even wider as a second distinctive tip pops up, sliding up and out until she is sporting two bulging dog-cocks, each exactly the same size as the last.  She reaches down and gently strokes one with each hand, casting you a come hither look.\n\n", false);
+		outputText("Your gaze goes to her crotch, where her canine cock slides free with deceptive slowness, crowning itself at " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches and filling its knot to " + flags[kFLAGS.KATHERINE_BALL_SIZE] + " inches thick as the knot pops free.  Then the sheath's opening stretches even wider as a second distinctive tip pops up, sliding up and out until she is sporting two bulging dog-cocks, each exactly the same size as the last.  She reaches down and gently strokes one with each hand, casting you a come hither look.\n\n", false);
 		//set Kat cock number to 2, use 1x double pepper, Display Katherine Sex options
 		flags[kFLAGS.KATHERINE_DICK_COUNT] = 2;
 	}

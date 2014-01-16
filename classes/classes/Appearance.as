@@ -1701,7 +1701,7 @@
 				//TOIGHT LIKE A TIGER
 				if(i_character.tone >= 65) {
 					options = ["full, toned ",
-								"muscly handful of ass",
+								"muscly handful of ",
 								"shapely, toned ",
 								"muscular, hand-filling ",
 								"shapely, chiseled ",
@@ -1921,10 +1921,7 @@
 						"derriere",
 						"rump",
 						"bottom"];
-			//They worked hard for this, so extra chance of booty.
-			if (i_character.buttRating >= 10)
-				options.push("booty", "booty", "booty");
-
+			
 			description += randomChoice(options);
 			//if(rando == 2) desc += "cheeks";
 			return description;

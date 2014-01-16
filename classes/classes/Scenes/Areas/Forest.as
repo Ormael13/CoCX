@@ -195,7 +195,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Essy every 20 explores or so
-			if ((rand(100) <= 3) && player.gender > 0 && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0 || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)) {
+			if ((rand(100) <= 1) && player.gender > 0 && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0 || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)) {
 				essrayle.essrayleMeetingI();
 				return;
 			}
