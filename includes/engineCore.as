@@ -2629,7 +2629,9 @@ public function dynStats(... args):void
 			
 			// Figure out which array to search
 			var argsi:String = (args[i] as String);
-			if (argsi.length <= 4 && argsi != "lust") // Short
+			if (argsi == "lust") argsi = "lus";
+			if (argsi == "sens") argsi = "sen";
+			if (argsi.length <= 4) // Short
 			{
 				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));
 				if (argsi.length == 4 && argIndex != -1) argOps[argIndex] = argsi.charAt(3);
