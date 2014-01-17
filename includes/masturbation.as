@@ -1760,7 +1760,8 @@ public function multiNippleFuckPrep(randomCock:Number):void {
 //ORGASM COOOOAD
 public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 	outputText("\n\n", false);
-	if(player.cockTotal() > 0) {
+	if(player.cockTotal() > 0) 
+	{
 		if(player.cockTotal() == 1) {
 			outputText("The sensations prove too much for you, and you feel the tightness building in your ", false);
 			if(player.normalCocks() == 1) outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ", false);
@@ -1835,6 +1836,7 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.cumQ() >=7 && player.cumQ() < 10) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
 			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  You mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
 		}
+		player.resetDickEjaculateTimer();
 	}
 	//Vaginal CUMMING
 	if(player.vaginas.length > 0) {

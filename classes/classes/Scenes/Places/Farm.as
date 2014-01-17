@@ -828,6 +828,7 @@ private function cockPumping():void {
 			}
 			outputText(".  Every time you get a good grip and start to pull, a shiver of pleasure shoots down " + sMultiCockDesc() + " and robs you of your focus and muscle control.  Practically helpless against the tubes, you feel " + sMultiCockDesc() + " get harder and harder as the machine sucks out more pre-cum along with the milky aftershocks of your last massive orgasm.\n\n", false);
 		}
+		player.resetDickEjaculateTimer();
 		dynStats("lus", -150);
 		//TO BAD ENDAGE
 		doNext(milkerBadEnd1);
