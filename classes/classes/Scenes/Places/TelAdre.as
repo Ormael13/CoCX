@@ -779,7 +779,7 @@ private function piercingRemove():void {
 	if(player.hasVagina()) {
 		if(player.vaginas[0].labiaPierced > 0) vulva = removeVulvaPierce;
 	}
-	if(clit != null || dick != null || ears != null || eyebrow != null || lip != null || nipples != null || nose != null || tongue != null || vulva != null) {
+	if(clit == null && dick == null && ears == null && eyebrow == null && lip == null && nipples == null && nose == null && tongue == null && vulva == null) {
 		outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"", true);
 		doNext(piercingStudio);
 		return;
