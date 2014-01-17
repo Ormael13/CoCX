@@ -294,6 +294,13 @@ package classes
 			statusAffects = [];
 			//keyItems = new Array();
 		}
+
+		public function resetDickEjaculateTimer():void
+		{
+			// Reset hoursSinceCum 
+			// trace("YOU IS JIZZING OMGLOLWTFBBQ!", this.hoursSinceCum)
+			this.hoursSinceCum = 0;
+		}
 		
 		//Functions			
 		//Create a perk

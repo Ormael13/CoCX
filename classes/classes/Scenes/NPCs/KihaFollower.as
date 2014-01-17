@@ -668,7 +668,7 @@ private function lovingHugDickings():void {
 	if(player.cumQ() >= 500) outputText("  Jet after jet of your creamy batter soaks the reptilian womb in spunk, the proof of your virility.");
 	if(player.cumQ() >= 1000) {
 		outputText("  It doesn't take long for you to flood the poor cum-receptacle and drizzle out onto the bed.  Feeling way to good to care, you just keep moaning while you ");
-		if(player.cumQ() >= 2000) outputText("fill Kiha's bed");
+		if(player.cumQ() <= 2000) outputText("fill Kiha's bed");
 		else outputText("turn Kiha's abode into your spermy swimming pool");
 		outputText(".");
 	}

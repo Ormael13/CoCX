@@ -553,7 +553,7 @@
 			if (attackSucceeded()){
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = calcDamage();
-				if (damage > 0 && short != "anemone") damage = player.takeDamage(damage);
+				if (damage > 0) damage = player.takeDamage(damage,true);
 				return damage;
 			}
 			return 0;
@@ -577,11 +577,13 @@
 			var attacks:int = statusAffectv1("attacks");
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
-				var damage:int = eOneAttack();
-				outputAttack(damage);
-				postAttack(damage);
-				game.statScreenRefresh();
-				outputText("\n", false);
+				if (attackSucceeded()){
+				    var damage:int = eOneAttack();
+					outputAttack(damage);
+					postAttack(damage);
+					game.statScreenRefresh();
+					outputText("\n", false);
+				}
 				if (statusAffectv1("attacks") >= 0) {
 					addStatusValue("attacks", 1, -1);
 				}

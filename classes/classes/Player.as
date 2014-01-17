@@ -54,7 +54,7 @@ package classes
 				if (damage < 1) damage = 1;
 			}
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1("Black Cat Beer") >= 0)
+			if (statusAffectv1("Black Cat Beer") > 0)
 				damage = Math.round(damage * .75);
 
 			//Take damage you masochist!
@@ -113,8 +113,8 @@ package classes
 		 */
 		public function speedDodge(monster:Monster):int{
 			var diff:Number = spe - monster.spe;
-			var rnd:Boolean = int(Math.random() * ((diff / 4) + 80)) > 80;
-			if (rnd) return 0;
+			var rnd:int = int(Math.random() * ((diff / 4) + 80));
+			if (rnd<=80) return 0;
 			else if (diff<8) return 1;
 			else if (diff<20) return 2;
 			else return 3;
