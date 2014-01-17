@@ -6,7 +6,7 @@ package classes.Items.Consumables
 	import classes.Items.ConsumableLib;
 	import classes.Player;
 
-	public class LustStick extends SimpleConsumable
+	public final class LustStick extends SimpleConsumable
 	{
 
 		override public function canConsume(player:Player):Boolean

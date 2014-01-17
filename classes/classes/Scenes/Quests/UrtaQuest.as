@@ -2824,7 +2824,7 @@ private function getKnockedUpWithGodChild():void {
 	if(player.vaginalCapacity() < 60) outputText("a little painfully");
 	else outputText("deliciously");
 	outputText(".  Her hands roam over the rest of your body with unrestrained ardor, groping and squeezing, pulling and tweaking.   Meanwhile, her hips smack against your own, smushing her sheath up against your puffy lips, her steamy sex dripping girl-lube down the back of her balls into a thick puddle on your blanket.  SLAP!  The sweaty nutsack slaps loud enough to be heard all over as Urta crudely fucks you, humping you artlessly, her hips beating out a confused, staccato rhythm.");
-	cuntChange(60,true,true,false);
+	player.cuntChange(60,true,true,false);
 	
 	outputText("\n\nYou hold on to her waist for support, teeth clacking against each other with each bone-jarring, cunt-filling rut.  Urta's gone absolutely wild!  Her copious, ever-dripping pre is pouring out of your abused, cock-gaped slit, unimpeded by the girthy horse-cock that enters and exits, so fast it might as well be a blur.  Helpless under the onslaught, you moan");
 	if(player.hasCock()) {
@@ -2933,7 +2933,7 @@ private function getKnockedUpByUrtaEpilogueII():void {
 	outputText("You wake to pangs of labor, an unmistakable, forceful pushing emanating from within you.  Loudly, you yell, \"<i>It's coming!</i>\" which launches the room into a flurry of activity.  Your water breaks, gushing from your [vagina] and soaking the floor ahead of you with the clear, amniotic fluids.  One contraction after another begins to hit you, causing you no small amount of pain as your cervix dilates, preparing to disgorge the new life within you.");
 	
 	outputText("\n\nUnfortunately for you, even with your labor's rapid onset, it takes its sweet time getting there.  For nearly five hours, you're kept waiting, clenching Urta's hand for support whenever the pain becomes too much.  The time passes with agonizing slowness, though the room fills with more and more of the wizards as your labor drags on.  Soft blankets and pillows are gathered, to protect the child when it exits your body, and thankfully, you begin to feel it moving, travelling down your canal as your body compels you to push, to squeeze as hard as you've ever tried.  Then, with a tremendous, sucking, wrenching changing of pleasure, it slips free.");
-	cuntChange(40,true,true,false);
+	player.cuntChange(40,true,true,false);
 	
 	outputText("\n\nSlick with birthing fluids, a ball of fur, skin, and bones rolls out onto gathered blankets.  Exhaustion tries to claim you, but you pull yourself up on your forearms and squint at it, wondering just what everybody is so excited about - it looks little and messy, like any other newborn.  It strikes you as odd that you feel no motherly affection for the little bundle.");
 	

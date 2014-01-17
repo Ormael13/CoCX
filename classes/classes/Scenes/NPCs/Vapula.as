@@ -576,10 +576,9 @@ package classes.Scenes.NPCs
 			//standard night succubus stat increases
 			flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 			flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
-			shortName = "Cerul P";
 			dynStats("str", rand(2), "tou", rand(2), "spe", rand(2), "int", rand(2), "lus=", 0, "cor", 2.5);
 			menuLoc = 14;
-			takeItem();
+			inventory.takeItem(consumables.CERUL_P);
 		}
 
 //Vapula/Jojo threesome

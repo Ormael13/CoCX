@@ -108,7 +108,7 @@ public function edrynBarTalk():void {
 				doNext(telAdre.barTelAdre);
 				return;
 			}
-			takeItem();
+			inventory.takeItem();
 			return;
 		}
 		//(Too big) 
@@ -118,8 +118,7 @@ public function edrynBarTalk():void {
 				menuLoc = 2;
 				outputText("Her eyes light up and she suggests, \"<i>Take some of this; it ought to take down some of that swelling.</i>\"\n\n", false);
 				flags[kFLAGS.EDRYN_GIFT_COUNTER]++;
-				shortName = "Reducto";
-				takeItem();
+				inventory.takeItem(consumables.REDUCTO);
 				return;
 			}
 			//(ALT) 

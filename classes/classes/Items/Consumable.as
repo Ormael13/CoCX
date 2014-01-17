@@ -17,12 +17,12 @@ package classes.Items
 		/**
 		 * Perform effect on player WITHOUT requiring item being in player's inventory and removing it
 		 */
-		public function doEffect(user:Player):void
+		public function doEffect(player:Player):void
 		{
 			CoC_Settings.errorAMC("Consumable","doEffect",id);
 		}
 
-		public function canConsume(user:Player):Boolean
+		public function canConsume(player:Player):Boolean
 		{
 			return true;
 		}
@@ -30,10 +30,8 @@ package classes.Items
 		/**
 		 * Removes item from player and does effect
 		 */
-		override public function useItem(user:Player):void
+		override public function useItem(player:Player):void
 		{
-			if (!(user is Character)) CoC_Settings.error(user.a+user.short+" tried to use "+id);
-			var player:Player = user as Player;
 			if (canConsume(player)){
 				player.consumeItem(this,1);
 				doEffect(player);

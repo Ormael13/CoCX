@@ -62,42 +62,34 @@ public function openXmasPresent():void {
 	spriteSelect(9);
 	outputText("", true);
 	outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ", false);
-	//[Bad Present]
 	if(player.cor >= 90 || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+		//[Bad Present]
 		outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n", false);
 		
 		outputText("Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your " + allBreastsDescript() + ".  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n", false);
 		
 		outputText("The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n", false);
-		shortName = "Coal   ";
-		takeItem();
+		inventory.takeItem(consumables.COAL___);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
-		return;
 	}
-	//Great present!
 	else if(player.cor <= 33) {
+		//Great present!
 		outputText("surprise at the box's contents - there's a carefull arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-		if(rand(2) == 0) shortName = "SS.Robe";
-		else shortName = "SSArmor";
-		takeItem();
+		if(rand(2) == 0) inventory.takeItem(armors.SPIDERSILK_ROBES);
+		else inventory.takeItem(armors.SPIDERSILK_ARMOR);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
-		return;
 	}
-	//[Good present]
 	else if(player.cor < 60) {
+		//[Good present]
 		outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n", false);
-		shortName = "GroPlus";
-		takeItem();
+		inventory.takeItem(consumables.GROPLUS);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
-		return;
 	}
-	//[Mediocre Present]
 	else {
+		//[Mediocre Present]
 		outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n", false);
-		shortName = "SDelite";
-		takeItem();
+		inventory.takeItem(consumables.SDELITE);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
-		return;
 	}
 }
 
@@ -206,7 +198,7 @@ public function vagFuckXmasElf():void {
 	outputText("In seconds the elf has her hands around a striped, red, double-sided dildo.  It wiggles back and forth obscenely, and now that you have a good look at it, you realize the red sections are slightly raised, to better stimulate the user.  She pants and runs her hand over its pussy-slicked surface, shivering in remembered pleasure till her attention returns to you.  Her lips curl into a knowing smile and she kneels between your " + player.legs() + ", spreading them apart for better access to your " + vaginaDescript(0) + ".\n\n", false);
 	
 	outputText("The diminutive elf rubs the tip over your lower lips and " + clitDescript() + " a few times, getting you nice and hot before she slides it up your " + vaginaDescript(0) + ".  The dildo feels wonderful inside, each curved ridge sending shivers up your spine as it enters you, then stroking along your walls as you take it deeper and deeper.  The motion is interrupted once your 'present' has decided she's lodged her candy-cane-like toy deep enough inside you.  She lies back and scoots forwards, taking the rest of the striped dildo into her hairless snatch until your mounds are locked together, feminine fluids mixing on an artificial cock.");
-	cuntChange(15,true,true,false);
+	player.cuntChange(15,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("The elf giggles, \"<i>Merry Christmas,</i>\" as she starts rocking against you.  The dildo slides through your passage, massaging your inner walls and bumping against your " + clitDescript() + "'s underside with each stroke.   She's got such great muscle control that she's clamped down on the double-sided dildo and started using it as a cock to fuck you!  She smirks and pounds your vulnerable " + vaginaDescript(0) + ", raping it with increasingly forceful strokes.  You grunt and moan as each stroke loudly smacks into your hips.  You feel yourself closing in on an orgasm, but the elf-girl relaxes her grip and simply grinds against you, taking the stimulation down a notch.\n\n", false);

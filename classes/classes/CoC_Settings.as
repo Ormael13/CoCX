@@ -12,7 +12,7 @@
 		
 		// Horrible static abuse FTW
 		public static var haltOnErrors:Boolean = false;
-		public static var buttonEvents:Array = new Array();
+		public static var buttonEvents:Array = [];
 		private static const bufferSize:int = 50;
 
 		/**
@@ -44,7 +44,7 @@
 		}
 		public static function getButtonEvents():String
 		{
-			var retStr:String = ""
+			var retStr:String = "";
 			for (var x:String in CoC_Settings.buttonEvents)
 			{
 				retStr += CoC_Settings.buttonEvents[x] + "\n";

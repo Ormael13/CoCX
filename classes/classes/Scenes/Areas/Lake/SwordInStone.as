@@ -46,8 +46,7 @@ private function tryToTakeSwordInStone():void {
 		outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n", false);
 		outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n", false);
 		dynStats("lib", -(player.lib/3), "lus", -15);
-		shortName = "B.Sword"
-		takeItem();
+		inventory.takeItem(weapons.BEAUTIFUL_SWORD);
 		player.createStatusAffect("Took Blessed Sword",0,0,0,0);
 	}
 }

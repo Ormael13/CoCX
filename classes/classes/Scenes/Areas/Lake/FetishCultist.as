@@ -11,15 +11,76 @@
 
 	public class FetishCultist extends Monster
 	{
+
+		private static const NAUGHTY_NURSES_UNIFORM:String = "naughty nurse's uniform";
+		private static const TEACHERS_OUTFIT:String = "teacher's outfit";
+		private static const SWIMSUIT:String = "swimsuit";
+		private static const NOBLES_CLOTHING:String = "noble's clothing";
+		private static const PERVY_NUNS_CLOTHING:String = "pervy nun's clothing";
+
+		override public function combatRoundUpdate():void
+		{
+			super.combatRoundUpdate();
+			var changed:Boolean = false;
+			//Fetish Cultist Update
+			switch (rand(5)) {
+				case 0:
+					if (armorName != PERVY_NUNS_CLOTHING) {
+						//Religious outfit!
+						long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath.  She is wearing a religious robe that closely hugs her curvacious shape. There is a specially-placed opening over her pussy lips.";
+						setArmorName(PERVY_NUNS_CLOTHING);
+						changed = true;
+					}
+					break;
+				case 1:
+					if (armorName != NOBLES_CLOTHING) {
+						//Noble outfit
+						setArmorName(NOBLES_CLOTHING);
+						long = "She's wearing a skimpy noble's dress, which lets you get a good look at her well-filled bra through an over-generous cleavage. Her skirt is so short that you clearly see her pussy lips.  She smiles at you in a rather cute way.  She looks like she's coming out of a painting, executed by a rather depraved and lust-filled artist.";
+						changed = true;
+					}
+					break;
+				case 2:
+					if (armorName != SWIMSUIT) {
+						//Swim outfit
+						long = "She's currently wearing a swimsuit that's apparently much too small for her, because it stretches across every curve and clearly outlines them for you to see.  Her sizable breasts look like they could burst through the fabric at any moment.  You can even see her erect nipples and her puffy lower lips.";
+						setArmorName(SWIMSUIT);
+						changed = true;
+					}
+					break;
+				case 3:
+					if (armorName != TEACHERS_OUTFIT) {
+						//Pervy Teacher
+						long = "She's now wearing a teacher's outfit, complete with glasses, make-up, her black hair in a tight bun, and a serious-looking outfit... with no back side at all.  She turns to the side to give you a good look at her rear, smiling mischievously.";
+						setArmorName(TEACHERS_OUTFIT);
+						changed = true;
+					}
+					break;
+				case 4:
+					if (armorName != NAUGHTY_NURSES_UNIFORM) {
+						//Naughty Nurse
+						long = "The woman is wearing heavy make-up and a whorish nurse's suit, seemingly in white latex with two openings at her breasts and a large one on her crotch and inner thighs. It lets her blood-gorged pussy lips hang freely, which she displays proudly.";
+						setArmorName(NAUGHTY_NURSES_UNIFORM);
+						changed = true;
+					}
+					break;
+			}
+			//Talk abouts it mang!
+			if(changed) outputText("The fetish cultist's clothing shifts and twists, taking on the appearance of a " + armorName + ".\n\n", false);
+			lust += lustVuln * 3;
+		}
+
+		private static const FETISHY_OUTFIT:String = "fetishy outfit";
+
 		private function cultistRaisePlayerLust():void {
 			//Two text variants!
 			if(rand(2) == 0) {
-				if(armorName == "pervy nun's clothing") outputText("She suddenly stops chanting and spreads her legs, opening her loose pussy wide with one hand while moaning like a whore.  She toys with her breasts and fondles one of her nipples with her other hand.\n\nDespite yourself,  you can't help but be aroused by the scene.", false);
-				if(armorName == "noble's clothing") outputText("She suddenly blushes and start giggling, saying: 'Really my lord!' in a suave, submitting voice while pulling down her skirt.  The movement lets you get an even better look down her cleavage, and her breasts appear even fuller than before.\n\nDespite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == "swimsuit") outputText("She does a series of lewd stretches, showing off her tightly-clad, sexy body in every possible detail.  In particular, her excited, blood-gorged pussy lips, clearly outlined, seem to be begging for you to come and grope them.  For a start.  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == "teacher's outfit") outputText("Obviously very flexible, she arches her back with one hand on her hip, displaying her firm round ass while looking at you with a lascivious expression.  She says in a sexy voice, \"<i>Maybe we should have a... private talk after class...</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == "naughty nurse's uniform") outputText("Still displaying her figure in her tight suit, she asks with a lewd smile, \"<i>Is there one of your needs I could satisfy, my dear?</i>\"  She grabs one of her firm, full breasts, \"<i>Are you thirsty, maybe?</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == "fetishy outfit") outputText("She suddenly starts posing in sexy outfits.  Despite yourself, you can't help but be aroused by it.", false);
+				if(armorName == PERVY_NUNS_CLOTHING) outputText("She suddenly stops chanting and spreads her legs, opening her loose pussy wide with one hand while moaning like a whore.  She toys with her breasts and fondles one of her nipples with her other hand.\n\nDespite yourself,  you can't help but be aroused by the scene.", false);
+				if(armorName == NOBLES_CLOTHING) outputText("She suddenly blushes and start giggling, saying: 'Really my lord!' in a suave, submitting voice while pulling down her skirt.  The movement lets you get an even better look down her cleavage, and her breasts appear even fuller than before.\n\nDespite yourself, you can't help but be aroused by the scene.", false);
+				if(armorName == SWIMSUIT) outputText("She does a series of lewd stretches, showing off her tightly-clad, sexy body in every possible detail.  In particular, her excited, blood-gorged pussy lips, clearly outlined, seem to be begging for you to come and grope them.  For a start.  Despite yourself, you can't help but be aroused by the scene.", false);
+				if(armorName == TEACHERS_OUTFIT) outputText("Obviously very flexible, she arches her back with one hand on her hip, displaying her firm round ass while looking at you with a lascivious expression.  She says in a sexy voice, \"<i>Maybe we should have a... private talk after class...</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
+				if(armorName == NAUGHTY_NURSES_UNIFORM) outputText("Still displaying her figure in her tight suit, she asks with a lewd smile, \"<i>Is there one of your needs I could satisfy, my dear?</i>\"  She grabs one of her firm, full breasts, \"<i>Are you thirsty, maybe?</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
+				if(armorName == FETISHY_OUTFIT) outputText("She suddenly starts posing in sexy outfits.  Despite yourself, you can't help but be aroused by it.", false);
 			}
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
@@ -107,7 +168,7 @@
 			init08Face();
 			init09PrimaryStats(35,25,30,1,75,80,90);
 			init10Weapon("whip","whip-crack");
-			init11Armor("fetishy outfit");
+			init11Armor(FETISHY_OUTFIT);
 			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(2,5+rand(10));
 			init14WeightedDrop()

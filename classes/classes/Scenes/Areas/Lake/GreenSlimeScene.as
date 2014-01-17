@@ -491,7 +491,7 @@ private function oozeButtRapesYou():void
   	}
 	outputText("You grimace slightly and it pushes at your sphincter, then penetrates.  You let out a slight gasp in spite of yourself as its cock warps, deforming to stretch your ass without pushing you beyond your limits.  It pushes itself several inches inside you and stops, pausing as you catch your breath and collect yourself.", false);
 	//De-virgin
-	buttChange(monster.cockArea(0), true);
+	player.buttChange(monster.cockArea(0), true);
 	outputText("\n\n", false);
 	outputText("With a deliberate slowness the slime pulls out of you and then thrusts back inside, this time going deeper than before.  It continues like this and you realize that the penetration is entirely painless, the creature's pliability and moistness allowing it to easily glide inside you.  Before long you feel it bottom out inside you, its soft member curving perfectly through your insides as it trunk presses against your behind.  The slime begins fucking you with short, shallow strokes and you feel a moistness build inside your ass as the creature's fluid begins to accumulate.  It begins to quicken and deepen its strokes as you feel a heat build inside of you, the creature's fluid apparently having an aphrodisiac effect.\n\n", false);
 	outputText("Before long you find yourself moaning under the beast's attack, pleasure washing through your nethers in spite of yourself as it pumps your ass.  ", false);
@@ -599,7 +599,7 @@ private function oozeRapesYouVaginally():void
 		else if (player.vaginalCapacity() <= 30) outputText("The thing slowly presses against you to penetrate and you grab at the grass beneath you.  A soft moan escapes your lips as the cock slides into your " + vaginaDescript(0) + ", its girth changing slightly to fit you almost perfectly, stretching you just the right amount.  Your moan grows louder as it penetrates deeper into your body, filling the contours of your interior perfectly until your hips finally touch its trunk.  There's a short pause and you gasp as the slime's member then grows inside you, lengthening to fill your " + vaginaDescript(0) + " perfectly.  ", false);
 		//MEGA coochie
 		else outputText("The thing slowly presses against you to penetrate and you grab at the grass beneath you.  A soft moan escapes your lips as the cock slides into your " + vaginaDescript(0) + ", its girth changing slightly to fit you almost perfectly, stretching you just the right amount.  Your moan grows louder as it penetrates deeper into your body, filling the contours of your interior perfectly until your hips finally touch its trunk.  There's a short pause and you gasp as the slime's member then grows inside you, lengthening until it nearly fills your " + vaginaDescript(0) + ".  ", false);
-		cuntChange(monster.cockArea(0),true,false,true);
+		player.cuntChange(monster.cockArea(0),true,false,true);
 		outputText("You arch your back slightly as the slime begins moving, slowly pumping your " + vaginaDescript(0) + ".  As it picks up speed a small amount of the thing's greenish fluid builds up around your lower mouth, making your skin tingle and filling you with an unusual arousal.\n\n", false);
 		//Cocks
 		if(player.cockTotal() > 0)
@@ -637,7 +637,7 @@ private function oozeRapesYouVaginally():void
 			//!!NOTE
 			//same as before with the virginity
 			outputText("The thing slowly presses against you to penetrate and you grab at the grass beneath you, certain that it won't fit, but excited to finally have sex for the first time.  You bite your bottom lip as the cock pierces your virginity, arcing your back as a sharp pang of pain runs through you.  You let out a stuttering gasp as it penetrates deeper into your body, filling the contours of your interior perfectly.  As it does it coats your inside with a tingling, soothing fluid that quickly turns whatever pain you may have felt into a wonderful pleasure.  When the creature finally bottoms out inside you, what remains of its length seems to slide back into the creature's body.  ", false);
-			cuntChange(15, true);
+			player.cuntChange(15, true);
 		}
 		//TIGHT
 		else if(player.vaginalCapacity() < 18) outputText("It finally begins to penetrate you and you grab at the grass beneath you, excited and anxious for it to try and squeeze itself into you.  You bite your bottom lip hold in a moan loudly as the cock slides into your " + vaginaDescript(0) + ", its girth squeezing down to comfortably slide into you.  You let out a pleasant sigh as it penetrates deeper into your body, filling the contours of your interior perfectly until it finally bottoms out.  What remains of its length seems to slide back into the creatures body as it pulls your hips against it's trunk.  ", false);

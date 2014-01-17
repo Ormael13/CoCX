@@ -4327,7 +4327,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	}
 	//reduce lust and libido, increase sensitivity, remove virgin vag if PC clit>12", slimefeed if PC clit>12" or PC corr <50, increase clit by 1" before perk mod; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 	if(player.clitLength > 12 || player.cor < 50) {
-		cuntChange(12,false,false,false);
+		player.cuntChange(12,false,false,false);
 		player.slimeFeed();
 	}
 	player.clitLength++;
@@ -4920,7 +4920,7 @@ private function winAgainstDemoNSheilaForVaginas():void {
 	outputText("\n\n\"<i>I'm told this hurts, at first,</i>\" your demon lover says.  \"<i>Sorry.</i>\"");
 	
 	outputText("\n\nBefore you can utter a word to temporize, she slams her hips into yours, penetrating you neatly with her spade.");
-	cuntChange(10,true,true,false);
+	player.cuntChange(10,true,true,false);
 	outputText("  Oh, god, it burns!  You shake violently as your pussy is assaulted by the fluid from Sheila's black tail, waves of pain twisting through it and forcing its walls to clamp down on the invader.  The demon gasps as you squeeze and leans forward onto your back");
 	if(sheilaCorruption() > 0) outputText(", squashing her tits into you");
 	outputText(".  \"<i>Calm down!</i>\" she barks, grabbing your arms and pulling them toward her.  With hands held behind you like this, you can do little to check her enthusiasm... but Sheila doesn't begin thrusting yet.  \"<i>It'll fade soon, love, and you'll start feeling it,</i>\" she promises, kissing your ");

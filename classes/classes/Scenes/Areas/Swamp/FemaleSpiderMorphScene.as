@@ -85,9 +85,8 @@ package classes.Scenes.Areas.Swamp
 				//(OPTION 2 - GIFT) 
 				else {
 					outputText("After you've both had your fill of talk, the spider-girl smiles and gives you a gentle hug.  She trills, \"<i>Thank you so much for talking to me!  It feels so good to actually... communicate with someone again.  I can't thank you enough, but here, take this.  Maybe it will help you on your journey.</i>\"\n\n", false);
-					shortName = "S.Gossr";
 					menuLoc = 2;
-					takeItem();
+					inventory.takeItem(consumables.S_GOSSR);
 				}
 			}
 			//*Try to Talk - Aggressive Variant

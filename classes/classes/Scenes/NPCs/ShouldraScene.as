@@ -376,9 +376,8 @@ private function slimeGinaFlation():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 	flags[kFLAGS.SLIMEGINAED]++;
 }
@@ -437,9 +436,8 @@ private function slimeyPenorsAhoy():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -472,7 +470,7 @@ private function genderlessGhostBuster():void {
 	//[if anus is not gaping]
 	if(player.ass.analLooseness < 4) outputText(" and stretching your butt obscenely", false);
 	outputText(".", false);
-	buttChange(31,true,true,false);
+	player.buttChange(31,true,true,false);
 	outputText("  Babbling like a crazed addict, her mind clouding increasingly by the triple penetration, she hops up and down, driving the dildo further into your anus with every bounce. Finally, with eight inches of horsey wang shoved into your butt, and vibrating demon-dicks never ceasing their barrage of pleasure on your tits, the ghost-girl climaxes in a big way. She reaches up and roughly pulls the vibrators out of your nipplecunts, stroking them vigorously as they spurt a mixture of transparent spunk and thick white milk, two mini-fountains of orgasmic pleasure. After some time on the ground, taking deep breaths that jostle your boobs against each other, the ghost girl finally reaches down and extricates the equine dong from your pucker, tossing it to the side with a contented sigh. \"<i>What did I tell you?</i>\" she asks softly. \"<i>Any means necessary.</i>\"\n\n", false);
 	
 	outputText("You chuckle to yourself, admittedly impressed by her prowess. A pressure lifts from your chest, and you absently raise a hand to find ", false);
@@ -558,9 +556,8 @@ private function penisLossThatIsntALoss():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -603,9 +600,8 @@ private function ghostBJFinisher(inside:Boolean):void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 //Penis With Worm Infestation Scene
@@ -686,7 +682,7 @@ private function ghostGinaWinSexings():void {
 	
 	outputText("You awake some time later in a prodigious puddle of girly spunk. Your attempt to sit up is impeded by a clunk against the ground.  A clunk? You prop yourself up on your elbows and glance down to see a large metal pipe, stuck in your vagina presumably some time during your black-out. Reaching down, you extricate a full ten inches of piping from your cunt, and shake your head at the tenacity of your unworldly bodily invader. You are happy to feel a tightening in your crotch, however, as the magic finally wears off, returning your womanliness to a " + vaginaDescript(0) + ". You also note the absence of your gigantic clitoris, and give yourself a little stroke to confirm; it's reverted to normal size as well. All's well that ends well, you suppose.\n\n", false);
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!", false);
-	cuntChange(50,true,true,false);
+	player.cuntChange(50,true,true,false);
 	dynStats("lus=", 0);
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
 	if(inCombat()) cleanupAfterCombat();
@@ -753,7 +749,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 	outputText("She chuckles malevolently, and you groan, mind cycling through the possible outcomes of the girl's impulses. Your lips curl unbidden in an evil smile, then begin mouthing an archaic incantation. You wince inwardly, bracing for the worst. She finishes and goes back to the vigorous stroking, and you are left to wonder what the spell was meant to do—that is, until you feel a tingling beginning at the base of your " + cockDescript(x) + ", slowly climbing up the shaft until your entire length is covered in the sensation.\n\n", false);
 	
 	outputText("Your eyes widen as your proud, rigid member becomes significantly more elastic. As the ghost girl continues to stroke, you marvel at the odd sensation, flexible yet still firm. She stops suddenly, and begins bending the shaft downwards, and you have a fairly good idea of what she plans to do with your magically-altered manhood. True enough, she promptly loops your bendy dick over and inserts it firmly into your fuck-hole, creating the most confusingly arousing feeling you've ever experienced. She continues to push until your shaft reaches its limit, shoving the entire thing into your slavering slit.", false);
-	cuntChange(player.cockArea(x),true,true,false);
+	player.cuntChange(player.cockArea(x),true,true,false);
 	outputText("  Unable to do much in your current position, the ghost girl launches into spellcasting once more with a determined edge to her voice. The tingling feeling returns, this time beginning in your head and intensifying. You sharply inhale as your glans begins vibrating and wiggling around, stimulating your tunnel better than any dildo. The vibration has a similar effect on the penis itself, and you can't resist a moan as the tingles creep up your shaft. This tension lasts for an impressive amount of time, and the ghost-girl, getting sick of your endurance, cries a single word, intensifying the jostling of your dick and drawing a throaty gurgle from you. Any conceptions of restraint are quickly shattered under the stimulation, and you climax hard, writhing on the cracked pavement and crying out in ecstasy as a result of an actual occurrence of a ghost-assisted self-fuck. You're only pushed further over the edge with the journey of your seed through your misshapen urethra, the curve causing a small 'traffic jam' of cum and stretching the urethra further out.\n\n", false);
 	
 	outputText("Finally, the seed spills out with an explosive splash into your carnal canal, and your scream only intensifies, the ghost girl joining in with her own melodic voice inside your mind. Gout after gout of cum bursts into you. Your vibrating head keeps the semen from leaking out as your belly protrudes a bit to accommodate. After many blissful moments, your orgasm winds down, and you collapse. Luckily, you remain mindful enough to drag your dick, with the vibration dying down, back out into the open, a torrential mixture of female lovejuice and semen pouring out and pooling around your " + buttDescript() + ". You lie there for minutes, gathering your wits and feeling your penis gradually stiffen once more, the effects worn out. After several attempts, you manage to summon enough strength to slide yourself into a sitting position, wondering what happens now.\n\n", false);
@@ -825,9 +821,8 @@ private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -869,9 +864,8 @@ private function ghostGinaLosses():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -899,9 +893,8 @@ private function loseToShouldraAsHerm():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -1002,9 +995,8 @@ private function shouldraGiantCockLoss():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 //Genderless Scene
@@ -1040,7 +1032,7 @@ private function genderlessShouldrasLossRapes():void {
 	//[if anus is not gaping]
 	if(player.ass.analLooseness <= 4) outputText(" and stretching your butt obscenely", false);
 	outputText(".", false);
-	buttChange(50,true,true,false);
+	player.buttChange(50,true,true,false);
 	outputText("  Babbling like a crazed addict, her mind clouding increasingly by the triple penetration, she hops up and down, driving the dildo further into your anus with every bounce. Finally, with eight inches of horsey wang shoved into your butt, and vibrating demon-dicks never ceasing their barrage of pleasure on your tits, the ghost-girl climaxes in a big way. She reaches up and roughly pulls the vibrators out of your nipplecunts, stroking them vigorously as they spurt a mixture of transparent spunk and thick white milk, two mini-fountains of orgasmic pleasure. After some time on the ground, taking deep breaths that jostle your boobs against each other, the ghost girl finally reaches down and extricates the equine dong from your pucker, tossing it to the side with a contented sigh. \"<i>What did I tell you?</i>\" she asks softly. \"<i>Any means necessary.</i>\"\n\n", false);
 
 	outputText("You chuckle to yourself, admittedly impressed by her prowess. A pressure lifts from your chest, and you absently raise a hand to find ", false);
@@ -1057,9 +1049,8 @@ private function genderlessShouldrasLossRapes():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -1176,9 +1167,8 @@ private function ginaBoobgartuanShouldra():void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 }
 
@@ -1258,9 +1248,8 @@ private function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	}
 	else {
 		outputText("\n\n", false);
-		shortName = "EctoPls";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.ECTOPLS);
 	}
 	flags[kFLAGS.GHOST_GIRL_SLIME_X_SHOULDRA_COUNTER]++;
 }

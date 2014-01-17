@@ -5,7 +5,7 @@ package classes.Items
 {
 	import classes.Items.Weapons.*;
 
-	public class WeaponLib
+	public final class WeaponLib
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 

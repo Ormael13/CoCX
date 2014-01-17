@@ -545,9 +545,8 @@ public function helpMarble1():void {
 	//(increase player lust)
 	dynStats("lus", 10);
 	//(player receives a bottle of Marble's milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 }
 
 //Help out Marble, version 2 (can occur anytime before Marble knows about her milk):
@@ -572,9 +571,8 @@ public function helpMarble2():void {
 	if(afterMarbleHelp()) return;
 	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you.  Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source,</i>\" she says, patting her sizable chest.\n\n", false);
 	//(player receives a bottle of Marble's milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 }
 
 
@@ -776,9 +774,8 @@ private function marbleChoreHelpChooseMilk():void {
 	outputText("", true);
 	outputText("With the possibility of getting some relief, you eagerly get to work and do whatever you can to help Marble.  It is tough work, but the idea of getting milk seems to give you strength you didn't realize you had.  Afterwards, Marble is so impressed with your efforts that she gives you a large bottle of her milk.  As you are leaving, you realize that you don't have to drink them right away; just having worked for it has soothed your withdrawal a little.", false);
 	//(player gets a large bottle of Marble's milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 	//(decrease affection by 5)
 	marbleStatusChange(-5,0);
 	//(delay withdrawal for a few hours)
@@ -794,9 +791,8 @@ private function marbleChoreHelpChooseMarble():void {
 	outputText("", true);
 	outputText("You agree to help Marble, but not for the milk.  She seems confused for a moment and you tell her that you want to help her for the sake of helping her, not just because you'll be getting milk.  She gives you a genuine smile at this and the two of you work well together for the next few hours.  At the end, Marble thanks you for your help and hands you the bottle of milk she promised, even if you didn't work solely for it.  As you are leaving, you realize that you don't have to drink it right away; just having worked for it has soothed your withdrawal a little.", false);
 	//(player gets a bottle of Marble's milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 	//(increase affection by 5)
 	marbleStatusChange(5,0);
 	//(delay withdrawal for a few hours)
@@ -994,9 +990,8 @@ private function ashamedAddictionBegForIt():void {
 	outputText("", true);
 	outputText("You look at her in horror at the suggestion of wasting her delicious milk in such a way. You snatch the milk bottle and hold it tightly to your chest.  You beg her not to talk about it like that and not to throw her milk away so easily.  She seems to be even more upset by your declaration and grabs hold of your hands.  Marble looks into your eyes for a moment and tells you that there is always hope to change before she runs off.  You are left with the milk bottle, but you think that you can wait until later to drink it.  It just felt right to make that bold declaration and it seems to have made you feel better, if only for now.", false);
 	//(player gets a bottle of Marble's Milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusAffect("Bottled Milk") >= 0) {
 		player.addStatusValue("Bottled Milk",1,(1+rand(6)));
@@ -1196,9 +1191,8 @@ public function postAddictionFarmHelpings():void {
 	//(randomly raise either str or spd)
 	dynStats("str", rand(2),"spe", rand(2));
 	//(player gets a bottle of Marble's milk)
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 }
 
 //Post addiction Camp Text:
@@ -1216,14 +1210,13 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
-	if(!hasItem("M. Milk", 5)) {
+	if(!player.hasItem("M. Milk", 5)) {
 		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ", false);
 		//[if the player is no longer addicted]
 		if(player.hasPerk("Marble Resistant") >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.", false);
 		//(player gains a bottle of Marble's milk)
-		shortName = "M. Milk";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem("M. Milk");
 	}
 }
 
@@ -1323,7 +1316,7 @@ public function marbleSex2Continued(genders:Number) : void
 		if(player.totalCocks() > 0) outputText(".  Your " + multiCockDescriptLight() + " erupts while clamped between your bodies", false);
 		outputText(".  Her grip soon relents and the two of you lay there panting, the dildo still connecting you.  You can hear Marble say under her breath \"<i>That was way better than on my own...</i>\"\n\n", false);
 		//(remove vaginal virginity?  "Your hymen is torn...")
-		cuntChange(8,true);
+		player.cuntChange(8,true);
 	}
 	//(first time sex)
 	if(player.hasStatusAffect("FuckedMarble") < 0) {
@@ -1462,7 +1455,7 @@ public function marbleAddictionSex(newpage:Boolean = true):void {
 		if(player.tallness >= 48 && player.tallness <= 60) outputText(" and the breasts your head is clamped between", false);
 		outputText(".  You can't help but think about how wonderful a person Marble is, and you bet that Marble feels the same way about you.  \"<i>I love you sweetie.</i>\" Marble says to you gently.  You assure her that you feel the same, and at the moment, nothing else matters.", false);
 		//(remove vaginal virginity? "Your hymen is torn...")
-		cuntChange(8, true);
+		player.cuntChange(8, true);
 		outputText("\n\n", false);
 	}
 	//[after either]
@@ -1583,15 +1576,15 @@ public function interactWithMarbleAtCamp():void {
 	//Determine if marble has an item for the player
 	if(player.hasStatusAffect("MarbleHasItem") >= 0) gatherEvent = marbleGathered;
 	//The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted
-	if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) giveItemEvent = 2128;
-	if(hasItem("P.Draft",1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
+	if(player.hasPerk("Marble's Milk") >= 0 && player.hasItem(consumables.LACTAID)) giveItemEvent = 2128;
+	if(player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
-		if(hasItem("PinkEgg",1)) giveItemEvent = 2128;
-		if(hasItem("L.PnkEg",1)) giveItemEvent = 2128;
+		if(player.hasItem(consumables.PINKEGG)) giveItemEvent = 2128;
+		if(player.hasItem(consumables.L_PNKEG)) giveItemEvent = 2128;
 	}
 	if(flags[kFLAGS.MARBLE_KIDS] > 0) playtime = marbleKidsPlaytime;
-	if(hasItem("OviElix",1)) giveItemEvent = 2128;
-	if(hasItem("ProBova",1)) giveItemEvent = 2128;
+	if(player.hasItem(consumables.OVIELIX)) giveItemEvent = 2128;
+	if(player.hasItem("ProBova")) giveItemEvent = 2128;
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = marbleSexExpanded;
@@ -1716,8 +1709,7 @@ private function marbleKidsPlaytime():void {
 		//Takes 1-2 hours?
 		menuLoc = 2;
 		//gain 1x Whisker Fruit
-		shortName = "W.Fruit";
-		takeItem();
+		inventory.takeItem(consumables.W_FRUIT);
 		//end event
 		return;
 	}
@@ -1895,9 +1887,8 @@ private function gotMilk():void {
 	spriteSelect(41);
 	doNext(13);
 	outputText("You ask Marble for a bottle of her milk, and she happily hands you one.  ", true);
-	shortName = "M. Milk";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem("M. Milk");
 }
 
 private function marbleGathered():void {
@@ -1909,25 +1900,22 @@ private function marbleGathered():void {
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
 	if(player.statusAffectv1("MarbleHasItem") <= 4) {
-		shortName = "Vital T";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.VITAL_T);
 		player.removeStatusAffect("MarbleHasItem");
 		return;
 	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
 	else if(player.statusAffectv1("MarbleHasItem") <= 7) {
-		shortName = "LeathrA";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(armors.LEATHER_ARMOR);
 		player.removeStatusAffect("MarbleHasItem");
 		return;
 	}
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
 	else {
-		shortName = "LaBova ";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.LABOVA_);
 		player.removeStatusAffect("MarbleHasItem");
 		return;
 	}
@@ -1956,7 +1944,7 @@ private function marbleInfo():void {
 public function giveMarbleLactaid():void {
 	spriteSelect(41);
 	//Lactaid
-	consumeItem("Lactaid",1);
+	player.consumeItem(consumables.LACTAID);
 	//Give Marble a dose of Lactaid to gain powerful but temporary boost to your stats, it takes an hour to do.
 	outputText("You show Marble the bottle of Lactaid that you found and ask her if she could drink it.  She gives you a knowing smile. \"<i>So you want a special treat?  Ok sweetie, give it here.</i>\"  She takes the bottle from you and easily drinks the liquid.  Within moments, she gasps and ", true);
 	if(player.tallness<60) outputText("lifts you up to her chest before saying breathlessly saying \"<i>Drink now!</i>\"  You waste no time obliging her.\n\n", false);
@@ -2632,7 +2620,7 @@ public function marblePoopsBaybees():void {
 			if(temp == 5) shortName = "BlackEg";
 		}
 		if(timeQ > 0) menuLoc = 11;
-		takeItem();
+		inventory.takeItem();
 		return;
 	}
 	
@@ -2951,7 +2939,7 @@ private function marbleNightSexChicks():void {
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] == 0) {
 		outputText("You gently lift yourself up as Marble produces her double dildo and slips it inside her womanhood.  Smiling at her, you slowly lower your body and impale your " + vaginaDescript(0) + " onto the artificial rod.  ", false);
 		//Loosen PC's vagina if they are really tight, also removes virginity
-		cuntChange(14,true);
+		player.cuntChange(14,true);
 		//(Message about vagina becoming looser)
 		outputText("After adjusting to the feeling of the shaft inside you, you can't deny what a wonderful feeling it is to be connected like this.  ", false);
 		//Does Marble take the initiative?
@@ -3036,7 +3024,7 @@ private function marbleNightSexChicks():void {
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
 		//Pregnancy chance for PC, ¼ their fertility
 		player.knockUp(8,368,150);
-		cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
+		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
 	}
 	marbleSexFinish();
 }
@@ -3140,7 +3128,7 @@ private function marbleNomNoms():void {
 public function MarbleDigsDraftsYo():void {
 	spriteSelect(41);
 	outputText("", true);
-	consumeItem("P.Draft",1);
+	player.consumeItem(consumables.P_DRAFT);
 	//gives Marble a 7 inch long, 2 inch thick dick by default, no other effect.  Can only be given while she does not have a dick.
 	outputText("You hand Marble the bottle.  She looks at it for a moment before ", false);
 	if(player.statusAffectv4("Marble") > 60) {
@@ -3162,11 +3150,11 @@ public function MarbleDigsDraftsYo():void {
 
 //Pink egg or large pink egg
 public function MarblepinkEgg():void {
-	consumeItem("PinkEgg",1);
+	player.consumeItem(consumables.PINKEGG);
 	MarblePEggEffects();
 }
 public function MarbleLPinkEgg():void {
-	consumeItem("L.PnkEg",1);
+	player.consumeItem(consumables.L_PNKEG);
 	MarblePEggEffects();
 }
 private function MarblePEggEffects():void {
@@ -3208,7 +3196,7 @@ public function marbleOvulatesLikeMadDawg():void {
 		flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] = 96;
 		flags[kFLAGS.MARBLE_PREGNACY_TYPE] = 2;
 	}
-	consumeItem("OviElix",1);
+	player.consumeItem(consumables.OVIELIX);
 	doNext(13);
 }
 
@@ -3247,7 +3235,7 @@ private function giveMurbleProBova():void {
 public function giveMarbleTheProBovas4Sho():void {
 	clearOutput();
 	spriteSelect(41);
-	consumeItem("ProBova",1);
+	player.consumeItem("ProBova");
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) {
 		outputText("Marble nods and downs the contents.  Nothing happens for a moment... then she gasps and grabs at her chest, stumbling forward slightly.  The cow-girl straightens up and releases her grip, then pulls open her top to look at her breasts.  <b>Each is now decorated with sets of four nipples, like the teats of a cow.  She has also gained about 4 inches in height, judging against the backdrop of the camp.</b>  Marble takes a few minutes to test her new nipples, squeezing them gently and sighing as dribbles of milk decorate her areolae in fours instead of one, then looks at you and says, \"<i>This isn't really so bad.  Actually, it feels nice.  If you find another dose, I'm willing to drink it - just to see what happens, of course.</i>\"");
 		//Set Marble's nippes to quads, set her height to 6'8</i>\", increase Marble's vaginal capacity by 10, increase Marble corruption by 4

@@ -20,7 +20,7 @@ public function pickPerks(eventNo:*):void
 		}
 		player.createPerk("Strong Back",0,0,0,0,"Enables fourth item slot.");
 		outputText("You choose the 'Strong Back' perk, enabling a fourth item slot.", true);
-		itemSlot4.unlocked = true;
+		player.itemSlot4.unlocked = true;
 		doNext(1);
 		return;
 	}
@@ -33,7 +33,7 @@ public function pickPerks(eventNo:*):void
 		}
 		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0, "Enables fifth item slot.");
 		outputText("You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.", true);
-		itemSlot5.unlocked = true;
+		player.itemSlot5.unlocked = true;
 		doNext(1);
 		return;
 	}
@@ -225,7 +225,6 @@ public function pickPerks(eventNo:*):void
 		}
 		player.createPerk("Weapon Mastery",0,0,0,0,"After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).");
 		outputText("You choose the 'Weapon Mastery' perk, doubling the effectiveness of large weapons.", true);
-		if(player.weaponPerk == "Large") player.weaponAttack *= 2;
 		doNext(1);
 		return;
 	}
@@ -276,8 +275,6 @@ public function pickPerks(eventNo:*):void
 		}
 		player.createPerk("Agility",0,0,0,0,"When wearing light or medium armor its effectiveness is increased by a portion of your speed.");
 		outputText("You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.", true);
-		if(player.armorPerk == "Light") player.armorDef += Math.round(player.spe/10);
-		else if(player.armorPerk == "Medium") player.armorDef += Math.round(player.spe/15);
 		doNext(1);
 		return;
 	}
@@ -363,6 +360,5 @@ public function pickPerks(eventNo:*):void
 		player.createPerk("Resistance",0,0,0,0,"You've become resistant to the myriad ways your lust can be increased.");
 		outputText("You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.", true);
 		doNext(1);
-		return;
 	}
 }

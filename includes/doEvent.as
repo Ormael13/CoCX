@@ -298,7 +298,7 @@ public function doEvent(eventNo:Number):void
 				outputText("using a sucking-stroking motion on your helpless " + multiCockDescriptLight() + ". The swelling of the ass tentacle pressures your prostate in a paradoxically pleasurable and painful manner. You realize, much to your terror, that this beast is MILKING you of your semen!", false);
 			else
 				outputText("using a sucking-stroking motion on your " + multiCockDescriptLight() + ".  The swelling of the ass tentacle pressures your prostate in a paradoxical pleasurable and painful manner.  You realize, much to your terror, that this beast is MILKING you of your semen!", false);
-			buttChange(50, true);
+			player.buttChange(50, true);
 			outputText("\n\nHelpless and overwhelmed by the pleasure of such rough and primal stimulation, all you can do is give the creature what it wants; your hot cum. Your body only responds to the sensations from your ", false);
 			if (player.cockTotal() == 1)
 				outputText(multiCockDescriptLight() + " and ass and in a very short time, your phallus explodes, launching stream upon stream of hot, thick cum into the horror. Your hips and pelvis buck violently with each thrust as the creature masterfully strokes your " + multiCockDescriptLight() + "  and milks your prostate of your fluids. You cry with each orgasm, prompting the thing to milk you harder. After an eternity of successive ejaculations, the creature withdraws its unholy arms and leaves you in a bruised, lacerated, overfucked heap on the ground, discarded like a person throws away a corn cob after a meal.", false);
@@ -324,7 +324,7 @@ public function doEvent(eventNo:Number):void
 				outputText("clits. ", false);
 			else
 				outputText("clit. ", false);
-			cuntChange(player.vaginalCapacity() * .76, true);
+			player.cuntChange(player.vaginalCapacity() * .76, true);
 			outputText(" Your body betrays your resistance as pleasure hammers you from crotch to head. After some time, you begin bucking your hips in tandem to the creature's thrusts, drunk with pleasure. As you peak for your orgasm, you feel the creature bottom out inside your womb. Oceans of hot cum flood your " + vaginaDescript(0), false);
 			if (player.vaginas.length > 1)
 				outputText("s", false);
@@ -341,7 +341,7 @@ public function doEvent(eventNo:Number):void
 			{
 				outputText("A sharp tug tells you that the creature has sealed itself upon your " + cockDescript(0) + ". You see " + player.totalBreasts() + " smaller tentacles latch onto your erect nipples. You feel milk begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your trapped " + cockDescript(0) + " until it finds your vaginal opening. You cry out as the member punches past your opening and bottoms out in your womb. The tentacle swells up until it completely fills your " + vaginaDescript(0) + ".  ", true);
 				spriteSelect(100);
-				cuntChange(player.vaginalCapacity() * .76, true, false, true);
+				player.cuntChange(player.vaginalCapacity() * .76, true, false, true);
 				outputText("With freakish coordination, the beast sucks your " + cockDescript(0) + " and tits while hammering away at your " + vaginaDescript(0) + ". The overwhelming pleasure courses through your body and triggers an immediate orgasm, sending gouts of cum into the tentacle sealed around your " + cockDescript(0) + ". The sensation of your fluids entering the creature prompts it to suck your " + cockDescript(0) + " harder as well as hammer your " + vaginaDescript(0) + " faster, leading to a chain of orgasms.\n\n", false);
 				outputText("Drunk with pleasure, you revel in the sensation of cumming into the creature while it breast feeds from you. All you can do is drown in the experience of being milked from top to bottom. The creature begins piledriving your box faster and you feel like the creature is going to impale you with its phallic tentacle.\n\n", false);
 				outputText("The creature's milking tentacles stop moving and you feel the dick-tentacle press sharply against your womb. You feel the thunderous force of hot fluid lance into your body as the creature cums repeatedly inside you, triggering yet another orgasm. The creature cums in surges and shoots repeatedly inside you. Within moments, excess cum spews out of your " + vaginaDescript(0) + " as it cannot hold anymore, but the creature keeps cumming.\n\n", false);
@@ -351,7 +351,7 @@ public function doEvent(eventNo:Number):void
 			{
 				outputText("A sharp tug tells you that the creature has sealed itself upon your " + multiCockDescriptLight() + ". You see " + player.totalBreasts() + " smaller tentacles latch onto your erect nipples. You feel milk begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your trapped cocks until it finds your vaginal opening. You cry out as the member punches past your opening and bottoms out in your womb. The tentacle swells up until it completely fills your " + vaginaDescript(0) + ".", true);
 				spriteSelect(100);
-				cuntChange(player.vaginalCapacity() * .76, true, true, false);
+				player.cuntChange(player.vaginalCapacity() * .76, true, true, false);
 				outputText("  With freakish coordination, the beast sucks your " + multiCockDescriptLight() + " and tits while hammering away at your " + vaginaDescript(0) + ". The overwhelming pleasure courses through your body and triggers an immediate orgasm, sending gouts of cum into the tentacles sealed around your pricks. The sensation of your fluids entering the creature prompts it to suck your throbbing cocks harder as well as hammer your " + vaginaDescript(0) + " faster, leading to a chain of orgasms.\n\n", false);
 				outputText("Drunk with pleasure, you revel in the sensation of cumming into the creature while it breast feeds from you. All you can do is drown in the experience of being milked from top to bottom. The creature begins piledriving your box faster and you feel like the creature is going to impale you with its phallic tentacle.\n\n", false);
 				outputText("The creature's milking tentacles stop moving and you feel the dick-tentacle press sharply against your womb. You feel the thunderous force of hot fluid lance into your body as the creature cums repeatedly inside you, triggering yet another orgasm. The creature cums in surges and shoots repeatedly inside you. Within moments, excess cum spews out of your " + vaginaDescript(0) + " as it cannot hold anymore, but the creature keeps cumming.\n\n", false);
@@ -593,7 +593,7 @@ public function doEvent(eventNo:Number):void
 			if (temp == 2)
 				outputText("With a desperate grunt, you barely manage to force the obscene cock-head of the vine between your nether-lips. The swollen bulge pulses inside you, stretching you uncomfortably as it reacts to the warmth and tightness of your " + vaginaDescript(0) + ". The vine's lubricants begin to combine with your own, rapidly transforming your horny cunt into a sloppy slip-and-slide. You manage to cram the vine the rest of the way inside, bottoming it out against your cervix, reveling in the feeling of being stretched so wide, as you begin pumping it in and out of your " + vaginaDescript(0) + " like an over-sized sex-toy. Deep inside your " + vaginaDescript(0) + ", the vine's lubricants begin to make your passage tingle, intensifying until your entire channel is overloaded with clit-like levels of sensation.\n\n", false);
 			//Stretch cuuuuunt and newline if it gets stretched
-			if (cuntChange(temp2, true))
+			if (player.cuntChange(temp2, true))
 				outputText("\n\n", false);
 			//New PG
 			outputText("The rest of the world disappears as your mind tries to cope with the sensation overload coming from your groin. You're dimly aware of your hands pumping the slippery vine in and out, in and out, over and over.  Hips bucking, " + vaginaDescript(0) + " squeezing, thighs trembling, you achieve the first of many orgasms.  Incredibly, the sensitivity of your groin redoubles, nearly blacking you out from the pleasure.  Cumming over and over, you writhe in the dirt, pumping the corrupted prick-vine in and out of your spasming cunt.  Your eyes roll back in your head when the vine begins pumping you full of its strange fluid, and you finally lose your battle to remain conscious.\n\n", false);
@@ -823,8 +823,7 @@ public function doEvent(eventNo:Number):void
 		else
 		{
 			player.gems -= 15;
-			shortName = "Vital T";
-			takeItem();
+			inventory.takeItem(consumables.VITAL_T);
 			statScreenRefresh();
 		}
 	}
@@ -847,8 +846,7 @@ public function doEvent(eventNo:Number):void
 		else
 		{
 			player.gems -= 15;
-			shortName = "Smart T";
-			takeItem();
+			inventory.takeItem(consumables.SMART_T);
 			statScreenRefresh();
 		}
 	}
@@ -870,8 +868,7 @@ public function doEvent(eventNo:Number):void
 		}
 		else
 		{
-			shortName = "Cerul P";
-			takeItem();
+			inventory.takeItem(consumables.CERUL_P);
 			player.gems -= 75;
 			statScreenRefresh();
 		}
@@ -999,8 +996,7 @@ public function doEvent(eventNo:Number):void
 			outputText(" She gives a giggle and disappears before your eyes. At that moment the fatigue from the massive fucking you received catches up with you and you pass out in a slump.", false);
 			dynStats("str", .5,"lus", 4);
 		}
-		shortName = "Cerul P";
-		takeItem();
+		inventory.takeItem(consumables.CERUL_P);
 	}
 	//Dangerous Plants Pitch
 	else if (eventNo == 2029)
@@ -1393,9 +1389,8 @@ public function doEvent(eventNo:Number):void
 		}
 		outputText("", true);
 		if (!debug)
-			destroyItems("IncubiD", 1);
-		shortName = "P.Draft";
-		takeItem();
+			player.destroyItems(consumables.INCUBID, 1);
+		inventory.takeItem(consumables.P_DRAFT);
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
@@ -1411,9 +1406,8 @@ public function doEvent(eventNo:Number):void
 		}
 		outputText("", true);
 		if (!debug)
-			destroyItems("SucMilk", 1);
-		shortName = "P.S.Mlk";
-		takeItem();
+			player.destroyItems(consumables.SUCMILK, 1);
+		inventory.takeItem(consumables.P_S_MLK);
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
@@ -1429,9 +1423,8 @@ public function doEvent(eventNo:Number):void
 		}
 		outputText("", true);
 		if (!debug)
-			destroyItems("SDelite", 1);
-		shortName = "PSDelit";
-		takeItem();
+			player.destroyItems(consumables.SDELITE, 1);
+		inventory.takeItem(consumables.PSDELIT);
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
@@ -1472,8 +1465,7 @@ public function doEvent(eventNo:Number):void
 		dynStats("lib", -1, "lus", -99, "cor", -4);
 		player.gems -= 175;
 		statScreenRefresh();
-		shortName = "Vital T";
-		takeItem();
+		inventory.takeItem(consumables.VITAL_T);
 	}
 	//Offer to remove worms #2
 	else if (eventNo == 2082)
@@ -1547,7 +1539,7 @@ public function doEvent(eventNo:Number):void
 			if (player.biggestTitSize() > 5)
 			{
 				outputText("  As you redress, you feel a sense of added weight on your chest.  After a few moments you realize your already-formidable chest has grown even larger.", false);
-				growTits(1, 1 + rand(3), false, 1);
+				player.growTits(1, 1 + rand(3), false, 1);
 				
 			}
 			else
@@ -1556,12 +1548,12 @@ public function doEvent(eventNo:Number):void
 				if (player.biggestTitSize() == 0)
 				{
 					outputText("  As you redress, you realize you have grown a pair of luscious breasts!  Perhaps this was a good idea after all...", false);
-					growTits(1, 2 + rand(3), false, 1);
+					player.growTits(1, 2 + rand(3), false, 1);
 				}
 				else //Small tits growth
 				{
 					outputText("  As you redress, you realize your breasts have gotten quite a bit larger!  Maybe you can come back later when you aren't so full and plump them up a bit more.", false);
-					growTits(1, 1 + rand(3), false, 1);
+					player.growTits(1, 1 + rand(3), false, 1);
 				}
 			}
 		}
@@ -1598,20 +1590,20 @@ public function doEvent(eventNo:Number):void
 		var ttemp5:Function = null;
 		var ttemp6:Function = null;
 		var ttemp7:Function = null;
-		if (player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid", 1))
+		if (player.hasPerk("Marble's Milk") >= 0 && player.hasItem(consumables.LACTAID, 1))
 			ttemp2 = marbleScene.giveMarbleLactaid;
-		if (hasItem("P.Draft", 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
+		if (player.hasItem(consumables.P_DRAFT, 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
 			ttemp4 = marbleScene.MarbleDigsDraftsYo;
 		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 		{
-			if (hasItem("PinkEgg", 1))
+			if (player.hasItem(consumables.PINKEGG, 1))
 				ttemp5 = marbleScene.MarblepinkEgg;
-			if (hasItem("L.PnkEg", 1))
+			if (player.hasItem(consumables.L_PNKEG, 1))
 				ttemp6 = marbleScene.MarbleLPinkEgg;
 		}
-		if (flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2 && hasItem("ProBova", 1))
+		if (flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2 && player.hasItem(consumables.PROBOVA, 1))
 			ttemp7 = marbleScene.giveMarbleTheProBovas4Sho;
-		if (hasItem("OviElix", 1))
+		if (player.hasItem(consumables.OVIELIX, 1))
 			ttemp3 = marbleScene.marbleOvulatesLikeMadDawg;
 		outputText("What item do you want to give Marble?", true);
 		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "ProBova", ttemp7, "", 0, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
@@ -1727,9 +1719,8 @@ public function doEvent(eventNo:Number):void
 		}
 		outputText("", true);
 		if (!debug)
-			destroyItems("LaBova ", 1);
-		shortName = "P.LBova";
-		takeItem();
+			player.destroyItems(consumables.LABOVA_, 1);
+		inventory.takeItem(consumables.P_LBOVA);
 		player.gems -= 20;
 		statScreenRefresh();
 		player.addStatusValue("metRathazul", 2, 1);
@@ -2124,9 +2115,8 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2638)
 	{
 		outputText("", true);
-		shortName = "BonStrp";
 		flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-		takeItem();
+		inventory.takeItem(armors.BONDAGE_STRAPS);
 	}
 	else if (eventNo == 2639)
 	{
@@ -2151,30 +2141,21 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2643)
 	{
 		spriteSelect(52);
-		shortName = "NumbRox";
-		incubusBuy();
+		incubusBuy(consumables.NUMBROX);
 	}
 	else if (eventNo == 2644)
 	{
 		spriteSelect(52);
-		shortName = "SensDrf";
-		incubusBuy();
+		incubusBuy(consumables.SENSDRF);
 	}
 	else if (eventNo == 2645)
 	{
 		spriteSelect(52);
-		shortName = "Reducto";
-		incubusBuy();
-	}
-	else if (eventNo == 2646)
-	{
-		spriteSelect(52);
-		incubusTransact();
+		incubusBuy(consumables.REDUCTO);
 	}
 	else if (eventNo == 2653)
 	{
-		shortName = "SucWhip";
-		incubusBuy();
+		incubusBuy(weapons.SUCCUBI_WHIP);
 	}
 	else if (eventNo == 2739)
 	{
@@ -2584,11 +2565,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3968)
 	{
-		chickenHarpy();
-	}
-	else if (eventNo == 3988)
-	{
-		lustyMaidenPaizuri();
+		highMountains.chickenHarpy();
 	}
 	else if (eventNo == 3989)
 	{

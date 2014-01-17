@@ -446,7 +446,7 @@ private function drinkUrtasBoozeLetHer():void {
 	outputText(".\n\n", false);
 	
 	outputText("With a quick shift in position, she forces herself inside, her arms supporting her jiggling chest as she leans over you, dragging her nipples up your back.  Her fat shaft forces your body to spread wide.  The fat head and ring of prepuce strokes your inner walls, squeezing grunts of pleasure from you as the drunken fox forcefully begins fucking you, rutting like a beast.  You can feel her nipples harden, digging into your back and eliciting moans from their owner as they're repeatedly smashed against you.  Urta starts licking your neck where it joins your shoulder, gently nipping at your tender flesh as her tip begins to flare wider inside you.", false);
-	cuntChange(60,true,true,false);
+	player.cuntChange(60,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("\"<i>Mmmm I shhoulda ushed a condom, you're gonna be a messssss!</i>\" she cries as she climbs atop her sexual peak, mounting it just like she's mounting your " + player.assholeOrPussy() + ".  You're spread wide, the equine member rammed tightly ", false);
@@ -643,7 +643,7 @@ private function urtaFuckHer():void {
 			else {
 				outputText("  You nearly cry out as you sink down, taking it till the folds of her sheath are rubbing your entrance, even though it hurts to accommodate it.", false);
 			}
-			cuntChange(60,true,true,false);
+			player.cuntChange(60,true,true,false);
 		}
 		else {
 			if(player.analCapacity() >= 60) {
@@ -652,7 +652,7 @@ private function urtaFuckHer():void {
 			else {
 				outputText("  You nearly cry out as you sink down, taking it till the folds of her sheath are rubbing your entrance, even though it hurts to accommodate it.", false);
 			}
-			buttChange(60,true,true,false);
+			player.buttChange(60,true,true,false);
 		}
 		outputText("  Urta babbles, \"<i>Oh godsh yesh thank you so much-ohmigod it's SO HOT inside you.</i>\"\n\n", false);
 		
@@ -1102,11 +1102,11 @@ private function rideUrtaTenderFemale():void {
 	outputText("You can see a bubble already forming at the tip of her hardness, signaling the unbridled lust your form has brought to your lover and you lower yourself with a sigh, feeling it spread your lips apart with delicious slowness as her flared tip begins penetrating you.  The horse-cock is so big and thick that it ", false);
 	if(player.vaginalCapacity() < 60) {
 		outputText("it hurts quite a bit as it pushes further and further inside.  ", false);
-		cuntChange(60,true);
+		player.cuntChange(60,true);
 	}
 	else {
 		outputText("stretches you nice and wide, rubbing you tightly even though you're quite stretched already.  ", false);
-		cuntChange(60,true);
+		player.cuntChange(60,true);
 	}
 	outputText("You gasp and sigh happily, sinking downwards slowly.\n\n", false);
 	
@@ -1655,7 +1655,7 @@ private function rideUrtasCoochLoveyDovey():void {
 	
 	outputText("You bottom-out, but immediately begin rocking your hips, working your lover's twitching rod deep inside your " + vaginaDescript(0) + ".  ", false);
 	//(LOOSENESS MESSAGES GO HERE AS APPROPRIATE) 
-	cuntChange(60,true);
+	player.cuntChange(60,true);
 	outputText("Urta's hands grab you firmly by the " + assDescript() + ", reminding you just how strong the lithe fox is.  She begins working with you to lift your body up and slam it back down against her, alternating the feelings of emptiness and fullness within you.  Each time the little balloon that's formed on her flare gets larger, squishing each time she bottoms out.  As the pair of you rut faster and faster, the limited space inside you squeezes the excess pre-cum from the sheath, causing it drip over her balls into the sheets.\n\n", false);
 	
 	outputText("Bending over, you plant another kiss full on her lips, and your vulpine lover just can't restrain herself anymore.  She moans into your mouth, her body shivering, her balls tightening up until you feel them press against your ass.  Her hands grip you hard and pull you down with incredible force, locking you against her as you feel her member swelling inside you, submitting to your " + vaginaDescript(0) + "'s swelteringly hot embrace.  A burst of tightness fills you, growing as Urta squirms, unloading her massive horse-pole's seed into the latex balloon she's stuffed inside you.\n\n", false);
@@ -1732,7 +1732,7 @@ private function rideUrtaInButtAtHomeLove():void {
 	if(player.analCapacity() < 60) outputText("tight", false);
 	else outputText("welcoming", false);
 	outputText(", warm hole.  A groan escapes your mouth as you sink down, feeling fuller and fuller until her real sheath is resting just between your ass-cheeks.", false);
-	buttChange(60, true, true, false);
+	player.buttChange(60, true, true, false);
 	if(player.totalCocks() > 0) {
 		outputText("  You can feel tiny dribbles force their way out of ", false);
 		if(player.totalCocks() > 1) outputText("each of ", false);
@@ -3629,10 +3629,10 @@ private function fillMeUpPleaseUrta():void {
 		if(player.hasCock()) outputText("  Drool begins to leak from [eachCock], slicking the underside with pre-cum as the pleasure affects your maleness.");
 		outputText("  Before long, you've taken Urta halfway, with her ring jutting up against your entrance.");
 		//{cuntChange 30}
-		cuntChange(30,true,true,false);
+		player.cuntChange(30,true,true,false);
 		outputText("\n\nUndaunted and spurred on by how good it feels, you ease yourself into your lover's hands, lowering your body an inch at a time, gradually widening your [vagina] to handle her spear and magic helmet, stretching your nethers into a reverse mould of that affectionate prick-vixen's tool.  You doubt anything will ever fit you as perfectly or rightly again, or scrape every inch of your birth canal so flawlessly.  It hurts a little, stretching like this, but it's worth it to watch the fox's face slowly lose its reserve, splitting into a dopey, pleasured grin as you sink the whole way to her balls.");
 		//{cuntChange 60}
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 		outputText("\n\nYou rest in her lap and kiss her, bringing her out of her stupor.  Urta bashfully murmurs, \"<i>Thank you,</i>\" before kissing back, hugging you tightly for a few moments.  Bound up in each other, you share the tender expression of affection a little longer.");
 		//{+15 Urta love}
 		urtaLove(15);
@@ -3642,7 +3642,7 @@ private function fillMeUpPleaseUrta():void {
 		outputText("\n\nWithout pausing, you squat down, lowering your [vagina] to ensnare the stallion below, lassoing it with ease in your clingy, stretching lips.  Urta moans as you take her flare, lifting her hips slightly to meet you, driven beyond reason with lust.  You place a hand on her rising belly for support and ride her like a bucking bronco, sliding lower with every thrust, gradually spreading yourself around the welcoming heat of her throbbing member.  You can feel the ring around the middle of her mottled horsecock caressing your silky tunnel even as the flare presses harder on it, further in.  It's an exquisite sensation that you focus on as you work to fully enclose your rebellious lover, snaring her prick in your silky, lubricated twat.");
 		outputText("\n\nUrta's eyes roll back and she lifts her hips powerfully one last time, and in the motion she takes you fully, embedding all twenty inches of her length inside you.  Her sheath grinds into your outer lips as she continues to push, but there is no further penetration to be had.  You're completely, utterly speared, penetrated fully by the vixen's horse half.  As if realizing this, Urta lowers herself down, twitching slightly as she adjusts to the slippery warmth of your [vagina].");
 		//{cuntChange 60}
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 	}
 	outputText("\n\nUrta grabs you by the hips, ready to go to town on you, but you stop her with a simple motion.  Shaking your head, you coo, \"<i>Let me.</i>\"");
 	outputText("\n\nThe fox reluctantly nods, doing her best to hold still as you set to work.  You slowly raise yourself up, your wet lips clinging to every inch of the well-lubricated shaft as it exits your sodden pussy.  Once only the flare remains inside, you lower yourself back down, sliding slowly back into place just a little faster, assisted by gravity as you are.  It feels so good, so heavenly, that you just can't keep up the languid pace.  After a few simple strokes, you find your [hips] beginning to move faster, pumping Urta in and out, slapping back down with lewd, wet smacks that can doubtless be heard from the street below.");
@@ -4138,7 +4138,7 @@ private function raphaelAndUrtaPartTwo():void {
 	
 	outputText("\n\nYou whimper into Raphael's lips while your lust and alcohol inebriated brain struggles to come up with a counterattack.  It comes to you when you feel a trickle of foxy moisture flow into your belly-button, and your return strike is as swift as your cunt is wet.  Rocking your [hips], you undulate against the crimson thief's pecker, smearing it with your juices.  Then, you lift yourself up with your [legs] and abruptly drop onto the foxy phallus, impaling yourself on its bulbous length.  Raphael's skillful kiss collapses under the weight of the sensations you've forced him to experience.  The poor guy wasn't expecting you to take him then and there, and you take the opportunity to violently kiss him, enjoying his pliant mouth while he slowly gathers his wits and begins to kiss you back, this time not so competitively.");
 	//CUNT STRETCH RAPHAEL GOOOAOOAOAOAOAOAOAOAOAO
-	cuntChange(12,true,true,false);
+	player.cuntChange(12,true,true,false);
 	
 	outputText("\n\nUrta, perhaps feeling a bit ignored, suddenly forces a finger into Raphael's tight pucker as she crouches, using her free hand to line her blunt horse-cock up with your [asshole].  You ");
 	if(player.tailType > TAIL_TYPE_NONE) outputText("lift your tails and ");
@@ -4146,7 +4146,7 @@ private function raphaelAndUrtaPartTwo():void {
 	if(player.analCapacity() < 30) outputText(", slowly stretching your tight sphincter with constant pressure.  You're not really loose enough back there for this to be entirely comfortable, but the incredible fullness her length provides has a way of muting the pain of stretching.");
 	else if(player.analCapacity() < 60) outputText(", slowly sliding into your sphincter.  You groan into your other lover's mouth as your anus is claimed by the thick horse-pole, and you do your best to relax around the butthole-stretching shaft.");
 	else outputText(", easily slipping inside your well-practiced anus.  You groan into your other lover's mouth as the thick cock claims your ready asshole, and you're glad your butthole was so well prepared to handle having a hot meat pole injected into it.");
-	buttChange(60,true,true,false);
+	player.buttChange(60,true,true,false);
 	outputText("\n\nRaphael breaks this kiss, his hips thrusting needfully against your mons with jerky, uncoordinated strokes, pumping to the timing Urta's wiggling finger forces his prostate to obey.  \"<i>S-senorita... w-who is your friend?  Oooh, mon dieu!</i>\" he cries.");
 	outputText("\n\nYou give him a reassuring peck on the lips as a few more inches of mammoth dick nestle into your [butt], filling you full enough that you can feel your lovers' members sliding across each other through your dick-filled insides, Raphael's small, vulpine dong is smothered with the expansive, pre drooling horse-cock, and the smaller male seems almost afraid of the size of your companion.  You squeeze your inner muscles to caress the smaller fox-dick and answer, \"<i>Just a friend with a fun little package.  I hope you don't mind...</i>\"");
 	
@@ -4541,7 +4541,7 @@ private function doggyStyle():void {
 	if(!silly()) outputText("ass");
 	else outputText("boypussy");
 	outputText(".");
-	buttChange(60,true,true,false);
+	player.buttChange(60,true,true,false);
 	
 	outputText("\n\nSoon, Urta develops a good rhythm, thrusting in and out, her balls slapping your ");
 	if(player.hasCock()) outputText("dick");

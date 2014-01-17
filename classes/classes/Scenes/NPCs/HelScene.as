@@ -151,7 +151,7 @@ internal function loseToSalamander():void {
 		outputText("\"<i>Oh, hell no!</i>\" she snaps, grasping you by the forehead and pushing your head to the grassland ground.  \"<i>You're not getting off that easily... and I promised I'd get you off too, lover.</i>\"  Her prehensile tail swishes into view over her shoulder, the flames that once coated it mysteriously gone.  She grins at you, and in one swift motion engulfs the tip of her tail in her mouth.  When she releases it, the tip is glistening with moisture.  Then it's gone from view.\n\n", false);
 
 		outputText("You feel a sudden tickle against the lips of your " + vaginaDescript(0) + ".  You gasp at the spark of pleasure as her tail slips across your pleasure bud, then begins wriggling past the lips of your cunt.  Your lover smiles down at you and cups her own breasts, freeing you to resume your ministrations.  Every few licks, you're forced to stop and gasp or shudder as her tail works its way into your " + vaginaDescript(0) + ", fucking you like a cock and a skilled finger at once, not pistoning in and out, but writhing within your depths like a tentacle.");
-		cuntChange(20,true,true,false);
+		player.cuntChange(20,true,true,false);
 		outputText("\n\n", false);
 
 		outputText("All good things must come to an end, however, and soon the salamander's hot cunt contracts around your tongue as she cums, squirting girl-juice all over your face and neck.  You give her a last good tongue-fucking, picking up the pace and bringing her to a screaming, shuddering climax.  The power of her orgasm has a welcome side effect, as her tail begins to thrash wildly within you, battering your cunt and bringing you, too, to a massive, mind-numbing climax", false);
@@ -174,7 +174,7 @@ internal function loseToSalamander():void {
 		outputText("\"<i>Oh, hell no!</i>\" she snaps, grasping you by the forehead and pushing your head to the grassland ground.  \"<i>You're not getting off that easily... and I promised I'd get you off too, lover.</i>\"  Her prehensile tail swishes into view over her shoulder, the flames that once coated it mysteriously gone.  She grins at you, and in one swift motion engulfs the tip of her tail in her mouth.  When she releases it, the tip is glistening with moisture.  Then it's gone from view.\n\n", false);
 
 		outputText("You gasp as you feel a sudden pressure against the rim of your " + assholeDescript() + ".  Your eyes widen, but your fiery lover only smiles and increases the pressure against your asshole until you force yourself to relax, admitting the tip of her tail into your ass.  Every few licks, you're forced to stop and gasp or shudder as her tail works its way into your " + assholeDescript() + ", fucking you like a cock and a skilled finger at once, not pistoning in and out, but writhing within your depths like a tentacle.");
-		buttChange(20,true,true,false);
+		player.buttChange(20,true,true,false);
 		outputText("\n\n", false);
 
 		outputText("All good things must come to an end, however, and soon the salamander's hot cunt contracts around your tongue as she cums, squirting girl-juice all over your face and neck.  You give her a last good tongue-fucking, picking up the pace and bringing her to a screaming, shuddering climax.  The power of her orgasm has a welcome side effect, as her tail begins to thrash wildly within you, battering your ass and bringing you, too, to a massive, mind-numbing climax.\n\n", false);
@@ -531,7 +531,7 @@ internal function helTailPegging():void {
 	outputText("You do as she asks, getting on all fours and giving her a good views of your vulnerable " + buttDescript() + ".  Looking over your shoulder, you can see her smile wolfishly as she brings her tail to bear, now doused of its previous flames, and gives its tip a little suckle, moistening it up as she straddles your hips to fuck you doggy style.  Her tail slips down from her mouth and winds between her legs like a cock as she lines herself up with your " + assholeDescript() + ".\n\n", false);
 
 	outputText("You grit your teeth and clench your fists in preparation for the coming fucking.  Soon, you feel the tip of her tail pressing against your backdoor, looking for entrance.  You do your best to relax yourself, but she only needs a second to force herself inside you, eliciting a gasp of pain and pleasure from you as inches of her tail sink in, widening and stretching your hole.", false);
-	buttChange(40,true,true,false);
+	player.buttChange(40,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("Firmly within your depths, she plants her smooth, scaled hands on your " + buttDescript() + " and starts to hammer your ass, quickly thrusting her tail in and out.  You gasp and moan like a whore, barely able to support your own weight as she fucks your ass hard and fast, threatening to tear your tender insides up with her rough fucking.\n\n", false);
@@ -610,7 +610,7 @@ private function nagaCoilsUpAnalNaga():void {
 	outputText("You get an idea in a hurry, and quickly discard your " + player.armorName + " as she does the same.  She drops to her hands and knees before you, and like a child, snatches at your tail.  Once in hand, she eagerly puts her mouth to it, sucking your tail's tip like a cock.  You shudder at the odd sensation, but when she raises her tail up toward you, you reciprocate the gesture, taking her extinguished tip into your mouth and slathering it with spittle.\n\n", false);
 
 	outputText("Once both your tails are sufficiently lubricated, the salamander crawls behind you, and presses her back tightly to yours.  In an odd show of kindness, she even takes your hands in hers as her tail slithers between the cheeks of your " + buttDescript() + ".  You return the favor, soon pressing the tip of your tail to her tight but relaxed asshole as hers begins to slip into your " + assholeDescript() + ".  You gasp with the sensation of the hot, writhing tail-cock pushing inside you, fighting every inch to wring sensation out of it even as you push yours deep inside her, hard enough to make her take a sharp breath and knock her knees.", false);
-	buttChange(40,true,true,false);
+	player.buttChange(40,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("She continues to force her way into you, wriggling her thickening tail further into your " + assholeDescript() + ", stretching it wide as her tail gains in thickness.  Finally, though, she can get no more of herself into you, nor you into her.  \"<i>Ready for a wild ride, lover?</i>\" she asks, twisting her head so that she can plant a tender kiss on your shoulder.  You nod eagerly, and start to bounce.\n\n", false);
@@ -695,7 +695,7 @@ private function helVaginaTaur69():void {
 	outputText("After a moment, she settles, and is still.  All you can feel is her hot breath on your underside and the strain of her weight on your back.  It isn't long, however, before the salamander reaches out with one of her clawed, scaled hands, tracing a finger up your sensitive inner thighs and making you shudder with anticipation.  Eventually, it snakes up to your wet, waiting " + vaginaDescript(0) + ", brushing a knuckle against your anxious lips.\n\n", false);
 
 	outputText("You're hardly prepared for what comes next.  Without warning, the salamander slams her arm into your cunt, punching hard into your cervix.", false);
-	cuntChange(50,true,true,false);
+	player.cuntChange(50,true,true,false);
 	outputText("  You scream and buck, nearly throwing her from her harness.  Laughing maniacally, she forces more of her arm into your unsuspecting depths until she's up past her elbow in centaur cunt.  You gasp and buck and whinny, but anything that serves to dislodge her arm from your " + vaginaDescript(0) + " only gives her ample opportunity to jam it right back in.\n\n", false);
 
 	outputText("She hammers your cervix, fist-fucking you like a massive knotted cock.  It takes a minute to reconcile yourself to the enormous penetration, but soon you're shaking your hips and whinnying with pleasure.  ", false);
@@ -1643,7 +1643,7 @@ internal function foxyFluffGirlsFuckSex():void {
 	outputText("The twins pick you and Hel up and toss you onto the bed, falling side by side on your backs.  The twins loom over you, with Mai stroking her knotty cock as it nears your waiting " + vaginaDescript() + ".  Seeing Miko flop her cock down on Hel's waiting cunt, you take the salamander by the hand and grit your teeth in anticipation.\n\n", false);
 
 	outputText("Grasping your " + hipDescript() + ", Mai slides her doggy cock into you in one slow, languid motion, pushing in until her thick, swollen knot presses against your lips.  You moan as her shaft gently strokes your walls, dribbling pre enough to get you nice and lubricated as she goes.  With her knot against your lips, Mai gives a few quick, forceful strokes into you before withdrawing to the tip, leaving only half an inch of her red cock inside you before slamming home, ramming her knot into you in one mighty thrust.", false);
-	cuntChange(24,true,true,false);
+	player.cuntChange(24,true,true,false);
 	outputText("\n\n");
 
 	outputText("You scream in pleasure as your cunt's lips are stretched wide, your tunnel having to expand greatly to accommodate the massive intruder.  Now knotted, Mai is restricted to short, hard thrusts into you, smashing her hips into your groin until your thighs are coated with her free-leaking fem-juice.  As Mai starts to roughly pound you, Hel lets go of your hand and flips Miko onto her back beside you, switching places with her lover and riding her cock.  The salamader lets out a loud yell of pleasure as she grabs the fox-girl's hefty tits and starts to bounce on her knotted cock.\n\n", false);

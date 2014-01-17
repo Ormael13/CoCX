@@ -10,8 +10,6 @@ public function eventParser(eventNo:*):void {
 	//trace("EVENT CODE: " + eventNo);
 	if (eventNo is Function)
 	{
-		//trace("It's a function");
-
 		eventNo();
 	}
 	else if (eventNo is int)
@@ -45,7 +43,7 @@ public function eventParser(eventNo:*):void {
 
 
 		if(eventNo < 1000) doSystem(eventNo);
-		if(eventNo >=1000 && eventNo < 2000) doItems(eventNo);
+		if(eventNo >=1000 && eventNo < 2000) inventory.doItems(eventNo);
 		if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
 		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
 		if(eventNo >= 10000 && eventNo < 10999) doCreation(eventNo);
@@ -436,11 +434,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 		if(player.ballSize > 400) player.ballSize = 400;
-		if(player.hasPerk("Strong Back") >= 0 && !itemSlot4.unlocked) {
-			itemSlot4.unlocked = true;
+		if(player.hasPerk("Strong Back") >= 0 && !player.itemSlot4.unlocked) {
+			player.itemSlot4.unlocked = true;
 		}
-		if(player.hasPerk("Strong Back 2: Strong Harder") >= 0 && !itemSlot5.unlocked) {
-			itemSlot5.unlocked = true;
+		if(player.hasPerk("Strong Back 2: Strong Harder") >= 0 && !player.itemSlot5.unlocked) {
+			player.itemSlot5.unlocked = true;
 		}
 		if(flags[kFLAGS.SOCK_COUNTER] > 0) {
 			flags[kFLAGS.SOCK_COUNTER]--;
@@ -458,8 +456,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
-		player.weaponAttack = fixedDamage(player.weaponName);
-		applyArmorStats(player.armorName,false);
 		if(player.hasStatusAffect("noJojo") >= 0) player.removeStatusAffect("noJojo");
 		
 		regeneration(false);
@@ -1079,7 +1075,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("eggchest",1,-1);
 			if(player.statusAffectv1("eggchest") <= 0) {
 				outputText("\n<b>You feel the rounded eggs within your [fullChest] vanishing, absorbed into your body.  </b>");
-				growTits(player.statusAffectv2("eggchest"), player.bRows(), true, 2);
+				player.growTits(player.statusAffectv2("eggchest"), player.bRows(), true, 2);
 				outputText("\n");	
 				player.removeStatusAffect("eggchest");
 			}
@@ -1771,7 +1767,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
 			outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
-			growTits(1,player.bRows(),false,2);
+			player.growTits(1,player.bRows(),false,2);
 			needNext = true;
 			dynStats("lus", 10);
 		}
@@ -2829,29 +2825,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("lootEgg") >= 0) {
 			trace("EGG LOOT HAS");
 			//default
-			shortName = "BrownEg";
-			//Large eggs
-			if(player.statusAffects[player.hasStatusAffect("eggs")].value2 == 1) {
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 0) shortName = "L.BrnEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 1) shortName = "L.PrpEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 2) shortName = "L.BluEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 3) shortName = "L.PnkEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 4) shortName = "L.WhtEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 5) shortName = "L.BlkEg";
-			}
-			//Small eggs
-			else {
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 0) shortName = "BrownEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 1) shortName = "PurplEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 2) shortName = "BlueEgg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 3) shortName = "PinkEgg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 4) shortName = "WhiteEg";
-				if(player.statusAffects[player.hasStatusAffect("eggs")].value1 == 5) shortName = "BlackEg";
-			}
+			var itype:ItemType =
+					[
+						[consumables.BROWNEG,consumables.PURPLEG,consumables.BLUEEGG,consumables.PINKEGG,consumables.WHITEEG,consumables.BLACKEG],
+						[consumables.L_BRNEG,consumables.L_PRPEG,consumables.L_BLUEG,consumables.L_PNKEG,consumables.L_WHTEG,consumables.L_BLKEG]]
+							[player.statusAffects[player.hasStatusAffect("eggs")].value2 || 0][player.statusAffects[player.hasStatusAffect("eggs")].value1 || 0] ||
+							consumables.BROWNEG;
 			player.removeStatusAffect("lootEgg");			
 			player.removeStatusAffect("eggs");
 			trace("TAKEY NAU");
-			takeItem();
+			inventory.takeItem(itype);
 			return true;
 		}
 	}
@@ -2864,61 +2847,37 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	//Drop axe if too short!
-	if(player.tallness < 78 && player.weaponName == "large axe") {
+	if(player.tallness < 78 && player.weapon == weapons.LARGE_AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);
-		shortName = "L. Axe ";
-		player.weaponName = "fists";
-		player.weaponVerb = "punch";
-		player.weaponAttack = 0;
-		player.weaponPerk = "";
-		player.weaponValue = 0;
-		takeItem();
+		player.weapon = WeaponLib.FISTS;
+		inventory.takeItem(weapons.LARGE_AXE);
 		return true;
 	}
-	if(player.weaponName == "large hammer" && player.tallness < 60) {
+	if(player.weapon == weapons.LARGE_HAMMER && player.tallness < 60) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n", true);
-		shortName = "L.Hammr";
-		player.weaponName = "fists";
-		player.weaponVerb = "punch";
-		player.weaponAttack = 0;
-		player.weaponPerk = "";
-		player.weaponValue = 0;
-		takeItem();
+		player.weapon = WeaponLib.FISTS;
+		inventory.takeItem(weapons.LARGE_HAMMER);
 		return true;
 	}		
-	if(player.weaponName == "large claymore" && player.str < 40) {
+	if(player.weapon == weapons.LARGE_CLAYMORE && player.str < 40) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n", true);
-		shortName = "Claymor";
-		player.weaponName = "fists";
-		player.weaponVerb = "punch";
-		player.weaponAttack = 0;
-		player.weaponPerk = "";
-		player.weaponValue = 0;
-		takeItem();
+		player.weapon = WeaponLib.FISTS;
+		inventory.takeItem(weapons.LARGE_CLAYMORE);
 		return true;
 	}
-	if(player.weaponName == "huge warhammer" && player.str < 80) {
+	if(player.weapon == weapons.BEAUTIFUL_SWORD && player.str < 80) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n", true);
-		shortName = "Warhamr";
-		player.weaponName = "fists";
-		player.weaponVerb = "punch";
-		player.weaponAttack = 0;
-		player.weaponPerk = "";
-		player.weaponValue = 0;
-		takeItem();
+		player.weapon = WeaponLib.FISTS;
+		inventory.takeItem(weapons.HUGE_WARHAMMER);
 		return true;
 	}
 	//Drop beautiful sword if corrupted!
 	if(player.weaponPerk == "holySword") {
 		if(player.cor >= 35) {
 			outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but could probably keep it in your inventory.</b>\n\n", false);
-			shortName = "B.Sword";
-			player.weaponName = "fists";
-			player.weaponVerb = "punch";
-			player.weaponAttack = 0;
-			player.weaponPerk = "";
-			player.weaponValue = 0;
-			takeItem();
+			var oldWeapon:Weapon = player.weapon;
+			player.weapon = WeaponLib.FISTS;
+			inventory.takeItem(oldWeapon);
 			return true;
 		}
 	}
@@ -2931,40 +2890,22 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hasCock()) outputText("maleness");
 			else outputText("bulgy balls");
 			outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-			player.armorName = "comfortable underclothes";
-			player.armorDef = 0;
-			player.armorPerk = "";
-			player.armorValue = 0;
-			player.removePerk("Slutty Seduction");
-			flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
-			shortName = "LMArmor";
-			takeItem();
+			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
 			return true;
 		}
 		//Lost pussy
 		else if(!player.hasVagina()) {
 			outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-			player.armorName = "comfortable underclothes";
-			player.armorDef = 0;
-			player.armorPerk = "";
-			player.armorValue = 0;
-			player.removePerk("Slutty Seduction");
-			flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
-			shortName = "LMArmor";
-			takeItem();
+			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
 			return true;
 		}
 		//Tits gone or too small
 		else if(player.biggestTitSize() < 4) {
 			outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-			player.armorName = "comfortable underclothes";
-			player.armorDef = 0;
-			player.armorPerk = "";
-			player.armorValue = 0;
-			player.removePerk("Slutty Seduction");
-			flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
-			shortName = "LMArmor";
-			takeItem();
+			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
 			return true;
 		}
 	}

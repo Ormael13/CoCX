@@ -11,22 +11,24 @@ package classes.Items
 		private var _attack:Number;
 		private var _perk:String;
 
-		override public function equip(user:Player):void
+		override public function equip(player:Player, output:Boolean):void
 		{
-			if (canEquip(user,true)){
-				user.weapon.unequip();
-				user.setWeaponHiddenField(this);
-				clearOutput();
-				outputText("You equip your " + longName + ".  ");
-				equipped(user);
+			if (canEquip(player,output)){
+				player.weapon.unequip(output);
+				player.setWeaponHiddenField(this);
+				if (output) {
+					clearOutput();
+					outputText("You equip your " + longName + ".  ");
+				}
+				equipped(player,output);
 			}
 		}
 
 
-		override public function unequip():void
+		override public function unequip(output:Boolean):void
 		{
 			wearer.weapon = WeaponLib.FISTS;
-			unequipped();
+			unequipped(output);
 		}
 
 		public function Weapon(id:String, shortName:String, longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "")

@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Swamp
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class MaleSpiderMorphScene extends BaseContent
 	{
@@ -42,9 +43,8 @@ package classes.Scenes.Areas.Swamp
 			outputText("You talk of your own people, and the good times you had in Ingnam growing up, but you keep coming back to the sadness of losing so many young adults to becoming champions.  Eventually you go over your own selection, training, and eventual journey.  The spider-morph listens with rapt attention the whole way through.\n\n", false);
 			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n", false);
 			outputText("He stands and gives you a bundle of pink fibres with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ", false);
-			shortName = "S.Gossr";
 			menuLoc = 2;
-			takeItem();
+			inventory.takeItem(consumables.S_GOSSR);
 		}
 
 //*Victory Pretext:rr
@@ -60,8 +60,8 @@ package classes.Scenes.Areas.Swamp
 				if (player.cockThatFits(monster.analCapacity()) != -1) buttfuck = victoryButtFuck;
 				if (player.biggestCockArea() > monster.analCapacity()) frot = victoryFrotTheSpoidah;
 			}
-			var bikiniTits:int = 0;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+			var bikiniTits:Function = null;
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 			outputText("The male spider-morph collapses onto his hands and knees, ", false);
 			if (monster.lust > 99) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.", false);
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.", false);

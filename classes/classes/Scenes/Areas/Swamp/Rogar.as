@@ -410,9 +410,8 @@ public function rogarThirdPhase():void {
 			//set Ro'gar phase = 4 and Ro'roh Raggy = 0, Acquire 1x Bro Brew
 			flags[kFLAGS.ROGAR_PHASE] = 4;
 			flags[kFLAGS.ROGAR_WARNING] = 0;
-			shortName = "BroBrew";
 			menuLoc = 2;
-			takeItem();
+			inventory.takeItem(consumables.BROBREW);
 			return;
 		}
 		//(else if Dirt Mc Girt = 2)
@@ -498,7 +497,7 @@ private function rogarFuckMenu():void {
 	var frot:Function = null;
 	var brodown:Function = null;
 	
-	if(hasItem("BroBrew",1)) brodown = brobrobrobro;
+	if(player.hasItem("BroBrew")) brodown = brobrobrobro;
 	if(player.hasCock()) {
 		giveAnal = fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim;
 		getAnal = loseButtGinity;
@@ -548,7 +547,7 @@ private function loseButtGinity():void {
 		outputText("  You hear the pop of a corked bottle, and soon the cool, slippery lubricant pours over your puckered entrance and taint.  After the twin fingers have worked you loose enough a third slides in, the three digits picking up speed as they push in deeper and open you wide.  The strange feeling drives you wild for reasons you don't understand. It just feels so good and new, and your seed pools on your stomach, drolling down your sides to stain the sheets below.  Ro'gar gets up on the bed, looming over your aroused form as his fingers continue pumping into you.  You glance down through the haze of pleasure to see his massive erection.  It seems bigger than you remember, the head leaking a steady stream of spunk to hint at his production.  \"<i>Ready fer yer cherry poppin', boy?  I got you nice and spread.</i>\"  Blue eyes look over your arousal, and you can only shiver under his gaze.  \"<i>I reckon yer enjoyin' yerself,</i>\" he says with a growl, and continues to drive your body wild with lust and strange, new sensations.  \"<i>I've been bidin' my time now, but I'll take that cherry of yers, an' I'm goin' to savor every last drop until ya burst.</i>\"\n\n", false);
 		
 		outputText("A groan escapes your lips as his fingers slide from your pucker.  His strong hands lift your backside, raising your lubricated hole to a suitable level; you lay completely exposed before him as he shifts his hips to line himself up with your virgin pucker.  The head of his monstrous cock presses against your loosened boycunt, dripping with need as he steadily forces the tight hole.  Your teeth clench as he stretches you wide around his length, though he continues without hesitation, and finally you cry out with the sting of the bulbous head squeezing into your tiny hole, though it falls on deaf ears as Ro'gar merely groans at your virgin tightness.", false);
-		buttChange(25,true,true,false);
+		player.buttChange(25,true,true,false);
 		outputText("  Another whimper escapes your lips as you feel the orc's gigantic cock stretch you much farther than his tongue or fingers.  Despite the pain, your body submits under the girthy cock without a choice, and soon your once-virgin hole is large enough for what will ensue.  \"<i>When I'm done with you, you'll be a proper cock sleeve, boy.  Perfect fer me to breed.</i>\"  He chuckles and licks your face with his warm tongue.  With most of his thick length nestled in you, Ro'gar pulls back to his cockhead only to thrust in again, steadily working more and more of himself inside.  Your whimpers begin to die down and the sting fades with them.  The heat and feeling of his dripping spunk, warm against your walls begin to overwhelm you.  Feeling him claim your untouched insides makes you moan out in bliss.\n\n", false);
  
 		outputText("Your mind races with Ro'gar's words as they seemed to be coming true.  You can't help but focus on the wonderful feeling of Ro'gar's cock throbbing within you.  Maybe this is where you belong?  With your tight ass impaled on Ro'gar's massive tool?  You moan loudly as Ro'gar picks up the pace, hips ramming into you with enough force to shift your body over the sheets.  He really starts to break in your hole with huffed grunts and groans as he hilts in you; his cockhead prods your prostate with each thrust, causing you to cry out as electric shocks shoot up your spine.  Every nerve in your body lights up like a Christmas tree and make your entire body squirm with pleasure.  You feel spurts of cum begin to leak from your " + multiCockDescriptLight() + " and glaze your belly with pre-cum.", false);
@@ -701,7 +700,7 @@ private function rogarIsDumb():void {
 //[Fukkin' Grab It!]
 private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
-	consumeItem("BroBrew",1);
+	player.consumeItem("BroBrew");
 	var changed:Boolean = false;
 	var cocked:Boolean = false;
 	outputText("", true);

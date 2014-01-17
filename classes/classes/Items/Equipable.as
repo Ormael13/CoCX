@@ -3,7 +3,6 @@
  */
 package classes.Items
 {
-	import classes.Character;
 	import classes.CoC_Settings;
 	import classes.Player;
 
@@ -22,46 +21,56 @@ package classes.Items
 			return _wearer;
 		}
 
-		public function canEquip(player:Player,printReason:Boolean):Boolean
+		/**
+		 * Called on attempt to equip item.
+		 * @param output Print "equipping" scene to output
+		 */
+		public function canEquip(player:Player,output:Boolean):Boolean
 		{
 			return true;
 		}
 
-		public function equipEffect(user:Player):void
+		/**
+		 * Called after item succesfully equipped. By default, does nothing. Should add perks/effects/etc.
+		 */
+		public function equipEffect(player:Player,output:Boolean):void
 		{
 
 		}
 
-		public function unequipEffect(user:Player):void
+		/**
+		 * Called after item succesfully unequipped. By default, does nothing. Should remove perks/effects/etc.
+		 */
+		public function unequipEffect(player:Player,output:Boolean):void
 		{
 
 		}
 
-		protected function equipped(user:Player):void
+		protected final function equipped(player:Player,output:Boolean):void
 		{
-			_wearer = user;
-			equipEffect(user);
+			_wearer = player;
+			equipEffect(player,output);
 		}
 
-		protected function unequipped():void
+		protected final function unequipped(output:Boolean):void
 		{
-			unequipEffect(_wearer);
+			unequipEffect(_wearer,output);
 			_wearer = null;
 		}
 
-		public function equip(user:Player):void
+		public function equip(player:Player,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "equip", id);
 		}
 
-		public function unequip():void
+		public function unequip(output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}
 
-		override public function doEffect(user:Player):void
+		override public function doEffect(player:Player):void
 		{
-			equip(user);
+			equip(player,true);
 		}
 
 		public function Equipable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null)

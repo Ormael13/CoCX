@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.Places{
 import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.Owca.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -232,8 +234,7 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-		player.weaponName = "fists";
-		player.weaponAttack = 0;
+		player.weapon = WeaponLib.FISTS;
 		monster.createStatusAffect("Bow Disabled",0,0,0,0);
 		if(player.str < 80 && player.spe < 80) {
 			monster.createStatusAffect("Attack Disabled",0,0,0,0);
@@ -258,7 +259,7 @@ public function loseOrSubmitToVapula():void {
 	outputText(".  As more and more hands start playing with your flesh, the succubus grabs your head and gives you a fierce kiss, literally crushing your lips under hers; her mouth tastes like wine and her tongue is driving you over the edge as it intertwines with yours.  Her strong natural scent makes you dizzy and you gradually lose control over your body.  \"<i>Don't worry, darling, it'll be all right...</i>\"");
 	outputText("\n\nSoon you find yourself completely overwhelmed by hot demon hands and dicks touching every part of your body.  In no time at all two imps bend you over and forcefully ram your " +assholeDescript()+ " with their mammoth peckers.");
 	//[ass stretching check]
-	buttChange(60,true,true,false);
+	player.buttChange(60,true,true,false);
 	outputText("  The double penetration is brutal, unexpected and painful.  Your insides are protesting vigorously against this rough treatment, even though you feel a tingle of pleasure gently tickling your colon at every thrust.  ");
 	//[(no Buttslut)
 	if(player.hasPerk("Buttslut") < 0) outputText("No!  You aren't supposed to enjoy it...  ");
@@ -273,7 +274,7 @@ public function loseOrSubmitToVapula():void {
 	//[if vagina
 	if(player.hasVagina()) {
 		outputText("\n\nYou suddenly feel a sharp sensation: your womanhood is finally being penetrated.");
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 		outputText("  A dick found a way into your " +vaginaDescript(0)+ " and is pushing further inside.  Wait, what's this?  A second, and then a third!  There's no way these titanic columns of flesh will... this is too much... you fear you will be torn in half, but at the last moment, you feel someone spilling the content of a flask over your nether-lips.  As if you had lost control of your " +vaginaDescript(0)+ ", it automatically starts leaking girl-cum in prodigious amounts, and you let out a stifled moan as a delicious shiver runs teasingly across your body.  Your fuck-hole widens under the corrupting effect of the weird mixture you were administered.  ");
 		//[set vagstretch up a few levels]
 		if(player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity",0,0,0,0);
@@ -472,7 +473,7 @@ private function rapeZeVapula():void {
 		outputText("\n\n\"<i>What are you waiting for?</i>\" Vapula snarls.  \"<i>Use me already, you filthy bitch.  Shove your pussy into my face, let me lick your nasty juices, rub it all over me if that's the best you can do.  You haven't thought the logistics of this through, have you, cunt?  Or maybe you're too afraid.   Maybe you just need some cock up you, to remind you who-\"</i>");
 		outputText("\n\nSLAP!  The back of your hand hits her across her face, muting her for the moment you need to lay down the rules.  \"<i>Shut up, whore.  I'm the one deciding who fucks who here.  And what an interesting idea you've given me.  Let's find out who wants what, shall we?</i>\"");
 		outputText("\n\nWith lazy nonchalance you grab hold of another demon crawling at your feet, an incubus; shorter and younger than Vapula, his tight, pert body is a delight to your eyes.  Without ceremony you shove him to the ground and grind your " +vaginaDescript()+ " into his crotch.  He looks at you, semi-comatose and bewildered, as you get a rise out of his dick, which hardens against your damp strokes.  You pin him down as you sink onto his red length, sighing as you rapidly engulf him, then begin to ride him ruthlessly.  ");
-		cuntChange(40,true,true,false);
+		player.cuntChange(40,true,true,false);
 		if(player.vaginalCapacity() > 80) outputText("His cock is lost in your vast cunt and you work him as hard as you can to feel him against your walls, his body convulsing and dazed eyes rolling against the wet, savage rape.  ");
 		outputText("You keep thrusting back and forth, treating the worthless horned boy like a disposable dildo.  As you pump him, you look at Vapula, warning her, \"<i>Don't turn your head.  If you ever look away or close your eyes you will regret it.</i>\" Overwhelmed by your dominance and subdued by the defeat, Vapula can only nod.");
 		outputText("\n\nYou keep working the incubus's hot cock in front of the once-powerful dominatrix, panting as you accelerate the pace until you finally reach your climax, clenching your thighs tightly to his fit body as your " +vaginaDescript()+ " clenches and spasms.  ");
@@ -488,7 +489,7 @@ private function rapeZeVapula():void {
 		outputText("\n\nYou feel another high coming as you thrust harder and harder into the succubus's mouth; her eyes look timidly at an upside down Vapula as you ride her slippery tongue to another clenching climax.  Rather than sit down for it this time you raise yourself up and stare gloatingly at the dominatrix as a small torrent of semen-mingled girlcum gushes out of you and spatters all over the tied succubus.  The demon is so far past it she drinks and chokes over what you give her.  What is in Vapula's eyes as she watches this is something between total horror and raging thirst, and it fills you with incredible triumph.");
 		outputText("\n\nGods, this is only the beginning.  You sashay into a beaten huddle of incubi and imps.  One of the more aware ones even tries to crawl away at your approach; you put an immediate stop to this by grabbing his bulging quartet of balls.  Holding him entirely at your mercy this way, you use your other hand to rub his monstrously thick pecker, quickly making it bulge with pressure.  Again you push the gasping, quaking incubus onto his back and guide him into your gaping pussy; your eyes catch those of an imp whose mouth is open with disbelief and whose dog dick is standing to attention.");
 		outputText("\n\n\"<i>You!</i>\" you snap. \"<i>Fuck my ass.  Do a good job or I'll wring your neck.  The rest of you worthless spare pricks... gather around.</i>\"  You grip the incubus beneath you with your " +hipDescript()+ " as small, uncertain hands grasp you around your waist and something hot oozes moisture into your " +assholeDescript()+ ".  You thrust forwards and then backwards, simultaneously working the incubus cock whilst driving the imp's meat into your bowels.");
-		buttChange(60,true,true,false);
+		player.buttChange(60,true,true,false);
 		outputText("  Around you more dicks present themselves as other demons slowly draw closer, and with the cock inside you rubbing your sensitive inner walls backwards and forwards you enthusiastically grab two other turgid members and pump them in tandem.  One of the dicks you have grabbed is a sensitive cat dick and the owner is quickly moaning as you fingers brush his hooks; as you feel him reach his peak you ruthlessly jerk him around so he is facing Vapula, and he helplessly spurts his load onto her jiggling frame.  The imp begins to pump harder as he finds his rhythm, stretching your ass wide as he takes you to his plug, rubbing against the huge incubus cock trapped in your " +vaginaDescript(0)+ ".  You laugh breathlessly and manically as the other demon in your grasp helplessly falls over his own peak, further soaking the horny ex-domniatrix.");
 		//[cunt nipples] 
 		if(player.hasFuckableNipples()) outputText("  Your freakish nipples moisten with excitement to the smell of man juice, and you feel your libido ratcheting up even higher.  Bending forward, you grab two other imps with smaller dicks, quickly guiding their lengths into your nipplecunts; they are small enough that you can mash their bodies against your soft flesh, doing all the work for them as your sensitive nubs are penetrated.");
@@ -585,42 +586,41 @@ public function owcaTavern():void {
 	clearOutput();
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
-	var milk:Function = createCallBackFunction(owcaBuySetup,"SheepMk");
+	var milk:Function = createCallBackFunction(owcaBuySetup,consumables.SHEEPMK);
 	outputText("\nSheep Milk Bottle: " + (180 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
 	if((180 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) milk = null;
 	
-	var goblin:Function = createCallBackFunction(owcaBuySetup,"Gob.Ale");
+	var goblin:Function = createCallBackFunction(owcaBuySetup,consumables.GOB_ALE);
 	outputText("\nGoblin Ale: " + (60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) + " gems");
 	if((60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) > player.gems) goblin = null;
 	
-	var brew:Function = createCallBackFunction(owcaBuySetup,"BroBrew");
+	var brew:Function = createCallBackFunction(owcaBuySetup,consumables.BROBREW);
 	if(rand(10) > flags[kFLAGS.OWCAS_ATTITUDE]/10) {
 		outputText("\nBro Brew: 2000 gems");
 		if((2000) > player.gems) brew = null;
 	}
 	else brew = null;
 	
-	var cum:Function = createCallBackFunction(owcaBuySetup,"MinoCum");
+	var cum:Function = createCallBackFunction(owcaBuySetup,consumables.MINOCUM);
 	outputText("\nMinotaur Cum: " + (300 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
 	if((300 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) cum = null;
 	outputText("</i>");
 	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",gangbangVillageStuff);
 }
 
-private function owcaBuySetup(item:String = "MinoCum"):void {
-	if(item == "SheepMk") buyOwcaShit(item,(180 - flags[kFLAGS.OWCAS_ATTITUDE]));
-	else if(item == "Gob.Ale") buyOwcaShit(item,(60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)));
-	else if(item == "BroBrew") buyOwcaShit(item,2000);
+private function owcaBuySetup(item:ItemType):void {
+	if(item == consumables.SHEEPMK) buyOwcaShit(item,(180 - flags[kFLAGS.OWCAS_ATTITUDE]));
+	else if(item == consumables.GOB_ALE) buyOwcaShit(item,(60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)));
+	else if(item == consumables.BROBREW) buyOwcaShit(item,2000);
 	else buyOwcaShit(item,(300 - flags[kFLAGS.OWCAS_ATTITUDE]));
 }
-private function buyOwcaShit(bleh:String = "MinoCum",price:Number = 0):void {
+private function buyOwcaShit(bleh:ItemType,price:Number = 0):void {
 	clearOutput();
 	player.gems -= price;
 	statScreenRefresh();
 	outputText("The bartender hands you a bottle and grabs your gems before attending other clients, leaving you to your own business.\n\n");
-	shortName = bleh;
 	menuLoc = 25;
-	takeItem();
+	inventory.takeItem(bleh);
 }
 	
 //Herds (Z)
@@ -635,9 +635,8 @@ private function herds():void {
 	//[if attitude > 70]
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 70) {
 		outputText("\n\nThe villagers thank you for your hard work and one of them hands you a bottle of sheep milk.  \"<i>'Tis good for your health.  Don't worry, it won't... mutate you.</i>\"\n\n");
-		shortName = "SheepMk";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.SHEEPMK);
 	}
 	else doNext(13);
 }

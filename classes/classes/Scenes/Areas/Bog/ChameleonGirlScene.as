@@ -199,8 +199,8 @@ package classes.Scenes.Areas.Bog
 			if (player.hasVagina()) pussy = femaleHasWinSexWithChamCham;
 			if (player.gender == 3) herm = fuckDatChameleonAsACoolGuyGirlHerm;
 			//let PC use item
-			if ((hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && player.hasCock()) item = useAnItemOnTheChamcham;
-			else if (hasItem("SensDrf", 1) && (hasItem("L.Draft", 1) || hasItem("F.Draft", 1))) item = useAnItemOnTheChamcham;
+			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) item = useAnItemOnTheChamcham;
+			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) item = useAnItemOnTheChamcham;
 			simpleChoices("Use Dick", dick, "Use Pussy", pussy, "Herm Style", herm, "Use Item", item, "Leave", cleanupAfterCombat);
 		}
 
@@ -299,8 +299,8 @@ package classes.Scenes.Areas.Bog
 			//optionz go herez
 			var milk:Function =null;
 			var drafts:Function =null;
-			if ((hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
-			if (hasItem("SensDrf", 1) && (hasItem("L.Draft", 1) || hasItem("F.Draft", 1))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
+			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
+			if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
 
 			simpleChoices("SuccMilk", milk, "LustnSensD.", drafts, "", 0, "", 0, "Back", defeatChameleonGirl);
 		}
@@ -329,9 +329,9 @@ package classes.Scenes.Areas.Bog
 
 			//send player back to camp, remove 1 succubi milk or p.milk, add gems and exp and time
 			dynStats("lus=", 0);
-			if (hasItem("P.S.Mlk", 1)) consumeItem("P.S.Mlk", 1);
+			if (player.hasItem(consumables.P_S_MLK)) player.consumeItem(consumables.P_S_MLK);
 			else {
-				consumeItem("SucMilk", 1);
+				player.consumeItem(consumables.SUCMILK);
 				dynStats("cor", 5);
 			}
 			cleanupAfterCombat();
@@ -376,9 +376,9 @@ package classes.Scenes.Areas.Bog
 				dynStats("lus", 20);
 			}
 			//send player back to camp, remove sens/fuck draft, reset hours since cum, add gems and exp and time
-			consumeItem("SensDrf", 1);
-			if (hasItem("L.Draft", 1)) consumeItem("L.Draft", 1);
-			else consumeItem("F.Draft", 1);
+			player.consumeItem(consumables.SENSDRF);
+			if (player.hasItem(consumables.L_DRAFT)) player.consumeItem(consumables.L_DRAFT);
+			else player.consumeItem(consumables.F_DRAFT);
 			cleanupAfterCombat();
 		}
 	}

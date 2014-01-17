@@ -541,7 +541,7 @@ public function doDungeon(eventNo:Number):void {
 		if(player.hasStatusAffect("TensionReleased") < 0) {
 			outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ", false);
 			if(player.biggestTitSize() < 10) {
-				growTits(1, (2+rand(3)), true, 1);
+				player.growTits(1, (2+rand(3)), true, 1);
 				outputText("  ", false);
 			}
 			outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.", false);
@@ -556,7 +556,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ", false);
 				//Grow dick!
 				if(player.cocks.length > 0) {
-					lengthChange(player.increaseCock(5,0), player.cocks.length);
+					player.lengthChange(player.increaseCock(5,0), player.cocks.length);
 					if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
 						outputText("You feel yourself gain in thickness as well, to match your new length.  ", false);
 						temp = player.cocks.length;
@@ -580,7 +580,7 @@ public function doDungeon(eventNo:Number):void {
 					player.createBreastRow();
 					outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ", false);
 				}
-				growTits(1, (2+rand(3)), true, 1);
+				player.growTits(1, (2+rand(3)), true, 1);
 				outputText("  ", false);
 				outputText("Your " + nippleDescript(0) + "s ", false);
 				if(player.cocks.length > 0) outputText("and " + multiCockDescript(), false);
@@ -590,7 +590,7 @@ public function doDungeon(eventNo:Number):void {
 				//FEMALE
 				if(player.vaginas.length > 0 && player.cocks.length == 0) {
 					outputText("As you enter the sex-crazed crowd, you notice several \"girls\" with demonic cocks bloated by the use of drugs, getting drawn to you by the scent of your dripping wet " + vaginaDescript(0) + ". Sitting on the floor, you spread your legs wide, facing the nearest one with an inviting lewd moan, while you hungrily grab another cum-covered cock, that just filled up an obscenely wide gaping vagina, to suck it.  You are soon penetrated and fucked hard and deep, one huge infernal dick after another, as they all cum into you in turn. ", false);
-					cuntChange(150, true);
+					player.cuntChange(150, true);
 				}
 				//HERM
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
@@ -1026,16 +1026,14 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11061) {
 		if(player.hasStatusAffect("TakenGro+") >= 0) player.statusAffects[player.hasStatusAffect("TakenGro+")].value1--;
 		else player.createStatusAffect("TakenGro+",4,0,0,0);
-		shortName = "GroPlus";
-		takeItem();
+		inventory.takeItem(consumables.GROPLUS);
 		return;
 	}
 	//Take item from storage
 	if(eventNo == 11062) {
 		if(player.hasStatusAffect("TakenLactaid") >= 0) player.statusAffects[player.hasStatusAffect("TakenLactaid")].value1--;
 		else player.createStatusAffect("TakenLactaid",4,0,0,0);
-		shortName = "Lactaid";
-		takeItem();
+		inventory.takeItem(consumables.LACTAID);
 		return;
 	}
 	//Take incubus in the butt
@@ -1149,8 +1147,7 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11097) {
-		shortName = "GodMead";
-		takeItem();
+		inventory.takeItem(consumables.GODMEAD);
 		flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
 		return;
 	}
@@ -1179,7 +1176,7 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11104) {
-		kiriSexAnal()
+		kiriSexAnal();
 		return;
 	}
 	if(eventNo == 11105) {
@@ -1191,20 +1188,17 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11107) {
-		shortName = "SucWhip";
-		takeItem();
+		inventory.takeItem(weapons.SUCCUBI_WHIP);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] = 1;
 		return;
 	}
 	if(eventNo == 11108) {
-		shortName = "BonStrp";
-		takeItem();
+		inventory.takeItem(armors.BONDAGE_STRAPS);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] = 1;
 		return;
 	}
 	if(eventNo == 11109) {
-		shortName = "L.Daggr";
-		takeItem();
+		inventory.takeItem(weapons.LUST_DAGGER);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] = 1;
 		return;
 	}
@@ -1241,7 +1235,7 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11118) {
-		harpyQueenAdvantage()
+		harpyQueenAdvantage();
 		return;
 	}
 	if(eventNo == 11119) {

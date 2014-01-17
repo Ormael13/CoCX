@@ -2,7 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Mutations extends BaseContent
+	public final class Mutations extends BaseContent
 	{
 
 
@@ -19,132 +19,7 @@
 //const EGGS_BOUGHT:int = 653;
 //const BIKINI_ARMOR_BONUS:int = 769;
 
-public function itemUse(shortName1:String):void {
-	if(shortName1 == "LMArmor") lustyMaidensArmor();
-	else CoC_Settings.error("Tried to use item that cannot be used = "+shortName1);
-}
-public function fixedDamage(weaponName:String):Number {
-	var attack:Number = 0;
-	//PERK BONUSES!
-	if(player.hasPerk("Weapon Mastery") >= 0 && player.weaponPerk == "Large" && player.str > 60)
-		attack *= 2;
-	if(player.hasPerk("Lightning Strikes") >= 0 && player.spe >= 60 && player.weaponPerk != "Large") {
-		attack += Math.round((player.spe - 50) / 3);
-	}
-	if(player.hasStatusAffect("Berzerking") >= 0) attack += 30;
-	attack += player.statusAffectv1("Charge Weapon");
-	return attack;
-}
-
 public function applyArmorStats(armorName:String, output:Boolean = true):void {
-	player.armorDef = 0;
-	//Add stats!
-	if(armorName == "scandalously seductive armor") {
-		player.armorName = "comfortable underclothes";
-		if(!ceraphFollowerScene.ceraphIsFollower()) {
-			if(output) {
-				outputText("After struggling to get it on, you feel a sudden shift in your scandalous new armor.  To your horror, it begins folding into itself, revealing more and more of your " + player.skinDesc + " and the comfortable underclothes you had on underneath it.  The transforming armor gradually covers less and less of you until it's little more than a pair of huge nipple-coverings and a silver chain.  A loud KA-CHUNK startles you, and then you're screaming as you feel something stabbing through your nipples.  Goosebumps cover your flesh as you twist in unexpected agony.\n\n", false);  
-				outputText("After you've had a chance to recover, you inspect your abused nipples and discover that your armor has totally disappeared.  The only thing left behind is a pair of seamless black nipple-studs, embedded into your vulnerable flesh.  There doesn't appear to be any way to remove them either.  Thankfully, your comfortable underclothes have been unaffected by the sudden disappearance of your armor.  The thought of having to run around naked stays stubbornly locked in your mind, and you mentally curse the demon for what she's done to you.\n\n", false);
-				outputText("As if summoned by your thoughts, you can hear her voice on the wind, taunting you again, \"<i>Enjoy your new bondage fetish, pet!  One more piercing and you'll be ready.  Don't have too much fun being tied down and fucked, ok?</i>\"\n\n", false);
-			}
-			if(player.nipplesPierced > 0) outputText("You're left to wonder - where did the old piercings go?\n\n", false);
-			player.nipplesPierced = 1;
-			player.nipplesPShort = "seamless black nipple-studs";
-			player.nipplesPLong = "Seamless black nipple-studs";
-			flags[kFLAGS.PC_FETISH] = 2;
-			return;
-		}
-		else {
-			if(output) {
-				outputText("As you're trying to put on the armor, Ceraph appears from nowhere, apologizing profusely and stopping you before you can slide the last strap into place.  \"<i>Please don't put that on, " + player.mf("Master","Mistress") + ".  I trapped that armor to pierce new fetishes the unwary so that I could add them to my harem.  I'd hate to garner your anger.</i>\"  She wrings her hands nervously.  \"<i>If you'll hand it here, I'll get rid of it for you. Noone would buy it anyway.</i>\"");
-				outputText("\n\nYou shrug and toss her the armor, disappointed that you're down a potentially sexy outfit.");
-				outputText("\n\nCeraph bows gratefully and swiftly backpedals, offering, \"<i>And if you ever want me to stuff you full of magic fetishes, just ask, okay?</i>\"");
-				outputText("\n\nShe's gone before you can reply.  Sometimes she's more trouble than she's worth.");
-			}
-			return;
-		}
-	}
-	
-	if(armorName == "inquisitor's robes") {
-		//[First time equipping Inquisitor's Robes (If it's too much trouble to have a scene play the first time you equip them, just have this be a continuation of the last scene, with a \"YOU GO TO CAMP\" text in between.)]
-		if(output) {
-			outputText("You unfold the robes you received from the secret chamber in the swamp and inspect them.  They have not changed since the last time you saw them - perhaps the transformative magic promised in the letter has been exhausted.  Looking at the two separate parts to the outfit, it becomes clear that the mantle is constructed of a thicker fabric and is intended to be the primary protection of the outfit - what protection a robe can provide, at least.  The undershirt is made of a much lighter material, and you dare say that it could prove quite a classy number on its own.  You strip naked and then slip into the robe.\n\n", false);
-
-			outputText("The degree to which it fits you is moderately surprising.  For lack of a better word, it seems to be perfect.  The fabric does not cling to you, but gives you a full range of movement.  There is a clasp over the high collar, displaying a golden sword.  Though your arms are bare the holes through which your arms extend are comfortable, and have the same golden trim as the collar.  Along the middle of the robe the trim gathers around the waist, descending down the skirt in two lines.  As it reaches the bottom it explodes into elaborate embroidery circling around the back, patterning based on holy symbols and iconography that may have meant something long ago before the advent of demons.  Between the two lines of gold a sword is displayed, similar to the one on the collar's clasp.  You take a few dramatic movements to see how it responds, and find that you continue to enjoy free movement.\n\n", false);
-
-			outputText("Taking the heavier coat, you slide your hands into the sleeves, and secure the belt firmly around your waist.  Your initial concern was that the sleeves would be too open, but in making a few quick motions with your hands you don't feel that the cloth gets in the way.  The weight of the gold-trimmed hood surprises you somewhat, but you quickly grow accustomed.  After attempting to move the hood down you realize that doing so is remarkably difficult; it's designed by clever stitching and wires to stay up, and straight.  You suppose that unless you're overheating there's no real need to adjust it.  The coat covers the undershirt's waist decorations, hiding them completely behind its belt.  Now-familiar sword imagery runs over your back, along your spine.  The loops of the belt meet twice - once behind your back, and once beneath the clasp.\n\n", false);
-
-			outputText("To finish the look, you take the two fingerless alchemical gloves and slide them over your hands.  What seems to be a prayer is embroidered in gold on their back.\n\n", false);
-
-			outputText("You feel pious.\n\n\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of fatigue!)\n\n", false);
-		}
-		if(player.hasPerk("Blood Mage") < 0) player.createPerk("Blood Mage",0,0,0,0,"");
-	}
-	if(armorName == "inquisitor's corset") {
-		if(output) {
-			outputText("You remove the clothing you received from the underground chamber in the swamp.  The sexual nature of the clothing excites you a bit, as does the knowledge that it will be functional in combat.  You quickly disrobe, eager to try it on.\n\n", false);
-
-			outputText("Checking to see whether the posture collar can be detached from the sleeves, you find a complete lack of any way to do so.  Shrugging, you slide your arms into the sleeves, sticking your middle fingers through the extended ends.  Golden embroidery down their length contains some of the most ornate and stylized pictures of dicks you have ever seen, culminating in an excessive amount of gold thread splayed in your palm, symbolizing the ejaculate.  You lift your chin to fit the posture collar in place, completely hiding your neck from view as you lace it from behind.  The dark red works nicely with your " + player.skinTone + " " + player.skinDesc + ".   A small amount of delight fills you as you realize the collar is not as unforgiving as a true posture collar, allowing you a comfortable amount of movement - though you do briefly wonder what a fight would be like if it didn't.\n\n", false);
-
-			outputText("You fit the corset on next, wrapping it around your waist and chest, hiding your " + nippleDescript(0) + "s beneath more red and gold trim.  As you lace the corset up you realize that what you had taken for a stylized sword rising up between the cups bears a much greater resemblance to a prick.  Fair enough.  The belt practically attaches to the corset as though it were made to be a single article of clothing, clasping beneath a set of heavily stylized golden lines that you suspect are meant to be a face in the middle of either prayer or oral sex, or possibly both.\n\n", false);
-
-			outputText("Earlier suspicions about the skirt prove correct - it does not conceal in the slightest.  It covers some skin to the right side, mostly in the back, but your front is on full display to the world.  The skirt feels as though it should go on a dancing showgirl rather than an inquisitor, but you made the choice you did and the results <i>are</i> arousing.  Golden trim takes on the form of waving and twisting tentacles as the bottom of the skirt gets closer, looking as though it wants to burst from the fabric and molest its wearer.\n\n", false);
-
-			//[(if PC has human, demon, or bee feet)
-			if(player.isBiped()) outputText("Finally you slide your legs into the boots.  The heel itself is hollow, to accommodate any natural spurs on the wearer's foot, and the rest of the boot seems surprisingly fitted to your dimensions.  To a certain extent it feels as though it is reshaping itself as you enter - parts that initially feel tight loosen up in minutes, as if the boots were breaking themselves in.  If what the note said is true, and the armor adapts to he who finds it, perhaps even hooves and paws could have fit, given enough magical power used in the creation.  Laces run up the side of each boot all the way to your thighs, resembling the corset they were paired with.  The front of them bear golden symbology, akin to the symbols  that sat on the front of the secret chamber.  Based on your previous decoding, they're halfway between a prayer and a exaltation of cock.  Standing up in them, you smile as your " + buttDescript() + " rises with their influence.", false);
-			///(else if PC has funny feet)
-			else outputText("The final bit of the outfit is a pair of long-heeled lace-up boots, which, though decorated with gorgeous golden symbols spelling out what appears to be a hymn to sex, seem... relatively unusable in your current state.  You tuck them away someplace safe in case you ever become a biped again, then stand to your full height and assess yourself.", false);
-			outputText("\n\n", false);
-			
-			outputText("You feel sexy.  And pious.\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of fatigue!)\n\n", false);
-			//+lust
-			dynStats("lus", 5);
-		}
-		if(player.hasPerk("Blood Mage") < 0) player.createPerk("Blood Mage",0,0,0,0,"");
-		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",10,0,0,0,"");
-	}
-	if(armorName == "lusty maiden's armor") {
-		/*Stats: Virgin - 9, Non-Virgin - 5
-		
-		//NONVIRGIN:
-		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");		
-		//VIRGIN:
-		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",10,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-		Special Bonus: Every time you use the special titfuck scene, you gain two defense and 2 tease damage up to a max of 8.  Every night you lose half your bonus (minimum 1).
-		Min lust: 30
-		Min libido: 50*/
-		if(player.hasVirginVagina()) {
-			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
-			player.createPerk("Slutty Seduction",10 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-		}
-		else {
-			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
-			if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",6 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");	
-		}
-	}
-	if(armorName == "spider-silk robes") {
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
-	}
-	if(armorName == "goo armor") {
-		flags[kFLAGS.VALARIA_AT_CAMP] = 0;
-		if(output) {
-			outputText("With an ecstatic smile, the goo-armor jumps to her feet and throws her arms around your shoulders.  \"<i>Oh, this is going to be so much fun!  Thank you thank you thank you!  I promise I'll keep you nice and snug and safe, don't you worry.  Oooh, a real adventure again!  WHEEE!</i>\"");
-			outputText("\n\nBefore she can get too excited, you remind the goo that she's supposed to be your armor right about now.  Clasping her hands over her mouth in embarrassment, she utters a muted apology and urges you to just \"<i>put me on!</i>\"  Awkwardly, you strip out of your gear and open up the platemail armor and clamber in.  It's wet and squishy, making you shudder and squirm as you squash your new friend flat against the metal armor.");
-			outputText("\n\nEventually, the two of you get situated. The goo-girl slips around your body inside the heavy armor, maneuvering so that your face is unobstructed and your joints, not protected by the armor, are soundly clad in squishy goo.  She even forms a gooey beaver on your new helm, allowing you to open and close her like a visor in battle.  Eventually, her goo settles around your ");
-			if(player.hasVagina()) outputText("[vagina]");
-			if(player.hasVagina() && player.hasCock()) outputText(" and ");
-			if(player.hasCock()) outputText(multiCockDescriptLight());
-			if(player.gender == 0) outputText("groin");
-			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
-		
-			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
-			if(flags[kFLAGS.MET_VALERIA] == 0) {
-				outputText("  As you ready yourself for the dungeon ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
-				flags[kFLAGS.MET_VALERIA]++;
-			}
-			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");
-		}
-	}
 	if(armorName == "wizard's robes") {
 		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",25,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
 	}
@@ -213,68 +88,24 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 			outputText("\n\n", false);
 		}
 	}
-	//Blacksmith history!
-	if(player.armorDef > 0 && player.hasPerk("History: Smith") >= 0) {
-		player.armorDef = Math.round(player.armorDef * 1.1);
-		player.armorDef += 1;
-	}
-	//Skin armor perk
-	if(player.hasPerk("Thick Skin") >= 0) {
-		player.armorDef += 2;
-		if(player.skinType > SKIN_TYPE_PLAIN) player.armorDef += 1;
-	}
-	//If no skin armor perk scales rock
-	else {
-		if(player.skinType == SKIN_TYPE_FUR) player.armorDef += 1;
-		if(player.skinType == SKIN_TYPE_SCALES) player.armorDef += 3;
-	}
-	//'Thick' dermis descriptor adds 1!
-	if(player.skinAdj == "smooth") player.armorDef += 1;
-	//Agility boosts armor ratings!
-	if(player.hasPerk("Agility") >= 0) {
-		if(player.armorPerk == "Light") player.armorDef += Math.round(player.spe/8);
-		else if(player.armorPerk == "Medium") player.armorDef += Math.round(player.spe/13);
-	}
-	//Berzerking removes armor
-	if(player.hasStatusAffect("Berzerking") >= 0) {
-		player.armorDef = 0;
-	}
-	if(monster.hasStatusAffect("Tail Whip") >= 0) {
-		player.armorDef -= monster.statusAffectv1("Tail Whip");
-		if(player.armorDef < 0) player.armorDef = 0;
-	}
+
 }
 
 public function equipArmor(armorName:String, output:Boolean = true):void {
 	//Strip old armor perks
 	while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
-	while(player.hasPerk("Bulge Armor") >= 0) player.removePerk("Bulge Armor");
 	while(player.hasPerk("Wizard's Endurance") >= 0) player.removePerk("Wizard's Endurance");
-	while(player.hasPerk("Blood Mage") >= 0) player.removePerk("Blood Mage");
 	itemSwapping = true;
 	if(debug && armorName != "goo armor") {
 		if(output) outputText("You cannot equip anything in debug mode.  Please restart the game in normal mode to equip items.", true);
 		return;
 	}
 	var oldArmorName:String = player.armorName;
-	player.armorName = armorName;
-	if(output) outputText("You equip your " + player.armorName + ".  ", true);
 	//Purge Old Stats!
 	player.armorDef = 0;
 	//Strip old perk before clearing
-	if(player.armorPerk != "") player.removePerk(player.armorPerk);
-	player.armorPerk = "";
-	player.armorValue = 0;
 	applyArmorStats(armorName,output);
 	//Add old item back to inventory
-	if(oldArmorName == "goo armor") {
-		//shortName = "GooArmr";
-		//outputText("You have " + itemLongName(shortName) + " still over.  ", false);
-		//takeItem();
-		outputText("Valeria picks herself up and huffs, \"<i>Maybe we can adventure some more later on?</i>\" before undulating off towards your camp.\n\n(<b>Valeria now available in the followers tab!</b>)");
-		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
-		itemGoNext();
-	}
 	if(oldArmorName == "bondage patient clothes" ||
 	   oldArmorName == "crotch-revealing clothes" || oldArmorName == "cute servant's clothes" ||
 	   oldArmorName == "maid's clothes" || oldArmorName == "servant's clothes" || oldArmorName == "crotch-hugging clothes" ||
@@ -283,12 +114,12 @@ public function equipArmor(armorName:String, output:Boolean = true):void {
 		if(oldArmorName != "comfortable clothes") outputText("The " + oldArmorName + " revert into a pair of comfortable clothes, as if by magic.  ", false);
 		shortName = "C.Cloth";
 		outputText("You have your old set of " + itemLongName(shortName) + " left over.  ", false);
-		takeItem();
+		inventory.takeItem(armors.COMFORTABLE_CLOTHES);
 	}
 	if(oldArmorName == "leather armor segments" || oldArmorName == "crotch-hugging leather armor segments") {
 		shortName = "LeathrA";
 		outputText("You have your old set of " + itemLongName(shortName) + " left over.  ", false);
-		takeItem();
+		inventory.takeItem(armors.LEATHER_ARMOR);
 	}
 	if(oldArmorName == "comfortable underclothes") {
 		itemGoNext();
@@ -410,7 +241,7 @@ public function incubiDraft(tainted:Boolean):void {
 		}
 		//TIT CHANGE 25% chance of shrinkage
 		if(rand(4) == 0) {
-			shrinkTits();
+			player.shrinkTits();
 		}
 	}
 	//Mid-level changes
@@ -424,7 +255,7 @@ public function incubiDraft(tainted:Boolean):void {
 				temp3 = player.cocks[temp].thickenCock(1);
 				if(temp3 < .1) player.cocks[temp].cockThickness += .05;
 			}
-			lengthChange(temp2, player.cocks.length);
+			player.lengthChange(temp2, player.cocks.length);
 			//Display the degree of thickness change.
 			if(temp3 >= 1) {
 				if(player.cocks.length == 1) outputText("\n\nYour cock spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -445,7 +276,7 @@ public function incubiDraft(tainted:Boolean):void {
 			outputText("\n\nYour cock fills to its normal size and begins growing... ", false);
 			temp3 = player.cocks[0].thickenCock(1);
 			temp2 = player.cocks[0].growCock(rand(3)+2);
-			lengthChange(temp2, 1);
+			player.lengthChange(temp2, 1);
 			//Display the degree of thickness change.
 			if(temp3 >= 1) {
 				if(player.cocks.length == 1) outputText("  Your cock spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -474,7 +305,7 @@ public function incubiDraft(tainted:Boolean):void {
 		//Shrink breasts a more
 		//TIT CHANGE 50% chance of shrinkage
 		if(rand(2) == 0) {
-			shrinkTits();
+			player.shrinkTits();
 		}
 	}
 	//High level change
@@ -490,12 +321,12 @@ public function incubiDraft(tainted:Boolean):void {
 				growDemonCock(1);
 			}
 		}
-		shrinkTits();
-		shrinkTits();
+		player.shrinkTits();
+		player.shrinkTits();
 	}
 	//Demonic changes - higher chance with higher corruption.
 	if(rand(40) + player.cor/3 > 35 && tainted) demonChanges();
-	genderCheck();
+	player.genderCheck();
 	if(rand(4) == 0 && tainted) outputText(player.modFem(5,2), false);
 	if(rand(4) == 0 && tainted) outputText(player.modThickness(30,2), false);
 }
@@ -624,9 +455,9 @@ public function minotaurCum(player:Player):void {
 		dynStats("lib", 1, "lus", rand(5)+player.cor/20+flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER]/5);
 	}
 	//(Healing – if hurt and uber-addicted (hasperk))
-	if(player.HP < maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
+	if(player.HP < player.maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
 		outputText("\n\nThe fire of your arousal consumes your body, leaving vitality in its wake.  You feel much better!", false);
-		HPChange(int(maxHP()/4), false);
+		HPChange(int(player.maxHP()/4), false);
 	}
 	//Uber-addicted status!
 	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0) {
@@ -775,7 +606,7 @@ public function minotaurBlood(player:Player):void {
 				player.cocks[0].cockType = CockTypesEnum.HORSE;
 				player.clitLength = .25;
 			}
-			genderCheck();
+			player.genderCheck();
 		}
 		changes++;
 	}
@@ -878,7 +709,7 @@ public function minotaurBlood(player:Player):void {
 			//Text for humandicks or others
 			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
 			//Text for dogdicks
-			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 			player.cocks[0].cockType = CockTypesEnum.HORSE;
 			player.increaseCock(4, 0);
 			dynStats("lib", 5, "sen", 4, "lus", 35);
@@ -1225,20 +1056,20 @@ public function equinum(player:Player):void {
 				}
 				if(player.cocks[0].cockType == CockTypesEnum.DOG) {
 					temp = player.addHorseCock();
-					outputText("\n\nYour " + dogDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+					outputText("\n\nYour " + Appearance.dogDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 					temp = player.addHorseCock();
-					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 				}
 				if(player.cocks[0].cockType.Index > 4) {
-					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp = player.addHorseCock();
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
@@ -1315,11 +1146,11 @@ public function equinum(player:Player):void {
 			}
 			temp = temp3;
 			player.cocks[temp].thickenCock(.5);
-			outputText("\n\nYour " + horseDescript(temp) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right", false);
-			if(player.cor + player.lib < 50) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + horseDescript(temp) + " plowing them relentlessly, stuffing them pregnant with cum", false);
+			outputText("\n\nYour " + Appearance.horseDescript(temp) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right", false);
+			if(player.cor + player.lib < 50) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.horseDescript(temp) + " plowing them relentlessly, stuffing them pregnant with cum", false);
 			if(player.cor + player.lib >= 50 && player.cor + player.lib < 80) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum", false);
-			if(player.cor + player.lib >= 75 &&  player.cor + player.lib <= 125) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + horseDescript(temp) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..", false);
-			if(player.cor + player.lib > 125) outputText(" to whinny loudly like a rutting stallion.  Your " + horseDescript(temp) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.", false);
+			if(player.cor + player.lib >= 75 &&  player.cor + player.lib <= 125) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + Appearance.horseDescript(temp) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..", false);
+			if(player.cor + player.lib > 125) outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.horseDescript(temp) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.", false);
 			outputText(".", false);
 			if(player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.", false);
 			if(player.cor >=30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.", false);
@@ -1609,7 +1440,7 @@ public function succubiMilk(tainted:Boolean):void {
 			if(player.breastRows[0].breastRating < 6 && rand(5) == 0) temp++;
 		}
 		outputText("\n\n", false);
-		growTits(temp, player.breastRows.length, true, 3);
+		player.growTits(temp, player.breastRows.length, true, 3);
 		if(player.breastRows.length == 0) {
 			outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.", false);
 			player.createBreastRow();
@@ -1638,10 +1469,10 @@ public function succubiMilk(tainted:Boolean):void {
 			}
 			temp3 += player.cocks[temp].growCock((rand(3)+1)*-1);
 			outputText("\n\n", false);
-			lengthChange(temp3, 1);
+			player.lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 2) {
 				outputText("  ", false);
-				killCocks(1);
+				player.killCocks(1);
 			}
 		}
 	}
@@ -1673,10 +1504,10 @@ public function succubiMilk(tainted:Boolean):void {
 				temp3 -= .5;
 			}
 			temp3 = player.cocks[temp].growCock(-1 *(rand(3)+1));
-			lengthChange(temp3, 1);
+			player.lengthChange(temp3, 1);
 			if(player.cocks[temp].cockLength < 3) {
 				outputText("  ", false);
-				killCocks(1);
+				player.killCocks(1);
 			}
 		}
 		if(player.vaginas.length > 0) {
@@ -1758,7 +1589,7 @@ public function succubiMilk(tainted:Boolean):void {
 		outputText(player.modFem(90,1), false);
 		if(rand(3) == 0) outputText(player.modTone(20,2), false);
 	}
-	genderCheck();
+	player.genderCheck();
 }
 //1-Oversized Pepper (+size, thickness)
 //2-Double Pepper (+grows second cock or changes two cocks to dogcocks)
@@ -1947,7 +1778,7 @@ public function caninePepper(type:Number = 0):void {
 				}
 			}
 		}
-		genderCheck();
+		player.genderCheck();
 	}
 	//Knotty knot pepper!
 	if(type == 4) {
@@ -1978,9 +1809,9 @@ public function caninePepper(type:Number = 0):void {
 				if(player.cocks[temp2].knotMultiplier >= 2) temp3   /= 5;
 				player.cocks[temp2].knotMultiplier += (temp3);
 				outputText("\n\n", false);
-				if(temp3 < .06) outputText("Your " + dogDescript(temp2) + " feels unusually tight in your sheath as your knot grows.", false);
-				if(temp3 >= .06 && temp3 <= .12) outputText("Your " + dogDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.", false);
-				if(temp3 > .12) outputText("Your " + dogDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.", false);
+				if(temp3 < .06) outputText("Your " + Appearance.dogDescript(temp2) + " feels unusually tight in your sheath as your knot grows.", false);
+				if(temp3 >= .06 && temp3 <= .12) outputText("Your " + Appearance.dogDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.", false);
+				if(temp3 > .12) outputText("Your " + Appearance.dogDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.", false);
 				dynStats("sen", .5, "lus", 5*crit);
 			}
 			//Grow dogdick with big knot
@@ -2067,12 +1898,12 @@ public function caninePepper(type:Number = 0):void {
 			//Talk about it
 			//Hooooman
 			if(player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
-				outputText("\n\nYour " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(temp3) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
+				outputText("\n\nYour " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.dogDescript(temp3) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
 				dynStats("sen", 10, "lus", 5*crit);
 			}
 			//Horse
 			if(player.cocks[temp3].cockType == CockTypesEnum.HORSE) {
-				outputText("\n\nYour " + horseDescript(temp3) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
+				outputText("\n\nYour " + Appearance.horseDescript(temp3) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[temp3].cockLength > 6) player.cocks[temp3].cockLength -= 2;
 				else player.cocks[temp3].cockLength -= .5;
@@ -2291,7 +2122,7 @@ public function caninePepper(type:Number = 0):void {
 			//break1
 			if(player.cor < 33 || !player.hasCock()) outputText("\nYou shake your head to clear the unwanted fantasy from your mind, repulsed by it.", false);
 			else {
-				outputText("  Heart pounding, your shaft pops free of its sheath on instinct, as you take off after the new scent.  Caught firmly in the grip of a female's heat, you ignore your master's cry as you disappear into the wild, " + dogDescript(0) + " growing harder as you near your quarry.  You burst through a bush, spotting a white-furred female.  She drops, exposing her dripping fem-sex to you, the musky scent of her sex channeling straight through your nose and sliding into your " + dogDescript(0) + ".", false);
+				outputText("  Heart pounding, your shaft pops free of its sheath on instinct, as you take off after the new scent.  Caught firmly in the grip of a female's heat, you ignore your master's cry as you disappear into the wild, " + Appearance.dogDescript(0) + " growing harder as you near your quarry.  You burst through a bush, spotting a white-furred female.  She drops, exposing her dripping fem-sex to you, the musky scent of her sex channeling straight through your nose and sliding into your " + Appearance.dogDescript(0) + ".", false);
 				dynStats("lus", 5 + player.lib/20);
 				//Break 2
 				if(player.cor < 66) outputText("\nYou blink a few times, the fantasy fading as you master yourself.  That daydream was so strange, yet so hot.", false);
@@ -2304,7 +2135,7 @@ public function caninePepper(type:Number = 0):void {
 						else outputText("\nYou reluctantly pry your hand from your aching " + cockDescript(0) + " as you drag yourself out of your fantasy.", false);
 					}
 					else {
-						outputText("  At last your knot pops into her juicy snatch, splattering her groin with a smattering of her arousal.  The scents of your mating reach a peak as the velvet vice around your " + dogDescript(0) + " quivers in the most indescribably pleasant way.  You clamp down on her hide as your whole body tenses, unleashing a torrent of cum into her sex.  Each blast is accompanied by a squeeze of her hot passage, milking you of the last of your spooge.  Your " + player.legs() + " give out as your fantasy nearly brings you to orgasm, the sudden impact with the ground jarring you from your daydream.", false);
+						outputText("  At last your knot pops into her juicy snatch, splattering her groin with a smattering of her arousal.  The scents of your mating reach a peak as the velvet vice around your " + Appearance.dogDescript(0) + " quivers in the most indescribably pleasant way.  You clamp down on her hide as your whole body tenses, unleashing a torrent of cum into her sex.  Each blast is accompanied by a squeeze of her hot passage, milking you of the last of your spooge.  Your " + player.legs() + " give out as your fantasy nearly brings you to orgasm, the sudden impact with the ground jarring you from your daydream.", false);
 						dynStats("lus", 5 + player.lib/20);
 					}
 				}
@@ -2471,7 +2302,7 @@ public function impFood(player:Player):void {
 		if(player.cocks[0].cockLength < 12) {
 			temp = player.increaseCock(rand(2) + 2, 0);
 			outputText("\n\n", false);
-			lengthChange(temp, 1);
+			player.lengthChange(temp, 1);
 		}
 		outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
 		HPChange(30 + player.tou/3, true);
@@ -2836,34 +2667,14 @@ public function succubisDream(player:Player):void {
 }
 
 public function greenGel(player:Player):void {
-	var changes:Number = 0;
 	outputText("You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.", true);
-	//You can't use it!
-	if(!debug) {
-		shortName = "GreenGl";
-		takeItem();
-		itemSwapping = true;
-	}
 }
 public function toughSpiderSilk(player:Player):void {
-	var changes:Number = 0;
 	outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.", true);
-	//You can't use it!
-	if(!debug) {
-		shortName = "T.SSilk";
-		takeItem();
-		itemSwapping = true;
-	}
 }
 
 public function chitinUseless(player:Player):void {
 	outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
-	//You can't use it!
-	if(!debug) {
-		shortName = "B.Chitn";
-		takeItem();
-		itemSwapping = true;
-	}
 }
 //Oviposition Elixer!
 /*
@@ -2928,8 +2739,7 @@ public function ovipositionElixer(player:Player):void {
 	else {
 		outputText("You pop the cork and prepare to drink the stuff, but the smell nearly makes you gag.  You cork it hastily.\n\n", true);
 		if(!debug) {
-			shortName = "OviElix";
-			takeItem();
+			inventory.takeItem(consumables.OVIELIX);
 			itemSwapping = true;
 		}
 	}
@@ -2972,9 +2782,9 @@ public function pinkEgg(large:Boolean):void {
 	if(!large) {
 		//Remove a dick
 		if(player.cocks.length > 0) {
-			killCocks(1);
+			player.killCocks(1);
 			outputText("\n\n", false);
-			genderCheck()
+			player.genderCheck()
 		}
 		//remove balls
 		if(player.balls > 0) {
@@ -2998,9 +2808,9 @@ public function pinkEgg(large:Boolean):void {
 	else {
 		//Remove a dick
 		if(player.cocks.length > 0) {
-			killCocks(-1);
+			player.killCocks(-1);
 			outputText("\n\n", false);
-			genderCheck();
+			player.genderCheck();
 		}
 		if(player.balls > 0) {
 			player.balls = 0;
@@ -3029,7 +2839,7 @@ public function blueEgg(large:Boolean):void {
 			outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 			player.removeVagina(0,1);
 			player.clitLength = .5;
-			genderCheck();
+			player.genderCheck();
 		}
 		//Dickz
 		if(player.cocks.length > 0) {
@@ -3042,7 +2852,7 @@ public function blueEgg(large:Boolean):void {
 					temp2 = player.cocks[temp].growCock(rand(3)+2);
 					temp3 = player.cocks[temp].thickenCock(1);
 				}
-				lengthChange(temp2, player.cocks.length);
+				player.lengthChange(temp2, player.cocks.length);
 				//Display the degree of thickness change.
 				if(temp3 >= 1) {
 					if(player.cocks.length == 1) outputText("\n\nYour " + multiCockDescriptLight() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -3063,7 +2873,7 @@ public function blueEgg(large:Boolean):void {
 				outputText("\n\nYour " + multiCockDescript() + " fills to its normal size... and begins growing... ", false);
 				temp3 = player.cocks[0].thickenCock(1);
 				temp2 = player.cocks[0].growCock(rand(3)+2);
-				lengthChange(temp2, 1);
+				player.lengthChange(temp2, 1);
 				//Display the degree of thickness change.
 				if(temp3 >= 1) {
 					if(player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -3092,7 +2902,7 @@ public function blueEgg(large:Boolean):void {
 			if(player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 			player.removeVagina(0,1);
 			player.clitLength = .5;
-			genderCheck();
+			player.genderCheck();
 		}
 		//Kill extra boobages
 		if(player.bRows() > 1) {
@@ -3112,7 +2922,7 @@ public function blueEgg(large:Boolean):void {
 			player.hipRating -= 2;
 		}
 		//Shrink tits!
-		if(player.biggestTitSize() > 0) shrinkTits();
+		if(player.biggestTitSize() > 0) player.shrinkTits();
 		if(player.cocks.length > 0) {
 			//Multiz
 			if(player.cocks.length > 1) {
@@ -3123,7 +2933,7 @@ public function blueEgg(large:Boolean):void {
 					temp2 = player.cocks[temp].growCock(rand(3)+5);
 					temp3 = player.cocks[temp].thickenCock(1.5);
 				}
-				lengthChange(temp2, player.cocks.length);
+				player.lengthChange(temp2, player.cocks.length);
 				//Display the degree of thickness change.
 				if(temp3 >= 1) {
 					if(player.cocks.length == 1) outputText("\n\nYour " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -3144,7 +2954,7 @@ public function blueEgg(large:Boolean):void {
 				outputText("\n\nYour " + multiCockDescript() + " fills to its normal size...and begins growing...", false);
 				temp3 = player.cocks[0].thickenCock(1.5);
 				temp2 = player.cocks[0].growCock(rand(3)+5);
-				lengthChange(temp2, 1);
+				player.lengthChange(temp2, 1);
 				//Display the degree of thickness change.
 				if(temp3 >= 1) {
 					if(player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
@@ -3311,541 +3121,8 @@ public function hairDye(color:String):void {
 		dynStats("lus", -15);
 	}
 }
-//Store - let you select an item slot, then a storage slot.
-public function pickItemToStorage(player:Player):void {
-	var temp2:Number = 0;
-	var temp1:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	//Reset temp2;
-	temp2 = 0;
-	hideUpDown();
-	if(itemSlot1.quantity > 0) temp1 = 1023;
-	if(itemSlot2.quantity > 0) temp2 = 1024;
-	if(itemSlot3.quantity > 0) temp3 = 1025;
-	if(itemSlot4.unlocked && itemSlot4.quantity > 0) temp4 = 1026;
-	if(itemSlot5.unlocked && itemSlot5.quantity > 0) temp5 = 1027;
-	outputText("What item slot do you wish to empty into your storage containers?", true);
-	choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
-	menuLoc = 7;
-}
-//Retrieval List - lets you select the correct slot
-public function chooseRetrievalSlot(player:Player):void {
-	if(!hasItemsInStorage()) {
-		eventParser(1);
-		return;
-	}
-	var temp2:Number = 0;
-	var temp1:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	var temp6:Number = 0;
-	var temp7:Number = 0;
-	var temp8:Number = 0;
-	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
-	temp = itemStorage.length;
-	while(temp > 0) {
-		temp--;
-		if(itemStorage[temp].quantity > 0) {
-			if(temp == 0) temp1 = 1030;
-			if(temp == 1) temp2 = 1031;
-			if(temp == 2) temp3 = 1032;
-			if(temp == 3) temp4 = 1033;
-			if(temp == 4) temp5 = 1034;
-			if(temp == 5) temp6 = 1035;
-			if(temp == 6) temp7 = 1036;
-			if(temp == 7) temp8 = 1037;
-			slotDescs[temp] = (itemStorage[temp].shortName + " x" + itemStorage[temp].quantity);
-		}
-	}
-	hideUpDown();
-	outputText("What storage slot do you wish to take an item from?", true);
-	choices(slotDescs[0], temp1, slotDescs[1], temp2, slotDescs[2], temp3, slotDescs[3], temp4, "", 0, slotDescs[4], temp5, slotDescs[5], temp6, slotDescs[6], temp7, slotDescs[7], temp8, "Back", 2951);
-	menuLoc = 7;
-}
-//Grab an item from the selected slot.
-public function retrieveFromStorage(slotNum:Number):void {
-	if(itemStorage[slotNum].quantity == 0) {
-		outputText("That slot is empty.", true);
-		return;
-	}
-	itemStorage[slotNum].quantity--;
-	shortName = itemStorage[slotNum].shortName;
-	if(itemStorage[slotNum].quantity == 0) itemStorage[slotNum].shortName = "";
-	outputText("", true);
-	doNext(1029);
-	menuLoc = 7;
-	takeItem();
-}
-//Check to see if anything is stored
-public function hasItemsInStorage():Boolean {
-	temp = itemStorage.length;
-	while(temp > 0) {
-		temp--;
-		if(itemStorage[temp].quantity > 0) return true;
-	}
-	return false;
-}
-public function hasItemInStorage(item:String = ""):Boolean {
-	temp = itemStorage.length;
-	while(temp > 0) {
-		temp--;
-		if(itemStorage[temp].shortName == item && itemStorage[temp].quantity > 0) return true;
-	}
-	return false;
-}
-public function consumeItemInStorage(item:String = ""):Boolean {
-	temp = itemStorage.length;
-	while(temp > 0) {
-		temp--;
-		if(itemStorage[temp].shortName == item && itemStorage[temp].quantity > 0) {
-			itemStorage[temp].quantity--;
-			if(itemStorage[temp].quantity <= 0) itemStorage[temp].shortName = "";
-			return true;
-		}
-	}
-	return false;
-}
-//Place item slot into the first dump spot.
-public function placeInStorage(slotNum:Number):void {
-	outputText("", true);
-	var shortStorage:String = "";
-	var shortQuantity:Number = 0;
-	var currentStorageSlotIndex:Number = 0;
-	//Load the item stats from the slot that's being emptied, and empty the slot.
-	if(slotNum == 1)
-	{
-		shortQuantity = itemSlot1.quantity;
-		shortStorage = itemSlot1.shortName;
-		itemSlot1.emptySlot();
-	}
-	else if(slotNum == 2)
-	{
-		shortQuantity = itemSlot2.quantity;
-		shortStorage = itemSlot2.shortName;
-		itemSlot2.emptySlot();
-	}
-	else if(slotNum == 3)
-	{
-		shortQuantity = itemSlot3.quantity;
-		shortStorage = itemSlot3.shortName;
-		itemSlot3.emptySlot();
-	}
-	else if(slotNum == 4)
-	{
-		shortQuantity = itemSlot4.quantity;
-		shortStorage = itemSlot4.shortName;
-		itemSlot4.emptySlot();
-	}
-	else if(slotNum == 5)
-	{
-		shortQuantity = itemSlot5.quantity;
-		shortStorage = itemSlot5.shortName;
-		itemSlot5.emptySlot();
-	}
-	//Place in the first free slot
-	currentStorageSlotIndex = 0;
-	var storedItems:Number = 0;
-
-	//Check for slots with free space for the item.  If so fill them and move on
-	//until out of items to place
-	while(currentStorageSlotIndex < itemStorage.length && shortQuantity > 0)
-	{
-		//If there is a slot with the item and room
-		if(itemStorage[currentStorageSlotIndex].shortName == shortStorage && itemStorage[currentStorageSlotIndex].quantity < 5)
-		{
-			//storedItems is used for counting items placed in a slot.
-			storedItems = 0;
-			//Place items in 1 at a time until out of room or items
-			while(itemStorage[currentStorageSlotIndex].quantity < 5 && shortQuantity > 0)
-			{
-				shortQuantity--;
-				itemStorage[currentStorageSlotIndex].quantity++;
-				storedItems++;
-			}
-			if(storedItems > 0) outputText("You add " + storedItems + "x " + shortStorage + " into storage slot number " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
-		}
-		currentStorageSlotIndex++;
-	}
-	//Talk about items if they're all gone.
-	currentStorageSlotIndex = 0;
-	//check if a suitable slot is found.  If so, load in, and quit out.
-	while(currentStorageSlotIndex < itemStorage.length && shortQuantity > 0)
-	{
-		if(itemStorage[currentStorageSlotIndex].quantity == 0 && itemStorage[currentStorageSlotIndex].shortName == "")
-		{
-			itemStorage[currentStorageSlotIndex].placeItemWQuantity(shortQuantity, shortStorage);
-			outputText("You place " + shortQuantity + "x " + shortStorage + " into storage slot " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
-			currentStorageSlotIndex = 17;
-			shortQuantity = 0;
-		}
-		currentStorageSlotIndex++;
-	}
-	if(shortQuantity > 0)
-	{
-		outputText("There is no room for the remaining " + shortQuantity + "x " + shortStorage + ".  You leave it in your inventory.\n", false);
-		//Put remaining back in slot.
-		if(slotNum == 1) {
-			itemSlot1.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 2) {
-			itemSlot2.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 3) {
-			itemSlot3.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 4) {
-			itemSlot4.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 5) {
-			itemSlot5.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-	}
-	doNext(1028);
-}
-
-//Place item slot into the first dump spot.
-public function placeInRacks(slotNum:Number, armor:Boolean = false):void {
-	outputText("", true);
-	var shortStorage:String = "";
-	var shortQuantity:Number = 0;
-	var temp2:Number = 0;
-	//Load the item stats from the slot that's being emptied, and empty the slot.
-	if(slotNum == 1) {
-		shortQuantity = itemSlot1.quantity;
-		shortStorage = itemSlot1.shortName;
-		itemSlot1.emptySlot()
-	}
-	if(slotNum == 2) {
-		shortQuantity = itemSlot2.quantity;
-		shortStorage = itemSlot2.shortName;
-		itemSlot2.emptySlot()
-	}
-	if(slotNum == 3) {
-		shortQuantity = itemSlot3.quantity;
-		shortStorage = itemSlot3.shortName;
-		itemSlot3.emptySlot()
-	}
-	if(slotNum == 4) {
-		shortQuantity = itemSlot4.quantity;
-		shortStorage = itemSlot4.shortName;
-		itemSlot4.emptySlot()
-	}
-	if(slotNum == 5) {
-		shortQuantity = itemSlot5.quantity;
-		shortStorage = itemSlot5.shortName;
-		itemSlot5.emptySlot()
-	}
-	//Place in the first free slot
-	temp = 0;
-	var goal:Number = 9;
-	if(armor) {
-		temp = 9;
-		goal = 18;
-	}
-	//Check for slots with free space for the item.  If so fill them and move on
-	//until out of items to place
-	while(temp < goal && shortQuantity > 0) {
-		//If there is a slot with the item and room
-		if(gearStorage[temp].shortName == shortStorage && gearStorage[temp].quantity < 5) {
-			//temp2 is used for counting items placed in a slot.
-			temp2 = 0;
-			//Place items in 1 at a time until out of room or items
-			while(gearStorage[temp].quantity < 5 && shortQuantity > 0) {
-				shortQuantity--;
-				gearStorage[temp].quantity++;
-				temp2++;
-			}
-			if(temp2 > 0) outputText("You add " + temp2 + "x " + shortStorage + " into storage slot number ", false);
-			if(!armor) outputText(num2Text(temp+1) + ".\n", false);
-			else outputText(num2Text(temp - 8) + ".\n", false);
-		}
-		temp++;
-	}
-	//Talk about items if they're all gone.
-	temp = 0;
-	goal = 9;
-	if(armor) {
-		temp = 9;
-		goal = 18;
-	}
-	//check if a suitable slot is found.  If so, load in, and quit out.
-	while(temp < goal && shortQuantity > 0) {
-		if(gearStorage[temp].quantity == 0 && gearStorage[temp].shortName == "") {
-			gearStorage[temp].quantity = shortQuantity;
-			gearStorage[temp].shortName = shortStorage;
-			outputText("You place " + shortQuantity + "x " + shortStorage + " into storage slot ", false);
-			if(!armor) outputText(num2Text(temp+1) + ".\n", false);
-			else outputText(num2Text(temp - 8) + ".\n", false);
-			temp = 25;
-			shortQuantity = 0;
-		}
-		temp++;
-	}
-	if(shortQuantity > 0) {
-		outputText("There is no room for the remaining " + shortQuantity + "x " + shortStorage + ".  You leave it in your inventory.\n", false);
-		//Put remaining back in slot.
-		if(slotNum == 1) {
-			itemSlot1.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 2) {
-			itemSlot2.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 3) {
-			itemSlot3.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 4) {
-			itemSlot4.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-		if(slotNum == 5) {
-			itemSlot5.placeItemWQuantity(shortQuantity, shortStorage);
-		}
-	}
-	if(!armor) doNext(1090);//1028);
-	else doNext(1106);
-}
-
-//Check to see if anything is stored in racks
-public function hasItemsInRacks(armor:Boolean = false):Boolean {
-	var goal:Number = 0;
-	if(armor) goal = 9;
-	temp = gearStorage.length;
-	if(!armor) temp = 9;
-	while(temp > goal) {
-		temp--;
-		if(gearStorage[temp].quantity > 0) return true;
-	}
-	return false;
-}
-//Grab an item from the selected weapon slot.
-public function retrieveFromRacks(slotNum:Number,armor:Boolean = false):void {
-	if(armor) slotNum += 9;
-	if(gearStorage[slotNum].quantity == 0) {
-		outputText("That slot is empty.", true);
-		return;
-	}
-	gearStorage[slotNum].quantity--;
-	shortName = gearStorage[slotNum].shortName;
-	if(gearStorage[slotNum].quantity == 0) gearStorage[slotNum].shortName = "";
-	outputText("", true);
-	if(!armor) {
-		doNext(1091);//1029);
-		menuLoc = 21;
-	}
-	else {
-		doNext(1107);
-		menuLoc = 23;
-	}
-	takeItem();
-}
-
-//Retrieval List - lets you select the correct gear slot
-public function chooseRacksSlot(armor:Boolean = false):void {
-	/*if(!hasItemsInGearStorage()) {
-		eventParser(1);
-		return;
-	}*/
-	var temp2:Number = 0;
-	var temp1:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	var temp6:Number = 0;
-	var temp7:Number = 0;
-	var temp8:Number = 0;
-	var temp9:Number = 0;
-	var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
-	//Set goals
-	var goal:Number = 0;
-	if(armor) goal = 9;
-	//This modifies the event numbers for armor rack.
-	var bonus:Number = 0;
-	if(armor) bonus = 16;
-	//Set loop starting place
-	if(armor) temp = 18;
-	else temp = 9;
-	while(temp > goal) {
-		temp--;
-		trace("TEMP: " + temp);
-		if(gearStorage[temp].quantity > 0) {
-			if(temp == 0 || temp == 9) temp1 = 1092 + bonus;
-			if(temp == 1 || temp == 10) temp2 = 1093 + bonus;//1031;
-			if(temp == 2 || temp == 11) temp3 = 1094 + bonus;
-			if(temp == 3 || temp == 12) temp4 = 1095 + bonus;
-			if(temp == 4 || temp == 13) temp5 = 1096 + bonus;
-			if(temp == 5 || temp == 14) temp6 = 1097 + bonus;
-			if(temp == 6 || temp == 15) temp7 = 1098 + bonus;
-			if(temp == 7 || temp == 16) temp8 = 1099 + bonus;
-			if(temp == 8 || temp == 17) temp9 = 1100 + bonus;
-			if(!armor) slotDescs[temp] = (gearStorage[temp].shortName + " x" + gearStorage[temp].quantity);
-			else slotDescs[(temp-9)] = (gearStorage[temp].shortName + " x" + gearStorage[temp].quantity);
-		}
-	}
-	hideUpDown();
-	outputText("What rack slot do you wish to take an item from?", true);
-	if(temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7 + temp8 == 0) {
-		outputText("\n<b>You have no items stored in this ", false);
-		if(!armor) outputText("weapon ", false);
-		else outputText("armor ", false);
-		outputText("rack.</b>", false);
-	}
-	choices(slotDescs[0], temp1, slotDescs[1], temp2, slotDescs[2], temp3, slotDescs[3], temp4, slotDescs[4], temp5, slotDescs[5], temp6, slotDescs[6], temp7, slotDescs[7], temp8, slotDescs[8], temp9, "Back", 2951);
-	if(!armor) menuLoc = 21;
-	else menuLoc = 23;
-}
-//Store - let you select an item slot, then a weapon slot.
-public function pickItemToRacks(armor:Boolean = false):void {
-	var temp2:Number = 0;
-	var temp1:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	var bonus:Number = 0;
-	if(armor) bonus = 16;
-	hideUpDown();
-	if(!armor) {
-		if(itemSlot1.quantity > 0 && isWeapon(itemSlot1.shortName)) temp1 = 1085 + bonus;
-		if(itemSlot2.quantity > 0 && isWeapon(itemSlot2.shortName)) temp2 = 1086 + bonus;
-		if(itemSlot3.quantity > 0 && isWeapon(itemSlot3.shortName)) temp3 = 1087 + bonus;
-		if(itemSlot4.unlocked && itemSlot4.quantity > 0 && isWeapon(itemSlot4.shortName)) temp4 = 1088 + bonus;
-		if(itemSlot5.unlocked && itemSlot5.quantity > 0 && isWeapon(itemSlot5.shortName)) temp5 = 1089 + bonus;
-	}
-	else {
-		if(itemSlot1.quantity > 0 && isArmor(itemSlot1.shortName)) temp1 = 1085 + bonus;
-		if(itemSlot2.quantity > 0 && isArmor(itemSlot2.shortName)) temp2 = 1086 + bonus;
-		if(itemSlot3.quantity > 0 && isArmor(itemSlot3.shortName)) temp3 = 1087 + bonus;
-		if(itemSlot4.unlocked && itemSlot4.quantity > 0 && isArmor(itemSlot4.shortName)) temp4 = 1088 + bonus;
-		if(itemSlot5.unlocked && itemSlot5.quantity > 0 && isArmor(itemSlot5.shortName)) temp5 = 1089 + bonus;
-	}
-	outputText("What item slot do you wish to empty into your ", true);
-	if(!armor) outputText("weapon rack", false);
-	else outputText("armor rack", false);
-	outputText("?", false);
-	if(temp1 + temp2 + temp3 + temp4 + temp5 == 0) outputText("\n<b>You have no appropriate items to put in this rack.</b>", false);
-	choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
-	if(!armor) menuLoc = 20;
-	else menuLoc = 22;
-}
 
 
-//Determine how to continue after using items or running from the items menu.
-public function itemGoNext(player:Player):void {
-	trace("ITEM GO NEXT HAPPENZ BITCHES" + String(itemSwapping));
-	//If at giacomo go back to him afterwards
-	if(gameState == 4) {
-		doNext(2015);
-		return;
-	}
-	//If at alchemist go back to him afterwards
-	if(gameState == 6) {
-		doNext(2070);
-		return;
-	}
-	//Go back to item storage screen if there
-	if(menuLoc == 7) {
-		doNext(1029);
-		return;
-	}
-	//If finding a pepper at the farm, pass 2 hours
-	if(gameState == 8) {
-		doNext(14);
-		return;
-	}
-	//Tailor shop
-	if(menuLoc == 10) {
-		doNext(telAdre.tailorShoppe);
-		return;
-	}
-	//Armor shop
-	if(menuLoc == 9) {
-		doNext(telAdre.armorShop);
-		return;
-	}
-	if(menuLoc == 11) {
-		doNext(41);
-		return;
-	}
-	//Lumi's potion shop
-	if(menuLoc == 12) {
-		doNext(lumi.lumiShop);
-		return;
-	}
-	//Lumi's enhancement shop
-	if(menuLoc == 13) {
-		doNext(lumi.lumiEnhance);
-		return;
-	}
-	//Late night looting
-	if(menuLoc == 14) {
-		doNext(1);
-		return;
-	}
-	//Weapon shop
-	if(menuLoc == 15) {
-		doNext(telAdre.weaponShop);
-		return;
-	}
-	if(menuLoc == 16) {
-		doNext(2642);
-		return;
-	}
-	if(menuLoc == 17) {
-		doNext(15);
-		return;
-	}
-	if(menuLoc == 18) {
-		doNext(16);
-		return;
-	}
-	if(menuLoc == 19) {
-		doNext(telAdre.bakeryScene.bakeryuuuuuu);
-		return;
-	}
-	if(menuLoc == 20) {
-		doNext(1090);
-		return;
-	}
-	if(menuLoc == 21) {
-		doNext(1091);
-		return;
-	}
-	if(menuLoc == 22) {
-		doNext(1106);
-		return;
-	}
-	if(menuLoc == 23) {
-		doNext(1107);
-		return;
-	}
-	if(menuLoc == 24) {
-		doNext(telAdre.barTelAdre);
-		return;
-	}
-	if(menuLoc == 25) {
-		doNext(owca.owcaTavern);
-		return;
-	}
-	if(menuLoc == 26) {
-		doNext(bazaar.benoit.benoitsBuyMenu);
-		return;
-	}
-	if(menuLoc == 27) {
-		doNext(chickenHarpy);
-		return;
-	}
-	if(menuLoc == 28) {
-		doNext(1000);
-		return;
-	}
-	if(menuLoc == 29) {
-		doNext(telAdre.bakeryScene.ingredientsMenu);
-		return;
-	}
-	if(menuLoc == 2) doNext(13);
-	else doNext(1);
-}
 
 public function purePearl(player:Player):void {
 	outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.", true);
@@ -3865,7 +3142,7 @@ public function growPlus(player:Player):void {
 	if(player.breastRows.length > 0) breastEvent = 1040;
 	var cockEvent:Number = 0;
 	if(player.cockTotal() > 0) cockEvent = 1042;
-	itemSubMenu = true;
+	kGAMECLASS.itemSubMenu = true;
 	outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ", true);
 	choices("Balls", ballsEvent, "Breasts",breastEvent,"Clit",clitEvent,"Cock", cockEvent,"Nipples", nipplesEvent,"",0,"",0,"",0,"",0,"Nevermind",1038);
 }
@@ -3884,7 +3161,7 @@ public function reducto(player:Player):void {
 	if(player.buttRating > 1) buttEvent = 1071;
 	var hipEvent:int = 0;
 	if(player.hipRating > 2) hipEvent = 1122;
-	itemSubMenu = true;
+	kGAMECLASS.itemSubMenu = true;
 	outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?", true);
 	choices("Balls",  ballsEvent, "Breasts",breastEvent,"Butt",buttEvent,"Clit",clitEvent,"Cock", cockEvent,"Hips",hipEvent,"Nipples",nippleEvent,"",0,"",0,"Nevermind",1053);
 }
@@ -3897,8 +3174,8 @@ public function lactaid(player:Player):void {
 	//Bump up size!
 	if(player.averageBreastSize() < 8) {
 		outputText("\n\n", false);
-		if(player.breastRows.length == 1) growTits((1+rand(5)),1,true,1);
-		else growTits(1+rand(2),player.breastRows.length,true,1);
+		if(player.breastRows.length == 1) player.growTits((1+rand(5)),1,true,1);
+		else player.growTits(1+rand(2),player.breastRows.length,true,1);
 	}
 	//Player doesn't lactate
 	if(player.biggestLactation() < 1) {
@@ -3920,20 +3197,6 @@ public function lactaid(player:Player):void {
 	if(rand(3) == 0) {
 		outputText(player.modFem(95,1), false);
 	}
-}
-/*
-v1 = egg type.
-v2 = size - 0 for normal, 1 for large
-v3 = quantity
-EGG TYPES-
-0 - brown - ass expansion
-1 - purple - hip expansion
-2 - blue - vaginal removal and/or growth of existing maleness
-3 - pink - dick removal and/or fertility increase.
-4 - white - breast growth.  If lactating increases lactation.
-5 - rubbery black*/
-public function eggShifter(eggCode:Number):void {
-	if (player.hasStatusAffect("eggs") >= 0) player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
 }
 
 public function useMarbleMilk(player:Player):void {
@@ -3957,7 +3220,7 @@ public function useMarbleMilk(player:Player):void {
 		}
 	}
 	//Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
-	marbleScene.marbleStatusChange(0,5);
+	kGAMECLASS.marbleScene.marbleStatusChange(0,5);
 	//Does not apply the 'Marble's Milk' effect
 	//Purge withdrawl
 	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
@@ -3968,7 +3231,7 @@ public function useMarbleMilk(player:Player):void {
 	//Heals the player 70-100 health
 	HPChange(70 + rand(31), true);
 	//Restores a portion of fatigue (once implemented)
-	changeFatigue(-25);
+	kGAMECLASS.changeFatigue(-25);
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 	if(player.hasStatusAffect("Bottled Milk") >= 0) {
 		player.addStatusValue("Bottled Milk",1,(6+rand(6)));
@@ -4073,7 +3336,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			temp3 -= .5;
 		}
 		temp3 += player.cocks[temp].growCock((rand(3)+1)*-1);
-		lengthChange(temp3, 1);
+		player.lengthChange(temp3, 1);
 		if(player.cocks[temp].cockLength < 2) {
 			outputText("  ", false);
 			if(player.cockTotal() == 1 && !player.hasVagina()) {
@@ -4087,8 +3350,8 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 				player.removeCock(0,1);
 			}
 			else {
-				killCocks(1);
-				genderCheck();
+				player.killCocks(1);
+				player.genderCheck();
 			}
 		}
 		//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -4101,7 +3364,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 			outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
 
 			changes++;
-			genderCheck();
+			player.genderCheck();
 			dynStats("lus", 10);
 		}
 	}
@@ -4112,7 +3375,7 @@ public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 	if(((tainted && player.biggestTitSize() <= 11) || (!tainted && player.biggestTitSize() <= 5)) && changes < changeLimit && (rand(3) == 0 || enhanced)) {
 		if(rand(2) == 0) outputText("\n\nYour " + breastDescript(0) + " tingle for a moment before becoming larger.", false);
 		else outputText("\n\nYou feel a little weight added to your chest as your " + breastDescript(0) + " seem to inflate and settle in a larger size.", false);
-		growTits(1 + rand(3), 1, false, 3);
+		player.growTits(1 + rand(3), 1, false, 3);
 		changes++;
 		dynStats("sen", .5);
 		boobsGrew = true;
@@ -4608,7 +3871,7 @@ public function goblinAle(player:Player):void {
 	//Multidick killa!
 	if(player.totalCocks() > 1 && rand(3) == 0 && changes < changeLimit) {
 		outputText("\n\n", false);
-		killCocks(1);
+		player.killCocks(1);
 		changes++;
 	}
 	//Boost vaginal capacity without gaping
@@ -4636,7 +3899,7 @@ public function goblinAle(player:Player):void {
 				temp3 -= .5;
 			}
 			temp3 += player.cocks[0].growCock((rand(3)+1)*-1);
-			lengthChange(temp3, 1);
+			player.lengthChange(temp3, 1);
 		}
 	}
 	//GENERAL APPEARANCE STUFF BELOW
@@ -4848,7 +4111,7 @@ public function gooGasmic(player:Player):void {
 		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 		player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		player.clitLength = .4;
-		genderCheck();
+		player.genderCheck();
 		return;
 
 	}
@@ -4880,16 +4143,7 @@ public function gooGasmic(player:Player):void {
 	if(rand(2) == 0) outputText(player.modTone(15,5), false);
 }
 
-public function slimeBadEnd(player:Player):void {
-	outputText("One year later...", true);
-	outputText("\n\nThe new champion has managed to escape imprisonment in the demons' sick plots, but the monsters and trials of this land have taken their toll on him.  He undresses and slips into the water, hesitant around his newly enlarged member, but once he slips beneath the soothing waters he forgets all about it all and just relaxes.", false);
-	outputText("\n\nHis reprieve is rudely interrupted as something thick and viscous wraps around his legs, gripping them with vicelike tightness.  He kicks futilely, accomplishing nothing but making the once-champion's goopey body jiggle as it slowly envelops more and more of the young man.  Suspended so that his head barely breaks the surface of the water, his entire body is wrapped up in more and more of the slime.  It curls around his member, slick and moist, gently massaging away his desire to resist.  The new champion relaxes and accepts it, twitching as the slime manages to caress a particularly tender spot.", false);
-	outputText("\n\nThough the situation is incredibly pleasurable to both parties, the slime is merely following its instincts and seeking to fulfill its never ending craving.  For his part, the champion resisted admirably, though perhaps he simply had a high sexual endurance.  Whatever the case, this male doesn't last too long.  His altered sexuality easily accommodates the creature's desires, filling it with spurt after spurt of creamy whiteness, making it stronger for the first time in a long time.  It does not release him once his orgasm concludes.  It milks him again, and again, and again until the champion is unconscious, cradled in the slime's sloppy embrace.", false);
-	outputText("\n\nFilled with new-found vigor, the slime travels up the beach, still holding its captive trapped inside it.  Its body shifts as a half-remembered humanoid form grows out from the blob's surface.  The new body is a parody of its former self, with sexually distorted features and jiggling, globe-like breasts.  It presses the captive's lips against a nipple, allowing him to suckle down a bit of her essence.  He does so instinctively – his parched body seeking relief from the orgasm-induced dehydration afflicting him.", false);
-	outputText("\n\nIn a few hours he awakens, still entirely trapped by the wet-dream of a slime-girl.  His belly is full of her nutritious and corruptive slime, and his cock feels bigger and more sensitive than ever inside her tight embrace.  She squeezes and milks it, gurgling happily.  He cums for her.  Again and again he cums for her.  He can't stop or resist the feeling she gives him as he helplessly orgasms over and over.  She milks him forever, growing stronger, feeding him slime, and gathering incubi drafts and succubi's delight to satiate her ever-growing needs.", false);
-	outputText("\n\nEvery year thereafter the new champion is greeted with a slippery prison.  Forced to orgasm and feed the slime-queen for the rest of their natural life.  Most of them stop minding by the second day, too drunk on her breast-milk and all the drugs she's mixed into it.", false);
-	eventParser(5035);
-}
+
 
 
 
@@ -4945,7 +4199,7 @@ public function sharkTooth(type:Number = 0):void {
 		player.createVagina();
 		player.clitLength = .25;
 		dynStats("sen", 10);
-		genderCheck();
+		player.genderCheck();
 	}
 	//WANG GROWTH - TIGGERSHARK ONLY
 	if(type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -4961,7 +4215,7 @@ public function sharkTooth(type:Number = 0):void {
 		outputText("!", false);
 		player.createCock(7,1.4);
 		dynStats("lib", 4, "sen", 5, "lus", 20);
-		genderCheck();
+		player.genderCheck();
 		changes++;
 	}
 	//(Requires the player having two testicles)
@@ -5163,8 +4417,7 @@ public function extensionSerum(player:Player):void {
 	if(flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
 		outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
 		if(!debug) {
-			shortName = "ExtSerm";
-			takeItem();
+			inventory.takeItem(consumables.EXTSERM);
 		}
 		return;
 	}
@@ -5192,7 +4445,7 @@ public function Hummus(player:Player):void {
 	outputText("", true);
 	if(debug) {
 		outputText("You're about to eat the humus when you see it has bugs in it. Not wanting to eat bugged humus or try to debug it you throw it into the portal and find something else to eat.", false);
-		destroyItems("9999",1);
+		player.destroyItems(consumables.HUMMUS_,1);
 		return;
 	}
 	outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
@@ -5290,18 +4543,6 @@ public function Hummus(player:Player):void {
 	player.vaginaType(0);
 }
 
-
-public function giveHumanizer(player:Player):void {
-	if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
-		outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
-		eventParser(5035);
-		return;
-	}
-	outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
-	shortName = "Hummus ";
-	takeItem();
-	flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
-}
 
 public function coal(player:Player):void {
 	var changes:Number = 0;
@@ -6530,7 +5771,7 @@ public function goldenSeed(type:Number = 0):void {
 		player.createVagina();
 		player.clitLength = .25;
 		dynStats("sen", 10);
-		genderCheck();
+		player.genderCheck();
 	}
 	//-Remove extra breast rows
 	if(changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0) {
@@ -6550,7 +5791,7 @@ public function goldenSeed(type:Number = 0):void {
 	else if(changes < changeLimit && player.breastRows.length == 1 && rand(3) == 0 && player.breastRows[0].breastRating >= 7) {
 		changes++;
 		//(Use standard breast shrinking mechanism if breasts are under 'h')
-		if(player.breastRows[0].breastRating < 19) shrinkTits();
+		if(player.breastRows[0].breastRating < 19) player.shrinkTits();
 		//(H+)
 		else {
 			player.breastRows[0].breastRating -= (4 + rand(4));
@@ -7309,7 +6550,7 @@ public function broBrew(player:Player):void {
 		player.createPerk("Futa Form",0,0,0,0,"");
 		player.createPerk("Futa Faculties",0,0,0,0,"");
 		outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
-		genderCheck();
+		player.genderCheck();
 		return;
 	}
 	//HP restore for bros!
@@ -7393,7 +6634,7 @@ public function broBrew(player:Player):void {
 		outputText("At the same time, your " + vaginaDescript(0) + " burns hot, nearly feeling on fire.  You cuss in a decidedly masculine way for a moment before the pain fades to a dull itch.  Scratching it, you discover your lady-parts are gone.  Only a sensitive patch of skin remains.\n\n", false);
 		player.removeVagina(0,1);
 	}
-	genderCheck();
+	player.genderCheck();
 	//(below max masculinity)
 	if(player.femininity > 0) {
 		outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);
@@ -7606,8 +6847,7 @@ public function bimboLiquer(player:Player):void {
 	if(player.hasPerk("Futa Form") >= 0) {
 		outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n", false);
 		if(!debug) {
-			shortName = "BimboLq";
-			takeItem();
+			inventory.takeItem(consumables.BIMBOLQ);
 			itemSwapping = true;
 		}
 		return;
@@ -7618,8 +6858,7 @@ public function bimboLiquer(player:Player):void {
 		if(player.hasPerk("Bro Brains") >= 0) outputText("that drink is way too girly for a dude as bad as you.\n\n", false);
 		else outputText("you feel sick to the stomache at the thought.  Clearly your bro body isn't compatible with such a feminine drink.\n\n", false);
 		if(!debug) {
-			shortName = "BimboLq";
-			takeItem();
+			inventory.takeItem(consumables.BIMBOLQ);
 			itemSwapping = true;
 		}
 		return;*/
@@ -7783,7 +7022,7 @@ public function bimboLiquer(player:Player):void {
 		//Brain
 		//Max int - 50
 	}
-	genderCheck();
+	player.genderCheck();
 }
 
 //Numb Rocks
@@ -7827,7 +7066,6 @@ public function numbRocks(player:Player):void {
 		else outputText("the skin under your " + player.skinDesc, false);
 		outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>", false);
 		player.createPerk("Thick Skin",0,0,0,0,"Your skin is now tough enough to effectively grant you an extra armor!");
-		player.armorDef += 2;
 	}
 	outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.", false);
 	dynStats("sen", -3);
@@ -7975,7 +7213,7 @@ public function foxTF(enhanced:Boolean = false):void {
 
 	//dog cocks!
 	if(changes < changeLimit && rand(3) == 0 && player.dogCocks() < player.totalCocks()) {
-		var choices:Array = new Array();
+		var choices:Array = [];
 		counter = player.cockTotal();
 		while(counter > 0) {
 			counter--;
@@ -7985,13 +7223,13 @@ public function foxTF(enhanced:Boolean = false):void {
 		if(choices.length != 0) {
 			var select:int = choices[rand(choices.length)];
 			if(player.cocks[select].cockType == CockTypesEnum.HUMAN) {
-				outputText("\n\nYour " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(select) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
+				outputText("\n\nYour " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.dogDescript(select) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
 				player.cocks[select].cockThickness += .3;
 				dynStats("sen", 10, "lus", 5);
 			}
 			//Horse
 			else if(player.cocks[select].cockType == CockTypesEnum.HORSE) {
-				outputText("\n\nYour " + horseDescript(select) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
+				outputText("\n\nYour " + Appearance.horseDescript(select) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[select].cockLength > 6) player.cocks[select].cockLength -= 2;
 				else player.cocks[select].cockLength -= .5;
@@ -8209,7 +7447,7 @@ public function godMead(player:Player):void {
 	dynStats("lib", 1, "cor", -1);
 	//Health/HP(Large increase; always occurs):
 	outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
-	HPChange(Math.round(maxHP() * .33),false);
+	HPChange(Math.round(player.maxHP() * .33),false);
 	if(rand(3) == 0) {
 		outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 		if(silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
@@ -8525,9 +7763,8 @@ public function kitsunesGift(player:Player):void {
 	if(inCombat()) {
 		outputText("You cannot use this item in combat.  ");
 		if(!debug) {
-			shortName = "KitGift";
-			itemSubMenu = true;
-			takeItem();
+			kGAMECLASS.itemSubMenu = true;
+			inventory.takeItem(consumables.KITGIFT);
 		}
 		return;
 	}
@@ -8542,7 +7779,7 @@ public function kitsunesGift(player:Player):void {
 public function kitsuneGiftResult(clear:Boolean = true):void {
 	if(clear)clearOutput();
 	else outputText("\n\n");
-	itemSubMenu = true;
+	kGAMECLASS.itemSubMenu = true;
 	//itemSwapping = true;
 	//Opening the gift randomly results in one of the following:
 	var choice:int = rand(10);
@@ -8551,18 +7788,14 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 	if(choice == 0) {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 		outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-		shortName = "FoxJewl";
-		takeItem();
-		return;
+		inventory.takeItem(consumables.FOXJEWL);
 	}
 	//[Fox Berries]
 	else if(choice == 1) {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
 		outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 		//add Fox Berries to inventory
-		shortName = "FoxBery";
-		takeItem();
-		return;
+		inventory.takeItem(consumables.FOXBERY);
 	}
 	//[Gems]
 	else if(choice == 2) {
@@ -8573,30 +7806,27 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		//add X gems to inventory
 		statScreenRefresh();
 		doNext(1000);
-		return;
 	}
  	//[Kitsune Tea/Scholar's Tea] //Just use Scholar's Tea and drop the "trick" effect if you don't want to throw in another new item.
 	else if(choice == 3) {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
 		outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
 		//add Kitsune Tea/Scholar's Tea to inventory
-		shortName = "Smart T";
-		takeItem();
-		return;
+		inventory.takeItem(consumables.SMART_T);
 	}
 	//[Hair Dye]
 	else if(choice == 4) {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small vial filled with hair dye!");
-		var select:int = rand(4);
-		if(select == 0) shortName = "Red Dye";
-		else if(select == 1) shortName = "Blond D";
-		else if(select == 2) shortName = "Black D";
-		else shortName = "WhiteDy";
+		var itype:ItemType = [
+				consumables.RED_DYE,
+				consumables.BLOND_D,
+				consumables.BLACK_D,
+				consumables.WHITEDY
+		][rand(4)];
 
-		outputText("\n\n<b>You've received " + itemLongName(shortName) + " from the kitsune's gift!  How generous!</b>  ");
+		outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
 		//add <color> Dye to inventory
-		takeItem();
-		return;
+		inventory.takeItem(itype);
 	}
 	//[Knowledge Spell]
 	else if(choice == 5) {
@@ -8606,7 +7836,6 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		//Increase INT and Libido, +10 LUST
 		dynStats("int", 4, "sen", 2, "lus", 10);
 		doNext(1000);
-		return;
 	}
 	//[Thief!]
 	else if(choice == 6) {
@@ -8617,7 +7846,6 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		player.gems -= 2 + rand(15);
 		statScreenRefresh();
 		doNext(1000);
-		return;
 	}
 	//[Prank]
 	else if(choice == 7) {
@@ -8627,7 +7855,6 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		//Advance time 1 hour, -20 LUST
 		dynStats("lus", -20);
 		doNext(1000);
-		return;
 	}
 	//[Aphrodisiac]
 	else if(choice == 8) {
@@ -8636,7 +7863,6 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		//+100 LUST
 		dynStats("lus=", 100, "resisted", false);
 		doNext(1000);
-		return;
 	}
 	//[Wither]
 	else if(choice == 9) {
@@ -8645,23 +7871,19 @@ public function kitsuneGiftResult(clear:Boolean = true):void {
 		// -15 STR and -15 TUF
 		dynStats("str", -5,"tou", -5);
 		doNext(1000);
-		return;
 	}
 	//[Dud]
 	else if(choice == 10) {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.");
 		outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  What a ripoff!</b>");
 		doNext(1000);
-		return;
 	}
 	//[Dud...  Or is it?]
 	else {
 		outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 		outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  At least you managed to salvage a shard of black chitin from it...</b>  ");
 		//add B. Chitin to inventory*/
-		shortName = "B.Chitn";
-		takeItem();
-		return;
+		inventory.takeItem(useables.B_CHITN);
 	}
 }
 
@@ -8722,8 +7944,7 @@ public function deBimbo(player:Player):void {
 		outputText("You can't use this right now, and it's too expensive to waste!\n\n");
 		if(debug) {}
 		else {
-			shortName = "Debimbo";
-			takeItem();
+			inventory.takeItem(consumables.DEBIMBO);
 		}
 		return;
 	}
@@ -8739,84 +7960,6 @@ public function deBimbo(player:Player):void {
 	}
 }
 
-public function lustyMaidensArmor(player:Player):void {
-	clearOutput();
-	//{No titties}
-	if(player.biggestTitSize() < 1) {
-		outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.");
-		if(debug) {}
-		else {
-			itemSwapping = true;
-			outputText("\n\n");
-			shortName = "LMArmor";
-			takeItem();
-		}
-		return;
-	}
-	//{Too small titties}
-	if(player.biggestTitSize() < 4) {
-		outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.");
-		if(debug) {}
-		else {
-			itemSwapping = true;
-			outputText("\n\n");
-			shortName = "LMArmor";
-			takeItem();
-		}
-		return;
-	}
-	//{Proper sized breasts}
-	else {
-		outputText("You slide the bikini top over your more than ample chest, shivering at the touch of the cold metal on your sensitive nipples.  It stretches taut around each of your globes, and by the time you're snapping the narrow leather strap behind your back, the exotic metal bra has grown warm enough to make your chest tingle pleasantly.  Your hands find their way to your jiggling, gilded mounds and grab hold, fingers sinking into the shimmering flesh without meaning to.  Your nipples scrape along a diaphanous inner lining so pleasantly that a moan slips out of your mouth as you admire how your cleavage bulges out above the glittery cups.  A narrow band of steel with a shiny black leather thong underneath connects the two halfs of the top, padded for comfort but pulled away from you by the sheer size of your straining bosoms.");
-		outputText("\n\nAs you examine the material, you realize that leather band isn't just padding.  It's as slippery as butter on grease and has a subtle indentation, one that would let it perfectly cushion something round, thick... and throbbing.  Your cheeks color when you catch yourself thinking of titfucking some beast while dressed in this outfit, taking a thick load of monster or dick-girl seed right over your cleavage, face, and hair.  You could even line it up with your mouth and drink down a few swallows if you wanted to.");
-		outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
-		dynStats("lus", 25, "resisted", false);
-		outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are moulded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
-		if(player.hasCock() || player.balls > 0) {
-			outputText("that it won't fit you ");
-			if(player.hasCock()) outputText("or your " + multiCockDescriptLight());
-			else outputText("or your [balls]");
-			outputText(" at all!  <b>You put your old gear back on with a sigh</b>.");
-			if(debug) {}
-			else {
-				itemSwapping = true;
-				outputText("\n\n");
-				shortName = "LMArmor";
-				takeItem();
-			}
-			return;
-		}
-		else if(player.gender == 0 || !player.hasVagina()) {
-			outputText("that it will dig uncomfortably into your featureless groin.  <b>You put your old gear back on with a sigh</b>.");
-			if(debug) {}
-			else {
-				itemSwapping = true;
-				outputText("\n\n");
-				shortName = "LMArmor";
-				takeItem();
-			}
-			return;
-		}
-		outputText("your [vagina] is prominently displaying your camel-toe for all to see.");
-
-		outputText("\n\nYou don't give it a second thought, sliding the white thong snugly into place.  Snug warmth slides right up against your mound, the perfectly formed crease slipping right into your labia, where it belongs, ");
-		if(player.vaginas[0].virgin) {
-			outputText("a tight seal over your chastity, displaying your womanly status while guarding your maidenhead at the same time.  A smug, smile tugs at the corners of your mouth - who would take your virginity when they can tit-fuck your tits or fuck your butt?");
-			if(player.cor < 33) outputText("  Wait, that isn't right...");
-		}
-		else {
-			outputText("a tight seal over your previously-claimed cunt.  Regret fills you when you realize you could have kept your chastity intact simply by servicing the lusty studs and monsters with your ass and tits.");
-		}
-		if(player.wetness() >= 3) outputText("  The moisture you normally drip seems to soak right into the gusset instead of running down your [legs] like normal, giving you a much more chaste appearance in spite of the lewd garments that even now seem to shape your femininity and [butt] into perfectly arousing shapes.");
-
-		outputText("\n\nLast is the chain skirt - perhaps the easiest part to put on.  It's barely three inches long, such that it exposes your [butt] almost entirely, and when you bend over, fully.  The bottom of your vaginal crease can be spied as well, and should you desire to show yourself off, a simple stretch or tug would put you completely on display.  You wiggle about, watching the reflective material ripple almost hypnotically, one hand still on your boobs, mauling at your own tits with passion.  THIS is how a chaste champion should dress - perfectly modest but full of erotic energy to overwhelm her enemies with!\n\n");
-		if(player.lib < 50) dynStats("lib", 1, "sen", 1);
-	}
-	equipArmor("lusty maiden's armor",false);
-}
-
-
-
 //Fish Fillet
 public function fishFillet(player:Player):void {
 	clearOutput();
@@ -8829,7 +7972,7 @@ public function fishFillet(player:Player):void {
 	//(If lake has been tainted, +1 Corruption?)
 	if(player.hasStatusAffect("FactoryOverload") >= 0) dynStats("cor", 0.5);
 	dynStats("cor", 0.1);
-	HPChange(Math.round(maxHP() * .25),false);
+	HPChange(Math.round(player.maxHP() * .25),false);
 }
 
 //Trap Oil
@@ -9107,7 +8250,7 @@ public function purityPeach(player:Player):void {
 	clearOutput();
 	outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.");
 	fatigue(-15);
-	HPChange(Math.round(maxHP()*0.25),false);
+	HPChange(Math.round(player.maxHP()*0.25),false);
 }
 
 //New Item: "Purple Fruit"
@@ -9379,7 +8522,7 @@ public function mouseCocoa(player:Player):void {
 		if(player.hasStatusAffect("heat") >= 0) {
 			outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
 			//[(no mino cum in inventory)]
-			if(!hasItem("MinoCum",1)) {
+			if(!player.hasItem(consumables.MINOCUM)) {
 				outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
 			}
 			else if(player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
@@ -9389,7 +8532,7 @@ public function mouseCocoa(player:Player):void {
 				//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
 				player.minoCumAddiction(5);
 				player.knockUp(2,432,175);
-				consumeItem("MinoCum",1);
+				player.consumeItem(consumables.MINOCUM);
 			}
 			temp = player.hasStatusAffect("heat");
 			player.statusAffects[temp].value1 += 5;
@@ -9497,5 +8640,127 @@ public function mouseCocoa(player:Player):void {
 
 //perk - fuck if i know
 //maybe some pregnancy-accelerating thing
-}
+
+		public function demonChanges(player:Player):void {
+			//Change tail if already horned.
+			if(player.tailType != TAIL_TYPE_DEMONIC && player.horns > 0) {
+				if(player.tailType != TAIL_TYPE_NONE) {
+					outputText("\n\n", false);
+					if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ", false);
+					else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ", false);
+					outputText("<b>Your tail is now demonic in appearance.</b>", false);
+				}
+				else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
+				dynStats("cor", 4);
+				player.tailType = TAIL_TYPE_DEMONIC;
+			}
+			//grow horns!
+			if(player.horns == 0 || (rand(player.horns+3) == 0)) {
+				if(player.horns < 12 && (player.hornType == HORNS_NONE || player.hornType == HORNS_DEMON)) {
+					outputText("\n\n", false);
+					if(player.horns == 0) {
+						outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>", false);
+					}
+					else outputText("Another pair of demon horns, larger than the last, forms behind the first row.", false);
+					if(player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
+					player.horns++;
+					player.horns++;
+					dynStats("cor", 3);
+				}
+				//Text for shifting horns
+				else if(player.hornType > HORNS_DEMON) {
+					outputText("\n\n", false);
+					outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
+					player.horns = 2;
+					player.hornType = HORNS_DEMON;
+					dynStats("cor", 3);
+				}
+			}
+			//Nipples Turn Back:
+			if(player.hasStatusAffect("Black Nipples") >= 0 && rand(3) == 0) {
+				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+				player.removeStatusAffect("Black Nipples");
+			}
+			//remove fur
+			if((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && rand(3) == 0) {
+				//Remove face before fur!
+				if(player.faceType != FACE_HUMAN) {
+					outputText("\n\n", false);
+					outputText("Your visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>", false);
+					player.faceType = FACE_HUMAN;
+				}
+				//De-fur
+				else if(player.skinType != SKIN_TYPE_PLAIN) {
+					outputText("\n\n", false);
+					if(player.skinType == SKIN_TYPE_FUR) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.", false);
+					if(player.skinType == SKIN_TYPE_SCALES) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
+					player.skinType = SKIN_TYPE_PLAIN;
+					player.skinDesc = "skin";
+				}
+			}
+			//Demon tongue
+			if(player.tongueType == TONUGE_SNAKE && rand(3) == 0) {
+				outputText("\n\nYour snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>", false);
+				player.tongueType = TONUGE_DEMONIC;
+			}
+			//foot changes - requires furless
+			if(player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) {
+				//Males/genderless get clawed feet
+				if(player.gender <= 1) {
+					if(player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {
+						outputText("\n\n", false);
+						outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
+						player.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+					}
+				}
+				//Females/futa get high heels
+				else if(player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) {
+					outputText("\n\n", false);
+					outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);
+					player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+				}
+			}
+			//Grow demon wings
+			if(player.wingType != WING_TYPE_BAT_LIKE_LARGE && rand(8) == 0 && player.cor >= 50) {
+				//grow smalls to large
+				if(player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
+					outputText("\n\n", false);
+					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>", false);
+					player.wingType = WING_TYPE_BAT_LIKE_LARGE;
+					player.wingDesc = "large, bat-like";
+				}
+				else if(player.wingType == WING_TYPE_SHARK_FIN) {
+					outputText("\n\n", false);
+					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support the new bat-like wings growing from your back.  You twist your head as far as you can for a look and realize your fin has changed into ", false);
+					outputText("small ", false);
+					player.wingType = WING_TYPE_BAT_LIKE_TINY;
+					player.wingDesc = "tiny, bat-like";
+					outputText("bat-like demon-wings!", false);
+				}
+				else if(player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
+					outputText("\n\n", false);
+					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ", false);
+					if(player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
+						outputText("small ", false);
+						player.wingType = WING_TYPE_BAT_LIKE_TINY;
+						player.wingDesc = "tiny, bat-like";
+					}
+					else {
+						outputText("large ", false);
+						player.wingType = WING_TYPE_BAT_LIKE_LARGE;
+						player.wingDesc = "large, bat-like";
+					}
+					outputText("<b>bat-like demon-wings!</b>", false);
+				}
+				//No wings
+				else if(player.wingType == WING_TYPE_NONE) {
+					outputText("\n\n", false);
+					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your " + player.armorName + ".  <b>You now have tiny demonic wings</b>.", false);
+					player.wingType = WING_TYPE_BAT_LIKE_TINY;
+					player.wingDesc = "tiny, bat-like";
+				}
+
+			}
+		}
+	}
 }

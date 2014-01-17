@@ -618,8 +618,7 @@ public function rubisFuckingHouseYouPervert():void {
 			outputText("\n\nIt's only once you get back tbat you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
 			//(Add Bimbo Skirt to inventory)
 			menuLoc = 2;
-			shortName = "BimboSk";
-			takeItem();
+			inventory.takeItem(armors.BIMBO_SKIRT);
 			return;
 		}
 		//(If Bimbo Skirt not found) 
@@ -2834,7 +2833,7 @@ private function giveRubiATFItem(short:String):void {
 		
 		outputText("\n\nYou grin and say, \"<i>Of course.</i>\"  After all, you're always happy to help!");
 		//(Go to sex menu)
-		consumeItem("BimboLq",1);
+		player.consumeItem(consumables.BIMBOLQ);
 		flags[kFLAGS.RUBI_SHE] = 1;
 		flags[kFLAGS.RUBI_BIMBO] = 1;
 		flags[kFLAGS.RUBI_HAIR] = 1;
@@ -3020,12 +3019,12 @@ private function giveRubiATFItem(short:String):void {
 		else {
 			outputText("\n\nYou monitor Rubi carefully, but it seems this batch of peaches has no effect other than filling [rubi eir] stomach.  Or perhaps there's nothing more to change.");
 		}
-		consumeItem(short,1);
-		consumeItem(short,1);
-		consumeItem(short,1);
-		consumeItem(short,1);
+		player.consumeItem(short,1);
+		player.consumeItem(short,1);
+		player.consumeItem(short,1);
+		player.consumeItem(short,1);
 	}
-	consumeItem(short,1);
+	player.consumeItem(short,1);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to give item menu.
@@ -3054,7 +3053,7 @@ private function rubiGrowPlusBreasts():void {
 	}
 	//(If breasts already maxed)
 	else outputText("\n\nSadly, apart from making [rubi eir] nipples particularly perky, they don't seem to have much effect on Rubi's already enormous rack.");
-	consumeItem("GroPlus",1);
+	player.consumeItem(consumables.GROPLUS);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to give item menu.
@@ -3094,7 +3093,7 @@ private function rubiPenisGroPlus():void {
 		if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("sheath-stuffing horse-dick");
 		else outputText("giant dick.");
 	}
-	consumeItem("GroPlus",1);
+	player.consumeItem(consumables.GROPLUS);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to give item menu.
@@ -3108,7 +3107,7 @@ private function rubiBoobsReducto():void {
 		outputText("\n\nIt seems to take a moment for the effects to kick in, and soon you see Rubi shiver while [rubi eir] breasts seem to quake, shrinking rapidly in size.  When the process is done, you're certain [rubi ey]'s lost an entire cup size, and the paste has been completely absorbed in the process.");
 		flags[kFLAGS.RUBI_BREAST_SIZE]--;
 	}
-	consumeItem("Reducto",1);
+	player.consumeItem(consumables.REDUCTO);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to give item menu.
@@ -3125,7 +3124,7 @@ private function rubiPenisReducto():void {
 	else {
 		outputText("\n\nIt doesn't seem to have any effect.");
 	}
-	consumeItem("Reducto",1);
+	player.consumeItem(consumables.REDUCTO);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to item giving menu!
@@ -3247,92 +3246,92 @@ private function pickAnItemToFeedRubi():void {
 	//The following items can be given to Rubi at Relationship 40+: Bimbo Liqueur (once), Incubus Draft (up to three times).  Incubus Rubi can't be given Bimbo Liqueur, and likewise Bimbo Rubi can't be given Incubus Draft.
 	var events:Array = [];
 	var functions:Array = [];
-	if(hasItem("ClssyCl",1) && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
+	if(player.hasItem("ClssyCl") && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
 		events[events.length] = 3879;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("RbbrClt",1) && flags[kFLAGS.RUBI_FETISH_CLOTHES] == 0) {
+	if(player.hasItem("RbbrClt") && flags[kFLAGS.RUBI_FETISH_CLOTHES] == 0) {
 		events[events.length] = 3880;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("AdvClth",1) && flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 0) {
+	if(player.hasItem("AdvClth") && flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 0) {
 		events[events.length] = 3881;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("TubeTop",1) && flags[kFLAGS.RUBI_TUBE_TOP] == 0) {
+	if(player.hasItem("TubeTop") && flags[kFLAGS.RUBI_TUBE_TOP] == 0) {
 		events[events.length] = 3882;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("T.BSuit",1) && flags[kFLAGS.RUBI_BODYSUIT] == 0) {
+	if(player.hasItem("T.BSuit") && flags[kFLAGS.RUBI_BODYSUIT] == 0) {
 		events[events.length] = 3883;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("B.Dress",1) && flags[kFLAGS.RUBI_LONGDRESS] == 0) {
+	if(player.hasItem("B.Dress") && flags[kFLAGS.RUBI_LONGDRESS] == 0) {
 		events[events.length] = 3884;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("LthrPnt",1) && flags[kFLAGS.RUBI_TIGHT_PANTS] == 0) {
+	if(player.hasItem("LthrPnt") && flags[kFLAGS.RUBI_TIGHT_PANTS] == 0) {
 		events[events.length] = 3885;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("NurseCl",1) && flags[kFLAGS.RUBI_NURSE_CLOTHES] == 0) {
+	if(player.hasItem(armors.NURSES_OUTFIT) && flags[kFLAGS.RUBI_NURSE_CLOTHES] == 0) {
 		events[events.length] = 3886;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("S.Swmwr",1) && flags[kFLAGS.RUBI_SWIMWEAR] == 0) {
+	if(player.hasItem(armors.SKIMPY_BLACK_BIKINI) && flags[kFLAGS.RUBI_SWIMWEAR] == 0) {
 		events[events.length] = 3887;
 		functions[functions.length] = eventParser;
 	}
-	if(hasItem("BonStrp",1) && flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 0) {
+	if(player.hasItem("BonStrp") && flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 0) {
 		events[events.length] = "BonStrp";
 		functions[functions.length] = giveRubiClothes;
 	}
-	if(hasItem("I.Corst",1) && flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 0) {
+	if(player.hasItem("I.Corst") && flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 0) {
 		events[events.length] = "I.Corst";
 		functions[functions.length] = giveRubiClothes;
 	}
 	
-	if(hasItem("BimboLq",1) && !rubiBimbo()) {
+	if(player.hasItem(consumables.BIMBOLQ) && !rubiBimbo()) {
 		events[events.length] = "BimboLq";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("IncubiD",1)) {
+	if(player.hasItem(consumables.INCUBID)) {
 		events[events.length] = "IncubiD";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("P.Draft",1)) {
+	if(player.hasItem(consumables.P_DRAFT)) {
 		events[events.length] = "P.Draft";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("SucMilk",1)) {
+	if(player.hasItem(consumables.SUCMILK)) {
 		events[events.length] = "SucMilk";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("P.S.Mlk",1)) {
+	if(player.hasItem(consumables.P_S_MLK)) {
 		events[events.length] = "P.S.Mlk";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("PurPeac",5)) {
+	if(player.hasItem("PurPeac",5)) {
 		events[events.length] = "PurPeac";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("Equinum",1)) {
+	if(player.hasItem(consumables.EQUINUM)) {
 		events[events.length] = "Equinum";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("W.Fruit",1)) {
+	if(player.hasItem(consumables.W_FRUIT)) {
 		events[events.length] = "W.Fruit";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("Reducto",1)) {
+	if(player.hasItem(consumables.REDUCTO)) {
 		events[events.length] = "Reducto";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("GroPlus",1)) {
+	if(player.hasItem(consumables.GROPLUS)) {
 		events[events.length] = "GroPlus";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("TrapOil",1)) {
+	if(player.hasItem("TrapOil")) {
 		events[events.length] = "TrapOil";
 		functions[functions.length] = giveRubiATFItem;
 	}
@@ -3389,7 +3388,7 @@ public function giveRubiClothes(short:String = ""):void {
 	outputText("You hand over the spare set of clothes, and Rubi's eyes light up.  \"<i>For me?</i>\"  the little demon practically screams, ecstatic.  \"<i>ThankyouthankyouthankyouTHANKYOU!</i>\"");
 	outputText("\n\nRubi holds the outfit up to [rubi eir] body and grins, \"<i>Ooooh, I just love it!  I mean, I'll have to take it to the tailors to get fitted, but I absolutely adore it!</i>\"");
 	outputText("\n\nYou wonder how [rubi ey] could get so excited over it, after all it's just clothes, but you smile and nod along, happy to make [rubi em] happy.");
-	consumeItem(short,1);
+	player.consumeItem(short,1);
 	if(short == "ClssyCl") flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
 	else if(short == "RbbrClt") flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
 	else if(short == "AdvClth") flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;

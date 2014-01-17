@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Camp.ImpGang;
 
 	use namespace kGAMECLASS;
@@ -33,7 +34,7 @@ package classes.Scenes.Monsters
 			var feeder:Function =null;
 			var nipFuck:Function =null;
 			var bikiniTits:Function =null;
-			if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
+			if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 			if(player.hasFuckableNipples() && player.lust >= 33) nipFuck = noogaisNippleRape;
 			if(player.hasStatusAffect("Feeder") >= 0) feeder = areImpsLactoseIntolerant;
 			//Taurs have different scenes

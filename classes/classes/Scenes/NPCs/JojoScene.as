@@ -460,8 +460,8 @@ public function useTentacleJojo():void {
 	}
 	outputText(".  You moan in frustration, feeling the fluid soak into your skin, secretly wishing he could've fucked you into unconsciousness.  ", false);
 	outputText("The mouse kneels over you and begins licking your body, cleaning you with his tongue.  The tentacles join in, noisily slurping up every ounce of fluid from your form until you're clean and sated.  Sighing dreamily from the attention, you close your eyes and murmer, \"<i><i>Good boy.</i></i>\" When you open them, he's trotting away towards the forest, his tentacles well-hidden again...\n\n", false);
-	buttChange(40, true);
-	cuntChange(40, true);
+	player.buttChange(40, true);
+	player.cuntChange(40, true);
 	dynStats("lus=", 0, "cor", .5);
 	doNext(13);
 }
@@ -970,7 +970,7 @@ public function jojoRape():void {
 				 player.biggestTitSize() * player.biggestLactation() * player.breastRows.length >= 20) outputText("Milk erupts from your " + breastDescript(0) + ", spraying in pulsing blasts, soaking the mouse.  Each nerve-wracking orgasm seems to wring more and more milk from you, till it puddles around.", false);
 				if(player.biggestTitSize() * player.biggestLactation() * player.breastRows.length >= 35) outputText("Milk fountains from your " + breastDescript(0) + ", soaking the mouse with a continuous river of cream.  For every blob of cum you feel pushing into your over-filled uterus, another torrent of milk sprays out.  As your mind-bending orgasms drag on, a small lake of milk forms around you.", false);
 			}
-			cuntChange(3, true);
+			player.cuntChange(3, true);
 			//Preggers chance!
 			player.knockUp(4,432);
 			//The end
@@ -1036,7 +1036,7 @@ public function jojoRape():void {
 			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over, spreading your legs and shaking your rump.  ", false);
 			if(player.hasLongTail() > 0) outputText("Your tail swishes back and forth teasingly.  ", false);
 			outputText("Your tantalizing backside is too much for him.  He pounces your ass in a second, penetrating your " + vaginaDescript(0) + " forcefully.  The knowledge that your demonic influence is responsible for his state nearly makes you cream all over his cock.  You fantasize about your cunt making his cock grow longer and fatter as it corrupts him further, transforming his morals and values into cock and cum.  Jojo thrashes against you, brutally pounding your " + vaginaDescript(0) + " as he orgasms.  His " + eCockDescript(0) + " erupts inside you, the feeling of being filled with mouse-spunk drives you over the edge with him.  More and more of his cum sprays inside you, unnatural amounts for a creature his size.  Thick streams of the stuff escape down your thighs as your belly distends.  ", false);
-			cuntChange(2, true);
+			player.cuntChange(2, true);
 			outputText("\n\n", false);
 			outputText("You let the drained mouse pop free, reveling in the sensation of cum pouring from between your thighs.   Jojo has already passed out behind you.  ", false);
 			if(player.lib > 60 && player.cor > 50) {
@@ -1066,7 +1066,7 @@ public function jojoRape():void {
 			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over, spreading your legs and shaking your rump.  ", false);
 			if(player.hasLongTail() > 0) outputText("Your tail swishes back and forth teasingly.  ", false);
 			outputText("Your tantalizing backside is too much for him.  He pounces your ass in a second, penetrating your " + vaginaDescript(0) + " forcefully.  The knowledge that your demonic influence is responsible for his state nearly makes you cream all over his cock.  You fantasize about your cunt making his cock grow longer and fatter as it corrupts him further, transforming his morals and values into cock and cum.  Jojo thrashes against you, brutally pounding your " + vaginaDescript(0) + " as he orgasms.  His " + eCockDescript(0) + " erupts inside you, the feeling of being filled with mouse-spunk drives you over the edge with him.  More and more of his cum sprays inside you, unnatural amounts for a creature his size.  Thick streams of the stuff escape down your thighs as your belly distends.  ", false);
-			cuntChange(2, true);
+			player.cuntChange(2, true);
 			if(player.cockTotal() == 1) outputText("Your " + cockDescript(0) + " trembles in orgasm, squirting your load into the thick forest loam.  ", false);
 			if(player.cockTotal() > 1) outputText("Your " + multiCockDescriptLight() + " tremble in orgasm, squirting their hot loads all over the thick forest loam.  ", false);
 			outputText("\n\n", false);
@@ -1098,7 +1098,7 @@ public function jojoRape():void {
 		}
 		if(player.gender == 2 || player.gender == 3) {
 			outputText("You throw him on the soft soil of the forest and mount him, skilfully guiding his member towards your now dripping wet hole.  As you slide down you marvel at how he feels larger and thicker than before, deliciously so.  Your " + vaginaDescript(0) + " throbs in the most pleasant way as you rape his small form.  You play with your clit, watching Jojo's face flit between rapture and disgust.  You lick your lips and smile as the disgust vanishes, his hot jets of cum painting your cunt-walls.  You giggle and keep fucking him, hoping that somehow your corruption and lust are influencing him, turning him into your personal fucktoy.  The thought brings you over the edge.  You clamp down, your " + vaginaDescript(0) + " milking, squeezing every last drop from him as his prick erupts inside you.  ", false);
-			cuntChange(1.5, true);
+			player.cuntChange(1.5, true);
 			if(player.biggestLactation() >= 1 && player.biggestLactation() < 2) outputText("Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.  ", false);
 			if(player.biggestLactation() >= 2 && player.biggestLactation() < 3) outputText("Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.  ", false);
 			if(player.biggestLactation() >= 3) outputText("Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.  ", false);
@@ -1149,7 +1149,7 @@ public function jojoRape():void {
 			
 			outputText("You smile when you realize how large he is for his frame, and mount him, taking care to keep him pinned hard to the ground.", false);
 			
-			cuntChange(12, true, true, false);
+			player.cuntChange(12, true, true, false);
 			
 			outputText("\n\n", false);
 			

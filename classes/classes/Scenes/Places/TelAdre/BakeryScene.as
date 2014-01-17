@@ -239,10 +239,9 @@ private function buyCocoa():void {
 	}
 	outputText("You pay ten gems for some cocoa.  ");
 	menuLoc = 29;
-	shortName = "MouseCo";
 	player.gems -= 10;
 	statScreenRefresh();
-	takeItem();
+	inventory.takeItem(consumables.MOUSECO);
 }
 
 private function buyFig():void {
@@ -255,10 +254,9 @@ private function buyFig():void {
 	}
 	outputText("You pay five gems for a fig.  ");
 	menuLoc = 29;
-	shortName = "RingFig";
 	player.gems -= 5;
 	statScreenRefresh();
-	takeItem();
+	inventory.takeItem(consumables.RINGFIG);
 }
 
 
@@ -397,8 +395,7 @@ public function buySlutCake():void {
 	player.gems -= 500;
 	statScreenRefresh();
 	menuLoc = 19;
-	shortName = "CCupcak";
-	takeItem();
+	inventory.takeItem(consumables.CCUPCAK);
 }
 
 private function buyFoxBerry():void {
@@ -411,10 +408,9 @@ private function buyFoxBerry():void {
 	}
 	outputText("You pay five gems for a fox berry.  ");
 	menuLoc = 29;
-	shortName = "FoxBery";
 	player.gems -= 5;
 	statScreenRefresh();
-	takeItem();
+	inventory.takeItem(consumables.FOXBERY);
 }
 
 

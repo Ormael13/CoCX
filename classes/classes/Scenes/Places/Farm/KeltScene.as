@@ -513,7 +513,7 @@ private function keltMainEncounter3():void {
 			else if(player.vaginalCapacity() <= 40) outputText("Even for you, Kelt's cock seems oversized as he presses the flared head of his massive manhood against your netherlips.  Even so, he does not hesitate, lunging forward and spearing you on his manhood without hesitation.  You let out a groan as that massive organ spreads you wide open, straining your bounderies and almost certainly stretching you out even further.  The centaur's thrusts are relentless, but even at his best, he can only fit in about three fourths of his cock.  He snorts, frustrated... but you are so filled that your head is spinning with pleasure.\r\r", false);
 			//(Vagina, Large: 
 			else outputText("It seems like a perfect fit for your gaping, hungry pussy as Kelt rams the flared head deep into you.  You feel that glorious manhood filling you like few cocks can these days, spreading you wide and searching out your depths.  Kelt lets out a pleased laugh when he bottoms out with you just barely able to accommodate his size.  His heavy balls slap pleasantly against your ass as you groan with pleasure, filled to the core with cock.", false);
-			cuntChange(50,true,true,false);
+			player.cuntChange(50,true,true,false);
 			outputText("\n\n");
 			outputText("From then on, the ride only becomes rougher.  Kelt begins pumping his hips steadily, deep and hard, intent on burying as much of his manhood as possible with each thrust.  He gives little thought to your pleasure, but it hardly matters.  With a cock that size, you cannot help but moan with each buck of his hips.\r\r", false);
 			outputText("\"<i>Not too bad, not too bad!  You make for a pretty decent fuck!  Maybe after you bear a couple of my foals, I'll add you to my harem.  You'd like that, wouldn't you?  You just can't wait to get a bellyful of centaurs, can you?</i>\"\r\r", false);
@@ -638,7 +638,7 @@ private function keltMainEncounterPostBlowjob():void {
 			outputText("Kelt doesn't hesitate.  With an almost primal snarl, he rams his cock forward, anxious to sink himself deep into your ass.  With no lube and no foreplay, you let out a cry as the massive cock splits you open.  Fortunately, it drools precum eagerly into your backside, making the next thrust easier, though no less forceful.  Kelt shows no mercy, trying to fit himself inside your ");
 			if(player.tallness < 112) outputText("smaller ");
 			outputText("body with no concern for your well being.", false);
-			buttChange(70,true, true, false);
+			player.buttChange(70,true, true, false);
 			outputText("\r\r", false);
 			outputText("You can't help it... at the thought of being used as his worthless fucktoy, you suffer a mild orgasm of your own, crying out your submission to this powerful creature.", false);
 			//(Penis: 

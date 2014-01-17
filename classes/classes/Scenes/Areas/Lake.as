@@ -211,15 +211,13 @@ package classes.Scenes.Areas
 				if (rand(10) < 4) {
 					if (rand(2) == 0) {
 						outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n", true);
-						shortName = "Equinum";
 						menuLoc = 2;
-						eventParser(1001);
+						inventory.takeItem(consumables.EQUINUM);
 					}
 					else {
 						outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-						shortName = "W.Fruit";
 						menuLoc = 2;
-						eventParser(1001);
+						inventory.takeItem(consumables.W_FRUIT);
 					}
 				}
 				//Find Whitney
@@ -231,15 +229,13 @@ package classes.Scenes.Areas
 							//If so, find equinum or whisker fruit
 							if (rand(2) == 0) {
 								outputText("You find a long and oddly flared vial half-buried in the sand.   Written across the middle band of the vial is a single word, 'Equinum'.\n", true);
-								shortName = "Equinum";
 								menuLoc = 2;
-								eventParser(1001);
+								inventory.takeItem(consumables.EQUINUM);
 							}
 							else {
 								outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-								shortName = "W.Fruit";
 								menuLoc = 2;
-								eventParser(1001);
+								inventory.takeItem(consumables.W_FRUIT);
 							}
 						}
 						//If you havent met whitney enough to know the farm....
@@ -433,8 +429,7 @@ package classes.Scenes.Areas
 			outputText("\n\nYou take a minute to recover before doing the same.  ");
 			dynStats("sen", -1, "lus=", 0);
 			menuLoc = 2;
-			shortName = "FishFil";
-			takeItem();
+			inventory.takeItem(consumables.FISHFIL);
 		}
 
 		//For Chicks
@@ -493,8 +488,7 @@ package classes.Scenes.Areas
 
 			dynStats("sen", -1, "lus=", 0);
 			menuLoc = 2;
-			shortName = "FishFil";
-			takeItem();
+			inventory.takeItem(consumables.FISHFIL);
 		}
 
 		//For Pansies
@@ -519,8 +513,7 @@ package classes.Scenes.Areas
 
 			//(You have gained Fish Fillet!)
 			menuLoc = 2;
-			shortName = "FishFil";
-			takeItem();
+			inventory.takeItem(consumables.FISHFIL);
 		}
 	}
 }

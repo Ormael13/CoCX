@@ -1,5 +1,6 @@
 ﻿import classes.GlobalFlags.kGAMECLASS;
 import classes.Monster;
+import classes.Scenes.Areas.Mountain.Minotaur;
 
 import coc.view.MainView;
 
@@ -86,9 +87,8 @@ public function cleanupAfterCombat():void {
 			//Bonus lewts
 			if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 				outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n", false);
-				shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
 				menuLoc = 18;
-				takeItem();
+				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]));
 			}
 			else doNext(16);
 		}
@@ -398,14 +398,14 @@ public function doCombat(eventNum:Number):void
 						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
 						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
 						if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-						buttChange(monster.cockArea(0), true);
+						player.buttChange(monster.cockArea(0), true);
 					}
 					if (player.gender >= 2) {
 						outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
 						if (player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
 						else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
-						cuntChange(monster.cocks[0].cockThickness, true);
+						player.cuntChange(monster.cocks[0].cockThickness, true);
 						//Preggers chance!
 						player.knockUp(4, 432, 101);
 					}
@@ -1752,93 +1752,87 @@ public function finishCombat():void
 	}
 	awardPlayer();
 }
-public function dropItem(monsterName:String):void {
-	shortName = "NULL";
+public function dropItem(monster:Monster):void {
 	if(monster.hasStatusAffect("No Loot") >= 0) {
 		return;
 	}
-	if(monsterName == "Akbitch") {	}
-	if(monsterName == "tit-fucked Minotaur") {
-		shortName = "MinoCum";
+	var itype:ItemType = monster.dropLoot();
+	if(monster.short == "tit-fucked Minotaur") {
+		itype = consumables.MINOCUM;
 	}
-	if(monsterName == "minotaur") {
+	if(monster is Minotaur) {
 		if(monster.weaponName == "axe") {
 			if(rand(2) == 0) {
 				//50% breakage!
 				if(rand(2) == 0) {
-					shortName = "L. Axe ";
+					itype = weapons.LARGE_AXE;
 					if(player.tallness < 78) {
 						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ", false);
-						if(rand(2) == 0) shortName = "NULL";
-						else shortName = "SDelite";
+						if(rand(2) == 0) itype = null;
+						else itype = consumables.SDELITE;
 					}
 					//Not too tall, dont rob of axe!
 					else plotFight = true;
 				}
 				else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ", false);
 			}
-			else shortName = "MinoBlo";
+			else itype = consumables.MINOBLO;
 		}
 	}
-	if(monsterName == "bee-girl") {
+	if(monster is BeeGirl) {
 		//force honey drop if milked
 		if(flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
-			if(rand(2) == 0) shortName = "BeeHony";
-			else shortName = "PurHony";
+			if(rand(2) == 0) itype = consumables.BEEHONY;
+			else itype = consumables.PURHONY;
 			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
 		}
 	}
-	if(monsterName == "Jojo" && monk > 4) {
-		if(rand(2) == 0) shortName = "IncubiD";
+	if(monster is Jojo && monk > 4) {
+		if(rand(2) == 0) itype = consumables.INCUBID;
 		else {
-			if(rand(2) == 0) shortName = "B. Book";
-			else shortName = "SucMilk";
+			if(rand(2) == 0) itype = consumables.B__BOOK;
+			else itype = consumables.SUCMILK;
 		}
 	}
-	if(monsterName == "harpy") {
-		if(rand(10) == 0) shortName = "W.Robes";
-		else if(rand(3) == 0 && player.hasPerk("Luststick Adapted") >= 0) shortName = "LustStk";
-		else shortName = "GldSeed";
-
-	}
-	if(monsterName == "Sophie") {
-		if(rand(10) == 0) shortName = "W.Robes";
-		else if(rand(2) == 0 && player.hasPerk("Luststick Adapted") >= 0) shortName = "LustStk";
-		else shortName = "GldSeed";
+	if(monster is Harpy || monster is Sophie) {
+		if(rand(10) == 0) itype = armors.WIZARDS_ROBES;
+		else if(rand(3) == 0 && player.hasPerk("Luststick Adapted") >= 0) itype = consumables.LUSTSTK;
+		else itype = consumables.GLDSEED;
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphFollowerScene.ceraphIsFollower()) {
-		shortName = "SeductA";
+	if(!plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
+			&& flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTIVE_ARMOR, 1) && !ceraphFollowerScene.ceraphIsFollower()) {
+		itype = armors.SEDUCTIVE_ARMOR;
 	}
 
-	if(!plotFight && rand(200) == 0 && player.level >= 7) shortName = "BroBrew";
-	if(!plotFight && rand(200) == 0 && player.level >= 7) shortName = "BimboLq";
+	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
+	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
 	//Chance of eggs if Easter!
 	if(!plotFight && rand(6) == 0 && isEaster()) {
 		temp = rand(13);
-		if(temp == 0) shortName ="BrownEg";
-		if(temp == 1) shortName ="L.BrnEg";
-		if(temp == 2) shortName ="PurplEg";
-		if(temp == 3) shortName ="L.PrpEg";
-		if(temp == 4) shortName ="BlueEgg";
-		if(temp == 5) shortName ="L.BluEg";
-		if(temp == 6) shortName ="PinkEgg";
-		if(temp == 7) shortName ="NPnkEgg";
-		if(temp == 8) shortName ="L.PnkEg";
-		if(temp == 9) shortName ="L.WhtEg";
-		if(temp == 10) shortName ="WhiteEg";
-		if(temp == 11) shortName ="BlackEg";
-		if(temp == 12) shortName ="L.BlkEg";
+		if(temp == 0) itype =consumables.BROWNEG;
+		if(temp == 1) itype =consumables.L_BRNEG;
+		if(temp == 2) itype =consumables.PURPLEG;
+		if(temp == 3) itype =consumables.L_PRPEG;
+		if(temp == 4) itype =consumables.BLUEEGG;
+		if(temp == 5) itype =consumables.L_BLUEG;
+		if(temp == 6) itype =consumables.PINKEGG;
+		if(temp == 7) itype =consumables.NPNKEGG;
+		if(temp == 8) itype =consumables.L_PNKEG;
+		if(temp == 9) itype =consumables.L_WHTEG;
+		if(temp == 10) itype =consumables.WHITEEG;
+		if(temp == 11) itype =consumables.BLACKEG;
+		if(temp == 12) itype =consumables.L_BLKEG;
 	}
 	//Bonus loot overrides others
 	if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
-		shortName = flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID];
+		itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
 	}
 	//if(debug) shortName = "OviElix";
-	if(shortName != "NULL") {
-		outputText("\nThere is " + itemLongName(shortName) + " on your defeated opponent.  ", false);
+	if(itype != null) {
+		outputText("\nThere is " + itype.longName + " on your defeated opponent.  ", false);
 		if(!inDungeon) menuLoc = 2;
-		takeItem();
+		inventory.takeItem(itype);
 	}
 }
 public function awardPlayer():void
@@ -1853,7 +1847,7 @@ public function awardPlayer():void
 	if(monster.gems == 0) outputText("\n\nYou gain " + monster.XP + " XP from the battle.", false);
 	if(!inDungeon) doNext(13);
 	else doNext(1);
-	dropItem(monster.short);
+	dropItem(monster);
 	gameState = 0;
 	player.gems += monster.gems;
 	player.XP += monster.XP;
@@ -1879,77 +1873,8 @@ public function combatStatusesUpdate():void {
 			else outputText("<b>One of your combat abilities is currently sealed by magic!</b>\n\n");
 		}
 	}
-	if(monster.hasStatusAffect("Milky Urta") >= 0) {
-		urtaQuest.milkyUrtaTic();
-	}
-	
-	//Countdown
-	if(monster.hasStatusAffect("TentacleCoolDown") >= 0) {
-		monster.statusAffects[monster.hasStatusAffect("TentacleCoolDown")].value1--;
-		if(monster.statusAffects[monster.hasStatusAffect("TentacleCoolDown")].value1 == 0) {
-			monster.removeStatusAffect("TentacleCoolDown");
-		}
-	}
-	if(monster.hasStatusAffect("Coon Whip") >= 0) {
-		if(monster.statusAffectv2("Coon Whip") <= 0) {
-			monster.armorDef += monster.statusAffectv1("Coon Whip");
-			outputText("<b>Tail whip wears off!</b>\n\n");
-			monster.removeStatusAffect("Coon Whip");
-		}
-		else {
-			monster.addStatusValue("Coon Whip",2,-1);
-			outputText("<b>Tail whip is currently reducing your foe");
-			if(monster.plural) outputText("s'");
-			else outputText("'s");
-			outputText(" armor by " + monster.statusAffectv1("Coon Whip") + ".</b>\n\n")
-		}
-	}
-	if(monster.hasStatusAffect("Blind") >= 0) {
-		monster.addStatusValue("Blind",1,-1);
-		if(monster.statusAffectv1("Blind") <= 0) {
-			outputText("<b>" + monster.capitalA + monster.short + " is no longer blind!</b>\n\n", false);
-			monster.removeStatusAffect("Blind");
-		}
-		else outputText("<b>" + monster.capitalA + monster.short + " is currently blind!</b>\n\n", false);
-	}
-	if(monster.hasStatusAffect("Earthshield") >= 0) {
-		outputText("<b>" + monster.capitalA + monster.short + " is protected by a shield of rocks!</b>\n\n");
-	}
-	if(monster.hasStatusAffect("sandstorm") >= 0) {
-		//Blinded: 
-		if(player.hasStatusAffect("Blind") >= 0) {
-			outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
-			player.removeStatusAffect("Blind");
-		}
-		else {
-			if(monster.statusAffectv1("sandstorm") == 0 || monster.statusAffectv1("sandstorm") % 4 == 0) {
-				player.createStatusAffect("Blind",0,0,0,0);
-				outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
-			}
-			else {
-				outputText("<b>The grainy mess cuts at any exposed flesh and gets into every crack and crevice of your armor.");
-				temp = 1 + rand(2);
-				temp = takeDamage(temp);
-				outputText(" (" + temp + ")");
-				outputText("</b>\n\n");
-			}
-		}
-		monster.addStatusValue("sandstorm",1,1);
-	}
-	if(monster.hasStatusAffect("Stunned") >= 0) {
-		outputText("<b>" + monster.capitalA + monster.short + " is still stunned!</b>\n\n", false);
-	}
-	if(monster.hasStatusAffect("Shell") >= 0) {
-		if(monster.statusAffectv1("Shell") >= 0) {
-			outputText("<b>A wall of many hues shimmers around " + monster.a + monster.short + ".</b>\n\n");
-			monster.addStatusValue("Shell",1,-1);
-		}
-		else {
-			outputText("<b>The magical barrier " + monster.a + monster.short + " erected fades away to nothing at last.</b>\n\n");
-			monster.removeStatusAffect("Shell");
-		}
-	}
-	//[Silence warning] 
+	monster.combatRoundUpdate();
+	//[Silence warning]
 	if(player.hasStatusAffect("Throat Punch") >= 0) {
 		player.addStatusValue("Throat Punch",1,-1);
 		if(player.statusAffectv1("Throat Punch") >= 0) outputText("Thanks to Isabella's wind-pipe crushing hit, you're having trouble breathing and are <b>unable to cast spells as a consequence.</b>\n\n", false);
@@ -1990,67 +1915,6 @@ public function combatStatusesUpdate():void {
 			player.addStatusValue("Web-Silence",1,1);
 		}
 	}		
-	if(monster.hasStatusAffect("Izma Bleed") >= 0) {
-		//Countdown to heal
-		monster.addStatusValue("Izma Bleed",1,-1);
-		//Heal wounds
-		if(monster.statusAffectv1("Izma Bleed") <= 0) {
-			outputText("The wounds you left on " + monster.a + monster.short + " stop bleeding so profusely.\n\n", false);
-			monster.removeStatusAffect("Izma Bleed");
-		}
-		//Deal damage if still wounded.
-		else {
-			var store:Number = monster.eMaxHP() * (3 + rand(4))/100;
-			store = doDamage(store);
-			if(monster.plural) outputText(monster.capitalA + monster.short + " bleed profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
-			else outputText(monster.capitalA + monster.short + " bleeds profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
-		}
-	}
-	if(monster.hasStatusAffect("Timer") >= 0) {
-		if(monster.statusAffectv1("Timer") <= 0)
-			monster.removeStatusAffect("Timer");
-		monster.addStatusValue("Timer",1,-1);
-	}
-	if(monster.hasStatusAffect("Lust Stick") >= 0) {
-		//LoT Effect Messages:
-		switch(monster.statusAffectv1("Lust Stick")) {
-			//First:
-			case 1:
-				if(monster.plural) outputText("One of " + monster.a + monster.short + " pants and crosses " + monster.mf("his","her") + " eyes for a moment.  " + monster.mf("His","Her") + " dick flexes and bulges, twitching as " + monster.mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + monster.mf("he","she") + " recovers, you lick your lips and watch " + monster.mf("his","her") + " blush spread.\n\n", false);
-				else outputText(monster.capitalA + monster.short + " pants and crosses " + monster.pronoun3 + " eyes for a moment.  " + monster.mf("His","Her") + " dick flexes and bulges, twitching as " + monster.pronoun1 + " loses himself in a lipstick-fueled fantasy.  When " + monster.pronoun1 + " recovers, you lick your lips and watch " + monster.mf("his","her") + " blush spread.\n\n", false);
-				break;
-			//Second:
-			case 2:
-				if(monster.plural) outputText(monster.capitalA + monster.short + " moan out loud, " + monster.pronoun3 + " dicks leaking and dribbling while " + monster.pronoun1 + " struggle not to touch it.\n\n", false);
-				else outputText(monster.capitalA + monster.short + " moans out loud, " + monster.pronoun3 + " dick leaking and dribbling while " + monster.pronoun1 + " struggles not to touch it.\n\n", false);
-				break;
-			//Third:
-			case 3:
-				if(monster.plural) outputText(monster.capitalA + monster.short + " pump " + monster.pronoun3 + " hips futilely, air-humping non-existent partners.  Clearly your lipstick is getting to " + monster.pronoun2 + ".\n\n", false);
-				else outputText(monster.capitalA + monster.short + " pumps " + monster.pronoun3 + " hips futilely, air-humping a non-existent partner.  Clearly your lipstick is getting to " + monster.pronoun2 + ".\n\n", false);
-				break;
-			//Fourth:
-			case 4:
-				if(monster.plural) outputText(monster.capitalA + monster.short + " close " + monster.pronoun2 + " eyes and grunt, " + monster.pronoun3 + " cocks twitching, bouncing, and leaking pre-cum.\n\n", false);
-				else outputText(monster.capitalA + monster.short + " closes " + monster.pronoun2 + " eyes and grunts, " + monster.pronoun3 + " cock twitching, bouncing, and leaking pre-cum.\n\n", false);
-				break;
-			//Fifth and repeat:
-			default:
-				if(monster.plural) outputText("Drops of pre-cum roll steadily out of their dicks.  It's a marvel " + monster.pronoun1 + " haven't given in to " + monster.pronoun3 + " lusts yet.\n\n", false);
-				else outputText("Drops of pre-cum roll steadily out of " + monster.a + monster.short + "'s dick.  It's a marvel " + monster.pronoun1 + " hasn't given in to " + monster.pronoun3 + " lust yet.\n\n", false);
-				break;
-		}
-		monster.addStatusValue("Lust Stick",1,1);
-		//Damage = 5 + bonus score minus
-		//Reduced by lust vuln of course
-		monster.lust += Math.round(monster.lustVuln * (5 + monster.statusAffectv2("Lust Stick")));
-	}
-	if(monster.hasStatusAffect("PCTailTangle") >= 0) {
-		//when Entwined
-		outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
-		outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
-		dynStats("lus", 5+player.sens/10);
-	}
 	if(player.hasStatusAffect("Holli Constrict") >= 0) {
 		outputText("<b>You're tangled up in Holli's verdant limbs!  All you can do is try to struggle free...</b>\n\n");
 	}
@@ -2127,10 +1991,6 @@ public function combatStatusesUpdate():void {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n", false);
 		dynStats("lus", 3);
 	}
-	if(monster.hasStatusAffect("QueenBind") >= 0) {
-		outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-		if(flags[kFLAGS.PC_FETISH] >= 2) dynStats("lus", 3);
-	}
 	if(player.hasStatusAffect("GooArmorBind") >= 0) {
 		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
@@ -2200,27 +2060,6 @@ public function combatStatusesUpdate():void {
 			outputText("The orb continues vibrating in your ass, doing its best to arouse you.\n\n", false);
 		}
 		dynStats("lus", 7 + int(player.sens)/10);
-	}
-	if(monster.short == "secretarial succubus" || monster.short == "milky succubus") {
-		if(player.lust < 45) outputText("There is something in the air around your opponent that makes you feel warm.\n\n", false);
-		if(player.lust >= 45 && player.lust < 70) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n", false);
-		if(player.lust >= 70 && player.lust < 90) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n", false);
-		if(player.lust >= 90) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n", false);
-		dynStats("lus", 1+rand(8));
-	}
-	//[LUST GAINED PER ROUND] - Omnibus
-	if(monster.hasStatusAffect("Lust Aura") >= 0) {
-		if(player.lust < 33) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
- 		if(player.lust >= 33 && player.lust < 66) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false); 
-  		if(player.lust >= 66) {
-			outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ", false);
-			temp = rand(4);
-			if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n", false);
-			if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n", false);
-			if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n", false);
-			if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n", false);
-		}
-		dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 	}
 	if(player.hasStatusAffect("Kiss of Death") >= 0) {
 		//Effect 
@@ -2299,82 +2138,6 @@ public function combatStatusesUpdate():void {
 	if(flags[kFLAGS.PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		dynStats("lus", 2);
-	}
-	//Fetish Zealot Update!
-	if(monster.short == "fetish zealot") {
-		oldOutfit = monster.armorName;
-		temp = rand(5);
-		//Religious outfit!
-		if(temp == 0 && monster.armorName != "religious clothes") {
-			monster.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out of the front.";
-			monster.armorName = "religious clothes";
-			changed = true;
-		}
-		//Pirate Outfit
-		if(temp == 1 && monster.armorName != "pirate clothes") {
-			monster.armorName = "pirate clothes";
-			monster.long = "You are faced with one of the strangest things you have ever seen in your life.  A stereotypical pirate, who has not replaced his hand with a hook, but rather a collection of sex toys.  You can see at least two dildos, a fleshlight, and numerous other toys that you're incapable of recognizing.";
-			changed = true;
-		}
-		//Military Uniform
-		if(temp == 2 && monster.armorName != "military clothes") {
-			monster.long = "In front of you is someone wearing a green military uniform.  They obviously aren't in any military you've ever heard of, as on his shoulder he has emblazoned <i>FF Army Sex Instructor</i>.  It seems you are his latest recruit...";
-			monster.armorName = "military clothes";
-			changed = true;
-		}
-		//Leather fetish shiiiiite
-		if(temp == 3 && monster.armorName != "leather clothes") {
-			monster.long = "The Zealot has taken on an appearance that seems more suitable for the level of perversion he exudes.  He is wearing a full-body suit of leather, with a cock case over his crotch; you can clearly see a large zipper on it.  The zipper handle is far bigger than you think is absolutely necessary.";
-			monster.armorName = "leather clothes";
-			changed = true;
-		}
-		//Student
-		if(temp == 4 && monster.armorName != "student's clothes") {
-			monster.long = "The Zealot seems to have taken on the appearance of a young adult wearing a student uniform of sorts; of course, this isn't any less perverted than any of the other costumes this man wears.  This one includes a number of loose straps that you're certain would cause large sections of his clothes to fall off if somebody pulled on them.";
-			monster.armorName = "student's clothes";
-			changed = true;
-		}
-		//Talk abouts it mang!
-		if(changed) outputText("The fetish zealot's clothing shifts and twists, until he is wearing " + monster.armorName + ".\n\n", false);
-		monster.lust += monster.lustVuln * 5;
-	}
-	//Fetish Cultist Update
-	if(monster.short == "fetish cultist") {
-		oldOutfit = monster.armorName;
-		temp = rand(5);
-		//Religious outfit!
-		if(temp == 0 && monster.armorName != "pervy nun's clothing") {
-			monster.long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath.  She is wearing a religious robe that closely hugs her curvacious shape. There is a specially-placed opening over her pussy lips.";
-			monster.armorName = "pervy nun's clothing";
-			changed = true;
-		}
-		//Noble outfit
-		if(temp == 1 && monster.armorName != "noble's clothing") {
-			monster.armorName = "noble's clothing";
-				monster.long = "She's wearing a skimpy noble's dress, which lets you get a good look at her well-filled bra through an over-generous cleavage. Her skirt is so short that you clearly see her pussy lips.  She smiles at you in a rather cute way.  She looks like she's coming out of a painting, executed by a rather depraved and lust-filled artist.";
-			changed = true;
-		}
-		//Swim outfit
-		if(temp == 2 && monster.armorName != "swimsuit") {
-			monster.long = "She's currently wearing a swimsuit that's apparently much too small for her, because it stretches across every curve and clearly outlines them for you to see.  Her sizable breasts look like they could burst through the fabric at any moment.  You can even see her erect nipples and her puffy lower lips.";
-			monster.armorName = "swimsuit";
-			changed = true;
-		}
-		//Pervy Teacher
-		if(temp == 3 && monster.armorName != "teacher's outfit") {
-			monster.long = "She's now wearing a teacher's outfit, complete with glasses, make-up, her black hair in a tight bun, and a serious-looking outfit... with no back side at all.  She turns to the side to give you a good look at her rear, smiling mischievously.";
-			monster.armorName = "teacher's outfit";
-			changed = true;
-		}
-		//Naughty Nurse
-		if(temp == 4 && monster.armorName != "naughty nurse's uniform") {
-			monster.long = "The woman is wearing heavy make-up and a whorish nurse's suit, seemingly in white latex with two openings at her breasts and a large one on her crotch and inner thighs. It lets her blood-gorged pussy lips hang freely, which she displays proudly.";
-			monster.armorName = "naughty nurse's uniform";
-			changed = true;
-		}
-		//Talk abouts it mang!
-		if(changed) outputText("The fetish cultist's clothing shifts and twists, taking on the appearance of a " + monster.armorName + ".\n\n", false);
-		monster.lust += monster.lustVuln * 3;
 	}
 	regeneration(true);
 	if(player.lust >= 100) doNext(endLustLoss);
@@ -3965,8 +3728,6 @@ public function teaseXP(XP:Number = 0):void {
 //VICTORY OR DEATH?
 public function combatRoundOver():Boolean {
 	statScreenRefresh();
-	player.weaponAttack = fixedDamage(player.weaponName);
-	applyArmorStats(player.armorName, false);
 	if(gameState < 1) return false;
 	if(monster.HP < 1) {
 		doNext(endHpVictory);
@@ -4235,7 +3996,6 @@ public function spellChargeWeapon():void {
 	fatigue(15,1);
 	outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n", true);
 	player.createStatusAffect("Charge Weapon",10*spellMod(),0,0,0);
-	player.weaponAttack += player.statusAffectv1("Charge Weapon");
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
@@ -5429,8 +5189,6 @@ public function berzerk():void {
 	menuLoc = 0;
 	outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n", true);
 	player.createStatusAffect("Berzerking",0,0,0,0);
-	applyArmorStats(player.armorName, false);
-	player.weaponAttack = fixedDamage(player.weaponName);
 	enemyAI();
 }
 

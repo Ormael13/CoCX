@@ -471,15 +471,17 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		
 		//CLOTHING/ARMOR
-		saveFile.data.armorName = player.armorName;
-		saveFile.data.weaponName = player.weaponName;
-		saveFile.data.weaponVerb = player.weaponVerb;
-		saveFile.data.armorDef = player.armorDef;
-		saveFile.data.armorPerk = player.armorPerk;
-		saveFile.data.weaponAttack = player.weaponAttack;
-		saveFile.data.weaponPerk = player.weaponPerk;
-		saveFile.data.weaponValue = player.weaponValue;
-		saveFile.data.armorValue = player.armorValue;
+		saveFile.data.armorId = player.armor.id;
+		saveFile.data.weaponId = player.weapon.id;
+		saveFile.data.armorName = player.armorName;// For backward compatibility
+		saveFile.data.weaponName = player.weaponName;// For backward compatibility
+		saveFile.data.weaponVerb = player.weaponVerb;// For backward compatibility
+		saveFile.data.armorDef = player.armorDef;// For backward compatibility
+		saveFile.data.armorPerk = player.armorPerk;// For backward compatibility
+		saveFile.data.weaponAttack = player.weaponAttack;// For backward compatibility
+		saveFile.data.weaponPerk = player.weaponPerk;// For backward compatibility
+		saveFile.data.weaponValue = player.weaponValue;// For backward compatibility
+		saveFile.data.armorValue = player.armorValue;// For backward compatibility
 		
 		//PIERCINGS
 		saveFile.data.nipplesPierced = player.nipplesPierced;
@@ -700,7 +702,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Populate storage slot array
 		for (i = 0; i < itemStorage.length; i++)
 		{
-			saveFile.data.itemStorage[i].shortName = itemStorage[i].itype.id;
+			saveFile.data.itemStorage[i].shortName = itemStorage[i].itype.id;// For backward compatibility
+			saveFile.data.itemStorage[i].id = itemStorage[i].itype.id;
 			saveFile.data.itemStorage[i].quantity = itemStorage[i].quantity;
 			saveFile.data.itemStorage[i].unlocked = itemStorage[i].unlocked;
 		}
@@ -713,7 +716,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Populate gear slot array
 		for (i = 0; i < gearStorage.length; i++)
 		{
-			saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;
+			saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;// For backward compatibility
+			saveFile.data.gearStorage[i].id = gearStorage[i].itype.id;
 			saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
 			saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
 		}
@@ -748,23 +752,28 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//ITEMZ. Item1s
 		saveFile.data.itemSlot1 = [];
 		saveFile.data.itemSlot1.quantity = player.itemSlot1.quantity;
-		saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;
+		saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;// For backward compatibility
+		saveFile.data.itemSlot1.id = player.itemSlot1.itype.id;
 		saveFile.data.itemSlot1.unlocked = player.itemSlot1.unlocked;
 		saveFile.data.itemSlot2 = [];
 		saveFile.data.itemSlot2.quantity = player.itemSlot2.quantity;
-		saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;
+		saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;// For backward compatibility
+		saveFile.data.itemSlot2.id = player.itemSlot2.itype.id;
 		saveFile.data.itemSlot2.unlocked = player.itemSlot2.unlocked;
 		saveFile.data.itemSlot3 = [];
 		saveFile.data.itemSlot3.quantity = player.itemSlot3.quantity;
-		saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;
+		saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;// For backward compatibility
+		saveFile.data.itemSlot3.id = player.itemSlot3.itype.id;
 		saveFile.data.itemSlot3.unlocked = player.itemSlot3.unlocked;
 		saveFile.data.itemSlot4 = [];
 		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
-		saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;
+		saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;// For backward compatibility
+		saveFile.data.itemSlot4.id = player.itemSlot4.itype.id;
 		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
 		saveFile.data.itemSlot5 = [];
 		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
-		saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;
+		saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;// For backward compatibility
+		saveFile.data.itemSlot5.id = player.itemSlot5.itype.id;
 		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
 		
 		// Keybinds
@@ -1052,16 +1061,29 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.nosePLong = saveFile.data.nosePLong;
 		
 		//CLOTHING/ARMOR
-		player.armorName = saveFile.data.armorName;
-		player.weaponName = saveFile.data.weaponName;
-		player.weaponVerb = saveFile.data.weaponVerb;
-		player.armorDef = saveFile.data.armorDef;
-		player.armorPerk = saveFile.data.armorPerk;
-		player.weaponAttack = saveFile.data.weaponAttack;
-		player.weaponPerk = saveFile.data.weaponPerk;
-		player.weaponValue = saveFile.data.weaponValue;
-		player.armorValue = saveFile.data.armorValue;
-		
+		if (saveFile.data.weaponId){
+			player.weapon = (ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS;
+		} else {
+			player.weapon = WeaponLib.FISTS;
+			for each (var itype:ItemType in ItemType.getItemLibrary()) {
+				if (itype.longName == saveFile.data.weaponName){
+					player.weapon = (itype as Weapon) || WeaponLib.FISTS;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.armorId){
+			player.armor = (ItemType.lookupItem(saveFile.data.armorId) as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		} else {
+			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			for each (var itype:ItemType in ItemType.getItemLibrary()) {
+				if (itype.longName == saveFile.data.armorName){
+					player.armor = (itype as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES;
+					break;
+				}
+			}
+		}
+
 		//MAIN STATS
 		player.str = saveFile.data.str;
 		player.tou = saveFile.data.tou;
@@ -1453,14 +1475,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = gearStorage[i];
-				if (saveFile.data.gearStorage[i].shortName == undefined)
+				if (saveFile.data.gearStorage[i].shortName == undefined || saveFile.data.gearStorage[i].quantity == undefined)
 					storage.emptySlot();
 				else
-					storage.itype = ItemType.lookupItem(saveFile.data.gearStorage[i].shortName);
-				if (saveFile.data.gearStorage[i].quantity == undefined)
-					storage.emptySlot();
-				else
-					storage.quantity = saveFile.data.gearStorage[i].quantity;
+					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
 				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
@@ -1514,20 +1532,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			saveFile.data.itemSlot4.shortName = "GroPlus";
 		if (saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
 			saveFile.data.itemSlot5.shortName = "GroPlus";
-		player.itemSlot1.quantity = saveFile.data.itemSlot1.quantity;
-		player.itemSlot1.itype = ItemType.lookupItem(saveFile.data.itemSlot1.shortName);
+		player.itemSlot1.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot1.shortName),saveFile.data.itemSlot1.quantity);
 		player.itemSlot1.unlocked = saveFile.data.itemSlot1.unlocked;
-		player.itemSlot2.quantity = saveFile.data.itemSlot2.quantity;
-		player.itemSlot2.itype = ItemType.lookupItem(saveFile.data.itemSlot2.shortName);
+		player.itemSlot2.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot2.shortName),saveFile.data.itemSlot2.quantity);
 		player.itemSlot2.unlocked = saveFile.data.itemSlot2.unlocked;
-		player.itemSlot3.quantity = saveFile.data.itemSlot3.quantity;
-		player.itemSlot3.itype = ItemType.lookupItem(saveFile.data.itemSlot3.shortName);
+		player.itemSlot3.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot3.shortName),saveFile.data.itemSlot3.quantity);
 		player.itemSlot3.unlocked = saveFile.data.itemSlot3.unlocked;
-		player.itemSlot4.quantity = saveFile.data.itemSlot4.quantity;
-		player.itemSlot4.itype = ItemType.lookupItem(saveFile.data.itemSlot4.shortName);
+		player.itemSlot4.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot4.shortName),saveFile.data.itemSlot4.quantity);
 		player.itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
-		player.itemSlot5.quantity = saveFile.data.itemSlot5.quantity;
-		player.itemSlot5.itype = ItemType.lookupItem(saveFile.data.itemSlot5.shortName);
+		player.itemSlot5.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot5.shortName),saveFile.data.itemSlot5.quantity);
 		player.itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
 
 		unFuckSave();

@@ -167,7 +167,7 @@ private function liliumDickRidah():void {
 	//(if loose or produce lots of lube)
 	else outputText("Without a second thought you plunge yourself down on Lilium's fuckrod, your " + buttDescript() + " jiggling from the sudden impact.  ", false);
 	outputText("You pull yourself up until only the head of the demon girl's dick remains within you, before sliding back down to let her fill you again.  Up and down you bounce on top of her, your speed and force increasing with every stroke.  You let out a contented half moan, half grunt each time your " + hipDescript() + " collide with hers as her stiff cock stimulates your insides.  Lilium's own search for more pleasure brings her hands to her breasts and she begins to finger-fuck her nipples.  Before long she has two and then three fingers furiously plunging in and out of her gaping nipplecunts and you can see her eyes rolled back in her head as her mouth hangs open in testament to the excitement flowing through her body.", false);
-	cuntChange(14,true,true,false);
+	player.cuntChange(14,true,true,false);
 	outputText("\n\n", false);
 
 	//(if player has breasts)

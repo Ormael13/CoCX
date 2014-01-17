@@ -184,8 +184,7 @@ package classes.Scenes
 
 		public function debugOptions():void
 		{
-			shortName = "W.Fruit";
-			takeItem();
+			inventory.takeItem(consumables.W_FRUIT);
 		}
 
 		//Massive bodyparts scene

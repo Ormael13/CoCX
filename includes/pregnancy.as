@@ -94,12 +94,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}
@@ -209,12 +209,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}
@@ -270,12 +270,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("<b>\nYour breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("<b>\nYour breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}
@@ -287,7 +287,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 785) {
 				//outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>", false);
-				neonPinkEgg(true);
+				mutations.neonPinkEgg(true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -297,7 +297,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 765) {
 				//outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>", false);
-				neonPinkEgg(true);
+				mutations.neonPinkEgg(true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -408,12 +408,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				displayedUpdate = true;
 			}
@@ -507,12 +507,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}	
@@ -568,12 +568,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}
@@ -633,13 +633,13 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 			}
@@ -703,13 +703,13 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 			}
@@ -743,13 +743,13 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 			}
@@ -935,13 +935,13 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 					displayedUpdate = true;
 				}
 			}
@@ -1057,12 +1057,12 @@ public function updatePregnancy():Boolean {
 				//Enlarge if too small for lactation
 				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 				//Enlarge if really small!
 				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
-					growTits(1, 1, false, 3);
+					player.growTits(1, 1, false, 3);
 				}
 			}
 		}
@@ -1218,7 +1218,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.buttPregnancyIncubation == 785) {
-				neonPinkEgg(true);
+				mutations.neonPinkEgg(true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -1227,7 +1227,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.buttPregnancyIncubation == 765) {
-				neonPinkEgg(true);
+				mutations.neonPinkEgg(true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -1297,7 +1297,7 @@ public function updatePregnancy():Boolean {
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType=0;
 		dynStats("int", 1, "lib", 4, "sen", 3, "lus=", 0);
-		if(buttChange(20, true)) outputText("\n", false);
+		if(player.buttChange(20, true)) outputText("\n", false);
 		if(player.buttRating < 17) {
 			//Guaranteed increase up to level 10
 			if(player.buttRating < 13) {
@@ -1420,7 +1420,7 @@ public function updatePregnancy():Boolean {
 		outputText(".  At last they finish, and with one last nuzzle, your strange bunny-children go hopping off, doubtless to find more of their own kind.\n\n", false);
 		
 		outputText("You sink into restful unconsciousness, marveling at how stretchy and sensitive your " + vaginaDescript(0) + " feels now.", false);
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 		player.boostLactation(.01);
 		//Boost capacity
 		if(player.vaginalCapacity() < 300) {
@@ -1447,7 +1447,7 @@ public function updatePregnancy():Boolean {
 		
 		if(flags[kFLAGS.ANEMONE_KID] > 0) {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, cilliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			outputText("\n\nExhausted by the birth but with a burden lifted from your mind, you slip into a grateful doze.");
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
@@ -1456,7 +1456,7 @@ public function updatePregnancy():Boolean {
 		else if(player.anemoneCocks() > 0 && player.cor < 25 && flags[kFLAGS.ANEMONE_KID] == 0) {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
 			outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			outputText("\n");
 			player.createStatusAffect("Camp Anemone Trigger",0,0,0,0);
 			player.pregnancyIncubation = 0;
@@ -1466,7 +1466,7 @@ public function updatePregnancy():Boolean {
 		//[(if pc has 0-9 existing cocks)
 		else if(player.cockTotal() < 10) {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + clitDescript() + "!  The small anemone and you both lay there twitching, but it recovers its bearings first; through your haze of pain you watch it flexing its body, wedging the head under itself, and elevating the base.", false);
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			
 			outputText("\n\nBeset by a panic, you watch as the strange thing sets butt-end down on your pubic mound and adheres", false);
 			//[(if cocks)
@@ -1503,7 +1503,7 @@ public function updatePregnancy():Boolean {
 		//[(if PC has 10 existing cocks) && no kid
 		else {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, robbing your pull of force.  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Casting about with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; renewed, you slap at it, trying to knock the little creature away.  Several weak hits land on it, and, almost as if irritated, the tentacles seize on your labia and pull the stalk back toward your crotch and thence into your pussy.  Next you feel the thing shift and flatten itself against your insides, then a pinch on your vaginal walls where the little anemone presses on them.  This can't be good.");
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 						
 			//OLD TXToutputText("The anemone writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back into your " + vaginaDescript(0)+ ".  As the tentacled crown brushes past your lips a venomous heat fills your crotch - you feel the thing shift and flatten itself against your insides, then a pinch on your vaginal walls where the little anemone was pressing on them.  This can't be good.\n\n", false);
 
@@ -1555,12 +1555,12 @@ public function updatePregnancy():Boolean {
 		//Enlarge if too small for lactation
 		if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
 			outputText("  <b>Your breasts have grown to C-cups!</b>", false);
-			growTits(1, 1, false, 3);
+			player.growTits(1, 1, false, 3);
 		}
 		//Enlarge if really small!
 		if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
 			outputText("  <b>Your breasts have grown to B-cups!</b>", false);
-			growTits(1, 1, false, 3);
+			player.growTits(1, 1, false, 3);
 		}
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
@@ -1592,7 +1592,7 @@ public function updatePregnancy():Boolean {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
 			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			
 			outputText("\n\nEventually you feel a hand on your face, and open your eyes to see Marble looking down at you.  \"<i>Sweetie, are you all right?  Why aren't you pregnant anymore?  Where is our child?</i>\" You stand up and look around.  There is no sign of the baby you were carrying; the child seems to have left after finishing its drink. You never even got to see its face...\n\n", false);
 			
@@ -1601,7 +1601,7 @@ public function updatePregnancy():Boolean {
 		}
 		else {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble rushes over and sees that it's time for you to give birth, so she picks you up and supports you as you continue pushing the child out of your now-gaping " + vaginaDescript(0) + ".", false);
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			outputText("\n\nFor the next few minutes, you can't do much else but squeeze the large form inside your belly out.  Marble tries to help a little, pulling your nether lips open even further to make room for the head.  You gasp as you push the head out, and you hear Marble give a little cry of joy.  \"<i>It's a daughter of mine!</i>\" she tells you, but you can barely hear her due to the focus you're putting into the task of bringing this child out.\n\n", false);
 			outputText("You give an almighty heave and finally manage to push the shoulders out. The rest is downhill from there.  Once you've pushed the child completely out, Marble lays you down on the ground.  You rest there for a few moments, trying to catch your breath after the relatively difficult birthing.  When you finally have a chance to get up, you see that Marble has a small cowgirl cradled in her arms, suckling on her nipple.  You can hardly believe that you managed to push out a girl that big!  Marble seems to understand and tells you that the child is actually a fair bit bigger now than when she came out.\n\n", false);
 			outputText("She helps you stand up and gives you the little girl to suckle for yourself.  ", false);
@@ -1640,7 +1640,7 @@ public function updatePregnancy():Boolean {
 			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(1);
 		}
-		cuntChange(120, true,true,false);
+		player.cuntChange(120, true,true,false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
@@ -1685,7 +1685,7 @@ public function updatePregnancy():Boolean {
 		}
 		//FUCKING BIRTH SHIT HERE.
 		amilyScene.pcBirthsAmilysKidsQuestVersion();
-		cuntChange(60, true, true, false);
+		player.cuntChange(60, true, true, false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
@@ -1711,7 +1711,7 @@ public function updatePregnancy():Boolean {
 			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(.5);
 		}
-		cuntChange(60, true,true,false);
+		player.cuntChange(60, true,true,false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
@@ -1753,7 +1753,7 @@ public function updatePregnancy():Boolean {
 			player.boostLactation(.5);
 		}
 		outputText("  ", false);
-		cuntChange(100, true);
+		player.cuntChange(100, true);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
@@ -1794,7 +1794,7 @@ public function updatePregnancy():Boolean {
 			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.  ", false);
 			player.boostLactation(.5);
 		}
-		cuntChange(60, true);
+		player.cuntChange(60, true);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
@@ -1868,7 +1868,7 @@ public function updatePregnancy():Boolean {
 			outputText("\n\n<b>You feel compelled to leave the eggs behind, ", false);
 			if(player.hasStatusAffect("ateEgg") >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);
 			else outputText("but your body's intuition reminds you they shouldn't be fertile, and your belly rumbles with barely contained hunger.\n</b>", false);
-			cuntChange(20, true);
+			player.cuntChange(20, true);
 			player.createStatusAffect("lootEgg",0,0,0,0); 
 			displayedUpdate = true;
 			player.pregnancyIncubation = 0;

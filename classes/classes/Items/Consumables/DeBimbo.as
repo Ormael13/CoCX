@@ -7,7 +7,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Player;
 
-	public class DeBimbo extends Consumable
+	public final class DeBimbo extends Consumable
 	{
 
 		override public function get description():String

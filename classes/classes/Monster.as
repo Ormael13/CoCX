@@ -1,11 +1,16 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.ArmorLib;
 	import classes.Items.ConsumableLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
+	import classes.Scenes.Areas.Lake.FetishCultist;
+	import classes.Scenes.Areas.Lake.FetishZealot;
+	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
+	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.internals.RandomDrop;
 	import classes.internals.ChainedDrop;
 	import classes.internals.WeightedDrop;
@@ -1070,6 +1075,196 @@
 		protected function clearOutput():void
 		{
 			game.clearOutput();
+		}
+
+		public function dropLoot():ItemType
+		{
+			return drop.roll() as ItemType;
+		}
+
+		public function combatRoundUpdate():void
+		{
+			if(hasStatusAffect("Milky Urta") >= 0) {
+				game.urtaQuest.milkyUrtaTic();
+			}
+			//Countdown
+			if(hasStatusAffect("TentacleCoolDown") >= 0) {
+				statusAffects[hasStatusAffect("TentacleCoolDown")].value1--;
+				if(statusAffects[hasStatusAffect("TentacleCoolDown")].value1 == 0) {
+					removeStatusAffect("TentacleCoolDown");
+				}
+			}
+			if(hasStatusAffect("Coon Whip") >= 0) {
+				if(statusAffectv2("Coon Whip") <= 0) {
+					armorDef += statusAffectv1("Coon Whip");
+					outputText("<b>Tail whip wears off!</b>\n\n");
+					removeStatusAffect("Coon Whip");
+				}
+				else {
+					addStatusValue("Coon Whip",2,-1);
+					outputText("<b>Tail whip is currently reducing your foe");
+					if(plural) outputText("s'");
+					else outputText("'s");
+					outputText(" armor by " + statusAffectv1("Coon Whip") + ".</b>\n\n")
+				}
+			}
+			if(hasStatusAffect("Blind") >= 0) {
+				addStatusValue("Blind",1,-1);
+				if(statusAffectv1("Blind") <= 0) {
+					outputText("<b>" + capitalA + short + " is no longer blind!</b>\n\n", false);
+					removeStatusAffect("Blind");
+				}
+				else outputText("<b>" + capitalA + short + " is currently blind!</b>\n\n", false);
+			}
+			if(hasStatusAffect("Earthshield") >= 0) {
+				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
+			}
+			if(hasStatusAffect("sandstorm") >= 0) {
+				//Blinded:
+				if(player.hasStatusAffect("Blind") >= 0) {
+					outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
+					player.removeStatusAffect("Blind");
+				}
+				else {
+					if(statusAffectv1("sandstorm") == 0 || statusAffectv1("sandstorm") % 4 == 0) {
+						player.createStatusAffect("Blind",0,0,0,0);
+						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
+					}
+					else {
+						outputText("<b>The grainy mess cuts at any exposed flesh and gets into every crack and crevice of your armor.");
+						var temp:Number = player.takeDamage(1 + rand(2));
+						outputText(" (" + temp + ")");
+						outputText("</b>\n\n");
+					}
+				}
+				addStatusValue("sandstorm",1,1);
+			}
+			if(hasStatusAffect("Stunned") >= 0) {
+				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n", false);
+			}
+			if(hasStatusAffect("Shell") >= 0) {
+				if(statusAffectv1("Shell") >= 0) {
+					outputText("<b>A wall of many hues shimmers around " + a + short + ".</b>\n\n");
+					addStatusValue("Shell",1,-1);
+				}
+				else {
+					outputText("<b>The magical barrier " + a + short + " erected fades away to nothing at last.</b>\n\n");
+					removeStatusAffect("Shell");
+				}
+			}
+			if(hasStatusAffect("Izma Bleed") >= 0) {
+				//Countdown to heal
+				addStatusValue("Izma Bleed",1,-1);
+				//Heal wounds
+				if(statusAffectv1("Izma Bleed") <= 0) {
+					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n", false);
+					removeStatusAffect("Izma Bleed");
+				}
+				//Deal damage if still wounded.
+				else {
+					var store:Number = eMaxHP() * (3 + rand(4))/100;
+					store = game.doDamage(store);
+					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
+					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
+				}
+			}
+			if(hasStatusAffect("Timer") >= 0) {
+				if(statusAffectv1("Timer") <= 0)
+					removeStatusAffect("Timer");
+				addStatusValue("Timer",1,-1);
+			}
+			if(hasStatusAffect("Lust Stick") >= 0) {
+				//LoT Effect Messages:
+				switch(statusAffectv1("Lust Stick")) {
+					//First:
+					case 1:
+						if(plural) outputText("One of " + a + short + " pants and crosses " + mf("his","her") + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + mf("he","she") + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n", false);
+						else outputText(capitalA + short + " pants and crosses " + pronoun3 + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + pronoun1 + " loses himself in a lipstick-fueled fantasy.  When " + pronoun1 + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n", false);
+						break;
+					//Second:
+					case 2:
+						if(plural) outputText(capitalA + short + " moan out loud, " + pronoun3 + " dicks leaking and dribbling while " + pronoun1 + " struggle not to touch it.\n\n", false);
+						else outputText(capitalA + short + " moans out loud, " + pronoun3 + " dick leaking and dribbling while " + pronoun1 + " struggles not to touch it.\n\n", false);
+						break;
+					//Third:
+					case 3:
+						if(plural) outputText(capitalA + short + " pump " + pronoun3 + " hips futilely, air-humping non-existent partners.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n", false);
+						else outputText(capitalA + short + " pumps " + pronoun3 + " hips futilely, air-humping a non-existent partner.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n", false);
+						break;
+					//Fourth:
+					case 4:
+						if(plural) outputText(capitalA + short + " close " + pronoun2 + " eyes and grunt, " + pronoun3 + " cocks twitching, bouncing, and leaking pre-cum.\n\n", false);
+						else outputText(capitalA + short + " closes " + pronoun2 + " eyes and grunts, " + pronoun3 + " cock twitching, bouncing, and leaking pre-cum.\n\n", false);
+						break;
+					//Fifth and repeat:
+					default:
+						if(plural) outputText("Drops of pre-cum roll steadily out of their dicks.  It's a marvel " + pronoun1 + " haven't given in to " + pronoun3 + " lusts yet.\n\n", false);
+						else outputText("Drops of pre-cum roll steadily out of " + a + short + "'s dick.  It's a marvel " + pronoun1 + " hasn't given in to " + pronoun3 + " lust yet.\n\n", false);
+						break;
+				}
+				addStatusValue("Lust Stick",1,1);
+				//Damage = 5 + bonus score minus
+				//Reduced by lust vuln of course
+				lust += Math.round(lustVuln * (5 + statusAffectv2("Lust Stick")));
+			}
+			if(hasStatusAffect("PCTailTangle") >= 0) {
+				//when Entwined
+				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
+				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
+				game.dynStats("lus", 5+player.sens/10);
+			}
+			if(player.hasStatusAffect("Blind") >= 0 && hasStatusAffect("sandstorm") < 0) {
+				if(player.hasStatusAffect("Sheila Oil") >= 0) {
+					if(player.statusAffectv1("Blind") <= 0) {
+						outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
+						player.removeStatusAffect("Blind");
+					}
+					else {
+						outputText("<b>You scrub at the oily secretion with the back of your hand and wipe some of it away, but only smear the remainder out more thinly.  You can hear the demon giggling at your discomfort.</b>\n\n", false);
+						player.addStatusValue("Blind",1,-1);
+					}
+				}
+				else {
+					//Remove blind if countdown to 0
+					if(player.statusAffectv1("Blind") == 0) {
+						player.removeStatusAffect("Blind");
+						//Alert PC that blind is gone if no more stacks are there.
+						if(player.hasStatusAffect("Blind") < 0) {
+							outputText("<b>Your eyes have cleared and you are no longer blind!</b>\n\n", false);
+						}
+						else outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
+					}
+					else {
+						player.addStatusValue("Blind",1,-1);
+						outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
+					}
+				}
+			}
+			if(hasStatusAffect("QueenBind") >= 0) {
+				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
+				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
+			}
+			if(this is SecretarialSuccubus || this is MilkySuccubus) {
+				if(player.lust < 45) outputText("There is something in the air around your opponent that makes you feel warm.\n\n", false);
+				if(player.lust >= 45 && player.lust < 70) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n", false);
+				if(player.lust >= 70 && player.lust < 90) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n", false);
+				if(player.lust >= 90) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n", false);
+				game.dynStats("lus", 1+rand(8));
+			}
+			//[LUST GAINED PER ROUND] - Omnibus
+			if(hasStatusAffect("Lust Aura") >= 0) {
+				if(player.lust < 33) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
+		 		if(player.lust >= 33 && player.lust < 66) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
+		  		if(player.lust >= 66) {
+					outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ", false);
+					temp = rand(4);
+					if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n", false);
+					if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n", false);
+					if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n", false);
+					if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n", false);
+				}
+				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
+			}
 		}
 	}
 }

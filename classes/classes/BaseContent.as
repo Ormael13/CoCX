@@ -1,12 +1,9 @@
 ﻿package classes 
 {
-	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.ArmorLib;
-	import classes.Items.ConsumableLib;
-	import classes.Items.UseableLib;
-	import classes.Items.WeaponLib;
+	import classes.Items.*;
 	import classes.Scenes.Camp;
+	import classes.Scenes.Inventory;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
@@ -91,6 +88,15 @@
 			return kGAMECLASS.inCombat();
 		}
 
+		protected function get inDungeon():Boolean
+		{
+			return kGAMECLASS.inDungeon;
+		}
+		protected function get itemSubMenu():Boolean
+		{
+			return kGAMECLASS.itemSubMenu;
+		}
+
 		protected function showStats():void
 		{
 			kGAMECLASS.showStats();
@@ -104,6 +110,16 @@
 		protected function cleanupAfterCombat():void
 		{
 			kGAMECLASS.cleanupAfterCombat();
+		}
+
+		protected function combatRoundOver():void
+		{
+			kGAMECLASS.combatRoundOver();
+		}
+
+		protected function enemyAI():void
+		{
+			kGAMECLASS.enemyAI();
 		}
 
 		protected function spriteSelect(choice:Number = 0):void
@@ -475,12 +491,6 @@
 			// Bullshit to unroll the incoming array
 			kGAMECLASS.dynStats.apply(null, args);
 		}
-		protected function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
-			return player.cuntChange(cArea,display,spacingsF,spacingsB);
-		}
-		protected function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
-			return player.buttChange(cArea,display,spacingsF,spacingsB);
-		}
 
 		protected function silly():Boolean
 		{
@@ -585,6 +595,9 @@
 		protected function get armors():ArmorLib{
 			return kGAMECLASS.armors;
 		}
+		protected function get inventory():Inventory{
+			return kGAMECLASS.inventory;
+		}
 
 		protected function get itemSwapping():Boolean
 		{
@@ -649,16 +662,6 @@
 		protected function set gearStorage(val:Array):void
 		{
 			kGAMECLASS.gearStorage = val;
-		}
-		
-		protected function get shortName():String
-		{
-			return kGAMECLASS.shortName;
-		}
-		
-		protected function set shortName(val:String):void
-		{
-			kGAMECLASS.shortName = val;
 		}
 		
 		protected function get temp():int

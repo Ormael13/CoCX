@@ -6,7 +6,8 @@ package classes.Scenes.Areas.Forest
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
+	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Player;
 	import classes.Scenes.Monsters.Imp;
 
@@ -235,8 +236,7 @@ package classes.Scenes.Areas.Forest
 			else {
 				//add Kitsune's Gift to inventory
 				menuLoc = 2;
-				shortName = "KitGift";
-				takeItem();
+				inventory.takeItem(consumables.KITGIFT);
 			}
 		}
 
@@ -1077,17 +1077,17 @@ package classes.Scenes.Areas.Forest
 			if (monster.hairColor == "blonde") {
 				if (player.hasCock()) {
 					//[Fuck Draft]
-					if (hasItem("F.Draft", 1)) {
+					if (player.hasItem(consumables.F_DRAFT)) {
 						if (display) outputText("  You could dose her with a fuck draft...");
 						button = kitsuneButton(button, "Use F.Draft", fuckDraftBlond);
 					}
 					//[Lactaid]
-					if (hasItem("Lactaid", 1)) {
+					if (player.hasItem(consumables.LACTAID)) {
 						if (display) outputText("  You could dose her with lactad...");
 						button = kitsuneButton(button, "Use L-Aid", lactaidDoseAKitSune);
 					}
 					//[Ovi Elixir]
-					if (hasItem("OviElix", 1)) {
+					if (player.hasItem(consumables.OVIELIX)) {
 						if (display) outputText("  You could use an oviposition elixir on her...");
 						button = kitsuneButton(button, "Use OviElix", doseAKitsuneWithOviElixirs);
 					}
@@ -1130,7 +1130,7 @@ package classes.Scenes.Areas.Forest
 				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0)
 					button = kitsuneButton(button, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
 				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					button = kitsuneButton(button, "B.Titfuck", kGAMECLASS.lustyMaidenPaizuri);
+					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
 			//[Feeder]
 			if (player.hasPerk("Feeder") >= 0)
@@ -1538,7 +1538,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You can't be certain how long you were asleep, but when you come to your senses, you are alone.  A musky trail of fluids leads into the underbrush, and though you doubt that she could have gotten far in her condition, you need to return to check on your camp.  As you gather your things, you pause briefly and smirk, certain you can hear the sound of moaning filtering through the trees.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
-			consumeItem("F.Draft", 1);
+			player.consumeItem(consumables.F_DRAFT);
 			cleanupAfterCombat();
 		}
 
@@ -1598,32 +1598,20 @@ package classes.Scenes.Areas.Forest
 
 			outputText("They are ");
 
-			shortName = "BrownEg";
+			var itype:ItemType;
 			//Large eggs
 			if (rand(3) == 0) {
-				temp = rand(6);
-				if (temp == 0) shortName = "L.BrnEg";
-				if (temp == 1) shortName = "L.PrpEg";
-				if (temp == 2) shortName = "L.BluEg";
-				if (temp == 3) shortName = "L.PnkEg";
-				if (temp == 4) shortName = "L.WhtEg";
-				if (temp == 5) shortName = "L.BlkEg";
+				itype = consumables.LARGE_EGGS[rand(consumables.LARGE_EGGS.length)];
 			}
 			//Small eggs
 			else {
-				temp = rand(6);
-				if (temp == 0) shortName = "BrownEg";
-				if (temp == 1) shortName = "PurplEg";
-				if (temp == 2) shortName = "BlueEgg";
-				if (temp == 3) shortName = "PinkEgg";
-				if (temp == 4) shortName = "WhiteEg";
-				if (temp == 5) shortName = "BlackEg";
+				itype = consumables.SMALL_EGGS[rand(consumables.SMALL_EGGS.length)];
 			}
 			outputText(" about the size of ostrich eggs.  You pick one up and examine it, rolling it in your hand a bit.  A rustling in the bushes brings your focus back to the kitsune, but by the time you look up, all you see is a set of golden tails slipping into the underbrush.\n\n");
-			consumeItem("OviElix", 1);
+			player.consumeItem(consumables.OVIELIX);
 			outputText("\"<i>Take good care of my little eggies, darling!</i>\"");
 			//{replace normal kitsune loot tables with randomly colored eggs}
-			flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = shortName;
+			flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = itype.id;
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
 			cleanupAfterCombat();
@@ -1685,7 +1673,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
 			//consume lactaid
-			consumeItem("Lactaid", 1);
+			player.consumeItem(consumables.LACTAID);
 			cleanupAfterCombat();
 		}
 
@@ -2255,7 +2243,7 @@ package classes.Scenes.Areas.Forest
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
-			if (hasItem("GldStat", 1) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(2, "Statue", stealAStatue);
+			if (player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(2, "Statue", stealAStatue);
 			addButton(4, "Leave", eventParser, 13);
 		}
 
@@ -2290,7 +2278,7 @@ package classes.Scenes.Areas.Forest
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			clearOutput();
-			if (hasItem("FoxJewl", 1) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte / 10 && player.earType == EARS_FOX && player.hasPerk("Corrupted Nine-tails") < 0 && player.hasPerk("Enlightened Nine-tails") < 0) {
+			if (player.hasItem(consumables.FOXJEWL) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte / 10 && player.earType == EARS_FOX && player.hasPerk("Corrupted Nine-tails") < 0 && player.hasPerk("Enlightened Nine-tails") < 0) {
 				//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 
@@ -2310,7 +2298,7 @@ package classes.Scenes.Areas.Forest
 					player.createPerk("Enlightened Nine-tails", 0, 0, 0, 0);
 					dynStats("int", 2, "lus", -20, "cor", -2);
 				}
-				consumeItem("FoxJewl", 1);
+				player.consumeItem(consumables.FOXJEWL);
 				doNext(13);
 			}
 			else {
@@ -2347,8 +2335,7 @@ package classes.Scenes.Areas.Forest
 			//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
 			dynStats("lus", 10);
 			menuLoc = 2;
-			shortName = "GldStat";
-			takeItem();
+			inventory.takeItem(useables.GLDSTAT);
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 1;
 		}
 
@@ -2359,7 +2346,7 @@ package classes.Scenes.Areas.Forest
 			outputText("Regretting your decision, you replace the statue on the pedestal, your guilty conscience winning out over greed today.");
 			//Advance 1hr and return to camp.
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 0;
-			consumeItem("GldStat", 1);
+			player.consumeItem(useables.GLDSTAT);
 			doNext(13);
 		}
 

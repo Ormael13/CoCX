@@ -5,9 +5,9 @@ package classes.Items
 {
 	import classes.BaseContent;
 
-	public class MiscItems extends BaseContent
+	public final class MiscItemLib extends BaseContent
 	{
-		public function MiscItems()
+		public function MiscItemLib()
 		{
 		}
 	}

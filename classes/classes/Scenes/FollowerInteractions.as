@@ -1,5 +1,6 @@
 ﻿package classes.Scenes{
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.NPCs.NPCAwareContent;
 	import classes.GlobalFlags.kFLAGS;
 
@@ -94,7 +95,7 @@ public function fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM():void {
 	outputText("", true);
 	outputText("\"<i>You brought it!  Yes!</i>\" cheers Amily.  She reaches into your pouches and pulls out the bottle of pure honey and takes off for the woods.  You're forced to chase after her, and by the time you catch up, she's already hit Jojo with a knock-out dart.  The corrupted mouse is still hard and dripping with spunk, even while unconscious.  Amily moans, \"<i>You poor dear... here, drink up.  This will help make you better.</i>\"\n\n", false);
 	//She noms your honey
-	consumeItem("PurHony",1);
+	player.consumeItem(consumables.PURHONY);
 	
 	outputText("She only gives him a few sips before she turns back to you and says, \"<i>This is going to take me a few hours.  It would be best if you weren't here when he wakes up.  I doubt he'll want anything to do with you after this.  I'll give him directions to find our children.  I'm sure they'll be able to help him recover the rest of the way.</i>\"\n\n", false);
 	
@@ -415,17 +416,13 @@ private function srslyPimpinGuyz():void {
 	
 	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  All that is left is a suit of comfortable clothes that you put on.  You also find a note in a rough script that says: <i>This is what you get for being an asshole.</i>  Those damn bitches.", false);
 	player.gems = 0;
-	itemSlot1.quantity = 0;
-	itemSlot2.quantity = 0;
-	itemSlot3.quantity = 0;
-	itemSlot4.quantity = 0;
-	itemSlot5.quantity = 0;
-	player.armorName = "comfortable clothes";
-	player.weaponName = "fists";
-	player.armorValue = 0;
-	player.weaponValue = 0;
-	player.weaponAttack = 0;
-	player.armorDef = 0;
+	player.itemSlot1.quantity = 0;
+	player.itemSlot2.quantity = 0;
+	player.itemSlot3.quantity = 0;
+	player.itemSlot4.quantity = 0;
+	player.itemSlot5.quantity = 0;
+	player.armor = armors.COMFORTABLE_CLOTHES;
+	player.weapon = WeaponLib.FISTS;
 	player.removeStatusAffect("Camp Marble");
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);

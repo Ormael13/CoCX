@@ -60,7 +60,7 @@ private function noDontDebimbo():void {
 //Yes (God dammit what the fuck did I just say)*
 private function yesDebimboSophie():void {
 	clearOutput();
-	consumeItem("Debimbo",1);
+	player.consumeItem(consumables.DEBIMBO);
 	outputText("You grab the air-headed harpy and pull her over to you, pressing her impressive chest against you as you ready your intellectual beverage.  \"<i>Oooh! Hey, babe, what'cha got there?</i>\" Sophie asks, staring wide-eyed at the tincture.  Telling her not to worry about it, you pop the cork and bring the vial's neck up to Sophie's mouth, her big, full lips parting eagerly.  \"<i>Hey, is it wine?  I could just <b>DIE</b> for some wine!  Then maybe, like, a good hard fucking afterwards!</i>\" she declares, jumping excitedly in your grasp - almost making you spill the drink.  You grasp her chin, steadying the harpy's head just long enough to upend the liquid into her mouth, making sure to drain every last drop into her before you tickle her throat, forcing her to swallow it all in one audible gulp.");
 	
 	outputText("\n\n\"<i>Ew!  That TOTALLY wasn't booze!</i>\" Sophie complains, struggling out of your grasp and pouting, feather arms crossed beneath her heavy bosom.  You observe her for a long moment, waiting... waiting....  \"<i>Hey, I like, don't feel so good...</i>\" Sophie finally says, clutching her head, fingers running through her thick blonde locks.  \"<i>Ugh, I don't... Why... Oh, shit, where am I?  And what happened to my TITS!?</i>\" Sophie staggers forward, blinking hard.  When she looks up at you a moment later, you can see that gleam of intelligence flaring brightly once more in her blue eyes.");
@@ -78,7 +78,7 @@ private function yesDebimboSophie():void {
 		addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
 	}
 	addButton(3,"Let Her Go",letDebimboSophieGo);
-	if(hasItem("BimboLq",1)) addButton(4,"Bimbo Again",bimboSophieAgain);
+	if(player.hasItem(consumables.BIMBOLQ)) addButton(4,"Bimbo Again",bimboSophieAgain);
 	
 	
 }
@@ -92,7 +92,7 @@ private function bimboSophieAgain():void {
 	outputText("\n\nWell then, crisis averted!");
 	flags[kFLAGS.SOPHIE_DEBIMBOED] = 0;
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
-	consumeItem("BimboLq",1);
+	player.consumeItem(consumables.BIMBOLQ);
 	if(inCombat()) cleanupAfterCombat();
 	//(Display Sophie's normal options.You monster)
 	else sophieBimbo.approachBimboSophieInCamp(false);
@@ -122,7 +122,7 @@ internal function beatUpDebimboSophie():void {
 	addButton(1,"Apologize",apologizeToDebimboSophie);
 	addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
 	addButton(3,"Let Her Go",letDebimboSophieGo);
-	if(hasItem("BimboLq",1)) addButton(4,"Bimbo Again",bimboSophieAgain);
+	if(player.hasItem(consumables.BIMBOLQ)) addButton(4,"Bimbo Again",bimboSophieAgain);
 	
 }
 //Get the Shit Beaten Out of You by a God-damn Bimbo (You (weakling) Monster)

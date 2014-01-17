@@ -3,7 +3,7 @@ import classes.CockTypesEnum;
 
 public function sackDescript():String
 {
-	return Appearance.sackDescription(player);
+	return Appearance.sackDescript(player);
 }
 
 public function cockClit(number:int = 0):String {
@@ -161,145 +161,7 @@ public function allVaginaDescript():String {
 	return "ERROR: allVaginaDescript called with no vaginas.";
 }
 public function multiCockDescript():String {
-	if(player.cocks.length < 1) 
-	{
-		CoC_Settings.error("");
-		return "<B>Error: multiCockDescript() called with no penises present.</B>";
-	}
-	//Get cock counts
-	var descript:String="";
-	var currCock:Number = 0;
-	var totCock:Number = player.cocks.length;
-	var dogCocks:Number = 0;
-	var horseCocks:Number = 0;
-	var normalCocks:Number = 0;
-	var normalCockKey:Number = 0;
-	var dogCockKey:Number = 0;
-	var horseCockKey:Number = 0;
-	var averageLength:Number = 0;
-	var averageThickness:Number = 0;
-	var same:Boolean = true;
-	//For temp14 random values
-	var rando:Number = 0;
-	var descripted:Boolean = false;
-	//Count cocks & Prep average totals
-	while(currCock <= totCock-1) {
-		//trace("Counting cocks!");
-		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) 
-		{
-			normalCocks++;
-			normalCockKey = currCock;
-		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) 
-		{
-			horseCocks++;
-			horseCockKey = currCock;
-		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.DOG) 
-		{
-			dogCocks++;
-			dogCockKey = currCock;
-		}
-		averageLength += player.cocks[currCock].cockLength;
-		averageThickness += player.cocks[currCock].cockThickness;
-		//If cocks are matched make sure they still are
-		if(same && currCock > 0 && player.cocks[currCock].cockType != player.cocks[currCock-1].cockType) same = false;
-		currCock++;
-	}
-	//Crunch averages
-	averageLength /= currCock;
-	averageThickness /= currCock;
-	//Quantity descriptors
-	if(currCock == 1) {
-		if(dogCocks == 1) return dogDescript(0);
-		if(horseCocks == 1) return horseDescript(0);
-		if(normalCocks == 1) return cockDescript(0)
-		//Catch-all for when I add more cocks.  Let cock descript do the sorting.
-		if(player.cocks.length == 1) return cockDescript(0);
-	}
-	if(currCock == 2) {
-		//For cocks that are the same
-		if(same) 
-		{
-			descript += randomChoice("a pair of ", "two ", "a brace of ", "matching ", "twin ");
-			descript += Appearance.cockAdjectives(averageLength, averageThickness, player.cocks[0].cockType, player);
-			if(normalCocks == 2) descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-			if(horseCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-			if(dogCocks == 2) descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-			//Tentacles
-			if (player.cocks[0].cockType.Index > 2) 
-				descript += ", " + Appearance.cockNoun(player.cocks[0].cockType) + "s";
-		}
-		//Nonidentical
-		else 
-		{
-			descript += randomChoice("a pair of ", "two ", "a brace of ");
-			descript += Appearance.cockAdjectives(averageLength, averageThickness, player.cocks[0].cockType, player) + ", ";
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
-		}
-	}
-	if(currCock == 3) 
-	{
-		//For samecocks
-		if(same) 
-		{
-			descript += randomChoice("three ", "a group of ", "a menage a trois of ", "a triad of ", "a triumvirate of ");
-			descript += Appearance.cockAdjectives(averageLength, averageThickness, player.cocks[currCock-1].cockType, player);
-			if(normalCocks == 3) 
-				descript += " " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-			if(horseCocks == 3) 
-				descript += ", " + Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-			if(dogCocks == 3) 
-				descript += ", " + Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-			//Tentacles
-			if(player.cocks[0].cockType.Index > 2) descript += ", " + Appearance.cockNoun(player.cocks[0].cockType) + "s";   // Not sure what's going on here, referencing index *may* be a bug.
-
-		}
-		else 
-		{
-			descript += randomChoice("three ", "a group of ");
-			descript += Appearance.cockAdjectives(averageLength, averageThickness, player.cocks[0].cockType, player);
-			descript += randomChoice(", mutated cocks", ", mutated dicks", ", mixed cocks", ", mismatched dicks");
-		}
-	}
-	//Large numbers of cocks!
-	if(currCock > 3)
-	{
-		descript += randomChoice("a bundle of ", "an obscene group of ", "a cluster of ", "a wriggling group of ");
-		//Cock adjectives and nouns
-		descripted = false;
-		//If same types...
-		if(same) {
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-				descript += Appearance.cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, player) + " ";	
-				descript += Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
-				descripted = true;
-			}
-			if(player.cocks[0].cockType == CockTypesEnum.DOG) {
-				descript += Appearance.cockAdjectives(averageLength, averageThickness, CockTypesEnum.DOG, player) + ", ";
-				descript += Appearance.cockNoun(CockTypesEnum.DOG) + "s";
-				descripted = true;
-			}
-			if(player.cocks[0].cockType == CockTypesEnum.HORSE) {
-				descript += Appearance.cockAdjectives(averageLength, averageThickness, CockTypesEnum.HORSE, player) + ", ";
-				descript += Appearance.cockNoun(CockTypesEnum.HORSE) + "s";
-				descripted = true;			
-			}
-			//TODO More group cock type descriptions!
-			if(player.cocks[0].cockType.Index > 2) {
-				descript += Appearance.cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, player) + ", ";
-				descript += Appearance.cockNoun(player.cocks[0].cockType) + "s";
-				descripted = true;			
-			}
-		}
-		//If mixed
-		if(!descripted) {
-			descript += Appearance.cockAdjectives(averageLength, averageThickness, player.cocks[0].cockType, player) + ", ";
-			rando = rand(4);
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
-		}
-	}	
-	return descript;
+	return Appearance.multiCockDescript(player);
 }
 
 public function multiCockDescriptLight():String {
@@ -922,7 +784,7 @@ public function eVaginaDescript(vaginaNum:Number):String {
 	return Appearance.vaginaDescript(monster,vaginaNum);
 }
 
-//Enemy cock description - value of random cock or 1000 for normal, 1001 horse, 1002 dog.
+//Enemy cock description
 public function eCockDescript(cockIndex:Number = 0):String {
 	return Appearance.cockDescriptionShort(cockIndex, monster);
 }

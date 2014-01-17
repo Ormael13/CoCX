@@ -743,7 +743,7 @@ internal function sophieLostCombat():void {
 			//big clit girls
 			if(player.clitLength >= 5) clitFuck = fuckDatClit;
 		}
-		if(hasItem("BimboLq",1)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
+		if(player.hasItem(consumables.BIMBOLQ)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
 	}
 	if(dickRape != null || cuntFuck != null || clitFuck != null || bimbo != null) {
 		outputText("  What do you do to her?", false);

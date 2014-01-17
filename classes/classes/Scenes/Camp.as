@@ -1,6 +1,7 @@
 ﻿package classes.Scenes{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
@@ -21,17 +22,17 @@
 			kGAMECLASS.campQ = value;
 		}
 
-		protected function hasItemInStorage(itemName:String):Boolean
+		protected function hasItemInStorage(itype:ItemType):Boolean
 		{
-			return kGAMECLASS.hasItemInStorage(itemName);
+			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
 		protected function hasItemsInStorage():Boolean
 		{
-			return kGAMECLASS.hasItemsInStorage();
+			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
-			return kGAMECLASS.hasItemsInRacks(armor);
+			return kGAMECLASS.inventory.hasItemsInRacks(armor);
 		}
 
 		public function Camp()
@@ -290,7 +291,7 @@ public function doCamp():void {
 		return;
 	}
 	//Bimbo Sophie finds ovi elixer in chest!
-	if(bimboSophie() && hasItemInStorage("OviElix") && rand(5) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0 && player.gender > 0) {
+	if(bimboSophie() && hasItemInStorage(consumables.OVIELIX) && rand(5) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0 && player.gender > 0) {
 		sophieBimbo.sophieEggApocalypse();
 		hideMenus();
 		return;
@@ -644,12 +645,12 @@ public function stash(exists:Boolean = true):Boolean {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
 	//REMOVE THE ABOVE BEFORE RELASE ()
-	var retrieveStuff:Number = 0;
+	var retrieveStuff:Function = null;
 	var storeStuff:Number = 0;
-	if(hasItemsInStorage()) retrieveStuff = 1029;
+	if(hasItemsInStorage()) retrieveStuff = kGAMECLASS.inventory.chooseRetrievalSlot;
 	if(itemStorage.length > 0) storeStuff = 1028;
 	var weaponRack:Number = 0;
-	var weaponRetrieve:Number = 0;
+	var weaponRetrieve:Function = null;
 	var armorRack:Number = 0;
 	var armorRetrieve:Number = 0;
 	var barrel:* = 0;
@@ -674,12 +675,12 @@ public function stash(exists:Boolean = true):Boolean {
 		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.", false);
 		weaponRack = 1090;
 		if(hasItemsInRacks(false)) {
-			weaponRetrieve = 1091;
+			weaponRetrieve = inventory.chooseRacksSlot;
 			temp = 0;
 			outputText("  It currently holds ", false);
 			while(temp < 9) {
 				if(gearStorage[temp].quantity > 0) {
-					weaponNames[weaponNames.length] = itemLongName(gearStorage[temp].shortName);
+					weaponNames[weaponNames.length] = gearStorage[temp].longName;
 				}
 				temp++;
 			}
@@ -708,7 +709,7 @@ public function stash(exists:Boolean = true):Boolean {
 			outputText("  It currently holds ", false);
 			while(temp < 18) {
 				if(gearStorage[temp].quantity > 0) {
-					armorNames[armorNames.length] = itemLongName(gearStorage[temp].shortName);
+					armorNames[armorNames.length] = gearStorage[temp].longName;
 				}
 				temp++;
 			}
@@ -1391,9 +1392,8 @@ public function nightSuccubiRepeat():void {
 			//[Maintain first encounter mechanics. New variable to keep track of subsequent encounters within a specific time period]
 		}
 	}
-	shortName = "Cerul P";
 	menuLoc = 14;
-	takeItem();
+	inventory.takeItem(consumables.CERUL_P);
 	outputText("\n", false);
 	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "lus=", 0, "cor", 1);
 }

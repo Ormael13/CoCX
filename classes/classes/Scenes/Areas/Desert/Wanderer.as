@@ -95,9 +95,9 @@ private function wandererDemonEpilogue():void {
 			outputText("Lucia places a small bottle in your hand.  \"<i>So thank you, and have this present.  Perhaps you can create some lethicite for us later... oh, and before I forget, Marcus is loving his new existence.</i>\"\n\n", false);
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n", false);
 			dynStats("lus", 5);
-			shortName = "SDelite";
 			menuLoc = 2;
-			takeItem();
+			inventory.takeItem();
+			shortName = "SDelite";
 			player.statusAffects[player.hasStatusAffect("wanderer demon")].value1 = 1;
 		}
 		//Second Encounter
@@ -106,9 +106,9 @@ private function wandererDemonEpilogue():void {
 			//Catch it
 			if(50 < (player.spe + rand(60))) {
 				outputText("You handily catch a small potion vial.  When you look up, she's gone.\n\n", false);
-				shortName = "SDelite";
 				menuLoc = 2;
-				takeItem();
+				inventory.takeItem();
+				shortName = "SDelite";
 			}
 			//Drop it
 			else {
@@ -136,9 +136,8 @@ private function wandererEpilogueHuman():void {
 		//Human Epilogue 2
 		else if(player.statusAffectv1("wanderer human") == 1) {
 			outputText("While exploring the desert, you find a strange bottle half-buried in the sand.  A small note is tied to it:\n\n\"<i>I just knew you'd find this.  Try this a few times and I think you might change your mind about Marcus' situation.\n  -Lovely Lucia</i>\"\n\n", true);
-			shortName = "SDelite";
 			menuLoc = 2;
-			takeItem();
+			inventory.takeItem(consumables.SDELITE);
 		}
 	}
 }

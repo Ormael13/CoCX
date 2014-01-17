@@ -10,7 +10,7 @@ package classes.Items
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.Items.Consumables.WingStick;
 
-	public class ConsumableLib extends BaseContent
+	public final class ConsumableLib extends BaseContent
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 
@@ -34,7 +34,7 @@ package classes.Items
 		public const CANINEP:SimpleConsumable = mk("CanineP", "a Canine pepper", m.caninePepper, "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.");
 		public const CCUPCAK:SimpleConsumable = mk("CCupcak", "a gigantic, chocolate cupcake", m.giantChocolateCupcake, null, 250);
 		public const CERUL_P:SimpleConsumable = mk("Cerul P", "a cerulean-tinted potion", m.ceruleanPotion, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.");
-		public const COAL___:SimpleConsumable = mk("Coal   ", "two pieces of coal", m.coal);
+		public const COAL___:SimpleConsumable = mk("Coal   ", "two pieces of coal", m.coal,null);
 		public const DBLPEPP:SimpleConsumable = mk("DblPepp", "a double canine pepper", curry(m.caninePepper, 2), "This canine pepper is actually two that have grown together due to some freak coincidence.", 10);
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const DRGNEGG:SimpleConsumable = mk("DrgnEgg","an unfertilized dragon egg", m.eatEmberEgg,"A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.");
@@ -47,7 +47,7 @@ package classes.Items
 		public const FOXBERY:SimpleConsumable = mk("FoxBery", "a fox berry", m.foxTF, "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.");
 		public const FOXJEWL:SimpleConsumable = mk("FoxJewl", "a fox jewel", m.foxJewel, "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.");
 		public const GLDSEED:SimpleConsumable = mk("GldSeed", "a golden seed", m.goldenSeed,"This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.");
-		public const GODMEAD:SimpleConsumable = mk("GodMead", "a pint of god's mead", m.godMead);
+		public const GODMEAD:SimpleConsumable = mk("GodMead", "a pint of god's mead", m.godMead,null);
 		public const GOB_ALE:SimpleConsumable = mk("Gob.Ale", "a flagon of potent goblin ale", m.goblinAle, "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.");
 		public const GRAYDYE:SimpleConsumable = mk("GrayDye", "a vial of gray hair dye", curry(m.hairDye, "gray"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
 		public const GROPLUS:SimpleConsumable = mk("GroPlus", "a needle filled with Gro+", m.growPlus, "This is a small needle with a resevoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.", 50);
@@ -116,8 +116,20 @@ package classes.Items
 		public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "a piece of whisker-fruit", m.catTransformation, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.");
 		public const W_STICK:WingStick = new WingStick();
 		public const WETCLTH:SimpleConsumable = mk("WetClth", "a wet cloth dripping with slippery slime", m.gooGasmic, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.");
-		public const WHITEDY:SimpleConsumable = mk("WhiteDy", "a vial of white hair dye", curry(m.hairDye, "white"));
+		public const WHITEDY:SimpleConsumable = mk("WhiteDy", "a vial of white hair dye", curry(m.hairDye, "white"), "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
 		public const WHITEEG:SimpleConsumable = mk("WhiteEg", "a milky-white egg", curry(m.whiteEgg, false),"This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.");
+
+		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
+		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
+
+		/**
+		 * A handy function to create SimpleConsumables (useable by any player, effect is a function accepting player:Player,
+		 * shortName=id, longName, description and value are const)
+		 * @param id id and shortName. Must be String 7 chars long
+		 * @param longName null to use shortName as longName
+		 * @param effect function(player:Player) called to produce effect
+		 * @param description null to use longName as description
+		 */
 		private static function mk(id:String, longName:String, effect:Function, description:String, value:Number = DEFAULT_VALUE):SimpleConsumable{
 			return new SimpleConsumable(id,id,longName,effect,value,description);
 		}

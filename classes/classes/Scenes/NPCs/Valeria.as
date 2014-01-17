@@ -206,11 +206,11 @@ private function valeriaGetFucked():void {
 		outputText("\n\nJust as you're getting into the rhythm of things, you feel a sudden pressure against your [asshole].  Oh, shit.  You squirm and try to relax yourself, but surprisingly, you don't feel the hard pinch of a cock's insertion.  Instead, Valeria pours a tiny trickle of herself into your anus, slowly but surely stretching you out as her cock inflates half-way inside you.  You groan in pleasure as she stretches you out and redoubles her pace on your " + cockDescript(0));
 		//(if Herm: [
 		if(player.hasVagina()) {
-			cuntChange(10,true,true,false);
+			player.cuntChange(10,true,true,false);
 			outputText(", the double-attack's pleasure is so great that you barely even notice her creating a second cock above the first and pouring it into your unused [vagina], filling your last hole up with a firm, gooey cock");
 		}
 		outputText(".");
-		buttChange(10,true,true,false);
+		player.buttChange(10,true,true,false);
 		
 		outputText("\n\nValeria begins to buck her hips in your lap, stuffing your hole");
 		if(player.hasVagina()) outputText("s");
@@ -247,7 +247,7 @@ private function gooFlation(clearText:Boolean = true):void {
 	outputText("\n\nValeria, still curled up in your lap, gives you nothing but a cute, innocent little smile as you feel her toes growing and expanding into ten long, slender tentacles prying at your buttcheeks, seeking entrance to your ");
 	if(!player.hasVagina()) outputText("one lonely ");
 	outputText("hole.  You gulp as the tentacle-fuck begins, her long tendrils pouring one by one into your [asshole], each so small and soft it easily slips inside you.  One piles onto another, tickling and teasing your anal walls as more and more of her slithers into you.");
-	buttChange(30,true,true,false);
+	player.buttChange(30,true,true,false);
 	outputText("\n\nYou grunt and gasp as the last of her toe-tentacles pierces your sphincter and joins its sisters inside your ass.  As she pours more and more of her cock-toe-tendrils into you, you begin to see Valeria's body shrinking and deflating... Oh, god...");
 	outputText("\n\nHer gut becomes concave, then her face, until she's pouring off your body and around your waist.  You try and struggle, but it's too late.  She surges up your rectum, utterly filling you with herself.  You can only sit and watch as your stomach begins to expand, pushing dangerously out from your ribs as the last little bits of Valeria suck up your ass.");
 	outputText("\n\n\"<i>VALERIA!</i>\" you shout, poking your stomach.  Your flesh quivers, shaking like a great big bowl of goo.");
@@ -476,13 +476,13 @@ private function valeriaGooRapeII():void {
 	else outputText("You hold tight, keeping up your faux resistance until she yanks your cheeks open and twists her gooey reaming-tool into a sphincter-penetrating drill bit.");
 	outputText(" Spinning faster and faster, the intruding, cylindrical slime dilates your [asshole] to its maximum gape in four or five seconds, hardening its exterior into an butt-stuffing goo-pipe. You can feel it snaking around through your bowels, plumbing deeper inside you than you would have thought possible before stopping what feels like halfway through your large intestine.");
 	//{Butt-change: full anal size}
-	buttChange(player.analCapacity() * .75,true,true,false);
+	player.buttChange(player.analCapacity() * .75,true,true,false);
 	//Lay pipes in cooch! {reqiores non pregnant}
 	if(!player.isPregnant() && player.hasVagina()) {
 		if(silly()) outputText("\n\n\"<i>But wait, there's more!</i>\" Billy Mays announces.");
 		outputText("\n\nShortly after, a similar sized blob of semi-liquid matter rubs over your [vagina], brushing aside Valeria's feathery teases to spread your lips around the slick bubble, shooting tingles of pleasure through your body. You try to shift, to grind against the messy intruder, but all restrained as you are, all you can do is quiver against your bindings, vibrating in pleasures that would be plain to any watchers. The penetration doesn't stop Valeria's teases either. The talented woman continues to roll feathery caresses over the exterior of your genitalia while opening you open as wide as any dick you've ever taken, burrowing a tunnel straight to your cervix.");
 		//{cuntChange: MAXIMUM}
-		cuntChange(player.vaginalCapacity() * .75,true,true,false);
+		player.cuntChange(player.vaginalCapacity() * .75,true,true,false);
 		outputText("\n\nThere, the cerulean shaft batters hard against the restrictive opening to your womb, pushing with firm pressure until some slime rolls into your empty, baby-making chamber. You cannot help but cry out to the sensation of your incredibly thorough doublestuffing. Wincing, you endure the slow stretching of your inner gates, and once the tunneling ooze has established a decent-size path to your uterus, the outside solidifies, much like the one in your ass. A suction starts on your [clit] to distract you from this, and its success is evidenced by the copious fuck-juices your [vagina] feeds the mixed goo-girls.");
 	}
 	//Fuckable nipples

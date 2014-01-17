@@ -9,7 +9,7 @@ package classes.Items
 
 	use namespace kGAMECLASS;
 
-	public class UseableLib extends BaseContent
+	public final class UseableLib extends BaseContent
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 

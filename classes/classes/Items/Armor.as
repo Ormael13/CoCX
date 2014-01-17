@@ -3,7 +3,6 @@
  */
 package classes.Items
 {
-	import classes.Character;
 	import classes.Player;
 
 	public class Armor extends Equipable
@@ -12,19 +11,25 @@ package classes.Items
 		private var _perk:String;
 
 
-		override public function equip(user:Player):void
+		override public function equip(player:Player, output:Boolean):void
 		{
-			if (canEquip(user, true)) {
-				user.armor.unequip();
-				user.setArmorHiddenField(this);
-				equipped(user);
+			if (canEquip(player, true)) {
+				player.armor.unequip(output);
+				player.setArmorHiddenField(this);
+				if (output){
+					clearOutput();
+					if(output) outputText("You equip your " + player.armorName + ".  ");
+				}
+				equipped(player,output);
 			}
 		}
 
-		override public function unequip():void
+		override public function unequip(output:Boolean):void
 		{
+			while(wearer.hasPerk("Bulge Armor") >= 0) wearer.removePerk("Bulge Armor");// TODO remove this Exgartuan hack
+			if(_perk != "") wearer.removePerk(_perk);
 			wearer.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			unequipped();
+			unequipped(output);
 		}
 
 		public function Armor(id:String, shortName:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "")

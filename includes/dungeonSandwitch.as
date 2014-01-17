@@ -200,7 +200,7 @@ public function femaleGirlsLoseToSammitches():void {
 	outputText("\n\nYou reach out and grip the cocks to your left and right while your mouth sucks on the one in the middle.  The sand-witches smile like fiends as you try your best to serve them, though the only pleasure they'll get is seeing how desperate you look.  You're so willing to please them in hopes that they will fuck you.  The witch with the cock is groping your [chest], playing with and pitching your [nipples] as she slides the barded-covered cock between the lips of your [vagina].  The small little nubs scratch at your cunt and tease your clit, as the toy rapidly grows lubricated with your own juices.  She murmurs in your ear.  \"<i>Good little cock sucker.  Do you want your rewards?</i>\"  With a toy-prick still in your mouth, you smile and shake your head 'yes'.  The kitty-witch pulls you off the cocks you're pleasing and turns you around, making you sit on her crossed [legs], her kitten dick pushing against your [vagina] and stomach like it was alive.");
 	
 	outputText("\n\nYou bend your knees up and hover your drooling pussy over the cat-cock and slam down onto it with no hesitation.  You feel so full and blissed as splashes of your fuck-lube squirt from how hard you're pounding yourself onto the sand-witch's \"<i>cock</i>\".  You ride her like a crazed slut, moaning and screaming as your fucking shakes the witch's body, jiggling her milky mounds.  Other witches present their faux erections to you, and you happily take one, suckling on anything you can while the other ones rub them on your " + player.skinFurScales() + ".  They can't feel the sensations like proper penies but they're getting off on the very act of rubbing phallic objects over every inch of such a whorish individual.  These girls proceed to kiss and lick each other as they massage their strap-ons all over your body.");
-	cuntChange(30,true,true,false);
+	player.cuntChange(30,true,true,false);
 	
 	outputText("\n\nYou're already messily cumming on the crotch of the cat-cocked witch.  Not taking one moment to stop for your climax, you continue to fuck the artificial erection you so desperately wanted.  The witch grabs your [butt] and lifts you up as she stands, even though you're still thrusting your [hips] towards her cooch.  She spreads your asscheeks and announces, \"<i>Which one of you other sluts wants this ass?</i>\"");
 	
@@ -848,7 +848,7 @@ public function turnIntoASammitch():void {
 	
 	outputText("\n\nTwo huge tits come to rest on your back, pinning you underneath their enormous weight, smooth, sweat-slicked skin sliding across your body like silk as the hard shaft spreads your vulva wide and slides through the curtain of oozing fem-cum. You moan happily at that welcome intrusion, a sensation of amazing fullness - no, rightness - filling you up in the most perfect and womanly way.");
 	if(player.hasCock()) outputText("  [EachCock] throbs beneath you, hard as rock and crushed between your belly and the slippery-smooth wood.  It seems unimportant compared to what's going on above it.");
-	cuntChange(monster.cockArea(0),true,true,false);
+	player.cuntChange(monster.cockArea(0),true,true,false);
 	//Virgin check here!
 	
 	outputText("When the two, wondrously bulging nuts come to rest on your [butt], you realize she's completely and utterly inside you.  That hard, wonderful cock is inside you and pressing up on your cervix, the thick, potent cum oozing directly into you, where it belongs.  You sigh in contentment and work your internal muscles, clenching the dick inside you as if you could milk it, drawing a surprised gasp from the dusky lips of your dark-skinned lover.  Her hard nipples dig harder into your back and an increase in the wet warmth in your [vagina] alerts you to just how much she's enjoying it.");
@@ -1313,7 +1313,7 @@ public function menFuckUpSomeCumWitch():void {
 	if(player.gender == 3) {
 		outputText("\n\nYou pivot around so your [butt] is facing her and your dick is spearing straight down into her honeyed vise.  It's less pleasurable than your previous position, at least until you yank the dickgirl's cock out of her hands and ram it into your slit, fucking both her virile tool and fertile cunt at the same time.  Your futanari lover finally gives in the pleasures of the act and stops resisting.  She begs, \"<i>Yes, don't stop!  Fucking ride me!  By the mothers, that's good!</i>\" while her hips lift against your, slamming hard into your groin with echoing force.");
 		//cuntchange
-		cuntChange(monster.biggestCockArea(), true, true, false);
+		player.cuntChange(monster.biggestCockArea(), true, true, false);
 		
 		outputText("\n\nDetermined to ride this rebellious cow into submission, you match her motions thrust for thrust and pump for pump, pushing harder and harder into the ground with each contact.  In no time, you're both covered in a fine sheen of sweat, recklessly rutting with the force of four animals trapped in two meager bodies.  Daringly, the witch begins to spank your [butt] with each concussive clap of crotches, only adding to the cacophony of noisy slaps.  You can't do anything but scowl in displeasure due to your positioning, even though the hits make your cock throb and your pussy clench.");
 		
@@ -1451,7 +1451,7 @@ public function ladyVictorySex():void {
 	outputText("\n\nSinking down on the firm pole, you revel in the sensation of it splitting your nethers, beautifully stretching your canal's walls into a wide, cock-swallowing 'o'.  Your [clit] thrums with heat and pleasure while you continue your slow descent, and by the time you hit cock-bottom, your [legs] are shaking weakly and your abdominal muscles are fluttering, clenching uncontrollably.  You bend over to nuzzle against the brown breasts, and they form a comfortable pillow for you to lean upon once you start to move your [hips].");
 	
 	//cuntCheck Here
-	cuntChange(monster.biggestCockArea(),true,true,false);
+	player.cuntChange(monster.biggestCockArea(),true,true,false);
 	outputText("\n\nThe semi-conscious witch stirs beneath you, responding to the sexual pleasure you've forced back upon her.  \"<i>...Wha?</i>\" she asks as comprehension washes over her features.  \"<i>Oooh... you're not done?</i>\"  You bite her lower lip as your work her cock over, pumping away with wild abandon.  The only answer she needs is the feel of your body climaxing atop her, and you begin to play with her breasts as you work towards that goal.");
 	
 	outputText("\n\nThe dark-skinned blond pants, \"<i>Too soon... gonna... gonna cum... again!</i>\"  She screws up her eyes and throws back her head, her tongue weakly flopping to the side, and you feel her cock erupt, the heavy orbs of her balls twitching under your [butt].  Molten hot semen gushes through your passage, bathing your womb in thick sperm until you feel full in a whole different way, and as if triggered by biological imperative, you cum, creaming that thick rod with your lady-spunk.");
@@ -1549,7 +1549,7 @@ public function savinMakesAwesomeFemdom():void {
 	outputText("\n\nSlowly, the witch turns her attention back to your quivering [vagina].  Her cock, now lying flat on your belly, is thrumming hotly, her heartbeat easily felt through her ready rod, a steady trickle of precum flooding down your chest in eager anticipation of the coming fucking.  You brace yourself as best you can as the witch leans back, sliding her prick down your flesh until its thick head brushes your [vagina].  You shiver, half in anticipation and half in lust-filled need; your quavering cunt's cockhungry muscles easily relax at her touch as she pushes in, the first inches of witchcock spreading your vaginal walls wide in acceptance of the dominating cock, womb ready to be bred, to suck every drop of seed from the cum witch's potent loins.");
 	
 	outputText("\n\n\"<i>There's a good girl,</i>\" the witch coos, stroking your " + hairDescript() + " as she slowly, tenderly enters you, her wide hips pushing inch after throbbing inch of cock into your hole.  ");
-	cuntChange(monster.cockArea(0),true,false,true);
+	player.cuntChange(monster.cockArea(0),true,false,true);
 	outputText("Suddenly, the witch hooks her fingers around the back of your neck, lifting you up from the sand.  You gasp, unsure, until the witch guides your head up to her massive breast, already leaking milk in anticiaption.  She smiles at you, surprisingly warmly, as she nestles your cheek into the wide valley of her cleavage.  A sudden, primal instinct overtakes you, and you wrap your arms around the witch's waist, holding yourself to her in a tight hug.  The witch gasps, surprised by your sudden act, but relaxes in your grasp as you did in hers, allowing you to support yourself as she cups one of her teats for you, guiding the leaking nipple to your lips.  You take it eagerly, breath catching as the first sweet, creamy drops enter your waiting mouth.  You suckle from the witch like a babe, drinking her delicious milk as it pours into you.  The witch moans loudly, her head rolling back as her milk flows into you, her flared hips finally pressing into yours, her tremendous cock fully buried inside you, its head kissing the lips of your cervix.  \"<i>Good girl,</i>\" she echoes, stroking your hair and milk-bloated cheeks, otherwise still in your sexual embrace.");
 	
 	outputText("\n\nSlowly, the witch begins to roll her hips, pulling mere inches from your loins before slipping back in, your lubricants and her free-flowing precum sloshing out around her cock to stain the desert sands.  In tune with your suckling, she fucks your [vagina], pushing in again and again, holding you tight to herself as more and more pre fills your hungry womb.  She moans deeply, eyes closed and head resting against your own, her breath hot and heavy on your bare flesh.");
@@ -2064,14 +2064,14 @@ public function forceDildos():void {
 	outputText("\n\nInstead, the sphinx-girl teases you with another lick, and another; but as she does, you can see her fingers moving in arcane gestures, weaving thin blue lines of magic in their wake as a spell takes shape.  A long, wrist-thick pole of translucent blue light soon forms between her hands, the crown at its tip giving it the unmistakable shape of a phallus.  With a final lick across your sensitive flesh, the sphinx spreads your cheeks as wide as they'll go, letting your spit-slicked hole taste the dry desert air.  A moment later, you feel the tip of the spectral dildo against the mouth of your [vagOrAss], the magical energies that form it sending electric currents through your body; every hair on your bare form jumps to attention as pleasure burns in you like a fire, even before the slightest penetration.");
 	
 	outputText("\n\nWhen the tip does slide in, you nearly cum on the spot.");
-	if(player.hasVagina()) cuntChange(10,true,true,false);
-	else buttChange(10,true,true,false);
+	if(player.hasVagina()) player.cuntChange(10,true,true,false);
+	else player.buttChange(10,true,true,false);
 	outputText("\n\nEvery inch of your sensitive inner walls that the arcane pseudo-cock presses past explodes in a conflagration of pleasure, electrifying your every nerve as Sanura slowly sinks her summoned dildo into your [vagOrAss].  You clench your teeth as you try to bear the orgasmic overload radiating from your fuck-hole, but the magical shock-wave soon spreads over your entire body.  Your [legs] quiver as the half-lion sinks her rod deeper and deeper into you, reaming your innermost depths wide with inch after inch of mind-numbing stimulation.  Suddenly, though, her advance ceases, leaving you skewered on a gently-vibrating rod of arcane ecstasy.  Just as your sex-addled mind starts to question the lack of movement, you feel a sudden and overwhelming force pressing into your [vagOrAss] atop the cock already embedded inside you, trying to stretch your hole even wider.  This second ethereal prick is even bigger than the first, slowly working and wedging itself into your abused hole, forcing you open until you're screaming in pleasure and pain.  Finally, the massive cock pops in, and relief spreads through you as Sanura starts gently working it in, cooing softly as she penetrates you once again.");
 	
 	if(player.hasVagina()) {
 		//if PC has Vagina
 		outputText("\n\nAs your quivering cunt tries to adjust to the pair of massive intruders tearing it apart, the sultry sphinx conjures up a third rod, just as big as the last.  You grit your teeth, bracing for her attempt to cram THAT up your slit as well, but instead feel only a gentle, probing wetness against your [ass].  You shiver from your very core as Sanura drags her tongue along your backdoor, pressing the tip in, seeking entrance.  Despite the static pleasure roiling in your cunt, you try your best to relax the muscles in your sphincter; eventually, after a few long moments of prodding, you feel the first inch of the magic dildo pierce your [asshole], stretching you out to your limit and beyond as Sanura shapes its size to utterly fill your rear entrance.");
-		buttChange(10,true,true,false);
+		player.buttChange(10,true,true,false);
 	}
 	//If PC Ain't Got No Cunt
 	else {
@@ -2235,7 +2235,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 	
 	//END VARIATION
 	//Buttchange 75
-	buttChange(75,true,true,false);
+	player.buttChange(75,true,true,false);
 	
 	outputText("\n\nSanura reluctantly changes direction and begins to pull the immense length out of you.  She actually yanks it back far enough that the top flops out of your gaped orifice, flopping lewdly against a [leg] as she lines back up for a second push.  As the sphinx nudges her tree-trunk-like totem into you, you try to fathom the size of the thing.  It must be several feet long and at least four inches wide by the way it's distending your innards, maybe five inches across at the tip.  Moaning, you helplessly give yourself over to the unusual feelings her ephemeral erection installs in your plugged-up pucker.");
 	
@@ -3238,7 +3238,7 @@ public function lesboMilkFilling():void {
 	//Both
 	outputText("\n\nYou bite your own lip, trying to stifle a moan of delight when she presses herself harder against you, that remarkably firm nipple sliding inside you with only the slightest token of resistance.  It's so slippery with dribbling milk and your hot secretions that you almost wonder if she could press her whole, sordid breast inside you, but you know that's impossible.  Instinctively, you push back against the welcome, heated pressure, grinding your twat hard on her textured tit-skin.  Warm fluid rushes into your channel almost immediately, thicker and more copious than a minotaur's seed.  Some of it even squirts into your womb, while a few stray trickles leak out, dripping over your vulva and onto the creamy, chocolate skinned woman you're riding.");
 	//CuntChange 3
-	cuntChange(3,true,true,false);
+	player.cuntChange(3,true,true,false);
 	
 	outputText("\n\nYou ");
 	if(player.isTaur()) outputText("squeeze your own [nipples]");
@@ -3250,13 +3250,13 @@ public function lesboMilkFilling():void {
 	if(player.pregnancyIncubation == 0) outputText("Your poor womb is flooding with the stuff.  It's getting so full that you're starting to feel like you should be labelled 'cream-filled', and a tiny bump has begun to swell on your midsection in response.");
 	else outputText("Your poor pregnant womb is battered with the stuff, but since you're already full, jets of hot cream are spraying out from your [vagina] around nipple-shaped milk-injectors.");
 	//CuntChange 6
-	cuntChange(6,true,true,false);
+	player.cuntChange(6,true,true,false);
 	outputText("\n\n\"<i>Yesssss,</i>\" you find yourself hissing, ");
 	if(player.isTaur()) outputText("wishing you could rub your swollen belly");
 	else outputText("rubbing your swollen belly");
 	outputText(".  Your [vagina] feels like a living, breathing thing, taking in milk and producing nothing but lightning bolts of soul-filling pleasure.  Wracked by the erotic sensations, you shudder atop the Sand Mother, helplessly rutting her nipples.  She squeezes a third up against you, but fails to find purchase in your stuffed slit.  The extra teat merely hoses down your entrance, sloppily pressing itself against every moist, sexually-soaked fold.  Convulsing, your [vagina] spasms, pulling the tit-tips deeper into itself, and just when it relaxes in between suctioning compressions, the third one finds purchase, disappearing into your slavering honeypot in an explosion of white fluid.");
 	//Cuntchange 9
-	cuntChange(9,true,true,false);
+	player.cuntChange(9,true,true,false);
 	outputText("\n\nThe Sand Mother gasps, \"<i>So good.  How's the milk, Champion?  Is it good?  Your pussy is slurping it down so well!</i>\"");
 	outputText("\n\nIt IS good.  You nod to her, noting the way her tongue is lolling out and the rapidly increasing pace of her mastubatory noises.  She's going to cum soon and probably fountain from her nipples just as hard as she will from her two twats.  Your thoughts are interrupted by a sudden intrusion in your packed delta - is that... is that a FOURTH nipple inside you?  The answering injection of cream confirms what your startled consciousness is struggling to come to terms with.  Four nipples are spraying almost continually into you.  Gods, you're getting so full!  ");
 	if(player.pregnancyIncubation == 0) outputText("You can feel your midsection going round, wobbling wildly.  POP!  Your belly-button has turned into an outie, accompanied by a wobbling, comforting weight inside you.  Four months... five, no - six... you give up on counting, but with every second that passes, you're getting bigger and bigger, visually matching any of the pregnant women you saw growing up.");
@@ -3472,8 +3472,7 @@ public function getLactaidFromWitches():void {
 	outputText("\n\nYou decline the offer and repeat your request for Lactaid, which sours the woman's expression slightly.  The corners of her mouth are still upturned in a half smirk when she procures a bottle and hands it to you.  After, she smooths her hand across her robed lap, and for a split second, you wonder if she's trying to beckon you to take a seat there...  You shake your head as you examine the bottle in your hand.  You got what you came for.\n\n");
 	flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
 	//Receive one lactaid
-	shortName = "Lactaid";
-	takeItem();
+	inventory.takeItem(consumables.LACTAID);
 }
 //*Labova
 //>Get Labova
@@ -3491,8 +3490,7 @@ public function getLaBova():void {
 	outputText("\n\n\"<i>That is good.  The ways of beasts offer many boons.  This one is quite useful for enhancing lactation, for instance.  However, there is great risk in reveling in such transformation.  Be sure that you don't lose yourself to it,</i>\" the statuesque sorceress warns.");
 	outputText("\n\nYou nod, and she gives you the La Bova.\n\n");
 	flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
-	shortName = "LaBova ";
-	takeItem();
+	inventory.takeItem(consumables.LABOVA_);
 }
 	
 //TURN EM OFF!
@@ -3524,9 +3522,13 @@ public function takeLaBovaOrLactaid(lactaid:Boolean = true):void {
 	clearOutput();
 	outputText("Smirking, you circle around the Sand Mother's throne towards the secure chests behind her.  She stiffens when you come close but doesn't make a move.  The poor little witch is afraid of you, and with good reason.  You gather the item you came for, condescending patting the sorceress's platinum tresses on your way back in front of her throne.  She glares at you.\n\n");
 	//New lines and take appropriate item.
-	if(lactaid) shortName = "Lactaid";
-	else shortName = "LaBova ";
-	takeItem();
+	if(lactaid) {
+		inventory.takeItem(consumables.LACTAID);
+	}
+	else {
+		inventory.takeItem(consumables.LABOVA_);
+	}
+
 }
 
 public function pullLever():void {

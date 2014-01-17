@@ -381,11 +381,11 @@ internal function tamaniSexLetHer():void {
 			outputText(", and places the dildo's leaking tip against your " + assholeOrPussy() + ".  You feel it stretching you out, reacting with your body's own fluids to swell up inside you like a pervert's balloon as Tamani pushes it further and further inside you.", false);
 			if(player.hasVagina()) {
 				outputText("  ", false);
-				cuntChange(player.vaginalCapacity() * .95, true);
+				player.cuntChange(player.vaginalCapacity() * .95, true);
 				outputText("Your walls squeeze tightly around it in an unconscious milking motion as your body reacts to it as if it were a real dick.", false);
 			}
 			else {
-				buttChange(player.analCapacity() * .95, true);
+				player.buttChange(player.analCapacity() * .95, true);
 				outputText("Your body clamps down around it, resisting the strange intrusion as it swells up to fill you, pressing tightly against your prostate.", false);
 			}
 			outputText("  A burning heat radiates through your body, making your " + nippleDescript(0) + " tingle and grow ever more sensitive.\n\n", false);

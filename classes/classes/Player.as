@@ -1,6 +1,12 @@
 package classes
 {
+	import classes.Appearance;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
@@ -56,6 +62,40 @@ package classes
 			return _armor.longName;
 		}
 		override public function get armorDef():Number {
+			var armorDef:Number = _armor.def;
+			//Blacksmith history!
+			if(armorDef > 0 && hasPerk("History: Smith") >= 0) {
+				armorDef = Math.round(armorDef * 1.1);
+				armorDef += 1;
+			}
+			//Skin armor perk
+			if(hasPerk("Thick Skin") >= 0) {
+				armorDef += 2;
+				if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
+			}
+			//If no skin armor perk scales rock
+			else {
+				if(skinType == SKIN_TYPE_FUR) armorDef += 1;
+				if(skinType == SKIN_TYPE_SCALES) armorDef += 3;
+			}
+			//'Thick' dermis descriptor adds 1!
+			if(skinAdj == "smooth") armorDef += 1;
+			//Agility boosts armor ratings!
+			if(hasPerk("Agility") >= 0) {
+				if(armorPerk == "Light") armorDef += Math.round(spe/8);
+				else if(armorPerk == "Medium") armorDef += Math.round(spe/13);
+			}
+			//Berzerking removes armor
+			if(hasStatusAffect("Berzerking") >= 0) {
+				armorDef = 0;
+			}
+			if(kGAMECLASS.monster.hasStatusAffect("Tail Whip") >= 0) {
+				armorDef -= kGAMECLASS.monster.statusAffectv1("Tail Whip");
+				if(armorDef < 0) armorDef = 0;
+			}
+			return armorDef;
+		}
+		public function get armorBaseDef():Number {
 			return _armor.def;
 		}
 		override public function get armorPerk():String {
@@ -72,6 +112,17 @@ package classes
 			return _weapon.verb;
 		}
 		override public function get weaponAttack():Number {
+			var attack:Number = _weapon.attack;
+			if(hasPerk("Weapon Mastery") >= 0 && weaponPerk == "Large" && str > 60)
+				attack *= 2;
+			if(hasPerk("Lightning Strikes") >= 0 && spe >= 60 && weaponPerk != "Large") {
+				attack += Math.round((spe - 50) / 3);
+			}
+			if(hasStatusAffect("Berzerking") >= 0) attack += 30;
+			attack += statusAffectv1("Charge Weapon");
+			return attack;
+		}
+		public function get weaponBaseAttack():Number {
 			return _weapon.attack;
 		}
 		override public function get weaponPerk():String {
@@ -92,7 +143,7 @@ package classes
 				CoC_Settings.error(short+".armor is set to null");
 				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			}
-			value.equip(this);
+			value.equip(this, false);
 		}
 
 		// in case you don't want to call the value.equip
@@ -1149,6 +1200,51 @@ package classes
 			return Appearance.hairDescription(this);
 		}
 
+		public function shrinkTits():void
+		{
+			if(breastRows.length == 1) {
+				if(breastRows[0].breastRating > 0) {
+					//Shrink if bigger than N/A cups
+					var temp:Number = 0;
+					temp = 1;
+					breastRows[0].breastRating--;
+					//Shrink again 50% chance
+					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && hasPerk("Big Tits") < 0) {
+						temp++;
+						breastRows[0].breastRating--;
+					}
+					if(breastRows[0].breastRating < 0) breastRows[0].breastRating = 0;
+					//Talk about shrinkage
+					if(temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your breasts have shrunk!  With a quick measure, you determine they're now " + breastCup(0) + "s.", false);
+					if(temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are much smaller!  With a quick measure, you determine they're now " + breastCup(0) + "s.", false);
+				}
+			}
+			else if(breastRows.length > 1) {
+				//multiple
+				outputText("\n", false);
+				//temp2 = amount changed
+				//temp3 = counter
+				var temp2:Number = 0;
+				var temp3:Number = breastRows.length;
+				while(temp3 > 0) {
+					temp3--;
+					if(breastRows[temp3].breastRating > 0) {
+						breastRows[temp3].breastRating--;
+						if(breastRows[temp3].breastRating < 0) breastRows[temp3].breastRating = 0;
+						temp2++;
+						outputText("\n", false);
+						if(temp3 < breastRows.length - 1) outputText("...and y", false);
+						else outputText("Y", false);
+						outputText("our " + breastDescript(temp3) + " shrink, dropping to " + breastCup(temp3) + "s.", false);
+					}
+					if(breastRows[temp3].breastRating < 0) breastRows[temp3].breastRating = 0;
+				}
+				if(temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
+				if(temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
+				if(temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
+			}
+		}
+
 		public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number):void
 		{
 			if(breastRows.length == 0) return;
@@ -1385,12 +1481,9 @@ package classes
 			}
 			if(hasStatusAffect("Berzerking") >= 0) {
 				removeStatusAffect("Berzerking");
-				kGAMECLASS.applyArmorStats(armorName, false);
-				weaponAttack = kGAMECLASS.fixedDamage(weaponName);
 			}
 			if(kGAMECLASS.monster.hasStatusAffect("Tail Whip") >= 0) {
 				kGAMECLASS.monster.removeStatusAffect("Tail Whip");
-				kGAMECLASS.applyArmorStats(armorName, false);
 			}
 			if(hasStatusAffect("UBERWEB") >= 0) removeStatusAffect("UBERWEB");
 			if(hasStatusAffect("Drider Kiss") >= 0) removeStatusAffect("Drider Kiss");
@@ -1471,7 +1564,6 @@ package classes
 				removeStatusAffect("Might");
 			}
 			if(hasStatusAffect("Charge Weapon") >= 0) {
-				weaponAttack -= statusAffectv1("Charge Weapon");
 				removeStatusAffect("Charge Weapon");
 			}
 			if(hasStatusAffect("Disarmed") >= 0) {
@@ -1523,7 +1615,7 @@ package classes
 			{
 				if(!hasItem(itype,1))
 				{
-					CoC_Settings.error("ERROR: consumeItem in items.as attempting to find an item to remove when the player has none.");
+					CoC_Settings.error("ERROR: consumeItem in items.as attempting to find an item to remove when the has none.");
 					break;
 				}
 				trace("FINDING A NEW SLOT! (ITEMS LEFT: " + amount + ")");
@@ -1605,5 +1697,157 @@ package classes
 			return numOfItemToRemove <= 0;
 		}
 
+		public function lengthChange(temp2:Number, cocks:Number):void {
+			//DIsplay the degree of length change.
+			if(temp2 <= 1 && temp2 > 0) {
+				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " has grown slightly longer.", false);
+				if(cocks.length > 1) {
+					if(cocks == 1) outputText("One of your " + multiCockDescriptLight() + " grows slightly longer.", false);
+					if(cocks > 1 && cocks < cocks.length) outputText("Some of your " + multiCockDescriptLight() + " grow slightly longer.", false);
+					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " seem to fill up... growing a little bit larger.", false);
+				}
+			}
+			if(temp2 > 1 && temp2 < 3) {
+				if(cocks.length == 1) outputText("A very pleasurable feeling spreads from your groin as your " + cockDescript(0) + " grows permanently longer - at least an inch - and leaks pre-cum from the pleasure of the change.", false);
+				if(cocks.length > 1) {
+					if(cocks == cocks.length) outputText("A very pleasurable feeling spreads from your groin as your " + multiCockDescriptLight() + " grow permanently longer - at least an inch - and leak plenty of pre-cum from the pleasure of the change.", false);
+					if(cocks == 1) outputText("A very pleasurable feeling spreads from your groin as one of your " + multiCockDescriptLight() + " grows permanently longer, by at least an inch, and leaks plenty of pre-cum from the pleasure of the change.", false);
+					if(cocks > 1 && cocks < cocks.length) outputText("A very pleasurable feeling spreads from your groin as " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " grow permanently longer, by at least an inch, and leak plenty of pre-cum from the pleasure of the change.", false);
+				}
+			}
+			if(temp2 >=3){
+				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " feels incredibly tight as a few more inches of length seem to pour out from your crotch.", false);
+				if(cocks.length > 1) {
+					if(cocks == 1) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as one of their number begins to grow inch after inch of length.", false);
+					if(cocks > 1 && cocks < cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly number as " + kGAMECLASS.num2Text(cocks) + " of them begin to grow inch after inch of added length.", false);
+					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as inch after inch of length pour out from your groin.", false);
+				}
+			}
+			//Display LengthChange
+			if(temp2 > 0) {
+				if(cocks[0].cockLength >= 8 && cocks[0].cockLength-temp2 < 8){
+					if(cocks.length == 1) outputText("  <b>Most men would be overly proud to have a tool as long as yours.</b>", false);
+					if(cocks.length > 1) outputText("  <b>Most men would be overly proud to have one cock as long as yours, let alone " + multiCockDescript() + ".</b>", false);
+				}	
+				if(cocks[0].cockLength >= 12 && cocks[0].cockLength-temp2 < 12) {
+					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " is so long it nearly swings to your knee at its full length.</b>", false);
+					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " are so long they nearly reach your knee when at full length.</b>", false);
+				}
+				if(cocks[0].cockLength >= 16 && cocks[0].cockLength-temp2 < 16) {
+					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " would look more at home on a large horse than you.</b>", false);
+					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " would look more at home on a large horse than on your body.</b>", false);
+					if(gender == 3){
+						if(cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give the self-titty-fuck of a lifetime.", false);
+						if(cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the tittyfuck of a lifetime.", false);
+					}
+					if(gender == 1){
+						if(cocks.length == 1) outputText("  Your " + cockDescript(0) + " is so long it easily reaches your chest.  The possibility of autofellatio is now a foregone conclusion.", false);
+						if(cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " are so long they easily reach your chest.  Autofellatio would be about as hard as looking down.", false);
+					}
+				}
+				if(cocks[0].cockLength >= 20 && cocks[0].cockLength-temp2 < 20) {
+					if(cocks.length == 1) outputText("  <b>As if the pulsing heat of your " + cockDescript(0) + " wasn't enough, the tip of your " + cockDescript(0) + " keeps poking its way into your view every time you get hard.</b>", false);
+					if(cocks.length > 1) outputText("  <b>As if the pulsing heat of your " + multiCockDescriptLight() + " wasn't bad enough, every time you get hard, the tips of your " + multiCockDescriptLight() + " wave before you, obscuring the lower portions of your vision.</b>", false);
+					if(cor > 40 && cor <= 60) {
+						if(cocks.length > 1) outputText("  You wonder if there is a demon or beast out there that could take the full length of one of your " + multiCockDescriptLight() + "?", false);
+						if(cocks.length ==1) outputText("  You wonder if there is a demon or beast out there that could handle your full length.", false);
+					}
+					if(cor > 60 && cor <= 80) {
+						if(cocks.length > 1) outputText("  You daydream about being attacked by a massive tentacle beast, its tentacles engulfing your " + multiCockDescriptLight() + " to their hilts, milking you dry.\n\nYou smile at the pleasant thought.", false);
+						if(cocks.length ==1) outputText("  You daydream about being attacked by a massive tentacle beast, its tentacles engulfing your " + cockDescript(0) + " to the hilt, milking it of all your cum.\n\nYou smile at the pleasant thought.", false);
+					}
+					if(cor > 80) {
+						if(cocks.length > 1) outputText("  You find yourself fantasizing about impaling nubile young champions on your " + multiCockDescriptLight() + " in a year's time.", false);
+					}
+				}
+			}
+			//Display the degree of length loss.
+			if(temp2 < 0 && temp2 >= -1) {
+				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
+				if(cocks.length > 1) {
+					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
+					if(cocks > 1 && cocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
+					if(cocks == 1) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
+				}
+			}
+			if(temp2 < -1 && temp2 > -3) {
+				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " shrinks smaller, flesh vanishing into your groin.", false);
+				if(cocks.length > 1) {
+					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(cocks == 1) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(cocks > 1 && cocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+				}
+			}
+			if(temp2 <= -3) {
+				if(cocks.length == 1) outputText("A large portion of your " + multiCockDescriptLight() + "'s length shrinks and vanishes.", false);
+				if(cocks.length > 1) {
+					if(cocks == cocks.length) outputText("A large portion of your " + multiCockDescriptLight() + " receeds towards your groin, receding rapidly in length.", false);
+					if(cocks == 1) outputText("A single member of your " + multiCockDescriptLight() + " vanishes into your groin, receding rapidly in length.", false);
+					if(cocks > 1 && cocks.length > cocks) outputText("Your " + multiCockDescriptLight() + " tingles as " + kGAMECLASS.num2Text(cocks) + " of your members vanish into your groin, receding rapidly in length.", false);
+				}
+			}
+		}
+
+		public function killCocks(deadCock:Number):void
+		{
+			//Count removal for text bits
+			var removed:Number = 0;
+			var temp:Number;
+			//Holds cock index
+			var storedCock:Number = 0;
+			//Less than 0 = PURGE ALL
+			if (deadCock < 0) {
+				deadCock = cocks.length;
+			}
+			//Double loop - outermost counts down cocks to remove, innermost counts down 
+			while (deadCock > 0) {
+				//Find shortest cock and prune it
+				temp = cocks.length;
+				while (temp > 0) {
+					temp--;
+					//If anything is out of bounds set to 0.
+					if (storedCock > cocks.length - 1) storedCock = 0;
+					//If temp index is shorter than stored index, store temp to stored index.
+					if (cocks[temp].cockLength <= cocks[storedCock].cockLength) storedCock = temp;
+				}
+				//Smallest cock should be selected, now remove it!
+				removeCock(storedCock, 1);
+				removed++;
+				deadCock--;
+				if (cocks.length == 0) deadCock = 0;
+			}
+			//Texts
+			if (removed == 1) {
+				if (cocks.length == 0) {
+					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>", false);
+					if (hasStatusAffect("infested") >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+				}
+				if (cocks.length == 1) {
+					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one " + cockDescript(0) + ".</b>", false);
+				}
+				if (cocks.length > 1) {
+					outputText("<b>Your smallest penis disappears forever, leaving you with just your " + multiCockDescriptLight() + ".</b>", false);
+				}
+			}
+			if (removed > 1) {
+				if (cocks.length == 0) {
+					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>", false);
+					if (hasStatusAffect("infested") >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+				}
+				if (cocks.length == 1) {
+					outputText("<b>You feel " + kGAMECLASS.num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
+				}
+				if (cocks.length > 1) {
+					outputText("<b>You feel " + kGAMECLASS.num2Text(removed) + " cocks disappear into your groin, leaving you with " + multiCockDescriptLight() + ".", false);
+				}
+			}
+			//remove infestation if cockless
+			if (cocks.length == 0) removeStatusAffect("infested");
+			if (cocks.length == 0 && balls > 0) {
+				outputText("  <b>Your " + sackDescript() + " and " + ballsDescriptLight() + " shrink and disappear, vanishing into your groin.</b>", false);
+				balls = 0;
+				ballSize = 1;
+			}
+		}
 	}
 }

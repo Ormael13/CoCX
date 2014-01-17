@@ -335,8 +335,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The force of her orgasm splatters you with the honey, far more than you could possibly try to lap up. You dimly remember the vial she gave to you, and steady it under the dripping fluid.  You catch as much of her sweetness as you can while still mashing your face against her quivering cunt.  You are in heaven, but after a time she pushes you back, smiling contentedly.  Her free hand offers you a small cork.   You reluctantly accept it and cap off the pure honey to save for later.\n\n", false);
 			outputText("She waves and stretches, picking up her pack and buzzing her wings as she takes off.  She blows a kiss over her shoulder and flies away, leaving you to return to your camp...", false);
 			menuLoc = 2;
-			shortName = "PurHony";
-			takeItem();
+			inventory.takeItem(consumables.PURHONY);
 		}
 
 		private function seduceBeeGirl():void

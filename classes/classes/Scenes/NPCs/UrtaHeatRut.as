@@ -315,7 +315,7 @@ private function soberUrtaSatingPCHeat():void {
 	if(player.vaginalCapacity() >= 100) outputText("  Your hungry gash eagerly welcomes her, Urta easily sliding herself home.");
 	else if(player.vaginalCapacity() > 60) outputText("  You feel it stretch you in the most pleasuring of ways, filling you with warm, throbbing flesh as she pushes it deeper and deeper.");
 	else outputText("  You wince in pain at being stretched so much, but you grow wetter and wetter as Urta slowly pushes herself inside your depths, your [vagina] slowly getting wetter and warmer, accepting the intruder.  Pleasure starts to override pain and you let out a gasp.");
-	cuntChange(60,true,true,false);
+	player.cuntChange(60,true,true,false);
 	//virginity loss message, if appropriate//)
 
 	outputText("\n\nYou moan in pleasure as Urta gets a foot or so of her erection inside you, and then keeps pushing.  Your insides, along with all their sensitive spots, are stimulated at once by the throbbing pillar of flesh that stretches you, and Urta finally has no more to give.  ");
@@ -576,7 +576,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 	outputText("\n\nNow that you've been properly lubed up, Urta suddenly springs at you, literally vaulting atop you whilst at the same time thrusting her huge prick into your [vagina].");
 	if(player.vaginalCapacity() < 60) outputText("  Urta's cock is long and thick enough to be something a stallion would be proud of, and far larger than should be comfortable. Its sheer girth and flared head snag against your opening, before the lust-crazed herm vixen roughly forces it through, impatiently feeding inch after inch of girthy herm-hood into your lower lips.  The sudden intrusion of something so long and broad stretches your poor pussy wide, but the shock and the pain merely turn into pleasure in your lust-enthralled mind.");
 	else outputText("  Urta's mammoth cock fits you like a hand fits into a comfortable glove, and you howl in joy as it slides home, stretching you in all the right places, able to feel every bump and vein on its surface, the flared tip thrusting into the deepest part of you.");
-	cuntChange(60,true,true,false);
+	player.cuntChange(60,true,true,false);
 
 	outputText("\n\nLike an animal, Urta begins to rock back and forth, thrusting her cock wildly into you with brutal eagerness, slamming you with such force that the table creaks and groans in a manner that would be most alarming if you weren't too caught up in your own pleasure to care.  You throw your head back in ecstasy, getting brief glimpses of the situation in the bar around you.  It looks like the others are enjoying the show quite a lot in their own right - you see more than a few couples or threesomes starting to kiss, fondle each other, even begin having sex on their own.");
 
@@ -589,7 +589,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 
 	outputText("\n\nAs you lay there on the table, bucking and thrashing with ecstasy as your lover fills you in the way only she can, the other bar-goers of the Wet Bitch breaking down into a chaotic orgy around you, all you can think of is to ask Urta for more.  And more is what she gives you; as you finally black out, your last sight is of your stomach, huge and swollen with Urta's cum, jiggling and sloshing above you.");
 
-	cuntChange(60,true,true,false);
+	player.cuntChange(60,true,true,false);
 
 	outputText("\n\n<b><u>A bit later...</u></b>");
 	outputText("\nWhen you wake, you find yourself in unfamiliar surroundings - you're in a bed, you realise. That it's Urta's bed quickly becomes apparent when you see the fox-herm in question sitting on a cushioned seat beside you, holding a wet towel gingerly over her crotch.  \"<i>Um... hi,</i>\" she says, shyly.  \"<i>That was....  Well, I won't say I didn't enjoy it, but I don't think I'm going to be able to get it up for a week,</i>\" she tells you.  \"<i>Also, can we try and keep that kind of thing in private, in the future?  It looks bad when the Captain of the Guard not only starts a public orgy, but needs to get hosed down for several minutes to make her stop fucking somebody.</i>\"");

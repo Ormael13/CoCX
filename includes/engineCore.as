@@ -920,7 +920,6 @@ public function applyPerk(pName:String = ""):void {
 			break;
 		case "Weapon Mastery":
 			player.createPerk("Weapon Mastery",0,0,0,0,"After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).");
-			if(player.weaponPerk == "Large") player.weaponAttack *= 2;
 			break;
 		case "Tank 2":
 			player.createPerk("Tank 2",0,0,0,0,"Your maximum HP is raised by an extra 1 point per point of toughness!");
@@ -935,8 +934,6 @@ public function applyPerk(pName:String = ""):void {
 			break;
 		case "Agility":
 			player.createPerk("Agility",0,0,0,0,"When wearing light or medium armor its effectiveness is increased by a portion of your speed.");
-			if(player.armorPerk == "Light") player.armorDef += Math.round(player.spe/10);
-			else if(player.armorPerk == "Medium") player.armorDef += Math.round(player.spe/15);
 			break;
 		case "Channeling":
 			player.createPerk("Channeling",0,0,0,0,"You've gotten even better at spellcasting, gaining up to 50% more effectiveness!");
@@ -1454,8 +1451,8 @@ public function createCallBackFunction(func:Function, arg:*):Function
 	}
 	if( arg == -9000 || arg == null )
 	{
-		if (func == eventParser && CoC_Settings.haltOnErrors){
-			throw new Error("createCallBackFunction(eventParser,"+arg+")");
+		if (func == eventParser){
+			CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
 		}
 		return function ():*
 		{ 

@@ -10,14 +10,14 @@ package classes.Items.Weapons
 	public class EldritchStaff extends Weapon
 	{
 
-		override public function equipEffect(user:Player):void
+		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			user.createPerk("Wizard's Focus",.6,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
+			player.createPerk("Wizard's Focus",.6,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
 		}
 
-		override public function unequipEffect(user:Player):void
+		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			user.removePerk("Wizard's Focus");
+			player.removePerk("Wizard's Focus");
 		}
 
 		public function EldritchStaff()

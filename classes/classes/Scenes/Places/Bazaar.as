@@ -562,8 +562,7 @@ private function buyGretasBikini():void {
 	outputText("\n\n\"<i>Thanks, sugar!  Have fun and be safe, and if you don't want to be safe, come visit me sometime!</i>\"");
 	outputText("\n\nYou'll have to keep that in mind...  ");
 	menuLoc = 2;
-	shortName = "LMArmor";
-	takeItem();
+	inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
 }
 
 //Cock-socks Available - First Time
@@ -1153,8 +1152,7 @@ private function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;
-		shortName = "L.Draft";
-		takeItem();
+		inventory.takeItem(consumables.L_DRAFT);
 		//Time set to morning
 		statScreenRefresh();
 	}
@@ -1186,8 +1184,7 @@ private function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;
-		shortName = "L.Draft";
-		takeItem();
+		inventory.takeItem(consumables.L_DRAFT);
 		//Time set to morning
 		statScreenRefresh();
 	}
@@ -1219,8 +1216,7 @@ private function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;
-		shortName = "BimboLq";
-		takeItem();
+		inventory.takeItem(consumables.BIMBOLQ);
 		statScreenRefresh();
 		//Time set to morning
 	}

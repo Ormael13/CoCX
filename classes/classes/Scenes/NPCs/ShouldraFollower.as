@@ -260,8 +260,8 @@ public function sandWitchGetsGhostly():void {
 		outputText("\n\nHowever, you're determined not to go down without a proper fight.  You throw down the gauntlet by leaning up and eating the sand witch's pussy a new one.  With maddening concentration, your tongue teases her vulva, dashing all around as you attempt to cope with your own mounting passion.  And whichever of the witch's cunts isn't getting the oral treatment continues to receive your fingering speciality.  Soaked in the never ending geysers of breastmilk, your hands can easily keep up with your own lapping deliverance.  The sand sorceress' moaning picks up in pace as her breathing reaches its crescendo, her voice mixing with that of her paranormal invader.");
 		outputText("\n\nYour extraordinary determination wins out as Shouldra's host concedes, a cocktail of breastmilk and femspunk blasting all over your bound body.  You fall in short order after her, your [vagina] letting loose its own juice[if (hasCock = true) , right alongside your spraying [cock]].  It's a wonder you haven't started seeing stars through all your convulsing.  Dragged through unnatural ecstasy and back, Shouldra and her host flop down [if (isBiped = true) between your [legs]][if (isBiped = false) on top of you], their dual voices still mixing together as the duo try and climb down from their sexual high.  After a few moments, you slide out from underneath the witch and rise to your [feet] - an action made most difficult by the continued orb penetration.");
 		outputText("\n\nHelping the possessed desert seductress to her feet, you query as to how to get the damnable things to stop.  \"<i>Oh...oh...t-that's easy,</i>\" Shouldra replies, her voice cracking under the persisting frontal duress.  She leans heavily on your shoulder and with a merely a snap of her fingers, the orbs finally go silent, lifelessly rolling out from their targeted orifices.  Your relief is only shadowed by the incredibly odd tingling sensation left in the orbs' wake.  Peering back up at the sand witch, you find her eyes finally returned back to her normal shade of brown.  Her breathless gaze meets yours, the two of you staring at one another for a moment.");
-		cuntChange(20,true,true,false);
-		buttChange(20,true,true,false);
+		player.cuntChange(20,true,true,false);
+		player.buttChange(20,true,true,false);
 		outputText("\n\nThe witch suddenly blushes beet red.  \"<i>What the fuck is wrong with you?</i>\" she shouts, slapping you across the face and back down to the desert ground.  The sand witch storms off into the horizon, muttering to herself as she glares down at her mutated tits.  Boisterous laughing off to your side catches your attention; Shouldra is entirely too pleased with herself it seems.  It appears that the deceased comedian snuck out of her host without catching your attention.");
 		outputText("\n\n\"<i>The look on your face was priceless!</i>\" she says, doing her best to mimic you.  You give her a slightly perturbed stare as she stumbles back into your body, still laughing to herself.  ");
 		if(!player.hasFuckableNipples()) outputText("\"<i>You know, maybe I should give you a couple of those chest-mounted treats.  They're pretty fun,</i>\" Shouldra teases, tweaking your [nipples].  ");
@@ -371,11 +371,10 @@ private function genderlessShouldraMasturbation():void {
 	//{analLooseness is now 5} {player receives ectoplasm}
 	player.ass.analLooseness = 5;
 	outputText("\n\n", false);
-	shortName = "EctoPls";
 	dynStats("sen", -2, "lus=", 0);
 	menuLoc = 2;
 	shouldraSleeping((10 + rand(26)), true);
-	takeItem();
+	inventory.takeItem(consumables.ECTOPLS);
 }
 
 //Anal Masturbation - Variant on Genderless Masturbation
@@ -455,9 +454,8 @@ private function nongenderlessAnalShouldraMasturbation():void {
 	player.ass.analLooseness = 5;
 	shouldraSleeping((10 + rand(26)), true);
 	outputText("\n\n", false);
-	shortName = "EctoPls";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem(consumables.ECTOPLS);
 }
 
 //Male Masturbation
@@ -489,10 +487,9 @@ private function maleMasturbationProper():void {
 	outputText("  She reaches into her tunic and tosses you a full bottle of ectoplasm, giving you a wink before incorporealizing once more and floating into you.  All's well that ends well.");
 	dynStats("sen", -2, "lus=", 0);
 	outputText("\n\n", false);
-	shortName = "EctoPls";
 	shouldraSleeping((10 + rand(26)), true);
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem(consumables.ECTOPLS);
 }
 
 //Female Masturbation

@@ -671,7 +671,7 @@ public function rideCorruptJojoCock():void {
 	outputText("\n\nNow that's what you like to hear, and you promptly impale yourself on Jojo's handy shaft, brutally forcing it inch by inch inside you until you have forced him to the ground with your efforts.  Moaning with satisfaction at being stuffed, you begin to roughly rise and fall, pistoning back and forth in order to sate your pleasures.");
 	
 	outputText("\n\nJojo goes berserk, babbling incoherently as he grabs your hips and begins roughly slamming himself into your [vagina], trying to dig as deep into you as he can, even as his pre leaking shaft lubricates your tunnel.  You try to exert some control over the ex-monk, but eventually decide it's better to just sit back and enjoy the ride - however, you can't resist taunting Jojo over what a depraved little slut he has become, totally incapable of controlling himself. \"<i>S-Sluuut... I'm... sluuuut,</i>\" he utters incoherently between moans.");
-	cuntChange(20,true,true,false);
+	player.cuntChange(20,true,true,false);
 	
 	outputText("\n\nYou thrust, buck, and heave, enjoying everything there is about mastering this once-pure soul and reducing him to your fuck puppet.  Finally, with an ecstatic howl, you cum, female lubricants gushing onto his burning hot cock");
 	if(player.hasCock()) outputText(", your own futa-cock spewing its load, which you deliberately spray in his face for amusement");

@@ -88,8 +88,7 @@ public function encounterMarae():void {
 			outputText("\"<i>Thank you,</i>\" she says, breaking the hug and turning back to her tree, \"<i>The onslaught has lessened, and I feel more myself already.  Let me thank you for your heroic deeds.</i>\"\n\n", false);
 			outputText("She plunges a hand inside the tree and pulls out a small pearl.  \"<i>This is a pearl from the very depths of the lake, infused with my purity.  If you eat it, it will grant you my aid in resisting the lust and corruption of this land.</i>\"\n\n", false);
 			outputText("Marae pushes the pearl into your hand, and closes your fingers over it gently.  \"<i>Go now, there is still much to be done.  With luck we will not need each other again,</i>\" commands the goddess as she slips back into her tree.  ", false);
-			shortName = "P.Pearl";
-			takeItem();
+			inventory.takeItem(consumables.P_PEARL);
 			player.createStatusAffect("Marae Complete",0,0,0,0);
 		}
 		//Corrupt!
@@ -216,7 +215,7 @@ private function maraeStealLethicite():void {
 			}
 			else outputText(vaginaDescript(0) + ".  ", false);
 			outputText("She guides the tentacle forwards, letting it brush your nether-lips.  Without any guidance from its mistress, the bulbous plant-member buries itself inside you, sliding in easily until it's pushing hard against your womb.  A quick blast of fluid sends cramps spasming up your gut, forcing your cervix to dilate.  It wastes no time, flowing into your unprotected womb.  As soon as it reaches the back of your womb, thick bulges begin sliding down the exposed portion of the tentacle.  It stretches you wide, almost painfully so, as they pass through your lips and work up your passage.  They begin exploding in your cunt, one after the other, cum-bombs bursting in your womb, filling you to the brink.  Your belly swells out, giving you the appearance of a pregnant woman.  Finished with its nasty work, the plant-prick pulls free leaving your puffy pussy lips slightly agape.  A small runner of a thick green substance slowly slides out.", false);
-			cuntChange(20,true,true,false);
+			player.cuntChange(20,true,true,false);
 			outputText("\n\n", false);   
 			outputText("Marae winks, \"<i>Sorry about making you look so pregnant my dear, it's a necessary part of the process.  All that sloshing seed is going to flow right into your tender little mortal ovaries, and remake them.  You'll be so fertile just looking at a hard cock could knock you up!</i>\"\n\n", false);
 			outputText("She giggles at your expression of horror, \"<i>No, not literally, but it won't take much to make you a mommy, and you'll find the gestation to be quite a bit...shorter.  Now get out of here before I change my mind and lock in an orgasm for the rest of your life.</i>\"\n\n", false);
@@ -304,7 +303,7 @@ private function MaraeIIStageII():void {
 		outputText("Bobbing back and forth, you begin to fellate the goddess of fertility with unthinking, flawless precision.  Marae's hands continue to toy with your " + hairDescript() + ", wrenching it painfully once when you accidentally bump her with your teeth.  You whimper submissively and work harder, and your goddess rewards you by sending a tentacle to your groin.  The rounded tip nuzzles against you through your " + player.armorName + ", but quickly angles itself to slip inside.  It curls around your body, coating you with slippery fluids as it works its way back towards your " + vaginaDescript(0) + ".\n\n", false);
 		
 		outputText("The tentacle squirts something slippery and warm over your outer lips before arching up to pass inside you.  A half-articulated hum of pleasure escapes through your throat to vibrate Marae's plant-like prick.  She grunts and deposits a fat bead of nectar in your mouth, and trickles of the goddess' vaginal fluids start to slide down her inner thighs.  Marae's hips start to pump into you in time with the tentacle that's worming its way inside your " + vaginaDescript(0) + ".", false);
-		cuntChange(12,true,true,false);
+		player.cuntChange(12,true,true,false);
 		outputText("  Both are dripping and giving tiny squirts of sweet pleasure that simultaneously dull the mind and reinforce your worship of this sexually-charged deity.\n\n", false);
 		
 		outputText("Marae grunts and pulls on ", false);
@@ -335,7 +334,7 @@ private function MaraeIIStageII():void {
 		outputText("Marae extends her arms, and the twin tentacles crawl forward like snakes as they wriggle down her appendages.  You thrust your crotch forwards, presenting it to the goddess, and only wonder why for a brief second before you toss away the nagging, useless thought.  Why would anything but pleasuring the living goddess before you matter?  Her corruptive aura floats in the air, filling you with the desire to submit to your queen and obey her every whim.  " + SMultiCockDesc() + " twitches and starts to drip pre-cum, itching to fulfill your deity's desires.\n\n", false);
 																																																																																																																										 
 		outputText("The tentacle on her right arm convulses, then splits open along four joints.  The tip folds open to reveal a pink, wriggling interior that promises pleasures mortal minds weren't meant to comprehend.  Meanwhile, while you're distracted by the eager plant-hole, the other tentacle slips behind you and climbs up your " + player.leg() + ", leaving a trail of slime in its wake.   It slides between your cheeks and prods at your " + assholeDescript() + ".  You jerk forwards in surprise, but Marae pushes your " + hipDescript() + " back, allowing it to work its way inside.", false);
-		buttChange(12,true,true,false);
+		player.buttChange(12,true,true,false);
 		outputText("  The open plant-hole dives for your groin while you're distracted, hits your " + cockDescript(0) + " and devours it with a greedy sluuuuurp.", false);
 		if(player.cockTotal() == 2) outputText("  Another vine that may as well be the first's twin snakes from between the goddess' legs and jumps onto your " + cockDescript(1) + ".", false);
 		else if(player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s.", false);
@@ -385,8 +384,8 @@ private function MaraeIIStageII():void {
 		else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Drops of feminine arousal run down your thighs", false);
 		else outputText("Trails of viscous feminine fluid leak from your " + vaginaDescript(0), false);
 		outputText(", reminding you of your unused femsex.  Marae grunts underneath you, and while at first you assume it's from the penetration, the prodding of two cock-like protrusions at your lusty holes corrects your misguided assumptions.  You pull back and begin to fuck her in earnest, and with each long rock back, you can see she's grown tentacles from underneath her ass, like two prehensile tails.  They push forwards and spear you, arresting your movement while you try to cope with the sudden stretching of two of your orifices.  Warmth radiates from the twin intruders along with a slippery fullness.  They're pumping something inside you that tingles and makes " + sMultiCockDesc() + " bounce and drip.", false);
-		cuntChange(12,true,true,false);
-		buttChange(12,true,true,false);
+		player.cuntChange(12,true,true,false);
+		player.buttChange(12,true,true,false);
 		outputText("\n\n", false);
 		
 		outputText("Marae laughs and teases, \"<i>If this is how you fuck it's no wonder I haven't met your children yet.  If you're going to be my disciple you need to fuck your partners hard until you're stuffing them with cum.  Then you need to do it again.  Alternatively you should be bouncing on their cock and milking it with your " + vaginaDescript(0) + " until your womb is packed so full you can't walk.  Now show me how you'll do it, or I might keep you here until you're properly trained!</i>\"\n\n", false);

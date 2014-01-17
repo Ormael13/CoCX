@@ -255,7 +255,7 @@ public function gooArmorBeatsUpPC():void {
 		outputText("\n\nShe begins to use her goo to peel back your [armor], soon revealing your defenseless [vagina], and makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You writhe and struggle against your gooey bonds, but your efforts are futile.  The goo-girl inside the armor only shakes her head at you, and withdraws herself from your [vagina].");
 		outputText("\n\nYou have only a moment to figure out what's coming before her goo -- now perfectly shaped like the inside of your cunt -- slams back into you like a stiff cock. You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth."); 
 		outputText("\n\n\"<i>Oh, you like that do you?</i>\" the armor-goo asks, smiling evilly.  \"<i>Well, maybe this can be mutually... beneficial.</i>\"  Still grinning, she begins to hammer her cock-like appendage into your pussy, fucking you fast and hard with her goo-dildo.");
-		cuntChange(25,true,true,false);
+		player.cuntChange(25,true,true,false);
 		//[If PC has breasts > A-cups: 
 		if(player.biggestTitSize() > 1) {
 			outputText("  As she hammers your cunny, bits of her goo swirl around your [chest], squeezing and massaging your tits.  You squirm as she roughly teases your boobs, pinching at your nipples and squeezing your tender flesh roughly.");
@@ -372,7 +372,7 @@ public function takeGooArmorAndWearIt():void {
 	//(\"<i>You put a (previous armorName) in your X pouch)
 	outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 	//(PC regains HP)
-	equipArmor("goo armor", false);
+	player.armor = armors.GOO_ARMOR;
 	flags[kFLAGS.MET_VALERIA] = 1;
 	HPChange(1000,false);
 	flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
@@ -826,7 +826,7 @@ public function gitButtRoadPhoenix():void {
 	outputText("\n\nYou quickly discard your [armor] and, pushing the girl back onto her back, squat over your prize.  You wrap your hand around her stiff lizard prick and start to stroke it, running your hand along her bulbous purple shaft.  The phoenix makes a pleasured gasp as you start to jerk her off, idly playing with her lush tits or slick pussy as you stroke her to full hardness.");
 
 	outputText("\n\nOnce you're satisfied that she's completely rigid, you shift your [hips] so that your [asshole] is hovering over the phoenix's thick twelve-incher.  You allow her to put her hands on your hips and guide you down, until you can feel her narrow head pressed against your backdoor.  Biting your lip to stifle a cry of pain and pleasure, you do the honors, guiding her wide prick to slip past your relaxed sphincter and into your bowels.");
-	buttChange(30,true,true,false);
+	player.buttChange(30,true,true,false);
 
 	outputText("\n\nYou grunt as she bottoms out inside you, leaving you with a feeling of intense fullness and warmth, grinning down at the phoenix-girl and pleased to see the look of rapture on her face as your ass muscles squeeze down on her stiff lizard-cock.  You feel her hands digging into your [hips], and in return you give her soft breasts a playful squeeze.  You start to rock your hips, letting an inch or two of her dick spill out of you before your stretched [asshole] sucks it back up.");
 
@@ -860,7 +860,7 @@ public function phoenixAginal():void {
 	outputText(" and strip out of your [armor]. The phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 
 	outputText("\n\nWhen she's nice and hard, you give the phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina].  Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust.  You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");
-	cuntChange(12,true,true,false);
+	player.cuntChange(12,true,true,false);
 
 	outputText("\n\nBy the time you're somewhat recovered from her surprise attack, the phoenix-girl has started rocking her hips into yours, grinding her long prick into you.  You give her hefty tits a rough squeeze and push her back down, holding her down by her mammaries as you start to ride her cock.  Having gotten her thrill, the phoenix-girl submits to you, only venturing to hold onto your [hips] as you fuck her.  For your part, you bask in the sensation of her thick dick sliding in and out of your well-lubricated depths, rubbing and stroking your sensitive inner walls with its bulbous length."); 
 
@@ -1120,8 +1120,7 @@ public function takeQueensStaff():void {
 	clearOutput();
 	outputText("You pick up the Harpy Queen's staff.  It is a tall whitewood staff, nearly six feet in length, and covered in glowing eldritch runes, with a singular shimmering sphere of crystal at its head, which seems to have a swirling mist within.");
 	//(New Weapon: EldritchStaff)
-	shortName = "E.Staff";
-	takeItem();
+	inventory.takeItem(weapons.ELDRITCH_STAFF);
 	//Similar stats to the Wizard's Staff, but with a better Fatigue reduction and a bonus to Magic damage/effect.
 	flags[kFLAGS.TOOK_QUEEN_STAFF] = 1;
 }

@@ -11,14 +11,15 @@ package classes.Items.Other
 	{
 		private var effect:Function;
 
-		override public function useItem(user:Player):void
+		override public function useItem(player:Player):void
 		{
-			effect(user);
+			effect(player);
 		}
 
 		public function SimpleUseable(id:String, shortName:String, longName:String, effect:Function,value:Number = 0, description:String = null)
 		{
 			super(id, shortName, longName, value, description);
+			// TODO check function arity and probably arg type
 			this.effect = effect;
 		}
 	}

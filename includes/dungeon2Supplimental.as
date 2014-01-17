@@ -211,14 +211,14 @@ public function loseToImpMob():void {
 	//(SINGLE PEN) 
 	if(!player.hasVagina()) {
 		outputText("Most of the crowd centers itself around your lower body, taking a good long look at your " + assholeDescript() + ".  An intrepid imp steps forwards and pushes his member into the unfilled orifice.  You're stretched wide by the massive and unexpectedly forceful intrusion.  The tiny corrupted nodules stroke every inch of your interior, eliciting uncontrollable spasms from your inner muscles.  The unintentional dick massage gives your rapist a wide smile, and he reaches down to smack your ass over and over again throughout the ordeal.", false);
-		buttChange(12,true,true,false);
+		player.buttChange(12,true,true,false);
 		outputText("\n\n", false);
 	}
 	//(DOUBLE PEN)
 	else {
 		outputText("Most of the crowd centers itself around your lower body, taking a good long look at your pussy and asshole.  Two intrepid imps step forward and push their members into the unplugged orifices.  You're stretched wide by the massive, unexpectedly forceful intrusions.  The tiny corrupted nodules stroke every inch of your interiors, eliciting uncontrollable spasms from your inner walls.  The unintentional dick massage gives your rapists knowing smiles, and they go to town on your ass, slapping it repeatedly as they double-penetrate you.", false);
-		buttChange(12,true,true,false);
-		cuntChange(12,true,true,false);
+		player.buttChange(12,true,true,false);
+		player.cuntChange(12,true,true,false);
 		outputText("\n\n", false);
 	}
 	//(DICK!)
@@ -333,7 +333,7 @@ public function impGangGetsRapedByFemale():void {
 	outputText("You walk around to one of the demons and push him onto his back.  Your " + player.armorName + " falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ", false);
 	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ", false);
 	outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.", false);
-	cuntChange(15,true,true,false);
+	player.cuntChange(15,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("At last you feel it bottom out, bumping against your cervix with the tiniest amount of pressure.  Grinning like a cat with the cream, you swivel your hips, grinding your " + clitDescript() + " against him in triumph.  ", false);
@@ -669,8 +669,8 @@ public function freeValazLooseCoochie():void {
 	
 	//[Heal (if the player has Pure Honey)] [Sex] [Reject]
 	var Heal:Number = 0;
-	if(hasItem("PurHony",1)) Heal = 2597;
-	if(hasItem("P.Pearl",1)) Heal = 2597;
+	if(player.hasItem(consumables.PURHONY,1)) Heal = 2597;
+	if(player.hasItem(consumables.P_PEARL,1)) Heal = 2597;
 	var Sex:Number = 0;
 	if(player.gender > 0) Sex = 2599;
 	//Choicez go here.  I can haz fucks?
@@ -681,8 +681,8 @@ public function freeValazLooseCoochie():void {
 public function healVala():void {
 	spriteSelect(85);
 	outputText("", true);
-	if(hasItem("PurHony",1)) {
-		consumeItem("PurHony",1);
+	if(player.hasItem(consumables.PURHONY,1)) {
+		player.consumeItem(consumables.PURHONY,1);
 		outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. She clings onto your ", false);
 		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail", false);
 		else outputText(player.leg(), false);
@@ -694,7 +694,7 @@ public function healVala():void {
 	}
 	//Pearl!
 	else {
-		consumeItem("P.Pearl",1);
+		player.consumeItem(consumables.P_PEARL,1);
 		outputText("A soft, warm breeze rustles your " + hairDescript() + " and for a moment the foul stench of the dungeon vanishes, setting your mind at ease and draining the tension that has been building in your gut. In a moment of clarity, you remember the beautiful, Pure Pearl that Marae granted you as a reward for shutting down the demons' factory. It seems only right to use the goddess' gift to rescue one of her wayward children. Perhaps she gave it to you for this very reason? The oblivious girl has managed to work her way to a sitting position and is grinding her dripping sex against your " + player.foot() + ". You lean down and gently lift her chin up, bringing her empty, pink eyes to stare into yours. Mistaking the gentle motion for a command, she gleefully opens wide, tongue thrashing about in anticipation. You place the pink pearl at the fairy's lips and she wraps her mouth around the pale jewel, trying obediently to swallow it. However, the little fairy's mouth is far smaller than you would've thought and it seems stuck just behind her teeth, like a pink ball-gag. She coos a muffled moan and begins to masturbate without breaking eye contact with you.\n\n", false);
 
 		outputText("Not exactly what you had in mind. It looks like you're going to have to be a bit more forceful.  You stoop down and take the fairy's head in your arms. Placing your fingers on the drool-soaked orb wrenching her mouth open, you begin to shove the pure pearl into her throat. With ecstatic joy, she swallows as hard as she can, trying to accommodate this new, exciting insertion. The gem squeezes past her tonsils and is forced into her esophagus with an audible 'pop!' the mass of the pearl leaving an orb-shaped bulge in her throat. Her masturbation becomes frenzied as she begins choking on the gem and you hurry to stroke the girl's neck, coaxing the pearl down, out of her windpipe. Finally, it drops into her stomach and the change is immediate. Just as she climaxes, her empty pink eyes focus and sharpen, the lusty haze fading as Marae's gift burns away the pollution of the imps' drugs and rape. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. You are a godsend, hero. I will never forget what you've done for me.</i>\"\n\n", false);
@@ -824,78 +824,7 @@ public function rejectFuckingVala():void {
 	doNext(1);
 }
 
-//Vala AI
-public function valaAI():void {
-	//VALA SPEAKS!
-	valaCombatDialogue();
-	outputText("\n\n", false);
-	//Select Attack	
-	//BLood magic special
-	if(monster.HPRatio() < .85 && rand(3) == 0) valaSpecial1();
-	//25% chance of milksquirt.
-	else if(rand(4) == 0) valaSpecial2();
-	else valaMasturbate();
-}
 
-//Blood magic?
-public function valaSpecial1():void {
-	outputText("Vala dabs at one of her wounds and swoons.  Is she actually getting off from the wounds?  Damn she's damaged!  Vala licks the blood from her fingers, winks, and blows pink mist from her mouth.", false);
-	//Lightly wounded.
-	if(monster.HPRatio() > .7) {
-		outputText("  The sweet-smelling cloud rapidly fills the room, but the volume of mist is low enough that you don't end up breathing in that much of it.  It does make your pulse quicken in the most pleasant way though...", false);
-		dynStats("lus", 5 + player.lib/20);
-	}
-	else if(monster.HPRatio() > .4) {
-		outputText("  The rose-colored vapor spreads throughout the room, forcing you to breathe it in or pass out from lack of air.  It smells sweet and makes your head swim with sensual promises and your crotch tingle with desire.  Panicked by the knowledge that you're being drugged, you gasp, but it only draws more of the rapidly disappating cloud into your lungs, fueling your lust.", false);
-		dynStats("lus", 10 + player.lib/20);
-	}
-	else {
-		outputText("  The cloying, thick cloud of pink spools out from her mouth and fills the room with a haze of bubblegum-pink sweetness.  Even the shallowest, most experimental breath makes your heart pound and your crotch thrum with excitement.  You gasp in another quick breath and sway back and forth on your feet, already on the edge of giving in to the faerie.", false);
-		dynStats("lus", 30 + player.lib/10);
-	}
-	combatRoundOver();
-}
-//Milk magic
-public function valaSpecial2():void {
-	outputText("With a look of ecstasy on her face, Vala throws back her head and squeezes her pillowy chest with her hands, firing gouts of thick faerie milk from her over-sized bosom!  You try to dodge, but she's squirting so much it's impossible to dodge it all, and in no time you're drenched with a thick coating of Vala's milk.", false);
-	outputText("  She releases her breasts, shaking them back and forth for your benefit, and flutters her wings, blowing shiny, glitter-like flakes at you.  They stick to the milk on your skin, leaving you coated in milk and faerie-dust.", false);
-	outputText("\nVala says, \"<i>Now you can be sexy like Vala!</i>\"\n", false);
-
-	if(monster.hasStatusAffect("milk") >= 0) {
-		monster.addStatusValue("milk",1,5);
-		outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!", false);		
-	}
-	else {
-		monster.createStatusAffect("milk",5,0,0,0);
-		outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.", false);
-	}
-	dynStats("lus", monster.statusAffectv1("milk") + player.lib/20);
-	combatRoundOver();
-}
-//Masturbation
-public function valaMasturbate():void {
-	outputText("The mind-fucked faerie spreads her alabaster thighs and dips a finger into the glistening slit between her legs, sliding in and out, only pausing to circle her clit.  She brazenly masturbates, putting on quite the show.  Vala slides another two fingers inside herself and finger-fucks herself hard, moaning and panting lewdly.  Then she pulls them out and asks, \"<i>Did you like that?  Will you fuck Vala now?</i>\"", false);
-	dynStats("lus", 4 + player.cor/10);
-	combatRoundOver();
-}
-
-
-//[Fight dialog]
-public function valaCombatDialogue():void {
-	if(monster.hasStatusAffect("vala") < 0) {
-		outputText("\"<i>Sluts needs to service the masters!</i>\" the fairy wails, flying high. \"<i>If they are not pleased, Bitch doesn't get any cum!</i>\"", false);
-		monster.createStatusAffect("vala",0,0,0,0);
-	}
-	else {
-		monster.addStatusValue("vala",1,1);
-		if(monster.statusAffectv1("vala") == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
-		else if(monster.statusAffectv1("vala") == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself? Won't you like that?</i>\"", false);
-		else if(monster.statusAffectv1("vala") == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
-		else if(monster.statusAffectv1("vala") == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
-		else if(monster.statusAffectv1("vala") == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);
-		else outputText("\"<i>Bitch loves when her children use her as their fathers did. Sluts belong to them. Slut love them. You will love them too!</i>\"", false);
-	}
-}
 
 public function loseToVala():void {
 	spriteSelect(85);
@@ -1220,25 +1149,23 @@ public function tryToHealVala():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Without Pure Honey)
-	if(!(hasItem("PurHony",1) || hasItem("P.Pearl",1))) {
+	if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
 		outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
 		doNext(1);
-		return;
 	}
 	//(With Pure Honey)
-	else if(hasItem("PurHony",1)) {
-		consumeItem("PurHony",1);
+	else if(player.hasItem(consumables.PURHONY,1)) {
+		player.consumeItem(consumables.PURHONY,1);
 		outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. Vala clings onto your leg as you walk, and you end up dragging her across the dungeon floor. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a more viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your shin. You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n", false);
 
 		outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you,</i>\" she gasps. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death those wretched creatures could have subjected me to.</i>\"", false);
 		
 		//[Next]
 		doNext(tryToHealValaWHoney2);
-		return;
 	}
-	//Pure Pearl
 	else {
-		consumeItem("P.Pearl",1);
+		//Pure Pearl
+		player.consumeItem(consumables.P_PEARL,1);
 		outputText("A soft, warm breeze rustles your " + hairDescript() + " and for a moment the foul stench of the dungeon vanishes, setting your mind at ease and draining the tension that has been building in your gut. In a moment of clarity, you remember the beautiful, Pure Pearl that Marae granted you as a reward for shutting down the demons' factory. It seems only right to use the goddess' gift to rescue one of her wayward children. Perhaps she gave it to you for this very reason? The oblivious girl has managed to work her way to a sitting position and is grinding her dripping sex against your " + player.foot() + ". You lean down and gently lift her chin up, bringing her empty, pink eyes to stare into yours. Mistaking the gentle motion for a command, she gleefully opens wide, tongue thrashing about in anticipation. You place the pink pearl at the fairy's lips and she wraps her mouth around the pale jewel, trying obediently to swallow it. However, the little fairy's mouth is far smaller than you would've thought and it seems stuck just behind her teeth, like a pink ball-gag. She coos a muffled moan and begins to masturbate without breaking eye contact with you.\n\n", false);
 
 		outputText("Not exactly what you had in mind. It looks like you're going to have to be a bit more forceful.  You stoop down and take the fairy's head in your arms. Placing your fingers on the drool-soaked orb wrenching her mouth open, you begin to shove the pure pearl into her throat. With ecstatic joy, she swallows as hard as she can, trying to accommodate this new, exciting insertion. The gem squeezes past her tonsils and is forced into her esophagus with an audible 'pop!' the mass of the pearl leaving an orb-shaped bulge in her throat. Her masturbation becomes frenzied as she begins choking on the gem and you hurry to stroke the girl's neck, coaxing the pearl down, out of her windpipe. Finally, it drops into her stomach and the change is immediate. Just as she climaxes, her empty pink eyes focus and sharpen, the lusty haze fading as Marae's gift burns away the pollution of the imps' drugs and rape. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. You are a godsend, hero. I will never forget what you've done for me.</i>\"\n\n", false);
@@ -2292,33 +2219,33 @@ public function incubusShop():void {
 	outputText("", true);
 	outputText("Sean nods at you and slicks his hair back into place, threading it carefully around the small nubs of his horns before asking, \"<i>What can I do for you?</i>\"", false);
 	var bimbo:Number = 0;
-	if(hasItem("BimboCh",1) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
-	if(hasItem("BimboCh",5) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
+	if(player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
+	if(player.hasItem(consumables.BIMBOCH,5) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 		bimbo = 3542;
 		outputText("  Luckily, you do!");
 	}
 	choices("Numb Rox",2643,"Sens. Draft",2644,"Reducto",2645,"Demon Whip",2653,"Bimbo Liq",bimbo,"",0,"",0,"",0,"",0,"Leave",1);
 }
 
-public function incubusBuy():void {
+public function incubusBuy(itype:ItemType):void {
 	spriteSelect(52);
 	outputText("", true);
-	outputText("The incubus lifts " + itemLongName(shortName) + " from his shelves and says, \"<i>That will be " + (itemValue(shortName) * 3) + " gems.  Are you sure you want to buy it?</i>\"", false);
-	if(player.gems < (itemValue(shortName) * 3)) {
+	outputText("The incubus lifts " + itype.longName + " from his shelves and says, \"<i>That will be " + (itype.value * 3) + " gems.  Are you sure you want to buy it?</i>\"", false);
+	if(player.gems < (itype.value * 3)) {
 		outputText("\n<b>You don't have enough gems...</b>", false);
 		doNext(2642);
 		return;
 	}
-	doYesNo(2646,2642);
+	doYesNo(curry(incubusTransact,itype),2642);
 }
 
-public function incubusTransact():void {
+public function incubusTransact(itype:ItemType):void {
 	spriteSelect(52);
 	outputText("", true);
-	player.gems -= itemValue(shortName) * 3;
+	player.gems -= itype.value * 3;
 	menuLoc = 16;
 	statScreenRefresh();
-	takeItem();
+	inventory.takeItem(itype);
 }
 
 //[Cum Bath]
@@ -2419,7 +2346,7 @@ public function valaBigYou():void {
 	addButton(0,"Dom Me",bigValaDomsPC);
 	if(player.hasCock()) addButton(1,"Lick Me",bigValaLicksOffDudes);
 	if(vapula.vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
-		addButton(2,"Dom Vapula",valaDommyVapula3Some)
+		addButton(2,"Dom Vapula",valaDommyVapula3Some);
 		addButton(3,"Vapula3Some",valaLoveyVapula3Some);
 	}
 }

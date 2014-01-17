@@ -287,7 +287,7 @@ public function fuckMyAssPlantLadyWhileImTrapped():void {
 	outputText(".");
 
 	outputText("\n\nYou grit your teeth as she bottoms out and then begins to withdraw. Just as it seems she's going to give you a moment of respite, she pushes her once again, sliding more of it into your ass.");
-	buttChange(25,true,true,false);
+	player.buttChange(25,true,true,false);
 	
 	//PC asshole is virgin/tight: 
 	if(player.analCapacity() < 20) outputText("  You moan again from the pain and clamp down, causing your captor to

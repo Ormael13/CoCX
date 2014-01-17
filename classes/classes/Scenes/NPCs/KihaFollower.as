@@ -888,7 +888,7 @@ private function kihaSexMenu(display:Boolean = true):void {
 	if(followerKiha()) {
 		if(player.gender > 0) dom = dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis;
 		//Req: Gro+ (also soft ghost req!)
-		if(hasItem("GroPlus",1)) {
+		if(player.hasItem(consumables.GROPLUS)) {
 			if(display) {
 				if(player.hasPerk("Incorporeality") >= 0) outputText("\nYou could try and pump her boobs a bit with gro+, and if she decides against it, possess her and do it anyway!");
 				else outputText("\nYou could see if she'd let you pump her boobs with gro+.");
@@ -896,7 +896,7 @@ private function kihaSexMenu(display:Boolean = true):void {
 			gro = ghostboobiesKiha;
 		}
 		else if(display) outputText("\nIf you had some gro+, you could ask her about making her breasts bigger.");
-		if(hasItem("IncubiD",1) || hasItem("P.Draft",1)) {
+		if(player.hasItem(consumables.INCUBID) || player.hasItem(consumables.P_DRAFT)) {
 			if(display) outputText("\nYou could slip her an incubi draft and let her fuck your ass with it.");
 			incu = giveKihaIncubusDraft;
 		}
@@ -908,7 +908,7 @@ private function kihaSexMenu(display:Boolean = true):void {
 			if(player.cockThatFits(67) >= 0) fuckVag = fuckKihasVagInCamp;
 			else if(display) outputText("\nKiha's vagina is too small and tight for you to take.");
 			//(requires 50+ minimum lust, or 80+ libido, or a lust/fuck draft)
-			if(player.cockThatFits(200) >= 0 && (player.minLust() > 50 || player.lib > 80 || hasItem("L.Draft",1))) {
+			if(player.cockThatFits(200) >= 0 && (player.minLust() > 50 || player.lib > 80 || player.hasItem(consumables.L_DRAFT))) {
 				//Dick also can't be that small.
 				if(player.cockArea(player.cockThatFits(200)) >= 40) {
 					horse = boneTheShitOutofKihaHolesWithHorsecock;
@@ -1049,7 +1049,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	//{Variant: Low Lib/Minlust + Fuck/Lust draft} 
 	if(player.minLust() < 50 && player.lib < 80) {
 		outputText("[pg]\"<i>No problem,</i>\" you think, reaching for a handy potion to spike your lagging libido back into the stratosphere.  The potion goes down smooth, with barely any effects at first.  However, after a few moments [eachCock] stiffens and tingles, hungry for more.  You can even faintly detect some new, odd scents in the air.");
-		consumeItem("L.Draft",1);
+		player.consumeItem(consumables.L_DRAFT);
 	}
 	outputText("[pg]Kiha ");
 	if(horse) {
@@ -1435,7 +1435,7 @@ private function giveKihaIncubusDraft():void {
 	else if(player.ass.analLooseness < 4) outputText("welcoming");
 	else outputText("loose");
 	outputText(" passage.  Kiha whines and groans, until finally you relent and slide down, taking her thick prick into your ass.");
-	buttChange(14,true,true,false);
+	player.buttChange(14,true,true,false);
 	outputText("  Your lover screams, hurtling toward orgasm -- until your stop, perfectly still as your [butt] rests against her thighs.  You relax your anal muscles, careful not to give the cock snugly stuffed inside you any extra stimulation.  Made too submissive by sensation, Kiha cannot even attempt to defy your wishes, only lying in a pool of her cum and fem-lube, pleading for mercy.");
 	outputText("[pg]Graciously, you grant her request.  Once she's calmed down from the edge, you begin to rise and fall on her prick, slowly bouncing on her dragon-rod.  You let go of her hands, grinning as they instantly rush to your hips, attempting -- and failing -- to hasten your pace.  Kiha pants and thrusts her hips into you, though a quick, hard pinch of her nipples stops that.");
 	if(silly()) outputText("  This is your game, you remind her: you control the horizontal and the vertical.");
@@ -1445,9 +1445,9 @@ private function giveKihaIncubusDraft():void {
 	outputText("[pg]Roaring, Kiha thrusts her cock up into your ass as you slam down upon her, meeting half-way as the first great, hot load of dragon-spunk shoots into your ass.  You grind your [asshole] around your lover's reptilian prick, milking out squirt after squirt of dragon-spooge until white streamers leak freely out of your asshole and coat the ground beneath you.");
 	outputText("[pg]By the time Kiha's orgasm subsides, you're both covered in her hot white spunk, reeking of sex and sweat and semen.  Shuddering from the sticky, slimy sensation up your ass, you crawl off your lover, her prick popping out of you with a wet POP.  Looking down at her, you see Kiha's eyes are crossed, her chest heaving; she's mumbling something about some pink eggs in her stash, but seems otherwise insensate.  You give her soon-to-be-gone cock a last loving little pat before gathering your [armorName] and heading out.");
 	dynStats("sen", 4, "lus", 30, "cor", .5);
-	if(hasItem("P.Draft",1)) consumeItem("P.Draft",1);
+	if(player.hasItem(consumables.P_DRAFT)) player.consumeItem(consumables.P_DRAFT);
 	else {
-		consumeItem("IncubiD",1);
+		player.consumeItem(consumables.INCUBID);
 		dynStats("cor", 2);
 	}
 	doNext(13);
@@ -1578,7 +1578,7 @@ private function ghostboobiesKiha():void {
 	outputText("[pg]Her entire body tenses as an orgiasmic tremor rocks your system, both of you bellowing your pleasure.  Gushes of her translucent fluids surge past her fingers are you continue to stroke the inflamed labia.  Flopping to her side, Kiha trembles as the orgasm runs its course and eventually fades.  She lies there for a few minutes more, enjoying the near-electric aftershocks running through body.  Before she can even rise, however, she's snoozing, curled up and pressing her knees into her too-big chest.  Taking that as your cue to depart, you wriggle your ghostly essence back out of her back, reforming and recorporealizing behind her.");  
 	outputText("[pg]Your lust spent and curiosity sated, you step over and past Kiha.  Glancing back over your shoulder, you notice her bosom has shrunken just a little already.  You realize, with a sigh, that you'd probably need to take more drastic measures to make more of a permanent effect on her cup size.  Oh well, you figure.  There's always next time.");
 	dynStats("lus=", 0, "cor", 2);
-	consumeItem("GroPlus",1);
+	player.consumeItem(consumables.GROPLUS);
 	doNext(13);
 }
 

@@ -66,6 +66,7 @@
 
 		public function set quantity(value:Number):void
 		{
+			if (value > 0 && _itype == null) CoC_Settings.error("ItemSlotClass.quantity set with no item; use setItemAndQty instead!");
 			if (value == 0) _itype = null;
 			_quantity = value;
 		}

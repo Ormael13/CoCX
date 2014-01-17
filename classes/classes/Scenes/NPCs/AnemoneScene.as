@@ -8,6 +8,8 @@ package classes.Scenes.NPCs
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class AnemoneScene extends BaseContent
 	{
@@ -75,13 +77,13 @@ package classes.Scenes.NPCs
 		{
 			spriteSelect(4);
 			outputText("", true);
-			if (flags[kFLAGS.TIMES_MET_ANEMONE] == 0 || hasItem("MinoCum", 1)) {
+			if (flags[kFLAGS.TIMES_MET_ANEMONE] == 0 || player.hasItem(consumables.MINOCUM)) {
 				flags[kFLAGS.TIMES_MET_ANEMONE]++;
 				outputText("You step into the boat and begin to slip off the mooring rope when you are distracted by a swirl of bright colors under the surface of the lake.  As you peer over the side to get a better look at the oscillating mass of greens and purples, the swirl begins drawing closer to the boat as if reciprocating your interest; it grows larger and brighter as it closes the distance.  The cloud parts to reveal an attractive feminine face cast in a deep blue shade.  It lightens responsively as its gaze takes you in from the depths of two opaque eyes.  The confusing mass of colors resolves itself into tresses of two-inch-thick anemone tentacles sprouting from the head in place of hair!\n\n", false);
 
 				outputText("The anemone girl smiles at you flirtatiously as she bobs up to the surface.  More out of politeness than anything you smile back, not sure of what to make of her and unused to such unaggressive approaches by the denizens of this place.  A bloom of vibrant color offset by the blue outline of her body causes you to lean farther out as your attention refocuses below her waist, where you perceive a smaller ring of tentacles waving at you from behind the head of a hardening penis!  Turned on by the attention, the anemone grabs onto the saxboard in an attempt to pull herself up to you, but her added weight on the side overbalances you and pitches you overboard into her waiting tentacles!\n\n", false);
 
-				if (hasItem("MinoCum", 1)) {
+				if (player.hasItem(consumables.MINOCUM)) {
 					minoCumForAnemonieeeeez();
 					return;
 				}
@@ -125,7 +127,7 @@ package classes.Scenes.NPCs
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
 				var bikiniTits:Function =null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs, "", 0, "", 0, "", 0, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
@@ -611,7 +613,7 @@ package classes.Scenes.NPCs
 		{
 			spriteSelect(4);
 			outputText("", true);
-			consumeItem("MinoCum", 1);
+			player.consumeItem(consumables.MINOCUM);
 			outputText("You nod at the girl and she smiles and responds with a very quiet \"<i>Yay.</i>\"  As you pick up the rest of your stuff, she takes the top off of the bottle and chugs it like a champ, without even stopping to breathe.  Her eyes widen a bit as the drug hits her system, then narrow into a heavy-lidded stare.  Dropping the bottle with a splash, she falls to her knees with another.  She looks at you and licks her lips as she begins playing with her nipples. Obviously, she's feelin' good.  ", false);
 			//[(lust<30)
 			if (player.lust < 30) {
@@ -1123,56 +1125,57 @@ package classes.Scenes.NPCs
 			clearOutput();
 			spriteSelect(71);
 			var choice:Number;
+			var itype:ItemType;
 			outputText("You reach down and pick up her present.  Today, she's left you ");
-			if (kidAXP() == 0) shortName = MutagenLib.DRY_TENTACLE;
+			if (kidAXP() == 0) itype = consumables.DRYTENT;
 			else if (kidAXP() < 50) {
 				///[IncubusDraft/SuccubusMilk/ImpFood/MinoBlood/LargeAxe]
 				choice = rand(8);
-				if (choice == 0) shortName = "IncubiD";
-				else if (choice == 1) shortName = "SucMilk";
-				else if (choice == 2) shortName = "ImpFood";
-				else if (choice == 3) shortName = "Gob.Ale";
-				else if (choice == 4) shortName = "WetClth";
-				else if (choice == 5) shortName = "L.Draft";
-				else if (choice == 6) shortName = "W.Fruit";
-				else shortName = "Equinum";
+				if (choice == 0) itype = consumables.INCUBID;
+				else if (choice == 1) itype = consumables.SUCMILK;
+				else if (choice == 2) itype = consumables.IMPFOOD;
+				else if (choice == 3) itype = consumables.GOB_ALE;
+				else if (choice == 4) itype = consumables.WETCLTH;
+				else if (choice == 5) itype = consumables.L_DRAFT;
+				else if (choice == 6) itype = consumables.W_FRUIT;
+				else itype = consumables.EQUINUM;
 			}
 			else if (kidAXP() < 75) {
 				//White Book/Bee Honey/Ovi Elixir/Shark Tooth/S. Swimwear/Lust Draft/Bimbo Liqueur(same odds as player drop)
 				choice = rand(6);
-				if (choice == 0) shortName = "W. Book";
-				else if (choice == 1) shortName = "BeeHony";
-				else if (choice == 2) shortName = "OviElix";
-				else if (choice == 3) shortName = "Shark.T";
-				else if (choice == 4) shortName = "S.Swmwr";
-				else if (choice == 5) shortName = "L.Draft";
-				if (rand(100) == 0) shortName = "BimboLq";
+				if (choice == 0) itype = consumables.W__BOOK;
+				else if (choice == 1) itype = consumables.BEEHONY;
+				else if (choice == 2) itype = consumables.OVIELIX;
+				else if (choice == 3) itype = consumables.SHARK_T;
+				else if (choice == 4) itype = armors.SKIMPY_BLACK_BIKINI;
+				else if (choice == 5) itype = consumables.L_DRAFT;
+				if (rand(100) == 0) itype = consumables.BIMBOLQ;
 			}
 			else if (kidAXP() < 100) {
 				//Mino Blood/Large Axe/Comfortable Clothes/Lust Draft/Lust Dagger/Bro Brew(same odds as player drop)
 				choice = rand(5);
-				if (choice == 0) shortName = "MinoBlo";
-				else if (choice == 1) shortName = "L. Axe ";
-				else if (choice == 2) shortName = "C.Cloth";
-				else if (choice == 3) shortName = "L.Draft";
-				else if (choice == 4) shortName = "L.Daggr";
-				if (rand(100) == 0) shortName = "BroBrew";
+				if (choice == 0) itype = consumables.MINOBLO;
+				else if (choice == 1) itype = weapons.LARGE_AXE;
+				else if (choice == 2) itype = armors.COMFORTABLE_CLOTHES;
+				else if (choice == 3) itype = consumables.L_DRAFT;
+				else if (choice == 4) itype = weapons.LUST_DAGGER;
+				if (rand(100) == 0) itype = consumables.BROBREW;
 			}
 			else {
 				//T.Shark Tooth/Pink Gossamer/Black Gossamer/Reptilum
 				choice = rand(4);
-				if (choice == 0) shortName = "TSTooth";
-				else if (choice == 1) shortName = "S.Gossr";
-				else if (choice == 2) shortName = "B.Gossr";
-				else if (choice == 3) shortName = "Reptlum";
-				if (rand(100) == 0) shortName = "BroBrew";
-				if (rand(100) == 0) shortName = "BimboLq";
+				if (choice == 0) itype = consumables.TSTOOTH;
+				else if (choice == 1) itype = consumables.S_GOSSR;
+				else if (choice == 2) itype = consumables.B_GOSSR;
+				else if (choice == 3) itype = consumables.REPTLUM;
+				if (rand(100) == 0) itype = consumables.BROBREW;
+				if (rand(100) == 0) itype = consumables.BIMBOLQ;
 			}
-			outputText(itemLongName(shortName) + ".");
-			if (shortName == "L. Axe ") outputText("  Holy... how did she drag this thing home!?");
+			outputText(itype.longName + ".");
+			if (itype == weapons.LARGE_AXE) outputText("  Holy... how did she drag this thing home!?");
 			outputText("\n\n");
 			menuLoc = 0;
-			kGAMECLASS.takeItem();
+			inventory.takeItem(itype);
 			//(set hourssinceKiditem = 0)
 			flags[kFLAGS.KID_ITEM_FIND_HOURS] = 0;
 		}
@@ -1190,18 +1193,18 @@ package classes.Scenes.NPCs
 			var temp5:Function = null;
 			var bonus:Number = 0;
 			kGAMECLASS.hideUpDown();
-			if (itemSlot1.quantity > 0 && (itemSlot1.shortName == "W. Book" || itemSlot1.shortName == "B. Book" || isWeapon(itemSlot1.shortName)))
+			if (player.itemSlot1.quantity > 0 && (player.itemSlot1.shortName == "W. Book" || player.itemSlot1.shortName == "B. Book" || isWeapon(player.itemSlot1.shortName)))
 				temp1 = createCallBackFunction(placeInAnemone,1);
-			if (itemSlot2.quantity > 0 && (itemSlot2.shortName == "W. Book" || itemSlot2.shortName == "B. Book" || isWeapon(itemSlot2.shortName)))
+			if (player.itemSlot2.quantity > 0 && (player.itemSlot2.shortName == "W. Book" || player.itemSlot2.shortName == "B. Book" || isWeapon(player.itemSlot2.shortName)))
 				temp2 = createCallBackFunction(placeInAnemone,2);
-			if (itemSlot3.quantity > 0 && (itemSlot3.shortName == "W. Book" || itemSlot3.shortName == "B. Book" || isWeapon(itemSlot3.shortName)))
+			if (player.itemSlot3.quantity > 0 && (player.itemSlot3.shortName == "W. Book" || player.itemSlot3.shortName == "B. Book" || isWeapon(player.itemSlot3.shortName)))
 				temp3 = createCallBackFunction(placeInAnemone,3);
-			if (itemSlot4.unlocked && itemSlot4.quantity > 0 && (itemSlot4.shortName == "W. Book" || itemSlot4.shortName == "B. Book" || isWeapon(itemSlot4.shortName)))
+			if (player.itemSlot4.unlocked && player.itemSlot4.quantity > 0 && (player.itemSlot4.shortName == "W. Book" || player.itemSlot4.shortName == "B. Book" || isWeapon(player.itemSlot4.shortName)))
 				temp4 = createCallBackFunction(placeInAnemone,4);
-			if (itemSlot5.unlocked && itemSlot5.quantity > 0 && (itemSlot5.shortName == "W. Book" || itemSlot5.shortName == "B. Book" || isWeapon(itemSlot5.shortName)))
+			if (player.itemSlot5.unlocked && player.itemSlot5.quantity > 0 && (player.itemSlot5.shortName == "W. Book" || player.itemSlot5.shortName == "B. Book" || isWeapon(player.itemSlot5.shortName)))
 				temp5 = createCallBackFunction(placeInAnemone,5);
 			if (temp1 != null || temp2 != null || temp3 != null || temp4 != null || temp5 != null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
-			choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			choices((player.itemSlot1.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 		}
 
 		public function placeInAnemone(slot:Number = 1):void
@@ -1211,24 +1214,24 @@ package classes.Scenes.NPCs
 			spriteSelect(71);
 			//(set Kidweapon to item name, remove from inventory)
 			if (slot == 1) {
-				flags[kFLAGS.ANEMONE_WEAPON] = itemSlot1.shortName;
-				itemSlot1.removeOneItem();
+				flags[kFLAGS.ANEMONE_WEAPON] = player.itemSlot1.shortName;
+				player.itemSlot1.removeOneItem();
 			}
 			else if (slot == 2) {
-				flags[kFLAGS.ANEMONE_WEAPON] = itemSlot2.shortName;
-				itemSlot2.removeOneItem();
+				flags[kFLAGS.ANEMONE_WEAPON] = player.itemSlot2.shortName;
+				player.itemSlot2.removeOneItem();
 			}
 			else if (slot == 3) {
-				flags[kFLAGS.ANEMONE_WEAPON] = itemSlot3.shortName;
-				itemSlot3.removeOneItem();
+				flags[kFLAGS.ANEMONE_WEAPON] = player.itemSlot3.shortName;
+				player.itemSlot3.removeOneItem();
 			}
 			else if (slot == 4) {
-				flags[kFLAGS.ANEMONE_WEAPON] = itemSlot4.shortName;
-				itemSlot4.removeOneItem();
+				flags[kFLAGS.ANEMONE_WEAPON] = player.itemSlot4.shortName;
+				player.itemSlot4.removeOneItem();
 			}
 			else {
-				flags[kFLAGS.ANEMONE_WEAPON] = itemSlot5.shortName;
-				itemSlot5.removeOneItem();
+				flags[kFLAGS.ANEMONE_WEAPON] = player.itemSlot5.shortName;
+				player.itemSlot5.removeOneItem();
 			}
 			doNext(approachAnemoneBarrel);
 		}
@@ -1245,7 +1248,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.ANEMONE_WATCH] = 0;
 			}
 			menuLoc = 0;
-			takeItem();
+			inventory.takeItem();
 			//(add weapon to inventory, then revert Kidweapon to empty)
 			flags[kFLAGS.ANEMONE_WEAPON] = 0;
 		}

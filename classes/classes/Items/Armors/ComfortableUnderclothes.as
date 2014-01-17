@@ -5,7 +5,7 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 
-	public class ComfortableUnderclothes extends Armor
+	public final class ComfortableUnderclothes extends Armor
 	{
 		public function ComfortableUnderclothes()
 		{

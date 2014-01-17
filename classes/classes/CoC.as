@@ -125,7 +125,7 @@
 		// Scenes/
 		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
-		public var inventoryScene:InventoryScene = new InventoryScene();
+		public var inventory:Inventory = new Inventory();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
@@ -262,7 +262,6 @@
 		public var beeProgress:Number;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
-		public var shortName:String;
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
@@ -470,7 +469,6 @@
 
 			itemStorage = [];
 			gearStorage = [];
-			shortName = "";
 			//}endregion
 
 

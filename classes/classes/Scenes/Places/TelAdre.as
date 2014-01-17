@@ -2,6 +2,7 @@
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 	import classes.Scenes.Places.TelAdre.*;
 
 	/**
@@ -1329,21 +1330,20 @@ public function tailorShoppe():void {
 		outputText("at Victoria the Corgi Tailor.  As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.", false);
 	}
 	outputText("\n\n(What do you want to buy?)", false);
-	choices("Suitclothes",createCallBackFunction(buyClothes,"ClssyCl"),
-			"Rbbr Fetish",createCallBackFunction(buyClothes,"RbbrClt"),
-			"G. Clothes",createCallBackFunction(buyClothes,"AdvClth"),
-			"Tube Top",createCallBackFunction(buyClothes,"TubeTop"),
-			"Overalls", createCallBackFunction(buyClothes,"Overall"),
-			"Long Dress",createCallBackFunction(buyClothes,"B.Dress"),
-			"Bodysuit",createCallBackFunction(buyClothes,"T.BSuit"),
-			"Robes",createCallBackFunction(buyClothes,"M.Robes"),
-			"T.Lthr Pants",createCallBackFunction(buyClothes,"LthrPnt"),
+	choices("Suitclothes",createCallBackFunction(buyClothes,armors.CLASSY_SUIT),
+			"Rbbr Fetish",createCallBackFunction(buyClothes,armors.RUBBER_FETISH_CLOTHES),
+			"G. Clothes",createCallBackFunction(buyClothes,armors.ADVENTURERS_OUTFIT),
+			"Tube Top",createCallBackFunction(buyClothes,armors.TUBE_TOP),
+			"Overalls", createCallBackFunction(buyClothes,armors.OVERALLS),
+			"Long Dress",createCallBackFunction(buyClothes,armors.BALLROOM_DRESS),
+			"Bodysuit",createCallBackFunction(buyClothes,armors.SEMITRANSPARENT_BODYSUIT),
+			"Robes",createCallBackFunction(buyClothes,armors.MODEST_ROBES),
+			"T.Lthr Pants",createCallBackFunction(buyClothes,armors.LEATHER_PANTS),
 			"Leave",telAdreMenu);
 }
 
 
-private function buyClothes(itemShortName:String):void {
-	kGAMECLASS.shortName = itemShortName;
+private function buyClothes(itype:ItemType):void {
 	outputText("", true);
 	spriteSelect(61);
 	outputText("Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to ", false);
@@ -1351,9 +1351,9 @@ private function buyClothes(itemShortName:String):void {
 	else if(player.hasVagina()) outputText("rub against your outer lips", false);
 	else outputText("slip a finger along your crotch", false);
 	outputText(" more than a few times.  You could swear you catch her licking her lips when she stands up, but she quickly turns away, saying, \"<i>I've got one in the back that should fit perfectly!  Be right with you!</i>\"\n\n", false);
-	outputText("She disappears in the back for a few moments, then returns with " + itemLongName(itemShortName) + " that looks as if it were tailor-made for you.\n\n", false);
-	outputText("\"<i>" + itemValue(itemShortName) + " gems and it can be yours,</i>\" she says.  ", false);
-	if(player.gems < itemValue(itemShortName)) {
+	outputText("She disappears in the back for a few moments, then returns with " + itype.longName + " that looks as if it were tailor-made for you.\n\n", false);
+	outputText("\"<i>" + itype.value + " gems and it can be yours,</i>\" she says.  ", false);
+	if(player.gems < itype.value) {
 		outputText("You count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
 		doNext(tailorShoppe);
@@ -1361,15 +1361,15 @@ private function buyClothes(itemShortName:String):void {
 	}
 	//Go to debit/update function or back to shop window
 	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",debitClothes,"No",tailorShoppe,"",0,"",0,"Flirt",flirtWithVictoria);
-	else doYesNo(debitClothes,tailorShoppe);
+	else doYesNo(curry(debitClothes,itype),tailorShoppe);
 }
 
-private function debitClothes():void {
+private function debitClothes(itype:ItemType):void {
 	spriteSelect(61);
-	player.gems -= itemValue(shortName);
+	player.gems -= itype.value;
 	statScreenRefresh();
 	menuLoc = 10;
-	takeItem();
+	inventory.takeItem(itype);
 }
 
 public function armorShop():void {
@@ -1403,22 +1403,21 @@ public function weaponShop():void {
 	
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
 	
-	choices("Wingstick",createCallBackFunction(weaponBuy, "W.Stick"),
-			"L.Claymore",createCallBackFunction(weaponBuy, "Claymor"),
-			"Warhammer",createCallBackFunction(weaponBuy, "Warhamr"),
-			"Katana",createCallBackFunction(weaponBuy, "Katana "),
-			"Spear",createCallBackFunction(weaponBuy, "Spear  "),
-			"Whip",createCallBackFunction(weaponBuy, "Whip   "),
-			"W. Staff",createCallBackFunction(weaponBuy, "W.Staff"),
-			"S.Gauntlet",createCallBackFunction(weaponBuy, "S.Gaunt"),
+	choices("Wingstick",createCallBackFunction(weaponBuy, consumables.W_STICK),
+			"L.Claymore",createCallBackFunction(weaponBuy, weapons.LARGE_CLAYMORE),
+			"Warhammer",createCallBackFunction(weaponBuy, weapons.HUGE_WARHAMMER),
+			"Katana",createCallBackFunction(weaponBuy, weapons.KATANA),
+			"Spear",createCallBackFunction(weaponBuy, weapons.SPEAR),
+			"Whip",createCallBackFunction(weaponBuy, weapons.WHIP),
+			"W. Staff",createCallBackFunction(weaponBuy, weapons.WIZARDS_STAFF),
+			"S.Gauntlet",createCallBackFunction(weaponBuy, weapons.SPIKED_GAUNTLET),
 			"",0,"Leave",telAdreMenu);
 }
-private function weaponBuy(itemShortName:String):void {
-	kGAMECLASS.shortName = itemShortName;
+private function weaponBuy(itype:ItemType):void {
 	outputText("", true);
 	spriteSelect(80);
-	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itemValue(itemShortName) + " gems.</i>\"", false);
-	if(player.gems < itemValue(itemShortName)) {
+	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
+	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
 		doNext(weaponShop);
@@ -1426,22 +1425,21 @@ private function weaponBuy(itemShortName:String):void {
 	}
 	else outputText("\n\nDo you buy it?\n\n", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(debitWeapon,weaponShop);
+	doYesNo(curry(debitWeapon,itype),weaponShop);
 }
-private function debitWeapon():void {
+private function debitWeapon(itype:ItemType):void {
 	spriteSelect(80);
-	player.gems -= itemValue(shortName);
+	player.gems -= itype.value;
 	statScreenRefresh();
 	menuLoc = 15;
-	takeItem();
+	inventory.takeItem(itype);
 }
-private function armorBuy(itemShortName:String):void {
-	kGAMECLASS.shortName = itemShortName;
+private function armorBuy(itype:ItemType):void {
 	spriteSelect(64);
 	outputText("", true);
 	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
-	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itemValue(itemShortName) + " gems, unless you want to change your mind?</i>\"", false);
-	if(player.gems < itemValue(itemShortName)) {
+	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
 		doNext(armorShop);
@@ -1449,16 +1447,16 @@ private function armorBuy(itemShortName:String):void {
 	}
 	else outputText("\n\nDo you buy it?", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(debitArmor,armorShop);
+	doYesNo(curry(debitArmor,itype),armorShop);
 }
 
-private function debitArmor():void {
+private function debitArmor(itype:ItemType):void {
 	spriteSelect(64);
 	outputText("", true);
-	player.gems -= itemValue(shortName);
+	player.gems -= itype.value;
 	statScreenRefresh();
 	menuLoc = 9;
-	takeItem();
+	inventory.takeItem(itype);
 }
 
 private function urtaIsABadass():void {

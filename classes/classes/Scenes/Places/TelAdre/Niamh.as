@@ -49,7 +49,7 @@ public function telAdreNiamh():void {
 //Approach:
 public function approachNiamh():void {
 	clearOutput();
-	if(rand(5) == 0 && flags[kFLAGS.MET_NIAMH] > 0 && (hasItem("BimboLq",1) || hasItem("SucMilk",1))) 
+	if(rand(5) == 0 && flags[kFLAGS.MET_NIAMH] > 0 && (player.hasItem(consumables.BIMBOLQ) || player.hasItem(consumables.SUCMILK)))
 	{
 		corruptOrBimboNiamhIntro();
 		return;
@@ -182,9 +182,8 @@ private function blackCatBeerToGo():void {
 	outputText("\n\n");
 	flags[kFLAGS.MET_NIAMH]++;
 	//PC gains 1x BCB
-	shortName = "BC Beer";
 	menuLoc = 24;
-	takeItem();
+	inventory.takeItem(consumables.BC_BEER);
 }
 
 //Talk
@@ -278,13 +277,13 @@ private function corruptOrBimboNiamhIntro():void {
 	outputText("\"<i>Heya, favored customer,</i>\" the busty kitty greets as you approach.  \"<i>I have a favor to ask!  My drink's empty, and I get bored of me own brew,</i>\" Niamh explains.  \"<i>Would ya mind fetchin' me somethin', or are ye gonna force me to sample me own goods once more?</i>\"");
 	
 	outputText("\n\nYou pause, contemplating your options.  While you know of many drinks The Wet Bitch sells, most of them... aren't exactly fit for human - or feline - consumption, in your opinion.  You're stricken with a particularly naughty thought.  Perhaps you could fetch something... ");
-	if(hasItem("BimboLq",1)) 
+	if(player.hasItem(consumables.BIMBOLQ))
 		outputText("'bubbly' for her, in the form of the Bimbo Liqueur you got from the imp lord, or ");
 	outputText("maybe even a Succubus Milk?  You'll have to consider your options.  On the other hand, of course, something that corruptive would probably mutate her booze-filled boobs, most likely forcing her out of Tel'Adre altogether... and may fall back on your own head, to boot.  What do you do?");	
 	
 	//[Bimbo][Succubus][Maybe Later] (spacebar should select 'Maybe Later' as long as it's a repeatable
 	var bimbo:int = 0;
-	if(hasItem("BimboLq",1)) bimbo = 3533;
+	if(player.hasItem(consumables.BIMBOLQ)) bimbo = 3533;
 	var succMilk:int = 0;
 	outputText("\n\n(Editors Note: Succubi Milk Option Currently in beta)\n\n\n");
 	simpleChoices("Bimbo",giveNiamphBimboLiquer,"S.Milk",giveNiamphSuccubiMilk,"",0,"",0,"Back",3532);
@@ -306,14 +305,14 @@ public function taintNiamh(bimbo:Boolean = false):void {
 	outputText("You grab Niamh's glass and one more and head off, making sure to turn a corner before commandeering an empty table.  Plunking the mugs down in front of you, you mutter to yourself as she moves away.");
 	//[if sucmilk] 
 	if(!bimbo) {
-		consumeItem("SucMilk",1);
+		player.consumeItem(consumables.SUCMILK);
 		outputText("\n\nYou uncork your bottle of Succubus Milk and pour half into each mug, loving the way the thick, creamy fluid flows.  With each containing a good amount of the stuff, you scoop them up and start towards Niamh.  Her expression brightens when she notices your approach, and she giggles when she regards the two glasses of milk in your hands.  \"<i>Are ye making fun of me?</i>\" she remarks coyly, patting one of her beer-filled boobs gently.  \"<i>Ah well, I haven't had a good glass o' milk in too long...this is milk, yeah?</i>\"");
 		outputText("\n\nNiamh reaches for a mug, but you draw it away from her questing hand, instead sinking it into her considerable expanse of cleavage.  A devious grin flits across your features as she subsequently shivers from the cold glass between her fluid-filled bosom.  \"<i>Wh-why you...</i>\" she gasps, quickly snatching the drink and rubbing warmth back into her goosebumped flesh.  \"<i>You scoundrel...</i>\"");
 		outputText("\n\nYou respond by raising your glass in toast, and she grudgingly complies.  Your mugs clink together, and she wastes no time in downing the creamy milk.  You raise your own drink to your lips and pretend to sip, not wanting anything to do with what's about to happen.  \"<i>Went down smooth,</i>\" she comments, licking her lips.  \"<i>Say, there... mind if I have a swig o' yours, too?</i>\"  You readily hand the flagon over, marveling at how fast she chugs it.  Niamh gives a happy little burp, and you scoot back a bit in anticipation.");
 	}
 	//[if bimbo liqueur] 
 	else {
-		consumeItem("BimboLq",1);
+		player.consumeItem(consumables.BIMBOLQ);
 		outputText("\n\nYou pop the seal of your bottle of Bimbo Liqueur, recoiling at the cloying, spiced scent that paints visions of a slutty slave-girl's slightly spread folds.  With a grimace, you pour the potent stuff evenly into the glasses.  Hefting the mugs, you rise and start towards Niamh.");
 		outputText("\n\nHer expression brightens when she notices your approach, and she giggles when she regards the quarter-full mugs of liqueur.  \"<i>What, that's it?</i>\" she quips curiously.  \"<i>This stuff had better pack some punch, " + player.mf("lad","lass") + ".</i>\"  You assure her that it will knock her socks off.");
 		outputText("\n\nNiamh reaches for a mug, but you draw it away from her questing hand, instead sinking it into her considerable expanse of cleavage.  A devious grin flits across your features as she subsequently shivers from the cold glass between her fluid-filled bosom.  \"<i>Wh-why you...</i>\" she gasps, quickly snatching the drink and rubbing warmth back into her goosebumped flesh.  \"<i>You scoundrel...</i>\"");
@@ -547,9 +546,8 @@ private function getBimboChampFromNiamh():void {
 	outputText("\n\nPushing that slightly scary thought to the side, you lean in, firmly grasping one stiff nipple and forcing it to the mouth of your container.  Ignoring her increasingly loud and frequent groans, you dutifully milk the bubbly into the flask, stopper it up, and rise.  Niamh tries to follow you, too aroused by the milking to resist her carnal urges, but you easily push her to the side, her ponderous melons throwing her off balance.");
 	outputText("\n\nShe lands into a big pile of similarly blonde and giggling girls who waste no time in swarming her.  You chuckle and shake your head.  Perhaps you'll come back later.\n\n");
 	//bimbo champagne aqua-aired
-	shortName = "BimboCh";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem(consumables.BIMBOCH);
 }
 
 //[Bazaar sex]
@@ -599,11 +597,11 @@ public function yeahSeanLetsBimbooze():void {
 	outputText("\n\n\"<i>Now shoo, I must do work!</i>\" he scolds, ushering you out of the cave.  \"<i>Come back tomorrow!</i>\"  Satisfied, you leave his shop.");
 	doNext(1);
 	player.gems -= 500;
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
 	statScreenRefresh();
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 25;
 }
@@ -618,10 +616,9 @@ public function getBimboozeFromSean():void {
 	outputText("He scoops a familiar-looking bottle from a tabletop, passing it off to you.  \"<i>Be somewhat careful with this,</i>\" he warns as you take it.  \"<i>The original's deleterious effect on the mind has been duplicated, I assure you.</i>\"\n\n");
 	outputText("You drop the vial into a pouch on your person.\n\n");
 	//bimbo liqueur aqcquired
-	shortName = "BimboLq";
 	menuLoc = 16;
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
-	takeItem();
+	inventory.takeItem(consumables.BIMBOLQ);
 }
 
 // [LEAVE]

@@ -103,7 +103,7 @@ internal function tentacleVictoryRape():void {
 		if(player.cor >= 66) {
 			outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest phallic tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the tentacle-cock and poise it in front of your dripping cunt.\n\n", false);
 			outputText("Laughing like a true psychotic, you stuff the tentacle into your womb.", false);
-			cuntChange(20, true, true, false);
+			player.cuntChange(20, true, true, false);
 			outputText("  Your vaginal muscles quickly go to work stroking, squeezing and kneading the appendage. The creature, more intent with escape than hammering your box, begins struggling. You summarily slug the beast as well as any professional pugilist to stop its throes.\n\n", false);
 			outputText("\"<i>STOP STRUGGLING AND FUCK MY LITTLE PUSSY!!!!!</i>\", you screech.\n\n", false);
 			outputText("The sensation of the beast ejaculating immediately gets your attention. As your womb fills with its warm load, a brutal idea takes you. The beast responded after you hit it. Smirking like a devil, you turn the beast into a punching bag. With each strike, the beast sprays a batch of goo deep inside your body. The sheer force of the spray is working your hole into an ecstatic frenzy. As you orgasm, you slug the creature again, forcing another batch of semen to flush your womanhood. After an hour of this, you reach a multi-orgasmic peak and release. The creature twitches weakly as you pull out the limp tentacle from your body. The excess spunk flows out like an overturned bucket, leaving one hell of a mess. You walk away satisfied. It is unclear whether the tentacled horror survived your lust…but who cares. Your satisfaction is all you cared about, anyway.", false);
@@ -112,7 +112,7 @@ internal function tentacleVictoryRape():void {
 		else {
 			outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest phallic tentacle you can find and summarily push the beast onto the ground. Holding the creature down with your body weight, you take the tentacle-cock and poise it in front of your dripping cunt.\n\n", false);
 			outputText("You sit on the creature and begin using the tentacle as a living dildo. With your mass atop it, the creature cannot move or struggle, despite its lack of any attempts to do so. You push the limb deeper and deeper until you feel it bottom out against your cervix.", false);
-			cuntChange(20, true, true, false);
+			player.cuntChange(20, true, true, false);
 			outputText("\n\nSensing your needs, the tamed beast extends a tendril from the main tentacle that easily pushes past your cervical opening and breeches the deepest parts of your womb. The feeler penetrates past your uterus and lodges itself as deeply as possible. The beast begins rapidly vibrating and undulating its member, stimulating the deepest parts of your sex.\n\n", false);
 			outputText("You quickly reach a cunt-cramping orgasm, which forces the creature to unload a torrent of hot, musky fluids inside you. You feel bloated and stuffed as the beast reflexively sprays the entire contents of its seminal sacs…or whatever it stores its cum in…inside you. With a quick squeeze, you start expelling the tentacle, which prompts the creature to withdraw its tendril and leave your body. You walk away well satisfied while the abomination is too exhausted to move.", false);
 		}
@@ -257,7 +257,7 @@ public function tentacleLossRape():void {
 		// has vagina: 
 		if(player.hasVagina()) {
 			outputText("A squirming tentacle forces its way inside your " + vaginaDescript(0) + ", undulating and squirming as it works its way deeper and deeper.  Your body responds by pumping out more fluid, making the passage of the monstrous thing easier.", false);
-			cuntChange(32,true,true,false);
+			player.cuntChange(32,true,true,false);
 			if(player.hasCock()) {
 				if(player.cockArea(player.smallestCockIndex()) <= 50) outputText("  Your humping appears to not affect the creatures continuing efforts, despite the force of your body.", false);
 			}
@@ -315,7 +315,7 @@ public function tentacleLossRape():void {
 		// has cock, normal cum amount, anus < gaping: 
 		if(player.hasCock() && player.cumQ() < 1500 && player.ass.analLooseness < 4) {
 			outputText("Just as you think it's over, another tentacle rams into your " + assholeDescript() + " and begins roughly massaging your prostate as it swells massively, causing another surge of cum to leave you, and another, and another.", false);
-			buttChange(40,true,true,false);
+			player.buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.", false);
 			//end (loss)
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "lus=", 0, "cor", .5);
@@ -335,7 +335,7 @@ public function tentacleLossRape():void {
 		//{ has vagina, anus < gaping: 
 		if(player.hasVagina()) {
 			outputText("Just as you think it's over, a tentacle rams into your " + assholeDescript() + " and begins to swell massively, causing another surge of girlcum to leave you, and another, and another.", false);
-			buttChange(40,true,true,false);
+			player.buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of times you've orgasmed no longer countable.", false);
 			//end (loss)
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "lus=", 0, "cor", .5);

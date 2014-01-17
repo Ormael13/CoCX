@@ -58,7 +58,7 @@ private function useTheSexMachine():void {
 			outputText("Shaking your head as the machine forcibly pleasures you, you quickly realize that with each drop of cum your cock has drained from it, the phallus against your anus gets a little more moist. It's using your own pre-cum to lube your asshole!\n\n", false);
 
 			outputText("It doesn't take long for the phallus to slip past your anal ring, filling your anus with firm strokes while you let out muffled moans.", false);
-			buttChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("  The machine's screen states that it is now entering \"Harvest phase\", and goes into high gear. The phallus in your ass bucks you forward, forcing your hips to buck and grind against the tight mechanical cunt as it quickly grinds against your cock.  Even the device forced inside your mouth begins to vibrate and hum, and you swear you taste your own cum leaking from it.\n\n", false);
 
 			outputText("The phallus in your anus begins to rub firmly against your prostate, as if it was locating it and locking onto it. Within moments you cry out in orgasmic pleasure, ", false);
@@ -81,7 +81,7 @@ private function useTheSexMachine():void {
 			outputText("You eagerly place your legs into the straps, and buckle your waist down. Placing your arms into the cuffs, the machine whirrs to life, revealing it's newest additions. It seems there's been improvements since your last visit! The machine raises a onahole to your slowly stiffening " + cockDescript(0) + ", already removing your shorts as it works your arms and legs to a tiring stiffness. The false vaginal opening seems to glisten in the light with some form of self lubrication, and you feel a familiar pressure against your " + assholeDescript() + ". A second phallus lowers to your lips, and once more you're shocked and gagged with the dildos, the onahole quickly going to work on your stiff cock.\n\n", false);
 
 			outputText("Within moments you're rock hard, being roughly fucked by the wet sex toy. You can feel the machine rippling the length of the slick tunnel, massaging your " + cockDescript(0) + " and focusing on your sensitive " + cockHead(0) + ", causing every nerve ending to light up in pleasure.  As you slowly leak pre-cum, the phallus is slipped once more into your anus, almost instantly pressing against your prostate to stroke and milk it as if it were a prehensile finger, not a metal toy in your ass.", false);
-			buttChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("\n\n", false);
 
 			outputText("You're brought to the edge of climax repeatedly, groaning as you grow tender and swollen, being denied your release multiple times by the machine. You willingly begin to buck against the wet vagina-like opening, attempting to force the machine to let you climax, but you're only met with resistance as it pulls on your arms and legs to restrain you.\n\n", false);
@@ -102,8 +102,8 @@ private function useTheSexMachine():void {
 			outputText("You feel the machine begin to tug at your clothes with various mechanical clamps.  It pulls your clothing free in moments, revealing your " + allBreastsDescript() + ", " + vaginaDescript() + ", and your " + buttDescript() + " to the cool room's air. You blush furiously, and it doesn't take the machine but a couple of moments to place a metallic, phallic-shaped device against your labia and anus, the cold metal eliciting a shocked gasp from you, allowing it to slip another cock into your mouth. The tip of the metal cock tastes salty, leaking a fluid slowly from the tip.  You blush with arousal: the machine is force feeding you cum!\n\n", false);
 	
 			outputText("Continuing it's molestations, the machine attaches a small sucker hose to your " + clitDescript() + ", quickly suctioning it erect.  The device follows suit with your " + nippleDescript(0) + "s.  You begin to moan, unable to hold back the pleasure shooting through your body from the suctioning tubes. You almost don't notice the cum leaking from both phallic devices between your legs, lubing you further until they're both starting to penetrate you at the same time, stuffing you full of cock from nearly every angle.", false);
-			cuntChange(30,true,true,false);
-			buttChange(30,true,true,false);
+			player.cuntChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("\n\n", false);
 	
 			outputText("You gasp in pleasure, unable to move, fight, or even touch yourself as the machine begins to fuck you with it's metallic cocks. The screen flashes, showing 'phase one is completed', and that it has begun phase two, 'implantation'. You don't have time to question the machine's intentions as it begins to fuck you harder and faster, your juices and arousal only helping the machine to continue.", false);
@@ -129,8 +129,8 @@ private function useTheSexMachine():void {
 			outputText("The cool air makes your nipples stand out, and you notice a pleasant surprise: the cocks slipping between your ass-cheeks and thighs are made of a soft, but firm, latex.  They warm as they leak cum on your " + assholeDescript() + " and labia. You blush, willingly opening your mouth for the cock in front of you.  Sucking it in to taste the heady seed, you close your eyes, enjoying the ride as your labia softly part, wet and ready for the intruding member.\n\n", false);
 
 			outputText("You moan lustfully as the members slip into your " + vaginaDescript() + " and " + assholeDescript() + ", filling you deeply.", false);
-			cuntChange(30,true,true,false);
-			buttChange(30,true,true,false);
+			player.cuntChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("  They begin to stroke slowly", false);
 			if(player.biggestTitSize() >= 2) outputText(", and it doesn't take long for the machine to slip a cock between your breasts as well, starting to tit fuck you as it rotates you in your restraints to optimize your position", false);
 			else outputText(" while the machine rotates you in place to optimized your positioning.", false);
@@ -152,7 +152,7 @@ private function useTheSexMachine():void {
 			outputText("It whirrs for a moment, confused. It seems to ponder a second before simply lifting you up into a sitting position. It doesn't take but a moment for you to feel a firm steel tip press against your anus, the machine bouncing you slowly in your restraints on the mechanical cock, each bounce smearing more and more cum on your " + assholeDescript() + ", lubing you up for your eventual penetration.\n\n", false);
 
 			outputText("You gasp with each bounce, your ass finally lubed enough that each gentle jostle forces you to sink another half-inch down on the thick phallic member. With a groan you finally bottom out, your anus stretched around the thick member.  ", false);
-			buttChange(30,true,false,true);
+			player.buttChange(30,true,false,true);
 			outputText("The machine forces you forwards, onto your hands and knees, the thick cock beginning to slip in and out of your ass, pounding away with fervor to the sound of your exhausted moans. Each thrust seems to get closer and closer to a pleasurable spot, as if homing in on it slowly.\n\n", false);
 
 			outputText("It doesn't take long for every thrust of the thick metal cock to ram that pleasant spot, pushing you closer and closer to your climax. You close your eyes as they roll back in your head, moaning loudly as you orgasm, the cock erupting inside of you, filling your rectum with thick spurts of cum.\n\n", false);
@@ -172,7 +172,7 @@ private function useTheSexMachine():void {
 			outputText("You turn your head, look back, and gasp. You expected to see a latex cock molesting your backdoor, but instead see a latex tentacle brushing cum against your anus. What is this machine planning to do?!\n\n", false);
 
 			outputText("It doesn't take long for your " + assholeDescript() + " to be slathered in cum, the machine pressing on your muscular ring with the tip of it's tentacle cock, starting to fill your ass with it's prehensile member. Inch after inch slips inside of you, each humming ring of the cock stroking your anus as it fills your ass, vibrating deep inside of you.", false);
-			buttChange(30,true,false,true);
+			player.buttChange(30,true,false,true);
 			outputText("  You moan, closing your eyes and enjoying the pleasure, only to have a second tentacled cock thrust into your mouth, and down your throat. It doesn't take long for them both to begin thrusting, vibrating in both your holes.\n\n", false);
 
 			outputText("The machine seems to know you well, the latex tentacle in your ass pressing firmly against your prostate with each firm thrust, driving you to a quick orgasm. You pant, realizing sadly that it didn't cum, expecting it to put you down after your climax. Instead it just holds you as you shudder, your body twitching in orgasmic pleasure, held fast by the machine. After a moment it starts again, pistoning harder and faster into your anus, filling you more than ever before. With each thrust you can feel thick spurts of hot pre-cum filling your backside, the tentacled cock swelling with tiny knots along it's length, making it feel like you're being fucked by a set of vibrating beads.\n\n", false);
@@ -196,8 +196,8 @@ private function useTheSexMachine():void {
 			outputText(" is gently stroked by the sheathe-like device now slipping over it. It rubs the flaccid member gently, stroking it up and down as it begins to swell with blood, growing harder by the second. You shudder with pleasure, wondering what could come next, only to be forced to gasp by a firm press on your " + assholeDescript() + ". A metallic cock presses hard against your muscular ring, taking the opportunity given by your gasp of surprise to force another cock into your mouth.\n\n", false);
 
 			outputText("It's almost impossible to stay focused on any one stimulation at once, your mind flowing effortlessly between your asshole as the cock lubes it up, your cock as it's milked slowly, your throat as it's slowly fucked by another cock, and your pussy as it grows wet, slowly allowing inch after inch of the invading phallus to penetrate your walls and stretch you wide open.", false);
-			cuntChange(30,true,true,false);
-			buttChange(30,true,true,false);
+			player.cuntChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("  You moan lustfully, your girly juices beginning to flow down your thighs as the cock begins to thrust deep inside of you.  The metallic sleeve on your member thrusts down around you, even as the machine penetrates your " + vaginaDescript() + ". It's almost as if you were fucking your own cunt!\n\n", false);
 
 			outputText("You moan around the cock in your mouth, tasting the heady and thick cum it gives you, letting it trickle down the back of your throat slowly as it bucks in your mouth, leaving you helpless to call for help as every part of you is fucked.", false);
@@ -222,8 +222,8 @@ private function useTheSexMachine():void {
 			outputText("The thought stirs your cock to life, letting it slowly grow hard as you sit on the padded bench, strapping and buckling yourself to the machine as it whirrs to life. The machine's screen flickers, scrolling all kinds of information past your eyes at a dizzying speed, until finally it settles on \"Entering stage one\".\n\n", false);
 
 			outputText("You notice several lengthy latex tentacles raise up like snakes, dancing to an invisible snake charmer. Each of their swollen tips begins to leak cum slowly while they positioning themselves around you, ready to strike their various targets. You lick your lips, opening your mouth for the approaching cock-tentacle as it slips itself into your throat, the length of the member ribbed and vibrating. You shudder, feeling the probing head of yet another tentacle cock rubbing against your anus, lubing it up with the cum that leaks out of it's tip; a similar cock does the same to your moist labia.", false);
-			cuntChange(30,true,true,false);
-			buttChange(30,true,true,false);
+			player.cuntChange(30,true,true,false);
+			player.buttChange(30,true,true,false);
 			outputText("\n\n", false);
 
 			outputText("You moan gently, sucking firmly at the tentacle cock in your mouth as your own cock throbs in anxiety, waiting for it's sleeve to arrive. You're pleasantly surprised as you feel a warm, wet cunt wrap around your cock. You moan in pleasure, the tube gently slipping into your cock to milk you when you cum, as the faux-vagina begins to stroke the length of your fuckstick. It doesn't take long for you to begin becoming lost in all the varied pleasures, your mind becoming quickly overwhelmed with the multiple inputs of pleasure.\n\n", false);

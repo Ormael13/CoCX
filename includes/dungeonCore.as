@@ -1219,11 +1219,11 @@ public function incubusLossRape():void {
 			//FemCum
 			if(player.clitLength > 3) outputText("You nearly cum on the spot when the cock fucking your pussy loops its length around your " + clitDescript() + ", the cum-slickened coils driving you mad with pleasure as they coil, slide, and jerk around your clit as if it was a cock.  ", false);
 			else outputText("You nearly cum on the spot when the cock fucking your pussy curves up to rub its textured nodules against your " + clitDescript() + ".  ", false);
-			cuntChange(player.vaginalCapacity()*.8, true);
+			player.cuntChange(player.vaginalCapacity()*.8, true);
 			if(player.cor >= 80) outputText("You cum more times than you are able to count, each time causing a tightening of your fuckholes, which increases the rubbing against the demonic nodules and sends another wave of pleasure to your dazed brain.  You begin to drool freely, revelling in this most unholy mating.  ", false);
 			outputText("The prick in your mouth surges forward, sliding deep into your throat.  The coils around your neck tighten in response, choking your neck into a tight cock-sleeve as you feel bulges of cum moving along its length.  In moments you feel your belly starting to grow full, sloshing with cum as you become desperate to breathe.  The tentacles lodged in your " + assholeDescript() + " and " + vaginaDescript(0) + " react in similar fashion, stretching you wide as they begin pumping your body full of vast quantities of spunk.  A few free tentacles begin spurting gobs of the white stuff onto your " + player.skinDesc + ", soaking you in the stuff as you black out from a combination of oxygen deprivation and pleasure.", false);
 			dynStats("lus=", 0, "cor", 25);
-			buttChange(monster.cockArea(0), true);
+			player.buttChange(monster.cockArea(0), true);
 			if(player.hasStatusAffect("DungeonShutDown") < 0) doNext(11025);
 			else cleanupAfterCombat();
 			return;
@@ -1253,7 +1253,7 @@ public function incubusLossRape():void {
 			}
 			outputText("The feeling is so intense that your " + hipDescript() + " twitch and move of their own volition while your eyes roll back in pleasure.\n\n", false);
 			outputText("You black out just as you feel the cock-tentacle in your throat retracting. You dully feel your body drop to the ground, your pregnant-looking belly sloshing with demon jizz.", false);
-			buttChange(monster.cockArea(0), true);
+			player.buttChange(monster.cockArea(0), true);
 			dynStats("lus=", 0, "cor", 25);
 			if(player.hasStatusAffect("DungeonShutDown") < 0) doNext(11025);
 			else cleanupAfterCombat();
@@ -1267,7 +1267,7 @@ public function incubusVictoryRapeBackdoor():void {
 	outputText("His eyes flash open as if you'd just sent a jolt of electricity through him and he regains his senses, becoming hyper-aware of what you're doing. The incubus instinctively moves to control your " + hipDescript() + " and " + buttDescript() + " as they grind against him, guiding his cock towards pleasurable areas up your " + assholeDescript() + " that you would never have guessed were there a short while ago.\n\n", false);
 	outputText("All too soon, he grunts and shivers as loads of his hot cum begin to squirt into you. He may be cumming, but you're not done yet; each squirt of seed only fans the flames of lust within you, making your increasingly wet and noisy thrusts even harder. Enjoying the ride and still nowhere near satisfied, you start sliding up and down on his slick pole even faster than before. He halfheartedly tries to push you off as you continue draining him of his seed, your lust seemingly unquenchable. But you cannot be stopped; his efforts only add to your pleasure as he struggles and unloads underneath you. With your belly beginning to swell with the cum you're relentlessly drawing from the incubus, you don't know how much longer either of you will last. Each movement of his tool inside you heightens the fire inside you until, with an unholy roar, the pleasure peaks and wave after wave of shuddering orgasm crashes over you. Each one hits hotter and harder than the last until finally, your senses are overcome and you lose consciousness entirely.\n\n", false);
 	outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + assholeDescript() + " is satisfied.", false);
-	buttChange(monster.cockArea(0), true);
+	player.buttChange(monster.cockArea(0), true);
 	player.slimeFeed();
 	dynStats("lus=", 0, "cor", 2);
 	cleanupAfterCombat();
@@ -1333,7 +1333,7 @@ public function incubusVictoryRapeSex():void {
 		outputText("Relaxing the muscles in your " + player.legs() + ", you let a few inches of his length slip inside you, every nub and nodule of his corrupted prick filling the walls of your love-canal with inhuman pleasures that make your knees weak.  A particularly delightful bump brushes your " + clitDescript() + ", causing your " + player.legs() + " to finally give out. The incubus' nubbly cock plunges entirely inside you.\n\n", false);
 		outputText("You gasp and moan like a cheap whore, disgusted by yourself and yet so turned on by the total loss of self-control.  The incubus is leering up at you, having regained some of his lost confidence.  Despite the lust, desire and pleasure burning through the hot pole buried in your abdomen, you work up enough rage to grip his neck with your left hand and practically choke him out.  You work your hips quickly as you feel his pre start to drip into your canal, spreading tingling warmth in the deepest parts of your passage and into your cervix.  You tighten your grip as you forcibly take your pleasure, barking in displeasure at the demon, \"<i>Don't look like you're enjoying this too much bitch, or I'll take it out of your hide.</i>\"  Satisfied at the renewed look of fear in his eyes, you return to using his magnificent tool as a masturbation aid.\n\n", false);
 		outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to explore the rest of the factory. ", false);
-		cuntChange(player.vaginalCapacity()*.8, true);
+		player.cuntChange(player.vaginalCapacity()*.8, true);
 		dynStats("lus=", 0, "cor", 2);
 		cleanupAfterCombat();
 		return;

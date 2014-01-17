@@ -291,10 +291,10 @@ private function giveKatherineAnItem():void {
 	var bulb:Function = null;
 	var double2:Function = null;
 	var large:Function = null;
-	if(hasItem("Reducto",1)) reducto = useReductoOnKat;
-	if(hasItem("BulbyPp",1)) bulb = giveKatABulbousPepper;
-	if(hasItem("DblPepp",1)) double2 = giveKatADoublePepper;
-	if(hasItem("LargePp",1)) large = giveKatAOverlyLargePepper;
+	if(player.hasItem(consumables.REDUCTO)) reducto = useReductoOnKat;
+	if(player.hasItem("BulbyPp")) bulb = giveKatABulbousPepper;
+	if(player.hasItem("DblPepp")) double2 = giveKatADoublePepper;
+	if(player.hasItem("LargePp")) large = giveKatAOverlyLargePepper;
 	//[Reducto] [Bulbous Pepper] [Double Pepper] [Overly Large Pepper]
 	simpleChoices("Reducto",reducto,"BulbPepper",bulb,"DblPeppr",double2,"LrgPepp",large,"Back",katherineMenu);
 }
@@ -352,7 +352,7 @@ private function useRedoctoOnKatsKnot():void {
 	flags[kFLAGS.KATHERINE_KNOT_THICKNESS] -= 2;
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] < 2) flags[kFLAGS.KATHERINE_KNOT_THICKNESS] = 2;
 	dynStats("lus", 10+player.lib/20);
-	consumeItem("Reducto",1);
+	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
 //[Cock Length] (unavailable unless Kat cocklength is >8)
@@ -403,7 +403,7 @@ private function useReductoOnKatsKock():void {
 	flags[kFLAGS.KATHERINE_DICK_LENGTH] -= 2;
 	if(flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8) flags[kFLAGS.KATHERINE_DICK_LENGTH] = 8;
 	dynStats("lus", 10+player.lib/20);
-	consumeItem("Reducto",1);
+	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
 
@@ -423,7 +423,7 @@ private function reductoBallSize():void {
 	flags[kFLAGS.KATHERINE_BALL_SIZE] -= 2;
 	if(flags[kFLAGS.KATHERINE_BALL_SIZE] < 1) flags[kFLAGS.KATHERINE_BALL_SIZE] = 1;
 	dynStats("lus", 10+player.lib/20);
-	consumeItem("Reducto",1);
+	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
 
@@ -439,7 +439,7 @@ private function giveKatABulbousPepper():void {
 		flags[kFLAGS.KATHERINE_BALL_SIZE] += 2;
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] > 5) flags[kFLAGS.KATHERINE_BALL_SIZE] = 5;
 		dynStats("lus", 10+player.lib/20);
-		consumeItem("BulbyPp",1);
+		player.consumeItem("BulbyPp");
 		katSexMenu();
 	}
 	//(else If KathBallSize maxed at 5 inches)
@@ -471,7 +471,7 @@ private function giveKatADoublePepper():void {
 		outputText("\"<i>Oh dear...  I think that was maybe a bit too spicy.  You want to help me out with this?</i>\" she purrs, already starting to stroke her twin shafts.\n\n", false);
 	}
 	dynStats("lus", 10+player.lib/20);
-	consumeItem("DblPepp",1);
+	player.consumeItem("DblPepp");
 	katSexMenu();
 }
 	
@@ -490,7 +490,7 @@ private function giveKatAOverlyLargePepper():void {
 		//use 1x large pepper, increase Kat length by 2, Display Katherine Sex options
 		dynStats("lus", 10+player.lib/20);
 		flags[kFLAGS.KATHERINE_DICK_LENGTH] += 2;
-		consumeItem("LargePp",1);
+		player.consumeItem("LargePp");
 		katSexMenu();
 	}
 	//else if capped)
@@ -740,7 +740,7 @@ private function letKatKnotYourCuntPussyFuck():void {
 	}
 	var cunt:Number = player.vaginas[0].vaginalLooseness;
 	//(hymen check and stretching)
-	cuntChange(2 * flags[kFLAGS.KATHERINE_DICK_LENGTH],true,true,false);
+	player.cuntChange(2 * flags[kFLAGS.KATHERINE_DICK_LENGTH],true,true,false);
 	outputText("\n\n", false);
 
 	if(cunt < player.vaginas[0].vaginalLooseness) {
@@ -761,7 +761,7 @@ private function letKatKnotYourCuntPussyFuck():void {
 	outputText("\"<i>Ohhh!  Gonna plug you up; fill you fulla kitty-cat spunk!</i>\" Katherine moans, her knot growing to its maximum size inside of you, anchoring you together so that she can no longer pull out.", false);
 	//(stretch check again)
 	cunt = player.vaginas[0].vaginalLooseness;
-	cuntChange(2 * flags[kFLAGS.KATHERINE_DICK_LENGTH],true,true,false);
+	player.cuntChange(2 * flags[kFLAGS.KATHERINE_DICK_LENGTH],true,true,false);
 	outputText("  She lunges forward and grabs your shoulders, trying to push her way in deeper.", false);
 	//(if stretched: 
 	if(cunt < player.vaginas[0].vaginalLooseness) outputText("  The amount of swollen cockmeat she's stuffing inside you is on the border of being painful, but mostly it's pleasure that fills you.", false);
@@ -837,7 +837,7 @@ private function getPenetrated():void {
 	outputText(".  With soft hands, she rubs the goo into your pucker and all over her pointed shaft, then a void of sensation as she pulls it from your asscheeks.  Before you can react, she pushes them open again and rams her cock into your anus!", false);
 	//(butt hymen check + stretch check)
 	var butts:Number = player.ass.analLooseness;
-	buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2,true,true,false);
+	player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2,true,true,false);
 	outputText("\n\n", false);
 	
 	if(butts > player.ass.analLooseness) outputText("You can't help but yelp in shock and look back over your shoulder at Katherine, who appears genuinely apologetic.  \"<i>Sorry!  But I need to penetrate sooner rather than later - or would you rather wait until my knot's fully swollen?</i>\"  You concede she has a point, but beg her to be more gentle if there's a next time.\n\n", false);
@@ -919,7 +919,7 @@ private function getDoublePennedByKat():void {
 	outputText("You indicate to Katherine that you want it in both holes.\n\n", false);
 
 	outputText("She starts in shock at the proposal, then slowly, she nods her head.  \"<i>All right... if that's what you want.</i>\"  Despite her tone, her furry hands promptly begin to rub possessively over your " + assDescript() + ", slowly moving up to take hold of your " + hipDescript() + ".  \"<i>Hmm... this is so kinky, but I think it just might work...</i>\"  She murmurs, mostly to herself, and you feel her running her " + katCock() + " cocks against your sensitive pussy lips and your tingling anus, letting you feel their rubbery-smooth length, then, drawing back her hips, she suddenly thrusts the bottom one home without any hesitation.  The other slides along your asscrack harmlessly.", false);
-	cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+	player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	//[check vag hymen and stretch it]
 	outputText("\n\n", false);
 
@@ -928,7 +928,7 @@ private function getDoublePennedByKat():void {
 	outputText("Fingers digging into your hips, she begins to thrust back and forth inside of you, dragging one shaft through your pussy and the other through your cheeks.  \"<i>Mmm, you're so good... I could come from this alone,</i>\" she moans.  As if to echo the sentiment, a slow stream of pre-cum infiltrates your asscrack.  \"<i>Ahh, here it comes...</i>\"  She pulls her shafts out just as you feel a minute stiffening of the knots at their bases, and you can hear her smearing her pre-cum", false);
 	if(player.hasVagina()) outputText(" and your copious girl-lube", false);
 	outputText(" along her lengths.  Your " + assholeDescript() + " does not go neglected either; after she's done rubbing herself to slickness, a palmful of warm gooeyness is pushed into it.  She must already be drooling a huge amount if she's got this much to donate!  Almost on cue, she confirms your hunch with a moan.  \"<i>Ahhh, gotta put it in now!  I can't hold back anymore, I'm sorry!</i>\"  A hot pressure on both holes is the only warning you get before her twin talents are forced into you, sliding easily into your already wet vagina and pushing past your ring by virtue of the tapered shape and the slickness.", false);
-	buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+	player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	outputText("\n\n", false);
 
 	outputText("She begins thrusting at once, grunting and groaning as if she were already near her peak.  \"<i>Oh- Oh yeah, you're unbelievable!  It's so weird, I'm fucking two holes at once, but it's so good!</i>\" she cries out.  Her usually firm grip is shaky and unreliable, further evidence of the trouble she's having in controlling her climax.\n\n", false);
@@ -1006,8 +1006,8 @@ private function suckedNFuckedByKat():void {
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(".  Then, without further ado, she slides herself into you.", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1 && player.hasVagina()) {
-		buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
-		cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+		player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+		player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	}
 	else if(player.hasVagina()) cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	else buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
@@ -1403,7 +1403,7 @@ private function katDoubleHelixCraziness():void {
 	outputText("Shivering with delight as her hot, soaking wet walls envelop your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and her rubbery, pointy dog-cock slides into your " + vaginaDescript() + ", you need no further encouragement, eagerly pumping your hips against hers, trying to push into her and push her into you without letting either cock slip free of its appointed hole.  Katherine gyrates her hips, attempting to stimulate both your parts, panting in pleasure.\n\n", false);
 
 	outputText("You whine and whimper at the stimulus, moving your own hips likewise in an effort to intensify the sensations without accidentally enveloping her knot in your cunt.  Katherine mewls and yowls in pleasure in response, voicing her approval and pulling you dangerously closer to her knot in an attempt to feel more of you.  Barely coherent of what's happening, your world shrinks down to the feeling of cock in cunt... then with a wet SCHLUCK Katherine's half-swollen knot slips inside your pussy and your hips collide.", false);
-	cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2,true,true,false);
+	player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2,true,true,false);
 	outputText("\n\n", false);
 
 	outputText("You gasp as you find yourself filled so full, with your cock sheathed to the hilt in her hot, wet depths.  The sensations are almost overwhelming... but you manage to stave them off and gasp out that she's knotted you.\n\n", false);

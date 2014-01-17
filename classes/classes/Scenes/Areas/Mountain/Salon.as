@@ -79,8 +79,7 @@ private function salonPaymentMenu():void {
 				player.gems -= 60;
 				outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ", true);
 				statScreenRefresh();
-				shortName = "MinoCum";
-				takeItem();
+				inventory.takeItem(consumables.MINOCUM);
 			}
 		}
 public function salonPurchaseMenu():void {
@@ -384,7 +383,7 @@ private function hairGrow():void {
 		private function buyDye(itemShortName:String):void{
 			outputText("", true);
 			shortName = itemShortName;
-			takeItem();
+			inventory.takeItem();
 		}
 private function dyeMenu():void {
 	spriteSelect(38);
@@ -476,7 +475,7 @@ private function minotaurCumBukkakeInSalon():void {
 	else if(player.analCapacity() < 140) outputText("delighting in the feeling of perfect fullness.", false);
 	else outputText("delighting in realizing that you could take far larger than even this virile specimen!", false);
 	//(buttchange here: 90)
-	buttChange(90,true,false);
+	player.buttChange(90,true,false);
 																																																																		  
 	outputText("\n\nYou slide down the twitching bull-shaft until your " + buttDescript() + " slaps the wall, and you draw slowly away, but you push back harder, turned into a lewd, wanting whore by the massive quantity of minotaur seed in your belly, on your skin, and fogging up the air.  The beast pulls out and you whine plaintively, feeling empty and useless until he plunges back inside and reminds you of your purpose.  He starts to fuck you hard, not caring for your pleasure at all, slamming his horse-cock deep and fast.  Each of his three rings of prepuce ", false);
 	if(!player.hasCock()) outputText("drags through your body, touching sensitive nerves you didn't even know you had until you cum, shuddering and shaking like a wanton whore.", false);

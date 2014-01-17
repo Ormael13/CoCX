@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class FetishZealotScene extends AbstractLakeContent
 	{
@@ -248,8 +249,8 @@ package classes.Scenes.Areas.Lake
 			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.", false);
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
-				var bikiniTits:int = 0;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+				var bikiniTits:Function = null;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 				simpleChoices("Yes", zealotWinRape, "", 0, "", 0, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();

@@ -170,7 +170,7 @@ private function benoitTransactBuy(slot:int = 1):void {
 	player.gems -= 2 * itemValue(shortName);
 	statScreenRefresh();
 	menuLoc = 26;
-	takeItem();
+	inventory.takeItem();
 }
 
 private function benoitSellTransact(slot:int = 1):void {
@@ -749,7 +749,7 @@ private function tryToConvertToBassyWomb():void {
 	clearOutput();
 	//[Ingredients not in inventory: ]
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
-	if(!(hasItem("OviElix",2) && hasItem("Reptlum",1) && hasItem("Gob.Ale",1))) {
+	if(!(player.hasItem(consumables.OVIELIX,2) && player.hasItem("Reptlum") && player.hasItem(consumables.GOB_ALE))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall " + benoitMF("Benoit","Benoite") + " mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
 		doNext(benoitIntro);
 	}
@@ -761,9 +761,9 @@ private function tryToConvertToBassyWomb():void {
 	}*/
 	//Ingredients in inventory: 
 	else {
-		consumeItem("OviElix",2);
-		consumeItem("Reptlum",1);
-		consumeItem("Gob.Ale",1);
+		player.consumeItem(consumables.OVIELIX,2);
+		player.consumeItem("Reptlum");
+		player.consumeItem(consumables.GOB_ALE);
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 		
 		outputText("\n\n\"<i>And what is zat?</i>\" the basilisk says, bewildered. You explain you can whip something up which will give you a basilisk womb - and hence, female basilisk kids.  Benoit opens his mouth then closes it again; it takes him a while to properly compute these words.  \"<i>But... but zat is completely impossible, [name]!</i>\" he says eventually, wringing his hands.  \"<i>'Ow do you know you won't just poison yourself?  Or, or turn yourself into a newt or somesing?  Please... don't 'urt... I should never 'ave said...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You pour the ovi-elixers into the goblin ale, beating them together until a fairly unpleasant sulphuric smell fills the close market stall.  Carefully you dribble the reptilum in whilst continuing to stir, until the smell changes to that of cooking sherry.  You frown at the mixture.  It feels like it's missing something...  Casually, you ask Benoit to open his hand to you, whilst plucking a kitchen knife from the utensil container.  He barks in pain as you run the blade across his palm and then hold his hand firmly over the bowl.  Drops of dark red blossom into the mixture, and as you carefully stir the potion turns a green-grey colour: the colour of Benoit's scales.");

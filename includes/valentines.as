@@ -387,11 +387,11 @@ public function goVisitPastyVDay():void {
 	
 	//Check inventory for Goblin Ale, Black Cat Beer, Bimbo Champagne; failing this, check if PC has female genitalia.
 	//[BCBeer] [BimboCham][GoblinAle][vagina]
-	if(hasItem("BimboCh",1) || hasItem("BC Beer",1) || hasItem("Gob.Ale",1) || player.hasVagina()) {
+	if(player.hasItem(consumables.BIMBOCH) || player.hasItem(consumables.BC_BEER) || player.hasItem(consumables.GOB_ALE) || player.hasVagina()) {
 		menu();
-		if(hasItem("BimboCh",1)) addButton(0,"BimboCham",pastieValentineIntro,"BimboCh");
-		if(hasItem("BC Beer",1)) addButton(1,"B.Cat Beer ",pastieValentineIntro,"BC Beer");
-		if(hasItem("Gob.Ale",1)) addButton(2,"Gob.Ale",pastieValentineIntro,"Gob.Ale");
+		if(player.hasItem(consumables.BIMBOCH)) addButton(0,"BimboCham",pastieValentineIntro,"BimboCh");
+		if(player.hasItem(consumables.BC_BEER)) addButton(1,"B.Cat Beer ",pastieValentineIntro,"BC Beer");
+		if(player.hasItem(consumables.GOB_ALE)) addButton(2,"Gob.Ale",pastieValentineIntro,"Gob.Ale");
 		if(player.hasVagina()) addButton(3,"Pussy",pastieValentineIntro,"vag");
 	}
 	else {
@@ -411,16 +411,16 @@ public function pastieValentineIntro(choice:String = ""):void {
 	}
 	//({Any other drink}. 
 	else {
-		consumeItem(choice,1);
-		shortName = choice;
+		var itype:ItemType = ItemType.lookupItem(choice);
+		player.consumeItem(itype,1);
 		outputText("You present the drink to Pastie and she flashes you a grin as she flies up and away, leading you into an alley.  \"<i>Well, lemme at it!  A drink sure as hell sounds good right now and none of this seems like it'd be really bad.</i>\"");
 		menu();
-		addButton(0,"Next",valentineDrinkPastie);
+		addButton(0,"Next",curry(valentineDrinkPastie,itype));
 	}
 }
 
 //PASTIE EVENT
-public function valentineDrinkPastie():void {
+public function valentineDrinkPastie(itype:ItemType):void {
 	clearOutput();
 	outputText("One you're away from any prying eyes, Pastie turns to you and rubs her little fairy hands together, apparently barely able to hold her enthusiasm to finally get a bit drunk.  You're afraid it may not end at one drink, either, and for a moment, wonder about whether this is all right or not...");
 	//Corruption 0-20] 
@@ -434,19 +434,19 @@ public function valentineDrinkPastie():void {
 	
 	outputText("\n\nWith a burp, Pastie removes herself from the bottle's tip and rubs her belly.  \"<i>Tasteeeehhh!!!</i>\"");
 	
-	valentineDayGetPastieDrink();
+	valentineDayGetPastieDrink(itype);
 }
 
-public function valentineDayGetPastieDrink():void {
+public function valentineDayGetPastieDrink(itype:ItemType):void {
 	//{Black Cat Beer}
-	if(shortName == "BC Beer") {
+	if(itype == consumables.BC_BEER) {
 		outputText("\n\nPastie suddenly starts running her hands along her body, licking her lips as she does so. \"<i>Odd... Imma bit of a horny drunk, yah know, but thish ish... overkill...</i>\"  The little fairy-drunkard complains as she reaches between her legs and starts fingering herself, while rubbing a nipple.  \"<i>Daaaamnnnn, I'm sooo horny! I need more... to, uhhh, to driiink!</i>\"");
 		outputText("\n\nWell, that was an expected effect, to be honest.  You guess you could also comply with her request, and horny as she is, she'd probably degrade herself with whatever sex bits you want her to... although, too big of a member can definitely be a problem for her.");
 		//[RubDick][PussyDive]
 		//{Rub Dick option is present if a character has a member underneath 28 cock area. Pussy Dive is obviously present if a character has a pussy of any kind.}
 	}
 	//{Bimbo Champagne}
-	else if(shortName == "BimboCh") {
+	else if(itype == consumables.BIMBOCH) {
 		outputText("\n\nPastie giggles as her body starts to slowly show the effects of the liquid she just drank.  \"<i>Hihihi... I feel kinda funny,</i>\" she says, and you start to see the changes the champagne is starting to have on her body.  Her hair starts turning blonde, and her position in mid-air changes somewhat... almost as if she was imitating standing on \"<i>fuck-me</i>\" pumps, and, slowly, her little cupid dress stretches, as you become aware that her body is starting to become curvier, especially in the chest area.  \"<i>Hahaha... it's, like, I'm hitting three puberties at once!  Ummm... pu... puber, ah, nevermind.  Look, look!  It's gonna rip!</i>\" The seams in the little dress indeed pop, exposing a significant amount of the little girl's cleavage, now very significant.  True, compared to your body size her breasts are still nothing, but on her little body they're very prominent.  She even seems to have trouble flying from the added mass!  Her hips gained the slightest bit of curve, too, and Pastie's hair is now completely blonde.");
 		outputText("\n\n\"<i>Uhh, like... baby, you know, the usual drink gets me hot, and this one is as special as my new titties!  Would you mind helping me out?</i>\"");
 		
@@ -456,7 +456,7 @@ public function valentineDayGetPastieDrink():void {
 		//{Fuck is only present if a character has a cock under 8 cock area, Rub Dick option is present if a character has a member underneath 28 cock area. Pussy Dive is obviously present if a character has a pussy of any kind.}
 	}
 	//{Goblin Ale}
-	else if(shortName == "Gob.Ale") {
+	else if(itype == consumables.GOB_ALE) {
 		outputText("\n\n\"<i>Huuuh? Feels weird!</i>\" Pastie says, as she runs her hands over her body, and then slips a finger into her little pussy... four fingers... her hand, and then, reaches halfway up to her elbow before she cannot bend any more in her drunken state.  \"<i>Thissh... got me more horny than usual, and I feel so... stretchy, hehehe!</i>\"");
 		
 		outputText("\n\nHer body's still totally diminutive, but you guess someone with a small enough endowment might actually be able to take advantage of her now.  You doubt she'd refuse a little cum or pussy juice, either.");

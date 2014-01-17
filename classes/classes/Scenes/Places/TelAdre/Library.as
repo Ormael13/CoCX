@@ -169,7 +169,7 @@ private function talkToMali():void {
 		doNext(13);
 	}	
 	//[[Mali], player has spellblade]
-	else if((player.weaponName == "inscribed spellblade" || hasItem("S.Blade",1)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
+	else if((player.weaponName == "inscribed spellblade" || player.hasItem("S.Blade")) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
 		outputText("You tell Quinn you're here to see Mali.  He seems intrigued by the wrapped blade you're carrying, but doesn't ask any questions.  Unlocking the second floor as usual, he escorts you to Mali's quarters.");
 		outputText("\n\n\"<i>What's that?</i>\" Mali asks, curious when you pull out the inscribed spellblade.  You place it down on the desk and explain that you got it from... from...  Mali's eyes light up at your strained inability to explain.  \"<i>Yes!</i>\" she says excitedly, reaching over the desk and grabbing your cheeks.  She plants a quick and enthusiastic kiss on your lips in thanks, looking back down at the sword and running her hands over it.");
 		
@@ -186,7 +186,7 @@ private function talkToMali():void {
 			player.weaponName = "fists";
 		}
 		else {
-			consumeItem("S.Blade",1);
+			player.consumeItem("S.Blade");
 		}
 		flags[kFLAGS.MALI_TAKEN_BLADE] = 1;
 		doNext(13);

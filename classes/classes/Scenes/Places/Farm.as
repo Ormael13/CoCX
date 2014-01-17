@@ -4,6 +4,7 @@
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 	import classes.Scenes.NPCs.MarbleScene;
 	import classes.Scenes.Places.Farm.*;
 
@@ -35,9 +36,8 @@ public function farmExploreEncounter():void {
 			player.addStatusValue("Met Whitney",1,1);
 			if(player.statusAffects[player.hasStatusAffect("Met Whitney")].value1 == 2) outputText("<b>You've been to the farm enough to easily find it.  You can return by selecting it from the places menu (and will no longer encounter it during random lake exploration)</b>.\n\n", false);
 		}
-		shortName = "CanineP";
 		menuLoc = 2;
-		takeItem();
+		inventory.takeItem(consumables.CANINEP);
 	}
 	//Repeat Offender
 	else {
@@ -263,23 +263,24 @@ private function workFarm():void {
 	outputText("You nod and borrow a basket, and set off towards the fields.  The next two hours are a blur of sweat and hard work as you prowl between the rows of plants, picking as many ripe red peppers as you can find.  When you finish, you drop the basket by Whitney's door, but not before taking your pepper.\n", false);
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
 	var pepper:Number = rand(4);
-	if(pepper <= 2) shortName = "CanineP";
+	var itype:ItemType;
+	if(pepper <= 2) itype = consumables.CANINEP;
 	else {
 		temp = rand(5);
 		//-Oversized Pepper (+size, thickness)
-		if(temp == 0) shortName = "LargePp";
+		if(temp == 0) itype = consumables.LARGEPP;
 		//-Double Pepper (+grows second cock or changes two cocks to dogcocks)
-		if(temp == 1) shortName = "DblPepp";
+		if(temp == 1) itype = consumables.DBLPEPP;
 		//-Black Pepper (Dark Fur, +corruption/libido)
-		if(temp == 2) shortName = "BlackPp";
+		if(temp == 2) itype = consumables.BLACKPP;
 		//-Knotty Pepper (+Knot + Cum Multiplier)
-		if(temp == 3) shortName = "KnottyP";
+		if(temp == 3) itype = consumables.KNOTTYP;
 		//-Bulbous Pepper (+ball size or fresh balls)
-		if(temp == 4) shortName = "BulbyPp";
+		if(temp == 4) itype = consumables.BULBYPP;
 	}
-	trace("FARM SHIT: " + shortName);
+	trace("FARM SHIT: " + itype.shortName);
 	gameState = 8;
-	takeItem();
+	inventory.takeItem(itype);
 }
 
 private function meetMarble():void {
@@ -984,7 +985,7 @@ private function milkerBadEnd1():void {
 	//[(if vag)  
 	if(player.hasVagina()) {
 		outputText("  Another tube, likewise capped with a thick, firm end instead of a suction cup, reaches your " + vaginaDescript(0) + " and pushes inside, secreting more of the fluid.  ", false);
-		cuntChange(15,true);		
+		player.cuntChange(15,true);
 		//[(bigclit)
 		if(player.clitLength > 3) outputText("A smaller suction tube fastens over your " + clitDescript() + " as it rouses from the vaginal stimulation.", false);
 	}

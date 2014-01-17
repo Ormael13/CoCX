@@ -412,7 +412,7 @@ public function stimBeltUse():void {
 			dynStats("sen", -1, "lus=", 0);
 			doNext(13);
 		}
-		cuntChange(1, true, true, false);
+		player.cuntChange(1, true, true, false);
 	}
 }
 public function allNaturalStimBeltUse():void {
@@ -447,7 +447,7 @@ public function allNaturalStimBeltUse():void {
 			}
 		}
 	}
-	cuntChange(1, true);
+	player.cuntChange(1, true);
 	player.slimeFeed();
 }
 
@@ -567,7 +567,7 @@ public function masturbateJojo():void {
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock. You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand up off of him and dismiss him with a wave of your hand.  ", false);
 			//Preggers chance!
 			player.knockUp(4,432);
-			cuntChange(36.4, true);
+			player.cuntChange(36.4, true);
 		}
 		//Cuntboy 2: Anal Gentle		
 		if(selection == 1) {
@@ -638,7 +638,7 @@ public function masturbateJojo():void {
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock. You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.  ", false);
 			//Preggers chance!
 			player.knockUp(4,432);
-			cuntChange(36.4, true);
+			player.cuntChange(36.4, true);
 		}
 		//Female 4: Smother Vaginal
 		if(selection == 3) {
@@ -701,7 +701,7 @@ public function masturbateJojo():void {
 			outputText("You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.", false);
 			//Preggers chance!
 			player.knockUp(4,432);
-			cuntChange(36.4, true);
+			player.cuntChange(36.4, true);
 		}
 	}	
 	doNext(13);
@@ -1970,7 +1970,7 @@ public function deluxeDildo():void {
 		dynStats("lus=", 0);
 		doNext(13);
 		outputText("\n", false);
-		cuntChange(player.vaginalCapacity() * .9, true);
+		player.cuntChange(player.vaginalCapacity() * .9, true);
 		return;
 	}
 }
@@ -2335,7 +2335,7 @@ public function centaurGirlsGetHorseAids():void {
 	outputText("Though it tastes rubbery, the heft and size of the prick feels... right... inside you.  You spend a few blissful minutes sucking off the horse dildo, getting it nice and wet and ready for you.  When you're satisfied the imp-statue's wang is sufficiently lubed up, you let it pop out of your mouth and, making sure it's still standing straight out of the statue, you turn around.\n\n", false);
 
 	outputText("Your " + hipDescript() + " wiggle in anticipation as you work to get your ready " + vaginaDescript() + " lined up with the horse dildo.  Unable to see the toy past your equine rump, it's a long, desperate minute until finally you feel its flared head against your horsecunt.  You shimmy back, gasping in delight as the meaty horsecock pushes into you.  It seems to inflate and expand inside you as you take it, until you're completely and utterly full of purple rubber -- and then some.  You grunt as the cock continues to grow, stretching your " + vaginaDescript() + " until you let out a pained whimper.", false);
-	cuntChange(player.vaginalCapacity() - 3,true,true,false);
+	player.cuntChange(player.vaginalCapacity() - 3,true,true,false);
 	outputText("\n\n", false);
 
 	outputText("Just then, though, the cock seems to stop.  You grunt and groan as it settles inside you, finally letting out a relieved sigh when it's only giving you a modest, pleasant stretching.  Now that you're stuffed full of fake horsecock, though, you're not sure what to do... \"<i>EEP!</i>\" you yelp as the imp-statue's hands suddenly reach out and grasp your " + hipDescript() + ".  Your eyes go wide as you feel the thick dildo withdraw from your cunt, the imp's hips pulling back.\n\n", false);
@@ -2702,7 +2702,7 @@ public function tentacleSelfFuck():void {
 	else outputText("  You");
 	outputText(" twist your wrist down.  That change in direction comes far easier than trying to stroke it.  Releasing sets of alien muscles that you had held instinctively, you let your " + cockDescript(x) + " do what it was made to do.  It slithers down sinuously, the purplish head pressing heavy and hot against your juicy mound just hard enough to encourage you to press back against it.  It slowly spreads your clinging tunnel around its obscene girth one fold at a time.");
 	//Cunt change!
-	cuntChange(player.cockArea(x),true,true,false);
+	player.cuntChange(player.cockArea(x),true,true,false);
 	
 	outputText("\n\nRipples of delight radiate along your " + cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible.  The fat, purplish head stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat.  Tugging on the exposed portion, you find yourself pumping wildly on your length, squeezing it while paroxysms of ecstasy render your fine muscle control useless.  The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you.");
 	if(y >= 0) {
@@ -2710,7 +2710,7 @@ public function tentacleSelfFuck():void {
 		if(player.cocks[y].cockType == CockTypesEnum.TENTACLE) {
 			outputText("  In no time flat the second tendril has gotten the idea, and it elongates to reach for your unoccupied asshole.  There's a moment of token resistance before it violates your [asshole], but then, there's only the warm heat of a torrid butt-fuck.");
 			//BUTTCHANGE IF APPROPRIATE
-			buttChange(player.cockArea(y),true,true,false);
+			player.buttChange(player.cockArea(y),true,true,false);
 		}
 	}
 	outputText("\n\nDelirious with excitement, you grab hold of your [chest]");
@@ -2841,7 +2841,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 
 	outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + cockDescript(x)+ " to your back, pointing it  toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + cockDescript(x) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + cockDescript(x) + " at full force inside your colon.");
 	//[anal tightness check]
-	buttChange(player.cockArea(x),true,true,false);
+	player.buttChange(player.cockArea(x),true,true,false);
 	
 	outputText("\n\nThe impetuousness of the act makes you cry in pleasure and pain mixed, your [asshole] being overloaded with intense sensations.  Fortunately the tender and rubbery texture of your " + cockDescript(x) + " allows for more sensitivity, the subtle friction sending tingles from your crotch all the way up your spine.  You shiver from the sheer cocktail of raw pleasure you're inflicting on your own body.  Your " + cockDescript(x) + " keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position.  You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 	

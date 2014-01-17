@@ -399,8 +399,7 @@ package classes.Scenes.Areas
 			//(Acquired minotaur cum!)
 			model.time.hours++;
 			menuLoc = 2;
-			shortName = "MinoCum";
-			takeItem();
+			inventory.takeItem(consumables.MINOCUM);
 		}
 
 		private function watchAMinoCumSlut():void

@@ -1,3 +1,7 @@
+import classes.GlobalFlags.kGAMECLASS;
+
+use namespace kGAMECLASS;
+
 inputManager.AddBindableControl(
 	"Show Stats",
 	"Show the stats pane when available",
@@ -465,7 +469,7 @@ inputManager.AddBindableControl(
 			{
 				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1)
 				{
-					giveHumanizer();
+					kGAMECLASS.inventory.giveHumanizer();
 				}
 			}
 			else

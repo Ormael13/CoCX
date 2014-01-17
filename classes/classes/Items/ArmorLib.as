@@ -5,7 +5,7 @@ package classes.Items
 {
 	import classes.Items.Armors.*;
 
-	public class ArmorLib
+	public final class ArmorLib
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 
@@ -23,9 +23,9 @@ package classes.Items
 		public const FULL_PLATEMAIL:Armor = mk("FullPlt","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.");
 		public const FUR_LOINCLOTH:Armor = new FurLoincloth();
 		public const GEL_ARMOR:Armor = mk("GelArmr","a suit of gel armor",10,150,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)");
-		public const GOO_ARMOR:Armor = mk("GooArmr","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!");
-		public const INQUISITORS_CORSET:Armor = mk("I.Corst","inquisitor's corset",4,2000,"This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.","Light");
-		public const INQUISITORS_ROBES:Armor = mk("I.Robes","inquisitor's robes",8,2000,"These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.","Light");
+		public const GOO_ARMOR:GooArmor = new GooArmor();
+		public const INQUISITORS_CORSET:InquisitorsCorset = new InquisitorsCorset();
+		public const INQUISITORS_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECENT_STEEL_ARMOR:Armor = mk("IndecSt","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium");
 		public const LEATHER_ARMOR:Armor = mk("LeathrA","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)","Light");
 		public const LEATHER_ARMOR_SEGMENTS:Armor = mk("UrtaLta","leather armor segments",5,76,null,"Light");
@@ -39,8 +39,8 @@ package classes.Items
 		public const RUBBER_FETISH_CLOTHES:Armor = mk("RbbrClt","a set of revealing rubber fetish clothes",3,1000,"A revealing set of fetish-wear.  Upgrades tease attack to seduce.","Light");
 		public const SKIMPY_BLACK_BIKINI:Armor = mk("S.Swmwr","a skimpy black bikini",0,DEFAULT_VALUE,"An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.","Light");
 		public const SCALE_MAIL:Armor = mk("ScaleMl","a set of scale-mail armor",12,170,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.");
-		public const SEDUCTIVE_ARMOR:Armor = mk("SeductA","a set of scandalously seductive armor",0,1,"A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.");
-		public const SPIDERSILK_ROBES:Armor = mk("SS.Robe","a spider-silk robes",6,950,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.","Light");
+		public const SEDUCTIVE_ARMOR:SeductiveArmor = new SeductiveArmor();
+		public const SPIDERSILK_ROBES:SpiderSilkRobes = new SpiderSilkRobes();
 		public const SPIDERSILK_ARMOR:Armor = mk("SSArmor","a suit of spider-silk armor",25,950,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.");
 		public const SEMITRANSPARENT_BODYSUIT:Armor = mk("T.BSuit","a semi-transparent, curve-hugging bodysuit",0,1300,"A semi-transparent bodysuit.","Light");
 		public const TUBE_TOP:Armor = mk("TubeTop","a snug tube top and VERY short shorts",0,80,"A clingy tube top and VERY short shorts.","Light");

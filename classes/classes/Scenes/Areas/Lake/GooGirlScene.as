@@ -315,7 +315,7 @@ package classes.Scenes.Areas.Lake
 				var gooTF:Function = null;
 				//corrupt chances
 				if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
-					if (player.cor < 50 && (hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && (hasItem("BlackEg", 1) || hasItem("L.BlkEg", 1))) {
+					if (player.cor < 50 && (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
 						kGAMECLASS.latexGirl.pureGooRecruitmentStart();
 						return;
 					}
@@ -330,7 +330,7 @@ package classes.Scenes.Areas.Lake
 						else {
 							outputText("\n\nAs you survey your victory, you remember the idea you had before - maybe if you drugged one of these things with a black egg and some succubi milk, you could make it your pet?");
 						}
-						if ((hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && (hasItem("BlackEg", 1) || hasItem("L.BlkEg", 1))) {
+						if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
 							outputText("  Good thing you have those handy!");
 							gooTF = kGAMECLASS.latexGirl.meanGooGirlRecruitment;
 						}

@@ -197,10 +197,9 @@ private function RaphaelDressPtII():void {
 	outputText("You stand up straight and look over your body one more time. With this outfit, you could walk into a stately ballroom with as much confidence as you could a seedy burlesque, even though both places would be filled with people turning their heads. At least your blush would match the color of the outfit, while an audience would try to figure out whether you're either a lost duchess or a stray dancer. You're not certain if you want to continue wearing it, although you're sure Raphael would appreciate you for it.  You change back for now - you'll have to decide once you've cleared your head.", false);
 
 	//{Third encounter unlocked}
-	shortName = "R.BdySt";
 	//Set 'time to wear dress' countdown.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
-	takeItem();
+	inventory.takeItem(armors.RED_BODYSUIT);
 }
 
 /*DRESS HERE
@@ -719,7 +718,7 @@ private function RaphaelPostFenceSex():void {
 	outputText("When Raphael notices your attention, the time seems right for one of his one-liners.  'Do not fear the blade', 'look how the length stands firm upon the hilt', a lecture on the art of parrying, or the like is not forthcoming, however.  The fox says nothing instead and merely smiles knowingly at you from the side, knowing silent action is enough.  With his one remaining free arm, he claws around the silk of your womanhood and does indeed part the subtle opening of interlapping folds. For a moment you gasp as his hot, slick cock falls freely into the denuded skin of your quaking " + vaginaDescript(0) + ".  It shouldn't come as a surprise he knows of the secret opening in the clothes: he gifted them after all, perhaps planning it all along.\n\n", false); 
 
 	outputText("You tremble as Raphael shifts back, angles his cock into the furrow of your womanhood and takes your moist opening in a single inward incursion.  ", false);
-	cuntChange(12,true);
+	player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paw continues to trace around your body to tease your tits or bother your lovebud.  Your one remaining foot has long since begun to buckle under the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins.  He often changes his angle, until not an inch of your loosening walls have been deprived of an pleasurable inner invasion, as he brushes into your walls with deep lunges.\n\n", false);
 
 	outputText("Finally, you can bear it no more with his hot breath across your neck.  Your body convulses limply around his upright impalement, the fox still standing tall and firm.  You try to close your leg or slip down his body, but with two firm hands Raphael holds you in climactic embrace like captured prey.  Only after you howl and rock your hips forth to the involuntary rhythm of orgasm, does Raphael allow you to drop to the moss. The dew-dappled meadows feel like salvation, but little do you know that it does not end there.\n\n", false);
@@ -741,8 +740,7 @@ private function postRaphaelCoitus():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		shortName = "RRapier";
-		takeItem();
+		inventory.takeItem(weapons.RAPHAELS_RAPIER);
 	}
 	//({When player has reached the INT Conversation apex} 
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -784,8 +782,7 @@ private function declinePuttingOutForRogues():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		shortName = "RRapier";
-		takeItem();
+		inventory.takeItem(weapons.RAPHAELS_RAPIER);
 
 	}
 	//({When player has reached the INT Conversation apex}
@@ -969,7 +966,7 @@ private function RaphaelThieverySmex():void {
 	outputText("You gasp when he spreads your legs by placing his in between and parting them. When he fondles you down there, fingers rubbing into your flushed  " + vaginaDescript(0) + ", you suddenly feel the wind passing through the hot bare inners of your parted folds.  Raphael has opened the silken opening of your suit. It shouldn't come as a shock.  He gifted them after all, perhaps planning for it all along.  Another surprise follows as you can feel something hot and rigid standing off his body and lying on top of yours. Raphael's vulpine cock is resting in the hollow of your bellybutton, through the fly of his pants.  The bright red, smooth tip rides up your tummy admiringly.  It lacks the mushroom shaped dome that human men have and instead, his cock is pointed and tapered, much like the weapons he prefers.  You can also feel a subtle, but noticeable canine bulb at the base, throbbing against your sensitive loins.\n\n", false);
 
 	outputText("When he finally lowers himself, positioning himself in front of your opening, you've already welcomed it.  In the time it took him, the wind's soft breeze has passed through and licked by your exposed cunt for long enough.  By now you long to get penetrated by something more substantial and indeed your wish is granted.  When you feel the tip of Raphael's foxy cock trail down your furrow, it hits the spot and he takes your moist opening in a single inward incursion.  ", false);
-	cuntChange(12,true);
+	player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paws grope your tits and pester the " + nippleDescript(0) + "s by twirling his abrasive hands around them.  With a knowing look upwards, he has also begun to nibble down on your shoulders with his sharp teeth, giving you little lovebites across your neck that make you gasp.  Your body has long since buckled under his luscious fur thanks to the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins. He often changes his angle, until not an inch of your loosening walls have been deprived of a pleasurable inner indentation, as he brushes into your walls with deep lunges.\n\n", false); 
 
 	outputText("Finally, you can bear it no more.  You body convulses limply below him, the fox still jamming himself in with consistent rhythm.  You raise your legs and clamp him around his hips as Raphael keeps up the motion, rocking into you like a voracious predator.  Only after you howl and pump your hips to the involuntary rhythm of orgasm does Raphael allow you a breather by sitting up, but his penis is still locked into your " + vaginaDescript(0) + ". Little do you guess that it does not end there.\n\n", false);
@@ -990,8 +987,7 @@ private function RaphaelThieverySmexPtII():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		shortName = "RRapier";
-		takeItem();
+		inventory.takeItem(weapons.RAPHAELS_RAPIER);
 	}
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -1300,7 +1296,7 @@ private function kissRaphaelFirstTimeOrphanage():void {
 	outputText("You drift into Raphael as easily as you would into a pillow.  The young thief leans in over you and begins to devour you softly with gentle tongue and nimble hands.  You are all to eager to reciprocate and let him pass through your mouth and across your back.  You try to wrestle him for control over your tangled tongues, but it turns all to quickly into a metaphor for his swordplay.  All your twirls and wriggles are met by sensuous swirls across areas of your tongue you never even knew you had.  Raphael has instantly turned it into an major erogenous zone.  You give up, but once again the fox does not relent.  He keeps lashing your tongue until you're forced to writhe limply to the rhythm.  When you attempt to imagine what would happen, were he to do the same to your already throbbing " + clitDescript() + ", your knees shudder.  When Raphael, just faintly, places his paws on the sides of your spine in just the right way, you nearly climax.  You fall into his waiting hand and he catches you by the neck and lower back.  You're enveloped in a soft sea of groping warmness.  His playful growls carry further into your body than they should.");
 	outputText("\n\nHe moves you back, further into the garden.  Just before you hit a rose entwined lattice, Raphael takes hold of you and lifts you up, pinning you squarely against it at mid-height.  Slightly startled by the gesture, you spread your arms to find a grip, but discover it to be easy, up against the plants.  The lattice is indeed rotten to the core, and it crumbles at your touch.  The thick, stubborn rosebushes, however, manage to hold your weight.  You quickly find two branches to grasp and your posterior finds a nook to sit upon.  Your legs you wrap around the fox's hips, as the rogue smiles at you with admiration and zeal.");
 	outputText("\n\nThere's a brief moment of vulnerability, as he finds an opening into your pants.  As sure as a master thief would find his way into the vault of a city, he quickly opens it.  The thorns at your back do bite while you hang limply between trunk and fox with your privates exposed mid air, but you are soon relieved of your awkward neglect when Raphael tilts his hips and drives deep a much larger implement.  Finally the embrace is whole again as you can feel his pelvis thump in against your netherlips. His bone-hard length has already breached you.");
-	cuntChange(5,true,true,false);
+	player.cuntChange(5,true,true,false);
 	
 	outputText("\n\nThere's something to be said for his slender and agile size, still clearly felt bottoming inside you.  You're never left waiting for too long.  You quickly settle into the distinctive rhythm, staring Mr. Fox into his eyes with a daring look.  You're willing to suffer the discomfort of the thorns to discover just how good he is now that you're in it for the duration.  You arch your back into the bushes, help to ease him into your passage and feel like the first of Spring's roses held proudly aloft by the gifted gardener.");
 	
@@ -1365,7 +1361,7 @@ private function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nYou swipe the condom out of the fox's hand and waste no time applying it.  In fact, you manage to do a good job of giving it a sensual part within your lovemaking, which makes you feel all smart.  Between spread legs and right in front of your " + vaginaDescript(0) + ", you lay it in within your hand and slowly roll your fist across his cock; giving him a taste of what is to come.  Raphael gasps softly at the sight as you do it. The condom fogs up instantly around his muzzled red bone.");
 	
 	outputText("\n\nTriumphant, you finally point his tip towards your furls and and drag through, towards the waiting hole of your [vagina].  Gently sitting down upon it, it slides in smoothly. Raphael rewards you by finally participating, softly running his velvet paws across your flanks, neck and fondling your [chest] admiringly.  Finally, a little bashful, you throw your head back, letting Raphael have his way with your body as you concentrate and enjoy riding him.");
-	cuntChange(5,true,true,false);
+	player.cuntChange(5,true,true,false);
 	
 	outputText("\n\nRaphael's cock is something else. It must be the bone running through it that gives it its firmness.  Instead of stuffing yourself with a nondescript roll of meat, you can clearly feel him penetrating you with his well defined and rock-hard shaft.  With the faintest twitch of the hip, you can change its angle and run it through in an entirely different manner and you eagerly start experimenting with what feels best.  Eventually you settle on jutting your ass backwards and pressing the middlemost of his solid length against the front wall of your [vagina] while the tip bottoms out against the back.  The position does not go unnoticed to Raph, and he trails his paws along your " + buttDescript() + ".  You begin to bounce around on top him, jamming him into you more firmly and more securely with every rut in.  Raphael supports you by either grabbing you by the ass or cupping your tits, playing with them with his sandy paws.  He sinks in heavily, smoothly, with every gulp of your tightening cunt accompanied by a little wet slush around his hard manhood.");
 	

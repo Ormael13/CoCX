@@ -1436,37 +1436,7 @@ package classes
 		
 		public function cockDescript(cockIndex:Number = 0):String
 		{
-
-			//trace("WRONG COCKDESCRIPT FUNCTION CALLED");
-			if (totalCocks() == 0)
-				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-			if (cockTotal() <= cockIndex && cockIndex != 99)
-				return "<b>ERROR: CockDescript called with index of " + cockIndex + " - out of BOUNDS</b>";
-			//Cocknum 99 to default to boring descriptions!
-			if (cockIndex != 99)
-			{
-				if (rand(2) == 0)
-					descript += cockAdjective(cockIndex) + ", ";
-				descript += Appearance.cockNoun(cocks[cockIndex].cockType);
-			}
-			else
-				cockIndex = 0;
-			var descript:String = "";
-			//50% of the time add a descriptor
-			if (rand(2) == 0)
-				descript += cockAdjective(cockIndex) + " ";
-			var rando:Number = 0;
-			rando = int(Math.random() * 10)
-			if (rando >= 0 && rando <= 4)
-				descript += "cock";
-			if (rando == 5 || rando == 6)
-				descript += "prick";
-			if (rando == 7)
-				descript += "pecker";
-			if (rando > 7)
-				descript += "shaft";
-			
-			return descript;
+			return Appearance.cockDescript(this,cockIndex);
 		}
 		
 		
@@ -3979,12 +3949,22 @@ package classes
 
 		public function multiCockDescriptLight():String
 		{
-			return Appearance.cockMultiLDescriptionShort(this);
+			return Appearance.multiCockDescriptLight(this);
+		}
+
+		public function multiCockDescript():String
+		{
+			return Appearance.multiCockDescript(this);
 		}
 
 		public function ballsDescriptLight(forcedSize:Boolean = true):String
 		{
 			return Appearance.ballsDescription(forcedSize, true, this);
+		}
+
+		public function sackDescript():String
+		{
+			return Appearance.sackDescript(this);
 		}
 
 		public function breastDescript(rowNum:int):String

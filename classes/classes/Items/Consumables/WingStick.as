@@ -6,7 +6,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Player;
 
-	public class WingStick extends SimpleConsumable
+	public final class WingStick extends SimpleConsumable
 	{
 
 

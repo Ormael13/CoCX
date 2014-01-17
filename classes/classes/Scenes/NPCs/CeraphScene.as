@@ -5,6 +5,7 @@ package classes.Scenes.NPCs
 {
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class CeraphScene extends NPCAwareContent
 	{
@@ -660,8 +661,8 @@ package classes.Scenes.NPCs
 				}
 				var cunting:Function =null;
 				if (player.hasVagina()) cunting = rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				var bikiniTits:int = 0;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+				var bikiniTits:Function = null;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "B.Titfuck", bikiniTits, "Leave", leave);
 				/*
@@ -910,7 +911,7 @@ package classes.Scenes.NPCs
 			var armor:Function =null;
 			outputText("Ceraph looks you up and down like an appraiser examining an antique, never stopping her languid masturbation.  You stand there, hands on your hips, waiting for her to finish while you try not to stare too long at her beading pre-cum or dripping twat-juice.\n\n", false);
 			//(BIMBO LIQUER) 
-			if (hasItem("BimboLq", 1)) {
+			if (player.hasItem(consumables.BIMBOLQ)) {
 				outputText("She finishes and smiles widely.  \"<i>Is that bimbo liqueur?  That stuff is so hard to find, even for a demon like me.  I tell you what, I'll release you from ", false);
 				if (flags[kFLAGS.PC_FETISH] > 1) outputText("all the fetishes", false);
 				else outputText("the fetish", false);
@@ -947,13 +948,12 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			spriteSelect(7);
 			outputText("Ceraph smiles knowingly at your response.  \"<i>You'll find this to be quite sexy.  Just be careful putting it on.  If you don't fit it right it'll pinch,</i>\" the demoness instructs while tossing you a set of armor.\n\n", false);
-			//(Get trapped armor and go home)
-			shortName = "SeductA";
 			//Pass time
 			menuLoc = 2;
 			//just in case...
 			doNext(13);
-			takeItem();
+			//(Get trapped armor and go home)
+			inventory.takeItem(armors.SEDUCTIVE_ARMOR);
 		}
 
 //[Trade Bimbo Liquer]
@@ -964,7 +964,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph grins as wide as the Cheshire Cat, groaning with happiness as she pulls her dripping tail from her snatch.  The pungent scent of her lusty, tainted puss hangs in the air while her tail extends towards you, looping around the liquer's top and pulling it from your pouch.  Ceraph plucks the bottle from her lust-drenched tail with great care and undoes the top.  She gives the liquer a tiny sniff, but it rocks her back on her heels all the same.  The demon starts giggling as she corks it, smiling with a slightly dopy look.  \"<i>Wheeeeeewww... heheheheee.. that stuff has got some kick!</i>\"\n\n", false);
 
 			outputText("You mention the deal and she glares back at you in irritation.  Her beautiful features curl with anger, a hand coming out of nowhere to slap you squarely on the side of the temple.  \"<i>Don't interrupt me, pet.</i>\"  Ears ringing, you stagger back, clutching at your head in surprise.  By the time you glare back at her, she's walking away.  You briefly consider giving her payback, but you realize your head feels clearer, more normal.  The artificial fetishes are gone!  While you catalogue lewd acts in your head and marvel at how little they affect you, Ceraph makes good on her escape.", false);
-			consumeItem("BimboLq", 1);
+			player.consumeItem(consumables.BIMBOLQ);
 			player.takeDamage(4);
 			flags[kFLAGS.PC_FETISH] = 0;
 			dynStats("lus", -20);

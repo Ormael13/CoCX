@@ -18,10 +18,10 @@ package classes.Items.Weapons
 		}
 
 
-		override public function canEquip(player:Player, printReason:Boolean):Boolean
+		override public function canEquip(player:Player, output:Boolean):Boolean
 		{
 			if (player.cor >= 35) {
-				if (printReason) {
+				if (output) {
 					clearOutput();
 					outputText("You grab hold of the handle of the sword only to have it grow burning hot.  You're forced to let it go lest you burn yourself.  Something within the sword must be displeased.  ");
 				}

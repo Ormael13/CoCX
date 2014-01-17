@@ -854,7 +854,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("Finally breaking the kiss, Cotton reaches down and hooks her arms under both your legs. You quickly wrap your arms around her neck as she lifts you off the ground. You carefully grip her with your legs as she uses one arm to position her dick at your waiting entrance. You give her a kiss just as she presses into you, and moan into her mouth. She gives a couple careful thrusts before her free hand returns to holding you.\n\n", false);
 		
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite.", false);
-		buttChange(72,true,true,false);
+		player.buttChange(72,true,true,false);
 		outputText("  You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 	
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. Only now you notice your flaccid cock also came at some point, covering both your bodies in seed. You share a deep kiss again and wash each other up before redressing and leaving the gym.\n\n", false);
@@ -865,7 +865,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("You decide to take her up on her offer, and she pulls you towards the showers, quickly disrobing the both of you. She turns only one shower-head on and pulls you into an embrace underneath the rapidly heating stream. Cotton's cock stirs between you, and your " + vaginaDescript() + " burns with anticipation.\n\n", false);
 
 		outputText("Finally breaking the kiss, Cotton reaches down and hooks her arms under both your legs. You quickly wrap your arms around her neck as she lifts you off the ground. You carefully grip her with your legs as she uses one arm to position her dick at your waiting entrance. You give her a kiss just as she presses into you, and moan into her mouth. She gives a couple careful thrusts before her free hand returns to holding you.", false);
-		cuntChange(72,true,true,false);
+		player.cuntChange(72,true,true,false);
 		outputText("\n\n", false);
 
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite. You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
@@ -1019,7 +1019,7 @@ public function cottonTantricSex():void {
 	outputText("She leads you to a private room in the gym and sets up a larger mat. She disrobes and you do the same. She sits on the mat and you sit opposite her. You spend a couple minutes just breathing, exploring your partner's body with your eyes only. Then Cotton slips her legs outwards, and leans backwards, letting her enormous member to waggle freely in the air. She curls a finger at you, and gives you your instructions.\n\n", false);
 
 	outputText("You stand and straddle her hips, facing her, carefully lowering yourself down onto her length. You take your time, matching your breathing with hers, until you're completely impaled. Then you stretch your legs out behind your partner and also lean back. You both gyrate your hips as your bodies glisten with a light sheen of sweat.", false);
-	buttChange(72,true,true,false);
+	player.buttChange(72,true,true,false);
 	outputText("\n\n", false);
 
 	outputText("After several minutes of this you switch positions, with Cotton leaning forward and grabbing you under the waist while you curl your legs under you. Then Cotton pulls herself up into a kneeling position while still inside you, pushing your head and shoulders down onto the mat and your legs up into the ceiling. Several more positions later, your breathing is a little ragged but still in sync, and it's clear neither of you can take much more of this.\n\n", false);
