@@ -2723,7 +2723,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
 	//If orgasm, set hours since cum to 0.
-	if(lust2 <= -100) player.hoursSinceCum = 0;
+	if(lust2 <= 0) player.resetDickEjaculateTimer();
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;
 	if(libi > 0 && player.hasPerk("Purity Blessing") >= 0) libi *= 0.75;
