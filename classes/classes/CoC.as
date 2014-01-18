@@ -132,6 +132,7 @@
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
+		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();

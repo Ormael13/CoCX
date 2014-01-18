@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 05.01.14.
  */
 package classes.Scenes
@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Monsters.GoblinAssassinScene;
 
 	public class Exploration extends BaseContent
 	{
@@ -158,6 +159,11 @@ package classes.Scenes
 					}
 					//Encounter Gobbalin!
 					else {
+						//50% of the time, goblin assassin!
+						if (player.level >= 10 && rand(2) == 0) {
+							kGAMECLASS.goblinAssassinScene.goblingoblinAssassinEncounter();
+							return;
+						}
 						if (player.gender > 0) {
 							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
 							outputText(".</i>\"", false);

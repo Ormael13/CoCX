@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 06.01.14.
  */
 package classes.Scenes.Areas
@@ -10,6 +10,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Monsters.GoblinAssassinScene;
 	import classes.Scenes.NPCs.Jojo;
 
 	use namespace kGAMECLASS;
@@ -254,6 +255,11 @@ package classes.Scenes.Areas
 						}
 						else
 							tamaniScene.encounterTamani();
+						return;
+					}
+					//50% of the time, goblin assassin!
+					if (player.level >= 10 && rand(2) == 0) {
+						kGAMECLASS.goblinAssassinScene.goblingoblinAssassinEncounter();
 						return;
 					}
 					if (player.gender > 0) {
