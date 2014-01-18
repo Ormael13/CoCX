@@ -6,7 +6,7 @@
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.Scenes.Areas.Forest.Tamani;
-
+	import classes.Scenes.Monsters.GoblinAssassinScene;
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -82,7 +82,7 @@
 			combatRoundOver();
 		}
 		//Dual Shot
-		protection function dualShot():void {
+		protected function dualShot():void {
 			output("The assassin throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for her to slip underneath you. With a quick flick of her wrists two needles are placed into her hands, though you’ve already caught wind of her movements.");
 			//Miss: 
 			if (combatMiss() || combatEvade() || combatMisdirect() || combatFlexibility()) 

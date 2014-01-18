@@ -7,10 +7,11 @@ package classes.Scenes.Monsters
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
+	
 
-	public class goblinAssassinScene extends BaseContent
+	public class GoblinAssassinScene extends BaseContent
 	{
-		public function goblinAssassinScene()
+		public function GoblinAssassinScene()
 		{
 		}
 

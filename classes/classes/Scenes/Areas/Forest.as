@@ -259,7 +259,7 @@ package classes.Scenes.Areas
 					}
 					//50% of the time, goblin assassin!
 					if (player.level >= 10 && rand(2) == 0) {
-						kGAMECLASS.goblinAssassinScene.goblingoblinAssassinEncounter();
+						GoblinAssassinScene.goblingoblinAssassinEncounter();
 						return;
 					}
 					if (player.gender > 0) {
