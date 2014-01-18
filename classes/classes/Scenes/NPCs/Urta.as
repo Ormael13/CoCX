@@ -257,7 +257,7 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//HERE WE GOEZ!
-	if(((player.hasStatusAffect("rut") >= 0 && player.hasCock()) || (player.hasStatusAffect("heat") >= 0 && player.hasVagina() )))
+	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 && ((player.hasStatusAffect("rut") >= 0 && player.hasCock()) || (player.hasStatusAffect("heat") >= 0 && player.hasVagina() )))
 	{
 
 		if(urtaDrunk()) urtaHeatRut.approachDrunkenUrta();

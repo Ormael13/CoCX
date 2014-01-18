@@ -365,7 +365,7 @@ private function soberUrtaSatingPCHeat():void {
 	outputText("\n\nAfter a while, her shots get smaller, starting to become similar to what a normal male would ejaculate with until, finally, she is only dribbling her seed out into you.  Urta sets your feet back onto the ground and starts to pull out.  You feel the skin at the base of her cock leave you, followed by her shaft, but your pussy suddenly clenches, apparently wanting to keep the intruder inside.");
 
 	outputText("\n\n\"<i>What?  ");
-	if(!urtaLove()) outputText("You're still not satisfied?");
+	if(!urtaLove()) outputText("You're still not satisfied?</i>\"");
 	else outputText("You want to keep going, darling?  I want to make you satisfied, so I'll spare all the time I can!</i>\"");
 
 	outputText("\n\nYou slowly nod and express the desire to continue.  Urta pulls the rest of her member out of you with a loud squelch, her warm seed running down your [hips], your belly slightly receding.  She motions for you to turn away from her and you get the message, sticking your [butt] out.  The vixen grabs you by your [hips] and brings her semi-erect, but slowly hardening member back to the entrance of your hole.  With a thrust, her tip is once again inside your [vagina], and you push your hips back against her, devouring inch after inch of her member with your greedy breeding hole.");
