@@ -2665,7 +2665,7 @@ public function takeItem():void {
 				"", 0, 
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 1072);
+				"Abandon", telAdre.tailorShoppe);
 	}
 	//Armor
 	else if (menuLoc == 9) 
