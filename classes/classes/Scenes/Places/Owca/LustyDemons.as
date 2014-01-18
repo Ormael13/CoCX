@@ -14,11 +14,11 @@ package classes.Scenes.Places.Owca
 		override protected function performCombatAction():void
 		{
 			str = 40;
-			weaponAttack = 10;
+			setWeaponAttack(10);
 			createStatusAffect("attacks", 4, 0, 0, 0);
 			eAttack();
 			str = 80;
-			weaponAttack = 40;
+			setWeaponAttack(40);
 			eAttack();
 			combatRoundOver();
 		}

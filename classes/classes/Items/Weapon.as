@@ -3,6 +3,7 @@
  */
 package classes.Items
 {
+	import classes.ItemType;
 	import classes.Player;
 
 	public class Weapon extends Equipable
@@ -10,30 +11,40 @@ package classes.Items
 		private var _verb:String;
 		private var _attack:Number;
 		private var _perk:String;
+		private var _name:String;
 
 		override public function equip(player:Player, output:Boolean):void
 		{
-			if (canEquip(player,output)){
-				player.weapon.unequip(output);
+			if (output) clearOutput();
+			if (canConsume(player,output)){
+				var oldWeapon:Weapon = player.weapon;
 				player.setWeaponHiddenField(this);
 				if (output) {
-					clearOutput();
 					outputText("You equip your " + longName + ".  ");
 				}
+				oldWeapon.unequip(player,output);
 				equipped(player,output);
 			}
 		}
 
 
-		override public function unequip(output:Boolean):void
+		override public function unequip(player:Player,output:Boolean):void
 		{
-			wearer.weapon = WeaponLib.FISTS;
-			unequipped(output);
+			var itype:ItemType = unequipReturnItem(player,output);
+			if (itype != null){
+				if (output && itype == this)
+					outputText("You still have " + itype.longName + " left over.  ");
+				game.itemSwapping = true;
+				game.inventory.takeItem(this);
+			}
+			player.setWeaponHiddenField(WeaponLib.FISTS);
+			unequipped(player,output);
 		}
 
-		public function Weapon(id:String, shortName:String, longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "")
+		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "")
 		{
 			super(id, shortName, longName, value, description);
+			this._name = name;
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
@@ -53,6 +64,11 @@ package classes.Items
 		public function get perk():String
 		{
 			return _perk;
+		}
+
+		public function get name():String
+		{
+			return _name;
 		}
 	}
 }

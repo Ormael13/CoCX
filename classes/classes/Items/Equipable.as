@@ -4,6 +4,8 @@
 package classes.Items
 {
 	import classes.CoC_Settings;
+	import classes.ItemType;
+	import classes.Items.Armors.GooArmor;
 	import classes.Player;
 
 	/**
@@ -14,18 +16,12 @@ package classes.Items
 	 */
 	public class Equipable extends Consumable
 	{
-		private var _wearer:Player = null;
-
-		public function get wearer():Player
-		{
-			return _wearer;
-		}
 
 		/**
 		 * Called on attempt to equip item.
 		 * @param output Print "equipping" scene to output
 		 */
-		public function canEquip(player:Player,output:Boolean):Boolean
+		override public function canConsume(player:Player,output:Boolean):Boolean
 		{
 			return true;
 		}
@@ -48,14 +44,12 @@ package classes.Items
 
 		protected final function equipped(player:Player,output:Boolean):void
 		{
-			_wearer = player;
 			equipEffect(player,output);
 		}
 
-		protected final function unequipped(output:Boolean):void
+		protected final function unequipped(player:Player,output:Boolean):void
 		{
-			unequipEffect(_wearer,output);
-			_wearer = null;
+			unequipEffect(player,output);
 		}
 
 		public function equip(player:Player,output:Boolean):void
@@ -63,19 +57,28 @@ package classes.Items
 			CoC_Settings.errorAMC("Equipable", "equip", id);
 		}
 
-		public function unequip(output:Boolean):void
+		public function unequip(player:Player,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}
 
 		override public function doEffect(player:Player):void
 		{
+			if (game.debug && !(this is GooArmor)){
+				clearOutput();
+				outputText("You cannot equip anything in debug mode.  Please restart the game in normal mode to equip items.");
+			}
 			equip(player,true);
 		}
 
 		public function Equipable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null)
 		{
 			super(id, shortName, longName, value, description);
+		}
+
+		protected function unequipReturnItem(player:Player,output:Boolean):ItemType
+		{
+			return this;
 		}
 	}
 }

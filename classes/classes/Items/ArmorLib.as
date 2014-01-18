@@ -11,43 +11,57 @@ package classes.Items
 
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 
-		public const ADVENTURERS_OUTFIT:Armor = mk("AdvClth","a green adventurer's outfit, complete with pointed cap",2,200,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
-		public const BALLROOM_DRESS:Armor = mk("B.Dress","a ballroom dress patterned with sequins",0,1200,"A long ballroom dress patterned with sequins.  Perfect for important occassions.","Medium");
-		public const BEE_ARMOR:Armor = mk("BeeArmr","a set of chitinous armor",18,200,"A suit of armor cleverly fashioned from giant bee chitin.");
-		public const BIMBO_SKIRT:Armor = mk("BimboSk","a skirt that looks like it belongs on a bimbo",1,50,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light");
-		public const BONDAGE_STRAPS:Armor = mk("BonStrp","a set of bondage straps",0,600,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light");
-		public const COMFORTABLE_CLOTHES:Armor = mk("C.Cloth","a set of comfortable clothes",0,0,"These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)","Light");
-		public const CHAINMAIL_BIKINI:Armor = mk("ChBikni","a chainmail bikini",2,700,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light");
-		public const CLASSY_SUIT:Armor = mk("ClssyCl","a set of classy suit-clothes",1,400,"A set of classy suitclothes.","Light");
-		public const FULL_CHAINMAIL:Armor = mk("FullChn","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
-		public const FULL_PLATEMAIL:Armor = mk("FullPlt","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.");
-		public const FUR_LOINCLOTH:Armor = new FurLoincloth();
-		public const GEL_ARMOR:Armor = mk("GelArmr","a suit of gel armor",10,150,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)");
-		public const GOO_ARMOR:GooArmor = new GooArmor();
-		public const INQUISITORS_CORSET:InquisitorsCorset = new InquisitorsCorset();
-		public const INQUISITORS_ROBES:InquisitorsRobes = new InquisitorsRobes();
-		public const INDECENT_STEEL_ARMOR:Armor = mk("IndecSt","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium");
-		public const LEATHER_ARMOR:Armor = mk("LeathrA","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)","Light");
-		public const LEATHER_ARMOR_SEGMENTS:Armor = mk("UrtaLta","leather armor segments",5,76,null,"Light");
-		public const LUSTY_MAIDENS_ARMOR:LustyMaidensArmor = new LustyMaidensArmor();
-		public const LEATHER_PANTS:Armor = mk("LthrPnt","a pair of leather pants and a white silk shirt",0,450,"A flowing silk shirt and tight black leather pants.  Suave!","Light");
-		public const LEATHER_ARMOR_WITH_ROBES:Armor = mk("LthrRob","a suit of black leather armor with voluminous robes",6,100,"This is a suit of flexible leather armor with a voluminous set of concealing black robes.","Light");
-		public const MODEST_ROBES:Armor = mk("M.Robes","a set of modest robes",0,120,"A set of modest robes, not dissimilar from what the monks back home would wear.","Light");
-		public const NURSES_OUTFIT:Armor = mk("NurseCl","a nurse's outfit",0,800,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.","Light");
-		public const OVERALLS:Armor = mk("Overall","a white shirt and overalls",0,60,"A simple white shirt and overalls.","Light");
-		public const RED_BODYSUIT:Armor = mk("R.BdySt","a red bodysuit for high society",1,1200,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light");
-		public const RUBBER_FETISH_CLOTHES:Armor = mk("RbbrClt","a set of revealing rubber fetish clothes",3,1000,"A revealing set of fetish-wear.  Upgrades tease attack to seduce.","Light");
-		public const SKIMPY_BLACK_BIKINI:Armor = mk("S.Swmwr","a skimpy black bikini",0,DEFAULT_VALUE,"An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.","Light");
-		public const SCALE_MAIL:Armor = mk("ScaleMl","a set of scale-mail armor",12,170,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.");
-		public const SEDUCTIVE_ARMOR:SeductiveArmor = new SeductiveArmor();
-		public const SPIDERSILK_ROBES:SpiderSilkRobes = new SpiderSilkRobes();
-		public const SPIDERSILK_ARMOR:Armor = mk("SSArmor","a suit of spider-silk armor",25,950,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.");
-		public const SEMITRANSPARENT_BODYSUIT:Armor = mk("T.BSuit","a semi-transparent, curve-hugging bodysuit",0,1300,"A semi-transparent bodysuit.","Light");
-		public const TUBE_TOP:Armor = mk("TubeTop","a snug tube top and VERY short shorts",0,80,"A clingy tube top and VERY short shorts.","Light");
-		public const WIZARDS_ROBES:Armor = mk("W.Robes","a wizard's robes",1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light");
+		public const ADVCLTH:Armor = mk("AdvClth","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,200,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
+		public const B_DRESS:Armor = mk("B.Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,1200,"A long ballroom dress patterned with sequins.  Perfect for important occassions.","Medium");
+		public const BEEARMR:Armor = mk("BeeArmr","sexy black chitin armor-plating","a set of chitinous armor",18,200,"A suit of armor cleverly fashioned from giant bee chitin.");
+		public const BIMBOSK:ArmorWithPerk = mk2("BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,50,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
+				"Slutty Seduction",10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!");
+		public const BONSTRP:ArmorWithPerk = mk2("BonStrp","barely-decent bondage straps","a set of bondage straps",0,600,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",
+				"Slutty Seduction",10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.");
+		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
+		public const CHBIKNI:ArmorWithPerk = mk2("ChBikni","revealing chainmal bikini","a chainmail bikini",2,700,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light",
+				"Slutty Seduction",5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const CLSSYCL:Armor = mk("ClssyCl","classy suitclothes","a set of classy suit-clothes",1,400,"A set of classy suitclothes.","Light");
+		public const FULLCHN:Armor = mk("FullChn","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
+		public const FULLPLT:Armor = mk("FullPlt","full platemail","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.");
+		public const FURLOIN:Armor = new FurLoincloth();
+		public const GELARMR:Armor = mk("GelArmr","glistening gel-armor plates","a suit of gel armor",10,150,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)");
+		public const GOOARMR:GooArmor = new GooArmor();
+		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
+		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
+		public const INDEC_ST:ArmorWithPerk = mk2("IndecSt","practically indecent steel armor","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
+				"Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const LEATHRA:Armor = mk("LeathrA","leather armor segments","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)","Light");
+		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
+		public const LMARMOR:LustyMaidensArmor = new LustyMaidensArmor();
+		public const LTHRPNT:Armor = mk("LthrPnt","white silk shirt and tight leather pants","a pair of leather pants and a white silk shirt",0,450,"A flowing silk shirt and tight black leather pants.  Suave!","Light");
+		public const LTHRROB:Armor = mk("LthrRob","black leather armor surrounded by voluminous robes","a suit of black leather armor with voluminous robes",6,100,"This is a suit of flexible leather armor with a voluminous set of concealing black robes.","Light");
+		public const M_ROBES:Armor = mk("M.Robes","modest robes","a set of modest robes",0,120,"A set of modest robes, not dissimilar from what the monks back home would wear.","Light");
+		public const NURSECL:ArmorWithPerk = mk2("NurseCl","skimpy nurse's outfit","a nurse's outfit",0,800,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.","Light",
+				"Slutty Seduction",8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
+		public const OVERALL:Armor = mk("Overall","white shirt and overalls","a white shirt and overalls",0,60,"A simple white shirt and overalls.","Light");
+		public const R_BDYST:Armor = mk("R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,1200,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light");
+		public const RBBRCLT:ArmorWithPerk = mk2("RbbrClt","rubber fetish clothes","a set of revealing rubber fetish clothes",3,1000,"A revealing set of fetish-wear.  Upgrades tease attack to seduce.","Light",
+				"Slutty Seduction",8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
+		public const SCALEML:Armor = mk("ScaleMl","scale-mail armor","a set of scale-mail armor",12,170,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.");
+		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
+		public const SS_ROBE:ArmorWithPerk = mk2("SS.Robe","spider-silk robes","a spider-silk robes",6,950,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.","Light",
+				"Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
+		public const SSARMOR:Armor = mk("SSArmor","spider-silk armor","a suit of spider-silk armor",25,950,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.");
+		public const T_BSUIT:ArmorWithPerk = mk2("T.BSuit","semi-transparent bodysuit","a semi-transparent, curve-hugging bodysuit",0,1300,"A semi-transparent bodysuit.","Light",
+				"Slutty Seduction",7,0,0,0,"Your clingy transparent bodysuit allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const TUBETOP:Armor = mk("TubeTop","tube top and short shorts","a snug tube top and VERY short shorts",0,80,"A clingy tube top and VERY short shorts.","Light");
+		public const W_ROBES:ArmorWithPerk = mk2("W.Robes","wizard's robes","a wizard's robes",1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
+				"Wizard's Endurance",25,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
 
-		private static function mk(id:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
-			return new Armor(id,id,longName,def,value,description,perk);
+		private static function mk(id:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
+			return new Armor(id,id,name,longName,def,value,description,perk);
+		}
+		private static function mk2(id:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String,
+				playerPerkName:String,playerPerkV1:Number,playerPerkV2:Number,playerPerkV3:Number,playerPerkV4:Number,playerPerkDesc:String):ArmorWithPerk{
+			return new ArmorWithPerk(id,id,name,longName,def,value,description,perk,
+					playerPerkName,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4,playerPerkDesc);
 		}
 		public function ArmorLib()
 		{

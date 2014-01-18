@@ -287,7 +287,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 785) {
 				//outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>", false);
-				mutations.neonPinkEgg(true);
+				mutations.neonPinkEgg(player,true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -297,7 +297,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 765) {
 				//outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>", false);
-				mutations.neonPinkEgg(true);
+				mutations.neonPinkEgg(player,true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -1218,7 +1218,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.buttPregnancyIncubation == 785) {
-				mutations.neonPinkEgg(true);
+				mutations.neonPinkEgg(player,true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}
@@ -1227,7 +1227,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.buttPregnancyIncubation == 765) {
-				mutations.neonPinkEgg(true);
+				mutations.neonPinkEgg(player,true);
 				outputText("\n", false);
 				displayedUpdate = true;
 			}

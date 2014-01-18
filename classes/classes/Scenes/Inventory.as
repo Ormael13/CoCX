@@ -12,7 +12,6 @@ package classes.Scenes
 	import classes.Items.Armor;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
-	import classes.Player;
 
 	use namespace kGAMECLASS;
 
@@ -102,8 +101,8 @@ public function doItems(eventNo:Number):void {
 			return;
 		}
 		outputText("\nWhich item will you use?", false);		
-		if(gameState == 1) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 5000);
-		else choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
+		if(gameState == 1) choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 5000);
+		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
 		menuLoc = 1;
 	}
 	//Auburn Dyes
@@ -482,34 +481,34 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1065) {
 		spriteSelect(47);
 		outputText("\n\n<b><u>Oswald's Estimates</u></b>", false);
-		if(itemSlot1.quantity > 0 && itemSlot1.value > 1) {
-			outputText("\n" + int(itemSlot1.value/2) + " gems for " + itemSlot1.longName + ".", false);
+		if(itemSlot1.quantity > 0 && itemSlot1.itype.value > 1) {
+			outputText("\n" + int(itemSlot1.itype.value/2) + " gems for " + itemSlot1.itype.longName + ".", false);
 			temp1 = 1066;
 		}
-		if(itemSlot2.quantity > 0 && itemSlot2.value > 1) {
-			outputText("\n" + int(itemSlot2.value/2) + " gems for " + itemSlot2.longName + ".", false);
+		if(itemSlot2.quantity > 0 && itemSlot2.itype.value > 1) {
+			outputText("\n" + int(itemSlot2.itype.value/2) + " gems for " + itemSlot2.itype.longName + ".", false);
 			temp2 = 1067;
 		}
-		if(itemSlot3.quantity > 0 && itemSlot3.value > 1) {
-			outputText("\n" + int(itemSlot3.value/2) + " gems for " + itemSlot3.longName + ".", false);
+		if(itemSlot3.quantity > 0 && itemSlot3.itype.value > 1) {
+			outputText("\n" + int(itemSlot3.itype.value/2) + " gems for " + itemSlot3.itype.longName + ".", false);
 			temp3 = 1068;
 		}
-		if(itemSlot4.quantity > 0 && itemSlot4.value > 1) {
+		if(itemSlot4.quantity > 0 && itemSlot4.itype.value > 1) {
 			temp4 = 1069;
-			outputText("\n" + int(itemSlot4.value/2) + " gems for " + itemSlot4.longName + ".", false);
+			outputText("\n" + int(itemSlot4.itype.value/2) + " gems for " + itemSlot4.itype.longName + ".", false);
 		}
-		if(itemSlot5.quantity > 0 && itemSlot5.value > 1) {
+		if(itemSlot5.quantity > 0 && itemSlot5.itype.value > 1) {
 			temp5 = 1070;
-			outputText("\n" + int(itemSlot5.value/2) + " gems for " + itemSlot5.longName + ".", false);
+			outputText("\n" + int(itemSlot5.itype.value/2) + " gems for " + itemSlot5.itype.longName + ".", false);
 		}
 		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) 
 			kath = kGAMECLASS.telAdre.katherine.visitKatherine;
 
-		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1,
-				(itemSlot2.shortName + " x" + itemSlot2.quantity), temp2,
-				(itemSlot3.shortName + " x" + itemSlot3.quantity), temp3,
-				(itemSlot4.shortName + " x" + itemSlot4.quantity), temp4,
-				(itemSlot5.shortName + " x" + itemSlot5.quantity), temp5,
+		choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1,
+				(itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2,
+				(itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3,
+				(itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4,
+				(itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5,
 				"Kath's Alley", kath, 
 				"", 0, 
 				"", 0, 
@@ -698,7 +697,7 @@ public function doItems(eventNo:Number):void {
 
 		private function useItem(itype:ItemType):void
 		{
-			(itype as Useable).useItem(player);
+			(itype as Useable).useItem(player,true);
 			if (!itemSwapping && !itemSubMenu) itemGoNext();
 			itemSwapping = false;
 		}
@@ -706,9 +705,9 @@ public function doItems(eventNo:Number):void {
 		private function useItemInInventory(slotTmp:ItemSlotClass):void
 		{
 			if (slotTmp.itype is Useable) {
-				(slotTmp.itype as Useable).useItem(player);
+				(slotTmp.itype as Useable).useItem(player,true);
 			} else {
-				outputText("You cannot use " + slotTmp.longName + "!\n\n", true);
+				outputText("You cannot use " + slotTmp.itype.longName + "!\n\n", true);
 			}
 			if (!itemSubMenu && !itemSwapping) {
 				if (!inCombat())
@@ -973,11 +972,11 @@ public function doItems(eventNo:Number):void {
 			{
 				abandon = kGAMECLASS.telAdre.bakeryScene.ingredientsMenu;
 			}
-			choices((itemSlot1.shortName + " x" + itemSlot1.quantity), createCallBackFunction2(replaceItem,itype,itemSlot1),
-					(itemSlot2.shortName + " x" + itemSlot2.quantity), createCallBackFunction2(replaceItem,itype,itemSlot2),
-					(itemSlot3.shortName + " x" + itemSlot3.quantity), createCallBackFunction2(replaceItem,itype,itemSlot3),
-					(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4,
-					(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5,
+			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), createCallBackFunction2(replaceItem,itype,itemSlot1),
+					(itemSlot2.itype.shortName + " x" + itemSlot2.quantity), createCallBackFunction2(replaceItem,itype,itemSlot2),
+					(itemSlot3.itype.shortName + " x" + itemSlot3.quantity), createCallBackFunction2(replaceItem,itype,itemSlot3),
+					(itemSlot4.itype.shortName + " x" + itemSlot4.quantity), slot4,
+					(itemSlot5.itype.shortName + " x" + itemSlot5.quantity), slot5,
 					"", 0,
 					"", 0,
 					"", 0,
@@ -1012,7 +1011,7 @@ public function doItems(eventNo:Number):void {
 			if(itemSlot4.unlocked && itemSlot4.quantity > 0) temp4 = 1026;
 			if(itemSlot5.unlocked && itemSlot5.quantity > 0) temp5 = 1027;
 			outputText("What item slot do you wish to empty into your storage containers?", true);
-			choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 			menuLoc = 7;
 		}
 		//Retrieval List - lets you select the correct slot
@@ -1042,7 +1041,7 @@ public function doItems(eventNo:Number):void {
 					if(temp == 5) temp6 = 1035;
 					if(temp == 6) temp7 = 1036;
 					if(temp == 7) temp8 = 1037;
-					slotDescs[temp] = (itemStorage[temp].shortName + " x" + itemStorage[temp].quantity);
+					slotDescs[temp] = (itemStorage[temp].itype.shortName + " x" + itemStorage[temp].quantity);
 				}
 			}
 			hideUpDown();
@@ -1086,7 +1085,6 @@ public function doItems(eventNo:Number):void {
 				temp--;
 				if(itemStorage[temp].itype == itype && itemStorage[temp].quantity > 0) {
 					itemStorage[temp].quantity--;
-					if(itemStorage[temp].quantity <= 0) itemStorage[temp].shortName = "";
 					return true;
 				}
 			}
@@ -1138,7 +1136,7 @@ public function doItems(eventNo:Number):void {
 			while(currentStorageSlotIndex < itemStorage.length && qty > 0)
 			{
 				//If there is a slot with the item and room
-				if(itemStorage[currentStorageSlotIndex].shortName == itype && itemStorage[currentStorageSlotIndex].quantity < 5)
+				if(itemStorage[currentStorageSlotIndex].itype == itype && itemStorage[currentStorageSlotIndex].quantity < 5)
 				{
 					//storedItems is used for counting items placed in a slot.
 					storedItems = 0;
@@ -1158,7 +1156,7 @@ public function doItems(eventNo:Number):void {
 			//check if a suitable slot is found.  If so, load in, and quit out.
 			while(currentStorageSlotIndex < itemStorage.length && qty > 0)
 			{
-				if(itemStorage[currentStorageSlotIndex].quantity == 0 && itemStorage[currentStorageSlotIndex].shortName == "")
+				if(itemStorage[currentStorageSlotIndex].isEmpty())
 				{
 					itemStorage[currentStorageSlotIndex].placeItemWQuantity(qty, itype);
 					outputText("You place " + qty + "x " + itype.shortName + " into storage slot " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
@@ -1233,7 +1231,7 @@ public function doItems(eventNo:Number):void {
 			//until out of items to place
 			while(temp < goal && qty > 0) {
 				//If there is a slot with the item and room
-				if(gearStorage[temp].shortName == itype && gearStorage[temp].quantity < 5) {
+				if(gearStorage[temp].itype == itype && gearStorage[temp].quantity < 5) {
 					//temp2 is used for counting items placed in a slot.
 					temp2 = 0;
 					//Place items in 1 at a time until out of room or items
@@ -1257,7 +1255,7 @@ public function doItems(eventNo:Number):void {
 			}
 			//check if a suitable slot is found.  If so, load in, and quit out.
 			while(temp < goal && qty > 0) {
-				if(gearStorage[temp].quantity == 0 && gearStorage[temp].shortName == "") {
+				if(gearStorage[temp].quantity == 0) {
 					gearStorage[temp].quantity = qty;
 					gearStorage[temp].shortName = itype;
 					outputText("You place " + qty + "x " + itype.shortName + " into storage slot ", false);
@@ -1362,8 +1360,8 @@ public function doItems(eventNo:Number):void {
 					if(temp == 6 || temp == 15) temp7 = 1098 + bonus;
 					if(temp == 7 || temp == 16) temp8 = 1099 + bonus;
 					if(temp == 8 || temp == 17) temp9 = 1100 + bonus;
-					if(!armor) slotDescs[temp] = (gearStorage[temp].shortName + " x" + gearStorage[temp].quantity);
-					else slotDescs[(temp-9)] = (gearStorage[temp].shortName + " x" + gearStorage[temp].quantity);
+					if(!armor) slotDescs[temp] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
+					else slotDescs[(temp-9)] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
 				}
 			}
 			hideUpDown();
@@ -1407,7 +1405,7 @@ public function doItems(eventNo:Number):void {
 			else outputText("armor rack", false);
 			outputText("?", false);
 			if(temp1 + temp2 + temp3 + temp4 + temp5 == 0) outputText("\n<b>You have no appropriate items to put in this rack.</b>", false);
-			choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 			if(!armor) menuLoc = 20;
 			else menuLoc = 22;
 		}

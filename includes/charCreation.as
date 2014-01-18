@@ -156,7 +156,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	}
 	//Clothes clear
 	else {
-		player.armor = armors.COMFORTABLE_CLOTHES;
+		player.armor = armors.C_CLOTH;
 		player.weapon = WeaponLib.FISTS;
 	}
 	//Clear plot storage array!

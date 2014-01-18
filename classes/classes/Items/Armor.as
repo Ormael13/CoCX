@@ -3,38 +3,46 @@
  */
 package classes.Items
 {
+	import classes.ItemType;
 	import classes.Player;
 
 	public class Armor extends Equipable
 	{
 		private var _def:Number;
 		private var _perk:String;
-
+		private var _name:String;
 
 		override public function equip(player:Player, output:Boolean):void
 		{
-			if (canEquip(player, true)) {
-				player.armor.unequip(output);
+			clearOutput();
+			if (canConsume(player, true)) {
 				player.setArmorHiddenField(this);
-				if (output){
-					clearOutput();
-					if(output) outputText("You equip your " + player.armorName + ".  ");
-				}
+				if(output) outputText("You equip your " + player.armorName + ".  ");
+				var oldArmor:Armor = player.armor;
+				oldArmor.unequip(player,output);
 				equipped(player,output);
 			}
 		}
 
-		override public function unequip(output:Boolean):void
+		override public function unequip(player:Player,output:Boolean):void
 		{
-			while(wearer.hasPerk("Bulge Armor") >= 0) wearer.removePerk("Bulge Armor");// TODO remove this Exgartuan hack
-			if(_perk != "") wearer.removePerk(_perk);
-			wearer.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			unequipped(output);
+			while(player.hasPerk("Bulge Armor") >= 0) player.removePerk("Bulge Armor");// TODO remove this Exgartuan hack
+			if(_perk != "") player.removePerk(_perk);
+			var itype:ItemType = unequipReturnItem(player,output);
+			if (itype != null){
+				game.itemSwapping = true;
+				if (output && itype == this)
+					outputText("You have your old set of " + longName + " left over.  ");
+				game.inventory.takeItem(this);
+			}
+			player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+			unequipped(player,output);
 		}
 
-		public function Armor(id:String, shortName:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "")
+		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "")
 		{
 			super(id, shortName, longName, value, description);
+			this._name = name;
 			this._def = def;
 			this._perk = perk;
 		}
@@ -47,6 +55,11 @@ package classes.Items
 		public function get perk():String
 		{
 			return _perk;
+		}
+
+		public function get name():String
+		{
+			return _name;
 		}
 	}
 }

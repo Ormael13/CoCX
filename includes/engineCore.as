@@ -1433,15 +1433,6 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 	trace(logStr)
 }
 
-// curryFunction(f,args1)(args2)=f(args1.concat(args2))
-// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
-public function curry(func:Function,...args):Function
-{
-	if (func == null) CoC_Settings.error("carryFunction(null,"+args+")");
-	return function (...args2){
-		func.apply(null,args.concat(args2));
-	};
-}
 
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
 public function createCallBackFunction(func:Function, arg:*):Function

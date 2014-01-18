@@ -13,7 +13,7 @@ package classes.Items
 	public class Useable extends CommonItem
 	{
 
-		public function useItem(player:Player):void
+		public function useItem(player:Player,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Useable", "useItem", id);
 		}

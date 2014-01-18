@@ -4,7 +4,9 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
 import classes.CoC_Settings;
 import classes.Appearance;
-public class FapArena extends BazaarAbstractContent{
+	import classes.ItemType;
+
+	public class FapArena extends BazaarAbstractContent{
 
 	public function FapArena()
 	{
@@ -400,6 +402,7 @@ private function fapResults(place:Number = 3):void {
 		dynStats("lus=", 0);
 		dynStats("lus", 5);
 		temp = rand(4);
+		var itype:ItemType;
 		switch(temp) {
 			case 0:
 			outputText("You gained 300 gems!", false);
@@ -409,19 +412,19 @@ private function fapResults(place:Number = 3):void {
 			return;
 			break;
 			case 1:
-			shortName = "GroPlus";
+			itype = consumables.GROPLUS;
 			break;
 			case 2:
-			shortName = "S.Dream";
+			itype = consumables.S_DREAM;
 			break;
 			case 3:
-			shortName = "L.BluEg";
+			itype = consumables.L_BLUEG;
 			break;
 		}			
 		dynStats("lus=", 0);
 		dynStats("lus", 5);
 		menuLoc = 2;
-		inventory.takeItem();
+		inventory.takeItem(itype);
 		return;		
 	}
 	//[if you didn't win]

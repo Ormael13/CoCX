@@ -15,6 +15,9 @@ package classes.Items
 		public function get game():CoC{
 			return kGAMECLASS;
 		}
+		public function getGame():CoC{
+			return kGAMECLASS;
+		}
 
 		public function clearOutput():void{
 			kGAMECLASS.clearOutput();

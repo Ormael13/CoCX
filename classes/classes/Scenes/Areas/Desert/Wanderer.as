@@ -96,8 +96,7 @@ private function wandererDemonEpilogue():void {
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n", false);
 			dynStats("lus", 5);
 			menuLoc = 2;
-			inventory.takeItem();
-			shortName = "SDelite";
+			inventory.takeItem(consumables.SDELITE);
 			player.statusAffects[player.hasStatusAffect("wanderer demon")].value1 = 1;
 		}
 		//Second Encounter
@@ -107,8 +106,7 @@ private function wandererDemonEpilogue():void {
 			if(50 < (player.spe + rand(60))) {
 				outputText("You handily catch a small potion vial.  When you look up, she's gone.\n\n", false);
 				menuLoc = 2;
-				inventory.takeItem();
-				shortName = "SDelite";
+				inventory.takeItem(consumables.SDELITE);
 			}
 			//Drop it
 			else {

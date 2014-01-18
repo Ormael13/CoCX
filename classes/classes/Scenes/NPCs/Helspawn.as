@@ -80,7 +80,7 @@ private function calledShot():void {
 		//Gives Helspawn the benefit of the Berzerk special ability
 		private function helSpawnBerserk():void {
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " lets out a savage warcry, throwing her head back in primal exaltation before charging back into the fray with utter bloodlust in her wild eyes!");
-			weaponAttack += 30;
+			setWeaponAttack(weaponAttack + 30);
 			armorDef = 0;
 		}
 

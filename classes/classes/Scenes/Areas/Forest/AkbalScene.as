@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Forest
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class AkbalScene extends BaseContent
 	{
@@ -41,8 +42,8 @@ package classes.Scenes.Areas.Forest
 						vagoo = girlsRapeAkbal;
 						vagooLick = rapeAkbalForcedFemaleOral;
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-						bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor)
+						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 					if (player.hasCock())
 						buttFuck = rapeAkbal;
 					outputText("\n\nDo you rape him?", false);

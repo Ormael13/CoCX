@@ -659,7 +659,7 @@ private function keltMainEncounterPostBlowjob():void {
 			doNext(14);
 			player.slimeFeed();
 			//(+10 Submissiveness)
-			if(buttChange(70,true)) outputText("\r\r", false);
+			if(player.buttChange(70,true)) outputText("\r\r", false);
 			player.addStatusValue("Kelt",2,10);
 			dynStats("lus=", 0, "cor", 1);
 			return;

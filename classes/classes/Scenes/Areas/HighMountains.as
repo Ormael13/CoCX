@@ -6,6 +6,7 @@ package classes.Scenes.Areas
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 	import classes.Scenes.Areas.HighMountains.*;
 
 	use namespace kGAMECLASS;
@@ -146,12 +147,12 @@ package classes.Scenes.Areas
 			outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
 			menu();
-			addButton(0, "Black", getHarpyEgg, 0);
-			addButton(1, "Blue", getHarpyEgg, 1);
-			addButton(2, "Brown", getHarpyEgg, 2);
-			addButton(3, "Pink", getHarpyEgg, 3);
-			addButton(4, "Purple", getHarpyEgg, 4);
-			addButton(5, "White", getHarpyEgg, 10);
+			addButton(0, "Black", getHarpyEgg, consumables.BLACKEG);
+			addButton(1, "Blue", getHarpyEgg, consumables.BLUEEGG);
+			addButton(2, "Brown", getHarpyEgg, consumables.BROWNEG);
+			addButton(3, "Pink", getHarpyEgg, consumables.PINKEGG);
+			addButton(4, "Purple", getHarpyEgg, consumables.PURPLEG);
+			addButton(5, "White", getHarpyEgg, consumables.WHITEEG);
 		}
 
 		//If Give Three
@@ -163,35 +164,23 @@ package classes.Scenes.Areas
 			outputText("You hand over three elixirs, the harpy ecstatic over the fact that you're willing to part with them.  In return, she unties a side of the sheet atop the cart, allowing you to take a look at a large collection of her eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
 			menu();
-			addButton(0, "Black", getHarpyEgg, 5);
-			addButton(1, "Blue", getHarpyEgg, 6);
-			addButton(2, "Brown", getHarpyEgg, 7);
-			addButton(3, "Pink", getHarpyEgg, 8);
-			addButton(4, "Purple", getHarpyEgg, 9);
-			addButton(5, "White", getHarpyEgg, 11);
+			addButton(0, "Black", getHarpyEgg, consumables.L_BLKEG);
+			addButton(1, "Blue", getHarpyEgg, consumables.L_BLUEG);
+			addButton(2, "Brown", getHarpyEgg, consumables.L_BRNEG);
+			addButton(3, "Pink", getHarpyEgg, consumables.L_PNKEG);
+			addButton(4, "Purple", getHarpyEgg, consumables.L_PRPEG);
+			addButton(5, "White", getHarpyEgg, consumables.L_WHTEG);
 		}
 
 		//All Text
-		public function getHarpyEgg(type:int = 0):void
+		public function getHarpyEgg(itype:ItemType):void
 		{
 			clearOutput();
 			spriteSelect(90);
-			if (type == 0) shortName = "BlackEg";
-			if (type == 5) shortName = "L.BlkEg";
-			if (type == 1) shortName = "BlueEgg";
-			if (type == 6) shortName = "L.BluEg";
-			if (type == 2) shortName = "BrownEg";
-			if (type == 7) shortName = "L.BrnEg";
-			if (type == 3) shortName = "PinkEgg";
-			if (type == 8) shortName = "L.PnkEg";
-			if (type == 4) shortName = "PurplEg";
-			if (type == 9) shortName = "L.PrpEg";
-			if (type == 10) shortName = "WhiteEg";
-			if (type == 11) shortName = "L.WhtEg";
 			flags[kFLAGS.EGGS_BOUGHT]++;
-			outputText("You take " + itemLongName(shortName) + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
+			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			menuLoc = 27;
-			inventory.takeItem();
+			inventory.takeItem(itype);
 		}
 
 		//If No

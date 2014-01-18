@@ -180,23 +180,23 @@ public function doSystem(eventNo:Number):void {
 
 		case 19:
 			//Load menu
-			loadScreen();
+			saves.loadScreen();
 			return;
 
 
 		case 20:
 			//Save Menu
-			saveScreen();
+			saves.saveScreen();
 			return;
 
 
 		case -20:
-			saveGameObject(null, true);
+			saves.saveGameObject(null, true);
 			return;
 
 
 		case -21:
-			openSave();
+			saves.openSave();
 			showStats();
 			statScreenRefresh();
 			return;
@@ -205,7 +205,7 @@ public function doSystem(eventNo:Number):void {
 		case 30:
 			// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
 			var f:MouseEvent;
-			saveLoad(f);
+			saves.saveLoad(f);
 			return;
 
 
@@ -294,7 +294,7 @@ public function doSystem(eventNo:Number):void {
 			//turn on/off autosave
 			var e:MouseEvent;
 			player.autoSave = !player.autoSave;
-			saveLoad(e);
+			saves.saveLoad(e);
 			return;
 
 
@@ -322,7 +322,7 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 82:
-			deleteScreen();
+			saves.deleteScreen();
 			return;
 
 
@@ -2847,28 +2847,28 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	//Drop axe if too short!
-	if(player.tallness < 78 && player.weapon == weapons.LARGE_AXE) {
+	if(player.tallness < 78 && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);
 		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.LARGE_AXE);
+		inventory.takeItem(weapons.L__AXE);
 		return true;
 	}
-	if(player.weapon == weapons.LARGE_HAMMER && player.tallness < 60) {
+	if(player.weapon == weapons.L_HAMMR && player.tallness < 60) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n", true);
 		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.LARGE_HAMMER);
+		inventory.takeItem(weapons.L_HAMMR);
 		return true;
 	}		
-	if(player.weapon == weapons.LARGE_CLAYMORE && player.str < 40) {
+	if(player.weapon == weapons.CLAYMOR && player.str < 40) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n", true);
 		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.LARGE_CLAYMORE);
+		inventory.takeItem(weapons.CLAYMOR);
 		return true;
 	}
-	if(player.weapon == weapons.BEAUTIFUL_SWORD && player.str < 80) {
+	if(player.weapon == weapons.WARHAMR && player.str < 80) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n", true);
 		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.HUGE_WARHAMMER);
+		inventory.takeItem(weapons.WARHAMR);
 		return true;
 	}
 	//Drop beautiful sword if corrupted!
@@ -2891,21 +2891,21 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else outputText("bulgy balls");
 			outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
 			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
+			inventory.takeItem(armors.LMARMOR);
 			return true;
 		}
 		//Lost pussy
 		else if(!player.hasVagina()) {
 			outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
 			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
+			inventory.takeItem(armors.LMARMOR);
 			return true;
 		}
 		//Tits gone or too small
 		else if(player.biggestTitSize() < 4) {
 			outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
 			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
+			inventory.takeItem(armors.LMARMOR);
 			return true;
 		}
 	}

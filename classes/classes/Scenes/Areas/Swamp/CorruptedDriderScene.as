@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Swamp
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.LustyMaidensArmor;
 
 	use namespace kGAMECLASS;
 
@@ -76,7 +77,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
 					outputText("\nYou could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.", false);
 					vagFuck = winDriderPCDickInSpiderCunt;
-					if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.hasItem("T.SSilk")) {
+					if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)) {
 						outputText("\nYou could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
 						careful = driderVagSmartFuck;
 					}
@@ -91,7 +92,7 @@ package classes.Scenes.Areas.Swamp
 			var rideCock:Function =null;
 			var rideOvi:Function =null;
 			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
 				rideOvi = victoryVSDriderRideOviVaginal;
@@ -906,7 +907,7 @@ package classes.Scenes.Areas.Swamp
 				driderTiedUpPartTwo(false);
 			}
 			//(Champion has some Tough Spider Silk on them)
-			else if (player.hasItem("T.SSilk")) {
+			else if (player.hasItem(useables.T_SSILK)) {
 				outputText("\n\nRemembering the bundle of silk that you have with you, it doesn't take long to come up with a very enticing idea for dealing with the drider.  However, you have a feeling that you won't be able to do much else with the silk if you go through with your plan.  Are you sure you want to use it on her?");
 				//[Yes] [No]
 				doYesNo(createCallBackFunction(driderTiedUpPartTwo,true), dontSilkRapeDrider);
@@ -931,7 +932,7 @@ package classes.Scenes.Areas.Swamp
 			var y:Number = x + 1;
 			if (useItem) {
 				clearOutput();
-				player.consumeItem("T.SSilk");
+				player.consumeItem(useables.T_SSILK);
 				outputText("Smirking to yourself, you advance on the collapsed girl, [cock " + y + "] straining against your clothing in anticipation of what's to come.");
 			}
 			outputText("\n\nDarting forwards suddenly, you seize her wrists, pulling her arms above her head");

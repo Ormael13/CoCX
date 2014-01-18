@@ -2,7 +2,6 @@
 import classes.BaseContent;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
 import classes.CockTypesEnum;
 import classes.Scenes.Places.TelAdre;
 public class Rogar extends BaseContent{
@@ -163,7 +162,6 @@ public function encounterRogarSwamp():void {
 		}
 		//SEXY CHOICES
 		sexyChoices();
-		return;
 	}
 	//Not sure what determines this yet
 	else if(flags[kFLAGS.ROGAR_PHASE] == 2) {
@@ -173,7 +171,6 @@ public function encounterRogarSwamp():void {
 			doNext(13);
 			//move Ro'gar to Wet Bitch, set Ro'gar phase = 3
 			flags[kFLAGS.ROGAR_PHASE] = 3;
-			return;
 		}
 		//((androgynous or masculine and breasts <= A-cup))
 		else {
@@ -193,7 +190,6 @@ public function encounterRogarSwamp():void {
 				outputText("You apologize to Ro'gar; your mind draws a complete blank on the question.  The orc pouts with disappointment.  \"<i>I reckon I could just wander until I find somewhere...</i>\"  You shake your head and suggest he wait here where he's already established, but promise you'll be keeping an eye out for anywhere that might suit him.  Ro'gar beams at the reassurance, his pout twisting into a grin.  \"<i>Mighty fine of you!</i>\"  His thick arms wrap around you in a bear hug over the table.  You spend the rest of your visit chatting with the burly orc, careful to avoid any topics that might stir his wanderlust.\n\n", false);
 				//end scene without updating Ro'gar phase
 				doNext(13);
-				return;
 			}
 			//(if player has been to Tel'Adre)
 			else {
@@ -219,7 +215,6 @@ public function encounterRogarSwamp():void {
 					//set Ro'gar phase = 3
 					flags[kFLAGS.ROGAR_PHASE] = 3;
 					doNext(13);
-					return;
 				}
 				//(if Dirt Mc Girt = 2) 
 				else {
@@ -236,7 +231,6 @@ public function encounterRogarSwamp():void {
 					dynStats("lus", 30);
 					flags[kFLAGS.ROGAR_PHASE] = 3;
 					doNext(13);
-					return;
 				}
 			}
 		}
@@ -370,7 +364,6 @@ public function rogarThirdPhase():void {
 		
 		//return to bar menu
 		doNext(telAdre.barTelAdre);
-		return;
 	}
 	//((androgynous or masculine and breasts <= A-cup))
 	else {
@@ -412,7 +405,6 @@ public function rogarThirdPhase():void {
 			flags[kFLAGS.ROGAR_WARNING] = 0;
 			menuLoc = 2;
 			inventory.takeItem(consumables.BROBREW);
-			return;
 		}
 		//(else if Dirt Mc Girt = 2)
 		else {
@@ -472,7 +464,6 @@ public function rogarPhaseFour():void {
 		if(player.gender == 2 || player.gender == 0) {
 			outputText("  It reaches the center without interruption, and Ro'gar colors deeper.  \"<i>Uh... ferget it,</i>\" he mumbles.  \"<i>Didn't mean ta be indecent with you or anythin', miss.</i>\"  He nods to you and quickly departs before you can recover from the surprise.", false);
 			doNext(13);
-			return;
 		}
 		else {
 			outputText("  " + SMultiCockDesc() + " trembles under his strong touch, as he increases the pressure and looks into your eyes meaningfully.  ", false);
@@ -485,7 +476,6 @@ public function rogarPhaseFour():void {
 			//[Get Anal][Give Anal][Frot][Drink with your Bro! (requires 1x Bro Brew)][No Thanks]
 			rogarFuckMenu();
 			dynStats("lus", 10);
-			return;
 		}
 	}
 }
@@ -497,7 +487,7 @@ private function rogarFuckMenu():void {
 	var frot:Function = null;
 	var brodown:Function = null;
 	
-	if(player.hasItem("BroBrew")) brodown = brobrobrobro;
+	if(player.hasItem(consumables.BROBREW)) brodown = brobrobrobro;
 	if(player.hasCock()) {
 		giveAnal = fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim;
 		getAnal = loseButtGinity;
@@ -700,7 +690,7 @@ private function rogarIsDumb():void {
 //[Fukkin' Grab It!]
 private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
-	player.consumeItem("BroBrew");
+	player.consumeItem(consumables.BROBREW);
 	var changed:Boolean = false;
 	var cocked:Boolean = false;
 	outputText("", true);

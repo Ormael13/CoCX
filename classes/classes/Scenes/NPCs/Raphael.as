@@ -199,7 +199,7 @@ private function RaphaelDressPtII():void {
 	//{Third encounter unlocked}
 	//Set 'time to wear dress' countdown.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
-	inventory.takeItem(armors.RED_BODYSUIT);
+	inventory.takeItem(armors.R_BDYST);
 }
 
 /*DRESS HERE
@@ -740,7 +740,7 @@ private function postRaphaelCoitus():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RAPHAELS_RAPIER);
+		inventory.takeItem(weapons.RRAPIER);
 	}
 	//({When player has reached the INT Conversation apex} 
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -782,7 +782,7 @@ private function declinePuttingOutForRogues():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RAPHAELS_RAPIER);
+		inventory.takeItem(weapons.RRAPIER);
 
 	}
 	//({When player has reached the INT Conversation apex}
@@ -987,7 +987,7 @@ private function RaphaelThieverySmexPtII():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RAPHAELS_RAPIER);
+		inventory.takeItem(weapons.RRAPIER);
 	}
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {

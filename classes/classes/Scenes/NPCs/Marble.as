@@ -96,7 +96,7 @@
 			init11Armor("tough hide",5);
 			init12Combat(0,0,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(7,rand(5) + 25);
-			init14FixedDrop(weapons.LARGE_HAMMER);
+			init14FixedDrop(weapons.L_HAMMR);
 			initX_Tail(TAIL_TYPE_COW);
 			initX_Specials(marbleSpecialAttackOne,marbleSpecialAttackTwo);
 

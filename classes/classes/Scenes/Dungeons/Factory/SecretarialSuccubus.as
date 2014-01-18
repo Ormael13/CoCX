@@ -1,14 +1,13 @@
 package classes.Scenes.Dungeons.Factory
 {
-	import classes.CoC;
-	import classes.Creature;
 	import classes.Monster;
-	import classes.CockTypesEnum;	
+	import classes.Scenes.Monsters.AbstractSuccubus;
+
 	/**
 	 * ...
 	 * @author aimozg
 	 */
-	public class SecretarialSuccubus extends Monster {
+	public class SecretarialSuccubus extends AbstractSuccubus {
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.gender > 0){
@@ -59,9 +58,9 @@ package classes.Scenes.Dungeons.Factory
 			init14FixedDrop(consumables.LACTAID);
 			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Specials(11020,11021,11022);
-
+			initX_Specials(kissAttack,seduceAttack,whipAttack);
 		}
+
 	}
 
 }

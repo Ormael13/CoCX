@@ -371,7 +371,7 @@ private function slimeGinaFlation():void {
 	outputText("The oozy evacuation keeps up for many long, pleasure-filled heartbeats, your breasts deflating as the slime spurts out of your body. Eventually, the spurts turn to a drizzle, and you push out the remainder of the goo with a compression of your back-to-normal boobs. Reaching into the diluted sage substance, you feel around for any signs of life for the poor ghost girl. You feel a slender hand wrap around your wrist, and you easily heave the spirit free of the twitching mess. Free of the mostly-empty influence of the green slime, she whimsically floats about you. \"<i>It took you long enough!</i>\" she berates you angrily. \"<i>...But, you managed to get me out of there with my sanity intact...and I DID have a good time, so...</i>\"  She substantiates in front of you, smiling radiantly. \"<i>Thanks,</i>\" she says amiably. \"<i>I'm gonna go home. Oh, before I go...</i>\"  She brazenly undoes her leggings, pulling them away from her crotch and reaching into her box. She extricates a good amount of ectoplasm, then pulls a small bottle from a pocket inside her tunic and squeezes the goop inside. With an amiable grin, she hands the bottle to you, and you nod your appreciation. You part ways there, with you redressing and heading back to your campsite, and the ghost girl beginning her trek back to the town ruins.", false);
 	dynStats("lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -431,7 +431,7 @@ private function slimeyPenorsAhoy():void {
 	dynStats("lus=", 0);
 	flags[kFLAGS.SHOULDRA_SLIME_PENOR_TIMES]++;
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -551,7 +551,7 @@ private function penisLossThatIsntALoss():void {
 	dynStats("lus=", 0);
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -595,7 +595,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 		outputText("She wobbles almost exaggeratedly before falling sideways, smacking her head against the ground and sending up a small splash of cum.  If she felt any pain, however, she doesn't react to it at all, staring vacantly at a dilapidated building and drooling slightly.  That outta teach her to try to pull a fast one on you twice, you figure.  As you stride past her, you tug her pants down to her knees and scoop out a good amount of ectoplasm from her vagina.  You reach into her pocket and grab a bottle (honking her boob for good measure and eliciting an aroused twitch), dumping the goo in and stuffing it in your pack.  She'll probably find a goblin eventually, you figure as you begin your journey back to the camp.", false);
 	}
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -816,7 +816,7 @@ private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	dynStats("sen", 1, "lus=", 0);
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -859,7 +859,7 @@ private function ghostGinaLosses():void {
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
 	dynStats("sen", 1, "lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -888,7 +888,7 @@ private function loseToShouldraAsHerm():void {
 	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
 	dynStats("sen", 1, "lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -990,7 +990,7 @@ private function shouldraGiantCockLoss():void {
 	dynStats("lib", 1, "sen", 1, "lus=", 0);
 	flags[kFLAGS.SHOULDRA_USES_YOUR_GIANT_COCK_COUNT]++;
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -1044,7 +1044,7 @@ private function genderlessShouldrasLossRapes():void {
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
 	dynStats("sen", 1, "lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -1162,7 +1162,7 @@ private function ginaBoobgartuanShouldra():void {
 	outputText("\n\nThough exhausted and a little sore from Exgartuan's treatment of your body, you keep the presence of mind to lean down -- pushing your " + breastDescript(0) + " out of the way -- and scoop up a little ectoplasm from her still-gaping box.  You make a point to ignore Exgartuan's triumphant chortle as you leave the ghost girl to her sleep and walk back to camp.  What a day.");
 	dynStats("lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {
@@ -1243,7 +1243,7 @@ private function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	//ECTOPLZ
 	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) {
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "EctoPls";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS;
 		cleanupAfterCombat();
 	}
 	else {

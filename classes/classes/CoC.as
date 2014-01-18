@@ -110,12 +110,13 @@
 		include "../../includes/transform.as";
 		
 		include "../../includes/engineCore.as";
-		include "../../includes/saves.as";
-		
+
 		// Lots of constants
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		// /
+		public var saves:Saves = new Saves();
 		// Items/
 		public var mutations:Mutations = new Mutations();
 		public var consumables:ConsumableLib = new ConsumableLib();
@@ -307,7 +308,7 @@
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = newGameGo;
 			this.mainView.onAppearanceClick = appearance;
-			this.mainView.onDataClick = saveLoad;
+			this.mainView.onDataClick = saves.saveLoad;
 			this.mainView.onLevelClick = levelUpGo;
 			this.mainView.onPerksClick = displayPerks;
 			this.mainView.onStatsClick = displayStats;
@@ -336,8 +337,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.4.0";
-			version = ver + " (<b>Fixes and Uma Blowjob Training</b>)";
+			ver = "0.8.4.3";
+			version = ver + " (<b>Fixes and Uma Blowjob Training; Itemz refactored</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

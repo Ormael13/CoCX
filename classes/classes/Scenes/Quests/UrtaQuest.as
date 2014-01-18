@@ -1,11 +1,8 @@
 ﻿package classes.Scenes.Quests{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.*;
 	import classes.Scenes.Quests.UrtaQuest.*;
-	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Areas.Plains.GnollSpearThrower;
 	import classes.Scenes.NPCs.NPCAwareContent;
 	public class UrtaQuest extends NPCAwareContent
@@ -178,11 +175,11 @@ public function infertilityQuestions():void {
 
 private function resetToPC():void {
 	player = kGAMECLASS.clone(player2);
-	itemSlot1 = kGAMECLASS.clone(urtaQItems1);
-	itemSlot2 = kGAMECLASS.clone(urtaQItems2);
-	itemSlot3 = kGAMECLASS.clone(urtaQItems3);
-	itemSlot4 = kGAMECLASS.clone(urtaQItems4);
-	itemSlot5 = kGAMECLASS.clone(urtaQItems5);
+	player.itemSlot1 = kGAMECLASS.clone(urtaQItems1);
+	player.itemSlot2 = kGAMECLASS.clone(urtaQItems2);
+	player.itemSlot3 = kGAMECLASS.clone(urtaQItems3);
+	player.itemSlot4 = kGAMECLASS.clone(urtaQItems4);
+	player.itemSlot5 = kGAMECLASS.clone(urtaQItems5);
 	model.player = player;
 	
 	// See called method comment.
@@ -195,16 +192,16 @@ private function startUrtaQuest():void {
 	clearOutput();
 	
 	// *SERIALIZE* out the players current Player object + items
-	urtaQItems1 = kGAMECLASS.clone(itemSlot1);
-	urtaQItems2 = kGAMECLASS.clone(itemSlot2);
-	urtaQItems3 = kGAMECLASS.clone(itemSlot3);
-	urtaQItems4 = kGAMECLASS.clone(itemSlot4);
-	urtaQItems5 = kGAMECLASS.clone(itemSlot5);
-	itemSlot1 = new ItemSlotClass();
-	itemSlot2 = new ItemSlotClass();
-	itemSlot3 = new ItemSlotClass();
-	itemSlot4 = new ItemSlotClass();
-	itemSlot5 = new ItemSlotClass();
+	urtaQItems1 = kGAMECLASS.clone(player.itemSlot1);
+	urtaQItems2 = kGAMECLASS.clone(player.itemSlot2);
+	urtaQItems3 = kGAMECLASS.clone(player.itemSlot3);
+	urtaQItems4 = kGAMECLASS.clone(player.itemSlot4);
+	urtaQItems5 = kGAMECLASS.clone(player.itemSlot5);
+	player.itemSlot1 = new ItemSlotClass();
+	player.itemSlot2 = new ItemSlotClass();
+	player.itemSlot3 = new ItemSlotClass();
+	player.itemSlot4 = new ItemSlotClass();
+	player.itemSlot5 = new ItemSlotClass();
 	player2 = kGAMECLASS.clone(player);
 
 	player = new Player();
@@ -276,9 +273,8 @@ private function startUrtaQuest():void {
 	player.createPerk("History: Fighter",0,0,0,0,"");
 	
 	//GEAR!
-	player.weapon = weapons.HALBERD;
-	player.armor = armors.LEATHER_ARMOR_SEGMENTS;
-	kGAMECLASS.applyArmorStats("leather armor segments",false);
+	player.weapon = weapons.URTAHLB;
+	player.armor = armors.URTALTA;
 	//DISPLAY SOME SHIT YO
 	clearOutput();
 	flags[kFLAGS.URTA_QUEST_STATUS] = .75;
@@ -495,7 +491,7 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	if(player.hasStatusAffect("JojoNightWatch") >= 0 && player.hasStatusAffect("PureCampJojo") >= 0)
 		outputText("You easily sneak past a mouse monk.  He's looking towards the sky mostly, perhaps watching for imps.  ");
 	if(flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.ANEMONE_KID] > 0) 
-		outputText("A confused-looking anemone with a " + itemLongName(flags[kFLAGS.ANEMONE_WEAPON]) + " nearly sees you, but you duck around a rock and escape her notice.  ");
+		outputText("A confused-looking anemone with a " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " nearly sees you, but you duck around a rock and escape her notice.  ");
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.HOLLI_DEFENSE_ON] > 0) 
 		outputText("A dangling tentacle nearly hits you in the dark.  You roll aside at the last moment, looking up to see dozens of the things idly dangling around.  When did this camp get such a corrupt tree in it?  You suppose it must have its uses in defending against foes from the sky...  ");
 	if(camp.companionsCount() > 2) outputText("There are a number of people in the camp, but you avoid them as you head towards " + player2.short + "'s bunk.  ");
@@ -869,21 +865,7 @@ private function runIntoAGoblin(camped:Boolean = false):void {
 	}
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
-	startCombat(new Goblin());// TODO extract to Monsters.GoblinBroodMother class
-	monster.level = 10;
-	monster.bonusHP = 300;
-	monster.tou = 30;
-	monster.HP = monster.eMaxHP();
-	monster.str = 50;
-	monster.inte = 100;
-	monster.cor = 70;
-	monster.sens = 20;
-	monster.lib = 70;
-	monster.lustVuln = .5;
-	monster.weaponAttack = 20;
-	
-	monster.short = "goblin broodmother";
-	monster.long = "Thanks to their corruption, it's almost impossible to discern a goblin's age by their appearance, but it's quite obvious that this one is no horny young slut looking for her first dozen or so studs.  Standing before you is an obvious veteran breeder, a proud motherwhore who doubtlessly has a sizable tribe of slutty daughters somewhere not too far away.  Maybe three and a half feet tall, she has vibrant yellow skin - a rare shade, for goblins - and a wild mane of flamboyant neon pink and neon blue striped hair that falls down her back, her long, pointed ears barely visible amongst it.  Her many pregnancies have rendered her absurdly voluptuous. I-cup tits wobble absurdly in the air before her, their jiggling expanse so big that it's a wonder she can reach out to her blatant, teat-like purple nipples. Broodmother hips flare out from her waist, making her sashay from side to side with every step. A gloriously round and luscious bubble-butt, big enough to be DD-cup tits if it were on somebody's chest, jiggles enticingly with every motion.  Lewd leather straps fight to contain her exaggerated boobs and ass, serving more to house clinking pouches and bottles than to provide any protection of her modesty.  Piercings stud her lips, nose, eyebrows, ears, nipples and clit, and her fiery red eyes smoulder as she seductively licks her lips at you.\n\nYour treacherous horse-cock aches to bury itself into this ripe, ready slut, but you have to be strong - you rather doubt she'll let you go with a single fuck, even if you are incapable of giving her the babies she craves...";
+	startCombat(new GoblinBroodmother());// TODO extract to Monsters.GoblinBroodMother class
 	doNext(1);
 }
 
@@ -934,7 +916,7 @@ public function urtaLosesToGoblin():void {
 	//Urta bad end, written by Kinathis... Buckle up for the worst writing you have ever seen!....Okay lets do this! Raaaaa!!! o-o What did i get myself into...
     //Loss by lust intro(C)*
 	if(player.lust > 99) {
-		outputText("Your aching body buckles under the goblin's lusty assault.  As if the constant flow of precum that soaks your skirt isn't enough, your raw desire for the goblin's curvy little body explodes from you.  The iron-hard pole of animalistic breeding meat throbs powerfully as it stands tall against your otherwise feminine body, lifting your protective skirt and making it gather up around your waist.  Unable to stop yourself, your hands grab hold of the aching, arm-sized length of horseflesh as you sink to your knees.  Without missing a beat, your hands stroke and squeeze your fat equine endowment with feverish need.  Almost instantly, your over-productive organ soaks your squeezing hands in streams of thick, musky pre; clear, sticky rivulets that drip all the way down to your aching, pulsating balls.  Your huge, sterile, stallion-nuts swell and bloat with their massive load.  The poor things ache to be unleashed inside your assailant's cum-craving womb.")
+		outputText("Your aching body buckles under the goblin's lusty assault.  As if the constant flow of precum that soaks your skirt isn't enough, your raw desire for the goblin's curvy little body explodes from you.  The iron-hard pole of animalistic breeding meat throbs powerfully as it stands tall against your otherwise feminine body, lifting your protective skirt and making it gather up around your waist.  Unable to stop yourself, your hands grab hold of the aching, arm-sized length of horseflesh as you sink to your knees.  Without missing a beat, your hands stroke and squeeze your fat equine endowment with feverish need.  Almost instantly, your over-productive organ soaks your squeezing hands in streams of thick, musky pre; clear, sticky rivulets that drip all the way down to your aching, pulsating balls.  Your huge, sterile, stallion-nuts swell and bloat with their massive load.  The poor things ache to be unleashed inside your assailant's cum-craving womb.");
 		outputText("\n\nGiggling impishly, the pregnancy-obsessed seductress sashays her way over to you.  The voluptuous woman looks at your masturbating form for a moment, admiring your well endowed body before making her move.  Shoving you down, she pulls your face into her bountiful bosom, nearly suffocating you in sweet, soft titflesh as she grinds her curvy little body against you.  \"<i>Ohhh... look at that big beast you have there.  You're going to love feeling my tight little puss wraped around your stallion-cock, aren't you?  Just look at those huge balls - I think I found myself a keeper.  Now, don't you worry about anything, dear.  Just lay back and let me milk all the sperm from those big, round cum-dispensers of yours,</i>\" the kid-crazy woman says before she pulls a few red vials from her bags and forces them against your lips, massaging your throat to make sure you swallow every drop.");
 		outputText("\n\nYou were pretty horny before, but after these doses there's only one thought you're capable of processing: the searing desire to rut and breed.  As soon as that bubbling concoction hits your stomach a throaty groan tears itself from your dark lips.  The chemical aphrodisiac surges right to your brain and over-aroused equine erection.  Your already iron-hard horseflesh seems to swell even bigger from your newfound arousal; the bloated, blunt crown belching forth a thick, musky bolt of sticky pre all up the dominant goblin's back.  Feeling your hot, thick juice shoot across her flesh only seems to make her more hungry for you.  If you can pump out pre-cum like that, just what kind of flood are you going to make when you really cum?");
 		
@@ -1129,7 +1111,7 @@ private function urtaComboAttack():void {
 	if(player.hasStatusAffect("Blind") >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
-	var damage:Number = 0;
+	var damage:Number;
 	//Determine if dodged!
 	if(monster.hasStatusAffect("Blind") < 0 && (rand(3) == 0 || (player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
@@ -1270,7 +1252,7 @@ private function urtaSidewinder():void {
 		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
-	var damage:Number = 0;
+	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
@@ -1388,7 +1370,7 @@ private function urtaVaultAttack():void {
 		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You leap into the air, intent on slamming your " + player.weaponName + " into your foe!  ");
-	var damage:Number = 0;
+	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
@@ -2426,11 +2408,7 @@ public function beatMinoLordOnToSuccubi():void {
 	
 	outputText("\n\n<b>It's a fight!</b>");
 	kGAMECLASS.clearStatuses(false);
-	player.weaponName = "halberd";
-	player.weaponVerb = "slash";
-	player.weaponPerk = "Large";
-	player.weaponValue = 10;
-	player.weaponAttack = kGAMECLASS.fixedDamage("halberd");
+	player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
 }
 
@@ -2730,7 +2708,7 @@ private function knockUpUrtaWithGodChild():void {
 	else outputText("taint");
 	outputText(" tints off-white from your liquid, squirting out of her tunnel faster than ever when she climaxes with you");
 	if(player.cumQ() > 1000) outputText(", belly rounded with wobbly, womb-packing spunk");
-	outputText(".")
+	outputText(".");
 	outputText("\n\nYou come down from your orgasmic high, slumping back into the messy mud below.  It's beginning to dry and harden already, the moisture being wicked away by the parched earth.  You'd get up, but Urta isn't done!  She begins bouncing again, her spasming inner walls rippling expertly around you as she rides you rough and dirty, keeping you so hard that it hurts, even after such a potent orgasm.");
 	
 	outputText("\n\n\"<i>Mmmm, not done yet, are you, love?  I'm still horny!</i>\" Urta proudly declares, even while her dick is drooling a thin flow of leftover cum across your chest, slapping against your middle again and again with her bounces.  An invigorating tingle tickles through your [balls], and you realize you've only just begun to fertilize her...");

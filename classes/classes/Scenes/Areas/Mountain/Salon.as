@@ -4,7 +4,9 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.BaseContent;
 import classes.Appearance;
 import classes.CockTypesEnum;
-public class Salon extends BaseContent{
+	import classes.ItemType;
+
+	public class Salon extends BaseContent{
 
 	public function Salon()
 	{
@@ -380,26 +382,21 @@ private function hairGrow():void {
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(13);
 }
-		private function buyDye(itemShortName:String):void{
+		private function buyDye(itype:ItemType):void{
 			outputText("", true);
-			shortName = itemShortName;
-			inventory.takeItem();
+			inventory.takeItem(itype);
 		}
 private function dyeMenu():void {
 	spriteSelect(38);
 	outputText("", true);
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?", false);
 	menuLoc = 2;
-	choices("Blue",createCallBackFunction(buyDye,"BlueDye"),
-			"Orange",createCallBackFunction(buyDye,"OrangDy"),
-			"Pink",createCallBackFunction(buyDye,"PinkDye"),
-			"Purple",createCallBackFunction(buyDye,"PurpDye"),
+	choices("Blue",createCallBackFunction(buyDye,consumables.BLUEDYE),
+			"Orange",createCallBackFunction(buyDye,consumables.ORANGDY),
+			"Pink",createCallBackFunction(buyDye,consumables.PINKDYE),
+			"Purple",createCallBackFunction(buyDye,consumables.PURPDYE),
 			"Back",hairDressingMainMenu,
-			"Ext.Serum",createCallBackFunction(buyDye,"ExtSerm"),"",0,"",0,"",0,"",0);
-  	/*if(shortName1 == "PinkDye") return "a vial of bright pink hair dye";
-	if(shortName1 == "PurpDye") return "a vial of purple hair dye";
-	if(shortName1 == "BlueDye") return "a vial of blue hair dye";
-	if(shortName1 == "OrangDy") return "a vial of brilliant orange hair dye";*/
+			"Ext.Serum",createCallBackFunction(buyDye,consumables.EXTSERM),"",0,"",0,"",0,"",0);
 }
 
 

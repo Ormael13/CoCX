@@ -56,42 +56,32 @@
 			//Dodge chance!
 			if((player.hasPerk("Evasion") >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);
-				if(short != "Tamani's daughters") combatRoundOver();
-				else outputText("\n", false);
-				return;
 			}
-			//Get hit!
-			//Temporary heat
-			if(color == "red") {
-				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-				if(player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat",0,0,0,0);
-				if(short != "Tamani's daughters") combatRoundOver();
-				else outputText("\n", false);
-				return;
+			else {
+				//Get hit!
+				if (color == "red") {
+					//Temporary heat
+					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
+					if (player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat", 0, 0, 0, 0);
+				}
+				else if (color == "green") {
+					//Green poison
+					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
+					if (player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison", 0, 0, 0, 0);
+				}
+				else if (color == "white") {
+					//sticky flee prevention
+					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
+					if (player.hasStatusAffect("NoFlee") < 0) player.createStatusAffect("NoFlee", 0, 0, 0, 0);
+				}
+				else if (color == "black") {
+					//Increase fatigue
+					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
+					game.fatigue(10 + rand(25));
+				}
 			}
-			//Green poison
-			if(color == "green") {
-				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-				if(player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison",0,0,0,0);
-				if(short != "Tamani's daughters") combatRoundOver();
-				else outputText("\n", false);
-				return;
-			}
-			//sticky flee prevention
-			if(color == "white") {
-				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-				if(player.hasStatusAffect("NoFlee") < 0) player.createStatusAffect("NoFlee",0,0,0,0);
-				if(short != "Tamani's daughters") combatRoundOver();
-				else outputText("\n", false);
-				return;
-			}
-			//Increase fatigue
-			if(color == "black") {
-				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-				game.fatigue(10 + rand(25));
-				if(short != "Tamani's daughters") combatRoundOver();
-				else outputText("\n", false);
-			}
+			if (!plural) combatRoundOver();
+			else outputText("\n", false);
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
@@ -105,39 +95,25 @@
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(short == "goblin") {
-				game.goblinScene.gobboRapeIntro();
-			} else if(short == "goblin broodmother") {
-				game.clearOutput();
-				outputText("The goblin broodmother is defeated!  You find a bottle of succubi milk on her.  That stuff is banned in Tel'Adre - and for good reason, but it might come in handy.  You pocket the foul fluid for now.");
-				outputText("  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Do you?");
-				game.menu();
-				game.addButton(0,"Fuck",	game.urtaQuest.winFuckAGoblinBroodmotherAsUrta);
-				game.addButton(4,"Leave",game.urtaQuest.nagaPleaseNagaStoleMyDick);
-			}
+			game.goblinScene.gobboRapeIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (short == "goblin") {
-				if (player.gender == 0) {
-					outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
-					game.cleanupAfterCombat();
-				} else if (pcCameWorms) {
-					outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
-					game.dynStats("lus=", 0);
-					doNext(game.cleanupAfterCombat);
-				} else {
-					game.goblinScene.goblinRapesPlayer();
-				}
-			} else if (short == "goblin broodmother"){
-				game.urtaQuest.urtaLosesToGoblin();
+			if (player.gender == 0) {
+				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
+				game.cleanupAfterCombat();
+			} else if (pcCameWorms) {
+				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
+				game.dynStats("lus=", 0);
+				doNext(game.cleanupAfterCombat);
+			} else {
+				game.goblinScene.goblinRapesPlayer();
 			}
 		}
 
 		public function Goblin(noInit:Boolean=false)
 		{
-			trace("Goblin Constructor!");
 			init01Names("the ", "goblin", "goblin", "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?");
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 40);
 			init03BreastRows("E");

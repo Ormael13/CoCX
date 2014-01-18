@@ -47,10 +47,10 @@
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 
-		public function Minotaur()
+		public function Minotaur(axe:Boolean=false)
 		{
 			//Most times they dont have an axe
-			hasAxe = rand(3)==0;
+			hasAxe = axe || rand(3)==0;
 			var furColor:String = Appearance.randomChoice("black","brown");
 
 			trace("Minotaur Constructor!");

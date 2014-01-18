@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class LargeHammer extends Weapon
 	{
 
-		override public function canEquip(player:Player, printReason:Boolean):Boolean
+		override public function canConsume(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.tallness < 60){
 				if (printReason) {
@@ -26,7 +26,7 @@ package classes.Items.Weapons
 
 		public function LargeHammer()
 		{
-			super("L.Hammr","L.Hammr","Marble's large hammer","smash",16,90,"This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.","Large");
+			super("L.Hammr","L.Hammr","large hammer","Marble's large hammer","smash",16,90,"This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.","Large");
 		}
 	}
 }

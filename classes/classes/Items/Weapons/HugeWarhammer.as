@@ -8,7 +8,7 @@ package classes.Items.Weapons
 
 	public class HugeWarhammer extends Weapon
 	{
-		override public function canEquip(player:Player, printReason:Boolean):Boolean
+		override public function canConsume(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.str<80){
 				if (printReason){
@@ -21,7 +21,7 @@ package classes.Items.Weapons
 
 		public function HugeWarhammer()
 		{
-			super("Warhamr","Warhamr","a huge warhammer","smash",15,1600,"A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)","Large");
+			super("Warhamr","Warhamr","huge warhammer","a huge warhammer","smash",15,1600,"A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)","Large");
 		}
 	}
 }

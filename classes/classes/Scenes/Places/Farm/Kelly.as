@@ -78,7 +78,7 @@ private function resistKeltsBSBreakHimIntro():void {
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		outputText("You are more and more annoyed by Kelt's rudeness and dick-waving.  The centaur may be imposing at first and his archery skills are impressive, but you're sure that behind his false display of virility, there's nothing an experienced champion like you can't deal with.  With your superior strength and speed, you could probably take him by surprise and teach him a good lesson.  Of course, you won't ever be able to learn archery from him after that.");
 		//[if (PC doesn't have items)
-		if(!(player.hasItem("SucMilk",15) || (player.hasItem("SucMilk",10) && hasPinkEgg()) || (player.hasItem("P.S.Mlk",10) && hasPinkEgg()) || player.hasItem("P.S.Mlk",15))) {
+		if(!(player.hasItem(consumables.SUCMILK,15) || (player.hasItem(consumables.SUCMILK,10) && hasPinkEgg()) || (player.hasItem(consumables.P_S_MLK,10) && hasPinkEgg()) || player.hasItem(consumables.P_S_MLK,15))) {
 			outputText("Unfortunately, you don't have anything that could be useful to tame his arrogant maleness.  You want items that would make his disgracious horsecock and balls shrink.  A nice set of breasts on his human chest would be fine, too.  You know you're going to need A LOT of such items - or very potent ones.");
 			menu();
 			addButton(0,"Next",farm.farmExploreEncounter);
@@ -96,7 +96,7 @@ private function resistKeltsBSBreakHimIntro():void {
 		outputText("You set out to go get Kelt, eager to teach this slut another lesson of your own.  You explore the farm for a bit before spotting the centaur behind the barn.  However, Kelt seems to have changed since last time: he somehow changed back his gender.  That rebellious little bitch!  Although he doesn't look as aggressively masculine as before, and his chest still bears some man-tits, he has gotten back his stern, rude face and you can clearly see a fat prick hanging from his backside.  It doesn't seem to be as big as it was before, though.  He must have grown it in a hurry.");
 		//back to farm]
 		//[if you don't have the items:
-		if(!(player.hasItem("SucMilk",10) || player.hasItem("P.S.Mlk",10) || (player.hasItem("SucMilk",5) && hasPinkEgg()) || (player.hasItem("P.S.Mlk",5) && hasPinkEgg()))) {
+		if(!(player.hasItem(consumables.SUCMILK,10) || player.hasItem(consumables.P_S_MLK,10) || (player.hasItem(consumables.SUCMILK,5) && hasPinkEgg()) || (player.hasItem(consumables.P_S_MLK,5) && hasPinkEgg()))) {
 			outputText("\n\nYou'd gladly teach him another lesson so he can keep his true gender and learn his place, but you don't have anything to turn him female again.  You should fetch appropriate items to begin the 'lesson'.</i>\"");
 			//back to farm]
 			menu();
@@ -110,7 +110,7 @@ private function resistKeltsBSBreakHimIntro():void {
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) {
 		outputText("You saunter up to the back of the farm, eager to meet the centaur-slut for another 'lesson'.  The creature is quite a weird sight when you spot her: instead of the gorgeous woman whose face you had splattered with spooge, what you see is an androgynous hybrid sporting a tiny, ridiculous microdick and a little pair of tits that can't fill more than a B-cup bra.  Even the face is ambiguous about its gender.  Although Kelly is now strong in the centaur's body, Kelt seems to have regained a little control.  You have to fix this.");
 		//[if (less than 5 succubi milk)
-		if(!(player.hasItem("SucMilk",5) || player.hasItem("P.S.Mlk",5)))
+		if(!(player.hasItem(consumables.SUCMILK,5) || player.hasItem(consumables.P_S_MLK,5)))
 		{
 			outputText("You must acquire enough Succubi Milk to remove any male remnants off Kelly's body before confronting 'him' again.");
 			menu();
@@ -258,18 +258,18 @@ private function breakKeltGo():void {
 	if(hasPinkEgg()) {
 		if(player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
 		else player.consumeItem(consumables.L_PNKEG);
-		if (player.hasItem("SucMilk",10))
-			player.consumeItem("SucMilk",10);
+		if (player.hasItem(consumables.SUCMILK,10))
+			player.consumeItem(consumables.SUCMILK,10);
 		else 
-			player.consumeItem("P.S.Mlk",10);
+			player.consumeItem(consumables.P_S_MLK,10);
 
 	}
 	else
 	{
-		if (player.hasItem("SucMilk",15))
-			player.consumeItem("SucMilk",15);
+		if (player.hasItem(consumables.SUCMILK,15))
+			player.consumeItem(consumables.SUCMILK,15);
 		else 
-			player.consumeItem("P.S.Mlk",15);
+			player.consumeItem(consumables.P_S_MLK,15);
 	}
 		
 	dynStats("lus=", 0, "cor", 5);
@@ -384,19 +384,19 @@ internal function defeatKellyNDBREAKHIM():void {
 	if(hasPinkEgg()) {
 		if(player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
 		else player.consumeItem(consumables.L_PNKEG);
-		if (player.hasItem("SucMilk",5))
-			player.consumeItem("SucMilk",5);
+		if (player.hasItem(consumables.SUCMILK,5))
+			player.consumeItem(consumables.SUCMILK,5);
 		else 
-			player.consumeItem("P.S.Mlk",5);
+			player.consumeItem(consumables.P_S_MLK,5);
 
 	}
 	else 
 	{
 
-		if (player.hasItem("SucMilk",10))
-			player.consumeItem("SucMilk",10);
+		if (player.hasItem(consumables.SUCMILK,10))
+			player.consumeItem(consumables.SUCMILK,10);
 		else 
-			player.consumeItem("P.S.Mlk",10);
+			player.consumeItem(consumables.P_S_MLK,10);
 	}
 
 	dynStats("lus=", 0, "cor", 5);
@@ -480,10 +480,10 @@ internal function breakingKeltNumeroThree():void {
 	outputText("\n\n\"<i>Ohhh...</i>\" Her breasts expand further, her pussy drips even more rivulets in sheer arousal.  Her eyes roll back and her breath grows short as she stares longingly at you.  You marvel at the effects: she's finally being turned into a horny cumslut!  Now all you have to do is wait for her to digest the hefty potion and come back to deliver the last dose.");
 	//consume items for 1x scene.
 
-	if (player.hasItem("SucMilk",5))
-		player.consumeItem("SucMilk",5);
+	if (player.hasItem(consumables.SUCMILK,5))
+		player.consumeItem(consumables.SUCMILK,5);
 	else 
-		player.consumeItem("P.S.Mlk",5);
+		player.consumeItem(consumables.P_S_MLK,5);
 
 	dynStats("lus=", 0, "cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
@@ -580,7 +580,7 @@ internal function keltFucksShitUp():void {
 private function keltFucksShitUpII():void {
 	clearOutput();
 	outputText("You awaken at the periphery of the farm, thankful to be alive.  Kelt is nowhere to be seen.  You have to wonder if Whitney saved you or the dumb beast was too stupid to finish you off.  Whatever the case, you head back to camp to lick your wounds.  <b>The worst indignity of all is that he broke a lot of your succubi milks.</b>  He'll likely have regained some more of his maleness by the time you're ready to attempt teaching him another lesson.");
-	player.consumeItem("SucMilk",5);
+	player.consumeItem(consumables.SUCMILK,5);
 	
 	//Roll Kelt back one obedience level - at the worst he drops to the level of the first fight
 	flags[kFLAGS.KELT_BREAK_LEVEL]--;
@@ -1688,11 +1688,11 @@ private function rewardKelly():void {
 	//Hair Dye/Apple Sauce
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
 	if(player.cockThatFits(300) >= 0 && player.hasCock()) addButton(0,"Applesauce",giveKellyAppleSauce);
-	if(player.hasItem("Black D") && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"BlackDye",dyeKellysBitchAssHair,"Black D");
-	if(player.hasItem("Blond D") && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"BlondDye",dyeKellysBitchAssHair,"Blond D");
-	if(player.hasItem("PurpDye") && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"PurpleDye",dyeKellysBitchAssHair,"PurpDye");
-	if(player.hasItem("PinkDye") && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"PinkDye",dyeKellysBitchAssHair,"PinkDye");
-	if(player.hasItem("Brown D") && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"BrownDye",dyeKellysBitchAssHair,"Brown D");
+	if(player.hasItem(consumables.BLACK_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"BlackDye",dyeKellysBitchAssHair,"Black D");
+	if(player.hasItem(consumables.BLOND_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"BlondDye",dyeKellysBitchAssHair,"Blond D");
+	if(player.hasItem(consumables.PURPDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"PurpleDye",dyeKellysBitchAssHair,"PurpDye");
+	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"PinkDye",dyeKellysBitchAssHair,"PinkDye");
+	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"BrownDye",dyeKellysBitchAssHair,"Brown D");
 	
 	addButton(9,"Back",approachKelly);
 }
@@ -1712,7 +1712,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 	if(color == "Black D") {
 		outputText("\n\nKelly whips her jet black hair to look at it, trotting back and forth and considering, swishing her equally black tail.\n\n\"<i>Mmm.  Not sure how much I like this, [Master],</i>\" she says eventually.  \"<i>It's very... severe, isn't it?</i>\"  You say you picked it because you think it will contrast well with the substance she's most often covered in.  Kelly laughs fondly as she begins the long process of retying her braid.\n\n\"<i>Oh, [Master].  Always thinking two moves ahead.  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "sable black";
-		player.consumeItem("Black D");
+		player.consumeItem(consumables.BLACK_D);
 	}
 	//Blonde dye: 
 	else if(color == "Blond D") {
@@ -1720,7 +1720,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		outputText("\n\n\"<i>This feels... right, [Master].  Very right.</i>\"  She looks at you lustfully.  \"<i>Wanna see if we have more fun?</i>\"  You say you'll definitely be back later to test that theory out.");
 		
 		outputText("\n\n\"<i>Don't stay away too long,</i>\" she purrs, as she begins the long process of retying her braid.  You feel your bottle blonde bitch's eyes on you for a long time after you head out of the field.");
-		player.consumeItem("Blond D");
+		player.consumeItem(consumables.BLOND_D);
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "slutty blonde";
 	}
 	//Purple dye: 
@@ -1729,14 +1729,14 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		outputText("\n\n\"<i>Like the goblins, I guess?  I don't know how much I like this colour, [Master].</i>\"  You say it'll serve as a constant reminder to her that she's a cock hungry breeding machine.  Kelly nods thoughtfully as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>You're right [Master], I would hate to ever forget that.  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "garish purple";
-		player.consumeItem("PurpDye");
+		player.consumeItem(consumables.PURPDYE);
 	}
 	//Pink dye:
 	else if(color == "PinkDye") {
 		outputText("\n\nKelly smiles with delight as she whips her bubblegum pink hair around to look at it, even prancing a bit so that her equally pink tail bounces.");
 		outputText("\n\n\"<i>Ooh I like this, it makes me feel so... girly.  I feel pink inside!</i>\"  You certainly do, you say.  Kelly giggles as she begins the long process of retying her braid.  She even sounds bubblier.");
 		outputText("\n\n\"<i>Thank you for your reward, [Master]!</i>\"");
-		player.consumeItem("PinkDye");
+		player.consumeItem(consumables.PINKDYE);
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "bright pink";
 	}
 	//Brown dye: Kelly smiles as she examines the regained chestnut brown colour of her hair and tail.
@@ -1744,7 +1744,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		outputText("\n\n\"<i>I'd almost forgotten what it looked like.</i>\"  She sighs, twisting a lock of it in a finger.  She looks quite different with her hair down - it reaches almost to her flanks.  \"<i>You'll bring more dye, right?  I'd love to do more colours.</i>\"  That depends, you say, on her being good.  Kelly sets her jaw determinedly as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>Of course, [Master].  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
-		player.consumeItem("Brown D");
+		player.consumeItem(consumables.BROWN_D);
 	}
 	else outputText("\n\nYO dog, " + color + " is definitely not working right. Please report this to fenoxo using the report a bug link on the site.");
 	menu();

@@ -75,8 +75,8 @@ public function openXmasPresent():void {
 	else if(player.cor <= 33) {
 		//Great present!
 		outputText("surprise at the box's contents - there's a carefull arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-		if(rand(2) == 0) inventory.takeItem(armors.SPIDERSILK_ROBES);
-		else inventory.takeItem(armors.SPIDERSILK_ARMOR);
+		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE);
+		else inventory.takeItem(armors.SSARMOR);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor < 60) {

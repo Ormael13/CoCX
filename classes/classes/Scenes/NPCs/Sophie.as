@@ -270,7 +270,7 @@
 			init12Combat(250,10,.3,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(11,20 + rand(25));
 			init14ChainedDrop()
-					.add(armors.WIZARDS_ROBES,1/10)
+					.add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
 			initX_Wings(WING_TYPE_HARPY,"large feathery");
 			initX_Specials(harpyUberCharge,harpyTease);

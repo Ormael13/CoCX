@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.Bazaar {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.ItemType;
 
 //  TIMES_IN_BENOITS:int = 562;
 //  BENOIT_AFFECTION:int = 563;
@@ -105,9 +106,9 @@ public function benoitsBuyMenu():void {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating his latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>", false);
-	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_1]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_1]));
-	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_2]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_2]));
-	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_3]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_3]));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value);
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
@@ -128,36 +129,37 @@ private function benoitSellMenu():void {
 	var sellMod:int = 3;
 	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Estimates</u></b>", false);
-	if(itemSlot1.quantity > 0 && int(itemValue(itemSlot1.shortName)/sellMod) > 0) {
-		outputText("\n" + int(itemValue(itemSlot1.shortName)/sellMod) + " gems for " + itemLongName(itemSlot1.shortName) + ".", false);
+	if(player.itemSlot1.quantity > 0 && int(player.itemSlot1.itype.value/sellMod) > 0) {
+		outputText("\n" + int(player.itemSlot1.itype.value/sellMod) + " gems for " + player.itemSlot1.itype.longName + ".", false);
 		temp1 = createCallBackFunction(benoitSellTransact,1);
 	}
-	if(itemSlot2.quantity > 0 && int(itemValue(itemSlot2.shortName)/sellMod) > 0) {
-		outputText("\n" + int(itemValue(itemSlot2.shortName)/sellMod) + " gems for " + itemLongName(itemSlot2.shortName) + ".", false);
+	if(player.itemSlot2.quantity > 0 && int(player.itemSlot2.itype.value/sellMod) > 0) {
+		outputText("\n" + int(player.itemSlot2.itype.value/sellMod) + " gems for " + player.itemSlot2.itype.longName + ".", false);
 		temp2 = createCallBackFunction(benoitSellTransact,2);
 	}
-	if(itemSlot3.quantity > 0 && int(itemValue(itemSlot3.shortName)/sellMod) > 0) {
-		outputText("\n" + int(itemValue(itemSlot3.shortName)/sellMod) + " gems for " + itemLongName(itemSlot3.shortName) + ".", false);
+	if(player.itemSlot3.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
+		outputText("\n" + int(player.itemSlot3.itype.value/sellMod) + " gems for " + player.itemSlot3.itype.longName + ".", false);
 		temp3 = createCallBackFunction(benoitSellTransact,3);
 	}
-	if(itemSlot4.quantity > 0 && int(itemValue(itemSlot3.shortName)/sellMod) > 0) {
+	if(player.itemSlot4.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
 		temp4 = createCallBackFunction(benoitSellTransact,4);
-		outputText("\n" + int(itemValue(itemSlot4.shortName)/sellMod) + " gems for " + itemLongName(itemSlot4.shortName) + ".", false);
+		outputText("\n" + int(player.itemSlot4.itype.value/sellMod) + " gems for " + player.itemSlot4.itype.longName + ".", false);
 	}
-	if(itemSlot5.quantity > 0 && int(itemValue(itemSlot3.shortName)/sellMod) > 0) {
+	if(player.itemSlot5.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
 		temp5 = createCallBackFunction(benoitSellTransact,5);
-		outputText("\n" + int(itemValue(itemSlot5.shortName)/sellMod) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
+		outputText("\n" + int(player.itemSlot5.itype.value/sellMod) + " gems for " + player.itemSlot5.itype.longName + ".", false);
 	}
-	choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", benoitIntro);
+	choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", benoitIntro);
 	
 }
 
 private function benoitTransactBuy(slot:int = 1):void {
 	clearOutput();
-	if(slot == 1) shortName = flags[kFLAGS.BENOIT_1];
-	else if(slot == 2) shortName = flags[kFLAGS.BENOIT_2];
-	else shortName = flags[kFLAGS.BENOIT_3];
-	if(player.gems < 2 * itemValue(shortName)) {
+	var itype:ItemType;
+	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
+	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
+	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	if(player.gems < 2 * itype.value) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
 		return;
@@ -167,10 +169,10 @@ private function benoitTransactBuy(slot:int = 1):void {
 	//(+3 Affection)
 	benoitAffection(3);
 	
-	player.gems -= 2 * itemValue(shortName);
+	player.gems -= 2 * itype.value;
 	statScreenRefresh();
 	menuLoc = 26;
-	inventory.takeItem();
+	inventory.takeItem(itype);
 }
 
 private function benoitSellTransact(slot:int = 1):void {
@@ -181,24 +183,24 @@ private function benoitSellTransact(slot:int = 1):void {
 	else outputText("Following a painstaking examination of what you've given him with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
 	var gems:int = 0;
 	if(slot == 1) {
-		gems = int(itemValue(itemSlot1.shortName)/sellMod);
-		itemSlot1.removeOneItem();
+		gems = int(player.itemSlot1.itype.value/sellMod);
+		player.itemSlot1.removeOneItem();
 	}
 	if(slot == 2) {
-		gems = int(itemValue(itemSlot2.shortName)/sellMod);
-		itemSlot2.removeOneItem();
+		gems = int(player.itemSlot2.itype.value/sellMod);
+		player.itemSlot2.removeOneItem();
 	}
 	if(slot == 3) {
-		gems = int(itemValue(itemSlot3.shortName)/sellMod);
-		itemSlot3.removeOneItem();
+		gems = int(player.itemSlot3.itype.value/sellMod);
+		player.itemSlot3.removeOneItem();
 	}
 	if(slot == 4) {
-		gems = int(itemValue(itemSlot4.shortName)/sellMod);
-		itemSlot4.removeOneItem();
+		gems = int(player.itemSlot4.itype.value/sellMod);
+		player.itemSlot4.removeOneItem();
 	}
 	if(slot == 5) {
-		gems = int(itemValue(itemSlot5.shortName)/sellMod);
-		itemSlot5.removeOneItem();
+		gems = int(player.itemSlot5.itype.value/sellMod);
+		player.itemSlot5.removeOneItem();
 	}
 	//add gem price here.
 	player.gems += gems;
@@ -749,7 +751,7 @@ private function tryToConvertToBassyWomb():void {
 	clearOutput();
 	//[Ingredients not in inventory: ]
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
-	if(!(player.hasItem(consumables.OVIELIX,2) && player.hasItem("Reptlum") && player.hasItem(consumables.GOB_ALE))) {
+	if(!(player.hasItem(consumables.OVIELIX,2) && player.hasItem(consumables.REPTLUM) && player.hasItem(consumables.GOB_ALE))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall " + benoitMF("Benoit","Benoite") + " mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
 		doNext(benoitIntro);
 	}
@@ -762,7 +764,7 @@ private function tryToConvertToBassyWomb():void {
 	//Ingredients in inventory: 
 	else {
 		player.consumeItem(consumables.OVIELIX,2);
-		player.consumeItem("Reptlum");
+		player.consumeItem(consumables.REPTLUM);
 		player.consumeItem(consumables.GOB_ALE);
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 		

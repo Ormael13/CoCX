@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -2547,7 +2546,7 @@ private function giveArianAnItem():void {
 		outputText("\n\n\"<i>Is it medicine you've brought me?  If so I'll be happy to take it; otherwise I think we should wait until I'm better; especially after that scolding you gave me earlier...</i>\"");
 		
 		//If PC has Vitality T. go to Give VT section. Otherwise, play below:
-		if(!player.hasItem("Vital T")) {
+		if(!player.hasItem(consumables.VITAL_T)) {
 			outputText("\n\nYou admit you don't have any medicine on you at the moment, and change the subject.");
 			arianHomeMenu();
 			return;
@@ -2567,13 +2566,13 @@ private function giveArianAnItem():void {
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
 	else {
-		if(player.hasItem("Vital T")) addButton(0,"Vital T",arianVitalityTincture);
+		if(player.hasItem(consumables.VITAL_T)) addButton(0,"Vital T",arianVitalityTincture);
 		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
 			if(player.hasItem(consumables.P_DRAFT)) addButton(1,"P. Incubi D",giveIncubusDraftToArian);
 			if(player.hasItem(consumables.P_S_MLK)) addButton(2,"P.S.Mlk",succubiMilkForArian);
 			if(player.hasItem(consumables.LACTAID)) addButton(3,"Lactaid",giveArianLactaid);
 			if(player.hasItem(consumables.REDUCTO)) addButton(4,"Reducto",giveArianReducto);
-			if(player.hasItem("Reptlum")) addButton(5,"Reptlum",giveArianReptilum);
+			if(player.hasItem(consumables.REPTLUM)) addButton(5,"Reptlum",giveArianReptilum);
 		}
 		addButton(9,"Back",arianHomeMenu);
 	}
@@ -2602,7 +2601,7 @@ private function arianVitalityTincture():void {
 	
 	outputText("\n\nYou smile and stroke the lizan gently on [Arian eir] head, telling [Arian em] that [Arian ey]'s welcome.  Now, you think it's time [Arian ey] laid [Arian em]self back down and got some rest; give the medicine time to work.  You promise you'll try and come back to see [Arian em] later, but right now, [Arian ey] needs to get some more rest.  Arian nods and settles [Arian em]self on [Arian eir] bed.");
 	
-	player.consumeItem("Vital T");
+	player.consumeItem(consumables.VITAL_T);
 	arianHealth(10);
 	menu();
 	addButton(0,"Next",giveArianAnItem);
@@ -3120,7 +3119,7 @@ private function useReductoOnAriansAsshole():void {
 //Chance to make Arian grow a second dick, if [Arian ey] has only one. (high chance: 50%)
 private function giveArianReptilum():void {
 	clearOutput();
-	player.consumeItem("Reptlum");
+	player.consumeItem(consumables.REPTLUM);
 	outputText("Fingering the vial of reptilium, you smirk to yourself.  Quickly wiping it off your face, you instruct Arian to close [Arian eir] eyes and open [Arian eir] mouth, as you have a special surprise for [Arian em].");
 	
 	outputText("\n\nArian, quickly complies.  \"<i>Okay, but can you at least tell me what is this about?</i>\"  [Arian ey] asks in curiosity.");
@@ -3321,8 +3320,8 @@ private function imbueTalisman():void {
 	outputText("\n\n<b>Shielding Spell:</b> Two Black Chitin and One Tough Silk - Increases defense for the duration of the battle.");
 	outputText("\n<b>Immolation Spell:</b> 2x Goblin Ale and 1x Sweet Gossamer - Deals damage over time.");
 	menu();
-	if(player.hasItem("B.Chitn",2) && player.hasItem("T.SSilk")) addButton(0,"Shielding",arianSpellPlace,"Shielding Spell");
-	if(player.hasItem(consumables.GOB_ALE,2) && player.hasItem("S.Gossr")) addButton(1,"Immolation",arianSpellPlace,"Immolation Spell");
+	if(player.hasItem(useables.B_CHITN,2) && player.hasItem(useables.T_SSILK)) addButton(0,"Shielding",arianSpellPlace,"Shielding Spell");
+	if(player.hasItem(consumables.GOB_ALE,2) && player.hasItem(consumables.S_GOSSR)) addButton(1,"Immolation",arianSpellPlace,"Immolation Spell");
 	addButton(9,"Back",arianHomeMenu);
 }
 
@@ -3347,14 +3346,14 @@ private function arianSpellPlace(spell:String):void {
 	if(spell == "Shielding Spell") {
 		player.createStatusAffect("Shielding Spell",0,0,0,0);
 		//Shielding Spell: 2x Black Chitin and 1x Tough Silk. - Increases defense for the duration of the battle.
-		player.consumeItem("B.Chitn",2);
-		player.consumeItem("T.SSilk");
+		player.consumeItem(useables.B_CHITN,2);
+		player.consumeItem(useables.T_SSILK);
 	}
 	if(spell == "Immolation Spell") {
 		player.createStatusAffect("Immolation Spell",0,0,0,0);
 		//Immolation Spell: 2x Goblin Ale and 1x Sweet Gossamer. - Deals damage over time.
 		player.consumeItem(consumables.GOB_ALE,2);
-		player.consumeItem("S.Gossr");
+		player.consumeItem(consumables.S_GOSSR);
 	}
 	//If charged, stay chargggggeeed
 	if(player.hasKeyItem("Arian's Talisman") >= 0) {
@@ -3889,12 +3888,14 @@ public function arianLaysEggs():void {
 	outputText("\n\nYou laugh at Arian's reaction, telling her that you don't mind.  You should go right now.  You turn to pocket the egg and leave Arian's tent, bidding the lizan farewell before you do.\n\n");
 	//(PC obtains (Large) Egg of the [color] asked message.)
 	menuLoc = 2;
-	if(flags[kFLAGS.ARIAN_EGG_COLOR] == "brown") shortName = "L.BrnEg";
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "purple") shortName = "L.PrpEg";
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "blue") shortName = "L.BluEg";
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "pink") shortName = "L.PnkEg";
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "white") shortName = "L.WhtEg";
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "rubbery black") takeItem(consumables.L_BLKEG);
+	var itype:ItemType;
+	if(flags[kFLAGS.ARIAN_EGG_COLOR] == "brown") itype = consumables.L_BRNEG;
+	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "purple") itype = consumables.L_PRPEG;
+	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "blue") itype = consumables.L_BLUEG;
+	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "pink") itype = consumables.L_PNKEG;
+	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "white") itype = consumables.L_WHTEG;
+	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "rubbery black") itype = consumables.L_BLKEG;
+	inventory.takeItem(itype);
 }
 //DildoFun
 private function arianDildoFun():void {

@@ -11,7 +11,7 @@ package classes.Items.Other
 	{
 		private var effect:Function;
 
-		override public function useItem(player:Player):void
+		override public function useItem(player:Player,output:Boolean):void
 		{
 			effect(player);
 		}

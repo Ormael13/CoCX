@@ -214,7 +214,6 @@ package classes.Scenes.Areas.HighMountains
 			init13Level(16,rand(25)+10,50);
 			init14FixedDrop(consumables.PURPEAC);
 			initX_Wings(WING_TYPE_HARPY,"fluffy feathery");
-			initX_Specials(11020,11021,11022);
 
 		}
 		

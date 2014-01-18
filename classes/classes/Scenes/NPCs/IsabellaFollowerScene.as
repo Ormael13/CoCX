@@ -162,7 +162,7 @@ public function callForFollowerIsabella():void {
 	var milk:Function = null;
 	if(flags[kFLAGS.ISABELLA_MILKED_YET] < 0) milk = getMilk;
 	var pro:Function = null;
-	if(player.hasItem("ProBova") && player.gender > 0) {
+	if(player.hasItem(consumables.PROBOVA) && player.gender > 0) {
 		pro = isabellaBurps;
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
 	}
@@ -876,7 +876,7 @@ private function sparring(type:int = 1):void {
 
 //first time (Z)
 private function isabellaBurps():void {
-	player.consumeItem("ProBova");
+	player.consumeItem(consumables.PROBOVA);
 	spriteSelect(31);
 	outputText("", true);
 	//First time

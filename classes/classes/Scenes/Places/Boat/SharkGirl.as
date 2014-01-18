@@ -63,7 +63,7 @@
 			init13Level(4,rand(15) + 5);
 			init14WeightedDrop().
 					add(consumables.L_DRAFT,3).
-					add(armors.SKIMPY_BLACK_BIKINI,1).
+					add(armors.S_SWMWR,1).
 					add(consumables.SHARK_T,5).
 					add(null,1);
 			initX_Specials(sharkTease,sharkTease);

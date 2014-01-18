@@ -22,7 +22,7 @@ package classes.Items
 			CoC_Settings.errorAMC("Consumable","doEffect",id);
 		}
 
-		public function canConsume(player:Player):Boolean
+		public function canConsume(player:Player,output:Boolean):Boolean
 		{
 			return true;
 		}
@@ -30,9 +30,9 @@ package classes.Items
 		/**
 		 * Removes item from player and does effect
 		 */
-		override public function useItem(player:Player):void
+		override public function useItem(player:Player,output:Boolean):void
 		{
-			if (canConsume(player)){
+			if (canConsume(player,output)){
 				player.consumeItem(this,1);
 				doEffect(player);
 			}

@@ -173,7 +173,7 @@
 			init13Level(2,5+rand(10));
 			init14WeightedDrop()
 					.add(consumables.LABOVA_,1)
-					.add(weapons.RIDING_CROP,1)
+					.add(weapons.RIDINGC,1)
 					.add(consumables.OVIELIX,2)
 					.add(consumables.L_DRAFT,6);
 			initX_Specials(cultistRaisePlayerLust,cultistLustTransfer);

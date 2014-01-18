@@ -2,6 +2,7 @@
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 
 	public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
@@ -618,7 +619,7 @@ public function rubisFuckingHouseYouPervert():void {
 			outputText("\n\nIt's only once you get back tbat you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
 			//(Add Bimbo Skirt to inventory)
 			menuLoc = 2;
-			inventory.takeItem(armors.BIMBO_SKIRT);
+			inventory.takeItem(armors.BIMBOSK);
 			return;
 		}
 		//(If Bimbo Skirt not found) 
@@ -2426,7 +2427,7 @@ private function getFuckedByRubi():void {
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("blunted, musky tip");
 	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
-	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + flags[kFLAGS.RUBI_COCK_TYPE] + "</b>  ")
+	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + flags[kFLAGS.RUBI_COCK_TYPE] + "</b>  ");
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");
@@ -2639,7 +2640,7 @@ private function popButtjobs():void {
 //(Can give him Purified Succubus Milk, grows boobs, shrinks penis.)
 //(Can give him Purified Incubus Draft, shrinks boobs, grows penis.)
 //(Can give him Gro+ to grow either one.)
-private function giveRubiATFItem(short:String):void {
+private function giveRubiATFItem(itype:ItemType):void {
 	clearOutput();
 	rubiSprite();
 	//First Time Giving a TF Item
@@ -2650,8 +2651,8 @@ private function giveRubiATFItem(short:String):void {
 	flags[kFLAGS.RUBI_TIMES_GIVEN_AN_ITEM]++;
 	//[go to TF scene]
 	//Succubus Milk
-	if(short == "SucMilk" || short == "P.S.Mlk") {
-		if(short == "SucMilk") {
+	if(itype == consumables.SUCMILK || itype == consumables.P_S_MLK) {
+		if(itype == consumables.SUCMILK) {
 			//Increase bust size by 1.
 			//Decrease penis size by 1.
 			//Random chance to give vagina (will always give it if Rubi has no penis or penis is just removed).
@@ -2697,17 +2698,17 @@ private function giveRubiATFItem(short:String):void {
 			flags[kFLAGS.RUBI_SHE] = 1;
 		}
 		//(If Rubi gets demonic heels)
-		if(flags[kFLAGS.RUBI_FEET] == 0 && rand(3) == 0 && short == "SucMilk") {
+		if(flags[kFLAGS.RUBI_FEET] == 0 && rand(3) == 0 && itype == consumables.SUCMILK) {
 			outputText("\n\nRubi suddenly hops from foot to foot, breathing in sharply.  \"<i>Ow, ow, ow!</i>\" [rubi ey] exclaims, dropping down onto [rubi eir] naked butt.  [rubi Ey] lifts one foot gingerly, inspecting the heel and sole.  Rubi rocks back and forth, craddling [rubi eir] foot as a pronounced bulge appears on the heel.  Soon, it splits as a sharp black horn grows out, pointing downwards.  After a minute of this, Rubi suddenly sighs with relief as the painful growth seems to subside.  [rubi Ey] gets to [rubi eir] feet, the horn making [rubi em] stand and walk as if [rubi ey] were wearing high heels.");
 			flags[kFLAGS.RUBI_FEET] = 1;
 		}
 		//(If Rubi gets horns)
-		if(rand(3) == 0 && flags[kFLAGS.RUBI_HORNTYPE] == 0 && short == "SucMilk") {
+		if(rand(3) == 0 && flags[kFLAGS.RUBI_HORNTYPE] == 0 && itype == consumables.SUCMILK) {
 			outputText("\n\nRubi's hands suddenly dart up, clutching [rubi eir] head as though [rubi ey] has a massive headache.  [rubi Ey] feels around blindly, trying to locate the source of the pain, and then you see it.  Two small bulges appear on [rubi eir] forehead, just at the hairline.  They grow larger and larger until the skin splits cleanly open revealing shiny black bone.  Horns.  They grow up and backwards, forming light ridges.  They don't quite grow completely past [rubi eir] head, however, before the growth stops.  Rubi calms and stands.  [rubi Eir] hands roam over every inch of [rubi eir] new addition as glances in the mirror, marveling at [rubi eir] demonic appearance.");
 			flags[kFLAGS.RUBI_HORNTYPE] = 1;
 		}
 		//(If Rubi gets red skin)
-		if(rand(3) == 0 && flags[kFLAGS.RUBI_SKIN] != 1 && short == "SucMilk") {
+		if(rand(3) == 0 && flags[kFLAGS.RUBI_SKIN] != 1 && itype == consumables.SUCMILK) {
 			outputText("\n\nRubi clutches [rubi eir] stomach suddenly as you notice red spots appearing on [rubi eir] ");
 			if(flags[kFLAGS.RUBI_SKIN] != 2) outputText("skin");
 			else outputText("coat of fur");
@@ -2717,7 +2718,7 @@ private function giveRubiATFItem(short:String):void {
 			flags[kFLAGS.RUBI_SKIN] = 1;
 		}
 	}
-	else if(short == "IncubiD" || short == "P.Draft") {
+	else if(itype == consumables.INCUBID || itype == consumables.P_DRAFT) {
 		//Incubus Draft
 		//Decrease bust size by 1.
 		//Increase penis size by 1 (will grow a 5" penis if none exists).
@@ -2725,7 +2726,7 @@ private function giveRubiATFItem(short:String):void {
 		//Random chance to give demonic high heels. (See Succubus Milk)
 		//Random chance to give large horns. (See Succubus Milk)
 		//Random chance to give red skin. (See Succubus Milk)
-		if(short == "IncubiD") outputText("You hand over the bottle of milky white fluids to Rubi.  [rubi Ey] takes a moment to read over the label before pulling out the cork and downing the whole bottle in one gulp.");
+		if(itype == consumables.INCUBID) outputText("You hand over the bottle of milky white fluids to Rubi.  [rubi Ey] takes a moment to read over the label before pulling out the cork and downing the whole bottle in one gulp.");
 		//Purified Incubus Draft
 		//Decrease bust size by 1. (See Incubus Draft)
 		//Increase penis size by 1 (will grow a penis if none exists). (See Incubus Draft)
@@ -2764,7 +2765,7 @@ private function giveRubiATFItem(short:String):void {
 	}
 	//Gro+
 	//Can choose Boobs or Penis. Grow that body part by 2.
-	else if(short == "GroPlus") {
+	else if(itype == consumables.GROPLUS) {
 		outputText("\n\nWhere would you like to inject the Gro+?");
 		//[Breasts] [Penis (if present)] [Back]
 		menu();
@@ -2773,7 +2774,7 @@ private function giveRubiATFItem(short:String):void {
 		addButton(4,"Back",pickAnItemToFeedRubi);
 		return;
 	}
-	else if(short == "Reducto") {
+	else if(itype == consumables.REDUCTO) {
 		//Reducto
 		//Can choose Penis or Boobs. Reduces that body part by 1. (Won't reduce below E-cup (5) if Rubi has bimbo body)
 		//Won't remove penises.
@@ -2787,7 +2788,7 @@ private function giveRubiATFItem(short:String):void {
 		return;
 	}
 	//Bimbo Liqueur (Modified for variant genders)
-	else if(short == "BimboLq") {
+	else if(itype == consumables.BIMBOLQ) {
 		outputText("You hold out the bottle of Bimbo Liqueur.  Rubi takes it, and looks it over tentatively.  \"<i>Bimbo... liqueur?</i>\" [rubi ey] asks, quirking an eyebrow at you.  \"<i>But what does this do?  There's a huge warning label right here.  Effects are permanent, strong...</i>\" [rubi eir] voice drifts off as [rubi ey] reads.");
 		outputText("\n\nYou explain that this liqueur will give [rubi em] the fresh start [rubi ey] so desired when [rubi ey] came to Tel'Adre.  That before [rubi ey] was simply wearing a mask, now [rubi ey] can become the mask.  [rubi Ey] nods along with you, but still frowns.");
 		outputText("\n\n\"<i>Are you sure?  I'm fine with my body how it is... but if you want me to change, I'll do it,</i>\" [rubi ey] says, clutching the bottle tight, suddenly looking very serious.");
@@ -2844,7 +2845,7 @@ private function giveRubiATFItem(short:String):void {
 	//Equinum
 	//Gives horsecock.
 	//Grows cock. (As Incubus Draft above)
-	else if(short == "Equinum") {
+	else if(itype == consumables.EQUINUM) {
 		outputText("You hand over the vial of milky white fluids.  Rubi looks it over and gives you an odd look.  \"<i>Horses?  Really?  What, do you like the giant cocks?</i>\" [rubi ey] asks, incredulously.  Nevertheless, [rubi ey] pops the cork out of the vial and puts [rubi eir] lips to the flared opening, downing the transformative drink in one swallow.");
 		if(flags[kFLAGS.RUBI_COCK_SIZE] == 0) {
 			outputText("\n\nRubi gasps and [rubi eir] hands dart between [rubi eir] legs, grasping frantically for something.  Between [rubi eir] fingers you spot it, a fleshy ");
@@ -2868,7 +2869,7 @@ private function giveRubiATFItem(short:String):void {
 		}
 	}
 	//Trap Oil
-	else if(short == "TrapOil") {
+	else if(itype == consumables.TRAPOIL) {
 		//Decrease bust size by 1 if above 1. (See Incubus Draft)
 		//Increase bust size by 1 if below 1. (See succubus milk)
 		//Decrease penis size by 1 if above 3. (See succubus milk)
@@ -2928,7 +2929,7 @@ private function giveRubiATFItem(short:String):void {
 	}
 	//Whisker Fruit
 	//Progression of furriness: cat ears, then whiskers and paws, then cat penis, then furry body.
-	else if(short == "W.Fruit") {
+	else if(itype == consumables.W_FRUIT) {
 		outputText("You hand over the tiny peach-like fruit to Rubi.  [rubi Ey] turns it over in [rubi eir] hands and remarks, \"<i>How can you like these things?  They're so... furry!  Well, to each their own I suppose.</i>\"  Rubi gulps visibly, preparing [rubi em]self for the whiskery fruit before biting down.  Apparently, it's not as bad as [rubi ey] thought it was, as [rubi ey] makes an appreciative grunt and consumes the fruit down to the pit.");
 		
 		//(Gaining Cat Ears) 
@@ -2958,7 +2959,7 @@ private function giveRubiATFItem(short:String):void {
 		}
 	}
 	//Purity Peach
-	if(short == "PurPeac") {
+	if(itype == consumables.PURPEAC) {
 		//Requires 5 Purity Peaches
 		//Consumes 1 hour
 		//Gives Anemone Penis.
@@ -3019,12 +3020,12 @@ private function giveRubiATFItem(short:String):void {
 		else {
 			outputText("\n\nYou monitor Rubi carefully, but it seems this batch of peaches has no effect other than filling [rubi eir] stomach.  Or perhaps there's nothing more to change.");
 		}
-		player.consumeItem(short,1);
-		player.consumeItem(short,1);
-		player.consumeItem(short,1);
-		player.consumeItem(short,1);
+		player.consumeItem(itype,1);
+		player.consumeItem(itype,1);
+		player.consumeItem(itype,1);
+		player.consumeItem(itype,1);
 	}
-	player.consumeItem(short,1);
+	player.consumeItem(itype,1);
 	menu();
 	addButton(0,"Next",pickAnItemToFeedRubi);
 	//Go back to give item menu.
@@ -3246,93 +3247,93 @@ private function pickAnItemToFeedRubi():void {
 	//The following items can be given to Rubi at Relationship 40+: Bimbo Liqueur (once), Incubus Draft (up to three times).  Incubus Rubi can't be given Bimbo Liqueur, and likewise Bimbo Rubi can't be given Incubus Draft.
 	var events:Array = [];
 	var functions:Array = [];
-	if(player.hasItem("ClssyCl") && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
+	if(player.hasItem(armors.CLSSYCL) && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
 		events[events.length] = 3879;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("RbbrClt") && flags[kFLAGS.RUBI_FETISH_CLOTHES] == 0) {
+	if(player.hasItem(armors.RBBRCLT) && flags[kFLAGS.RUBI_FETISH_CLOTHES] == 0) {
 		events[events.length] = 3880;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("AdvClth") && flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 0) {
+	if(player.hasItem(armors.ADVCLTH) && flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 0) {
 		events[events.length] = 3881;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("TubeTop") && flags[kFLAGS.RUBI_TUBE_TOP] == 0) {
+	if(player.hasItem(armors.TUBETOP) && flags[kFLAGS.RUBI_TUBE_TOP] == 0) {
 		events[events.length] = 3882;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("T.BSuit") && flags[kFLAGS.RUBI_BODYSUIT] == 0) {
+	if(player.hasItem(armors.T_BSUIT) && flags[kFLAGS.RUBI_BODYSUIT] == 0) {
 		events[events.length] = 3883;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("B.Dress") && flags[kFLAGS.RUBI_LONGDRESS] == 0) {
+	if(player.hasItem(armors.B_DRESS) && flags[kFLAGS.RUBI_LONGDRESS] == 0) {
 		events[events.length] = 3884;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("LthrPnt") && flags[kFLAGS.RUBI_TIGHT_PANTS] == 0) {
+	if(player.hasItem(armors.LTHRPNT) && flags[kFLAGS.RUBI_TIGHT_PANTS] == 0) {
 		events[events.length] = 3885;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem(armors.NURSES_OUTFIT) && flags[kFLAGS.RUBI_NURSE_CLOTHES] == 0) {
+	if(player.hasItem(armors.NURSECL) && flags[kFLAGS.RUBI_NURSE_CLOTHES] == 0) {
 		events[events.length] = 3886;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem(armors.SKIMPY_BLACK_BIKINI) && flags[kFLAGS.RUBI_SWIMWEAR] == 0) {
+	if(player.hasItem(armors.S_SWMWR) && flags[kFLAGS.RUBI_SWIMWEAR] == 0) {
 		events[events.length] = 3887;
 		functions[functions.length] = eventParser;
 	}
-	if(player.hasItem("BonStrp") && flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 0) {
-		events[events.length] = "BonStrp";
+	if(player.hasItem(armors.BONSTRP) && flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 0) {
+		events[events.length] = armors.BONSTRP;
 		functions[functions.length] = giveRubiClothes;
 	}
-	if(player.hasItem("I.Corst") && flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 0) {
-		events[events.length] = "I.Corst";
+	if(player.hasItem(armors.I_CORST) && flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 0) {
+		events[events.length] = armors.I_CORST;
 		functions[functions.length] = giveRubiClothes;
 	}
 	
 	if(player.hasItem(consumables.BIMBOLQ) && !rubiBimbo()) {
-		events[events.length] = "BimboLq";
+		events[events.length] = consumables.BIMBOLQ;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.INCUBID)) {
-		events[events.length] = "IncubiD";
+		events[events.length] = consumables.INCUBID;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.P_DRAFT)) {
-		events[events.length] = "P.Draft";
+		events[events.length] = consumables.P_DRAFT;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.SUCMILK)) {
-		events[events.length] = "SucMilk";
+		events[events.length] = consumables.SUCMILK;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.P_S_MLK)) {
-		events[events.length] = "P.S.Mlk";
+		events[events.length] = consumables.P_S_MLK;
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(player.hasItem("PurPeac",5)) {
-		events[events.length] = "PurPeac";
+	if(player.hasItem(consumables.PURPEAC,5)) {
+		events[events.length] = consumables.PURPEAC;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.EQUINUM)) {
-		events[events.length] = "Equinum";
+		events[events.length] = consumables.EQUINUM;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.W_FRUIT)) {
-		events[events.length] = "W.Fruit";
+		events[events.length] = consumables.W_FRUIT;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.REDUCTO)) {
-		events[events.length] = "Reducto";
+		events[events.length] = consumables.REDUCTO;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	if(player.hasItem(consumables.GROPLUS)) {
-		events[events.length] = "GroPlus";
+		events[events.length] = consumables.GROPLUS;
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(player.hasItem("TrapOil")) {
-		events[events.length] = "TrapOil";
+	if(player.hasItem(consumables.TRAPOIL)) {
+		events[events.length] = consumables.TRAPOIL;
 		functions[functions.length] = giveRubiATFItem;
 	}
 	while(events.length < 10) {
@@ -3350,19 +3351,19 @@ private function pickAnItemToFeedRubi():void {
 		else if(events[temp] == 3885) eventNames[eventNames.length] = "Leather Pants";
 		else if(events[temp] == 3886) eventNames[eventNames.length] = "Nurse Clothes";
 		else if(events[temp] == 3887) eventNames[eventNames.length] = "SluttySwim";
-		else if(events[temp] == "BimboLq") eventNames[eventNames.length] = "Bimbo Liq";
-		else if(events[temp] == "IncubiD") eventNames[eventNames.length] = "Incubi Draft";
-		else if(events[temp] == "BonStrp") eventNames[eventNames.length] = "Bondage S.";
-		else if(events[temp] == "I.Corst") eventNames[eventNames.length] = "I. Corset";
-		else if(events[temp] == "P.Draft") eventNames[eventNames.length] = "P.Draft";
-		else if(events[temp] == "SucMilk") eventNames[eventNames.length] = "SucMilk";
-		else if(events[temp] == "P.S.Mlk") eventNames[eventNames.length] = "P.S.Mlk";
-		else if(events[temp] == "PurPeac") eventNames[eventNames.length] = "PurPeac";
-		else if(events[temp] == "Equinum") eventNames[eventNames.length] = "Equinum";
-		else if(events[temp] == "W.Fruit") eventNames[eventNames.length] = "W.Fruit";
-		else if(events[temp] == "Reducto") eventNames[eventNames.length] = "Reducto";
-		else if(events[temp] == "GroPlus") eventNames[eventNames.length] = "GroPlus";
-		else if(events[temp] == "TrapOil") eventNames[eventNames.length] = "TrapOil";
+		else if(events[temp] == consumables.BIMBOLQ) eventNames[eventNames.length] = "Bimbo Liq";
+		else if(events[temp] == consumables.INCUBID) eventNames[eventNames.length] = "Incubi Draft";
+		else if(events[temp] == armors.BONSTRP) eventNames[eventNames.length] = "Bondage S.";
+		else if(events[temp] == armors.I_CORST) eventNames[eventNames.length] = "I. Corset";
+		else if(events[temp] == consumables.P_DRAFT) eventNames[eventNames.length] = "P.Draft";
+		else if(events[temp] == consumables.SUCMILK) eventNames[eventNames.length] = "SucMilk";
+		else if(events[temp] == consumables.P_S_MLK) eventNames[eventNames.length] = "P.S.Mlk";
+		else if(events[temp] == consumables.PURPEAC) eventNames[eventNames.length] = "PurPeac";
+		else if(events[temp] == consumables.EQUINUM) eventNames[eventNames.length] = "Equinum";
+		else if(events[temp] == consumables.W_FRUIT) eventNames[eventNames.length] = "W.Fruit";
+		else if(events[temp] == consumables.REDUCTO) eventNames[eventNames.length] = "Reducto";
+		else if(events[temp] == consumables.GROPLUS) eventNames[eventNames.length] = "GroPlus";
+		else if(events[temp] == consumables.TRAPOIL) eventNames[eventNames.length] = "TrapOil";
 		else {
 			eventNames[eventNames.length] = "FUCKIN TRAP: " + events[temp];
 			trace("FUCKIN TRAP: " + events[temp]);
@@ -3382,24 +3383,24 @@ private function pickAnItemToFeedRubi():void {
 
 	
 //(Give Clothes)
-public function giveRubiClothes(short:String = ""):void {
+public function giveRubiClothes(itype:ItemType = null):void {
 	clearOutput();
 	rubiSprite();
 	outputText("You hand over the spare set of clothes, and Rubi's eyes light up.  \"<i>For me?</i>\"  the little demon practically screams, ecstatic.  \"<i>ThankyouthankyouthankyouTHANKYOU!</i>\"");
 	outputText("\n\nRubi holds the outfit up to [rubi eir] body and grins, \"<i>Ooooh, I just love it!  I mean, I'll have to take it to the tailors to get fitted, but I absolutely adore it!</i>\"");
 	outputText("\n\nYou wonder how [rubi ey] could get so excited over it, after all it's just clothes, but you smile and nod along, happy to make [rubi em] happy.");
-	player.consumeItem(short,1);
-	if(short == "ClssyCl") flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
-	else if(short == "RbbrClt") flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
-	else if(short == "AdvClth") flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;
-	else if(short == "TubeTop") flags[kFLAGS.RUBI_TUBE_TOP] = 1;
-	else if(short == "T.BSuit") flags[kFLAGS.RUBI_BODYSUIT] = 1;
-	else if(short == "B.Dress") flags[kFLAGS.RUBI_LONGDRESS] = 1;
-	else if(short == "LthrPnt") flags[kFLAGS.RUBI_TIGHT_PANTS] = 1;
-	else if(short == "NurseCl") flags[kFLAGS.RUBI_NURSE_CLOTHES] = 1;
-	else if(short == "S.Swmwr") flags[kFLAGS.RUBI_SWIMWEAR] = 1;
-	else if(short == "I.Corst") flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
-	else if(short == "BonStrp") flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
+	player.consumeItem(itype,1);
+	if(itype == armors.CLSSYCL) flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
+	else if(itype == armors.RBBRCLT) flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
+	else if(itype == armors.ADVCLTH) flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;
+	else if(itype == armors.TUBETOP) flags[kFLAGS.RUBI_TUBE_TOP] = 1;
+	else if(itype == armors.T_BSUIT) flags[kFLAGS.RUBI_BODYSUIT] = 1;
+	else if(itype == armors.B_DRESS) flags[kFLAGS.RUBI_LONGDRESS] = 1;
+	else if(itype == armors.LTHRPNT) flags[kFLAGS.RUBI_TIGHT_PANTS] = 1;
+	else if(itype == armors.NURSECL) flags[kFLAGS.RUBI_NURSE_CLOTHES] = 1;
+	else if(itype == armors.S_SWMWR) flags[kFLAGS.RUBI_SWIMWEAR] = 1;
+	else if(itype == armors.I_CORST) flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
+	else if(itype == armors.BONSTRP) flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
 	rubiAffection(20);
 	doNext(rubisFuckingHouseYouPervert);
 }

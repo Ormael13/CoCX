@@ -1,8 +1,8 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.CoC;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
+	import classes.Scenes.Monsters.AbstractSuccubus;
 
 	use namespace kGAMECLASS;
 	
@@ -10,7 +10,7 @@ package classes.Scenes.Quests.UrtaQuest
 	 * ...
 	 * @author aimozg
 	 */
-	public class MilkySuccubus extends Monster 
+	public class MilkySuccubus extends AbstractSuccubus 
 	{
 
 		override protected function performCombatAction():void
@@ -107,10 +107,10 @@ package classes.Scenes.Quests.UrtaQuest
 			initX_Horns(HORNS_DRACONIC_X2);
 			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Specials(11020,11021,11022);
+			initX_Specials(kissAttack,seduceAttack,whipAttack);
 
 		}
-		
+
 	}
 
 }

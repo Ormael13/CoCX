@@ -35,7 +35,6 @@ package classes.Scenes.Dungeons.DesertCave
 			init11Armor("robes",1,armorPerk,armorValue);
 			init12Combat(130,20,.6,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(7,rand(15) + 55);
-			initX_Specials(11020,11021,11022);
 			this.createPerk("Resolute",0,0,0,0);
 			this.createPerk("Focused",0,0,0,0);
 		}

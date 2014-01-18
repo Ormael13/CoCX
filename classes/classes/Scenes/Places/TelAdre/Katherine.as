@@ -1,6 +1,5 @@
 ﻿package classes.Scenes.Places.TelAdre{
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
 import classes.Appearance;
 public class Katherine extends TelAdreAbstractContent{
@@ -292,9 +291,9 @@ private function giveKatherineAnItem():void {
 	var double2:Function = null;
 	var large:Function = null;
 	if(player.hasItem(consumables.REDUCTO)) reducto = useReductoOnKat;
-	if(player.hasItem("BulbyPp")) bulb = giveKatABulbousPepper;
-	if(player.hasItem("DblPepp")) double2 = giveKatADoublePepper;
-	if(player.hasItem("LargePp")) large = giveKatAOverlyLargePepper;
+	if(player.hasItem(consumables.BULBYPP)) bulb = giveKatABulbousPepper;
+	if(player.hasItem(consumables.DBLPEPP)) double2 = giveKatADoublePepper;
+	if(player.hasItem(consumables.LARGEPP)) large = giveKatAOverlyLargePepper;
 	//[Reducto] [Bulbous Pepper] [Double Pepper] [Overly Large Pepper]
 	simpleChoices("Reducto",reducto,"BulbPepper",bulb,"DblPeppr",double2,"LrgPepp",large,"Back",katherineMenu);
 }
@@ -439,7 +438,7 @@ private function giveKatABulbousPepper():void {
 		flags[kFLAGS.KATHERINE_BALL_SIZE] += 2;
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] > 5) flags[kFLAGS.KATHERINE_BALL_SIZE] = 5;
 		dynStats("lus", 10+player.lib/20);
-		player.consumeItem("BulbyPp");
+		player.consumeItem(consumables.BULBYPP);
 		katSexMenu();
 	}
 	//(else If KathBallSize maxed at 5 inches)
@@ -471,7 +470,7 @@ private function giveKatADoublePepper():void {
 		outputText("\"<i>Oh dear...  I think that was maybe a bit too spicy.  You want to help me out with this?</i>\" she purrs, already starting to stroke her twin shafts.\n\n", false);
 	}
 	dynStats("lus", 10+player.lib/20);
-	player.consumeItem("DblPepp");
+	player.consumeItem(consumables.DBLPEPP);
 	katSexMenu();
 }
 	
@@ -490,7 +489,7 @@ private function giveKatAOverlyLargePepper():void {
 		//use 1x large pepper, increase Kat length by 2, Display Katherine Sex options
 		dynStats("lus", 10+player.lib/20);
 		flags[kFLAGS.KATHERINE_DICK_LENGTH] += 2;
-		player.consumeItem("LargePp");
+		player.consumeItem(consumables.LARGEPP);
 		katSexMenu();
 	}
 	//else if capped)
@@ -696,7 +695,7 @@ private function suckNFuck():void {
 
 //Get Penetrated
 private function letKatKnotYou():void {
-	var x:Number = player.biggestCockIndex();
+	var x:Number;
 	outputText("", true);
 	outputText("You ask Katherine if she'd like to penetrate you.  She looks startled, then grins like the proverbial cat that ate the canary.  \"<i>Well, all right then...</i>\" she declares, swiftly stripping off her clothes.  \"<i>Get undressed, turn around and kneel on the ground.</i>\"  Her canine cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s are", false);
@@ -723,7 +722,6 @@ private function letKatKnotYou():void {
 
 //Get Penetrated (Vaginal)
 private function letKatKnotYourCuntPussyFuck():void {
-	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in your " + vaginaDescript() + ".\n\n", false);
 
@@ -820,7 +818,6 @@ private function letKatKnotYourCuntPussyFuck():void {
 
 //Get Penetrated (Anal)
 private function getPenetrated():void {
-	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in your " + assholeDescript() + ".\n\n", false);
 
@@ -914,7 +911,6 @@ private function getPenetrated():void {
 
 //Get Penetrated (Double)
 private function getDoublePennedByKat():void {
-	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in both holes.\n\n", false);
 
@@ -1009,8 +1005,8 @@ private function suckedNFuckedByKat():void {
 		player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 		player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	}
-	else if(player.hasVagina()) cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
-	else buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+	else if(player.hasVagina()) player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
+	else player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	outputText("\n\n", false);
 	
 	outputText("\"<i>Now, then, let's give this a shot...</i>\" she murmurs to herself, beginning to slowly rock back and forth within you, sliding her cock", false);
@@ -1078,7 +1074,6 @@ private function oralKatherineChoices():void {
 }
 //Give Katherine Oral scene, single cock
 private function giveKatOralPenisWingWang():void {
-	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] == 1) {
 		outputText("With a small grin, you tell Katherine that you wouldn't mind satisfying her orally.\n\n", false);

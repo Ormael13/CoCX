@@ -62,7 +62,7 @@ package classes.Scenes.Areas
 				outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
 				flags[kFLAGS.FOUND_WIZARD_STAFF]++;
 				menuLoc = 2;
-				inventory.takeItem(weapons.WIZARDS_STAFF);
+				inventory.takeItem(weapons.W_STAFF);
 				return;
 			}
 			//Possible chance of boosting camp space!

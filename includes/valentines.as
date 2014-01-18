@@ -415,7 +415,7 @@ public function pastieValentineIntro(choice:String = ""):void {
 		player.consumeItem(itype,1);
 		outputText("You present the drink to Pastie and she flashes you a grin as she flies up and away, leading you into an alley.  \"<i>Well, lemme at it!  A drink sure as hell sounds good right now and none of this seems like it'd be really bad.</i>\"");
 		menu();
-		addButton(0,"Next",curry(valentineDrinkPastie,itype));
+		addButton(0,"Next",Utils.curry(valentineDrinkPastie,itype));
 	}
 }
 

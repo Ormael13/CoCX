@@ -680,7 +680,7 @@ public function stash(exists:Boolean = true):Boolean {
 			outputText("  It currently holds ", false);
 			while(temp < 9) {
 				if(gearStorage[temp].quantity > 0) {
-					weaponNames[weaponNames.length] = gearStorage[temp].longName;
+					weaponNames[weaponNames.length] = gearStorage[temp].itype.longName;
 				}
 				temp++;
 			}
@@ -709,7 +709,7 @@ public function stash(exists:Boolean = true):Boolean {
 			outputText("  It currently holds ", false);
 			while(temp < 18) {
 				if(gearStorage[temp].quantity > 0) {
-					armorNames[armorNames.length] = gearStorage[temp].longName;
+					armorNames[armorNames.length] = gearStorage[temp].itype.longName;
 				}
 				temp++;
 			}
@@ -1120,7 +1120,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		{
 			trace("Autosaving to slot: " + player.slotName);
 			
-			kGAMECLASS.saveGame(player.slotName);
+			getGame().saves.saveGame(player.slotName);
 		}
 		//Clear screen
 		if(clrScreen) outputText("", true);
@@ -1129,7 +1129,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		//HEL SLEEPIES!
 		if(helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
-			kGAMECLASS.heliaDiscovery();
+			getGame().heliaDiscovery();
 			sleepRecovery(false);
 			return;
 		}

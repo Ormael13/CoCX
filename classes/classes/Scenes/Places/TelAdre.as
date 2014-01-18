@@ -1330,15 +1330,15 @@ public function tailorShoppe():void {
 		outputText("at Victoria the Corgi Tailor.  As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.", false);
 	}
 	outputText("\n\n(What do you want to buy?)", false);
-	choices("Suitclothes",createCallBackFunction(buyClothes,armors.CLASSY_SUIT),
-			"Rbbr Fetish",createCallBackFunction(buyClothes,armors.RUBBER_FETISH_CLOTHES),
-			"G. Clothes",createCallBackFunction(buyClothes,armors.ADVENTURERS_OUTFIT),
-			"Tube Top",createCallBackFunction(buyClothes,armors.TUBE_TOP),
-			"Overalls", createCallBackFunction(buyClothes,armors.OVERALLS),
-			"Long Dress",createCallBackFunction(buyClothes,armors.BALLROOM_DRESS),
-			"Bodysuit",createCallBackFunction(buyClothes,armors.SEMITRANSPARENT_BODYSUIT),
-			"Robes",createCallBackFunction(buyClothes,armors.MODEST_ROBES),
-			"T.Lthr Pants",createCallBackFunction(buyClothes,armors.LEATHER_PANTS),
+	choices("Suitclothes",createCallBackFunction(buyClothes,armors.CLSSYCL),
+			"Rbbr Fetish",createCallBackFunction(buyClothes,armors.RBBRCLT),
+			"G. Clothes",createCallBackFunction(buyClothes,armors.ADVCLTH),
+			"Tube Top",createCallBackFunction(buyClothes,armors.TUBETOP),
+			"Overalls", createCallBackFunction(buyClothes,armors.OVERALL),
+			"Long Dress",createCallBackFunction(buyClothes,armors.B_DRESS),
+			"Bodysuit",createCallBackFunction(buyClothes,armors.T_BSUIT),
+			"Robes",createCallBackFunction(buyClothes,armors.M_ROBES),
+			"T.Lthr Pants",createCallBackFunction(buyClothes,armors.LTHRPNT),
 			"Leave",telAdreMenu);
 }
 
@@ -1404,13 +1404,13 @@ public function weaponShop():void {
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
 	
 	choices("Wingstick",createCallBackFunction(weaponBuy, consumables.W_STICK),
-			"L.Claymore",createCallBackFunction(weaponBuy, weapons.LARGE_CLAYMORE),
-			"Warhammer",createCallBackFunction(weaponBuy, weapons.HUGE_WARHAMMER),
+			"L.Claymore",createCallBackFunction(weaponBuy, weapons.CLAYMOR),
+			"Warhammer",createCallBackFunction(weaponBuy, weapons.WARHAMR),
 			"Katana",createCallBackFunction(weaponBuy, weapons.KATANA),
 			"Spear",createCallBackFunction(weaponBuy, weapons.SPEAR),
 			"Whip",createCallBackFunction(weaponBuy, weapons.WHIP),
-			"W. Staff",createCallBackFunction(weaponBuy, weapons.WIZARDS_STAFF),
-			"S.Gauntlet",createCallBackFunction(weaponBuy, weapons.SPIKED_GAUNTLET),
+			"W. Staff",createCallBackFunction(weaponBuy, weapons.W_STAFF),
+			"S.Gauntlet",createCallBackFunction(weaponBuy, weapons.S_GAUNT),
 			"",0,"Leave",telAdreMenu);
 }
 private function weaponBuy(itype:ItemType):void {

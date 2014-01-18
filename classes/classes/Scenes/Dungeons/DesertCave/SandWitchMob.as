@@ -40,7 +40,6 @@ package classes.Scenes.Dungeons.DesertCave
 			init11Armor("robes",1,"",5);
 			init12Combat(80,30,.5,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(4,rand(15) + 5);
-			initX_Specials(11020,11021,11022);
 
 
 		}

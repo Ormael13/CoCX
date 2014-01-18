@@ -9,11 +9,10 @@ package classes.Items.Weapons
 	public class LargeClaymore extends Weapon
 	{
 
-		override public function canEquip(player:Player, printReason:Boolean):Boolean
+		override public function canConsume(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.str < 40){
 				if (printReason) {
-					clearOutput();
 					outputText("You aren't strong enough to handle such a heavy weapon!  ");
 				}
 				return false;
@@ -24,7 +23,7 @@ package classes.Items.Weapons
 
 		public function LargeClaymore()
 		{
-			super("Claymor","Claymor","a large claymore","cleaving sword-slash",15,1000,"A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)","Large")
+			super("Claymor","Claymor","large claymore","a large claymore","cleaving sword-slash",15,1000,"A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)","Large")
 		}
 	}
 }

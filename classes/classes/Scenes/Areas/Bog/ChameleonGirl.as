@@ -12,14 +12,14 @@ package classes.Scenes.Areas.Bog
 
 		public function chameleonTongueAttack():void
 		{
-			weaponName = "tongue";
-			weaponVerb = "tongue-slap";
-			weaponAttack = 10;
+			setWeaponName("tongue");
+			setWeaponVerb("tongue-slap");
+			setWeaponAttack(10);
 			createStatusAffect("attacks", 1, 0, 0, 0);
 			eAttack();
-			weaponAttack = 30;
-			weaponName = "claws";
-			weaponVerb = "claw";
+			setWeaponAttack(30);
+			setWeaponName("claws");
+			setWeaponVerb("claw");
 			combatRoundOver();
 		}
 

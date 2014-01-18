@@ -300,7 +300,7 @@ package classes.Scenes.NPCs
 			statScreenRefresh();
 			player.removeKeyItem("Dragon Eggshell");
 			menuLoc = 9;
-			inventory.takeItem(weapons.DRAGON_SHELL_SHIELD);
+			inventory.takeItem(weapons.DRGNSHL);
 		}
 
 //Suggested Reward: 

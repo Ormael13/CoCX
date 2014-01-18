@@ -564,6 +564,7 @@
 		protected function init14WeightedDrop():WeightedDrop
 		{
 			skipInit(14);
+			this.drop = new WeightedDrop();
 			return this.drop as WeightedDrop;
 		}
 

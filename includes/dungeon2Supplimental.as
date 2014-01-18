@@ -2236,7 +2236,7 @@ public function incubusBuy(itype:ItemType):void {
 		doNext(2642);
 		return;
 	}
-	doYesNo(curry(incubusTransact,itype),2642);
+	doYesNo(Utils.curry(incubusTransact,itype),2642);
 }
 
 public function incubusTransact(itype:ItemType):void {

@@ -454,9 +454,8 @@ private function bunbun69():void {
 			dynStats("int", -2, "lus=", 0);
 			//+ Lust
 			//+ Pink Egg 
-			shortName = "NPnkEgg";
 			menuLoc = 2;
-			inventory.takeItem();
+			inventory.takeItem(consumables.NPNKEGG);
 		}
 		return;
 	}

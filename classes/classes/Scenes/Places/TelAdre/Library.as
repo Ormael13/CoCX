@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre{
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
-public class Library extends TelAdreAbstractContent{
+	import classes.Items.WeaponLib;
+
+	public class Library extends TelAdreAbstractContent{
 
 	public function Library()
 	{
@@ -169,7 +171,7 @@ private function talkToMali():void {
 		doNext(13);
 	}	
 	//[[Mali], player has spellblade]
-	else if((player.weaponName == "inscribed spellblade" || player.hasItem("S.Blade")) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
+	else if((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
 		outputText("You tell Quinn you're here to see Mali.  He seems intrigued by the wrapped blade you're carrying, but doesn't ask any questions.  Unlocking the second floor as usual, he escorts you to Mali's quarters.");
 		outputText("\n\n\"<i>What's that?</i>\" Mali asks, curious when you pull out the inscribed spellblade.  You place it down on the desk and explain that you got it from... from...  Mali's eyes light up at your strained inability to explain.  \"<i>Yes!</i>\" she says excitedly, reaching over the desk and grabbing your cheeks.  She plants a quick and enthusiastic kiss on your lips in thanks, looking back down at the sword and running her hands over it.");
 		
@@ -178,15 +180,12 @@ private function talkToMali():void {
 		outputText("\n\n\"<i>I'm going to use this to track her,</i>\" she explains, \"<i>Then gather up some guards and find out just what she's up to.  You should rest up, prepare for lethal danger, then come back.</i>\"  The grin on her face doesn't seem to be going anywhere.  \"<i>I can't imagine doing this without your help now.</i>\"");
 		outputText("\n\n\"<i>Please, come back soon.</i>\"");
 		outputText("\n\n(<b>Conclusion not yet complete...</b>)");
-		if(player.weaponName == "inscribed spellblade") {
+		if(player.weapon == weapons.S_BLADE) {
+			player.weapon = WeaponLib.FISTS;
 			player.removePerk("Wizard's Focus");
-			player.weaponPerk = "";
-			player.weaponAttack = 0;
-			player.weaponValue = 0;
-			player.weaponName = "fists";
 		}
 		else {
-			player.consumeItem("S.Blade");
+			player.consumeItem(weapons.S_BLADE);
 		}
 		flags[kFLAGS.MALI_TAKEN_BLADE] = 1;
 		doNext(13);

@@ -2116,7 +2116,7 @@ public function doEvent(eventNo:Number):void
 	{
 		outputText("", true);
 		flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-		inventory.takeItem(armors.BONDAGE_STRAPS);
+		inventory.takeItem(armors.BONSTRP);
 	}
 	else if (eventNo == 2639)
 	{
@@ -2155,7 +2155,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2653)
 	{
-		incubusBuy(weapons.SUCCUBI_WHIP);
+		incubusBuy(weapons.SUCWHIP);
 	}
 	else if (eventNo == 2739)
 	{
@@ -2449,39 +2449,39 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3879)
 	{
-		telAdre.rubi.giveRubiClothes("ClssyCl");
+		telAdre.rubi.giveRubiClothes(armors.CLSSYCL);
 	}
 	else if (eventNo == 3880)
 	{
-		telAdre.rubi.giveRubiClothes("RbbrClt");
+		telAdre.rubi.giveRubiClothes(armors.RBBRCLT);
 	}
 	else if (eventNo == 3881)
 	{
-		telAdre.rubi.giveRubiClothes("AdvClth");
+		telAdre.rubi.giveRubiClothes(armors.ADVCLTH);
 	}
 	else if (eventNo == 3882)
 	{
-		telAdre.rubi.giveRubiClothes("TubeTop");
+		telAdre.rubi.giveRubiClothes(armors.TUBETOP);
 	}
 	else if (eventNo == 3883)
 	{
-		telAdre.rubi.giveRubiClothes("T.BSuit");
+		telAdre.rubi.giveRubiClothes(armors.T_BSUIT);
 	}
 	else if (eventNo == 3884)
 	{
-		telAdre.rubi.giveRubiClothes("B.Dress");
+		telAdre.rubi.giveRubiClothes(armors.B_DRESS);
 	}
 	else if (eventNo == 3885)
 	{
-		telAdre.rubi.giveRubiClothes("LthrPnt");
+		telAdre.rubi.giveRubiClothes(armors.LTHRPNT);
 	}
 	else if (eventNo == 3886)
 	{
-		telAdre.rubi.giveRubiClothes("NurseCl");
+		telAdre.rubi.giveRubiClothes(armors.NURSECL);
 	}
 	else if (eventNo == 3887)
 	{
-		telAdre.rubi.giveRubiClothes("S.Swmwr");
+		telAdre.rubi.giveRubiClothes(armors.S_SWMWR);
 	}
 	else if (eventNo == 3893)
 	{

@@ -295,9 +295,9 @@ private function valeriaSexDominated():void {
 	outputText("\n\n\"<i>Just lie back and submit, partner. It'll be better that way...</i>\"");
 	//(PC has Vagina)
 	if(player.hasVagina() && (!player.hasCock() || rand(2) == 0)) {
-	   outputText("\n\nValeria begins to use her goo to peel back your clothes, soon revealing your defenseless [vagina].  She makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You meekly submit to your gooey captor, letting Valeria have her way with you. Seeing your lack of resistance, she smiles and coos what a good " + player.mf("boy","girl") + " you are, slowly withdrawing herself from your [vagina].");
-	   outputText("\n\nYou have only a moment to figure out what's coming before her goo - now perfectly shaped like the inside of your cunt - slams back into you like a stiff cock.  You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth.");
-	   cuntChange(player.vaginalCapacity(),true,true,false);
+		outputText("\n\nValeria begins to use her goo to peel back your clothes, soon revealing your defenseless [vagina].  She makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You meekly submit to your gooey captor, letting Valeria have her way with you. Seeing your lack of resistance, she smiles and coos what a good " + player.mf("boy","girl") + " you are, slowly withdrawing herself from your [vagina].");
+		outputText("\n\nYou have only a moment to figure out what's coming before her goo - now perfectly shaped like the inside of your cunt - slams back into you like a stiff cock.  You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth.");
+		player.cuntChange(player.vaginalCapacity(),true,true,false);
 		outputText("\n\n\"<i>Oh, you like that, do you?</i>\" the armor-goo asks, smiling evilly.  \"<i>Hmm, maybe if you're a good " + player.mf("boy","girl") + ", I'll let you get off, too</i>\"  Still grinning, she begins to hammer her cock-like appendage into your pussy, fucking you fast and hard with her goo-dildo.");
 		//[If PC has breasts > A-cups: 
 		if(player.biggestTitSize() > 1) {
@@ -406,7 +406,7 @@ private function declineValeriasNeeds():void {
 private function takeValeria():void {
 	spriteSelect(79);
 	doNext(1);
-	kGAMECLASS.equipArmor("goo armor");
+	player.armor = armors.GOOARMR;
 }
 
 public function valeriaAndGooThreeStuff():void {

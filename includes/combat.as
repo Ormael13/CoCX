@@ -1765,7 +1765,7 @@ public function dropItem(monster:Monster):void {
 			if(rand(2) == 0) {
 				//50% breakage!
 				if(rand(2) == 0) {
-					itype = weapons.LARGE_AXE;
+					itype = weapons.L__AXE;
 					if(player.tallness < 78) {
 						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ", false);
 						if(rand(2) == 0) itype = null;
@@ -1795,14 +1795,14 @@ public function dropItem(monster:Monster):void {
 		}
 	}
 	if(monster is Harpy || monster is Sophie) {
-		if(rand(10) == 0) itype = armors.WIZARDS_ROBES;
+		if(rand(10) == 0) itype = armors.W_ROBES;
 		else if(rand(3) == 0 && player.hasPerk("Luststick Adapted") >= 0) itype = consumables.LUSTSTK;
 		else itype = consumables.GLDSEED;
 	}
 	//Chance of armor if at level 1 pierce fetish
 	if(!plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
-			&& flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTIVE_ARMOR, 1) && !ceraphFollowerScene.ceraphIsFollower()) {
-		itype = armors.SEDUCTIVE_ARMOR;
+			&& flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !ceraphFollowerScene.ceraphIsFollower()) {
+		itype = armors.SEDUCTA;
 	}
 
 	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;

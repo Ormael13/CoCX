@@ -5,6 +5,7 @@ package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.ItemType;
 
 	public class Edryn extends TelAdreAbstractContent {
 public function Edryn(){
@@ -91,16 +92,17 @@ public function edrynBarTalk():void {
 			outputText("She looks down, eyes fixating on your crotch for a moment.  Edryn asks, \"<i>When did you get so small?  We can't fuck like this!  ", false);
 			//(Chance of equinum,gro+(twice only),minotaur blood, or purified incubus draft)
 			menuLoc = 2;
+			var itype:ItemType;
 			if(flags[kFLAGS.EDRYN_GIFT_COUNTER] < 2) {
 				outputText("Here, take some of this stuff.  We confiscated it off one of the miscreants we kicked out the other day, and I KNOW it'll get you to be big enough for me.  Just don't go too nuts with it, okay?</i>\"\n\n", false);
-				shortName = "GroPlus";
+				itype = consumables.GROPLUS;
 				flags[kFLAGS.EDRYN_GIFT_COUNTER]++;
 			}
 			else if(flags[kFLAGS.EDRYN_GIFT_COUNTER] < 5) {
 				outputText("Here, take some of this stuff.  We confiscated it off one of the miscreants we kicked out the other day, and I KNOW it'll get you to be big enough for me.  Just don't go too nuts with it, okay?</i>\"\n\n", false);
 				flags[kFLAGS.EDRYN_GIFT_COUNTER]++;
-				if(rand(2) == 0) shortName = "MinoBlo";
-				else shortName = "IncubiD";
+				if(rand(2) == 0) itype = consumables.MINOBLO;
+				else itype = consumables.INCUBID;
 			}
 			else {
 				outputText("I'd love to help you, but I don't have any supplies for you.  I'm sure you'll find a way.</i>\"\n\n", false);
@@ -108,7 +110,7 @@ public function edrynBarTalk():void {
 				doNext(telAdre.barTelAdre);
 				return;
 			}
-			inventory.takeItem();
+			inventory.takeItem(itype);
 			return;
 		}
 		//(Too big) 

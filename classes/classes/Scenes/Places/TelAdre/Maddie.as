@@ -37,7 +37,7 @@ private function followMinotaurIntoBackroom():void {
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.", false);
 		else outputText("You blush when you realize what he must be using for crème filling.", false);
 		//[Give Them] [Leave]
-		if(player.hasItem("BeeHony") && player.hasItem(consumables.L_DRAFT)) simpleChoices("Give Them",handOverIngredientsItBeBakingTimeYo,"",0,"",0,"",0,"Leave",nopeAintGotNoneODemSpeculIngredimathings);
+		if(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) simpleChoices("Give Them",handOverIngredientsItBeBakingTimeYo,"",0,"",0,"",0,"Leave",nopeAintGotNoneODemSpeculIngredimathings);
 		else simpleChoices("",0,"",0,"",0,"",0,"Leave",13);	
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] = 1;
 	}
@@ -45,7 +45,7 @@ private function followMinotaurIntoBackroom():void {
 	else {
 		outputText("You follow the burly chef through the door, winding through the familiar ovens.  By the time you reach his work area, you're both covered in a fine sheen of sweat and you find yourself responding to the minotaur musk unconsciously.  The strange chef turns to ask, \"<i>You have special ingredients now, yes?</i>\"", false);
 		//[Yes] [Lie – No/Not Yet]
-		if(player.hasItem("BeeHony") && player.hasItem(consumables.L_DRAFT)) simpleChoices("Yes",2934,"Lie - No",2933,"",0,"",0,"",0);
+		if(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) simpleChoices("Yes",2934,"Lie - No",2933,"",0,"",0,"",0);
 		else simpleChoices("No",nopeAintGotNoneODemSpeculIngredimathings,"",0,"",0,"",0,"",0);
 	}
 }
@@ -64,7 +64,7 @@ public function nopeAintGotNoneODemSpeculIngredimathings():void {
 //[Yes – baking]
 public function handOverIngredientsItBeBakingTimeYo():void {
 	outputText("", true);
-	player.consumeItem("BeeHony");
+	player.consumeItem(consumables.BEEHONY);
 	player.consumeItem(consumables.L_DRAFT);
 	outputText("You hand the lust draft and bottled honey to the minotaur, doing your best to ignore his potent, lust-inducing pheromones as you watch him work.  He grabs the batch of dough he had been kneading and pours in the lust draft, snorting aggressively once the bubbling drug's smell reaches his bovine nostrils.  Next, the bull-like chef reaches over to grab a bottle marked 'P.S.M.', uncorking and pouring in one practiced motion.   The white fluid froths dangerously on contact with the pink lust draft, and a second later the honey is in there too.  Finally, he flips up his loincloth and reaches for the onahole.\n\n", false);
 	

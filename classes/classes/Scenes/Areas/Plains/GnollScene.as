@@ -27,7 +27,7 @@ package classes.Scenes.Areas.Plains
 		public function getRapedByGnoll():void
 		{
 			//Oh shit get anal raped.
-			if (player.hasItem("S.Dream")) {
+			if (player.hasItem(consumables.S_DREAM)) {
 				yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
@@ -275,7 +275,7 @@ package classes.Scenes.Areas.Plains
 		internal function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void
 		{
 			outputText("", true);
-			player.consumeItem("S.Dream");
+			player.consumeItem(consumables.S_DREAM);
 			//[either Gnoll loss, if the player has a succubi's dream in inventory]
 
 			outputText("A rolling, harsh laughter surrounds you as you sink to ground, no longer strong enough to remain upright.  The gnoll's mocking bark fills the air as she disposes of your " + player.armorName, false);

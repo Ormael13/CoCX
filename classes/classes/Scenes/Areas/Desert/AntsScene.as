@@ -303,14 +303,7 @@ package classes.Scenes.Areas.Desert
 				//►(Minotaur - Intro)
 				outputText("When you arrive in the colosseum, you tell the fight manager you're ready; he nods and leads you down into one of the two staging areas for the arena.  You watch through the bars as the stadium fills almost to capacity, still resistant to the idea of so many ants living right under the sands; there must be hundreds.  Gazing out into the cheering crowd, you spot the royal family sitting in their reserved area.  The princess waves at you excitedly with two of her arms, but her mother grabs them and lowers them.  Chylla herself looks as regal and reserved as ever.  You catch the queen smiling at you, but there's something wicked behind the smile.  Before you can contemplate what it might be, the gates raise on both sides of the colosseum and you are pushed out.");
 				outputText("\n\nYou're now fighting a minotaur and it's wielding a Giant Axe!  You quickly put two and two together and realize Chylla has set you up by arming the minotaur!  You brace yourself as the beastman charges you, roaring wildly.");
-				startCombat(new Minotaur());
-				if (monster.weaponName == "fist") {
-					monster.weaponName = "axe";
-					monster.weaponVerb = "cleave";
-					monster.long = "An angry-looking minotaur looms over you.  Covered in shaggy " + monster.hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  <b>This minotaur seems to have found a deadly looking axe somewhere!</b>";
-					monster.str += 25;
-					monster.lustVuln = 0.84;
-				}
+				startCombat(new Minotaur(true));
 				monster.createStatusAffect("No Loot", 0, 0, 0, 0);
 			}
 			//►[Fight #3]

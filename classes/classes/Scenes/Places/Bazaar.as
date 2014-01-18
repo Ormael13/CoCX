@@ -562,7 +562,7 @@ private function buyGretasBikini():void {
 	outputText("\n\n\"<i>Thanks, sugar!  Have fun and be safe, and if you don't want to be safe, come visit me sometime!</i>\"");
 	outputText("\n\nYou'll have to keep that in mind...  ");
 	menuLoc = 2;
-	inventory.takeItem(armors.LUSTY_MAIDENS_ARMOR);
+	inventory.takeItem(armors.LMARMOR);
 }
 
 //Cock-socks Available - First Time

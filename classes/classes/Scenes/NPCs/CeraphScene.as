@@ -953,7 +953,7 @@ package classes.Scenes.NPCs
 			//just in case...
 			doNext(13);
 			//(Get trapped armor and go home)
-			inventory.takeItem(armors.SEDUCTIVE_ARMOR);
+			inventory.takeItem(armors.SEDUCTA);
 		}
 
 //[Trade Bimbo Liquer]

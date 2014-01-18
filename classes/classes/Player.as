@@ -58,8 +58,21 @@ package classes
 		public var itemSlots:Array;
 
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		private var _modArmorName:String = null;
+
+		public function get modArmorName():String
+		{
+			return _modArmorName;
+		}
+
+		public function set modArmorName(value:String):void
+		{
+			_modArmorName = value;
+		}
+
 		override public function get armorName():String {
-			return _armor.longName;
+			if (_modArmorName != null) return _modArmorName;
+			return _armor.name;
 		}
 		override public function get armorDef():Number {
 			var armorDef:Number = _armor.def;
@@ -106,7 +119,7 @@ package classes
 		}
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		override public function get weaponName():String {
-			return _weapon.longName;
+			return _weapon.name;
 		}
 		override public function get weaponVerb():String {
 			return _weapon.verb;
@@ -163,7 +176,7 @@ package classes
 				CoC_Settings.error(short+".weapon is set to null");
 				value = WeaponLib.FISTS;
 			}
-			_weapon = value;
+			value.equip(this,false);
 		}
 
 		// in case you don't want to call the value.equip
@@ -1637,10 +1650,10 @@ package classes
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{
-			var minslot:ItemSlotClass = undefined;
+			var minslot:ItemSlotClass = null;
 			for each (var slot:ItemSlotClass in itemSlots){
 				if (slot.itype == itype){
-					if (minslot == undefined || slot.quantity<minslot.quantity){
+					if (minslot == null || slot.quantity<minslot.quantity){
 						minslot = slot;
 					}
 				}
@@ -1697,30 +1710,30 @@ package classes
 			return numOfItemToRemove <= 0;
 		}
 
-		public function lengthChange(temp2:Number, cocks:Number):void {
+		public function lengthChange(temp2:Number, ncocks:Number):void {
 			//DIsplay the degree of length change.
 			if(temp2 <= 1 && temp2 > 0) {
 				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " has grown slightly longer.", false);
 				if(cocks.length > 1) {
-					if(cocks == 1) outputText("One of your " + multiCockDescriptLight() + " grows slightly longer.", false);
-					if(cocks > 1 && cocks < cocks.length) outputText("Some of your " + multiCockDescriptLight() + " grow slightly longer.", false);
-					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " seem to fill up... growing a little bit larger.", false);
+					if(ncocks == 1) outputText("One of your " + multiCockDescriptLight() + " grows slightly longer.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("Some of your " + multiCockDescriptLight() + " grow slightly longer.", false);
+					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " seem to fill up... growing a little bit larger.", false);
 				}
 			}
 			if(temp2 > 1 && temp2 < 3) {
 				if(cocks.length == 1) outputText("A very pleasurable feeling spreads from your groin as your " + cockDescript(0) + " grows permanently longer - at least an inch - and leaks pre-cum from the pleasure of the change.", false);
 				if(cocks.length > 1) {
-					if(cocks == cocks.length) outputText("A very pleasurable feeling spreads from your groin as your " + multiCockDescriptLight() + " grow permanently longer - at least an inch - and leak plenty of pre-cum from the pleasure of the change.", false);
-					if(cocks == 1) outputText("A very pleasurable feeling spreads from your groin as one of your " + multiCockDescriptLight() + " grows permanently longer, by at least an inch, and leaks plenty of pre-cum from the pleasure of the change.", false);
-					if(cocks > 1 && cocks < cocks.length) outputText("A very pleasurable feeling spreads from your groin as " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " grow permanently longer, by at least an inch, and leak plenty of pre-cum from the pleasure of the change.", false);
+					if(ncocks == cocks.length) outputText("A very pleasurable feeling spreads from your groin as your " + multiCockDescriptLight() + " grow permanently longer - at least an inch - and leak plenty of pre-cum from the pleasure of the change.", false);
+					if(ncocks == 1) outputText("A very pleasurable feeling spreads from your groin as one of your " + multiCockDescriptLight() + " grows permanently longer, by at least an inch, and leaks plenty of pre-cum from the pleasure of the change.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("A very pleasurable feeling spreads from your groin as " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " grow permanently longer, by at least an inch, and leak plenty of pre-cum from the pleasure of the change.", false);
 				}
 			}
 			if(temp2 >=3){
 				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " feels incredibly tight as a few more inches of length seem to pour out from your crotch.", false);
 				if(cocks.length > 1) {
-					if(cocks == 1) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as one of their number begins to grow inch after inch of length.", false);
-					if(cocks > 1 && cocks < cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly number as " + kGAMECLASS.num2Text(cocks) + " of them begin to grow inch after inch of added length.", false);
-					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as inch after inch of length pour out from your groin.", false);
+					if(ncocks == 1) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as one of their number begins to grow inch after inch of length.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly number as " + kGAMECLASS.num2Text(ncocks) + " of them begin to grow inch after inch of added length.", false);
+					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as inch after inch of length pour out from your groin.", false);
 				}
 			}
 			//Display LengthChange
@@ -1765,25 +1778,25 @@ package classes
 			if(temp2 < 0 && temp2 >= -1) {
 				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
 				if(cocks.length > 1) {
-					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
-					if(cocks > 1 && cocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
-					if(cocks == 1) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
+					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
+					if(ncocks == 1) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
 				}
 			}
 			if(temp2 < -1 && temp2 > -3) {
 				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " shrinks smaller, flesh vanishing into your groin.", false);
 				if(cocks.length > 1) {
-					if(cocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
-					if(cocks == 1) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
-					if(cocks > 1 && cocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(cocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(ncocks == 1) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
 				}
 			}
 			if(temp2 <= -3) {
 				if(cocks.length == 1) outputText("A large portion of your " + multiCockDescriptLight() + "'s length shrinks and vanishes.", false);
 				if(cocks.length > 1) {
-					if(cocks == cocks.length) outputText("A large portion of your " + multiCockDescriptLight() + " receeds towards your groin, receding rapidly in length.", false);
-					if(cocks == 1) outputText("A single member of your " + multiCockDescriptLight() + " vanishes into your groin, receding rapidly in length.", false);
-					if(cocks > 1 && cocks.length > cocks) outputText("Your " + multiCockDescriptLight() + " tingles as " + kGAMECLASS.num2Text(cocks) + " of your members vanish into your groin, receding rapidly in length.", false);
+					if(ncocks == cocks.length) outputText("A large portion of your " + multiCockDescriptLight() + " receeds towards your groin, receding rapidly in length.", false);
+					if(ncocks == 1) outputText("A single member of your " + multiCockDescriptLight() + " vanishes into your groin, receding rapidly in length.", false);
+					if(ncocks > 1 && cocks.length > ncocks) outputText("Your " + multiCockDescriptLight() + " tingles as " + kGAMECLASS.num2Text(ncocks) + " of your members vanish into your groin, receding rapidly in length.", false);
 				}
 			}
 		}

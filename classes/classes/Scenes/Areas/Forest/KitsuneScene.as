@@ -230,7 +230,7 @@ package classes.Scenes.Areas.Forest
 			outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
 			if (inCombat()) {
-				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "KitGift";
+				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.KITGIFT;
 				cleanupAfterCombat();
 			}
 			else {

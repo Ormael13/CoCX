@@ -624,7 +624,7 @@ private function loseToIzma():void {
 	else if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] >= -4) outputText("  You have only the vaguest thought that maybe you shouldn't be thinking about Izma in that way, but it's so tempting to just immerse yourself in the sexiness of having a hot herm shark-girl dominate you so thoroughly. After all, it's not as if there's any harm in doing so, is there?", false);
 	//Izmafight -5: 
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?", false);
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 	player.slimeFeed();
 	cleanupAfterCombat();
 }
@@ -750,7 +750,7 @@ private function victoryPenisIzma():void {
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]] (Izmafight +1)
@@ -791,7 +791,7 @@ private function eatIzmasLeafAfterRapinHer():void {
 	outputText("", true);
 	outputText("You accept the leaf gingerly and eat it.  Izma smiles.", false);
 	//Set loot
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 	//[(if Izmafight <=4) 
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("  You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -838,7 +838,7 @@ private function takeItInZeButtVictoryLikeFromIzma():void {
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
@@ -864,7 +864,7 @@ private function leaveIzmaVictoryTease():void {
 	//(Izmafight +1)
 	
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 	cleanupAfterCombat();
 }
 
@@ -879,7 +879,7 @@ private function chooseIzmaTooth():void {
 	outputText("", true);
 	outputText("You accept the tooth from her with a polite word of thanks.", false);
 	//(gain 1 t-shark toof)
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "TSTooth";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
 	cleanupAfterCombat();
 }
 
@@ -894,7 +894,7 @@ private function chooseIzmaGloves():void {
 	
 	outputText("Meekly, she picks up the gloves and hands them to you.", false);
 	//(gain 1 Hooked gauntlets) 
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "H.Gaunt";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = weapons.H_GAUNT;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235]++;
 	cleanupAfterCombat();
 }
@@ -1725,7 +1725,7 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 	clearOutput();
 	outputText("As much as you think Izma would enjoy a handjob, you are not too keen on stimulating her member right now.  Izma notices your momentary stare at her rather large cock and grins mischievously at you.  \"<i>Come on, bitch! Pleasure your \"Alpha\"; you know you want to!</i>\" she chimes.  You stare back at her, and kindly inform her that her Alpha isn't keen on doing that; your reasons are your own, but you simply don't want to do that.  Her confident smirk almost immediately evaporates.  \"<i>Oh... sorry. I was caught up in the moment. If it's okay with you, I'll just jerk my cock while I dominate my Alpha,</i>\" she purrs.  Smiling back at her, you nod and give her a slap on the ass, giving her the message to giddy up.  With complete abandon, your tigershark lover giggles and bounces against your lap, manhandling your cock with those pussy feelers.  Moaning in appreciation, you dart your hands up to her rump and grasp it in your hands.  Driven by pleasure and sexual instinct, Izma fiercely strokes her member, moaning blissfully as her closed eyelids twitch from the dual pleasures of ravaging her cunt with your cock and jerking her prick in her hand.  She tries hard to contain the force of her sexual euphoria, but her expression ultimately betrays her escalating passion as she grits her teeth and physically opens her mouth to let out a hardy moan; dead silence is the only thing that escapes from her wide open mouth for a few briefs moments, before she releases a prolonged, erratic series of wails.");
 	outputText("\n\nIzma bites her lip in response, clearly wanting to enjoy her time on top just a little bit longer.  But the grunts and moans of ecstasy make it clear that the tigershark can't hold back much longer.  Her vaginal walls clamp down hard against your cock.  She squeals loudly as thick ropes of jizz launch from her cock, her hands cupping her cockhead to keep the cum from streaming onto your face or body."); 
-	outputText("\n\nYour own cock has been just as teased and tormented - and as her inner walls grip down, her tentacles squeezing as hard as they can, it's too much. You let out a cry of your own as you flood her interior with your spooge", false)
+	outputText("\n\nYour own cock has been just as teased and tormented - and as her inner walls grip down, her tentacles squeezing as hard as they can, it's too much. You let out a cry of your own as you flood her interior with your spooge", false);
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ", false);
@@ -2234,7 +2234,6 @@ private function talkWivIzma():void {
 		doNext(13);
 		return;
 	}
-	doNext(13);
 }
 //[Leave]
 private function chooseNotToFlirtWithIzma():void {
@@ -2242,7 +2241,6 @@ private function chooseNotToFlirtWithIzma():void {
 	outputText("", true);
 	outputText("You thank Izma for the interesting conversation, even if it did end up meandering a bit, and then walk away, leaving her to her private thoughts.\n\n", false);
 	doNext(13);
-	return;
 }
 //Flirt]
 private function chooseToFlirtWithIzma():void {
@@ -2464,7 +2462,7 @@ public function pcPopsOutASharkTot():void {
 private function izmaKidsPlaytime():void {
 	spriteSelect(32);
 	outputText("", true);
-	var choices:Array = new Array();
+	var choices:Array = [];
 	//Build an array of the possible scenes
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) {
 		//NEITHER GOOD
@@ -2768,7 +2766,7 @@ private function removeIzmasPenis():void {
 	var pMilk:int = 0;
 	var count:int = 5;
 	while(count > 0) {
-		if(player.hasItem("SucMilk",count)) {
+		if(player.hasItem(consumables.SUCMILK,count)) {
 		   succMilk = count;
 		   break;
 		}
@@ -2776,7 +2774,7 @@ private function removeIzmasPenis():void {
 	}
 	count = 5;
 	while(count > 0) {
-		if(player.hasItem("P.S.Mlk",count)) {
+		if(player.hasItem(consumables.P_S_MLK,count)) {
 			pMilk = count;
 			break;
 		}
@@ -2803,7 +2801,7 @@ private function forceIzmaPenis():void {
 	var pMilk:int = 0;
 	var count:int = 5;
 	while(count > 0) {
-		if(player.hasItem("SucMilk",count)) {
+		if(player.hasItem(consumables.SUCMILK,count)) {
 		   succMilk = count;
 		   break;
 		}
@@ -2811,7 +2809,7 @@ private function forceIzmaPenis():void {
 	}
 	count = 5;
 	while(count > 0) {
-		if(player.hasItem("P.S.Mlk",count)) {
+		if(player.hasItem(consumables.P_S_MLK,count)) {
 			pMilk = count;
 			break;
 		}

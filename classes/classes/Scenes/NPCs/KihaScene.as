@@ -3,7 +3,9 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.Appearance;
 import classes.CockTypesEnum;
-public class KihaScene extends NPCAwareContent {
+	import classes.ItemType;
+
+	public class KihaScene extends NPCAwareContent {
 
 	public function KihaScene()
 	{
@@ -175,6 +177,7 @@ public function kihaExplore(clearScreen:Boolean = true):void {
 	//spriteSelect(72);
 	flags[kFLAGS.KIHA_TOLL_DURATION]--;
 	var event:Number = rand(10);
+	var itype:ItemType;
 	//Grabbin' Inquisitor Armor
 	if(event == 0 && flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0) {
 		kGAMECLASS.inquisitorRobesDiscovery();
@@ -186,13 +189,13 @@ public function kihaExplore(clearScreen:Boolean = true):void {
 		return;
 	}
 	//Reducto
-	else if(event < 7) shortName = "Reducto";
-	else if(event < 8) shortName = "GroPlus";
-	else if(event < 9) shortName = "Coal   ";
-	else if(event < 10) shortName = "T.SSilk";
+	else if(event < 7) itype = consumables.REDUCTO;
+	else if(event < 8) itype = consumables.GROPLUS;
+	else if(event < 9) itype = consumables.COAL___;
+	else if(event < 10) itype = useables.T_SSILK;
 	outputText("While exploring, you find an item on the ground!  ", false);
 	menuLoc = 2;
-	inventory.takeItem();
+	inventory.takeItem(itype);
 }
 
 //[This was my idea!]

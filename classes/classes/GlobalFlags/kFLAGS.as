@@ -462,7 +462,7 @@ public static const TIMES_MET_ANEMONE:int                                       
 public static const ANEMONE_KID:int                                                 =  454; // 
 public static const KID_ITEM_FIND_HOURS:int                                         =  455; // 
 public static const ANEMONE_WATCH:int                                               =  456; // 
-public static const ANEMONE_WEAPON:int                                              =  457; // 
+public static const ANEMONE_WEAPON_ID:int                                           =  457; //
 public static const MURBLE_FARM_TALK_LEVELS:int                                     =  458; // 
 public static const BROKE_UP_WITH_MARBLE:int                                        =  459; // 
 public static const MARBLE_PLAYED_WITH_KIDS_TODAY:int                               =  460; // 

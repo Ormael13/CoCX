@@ -421,7 +421,7 @@ private function srslyPimpinGuyz():void {
 	player.itemSlot3.quantity = 0;
 	player.itemSlot4.quantity = 0;
 	player.itemSlot5.quantity = 0;
-	player.armor = armors.COMFORTABLE_CLOTHES;
+	player.armor = armors.C_CLOTH;
 	player.weapon = WeaponLib.FISTS;
 	player.removeStatusAffect("Camp Marble");
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);

@@ -481,8 +481,8 @@ private function drinkUrtasBoozeLetHer():void {
 	else outputText("come back for an even bigger load", false);
 	outputText(".</i>\"\n\n", false);
 	outputText("The fox helps you to your feet and the two of you get dressed, stumbling a bit over each other and giggling happily.  Urta gives you a quick peck on the lips and whispers, \"<i>Thanksh... for everything,</i>\" before the two of you make your way back into the bar and go your separate ways.\n\n", false);
-	if(player.hasVagina()) cuntChange(60,true);
-	else buttChange(60,true);
+	if(player.hasVagina()) player.cuntChange(60,true);
+	else player.buttChange(60,true);
 	doNext(13);
 }
 
@@ -861,7 +861,7 @@ internal function takeUrtaInTheButtPublically():void {
 		tooBig = true;
 		outputText("It's far too big for you, but that doesn't stop Urta from pushing it inside you.  You can feel yourself stretched around the invader, and it hurts enough that you almost scream out in pain, but inexorably, you're drawn down until your " + buttDescript() + " is resting on Urta's thighs.  Her thick prick keeps you stretched uncomfortably wide, and you can feel every twitch it makes.", false);
 		//(STRETCH TEXT HERE)
-		if(!buttChange(60,true)) outputText("  ", false);
+		if(!player.buttChange(60,true)) outputText("  ", false);
 		outputText("Surprisingly, the over-endowed fox notices your discomfort and hands you a narrow bottle from the table, \"<i>Drink up, it'll help with the pain until you get used to me.</i>\"\n\n", false);
 		
 		outputText("You look at the bottle suspiciously, reading the faded yellow label, \"<i>Barkardi 151</i>\".  Wincing from the pain, you suppose it couldn't hurt and you tip back the bottle, taking a hearty swig.  It burns like hellfire, and you nearly retch up the massive swallow before you get it down.  Amazingly, the pain in your throat and the bonfire in your belly nearly drowns out what's going on in your " + assholeDescript() + ".  You actually start to relax, and Urta nibbles on your ear in between sips of ale.  She holds her mug up to your lips and invites you to share her drink and you do, grateful for any additional pain-killers.\n\n", false);

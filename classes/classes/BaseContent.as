@@ -25,6 +25,10 @@
 		{
 			
 		}
+		protected function getGame():CoC
+		{
+			return kGAMECLASS;
+		}
 
 		protected function cheatTime(time:Number):void
 		{
@@ -134,7 +138,15 @@
 
 		protected function curry(func:Function,...args):Function
 		{
-			return kGAMECLASS.curry.apply(null,[func].concat(args));
+			return Utils.curry.apply(null,[func].concat(args));
+		}
+		protected function lazy(obj:*,...args):Function
+		{
+			return Utils.lazy.apply(null,[obj].concat(args));
+		}
+		protected function lazy2(func:Function,...args):Function
+		{
+			return Utils.lazy2.apply(null,[func].concat(args));
 		}
 
 		protected function createCallBackFunction(func:Function, arg:*):Function

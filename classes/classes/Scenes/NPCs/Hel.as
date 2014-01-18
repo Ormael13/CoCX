@@ -184,7 +184,7 @@ package classes.Scenes.NPCs
 			init12Combat(275,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(16,10 + rand(5));
 			init14ChainedDrop().
-					add(armors.CHAINMAIL_BIKINI,1/20).
+					add(armors.CHBIKNI,1/20).
 					add(consumables.REPTLUM,0.7);
 			initX_Tail(TAIL_TYPE_LIZARD,0,0);
 			this.createStatusAffect("keen",0,0,0,0);

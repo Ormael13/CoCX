@@ -67,7 +67,7 @@ package classes.Scenes.Areas.Plains
 		{
 			spriteSelect(54);
 			//Oh shit get anal raped.
-			if (player.hasItem("S.Dream")) {
+			if (player.hasItem(consumables.S_DREAM)) {
 				kGAMECLASS.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}

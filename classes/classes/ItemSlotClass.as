@@ -9,25 +9,8 @@
 		
 		//data
 		private var _quantity:Number = 0;
-		private var _itype:ItemType = null;
+		private var _itype:ItemType = ItemType.NOTHING;
 		private var _unlocked:Boolean = false;
-
-		public function get shortName():String{
-			if (_itype == null) return "";
-			return _itype.shortName;
-		}
-		public function get longName():String{
-			if (_itype == null) return "";
-			return _itype.longName;
-		}
-		public function get value():Number{
-			if (_itype == null) return 0;
-			return _itype.value;
-		}
-		public function get id():String{
-			if (_itype == null) return "";
-			return _itype.id;
-		}
 
 		
 		public function setItemAndQty(itype:ItemType, quant:Number):void
@@ -35,7 +18,7 @@
 			if (quant<0 || quant == 0 && itype != null || quant>0 && itype == null){
 				CoC_Settings.error("Inconsistent placeItemWQuantity call: "+quant+" "+itype);
 				quant = 0;
-				itype = null;
+				itype = ItemType.NOTHING;
 			}
 			this._quantity = quant;
 			this._itype = itype;
@@ -45,7 +28,7 @@
 		public function emptySlot():void
 		{
 			this._quantity = 0;
-			this._itype = null;
+			this._itype = ItemType.NOTHING;
 		}
 
 		public function removeOneItem():void
@@ -56,7 +39,7 @@
 				this._quantity -= 1;
 
 			if (this._quantity == 0)
-				this._itype = null;
+				this._itype = ItemType.NOTHING;
 		}
 
 		public function get quantity():Number
@@ -67,7 +50,7 @@
 		public function set quantity(value:Number):void
 		{
 			if (value > 0 && _itype == null) CoC_Settings.error("ItemSlotClass.quantity set with no item; use setItemAndQty instead!");
-			if (value == 0) _itype = null;
+			if (value == 0) _itype = ItemType.NOTHING;
 			_quantity = value;
 		}
 
@@ -91,7 +74,7 @@
 
 		public function isEmpty():Boolean
 		{
-			return _quantity>0;
+			return _quantity<=0;
 		}
 	}
 }

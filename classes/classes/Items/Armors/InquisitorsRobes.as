@@ -6,7 +6,7 @@ package classes.Items.Armors
 	import classes.Items.Armor;
 	import classes.Player;
 
-	public final class InquisitorsRobes extends Armor
+	public final class InquisitorsRobes extends ArmorWithPerk
 	{
 
 		override public function equipEffect(player:Player, output:Boolean):void
@@ -19,17 +19,13 @@ package classes.Items.Armors
 				outputText("To finish the look, you take the two fingerless alchemical gloves and slide them over your hands.  What seems to be a prayer is embroidered in gold on their back.\n\n");
 				outputText("You feel pious.\n\n\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of fatigue!)\n\n");
 			}
-			if(player.hasPerk("Blood Mage") < 0) player.createPerk("Blood Mage",0,0,0,0,"");
-		}
-
-		override public function unequipEffect(player:Player, output:Boolean):void
-		{
-			while(player.hasPerk("Blood Mage") >= 0) player.removePerk("Blood Mage");
+			super.equipEffect(player,output);
 		}
 
 		public function InquisitorsRobes()
 		{
-			super("I.Robes","I.Robes","inquisitor's robes",8,2000,"These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.","Light");
+			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 8, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.", "Light",
+					"Blood Mage", 0, 0, 0, 0, "");
 		}
 	}
 }
