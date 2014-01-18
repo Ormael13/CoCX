@@ -1040,7 +1040,7 @@ public static const UMA_TIMES_ACUPUNCTURE_UNDO:int                              
 public static const UMA_TIMES_SUCKED_YOU:int	                                    = 1032;
 public static const TIMES_RUT_FUCKED_URTAS_CUNT:int                                  = 1033;
 public static const TIMES_KIHA_ANALED:int                                   = 1034;
-public static const UNKNOWN_FLAG_NUMBER_01035:int                                   = 1035;
+public static const TIMES_ENCOUNTERED_GOBLIN_ASSASSIN:int                         = 1035;
 public static const UNKNOWN_FLAG_NUMBER_01036:int                                   = 1036;
 public static const UNKNOWN_FLAG_NUMBER_01037:int                                   = 1037;
 public static const UNKNOWN_FLAG_NUMBER_01038:int                                   = 1038;
