@@ -71,6 +71,10 @@ package classes.Scenes
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
+			
+			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+			// return;
+
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
@@ -161,7 +165,7 @@ package classes.Scenes
 					else {
 						//50% of the time, goblin assassin!
 						if (player.level >= 10 && rand(2) == 0) {
-							GoblinAssassinScene.goblinAssassinEncounter();
+							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 							return;
 						}
 						if (player.gender > 0) {

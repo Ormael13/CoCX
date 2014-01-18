@@ -241,7 +241,11 @@ package classes.Scenes.Monsters
 				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", 0, "", 0, "Leave", cleanupAfterCombat);
 				//doYesNo(feeder,cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else 
+			{
+				trace("falling through gobboAssassinRapeIntro")
+				cleanupAfterCombat();
+			}
 		}
 		private function giveGoblinAMilkMustache():void {
 			outputText("", true);

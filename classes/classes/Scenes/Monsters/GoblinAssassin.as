@@ -65,33 +65,33 @@
 		}
 		//Lust Needle
 		protected function lustNeedle():void {
-			output("With a swift step, the assassin vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
+			outputText("With a swift step, the assassin vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
 			//Miss
 			if (combatMiss() || combatEvade()) 
 			{
 				//Miss: 
-				output("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
+				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
 				game.dynStats("lus", rand(player.lib/10)+4);
 			}
 			//Hit: 
 			else 
 			{
-				output("\nYou’re far too distracted to notice the needle injected into the back of your neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
+				outputText("\nYou’re far too distracted to notice the needle injected into the back of your neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
 				game.dynStats("lus", rand(player.lib/4)+20);
 			}
 			combatRoundOver();
 		}
 		//Dual Shot
 		protected function dualShot():void {
-			output("The assassin throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for her to slip underneath you. With a quick flick of her wrists two needles are placed into her hands, though you’ve already caught wind of her movements.");
+			outputText("The assassin throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for her to slip underneath you. With a quick flick of her wrists two needles are placed into her hands, though you’ve already caught wind of her movements.");
 			//Miss: 
 			if (combatMiss() || combatEvade() || combatMisdirect() || combatFlexibility()) 
 			{
-				output("\nYou jump backwards, far enough to avoid her quick thrust upwards as she attempts to lick the area in which your crotch once stood. Realising her situation, she quickly removes herself from the ground and faces you, more determined than before.");
+				outputText("\nYou jump backwards, far enough to avoid her quick thrust upwards as she attempts to lick the area in which your crotch once stood. Realising her situation, she quickly removes herself from the ground and faces you, more determined than before.");
 			}
 			//Hit: 
 			else {
-				output("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger.");
+				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger.");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
 				damage = player.takeDamage(damage);
@@ -101,8 +101,8 @@
 		}
 		//Explosion
 		protected function goblinExplosion():void {
-			output("Without a second thought, the assassin pulls a thin needle from the belt wrapped around her chest and strikes it against the ground, causing a flame to erupt on the tip. She twirls forward, launching the needle in your direction which subsequently bursts apart and showers you with heat.");
-			output("\nYou shield yourself from the explosion, though the goblin has already lit a second needle which she throws behind you, launching your body forwards as it explodes behind your back. ");
+			outputText("Without a second thought, the assassin pulls a thin needle from the belt wrapped around her chest and strikes it against the ground, causing a flame to erupt on the tip. She twirls forward, launching the needle in your direction which subsequently bursts apart and showers you with heat.");
+			outputText("\nYou shield yourself from the explosion, though the goblin has already lit a second needle which she throws behind you, launching your body forwards as it explodes behind your back. ");
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
 			damage = player.takeDamage(damage);
@@ -111,12 +111,13 @@
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(short == "goblin") {
-				game.goblinScene.gobboAssassinRapeIntro();
-			}
+			trace("defeated goblin assassin");
+			game.goblinAssassinScene.gobboAssassinRapeIntro();
+			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			trace("beat by goblin assassin")
 			if (player.gender == 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"", false);
 				game.cleanupAfterCombat();
@@ -141,7 +142,8 @@
 			init11Armor("leather straps");
 			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
-			initX_Specials(goblinDrugAttack,lustNeedle,dualShot,goblinExplosion);
+			initX_Specials(goblinDrugAttack,lustNeedle,dualShot);//,goblinExplosion);
+	
 		}
 	}
 }
