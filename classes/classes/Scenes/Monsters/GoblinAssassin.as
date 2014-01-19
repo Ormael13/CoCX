@@ -142,8 +142,12 @@
 			init11Armor("leather straps");
 			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
-			initX_Specials(goblinDrugAttack,lustNeedle,dualShot);//,goblinExplosion);
-	
+		}
+
+		override protected function performCombatAction():void
+		{
+			var actions:Array = [eOneAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
+			actions[rand(actions.length)]();
 		}
 	}
 }
