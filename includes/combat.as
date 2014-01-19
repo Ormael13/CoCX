@@ -1735,8 +1735,8 @@ public function doDamage(damage:Number):Number {
 	return damage;
 }
 
-public function takeDamage(damage:Number, noMod:Boolean = false):Number {
-	return player.takeDamage(damage,noMod);
+public function takeDamage(damage:Number):Number {
+	return player.takeDamage(damage);
 }
 //ENEMYAI!
 public function enemyAI():void {

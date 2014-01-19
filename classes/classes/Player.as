@@ -86,8 +86,7 @@ package classes
 			return damage;
 		}
 
-		public function takeDamage(damage:Number,noMod:Boolean=false):Number{
-			if (!noMod) damage = reduceDamage(damage);
+		public function takeDamage(damage:Number):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP

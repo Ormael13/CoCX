@@ -553,7 +553,7 @@
 			if (attackSucceeded()){
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = calcDamage();
-				if (damage > 0) damage = player.takeDamage(damage,true);
+				if (damage > 0) damage = player.takeDamage(damage);
 				return damage;
 			}
 			return 0;
