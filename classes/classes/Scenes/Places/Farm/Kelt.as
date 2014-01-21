@@ -134,7 +134,7 @@ package classes.Scenes.Places.Farm
 			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,50);
 			init05Body(84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_CENTAUR);
 			init06Skin("tan");
-			init07Hair(Appearance.randomChoice("black","brown"),3);
+			init07Hair(randomChoice("black","brown"),3);
 			init08Face();
 			init09PrimaryStats(60,70,40,20,40,25,55);
 			init10Weapon("fist","punch",10);

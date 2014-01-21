@@ -8,7 +8,7 @@ package classes
 	import classes.Items.WeaponLib;
 
 	//import classes.CockClass;
-	public class Creature
+	public class Creature extends Utils
 	{
 
 		include "../../includes/appearanceDefs.as";
@@ -1428,11 +1428,7 @@ package classes
 				index3 = 0;
 			return index3;
 		}
-		
-		protected function rand(max:Number):Number
-		{
-			return int(Math.random() * max);
-		}
+
 		
 		public function cockDescript(cockIndex:Number = 0):String
 		{

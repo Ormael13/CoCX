@@ -77,12 +77,12 @@ public function customPCSetup():void {
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 		player.createStatusAffect("Kelt",100,0,0,0);		
 		player.createKeyItem("Bow",0,0,0,0);
-		createStorage();
-		createStorage();
-		createStorage();
-		createStorage();
-		createStorage();
-		createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
 		player.createKeyItem("Camp - Chest",0,0,0,0);
 		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;

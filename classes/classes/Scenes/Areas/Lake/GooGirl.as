@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.Appearance;
 	import classes.Monster;
+	import classes.Utils;
 
 	/**
 	 * ...
@@ -156,7 +157,7 @@ package classes.Scenes.Areas.Lake
 			init03BreastRows(playerHasBigBoobs ? player.biggestTitSize() : 3);
 			init04Ass(ANAL_LOOSENESS_TIGHT, ANAL_WETNESS_SLIME_DROOLING, 9001);
 			init05Body(rand(8) + 70, HIP_RATING_AMPLE, BUTT_RATING_LARGE, LOWER_BODY_TYPE_GOO);
-			var tone:String = Appearance.randomChoice("blue", "purple", "crystal");
+			var tone:String = randomChoice("blue", "purple", "crystal");
 			init06Skin(tone, SKIN_TYPE_GOO);
 			init07Hair(tone, 12 + rand(10));
 			init08Face();

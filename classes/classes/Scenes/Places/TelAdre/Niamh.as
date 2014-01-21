@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Player;
 
 	public class Niamh extends TelAdreAbstractContent {
 public function Niamh(){
@@ -150,7 +151,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 	}
 	outputText("You yell \"<i>Skoal!</i>\" and upend the mug into your mouth, drinking greedily.  The warmth of the booze quickly follows the liquid itself - potent stuff, this is.");
 	//PC is affected by Black Cat Beer item effects
-	blackCatBeerEffects(false,true);
+	blackCatBeerEffects(player,false,true);
 	//both output
 	if(model.time.hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
 	//16:00 ending
@@ -226,7 +227,7 @@ private function leaveNiamh():void {
 
 //Black Cat Beer
 //is affected by Black Cat Beer item effects
-public function blackCatBeerEffects(clearScreen:Boolean = true,newLine:Boolean = false):void {
+public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,newLine:Boolean = false):void {
 	if(clearScreen) clearOutput();
 	if(newLine) outputText("\n\n");
 	outputText("Uncapping the mug, you swill the stuff down in a single swig, gasping as it burns a fiery trail into your belly.  It's rich and sweet, and damn, but it's strong stuff!");
@@ -383,7 +384,7 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		outputText("\n\n\"<i>Yummy, isn't it?</i>\" Niamh purrs.  \"<i>Like, drink up; I gots lots more where that came from!</i>\"  She giggles, trying to push her breast forward; with how big it is, she can't really reach around to force you into it like she'd like.");
 		outputText("\n\nStill, refusing such a delicious drink is not something a true connoisseur does; you nuzzle eagerly into her swollen breast.  A little too hard, in hindsight; the pressure makes the vast quantity of champagne inside come spurting into your mouth, filling you up with sweet richness and forcing you to chug it down to avoid choking.  Once you get the rhythm right, though, it's much easier; you hardly need to suckle, just keep squeezing jet after glorious jet down your thirsty gullet.");
 		outputText("\n\n...This stuff is, like, way too freaking good!  Er?  Did you really just think that?  Come to think of it, it's getting harder to think, like, about anything... but izzat really so bad?  What do you need to think about, other than this sweet, sweet booze?");
-		bimboChampagne(false,false);
+		bimboChampagne(player,false,false);
 		outputText("\n\nGiggling happily around your boozy boob of love, you start to scrape your crotch against the ground and rub your bouncy big boobs against Niamh's; that feels just sooo good!  Niamh is meowing and purring and occasionally burping; she, like, really likes you sucking on her... that's good, since you like sucking on her too.  You move one of your hands down between her legs... ooh, she's, like, not wearing any panties... what a naughty, naughty kitty-girl! You grin into her boob and, still sucking, start to play with her little pleasure button and her wet, sticky girly bits.");
 		outputText("\n\nNiamh yowls and shudders, her pussy-parts squeezing around your fingers, and then, all of a sudden, she clenches up and lets go.  Girly-goo drizzles into your hand, getting you all sticky, and her big boobies suddenly start spurting... uh, whatsit, sham-pain?  From her big ol' nipples.  The other breast starts spraying the grass, which is a waste of good bubbly brew, but you get more than your fair share since her other breast is gushing into your mouth and you swallow and gulp and slurp as fast as you can.  But, in the end, you just can't keep up and you, like, have to let go.  Have to.");
 		outputText("\n\nFinally, Niamh's boobgasm comes to an end and she falls back on her big jiggly butt.  \"<i>Like, that feels so much better than when I put my big ol' boob in my own mouth...  Hey, [name]... you, like, okay?</i>\" she asks.  She half-crawls over to you, then giggles.  \"<i>You, like, got a big sloshy belly on you now, [name]!  You look so funny with this giant gutty-gut.</i>\"");
@@ -405,12 +406,12 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		outputText("\n\nGlancing around, you can't help but agree, judging by the lake of ale surrounding you both.  Luckily, her self-entertainment seems to have shrunk her normally-gigantic tits to a more manageable size, and with your assistance, she's soon back on her feet.  \"<i>I heard there was a form of refuge for... well, differently-blessed lassies like meself,</i>\" she says, somewhat drily, patting the top of her huge azure bosom for emphasis.  \"<i>I'm heading there.  Maybe I'll find you there eventually, hey?</i>\"");
 		outputText("\n\nShe gives you a little punch in the shoulder, shooting you a wink and walking away.  \"<i>Don't think I forgot about how I got like this,  " + player.mf("boy","gal") + ", ,</i>\" she yells over her shoulder, stopping you in your tracks as you turn to leave.  Several moments pass before she finally turns around and resumes her departure.");
 		outputText("\n\nJust before you move out of earshot, a last word from Niamh floats to your ears.  You can't be sure, but... did she say... \"<i>Thanks?</i>\"");
-		blackCatBeerEffects(false,true);
+		blackCatBeerEffects(player,false,true);
 		//[end encounter]*/
 	}
 	doNext(13);
 }
-public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
+public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
 	if(clearScreen) clearOutput();
 	if(intro) {
 		if((player.hasPerk("Futa Faculties") >= 0 && player.hasPerk("Futa Form") >= 0) || (player.hasPerk("Bimbo Body") >= 0 && player.hasPerk("Bimbo Brains") >= 0)) {
@@ -534,7 +535,7 @@ private function drinkFromZeTap():void {
 	outputText("\n\nYou snap back to your senses with a jolt, finding yourself flat on your back and gazing up at the sky.  \"<i>Like, are you alright, [name]?</i>\" Niamh asks, amused.  \"<i>My fizzy titties, like, really hit some people harder than they can, y'know, deal with.  You okay?</i>\"");
 	
 	outputText("\n\nYou push yourself upright and assure the pretty catgirl that you feel, like, super-duper wonderful!  You punctuate this declaration with a burp as the sudden motion makes all the yummy bubbles in your belly dance, and then you giggle at how naughty that was.");
-	bimboChampagne(false,false);
+	bimboChampagne(player,false,false);
 	doNext(13);
 }
 	

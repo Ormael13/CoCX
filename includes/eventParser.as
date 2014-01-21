@@ -20,7 +20,7 @@ public function eventParser(eventNo:*):void {
 		//Clear pic if not in combat
 		//if(!inCombat() && eventNo != cleanupAfterCombat) clearImages();
 		//Reset newgame buttons till back at camp
-		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
+		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
 		if(eventNo != 1) {
 			hideMenus();
 		}
@@ -46,7 +46,7 @@ public function eventParser(eventNo:*):void {
 		if(eventNo >=1000 && eventNo < 2000) inventory.doItems(eventNo);
 		if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
 		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
-		if(eventNo >= 10000 && eventNo < 10999) doCreation(eventNo);
+		if(eventNo >= 10000 && eventNo < 10999) charCreation.doCreation(eventNo);
 		if(eventNo >= 11000) doDungeon(eventNo);
 	}
 

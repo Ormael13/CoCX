@@ -75,7 +75,7 @@ INITIATING MONKEY
 	if (this.player.str) // we're in a game
 		doNext(13);      // so dump out to the camp scene
 	else
-		doNext(newGameGo);   // not in a game, create a char randomly
+		doNext(charCreation.newGameGo);   // not in a game, create a char randomly
 }
 
 

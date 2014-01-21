@@ -292,13 +292,6 @@ package classes
 			_pierced = value;
 		}
 		//} endregion
-		
-		//{ region Utility Functions
-		private static function rand(max:Number):Number
-		{
-			return int(Math.random() * max);
-		}
-		
-		//} endregion
+
 	}
 }

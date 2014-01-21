@@ -7,6 +7,7 @@ package classes
 
 	public class ItemType
 	{
+		include "../../includes/appearanceDefs.as"
 		private static var ITEM_LIBRARY:Dictionary = new Dictionary();
 		public static const NOTHING:ItemType = new ItemType(null);
 

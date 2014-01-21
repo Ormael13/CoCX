@@ -147,8 +147,8 @@ package classes.Scenes.Areas.Swamp
 		public function CorruptedDrider()
 		{
 
-			var hairColor:String = Appearance.randomChoice("red", "orange", "green");
-			var skinTone:String = Appearance.randomChoice("yellow", "purple", "red", "turquoise");
+			var hairColor:String = randomChoice("red", "orange", "green");
+			var skinTone:String = randomChoice("yellow", "purple", "red", "turquoise");
 
 			var pierced:Boolean = rand(2)==0;
 			init01Names("the ", "corrupted drider", "corrupteddrider",

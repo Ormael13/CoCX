@@ -146,7 +146,7 @@ package classes.Scenes.Areas.Plains
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,20);
 			init05Body(rand(37) + 64,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 			init06Skin("tan");
-			init07Hair(Appearance.randomChoice("black","brown"),3+rand(20));
+			init07Hair(randomChoice("black","brown"),3+rand(20));
 			init08Face(FACE_COW_MINOTAUR);
 			init09PrimaryStats(75,70,110,70,60,35,45);
 			init10Weapon("fist","punch");

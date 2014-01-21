@@ -119,6 +119,7 @@
 			init11Armor("rubbery skin",1);
 			init12Combat(350,10,0.8,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(6,rand(15)+5);
+			init14FixedDrop();
 			initX_Specials(tentaclePhysicalAttack,tentacleEntwine,tentaclePhysicalAttack);
 
 

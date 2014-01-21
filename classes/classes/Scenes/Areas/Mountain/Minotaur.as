@@ -6,7 +6,8 @@
 	import classes.CockTypesEnum;
 	import classes.Cock;
 	import classes.Appearance;
-	
+	import classes.Utils;
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -51,7 +52,7 @@
 		{
 			//Most times they dont have an axe
 			hasAxe = axe || rand(3)==0;
-			var furColor:String = Appearance.randomChoice("black","brown");
+			var furColor:String = randomChoice("black","brown");
 
 			trace("Minotaur Constructor!");
 			trace(game.flags);

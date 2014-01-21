@@ -5,6 +5,9 @@ package classes
 {
 	public class Utils
 	{
+		// TODO remove when we have proper enums for this
+		include "../../includes/appearanceDefs.as";
+
 		public function Utils()
 		{
 		}
@@ -18,7 +21,7 @@ package classes
 			};
 		}
 		// lazy(obj,arg1,...,argN)() = obj[arg1]...[argN]
-		public static function lazy(obj:*,...args):Function{
+		public static function lazyIndex(obj:*,...args):Function{
 			return function():*{
 				while(args.length>0)
 					obj=obj[args.shift()];
@@ -26,13 +29,48 @@ package classes
 			};
 		}
 		// lazy2(func,arg1,...,argN)() = func()[arg1]...[argN]
-		public static function lazy2(func:Function,...args):Function{
+		public static function lazyCallIndex(func:Function,...args):Function{
+			var _args:Array = args.slice();
 			return function():*{
 				var obj:*=func();
-				while(args.length>0)
-					obj=obj[args.shift()];
+				var __args:Array = _args.slice();
+				while(__args.length>0)
+					obj=obj[__args.shift()];
 				return obj
 			};
+		}
+		// lazy2(func,arg1,...,argN)(args) = func()[arg1]...[argN](args)
+		public static function lazyCallIndexCall(func:Function,...args):Function{
+			var _args:Array = args.slice();
+			return function (...fargs):*{
+				var obj:*=func();
+				var __args:Array = _args.slice();
+				while(__args.length>0)
+					obj=obj[__args.shift()];
+				return obj.apply(null,fargs);
+			};
+		}
+		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
+		// Accepts any type.
+		// Can also accept a *single* array of items, in which case it picks from the array instead.
+		// This lets you pre-construct the argument, to make things cleaner
+		public static function randomChoice(...args):*
+		{
+			var choice:Number;
+			if ((args.length == 1) && (args[0] is Array))
+			{
+				choice = int(Math.round(Math.random() * (args[0].length - 1)));
+				return args[0][choice];
+			}
+			else
+			{
+				choice = int(Math.round(Math.random() * (args.length - 1)));
+				return args[choice];
+			}
+		}
+		public static function rand(max:Number):Number
+		{
+			return int(Math.random() * max);
 		}
 	}
 }

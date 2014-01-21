@@ -69,7 +69,7 @@ private function lumiLustDraftPitch():void {
 	outputText("", true);
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
 	outputText("Will you buy the lust draft?", false);
-	doYesNo(lumiPurchase,curry(lumiShop,consumables.L_DRAFT));
+	doYesNo(curry(lumiPurchase,consumables.L_DRAFT),lumiShop);
 }
 //Goblin Ale
 private function lumiPitchGobboAle():void {
@@ -77,7 +77,7 @@ private function lumiPitchGobboAle():void {
 	outputText("", true);
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
 	outputText("Will you buy the goblin ale?", false);
-	doYesNo(lumiPurchase,curry(lumiShop,consumables.GOB_ALE));
+	doYesNo(curry(lumiPurchase,consumables.GOB_ALE),lumiShop);
 }
 //Ovi Elixir
 private function lumiPitchOviElixer():void {
@@ -85,7 +85,7 @@ private function lumiPitchOviElixer():void {
 	outputText("", true);
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
 	outputText("Will you buy the Ovi Elixir?", false);
-	doYesNo(lumiPurchase,curry(lumiShop,consumables.OVIELIX));
+	doYesNo(curry(lumiPurchase,consumables.OVIELIX),lumiShop);
 }
 
 

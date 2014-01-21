@@ -19,7 +19,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	//Reset newgame buttons
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
 	mainView.hideAllMenuButtons();
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );

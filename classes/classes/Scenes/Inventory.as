@@ -90,7 +90,7 @@ public function doItems(eventNo:Number):void {
 			}
 		}
 		//If3 no items
-		if(temp1 + temp2 + temp3 + temp4 + temp5 + ember + fuckPlant + nieve == 0) {
+		if(temp1 == null && temp2 == null && temp3 == null && temp4 == null && temp5 == null && ember == null && fuckPlant == null && nieve == 0) {
 			outputText("\nYou have no usable items.", false);
 			doNext(1);
 			return;
@@ -723,6 +723,7 @@ public function doItems(eventNo:Number):void {
 		}
 		//Determine how to continue after using items or running from the items menu.
 		public function itemGoNext():void {
+			itemSubMenu = false;//hope it will work
 			trace("ITEM GO NEXT HAPPENZ BITCHES" + String(itemSwapping));
 			if(gameState == 4) {
 				//If at giacomo go back to him afterwards
@@ -838,11 +839,13 @@ public function doItems(eventNo:Number):void {
 			else doNext(1);
 		}
 
-		public function takeItem(itype:ItemType):void{
+		public function takeItem(itype:ItemType):Boolean{
+			itemSubMenu = false;
 			if (itype == null){
 				CoC_Settings.error("takeItem(null)");
-				return;
+				return true;
 			}
+			if (itype == ItemType.NOTHING) return true;
 			var done:Boolean = false;
 			//Check for an existing stack with room in the inventory and return the value for it.
 			var temp:int = player.roomInExistingStack(itype);
@@ -863,12 +866,12 @@ public function doItems(eventNo:Number):void {
 					outputText("You place " + itype.longName + " in your "+
 							["first","second","third","fourth","fifth"][temp]+
 							" pouch.", false);
+					done = true;
 				}
-				done = true;
 			}
 			if(done) {
 				itemGoNext();
-				return;
+				return true;
 			}
 			//OH NOES! No room! Call replacer functions!
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.", false);
@@ -983,6 +986,7 @@ public function doItems(eventNo:Number):void {
 					"Use Now", createCallBackFunction(useItem,itype),
 					"Abandon", abandon);
 			trace("TakeItem Menuloc: " + menuLoc);
+			return false;
 		}
 		private function replaceItem(itype:ItemType,slotTmp:ItemSlotClass):void{
 			//If it is the same as what's in the slot...just throw away the new item
@@ -1059,8 +1063,9 @@ public function doItems(eventNo:Number):void {
 			itemStorage[slotNum].quantity--;
 			outputText("", true);
 			menuLoc = 7;
-			inventory.takeItem(itype);
-			doNext(chooseRetrievalSlot);
+			if (inventory.takeItem(itype)){
+				doNext(chooseRetrievalSlot);
+			}
 		}
 		//Check to see if anything is stored
 		public function hasItemsInStorage():Boolean {
@@ -1158,7 +1163,7 @@ public function doItems(eventNo:Number):void {
 			{
 				if(itemStorage[currentStorageSlotIndex].isEmpty())
 				{
-					itemStorage[currentStorageSlotIndex].placeItemWQuantity(qty, itype);
+					itemStorage[currentStorageSlotIndex].setItemAndQty(itype,qty);
 					outputText("You place " + qty + "x " + itype.shortName + " into storage slot " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
 					currentStorageSlotIndex = 17;
 					qty = 0;
@@ -1256,8 +1261,7 @@ public function doItems(eventNo:Number):void {
 			//check if a suitable slot is found.  If so, load in, and quit out.
 			while(temp < goal && qty > 0) {
 				if(gearStorage[temp].quantity == 0) {
-					gearStorage[temp].quantity = qty;
-					gearStorage[temp].shortName = itype;
+					(gearStorage[temp] as ItemSlotClass).setItemAndQty(itype,qty);
 					outputText("You place " + qty + "x " + itype.shortName + " into storage slot ", false);
 					if(!armor) outputText(num2Text(temp+1) + ".\n", false);
 					else outputText(num2Text(temp - 8) + ".\n", false);
@@ -1395,10 +1399,10 @@ public function doItems(eventNo:Number):void {
 			}
 			else {
 				if(itemSlot1.quantity > 0 && itemSlot1.itype is Armor) temp1 = 1085 + bonus;
-				if(itemSlot2.quantity > 0 && itemSlot1.itype is Armor) temp2 = 1086 + bonus;
-				if(itemSlot3.quantity > 0 && itemSlot1.itype is Armor) temp3 = 1087 + bonus;
-				if(itemSlot4.quantity > 0 && itemSlot1.itype is Armor && itemSlot4.unlocked) temp4 = 1088 + bonus;
-				if(itemSlot5.quantity > 0 && itemSlot1.itype is Armor && itemSlot5.unlocked) temp5 = 1089 + bonus;
+				if(itemSlot2.quantity > 0 && itemSlot2.itype is Armor) temp2 = 1086 + bonus;
+				if(itemSlot3.quantity > 0 && itemSlot3.itype is Armor) temp3 = 1087 + bonus;
+				if(itemSlot4.quantity > 0 && itemSlot4.itype is Armor && itemSlot4.unlocked) temp4 = 1088 + bonus;
+				if(itemSlot5.quantity > 0 && itemSlot5.itype is Armor && itemSlot5.unlocked) temp5 = 1089 + bonus;
 			}
 			outputText("What item slot do you wish to empty into your ", true);
 			if(!armor) outputText("weapon rack", false);
@@ -1445,5 +1449,44 @@ public function doItems(eventNo:Number):void {
 			inventory.takeItem(consumables.HUMMUS_);
 			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 		}
+//Create a storage slot
+public function createStorage():Boolean {
+	if(itemStorage.length >= 16) return false;
+	var newSlot:* = new ItemSlotClass();
+	itemStorage.push(newSlot);
+	return true;
+}
+//Clear storage slots
+public function clearStorage():void {
+	//Various Errors preventing action
+	if(itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+	else {
+		trace("Attempted to remove " + itemStorage.length + " storage slots.");
+		itemStorage.splice(0, itemStorage.length);
+	}
+}
+public function clearGearStorage():void {
+	//Various Errors preventing action
+	if(gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+	else {
+		trace("Attempted to remove " + gearStorage.length + " storage slots.");
+		gearStorage.splice(0, gearStorage.length);
+	}
+}
+
+public function initializeGearStorage():void {
+	//Completely empty storage array
+	if(gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+	else {
+		trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
+		gearStorage.splice(0, gearStorage.length);
+	}
+	//Rebuild a new one!
+	var newSlot:*;
+	while(gearStorage.length < 18) {
+		newSlot = new ItemSlotClass();
+		gearStorage.push(newSlot);
+	}
+}
 	}
 }

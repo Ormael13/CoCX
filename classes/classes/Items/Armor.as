@@ -16,10 +16,10 @@ package classes.Items
 		{
 			clearOutput();
 			if (canConsume(player, true)) {
-				player.setArmorHiddenField(this);
-				if(output) outputText("You equip your " + player.armorName + ".  ");
+				if(output) outputText("You equip your " + _name + ".  ");
 				var oldArmor:Armor = player.armor;
 				oldArmor.unequip(player,output);
+				player.setArmorHiddenField(this);
 				equipped(player,output);
 			}
 		}

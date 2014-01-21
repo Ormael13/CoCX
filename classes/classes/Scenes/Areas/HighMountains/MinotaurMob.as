@@ -156,7 +156,7 @@ package classes.Scenes.Areas.HighMountains
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,30);
 			init05Body(rand(37) + 84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 			init06Skin("red",SKIN_TYPE_FUR,"shaggy fur");
-			init07Hair(Appearance.randomChoice("black","brown"),3);
+			init07Hair(randomChoice("black","brown"),3);
 			init08Face(FACE_COW_MINOTAUR);
 			init09PrimaryStats(65,60,30,20,40,15,35);
 			init10Weapon("fists","punches");

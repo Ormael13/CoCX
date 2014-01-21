@@ -68,12 +68,12 @@ package classes.Scenes.Areas
 			//Possible chance of boosting camp space!
 			if (player.hasKeyItem("Camp - Chest") < 0 && (rand(100) < 10)) {
 				outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  <b>You now have six storage item slots at camp.</b>", true);
-				kGAMECLASS.createStorage();
-				kGAMECLASS.createStorage();
-				kGAMECLASS.createStorage();
-				kGAMECLASS.createStorage();
-				kGAMECLASS.createStorage();
-				kGAMECLASS.createStorage();
+				inventory.createStorage();
+				inventory.createStorage();
+				inventory.createStorage();
+				inventory.createStorage();
+				inventory.createStorage();
+				inventory.createStorage();
 				player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
 				doNext(13);
 				return;

@@ -6,9 +6,8 @@
 	import classes.CoC_Settings;
 
 
-	public class Appearance
+	public class Appearance extends Utils
 	{
-		include "../../includes/appearanceDefs.as"
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
 
@@ -20,22 +19,6 @@
 			}
 			return result;
 		}
-
-		public static function randomChoice(...args):*
-		{
-			if ((args.length == 1) && (args[0] is Array)) {
-				return args[0][ Math.floor(Math.random() * args[0].length) ];
-			}
-			else {
-				return args[ Math.floor(Math.random() * args.length) ];
-			}
-		}
-
-		public static function rand(max:Number):Number
-		{
-			return int(Math.random() * max);
-		}
-
 
 		public static function hairOrFur(i_creature:Creature):String
 		{

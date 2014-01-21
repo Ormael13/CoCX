@@ -24,7 +24,7 @@ package classes.Items.Consumables
 
 		public function WingStick()
 		{
-			super("W.Stick","W.Stick","a wingstick",Utils.lazy2(getGame,"mutations","wingStick"),16,"A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)");
+			super("W.Stick","W.Stick","a wingstick",Utils.lazyCallIndexCall(getGame,"mutations","wingStick"),16,"A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)");
 		}
 	}
 }

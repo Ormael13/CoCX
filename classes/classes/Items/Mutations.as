@@ -76,7 +76,7 @@
 		}
 
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
-		public function incubiDraft(player:Player,tainted:Boolean):void
+		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			var temp2:Number = 0;
@@ -1295,7 +1295,7 @@
 
 		}
 
-		public function succubiMilk(player:Player,tainted:Boolean):void
+		public function succubiMilk(tainted:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			var temp2:Number = 0;
@@ -1501,7 +1501,7 @@
 //3-Black Pepper (Dark Fur, +corruption/libido)
 //4-Knotty Pepper (+Knot + Cum Multiplier)
 //5-Bulbous Pepper (+ball size or fresh balls)
-		public function caninePepper(player:Player,type:Number = 0):void
+		public function caninePepper(type:Number,player:Player):void
 		{
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -2243,7 +2243,7 @@
 			}
 		}
 
-		public function pureHoney(pure:Boolean):void
+		public function pureHoney(pure:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			outputText("", true);
@@ -2409,7 +2409,7 @@
 			}
 		}
 
-		public function succubisDelight(player:Player,tainted:Boolean):void
+		public function succubisDelight(tainted:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			var changes:Number = 0;
@@ -2644,7 +2644,7 @@
 		}
 
 //butt expansion
-		public function brownEgg(player:Player,large:Boolean):void
+		public function brownEgg(large:Boolean,player:Player):void
 		{
 			outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 			if (!large) {
@@ -2662,7 +2662,7 @@
 		}
 
 //hip expansion
-		public function purpleEgg(player:Player,large:Boolean):void
+		public function purpleEgg(large:Boolean,player:Player):void
 		{
 			outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 			if (!large || player.hipRating > 20) {
@@ -2680,7 +2680,7 @@
 		}
 
 //Femminess
-		public function pinkEgg(player:Player,large:Boolean):void
+		public function pinkEgg(large:Boolean,player:Player):void
 		{
 			outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 			if (!large) {
@@ -2734,7 +2734,7 @@
 		}
 
 //Maleness
-		public function blueEgg(player:Player,large:Boolean):void
+		public function blueEgg(large:Boolean,player:Player):void
 		{
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -2886,7 +2886,7 @@
 		}
 
 //Nipplezzzzz
-		public function whiteEgg(large:Boolean):void
+		public function whiteEgg(large:Boolean,player:Player):void
 		{
 			var temp2:Number = 0;
 			outputText("You devour the egg, momentarily sating your hunger.", true);
@@ -2922,7 +2922,7 @@
 			}
 		}
 
-		public function blackRubberEgg(player:Player,large:Boolean):void
+		public function blackRubberEgg(large:Boolean,player:Player):void
 		{
 			outputText("You devour the egg, momentarily sating your hunger.", true);
 			//Small
@@ -3013,7 +3013,7 @@
 			}
 		}
 
-		public function hairDye(player:Player,color:String):void
+		public function hairDye(color:String,player:Player):void
 		{
 			if (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) {
 				outputText("You massage the dye into your " + hairDescript() + " but the dye cannot penetrate the impermeable material your hair is composed of.", true);
@@ -3172,7 +3172,7 @@
 		 If the player's nipples are larger than 1 inch in length, this item is guaranteed to give them quad nipples.  This applies to all their breasts; seems like it ould be a good compromise on whether or not cowgirls should have 4 breasts.
 		 Very small chance to increase fertility (normally this increase would only happen when the player forces a creature to drink their milk).
 		 */
-		public function laBova(player:Player,tainted:Boolean = true, enhanced:Boolean = false):void
+		public function laBova(tainted:Boolean,enhanced:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			//Changes done
@@ -3656,7 +3656,7 @@
 			}
 		}
 
-		public function lustDraft(player:Player,fuck:Boolean = false):void
+		public function lustDraft(fuck:Boolean,player:Player):void
 		{
 			player.slimeFeed();
 			outputText("You drink the ", true);
@@ -4065,7 +4065,7 @@
 		}
 
 
-		public function sharkTooth(player:Player,type:Number = 0):void
+		public function sharkTooth(type:Number,player:Player):void
 		{
 			var changes:Number = 0;
 			var changeLimit:Number = 2;
@@ -5223,7 +5223,7 @@
 			}
 		}
 
-		public function neonPinkEgg(player:Player,pregnantChange:Boolean = false):void
+		public function neonPinkEgg(pregnantChange:Boolean,player:Player):void
 		{
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
@@ -5559,7 +5559,7 @@
 			}
 		}
 
-		public function goldenSeed(player:Player,type:Number = 0):void
+		public function goldenSeed(type:Number,player:Player):void
 		{
 			//'type' refers to the variety of seed.
 			//0 == standard.
@@ -5897,7 +5897,7 @@
 		 -Roo footsies
 		 -Fur
 		 -Roo face*/
-		public function kangaFruit(type:Number = 0):void
+		public function kangaFruit(type:Number,player:Player):void
 		{
 			outputText("", true);
 			outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...", false);
@@ -6127,7 +6127,7 @@
 			outputText(player.modThickness(100, 100), false);
 		}
 
-		public function sweetGossamer(player:Player,type:Number = 0):void
+		public function sweetGossamer(type:Number,player:Player):void
 		{
 			outputText("", true);
 			var changes:Number = 0;
@@ -6757,172 +6757,6 @@
 		}
 
 //ITEMS START
-		public function bimboLiquer(player:Player):void
-		{
-			clearOutput();
-			if (player.hasPerk("Bro Body") >= 0) {
-				outputText("You wince as the stuff hits your stomach, already feeling the insidious effects beginning to take hold.  A lengthy belch escapes your lips as your stomach gurgles, and you giggle abashedly to yourself.", false);
-				if (player.tallness < 77) {
-					outputText(" ...Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!", false);
-					player.tallness = 77;
-				}
-				if (player.biggestTitSize() < 7) {
-					if (player.biggestTitSize() < 1) outputText("  Tingling, your chest begins to itch, then swell into a pair of rounded orbs.  ", false);
-					outputText("  They quiver ominously, and you can't help but squeeze your tits together to further appreciate the boobquake as another tremor runs through them.  Unexpectedly, the shaking pushes your hands further apart as your tits balloon against each other, growing rapidly against your now-sunken fingers.  The quakes continue until calming at around an E-cup.", false);
-					player.breastRows[0].breastRating = 7;
-				}
-				//(If vagina = 2tight:
-				if (!player.hasVagina()) {
-					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + player.armorName + ", but you can certainly feel the vagina splitting from behind your testicles.  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.", false);
-					if (player.hipRating < 12 || player.buttRating < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.", false);
-					player.createVagina();
-					if (player.hipRating < 12) player.hipRating = 12;
-					if (player.buttRating < 12) player.buttRating = 12;
-				}
-				outputText("\n\n", false);
-				outputText("A wave of numbness rolls through your features, alerting you that another change is happening.  You reach up to your feel your jaw narrowing, becoming more... feminine?  Heavy, filling lips purse in disappointment as your face takes on a very feminine cast.  You're probably pretty hot now!\n\n", false);
-				if (player.femininity < 80) player.femininity = 80;
-
-				outputText("Your surging, absurdly potent libido surges through your body, reminding you that you need to fuck.  Not just bitches, but guys too.  Hard cocks, wet pussies, hell, you don't care.  They can have both or a dozen of either.  You just want to get laid and bone something, hopefully at the same time!", false);
-				outputText("\n\n<b>(Perks Lost: Bro Body", false);
-				if (player.hasPerk("Bro Brains") >= 0) outputText(", Bro Brains", false);
-				outputText(")\n", false);
-				outputText("(Perks Gained: Futa Form, Futa Faculties)\n", false);
-				player.removePerk("Bro Body");
-				player.removePerk("Bro Brains");
-				player.createPerk("Futa Faculties", 0, 0, 0, 0, "");
-				player.createPerk("Futa Form", 0, 0, 0, 0, "");
-				if (player.inte > 35) {
-					player.inte = 35;
-					dynStats("int", -0.1);
-
-				}
-				if (player.lib < 50) {
-					player.lib = 50;
-					dynStats("lib", .1);
-				}
-			}
-			else {
-				outputText("You pop the cork from the flask and are immediately assaulted by a cloying, spiced scent that paints visions of a slutty slave-girl's slightly-spread folds.  Wow, this is some potent stuff!  Well, you knew what you were getting into when you found this bottle!  You open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly.\n\n", false);
-				if (player.hairColor != "platinum blonde") {
-					outputText("The first change that you notice is to your " + hairDescript() + ".  It starts with a tingling in your scalp and intensifies ", false);
-					if (player.hairLength < 36) {
-						outputText("as you feel the weight of your hair growing heavier and longer.", false);
-						player.hairLength = 36;
-					}
-					else outputText("as your hair grows thicker and heavier.", false);
-					outputText("  You grab a lock of the silken strands and watch open-mouthed while streaks so blonde they're almost white flow down the " + player.hairColor + " hair.  It goes faster and faster until your hair has changed into perfectly bimbo-blonde, flowing locks.\n\n", false);
-					player.hairColor = "platinum blonde";
-				}
-
-				outputText("Moaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  ", false);
-				if (!player.hasVagina()) {
-					player.createVagina();
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-					if (player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.", false);
-					else outputText("Wait!?  Wet?  You touch yourself between the " + player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.", false);
-				}
-				else {
-					if (player.isTaur()) {
-						outputText("You wish you could sink your fingers into your sloppy, wet cunt, but as a centaur, you can't quite reach.");
-						if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK)
-							player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-					}
-					else {
-						outputText("You sink your fingers into your ", false);
-						if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) {
-							outputText("now ", false);
-							player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-						}
-						outputText("sloppy, wet cunt with a groan of satisfaction.", false);
-					}
-				}
-				if (player.balls > 0) {
-					outputText("\n\nThere's a light pinch against your [sack] that makes you gasp in surprise, followed by an exquisite tightness that makes your [vagina] drool.  Looking down, <b>you see your balls slowly receding into your body, leaving nothing behind but your puffy mons.</b>");
-					player.balls = 0;
-					player.ballSize = 3;
-					player.cumMultiplier = 2;
-				}
-				if (player.hasCock()) {
-					outputText("\n\n[EachCock] seems to be responding to the liqueur in its own way.  Clenching and relaxing obscenely, your genitals begin to drizzle cum onto the ground in front of you, throwing you into paroxysms of bliss.  The flow of cum is steady but weak, and each droplet that leaves you lets [eachCock] go more flaccid.  Even once you're soft and little, it doesn't stop.  You cum your way down to nothing, a tiny droplet heralding your new, girlish groin.  <b>You no longer have ");
-					if (player.cockTotal() == 1) outputText("a penis");
-					else outputText("penises");
-					outputText("!</b>");
-					while (player.hasCock()) {
-						player.removeCock(0, 1);
-					}
-				}
-				outputText("  Somehow, you feel like you could seduce anyone right now!\n\n", false);
-
-				outputText("Another bubbly giggle bursts from your lips, which you then lick hungrily.  You, like, totally want some dick to suck!  Wow, that came out of left field.  You shake your head and try to clear the unexpected, like, words from your head but it's getting kind of hard.  Omigosh, you feel kind of like a dumb bimbo after, like, drinking that weird booze.  Oh, well, it doesn't matter anyhow – you can, like, still stop the demons and stuff.  You'll just have to show off your sexy bod until they're offering to serve you.\n\n", false);
-
-				outputText("You sigh and run one hand over your " + nippleDescript(0) + "s", false);
-				if (player.breastRows[0].breastRating < 10) {
-					player.breastRows[0].breastRating += 5 + rand(5);
-					outputText(", surprised at how large and rounded your expanding breasts have become while fresh tit-flesh continues to spill out around your needy fingers.  They feel so supple and soft, but when you let them go, they still sit fairly high and firm on your chest.  The newer, more generous, " + player.breastCup(0) + " cleavage has you moaning with how sensitive it is, pinching a nipple with one hand ", false);
-				}
-				else {
-					player.breastRows[0].breastRating += 5 + rand(5);
-					outputText(", admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple, " + player.breastCup(0) + " boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand ");
-				}
-				dynStats("sen", 20);
-				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + vaginaDescript(0) + " like no tomorrow.  By now, your " + clitDescript() + " is throbbing, and you give it an experimental ", false);
-				if (player.clitLength >= 3) outputText("jerk ", false);
-				else outputText("caress ", false);
-				outputText("that makes your " + player.legs() + " give out as you cum, splattering female fluids as you convulse nervelessly on the ground.\n\n", false);
-
-				outputText("Though the orgasm is intense, you recover a few moments later feeling refreshed, but still hot and horny.  Maybe you could find a partner to fuck?  After all, sex is, like, better with a partner or two.  Or that number after two.  You brush a lengthy, platinum blonde strand of hair out of your eyes and lick your lips - you're ready to have some fun!\n\n", false);
-
-				if (player.hipRating < 12 || player.buttRating < 12) {
-					outputText("As you start to walk off in search of a sexual partner, you feel your center of balance shifting.");
-					if (player.hipRating < 12 && player.buttRating < 12) {
-						outputText("  Your ass and hips inflate suddenly, forcing you to adopt a slow, swaying gait.  You find that rolling your hips back and forth comes naturally to you.  You make sure to squeeze your butt-muscles and make your curvy tush jiggle as you go.");
-						player.buttRating = 12;
-						player.hipRating = 12;
-					}
-					else if (player.hipRating < 12) {
-						outputText("  Your hips widen suddenly, forcing you to adopt a slow, swaying gait.  You find that rolling yours hips back and forth comes naturally to you, and your big, obscene ass seems to jiggle all on its own with every step you take.");
-						player.hipRating = 12;
-					}
-					else {
-						outputText("  Your [butt] swells dramatically, the puffy cheeks swelling with newfound weight that jiggles along with each step.  Clenching your glutes to make the posh cheeks jiggle a little more enticingly becomes second nature to you in a few seconds.");
-						player.buttRating = 12;
-					}
-					outputText("\n\n");
-				}
-				if (player.tone > 0) {
-					outputText("Like, weirdest of all, your muscles seem to be vanishing!  Before your eyes, all muscle tone vanishes, leaving your body soft and gently curvy.  You poke yourself and giggle!  Everyone's totally going to want to, like, rub up against you at every opportunity.  Your thighs are so soft you bet you could squeeze a pair of dicks to orgasm without even touching your moist cunny.");
-					player.tone = 0;
-					if (player.str >= 30) {
-						if (player.str >= 70) dynStats("str", -10);
-						if (player.str >= 90) dynStats("str", -10);
-						if (player.str >= 50) dynStats("str", -10);
-						dynStats("str", -5);
-						outputText("  It does get a bit harder to carry yourself around with your diminished strength, but that's, like, what big strong hunks are for anyways!  You can just flirt until one of them volunteers to help out or something!  Besides, you don't need to be strong to jerk off cocks or finger slutty pussies!");
-					}
-					outputText("\n\n");
-				}
-				if (player.hasPerk("Bimbo Body") < 0) {
-					outputText("<b>(Bimbo Body - Perk Gained!)\n", false);
-					player.createPerk("Bimbo Body", 0, 0, 0, 0, "You have the body of a bimbo.  Your tits will never stay below a 'DD' cup, you're much lustier, more accustomed to being turned on, and you gain a bonus to using your body to arouse your enemies in combat!");
-				}
-				if (player.hasPerk("Bimbo Brains") < 0) {
-					outputText("(Bimbo Brains - Perk Gained!)\n", false);//int to 20.  max int 50)
-					player.createPerk("Bimbo Brains", 0, 0, 0, 0, "Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!");
-					if (player.inte > 21) player.inte = 21;
-				}
-				dynStats("int", -1, "lib", 4, "sen", 25, "lus=", 0);
-				//FULL ON BITCHFACE
-				player.modFem(100, 100);
-				//Body
-				//Tease/Seduce Boost
-				//*boosts min lust and lust resistance)
-				//*Tit size
-				//Brain
-				//Max int - 50
-			}
-			player.genderCheck();
-		}
 
 //Numb Rocks
 		public function numbRocks(player:Player):void
@@ -6998,7 +6832,7 @@
 			dynStats("sen", 10, "lus", 5);
 		}
 
-		public function foxTF(player:Player,enhanced:Boolean = false):void
+		public function foxTF(enhanced:Boolean,player:Player):void
 		{
 			clearOutput();
 			if (!enhanced) outputText("You examine the berry a bit, rolling the orangish-red fruit in your hand for a moment before you decide to take the plunge and chow down.  It's tart and sweet at the same time, and the flavors seem to burst across your tongue with potent strength.  Juice runs from the corners of your lips as you finish the tasty snack.");
@@ -7400,7 +7234,7 @@
 //Fox Jewel (Magatama)
 
 //Consume:
-		public function foxJewel(player:Player,mystic:Boolean = false):void
+		public function foxJewel(mystic:Boolean,player:Player):void
 		{
 			clearOutput();
 			var changes:int = 0;

@@ -2189,7 +2189,7 @@ public function display():void {
 	if (!monster.isFullyInit()){
 		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: "+
 				monster.initsCalled
-						.map(function(x:Boolean,idx:int,array:Array):String{return x?"":String(idx)})
+						.map(function(x:Boolean,idx:int,array:Array):String{return x?"":String(idx+1)})
 						.filter(function(x:String,idx:int,array:Array):Boolean{return x!=""})
 						.join(",")+
 				"</u></b>\n");

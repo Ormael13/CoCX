@@ -2395,10 +2395,6 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	mainView.statsView.showUpDown();
 	statScreenRefresh();
 }
-public function rand(max:Number):Number
-{
-	return int(Math.random()*max);
-}
 public function range(min:Number, max:Number, round:Boolean = false):Number 
 {
 	var num:Number = (min + Math.random() * (max - min));

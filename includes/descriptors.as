@@ -225,7 +225,7 @@ public function eMultiCockDescriptLight():String {
 	if(currCock == 2) {
 		//For cocks that are the same
 		if(same) {
-			descript += randomChoice("pair of ", "two ", "brace of ", "matching ", "twin ");
+			descript += Utils.randomChoice("pair of ", "two ", "brace of ", "matching ", "twin ");
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[0].cockType);
 			if(normalCocks == 2) descript += eCockNoun(CockTypesEnum.HUMAN) + "s";
 			if(horseCocks == 2) descript += eCockNoun(CockTypesEnum.HORSE) + "s";
@@ -235,15 +235,15 @@ public function eMultiCockDescriptLight():String {
 		}
 		//Nonidentical
 		else {
-			descript += randomChoice("pair of ", "two ", "brace of ");
+			descript += Utils.randomChoice("pair of ", "two ", "brace of ");
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[0].cockType);
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+			descript += Utils.randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
 		}
 	}
 	if(currCock == 3) {
 		//For samecocks
 		if(same) {
-			descript += randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
+			descript += Utils.randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[currCock-1].cockType);
 			if(normalCocks == 3) descript += eCockNoun(CockTypesEnum.HUMAN) + "s";
 			if(horseCocks == 3) descript += eCockNoun(CockTypesEnum.HORSE) + "s";
@@ -252,15 +252,15 @@ public function eMultiCockDescriptLight():String {
 			if(monster.cocks[0].cockType.Index > 2) descript += eCockNoun(monster.cocks[0].cockType) + "s";
 		}
 		else {
-			descript += randomChoice("three ", "group of ");
+			descript += Utils.randomChoice("three ", "group of ");
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[0].cockType);
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+			descript += Utils.randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
 		}
 	}
 	//Large numbers of cocks!
 	if(currCock > 3)
 	{
-		descript += randomChoice("bundle of ", "obscene group of ", "cluster of ", "wriggling bunch of ");
+		descript += Utils.randomChoice("bundle of ", "obscene group of ", "cluster of ", "wriggling bunch of ");
 		//Cock adjectives and nouns
 		descripted = false;
 		//Same
@@ -289,7 +289,7 @@ public function eMultiCockDescriptLight():String {
 		//If mixed
 		if(!descripted) {
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[0].cockType);
-			descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
+			descript += Utils.randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
 		}
 	}	
 	return descript;
@@ -979,13 +979,13 @@ public function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, 
 	//Length 1/3 chance
 	if(rand(2) == 0) {
 		if(cockLength < 3) {
-			descript += randomChoice("little", "toy-sized", "mini", "budding", "tiny");
+			descript += Utils.randomChoice("little", "toy-sized", "mini", "budding", "tiny");
 		}
 		else if(cockLength < 5) {
-			descript += randomChoice("short", "small");
+			descript += Utils.randomChoice("short", "small");
 		}
 		else if(cockLength < 7) {
-			descript += randomChoice("fair-sized", "nice");
+			descript += Utils.randomChoice("fair-sized", "nice");
 		}
 		else if(cockLength < 9) {
 			rando = rand(3);
@@ -1010,10 +1010,10 @@ public function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, 
 			else descript = "foot-long";
 		}
 		else if(cockLength < 18) {
-			descript += randomChoice("massive", "knee-length", "forearm-length");
+			descript += Utils.randomChoice("massive", "knee-length", "forearm-length");
 		}
 		else if(cockLength < 30) {
-			descript += randomChoice("enormous", "giant", "arm-like");
+			descript += Utils.randomChoice("enormous", "giant", "arm-like");
 		}
 		else {
 			rando = rand(4);
@@ -1036,28 +1036,28 @@ public function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, 
 		}
 		//A little less lusty, but still lusty.
 		else if(lust > 75) {
-			descript += randomChoice("turgid", "blood-engorged", "rock-hard", "stiff", "eager");
+			descript += Utils.randomChoice("turgid", "blood-engorged", "rock-hard", "stiff", "eager");
 		}
 	}
 	//Girth - fallback
 	else {
 		if(cockLength/6 <= .75) {
-			descript += randomChoice("thin", "slender", "narrow");
+			descript += Utils.randomChoice("thin", "slender", "narrow");
 		}
 		else if(cockLength/6 <= 1.2) {
 			descript += "ample";
 		}
 		else if(cockLength/6 <= 1.4) {
-			descript += randomChoice("ample", "big");
+			descript += Utils.randomChoice("ample", "big");
 		}
 		else if(cockLength/6 <= 2) {
-			descript += randomChoice("broad", "girthy", "meaty");
+			descript += Utils.randomChoice("broad", "girthy", "meaty");
 		}
 		else if(cockLength/6 <= 3.5) {
-			descript += randomChoice("fat", "wide", "distended");
+			descript += Utils.randomChoice("fat", "wide", "distended");
 		}
 		else if(cockLength/6 > 3.5) {
-			descript += randomChoice("inhumanly distended", "bloated", "monstrously thick");
+			descript += Utils.randomChoice("inhumanly distended", "bloated", "monstrously thick");
 		}
 	}
 	return descript;

@@ -20,9 +20,9 @@ package classes.internals
 			sum += weight;
 			return this;
 		}
-		public function addMany(weight:Number,...items):WeightedDrop
+		public function addMany(weight:Number,..._items):WeightedDrop
 		{
-			for each (var item:* in items){
+			for each (var item:* in _items){
 				items.push([item,weight]);
 				sum += weight;
 			}
@@ -36,7 +36,7 @@ package classes.internals
 			while (random > 0 && items.length > 0) {
 				var pair:Array = items.shift();
 				item = pair[0];
-				sum -= pair[1];
+				random -= pair[1];
 			}
 			return item;
 		}

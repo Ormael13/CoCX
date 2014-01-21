@@ -18,11 +18,11 @@ package classes.Items
 			if (output) clearOutput();
 			if (canConsume(player,output)){
 				var oldWeapon:Weapon = player.weapon;
-				player.setWeaponHiddenField(this);
 				if (output) {
 					outputText("You equip your " + longName + ".  ");
 				}
 				oldWeapon.unequip(player,output);
+				player.setWeaponHiddenField(this);
 				equipped(player,output);
 			}
 		}

@@ -16,10 +16,8 @@
 	 * Also this means we might start being able to get IDE autocomplete shit working again! Huzzah!
 	 * @author Gedan
 	 */
-	public class BaseContent 
+	public class BaseContent extends Utils
 	{
-		// TODO remove when we have proper enums for this
-		include "../../includes/appearanceDefs.as";
 
 		public function BaseContent()
 		{
@@ -100,7 +98,10 @@
 		{
 			return kGAMECLASS.itemSubMenu;
 		}
-
+		protected function set itemSubMenu(value:Boolean):void
+		{
+			kGAMECLASS.itemSubMenu = value;
+		}
 		protected function showStats():void
 		{
 			kGAMECLASS.showStats();
@@ -131,6 +132,10 @@
 			kGAMECLASS.spriteSelect(choice);
 		}
 
+		protected function hideStats():void
+		{
+			kGAMECLASS.hideStats();
+		}
 		protected function hideUpDown():void
 		{
 			kGAMECLASS.hideUpDown();
@@ -140,13 +145,17 @@
 		{
 			return Utils.curry.apply(null,[func].concat(args));
 		}
-		protected function lazy(obj:*,...args):Function
+		protected function lazyIndex(obj:*,...args):Function
 		{
-			return Utils.lazy.apply(null,[obj].concat(args));
+			return Utils.lazyIndex.apply(null,[obj].concat(args));
 		}
-		protected function lazy2(func:Function,...args):Function
+		protected function lazyCallIndex(func:Function,...args):Function
 		{
-			return Utils.lazy2.apply(null,[func].concat(args));
+			return Utils.lazyCallIndex.apply(null,[func].concat(args));
+		}
+		protected function lazyCallIndexCall(func:Function,...args):Function
+		{
+			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
 		}
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
@@ -245,11 +254,6 @@
 		protected function hasButton(arg:*):Boolean
 		{
 			return kGAMECLASS.hasButton(arg);
-		}
-		
-		protected function rand(maxVal:Number):Number
-		{
-			return kGAMECLASS.rand(maxVal);
 		}
 
 		protected function clearList():void{
@@ -660,7 +664,7 @@
 		{
 			return kGAMECLASS.itemStorage;
 		}
-		
+
 		protected function set itemStorage(val:Array):void
 		{
 			kGAMECLASS.itemStorage = val;

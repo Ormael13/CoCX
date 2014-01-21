@@ -1009,8 +1009,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//trace("Type of saveFile.data = ", getClass(saveFile.data));
 		
-		game.clearStorage();
-		game.clearGearStorage();
+		inventory.clearStorage();
+		inventory.clearGearStorage();
 		player.short = saveFile.data.short;
 		player.a = saveFile.data.a;
 		//player.long = saveFile.data.long;
@@ -1470,7 +1470,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for (i = 0; i < saveFile.data.itemStorage.length; i++)
 			{
 				//trace("Populating a storage slot save with data");
-				game.createStorage();
+				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorage[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
 				if (savedIS.shortName && savedIS.shortName.indexOf("Gro+") != -1)
@@ -1483,7 +1483,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.gearStorage == undefined || saveFile.data.gearStorage.length < 18)
 		{
 			//trace("OLD SAVES DO NOT CONTAIN ITEM STORAGE ARRAY - Creating new!");
-			game.initializeGearStorage();
+			inventory.initializeGearStorage();
 		}
 		else
 		{

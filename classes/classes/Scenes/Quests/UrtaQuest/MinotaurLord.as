@@ -141,7 +141,7 @@ package classes.Scenes.Quests.UrtaQuest
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,50);
 			init05Body(rand(37) + 84,HIP_RATING_AVERAGE, BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 			init06Skin("red",SKIN_TYPE_FUR,"shaggy fur");
-			init07Hair(Appearance.randomChoice("black","brown"),3);
+			init07Hair(randomChoice("black","brown"),3);
 			init08Face(FACE_COW_MINOTAUR);
 			init09PrimaryStats(125,90,30,30,70,25,85);
 			init10Weapon("chain","chain-whip",50);

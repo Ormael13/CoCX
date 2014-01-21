@@ -87,7 +87,6 @@
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
-		include "../../includes/charCreation.as";
 		include "../../includes/customCharCreation.as";
 		
 		include "../../includes/descriptors.as";
@@ -116,6 +115,7 @@
 		include "../../includes/appearanceDefs.as";
 
 		// /
+		public var charCreation:CharCreation = new CharCreation();
 		public var saves:Saves = new Saves();
 		// Items/
 		public var mutations:Mutations = new Mutations();
@@ -274,6 +274,11 @@
 
 		public var kFLAGS_REF:*;
 
+		public function rand(max:int):int
+		{
+			return Utils.rand(max);
+		}
+
 		// holidayz
 		public function isEaster():Boolean
 		{
@@ -306,7 +311,7 @@
 
 
 			// Hooking things to MainView.
-			this.mainView.onNewGameClick = newGameGo;
+			this.mainView.onNewGameClick = charCreation.newGameGo;
 			this.mainView.onAppearanceClick = appearance;
 			this.mainView.onDataClick = saves.saveLoad;
 			this.mainView.onLevelClick = levelUpGo;

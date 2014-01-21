@@ -152,7 +152,7 @@
 
 		override protected function performCombatAction():void
 		{
-			Appearance.randomChoice(special1, special2)();
+			randomChoice(special1, special2)();
 		}
 
 		public function FetishCultist()
