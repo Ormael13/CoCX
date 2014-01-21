@@ -1606,7 +1606,7 @@ public function doEvent(eventNo:Number):void
 		if (player.hasItem(consumables.OVIELIX, 1))
 			ttemp3 = marbleScene.marbleOvulatesLikeMadDawg;
 		outputText("What item do you want to give Marble?", true);
-		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "ProBova", ttemp7, "", 0, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
+		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "Pro Bova", ttemp7, "", 0, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
 	}
 	else if (eventNo == 2134)
 	{

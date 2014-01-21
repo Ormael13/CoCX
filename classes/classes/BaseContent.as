@@ -18,6 +18,8 @@
 	 */
 	public class BaseContent extends Utils
 	{
+		// TODO remove when we have proper enums for this
+		include "../../includes/appearanceDefs.as";
 
 		public function BaseContent()
 		{

@@ -2,8 +2,9 @@
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.ItemType;
 
-	public class Kelly extends AbstractFarmContent{
+public class Kelly extends AbstractFarmContent{
 
 	public function Kelly()
 	{
@@ -1688,18 +1689,18 @@ private function rewardKelly():void {
 	//Hair Dye/Apple Sauce
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
 	if(player.cockThatFits(300) >= 0 && player.hasCock()) addButton(0,"Applesauce",giveKellyAppleSauce);
-	if(player.hasItem(consumables.BLACK_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"BlackDye",dyeKellysBitchAssHair,"Black D");
-	if(player.hasItem(consumables.BLOND_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"BlondDye",dyeKellysBitchAssHair,"Blond D");
-	if(player.hasItem(consumables.PURPDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"PurpleDye",dyeKellysBitchAssHair,"PurpDye");
-	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"PinkDye",dyeKellysBitchAssHair,"PinkDye");
-	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"BrownDye",dyeKellysBitchAssHair,"Brown D");
+	if(player.hasItem(consumables.BLACK_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"Black Dye",dyeKellysBitchAssHair,consumables.BLACK_D);
+	if(player.hasItem(consumables.BLOND_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"Blond Dye",dyeKellysBitchAssHair,consumables.BLOND_D);
+	if(player.hasItem(consumables.PURPDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"Purple Dye",dyeKellysBitchAssHair,consumables.PURPDYE);
+	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"Pink Dye",dyeKellysBitchAssHair,consumables.PINKDYE);
+	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"Brown Dye",dyeKellysBitchAssHair,consumables.BROWN_D);
 	
 	addButton(9,"Back",approachKelly);
 }
 
 //Hair Dye
 //Requires: Black dye, purple dye, blonde dye, pink dye, brown dye in inventory.  Dye can't be given if her hair is that colour already, e.g. brown can't be given straight away
-private function dyeKellysBitchAssHair(color:String = ""):void {
+private function dyeKellysBitchAssHair(color:ItemType):void {
 	clearOutput();
 	outputText("You tell her you've brought her a gift as you rummage around in your pockets.  Kelly looks apprehensive but pleasant surprise forms on her face when she catches the small vial of dye you throw at her.");
 	outputText("\n\n\"<i>Oh wow, thanks [Master]! It's been ages since I did my hair.");
@@ -1709,13 +1710,13 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 	outputText("This'll be so much fun!</i>\"  You walk over to the barn with her and pour some water into a wide bucket.  She lets down her braid and you spend a pleasant quarter of an hour or so helping her work the sharp-smelling substance into her long, luscious hair.  When you're done, you step back to admire the effect.  Amazingly the colour is not only sinking into her hair but also into her tail, her demon spade slowly bleaching with the hue you chose.");
 	flags[kFLAGS.KELLY_TIMES_DIED_HAIR]++;
 	//Black dye:
-	if(color == "Black D") {
+	if(color == consumables.BLACK_D) {
 		outputText("\n\nKelly whips her jet black hair to look at it, trotting back and forth and considering, swishing her equally black tail.\n\n\"<i>Mmm.  Not sure how much I like this, [Master],</i>\" she says eventually.  \"<i>It's very... severe, isn't it?</i>\"  You say you picked it because you think it will contrast well with the substance she's most often covered in.  Kelly laughs fondly as she begins the long process of retying her braid.\n\n\"<i>Oh, [Master].  Always thinking two moves ahead.  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "sable black";
 		player.consumeItem(consumables.BLACK_D);
 	}
 	//Blonde dye: 
-	else if(color == "Blond D") {
+	else if(color == consumables.BLOND_D) {
 		outputText("\n\nKelly whips her bonny, flaxen hair to look at it, and then bounces it happily with her hands.  Her blonde tail whips back and forth briskly.");
 		outputText("\n\n\"<i>This feels... right, [Master].  Very right.</i>\"  She looks at you lustfully.  \"<i>Wanna see if we have more fun?</i>\"  You say you'll definitely be back later to test that theory out.");
 		
@@ -1724,7 +1725,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "slutty blonde";
 	}
 	//Purple dye: 
-	else if(color == "PurpDye") {
+	else if(color == consumables.PURPDYE) {
 		outputText("\n\nKelly whips her virulently purple hair to look at it, trotting back and forth and considering, wagging her equally purple tail.");
 		outputText("\n\n\"<i>Like the goblins, I guess?  I don't know how much I like this colour, [Master].</i>\"  You say it'll serve as a constant reminder to her that she's a cock hungry breeding machine.  Kelly nods thoughtfully as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>You're right [Master], I would hate to ever forget that.  Thank you for your reward!</i>\"");
@@ -1732,7 +1733,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		player.consumeItem(consumables.PURPDYE);
 	}
 	//Pink dye:
-	else if(color == "PinkDye") {
+	else if(color == consumables.PINKDYE) {
 		outputText("\n\nKelly smiles with delight as she whips her bubblegum pink hair around to look at it, even prancing a bit so that her equally pink tail bounces.");
 		outputText("\n\n\"<i>Ooh I like this, it makes me feel so... girly.  I feel pink inside!</i>\"  You certainly do, you say.  Kelly giggles as she begins the long process of retying her braid.  She even sounds bubblier.");
 		outputText("\n\n\"<i>Thank you for your reward, [Master]!</i>\"");
@@ -1740,7 +1741,7 @@ private function dyeKellysBitchAssHair(color:String = ""):void {
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "bright pink";
 	}
 	//Brown dye: Kelly smiles as she examines the regained chestnut brown colour of her hair and tail.
-	else if(color == "Brown D") {
+	else if(color == consumables.BROWN_D) {
 		outputText("\n\n\"<i>I'd almost forgotten what it looked like.</i>\"  She sighs, twisting a lock of it in a finger.  She looks quite different with her hair down - it reaches almost to her flanks.  \"<i>You'll bring more dye, right?  I'd love to do more colours.</i>\"  That depends, you say, on her being good.  Kelly sets her jaw determinedly as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>Of course, [Master].  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";

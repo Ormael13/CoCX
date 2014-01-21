@@ -1105,6 +1105,8 @@ public function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "The Nymphomania perk allows your corruption to have it's way with your lust, keeping you constantly aroused.  Your lust will never drop below 30 with this perk.";
 	}
 	//Items
+    var itype:ItemType = ItemType.lookupItem(buttonText);
+    if (itype != null) toolTipText = itype.description;
 	if(buttonText.indexOf("Demon Whip") != -1) {
 		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
 	}
@@ -1170,10 +1172,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText == "Kiss") {                        
 		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
-	if(buttonText.indexOf("LustStk") != -1) {                        
-		toolTipText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
-	}
-	if(buttonText == "Tease") {                        
+	if(buttonText == "Tease") {
 		if (gameState != 1) toolTipText = "";
 		else toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}

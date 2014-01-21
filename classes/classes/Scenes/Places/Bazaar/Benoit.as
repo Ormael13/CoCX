@@ -214,54 +214,54 @@ private function benoitSellTransact(slot:int = 1):void {
 public function updateBenoitInventory():void {
 	temp = rand(8);
 	//Slot 1 Any one of the following: Incubus Draft, Minotaur Blood, Minotaur Cum, Equinuum, Black Pepper, Vitalitea, Scholar's Tea, Double Pepper
-	if(temp == 0) flags[kFLAGS.BENOIT_1] = "IncubiD";
-	else if(temp == 1) flags[kFLAGS.BENOIT_1] = "MinoBlo";
-	else if(temp == 2) flags[kFLAGS.BENOIT_1] = "MinoCum";
-	else if(temp == 3) flags[kFLAGS.BENOIT_1] = "Equinum";
-	else if(temp == 4) flags[kFLAGS.BENOIT_1] = "BlackPp";
-	else if(temp == 5) flags[kFLAGS.BENOIT_1] = "Smart T";
-	else if(temp == 6) flags[kFLAGS.BENOIT_1] = "Vital T";
-	else flags[kFLAGS.BENOIT_1] = "DblPepp";
+	if(temp == 0) flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
+	else if(temp == 1) flags[kFLAGS.BENOIT_1] = consumables.MINOBLO.id;
+	else if(temp == 2) flags[kFLAGS.BENOIT_1] = consumables.MINOCUM.id;
+	else if(temp == 3) flags[kFLAGS.BENOIT_1] = consumables.EQUINUM.id;
+	else if(temp == 4) flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
+	else if(temp == 5) flags[kFLAGS.BENOIT_1] = consumables.SMART_T.id;
+	else if(temp == 6) flags[kFLAGS.BENOIT_1] = consumables.VITAL_T.id;
+	else flags[kFLAGS.BENOIT_1] = consumables.DBLPEPP.id;
 	
 	//If the player discarded a unique item, the first time they arrive at the Salvage Shop after a week has passed it will appear in Slot 1.
 	if(rand(10) == 0) {
-		flags[kFLAGS.BENOIT_1] = "GodMead";
+		flags[kFLAGS.BENOIT_1] = consumables.GODMEAD.id;
 	}
 	
 	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
 	temp = rand(7);
-	if(temp == 0) flags[kFLAGS.BENOIT_2] = "SucMilk";
-	else if(temp == 1) flags[kFLAGS.BENOIT_2] = "W.Fruit";
-	else if(temp == 2) flags[kFLAGS.BENOIT_2] = "WetClth";
-	else if(temp == 3) flags[kFLAGS.BENOIT_2] = "GldSeed";
-	else if(temp == 4) flags[kFLAGS.BENOIT_2] = "LaBova ";
-	else if(temp == 5) flags[kFLAGS.BENOIT_2] = "SnakOil";
-	else if(temp == 6) flags[kFLAGS.BENOIT_2] = "S.Gossr";
-	else flags[kFLAGS.BENOIT_2] = "B.Gossr";
+	if(temp == 0) flags[kFLAGS.BENOIT_2] = consumables.SUCMILK.id;
+	else if(temp == 1) flags[kFLAGS.BENOIT_2] = consumables.W_FRUIT.id;
+	else if(temp == 2) flags[kFLAGS.BENOIT_2] = consumables.WETCLTH.id;
+	else if(temp == 3) flags[kFLAGS.BENOIT_2] = consumables.GLDSEED.id;
+	else if(temp == 4) flags[kFLAGS.BENOIT_2] = consumables.LABOVA_.id;
+	else if(temp == 5) flags[kFLAGS.BENOIT_2] = consumables.SNAKOIL.id;
+	else if(temp == 6) flags[kFLAGS.BENOIT_2] = consumables.S_GOSSR.id;
+	else flags[kFLAGS.BENOIT_2] = consumables.B_GOSSR.id;
 	
 	//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
 	if(rand(100) < 4) {
 		temp = rand(5);
-		if(temp == 0) flags[kFLAGS.BENOIT_2] = "BimboLq";
-		else if(temp == 1) flags[kFLAGS.BENOIT_2] = "L.PnkEg";
-		else if(temp == 2) flags[kFLAGS.BENOIT_2] = "L.BluEg";
-		else if(temp == 3) flags[kFLAGS.BENOIT_2] = "BroBrew";
-		else flags[kFLAGS.BENOIT_2] = "TSTooth";
+		if(temp == 0) flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
+		else if(temp == 1) flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
+		else if(temp == 2) flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
+		else if(temp == 3) flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
+		else flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
 	}
 	
 	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
 	temp = rand(5);
-	if(temp == 0) flags[kFLAGS.BENOIT_3] = "W.Robes";
-	else if(temp == 1) flags[kFLAGS.BENOIT_3] = "T.SSilk";
-	else if(temp == 2) flags[kFLAGS.BENOIT_3] = "S.Swmwr";
-	else if(temp == 3) flags[kFLAGS.BENOIT_3] = "GreenGl";
-	else flags[kFLAGS.BENOIT_3] = "B.Chitn";
+	if(temp == 0) flags[kFLAGS.BENOIT_3] = armors.W_ROBES.id;
+	else if(temp == 1) flags[kFLAGS.BENOIT_3] = useables.T_SSILK.id;
+	else if(temp == 2) flags[kFLAGS.BENOIT_3] = armors.S_SWMWR.id;
+	else if(temp == 3) flags[kFLAGS.BENOIT_3] = useables.GREENGL.id;
+	else flags[kFLAGS.BENOIT_3] = useables.B_CHITN.id;
 	
 	if(rand(10) == 0) {
 		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
 		temp = rand(2);
-		if(temp == 0) flags[kFLAGS.BENOIT_3] = "BonStrp";
-		else flags[kFLAGS.BENOIT_3] = "NurseCl";
+		if(temp == 0) flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+		else flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
 	}
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }

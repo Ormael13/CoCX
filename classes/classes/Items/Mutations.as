@@ -5,7 +5,7 @@
 
 	public final class Mutations extends BaseContent
 	{
-
+		include "../../../includes/appearanceDefs.as";
 
 		public function Mutations()
 		{
@@ -3192,8 +3192,8 @@
 			//ItemDesc: "A bottle containing a misty fluid with a grainy texture, it has a long neck and a ball-like base.  The label has a stylized picture of a well endowed cowgirl nursing two guys while they jerk themselves off.  "
 			//ItemUseText:
 			outputText("You drink the ", true);
-			if (enhanced) outputText("ProBova", false);
-			else outputText("LaBova", false);
+			if (enhanced) outputText("Pro Bova", false);
+			else outputText("La Bova", false);
 			outputText(".  The drink has an odd texture, but is very sweet.  It has a slight aftertaste of milk.", false);
 			//Possible Item Effects:
 			//STATS

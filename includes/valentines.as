@@ -389,9 +389,9 @@ public function goVisitPastyVDay():void {
 	//[BCBeer] [BimboCham][GoblinAle][vagina]
 	if(player.hasItem(consumables.BIMBOCH) || player.hasItem(consumables.BC_BEER) || player.hasItem(consumables.GOB_ALE) || player.hasVagina()) {
 		menu();
-		if(player.hasItem(consumables.BIMBOCH)) addButton(0,"BimboCham",pastieValentineIntro,"BimboCh");
-		if(player.hasItem(consumables.BC_BEER)) addButton(1,"B.Cat Beer ",pastieValentineIntro,"BC Beer");
-		if(player.hasItem(consumables.GOB_ALE)) addButton(2,"Gob.Ale",pastieValentineIntro,"Gob.Ale");
+		if(player.hasItem(consumables.BIMBOCH)) addButton(0,"BimboCham",pastieValentineIntro,consumables.BIMBOCH.id);
+		if(player.hasItem(consumables.BC_BEER)) addButton(1,"B.Cat Beer ",pastieValentineIntro,consumables.BC_BEER.id);
+		if(player.hasItem(consumables.GOB_ALE)) addButton(2,"Gob. Ale",pastieValentineIntro,consumables.GOB_ALE.id);
 		if(player.hasVagina()) addButton(3,"Pussy",pastieValentineIntro,"vag");
 	}
 	else {

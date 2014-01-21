@@ -3,7 +3,8 @@
  */
 package classes.Items.Consumables
 {
-	import classes.Player;
+import classes.Appearance;
+import classes.Player;
 	import classes.Utils;
 
 	public class BimboLiqueur extends SimpleConsumable
@@ -78,21 +79,21 @@ package classes.Items.Consumables
 				outputText("Moaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  ");
 				if (!player.hasVagina()) {
 					player.createVagina();
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+					player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
 					if (player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");
 				}
 				else {
 					if (player.isTaur()) {
 						outputText("You wish you could sink your fingers into your sloppy, wet cunt, but as a centaur, you can't quite reach.");
-						if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK)
-							player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+						if (player.vaginas[0].vaginalWetness < Appearance.VAGINA_WETNESS_SLICK)
+							player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
 					}
 					else {
 						outputText("You sink your fingers into your ");
-						if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) {
+						if (player.vaginas[0].vaginalWetness < Appearance.VAGINA_WETNESS_SLICK) {
 							outputText("now ");
-							player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+							player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
 						}
 						outputText("sloppy, wet cunt with a groan of satisfaction.");
 					}

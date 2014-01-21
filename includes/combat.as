@@ -1828,7 +1828,6 @@ public function dropItem(monster:Monster):void {
 	if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 		itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
 	}
-	//if(debug) shortName = "OviElix";
 	if(itype != null) {
 		outputText("\nThere is " + itype.longName + " on your defeated opponent.  ", false);
 		if(!inDungeon) menuLoc = 2;

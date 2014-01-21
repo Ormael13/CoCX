@@ -1387,12 +1387,12 @@ public function armorShop():void {
 		}
 		else egg = kGAMECLASS.emberScene.getSomeStuff;
 	}
-	choices("ChBikni",createCallBackFunction(armorBuy, "ChBikni"),
-			"FullChn",createCallBackFunction(armorBuy, "FullChn"),
-			"FullPlt",createCallBackFunction(armorBuy, "FullPlt"),
-			"IndecSt",createCallBackFunction(armorBuy, "IndecSt"),
-			"LthrRob",createCallBackFunction(armorBuy, "LthrRob"),
-			"ScaleMl",createCallBackFunction(armorBuy, "ScaleMl"),
+	choices("Chn Bikini",createCallBackFunction(armorBuy, armors.CHBIKNI),
+			"Full Chain",createCallBackFunction(armorBuy, armors.FULLCHN),
+			"Full Plate",createCallBackFunction(armorBuy, armors.FULLPLT),
+			"Indec StAr",createCallBackFunction(armorBuy, armors.INDECST),
+			"Lthr Robes",createCallBackFunction(armorBuy, armors.LTHRROB),
+			"Scale Mail",createCallBackFunction(armorBuy, armors.SCALEML),
 			"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
 

@@ -3355,15 +3355,15 @@ private function pickAnItemToFeedRubi():void {
 		else if(events[temp] == consumables.INCUBID) eventNames[eventNames.length] = "Incubi Draft";
 		else if(events[temp] == armors.BONSTRP) eventNames[eventNames.length] = "Bondage S.";
 		else if(events[temp] == armors.I_CORST) eventNames[eventNames.length] = "I. Corset";
-		else if(events[temp] == consumables.P_DRAFT) eventNames[eventNames.length] = "P.Draft";
-		else if(events[temp] == consumables.SUCMILK) eventNames[eventNames.length] = "SucMilk";
-		else if(events[temp] == consumables.P_S_MLK) eventNames[eventNames.length] = "P.S.Mlk";
-		else if(events[temp] == consumables.PURPEAC) eventNames[eventNames.length] = "PurPeac";
+		else if(events[temp] == consumables.P_DRAFT) eventNames[eventNames.length] = "Pure Draft";
+		else if(events[temp] == consumables.SUCMILK) eventNames[eventNames.length] = "Sucb Milk";
+		else if(events[temp] == consumables.P_S_MLK) eventNames[eventNames.length] = "PureScbMlk";
+		else if(events[temp] == consumables.PURPEAC) eventNames[eventNames.length] = "Pure Peach";
 		else if(events[temp] == consumables.EQUINUM) eventNames[eventNames.length] = "Equinum";
-		else if(events[temp] == consumables.W_FRUIT) eventNames[eventNames.length] = "W.Fruit";
+		else if(events[temp] == consumables.W_FRUIT) eventNames[eventNames.length] = "Whsk.Fruit";
 		else if(events[temp] == consumables.REDUCTO) eventNames[eventNames.length] = "Reducto";
-		else if(events[temp] == consumables.GROPLUS) eventNames[eventNames.length] = "GroPlus";
-		else if(events[temp] == consumables.TRAPOIL) eventNames[eventNames.length] = "TrapOil";
+		else if(events[temp] == consumables.GROPLUS) eventNames[eventNames.length] = "Gro Plus";
+		else if(events[temp] == consumables.TRAPOIL) eventNames[eventNames.length] = "Trap Oil";
 		else {
 			eventNames[eventNames.length] = "FUCKIN TRAP: " + events[temp];
 			trace("FUCKIN TRAP: " + events[temp]);

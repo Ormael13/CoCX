@@ -227,10 +227,8 @@ private function rathazulWorkOffer():Boolean {
 		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
 		if(player.hasStatusAffect("Camp Rathazul") >= 0) 
 			addButton(9,"Leave",eventParser,74);
-		//choices("Armor",armor,"Debimbo", debimbo, "Buy Dye",dyes, "Lethicite", lethiciteDefense, "Purify", purify, "", 0, "", 0, "", 0, "Reducto",reductos,"Leave",74);
-		else 
+		else
 			addButton(9,"Leave",eventParser,13);
-		//choices("Armor",armor,"Debimbo", debimbo, "Buy Dye",dyes, "Lethicite", lethiciteDefense, "Purify", purify, "", 0, "", 0, "", 0, "Reducto",reductos,"Leave",13);
 		gameState = 6;
 		return true;
 	}

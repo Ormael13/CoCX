@@ -29,7 +29,7 @@ package classes.Items
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
-		public const INDEC_ST:ArmorWithPerk = mk2("IndecSt","practically indecent steel armor","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
+		public const INDECST:ArmorWithPerk = mk2("IndecSt","practically indecent steel armor","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
 				"Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const LEATHRA:Armor = mk("LeathrA","leather armor segments","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();

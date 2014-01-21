@@ -106,12 +106,6 @@ public function doItems(eventNo:Number):void {
 		menuLoc = 1;
 	}
 	//Auburn Dyes
-	/*	if(shortName1 == "Red Dye") return "a vial of red hair dye";
-	if(shortName1 == "Blond D") return "a vial of blond hair dye";
-	if(shortName1 == "Black D") return "a vial of black hair dye";
-	if(shortName1 == "Brown D") return "a vial of brown hair dye";
-	if(shortName1 == "AuburnD") return "a vial of auburn hair dye";
-	if(shortName1 == "GrayDye") return "a vial of gray hair dye";*/
 	else if(eventNo == 1017) {
 		spriteSelect(49);
 		outputText("", true);

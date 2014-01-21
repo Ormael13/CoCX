@@ -530,7 +530,7 @@ public function exgartuanArmorShift():void {
 		player.modArmorName = "crotch-hugging leather armor segments";
 		changed = true;
 	}
-	else if(player.armor == armors.INDEC_ST){
+	else if(player.armor == armors.INDECST){
 		outputText("The chainmail bikini of your indecent steel armor rearranges and bends its interlocking rings to best shape itself around your  " + cockDescript(0) + ", leaving very little else to the imagination.", false);
 		player.modArmorName = "crotch-hugging practically indecent steel armor";
 		changed = true;

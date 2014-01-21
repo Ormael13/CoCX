@@ -155,7 +155,7 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	else {
 		outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n", false);
 		//The player chooses an item that can be enhanced from a list, regardless of which is chosen, the text for the next part is the same.
-		choices("FoxBery",fox,"Fox Jewel",kitsune,"GoldenSeed",seed,"KangaFruit",kanga,"L.Draft",lustDraft,"LaBova",laBova,"OviElix",oviElix,"SDelite",succuDelight,"",0,"Back",lumiLabChoices);
+		choices("Fox Berry",fox,"Fox Jewel",kitsune,"GoldenSeed",seed,"KangaFruit",kanga,"LustDraft",lustDraft,"La Bova",laBova,"Ovi Elix",oviElix,"Sucb.Delite",succuDelight,"",0,"Back",lumiLabChoices);
 		return true;
 	}
 }

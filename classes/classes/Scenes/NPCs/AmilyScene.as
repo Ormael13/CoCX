@@ -1465,59 +1465,59 @@ package classes.Scenes.NPCs
 				else {
 					outputText("You remember that you have something in your pockets that might be of interest, and show it to Amily.\n\n", false);
 				}
-				if(player.itemSlot1.itype.shortName == "Equinum") {
+				if(player.itemSlot1.itype == consumables.EQUINUM) {
 					outputText("\"<i>That's a distillation of horse essence, I think.</i>\" Amily says.  \"<i>I guess it would probably make you stronger and tougher... but horses aren't smart, and it might be too strong for a human to handle without changing them,</i>\" she warns you.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "CanineP") {
+				else if(player.itemSlot1.itype == consumables.CANINEP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "LargePp") {
+				else if(player.itemSlot1.itype == consumables.LARGEPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "DblPepp") {
+				else if(player.itemSlot1.itype == consumables.DBLPEPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "BlackPp") {
+				else if(player.itemSlot1.itype == consumables.BLACKPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "KnottyP") {
+				else if(player.itemSlot1.itype == consumables.KNOTTYP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "BulbyPp") {
+				else if(player.itemSlot1.itype == consumables.BULBYPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it?  Especially this one with the big knot-like bulge or this one with the ball-like bulbs.  I suppose it would make you more dog-like... but I'm pretty sure you should avoid these jet-black ones.  I can't remember why...</i>\" she trails off, wracking her brain.\n\n", false);
 				}
 				//Succubus Milk/Incubus Draft:
-				else if(player.itemSlot1.itype.shortName == "IncubiD" || player.itemSlot1.itype.shortName == "SucMilk") {
+				else if(player.itemSlot1.itype == consumables.INCUBID || player.itemSlot1.itype == consumables.SUCMILK) {
 					outputText("She recoils with a hiss.  \"<i>That's demon fluid, it is - like drinking liquid corruption! Avoid that stuff if you can; it'll turn you into a demon, and supercharge your sex-drive.  I've heard it can even mess with your gender if you drink too much of the opposite stuff.</i>\"\n\n", false);
 				}
 				//Succubi's Delight:
-				else if(player.itemSlot1.itype.shortName == "SDelite") {
+				else if(player.itemSlot1.itype == consumables.SDELITE) {
 					outputText("\"<i>Full of taint, no question of that.  Succubi give it to males who haven't become demons yet; makes them better able to produce cum, and pushes them towards demonhood.</i>\"\n\n", false);
 				}
 				//Wet Cloth:
-				else if(player.itemSlot1.itype.shortName == "WetClth") {
+				else if(player.itemSlot1.itype == consumables.WETCLTH) {
 					outputText("\"<i>I... have no idea what that is.</i>\" she says, looking confused.  \"<i>I guess it's... slimey?  Concentrate of goo?  I think it's got something to do with whatever's been polluting the lake, so I wouldn't rub it into your skin.</i>\"\n\n", false);
 				}
 				//Bee Honey:
-				else if(player.itemSlot1.itype.shortName == "BeeHony") {
+				else if(player.itemSlot1.itype == consumables.BEEHONY) {
 					outputText("\"<i>Honey from a giant bee?</i>\" she asks eagerly, perking up.  \"<i>Oh, that stuff's delicious! I hear it's full of special essences secreted by the giant bees, though, so it could have transformative effects.</i>\"\n\n", false);
 				}
 				//Pure Honey:
-				else if(player.itemSlot1.itype.shortName == "PurHony") {
+				else if(player.itemSlot1.itype == consumables.PURHONY) {
 					outputText("\"<i>You managed to get your hands on ultra-pure giant bee honey?</i>\" she asks, sounding impressed.  \"<i>I hear that stuff's so pure it can actually help purge the eater of demonic taint - but it's probably otherwise the same as regular bee honey.</i>\"\n\n", false);
 				}
 				//Green Glob:
-				else if(player.itemSlot1.itype.shortName == "GreenGl") {
+				else if(player.itemSlot1.itype == useables.GREENGL) {
 					outputText("\"<i>A blob of slime from a green gel?  Hmm...</i>\" she looks thoughtful.  \"<i>I think I remember my dad once telling me you could make a really strong armor out of a special distillation of green oozes.  I can't say for sure, and I wouldn't have the equipment even if I did remember.</i>\"\n\n", false);
 				}
 				//Bee Chitin:
-				else if(player.itemSlot1.itype.shortName == "B.Chitn") {
+				else if(player.itemSlot1.itype == useables.B_CHITN) {
 					outputText("\"<i>If you had a sufficient mass of this stuff, you could make a suit of armor out of it.  It needs special alchemical reagents, though, otherwise it'll just get all brittle and smashed up.</i>\"\n\n", false);
 				}
 				else {
@@ -3130,7 +3130,7 @@ package classes.Scenes.NPCs
 				else outputText("You realize you don't have any items worth using on her.", false);
 				doNext(amilyFollowerEncounter);
 			}
-			choices(incuText,incubusDraft,"Succ Milk",succubusMilk,"Pnk Egg",pinkEgg,"White Egg",whiteEgg,"Brown Egg",brownEgg,"PurpleEgg",purpleEgg,"Reducto",reducto,"SDelite",sDelight,clothesT,clothes,"Back",amilyFollowerEncounter);
+			choices(incuText,incubusDraft,"Succ Milk",succubusMilk,"Pnk Egg",pinkEgg,"White Egg",whiteEgg,"Brown Egg",brownEgg,"Purple Egg",purpleEgg,"Reducto",reducto,"Suc. Delite",sDelight,clothesT,clothes,"Back",amilyFollowerEncounter);
 		}
 
 		//[Purified Incubus Draft - If Amily is a Female]
@@ -5365,59 +5365,59 @@ package classes.Scenes.NPCs
 				else {
 					outputText("You remember that you have something in your pockets that might be of interest, and show it to Amily.\n\n", false);
 				}
-				if(player.itemSlot1.itype.shortName == "Equinum") {
+				if(player.itemSlot1.itype == consumables.EQUINUM) {
 					outputText("\"<i>That's a distillation of horse essence, I think,</i>\" Amily says. \"<i>It would probably make you stronger and tougher... Perhaps it could also give you a horse cock. Or perhaps give you a pussy as wet as mine,</i>\" she giggles. \"<i>Whatever happens, could you come test it on me?</i>\" she asks seductively.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "CanineP") {
+				else if(player.itemSlot1.itype == consumables.CANINEP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you ever tried one of the jet-black ones?  Those look yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "LargePp") {
+				else if(player.itemSlot1.itype == consumables.LARGEPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you ever tried one of the jet-black ones?  Those look yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "DblPepp") {
+				else if(player.itemSlot1.itype == consumables.DBLPEPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you ever tried one of the jet-black ones?  Those look yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "BlackPp") {
+				else if(player.itemSlot1.itype == consumables.BLACKPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you tried this black one?  It looks yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "KnottyP") {
+				else if(player.itemSlot1.itype == consumables.KNOTTYP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you ever tried one of the jet-black ones?  Those look yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Canine Pepper & Variants:
-				else if(player.itemSlot1.itype.shortName == "BulbyPp") {
+				else if(player.itemSlot1.itype == consumables.BULBYPP) {
 					outputText("\"<i>Looks kind of like a dog's dick, doesn't it? Especially this one with the big knot-like bulge or this one with the ball-like bulbs. I suppose it would make you more dog-like... Have you ever tried one of the jet-black ones?  Those look yummy...</i>\" she says, licking her lips.\n\n", false);
 				}
 				//Succubus Milk/Incubus Draft:
-				else if(player.itemSlot1.itype.shortName == "IncubiD" || player.itemSlot1.itype.shortName == "SucMilk") {
+				else if(player.itemSlot1.itype == consumables.INCUBID || player.itemSlot1.itype == consumables.SUCMILK) {
 					outputText("She hums at the scent. \"<i>That's demon fluid, " + player.mf("master","mistress") + ". It'd be like drinking liquid corruption. It could turn you into a demon, or supercharge your feminity or masculinity. I've heard it can even mess with your gender if you drink too much of the opposite stuff. But none of that is important, I'd be happy to drink from you no matter what gender you are " + player.mf("master","mistress") + ",</i>\" she says with a grin.\n\n", false);
 				}
 				//Succubi's Delight:
-				else if(player.itemSlot1.itype.shortName == "SDelite") {
+				else if(player.itemSlot1.itype == consumables.SDELITE) {
 					outputText("\"<i>Full of taint, no question of that. Succubi give it to males who haven't become demons yet; makes them better able to produce cum, and pushes them towards demonhood. Why don't you try some?</i>\" she asks with a smile.\n\n", false);
 				}
 				//Wet Cloth:
-				else if(player.itemSlot1.itype.shortName == "WetClth") {
+				else if(player.itemSlot1.itype == consumables.WETCLTH) {
 					outputText("\"<i>Forgive your useless cumslut for her ignorance, " + player.mf("master","mistress") + ",</i>\" she says, looking down. \"<i>I don't really know what this is; but it looks like some sort of... concentrate of goo?  I think it's got something to do with whatever's been polluting the lake, but it does smell great, doesn't it?</i>\" she asks, smiling at you.\n\n", false);
 				}
 				//Bee Honey:
-				else if(player.itemSlot1.itype.shortName == "BeeHony") {
+				else if(player.itemSlot1.itype == consumables.BEEHONY) {
 					outputText("\"<i>That is honey from a giant bee, " + player.mf("master","mistress") + "!</i>\" she tells you eagerly, perking up. \"<i>Oh, that stuff's delicious!</i>\" Then she diverts her stare to you, looking at you with half-lidded eyes, idly sucking on a clawed finger. \"<i>But I prefer having your honey, " + player.mf("master","mistress") + ",</i>\" she says seductively, licking at her finger, a tiny strand of saliva connecting it to her mouth.\n\n", false);
 				}
 				//Pure Honey:
-				else if(player.itemSlot1.itype.shortName == "PurHony") {
+				else if(player.itemSlot1.itype == consumables.PURHONY) {
 					outputText("\"<i>You managed to get your hands on ultra-pure giant bee honey?</i>\" she asks, sounding impressed. \"<i>I hear that stuff's so pure it can actually help purge the eater of demonic taint - but why would you want to do that?</i>\" she asks mockingly.\n\n", false);
 				}
 				//Green Glob:
-				else if(player.itemSlot1.itype.shortName == "GreenGl") {
+				else if(player.itemSlot1.itype == useables.GREENGL) {
 					outputText("\"<i>A blob of slime from a green gel? Hmm...</i>\" She looks thoughtful. \"<i>I think I remember my dad once telling  me you could make a really strong armor out of a special distillation of green oozes. Slut doesn't remember for sure, but she thinks you look better naked " + player.mf("master","mistress") + "</i>,\" she says seductively.</i>\"\n\n", false);
 				}
 				//Bee Chitin:
-				else if(player.itemSlot1.itype.shortName == "B.Chitn") {
+				else if(player.itemSlot1.itype == useables.B_CHITN) {
 					outputText("\"<i>If you had a sufficient mass of this stuff, you could make a suit of armor out of it. It needs special alchemical reagents, though, otherwise it'll just get all brittle and smashed up. But why bother? That would hide your perfect body, " + player.mf("master","mistress") + "</i>,\" she says seductively.\n\n", false);
 				}
 				else {

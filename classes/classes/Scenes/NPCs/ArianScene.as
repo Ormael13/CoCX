@@ -2566,13 +2566,13 @@ private function giveArianAnItem():void {
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
 	else {
-		if(player.hasItem(consumables.VITAL_T)) addButton(0,"Vital T",arianVitalityTincture);
+		if(player.hasItem(consumables.VITAL_T)) addButton(0,"Vital Tinct",arianVitalityTincture);
 		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
 			if(player.hasItem(consumables.P_DRAFT)) addButton(1,"P. Incubi D",giveIncubusDraftToArian);
-			if(player.hasItem(consumables.P_S_MLK)) addButton(2,"P.S.Mlk",succubiMilkForArian);
+			if(player.hasItem(consumables.P_S_MLK)) addButton(2,"P. Suc.Milk",succubiMilkForArian);
 			if(player.hasItem(consumables.LACTAID)) addButton(3,"Lactaid",giveArianLactaid);
 			if(player.hasItem(consumables.REDUCTO)) addButton(4,"Reducto",giveArianReducto);
-			if(player.hasItem(consumables.REPTLUM)) addButton(5,"Reptlum",giveArianReptilum);
+			if(player.hasItem(consumables.REPTLUM)) addButton(5,"Reptilum",giveArianReptilum);
 		}
 		addButton(9,"Back",arianHomeMenu);
 	}
