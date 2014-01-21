@@ -3,15 +3,14 @@
  */
 package classes.Items.Other
 {
-	import classes.Character;
-	import classes.Items.Useable;
-	import classes.Player;
+import classes.Items.Useable;
+import classes.Player;
 
-	public class SimpleUseable extends Useable
+public class SimpleUseable extends Useable
 	{
 		private var effect:Function;
 
-		override public function useItem(player:Player,output:Boolean):void
+		override public function useItem(player:Player, output:Boolean, external:Boolean):void
 		{
 			effect(player);
 		}

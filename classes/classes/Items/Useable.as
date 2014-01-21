@@ -13,7 +13,12 @@ package classes.Items
 	public class Useable extends CommonItem
 	{
 
-		public function useItem(player:Player,output:Boolean):void
+        /**
+         * @param player user
+         * @param output print text
+         * @param external item is external (used in consumables: do not remove from player inventory)
+         */
+		public function useItem(player:Player,output:Boolean,external:Boolean):void
 		{
 			CoC_Settings.errorAMC("Useable", "useItem", id);
 		}

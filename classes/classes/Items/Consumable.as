@@ -3,12 +3,10 @@
  */
 package classes.Items
 {
-	import classes.Character;
-	import classes.CoC_Settings;
-	import classes.Creature;
-	import classes.Player;
+import classes.CoC_Settings;
+import classes.Player;
 
-	/**
+/**
 	 * An item, that is consumed by player, and disappears after use. Direct subclasses should override "doEffect" method
 	 * and NOT "useItem" method.
 	 */
@@ -30,10 +28,10 @@ package classes.Items
 		/**
 		 * Removes item from player and does effect
 		 */
-		override public function useItem(player:Player,output:Boolean):void
+		override public function useItem(player:Player, output:Boolean, external:Boolean):void
 		{
 			if (canConsume(player,output)){
-				player.consumeItem(this,1);
+				if (!external) player.consumeItem(this,1);
 				doEffect(player);
 			}
 		}

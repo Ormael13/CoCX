@@ -695,9 +695,9 @@ public function doItems(eventNo:Number):void {
 	}
 }
 
-		private function useItem(itype:ItemType):void
+		private function useItem(itype:ItemType,external:Boolean):void
 		{
-			(itype as Useable).useItem(player,true);
+			(itype as Useable).useItem(player,true,external);
 			if (!itemSwapping && !itemSubMenu) itemGoNext();
 			itemSwapping = false;
 		}
@@ -705,7 +705,7 @@ public function doItems(eventNo:Number):void {
 		private function useItemInInventory(slotTmp:ItemSlotClass):void
 		{
 			if (slotTmp.itype is Useable) {
-				(slotTmp.itype as Useable).useItem(player,true);
+				(slotTmp.itype as Useable).useItem(player,true,false);
 			} else {
 				outputText("You cannot use " + slotTmp.itype.longName + "!\n\n", true);
 			}
@@ -983,7 +983,7 @@ public function doItems(eventNo:Number):void {
 					"", 0,
 					"", 0,
 					"", 0,
-					"Use Now", createCallBackFunction(useItem,itype),
+					"Use Now", curry(useItem,itype,true),
 					"Abandon", abandon);
 			trace("TakeItem Menuloc: " + menuLoc);
 			return false;
