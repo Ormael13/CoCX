@@ -19,7 +19,6 @@
 	import classes.VaginaClass;
 	import classes.ImageManager;
 
-	import flash.system.WorkerEvent;
 
 	// This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
@@ -145,6 +144,7 @@
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
+		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();

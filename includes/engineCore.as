@@ -2211,7 +2211,9 @@ public function dynStats(... args):void
 			
 			// Figure out which array to search
 			var argsi:String = (args[i] as String);
-			if (argsi.length <= 4 && argsi != "lust") // Short
+			if (argsi == "lust") argsi = "lus";
+			if (argsi == "sens") argsi = "sen";
+			if (argsi.length <= 4) // Short
 			{
 				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));
 				if (argsi.length == 4 && argIndex != -1) argOps[argIndex] = argsi.charAt(3);
@@ -2305,7 +2307,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
 	//If orgasm, set hours since cum to 0.
-	if(lust2 <= -100) player.hoursSinceCum = 0;
+	if(lust2 < 0) player.resetDickEjaculateTimer();
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;
 	if(libi > 0 && player.hasPerk("Purity Blessing") >= 0) libi *= 0.75;

@@ -688,7 +688,7 @@ private function victoryMinotaurGangTitFuck():void {
 		}
 	}
 	//Force cum bottle loot!
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.MINOCUM;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.MINOCUM.id;
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", .5);
 	player.slimeFeed();
 	player.minoCumAddiction(15);

@@ -369,7 +369,7 @@ public function takeItRooButtStyle():void {
 	outputText("\n\n");
 	//[If player has pussy] 
 	if(player.hasVagina()) outputText("Your cunt oozes in return, envious of the tenderized hole above it.  ");
-	outputText("You dedicate a few more minutes to soaking up every moment of her animalistic romping, savouring the feeling of a hung rod in your punished posterior.  Your climax quickly comes to loom over you, however, the potent, ");
+	outputText("You dedicate a few more minutes to soaking up every moment of her animalistic romping, savoring the feeling of a hung rod in your punished posterior.  Your climax quickly comes to loom over you, however, the potent, ");
 	if(player.hasCock()) outputText("prostate");
 	else outputText("ass");
 	outputText("-numbing sensations at your rear becoming too much to bear.  Slamming back into Kami's pole one last time, you breathe a shuddered sigh of relief as your orgasm takes over, the sensation spreading throughout your entire body like electricity.");

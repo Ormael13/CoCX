@@ -326,6 +326,8 @@
 		protected function init02Genderless(pronoun1:String="it",pronoun2:String="it",pronoun3:String="its"):void
 		{
 			this.gender = GENDER_NONE;
+            this.cocks = [];
+            this.vaginas = [];
 			if (!this.plural){
 				this.pronoun1 = pronoun1;
 				this.pronoun2 = pronoun2;
@@ -402,6 +404,7 @@
 		 * To create single row with 1 nipples per breast, you can call init3BreastRows(size)
 		 */
 		protected function init03BreastRows(... rows):void{
+            this.breastRows = [];
 			if (rows.length>0){
 				if(! (rows[0] is Array)){
 					rows = [rows];
@@ -634,13 +637,10 @@
 		 */
 		public function eOneAttack():int
 		{
-			if (attackSucceeded()){
-				//Determine damage - str modified by enemy toughness!
-				var damage:int = calcDamage();
-				if (damage > 0 && short != "anemone") damage = player.takeDamage(damage);
-				return damage;
-			}
-			return 0;
+            //Determine damage - str modified by enemy toughness!
+            var damage:int = calcDamage();
+            if (damage > 0) damage = player.takeDamage(damage);
+            return damage;
 		}
 
 		/**
@@ -661,11 +661,13 @@
 			var attacks:int = statusAffectv1("attacks");
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
-				var damage:int = eOneAttack();
-				outputAttack(damage);
-				postAttack(damage);
-				game.statScreenRefresh();
-				outputText("\n", false);
+				if (attackSucceeded()){
+				    var damage:int = eOneAttack();
+					outputAttack(damage);
+					postAttack(damage);
+					game.statScreenRefresh();
+					outputText("\n", false);
+				}
 				if (statusAffectv1("attacks") >= 0) {
 					addStatusValue("attacks", 1, -1);
 				}
@@ -885,8 +887,8 @@
 		}
 
 		/**
-		 * All branches of this method should end either with choose/doNext/menu,
-		 * or with default 'awardPlayer' or 'finishCombat'. The latter also displays
+		 * All branches of this method and all subsequent scenes should end either with
+         * 'cleanupAfterCombat', 'awardPlayer' or 'finishCombat'. The latter also displays
 		 * default message like "you defeat %s" or "%s falls and starts masturbating"
 		 */
 		public function defeated(hpVictory:Boolean):void
@@ -895,9 +897,8 @@
 		}
 
 		/**
-		 * All branches of this method should end either with choose/doNext/menu,
-		 * or with default 'cleanupAfterCombat', 'penalizePlayer' or 'finishCombat'. The latter also displays
-		 * default message like "you fall unconscious" or
+		 * All branches of this method and all subsequent scenes should end with
+         * 'cleanupAfterCombat'.
 		 */
 		public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
@@ -905,7 +906,7 @@
 				player.HP = 1;
 				outputText("Your wounds are too great to bear, and you fall unconscious.", true);
 			} else {
-				outputText("Your desire reaches uncontrollable levels, and you Numberopenly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
+				outputText("Your desire reaches uncontrollable levels, and you end up openly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
 				player.lust = 0;
 			}
 			game.gameState = 0;

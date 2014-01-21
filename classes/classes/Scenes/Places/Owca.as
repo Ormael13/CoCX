@@ -936,7 +936,7 @@ private function subdueVapula():void {
 	clearOutput();
 	outputText("And at last, the final demon falls, ");
 	if(monster.HP < 1) outputText("overwhelmed by your might");
-	else outputText("his own lust");
+	else outputText("rendered insensate by his own lust");
 	outputText(".  As usual, you walk among the forlorn bodies of your enemies.  Vapula is grovelling on the floor again, looking up to you with imploring eyes.  Even beaten and broken, the luscious succubus remains the most preeminent figure of the motley rabble.");
 	outputText("\n\nYou grip her by the shoulders and stare at her, asserting your dominance.  Your vanquished foe casts her gaze down but maintains eye contact; she looks solemn and reflective, probably knowing that her fate will depend on your next decision.");
 	outputText("\n\nBy now, you've completely broken the back of the rapacious demon horde.  Their leader is starting to get used to her repeated defeats; it's time for you to make a decision... what do you do?");

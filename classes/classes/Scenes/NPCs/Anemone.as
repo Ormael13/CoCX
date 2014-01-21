@@ -22,9 +22,7 @@ package classes.Scenes.NPCs
 
 		override public function eOneAttack():int
 		{
-			if (attackSucceeded()){
-				applyVenom(rand(4 + player.sens / 20) + 1);
-			}
+			applyVenom(rand(4 + player.sens / 20) + 1);
 			return 1;
 		}
 

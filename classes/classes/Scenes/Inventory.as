@@ -896,7 +896,7 @@ public function doItems(eventNo:Number):void {
 			//Tailor
 			else if (menuLoc == 10)
 			{
-				abandon = 1072;
+				abandon = getGame().telAdre.tailorShoppe;
 			}
 			//Armor
 			else if (menuLoc == 9)

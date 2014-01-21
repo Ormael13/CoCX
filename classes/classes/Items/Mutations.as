@@ -95,7 +95,7 @@
 					else outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.", false);
 					if (rand(4) == 0) temp = player.cocks[0].growCock(3);
 					else temp = player.cocks[0].growCock(1);
-					dynStats("int", 1, "lib", 2, "sens", 1, "lust", 5 + temp * 3, "cor", tainted ? 1 : 0);
+					dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + temp * 3, "cor", tainted ? 1 : 0);
 					if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.", false);
 					if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.", false);
 					if (temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.", false);

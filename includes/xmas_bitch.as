@@ -24,7 +24,7 @@ public function xmasBitchEncounter():void {
 		outputText("Confused by her appearance and the fact that she already knows you by name, you dumbly ask how she can possibly know who you are.\n\n", false);
 
 		outputText("She giggles, \"<i>Oh silly, don't you know what time of year it is?  We've got EVERYONE on our list, even ");
-		if(flags[kFLAGS.KELT_BREAK_LEVEL] == 4) outputText("Kelt, though he's getting coal this year");
+		if(flags[kFLAGS.KELT_BREAK_LEVEL] < 4) outputText("Kelt, though he's getting coal this year");
 		else outputText("Kelly, though I think she's getting a big fat dildo this year");
 		outputText(".</i>\"\n\n", false);
 	}

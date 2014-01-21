@@ -671,9 +671,9 @@ private function getToFuckingWithZeEggsInWitch():void {
 private function laySomeEggsInThatWitchFinally():void {
 	clearOutput();
 	var cunt:Boolean = (rand(2) == 0);
-	outputText("Before long the intense need to culminate the act grows too lucid to ignore, and with a hum of satisfaction you finally bore your ovipositor through the tight folds of her ");
-	if(cunt) outputText("vulva");
-	else outputText("anus");
+	outputText("Before long the intense need to culminate the act grows too lucid to ignore, and with a hum of satisfaction you finally bore your ovipositor through the tight ");
+	if(cunt) outputText("folds of her vulva");
+	else outputText("ring of her anus");
 	outputText(".  Like something out of a fever dream, the bizarre appendage you wield burrows further and further into her ");
 	if(cunt) outputText("sex");
 	else outputText("ass");

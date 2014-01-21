@@ -3355,7 +3355,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			outputText("Ember grabs you and rolls you around, pinning you under " + emberMF("his", "her") + " weight, whilst kissing you.  You allow the dragon to press you into the ground, rubbing your hands across ");
-			if (flags[kFLAGS.EMBER_GENDER] == 1) outputText("his flat, muscular chest");
+			if (flags[kFLAGS.EMBER_GENDER] == 1 && flags[kFLAGS.EMBER_MILK] == 0) outputText("his flat, muscular chest");
 			else outputText(emberMF("his", "her") + " soft, squeezable boobs");
 			outputText(" and savoring the kiss.  Emboldened, you poke your tongue into " + emberMF("his", "her") + " mouth, to see how " + emberMF("he", "she") + " will react.");
 

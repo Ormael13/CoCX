@@ -393,6 +393,13 @@ package classes
 			statusAffects = [];
 			//keyItems = new Array();
 		}
+
+		public function resetDickEjaculateTimer():void
+		{
+			// Reset hoursSinceCum 
+			// trace("YOU IS JIZZING OMGLOLWTFBBQ!", this.hoursSinceCum)
+			this.hoursSinceCum = 0;
+		}
 		
 		//Functions			
 		//Create a perk
@@ -1813,10 +1820,8 @@ package classes
 			{
 				counter--;
 				if (breastRows[counter].fuckable)
-					index = counter;
+					return true;
 			}
-			if (breastRows[index].fuckable)
-				return true;
 			return false;
 		}
 		
@@ -1838,10 +1843,8 @@ package classes
 			{
 				counter--;
 				if (breastRows[counter].nipplesPerBreast > 0)
-					index = counter;
+					return true;
 			}
-			if (breastRows[index].nipplesPerBreast > 0)
-				return true;
 			return false;
 		}
 		

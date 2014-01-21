@@ -119,6 +119,7 @@ package classes.Scenes.NPCs
 		{
 			if (lust >= 40) {
 				emberReactsToLustiness();
+				return;
 			}
 			if (hasStatusAffect("Stun Cooldown") >= 0) {
 				addStatusValue("Stun Cooldown", 1, -1);
@@ -126,6 +127,7 @@ package classes.Scenes.NPCs
 			}
 			else if (rand(3) == 0) {
 				dragonFarce();
+				return;
 			}
 			if (rand(4) == 0) embersSupahSpecialDragonBreath();
 			else if (rand(3) == 0) emberTailSlap();

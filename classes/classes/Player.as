@@ -208,7 +208,7 @@ package classes
 				if (damage < 1) damage = 1;
 			}
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1("Black Cat Beer") >= 0)
+			if (statusAffectv1("Black Cat Beer") > 0)
 				damage = Math.round(damage * .75);
 
 			//Take damage you masochist!
@@ -240,8 +240,7 @@ package classes
 			return damage;
 		}
 
-		public function takeDamage(damage:Number,noMod:Boolean=false):Number{
-			if (!noMod) damage = reduceDamage(damage);
+		public function takeDamage(damage:Number):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -267,8 +266,8 @@ package classes
 		 */
 		public function speedDodge(monster:Monster):int{
 			var diff:Number = spe - monster.spe;
-			var rnd:Boolean = int(Math.random() * ((diff / 4) + 80)) > 80;
-			if (rnd) return 0;
+			var rnd:int = int(Math.random() * ((diff / 4) + 80));
+			if (rnd<=80) return 0;
 			else if (diff<8) return 1;
 			else if (diff<20) return 2;
 			else return 3;

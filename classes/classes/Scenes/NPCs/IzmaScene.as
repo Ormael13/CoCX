@@ -624,7 +624,7 @@ private function loseToIzma():void {
 	else if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] >= -4) outputText("  You have only the vaguest thought that maybe you shouldn't be thinking about Izma in that way, but it's so tempting to just immerse yourself in the sexiness of having a hot herm shark-girl dominate you so thoroughly. After all, it's not as if there's any harm in doing so, is there?", false);
 	//Izmafight -5: 
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?", false);
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 	player.slimeFeed();
 	cleanupAfterCombat();
 }
@@ -750,7 +750,7 @@ private function victoryPenisIzma():void {
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]] (Izmafight +1)
@@ -791,7 +791,7 @@ private function eatIzmasLeafAfterRapinHer():void {
 	outputText("", true);
 	outputText("You accept the leaf gingerly and eat it.  Izma smiles.", false);
 	//Set loot
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 	//[(if Izmafight <=4) 
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("  You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -838,7 +838,7 @@ private function takeItInZeButtVictoryLikeFromIzma():void {
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
@@ -864,7 +864,7 @@ private function leaveIzmaVictoryTease():void {
 	//(Izmafight +1)
 	
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 	cleanupAfterCombat();
 }
 
@@ -879,7 +879,7 @@ private function chooseIzmaTooth():void {
 	outputText("", true);
 	outputText("You accept the tooth from her with a polite word of thanks.", false);
 	//(gain 1 t-shark toof)
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 	cleanupAfterCombat();
 }
 

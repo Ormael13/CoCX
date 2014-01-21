@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 05.01.14.
  */
 package classes.Scenes
@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Monsters.GoblinAssassinScene;
 
 	public class Exploration extends BaseContent
 	{
@@ -70,6 +71,10 @@ package classes.Scenes
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
+			
+			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+			// return;
+
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
@@ -158,6 +163,11 @@ package classes.Scenes
 					}
 					//Encounter Gobbalin!
 					else {
+						//50% of the time, goblin assassin!
+						if (player.level >= 10 && rand(2) == 0) {
+							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+							return;
+						}
 						if (player.gender > 0) {
 							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
 							outputText(".</i>\"", false);

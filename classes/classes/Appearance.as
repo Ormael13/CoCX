@@ -1602,12 +1602,12 @@
 				//TOIGHT LIKE A TIGER
 				if (i_character.tone >= 65) {
 					options = ["full, toned ",
-						"muscly handful of ass",
-						"shapely, toned ",
-						"muscular, hand-filling ",
-						"shapely, chiseled ",
-						"full ",
-						"chiseled "];
+								"muscly handful of ",
+								"shapely, toned ",
+								"muscular, hand-filling ",
+								"shapely, chiseled ",
+								"full ",
+								"chiseled "];
 					description = randomChoice(options);
 				}
 				//Nondescript
@@ -1810,22 +1810,19 @@
 				}
 			}
 			options = ["butt",
-				"butt",
-				"butt",
-				"butt",
-				"ass",
-				"ass",
-				"ass",
-				"ass",
-				"backside",
-				"backside",
-				"derriere",
-				"rump",
-				"bottom"];
-			//They worked hard for this, so extra chance of booty.
-			if (i_character.buttRating >= 10)
-				options.push("booty", "booty", "booty");
-
+						"butt",
+						"butt",
+						"butt",
+						"ass",
+						"ass",
+						"ass",
+						"ass",
+						"backside",
+						"backside",
+						"derriere",
+						"rump",
+						"bottom"];
+			
 			description += randomChoice(options);
 			//if(rando == 2) desc += "cheeks";
 			return description;

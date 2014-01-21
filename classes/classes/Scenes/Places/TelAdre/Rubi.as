@@ -111,6 +111,9 @@ public function rubiAffection(delt:Number = 0):Number {
 public function rubiCock():String {
 	return kGAMECLASS.NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], 50);
 }
+public function rubiGetCockType():CockTypesEnum {
+	return CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.RUBI_COCK_TYPE]);
+}
 public function rubiBreasts():String {
 	var ret:String = "pair of ";
 
@@ -924,23 +927,20 @@ public function dildoFuckRubi():void {
 	if(player.hasFuckableNipples()) outputText("You let the dildo meander up your body until it reaches your breasts, and with a bit of a grin you insert the tip right into one nipple, enjoying the feeling of your breasts swell up with arousal.  You do the same with the other nipple, and take a minute going back and forth.  ");
 	outputText("Finally you bring the dildo up to your mouth, licking the juices off of it, eagerly downing the goblin sex-drug.");
 	
-	//(Normal/Incubus Rubi)
-	if(!rubiBimbo()) {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting [rubi eir] turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
-	}
-	//(Bimbo Rubi) 
-	else {
-		outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting her turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
-	}
+	outputText("\n\nRubi looks on in rapt silence, and you can tell [rubi ey]'s eagerly waiting [rubi eir] turn.  You get on your hands and knees and crawl over " + rubiMF("him","her") + ", pressing the dildo against [rubi eir] skin, letting the drug do its magic.  [rubi Eir] skin flushes and [rubi ey] curls [rubi eir] spine impulsively.");
+ 	
+ 	outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting [rubi eir] get a taste by pressing the tip against those luscious ruby red lips.  ");
  	
 	//(Normal/Incubus Rubi) 
-	if(!rubiBimbo()) outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting " + rubiMF("him","her") + " get a taste by pressing the tip against those luscious ruby red lips.  They part shakily and [rubi eir] tongue reaches out to taste the dildo.  He apparently finds it pleasing, because he immediately wraps his lips around the tip, sucking and bobbing on it like it was a real cock.");
+	if(!rubiBimbo()) outputText("They part shakily and [rubi eir] tongue reaches out to taste the dildo.  ");
 	//(Bimbo Rubi) 
-	else outputText("\n\nLoving the effects it has on Rubi, you take it slow, first letting her get a taste by pressing the tip against those luscious ruby red lips.  They easily part, and her tongue takes a long slurp, just to taste the dildo.  She apparently finds it pleasing, because she immediately wraps her lips around the tip, sucking and bobbing on it like it was a real cock.");
+	else outputText("They easily part, and [rubi eir] tongue takes a long slurp, just to taste the dildo.  ");
+	
+	outputText("[rubi Ey] apparently finds it pleasing, because [rubi ey] immediately wraps [rubi eir] lips around the tip, sucking and bobbing on it like it was a real cock.");
 	
 	outputText("\n\nYou actually have to yank it out of Rubi's mouth, and tell [rubi em] that there's one way you can both get a little pleasure out of this.  You urge Rubi to lie down, and you reach down, pressing the tip of the dildo ");
-	if(!rubiBimbo()) outputText("against his tight ass");
-	else outputText("against her tight pussy");
+	if(flags[kFLAGS.RUBI_NO_CUNT] == 1) outputText("against [rubi eir] tight ass");
+	else outputText("against [rubi eir] tight pussy");
 	outputText(", which resists a little at first, but once the drug has a moment to work, it slips right in.  Rubi actually coos a little as it slips inside.");
 	
 	outputText("\n\nYou also lie down, and align the other end with your [vagOrAss], and slip it inside.  Warmth radiates outwards as the drug takes full effect, your whole body becoming aroused.");
@@ -964,7 +964,7 @@ public function dildoFuckRubi():void {
 		else outputText("demonic cock");
 		outputText(" twitches, launching jets of cum onto [rubi eir] stomach, chest and face.  In [rubi eir] sex-filled stupor, [rubi ey] eagerly swallows down whatever lands in [rubi eir] mouth, and actually uses [rubi eir] fingers to collect the rest , gulping that down as well.");
 	}
-	//(Bimbo Rubi)
+	//(Bimbo/Female Rubi)
 	else {
 		outputText("\n\n[rubi Eir] body shudders and convulses, and though you can't see or feel it, you're confident [rubi eir] pussy is clenching down tightly on the dildo, as it suddenly becomes very hard to thrust into [rubi em] with it.  With an orgasmic scream of \"<i>Oh yes!  Yes!</i>\"  and a spray of femjuices, Rubi collapses, exhausted.");
 	}
@@ -2423,11 +2423,11 @@ private function getFuckedByRubi():void {
 	outputText("\n\nRubi wraps [rubi eir] lips around your [vagOrAss] and flicks [rubi eir] tongue along the sensitive flesh.  You shiver and sprawl out on the bed, taking it all in.  Rubi lavishes your tight hole with [rubi eir] lips and tongue, lapping and slurping messily, all in preparation for what is to come, no doubt.  But [rubi ey] doesn't get ahead of [rubi em]self, and takes [rubi eir] time to make sure you're good and ready.  [rubi Eir] perfectly manicured fingers trace patterns only [rubi ey] can decipher on your inner thigh, movements so delicate and precise that your body quivers of its own accord.  [rubi Eir] other hand slips up your stomach, inching along and teasing your flesh with the same arcane movements of [rubi eir] fingers.");
 	
 	outputText("\n\nWith your crotch freshly lubricated, Rubi stands and quickly disrobes, adding to the pile of clothing on the floor.  [rubi Eir] feminine hands run down [rubi eir] body and grasp at the [rubi cock] sprouting from [rubi eir] groin, stroking it to its full length.  Its ");
-	if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HUMAN) outputText("pink, mushroom-like tip");
-	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
-	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("blunted, musky tip");
-	else if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
-	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + flags[kFLAGS.RUBI_COCK_TYPE] + "</b>  ");
+	if(this.rubiGetCockType() == CockTypesEnum.HUMAN) outputText("pink, mushroom-like tip");
+	else if(this.rubiGetCockType() == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
+	else if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("blunted, musky tip");
+	else if(this.rubiGetCockType() == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
+	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ")
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");
@@ -2740,7 +2740,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			if(flags[kFLAGS.RUBI_BREAST_SIZE] < 0) flags[kFLAGS.RUBI_BREAST_SIZE] = 0;
 		}
 		//(If Penis size increases)
-		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0 && ((flags[kFLAGS.RUBI_COCK_SIZE] < 12 || (flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[kFLAGS.RUBI_COCK_SIZE] < 20)) ||
+		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0 && ((flags[kFLAGS.RUBI_COCK_SIZE] < 12 || (this.rubiGetCockType() == CockTypesEnum.HORSE && flags[kFLAGS.RUBI_COCK_SIZE] < 20)) ||
 										(flags[kFLAGS.RUBI_COCK_SIZE] < 30 && flags[kFLAGS.HYPER_HAPPY]) ) )
 		{
 			outputText("\n\nRubi's [rubi cock] swells up suddenly, growing painfully hard.  [rubi Ey] grasps it and moans suddenly as it begins to pulse, growing larger with every throb, increasing in size by at least an inch, leaving [rubi em] with a ");
@@ -2855,7 +2855,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			flags[kFLAGS.RUBI_COCK_SIZE] = 5;
 		}
 		//(If Rubi gets Horsecock)
-		if(flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {
+		if(this.rubiGetCockType() != CockTypesEnum.HORSE) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, the pink head flattening all of a sudden and flaring outwards.");
 			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HORSE;
 			outputText("\n\nRubi's dick thickens in [rubi eir] hand, gaining at least an inch of width as it continues to change.  A thick, fleshy ring bulges out near the base of the cock... the beginnings of a sheathe, no doubt.  As you watch on in awe, the flesh at the base of Rubi's cock begins to darken, slowly become a dusky grey-black, which also overtakes [rubi eir] ");
@@ -2948,7 +2948,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			flags[kFLAGS.RUBI_LOWERBODY] = 1;
 		}
 		//(Gaining Cat Penis)
-		else if(flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.CAT && flags[kFLAGS.RUBI_COCK_SIZE] > 0) {
+		else if(this.rubiGetCockType() != CockTypesEnum.CAT && flags[kFLAGS.RUBI_COCK_SIZE] > 0) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, its tip lengthening out while a number of barb-like protrusions sprout from the head.  Before your eyes the barbs quiver and then go flush against [rubi eir] cock.  They don't seem sharp, more like they're ready to stimulate a potential mate.");
 			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.CAT;
 		}
@@ -2980,7 +2980,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		outputText(" underneath.  The demon-marked " + rubiMF("boy","girl") + " rubs [rubi eir] stomach appreciatively.  \"<i>Those were some great peaches, babe.</i>\"");
 		
 		//(Any changes? Yes)
-		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.TENTACLE))
+		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.TENTACLE))
 		{
 			outputText("\n\nRubi's eyes suddenly dart open and [rubi ey] clutches [rubi eir] stomach.  \"<i>Oh gods…  My belly feels so warm all of a sudden.</i>\"");
 			//(Feathery ears)
@@ -3005,9 +3005,9 @@ private function giveRubiATFItem(itype:ItemType):void {
 				flags[kFLAGS.RUBI_SKIN] = 3;
 			}
 			//(Anemone Penis, must have a penis)
-			else if(flags[kFLAGS.RUBI_COCK_SIZE] > 0 && flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.ANEMONE) {
+			else if(flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.ANEMONE) {
 				outputText("\n\n[rubi Eir] hands don't dally there long before darting down to [rubi eir] crotch, groping at the [rubi cock] betwixt [rubi eir] legs.  The flesh seems to  ripple, with veins suddenly bulging.  A low, husky groan wrestles its way out of Rubi's throat as [rubi eir] cock morphs");
-				if(flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.HUMAN) outputText(", first shifting towards a more human-like appearance");
+				if(this.rubiGetCockType() != CockTypesEnum.HUMAN) outputText(", first shifting towards a more human-like appearance");
 				outputText(".  Small nodules appear, around the crown of the penis, and around its base.  Rubi's delicate hands run across two of the nodules, and [rubi eir] cock suddenly stiffens, harder than you've ever seen it!  Whatever those things are, they're quite sensitive.");
 				
 				outputText("\n\nThe little nubs quickly grow outwards, lengthening into tiny, anemone-like tentacles.  When the changes finally stop, Rubi gazes down with no small amount of trepidation, as the four tentacles around the head of [rubi eir] penis and the four at its base wriggle and writhe of their own accord.");
@@ -3066,7 +3066,7 @@ private function rubiPenisGroPlus():void {
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over before, before taking a deep breath and injecting the entire thing into the base of [rubi eir] [rubi cock].");
 	
 	//(If Penis increase)
-	if(flags[kFLAGS.RUBI_COCK_SIZE] < 12 || (flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[kFLAGS.RUBI_COCK_SIZE] < 20) || (flags[kFLAGS.RUBI_COCK_SIZE] < 30 && flags[kFLAGS.HYPER_HAPPY])) {
+	if(flags[kFLAGS.RUBI_COCK_SIZE] < 12 || (this.rubiGetCockType() == CockTypesEnum.HORSE && flags[kFLAGS.RUBI_COCK_SIZE] < 20) || (flags[kFLAGS.RUBI_COCK_SIZE] < 30 && flags[kFLAGS.HYPER_HAPPY])) {
 		outputText("\n\nRubi grips [rubi eir] cock as it suddenly hardens, visibly throbbing in [rubi eir] grasp.  It surges, growing larger, gaining about two inches right before your eyes.");
 		flags[kFLAGS.RUBI_COCK_SIZE] += 2 + rand(2);
 
@@ -3081,7 +3081,7 @@ private function rubiPenisGroPlus():void {
 		}
 		else
 		{
-			if(flags[kFLAGS.RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {
+			if(this.rubiGetCockType() != CockTypesEnum.HORSE) {
 				if(flags[kFLAGS.RUBI_COCK_SIZE] > 12) flags[kFLAGS.RUBI_COCK_SIZE] = 12;
 			}
 			else {
@@ -3091,7 +3091,7 @@ private function rubiPenisGroPlus():void {
 	}
 	else {
 		outputText("\n\nSadly, apart from making [rubi eir] cock hard, it doesn't seem to have much of an effect on Rubi's ");
-		if(flags[kFLAGS.RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("sheath-stuffing horse-dick");
+		if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("sheath-stuffing horse-dick");
 		else outputText("giant dick.");
 	}
 	player.consumeItem(consumables.GROPLUS);

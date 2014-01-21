@@ -12,7 +12,7 @@ git checkout -- ./classes/classes/CoC.as
 export GIT_REV=`git rev-parse  --short HEAD`
 
 echo Done. Splicing in release info
-/bin/sed -i -r "s/^([\s\\t]+ver\s?=\s?\".+)\";/\1-ALPHA-${GIT_REV}\"\;/" ./classes/classes/CoC.as
+/bin/sed -i -r "s/^([\s\\t]+ver\s?=\s?\".+)\";/\1-A-${GIT_REV}\"\;/" ./classes/classes/CoC.as
 /bin/sed -i -r "s/^([\s\\t]+version\s?=\s?\".+)\";/\1\\\\nALPHA RELEASE Rev: ${GIT_REV}\\\\n Compiled by buildbot\"\;/" ./classes/classes/CoC.as
 
 #cat ./classes/classes/CoC.as
