@@ -441,15 +441,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	trace("SAVE DATAZ");
 	saveFile.data.short = player.short;
 	saveFile.data.a = player.a;
-	//saveFile.data.long = player.long;
-	//saveFile.data.capitalA = player.capitalA;
-	//saveFile.data.temperment = player.temperment;
-	//saveFile.data.special1 = player.special1;
-	//saveFile.data.special2 = player.special2;
-	//saveFile.data.special3 = player.special3;
-	//saveFile.data.pronoun1 = player.pronoun1;
-	//saveFile.data.pronoun2 = player.pronoun2;
-	//saveFile.data.pronoun3 = player.pronoun3;
 	
 	//Notes
 	if (mainView.nameBox.text != "")
@@ -481,14 +472,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.armorName = player.modArmorName;
-		//saveFile.data.weaponName = player.weaponName;// For backward compatibility
-		//saveFile.data.weaponVerb = player.weaponVerb;// For backward compatibility
-		//saveFile.data.armorDef = player.armorDef;// For backward compatibility
-		//saveFile.data.armorPerk = player.armorPerk;// For backward compatibility
-		//saveFile.data.weaponAttack = player.weaponAttack;// For backward compatibility
-		//saveFile.data.weaponPerk = player.weaponPerk;// For backward compatibility
-		//saveFile.data.weaponValue = player.weaponValue;// For backward compatibility
-		//saveFile.data.armorValue = player.armorValue;// For backward compatibility
+		//saveFile.data.weaponName = player.weaponName;// uncomment for backward compatibility
+		//saveFile.data.weaponVerb = player.weaponVerb;// uncomment for backward compatibility
+		//saveFile.data.armorDef = player.armorDef;// uncomment for backward compatibility
+		//saveFile.data.armorPerk = player.armorPerk;// uncomment for backward compatibility
+		//saveFile.data.weaponAttack = player.weaponAttack;// uncomment for backward compatibility
+		//saveFile.data.weaponPerk = player.weaponPerk;// uncomment for backward compatibility
+		//saveFile.data.weaponValue = player.weaponValue;// uncomment for backward compatibility
+		//saveFile.data.armorValue = player.armorValue;// uncomment for backward compatibility
 		
 		//PIERCINGS
 		saveFile.data.nipplesPierced = player.nipplesPierced;
@@ -583,7 +574,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		   myLocalData.data.girlArray.push(new Array());
 		   myLocalData.data.girlEffectArray.push(new Array());
 		 }*/
-		
+
 		saveFile.data.cocks = [];
 		saveFile.data.vaginas = [];
 		saveFile.data.breastRows = [];
@@ -723,8 +714,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Populate gear slot array
 		for (i = 0; i < gearStorage.length; i++)
 		{
-			//saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;// For backward compatibility
-			saveFile.data.gearStorage[i].id = (gearStorage[i].itype == null)?null:gearStorage[i].itype.id;
+			//saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;// uncomment for backward compatibility
+			saveFile.data.gearStorage[i].id = (gearStorage[i].isEmpty())?null:gearStorage[i].itype.id;
 			saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
 			saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
 		}
@@ -759,27 +750,27 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//ITEMZ. Item1s
 		saveFile.data.itemSlot1 = [];
 		saveFile.data.itemSlot1.quantity = player.itemSlot1.quantity;
-		//saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;// For backward compatibility
+		//saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot1.id = player.itemSlot1.itype.id;
 		saveFile.data.itemSlot1.unlocked = player.itemSlot1.unlocked;
 		saveFile.data.itemSlot2 = [];
 		saveFile.data.itemSlot2.quantity = player.itemSlot2.quantity;
-		//saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;// For backward compatibility
+		//saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot2.id = player.itemSlot2.itype.id;
 		saveFile.data.itemSlot2.unlocked = player.itemSlot2.unlocked;
 		saveFile.data.itemSlot3 = [];
 		saveFile.data.itemSlot3.quantity = player.itemSlot3.quantity;
-		//saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;// For backward compatibility
+		//saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot3.id = player.itemSlot3.itype.id;
 		saveFile.data.itemSlot3.unlocked = player.itemSlot3.unlocked;
 		saveFile.data.itemSlot4 = [];
 		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
-		//saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;// For backward compatibility
+		//saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot4.id = player.itemSlot4.itype.id;
 		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
 		saveFile.data.itemSlot5 = [];
 		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
-		//saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;// For backward compatibility
+		//saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot5.id = player.itemSlot5.itype.id;
 		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
 		
@@ -1013,15 +1004,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		inventory.clearGearStorage();
 		player.short = saveFile.data.short;
 		player.a = saveFile.data.a;
-		//player.long = saveFile.data.long;
-		//player.capitalA = saveFile.data.capitalA;
-		//player.temperment = saveFile.data.temperment;
-		//player.special1 = saveFile.data.special1;
-		//player.special2 = saveFile.data.special2;
-		//player.special3 = saveFile.data.special3;
-		//player.pronoun1 = saveFile.data.pronoun1;
-		//player.pronoun2 = saveFile.data.pronoun2;
-		//player.pronoun3 = saveFile.data.pronoun3;
 		game.notes = saveFile.data.notes;
 		
 		//flags
@@ -1497,7 +1479,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = gearStorage[i];
-				if (saveFile.data.gearStorage[i].shortName == undefined || saveFile.data.gearStorage[i].quantity == undefined)
+				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
+                        || saveFile.data.gearStorage[i].quantity == undefined)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);

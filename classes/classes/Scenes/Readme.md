@@ -128,7 +128,7 @@ An error will be reported in `trace` if items with same `id`s are created.
 Saving and loading are done using `id`. To get ItemType by `id`, use `ItemType.lookupItem(id:String):ItemType`.
 
 **Every comparison "is it *that* item?" that looks like `shortName == "ThatItm"` should be
-replaced with `itype == library.THATITM` where `library` is item library (see below).
+replaced with `itype == library.THATITM` where `library` is item library (see below)**.
 
 ## Class hierarchy
 
@@ -161,7 +161,7 @@ replaced with `itype == library.THATITM` where `library` is item library (see be
     * `ComfortableUnderclothes`, `Fists`, and `GooArmor` that return `null`
     * `ComfortableClothes` that return `this` but if the clothes were transformed into others by fetish cultists/zealots
         (which is done by `player.modArmorName`), displays message of them turning into comfortable clothes.
-    * `Urta's `LeatherArmorSegments` turns into default leather armor on unequip.
+    * Urta's `LeatherArmorSegments` turns into default leather armor on unequip.
 
     You cannot instantiate `Equipable`, instead, you should use one of the subclasses:
 
@@ -265,9 +265,8 @@ _Scenes/Places/TelAdre/TelAdreAbstractContent.as_ )
 
 Due to legacy reasons, if a NPC is combatable, its Monster subclass should be named after him (`Npcname`), and its BaseContent
 subclass should be named `Npcname+"Scene"`. However, if a non-combatable NPC (with BaseContent subclass named `npcname`)
-becomes combatable in future releases, its Monster subclass should be created and named `Npcname+"Monster"` or `Npcname+"Combat"`.
-
-In distant future we may rename all monster subclasses to `Monstername+"Monster"` and their scene classes to simple `Monstername`.
+becomes combatable in future releases, either its Monster subclass should be named `Npcname+"Combat"`, or the original
+`Npcname` should be renamed to `NpcnameScene` and its Monster subclass should be named `Npcname`. Messy.
 
 ## Class members
 

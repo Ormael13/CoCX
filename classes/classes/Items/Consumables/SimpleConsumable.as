@@ -13,7 +13,7 @@ package classes.Items.Consumables
 
 		override public function doEffect(player:Player,output:Boolean):void
 		{
-			effect(player,true);//TODO use output argument... which would require add checks for output to ALL mutations
+			effect(player);//TODO use output argument... which would require add checks for output to ALL mutations
 		}
 
 		/**
