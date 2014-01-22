@@ -4,13 +4,13 @@
 package classes.Items.Consumables
 {
 	import classes.Player;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	public class OvipositionElixir extends SimpleConsumable
 	{
 
 
-		override public function canConsume(player:Player, output:Boolean):Boolean
+		override public function canUse(player:Player, output:Boolean):Boolean
 		{
 			if (player.hasVagina()) return true;
 			if (output) {
@@ -20,9 +20,14 @@ package classes.Items.Consumables
 			return false;
 		}
 
+		private function ovipositionElixer(player:Player):void
+		{
+			game.mutations.ovipositionElixer(player);
+		}
+
 		public function OvipositionElixir()
 		{
-			super("OviElix","OviElix", "a hexagonal crystal bottle tagged with an image of an egg", Utils.lazyCallIndexCall(getGame,"mutations","ovipositionElixer"),30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.");
+			super("OviElix","OviElix", "a hexagonal crystal bottle tagged with an image of an egg", ovipositionElixer,30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.");
 		}
 	}
 }

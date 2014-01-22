@@ -5,12 +5,12 @@ package classes.Items.Consumables
 {
 	import classes.Items.ConsumableLib;
 	import classes.Player;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	public final class LustStick extends SimpleConsumable
 	{
 
-		override public function canConsume(player:Player, output:Boolean):Boolean
+		override public function canUse(player:Player, output:Boolean):Boolean
 		{
 			if (player.hasCock() && player.hasPerk("Luststick Adapted")<0){
 				clearOutput();
@@ -20,9 +20,13 @@ package classes.Items.Consumables
 			return true;
 		}
 
+		private function applyLustStick(player:Player):void{
+			game.mutations.applyLustStick(player);
+		}
+
 		public function LustStick()
 		{
-			super("LustStk","LustStk","a tube of golden lipstick",Utils.lazyCallIndexCall(getGame,"mutations","applyLustStick"),ConsumableLib.DEFAULT_VALUE,"This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.");
+			super("LustStk","LustStk","a tube of golden lipstick",applyLustStick,ConsumableLib.DEFAULT_VALUE,"This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.");
 		}
 	}
 }

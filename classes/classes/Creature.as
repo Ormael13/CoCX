@@ -6,6 +6,7 @@ package classes
 	import classes.Items.ArmorLib;
 	import classes.Items.Weapon;
 	import classes.Items.WeaponLib;
+	import classes.internals.Utils;
 
 	//import classes.CockClass;
 	public class Creature extends Utils

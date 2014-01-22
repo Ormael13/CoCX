@@ -6,7 +6,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	/**
 	 * ...

@@ -18,7 +18,7 @@ package classes.Items.Weapons
 		}
 
 
-		override public function canConsume(player:Player, output:Boolean):Boolean
+		override public function canUse(player:Player, output:Boolean):Boolean
 		{
 			if (player.cor >= 35) {
 				if (output) {

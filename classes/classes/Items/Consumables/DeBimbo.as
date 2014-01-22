@@ -19,9 +19,9 @@ package classes.Items.Consumables
 		}
 
 
-		override public function doEffect(player:Player):void
+		override public function doEffect(player:Player,output:Boolean):void
 		{
-			kGAMECLASS.mutations.deBimbo(player);
+			kGAMECLASS.mutations.deBimbo(player);// TODO use output argument in mutations.deBimbo
 		}
 
 		public function DeBimbo()

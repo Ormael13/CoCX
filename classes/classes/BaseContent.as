@@ -4,6 +4,7 @@
 	import classes.Items.*;
 	import classes.Scenes.Camp;
 	import classes.Scenes.Inventory;
+	import classes.internals.Utils;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;

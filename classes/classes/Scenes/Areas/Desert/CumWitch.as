@@ -43,6 +43,14 @@ package classes.Scenes.Areas.Desert
 			init11Armor("robes");
 			init12Combat(100,30,.8,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(6,rand(15) + 5);
+			init14WeightedDrop().addMany(1,
+								consumables.TSCROLL,
+								consumables.OVIELIX,
+								consumables.LACTAID,
+								consumables.LABOVA_,
+								consumables.W__BOOK,
+								consumables.B__BOOK,
+								null);
 		}
 		
 	}

@@ -26,7 +26,7 @@ package classes
 		protected var _value:Number;
 
 		/**
-		 * Short name (max. 7 letters) to be displayed on buttons
+		 * Short name to be displayed on buttons
 		 */
 		public function get shortName():String
 		{

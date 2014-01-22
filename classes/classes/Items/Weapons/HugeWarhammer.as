@@ -8,7 +8,7 @@ package classes.Items.Weapons
 
 	public class HugeWarhammer extends Weapon
 	{
-		override public function canConsume(player:Player, printReason:Boolean):Boolean
+		override public function canUse(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.str<80){
 				if (printReason){

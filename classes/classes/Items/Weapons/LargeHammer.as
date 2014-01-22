@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class LargeHammer extends Weapon
 	{
 
-		override public function canConsume(player:Player, printReason:Boolean):Boolean
+		override public function canUse(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.tallness < 60){
 				if (printReason) {

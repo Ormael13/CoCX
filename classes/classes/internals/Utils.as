@@ -1,8 +1,9 @@
 /**
  * Created by aimozg on 18.01.14.
  */
-package classes
+package classes.internals
 {
+	import classes.*;
 	public class Utils
 	{
 
@@ -37,7 +38,7 @@ package classes
 				return obj
 			};
 		}
-		// lazy2(func,arg1,...,argN)(args) = func()[arg1]...[argN](args)
+		// lazy2(func,arg1,...,argN)(args2) = func()[arg1]...[argN](args2)
 		public static function lazyCallIndexCall(func:Function,...args):Function{
 			var _args:Array = args.slice();
 			return function (...fargs):*{

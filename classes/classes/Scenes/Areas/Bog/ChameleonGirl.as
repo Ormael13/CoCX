@@ -2,7 +2,7 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.Appearance;
 	import classes.Monster;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	/**
 	 * ...

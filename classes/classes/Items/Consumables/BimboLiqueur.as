@@ -5,12 +5,12 @@ package classes.Items.Consumables
 {
 import classes.Appearance;
 import classes.Player;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	public class BimboLiqueur extends SimpleConsumable
 	{
 
-		override public function canConsume(player:Player, output:Boolean):Boolean
+		override public function canUse(player:Player, output:Boolean):Boolean
 		{
 			if(player.hasPerk("Futa Form") >= 0) {
 				if (output) outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n");

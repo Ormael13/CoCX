@@ -15,7 +15,7 @@ package classes.Items
 		override public function equip(player:Player, output:Boolean):void
 		{
 			clearOutput();
-			if (canConsume(player, true)) {
+			if (canUse(player, true)) {
 				if(output) outputText("You equip your " + _name + ".  ");
 				var oldArmor:Armor = player.armor;
 				oldArmor.unequip(player,output);

@@ -9,7 +9,7 @@ package classes.Items.Weapons
 	public class LargeClaymore extends Weapon
 	{
 
-		override public function canConsume(player:Player, printReason:Boolean):Boolean
+		override public function canUse(player:Player, printReason:Boolean):Boolean
 		{
 			if (player.str < 40){
 				if (printReason) {

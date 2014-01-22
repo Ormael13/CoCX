@@ -114,7 +114,139 @@ Generally 99% of monsters should subclass classes.Monster directly. However ther
 
 # Item classes
 
-TODO write
+Shortname fields and lookups are replaced with `ItemType` instances. Its members are:
+* `id`: An unique across all `ItemType`s 7-character identifier that should be kept unchanged in future game versions.
+* `shortName`: Currently just a copy of an `id`, but this field is intended to store very short name of the item that could be displayed on buttons instead of id.
+* `longName`: Full name of an item.
+* `description` A description of an item; currently used in tooltips.
+* `value`: Item price.
+
+Remember: **For each item type there should be one and only one instance of `ItemType` class with unique `id`**.
+An error will be reported in `trace` if items with same `id`s are created.
+`ItemType` instances are usually `const` fields of item libraries (see below).
+
+Saving and loading are done using `id`. To get ItemType by `id`, use `ItemType.lookupItem(id:String):ItemType`.
+
+**Every comparison "is it *that* item?" that looks like `shortName == "ThatItm"` should be
+replaced with `itype == library.THATITM` where `library` is item library (see below).
+
+## Class hierarchy
+
+1. `ItemType` is superclass for every item. It could be placed into player's inventory or chest.
+2. `CommonItem` contains handy methods `outputText`, `clearOutput` and a `game` property to use when performing item
+   effects.
+3. `Useable` has new method `useItem(player,output,external)` that **MUST** be overriden in subclasses. It is called
+   whenever player uses this item, via inventory or *"Use Now"* button. To distinguish these cases, `external` property
+   is added: it is `true` when item used not from player's inventory.
+    1. `SimpleUseable` is `Useable` defined by constructor parameter `effect`, which is `function(player:Player):void`.
+        Examples of such items are armor crafting ingredients and kitsune statue, which display text when used.
+4. `Consumable` is a `Useable` that has certain requirements, whether or not it could be used; and if it could (and it is
+    not `external`, it removes 1 instance of itself from `player`'s inventory. The superclass method `useItem` is already
+    overrided and **MUST NOT** be overriden. Instead, `doEffect(player:Player,output:Boolean)` **MUST** be overriden;
+    `canUse(player:Player,output:Boolean)` **COULD** be overriden (default: `return true`).
+    1. `SimpleConsumable` is `Consumable` defined by constructor parameter `effect`, which is `function(player:Player):void`.
+        \~95% of consumables are instances of `SimpleConsumables`; the rest has custom `canUse`.
+5. `Equipable` is a special kind of `Consumable` that is wielded/worn by player. Special effects could be done when
+    player equips/unequips `Equipable`. You **MUST NOT** override `doEffect`. Instead, you **MUST** override methods
+    * `equip(player:Player,output:Boolean)` that should check whether item could be equipped by player by calling 
+        `canUse`, unequip item already equipped in that slot, put itself into the slot, and call `equipped(player,output)` 
+        to call possible equip effect
+    * `unequip(player:Player,output:Boolean)` that should remove itself from player's slot and call `unequipped(player,output)`
+        to call possible unequip effect.
+    
+    Also you **CAN** override methods `equipEffect(player,output)` and `unequipEffect(player,output)` to display
+    some messages or add/remove perks. Overrideable method `unequipReturnItem` returns item that should be placed into
+    inventory on unequip, or `null` if item simply disappears. Example cases when you need to override this method are:
+
+    * `ComfortableUnderclothes`, `Fists`, and `GooArmor` that return `null`
+    * `ComfortableClothes` that return `this` but if the clothes were transformed into others by fetish cultists/zealots
+        (which is done by `player.modArmorName`), displays message of them turning into comfortable clothes.
+    * `Urta's `LeatherArmorSegments` turns into default leather armor on unequip.
+
+    You cannot instantiate `Equipable`, instead, you should use one of the subclasses:
+
+    1. `Armor`. Armor has 3 more properties: `name` (displayable name, shorter than `longName`), `def`, and `perk`.
+        `perk` defines armor class: `"Light"`/`"Medium"`/`"Heavy"` but could be empty string.
+        Armor is equipped in `player.armor` slot, and when unequipped, is replaced by _"comfortable underclothes"_.
+        You can create instances of this class, specify everything you need in the constructor. That armor will have
+        no `equipEffect`/`unequipEffect` and could be equipped by anyone.
+
+        * `ArmorWithPerk` is a subclass of `Armor` that adds a player perk on equip and removes in on unequip. Perk
+            name and properties are set up in the constructor.
+        
+        To fine-tune armor with custom `equipEffect`/`unequipEffect`/`canUse`, or situation-dependant properties,
+        subclass it.
+
+    2. `Weapon`. Weapon has 3 more properties: `name` (displayable name, shorter than `longName`), `verb` (like _"hit"_,
+        _"slash"_ to use in constructs like `"You "+weapon.verb+" "+monster.name+" with your "+weapon.name`, `attack`,
+        and `perk`. `perk` defines weapon class: `"Light"`/`"Heavy"` but could be empty string.
+        Weapon is equipped in `player.weapon` slot, and when unequipped, is replaced by _"fists"_.
+        You can create instances of this class, specify everything you need in the constructor. That weapon will have
+        no `equipEffect`/`unequipEffect` and could be equipped by anyone.
+
+        To fine-tune weapon with custom `equipEffect`/`unequipEffect`/`canUse`, or situation-dependant propertiesm
+        subclass it.
+
+Note: `WingStick` though being a weapon, technically is a `Consumable`. Remember that when you check if item is a weapon;
+ simple `itype is Weapon` might not be enough. **TODO** `ConsumableWeapon` for javelins, throwing daggers, grenades,
+ spell scrolls?
+
+## Item libraries
+
+As mentioned before, only **one** instance of each `ItemType` should be created. Current game architecture suggests them
+being `public const` fields of item library classes, and each item library is a `public` field of `CoC` game class.
+
+For examples, see `ConsumableLib` and `CoC.consumables`, `WeaponLib` and `CoC.weapons` etc.
+
+Item libraries usually subclass `BaseContent` to get access to handy methods and create their own handy methods to
+ quickly create `ItemType`s for the library. See below.
+
+## Adding new item
+
+### Adding new armor
+
+`ArmorLib` has methods
+ `mk(id,shortName,name,longName,def,value,description,perk="")` to create `Armor` and
+ `mk2(id,shortName,name,longName,def,value,description,perk,playerPerkName,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4,playerPerkDesc)` to create `ArmorWithPerk`.
+
+See examples.
+
+TODO moar on custom armorz
+
+### Adding new weapon
+
+`WeaponLib` has method
+ `mk(id,shortName,name,longName,verb,attack,value,description,perk="")` to create `Weapon`.
+
+See examples.
+
+TODO moar on custom weaponz
+
+### Adding new consumable
+
+`ConsumableLib` has method
+ `mk(id,shortName,longName,effect,description,value=DEFAULT_VALUE)` to create `SimpleConsumable`.
+`effect` should be `function(player:Player):void`.
+Legacy consumable effects are stored in `Mutations` class, which is accessible via `m` property.
+If you want to have one function to handle different consumables
+ (like, `succubiMilk` for both tainted and pure versions),
+ declare it with parameters and **`player` argument last**;
+ then use `curry` function (see bottom of this readme) to create partial function call
+  (e.g. `curry(m.succubiMilk,true)` will return `function(player:Player){m.succubiMilk(true,player)}`.
+
+See examples.
+
+TODO moar on custom consumablez
+
+### Adding new other item
+
+`UseableLib` holds items that are useable but not consumed when used (reagents, kitsune statue).
+It has method `mk(id,shortName,longName,effect,description,value=DEFAULT_VALUE)` to create `SimpleUseable`.
+`effect` should be `function(player:Player):void`.
+
+See examples.
+
+`MiscItemLib` is currently empty and probably should contain all other kinds of items.
 
 # Scene classes
 
@@ -182,3 +314,31 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 ## Other scenes
 
 If it does not fit **Camp** scenes, put it whatever it seems logial and where similar scenes may appear.
+
+# Utility functions
+
+During all these refucktorings, I've found `createCallBackFunction` not enough (also, I've moved it to new `Utils` class)
+So I've added more functions, (`curry` is enough for most cases):
+
+* `curry(func,...args)` is a partial function call. It returns a function, that will call `func` with first
+    arguments already applied: `curry(func,arg1,...,argN)(arg2_1,...,arg2_M) = func(arg1,...,argN,arg2_1,...arg2_M)`.
+    For example, `SimpleUseable` accepts `function(player:Player)`, but some of the mutations are parametrized, e.g.
+    Incubi Draft could be purified. So we make `function incubiDraft(purified:Boolean,player:Player)`, and to make
+    a function reference to impure draft, we use `f=curry(incubiDraft,false)`, and `f(player)` will call
+    `incubiDraft(false,player)`.
+* `curry(func,arg)` is equivalent of `createCallBackFunction(func,arg)`.
+* `lazyIndex(obj,...args)` is a lazy property access. It returns a function, that will dig into `obj`'s `args`
+    and return whatever is last: `lazyIndex(obj,arg1,...,argN)()=obj["arg1"]..["argN"]`.
+    For example, in cases when `game.telAdre` is not yet initialized (but `game` is), and
+    you need to access function reference `game.telAdre.doSomething`, you can use `lazyIndex(game,"telAdre","doSomething")`.
+* `lazyCallIndex(func,...args)` is a lazy property access of an unavailable object. It returns a function, that will call
+    `func` and dig into result's properties specified by `args`:
+    `lazyCallIndex(func,arg1,...,argN)() = func()["arg1"]..["argN"]`.
+    Let us enhance previous example and suppose that we need to access same function reference `game.telAdre.doSomething`,
+    but even `game` is not initialized. So we make `function getGame(){return game}` and use `lazyCallIndex`:
+    `lazyCallindex(getGame,"telAdre","doSomething")`.
+* `lazyCallIndexCall(func,...args1)` is the ultimate case when the returned function accepts arguments:
+    `lazyCallIndexCall(func,args1_1,...,args1_N)(args2_1,...args2_M) = func()["args1_1"]...["args1_N"](args2_1,...,args2_M)`.
+    Example how to use this monstrosity. Previous example, suppose `game.telAdre.doSomething` accepts argument.
+    So we can do `f=lazyCallIndexCall(getGame,telAdre,doSomething)` and then `f(bar)` will call `getGame().telAdre.doSomething(bar)`.
+* That above example is not type-safe or any kind of safe, so I prefer to use `f=function(bar:Bar){game.telAdre.doSomething(bar)}`

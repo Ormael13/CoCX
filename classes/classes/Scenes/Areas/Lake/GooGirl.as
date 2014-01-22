@@ -2,7 +2,7 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.Appearance;
 	import classes.Monster;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	/**
 	 * ...

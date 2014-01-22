@@ -21,7 +21,7 @@ package classes.Items
 		 * Called on attempt to equip item.
 		 * @param output Print "equipping" scene to output
 		 */
-		override public function canConsume(player:Player,output:Boolean):Boolean
+		override public function canUse(player:Player,output:Boolean):Boolean
 		{
 			return true;
 		}
@@ -62,13 +62,16 @@ package classes.Items
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}
 
-		override public function doEffect(player:Player):void
+		override public function doEffect(player:Player,output:Boolean):void
 		{
 			if (game.debug && !(this is GooArmor)){
-				clearOutput();
-				outputText("You cannot equip anything in debug mode.  Please restart the game in normal mode to equip items.");
+				if (output){
+					clearOutput();
+					outputText("You cannot equip anything in debug mode.  Please restart the game in normal mode to equip items.");
+				}
+				return;
 			}
-			equip(player,true);
+			equip(player,output);
 		}
 
 		public function Equipable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null)

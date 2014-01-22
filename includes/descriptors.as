@@ -1,5 +1,6 @@
 ﻿import classes.Appearance;
 import classes.CockTypesEnum;
+import classes.internals.Utils;
 
 public function sackDescript():String
 {

@@ -1,4 +1,6 @@
-﻿//const VALENTINES_EVENT_YEAR:int = 736;
+﻿import classes.internals.Utils;
+
+//const VALENTINES_EVENT_YEAR:int = 736;
 
 public function isValentine():Boolean {
 	if(date.date >= 13 && date.date <= 15 && date.month == 1) return true;

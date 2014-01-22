@@ -4,6 +4,7 @@
 	import classes.Player;
 	import classes.Monster;
 	import classes.CoC_Settings;
+	import classes.internals.Utils;
 
 
 	public class Appearance extends Utils

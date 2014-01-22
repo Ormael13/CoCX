@@ -1360,7 +1360,7 @@ private function buyClothes(itype:ItemType):void {
 		return;
 	}
 	//Go to debit/update function or back to shop window
-	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",debitClothes,"No",tailorShoppe,"",0,"",0,"Flirt",flirtWithVictoria);
+	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",curry(debitClothes,itype),"No",tailorShoppe,"",0,"",0,"Flirt",curry(flirtWithVictoria,itype));
 	else doYesNo(curry(debitClothes,itype),tailorShoppe);
 }
 
@@ -1860,7 +1860,7 @@ private function fuckYvonneInZeBlacksmith():void {
 
 //*Typical buy text goes here. Options are now Yes/No/Flirt*
 //[Flirt]
-private function flirtWithVictoria():void {
+private function flirtWithVictoria(itype:ItemType):void {
 	clearOutput();
 	var x:Number = player.cockThatFits(70);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1868,7 +1868,7 @@ private function flirtWithVictoria():void {
 	
 	if(x < 0) {
 		outputText("\n\nVictoria smirks and answers, \"<i>I measured your inseam, and what you're packing in there won't fit anywhere in a girl like me.  Maybe some other time, " + player.mf("studmuffin","sweet thing") + ".  Did you actually want to buy?</i>\"\n\nDo you still want to buy?");
-		doYesNo(debitClothes,tailorShoppe);
+		doYesNo(curry(debitClothes,itype),tailorShoppe);
 		return;
 	}
 	outputText("\n\nIt takes her a moment to realize just what it is you're suggesting before her face splits into a wide grin.  <i>\"That right?  Well now, you can't say things like that without backin' 'em up, can you?\"</i>  she says with a low chuckle, pressing her curvy body into you.  <i>\"What do you say, I close the shop up quick, and you can show me just 'ow nicely you can fit, mm?\"</i>");

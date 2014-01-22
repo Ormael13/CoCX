@@ -15,12 +15,12 @@ import classes.Player;
 		/**
 		 * Perform effect on player WITHOUT requiring item being in player's inventory and removing it
 		 */
-		public function doEffect(player:Player):void
+		public function doEffect(player:Player,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Consumable","doEffect",id);
 		}
 
-		public function canConsume(player:Player,output:Boolean):Boolean
+		public function canUse(player:Player,output:Boolean):Boolean
 		{
 			return true;
 		}
@@ -30,9 +30,9 @@ import classes.Player;
 		 */
 		override public function useItem(player:Player, output:Boolean, external:Boolean):void
 		{
-			if (canConsume(player,output)){
+			if (canUse(player,output)){
 				if (!external) player.consumeItem(this,1);
-				doEffect(player);
+				doEffect(player,output);
 			}
 		}
 

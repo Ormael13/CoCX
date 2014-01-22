@@ -11,9 +11,9 @@ package classes.Items.Consumables
 		private var effect:Function;
 
 
-		override public function doEffect(player:Player):void
+		override public function doEffect(player:Player,output:Boolean):void
 		{
-			effect(player);
+			effect(player,true);//TODO use output argument... which would require add checks for output to ALL mutations
 		}
 
 		/**

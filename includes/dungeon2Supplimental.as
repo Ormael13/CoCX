@@ -1,4 +1,6 @@
-﻿//Index:
+﻿import classes.internals.Utils;
+
+//Index:
 //-Imp Gang
 //-Plant - "Encapsulation Start"
 //-Vala - "OH GOD THE FAERIE STUFF"

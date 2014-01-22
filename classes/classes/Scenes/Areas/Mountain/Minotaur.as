@@ -6,7 +6,7 @@
 	import classes.CockTypesEnum;
 	import classes.Cock;
 	import classes.Appearance;
-	import classes.Utils;
+	import classes.internals.Utils;
 
 	/**
 	 * ...

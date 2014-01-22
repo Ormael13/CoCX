@@ -4,6 +4,7 @@
 package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
 
@@ -42,6 +43,12 @@ package classes.Items.Armors
 		public function GooArmor()
 		{
 			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!");
+		}
+
+
+		override protected function unequipReturnItem(player:Player, output:Boolean):ItemType
+		{
+			return null;
 		}
 	}
 }
