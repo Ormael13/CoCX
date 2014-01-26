@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class Niamh extends TelAdreAbstractContent {
@@ -72,7 +73,7 @@ public function getANiamhBeer():void {
 	clearOutput();
 	outputText("\"<i>That'll be two gems,</i>\" she replies.  You hand over the payment, which she holds up to the light and scrutinizes thoroughly.  Satisfied, she drops the things into a sack at her waist.  \"<i>Sorry,</i>\" she mutters. \"<i>I do want to get this damned beer out o' me, but this is still my primary livelihood; I canno' afford to be cheated.  Anyway, here's your mug - you can keep that f'r another two gems; I get 'em cheap.  Go ahead and fill it up, but keep in mind what you're tweakin', right?</i>\"");
 	//Feeder
-	if(player.hasPerk("Feeder") >= 0) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
+	if(player.findPerk(PerkLib.Feeder) >= 0) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
 	//(Player has G-cups or bigger; 
 	else if(player.biggestTitSize() >= 15) 
 	{
@@ -414,7 +415,7 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
 	if(clearScreen) clearOutput();
 	if(intro) {
-		if((player.hasPerk("Futa Faculties") >= 0 && player.hasPerk("Futa Form") >= 0) || (player.hasPerk("Bimbo Body") >= 0 && player.hasPerk("Bimbo Brains") >= 0)) {
+		if((player.findPerk(PerkLib.FutaFaculties) >= 0 && player.findPerk(PerkLib.FutaForm) >= 0) || (player.findPerk(PerkLib.BimboBody) >= 0 && player.findPerk(PerkLib.BimboBrains) >= 0)) {
 			outputText("You could've swore the stuff worked when you saw Niamh do it to others, but for some reason, it had, like, no effect on you. How weird!");
 		}
 		else if(player.hasStatusAffect("Bimbo Champagne") < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");

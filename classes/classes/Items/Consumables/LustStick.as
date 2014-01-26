@@ -4,6 +4,7 @@
 package classes.Items.Consumables
 {
 	import classes.Items.ConsumableLib;
+	import classes.PerkLib;
 	import classes.Player;
 	import classes.internals.Utils;
 
@@ -12,7 +13,7 @@ package classes.Items.Consumables
 
 		override public function canUse(player:Player, output:Boolean):Boolean
 		{
-			if (player.hasCock() && player.hasPerk("Luststick Adapted")<0){
+			if (player.hasCock() && player.findPerk(PerkLib.LuststickAdapted)<0){
 				clearOutput();
 				outputText("You look at the tube of lipstick, but get the idea it would be a pretty bad idea to smear a thick coating of cock-hardening aphrodisiacs over your own lips.  ");
 				return false;

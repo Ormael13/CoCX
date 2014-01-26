@@ -12,6 +12,7 @@ package classes.Scenes.NPCs
 	import classes.ItemType;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 
 	public class AnemoneScene extends BaseContent
 	{
@@ -222,7 +223,7 @@ package classes.Scenes.NPCs
 
 				outputText("The anemone's eyes roll back in her head as she reaches her climax first, hips shaking and penis squirting a glob of semen that drools down the side.  ", false);
 				//[(Flexibility cat perk)
-				if (player.hasPerk("Flexibility") >= 0) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ", false);
+				if (player.findPerk(PerkLib.Flexibility) >= 0) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ", false);
 				outputText("Your own orgasm takes a bit longer, but the convulsing walls of her pussy do their best to help you arrive and the feelers along her labia writhe against your " + multiCockDescriptLight() + " in the same tempo, injecting the last of their venom.  With a deep, final thrust, " + sMultiCockDesc() + " erupts in her pussy.  ", false);
 				//[(big skeet)
 				if (player.cumQ() > 500) {

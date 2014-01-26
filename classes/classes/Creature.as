@@ -514,7 +514,7 @@ package classes
 		}
 		
 		//has perk?
-		public function hasPerk(perkName:String):Number
+		public function findPerk(ptype:PerkType):Number
 		{
 			var counter:Number = perks.length;
 			if (perks.length <= 0)
@@ -522,7 +522,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perk(counter).perkName == perkName)
+				if (perk(counter).ptype == ptype)
 					return counter;
 			}
 			return -1;
@@ -1774,17 +1774,17 @@ package classes
 			else if (lowerBody == 3)
 				bonus = 20;
 			//Wet pussy provides 20 point boost
-			if (hasPerk("Wet Pussy") >= 0)
+			if (findPerk(PerkLib.WetPussy) >= 0)
 				bonus += 20;
-			if (hasPerk("History: Slut") >= 0)
+			if (findPerk(PerkLib.HistorySlut) >= 0)
 				bonus += 20;
-			if (hasPerk("One Track Mind") >= 0)
+			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				bonus += 10;
-			if (hasPerk("Cornucopia") >= 0)
+			if (findPerk(PerkLib.Cornucopia) >= 0)
 				bonus += 30;
-			if(hasPerk("Fera's Boon - Wide Open") >= 0) 
+			if(findPerk(PerkLib.FerasBoonWideOpen) >= 0)
 				bonus += 25;
-			if(hasPerk("Fera's Boon - Milking Twat") >= 0) 
+			if(findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
 			total = (bonus + statusAffectv1("Bonus vCapacity") + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
@@ -1792,16 +1792,15 @@ package classes
 		
 		public function analCapacity():Number
 		{
-			var total:Number;
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
 			if (lowerBody == 4)
 				bonus = 30;
-			if (hasPerk("History: Slut") >= 0)
+			if (findPerk(PerkLib.HistorySlut) >= 0)
 				bonus += 20;
-			if (hasPerk("Cornucopia") >= 0)
+			if (findPerk(PerkLib.Cornucopia) >= 0)
 				bonus += 30;
-			if (hasPerk("One Track Mind") >= 0)
+			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
@@ -1987,24 +1986,24 @@ package classes
 				percent += 0.01;
 			if (cumQ() >= 1600)
 				percent += 0.02;
-			if (hasPerk("Bro Body") >= 0)
+			if (findPerk(PerkLib.BroBody) >= 0)
 				percent += 0.05;
-			if (hasPerk("Marae's Gift - Stud") >= 0)
+			if (findPerk(PerkLib.MaraesGiftStud) >= 0)
 				percent += 0.15;
-			if (hasPerk("Fera's Boon - Alpha") >= 0)
+			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
 				percent += 0.10;
 			if (perkv1("Elven Bounty") > 0)
 				percent += 0.05;
-			if (hasPerk("Fertility+") >= 0)
+			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				percent += 0.03;
-			if (hasPerk("Pierced: Fertite") >= 0)
+			if (findPerk(PerkLib.PiercedFertite) >= 0)
 				percent += 0.03;
-			if (hasPerk("One Track Mind") >= 0)
+			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				percent += 0.03;
-			if (hasPerk("Magical Virility") >= 0)
+			if (findPerk(PerkLib.MagicalVirility) >= 0)
 				percent += 5;
 			//Messy Orgasms?
-			if (hasPerk("Messy Orgasms") >= 0)
+			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
 			if (percent > 1)
 				percent = 1;
@@ -2023,31 +2022,31 @@ package classes
 			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
 			var lustCoefficient:Number = (lust + 50) / 10;
 			//Pilgrim's bounty maxxes lust coefficient
-			if (hasPerk("Pilgrim's Bounty") >= 0)
+			if (findPerk(PerkLib.PilgrimsBounty) >= 0)
 				lustCoefficient = 150 / 10;
 			if (balls == 0)
 				quantity = int(1.25 * 2 * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
 			else
 				quantity = int(ballSize * balls * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
-			if (hasPerk("Bro Body") >= 0)
+			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity *= 1.3;
-			if (hasPerk("Fertility+") >= 0)
+			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				quantity *= 1.5;
-			if (hasPerk("Messy Orgasms") >= 0)
+			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				quantity *= 1.5;
-			if (hasPerk("One Track Mind") >= 0)
+			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				quantity *= 1.1;
-			if (hasPerk("Marae's Gift - Stud") >= 0)
+			if (findPerk(PerkLib.MaraesGiftStud) >= 0)
 				quantity += 350;
-			if (hasPerk("Fera's Boon - Alpha") >= 0)
+			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
 				quantity += 200;
-			if (hasPerk("Magical Virility") >= 0)
+			if (findPerk(PerkLib.MagicalVirility) >= 0)
 				quantity += 200;
-			if(hasPerk("Fera's Boon - Seeder") >= 0) 
+			if(findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1("Elven Bounty");
-			if (hasPerk("Bro Body") >= 0)
+			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
 			quantity += statusAffectv1("rut");
 			quantity *= (1 + (2 * perkv1("Pierced: Fertite")) / 100);
@@ -2988,7 +2987,7 @@ package classes
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
 			if(vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			if(hasPerk("Fera's Boon - Milking Twat") < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if(cArea >= vaginalCapacity()) {
 				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
@@ -3026,15 +3025,15 @@ package classes
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
-			if (hasPerk("heat") >= 0)
-				counter += perk(hasPerk("heat")).value1;
-			if (hasPerk("Fertility+") >= 0)
+			if (hasStatusAffect("heat") >= 0)
+				counter += statusAffectv1("heat");
+			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
-			if (hasPerk("Marae's Gift - Fertility") >= 0)
+			if (findPerk(PerkLib.MaraesGiftFertility) >= 0)
 				counter += 50;
-			if (hasPerk("Fera's Boon - Breeding Bitch") >= 0)
+			if (findPerk(PerkLib.FerasBoonBreedingBitch) >= 0)
 				counter += 30;
-			if (hasPerk("Magical Fertility") >= 0)
+			if (findPerk(PerkLib.MagicalFertility) >= 0)
 				counter += 10;
 			counter += perkv2("Elven Bounty");
 			counter += perkv1("Pierced: Fertite");
@@ -3382,14 +3381,14 @@ package classes
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && hasPerk("Spider Ovipositor") >= 0 && isDrider() && tailType == 5)
+			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tailType == 5)
 				return true;
 			return false;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && hasPerk("Bee Ovipositor") >= 0 && tailType == 6)
+			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tailType == 6)
 				return true;
 			return false;
 		}
@@ -3403,9 +3402,9 @@ package classes
 
 		public function eggs():int
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
-			else if (hasPerk("Spider Ovipositor") >= 0)
+			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				return perkv1("Spider Ovipositor");
 			else
 				return perkv1("Bee Ovipositor");
@@ -3413,10 +3412,10 @@ package classes
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
 			else {
-				if (hasPerk("Spider Ovipositor") >= 0) {
+				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
 					addPerkValue("Spider Ovipositor", 1, arg);
 					if (eggs() > 50)
 						changePerkValue("Spider Ovipositor", 1, 50);
@@ -3433,7 +3432,7 @@ package classes
 
 		public function dumpEggs():void
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3442,10 +3441,10 @@ package classes
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
 			else {
-				if (hasPerk("Spider Ovipositor") >= 0) {
+				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
 					changePerkValue("Spider Ovipositor", 1, arg);
 					if (eggs() > 50)
 						changePerkValue("Spider Ovipositor", 1, 50);
@@ -3462,9 +3461,9 @@ package classes
 
 		public function fertilizedEggs():int
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
-			else if (hasPerk("Spider Ovipositor") >= 0)
+			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				return perkv2("Spider Ovipositor");
 			else
 				return perkv2("Bee Ovipositor");
@@ -3472,9 +3471,9 @@ package classes
 
 		public function fertilizeEggs():int
 		{
-			if (hasPerk("Spider Ovipositor") < 0 && hasPerk("Bee Ovipositor") < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
-			else if (hasPerk("Spider Ovipositor") >= 0)
+			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				changePerkValue("Spider Ovipositor", 2, eggs());
 			else
 				changePerkValue("Bee Ovipositor", 2, eggs());
@@ -3483,11 +3482,11 @@ package classes
 
 		public function increaseCock(increase:Number, cockNum:Number):Number
 		{
-			if (hasPerk("Big Cock") >= 0)
-				increase *= perk(hasPerk("Big Cock")).value1;
-			if (hasPerk("Phallic Potential") >= 0)
+			if (findPerk(PerkLib.BigCock) >= 0)
+				increase *= perk(findPerk(PerkLib.BigCock)).value1;
+			if (findPerk(PerkLib.PhallicPotential) >= 0)
 				increase *= 1.5;
-			if (hasPerk("Phallic Restraint") >= 0)
+			if (findPerk(PerkLib.PhallicRestraint) >= 0)
 				increase *= .25;
 			return cocks[cockNum].growCock(increase);
 		}

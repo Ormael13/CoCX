@@ -504,7 +504,7 @@ public function doDungeon(eventNo:Number):void {
 		temp = rand(2);
 		if(temp == 0) outputText("The demoness grips her sizable breasts and squeezes, spraying milk at you.\n", false);
 		else outputText("Your foe curls up to pinch her nipples, tugging hard and squirting milk towards you.\n", false);
-		if((player.spe > 50 && rand(4) == 0) || (player.hasPerk("Evade") >= 0 && rand(3) == 0) || (player.hasPerk("Misdirection") >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
+		if((player.spe > 50 && rand(4) == 0) || (player.findPerk(PerkLib.Evade) >= 0 && rand(3) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
 			outputText("You sidestep the gushing fluids.", false);
 		}
 		//You didn't dodge

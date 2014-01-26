@@ -176,7 +176,7 @@ public function thatllDoTurkey():void {
 	outputText("Running your hand through the turkey-girl's hair, you whisper what a good little cockgobbler she is. However, you soon find that the poor thing's passed out, your rut finally over with.  You give her a gentle push over her back, giving you a nice soft tit-pillow to lay your head down upon as you pick up the lunch you'd been preparing to eat before the eager slut arrived.");
 	
 	outputText("\n\n\"<i>That'll do, turkey,</i>\" you say, patting her jiggling tit. \"<i>That'll do.</i>\"");
-	if(player.hasPerk("Pilgrim's Bounty") < 0) {
+	if(player.findPerk(PerkLib.PilgrimsBounty) < 0) {
 		player.createPerk(PerkLib.PilgrimsBounty,0,0,0,0,"");
 		outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
 	}
@@ -289,7 +289,7 @@ public function haveTurkeyGirlDesertInYourCunt():void {
 	outputText("\n\nLurching to your feet, you stretch your arms, feeling completely refreshed after the short nap.  If it wasn't for the sweet taste of pumpkin still lingering on your lips, you'd be prepared to call what had just happened one of the weirdest dreams you've had since arriving in Mareth.");
 	
 	outputText("\n\nThen again, you have to admit that it would also class as one of the most fun...");
-	if(player.hasPerk("Cornucopia") < 0) {
+	if(player.findPerk(PerkLib.Cornucopia) < 0) {
 		outputText("\n\n(<b>Gained Perk: Cornucopia - increases vaginal and anal capacities by 30.</b>)");
 		player.createPerk(PerkLib.Cornucopia,0,0,0,0,"Get out of here, you dirty hobo!");
 	}

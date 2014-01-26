@@ -3,6 +3,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
+	import classes.PerkLib;
 
 	/**
 	 * ...
@@ -44,7 +45,7 @@ package classes.Scenes.NPCs
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 				kGAMECLASS.fatigue(5+rand(5));
-				if(rand(2) == 0 && player.hasPerk("Resolute") < 0) {
+				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect("Stunned",1,0,0,0);
 					outputText("  <b>You are stunned!</b>");
 				}
@@ -73,7 +74,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.");
 				//Stun triggered:
-				if(player.hasPerk("Resolute") < 0) {
+				if(player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect("Stunned",2,0,0,0);
 					outputText("  <b>You are stunned!</b>");
 				}

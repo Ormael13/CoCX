@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.Monster;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
 
 	/**
@@ -31,16 +32,16 @@
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				return;
 			}
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				outputText("'s attack.\n", false);
 				return;
@@ -90,16 +91,16 @@
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("Using your skills at evading attacks, you determine " + a + short + " is aiming for your upper body and slide under the attack.\n", false);
 				return;
 			}
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 40 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 40 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 40) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 40) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				outputText("'s attack.\n", false);
 				return;
@@ -147,16 +148,16 @@
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("Using your skills at evading attacks, you watch " + a + short + " and deftly sidestep her brutal talons.\n", false);
 				return;
 			}
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 30 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 30 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 40) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 40) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				outputText("'s attack.\n", false);
 				return;

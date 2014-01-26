@@ -226,7 +226,7 @@ public function xmasFuckFollowup():void {
 	outputText("", true);
 	outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly on your well-used " + cockDescript(0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.\n\n", false);
 	outputText("Did you enjoy being able to cum so much");
-	if(player.hasPerk("Elven Bounty") >= 0) outputText(" <b>again</b>");
+	if(player.findPerk(PerkLib.ElvenBounty) >= 0) outputText(" <b>again</b>");
 	outputText("?", false);
 	//[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
@@ -245,7 +245,7 @@ public function xmasFuckFollowupFems():void {
 	outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly in your well-used " + vaginaDescript(0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.  The dildo appears to have completely dissolved inside you, leaving behind a pinkish fluid that drips from your lips.\n\n", false);
 	
 	outputText("Do you think it might have done anything to you");
-	if(player.hasPerk("Elven Bounty") >= 0) outputText(" <b>again</b>");
+	if(player.findPerk(PerkLib.ElvenBounty) >= 0) outputText(" <b>again</b>");
 	outputText("?", false);
 	//[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
@@ -259,7 +259,7 @@ public function xmasFuckFollowupFems():void {
 }
 
 public function xmasPerkM():void {
-	if(player.hasPerk("Elven Bounty") < 0) {
+	if(player.findPerk(PerkLib.ElvenBounty) < 0) {
 		if(temp == 1001) player.createPerk(PerkLib.ElvenBounty,250,0,0,0,"After an encounter with an elf, her magic permanently increased how messy your orgasms are.");
 		else player.createPerk(PerkLib.ElvenBounty,0,15,0,0,"After your encounter with an elf, her magic has left you with increased fertility.");
 		outputText("<b>New Perk Acquired - Elven Bounty!</b>", true);

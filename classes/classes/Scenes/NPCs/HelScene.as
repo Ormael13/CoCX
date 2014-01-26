@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class HelScene extends NPCAwareContent {
 
@@ -301,7 +302,7 @@ private function helFuckMenu():void {
 		}
 	}
 	//Possess crams in free spot or overlaps another.
-	if(player.hasPerk("Incorporeality") >= 0) {
+	if(player.findPerk(PerkLib.Incorporeality) >= 0) {
 		//Taurs or nagas with both scenes, replace 1!
 		if(bodyButt != null && bodyButt2 != null) {
 			if(rand(2) == 0) {

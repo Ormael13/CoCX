@@ -45,10 +45,10 @@ public function benoitAffection(changes:Number = 0):Number {
 
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
-	if(player.pregnancyType == 14 && player.hasPerk("Basilisk Womb") >= 0) player.pregnancyType = 18;
+	if(player.pregnancyType == 14 && player.findPerk(PerkLib.BasiliskWomb) >= 0) player.pregnancyType = 18;
 	//Knock up chances:
-	if((player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0 || player.hasPerk("Basilisk Womb") >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
-		if(player.hasPerk("Basilisk Womb") >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
+	if((player.pregnancyType == 5 || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
+		if(player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if(player.pregnancyType != 5 || player.pregnancyIncubation == 0) {
 				//player.pregnancyIncubation = 250;
 				player.knockUp(18,250);
@@ -73,7 +73,7 @@ public function benoitIntro():void {
 		
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls his claws protectively into what appears to be a pile of robes sitting next to him, which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.hasStatusAffect("heat") >= 0 || player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyType == 5 || player.pregnancyIncubation == 0)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.hasStatusAffect("heat") >= 0 || player.pregnancyType == 5 || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == 5 || player.pregnancyIncubation == 0)) {
 		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
 	}
@@ -89,7 +89,7 @@ public function benoitIntro():void {
 	}
 	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina()) suggest = eggySuggest;
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.hasPerk("Basilisk Womb") < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0) womb = tryToConvertToBassyWomb;
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0) womb = tryToConvertToBassyWomb;
 	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,"Suggest",suggest,"Basil. Womb",womb,"",0,"",0,"",0,"",0,"Leave",2855);
 }
 
@@ -559,7 +559,7 @@ private function eggySuggest():void {
 	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" Benoit says after he's managed to catch his breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at his slightly shell-shocked expression, and the light, happy sound seems to bring him around a bit.  He brushes your shoulder as he walks past you, feeling around the stock room until he finds a chest of drawers.  He opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" he says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	dynStats("lus=", 0);
-	if((player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
+	if((player.pregnancyType == 5 || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
 	}
@@ -775,7 +775,7 @@ private function tryToConvertToBassyWomb():void {
 		
 		outputText("\n\nThe mixture has a lingering bite of mint overlaying the all-consuming burn of alcohol; you are reminded vaguely of the sticky liqueurs that populated the recesses of cupboards back home.  You smack your lips and plonk the bowl back down with deliberate loudness after you have finished; Benoit clutches the counter tensely as you wait.  You haven't died straight away, so that's a positive... an immense gurgle comes from your belly and you double over as your insides shift and the contents of your gut churn.  The sensation is not painful exactly but you feel like you've lost all control of your insides; you clutch your sides and try to breathe levelly as your stomach turns upside down and makes a sound like trapped gas.  Eventually you feel something like a bubble form just below your gut; slowly your insides settle as the bubble grows larger and larger, until the sensation slowly fades.  Cautiously you walk back and forth a few times, before poking your tummy.");
 		//[No oviposition:
-		if(player.hasPerk("Oviposition") < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
+		if(player.findPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
 		else outputText("You feel slightly bloated, but otherwise fine; you sense that were you to get impregnated by basilisk seed, the eggs you produce would be pure basilisk.");
 		
 		outputText("\n\n\"<i>[name]?</i>\" says Benoit nervously.  \"<i>Are you all right?  Shall I call ze sawbones? I will call ze sawbones.  'E is mostly good at taking people apart and putting zem back togezzer again, but I am sure 'e can give you a good purgative if we rush...</i>\"  You toy with the idea of staging a dramatic allergic reaction, but deciding not to fray his nerves any further you tell him you feel absolutely fine.  Indeed, stroking your belly, you are almost certain that it worked.");
@@ -852,7 +852,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	//(Oviposition perk added)
 	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
 	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
-	if(player.hasPerk("Oviposition") < 0) {
+	if(player.findPerk(PerkLib.Oviposition) < 0) {
 		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}

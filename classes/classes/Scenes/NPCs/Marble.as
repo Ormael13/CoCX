@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.Monster;
+	import classes.PerkLib;
 
 	/**
 	 * ...
@@ -26,7 +27,7 @@
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.", false);
 				combatRoundOver();
 				return;
@@ -51,7 +52,7 @@
 				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n", false);
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.", false);
 				combatRoundOver();
 				return;

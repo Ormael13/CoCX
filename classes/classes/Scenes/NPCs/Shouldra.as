@@ -3,7 +3,8 @@ package classes.Scenes.NPCs
 	import classes.CoC;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author ...
@@ -21,12 +22,12 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//("Misdirection"
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.", false);
 				return;
 			}

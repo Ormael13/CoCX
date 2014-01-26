@@ -376,7 +376,7 @@ public function doEvent(eventNo:Number):void
 			outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away. Covered completely in cum, you see that your clitoris swelled up to ", true);
 			spriteSelect(100);
 			//Big clit girls get huge clits
-			if ((player.hasPerk("Big Clit") >= 0 && player.clitLength > 2) || player.clitLength > 3)
+			if ((player.findPerk(PerkLib.BigClit) >= 0 && player.clitLength > 2) || player.clitLength > 3)
 				outputText("almost " + num2Text(Math.floor(player.clitLength * 1.75)) + " inches in length. ", false);
 			//normal girls get big clits
 			else
@@ -394,7 +394,7 @@ public function doEvent(eventNo:Number):void
 		else
 			outputText("too intoxicated with lust continue the pleasure. ", false);
 		//If has big-clit grow to max of 6"
-		if (player.clitLength < 7 && player.clitLength >= 3.5 && player.hasPerk("Big Clit") >= 0)
+		if (player.clitLength < 7 && player.clitLength >= 3.5 && player.findPerk(PerkLib.BigClit) >= 0)
 		{
 			player.clitLength += .1 + player.cor / 100;
 			outputText("Your massive clitty eventually diminishes, retaining a fair portion of it's former glory.  It is now " + int(player.clitLength * 10) / 10 + " inches long when aroused, ", false);
@@ -496,7 +496,7 @@ public function doEvent(eventNo:Number):void
 				booster += 3;
 			else if (player.ballSize < 6)
 				booster += 2;
-			if (player.hasPerk("Messy Orgasms") >= 0 && player.cumMultiplier < 3)
+			if (player.findPerk(PerkLib.MessyOrgasms) >= 0 && player.cumMultiplier < 3)
 				booster += 1;
 			player.cumMultiplier += booster;
 		}
@@ -1590,7 +1590,7 @@ public function doEvent(eventNo:Number):void
 		var ttemp5:Function = null;
 		var ttemp6:Function = null;
 		var ttemp7:Function = null;
-		if (player.hasPerk("Marble's Milk") >= 0 && player.hasItem(consumables.LACTAID, 1))
+		if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1))
 			ttemp2 = marbleScene.giveMarbleLactaid;
 		if (player.hasItem(consumables.P_DRAFT, 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
 			ttemp4 = marbleScene.MarbleDigsDraftsYo;

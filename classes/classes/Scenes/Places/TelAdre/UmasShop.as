@@ -705,7 +705,7 @@
 					PerkLib.ChiReflowMagic,
 					PerkLib.ChiReflowSpeed
 			]){
-				if (player.hasPerk(perk.name) >= 0)
+				if (player.findPerk(perk) >= 0)
 				{
 					return perk;
 				}

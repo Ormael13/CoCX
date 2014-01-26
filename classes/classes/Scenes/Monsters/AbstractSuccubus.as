@@ -4,6 +4,7 @@
 package classes.Scenes.Monsters
 {
 	import classes.Monster;
+	import classes.PerkLib;
 
 	public class AbstractSuccubus extends Monster
 	{
@@ -89,7 +90,7 @@ package classes.Scenes.Monsters
 			//[Kiss of Death Text]
 			outputText("The succubus dances forwards, cocking her elbow back for a vicious strike.", false);
 			//avoid!
-			if (player.spe > spe && rand(4) == 0 || (player.hasPerk("Evade") >= 0 && rand(4) == 0) || (player.hasPerk("Misdirection") >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
+			if (player.spe > spe && rand(4) == 0 || (player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
 				outputText("  You start to sidestep and realize it's a feint.   Ducking low, you slide under her real attack...a kiss?!  ", false);
 				if (player.lust >= 70) outputText("  Maybe you shouldn't have bothered to move, it might have been fun.", false);
 			}

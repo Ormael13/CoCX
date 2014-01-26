@@ -2,6 +2,7 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
 	import classes.CoC_Settings;
 public class SophieScene extends BaseContent {
@@ -688,7 +689,7 @@ private function sophieFucked(dicked:Boolean = true):void {
 
 public function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
-	if(player.hasPerk("Luststick Adapted") >= 0) return;
+	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) return;
 	//Increment luststick resistance
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] += Math.floor(hours/2);
 	if(!player.hasCock()) return;

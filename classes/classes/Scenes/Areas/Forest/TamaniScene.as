@@ -4,7 +4,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Appearance;
 import classes.CockTypesEnum;
-public class TamaniScene extends BaseContent{
+	import classes.PerkLib;
+
+	public class TamaniScene extends BaseContent{
 
 	public function TamaniScene()
 	{
@@ -666,7 +668,7 @@ internal function tamaniKnockUp():void {
 		player.changeStatusValue("Tamani",3,2);
 		var cum:Number = player.cumQ();
 		//Breeder perk is awesome
-		if(player.hasPerk("Marae's Gift - Stud") >= 0) player.addStatusValue("Tamani",3,3);
+		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) player.addStatusValue("Tamani",3,3);
 		if(cum >= 50 && rand(2) == 0) player.addStatusValue("Tamani",3,1);
 		if(cum >= 100 && rand(2) == 0) player.addStatusValue("Tamani",3,1);
 		if(cum >= 200 && rand(2) == 0) player.addStatusValue("Tamani",3,1);

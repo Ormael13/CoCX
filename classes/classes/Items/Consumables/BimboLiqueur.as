@@ -13,7 +13,7 @@ import classes.Appearance;
 
 		override public function canUse(player:Player, output:Boolean):Boolean
 		{
-			if(player.hasPerk("Futa Form") >= 0) {
+			if(player.findPerk(PerkLib.FutaForm) >= 0) {
 				if (output) outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n");
 				return false;
 			}
@@ -23,7 +23,7 @@ import classes.Appearance;
 		private function bimboLiquer(player:Player):void
 		{
 			clearOutput();
-			if (player.hasPerk("Bro Body") >= 0) {
+			if (player.findPerk(PerkLib.BroBody) >= 0) {
 				outputText("You wince as the stuff hits your stomach, already feeling the insidious effects beginning to take hold.  A lengthy belch escapes your lips as your stomach gurgles, and you giggle abashedly to yourself.");
 				if (player.tallness < 77) {
 					outputText(" ...Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!");
@@ -48,7 +48,7 @@ import classes.Appearance;
 
 				outputText("Your surging, absurdly potent libido surges through your body, reminding you that you need to fuck.  Not just bitches, but guys too.  Hard cocks, wet pussies, hell, you don't care.  They can have both or a dozen of either.  You just want to get laid and bone something, hopefully at the same time!");
 				outputText("\n\n<b>(Perks Lost: Bro Body");
-				if (player.hasPerk("Bro Brains") >= 0) outputText(", Bro Brains");
+				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText(", Bro Brains");
 				outputText(")\n");
 				outputText("(Perks Gained: Futa Form, Futa Faculties)\n");
 				player.removePerk(PerkLib.BroBody);
@@ -164,11 +164,11 @@ import classes.Appearance;
 					}
 					outputText("\n\n");
 				}
-				if (player.hasPerk("Bimbo Body") < 0) {
+				if (player.findPerk(PerkLib.BimboBody) < 0) {
 					outputText("<b>(Bimbo Body - Perk Gained!)\n");
 					player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 				}
-				if (player.hasPerk("Bimbo Brains") < 0) {
+				if (player.findPerk(PerkLib.BimboBrains) < 0) {
 					outputText("(Bimbo Brains - Perk Gained!)\n");//int to 20.  max int 50)
 					player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 					if (player.inte > 21) player.inte = 21;

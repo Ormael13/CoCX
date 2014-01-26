@@ -3032,10 +3032,10 @@ public function sandMotherBadEndsLadiesEpilogue():void {
 
 	outputText("\n\nAs best as she could remember, her life had begun only a decade ago, aging quickly to become ready for service in her Sand Mother's coven at the age of five.  She'd been eager to give her milk and use her two wombs to breed as many new sisters as possible.");
 	//if player had the broodmother perk
-	if(player.hasPerk("Brood Mother") >= 0) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
+	if(player.findPerk(PerkLib.BroodMother) >= 0) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
 	
 	//if player had broodmother and gigantic breasts
-	if(player.hasPerk("Brood Mother") >= 0 && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
+	if(player.findPerk(PerkLib.BroodMother) >= 0 && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
 	
 	outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
 	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
@@ -3385,7 +3385,7 @@ public function sendOutOrKeepInEnding():void {
 public function moreCumWitchesPlease():void {
 	clearOutput();
 	//Bimbo version:
-	if(player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0) {
+	if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
 		outputText("Wouldn't it be better if there were like, lots of cum witches, with yummy cocks that you could suck?");
 		outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 		doNext(1);

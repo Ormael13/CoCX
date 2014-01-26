@@ -5,6 +5,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.Tamani;
 
 	/**
@@ -54,7 +55,7 @@
 				return;
 			}
 			//Dodge chance!
-			if((player.hasPerk("Evasion") >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);
 			}
 			else {

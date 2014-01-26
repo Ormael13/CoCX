@@ -2,6 +2,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.ItemType;
+	import classes.PerkLib;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
@@ -596,7 +597,7 @@ public function doCamp():void {
 		}
 	}
 	var baitText:String = "Masturbate";
-	if(player.hasPerk("History: Religious") >= 0 && player.cor <= 66 && !(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)) baitText = "Meditate";
+	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66 && !(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)) baitText = "Meditate";
 	//Initialize companions/followers
 	if(model.time.hours > 4 && model.time.hours < 23) {
 		if(followersCount() > 0) 
@@ -1056,14 +1057,14 @@ public function rest():void {
 			dynStats("tou", -.1, "int", -.1);
 			//fatigue
 			fatigue(-2*timeQ);
-			if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-1*timeQ);
+			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-1*timeQ);
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
 			HPChange(timeQ * 10, true);
 			//fatigue
 			fatigue(-4*timeQ); 
-			if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-2*timeQ);
+			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-2*timeQ);
 		}
 	}
 	else {
@@ -1083,13 +1084,13 @@ public function doWait():void {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			//fatigue
 			fatigue(-1*timeQ); 
-			if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-0.5*timeQ);
+			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-0.5*timeQ);
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
 			//fatigue
 			fatigue(-2*timeQ); 	
-			if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-1*timeQ);
+			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-1*timeQ);
 		}
 	}
 	else {
@@ -1241,14 +1242,14 @@ public function sleepRecovery(display:Boolean = false):void {
 		dynStats("tou", -.1, "int", -.1);
 		//fatigue
 		fatigue(-int(player.fatigue/2));
-		if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-int(player.fatigue/4));
+		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
 	}
 	//Mino withdrawal
 	else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 		if(display) outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n", false);
 		HPChange(timeQ * 15, true);
 		fatigue(-int(player.fatigue/2)); 
-		if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-int(player.fatigue/4)); 
+		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
 	}
 	//REGULAR HP/FATIGUE RECOVERY
 	else {

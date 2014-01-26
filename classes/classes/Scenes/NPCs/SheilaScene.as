@@ -3,7 +3,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 import classes.Appearance;
 import classes.CoC_Settings;
-public class SheilaScene extends NPCAwareContent {
+	import classes.PerkLib;
+
+	public class SheilaScene extends NPCAwareContent {
 
 	public function SheilaScene()
 	{
@@ -2717,7 +2719,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
 			outputText("Perhaps I'll turn you over to a minotaur; you're bound to get better at using your tongue when you're addicted to their amazing seed.  Would you like that?  The first thing you'd see in the morning would be a huge flared cock, right in front of you, dripping with heavenly precum and waiting for your mouth... or your cunt.  You could be just another minotaur-fucking slut of the plains.  ");
 		}
 		outputText("Or I could take you home and give you personal training myself, whenever I feel like it, and invite travelers to do the same");
@@ -3228,7 +3230,7 @@ private function normalSheilaPregNotifREPEATEDED():void {
 	if(sheilaCorruption() > 80) flags[kFLAGS.SHEILA_CORRUPTION] = 80;
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
-	if((player.spe > 80 && player.hasPerk("Runner") >= 0) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
+	if((player.spe > 80 && player.findPerk(PerkLib.Runner) >= 0) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
 		addButton(0,"Help",normalSheilaPregNotifREPEATEDEDHelpABitchOut);
 	addButton(1,"WalkWithHer",normalSheilaPregNotifREPEATEDEDWalkWithHer);
 	addButton(2,"Let Her Go",normalSheilaPregNotifREPEATEDEDLetHerGo);
@@ -3339,7 +3341,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 		fatigue(20);
 	}
 	//(else spd >= 80 and Runner perk)
-	else if(player.spe >= 80 && player.hasPerk("Runner") >= 0) {
+	else if(player.spe >= 80 && player.findPerk(PerkLib.Runner) >= 0) {
 		outputText("\n\n\"<i>Just do what you normally do, and I'll help.</i>\"");
 		
 		outputText("\n\nSheila looks at you blankly, but takes your hand and begins walking.  Or rather, more like meandering.  Her head turns listlessly as she drags you onward.");
@@ -4331,7 +4333,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		player.slimeFeed();
 	}
 	player.clitLength++;
-	if(player.hasPerk("Big Clit") >= 0) player.clitLength += .5;
+	if(player.findPerk(PerkLib.BigClit) >= 0) player.clitLength += .5;
 	if(player.cor < 50) {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);

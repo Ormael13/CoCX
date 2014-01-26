@@ -1621,7 +1621,7 @@ package classes.Scenes.NPCs
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
-			if (player.dragonScore() >= 4 && changes < changeLimit && player.hasPerk("Dragonfire") < 0) {
+			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.Dragonfire) < 0) {
 				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 				outputText("\n\nIt seems Ember's dragon blood has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.\n\n(<b>Gained Perk: Dragonfire!</b>)");
 				player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);
@@ -3222,7 +3222,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\n\"<i>I-I can't keep doing this... you're going to dry me out...</i>\" Ember says, panting in exhaustion, although from " + emberMF("his", "her") + " expression you'd have a hard time believing " + emberMF("he", "she") + " isn't enjoying it.  You give " + emberMF("him", "her") + " an exaggerated pout and tell " + emberMF("him", "her") + " you're not quite done yet.  Surely, just one or two more...?");
 			//[(has History: Slut or Whore)
-			if (player.hasPerk("History: Whore") >= 0 || player.hasPerk("History: Slut") >= 0) outputText("  Using the skills you've honed, you make the muscles in your vagina ripple and wrinkle, teasing the cock caught inside you in a way few women can.");
+			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.HistorySlut) >= 0) outputText("  Using the skills you've honed, you make the muscles in your vagina ripple and wrinkle, teasing the cock caught inside you in a way few women can.");
 			outputText("  Mmm... you can feel your own second orgasm coming in hot.  Maybe after another 4 or 5, you'll let the dragon go...");
 
 			outputText("\n\nEventually, exhausted, belly stuffed with dragon-spunk to the point you look ready to birth a pair of dragon toddlers, and feeling incredibly well-sated, you lay on Ember's chest, cuddling your limp, utterly drained lover.  The dragon is fast asleep, having passed out from exhaustion, and you amuse yourself by listening to " + emberMF("his", "her") + " heart beating as " + emberMF("he", "she") + " inhales and exhales softly in " + emberMF("his", "her") + " sleep.  To be honest, you could use a nap too, and you pass out atop " + emberMF("him", "her") + ".");
@@ -3858,7 +3858,7 @@ package classes.Scenes.NPCs
 				player.cuntChange(80, true, true, false);
 
 				outputText("\n\nYou strain with all your might, drawing on wells of inner strength you weren't even sure you had, hovering ");
-				if (player.hasPerk("Masochist") >= 0) outputText("deliciously ");
+				if (player.findPerk(PerkLib.Masochist) >= 0) outputText("deliciously ");
 				outputText("on the boundary between pleasure and pain.  You aren't sure how much more you can take.");
 
 				outputText("\n\nEmber suddenly withdraws " + emberMF("his", "her") + " tongue and screams in joy, \"<i>I can see it! Push [name]!  You're almost done!</i>\"");
@@ -3942,7 +3942,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber complies, digging deeper into your searing hot canal; one of " + emberMF("his", "her") + " clawed hands, gently reach out to the protruding bulge within your belly, massaging you as best as " + emberMF("he", "she") + " can.  Slowly but steadily, the draconic egg within you starts making its way down your birth canal, stretching you out as it seeks freedom.");
 
 				outputText("\n\nYou strain with all your might, drawing on wells of inner strength you weren't even sure you had, hovering ");
-				if (player.hasPerk("Masochist") >= 0) outputText("deliciously ");
+				if (player.findPerk(PerkLib.Masochist) >= 0) outputText("deliciously ");
 				outputText("on the boundary between pleasure and pain.  You aren't sure how much more you can take.");
 
 				outputText("\n\nEmber suddenly withdraws " + emberMF("his", "her") + " tongue and screams in joy, \"<i>I can see it! Push [name]!  You're almost done!</i>\"");

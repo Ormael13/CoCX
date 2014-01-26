@@ -42,7 +42,7 @@ public function dreamSelect():Boolean {
 	if(player.minotaurAddicted()) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
-		if(player.hasPerk("Minotaur Cum Addict") >= 0) choices[choices.length] = 6;
+		if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) choices[choices.length] = 6;
 	}
 	//Akbal
 	if(flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 4) {
@@ -113,10 +113,10 @@ public function dreamSelect():Boolean {
 	else outputText("\nYou barely rest, spending most of the time touching yourself and dreaming of ", false);
 	//LUST CHANGES
 	//Well adjusted cuts gain in half!
-	if(player.hasPerk("Well Adjusted") < 0) dynStats("lus", (-dreamtemp/2));
+	if(player.findPerk(PerkLib.WellAdjusted) < 0) dynStats("lus", (-dreamtemp/2));
 	//Lust change!
 	dynStats("lus", dreamtemp);
-	if(player.hasPerk("Lusty") >= 0) dynStats("lus", dreamtemp/3);
+	if(player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", dreamtemp/3);
 	//ACTUAL DREAM TEXTS
 	if(dreamtemp > 5) {
 		//Roll for dream!

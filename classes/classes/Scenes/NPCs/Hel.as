@@ -2,7 +2,8 @@ package classes.Scenes.NPCs
 {
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author aimozg
@@ -11,7 +12,7 @@ package classes.Scenes.NPCs
 	{
 
 		private function helAttack():void {
-			var damage:Number = 0;
+			var damage:Number;
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
@@ -25,17 +26,17 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				return;
 			}
 			//("Misdirection"
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				return;
 			}
@@ -65,7 +66,7 @@ package classes.Scenes.NPCs
 		//Attack 2 – Tail Slap (Hit)
 		//low dodge chance, lower damage
 		private function helAttack2():void {
-			var damage:Number = 0;
+			var damage:Number;
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
@@ -79,17 +80,17 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 5) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 5) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n", false);
 				return;
 			}
 			//("Misdirection"
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 5 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 5 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n", false);
 				return;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 3) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 3) {
 				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!", false);
 				return;
 			}
@@ -118,7 +119,7 @@ package classes.Scenes.NPCs
 
 		private function helCleavage():void {
 			//FAIL
-			if((player.hasPerk("Flexibility") >= 0 && rand(100) < 6) || (player.hasPerk("Evade") >= 0 && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if((player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) || (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
 				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n", false);
 			}
 			//Attack 3 – Lust – Cleavage (Failure)

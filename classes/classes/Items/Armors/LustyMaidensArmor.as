@@ -82,19 +82,19 @@ package classes.Items.Armors
 			Min lust: 30
 			Min libido: 50*/
 			if(wearer.hasVirginVagina()) {
-				while(wearer.hasPerk("Slutty Seduction") >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
 				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 			}
 			else {
-				while(wearer.hasPerk("Slutty Seduction") >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,
+				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+				if(wearer.findPerk(PerkLib.SluttySeduction) < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,
 							"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 			}
 		}
 
 		override public function unequipEffect(wearer:Player, output:Boolean):void
 		{
-			while(wearer.hasPerk("Slutty Seduction") >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+			while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
 		}
 
 		//"Chaste" Paizuri - works for most foes with penises.

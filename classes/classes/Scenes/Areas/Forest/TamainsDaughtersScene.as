@@ -7,7 +7,9 @@ import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.Appearance;
 import classes.CockTypesEnum;
-public class TamainsDaughtersScene extends BaseContent {
+	import classes.PerkLib;
+
+	public class TamainsDaughtersScene extends BaseContent {
 
 	public function TamainsDaughtersScene()
 	{
@@ -1007,7 +1009,7 @@ private function knockUpDaughters():void {
 		//Start at 2, add more according to cum levels and chance
 		player.addStatusValue("Tamani",2,2);
 		var cum:Number = player.cumQ();
-		if(player.hasPerk("Marae's Gift - Stud") >= 0) player.addStatusValue("Tamani",2,3);
+		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) player.addStatusValue("Tamani",2,3);
 		if(cum >= 50 && rand(2) == 0) player.addStatusValue("Tamani",2,1);
 		if(cum >= 100 && rand(2) == 0) player.addStatusValue("Tamani",2,1);
 		if(cum >= 200 && rand(2) == 0) player.addStatusValue("Tamani",2,1);

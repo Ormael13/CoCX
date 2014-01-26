@@ -1142,7 +1142,7 @@ private function urtaComboAttack():void {
 	damage += player.weaponAttack;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(rand(100) <= 4 || (player.hasPerk("Tactician") >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 2;
 	}
@@ -1152,7 +1152,7 @@ private function urtaComboAttack():void {
 	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.hasPerk("Lunging Attacks") >= 0) 
+		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
@@ -1166,13 +1166,13 @@ private function urtaComboAttack():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
+	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 	
 	if(damage > 0) {
-		if(player.hasPerk("History: Fighter") >= 0) damage *= 1.1;
+		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
 	if(damage <= 0) {
@@ -1183,7 +1183,7 @@ private function urtaComboAttack():void {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.hasPerk("Brutal Blows") >= 0 && player.str > 75) {
+	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
@@ -1278,7 +1278,7 @@ private function urtaSidewinder():void {
 	damage *= .7;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(rand(100) <= 4 || (player.hasPerk("Tactician") >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 1.75;
 	}
@@ -1288,7 +1288,7 @@ private function urtaSidewinder():void {
 	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.hasPerk("Lunging Attacks") >= 0) 
+		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
@@ -1302,13 +1302,13 @@ private function urtaSidewinder():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
+	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 	
 	if(damage > 0) {
-		if(player.hasPerk("History: Fighter") >= 0) damage *= 1.1;
+		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
 	if(damage <= 0) {
@@ -1319,18 +1319,18 @@ private function urtaSidewinder():void {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.hasPerk("Brutal Blows") >= 0 && player.str > 75) {
+	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if(monster.hasStatusAffect("Stunned") < 0 && monster.hasPerk("Resolute") < 0 && damage > 0) {
+	if(monster.hasStatusAffect("Stunned") < 0 && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
 		if(monster.tou/10 + rand(20) + 1 < 20) {
 			outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
 			monster.createStatusAffect("Stunned",1,0,0,0);
 		}
 	}
-	else if(monster.hasPerk("Resolute") >= 0) {
+	else if(monster.findPerk(PerkLib.Resolute) >= 0) {
 		outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	}
 	outputText("\n", false);
@@ -1401,7 +1401,7 @@ private function urtaVaultAttack():void {
 	damage *= 1.25;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(monster.hasStatusAffect("Stunned") >= 0 || rand(100) <= 4 || (player.hasPerk("Tactician") >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if(monster.hasStatusAffect("Stunned") >= 0 || rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 2;
 	}
@@ -1411,7 +1411,7 @@ private function urtaVaultAttack():void {
 	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.hasPerk("Lunging Attacks") >= 0) 
+		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
@@ -1425,13 +1425,13 @@ private function urtaVaultAttack():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
+	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 	
 	if(damage > 0) {
-		if(player.hasPerk("History: Fighter") >= 0) damage *= 1.1;
+		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
 	if(damage <= 0) {
@@ -1442,7 +1442,7 @@ private function urtaVaultAttack():void {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.hasPerk("Brutal Blows") >= 0 && player.str > 75) {
+	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;

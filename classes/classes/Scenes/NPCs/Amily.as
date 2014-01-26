@@ -3,7 +3,8 @@ package classes.Scenes.NPCs
 	import classes.CoC;
 	import classes.CoC_Settings;
 	import classes.Monster;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author ...
@@ -37,15 +38,15 @@ package classes.Scenes.NPCs
 				dodged = 1;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				dodged = 2;
 			}
 			//("Misdirection"
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				dodged = 3;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				dodged = 4;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -113,15 +114,15 @@ package classes.Scenes.NPCs
 				dodged++;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				dodged++;
 			}
 			//("Misdirection"
-			if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				dodged++;
 			}
 			//Determine if cat'ed
-			if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				dodged++;
 			}
 			//Get hit!
@@ -163,15 +164,15 @@ package classes.Scenes.NPCs
 				dodged = 1;
 			}
 			//Determine if evaded
-			if (player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				dodged = 2;
 			}
 			//("Misdirection"
-			if (player.hasPerk("Misdirection") >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
 				dodged = 3;
 			}
 			//Determine if cat'ed
-			if (player.hasPerk("Flexibility") >= 0 && rand(100) < 15) {
+			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 15) {
 				dodged = 4;
 			}
 			//Dodged

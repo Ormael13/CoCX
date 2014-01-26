@@ -171,7 +171,7 @@
 				Changed = true;
 			}
 			//Fix if it went out of bounds!
-			if (hasPerk("Androgyny") < 0)
+			if (findPerk(PerkLib.Androgyny) < 0)
 				fixFemininity();
 			//Abort if nothing changed!
 			if (!Changed)
@@ -198,7 +198,6 @@
 		
 		public function modThickness(goal:Number, strength:Number = 1):String
 		{
-			var oldN:Number = thickness;
 			if (goal == thickness)
 				return "";
 			//Lose weight fatty!
@@ -229,7 +228,6 @@
 		
 		public function modTone(goal:Number, strength:Number = 1):String
 		{
-			var oldN:Number = tone;
 			if (goal == tone)
 				return "";
 			//Lose muscle visibility!
@@ -330,10 +328,7 @@
 		
 		public function hasBeard():Boolean
 		{
-			if (beardLength > 0)
-				return true;
-			else
-				return false;
+			return beardLength > 0;
 		}
 		
 		public function beard():String
@@ -452,8 +447,8 @@
 		}
 
 		public function isPregnant():Boolean {
-			if (pregnancyIncubation == 0) return false;
-			return true;
+			return pregnancyIncubation != 0;
+
 		}
 		//fertility must be >= random(0-beat)
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
@@ -479,7 +474,7 @@
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != 1 && type != 5 && type != 10)
 			{
-				if (hasPerk("Spider Ovipositor") >= 0 || hasPerk("Bee Ovipositor") >= 0)
+				if (findPerk(PerkLib.SpiderOvipositor) >= 0 || findPerk(PerkLib.BeeOvipositor) >= 0)
 				{
 					if (totalFertility() + bonus > Math.floor(Math.random() * beat))
 					{
@@ -517,8 +512,8 @@
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
-			var keySlot:Number = 0
-			var counter:Number = 0
+			var keySlot:Number = 0;
+			var counter:Number = 0;
 			//Start the array if its the first bit
 			if (keyItems.length == 0)
 			{
@@ -584,7 +579,6 @@
 			{
 				trace("New Key Item Belongs at the end!! " + keyName);
 				keyItems.push(newKeyItem);
-				arrayed = true;
 				keySlot = keyItems.length - 1;
 			}
 			
@@ -650,7 +644,6 @@
 				}
 			}
 			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
-			return;
 		}
 		
 		public function keyItemv1(statusName:String):Number
@@ -791,9 +784,8 @@
 		
 		public function hasSheath():Boolean
 		{
-			if (dogCocks() > 0 || horseCocks() > 0 || catCocks() > 0 || kangaCocks() > 0 || displacerCocks() > 0)
-				return true;
-			return false;
+			return dogCocks() > 0 || horseCocks() > 0 || catCocks() > 0 || kangaCocks() > 0 || displacerCocks() > 0;
+
 		}
 		
 		public function hasKnot(arg:int = 0):Boolean
@@ -808,9 +800,9 @@
 		{
 			var max:Number = 0;
 			max += int(tou * 2 + 50);
-			if (hasPerk("Tank") >= 0) max += 50;
-			if (hasPerk("Tank 2") >= 0) max += Math.round(tou);
-			if (hasPerk(PerkLib.ChiReflowDefense.name) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
+			if (findPerk(PerkLib.Tank) >= 0) max += 50;
+			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
+			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			if (level <= 20) max += level * 15;
 			else max += 20 * 15;
 			max = Math.round(max);

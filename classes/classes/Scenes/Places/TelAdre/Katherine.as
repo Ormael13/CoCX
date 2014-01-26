@@ -2,7 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 import classes.Appearance;
-public class Katherine extends TelAdreAbstractContent{
+	import classes.PerkLib;
+
+	public class Katherine extends TelAdreAbstractContent{
 
 	public function Katherine()
 	{
@@ -640,7 +642,7 @@ private function suckNFuck():void {
 	outputText("Still smiling, she begins to gently stroke her sheath, balls and pussy, coaxing out her dog cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(".  Making sure she's positioned so that she's not going to tumble off in mid-fuck, she takes hold of her thighs and bends over... and over... until she has practically pressed her nose into her own crotch.", false);
-	if(player.hasPerk("Flexibility") < 0) outputText("  The sight is enough to make your spine wince in sympathy.", false);
+	if(player.findPerk(PerkLib.Flexibility) < 0) outputText("  The sight is enough to make your spine wince in sympathy.", false);
 	//(player has Feline Flexibility: 
 	else outputText("  You watch how she does it, resolving to test your body and see if you can bend like that.", false);
 	outputText("  Having loosened up, she straightens her back until her mouth is hovering in front of the tip of her ", false);
@@ -1497,10 +1499,10 @@ private function suckleTacularKats():void {
 	outputText("your eyes and gently take her by the cheeks, insistently bringing her head close so that her lips are bumping right against your " + nippleDescript(0) + "s.  She takes the obvious hint and eagerly swallows it, eyes closing as she leans in and starts to suckle.  Purring with contentment, she sends the most delicious vibrations into your breasts, her rough, bristly tongue stroking and caressing to help coax your body into giving up its sweet, rich milk.\n\n", false);
 	
 	outputText("You're not sure how long you sit there with her in your arms, just listening to her purr as she quietly sucks and slurps, drinking everything you have to give.  She ", false);
-	if(player.hasPerk("Feeder") < 0 && player.lactationQ() < 1000) outputText("empties", false);
+	if(player.findPerk(PerkLib.Feeder) < 0 && player.lactationQ() < 1000) outputText("empties", false);
 	else outputText("does her best to empty", false);
 	outputText(" your first breast, and then moves to the next one.  Finally, she's ", false);
-	if(player.hasPerk("Feeder") < 0 && player.lactationQ() < 1000) outputText("drunk you dry", false);
+	if(player.findPerk(PerkLib.Feeder) < 0 && player.lactationQ() < 1000) outputText("drunk you dry", false);
 	else outputText("drunk so much of your seemingly inexhaustible supply of milk that she's physically incapable of drinking any more", false);
 	outputText(", and she lets your nipple go with a loud pop.", false);
 	if(player.lactationQ() < 500) {}

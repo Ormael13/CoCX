@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
 
 	public class Vapula extends NPCAwareContent
 	{
@@ -978,7 +979,7 @@ package classes.Scenes.NPCs
 			outputText("  Her tail goes wild at the impact, whipping around in a frenzy and actually managing to slap your cheek!  That bitch!");
 			outputText("\n\nThis time, your hand cocks and releases in a split-second, coming down with even more force than before.  Vapula screams, \"<i>Ow! Stop it, by Lethice, please!</i>\"  This time, her thrashing, spaded tail stays obediently low, harmlessly cutting through the air so as not to irritate you.");
 			outputText("\n\n\"<i>That's better,</i>\" you growl as you admire her gradually reddening bottom.  It's certainly unusual to watch a purple behind turn red, quite the opposite of how it would look on a normal person.  Still, two red handprints quickly become apparent on the closest cheek, one laid over top of the other.  \"<i>Now hold still and take your punishment,</i>\" you order, \"<i>I expect a demon like you ought to be enough of a pain-loving masochist to get off before I finish.  Isn't that right?</i>\"  You smack her other, untouched cheek for a bit of audible punctuation and smile at the high pitched peep of pain that she makes.");
-			if (player.hasPerk("Sadist") >= 0) outputText("  Dishing out all this suffering is getting you a little hot under the collar, and you squirm a bit in place in anticipation of the pain to come.");
+			if (player.findPerk(PerkLib.Sadist) >= 0) outputText("  Dishing out all this suffering is getting you a little hot under the collar, and you squirm a bit in place in anticipation of the pain to come.");
 			outputText("\n\nVapula scrunches her eyes shut and shakes her purple hair around, barely making a sound outside of her instinctive peep at the hit.  You lift your palm again and bring it down in another spank, not quite as hard as the last but in the same place.  She bites her lip but stays blissfully silent.  Well, at least she's not calling every imp in a five mile radius to come bother you.  You paddle her again, finding some untouched lavender flesh to abuse while you watch the new handprints appear on her shapely behind.  Tears well up at the corners of the succubus's eyes, and she makes a start at talking.");
 			outputText("\n\nYou interrupt, scolding, \"<i>Don't even start.  You swore to obey me as your [master] and you broke that promise.  Now you have to endure this.  Buckle up, sweatheart.</i>\"");
 			outputText("\n\nYou begin to attack her bottom with a barrage of quick slaps, bouncing the purple derriere back and forth from the hard-hitting strikes.  You don't spend too much time in any one place, instead trying to make sure you hit every untouched, unmarked portion of that beautiful butt.  Soon your slave's bouncy cheeks are tanned to the point where they seem to glow a rosy red, tender and sore.  Vapula bites her lips with each impact and tries to hold back her tears, but they flow on, unabated.");
@@ -993,7 +994,7 @@ package classes.Scenes.NPCs
 			//{+20ish lust}
 			dynStats("lus", (10 + player.lib / 7));
 			//{Sadist: + 20 lust}
-			if (player.hasPerk("Sadist") >= 0) dynStats("lus", (10 + player.lib / 7));
+			if (player.findPerk(PerkLib.Sadist) >= 0) dynStats("lus", (10 + player.lib / 7));
 			flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 0;
 			doNext(13);
 		}

@@ -2,6 +2,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class SandWitchScene extends BaseContent{
 
@@ -866,7 +867,7 @@ private function sandwitchSpanking():void {
 	if(player.hasCock()) outputText("Worse still, [eachCock] is now unprotected and pressed against the rough stone by your body-weight.  It's less than pleasant.  ");
 	else if(player.hasVagina()) outputText("Worse still, your [vagina] is pressed up against the rough stone.  It's less than pleasant.  ");
 	outputText("You bristle at your helplessness");
-	if(player.hasPerk("Fire Lord") >= 0 || player.hasPerk("Hellfire") >= 0 || player.hasPerk("Dragonfire") >= 0) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
+	if(player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.Dragonfire) >= 0) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
 	else outputText(", but there's nothing you can do");
 	outputText(".  Fingers tickle the " + player.skin() + " of your bottom, and then, without warning, your [butt] is slapped!  The sound of the hit rings out across the desert, hard enough to make moisture bead at the corners of your eyes.");
 	outputText("\n\nThe smirking sorceress laughs, \"<i>You are too prideful for your own good.  Now, I will teach you respect for our order, one spank at a time.</i>\"  She doesn't even wait before hitting you again, bringing her hand down on your unprotected ass without hesitation.  You squirm from pain, trying to escape, to wiggle free, but there's no use - you're tied down with stone restraints that you can't hope to escape.  All you can do is writhe uselessly against your bindings while your [butt] is tanned bright red, tingling with residual pain even when it isn't being hit.");

@@ -2,7 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
-public class Scylla extends TelAdreAbstractContent{
+	import classes.PerkLib;
+
+	public class Scylla extends TelAdreAbstractContent{
 
 	public function Scylla()
 	{
@@ -640,10 +642,10 @@ private function scyllaPtVShare():void {
 	outputText("What addiction would you like to discuss?", false);
 	//Set choices
 	var milk:Function = null;
-	if((player.hasPerk("Marble's Milk") >= 0 || player.statusAffectv3("Marble") > 0) && player.hasPerk("Marble Resistant") < 0)
+	if((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusAffectv3("Marble") > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
 		milk = scyllaPtVMilk;
 	var cum:Function = null;
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.hasPerk("Minotaur Cum Addict") >= 0) cum = scyllaPtVCum;
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) cum = scyllaPtVCum;
 	var sex:Function = null;
 	if(player.lib >= 85 || player.minLust() >= 20) sex = scyllaPtVSex;
 	var tentacles:Function = null;

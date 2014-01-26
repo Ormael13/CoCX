@@ -1567,7 +1567,7 @@ public function unFuckSave():void
 	//Fixing shit!
 
 	// Fix duplicate elven bounty perks
-	if(player.hasPerk("Elven Bounty") >= 0) {
+	if(player.findPerk(PerkLib.ElvenBounty) >= 0) {
 		//CLear duplicates
 		while(player.perkDuplicated("Elven Bounty")) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value

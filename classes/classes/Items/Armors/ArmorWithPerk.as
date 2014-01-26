@@ -19,13 +19,13 @@ package classes.Items.Armors
 
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			if(player.hasPerk(playerPerk.id) < 0)
+			if(player.findPerk(playerPerk) < 0)
 				player.createPerk(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4,playerPerkDesc);
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			while(player.hasPerk(playerPerk.id) >= 0) player.removePerk(playerPerk);
+			while(player.findPerk(playerPerk) >= 0) player.removePerk(playerPerk);
 		}
 
 		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String=null)

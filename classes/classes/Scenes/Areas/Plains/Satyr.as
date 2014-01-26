@@ -6,7 +6,8 @@ package classes.Scenes.Areas.Plains
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author aimozg
@@ -69,7 +70,7 @@ package classes.Scenes.Areas.Plains
 				if(damage > 0) {
 					damage = player.takeDamage(damage);
 					outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-					if(player.hasPerk("Resolute") < 0) {
+					if(player.findPerk(PerkLib.Resolute) < 0) {
 						outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
 						player.createStatusAffect("Stunned",0,0,0,0);
 					}

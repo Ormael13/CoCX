@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
+	import classes.PerkLib;
 
 	public class Rathazul extends NPCAwareContent {
 
@@ -194,7 +195,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = 1059;
 	}
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) {
-		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0)) {
+		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
 		}

@@ -5,6 +5,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.ItemType;
+	import classes.PerkLib;
 	import classes.Scenes.NPCs.MarbleScene;
 	import classes.Scenes.Places.Farm.*;
 
@@ -214,7 +215,7 @@ private function workFarm():void {
 				return;
 			}
 			else {
-				if(player.hasPerk("Marble Resistant") >= 0) {
+				if(player.findPerk(PerkLib.MarbleResistant) >= 0) {
 					//(work with Marble when helping)
 					marbleScene.postAddictionFarmHelpings();
 					return;
@@ -295,7 +296,7 @@ private function meetMarble():void {
 		else marbleScene.encounterMarbleExploring2();
 	}
 	else {
-		if(player.hasPerk("Marble Resistant") >= 0) {
+		if(player.findPerk(PerkLib.MarbleResistant) >= 0) {
 			marbleScene.postAddictionFarmExplorings();
 			return;
 		}

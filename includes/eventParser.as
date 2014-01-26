@@ -427,10 +427,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 		if(player.ballSize > 400) player.ballSize = 400;
-		if(player.hasPerk("Strong Back") >= 0 && !player.itemSlot4.unlocked) {
+		if(player.findPerk(PerkLib.StrongBack) >= 0 && !player.itemSlot4.unlocked) {
 			player.itemSlot4.unlocked = true;
 		}
-		if(player.hasPerk("Strong Back 2: Strong Harder") >= 0 && !player.itemSlot5.unlocked) {
+		if(player.findPerk(PerkLib.StrongBack2) >= 0 && !player.itemSlot5.unlocked) {
 			player.itemSlot5.unlocked = true;
 		}
 		if(flags[kFLAGS.SOCK_COUNTER] > 0) {
@@ -455,23 +455,23 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		
 		player.hoursSinceCum++;
 		//Super cumbuilding activate!
-		if(player.hasPerk("Marae's Gift - Profractory") >= 0) player.hoursSinceCum += 2;
-		if(player.hasPerk("Fera's Boon - Alpha") >= 0) player.hoursSinceCum += 2;
+		if(player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;
+		if(player.findPerk(PerkLib.FerasBoonAlpha) >= 0) player.hoursSinceCum += 2;
 		timeQ--;
 		//Normal
 		if(flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
-		if(player.hasPerk("Well Adjusted") < 0) {
+		if(player.findPerk(PerkLib.WellAdjusted) < 0) {
 			//Raise lust
 			dynStats("lus", player.lib * 0.04, "resisted", false);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.02, "resisted", false);
+			if(player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.02, "resisted", false);
 		}
 		//Well adjusted perk
 		else {
 			//Raise lust
 			dynStats("lus", player.lib * 0.02);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.01, "resisted", false);
+			if(player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false);
 		}
 		//Rathazul crafting countdown
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] > 1) {
@@ -695,7 +695,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
 		}
 		//Wet pussy check!
-		if(player.hasPerk("Wet Pussy") >= 0 && player.vaginas.length > 0) {
+		if(player.findPerk(PerkLib.WetPussy) >= 0 && player.vaginas.length > 0) {
 			if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) {
 				outputText("\n<b>Your " + vaginaDescript(0) + " returns to its normal, wet state.</b>\n", false);
 				needNext = true;
@@ -714,7 +714,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 		}		
 		//Make eggs big if harpied!
-		if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.hasPerk("Harpy Womb") >= 0 && player.hasStatusAffect("eggs") >= 0) {
+		if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0 && player.hasStatusAffect("eggs") >= 0) {
 			if(player.statusAffectv2("eggs") == 0) {
 				player.changeStatusValue("eggs",2,1);
 				outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n", false);
@@ -761,7 +761,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//EMBER STUFF
 		if(emberScene.followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
 			//Mino cum freakout - PC partly addicted!
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.hasPerk("Minotaur Cum Addict") < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
 				emberScene.minotaurJizzFreakout();
 				needNext = true;
 			}
@@ -784,7 +784,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		telAdre.cotton.cottonPregUpdates();
 		//Fix femininity ratings if out of whack!
-		if(player.hasPerk("Androgyny") < 0) 
+		if(player.findPerk(PerkLib.Androgyny) < 0)
 			textHolder = player.fixFemininity();
 		if(textHolder != "") {
 			outputText(textHolder, false);
@@ -952,14 +952,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Check for gain of cat agility - requires legs, tail, and ears
 		if(player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) {
-			if(player.hasPerk("Flexibility") < 0) {
+			if(player.findPerk(PerkLib.Flexibility) < 0) {
 				outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n", false);
 				needNext = true;
 				player.createPerk(PerkLib.Flexibility,0,0,0,0);
 			}
 		}
 		//Remove flexibility perk if not meeting requirements
-		else if(player.hasPerk("Flexibility") >= 0) {
+		else if(player.findPerk(PerkLib.Flexibility) >= 0) {
 			outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.\n\n(<b>Lost Perk: Flexibility</b>)\n", false);
 			needNext = true;
 			player.removePerk(PerkLib.Flexibility);
@@ -1074,15 +1074,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Spider Oviposits!
-		if(player.hasPerk("Spider Ovipositor") >= 0 || player.hasPerk("Bee Ovipositor") >= 0) {
+		if(player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0) {
 			//Remove dat shit!
-			if(player.hasPerk("Spider Ovipositor") >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) {
+			if(player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 				player.removePerk(PerkLib.SpiderOvipositor);
 				needNext = true;
 			}
 			//Remove dat shit!
-			else if(player.hasPerk("Bee Ovipositor") >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) {
+			else if(player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 				player.removePerk(PerkLib.BeeOvipositor);
 				needNext = true;
@@ -1099,7 +1099,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				else if(model.time.hours % 4 == 0) {
 					player.addEggs(1);
 				}
-				if(player.hasPerk("Spider Ovipositor") >= 0) {
+				if(player.findPerk(PerkLib.SpiderOvipositor) >= 0) {
 					//Egg Build up Texts:
 					if(temp < 10 && player.eggs() >= 10) {
 						outputText("\nYou feel a certain fullness building in your spider-half's abdomen.  <b>You have enough eggs to lay!</b>\n");
@@ -1150,7 +1150,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Check ninetails perks!
-		if(player.hasPerk("Enlightened Nine-tails") >= 0 || player.hasPerk("Corrupted Nine-tails") >= 0) {
+		if(player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
 			if(player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9) {
 				needNext = true;
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
@@ -1159,21 +1159,21 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Lose diapause
-		if(!player.hasVagina() && player.hasPerk("Diapause") >= 0) {
+		if(!player.hasVagina() && player.findPerk(PerkLib.Diapause) >= 0) {
 			outputText("\n<b>With the loss of your womb, you lose your kangaroo-like diapause ability.</b>\n");
 			player.removePerk(PerkLib.Diapause);
 			needNext = true;
 		}
 		//Oviposition perk for lizard folks
-		if(player.hasPerk("Oviposition") >= 0 || player.hasPerk("Bunny Eggs") >= 0) {
+		if(player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BunnyEggs) >= 0) {
 			//If too 'unlizardy', stop it
 			//--Lose Oviposition perk if lizard score gets below 3.
-			if((player.nagaScore() + player.lizardScore()) < 3 && player.hasPerk("Oviposition") >= 0 && player.hasPerk("Basilisk Womb") < 0) {
+			if((player.nagaScore() + player.lizardScore()) < 3 && player.findPerk(PerkLib.Oviposition) >= 0 && player.findPerk(PerkLib.BasiliskWomb) < 0) {
 				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost a little bit of reptilian reproductive ability.\n(<b>Perk Lost: Oviposition</b>)\n", false);
 				needNext = true;
 				player.removePerk(PerkLib.Oviposition);
 			}
-			else if(player.bunnyScore() < 3 && player.hasPerk("Bunny Eggs") >= 0) {
+			else if(player.bunnyScore() < 3 && player.findPerk(PerkLib.BunnyEggs) >= 0) {
 				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
 				needNext = true;
 				player.removePerk(PerkLib.BunnyEggs);
@@ -1208,7 +1208,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Prevent Buttsluts from getting dry backdoors
-		if(player.hasPerk("Marae's Gift - Buttslut") >= 0 && player.ass.analWetness < 2) {
+		if(player.findPerk(PerkLib.MaraesGiftButtslut) >= 0 && player.ass.analWetness < 2) {
 			outputText("\n<b>Your " + assholeDescript() + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n", false);
 			needNext = true;
 			player.ass.analWetness = 2;
@@ -1266,7 +1266,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("infested") < 0)
 			flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 0;
 		//Futa checks
-		if(player.hasPerk("Futa Form") >= 0) {
+		if(player.findPerk(PerkLib.FutaForm) >= 0) {
 			//(Dick regrowth) 
 			if(!player.hasCock()) {
 				player.createCock();
@@ -1301,7 +1301,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.breastRows[0].breastRating < 5) 
 			{
 				player.breastRows[0].breastRating = 5;
-				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n", false);
+				if(player.findPerk(PerkLib.FutaFaculties) >= 0) outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
 				dynStats("int", -1, "lus", 15);
@@ -1309,19 +1309,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Vagoo
 			if(!player.hasVagina()) {
 				player.createVagina();
-				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Damn!  There's a wet little slit opening up, and it's all tingly!  It feels so good, why would you have ever gotten rid of it?</b>\n", false);
+				if(player.findPerk(PerkLib.FutaFaculties) >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Damn!  There's a wet little slit opening up, and it's all tingly!  It feels so good, why would you have ever gotten rid of it?</b>\n", false);
 				else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n", false);
 				dynStats("int", -1, "sen", 10, "lus", 15);
 				needNext = true;
 			}
 		}
 		//Bimbo checks
-		if(player.hasPerk("Bimbo Body") >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) {
+		if(player.findPerk(PerkLib.BimboBody) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) {
 			//Tits!
 			if(player.breastRows[0].breastRating < 5) 
 			{
 				player.breastRows[0].breastRating = 5;
-				if(player.hasPerk("Bimbo Brains") >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
+				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
 				dynStats("int", -1, "lus", 15);
@@ -1329,19 +1329,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Vagoo
 			if(!player.hasVagina()) {
 				player.createVagina();
-				if(player.hasPerk("Bimbo Brains") >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n", false);
+				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n", false);
 				else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n", false);
 				needNext = true;
 			}
 			if(player.hipRating < 12) {
-				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
+				if(player.findPerk(PerkLib.BimboBrains) >= 0) outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 				else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
 				dynStats("int", -1);
 				player.hipRating = 12;
 				needNext = true;
 			}
 			if(player.buttRating < 12) {
-				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
+				if(player.findPerk(PerkLib.BimboBrains) >= 0) outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
 				else outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  Oh, no!  You thought that having a big, bloated bimbo-butt was a thing of the past, but with how it's tingling under your groping fingertips, you have no doubt that you're about to see the second coming of your sexy ass.  Wait, how did your fingers get down there?  You pull your hands away somewhat guiltily as you feel your buttcheeks expanding.  Each time you bounce and shake your new derriere, you moan softly in enjoyment.  Damnit!  You force yourself to stop just as your ass does, but when you set off again, you can feel it bouncing behind you with every step.  At least it'll help you tease your foes a little more effectively...\n");
 				dynStats("int", -1, "lus", 10);
 				player.buttRating = 12;
@@ -1349,7 +1349,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Bro checks
-		if(player.hasPerk("Bro Body") >= 0) {
+		if(player.findPerk(PerkLib.BroBody) >= 0) {
 			player.removeStatusAffect("Feeder");
 			player.removePerk(PerkLib.Feeder);
 			//(Dick regrowth) 
@@ -1369,7 +1369,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//(Dick rebiggening) 
 			if(player.cocks[0].cockLength < 10) {
 				outputText("\n<b>As time passes, your cock engorges, flooding with blood and growing until it's at 10 inches long.  ", false);
-				if(player.hasPerk("Bro Brains") >= 0) outputText("Goddamn, that thing is almost as tough as you!  ", false);
+				if(player.findPerk(PerkLib.BroBrains) >= 0) outputText("Goddamn, that thing is almost as tough as you!  ", false);
 				outputText("You really have no control over your dick.</b>\n", false);
 				player.cocks[0].cockLength = 10;
 				if(player.cocks[0].cockThickness < 2) player.cocks[0].cockThickness = 2;
@@ -1527,7 +1527,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.removeStatusAffect("Jizzpants");
 		}
 		//Marble's Milk Status!
-		if(player.hasStatusAffect("Marbles Milk") >= 0 && player.hasPerk("Marble's Milk") < 0) {
+		if(player.hasStatusAffect("Marbles Milk") >= 0 && player.findPerk(PerkLib.MarblesMilk) < 0) {
 			//Decrement time remaining by 1		
 			player.addStatusValue("Marbles Milk",1,-1);
 			//Remove the status and stat boosts when time runs out on the milk
@@ -1561,7 +1561,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}			
 		}
 		//Go into withdrawl if your addicted and don't have a reason not to be withdrawn.
-		if(player.statusAffectv3("Marble") > 0 && player.hasPerk("Marble Resistant") < 0 && player.hasPerk("Marble's Milk") < 0 && player.statusAffectv2("Marble") > 25) {
+		if(player.statusAffectv3("Marble") > 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.statusAffectv2("Marble") > 25) {
 			//If player does not have marble's milk or bottled milk, go into withdrawl
 			if(player.hasStatusAffect("Marbles Milk") < 0 && player.hasStatusAffect("Bottled Milk") < 0) {
 				//If player is not yet in withdrawl
@@ -1647,7 +1647,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("CuntStretched") >= 0) {
 			player.addStatusValue("CuntStretched",1,1);
 			if(player.vaginas.length > 0) {
-				if(player.hasPerk("Fera's Boon - Wide Open") < 0) {
+				if(player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
 				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusAffectv1("CuntStretched") >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
@@ -1704,7 +1704,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Lose slime core perk
-		if(player.hasPerk("Slime Core") >= 0) {
+		if(player.findPerk(PerkLib.SlimeCore) >= 0) {
 			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
 				//outputText("\n<b>Your slime core fades away inside of you, now lost forever.</b>\n", false);
 				outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into " + player.skin() + " while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your " + player.armorName + " as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n", false);
@@ -1718,7 +1718,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Regain slime core
 		if(player.hasKeyItem("Ruby Heart") >= 0) {
-			if(player.hasStatusAffect("Slime Craving") >= 0 && player.hasPerk("Slime Core") < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
+			if(player.hasStatusAffect("Slime Craving") >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
 				outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
 				
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n", false);
@@ -1738,7 +1738,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			else {
 				//Slime core reduces fluid need rate
-				if(player.hasPerk("Slime Core") >= 0) player.addStatusValue("Slime Craving",1,.5);
+				if(player.findPerk(PerkLib.SlimeCore) >= 0) player.addStatusValue("Slime Craving",1,.5);
 				else player.addStatusValue("Slime Craving",1,1);
 				if(player.statusAffectv1("Slime Craving") >= 18) {
 					if(player.hasStatusAffect("Slime Craving Output") < 0) {
@@ -1785,13 +1785,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			helFollower.sleepyNightMareHel();
 		}
 		//Luststick resistance unlock
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.hasPerk("Luststick Adapted") < 0) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) {
 			sophieBimbo.unlockResistance();
 			needNext = true;
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+		if((player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
 			sophieBimbo.bimboSophieLustStickSurprise();
 			needNext = true;
 		}
@@ -2155,7 +2155,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Bee dreams proc
-		if(player.hasCock() && player.hasPerk("Bee Ovipositor") >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.findPerk(PerkLib.BeeOvipositor) >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//happens at first sleep after hitting stage 3 unfertilized
 			//To Wong Foo, Thanks for Everything, Julie Newmar
 			outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
@@ -2180,7 +2180,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Drider dreams proc
-		if(player.hasCock() && player.hasPerk("Spider Ovipositor") >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.findPerk(PerkLib.SpiderOvipositor) >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//parser calls go to the player's attributes here
 			outputText("\nIn a moonlit forest, you hang upside down from a thick tree branch suspended by only a string of webbing.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap you've set.  Your breath catches as " + player.mf("he","she") + " finally encounters your web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, wrapping " + player.mf("him","her") + " in an elegant silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Positioning your catch against the tree's trunk, you sink your fangs through the web and into flesh, feeling " + player.mf("his","her") + " body heat with every drop of venom.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
 			if(player.gender == 3) outputText(vaginaDescript(0) + " and ");
@@ -2253,7 +2253,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//The more imps you create, the more often you get gangraped. 
 		temp = player.statusAffectv1("Birthed Imps") * 2;
 		if(temp > 7) temp = 7;
-		if(player.hasPerk("Pierced: Lethite") >= 0) temp += 4;
+		if(player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 		if(player.hasStatusAffect("heat") >= 0) temp += 2;
 		if(vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
@@ -2384,7 +2384,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//MARBLE STUFF
 		//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && model.time.hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
@@ -2468,7 +2468,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && model.time.hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
@@ -2635,13 +2635,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
+		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
 			isabellaFollowerScene.isabellaMorningWakeupCall();
 			return true;
 		}
 		//Morning Marble Meetings
-		if(model.time.hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
+		if(model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
 			//Marble is at camp
 			if(player.hasStatusAffect("Camp Marble") >= 0) {
 				marbleScene.postAddictionCampMornings(false);
@@ -2676,7 +2676,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 		}
 		//No diapause?  Normal!
-		if(player.hasPerk("Diapause") < 0) {
+		if(player.findPerk(PerkLib.Diapause) < 0) {
 			if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 			if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 			//Make sure pregnancy texts aren't hidden
@@ -2686,14 +2686,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Marae's Gift - Fertility") >= 0) {
+			if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Magical Fertility") >= 0) {
+			if(player.findPerk(PerkLib.MagicalFertility) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -2703,13 +2703,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
 				return true;
 			}
-			if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) {
+			if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
-			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
+			if(player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -2720,7 +2720,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Brood Mother") >= 0) {
+			if(player.findPerk(PerkLib.BroodMother) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -2766,14 +2766,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Marae's Gift - Fertility") >= 0) {
+			if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Magical Fertility") >= 0) {
+			if(player.findPerk(PerkLib.MagicalFertility) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -2783,13 +2783,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
 				return true;
 			}
-			if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) {
+			if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
-			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
+			if(player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -2800,7 +2800,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//DOUBLE PREGGERS SPEED
-			if(player.hasPerk("Brood Mother") >= 0) {
+			if(player.findPerk(PerkLib.BroodMother) >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden

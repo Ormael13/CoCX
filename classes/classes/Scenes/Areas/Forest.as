@@ -7,10 +7,10 @@ package classes.Scenes.Areas
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.Monsters.GoblinAssassinScene;
 	import classes.Scenes.NPCs.Jojo;
 
 	use namespace kGAMECLASS;
@@ -36,7 +36,7 @@ package classes.Scenes.Areas
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1("exploredDeepwoods") % 10 == 0 && isHalloween()) {
 				//If Fera isn't free yet...
-				if (player.hasPerk("Fera's Boon - Breeding Bitch") < 0 && player.hasPerk("Fera's Boon - Alpha") < 0) {
+				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0 && player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
 					if (date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE]) {
 						kGAMECLASS.pumpkinFuckEncounter();
 						return;
@@ -180,7 +180,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Raise Jojo chances for furrite
-			if (player.hasPerk("Pierced: Furrite") >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) {
+			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) {
 				chooser = 1;
 			}
 			//If Jojo lives in camp, never encounter him
@@ -230,7 +230,7 @@ package classes.Scenes.Areas
 				if (player.hasVagina()) impGob++;
 				if (player.fertility + player.bonusFertility() >= 30) impGob++;
 				if (player.cumQ() >= 200) impGob--;
-				if (player.hasPerk("Pierced: Lethite") >= 0) {
+				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
 					if (impGob <= 3) impGob += 2;
 					else if (impGob < 7) impGob = 7;
 				}

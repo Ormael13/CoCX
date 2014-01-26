@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class GoblinScene extends BaseContent
 	{
@@ -47,7 +48,7 @@ package classes.Scenes.Monsters
 		{
 			spriteSelect(24);
 			outputText("", true);
-			if (player.hasPerk("Bimbo Brains") >= 0) {
+			if (player.findPerk(PerkLib.BimboBrains) >= 0) {
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {
 					outputText(images.showImage("goblin-loss-female-bimbodildo"));
@@ -145,7 +146,6 @@ package classes.Scenes.Monsters
 					outputText("She giggles again and leans over to kiss you on the lips, smearing her thick bubbly lips across your own and leaving you tasting the bubble-gum of her lipstick.  You find yourself smiling dreamily and slipping into unconsciousness...there must have been something in that lipstick!", false);
 					cleanupAfterCombat();
 					dynStats("lus=", 0);
-					return;
 				}
 				//[DICK FITS]
 				else {

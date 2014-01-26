@@ -115,7 +115,7 @@ public function customPCSetup():void {
 	}
 	if(player.short == "Leah") {
 		player.armor = armors.LEATHRA;
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
+		if(player.findPerk(PerkLib.WizardsEndurance) < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
 		player.weapon = weapons.W_STAFF;
 		player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
 		player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
@@ -555,8 +555,7 @@ public function customPCSetup():void {
 		//Starting Equipment: Wizard's Robe, Wizards Staff, and one White and one Black book in inventory.
 		//equipArmor("inquisitor's corset",false);
 		player.armor = armors.W_ROBES;
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
-		
+
 		player.weapon = weapons.W_STAFF;
 		//Gift Perk- Smarts
 		player.createPerk(PerkLib.Smart,0,0,0,0);
@@ -667,7 +666,6 @@ public function customPCSetup():void {
 		//starting weapon: Spellblade if not gamebreaking otherwise spear is fine.
 		player.armor = armors.LTHRROB;
 		player.weapon = weapons.S_BLADE;
-		if (player.hasPerk("Wizard's Focus") < 0) player.createPerk(PerkLib.WizardsFocus, .5, 0, 0, 0);
 
 	}
 	if(player.short == "Aria") {

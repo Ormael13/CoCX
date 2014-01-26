@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class AmilyScene extends NPCAwareContent
 	{
@@ -771,7 +772,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n", false);
 			//[Player Speed less than 50]
-			if(player.spe < 50 || player.hasPerk("Evade") < 0) {
+			if(player.spe < 50 || player.findPerk(PerkLib.Evade) < 0) {
 				//{Player takes minor HP damage}
 				player.takeDamage(5);
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh.  Amily looks poised to strike again, but stops when she sees that it's you. She looks apologetic – well, somewhat. \"<i>Are you all right? I'm sorry, but that was honestly the stupidest thing I've ever seen someone do!</i>\" She approaches you and makes sure that you aren't seriously hurt. \"<i>You'll live,</i>\" she says rather quickly.\n\n", false);
@@ -5196,7 +5197,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Hey there, " + player.short + ", how... are you?</i>\" She trails off with a troubled expression. \"<i>You seem different...</i>\" She murmurs, studying you intently, and then she obviously comes to a sudden realization. \"<i>Have you had contact with demons!? You... This feeling... You're corrupted!</i>\" You take a step towards her, causing her to leap back. \"<i>N-No! Stay away!</i>\" She yells, hand darting towards her blowpipe. She spits a dart right at you!\n\n", false);
 
 			//(if PC doesn't have the perk Evasion or Feline Flexibility)
-			if(player.hasPerk("Evasion") < 0 && player.hasPerk("Flexibility") < 0) {
+			if(player.findPerk(PerkLib.Evade) < 0 && player.findPerk(PerkLib.Flexibility) < 0) {
 				outputText("Amily's sudden reaction catches you off guard and the dart hits you; almost immediately you feel your body going stiff. Amily doesn't even wait to see if she hit you or not before running away, yelling back at you.\n\n", false);
 
 				outputText("\"<i>Don't come near me again!  You're tainted, ruined!</i>\" Her voice is panicked, as she disappears into the ruins.\n\n", false);

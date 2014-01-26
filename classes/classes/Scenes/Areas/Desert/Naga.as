@@ -4,7 +4,8 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -65,10 +66,10 @@
 		protected function nagaTailWhip():void {
 			outputText("The naga tenses and twists herself forcefully.  ", false);
 			//[if evaded]
-			if((player.hasPerk("Evade") && rand(6) == 0)) {
+			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
 			}
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
 			}
 			else if(player.spe > rand(300)) {

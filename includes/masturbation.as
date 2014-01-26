@@ -10,7 +10,7 @@ public function masturbateMenu():void {
 	}
 	
 	//FAP BUTTON GOAADFADHAKDADK
-	if(player.hasPerk("History: Religious") >= 0 && player.cor <= 66) {
+	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
 		if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)
 			addButton(button,"Masturbate",eventParser,10);
 		else 
@@ -19,11 +19,11 @@ public function masturbateMenu():void {
 	else addButton(button,"Masturbate",eventParser,10);
 	button++;
 	//catofellato
-	if(player.hasCock() && (player.hasPerk("Flexibility") >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
+	if(player.hasCock() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
 		addButton(button,"Lick Cock",eventParser,2487);
 		button++;
 	}
-	if(player.hasVagina() && (player.hasPerk("Flexibility") >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
+	if(player.hasVagina() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
 		addButton(button,"Lick 'Gina",lickYerGirlParts);
 		button++;
 	}
@@ -44,7 +44,7 @@ public function masturbateMenu():void {
 		button++;
 	}
 	if(button == 1 && !fappingItems(false)) {
-		if(player.hasPerk("History: Religious") >= 0 && player.cor <= 66) {
+		if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
 			if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)
 				eventParser(10);
 			else 
@@ -456,7 +456,7 @@ public function masturbateJojo():void {
 	jojoScene.jojoSprite();
 	outputText("", true);
 	dynStats("lus=", 0, "cor", .5);
-	if(player.totalCocks() > 0 && player.hasPerk("Whispered") >= 0 && rand(4) == 0) {
+	if(player.totalCocks() > 0 && player.findPerk(PerkLib.Whispered) >= 0 && rand(4) == 0) {
 		forest.akbalScene.whisperJojobait();
 		return;
 	}
@@ -814,7 +814,7 @@ public function masturbateGo():void {
 		else exgartuan.exgartuanMasturbation();
 		return;
 	}
-	if(player.hasPerk("Midas Cock") >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+	if(player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
 		if(player.hasSock("gilded")) {
 			gildedCockTurbate();
 			flags[kFLAGS.MIDAS_JERKED] = 1;
@@ -2211,7 +2211,7 @@ public function centaurMasturbation():Boolean {
 
 public function lickYerGirlParts():void {
 	clearOutput();
-	if(player.hasPerk("Flexibility") < 0) {
+	if(player.findPerk(PerkLib.Flexibility) < 0) {
 		outputText("You undress from your " + player.armorName + " and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your " + vaginaDescript(0) + " You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your " + vaginaDescript(0) + ". You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.", false);
 		dynStats("lus", 15);
 		doNext(13);
@@ -2242,7 +2242,7 @@ public function lickYerGirlParts():void {
 public function catAutoLick():void {
 	outputText("", true);
 	//NOT FEXIBLE
-	if(player.hasPerk("Flexibility") < 0) {
+	if(player.findPerk(PerkLib.Flexibility) < 0) {
 		//Fails [Herm has a 50/50 chance of getting either.]
 		//[Male]
 		outputText("You undress from your " + player.armorName + " and take a seat down on the ground, your " + cockDescript(0) + " pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your " + cockDescript(0) + "; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the " + cockDescript(0) + " is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.", false);

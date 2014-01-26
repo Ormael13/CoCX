@@ -2,7 +2,9 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
-public class ShouldraFollower extends NPCAwareContent {
+	import classes.PerkLib;
+
+	public class ShouldraFollower extends NPCAwareContent {
 
 	public function ShouldraFollower()
 	{
@@ -537,7 +539,7 @@ private function shouldraTongueLicksPCs():void {
 		outputText("\n\nShouldra smiles and wonders aloud, \"<i>Think I could get your tongue in your cooch again?</i>\"");
 	}
 	//if PC is catgirl (has "flexibility" perk)
-	if(player.hasPerk("Flexibility") >= 0) {
+	if(player.findPerk(PerkLib.Flexibility) >= 0) {
 		//if event occurrence = 0
 		if(flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES] == 0) {
 			outputText("\n\nYou sheepishly pulse confirmation back to her that you can.  You're not really used to talking about that sort of thing, but you <b>are</b> sharing a body.  \"<i>Oh, now that's just adorable!</i>\" Shouldra exclaims, having already searched you for mental images of your own flexibility.  You blush at the tease, but you can feel her lust spike at the thoughts, telling you that it's more than just a fun thought for your ethereal partner.");
@@ -753,9 +755,9 @@ private function shouldraYappin():void {
 			outputText("\n\nYou watch the spirit's face closely.  She doesn't seem too upset; aware of how long she's been a ghost, you assume this is something she had long since gotten over and forgotten.  \"<i>I hadn't even considered being able to possess someone before I came across that woman in the forest.  The only thing on my mind before I saw her was living out my life - well, afterlife - in this state of flux, unable to <b>feel</b> joy.</i>\" Shouldra shrugs off her introspective state, \"<i>But then I ran into that woman, things clicked into place, and I had a bitchin' few hundreds of years up until today.</i>\"");
 			outputText("\n\nCluing in on her reluctance to divulge any more on the pre-bitchin' years, you instead decide to ask about the woman.  This is probably one of the best leads on humans in Mareth you've ever had.  Unfortunately, Shouldra does not share your interest.  \"<i>Eh, yea humans were a thing a long time ago, I guess.  I was a little more interested in Numero Uno from that point on, though,</i>\" she admits, thumbing herself in the chest.  \"<i>I won't get you very far in any history classes I'm afraid.</i>\" You don't dare ask her straight up - honestly, you doubt you'd receive little more than a sarcastic empty remark - but you can't help but wonder if the otherwise egocentric eidolon hasn't changed her tune even a little since setting up shack with you.  Has she even hung out with any other person for longer than a one night stand?");
 			outputText("\n\nThe tangent disappears from your head as Shouldra stares at you, probably curious as to what you're obsessing over.  You redirect her back to the dream, specifically about the actual first possession.  \"<i>Well, I already had a pretty good grasp on the act.  Without divulging much information, let's just say for now that I've always had a unique fascination with magic.</i>\" Tired of pacing around - and potentially trying to keep you from digging too deep again - Shouldra directs you nearby to a little clearing where the two of you sit down, side by side.  \"<i>But all the books in the world don't really prepare you for what's it like.  Like most anything, really.</i>\"");
-			if( player.hasPerk("Incorporeality") >= 0) outputText("  Shouldra bumps you to the side a little as she makes her next point, \"<i>Even with your hoaky quasi-possession power, you don't really know what it's like to actually possess someone.</i>\" You look at her funny, unaware that you weren't really getting the full effect.  Not that you care!");
+			if( player.findPerk(PerkLib.Incorporeality) >= 0) outputText("  Shouldra bumps you to the side a little as she makes her next point, \"<i>Even with your hoaky quasi-possession power, you don't really know what it's like to actually possess someone.</i>\" You look at her funny, unaware that you weren't really getting the full effect.  Not that you care!");
 			outputText("\n\nShouldra scootches over against you until almost half of her body is inside of yours.  She moves your arm and [leg] around as she illustrates her next point, \"<i>The expectation is that you're just 'putting on' the host.  Like a glove or a suit.  But the instant you dive inside someone");
-			if( player.hasPerk("Incorporeality") >= 0) outputText(" - and I mean <b>really</b> possess someone -");
+			if( player.findPerk(PerkLib.Incorporeality) >= 0) outputText(" - and I mean <b>really</b> possess someone -");
 			outputText(" you find out just how much more there is to it.</i>\" Shouldra directs your hand up, staring at it intently as she sprawls out your fingers, \"<i>You aren't crawling inside a husk.  There's a lot to a living being.  You felt it in my dream.  I know how to deal with it now but back then? It took real determination to not lose yourself in a person.  Even the most boring scumbag has a life's worth of history and an endless program of emotion and thought.</i>\"");
 			outputText("\n\nShouldra puts on a mischievous smile, turning to face you, \"<i>That's not to say I never pry, mind you.  Given all the time I've spent with you, I've been able to learn plenty.  Like about your hometown of Ingnam, Champ.</i>\" Shouldra laughs as you shuffle around uncomfortably, the notion of the ghost girl ransacking your mind of its every fiber not sitting well with you.  \"<i>Don't worry your pretty little head over it, though.</i>\"  Your hand reaches down unbidden, grasping at your [if (hasCock = true) [cock]] [if (isHerm = true)  and ][if (hasVagina = true) [vagina]]");
 			if(player.gender == 0) outputText("[asshole]");
@@ -1427,11 +1429,11 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//15 (Pure Jojo is a follower)
 	if(player.hasStatusAffect("PureCampJojo") >= 0) choices[choices.length] = 15;
 	//16 (has any of Marae's gift perks)
-	if(player.hasPerk("Marae's Gift - Stud") >= 0 || player.hasPerk("Marae's Gift - Fertility") >= 0 || player.hasPerk("Marae's Gift - Profractory") >= 0 || player.hasPerk("Marae's Gift - Buttslut") >= 0) choices[choices.length] = 16;
+	if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftProfractory) >= 0 || player.findPerk(PerkLib.MaraesGiftButtslut) >= 0) choices[choices.length] = 16;
 	//17 (has had children with Izma)
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) choices[choices.length] = 17;
 	//18 (has Incorporeality perk)
-	if(player.hasPerk("Incorporeality") >= 0) choices[choices.length] = 18;
+	if(player.findPerk(PerkLib.Incorporeality) >= 0) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
 	if(player.statusAffectv1("Exgartuan") == 2) choices[choices.length] = 19;
 	//20 (PC knows any spells)

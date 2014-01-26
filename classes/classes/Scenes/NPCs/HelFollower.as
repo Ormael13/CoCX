@@ -2,6 +2,7 @@
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class HelFollower extends NPCAwareContent
 	{
@@ -1011,7 +1012,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 			buttons++;	
 		}
 	}
-	if(player.lust >= 33 && player.hasPerk("Incorporeality") >= 0 && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 9) {
+	if(player.lust >= 33 && player.findPerk(PerkLib.Incorporeality) >= 0 && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 9) {
 		addButton(buttons,"Possess",heliaCampPossession);
 		buttons++;
 	}

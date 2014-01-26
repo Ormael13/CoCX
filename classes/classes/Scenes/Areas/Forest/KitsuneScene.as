@@ -94,7 +94,7 @@ package classes.Scenes.Areas.Forest
 				doNext(createCallBackFunction(followTheWillOWisp, true));
 			}//PC did NOT see through glamour
 			//With Religious BG:
-			else if (player.hasPerk("History: Religious") >= 0) {
+			else if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
 				outputText("The instant she touches you, she recoils with a yelp, a brilliant flash temporarily blinding you both.\n\n");
 				outputText("\"<i>Ow, ow, ow!</i>\"\n\n");
 				outputText("When the spots clear from your eyes, the kitsune's glamour has been dispelled, revealing her for what she truly is.  A pair of large triangular fox ears poke up from her ");
@@ -942,7 +942,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Lactation Amount
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
 			player.boostLactation(1.5);
-			if (player.hasPerk("Feeder") >= 0) {
+			if (player.findPerk(PerkLib.Feeder) >= 0) {
 				player.addStatusValue("Feeder", 1, 1);
 				player.changeStatusValue("Feeder", 2, 0);
 			}
@@ -1134,7 +1134,7 @@ package classes.Scenes.Areas.Forest
 					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
 			//[Feeder]
-			if (player.hasPerk("Feeder") >= 0)
+			if (player.findPerk(PerkLib.Feeder) >= 0)
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
 			addButton(9, "Leave", cleanupAfterCombat);
 		}
@@ -2279,7 +2279,7 @@ package classes.Scenes.Areas.Forest
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			clearOutput();
-			if (player.hasItem(consumables.FOXJEWL) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte / 10 && player.earType == EARS_FOX && player.hasPerk("Corrupted Nine-tails") < 0 && player.hasPerk("Enlightened Nine-tails") < 0) {
+			if (player.hasItem(consumables.FOXJEWL) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte / 10 && player.earType == EARS_FOX && player.findPerk(PerkLib.CorruptedNinetails) < 0 && player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
 				//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 

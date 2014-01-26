@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Swamp
 	import classes.Appearance;
 	import classes.Cock;
 	import classes.CockTypesEnum;
+	import classes.PerkLib;
 
 	/**
 	 * ...
@@ -29,7 +30,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Somehow, you manage to evade her lusty attack.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
@@ -38,7 +39,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("You manage to misdirect her lusty attack, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
@@ -47,7 +48,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You manage to twist your cat-like body out of the way at the last second, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);

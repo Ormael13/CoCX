@@ -1,7 +1,8 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
 	import classes.Monster;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author aimozg
@@ -27,7 +28,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = 5;
 			damage = player.takeDamage(5);
 			outputText(" (" + damage + ")");
-			if(player.hasPerk("Resolute") >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
+			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusAffect("Stunned",0,0,0,0);
 			game.combatRoundOver();
 		}

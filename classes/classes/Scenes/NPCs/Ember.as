@@ -4,7 +4,8 @@ package classes.Scenes.NPCs
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
-	
+	import classes.PerkLib;
+
 	/**
 	 * ...
 	 * @author aimozg
@@ -103,7 +104,7 @@ package classes.Scenes.NPCs
 			//Description:
 			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!");
 			outputText("  Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground.");
-			if(player.hasPerk("Resolute") < 0) {
+			if(player.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  Your head swims - it'll take a moment before you can regain your balance.");
 				//Miss: You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.
 				player.createStatusAffect("Stunned",0,0,0,0);

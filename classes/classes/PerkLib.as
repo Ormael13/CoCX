@@ -6,9 +6,12 @@ package classes
 	public class PerkLib
 	{
 
-		// UNSORTED perks TODO
+		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
 		public static const Brawler:PerkType = mk("Brawler","Brawler", "");
+		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut", "");
 		public static const Focused:PerkType = mk("Focused","Focused", "");
+		public static const LastStrike:PerkType = mk("Last Strike", "Last Strike", "");
+		public static const ImpGangBang:PerkType = mk("Imp GangBang", "Imp GangBang", "");
 
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast","Fast", "Gain speed 25% faster.");

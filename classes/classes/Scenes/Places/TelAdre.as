@@ -553,23 +553,23 @@ private function normalPierceAssemble():void {
 			break;
 		case 9:
 			shortP += "lethite ";
-			if(player.hasPerk("Pierced: Lethite") < 0) player.createPerk(PerkLib.PiercedLethite,0,0,0,0);
+			if(player.findPerk(PerkLib.PiercedLethite) < 0) player.createPerk(PerkLib.PiercedLethite,0,0,0,0);
 			longP += "Lethite ";
 			break;
 		case 10:
 			shortP += "fertite ";
-			if(player.hasPerk("Pierced: Fertite") < 0) player.createPerk(PerkLib.PiercedFertite,5,0,0,0);
+			if(player.findPerk(PerkLib.PiercedFertite) < 0) player.createPerk(PerkLib.PiercedFertite,5,0,0,0);
 			else player.addPerkValue("Pierced: Fertite",1,5);
 			longP += "Fertite ";
 			break;
 		case 11:
 			shortP += "furrite ";
-			if(player.hasPerk("Pierced: Furrite") < 0) player.createPerk(PerkLib.PiercedFurrite,0,0,0,0);
+			if(player.findPerk(PerkLib.PiercedFurrite) < 0) player.createPerk(PerkLib.PiercedFurrite,0,0,0,0);
 			longP += "Furrite ";
 			break;
 		case 12:
 			shortP += "crimstone ";
-			if(player.hasPerk("Pierced: Crimstone") < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
+			if(player.findPerk(PerkLib.PiercedCrimstone) < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
 			else player.addPerkValue("Pierced: Crimstone",1,5);
 			longP += "Crimstone ";
 			break;

@@ -7,6 +7,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.ItemType;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.*;
 
 	use namespace kGAMECLASS;
@@ -27,7 +28,7 @@ package classes.Scenes.Areas
 			doNext(1);
 			var chooser:Number = rand(3);
 			//Boosts mino and hellhound rates!
-			if (player.hasPerk("Pierced: Furrite") >= 0 && rand(3) == 0) {
+			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
 				chooser = 1;
 			}
 			//Helia monogamy fucks

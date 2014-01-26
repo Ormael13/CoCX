@@ -626,7 +626,7 @@ public function appearance(e:MouseEvent = null):void
 		outputText("  Two human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
 		outputText("  Your legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
-	if(player.hasPerk("Incorporeality") >= 0) 
+	if(player.findPerk(PerkLib.Incorporeality) >= 0)
 		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
 	
 	outputText("\n", false);
@@ -913,7 +913,7 @@ public function appearance(e:MouseEvent = null):void
 				else outputText("-Your next ", false);
 				outputText(cockDescript(temp), false);
 				outputText(" is ", false);
-				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false)
+				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches wide.", false);
 				else 
@@ -1030,7 +1030,7 @@ public function appearance(e:MouseEvent = null):void
 				sockDescript(temp);
 			}
 			temp++;
-			rando++
+			rando++;
 			outputText("\n", false);
 			if(rando > 3) rando = 0;
 		}

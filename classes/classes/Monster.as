@@ -6,15 +6,12 @@
 	import classes.Items.ConsumableLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
-	import classes.Scenes.Areas.Lake.FetishCultist;
-	import classes.Scenes.Areas.Lake.FetishZealot;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
-	import classes.internals.RandomDrop;
 	import classes.internals.ChainedDrop;
+	import classes.internals.RandomDrop;
 	import classes.internals.WeightedDrop;
-	import classes.ItemType;
 
 	/**
 	 * ...
@@ -757,19 +754,19 @@
 				return true;
 			}
 			//Determine if evaded
-			if (!(this is Kiha) && player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if (!(this is Kiha) && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
 				if (!plural) outputText("s");
 				outputText(" attack.\n", false);
 				return true;
 			}
 			//("Misdirection"
-			if (player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				return true;
 			}
 			//Determine if cat'ed
-			if (player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				if (plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);

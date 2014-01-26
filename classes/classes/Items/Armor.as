@@ -27,7 +27,7 @@ package classes.Items
 
 		override public function unequip(player:Player,output:Boolean):void
 		{
-			while(player.hasPerk("Bulge Armor") >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
+			while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
 			var itype:ItemType = unequipReturnItem(player,output);
 			if (itype != null){
 				game.itemSwapping = true;

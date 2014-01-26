@@ -6,6 +6,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+	import classes.PerkLib;
 
 	/**
 	 * ...
@@ -36,13 +37,13 @@
 				return;
 			}
 			//Determine if evaded
-			if (player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.", false);
 				game.combatRoundOver();
 				return;
 			}
 			//Determine if flexibilitied
-			if (player.hasPerk("Flexibility") >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10) {
 				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.", false);
 				game.combatRoundOver();
 				return;
@@ -141,14 +142,14 @@
 					return;
 				}
 				//Determine if evaded
-				if (player.hasPerk("Evade") >= 0 && rand(100) < 20)
+				if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 20)
 				{
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.", false);
 					game.combatRoundOver();
 					return;
 				}
 				//Determine if flexibilitied
-				if (player.hasPerk("Flexibility") >= 0 && rand(100) < 10)
+				if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10)
 				{
 					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.", false);
 					game.combatRoundOver();

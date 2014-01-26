@@ -31,15 +31,15 @@ package classes.Items.Armors
 						//+lust
 						game.dynStats("lus", 5);
 					}
-					if(player.hasPerk("Blood Mage") < 0) player.createPerk(PerkLib.BloodMage,0,0,0,0,"");
-					if(player.hasPerk("Slutty Seduction") < 0) player.createPerk(PerkLib.SluttySeduction,10,0,0,0,"");
+					if(player.findPerk(PerkLib.BloodMage) < 0) player.createPerk(PerkLib.BloodMage,0,0,0,0,"");
+					if(player.findPerk(PerkLib.SluttySeduction) < 0) player.createPerk(PerkLib.SluttySeduction,10,0,0,0,"");
 		}
 
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			while(player.hasPerk("Blood Mage") >= 0) player.removePerk(PerkLib.BloodMage);
-			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk(PerkLib.SluttySeduction);
+			while(player.findPerk(PerkLib.BloodMage) >= 0) player.removePerk(PerkLib.BloodMage);
+			while(player.findPerk(PerkLib.SluttySeduction) >= 0) player.removePerk(PerkLib.SluttySeduction);
 		}
 
 		public function InquisitorsCorset()

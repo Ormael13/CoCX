@@ -6,10 +6,10 @@ package classes.Scenes.Areas
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.Monsters.GoblinAssassinScene;
 
 	use namespace kGAMECLASS;
 
@@ -88,7 +88,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Boosts mino and hellhound rates!
-			if (player.hasPerk("Pierced: Furrite") >= 0 && rand(3) == 0) {
+			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
 				if (rand(2) == 0) chooser = 1;
 				else chooser = 3;
 			}
@@ -97,11 +97,11 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//10% MORE chance for minos if uber-addicted
-			if (player.hasPerk("Minotaur Cum Addict") >= 0 && rand(10) == 0) {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(10) == 0) {
 				chooser = 1;
 			}
 			//Every 15 explorations chance at mino bad-end!
-			if (player.exploredMountain % 16 == 0 && player.hasPerk("Minotaur Cum Addict") >= 0) {
+			if (player.exploredMountain % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
@@ -110,7 +110,7 @@ package classes.Scenes.Areas
 				//Determines likelyhood of imp/goblins
 				//Below - goblin, Equal and up - imp
 				var impGob:Number = 5;
-				if (player.hasPerk("Pierced: Lethite") >= 0) {
+				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
 					if (impGob <= 3) impGob += 2;
 					else if (impGob < 7) impGob = 7;
 				}

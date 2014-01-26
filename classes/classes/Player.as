@@ -77,12 +77,12 @@ package classes
 		override public function get armorDef():Number {
 			var armorDef:Number = _armor.def;
 			//Blacksmith history!
-			if(armorDef > 0 && hasPerk("History: Smith") >= 0) {
+			if(armorDef > 0 && findPerk(PerkLib.HistorySmith) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
 			//Skin armor perk
-			if(hasPerk("Thick Skin") >= 0) {
+			if(findPerk(PerkLib.ThickSkin) >= 0) {
 				armorDef += 2;
 				if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
 			}
@@ -94,7 +94,7 @@ package classes
 			//'Thick' dermis descriptor adds 1!
 			if(skinAdj == "smooth") armorDef += 1;
 			//Agility boosts armor ratings!
-			if(hasPerk("Agility") >= 0) {
+			if(findPerk(PerkLib.Agility) >= 0) {
 				if(armorPerk == "Light") armorDef += Math.round(spe/8);
 				else if(armorPerk == "Medium") armorDef += Math.round(spe/13);
 			}
@@ -126,9 +126,9 @@ package classes
 		}
 		override public function get weaponAttack():Number {
 			var attack:Number = _weapon.attack;
-			if(hasPerk("Weapon Mastery") >= 0 && weaponPerk == "Large" && str > 60)
+			if(findPerk(PerkLib.WeaponMastery) >= 0 && weaponPerk == "Large" && str > 60)
 				attack *= 2;
-			if(hasPerk("Lightning Strikes") >= 0 && spe >= 60 && weaponPerk != "Large") {
+			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && weaponPerk != "Large") {
 				attack += Math.round((spe - 50) / 3);
 			}
 			if(hasStatusAffect("Berzerking") >= 0) attack += 30;
@@ -212,13 +212,13 @@ package classes
 				damage = Math.round(damage * .75);
 
 			//Take damage you masochist!
-			if (hasPerk("Masochist") >= 0 && lib >= 60) {
+			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
 				damage = Math.round(damage * .7);
 				game.dynStats("lus", 2);
 				//Dont let it round too far down!
 				if (damage < 1) damage = 1;
 			}
-			if (hasPerk("Immovable Object") >= 0 && tou >= 75) {
+			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
 				damage = Math.round(damage * .8);
 				if (damage < 1) damage = 1;
 			}
@@ -233,8 +233,8 @@ package classes
 
 			// Uma's Accupuncture Bonuses
 			var modArmorDef:Number = 0;
-			if (hasPerk(PerkLib.ChiReflowAttack.name) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
-			if (hasPerk(PerkLib.ChiReflowAttack.name) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
+			if (findPerk(PerkLib.ChiReflowAttack) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
+			if (findPerk(PerkLib.ChiReflowAttack) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
 			damage -= modArmorDef;
 			if (damage<0) damage = 0;
 			return damage;
@@ -399,8 +399,8 @@ package classes
 		public function race():String
 		{
 			//Temp vars
-			var temp:Number = 0;
-			var rando:Number = 0;
+			var temp:Number;
+			var rando:Number;
 			//Determine race type:
 			var race:String = "human";
 			if (lowerBody == 4)
@@ -408,7 +408,7 @@ package classes
 			if (lowerBody == 11)
 				race = "pony-kin";
 			//determine sheath
-			var sheath:Boolean = false;
+			var sheath:Boolean;
 			if (catScore() >= 4)
 				race = "cat-" + mf("boy", "girl");
 			if (lizardScore() >= 4)
@@ -1093,7 +1093,7 @@ package classes
 			//(Small – 0.01 mLs – Size 1 + 1 Multi)
 			//(Large – 0.8 - Size 10 + 4 Multi)
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
-			var total:Number = 0;
+			var total:Number;
 			if (hasStatusAffect("Lactation Endurance") < 0)
 				createStatusAffect("Lactation Endurance", 1, 0, 0, 0);
 			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1("Lactation Endurance") * totalBreasts();
@@ -1157,7 +1157,7 @@ package classes
 					createStatusAffect("Slime Craving Feed",0,0,0,0);
 				}
 			}
-			if(hasPerk("Diapause") >= 0) {
+			if(findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
@@ -1184,10 +1184,10 @@ package classes
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
 			raw = Math.round(raw * 100)/100;
-			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//PUT SOME CAPS ON DAT' SHIT
-			if(raw > 50) raw = 20;
-			if(raw < -50) raw = -20;
+			if(raw > 50) raw = 50;
+			if(raw < -50) raw = -50;
+			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//Recheck to make sure shit didn't break
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
@@ -1217,11 +1217,11 @@ package classes
 			if(breastRows.length == 1) {
 				if(breastRows[0].breastRating > 0) {
 					//Shrink if bigger than N/A cups
-					var temp:Number = 0;
+					var temp:Number;
 					temp = 1;
 					breastRows[0].breastRating--;
 					//Shrink again 50% chance
-					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && hasPerk("Big Tits") < 0) {
+					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && findPerk(PerkLib.BigTits) < 0) {
 						temp++;
 						breastRows[0].breastRating--;
 					}
@@ -1266,7 +1266,7 @@ package classes
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
-			if(hasPerk("Big Tits") >= 0 && rand(3) == 0 && amount < 1) amount=1;
+			if(findPerk(PerkLib.BigTits) >= 0 && rand(3) == 0 && amount < 1) amount=1;
 			var temp:uint = breastRows.length;
 			if(growthType == 1) {
 				//Select smallest breast, grow it, move on
@@ -1287,19 +1287,19 @@ package classes
 					temp = amount;
 					//Diminishing returns!
 					if(breastRows[temp2].breastRating > 3) {
-						if(hasPerk("Big Tits") < 0) temp/=1.5;
+						if(findPerk(PerkLib.BigTits) < 0) temp/=1.5;
 						else temp/=1.3;
 					}
 					if(breastRows[temp2].breastRating > 7) { 
-						if(hasPerk("Big Tits") < 0) temp/=2;
+						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
 						else temp /= 1.5;
 					}
 					if(breastRows[temp2].breastRating > 9) { 
-						if(hasPerk("Big Tits") < 0) temp/=2;
+						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
 						else temp /= 1.5;
 					}
 					if(breastRows[temp2].breastRating > 12) { 
-						if(hasPerk("Big Tits") < 0) temp/=2;
+						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
 						else temp /= 1.5;
 					}
 					//Grow!
@@ -1309,15 +1309,15 @@ package classes
 			}
 			//Diminishing returns!
 			if(breastRows[0].breastRating > 3) {
-				if(hasPerk("Big Tits") < 0) amount/=1.5;
+				if(findPerk(PerkLib.BigTits) < 0) amount/=1.5;
 				else amount/=1.3;
 			}
 			if(breastRows[0].breastRating > 7) { 
-				if(hasPerk("Big Tits") < 0) amount/=2;
+				if(findPerk(PerkLib.BigTits) < 0) amount/=2;
 				else amount /= 1.5;
 			}
 			if(breastRows[0].breastRating > 12) { 
-				if(hasPerk("Big Tits") < 0) amount/=2;
+				if(findPerk(PerkLib.BigTits) < 0) amount/=2;
 				else amount /= 1.5;
 			}
 			/*if(breastRows[0].breastRating > 12) { 
@@ -1326,7 +1326,6 @@ package classes
 			}*/
 			if(growthType == 2) {
 				temp = 0;
-				temp2 = 0;
 				//Start at top and keep growing down, back to top if hit bottom before done.
 				while(rowsGrown > 0) {
 					if(temp+1 > breastRows.length) temp = 0;
@@ -1415,19 +1414,19 @@ package classes
 		{
 			var min:Number = 0;
 			//Bimbo body boosts minimum lust by 40
-			if(hasStatusAffect("Bimbo Champagne") >= 0 || hasPerk("Bimbo Body") >= 0 || hasPerk("Bro Body") >= 0 || hasPerk("Futa Form") >= 0) {
+			if(hasStatusAffect("Bimbo Champagne") >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
 				if(min > 40) min += 10;
 				else if(min > 0) min += 20;
 				else min += 40;
 			}
 			//Omnibus' Gift
-			if(hasPerk("Omnibus' Gift") >= 0) {
+			if(findPerk(PerkLib.OmnibusGift) >= 0) {
 				if(min > 40) min += 10;
 				else if(min > 0) min += 20;
 				else min += 35;                
 			}
 			//Nymph perk raises to 30
-			if(hasPerk("Nymphomania") >= 0) {
+			if(findPerk(PerkLib.Nymphomania) >= 0) {
 				if(min >= 40) min += 10;
 				else if(min > 0) min += 15;
 				else min += 30;
@@ -1439,11 +1438,11 @@ package classes
 				else min += 30;
 			}
 			//Hot blooded perk raises min lust!
-			if(hasPerk("Hot Blooded") >= 0) {
-				if(min > 0) min += perk(hasPerk("Hot Blooded")).value1 / 2;
-				else min += perk(hasPerk("Hot Blooded")).value1;
+			if(findPerk(PerkLib.HotBlooded) >= 0) {
+				if(min > 0) min += perk(findPerk(PerkLib.HotBlooded)).value1 / 2;
+				else min += perk(findPerk(PerkLib.HotBlooded)).value1;
 			}
-			if(hasPerk("Luststick Adapted") > 0) {
+			if(findPerk(PerkLib.LuststickAdapted) > 0) {
 				if(min < 50) min += 10;
 				else min += 5;                
 			}
@@ -1469,7 +1468,7 @@ package classes
 		}
 
 		public function minotaurAddicted():Boolean {
-			return hasPerk("Minotaur Cum Addict") >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
+			return findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
 		}
 		public function minotaurNeed():Boolean {
 			return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
