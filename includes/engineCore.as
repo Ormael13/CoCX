@@ -564,7 +564,7 @@ public function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
 	outputText("", true);
 	while(temp < player.perks.length) {
-		outputText("<b>" + player.perks[temp].perkName + "</b> - " + perkDescription(player.perks[temp].perkName) + "\n", false);
+		outputText("<b>" + player.perk(temp).perkName + "</b> - " + perkDescription(player.perk(temp).perkName) + "\n", false);
 		temp++;
 	}
 	menu();
@@ -863,122 +863,122 @@ public function applyPerk(pName:String = ""):void {
 	outputText("<b>" + tempPerk + "</b> gained!", true);
 	switch(tempPerk) {
 		case "Strong Back 2: Strong Harder":
-			player.createPerk("Strong Back 2: Strong Harder",0,0,0,0, "Enables fifth item slot.");
+			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
 			player.itemSlot5.unlocked = true;
 			break;
 		case "Strong Back":
-			player.createPerk("Strong Back",0,0,0,0, "Enables fourth item slot.");
+			player.createPerk(PerkLib.StrongBack,0,0,0,0);
 			player.itemSlot4.unlocked = true;
 			break;
 		case "Tank":
-			player.createPerk("Tank",0,0,0,0,"Raises max HP by 50.");
+			player.createPerk(PerkLib.Tank,0,0,0,0);
 			break;
 		case "Regeneration":
-			player.createPerk("Regeneration",0,0,0,0,"Regenerates 2% of max HP/hour and 1% of max HP/round.");
+			player.createPerk(PerkLib.Regeneration,0,0,0,0);
 			break;
 		case "Iron Man":
-			player.createPerk("Iron Man",0,0,0,0,"Now now, don't cheat.");
+			player.createPerk(PerkLib.IronMan,0,0,0,0);
 			break;
 		case "Evade":
-			player.createPerk("Evade",0,0,0,0,"Increases avoidance chances.");
+			player.createPerk(PerkLib.Evade,0,0,0,0);
 			break;
 		case "Runner":
-			player.createPerk("Runner",0,0,0,0,"Increases chances of escaping combat.");
+			player.createPerk(PerkLib.Runner,0,0,0,0);
 			break;
 		case "Fertility+":
-			player.createPerk("Fertility+",15,1.75,0,0,"Increases pregnancy chance by 15% and cum volume by up to 50%.");
+			player.createPerk(PerkLib.FertilityPlus,15,1.75,0,0);
 			break;
 		case "Hot Blooded":
-			player.createPerk("Hot Blooded",20,0,0,0, "Raises minimum lust by up to 20.");
+			player.createPerk(PerkLib.HotBlooded,20,0,0,0);
 			break;
 		case "Corrupted Libido":
-			player.createPerk("Corrupted Libido",20,0,0,0, "Reduces lust gain by 10%.");
+			player.createPerk(PerkLib.CorruptedLibido,20,0,0,0);
 			break;
 		case "Seduction":
-			player.createPerk("Seduction",0,0,0,0,"Upgrades your tease attack, making it more effective.");
+			player.createPerk(PerkLib.Seduction,0,0,0,0);
 			break;
 		case "Precision":
-			player.createPerk("Precision",0,0,0,0,"Reduces enemy damage resistance by 10.");
+			player.createPerk(PerkLib.Precision,0,0,0,0);
 			break;
 		case "Nymphomania":
-			player.createPerk("Nymphomania",0,0,0,0,"Raises minimum lust by up to 30.");
+			player.createPerk(PerkLib.Nymphomania,0,0,0,0);
 			break;
 		case "Spellpower":
-			player.createPerk("Spellpower",0,0,0,0,"Increases the effects of your spells by up to 50%.");
+			player.createPerk(PerkLib.Spellpower,0,0,0,0);
 			break;
 		case "Mage":
-			player.createPerk("Mage",0,0,0,0,"Increases the strength of your spells even more than 'Spellpower', up to 100%.");
+			player.createPerk(PerkLib.Mage,0,0,0,0);
 			break;
 		case "Double Attack":
-			player.createPerk("Double Attack",0,0,0,0,"Allows you to perform two melee attacks per round.");
+			player.createPerk(PerkLib.DoubleAttack,0,0,0,0);
 			break;
 		case "Acclimation":
-			player.createPerk("Acclimation",0,0,0,0,"Reduces the rate at which your lust increases.");
+			player.createPerk(PerkLib.Acclimation,0,0,0,0);
 			break;
 		case "Thunderous Strikes":
-			player.createPerk("Thunderous Strikes",0,0,0,0,"+20% 'Attack' damage while strength is at or above 80.");
+			player.createPerk(PerkLib.ThunderousStrikes,0,0,0,0);
 			break;
 		case "Weapon Mastery":
-			player.createPerk("Weapon Mastery",0,0,0,0,"After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).");
+			player.createPerk(PerkLib.WeaponMastery,0,0,0,0);
 			break;
 		case "Tank 2":
-			player.createPerk("Tank 2",0,0,0,0,"Your maximum HP is raised by an extra 1 point per point of toughness!");
+			player.createPerk(PerkLib.Tank2,0,0,0,0);
 			HPChange(player.tou, false);
 			statScreenRefresh();
 			break;
 		case "Regeneration 2":
-			player.createPerk("Regeneration 2",0,0,0,0,"You regenerate an additional 2% of max HP per round and heal faster out of combat (4% of max HP/hour)");
+			player.createPerk(PerkLib.Regeneration2,0,0,0,0);
 			break;
 		case "Speedy Recovery":
-			player.createPerk("Speedy Recovery",0,0,0,0,"Thanks to your impressive metabolism you regain fatigue 50% faster.");
+			player.createPerk(PerkLib.SpeedyRecovery,0,0,0,0);
 			break;
 		case "Agility":
-			player.createPerk("Agility",0,0,0,0,"When wearing light or medium armor its effectiveness is increased by a portion of your speed.");
+			player.createPerk(PerkLib.Agility,0,0,0,0);
 			break;
 		case "Channeling":
-			player.createPerk("Channeling",0,0,0,0,"You've gotten even better at spellcasting, gaining up to 50% more effectiveness!");
+			player.createPerk(PerkLib.Channeling,0,0,0,0);
 			break;
 		case "Medicine":
-			player.createPerk("Medicine",0,0,0,0,"You now have a 15% chance per round of cleansing poisons/drugs from your body.");
+			player.createPerk(PerkLib.Medicine,0,0,0,0);
 			break;
 		case "Well Adjusted":
-			player.createPerk("Well Adjusted",0,0,0,0,"You gain half as much lust as time passes in Mareth.");
+			player.createPerk(PerkLib.WellAdjusted,0,0,0,0);
 			break;
 		case "Masochist":
-			player.createPerk("Masochist",0,0,0,0,"You have a masochism fetish and take 30 percent less damage, but your lust goes up when struck (Requires 60+ Libido).");
+			player.createPerk(PerkLib.Masochist,0,0,0,0);
 			break;
 		case "Sadist":
-			player.createPerk("Sadist",0,0,0,0,"You have a sadism fetish and strike harder, but become aroused by the act of dealing damage.");
+			player.createPerk(PerkLib.Sadist,0,0,0,0);
 			break;
 		case "Arousing Aura":
-			player.createPerk("Arousing Aura",0,0,0,0,"While your corruption is at or above 70, you exude an aura of lust.");
+			player.createPerk(PerkLib.ArousingAura,0,0,0,0);
 			break;
 		case "Resistance":
-			player.createPerk("Resistance",0,0,0,0,"You've become resistant to the myriad ways your lust can be increased.");
+			player.createPerk(PerkLib.Resistance,0,0,0,0);
 			break;
 		case "Tactician":
-			player.createPerk("Tactician",0,0,0,0,"");
+			player.createPerk(PerkLib.Tactician,0,0,0,0);
 			break;
 		case "Archmage":
-			player.createPerk("Archmage",0,0,0,0,"");
+			player.createPerk(PerkLib.Archmage,0,0,0,0);
 			break;
 		case "Lunging Attacks":
-			player.createPerk("Lunging Attacks",0,0,0,0,"");
+			player.createPerk(PerkLib.LungingAttacks,0,0,0,0);
 			break;
 		case "Lightning Strikes":
-			player.createPerk("Lightning Strikes",0,0,0,0,"");
+			player.createPerk(PerkLib.LightningStrikes,0,0,0,0);
 			break;
 		case "Immovable Object":
-			player.createPerk("Immovable Object",0,0,0,0,"");
+			player.createPerk(PerkLib.ImmovableObject,0,0,0,0);
 			break;
 		case "Resolute":
-			player.createPerk("Resolute",0,0,0,0,"");
+			player.createPerk(PerkLib.Resolute,0,0,0,0);
 			break;
 		case "Berzerker":
-			player.createPerk("Berzerker",0,0,0,0,"");
+			player.createPerk(PerkLib.Berzerker,0,0,0,0);
 			break;
 		case "Brutal Blows":
-			player.createPerk("Brutal Blows",0,0,0,0,"");
+			player.createPerk(PerkLib.BrutalBlows,0,0,0,0);
 			break;
 		default:
 			outputText("\n\n<b>AN ERROR HAS OCCURRED: </b>Invalid tempPerk value!", false);
@@ -2114,7 +2114,7 @@ public function lustPercent():Number {
 	if(player.hasPerk("Purity Blessing") >= 0) lust -= 5;
 	//Resistance = 10%
 	if(player.hasPerk("Resistance") >= 0) lust -= 10;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+	if (player.hasPerk(PerkLib.ChiReflowLust.name) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
 	if(lust < 25) lust = 25;
 	if(player.statusAffectv1("Black Cat Beer") > 0) {
@@ -2301,9 +2301,9 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}
 	
 	// Uma's Perkshit
-	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME)>=0 && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowSpeed.name)>=0 && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowLust.name)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowLust.name)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
 	//If orgasm, set hours since cum to 0.
 	if(lust2 < 0) player.resetDickEjaculateTimer();
@@ -2328,22 +2328,22 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	player.lust+=lust2;
 	player.cor+=corr;
 	//Bonus gain for perks!
-	if(player.hasPerk("Strong") >= 0 && stre >= 0) player.str+=stre*player.perks[player.hasPerk("Strong")].value1;
-	if(player.hasPerk("Tough") >= 0 && toug >= 0) player.tou+=toug*player.perks[player.hasPerk("Tough")].value1;
-	if(player.hasPerk("Fast") >= 0 && spee >= 0) player.spe+=spee*player.perks[player.hasPerk("Fast")].value1;
-	if(player.hasPerk("Smart") >= 0 && intel >= 0) player.inte+=intel*player.perks[player.hasPerk("Smart")].value1;
-	if(player.hasPerk("Lusty") >= 0 && libi >= 0) player.lib+=libi*player.perks[player.hasPerk("Lusty")].value1;
-	if (player.hasPerk("Sensitive") >= 0 && sens >= 0) player.sens += sens * player.perks[player.hasPerk("Sensitive")].value1;
+	if(player.hasPerk("Strong") >= 0 && stre >= 0) player.str+=stre*player.perk(player.hasPerk("Strong")).value1;
+	if(player.hasPerk("Tough") >= 0 && toug >= 0) player.tou+=toug*player.perk(player.hasPerk("Tough")).value1;
+	if(player.hasPerk("Fast") >= 0 && spee >= 0) player.spe+=spee*player.perk(player.hasPerk("Fast")).value1;
+	if(player.hasPerk("Smart") >= 0 && intel >= 0) player.inte+=intel*player.perk(player.hasPerk("Smart")).value1;
+	if(player.hasPerk("Lusty") >= 0 && libi >= 0) player.lib+=libi*player.perk(player.hasPerk("Lusty")).value1;
+	if (player.hasPerk("Sensitive") >= 0 && sens >= 0) player.sens += sens * player.perk(player.hasPerk("Sensitive")).value1;
 
 	// Uma's Str Cap from Perks
-	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME) >= 0)
+	if (player.hasPerk(PerkLib.ChiReflowSpeed.name) >= 0)
 	{
 		if (player.str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
 		{
 			player.str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
 		}
 	}
-	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0)
+	if (player.hasPerk(PerkLib.ChiReflowDefense.name) >= 0)
 	{
 		if (player.spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
 		{

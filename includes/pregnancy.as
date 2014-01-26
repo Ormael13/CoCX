@@ -31,7 +31,7 @@ public function updatePregnancy():Boolean {
 			player.addStatusValue("Birthed",1,1);
 			if(player.hasPerk("Brood Mother") < 0 && player.statusAffectv1("Birthed") >= 10) {
 				outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n", false);
-				player.createPerk("Brood Mother",0,0,0,0,"Pregnancy moves twice as fast as a normal woman's.");
+				player.createPerk(PerkLib.BroodMother,0,0,0,0);
 			}
 		}
 	}

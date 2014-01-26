@@ -200,7 +200,7 @@ public function cuddleWithScyllaVDay():void {
 	outputText("\n\nLater, when you move through the desert around Tel'Adre towards your own camp, looking back at Scylla waving towards you, you're somehow glad things turned out that way, and feel more determined than ever to not only defeat the demons, but also spread the good will and positive feelings through any world you may call your own.");
 	
 	outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
-	player.createPerk("Pure and Loving",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.PureAndLoving,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	doNext(14);
 }
 
@@ -254,7 +254,7 @@ public function makeOutWithScyllaVDayII():void {
 	outputText("\n\nAn hour or so later and quite a bit after sunset, you return to your camp, satisfied and pleased with how you celebrated this holiday...");
 	
 	outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
-	player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peeking in my code, desu-chan!");
+	player.createPerk(PerkLib.SensualLover,0,0,0,0,"Q-q-quit peeking in my code, desu-chan!");
 	doNext(14);
 }
 
@@ -266,7 +266,7 @@ public function feedScyllaVDay():void {
 	outputText("You feed Scylla what feels like a gallon of jizz!");
 	dynStats("lus=", 0);
 	outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
-	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peeking in my code, desu-chan!");
+	player.createPerk(PerkLib.OneTrackMind,0,0,0,0,"Q-q-quit peeking in my code, desu-chan!");
 	doNext(14);
 }
 
@@ -346,7 +346,7 @@ public function fuckAbbyVDay():void {
 	outputText("\n\nSated, you disentangle yourself from the clinging girl and lay her into her bed, with a kiss on her sweat-slick forehead.  She absently strokes between her legs, feeling the oozing jizz dribbling out of her stuffed snatch.  Maybe, for her, this is the meaning of the holiday: not just a casual fuck, but taking the time to really savor the body of someone who's important to you.  Even if it isn't love, in the strictest sense, being close to the people who impact your life is reason enough to find joy in your days.  You wish the little paladin a good night and, blowing out her candles, you take your leave.");
 	
 	outputText("\n\n(<b>You've received the Sensual Lover Perk!</b>)");
-	player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.SensualLover,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	dynStats("sen", -3, "lus=", 0);
 	doNext(14);
 }
@@ -376,7 +376,7 @@ public function pleasureAbbyVDay():void {
 	outputText("\n\nAll in all, you're pleased that perhaps you've managed to show a goblin that real affection does exist... not to mention get somebody off twice on a new Mareth holiday!");
 	
 	outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
-	player.createPerk("Pure and Loving",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.PureAndLoving,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	dynStats("lus", 80);
 	doNext(14);
 }
@@ -504,7 +504,7 @@ public function fuckPastieForVDay():void {
 	outputText("\n\nYou grin and lick your lips as you return to camp.");
 	
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
-	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.OneTrackMind,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	dynStats("sen", -2, "lus=", 0);
 	doNext(14);
 }
@@ -539,7 +539,7 @@ public function rubPastieOnYourWangDawg():void {
 	outputText("\n\nYou grin and whistle a spritely tune as you return to camp.");
 	// (You have gained the One Track Mind perk!)
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
-	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.OneTrackMind,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	dynStats("sen", -2, "lus=", 0);
 	doNext(14);
 }
@@ -571,7 +571,7 @@ public function goForAPushayDivePasty():void {
 	outputText("\n\nTrue, this might not have been the most romantic sex act, but it was certainly enjoyable for the two of you.");
 	
 	outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
-	player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+	player.createPerk(PerkLib.SensualLover,0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
 	dynStats("sen", -2, "lus=", 0);
 	doNext(14);
 }
@@ -586,7 +586,7 @@ B) One has to have a cock to play with Scylla or Abylon, but not neccessarily Pa
 C) The player meets Scylla's Addiction Group and they hang out as Scylla goes about establishing the holiday in Tel'Adre.
 D) Once this is over, player can choose to stay and spend more time with Patsie, Scylla, or Abylon, or leave.
 E) Staying with Patsie requires one of the alcoholic items. If the player has none, re-direct to Abylon, Scylla, or Leave.
-F) The encounter can grant one of three perks. Scylla allows all perks, Patsie allows the Tainted or Corrupted perk, and Abylon allows the Pure or Tainted perk.
+F) The encounter can grant one of three PerkLib. Scylla allows all perks, Patsie allows the Tainted or Corrupted perk, and Abylon allows the Pure or Tainted perk.
 G) Picking Scylla leads to walking around Tel'Adre before watching sunset on the walls. The PC and Scylla are allowed to do this due to their reputation.
 G1) The player staying with Scylla can choose to : 
 - Cuddle and watch, leads to next day or loss of a few hours. Gives the Pure and Loving perk, plus stat modifications (lowers Corruption and Libido, raises Lust)

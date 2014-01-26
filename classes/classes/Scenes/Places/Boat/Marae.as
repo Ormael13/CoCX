@@ -3,7 +3,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
 import classes.Appearance;
-public class Marae extends AbstractBoatContent{
+	import classes.PerkLib;
+
+	public class Marae extends AbstractBoatContent{
 
 	public function Marae()
 	{
@@ -202,7 +204,7 @@ private function maraeStealLethicite():void {
 			outputText("You feel warm, enclosed in comfort and pleasure.  Is this heaven?  No, your head is throbbing and your eyes are closed…you open them and discover you're still lying at the base of the tree.  That greedy tentacle is still locked around your " + cockDescript(0) + " pinning it in the throes of orgasm.  You watch thick bulges of cum pump up the tentacle, evidence of a truly garguantuan fluid output.  It goes on and on, and you realize the pleasure ought to drive you mad.\n\n", false);
 			outputText("Marae steps into your field of view, and pulls the tentacle free.  Your " + cockDescript(0) + " twitches pitifully, blasting a few massive loads onto your belly as your orgasm withers and dies from lack of stimulation.\n\n", false); 
 			outputText("\"<i>Sorry about the pain, I had to tweak your body to make you a true breeder.  You can go now stud.  I expect the monsters ought to worry about you now, or they'll all have dripping twats and swollen bellies,</i>\" apologizes Marae.  She turns away from you, returning to the embrace of her tree's tentacles, sinking into debauchery.  You stagger into your boat and row away, oblivious to the stream to pre-cum dripping from your "+multiCockDescript()+".", false);
-			player.createPerk("Marae's Gift - Stud",0,0,0,0,"Marae saw fit to reward you for corrupting her by giving you a higher volume of semen and increasing its potency.");
+			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			doNext(14);
 		}
 		//FEM)
@@ -220,7 +222,7 @@ private function maraeStealLethicite():void {
 			outputText("Marae winks, \"<i>Sorry about making you look so pregnant my dear, it's a necessary part of the process.  All that sloshing seed is going to flow right into your tender little mortal ovaries, and remake them.  You'll be so fertile just looking at a hard cock could knock you up!</i>\"\n\n", false);
 			outputText("She giggles at your expression of horror, \"<i>No, not literally, but it won't take much to make you a mommy, and you'll find the gestation to be quite a bit...shorter.  Now get out of here before I change my mind and lock in an orgasm for the rest of your life.</i>\"\n\n", false);
 			outputText("You are dropped from the tree, and with little choice, you waddle to your boat, doing your best to cover up your violated " + vaginaDescript(0) + ".", false);
-			player.createPerk("Marae's Gift - Fertility",0,0,0,0,"Marae saw fit to 'reward' you for corrupting her by blessing you with unholy fertility!");
+			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 			doNext(13);
 		}
 	}
@@ -436,11 +438,11 @@ private function MaraePt2RoundIIIPrizes():void {
 		outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky " + player.feet() + " and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to knock up all the prettiest girls!</i>\"\n\n", false);
 		if(player.hasPerk("Marae's Gift - Stud") >= 0) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>", false);
-			player.createPerk("Marae's Gift - Profractory",0,0,0,0,"Marae increased the speed at which your body produces cum, allowing you to build up fluid 3x as fast as a normal person.");
+			player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 		}
 		else {
 			outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>", false);
-			player.createPerk("Marae's Gift - Stud",0,0,0,0,"Marae saw fit to reward you for corrupting her by giving you a higher volume of semen and increasing its potency.");
+			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 		}
 	}
 	//[Chickzillas]
@@ -464,12 +466,12 @@ private function MaraePt2RoundIIIPrizes():void {
 		
 		if(player.hasPerk("Marae's Gift - Fertility") >= 0) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>", false);
-			player.createPerk("Marae's Gift - Buttslut",0,0,0,0,"For some reason Marae altered your butthole to make it become wet and slippery when you're aroused.");
+			player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 			player.ass.analWetness = 2;
 		}
 		else {
 			outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>", false);
-			player.createPerk("Marae's Gift - Fertility",0,0,0,0,"Marae saw fit to 'reward' you for corrupting her by blessing you with unholy fertility!");
+			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 		}
 	}
 	//[HERMS]
@@ -481,13 +483,13 @@ private function MaraePt2RoundIIIPrizes():void {
 			//(RANDOM 1)
 			if(rand(2) == 0) {
 				outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ", false);
-				player.createPerk("Marae's Gift - Fertility",0,0,0,0,"Marae saw fit to 'reward' you for corrupting her by blessing you with unholy fertility!");
+				player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 				
 			}
 			//(RANDOM 2)
 			else {
 				outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ", false);
-				player.createPerk("Marae's Gift - Stud",0,0,0,0,"Marae saw fit to reward you for corrupting her by giving you a higher volume of semen and increasing its potency.");
+				player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			}
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n", false);
 	
@@ -502,7 +504,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n", false);
 	
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky " + player.feet() + " and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n", false);
-			player.createPerk("Marae's Gift - Stud",0,0,0,0,"Marae saw fit to reward you for corrupting her by giving you a higher volume of semen and increasing its potency.");
+			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>", false);
 		}
 		//(HAZ STUD)
@@ -512,7 +514,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n", false);
 	
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky " + player.feet() + " and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae or the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n", false);
-			player.createPerk("Marae's Gift - Fertility",0,0,0,0,"Marae saw fit to 'reward' you for corrupting her by blessing you with unholy fertility!");
+			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 			outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
 		}
 	}

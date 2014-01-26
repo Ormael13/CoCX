@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
 
 	public class SophieBimbo extends NPCAwareContent
 	{
@@ -390,7 +391,7 @@ public function unlockResistance():void {
 	}
 	else outputText("\nYou've gotten so used to having harpy lipstick on your lips that you're sure you're immune to it, even if you were to sprout a dick.  You would even feel comfortable wearing it around to use on male enemies, if you could find any.\n\n", false);
 	outputText("<b>(Perk Unlocked: Luststick Adapted - your minimum lust is permanently raised, but you are 20% more lust resistant.  In combat, you're immune to it, though it still gives you a rush during sex.  You're also comfortable enough with it to use it like a harpy if you find any.)</b>\n", false);
-	player.createPerk("Luststick Adapted",0,0,0,0,"Minimum lust is permanently raised, but you are also more lust resistant.  In combat, you're immune to harpy lipstick, though it still gives you a rush during sex.  You can also wear the lipstick yourself.");
+	player.createPerk(PerkLib.LuststickAdapted,0,0,0,0);
 }
 //Get oral as female.  
 private function bimboSophieLicksRugs():void {

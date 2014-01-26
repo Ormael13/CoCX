@@ -2,6 +2,7 @@
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 	import classes.Scenes.Places.Bazaar.*;
 
 	public class Bazaar extends BaseContent {
@@ -225,7 +226,7 @@ private function joeyAndrogyny():void {
 	outputText("You ask for a mirror, but Joey just titters with a knowing smile on his succulent lips as he replies, \"<i>Oh, you haven't changed at all " + player.mf("handsome","dear") + ".  This will let you change it to whatever extreme you like, but those kinds of facials aren't a service we currently offer.  I do hear that there's a goblin salon in the mountains that might be able to help you finish up your look though!</i>\"\n\n", false);
 	
 	outputText("Thanking the cute bunny-boy for his help, you hand over the payment and head back to check on camp.", false);
-	player.createPerk("Androgyny",0,0,0,0,"Your face is able to be as masculine or feminine as possible, regardless of gender.");
+	player.createPerk(PerkLib.Androgyny,0,0,0,0);
 	dynStats("lus", 5);
 	doNext(13);
 }
@@ -703,24 +704,24 @@ private function yesPutDatSockOnMe(target:int):void {
 	clearOutput();
 	if(flags[kFLAGS.SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
 	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") {
-		if(player.hasPerk("Midas Cock") < 0) player.createPerk("Midas Cock",0,0,0,0);
+		if(player.hasPerk("Midas Cock") < 0) player.createPerk(PerkLib.MidasCock,0,0,0,0);
 		player.gems -= 3000;
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;
-		if(player.hasPerk("Phallic Restraint") < 0) player.createPerk("Phallic Restraint",0,0,0,0);
+		if(player.hasPerk("Phallic Restraint") < 0) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
-		if(player.hasPerk("Phallic Potential") < 0) player.createPerk("Phallic Potential",0,0,0,0);
+		if(player.hasPerk("Phallic Potential") < 0) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
 		player.gems -= 250;
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
-		if(player.hasPerk("Lusty Regeneration") < 0) player.createPerk("Lusty Regeneration",0,0,0,0);
+		if(player.hasPerk("Lusty Regeneration") < 0) player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
 		player.gems -= 1000;
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
-		if(player.hasPerk("Pent Up") < 0) player.createPerk("Pent Up",10,0,0,0);
+		if(player.hasPerk("Pent Up") < 0) player.createPerk(PerkLib.PentUp,10,0,0,0);
 		else player.addPerkValue("Pent Up",1,5);
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "alabaster") player.gems -= 25;

@@ -213,7 +213,7 @@ public function newGameGo(e:MouseEvent = null):void {
 
 public function doCreation(eventNo:Number):void {
 	var e:MouseEvent;
-	var historyPerk:String = "";
+	var historyPerk:PerkType;
 	//MAN
 	if(eventNo == 10000) {
 		player.str+=3;
@@ -475,65 +475,65 @@ public function doCreation(eventNo:Number):void {
 			player.tone += 7;
 			player.thickness += 3;
 			//Add bonus +25% strength gain
-			player.createPerk("Strong", 0.25, 0, 0, 0,"Gain strength 25% faster.");
+			player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
 		}
 		if(temp == 2) {
 			player.tou += 5;
 			player.tone += 5;
 			player.thickness += 5;
-			player.createPerk("Tough", 0.25, 0, 0, 0,"Gain toughness 25% faster.");
+			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0,"Gain toughness 25% faster.");
 			player.HP = kGAMECLASS.maxHP();
 		}
 		if(temp == 3) {
 			player.spe += 5;
 			player.tone += 10;
-			player.createPerk("Fast", 0.25, 0, 0, 0,"Gain speed 25% faster.");
+			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0,"Gain speed 25% faster.");
 		}
 		if(temp == 4) {
 			player.inte += 5;
 			player.thickness -= 5;
-			player.createPerk("Smart", 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
+			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
 		}
 		if(temp == 5) {
 			player.lib += 5;
-			player.createPerk("Lusty", 0.25, 0, 0, 0,"Gain lust 25% faster.");
+			player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0,"Gain lust 25% faster.");
 		}
 		if(temp == 6) {
 			player.sens += 5;
-			player.createPerk("Sensitive", 0.25, 0, 0, 0,"Gain sensitivity 25% faster.");
+			player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0,"Gain sensitivity 25% faster.");
 		}
 		if(temp == 7) {
 			player.femininity -= 5;
 			player.cocks[0].cockLength = 8;
 			player.cocks[0].cockThickness = 1.5;
 			trace("Creation - cock modded to 8inches");
-			player.createPerk("Big Cock", 1.25, 0, 0, 0,"Gain cock size 25% faster and grow larger easier.");
+			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
 		}
 		if(temp == 8) {
 			player.femininity -= 2;
 			player.cumMultiplier = 1.5;
-			player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
+			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 		}
 		if(temp == 9) {
 			player.femininity += 5;
 			player.breastRows[0].breastRating += 2;
-			player.createPerk("Big Tits", 1.5, 0, 0, 0,"Makes your tits grow larger more easily.");
+			player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 		}
 		if(temp == 10) {
 			player.femininity -= 5;
 			player.clitLength = 1;
-			player.createPerk("Big Clit", 1.25, 0, 0, 0,"Allows your clit to grow larger faster.");
+			player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
 		}
 		if(temp == 11) {
 			player.femininity += 5;
 			player.fertility += 25;
 			player.hipRating+=2;
-			player.createPerk("Fertile", 1.5, 0, 0, 0,"Makes you 15% more likely to become pregnant.");
+			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 		}
 		if(temp == 12) {
 			player.femininity += 7;
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-			player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
+			player.createPerk(PerkLib.WetPussy,2,0,0,0);
 		}
 		eventParser(10036);
 	}
@@ -649,14 +649,14 @@ public function doCreation(eventNo:Number):void {
 	}
 	if(eventNo == 10044) {
 		//Alchemist
-		if(temp == 10037) historyPerk = "History: Alchemist";
-		else if(temp == 10038) historyPerk = "History: Fighter";
-		else if(temp == 10039) historyPerk = "History: Healer";
-		else if(temp == 10040) historyPerk = "History: Religious";
-		else if(temp == 10041) historyPerk = "History: Scholar";
-		else if(temp == 10042) historyPerk = "History: Slacker";
+		if(temp == 10037) historyPerk = PerkLib.HistoryAlchemist;
+		else if(temp == 10038) historyPerk = PerkLib.HistoryFighter;
+		else if(temp == 10039) historyPerk = PerkLib.HistoryHealer;
+		else if(temp == 10040) historyPerk = PerkLib.HistoryReligious;
+		else if(temp == 10041) historyPerk = PerkLib.HistoryScholar;
+		else if(temp == 10042) historyPerk = PerkLib.HistorySlacker;
 		else if(temp == 10046) {
-			historyPerk = "History: Slut";
+			historyPerk = PerkLib.HistorySlut;
 			if(player.hasVagina()) {
 				player.vaginas[0].virgin = false;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
@@ -664,14 +664,14 @@ public function doCreation(eventNo:Number):void {
 			player.ass.analLooseness = 1;
 		}
 		else if(temp == 10047) {
-			historyPerk = "History: Whore";
+			historyPerk = PerkLib.HistoryWhore;
 			if(player.hasVagina()) {
 				player.vaginas[0].virgin = false;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 			}
 			player.ass.analLooseness = 1;
 		}
-		else historyPerk = "History: Smith";
+		else historyPerk = PerkLib.HistorySmith;
 		player.createPerk(historyPerk,0,0,0,0,"YOU GOT HISTORY BRO!");
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
 			eventParser(10045);

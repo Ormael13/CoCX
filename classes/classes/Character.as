@@ -810,7 +810,7 @@
 			max += int(tou * 2 + 50);
 			if (hasPerk("Tank") >= 0) max += 50;
 			if (hasPerk("Tank 2") >= 0) max += Math.round(tou);
-			if (hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
+			if (hasPerk(PerkLib.ChiReflowDefense.name) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			if (level <= 20) max += level * 15;
 			else max += 20 * 15;
 			max = Math.round(max);

@@ -1,5 +1,4 @@
-﻿import classes.GlobalFlags.kGAMECLASS;
-import classes.Monster;
+﻿import classes.Monster;
 import classes.Scenes.Areas.Mountain.Minotaur;
 
 import coc.view.MainView;
@@ -1421,8 +1420,8 @@ public function attack():void {
 	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
 		damage *= 1.2;
 		
-	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowMagic.name) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowAttack.name) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
 	
 	//One final round
 	damage = Math.round(damage);
@@ -2328,7 +2327,6 @@ public function showMonsterLust():void {
 		if(monster.lust >= 65 && monster.lust < 85) outputText("A distinct lump pulses at the base of the slime's torso, as if something inside the creature were trying to escape.  ", false);
 		if(monster.lust >= 85 && monster.lust < 93) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  ", false);
 		if(monster.lust >= 93) outputText("A long, thick pillar like a small arm protrudes from the base of the slime's torso.  Its entire body pulses, and it is clearly beginning to lose its cohesion.  ", false);
-		return;	
 	}
 	else if(monster.short == "Sirius, a naga hypnotist") {
 		if(monster.lust < 40) {}
@@ -2399,13 +2397,13 @@ public function tease():void {
 		return;
 	}
 	fatigueRecovery();
-	var damage:Number = 0;
-	var chance:Number= 0;
+	var damage:Number;
+	var chance:Number;
 	var bimbo:Boolean = false;
 	var bro:Boolean = false;
 	var futa:Boolean = false;
 	var choices:Array = [];
-	var select:Number = 0;
+	var select:Number;
 	//Tags used for bonus damage and chance later on
 	var breasts:Boolean = false;
 	var penis:Boolean = false;
@@ -2442,7 +2440,7 @@ public function tease():void {
 	if(player.hasPerk("Sensual Lover") >= 0) {
 		chance += 2;
 	}
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowLust.name) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 	//==============================
 	//Determine basic damage.
 	//==============================
@@ -3208,7 +3206,7 @@ public function tease():void {
 				outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!", false);
 			}
 			penis = true;
-			break
+			break;
 		//24 STAFF POLEDANCE
 		case 24:
 			outputText("You run your tongue across your lips as you plant your staff into the ground.  Before your enemy can react, you spin onto the long, wooden shaft, using it like an impromptu pole.  You lean back against the planted staff, giving your enemy a good look at your body.  You stretch backwards like a cat, nearly touching your fingertips to the ground beneath you, now holding onto the staff with only one leg.  You pull yourself upright and give your " + buttDescript() + " a little slap and your " + chestDesc() + " a wiggle before pulling open your " + player.armorName + " and sliding the pole between your tits.  You drop down to a low crouch, only just covering your genitals with your hand as you shake your " + buttDescript() + " playfully.  You give the enemy a little smirk as you slip your " + player.armorName + " back on and pick up your staff.", false);
@@ -3697,7 +3695,7 @@ public function tease():void {
 			damage *= 1.15;
 			bonusDamage *= 1.15;
 		}
-		if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.hasPerk(PerkLib.ChiReflowLust.name) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
 		damage = (damage + rand(bonusDamage))*monster.lustVuln;
 		monster.teased(damage);
@@ -3819,7 +3817,7 @@ public function spellMod():Number {
 	if(player.hasPerk("Wizard's Focus") >= 0) {
 		if(player.perkv1("Wizard's Focus") is Number) mod += player.perkv1("Wizard's Focus");
 	}
-	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowMagic.name) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	return mod;
 }
 public function spellArouse():void {
@@ -4067,7 +4065,7 @@ public function spellWhitefire():void {
 	//Using fire attacks on the goo]
 	if(monster.short == "goo-girl") {
 		outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
-		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
+		if(monster.hasPerk("Acid") < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	outputText("\n\n", false);
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -4081,11 +4079,11 @@ public function spellWhitefire():void {
 public function spellPerkUnlock():void {
 	if(flags[kFLAGS.SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
 		outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 20%!</b>\n\n");
-		player.createPerk("Spellcasting Affinity",20,0,0,0);
+		player.createPerk(PerkLib.SpellcastingAffinity,20,0,0,0);
 	}
 	if(flags[kFLAGS.SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
-		player.changePerkValue("Spellcasting Affinity",1,35);
+		player.changePerkValue("SpellcastingAffinity",1,35);
 	}
 	if(flags[kFLAGS.SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
@@ -4111,8 +4109,7 @@ public function hellFire():void {
 		enemyAI();
 		return;
 	}
-	var damage:Number = 0;
-	damage = (player.level * 8 + rand(10) + player.cor/5);
+	var damage:Number = (player.level * 8 + rand(10) + player.cor/5);
 	if(player.hasStatusAffect("GooArmorSilence") < 0) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
 	
 	if(player.hasStatusAffect("Web-Silence") >= 0) {
@@ -4230,7 +4227,7 @@ public function kick():void {
 		enemyAI();
 		return;
 	}
-	var damage:Number = 0;
+	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 		//Akbal dodges special education
@@ -4533,7 +4530,7 @@ public function dragonBreath():void {
 	//Goos burn
 	else if(monster.short == "goo-girl") {
 		outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
-		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
+		if(monster.hasPerk("Acid") < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		damage = Math.round(damage * 1.5);
 		damage = doDamage(damage);
 		monster.createStatusAffect("Stunned",0,0,0,0);
@@ -4590,7 +4587,7 @@ public function fireballuuuuu():void {
 		enemyAI();
 		return;
 	}
-	var damage:Number = 0;
+	var damage:Number;
 	damage = int(player.level * 10 + 45 + rand(10));
 	if(player.hasStatusAffect("GooArmorSilence") >= 0) {
 		outputText("<b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b> ", false);
@@ -4623,7 +4620,7 @@ public function fireballuuuuu():void {
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
-			if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
+			if(monster.hasPerk("Acid") < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
 		}
 		if(monster.hasStatusAffect("sandstorm") >= 0) {
@@ -5001,7 +4998,6 @@ public function runAway():void {
 	}
 	outputText("\n\n", false);
 	enemyAI();
-	return;
 }
 
 public function anemoneSting():void {
@@ -5222,7 +5218,7 @@ public function corruptedFoxFire():void {
 	//Using fire attacks on the goo]
 	if(monster.short == "goo-girl") {
 		outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
-		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
+		if(monster.hasPerk("Acid") < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);
@@ -5260,7 +5256,7 @@ public function foxFire():void {
 	//Using fire attacks on the goo]
 	if(monster.short == "goo-girl") {
 		outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
-		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
+		if(monster.hasPerk("Acid") < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);

@@ -233,8 +233,8 @@ package classes
 
 			// Uma's Accupuncture Bonuses
 			var modArmorDef:Number = 0;
-			if (hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
-			if (hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
+			if (hasPerk(PerkLib.ChiReflowAttack.name) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
+			if (hasPerk(PerkLib.ChiReflowAttack.name) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
 			damage -= modArmorDef;
 			if (damage<0) damage = 0;
 			return damage;

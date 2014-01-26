@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Lake
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
 
 	public class GooGirlScene extends AbstractLakeContent
 	{
@@ -53,7 +54,7 @@ package classes.Scenes.Areas.Lake
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes. The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences. There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n\n", false);
 				//(Reduces Fluid Addiction to a 24 hour intake requirement).
 				outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>)", false);
-				player.createPerk("Slime Core", 0, 0, 0, 0, "Moisture craving builds at a greatly reduced rate.");
+				player.createPerk(PerkLib.SlimeCore, 0, 0, 0, 0);
 			}
 		}
 

@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.Bazaar {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
+	import classes.PerkLib;
 
 //  TIMES_IN_BENOITS:int = 562;
 //  BENOIT_AFFECTION:int = 563;
@@ -849,10 +850,10 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = 1;
 	benoitKnocksUpPCCheck();
 	//(Oviposition perk added)
-	player.createPerk("Basilisk Womb",0,0,0,0);
+	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
 	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
 	if(player.hasPerk("Oviposition") < 0) {
-		player.createPerk("Oviposition",0,0,0,0);
+		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}
 	if(player.pregnancyType == 14) player.pregnancyType = 18;

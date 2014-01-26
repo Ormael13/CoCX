@@ -74,8 +74,7 @@ package classes
 			this._description = _description || this.longName;
 			this._value = _value;
 			if (ITEM_LIBRARY[_id] != null) {
-				trace("Duplicatem itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
-				CoC_Settings.error("Duplicate itemid " + _id);
+				CoC_Settings.error("Duplicate itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
 			}
 			ITEM_LIBRARY[_id] = this;
 		}

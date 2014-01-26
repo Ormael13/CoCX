@@ -818,7 +818,7 @@ public function doDungeon(eventNo:Number):void {
 	//Omnibus Post-Boon stuff
 	if(eventNo == 11055) {
 		outputText("\n\nThe omnibus disappeared while you were examining the changes.  You guess you did get what you wanted.  You blush and smile, still feeling very horny.  You decide to use the privacy of the office to relieve the tension you've been building up since you arrived.\n\nYou masturbate quickly and efficiently, eager to calm down and resume your exploration.  In no time at all an orgasm crashes through your body.  Stretching and standing up, you find yourself still aroused.\n\nYou slap your forehead as realization washes over you - <b>the demoness' magic is keeping you from ever being totally satisfied!</b>\n(Perk Gained - Omnibus' Gift - Minimum lust has been increased!)", false);
-		player.createPerk("Omnibus' Gift",0,0,0,0,"Raises your minimum lust by up to 35 and slightly reduces lust gain.");
+		player.createPerk(PerkLib.OmnibusGift,0,0,0,0);
 		dynStats("lus=", 0, "cor", 2);
 		cleanupAfterCombat();
 		return;

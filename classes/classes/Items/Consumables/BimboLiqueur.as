@@ -4,7 +4,8 @@
 package classes.Items.Consumables
 {
 import classes.Appearance;
-import classes.Player;
+	import classes.PerkLib;
+	import classes.Player;
 	import classes.internals.Utils;
 
 	public class BimboLiqueur extends SimpleConsumable
@@ -52,8 +53,8 @@ import classes.Player;
 				outputText("(Perks Gained: Futa Form, Futa Faculties)\n");
 				player.removePerk("Bro Body");
 				player.removePerk("Bro Brains");
-				player.createPerk("Futa Faculties", 0, 0, 0, 0, "");
-				player.createPerk("Futa Form", 0, 0, 0, 0, "");
+				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
+				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				if (player.inte > 35) {
 					player.inte = 35;
 					game.dynStats("int", -0.1);
@@ -165,11 +166,11 @@ import classes.Player;
 				}
 				if (player.hasPerk("Bimbo Body") < 0) {
 					outputText("<b>(Bimbo Body - Perk Gained!)\n");
-					player.createPerk("Bimbo Body", 0, 0, 0, 0, "You have the body of a bimbo.  Your tits will never stay below a 'DD' cup, you're much lustier, more accustomed to being turned on, and you gain a bonus to using your body to arouse your enemies in combat!");
+					player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 				}
 				if (player.hasPerk("Bimbo Brains") < 0) {
 					outputText("(Bimbo Brains - Perk Gained!)\n");//int to 20.  max int 50)
-					player.createPerk("Bimbo Brains", 0, 0, 0, 0, "Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!");
+					player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 					if (player.inte > 21) player.inte = 21;
 				}
 				game.dynStats("int", -1, "lib", 4, "sen", 25, "lus=", 0);

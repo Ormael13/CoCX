@@ -8,6 +8,7 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.PerkLib;
 	import classes.Player;
 	import classes.Scenes.Monsters.Imp;
 
@@ -2295,7 +2296,7 @@ package classes.Scenes.Areas.Forest
 					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
 					player.tailVenom = 9;
-					player.createPerk("Enlightened Nine-tails", 0, 0, 0, 0);
+					player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					dynStats("int", 2, "lus", -20, "cor", -2);
 				}
 				player.consumeItem(consumables.FOXJEWL);

@@ -375,7 +375,13 @@ package classes
 		
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
-		public var perks:Array;
+		private var _perks:Array;
+		public function perk(i:int):PerkClass{
+			return _perks[i];
+		}
+		public function get perks():Array {
+			return _perks;
+		}
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
 		//TODO: Move monster status effects into perks. Needs investigation though.
@@ -390,7 +396,7 @@ package classes
 			vaginas = [];
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
 			breastRows = [];
-			perks = [];
+			_perks = [];
 			statusAffects = [];
 			//keyItems = new Array();
 		}
@@ -404,9 +410,9 @@ package classes
 		
 		//Functions			
 		//Create a perk
-		public function createPerk(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number, desc:String = ""):void
+		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number, modDesc:String=null):void
 		{
-			var newKeyItem:PerkClass = new PerkClass();
+			var newKeyItem:PerkClass = new PerkClass(ptype);
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
@@ -421,7 +427,7 @@ package classes
 				keySlot = 0;
 			}
 			//If it belongs at the end, push it on
-			if (perks[perks.length - 1].perkName < keyName && !arrayed)
+			if (perks[perks.length - 1].perkName < ptype.name && !arrayed)
 			{
 				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
@@ -429,7 +435,7 @@ package classes
 				keySlot = perks.length - 1;
 			}
 			//If it belongs in the beginning, splice it in
-			if (perks[0].perkName > keyName && !arrayed)
+			if (perks[0].perkName > ptype.name && !arrayed)
 			{
 				//trace("New Perk Belongs at the beginning! " + keyName);
 				perks.splice(0, 0, newKeyItem);
@@ -445,13 +451,13 @@ package classes
 				{
 					counter--;
 					//If the current slot is later than new key
-					if (perks[counter].perkName > keyName)
+					if (perks[counter].perkName > ptype.name)
 					{
 						//If the earlier slot is earlier than new key && a real spot
 						if (counter - 1 >= 0)
 						{
 							//If the earlier slot is earlier slot in!
-							if (perks[counter - 1].perkName <= keyName)
+							if (perks[counter - 1].perkName <= ptype.name)
 							{
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
@@ -462,7 +468,7 @@ package classes
 						else
 						{
 							//If the next slot is later we are go
-							if(perks[counter].perkName <= keyName) {
+							if(perks[counter].perkName <= ptype.name) {
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
 								keySlot = counter;
@@ -480,12 +486,11 @@ package classes
 				keySlot = perks.length - 1;
 			}
 			
-			perks[keySlot].perkName = keyName;
 			perks[keySlot].value1 = value1;
 			perks[keySlot].value2 = value2;
 			perks[keySlot].value3 = value3;
 			perks[keySlot].value4 = value4;
-			perks[keySlot].perkDesc = desc;
+			if (modDesc != null) perks[keySlot].modDesc = modDesc;
 			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
 		}
 		

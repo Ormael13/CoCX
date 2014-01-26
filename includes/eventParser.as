@@ -62,13 +62,6 @@ public function doSystem(eventNo:Number):void {
 	//(clear data/appearance buttons if not at camp
 	//trace("System Event", eventNo)
 
-	// Perk options (and an array containing all the event-numbers that correspond to perks)
-	// are located in perkPicker.as
-	if (perkEventNums.indexOf(eventNo) > 0)
-	{
-		pickPerks(eventNo);
-		return;
-	}
 
 	if(eventNo != 1)
 	{
@@ -962,7 +955,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hasPerk("Flexibility") < 0) {
 				outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n", false);
 				needNext = true;
-				player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
+				player.createPerk(PerkLib.Flexibility,0,0,0,0);
 			}
 		}
 		//Remove flexibility perk if not meeting requirements
@@ -1731,7 +1724,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n", false);
 				//(Reduces Fluid Addiction to a 24 hour intake requirement).
 				outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)", false);
-				player.createPerk("Slime Core",0,0,0,0,"Moisture craving builds at a greatly reduced rate.");
+				player.createPerk(PerkLib.SlimeCore,0,0,0,0);
 				player.removeKeyItem("Ruby Heart");
 			}
 		}
@@ -2398,7 +2391,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//(reduce corr by 5)
 			dynStats("cor", -5);
 			//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal)
-			player.createPerk("Marble Resistant",0,0,0,0,"You know how to avoid the addictive qualities of Marble's milk.");
+			player.createPerk(PerkLib.MarbleResistant,0,0,0,0);
 			//After player ends Addiction:
 			//Marble liked you addicted
 			if(player.statusAffectv3("Marble") == 1) {
@@ -2480,7 +2473,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
 			//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal, they are instead permanently given the stat increases of 5 str, and 10 tou as part of a perk called 'Marble's Milk' and automatically drink Marble's milk every morning if a bad end is not triggered)
-			player.createPerk("Marble's Milk",0,0,0,0,"You're totally addicted to Marble's milk and can't live without it.");
+			player.createPerk(PerkLib.MarblesMilk,0,0,0,0);
 			//Clear withdrawl
 			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 				player.removeStatusAffect("MarbleWithdrawl");

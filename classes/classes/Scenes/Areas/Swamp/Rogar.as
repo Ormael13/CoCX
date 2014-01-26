@@ -3,7 +3,8 @@ import classes.BaseContent;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
-import classes.Scenes.Places.TelAdre;
+	import classes.PerkLib;
+	import classes.Scenes.Places.TelAdre;
 public class Rogar extends BaseContent{
 
 	public function Rogar()
@@ -772,8 +773,8 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(cocked) outputText(", and you smile to yourself as your now-larger endowment rubs against garments not suited to it", false);
 		outputText(".  Who needs book smarts anyway?  Nerds.", false);
 		//lose lust, gain bro traits, slimefeed
-		player.createPerk("Bro Brains",0,0,0,0,"After drinking a 'Bro Brew', your maximum capacity for intellect is greatly decreased.");
-		player.createPerk("Bro Body",0,0,0,0,"You have the body of a muscled, sex-addicted hunk.  Your cock cannot be shorter than 10\", you're much lustier, more accustomed to being turned on, and you gain a bonus to using your body to arouse your enemies in combat!");
+		player.createPerk(PerkLib.BroBrains,0,0,0,0);
+		player.createPerk(PerkLib.BroBody,0,0,0,0);
 		outputText("<b>(Bro Body - Perk Gained!)\n", false);
 		outputText("(Bro Brains - Perk Gained!)</b>\n", false);//int to 20.  max int 50)
 		if(player.hasPerk("Feeder") >= 0) {

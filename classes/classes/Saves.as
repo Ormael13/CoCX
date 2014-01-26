@@ -642,21 +642,19 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
 		}
 		//Set Perk Array
-		for (i = 0; i < player.perks.length; i++)
-		{
-			saveFile.data.perks.push([]);
-				//trace("Saveone Perk");
-		}
 		//Populate Perk Array
 		for (i = 0; i < player.perks.length; i++)
 		{
+			saveFile.data.perks.push([]);
+			//trace("Saveone Perk");
 			//trace("Populate One Perk");
-			saveFile.data.perks[i].perkName = player.perks[i].perkName;
-			saveFile.data.perks[i].value1 = player.perks[i].value1;
-			saveFile.data.perks[i].value2 = player.perks[i].value2;
-			saveFile.data.perks[i].value3 = player.perks[i].value3;
-			saveFile.data.perks[i].value4 = player.perks[i].value4;
-			saveFile.data.perks[i].perkDesc = player.perks[i].perkDesc;
+			saveFile.data.perks[i].id = player.perk(i).ptype.id;
+			//saveFile.data.perks[i].perkName = player.perk(i).ptype.id; //uncomment for backward compatibility
+			saveFile.data.perks[i].value1 = player.perk(i).value1;
+			saveFile.data.perks[i].value2 = player.perk(i).value2;
+			saveFile.data.perks[i].value3 = player.perk(i).value3;
+			saveFile.data.perks[i].value4 = player.perk(i).value4;
+			saveFile.data.perks[i].perkDesc = player.perk(i).perkDesc;
 		}
 		
 		//Set Status Array
@@ -1373,39 +1371,39 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (player.breastRows[i].breastRating < 0)
 				player.breastRows[i].breastRating = 0;
 		}
-		//Set Perk Array
-		for (i = 0; i < saveFile.data.perks.length; i++)
-		{
-			player.createPerk("TEMP", 0, 0, 0, 0);
-				//trace("LoadOne Perk i(" + i + ")");
-		}
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
 		{
-			player.perks[i].perkName = saveFile.data.perks[i].perkName;
-			player.perks[i].value1 = saveFile.data.perks[i].value1;
-			player.perks[i].value2 = saveFile.data.perks[i].value2;
-			player.perks[i].value3 = saveFile.data.perks[i].value3;
-			player.perks[i].value4 = saveFile.data.perks[i].value4;
-			if(isNaN(player.perks[i].value1)) {
-				if(player.perks[i].perkName == "Wizard's Focus") {
-					player.perks[i].value1 = .3;
-				}
-				else player.perks[i].value1 = 0;
-				trace("NaN byaaaatch: " + player.perks[i].value1);
+			var id:String = saveFile.data.perks[i].id || saveFile.data.perks[i].perkName;
+			var value1:Number = saveFile.data.perks[i].value1;
+			var value2:Number = saveFile.data.perks[i].value2;
+			var value3:Number = saveFile.data.perks[i].value3;
+			var value4:Number = saveFile.data.perks[i].value4;
+			var ptype:PerkType = PerkType.lookupPerk(id);
+			if (ptype == null) {
+				trace("ERROR: Unknown perk id="+id);
+				continue;
 			}
-			if(player.perks[i].perkName == "Wizard's Focus") {
-				if(player.perks[i].value1 == 0 || player.perks[i].value1 < 0.1) {
+			player.createPerk(ptype,value1,value2,value3,value4);
+			if(isNaN(player.perk(i).value1)) {
+				if(player.perk(i).perkName == "Wizard's Focus") {
+					player.perk(i).value1 = .3;
+				}
+				else player.perk(i).value1 = 0;
+				trace("NaN byaaaatch: " + player.perk(i).value1);
+			}
+			if(player.perk(i).perkName == "Wizard's Focus") {
+				if(player.perk(i).value1 == 0 || player.perk(i).value1 < 0.1) {
 					trace("Wizard's Focus boosted up to par (.5)");
-					player.perks[i].value1 = .5;
+					player.perk(i).value1 = .5;
 				}
 			}
 			//If no save data for perkDesc, initialize it.
 			if (saveFile.data.perks[i].perkDesc == undefined)
-				player.perks[i].perkDesc = "<b>N/A: This is an older character file.</b>";
+				player.perk(i).modDesc = "<b>N/A: This is an older character file.</b>";
 			else
-				player.perks[i].perkDesc = saveFile.data.perks[i].perkDesc;
-				//trace("Perk " + player.perks[i].perkName + " loaded.");
+				player.perk(i).modDesc = saveFile.data.perks[i].perkDesc;
+				//trace("Perk " + player.perk(i).id + " loaded.");
 		}
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
@@ -1457,7 +1455,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				var savedIS:* = saveFile.data.itemStorage[i];
 				if (savedIS.shortName && savedIS.shortName.indexOf("Gro+") != -1)
 					savedIS.id = "GroPlus";
-				storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
+				if (savedIS.quantity>0)
+					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
+				else
+					storage.emptySlot();
 				storage.unlocked = savedIS.unlocked;
 			}
 		}

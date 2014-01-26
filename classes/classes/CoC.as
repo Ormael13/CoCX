@@ -9,6 +9,7 @@
 	import classes.AssClass;
 	import classes.BreastRowClass;
 	import classes.Items.*;
+	import classes.PerkLib;
 
 	import classes.Player;
 	import classes.Cock;
@@ -28,16 +29,11 @@
 
 	import classes.Scenes.*;
 	import classes.Scenes.Areas.*;
-	import classes.Scenes.Areas.Bog.*
 	import classes.Scenes.Areas.Desert.*
 	import classes.Scenes.Areas.Forest.*
 	import classes.Scenes.Areas.HighMountains.*
-	import classes.Scenes.Areas.Lake.*
 	import classes.Scenes.Areas.Mountain.*
-	import classes.Scenes.Areas.Plains.*
 	import classes.Scenes.Areas.Swamp.*
-	import classes.Scenes.Camp.*;
-	import classes.Scenes.Dungeons.*;
 	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.Scenes.Dungeons.Factory.*;
@@ -46,13 +42,8 @@
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.*;
-	import classes.Scenes.Places.Bazaar.*;
-	import classes.Scenes.Places.Boat.*;
-	import classes.Scenes.Places.Farm.*;
-	import classes.Scenes.Places.Owca.*;
 	import classes.Scenes.Places.TelAdre.*;
 	import classes.Scenes.Quests.*;
-	import classes.Scenes.Quests.UrtaQuest.*;
 	import coc.view.MainView;
 
 	import coc.model.GameModel;
@@ -204,7 +195,6 @@
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/masturbation.as";
-		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
 		include "../../includes/symGear.as";

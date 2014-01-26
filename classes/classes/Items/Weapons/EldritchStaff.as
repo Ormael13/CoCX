@@ -5,6 +5,7 @@ package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.Items.WeaponLib;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class EldritchStaff extends Weapon
@@ -12,7 +13,7 @@ package classes.Items.Weapons
 
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			player.createPerk("Wizard's Focus",.6,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
+			player.createPerk(PerkLib.WizardsFocus,.6,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void

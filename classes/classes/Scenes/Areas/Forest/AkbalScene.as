@@ -8,6 +8,7 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.PerkLib;
 
 	public class AkbalScene extends BaseContent
 	{
@@ -1045,7 +1046,7 @@ package classes.Scenes.Areas.Forest
 					outputText("(You are now capable of breathing Akbal's fire.)", false);
 					//['LOTF' or 'Terrestrial Fire Lord' appears as perk]
 					//[Gain 'Terrestrial Fire' in Specials]
-					player.createPerk("Fire Lord", 0, 0, 0, 0, "Thanks to Akbal's blessings, you're able to breathe gouts of green flame at your foes.");
+					player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
 				}
 			}
 			//[After 4th submission if corruption is greater than 40%]
@@ -1055,7 +1056,7 @@ package classes.Scenes.Areas.Forest
 				if (player.hasPerk("Whispered") < 0)
 				{
 					outputText("(You are now Whispered.)", false);
-					player.createPerk("Whispered", 0, 0, 0, 0, "Akbal has allowed you to whisper to the minds of your foes, as he does.");
+					player.createPerk(PerkLib.Whispered, 0, 0, 0, 0);
 						//['Whispered' appears as perk]
 						//[Gain 'Whisper' in Specials]
 				}

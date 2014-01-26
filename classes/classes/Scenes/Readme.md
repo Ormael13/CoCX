@@ -155,7 +155,7 @@ replaced with `itype == library.THATITM` where `library` is item library (see be
         to call possible unequip effect.
     
     Also you **CAN** override methods `equipEffect(player,output)` and `unequipEffect(player,output)` to display
-    some messages or add/remove perks. Overrideable method `unequipReturnItem` returns item that should be placed into
+    some messages or add/remove PerkLib. Overrideable method `unequipReturnItem` returns item that should be placed into
     inventory on unequip, or `null` if item simply disappears. Example cases when you need to override this method are:
 
     * `ComfortableUnderclothes`, `Fists`, and `GooArmor` that return `null`

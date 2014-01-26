@@ -2356,7 +2356,7 @@
 			if (changes < changeLimit && player.hasPerk("Bee Ovipositor") < 0 && player.tailType == TAIL_TYPE_BEE_ABDOMEN && rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
-				player.createPerk("Bee Ovipositor", 0, 0, 0, 0);
+				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0, "");
 				changes++;
 			}
 			//Bee butt - 66% lower chance if already has a tail
@@ -3037,7 +3037,7 @@
 		{
 			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.", true);
 			dynStats("lib", -5, "lus", -25, "cor", -10);
-			if (player.hasPerk("Purity Blessing") < 0) player.createPerk("Purity Blessing", 0, 0, 0, 0, "Reduces the rate at which your corruption, libido, and lust increase.");
+			if (player.hasPerk("Purity Blessing") < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
 		}
 
 //TODO FIX
@@ -3413,7 +3413,7 @@
 			if (player.hasStatusAffect("Feeder") < 0 && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
 				outputText("\n\nYou start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.\n\n<b>(You have gained the 'Feeder' perk!)</b>", false);
 				player.createStatusAffect("Feeder", 0, 0, 0, 0);
-				player.createPerk("Feeder", 0, 0, 0, 0, "The LaBova has corrupted your breasts, preventing your lactation from decreasing and giving you an urge to feed it to others.");
+				player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 				changes++;
 			}
 			//UNFINISHED
@@ -5030,7 +5030,7 @@
 			if (player.hasVagina() && player.hasPerk("Oviposition") < 0 && changes < changeLimit && rand(5) == 0 && player.lizardScore() > 3) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n", false);
 				outputText("(<b>Perk Gained: Oviposition</b>)", false);
-				player.createPerk("Oviposition", 0, 0, 0, 0, "Laying eggs has become a normal part of your reptilian body's routine.");
+				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
 				changes++;
 			}
 
@@ -5382,7 +5382,7 @@
 			if (player.hasVagina() && player.hasPerk("Bunny Eggs") < 0 && changes < changeLimit && rand(4) == 0 && player.bunnyScore() > 3) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n\n", false);
 				outputText("(<b>Perk Gained: Bunny Eggs</b>)", false);
-				player.createPerk("Bunny Eggs", 0, 0, 0, 0, "Laying eggs has become a normal part of your bunny-body's routine.");
+				player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
 				changes++;
 			}
 			//Shrink Balls!
@@ -5850,7 +5850,7 @@
 			//SPECIAL:
 			//Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
 			if (player.hasPerk("Harpy Womb") < 0 && player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && rand(4) == 0 && changes < changeLimit) {
-				player.createPerk("Harpy Womb", 0, 0, 0, 0, "So long as you have harpy legs and a harpy tail, your womb will never produce small eggs.");
+				player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
 				outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)", false);
 				changes++;
 			}
@@ -6099,7 +6099,7 @@
 			//kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
 			if (player.hasPerk("Diapause") < 0 && player.kangaScore() > 4 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
 				//Perk name and description:
-				player.createPerk("Diapause", 0, 0, 0, 0, "Your marsupial-like body can delay a pregnancy indefinitely, but drinking or otherwise intaking fluids will advance it.");
+				player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
 				outputText("\n\nYour womb rumbles as something inside it changes.\n<b>(You have gained the Diapause perk.  Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.)", false);
 				changes++;
 				//trigger effect: Your body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.
@@ -6346,7 +6346,7 @@
 				outputText("\n\n(<b>Perk Gained:  Spider Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				//V1 - Egg Count
 				//V2 - Fertilized Count
-				player.createPerk("Spider Ovipositor", 0, 0, 0, 0);
+				player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0, "");
 				//Opens up drider ovipositor scenes from available mobs. The character begins producing unfertilized eggs in their arachnid abdomen. Egg buildup raises minimum lust and eventually lowers speed until the player has gotten rid of them.  This perk may only be used with the drider lower body, so your scenes should reflect that.
 				//Any PC can get an Ovipositor perk, but it will be much rarer for characters without vaginas.
 				//Eggs are unfertilized by default, but can be fertilized:
@@ -6459,8 +6459,8 @@
 				else outputText("<b>(Lost Perk - Bimbo Body)\n", false);
 				player.removePerk("Bimbo Brains");
 				player.removePerk("Bimbo Body");
-				player.createPerk("Futa Form", 0, 0, 0, 0, "");
-				player.createPerk("Futa Faculties", 0, 0, 0, 0, "");
+				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
+				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
 				player.genderCheck();
 				return;
@@ -6557,8 +6557,8 @@
 			player.modTone(100, 100);
 			player.modThickness(100, 50);
 			//Bonus cum production!
-			player.createPerk("Bro Brains", 0, 0, 0, 0, "After drinking a 'Bro Brew', your maximum capacity for intellect is greatly decreased.");
-			player.createPerk("Bro Body", 0, 0, 0, 0, "You have the body of a muscled, sex-addicted hunk.  Your cock cannot be shorter than 10\", you're much lustier, more accustomed to being turned on, and you gain a bonus to using your body to arouse your enemies in combat!");
+			player.createPerk(PerkLib.BroBrains, 0, 0, 0, 0);
+			player.createPerk(PerkLib.BroBody, 0, 0, 0, 0);
 			outputText("<b>(Bro Body - Perk Gained!)\n", false);
 			outputText("(Bro Brains - Perk Gained!)</b>\n", false);//int to 20.  max int 50)
 			if (player.hasPerk("Feeder") >= 0) {
@@ -6647,7 +6647,7 @@
 				//(ghost-legs!  Absolutely no problem with regular encounters, though! [if you somehow got this with a centaur it'd probably do nothing cuz you're not supposed to be a centaur with ectoplasm ya dingus])
 				outputText("\n\nAn otherworldly sensation begins in your belly, working its way to your " + hipDescript() + ". Before you can react, your " + player.legs() + " begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like " + player.legs() + ". You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>\n\n", false);
 				outputText("<b>(Gained Perk:  Incorporeality</b>)", false);
-				player.createPerk("Incorporeality", 0, 0, 0, 0, "You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.");
+				player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 			}
 			//Effect Script 8: 100% chance of healing
 			if (changes == 0) {
@@ -6799,7 +6799,7 @@
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("your skin", false);
 				else outputText("the skin under your " + player.skinDesc, false);
 				outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>", false);
-				player.createPerk("Thick Skin", 0, 0, 0, 0, "Your skin is now tough enough to effectively grant you an extra armor!");
+				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
 			}
 			outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.", false);
 			dynStats("sen", -3);
@@ -7395,7 +7395,7 @@
 				outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
 				outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
 				outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants two magical special attacks.)");
-				player.createPerk("Corrupted Nine-tails", 0, 0, 0, 0);
+				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
 				dynStats("lib", 2, "lus", 10, "cor", 10);
 				player.tailVenom = 9;
 			}
@@ -7890,7 +7890,7 @@
 					if (player.femininity < 70 && player.femininity >= 60) {
 						outputText("\n\nYou laugh as you feel your features once again soften, before stopping abruptly.  Your laugh sounded more like a girly giggle than anything else.  Feeling slightly more sober, you touch the soft flesh of your face prospectively.  The trap oil has changed you profoundly, making your innate maleness... difficult to discern, to say the least.  You suspect you could make yourself look even more like a girl now if you wanted to.");
 						if (player.hasPerk("Androgyny") < 0) {
-							player.createPerk("Androgyny", 0, 0, 0, 0);
+							player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
 							outputText("\n\n(<b>Perk Gained: Androgyny</b>)");
 						}
 						player.femininity += 10;
@@ -7921,7 +7921,7 @@
 						//Masculinity Increase Final (max masculinity allowed increased by +10):
 						outputText("\n\nYou laugh as you feel your features once again soften, before stopping abruptly.  Your laugh sounded more like a boyish crow than anything else.  Feeling slightly more sober, you touch the defined lines of your face prospectively.  The trap oil has changed you profoundly, making your innate femaleness... difficult to discern, to say the least.  You suspect you could make yourself look even more like a boy now if you wanted to.");
 						if (player.hasPerk("Androgyny") < 0) {
-							player.createPerk("Androgyny", 0, 0, 0, 0);
+							player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
 							outputText("\n\n(<b>Perk Gained: Androgyny</b>)");
 						}
 					}

@@ -1,7 +1,7 @@
 package classes.Scenes.Dungeons.DesertCave
 {
-	import classes.CoC;
 	import classes.Monster;
+	import classes.PerkLib;
 
 	/**
 	 * ...
@@ -35,8 +35,8 @@ package classes.Scenes.Dungeons.DesertCave
 			init11Armor("robes",1,armorPerk,armorValue);
 			init12Combat(130,20,.6,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(7,rand(15) + 55);
-			this.createPerk("Resolute",0,0,0,0);
-			this.createPerk("Focused",0,0,0,0);
+			this.createPerk(PerkLib.Resolute,0,0,0,0);
+			this.createPerk(PerkLib.Focused,0,0,0,0);
 		}
 		
 	}

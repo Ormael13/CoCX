@@ -4,13 +4,14 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class Spellblade extends Weapon
 	{
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			player.createPerk("Wizard's Focus",.5,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
+			player.createPerk(PerkLib.WizardsFocus,.5,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void

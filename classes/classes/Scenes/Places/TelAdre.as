@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.ItemType;
+	import classes.PerkLib;
 	import classes.Scenes.Places.TelAdre.*;
 
 	/**
@@ -552,23 +553,23 @@ private function normalPierceAssemble():void {
 			break;
 		case 9:
 			shortP += "lethite ";
-			if(player.hasPerk("Pierced: Lethite") < 0) player.createPerk("Pierced: Lethite",0,0,0,0,"You've been pierced with Lethite and demons are more attracted to you.");
+			if(player.hasPerk("Pierced: Lethite") < 0) player.createPerk(PerkLib.PiercedLethite,0,0,0,0);
 			longP += "Lethite ";
 			break;
 		case 10:
 			shortP += "fertite ";
-			if(player.hasPerk("Pierced: Fertite") < 0) player.createPerk("Pierced: Fertite",5,0,0,0,"You've been pierced with Fertite and any male or female organs have become more fertile.");
+			if(player.hasPerk("Pierced: Fertite") < 0) player.createPerk(PerkLib.PiercedFertite,5,0,0,0);
 			else player.addPerkValue("Pierced: Fertite",1,5);
 			longP += "Fertite ";
 			break;
 		case 11:
 			shortP += "furrite ";
-			if(player.hasPerk("Pierced: Furrite") < 0) player.createPerk("Pierced: Furrite",0,0,0,0,"You've been pierced with Furrite and are more attractive to those who are part beast.");
+			if(player.hasPerk("Pierced: Furrite") < 0) player.createPerk(PerkLib.PiercedFurrite,0,0,0,0);
 			longP += "Furrite ";
 			break;
 		case 12:
 			shortP += "crimstone ";
-			if(player.hasPerk("Pierced: Crimstone") < 0) player.createPerk("Pierced: Crimstone",5,0,0,0,"You've been pierced with Crimstone and your lust seems to stay a bit higher than before.");
+			if(player.hasPerk("Pierced: Crimstone") < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
 			else player.addPerkValue("Pierced: Crimstone",1,5);
 			longP += "Crimstone ";
 			break;

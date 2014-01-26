@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.NPCs{
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
-public class Exgartuan extends NPCAwareContent {
+	import classes.PerkLib;
+
+	public class Exgartuan extends NPCAwareContent {
 
 	public function Exgartuan()
 	{
@@ -600,7 +602,7 @@ public function exgartuanArmorShift():void {
 	else outputText("  You pivot your hips forwards, doing your best to show off your sensational package with every step.  Oh, very nice, you'll have to thank Exgartuan later...", false);
 	if(changed) {
 		//(Add perk \"Bulge Armor\" - bonus to male crotch reveal tease!) - check armor equip function – all names are hashed out in old armor names already
-		player.createPerk("Bulge Armor",0,0,0,0,"Your crotch-hugging armor improves penis-based enticements.");
+		player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
 	}
 }
 

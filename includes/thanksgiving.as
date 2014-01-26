@@ -177,7 +177,7 @@ public function thatllDoTurkey():void {
 	
 	outputText("\n\n\"<i>That'll do, turkey,</i>\" you say, patting her jiggling tit. \"<i>That'll do.</i>\"");
 	if(player.hasPerk("Pilgrim's Bounty") < 0) {
-		player.createPerk("Pilgrim's Bounty",0,0,0,0);
+		player.createPerk(PerkLib.PilgrimsBounty,0,0,0,0,"");
 		outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
 	}
 	doNext(14);
@@ -291,7 +291,7 @@ public function haveTurkeyGirlDesertInYourCunt():void {
 	outputText("\n\nThen again, you have to admit that it would also class as one of the most fun...");
 	if(player.hasPerk("Cornucopia") < 0) {
 		outputText("\n\n(<b>Gained Perk: Cornucopia - increases vaginal and anal capacities by 30.</b>)");
-		player.createPerk("Cornucopia",0,0,0,0,"Get out of here, you dirty hobo!");
+		player.createPerk(PerkLib.Cornucopia,0,0,0,0,"Get out of here, you dirty hobo!");
 	}
 	//HP set to full, fatigue to 0?
 	fatigue(-100);

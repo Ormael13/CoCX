@@ -5,20 +5,21 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Appearance;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.PerkLib;
 
 	public class MinotaurScene extends BaseContent {
 
 		public function MinotaurScene()
 		{
 		}
-
+ /*
 	private function minotaurAddicted():Boolean {
 	return player.minotaurAddicted();
 }
 private function minotaurNeed():Boolean {
 	return player.minotaurNeed();
 }
-
+ */
 internal function minoVictoryRapeChoices():void {
 	spriteSelect(44);
 	//Determine if PC can rape with a dick!
@@ -30,9 +31,9 @@ internal function minoVictoryRapeChoices():void {
 	var urethralPen:Function = null;
 	var filled:Function = null;
 	var bj:Function = null;
-	var eggs:Number = 0;
+	var eggs:Number;
 	var feedposit:String = "B. Feed";
-	var bikiniTits:int = 0;
+	var bikiniTits:int;
 	//Checking to see if can urethral pen
 	if(player.hasCock()) {
 		var counter:Number = 0;
@@ -338,7 +339,6 @@ private function minoUrethralPen():void {
 	}
 	dynStats("lus=", 0);
 	cleanupAfterCombat();
-	return;
 }
 
 private function minoRapeIntro():void {	
@@ -785,7 +785,7 @@ public function minoCumUpdate():Boolean {
 		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100) {
 			if(player.hasPerk("Minotaur Cum Addict") >= 0) {}
 			else {
-				player.createPerk("Minotaur Cum Addict",0,0,0,0,"A hopeless addict to minotaur cum, you need it regularly and can be healed by bottled minotaur cum.");
+				player.createPerk(PerkLib.MinotaurCumAddict,0,0,0,0);
 				outputText("<b>You are now a Minotaur Cum Addict</b> (Bottled Minotaur Cum now heals 25% of your HP, but causes HP damage to boost lust for a few hours.)\n", false);
 				output = true;
 			}

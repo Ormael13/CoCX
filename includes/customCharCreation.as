@@ -52,7 +52,7 @@ public function customPCSetup():void {
 		player.earType = EARS_CAT;
 		player.lowerBody = LOWER_BODY_TYPE_CAT;
 		player.tailType = TAIL_TYPE_CAT;
-		player.createPerk("Incorporeality",0,0,0,0,"You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.");
+		player.createPerk(PerkLib.Incorporeality,0,0,0,0);
 		player.wingType = WING_TYPE_FEATHERED_LARGE;
 		player.armType = ARM_TYPE_HARPY;
 		player.hornType = HORNS_DRACONIC_X2;
@@ -89,23 +89,23 @@ public function customPCSetup():void {
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
-		player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
-		player.createPerk("History: Religious",0,0,0,0,"");
-		player.createPerk("Dragonfire",0,0,0,0,"You're a cheater, cheater.");
-		player.createPerk("Brood Mother",0,0,0,0,"Pregnancy moves twice as fast as a normal woman's.");
-		player.createPerk("Fertile",1.5,0,0,0,"CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0, "You're a cheater, cheater.");
+		player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0, "CHEATER JACKASS JERKFACE");
 		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-		player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
-		player.createPerk("Tough", 0.25, 0, 0, 0,"Gain toughness 25% faster.");
-		player.createPerk("Strong", 0.25, 0, 0, 0,"Gain strength 25% faster.");
-		player.createPerk("Fast", 0.25, 0, 0, 0,"Gain speed 25% faster.");
-		player.createPerk("Smart", 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
-		player.createPerk("History: Scholar", 0, 0, 0, 0,"You cheated.");
-		player.createPerk("Strong Back",0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.WetPussy,2,0,0,0);
+		player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0, "You cheated.");
+		player.createPerk(PerkLib.StrongBack,0,0,0,0,"Cheating Nerd!");
 		player.itemSlot4.unlocked = true;
 		player.itemSlot5.unlocked = true;
-		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0,"Cheating Nerd!");
-		player.createPerk("History: Slacker",0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.StrongBack2,0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.HistorySlacker,0,0,0,0,"Cheating Nerd!");
 		player.str += 4;
 		player.tou += 4;
 		player.inte += 2;
@@ -114,8 +114,8 @@ public function customPCSetup():void {
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 	}
 	if(player.short == "Leah") {
-		player.armor = armors.URTALTA;
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
+		player.armor = armors.LEATHRA;
+		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
 		player.weapon = weapons.W_STAFF;
 		player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
 		player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
@@ -232,8 +232,8 @@ public function customPCSetup():void {
 		player.tone = 88;
 		player.tongueType = TONUGE_DRACONIC;
 		//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
-		player.createPerk("History: Fighter",0,0,0,0);
-		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
+		player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+		player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 	}
 	if(player.short == "Sora") {
 		//Character Creation	Female,virgin	A kitsune with a snake-like tongue	Sora
@@ -250,10 +250,10 @@ public function customPCSetup():void {
 	if(player.short == "Nixi") {
 		//-Perks
        	//fertility AND messy orgasm (hope that's not pushing it)
-	   	player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
-	   	player.createPerk("Fertile", 1.5, 0, 0, 0,"Makes you 15% more likely to become pregnant.");
+	   	player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+	   	player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
        	//fighting history
-		player.createPerk("History: Fighter",0,0,0,0);
+		player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 		//3 starting perk points
 		player.perkPoints = 3;
 		//some starting gems (just go ahead and surprise me on the amount)
@@ -361,17 +361,17 @@ public function customPCSetup():void {
 
 		//Perks: Feeder, Strong Back, Strong Back 2
 		player.createStatusAffect("Feeder",0,0,0,0);
-		player.createPerk("Feeder",0,0,0,0,"The LaBova has corrupted your breasts, preventing your lactation from decreasing and giving you an urge to feed it to others.");
-		
-		player.createPerk("Strong Back",0,0,0,0,"Cheating Nerd!");
-		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
+
+		player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0, "Cheating Nerd!");
+		player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0, "Cheating Nerd!");
 
 		//Equipment: 
     	//Weapon: Warhammer
 		player.weapon = weapons.WARHAMR;
     	//Armor: Lusty shit
 		player.armor = armors.LMARMOR;
-		player.createPerk("Slutty Seduction",10 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+		player.createPerk(PerkLib.SluttySeduction, 10 + flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0, "Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 
 		//Stats: (if possible)
   		//Strength: 90
@@ -488,17 +488,17 @@ public function customPCSetup():void {
 		player.nipplesPLong = "Silver studs";
 			
 		player.skinTone = "ghostly pale";
-		player.createPerk("Incorporeality",0,0,0,0,"You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.");
+		player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 		player.armor = armors.I_CORST;
 		player.level = 5;
 		player.weapon = weapons.W_STAFF;
 
-		player.createPerk("Regeneration",0,0,0,0);
-		player.createPerk("Smart",0,0,0,0);
-		player.createPerk("Channeling",0,0,0,0);
-		player.createPerk("Mage",0,0,0,0);
-		player.createPerk("History: Healer",0,0,0,0);
-		player.createPerk("Tank",0,0,0,0);
+		player.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Smart, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Tank, 0, 0, 0, 0);
 		player.createStatusAffect("Knows Arouse",0,0,0,0);
 		player.createStatusAffect("Knows Heal",0,0,0,0);
 		player.createStatusAffect("Knows Might",0,0,0,0);
@@ -555,13 +555,13 @@ public function customPCSetup():void {
 		//Starting Equipment: Wizard's Robe, Wizards Staff, and one White and one Black book in inventory.
 		//equipArmor("inquisitor's corset",false);
 		player.armor = armors.W_ROBES;
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
+		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
 		
 		player.weapon = weapons.W_STAFF;
 		//Gift Perk- Smarts
-		player.createPerk("Smart",0,0,0,0);
+		player.createPerk(PerkLib.Smart,0,0,0,0);
 		//History- Schooling
-		player.createPerk("History: Scholar",0,0,0,0);
+		player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
 		player.itemSlot1.setItemAndQty(consumables.W__BOOK,1);
 		player.itemSlot2.setItemAndQty(consumables.B__BOOK,1);
 			
@@ -586,8 +586,8 @@ public function customPCSetup():void {
 		player.spe += 20;
 		outputText("You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals.");
 		//Perk is speed, she was a scout, and it'd be neat (if possible) to give her something akin to the Runner perk. She might not start out very strong or tough, but at least she's fast.
-		player.createPerk("Fast",0.25,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Runner",0,0,0,0,"CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Runner, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
 		//In the human world, Prismere began as a scout, helping patrol areas with portals to make sure demonspawn and corruption didn't reach the human homeland. She's gotten herself into a few tight spots because of it, but she's hard to keep pinned down. She has a fiance back in her village whom she fully intends to get back to, so her libido isn't especially high. 
 		//As of the time the PC takes her on, she has some signs of demonic taint, so Corruption might start at 5 to 10 points."	"Breasts at E, height at 5'0, a curvy build with a more narrow waist and substantial hips and butt. Skin is olive, like a mocha, hair is long and wildly wavy, a deep red, and eyes are a stormy blue. Muscles are barely visible; what muscle she has is the lean build of a runner, not a fighter. Nipples aren't especially long, but more soft. 
 		player.cor = 5;
@@ -644,13 +644,13 @@ public function customPCSetup():void {
 		player.lowerBody = LOWER_BODY_TYPE_CAT;
 		player.nippleLength = 0.5;
 		//perks:
-		player.createPerk("Agility",0,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Evade",0,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Runner",0,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Fast",0.25,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Fertile",1.5,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("Flexibility",0,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.createPerk("History: Scholar",0,0,0,0,"CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Agility, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Evade, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Runner, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
 
 		player.skinDesc = "fur";
 		player.skinTone = "ashen";
@@ -667,20 +667,20 @@ public function customPCSetup():void {
 		//starting weapon: Spellblade if not gamebreaking otherwise spear is fine.
 		player.armor = armors.LTHRROB;
 		player.weapon = weapons.S_BLADE;
-		if(player.hasPerk("Wizard's Focus") < 0) player.createPerk("Wizard's Focus",.5,0,0,0,"Your wizard's staff grants you additional focus, reducing the use of fatigue for spells.");
+		if (player.hasPerk("Wizard's Focus") < 0) player.createPerk(PerkLib.WizardsFocus, .5, 0, 0, 0);
 
 	}
 	if(player.short == "Aria") {
 		outputText("It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth.");
 		//2/26/2013 8:18:21	rdolave@gmail.com	Character Creation	"female DD breasts feminity 100 butt size 5 hip size 5 body thickness 10 clit I would like her nipples pierced with Ceraphs piercing
-		//(on a side note how much do you think it would cost to add bell nipple,labia and clit piercings as well as an option for belly button piercings would like to see belly button piecings with a few different options as well.  Also would love to have handcuff ear piercings.)"	Would like the bimbo brain and bimbo body perks as well as the nine tail perks.  demonic high heels, pink skin, obscenely long pink hair  would like her to be a kitsune with the nine tails.  pink fur.  starting equipment would like to be the succubus whip and nurse's outfit.  Also would like the xmas perk and all three Vday perks	Aria															
+		//(on a side note how much do you think it would cost to add bell nipple,labia and clit piercings as well as an option for belly button piercings would like to see belly button piecings with a few different options as well.  Also would love to have handcuff ear piercings.)"	Would like the bimbo brain and bimbo body perks as well as the nine tail PerkLib.  demonic high heels, pink skin, obscenely long pink hair  would like her to be a kitsune with the nine tails.  pink fur.  starting equipment would like to be the succubus whip and nurse's outfit.  Also would like the xmas perk and all three Vday perks	Aria
 		if(!player.hasVagina()) player.createVagina();
 		if(player.femininity < 80) player.femininity = 80;
-		player.createPerk("Bimbo Body",0,0,0,0,"Cheater.");
-		player.createPerk("Bimbo Brains",0,0,0,0,"Cheater.");
+		player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0, "Cheater.");
+		player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0, "Cheater.");
 		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
-		player.createPerk("Enlightened Nine-tails",0,0,0,0);
+		player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 		player.breastRows[0].breastRating = 5;
 		player.femininity = 100;
 		player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
@@ -706,13 +706,12 @@ public function customPCSetup():void {
 		player.vaginas[0].labiaPierced = 2;
 		player.vaginas[0].labiaPShort = "ruby labia-rings";
 		player.vaginas[0].labiaPLong = "Ruby labia-rings";
-		player.createPerk("Elven Bounty",0,15,0,0,"After your encounter with an elf, her magic has left you with increased fertility.");
-		player.createPerk("Pure and Loving",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-		player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-		player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
+		player.createPerk(PerkLib.ElvenBounty,0,15,0,0);
+		player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
+		player.createPerk(PerkLib.SensualLover,0,0,0,0);
+		player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 		player.weapon = weapons.SUCWHIP;
 		player.armor = armors.NURSECL;
-		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 
 	}
 	if(player.short == "Lucina") {
@@ -771,7 +770,7 @@ public function customPCSetup():void {
 		player.fertility = 15;
 		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
-		player.createPerk("Enlightened Nine-tails",0,0,0,0);
+		player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 		//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 		player.hairColor = "midnight black";
 		player.skinType = SKIN_TYPE_FUR;
@@ -798,16 +797,14 @@ public function customPCSetup():void {
 		player.nippleLength = 0.1;
 		//Starting with an Inscribed Spellblade and Bondage Straps.	Charaun
 		player.armor = armors.BONSTRP;
-		if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.");
 		player.weapon = weapons.S_BLADE;
-		if(player.hasPerk("Wizard's Focus") < 0) player.createPerk("Wizard's Focus",.5,0,0,0,"Your wizard's staff grants you additional focus, reducing the use of fatigue for spells.");
 
 	}
 	if(player.short == "Navorn") {
 		outputText("There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion.");
 		//Character Creation	"Herm same number and types of cocks from email sent earlier. 
 		//Special abilities: Fire breath, fox fire?
-		player.createPerk("Dragonfire",0,0,0,0,"You're a cheater, cheater.");
+		player.createPerk(PerkLib.Dragonfire,0,0,0,0,"You're a cheater, cheater.");
 		//equipment: Large claymore, and platemail
 		//-Chainmail armor
 		player.armor = armors.FULLPLT;
@@ -894,7 +891,7 @@ public function customPCSetup():void {
 		player.lowerBody = LOWER_BODY_TYPE_DRAGON;
 		player.tongueType = TONUGE_DRACONIC;
 		player.hairLength = 45;
-		player.createPerk("Enlightened Nine-tails",0,0,0,0);
+		player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 		player.gender = 3;
 	}
 	if(player.short == "Hikari") {
@@ -915,14 +912,14 @@ public function customPCSetup():void {
 		//- gift: fast
 		player.spe += 5;
 		player.tone += 10;
-		player.createPerk("Fast", 0.25, 0, 0, 0,"Gain speed 25% faster.");
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 		//- history: religion 
-		player.createPerk("History: Religious",0,0,0,0,"Rar, I'm religious.");
+		player.createPerk(PerkLib.HistoryReligious,0,0,0,0,"Rar, I'm religious.");
 		//(and if possible)
 		//- history: fighter
-		player.createPerk("History: Fighter",0,0,0,0,"Rar, I'm a fighter.");
+		player.createPerk(PerkLib.HistoryFighter,0,0,0,0,"Rar, I'm a fighter.");
 		//- history: smith
-		player.createPerk("History: Smith",0,0,0,0,"Rar, I'm a smith");
+		player.createPerk(PerkLib.HistorySmith,0,0,0,0,"Rar, I'm a smith");
 		//in my ar, Issac was born to a disgraced priestess (she was raped by marauders) and raised by her alone until she died from an illness and was pretty much left to fend for and earn a living for himself (hence the fighter and smith background's too) until, years later he was chosen as 'champion'~
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		//sex - male
@@ -946,7 +943,7 @@ public function customPCSetup():void {
 		player.cocks[0].pierced = 3;
 		player.cocks[0].pShortDesc = "fertite cock-jacob's ladder";
 		player.cocks[0].pLongDesc = "Fertite cock-jacob's ladder";
-		player.createPerk("Pierced: Fertite",5,0,0,0,"You've been pierced with Fertite and any male or female organs have become more fertile.");
+		player.createPerk(PerkLib.PiercedFertite,5,0,0,0);
 		//- and one tight asshole
 		player.ass.analLooseness = 0;
 		//- kitsune
@@ -1063,8 +1060,8 @@ public function customPCSetup():void {
 		//Equipment: Starts with spiked fist
 		player.weapon = weapons.S_GAUNT;
 		//Perks: Fighter and Lotsa Jizz"	Annetta
-		player.createPerk("History: Fighter",0,0,0,0,"");
-		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
+		player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+		player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 		player.cumMultiplier = 20;
 		player.gender = 3;
 	}
@@ -1110,9 +1107,9 @@ public function customPCSetup():void {
 		
 		player.spe+=3;
 		player.inte+=2;
-	
-		player.createPerk("History: Slut",0,0,0,0,"");
-		player.createPerk("Fertile", 1.5, 0, 0, 0,"Makes you 15% more likely to become pregnant.");
+
+		player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 		player.teaseLevel = 3;
 	}
 	if(player.short == "Gundam") {
@@ -1241,9 +1238,9 @@ public function customPCSetup():void {
 		//Gift: Lotz of Jizz
 		//History: Schooling
 		player.cumMultiplier = 5.5;
-		
-		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
-		player.createPerk("History: Scholar",0,0,0,0,"");
+
+		player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 		//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 		player.earType = EARS_CAT;
 		player.wingType = WING_TYPE_BAT_LIKE_LARGE;
@@ -1308,13 +1305,12 @@ public function customPCSetup():void {
 		
 		//Beautiful Sword & Wizard Robe
 		player.weapon = weapons.B_SWORD;
-		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",0,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
 		player.armor = armors.W_ROBES;
 		//Herm, lots of jizz.
 		player.femininity -= 2;
 		player.cumMultiplier = 5.5;
-		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
-		player.createPerk("History: Whore",0,0,0,0,"");
+		player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 	}
 	if(player.short == "Mara") {
 		//#226096893686530
@@ -1338,10 +1334,10 @@ public function customPCSetup():void {
 		player.buttRating = 12;
 		player.femininity = 100;
 		player.thickness = 33;
-		player.createPerk("History: Slut",0,0,0,0,"");
-		player.createPerk("Bimbo Body",0,0,0,0,"");
-		player.createPerk("Bimbo Brains",0,0,0,0,"");
-		player.createPerk("Big Tits", 1.5, 0, 0, 0,"Makes your tits grow larger more easily.");
+		player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
+		player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
+		player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
+		player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 		player.earType = EARS_BUNNY;
 		player.tailType = TAIL_TYPE_RABBIT;
 		player.skinTone = "tan";

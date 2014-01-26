@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
 
 	public class Raphael extends NPCAwareContent {
 
@@ -233,7 +234,7 @@ public function RaphaelEncounterIIDressFollowup():void {
 		outputText("\"<i>The temporary price of admission for a moment of wonder.</i>\" He assures you. \"<i>Trust me that it'll be worth it. Join me, and I might even teach you the tricks of the trade. That is, unless you're cunning enough to frisk me for it.</i>\" He smiles playfully.\n\n", false);
 
 		outputText("What do you do?", false);
-		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0;
+		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
 		simpleChoices("Reject",RaphaelChooseReject,"Frisk",RaphaelChooseFrisk,"Date",RaphaelSelectDate,"",0,"",0);
 	}
@@ -746,7 +747,7 @@ private function postRaphaelCoitus():void {
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skilled you declined him and how deftly you lead him around, your realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n", false);
 		//Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk("Misdirection",0,0,0,0,"You've learned quite a lot from Raphael, and your training, combined with the bodysuit, makes it easier to avoid attacks.");
+		player.createPerk(PerkLib.Misdirection,0,0,0,0);
 	}
 	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again though.\n\n", false);
 	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
@@ -789,7 +790,7 @@ private function declinePuttingOutForRogues():void {
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("You realize he's left you with more than just pleasant memories of sitting with him around the picnic, though. Realizing how skillfully you declined him and how deftly you lead him around, your realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting. This misdirection could have great applications in battle.\n\n", false);
 		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk("Misdirection",0,0,0,0,"You've learned quite a lot from Raphael, and your training, combined with the bodysuit, makes it easier to avoid attacks.");
+		player.createPerk(PerkLib.Misdirection,0,0,0,0);
 
 	}
 	
@@ -993,7 +994,7 @@ private function RaphaelThieverySmexPtII():void {
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skilled you declined him and how deftly you lead him around, your realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n", false);
 		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk("Misdirection",0,0,0,0,"You've learned quite a lot from Raphael, and your training, combined with the bodysuit, makes it easier to avoid attacks.");
+		player.createPerk(PerkLib.Misdirection,0,0,0,0);
 		outputText("(Gained Perk: Misdirection!)\n\n");
 	}
 	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you. You can't help but wonder if you'll ever see him again though.", false);
@@ -1203,7 +1204,7 @@ public function orphanageIntro():void {
 			//Repeat encounter: When the Orphanage is selected between 19:00 and 21:00
 			outputText("You walk into the alley to the side of the orphanage and look up expectantly, brushing by shady looking teens who enjoy patting you down, but leaving you and your possessions alone otherwise.  They seem to make a game out of it.  The little staging room is lit and you begin to search for the one rope out of many that will hoist you up there by pulling it.  You stay clear of the other ones, not quite sure what they'd do, but half expecting them to fire a crossbow bolt or drop an anvil on your head.  Anxious, you grab the right one and hold on tight as it pulls you up into the air and swings you towards the correct window.");
 			//[One of the three sex / dialogue scenes follows]
-			flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL]++
+			flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL]++;
 			if(player.spe < 33) {
 				outputText("\n\nYou try your best to make an elegant entrance, but the rope gathers such speed that you're almost hurled into the room ungraciously.  Just before you crash into the floorboards, something catches you and slows your flight by spinning you around by the waist.");
 				outputText("\"<i>Ho-ho, I've not even begun the night and already I'm snatching the priceless treasure out of thin air.</i>\"  When your eyes focus, Raphael is smiling back at you and leans you backward in his embrace.  His long vulpine snout hovers over you and his green eyes twinkle in the light.  \"<i>I must admit that I was feeling a bit nervous about my chances in the coming night, but now that you're here?</i>\"  He shrugs playfully.  \"<i>I'd say that fallen angels are a blessing.  With you seeing me off for good luck, I can't go wrong!</i>\" he chuckles while setting you down.");

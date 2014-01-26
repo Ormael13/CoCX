@@ -5,6 +5,7 @@ package classes.Scenes.NPCs
 {
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
 
 	public class EmberScene extends NPCAwareContent
 	{
@@ -1623,7 +1624,7 @@ package classes.Scenes.NPCs
 			if (player.dragonScore() >= 4 && changes < changeLimit && player.hasPerk("Dragonfire") < 0) {
 				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 				outputText("\n\nIt seems Ember's dragon blood has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.\n\n(<b>Gained Perk: Dragonfire!</b>)");
-				player.createPerk("Dragonfire", 0, 0, 0, 0);
+				player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);
 				if (emberAffection() >= 75) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}

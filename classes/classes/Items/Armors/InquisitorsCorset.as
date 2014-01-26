@@ -4,6 +4,7 @@
 package classes.Items.Armors
 {
 	import classes.Items.Armor;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public final class InquisitorsCorset extends Armor
@@ -30,8 +31,8 @@ package classes.Items.Armors
 						//+lust
 						game.dynStats("lus", 5);
 					}
-					if(player.hasPerk("Blood Mage") < 0) player.createPerk("Blood Mage",0,0,0,0,"");
-					if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",10,0,0,0,"");
+					if(player.hasPerk("Blood Mage") < 0) player.createPerk(PerkLib.BloodMage,0,0,0,0,"");
+					if(player.hasPerk("Slutty Seduction") < 0) player.createPerk(PerkLib.SluttySeduction,10,0,0,0,"");
 		}
 
 

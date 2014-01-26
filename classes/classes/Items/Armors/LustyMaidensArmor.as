@@ -6,6 +6,7 @@ package classes.Items.Armors
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armor;
 	import classes.Monster;
+	import classes.PerkLib;
 	import classes.Player;
 	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Areas.Mountain.Minotaur;
@@ -82,11 +83,11 @@ package classes.Items.Armors
 			Min libido: 50*/
 			if(wearer.hasVirginVagina()) {
 				while(wearer.hasPerk("Slutty Seduction") >= 0) wearer.removePerk("Slutty Seduction");
-				wearer.createPerk("Slutty Seduction",10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 			}
 			else {
 				while(wearer.hasPerk("Slutty Seduction") >= 0) wearer.removePerk("Slutty Seduction");
-				if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,
+				if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,
 							"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 			}
 		}
