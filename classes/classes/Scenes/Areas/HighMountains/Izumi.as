@@ -37,7 +37,7 @@ package classes.Scenes.Areas.HighMountains
 		// Override won/lost calls
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.izumiScenes.pcBeatIzumiIntro();
+			game.highMountains.izumiScenes.pcBeatIzumiIntro();
 		}
 		
 		// Monster won, not player, gg for descriptive method names
@@ -46,13 +46,13 @@ package classes.Scenes.Areas.HighMountains
 			if (player.hasStatusAffect("Titsmother") >= 0)
 			{
 				this.cleanup();
-				game.izumiScenes.izumiTitsmotherIntro();
+				game.highMountains.izumiScenes.izumiTitsmotherIntro();
 				return;
 			}
 			else
 			{
 				this.cleanup();
-				game.izumiScenes.izumiBeatPCIntro();
+				game.highMountains.izumiScenes.izumiBeatPCIntro();
 				return;
 			}
 		}
@@ -63,7 +63,7 @@ package classes.Scenes.Areas.HighMountains
 			// Handle chokeslam mechanics
 			if (player.hasStatusAffect("Chokeslam") >= 0)
 			{
-				player.statusAffectv2("Chokeslam") -= 1;
+				player.statusAffects[player.hasStatusAffect("Chokeslam")].value2 -= 1;
 				
 				if (player.statusAffectv2("Chokeslam") == 0)
 				{
@@ -78,7 +78,7 @@ package classes.Scenes.Areas.HighMountains
 			// Handle groundpound
 			if (player.hasStatusAffect("Groundpound") >= 0)
 			{
-				player.statusAffectv1("Groundpound") -= 1;
+				player.statusAffects[player.hasStatusAffect("Groundpound")].value1 -= 1;
 				
 				if (player.statusAffectv1("Groundpound") == 0)
 				{
@@ -94,7 +94,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Titsmother toggle; gonna need to play with this, it should only be used once per fight
-			if ((this.HPRatio <= 0.25) && (this.hasStatusAffect("Used Titsmother") == -1))
+			if ((this.HPRatio() <= 0.25) && (this.hasStatusAffect("Used Titsmother") == -1))
 			{
 				titSmother();
 				this.createStatusAffect("Used Titsmother", 0, 0, 0, 0);
@@ -105,7 +105,6 @@ package classes.Scenes.Areas.HighMountains
 				var actions:Array = [straightJab, roundhouseKick, chokeSlam, groundPound]; 
 				actions[rand(actions.length)]();
 			}
-			
 		}
 		
 		// Remove any lingering effects from the player once combat is over
@@ -344,6 +343,25 @@ package classes.Scenes.Areas.HighMountains
 				game.dynStats("lus", player.lib / 20 + 5 + rand(5));
 				doAI();
 			}
+		}
+		
+		// Player breaks free of tiSmother and applies damage to Izumi
+		public function titSmotherDamage():void
+		{
+			if (player.str < 90)
+			{
+				outputText("Straining with all your might, you still can’t quite manage to break Izumi’s grip, but you do manage to somehow slide upwards through the valley of her bust.  Izumi’s face looms into view, the enormous woman gritting her teeth as she attempts to crush the fight out of you.  In an act of desperation, you rear back and then knife forwards in a brutal headbutt.\n\n");
+				outputText("“Ack!”  Your forehead connects with her chin in a collision that probably hurts you as much as her, judging by the searing pain that lances through your forehead as she drops you to the floor. Meanwhile, Izumi staggers back, rubbing at her chin.  “Ow.  That hurt, kid!”  She says reproachfully.  The two of you take a moment to shake the cobwebs from your heads before dropping back into your combat stances, a little more wary this time around.\n\n");
+			}
+			else
+			{
+				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground....  [if (player.isBiped)As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort.]Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
+			}
+
+			outputText("“Oh my,” She purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...”");
+
+			this.HP -= (15 + rand(player.str));
+			combatRoundOver();
 		}
 		
 		// Wait handler for titsmother attack
