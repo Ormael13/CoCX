@@ -51,8 +51,8 @@ import classes.Appearance;
 				if (player.hasPerk("Bro Brains") >= 0) outputText(", Bro Brains");
 				outputText(")\n");
 				outputText("(Perks Gained: Futa Form, Futa Faculties)\n");
-				player.removePerk("Bro Body");
-				player.removePerk("Bro Brains");
+				player.removePerk(PerkLib.BroBody);
+				player.removePerk(PerkLib.BroBrains);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				if (player.inte > 35) {

@@ -1,12 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre
 {
-	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
 	import classes.PerkType;
-	import classes.Scenes.Places.TelAdre;
 
 	/**
 	 * Whee!
@@ -689,7 +686,7 @@
 		 */
 		public function hasNeedleworkPerk():Boolean
 		{
-			var pName:String = this.getNeedleworkPerkName();
+			var pName:String = this.getNeedleworkPerk().name;
 			return pName != "";
 			
 
@@ -699,7 +696,7 @@
 		 * Figure out exactly WHICH needlework perk the player has
 		 * @return	Perk name that the player currently has
 		 */
-		public function getNeedleworkPerkName():String
+		public function getNeedleworkPerk():PerkType
 		{
 			for each(var perk:PerkType in [
 					PerkLib.ChiReflowAttack,
@@ -710,10 +707,10 @@
 			]){
 				if (player.hasPerk(perk.name) >= 0)
 				{
-					return perk.name;
+					return perk;
 				}
 			}
-			return "";
+			return null;
 		}
 		
 		/**
@@ -726,7 +723,7 @@
 		{
 			if (selectedSession == NEEDLEWORK_UNDO)
 			{
-				player.removePerk(this.getNeedleworkPerkName());
+				player.removePerk(this.getNeedleworkPerk());
 				flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]++;
 			}
 			else if (selectedSession == NEEDLEWORK_SPEED)

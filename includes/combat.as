@@ -1703,7 +1703,7 @@ public function doDamage(damage:Number):Number {
 		dynStats("lus", 3);
 	}
 	if(monster.HP - damage <= 0) {
-		if(monster.hasPerk("Last Strike") >= 0) doNext(monster.perks[monster.hasPerk("Last Strike")].value1);
+		if(monster.hasPerk("Last Strike") >= 0) doNext(monster.perk(monster.hasPerk("Last Strike")).value1);
 		else doNext(endHpVictory);
 	}
 	

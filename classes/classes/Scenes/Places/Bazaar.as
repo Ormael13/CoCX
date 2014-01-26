@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Places{
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
 	import classes.Scenes.Places.Bazaar.*;
 
@@ -67,7 +66,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	var roxanne2:Function = roxanne.RoxanneAppearance();
 	var roxanneT:String = "Lizans";
 	var demon:Function = null;
-	var tent:Function = null;
+	var tent:Function;
 	var benoit2:Function = null;
 	var benoitT:String = "MarketStall";
 	if(model.time.hours >= 9 && model.time.hours <= 17) {
@@ -790,19 +789,19 @@ private function removeTargettedSock(index:int):void {
 	}
 	else {
 		if(storage == "gilded") {
-			if(player.hasPerk("Midas Cock") >= 0) player.removePerk("Midas Cock");
+			player.removePerk(PerkLib.MidasCock);
 		}
 		if(storage == "cobalt") {
-			if(player.hasPerk("Phallic Restraint") >= 0) player.removePerk("Phallic Restraint");
+			player.removePerk(PerkLib.PhallicRestraint);
 		}
 		if(storage == "scarlet") {
-			if(player.hasPerk("Phallic Potential") >= 0) player.removePerk("Phallic Potential");
+			player.removePerk(PerkLib.PhallicPotential);
 		}
 		if(storage == "viridian") {
-			if(player.hasPerk("Lusty Regeneration") >= 0) player.removePerk("Lusty Regeneration");
+			player.removePerk(PerkLib.LustyRegeneration);
 		}
 		if(storage == "cockring") {
-			if(player.hasPerk("Pent Up") >= 0) player.removePerk("Pent Up");
+			player.removePerk(PerkLib.PentUp);
 		}
 	}	
 	outputText("\n\n\"<i>If you need another one, we've got plenty more for sale.</i>\"");

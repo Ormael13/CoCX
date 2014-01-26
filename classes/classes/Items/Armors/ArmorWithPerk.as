@@ -25,7 +25,7 @@ package classes.Items.Armors
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			while(player.hasPerk(playerPerk.id) >= 0) player.removePerk(playerPerk.id);
+			while(player.hasPerk(playerPerk.id) >= 0) player.removePerk(playerPerk);
 		}
 
 		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String=null)

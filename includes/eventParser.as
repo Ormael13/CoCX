@@ -962,7 +962,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		else if(player.hasPerk("Flexibility") >= 0) {
 			outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.\n\n(<b>Lost Perk: Flexibility</b>)\n", false);
 			needNext = true;
-			player.removePerk("Flexibility");
+			player.removePerk(PerkLib.Flexibility);
 		}
 		if(player.hasStatusAffect("Camp Marble") >= 0) {
 			//Increment Marble's Lust
@@ -1078,13 +1078,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Remove dat shit!
 			if(player.hasPerk("Spider Ovipositor") >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
-				player.removePerk("Spider Ovipositor");
+				player.removePerk(PerkLib.SpiderOvipositor);
 				needNext = true;
 			}
 			//Remove dat shit!
 			else if(player.hasPerk("Bee Ovipositor") >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
-				player.removePerk("Bee Ovipositor");
+				player.removePerk(PerkLib.BeeOvipositor);
 				needNext = true;
 			}
 			//Update stuff!
@@ -1154,14 +1154,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9) {
 				needNext = true;
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
-				player.removePerk("Enlightened Nine-tails");
-				player.removePerk("Corrupted Nine-tails");
+				player.removePerk(PerkLib.EnlightenedNinetails);
+				player.removePerk(PerkLib.CorruptedNinetails);
 			}
 		}
 		//Lose diapause
 		if(!player.hasVagina() && player.hasPerk("Diapause") >= 0) {
 			outputText("\n<b>With the loss of your womb, you lose your kangaroo-like diapause ability.</b>\n");
-			player.removePerk("Diapause");
+			player.removePerk(PerkLib.Diapause);
 			needNext = true;
 		}
 		//Oviposition perk for lizard folks
@@ -1171,12 +1171,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if((player.nagaScore() + player.lizardScore()) < 3 && player.hasPerk("Oviposition") >= 0 && player.hasPerk("Basilisk Womb") < 0) {
 				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost a little bit of reptilian reproductive ability.\n(<b>Perk Lost: Oviposition</b>)\n", false);
 				needNext = true;
-				player.removePerk("Oviposition");
+				player.removePerk(PerkLib.Oviposition);
 			}
 			else if(player.bunnyScore() < 3 && player.hasPerk("Bunny Eggs") >= 0) {
 				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
 				needNext = true;
-				player.removePerk("Bunny Eggs");
+				player.removePerk(PerkLib.BunnyEggs);
 			}
 			//Otherwise pregger check
 			else if(player.pregnancyIncubation < 1 && player.hasVagina()) {
@@ -1351,7 +1351,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Bro checks
 		if(player.hasPerk("Bro Body") >= 0) {
 			player.removeStatusAffect("Feeder");
-			player.removePerk("Feeder");
+			player.removePerk(PerkLib.Feeder);
 			//(Dick regrowth) 
 			if(!player.hasCock()) {
 				player.createCock();
@@ -1389,7 +1389,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.cor <= 20) {
 				outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n", false);
 				player.removeStatusAffect("Feeder");
-				player.removePerk("Feeder");
+				player.removePerk(PerkLib.Feeder);
 				needNext = true;
 			}
 			else {
@@ -1713,7 +1713,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
 				player.createKeyItem("Ruby Heart",0,0,0,0);
 				needNext = true;
-				player.removePerk("Slime Core");
+				player.removePerk(PerkLib.SlimeCore);
 			}
 		}
 		//Regain slime core

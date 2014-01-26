@@ -2,10 +2,6 @@
 package classes
 {
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
 	import classes.internals.Utils;
 
 	//import classes.CockClass;
@@ -427,7 +423,7 @@ package classes
 				keySlot = 0;
 			}
 			//If it belongs at the end, push it on
-			if (perks[perks.length - 1].perkName < ptype.name && !arrayed)
+			if (perk(perks.length - 1).perkName < ptype.name && !arrayed)
 			{
 				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
@@ -435,7 +431,7 @@ package classes
 				keySlot = perks.length - 1;
 			}
 			//If it belongs in the beginning, splice it in
-			if (perks[0].perkName > ptype.name && !arrayed)
+			if (perk(0).perkName > ptype.name && !arrayed)
 			{
 				//trace("New Perk Belongs at the beginning! " + keyName);
 				perks.splice(0, 0, newKeyItem);
@@ -451,13 +447,13 @@ package classes
 				{
 					counter--;
 					//If the current slot is later than new key
-					if (perks[counter].perkName > ptype.name)
+					if (perk(counter).perkName > ptype.name)
 					{
 						//If the earlier slot is earlier than new key && a real spot
 						if (counter - 1 >= 0)
 						{
 							//If the earlier slot is earlier slot in!
-							if (perks[counter - 1].perkName <= ptype.name)
+							if (perk(counter - 1).perkName <= ptype.name)
 							{
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
@@ -468,7 +464,7 @@ package classes
 						else
 						{
 							//If the next slot is later we are go
-							if(perks[counter].perkName <= ptype.name) {
+							if(perk(counter).perkName <= ptype.name) {
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
 								keySlot = counter;
@@ -482,38 +478,39 @@ package classes
 			{
 				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
-				arrayed = true;
 				keySlot = perks.length - 1;
 			}
 			
-			perks[keySlot].value1 = value1;
-			perks[keySlot].value2 = value2;
-			perks[keySlot].value3 = value3;
-			perks[keySlot].value4 = value4;
-			if (modDesc != null) perks[keySlot].modDesc = modDesc;
-			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
+			perk(keySlot).value1 = value1;
+			perk(keySlot).value2 = value2;
+			perk(keySlot).value3 = value3;
+			perk(keySlot).value4 = value4;
+			if (modDesc != null) perk(keySlot).modDesc = modDesc;
+			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perk(keySlot).perkName);
 		}
-		
-		//Remove perk
-		public function removePerk(perkName:String):void
+
+		/**
+		 * Remove perk. Return true if there was such perk
+		 */
+		public function removePerk(ptype:PerkType):Boolean
 		{
 			var counter:Number = perks.length;
 			//Various Errors preventing action
 			if (perks.length <= 0)
 			{
-				//trace("ERROR: Perk could not be removed because player has no perks.");
-				return;
+				return false;
 			}
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == perkName)
+				if (perk(counter).ptype == ptype)
 				{
 					perks.splice(counter, 1);
 					//trace("Attempted to remove \"" + perkName + "\" perk.");
-					counter = 0;
+					return true;
 				}
 			}
+			return false;
 		}
 		
 		//has perk?
@@ -525,7 +522,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == perkName)
+				if (perk(counter).perkName == perkName)
 					return counter;
 			}
 			return -1;
@@ -542,7 +539,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == perkName)
+				if (perk(counter).perkName == perkName)
 					timesFound++;
 			}
 			return (timesFound > 1);
@@ -572,7 +569,7 @@ package classes
 			{
 				counter--;
 				//Find it, change it, quit out
-				if (perks[counter].perkName == statusName)
+				if (perk(counter).perkName == statusName)
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
@@ -580,18 +577,17 @@ package classes
 						return;
 					}
 					if (statusValueNum == 1)
-						perks[counter].value1 += newNum;
+						perk(counter).value1 += newNum;
 					if (statusValueNum == 2)
-						perks[counter].value2 += newNum;
+						perk(counter).value2 += newNum;
 					if (statusValueNum == 3)
-						perks[counter].value3 += newNum;
+						perk(counter).value3 += newNum;
 					if (statusValueNum == 4)
-						perks[counter].value4 += newNum;
+						perk(counter).value4 += newNum;
 					return;
 				}
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player does not have the perk.");
-			return;
 		}
 		
 		public function changePerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0): void
@@ -607,7 +603,7 @@ package classes
 			{
 				counter--;
 				//Find it, change it, quit out
-				if (perks[counter].perkName == statusName)
+				if (perk(counter).perkName == statusName)
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
@@ -615,18 +611,17 @@ package classes
 						return;
 					}
 					if (statusValueNum == 1)
-						perks[counter].value1 = newNum;
+						perk(counter).value1 = newNum;
 					if (statusValueNum == 2)
-						perks[counter].value2 = newNum;
+						perk(counter).value2 = newNum;
 					if (statusValueNum == 3)
-						perks[counter].value3 = newNum;
+						perk(counter).value3 = newNum;
 					if (statusValueNum == 4)
-						perks[counter].value4 = newNum;
+						perk(counter).value4 = newNum;
 					return;
 				}
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player does not have the perk.");
-			return;
 		}
 		
 		public function perkv1(statusName:String):Number
@@ -641,8 +636,8 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == statusName)
-					return perks[counter].value1;
+				if (perk(counter).perkName == statusName)
+					return perk(counter).value1;
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
 			return 0;
@@ -660,8 +655,8 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == statusName)
-					return perks[counter].value2;
+				if (perk(counter).perkName == statusName)
+					return perk(counter).value2;
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
 			return 0;
@@ -679,8 +674,8 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == statusName)
-					return perks[counter].value3;
+				if (perk(counter).perkName == statusName)
+					return perk(counter).value3;
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
 			return 0;
@@ -698,8 +693,8 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (perks[counter].perkName == statusName)
-					return perks[counter].value4;
+				if (perk(counter).perkName == statusName)
+					return perk(counter).value4;
 			}
 			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
 			return 0;
@@ -791,7 +786,6 @@ package classes
 				}
 			}
 			//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player does not have the status affect.");
-			return;
 		}
 		
 		public function addStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
@@ -826,7 +820,6 @@ package classes
 				}
 			}
 			//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player does not have the status affect.");
-			return;
 		}
 		
 		public function statusAffectv1(statusName:String):Number
@@ -1066,10 +1059,7 @@ package classes
 				temp++;
 			}
 			//If the two thicknesses added together are less than the arg, true, else false
-			if (cocks[thinnest].cockThickness + cocks[thinnest2].cockThickness < width)
-				return true;
-			else
-				return false;
+			return cocks[thinnest].cockThickness + cocks[thinnest2].cockThickness < width;
 		}
 		
 		public function totalCockThickness():Number
@@ -1775,7 +1765,7 @@ package classes
 			//If the player has no vaginas
 			if (vaginas.length == 0)
 				return 0;
-			var total:Number = 0;
+			var total:Number;
 			var bonus:Number = 0;
 			//Centaurs = +50 capacity
 			if (lowerBody == 4)
@@ -1802,7 +1792,7 @@ package classes
 		
 		public function analCapacity():Number
 		{
-			var total:Number = 0;
+			var total:Number;
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
 			if (lowerBody == 4)
@@ -1821,7 +1811,6 @@ package classes
 		public function hasFuckableNipples():Boolean
 		{
 			var counter:Number = breastRows.length;
-			var index:Number = 0;
 			while (counter > 0)
 			{
 				counter--;
@@ -1844,7 +1833,6 @@ package classes
 		public function hasNipples():Boolean
 		{
 			var counter:Number = breastRows.length;
-			var index:Number = 0;
 			while (counter > 0)
 			{
 				counter--;
@@ -2324,9 +2312,8 @@ package classes
 		//BOolean alternate
 		public function hasCock():Boolean
 		{
-			if (cocks.length >= 1)
-				return true;
-			return false;
+			return cocks.length >= 1;
+
 		}
 		
 		public function hasSockRoom():Boolean
@@ -2375,17 +2362,15 @@ package classes
 			//web also makes false!
 			if (hasStatusAffect("Web") >= 0)
 				return false;
-			if (wingType == 2 || wingType == 7 || wingType == 9 || wingType == 11 || wingType == 12)
-				return true;
-			return false;
+			return wingType == 2 || wingType == 7 || wingType == 9 || wingType == 11 || wingType == 12;
+
 		}
 		
 		//check for vagoo
 		public function hasVagina():Boolean
 		{
-			if (vaginas.length > 0)
-				return true;
-			return false;
+			return vaginas.length > 0;
+
 		}
 		
 		public function hasVirginVagina():Boolean
@@ -3003,7 +2988,6 @@ package classes
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
 			if(vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			var devirgined:Boolean = false;
 			if(hasPerk("Fera's Boon - Milking Twat") < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if(cArea >= vaginalCapacity()) {
@@ -3025,7 +3009,6 @@ package classes
 			//If virgin
 			if(vaginas[0].virgin) {
 				vaginas[0].virgin = false;
-				devirgined = true;
 			}
 			//Delay anti-stretching
 			if(cArea >= .5 * vaginalCapacity()) {
@@ -3044,7 +3027,7 @@ package classes
 		{
 			var counter:Number = 0;
 			if (hasPerk("heat") >= 0)
-				counter += perks[hasPerk("heat")].value1;
+				counter += perk(hasPerk("heat")).value1;
 			if (hasPerk("Fertility+") >= 0)
 				counter += 15;
 			if (hasPerk("Marae's Gift - Fertility") >= 0)
@@ -3501,7 +3484,7 @@ package classes
 		public function increaseCock(increase:Number, cockNum:Number):Number
 		{
 			if (hasPerk("Big Cock") >= 0)
-				increase *= perks[hasPerk("Big Cock")].value1;
+				increase *= perk(hasPerk("Big Cock")).value1;
 			if (hasPerk("Phallic Potential") >= 0)
 				increase *= 1.5;
 			if (hasPerk("Phallic Restraint") >= 0)

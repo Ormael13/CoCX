@@ -821,7 +821,7 @@ public function masturbateGo():void {
 			return;
 		}
 		else {
-			player.removePerk("Midas Cock");
+			player.removePerk(PerkLib.MidasCock);
 		}
 	}
 	var autofellatio:Boolean = false;

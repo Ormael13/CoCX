@@ -764,7 +764,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.inte > 21) player.inte = 21;
 		dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);
 		changed = true;
-		player.removePerk("Feeder");
+		player.removePerk(PerkLib.Feeder);
 	}
 	//[(if player received a change from brew)
 	if(changed) {
@@ -779,7 +779,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		outputText("(Bro Brains - Perk Gained!)</b>\n", false);//int to 20.  max int 50)
 		if(player.hasPerk("Feeder") >= 0) {
 			outputText("<b>(Perk Lost - Feeder!)</b>\n", false);
-			player.removePerk("Feeder");
+			player.removePerk(PerkLib.Feeder);
 		}
 	}
 	dynStats("lus=", 0);

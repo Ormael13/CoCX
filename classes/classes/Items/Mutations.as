@@ -5006,7 +5006,7 @@
 				outputText("escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.", false);
 				if (player.hasPerk("Feeder") >= 0 || player.hasStatusAffect("Feeder") >= 0) {
 					outputText("\n\n(<b>Feeder perk lost!</b>)", false);
-					player.removePerk("Feeder");
+					player.removePerk(PerkLib.Feeder);
 					player.removeStatusAffect("Feeder");
 				}
 				changes++;
@@ -6457,8 +6457,8 @@
 				outputText("\n\n", false);
 				if (player.hasPerk("Bimbo Brains") >= 0) outputText("<b>(Lost Perks - Bimbo Brains, Bimbo Body)\n", false);
 				else outputText("<b>(Lost Perk - Bimbo Body)\n", false);
-				player.removePerk("Bimbo Brains");
-				player.removePerk("Bimbo Body");
+				player.removePerk(PerkLib.BimboBrains);
+				player.removePerk(PerkLib.BimboBody);
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
@@ -6495,7 +6495,7 @@
 				if (player.nippleLength > .5) player.nippleLength = .25;
 				player.breastRows[0].lactationMultiplier = 0;
 				player.removeStatusAffect("Feeder");
-				player.removePerk("Feeder");
+				player.removePerk(PerkLib.Feeder);
 				outputText("All too soon, your boobs are gone.  Whoa!\n\n", false);
 			}
 
@@ -6563,7 +6563,7 @@
 			outputText("(Bro Brains - Perk Gained!)</b>\n", false);//int to 20.  max int 50)
 			if (player.hasPerk("Feeder") >= 0) {
 				outputText("<b>(Perk Lost - Feeder!)</b>\n", false);
-				player.removePerk("Feeder");
+				player.removePerk(PerkLib.Feeder);
 			}
 			if (player.inte > 21) player.inte = 21;
 			dynStats("str", 33, "tou", 33, "int", -1, "lib", 4, "lus", 40);
@@ -7690,11 +7690,11 @@
 			outputText("\n\nYou... you were an air-headed ditz!  A vacuous, idiot-girl with nothing between her ears but hunger for dick and pleasure!  You shudder as your faculties return, the pain diminishing with each passing moment.");
 			if (player.hasPerk("Bimbo Brains") >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Bimbo Brains - Your intelligence and speech patterns are no longer limited to that of a bimbo.</b>)");
-				player.removePerk("Bimbo Brains");
+				player.removePerk(PerkLib.BimboBrains);
 			}
 			else if (player.hasPerk("Futa Faculties") >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Futa Faculties - Your intelligence and speech patterns are no longer limited to that of a futanari bimbo.</b>)");
-				player.removePerk("Futa Faculties");
+				player.removePerk(PerkLib.FutaFaculties);
 			}
 		}
 

@@ -1440,8 +1440,8 @@ package classes
 			}
 			//Hot blooded perk raises min lust!
 			if(hasPerk("Hot Blooded") >= 0) {
-				if(min > 0) min += perks[hasPerk("Hot Blooded")].value1 / 2;
-				else min += perks[hasPerk("Hot Blooded")].value1;
+				if(min > 0) min += perk(hasPerk("Hot Blooded")).value1 / 2;
+				else min += perk(hasPerk("Hot Blooded")).value1;
 			}
 			if(hasPerk("Luststick Adapted") > 0) {
 				if(min < 50) min += 10;

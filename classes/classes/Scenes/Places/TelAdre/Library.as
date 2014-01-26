@@ -2,6 +2,7 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.WeaponLib;
+	import classes.PerkLib;
 
 	public class Library extends TelAdreAbstractContent{
 
@@ -182,7 +183,7 @@ private function talkToMali():void {
 		outputText("\n\n(<b>Conclusion not yet complete...</b>)");
 		if(player.weapon == weapons.S_BLADE) {
 			player.weapon = WeaponLib.FISTS;
-			player.removePerk("Wizard's Focus");
+			player.removePerk(PerkLib.WizardsFocus);
 		}
 		else {
 			player.consumeItem(weapons.S_BLADE);

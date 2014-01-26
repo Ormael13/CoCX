@@ -38,8 +38,8 @@ package classes.Items.Armors
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			while(player.hasPerk("Blood Mage") >= 0) player.removePerk("Blood Mage");
-			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
+			while(player.hasPerk("Blood Mage") >= 0) player.removePerk(PerkLib.BloodMage);
+			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk(PerkLib.SluttySeduction);
 		}
 
 		public function InquisitorsCorset()

@@ -18,7 +18,7 @@ package classes.Items.Weapons
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			player.removePerk("Wizard's Focus");
+			player.removePerk(PerkLib.WizardsFocus);
 		}
 
 		public function EldritchStaff()

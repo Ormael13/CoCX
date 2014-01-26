@@ -1481,7 +1481,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				//trace("Populating a storage slot save with data");
 				storage = gearStorage[i];
 				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
-                        || saveFile.data.gearStorage[i].quantity == undefined)
+                        || saveFile.data.gearStorage[i].quantity == undefined
+						|| saveFile.data.gearStorage[i].quantity == 0)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
@@ -1568,7 +1569,7 @@ public function unFuckSave():void
 	// Fix duplicate elven bounty perks
 	if(player.hasPerk("Elven Bounty") >= 0) {
 		//CLear duplicates
-		while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
+		while(player.perkDuplicated("Elven Bounty")) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
 		if(player.perkv1("Elven Bounty") == 15) {
 			player.changePerkValue("Elven Bounty",1,0);
