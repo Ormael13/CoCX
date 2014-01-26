@@ -39,7 +39,10 @@
 		public function SandWitch()
 		{
 			trace("SandWitch Constructor!");
-			init01Names("the ","sand witch",game.silly()?"sandwidch":"sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
+			if(game.silly)		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
+				init01Names("the ","sand witch","sandwidch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
+			else
+				init01Names("the ","sand witch","sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
 			init02Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows(["DD"],["DD"]);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);

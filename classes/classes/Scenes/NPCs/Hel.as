@@ -169,8 +169,11 @@ package classes.Scenes.NPCs
 
 		public function Hel()
 		{
-			var met:Boolean = game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1;
-			init01Names(met?"":"the ",met?"Hel":"salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
+			
+			if (game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1)		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
+				init01Names("the ","salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
+			else
+				init01Names("","Hel","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
 			init02Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL,85);
 			init03BreastRows("E+");
 			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
