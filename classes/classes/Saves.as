@@ -654,7 +654,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.perks[i].value2 = player.perk(i).value2;
 			saveFile.data.perks[i].value3 = player.perk(i).value3;
 			saveFile.data.perks[i].value4 = player.perk(i).value4;
-			saveFile.data.perks[i].perkDesc = player.perk(i).perkDesc;
+			//saveFile.data.perks[i].perkDesc = player.perk(i).perkDesc; // uncomment for backward compatibility
 		}
 		
 		//Set Status Array
@@ -1382,6 +1382,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
 				trace("ERROR: Unknown perk id="+id);
+				(saveFile.data.perks as Array).splice(i,1);
 				continue;
 			}
 			player.createPerk(ptype,value1,value2,value3,value4);
@@ -1398,12 +1399,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					player.perk(i).value1 = .5;
 				}
 			}
-			//If no save data for perkDesc, initialize it.
-			if (saveFile.data.perks[i].perkDesc == undefined)
-				player.perk(i).modDesc = "<b>N/A: This is an older character file.</b>";
-			else
-				player.perk(i).modDesc = saveFile.data.perks[i].perkDesc;
-				//trace("Perk " + player.perk(i).id + " loaded.");
+			//trace("Perk " + player.perk(i).id + " loaded.");
 		}
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
@@ -1540,15 +1536,25 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.itemSlot5.shortName && saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
 			saveFile.data.itemSlot5.id = "GroPlus";
 		player.itemSlot1.unlocked = saveFile.data.itemSlot1.unlocked;
-		player.itemSlot1.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot1.id),saveFile.data.itemSlot1.quantity);
+		player.itemSlot1.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot1.id || saveFile.data.itemSlot1.shortName),
+				saveFile.data.itemSlot1.quantity);
 		player.itemSlot2.unlocked = saveFile.data.itemSlot2.unlocked;
-		player.itemSlot2.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot2.id),saveFile.data.itemSlot2.quantity);
+		player.itemSlot2.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot2.id || saveFile.data.itemSlot2.shortName),
+				saveFile.data.itemSlot2.quantity);
 		player.itemSlot3.unlocked = saveFile.data.itemSlot3.unlocked;
-		player.itemSlot3.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot3.id),saveFile.data.itemSlot3.quantity);
+		player.itemSlot3.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot3.id || saveFile.data.itemSlot3.shortName),
+				saveFile.data.itemSlot3.quantity);
 		player.itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
-		player.itemSlot4.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot4.id),saveFile.data.itemSlot4.quantity);
+		player.itemSlot4.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot4.id || saveFile.data.itemSlot4.shortName),
+				saveFile.data.itemSlot4.quantity);
 		player.itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
-		player.itemSlot5.setItemAndQty(ItemType.lookupItem(saveFile.data.itemSlot5.id),saveFile.data.itemSlot5.quantity);
+		player.itemSlot5.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
+				saveFile.data.itemSlot5.quantity);
 
 		unFuckSave();
 		

@@ -255,22 +255,22 @@ private function startUrtaQuest():void {
 	player.fatigue = 0;
 	
 	//PERKS
-	player.createPerk(PerkLib.Resistance,0,0,0,0,"");
-	player.createPerk(PerkLib.Agility,0,0,0,0,"");
-	player.createPerk(PerkLib.WeaponMastery,0,0,0,0,"");
-	player.createPerk(PerkLib.Acclimation,0,0,0,0,"");
-	player.createPerk(PerkLib.Nymphomania,0,0,0,0,"");
-	player.createPerk(PerkLib.Precision,0,0,0,0,"");
-	player.createPerk(PerkLib.Seduction,0,0,0,0,"");
-	player.createPerk(PerkLib.Evade,0,0,0,0,"");
-	player.createPerk(PerkLib.Tactician,0,0,0,0,"");
-	player.createPerk(PerkLib.LungingAttacks,0,0,0,0,"");
-	player.createPerk(PerkLib.ImmovableObject,0,0,0,0,"");
-	player.createPerk(PerkLib.BrutalBlows,0,0,0,0,"");
-	player.createPerk(PerkLib.Brawler,0,0,0,0,"");
-	player.createPerk(PerkLib.Berzerker,0,0,0,0,"");
-	player.createPerk(PerkLib.Tank,0,0,0,0,"");
-	player.createPerk(PerkLib.HistoryFighter,0,0,0,0,"");
+	player.createPerk(PerkLib.Resistance,0,0,0,0);
+	player.createPerk(PerkLib.Agility,0,0,0,0);
+	player.createPerk(PerkLib.WeaponMastery,0,0,0,0);
+	player.createPerk(PerkLib.Acclimation,0,0,0,0);
+	player.createPerk(PerkLib.Nymphomania,0,0,0,0);
+	player.createPerk(PerkLib.Precision,0,0,0,0);
+	player.createPerk(PerkLib.Seduction,0,0,0,0);
+	player.createPerk(PerkLib.Evade,0,0,0,0);
+	player.createPerk(PerkLib.Tactician,0,0,0,0);
+	player.createPerk(PerkLib.LungingAttacks,0,0,0,0);
+	player.createPerk(PerkLib.ImmovableObject,0,0,0,0);
+	player.createPerk(PerkLib.BrutalBlows,0,0,0,0);
+	player.createPerk(PerkLib.Brawler,0,0,0,0);
+	player.createPerk(PerkLib.Berzerker,0,0,0,0);
+	player.createPerk(PerkLib.Tank,0,0,0,0);
+	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 	
 	//GEAR!
 	player.weapon = weapons.URTAHLB;

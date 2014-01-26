@@ -91,21 +91,21 @@ public function customPCSetup():void {
 		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 		player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
-		player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0, "You're a cheater, cheater.");
+		player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);
 		player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
-		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 		player.createPerk(PerkLib.WetPussy,2,0,0,0);
 		player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
 		player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
 		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 		player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0, "You cheated.");
-		player.createPerk(PerkLib.StrongBack,0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+		player.createPerk(PerkLib.StrongBack,0,0,0,0);
 		player.itemSlot4.unlocked = true;
 		player.itemSlot5.unlocked = true;
-		player.createPerk(PerkLib.StrongBack2,0,0,0,0,"Cheating Nerd!");
-		player.createPerk(PerkLib.HistorySlacker,0,0,0,0,"Cheating Nerd!");
+		player.createPerk(PerkLib.StrongBack2,0,0,0,0);
+		player.createPerk(PerkLib.HistorySlacker,0,0,0,0);
 		player.str += 4;
 		player.tou += 4;
 		player.inte += 2;
@@ -363,15 +363,15 @@ public function customPCSetup():void {
 		player.createStatusAffect("Feeder",0,0,0,0);
 		player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 
-		player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0, "Cheating Nerd!");
-		player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0, "Cheating Nerd!");
+		player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
+		player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0);
 
 		//Equipment: 
     	//Weapon: Warhammer
 		player.weapon = weapons.WARHAMR;
     	//Armor: Lusty shit
 		player.armor = armors.LMARMOR;
-		player.createPerk(PerkLib.SluttySeduction, 10 + flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0, "Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+		player.createPerk(PerkLib.SluttySeduction, 10 + flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
 
 		//Stats: (if possible)
   		//Strength: 90
@@ -585,8 +585,8 @@ public function customPCSetup():void {
 		player.spe += 20;
 		outputText("You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals.");
 		//Perk is speed, she was a scout, and it'd be neat (if possible) to give her something akin to the Runner perk. She might not start out very strong or tough, but at least she's fast.
-		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Runner, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.Runner, 0, 0, 0, 0);
 		//In the human world, Prismere began as a scout, helping patrol areas with portals to make sure demonspawn and corruption didn't reach the human homeland. She's gotten herself into a few tight spots because of it, but she's hard to keep pinned down. She has a fiance back in her village whom she fully intends to get back to, so her libido isn't especially high. 
 		//As of the time the PC takes her on, she has some signs of demonic taint, so Corruption might start at 5 to 10 points."	"Breasts at E, height at 5'0, a curvy build with a more narrow waist and substantial hips and butt. Skin is olive, like a mocha, hair is long and wildly wavy, a deep red, and eyes are a stormy blue. Muscles are barely visible; what muscle she has is the lean build of a runner, not a fighter. Nipples aren't especially long, but more soft. 
 		player.cor = 5;
@@ -643,13 +643,13 @@ public function customPCSetup():void {
 		player.lowerBody = LOWER_BODY_TYPE_CAT;
 		player.nippleLength = 0.5;
 		//perks:
-		player.createPerk(PerkLib.Agility, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Evade, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Runner, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
-		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0, "CHEATER JACKASS JERKFACE");
+		player.createPerk(PerkLib.Agility, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Evade, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Runner, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
+		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
+		player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 
 		player.skinDesc = "fur";
 		player.skinTone = "ashen";
@@ -674,8 +674,8 @@ public function customPCSetup():void {
 		//(on a side note how much do you think it would cost to add bell nipple,labia and clit piercings as well as an option for belly button piercings would like to see belly button piecings with a few different options as well.  Also would love to have handcuff ear piercings.)"	Would like the bimbo brain and bimbo body perks as well as the nine tail PerkLib.  demonic high heels, pink skin, obscenely long pink hair  would like her to be a kitsune with the nine tails.  pink fur.  starting equipment would like to be the succubus whip and nurse's outfit.  Also would like the xmas perk and all three Vday perks	Aria
 		if(!player.hasVagina()) player.createVagina();
 		if(player.femininity < 80) player.femininity = 80;
-		player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0, "Cheater.");
-		player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0, "Cheater.");
+		player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
+		player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
 		player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
@@ -802,7 +802,7 @@ public function customPCSetup():void {
 		outputText("There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion.");
 		//Character Creation	"Herm same number and types of cocks from email sent earlier. 
 		//Special abilities: Fire breath, fox fire?
-		player.createPerk(PerkLib.Dragonfire,0,0,0,0,"You're a cheater, cheater.");
+		player.createPerk(PerkLib.Dragonfire,0,0,0,0);
 		//equipment: Large claymore, and platemail
 		//-Chainmail armor
 		player.armor = armors.FULLPLT;
@@ -912,12 +912,12 @@ public function customPCSetup():void {
 		player.tone += 10;
 		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 		//- history: religion 
-		player.createPerk(PerkLib.HistoryReligious,0,0,0,0,"Rar, I'm religious.");
+		player.createPerk(PerkLib.HistoryReligious,0,0,0,0);
 		//(and if possible)
 		//- history: fighter
-		player.createPerk(PerkLib.HistoryFighter,0,0,0,0,"Rar, I'm a fighter.");
+		player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 		//- history: smith
-		player.createPerk(PerkLib.HistorySmith,0,0,0,0,"Rar, I'm a smith");
+		player.createPerk(PerkLib.HistorySmith,0,0,0,0);
 		//in my ar, Issac was born to a disgraced priestess (she was raped by marauders) and raised by her alone until she died from an illness and was pretty much left to fend for and earn a living for himself (hence the fighter and smith background's too) until, years later he was chosen as 'champion'~
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		//sex - male

@@ -2356,7 +2356,7 @@
 			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == TAIL_TYPE_BEE_ABDOMEN && rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
-				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0, "");
+				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
 				changes++;
 			}
 			//Bee butt - 66% lower chance if already has a tail
@@ -6346,7 +6346,7 @@
 				outputText("\n\n(<b>Perk Gained:  Spider Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				//V1 - Egg Count
 				//V2 - Fertilized Count
-				player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0, "");
+				player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0);
 				//Opens up drider ovipositor scenes from available mobs. The character begins producing unfertilized eggs in their arachnid abdomen. Egg buildup raises minimum lust and eventually lowers speed until the player has gotten rid of them.  This perk may only be used with the drider lower body, so your scenes should reflect that.
 				//Any PC can get an Ovipositor perk, but it will be much rarer for characters without vaginas.
 				//Eggs are unfertilized by default, but can be fertilized:

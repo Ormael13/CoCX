@@ -15,11 +15,12 @@
 		
 		public function setItemAndQty(itype:ItemType, quant:Number):void
 		{
-			if (quant == 0 && itype == null) {
+			if (itype == null) itype = ItemType.NOTHING;
+			if (quant == 0 && itype == ItemType.NOTHING) {
 				emptySlot();
 				return;
 			}
-			if (quant<0 || quant == 0 && itype != null || quant>0 && itype == null){
+			if (quant<0 || quant == 0 && itype != ItemType.NOTHING || quant>0 && itype == ItemType.NOTHING){
 				CoC_Settings.error("Inconsistent setItemAndQty call: "+quant+" "+itype);
 				quant = 0;
 				itype = ItemType.NOTHING;

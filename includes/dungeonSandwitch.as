@@ -3632,11 +3632,11 @@ public function cumWitchBlessed(virility:Boolean = true):void {
 	outputText("<b>");
 	if(virility) {
 		outputText("\n\n(Perk Unlocked: Magical Virility - 200 mLs more cum per orgasm and enhanced virility.)");
-		player.createPerk(PerkLib.MagicalVirility,0,0,0,0,"Fucking cheater-nozzle.");
+		player.createPerk(PerkLib.MagicalVirility,0,0,0,0);
 	}
 	else {
 		outputText("\n\n(Perk Unlocked: Magical Fertility - 10% higher chance of pregnancy and increased pregnancy speed.)");
-		player.createPerk(PerkLib.MagicalFertility,0,0,0,0,"Fucking cheater-nozzle.");
+		player.createPerk(PerkLib.MagicalFertility,0,0,0,0);
 	}
 	flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] = 1;
 	dynStats("lib", 1, "sen", -5, "lus=", 0);

@@ -643,19 +643,19 @@
 			switch(perkName)
 			{
 				case PerkLib.ChiReflowAttack.name:
-					return PerkLib.ChiReflowAttack.desc;
+					return PerkLib.ChiReflowAttack.desc();
 					break;
 				case PerkLib.ChiReflowDefense.name:
-					return PerkLib.ChiReflowDefense.desc;
+					return PerkLib.ChiReflowDefense.desc();
 					break;
 				case PerkLib.ChiReflowLust.name:
-					return PerkLib.ChiReflowLust.desc;
+					return PerkLib.ChiReflowLust.desc();
 					break;
 				case PerkLib.ChiReflowMagic.name:
-					return PerkLib.ChiReflowMagic.desc;
+					return PerkLib.ChiReflowMagic.desc();
 					break;
 				case PerkLib.ChiReflowSpeed.name:
-					return PerkLib.ChiReflowSpeed.desc;
+					return PerkLib.ChiReflowSpeed.desc();
 					break;
 				default:
 					return "";

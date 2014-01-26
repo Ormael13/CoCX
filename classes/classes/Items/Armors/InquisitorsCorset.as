@@ -31,8 +31,8 @@ package classes.Items.Armors
 						//+lust
 						game.dynStats("lus", 5);
 					}
-					if(player.findPerk(PerkLib.BloodMage) < 0) player.createPerk(PerkLib.BloodMage,0,0,0,0,"");
-					if(player.findPerk(PerkLib.SluttySeduction) < 0) player.createPerk(PerkLib.SluttySeduction,10,0,0,0,"");
+					if(player.findPerk(PerkLib.BloodMage) < 0) player.createPerk(PerkLib.BloodMage,0,0,0,0);
+					if(player.findPerk(PerkLib.SluttySeduction) < 0) player.createPerk(PerkLib.SluttySeduction,10,0,0,0);
 		}
 
 

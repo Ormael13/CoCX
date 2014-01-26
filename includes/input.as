@@ -7,21 +7,12 @@
 // import fl.data.DataProvider; 
 // import flash.net.navigateToURL; 
  
-public var perkList:Array = new Array( 
-    {label:"Pretend Strength Perk"},
-    {label:"Pretend Speed Perk"}
- 	/*{label:"Pretend Strength Perk",  
-                data:2}, 
-    {label:"Pretend Speed Perk",  
-                data:3}*/
-); 
- 
-public function changeHandler(event:Event):void { 
+public function changeHandler(event:Event):void {
  	//Store perk name for later addition
- 	tempPerk = ComboBox(event.target).selectedItem.label; 
+ 	tempPerk = ComboBox(event.target).selectedItem.perk;
 	mainView.aCb.move(210, 80);
 	outputText("You have selected the following perk:\n\n", true);
-	outputText("<b>" + tempPerk + ":</b> " + perkLongDescription(tempPerk) + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.", false);
+	outputText("<b>" + tempPerk.perkName + ":</b> " + tempPerk.perkLongDesc + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.", false);
 	simpleChoices("Okay",114,"Skip",115,"",0,"",0,"",0);
 }
 

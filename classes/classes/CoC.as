@@ -233,7 +233,7 @@
 		public var images:ImageManager;
 		public var player:Player;
 		public var player2:Player;
-		public var tempPerk:String;
+		public var tempPerk:PerkClass;
 		public var monster:Monster;
 		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
@@ -361,7 +361,7 @@
 			player2 = new Player();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
-			tempPerk = "";
+			tempPerk = null;
 
 			//Create monster, used all over the place
 			monster = new Monster();
@@ -505,7 +505,7 @@
 
 			// ******************************************************************************************
 
-			mainView.aCb.dataProvider = new DataProvider(perkList); 
+			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
 			//mainView._getButtonToolTipText = getButtonToolTipText;

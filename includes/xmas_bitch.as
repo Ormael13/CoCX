@@ -260,8 +260,8 @@ public function xmasFuckFollowupFems():void {
 
 public function xmasPerkM():void {
 	if(player.findPerk(PerkLib.ElvenBounty) < 0) {
-		if(temp == 1001) player.createPerk(PerkLib.ElvenBounty,250,0,0,0,"After an encounter with an elf, her magic permanently increased how messy your orgasms are.");
-		else player.createPerk(PerkLib.ElvenBounty,0,15,0,0,"After your encounter with an elf, her magic has left you with increased fertility.");
+		if(temp == 1001) player.createPerk(PerkLib.ElvenBounty,250,0,0,0);
+		else player.createPerk(PerkLib.ElvenBounty,0,15,0,0);
 		outputText("<b>New Perk Acquired - Elven Bounty!</b>", true);
 	}
 	else {

@@ -481,26 +481,26 @@ public function doCreation(eventNo:Number):void {
 			player.tou += 5;
 			player.tone += 5;
 			player.thickness += 5;
-			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0,"Gain toughness 25% faster.");
+			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
 			player.HP = kGAMECLASS.maxHP();
 		}
 		if(temp == 3) {
 			player.spe += 5;
 			player.tone += 10;
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0,"Gain speed 25% faster.");
+			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 		}
 		if(temp == 4) {
 			player.inte += 5;
 			player.thickness -= 5;
-			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
+			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
 		}
 		if(temp == 5) {
 			player.lib += 5;
-			player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0,"Gain lust 25% faster.");
+			player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
 		}
 		if(temp == 6) {
 			player.sens += 5;
-			player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0,"Gain sensitivity 25% faster.");
+			player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
 		}
 		if(temp == 7) {
 			player.femininity -= 5;
@@ -672,7 +672,7 @@ public function doCreation(eventNo:Number):void {
 			player.ass.analLooseness = 1;
 		}
 		else historyPerk = PerkLib.HistorySmith;
-		player.createPerk(historyPerk,0,0,0,0,"YOU GOT HISTORY BRO!");
+		player.createPerk(historyPerk,0,0,0,0);
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
 			eventParser(10045);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;

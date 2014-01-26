@@ -182,389 +182,11 @@ public function flushOutputTextToGUI():void
 	mainView.setOutputText( currentText );
 }
 
-public function perkLongDescription(perkName:String = ""):String {
-	switch(perkName) {
-		case "Pretend Strength Perk":
-			return "Pretend I am telling you about how this works.";
-		case "Resistance":
-			return "You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.";
-		case "Arousing Aura":
-			return "You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.";
-		case "Sadist":
-			return "You choose the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.";
-		case "Masochist":
-			return "You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!";
-		case "Well Adjusted":
-			return "You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!";
-		case "Medicine":
-			return "You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically!";
-		case "Channeling":
-			return "You choose the 'Channeling' perk, boosting the strength of your spellcasting!";
-		case "Agility":
-			return "You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.";
-		case "Speedy Recovery":
-			return "You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!";
-		case "Regeneration 2":
-			return "You choose the 'Regeneration 2' perk, giving an addition 2% of max HP per turn in combat and 4% of max HP per hour.";
-		case "Fera's Boon - Seeder":
-			return "Increases cum output by 1,000 mLs.";
-		case "Fera's Boon - Wide Open":
-			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
-		case "Fera's Boon - Milking Twat":
-			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
-		case "Tank 2":
-			return "You choose the 'Tank 2' perk, granting an extra maximum HP for each point of toughness.";
-		case "Weapon Mastery":
-			return "You choose the 'Weapon Mastery' perk, doubling the effectiveness of large weapons.";
-		case "Thunderous Strikes":
-			return "You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.";
-		case "Acclimation":
-			return "You choose the 'Acclimation' perk, making your body 15% more resistant to lust, up to a maximum of 75%.";
-		case "Double Attack":
-			return "You choose the 'Double Attack' perk.  This allows you to make two attacks so long as your strength is at 60 or below.  By default your effective strength will be reduced to 60 if it is too high when double attacking.  <b>You can enter the perks menu at any time to toggle options as to how you will use this perk.</b>";
-		case "Mage":
-			return "You choose the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 50%.";
-		case "Spellpower":
-			return "You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 50%.";
-		case "Nymphomania":
-			return "You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by as much as 30 (If you already have minimum lust, the increase is 10-15).";
-		case "Precision":
-			return "You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.";
-		case "Seduction":
-			return "You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.";
-		case "Corrupted Libido":
-			return "You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)";
-		case "Hot Blooded":
-			return "You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20! (If you already have some minimum lust, it will be increased by 10)";
-		case "Fertility+":
-			return "You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!";
-		case "Magical Fertility":
-			return "10% higher chance of pregnancy and increased pregnancy speed.";
-		case "Magical Virility":
-			return "200 mLs more cum per orgasm and enhanced virility.";
-		case "Runner":
-			return "You choose the 'Runner' perk, increasing your chances to escape from your foes when fleeing!";
-		case "Evade":
-			return "You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!";
-		case "Regeneration":
-			return "You choose the 'Regeneration' perk, allowing you to heal 2% of max HP every hour and 1% of max HP every round of combat!";
-		case "Iron Man":
-			return "You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%";
-		case "Brawler":
-			return "You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!";
-		case "Tank":
-			return "You choose the 'Tank' perk, giving you an additional 50 hp!";
-		case "Strong Back 2: Strong Harder":
-			return "You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.";
-		case "Strong Back":
-			return "You choose the 'Strong Back' perk, enabling a fourth item slot.";
-		case "Tactician":
-			return "You choose the 'Tactician' perk, increasing critical hit chance by up to 10% (Intelligence-based).";
-		case "Archmage":
-			return "You choose the 'Archmage' perk, increasing base spell strength by 50%.";
-		case "Lunging Attacks":
-			return "You choose the 'Lunging Attacks' perk, granting 50% armor penetration for standard attacks.";
-		case "Lightning Strikes":
-			return "You choose the 'Lightning Strikes' perk, increasing the attack damage for non-heavy weapons.</b>";
-		case "Immovable Object":
-			return "You choose the 'Immovable Object' perk, granting 20% physical damage reduction.</b>";
-		case "Resolute":
-			return "You choose the 'Resolute' perk, granting immunity to stuns and some statuses.</b>";
-		case "Berzerker":
-			return "You choose the 'Berzerker' perk, which unlocks the 'Berzerk' magical ability.  Berzerking increases attack and lust resistance but reduces physical defenses.";
-		case "Brutal Blows":
-			return "You choose the 'Brutal Blows' perk, which reduces enemy armor with each hit.";
-		default:
-			return "An error occurred when loading the long perk description.  Please post a bug report on the bug report forums at forum.fenoxo.com.";
-	}
-}
-public function perkDescription(perkName:String = ""):String {
-	switch(perkName) {
-		case "History: Whore":
-			return "Seductive experience causes your tease attacks to be 15% more effective.";
-		case "History: Slut":
-			return "Sexual experience has made you more able to handle large insertions and more resistant to stretching.";
-		case "Pure and Loving":
-			return "Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.";
-		case "Sensual Lover":
-			return "Your sensual attitude towards love and romance makes your tease ability slightly more effective.";
-		case "One Track Mind":
-			return "Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.";
-		case "Brawler":
-			return "Brawling experience allows you to make two unarmed attacks in a turn.";
-		case "Corrupted Nine-tails":
-			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.";
-		case "Enlightened Nine-tails":
-			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.";
-		case "History: Alchemist":
-			return "Alchemical experience makes items more reactive to your body.";
-		case "History: Fighter":
-			return "Past full of conflict increases physical damage dealt by 10%.";
-		case "History: Healer":
-			return "Healing experience increases HP gains by 20%.";
-		case "History: Religious":
-			return "Replaces masturbate with meditate when corruption less than or equal to 66.";
-		case "History: Scholar":
-			return "Time spent focusing your mind makes spellcasting 20% less fatiguing.";
-		case "History: Smith":
-			return "Knowledge of armor and fitting increases armor effectiveness by roughly 10%.";
-		case "History: Slacker":
-			return "Regenerate fatigue 20% faster.";
-		case "Slime Core":
-			return "Grants more control over your slimy body, allowing you to go twice as long without fluids.";
-		case "Flexibility":
-			return "Grants cat-like flexibility.  Useful for dodging and 'fun'.";
-		case "Thick Skin":
-			return "Toughens your dermis to provide 2 points of armor.";
-		case "Bunny Eggs":
-			return "Laying eggs has become a normal part of your bunny-body's routine.";
-		case "Basilisk Womb":
-			return "Enables your eggs to be properly fertilized into basilisks of both genders!";
-		case "Oviposition":
-			return "Causes you to regularly lay eggs when not otherwise pregnant.";
-		case "Dragonfire":
-			return "Allows access to a dragon breath attack.";
-		case "Futa Form":
-			return "Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.";
-		case "Futa Faculties":
-			return "It's super hard to think about stuff that like, isn't working out or fucking!";
-		case "Bulge Armor":
-			return "Grants a 5 point damage bonus to dick-based tease attacks.";
-		case "Slutty Seduction":
-			return "Increases odds of successfully teasing and lust damage of successful teases by " + player.perkv1("Slutty Seduction") + " points.";
-		case "Blood Mage":
-			return "Spellcasting now consumes health instead of fatigue!";
-		case "Purity Blessing":
-			return "Reduces the rate at which your corruption, libido, and lust increase.";
-		case "Wizard's Endurance":
-			return "Reduces fatigue cost of spells by " + player.perkv1("Wizard's Endurance") + "%.";
-		case "Wizard's Focus":
-			return "Increases your spell effect modifier by " + player.perkv1("Wizard's Focus") * 100 + "%.";
-		case "Strong":
-			return "Gains strength 25% faster.";
-		case "Tough":
-			return "Gains toughness 25% faster.";
-		case "Fast":
-			return "Gains speed 25% faster.";
-		case "Smart":
-			return "Gains intelligence 25% faster.";
-		case "Lusty":
-			return "Gains lust 25% faster.";
-		case "Sensitive":
-			return "Gains sensitivity 25% faster.";
-		case "Big Cock":
-			return "Gains cock size 25% faster and with less limitations.";
-		case "Messy Orgasms":
-			return "Produces 50% more cum volume.";
-		case "Big Tits":
-			return "Makes your tits grow larger more easily.";
-		case "Big Clit":
-			return "Allows your clit to grow larger more easily and faster.";
-		case "Fertile":
-			return "Makes you 15% more likely to become pregnant.";
-		case "Wet Pussy":
-			return "Keeps your pussy wet and provides a bonus to capacity.";
-		case "Marble Resistant":
-			return "Provides resistance to the addictive effects of bottled LaBova milk.";
-		case "Marble's Milk":
-			return "Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.";
-		case "Minotaur Cum Addict":
-			return "Causes you to crave minotaur cum frequently.  You cannot shake this addiction.";
-		case "Misdirection":
-			return "Grants additional evasion chances while wearing Raphael's red bodysuit.";
-		case "Omnibus' Gift":
-			return "Increases minimum lust but provides some lust resistance.";
-		case "Pierced: Crimstone":
-			return "Increases minimum lust by " + Math.round(player.perkv1("Pierced: Crimstone")) + ".";
-		case "Pent Up":
-			return "Increases minimum lust by " + Math.round(player.perkv1("Pent Up")) + " and makes you more vulnerable to seduction.";
-		case "Midas Cock":
-			return "Increases the gems awarded from victory in battle.";
-		case "Phallic Potential":
-			return "Increases the effects of penis-enlarging transformations.";
-		case "Phallic Restraint":
-			return "Reduces the effects of penis-enlarging transformations.";
-		case "Lusty Regeneration":
-			return "Regenerates 1% of HP per round in combat and 2% of HP per hour.";
-		case "Pierced: Fertite":
-			return "Increases cum production by " + Math.round(2*player.perkv1("Pierced: Fertite")) + "% and fertility by " + Math.round(player.perkv1("Pierced: Fertite")) + ".";
-		case "Pierced: Furrite":
-			return "Increases chances of encountering 'furry' foes.";
-		case "Pierced: Lethite":
-			return "Increases chances of encountering demonic foes.";
-		case "Harpy Womb":
-			return "Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.";
-		case "Hellfire":
-			return "Grants a corrupted fire breath attack, like the hellhounds in the mountains.";
-		case "Incorporeality":
-			return "Allows you to fade into a ghost-like state and temporarily possess others.";
-		case "Luststick Adapted":
-			return "Grants immunity to the lust-increasing effects of lust-stick and allows its use.";
-		case "Pilgrim's Bounty":
-			return "Causes you to always cum as hard as if you had max lust.";
-		case "Cornucopia":
-			return "Vaginal and Anal capacities increased by 30.";
-		case "Spider Ovipositor":
-			return "Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.";
-		case "Bee Ovipositor":
-			return "Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.";
-		case "Fera's Boon - Alpha":
-			return "Increases the rate your cum builds up and cum production in general.";
-		case "Fera's Boon - Breeding Bitch":
-			return "Increases fertility and reduces the time it takes to birth young.";
-		case "Marae's Gift - Stud":
-			return "Increases your cum production and potency greatly.";
-		case "Marae's Gift - Fertility":
-			return "Greatly increases fertility and halves base pregnancy speed.";
-		case "Marae's Gift - Profractory":
-			return "Causes your cum to build up at 3x the normal rate.";
-		case "Marae's Gift - Buttslut":
-			return "Makes your anus provide lubrication when aroused.";
-		case "Feeder":
-			return "Lactation does not decrease and gives a compulsion to breastfeed others.";
-		case "Fire Lord":
-			return "Akbal's blessings grant the ability to breathe burning green flames.";
-		case "Whispered":
-			return "Akbal's blessings grant limited telepathy that can induce fear.";
-		case "Bro Brains":
-			return "Makes thou... thin... fuck, that shit's for nerds.";
-		case "Bro Body":
-			return "Grants an ubermasculine body that's sure to impress.";
-		case "Bimbo Body":
-			return "Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.";
-		case "Bimbo Brains":
-			return "Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!";
-		case "Brood Mother":
-			return "Pregnancy moves twice as fast as a normal woman's.";
-		case "Diapause":
-			return "Pregnancy does not advance normally, but develops quickly after taking in fluids.";
-		case "Elven Bounty":
-			return "Increases fertility by " + player.perkv2("Elven Bounty") + "% and cum production by " + player.perkv1("Elven Bounty") + "mLs.";
-		case "Androgyny":
-			return "No gender limits on facial masculinity or femininity.";
-		case "Pretend Strength Perk":
-			return "Pretend I am telling you about how this works.";
-		case "Resistance":
-			return "Reduces lust gain by 10%.";
-		case "Arousing Aura":
-			return "Exude a lust-inducing aura (Req's corruption of 70 or more)";
-		case "Sadist":
-			return "Deal 20% more damage, but gain lust at the same time.";
-		case "Masochist":
-			return "Take 30% less physical damage but gain lust when damage.";
-		case "Well Adjusted":
-			return "You gain half as much lust as time passes in Mareth.";
-		case "Medicine":
-			return "Grants 15% chance per round of cleansing poisons/drugs from your body.";
-		case "Channeling":
-			return "Increases base spell strength by 50%.";
-		case "Agility":
-			return "Boosts armor points by a portion of your speed on light/medium armors.";
-		case "Speedy Recovery":
-			return "Regain fatigue 50% faster.";
-		case "Regeneration 2":
-			return "Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.";
-		case "Fera's Boon - Seeder":
-			return "Increases cum output by 1,000 mLs.";
-		case "Fera's Boon - Wide Open":
-			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
-		case "Fera's Boon - Milking Twat":
-			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
-		case "Spellcasting Affinity":
-			return "Reduces spell costs by " + player.perkv1("Spellcasting Affinity") + "%.";
-		case "Tank 2":
-			return "+1 extra HP per point of toughness.";
-		case "Weapon Mastery":
-			if(player.str > 60) return "Doubles damage bonus of weapons classified as 'Large'.";
-			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-		case "Thunderous Strikes":
-			return "+20% 'Attack' damage while strength is at or above 80.";
-		case "Acclimation":
-			return "Reduces lust gain by 15%.";
-		case "Double Attack":
-			if(player.spe < 50) return "<b>You're too slow to double attack!</b>";
-			else if(player.str < 61) return "Allows you to perform two melee attacks per round.";
-			else return "<b>You are stronger than double attack allows.  Too choose between reduced strength double-attacks and a single strong attack, access \"Dbl Options\" in the perks menu.</b>";
-		case "Mage":
-			return "Increases base spell strength by 50%.";
-		case "Spellpower":
-			return "Increases base spell strength by 50%.";
-		case "Nymphomania":
-			return "Raises minimum lust by up to 30.";
-		case "Precision":
-			return "Reduces enemy armor by 10. (Req's 25+ Intelligence)";
-		case "Seduction":
-			return "Upgrades your tease attack, making it more effective.";
-		case "Corrupted Libido":
-			return "Reduces lust gain by 10%.";
-		case "Hot Blooded":
-			return "Raises minimum lust by up to 20.";
-		case "Fertility+":
-			return "Increases fertility rating by 15 and cum volume by up to 50%.";
-		case "Magical Fertility":
-			return "10% higher chance of pregnancy and increased pregnancy speed.";
-		case "Magical Virility":
-			return "200 mLs more cum per orgasm and enhanced virility.";
-		case "Runner":
-			return "Increases chances of escaping combat.";
-		case "Evade":
-			return "Increases chances of evading enemy attacks.";
-		case "Regeneration":
-			return "Regenerates 2% of max HP/hour and 1% of max HP/round.";
-		case "Iron Man":
-			return "Reduces the fatigue cost of physical specials by 50%.";
-		case "Tank":
-			return "Raises max HP by 50.";
-		case "Strong Back 2: Strong Harder":
-			return "Enables fifth item slot.";
-		case "Strong Back":
-			return "Enables fourth item slot.";
-		case "Tactician":
-			if(player.inte >= 50) return "Increases critical hit chance by up to 10% (Intelligence-based).";
-			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-		case "Archmage":
-			if(player.inte >= 75) return "Increases base spell strength by 50%.";
-			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-		case "Lunging Attacks":
-			if(player.spe >= 75) return "Grants 50% armor penetration for standard attacks.";
-			else return "<b>You are too slow to benefit from this perk.</b>";
-		case "Lightning Strikes":
-			if(player.spe >= 60) return "Increases the attack damage for non-heavy weapons.</b>";
-			else return "<b>You are too slow to benefit from this perk.</b>";
-		case "Immovable Object":
-			if(player.tou >= 75) return "Grants 20% physical damage reduction.</b>";
-			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-		case "Resolute":
-			if(player.tou >= 75) return "Grants immunity to stuns and some statuses.</b>";
-			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-		case "Berzerker":
-			if(player.str >= 75) return "Grants 'Berzerk' ability.";
-			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-		case "Brutal Blows":
-			if(player.str >= 75) return "Reduces enemy armor with each hit.";
-			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-		default:
-			var checkChildren:String;
-			
-			checkChildren = telAdre.umasShop.listPerkDescription(perkName);
-			
-			if (checkChildren != "")
-			{
-				return checkChildren;
-			}
-			else
-			{			
-				return "<u><i>This Perk does not have a stored description.  Please post a bug report on the bug report forums at forum.fenoxo.com.</i></u>";
-			}
-			
-			break;
-	}
-}
 public function displayPerks(e:MouseEvent = null):void {
-	temp = 0;
+	var temp:int = 0;
 	outputText("", true);
 	while(temp < player.perks.length) {
-		outputText("<b>" + player.perk(temp).perkName + "</b> - " + perkDescription(player.perk(temp).perkName) + "\n", false);
+		outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n", false);
 		temp++;
 	}
 	menu();
@@ -661,7 +283,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 
 public function perkBuyMenu():void {
 	outputText("", true);
-	buildPerkList();
+	var perkList:Array = buildPerkList();
 	if(perkList.length == 0) {
 		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
@@ -670,7 +292,7 @@ public function perkBuyMenu():void {
 		return;
 	}
 	if (testingBlockExiting){
-		tempPerk = perkList[rand(perkList.length)].label;
+		tempPerk = perkList[rand(perkList.length)].perk;
 		doNext(114);
 	} else {
 		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
@@ -681,309 +303,196 @@ public function perkBuyMenu():void {
 		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
 	}
 }
-public function buildPerkList():void {
-	perkList = [];
+public function buildPerkList():Array {
+	var perkList:Array = [];
+	function _add(p:PerkClass):void{
+		perkList.push({label: p.perkName,perk:p});
+	}
 	//STRENGTH PERKS
 	if(player.str >= 25) {
-		perkList.push({label:"Strong Back"});
+		_add(new PerkClass(PerkLib.StrongBack));
 	}
 	if(player.findPerk(PerkLib.StrongBack) >= 0 && player.str >= 50) {
-		perkList.push({label:"Strong Back 2: Strong Harder"});
+		_add(new PerkClass(PerkLib.StrongBack2));
 	}
 	//Tier 1 Strength Perks
 	if(player.level >= 6) {
 		//Thunderous Strikes - +20% basic attack damage while str > 80.
 		if(player.str >= 80) {
-			perkList.push({label:"Thunderous Strikes"});
+			_add(new PerkClass(PerkLib.ThunderousStrikes));
 		}
 		//Weapon Mastery - Doubles weapon damage bonus of 'large' type weapons. (Minotaur Axe, M. Hammer, etc)
 		if(player.str > 60) {
-			perkList.push({label:"Weapon Mastery"});
+			_add(new PerkClass(PerkLib.WeaponMastery));
 		}
 		if(player.str >= 75)
-			perkList.push({label:"Brutal Blows"});
+			_add(new PerkClass(PerkLib.BrutalBlows));
 	}
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
 		if(player.str >= 75)
-			perkList.push({label:"Berzerker"});
+			_add(new PerkClass(PerkLib.Tank));
 	}
 	//slot 2 - toughness perk 1
 	if(player.findPerk(PerkLib.Tank) < 0 && player.tou >= 25) {
-		perkList.push({label:"Tank"});
+		_add(new PerkClass(PerkLib.Tank));
 	}
 	//slot 2 - regeneration perk
 	if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 50) {
-		perkList.push({label:"Regeneration"});
+		_add(new PerkClass(PerkLib.Regeneration));
 	}
 	//Tier 1 Toughness Perks
 		if(player.level >= 6) {
 		if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 60) {
-			perkList.push({label:"Tank 2"});
+			_add(new PerkClass(PerkLib.Tank2));
 		}
 		if(player.findPerk(PerkLib.Regeneration) >= 0 && player.tou >= 70) {
-			perkList.push({label:"Regeneration 2"});
+			_add(new PerkClass(PerkLib.Regeneration2));
 		}
 		if(player.tou >= 75) {
-			perkList.push({label:"Immovable Object"});
+			_add(new PerkClass(PerkLib.ImmovableObject));
 		}
 	}
 	//Tier 2 Toughness Perks
 	if(player.level >= 12) {
 		if(player.tou >= 75) {
-			perkList.push({label:"Resolute"});
+			_add(new PerkClass(PerkLib.Resolute));
 		}
 		if(player.tou >= 60) {
-			perkList.push({label:"Iron Man"});
+			_add(new PerkClass(PerkLib.IronMan));
 		}
 	}
 	//slot 3 - speed perk
 	if(player.spe >= 25) {
-			perkList.push({label:"Evade"});
+			_add(new PerkClass(PerkLib.Evade));
 	}
 	//slot 3 - run perk
 	if(player.spe >= 25) {
-			perkList.push({label:"Runner"});
+			_add(new PerkClass(PerkLib.Runner));
 	}
 	//slot 3 - Double Attack perk
 	if(player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Runner) >= 0 && player.spe >= 50) {
-			perkList.push({label:"Double Attack"});
+			_add(new PerkClass(PerkLib.DoubleAttack));
 	}
 	//Tier 1 Speed Perks
 	if(player.level >= 6) {
 		//Speedy Recovery - Regain Fatigue 50% faster speed.
 		if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 60) {
-			perkList.push({label:"Speedy Recovery"});
+			_add(new PerkClass(PerkLib.SpeedyRecovery));
 		}
 		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
 		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
-			perkList.push({label:"Agility"});
+			_add(new PerkClass(PerkLib.Agility));
 		}
 		if(player.spe >= 60) {
-			perkList.push({label:"Lightning Strikes"});
+			_add(new PerkClass(PerkLib.LightningStrikes));
 		}
 	}
 	//Tier 2 Speed Perks
 	if(player.level >= 12) {
 		if(player.spe >= 75) {
-			perkList.push({label:"Lunging Attacks"});
+			_add(new PerkClass(PerkLib.LungingAttacks));
 		}
 	}
 	//Slot 4 - precision - -10 enemy toughness for damage calc
 	if(player.inte >= 25) {
-			perkList.push({label:"Precision"});
+			_add(new PerkClass(PerkLib.Precision));
 	}
 	//Spellpower - boosts spell power
 	if(player.inte >= 50) {
-			perkList.push({label:"Spellpower"});
+			_add(new PerkClass(PerkLib.Spellpower));
 	}
 	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) {
-			perkList.push({label:"Mage"});
+			_add(new PerkClass(PerkLib.Mage));
 	}
 	//Tier 1 Intelligence Perks
 	if(player.level >= 6) {
 		if(player.inte >= 50)
-			perkList.push({label:"Tactician"});
+			_add(new PerkClass(PerkLib.Tactician));
 		if(spellCount() > 0 && player.findPerk(PerkLib.Spellpower) >= 0 && player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 60) {
-			perkList.push({label:"Channeling"});
+			_add(new PerkClass(PerkLib.Channeling));
 		}
 		if(player.inte >= 60) {
-			perkList.push({label:"Medicine"});
+			_add(new PerkClass(PerkLib.Medicine));
 		}
 	}
 	//Tier 2 Intelligence perks
 	if(player.level >= 12) {
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 75) {
-			perkList.push({label:"Archmage"});
+			_add(new PerkClass(PerkLib.Archmage));
 		}
 	}
 	//LIBIDO PERKZ
 	//slot 5 - libido perks
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
 	if(player.lib >= 25) {
-			perkList.push({label:"Fertility+"});
+			_add(new PerkClass(PerkLib.FertilityPlus,15,1.75,0,0));
 	}
 	//Slot 5 - minimum libido
 	if(player.lib >= 50) {
-			perkList.push({label:"Hot Blooded"});
+			_add(new PerkClass(PerkLib.HotBlooded,20,0,0,0));
 	}
 	//Tier 1 Libido Perks
 	if(player.level >= 6) {
 		//Slot 5 - minimum libido
 		if(player.lib >= 60) {
-			perkList.push({label:"Well Adjusted"});
+			_add(new PerkClass(PerkLib.WellAdjusted));
 		}
 		//Slot 5 - minimum libido
 		if(player.lib >= 60 && player.cor >= 50) {
-			perkList.push({label:"Masochist"});
+			_add(new PerkClass(PerkLib.Masochist));
 		}
 	}
 	//Corruption Perks - slot 7
 	//Slot 7 - Corrupted Libido - lust raises 10% slower.
 	if(player.cor >= 25) {
-			perkList.push({label:"Corrupted Libido"});
+			_add(new PerkClass(PerkLib.CorruptedLibido,20,0,0,0));
 	}
 	//Slot 7 - Seduction (Must have seduced Jojo
 	if(player.findPerk(PerkLib.Seduction) < 0 && player.cor >= 50 && monk >= 5) {
-			perkList.push({label:"Seduction"});
+			_add(new PerkClass(PerkLib.Seduction));
 	}
 	//Slot 7 - Nymphomania
 	else if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 75) {
-			perkList.push({label:"Nymphomania"});
+			_add(new PerkClass(PerkLib.Nymphomania));
 	}
 	//Slot 7 - UNFINISHED :3
 	if(minLust() >= 20 && player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 50) {
-			perkList.push({label:"Acclimation"});
+			_add(new PerkClass(PerkLib.Acclimation));
 	}
 	//Tier 1 Corruption Perks - acclimation over-rides
 	else if(player.level >= 6)
 	{
 		if(player.cor >= 60 && player.findPerk(PerkLib.CorruptedLibido) >= 0) {
-			perkList.push({label:"Sadist"});
+			_add(new PerkClass(PerkLib.Sadist));
 		}
 		if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 70) {
-			perkList.push({label:"Arousing Aura"});
+			_add(new PerkClass(PerkLib.ArousingAura));
 		}
 	}
 	//Tier 1 Misc Perks
 	if(player.level >= 6) {
-		perkList.push({label:"Resistance"});
+		_add(new PerkClass(PerkLib.Resistance));
 	}
 	// FILTER PERKS
 	perkList = perkList.filter(
 			function(perk:*,idx:int,array:Array):Boolean{
-				return player.findPerk(perk.label) < 0;
+				return player.findPerk(perk.perk.ptype) < 0;
 			});
-	mainView.aCb.dataProvider = new DataProvider(perkList); 
+	mainView.aCb.dataProvider = new DataProvider(perkList);
+	return perkList;
 }
 
-public function applyPerk(pName:String = ""):void {
+public function applyPerk(perk:PerkClass):void {
 	player.perkPoints--;
 	//Apply perk here.
-	outputText("<b>" + tempPerk + "</b> gained!", true);
-	switch(tempPerk) {
-		case "Strong Back 2: Strong Harder":
-			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
-			player.itemSlot5.unlocked = true;
-			break;
-		case "Strong Back":
-			player.createPerk(PerkLib.StrongBack,0,0,0,0);
-			player.itemSlot4.unlocked = true;
-			break;
-		case "Tank":
-			player.createPerk(PerkLib.Tank,0,0,0,0);
-			break;
-		case "Regeneration":
-			player.createPerk(PerkLib.Regeneration,0,0,0,0);
-			break;
-		case "Iron Man":
-			player.createPerk(PerkLib.IronMan,0,0,0,0);
-			break;
-		case "Evade":
-			player.createPerk(PerkLib.Evade,0,0,0,0);
-			break;
-		case "Runner":
-			player.createPerk(PerkLib.Runner,0,0,0,0);
-			break;
-		case "Fertility+":
-			player.createPerk(PerkLib.FertilityPlus,15,1.75,0,0);
-			break;
-		case "Hot Blooded":
-			player.createPerk(PerkLib.HotBlooded,20,0,0,0);
-			break;
-		case "Corrupted Libido":
-			player.createPerk(PerkLib.CorruptedLibido,20,0,0,0);
-			break;
-		case "Seduction":
-			player.createPerk(PerkLib.Seduction,0,0,0,0);
-			break;
-		case "Precision":
-			player.createPerk(PerkLib.Precision,0,0,0,0);
-			break;
-		case "Nymphomania":
-			player.createPerk(PerkLib.Nymphomania,0,0,0,0);
-			break;
-		case "Spellpower":
-			player.createPerk(PerkLib.Spellpower,0,0,0,0);
-			break;
-		case "Mage":
-			player.createPerk(PerkLib.Mage,0,0,0,0);
-			break;
-		case "Double Attack":
-			player.createPerk(PerkLib.DoubleAttack,0,0,0,0);
-			break;
-		case "Acclimation":
-			player.createPerk(PerkLib.Acclimation,0,0,0,0);
-			break;
-		case "Thunderous Strikes":
-			player.createPerk(PerkLib.ThunderousStrikes,0,0,0,0);
-			break;
-		case "Weapon Mastery":
-			player.createPerk(PerkLib.WeaponMastery,0,0,0,0);
-			break;
-		case "Tank 2":
-			player.createPerk(PerkLib.Tank2,0,0,0,0);
-			HPChange(player.tou, false);
-			statScreenRefresh();
-			break;
-		case "Regeneration 2":
-			player.createPerk(PerkLib.Regeneration2,0,0,0,0);
-			break;
-		case "Speedy Recovery":
-			player.createPerk(PerkLib.SpeedyRecovery,0,0,0,0);
-			break;
-		case "Agility":
-			player.createPerk(PerkLib.Agility,0,0,0,0);
-			break;
-		case "Channeling":
-			player.createPerk(PerkLib.Channeling,0,0,0,0);
-			break;
-		case "Medicine":
-			player.createPerk(PerkLib.Medicine,0,0,0,0);
-			break;
-		case "Well Adjusted":
-			player.createPerk(PerkLib.WellAdjusted,0,0,0,0);
-			break;
-		case "Masochist":
-			player.createPerk(PerkLib.Masochist,0,0,0,0);
-			break;
-		case "Sadist":
-			player.createPerk(PerkLib.Sadist,0,0,0,0);
-			break;
-		case "Arousing Aura":
-			player.createPerk(PerkLib.ArousingAura,0,0,0,0);
-			break;
-		case "Resistance":
-			player.createPerk(PerkLib.Resistance,0,0,0,0);
-			break;
-		case "Tactician":
-			player.createPerk(PerkLib.Tactician,0,0,0,0);
-			break;
-		case "Archmage":
-			player.createPerk(PerkLib.Archmage,0,0,0,0);
-			break;
-		case "Lunging Attacks":
-			player.createPerk(PerkLib.LungingAttacks,0,0,0,0);
-			break;
-		case "Lightning Strikes":
-			player.createPerk(PerkLib.LightningStrikes,0,0,0,0);
-			break;
-		case "Immovable Object":
-			player.createPerk(PerkLib.ImmovableObject,0,0,0,0);
-			break;
-		case "Resolute":
-			player.createPerk(PerkLib.Resolute,0,0,0,0);
-			break;
-		case "Berzerker":
-			player.createPerk(PerkLib.Berzerker,0,0,0,0);
-			break;
-		case "Brutal Blows":
-			player.createPerk(PerkLib.BrutalBlows,0,0,0,0);
-			break;
-		default:
-			outputText("\n\n<b>AN ERROR HAS OCCURRED: </b>Invalid tempPerk value!", false);
-			player.perkPoints++;
-			break;
+	outputText("<b>" + perk.perkName + "</b> gained!", true);
+	player.createPerk(perk.ptype,perk.value1,perk.value2,perk.value3,perk.value4);
+	if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
+	if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
+	if (perk.ptype == PerkLib.Tank2) {
+		HPChange(player.tou, false);
+		statScreenRefresh();
 	}
 	doNext(1);
 }

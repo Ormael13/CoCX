@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	{
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			player.createPerk(PerkLib.WizardsFocus,.4,0,0,0,"Your "+longName+" grants you additional focus, reducing the use of fatigue for spells.");
+			player.createPerk(PerkLib.WizardsFocus,.4,0,0,0);
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void

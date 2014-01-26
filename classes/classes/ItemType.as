@@ -8,7 +8,7 @@ package classes
 	public class ItemType
 	{
 		private static var ITEM_LIBRARY:Dictionary = new Dictionary();
-		public static const NOTHING:ItemType = new ItemType(null);
+		public static const NOTHING:ItemType = new ItemType("NOTHING!");
 
 		public static function lookupItem(id:String):ItemType{
 			return ITEM_LIBRARY[id];

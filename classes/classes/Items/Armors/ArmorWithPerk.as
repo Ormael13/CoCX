@@ -10,7 +10,6 @@ package classes.Items.Armors
 	public class ArmorWithPerk extends Armor
 	{
 		private var playerPerk:PerkType;
-		private var playerPerkDesc:String;
 		private var playerPerkV1:Number;
 		private var playerPerkV2:Number;
 		private var playerPerkV3:Number;
@@ -20,7 +19,7 @@ package classes.Items.Armors
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
 			if(player.findPerk(playerPerk) < 0)
-				player.createPerk(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4,playerPerkDesc);
+				player.createPerk(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void
@@ -28,11 +27,10 @@ package classes.Items.Armors
 			while(player.findPerk(playerPerk) >= 0) player.removePerk(playerPerk);
 		}
 
-		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String=null)
+		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number)
 		{
 			super(id, shortName, name,longName, def, value, description, perk);
 			this.playerPerk = playerPerk;
-			this.playerPerkDesc = playerPerkDesc;
 			this.playerPerkV1 = playerPerkV1;
 			this.playerPerkV1 = playerPerkV2;
 			this.playerPerkV1 = playerPerkV3;

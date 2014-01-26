@@ -406,7 +406,7 @@ package classes
 		
 		//Functions			
 		//Create a perk
-		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number, modDesc:String=null):void
+		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
 			var newKeyItem:PerkClass = new PerkClass(ptype);
 			//used to denote that the array has already had its new spot pushed on.
@@ -485,7 +485,6 @@ package classes
 			perk(keySlot).value2 = value2;
 			perk(keySlot).value3 = value3;
 			perk(keySlot).value4 = value4;
-			if (modDesc != null) perk(keySlot).modDesc = modDesc;
 			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perk(keySlot).perkName);
 		}
 

@@ -582,16 +582,6 @@
 			kGAMECLASS.images = val;
 		}
 		
-		protected function get tempPerk():String
-		{
-			return kGAMECLASS.tempPerk;
-		}
-		
-		protected function set tempPerk(val:String):void
-		{
-			kGAMECLASS.tempPerk = val;
-		}
-		
 		protected function get monster():Monster
 		{
 			return kGAMECLASS.monster;

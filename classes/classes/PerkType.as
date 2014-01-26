@@ -21,6 +21,7 @@ package classes
 		private var _id:String;
 		private var _name:String;
 		private var _desc:String;
+		private var _longDesc:String;
 
 		/**
 		 * Unique perk id, should be kept in future game versions
@@ -38,16 +39,28 @@ package classes
 			return _name;
 		}
 
-		public function get desc():String
+		/**
+		 * Short description used in perk listing
+		 */
+		public function desc(params:PerkClass=null):String
 		{
 			return _desc;
 		}
 
-		public function PerkType(id:String,name:String,desc:String)
+		/**
+		 * Long description used when offering perk at levelup
+		 */
+		public function get longDesc():String
+		{
+			return _longDesc;
+		}
+
+		public function PerkType(id:String,name:String,desc:String,longDesc:String = null)
 		{
 			this._id = id;
 			this._name = name;
 			this._desc = desc;
+			this._longDesc = longDesc || _desc;
 			if (PERK_LIBRARY[id] != null) {
 				CoC_Settings.error("Duplicate perk id "+id+", old perk is "+(PERK_LIBRARY[id] as PerkType)._name);
 			}

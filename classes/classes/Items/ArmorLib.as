@@ -63,7 +63,7 @@ package classes.Items
 		private static function mk2(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String,
 				playerPerk:PerkType,playerPerkV1:Number,playerPerkV2:Number,playerPerkV3:Number,playerPerkV4:Number,playerPerkDesc:String=null):ArmorWithPerk{
 			return new ArmorWithPerk(id,shortName,name,longName,def,value,description,perk,
-					playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4,playerPerkDesc);
+					playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 		public function ArmorLib()
 		{
