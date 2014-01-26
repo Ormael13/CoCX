@@ -172,7 +172,10 @@ public function doCombat(eventNum:Number):void
 					choices("Struggle", 5077, tempText, 0, "Spells", 0, "Items", 0, "Run", 0, "P. Specials", 0, "M. Specials", 5160, "Wait", 0, "Fantasize", 0, "", 0);
 				} else if (player.hasStatusAffect("Chokeslam") >= 0) {
 					choices("Struggle", (monster as Izumi).chokeSlamStruggle, "Wait", (monster as Izumi).chokeSlamWait, "", 0, "", 0, "", 0);
+				} else if (player.hasStatusAffect("Titsmother") >= 0) {
+					choices("Struggle", (monster as Izumi).titSmotherStruggle, "Wait", (monster as Izumi).titSmotherWait, "", 0, "", 0, "", 0);
 				}
+				
 				//REGULAR MENU
 				else {
 					//Tease text should change based on perks!
