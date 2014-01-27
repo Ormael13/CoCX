@@ -52,6 +52,7 @@
 				"onecock"					: function(thisPtr:*):* { return thisPtr.oMultiCockDesc();},
 				"pg"						: function(thisPtr:*):* { return "\n\n";},
 				"pussy"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
+				"race"						: function(thisPtr:*):* { return thisPtr.player.race(); },
 				"sack"						: function(thisPtr:*):* { return thisPtr.sackDescript(); },
 				"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
 				"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },

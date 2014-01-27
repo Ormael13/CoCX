@@ -5,6 +5,7 @@ public function customPCSetup():void {
 	
 	if (player.short == "Gedan")
 	{
+		player.XP = 5000;
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
