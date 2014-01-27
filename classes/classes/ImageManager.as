@@ -56,6 +56,7 @@ package classes
 				var req:URLRequest = new URLRequest(imgList.Image[i]);
 				imgLoader.load(req);				
 			}
+			trace("Loading imagelist", imgLoader, req, imgList)
 		}
 		
 		private function fileLoaded(e:Event):void
@@ -68,11 +69,12 @@ package classes
 			
 			extImage = new Image(result[1], '.' + result[0], e.target.width, e.target.height);
 			_imageTable[extImage.id] = extImage;
+			trace("Loaded file", e)
 		}
 		
 		private function fileNotFound(e:IOErrorEvent):void
 		{
-			//trace("File not Found: " + e);
+			trace("File not Found: " + e);
 		}
 		
 		public function getLoadedImageCount():int

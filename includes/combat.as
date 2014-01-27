@@ -2200,9 +2200,13 @@ public function display():void {
 	var percent:String = "";
 	var math:Number = monster.HPRatio();
 	percent = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
+
+	trace("trying to show monster image!")
 	if (monster.imageName != "")
 	{
-		outputText(images.showImage("monster-" + monster.imageName), false,false);
+		var monsterName:String = "monster-" + monster.imageName;
+		trace("Monster name = ", monsterName)
+		outputText(images.showImage(monsterName), false,false);
 	}
 	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);
 	else outputText("<b>You are fighting ", false);
