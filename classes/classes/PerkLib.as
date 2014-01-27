@@ -3,14 +3,7 @@
  */
 package classes
 {
-	import classes.Perks.ElvenBountyPerk;
-	import classes.Perks.PentUpPerk;
-	import classes.Perks.PiercedCrimstonePerk;
-	import classes.Perks.PiercedFertitePerk;
-	import classes.Perks.SluttySeductionPerk;
-	import classes.Perks.SpellcastingAffinityPerk;
-	import classes.Perks.WizardsEndurancePerk;
-	import classes.Perks.WizardsFocusPerk;
+	import classes.Perks.*;
 
 	public class PerkLib
 	{

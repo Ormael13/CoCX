@@ -13,6 +13,7 @@ package classes.Items.Armors
 
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
+			super.equipEffect(player,output);
 			if(output) game.dynStats("lus", 5);
 			if(output) {
 				//[flat-chested]

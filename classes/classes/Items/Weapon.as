@@ -35,7 +35,7 @@ package classes.Items
 				if (output && itype == this)
 					outputText("You still have " + itype.longName + " left over.  ");
 				game.itemSwapping = true;
-				game.inventory.takeItem(this);
+				game.inventory.takeItem(this,false);
 			}
 			player.setWeaponHiddenField(WeaponLib.FISTS);
 			unequipped(player,output);

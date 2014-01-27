@@ -699,7 +699,7 @@ public function doItems(eventNo:Number):void {
 		private function useItemInInventory(slotTmp:ItemSlotClass):void
 		{
 			if (slotTmp.itype is Useable) {
-				(slotTmp.itype as Useable).useItem(player,true,false);
+				useItem(slotTmp.itype,false);
 			} else {
 				outputText("You cannot use " + slotTmp.itype.longName + "!\n\n", true);
 			}
@@ -833,7 +833,7 @@ public function doItems(eventNo:Number):void {
 			else doNext(1);
 		}
 
-		public function takeItem(itype:ItemType):Boolean{
+		public function takeItem(itype:ItemType,callItemGoNext:Boolean=true):Boolean{
 			itemSubMenu = false;
 			if (itype == null){
 				CoC_Settings.error("takeItem(null)");
@@ -864,7 +864,7 @@ public function doItems(eventNo:Number):void {
 				}
 			}
 			if(done) {
-				itemGoNext();
+				if (callItemGoNext) itemGoNext();
 				return true;
 			}
 			//OH NOES! No room! Call replacer functions!

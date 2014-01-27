@@ -331,7 +331,7 @@ public function buildPerkList():Array {
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
 		if(player.str >= 75)
-			_add(new PerkClass(PerkLib.Tank));
+			_add(new PerkClass(PerkLib.Berzerker));
 	}
 	//slot 2 - toughness perk 1
 	if(player.findPerk(PerkLib.Tank) < 0 && player.tou >= 25) {

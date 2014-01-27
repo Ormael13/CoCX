@@ -32,9 +32,9 @@ package classes.Items.Armors
 			super(id, shortName, name,longName, def, value, description, perk);
 			this.playerPerk = playerPerk;
 			this.playerPerkV1 = playerPerkV1;
-			this.playerPerkV1 = playerPerkV2;
-			this.playerPerkV1 = playerPerkV3;
-			this.playerPerkV1 = playerPerkV4;
+			this.playerPerkV2 = playerPerkV2;
+			this.playerPerkV3 = playerPerkV3;
+			this.playerPerkV4 = playerPerkV4;
 		}
 	}
 }
