@@ -1447,8 +1447,8 @@ package classes
 				else min += 5;                
 			}
 			//Add points for Crimstone
-			min += perkv1("Pierced: Crimstone");
-			min += perkv1("Pent Up");
+			min += perkv1(PerkLib.PiercedCrimstone);
+			min += perkv1(PerkLib.PentUp);
 			//Harpy Lipstick status forces minimum lust to be at least 50.
 			if(min < 50 && hasStatusAffect("Luststick") >= 0) min = 50;
 			//SHOULDRA BOOSTS

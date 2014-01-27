@@ -268,11 +268,11 @@ public function xmasPerkM():void {
 		clearOutput();
 		outputText("<b>Perk Enhanced - Elven Bounty!</b>");
 		if(temp == 1001) {
-			player.addPerkValue("Elven Bounty",1,250);
+			player.addPerkValue(PerkLib.ElvenBounty,1,250);
 			outputText("<b> - +250mL cum production!</b>");
 		}
 		else {
-			player.addPerkValue("Elven Bounty",2,15);
+			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 			outputText("<b> - +15 bonus fertility!</b>");
 		}
 		

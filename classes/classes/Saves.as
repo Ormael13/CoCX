@@ -1575,11 +1575,11 @@ public function unFuckSave():void
 	// Fix duplicate elven bounty perks
 	if(player.findPerk(PerkLib.ElvenBounty) >= 0) {
 		//CLear duplicates
-		while(player.perkDuplicated("Elven Bounty")) player.removePerk(PerkLib.ElvenBounty);
+		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
-		if(player.perkv1("Elven Bounty") == 15) {
-			player.changePerkValue("Elven Bounty",1,0);
-			player.addPerkValue("Elven Bounty",2,15);
+		if(player.perkv1(PerkLib.ElvenBounty) == 15) {
+			player.setPerkValue(PerkLib.ElvenBounty,1,0);
+			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
 

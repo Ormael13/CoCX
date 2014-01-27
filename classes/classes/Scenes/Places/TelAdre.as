@@ -559,7 +559,7 @@ private function normalPierceAssemble():void {
 		case 10:
 			shortP += "fertite ";
 			if(player.findPerk(PerkLib.PiercedFertite) < 0) player.createPerk(PerkLib.PiercedFertite,5,0,0,0);
-			else player.addPerkValue("Pierced: Fertite",1,5);
+			else player.addPerkValue(PerkLib.PiercedFertite,1,5);
 			longP += "Fertite ";
 			break;
 		case 11:
@@ -570,7 +570,7 @@ private function normalPierceAssemble():void {
 		case 12:
 			shortP += "crimstone ";
 			if(player.findPerk(PerkLib.PiercedCrimstone) < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
-			else player.addPerkValue("Pierced: Crimstone",1,5);
+			else player.addPerkValue(PerkLib.PiercedCrimstone,1,5);
 			longP += "Crimstone ";
 			break;
 	}

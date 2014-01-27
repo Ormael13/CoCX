@@ -721,7 +721,7 @@ private function yesPutDatSockOnMe(target:int):void {
 	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
 		if(player.findPerk(PerkLib.PentUp) < 0) player.createPerk(PerkLib.PentUp,10,0,0,0);
-		else player.addPerkValue("Pent Up",1,5);
+		else player.addPerkValue(PerkLib.PentUp,1,5);
 	}
 	if(flags[kFLAGS.SOCK_HOLDING] == "alabaster") player.gems -= 25;
 	if(flags[kFLAGS.SOCK_HOLDING] == "wool") player.gems -= 10;
@@ -784,8 +784,8 @@ private function removeTargettedSock(index:int):void {
 		}
 	}
 	if(extra && storage == "cockring") {
-		if(player.perkv1("Pent Up") >= 10) player.addPerkValue("Pent Up",1,-5);
-		else player.changePerkValue("Pent Up",1,10);
+		if(player.perkv1(PerkLib.PentUp) >= 10) player.addPerkValue(PerkLib.PentUp,1,-5);
+		else player.setPerkValue(PerkLib.PentUp,1,10);
 	}
 	else {
 		if(storage == "gilded") {

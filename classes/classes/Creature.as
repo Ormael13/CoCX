@@ -2,7 +2,8 @@
 package classes
 {
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.Utils;
+import classes.PerkType;
+import classes.internals.Utils;
 
 	//import classes.CockClass;
 	public class Creature extends Utils
@@ -515,12 +516,10 @@ package classes
 		//has perk?
 		public function findPerk(ptype:PerkType):Number
 		{
-			var counter:Number = perks.length;
 			if (perks.length <= 0)
 				return -2;
-			while (counter > 0)
+			for (var counter:int = 0; counter<perks.length; counter++)
 			{
-				counter--;
 				if (perk(counter).ptype == ptype)
 					return counter;
 			}
@@ -529,16 +528,14 @@ package classes
 		
 		//Duplicate perk
 		//Deprecated?
-		public function perkDuplicated(perkName:String):Boolean
+		public function perkDuplicated(ptype:PerkType):Boolean
 		{
-			var counter:Number = perks.length;
 			var timesFound:int = 0;
 			if (perks.length <= 0)
 				return false;
-			while (counter > 0)
+			for (var counter:int = 0; counter<perks.length; counter++)
 			{
-				counter--;
-				if (perk(counter).perkName == perkName)
+				if (perk(counter).ptype == ptype)
 					timesFound++;
 			}
 			return (timesFound > 1);
@@ -547,157 +544,96 @@ package classes
 		//remove all perks
 		public function removePerks():void
 		{
-			var counter:Number = perks.length;
-			while (counter > 0)
-			{
-				counter--;
-				perks.splice(counter, 1);
-			}
+			_perks = [];
 		}
 		
-		public function addPerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0): void
+		public function addPerkValue(ptype:PerkType, valueIdx:Number = 1, bonus:Number = 0): void
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
+			var counter:int = findPerk(ptype);
+			if (counter < 0) {
+				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
 				return;
-					//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player has no perks.");
 			}
-			while (counter > 0)
-			{
-				counter--;
-				//Find it, change it, quit out
-				if (perk(counter).perkName == statusName)
-				{
-					if (statusValueNum < 1 || statusValueNum > 4)
-					{
-						//trace("ERROR: ChangePerkValue called with invalid perk value number.");
-						return;
-					}
-					if (statusValueNum == 1)
-						perk(counter).value1 += newNum;
-					if (statusValueNum == 2)
-						perk(counter).value2 += newNum;
-					if (statusValueNum == 3)
-						perk(counter).value3 += newNum;
-					if (statusValueNum == 4)
-						perk(counter).value4 += newNum;
-					return;
-				}
-			}
-			//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player does not have the perk.");
-		}
-		
-		public function changePerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0): void
-		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
+			if (valueIdx < 1 || valueIdx > 4) {
+				CoC_Settings.error("addPerkValue(" + ptype.id + ", " + valueIdx + ", " + bonus + ").");
 				return;
-					//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player has no perks.");
 			}
-			while (counter > 0)
-			{
-				counter--;
-				//Find it, change it, quit out
-				if (perk(counter).perkName == statusName)
-				{
-					if (statusValueNum < 1 || statusValueNum > 4)
-					{
-						//trace("ERROR: ChangePerkValue called with invalid perk value number.");
-						return;
-					}
-					if (statusValueNum == 1)
-						perk(counter).value1 = newNum;
-					if (statusValueNum == 2)
-						perk(counter).value2 = newNum;
-					if (statusValueNum == 3)
-						perk(counter).value3 = newNum;
-					if (statusValueNum == 4)
-						perk(counter).value4 = newNum;
-					return;
-				}
-			}
-			//trace("ERROR: Looking for perk '" + statusName + "' to change value " + statusValueNum + ", and player does not have the perk.");
+			if (valueIdx == 1)
+				perk(counter).value1 += bonus;
+			if (valueIdx == 2)
+				perk(counter).value2 += bonus;
+			if (valueIdx == 3)
+				perk(counter).value3 += bonus;
+			if (valueIdx == 4)
+				perk(counter).value4 += bonus;
 		}
 		
-		public function perkv1(statusName:String):Number
+		public function setPerkValue(ptype:PerkType, valueIdx:Number = 1, newNum:Number = 0): void
 		{
-			var counter:Number = perks.length;
+			var counter:Number = findPerk(ptype);
 			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for perk '" + statusName + "', and player has no perks.");
+			if (counter < 0) {
+				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
+				return;
 			}
-			while (counter > 0)
+			if (valueIdx < 1 || valueIdx > 4)
 			{
-				counter--;
-				if (perk(counter).perkName == statusName)
-					return perk(counter).value1;
+				CoC_Settings.error("setPerkValue(" + ptype.id + ", " + valueIdx + ", " + newNum + ").");
+				return;
 			}
-			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
-			return 0;
+			if (valueIdx == 1)
+				perk(counter).value1 = newNum;
+			if (valueIdx == 2)
+				perk(counter).value2 = newNum;
+			if (valueIdx == 3)
+				perk(counter).value3 = newNum;
+			if (valueIdx == 4)
+				perk(counter).value4 = newNum;
 		}
 		
-		public function perkv2(statusName:String):Number
+		public function perkv1(ptype:PerkType):Number
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
+			var counter:Number = findPerk(ptype);
+			if (counter < 0)
 			{
+				// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
 				return 0;
-					//trace("ERROR: Looking for perk '" + statusName + "', and player has no perks.");
 			}
-			while (counter > 0)
-			{
-				counter--;
-				if (perk(counter).perkName == statusName)
-					return perk(counter).value2;
-			}
-			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
-			return 0;
+			return perk(counter).value1;
 		}
 		
-		public function perkv3(statusName:String):Number
+	public function perkv2(ptype:PerkType):Number
+	{
+		var counter:Number = findPerk(ptype);
+		if (counter < 0)
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for perk '" + statusName + "', and player has no perks.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (perk(counter).perkName == statusName)
-					return perk(counter).value3;
-			}
-			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
+			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
 			return 0;
 		}
+		return perk(counter).value2;
+	}
 		
-		public function perkv4(statusName:String):Number
+	public function perkv3(ptype:PerkType):Number
+	{
+		var counter:Number = findPerk(ptype);
+		if (counter < 0)
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for perk '" + statusName + "', and player has no perks.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (perk(counter).perkName == statusName)
-					return perk(counter).value4;
-			}
-			//trace("ERROR: Looking for perk '" + statusName + "', but player does not have it.");
+			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
 			return 0;
 		}
+		return perk(counter).value3;
+	}
+		
+	public function perkv4(ptype:PerkType):Number
+	{
+		var counter:Number = findPerk(ptype);
+		if (counter < 0)
+		{
+			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
+			return 0;
+		}
+		return perk(counter).value4;
+	}
 		
 		//{region StatusEffects
 		//Create a status
@@ -1991,7 +1927,7 @@ package classes
 				percent += 0.15;
 			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
 				percent += 0.10;
-			if (perkv1("Elven Bounty") > 0)
+			if (perkv1(PerkLib.ElvenBounty) > 0)
 				percent += 0.05;
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				percent += 0.03;
@@ -2044,11 +1980,11 @@ package classes
 			if(findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
-			quantity += perkv1("Elven Bounty");
+			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
 			quantity += statusAffectv1("rut");
-			quantity *= (1 + (2 * perkv1("Pierced: Fertite")) / 100);
+			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			if (quantity < 0)
 				//trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
@@ -3034,8 +2970,8 @@ package classes
 				counter += 30;
 			if (findPerk(PerkLib.MagicalFertility) >= 0)
 				counter += 10;
-			counter += perkv2("Elven Bounty");
-			counter += perkv1("Pierced: Fertite");
+			counter += perkv2(PerkLib.ElvenBounty);
+			counter += perkv1(PerkLib.PiercedFertite);
 			return counter;
 		}
 
@@ -3404,9 +3340,9 @@ package classes
 			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
-				return perkv1("Spider Ovipositor");
+				return perkv1(PerkLib.SpiderOvipositor);
 			else
-				return perkv1("Bee Ovipositor");
+				return perkv1(PerkLib.BeeOvipositor);
 		}
 
 		public function addEggs(arg:int = 0):int
@@ -3415,16 +3351,16 @@ package classes
 				return -1;
 			else {
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
-					addPerkValue("Spider Ovipositor", 1, arg);
+					addPerkValue(PerkLib.SpiderOvipositor, 1, arg);
 					if (eggs() > 50)
-						changePerkValue("Spider Ovipositor", 1, 50);
-					return perkv1("Spider Ovipositor");
+						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
+					return perkv1(PerkLib.SpiderOvipositor);
 				}
 				else {
-					addPerkValue("Bee Ovipositor", 1, arg);
+					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
-						changePerkValue("Bee Ovipositor", 1, 50);
-					return perkv1("Bee Ovipositor");
+						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
+					return perkv1(PerkLib.BeeOvipositor);
 				}
 			}
 		}
@@ -3444,16 +3380,16 @@ package classes
 				return -1;
 			else {
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
-					changePerkValue("Spider Ovipositor", 1, arg);
+					setPerkValue(PerkLib.SpiderOvipositor, 1, arg);
 					if (eggs() > 50)
-						changePerkValue("Spider Ovipositor", 1, 50);
-					return perkv1("Spider Ovipositor");
+						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
+					return perkv1(PerkLib.SpiderOvipositor);
 				}
 				else {
-					changePerkValue("Bee Ovipositor", 1, arg);
+					setPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
-						changePerkValue("Bee Ovipositor", 1, 50);
-					return perkv1("Bee Ovipositor");
+						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
+					return perkv1(PerkLib.BeeOvipositor);
 				}
 			}
 		}
@@ -3463,9 +3399,9 @@ package classes
 			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
-				return perkv2("Spider Ovipositor");
+				return perkv2(PerkLib.SpiderOvipositor);
 			else
-				return perkv2("Bee Ovipositor");
+				return perkv2(PerkLib.BeeOvipositor);
 		}
 
 		public function fertilizeEggs():int
@@ -3473,9 +3409,9 @@ package classes
 			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
-				changePerkValue("Spider Ovipositor", 2, eggs());
+				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
 			else
-				changePerkValue("Bee Ovipositor", 2, eggs());
+				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
 			return fertilizedEggs();
 		}
 

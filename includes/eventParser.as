@@ -1202,7 +1202,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						//v3 = quantity
 						player.createStatusAffect("eggs",rand(6),rand(2),(5+rand(3)),0);
 						//Count times eggpregged this way in perk.
-						player.addPerkValue("Oviposition",1,1);
+						player.addPerkValue(PerkLib.Oviposition,1,1);
 					}
 				}
 			}

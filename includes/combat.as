@@ -2450,7 +2450,7 @@ public function tease():void {
 	}
 	if(player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
 	//+ slutty armor bonus
-	if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1("Slutty Seduction");
+	if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
 	//10% for bimbo shits
 	if(bimbo || bro || futa) {
 		damage += 5;
@@ -3815,7 +3815,7 @@ public function spellMod():Number {
 	if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .5;
 	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .5;
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
-		if(player.perkv1("Wizard's Focus") is Number) mod += player.perkv1("Wizard's Focus");
+		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	return mod;
@@ -4081,13 +4081,13 @@ public function spellPerkUnlock():void {
 		outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 20%!</b>\n\n");
 		player.createPerk(PerkLib.SpellcastingAffinity,20,0,0,0);
 	}
-	if(flags[kFLAGS.SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 15 && player.perkv1(PerkLib.SpellcastingAffinity) < 35) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
-		player.changePerkValue("SpellcastingAffinity",1,35);
+		player.setPerkValue(PerkLib.SpellcastingAffinity,1,35);
 	}
-	if(flags[kFLAGS.SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 45 && player.perkv1(PerkLib.SpellcastingAffinity) < 50) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
-		player.changePerkValue("Spellcasting Affinity",1,50);
+		player.setPerkValue(PerkLib.SpellcastingAffinity,1,50);
 	}
 }
 

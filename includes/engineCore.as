@@ -525,94 +525,6 @@ public function getButtonToolTipText( buttonText :String ) :String
 
 	buttonText = buttonText || '';
 
-	//Perkzzz
-	if(buttonText.indexOf("Strong Back") != -1) {
-		toolTipText = "The Strong Back perk unlocks an additional inventory space, allowing you to carry more.";
-	}
-	if(buttonText.indexOf("StrongBack2") != -1) {
-		toolTipText = "The Strong Back 2 perk unlocks a fifth inventory location, allowing you to carry as much as possible.";
-	}
-	if(buttonText.indexOf("T.Strikes") != -1) {
-		toolTipText = "You've gotten so good at putting your sizable strength behind your attacks that you deal 20% more damage with standard attacks while strength is 80 or higher.";
-	}
-	if(buttonText.indexOf("W.Mastery") != -1) {
-		toolTipText = "After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).";
-	}
-	if(buttonText.indexOf("Tank 2") != -1) {
-		toolTipText = "Tank 2 raises your maximum HP by an additional 1 HP per point of toughness.";
-	}
-	if(buttonText.indexOf("Tank") != -1) {
-		toolTipText = "The Tank perk adds an additional 50 HP to your maximum hitpoints, allowing you take more damage before losing a fight.";
-	}
-	if(buttonText.indexOf("Regenerate") != -1) {
-		toolTipText = "The Regeneration perk makes your hit points come back faster, both in and out of combat.  In combat you gain 1 HP a round, outside of combat you'll get 2 HP an hour.";
-	}
-	if(buttonText.indexOf("Regen 2") != -1) {
-		toolTipText = "The Regeneration 2 perk quadruples the effectiveness of your regeneration.";
-	}
-	if(buttonText.indexOf("Evade") != -1) {
-		toolTipText = "The Evade perk gives you an additional 10% chance to avoid enemy attacks beyond the normal dodge chance.";
-	}
-	if(buttonText.indexOf("Agility") != -1) {
-		toolTipText = "The agility perk allows you to increase your armor defense by a portion of your speed when wearing light or medium armor.";
-	}
-	if(buttonText.indexOf("S.Recovery") != -1) {
-		toolTipText = "The speedy recovery perk increases the rate at which you regain fatigue.";
-	}
-	if(buttonText.indexOf("D.Attack") != -1) {
-		toolTipText = "The Double Attack perk lets you take advantage of your incredible speed to attack twice in one round.  Requires high speed and strength at or below 60.";
-	}
-	if(buttonText.indexOf("Spellpower") != -1) {
-		toolTipText = "The Spellpower perk increases the effects of your spells by up to 50% (dependant on the spell).";
-	}
-	if(buttonText.indexOf("Mage") != -1) {
-		toolTipText = "The Mage perk increases the effects of your spells by up to 100% (dependant on the spell).";
-	}
-	if(buttonText.indexOf("Channeling") != -1) {
-		toolTipText = "The channeling perk increases the spell bonus by up to an additional 50%.";
-	}
-	if(buttonText.indexOf("Medicine") != -1) {
-		toolTipText = "The medicine perk gives you a 15% chance per round of removing all non-biological poisons in combat.";
-	}
-	if(buttonText.indexOf("Runner") != -1) {
-		toolTipText = "The Runner perk increases your chances of escaping combat significantly, and may help with out of combat escapes as well.";
-	}
-	if(buttonText.indexOf("Fertility+") != -1) {
-		toolTipText = "The Fertility+ perk increases your pregnancy chance by 15% and also increases any cum production by 50 percent!";
-	}
-	if(buttonText.indexOf("Hot Blooded") != -1) {
-		toolTipText = "The Hot Blooded perk takes advantage of your enhanced libido, allowing your lust to never drop below 20.";
-	}
-	if(buttonText.indexOf("W.Adjusted") != -1) {
-		toolTipText = "The Well Adjusted perk halves the lust you gain over time in Mareth.";
-	}
-	if(buttonText.indexOf("Masochist") != -1) {
-		toolTipText = "The Masochism perk reduces damage taken by 30 percent but raises your lust from each hit.";
-	}
-	if(buttonText.indexOf("CorruptLibido") != -1) {
-		toolTipText = "The Corrupted Libido perk lets you use your corruption to adapt to your heightened libido, making lust rise 10 percent slower.";
-	}
-	if(buttonText.indexOf("Seduction") != -1) {
-		toolTipText = "The Seduction perk enhances your ability to tease and seduce, upgrading your tease attack significantly.";
-	}
-	if(buttonText.indexOf("Acclimation") != -1) {
-		toolTipText = "The Acclimation perk allows your highly corrupted form to adapt to the constant lust it's subjected to, slowing additional lust gain.";
-	}
-	if(buttonText.indexOf("A. Aura") != -1) {
-		toolTipText = "The Arousing Aura perk causes you to exude a lust-inducing aura whenever your corruption is 70 or above.";
-	}
-	if(buttonText.indexOf("Sadist") != -1) {
-		toolTipText = "The Sadist perk increases the damage you do with some physical attacks by 20% but causes you to gain lust from it.";
-	}
-	if(buttonText.indexOf("Resistance") != -1) {
-		toolTipText = "The Resistance perk gives you an additional reduction to lust gains.";
-	}
-	if(buttonText.indexOf("Precision") != -1) {
-		toolTipText = "The Precision perk allows you to strike an enemy's weak points, reducing damage resistance by 10.  Requires you to keep intelligence above 25, or you'll lose the benefits of this perk.";
-	}
-	if(buttonText.indexOf("Nymphomania") != -1) {
-		toolTipText = "The Nymphomania perk allows your corruption to have it's way with your lust, keeping you constantly aroused.  Your lust will never drop below 30 with this perk.";
-	}
 	//Items
     var itype:ItemType = ItemType.lookupItem(buttonText);
     if (itype != null) toolTipText = itype.description;
@@ -1384,8 +1296,8 @@ public function physicalCost(mod:Number):Number {
 public function spellCost(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
-	if(player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1("Spellcasting Affinity");
-	if(player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1("Wizard's Endurance");
+	if(player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+	if(player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	
 	//Limiting it and multiplicative mods
 	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -1630,7 +1542,7 @@ public function lustPercent():Number {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
-	lust += Math.round(player.perkv1("Pent Up")/2);
+	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MULTIPLICATIVE REDUCTIONS
 	//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER

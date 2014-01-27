@@ -856,7 +856,7 @@ public function naggaTease():void {
 		}
 		if(player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
 		//+ slutty armor bonus
-		if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1("Slutty Seduction");
+		if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
 		//10% for bimbo shits
 		if(bimbo || bro || futa) {
 			damage += 5;

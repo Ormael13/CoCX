@@ -25,8 +25,6 @@ package classes
 				"");
 		public static const LastStrike:PerkType = mk("Last Strike", "Last Strike",
 				"");
-		public static const ImpGangBang:PerkType = mk("Imp GangBang", "Imp GangBang",
-				"");
 
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",

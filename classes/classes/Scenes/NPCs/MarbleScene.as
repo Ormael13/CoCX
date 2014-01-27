@@ -1146,7 +1146,7 @@ private function extendedMurbelFarmTalkz():void {
 			outputText("  After my falling out with Ansgar, I noticed that I really missed nursing him more than anything else.</i>\"  She stops for a moment, shaking her head.  \"<i>That's not quite right.  It's more that I needed to keep nursing; it just felt like everything was wrong with me if I wasn't nursing something.</i>\"");
 			outputText("\n\n\"<i>It was so bad that I had to start nursing anything I could find, even if I had to force it.  The most notable of these was probably this one adorable imp, barely half my height.  I thought that my milk could make something so cute into anything I wanted.  I caught him and made him nurse me all night.  He was just the most wonderful thing once he'd gotten his mind off his monster cock.</i>\" She shakes her head.  \"<i>But an imp has demon taint, so you know how this is going to end, don't you?  The next day, my 'special' friend had gone out to get his other friends and decided that I'd make a wonderful sex toy.</i>\"  She smiles.  \"<i>That was one hell of a day... though maybe not in the way they expected.  I gave them such a bad beating that I doubt that they'll ever try to gang-rape someone outside the cover of night again.  Speaking of which sweetie, you'd best not show any of those horrible creatures where you live, ok?</i>\"");
 			//[if PC has been gang-banged by imps]
-			if(player.findPerk(PerkLib.ImpGangBang) >= 0) outputText("\n\nYou give a small chuckle at the belated advice; it would have been useful earlier.");
+			if(player.hasStatusAffect("Imp GangBang") >= 0) outputText("\n\nYou give a small chuckle at the belated advice; it would have been useful earlier.");
 			else outputText("\n\nYou nod and thank Marble for the advice; but as long as you have to stay by and defend this side of the portal from being occupied, you're pretty sure it's a moot point.");
 			outputText("\n\nThe two of you decide to end things at that for now; Marble seems a bit restless after discussing nursing so much and often caresses her sensitive breasts when she thinks you aren't looking.  She's probably eager to get back in the milker.");
 			break;
@@ -1490,7 +1490,7 @@ private function marbleGenderlessNoFuck():void {
 public function marbleStatusChange(affection:Number, addiction:Number, isAddicted:Number = -1):void {
 	if(player.hasStatusAffect("Marble") < 0) player.createStatusAffect("Marble",0,0,0,40);
 	//Values only change if not brought to conclusion
-	if(player.hasStatusAffect("Marble's Milk") < 0 && player.hasStatusAffect("Marble Resistant") < 0) {
+	if(player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0) {
 		player.addStatusValue("Marble",1,affection);
 		player.addStatusValue("Marble",2,addiction);
 	}
