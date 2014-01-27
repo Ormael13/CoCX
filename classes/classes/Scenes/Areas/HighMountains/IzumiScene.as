@@ -377,9 +377,6 @@ import classes.GlobalFlags.kGAMECLASS;
 		 */
 		protected function surrenderSelector():void
 		{
-			flags[kFLAGS.IZUMI_TIMES_SUBMITTED]++;
-			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 1;
-			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 			clearOutput();
 
 			// Male/Herms
@@ -398,13 +395,17 @@ import classes.GlobalFlags.kGAMECLASS;
 			// Female
 			else if (player.hasVagina())
 			{
-				surrenderOhGodTheFemaleSurrenderContentIsFuckingHuge();
+				surrenderOhGodTheFemaleSurrenderContentIsFuckingHugeSendHelp();
 			}
 			// Genderless
 			else
 			{
 				someGenderlessExitSceneBecauseNoneWereWritten();
 			}
+
+			flags[kFLAGS.IZUMI_TIMES_SUBMITTED]++;
+			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 1;
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 		}
 
 		// Male/Herm scene for cocks <= 4"
@@ -511,186 +512,221 @@ import classes.GlobalFlags.kGAMECLASS;
 		// Male/Herm play along scene split
 		protected function surrenderMediumCockObey():void
 		{
-Taking a deep breath, you grit your teeth and force yourself to calm down.  [if (pc.isTaur) Y | Lowering your shaking hips, y]ou manage to relax and simply wait passively for Izumi to resume her handjob.
- 
-“That’s better.”  Izumi says approvingly.  “Now, since you played nice...” She trails off dangerously, but before you can try to figure out what she has planned, she hits you with it - her handjob resumes, but much, much faster than before.  Despite her increased speed, she still manages to hit every single spot she was hitting before, causing a whirlwind of pleasure to rush through you.
+			outputText("Taking a deep breath, you grit your teeth and force yourself to calm down.  [if(player.isATaur == true)Y|Lowering your shaking hips, y]ou manage to relax and simply wait passively for Izumi to resume her handjob.\n\n");
 
-Almost immediately, you feel your orgasm starting to rise within you.  You try to stammer out a warning, but Izumi’s pace continues unabated.
+			outputText("“<i>That’s better.</i>”  Izumi says approvingly.  “<i>Now, since you played nice...</i>” She trails off dangerously, but before you can try to figure out what she has planned, she hits you with it - her handjob resumes, but much, much faster than before.  Despite her increased speed, she still manages to hit every single spot she was hitting before, causing a whirlwind of pleasure to rush through you.\n\n");
 
-“It’s fine.  Just cum as much as you like.”  She announces casually.  A few seconds later, your orgasm hits, exploding forcefully out of your [cockhead biggest].  Even once she sees the burning juice begin to erupt from your cock, Izumi doesn’t slow down - on the contrary, she actually accelerates her pace!  As she extends your orgasm over and over again, all you can do is writhe around, drumming your feet against the floor and groaning in ecstasy as the massive Oni woman vigorously milks you, draining your aching [if (pc.balls > 0) balls | cock ] to the very last drop.
- 
-Finally, she relents, and your extended orgasm mercifully subsides.  Izumi stares indulgently down at your shivering form for a moment, before muttering a quiet “Heh,” and wandering back over to her tent.  You can only manage to rest there, laid prone in a [if (player.hasVagina) mixed puddle of your own fem-slime and | puddle of your own ] cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.
+			outputText("Almost immediately, you feel your orgasm starting to rise within you.  You try to stammer out a warning, but Izumi’s pace continues unabated.\n\n");
 
-dynStats(“lust”, -100);
+			outputText("“<i>It’s fine.  Just cum as much as you like.</i>”  She announces casually.  A few seconds later, your orgasm hits, exploding forcefully out of your [cockhead biggest].  Even once she sees the burning juice begin to erupt from your cock, Izumi doesn’t slow down - on the contrary, she actually accelerates her pace!  As she extends your orgasm over and over again, all you can do is writhe around, drumming your feet against the floor and groaning in ecstasy as the massive Oni woman vigorously milks you, draining your aching [if (player.balls > 0)balls|cock] to the very last drop.\n\n");
 
-:[Next]
+			outputText("Finally, she relents, and your extended orgasm mercifully subsides.  Izumi stares indulgently down at your shivering form for a moment, before muttering a quiet “<i>Heh,</i>” and wandering back over to her tent.  You can only manage to rest there, laid prone in a [if (player.hasVagina) mixed puddle of your own fem-slime and | puddle of your own ] cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.\n\n");
 
+			dynStats("lus=", 0);
+
+			menu();
+			doNext(13);
 		}
 
+		// Male/Herm be a jerk about it split
 		protected function surrenderMediumCockRefuse():void
 		{
-			Sick of Izumi and the strange, uncomfortable feelings the Oni keeps forcing you to experience, you defy her command.   Instead, you thrust more vigorously into the air, turning this way and that, trying to force some form of stimulation from the hand mercilessly gripping your member.
+			outputText("Sick of Izumi and the strange, uncomfortable feelings the Oni keeps forcing you to experience, you defy her command.   Instead, you thrust more vigorously into the air, turning this way and that, trying to force some form of stimulation from the hand mercilessly gripping your member.\n\n");
 
-“Fine.”  Izumi says, apparently unconcerned.  “Go ahead and try.  It won’t do you any good.”
- 
-Ignoring her, you continue thrusting, twisting and turning, but always Izumi follows you effortlessly, thwarting every twist and turn you make in a desperate attempt to fuck her hand.  Finally, after an eternity of painful stalemate, you give in, collapsing to the ground, momentarily exhausted.
- 
-“All done?”  She asks.  You glare at her, and her grin widens.  “So, you wanna cum, huh?  Well then, let’s do that.”  She announces, happily.  Suddenly, she begins stroking you again - this time at a speed far beyond her previous unhurried pace.  Her hand flies up and down your shaft, stimulating you just as much as before, but at easily three times the speed!  It is, without a doubt, the most amazing handjob you’ve ever experienced.
+			outputText("“<i>Fine.</i>”  Izumi says, apparently unconcerned.  “<i>Go ahead and try.  It won’t do you any good.</i>”\n\n");
+			 
+			outputText("Ignoring her, you continue thrusting, twisting and turning, but always Izumi follows you effortlessly, thwarting every twist and turn you make in a desperate attempt to fuck her hand.  Finally, after an eternity of painful stalemate, you give in, collapsing to the ground, momentarily exhausted.\n\n");
+			 
+			outputText("“<i>All done?</i>”  She asks.  You glare at her, and her grin widens.  “<i>So, you wanna cum, huh?  Well then, let’s do that.</i>”  She announces, happily.  Suddenly, she begins stroking you again - this time at a speed far beyond her previous unhurried pace.  Her hand flies up and down your shaft, stimulating you just as much as before, but at easily three times the speed!  It is, without a doubt, the most amazing handjob you’ve ever experienced.\n\n");
 
-The insane feeling is just too much, and you feel your orgasm boiling up within you.  Just as you feel yourself rising to crest the orgamsic wave and hit sweet release... Izumi lets go.
- 
-You cry out in anger and pain as you find your impending orgasm so cruelly denied, your [cock biggest] twitching and throbbing painfully [if (pc.hasVagina) , [vagina] spasming in sympathy], desperate for release.  Somehow, she knew you were on the verge of orgasm, and she chose to deny you that pleasure, you just <b>know</b> it.  You shoot Izumi a vicious, hateful glare, only to see her laying there quite calmly, her expression blank.
- 
-“Hm?”  She grunts, looking surprised.  “Oh, do you want some help?  Sure; here, let me handle this for you.”  She says, her tone even.  She reaches out and, very deliberately, softly flicks your [cockhead] with a single finger.
- 
-The sensation is almost nothing, but as close as you are, it’s just enough.  You groan in a mix of pleasure and heartbroken anguish as the tiny amount of contact forces you over the edge, your load forcing its way up through your cock with agonizing slowness until finally [if (player.cumQ <= 250) spurting free, spattering down randomly over you as Izumi watches, happily observing the effects of your ruined orgasm.
-| [if (player.cumQ <= 500) sputtering freely from your [cock], glob after glob of thick jizz showering down randomly over you as Izumi watches, mildly amused with the results of your ruined orgasm.
-| [if (player.cumQ <= 1000) a torrent of fertile spunk rushes forth from your [cock], glob after glob of thick jizz showering down randomly over you, covering you from head to toe as Izumi watches, amused with the results of your ruined orgasm.
-| a torrent of fertile spunk rushes forth from your [cock], rope after rope of the thick cum launching into the air and splattering down over you.  Your orgasm continues unabated as you slowly paint yourself in a creamy white layer, Izumi giggling quietly, evidently proud of herself. ]]] Finally, you finish cumming, and as you lay panting in the results of her handiwork, Izumi gently pats you on the head.
+			outputText("The insane feeling is just too much, and you feel your orgasm boiling up within you.  Just as you feel yourself rising to crest the orgamsic wave and hit sweet release... Izumi lets go.\n\n");
+			 
+			outputText("You cry out in anger and pain as you find your impending orgasm so cruelly denied, your [cock biggest] twitching and throbbing painfully[if (player.hasVagina), [vagina] spasming in sympathy], desperate for release.  Somehow, she could sense you were on the verge of orgasm, and she chose to deny you that pleasure, you just <b>know</b> it.  You shoot Izumi a vicious, hateful glare, only to see her laying there quite calmly, her expression blank.\n\n");
+			 
+			outputText("“<i>Hm?</i>”  She grunts, looking surprised.  “<i>Oh, do you want some help?  Sure; here, let me handle this for you.</i>”  She says, her tone even.  She reaches out and, very deliberately, softly flicks your [cockhead] with a single finger.\n\n");
+			 
+			outputText("The sensation is almost nothing, but as close as you are, it’s just enough.  You groan in a mix of pleasure and heartbroken anguish as the tiny amount of contact forces you over the edge, your load forcing its way up through your cock with agonizing slowness until finally");
+			if (player.cumQ() <= 250) outputText(" spurting free, spattering down randomly over you as Izumi watches, happily observing the effects of your ruined orgasm.");
+			else if (player.cumQ() <= 500) outputText(" sputtering freely from your [cock], glob after glob of thick jizz showering down randomly over you as Izumi watches, mildly amused with the results of your ruined orgasm.");
+			else if (player.cumQ <= 1000) outputText(" a torrent of fertile spunk rushes forth from your [cock], glob after glob of thick jizz showering down randomly over you, covering you from head to toe.  Izumi simply watches, amused with the results of your ruined orgasm.");
+			else outputText("a torrent of fertile spunk rushes forth from your [cock], rope after rope of the thick cum launching into the air and splattering down over you.  Your orgasm continues unabated as you slowly paint yourself in a creamy white layer, Izumi giggling quietly, evidently quite proud of herself.");
+			outputText("  Finally, you finish cumming, and as you lay panting in the results of her handiwork, Izumi gently pats you on the head.\n\n");
 
-“So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.” She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.
+			outputText("“<i>So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.</i>” She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.\n\n");
 
-dynStats(“lust”, -100);
+			dynStats("lus=", 0);
 
-[Next]
+			menu();
+			doNext(13);
 		}
 
 		protected function surrenderLargeCock():void
 		{
-			Izumi grunts in surprise as your [cock biggest] flops free of its confinement.  “Damn.  This is pretty impressive, you know?”  She frowns, running an exploratory hand across the length of your flesh.  “Let me guess, you got a bit too frisky with one of the natives?  Maybe didn’t think to boil the water before you drank it?  Look, no offence, but there is no way this thing is legit, [IzumiShort].”
+			outputText("Izumi grunts in surprise as your [cock biggest] flops free of its confinement.  “<i>Damn.  This is pretty impressive, you know?</i>”  She frowns, running an exploratory hand across the length of your flesh.  “<i>Let me guess, you got a bit too frisky with one of the natives?  Maybe didn’t think to boil the water before you drank it?  Look, no offence, but there is no way this thing is legit, "+ this.heightDesc() +".</i>”\n\n");
  
-Izumi continues to frown as she inspects you, turning your stiffening cock this way and that in her hands, apparently indifferent to the way her touch has begun to coax you towards full hardness.  She murmurs to herself under her breath, tapping a finger to her lips whilst absentmindedly wringing your cock with her other hand.  Eventually, she appears to reach a decision.  “Alright!”  She announces, loudly.  “Let’s try it like this, shall we?!”
- 
-Izumi releases you from the floor, allowing you to sit [if (pc.isTaur) back on your haunches, front end raised ] up as she makes her way around to sit cross-legged between your legs.  Once settled into position, she smirks suggestively at you around the throbbing meat now standing at insistent attention between the two of you.  “Get ready,” She warns, “because this is going to be a hell of a ride... and you wouldn’t want to disappoint me now, would you?”
+			outputText("Izumi continues to frown as she inspects you, turning your stiffening cock this way and that in her hands, apparently indifferent to the way her touch has begun to coax you towards full hardness.  She murmurs to herself under her breath, tapping a finger to her lips whilst absentmindedly wringing your cock with her other hand.  Eventually, she appears to reach a decision.  “<i>Alright!</i>”  She announces, loudly.  “<i>Let’s try it like this, shall we?!</i>”\n\n");
+			 
+			outputText("Izumi releases you from the floor, allowing you to sit [if (player.isATaur == true) back on your haunches, front end raised ] up as she makes her way around to sit cross-legged between your legs.  Once settled into position, she smirks suggestively at you around the throbbing meat now standing at insistent attention between the two of you.  “<i>Get ready,</i>” She warns, “<i>because this is going to be a hell of a ride... and you wouldn’t want to disappoint me now, would you?</i>”\n\n");
 
-“Six!”  She shouts, suddenly, making you flinch in surprise as her right hand snaps out and latches onto your cock, just below the sensitive [cockhead].  Izumi grins, slowly rotating her wrist and wringing her hand around in place, but she doesn’t start up any kind of up-and-down motion - yet.
- 
-“Five!”  She yells, and her left hand joins the first in gripping your cock, this time about halfway down your shaft.  Again, her wrist rotates gently as she massages the area, but her hand doesn’t actually go anywhere.  Her grin widens into a truly ominous smile as she leans forwards conspiratorially.
- 
-“Four.”  She whispers, and without warning her legs unfold, both feet flying out from beneath her and latching onto the [sheath] of your [cock biggest]! Izumi leers at you with undisguised amusement as she watches your reaction to the sensation of her bare soles rolling over the [sheath] of your shaft 
-[if (pc.balls > 0) , occasionally sliding down to massage your [balls] before returning to your cock.
-| if (pc.hasVagina) , occasionally sliding down to tease at the lips of your [vagina].
-| if (pc.hasVagina && pc.balls > 0) , occasionally sliding down, alternating between a gentle massage of your [balls] and teasing caresses of your [vagina].]].  
+			outputText("“<i>Six!</i>”  She shouts, suddenly, making you flinch in surprise as her right hand snaps out and latches onto your cock, just below the sensitive [cockHead biggest].  Izumi grins, slowly rotating her wrist and wringing her hand around in place, but she doesn’t start up any kind of up-and-down motion - yet.\n\n");
+			 
+			outputText("“<i>Five!</i>”  She yells, and her left hand joins the first in gripping your cock, this time about halfway down your shaft.  Again, her wrist rotates gently as she massages the area, but her hand doesn’t actually go anywhere.  Her grin widens into a truly ominous smile as she leans forwards conspiratorially.\n\n");
+			 
+			outputText("“<i>Four.</i>”  She whispers, and without warning her legs unfold, both feet flying out from beneath her and latching onto the [sheath] of your [cock biggest]!  Izumi leers at you with undisguised amusement as she watches your reaction to the sensation of her bare soles rolling over the [sheath] of your shaft");
+			if (player.balls > 0 && !player.hasVagina()) outputText(", occasionally sliding down to massage your [balls] before returning to your cock.");
+			else if (player.balls == 0 && player.hasVagina()) outputText(", occasionally sliding down to tease at the lips of your [vagina].");
+			else if (player.balls > 0 && player.hasVagina()) outputText(", occasionally sliding down, alternating between a gentle massage of your [balls] and teasing caresses of your [vagina].");
+			outputText("\n\n");  
 
-The strange sensation causes you to quiver, your towering erection twitching ominously.  “Hey, don’t give up just yet!”  Izumi quips . “We’re just about to get to the fun part...” Already beginning to sweat as the mind-addling smoke fogs your brain with lust, you briefly wonder what exactly ‘the fun part’ entails....
- 
-“Three.”  She announces, and then begins to move.  You groan in equal parts pleasure and surprise; Izumi’s feet are surprisingly dextrous, and you can’t help but be amazed at how warm and soft her soles feel as they glide across your skin.  Incredibly, there seems to be almost no difference in sensation between her feet and her hands; if you close your eyes, it almost feels as though you’re being stroked along your entire length by four hands at once....
- 
-“It’s good, right?”  Izumi’s voice penetrates your thoughts, and you open your eyes to see her gazing up at you, amber irises glittering golden in the half-light.  “You know, there’s one more level to this... but looking at the state you’re in, there’s no way you could endure it for long.  In terms of pleasure, it outclasses what I’ve been doing up to now completely. Do you want to see it?”  You don’t even have to think about it.  You nod your head, unsure if you can manage the difficult task of speaking, and Izumi giggles.  “Alright, [IzumiRace], but don’t say I didn’t warn you.  Here we go...”
- 
-“Two.”  She teases, her technique changing completely.  Rather than just running her hands and feet gently over your flesh, she grips on tightly, her hands clenching around your [cock biggest] like vices.  Her movements change completely, instead of the simple, slow up-and-down motion she had been using, she begins to alternate the motions of her left and right angles of attack - while her left hand rolls up your shaft, the right slides down to meet it.  Even her feet seem to somehow press in tighter against your flesh, mirroring her hands;  the strange technique creating a unique wave-like rolling sensation that feels quite unlike anything you’ve experienced on Mareth before. You wonder briefly if there might be a little bit of magic involved here before your thoughts are obliterated by an avalanche of pleasure - Izumi has begun to speed up.
- 
-You can only grunt and shiver under the onslaught as Izumi works you over with this bizarre new approach.  There’s no gentleness here, you realise; no playful teasing or long, drawn out pauses.  This move is designed for one thing, and one thing only - to force you to cum.  [if (pc.balls > 0)You groan, your aching balls coming to the same conclusion as you have, twitching under a passing stroke from one of Izumi’s soles and tensing up in readiness.]  You understand now why Izumi warned you about this technique; you are no longer being teased, gently coaxed towards the edge and then pulled back at the last minute.  As of now, you are being milked.
- 
-“One.”  She commands, her tone demanding.  After only a few moments, you throw back your head and let out a long, ecstatic moan as you cum, your orgasm fountaining up through you and exploding free of your [cockhead biggest] like a creamy fireworks display.  As the first jet of semen surges free of your cock and thrusts up into the air, Izumi gasps.  A split second later, she releases you and launches herself backwards in a powerful roll that catapults her across the cave. Your first load splatters explosively down where she had been sitting moments ago, but you’re too busy firing off a second to care.
+			outputText("The strange sensation causes you to quiver, your towering erection twitching ominously.  “<i>Hey, don’t give up just yet!</i>”  Izumi quips . “<i>We’re just about to get to the fun part...</i>” Already beginning to sweat as the mind-addling smoke fogs your brain with lust, you briefly wonder what exactly ‘the fun part’ entails....\n\n");
+			 
+			outputText("“<i>Three.</i>”  She announces casually, and then begins to move.  You groan in equal parts pleasure and surprise; Izumi’s feet are surprisingly dextrous, and you can’t help but be amazed at how warm and soft her soles feel as they glide across your skin.  Incredibly, there seems to be almost no difference in sensation between her feet and her hands; if you close your eyes, it almost feels as though you’re being stroked along your entire length by four hands at once....\n\n");
+			 
+			outputText("“<i>It’s good, right?</i>”  Izumi’s voice penetrates your thoughts, and you open your eyes to see her gazing up at you, amber irises glittering in the half-light of the fire.  “<i>You know, there’s one more level to this... but looking at the state you’re in, there’s no way you could endure it for long.  In terms of pleasure, it outclasses what I’ve been doing up to now completely. Do you want to see it?</i>”  You don’t even have to think about it.  You nod your head, unsure if you can manage the difficult task of speaking, and Izumi giggles.  “<i>Alright, "+ this.heightDesc() +", but don’t say I didn’t warn you.  Here we go...</i>”\n\n");
+			 
+			outputText("“<i>Two.</i>”  She teases, her technique changing completely.  Rather than just running her hands and feet gently over your flesh, she grips on tightly, her hands clenching around your [cock biggest] like vices.  Her movements change completely, instead of the simple, slow up-and-down motion she had been using, she begins to alternate the motions of her left and right angles of attack - while her left hand rolls up your shaft, the right slides down to meet it.  Even her feet seem to somehow press in tighter against your flesh, mirroring her hands;  the strange technique creating a unique wave-like rolling sensation that feels quite unlike anything you’ve experienced on Mareth before. You wonder briefly if there might be a little bit of magic involved here before your thoughts are obliterated by an avalanche of pleasure - Izumi has begun to speed up.\n\n");
+			 
+			outputText("You can only grunt and shiver under the onslaught as Izumi works you over with this bizarre new approach.  There’s no gentleness here, you realise; no playful teasing or long, drawn out pauses.  This move is designed for one thing, and one thing only - to force you to cum.  [if (player.balls > 0)You groan, your aching balls coming to the same conclusion as you have, twitching under a passing stroke from one of Izumi’s soles and tensing up in readiness.]  You understand now why Izumi warned you about this technique; you are no longer being teased, gently coaxed towards the edge and then pulled back at the last minute.  As of now, you are being milked.\n\n");
+			 
+			outputText("“<i>One.</i>”  She commands, her tone demanding.  After only a few moments, you throw back your head and let out a long, ecstatic moan as you cum, your orgasm fountaining up through you and exploding free of your [cockhead biggest].  As the first jet of semen surges free of your cock and thrusts up into the air, Izumi gasps.  A split second later, she releases you and launches herself backwards in a powerful roll that catapults her across the cave. Your first load splatters explosively down where she had been sitting moments ago, but you’re too busy firing off a second to care.\n\n");
 
-[if (pc.cumQ > 500) 
-You remain sat there for a crippling eternity, unable to do anything but moan as you inexplicably continue to cum, your aching erection firing out shot after shot of hot, dripping goo as Izumi watches you from the safety of the shadows, grinning happily like the cat that got the cream.] Eventually, your orgasm subsides, and you collapse [if (pc.isTaur) sideways | backwards ] onto the ground, staring up at the roof of the cave in a daze.  After a few seconds, Izumi’s face appears in your field of vision, albeit upside down.
+			if (player.cumQ() > 500) outputText("You remain sat there for a crippling eternity, unable to do anything but moan as you inexplicably continue to cum, your aching erection firing out shot after shot of hot, dripping goo as Izumi watches you from the safety of the shadows, grinning happily like the cat that got the cream.  ");
 
-“Haha... Sorry about that, but I didn’t want you to ruin my clothes, you know?”  She half-apologizes, giggling.  “Hmm... maybe that move was a little much to try on a [IzumiRace].  I just thought that since you were a little more... <i>Robust</i> than most others of your kind that I’ve met, you’d be able to take it.  I did try to warn you, although... It seems like you enjoyed yourself anyway, hmm?”  She beams.  You can barely find the energy to blink, let alone respond.  
- 
-Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...
+			outputText("Eventually, your orgasm subsides, and you collapse [if (player.isATaur == true)sideways|backwards] onto the ground, staring up at the roof of the cave in a daze.  After a few seconds, Izumi’s face appears in your field of vision, albeit upside down.\n\n");
 
-dynStats(“lust”, -100);
+			outputText("“<i>Haha... Sorry about that, but I didn’t want you to ruin my clothes, you know?</i>”  She half-apologizes, giggling.  “<i>Hmm... maybe that move was a little much to try on a [race].  I just thought that since you were a little more... <i>robust</i> than most others of your kind that I’ve met, you’d be able to take it.  I did try to warn you, although... It seems like you enjoyed yourself anyway, hmm?</i>”  She beams.  You can barely find the energy to blink, let alone to muster a response.\n\n");
+			 
+			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
-[Next]
+			dynStats("lus=", 0);
 
+			menu();
+			doNext(13);
 		}
 
-		protected function surrenderOhGodTheFemaleSurrenderContentIsFuckingHuge():void
+		protected function surrenderOhGodTheFemaleSurrenderContentIsFuckingHugeSendHelp():void
 		{
-			You resign yourself to letting Izumi do as she wills with you and hesitantly reach to start undressing.  
+			outputText("You resign yourself to letting Izumi do as she wills with you, and hesitantly reach to start undressing.");
+
+			// First time addition to the start of the scene
+			if (flags[kFLAGS.IZUMI_TIMES_SUBMITTED] == 0)
+			{
+				outputText("  Before you can remove your clothes, however, Izumi grabs a hold of your wrist.\n\n");
+
+				outputText("“<i>Not so fast, I’ve never really had a chance to play with a girl before.  I wanna take my time on this one...</i>” She says.  Smiling suggestively, she reaches out and slowly divests you of your [armorname].  [if(player.cor <= 33) You 	can’t help but feel a crippling sense of embarrassment as the strange woman undresses you, and you look away, embarrassed, while Izumi’s hands explore your body.][if (player.cor >= 66) As Izumi slowly reveals your naked body to the world, you begin to feel an oh-so-familiar heat building up inside of you.  You look down at Izumi with pride as she inspects your body, running a skillful hand over your chest with a thoughtful look on her face.]\n\n");
+
+				// Big knockers!
+				if (player.biggestTitSize >= 15)
+				{
+					outputText("Izumi’s eyes widen in surprise as she pulls aside your clothing to reveal your impressive bust, your [chest] finally free.\n\n");
+
+					outputText("“<i>Wha- Wait, these are real?!</i>”  she exclaims, loudly.");
+
+					// Low corruption
+					if (player.cor < 50)
+					{
+						outputText("Sheepishly, you nod as Izumi manhandles your massive mammaries as though looking for evidence of their falseness.  She bites her bottom lip, glaring intently at you as she roughly runs her hands over your breasts.  Although the Oni woman’s palms are surprisingly soft, her treatment of your breasts is not - she practically mauls you, squeezing, groping, even pinching the soft flesh.\n\n");
+
+						outputText("“<i>Unbelievable...</i>” She mutters to herself, bitterly.  She looks up at you, confusion still plain upon your face, then scowls.  “<i>You don’t even know why I’m annoyed, do you?  Does having a chest THIS huge,</i>” she reaches out and pinches one of your [nipples] between her thumb and forefinger, causing you to yelp in surprise and pain.  “<i>Just seem normal to you?!</i>”  She grumbles in frustration before giving the nipple a sharp tug, causing you to cry out once again.  “<i>Forget it.</i>”]\n\n");
+					}
+					// High(er) corruption
+					else
+					{
+						outputText("You smile and nod proudly as Izumi examines your breasts, experiencing a giddy little thrill at the feeling of her soft palms rolling across your endowments.  She bites her bottom lip, glaring intently at you, and you return her gaze with amused indifference.  Although the Oni woman’s palms are surprisingly soft, her treatment of your breasts is not - she practically mauls you, squeezing, groping, even pinching the soft flesh . The rough treatment is deliciously arousing, and you can’t help but let out a few soft moans at being manhandled so forcefully - much to Izumi’s obvious annoyance.\n\n");
+
+						outputText("“<i>Let me guess, you intentionally made them grow this big?</i>”  She scowls.  She reaches out and pinches one of your nipples between her thumb and forefinger, causing you to let out another excited little groan.\n\n");
+
+						outputText("You respond with a shrug, teasingly, not entirely wanting Izumi’s abuse to stop.  Izumi’s frown deepens and she tweaks your nipple, twisting it painfully to the side, eliciting another gasp from you.\n\n");
+
+						
+					}
+
+					outputText("“<i>How shameless.</i>”  She grumbles, returning her gaze to your bust.  “<i>How utterly shameless....</i>”\n\n");
+				}
+			}
+			else
+			{
+				outputText("Before you can finish removing your clothes, Izumi grabs a hold of your wrist.  She takes over, placing herself firmly in charge of your state of dress.\n\n");
+			}
+
+			// PC is an exhibitionist!
+			if (flags[kFLAGS.PC_FETISH] >= 1)
+			{
+				outputText("While Izumi takes her time freeing you of your [armor], you experience a little familiar thrill as Ceraph’s cursed piercings start to work their magic.  Every inch of your skin from head to foot tingles with excitement as you relish the prospect of finding yourself on display once again, naked and defenceless for the whole world to stare, or scowl, or leer - it makes your nipples harden just thinking about it.\n\n");
+
+				outputText("Looking up at you with a superior smirk, Izumi continues to run her hands over your body, clearly more interested in stealthily groping you to check out the goods than actually undressing you. The tortuous anticipation just makes everything feel that much better though - soon, you’re going to find yourself completely naked in front of this strange woman. Not just yet, but <i>soon</i>, oh so soon....  It’s hard to believe how erotic the idea now seems to you.  Like a child the night before a birthday, you’re equal parts excited and desperate - and before long you’re practically screaming internally for Izumi to hurry up, rip off the rest of your clothes and just strip you <i>bare</i> already.  By the time she gets round to removing the bottom half of your clothing, you’re positively soaking wet.\n\n");
+
+				outputText("Izumi grunts in surprise as she surveys your dripping folds [if(player.hasCock), your [cock] slowly thickening under her scrutiny].  You shift in place, [if (player.isANaga == true)wriggling atop your[legs]|subtly parting your [legs] and even [if (player.isATaur == true)rolling your butt upward|tilting your hips forwards] a little, to ensure that Izumi gets a really <b>good</b> look at you down there.  The shameless act sends a flush of embarrassed warmth through you, making you tremble in pleasure.  You’re unable to keep yourself from smiling a little - you can barely manage to stop yourself from moaning aloud.  You place your hands above your breasts, hoping that Izumi will stop to look at them... which she does, looking up a moment later to say something, then pausing as her eyes linger at the sight of your [chest].\n\n");
+
+				outputText("[if(player.isANaga == false)You rub your thighs together in delight|You wriggle and writhe in delight] as Izumi stares at your proudly displayed chest, enjoying the sensation of being watched and idly wishing you had something to fill the aching void [if (player.isANaga == true) deep within your [vagina].  You slither around in place, your [leg] shifting and weaving around, moving and undulating... b|between your [legs] as well.  As you move your weight repeatedly from one [foot] to the other, you shiver in enjoyment.  B]eing stared at feels so good.... You blink, suddenly called back to reality by Izumi’s voice.\n\n");
+
+				outputText("“<i>Look, "+ this.heightDesc() +", I know I’m kind of an intimidating specimen, but you don’t really need to be scared.</i>” She smirks.  “<i>You keep shivering in fear like that and I’m liable to take offence, yeah?</i>”  You blink again in confusion before realization finally dawns.  Izumi has absolutely no idea how much this is turning you on.  The idea of your secret arousal going completely unnoticed is surprisingly erotic, and that thought turns out to be just enough to push you over the edge.  You wince and bite your lip to stifle your moans, quivering in the throes of a miniature orgasm, even though you’ve really yet to be even touched... and on a whim, you decide to keep eye contact with Izumi for the entire thing.\n\n");
+
+				outputText("Staring into those steady amber eyes as you quietly cum adds an entire new level of deliciously wrong-feeling pleasure to the affair, something you resolve to enjoy for as long as possible. Finally, your orgasm subsides, and you visibly relax.\n\n");
+
+				outputText("“<i>There.  See?  I ain’t so bad.</i>”  Izumi smiles again, still apparently oblivious to your fun at her expense.  “<i>Now, we get to move on to the good part.  You ready? </i>” She asks.  You smile and nod, still basking in the post-coital warmth of your inner glow.\n\n");
+			}
+
+			// Scentime!
+
 
 [First Time Submit]
-[if (flags[kFLAGS.IZUMI_TIMES_SUBMITTED] == 0) Before you can remove your clothes, however, Izumi grabs a hold of your wrist.
-
-“Not so fast.  I’ve never really had a chance to play with a girl before.  I wanna take my time on this one...” She says.  Smiling suggestively, she reaches out and slowly divests you of your [armorname].  [if (pc.corruption <= 33) You can’t help but feel a crippling sense of embarrassment as the strange woman undresses you, and you look away, embarrassed, while Izumi’s hands explore your body.] [if (pc.corruption >= 66) As Izumi slowly reveals your naked body to the world, you begin to feel an oh-so-familiar heat building up inside of you.  You look down at Izumi with pride as she inspects your body, running a skillful hand over your chest with a thoughtful look on her face.]
-
-[if (pc.biggestTitSize >= 15)  Izumi’s eyes widen in surprise as she pulls aside your clothing to reveal your impressive bust, your [chest] finally free.
-
-“Wha- Wait, these are real?!”  she exclaims, loudly. [if (pc.corruption < 50)Sheepishly, you nod as Izumi manhandles your massive mammaries as though looking for evidence of their falseness.  She bites her bottom lip, glaring intently at you as she roughly runs her hands over your breasts.  Although the Oni woman’s palms are surprisingly soft, her treatment of your breasts is not - she practically mauls you, squeezing, groping, even pinching the soft flesh.
-
-“Unbelievable...” She mutters to herself, bitterly.  She looks up at you, confusion still plain upon your face, then scowls.  “You don’t even know why I’m annoyed, do you?  Does having a chest THIS huge,” she reaches out and pinches one of your [nipples] between her thumb and forefinger, causing you to yelp in surprise and pain.  “Just seem normal to you?!”  She grumbles in frustration before giving the nipple a sharp tug, causing you to cry out once again.  “Forget it.”]
-
-[if (pc.corruption >= 50) You smile and nod proudly as Izumi examines your breasts, experiencing a giddy little thrill at the feeling of her soft palms rolling across your endowments.  She bites her bottom lip, glaring intently at you, and you return her gaze with amused indifference.  Although the Oni woman’s palms are surprisingly soft, her treatment of your breasts is not - she practically mauls you, squeezing, groping, even pinching the soft flesh . The rough treatment is deliciously arousing, and you can’t help but let out a few soft moans at being manhandled so forcefully - much to Izumi’s obvious annoyance.
-
-“Let me guess, you intentionally made them grow this big?”  She scowls.  She reaches out and pinches one of your nipples between her thumb and forefinger, causing you to let out another excited little groan.
-
-You respond with a shrug, teasingly, not entirely wanting Izumi’s abuse to stop.  Izumi’s frown deepens and she tweaks your nipple, twisting it painfully to the side, eliciting another gasp from you.]
-
-“How shameless.”  She grumbles, returning her gaze to your bust.  “How utterly shameless....”]]
-
-// Exhibitionist addition to scene start
-[if (flags[kFLAGS.PC_FETISH] >= 1)
-While Izumi takes her time freeing you of your [armorname], you experience a little familiar thrill as Ceraph’s cursed piercings start to work their magic.  Every inch of your skin from head to foot tingles with excitement as you relish the prospect of finding yourself on display once again, naked and defenceless for the whole world to stare, or scowl, or leer - it makes your nipples harden just thinking about it.
-
-Looking up at you with a superior smirk, Izumi continues to run her hands over your body, clearly more interested in stealthily groping you to check out the goods than actually undressing you. The tortuous anticipation just makes everything feel that much better though - soon, you’re going to find yourself completely naked in front of this strange woman. Not just yet, but <i>soon</i>, oh so soon….  It’s hard to believe how erotic the idea now seems to you.  Like a child the night before a birthday, you’re equal parts excited and desperate - and before long you’re practically screaming internally for Izumi to hurry up, rip off the rest of your clothes and just strip you <i>bare</i> already.  By the time she gets round to removing the bottom half of your clothing, you’re positively soaking wet.
-
-Izumi grunts in surprise as she surveys your dripping folds [if (pc.hasCock) , your [cock] slowly thickening under her scrutiny].  You shift in place, [if (pc.isNaga) wriggling atop your [legs] | subtly parting your [legs]] and even [if (pc.isTaur) rolling your butt upward | tilting your hips forwards ]a little, to ensure that Izumi gets a really <b>good</b> look at you down there.  The shameless act sends a flush of embarrassed warmth through you, making you tremble in pleasure.  You’re unable to keep yourself from smiling a little - you can barely manage to stop yourself from moaning aloud.  You place your hands above your breasts, hoping that Izumi will stop to look at them... Which she does, looking up a moment later to say something, then pausing as her eyes linger at the sight of your [chest].
-
-[if (!pc.isNaga)You rub your thighs together in delight | You wriggle and writhe in delight ] as Izumi stares at your proudly displayed chest, enjoying the sensation of being watched and idly wishing you had something to fill the aching void [if (pc.isNaga) deep within your [vagina].  You slither around in place, your [leg] shifting and weaving around itself, moving and undulating... | between your [legs] as well.  As you move your weight repeatedly from one [foot] to the other, you shiver in enjoyment.]   Being stared at feels so good.... You blink, suddenly called back to reality by Izumi’s voice.
-
-“Look, [IzumiShort], I know I’m kind of an intimidating specimen, but you don’t really need to be scared.” She smirks.  “You keep shivering in fear like that and I’m liable to take offence, yeah?”  You blink again in confusion before realization finally dawns.  Izumi has absolutely no idea how much this is turning you on.  The idea of your secret arousal going completely unnoticed is surprisingly erotic, and that thought turns out to be just enough to push you over the edge.  You wince and bite your lip to stifle your moans, quivering in the throes of a miniature orgasm, even though you’ve really yet to be even touched... And on a whim, you decide to keep eye contact with Izumi for the entire thing.
-
-Staring into those steady amber eyes as you quietly cum adds an entire new level of deliciously wrong-feeling pleasure to the affair, something you resolve to enjoy for as long as possible. Finally, your orgasm subsides, and you visibly relax.
-
-“There.  See?  I ain’t so bad.”  Izumi smiles again, still apparently oblivious to your fun at her expense.  “Now, we get to move on to the good part.  You ready? ” She asks.  You smile and nod, still basking in the post-coital warmth of your inner glow.
-
-] // End addition to scene start
-
-[if (!pc.isTaur)
-
-Without warning, Izumi violently lunges forward, grabbing at you.  You are only able to let out a surprised yelp before she grips onto your arms, pulling you towards her and spinning you around.  [if (!pc.isNaga) Before you know it, she has you down on your knees, the cold stone of the floor digging into your skin a little as she circles behind you, smirking cruelly. | She takes hold of your shoulders and forces you lower to the ground, forced to slither more and more of your tail out from under yourself, until Izumi towers over you.  She circles behind you, a cruel smirk the only hint of her intentions.]
-
-Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s other hand glide slowly across your [skinfurscales], running along your stomach and down towards your [if (pc.isNaga) [leg] | thighs ].
-
-“Well now, let’s see...” She murmurs into your ear, softly.  “What can I possibly do with you, hmm?”  She jerks you painfully back upright, locking your arm behind you as she frogmarches you towards the entrance to her cave.  “You’re really pretty, you know that?” She purrs.  “It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?”
-
-Struggling helplessly against the enormous Oni’s iron-hard muscles, you stagger over to the mouth of the cave.  A gust of cold mountain air blows over you, chilling your skin and causing you to shiver as your nipples harden.  Izumi halts, stopping your wobbling advance dead. You gaze out at the scenery for a moment, the vast mountain range spread out below you, and for a moment you’re filled with an irrational fear that she intends to simply hurl you off the cliffside and leave you to fend for yourself without your gear.  Then, suddenly, Izumi kicks your legs out from under you.
-
-You cry out in surprise and terror, then let out a grunt as you find yourself being yanked backwards into Izumi’s lap.  Her legs entwine with yours, yanking them apart painfully, exposing your [vagina] to the cold mountain winds.  At the same time, she grips both your wrists with one hand, pulling them behind your back, forcing you to arch backward, and thrusting your [fullchest] out for inspection.  You gasp in surprise as you feel her other hand reach around to grope at your breasts, squeezing and massaging them experimentally.  Despite yourself, you can’t help but let out a yelp as she squeezes a [nipple] between thumb and forefinger.  
-
-As you squirm in Izumi’s grip, it begins to dawn on you that you’re not getting away from this.  Your resistance begins to lessen until eventually you begin to relax, finally admitting to yourself that this really doesn’t feel half bad...
-
-| // Izumi rides the pony!
-
-Without warning, Izumi violently lunges forward, a hop in her step easily launching her high enough to land on top of your [race]-like body.  You’re only able to let out a surprised yelp before she grabs your arms, pulling them behind your back as a makeshift set of reins, a single powerful hand clasped around your wrists to keep them restrained.  The effect of being so utterly under the control of the Oni only amplified by the sensation of her muscular thighs clamped tightly around your flanks.
-
-Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin with her free hand and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s feet run across your [skinfurscales], her toes squirming against your underbelly.
-
-“Well now, let’s see… “  She murmurs, softly.  “What can I possibly do with you, hmm?”  She jerks your arms painfully forward, elbows locked straight thanks to her iron-hard grip around your wrists.  The motion prompts you to stumble a half step forward, edging you closer to the entrance of her cave.  “You’re really pretty, you know that?” She purrs.  “It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?”
-
-Struggling helplessly against the enormous Oni’s manacle-like grip around your wrists, you gradually stagger over to the mouth of the cave under her direction, another jolt delivered to your arms whenever Izumi deems your progress too slow.  A gust of cold mountain air blows over you, chilling your [skinfurscales] and causing you to shiver as your nipples harden.  Izumi tugs backward on your ‘reins’ to stop your wobbling advance dead.  You gaze out at the scenery, the vast mountain range spread out below you, and for a moment you’re filled with an irrational fear that she intends to simply drive you off the cliffside and leave you to fend for yourself without your gear.  Then, suddenly, Izumi kicks your legs out from under you, collapsing to the floor with a surprised shriek.
-
-Izumi shifts herself around to casually lay along the length of your lower body, using  her grip on your wrists to jerk you backward once more, forcing you to arch your back and thrust your [fullchest] out for easier inspection.  You gasp in surprise as you feel her free hand reach around to grope at your breasts, squeezing and massaging them experimentally.  Despite yourself you can’t help but let out a yelp as she squeezes a [nipple] between thumb and forefinger.
-
-As you squirm under Izumi’s body, it begins to dawn on you that you’re not getting away from this.  Your resistance begins to lessen until eventually you begin to relax, finally admitting to yourself that this really doesn’t feel half bad....
-
-]
+[if (flags[kFLAGS.IZUMI_TIMES_SUBMITTED] == 0) 
 
 
-“Well, well. Look at that,” She whispers into your ear conspiratorially. “It seems you’re already drawing an audience.”  It takes a moment, but her words finally filter through your lust-fogged consciousness, jerking back to reality .  Your eyes snap open in surprise, just in time to see a flicker of movement among the rocks nearby.  Then another, and another.  Imps, goblins, even one or two harpies slowly start to congregate around you, affording you brief glimpses at them as they take up vantage points in preparation for what is about to come.  Several of them are already clearly aroused, and your eyes widen at the sight of an imp’s wagging erection as he scampers between a pair of nearby boulders.  It slowly dawns on you that in a place as remote and empty as this, the sight of someone like you being toyed with - maybe even raped if the situation weren’t voluntary - is probably quite the rare spectacle.  And here Izumi is, displaying you like some kind of rare prize for every perverted beast on the mountain to gawk at.
+			[if (!pc.isTaur)
 
-[if (flags[kFLAGS.PC_FETISH] == 1) [ExhibitionVariant] | [NonExhibitionVariant]]
-[NonExhibitionVariant]
-You squirm desperately, the feeling of a dozen pairs of eyes leering at you making you feel decidedly uncomfortable.  Izumi apparently notices your distress, however, as a few seconds later you hear a thunderous crack as she reaches out to a nearby outcropping of jagged rock, snapping it off with one massive hand.
+			Without warning, Izumi violently lunges forward, grabbing at you.  You are only able to let out a surprised yelp before she grips onto your arms, pulling you towards her and spinning you around.  [if (!pc.isNaga) Before you know it, she has you down on your knees, the cold stone of the floor digging into your skin a little as she circles behind you, smirking cruelly. | She takes hold of your shoulders and forces you lower to the ground, forced to slither more and more of your tail out from under yourself, until Izumi towers over you.  She circles behind you, a cruel smirk the only hint of her intentions.]
 
-“Get lost, ya scummy vultures!” She yells, [if (pc.isTaur) sitting upright on your back and] hurling the rock forcefully at the circle of watchers. It shatters harmlessly on a boulder, but the crowd gets the message, disappearing in a flurry of angry squawks and howls. “Sorry,” Izumi adds apologetically as you twist your neck around to stare at her in confusion. “Like I said, this neighbourhood’s full of trash like that, you know? I didn’t realise they’d upset you.” She smiles - a friendly, honest smile, bereft of guile or malice.
+			Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s other hand glide slowly across your [skinfurscales], running along your stomach and down towards your [if (pc.isNaga) [leg] | thighs ].
 
-Despite your uncomfortable situation, you can’t help but feel kind of... reassured.  The smile soon becomes something more than friendly though, and suddenly Izumi’s head darts forwards and she forces her tongue into your surprised [if (pc.hasMuzzle) maw | mouth ], stunning you as she launches into a powerful french kiss.  Her tongue wraps effortlessly around your own, leaving you breathless and unable to help but wonder how dextrous it could be.  Izumi assaults your mouth, forcefully, leaving no doubt as to who is in control of the situation - it’s all you can do to keep up with the insistent, probing kiss.  Finally, she breaks off, leaving you gasping for breath after your extended tongue-grappling session.  For her part, Izumi seems to be none the worse for wear, wiping her mouth with a satisfied expression.
+			“Well now, let’s see...” She murmurs into your ear, softly.  “What can I possibly do with you, hmm?”  She jerks you painfully back upright, locking your arm behind you as she frogmarches you towards the entrance to her cave.  “You’re really pretty, you know that?” She purrs.  “It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?”
 
-“Now, where were we?” Izumi murmurs.  You look down as she gently rolls a hand around to cup one of your breasts. “Oh yeah,” She adds, playfully. “</i>I</i> remember...” Izumi gropes at your chest experimentally, stroking, fondling, squeezing, molesting your bust as she gauges it for firmness.
+			Struggling helplessly against the enormous Oni’s iron-hard muscles, you stagger over to the mouth of the cave.  A gust of cold mountain air blows over you, chilling your skin and causing you to shiver as your nipples harden.  Izumi halts, stopping your wobbling advance dead. You gaze out at the scenery for a moment, the vast mountain range spread out below you, and for a moment you’re filled with an irrational fear that she intends to simply hurl you off the cliffside and leave you to fend for yourself without your gear.  Then, suddenly, Izumi kicks your legs out from under you.
 
-[if (player.biggestTitSize <= 2)
-“Haha... You’re pretty cute, you know?” Izumi whispers into your ear, idly twiddling one of your nipples between thumb and forefinger as though this were a perfectly natural conversation. “Funny, I was going to play with your breasts a little, get you nice and warmed up... but I can’t seem to find ‘em.  That’s not right, is it?  Girls have boobs, big, pillowy things to show off in front of the fellas... but you don’t.  Completely flat, aren’t ya? Almost like you were a boy.  That’s gotta be embarrassing, right?”  You look down at your chest, blushing furiously.  You’d never really thought about it before, but now that Izumi mentions it....   Plus, with Izumi leaning in and gripping you from behind, those strong, muscled arms caging you in as her enormous breasts press inescapably against your spine, you have to admit you do feel kind of inadequate... as well as strangely aroused.
+			You cry out in surprise and terror, then let out a grunt as you find yourself being yanked backwards into Izumi’s lap.  Her legs entwine with yours, yanking them apart painfully, exposing your [vagina] to the cold mountain winds.  At the same time, she grips both your wrists with one hand, pulling them behind your back, forcing you to arch backward, and thrusting your [fullchest] out for inspection.  You gasp in surprise as you feel her other hand reach around to grope at your breasts, squeezing and massaging them experimentally.  Despite yourself, you can’t help but let out a yelp as she squeezes a [nipple] between thumb and forefinger.  
 
-“Well, it’s pretty sad, but don’t be too upset,” Izumi continues, reaching around with her other hand to play with the other nipple.  She pointedly avoids so much as stroking against the unimpressive mounds that make up your sub-average titflesh, solely concerned with molesting your now diamond-hard nipples, heightening both your sense of arousal and your rising shame at your small size.  “I’m sure someone, somewhere, will still want to take you.  Of course, they’ll probably be the kinky type.  Who else would want someone as flat as you?  There isn’t even enough here to rub up against.  But hey, some guys are into that.  You might have to pretend to be a schoolgirl for ‘em, but they’re into it...”  Without warning, Izumi shifts up her game, pinching your [nipples] painfully and pulling on them slightly, forcing you to let out a moan of confusion; half pleasure, half pain.
+			As you squirm in Izumi’s grip, it begins to dawn on you that you’re not getting away from this.  Your resistance begins to lessen until eventually you begin to relax, finally admitting to yourself that this really doesn’t feel half bad...
 
-“Or is that what </i>you’re<i> into?”  She hisses, suddenly intense.  “Admit it, there’s no way anyone could really have breasts this small.  You did this on purpose, right?  Wanted to make yourself as flat and unappealing as possible, so only the </i>real<i> deviants would want you.  Is that it, is that what makes you tick?  You want to find some sick perv who can only get off by fucking someone as flat as you?! Someone with a body that looks more like it belongs to a little girl?!”  She squeezes down on your long-suffering nipples, causing you to cry out again, then relents just a little.  “Well? Answer me.  Do you want to be the little girl?”
+			| // Izumi rides the pony!
 
-You stammer some form of response, feeling hot, and trapped, and confused, and wanting to get out but also desperate to stay and find out what happens <i>next.</i>  Why <i>did</i> you do this to yourself, anyway?  <i>Did</i> you even do it, or was it done to you... Or is this just how you’ve always been?  You’re so confused, the smoke drifting from the cave combining with the heat and the oppressive bear hug from Izumi to leave you feeling muggy and unfocused.  It must be having some kind of aphrodisiac effect on you, or something. Suddenly, Izumi chuckles, gentle and soft, mere inches from your ear.
+			Without warning, Izumi violently lunges forward, a hop in her step easily launching her high enough to land on top of your [race]-like body.  You’re only able to let out a surprised yelp before she grabs your arms, pulling them behind your back as a makeshift set of reins, a single powerful hand clasped around your wrists to keep them restrained.  The effect of being so utterly under the control of the Oni only amplified by the sensation of her muscular thighs clamped tightly around your flanks.
 
-“It’s fine.  Relax, kitten; I don’t care what kind of crazy kinks you think you need to get yourself off,” She murmurs, reassuringly. Then you feel her hand take gentle hold of your wrist. “But I </i>do<i> want to see it happen...” She adds [if (!pc.isTaur), guiding your hand down to your own nethers, which you’re shocked - in a foggy, distant kind of way - to discover are sopping wet.|.]
+			Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin with her free hand and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s feet run across your [skinfurscales], her toes squirming against your underbelly.
+
+			“Well now, let’s see… “  She murmurs, softly.  “What can I possibly do with you, hmm?”  She jerks your arms painfully forward, elbows locked straight thanks to her iron-hard grip around your wrists.  The motion prompts you to stumble a half step forward, edging you closer to the entrance of her cave.  “You’re really pretty, you know that?” She purrs.  “It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?”
+
+			Struggling helplessly against the enormous Oni’s manacle-like grip around your wrists, you gradually stagger over to the mouth of the cave under her direction, another jolt delivered to your arms whenever Izumi deems your progress too slow.  A gust of cold mountain air blows over you, chilling your [skinfurscales] and causing you to shiver as your nipples harden.  Izumi tugs backward on your ‘reins’ to stop your wobbling advance dead.  You gaze out at the scenery, the vast mountain range spread out below you, and for a moment you’re filled with an irrational fear that she intends to simply drive you off the cliffside and leave you to fend for yourself without your gear.  Then, suddenly, Izumi kicks your legs out from under you, collapsing to the floor with a surprised shriek.
+
+			Izumi shifts herself around to casually lay along the length of your lower body, using  her grip on your wrists to jerk you backward once more, forcing you to arch your back and thrust your [fullchest] out for easier inspection.  You gasp in surprise as you feel her free hand reach around to grope at your breasts, squeezing and massaging them experimentally.  Despite yourself you can’t help but let out a yelp as she squeezes a [nipple] between thumb and forefinger.
+
+			As you squirm under Izumi’s body, it begins to dawn on you that you’re not getting away from this.  Your resistance begins to lessen until eventually you begin to relax, finally admitting to yourself that this really doesn’t feel half bad....
+
+			]
+
+
+			“Well, well. Look at that,” She whispers into your ear conspiratorially. “It seems you’re already drawing an audience.”  It takes a moment, but her words finally filter through your lust-fogged consciousness, jerking back to reality .  Your eyes snap open in surprise, just in time to see a flicker of movement among the rocks nearby.  Then another, and another.  Imps, goblins, even one or two harpies slowly start to congregate around you, affording you brief glimpses at them as they take up vantage points in preparation for what is about to come.  Several of them are already clearly aroused, and your eyes widen at the sight of an imp’s wagging erection as he scampers between a pair of nearby boulders.  It slowly dawns on you that in a place as remote and empty as this, the sight of someone like you being toyed with - maybe even raped if the situation weren’t voluntary - is probably quite the rare spectacle.  And here Izumi is, displaying you like some kind of rare prize for every perverted beast on the mountain to gawk at.
+
+			[if (flags[kFLAGS.PC_FETISH] == 1) [ExhibitionVariant] | [NonExhibitionVariant]]
+			[NonExhibitionVariant]
+			You squirm desperately, the feeling of a dozen pairs of eyes leering at you making you feel decidedly uncomfortable.  Izumi apparently notices your distress, however, as a few seconds later you hear a thunderous crack as she reaches out to a nearby outcropping of jagged rock, snapping it off with one massive hand.
+
+			“Get lost, ya scummy vultures!” She yells, [if (pc.isTaur) sitting upright on your back and] hurling the rock forcefully at the circle of watchers. It shatters harmlessly on a boulder, but the crowd gets the message, disappearing in a flurry of angry squawks and howls. “Sorry,” Izumi adds apologetically as you twist your neck around to stare at her in confusion. “Like I said, this neighbourhood’s full of trash like that, you know? I didn’t realise they’d upset you.” She smiles - a friendly, honest smile, bereft of guile or malice.
+
+			Despite your uncomfortable situation, you can’t help but feel kind of... reassured.  The smile soon becomes something more than friendly though, and suddenly Izumi’s head darts forwards and she forces her tongue into your surprised [if (pc.hasMuzzle) maw | mouth ], stunning you as she launches into a powerful french kiss.  Her tongue wraps effortlessly around your own, leaving you breathless and unable to help but wonder how dextrous it could be.  Izumi assaults your mouth, forcefully, leaving no doubt as to who is in control of the situation - it’s all you can do to keep up with the insistent, probing kiss.  Finally, she breaks off, leaving you gasping for breath after your extended tongue-grappling session.  For her part, Izumi seems to be none the worse for wear, wiping her mouth with a satisfied expression.
+
+			“Now, where were we?” Izumi murmurs.  You look down as she gently rolls a hand around to cup one of your breasts. “Oh yeah,” She adds, playfully. “</i>I</i> remember...” Izumi gropes at your chest experimentally, stroking, fondling, squeezing, molesting your bust as she gauges it for firmness.
+
+			[if (player.biggestTitSize <= 2)
+			“Haha... You’re pretty cute, you know?” Izumi whispers into your ear, idly twiddling one of your nipples between thumb and forefinger as though this were a perfectly natural conversation. “Funny, I was going to play with your breasts a little, get you nice and warmed up... but I can’t seem to find ‘em.  That’s not right, is it?  Girls have boobs, big, pillowy things to show off in front of the fellas... but you don’t.  Completely flat, aren’t ya? Almost like you were a boy.  That’s gotta be embarrassing, right?”  You look down at your chest, blushing furiously.  You’d never really thought about it before, but now that Izumi mentions it....   Plus, with Izumi leaning in and gripping you from behind, those strong, muscled arms caging you in as her enormous breasts press inescapably against your spine, you have to admit you do feel kind of inadequate... as well as strangely aroused.
+
+			“Well, it’s pretty sad, but don’t be too upset,” Izumi continues, reaching around with her other hand to play with the other nipple.  She pointedly avoids so much as stroking against the unimpressive mounds that make up your sub-average titflesh, solely concerned with molesting your now diamond-hard nipples, heightening both your sense of arousal and your rising shame at your small size.  “I’m sure someone, somewhere, will still want to take you.  Of course, they’ll probably be the kinky type.  Who else would want someone as flat as you?  There isn’t even enough here to rub up against.  But hey, some guys are into that.  You might have to pretend to be a schoolgirl for ‘em, but they’re into it...”  Without warning, Izumi shifts up her game, pinching your [nipples] painfully and pulling on them slightly, forcing you to let out a moan of confusion; half pleasure, half pain.
+
+			“Or is that what </i>you’re<i> into?”  She hisses, suddenly intense.  “Admit it, there’s no way anyone could really have breasts this small.  You did this on purpose, right?  Wanted to make yourself as flat and unappealing as possible, so only the </i>real<i> deviants would want you.  Is that it, is that what makes you tick?  You want to find some sick perv who can only get off by fucking someone as flat as you?! Someone with a body that looks more like it belongs to a little girl?!”  She squeezes down on your long-suffering nipples, causing you to cry out again, then relents just a little.  “Well? Answer me.  Do you want to be the little girl?”
+
+			You stammer some form of response, feeling hot, and trapped, and confused, and wanting to get out but also desperate to stay and find out what happens <i>next.</i>  Why <i>did</i> you do this to yourself, anyway?  <i>Did</i> you even do it, or was it done to you... Or is this just how you’ve always been?  You’re so confused, the smoke drifting from the cave combining with the heat and the oppressive bear hug from Izumi to leave you feeling muggy and unfocused.  It must be having some kind of aphrodisiac effect on you, or something. Suddenly, Izumi chuckles, gentle and soft, mere inches from your ear.
+
+			“It’s fine.  Relax, kitten; I don’t care what kind of crazy kinks you think you need to get yourself off,” She murmurs, reassuringly. Then you feel her hand take gentle hold of your wrist. “But I </i>do<i> want to see it happen...” She adds [if (!pc.isTaur), guiding your hand down to your own nethers, which you’re shocked - in a foggy, distant kind of way - to discover are sopping wet.|.]
 
 “You’re not leaving ‘til I see your O-face,” She purrs, her tongue slipping out to give your neck and cheek a long, lascivious lick, making you shudder as the hot, wet sensation glides over your [skinfurscales]. “So unless you want to accidentally train yourself into having a fetish for all this pretend-schoolgirl stuff, I’d get busy... Or don’t,” She pushes her face into your neck, leaving a line of kisses up to your ear as the smoke-scent of her hair fills your nose. “Your call. Personally, I think you’d look pretty cute in a uniform.”
 
