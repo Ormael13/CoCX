@@ -47,19 +47,13 @@
         // Example replacements
         "fix_fancyquotes_open": {
             "find": "“",
-            "replace": "\\\"<i>",
+            "replace": "“<i>",
             "greedy": true,
             "case": false
         },
         "fix_fancyquotes_close": {
             "find": "”",
-            "replace": "</i>\\\"",
-            "greedy": true,
-            "case": false
-        },
-        "fix_fancyquotes_apos": {
-            "find": "’",
-            "replace": "'",
+            "replace": "</i>”",
             "greedy": true,
             "case": false
         }
@@ -107,5 +101,5 @@
     "find_highlight_style": "outline",
 
     // Search under selection(s) if and only if exists
-    "selection_only": false
+    "selection_only": true
 }
