@@ -45,6 +45,7 @@
 				"man"						: function(thisPtr:*):* { return thisPtr.player.mf("man", "woman"); },
 				"master"					: function(thisPtr:*):* { return thisPtr.player.mf("master","mistress"); },
 				"misdirection"				: function(thisPtr:*):* { return "[Misdirection]"; },
+				"multicock"					: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
 				"multicockdescriptlight"	: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
 				"name"						: function(thisPtr:*):* { return thisPtr.player.short;},
 				"nipple"					: function(thisPtr:*):* { return thisPtr.nippleDescript(0);},

@@ -46,13 +46,13 @@ package classes.Scenes.Areas.HighMountains
 			if (player.hasStatusAffect("Titsmother") >= 0)
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.izumiTitsmotherIntro();
+				game.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
 				return;
 			}
 			else
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.izumiBeatPCIntro();
+				game.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
 				return;
 			}
 		}
