@@ -381,6 +381,11 @@
 			return false;
 		}
 		
+		public function get hasAMuzzle():Boolean
+		{
+			return this.hasMuzzle();
+		}
+		
 		public function face():String
 		{
 			var stringo:String = "";
