@@ -3,9 +3,9 @@ public function customPCSetup():void {
 	//Set as having history perk
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 	
-	if (player.short == "Gedan")
+	if (player.short == "TestChar")
 	{
-		player.XP = 5000;
+		player.XP = 500000;
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
