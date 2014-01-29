@@ -272,15 +272,17 @@ package classes.Scenes.Areas.HighMountains
 		}
 
 		// Set some shit up for the Pipesmoke scene during the introduction
-		private const SMOKE_SPEED_REDUCE:int = 5;
-		private const SMOKE_SENS_BOOST:int = 5;
+		private const SMOKE_SPEED_REDUCE:Number = 1.1;
+		private const SMOKE_SENS_BOOST:Number = 1.1;
+		private const SMOKE_LIBIDO_BOOST:Number = 1.1;
 		private const SMOKE_DURATION:int = 24;
 
 		// Applies the smokeeffect to a player, based on if they used the pipe directly or not
 		protected function smokeEffect(smokedPipe:Boolean):void
 		{
-			var deltaSpd:int = (SMOKE_SPEED_REDUCE + player.spe) - 100;
-			var deltaSns:int = (SMOKE_SENS_BOOST + player.sens) - 100;
+			var deltaSpd:int = player.spe - (player.spe * SMOKE_SPEED_REDUCE);
+			var deltaSns:int = (player.sens * SMOKE_SENS_BOOST) - player.sens;
+			var deltaLib:int = (player.lib * SMOKE_LIBIDO_BOOST) - player.lib;
 			var lustMod:int = 7;
 
 			// Double effect for directly smokin da pipe
@@ -288,21 +290,32 @@ package classes.Scenes.Areas.HighMountains
 			{
 				deltaSpd *= 2;
 				deltaSns *= 2;
+				deltaLib *= 2;
 				lustMod *= 2;
 			}
 
-			player.createStatusAffect("Izumis Pipe Smoke", SMOKE_DURATION, deltaSpd, deltaSns, 0);
-			dynStats("spe-", deltaSpd, "sen", deltaSns, "lus", lustMod);
+			player.createStatusAffect("Izumis Pipe Smoke", SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
+			
+			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
+			player.spe += deltaSpd;
+			player.sens += deltaSns;
+			player.lib += deltaLib;
+			
+			if (player.spe <= 0) player.spe = 1;
+			if (player.sens >= 100) player.sens = 100;
+			if (player.lib >= 100) player.lib = 100;
+			
+			dynStats("lus", lustMod);
 		}
 
-		// Per-hour update decimation of the timer, removal etc
-		public function smokeEffectUpdate():void
+		// Update the duration of the pipe smoke effect
+		public function updateSmokeDuration(hours:int):void
 		{
 			var affectIndex:int = player.hasStatusAffect("Izumis Pipe Smoke");
 
 			if (affectIndex >= 0)
 			{
-				player.statusAffects[affectIndex].value1 -= 1;
+				player.statusAffects[affectIndex].value1 -= hours;
 
 				if (player.statusAffects[affectIndex].value1 == 0)
 				{
@@ -318,8 +331,17 @@ package classes.Scenes.Areas.HighMountains
 
 			if (affectIndex >= 0)
 			{
-				dynStats("sen+", player.statusAffects[affectIndex].value2, "spe+", player.statusAffects[affectIndex].value3);
-				// TODO mangle some scene text or something similar to the timed Uma effects
+				player.sens += Math.abs(player.statusAffects[affectIndex].value2);
+				player.spe -= player.statusAffects[affectIndex].value3;
+				player.lib -= player.statusAffects[affectIndex].value4;
+				
+				if (player.sens > 100) player.sens = 100;
+				if (player.spe <= 0) player.spe = 1;
+				if (player.lib <= 0) player.lib = 1;
+				
+				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
+				
+				player.removeStatusAffect("Izumis Pipe Smoke");
 			}
 		}
 
@@ -377,6 +399,8 @@ package classes.Scenes.Areas.HighMountains
 		// TODO: Bulk this up some, its way short.
 		protected function fuckinChegIt():void
 		{
+			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 2;
+			
 			clearOutput();
 
 			outputText("Spotting an opening, you decide to beat a hasty retreat, as far away from the immense woman as possible.\n\n");
@@ -930,6 +954,8 @@ package classes.Scenes.Areas.HighMountains
 		 */
 		public function fuckedUpByAFuckhugeOni(titLoss:Boolean = false):void
 		{
+			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 1;
+			
 			clearOutput();
 
 			if (player.HP <= 0)
@@ -1007,6 +1033,8 @@ package classes.Scenes.Areas.HighMountains
 		// Special loss scene if the player loses whilst being titsmothered by izumi
 		public function deathBySnuSnuIMeanGiantOniTits():void
 		{
+			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 1;
+			
 			if (player.isTaur() || player.isDrider() || !player.hasCock())
 			{
 				this.fuckedUpByAFuckhugeOni(true);
@@ -1195,6 +1223,8 @@ package classes.Scenes.Areas.HighMountains
 		 // Entry to VICTORRRYYYY scenes
 		public function touchThatFluffyHorn():void
 		{
+			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 3;
+			
 			clearOutput();
 
 			outputText("Izumi slips backwards onto one knee and holds up a hand for pause, [if(player.HPRatio < 0.1 )the brief reprieve giving both of you a moment to recover|[if(monster.lust >= monster.lustMax) the Oni’s cheeks tinged a rosy peach in contrast to her alabaster skin.|momentarily staggered by your furious onslaught.]]\n\n");

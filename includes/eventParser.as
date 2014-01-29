@@ -2846,6 +2846,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.MASSAGE_BONUS_NAME));
 	}
 	
+	highMountains.izumiScenes.updateSmokeDuration(time);
+	if (player.hasStatusAffect("Izumis Pipe Smoke") >= 0)
+	{
+		trace("Izumis pipe smoke time remaining: " + player.statusAffectv1("Izumis Pipe Smoke"));
+	}
+	
 	//Drop axe if too short!
 	if(player.tallness < 78 && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);

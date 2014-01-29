@@ -15,6 +15,7 @@ package classes.Scenes.Areas.HighMountains
 	 */
 	public class Izumi extends Monster
 	{
+		// Set trace outout for this classes' content.
 		private var combatDebug:Boolean = true;
 		
 		public function Izumi() 
@@ -33,6 +34,7 @@ package classes.Scenes.Areas.HighMountains
 			init11Armor("silken kimono");
 			init12Combat(600, 0, 1, Monster.TEMPERMENT_LOVE_GRAPPLES, 0);
 			init13Level(22, 25 + rand(25), 75);
+			skipInit(14);
 		}
 
 		// Override won/lost calls
@@ -114,12 +116,13 @@ package classes.Scenes.Areas.HighMountains
 			}
 			else
 			{
-				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
+				//var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
+				var actions:Array = [chokeSlam];
 				
 				if (player.hasStatusAffect("Groundpound") <= -1)
 				{
-					actions.push(groundPound);
-					actions.push(groundPound);
+					//actions.push(groundPound);
+					//actions.push(groundPound);
 				}
 				
 				actions[rand(actions.length)]();
@@ -390,6 +393,7 @@ package classes.Scenes.Areas.HighMountains
 		public function titSmotherEscape():void
 		{
 			if (combatDebug) trace("Escaping TitSmother!");
+			clearOutput();
 			
 			if (player.str < 90)
 			{
@@ -398,11 +402,12 @@ package classes.Scenes.Areas.HighMountains
 			}
 			else
 			{
-				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground....  [if (player.isBiped)As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort.]Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
+				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground.... [if (player.isABiped == true) As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort. ] Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
 
 			outputText("“Oh my,” She purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...”");
 
+			cleanupTitsmother();
 			this.HP -= (15 + rand(player.str));
 			combatRoundOver();
 		}
@@ -410,6 +415,8 @@ package classes.Scenes.Areas.HighMountains
 		// Wait handler for titsmother attack
 		public function titSmotherWait():void
 		{
+			clearOutput();
+			
 			if (combatDebug) trace("Waiting during TitSmother");
 			
 			outputText("With your face crushed into the Oni's cleavage, you can't help but wonder; why bother resisting?  She's just so <i>strong</i>, and her breasts feel so lushious against your [face]...");
