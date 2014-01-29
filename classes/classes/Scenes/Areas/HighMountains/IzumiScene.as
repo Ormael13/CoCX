@@ -25,7 +25,7 @@ package classes.Scenes.Areas.HighMountains
 		// Return a height-based nickname for the player
 		public function heightDesc():String
 		{
-			if (rand(4) == 0) return "kid";
+			if (rand(4) != 0) return "kid";
 			else
 			{
 				if (player.tallness < 60) return "pint-size";
@@ -35,13 +35,19 @@ package classes.Scenes.Areas.HighMountains
 				else return player.short;
 			}
 		}
+		
+		public function HeightDesc():String
+		{
+			var str:String = this.heightDesc();
+			return str.charAt(0).toUpperCase() + str.substr(1);
+		}
 
 		// Bundle of logic to determine if a player might "act" like a minotaur, based off of a couple of related statusAffects
 		public function actsLikeACow():Boolean
 		{
-			if (kGAMECLASS.player.hasStatusAffect("heat")) return true;
-			if (kGAMECLASS.player.hasStatusAffect("rut")) return true;
-			if (kGAMECLASS.player.hasStatusAffect("dysfunction")) return true;
+			if (player.hasStatusAffect("heat")) return true;
+			if (player.hasStatusAffect("rut")) return true;
+			if (player.hasStatusAffect("dysfunction")) return true;
 			return false;
 		}
 		

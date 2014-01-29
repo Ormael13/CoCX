@@ -40,6 +40,7 @@ package classes.Scenes.Areas.HighMountains
 		// Override won/lost calls
 		override public function defeated(hpVictory:Boolean):void
 		{
+			this.cleanup();
 			game.highMountains.izumiScenes.touchThatFluffyHorn();
 		}
 		
@@ -116,13 +117,13 @@ package classes.Scenes.Areas.HighMountains
 			}
 			else
 			{
-				//var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
+				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
 				var actions:Array = [chokeSlam];
 				
 				if (player.hasStatusAffect("Groundpound") <= -1)
 				{
-					//actions.push(groundPound);
-					//actions.push(groundPound);
+					actions.push(groundPound);
+					actions.push(groundPound);
 				}
 				
 				actions[rand(actions.length)]();
