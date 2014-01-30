@@ -518,23 +518,23 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	//[SEX OPTIONS GO HURRRR]
 	//Snuggle, put cock in cocked PC ass, ride PC cock vaginally, Fuck Girlvag with yer dick, maybe a sixtynine?
 	menu();
-	addButton(0,"Cuddle",snuggleWithUrta);
+	addButton(0,"Cuddle",snuggleWithUrta, truth);
 	//Put Urta dick in girl PC's vag(C)*
 	if(player2.hasVagina()) 
-		addButton(1,"FuckHerVag",putUrtasWangInPCsCunt);
+		addButton(1,"FuckHerVag",putUrtasWangInPCsCunt, truth);
 	//Put a PC dick in Urta's vag(C)* 
 	if(player2.cockThatFits(urta.urtaCapacity()) >= 0)
-		addButton(2,"Ride Dick",putAPCDickInUrtaCoochies);
+		addButton(2,"Ride Dick",putAPCDickInUrtaCoochies, truth);
 	//Put Urta dick in the PC's asshole [Cocked PCs](C)*
 	if(player2.hasCock())
-		addButton(3,"Fuck Ass",urtaPutsHerDickInPCsWithDicks);
+		addButton(3,"Fuck Ass",urtaPutsHerDickInPCsWithDicks, truth);
 	//PC blows Urta(C)*
-	addButton(4,"Get BJ",pcBlowsUrtasDong);	
+	addButton(4,"Get BJ",pcBlowsUrtasDong, truth);	
 }
 
 //Last Rendezvous with PC - Sex(C)*
 //Put Urta dick in the PC's asshole [Cocked PCs](C)*
-private function urtaPutsHerDickInPCsWithDicks():void {
+private function urtaPutsHerDickInPCsWithDicks(truth:Boolean):void {
 	clearOutput();
 	outputText("You push " + player2.short + " down onto the ground, glad that " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " gear right now.  Unfortunately, you've still got to get out of yours, an action made all the more difficult by the heat welling up in your groin.  Your rebellious cock is already half-stiff, lifting the hem of your armored skirt away from your thighs.  Fingers scrabbling, you struggle with your chestpiece's bindings.  Your nipples stiffen, scraping against the inside of it while you fight to remove it.  You straddle " + player2.short + "'s waist to hold " + player2.mf("him","her") + " down while you work the bothersome, restraining material free, practically grinding your semi-rigid dick against " + player2.mf("his","hers") + " in excitement.  " + player2.mf("His","Her") + " hands begin aiding you in your task, allowing your tightly compressed breasts to finally, happily breathe.   They jiggle as they flop free, and to your delight, " + player2.short + "'s eyes lock on them.");
 	outputText("\n\nGrabbing hold of " + player2.mf("his","her") + " head, you pull " + player2.short + "'s lips to one of your puckered nipples.  " + player2.mf("He","She") + " swallows it immediately, grabbing hold of your tits to squeeze and fondle them, openly enjoying the fruits of your womanly shape.  Tingles of electric enjoyment fire from your unrestrained areola when " + player2.mf("he","she") + " squeezes down on the other with " + player2.mf("his","her") + " fingers, expertly twisting the little nub around to give you the maximum pleasure.  In no time flat, you're humping " + player2.mf("his","her") + " " + player2.cockDescript(player2.biggestCockIndex()) + " openly, letting " + player2.mf("him","her") + " guide your motions with deft, controlling touches to your onyx nipples.  Your pre-cum bubbles out unhindered, the thick gobs swaying and splattering on " + player2.mf("his","her") + " belly and rigid tool, quickly lubricating the phallic embrace into a sticky, hot mess.");
@@ -588,11 +588,11 @@ private function urtaPutsHerDickInPCsWithDicks():void {
 	dynStats("sen", -2, "lus=", 0);
 	menu();
 	//To morning after fuck departure
-	addButton(0,"Next",morningAfterCampVisitEmbark);
+	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 
 //PC blows Urta(C)*
-private function pcBlowsUrtasDong():void {
+private function pcBlowsUrtasDong(truth:Boolean):void {
 	clearOutput();
 	outputText("You ogle your lover's naked form, admiring " + player2.mf("his","her") + " beauty.  When your eyes fixate upon " + player2.mf("his","her") + " sweet kissing lips... mmm, you'd really like to feel those wrapped around your aching dick...  Mustering your courage, you embrace your partner, and gently but insistently push " + player2.mf("him","her") + " to the ground.  Leaning over to " + player2.mf("his","her") + " ear, you say, in a stage whisper, \"<i>You have such a pretty mouth, and my cock's aching so bad... will you kiss it better?</i>\"  You blush, as much from the corniness of your line as from embarrassment at what you're asking " + player2.mf("him","her") + " to do.");
 	
@@ -627,11 +627,11 @@ private function pcBlowsUrtasDong():void {
 	outputText("\n\nYou yawn loudly, feeling tired now.  You promptly make yourself comfortable lying on " + player2.short + "'s belly, and kiss " + player2.mf("him","her") + " on the nose.  \"<i>Night, " + player2.short + "; sleep well.<i>\"  You say, then close your eyes and allow yourself to drift off to sleep, happily using " + player2.mf("him","her") + " as a full-body pillow.");
 	dynStats("sen", -2, "lus=", 0);
 	menu();
-	addButton(0,"Next",morningAfterCampVisitEmbark);
+	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 
 //Put a PC dick in Urta's vag(C)*
-private function putAPCDickInUrtaCoochies():void {
+private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 	clearOutput();
 	var x:int = player2.cockThatFits(urta.urtaCapacity());
 	outputText("You push " + player2.short + " down onto the ground, glad that " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " gear right now.  Unfortunately, you've still got to get out of yours, an action made all that more difficult by the heat welling up in your groin.  Your rebellious cock is already half-stiff, lifting the hem of your armored skirt away from your thighs.  Fingers scrabbling, you struggle with your chestpiece's bindings.  Your nipples stiffen, scraping against the inside of it while you fight with to remove it.  You straddle " + player2.short + "'s waist to hold " + player2.mf("him","her") + " down while you work the bothersome, restraining material free, practically grinding your semi-rigid dick against " + player2.mf("his","hers") + " in excitement.  " + player2.mf("His","Her") + " hands begin aiding you in your task, allowing your tightly compressed breasts to finally, happily breathe.");
@@ -716,11 +716,11 @@ private function putAPCDickInUrtaCoochies():void {
 	}
 	dynStats("sen", -2, "lus=", 0);
 	menu();
-	addButton(0,"Next",morningAfterCampVisitEmbark);
+	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 
 //Put Urta dick in girl PC's vag(C)*
-private function putUrtasWangInPCsCunt():void {
+private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	clearOutput();
 	outputText("You push " + player2.short + " down on her back, a task made all the more difficult by your growing arousal.  Thankfully, she's not wearing her usual " + player2.armorName + ".  Instead, her form is bared to your probing fingertips, pliant and exposed.  You cannot help but dip a finger into her moist delta, parting the oozing veil to enjoy the view of her ");
 	if(player.vaginaType() != 5) outputText("pink, ");
@@ -802,11 +802,11 @@ private function putUrtasWangInPCsCunt():void {
 	}
 	dynStats("sen", -2, "lus=", 0);
 	menu();
-	addButton(0,"Next",morningAfterCampVisitEmbark);
+	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 
 //Snuggle(C)*
-private function snuggleWithUrta():void {
+private function snuggleWithUrta(truth:Boolean):void {
 	clearOutput();
 	outputText("You think it over and decide that, for once, you'd like to focus more on love and less on lust.  \"<i>Well... I'd really just like to have a snuggle with you, " + player2.short + " - if that's alright?</i>\"  You ask quietly, tail instinctively wagging in an effort to be endearing.  Your lover nods " + player2.mf("his","her") + " head and answers in the positive, opening " + player2.mf("his","her") + " arms for further effect.  You waste no time and eagerly sidle into " + player2.mf("his","her") + " arms.");
 	//[If PC Centaur or Drider:
@@ -837,16 +837,33 @@ private function snuggleWithUrta():void {
 	outputText("\n\nTo your own surprise, you find your eyes growing heavier and heavier.  But you don't want to let your " + player2.short + " go yet... besides, may as well start searching from here in the morning, right?  So, you and " + player2.short + " carefully lay yourselves back down and quietly drift off to sleep, still holding fast to each other as you do.  The last sounds you hear for the night are your lover breathing, accompanied by the beating of " + player2.mf("his","her") + " heart, and you idly hope that " + player2.mf("he","she") + " can hear the same sounds from you...");
 	dynStats("lus", 14);
 	menu();
-	addButton(0,"Next",morningAfterCampVisitEmbark);
+	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 //Embark(C)*
-private function morningAfterCampVisitEmbark():void {
+private function morningAfterCampVisitEmbark(truth:Boolean):void {
 	clearOutput();
 	model.time.days++;
 	statScreenRefresh();
-	outputText("Sadly, morning comes, and your time with " + player2.short + " comes to an end.  You push " + player2.mf("his","her") + " shoulder gently to rouse " + player2.mf("him","her") + ", smiling at " + player2.mf("him","her") + " when " + player2.mf("he","she") + " wakes.  You kiss " + player2.mf("him","her") + " on the lips before rolling out from under the blanket.  The two of you eat a quiet breakfast together, simply enjoying each other's company.  " + player2.mf("He","She") + " asks again about coming with you, but you tell " + player2.mf("him","her") + " Gul's instructions were quite specific.  You'll need to tackle this alone.  The rest of breakfast passes in uncomfortable silence, broken when you rise to leave.");
-	outputText("\n\nYou embrace " + player2.short + ", kissing " + player2.mf("him","her") + " on the lips before you promise, \"<i>I'll come back to you, stronger and ready for kids, I promise.</i>\"");
-	outputText("\n\n" + player2.short + " nods, and you leave " + player2.mf("him","her") + " behind.  You keep glancing over your shoulder as you leave, praying silently to any god who'll listen that you return safely to your lover.");
+	outputText("Sadly, morning comes, and your time with " + player2.short + " comes to an end.  You push " + player2.mf("his", "her") + " shoulder gently to rouse " + player2.mf("him", "her") + ", smiling at " + player2.mf("him", "her") + " when " + player2.mf("he", "she") + " wakes.  You kiss " + player2.mf("him", "her") + " on the lips before rolling out from under the blanket.  The two of you eat a quiet breakfast together, simply enjoying each other's company.  ");
+	
+	if (truth)
+	{
+		outputText("" + player2.mf("He", "She") + " asks again about coming with you, but you tell " + player2.mf("him", "her") + " Gul's instructions were quite specific.  You'll need to tackle this alone.  The rest of breakfast passes in uncomfortable silence, broken when you rise to leave.");
+	}
+	
+	outputText("\n\nYou embrace " + player2.short + ", kissing " + player2.mf("him", "her") + " on the lips");
+	
+	if (truth)
+	{
+		outputText(" before you promise, \"< i > I'll come back to you, stronger and ready for kids, I promise.</i>\"\n\n");
+	}
+	else 
+	{
+		outputText(".  ");
+	}
+	
+	outputText(player2.short + " nods, and you leave " + player2.mf("him","her") + " behind.  You keep glancing over your shoulder as you leave, praying silently to any god who'll listen that you return safely to your lover.");
+	
 	menu();
 	addButton(0,"Next",runIntoAGoblin,true);
 }

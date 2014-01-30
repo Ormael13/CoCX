@@ -1931,6 +1931,7 @@ private function oralFiestyUberExplosionUrta():void {
 }
 
 internal function urtaHomeLuvLuvinsMenu():void {
+	clearOutput();
 	urtaSprite();
 	outputText("She caresses a nipple and visibly shivers as she says, \"<i>You teased me the whole way here, and I'm COMPLETELY ready for you, any way you could want.</i>\"\n\n", false);
 	outputText("She blushes and continues, \"<i>So, what'll it be, lover?  A little injection of fox-cream or something else?</i>\"", false);
