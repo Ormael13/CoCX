@@ -24,7 +24,7 @@
 			if(temp2 == 3) color = "white";
 			if(temp2 == 4) color = "black";
 			//Throw offensive potions at the player
-			if(color != "blue") {
+			if (color != "blue") {
 				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
 			}
 			//Drink blue pots
@@ -48,7 +48,7 @@
 			}
 			//Green poison
 			if(color == "green") {
-				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
+				outputText("\nThe greenish fluids splashes over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
 				if(player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison",0,0,0,0);
 			}
 			//sticky flee prevention
@@ -112,13 +112,11 @@
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			trace("defeated goblin assassin");
 			game.goblinAssassinScene.gobboAssassinRapeIntro();
 			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			trace("beat by goblin assassin")
 			if (player.gender == 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"", false);
 				game.cleanupAfterCombat();
@@ -129,7 +127,6 @@
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
 		{
-			trace("Goblin Assassin Constructor!");
 			init01Names("the ", "goblin assassin", "goblinassassin", "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.");
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 90);
 			init03BreastRows("E");
@@ -147,7 +144,7 @@
 
 		override protected function performCombatAction():void
 		{
-			var actions:Array = [eOneAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
+			var actions:Array = [eAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
 			actions[rand(actions.length)]();
 		}
 	}
