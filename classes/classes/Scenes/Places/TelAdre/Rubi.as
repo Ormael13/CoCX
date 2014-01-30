@@ -3138,91 +3138,128 @@ private function pickAnItemToFeedRubi():void {
 	rubiSprite();
 	var closet:Array = [];
 	var gifts:Array = [];
-	
 	var buttonNames:Array = [];
-	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
+	
+	if (flags[kFLAGS.RUBI_SUITCLOTHES] == 1) 
+	{
 		closet[closet.length] = "Suitclothes";
-		buttonNames[buttonNames.length] = "Suit";
 	}
-	if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) {
+	else
+	{
+		gifts.push("Suitclothes");
+	}
+	
+	if (flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) 
+	{
 		closet[closet.length] = "Rubber Fetish Clothes";
-		buttonNames[buttonNames.length] = "Rubber";
 	}
-	if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) {
+	else
+	{
+		gifts.push("Rubber Fetish Clothes");
+	}
+	
+	if (flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) 
+	{
 		closet[closet.length] = "A Green Adventurer's Outfit";
-		buttonNames[buttonNames.length] = "Green Outfit";
 	}
-	if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) {
+	else
+	{
+		gifts.push("A Green Adventurer's Outfit");
+	}
+	
+	if (flags[kFLAGS.RUBI_TUBE_TOP] == 1) 
+	{
 		closet[closet.length] = "A Tube Top";
-		buttonNames[buttonNames.length] = "Tube Top";
 	}
-	if(flags[kFLAGS.RUBI_BODYSUIT] == 1) {
+	else
+	{
+		gifts.push("A Tube Top");
+	}
+	
+	if (flags[kFLAGS.RUBI_BODYSUIT] == 1) 
+	{
 		closet[closet.length] = "A Sheer Bodysuit";
-		buttonNames[buttonNames.length] = "Bodysuit";
 	}
-	if(flags[kFLAGS.RUBI_LONGDRESS] == 1) {
+	else
+	{
+		gifts.push("A Sheer Bodysuit");
+	}
+	
+	if (flags[kFLAGS.RUBI_LONGDRESS] == 1) 
+	{
 		// trace("PRE-CRASH");
 		closet[closet.length] = "A Long Dress";
-		buttonNames[buttonNames.length] = "Long Dress";
 	}
-	if(flags[kFLAGS.RUBI_TIGHT_PANTS] == 1) {
+	else
+	{
+		gifts.push("A Long Dress");
+	}
+	
+	if (flags[kFLAGS.RUBI_TIGHT_PANTS] == 1) 
+	{
 		closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-		buttonNames[buttonNames.length] = "DashingOutfit";
 	}
-	if(flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1) {
+	else
+	{
+		gifts.push("A Dashing Outfit With Tight Leather Pants");
+	}
+	
+	if (flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1) 
+	{
 		closet[closet.length] = "Nurse's Clothes";
-		buttonNames[buttonNames.length] = "Nurse'sClothes";
 	}
+	else
+	{
+		gifts.push("Nurse's Clothes");
+	}
+	
 	//(Slutty Swimwear (Normal))
-	if(flags[kFLAGS.RUBI_SWIMWEAR] == 1) {
+	if (flags[kFLAGS.RUBI_SWIMWEAR] == 1) 
+	{
 		closet[closet.length] = "Slutty Swimwear";
-		buttonNames[buttonNames.length] = "Swimwear";
 	}
-	if(flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1) {
+	else
+	{
+		gifts.push("Slutty Swimwear");
+	}
+	
+	if (flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1)
+	{
 		closet[closet.length] = "A Bimbo Minidress";
-		buttonNames[buttonNames.length] = "Bimbo Dress";
 	}
-	if(flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1) {
+	else
+	{
+		gifts.push("A Bimbo Minidress");
+	}
+	
+	if (flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1) 
+	{
 		closet[closet.length] = "Bondage Straps";
-		buttonNames[buttonNames.length] = "Bondage Straps";
 	}
-	if(flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1) {
+	else
+	{
+		gifts.push("Bondage Straps");
+	}
+	
+	if (flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1) 
+	{
 		closet[closet.length] = "An Inquisitor's Corset";
-		buttonNames[buttonNames.length] = "Corset";
 	}
+	else
+	{
+		gifts.push("An Iquisitor's Corset");
+	}
+	
 	//RIsque waitress uniform
-	if(flags[kFLAGS.RUBI_AFFECTION] >= 100) {
+	if (flags[kFLAGS.RUBI_AFFECTION] >= 100) 
+	{
 		closet[closet.length] = "A Risque Waitress's Uniform";
-		buttonNames[buttonNames.length] = "RisqueUniform";
+	}
+	else
+	{
+		gifts.push("A Risque Waitress's Uniform");
 	}
 	
-	
-	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) closet[closet.length] = "Suitclothes";
-	else gifts[gifts.length] = "Suitclothes";
-	if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) closet[closet.length] = "Rubber Fetish Clothes";
-	else gifts[gifts.length] = "Rubber Fetish Clothes";
-	if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) closet[closet.length] = "A Green Adventurer's Outfit";
-	else gifts[gifts.length] = "Green Adventurer's Outfit";
-	if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) closet[closet.length] = "A Tube Top";
-	else gifts[gifts.length] = "A Tube Top";
-	if(flags[kFLAGS.RUBI_BODYSUIT] == 1) closet[closet.length] = "A Sheer Bodysuit";
-	else gifts[gifts.length] = "A Sheer Bodysuit";
-	if(flags[kFLAGS.RUBI_LONGDRESS] == 1) closet[closet.length] = "A Long Dress";
-	else gifts[gifts.length] = "A Long Dress";
-	if(flags[kFLAGS.RUBI_TIGHT_PANTS] == 1) closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-	else gifts[gifts.length] = "A Dashing Outfit With Tight Leather Pants";
-	if(flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1) closet[closet.length] = "Nurse's Clothes";
-	else gifts[gifts.length] = "Nurse's Clothes";
-	//(Slutty Swimwear (Normal))
-	if(flags[kFLAGS.RUBI_SWIMWEAR] == 1) closet[closet.length] = "Slutty Swimwear";
-	else gifts[gifts.length] = "Slutty Swimwear";
-	if(flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1) closet[closet.length] = "A Bimbo Minidress";
-	if(flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1) closet[closet.length] = "Bondage Straps";
-	else gifts[gifts.length] = "Bondage Straps";
-	if(flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1) closet[closet.length] = "An Inquisitor's Corset";
-	else gifts[gifts.length] = "An Inquisitor's Corset";
-	if(flags[kFLAGS.RUBI_AFFECTION] >= 100) closet[closet.length] = "A Risque Waitress's Uniform";
-	else gifts[gifts.length] = "A Risque Waitress's Uniform";
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet:</b>\n");
 		temp = 0;
@@ -3232,6 +3269,7 @@ private function pickAnItemToFeedRubi():void {
 		}
 		outputText("\n");
 	}
+	
 	if(gifts.length > 0) {
 		outputText("After a quick glance around Rubi's things, you bet [rubi ey] could really use... " + gifts[rand(gifts.length)] + ".\n\n");
 	}
@@ -3240,6 +3278,7 @@ private function pickAnItemToFeedRubi():void {
 		if(silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
 		outputText("\n\n");
 	}
+	
 	if(!rubiBimbo() && !rubiIncubus() && rubiAffection() >= 100) {
 		outputText("You could give Rubi some incubi draft to make [rubi em] a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn [rubi em] into a smoking hot, female sex-bomb.\n\n");
 	}
