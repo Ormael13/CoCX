@@ -588,6 +588,11 @@ package classes
 			return minoCounter;
 		}
 		
+		public function get minotaurScore():Number
+		{
+			return this.minoScore();
+		}
+		
 		//Determine cow rating
 		public function cowScore():Number
 		{

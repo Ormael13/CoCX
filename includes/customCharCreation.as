@@ -2,6 +2,97 @@
 public function customPCSetup():void {
 	//Set as having history perk
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
+	
+	if (player.short == "TestChar")
+	{
+		player.XP = 500000;
+		player.createBreastRow();
+		player.createVagina();
+		player.breastRows[0].breastRating = 5;
+		player.clitLength = 0.5;
+		player.fertility = 50;
+		player.gender = 2;
+		player.hipRating = 6;
+		player.buttRating = 6;
+		player.str = 100;
+		player.tou = 100;
+		player.spe = 100;
+		player.inte = 100;
+		player.sens = 100;
+		player.lib = 100;
+		player.cor = 67;
+		notes = "Cheater!";
+		player.HP = maxHP();
+		player.hairLength = 10;
+		player.skinType = SKIN_TYPE_PLAIN;
+		player.faceType = FACE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.tongueType = TONUGE_HUMAN;
+		player.femininity = 90;
+		player.beardLength = 0;
+		player.beardStyle = 0;
+		player.tone = 0;
+		player.thickness = 100;
+		player.skinDesc = "skin";
+		player.skinTone = "pale";
+		player.hairColor = "black";
+		player.balls = 2;
+		player.cumMultiplier = 1;
+		player.ballSize = 3;
+		player.hoursSinceCum = 0;
+		player.ass.analLooseness = 0;
+		player.ass.analWetness = 0;
+		player.ass.fullness = 0;
+		player.fertility = 50;
+		player.fatigue = 0;
+		player.horns = 0;
+		player.hornType = HORNS_NONE;
+		player.tallness = 109;
+		player.tailVenom = 0;
+		player.tailRecharge = 0;
+		player.wingType = WING_TYPE_NONE;
+		player.wingDesc = "non-existant";
+		player.earType = EARS_HUMAN;
+		player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.armType = ARM_TYPE_HUMAN;
+		player.hairLength = 69.2;
+		player.hairType = 2;
+		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
+		player.createStatusAffect("Kelt",100,0,0,0);		
+		player.createKeyItem("Bow",0,0,0,0);
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		inventory.createStorage();
+		player.createKeyItem("Camp - Chest",0,0,0,0);
+		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
+		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
+		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
+		player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
+		player.createPerk("History: Religious",0,0,0,0,"");
+		player.createPerk("Dragonfire",0,0,0,0,"You're a cheater, cheater.");
+		player.createPerk("Brood Mother",0,0,0,0,"Pregnancy moves twice as fast as a normal woman's.");
+		player.createPerk("Fertile",1.5,0,0,0,"CHEATER JACKASS JERKFACE");
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
+		player.createPerk("Tough", 0.25, 0, 0, 0,"Gain toughness 25% faster.");
+		player.createPerk("Strong", 0.25, 0, 0, 0,"Gain strength 25% faster.");
+		player.createPerk("Fast", 0.25, 0, 0, 0,"Gain speed 25% faster.");
+		player.createPerk("Smart", 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
+		player.createPerk("History: Scholar", 0, 0, 0, 0,"You cheated.");
+		player.createPerk("Strong Back",0,0,0,0,"Cheating Nerd!");
+		player.itemSlot4.unlocked = true;
+		player.itemSlot5.unlocked = true;
+		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0,"Cheating Nerd!");
+		player.createPerk("History: Slacker",0,0,0,0,"Cheating Nerd!");
+		player.gems += 3000;
+		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
+	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
 		player.createVagina();

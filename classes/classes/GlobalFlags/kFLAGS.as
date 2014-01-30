@@ -1041,12 +1041,12 @@ public static const UMA_TIMES_SUCKED_YOU:int	                                   
 public static const TIMES_RUT_FUCKED_URTAS_CUNT:int                                 = 1033;
 public static const TIMES_KIHA_ANALED:int                                           = 1034;
 public static const TIMES_ENCOUNTERED_GOBLIN_ASSASSIN:int                           = 1035;
-public static const UNKNOWN_FLAG_NUMBER_01036:int                                   = 1036;
-public static const UNKNOWN_FLAG_NUMBER_01037:int                                   = 1037;
-public static const UNKNOWN_FLAG_NUMBER_01038:int                                   = 1038;
-public static const UNKNOWN_FLAG_NUMBER_01039:int                                   = 1039;
-public static const UNKNOWN_FLAG_NUMBER_01040:int                                   = 1040;
-public static const UNKNOWN_FLAG_NUMBER_01041:int                                   = 1041;
+public static const IZUMI_MET:int                                  					= 1036; // Player has had the introduction/meeting scene with Izumi
+public static const IZUMI_LAST_ENCOUNTER:int                                   		= 1037; // Outcome of the last enouncter with Izumi, 0 = Unset, 1 = PC Lost in a fight, 2 = PC ran away, 3 = PC Won in a fight
+public static const IZUMI_TIMES_SUBMITTED:int                                  		= 1038; // Times the player has voluntarily submitted to Izumi's demands
+public static const IZUMI_TIMES_GRABBED_THE_HORN:int                                = 1039; // Times the player has beaten Izumi in a fight, and touched her horn.
+public static const IZUMI_TIMES_LOST_FIGHT:int                                   	= 1040; // Times the player has been beaten by Izumi in a fight
+public static const IZUMI_SEEN_PC_GENDER:int                                   		= 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const UNKNOWN_FLAG_NUMBER_01042:int                                   = 1042;
 public static const UNKNOWN_FLAG_NUMBER_01043:int                                   = 1043;
 public static const UNKNOWN_FLAG_NUMBER_01044:int                                   = 1044;

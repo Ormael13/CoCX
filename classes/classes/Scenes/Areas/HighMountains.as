@@ -18,14 +18,22 @@ package classes.Scenes.Areas
 		public var harpyScene:HarpyScene = new HarpyScene();
 		public var minervaScene:MinervaScene = new MinervaScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
+		public var izumiScenes:IzumiScene = new IzumiScene();
+		
 		public function HighMountains()
 		{
 		}
+		
 		//Explore High Mountain
 		public function exploreHighMountain():void
 		{
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(1);
+			
+			// Hardwire Izumi Encounters during testing
+			this.izumiScenes.encounter();
+			return;
+			
 			var chooser:Number = rand(3);
 			//Boosts mino and hellhound rates!
 			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {

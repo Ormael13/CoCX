@@ -182,8 +182,6 @@
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
 
 		// Other scenes
-		[Scene]
-		public var testContent:TestContent = new TestContent();
 
 		include "../../includes/april_fools.as";
 

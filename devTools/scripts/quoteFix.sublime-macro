@@ -1,5 +1,4 @@
 [
-
 	{
 		"args":
 		{
@@ -11,14 +10,7 @@
 	{
 		"args":
 		{
-			"characters": "outputText(\""
-		},
-		"command": "insert"
-	},
-	{
-		"args":
-		{
-			"extend": false,
+			"extend": true,
 			"to": "hardeol"
 		},
 		"command": "move_to"
@@ -26,8 +18,12 @@
 	{
 		"args":
 		{
-			"characters": "\\n\\n\");"
+			"replacements":
+			[
+				"fix_fancyquotes_open",
+				"fix_fancyquotes_close"
+			]
 		},
-		"command": "insert"
+		"command": "reg_replace"
 	}
 ]

@@ -793,6 +793,7 @@ public function customName(arg:String):Boolean {
 		case "Lukaz":
 		case "Leah":
 		case "Vahdunbrii":
+		case "TestChar":
 			return true;
 		default:
 			return false;
@@ -819,6 +820,7 @@ public function specialName(arg:String):Boolean {
 		case "Lukaz":
 		case "Leah":
 		case "Vahdunbrii":
+		case "TestChar":
 			return true;
 		default:
 			return false;

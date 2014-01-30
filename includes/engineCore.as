@@ -1738,13 +1738,15 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	player.tou+=toug;
 	player.spe+=spee;
 	player.inte+=intel;
-	player.lib+=libi;
+	player.lib += libi;
+	
 	if(player.sens > 50 && sens > 0) sens/=2;
 	if(player.sens > 75 && sens > 0) sens/=2;
 	if(player.sens > 90 && sens > 0) sens/=2;
 	if(player.sens > 50 && sens < 0) sens*=2;
 	if(player.sens > 75 && sens < 0) sens*=2;
 	if(player.sens > 90 && sens < 0) sens*=2;
+	
 	player.sens+=sens;
 	player.lust+=lust2;
 	player.cor+=corr;
