@@ -16,7 +16,7 @@ package classes.Scenes.Monsters
 		{
 			var damage:int = int((str + weaponAttack + 20) - rand(player.tou) - player.armorDef);
 			outputText("The demonic creature slashes a clawed hand towards your stomach,");
-			if (combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText(" but you handily avoid it.");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" but you handily avoid it.");
 			else if (damage <= 0) outputText(" but the attack proves ineffectual.");
 			else {
 				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
