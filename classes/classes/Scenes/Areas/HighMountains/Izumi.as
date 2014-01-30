@@ -118,7 +118,6 @@ package classes.Scenes.Areas.HighMountains
 			else
 			{
 				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
-				var actions:Array = [chokeSlam];
 				
 				if (player.hasStatusAffect("Groundpound") <= -1)
 				{

@@ -150,6 +150,8 @@ package classes.Scenes.Areas.HighMountains
 			// in the parsed strings == noplz :(
 
 			// PC is > 9’ Tall
+			trace(player.tallness);
+			
 			if (player.tallness >= 108)
 			{
 				// High strength variant

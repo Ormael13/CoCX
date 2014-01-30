@@ -6,6 +6,7 @@ public function customPCSetup():void {
 	if (player.short == "TestChar")
 	{
 		player.XP = 500000;
+		player.level = 20;
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
@@ -72,24 +73,28 @@ public function customPCSetup():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
-		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
-		player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
-		player.createPerk("History: Religious",0,0,0,0,"");
-		player.createPerk("Dragonfire",0,0,0,0,"You're a cheater, cheater.");
-		player.createPerk("Brood Mother",0,0,0,0,"Pregnancy moves twice as fast as a normal woman's.");
-		player.createPerk("Fertile",1.5,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-		player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
-		player.createPerk("Tough", 0.25, 0, 0, 0,"Gain toughness 25% faster.");
-		player.createPerk("Strong", 0.25, 0, 0, 0,"Gain strength 25% faster.");
-		player.createPerk("Fast", 0.25, 0, 0, 0,"Gain speed 25% faster.");
-		player.createPerk("Smart", 0.25, 0, 0, 0,"Gain intelligence 25% faster.");
-		player.createPerk("History: Scholar", 0, 0, 0, 0,"You cheated.");
-		player.createPerk("Strong Back",0,0,0,0,"Cheating Nerd!");
-		player.itemSlot4.unlocked = true;
-		player.itemSlot5.unlocked = true;
-		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0,"Cheating Nerd!");
-		player.createPerk("History: Slacker",0,0,0,0,"Cheating Nerd!");
+	
+		player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
+		player.createPerk(PerkLib.Berzerker, 			0, 0, 0, 0);
+		player.createPerk(PerkLib.BrutalBlows, 			0, 0, 0, 0);
+		player.createPerk(PerkLib.DoubleAttack, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.ImmovableObject, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.LightningStrikes, 	0, 0, 0, 0);
+		player.createPerk(PerkLib.LungingAttacks, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.Precision, 			0, 0, 0, 0);
+		player.createPerk(PerkLib.Regeneration, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.Regeneration2,		0, 0, 0, 0);
+		player.createPerk(PerkLib.Resistance,			0, 0, 0, 0);
+		player.createPerk(PerkLib.Resolute,				0, 0, 0, 0);
+		player.createPerk(PerkLib.SpeedyRecovery,		0, 0, 0, 0);
+		player.createPerk(PerkLib.Tactician,			0, 0, 0, 0);
+		player.createPerk(PerkLib.Tank,					0, 0, 0, 0);
+		player.createPerk(PerkLib.Tank2,				0, 0, 0, 0);
+		player.createPerk(PerkLib.ThunderousStrikes,	0, 0, 0, 0);
+		player.createPerk(PerkLib.WeaponMastery,		0, 0, 0, 0);
+		player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);		
+		
 		player.gems += 3000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 	}

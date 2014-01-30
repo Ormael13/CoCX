@@ -30,11 +30,7 @@ package classes.Scenes.Areas
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(1);
 			
-			// Hardwire Izumi Encounters during testing
-			this.izumiScenes.encounter();
-			return;
-			
-			var chooser:Number = rand(3);
+			var chooser:Number = rand(4);
 			//Boosts mino and hellhound rates!
 			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
 				chooser = 1;
@@ -88,6 +84,8 @@ package classes.Scenes.Areas
 				spriteSelect(44);
 				return;
 			}
+			trace("Chooser goin for" + chooser);
+			
 			//Generic harpy
 			if (chooser == 0) {
 				outputText("A harpy wings out of the sky and attacks!", true);
@@ -111,6 +109,11 @@ package classes.Scenes.Areas
 					if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) kGAMECLASS.sophieScene.meetSophie();
 					else kGAMECLASS.sophieScene.meetSophieRepeat();
 				}
+			}
+			if (chooser == 3) 
+			{
+				this.izumiScenes.encounter();
+				return;
 			}
 		}
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
