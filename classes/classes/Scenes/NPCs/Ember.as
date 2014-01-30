@@ -23,7 +23,7 @@ package classes.Scenes.NPCs
 		private function emberReactsToLustiness():void {
 			//(if PC uses any attack designed to increase Ember's lust)
 			outputText("The dragon moans, weaving softly from side to side, eyes glazed and tongue lolling at the intimate prospect of sex... but then, to your surprise, " + emberMF("he","she") + " visibly shakes it off and recomposes " + emberMF("him","her") + "self, frowning at you.");
-			outputText("\n\n\"<i>W-what do you think you're doing!?  I'm not some ordinary   Don't think you can seduce me out of a battle!</i>\"");
+			outputText("\n\n\"<i>W-what do you think you're doing!?  I'm not some ordinary monster!  Don't think you can seduce me out of a battle!</i>\"");
 			outputText("\n\nDespite Ember's initial display; you realize that, Ember was still a ways from " + emberMF("his","her") + " peak arousal.  The dragon flies off in a huff, irritated that you would stoop to fighting in a such a manner.");
 			if(player.lib >= 50) outputText("  How boring.");
 			gems = 0;
