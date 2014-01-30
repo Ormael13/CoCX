@@ -61,6 +61,7 @@
 				"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
 				"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },
 				"skinfurscales"				: function(thisPtr:*):* { return thisPtr.player.skinFurScales(); },
+				"teasetext"					: function(thisPtr:*):* { return thisPtr.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript(); },
 				"vag"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 				"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },

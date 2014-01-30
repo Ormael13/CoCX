@@ -2391,8 +2391,16 @@ public function showMonsterLust():void {
 	}
 }
 
-public function tease():void {
-	outputText("", true);
+// This is a bullshit work around to get the parser to do what I want without having to fuck around in it's code.
+public function teaseText():String
+{
+	tease(true);
+	return "";
+}
+
+// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
+public function tease(justText:Boolean = false):void {
+	if (!justText) outputText("", true);
 	//You cant tease a blind guy!
 	if(monster.hasStatusAffect("Blind") >= 0) {
 		outputText("You do your best to tease " + monster.a + monster.short + " with your body.  It doesn't work - you blinded " + monster.pronoun2 + ", remember?\n\n", true);
@@ -3708,18 +3716,18 @@ public function tease():void {
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
 		damage = (damage + rand(bonusDamage))*monster.lustVuln;
-		monster.teased(damage);
+		if (!justText) monster.teased(damage);
 		if(flags[kFLAGS.PC_FETISH] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
-			dynStats("lus", 2 + rand(3));
+			if (!justText) dynStats("lus", 2 + rand(3));
 		}
-		teaseXP(1);
+		if (!justText) teaseXP(1);
 	}
 	//Nuttin honey
 	else {
-		teaseXP(5);
-		outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
+		if (!justText) teaseXP(5);
+		if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);
 }

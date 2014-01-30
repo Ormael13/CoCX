@@ -1279,7 +1279,7 @@ package classes.Scenes.Areas.HighMountains
 				if (monster.lust >= 100) // I assume LustMax is always presumed to be 100?
 				{
 					// Gonna refactor the tease attack code to seperate out the display elements from the action elements, so I we can grab a player-appropriate text blurb
-					outputText("[TeaseText]");
+					outputText("[teaseText]");
 					outputText("Izumi pays your attempts to distract her no mind, focused entirely on her strange ritual. You slink forwards, hoping that something a little more... hands on might do the trick. But ");
 				}
 				else
