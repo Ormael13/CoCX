@@ -48,7 +48,7 @@
 			}
 			//Green poison
 			if(color == "green") {
-				outputText("\nThe greenish fluids splashes over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
+				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
 				if(player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison",0,0,0,0);
 			}
 			//sticky flee prevention

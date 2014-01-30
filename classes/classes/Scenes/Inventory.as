@@ -718,7 +718,7 @@ public function doItems(eventNo:Number):void {
 		//Determine how to continue after using items or running from the items menu.
 		public function itemGoNext():void {
 			itemSubMenu = false;//hope it will work
-			trace("ITEM GO NEXT HAPPENZ BITCHES" + String(itemSwapping));
+			
 			if(gameState == 4) {
 				//If at giacomo go back to him afterwards
 				doNext(2015);
