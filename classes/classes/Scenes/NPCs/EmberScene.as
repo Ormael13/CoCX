@@ -1610,9 +1610,14 @@ package classes.Scenes.NPCs
 					player.wingType = WING_TYPE_DRACONIC_LARGE;
 					player.wingDesc = "large, draconic";
 				}
+				else if (player.wingType == WING_TYPE_SHARK_FIN) {
+					outputText("\n\nA sensation of numbness suddenly fills your fin.  When it does away, it feels... different.  Looking back, you realise that it has been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your shark-like fin has changed into dragon wings.</b>");
+					player.wingType = WING_TYPE_DRACONIC_SMALL;
+					player.wingDesc = "small, draconic";
+				}
 				//(If other wings present)
 				else {
-					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different. Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
+					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
 					player.wingDesc = "small, draconic";
 				}
