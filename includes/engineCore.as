@@ -526,8 +526,11 @@ public function getButtonToolTipText( buttonText :String ) :String
 	buttonText = buttonText || '';
 
 	//Items
-    var itype:ItemType = ItemType.lookupItem(buttonText);
-    if (itype != null) toolTipText = itype.description;
+	if (/^....... x\d+$/.test(buttonText)){
+		buttonText = buttonText.substring(0,7);
+    	var itype:ItemType = ItemType.lookupItem(buttonText);
+    	if (itype != null) toolTipText = itype.description;
+	}
 	if(buttonText.indexOf("Demon Whip") != -1) {
 		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
 	}
