@@ -18,12 +18,12 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		{
 			var fem:Number = _femininity;
 			var statIndex:int = this.findStatusAffect(StatusAffects.UmasMassage);
-			
+
 			if (statIndex >= 0)
 			{
-				if (this.statusAffects[statIndex].value1 == UmasShop.MASSAGE_MODELLING_BONUS)
+				if (this.statusAffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
 				{
-					fem += this.statusAffects[statIndex].value2;
+					fem += this.statusAffect(statIndex).value2;
 				}
 			}
 			

@@ -264,8 +264,8 @@
 		text1 = "North";
 		choice1 = 11006;
 		if(player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) {
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.TakenLactaid)].value1 > 0) {
-				outputText("There is a crate with " + num2Text(player.statusAffects[player.findStatusAffect(StatusAffects.TakenLactaid)].value1) + " bottles of something called 'Lactaid' inside.\n\n", false);
+			if(player.statusAffectv1(StatusAffects.TakenLactaid) > 0) {
+				outputText("There is a crate with " + num2Text(player.statusAffectv1(StatusAffects.TakenLactaid)) + " bottles of something called 'Lactaid' inside.\n\n", false);
 				text3 = "Lactaid";
 				choice3 = 11062;
 			}
@@ -276,8 +276,8 @@
 			choice3 = 11062;
 		}
 		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) {
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1 > 0) {
-				outputText("There is a crate with " + num2Text(player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1) + " bottles of something called 'Gro+' inside.\n\n", false);
+			if(player.statusAffectv1(StatusAffects.TakenGroPlus) > 0) {
+				outputText("There is a crate with " + num2Text(player.statusAffectv1(StatusAffects.TakenGroPlus)) + " bottles of something called 'Gro+' inside.\n\n", false);
 				text4 = "GroPlus";
 				choice4 = 11061;
 			}

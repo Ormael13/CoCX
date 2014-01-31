@@ -68,9 +68,9 @@ import classes.StatusAffects;
 			// Handle chokeslam mechanics
 			if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0)
 			{
-				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusAffects[player.findStatusAffect(StatusAffects.Chokeslam)].value1);
+				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusAffectv1(StatusAffects.Chokeslam));
 				
-				player.statusAffects[player.findStatusAffect(StatusAffects.Chokeslam)].value1 -= 1;
+				player.addStatusValue(StatusAffects.Chokeslam,1,-1);
 				
 				if (player.statusAffectv1(StatusAffects.Chokeslam) <= 0)
 				{
@@ -85,7 +85,7 @@ import classes.StatusAffects;
 			// Handle groundpound
 			if (player.findStatusAffect(StatusAffects.Groundpound) >= 0)
 			{
-				player.statusAffects[player.findStatusAffect(StatusAffects.Groundpound)].value1 -= 1;
+				player.addStatusValue(StatusAffects.Groundpound,1,-1);
 				
 				if (player.statusAffectv1(StatusAffects.Groundpound) <= 0)
 				{

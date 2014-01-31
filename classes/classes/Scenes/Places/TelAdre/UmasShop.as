@@ -534,9 +534,9 @@ import classes.StatusAffects;
 			
 			if (statIndex >= 0)
 			{
-				player.statusAffects[statIndex].value3 -= hours;
+				player.statusAffect(statIndex).value3 -= hours;
 				
-				if (player.statusAffects[statIndex].value3 <= 0)
+				if (player.statusAffect(statIndex).value3 <= 0)
 				{
 					bonusExpired();
 				}

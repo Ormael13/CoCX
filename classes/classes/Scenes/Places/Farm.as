@@ -36,7 +36,7 @@ public function farmExploreEncounter():void {
 		else {
 			outputText("You stumble across Whitney's farm again.  The anthropomorphic canine woman gives you a friendly wave and tosses you another Canine pepper.\n\n", true);
 			player.addStatusValue(StatusAffects.MetWhitney,1,1);
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.MetWhitney)].value1 == 2) outputText("<b>You've been to the farm enough to easily find it.  You can return by selecting it from the places menu (and will no longer encounter it during random lake exploration)</b>.\n\n", false);
+			if(player.statusAffectv1(StatusAffects.MetWhitney) == 2) outputText("<b>You've been to the farm enough to easily find it.  You can return by selecting it from the places menu (and will no longer encounter it during random lake exploration)</b>.\n\n", false);
 		}
 		menuLoc = 2;
 		inventory.takeItem(consumables.CANINEP);

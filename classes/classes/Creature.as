@@ -642,7 +642,7 @@ import classes.PerkType;
 		{
 			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
 			statusAffects.push(newStatusAffect);
-			//trace("createStatusAffect -> "+statusAffects.join(","));
+			trace("createStatusAffect -> "+statusAffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
@@ -652,13 +652,14 @@ import classes.PerkType;
 			var counter:Number = findStatusAffect(stype);
 			if (counter < 0) return;
 			statusAffects.splice(counter, 1);
+			trace("removeStatusAffect -> "+statusAffects.join(","));
 		}
 		
 		public function findStatusAffect(stype:StatusAffectType):Number
 		{
 			for (var counter:int = 0; counter < statusAffects.length; counter++)
 			{
-				if (statusAffects[counter].stype == stype)
+				if (statusAffect(counter).stype == stype)
 					return counter;
 			}
 			return -1;
@@ -677,13 +678,13 @@ import classes.PerkType;
 				return;
 			}
 			if (statusValueNum == 1)
-				statusAffects[counter].value1 = newNum;
+				statusAffect(counter).value1 = newNum;
 			if (statusValueNum == 2)
-				statusAffects[counter].value2 = newNum;
+				statusAffect(counter).value2 = newNum;
 			if (statusValueNum == 3)
-				statusAffects[counter].value3 = newNum;
+				statusAffect(counter).value3 = newNum;
 			if (statusValueNum == 4)
-				statusAffects[counter].value4 = newNum;
+				statusAffect(counter).value4 = newNum;
 		}
 		
 		public function addStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, bonus:Number = 0):void
@@ -700,37 +701,42 @@ import classes.PerkType;
 				return;
 			}
 			if (statusValueNum == 1)
-				statusAffects[counter].value1 += bonus;
+				statusAffect(counter).value1 += bonus;
 			if (statusValueNum == 2)
-				statusAffects[counter].value2 += bonus;
+				statusAffect(counter).value2 += bonus;
 			if (statusValueNum == 3)
-				statusAffects[counter].value3 += bonus;
+				statusAffect(counter).value3 += bonus;
 			if (statusValueNum == 4)
-				statusAffects[counter].value4 += bonus;
+				statusAffect(counter).value4 += bonus;
+		}
+		
+		public function statusAffect(idx:int):StatusAffectClass
+		{
+			return statusAffects [idx];
 		}
 		
 		public function statusAffectv1(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[counter].value1;
+			return (counter<0)?0:statusAffect(counter).value1;
 		}
 		
 		public function statusAffectv2(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[counter].value2;
+			return (counter<0)?0:statusAffect(counter).value2;
 		}
 
 		public function statusAffectv3(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[counter].value3;
+			return (counter<0)?0:statusAffect(counter).value3;
 		}
 
 		public function statusAffectv4(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[counter].value4;
+			return (counter<0)?0:statusAffect(counter).value4;
 		}
 
 		public function removeStatuses():void

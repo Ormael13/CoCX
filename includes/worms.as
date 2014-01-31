@@ -100,11 +100,11 @@ public function infestOrgasm():void {
 	//Check infestation and update it
 	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		//Increment infestation number
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 < 5) {
-			player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1++;
+		if(player.statusAffectv1(StatusAffects.Infested) < 5) {
+			player.addStatusValue(StatusAffects.Infested,1,1);
 			player.cumMultiplier+=0.5;
 			//fifth time is the charm!
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 == 5) {
+			if(player.statusAffectv1(StatusAffects.Infested) == 5) {
 				//Futaz
 				if(player.balls == 0) {
 					outputText("\n\nAfter you empty yourself, you feel your body shift. The presence of the large worm is no longer discomforting. It is as if your seminal bladder has enlarged to accommodate the new thing inside you. Likewise, your ejaculations have become truly monstrous and the amount of worms you expel has also increased. You realize that the large worm has become a part of you and you can now <b>infest</b> your enemies much in the same manner as you have been infested, yourself. All you need now is some poor fool to overwhelm with your new 'pets'.", false);

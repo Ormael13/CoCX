@@ -667,11 +667,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		for (i = 0; i < player.statusAffects.length; i++)
 		{
 			//trace("Populate One statusAffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusAffects[i].stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusAffects[i].value1;
-			saveFile.data.statusAffects[i].value2 = player.statusAffects[i].value2;
-			saveFile.data.statusAffects[i].value3 = player.statusAffects[i].value3;
-			saveFile.data.statusAffects[i].value4 = player.statusAffects[i].value4;
+			saveFile.data.statusAffects[i].statusAffectName = player.statusAffect(i).stype.id;
+			saveFile.data.statusAffects[i].value1 = player.statusAffect(i).value1;
+			saveFile.data.statusAffects[i].value2 = player.statusAffect(i).value2;
+			saveFile.data.statusAffects[i].value3 = player.statusAffect(i).value3;
+			saveFile.data.statusAffects[i].value4 = player.statusAffect(i).value4;
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -1415,7 +1415,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					saveFile.data.statusAffects[i].value2,
 					saveFile.data.statusAffects[i].value3,
 					saveFile.data.statusAffects[i].value4);
-				//trace("StatusAffect " + player.statusAffects[i].stype.id + " loaded.");
+				//trace("StatusAffect " + player.statusAffect(i).stype.id + " loaded.");
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)

@@ -324,9 +324,9 @@ package classes.Scenes.Areas.HighMountains
 
 			if (affectIndex >= 0)
 			{
-				player.statusAffects[affectIndex].value1 -= hours;
+				player.statusAffect(affectIndex).value1 -= hours;
 
-				if (player.statusAffects[affectIndex].value1 == 0)
+				if (player.statusAffect(affectIndex).value1 == 0)
 				{
 					this.smokeEffectWearsOff();
 				}
@@ -340,9 +340,9 @@ package classes.Scenes.Areas.HighMountains
 
 			if (affectIndex >= 0)
 			{
-				player.sens += Math.abs(player.statusAffects[affectIndex].value2);
-				player.spe -= player.statusAffects[affectIndex].value3;
-				player.lib -= player.statusAffects[affectIndex].value4;
+				player.sens += Math.abs(player.statusAffect(affectIndex).value2);
+				player.spe -= player.statusAffect(affectIndex).value3;
+				player.lib -= player.statusAffect(affectIndex).value4;
 				
 				if (player.sens > 100) player.sens = 100;
 				if (player.spe <= 0) player.spe = 1;

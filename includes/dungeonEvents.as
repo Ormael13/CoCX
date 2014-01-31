@@ -331,7 +331,7 @@ public function doDungeon(eventNo:Number):void {
 			outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 			dynStats("lus", 3);
 			if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-			else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 7;
+			else player.addStatusValue(StatusAffects.DemonSeed,1,7);
 			player.slimeFeed();
 		}
 		//Chest
@@ -340,7 +340,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 				dynStats("lus", 3);
 				if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-				else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 8;
+				else player.addStatusValue(StatusAffects.DemonSeed,1,8);
 				player.slimeFeed();
 			}
 			else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.", false);
@@ -351,7 +351,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 				dynStats("lus", 3);
 				if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-				else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 8;
+				else player.addStatusValue(StatusAffects.DemonSeed,1,8);
 				player.slimeFeed();
 			}
 			else outputText("crotch.  Thankfully, it doesn't seem to have much effect.", false);
@@ -393,7 +393,7 @@ public function doDungeon(eventNo:Number):void {
 		//Second/third times...
 		else {
 			//[[2nd time]] 
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.TensionReleased)].value1 == 0) {
+			if(player.statusAffectv1(StatusAffects.TensionReleased) == 0) {
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ", false);
 				//Grow dick!
 				if(player.cocks.length > 0) {
@@ -438,7 +438,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
 				dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
 				player.createStatusAffect(StatusAffects.TensionReleased,0,0,0,0);
-				player.statusAffects[player.findStatusAffect(StatusAffects.TensionReleased)].value1++;
+				player.addStatusValue(StatusAffects.TensionReleased,1,1);
 				player.slimeFeed();
 			}
 			//Third time
@@ -865,14 +865,14 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Take item from storage
 	if(eventNo == 11061) {
-		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1--;
+		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) player.addStatusValue(StatusAffects.TakenGroPlus,1,-1);
 		else player.createStatusAffect(StatusAffects.TakenGroPlus,4,0,0,0);
 		inventory.takeItem(consumables.GROPLUS);
 		return;
 	}
 	//Take item from storage
 	if(eventNo == 11062) {
-		if(player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.TakenLactaid)].value1--;
+		if(player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) player.addStatusValue(StatusAffects.TakenLactaid,1,-1);
 		else player.createStatusAffect(StatusAffects.TakenLactaid,4,0,0,0);
 		inventory.takeItem(consumables.LACTAID);
 		return;

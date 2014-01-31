@@ -1567,9 +1567,9 @@ public function lustPercent():Number {
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 	if (statIndex >= 0)
 	{
-		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELIEF || player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_LUST)
+		if (player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
 		{
-			lust *= player.statusAffects[statIndex].value2;
+			lust *= player.statusAffect(statIndex).value2;
 		}
 	}
 	

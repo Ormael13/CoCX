@@ -1423,7 +1423,7 @@ public function doItems(eventNo:Number):void {
 		 5 - rubbery black*/
 		private function eggShifter(eggCode:Number):void
 		{
-			if (player.findStatusAffect(StatusAffects.Eggs) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 = eggCode;
+			if (player.findStatusAffect(StatusAffects.Eggs) >= 0) player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value1 = eggCode;
 		}
 		private function slimeBadEnd():void {
 			outputText("One year later...", true);

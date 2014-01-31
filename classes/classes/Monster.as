@@ -1094,8 +1094,8 @@
 			}
 			//Countdown
 			if(findStatusAffect(StatusAffects.TentacleCoolDown) >= 0) {
-				statusAffects[findStatusAffect(StatusAffects.TentacleCoolDown)].value1--;
-				if(statusAffects[findStatusAffect(StatusAffects.TentacleCoolDown)].value1 == 0) {
+				addStatusValue(StatusAffects.TentacleCoolDown,1,-1);
+				if(statusAffect(findStatusAffect(StatusAffects.TentacleCoolDown)).value1 == 0) {
 					removeStatusAffect(StatusAffects.TentacleCoolDown);
 				}
 			}

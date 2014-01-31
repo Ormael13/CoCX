@@ -226,7 +226,7 @@ use namespace kGAMECLASS;
 					//Have you met whitney?
 					if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
 						//Is the farm in your places menu?
-						if (player.statusAffects[player.findStatusAffect(StatusAffects.MetWhitney)].value1 > 1) {
+						if (player.statusAffectv1(StatusAffects.MetWhitney) > 1) {
 							//If so, find equinum or whisker fruit
 							if (rand(2) == 0) {
 								outputText("You find a long and oddly flared vial half-buried in the sand.   Written across the middle band of the vial is a single word, 'Equinum'.\n", true);

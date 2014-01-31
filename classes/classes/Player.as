@@ -220,8 +220,8 @@ use namespace kGAMECLASS;
 			// Uma's Massage bonuses
 			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
 			if (statIndex >= 0) {
-				if (statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELAXATION) {
-					damage = Math.round(damage * statusAffects[statIndex].value2);
+				if (statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
+					damage = Math.round(damage * statusAffect(statIndex).value2);
 				}
 			}
 
@@ -1550,8 +1550,8 @@ use namespace kGAMECLASS;
 				removeStatusAffect(StatusAffects.DemonSeed);
 			}
 			if(findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
-				str += statusAffects[findStatusAffect(StatusAffects.ParalyzeVenom)].value1;
-				spe += statusAffects[findStatusAffect(StatusAffects.ParalyzeVenom)].value2;
+				str += statusAffect(findStatusAffect(StatusAffects.ParalyzeVenom)).value1;
+				spe += statusAffect(findStatusAffect(StatusAffects.ParalyzeVenom)).value2;
 				removeStatusAffect(StatusAffects.ParalyzeVenom);
 			}
 			if(findStatusAffect(StatusAffects.lustvenom) >= 0) {

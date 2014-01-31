@@ -225,9 +225,9 @@ public function tentacleLossRape():void {
 		}
 		else {
 			//count up
-			player.statusAffects[temp].value1++;
+			player.statusAffect(temp).value1++;
 			//Bad end
-			if(player.statusAffects[temp].value1 >= 3 && player.cor > 50 && player.gender == 3) {
+			if(player.statusAffect(temp).value1 >= 3 && player.cor > 50 && player.gender == 3) {
 				futaTentacleBadEnd();
 				return;
 			}

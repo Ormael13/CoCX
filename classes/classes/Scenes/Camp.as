@@ -577,8 +577,7 @@ public function doCamp():void {
 	}
 	//Clear bee-status
 	if(player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
-		temp = player.findStatusAffect(StatusAffects.ParalyzeVenom);
-		dynStats("str", player.statusAffects[temp].value1,"spe", player.statusAffects[temp].value2);
+		dynStats("str", player.statusAffectv1(StatusAffects.ParalyzeVenom),"spe", player.statusAffectv2(StatusAffects.ParalyzeVenom));
 		player.removeStatusAffect(StatusAffects.ParalyzeVenom);
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
@@ -1426,7 +1425,7 @@ public function places(display:Boolean):Boolean {
 	
 	//Turn on main farm encounter!
 	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.MetWhitney)].value1 > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
+		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
 	}
 	//Turn on bazaar encounter
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;

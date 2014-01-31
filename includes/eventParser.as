@@ -1217,10 +1217,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.findStatusAffect(StatusAffects.Heat) >= 0)
 		{
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.Heat)].value3 <= 1 || player.vaginas.length == 0)
+			if(player.statusAffectv3(StatusAffects.Heat) <= 1 || player.vaginas.length == 0)
 			{
 				//Remove bonus libido from heat
-				dynStats("lib", -player.statusAffects[player.findStatusAffect(StatusAffects.Heat)].value2, "resisted", false, "noBimbo", true);
+				dynStats("lib", -player.statusAffect(player.findStatusAffect(StatusAffects.Heat)).value2, "resisted", false, "noBimbo", true);
 				//remove heat
 				player.removeStatusAffect(StatusAffects.Heat);
 				if(player.lib < 1) player.lib = 1;
@@ -1228,7 +1228,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n", false);
 				needNext = true;
 			}
-			else player.statusAffects[player.findStatusAffect(StatusAffects.Heat)].value3--;
+			else player.addStatusValue(StatusAffects.Heat,3,-1);
 		}
 		//Remove anemone lustiness
 		if(player.findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
@@ -1575,7 +1575,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Prevent addiction from passing 60 if not yet revealed that your addicted
 		if(player.statusAffectv3(StatusAffects.Marble) <= 0) {
-			if(player.statusAffectv2(StatusAffects.Marble) > 60) player.changeStatusValue(StatusAffects.Marble,2,60);
+			if(player.statusAffectv2(StatusAffects.Marble) > 60) player.addStatusValue(StatusAffects.Marble,2,60);
 		}
 		//Withdrawl removal if you get unaddicted.
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
@@ -1601,12 +1601,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Minotaur dysfunction status countdown (v1 = hours till gone)
 		if(player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.Dysfunction)].value1 <= 1) {
+			if(player.statusAffectv1(StatusAffects.Dysfunction) <= 1) {
 				player.removeStatusAffect(StatusAffects.Dysfunction);
 				outputText("\nYou feel a tingling in your nethers... at last full sensation has returned to your groin.  <b>You can masturbate again!</b>\n", false);
 				needNext = true;
 			}
-			else player.statusAffects[player.findStatusAffect(StatusAffects.Dysfunction)].value1--;
+			else player.addStatusValue(StatusAffects.Dysfunction,1,-1);
 		}
 		//Lactation reduction
 		if(player.findStatusAffect(StatusAffects.LactationReduction) < 0) {
@@ -2348,8 +2348,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.createStatusAffect(StatusAffects.RepeatSuccubi,0,0,0,0);
 				}
 				//Lower count if multiples stacked up.
-				if(player.statusAffects[player.findStatusAffect(StatusAffects.SuccubiNight)].value1 > 1) {
-					player.statusAffects[player.findStatusAffect(StatusAffects.SuccubiNight)].value1--;
+				if(player.statusAffectv1(StatusAffects.SuccubiNight) > 1) {
+					player.addStatusValue(StatusAffects.SuccubiNight,1,-1);
 				}
 				else player.removeStatusAffect(StatusAffects.SuccubiNight);
 				if(player.findStatusAffect(StatusAffects.SuccubiFirst) >= 0) {
@@ -2822,7 +2822,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					[
 						[consumables.BROWNEG,consumables.PURPLEG,consumables.BLUEEGG,consumables.PINKEGG,consumables.WHITEEG,consumables.BLACKEG],
 						[consumables.L_BRNEG,consumables.L_PRPEG,consumables.L_BLUEG,consumables.L_PNKEG,consumables.L_WHTEG,consumables.L_BLKEG]]
-							[player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 || 0][player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 || 0] ||
+							[player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value2 || 0][player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value1 || 0] ||
 							consumables.BROWNEG;
 			player.removeStatusAffect(StatusAffects.LootEgg);
 			player.removeStatusAffect(StatusAffects.Eggs);

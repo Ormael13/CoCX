@@ -40,7 +40,7 @@
 				else outputText("You do not notice any real effects.  Did the merchant con you?", false);
 			}
 			if (player.findStatusAffect(StatusAffects.SuccubiNight) >= 0) {
-				if (player.statusAffectv1(StatusAffects.SuccubiNight) < 3) player.statusAffects[player.findStatusAffect(StatusAffects.SuccubiNight)].value1++;
+				if (player.statusAffectv1(StatusAffects.SuccubiNight) < 3) player.addStatusValue(StatusAffects.SuccubiNight,1,1);
 			}
 			else player.createStatusAffect(StatusAffects.SuccubiNight, 1, 0, 0, 0);
 		}
@@ -812,9 +812,9 @@
 				//WARNINGS
 				//Repeat warnings
 				if (player.findStatusAffect(StatusAffects.HorseWarning) >= 0 && rand(3) == 0) {
-					if (player.statusAffects[player.findStatusAffect(StatusAffects.HorseWarning)].value1 == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>", false);
-					if (player.statusAffects[player.findStatusAffect(StatusAffects.HorseWarning)].value1 > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>", false);
-					player.statusAffects[player.findStatusAffect(StatusAffects.HorseWarning)].value1++;
+					if (player.statusAffectv1(StatusAffects.HorseWarning) == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>", false);
+					if (player.statusAffectv1(StatusAffects.HorseWarning) > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>", false);
+					player.addStatusValue(StatusAffects.HorseWarning,1,1);
 				}
 				//First warning
 				if (player.findStatusAffect(StatusAffects.HorseWarning) < 0) {
@@ -824,7 +824,7 @@
 				//Bad End
 				if (rand(4) == 0 && player.findStatusAffect(StatusAffects.HorseWarning) >= 0) {
 					//Must have been warned first...
-					if (player.statusAffects[player.findStatusAffect(StatusAffects.HorseWarning)].value1 > 0) {
+					if (player.statusAffectv1(StatusAffects.HorseWarning) > 0) {
 						//If player has dicks check for horsedicks
 						if (player.cockTotal() > 0) {
 							//If player has horsedicks
@@ -1142,9 +1142,9 @@
 					if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
 						temp = player.findStatusAffect(StatusAffects.Heat);
-						player.statusAffects[temp].value1 += 5;
-						player.statusAffects[temp].value2 += 5;
-						player.statusAffects[temp].value3 += 48;
+						player.statusAffect(temp).value1 += 5;
+						player.statusAffect(temp).value2 += 5;
+						player.statusAffect(temp).value3 += 48;
 						dynStats("lib", 5, "resisted", false, "noBimbo", true);
 					}
 					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
@@ -2000,9 +2000,9 @@
 				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
 					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffects[temp].value1 += 5;
-					player.statusAffects[temp].value2 += 5;
-					player.statusAffects[temp].value3 += 48;
+					player.statusAffect(temp).value1 += 5;
+					player.statusAffect(temp).value2 += 5;
+					player.statusAffect(temp).value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
@@ -2608,10 +2608,10 @@
 			if (player.pregnancyType == 5) {
 				if (player.findStatusAffect(StatusAffects.Eggs) >= 0) {
 					//If eggs are small, chance of increase!
-					if (player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 == 0) {
+					if (player.statusAffectv2(StatusAffects.Eggs) == 0) {
 						//1 in 2 chance!
 						if (rand(3) == 0) {
-							player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2++;
+							player.addStatusValue(StatusAffects.Eggs,2,1);
 							outputText("\n\nYour pregnant belly suddenly feels heavier and more bloated than before.  You wonder what the elixir just did.", false);
 							changes++;
 						}
@@ -2619,7 +2619,7 @@
 					//Chance of quantity increase!
 					if (rand(2) == 0) {
 						outputText("\n\nA rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.", false);
-						player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3 += rand(4) + 1;
+						player.addStatusValue(StatusAffects.Eggs,3,rand(4) + 1);
 						changes++;
 					}
 				}
@@ -3675,9 +3675,9 @@
 						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
 							outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
 							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffects[temp].value1 += 10;
-							player.statusAffects[temp].value2 += 10;
-							player.statusAffects[temp].value3 += 96;
+							player.statusAffect(temp).value1 += 10;
+							player.statusAffect(temp).value2 += 10;
+							player.statusAffect(temp).value3 += 96;
 							dynStats("lib", 10, "resisted", false, "noBimbo", true);
 						}
 						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
@@ -4477,9 +4477,9 @@
 					if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
 						temp = player.findStatusAffect(StatusAffects.Heat);
-						player.statusAffects[temp].value1 += 10;
-						player.statusAffects[temp].value2 += 10;
-						player.statusAffects[temp].value3 += 96;
+						player.statusAffect(temp).value1 += 10;
+						player.statusAffect(temp).value2 += 10;
+						player.statusAffect(temp).value3 += 96;
 						dynStats("lib", 10, "resisted", false, "noBimbo", true);
 					}
 					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
@@ -4638,9 +4638,9 @@
 					if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
 					else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
 					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffects[temp].value1 += 5;
-					player.statusAffects[temp].value2 += 5;
-					player.statusAffects[temp].value3 += 48;
+					player.statusAffect(temp).value1 += 5;
+					player.statusAffect(temp).value2 += 5;
+					player.statusAffect(temp).value3 += 48;
 					dynStats("lib", 5, "lus", 5, "resisted", false, "noBimbo", true);
 
 				}
@@ -7070,9 +7070,9 @@
 				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
 					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffects[temp].value1 += 5;
-					player.statusAffects[temp].value2 += 5;
-					player.statusAffects[temp].value3 += 48;
+					player.statusAffect(temp).value1 += 5;
+					player.statusAffect(temp).value2 += 5;
+					player.statusAffect(temp).value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
@@ -8279,9 +8279,9 @@
 						player.consumeItem(consumables.MINOCUM);
 					}
 					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffects[temp].value1 += 5;
-					player.statusAffects[temp].value2 += 5;
-					player.statusAffects[temp].value3 += 48;
+					player.statusAffect(temp).value1 += 5;
+					player.statusAffect(temp).value2 += 5;
+					player.statusAffect(temp).value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone

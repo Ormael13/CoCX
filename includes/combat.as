@@ -211,7 +211,7 @@ public function doCombat(eventNum:Number):void
 			if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) temp2 = 5038;
 			//Infest if infested
 			if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.hasCock()) {
-				if (player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 == 5) {
+				if (player.statusAffectv1(StatusAffects.Infested) == 5) {
 					temp3 = 5060;
 				}
 			}
@@ -558,8 +558,8 @@ public function doCombat(eventNum:Number):void
 				//v1 - strenght penalty, v2 speed penalty
 				if (player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
 					temp = player.findStatusAffect(StatusAffects.ParalyzeVenom);
-					player.statusAffects[temp].value1 += 2.9;
-					player.statusAffects[temp].value2 += 2.9;
+					player.statusAffect(temp).value1 += 2.9;
+					player.statusAffect(temp).value2 += 2.9;
 					dynStats("str", -3, "spe", -3);
 					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!", false);
 				}
@@ -1717,9 +1717,9 @@ public function doDamage(damage:Number):Number {
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 	if (statIndex >= 0)
 	{
-		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_POWER)
+		if (player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_POWER)
 		{
-			damage *= player.statusAffects[statIndex].value2;
+			damage *= player.statusAffect(statIndex).value2;
 		}
 	}
 	
@@ -2073,7 +2073,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.DemonSeed) >= 0) {
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n", false);
-		dynStats("lus", (player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 + int(player.sens/30) + int(player.lib/30) + int(player.cor/30)));
+		dynStats("lus", (player.statusAffectv1(StatusAffects.DemonSeed) + int(player.sens/30) + int(player.lib/30) + int(player.cor/30)));
 	}
 	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.vaginas.length > 0 && monster.totalCocks() > 0) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
@@ -5171,7 +5171,7 @@ public function physicalSpecials():void {
 	}
 	//Infest if infested
 	if(player.findStatusAffect(StatusAffects.Infested) >= 0 && player.hasCock()) {
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 == 5) {
+		if(player.statusAffectv1(StatusAffects.Infested) == 5) {
 			b6T = "Infest";
 			butt6 = 5060;
 		}

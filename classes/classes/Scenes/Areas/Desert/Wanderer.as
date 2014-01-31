@@ -98,7 +98,7 @@ private function wandererDemonEpilogue():void {
 			dynStats("lus", 5);
 			menuLoc = 2;
 			inventory.takeItem(consumables.SDELITE);
-			player.statusAffects[player.findStatusAffect(StatusAffects.WandererDemon)].value1 = 1;
+			player.statusAffect(player.findStatusAffect(StatusAffects.WandererDemon)).value1 = 1;
 		}
 		//Second Encounter
 		else if(player.statusAffectv1(StatusAffects.WandererDemon) == 1) {
@@ -129,7 +129,7 @@ private function wandererEpilogueHuman():void {
 			else outputText("You openly leer at the crude display, whistling lewdly at the blissful couple.  Marcus looks up and gives a cocky smile, while Lucia licks her lips and gives you a predatory grin.", false);
 			dynStats("lus", 10);
 			//Value 1 is used to track the status of the end state.
-			player.statusAffects[player.findStatusAffect(StatusAffects.WandererHuman)].value1 = 1;
+			player.statusAffect(player.findStatusAffect(StatusAffects.WandererHuman)).value1 = 1;
 			doNext(13);
 		}
 		//Human Epilogue 2

@@ -642,7 +642,7 @@ public function appearance(e:MouseEvent = null):void
 		{
 			outputText("<b>", false);
 			//Compute size
-			temp = player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3 + player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 * 10;
+			temp = player.statusAffectv3(StatusAffects.Eggs) + player.statusAffectv2(StatusAffects.Eggs) * 10;
 			if(player.pregnancyIncubation <= 50 && player.pregnancyIncubation > 20) 
 			{
 				outputText("Your swollen pregnant belly is as large as a ", false);
