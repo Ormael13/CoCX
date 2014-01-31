@@ -3,8 +3,9 @@ package classes.Scenes.Dungeons.DeepCave
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Lake.GooGirl;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -36,15 +37,15 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("  She releases her breasts, shaking them back and forth for your benefit, and flutters her wings, blowing shiny, glitter-like flakes at you.  They stick to the milk on your skin, leaving you coated in milk and faerie-dust.", false);
 			outputText("\nVala says, \"<i>Now you can be sexy like Vala!</i>\"\n", false);
 
-			if(findStatusAffect(StatusAffects.milk) >= 0) {
-				addStatusValue(StatusAffects.milk,1,5);
+			if(findStatusAffect(StatusAffects.Milk) >= 0) {
+				addStatusValue(StatusAffects.Milk,1,5);
 				outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!", false);
 			}
 			else {
-				createStatusAffect(StatusAffects.milk,5,0,0,0);
+				createStatusAffect(StatusAffects.Milk,5,0,0,0);
 				outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.", false);
 			}
-			game.dynStats("lus", statusAffectv1(StatusAffects.milk) + player.lib/20);
+			game.dynStats("lus", statusAffectv1(StatusAffects.Milk) + player.lib/20);
 			combatRoundOver();
 		}
 		//Masturbation
@@ -57,17 +58,17 @@ package classes.Scenes.Dungeons.DeepCave
 
 		//[Fight dialog]
 		public function valaCombatDialogue():void {
-			if(findStatusAffect(StatusAffects.vala) < 0) {
+			if(findStatusAffect(StatusAffects.Vala) < 0) {
 				outputText("\"<i>Sluts needs to service the masters!</i>\" the fairy wails, flying high. \"<i>If they are not pleased, Bitch doesn't get any cum!</i>\"", false);
-				createStatusAffect(StatusAffects.vala,0,0,0,0);
+				createStatusAffect(StatusAffects.Vala,0,0,0,0);
 			}
 			else {
-				addStatusValue(StatusAffects.vala,1,1);
-				if(statusAffectv1(StatusAffects.vala) == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
-				else if(statusAffectv1(StatusAffects.vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself? Won't you like that?</i>\"", false);
-				else if(statusAffectv1(StatusAffects.vala) == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
-				else if(statusAffectv1(StatusAffects.vala) == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
-				else if(statusAffectv1(StatusAffects.vala) == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);
+				addStatusValue(StatusAffects.Vala,1,1);
+				if(statusAffectv1(StatusAffects.Vala) == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
+				else if(statusAffectv1(StatusAffects.Vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself? Won't you like that?</i>\"", false);
+				else if(statusAffectv1(StatusAffects.Vala) == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
+				else if(statusAffectv1(StatusAffects.Vala) == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
+				else if(statusAffectv1(StatusAffects.Vala) == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);
 				else outputText("\"<i>Bitch loves when her children use her as their fathers did. Sluts belong to them. Slut love them. You will love them too!</i>\"", false);
 			}
 		}

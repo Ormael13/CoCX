@@ -630,7 +630,7 @@ public function appearance(e:MouseEvent = null):void
 		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
 	
 	outputText("\n", false);
-	if (player.findStatusAffect(StatusAffects.gooStuffed) >= 0)
+	if (player.findStatusAffect(StatusAffects.GooStuffed) >= 0)
 	
 	{
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
@@ -642,7 +642,7 @@ public function appearance(e:MouseEvent = null):void
 		{
 			outputText("<b>", false);
 			//Compute size
-			temp = player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value3 + player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2 * 10;
+			temp = player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3 + player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 * 10;
 			if(player.pregnancyIncubation <= 50 && player.pregnancyIncubation > 20) 
 			{
 				outputText("Your swollen pregnant belly is as large as a ", false);
@@ -887,7 +887,7 @@ public function appearance(e:MouseEvent = null):void
 			outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 		}
 		//Worm flavor
-		if(player.findStatusAffect(StatusAffects.infested) >= 0)
+		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
 			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
 		if(player.cocks[temp].sock) 
 			sockDescript(temp);
@@ -1035,7 +1035,7 @@ public function appearance(e:MouseEvent = null):void
 			if(rando > 3) rando = 0;
 		}
 		//Worm flavor
-		if(player.findStatusAffect(StatusAffects.infested) >= 0)
+		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
 			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
 		//DONE WITH COCKS, moving on!
 	}

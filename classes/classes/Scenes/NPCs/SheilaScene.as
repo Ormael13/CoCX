@@ -4,8 +4,9 @@ import classes.CockTypesEnum;
 import classes.Appearance;
 import classes.CoC_Settings;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class SheilaScene extends NPCAwareContent {
+public class SheilaScene extends NPCAwareContent {
 
 	public function SheilaScene()
 	{
@@ -692,7 +693,7 @@ private function sheilaReconcileKay2():void {
 	outputText("\n\n\"<i>We were never prolific, but they tore through us like parchment when they first attacked.  Open-air villages disappeared overnight, leaving only those run by xenophobic, isolationist, stealth nutters.  You've likely met my ex-tribe before if you've met any number of demons; a mug unlucky enough to be caught turns pretty much instantly when he or she climaxes and is flooded with their feelings.</i>\"  She pulls the remaining meat out of the fire and examines it, then hands you half.  At the look in your eyes, she grins.  \"<i>It's not as bad as all that.  Unhappy marriages are almost unheard of, since emotional intensity evens out inside couples.  Bit of a 'build-your-own-soulmate' workshop, right?  Demons are the problem, as always.</i>\"");
 	
 	//[(if PC has Tel'Adre)]
-	if(player.statusAffectv1("Tel'Adre") >= 1) {
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
 		outputText("\n\nYou interject here to mention the city you found in the desert.  Sheila grimaces and nods, then answers, \"<i>We got word of that from one of our trading partners near the desert a while back.  Seems like they had a wild blue in a town meeting after finding out and half the younger residents grabbed swag and hiked there, tired of hiding.</i>\"  She chews morosely, anticipating the end to her own story.");
 		
 		outputText("\n\n\"<i>A few of the kids lobbed in ten months later... they were just courtin' when they left, but they got married in the city; one of the girls was preggers and almost due when a hunting team picked them up.  The Covenant found out about our ability early and there was pressure on the expats to produce new generations and turn them over for 'proper civic education'; pressure in the form of both stick and carrot.  Preferred housing, deferred prosecution for bludging or criminality, you know.  Some of the bachelors even swore there was subtle public censure for those that chose celibacy or isolation - it'd be easy enough to establish that mindset in a town full of hookers where everybody's getting some.</i>\"  Sheila spits some gristle onto the ground emphatically.  \"<i>Dunno what they wanted the babes for, but speculation ran wild among our little community when the story came back.  At least one whacker's theory has it that the Covenant mages themselves wanted a literal dumping ground for their impure thoughts, but more people think they just wanted to raise them true blue, then pair the kids off with hotheaded young knockers who won't stop agitating, both to dob on them and root them into line.  Wherever the truth is, our young sheila didn't want to feel like she handed her joey over to the Covenant schools in exchange for a dole, and her man supported her.  So that mob is more or less no-go for anyone who doesn't want kids or wants to raise them by their own hands.</i>\"");
@@ -1186,7 +1187,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		outputText("\n\n\"<i>Are you really so worried about it?</i>\" you ask.  No answer comes");
 		//[(cock.length > 0)
 		if(player.hasCock()) outputText(", even after Sheila finishes wiping her face clean and stares at you");
-		outputText(", so you just content yourself with lying next to the woman for a while.")
+		outputText(", so you just content yourself with lying next to the woman for a while.");
 		
 		//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock;  if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
 		if(player.hasCock()) dynStats("lib", -2, "lus=", 0);
@@ -1474,7 +1475,7 @@ private function fuckBuddySheilaMeetingChatWhyHide():void {
 	
 	outputText("\n\nYou wave off her glare.  Seems like it'd still be better to have everyone in one place, to watch out for each other instead of shriveling up slowly without support.");
 	//(if T'A)
-	if(player.statusAffectv1("Tel'Adre") >= 1) {
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
 		outputText("  After all, the city in the desert seems to be bustling and bristling with weapons to resist the demons, whatever her feelings may be about it.");
 	
 		outputText("\n\nSheila snorts dismissively, considers, then speaks again.  \"<i>Suppose so... but one bad apple and the whole lot's spoiled from inside.  Next time you go there, try asking how often they've come close to being homeless because some horny or greedy hoon put himself first and tracked in dirt.  We may be weak enough that you can close down a cave or two, but we breed fast and we'll survive until we're numerous enough to fight.</i>\"  She shakes her head.");
@@ -1509,7 +1510,7 @@ private function fuckBuddySheilaMeetingChatKids():void {
 		
 		outputText("\n\n\"<i>I said, 'how's the kid doing?',</i>\" you repeat.");
 		
-		outputText("\n\n\"<i>I heard you, mate... I was just a little surprised.</i>\"  Sheila wraps her arm around yours.  \"<i>The baby's fine.  Eats well and loves attention.  The other day I stuck my finger into that chubby little hand and it closed around me and wouldn't let go... I sat there for about an hour, just watching and sighing.  Sometimes it feels like I'm turning into one of those mush-headed new moms that always embarrassed me before, though.</i>\"  She looks at you with a half-smile.")
+		outputText("\n\n\"<i>I heard you, mate... I was just a little surprised.</i>\"  Sheila wraps her arm around yours.  \"<i>The baby's fine.  Eats well and loves attention.  The other day I stuck my finger into that chubby little hand and it closed around me and wouldn't let go... I sat there for about an hour, just watching and sighing.  Sometimes it feels like I'm turning into one of those mush-headed new moms that always embarrassed me before, though.</i>\"  She looks at you with a half-smile.");
 	
 		outputText("\n\n\"<i>Strong grip?</i>\" you ask.");
 		
@@ -2123,7 +2124,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	//minus lust, minus small libido, if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption, low chance of sheilapreg +1 if non-dog cock or med-high chance if dog cock
 	//sheilaPreg stuff
 	sheilaPreg();
-	sheilaCorruptionUpdate()
+	sheilaCorruptionUpdate();
 	/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
 		dynStats("cor", -10);
 		sheilaCorruption(10);
@@ -2295,7 +2296,7 @@ private function sheilaMutualMasturbation():void {
 	}
 	//(else no corruption warning triggered)
 	else {
-		sheilaCorruptionUpdate()
+		sheilaCorruptionUpdate();
 		/*
 		if(player.cor > 90 || player.cor > sheilaCorruption()) {
 			dynStats("cor", -10);
@@ -2613,7 +2614,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 			outputText("jabbing at her undersized mouth with your enormous [cockHead shortest].  \"<i>It's too thick!</i>\" she complains, trying to turn away.");
 			outputText("\n\n\"<i>So?  Think of something, then!</i>\"  You drag her face along the tip of your penis, smearing her lips and cheeks with pre-cum, and she eventually gives up, taking your shaft in her hands for control and playing her tongue over and down your urethra.  Your shudder comes simultaneously with hers... though hers is more probably from humiliation.");
 		}
-		outputText("  The reticent woman brings her lips into play, sucking gingerly, ")
+		outputText("  The reticent woman brings her lips into play, sucking gingerly, ");
 		//start length fork, no new PG
 		//[(dick length <= 8)
 		if(player.cocks[player.shortestCockIndex()].cockLength <= 8) {
@@ -2660,7 +2661,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		//end width fork and length fork
 		//begin corruption worms fork
 		//(if corr >= 70 and Infest command is unlocked)
-		if(player.cor >= 70 && player.statusAffectv1(StatusAffects.infested) == 5) {
+		if(player.cor >= 70 && player.statusAffectv1(StatusAffects.Infested) == 5) {
 			outputText("\n\nA wicked idea flits through your head, brought on by the squirming annoyances ");
 			if(player.balls > 0) outputText("packing your [balls] and driving up your lust in their zeal to multiply");
 			else outputText("deep inside your body, trailing sensation along the nerves in your most intimate places and ramping up your production");
@@ -2729,7 +2730,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\nYour [vagOrAss] squeezes around Sheila's hesitant tongue, turned on more by the spectacle of selling her body than by any of her poor efforts.  She squirms under you, rubbing her thighs together as you paint the worst pictures of her future you can imagine, and you climax");
 		//[(PC has met Lumi or Lynette)
-		if(player.findStatusAffect(StatusAffects.hairdressermeeting) >= 0 || flags[kFLAGS.LUMI_MET] > 0) {
+		if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0 || flags[kFLAGS.LUMI_MET] > 0) {
 			outputText(" while imagining her turned over to the goblins for experiments, forced to drink potion after potion - most would be dedicated to growing cocks on her or increasing semen production, of course");
 		}
 		outputText(".  Your hole clenches and drools on her, and the woman's rude tongue retreats from the pressure, leaving you painfully empty.");
@@ -3579,7 +3580,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	outputText("\n\n\"<i>Seems... nice,</i>\" Sheila says quietly, taking a seat, \"<i>but it's exposed - not to mention the big target sign.</i>\"  She looks at the portal, casting an ominous silhouette against the sky.  \"<i>I dunno about this.</i>\"");
 	
 	//[(if PC has thorn canopy on)
-	if(player.findStatusAffect("Defense: Canopy") >= 0) outputText("\n\nYou shrug off her objections, pointing at the thorns already growing over your point of entry.  Sheila seems duly impressed by the quasi-magical display.");
+	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) outputText("\n\nYou shrug off her objections, pointing at the thorns already growing over your point of entry.  Sheila seems duly impressed by the quasi-magical display.");
 	//(else if PC has Jojo and Jojo's n.watch is on)
 	else if(player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		outputText("\n\nYou wave Jojo over, introducing them and explaining that the monk watches the camp at night and you check it during the day.  The small white mouse bows politely to your guest, then seats himself nearby.  \"<i>Hello, Sheila,</i>\" he says.");
@@ -4580,7 +4581,7 @@ private function sheilaAnalHateFuckAGoGo():void {
 	outputText("\n\n\"<i>[name]!  Finish in my pussy, please!  I want to raise your baby!  You're the only one that suits me!</i>\"");
 	
 	//if corruption >= 80 and PC has worms, present choices 
-	if(player.cor >= 80 && player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.cor >= 80 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		menu();
 		//[No][Worms Suit You], else auto-output text from [No]
 		addButton(0,"No",sheilaAnalHateFuckAGoGoNO);

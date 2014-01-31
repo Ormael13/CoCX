@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Kaiju extends AbstractLakeContent {
+public class Kaiju extends AbstractLakeContent {
 
 	public function Kaiju()
 	{

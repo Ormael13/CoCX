@@ -2,8 +2,9 @@
 {
 	import classes.Appearance;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

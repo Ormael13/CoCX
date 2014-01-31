@@ -8,8 +8,9 @@ package classes.Scenes.Areas.Lake
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class GooGirlScene extends AbstractLakeContent
+public class GooGirlScene extends AbstractLakeContent
 	{
 		public function GooGirlScene()
 		{
@@ -284,7 +285,7 @@ package classes.Scenes.Areas.Lake
 				var sex4S:String = "";
 				var sex4N:Function =null;
 				var valeria:Function = kGAMECLASS.valeria.valeriaAndGooThreeStuff;
-				if (player.armorName != "goo armor" || player.findStatusAffect(StatusAffects.gooStuffed) >= 0) valeria = null;
+				if (player.armorName != "goo armor" || player.findStatusAffect(StatusAffects.GooStuffed) >= 0) valeria = null;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {

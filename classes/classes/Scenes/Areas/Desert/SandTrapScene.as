@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
 	import classes.Items.Armors.LustyMaidensArmor;
+import classes.StatusAffects;
 
-	public class SandTrapScene extends BaseContent{
+public class SandTrapScene extends BaseContent{
 		private function get sandTrap():SandTrap{
 			return monster as SandTrap;
 		}
@@ -55,7 +56,7 @@ public function encounterASandTarp():void {
 			outputText("\n\nYou don't move quickly enough, however, and you may as well be running on the spot; the edge of the pit recedes as the fluid sand carries you downwards.  You struggle upright as best you can and ready yourself to fight the sandtrap, which is leering at you hungrily from the bottom of its vast pit.");
 			outputText("\n\n\"<i>Only a matter of time now, little ant,</i>\" it says huskily, in its fluttering, buzzing voice.  You will have to defeat it in order to escape, and before it pulls you to the bottom!");
 			startCombat(new SandTrap());
-			monster.createStatusAffect(StatusAffects.level,4,0,0,0);
+			monster.createStatusAffect(StatusAffects.Level,4,0,0,0);
 			doNext(1);
 		}
 	}
@@ -83,7 +84,7 @@ private function saveTheSandTarps():void {
 		outputText("\n\n\"<i>You made it all too easy for me, little ant,</i>\" it says pityingly.  \"<i>Did no one warn you about sandtraps?</i>\"  Slowly it sinks downwards, and whilst it fondles your face you feel its other set of hands cup your [butt].  \"<i>Never mind,</i>\" the insect monster sighs into your forehead in its fluttery voice.  \"<i>I'll teach you everything there is to know.</i>\"");
 	}
 	startCombat(new SandTrap());
-	monster.createStatusAffect(StatusAffects.level,2,0,0,0);
+	monster.createStatusAffect(StatusAffects.Level,2,0,0,0);
 	doNext(1);
 }
 
@@ -119,7 +120,7 @@ private function dontSaveTheTarps():void {
 private function startSandTarpFight():void {
 	startCombat(new SandTrap());
 	spriteSelect(97);
-	monster.createStatusAffect(StatusAffects.level,4,0,0,0);
+	monster.createStatusAffect(StatusAffects.Level,4,0,0,0);
 	eventParser(1);
 }
 

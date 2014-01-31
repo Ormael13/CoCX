@@ -7,8 +7,9 @@ package classes.Scenes.Quests.UrtaQuest
 	import classes.Items.WeaponLib;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 	
 	/**
 	 * ...

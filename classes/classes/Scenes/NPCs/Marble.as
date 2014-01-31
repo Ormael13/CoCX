@@ -2,8 +2,9 @@
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

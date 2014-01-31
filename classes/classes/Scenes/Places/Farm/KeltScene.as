@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.Places.Farm {
 	import classes.CockTypesEnum;
+import classes.StatusAffects;
 
-	public class KeltScene extends AbstractFarmContent{
+public class KeltScene extends AbstractFarmContent{
 
 	public function KeltScene()
 	{
@@ -81,8 +82,8 @@ public function keltEncounter():void {
 		}
 		//Centaur bad end
 		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.statusAffectv2(StatusAffects.Kelt) >= 100 && player.gender > 1) {
-			if(player.inte > rand(40) && player.statusAffectv2(StatusAffects.Kelt) < 130 && player.findStatusAffect("Kelt Bad End Warning") < 0) {
-				player.createStatusAffect("Kelt Bad End Warning",0,0,0,0);
+			if(player.inte > rand(40) && player.statusAffectv2(StatusAffects.Kelt) < 130 && player.findStatusAffect(StatusAffects.KeltBadEndWarning) < 0) {
+				player.createStatusAffect(StatusAffects.KeltBadEndWarning,0,0,0,0);
 				outputText("You approach the farm, ready for another archery lesson.  Kelt is oblivious to your presence, busy practicing with his own bow for the moment.  The wind shifts and blows his musk your way.  Unconsciously, you breathe deeply, sending heat racing between your rear legs.  Alarm bells go off in your mind as you realize what his presence is doing to you, and you run away to your camp before he can notice you.  It's clear to you that you can't resist him much longer; the next time you meet him, you'll probably volunteer to become his brood-mare.  Perhaps you should avoid the Kelt and the farm until you feel his influence less keenly.", true);
 				dynStats("lus", player.lib/5 + 10);
 				doNext(13);
@@ -492,7 +493,7 @@ private function keltMainEncounter3():void {
 	//NAKERS
 	else {
 		//(Naked, Player in Heat:)
-		if (player.findStatusAffect(StatusAffects.heat) >= 0 && player.gender > 1) {
+		if (player.findStatusAffect(StatusAffects.Heat) >= 0 && player.gender > 1) {
 			outputText(images.showImage("kelt-farm-female-inheat"));
 			outputText("You line up as normal to begin practicing, shooting at the distant targets while Kelt criticizes your technique... usually in as loud, lewd, and offensive a way as possible.  Today, however, he seems particularly energetic.  He looms over you, distractingly close, his hooves stomping at the ground like an anxious horse.  His insults are as harsh as ever... perhaps even more cruel than usual as he mocks your attempts to hit the targets.\r\r", false);
 			outputText("One shot goes wide, and Kelt furiously demands that you go to retrieve the arrow, lodged in a nearby bale of hay.  You do so quickly, snapping to obey his orders with a little shiver of pleasure.  Somehow, it feels right to obey his every wish; to do what you can to satisfy him.  His scent has been distracting you... the rich, masculine power of him.  How had you never noticed before what a spectacular creature Kelt was?\r\r", false);

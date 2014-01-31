@@ -3,8 +3,9 @@ package classes.Scenes.NPCs
 	import classes.CoC;
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -141,9 +142,9 @@ package classes.Scenes.NPCs
 		{
 			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.domfight) >= 0)
+			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
 				game.kihaFollower.pcWinsDomFight();
-			else if(findStatusAffect(StatusAffects.spar) >= 0)
+			else if(findStatusAffect(StatusAffects.Spar) >= 0)
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -153,9 +154,9 @@ package classes.Scenes.NPCs
 		{
 			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.domfight) >= 0)
+			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
 				game.kihaFollower.pcLosesDomFight();
-			else if(findStatusAffect(StatusAffects.spar) >= 0)
+			else if(findStatusAffect(StatusAffects.Spar) >= 0)
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");

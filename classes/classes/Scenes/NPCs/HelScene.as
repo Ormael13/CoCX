@@ -2,8 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class HelScene extends NPCAwareContent {
+public class HelScene extends NPCAwareContent {
 
 	public function HelScene()
 	{

@@ -3,8 +3,9 @@ package classes.Scenes.NPCs{
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class ShouldraFollower extends NPCAwareContent {
+public class ShouldraFollower extends NPCAwareContent {
 
 	public function ShouldraFollower()
 	{
@@ -280,7 +281,7 @@ public function sandWitchGetsGhostly():void {
 //Genderless Masturbation
 private function shouldraFappinTimes():void {
 	spriteSelect(67);
-	if(player.hasCock() && player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.hasCock() && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		shouldraAndWormsYoureGonnaHaveABadTime();
 	}
 	else if(player.gender == 0) genderlessShouldraMasturbation();
@@ -1413,7 +1414,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	choices[choices.length] = 7;
 	choices[choices.length] = 7;
 	//8 (Tel'Adre unlocked)
-	if(player.statusAffectv1("Tel'Adre") >= 1) choices[choices.length] = 8;
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) choices[choices.length] = 8;
 	//9 (is preggers)
 	if(player.pregnancyIncubation > 0) choices[choices.length] = 9;
 	//10 (is preggers2)
@@ -1636,7 +1637,7 @@ private function kickOutWormiesForYourGhostPalPAL():void {
 	outputText("\n\nFueled by the sizzling churning in your [balls], the spirit works you towards a mighty geyser.  She cringes further, trying her best to direct the parasite-riddled spray away from you.  However, the head worm gets lodged in your canal, knocking some of Shouldra's worst nightmare onto your head.  She prances around in place, your hands knocking any offenders clear from your body.  The flailing about manages to loosen the obese leader from your shaft, aided by a final spurt of cum.  Shouldra balls up all her rage and unleashes it onto the poor little critter, setting it aflame.");
 	outputText("\n\nTaking great caution, the spirit falls you back onto your rump, still trembling from the horrifying ordeal.  With weary eyes, she stares at what was once her glorious salvation that had now become a drooping dick.");
 	outputText("\n\n\"<i>We are taking a bath first thing when we get to your camp, Champ,</i>\" Shouldra says by way of your mouth, your body still shuddering.");
-	player.removeStatusAffect(StatusAffects.infested);
+	player.removeStatusAffect(StatusAffects.Infested);
 	doNext(13);
 }
 

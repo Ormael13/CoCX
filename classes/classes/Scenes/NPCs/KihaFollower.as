@@ -3,8 +3,9 @@
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
 	import classes.Scenes.Areas.Swamp.SpiderMorphMob;
+import classes.StatusAffects;
 
-	public class KihaFollower extends NPCAwareContent
+public class KihaFollower extends NPCAwareContent
 	{
 
 		public function KihaFollower()
@@ -145,7 +146,7 @@ private function warnKihaOfHerImpendingDemise():void {
 	startCombat(new SpiderMorphMob());
 	//(Proceed to Spider Horde Combat)
 	//Set first round cover
-	monster.createStatusAffect(StatusAffects.miss_first_round,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.MissFirstRound,0,0,0,0);
 	HPChange(100,false);
 	fatigue(-30);
 	dynStats("lus", -40);
@@ -314,7 +315,7 @@ private function sparWithKiha():void {
 	//(Use the normal Kiha combat scenario, with the following changes upon Win/Lose, and no \"<i>Run</i>\" option available)
 	startCombat(new Kiha());
 	spriteSelect(72);
-	monster.createStatusAffect(StatusAffects.spar,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
 }
 //Spar with Friendly Kiha - Player Wins (Z)
 internal function winSparWithKiha():void {
@@ -1292,7 +1293,7 @@ private function kihaPlaysWithBigassCocksFemDomAhoy():void {
 		else outputText("  You wonder what would happen if she got jumped by your tiger-shark children.");
 	}
 	outputText("[pg]Wiping up as best you can, you don your [armor] and walk back");
-	if(monk >= 5 && player.findStatusAffect(StatusAffects.noJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+	if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 		if(!jojoScene.tentacleJojo()) outputText(", ignoring the sounds of Jojo feverishly masturbating in the woods");
 		else outputText(", ignoring the sound of Jojo vigorously fucking himself with all his tentacles in the trees");
 	}
@@ -1688,7 +1689,7 @@ private function fightForDominanceWithDragonCunnies():void {
 	outputText("[pg]\"<i>I wouldn't have it any other way, [name],</i>\" she says as she grins, raising her axe into a more combat-ready stance.  It's time to prove your worth!");
 	//[Leads to a fight]
 	startCombat(new Kiha());
-	monster.createStatusAffect(StatusAffects.domfight,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.DomFight,0,0,0,0);
 	doNext(1);
 }
 

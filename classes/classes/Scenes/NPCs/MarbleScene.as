@@ -2,8 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class MarbleScene extends NPCAwareContent{
+public class MarbleScene extends NPCAwareContent{
 
 	public function MarbleScene()
 	{
@@ -95,7 +96,7 @@ private function leaveNonFriendsMarble():void {
 private function leaveNonFriendsMarble4EVERRRR():void {
 	clearOutput();
 	spriteSelect(41);
-	player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
+	player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 	flags[kFLAGS.MARBLE_WARNING] = 2;
 	outputText("Answering the cow-girl with a blank look, you shake your head and walk away, resolving to avoid Marble from now on.");
 	//Marble is removed from the game
@@ -284,7 +285,7 @@ private function forceFeedMarble():void {
 	outputText("\n\n\"<i>I'm sorry,</i>\" you say, cupping your still-half-full tits, \"<i>but bad girls who don't drink all their milk should be punished.</i>\"  She can only look at you, wide-eyed and trembling with rage, as you pull away - and yet, even her trembles are funny, with one tit wobbling wildly and the other hardly moving at all.");
 	outputText("\n\nThe crowd that had gathered around slowly dissolves, leery of this turn of events and the mad cow-girl, and soon only visibly 'excited' observers are left.  Her tits wobble again as she tries to stand up, then begin to inflate.  The drained one balloons, increasing to full size again as her bovine body refills her milk reserve, while the other jiggles and swells only a little, growing to a small HHH-cup and setting the nipple to dribbling, simply unable to fit any more fluid inside.  As she rubs her sorely stretched and manhandled breasts, you pick up Marble's hammer and leave; maybe you'll give it back to her if you ever see her again... and she can beat you in a fight.  You doubt either will ever happen.  Whitney catches your eye and gives you a disapproving, angry, and almost forceful glare as you walk away toting the cow-girl's weapon, leaving you feeling like you were just slapped.  Oh well... as long as you don't remind her, it'll probably blow over, right?");
 	//no more marble
-	player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
+	player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 	//gain Marbl Hammer, satisfy feeder
 	//You've now been milked, reset the timer for that
 	player.addStatusValue(StatusAffects.Feeder,1,1);
@@ -353,7 +354,7 @@ private function rapeMarble():void {
 	outputText("", true);
 	outputText("You decide that rather than helping her, you are going to roughly manhandle her breasts and rape her.  You suddenly grab at her breasts and squeeze them roughly, at which point she screams and slaps you.  While you are still reeling from the blow, she uses a surprising amount of strength to force you out the door.  She slams it behind you and yells, \"<i>Don't you ever come back!</i>\" through the door. You hear her start to cry as you walk away.  Aw well, you didn't like her anyway.", true);
 	//-player never encounters Marble again
-	player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
+	player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 	doNext(13);
 }
 
@@ -666,11 +667,11 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 	spriteSelect(41);
 	if(clearS) outputText("", true);
 	//First visit post addiction:
-	if(player.findStatusAffect("Malon Visited Post Addiction") < 0) {
+	if(player.findStatusAffect(StatusAffects.MalonVisitedPostAddiction) < 0) {
 		outputText("You find Marble coming out of the barn, holding one of her bottles of milk.  When she spots you, she hurries over and hands you the bottle.  \"<i>I want to find something out. Can you drink from that bottle?</i>\" she asks.  Do you drink it?", false);
 		//- player chooses yes/no
 		doYesNo(playerAgreesToDrinkMarbleMilkBottled,playerRefusesToDrinkBottledMilk);
-		player.createStatusAffect("Malon Visited Post Addiction",0,0,0,0);
+		player.createStatusAffect(StatusAffects.MalonVisitedPostAddiction,0,0,0,0);
 	}
 	//Return visits
 	else {
@@ -842,11 +843,11 @@ public function encounterMarbleAshamedAddiction(clearS:Boolean = true):void {
 	if(clearS) outputText("", true);
 	spriteSelect(41);
 	//First visit post addiction:
-	if(player.findStatusAffect("Malon Visited Post Addiction") < 0) {
+	if(player.findStatusAffect(StatusAffects.MalonVisitedPostAddiction) < 0) {
 		outputText("You find Marble walking out of the barn, a tank in her arms.  You decide to follow her as she goes behind the barn.  When you round the corner, you see her pouring the contents of the tank out onto the ground.  You ask her what she's doing, \"<i>I'm getting rid of this corrupted milk,</i>\" she says in disgust.  As you approach her, you recognize the smell of her milk and lick your lips unconsciously.  \"<i>I make so much of it each day, I'm a monster,</i>\" she says coldly, \"<i>and I made you need it.</i>\"  As the last of the milk splashes onto the ground, Marble looks towards you. Surprisingly, her face seems hard and cold.  Do you blame her for what happened to you, or do you comfort her?", false);
 		//- player chooses blame her or comfort her
 		simpleChoices("Comfort",AshamedAddictionComfort,"Blame",AshamedAddictionBlame,"",0,"",0,"",0);
-		player.createStatusAffect("Malon Visited Post Addiction",0,0,0,0);
+		player.createStatusAffect(StatusAffects.MalonVisitedPostAddiction,0,0,0,0);
 		return;
 	}
 	//REPEAT
@@ -1746,7 +1747,7 @@ private function definitelyBreakUpWithWithMarble():void {
 	doNext(1);
 	flags[kFLAGS.BROKE_UP_WITH_MARBLE] = 1;
 	player.removeStatusAffect(StatusAffects.CampMarble);
-	player.removeStatusAffect(StatusAffects.No_More_Marble);
+	player.removeStatusAffect(StatusAffects.NoMoreMarble);
 }
 //line for morning milk delivery for dumbass addicts:  \"<i>You make a quick jaunt to the farm to satisfy your addiction; Marble seems less than pleased to see you, but squeezes one teat over a bottle and hands it to you.  You drink it greedily.</i>\"
 
@@ -1822,7 +1823,7 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 5;
 	}
 	//story) Talk about Tel'Adre(Z)
-	else if(player.statusAffectv1("Tel'Adre") >= 1 && flags[kFLAGS.MARBLE_TELADRE_STORY] == 0) {
+	else if(player.statusAffectv1(StatusAffects.TelAdre) >= 1 && flags[kFLAGS.MARBLE_TELADRE_STORY] == 0) {
 		outputText("This time you've got quite a tale to tell Marble: the last free city in the world, Tel'Adre.  She is quite enthralled by the tale of the many buildings and people who live in its confines, managing to hide away from the demons thanks to the mages in the great tower, but is somewhat saddened when you tell her about how empty much of the city was, and oddly confused about the guards you met at the entrance.  In the end, she seems to decide to check it out on her own, although she doesn't say so openly.");
 		flags[kFLAGS.MARBLE_TELADRE_STORY] = 1;
 	}
@@ -1853,16 +1854,16 @@ private function talkWithMarbleAtCamp():void {
 	else if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) < 0)
 		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"", false);		
 	//(player has completed the factory but has not returned to Marae)
-	else if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) < 0)
+	else if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
-	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1(StatusAffects.TelAdre) == 0)
 		outputText("\"<i>Well sweetie, maybe you should explore the world more?  From what I've heard from the centaurs who stop by the farm, I'm sure you could find something interesting in the deep forest, or maybe the desert,</i>\" she suggests.");
 	//(suggestion) If PC has found Tel'Adre, but not Zetaz's lair(Z)
-	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 && player.statusAffectv1("Tel'Adre") >= 1)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 && player.statusAffectv1(StatusAffects.TelAdre) >= 1)
 		outputText("\"<i>I was thinking that the deep woods probably still hide secrets from you, sweetie... a few times I've been there, I've noticed large numbers of imps carrying supplies.  Think there could be something to that?</i>\" she asks.");
 	//(suggestion) if PC has discovered Zetaz's lair, but has not yet found Tel'Adre(Z)
-	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)
 		outputText("\"<i>Well... I've seen patrols around the camp before.  They were all wearing the same uniform, so maybe there's some kind of city or armed force out there?  Come to think of it, one time I found some sand where they were standing when they moved on - I bet they're holed up in the desert somewhere!</i>\" she says with conviction.");
 	//(suggestion) if PC has discovered Zetaz's lair but has not cleared the cave(Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[kFLAGS.DEFEATED_ZETAZ] == 0)
@@ -1960,7 +1961,7 @@ New function: marbleNips() – returns "nipples" or "quad-nipples" based on what
 */
 private function marbleCampSexNew():void {
 	spriteSelect(41);
-	if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		outputText("You call Marble over and ask her if she can give you some release.  She smiles at you and gently grips your " + cockDescript(0) + " in one of her hands before recoiling in horror.  \"<i>Uh, why don't you take care of that problem of yours in your cock first, sweetie?  Then I'll help you get release.</i>\"  It looks like Marble isn't willing to help you get release while you have worms infecting your cock.", false);
 		return;
 	}
@@ -2358,7 +2359,7 @@ private function rapeDAHMARBLEZ():void {
 	}
 	doNext(15);
 	//The follow up fight event can now be triggered, regardless of whether the rape was successful or not.
-	player.createStatusAffect(StatusAffects.Marble_Rape_Attempted,0,0,0,0);
+	player.createStatusAffect(StatusAffects.MarbleRapeAttempted,0,0,0,0);
 }
 
 //Corruption supplementary text
@@ -2638,7 +2639,7 @@ public function marbleNightSleepFlavor():Boolean {
 	//Marble 60+ & player 20+ - service
 	//boring
 	//PC has worms kills everything.
-	if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		if(flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] != 1) {
 			outputText("As you go to lie down for the night, you find that Marble has gotten there before you.  You lie down next to her, but you can't help wishing that the two of you could have sex.  Suddenly, you feel Marble's hand grab ahold of your " + cockDescript(0) + ".  She give a bit of a squeal as one of the worms starts to move around inside the shaft.  She pulls open the blankets and looks closely at your dick for a few moments before picking up her bedroll and moving to a different part of the camp saying, \"<i>" + player.short + ", you get rid of those or I'm not going to sleep next to you or with you.</i>\"\n\n", false);
 			flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 1;

@@ -667,7 +667,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		for (i = 0; i < player.statusAffects.length; i++)
 		{
 			//trace("Populate One statusAffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusAffects[i].statusAffectName;
+			saveFile.data.statusAffects[i].statusAffectName = player.statusAffects[i].stype.id;
 			saveFile.data.statusAffects[i].value1 = player.statusAffects[i].value1;
 			saveFile.data.statusAffects[i].value2 = player.statusAffects[i].value2;
 			saveFile.data.statusAffects[i].value3 = player.statusAffects[i].value3;
@@ -1404,17 +1404,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
-			player.createStatusAffect(StatusAffects.TEMP, 0, 0, 0, 0);
-		}
-		//Populate Status Array
-		for (i = 0; i < saveFile.data.statusAffects.length; i++)
-		{
-			player.statusAffects[i].statusAffectName = saveFile.data.statusAffects[i].statusAffectName;
-			player.statusAffects[i].value1 = saveFile.data.statusAffects[i].value1;
-			player.statusAffects[i].value2 = saveFile.data.statusAffects[i].value2;
-			player.statusAffects[i].value3 = saveFile.data.statusAffects[i].value3;
-			player.statusAffects[i].value4 = saveFile.data.statusAffects[i].value4;
-				//trace("StatusAffect " + player.statusAffects[i].statusAffectName + " loaded.");
+			var stype:StatusAffectType = StatusAffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
+			if (stype == null){
+				CoC_Settings.error("Cannot find status affect "+saveFile.data.statusAffects[i].statusAffectName);
+				continue;
+			}
+			player.createStatusAffect(stype,
+					saveFile.data.statusAffects[i].value1,
+					saveFile.data.statusAffects[i].value2,
+					saveFile.data.statusAffects[i].value3,
+					saveFile.data.statusAffects[i].value4);
+				//trace("StatusAffect " + player.statusAffects[i].stype.id + " loaded.");
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)

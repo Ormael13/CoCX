@@ -2,6 +2,8 @@
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class Essrayle extends BaseContent{
 
 	public function Essrayle()

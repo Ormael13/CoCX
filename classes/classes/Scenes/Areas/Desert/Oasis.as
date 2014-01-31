@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.BaseContent;
-	public class Oasis extends BaseContent{
+import classes.StatusAffects;
+
+public class Oasis extends BaseContent{
 
 		public function Oasis()
 		{

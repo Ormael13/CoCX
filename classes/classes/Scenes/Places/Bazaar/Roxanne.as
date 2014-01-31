@@ -5,8 +5,9 @@ import classes.CockTypesEnum;
 import classes.CoC_Settings;
 import classes.Appearance;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Roxanne extends BazaarAbstractContent{
+public class Roxanne extends BazaarAbstractContent{
 
 	public function Roxanne()
 	{

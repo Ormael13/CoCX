@@ -4,8 +4,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.Cock;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */

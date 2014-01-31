@@ -5,8 +5,9 @@ package classes.Scenes.NPCs
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */

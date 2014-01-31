@@ -4,6 +4,8 @@ import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class TentacleBeastScene extends BaseContent{
 
 

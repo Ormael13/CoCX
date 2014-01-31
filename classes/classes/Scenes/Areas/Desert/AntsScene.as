@@ -10,8 +10,9 @@ package classes.Scenes.Areas.Desert
 	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Plains.Gnoll;
+import classes.StatusAffects;
 
-	public class AntsScene extends BaseContent
+public class AntsScene extends BaseContent
 	{
 		public function AntsScene()
 		{

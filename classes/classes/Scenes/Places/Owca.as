@@ -7,6 +7,8 @@ import classes.BaseContent;
 	import classes.Scenes.Places.Owca.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class Owca extends BaseContent{
 
 	public function Owca()
@@ -330,7 +332,7 @@ public function loseOrSubmitToVapula():void {
 	flags[kFLAGS.VAPULA_SUBMISSIVENESS] += 10;
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 90 && flags[kFLAGS.VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
-	else if(player.findStatusAffect(StatusAffects.lostVillagerSpecial) >= 0) doNext(morningAfterRape);
+	else if(player.findStatusAffect(StatusAffects.LostVillagerSpecial) >= 0) doNext(morningAfterRape);
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	dynStats("lib", 1, "sen", 2, "lus=", 0, "cor", 3);
 }
@@ -778,7 +780,7 @@ private function fightZeVillagers():void {
 	clearOutput();
 	//You are fighting the villagers (level 14):
 	startCombat(new Farmers());
-	monster.createStatusAffect(StatusAffects.Generic_Run_Disabled,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.GenericRunDisabled,0,0,0,0);
 	eventParser(1);
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp
 }
@@ -839,11 +841,11 @@ public function loseToOwca():void {
 	fatigue(-30);
 	//after nightly scene, next encounter is Post-Mob Encounter
 	doNext(loseOrSubmitToVapula);
-	player.createStatusAffect(StatusAffects.lostVillagerSpecial,0,0,0,0);
+	player.createStatusAffect(StatusAffects.LostVillagerSpecial,0,0,0,0);
 }
 //Post-Mob Encounter (Z)
 private function morningAfterRape():void {
-	player.removeStatusAffect(StatusAffects.lostVillagerSpecial);
+	player.removeStatusAffect(StatusAffects.LostVillagerSpecial);
 	clearOutput();
 	outputText("The village is utterly silent and almost deserted.  The few people you see look away when they spot you, probably ashamed of what they did last time.  Doors are locked and windows are closed as you pass by; everyone is obviously afraid of directly confronting their victim.  You head toward Rebecc's house, your last friend.  As you open her door, you hear a muffled wail; you recognize the pretty farmer's voice.  She is laying on her bed, weeping uncontrollably; once she finally notices your presence, she looks up to you with tear-filled eyes, sobbing convulsively as she talks.");
 	outputText("\n\n\"<i>T-they forced you to be abused... I promise I didn't want that!  I tried to convince them... they wouldn't listen... they threw you to the pit... at least I made them give you back your belongings as usual... now you must hate me, don't you?  Oh, I'm so sorry!  It's all my fault!</i>\"");

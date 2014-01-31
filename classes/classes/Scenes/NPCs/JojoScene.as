@@ -3,6 +3,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Appearance;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class JojoScene extends NPCAwareContent {
 
 	public function JojoScene()
@@ -47,7 +49,7 @@ public function tentacleJojo():Boolean {
 
 }
 override public function campCorruptJojo():Boolean {
-	return monk >= 5 && player.findStatusAffect(StatusAffects.noJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
+	return monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
 }
 private function jojoMutationOffer():void {
 	outputText("A wicked idea comes to mind while thinking of Jojo.  The lethicite you took from the lake goddess – perhaps it could be used to enhance your own budding demonic powers, and twist your mousey fuck-puppet into a truly worthy pet?\n\n<b>Do You?</b> (WARNING: Offered only once & unlocks tentacle content)", true);
@@ -102,7 +104,7 @@ public function corruptCampJojo():void {
 	var hairCare:Function = null;
 	var sex:Number = 0;
 	if(player.gender > 0 && player.lust >= 33) sex = 2138;
-	if(player.findStatusAffect(StatusAffects.hairdressermeeting) >= 0) hairCare = jojoPaysForPerms;
+	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) hairCare = jojoPaysForPerms;
 	choices("Sex",sex,"TentacleSex",tent,"Milk Him",milkHim,"TentacleMilk",tentaMilk,"HairCare",hairCare,"Lay Eggs",eggs,"",0,"",0,"",0,"Back",camp.campSlavesMenu);
 }
 /*OLD FOLLOWER JOJO CODE
@@ -183,7 +185,7 @@ public function mutateJojo():void {
 	outputText("You turn back to your tent, turned on beyond all measure, and needing to masturbate NOW.   You wonder what Jojo's new additions will feel like on your body when he wakes up, but for now you'll have to get off another way.", false);
 	dynStats("lus", 300, "cor", 10);
 	//(LIMITED MASTURBATE MENU – No Jojo)
-	player.createStatusAffect(StatusAffects.noJojo,0,0,0,0);
+	player.createStatusAffect(StatusAffects.NoJojo,0,0,0,0);
 	player.createStatusAffect(StatusAffects.TentacleJojo,0,0,0,0);
 	doNext(1);
 }
@@ -861,8 +863,8 @@ public function jojoRape():void {
 	jojoSprite();
 	player.slimeFeed();
 	//Track Jojo rapeage
-	if(player.findStatusAffect(StatusAffects.Ever_Raped_Jojo) < 0) player.createStatusAffect(StatusAffects.Ever_Raped_Jojo,1,0,0,0);
-	else player.addStatusValue(StatusAffects.Ever_Raped_Jojo,1,1);
+	if(player.findStatusAffect(StatusAffects.EverRapedJojo) < 0) player.createStatusAffect(StatusAffects.EverRapedJojo,1,0,0,0);
+	else player.addStatusValue(StatusAffects.EverRapedJojo,1,1);
 	//Fifth RAEP
 	if(monk == 5) {
 		outputText("Jojo smiles serenely, pleased at the outcome, a foot of tumescent mouse-meat bobbing at attention.\n\n", true);

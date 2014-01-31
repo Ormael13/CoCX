@@ -2,8 +2,9 @@ package classes.Scenes.NPCs
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */

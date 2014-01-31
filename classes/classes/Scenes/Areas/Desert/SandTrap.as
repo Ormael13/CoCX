@@ -3,8 +3,9 @@
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -37,14 +38,14 @@
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(findStatusAffect(StatusAffects.level) < 0) createStatusAffect(StatusAffects.level,4,0,0,0);
+			if(findStatusAffect(StatusAffects.Level) < 0) createStatusAffect(StatusAffects.Level,4,0,0,0);
 			if(adjustment != 0) {
-				addStatusValue(StatusAffects.level,1,adjustment);
+				addStatusValue(StatusAffects.Level,1,adjustment);
 				//Keep in bounds ya lummox
-				if(statusAffectv1(StatusAffects.level) < 1) changeStatusValue(StatusAffects.level,1,1);
-				if(statusAffectv1(StatusAffects.level) > 4) changeStatusValue(StatusAffects.level,1,4);
+				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
+				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
 			}
-			return statusAffectv1(StatusAffects.level);
+			return statusAffectv1(StatusAffects.Level);
 		}
 
 
@@ -83,7 +84,7 @@
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.level) >= 0) {
+			if (findStatusAffect(StatusAffects.Level) >= 0) {
 				if (trapLevel() == 4 && findStatusAffect(StatusAffects.Climbed) < 0) nestleQuikSandAttack();
 				else sandTrapPheremones();
 //PC sinks a level (end of any turn in which player didn't successfully \"<i>Wait</i>\"):

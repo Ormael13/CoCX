@@ -13,7 +13,7 @@ package classes
 				return STATUSAFFECT_LIBRARY[id];
 			}
 
-			public static function getPerkLibrary():Dictionary
+			public static function getStatusAffectLibrary():Dictionary
 			{
 				return STATUSAFFECT_LIBRARY;
 			}

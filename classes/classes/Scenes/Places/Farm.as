@@ -77,7 +77,7 @@ public function farmExploreEncounter():void {
 			
 			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
 		}
-		if(player.findStatusAffect(StatusAffects.Marble_Rape_Attempted) < 0 && player.findStatusAffect(StatusAffects.No_More_Marble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
+		if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
 			
 			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
@@ -187,17 +187,17 @@ private function workFarm():void {
 	var marbling:Number = 0;
 	outputText("", true);
 	//In withdrawl odds are higher.
-	if(player.findStatusAffect(StatusAffects.No_More_Marble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+	if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) marbleScene.addictedEncounterHappy();
 		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
 	}
 	//1/3 chance of marblez
-	if(rand(3) == 0 && player.findStatusAffect(StatusAffects.No_More_Marble) < 0 && player.findStatusAffect(StatusAffects.Marble) > 0) {
+	if(rand(3) == 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) > 0) {
 		//Rapez Override normal
-		if(player.findStatusAffect(StatusAffects.Marble_Rape_Attempted) >= 0 || flags[kFLAGS.MARBLE_WARNING] == 3) {
+		if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0 || flags[kFLAGS.MARBLE_WARNING] == 3) {
 			marbleScene.marbleAfterRapeBattle();
-			player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
+			player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 			return;
 		}
 		//Angry meeting
@@ -326,9 +326,9 @@ private function exploreFarm():void {
 	var explore:Number = 0;
 	
 	//Marble after-rape
-	if(player.findStatusAffect(StatusAffects.Marble_Rape_Attempted) >= 0 && player.findStatusAffect(StatusAffects.No_More_Marble) < 0) {
+	if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
 		marbleScene.marbleAfterRapeBattle();
-		player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
+		player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 		return;
 	}
 	//FIND CARROT!
@@ -342,7 +342,7 @@ private function exploreFarm():void {
 		return;
 	}
 	//Meet Marble First Time
-	if(player.findStatusAffect(StatusAffects.Marble) < 0 && player.findStatusAffect(StatusAffects.No_More_Marble) < 0) {
+	if(player.findStatusAffect(StatusAffects.Marble) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
 		doNext(13);
 		marbleScene.encounterMarbleInitially();
 		return;
@@ -354,7 +354,7 @@ private function exploreFarm():void {
 		return;		
 	}
 	//In withdrawl odds are higher.
-	if(player.findStatusAffect(StatusAffects.No_More_Marble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+	if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) marbleScene.addictedEncounterHappy();
 		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
@@ -411,7 +411,7 @@ private function exploreFarm():void {
 			dynStats("lus", 10);
 		}
 		//[if no horse dick, a deep cow or horse vag, and in heat]
-		else if(player.findStatusAffect(StatusAffects.heat) >= 0) {
+		else if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
 			outputText("Maybe it wants a bull? You do, one with long, thick dick-meat to satisfy your starving fuck-hole...\n\n", false);
 			dynStats("lus", 15);
 		}

@@ -7,8 +7,9 @@
 	import classes.CockTypesEnum;
 	import classes.ItemType;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class LatexGirl extends NPCAwareContent
+public class LatexGirl extends NPCAwareContent
 	{
 
 		public function LatexGirl()

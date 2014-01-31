@@ -152,7 +152,7 @@ public function dreamSelect():Boolean {
 			//female
 			else {
 				//heat dream!
-				if(player.findStatusAffect(StatusAffects.heat) >= 0) {
+				if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
 					outputText("being pregnant, your belly bulging obscenely with the fruits of all your frequent copulations, and your breasts swollen with breast milk.  You imagine your condition enhancing your libido, driving you seek out sexual partners willing to pleasure your distorted form.  ", false);
 				}
 				//normal dream

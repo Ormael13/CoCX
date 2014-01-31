@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class SophieBimbo extends NPCAwareContent
+public class SophieBimbo extends NPCAwareContent
 	{
 
 		public function SophieBimbo()
@@ -142,7 +143,7 @@ private function acceptBimboSophie():void {
 		else outputText("flushes hotly and wiggles her hips Sophie's way.  The slutty, corrupted mouse and Sophie will clearly be helping to sate each other's needs in your absence.", false);
 	}
 	//(After, she offers to lick Marble's cunt.  Marble doesn't even answer her.  She just turns to you and says, \"<i>Really?  Sweetie... just... keep her away from me.  She's so far gone, I guess you can keep her around if you need to, but don't let her bug me.</i>\")  
-	else if(monk >= 5 && player.findStatusAffect(StatusAffects.noJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
+	else if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...", false);
 	else if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
 	else if(kGAMECLASS.isabellaFollowerScene.isabellaFollower())

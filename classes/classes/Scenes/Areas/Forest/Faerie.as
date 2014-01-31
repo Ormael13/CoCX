@@ -4,6 +4,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Appearance;
 import classes.CockTypesEnum;
+import classes.StatusAffects;
+
 public class Faerie extends BaseContent{
 
 	public function Faerie()
@@ -54,13 +56,13 @@ public function encounterFaerie():void {
 private function faerieRAEP():void {
 	spriteSelect(17);
 	//Count secksins
-	if(player.findStatusAffect(StatusAffects.Faerie_Fem_Fuck) < 0) player.createStatusAffect(StatusAffects.Faerie_Fem_Fuck,1,0,0,0);
-	else player.addStatusValue(StatusAffects.Faerie_Fem_Fuck,1,1);
+	if(player.findStatusAffect(StatusAffects.FaerieFemFuck) < 0) player.createStatusAffect(StatusAffects.FaerieFemFuck,1,0,0,0);
+	else player.addStatusValue(StatusAffects.FaerieFemFuck,1,1);
 	
 	outputText("You let the tiny faerie buzz closer to investigate, then with an explosion of movement, snatch her out of the air.  She squirms in your palm, struggling futilely in your grasp.  You poke between her legs with a finger, noting the flushed redness of the faerie's skin.  ", true);
 	//Changes based on times fucked
-	if(player.statusAffectv1(StatusAffects.Faerie_Fem_Fuck) == 1) outputText("She juices herself and screams, \"<i>Let me goooooooo,</i>\" trying to sound outraged instead of turned on, but the tiny girl's body gives away the lie.", false);
-	else if(player.statusAffectv1(StatusAffects.Faerie_Fem_Fuck) <= 5) outputText("She juices herself and moans, \"<i>Stop teasing meeeeee,</i>\" doing her best to wriggle back against you, as if she could somehow impale herself on your digit.", false);
+	if(player.statusAffectv1(StatusAffects.FaerieFemFuck) == 1) outputText("She juices herself and screams, \"<i>Let me goooooooo,</i>\" trying to sound outraged instead of turned on, but the tiny girl's body gives away the lie.", false);
+	else if(player.statusAffectv1(StatusAffects.FaerieFemFuck) <= 5) outputText("She juices herself and moans, \"<i>Stop teasing meeeeee,</i>\" doing her best to wriggle back against you, as if she could somehow impale herself on your digit.", false);
 	else outputText("She squeals, rocking her hips back against you and moaning, \"<i>Ohhhh I love it when you do that,</i>\" grinding her incredibly small love-button on your digit.", false);
 	//Special Taurness
 	if(player.isTaur()) {
@@ -90,7 +92,7 @@ private function faerieRAEP():void {
 	//Non-Taurs
 	else {
 		outputText("\n\nYou release the lower portion of your " + player.armorName + ", revealing your aroused slit to the faerie.  ", false);
-		if(player.statusAffectv1(StatusAffects.Faerie_Fem_Fuck) < 4) outputText("Her mood immediately shifts from panic to desire, and she licks her lips hungrily, locking her eyes onto your feminine folds.", false);
+		if(player.statusAffectv1(StatusAffects.FaerieFemFuck) < 4) outputText("Her mood immediately shifts from panic to desire, and she licks her lips hungrily, locking her eyes onto your feminine folds.", false);
 		else outputText("Her eyes open wide, like a junkie seeing a fix.  She licks her lips hungrily and humps the inside of your hand, ready for action.", false);
 		outputText("  You release the faerie, letting the pussy-entranced fae buzz down to your sensitive nether-regions.  She lands softly, her tiny feet and hands prancing over your vulva.  You gasp in delight, ", false);
 		if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("releasing a tiny squirt", false);
@@ -125,12 +127,12 @@ private function faerieRAEP():void {
 	}
 	//[OH SHIT ITS OVER, POOR BITCH CRAWLS OUT ALL STONE ON GIRLCUM]
 	//[FIRST TIME] 
-	if(player.statusAffectv1(StatusAffects.Faerie_Fem_Fuck) == 1) {
+	if(player.statusAffectv1(StatusAffects.FaerieFemFuck) == 1) {
 		outputText("Lying in the forest loam as you recover, you watch as the faerie stumbles out of your groin, holding her head and giggling nonstop.  She tries to put on a serious face but it's instantly overpowered by another fit of laughter, \"<i>Hehe, did you know I'd get stoned off your girlcum?  Omigod I've never been this -heheheheheh- high before!  Like I can see EVERYTHING.  Puuhleeeease don't make me do this again...</i>\"\n\n", false);
 		outputText("She flies off, hungry and looking for a flower to munch on.", false);
 	}
 	//[REPEAT LOW]
-	else if(player.statusAffectv1(StatusAffects.Faerie_Fem_Fuck) <= 5) {
+	else if(player.statusAffectv1(StatusAffects.FaerieFemFuck) <= 5) {
 		outputText("The faerie slowly drags herself out of your " + vaginaDescript(0) + ", smiling broadly with her eyes dilated wide.  She slips off you, dropping to the ground and giggling, \"<i>Everything feels so soft.  Mmmm that was fun!</i>\"\n\n", false);
 		outputText("The little woman spins around happily, proclaiming, \"<i>The  colors are like, so bright!  Oh gosh, I'm hungry!  See you and your clit later, just don't let me fall in your snatch, it fucks me up so much.  I don't think I can handle much more or I'll be crawling between your legs every chance I get!</i>\"\n\n", false);
 		outputText("She flits away, calling out, \"<i>Bye sweetie!</i>\"", false);

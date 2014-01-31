@@ -40,11 +40,11 @@ public function doEvent(eventNo:Number):void
 		outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"", true);
 		
 		dynStats("str", .5,"tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", -1);
-		if (player.findStatusAffect(StatusAffects.Jojo_Meditation_Count) < 0)
-			player.createStatusAffect(StatusAffects.Jojo_Meditation_Count, 1, 0, 0, 0);
+		if (player.findStatusAffect(StatusAffects.JojoMeditationCount) < 0)
+			player.createStatusAffect(StatusAffects.JojoMeditationCount, 1, 0, 0, 0);
 		else
-			player.addStatusValue(StatusAffects.Jojo_Meditation_Count, 1, 1);
-		temp = player.statusAffectv1(StatusAffects.Jojo_Meditation_Count);
+			player.addStatusValue(StatusAffects.JojoMeditationCount, 1, 1);
+		temp = player.statusAffectv1(StatusAffects.JojoMeditationCount);
 		if (temp >= 5)
 		{
 			outputText("\n\nJojo nods respectfully at you when the meditation session is over and smiles.  ");
@@ -271,7 +271,7 @@ public function doEvent(eventNo:Number):void
 		if (player.cor > 75)
 			outputText("You smile and stride forward, welcoming the pleasure you expect from such a monster.\n\n", false);
 		//Worms get nothing!
-		if (player.findStatusAffect(StatusAffects.infested) >= 0)
+		if (player.findStatusAffect(StatusAffects.Infested) >= 0)
 		{
 			outputText("It stops itself completely in a moment and twitches, as if sniffing the air, before turning around and disappearing into the underbrush.", false);
 			doNext(13);
@@ -710,7 +710,7 @@ public function doEvent(eventNo:Number):void
 		if (giacomo > 0)
 		{
 			//If infested && no worm offer yet
-			if (player.findStatusAffect(StatusAffects.WormOffer) < 0 && player.findStatusAffect(StatusAffects.infested) >= 0)
+			if (player.findStatusAffect(StatusAffects.WormOffer) < 0 && player.findStatusAffect(StatusAffects.Infested) >= 0)
 			{
 				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n", true);
 				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles. \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here. It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n", false);
@@ -738,7 +738,7 @@ public function doEvent(eventNo:Number):void
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ", true);
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?", false);
 				//If player is infested and knows of the cure..
-				if (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.infested) >= 0)
+				if (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0)
 				{
 					simpleChoices("Potions", 2016, "Books", 2017, "Erotica", 2018, "Worm Cure", 2082, "Leave", 13);
 				}
@@ -1393,7 +1393,7 @@ public function doEvent(eventNo:Number):void
 		inventory.takeItem(consumables.P_DRAFT);
 		player.gems -= 20;
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul, 2, 1);
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
 	//Purify Succubi Milk
 	else if (eventNo == 2072)
@@ -1410,7 +1410,7 @@ public function doEvent(eventNo:Number):void
 		inventory.takeItem(consumables.P_S_MLK);
 		player.gems -= 20;
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul, 2, 1);
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
 	//Purify Succubi's Delight
 	else if (eventNo == 2073)
@@ -1427,7 +1427,7 @@ public function doEvent(eventNo:Number):void
 		inventory.takeItem(consumables.PSDELIT);
 		player.gems -= 20;
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul, 2, 1);
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
 	
 	//Grab marae's boob!
@@ -1461,7 +1461,7 @@ public function doEvent(eventNo:Number):void
 		if (player.HP > int(maxHP() * .15))
 			player.HP = int(maxHP() * .15);
 		//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
-		player.removeStatusAffect(StatusAffects.infested);
+		player.removeStatusAffect(StatusAffects.Infested);
 		dynStats("lib", -1, "lus", -99, "cor", -4);
 		player.gems -= 175;
 		statScreenRefresh();
@@ -1506,7 +1506,7 @@ public function doEvent(eventNo:Number):void
 		if (player.HP > int(maxHP() * .5))
 			player.HP = int(maxHP() * .5);
 		player.sens = 11;
-		player.removeStatusAffect(StatusAffects.infested);
+		player.removeStatusAffect(StatusAffects.Infested);
 		dynStats("sen", -1, "lus", -99, "cor", -15);
 		doNext(13);
 	}
@@ -1723,14 +1723,14 @@ public function doEvent(eventNo:Number):void
 		inventory.takeItem(consumables.P_LBOVA);
 		player.gems -= 20;
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul, 2, 1);
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
 	
 	//Move Jojo into camp
 	else if (eventNo == 2149)
 	{
 		jojoScene.jojoSprite();
-		if (player.findStatusAffect(StatusAffects.Ever_Raped_Jojo) >= 0 || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1)
+		if (player.findStatusAffect(StatusAffects.EverRapedJojo) >= 0 || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1)
 		{
 			outputText("You offer Jojo the chance to stay at your camp, but before you can finish your sentance he shakes his head 'no' and stalks off into the woods, remembering.", false);
 			doNext(13);
@@ -1769,7 +1769,7 @@ public function doEvent(eventNo:Number):void
 		if (player.lust >= 33 && player.gender > 0)
 			jojoRapeFuncNum = 2153;
 		//Menu with worm purge
-		if (player.findStatusAffect(StatusAffects.infested) >= 0)
+		if (player.findStatusAffect(StatusAffects.Infested) >= 0)
 		{
 			outputText("As you approach the serene monk, you see his nose twitch.\n\n", false);
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
@@ -1893,7 +1893,7 @@ public function doEvent(eventNo:Number):void
 			outputText("reluctantly.", false);
 		outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges. You count at least two goblins and one imp who quickly pull back. From the sounds, they were busy getting themselves off.", false);
 		//[if first appearance of this event]
-		if (player.statusAffectv1("Mino + Cowgirl") == 0)
+		if (player.statusAffectv1(StatusAffects.MinoPlusCowgirl) == 0)
 			outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.", false);
 		//Lust!
 		dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());

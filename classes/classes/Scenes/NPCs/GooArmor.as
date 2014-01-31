@@ -3,8 +3,9 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.Scenes.Areas.Lake.GooGirl;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -18,7 +19,7 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusAffect(StatusAffects.spar) >= 0) game.valeria.pcWinsValeriaSpar();
+			if (findStatusAffect(StatusAffects.Spar) >= 0) game.valeria.pcWinsValeriaSpar();
 			else game.beatUpGooArmor();
 		}
 
@@ -28,7 +29,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
 				doNext(game.endLustLoss);
 			} else {
-				if(findStatusAffect(StatusAffects.spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
+				if(findStatusAffect(StatusAffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
 				else game.gooArmorBeatsUpPC();
 			}
 		}

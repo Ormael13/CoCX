@@ -7,8 +7,9 @@ package classes.Scenes.Areas.Mountain
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class HellHoundScene extends BaseContent
+public class HellHoundScene extends BaseContent
 	{
 		public function HellHoundScene()
 		{
@@ -193,11 +194,11 @@ package classes.Scenes.Areas.Mountain
 			if (player.keyItemv2("Marae's Lethicite") == 1) {
 				outputText("He looks at the crystal for a moment, before biting off half of it and giving the other half back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n", false);
 				//Replace ⅔ Merae's Lethicite with regular lethicite.
-				player.addStatusValue("Marae's Lethicite", 2, 1)
+				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
 			}
 			else {
 				//Remove 1 lethicite crystal from the PC
-				player.addStatusValue("Marae's Lethicite", 2, 1)
+				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
 			}
 			outputText("He rolls the crystal around in his mouth for a few moments before swallowing the crystal.  In a moment, white flames rise up around his body, and he gives you a wicked grin.  \"<i>Now, let me give you the gift promised for this tribute.</i>\"\n\n", false);
 

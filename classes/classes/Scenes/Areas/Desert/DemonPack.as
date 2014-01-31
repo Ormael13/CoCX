@@ -5,8 +5,9 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

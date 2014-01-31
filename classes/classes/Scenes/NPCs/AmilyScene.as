@@ -8,8 +8,9 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class AmilyScene extends NPCAwareContent
+public class AmilyScene extends NPCAwareContent
 	{
 		/*Amily the Mousegirl Breeder
 		 * Plus human stuff
@@ -184,7 +185,7 @@ package classes.Scenes.NPCs
 			}
 			//Remove worm block if player got rid of worms.
 			if(flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1) {
-				if(player.findStatusAffect(StatusAffects.infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
+				if(player.findStatusAffect(StatusAffects.Infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
 			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25) {
@@ -1215,7 +1216,7 @@ package classes.Scenes.NPCs
 			outputText("You softly tell her that you're sorry, but it just can't be helped. You have a quest to fulfill, and you don't even know if you'll be staying around instead of going home when it's over. That's even assuming you succeed, and don't end up dead in a ditch somewhere. You can't countenance taking a lover with something like that hanging over your head. Besides, you tell Amily that she should have more respect for her body than what this plan of hers entails, anyway.\n\n", false);
 			outputText("Amily sniffs loudly, tears blatantly running down her cheeks. \"<i>If... if that's the way it has to be, then,</i>\" she sniffles, \"<i>I... I guess that there's nothing left for me here. I'll just have to leave... Maybe I can find somewhere that will at least give me shelter.</i>\"\n\n", false);
 			//[Player has found Tel'Adre]
-			if(player.statusAffectv1("Tel'Adre") >= 1) {
+			if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
 				outputText("You tell her that you've discovered a hidden city in the desert, free of corruption. Amily looks shocked, but clearly grateful as you assure her of its existence and provide instructions on how to get there.\n\n", false);
 			}
 			else {
@@ -2038,7 +2039,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 
 			//worm infested reaction
-			if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+			if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 				outputText("\"<i>EWWWW!  You're infested!</i>\" she shrieks, \"<i>Get out!  Don't come back till you get rid of the worms!</i>\"\n\nYou high tail it out of there.  It looks like Amily doesn't want much to do with you until you're cured.", false);
 				doNext(13);
 				flags[kFLAGS.AMILY_AFFECTION] -= 3;

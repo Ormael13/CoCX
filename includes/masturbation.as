@@ -233,7 +233,7 @@ public function onaholeUse():void
 	
 	//Regular!
 	//Flag after first use!
-	if(player.findStatusAffect(StatusAffects.plain_onahole_used) < 0) player.createStatusAffect(StatusAffects.plain_onahole_used,0,0,0,0);
+	if(player.findStatusAffect(StatusAffects.PlainOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.PlainOnaholeUsed,0,0,0,0);
 	//If player is already flagged, show repeated use text!
 	else {
 		//High Corruption
@@ -279,7 +279,7 @@ public function deluxeOnaholeUse():void {
 	//Deluxe!
 	if(player.hasKeyItem("Deluxe Onahole") >= 0) {
 		//Flag after first use!
-		if(player.findStatusAffect(StatusAffects.deluxe_onahole_used) < 0) player.createStatusAffect(StatusAffects.deluxe_onahole_used,0,0,0,0);
+		if(player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.DeluxeOnaholeUsed,0,0,0,0);
 		//If player is already flagged, show repeated use text!
 		else {
 			//High Corruption
@@ -340,7 +340,7 @@ public function allNaturalOnaholeUse():void {
 	//All-natural!
 	if(player.hasKeyItem("All-Natural Onahole") >= 0) {
 		//Flag after first use!
-		if(player.findStatusAffect("all-natural onahole used") < 0) player.createStatusAffect("all-natural onahole used",0,0,0,0);
+		if(player.findStatusAffect(StatusAffects.AllNaturalOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.AllNaturalOnaholeUsed,0,0,0,0);
 		//If player is already flagged, show repeated use text!
 		else {
 			//High corruption variant!
@@ -395,8 +395,8 @@ public function stimBeltUse():void {
 	//FIRST TIME USAGE
 	if((player.hasKeyItem("Self-Stimulation Belt") >= 0)) {
 		//First use! Flag after first use!
-		if(player.findStatusAffect("used self-stim") < 0) {
-			player.createStatusAffect("used self-stim", 0,0,0,0);	
+		if(player.findStatusAffect(StatusAffects.used_self_dash_stim) < 0) {
+			player.createStatusAffect(StatusAffects.used_self_dash_stim, 0,0,0,0);
 			outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ", false);
 			outputText(player.breastCup(0), false);
 			outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.", false);
@@ -419,9 +419,9 @@ public function allNaturalStimBeltUse():void {
 	outputText("", true);
 	if(player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 		//First time!
-		if(player.findStatusAffect("used natural self-stim") < 0) {
+		if(player.findStatusAffect(StatusAffects.UsedNaturalSelfStim) < 0) {
 			//Flag as used!
-			player.createStatusAffect("used natural self-stim", 0,0,0,0);
+			player.createStatusAffect(StatusAffects.UsedNaturalSelfStim, 0,0,0,0);
 			outputText("Brimming with anticipation, you put on the gloves to avoid prematurely triggering the machine. You place the belt down and strip yourself completely. Stepping through the straps of the garment, you pull it up. You take the time to align the nodule with the opening of your womanhood. After settling the knob to the entrance to your pussy, you take off the gloves, lay back and touch the amber pads with your fingers.\n\n", false);
 			outputText("You hear a distinctive squishing sound and you feel the belt tighten around your waist and pelvis. It becomes tighter and tighter until its removal is an impossibility because of your own bulk. While you are concerned, you maintain composure as the belt eventually stops tightening. There is a pause. A couple of minutes go by and little happens. You notice that the entire front of the belt is becoming warm. It is not the typical heat from a blanket or a piece of metal, but it feels like the warmth of flesh on flesh. You hear more squishing and you feel the nodule stir and rub against your opening. Your pleasure slowly begins to build and you are stimulated and amused by the teasing the apparatus seems to produce. Without warning, you feel your cunt stretch open as something thrusts inside you.\n\n", false);
 			doNext(2047);
@@ -718,9 +718,9 @@ public function genderlessMasturbate():void {
 	if(player.cor >= 80) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
 	//Tit foreplay
 	titForeplay();
-	if(player.findStatusAffect(StatusAffects.fappedgenderless) < 0) {
+	if(player.findStatusAffect(StatusAffects.FappedGenderless) < 0) {
 		outputText("Now this might be a problem. Here you are ready to get your rocks off and you have no idea as how to do it. Nothing to do except some trial and error. You run your hands gently over where your genitals would be. Lightly you pet the skin and feel your finger tips tickle what was once your most pleasurable of places. While it feels incredibly nice, it just isn't getting you there. You teeter at the edge and it only frustrates you further. Unsure of what to do next, your body gives you a little nudge in an unexplored avenue and you decide to take the trip.\n\n", false);
-		player.createStatusAffect(StatusAffects.fappedgenderless,0,0,0,0);
+		player.createStatusAffect(StatusAffects.FappedGenderless,0,0,0,0);
 	}
 	//All times as a genderless person (possibly written for all genders perhaps not herm (not enough hands)) - 
 	outputText("Your " + assholeDescript() + " begins to twitch. It's practically crying out for attention.\n\n", false);
@@ -1973,7 +1973,6 @@ public function deluxeDildo():void {
 		doNext(13);
 		outputText("\n", false);
 		player.cuntChange(player.vaginalCapacity() * .9, true);
-		return;
 	}
 }
 
@@ -2320,7 +2319,7 @@ public function centaurDudesGetHorseAids():void {
 	outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, though it leaks your cum the entire way.", false);
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
-	player.addKeyValue(StatusAffects.FakeMare,1,1);
+	player.addKeyValue("Fake Mare",1,1);
 }
 
 //[Masturbate] -- [CentaurPole] -- [Fem/Herm Centaurs]
@@ -2349,7 +2348,7 @@ public function centaurGirlsGetHorseAids():void {
 	outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + buttDescript() + ".  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.\n\n", false);
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
-	player.addKeyValue(StatusAffects.CentaurPole,1,1);
+	player.addKeyValue("Centaur Pole",1,1);
 	trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
 }
 
@@ -2635,8 +2634,8 @@ public function layEggsInYerTits():void {
 			if(player.bRows() < 2) outputText("\n\nEven your stomach is beginning to feel uncomfortably full when the final egg enters the ovipositor to begin its journey.  Once it pops into your gullet, you feel a great sense of relief wash over you accompanied by the last orgasm.  You pass out cradling your swollen stomach and [chest].");
 		}
 	}
-	if(player.findStatusAffect(StatusAffects.eggchest) < 0) {
-		player.createStatusAffect(StatusAffects.eggchest,3 + rand(10),1 + rand(4),0,0);
+	if(player.findStatusAffect(StatusAffects.Eggchest) < 0) {
+		player.createStatusAffect(StatusAffects.Eggchest,3 + rand(10),1 + rand(4),0,0);
 		
 	}
 	dynStats("sen", 1, "lus=", 0);

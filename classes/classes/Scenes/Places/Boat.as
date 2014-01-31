@@ -9,8 +9,9 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.AnemoneScene;
 	import classes.Scenes.Places.Boat.*;
+import classes.StatusAffects;
 
-	public class Boat extends AbstractLakeContent
+public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:Marae = new Marae();
@@ -44,12 +45,12 @@ package classes.Scenes.Places
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n", false);
 			//20% chance if not done with marae of meeting her.
-			if (rand(10) <= 2 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) < 0) {
+			if (rand(10) <= 2 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0) {
 				marae.encounterMarae();
 				return;
 			}
 			//10% chance of corrupt Marae followups
-			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) >= 0 && player.gender > 0) {
+			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) >= 0 && player.gender > 0) {
 				marae.level2MaraeEncounter();
 				return;
 			}

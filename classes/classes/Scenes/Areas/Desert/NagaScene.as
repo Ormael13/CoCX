@@ -15,8 +15,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class NagaScene extends BaseContent{
+public class NagaScene extends BaseContent{
 	public function NagaScene(){
 
 	}
@@ -328,7 +329,7 @@ private function nagaVictoryMale():void {
 			
 			outputText("When you awaken, the naga is long gone. All that remains of your encounter is a depression in the landscape", false);
 			//[lots of jizz] 
-			if(player.cumQ() > 250) outputText(" with traces of semen in it", false)
+			if(player.cumQ() > 250) outputText(" with traces of semen in it", false);
 			//[if OMGWTFBBQGALLONSOFCUM]
 			else if(player.cumQ() > 2000) outputText(" that's filled with your thick seed", false);
 			outputText(".\n\n", false);

@@ -2,8 +2,9 @@
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

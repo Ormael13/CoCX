@@ -2,8 +2,9 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -17,10 +18,10 @@ package classes.Scenes.Areas.Plains
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if(statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks,1,-1);
+				if(statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -34,10 +35,10 @@ package classes.Scenes.Areas.Plains
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if(statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks,1,-1);
+				if(statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -46,10 +47,10 @@ package classes.Scenes.Areas.Plains
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if(statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks,1,-1);
+				if(statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -60,10 +61,10 @@ package classes.Scenes.Areas.Plains
 				if(plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if(statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks,1,-1);
+				if(statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -227,10 +228,10 @@ package classes.Scenes.Areas.Plains
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if (statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks, 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -242,10 +243,10 @@ package classes.Scenes.Areas.Plains
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if (statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks, 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -253,10 +254,10 @@ package classes.Scenes.Areas.Plains
 			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if (statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks, 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -266,10 +267,10 @@ package classes.Scenes.Areas.Plains
 				if (plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
+				if (statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
-					addStatusValue(StatusAffects.attacks, 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 					eAttack();
 				}
 			}

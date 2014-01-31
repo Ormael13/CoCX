@@ -4,8 +4,9 @@ package classes.Scenes.Areas.Swamp
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -16,8 +17,8 @@ package classes.Scenes.Areas.Swamp
 		//==============================
 		private function spiderStandardAttack():void {
 			//SPIDER HORDE ATTACK - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.miss_first_round) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
-				removeStatusAffect(StatusAffects.miss_first_round);
+			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+				removeStatusAffect(StatusAffects.MissFirstRound);
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.", false);
 			}
 			//SPIDER HORDE ATTACK - Hit
@@ -53,7 +54,7 @@ package classes.Scenes.Areas.Swamp
 		//SPIDER HORDE WEB - Hit
 		private function spoidahHordeWebLaunchahs():void {
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.miss_first_round) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!", false);
 				combatRoundOver();
 			}

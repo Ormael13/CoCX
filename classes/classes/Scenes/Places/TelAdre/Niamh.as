@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
 	import classes.Player;
+import classes.StatusAffects;
 
-	public class Niamh extends TelAdreAbstractContent {
+public class Niamh extends TelAdreAbstractContent {
 public function Niamh(){
 
 }
@@ -237,18 +238,18 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21),false);
 	var lib:Number = 0;
-	if(player.findStatusAffect(StatusAffects.Black_Cat_Beer) >= 0) {
+	if(player.findStatusAffect(StatusAffects.BlackCatBeer) >= 0) {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.addStatusValue(StatusAffects.Black_Cat_Beer,1,4);
-		player.addStatusValue(StatusAffects.Black_Cat_Beer,2,lib);
+		player.addStatusValue(StatusAffects.BlackCatBeer,1,4);
+		player.addStatusValue(StatusAffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
 		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.createStatusAffect(StatusAffects.Black_Cat_Beer,8,lib,0,0);
+		player.createStatusAffect(StatusAffects.BlackCatBeer,8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	player.slimeFeed();
@@ -256,8 +257,8 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
 public function blackCatBeerExpires():void {
-	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2(StatusAffects.Black_Cat_Beer)));
-	player.removeStatusAffect(StatusAffects.Black_Cat_Beer);
+	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2(StatusAffects.BlackCatBeer)));
+	player.removeStatusAffect(StatusAffects.BlackCatBeer);
 	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
 

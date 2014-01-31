@@ -3,8 +3,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class HelFollower extends NPCAwareContent
+public class HelFollower extends NPCAwareContent
 	{
 
 		public function HelFollower()
@@ -565,7 +566,7 @@ private function sparWithHeliaFirebuttsAreHot():void {
 	outputText("\n\n<i>\"Oh?  Well, it's certainly been awhile since you and I fought out on the plains...  Alright, let's do it, [name]!  But heads up, I might just need to have my way with you after I push your face in the dirt!\"</i>");
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
-	monster.createStatusAffect(StatusAffects.sparring,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Sparring,0,0,0,0);
 	//No gems.
 	monster.XP = 1;
 	monster.gems = 0;

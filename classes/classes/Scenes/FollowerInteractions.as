@@ -4,8 +4,9 @@
 	import classes.PerkLib;
 	import classes.Scenes.NPCs.NPCAwareContent;
 	import classes.GlobalFlags.kFLAGS;
+import classes.StatusAffects;
 
-	public class FollowerInteractions extends NPCAwareContent {
+public class FollowerInteractions extends NPCAwareContent {
 
 		public function FollowerInteractions()
 		{
@@ -478,7 +479,7 @@ public function BlameMarblezSweetVagoozle():void {
 	//end event, Marble leaves the camp and returns to the farm, she can now be encountered if she had not joined you in the camp.
 	player.removeStatusAffect(StatusAffects.CampMarble);
 	//Marble goes back to farm
-	player.removeStatusAffect(StatusAffects.No_More_Marble);
+	player.removeStatusAffect(StatusAffects.NoMoreMarble);
 	doNext(13);
 }
 

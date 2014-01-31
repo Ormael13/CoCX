@@ -5,6 +5,8 @@ import classes.BaseContent;
 import classes.Appearance;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
+import classes.StatusAffects;
+
 public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
 //servuceLowCorruptionHighLust();

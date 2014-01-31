@@ -3,8 +3,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 import classes.Appearance;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Katherine extends TelAdreAbstractContent{
+public class Katherine extends TelAdreAbstractContent{
 
 	public function Katherine()
 	{

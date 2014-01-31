@@ -7,15 +7,16 @@ package classes.Scenes.Places.Owca
 	import classes.Cock;
 	import classes.CockTypesEnum;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	public class LustyDemons extends Monster
+public class LustyDemons extends Monster
 	{
 
 		override protected function performCombatAction():void
 		{
 			str = 40;
 			setWeaponAttack(10);
-			createStatusAffect(StatusAffects.attacks, 4, 0, 0, 0);
+			createStatusAffect(StatusAffects.Attacks, 4, 0, 0, 0);
 			eAttack();
 			str = 80;
 			setWeaponAttack(40);

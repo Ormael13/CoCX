@@ -8,8 +8,9 @@ package classes.Scenes.Monsters
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class GoblinScene extends BaseContent
+public class GoblinScene extends BaseContent
 	{
 		public function GoblinScene()
 		{

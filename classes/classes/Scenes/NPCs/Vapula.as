@@ -3,8 +3,9 @@ package classes.Scenes.NPCs
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Vapula extends NPCAwareContent
+public class Vapula extends NPCAwareContent
 	{
 		public function Vapula()
 		{
@@ -219,7 +220,7 @@ package classes.Scenes.NPCs
 				haremT = "Don'tFuck";
 			}
 			//IF PC has cerulean succubused before
-			if (player.findStatusAffect(StatusAffects.repeatSuccubi) >= 0) {
+			if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
 				if (flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 					outputText("\n\nShe won't currently assist the cerulean succubus if you invite her over.");
 					threesomeT = "Assist On";

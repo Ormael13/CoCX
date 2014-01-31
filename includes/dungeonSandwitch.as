@@ -522,7 +522,7 @@ public function gangrush():void {
 	outputText("The witches close ranks and advance with raised fists, intent on beating you into submission!\n");
 	//3-5 attacks.at half strength
 	monster.str -= 10;
-	monster.createStatusAffect(StatusAffects.attacks,2 + rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.Attacks,2 + rand(3),0,0,0);
 	monster.eAttack();
 	monster.str += 10;
 	
@@ -605,14 +605,14 @@ public function sandstonesAreCool():void {
 			bonus = 5;
 			
 		}
-		player.createStatusAffect(StatusAffects.luststones,bonus,0,0,0);
+		player.createStatusAffect(StatusAffects.LustStones,bonus,0,0,0);
 		dynStats("lus", bonus * 2 + 5 + player.sens/7);
 	}
 	//[If attack misses]
 	else {
 		outputText("\nThe stones then make a ninety degree turn into the purple fire, and then nothing.  One sand-witch smacks another upside the head, yelling something about focusing.");
 	}
-	monster.removeStatusAffect(StatusAffects.sandstorm);
+	monster.removeStatusAffect(StatusAffects.Sandstorm);
 	combatRoundOver();
 }
 
@@ -636,14 +636,14 @@ public function sandStormAttack():void {
 	else {
 		outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
 	}
-	monster.createStatusAffect(StatusAffects.sandstorm,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Sandstorm,0,0,0,0);
 	combatRoundOver();
 }
 
 public function sandWitchMobAI():void {
-	if(monster.findStatusAffect(StatusAffects.sandstorm) < 0) sandStormAttack();
+	if(monster.findStatusAffect(StatusAffects.Sandstorm) < 0) sandStormAttack();
 	else if(monster.HPRatio() < .5) drankSomeMialk();
-	else if(monster.findStatusAffect(StatusAffects.sandstorm) >= 0 && rand(2) == 0 && player.findStatusAffect(StatusAffects.luststones) < 0) sandstonesAreCool();
+	else if(monster.findStatusAffect(StatusAffects.Sandstorm) >= 0 && rand(2) == 0 && player.findStatusAffect(StatusAffects.LustStones) < 0) sandstonesAreCool();
 	else if(rand(3) == 0) headbuttABitch();
 	else gangrush();
 }
@@ -2594,7 +2594,7 @@ public function getWhispered():void {
 //Starts combat with sandstorm.  GigaFire's every fifth round.
 //Whispers every fourth.
 public function sandWitchMotherAI():void {
-	if(monster.findStatusAffect(StatusAffects.sandstorm) < 0) {
+	if(monster.findStatusAffect(StatusAffects.Sandstorm) < 0) {
 		sandStormAttack();
 		return;
 	}

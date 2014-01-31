@@ -12,8 +12,9 @@ package classes.Scenes
 	import classes.Items.Armor;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Inventory extends BaseContent
 	{
@@ -52,9 +53,9 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1000) {
 		itemSwapping = false;
 		hideUpDown();
-		if(player.findStatusAffect(StatusAffects.Gotta_Open_Gift) >= 0) {
+		if(player.findStatusAffect(StatusAffects.GottaOpenGift) >= 0) {
 			clearOutput();
-			player.removeStatusAffect(StatusAffects.Gotta_Open_Gift);
+			player.removeStatusAffect(StatusAffects.GottaOpenGift);
 			kGAMECLASS.mutations.kitsuneGiftResult();
 			return;
 		}
@@ -111,35 +112,35 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.AUBURND);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1018) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1019) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1020) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1021) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.RED_DYE);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1023) {
 		placeInStorage(1);
@@ -292,7 +293,7 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.WHITEDY);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	/*EGG COLOR SHIFTING HAPPENS HERE
 	EGG TYPES-
@@ -425,7 +426,7 @@ public function doItems(eventNo:Number):void {
 			else player.gems -= 100;
 			inventory.takeItem(consumables.REDUCTO);
 			statScreenRefresh();
-			player.addStatusValue(StatusAffects.metRathazul,2,1);
+			player.addStatusValue(StatusAffects.MetRathazul,2,1);
 		}
 		else {
 			outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.", false);
@@ -442,8 +443,8 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1060) {
 		spriteSelect(49);
 		outputText("Rathazul nods and produces a mallet and chisel from his robes.  With surprisingly steady hands for one so old, he holds the chisel against the crystal and taps it, easily cracking off a large shard.  Rathazul gathers it into his hands before slamming it down into the dirt, until only the smallest tip of the crystal is visible.  He produces vials of various substances from his robe, as if by magic, and begins pouring them over the crystal.  In a few seconds, he finishes, and runs back towards his equipment.\n\n\"<i>You may want to take a step back,</i>\" he warns, but before you have a chance to do anything, a thick trunk covered in thorny vines erupts from the ground.  Thousands of vine-like branches split off the main trunk as it reaches thirty feet in the air, radiating away from the trunk and intertwining with their neighbors as they curve back towards the ground.  In the span of a few minutes, your camp gained a thorn tree and a thick mesh of barbed vines preventing access from above.", true);
-		player.createStatusAffect("Defense: Canopy",0,0,0,0);
-		player.addStatusValue("Marae's Lethicite",2,1);
+		player.createStatusAffect(StatusAffects.DefenseCanopy,0,0,0,0);
+		player.addStatusValue(StatusAffects.MaraesLethicite,2,1);
 		doNext(1);
 	}
 	//Refuse to use lethicite for thorns
@@ -572,7 +573,7 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.GRAYDYE);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.metRathazul,2,1);
+		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	/* WEAPON RACK STORAGE */
 	else if(eventNo == 1085) {
@@ -1422,7 +1423,7 @@ public function doItems(eventNo:Number):void {
 		 5 - rubbery black*/
 		private function eggShifter(eggCode:Number):void
 		{
-			if (player.findStatusAffect(StatusAffects.eggs) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 = eggCode;
+			if (player.findStatusAffect(StatusAffects.Eggs) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 = eggCode;
 		}
 		private function slimeBadEnd():void {
 			outputText("One year later...", true);

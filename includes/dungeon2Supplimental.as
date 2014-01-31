@@ -1954,7 +1954,7 @@ public function femaleZetazOver():void {
 	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("drools a heavy flow of liquid arousal onto the hardwood table", false);
 	else outputText("begins to dribble a steady flow of liquid on to the table's girl-slicked boards", false);
 	outputText(".  ", false);
-	if(player.findStatusAffect(StatusAffects.heat) >= 0) outputText("D", false);
+	if(player.findStatusAffect(StatusAffects.Heat) >= 0) outputText("D", false);
 	else outputText("Foreign d", false);
 	outputText("esires wash through your doped up body, and your hungry slit practically demands to be filled with cock and injected with semen.  It wants to be filled with... with males, and with their hot, sticky cum. No, your hot little pussy doesn't want that – you do.  Gods above and below, you want to feel your belly pumped full of imp sperm until their offspring are wriggling in your womb.  And then you want them to come in you some more!\n\n", false);
 	

@@ -1,8 +1,9 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class IzmaScene extends NPCAwareContent
+public class IzmaScene extends NPCAwareContent
 	{
 		import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
@@ -60,7 +61,7 @@ public function meetIzmaAtLake():void {
 		outputText("\"<i>Tigershark?</i>\" you ask.\n\n", false);
 
 		outputText("\"<i>It's a mutation among shark-people.  We're stronger, tougher, faster... and we have some other... err, 'qualities' our sisters lack,</i>\" she explains, with a glance to subtly discourage you from probing the matter further.  Instead, you follow up by asking her where she got her books.   \"<i>These?  Scavenged from around the place.  It's so hard to find recorded knowledge around here, and even some of this stuff isn't in great condition... you know?</i>\"  You agree; that meager pile of books in the chest is still the biggest library you've seen ", false);
-		if(player.statusAffectv1("Tel'Adre") >= 1) outputText("outside the safety of Tel'Adre", false);
+		if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("outside the safety of Tel'Adre", false);
 		else outputText("since you arrived", false);
 		outputText(".  Perhaps imagining you a kindred spirit, she presses the topic.  \"<i>I could let you borrow some... for a small usage fee. And you'd stay in sight, of course.</i>\"  You contrive to look hurt.  \"<i>Nothing personal, but I'd like to expand my collection, not reduce it,</i>\" she adds.  Still... an appealing offer.  You could do with as much knowledge as you can get.\n\n", false);
 
@@ -368,7 +369,7 @@ internal function defeatIzma():void {
 internal function IzmaWins():void {
 	outputText("", true);
 	//(if Worms)
-	if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		kGAMECLASS.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
@@ -2918,7 +2919,7 @@ private function gooJob():void {
 	clearOutput();
 	outputText("Concentrating on moving your mass forward, you manage to envelop Izma's entire back side.  Slowly but surely, you are able to harden your goo around Izma's rock hard cock, and begin to pump her penile member with gusto. Now that she's been jerked off, and the fact that she's ");
 	radarIzmaSpanking(false);
-	player.createStatusAffect(StatusAffects.GOOJOB,0,0,0,0);
+	player.createStatusAffect(StatusAffects.Goojob,0,0,0,0);
 }
 //[Spanking and orgasm]
 private function radarIzmaSpanking(newSentance:Boolean):void {
@@ -2938,8 +2939,8 @@ private function radarIzmaGasm():void {
 	//(Cum production High: 
 	else outputText("unleashing a cascade of steamy jizz into Izma's well fucked hole.  Your volume is so large that it causes a back draft of semen to rush out of her within mere seconds.");
 	//(If PC gave Izma a "goo job":
-	if(player.findStatusAffect(StatusAffects.GOOJOB) >= 0) {
-		player.removeStatusAffect(StatusAffects.GOOJOB);
+	if(player.findStatusAffect(StatusAffects.Goojob) >= 0) {
+		player.removeStatusAffect(StatusAffects.Goojob);
 		outputText("  The sensation of being injected with her lover's seed is all the encouragement Izma's cock needs to finally erupt, shooting thick streams of steamy cum into your central mass; something your gooey form appreciates as it unconsciously works her load into your see through gut.");
 	}
 	outputText("\n\nYour exhausted partner swoons as she cradles her ");

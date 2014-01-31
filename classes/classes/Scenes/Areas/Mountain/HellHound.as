@@ -6,8 +6,9 @@
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

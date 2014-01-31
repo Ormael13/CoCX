@@ -166,7 +166,7 @@
 	//Repair Closet
 	if(roomNo == 4) {
 		outputText("<b><u>Repair Closet</u></b>\nAs you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ", true);
-		if(player.findStatusAffect("BUILT: Milker") >= 0) outputText("The shelves are empty.  ", false);
+		if(player.findStatusAffect(StatusAffects.BuiltMilker) >= 0) outputText("The shelves are empty.  ", false);
 		else {
 			outputText("The shelves of the cabinet hold various pieces of pump machinery, probably used to repair complete machines further into the factory.  ", false);
 			if(player.inte >= 40) {
@@ -248,7 +248,7 @@
 			outputText("-You could leave the equipment to continue running.  After all, the girls downstairs did seem to be enjoying themselves...\n", false);
 			//(Consequences - Marcus takes over if demonic choice taken, if not he shuts down the equipment & things continue as per #3).
 			text4 = "Valves";
-			choice4 = 11059
+			choice4 = 11059;
 			text5 = "Shutdown";
 			choice5 = 11058;
 		}
@@ -275,9 +275,9 @@
 			text3 = "Lactaid";
 			choice3 = 11062;
 		}
-		if(player.findStatusAffect("TakenGro+") >= 0) {
-			if(player.statusAffects[player.findStatusAffect("TakenGro+")].value1 > 0) {
-				outputText("There is a crate with " + num2Text(player.statusAffects[player.findStatusAffect("TakenGro+")].value1) + " bottles of something called 'Gro+' inside.\n\n", false);
+		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) {
+			if(player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1 > 0) {
+				outputText("There is a crate with " + num2Text(player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1) + " bottles of something called 'Gro+' inside.\n\n", false);
 				text4 = "GroPlus";
 				choice4 = 11061;
 			}
@@ -1566,7 +1566,7 @@ public function demonBadEnd():void {
 			outputText("The slutty succubus stands up, her puffy vulva coating in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 			outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm, yours was potent!</i>\"\n\n", false);
 			outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with newfound power.  You resolve to ", false);
-			if(player.findStatusAffect("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity…", false);
+			if(player.findStatusAffect(StatusAffects.MaraesLethicite) < 0) outputText("gather some yourself at the next opportunity…", false);
 			else outputText("devour Marae's as soon as you get a chance.", false);
 			outputText("You greedily gather up the lethicite splattered on your body and devour it, turning it into raw demonic power.  You really do need to get more of this...but first you know a certain demoness you intend to wrap around your ", false);
 			if(player.demonCocks() > 0) outputText("growing", false);
@@ -1591,7 +1591,7 @@ public function demonBadEnd():void {
 			outputText("The slutty succubus stands up, her puffy vulva coating in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 			outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm your's was potent!</i>\"\n\n", false);
 			outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with newfound power.  You resolve to ", false);
-			if(player.findStatusAffect("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity…", false);
+			if(player.findStatusAffect(StatusAffects.MaraesLethicite) < 0) outputText("gather some yourself at the next opportunity…", false);
 			else outputText("devour Marae's as soon as you get a chance.", false);
 			outputText("  But first you know a certain demoness you intend to wrap around your ", false);
 			if(player.demonCocks() > 0) outputText("growing", false);
@@ -1637,7 +1637,7 @@ public function demonBadEnd():void {
 		outputText("The slutty succubus stands up, her puffy vulva coating in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 		outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm your's was soooo potent!</i>\"\n\n", false);
 		outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with her new-found power.  You resolve to ", false);
-		if(player.findStatusAffect("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity…", false);
+		if(player.findStatusAffect(StatusAffects.MaraesLethicite) < 0) outputText("gather some yourself at the next opportunity…", false);
 		else outputText("devour Marae's as soon as you get a chance.", false);
 		outputText("  But first you know a certain demoness you intend to wrap around your ", false);
 		if(player.demonCocks() > 0) outputText("growing", false);

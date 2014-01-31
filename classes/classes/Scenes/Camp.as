@@ -4,8 +4,9 @@
 	import classes.ItemType;
 	import classes.PerkLib;
 	import classes.Scenes.NPCs.*;
+import classes.StatusAffects;
 
-	import coc.view.MainView;
+import coc.view.MainView;
 
 	public class Camp extends NPCAwareContent{
 
@@ -45,14 +46,14 @@
 public function doCamp():void {
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	if(player.findStatusAffect(StatusAffects.Post_Akbal_Submission) >= 0) {
-		player.removeStatusAffect(StatusAffects.Post_Akbal_Submission);
+	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
+		player.removeStatusAffect(StatusAffects.PostAkbalSubmission);
 		kGAMECLASS.forest.akbalScene.akbalSubmissionFollowup();
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.Post_Anemone_Beatdown) >= 0) {
+	if(player.findStatusAffect(StatusAffects.PostAnemoneBeatdown) >= 0) {
 		HPChange(Math.round(player.maxHP()/2),false);
-		player.removeStatusAffect(StatusAffects.Post_Anemone_Beatdown);
+		player.removeStatusAffect(StatusAffects.PostAnemoneBeatdown);
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	gameState = 0;
@@ -90,7 +91,7 @@ public function doCamp():void {
 		kGAMECLASS.processJackFrostEvent();
 		return;
 	}
-	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.metRathazul) >= 4) {
+	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		hideMenus();
 		milkWaifu.ratducto();
 		return;
@@ -257,8 +258,8 @@ public function doCamp():void {
 		return;
 	}
 	//Anemone birth followup!
-	if(player.findStatusAffect(StatusAffects.Camp_Anemone_Trigger) >= 0) {
-		player.removeStatusAffect(StatusAffects.Camp_Anemone_Trigger);
+	if(player.findStatusAffect(StatusAffects.CampAnemoneTrigger) >= 0) {
+		player.removeStatusAffect(StatusAffects.CampAnemoneTrigger);
 		anemoneScene.anemoneKidBirthPtII();
 		hideMenus();
 		return;
@@ -371,7 +372,7 @@ public function doCamp():void {
 	if(places(false)) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
-	if(player.findStatusAffect(StatusAffects.Slime_Craving_Output) >= 0) player.removeStatusAffect(StatusAffects.Slime_Craving_Output);
+	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
 	flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] = 0;
 	//Display Proper Buttons
@@ -463,7 +464,7 @@ public function doCamp():void {
 		}
 	}
 	//Traps
-	if(player.findStatusAffect("Defense: Canopy") >= 0) {
+	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) {
 		outputText("  A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.", false);
 	}
 	else outputText("  You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.", false);
@@ -493,7 +494,7 @@ public function doCamp():void {
 		//at 6-7 in the morning, scene always displays at this time
 		else if(model.time.hours == 6 || model.time.hours == 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
 		//after nightfall, scene always displays at this time unless PC is wormed
-		else if(model.time.hours == 21 && player.findStatusAffect(StatusAffects.infested) < 0) {
+		else if(model.time.hours == 21 && player.findStatusAffect(StatusAffects.Infested) < 0) {
 			outputText("Marble is hanging around her bedroll waiting for you to come to bed.  However, sometimes she lies down for a bit, and sometimes she paces next to it.");
 			if(flags[kFLAGS.MARBLE_LUST] > 30) outputText("  She seems to be feeling antsy.");
 		}
@@ -575,15 +576,15 @@ public function doCamp():void {
 		outputText("\n\n");
 	}
 	//Clear bee-status
-	if(player.findStatusAffect(StatusAffects.paralyzevenom) >= 0) {
-		temp = player.findStatusAffect(StatusAffects.paralyzevenom);
+	if(player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
+		temp = player.findStatusAffect(StatusAffects.ParalyzeVenom);
 		dynStats("str", player.statusAffects[temp].value1,"spe", player.statusAffects[temp].value2);
-		player.removeStatusAffect(StatusAffects.paralyzevenom);
+		player.removeStatusAffect(StatusAffects.ParalyzeVenom);
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
 	//The uber horny
 	if(player.lust >= 100) {
-		if(player.findStatusAffect(StatusAffects.dysfunction) >= 0) {
+		if(player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
 			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n", false);
 		}
 		else if(flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
@@ -1386,7 +1387,7 @@ public function nightSuccubiRepeat():void {
 			//Clear out any queue'ed events if bad-end
 			//coming.  PC has to dig his own grave.
 			if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
-				player.removeStatusAffect(StatusAffects.succubiNight);
+				player.removeStatusAffect(StatusAffects.SuccubiNight);
 			}
 			fatigue(20);
 			player.cumMultiplier++;
@@ -1418,8 +1419,8 @@ public function places(display:Boolean):Boolean {
 	//turn on ruins
 	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
 	//turn on teladre
-	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.findStatusAffect(StatusAffects.hairdressermeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
+	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
 	//turn on boat
 	if(player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) _boat = kGAMECLASS.boat.boatExplore;
 	

@@ -116,7 +116,7 @@ package classes.Scenes.Areas.Swamp
 			game.spriteSelect(77);
 			if (lust > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
-			else if (game.hasSpells() && player.findStatusAffect(StatusAffects.Web_dash_Silence) < 0 && rand(4) == 0) {
+			else if (game.hasSpells() && player.findStatusAffect(StatusAffects.WebSilence) < 0 && rand(4) == 0) {
 				spiderSilence();
 			}
 			//1/4 chance of disarm

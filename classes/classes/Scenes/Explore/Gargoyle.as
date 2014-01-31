@@ -5,6 +5,8 @@ import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class Gargoyle extends BaseContent{
 
 	public function Gargoyle()
@@ -39,7 +41,7 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 	
 	outputText("\n\nHowever, soon you catch the faintest glimpse of <b>something</b> in the distance!  Squinting, you shield your eyes from the sun and try to discern the strange glint on the horizon, but it's simply too far away.  Well, whatever it is, it certainly merits a check – it could be anything, perhaps a city, ");
 	//if Tel'Adre has been discovered:
-	if(player.statusAffectv1("Tel'Adre") >= 1) outputText("or the ruins of one of Tel'Adre's more distant neighbors, ");
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("or the ruins of one of Tel'Adre's more distant neighbors, ");
 	outputText("or (even) some demon enclave that needs destroying.  With a quick check of your [weapon], you begin the long trek towards the shimmer in the distance.");
 	
 	//[Next]
@@ -522,7 +524,7 @@ private function ritualGargoyle():void {
 	menu();
 	addButton(0,"Body",bodyRitual);
 	addButton(1,"Mind",mindGargoyleRitual);
-	if(player.findStatusAffect(StatusAffects.infested) >= 0 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0) addButton(2,"Banish",banishmentGargoyleRitual);
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0) addButton(2,"Banish",banishmentGargoyleRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -623,7 +625,7 @@ private function banishmentGargoyleRitual():void {
 	
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
 	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) player.removeStatusAffect(StatusAffects.Exgartuan);
-	else player.removeStatusAffect(StatusAffects.infested);
+	else player.removeStatusAffect(StatusAffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
@@ -678,7 +680,7 @@ private function gargoyleKinkyRituals():void {
 	menu();
 	addButton(0,"Body",kinkyBodyRitual);
 	addButton(1,"Mind",mindRitualPervy);
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.findStatusAffect(StatusAffects.infested) >= 0) addButton(2,"Banish",banishPervRitual);
+	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(2,"Banish",banishPervRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -787,7 +789,7 @@ private function banishPervRitual():void {
 	outputText("\n\nEventually, though, you know you need to get back to camp.  You try to tell " + flags[kFLAGS.GAR_NAME] + ", but to your surprise, she's fast asleep, snoring softly.  With a grin, you untangle yourself from her embrace and find something to cover her with before giving her another kiss and making your way home.");
 	//(Return PC to camp, advance time 1 hour)
 	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) player.removeStatusAffect(StatusAffects.Exgartuan);
-	else player.removeStatusAffect(StatusAffects.infested);
+	else player.removeStatusAffect(StatusAffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	gargoyleConfidence(2);

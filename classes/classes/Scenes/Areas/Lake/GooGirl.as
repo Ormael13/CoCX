@@ -3,7 +3,8 @@ package classes.Scenes.Areas.Lake
 	import classes.Appearance;
 	import classes.Monster;
 	import classes.PerkLib;
-	import classes.internals.Utils;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -70,7 +71,7 @@ package classes.Scenes.Areas.Lake
 			else {
 				if (findPerk(PerkLib.Acid) >= 0) {
 					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on!", false);
-					if (player.findStatusAffect(StatusAffects.AcidSlap) < 0) player.createStatusAffect(StatusAffects.AcidBurn, 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.AcidSlap) < 0) player.createStatusAffect(StatusAffects.AcidSlap, 0, 0, 0, 0);
 				}
 				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap.", false);
 				outputText(" (" + damage + ")", false);

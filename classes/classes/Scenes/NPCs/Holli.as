@@ -3,8 +3,9 @@ package classes.Scenes.NPCs
 	import classes.Cock;
 	import classes.CockTypesEnum;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * Holli
 	 * @author aimozg
 	 */
@@ -60,7 +61,7 @@ package classes.Scenes.NPCs
 			}
 			//End of Round, Round 1 with Jojo Helping - make a little woodpile
 			//output anything triggered under no Jojo Fire condition, then output
-			if (findStatusAffect(StatusAffects.Jojo_Is_Assisting) >= 0) {
+			if (findStatusAffect(StatusAffects.JojoIsAssisting) >= 0) {
 				if (findStatusAffect(StatusAffects.HolliBurning) >= 0) {
 					outputText("\n\nJojo continues to ferry firewood to stoke the blaze; flames lick at Holli, and her face contorts in anger.  Sap flows from her burn wounds, but much of it boils away before it can do her any good and her iron-hard bark is peeling in places.");
 					//much less HP regain, no lust regain, monster armor lowered
@@ -97,7 +98,7 @@ package classes.Scenes.NPCs
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
 		public function lightHolliOnFireMagically():void
 		{
-			if (findStatusAffect(StatusAffects.Jojo_Is_Assisting) >= 0) {
+			if (findStatusAffect(StatusAffects.JojoIsAssisting) >= 0) {
 				if (findStatusAffect(StatusAffects.HolliBurning) < 0) {
 					outputText("The magical fire effectively ignites a wide swath of Jojo's tinder, and the demon howls in rage.  Seeing this, Jojo drops the burning torch he carries and turns back toward the forest to fetch more tinder.\n\n");
 					createStatusAffect(StatusAffects.HolliBurning, 0, 0, 0, 0);

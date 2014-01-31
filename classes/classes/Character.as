@@ -1,12 +1,8 @@
 ﻿package classes 
 {
-	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Places.TelAdre.UmasShop;
 
-	/**
+/**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
 	 * @author Yoffy
 	 */
@@ -21,7 +17,7 @@
 		public function get femininity():Number
 		{
 			var fem:Number = _femininity;
-			var statIndex:int = this.findStatusAffect(UmasShop.UmasMassage);
+			var statIndex:int = this.findStatusAffect(StatusAffects.UmasMassage);
 			
 			if (statIndex >= 0)
 			{
@@ -461,7 +457,7 @@
 			//Contraceptives cancel!
 			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
-			if (findStatusAffect(StatusAffects.gooStuffed) >= 0)
+			if (findStatusAffect(StatusAffects.GooStuffed) >= 0)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000

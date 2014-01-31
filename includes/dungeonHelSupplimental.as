@@ -225,7 +225,7 @@ public function struggleAtGooBind():void {
 		//(If fail 5 times, go to defeat scene)
 		player.addStatusValue(StatusAffects.GooArmorBind,1,1);
 		if(player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
-			if(monster.findStatusAffect(StatusAffects.spar) >= 0) valeria.pcWinsValeriaSparDefeat();
+			if(monster.findStatusAffect(StatusAffects.Spar) >= 0) valeria.pcWinsValeriaSparDefeat();
 			else gooArmorBeatsUpPC();
 			return;
 		}
@@ -382,7 +382,7 @@ public function takeGooArmorAndWearIt():void {
 public function harpyHordeClawFlurry():void {
 	outputText("The harpies lunge at you, a veritable storm of talons and claws raining down around you.  You stumble back, trying desperately to deflect some of the attacks, but there are simply too many to block them all!  Only a single harpy in the brood seems to be holding back...\n");
 	//(Effect: Multiple light attacks)
-	monster.createStatusAffect(StatusAffects.attacks,3+rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.Attacks,3+rand(3),0,0,0);
 	monster.eAttack();
 	combatRoundOver();
 }
@@ -652,7 +652,7 @@ public function phoenixPlatoonRush():void {
 	outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
 	//(Effect: Multiple medium-damage attacks)
 	//(Effect: Multiple light attacks)
-	monster.createStatusAffect(StatusAffects.attacks,2+rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.Attacks,2+rand(3),0,0,0);
 	monster.eAttack();
 	combatRoundOver();
 }
@@ -675,17 +675,17 @@ public function phoenixPlatoonLustbang():void {
 }
 
 public function phoenixPlatoonAI():void {
-	if(monster.findStatusAffect(StatusAffects.platoon) < 0) {
+	if(monster.findStatusAffect(StatusAffects.Platoon) < 0) {
 		phoenixPlatoonRush();
-		monster.createStatusAffect(StatusAffects.platoon,0,0,0,0);
+		monster.createStatusAffect(StatusAffects.Platoon,0,0,0,0);
 	}
-	else if(monster.statusAffectv1(StatusAffects.platoon) == 0) {
+	else if(monster.statusAffectv1(StatusAffects.Platoon) == 0) {
 		phoenixPlatoonFireBreath();
-		monster.addStatusValue(StatusAffects.platoon,1,1);
+		monster.addStatusValue(StatusAffects.Platoon,1,1);
 	}
 	else {
 		phoenixPlatoonLustbang()
-		monster.removeStatusAffect(StatusAffects.platoon);
+		monster.removeStatusAffect(StatusAffects.Platoon);
 	}
 }
 
@@ -873,7 +873,7 @@ public function phoenixAginal():void {
 	//v1 = egg type.
 	//v2 = size - 0 for normal, 1 for large
 	//v3 = quantity
-	player.createStatusAffect(StatusAffects.eggs,rand(6),0,(5+rand(3)),0);
+	player.createStatusAffect(StatusAffects.Eggs,rand(6),0,(5+rand(3)),0);
 	//(Return to Mezzanine main menu)
 	dynStats("lus=", 0);
 	doNext(1);

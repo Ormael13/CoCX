@@ -5,6 +5,8 @@ import classes.BaseContent;
 	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
 	import classes.CoC_Settings;
+import classes.StatusAffects;
+
 public class SophieScene extends BaseContent {
 
 	public function SophieScene()

@@ -718,25 +718,25 @@ import classes.PerkType;
 		public function statusAffectv1(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[stype].value1;
+			return (counter<0)?0:statusAffects[counter].value1;
 		}
 		
 		public function statusAffectv2(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[stype].value2;
+			return (counter<0)?0:statusAffects[counter].value2;
 		}
 
 		public function statusAffectv3(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[stype].value3;
+			return (counter<0)?0:statusAffects[counter].value3;
 		}
 
 		public function statusAffectv4(stype:StatusAffectType):Number
 		{
 			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffects[stype].value4;
+			return (counter<0)?0:statusAffects[counter].value4;
 		}
 
 		public function removeStatuses():void
@@ -2860,8 +2860,8 @@ import classes.PerkType;
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
-			if (findStatusAffect(StatusAffects.heat) >= 0)
-				counter += statusAffectv1(StatusAffects.heat);
+			if (findStatusAffect(StatusAffects.Heat) >= 0)
+				counter += statusAffectv1(StatusAffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
 			if (findPerk(PerkLib.MaraesGiftFertility) >= 0)

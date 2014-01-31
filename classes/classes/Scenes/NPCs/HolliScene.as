@@ -2,8 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class HolliScene extends NPCAwareContent {
+public class HolliScene extends NPCAwareContent {
 
 	public function HolliScene()
 	{
@@ -1030,7 +1031,7 @@ private function callDatJojo():void {
 	//go to fight
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
 	startCombat(new Holli());
-	monster.createStatusAffect(StatusAffects.Jojo_Is_Assisting,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.JojoIsAssisting,0,0,0,0);
 }
 
 
@@ -1040,7 +1041,7 @@ internal function defeatHolli():void {
 	clearOutput();
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
 	//Win without Jojo -Z
-	if(monster.findStatusAffect(StatusAffects.Jojo_Is_Assisting) < 0) {
+	if(monster.findStatusAffect(StatusAffects.JojoIsAssisting) < 0) {
 		outputText("Weary, the succubus godling folds into her tree, unwilling to allow you the sight of her defeat.  With her energy suppressed, you're free to ");
 		if(player.weaponName != "large axe") outputText("fetch an axe and ");
 		outputText("hack at her trunk, laboriously peeling bark and making wedge-shaped cuts in it as you try to fell the abomination.  It takes nearly eight hours, but eventually the gnarled tree topples.  No sooner does it fall than it shrivels and turns to ash.");
@@ -1108,7 +1109,7 @@ private function dontRecruitJojoToCamp():void {
 internal function enjoyYourBadEndBIYAAAATCH():void {
 	clearOutput();
 	outputText("Screeching in triumph, the demon holds your defeated form aloft and begins to shake you.  ");
-	if(monster.findStatusAffect(StatusAffects.Jojo_Is_Assisting) >= 0) {
+	if(monster.findStatusAffect(StatusAffects.JojoIsAssisting) >= 0) {
 		outputText("Jojo drops the firewood he's carrying and attempts to strike her, but she swats him aside brutally with a branch, leaving him clutching his stomach and retching as he stumbles away; she returns her attention to you, completely fixated.  Her oozing sap runs in streams as she heals the damage from the dwindling flames.  ");
 	}
 	outputText("\"<i>Oh, my little meat...</i>\" Holli coos dangerously.  \"<i>Was I not clear enough before?  You exist to worship me.  If you won't give your mind to me, I'll have your body, instead.</i>\"  A floral tendril descends from her upper branches, slipping into your mouth and beginning to drool a nectar down your throat.  Forced to drink or drown, you gulp unhappily, feeling increasingly light-headed with each swallow.");

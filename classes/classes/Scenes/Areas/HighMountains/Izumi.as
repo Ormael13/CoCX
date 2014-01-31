@@ -3,8 +3,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
 	 * Most of the combat damage and stats will need to actually be tuned. I have no idea about what
 	 * these values should be for the intended effect.

@@ -4,8 +4,9 @@ package classes.Scenes.Quests.UrtaQuest
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Scenes.Areas.Desert.Naga;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */

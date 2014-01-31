@@ -2,8 +2,9 @@ package classes.Scenes.Dungeons.HelDungeon
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */

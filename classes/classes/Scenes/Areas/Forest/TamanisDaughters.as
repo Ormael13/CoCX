@@ -2,8 +2,9 @@ package classes.Scenes.Areas.Forest
 {
 	import classes.Monster;
 	import classes.Scenes.Monsters.Goblin;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -65,7 +66,7 @@ package classes.Scenes.Areas.Forest
 			var rando:int = rand(select);
 			//Tamani's Daughters get multiattacks!
 			if(rando == 0) {
-				createStatusAffect(StatusAffects.attacks,int(player.statusAffectv2(StatusAffects.Tamani)/2/10),0,0,0);
+				createStatusAffect(StatusAffects.Attacks,int(player.statusAffectv2(StatusAffects.Tamani)/2/10),0,0,0);
 				eAttack();
 			}
 			if(rando == 1) game.eventParser(special1);

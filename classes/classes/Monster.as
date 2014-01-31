@@ -661,7 +661,7 @@
 		}
 
 		public function eAttack():void {
-			var attacks:int = statusAffectv1(StatusAffects.attacks);
+			var attacks:int = statusAffectv1(StatusAffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
 				if (attackSucceeded()){
@@ -671,12 +671,12 @@
 					game.statScreenRefresh();
 					outputText("\n", false);
 				}
-				if (statusAffectv1(StatusAffects.attacks) >= 0) {
-					addStatusValue(StatusAffects.attacks, 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 				}
 				attacks--;
 			}
-			removeStatusAffect(StatusAffects.attacks);
+			removeStatusAffect(StatusAffects.Attacks);
 			if (!game.combatRoundOver()) game.doNext(1);
 		}
 
@@ -1124,14 +1124,14 @@
 			if(findStatusAffect(StatusAffects.Earthshield) >= 0) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
 			}
-			if(findStatusAffect(StatusAffects.sandstorm) >= 0) {
+			if(findStatusAffect(StatusAffects.Sandstorm) >= 0) {
 				//Blinded:
 				if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 					outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
 					player.removeStatusAffect(StatusAffects.Blind);
 				}
 				else {
-					if(statusAffectv1(StatusAffects.sandstorm) == 0 || statusAffectv1(StatusAffects.sandstorm) % 4 == 0) {
+					if(statusAffectv1(StatusAffects.Sandstorm) == 0 || statusAffectv1(StatusAffects.Sandstorm) % 4 == 0) {
 						player.createStatusAffect(StatusAffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
@@ -1142,7 +1142,7 @@
 						outputText("</b>\n\n");
 					}
 				}
-				addStatusValue(StatusAffects.sandstorm,1,1);
+				addStatusValue(StatusAffects.Sandstorm,1,1);
 			}
 			if(findStatusAffect(StatusAffects.Stunned) >= 0) {
 				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n", false);
@@ -1218,7 +1218,7 @@
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				game.dynStats("lus", 5+player.sens/10);
 			}
-			if(player.findStatusAffect(StatusAffects.Blind) >= 0 && findStatusAffect(StatusAffects.sandstorm) < 0) {
+			if(player.findStatusAffect(StatusAffects.Blind) >= 0 && findStatusAffect(StatusAffects.Sandstorm) < 0) {
 				if(player.findStatusAffect(StatusAffects.SheilaOil) >= 0) {
 					if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
 						outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);

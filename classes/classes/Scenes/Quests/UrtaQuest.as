@@ -1088,13 +1088,13 @@ private function urtaMetabolize():void {
 
 private function urtaSecondWind():void {
 	clearOutput();
-	if(monster.findStatusAffect(StatusAffects.Urta_Second_Winded) >= 0) {
+	if(monster.findStatusAffect(StatusAffects.UrtaSecondWinded) >= 0) {
 		outputText("You've already pushed yourself as hard as you can!");
 		menuLoc = 3;
 		doNext(5000);
 		return;
 	}
-	monster.createStatusAffect(StatusAffects.Urta_Second_Winded,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.UrtaSecondWinded,0,0,0,0);
 	HPChange(Math.round(player.maxHP()/2),false);
 	fatigue(-50);
 	dynStats("lus", -50);
@@ -1104,7 +1104,7 @@ private function urtaSecondWind():void {
 
 //Combo: 3x attack, higher miss chance, guaranteed hit vs blind
 private function urtaComboAttack():void {
-	if(player.findStatusAffect(StatusAffects.attacks) < 0) {
+	if(player.findStatusAffect(StatusAffects.Attacks) < 0) {
 		clearOutput();
 		if(player.fatigue + 25 > 100) {
 			outputText("You are too fatigued to use that attack!");
@@ -1114,14 +1114,14 @@ private function urtaComboAttack():void {
 		}
 		fatigue(25);
 	}
-	if(player.findStatusAffect(StatusAffects.attacks) < 0)
-		player.createStatusAffect(StatusAffects.attacks,3,0,0,0);
+	if(player.findStatusAffect(StatusAffects.Attacks) < 0)
+		player.createStatusAffect(StatusAffects.Attacks,3,0,0,0);
 	else {
-		player.addStatusValue(StatusAffects.attacks,1,-1);
+		player.addStatusValue(StatusAffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
-		if(player.statusAffectv1(StatusAffects.attacks) <= 1) {
+		if(player.statusAffectv1(StatusAffects.Attacks) <= 1) {
 			trace("REMOVED ATTACKS");
-			player.removeStatusAffect(StatusAffects.attacks);
+			player.removeStatusAffect(StatusAffects.Attacks);
 		}
 	}
 	//Blind
@@ -1135,7 +1135,7 @@ private function urtaComboAttack():void {
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
-		if(player.findStatusAffect(StatusAffects.attacks) >= 0) {
+		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
 			urtaComboAttack();
 			return;
 		}
@@ -1208,7 +1208,7 @@ private function urtaComboAttack():void {
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.findStatusAffect(StatusAffects.attacks) >= 0) {
+		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
 			trace("MORE ATTACK");
 			urtaComboAttack();
 			return;

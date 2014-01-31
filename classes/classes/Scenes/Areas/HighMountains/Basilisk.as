@@ -5,8 +5,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Player;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */

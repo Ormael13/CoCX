@@ -4,8 +4,9 @@ import classes.Appearance;
 import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class IsabellaScene extends NPCAwareContent {
+public class IsabellaScene extends NPCAwareContent {
 //Isabella Flags:
 //256	PC decided to approach Isabella's camp yet? 1
 //257	Met Isabella?
@@ -827,7 +828,7 @@ public function IsabellaPostSpankFeedSex():void {
 
 //LOSS
 public function isabellaDefeats():void {
-	if(monster.statusAffectv1(StatusAffects.sparring) <= 1) {
+	if(monster.statusAffectv1(StatusAffects.Sparring) <= 1) {
 		if(player.hasCock() && rand(2) == 0) isabellaRapesYouWithHerAss();
 		else IsabellaWinsAndSpanks();
 	}
@@ -839,7 +840,7 @@ public function isabellaDefeats():void {
 //[VICTORY!]
 public function defeatIsabella():void {
 	outputText("", true);
-	if(monster.statusAffectv1(StatusAffects.sparring) == 2) {
+	if(monster.statusAffectv1(StatusAffects.Sparring) == 2) {
 		outputText("You give the ", false);
 		if(monster.HP < 1) outputText("damage-dazed", false);
 		else outputText("arousal-addled", false);

@@ -7,8 +7,9 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Desert.*;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{
@@ -40,7 +41,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if ((player.exploredDesert == 20 && player.findStatusAffect("Tel'Adre") < 0) || (rand(20) == 0 && player.statusAffectv1("Tel'Adre") == 0)) {
+			if ((player.exploredDesert == 20 && player.findStatusAffect(StatusAffects.TelAdre) < 0) || (rand(20) == 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}

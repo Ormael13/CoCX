@@ -2,8 +2,9 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */

@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Rathazul extends NPCAwareContent {
+public class Rathazul extends NPCAwareContent {
 
 		public function Rathazul()
 		{
@@ -19,7 +20,7 @@ public function encounterRathazul():void {
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -10);
 	//Introduction
-	if(player.findStatusAffect(StatusAffects.metRathazul) >= 0) {
+	if(player.findStatusAffect(StatusAffects.MetRathazul) >= 0) {
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n", true);
 		else
@@ -27,14 +28,14 @@ public function encounterRathazul():void {
 	}
 	else {
 		outputText("You encounter a hunched figure working as you come around a large bush.  Clothed in tattered robes that obscure most his figure, you can nontheless see a rat-like muzzle protruding from the shadowy hood that conceals most of his form.  A simple glance behind him confirms your suspicions - this is some kind of rat-person.   He seems oblivious to your presence as he stirs a cauldron of viscous fluid with one hand; a neat stack of beakers and phials sit in the dirt to his left.  You see a smile break across his aged visage, and he says, \"<i>Come closer child.  I will not bite.</i>\"\n\nApprehensive of the dangers of this unknown land, you cautiously approach.\n\n\"<i>I am Rathazul the Alchemist.  Once I was famed for my miracle cures.  Now I idle by this lake, helpless to do anything but measure the increasing amounts of corruption that taint its waters,</i>\" he says as he pulls back his hood, revealing the entirety of his very bald and wrinkled head.\n\n", true);
-		player.createStatusAffect(StatusAffects.metRathazul,0,0,0,0);
+		player.createStatusAffect(StatusAffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
-	if(player.statusAffectv2(StatusAffects.metRathazul) >= 3 && player.statusAffectv3(StatusAffects.metRathazul) != 1 && player.cor < 75) {
+	if(player.statusAffectv2(StatusAffects.MetRathazul) >= 3 && player.statusAffectv3(StatusAffects.MetRathazul) != 1 && player.cor < 75) {
 		outputText("\"<i>You know, I think I might be able to do this worn-out world a lot more good from your camp than by wandering around this lake.  What do you say?</i>\" asks the rat.\n\n(Move Rathazul into your camp?)", false);
 		doYesNo(2124,2125);
 		//Set rathazul flag that he has offered to move in (1 time offer)
-		player.changeStatusValue(StatusAffects.metRathazul,3,1);
+		player.changeStatusValue(StatusAffects.MetRathazul,3,1);
 		return;
 	}
 	offered = rathazulWorkOffer();
@@ -170,7 +171,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//Reducto
 	var reductos:Number = 0;
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.metRathazul) >= 4) {
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ", false);
 		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50", false);
 		else outputText("100", false);
@@ -188,7 +189,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("\"<i>Oooh, is that some webbing from a giant spider or spider-morph?  Most excellent!  With a little bit of alchemical treatment, it is possible I could loosen the fibres enough to weave them into something truly magnificent - armor, or even a marvelous robe,</i>\" offers Rathazul.\n\n", false);
 	}
 	//Vines
-	if(player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.findStatusAffect("Defense: Canopy") < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
+	if(player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n", false);
 		totalOffers++;
 		spoken = true;
@@ -294,7 +295,7 @@ private function makeADeBimboDraft():void {
 	player.gems -= 250;
 	player.consumeItem(consumables.SMART_T,5);
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.metRathazul,2,1);
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.DEBIMBO);
 }
 
@@ -399,7 +400,7 @@ private function craftOozeArmor():void {
 	spriteSelect(49);
 	player.destroyItems(useables.GREENGL, 5);
 	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n", true);
-	player.addStatusValue(StatusAffects.metRathazul,2,1);
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR);
 	if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
 }
@@ -427,7 +428,7 @@ public function craftCarapace():void {
 	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.   Rathazul mumbles and looks away, shaking his head.\n\n", false);
 	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
 	player.destroyItems(useables.B_CHITN, 5);
-	player.addStatusValue(StatusAffects.metRathazul,2,1);
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(armors.BEEARMR);
 }
 }

@@ -4,8 +4,9 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */

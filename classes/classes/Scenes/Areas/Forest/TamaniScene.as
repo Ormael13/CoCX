@@ -5,8 +5,9 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Appearance;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class TamaniScene extends BaseContent{
+public class TamaniScene extends BaseContent{
 
 	public function TamaniScene()
 	{
@@ -76,7 +77,7 @@ internal function tamaniChest():String {
 //[Encounter Tamani – female]
 private function tamaniFemaleEncounter():void {
 	spriteSelect(56);
-	player.createStatusAffect(StatusAffects.Tamani_Female_Encounter,0,0,0,0);
+	player.createStatusAffect(StatusAffects.TamaniFemaleEncounter,0,0,0,0);
 	outputText("", true);
 	outputText("A goblin leaps out from behind a rock outcropping.  She keeps her arms folded across her " + tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("She says, \"<i>There's only so much cock around, and I got dibs on ALL of it, O.K. skank?</i>\"\n\n", false);

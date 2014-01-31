@@ -2,7 +2,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.Appearance;
 	import classes.Monster;
-	import classes.internals.Utils;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -16,7 +17,7 @@ package classes.Scenes.Areas.Bog
 			setWeaponName("tongue");
 			setWeaponVerb("tongue-slap");
 			setWeaponAttack(10);
-			createStatusAffect(StatusAffects.attacks, 1, 0, 0, 0);
+			createStatusAffect(StatusAffects.Attacks, 1, 0, 0, 0);
 			eAttack();
 			setWeaponAttack(30);
 			setWeaponName("claws");

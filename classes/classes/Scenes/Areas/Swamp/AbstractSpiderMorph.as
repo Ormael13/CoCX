@@ -20,7 +20,7 @@ package classes.Scenes.Areas.Swamp
 			if(player.spe >= 2 && rand(2) == 0) {
 				spiderMorphWebAttack();
 			}
-			else if(player.findStatusAffect(StatusAffects.Web_dash_Silence) < 0 && rand(3) == 0) {
+			else if(player.findStatusAffect(StatusAffects.WebSilence) < 0 && rand(3) == 0) {
 				spiderSilence();
 			}
 			else if(player.findStatusAffect(StatusAffects.Disarmed) < 0 && player.weaponName != "fists" && rand(3) == 0) {
@@ -207,7 +207,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			else {
 				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n", false);
-				player.createStatusAffect(StatusAffects.Web_dash_Silence, 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

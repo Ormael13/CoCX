@@ -2,8 +2,9 @@ package classes.Scenes.Places.TelAdre {
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Lottie extends TelAdreAbstractContent {
 public function Lottie(){

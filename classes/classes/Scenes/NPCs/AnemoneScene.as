@@ -13,8 +13,9 @@ package classes.Scenes.NPCs
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Weapon;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class AnemoneScene extends BaseContent
+public class AnemoneScene extends BaseContent
 	{
 		public function AnemoneScene()
 		{
@@ -1454,7 +1455,7 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Um... hi.</i>\"");
 				//(lose 8 hours, restore HP amount consonant with 8hrs rest)
 				doNext(16);
-				player.createStatusAffect(StatusAffects.Post_Anemone_Beatdown, 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.PostAnemoneBeatdown, 0, 0, 0, 0);
 				return;
 			}
 			//Sex scenes, post dream

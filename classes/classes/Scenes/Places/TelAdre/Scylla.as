@@ -3,8 +3,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Scylla extends TelAdreAbstractContent{
+public class Scylla extends TelAdreAbstractContent{
 
 	public function Scylla()
 	{

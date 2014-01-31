@@ -8,9 +8,10 @@ package classes.Scenes.Monsters
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-	
+import classes.StatusAffects;
 
-	public class GoblinAssassinScene extends BaseContent
+
+public class GoblinAssassinScene extends BaseContent
 	{
 		public function GoblinAssassinScene()
 		{

@@ -1510,10 +1510,10 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
-	if(player.findStatusAffect(StatusAffects.heat) >= 0) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.heat)) + " hours remaining.\n", false);
+	if(player.findStatusAffect(StatusAffects.Heat) >= 0) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
 	if(player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
-	if(player.statusAffectv1(StatusAffects.Black_Cat_Beer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.Black_Cat_Beer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
 	outputText("<b>Eggs Traded For: </b>" + flags[kFLAGS.EGGS_BOUGHT] + "\n");
 	doNext(1);
@@ -1541,7 +1541,7 @@ public function lustPercent():Number {
 	if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
 	if(lust < 25) lust = 25;
-	if(player.statusAffectv1(StatusAffects.Black_Cat_Beer) > 0) {
+	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
@@ -1564,7 +1564,7 @@ public function lustPercent():Number {
 	
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var statIndex:int = player.findStatusAffect(UmasShop.UmasMassage);
+	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 	if (statIndex >= 0)
 	{
 		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELIEF || player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_LUST)
@@ -1812,7 +1812,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
 	//worms raise min lust!
-	if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		if(player.lust < 50) player.lust = 50;
 	}
 	if(player.lust > 100) player.lust = 100;

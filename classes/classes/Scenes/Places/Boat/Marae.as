@@ -4,8 +4,9 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.CockTypesEnum;
 import classes.Appearance;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Marae extends AbstractBoatContent{
+public class Marae extends AbstractBoatContent{
 
 	public function Marae()
 	{
@@ -23,7 +24,7 @@ public function encounterMarae():void {
 			if(player.cor > 66) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!", false);
 			//Explain the dungeon scenario
 			else {
-				player.createStatusAffect("Marae's Quest Start",0,0,0,0);
+				player.createStatusAffect(StatusAffects.MaraesQuestStart,0,0,0,0);
 				outputText("\"<i>You seem so surprised by me, Champion.   I suppose that is inevitable.  Your origin is not of Mareth, our land, and few save for the demons remember me,</i>\" says the tree.\n\n", false);
 				outputText("You take a step back, amazed to find such a creature, apparently uncorrupted.  ", false);
 				if(player.lib + player.cor > 80) outputText("Your eyes can't help but take note of the tree-woman's shapely breasts, and wonder if they feel like tits or wood.  ", false);
@@ -54,13 +55,13 @@ public function encounterMarae():void {
 			else 
 			{
 				//If youve taken her quest already
-				if(player.findStatusAffect("Marae's Quest Start") >= 0) {
+				if(player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0) {
 					outputText("Marae reminds you, \"<i>You need to disable the demon's factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"", false);
 					doNext(13);
 				}
 				//If not
 				else {
-					player.createStatusAffect("Marae's Quest Start",0,0,0,0);
+					player.createStatusAffect(StatusAffects.MaraesQuestStart,0,0,0,0);
 					outputText("<i>You seem so surprised by me, Champion.   I suppose that is inevitable.  Your origin is not of Mareth, our land, and few save for the demons remember me,</i>\" says the tree.\n\n", false);
 					outputText("You take a step back, amazed to find such a creature, apparently uncorrupted.  ", false);
 					if(player.lib + player.cor > 80) outputText("Your eyes can't help but take note of the tree-woman's shapely breasts, and wonder if they feel like tits or wood.  ", false);
@@ -97,8 +98,8 @@ public function encounterMarae():void {
 		else {
 			outputText("You approach Marae's tree and note that the bark of the tree is smooth, practically wet looking.  The goddess's form is already exposed, as she leans out from the trunk and blows you a kiss.   Her breasts look as if they've filled out quite a bit since your first meeting, jiggling teasingly with every motion she makes.\n\n", true);
 			//First corrupt meeting
-			if(player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) < 0) {
-				player.createStatusAffect(StatusAffects.Met_Corrupt_Marae,0,0,0,0);
+			if(player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0) {
+				player.createStatusAffect(StatusAffects.MetCorruptMarae,0,0,0,0);
 				outputText("She smiles lewdly and beckons you to come closer.  \"<i>Do you like the new me?  I don't know why I was resisting this in the first place.   You shut down the factory, I could feel it in the ground, and I was so happy.  Then I realized HOW you shut down the factory.  I could feel it seeping into my roots.  I was so afraid, feeling that corruption flow through the ground back to me.   I promised myself I would kill you when you dared to show your face.   But then that warmth started flowing into me, and it just melted my anger and resolve,</i>\" she explains, pushing forwards a bit further out from the trunk.\n\n", false);
 				outputText("You watch as a tiny purple bud blooms below her belly button, just above her junction with the tree.  The petals unfurl into a very familiar shape, looking more like a vagina than a flower.  Marae reaches down and brushes her fingers across the outer petals, cooing in delight.   You glance up at her eyes and she's practically beaming – she knew where you were looking.\n\n", false);
 				outputText("\"<i>I don't mind, I'd like you to watch,</i>\" she says as she begins to masturbate in earnest.  Nectar begins to drip from the flower while she talks about her corruption, \"<i>I couldn't help it, it was like lust was filling me up until there wasn't room for anything else.   I started groping my tits, feeling them grow heavy while I teased and pinched my nipples.  I must have been like that for nearly an hour.  And when the runoff finally started washing into my lake, mmm, I just had to give myself a hot little honeypot.   It felt so good to give in.  I see why the demons do what they do.  It isn't evil, they just want to share this... this pleasure, with everyone and everything.</i>\"\n\n", false);
@@ -120,7 +121,7 @@ public function encounterMarae():void {
 private function maraeBadEnd():void {
 	spriteSelect(40);
 	outputText("", true);
-	if(player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) < 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n", false);
+	if(player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n", false);
 	outputText("She approaches you, her breasts swinging pendulously and dripping sap.   Mesmerized by her swaying mammaries, you watch until she mashes you into them with an enormous hug.  A hand traces down your chest to your groin", false);
 	if(player.gender == 0) outputText(" where it pauses in momentary confusion", false);
 	outputText(".  She giggles and presses your face into her one of her verdant nipples.  You open your mouth to accept the purplish-green bud, licking and suckling it, encouraging her sweet sap to flow into your hungry mouth.  She gushes fluids and pulls you tightly against her tits, crushing you with soft flesh.\n\n", false);

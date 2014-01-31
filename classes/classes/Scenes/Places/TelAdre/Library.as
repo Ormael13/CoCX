@@ -3,8 +3,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.WeaponLib;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Library extends TelAdreAbstractContent{
+public class Library extends TelAdreAbstractContent{
 
 	public function Library()
 	{

@@ -46,9 +46,9 @@ package classes.Scenes.Areas.HighMountains
 		// Bundle of logic to determine if a player might "act" like a minotaur, based off of a couple of related statusAffects
 		public function actsLikeACow():Boolean
 		{
-			if (player.findStatusAffect(StatusAffects.heat)) return true;
+			if (player.findStatusAffect(StatusAffects.Heat)) return true;
 			if (player.findStatusAffect(StatusAffects.Rut)) return true;
-			if (player.findStatusAffect(StatusAffects.dysfunction)) return true;
+			if (player.findStatusAffect(StatusAffects.Dysfunction)) return true;
 			return false;
 		}
 		
@@ -303,7 +303,7 @@ package classes.Scenes.Areas.HighMountains
 				lustMod *= 2;
 			}
 
-			player.createStatusAffect(StatusAffects.Izumis_Pipe_Smoke, SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
+			player.createStatusAffect(StatusAffects.IzumisPipeSmoke, SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
 			
 			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
 			player.spe += deltaSpd;
@@ -320,7 +320,7 @@ package classes.Scenes.Areas.HighMountains
 		// Update the duration of the pipe smoke effect
 		public function updateSmokeDuration(hours:int):void
 		{
-			var affectIndex:int = player.findStatusAffect(StatusAffects.Izumis_Pipe_Smoke);
+			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
 
 			if (affectIndex >= 0)
 			{
@@ -336,7 +336,7 @@ package classes.Scenes.Areas.HighMountains
 		// Method to contain removal mechanics + scene text to spit out
 		protected function smokeEffectWearsOff():void
 		{
-			var affectIndex:int = player.findStatusAffect(StatusAffects.Izumis_Pipe_Smoke);
+			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
 
 			if (affectIndex >= 0)
 			{
@@ -350,7 +350,7 @@ package classes.Scenes.Areas.HighMountains
 				
 				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
 				
-				player.removeStatusAffect(StatusAffects.Izumis_Pipe_Smoke);
+				player.removeStatusAffect(StatusAffects.IzumisPipeSmoke);
 			}
 		}
 

@@ -5,8 +5,9 @@
 	import classes.BaseContent;
 	import classes.Appearance;
 	import classes.CockTypesEnum;
+import classes.StatusAffects;
 
-	public class SwordInStone extends AbstractLakeContent
+public class SwordInStone extends AbstractLakeContent
 	{
 		public function SwordInStone()
 		{
@@ -68,7 +69,7 @@
 				menuLoc = 2;
 				inventory.takeItem(weapons.B_SWORD);
 			
-				player.createStatusAffect(StatusAffects.Took_Blessed_Sword,0,0,0,0);
+				player.createStatusAffect(StatusAffects.TookBlessedSword,0,0,0,0);
 			}
 		}
 	}

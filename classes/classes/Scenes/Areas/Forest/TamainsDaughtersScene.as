@@ -8,8 +8,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Appearance;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class TamainsDaughtersScene extends BaseContent {
+public class TamainsDaughtersScene extends BaseContent {
 
 	public function TamainsDaughtersScene()
 	{
@@ -1047,7 +1048,7 @@ internal function loseToDaughters():void {
 	spriteSelect(57);
 	if(player.lust > 99) {
 		//worms r gross mmmmkay?
-		if(player.findStatusAffect(StatusAffects.infested) >= 0) {
+		if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 			kGAMECLASS.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
 			dynStats("lus=", 0);

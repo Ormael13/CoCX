@@ -2,8 +2,9 @@ package classes.Scenes.NPCs
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * Holli (combat id 69)
 	 * @author ...
 	 */
@@ -36,7 +37,7 @@ private function helspawnTwinStrikes():void {
 	//if Bowmander
 	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
 	else outputText(flags[kFLAGS.HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
-	createStatusAffect(StatusAffects.attacks,0,0,0,0);
+	createStatusAffect(StatusAffects.Attacks,0,0,0,0);
 	eAttack();
 }
 
@@ -183,7 +184,7 @@ private function calledShot():void {
 			init12Combat(175,30,.55,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,10 + rand(5));
 			initX_Tail(TAIL_TYPE_LIZARD,0,0);
-			this.createStatusAffect(StatusAffects.keen, 0, 0, 0, 0);
+			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
 		}
 
 	}

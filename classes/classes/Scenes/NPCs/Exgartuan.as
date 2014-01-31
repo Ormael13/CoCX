@@ -2,8 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Exgartuan extends NPCAwareContent {
+public class Exgartuan extends NPCAwareContent {
 
 	public function Exgartuan()
 	{
@@ -613,7 +614,7 @@ public function exgartuanWormCure():void {
 	else outputText("groin", false);
 	outputText(" begins to grow warm...no, hot.  You feel it moving and squirming with discomfort as the worms inside you wriggle about, agitated by something.  The heat intensifies and you watch in a mixture of shock and horror as they start crawling out your urethra, sliding down to the ground on a river of thick seminal fluid.   You double over in pain as something stretches you wide, and you feel the main worm pushing itself through your " + cockDescript(0) + ", desperate to escape.  It crests the tip, wiggling and stuck for a moment as it struggles to pull free.  At last it pops out and drops to the ground, crawling away.  Exgartuan roars, \"<i>AND STAY OUT!</i>\"", false);
 	outputText("\n\nYou guess there was only enough room for one or the other...", false);
-	player.removeStatusAffect(StatusAffects.infested);
+	player.removeStatusAffect(StatusAffects.Infested);
 }
 
 public function exgartuanLactationAdjustment():void {
@@ -801,7 +802,7 @@ public function exgartuanSleepSurprise():void {
 		outputText("  Liquid-hot pressure slides over the underside of your " + cockDescript(0) + ", licking wetly at the pulsating, need-filled demon-prick.  Your rogue tongue's attentions have the desired effect, and the cries of your pleasure are muffled by your own thick flesh and its rapidly distending urethra.\n\n", false);
 		
 		outputText("If someone were watching", false);
-		if(monk >= 5 && player.findStatusAffect(StatusAffects.noJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
+		if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps it's creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ", false);
 		temp = player.cumQ();
 		if(temp < 50) outputText("surprisingly light", false);
@@ -824,7 +825,7 @@ public function exgartuanSleepSurprise():void {
 		}
 		outputText("\n\n", false);
 		
-		if(monk >= 5 && player.findStatusAffect(StatusAffects.noJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			outputText("The splatter of mouse-cum erupting in the wood reaches your ears, bringing a wistful smile to your face.  That slutty mouse is such a peeping tom!  ", false);
 		}
 		outputText("Your eyes slowly roll back down while Exgartuan deflates, leaving a trail of pleased, white submission ", false);

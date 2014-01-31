@@ -3,8 +3,9 @@
 	import classes.Monster;
 	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -207,7 +208,7 @@
 			var select:Number = 1;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
-			if (!player.hasCock() || findStatusAffect(StatusAffects.bimboBrawl) >= 0) {
+			if (!player.hasCock() || findStatusAffect(StatusAffects.BimboBrawl) >= 0) {
 				//Talons
 				special1 = talonsSophie;
 				//Batter
@@ -224,7 +225,7 @@
 				//compulsion
 				special3 = sophieCompulsionAttack;
 			}
-			if (player.hasCock() && findStatusAffect(StatusAffects.bimboBrawl) < 0) rando = 1 + rand(3);
+			if (player.hasCock() && findStatusAffect(StatusAffects.BimboBrawl) < 0) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) game.eventParser(special1);
 			if (rando == 2) game.eventParser(special2);
@@ -234,7 +235,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.bimboBrawl) >= 0)
+			if(findStatusAffect(StatusAffects.BimboBrawl) >= 0)
 				game.sophieFollowerScene.beatUpDebimboSophie();
 			else
 				game.sophieScene.sophieLostCombat();
@@ -242,7 +243,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.bimboBrawl) >= 0)
+			if(findStatusAffect(StatusAffects.BimboBrawl) >= 0)
 				game.sophieFollowerScene.debimboSophieBeatsYouUp();
 			else if (pcCameWorms) {
 				outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");

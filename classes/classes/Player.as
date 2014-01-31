@@ -1,14 +1,14 @@
 package classes
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armor;
+import classes.Items.ArmorLib;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
+import classes.Scenes.Places.TelAdre.UmasShop;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	/**
 	 * ...
@@ -202,7 +202,7 @@ package classes
 				if (damage < 1) damage = 1;
 			}
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1(StatusAffects.Black_Cat_Beer) > 0)
+			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
 				damage = Math.round(damage * .75);
 
 			//Take damage you masochist!
@@ -218,7 +218,7 @@ package classes
 			}
 
 			// Uma's Massage bonuses
-			var statIndex:int = findStatusAffect(UmasShop.UmasMassage);
+			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
 			if (statIndex >= 0) {
 				if (statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELAXATION) {
 					damage = Math.round(damage * statusAffects[statIndex].value2);
@@ -1147,8 +1147,8 @@ package classes
 				//Reset craving value
 				changeStatusValue(StatusAffects.SlimeCraving,1,0);
 				//Flag to display feed update and restore stats in event parser
-				if(findStatusAffect(StatusAffects.Slime_Craving_Feed) < 0) {
-					createStatusAffect(StatusAffects.Slime_Craving_Feed,0,0,0,0);
+				if(findStatusAffect(StatusAffects.SlimeCravingFeed) < 0) {
+					createStatusAffect(StatusAffects.SlimeCravingFeed,0,0,0,0);
 				}
 			}
 			if(findPerk(PerkLib.Diapause) >= 0) {
@@ -1479,8 +1479,8 @@ package classes
 			}
 			if(findStatusAffect(StatusAffects.Shielding) >= 0) removeStatusAffect(StatusAffects.Shielding);
 			if(findStatusAffect(StatusAffects.HolliConstrict) >= 0) removeStatusAffect(StatusAffects.HolliConstrict);
-			if(findStatusAffect(StatusAffects.luststones) >= 0) removeStatusAffect(StatusAffects.luststones);
-			if(kGAMECLASS.monster.findStatusAffect(StatusAffects.sandstorm) >= 0) kGAMECLASS.monster.removeStatusAffect(StatusAffects.sandstorm);
+			if(findStatusAffect(StatusAffects.LustStones) >= 0) removeStatusAffect(StatusAffects.LustStones);
+			if(kGAMECLASS.monster.findStatusAffect(StatusAffects.Sandstorm) >= 0) kGAMECLASS.monster.removeStatusAffect(StatusAffects.Sandstorm);
 			if(findStatusAffect(StatusAffects.Sealed) >= 0) {
 				removeStatusAffect(StatusAffects.Sealed);
 			}
@@ -1492,7 +1492,7 @@ package classes
 			}
 			if(findStatusAffect(StatusAffects.UBERWEB) >= 0) removeStatusAffect(StatusAffects.UBERWEB);
 			if(findStatusAffect(StatusAffects.DriderKiss) >= 0) removeStatusAffect(StatusAffects.DriderKiss);
-			if(findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) removeStatusAffect(StatusAffects.Web_dash_Silence);
+			if(findStatusAffect(StatusAffects.WebSilence) >= 0) removeStatusAffect(StatusAffects.WebSilence);
 			if(findStatusAffect(StatusAffects.GooArmorSilence) >= 0) removeStatusAffect(StatusAffects.GooArmorSilence);
 			if(findStatusAffect(StatusAffects.Bound) >= 0) removeStatusAffect(StatusAffects.Bound);
 			if(findStatusAffect(StatusAffects.GooArmorBind) >= 0) removeStatusAffect(StatusAffects.GooArmorBind);
@@ -1535,7 +1535,7 @@ package classes
 			if(findStatusAffect(StatusAffects.Stunned) >= 0) removeStatusAffect(StatusAffects.Stunned);
 			if(findStatusAffect(StatusAffects.Confusion) >= 0) removeStatusAffect(StatusAffects.Confusion);
 			if(findStatusAffect(StatusAffects.ThroatPunch) >= 0) removeStatusAffect(StatusAffects.ThroatPunch);
-			if(findStatusAffect(StatusAffects.Kiss_of_Death) >= 0) removeStatusAffect(StatusAffects.Kiss_of_Death);
+			if(findStatusAffect(StatusAffects.KissOfDeath) >= 0) removeStatusAffect(StatusAffects.KissOfDeath);
 			if(findStatusAffect(StatusAffects.AcidSlap) >= 0) removeStatusAffect(StatusAffects.AcidSlap);
 			if(findStatusAffect(StatusAffects.GooBind) >= 0) removeStatusAffect(StatusAffects.GooBind);
 			if(findStatusAffect(StatusAffects.HarpyBind) >= 0) removeStatusAffect(StatusAffects.HarpyBind);
@@ -1549,16 +1549,16 @@ package classes
 			if(findStatusAffect(StatusAffects.DemonSeed) >= 0) {
 				removeStatusAffect(StatusAffects.DemonSeed);
 			}
-			if(findStatusAffect(StatusAffects.paralyzevenom) >= 0) {
-				str += statusAffects[findStatusAffect(StatusAffects.paralyzevenom)].value1;
-				spe += statusAffects[findStatusAffect(StatusAffects.paralyzevenom)].value2;
-				removeStatusAffect(StatusAffects.paralyzevenom);
+			if(findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
+				str += statusAffects[findStatusAffect(StatusAffects.ParalyzeVenom)].value1;
+				spe += statusAffects[findStatusAffect(StatusAffects.ParalyzeVenom)].value2;
+				removeStatusAffect(StatusAffects.ParalyzeVenom);
 			}
 			if(findStatusAffect(StatusAffects.lustvenom) >= 0) {
 				removeStatusAffect(StatusAffects.lustvenom);
 			}
-			if(findStatusAffect(StatusAffects.infestAttempted) >= 0) {
-				removeStatusAffect(StatusAffects.infestAttempted);
+			if(findStatusAffect(StatusAffects.InfestAttempted) >= 0) {
+				removeStatusAffect(StatusAffects.InfestAttempted);
 			}
 			if(findStatusAffect(StatusAffects.Might) >= 0) {
 				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.Might),"tou", -statusAffectv2(StatusAffects.Might));
@@ -1821,7 +1821,7 @@ package classes
 			if (removed == 1) {
 				if (cocks.length == 0) {
 					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>", false);
-					if (findStatusAffect(StatusAffects.infested) >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					if (findStatusAffect(StatusAffects.Infested) >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
 				}
 				if (cocks.length == 1) {
 					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one " + cockDescript(0) + ".</b>", false);
@@ -1833,7 +1833,7 @@ package classes
 			if (removed > 1) {
 				if (cocks.length == 0) {
 					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>", false);
-					if (findStatusAffect(StatusAffects.infested) >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					if (findStatusAffect(StatusAffects.Infested) >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
 				}
 				if (cocks.length == 1) {
 					outputText("<b>You feel " + kGAMECLASS.num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
@@ -1843,7 +1843,7 @@ package classes
 				}
 			}
 			//remove infestation if cockless
-			if (cocks.length == 0) removeStatusAffect(StatusAffects.infested);
+			if (cocks.length == 0) removeStatusAffect(StatusAffects.Infested);
 			if (cocks.length == 0 && balls > 0) {
 				outputText("  <b>Your " + sackDescript() + " and " + ballsDescriptLight() + " shrink and disappear, vanishing into your groin.</b>", false);
 				balls = 0;

@@ -3,8 +3,9 @@ package classes.Scenes.Quests.UrtaQuest
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 	
 	/**
 	 * ...
@@ -46,12 +47,12 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("Smiling wryly and licking her lips, the succubus-cow procures a bottle of her pet's cum with her probing tail.");
 //Success:
-			if (findStatusAffect(StatusAffects.drank_mino_cum) < 0 || findStatusAffect(StatusAffects.drank_mino_cum2) < 0) {
+			if (findStatusAffect(StatusAffects.DrankMinoCum) < 0 || findStatusAffect(StatusAffects.DrankMinoCum2) < 0) {
 				outputText("\n\nSmiling triumphantly, she takes the bottle and opens it with a pop, drinking the contents with glee.  When done, she throws the bottle away and smacks her lips.  \"<i>Nothing like a bottle of minotaur cum to get you back on your feet, right?</i>\"  She grins, her pussy dripping with more juices.");
 				lust += 25;
 				HP += 400;
-				if (findStatusAffect(StatusAffects.drank_mino_cum) < 0) createStatusAffect(StatusAffects.drank_mino_cum, 0, 0, 0, 0);
-				else createStatusAffect(StatusAffects.drank_mino_cum2, 0, 0, 0, 0);
+				if (findStatusAffect(StatusAffects.DrankMinoCum) < 0) createStatusAffect(StatusAffects.DrankMinoCum, 0, 0, 0, 0);
+				else createStatusAffect(StatusAffects.DrankMinoCum2, 0, 0, 0, 0);
 			}
 			//Failure:
 			else {

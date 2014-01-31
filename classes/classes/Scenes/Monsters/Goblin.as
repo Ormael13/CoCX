@@ -7,8 +7,9 @@
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.Tamani;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

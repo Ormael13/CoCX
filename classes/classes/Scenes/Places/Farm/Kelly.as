@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.ItemType;
+import classes.StatusAffects;
 
 public class Kelly extends AbstractFarmContent{
 
@@ -990,7 +991,7 @@ private function punishKelly():void {
 		outputText("\n\n\"<i>Yes, [Master], I do,</i>\" she says, slightly louder and straightening her back.  You smile softly.  Such a good girl.");
 	}
 	menu();
-	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1("Tel'Adre") < 1) {
+	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1(StatusAffects.TelAdre) < 1) {
 		outputText("You'd like to take Kelly for a ride, but you don't have any good ideas for public places to humiliate her.");
 	}
 	else addButton(1,"Ride",rideKellyForPunishment);

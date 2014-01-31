@@ -2,8 +2,9 @@
 import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
-	public class MilkWaifu extends NPCAwareContent{
+public class MilkWaifu extends NPCAwareContent{
 
 	public function MilkWaifu()
 	{
@@ -72,7 +73,7 @@ private function nameZeMilkBath():void
 		outputText("\n\n\"<i>" + flags[kFLAGS.MILK_NAME] + "</i>\" she hesitantly repeats.  Looks like she gets it!  \"<i>" + flags[kFLAGS.MILK_NAME] + "!</i>\" she says, more confidently as you encourage her.");
 	}
 	//Arrival: Part 2 (PC has Rath in camp)
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.metRathazul) >= 4) {
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		outputText("\n\nAs you finish deciding on what to call " + flags[kFLAGS.MILK_NAME] + ", you hear footsteps shuffling over to the two of you.  Looking up, you see the old rat alchemist Rathazul approaching, nose buried in an ancient-looking tome.  \"<i>Good news, [name]!</i>\" he calls, just before tripping over the prone milkmaid, going sprawling across the ground.");
 		
 		outputText("\n\n\"<i>Gah!  Help, I can't get up!</i>\" he shouts, flailing around until you rush over and pull him to his feet.");

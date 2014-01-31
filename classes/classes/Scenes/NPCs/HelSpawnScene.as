@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class HelSpawnScene extends NPCAwareContent {
 
 	public function HelSpawnScene()
@@ -276,19 +278,19 @@ private function getAnotherDad():void {
 	//[Another Dad] (PC has no dick)
 	if(!player.hasCock()) {
 		outputText("You tell Helia you'd love to a share a child with her, but you're not... properly equipped for the endeavor.  \"<i>That's fine!  I can... I can wait, a little.  I-if you want to go grow one, I mean.  If not, then we can find someone with a cock.  ");
-		if(player.statusAffectv1("Tel'Adre") >= 1) outputText("There's Miko and Mai from the bar.  Mai's said she wanted a kid, but can't take care of one... she'd probably be willing to fuck one into me!  If that's not alright, then... lemme think.  ");
+		if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("There's Miko and Mai from the bar.  Mai's said she wanted a kid, but can't take care of one... she'd probably be willing to fuck one into me!  If that's not alright, then... lemme think.  ");
 		outputText("Uh, maybe not a minotaur... they always plug more minotaurs, and I don't want a bull coming out of my twat.  Uh, maybe I could track down one of the spider boys from the swamp and jump on </i>his<i> dick.  They're pretty cute, right?  Dunno how that'd affect a child, though.  Maybe he'd end up with like, extra eyes, or chitin?  Still, better than an imp or some shit.  So what do you think?  Wanna grow a dick, or leave the knocking-up to someone else?</i>\"");
 		//{Options in next section}
 	}
 	//[Another Dad] (PC has a dick)
 	else {
 		outputText("\"<i>W-wha?</i>\" Hel says, cocking an eyebrow.  \"<i>You sure, [name]?  I-if you don't want to be the dad, I guess I understand.  But why?  Am I not... no, nevermind.  I don't want to know.  Okay, uh, we can find someone with a cock.  ");
-		if(player.statusAffectv1("Tel'Adre") >= 1) outputText("There's Miko and Mai from the bar.  Mai's said she wanted a kid, but can't take care of one... she'd probably be willing to fuck one into me!  If that's not alright, then... lemme think.  ");
+		if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("There's Miko and Mai from the bar.  Mai's said she wanted a kid, but can't take care of one... she'd probably be willing to fuck one into me!  If that's not alright, then... lemme think.  ");
 		outputText("Uh, maybe not a minotaur... they always plug more minotaurs, and I don't want a bull coming out of my twat.  Uh, maybe I could track down one of the spider boys from the swamp and jump on </i>his<i> dick.  They're pretty cute, right?  Dunno how that'd affect a child, though.  Maybe he'd end up with like, extra eyes, or chitin?  Still, better than an imp or some shit.  So what do you think?</i>\"");
 	}
 	menu();
 	//{If Tel'Adre has been discovered: [Mai]}
-	if(player.statusAffectv1("Tel'Adre") >= 1) addButton(0,"Mai",maiWouldBeTheBestInseminator);
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(0,"Mai",maiWouldBeTheBestInseminator);
 	//[Spiderboy]
 	addButton(1,"Spiderboy",spiderboyWouldBeBestDad);
 	//[I will] (If PC has a dick)

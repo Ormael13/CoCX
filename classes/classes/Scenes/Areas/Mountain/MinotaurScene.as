@@ -6,8 +6,9 @@
 	import classes.Appearance;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class MinotaurScene extends BaseContent {
+public class MinotaurScene extends BaseContent {
 
 		public function MinotaurScene()
 		{
@@ -298,7 +299,7 @@ private function minoUrethralPen():void {
 		counter++;
 	}
 	//Infested version!
-	if(player.statusAffectv1(StatusAffects.infested) == 5) {
+	if(player.statusAffectv1(StatusAffects.Infested) == 5) {
 		outputText("Grinning maliciously, you shove the minotaur onto his back, his massive equine dong slapping him in the chest as he lands with a grunt. Fondling your " + cockDescript(x) + " as you gaze upon his splendid rod, you suddenly shudder with pleasure as the worms in your " + sackDescript() + " wriggle around deliciously, a few of them escaping from your tip along with a copious dollop of pre.  The meager group of wiggling parasites crawling lamely towards the fallen brute gives you a wicked idea, flushing your entire body with arousal as you step over the minotaur and grab his prick firmly. Recognizing your plan, your parasitic pets begin to churn happily in your balls as you smear your pre over the minotaur's urethra.\n\n", false);
 
 		outputText("The brute breaks out of his defeated daze with a look of abject horror as he feels unnatural squirming on his flare, bolting upright and loosing a terrified \"<i>MOO!!</i>\" as he scrambles to distance himself from your infested semen. You cackle with sick delight at his meager attempts to escape and grasp the head of his cock firmly, causing him to grunt with pain as you yank him back over to you by his flared rod and line the head of your " + cockDescript(x) + " up with his urethra. His eyes lock with yours, a pleading, desperate look in them as your balls surge from the anticipation. Unable to hold back against the unholy squirming of your infested cum, you grin evilly and ram your throbbing, infested prick deep into his shaft.\n\n", false);

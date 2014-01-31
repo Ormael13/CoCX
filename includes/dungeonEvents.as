@@ -222,7 +222,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You puzzle out how to build a fully functional cock-milker from the spare parts here and assemble it.\n\nYou gained a <b>Cock Milker</b>!", true);
 		outputText("\n\nYou'll need a little help to use it though.", false);
 		player.createKeyItem("Cock Milker",0,0,0,0);
-		player.createStatusAffect("BUILT: Milker",0,0,0,0);
+		player.createStatusAffect(StatusAffects.BuiltMilker,0,0,0,0);
 		doNext(1);
 		return;
 	}
@@ -231,7 +231,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You puzzle out how to build a fully functional breast-milker from the spare parts here and assemble it.\n\nYou gained a <b>Breast Milker</b>!", true);
 		outputText("\n\nYou'll need a little help to use it though.", false);
 		player.createKeyItem("Breast Milker",0,0,0,0);
-		player.createStatusAffect("BUILT: Milker",0,0,0,0);
+		player.createStatusAffect(StatusAffects.BuiltMilker,0,0,0,0);
 		doNext(1);
 		return;
 	}
@@ -865,8 +865,8 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Take item from storage
 	if(eventNo == 11061) {
-		if(player.findStatusAffect("TakenGro+") >= 0) player.statusAffects[player.findStatusAffect("TakenGro+")].value1--;
-		else player.createStatusAffect("TakenGro+",4,0,0,0);
+		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.TakenGroPlus)].value1--;
+		else player.createStatusAffect(StatusAffects.TakenGroPlus,4,0,0,0);
 		inventory.takeItem(consumables.GROPLUS);
 		return;
 	}

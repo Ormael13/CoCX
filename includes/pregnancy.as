@@ -13,13 +13,13 @@ public function updatePregnancy():Boolean {
 		return false;
 	}
 	//Cancel Heat
-	if(player.findStatusAffect(StatusAffects.heat) >= 0) {
+	if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
 		outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n", false);
 		//Remove bonus libido from heat
-		dynStats("lib", -player.statusAffects[player.findStatusAffect(StatusAffects.heat)].value2);
+		dynStats("lib", -player.statusAffects[player.findStatusAffect(StatusAffects.Heat)].value2);
 		if(player.lib < 10) player.lib = 10;
 		statScreenRefresh();
-		player.removeStatusAffect(StatusAffects.heat);
+		player.removeStatusAffect(StatusAffects.Heat);
 		displayedUpdate = true;
 	}
 	if(player.pregnancyIncubation == 1) {
@@ -1458,7 +1458,7 @@ public function updatePregnancy():Boolean {
 			outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
 			player.cuntChange(20,true,true,false);
 			outputText("\n");
-			player.createStatusAffect(StatusAffects.Camp_Anemone_Trigger,0,0,0,0);
+			player.createStatusAffect(StatusAffects.CampAnemoneTrigger,0,0,0,0);
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
 			return true;
@@ -1817,7 +1817,7 @@ public function updatePregnancy():Boolean {
 	//Egg status messages
 	if(player.pregnancyType == 5 && player.pregnancyIncubation > 0) {
 		if(player.vaginas.length == 0) {
-			player.removeStatusAffect(StatusAffects.eggs);
+			player.removeStatusAffect(StatusAffects.Eggs);
 			outputText("\n<b>Your pregnant belly suddenly begins shrinking, until it disappears.</b>\n", false);
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
@@ -1832,9 +1832,9 @@ public function updatePregnancy():Boolean {
 				genderCheck();
 			}		
 			//Small egg scenes
-			if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2 == 0) {
+			if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 == 0) {
 				//light quantity
-				if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value3 < 10) {
+				if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3 < 10) {
 					outputText("You are interrupted as you find yourself overtaken by an uncontrollable urge to undress and squat.   You berate yourself for giving in to the urge for a moment before feeling something shift.  You hear the splash of fluid on the ground and look down to see a thick greenish fluid puddling underneath you.  There is no time to ponder this development as a rounded object passes down your birth canal, spreading your feminine lips apart and forcing a blush to your cheeks.  It plops into the puddle with a splash, and you find yourself feeling visibly delighted to be laying such healthy eggs.   Another egg works its way down and you realize the process is turning you on more and more.   In total you lay ", false);
 					outputText(eggDescript(), false); 
 					outputText(", driving yourself to the very edge of orgasm.", false);
@@ -1861,15 +1861,15 @@ public function updatePregnancy():Boolean {
 				if(player.clitLength > 2 && player.clitLength <= 5) outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ", false);
 				if(player.clitLength <= 2) outputText("your " + vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ", false);
 				outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ", false);
-				if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value3 >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ", false);
+				if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3 >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ", false);
 				outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".", false);
 				dynStats("lus=", 0, "resisted", false);
 			}
 			outputText("\n\n<b>You feel compelled to leave the eggs behind, ", false);
-			if(player.findStatusAffect(StatusAffects.ateEgg) >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);
+			if(player.findStatusAffect(StatusAffects.AteEgg) >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);
 			else outputText("but your body's intuition reminds you they shouldn't be fertile, and your belly rumbles with barely contained hunger.\n</b>", false);
 			player.cuntChange(20, true);
-			player.createStatusAffect(StatusAffects.lootEgg,0,0,0,0);
+			player.createStatusAffect(StatusAffects.LootEgg,0,0,0,0);
 			displayedUpdate = true;
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
@@ -1880,10 +1880,10 @@ public function updatePregnancy():Boolean {
 
 public function eggDescript(plural:Boolean = true):String {
 	var descript:String = "";
-	if(player.findStatusAffect(StatusAffects.eggs) >= 0) {
-		descript += num2Text(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value3) + " ";
+	if(player.findStatusAffect(StatusAffects.Eggs) >= 0) {
+		descript += num2Text(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value3) + " ";
 		//size descriptor
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2 == 1) descript += "large ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value2 == 1) descript += "large ";
 		/*color descriptor
 		0 - brown - ass expansion
 		1 - purple - hip expansion
@@ -1892,12 +1892,12 @@ public function eggDescript(plural:Boolean = true):String {
 		4 - white - breast growth.  If lactating increases lactation.
 		5 - rubbery black - 
 		*/
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 0) descript += "brown ";
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 1) descript += "purple ";
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 2) descript += "blue ";
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 3) descript += "pink ";
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 4) descript += "white ";
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 == 5) descript += "rubbery black ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 0) descript += "brown ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 1) descript += "purple ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 2) descript += "blue ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 3) descript += "pink ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 4) descript += "white ";
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Eggs)].value1 == 5) descript += "rubbery black ";
 		//EGGS
 		if(plural) descript += "eggs";
 		else descript += "egg";

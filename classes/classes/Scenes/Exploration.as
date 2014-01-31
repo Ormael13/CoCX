@@ -10,8 +10,9 @@ package classes.Scenes
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.Monsters.GoblinAssassinScene;
+import classes.StatusAffects;
 
-	public class Exploration extends BaseContent
+public class Exploration extends BaseContent
 	{
 		public function Exploration()
 		{
@@ -46,7 +47,7 @@ package classes.Scenes
 			addButton(4, "Next", explorePageII);
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains);
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
-			if (player.findStatusAffect(StatusAffects.exploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
+			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
 			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
 			addButton(9, "Back", eventParser, 1);
 		}

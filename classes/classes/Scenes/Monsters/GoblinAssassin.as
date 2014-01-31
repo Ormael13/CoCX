@@ -8,7 +8,9 @@
 	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.Tamani;
 	import classes.Scenes.Monsters.GoblinAssassinScene;
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */

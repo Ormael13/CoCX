@@ -6,8 +6,9 @@ package classes.Scenes.Places.Farm
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */

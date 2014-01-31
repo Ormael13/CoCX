@@ -5,8 +5,9 @@ package classes.Scenes.Monsters
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class AbstractSuccubus extends Monster
+public class AbstractSuccubus extends Monster
 	{
 		protected function whipAttack():void
 		{
@@ -97,7 +98,7 @@ package classes.Scenes.Monsters
 			//get hit
 			else {
 				outputText("  You start to dodge to the side, but she shifts direction expertly and plants a wet kiss on your lips.  She spins and dodges away with a ballet dancer's grace, leaving you to wonder what just happened.  ", false);
-				if (player.findStatusAffect(StatusAffects.Kiss_of_Death) < 0) player.createStatusAffect(StatusAffects.Kiss_of_Death, 0, 0, 0, 0);
+				if (player.findStatusAffect(StatusAffects.KissOfDeath) < 0) player.createStatusAffect(StatusAffects.KissOfDeath, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

@@ -22,7 +22,7 @@ public function endHpLoss():void
 }
 public function endLustLoss():void
 {
-	if (player.findStatusAffect(StatusAffects.infested) >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 		infestOrgasm();
 		monster.won(false,true);
@@ -43,7 +43,7 @@ public function cleanupAfterCombat():void {
 		}
 		//Player lost
 		else {
-			if(monster.statusAffectv1(StatusAffects.sparring) == 2) {
+			if(monster.statusAffectv1(StatusAffects.Sparring) == 2) {
 				outputText("The cow-girl has defeated you in a practice fight!", true);
 				outputText("\n\nYou have to lean on Isabella's shoulder while the two of your hike back to camp.  She clearly won.", false);
 				gameState = 0;
@@ -53,7 +53,7 @@ public function cleanupAfterCombat():void {
 				return;
 			}
 			//Next button is handled within the minerva loss function
-			if(monster.findStatusAffect(StatusAffects.Peach_Loot_Loss) >= 0) {
+			if(monster.findStatusAffect(StatusAffects.PeachLootLoss) >= 0) {
 				gameState = 0;
 				player.HP = 1;
 				statScreenRefresh();
@@ -114,7 +114,7 @@ public function doCombat(eventNum:Number):void
 			mainView.hideMenuButton(MainView.MENU_PERKS);
 			mainView.setButton(0, "Attack");
 			var waitT:String = "Wait";
-			if (monster.findStatusAffect(StatusAffects.level) >= 0) waitT = "Climb";
+			if (monster.findStatusAffect(StatusAffects.Level) >= 0) waitT = "Climb";
 			outputText("", true);
 			hideUpDown();
 			//Update Combat Statuses
@@ -126,7 +126,7 @@ public function doCombat(eventNum:Number):void
 			if (combatRoundOver()) return;
 			temp2 = magicMenu;
 			if (player.findStatusAffect(StatusAffects.ThroatPunch) >= 0) temp2 = null;
-			if (player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) temp2 = null;
+			if (player.findStatusAffect(StatusAffects.WebSilence) >= 0) temp2 = null;
 			if (player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) temp2 = null;
 
 			if (player.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
@@ -210,8 +210,8 @@ public function doCombat(eventNum:Number):void
 			//Gore if mino horns
 			if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) temp2 = 5038;
 			//Infest if infested
-			if (player.findStatusAffect(StatusAffects.infested) >= 0 && player.hasCock()) {
-				if (player.statusAffects[player.findStatusAffect(StatusAffects.infested)].value1 == 5) {
+			if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.hasCock()) {
+				if (player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 == 5) {
 					temp3 = 5060;
 				}
 			}
@@ -224,7 +224,7 @@ public function doCombat(eventNum:Number):void
 			if (player.faceType == FACE_SNAKE_FANGS) temp5 = 5117;
 			if (player.faceType == FACE_SPIDER_FANGS) temp5 = 5157;
 			//Kiss supercedes bite.
-			if (player.findStatusAffect(StatusAffects.Lust_Stick_Applied) >= 0) {
+			if (player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
 				temp5 = 5158;
 				button1Text = "Kiss";
 			}
@@ -556,15 +556,15 @@ public function doCombat(eventNum:Number):void
 			else {
 				outputText("Searing pain lances through you as " + monster.a + monster.short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.", false);
 				//v1 - strenght penalty, v2 speed penalty
-				if (player.findStatusAffect(StatusAffects.paralyzevenom) >= 0) {
-					temp = player.findStatusAffect(StatusAffects.paralyzevenom);
+				if (player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
+					temp = player.findStatusAffect(StatusAffects.ParalyzeVenom);
 					player.statusAffects[temp].value1 += 2.9;
 					player.statusAffects[temp].value2 += 2.9;
 					dynStats("str", -3, "spe", -3);
 					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!", false);
 				}
 				else {
-					player.createStatusAffect(StatusAffects.paralyzevenom, 2, 2, 0, 0);
+					player.createStatusAffect(StatusAffects.ParalyzeVenom, 2, 2, 0, 0);
 					dynStats("str", -2, "spe", -2);
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!", false);
 				}
@@ -685,7 +685,7 @@ public function doCombat(eventNum:Number):void
 	}
 			//Encounte worms
 	if(eventNum == 5052) {
-			if (player.findStatusAffect(StatusAffects.metWorms) >= 0) {
+			if (player.findStatusAffect(StatusAffects.MetWorms) >= 0) {
 				if (player.gender == 1 || player.gender == 3) wormsMale();
 				else wormsFemale();
 			}
@@ -735,20 +735,20 @@ public function doCombat(eventNum:Number):void
 			//Set worms to 'who cares'
 	if(eventNum == 5061) {
 			outputText("You shrug and keep walking, not sure how you feel about the strange sign.", true);
-			player.createStatusAffect(StatusAffects.wormsOn, 0, 0, 0, 0);
-			player.createStatusAffect(StatusAffects.wormsHalf, 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
 			doNext(13);
 	}
 			//Wait
 	if(eventNum == 5071) {
 			//Gain fatigue if not fighting sand tarps
-			if (monster.findStatusAffect(StatusAffects.level) < 0) fatigue(-5);
+			if (monster.findStatusAffect(StatusAffects.Level) < 0) fatigue(-5);
 			flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 			if (monster.findStatusAffect(StatusAffects.PCTailTangle) >= 0) {
 				(monster as Kitsune).kitsuneWait();
 				return;
 			}
-			else if (monster.findStatusAffect(StatusAffects.level) >= 0) {
+			else if (monster.findStatusAffect(StatusAffects.Level) >= 0) {
 				(monster as SandTrap).sandTrapWait();
 				return;
 			}
@@ -790,7 +790,7 @@ public function doCombat(eventNum:Number):void
 				outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you. You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest. More and more goo latches onto you - you'll have to fight to get out of this.");
 				player.addStatusValue(StatusAffects.GooArmorBind, 1, 1);
 				if (player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
-					if (monster.findStatusAffect(StatusAffects.spar) >= 0) valeria.pcWinsValeriaSparDefeat();
+					if (monster.findStatusAffect(StatusAffects.Spar) >= 0) valeria.pcWinsValeriaSparDefeat();
 					else gooArmorBeatsUpPC();
 					return;
 				}
@@ -964,7 +964,7 @@ public function doCombat(eventNum:Number):void
 				//Keep it from going over 100
 				player.changeStatusValue(StatusAffects.Kelt, 1, 100);
 			}
-			if (monster.findStatusAffect(StatusAffects.sandstorm) >= 0 && rand(10) > 1) {
+			if (monster.findStatusAffect(StatusAffects.Sandstorm) >= 0 && rand(10) > 1) {
 				outputText("Your shot is blown off target by the tornado of sand and wind.  Damn!\n\n");
 				enemyAI();
 				return;
@@ -1279,7 +1279,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(monster.findStatusAffect(StatusAffects.level) >= 0 && player.findStatusAffect(StatusAffects.FirstAttack) < 0) {
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && player.findStatusAffect(StatusAffects.FirstAttack) < 0) {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		(monster as SandTrap).trapLevel(-4);
 	}
@@ -1396,7 +1396,7 @@ public function attack():void {
 	//Weapon addition!
 	damage += player.weaponAttack;
 	//Bonus sand trap damage!
-	if(monster.findStatusAffect(StatusAffects.level) >= 0) damage = Math.round(damage * 1.75);
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0) damage = Math.round(damage * 1.75);
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
@@ -1714,7 +1714,7 @@ public function doDamage(damage:Number):Number {
 	}
 	
 	// Uma's Massage Bonuses
-	var statIndex:int = player.findStatusAffect(UmasShop.UmasMassage);
+	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 	if (statIndex >= 0)
 	{
 		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_POWER)
@@ -1898,7 +1898,7 @@ public function combatStatusesUpdate():void {
 			player.addStatusValue(StatusAffects.GooArmorSilence,1,1);
 		}
 	}
-	if(player.findStatusAffect(StatusAffects.luststones) >= 0) {
+	if(player.findStatusAffect(StatusAffects.LustStones) >= 0) {
 		//[When witches activate the stones for goo bodies]
 		if(player.isGoo()) {
 			outputText("<b>The stones start vibrating again, making your liquid body ripple with pleasure.  The witches snicker at the odd sight you are right now.\n\n</b>");
@@ -1907,16 +1907,16 @@ public function combatStatusesUpdate():void {
 		else {
 			outputText("<b>The smooth stones start vibrating again, sending another wave of teasing bliss throughout your body.  The witches snicker at you as you try to withstand stand their attack.\n\n</b>");
 		}
-		dynStats("lus", player.statusAffectv1(StatusAffects.luststones) + 4);
+		dynStats("lus", player.statusAffectv1(StatusAffects.LustStones) + 4);
 	}
-	if(player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
-		if(player.statusAffectv1(StatusAffects.Web_dash_Silence) >= 2 || rand(20) + 1 + player.str/10 >= 15) {
+	if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
+		if(player.statusAffectv1(StatusAffects.WebSilence) >= 2 || rand(20) + 1 + player.str/10 >= 15) {
 			outputText("You rip off the webbing that covers your mouth with a cry of pain, finally able to breathe normally again!  Now you can cast spells!\n\n", false);
-			player.removeStatusAffect(StatusAffects.Web_dash_Silence);
+			player.removeStatusAffect(StatusAffects.WebSilence);
 		}
 		else {
 			outputText("<b>Your mouth and nose are obstructed by sticky webbing, making it difficult to breathe and impossible to focus on casting spells.  You try to pull it off, but it just won't work!</b>\n\n", false);
-			player.addStatusValue(StatusAffects.Web_dash_Silence,1,1);
+			player.addStatusValue(StatusAffects.WebSilence,1,1);
 		}
 	}		
 	if(player.findStatusAffect(StatusAffects.HolliConstrict) >= 0) {
@@ -1924,7 +1924,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.UBERWEB) >= 0)
 		outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n", false);
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0 && monster.findStatusAffect(StatusAffects.sandstorm) < 0) {
+	if(player.findStatusAffect(StatusAffects.Blind) >= 0 && monster.findStatusAffect(StatusAffects.Sandstorm) < 0) {
 		if(player.findStatusAffect(StatusAffects.SheilaOil) >= 0) {
 			if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
 				outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
@@ -2065,7 +2065,7 @@ public function combatStatusesUpdate():void {
 		}
 		dynStats("lus", 7 + int(player.sens)/10);
 	}
-	if(player.findStatusAffect(StatusAffects.Kiss_of_Death) >= 0) {
+	if(player.findStatusAffect(StatusAffects.KissOfDeath) >= 0) {
 		//Effect 
 		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted....\n\n", false);
 		dynStats("lus", 5);
@@ -2075,7 +2075,7 @@ public function combatStatusesUpdate():void {
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n", false);
 		dynStats("lus", (player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 + int(player.sens/30) + int(player.lib/30) + int(player.cor/30)));
 	}
-	if(player.findStatusAffect(StatusAffects.heat) >= 0 && player.vaginas.length > 0 && monster.totalCocks() > 0) {
+	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.vaginas.length > 0 && monster.totalCocks() > 0) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ", false);
 		outputText("If you don't end this quickly you'll give in to your heat.\n\n", false);
@@ -2221,8 +2221,8 @@ public function display():void {
 	else {
 		outputText(monster.long + "\n", false);
 		//Bonus sand trap stuff
-		if(monster.findStatusAffect(StatusAffects.level) >= 0) {
-			temp = monster.statusAffectv1(StatusAffects.level);
+		if(monster.findStatusAffect(StatusAffects.Level) >= 0) {
+			temp = monster.statusAffectv1(StatusAffects.Level);
 			//[(new PG for PC height levels)PC level 4: 
 			outputText("\n");
 			if(temp == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
@@ -2678,13 +2678,13 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
 	}
 	//15 Nipplecunts
 	if(player.hasFuckableNipples()) {
@@ -3145,7 +3145,7 @@ public function tease(justText:Boolean = false):void {
 			else outputText("You wiggle your " + hipDescript() + " at your enemy, giving them a long, tantalizing look at the hips that have passed so very many offspring.  \"<i>Oh, like what you see, bad boy?  Well why don't you just come on over and stuff that cock inside me?  Give me your seed, and I'll give you suuuuch beautiful offspring.  Oh?  Does that turn you on?  It does!  Come on, just let loose and fuck me full of your babies!</i>\"", false);
 			chance += 2;
 			damage += 4;
-			if(player.findStatusAffect(StatusAffects.heat) >= 0) {
+			if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
 				chance += 2;
 				damage += 4;
 			}
@@ -3757,7 +3757,7 @@ public function combatRoundOver():Boolean {
 		doNext(endLustVictory);
 		return true;
 	}
-	if(monster.findStatusAffect(StatusAffects.level) >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0) {
 		if((monster as SandTrap).trapLevel() <= 1) {
 			desert.sandTrapScene.sandtrapmentLoss();
 			return true;
@@ -4130,9 +4130,9 @@ public function hellFire():void {
 	var damage:Number = (player.level * 8 + rand(10) + player.cor/5);
 	if(player.findStatusAffect(StatusAffects.GooArmorSilence) < 0) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
 	
-	if(player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("  <b>The fire burns through the webs blocking your mouth!</b>", false);
-		player.removeStatusAffect(StatusAffects.Web_dash_Silence);
+		player.removeStatusAffect(StatusAffects.WebSilence);
 	}
 	if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) {
 		outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>", false);
@@ -4442,7 +4442,7 @@ public function superWhisperAttack():void {
 		doNext(5000);
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
 		doNext(5000);
 		return;
@@ -4496,17 +4496,17 @@ public function dragonBreath():void {
 		return;
 	}
 	//Not Ready Yet:
-	if(player.findStatusAffect(StatusAffects.Dragon_Breath_Cooldown) >= 0) {
+	if(player.findStatusAffect(StatusAffects.DragonBreathCooldown) >= 0) {
 		outputText("You try to tap into the power within you, but your burning throat reminds you that you're not yet ready to unleash it again...");
 		doNext(5000);
 		return;
 	}
 	menuLoc = 0;
 	changeFatigue(20);
-	player.createStatusAffect(StatusAffects.Dragon_Breath_Cooldown,0,0,0,0);
+	player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
 	var damage:Number = int(player.level * 8 + 25 + rand(10));
-	if(player.findStatusAffect(StatusAffects.Dragon_Breath_Boost) >= 0) {
-		player.removeStatusAffect(StatusAffects.Dragon_Breath_Boost);
+	if(player.findStatusAffect(StatusAffects.DragonBreathBoost) >= 0) {
+		player.removeStatusAffect(StatusAffects.DragonBreathBoost);
 		damage *= 1.5;
 	}
 	//Shell
@@ -4522,7 +4522,7 @@ public function dragonBreath():void {
 		return;
 	}
 	outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
-	if(monster.findStatusAffect(StatusAffects.sandstorm) >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Sandstorm) >= 0) {
 		outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
 		damage = Math.round(0.2 * damage);
 	}
@@ -4596,8 +4596,8 @@ public function fireballuuuuu():void {
 	}
 	//[Failure]
 	//(high damage to self, +20 fatigue)
-	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
-		if(player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n\n", false);
+	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
+		if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n\n", false);
 		else if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now.");
 		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.\n\n", false);
 		changeFatigue(10);
@@ -4641,7 +4641,7 @@ public function fireballuuuuu():void {
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
 		}
-		if(monster.findStatusAffect(StatusAffects.sandstorm) >= 0) {
+		if(monster.findStatusAffect(StatusAffects.Sandstorm) >= 0) {
 			outputText("<b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>  ");
 			damage = Math.round(0.2 * damage);
 		}
@@ -4794,7 +4794,7 @@ public function runAway():void {
 		doNext(5000);
 		return;
 	}
-	if(monster.findStatusAffect(StatusAffects.level) >= 0 && player.canFly()) {
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && player.canFly()) {
 		clearOutput();
 		outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
 		gameState = 0;
@@ -4802,13 +4802,13 @@ public function runAway():void {
 		doNext(13);
 		return;
 	}
-	if(monster.findStatusAffect(StatusAffects.Generic_Run_Disabled) >= 0 || urtaQuest.isUrta()) {
+	if(monster.findStatusAffect(StatusAffects.GenericRunDisabled) >= 0 || urtaQuest.isUrta()) {
 		menuLoc = 3;
 		outputText("You can't escape from this fight!");
 		doNext(5000);
 		return;
 	}
-	if(monster.findStatusAffect(StatusAffects.level) >= 0 && monster.statusAffectv1(StatusAffects.level) < 4) {
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && monster.statusAffectv1(StatusAffects.Level) < 4) {
 		menuLoc = 3;
 		outputText("You're too deeply mired to escape!  You'll have to <b>climb</b> some first!");
 		doNext(5000);
@@ -5170,14 +5170,14 @@ public function physicalSpecials():void {
 		butt5 = 5038;
 	}
 	//Infest if infested
-	if(player.findStatusAffect(StatusAffects.infested) >= 0 && player.hasCock()) {
-		if(player.statusAffects[player.findStatusAffect(StatusAffects.infested)].value1 == 5) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0 && player.hasCock()) {
+		if(player.statusAffects[player.findStatusAffect(StatusAffects.Infested)].value1 == 5) {
 			b6T = "Infest";
 			butt6 = 5060;
 		}
 	}
 	//Kiss supercedes bite.
-	if(player.findStatusAffect(StatusAffects.Lust_Stick_Applied) >= 0) {
+	if(player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
 		butt7 = 5158;
 		b7T = "Kiss";
 	}	
@@ -5218,7 +5218,7 @@ public function corruptedFoxFire():void {
 		doNext(5160);
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 		doNext(5160);
 		return;
@@ -5252,7 +5252,7 @@ public function foxFire():void {
 		doNext(5160);
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 		doNext(5160);
 		return;
@@ -5297,7 +5297,7 @@ public function kitsuneTerror():void {
 		enemyAI();
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
 		doNext(5160);
 		return;
@@ -5332,7 +5332,7 @@ public function kitsuneIllusion():void {
 		doNext(5160);
 		return;
 	}
-	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 		doNext(5160);
 		return;
