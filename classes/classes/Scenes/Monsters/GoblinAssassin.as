@@ -140,6 +140,13 @@
 			init11Armor("leather straps");
 			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
+			init14WeightedDrop().
+					add(consumables.GOB_ALE, 5).
+					addMany(1, consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE, 1);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
 		}
 
 		override protected function performCombatAction():void

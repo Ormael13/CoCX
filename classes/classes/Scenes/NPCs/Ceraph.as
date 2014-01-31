@@ -309,6 +309,7 @@
 			init11Armor("demon-skin");
 			init12Combat(200,30,0.75,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(9,rand(5) + 38);
+			init14NoDrop();
 			initX_Specials(ceraphSpecial1,ceraphSpecial2,ceraphSpecial3);
 		}
 

@@ -699,6 +699,7 @@ public function doItems(eventNo:Number):void {
 		private function useItemInInventory(slotTmp:ItemSlotClass):void
 		{
 			if (slotTmp.itype is Useable) {
+				clearOutput();
 				useItem(slotTmp.itype,false);
 			} else {
 				outputText("You cannot use " + slotTmp.itype.longName + "!\n\n", true);

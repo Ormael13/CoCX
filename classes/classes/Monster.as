@@ -549,6 +549,12 @@
 			this.drop = new WeightedDrop(fixedDrop,1);
 		}
 
+		protected function init14NoDrop():void
+		{
+			skipInit(14);
+			this.drop = new WeightedDrop();
+		}
+
 		/**
 		 * Initializes droplist as a weighted droplist. Call .add(item,weight) of the
 		 * returned value to add them to list.
