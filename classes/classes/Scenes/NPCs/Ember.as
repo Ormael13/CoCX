@@ -36,7 +36,7 @@ package classes.Scenes.NPCs
 			//Basic attack, average damage, average accuracy
 			outputText("With a growl, the dragon lashes out in a ferocious splay-fingered slash, "+ emberMF("his","her") + " claws poised to rip into your flesh.  ");
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(2) == 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Miss/dodge
@@ -55,7 +55,7 @@ package classes.Scenes.NPCs
 		
 		//Dragon Breath: Very rare attack, very high damage
 		private function embersSupahSpecialDragonBreath():void {
-			if(hasStatusAffect("Blind") >= 0 && rand(2) == 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
@@ -77,7 +77,7 @@ package classes.Scenes.NPCs
 		//Tailslap: Rare attack, high damage, low accuracy
 		private function emberTailSlap():void {
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText(capitalA + short + " completely misses you with a blind tail-slap!", false);
 				combatRoundOver();
 				return;
@@ -107,9 +107,9 @@ package classes.Scenes.NPCs
 			if(player.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  Your head swims - it'll take a moment before you can regain your balance.");
 				//Miss: You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.
-				player.createStatusAffect("Stunned",0,0,0,0);
+				player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			}
-			createStatusAffect("Stun Cooldown",4,0,0,0);
+			createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
 			var damage:Number = 10 + rand(10);
 			damage = player.takeDamage(damage);
 			outputText(" (" + damage + ")");
@@ -122,9 +122,9 @@ package classes.Scenes.NPCs
 				emberReactsToLustiness();
 				return;
 			}
-			if (hasStatusAffect("Stun Cooldown") >= 0) {
-				addStatusValue("Stun Cooldown", 1, -1);
-				if (statusAffectv1("Stun Cooldown") <= 0) removeStatusAffect("Stun Cooldown");
+			if (findStatusAffect(StatusAffects.StunCooldown) >= 0) {
+				addStatusValue(StatusAffects.StunCooldown, 1, -1);
+				if (statusAffectv1(StatusAffects.StunCooldown) <= 0) removeStatusAffect(StatusAffects.StunCooldown);
 			}
 			else if (rand(3) == 0) {
 				dragonFarce();

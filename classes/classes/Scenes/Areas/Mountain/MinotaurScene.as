@@ -88,7 +88,7 @@ internal function minoVictoryRapeChoices():void {
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nWhat do you do?", true);
 	}
 	//Not able to rape but a feeder
-	else if(player.hasStatusAffect("Feeder") >= 0 && feedposit == "B. Feed") {
+	else if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && feedposit == "B. Feed") {
 		if(monster.lust > 99) outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nDo you?", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWhat do you do?", true);
 	}
@@ -298,7 +298,7 @@ private function minoUrethralPen():void {
 		counter++;
 	}
 	//Infested version!
-	if(player.statusAffectv1("infested") == 5) {
+	if(player.statusAffectv1(StatusAffects.infested) == 5) {
 		outputText("Grinning maliciously, you shove the minotaur onto his back, his massive equine dong slapping him in the chest as he lands with a grunt. Fondling your " + cockDescript(x) + " as you gaze upon his splendid rod, you suddenly shudder with pleasure as the worms in your " + sackDescript() + " wriggle around deliciously, a few of them escaping from your tip along with a copious dollop of pre.  The meager group of wiggling parasites crawling lamely towards the fallen brute gives you a wicked idea, flushing your entire body with arousal as you step over the minotaur and grab his prick firmly. Recognizing your plan, your parasitic pets begin to churn happily in your balls as you smear your pre over the minotaur's urethra.\n\n", false);
 
 		outputText("The brute breaks out of his defeated daze with a look of abject horror as he feels unnatural squirming on his flare, bolting upright and loosing a terrified \"<i>MOO!!</i>\" as he scrambles to distance himself from your infested semen. You cackle with sick delight at his meager attempts to escape and grasp the head of his cock firmly, causing him to grunt with pain as you yank him back over to you by his flared rod and line the head of your " + cockDescript(x) + " up with his urethra. His eyes lock with yours, a pleading, desperate look in them as your balls surge from the anticipation. Unable to hold back against the unholy squirming of your infested cum, you grin evilly and ram your throbbing, infested prick deep into his shaft.\n\n", false);
@@ -868,7 +868,7 @@ private function minoAddictionBadEnd2():void {
 	
 	outputText("There's a whole village of minotaurs here!  Twenty or thirty cave openings are tunneled into the mountain, and an equal number of crude huts are built on the surrounding ledge.  You aren't looking at that way  – your eyes are riveted by what you see between the two sets of structures.  There are five of the shaggy beast-men gathered around a fire-pit, roasting some animal and relaxing.  Two of them are vigorously fucking tiny minotaur-like beings with feminine features, spearing their much shorter brethren on their mammoth shafts.  The look on the faces of the 'minitaurs' is one you know well, the pure ecstasy of indulging a potent addiction.\n\n", false);
 	
-	if(player.hasStatusAffect("DungeonShutDown") >= 0) {
+	if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 		outputText("A third beast has a human-looking victim suspended by her ankles and is roughly fucking her throat.   Her eyes are rolled back, though whether from pleasure or lack of oxygen you're not sure.  A pair of beach-ball-sized breasts bounces on her chest, and a cock big enough to dwarf the minotaur's flops about weakly, dribbling a constant stream of liquid.  She must be one of the slaves that escaped from the factory, though it doesn't look like her life has improved much since her escape.\n\n", false);
 	}
 	
@@ -905,8 +905,8 @@ private function minotaurDrinksMilkNewsAtEleven():void {
 	//set lust to 0, increase sensitivity slightly
 	dynStats("lib", .2, "lus", -50);
 	//You've now been milked, reset the timer for that
-	player.addStatusValue("Feeder",1,1);
-	player.changeStatusValue("Feeder",2,0);
+	player.addStatusValue(StatusAffects.Feeder,1,1);
+	player.changeStatusValue(StatusAffects.Feeder,2,0);
 	cleanupAfterCombat();
 }
 

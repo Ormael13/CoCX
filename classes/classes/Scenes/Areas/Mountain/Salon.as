@@ -19,13 +19,13 @@ public function hairDresser():void {
 	doYesNo(salonGreeting,13);
 }
 public function salonGreeting():void{
-	if (player.hasStatusAffect("hairdresser meeting") >= 0)
+	if (player.findStatusAffect(StatusAffects.hairdressermeeting) >= 0)
 	{
 		hairDresserRepeatGreeting();
 	}
 	else
 	{
-		player.createStatusAffect("hairdresser meeting", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.hairdressermeeting, 0, 0, 0, 0);
 		hairDresserGreeting();
 	}
 }

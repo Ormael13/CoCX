@@ -186,12 +186,12 @@ package classes.Scenes.Areas.HighMountains
 		
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n", false);
 			//Undo slow to determine if bad end time
-			if(player.hasStatusAffect("BasiliskSlow") >= 0) {
-				player.spe += player.statusAffectv1("BasiliskSlow");
+			if(player.findStatusAffect(StatusAffects.BasiliskSlow) >= 0) {
+				player.spe += player.statusAffectv1(StatusAffects.BasiliskSlow);
 				mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
 				// speDown.visible = false;
-				player.removeStatusAffect("BasiliskSlow");
+				player.removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
 			dynStats("spe", -3, "lus", 399);
 			//Bad end
@@ -200,7 +200,7 @@ package classes.Scenes.Areas.HighMountains
 				return;
 			}
 			//choose between loss rapes
-			if(player.hasVagina() && (player.hasStatusAffect("heat") >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0 || (player.pregnancyIncubation > 1 && player.pregnancyType == 5)))
+			if(player.hasVagina() && (player.findStatusAffect(StatusAffects.heat) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0 || (player.pregnancyIncubation > 1 && player.pregnancyType == 5)))
 				basiliskHasVagEggStuff();
 			else defaultBasiliskRape();
 		}
@@ -239,12 +239,12 @@ package classes.Scenes.Areas.HighMountains
 			player.slimeFeed();
 			outputText("The basilisk is breathing heavily as it tears your " + player.armorName + " from your body, its warm exhalations rolling over your naked flesh.  It seems to be having difficulty controlling itself; from your frozen gaze you can see it constantly shifting its dreadful slit eyes back to your frame as it searches through your pockets with claws that tremble.  Eventually it throws down your attire and stares back into your eyes.  There is something else in there now; a pulsing lust, hints of red at the edges of that great, grey sea, a rapacious tide gathering.  You wish you could look away but there is more chance of you moving mountains.", false);
 			//(Heat: 
-			if(player.hasStatusAffect("heat") >= 0) outputText("  You are more aware than ever of an invisible scent simmering off you, of your wet vagina clenching and wetting itself in anticipation, your body begging this male creature to fulfil its genetic objective upon you.  Your eyes have betrayed you, your body is betraying you, and whatever else you are is a tiny, ignored voice screaming in between.", false);
+			if(player.findStatusAffect(StatusAffects.heat) >= 0) outputText("  You are more aware than ever of an invisible scent simmering off you, of your wet vagina clenching and wetting itself in anticipation, your body begging this male creature to fulfil its genetic objective upon you.  Your eyes have betrayed you, your body is betraying you, and whatever else you are is a tiny, ignored voice screaming in between.", false);
 			outputText("  The basilisk suddenly breaks away and kneels down in front of you.  Out of sight of your petrified eyes you cannot see what it is doing; however a moment later, you can feel, as a warm, sticky sensation slavers over your abdomen.", false);
 			//(egg preg:
 			if(player.pregnancyIncubation > 1 && player.pregnancyType == 5) outputText("  The basilisk licks your bulging belly hungrily, pushing against and testing for the eggs you are carrying.  Your sensitive cargo shifts around under its hungry attention; you'd squirm, but that is, of course, impossible.", false);
 			//(heat or perk:
-			if(player.hasStatusAffect("heat") >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) outputText("  The basilisk licks your belly hungrily, its sticky tongue crawling like a warm tentacle across your sensitive underside.  You'd squirm, but that is impossible.  The creature is making you feel everything it is forcing upon you.", false);
+			if(player.findStatusAffect(StatusAffects.heat) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) outputText("  The basilisk licks your belly hungrily, its sticky tongue crawling like a warm tentacle across your sensitive underside.  You'd squirm, but that is impossible.  The creature is making you feel everything it is forcing upon you.", false);
 			outputText("\n\n", false);
 			
 			outputText("The basilisk gets up and again stares back into your eyes and you feel its will press indomitably against your pliable mind.  At the very edge of your vision, underneath the creature you can see a hint of shiny purple; the creature's cock has slid out of its genital slit.  How long it is and what it looks like you cannot see, but as with another raspy moan you finally accept what is about to happen, there is no doubt you are going to get to know about it very personally.\n\n", false);

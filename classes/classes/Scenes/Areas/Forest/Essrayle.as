@@ -218,9 +218,9 @@ private function plantsForMe2(BE:int = 0):void {
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
 	}
 	if(player.biggestTitSize() >= 1) {
-		if(player.hasStatusAffect("Feeder") >= 0) {
-			player.addStatusValue("Feeder",1,1);
-			player.changeStatusValue("Feeder",2,0);
+		if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			player.addStatusValue(StatusAffects.Feeder,1,1);
+			player.changeStatusValue(StatusAffects.Feeder,2,0);
 		}
 		player.boostLactation(0.01);
 	}

@@ -1519,8 +1519,8 @@ private function suckleTacularKats():void {
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 	//You've now been milked, reset the timer for that
-	player.addStatusValue("Feeder",1,1);
-	player.changeStatusValue("Feeder",2,0);
+	player.addStatusValue(StatusAffects.Feeder,1,1);
+	player.changeStatusValue(StatusAffects.Feeder,2,0);
 }
 	}
 }

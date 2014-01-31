@@ -233,17 +233,17 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 	startCombat(new LustyDemons());
 	if(sacrifice) {
 		//Remove weapon
-		player.createStatusAffect("Disarmed",0,0,0,0);
+		player.createStatusAffect(StatusAffects.Disarmed,0,0,0,0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 		player.weapon = WeaponLib.FISTS;
-		monster.createStatusAffect("Bow Disabled",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.BowDisabled,0,0,0,0);
 		if(player.str < 80 && player.spe < 80) {
-			monster.createStatusAffect("Attack Disabled",0,0,0,0);
-			monster.createStatusAffect("Run Disabled",0,0,0,0);
-			monster.createStatusAffect("Physical Disabled",0,0,0,0);
+			monster.createStatusAffect(StatusAffects.AttackDisabled,0,0,0,0);
+			monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
+			monster.createStatusAffect(StatusAffects.PhysicalDisabled,0,0,0,0);
 		}
 		else {
-			if(!player.canFly()) monster.createStatusAffect("Run Disabled",0,0,0,0);
+			if(!player.canFly()) monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
 		}
 	}
 	eventParser(1);
@@ -278,8 +278,8 @@ public function loseOrSubmitToVapula():void {
 		player.cuntChange(60,true,true,false);
 		outputText("  A dick found a way into your " +vaginaDescript(0)+ " and is pushing further inside.  Wait, what's this?  A second, and then a third!  There's no way these titanic columns of flesh will... this is too much... you fear you will be torn in half, but at the last moment, you feel someone spilling the content of a flask over your nether-lips.  As if you had lost control of your " +vaginaDescript(0)+ ", it automatically starts leaking girl-cum in prodigious amounts, and you let out a stifled moan as a delicious shiver runs teasingly across your body.  Your fuck-hole widens under the corrupting effect of the weird mixture you were administered.  ");
 		//[set vagstretch up a few levels]
-		if(player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity",0,0,0,0);
-		if(player.statusAffectv1("Bonus vCapacity") < 200) player.addStatusValue("Bonus vCapacity", 1, 15);
+		if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
+		if(player.statusAffectv1(StatusAffects.BonusVCapacity) < 200) player.addStatusValue(StatusAffects.BonusVCapacity, 1, 15);
 		outputText("As soon as new space is created, it is immediately filled by a pussy-hungry cock.  The three cocks slide effortlessly inside you and start thrusting energetically, vying in intensity and ferocity with the peckers ramming your " +assholeDescript()+ ".  The penetration of both holes is almost too much too handle, but you finally get used to it as your own anal and vaginal muscles try their best to milk as much spunk as possible from these cum-tubes.  Even though you are being violated in every hole, the raw and powerful sensation is quite pleasurable; it feels so right to be used this way, so full of demon wang.  You don't have to focus on anything, just to enjoy the sheer amazing feeling of being pounded by many pistons at once.  You squirt over and over again as the dicks and the fluid force you into a series of wild female orgasms.");
 		//[crank up vaginal wetness one level, why not?]
 		if(player.wetness() < 5) player.vaginas[0].vaginalWetness++;
@@ -330,7 +330,7 @@ public function loseOrSubmitToVapula():void {
 	flags[kFLAGS.VAPULA_SUBMISSIVENESS] += 10;
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 90 && flags[kFLAGS.VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
-	else if(player.hasStatusAffect("lostVillagerSpecial") >= 0) doNext(morningAfterRape);
+	else if(player.findStatusAffect(StatusAffects.lostVillagerSpecial) >= 0) doNext(morningAfterRape);
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	dynStats("lib", 1, "sen", 2, "lus=", 0, "cor", 3);
 }
@@ -357,7 +357,7 @@ public function defeetVapulasHorde():void {
 		return;
 	}
 	//Sacrificed and bound
-	if(monster.hasStatusAffect("Attack Disabled") >= 0) {
+	if(monster.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
 	   if(monster.HP < 1) outputText("You grin wickedly as the last demons fall, defeated.  Some of the errant blows have broken and mangled the links of your chains, and you find you can get free with a bit of additional effort.");
 		//[if won by Lust]
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even begins unfastening your bindings, hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
@@ -778,7 +778,7 @@ private function fightZeVillagers():void {
 	clearOutput();
 	//You are fighting the villagers (level 14):
 	startCombat(new Farmers());
-	monster.createStatusAffect("Generic Run Disabled",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Generic_Run_Disabled,0,0,0,0);
 	eventParser(1);
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp
 }
@@ -791,7 +791,7 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled upas she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
-	if(player.hasStatusAffect("Knows Whitefire") >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
+	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
@@ -839,11 +839,11 @@ public function loseToOwca():void {
 	fatigue(-30);
 	//after nightly scene, next encounter is Post-Mob Encounter
 	doNext(loseOrSubmitToVapula);
-	player.createStatusAffect("lostVillagerSpecial",0,0,0,0);
+	player.createStatusAffect(StatusAffects.lostVillagerSpecial,0,0,0,0);
 }
 //Post-Mob Encounter (Z)
 private function morningAfterRape():void {
-	player.removeStatusAffect("lostVillagerSpecial");
+	player.removeStatusAffect(StatusAffects.lostVillagerSpecial);
 	clearOutput();
 	outputText("The village is utterly silent and almost deserted.  The few people you see look away when they spot you, probably ashamed of what they did last time.  Doors are locked and windows are closed as you pass by; everyone is obviously afraid of directly confronting their victim.  You head toward Rebecc's house, your last friend.  As you open her door, you hear a muffled wail; you recognize the pretty farmer's voice.  She is laying on her bed, weeping uncontrollably; once she finally notices your presence, she looks up to you with tear-filled eyes, sobbing convulsively as she talks.");
 	outputText("\n\n\"<i>T-they forced you to be abused... I promise I didn't want that!  I tried to convince them... they wouldn't listen... they threw you to the pit... at least I made them give you back your belongings as usual... now you must hate me, don't you?  Oh, I'm so sorry!  It's all my fault!</i>\"");

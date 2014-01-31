@@ -217,9 +217,9 @@ public function tentacleLossRape():void {
 	}
 	//Bad end + counter here
 	if(player.lust > 99) {
-		temp = player.hasStatusAffect("TentacleBadEndCounter");
+		temp = player.findStatusAffect(StatusAffects.TentacleBadEndCounter);
 		if(temp < 0) {
-			player.createStatusAffect("TentacleBadEndCounter",0,0,0,0);
+			player.createStatusAffect(StatusAffects.TentacleBadEndCounter,0,0,0,0);
 		}
 		else {
 			//count up

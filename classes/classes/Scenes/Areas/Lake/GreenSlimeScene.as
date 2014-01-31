@@ -758,8 +758,8 @@ internal function rapeOozeWithMilk():void {
 	//set lust to 0, increase sensitivity slightly
 	dynStats("lib", .2, "lus=", 0);
 	//You've now been milked, reset the timer for that
-	player.addStatusValue("Feeder",1,1);
-	player.changeStatusValue("Feeder",2,0);
+	player.addStatusValue(StatusAffects.Feeder,1,1);
+	player.changeStatusValue(StatusAffects.Feeder,2,0);
 	cleanupAfterCombat();
 }
 

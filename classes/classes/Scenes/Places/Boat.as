@@ -18,7 +18,7 @@ package classes.Scenes.Places
 		{
 		}
 		public function discoverBoat():void {
-			player.createStatusAffect("Boat Discovery",0,0,0,0);
+			player.createStatusAffect(StatusAffects.BoatDiscovery,0,0,0,0);
 			outputText("You journey around the lake, seeking demons to fight", true);
 			if(player.cor > 60) outputText(" or fuck", false);
 			outputText(".  The air is fresh, and the grass is cool and soft under your feet.   Soft waves lap against the muddy sand of the lake-shore, as if radiating outward from the lake.   You pass around a few bushes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n", false);
@@ -33,7 +33,7 @@ package classes.Scenes.Places
 				return;
 			}
 			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ", true);
-			if (player.hasStatusAffect("FactoryOverload") >= 0) {
+			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
 				outputText("The water appears somewhat muddy and has a faint pungeant odor.  ", false);
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 			}
@@ -44,18 +44,18 @@ package classes.Scenes.Places
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n", false);
 			//20% chance if not done with marae of meeting her.
-			if (rand(10) <= 2 && player.hasStatusAffect("Marae Complete") < 0 && player.hasStatusAffect("Met Corrupt Marae") < 0) {
+			if (rand(10) <= 2 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) < 0) {
 				marae.encounterMarae();
 				return;
 			}
 			//10% chance of corrupt Marae followups
-			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.hasStatusAffect("Met Corrupt Marae") >= 0 && player.gender > 0) {
+			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.findStatusAffect(StatusAffects.Met_Corrupt_Marae) >= 0 && player.gender > 0) {
 				marae.level2MaraeEncounter();
 				return;
 			}
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3];
-			if (player.hasStatusAffect("DungeonShutDown") >= 0 && player.level > 2)
+			if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.level > 2)
 				choice[choice.length] = 4;
 			choice[choice.length] = 5;
 			//MAKE YOUR CHOICE

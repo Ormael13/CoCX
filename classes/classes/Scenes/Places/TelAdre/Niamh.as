@@ -237,18 +237,18 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21),false);
 	var lib:Number = 0;
-	if(player.hasStatusAffect("Black Cat Beer") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Black_Cat_Beer) >= 0) {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.addStatusValue("Black Cat Beer",1,4);
-		player.addStatusValue("Black Cat Beer",2,lib);
+		player.addStatusValue(StatusAffects.Black_Cat_Beer,1,4);
+		player.addStatusValue(StatusAffects.Black_Cat_Beer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
 		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.createStatusAffect("Black Cat Beer",8,lib,0,0);
+		player.createStatusAffect(StatusAffects.Black_Cat_Beer,8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	player.slimeFeed();
@@ -256,8 +256,8 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
 public function blackCatBeerExpires():void {
-	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2("Black Cat Beer")));
-	player.removeStatusAffect("Black Cat Beer");
+	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2(StatusAffects.Black_Cat_Beer)));
+	player.removeStatusAffect(StatusAffects.Black_Cat_Beer);
 	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
 
@@ -418,19 +418,19 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		if((player.findPerk(PerkLib.FutaFaculties) >= 0 && player.findPerk(PerkLib.FutaForm) >= 0) || (player.findPerk(PerkLib.BimboBody) >= 0 && player.findPerk(PerkLib.BimboBrains) >= 0)) {
 			outputText("You could've swore the stuff worked when you saw Niamh do it to others, but for some reason, it had, like, no effect on you. How weird!");
 		}
-		else if(player.hasStatusAffect("Bimbo Champagne") < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
+		else if(player.findStatusAffect(StatusAffects.BimboChampagne) < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
 		else outputText("You find yourself falling even further into the dense bimbo mindset.  You do feel, like, super-good and all, though!\n\nMoaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  You sink your fingers into your sloppy cunt with a groan of satisfaction.  Somehow, you feel like you could fuck anyone right now!");
 	}
-	if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
-		player.addStatusValue("Bimbo Champagne",1,4);
+	if(player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) {
+		player.addStatusValue(StatusAffects.BimboChampagne,1,4);
 		dynStats("spe", -2, "lib", 1, "lus", 10);
 	}
 	else {
-		player.createStatusAffect("Bimbo Champagne",8,0,0,0);
+		player.createStatusAffect(StatusAffects.BimboChampagne,8,0,0,0);
 		//(Player has breasts smaller than DD-cup: 
 		if(player.breastRows[0].breastRating < 5) {
 			outputText("\n\nYou feel this, like, totally sweet tingling in your boobies... And then your [armor] gets, like, tighter; wow, it seems like Niamh's booze is making your boobies grow!  That's so awesome!  You giggle and gulp down as much as you can... Aw; your boobies are <b>kinda</b> big now, but, like, you wanted great big bouncy sloshy boobies like Niamh has.  That'd be so hot!");
-			player.changeStatusValue("Bimbo Champagne",2,5-player.biggestTitSize());
+			player.changeStatusValue(StatusAffects.BimboChampagne,2,5-player.biggestTitSize());
 			player.breastRows[0].breastRating = 5;
 		}
 		//(Player does not have vagina: 
@@ -441,12 +441,12 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
 			outputText(" start to tingle and squirm... mmm... that feels nice!  There's a sensation you, like, can't describe, and then your crotch feels all wet... but in a good, sticky sorta way.  Oh, wow!  <b>You've, like, just grown a new virgin pussy!</b>  Awesome!");
-			player.changeStatusValue("Bimbo Champagne",3,1);
+			player.changeStatusValue(StatusAffects.BimboChampagne,3,1);
 		}
 		//(player ass smaller than bimbo: 
 		if(player.buttRating < 12) {
 			outputText("\n\nYour butt jiggles deliciously - it feels like the bubbles from the drink are pushing out your plump rump, filling it like bagged sparkling wine!  Your bubbly booty swells and inflates until it feels as airy as your head.  Like, this is soooo plush!");
-			player.changeStatusValue("Bimbo Champagne",4,12-player.buttRating);
+			player.changeStatusValue(StatusAffects.BimboChampagne,4,12-player.buttRating);
 			player.buttRating = 12;
 			if(player.hipRating < 10) player.hipRating = 10;
 		}
@@ -458,19 +458,19 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 public function removeBimboChampagne():void {
 	outputText("\n<b>Whoah!  Your head is clearing up, and you feel like you can think clearly for the first time in forever.  Niamh sure is packing some potent stuff!  You shake the cobwebs out of your head, glad to once again be less dense than a goblin with a basilisk boyfriend.</b>");
 	dynStats("spe", 10, "lib", -1);
-	if(player.statusAffectv2("Bimbo Champagne") > 0) {
-		player.breastRows[0].breastRating -= player.statusAffectv2("Bimbo Champagne");
+	if(player.statusAffectv2(StatusAffects.BimboChampagne) > 0) {
+		player.breastRows[0].breastRating -= player.statusAffectv2(StatusAffects.BimboChampagne);
 		outputText("  As the trecherous brew fades, your [chest] loses some of its... bimboliciousness.  Your back feels so much lighter without the extra weight dragging down on it.");
 	}
-	if(player.statusAffectv3("Bimbo Champagne") > 0) {
+	if(player.statusAffectv3(StatusAffects.BimboChampagne) > 0) {
 		outputText("  At the same time, your [vagina] slowly seals itself up, disappearing as quickly as it came.  Goodbye womanhood.");
 		player.removeVagina();
 	}
-	if(player.statusAffectv4("Bimbo Champagne") > 0) {
-		player.buttRating -= player.statusAffectv4("Bimbo Champagne");
+	if(player.statusAffectv4(StatusAffects.BimboChampagne) > 0) {
+		player.buttRating -= player.statusAffectv4(StatusAffects.BimboChampagne);
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
-	player.removeStatusAffect("Bimbo Champagne");
+	player.removeStatusAffect(StatusAffects.BimboChampagne);
 	player.genderCheck();
 	outputText("\n");
 }
@@ -769,7 +769,7 @@ private function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && model.time.hours == 14 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+	if(player.statusAffectv1(StatusAffects.Edryn) >= 5 && player.gender == 3 && model.time.hours == 14 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");

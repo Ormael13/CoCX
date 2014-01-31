@@ -16,7 +16,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				return;
 			}
@@ -70,7 +70,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				return;
 			}
@@ -153,7 +153,7 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("sparring") >= 0) game.helFollower.PCBeatsUpSalamanderSparring();
+			if(findStatusAffect(StatusAffects.sparring) >= 0) game.helFollower.PCBeatsUpSalamanderSparring();
 			else game.helScene.beatUpHel();
 		}
 
@@ -163,7 +163,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nHelia waits it out in stoic silence...");
 				doNext(game.endLustLoss);
 			} else {
-				if(hasStatusAffect("sparring") >= 0) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
+				if(findStatusAffect(StatusAffects.sparring) >= 0) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
 				else game.helScene.loseToSalamander();
 			}
 		}
@@ -191,7 +191,7 @@ package classes.Scenes.NPCs
 					add(armors.CHBIKNI,1/20).
 					add(consumables.REPTLUM,0.7);
 			initX_Tail(TAIL_TYPE_LIZARD,0,0);
-			this.createStatusAffect("keen",0,0,0,0);
+			this.createStatusAffect(StatusAffects.keen,0,0,0,0);
 		}
 		
 	}

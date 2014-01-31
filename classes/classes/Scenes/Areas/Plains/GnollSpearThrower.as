@@ -14,13 +14,13 @@ package classes.Scenes.Areas.Plains
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks",1,-1);
+				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -34,10 +34,10 @@ package classes.Scenes.Areas.Plains
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks",1,-1);
+				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -46,10 +46,10 @@ package classes.Scenes.Areas.Plains
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks",1,-1);
+				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -60,10 +60,10 @@ package classes.Scenes.Areas.Plains
 				if(plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if(statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if(statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if(statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks",1,-1);
+				if(statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks,1,-1);
 					eAttack();
 				}
 				return;
@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Plains
 			var slow:Number = 0;
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Dodged>
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but blind as she is, it goes wide.", false);
 			}
 			//Determine if dodged!
@@ -135,11 +135,11 @@ package classes.Scenes.Areas.Plains
 			else if(rand(3) >= 1) {
 				damage = player.takeDamage(25+rand(20));
 				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your " + player.armorName + ".  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. (" + damage + ")", false);
-				if(player.hasStatusAffect("Gnoll Spear") < 0) player.createStatusAffect("Gnoll Spear",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.GnollSpear) < 0) player.createStatusAffect(StatusAffects.GnollSpear,0,0,0,0);
 				slow = 15;
 				while(slow > 0 && player.spe > 2) {
 					slow--;
-					player.addStatusValue("Gnoll Spear",1,1);
+					player.addStatusValue(StatusAffects.GnollSpear,1,1);
 					player.spe--;
 					showStatDown( 'spe' );
 					// speDown.visible = true;
@@ -158,7 +158,7 @@ package classes.Scenes.Areas.Plains
 		private function hyenaSnapKicku():void {
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("The gnoll tries to catch you with a brutal snap-kick, but blind as she is, she completely misses.", false);
 			}
 			//Determine if dodged!
@@ -224,13 +224,13 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 			doNext(1);
 //Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks", 1, -1);
+				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -242,10 +242,10 @@ package classes.Scenes.Areas.Plains
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks", 1, -1);
+				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -253,10 +253,10 @@ package classes.Scenes.Areas.Plains
 			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks", 1, -1);
+				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks, 1, -1);
 					eAttack();
 				}
 			}
@@ -266,10 +266,10 @@ package classes.Scenes.Areas.Plains
 				if (plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
 				//See below, removes the attack count once it hits rock bottom.
-				if (statusAffectv1("attacks") == 0) removeStatusAffect("attacks");
+				if (statusAffectv1(StatusAffects.attacks) == 0) removeStatusAffect(StatusAffects.attacks);
 				//Count down 1 attack then recursively call the function, chipping away at it.
-				if (statusAffectv1("attacks") - 1 >= 0) {
-					addStatusValue("attacks", 1, -1);
+				if (statusAffectv1(StatusAffects.attacks) - 1 >= 0) {
+					addStatusValue(StatusAffects.attacks, 1, -1);
 					eAttack();
 				}
 			}

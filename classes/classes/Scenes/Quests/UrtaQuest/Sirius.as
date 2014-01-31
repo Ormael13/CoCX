@@ -36,7 +36,7 @@ package classes.Scenes.Quests.UrtaQuest
 		override protected function performCombatAction():void
 		{
 			var attack:int = rand(4);
-			if (player.hasStatusAffect("Blind") >= 0) attack = rand(3);
+			if (player.findStatusAffect(StatusAffects.Blind) >= 0) attack = rand(3);
 			if (attack == 0) eAttack();
 			if (attack == 1) poisonBite();
 			if (attack == 2) manNagaTease();
@@ -52,7 +52,7 @@ package classes.Scenes.Quests.UrtaQuest
 				combatRoundOver();
 			}
 //Hit (Blind):
-			if (hasStatusAffect("Blind") >= 0) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("  Though your vision is still blurry, you feel yourself being sucked into the golden depths of those pupils, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
 				kGAMECLASS.dynStats("lus", (5 + player.lib / 10 - player.inte / 20));
 			}
@@ -70,7 +70,7 @@ package classes.Scenes.Quests.UrtaQuest
 //{Hit:
 			if (spe / 20 + rand(20) + 1 > player.spe / 20 + 10) {
 				outputText("The vile spray hits your eyes and you scream in pain, clawing fiercely at your burning, watering, weeping eyes.  <b>You can't see!  It'll be much harder to fight in this state, but at the same time, his hypnosis won't be so effective...</b>");
-				player.createStatusAffect("Blind", 3, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Blind, 3, 0, 0, 0);
 			}
 			//Miss:
 			else outputText("You quickly lean to the side, narrowly avoiding being blinded by the snake-man's spit!");

@@ -188,7 +188,7 @@ package classes.Scenes.Monsters
 			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.")
 				dynStats("lus", 20);
 			//If cant rape or breastfeed
-			if (player.lust < 30 && player.hasStatusAffect("Feeder") < 0) {
+			if (player.lust < 30 && player.findStatusAffect(StatusAffects.Feeder) < 0) {
 				cleanupAfterCombat();
 				return;
 			}
@@ -226,7 +226,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.hasStatusAffect("Feeder") >= 0) {
+			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
@@ -257,8 +257,8 @@ package classes.Scenes.Monsters
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue("Feeder",1,1);
-			player.changeStatusValue("Feeder",2,0);
+			player.addStatusValue(StatusAffects.Feeder,1,1);
+			player.changeStatusValue(StatusAffects.Feeder,2,0);
 			cleanupAfterCombat();
 		}
 		private function gobboButtSecks():void

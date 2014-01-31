@@ -60,7 +60,7 @@ public function customPCSetup():void {
 		player.hairLength = 69.2;
 		player.hairType = 2;
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-		player.createStatusAffect("Kelt",100,0,0,0);		
+		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
 		player.createKeyItem("Bow",0,0,0,0);
 		inventory.createStorage();
 		inventory.createStorage();
@@ -171,7 +171,7 @@ public function customPCSetup():void {
 		player.weapon = weapons.B_SWORD;
 		player.armor = armors.SSARMOR;
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-		player.createStatusAffect("Kelt",100,0,0,0);		
+		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
 		player.createKeyItem("Bow",0,0,0,0);
 		inventory.createStorage();
 		inventory.createStorage();
@@ -339,8 +339,8 @@ public function customPCSetup():void {
 		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 2;
 		player.inte = 30;
-		if(player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity",0,0,0,0);
-		else player.addStatusValue("Bonus vCapacity",1,5+rand(10));
+		if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
+		else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
 		outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 	}
 	if(player.short == "Nixi") {
@@ -456,7 +456,7 @@ public function customPCSetup():void {
 		player.tallness = 64;
 
 		//Perks: Feeder, Strong Back, Strong Back 2
-		player.createStatusAffect("Feeder",0,0,0,0);
+		player.createStatusAffect(StatusAffects.Feeder,0,0,0,0);
 		player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 
 		player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
@@ -595,12 +595,12 @@ public function customPCSetup():void {
 		player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 		player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 		player.createPerk(PerkLib.Tank, 0, 0, 0, 0);
-		player.createStatusAffect("Knows Arouse",0,0,0,0);
-		player.createStatusAffect("Knows Heal",0,0,0,0);
-		player.createStatusAffect("Knows Might",0,0,0,0);
-		player.createStatusAffect("Knows Charge",0,0,0,0);
-		player.createStatusAffect("Knows Blind",0,0,0,0);
-		player.createStatusAffect("Knows Whitefire",0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
+		player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
 		//magic, 50 Int, 50 tough, Speed 15, Str 10, 30 corruption, 30 libido, 10 sensitivity.
 		player.inte = 50;
 		player.tou = 50;
@@ -642,7 +642,7 @@ public function customPCSetup():void {
 		//Muscle Tone- A bit above average enough to trigger a mention of it in the desc.
 		player.tone = 55;
 		//Nipples-  As above on size but the black sand trap nipples.
-		player.createStatusAffect("Black Nipples",0,0,0,0);
+		player.createStatusAffect(StatusAffects.BlackNipples,0,0,0,0);
 		//Hair Length- Long
 		player.hairLength = 16;
 		//Hair Color- Black
@@ -825,7 +825,7 @@ public function customPCSetup():void {
 		player.breastRows[0].breastRating = 4;
 		player.skinTone = "light";
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-		player.createStatusAffect("Kelt",100,0,0,0);		
+		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
 		player.createKeyItem("Bow",0,0,0,0);
 	}
 	if(player.short == "Rann Rayla") {
@@ -976,7 +976,7 @@ public function customPCSetup():void {
 		//for wetness a squirter, looseness a 2 and capacity at 140.
 		if(!player.hasVagina()) player.createVagina();
 		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-		player.createStatusAffect("Bonus vCapacity",132,0,0,0);
+		player.createStatusAffect(StatusAffects.BonusVCapacity,132,0,0,0);
 		//Virgin, high fertility like in the email I sent before.  dragon wings, nine fox tails,  dragon legs, eight DD breasts with four fuckable nipples each, dragon tongue, waist length hair, large dragon wings.
 		player.wingType = WING_TYPE_DRACONIC_LARGE;
 		player.wingDesc = "large, draconic";
@@ -1259,7 +1259,7 @@ public function customPCSetup():void {
 		//Bow
 		player.createKeyItem("Bow",0,0,0,0);
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-		player.createStatusAffect("Kelt",100,0,0,0);
+		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
 		//Is it possible to get extra starting perks added? If so, I'd like History: Religious added to whatever is selected on creation. If not, please ignore this line.
 		//Freckled skinAdj
 		player.skinAdj = "freckled";

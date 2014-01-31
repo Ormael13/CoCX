@@ -36,7 +36,7 @@ private function helspawnTwinStrikes():void {
 	//if Bowmander
 	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
 	else outputText(flags[kFLAGS.HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
-	createStatusAffect("attacks",0,0,0,0);
+	createStatusAffect(StatusAffects.attacks,0,0,0,0);
 	eAttack();
 }
 
@@ -50,10 +50,10 @@ private function calledShot():void {
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while!");
 		var affect:int = 20 + rand(5);
-		if(player.hasStatusAffect("Called Shot") >= 0) {
+		if(player.findStatusAffect(StatusAffects.CalledShot) >= 0) {
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue("Called Shot",1,1);
+				player.addStatusValue(StatusAffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -61,10 +61,10 @@ private function calledShot():void {
 			}
 		}
 		else {
-			player.createStatusAffect("Called Shot",0,0,0,0);
+			player.createStatusAffect(StatusAffects.CalledShot,0,0,0,0);
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue("Called Shot",1,1);
+				player.addStatusValue(StatusAffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -95,8 +95,8 @@ private function calledShot():void {
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack!");
 				damage = player.takeDamage(damage);
-				if(rand(2) == 0 && player.hasStatusAffect("Stunned") < 0) {
-					player.createStatusAffect("Stunned",0,0,0,0);
+				if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) {
+					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}
 				outputText(" (" + damage + ")");
@@ -183,7 +183,7 @@ private function calledShot():void {
 			init12Combat(175,30,.55,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,10 + rand(5));
 			initX_Tail(TAIL_TYPE_LIZARD,0,0);
-			this.createStatusAffect("keen", 0, 0, 0, 0);
+			this.createStatusAffect(StatusAffects.keen, 0, 0, 0, 0);
 		}
 
 	}

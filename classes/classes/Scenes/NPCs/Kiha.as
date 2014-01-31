@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 		*/
 		override protected function handleFear():Boolean
 		{
-			removeStatusAffect("Fear");
+			removeStatusAffect(StatusAffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
 			return true;
 		}
@@ -139,11 +139,11 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("spiderfight") >= 0)
+			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(hasStatusAffect("domfight") >= 0)
+			else if(findStatusAffect(StatusAffects.domfight) >= 0)
 				game.kihaFollower.pcWinsDomFight();
-			else if(hasStatusAffect("spar") >= 0)
+			else if(findStatusAffect(StatusAffects.spar) >= 0)
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -151,11 +151,11 @@ package classes.Scenes.NPCs
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect("spiderfight") >= 0)
+			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(hasStatusAffect("domfight") >= 0)
+			else if(findStatusAffect(StatusAffects.domfight) >= 0)
 				game.kihaFollower.pcLosesDomFight();
-			else if(hasStatusAffect("spar") >= 0)
+			else if(findStatusAffect(StatusAffects.spar) >= 0)
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");

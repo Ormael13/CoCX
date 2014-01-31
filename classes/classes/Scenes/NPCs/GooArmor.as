@@ -18,7 +18,7 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (hasStatusAffect("spar") >= 0) game.valeria.pcWinsValeriaSpar();
+			if (findStatusAffect(StatusAffects.spar) >= 0) game.valeria.pcWinsValeriaSpar();
 			else game.beatUpGooArmor();
 		}
 
@@ -28,7 +28,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
 				doNext(game.endLustLoss);
 			} else {
-				if(hasStatusAffect("spar") >= 0) game.valeria.pcWinsValeriaSparDefeat();
+				if(findStatusAffect(StatusAffects.spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
 				else game.gooArmorBeatsUpPC();
 			}
 		}

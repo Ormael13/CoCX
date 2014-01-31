@@ -14,7 +14,7 @@ package classes.Scenes.Places.Owca
 
 		override protected function performCombatAction():void
 		{
-			createStatusAffect("attacks",4,0,0,0);
+			createStatusAffect(StatusAffects.attacks,4,0,0,0);
 			eAttack();
 			combatRoundOver();
 		}

@@ -395,9 +395,9 @@ private function cramANippleInIt():void {
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 }
 
@@ -559,7 +559,7 @@ private function postSophieSexSnuggle():void {
 	if(player.cor > 50) outputText("nearly give her a good-bye kiss, but catch yourself at the last moment.  She quips, \"<i>Too bad, it was nice.</i>\"\n\n", false);
 	else outputText("give her a kiss on the cheek, knowing all-too-well the dangers of her lips.  She quips, \"<i>Ohh, too bad.  I wanted to stroke you to sleep.</i>\"\n\n", false);
 	//Remove luststick
-	player.removeStatusAffect("Luststick");
+	player.removeStatusAffect(StatusAffects.Luststick);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
 	
@@ -696,22 +696,22 @@ public function luststickApplication(hours:Number = 4):void {
 	//Max of 20.
 	if(hours > 20) hours = 20;
 	//Add duration if under effects
-	if(player.hasStatusAffect("Luststick") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Luststick) >= 0) {
 		//Max?
-		if(player.statusAffectv1("Luststick") >= 20) 
+		if(player.statusAffectv1(StatusAffects.Luststick) >= 20)
 		{}
 		//Not maxed - increase duration
 		else {
 			//lower hours if it pushes it too high.
-			if(player.statusAffectv1("Luststick") + hours > 20) {
-				hours = 20 - player.statusAffectv1("Luststick");
+			if(player.statusAffectv1(StatusAffects.Luststick) + hours > 20) {
+				hours = 20 - player.statusAffectv1(StatusAffects.Luststick);
 			}
 			//increase!
-			player.addStatusValue("Luststick",1,hours);
+			player.addStatusValue(StatusAffects.Luststick,1,hours);
 		}
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
-	else player.createStatusAffect("Luststick",hours,0,0,0);
+	else player.createStatusAffect(StatusAffects.Luststick,hours,0,0,0);
 }
 
 

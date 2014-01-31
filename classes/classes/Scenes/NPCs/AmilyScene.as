@@ -184,7 +184,7 @@ package classes.Scenes.NPCs
 			}
 			//Remove worm block if player got rid of worms.
 			if(flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1) {
-				if(player.hasStatusAffect("infested") < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
+				if(player.findStatusAffect(StatusAffects.infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
 			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25) {
@@ -1425,7 +1425,7 @@ package classes.Scenes.NPCs
 
 			flags[kFLAGS.AMILY_CLOTHING] = "rags";
 			//if marble is there, tag it for freakout
-			if(player.hasStatusAffect("Camp Marble") >= 0) {
+			if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 				flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 			}
 			else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2038,7 +2038,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 
 			//worm infested reaction
-			if(player.hasStatusAffect("infested") >= 0) {
+			if(player.findStatusAffect(StatusAffects.infested) >= 0) {
 				outputText("\"<i>EWWWW!  You're infested!</i>\" she shrieks, \"<i>Get out!  Don't come back till you get rid of the worms!</i>\"\n\nYou high tail it out of there.  It looks like Amily doesn't want much to do with you until you're cured.", false);
 				doNext(13);
 				flags[kFLAGS.AMILY_AFFECTION] -= 3;
@@ -2408,7 +2408,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Jojo + Amily Spar
-			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 				finter.pureJojoAndAmilySpar();
 				return;
 			}
@@ -4443,7 +4443,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("", true);
 			/*(If player is already locked into a relationship):
-			if(player.hasStatusAffect("Camp Marble") >= 0 || urtaLove()) {
+			if(player.hasStatusAffect(StatusAffects.CampMarble) >= 0 || urtaLove()) {
 				outputText("You put a hand on her shoulder, bringing her to a stop. She looks so hopeful at you that it's almost painful, but you tell her that, while you do care for her and you like her as a friend, you're already in a relationship with somebody.\n\n", false);
 
 				outputText("\"<i>Are you? ...I see. Well, I'm happy that you, at least, found somebody. I... You're still welcome to come by and talk, but I'll respect your wishes.</i>\" Amily tells you. Evidently still quite embarrassed, she apologises and then melts away into the ruins again.", false);
@@ -6219,7 +6219,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.AMILY_CLOTHING] = "sexy rags";
 			}
 			//if marble is there, tag it for freakout
-			if(player.hasStatusAffect("Camp Marble") >= 0) {
+			if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 				flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 			}
 			else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;

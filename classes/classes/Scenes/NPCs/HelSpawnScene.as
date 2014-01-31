@@ -889,11 +889,11 @@ public function helSpawnChoosesAFightingStyle():void {
 	
 	outputText("\n\nWell.  You suppose you could float Hel a loan and let little " + flags[kFLAGS.HELSPAWN_NAME] + " grow up as a furious salamander berzerker just like dear old mom.  Or, if you have the time, you could instead do her combat training yourself.  You probably can't completely get rid of the 'mander temper, but a few hours in the ring with you would certainly make her less brazenly reckless - something Hel could benefit from, too, if she's willing to stick around.");
 	//{If PC has a bow & skill 100+}: 
-	if(player.statusAffectv1("Kelt") >= 100) {
+	if(player.statusAffectv1(StatusAffects.Kelt) >= 100) {
 		outputText("\n\nThen again, while the little salamander needs to be able to defend herself, it might be better to give her a more defensive weapon altogether.  The guards of your village called the bow the wise man's weapon, as the archers sat behind the lines or atop high walls, picking off enemies.  While you weren't trained with it back home, you've gotten pretty good with your bow during your time here.  Perhaps it's time to pass on those skills to " + flags[kFLAGS.HELSPAWN_NAME] + ".");
 	}
 	menu();
-	if(player.statusAffectv1("Kelt") >= 100) addButton(2,"Bow",snipermanders);
+	if(player.statusAffectv1(StatusAffects.Kelt) >= 100) addButton(2,"Bow",snipermanders);
 	addButton(0,"You Train",swordAndBoardmander);
 	addButton(1,"Loan",dasBarbarimander);
 	
@@ -915,7 +915,7 @@ private function snipermanders():void {
 	
 	outputText("\n\nBreathing hard, the young salamander draws back the bowstring, lining up on her target.  She chews on her lower lip, eyes squinting, deep in concentration, wanting to make this first shot count - to make you proud.  She looses the arrow, and gasps as it bolts away with lethal force... and sails across camp, well away from the target.");
 	//If Rath is @ camp:
-	if(player.hasStatusAffect("Camp Rathazul") >= 0) outputText("  You hear your old alchemist friend suddenly putting up a ruckus as the sounds of breaking glass echo throughout camp.  " + flags[kFLAGS.HELSPAWN_NAME] + " looks up at you nervously, but you ruffle her fiery hair and tell her to try again. Rath is probably just fine.");
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("  You hear your old alchemist friend suddenly putting up a ruckus as the sounds of breaking glass echo throughout camp.  " + flags[kFLAGS.HELSPAWN_NAME] + " looks up at you nervously, but you ruffle her fiery hair and tell her to try again. Rath is probably just fine.");
 	//else if Valeria/Latexy is at camp: 
 	else if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) outputText("  You hear a sudden yelp of pain from across camp. Valeria slithers up to you with an irritated look on her gooey face, pointing an accusing finger at an arrow sticking out of her tit.  \"<i>Dammit, [name], I'm a googirl, not a pin cushion!</i>\"  You wave her off, and tell " + flags[kFLAGS.HELSPAWN_NAME] + " to try again.");
 	else if(latexGooFollower()) outputText("  You hear a sudden yelp of pain from across camp.  " + flags[kFLAGS.GOO_NAME] + " slithers up to you with an irritated look on her gooey face, pointing an accusing finger at an arrow sticking out of her tit.  \"<i>Dammit, [name], I'm a googirl, not a pin cushion!</i>\"  You wave her off, and tell " + flags[kFLAGS.HELSPAWN_NAME] + " to try again.");
@@ -1196,7 +1196,7 @@ private function talkToHelspawn():void {
 	}
 	//Talk 3
 	//{Needs Rath at camp]
-	else if(temp <= 1 && player.hasStatusAffect("Camp Rathazul") >= 0) {
+	else if(temp <= 1 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		outputText("\"<i>" + flags[kFLAGS.HELSPAWN_NAME] + "!</i>\" you hear a ragged old voice call, \"<i>Get back here this instant!  I'm not done with you yet!</i>\"");
 		
 		outputText("\n\n\"<i>Coming!</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " calls back as Rathazul shuffles into view, waving around what looks like a tiny hammer.  Whispering, " + flags[kFLAGS.HELSPAWN_NAME] + " says, \"<i>Could you come with me, " + championRef() + "? Rathazul weirds me out.</i>\"");

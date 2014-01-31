@@ -280,7 +280,7 @@ public function sandWitchGetsGhostly():void {
 //Genderless Masturbation
 private function shouldraFappinTimes():void {
 	spriteSelect(67);
-	if(player.hasCock() && player.hasStatusAffect("infested") >= 0) {
+	if(player.hasCock() && player.findStatusAffect(StatusAffects.infested) >= 0) {
 		shouldraAndWormsYoureGonnaHaveABadTime();
 	}
 	else if(player.gender == 0) genderlessShouldraMasturbation();
@@ -1401,7 +1401,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 5;
 	}
 	//6 PC with Exgartuan and Shouldra //unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
-	if(player.statusAffectv1("Exgartuan") == 1 && 9999 == 9999) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && 9999 == 9999) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
@@ -1427,7 +1427,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//14 (Amily is a follower)
 	if(kGAMECLASS.amilyScene.amilyFollower()) choices[choices.length] = 14;
 	//15 (Pure Jojo is a follower)
-	if(player.hasStatusAffect("PureCampJojo") >= 0) choices[choices.length] = 15;
+	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) choices[choices.length] = 15;
 	//16 (has any of Marae's gift perks)
 	if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftProfractory) >= 0 || player.findPerk(PerkLib.MaraesGiftButtslut) >= 0) choices[choices.length] = 16;
 	//17 (has had children with Izma)
@@ -1435,7 +1435,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//18 (has Incorporeality perk)
 	if(player.findPerk(PerkLib.Incorporeality) >= 0) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
-	if(player.statusAffectv1("Exgartuan") == 2) choices[choices.length] = 19;
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 2) choices[choices.length] = 19;
 	//20 (PC knows any spells)
 	if(player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
@@ -1636,7 +1636,7 @@ private function kickOutWormiesForYourGhostPalPAL():void {
 	outputText("\n\nFueled by the sizzling churning in your [balls], the spirit works you towards a mighty geyser.  She cringes further, trying her best to direct the parasite-riddled spray away from you.  However, the head worm gets lodged in your canal, knocking some of Shouldra's worst nightmare onto your head.  She prances around in place, your hands knocking any offenders clear from your body.  The flailing about manages to loosen the obese leader from your shaft, aided by a final spurt of cum.  Shouldra balls up all her rage and unleashes it onto the poor little critter, setting it aflame.");
 	outputText("\n\nTaking great caution, the spirit falls you back onto your rump, still trembling from the horrifying ordeal.  With weary eyes, she stares at what was once her glorious salvation that had now become a drooping dick.");
 	outputText("\n\n\"<i>We are taking a bath first thing when we get to your camp, Champ,</i>\" Shouldra says by way of your mouth, your body still shuddering.");
-	player.removeStatusAffect("infested");
+	player.removeStatusAffect(StatusAffects.infested);
 	doNext(13);
 }
 
@@ -1756,7 +1756,7 @@ private function keepShouldraAndKickOutExgartuan():void {
 	//PC has human dick
 	player.cocks[0].cockType = CockTypesEnum.HUMAN;
 	//Exgartuan departs
-	player.removeStatusAffect("Exgartuan");
+	player.removeStatusAffect(StatusAffects.Exgartuan);
 	//unlocks one more scene for later that night
 	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
 	doNext(1);
@@ -1820,7 +1820,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
 	//puts Shouldra and Exgartuan to sleep/resets their timers
 	shouldraSleeping(15,true);
-	player.changeStatusValue("Exgartuan",2,(12+rand(7)));
+	player.changeStatusValue(StatusAffects.Exgartuan,2,(12+rand(7)));
 	//unlocks follower dialog
 	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
 	doNext(1);

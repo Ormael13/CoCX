@@ -15,7 +15,7 @@ package classes.Scenes.Places.Owca
 		{
 			str = 40;
 			setWeaponAttack(10);
-			createStatusAffect("attacks", 4, 0, 0, 0);
+			createStatusAffect(StatusAffects.attacks, 4, 0, 0, 0);
 			eAttack();
 			str = 80;
 			setWeaponAttack(40);
@@ -66,7 +66,7 @@ package classes.Scenes.Places.Owca
 			initX_Specials(5043,5044);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Horns(HORNS_DEMON);
-			createStatusAffect("Vapula",0,0,0,0);
+			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
 		}
 	}
 }

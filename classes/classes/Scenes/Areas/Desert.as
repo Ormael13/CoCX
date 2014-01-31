@@ -40,7 +40,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if ((player.exploredDesert == 20 && player.hasStatusAffect("Tel'Adre") < 0) || (rand(20) == 0 && player.statusAffectv1("Tel'Adre") == 0)) {
+			if ((player.exploredDesert == 20 && player.findStatusAffect("Tel'Adre") < 0) || (rand(20) == 0 && player.statusAffectv1("Tel'Adre") == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}

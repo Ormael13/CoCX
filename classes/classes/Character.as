@@ -21,7 +21,7 @@
 		public function get femininity():Number
 		{
 			var fem:Number = _femininity;
-			var statIndex:int = this.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+			var statIndex:int = this.findStatusAffect(UmasShop.UmasMassage);
 			
 			if (statIndex >= 0)
 			{
@@ -459,9 +459,9 @@
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (hasStatusAffect("Contraceptives") >= 0 && arg < 1)
+			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
-			if (hasStatusAffect("gooStuffed") >= 0) 
+			if (findStatusAffect(StatusAffects.gooStuffed) >= 0)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
@@ -493,7 +493,7 @@
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (hasStatusAffect("Contraceptives") >= 0 && arg < 1)
+			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000

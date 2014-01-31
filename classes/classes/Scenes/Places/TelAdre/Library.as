@@ -90,34 +90,34 @@ private function studyInTA():void {
 			dynStats("int", 3+rand(4));
 			//(Intelligence increase)
 			//Smart enough for arouse and doesnt have it
-			if(player.inte >= 25 && player.hasStatusAffect("Knows Arouse") < 0) {
+			if(player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsArouse) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>", false);
-				player.createStatusAffect("Knows Arouse",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 30 && player.hasStatusAffect("Knows Heal") < 0) {
+			else if(player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsHeal) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>", false);
-				player.createStatusAffect("Knows Heal",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 40 && player.hasStatusAffect("Knows Might") < 0) {
+			else if(player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsMight) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
-				player.createStatusAffect("Knows Might",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 25 && player.hasStatusAffect("Knows Charge") < 0) {
+			else if(player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsCharge) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>", false);
-				player.createStatusAffect("Knows Charge",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 30 && player.hasStatusAffect("Knows Blind") < 0) {
+			else if(player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsBlind) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>", false);
-				player.createStatusAffect("Knows Blind",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 40 && player.hasStatusAffect("Knows Whitefire") < 0) {
+			else if(player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsWhitefire) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
-				player.createStatusAffect("Knows Whitefire",0,0,0,0);
+				player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
 			}
 		}
 		//OR (player is bimbo/bimbro/whatever) 

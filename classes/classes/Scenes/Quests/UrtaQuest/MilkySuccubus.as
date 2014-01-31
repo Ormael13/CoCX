@@ -15,7 +15,7 @@ package classes.Scenes.Quests.UrtaQuest
 
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect("Milky Urta") < 0 && rand(3) == 0) cowCubiMilkSprayAttack();
+			if (findStatusAffect(StatusAffects.MilkyUrta) < 0 && rand(3) == 0) cowCubiMilkSprayAttack();
 			else if (HP < 400) drinkMinoCum();
 			else if (player.HP < 100) eAttack();
 			else if (player.lust >= 90) succubusTease();
@@ -37,7 +37,7 @@ package classes.Scenes.Quests.UrtaQuest
 			else {
 				outputText("All you manage to do is cover your face; the rest of you, however, gets completely soaked in the demon's corrupted milk.  Looking down at yourself, you realise that you are panting, and the places where the milk splashed your fur begin to heat up.  Oh no! <b>You'd better finish off this succubus before you succumb to your lusts!</b>");
 				kGAMECLASS.dynStats("lus", 15);
-				createStatusAffect("Milky Urta", 3, 0, 0, 0);
+				createStatusAffect(StatusAffects.MilkyUrta, 3, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -46,12 +46,12 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("Smiling wryly and licking her lips, the succubus-cow procures a bottle of her pet's cum with her probing tail.");
 //Success:
-			if (hasStatusAffect("drank mino cum") < 0 || hasStatusAffect("drank mino cum2") < 0) {
+			if (findStatusAffect(StatusAffects.drank_mino_cum) < 0 || findStatusAffect(StatusAffects.drank_mino_cum2) < 0) {
 				outputText("\n\nSmiling triumphantly, she takes the bottle and opens it with a pop, drinking the contents with glee.  When done, she throws the bottle away and smacks her lips.  \"<i>Nothing like a bottle of minotaur cum to get you back on your feet, right?</i>\"  She grins, her pussy dripping with more juices.");
 				lust += 25;
 				HP += 400;
-				if (hasStatusAffect("drank mino cum") < 0) createStatusAffect("drank mino cum", 0, 0, 0, 0);
-				else createStatusAffect("drank mino cum2", 0, 0, 0, 0);
+				if (findStatusAffect(StatusAffects.drank_mino_cum) < 0) createStatusAffect(StatusAffects.drank_mino_cum, 0, 0, 0, 0);
+				else createStatusAffect(StatusAffects.drank_mino_cum2, 0, 0, 0, 0);
 			}
 			//Failure:
 			else {

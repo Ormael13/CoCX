@@ -1404,7 +1404,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
-			player.createStatusAffect("TEMP", 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.TEMP, 0, 0, 0, 0);
 		}
 		//Populate Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)

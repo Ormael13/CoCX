@@ -30,7 +30,7 @@
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
-			if(hasStatusAffect("phyllafight") >= 0) {
+			if(findStatusAffect(StatusAffects.phyllafight) >= 0) {
 				doNext(game.desert.antsScene.consolePhylla);
 			} else if (hpVictory){
 				game.cleanupAfterCombat();

@@ -20,7 +20,7 @@
 		private function ceraphSpecial1():void
 		{
 			game.spriteSelect(7);
-			if (hasStatusAffect("Uber") < 0) {
+			if (findStatusAffect(StatusAffects.Uber) < 0) {
 				if (rand(2) == 0) {
 					outputText("Ceraph winks and says, \"<i><i>Have you ever cum without being touched? You will.</i></i>\"\n\n", false);
 				}
@@ -28,12 +28,12 @@
 					outputText("Ceraph titters, \"<i><i>Let me show you the true power of an Omnibus.</i></i>\"\n\n", false);
 				}
 				outputText("Despite her sultry tease, you can tell she's starting to build up to something big...", false);
-				createStatusAffect("Uber", 0, 0, 0, 0);
+				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
 			}
 			else {
 				//(Next Round)
-				if (statusAffectv1("Uber") == 0) {
-					addStatusValue("Uber", 1, 1);
+				if (statusAffectv1(StatusAffects.Uber) == 0) {
+					addStatusValue(StatusAffects.Uber, 1, 1);
 					if (rand(2) == 0) outputText("The demonic hermaphrodite begins forging demonic symbols in the air before her, each glowing brilliant pink before they blur away in a haze.", false);
 					else outputText("The demonette makes obscene motions with her hands, as if masturbating an imaginary cock or vagina while her hands are wreathed in pink flames.", false);
 					outputText("  <b>She's about to unleash something huge!</b>", false);
@@ -41,7 +41,7 @@
 				}
 				//FIRE!
 				else {
-					removeStatusAffect("Uber");
+					removeStatusAffect(StatusAffects.Uber);
 					//(Avoid!)
 					if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n", false);
@@ -59,14 +59,14 @@
 //[SPECIAL] – Whip Binding
 		private function ceraphSpecial2():void
 		{
-			if (player.hasStatusAffect("Bound") < 0) {
+			if (player.findStatusAffect(StatusAffects.Bound) < 0) {
 				outputText("Ceraph snaps her whip at you, lightning fast.  Unable to avoid the blinding speed of her attack, you find yourself wrapped from head to toe in the strong leather of her whip.  Remarkably, the fire dies out everywhere the whip touches you, leaving you bound but unharmed.", false);
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!", false);
 					game.dynStats("lus", 5);
 				}
-				player.createStatusAffect("Bound", 2 + rand(5), 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
 			//[SPECIAL WHILE PC RESTRAINED]
 			else {
@@ -92,13 +92,13 @@
 		{
 			outputText("", true);
 			outputText("You wriggle in the tight binding, trying your best to escape.  ", false);
-			if (player.statusAffectv1("Bound") - 1 <= 0) {
+			if (player.statusAffectv1(StatusAffects.Bound) - 1 <= 0) {
 				outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom", false);
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText(", though you miss the tight leathery embrace", false);
 				}
 				outputText("!", false);
-				player.removeStatusAffect("Bound");
+				player.removeStatusAffect(StatusAffects.Bound);
 				combatRoundOver();
 				return;
 			}
@@ -107,11 +107,11 @@
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  You get nice and hot from being so effectively restrained, maybe you should just accept it?", false);
 				}
-				player.addStatusValue("Bound", 1, -1);
+				player.addStatusValue(StatusAffects.Bound, 1, -1);
 				//Strong characters break free faster
 				if (player.str > 65 && rand(player.str) > 45) {
 					outputText("  Though you didn't break free, it seems like your mighty struggles loosened the whip slightly...", false);
-					player.addStatusValue("Bound", 1, -1);
+					player.addStatusValue(StatusAffects.Bound, 1, -1);
 				}
 			}
 			outputText("\n\n", false);
@@ -157,7 +157,7 @@
 			//First hit!
 			doNext(1);
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(10) != 9) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -202,7 +202,7 @@
 			outputText("\n", false);
 			//SECOND ATTACK HERE------
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(10) != 9) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -252,11 +252,11 @@
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (player.hasStatusAffect("Bound") >= 0) {
+			if (player.findStatusAffect(StatusAffects.Bound) >= 0) {
 				ceraphSpecial2();
 				return;
 			}
-			if (hasStatusAffect("Uber") >= 0) {
+			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				ceraphSpecial1();
 				return;
 			}

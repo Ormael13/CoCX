@@ -66,9 +66,9 @@ private function oasisTalkAccept():void {
 	else outputText("legs falling open in the process.  ", false);
 	outputText("Suddenly the silence is broken by a shrill screeching laugh, then a howl and the movement of the demons begins to accelerate. The deep bass laugh of the demon leader breaks over you like a crashing wave and the demons shriek with frenzied lust as they take you on the sand of the oasis.", false);
 	//Count voluntary submissions
-	if(player.hasStatusAffect("Voluntary Demonpack") < 0) player.createStatusAffect("Voluntary Demonpack",0,0,0,0);
+	if(player.findStatusAffect(StatusAffects.VoluntaryDemonpack) < 0) player.createStatusAffect(StatusAffects.VoluntaryDemonpack,0,0,0,0);
 	else {
-		player.addStatusValue("Voluntary Demonpack",1,1);
+		player.addStatusValue(StatusAffects.VoluntaryDemonpack,1,1);
 	}
 	//TO THE SECKSIN!
 	doNext(oasisSexing);
@@ -166,7 +166,7 @@ internal function oasisSexing():void {
 	{
 		//►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
-		if(monster.hasStatusAffect("phyllafight") >= 0) {
+		if(monster.findStatusAffect(StatusAffects.phyllafight) >= 0) {
 			outputText("You sought to save the ant-girl from being raped, and looking around, you don't see her anywhere.  She must have gotten away safely.  Mission... accomplished?  Wait, that ungrateful little bitch just left you to suffer in her place!  Your ass is gonna be sore for a while, but not as sore as your pride...  ");
 			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 		}
@@ -176,7 +176,7 @@ internal function oasisSexing():void {
 		return;
 	}
 	//If you submitted willingly - chance of bad end
-	if(player.statusAffectv1("Voluntary Demonpack") >= 6 && player.hasVagina()) {
+	if(player.statusAffectv1(StatusAffects.VoluntaryDemonpack) >= 6 && player.hasVagina()) {
 		doNext(oasisBadEnd);
 		return;
 	}

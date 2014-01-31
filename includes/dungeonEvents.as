@@ -76,7 +76,7 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Start combat succubi
 	if(eventNo == 11016) {
-		player.createStatusAffect("FactorySuccubusDefeated", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.FactorySuccubusDefeated, 0, 0, 0, 0);
 		startCombat(new SecretarialSuccubus(),true);
 		eventParser(1);
 		spriteSelect(55);
@@ -166,17 +166,17 @@ public function doDungeon(eventNo:Number):void {
 		if(player.vaginas.length > 0) outputText("Clenching tightly, your " + vaginaDescript(0) + " squeezes tightly on it's intruder as it's repeatedly violated by the machines.  ", false);
 		//End
 		outputText("\n\nThe world around you disappears, leaving you alone with the drug-enhanced sensations assaulting your body.  In truth, you don't want it to end.  You find yourself wishing it would never end, and no doubt the equipment you're hooked in to will see to that.\n\n", false);
-		if(player.statusAffectv3("Marble") == 1) {
+		if(player.statusAffectv3(StatusAffects.Marble) == 1) {
 			outputText("Later on, you are briefly pulled out of your reverie by a familiar warm fluid flowing down your throat.  You come to your senses and see Marble looking down at you with an odd expression on her face.  ", false);
 			outputText("She seems to be in a state of bliss. Looking down, you see that she is wearing some kind of pair of pink panties.  Marble gasps and the surface of the panties ripples; it's a living thing!\n\nYou look around and realize you aren't alone.  ", false);
 		}
-		else if(player.hasStatusAffect("Camp Marble") >= 0) {
+		else if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 			outputText("You are given a brief moment of clarity as you see Marble standing in front of you.  ", false);
 			outputText("She seems to be in a state of bliss. Looking down, you see that she is wearing some kind of pair of pink panties.  Marble gasps and the surface of the panties ripples; it's a living thing!\n\nYou look around and realize you aren't alone.  ", false);
 		}
 		else outputText("Later on, in a moment of clarity, you look around and realize you aren't alone.  ", false);		
 		outputText("In rows alongside you are a large number of other captives, every single one endowed with freakishly sized breasts, and nearly all gifted with throbbing demonic dicks.  Some small analytical part of you notes that the farther down the line they are, the older and larger they have become.   You look down and see your own massive tits, shiny tainted nipples still pumping out streams of milk.  The huge throbbing demon-cock between your legs begins to get hard as the machines crank back up, filling you full of happy horniness.", false);
-		if(player.statusAffectv3("Marble") == 1 || player.hasStatusAffect("Camp Marble") >= 0) outputText("  With Marble here too, you'll be around for a long time.", false);
+		if(player.statusAffectv3(StatusAffects.Marble) == 1 || player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("  With Marble here too, you'll be around for a long time.", false);
 		eventParser(5035);
 		return;
 	}
@@ -237,7 +237,7 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Start combat incubi
 	if(eventNo == 11031) {
-		player.createStatusAffect("FactoryIncubusDefeated", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.FactoryIncubusDefeated, 0, 0, 0, 0);
 		startCombat(new IncubusMechanic(),true);
 		eventParser(1);
 		spriteSelect(30);
@@ -260,7 +260,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11033) {
 		spriteSelect(30);
 		outputText("\"<i>It is good to see the insect accept its fate as the spider closes in,</i>\" intones the strange demonic mechanic as he takes you by the arm and leads you deeper into the facility.  ", false);
-		if(player.hasStatusAffect("DungeonShutDown") >= 0) {
+		if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 			outputText("\n\nYou enter the main milking chamber, and the incubus gives a start when he realizes what has happened.  With a grunt of rage he throws you through the doorways back into his chamber.  The demon stalks after you, taking up a fighting stance.", false);
 			doNext(11031);
 			return;
@@ -275,14 +275,14 @@ public function doDungeon(eventNo:Number):void {
 		spriteSelect(30);
 		outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mits he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.", true);
 		player.removeKeyItem("Hentai Comic");
-		player.createStatusAffect("IncubusBribed",0,0,0,0);
+		player.createStatusAffect(StatusAffects.IncubusBribed,0,0,0,0);
 		doNext(1);
 		return;
 	}
 	//Incubus Cock-Trip Attack
 	if(eventNo == 11035) {
 		//Blind dodge change
-		if(monster.hasStatusAffect("Blind") >= 0) {
+		if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
 			outputText(monster.capitalA + monster.short + " suddenly grows its dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!!", false);
 			combatRoundOver();
 			return;
@@ -318,7 +318,7 @@ public function doDungeon(eventNo:Number):void {
 	//Incubus Spooge Attack
 	if(eventNo == 11036) {
 		//Blind dodge change
-		if(monster.hasStatusAffect("Blind") >= 0) {
+		if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
 			outputText(monster.capitalA + monster.short + " pumps his thrust lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.", false);
 			combatRoundOver();
 			return;
@@ -330,8 +330,8 @@ public function doDungeon(eventNo:Number):void {
 		if(temp == 0) {
 			outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 			dynStats("lus", 3);
-			if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
-			else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 7;
+			if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
+			else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 7;
 			player.slimeFeed();
 		}
 		//Chest
@@ -339,8 +339,8 @@ public function doDungeon(eventNo:Number):void {
 			if(player.hasFuckableNipples()) {
 				outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 				dynStats("lus", 3);
-				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
-				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
+				if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
+				else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 8;
 				player.slimeFeed();
 			}
 			else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.", false);
@@ -350,8 +350,8 @@ public function doDungeon(eventNo:Number):void {
 			if(player.vaginas.length > 0) {
 				outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 				dynStats("lus", 3);
-				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
-				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
+				if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
+				else player.statusAffects[player.findStatusAffect(StatusAffects.DemonSeed)].value1 += 8;
 				player.slimeFeed();
 			}
 			else outputText("crotch.  Thankfully, it doesn't seem to have much effect.", false);
@@ -379,7 +379,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11040) {
 		outputText("", true);
 		//First time...
-		if(player.hasStatusAffect("TensionReleased") < 0) {
+		if(player.findStatusAffect(StatusAffects.TensionReleased) < 0) {
 			outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ", false);
 			if(player.biggestTitSize() < 10) {
 				player.growTits(1, (2+rand(3)), true, 1);
@@ -388,12 +388,12 @@ public function doDungeon(eventNo:Number):void {
 			outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.", false);
 			dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
 			player.slimeFeed();
-			player.createStatusAffect("TensionReleased",0,0,0,0);
+			player.createStatusAffect(StatusAffects.TensionReleased,0,0,0,0);
 		}
 		//Second/third times...
 		else {
 			//[[2nd time]] 
-			if(player.statusAffects[player.hasStatusAffect("TensionReleased")].value1 == 0) {
+			if(player.statusAffects[player.findStatusAffect(StatusAffects.TensionReleased)].value1 == 0) {
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ", false);
 				//Grow dick!
 				if(player.cocks.length > 0) {
@@ -437,8 +437,8 @@ public function doDungeon(eventNo:Number):void {
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
 				dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
-				player.createStatusAffect("TensionReleased",0,0,0,0);
-				player.statusAffects[player.hasStatusAffect("TensionReleased")].value1++;
+				player.createStatusAffect(StatusAffects.TensionReleased,0,0,0,0);
+				player.statusAffects[player.findStatusAffect(StatusAffects.TensionReleased)].value1++;
 				player.slimeFeed();
 			}
 			//Third time
@@ -489,12 +489,12 @@ public function doDungeon(eventNo:Number):void {
 	//Omnibus Lust Aura;
 	if(eventNo == 11043) {
 		outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.", false);
-		if(monster.hasStatusAffect("Lust Aura") >= 0) {
+		if(monster.findStatusAffect(StatusAffects.LustAura) >= 0) {
 			outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms it's way into you.  The intense aura quickly subsides, but it's already done its job.", false);
 			dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
 		}
 		else {
-			monster.createStatusAffect("Lust Aura",0,0,0,0);
+			monster.createStatusAffect(StatusAffects.LustAura,0,0,0,0);
 		}
 		combatRoundOver();
 		return;
@@ -529,7 +529,7 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Omnibus Combat Start
 	if(eventNo == 11045) {
-		player.createStatusAffect("FactoryOmnibusDefeated", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.FactoryOmnibusDefeated, 0, 0, 0, 0);
 		startCombat(new OmnibusOverseer(),true);
 		spriteSelect(16);
 		return;
@@ -832,9 +832,9 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Find Factory
 	if(eventNo == 11057) {
-		if(player.hasStatusAffect("Found Factory") < 0) {
+		if(player.findStatusAffect(StatusAffects.FoundFactory) < 0) {
 			outputText("\n\n<b>The factory is now accessable from your places menu.</b>", false);
-			player.createStatusAffect("Found Factory",0,0,0,0);
+			player.createStatusAffect(StatusAffects.FoundFactory,0,0,0,0);
 		}
 		outputText("Rounding a bend in the mountainous foothills, you stumble upon a large and rusted iron structure belching cloying pink smoke from its tall smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.  It must be some kind of demonic factory, though you've no idea what they could be pumping out.  High atop the roof, you spy a huge water tower fed by smaller pipes that run down the building's side and off in the direction of the lake.\n\nThere are no windows to the hellish factory, with only a single iron door adorning the front wall.  If you go inside there will undoubtedly be many demons to fight and little chance to escape. Death or worse awaits should you fall into their hands.\n\nDo you enter the factory or leave?", true);
 		
@@ -845,15 +845,15 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11058) {
 		outputText("You resolve to shut down the factory, then destroy the controls.  You spend a few moments making sure you aren't about to do something disastrous.  A few deep breaths calm your nerves, letting you focus on pressing the correct buttons.  The constant thrumming of the machinery slowly dies down, closely followed by a chorus of disappointed moans.  You step over to the window and watch as the captives come out of their drug induced sex-comas.  A great deal of them gather up and leave, though you are unsure what their destination is.  A few seem to be gathering back around the equipment, and puzzling out how to operate it.  Maybe they liked being here...", true); 
 		doNext(1);
-		player.createStatusAffect("DungeonShutDown",0,0,0,0);
+		player.createStatusAffect(StatusAffects.DungeonShutDown,0,0,0,0);
 		return;
 	}
 	//Shut down overload
 	if(eventNo == 11059) {
 		outputText("You resolve to shut down the factory by overloading the storage tanks, rendering much of the equipment inoperable and difficult to repair.  With a quick twist of a knob, you override the pressure vents for the storage tanks.  Within minutes, you hear the sounds of popping rivets and straining pumps.  You look out over the factory floor and watch as many of the pipes fracture, dripping seed over the moaning captives.  Smoke rises from pumps as they short out and overheat.  The entire building shudders as a massive blast echoes from somewhere to the west.  A high pitched whine fills the building as the last motors shriek and die.  The captives slowly start to come to as the flood of drugs and artificial pleasure come to a stop.  Many break down and cry, others begin unhooking themselves and exploring their surroundings.  You watch with interest as many of them rally together and make for an exit.   The remaining survivors begin scavenging parts from the machinery and puzzling out how to use it.  Perhaps they liked it here.", true);
 		doNext(1);
-		player.createStatusAffect("DungeonShutDown",0,0,0,0);
-		player.createStatusAffect("FactoryOverload",0,0,0,0);
+		player.createStatusAffect(StatusAffects.DungeonShutDown,0,0,0,0);
+		player.createStatusAffect(StatusAffects.FactoryOverload,0,0,0,0);
 		return;
 	}
 	//Take Supervisor's Key
@@ -865,15 +865,15 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Take item from storage
 	if(eventNo == 11061) {
-		if(player.hasStatusAffect("TakenGro+") >= 0) player.statusAffects[player.hasStatusAffect("TakenGro+")].value1--;
+		if(player.findStatusAffect("TakenGro+") >= 0) player.statusAffects[player.findStatusAffect("TakenGro+")].value1--;
 		else player.createStatusAffect("TakenGro+",4,0,0,0);
 		inventory.takeItem(consumables.GROPLUS);
 		return;
 	}
 	//Take item from storage
 	if(eventNo == 11062) {
-		if(player.hasStatusAffect("TakenLactaid") >= 0) player.statusAffects[player.hasStatusAffect("TakenLactaid")].value1--;
-		else player.createStatusAffect("TakenLactaid",4,0,0,0);
+		if(player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.TakenLactaid)].value1--;
+		else player.createStatusAffect(StatusAffects.TakenLactaid,4,0,0,0);
 		inventory.takeItem(consumables.LACTAID);
 		return;
 	}
@@ -890,7 +890,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11065) {
 		outputText("You laugh mockingly at the stupid demon, roaring, \"<i>I'm the bloody champion you vapid cunt!</i>\"\n\nShe whirls, her beautiful face marred by rage.  It looks like you have a fight on your hands...", true);
 		//(START FIGHT – Succubus Defense -10)
-		player.createStatusAffect("FactorySuccubusDefeated", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.FactorySuccubusDefeated, 0, 0, 0, 0);
 		startCombat(new SecretarialSuccubus(),true);
 		monster.armorDef -= 10;
 		return;

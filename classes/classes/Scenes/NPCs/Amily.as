@@ -14,7 +14,7 @@ package classes.Scenes.NPCs
 
 		override protected function performCombatAction():void
 		{
-			if(hasStatusAffect("Concentration") < 0 && rand(4) == 0) amilyConcentration();
+			if(findStatusAffect(StatusAffects.Concentration) < 0 && rand(4) == 0) amilyConcentration();
 			else if(rand(3) == 0) amilyDartGo();
 			else if(rand(2) == 0) amilyDoubleAttack();
 			else amilyAttack();
@@ -28,7 +28,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				game.combatRoundOver();
 				return;
@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				dodged++;
 			}
 			//Determine if dodged!
@@ -154,7 +154,7 @@ package classes.Scenes.NPCs
 		{
 			var dodged:Number = 0;
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n", false);
 				game.combatRoundOver();
 				return;
@@ -202,7 +202,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.", false);
 				//Set status
-				if (player.hasStatusAffect("Amily Venom") < 0) player.createStatusAffect("Amily Venom", 0, 0, 0, 0);
+				if (player.findStatusAffect(StatusAffects.AmilyVenom) < 0) player.createStatusAffect(StatusAffects.AmilyVenom, 0, 0, 0, 0);
 				var poison:Number = 2 + rand(5);
 				while (poison > 0) {
 					poison--;
@@ -211,14 +211,14 @@ package classes.Scenes.NPCs
 						showStatDown("str");
 						// strDown.visible = true;
 						// strUp.visible = false;
-						player.addStatusValue("Amily Venom", 1, 1);
+						player.addStatusValue(StatusAffects.AmilyVenom, 1, 1);
 					}
 					if (player.spe >= 2) {
 						player.spe--;
 						showStatDown("spe");
 						// speDown.visible = true;
 						// speUp.visible = false;
-						player.addStatusValue("Amily Venom", 2, 1);
+						player.addStatusValue(StatusAffects.AmilyVenom, 2, 1);
 					}
 				}
 				//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.
@@ -233,7 +233,7 @@ package classes.Scenes.NPCs
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
 			outputText("Amily takes a deep breath and attempts to concentrate on your movements.", false);
-			createStatusAffect("Concentration",0,0,0,0);
+			createStatusAffect(StatusAffects.Concentration,0,0,0,0);
 			game.combatRoundOver();
 		}
 
@@ -241,10 +241,10 @@ package classes.Scenes.NPCs
 		//Deals big lust increase, despite her resistance.
 		override public function teased(lustDelta:Number):void
 		{
-			if(hasStatusAffect("Concentration") >= 0) {
+			if(findStatusAffect(StatusAffects.Concentration) >= 0) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
 				lustDelta += 25+lustDelta;
-				removeStatusAffect("Concentration");
+				removeStatusAffect(StatusAffects.Concentration);
 				applyTease(lustDelta);
 			} else {
 				super.teased(lustDelta);

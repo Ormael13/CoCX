@@ -115,7 +115,7 @@ public function doSystem(eventNo:Number):void {
 
 		case 10:
 			//Masturbate
-			if (player.hasStatusAffect("dysfunction") >= 0) {
+			if (player.findStatusAffect(StatusAffects.dysfunction) >= 0) {
 				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true);
 				doNext(1);
 				return;
@@ -449,7 +449,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
-		if(player.hasStatusAffect("noJojo") >= 0) player.removeStatusAffect("noJojo");
+		if(player.findStatusAffect(StatusAffects.noJojo) >= 0) player.removeStatusAffect(StatusAffects.noJojo);
 		
 		regeneration(false);
 		
@@ -492,9 +492,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Goo fuck stuff
-		if (player.statusAffectv1("gooStuffed") > 0) {
-			player.addStatusValue("gooStuffed",1,-1);
-			if (player.statusAffectv1("gooStuffed") <= 0) 
+		if (player.statusAffectv1(StatusAffects.gooStuffed) > 0) {
+			player.addStatusValue(StatusAffects.gooStuffed,1,-1);
+			if (player.statusAffectv1(StatusAffects.gooStuffed) <= 0)
 			{
 				valeria.birthOutDatGooSlut();
 				needNext = true;
@@ -502,14 +502,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			
 		}
 		//Ember fuck cooldown
-		if(player.statusAffectv1("ember fuck cooldown") > 0) {
-			player.addStatusValue("ember fuck cooldown",1,-1);
-			if(player.statusAffectv1("ember fuck cooldown") < 1) player.removeStatusAffect("ember fuck cooldown");
+		if(player.statusAffectv1(StatusAffects.ember_fuck_cooldown) > 0) {
+			player.addStatusValue(StatusAffects.ember_fuck_cooldown,1,-1);
+			if(player.statusAffectv1(StatusAffects.ember_fuck_cooldown) < 1) player.removeStatusAffect(StatusAffects.ember_fuck_cooldown);
 		}
 		//Ember napping
-		if(player.hasStatusAffect("Ember Napping") >= 0) {
-			player.addStatusValue("Ember Napping",1,-1);
-			if(player.statusAffectv1("Ember Napping") <= 0) player.removeStatusAffect("Ember Napping");
+		if(player.findStatusAffect(StatusAffects.EmberNapping) >= 0) {
+			player.addStatusValue(StatusAffects.EmberNapping,1,-1);
+			if(player.statusAffectv1(StatusAffects.EmberNapping) <= 0) player.removeStatusAffect(StatusAffects.EmberNapping);
 		}
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
 			sophieFollowerScene.sophieDaughterDebimboUpdate();
@@ -640,7 +640,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else if(flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
 		}
 		if(flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] >= 1) flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN]--;
-		if(shouldraFollower.followerShouldra() && player.statusAffectv1("Exgartuan") == 1 && player.hasCock() && rand(10) == 0) {
+		if(shouldraFollower.followerShouldra() && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.hasCock() && rand(10) == 0) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 1) {
 				needNext = true;
 				shouldraFollower.exgartumonAndShouldraFightPartII();
@@ -669,9 +669,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Niamh counters
 		if(flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] > 1) flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER]--;
 		if(flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] > 1) flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER]--;
-		if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
-			player.addStatusValue("Bimbo Champagne",1,-1);
-			if(player.statusAffectv1("Bimbo Champagne") <= 0) {
+		if(player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) {
+			player.addStatusValue(StatusAffects.BimboChampagne,1,-1);
+			if(player.statusAffectv1(StatusAffects.BimboChampagne) <= 0) {
 				telAdre.niamh.removeBimboChampagne();
 				needNext = true;
 			}
@@ -707,16 +707,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.pregnancyType = 0;
 			player.pregnancyIncubation = 0;
 		}
-		if(player.hasStatusAffect("Uniball") >= 0 && player.ballSize > 1 && player.balls > 0) {
+		if(player.findStatusAffect(StatusAffects.Uniball) >= 0 && player.ballSize > 1 && player.balls > 0) {
 			//Testicles Normalise: 
 			outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
-			player.removeStatusAffect("Uniball");
+			player.removeStatusAffect(StatusAffects.Uniball);
 			needNext = true;
 		}		
 		//Make eggs big if harpied!
-		if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0 && player.hasStatusAffect("eggs") >= 0) {
-			if(player.statusAffectv2("eggs") == 0) {
-				player.changeStatusValue("eggs",2,1);
+		if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0 && player.findStatusAffect(StatusAffects.eggs) >= 0) {
+			if(player.statusAffectv2(StatusAffects.eggs) == 0) {
+				player.changeStatusValue(StatusAffects.eggs,2,1);
 				outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n", false);
 				needNext = true;
 			}
@@ -736,30 +736,30 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Reset if she finds someone to take it (random at high values)
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
 		//hangover status stuff
-		if(player.hasStatusAffect("Hangover") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Hangover) >= 0) {
 			//Countdown
-			if(player.statusAffectv1("Hangover") > 0) player.addStatusValue("Hangover",1,-1);
+			if(player.statusAffectv1(StatusAffects.Hangover) > 0) player.addStatusValue(StatusAffects.Hangover,1,-1);
 			else {
 				outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n", false);
 				//Restore stats
-				player.str += player.statusAffectv2("Hangover");
-				player.spe += player.statusAffectv3("Hangover");
-				player.inte += player.statusAffectv4("Hangover");
+				player.str += player.statusAffectv2(StatusAffects.Hangover);
+				player.spe += player.statusAffectv3(StatusAffects.Hangover);
+				player.inte += player.statusAffectv4(StatusAffects.Hangover);
 				dynStats("cor", 0);
 				//Clear status
-				player.removeStatusAffect("Hangover");
+				player.removeStatusAffect(StatusAffects.Hangover);
 				needNext = true;
 			}
 		}
-		if(player.statusAffectv1("Black Cat Beer") > 0) {
-			player.addStatusValue("Black Cat Beer",1,-1);
-			if(player.statusAffectv1("Black Cat Beer") <= 0) {
+		if(player.statusAffectv1(StatusAffects.Black_Cat_Beer) > 0) {
+			player.addStatusValue(StatusAffects.Black_Cat_Beer,1,-1);
+			if(player.statusAffectv1(StatusAffects.Black_Cat_Beer) <= 0) {
 				telAdre.niamh.blackCatBeerExpires();
 				needNext = true;
 			}
 		}
 		//EMBER STUFF
-		if(emberScene.followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
+		if(emberScene.followerEmber() && player.findStatusAffect(StatusAffects.EmberNapping) < 0) {
 			//Mino cum freakout - PC partly addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
 				emberScene.minotaurJizzFreakout();
@@ -826,11 +826,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			   
 		}
 		//Lust stick!
-		if(player.hasStatusAffect("Lust Stick Applied") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Lust_Stick_Applied) >= 0) {
 			//Decrement!
-			player.addStatusValue("Lust Stick Applied",1,-1);
-			if(player.statusAffectv1("Lust Stick Applied") <= 0) {
-				player.removeStatusAffect("Lust Stick Applied");
+			player.addStatusValue(StatusAffects.Lust_Stick_Applied,1,-1);
+			if(player.statusAffectv1(StatusAffects.Lust_Stick_Applied) <= 0) {
+				player.removeStatusAffect(StatusAffects.Lust_Stick_Applied);
 				outputText("<b>\nYour drugged lipstick fades away, leaving only the faintest residue on your lips.  You'll have to put on more if you want to be able to kiss your foes into submission!</b>\n", false);
 			}
 		}
@@ -873,7 +873,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 		}			
 		//Lusty Tongue Check!
-		if(player.hasStatusAffect("LustyTongue") >= 0) {
+		if(player.findStatusAffect(StatusAffects.LustyTongue) >= 0) {
 			if(rand(5) == 0) {
 				outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.", false);
 				dynStats("lus", 2+rand(15));
@@ -881,16 +881,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.", false);
 					dynStats("sen", 2, "lus=", 0);
 					//Tongue orgasming makes it last longer.
-					player.changeStatusValue("LustyTongue",1,player.statusAffectv1("LustyTongue")+10);
+					player.changeStatusValue(StatusAffects.LustyTongue,1,player.statusAffectv1(StatusAffects.LustyTongue)+10);
 					
 				}
 				needNext = true;
 				outputText("\n", false);			
 			}
 			//Decrement
-			player.changeStatusValue("LustyTongue",1,player.statusAffectv1("LustyTongue")-1);
-			if(player.statusAffectv1("LustyTongue") <= 0) {
-				player.removeStatusAffect("LustyTongue");
+			player.changeStatusValue(StatusAffects.LustyTongue,1,player.statusAffectv1(StatusAffects.LustyTongue)-1);
+			if(player.statusAffectv1(StatusAffects.LustyTongue) <= 0) {
+				player.removeStatusAffect(StatusAffects.LustyTongue);
 				needNext = true;
 				outputText("\nYour mouth and tongue return to normal.\n", false);
 			}
@@ -903,8 +903,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] == 0) flags[kFLAGS.SOPHIE_EGGS_LAID]++;
 		}
 		//Luststic countdown
-		if(player.hasStatusAffect("Luststick") >= 0) {
-			player.addStatusValue("Luststick",1,-1);
+		if(player.findStatusAffect(StatusAffects.Luststick) >= 0) {
+			player.addStatusValue(StatusAffects.Luststick,1,-1);
 			//50% chance to lust spike
 			if(rand(2) == 0 && player.hasCock()) {
 				//Display if havent displayed
@@ -917,8 +917,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.lust += 20;
 				if(player.lust > 100) player.lust = 100;
 			}
-			if(player.statusAffectv1("Luststick") <= 0) {
-				player.removeStatusAffect("Luststick");
+			if(player.statusAffectv1(StatusAffects.Luststick) <= 0) {
+				player.removeStatusAffect(StatusAffects.Luststick);
 				outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>", false);
 				needNext = true;
 			}
@@ -964,12 +964,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 			player.removePerk(PerkLib.Flexibility);
 		}
-		if(player.hasStatusAffect("Camp Marble") >= 0) {
+		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 			//Increment Marble's Lust
 			if(flags[kFLAGS.MARBLE_LUST] < -100) flags[kFLAGS.MARBLE_LUST] = -100;
 			if(rand(2) == 0) flags[kFLAGS.MARBLE_LUST] += 1;
-			if(player.statusAffectv4("Marble") > 50) flags[kFLAGS.MARBLE_LUST] += .3;
-			if(player.statusAffectv4("Marble") > 70) flags[kFLAGS.MARBLE_LUST] += .3;
+			if(player.statusAffectv4(StatusAffects.Marble) > 50) flags[kFLAGS.MARBLE_LUST] += .3;
+			if(player.statusAffectv4(StatusAffects.Marble) > 70) flags[kFLAGS.MARBLE_LUST] += .3;
 			//If bitch-bin is in construction
 			if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
 				flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
@@ -982,29 +982,29 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			
 			//Marble find items check
-			else if(player.hasStatusAffect("MarbleHasItem") < 0) {
+			else if(player.findStatusAffect(StatusAffects.MarbleHasItem) < 0) {
 				// Off cooldown
-				if(player.hasStatusAffect("MarbleItemCooldown") < 0) {
+				if(player.findStatusAffect(StatusAffects.MarbleItemCooldown) < 0) {
 					if(rand(10) == 0) {
 						spriteSelect(41);
 						outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n", false);
-						player.createStatusAffect("MarbleItemCooldown",(24 + rand(24)),0,0,0);
-						player.createStatusAffect("MarbleHasItem",rand(10),0,0,0);
+						player.createStatusAffect(StatusAffects.MarbleItemCooldown,(24 + rand(24)),0,0,0);
+						player.createStatusAffect(StatusAffects.MarbleHasItem,rand(10),0,0,0);
 						needNext = true;
 					}
 				}
 			}
 		}
 		//Decrement marble cooldown
-		if(player.hasStatusAffect("MarbleItemCooldown") >= 0) {
-			player.addStatusValue("MarbleItemCooldown",1,-1);
-			if(player.statusAffectv1("MarbleItemCooldown") < 1) 
-				player.removeStatusAffect("MarbleItemCooldown");
+		if(player.findStatusAffect(StatusAffects.MarbleItemCooldown) >= 0) {
+			player.addStatusValue(StatusAffects.MarbleItemCooldown,1,-1);
+			if(player.statusAffectv1(StatusAffects.MarbleItemCooldown) < 1)
+				player.removeStatusAffect(StatusAffects.MarbleItemCooldown);
 		}
 		//Kelt Submissiveness check
-		if(player.statusAffectv2("Kelt") > 0) {
+		if(player.statusAffectv2(StatusAffects.Kelt) > 0) {
 			//reduce kelt submissiveness by 1 every 5 hours
-			player.addStatusValue("Kelt",2,-0.15);
+			player.addStatusValue(StatusAffects.Kelt,2,-0.15);
 		}
 		//Mino cum update.
 		if(mountain.minotaurScene.minoCumUpdate()) needNext = true;
@@ -1064,13 +1064,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Eggs in tits!
-		if(player.hasStatusAffect("eggchest") >= 0) {
-			player.addStatusValue("eggchest",1,-1);
-			if(player.statusAffectv1("eggchest") <= 0) {
+		if(player.findStatusAffect(StatusAffects.eggchest) >= 0) {
+			player.addStatusValue(StatusAffects.eggchest,1,-1);
+			if(player.statusAffectv1(StatusAffects.eggchest) <= 0) {
 				outputText("\n<b>You feel the rounded eggs within your [fullChest] vanishing, absorbed into your body.  </b>");
-				player.growTits(player.statusAffectv2("eggchest"), player.bRows(), true, 2);
+				player.growTits(player.statusAffectv2(StatusAffects.eggchest), player.bRows(), true, 2);
 				outputText("\n");	
-				player.removeStatusAffect("eggchest");
+				player.removeStatusAffect(StatusAffects.eggchest);
 			}
 		}
 		//Spider Oviposits!
@@ -1190,7 +1190,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						//v1 = egg type.
 						//v2 = size - 0 for normal, 1 for large
 						//v3 = quantity
-						player.createStatusAffect("eggs",rand(6),rand(2),(5+rand(3)),0);
+						player.createStatusAffect(StatusAffects.eggs,rand(6),rand(2),(5+rand(3)),0);
 					}
 					//every 30 days if high fertility get egg preg
 					else if(model.time.days % 30 == 0) {
@@ -1200,7 +1200,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						//v1 = egg type.
 						//v2 = size - 0 for normal, 1 for large
 						//v3 = quantity
-						player.createStatusAffect("eggs",rand(6),rand(2),(5+rand(3)),0);
+						player.createStatusAffect(StatusAffects.eggs,rand(6),rand(2),(5+rand(3)),0);
 						//Count times eggpregged this way in perk.
 						player.addPerkValue(PerkLib.Oviposition,1,1);
 					}
@@ -1215,55 +1215,55 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Heat-check!
 		//Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-		if(player.hasStatusAffect("heat") >= 0) 
+		if(player.findStatusAffect(StatusAffects.heat) >= 0)
 		{
-			if(player.statusAffects[player.hasStatusAffect("heat")].value3 <= 1 || player.vaginas.length == 0) 
+			if(player.statusAffects[player.findStatusAffect(StatusAffects.heat)].value3 <= 1 || player.vaginas.length == 0)
 			{
 				//Remove bonus libido from heat
-				dynStats("lib", -player.statusAffects[player.hasStatusAffect("heat")].value2, "resisted", false, "noBimbo", true);
+				dynStats("lib", -player.statusAffects[player.findStatusAffect(StatusAffects.heat)].value2, "resisted", false, "noBimbo", true);
 				//remove heat
-				player.removeStatusAffect("heat");
+				player.removeStatusAffect(StatusAffects.heat);
 				if(player.lib < 1) player.lib = 1;
 				statScreenRefresh();
 				outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n", false);
 				needNext = true;
 			}
-			else player.statusAffects[player.hasStatusAffect("heat")].value3--;
+			else player.statusAffects[player.findStatusAffect(StatusAffects.heat)].value3--;
 		}
 		//Remove anemone lustiness
-		if(player.hasStatusAffect("Anemone Arousal") >= 0) {
+		if(player.findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
 			if(player.pregnancyIncubation > 1) {
-				player.removeStatusAffect("Anemone Arousal");
+				player.removeStatusAffect(StatusAffects.AnemoneArousal);
 				outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You stick a finger inside yourself and marvel in wonder - it's gone!  You aren't sure if it slipped out or your body somehow consumed it, but it's nice to have a clearer head.</b>\n", false);
 				needNext = true;
 			}
 			else if(!player.hasVagina()) {
-				player.removeStatusAffect("Anemone Arousal");
+				player.removeStatusAffect(StatusAffects.AnemoneArousal);
 				outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You aren't sure if it was somehow consumed by the removal of your vagina or if it escaped during the process, but it's nice to have a clear head for a change.</b>\n", false);
 				needNext = true;
 			}
 		}
 		//Rut-check!
 		//Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
-		if(player.hasStatusAffect("rut") >= 0) 
+		if(player.findStatusAffect(StatusAffects.Rut) >= 0)
 		{
-			trace("RUT:" + player.statusAffectv3("rut"));
-			if(player.statusAffectv3("rut") <= 1 || player.totalCocks() == 0) 
+			trace("RUT:" + player.statusAffectv3(StatusAffects.Rut));
+			if(player.statusAffectv3(StatusAffects.Rut) <= 1 || player.totalCocks() == 0)
 			{
 				//Remove bonus libido from rut
-				dynStats("lib", -player.statusAffectv2("rut"), "resisted", false, "noBimbo", true);
+				dynStats("lib", -player.statusAffectv2(StatusAffects.Rut), "resisted", false, "noBimbo", true);
 				//remove heat
-				player.removeStatusAffect("rut");
+				player.removeStatusAffect(StatusAffects.Rut);
 				if(player.lib < 10) player.lib = 10;
 				statScreenRefresh();
 				outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n", false);
 				needNext = true;
 			}
 			
-			else player.addStatusValue("rut",3,-1);
+			else player.addStatusValue(StatusAffects.Rut,3,-1);
 		}
 		//Remove marble anti-worm sex
-		if(player.hasStatusAffect("infested") < 0)
+		if(player.findStatusAffect(StatusAffects.infested) < 0)
 			flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 0;
 		//Futa checks
 		if(player.findPerk(PerkLib.FutaForm) >= 0) {
@@ -1316,12 +1316,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Bimbo checks
-		if(player.findPerk(PerkLib.BimboBody) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) {
+		if(player.findPerk(PerkLib.BimboBody) >= 0 || player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) {
 			//Tits!
 			if(player.breastRows[0].breastRating < 5) 
 			{
 				player.breastRows[0].breastRating = 5;
-				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
+				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
 				dynStats("int", -1, "lus", 15);
@@ -1329,7 +1329,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Vagoo
 			if(!player.hasVagina()) {
 				player.createVagina();
-				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n", false);
+				if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n", false);
 				else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n", false);
 				needNext = true;
 			}
@@ -1350,7 +1350,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Bro checks
 		if(player.findPerk(PerkLib.BroBody) >= 0) {
-			player.removeStatusAffect("Feeder");
+			player.removeStatusAffect(StatusAffects.Feeder);
 			player.removePerk(PerkLib.Feeder);
 			//(Dick regrowth) 
 			if(!player.hasCock()) {
@@ -1384,11 +1384,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Feeder checks
-		if(player.hasStatusAffect("Feeder") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 			//Go away if pure
 			if(player.cor <= 20) {
 				outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n", false);
-				player.removeStatusAffect("Feeder");
+				player.removeStatusAffect(StatusAffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 				needNext = true;
 			}
@@ -1400,19 +1400,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				//Increase 'time since breastfed'
-				player.addStatusValue("Feeder",2,1);
-				//trace("Feeder status: " + player.statusAffectv2("Feeder") + " (modded " + ((player.statusAffectv2("Feeder")) - 70) + ")");
+				player.addStatusValue(StatusAffects.Feeder,2,1);
+				//trace("Feeder status: " + player.statusAffectv2(StatusAffects.Feeder) + " (modded " + ((player.statusAffectv2(StatusAffects.Feeder)) - 70) + ")");
 				//After 3 days without feeding someone sensitivity jumps.
-				if(player.statusAffectv2("Feeder") >= 72 && model.time.hours == 14) {
+				if(player.statusAffectv2(StatusAffects.Feeder) >= 72 && model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);
-					temp = (2 + (((player.statusAffectv2("Feeder")) - 70) / 20));
+					temp = (2 + (((player.statusAffectv2(StatusAffects.Feeder)) - 70) / 20));
 					dynStats("sen", temp);
 					needNext = true;
 				}
 			}
 		}
 		//Update worm drippy-cooch
-		if(player.hasStatusAffect("worm plugged") >= 0 && flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] == 0) {
+		if(player.findStatusAffect(StatusAffects.wormplugged) >= 0 && flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] == 0) {
 			if(player.hasVagina()) {
 				if(rand(5) == 0) {
 					flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
@@ -1421,40 +1421,40 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					dynStats("lus", 2+player.sens/10);
 					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility/4));
 					//Lower chances
-					player.addStatusValue("worm plugged",1,-1);
+					player.addStatusValue(StatusAffects.wormplugged,1,-1);
 					//Remove if too low
-					if(player.statusAffectv1("worm plugged") <= 0) player.removeStatusAffect("worm plugged");
+					if(player.statusAffectv1(StatusAffects.wormplugged) <= 0) player.removeStatusAffect(StatusAffects.wormplugged);
 				}
 			}
 			//Non cunts lose worm plugged
-			else player.removeStatusAffect("worm plugged");
+			else player.removeStatusAffect(StatusAffects.wormplugged);
 		}				
 		//Update Exgartuan stuff
-		if(player.hasStatusAffect("Exgartuan") >= 0) 
+		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0)
 		{
-			trace("EXGARTUAN V1: " + player.statusAffectv1("Exgartuan") + " V2: " + player.statusAffectv2("Exgartuan"));
+			trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
 			//if too small dick, remove him
-			if(player.statusAffectv1("Exgartuan") == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) 
+			if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
 			{
 				outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n", false);
-				player.removeStatusAffect("Exgartuan");
+				player.removeStatusAffect(StatusAffects.Exgartuan);
 				needNext = true;
 			}
 			//Tit removal
-			else if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() < 12) 
+			else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 			{
 				outputText("\n<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
-				player.removeStatusAffect("Exgartuan");
+				player.removeStatusAffect(StatusAffects.Exgartuan);
 				needNext = true;
 			}		
 			else 
 			{
 				//if sleeping, decrement sleep timer.
-				if(player.statusAffectv2("Exgartuan") > 0) 
+				if(player.statusAffectv2(StatusAffects.Exgartuan) > 0)
 				{
-					player.addStatusValue("Exgartuan",2,-1);
+					player.addStatusValue(StatusAffects.Exgartuan,2,-1);
 					//The demon awakens!
-					if(player.statusAffectv2("Exgartuan") == 0) 
+					if(player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 					{
 						outputText("\n<b>", false);
 						exgartuan.exgartuanBored();
@@ -1466,9 +1466,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				else 
 				{
 					//Dude stuff
-					if(player.statusAffectv1("Exgartuan") == 1 && player.cockArea(0) > 100)
+					if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100)
 					{	
-						if(player.hasStatusAffect("infested") >= 0 ) {
+						if(player.findStatusAffect(StatusAffects.infested) >= 0 ) {
 							outputText("\n<b>", false);
 							exgartuan.exgartuanWormCure();
 							needNext = true;
@@ -1483,7 +1483,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						else dynStats("lus", 1+rand(2));
 					}
 					//Chick stuff
-					if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() >= 12) {
+					if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) {
 						//Only once every 9 hours or so.
 						if(model.time.hours % 9 == 0) {
 							// lactation messing with!
@@ -1512,194 +1512,194 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//"Milked"
-		if(player.hasStatusAffect("Milked") >= 0) {
-			player.addStatusValue("Milked",1,-1);
-			if(player.statusAffectv1("Milked") <= 0) {
+		if(player.findStatusAffect(StatusAffects.Milked) >= 0) {
+			player.addStatusValue(StatusAffects.Milked,1,-1);
+			if(player.statusAffectv1(StatusAffects.Milked) <= 0) {
 				outputText("\n<b>Your " + nippleDescript(0) + "s are no longer sore from the milking.</b>\n", false);
-				player.removeStatusAffect("Milked");
+				player.removeStatusAffect(StatusAffects.Milked);
 				needNext = true;
 			}
 		}
-		if(player.hasStatusAffect("Jizzpants") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Jizzpants) >= 0) {
 			outputText("\nYour " + player.armorName + " squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n", false);
 			needNext = true;
 			dynStats("lus", 10 + player.sens/5);
-			player.removeStatusAffect("Jizzpants");
+			player.removeStatusAffect(StatusAffects.Jizzpants);
 		}
 		//Marble's Milk Status!
-		if(player.hasStatusAffect("Marbles Milk") >= 0 && player.findPerk(PerkLib.MarblesMilk) < 0) {
+		if(player.findStatusAffect(StatusAffects.MarblesMilk) >= 0 && player.findPerk(PerkLib.MarblesMilk) < 0) {
 			//Decrement time remaining by 1		
-			player.addStatusValue("Marbles Milk",1,-1);
+			player.addStatusValue(StatusAffects.MarblesMilk,1,-1);
 			//Remove the status and stat boosts when time runs out on the milk
-			if(player.statusAffectv1("Marbles Milk") <= 0) {
+			if(player.statusAffectv1(StatusAffects.MarblesMilk) <= 0) {
 				needNext = true;
-				dynStats("str", (-1 * player.statusAffectv2("Marbles Milk")),"tou", (-1 * player.statusAffectv3("Marbles Milk")));
-				player.removeStatusAffect("Marbles Milk");
+				dynStats("str", (-1 * player.statusAffectv2(StatusAffects.MarblesMilk)),"tou", (-1 * player.statusAffectv3(StatusAffects.MarblesMilk)));
+				player.removeStatusAffect(StatusAffects.MarblesMilk);
 				//Text for when Marble's Milk effect wears off:
 				//[addiction is 10 or less] 
-				if(player.statusAffectv2("Marble") <= 10) outputText("\nYou feel the euphoria from drinking Marble's milk fade from you. Only now that it's gone do you notice that it was actually making you tougher.\n", false);
+				if(player.statusAffectv2(StatusAffects.Marble) <= 10) outputText("\nYou feel the euphoria from drinking Marble's milk fade from you. Only now that it's gone do you notice that it was actually making you tougher.\n", false);
 				//[addiction is 11-30]
-				else if(player.statusAffectv2("Marble") <= 30) outputText("\nYou feel a slight sense of loss as the euphoria from Marble's milk fades.  You kinda want to drink more, but the desire is not overpowering.\n", false);
+				else if(player.statusAffectv2(StatusAffects.Marble) <= 30) outputText("\nYou feel a slight sense of loss as the euphoria from Marble's milk fades.  You kinda want to drink more, but the desire is not overpowering.\n", false);
 				//[addiction is 31-50, player is not addicted]
-				else if(player.statusAffectv2("Marble") <= 50) outputText("\nYou shiver slightly as the euphoria from Marble's milk fades.  You really feel like suckling her breasts again.\n", false);
+				else if(player.statusAffectv2(StatusAffects.Marble) <= 50) outputText("\nYou shiver slightly as the euphoria from Marble's milk fades.  You really feel like suckling her breasts again.\n", false);
 				//IF ADDICTED
-				if(player.statusAffectv3("Marble") > 0) {
+				if(player.statusAffectv3(StatusAffects.Marble) > 0) {
 					//If player is under bottled milk effects
-					if(player.hasStatusAffect("Bottled Milk") >= 0) {
+					if(player.findStatusAffect(StatusAffects.BottledMilk) >= 0) {
 						outputText("\nYour hands develop a tiny tremble as the effects of Marble's fresh milk wear off.  Thanks to the bottled milk you drank, you don't go into withdrawal just yet.\n", false);
 					}
 					else {
 						//[addiction is <90, player is addicted]
-						if(player.statusAffectv2("Marble") <= 90) outputText("\nYour hands start to tremble as you lose the only true relief you get to your cravings.  You desperately want to go see Marble again, especially if it means a chance to drink her wonderful milk.\n", false);
+						if(player.statusAffectv2(StatusAffects.Marble) <= 90) outputText("\nYour hands start to tremble as you lose the only true relief you get to your cravings.  You desperately want to go see Marble again, especially if it means a chance to drink her wonderful milk.\n", false);
 						//[addiction is >=90, player is addicted]
 						else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n", false);
 						//If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
-						player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
+						player.createStatusAffect(StatusAffects.MarbleWithdrawl,0,0,0,0);
 						dynStats("tou", -5, "int", -5);
 					}
 				}
 			}			
 		}
 		//Go into withdrawl if your addicted and don't have a reason not to be withdrawn.
-		if(player.statusAffectv3("Marble") > 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.statusAffectv2("Marble") > 25) {
+		if(player.statusAffectv3(StatusAffects.Marble) > 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.statusAffectv2(StatusAffects.Marble) > 25) {
 			//If player does not have marble's milk or bottled milk, go into withdrawl
-			if(player.hasStatusAffect("Marbles Milk") < 0 && player.hasStatusAffect("Bottled Milk") < 0) {
+			if(player.findStatusAffect(StatusAffects.MarblesMilk) < 0 && player.findStatusAffect(StatusAffects.BottledMilk) < 0) {
 				//If player is not yet in withdrawl
-				if(player.hasStatusAffect("MarbleWithdrawl") < 0) {
+				if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) < 0) {
 					outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n", false);
 					needNext = true;
-					player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
+					player.createStatusAffect(StatusAffects.MarbleWithdrawl,0,0,0,0);
 					dynStats("tou", -5, "int", -5);
 				}
 			}
 		}
 		//Prevent addiction from passing 60 if not yet revealed that your addicted
-		if(player.statusAffectv3("Marble") <= 0) {
-			if(player.statusAffectv2("Marble") > 60) player.changeStatusValue("Marble",2,60);
+		if(player.statusAffectv3(StatusAffects.Marble) <= 0) {
+			if(player.statusAffectv2(StatusAffects.Marble) > 60) player.changeStatusValue(StatusAffects.Marble,2,60);
 		}
 		//Withdrawl removal if you get unaddicted.
-		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
-			if(player.statusAffectv2("Marble") <= 25) {
-				player.removeStatusAffect("MarbleWithdrawl");
+		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+			if(player.statusAffectv2(StatusAffects.Marble) <= 25) {
+				player.removeStatusAffect(StatusAffects.MarbleWithdrawl);
 				dynStats("tou", 5, "int", 5);
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
 			}
 			//Remove withdrawl if you have bottled milk affect
-			else if(player.hasStatusAffect("Bottled Milk") >= 0) {
+			else if(player.findStatusAffect(StatusAffects.BottledMilk) >= 0) {
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
-				player.removeStatusAffect("MarbleWithdrawl");
+				player.removeStatusAffect(StatusAffects.MarbleWithdrawl);
 				dynStats("tou", 5, "int", 5);
 			}
 		}
 		//Bottled Milk Countdown
-		if(player.hasStatusAffect("Bottled Milk") >= 0) {
-			player.addStatusValue("Bottled Milk",1,-1);
-			if(player.statusAffectv1("Bottled Milk") <= 0)
-				player.removeStatusAffect("Bottled Milk");
+		if(player.findStatusAffect(StatusAffects.BottledMilk) >= 0) {
+			player.addStatusValue(StatusAffects.BottledMilk,1,-1);
+			if(player.statusAffectv1(StatusAffects.BottledMilk) <= 0)
+				player.removeStatusAffect(StatusAffects.BottledMilk);
 		}
 		//Minotaur dysfunction status countdown (v1 = hours till gone)
-		if(player.hasStatusAffect("dysfunction") >= 0) {
-			if(player.statusAffects[player.hasStatusAffect("dysfunction")].value1 <= 1) {
-				player.removeStatusAffect("dysfunction");
+		if(player.findStatusAffect(StatusAffects.dysfunction) >= 0) {
+			if(player.statusAffects[player.findStatusAffect(StatusAffects.dysfunction)].value1 <= 1) {
+				player.removeStatusAffect(StatusAffects.dysfunction);
 				outputText("\nYou feel a tingling in your nethers... at last full sensation has returned to your groin.  <b>You can masturbate again!</b>\n", false);
 				needNext = true;
 			}
-			else player.statusAffects[player.hasStatusAffect("dysfunction")].value1--;			
+			else player.statusAffects[player.findStatusAffect(StatusAffects.dysfunction)].value1--;
 		}
 		//Lactation reduction
-		if(player.hasStatusAffect("Lactation Reduction") < 0) {
+		if(player.findStatusAffect(StatusAffects.LactationReduction) < 0) {
 			if(player.biggestLactation() > 0) {
-				player.createStatusAffect("Lactation Reduction",0,0,0,0);
+				player.createStatusAffect(StatusAffects.LactationReduction,0,0,0,0);
 			}
 		}
-		else if(player.biggestLactation() > 0 && player.hasStatusAffect("Feeder") < 0 && player.pregnancyIncubation == 0) {
-			player.addStatusValue("Lactation Reduction",1,1);
-			if(player.statusAffectv1("Lactation Reduction") >= 48) {
-				if(player.hasStatusAffect("Lactation Reduc0") < 0) {
-					player.createStatusAffect("Lactation Reduc0",0,0,0,0);
+		else if(player.biggestLactation() > 0 && player.findStatusAffect(StatusAffects.Feeder) < 0 && player.pregnancyIncubation == 0) {
+			player.addStatusValue(StatusAffects.LactationReduction,1,1);
+			if(player.statusAffectv1(StatusAffects.LactationReduction) >= 48) {
+				if(player.findStatusAffect(StatusAffects.LactationReduc0) < 0) {
+					player.createStatusAffect(StatusAffects.LactationReduc0,0,0,0,0);
 					if(player.biggestLactation() >= 1) outputText("\n<b>Your " + nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n", false);
-					if(player.biggestLactation() <= 2) player.createStatusAffect("Lactation Reduc1",0,0,0,0);
-					if(player.biggestLactation() <= 1) player.createStatusAffect("Lactation Reduc2",0,0,0,0);
+					if(player.biggestLactation() <= 2) player.createStatusAffect(StatusAffects.LactationReduc1,0,0,0,0);
+					if(player.biggestLactation() <= 1) player.createStatusAffect(StatusAffects.LactationReduc2,0,0,0,0);
 					needNext = true;
 				}
 				player.boostLactation(-(.5*player.breastRows.length)/24);
-				if(player.biggestLactation() <= 2.5 && player.hasStatusAffect("Lactation Reduc1") < 0) {
+				if(player.biggestLactation() <= 2.5 && player.findStatusAffect(StatusAffects.LactationReduc1) < 0) {
 					outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n", false);
-					player.createStatusAffect("Lactation Reduc1",0,0,0,0);
+					player.createStatusAffect(StatusAffects.LactationReduc1,0,0,0,0);
 					needNext = true;
 				}
-				else if(player.biggestLactation() <= 1.5 && player.hasStatusAffect("Lactation Reduc2") < 0) {
+				else if(player.biggestLactation() <= 1.5 && player.findStatusAffect(StatusAffects.LactationReduc2) < 0) {
 					outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n", false);
-					player.createStatusAffect("Lactation Reduc2",0,0,0,0);
+					player.createStatusAffect(StatusAffects.LactationReduc2,0,0,0,0);
 					needNext = true;
 				}
-				if(player.biggestLactation() < 1 && player.hasStatusAffect("Lactation Reduc3") < 0) {
-					player.createStatusAffect("Lactation Reduc3",0,0,0,0);
+				if(player.biggestLactation() < 1 && player.findStatusAffect(StatusAffects.LactationReduc3) < 0) {
+					player.createStatusAffect(StatusAffects.LactationReduc3,0,0,0,0);
 					outputText("\n<b>Your body no longer produces any milk.</b>\n", false);
-					player.removeStatusAffect("Lactation Reduction");
+					player.removeStatusAffect(StatusAffects.LactationReduction);
 					needNext = true;
 				}
 			}
 		}
 		//Cunt stretching stuff
-		if(player.hasStatusAffect("CuntStretched") >= 0) {
-			player.addStatusValue("CuntStretched",1,1);
+		if(player.findStatusAffect(StatusAffects.CuntStretched) >= 0) {
+			player.addStatusValue(StatusAffects.CuntStretched,1,1);
 			if(player.vaginas.length > 0) {
 				if(player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusAffectv1("CuntStretched") >= 200) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusAffectv1(StatusAffects.CuntStretched) >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
-					player.changeStatusValue("CuntStretched",1,0);
+					player.changeStatusValue(StatusAffects.CuntStretched,1,0);
 					needNext = true;
 				}
-				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusAffectv1("CuntStretched") >= 100) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusAffectv1(StatusAffects.CuntStretched) >= 100) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
-					player.changeStatusValue("CuntStretched",1,0);
+					player.changeStatusValue(StatusAffects.CuntStretched,1,0);
 					needNext = true;
 				}
-				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusAffectv1("CuntStretched") >= 70) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusAffectv1(StatusAffects.CuntStretched) >= 70) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n", false);
 					player.vaginas[0].vaginalLooseness--;
-					player.changeStatusValue("CuntStretched",1,0);
+					player.changeStatusValue(StatusAffects.CuntStretched,1,0);
 					needNext = true;
 				}
 				}
-				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusAffectv1("CuntStretched") >= 50) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusAffectv1(StatusAffects.CuntStretched) >= 50) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n", false);
 					player.vaginas[0].vaginalLooseness--;
-					player.changeStatusValue("CuntStretched",1,0);
+					player.changeStatusValue(StatusAffects.CuntStretched,1,0);
 					needNext = true;
 				}
 			}
 		}
 		//Butt stretching stuff
-		if(player.hasStatusAffect("ButtStretched") >= 0) {
-			player.addStatusValue("ButtStretched",1,1);
-			if(player.ass.analLooseness == 2 && player.statusAffectv1("ButtStretched") >= 72) {
+		if(player.findStatusAffect(StatusAffects.ButtStretched) >= 0) {
+			player.addStatusValue(StatusAffects.ButtStretched,1,1);
+			if(player.ass.analLooseness == 2 && player.statusAffectv1(StatusAffects.ButtStretched) >= 72) {
 				outputText("\n<b>Your " + assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n", false);
 				player.ass.analLooseness--;
-				player.changeStatusValue("ButtStretched",1,0);
+				player.changeStatusValue(StatusAffects.ButtStretched,1,0);
 				needNext = true;
 			}
-			if(player.ass.analLooseness == 3 && player.statusAffectv1("ButtStretched") >= 48) {
+			if(player.ass.analLooseness == 3 && player.statusAffectv1(StatusAffects.ButtStretched) >= 48) {
 				outputText("\n<b>Your " + assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n", false);
 				player.ass.analLooseness--;
-				player.changeStatusValue("ButtStretched",1,0);
+				player.changeStatusValue(StatusAffects.ButtStretched,1,0);
 				needNext = true;
 			}
-			if(player.ass.analLooseness == 4 && player.statusAffectv1("ButtStretched") >= 24) {
+			if(player.ass.analLooseness == 4 && player.statusAffectv1(StatusAffects.ButtStretched) >= 24) {
 				outputText("\n<b>Your " + assholeDescript() + " recovers from your ordeals and becomes tighter.</b>\n", false);
 				player.ass.analLooseness--;
-				player.changeStatusValue("ButtStretched",1,0);
+				player.changeStatusValue(StatusAffects.ButtStretched,1,0);
 				needNext = true;
 			}
-			if(player.ass.analLooseness == 5 && player.statusAffectv1("ButtStretched") >= 12) {
+			if(player.ass.analLooseness == 5 && player.statusAffectv1(StatusAffects.ButtStretched) >= 12) {
 				outputText("\n<b>Your " + assholeDescript() + " recovers from the brutal stretching it has received and tightens up.</b>\n", false);
 				player.ass.analLooseness--;
-				player.changeStatusValue("ButtStretched",1,0);
+				player.changeStatusValue(StatusAffects.ButtStretched,1,0);
 				needNext = true;
 			}
 		}
@@ -1718,7 +1718,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Regain slime core
 		if(player.hasKeyItem("Ruby Heart") >= 0) {
-			if(player.hasStatusAffect("Slime Craving") >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
+			if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
 				outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
 				
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n", false);
@@ -1729,26 +1729,26 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Slime craving stuff
-		if(player.hasStatusAffect("Slime Craving") >= 0) {
+		if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
 			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
 				outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n", false);
 				needNext = true;
-				player.removeStatusAffect("Slime Craving");
-				player.removeStatusAffect("Slime Craving Feed");
+				player.removeStatusAffect(StatusAffects.SlimeCraving);
+				player.removeStatusAffect(StatusAffects.Slime_Craving_Feed);
 			}
 			else {
 				//Slime core reduces fluid need rate
-				if(player.findPerk(PerkLib.SlimeCore) >= 0) player.addStatusValue("Slime Craving",1,.5);
-				else player.addStatusValue("Slime Craving",1,1);
-				if(player.statusAffectv1("Slime Craving") >= 18) {
-					if(player.hasStatusAffect("Slime Craving Output") < 0) {
-						player.createStatusAffect("Slime Craving Output",0,0,0,0);
+				if(player.findPerk(PerkLib.SlimeCore) >= 0) player.addStatusValue(StatusAffects.SlimeCraving,1,.5);
+				else player.addStatusValue(StatusAffects.SlimeCraving,1,1);
+				if(player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) {
+					if(player.findStatusAffect(StatusAffects.Slime_Craving_Output) < 0) {
+						player.createStatusAffect(StatusAffects.Slime_Craving_Output,0,0,0,0);
 						outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n", false);
 						needNext = true;
 					}
 					dynStats("str", -.1,"spe", -.1, "lus", 2);
 					//Keep track of how much has been taken from speed/strength
-					player.addStatusValue("Slime Craving",2,.1);
+					player.addStatusValue(StatusAffects.SlimeCraving,2,.1);
 					//Bad end!
 					if(player.str <= 1) {
 						outputText("Your entire body wobbles as your strength fails, collapsing into itself.  You struggle to rise, but your form loses more and more rigidity, melting into an amorphous blob.  Without the strength to rise, you've no hope of getting the fluids you need.  The aching craving for moisture drives you to roll to the lake, which you slip into.  With the constant runoff of bodily fluids that enter the lake, you're able to subsist for a time, forgetting about your mission as the all-consuming need devours your personality.", false);
@@ -1765,14 +1765,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			dynStats("lus", 10);
 		}
 		//Slime feeding stuff
-		if(player.hasStatusAffect("Slime Craving Feed") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Slime_Craving_Feed) >= 0) {
 			outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n", false);
 			//Boost speed and restore hp/toughness
-			dynStats("str", player.statusAffectv2("Slime Craving") * .5,"spe", player.statusAffectv2("Slime Craving"));
+			dynStats("str", player.statusAffectv2(StatusAffects.SlimeCraving) * .5,"spe", player.statusAffectv2(StatusAffects.SlimeCraving));
 			//Remove feed succuss status so it can be reset
-			player.removeStatusAffect("Slime Craving Feed");
+			player.removeStatusAffect(StatusAffects.Slime_Craving_Feed);
 			//Reset stored hp/toughness values
-			player.changeStatusValue("Slime Craving",2,0);
+			player.changeStatusValue(StatusAffects.SlimeCraving,2,0);
 			needNext = true;
 		}
 		//Bee Sting Recharge
@@ -1788,7 +1788,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) {
 			sophieBimbo.unlockResistance();
 			needNext = true;
-			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
+			if(player.findStatusAffect(StatusAffects.Luststick) >= 0) player.removeStatusAffect(StatusAffects.Luststick);
 		}
 		//Sophie's love
 		if((player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
@@ -1942,47 +1942,47 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] < 0) flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] = 0;
 			//Put a cap on daughters if they havent been met yet.
 			if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] == 0) {
-				if(player.statusAffectv2("Tamani") > 30)
-					player.changeStatusValue("Tamani",2,30);
+				if(player.statusAffectv2(StatusAffects.Tamani) > 30)
+					player.changeStatusValue(StatusAffects.Tamani,2,30);
 				
 			}
 			
 			//Lower daughter population by 1 every fourth day
 			//once population gets high
-			if(player.statusAffectv2("Tamani") > 40 && model.time.days % 4 == 0) {
-				player.addStatusValue("Tamani",2,-1);
+			if(player.statusAffectv2(StatusAffects.Tamani) > 40 && model.time.days % 4 == 0) {
+				player.addStatusValue(StatusAffects.Tamani,2,-1);
 			}
 			//Tamani pregnancy counting
-			if(player.statusAffectv1("Tamani") > -500) {
-				player.addStatusValue("Tamani",1,-1);
+			if(player.statusAffectv1(StatusAffects.Tamani) > -500) {
+				player.addStatusValue(StatusAffects.Tamani,1,-1);
 				//Silently give birth if player missed the chance to see it
-				if(player.statusAffectv1("Tamani") <= -2) {
+				if(player.statusAffectv1(StatusAffects.Tamani) <= -2) {
 					//Add new daughters to count
-					player.addStatusValue("Tamani",2,player.statusAffectv3("Tamani"));
+					player.addStatusValue(StatusAffects.Tamani,2,player.statusAffectv3(StatusAffects.Tamani));
 					//reset incubation
-					player.changeStatusValue("Tamani",1,-500);
+					player.changeStatusValue(StatusAffects.Tamani,1,-500);
 					//clear daughters to be born
-					player.changeStatusValue("Tamani",3,0);
+					player.changeStatusValue(StatusAffects.Tamani,3,0);
 					//Increment times made pregnant
-					player.addStatusValue("Tamani",4,1);
+					player.addStatusValue(StatusAffects.Tamani,4,1);
 				}
 			}
 			//Remove jojo meditation block
-			if(player.statusAffectv1("Meditated") > 0) {
-				player.removeStatusAffect("Meditated");
+			if(player.statusAffectv1(StatusAffects.Meditated) > 0) {
+				player.removeStatusAffect(StatusAffects.Meditated);
 				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] == 0) {
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102]++;
-					while(player.hasStatusAffect("Meditated") >= 0) {
-						player.removeStatusAffect("Meditated");
+					while(player.findStatusAffect(StatusAffects.Meditated) >= 0) {
+						player.removeStatusAffect(StatusAffects.Meditated);
 					}
 				}
 			}
 			//Lower addiction by 1 every day.
-			if(player.hasStatusAffect("Marble") >= 0) {
-				if(player.statusAffectv2("Marble") > 0) marbleScene.marbleStatusChange(0,-1);
+			if(player.findStatusAffect(StatusAffects.Marble) >= 0) {
+				if(player.statusAffectv2(StatusAffects.Marble) > 0) marbleScene.marbleStatusChange(0,-1);
 			}
 			//Lower shark girl counter
-			if(player.statusAffectv1("Shark-Girl") > 0) player.addStatusValue("Shark-Girl",1,-1);
+			if(player.statusAffectv1(StatusAffects.Shark_dash_Girl) > 0) player.addStatusValue(StatusAffects.Shark_dash_Girl,1,-1);
 			if(flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] > 0) {
 				switch (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]) {
 					case 1:
@@ -2024,7 +2024,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Lower bonus score for drinking contest
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--;
 			//Clear dragon breath cooldown!
-			if(player.hasStatusAffect("Dragon Breath Cooldown") >= 0) player.removeStatusAffect("Dragon Breath Cooldown");
+			if(player.findStatusAffect(StatusAffects.Dragon_Breath_Cooldown) >= 0) player.removeStatusAffect(StatusAffects.Dragon_Breath_Cooldown);
 		}
 		if(model.time.hours > 20 && model.time.hours - 1 <= 20) {
 			outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n", false);
@@ -2112,13 +2112,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 		}
-		if(player.hasStatusAffect("Ember Napping") < 0) {
+		if(player.findStatusAffect(StatusAffects.EmberNapping) < 0) {
 			//Ember get's a whiff of fuckscent and knocks up PC!
-			if(emberScene.followerEmber() && player.hasVagina() && player.hasStatusAffect("heat") >= 0 && player.pregnancyIncubation == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
+			if(emberScene.followerEmber() && player.hasVagina() && player.findStatusAffect(StatusAffects.heat) >= 0 && player.pregnancyIncubation == 0 && player.findStatusAffect(StatusAffects.ember_fuck_cooldown) < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 				emberScene.emberRapesYourHeatness();
 				return true;
 			}
-			else if(emberScene.followerEmber() && player.hasCock() && player.hasStatusAffect("rut") >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
+			else if(emberScene.followerEmber() && player.hasCock() && player.findStatusAffect(StatusAffects.Rut) >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.findStatusAffect(StatusAffects.ember_fuck_cooldown) < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
 				emberScene.emberRapesYourHeatness();
 				return true;
 			}
@@ -2251,18 +2251,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//IMP GANGBAAAAANGA
 		//The more imps you create, the more often you get gangraped. 
-		temp = player.statusAffectv1("Birthed Imps") * 2;
+		temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
 		if(temp > 7) temp = 7;
 		if(player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
-		if(player.hasStatusAffect("heat") >= 0) temp += 2;
+		if(player.findStatusAffect(StatusAffects.heat) >= 0) temp += 2;
 		if(vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
-			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
+			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2(StatusAffects.Tamani) >= 40) {
 				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
-			else if(temp > rand(100) && player.hasStatusAffect("Defense: Canopy") < 0) {
-				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
+			else if(temp > rand(100) && player.findStatusAffect("Defense: Canopy") < 0) {
+				if(player.gender > 0 && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
 					impScene.impGangabangaEXPLOSIONS();
 					doNext(1);
 					return true;
@@ -2275,7 +2275,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 					needNext = true;
 				}
-				else if(player.gender > 0 && player.hasStatusAffect("JojoNightWatch") >= 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+				else if(player.gender > 0 && player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 					outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n", false);
 					needNext = true;
 				}
@@ -2289,8 +2289,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 			//wormgasms
-			else if(flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.hasStatusAffect("infested") < 0) {
-				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
+			else if(flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.findStatusAffect(StatusAffects.infested) < 0) {
+				if(player.hasCock() && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
 					nightTimeInfestation();
 					return true;
 				}
@@ -2298,7 +2298,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
-				else if(player.gender > 0 && player.hasStatusAffect("JojoNightWatch") >= 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+				else if(player.gender > 0 && player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 					outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n", false);
 					needNext = true;
 				}
@@ -2330,9 +2330,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Dreams on hour 3.
 		if(model.time.hours == 4) {
-			if(player.hasStatusAffect("succubiNight") >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
+			if(player.findStatusAffect(StatusAffects.succubiNight) >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
 				//Call secksins!
-				if(player.hasStatusAffect("repeatSuccubi") >= 0) {
+				if(player.findStatusAffect(StatusAffects.repeatSuccubi) >= 0) {
 					//VapulaSurprise
 					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
 						vapula.vapulaAssistsCeruleanSuccubus();
@@ -2343,29 +2343,29 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					}
 				}
 				else {
-					player.createStatusAffect("SuccubiFirst",0,0,0,0);
+					player.createStatusAffect(StatusAffects.SuccubiFirst,0,0,0,0);
 					eventParser(2025);
-					player.createStatusAffect("repeatSuccubi",0,0,0,0);
+					player.createStatusAffect(StatusAffects.repeatSuccubi,0,0,0,0);
 				}
 				//Lower count if multiples stacked up.
-				if(player.statusAffects[player.hasStatusAffect("succubiNight")].value1 > 1) {
-					player.statusAffects[player.hasStatusAffect("succubiNight")].value1--;
+				if(player.statusAffects[player.findStatusAffect(StatusAffects.succubiNight)].value1 > 1) {
+					player.statusAffects[player.findStatusAffect(StatusAffects.succubiNight)].value1--;
 				}
-				else player.removeStatusAffect("succubiNight");
-				if(player.hasStatusAffect("SuccubiFirst") >= 0) {
+				else player.removeStatusAffect(StatusAffects.succubiNight);
+				if(player.findStatusAffect(StatusAffects.SuccubiFirst) >= 0) {
 					if(player.gender > 0) doNext(2026);
-					player.removeStatusAffect("SuccubiFirst");
+					player.removeStatusAffect(StatusAffects.SuccubiFirst);
 				}
 				return true;
 			}
 			//Exgartuan night time surprise!
-			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
+			else if(player.totalCocks() > 0 && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
 				outputText("\n", false);
 				exgartuan.exgartuanSleepSurprise();
 				return true;
 			}
 			//Boobgartuan night time surprise!
-			if(player.statusAffectv1("Exgartuan") == 2 && rand(3) == 0 && player.statusAffectv2("Exgartuan") == 0) {
+			if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && rand(3) == 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
 				outputText("\n", false);
 				exgartuan.boobGartuanSURPRISE();
 				return true;
@@ -2384,7 +2384,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//MARBLE STUFF
 		//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
+		if(player.statusAffectv3(StatusAffects.Marble) > 0 && player.statusAffectv2(StatusAffects.Marble) < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
@@ -2394,23 +2394,23 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.createPerk(PerkLib.MarbleResistant,0,0,0,0);
 			//After player ends Addiction:
 			//Marble liked you addicted
-			if(player.statusAffectv3("Marble") == 1) {
+			if(player.statusAffectv3(StatusAffects.Marble) == 1) {
 				//Affection 0-29, version 1
-				if(player.statusAffectv1("Marble") < 30) {
+				if(player.statusAffectv1(StatusAffects.Marble) < 30) {
 					outputText("\nMarble looks horrified at your words and exclaims, \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, but she will have none of it.  \"<i>That's it, I'm leaving, don't come looking for me.</i>\"  She storms out the door.  Having no further reason to stay here, you leave too.\n", false);
 					//(Marble leaves the farm, she is no longer encountered)
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 				}
 				//Affection 30-89, version 1
-				if(player.statusAffectv1("Marble") >= 30 && player.statusAffectv1("Marble") < 90) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 30 && player.statusAffectv1(StatusAffects.Marble) < 90) {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says, \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles at you.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n", false);
 					//(Marble can be met at the farm)
 				}
 				//Affection 90+, version 1
-				if(player.statusAffectv1("Marble") >= 90) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 90) {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect("Camp Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
 					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
@@ -2421,13 +2421,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 				}
 			}
 			//Ashamed Marble
 			else {
 				//Affection 0-29, version 2
-				if(player.statusAffectv1("Marble") < 30) {
+				if(player.statusAffectv1(StatusAffects.Marble) < 30) {
 					outputText("\nMarble seems impassive at the news of hearing that you are no longer addicted.  Her eyes have gone cold, her old passion gone.  \"<i>Good,</i>\" she states simply and points at a paper on the table in her room.  \"<i>That's for you. Goodbye.</i>\" With that, she turns and walks out the room.  Since you are unsure how to react, you decide to take a look at the paper.\n\n", false);
 					//[This section should be indented and/or italicized] - put the codex entry here
 					outputText("The piece of paper looks like a page torn from a book.  It looks like an entry from an encyclopedia of sorts, it reads in formal script:\n", false);
@@ -2437,19 +2437,19 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("Behaviour: <i>The behaviour of Lacta Minotaurs varies greatly between each individual.  The only major unifying piece of behaviour is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n", false);
 					outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom is was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and granting limited powers of control over them to the Lacta Minotaur that nursed them.  Finally, the breasts of Lacta Minotaurs are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n", false);
 					outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n", false);
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 				}
 				//Affection 30-69, version 2
-				if(player.statusAffectv1("Marble") >= 30 && player.statusAffectv1("Marble") < 70) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 30 && player.statusAffectv1(StatusAffects.Marble) < 70) {
 					outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>now, no one will mind if I disappear.</i>\"  You look at her in surprise and ask her why she says that.  She explains that the only way to be sure that no one else ever drinks her milk is for her to disappear, forever.  You tell her not to think like that and that the people on the farm still appreciate her help with the chores and duties, insisting that they would all be sorry to see her go. Besides, now that you both know that her milk is addictive, the two of you have a big advantage compared to what happened the first time.  \"<i>Plus, we got through it, didn't we?</i>\" you say with a smile.  At this, her face lights up, \"<i>You're right! Thanks for being such a good friend, sweetie.</i>\"  She smiles at you in return.  \"<i>I guess things are back to normal now.</i>\"  You both laugh at this.\n", false);
 					//(Marble can be encountered at the farm)
 				}
 				//Affection 70+, version 2
-				if(player.statusAffectv1("Marble") >= 70) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 70) {
 					outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>now, no one will mind if I disappear.</i>\"  You look at her in surprise and quickly grab her arms.  You tell her with no uncertainty that if she disappeared, you would forever miss her.  You don't care about her milk, it doesn't matter; it is her as a person that matters to you.  You wouldn't have done all those things or spent all that time together if you didn't care about her.  She bursts into tears and hugs you tightly to her breasts.\n\n", false);
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
-					player.createStatusAffect("Camp Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
 					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
@@ -2460,7 +2460,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 				}
 			}
 			outputText("\n<b>You have gained the perk Marble Resistance</b> (You know how to avoid the addictive qualities of her milk!)\n", false);
@@ -2468,20 +2468,20 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
+		if(player.statusAffectv3(StatusAffects.Marble) > 0 && player.statusAffectv2(StatusAffects.Marble) >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
 			//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal, they are instead permanently given the stat increases of 5 str, and 10 tou as part of a perk called 'Marble's Milk' and automatically drink Marble's milk every morning if a bad end is not triggered)
 			player.createPerk(PerkLib.MarblesMilk,0,0,0,0);
 			//Clear withdrawl
-			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
-				player.removeStatusAffect("MarbleWithdrawl");
+			if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+				player.removeStatusAffect(StatusAffects.MarbleWithdrawl);
 				dynStats("tou", 5, "int", 5);
 			}
 			//Clear marble's milk status
-			if(player.hasStatusAffect("Marbles Milk") >= 0) {
-				player.removeStatusAffect("Marbles Milk");
+			if(player.findStatusAffect(StatusAffects.MarblesMilk) >= 0) {
+				player.removeStatusAffect(StatusAffects.MarblesMilk);
 			}
 			//Boost stats if not under its affects
 			else {
@@ -2489,9 +2489,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Post-addiction flavors
 			//Marble liked you addicted
-			if(player.statusAffectv3("Marble") == 1) {
+			if(player.statusAffectv3(StatusAffects.Marble) == 1) {
 				//Affection 0-49, type 1:
-				if(player.statusAffectv1("Marble") < 49) {
+				if(player.statusAffectv1(StatusAffects.Marble) < 49) {
 					//outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>I was hoping you might help me out with my chores. Then I'll see about getting you some milk.</i>\"  The idea of working for her milk seems oddly right, and you put a huge effort into helping Marble with her chores.  Afterwards, Marble gladly agrees to give you her milk. While you are nursing from her, she starts to talk: \"<i>Sweetie, I've been thinking.  I think you should stay here with me from now on, since you need my milk to survive.</i>\"  She starts to stroke your head.  \"<i>You always do such a good job with the chores too; do you really want to do anything else?</i>\"  You try to pull back from her and tell her about your quest, but she keeps your mouth from straying from her breast.  \"<i>No, of course you don't.</i>\"  She says with finality, and you feel your need to do anything else fade....\n\n", false);
 					//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>Mmm, if you need me so much, then I want you to move in with me on the farm,</i>\" she says happily above you.  \"<i>That way, I can take care of you and you can help me, and we'll both be happy.</i>\"  You panic a bit; while you'd certainly be happy to have the source of her delicious milk at your fingertips, leaving the portal unguarded means the demons will be free to set up shop there again!  Marble responds to your squirming by tightening her arms and says, \"<i>Ah, ah, remember, sweetie; you need my milk and I control whether or not you can drink it.  I'm happy to share it, but if I'm being so generous, I think the least you could do is make it easier for me.  I don't think living here and helping me with the farmwork is too much to ask, do you?</i>\"  Her face contorts into an open-mouthed smile and her eyes glitter.  You sigh into her chest, she's right, there isn't much you can do about it now...");
@@ -2499,22 +2499,22 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					return true;
 				}
 				//Affection 50-79, type 1:
-				if(player.statusAffectv1("Marble") >= 50 && player.statusAffectv1("Marble") < 79) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 50 && player.statusAffectv1(StatusAffects.Marble) < 79) {
 	
 					outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, Marble sighs and gives you a smile.  \"<i>I was thinking that maybe you should live with me from now on, but I think I like seeing you visit like this too much.  It always makes me so happy to see you come by, so why don't we just leave things they way they are?</i>\"  You agree with her and she says \"<i>I'll see you tomorrow when you're thirsty again.</i>\"  You nod again and return to your camp.\n", false);
 					//(Marble can be encountered at the farm)
 					//(every morning, the player goes to Marble for milk, it costs them the first hour of the day)
 				}
 				//High affection
-				if(player.statusAffectv1("Marble") >= 80) {
+				if(player.statusAffectv1(StatusAffects.Marble) >= 80) {
 					outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>Are you thirsty already?</i>\" You give an eager nod and she slips her top off, pushing your mouth to one of her teats.  After you've drunk your fill, you notice Marble staring closely at you. \"<i>Sweetie, do you like me for more than just my milk?</i>\"  You are taken aback by the question, why wouldn't you?  \"<i>I want to know if you like me because I'm me, and not because you like my milk.  Can you show me in a special way?</i>\" she asks you, suggestively.  You agree without having to think about it at all.\n\n", false);
 					//(player chose yes) do after addiction sex event
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect("Camp Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
 					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
@@ -2530,7 +2530,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Marble didn't like you addicted
 			else {
 				//Replacement scene for when the player becomes addicted, Marble is ashamed, and her affection is low (<20)
-				if(player.statusAffectv1("Marble") < 30) {
+				if(player.statusAffectv1(StatusAffects.Marble) < 30) {
 					//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
 					//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.   \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
@@ -2538,7 +2538,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					return true;
 				}
 				//Affection < 80, type 2:
-				else if(player.statusAffectv1("Marble") < 80) {
+				else if(player.statusAffectv1(StatusAffects.Marble) < 80) {
 					outputText("Marble's face falls at your words.  \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You shake your head and tell her it wasn't something either of you could stop.  Despite what you said before, what happened happened.  You two will just have to find a way to go on, regardless.  She nods and holds out her arms. You gladly move forward and accept her milk.  Once you've finished drinking, Marble looks at you and says, \"<i>I guess I'll see you tomorrow when you're thirsty again.</i>\"  You nod and return to your camp.\n", false);
 					//(Marble can be encountered at the farm)
 					//(every morning, the player goes to Marble for milk, it costs them the first hour of the day)
@@ -2550,9 +2550,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect("Camp Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
 					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
-					player.createStatusAffect("No More Marble",0,0,0,0);
+					player.createStatusAffect(StatusAffects.No_More_Marble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
@@ -2643,14 +2643,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Morning Marble Meetings
 		if(model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
 			//Marble is at camp
-			if(player.hasStatusAffect("Camp Marble") >= 0) {
+			if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 				marbleScene.postAddictionCampMornings(false);
 				needNext = true;
 			}
 			//Marble isn't at camp
 			else {
 				//Marble is still available at farm
-				if(player.hasStatusAffect("No More Marble") < 0) {
+				if(player.findStatusAffect(StatusAffects.No_More_Marble) < 0) {
 					marbleScene.postAddictionFarmMornings();
 					threshhold--;
 					needNext = true;
@@ -2815,17 +2815,17 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.pregnancyIncubation < 0) player.pregnancyIncubation = 0;
 		if(player.buttPregnancyIncubation < 0) player.buttPregnancyIncubation = 0;
 		//Egg loot!
-		if(player.hasStatusAffect("lootEgg") >= 0) {
+		if(player.findStatusAffect(StatusAffects.lootEgg) >= 0) {
 			trace("EGG LOOT HAS");
 			//default
 			var itype:ItemType =
 					[
 						[consumables.BROWNEG,consumables.PURPLEG,consumables.BLUEEGG,consumables.PINKEGG,consumables.WHITEEG,consumables.BLACKEG],
 						[consumables.L_BRNEG,consumables.L_PRPEG,consumables.L_BLUEG,consumables.L_PNKEG,consumables.L_WHTEG,consumables.L_BLKEG]]
-							[player.statusAffects[player.hasStatusAffect("eggs")].value2 || 0][player.statusAffects[player.hasStatusAffect("eggs")].value1 || 0] ||
+							[player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2 || 0][player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 || 0] ||
 							consumables.BROWNEG;
-			player.removeStatusAffect("lootEgg");			
-			player.removeStatusAffect("eggs");
+			player.removeStatusAffect(StatusAffects.lootEgg);
+			player.removeStatusAffect(StatusAffects.eggs);
 			trace("TAKEY NAU");
 			inventory.takeItem(itype);
 			return true;
@@ -2834,15 +2834,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	
 	// Hanging the Uma massage update here, I think it should work...
 	telAdre.umasShop.updateBonusDuration(time);
-	if (player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME) >= 0)
+	if (player.findStatusAffect(UmasShop.UmasMassage) >= 0)
 	{
-		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.MASSAGE_BONUS_NAME));
+		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.UmasMassage));
 	}
 	
 	highMountains.izumiScenes.updateSmokeDuration(time);
-	if (player.hasStatusAffect("Izumis Pipe Smoke") >= 0)
+	if (player.findStatusAffect(StatusAffects.Izumis_Pipe_Smoke) >= 0)
 	{
-		trace("Izumis pipe smoke time remaining: " + player.statusAffectv1("Izumis Pipe Smoke"));
+		trace("Izumis pipe smoke time remaining: " + player.statusAffectv1(StatusAffects.Izumis_Pipe_Smoke));
 	}
 	
 	//Drop axe if too short!

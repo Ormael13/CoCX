@@ -150,28 +150,28 @@ private function acceptDominikasKnowledge():void {
 	
 			outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.", false);
 			//(Player receives random unlearned spell.)
-			if(player.hasStatusAffect("Knows Might") < 0) {
-				player.createStatusAffect("Knows Might",0,0,0,0);
+			if(player.findStatusAffect(StatusAffects.KnowsMight) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Heal") < 0) {
-				player.createStatusAffect("Knows Heal",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsHeal) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Heal</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Arouse") < 0) {
-				player.createStatusAffect("Knows Arouse",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsArouse) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Charge") < 0) {
-				player.createStatusAffect("Knows Charge",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsCharge) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Charge</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Blind") < 0) {
-				player.createStatusAffect("Knows Blind",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsBlind) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Whitefire") < 0) {
-				player.createStatusAffect("Knows Whitefire",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsWhitefire) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==", false);
@@ -185,28 +185,28 @@ private function acceptDominikasKnowledge():void {
 	
 			outputText("Even with your inexperience, you find Dominika to be a good teacher. She helps you focus and train your mind, and you quickly find your first spell to be easy to perform.", false);
 			//(Player receives random unlearned spell.)
-			if(player.hasStatusAffect("Knows Might") < 0) {
-				player.createStatusAffect("Knows Might",0,0,0,0);
+			if(player.findStatusAffect(StatusAffects.KnowsMight) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Heal") < 0) {
-				player.createStatusAffect("Knows Heal",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsHeal) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Heal</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Arouse") < 0) {
-				player.createStatusAffect("Knows Arouse",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsArouse) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Charge") < 0) {
-				player.createStatusAffect("Knows Charge",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsCharge) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Charge</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Blind") < 0) {
-				player.createStatusAffect("Knows Blind",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsBlind) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>", false);
 			}
-			else if(player.hasStatusAffect("Knows Whitefire") < 0) {
-				player.createStatusAffect("Knows Whitefire",0,0,0,0);
+			else if(player.findStatusAffect(StatusAffects.KnowsWhitefire) < 0) {
+				player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==", false);

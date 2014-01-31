@@ -93,7 +93,7 @@ package classes.Scenes.Areas.Forest
 				var temp2:Function = null;
 				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = game.forest.tamaniScene.tamaniAnalShits;
 				//NOT PREGGERS
-				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
+				if(player.statusAffectv1(StatusAffects.Tamani) <= -500 && player.canOvipositSpider()) {
 					temp2 = game.forest.tamaniScene.tamaniBeaten;
 				}
 				game.simpleChoices("Fuck",game.forest.tamaniScene.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",game.cleanupAfterCombat);

@@ -1454,7 +1454,7 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Um... hi.</i>\"");
 				//(lose 8 hours, restore HP amount consonant with 8hrs rest)
 				doNext(16);
-				player.createStatusAffect("Post Anemone Beatdown", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Post_Anemone_Beatdown, 0, 0, 0, 0);
 				return;
 			}
 			//Sex scenes, post dream

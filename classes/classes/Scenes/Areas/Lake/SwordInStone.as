@@ -14,7 +14,7 @@
 
 		public function findSwordInStone():void 
 		{
-			if (player.hasStatusAffect("FactoryOverload") < 0) 
+			if (player.findStatusAffect(StatusAffects.FactoryOverload) < 0)
 			{
 				//Encounter it!
 				outputText("While walking along the lake, the glint of metal catches your eye.  You drop into a combat stance, readying your " + player.weaponName + " for another fight.   Your eyes dart about, searching for the source of the light. You feel rather foolish when you locate the source of the reflection.  It came from a sword lodged hilt-deep in the trunk of a tree.  You relax a bit, approaching the odd sight to get a better look.\n\n", true);
@@ -32,7 +32,7 @@
 				
 				doNext(13);
 				
-				player.createStatusAffect("BSwordBroken",0,0,0,0);
+				player.createStatusAffect(StatusAffects.BSwordBroken,0,0,0,0);
 			}
 		}
 
@@ -68,7 +68,7 @@
 				menuLoc = 2;
 				inventory.takeItem(weapons.B_SWORD);
 			
-				player.createStatusAffect("Took Blessed Sword",0,0,0,0);
+				player.createStatusAffect(StatusAffects.Took_Blessed_Sword,0,0,0,0);
 			}
 		}
 	}

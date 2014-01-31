@@ -106,8 +106,8 @@ private function beatSophieAroundYouMonster():void {
 	outputText("\n\n\"<i>I'm gonna make you pay for this!</i>\"");
 	//(Go to normal Sophie Combat screen)
 	startCombat(new Sophie());
-	monster.createStatusAffect("bimboBrawl",0,0,0,0);
-	monster.createStatusAffect("Generic Run Disabled",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.bimboBrawl,0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Generic_Run_Disabled,0,0,0,0);
 	doNext(1);
 }
 

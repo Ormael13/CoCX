@@ -30,7 +30,7 @@ package classes.Scenes.NPCs
 		public function applyVenom(str:Number = 1):void
 		{
 			//First application
-			if (player.hasStatusAffect("Anemone Venom") < 0) player.createStatusAffect("Anemone Venom", 0, 0, 0, 0);
+			if (player.findStatusAffect(StatusAffects.AnemoneVenom) < 0) player.createStatusAffect(StatusAffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
 			game.dynStats("lus", (2 * str));
 
@@ -45,7 +45,7 @@ package classes.Scenes.NPCs
 					// strDown.visible = true;
 					// strUp.visible = false;
 					player.str--;
-					player.addStatusValue("Anemone Venom", 1, 1);
+					player.addStatusValue(StatusAffects.AnemoneVenom, 1, 1);
 				}
 				//Spe bottomed out, convert to lust
 				if (player.spe < 2) game.dynStats("lus", 2);
@@ -55,7 +55,7 @@ package classes.Scenes.NPCs
 					// speDown.visible = true;
 					// speUp.visible = false;
 					player.spe--;
-					player.addStatusValue("Anemone Venom", 2, 1);
+					player.addStatusValue(StatusAffects.AnemoneVenom, 2, 1);
 				}
 			}
 			game.statScreenRefresh();

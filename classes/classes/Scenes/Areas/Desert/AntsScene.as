@@ -196,7 +196,7 @@ package classes.Scenes.Areas.Desert
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
 			startCombat(new DemonPack());
-			monster.createStatusAffect("phyllafight", 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.phyllafight, 0, 0, 0, 0);
 			doNext(1);
 		}
 
@@ -297,7 +297,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 				outputText("\n\nYou're fighting a tentacle beast!");
 				startCombat(new TentacleBeast());
-				monster.createStatusAffect("No Loot", 0, 0, 0, 0);
+				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
 			}
 			//►[Fight #2]
 			else if (flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
@@ -305,7 +305,7 @@ package classes.Scenes.Areas.Desert
 				outputText("When you arrive in the colosseum, you tell the fight manager you're ready; he nods and leads you down into one of the two staging areas for the arena.  You watch through the bars as the stadium fills almost to capacity, still resistant to the idea of so many ants living right under the sands; there must be hundreds.  Gazing out into the cheering crowd, you spot the royal family sitting in their reserved area.  The princess waves at you excitedly with two of her arms, but her mother grabs them and lowers them.  Chylla herself looks as regal and reserved as ever.  You catch the queen smiling at you, but there's something wicked behind the smile.  Before you can contemplate what it might be, the gates raise on both sides of the colosseum and you are pushed out.");
 				outputText("\n\nYou're now fighting a minotaur and it's wielding a Giant Axe!  You quickly put two and two together and realize Chylla has set you up by arming the minotaur!  You brace yourself as the beastman charges you, roaring wildly.");
 				startCombat(new Minotaur(true));
-				monster.createStatusAffect("No Loot", 0, 0, 0, 0);
+				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
 			}
 			//►[Fight #3]
 			else {
@@ -316,9 +316,9 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nYou're fighting a gnoll!");
 				flags[kFLAGS.MET_ANT_ARENA_GNOLL]++;
 				startCombat(new Gnoll());
-				monster.createStatusAffect("No Loot", 0, 0, 0, 0);
+				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
 			}
-			monster.createStatusAffect("PhyllaFight", 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.PhyllaFight, 0, 0, 0, 0);
 			doNext(1);
 		}
 
@@ -1143,7 +1143,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nThough you've taken 'advantage' of the corruption yourself, it makes you a little horny verbally asserting your dominance over Phylla.");
 
 				//(If PC has not completed the factory)
-				if (player.hasStatusAffect("DungeonShutDown") < 0) {
+				if (player.findStatusAffect(StatusAffects.DungeonShutDown) < 0) {
 					outputText("\n\nEvery year!  Every year, your people valiantly send one of their own through that hellish portal to this place in the hopes to try and quell or even stop the spread of corruption.  Now you just learned that it all could have been slowed or even stopped completely by Phylla's race had they all not been gutless yellow-bellied cowards!");
 				}
 				//(If PC has completed the factory)
@@ -1940,7 +1940,7 @@ package classes.Scenes.Areas.Desert
 				//If PC has IS pregnant:
 				if (player.pregnancyIncubation > 0) outputText("\n\nThe feeling of your pregnancies is instantly transferred between yourself and Phylla; you feel the warmth and energy of her unborn children inside of you, and you can feel her experiencing the warmth of the life still growing within you.  At this moment, you two understand perfectly what it's like for each other to be with child; it's a pretty... enlightening experience... that's distracting you from the task at hand.");
 				//If PC has been pregnant:
-				else if (player.statusAffectv1("Birthed") > 0) outputText("\n\nYou've been pregnant before, but this... this is completely different.  You feel every stage that each of Phylla's eggs in her abdomen is in.  You feel what it's like to have your only goal, your only want in life to mate and have children for the rest of your life.  It's an amazing turn on for you - you feel a warmth start to spread between your own legs.");
+				else if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("\n\nYou've been pregnant before, but this... this is completely different.  You feel every stage that each of Phylla's eggs in her abdomen is in.  You feel what it's like to have your only goal, your only want in life to mate and have children for the rest of your life.  It's an amazing turn on for you - you feel a warmth start to spread between your own legs.");
 				//If PC has NEVER been pregnant:
 				else outputText("\n\nIt's one of most interesting feelings you've ever felt; you feel every stage of pregnancy at once - every stage of each egg in Phylla's ever-laying abdomen.  It makes you want to experience the joys of being pregnant as a flood of maternal thoughts flood your mind.  Though you keep in mind the disadvantages as well - don't want to go overboard.  You feel what it's like to have your only goal in life be to breed continuously.  It's an amazing turn on for you as you feel a warmth start to spread between your own legs.");
 			}

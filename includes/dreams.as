@@ -54,13 +54,13 @@ public function dreamSelect():Boolean {
 		choices[choices.length] = 7;
 	}
 	//Exgartuboobs
-	if(player.statusAffectv1("Exgartuan") == 2) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 2) {
 		choices[choices.length] = 8;
 		choices[choices.length] = 8;
 		choices[choices.length] = 8;
 	}
 	//Exgartucock
-	if(player.statusAffectv1("Exgartuan") == 1 && player.hasCock()) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.hasCock()) {
 		choices[choices.length] = 9;
 		choices[choices.length] = 9;
 		choices[choices.length] = 9;
@@ -152,7 +152,7 @@ public function dreamSelect():Boolean {
 			//female
 			else {
 				//heat dream!
-				if(player.hasStatusAffect("heat") >= 0) {
+				if(player.findStatusAffect(StatusAffects.heat) >= 0) {
 					outputText("being pregnant, your belly bulging obscenely with the fruits of all your frequent copulations, and your breasts swollen with breast milk.  You imagine your condition enhancing your libido, driving you seek out sexual partners willing to pleasure your distorted form.  ", false);
 				}
 				//normal dream

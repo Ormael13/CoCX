@@ -266,7 +266,7 @@ public function helFollowersIntro():void {
 		}
 	}
 	//If Rath is in Camp
-	else if(flags[kFLAGS.HEL_INTROS_LEVEL] < 3 && player.hasStatusAffect("Camp Rathazul") >= 0) {
+	else if(flags[kFLAGS.HEL_INTROS_LEVEL] < 3 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		flags[kFLAGS.HEL_INTROS_LEVEL] = 3;
 		outputText("You take Hel over to the small section of camp Rathazul has cordoned off for his 'laboratory,' surrounding himself with glass tubes and beakers and other, stranger instruments.  You poke through the array of equipment to find old Rath sitting in front of some experiment or another, furiously scribbling notes.  With a light cough, you alert him to your presence.");
 		
@@ -565,7 +565,7 @@ private function sparWithHeliaFirebuttsAreHot():void {
 	outputText("\n\n<i>\"Oh?  Well, it's certainly been awhile since you and I fought out on the plains...  Alright, let's do it, [name]!  But heads up, I might just need to have my way with you after I push your face in the dirt!\"</i>");
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
-	monster.createStatusAffect("sparring",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.sparring,0,0,0,0);
 	//No gems.
 	monster.XP = 1;
 	monster.gems = 0;
@@ -620,7 +620,7 @@ private function talkToHel():void {
 		outputText("\n\nFirst, you ask her how she's settling in.  She smiles at the question, <i>\"It's good to be here, [name].  It's nice to know someone's got my back while I sleep, that I have someone who can take care of me if I get sick or hurt...  But most of all, I'm loving being so close to my best friend.\"</i>  She leans over and plants a little kiss on your cheek.");
 		
 		//(If Rath's at camp):
-		if(player.hasStatusAffect("Camp Rathazul") >= 0) {
+		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 			outputText("\n\n<i>\"Oh!  And check out what the old man helped me set up!\"</i>  Hel adds, quickly hopping down and going to a large metal cask sitting under the hammock.");
 		}
 		else

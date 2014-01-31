@@ -1605,8 +1605,8 @@ private function feedLatexySomeMilk():void {
 	outputText("\n\n\"<i>Delicious!</i>\" she says with a smile, plating a long kiss on your lips.  You return her grin and pull her close, nesting her face into your now-lighter bosom for a few short, restful minutes.");
 	if(player.findPerk(PerkLib.Feeder) >= 0) {
 		//You've now been milked, reset the timer for that
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 	player.boostLactation(.5);
 	gooHappiness(5);

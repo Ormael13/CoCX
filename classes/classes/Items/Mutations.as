@@ -35,14 +35,14 @@
 			else {
 				outputText("The liquid tastes rather bland and goes down easily. ", true);
 				//Special repeat texts
-				if (player.hasStatusAffect("repeatSuccubi") >= 0) outputText("You look forwards to tonight's encounter.", false);
+				if (player.findStatusAffect(StatusAffects.repeatSuccubi) >= 0) outputText("You look forwards to tonight's encounter.", false);
 				//First timer huh?
 				else outputText("You do not notice any real effects.  Did the merchant con you?", false);
 			}
-			if (player.hasStatusAffect("succubiNight") >= 0) {
-				if (player.statusAffectv1("succubiNight") < 3) player.statusAffects[player.hasStatusAffect("succubiNight")].value1++;
+			if (player.findStatusAffect(StatusAffects.succubiNight) >= 0) {
+				if (player.statusAffectv1(StatusAffects.succubiNight) < 3) player.statusAffects[player.findStatusAffect(StatusAffects.succubiNight)].value1++;
 			}
-			else player.createStatusAffect("succubiNight", 1, 0, 0, 0);
+			else player.createStatusAffect(StatusAffects.succubiNight, 1, 0, 0, 0);
 		}
 
 //Vitality Tincture
@@ -632,25 +632,25 @@
 				//v2 - bonus libido
 				//v3 - time remaining!
 				//Has rut, intensify it!
-				if (player.hasStatusAffect("rut") >= 0) {
-					player.addStatusValue("rut", 1, 100);
-					player.addStatusValue("rut", 2, 5);
+				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+					player.addStatusValue(StatusAffects.Rut, 1, 100);
+					player.addStatusValue(StatusAffects.Rut, 2, 5);
 					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-					player.addStatusValue("rut", 3, 48);
+					player.addStatusValue(StatusAffects.Rut, 3, 48);
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				else {
-					player.createStatusAffect("rut", 150, 5, 100, 0);
+					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
 					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 			}
 			//Anti-masturbation status
-			if (rand(4) == 0 && changes < changeLimit && player.hasStatusAffect("dysfunction") < 0) {
+			if (rand(4) == 0 && changes < changeLimit && player.findStatusAffect(StatusAffects.dysfunction) < 0) {
 				if (player.totalCocks() > 0) outputText("\n\nYour " + cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
 				else if (player.hasVagina()) outputText("\n\nYour " + vaginaDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
 				if (player.totalCocks() > 0 || player.hasVagina()) {
-					player.createStatusAffect("dysfunction", 96, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.dysfunction, 96, 0, 0, 0);
 					changes++;
 				}
 			}
@@ -811,20 +811,20 @@
 			if (player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_HORSE && player.tailType == TAIL_TYPE_HORSE && (player.lowerBody != LOWER_BODY_TYPE_HOOFED)) {
 				//WARNINGS
 				//Repeat warnings
-				if (player.hasStatusAffect("horse warning") >= 0 && rand(3) == 0) {
-					if (player.statusAffects[player.hasStatusAffect("horse warning")].value1 == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>", false);
-					if (player.statusAffects[player.hasStatusAffect("horse warning")].value1 > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>", false);
-					player.statusAffects[player.hasStatusAffect("horse warning")].value1++;
+				if (player.findStatusAffect(StatusAffects.horsewarning) >= 0 && rand(3) == 0) {
+					if (player.statusAffects[player.findStatusAffect(StatusAffects.horsewarning)].value1 == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>", false);
+					if (player.statusAffects[player.findStatusAffect(StatusAffects.horsewarning)].value1 > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>", false);
+					player.statusAffects[player.findStatusAffect(StatusAffects.horsewarning)].value1++;
 				}
 				//First warning
-				if (player.hasStatusAffect("horse warning") < 0) {
+				if (player.findStatusAffect(StatusAffects.horsewarning) < 0) {
 					outputText("<b>\n\nWhile you drink the tasty potion, you realize how horse-like you already are, and wonder what else the potion could possibly change...</b>", false);
-					player.createStatusAffect("horse warning", 0, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.horsewarning, 0, 0, 0, 0);
 				}
 				//Bad End
-				if (rand(4) == 0 && player.hasStatusAffect("horse warning") >= 0) {
+				if (rand(4) == 0 && player.findStatusAffect(StatusAffects.horsewarning) >= 0) {
 					//Must have been warned first...
-					if (player.statusAffects[player.hasStatusAffect("horse warning")].value1 > 0) {
+					if (player.statusAffects[player.findStatusAffect(StatusAffects.horsewarning)].value1 > 0) {
 						//If player has dicks check for horsedicks
 						if (player.cockTotal() > 0) {
 							//If player has horsedicks
@@ -1137,20 +1137,20 @@
 						changes++;
 					}
 				}
-				if (player.statusAffectv2("heat") < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0) {
+				if (player.statusAffectv2(StatusAffects.heat) < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0) {
 					//Already in heat, intensify fertility further.
-					if (player.hasStatusAffect("heat") >= 0) {
+					if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-						temp = player.hasStatusAffect("heat");
+						temp = player.findStatusAffect(StatusAffects.heat);
 						player.statusAffects[temp].value1 += 5;
 						player.statusAffects[temp].value2 += 5;
 						player.statusAffects[temp].value3 += 48;
 						dynStats("lib", 5, "resisted", false, "noBimbo", true);
 					}
 					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-					if (player.hasStatusAffect("heat") < 0) {
+					if (player.findStatusAffect(StatusAffects.heat) < 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
-						player.createStatusAffect("heat", 10, 15, 48, 0);
+						player.createStatusAffect(StatusAffects.heat, 10, 15, 48, 0);
 						dynStats("lib", 15, "resisted", false, "noBimbo", true);
 					}
 					changes++;
@@ -1547,7 +1547,7 @@
 				outputText("You eat the pepper, even the two orb-like growths that have grown out from the base.  It's delicious!", false);
 			}
 			//OVERDOSE Bad End!
-			if (type <= 0 && crit > 1 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.hasStatusAffect("dog warning") >= 0) {
+			if (type <= 0 && crit > 1 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.findStatusAffect(StatusAffects.dogwarning) >= 0) {
 				temp = rand(2);
 				if (temp == 0) {
 					outputText("\n\nAs you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ", false);
@@ -1559,12 +1559,12 @@
 				return;
 			}
 			//WARNING, overdose VERY close!
-			if (type <= 0 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.hasStatusAffect("dog warning") >= 0 && rand(3) == 0) {
+			if (type <= 0 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.findStatusAffect(StatusAffects.dogwarning) >= 0 && rand(3) == 0) {
 				outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>", false);
 			}
 			//WARNING, overdose is close!
-			if (type <= 0 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.hasStatusAffect("dog warning") < 0) {
-				player.createStatusAffect("dog warning", 0, 0, 0, 0);
+			if (type <= 0 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.findStatusAffect(StatusAffects.dogwarning) < 0) {
+				player.createStatusAffect(StatusAffects.dogwarning, 0, 0, 0, 0);
 				outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>", false);
 			}
 			if (type == 3) {
@@ -1997,18 +1997,18 @@
 			if (rand(2) == 0 && changes < changeLimit && player.vaginas.length > 0 &&
 					player.pregnancyIncubation == 0) {
 				//Already in heat, intensify fertility further.
-				if (player.hasStatusAffect("heat") >= 0) {
+				if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-					temp = player.hasStatusAffect("heat");
+					temp = player.findStatusAffect(StatusAffects.heat);
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.hasStatusAffect("heat") < 0) {
+				if (player.findStatusAffect(StatusAffects.heat) < 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
-					player.createStatusAffect("heat", 10, 15, 72, 0);
+					player.createStatusAffect(StatusAffects.heat, 10, 15, 72, 0);
 					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				}
 				changes++;
@@ -2606,12 +2606,12 @@
 			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.", true);
 			//If player already has eggs, chance of size increase!
 			if (player.pregnancyType == 5) {
-				if (player.hasStatusAffect("eggs") >= 0) {
+				if (player.findStatusAffect(StatusAffects.eggs) >= 0) {
 					//If eggs are small, chance of increase!
-					if (player.statusAffects[player.hasStatusAffect("eggs")].value2 == 0) {
+					if (player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2 == 0) {
 						//1 in 2 chance!
 						if (rand(3) == 0) {
-							player.statusAffects[player.hasStatusAffect("eggs")].value2++;
+							player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value2++;
 							outputText("\n\nYour pregnant belly suddenly feels heavier and more bloated than before.  You wonder what the elixir just did.", false);
 							changes++;
 						}
@@ -2619,7 +2619,7 @@
 					//Chance of quantity increase!
 					if (rand(2) == 0) {
 						outputText("\n\nA rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.", false);
-						player.statusAffects[player.hasStatusAffect("eggs")].value3 += rand(4) + 1;
+						player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value3 += rand(4) + 1;
 						changes++;
 					}
 				}
@@ -2631,7 +2631,7 @@
 				//v1 = egg type.
 				//v2 = size - 0 for normal, 1 for large
 				//v3 = quantity
-				player.createStatusAffect("eggs", rand(6), 0, (5 + rand(3)), 0);
+				player.createStatusAffect(StatusAffects.eggs, rand(6), 0, (5 + rand(3)), 0);
 				changes++;
 			}
 			//If no changes, speed up pregnancy.
@@ -3121,10 +3121,10 @@
 			outputText("", true);
 			//Text for when the player uses the bottle:
 			//[before the player is addicted, Addiction < 30]
-			if (player.statusAffectv2("Marble") < 30 && player.statusAffectv3("Marble") == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
+			if (player.statusAffectv2(StatusAffects.Marble) < 30 && player.statusAffectv3(StatusAffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
 			//[before the player is addicted, Addiction < 50]
-			else if (player.statusAffectv3("Marble") <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n", false);
-			else if (player.statusAffectv3("Marble") > 0) {
+			else if (player.statusAffectv3(StatusAffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n", false);
+			else if (player.statusAffectv3(StatusAffects.Marble) > 0) {
 				//[player is completely addicted]
 				if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n", false);
 				else {
@@ -3138,8 +3138,8 @@
 			kGAMECLASS.marbleScene.marbleStatusChange(0, 5);
 			//Does not apply the 'Marble's Milk' effect
 			//Purge withdrawl
-			if (player.hasStatusAffect("MarbleWithdrawl") >= 0) {
-				player.removeStatusAffect("MarbleWithdrawl");
+			if (player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+				player.removeStatusAffect(StatusAffects.MarbleWithdrawl);
 				dynStats("tou", 5, "int", 5);
 				outputText("You no longer feel the symptoms of withdrawal.\n\n", false);
 			}
@@ -3148,10 +3148,10 @@
 			//Restores a portion of fatigue (once implemented)
 			kGAMECLASS.changeFatigue(-25);
 			//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
-			if (player.hasStatusAffect("Bottled Milk") >= 0) {
-				player.addStatusValue("Bottled Milk", 1, (6 + rand(6)));
+			if (player.findStatusAffect(StatusAffects.BottledMilk) >= 0) {
+				player.addStatusValue(StatusAffects.BottledMilk, 1, (6 + rand(6)));
 			}
-			else player.createStatusAffect("Bottled Milk", 12, 0, 0, 0);
+			else player.createStatusAffect(StatusAffects.BottledMilk, 12, 0, 0, 0);
 		}
 
 		/*Purified LaBova:
@@ -3396,7 +3396,7 @@
 						}
 						changes++;
 					}
-					if ((player.breastRows[0].lactationMultiplier > 2 && player.hasStatusAffect("Feeder") >= 0) || player.breastRows[0].lactationMultiplier > 5) {
+					if ((player.breastRows[0].lactationMultiplier > 2 && player.findStatusAffect(StatusAffects.Feeder) >= 0) || player.breastRows[0].lactationMultiplier > 5) {
 						if (rand(2) == 0) outputText("\n\nYour breasts suddenly feel less full, it seems you aren't lactating at quite the level you were.", false);
 						else outputText("\n\nThe insides of your breasts suddenly feel bloated.  There is a spray of milk from them, and they settle closer to a more natural level of lactation.", false);
 						changes++;
@@ -3410,9 +3410,9 @@
 			//apply an effect where the player really wants
 			//to give their milk to other creatures
 			//(capable of getting them addicted):
-			if (player.hasStatusAffect("Feeder") < 0 && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
+			if (player.findStatusAffect(StatusAffects.Feeder) < 0 && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
 				outputText("\n\nYou start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.\n\n<b>(You have gained the 'Feeder' perk!)</b>", false);
-				player.createStatusAffect("Feeder", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Feeder, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 				changes++;
 			}
@@ -3424,9 +3424,9 @@
 					outputText("\n\nYou feel a relaxing sensation in your groin.  On further inspection you discover your " + vaginaDescript(0) + " has somehow relaxed, permanently loosening.", false);
 					player.vaginas[0].vaginalLooseness++;
 					//Cunt Stretched used to determine how long since last enlargement
-					if (player.hasStatusAffect("CuntStretched") < 0) player.createStatusAffect("CuntStretched", 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.CuntStretched) < 0) player.createStatusAffect(StatusAffects.CuntStretched, 0, 0, 0, 0);
 					//Reset the timer on it to 0 when restretched.
-					else player.changeStatusValue("CuntStretched", 1, 0);
+					else player.changeStatusValue(StatusAffects.CuntStretched, 1, 0);
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 					dynStats("lus", 10);
@@ -3563,10 +3563,10 @@
 				}
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && changes < changeLimit && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -3600,21 +3600,21 @@
 				dynStats("int", .6);
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 25 && player.hasStatusAffect("Knows Arouse") < 0) {
+			if (player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsArouse) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>", false);
-				player.createStatusAffect("Knows Arouse", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsArouse, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 30 && player.hasStatusAffect("Knows Heal") < 0) {
+			if (player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsHeal) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>", false);
-				player.createStatusAffect("Knows Heal", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsHeal, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 40 && player.hasStatusAffect("Knows Might") < 0) {
+			if (player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsMight) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
-				player.createStatusAffect("Knows Might", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsMight, 0, 0, 0, 0);
 			}
 		}
 
@@ -3638,21 +3638,21 @@
 				dynStats("int", .6);
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 25 && player.hasStatusAffect("Knows Charge") < 0) {
+			if (player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsCharge) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>", false);
-				player.createStatusAffect("Knows Charge", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsCharge, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 30 && player.hasStatusAffect("Knows Blind") < 0) {
+			if (player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsBlind) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>", false);
-				player.createStatusAffect("Knows Blind", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsBlind, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 40 && player.hasStatusAffect("Knows Whitefire") < 0) {
+			if (player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsWhitefire) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
-				player.createStatusAffect("Knows Whitefire", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
 			}
 		}
 
@@ -3672,18 +3672,18 @@
 					//Non preggoz only!
 					if (player.pregnancyIncubation == 0) {
 						//Already in heat, intensify fertility further.
-						if (player.hasStatusAffect("heat") >= 0) {
+						if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 							outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
-							temp = player.hasStatusAffect("heat");
+							temp = player.findStatusAffect(StatusAffects.heat);
 							player.statusAffects[temp].value1 += 10;
 							player.statusAffects[temp].value2 += 10;
 							player.statusAffects[temp].value3 += 96;
 							dynStats("lib", 10, "resisted", false, "noBimbo", true);
 						}
 						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.hasStatusAffect("heat") < 0) {
+						if (player.findStatusAffect(StatusAffects.heat) < 0) {
 							outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
-							player.createStatusAffect("heat", 20, 20, 96, 0);
+							player.createStatusAffect(StatusAffects.heat, 20, 20, 96, 0);
 							dynStats("lib", 20, "resisted", false, "noBimbo", true);
 						}
 					}
@@ -3695,15 +3695,15 @@
 					//v2 - bonus libido
 					//v3 - time remaining!
 					//Has rut, intensify it!
-					if (player.hasStatusAffect("rut") >= 0) {
-						player.addStatusValue("rut", 1, 100);
-						player.addStatusValue("rut", 2, 5);
-						player.addStatusValue("rut", 3, 48);
+					if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+						player.addStatusValue(StatusAffects.Rut, 1, 100);
+						player.addStatusValue(StatusAffects.Rut, 2, 5);
+						player.addStatusValue(StatusAffects.Rut, 3, 48);
 						outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
 						dynStats("lib", 5, "resisted", false, "noBimbo", true);
 					}
 					else {
-						player.createStatusAffect("rut", 150, 5, 100, 0);
+						player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
 						dynStats("lib", 5, "resisted", false, "noBimbo", true);
 						outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
 					}
@@ -3795,9 +3795,9 @@
 				changes++;
 			}
 			//Boost vaginal capacity without gaping
-			if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusAffectv1("Bonus vCapacity") < 40) {
-				if (player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity", 0, 0, 0, 0);
-				player.addStatusValue("Bonus vCapacity", 1, 5);
+			if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 40) {
+				if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
+				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
 				outputText("\n\nThere is a sudden... emptiness within your " + vaginaDescript(0) + ".  Somehow you know you could accommodate even larger... insertions.", false);
 				changes++;
 			}
@@ -3903,10 +3903,10 @@
 				changes++;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && changes < changeLimit && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -4038,8 +4038,8 @@
 			}
 			//3b.Infinite Vagina
 			if (player.vaginalCapacity() < 9000) {
-				if (player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity", 9000, 0, 0, 0);
-				else player.addStatusValue("Bonus vCapacity", 1, 9000);
+				if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity, 9000, 0, 0, 0);
+				else player.addStatusValue(StatusAffects.BonusVCapacity, 1, 9000);
 				outputText("\n\nYour " + vaginaDescript(0) + "'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>", false);
 				return;
 			}
@@ -4050,13 +4050,13 @@
 			}
 			//Big slime girl
 			else {
-				if (player.hasStatusAffect("Slime Craving") < 0) {
+				if (player.findStatusAffect(StatusAffects.SlimeCraving) < 0) {
 					outputText("\n\nYou feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>", false);
-					player.createStatusAffect("Slime Craving", 0, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.SlimeCraving, 0, 0, 0, 0);
 				}
 				else {
 					outputText("\n\nYou feel full for a moment, but you know it's just a temporary respite from your constant need to be 'injected' with fluid.", false);
-					player.changeStatusValue("Slime Craving", 1, 0);
+					player.changeStatusValue(StatusAffects.SlimeCraving, 1, 0);
 				}
 			}
 			if (rand(2) == 0) outputText(player.modFem(85, 3), false);
@@ -4458,8 +4458,8 @@
 			}
 			else player.breastRows[0].breastRating = 0;
 			player.gills = false;
-			player.removeStatusAffect("Uniball");
-			player.removeStatusAffect("Black Nipples");
+			player.removeStatusAffect(StatusAffects.Uniball);
+			player.removeStatusAffect(StatusAffects.BlackNipples);
 			player.vaginaType(0);
 		}
 
@@ -4474,18 +4474,18 @@
 				//Non preggoz only!
 				if (player.pregnancyIncubation == 0) {
 					//Already in heat, intensify fertility further.
-					if (player.hasStatusAffect("heat") >= 0) {
+					if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
-						temp = player.hasStatusAffect("heat");
+						temp = player.findStatusAffect(StatusAffects.heat);
 						player.statusAffects[temp].value1 += 10;
 						player.statusAffects[temp].value2 += 10;
 						player.statusAffects[temp].value3 += 96;
 						dynStats("lib", 10, "resisted", false, "noBimbo", true);
 					}
 					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-					if (player.hasStatusAffect("heat") < 0) {
+					if (player.findStatusAffect(StatusAffects.heat) < 0) {
 						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
-						player.createStatusAffect("heat", 20, 20, 96, 0);
+						player.createStatusAffect(StatusAffects.heat, 20, 20, 96, 0);
 						dynStats("lib", 20, "resisted", false, "noBimbo", true);
 					}
 					changes++;
@@ -4498,15 +4498,15 @@
 				//v2 - bonus libido
 				//v3 - time remaining!
 				//Has rut, intensify it!
-				if (player.hasStatusAffect("rut") >= 0) {
-					player.addStatusValue("rut", 1, 100);
-					player.addStatusValue("rut", 2, 5);
-					player.addStatusValue("rut", 3, 48);
+				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+					player.addStatusValue(StatusAffects.Rut, 1, 100);
+					player.addStatusValue(StatusAffects.Rut, 2, 5);
+					player.addStatusValue(StatusAffects.Rut, 3, 48);
 					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				else {
-					player.createStatusAffect("rut", 150, 5, 100, 0);
+					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
 					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
@@ -4514,9 +4514,9 @@
 			}
 			else {
 				//Boost vaginal capacity without gaping
-				if (player.statusAffectv1("Bonus aCapacity") < 80) {
-					if (player.hasStatusAffect("Bonus aCapacity") < 0) player.createStatusAffect("Bonus aCapacity", 0, 0, 0, 0);
-					player.addStatusValue("Bonus aCapacity", 1, 5);
+				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 80) {
+					if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
 					outputText("\n\nYou feel... more accomodating somehow.  Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
 					changes++;
 				}
@@ -4622,14 +4622,14 @@
 			//Heat
 			if (player.pregnancyIncubation == 0 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
 				//Not 'heat'ed yet.
-				if (player.hasStatusAffect("heat") < 0) {
+				if (player.findStatusAffect(StatusAffects.heat) < 0) {
 					outputText("\n\nThe interior of your " + vaginaDescript(0) + " clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ", false);
 					if (player.skinType == SKIN_TYPE_FUR) outputText("underneath your fur ", false);
 					outputText("as images and fantasies ", false);
 					if (player.cor < 50) outputText("assault ", false);
 					else outputText("fill ", false);
 					outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
-					player.createStatusAffect("heat", 10, 15, 48, 0);
+					player.createStatusAffect(StatusAffects.heat, 10, 15, 48, 0);
 					dynStats("lib", 15, "lus", 15, "resisted", false, "noBimbo", true);
 
 				}
@@ -4637,7 +4637,7 @@
 				else {
 					if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
 					else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
-					temp = player.hasStatusAffect("heat");
+					temp = player.findStatusAffect(StatusAffects.heat);
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
@@ -4970,11 +4970,11 @@
 			}
 			//--Worms leave if 100% lizard dicks?
 			//Require mammals?
-			if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusAffect("infested") >= 0) {
+			if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.findStatusAffect(StatusAffects.infested) >= 0) {
 				outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.", false);
 				if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.", false);
 				outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.", false);
-				player.removeStatusAffect("infested");
+				player.removeStatusAffect(StatusAffects.infested);
 				changes++;
 			}
 			//-Breasts vanish to 0 rating if male
@@ -5004,10 +5004,10 @@
 				outputText(" nipples relax.  It's a strange feeling, and you pull back your top to touch one.  It feels fine, though there doesn't seem to be any milk leaking out.  You give it a squeeze and marvel when nothing ", false);
 				if (player.hasFuckableNipples()) outputText("but sexual fluid ", false);
 				outputText("escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.", false);
-				if (player.findPerk(PerkLib.Feeder) >= 0 || player.hasStatusAffect("Feeder") >= 0) {
+				if (player.findPerk(PerkLib.Feeder) >= 0 || player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 					outputText("\n\n(<b>Feeder perk lost!</b>)", false);
 					player.removePerk(PerkLib.Feeder);
-					player.removeStatusAffect("Feeder");
+					player.removeStatusAffect(StatusAffects.Feeder);
 				}
 				changes++;
 				//Loop through and reset lactation
@@ -5861,10 +5861,10 @@
 				changes++;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && changes < changeLimit && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -6295,9 +6295,9 @@
 				}
 			}
 			//Nipples Turn Black:
-			if (player.hasStatusAffect("Black Nipples") < 0 && rand(6) == 0 && changes < changeLimit) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) < 0 && rand(6) == 0 && changes < changeLimit) {
 				outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-				player.createStatusAffect("Black Nipples", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.BlackNipples, 0, 0, 0, 0);
 				changes++;
 			}
 			//eyes!
@@ -6394,13 +6394,13 @@
 		public function applyLustStick(player:Player):void
 		{
 			outputText("", true);
-			if (player.hasStatusAffect("Lust Stick Applied") >= 0) {
-				player.addStatusValue("Lust Stick Applied", 1, 12 + rand(12));
+			if (player.findStatusAffect(StatusAffects.Lust_Stick_Applied) >= 0) {
+				player.addStatusValue(StatusAffects.Lust_Stick_Applied, 1, 12 + rand(12));
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ", false);
 				outputText("You finish and pucker your lips, feeling fairly sexy with your new, thicker makeup on.\n\n", false);
 			}
 			else {
-				player.createStatusAffect("Lust Stick Applied", 24, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Lust_Stick_Applied, 24, 0, 0, 0);
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over your lips.  ", false);
 				if (player.hasCock()) outputText("It tingles a little, but the drugs have little to no effect on you now.", false);
 				else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.", false);
@@ -6494,7 +6494,7 @@
 				player.breastRows[0].fuckable = false;
 				if (player.nippleLength > .5) player.nippleLength = .25;
 				player.breastRows[0].lactationMultiplier = 0;
-				player.removeStatusAffect("Feeder");
+				player.removeStatusAffect(StatusAffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 				outputText("All too soon, your boobs are gone.  Whoa!\n\n", false);
 			}
@@ -6770,7 +6770,7 @@
 				player.lust -= 20 + rand(40);
 			}
 			if (rand(5) == 0) {
-				if (player.hasStatusAffect("dysfunction") < 0) {
+				if (player.findStatusAffect(StatusAffects.dysfunction) < 0) {
 					outputText("\n\nUnfortunately, the skin of ", false);
 					if (player.cockTotal() > 0) {
 						outputText(sMultiCockDesc(), false);
@@ -6783,11 +6783,11 @@
 					}
 					if (!(player.hasCock() || player.hasVagina())) outputText(assholeDescript() + " ", false);
 					outputText(" numbs up too.  You give yourself a gentle touch, but are quite disturbed when you realize you can barely feel it.  You can probably still fuck something to get off, but regular masturbation is out of the question...", false);
-					player.createStatusAffect("dysfunction", 50 + rand(100), 0, 0, 0);
+					player.createStatusAffect(StatusAffects.dysfunction, 50 + rand(100), 0, 0, 0);
 				}
 				else {
 					outputText("\n\nSadly your groin becomes even more deadened to sensation.  You wonder how much longer you'll have to wait until you can please yourself again.", false);
-					player.addStatusValue("dysfunction", 1, 50 + rand(100));
+					player.addStatusValue(StatusAffects.dysfunction, 1, 50 + rand(100));
 				}
 			}
 			else if (rand(4) == 0 && player.inte > 15) {
@@ -6812,17 +6812,17 @@
 			outputText("", true);
 			outputText("You pop the cork on this small vial and drink down the clear liquid.  It makes your lips and tongue tingle strangely, letting you feel each globule of spit in your mouth and each breath of air as it slides past your lips.", false);
 
-			if (player.hasStatusAffect("dysfunction") >= 0) {
+			if (player.findStatusAffect(StatusAffects.dysfunction) >= 0) {
 				outputText("\n\nThankfully, the draft invigorates your groin, replacing the numbness with waves of raw sensation.  It seems your crotch is back to normal and <b>you can masturbate again!</b>", false);
-				player.removeStatusAffect("dysfunction");
+				player.removeStatusAffect(StatusAffects.dysfunction);
 			}
-			if (rand(4) == 0 && player.hasStatusAffect("LustyTongue") < 0) {
+			if (rand(4) == 0 && player.findStatusAffect(StatusAffects.LustyTongue) < 0) {
 				outputText("The constant tingling in your mouth grows and grows, particularly around your lips, until they feel as sensitive as ", false);
 				if (player.hasVagina()) outputText("your", false);
 				else outputText("a woman's", false);
 				outputText(" lower lips.  You'll have to be careful not to lick them!", false);
 				//(Lustytongue status)
-				player.createStatusAffect("LustyTongue", 25, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.LustyTongue, 25, 0, 0, 0);
 			}
 			outputText("\n\nAfter the wave of sensation passes, your " + player.skinDesc + " feels a little more receptive to touch.  ", false);
 			if (player.lust > 70 || player.lib > 70) {
@@ -7065,20 +7065,20 @@
 				}
 			}
 			//HEAT!
-			if (player.statusAffectv2("heat") < 30 && rand(6) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
+			if (player.statusAffectv2(StatusAffects.heat) < 30 && rand(6) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
 				//Already in heat, intensify fertility further.
-				if (player.hasStatusAffect("heat") >= 0) {
+				if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-					temp = player.hasStatusAffect("heat");
+					temp = player.findStatusAffect(StatusAffects.heat);
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.hasStatusAffect("heat") < 0) {
+				if (player.findStatusAffect(StatusAffects.heat) < 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
-					player.createStatusAffect("heat", 10, 15, 48, 0);
+					player.createStatusAffect(StatusAffects.heat, 10, 15, 48, 0);
 					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				}
 				changes++;
@@ -7157,10 +7157,10 @@
 				player.tone -= 4;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && changes < changeLimit && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -7218,9 +7218,9 @@
 			//Boosts the special effect of Dragonbreath by 20% for 1 use. ie: if Tainted's breath weapon has a 80% chance to stun on hit, +20% equals 100% chance to stun.
 			outputText("You crack the shell easily and swallow the large yolk and the copious amounts of albumen - the yolk is blue, while the rest is crimson-tinted.  It tastes like... well, it tastes mostly of spiced mint, you think.");
 			if (player.findPerk(PerkLib.Dragonfire) >= 0) {
-				if (player.hasStatusAffect("Dragon Breath Cooldown") >= 0) player.removeStatusAffect("Dragon Breath Cooldown");
+				if (player.findStatusAffect(StatusAffects.Dragon_Breath_Cooldown) >= 0) player.removeStatusAffect(StatusAffects.Dragon_Breath_Cooldown);
 				else {
-					if (player.hasStatusAffect("Dragon Breath Boost") < 0) player.createStatusAffect("Dragon Breath Boost", 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.Dragon_Breath_Boost) < 0) player.createStatusAffect(StatusAffects.Dragon_Breath_Boost, 0, 0, 0, 0);
 				}
 				//(if PC has breath weapon)
 				outputText("\n\nA sudden surge of energy fills your being and you feel like you could blast anything to atoms with a single breath, like the mighty dragons of legends.");
@@ -7336,20 +7336,20 @@
 				changes++;
 			}
 			//[Increase Vaginal Capacity] - requires vagina, of course
-			if (player.hasVagina() && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.statusAffectv1("Bonus vCapacity") < 200 && changes < changeLimit) {
+			if (player.hasVagina() && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.statusAffectv1(StatusAffects.BonusVCapacity) < 200 && changes < changeLimit) {
 				outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your " + vaginaDescript(0) + " is a bit deeper than it was before.");
-				if (player.hasStatusAffect("Bonus vCapacity") < 0) {
-					player.createStatusAffect("Bonus vCapacity", 0, 0, 0, 0);
+				if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) {
+					player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
 				}
-				player.addStatusValue("Bonus vCapacity", 1, 5 + rand(10));
+				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5 + rand(10));
 				changes++;
 			}
 			//[Vag of Holding] - rare effect, only if PC has high vaginal looseness
-			else if (player.hasVagina() && ((mystic) || (!mystic && rand(5) == 0)) && player.statusAffectv1("Bonus vCapacity") >= 200 && player.statusAffectv1("Bonus vCapacity") < 8000 && changes < changeLimit) {
+			else if (player.hasVagina() && ((mystic) || (!mystic && rand(5) == 0)) && player.statusAffectv1(StatusAffects.BonusVCapacity) >= 200 && player.statusAffectv1(StatusAffects.BonusVCapacity) < 8000 && changes < changeLimit) {
 				outputText("\n\nYou clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
 				if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
 				else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
-				player.changeStatusValue("Bonus vCapacity", 1, 8000);
+				player.changeStatusValue(StatusAffects.BonusVCapacity, 1, 8000);
 				changes++;
 			}
 
@@ -7477,10 +7477,10 @@
 				//9999 - pending tats system
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && changes < changeLimit && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -7508,7 +7508,7 @@
 			//Inventory Description:
 			//Sell Value: 1 gem (gives incentive to risk opening it)
 			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?");
-			//player.createStatusAffect("Gotta Open Gift",0,0,0,0);
+			//player.createStatusAffect(StatusAffects.Gotta_Open_Gift,0,0,0,0);
 			kitsuneGiftResult(false);
 
 		}
@@ -7709,7 +7709,7 @@
 			//Increase HP by quite a bit!)
 			//(Slight chance at increasing Toughness?)
 			//(If lake has been tainted, +1 Corruption?)
-			if (player.hasStatusAffect("FactoryOverload") >= 0) dynStats("cor", 0.5);
+			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) dynStats("cor", 0.5);
 			dynStats("cor", 0.1);
 			HPChange(Math.round(player.maxHP() * .25), false);
 		}
@@ -7834,7 +7834,7 @@
 				changes++;
 			}
 			//Testicle Reduction:
-			if (player.balls > 0 && player.hasCock() && (player.ballSize > 1 || player.hasStatusAffect("Uniball") < 0) && rand(4) == 0 && changes < changeLimit) {
+			if (player.balls > 0 && player.hasCock() && (player.ballSize > 1 || player.findStatusAffect(StatusAffects.Uniball) < 0) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYou feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.");
 				player.ballSize--;
 				if (player.ballSize > 8) player.ballSize--;
@@ -7843,11 +7843,11 @@
 				if (player.ballSize > 15) player.ballSize--;
 				if (player.ballSize > 20) player.ballSize--;
 				//Testicle Reduction final:
-				if (player.ballSize < 1 && player.hasStatusAffect("Uniball") < 0) {
+				if (player.ballSize < 1 && player.findStatusAffect(StatusAffects.Uniball) < 0) {
 					outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your " + multiCockDescriptLight() + ", but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
 					//[Note: Balls description should no longer say “swings heavily beneath”.  For simplicity's sake sex scenes should continue to assume two balls]
 					player.ballSize = 1;
-					player.createStatusAffect("Uniball", 0, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.Uniball, 0, 0, 0, 0);
 				}
 				else if (player.ballSize < 1) player.ballSize = 1;
 				changes++;
@@ -7938,9 +7938,9 @@
 				}
 			}
 			//Nipples Turn Black:
-			if (player.hasStatusAffect("Black Nipples") < 0 && rand(6) == 0 && changes < changeLimit) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) < 0 && rand(6) == 0 && changes < changeLimit) {
 				outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-				player.createStatusAffect("Black Nipples", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.BlackNipples, 0, 0, 0, 0);
 				changes++;
 			}
 			//Remove odd eyes
@@ -8250,20 +8250,20 @@
 				//adds some lust
 				dynStats("lus", 10 + player.sens / 5);
 				if (player.vaginalCapacity() < 100 && player.hasVagina()) {
-					if (player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity", 0, 0, 0, 0);
-					player.addStatusValue("Bonus vCapacity", 1, 5);
+					if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
 				}
 				else {
-					if (player.hasStatusAffect("Bonus aCapacity") < 0) player.createStatusAffect("Bonus aCapacity", 0, 0, 0, 0);
-					player.addStatusValue("Bonus aCapacity", 1, 5);
+					if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
 				}
 				changes++;
 			}
 			//fem fertility up and heat (suppress if pregnant)
 			//not already in heat (add heat and lust)
-			if (player.statusAffectv2("heat") < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
+			if (player.statusAffectv2(StatusAffects.heat) < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
 				//Already in heat, intensify fertility further.
-				if (player.hasStatusAffect("heat") >= 0) {
+				if (player.findStatusAffect(StatusAffects.heat) >= 0) {
 					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
 					//[(no mino cum in inventory)]
 					if (!player.hasItem(consumables.MINOCUM)) {
@@ -8278,16 +8278,16 @@
 						player.knockUp(2, 432, 175);
 						player.consumeItem(consumables.MINOCUM);
 					}
-					temp = player.hasStatusAffect("heat");
+					temp = player.findStatusAffect(StatusAffects.heat);
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
 					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.hasStatusAffect("heat") < 0) {
+				if (player.findStatusAffect(StatusAffects.heat) < 0) {
 					outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
-					player.createStatusAffect("heat", 10, 15, 48, 0);
+					player.createStatusAffect(StatusAffects.heat, 10, 15, 48, 0);
 					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 					player.fertility++;
 				}
@@ -8422,9 +8422,9 @@
 				}
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect("Black Nipples") >= 0 && rand(3) == 0) {
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				player.removeStatusAffect("Black Nipples");
+				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
 			//remove fur
 			if ((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && rand(3) == 0) {

@@ -13,7 +13,7 @@
 // TIMES_VAPULA_AND_GIANT_VALA:int = 768;
 
 public function impGangAI():void {
-	if(monster.hasStatusAffect("ImpUber") >= 0) impGangUber();
+	if(monster.findStatusAffect(StatusAffects.ImpUber) >= 0) impGangUber();
 	else if(monster.lust > 50 && rand(2) == 0) impGangBukkake();
 	else {
 		var choice:Number = rand(4);
@@ -31,7 +31,7 @@ public function impGangAI():void {
 //IMP GANG [ATTACKS!]  
 public function imtacularMultiHitzilla():void {
 	//Multiattack:
-	if(monster.hasStatusAffect("Blind") < 0) outputText("The imps come at you in a wave, tearing at you with claws!\n", false);
+	if(monster.findStatusAffect(StatusAffects.Blind) < 0) outputText("The imps come at you in a wave, tearing at you with claws!\n", false);
 	//(ALT BLINDED TEXT)
 	else outputText("In spite of their blindness, most of them manage to find you, aided by the clutching claws of their brothers.\n", false);
 	//(2-6 hits for 10 damage each)
@@ -43,7 +43,7 @@ public function imtacularMultiHitzilla():void {
 		//Clear damage from last loop
 		damage = 0;
 		//Blind dodge change
-		if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+		if(monster.findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 			outputText(monster.capitalA + monster.short + " completely misses you with a blind attack!\n", false);
 		}
 		//Determine if dodged!
@@ -96,7 +96,7 @@ public function impGangBukkake():void {
 		//Clear damage from last loop
 		damage = 0;
 		//Blind dodge change
-		if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+		if(monster.findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 			outputText(monster.capitalA + monster.short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n", false);
 		}
 		//Determine if dodged!
@@ -150,9 +150,9 @@ public function impGangBukkake():void {
 
 //Mass Arousal
 public function impGangUber():void {
-	if(monster.hasStatusAffect("ImpUber") < 0) {
+	if(monster.findStatusAffect(StatusAffects.ImpUber) < 0) {
 		outputText("Three imps on the far side of the room close their eyes and begin murmuring words of darkness and power.  Your eyes widen, recognizing the spell.  Anything but that!  They're building up a massive arousal spell!  They keep muttering and gesturing, and you realize you've got one round to stop them!\n", false);
-		monster.createStatusAffect("ImpUber",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.ImpUber,0,0,0,0);
 	}
 	else {
 		//(OH SHIT IT GOES OFF) 
@@ -173,7 +173,7 @@ public function impGangUber():void {
 		}
 		if(player.gender == 0) outputText("rub the sensitive skin of your thighs and featureless groin in a way that makes you wish you had a sex of some sort", false);
 		outputText(".\n", false);
-		monster.removeStatusAffect("ImpUber");
+		monster.removeStatusAffect(StatusAffects.ImpUber);
 	}
 }
 		
@@ -389,7 +389,7 @@ public function getTrappedContinuation():void {
 
 public function encapsulationPodAI():void {
 	//[Round 1 Action]
-	if(monster.hasStatusAffect("Round") < 0) {
+	if(monster.findStatusAffect(StatusAffects.Round) < 0) {
 		outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ", false);
 		if(player.balls > 0) {
 			outputText(ballsDescriptLight() + " ", false);
@@ -405,7 +405,7 @@ public function encapsulationPodAI():void {
 		}
 	}
 	//[Round 2 Action]
-	else if(monster.statusAffectv1("Round") == 2) {
+	else if(monster.statusAffectv1(StatusAffects.Round) == 2) {
 		outputText("The tentacles under your " + player.armorName + " squirm against you, seeking out openings to penetrate and genitalia to caress.  ", false);
 		if(player.balls > 0) outputText("One of them wraps itself around the top of your " + sackDescript() + " while its tip slithers over your " + ballsDescriptLight() + ".  Another ", false);
 		else outputText("One ", false);
@@ -449,7 +449,7 @@ public function encapsulationPodAI():void {
 		}
 	}
 	//[Round 3 Action]
-	else if(monster.statusAffectv1("Round") == 3) {
+	else if(monster.statusAffectv1(StatusAffects.Round) == 3) {
 		outputText("The wet, warm pressure of the fungus' protrusion working their way up your body feels better than it has any right to be.  It's like a combination of a warm bath and a gentle massage, and when combined with the thought-numbing scent in the air, it's nigh-impossible to resist relaxing a little.  In seconds the mass of tentacles is underneath your " + player.armorName + " and rubbing over your chest and " + nippleDescript(0) + "s.  You swoon from the sensation and lean back against the wall while they stroke and caress you, teasing your sensitive " + nippleDescript(0) + ".", false);
 		if(player.hasFuckableNipples()) outputText("  Proof of your arousal leaks from each " + nippleDescript(0) + " as their entrances part for the probing tentacles.  They happily dive inside to begin fucking your breasts, doubling your pleasure.", false);
 		outputText("  Moans escape your mouth as your hips begin to rock in time with the tentacles and the pulsing luminance of your fungus-pod.  It would be easy to lose yourself here.  You groan loudly enough to startle yourself back to attention.  You've got to get out!\n\n", false);
@@ -500,10 +500,10 @@ public function encapsulationPodAI():void {
 		return;
 	}
 	//Set flags for rounds
-	if(monster.hasStatusAffect("Round") < 0) {
-		monster.createStatusAffect("Round",2,0,0,0);
+	if(monster.findStatusAffect(StatusAffects.Round) < 0) {
+		monster.createStatusAffect(StatusAffects.Round,2,0,0,0);
 	}
-	else monster.addStatusValue("Round",1,1);
+	else monster.addStatusValue(StatusAffects.Round,1,1);
 	combatRoundOver();
 }
 
@@ -1622,22 +1622,22 @@ public function faerieOrgyFuckFemaleContinue():void {
 
 //ZETAZ START
 public function zetazTaunt():void {
-	if(monster.hasStatusAffect("round") < 0) {
-		monster.createStatusAffect("round",1,0,0,0);
+	if(monster.findStatusAffect(StatusAffects.round) < 0) {
+		monster.createStatusAffect(StatusAffects.round,1,0,0,0);
 		outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ", false);
 		if(player.humanScore() >= 4) outputText("human", false);
 		else outputText("'human'", false);
 		outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"", false);
 	}
 	else {
-		monster.addStatusValue("round",1,1);
-		if(monster.statusAffectv1("round") == 2) outputText("\"<i>I lost my post!  And when you screwed up the factory?  I barely escaped with my life!  You ruined EVERYTHING!</i>\" screams Zetaz.", false);
-		else if(monster.statusAffectv1("round") == 3) outputText("Zetaz snarls, \"<i>Do you know how hard it is to hide from Lethice?  DO YOU HAVE ANY IDEA!?  I've had to live in this fetid excuse for a jungle, and just when I found some friends and made it livable, you show up and DESTROY EVERYTHING!</i>\"", false);
-		else if(monster.statusAffectv1("round") == 4) outputText("Zetaz explains, \"<i>I won't let you go.  I'm going to break you.</i>\"", false);
-		else if(monster.statusAffectv1("round") == 5) outputText("\"<i>Would it have been that bad to go along with me?  You've seen the factory.  We would've kept you fed, warm, and provided you with limitless pleasure.  You would've tasted heaven and served a greater purpose.  It's not too late.  If you come willingly I can make sure they find a good machine to milk you with,</i>\" offers the imp lord.", false);
-		else if(monster.statusAffectv1("round") == 6) outputText("\"<i>Why won't you fall?</i>\" questions Zetaz incredulously.", false);
-		else if(monster.statusAffectv1("round") == 7) outputText("The imp lord suggests, \"<i>If you give up and let me fuck your ass maybe I'll let you go.</i>\"", false);
-		else if(monster.statusAffectv1("round") == 8) outputText("Zetaz pants, \"<i>Just give up!  I'm nothing like the weakling you met so long ago!  I've been through hell to get here and I'm not giving it up just because you've shown up to destroy my hard work!</i>\"", false);
+		monster.addStatusValue(StatusAffects.round,1,1);
+		if(monster.statusAffectv1(StatusAffects.round) == 2) outputText("\"<i>I lost my post!  And when you screwed up the factory?  I barely escaped with my life!  You ruined EVERYTHING!</i>\" screams Zetaz.", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 3) outputText("Zetaz snarls, \"<i>Do you know how hard it is to hide from Lethice?  DO YOU HAVE ANY IDEA!?  I've had to live in this fetid excuse for a jungle, and just when I found some friends and made it livable, you show up and DESTROY EVERYTHING!</i>\"", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 4) outputText("Zetaz explains, \"<i>I won't let you go.  I'm going to break you.</i>\"", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 5) outputText("\"<i>Would it have been that bad to go along with me?  You've seen the factory.  We would've kept you fed, warm, and provided you with limitless pleasure.  You would've tasted heaven and served a greater purpose.  It's not too late.  If you come willingly I can make sure they find a good machine to milk you with,</i>\" offers the imp lord.", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 6) outputText("\"<i>Why won't you fall?</i>\" questions Zetaz incredulously.", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 7) outputText("The imp lord suggests, \"<i>If you give up and let me fuck your ass maybe I'll let you go.</i>\"", false);
+		else if(monster.statusAffectv1(StatusAffects.round) == 8) outputText("Zetaz pants, \"<i>Just give up!  I'm nothing like the weakling you met so long ago!  I've been through hell to get here and I'm not giving it up just because you've shown up to destroy my hard work!</i>\"", false);
 		else outputText("He glares at you silently.", false);
 	}
 }
@@ -1650,36 +1650,36 @@ public function zetazAI():void {
 	//If afflicted by blind or whispered and over 50% lust,
 	//burns lust and clears statuses before continuing with 
 	//turn.
-	if(monster.lust > 50 && (monster.hasStatusAffect("Fear") >= 0 || monster.hasStatusAffect("Blind") >= 0)) {
-		monster.removeStatusAffect("Fear");
-		monster.removeStatusAffect("Blind");
+	if(monster.lust > 50 && (monster.findStatusAffect(StatusAffects.Fear) >= 0 || monster.findStatusAffect(StatusAffects.Blind) >= 0)) {
+		monster.removeStatusAffect(StatusAffects.Fear);
+		monster.removeStatusAffect(StatusAffects.Blind);
 		monster.lust -= 10;
 		outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!", false);
 	}
 	
 	//STANDARD COMBAT STATUS AFFECTS HERE
-	if(monster.hasStatusAffect("Stunned") >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Stunned) >= 0) {
 		if(monster.plural) outputText("Your foes are too dazed from your last hit to strike back!", false);
 		else outputText("Your foe is too dazed from your last hit to strike back!", false);
-		monster.removeStatusAffect("Stunned");
+		monster.removeStatusAffect(StatusAffects.Stunned);
 		combatRoundOver();
 		return;
 	}
 	var select:Number=1;
 	var rando:Number=1;
 	//Exgartuan gets to do stuff!
-	if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
+	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
 		exgartuan.exgartuanCombatUpdate();
 		outputText("\n\n", false);
 	}
-	if(monster.hasStatusAffect("Constricted") >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Constricted) >= 0) {
 		//Enemy struggles - 
 		outputText("Your prey pushes at your tail, twisting and writing in an effort to escape from your tail's tight bonds.", false);
-		if(monster.statusAffectv1("Constricted") <= 0) {
+		if(monster.statusAffectv1(StatusAffects.Constricted) <= 0) {
 			outputText("  " + monster.capitalA + monster.short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
-			monster.removeStatusAffect("Constricted");
+			monster.removeStatusAffect(StatusAffects.Constricted);
 		}
-		monster.addStatusValue("Constricted",1,-1);
+		monster.addStatusValue(StatusAffects.Constricted,1,-1);
 		combatRoundOver();
 		return;
 	}
@@ -1706,7 +1706,7 @@ public function zetazAI():void {
 			else {
 				outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skinDesc + " and leaves a pleasant, residual tingle in its wake.  Oh no...", false);
 				//[Applies: "Temporary Heat" status]
-				if(player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
 			}
 		}
 		else if(attackChoice == 1) {
@@ -1723,7 +1723,7 @@ public function zetazAI():void {
 				
 			}
 			outputText(" while the dust gets into your eyes, temporarily blinding you!", false);
-			player.createStatusAffect("Blind",1,0,0,0);
+			player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
 		}
 		//Gigarouse – A stronger version of normal imp's 
 		//'arouse' spell. - copy normal arouse text and 
@@ -1954,7 +1954,7 @@ public function femaleZetazOver():void {
 	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("drools a heavy flow of liquid arousal onto the hardwood table", false);
 	else outputText("begins to dribble a steady flow of liquid on to the table's girl-slicked boards", false);
 	outputText(".  ", false);
-	if(player.hasStatusAffect("heat") >= 0) outputText("D", false);
+	if(player.findStatusAffect(StatusAffects.heat) >= 0) outputText("D", false);
 	else outputText("Foreign d", false);
 	outputText("esires wash through your doped up body, and your hungry slit practically demands to be filled with cock and injected with semen.  It wants to be filled with... with males, and with their hot, sticky cum. No, your hot little pussy doesn't want that – you do.  Gods above and below, you want to feel your belly pumped full of imp sperm until their offspring are wriggling in your womb.  And then you want them to come in you some more!\n\n", false);
 	

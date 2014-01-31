@@ -99,7 +99,7 @@ public function agreeToHelpHeliaDungeon():void {
 	outputText("\n\nResigned to your fate, you curl up with Helia; who throws her cloak over the two of you.");
 	
 	//[If Marble is in camp:]
-	if(player.hasStatusAffect("Camp Marble") >= 0 && silly()) {
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && silly()) {
 		outputText("\n\nJust as you and Hel start to get intimate, you hear a familiar clopping of hooves. You poke your head out of the blanket, rather alarmed to see Marble standing over you.");
 		outputText("\n\n\"<i>S-Sweetie?</i>\" Marble says, aghast at Hel's presence in your arms.  \"<i>What... just what do you think you're doing!?</i>\"");
 		outputText("\n\nThis could be ba--");
@@ -182,7 +182,7 @@ public function takeGooArmor4Realz():void {
 
 public function gooArmorAI():void {
 	spriteSelect(79);
-	if(rand(2) == 0 && player.hasStatusAffect("GooArmorSilence") < 0) gooSilenceAttack();
+	if(rand(2) == 0 && player.findStatusAffect(StatusAffects.GooArmorSilence) < 0) gooSilenceAttack();
 	else if(rand(3) > 0) gooArmorAttackPhysical();
 	else gooArmorAttackTwoGooConsume();
 }
@@ -213,7 +213,7 @@ public function gooArmorAttackPhysical():void {
 //ATTACK TWO: Goo Consume
 public function gooArmorAttackTwoGooConsume():void {
 	outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you.  You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest.  More and more goo latches onto you - you'll have to fight to get out of this.");
-	player.createStatusAffect("GooArmorBind",0,0,0,0);
+	player.createStatusAffect(StatusAffects.GooArmorBind,0,0,0,0);
 	combatRoundOver();
 }
 //(Struggle)
@@ -223,9 +223,9 @@ public function struggleAtGooBind():void {
 	if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
 		outputText("You try and get out of the goo's grasp, but every bit of goop you pull off you seems to be replaced by twice as much!");
 		//(If fail 5 times, go to defeat scene)
-		player.addStatusValue("GooArmorBind",1,1);
-		if(player.statusAffectv1("GooArmorBind") >= 5) {
-			if(monster.hasStatusAffect("spar") >= 0) valeria.pcWinsValeriaSparDefeat();
+		player.addStatusValue(StatusAffects.GooArmorBind,1,1);
+		if(player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
+			if(monster.findStatusAffect(StatusAffects.spar) >= 0) valeria.pcWinsValeriaSparDefeat();
 			else gooArmorBeatsUpPC();
 			return;
 		}
@@ -233,7 +233,7 @@ public function struggleAtGooBind():void {
 	//If succeed: 
 	else {
 		outputText("You finally pull the goop off of you and dive out of her reach before the goo-girl can re-attach herself to you.  Pouting, she refills her suit of armor and reassumes her fighting stance.");
-		player.removeStatusAffect("GooArmorBind");
+		player.removeStatusAffect(StatusAffects.GooArmorBind);
 	}
 	combatRoundOver();
 }
@@ -241,7 +241,7 @@ public function struggleAtGooBind():void {
 public function gooSilenceAttack():void {
 	outputText("The goo pulls a hand off her greatsword and shoots her left wrist out towards you.  You recoil as a bit of goop slaps onto your mouth, preventing you from speaking - looks like you're silenced until you can pull it off!");
 	//(No spells until PC passes a moderate STR check or burns it away)
-	player.createStatusAffect("GooArmorSilence",0,0,0,0);
+	player.createStatusAffect(StatusAffects.GooArmorSilence,0,0,0,0);
 	combatRoundOver();
 }
 
@@ -382,7 +382,7 @@ public function takeGooArmorAndWearIt():void {
 public function harpyHordeClawFlurry():void {
 	outputText("The harpies lunge at you, a veritable storm of talons and claws raining down around you.  You stumble back, trying desperately to deflect some of the attacks, but there are simply too many to block them all!  Only a single harpy in the brood seems to be holding back...\n");
 	//(Effect: Multiple light attacks)
-	monster.createStatusAffect("attacks",3+rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.attacks,3+rand(3),0,0,0);
 	monster.eAttack();
 	combatRoundOver();
 }
@@ -390,7 +390,7 @@ public function harpyHordeClawFlurry():void {
 //ATTACK TWO: Gangbang
 public function harpyHordeGangBangAttack():void {
 	outputText("Suddenly, a pair of harpies grabs you from behind, holding your arms to keep you from fighting back! Taking advantage of your open state, the other harpies leap at you, hammering your chest with punches and kicks - only one hangs back from the gang assault.\n\n");
-	player.createStatusAffect("HarpyBind",0,0,0,0);
+	player.createStatusAffect(StatusAffects.HarpyBind,0,0,0,0);
 	//(PC must struggle:
 	harpyHordeGangBangStruggle(false);
 }
@@ -406,7 +406,7 @@ public function harpyHordeGangBangStruggle(clearDisp:Boolean = true):void {
 	}
 	//Success: 
 	else {
-		player.removeStatusAffect("HarpyBind");
+		player.removeStatusAffect(StatusAffects.HarpyBind);
 		outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 	}
 	combatRoundOver();
@@ -652,7 +652,7 @@ public function phoenixPlatoonRush():void {
 	outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
 	//(Effect: Multiple medium-damage attacks)
 	//(Effect: Multiple light attacks)
-	monster.createStatusAffect("attacks",2+rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.attacks,2+rand(3),0,0,0);
 	monster.eAttack();
 	combatRoundOver();
 }
@@ -675,17 +675,17 @@ public function phoenixPlatoonLustbang():void {
 }
 
 public function phoenixPlatoonAI():void {
-	if(monster.hasStatusAffect("platoon") < 0) {
+	if(monster.findStatusAffect(StatusAffects.platoon) < 0) {
 		phoenixPlatoonRush();
-		monster.createStatusAffect("platoon",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.platoon,0,0,0,0);
 	}
-	else if(monster.statusAffectv1("platoon") == 0) {
+	else if(monster.statusAffectv1(StatusAffects.platoon) == 0) {
 		phoenixPlatoonFireBreath();
-		monster.addStatusValue("platoon",1,1);
+		monster.addStatusValue(StatusAffects.platoon,1,1);
 	}
 	else {
 		phoenixPlatoonLustbang()
-		monster.removeStatusAffect("platoon");
+		monster.removeStatusAffect(StatusAffects.platoon);
 	}
 }
 
@@ -873,7 +873,7 @@ public function phoenixAginal():void {
 	//v1 = egg type.
 	//v2 = size - 0 for normal, 1 for large
 	//v3 = quantity
-	player.createStatusAffect("eggs",rand(6),0,(5+rand(3)),0);
+	player.createStatusAffect(StatusAffects.eggs,rand(6),0,(5+rand(3)),0);
 	//(Return to Mezzanine main menu)
 	dynStats("lus=", 0);
 	doNext(1);
@@ -891,7 +891,7 @@ public function eldritchRopes():void {
 	var damage:int = 25 + rand(10);
 	damage = takeDamage(damage);
 	outputText(" (" + damage + ")");
-	monster.createStatusAffect("QueenBind",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.QueenBind,0,0,0,0);
 	combatRoundOver();
 }
 
@@ -906,7 +906,7 @@ public function ropeStruggles(wait:Boolean = false):void {
 	}
 	else {
 		outputText("With supreme effort, you pull free of the magic ropes, causing the queen to tumble to her hands and knees.");
-		monster.removeStatusAffect("QueenBind");
+		monster.removeStatusAffect(StatusAffects.QueenBind);
 	}
 	combatRoundOver();
 }

@@ -1,13 +1,13 @@
 ﻿//Encounter with the Plant Woman (Intro 1, requires having seen corrupted glade) 
 public function encounterPlantWoman():void {
 	if(rand(2) == 0) {
-		monster.createStatusAffect("happy",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.happy,0,0,0,0);
 	}
 	else if(rand(2) == 0) {
-		monster.createStatusAffect("horny",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.horny,0,0,0,0);
 	}
 	else {
-		monster.createStatusAffect("grouchy",0,0,0,0);
+		monster.createStatusAffect(StatusAffects.grouchy,0,0,0,0);
 	}
 	clearOutput();
 	if(flags[kFLAGS.TIMES_MET_PLANTGIRL] == 0) {
@@ -24,7 +24,7 @@ public function encounterPlantWoman():void {
 		//Subsequent encounters (intro 2)
 		outputText("As you search the deep woods for anything (or anyone) of interest, you find yourself near where you encountered the plant woman last.  Cautiously, you survey the immediate area for any signs of mutant growth... or any hostile plant creatures.  The snap of a twig to your left grabs your attention, and you spin around to see the plant woman from before emerging from the woods.");
 		//(Plant woman is amused/happy to see you: 
-		if(monster.hasStatusAffect("happy") >= 0) outputText("\n\nApparently happy to see you, the feminine plant creature slowly walks toward you, assessing your demeanor and intentions.  Her candor as she approaches suggests that perhaps you two could partake in a little debauchery.  She stops a few feet away from you and awaits your response.");
+		if(monster.hasStatusAffect(StatusAffects.happy) >= 0) outputText("\n\nApparently happy to see you, the feminine plant creature slowly walks toward you, assessing your demeanor and intentions.  Her candor as she approaches suggests that perhaps you two could partake in a little debauchery.  She stops a few feet away from you and awaits your response.");
 		//(Plant woman is horny and more assert: 
 		else outputText("\n\nInstead of being welcomed with a smile and a cheerful demeanor, the plant creature saunters assertively towards you, intent on getting some sexing from you one way or another. She might not listen to reason if you reject her...");
 		//[Tied sex, leads to tied menu] 
@@ -99,7 +99,7 @@ public function plantWomanStruggle():void {
 		//Struggle success Meeting the Plant Woman(or 1.2.1m)
 		outputText("\n\nThat is when you see her... or whatever 'she' is.  In the first few seconds you have to gaze on her, you see that she is not like everything else that has tried to have sex with you; no animal parts to speak of, no signs of demonic taint aside from the red, jewel like eyes that meet your own.  Her average body has B-cup breasts, well rounded thighs, a nice full rump and appears to be very plant-like in appearance. From what you can tell, her skin looks like a mix between tree bark, leaves and the stems of the plants surrounding your village back home.  She stares at you...");
 		//[if amused] 
-		if(monster.hasStatusAffect("happy") >= 0) outputText(" with her hands on her hips, and sports a devilish smile on her face. By the way she is looking at you, she hasn't seen a potential mate in some time.  After the realization sets in that you have encountered a plant woman, you stare at the creature and await a response. The floral vixen responds by giggling and flinging her leaf like hair back, and turns her head in a way that shows only her left side.  She stares down at her body, and takes her time to raise her gaze from her torso to your eyes.  She seems to be trying to entice you to come and 'play.");
+		if(monster.hasStatusAffect(StatusAffects.happy) >= 0) outputText(" with her hands on her hips, and sports a devilish smile on her face. By the way she is looking at you, she hasn't seen a potential mate in some time.  After the realization sets in that you have encountered a plant woman, you stare at the creature and await a response. The floral vixen responds by giggling and flinging her leaf like hair back, and turns her head in a way that shows only her left side.  She stares down at her body, and takes her time to raise her gaze from her torso to your eyes.  She seems to be trying to entice you to come and 'play.");
 		//[If annoyed and horny]
 		else outputText(" with the back of her wrists at her side. She clearly doesn't look too happy that you struggled out of her trap.  She rises out of the bush with a pouty look on her face and stares daggers at you.  You aren't certain why she's angry at first and chalk it up to being based in territorial instinct.  However, looking up at her sex, you can tell that her vagina is soaking in her juices, which glisten in the sun.");
 		outputText("\n\nIt's quite obvious at this point that she was expecting to have a little intimacy with you.  Looking at her body, you can tell that her skin is very floral-like; while smooth, it resembles a mixture of tree bark, leaves and the stems of plants you've seen at home and around Mareth. Her leaf-like hair sways gently in the mild breeze that flows through this area of the deep woods. For something that looks as weak as a frail plant, she's pretty intimidating from this angle.");
@@ -160,9 +160,9 @@ public function declinePlantSmex():void {
 	outputText("As she returns to teasing you again with a pseudo-kiss, you pull back and shake your head.  The rejection apparent in your facial features, the plant woman stops and stares at you with glassy eyes.  You signal (as best as you can while constricted) that you aren't into this and that you need to leave. Her eyes become watery as she turns away, quietly sobbing as her vines loosen up a bit.");
 	//(depending on mood, scene will progress to Decline 1.1 or 1.2)
 	//(Decline 1.1; considerate: 
-	if(monster.hasStatusAffect("happy") >= 0) {
+	if(monster.hasStatusAffect(StatusAffects.happy) >= 0) {
 		outputText("\n\nHer vines relax further and uncoil around you, slumping to the ground as she withdraws into the bush.  The display from the creature tugs at you a bit, but you shake it off and decide to return to camp before she changes her mind.");
-		monster.removeStatusAffect("happy");
+		monster.removeStatusAffect(StatusAffects.happy);
 		doNext(13);
 		return;
 	}

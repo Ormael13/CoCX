@@ -63,17 +63,17 @@
 				if (color == "red") {
 					//Temporary heat
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if (player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat", 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, 0, 0, 0);
 				}
 				else if (color == "green") {
 					//Green poison
 					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-					if (player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison", 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, 0, 0, 0);
 				}
 				else if (color == "white") {
 					//sticky flee prevention
 					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-					if (player.hasStatusAffect("NoFlee") < 0) player.createStatusAffect("NoFlee", 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.NoFlee) < 0) player.createStatusAffect(StatusAffects.NoFlee, 0, 0, 0, 0);
 				}
 				else if (color == "black") {
 					//Increase fatigue

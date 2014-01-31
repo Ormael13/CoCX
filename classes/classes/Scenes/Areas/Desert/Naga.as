@@ -20,7 +20,7 @@
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
 			outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
-			if(player.hasStatusAffect("Naga Venom") < 0) {
+			if(player.findStatusAffect(StatusAffects.NagaVenom) < 0) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
 				if(player.spe > 4) {
 					//stats(0,0,-3,0,0,0,0,0);
@@ -28,10 +28,10 @@
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
-					player.createStatusAffect("Naga Venom",3,0,0,0);		
+					player.createStatusAffect(StatusAffects.NagaVenom,3,0,0,0);
 				}
 				else {
-					player.createStatusAffect("Naga Venom",0,0,0,0);		
+					player.createStatusAffect(StatusAffects.NagaVenom,0,0,0,0);
 					player.takeDamage(5+rand(5));
 				}
 				player.takeDamage(5+rand(5));
@@ -44,7 +44,7 @@
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
-					player.addStatusValue("Naga Venom",1,2);		
+					player.addStatusValue(StatusAffects.NagaVenom,1,2);
 				}
 				else player.takeDamage(5+rand(5));
 				player.takeDamage(5+rand(5));
@@ -56,7 +56,7 @@
 		//every turn until you break free
 		protected function nagaConstrict():void {
 			outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
-			player.createStatusAffect("Naga Bind",0,0,0,0); 
+			player.createStatusAffect(StatusAffects.NagaBind,0,0,0,0); 
 			player.takeDamage(2+rand(4));
 			combatRoundOver();  
 		}

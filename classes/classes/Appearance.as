@@ -263,7 +263,7 @@
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.hasStatusAffect("Black Nipples") >= 0) {
+			if (!haveDescription && i_creature.findStatusAffect(StatusAffects.BlackNipples) >= 0) {
 				options = ["black ",
 					"ebony ",
 					"sable "];
@@ -953,7 +953,7 @@
 			//Discuss girth one in 2 times if not already talked about length.
 			else if (int(Math.random() * 2 == 0) && !descripted) {
 				//narrow, thin, ample, broad, distended, voluminous
-				if (i_creature.cocks[i_cockIndex].cockThickness <= .75) description = "narrow "
+				if (i_creature.cocks[i_cockIndex].cockThickness <= .75) description = "narrow ";
 				if (i_creature.cocks[i_cockIndex].cockThickness > 1 && i_creature.cocks[i_cockIndex].cockThickness <= 1.4) description = "ample ";
 				if (i_creature.cocks[i_cockIndex].cockThickness > 1.4 && i_creature.cocks[i_cockIndex].cockThickness <= 2) description = "broad ";
 				if (i_creature.cocks[i_cockIndex].cockThickness > 2 && i_creature.cocks[i_cockIndex].cockThickness <= 3.5) description = "fat ";
@@ -1148,7 +1148,7 @@
 			var description:String = "";
 			var options:Array;
 
-			if (i_plural && (i_creature.hasStatusAffect("Uniball") < 0)) {
+			if (i_plural && (i_creature.findStatusAffect(StatusAffects.Uniball) < 0)) {
 				if (i_creature.balls == 1) {
 					if (i_withArticle) {
 						options = ["a single",
@@ -1230,7 +1230,7 @@
 
 			}
 			//UNIBALL
-			if (i_creature.hasStatusAffect("Uniball") >= 0) {
+			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0) {
 				if (description) description += " ";
 				options = ["tightly-compressed",
 					"snug",
@@ -1289,7 +1289,7 @@
 			description += randomChoice(options);
 			if (i_plural) description += "s";
 
-			if (i_creature.hasStatusAffect("Uniball") >= 0 && rand(2) == 0) {
+			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0 && rand(2) == 0) {
 				if (rand(3) == 0)
 					description += " merged into a cute, spherical package";
 				else if (rand(2) == 0)

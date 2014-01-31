@@ -52,9 +52,9 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1000) {
 		itemSwapping = false;
 		hideUpDown();
-		if(player.hasStatusAffect("Gotta Open Gift") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Gotta_Open_Gift) >= 0) {
 			clearOutput();
-			player.removeStatusAffect("Gotta Open Gift");
+			player.removeStatusAffect(StatusAffects.Gotta_Open_Gift);
 			kGAMECLASS.mutations.kitsuneGiftResult();
 			return;
 		}
@@ -95,7 +95,7 @@ public function doItems(eventNo:Number):void {
 			doNext(1);
 			return;
 		}
-		if(inCombat() && player.hasStatusAffect("Sealed") >= 0 && player.statusAffectv1("Sealed") == 3) {
+		if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv1(StatusAffects.Sealed) == 3) {
 			outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
 			kGAMECLASS.enemyAI();
 			return;
@@ -111,35 +111,35 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.AUBURND);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	else if(eventNo == 1018) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	else if(eventNo == 1019) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	else if(eventNo == 1020) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.BROWN_D);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	else if(eventNo == 1021) {
 		spriteSelect(49);
 		outputText("", true);
 		inventory.takeItem(consumables.RED_DYE);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	else if(eventNo == 1023) {
 		placeInStorage(1);
@@ -292,7 +292,7 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.WHITEDY);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	/*EGG COLOR SHIFTING HAPPENS HERE
 	EGG TYPES-
@@ -425,7 +425,7 @@ public function doItems(eventNo:Number):void {
 			else player.gems -= 100;
 			inventory.takeItem(consumables.REDUCTO);
 			statScreenRefresh();
-			player.addStatusValue("metRathazul",2,1);
+			player.addStatusValue(StatusAffects.metRathazul,2,1);
 		}
 		else {
 			outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.", false);
@@ -572,7 +572,7 @@ public function doItems(eventNo:Number):void {
 		outputText("", true);
 		inventory.takeItem(consumables.GRAYDYE);
 		statScreenRefresh();
-		player.addStatusValue("metRathazul",2,1);
+		player.addStatusValue(StatusAffects.metRathazul,2,1);
 	}
 	/* WEAPON RACK STORAGE */
 	else if(eventNo == 1085) {
@@ -1422,7 +1422,7 @@ public function doItems(eventNo:Number):void {
 		 5 - rubbery black*/
 		private function eggShifter(eggCode:Number):void
 		{
-			if (player.hasStatusAffect("eggs") >= 0) player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
+			if (player.findStatusAffect(StatusAffects.eggs) >= 0) player.statusAffects[player.findStatusAffect(StatusAffects.eggs)].value1 = eggCode;
 		}
 		private function slimeBadEnd():void {
 			outputText("One year later...", true);
