@@ -642,6 +642,7 @@ import classes.PerkType;
 		{
 			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
 			statusAffects.push(newStatusAffect);
+			//trace("createStatusAffect -> "+statusAffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
@@ -649,11 +650,7 @@ import classes.PerkType;
 		public function removeStatusAffect(stype:StatusAffectType):void
 		{
 			var counter:Number = findStatusAffect(stype);
-			//Various Errors preventing action
-			if (statusAffects.length < 0)
-			{
-				return;
-			}
+			if (counter < 0) return;
 			statusAffects.splice(counter, 1);
 		}
 		
@@ -673,10 +670,7 @@ import classes.PerkType;
 		{
 			var counter:Number = findStatusAffect(stype);
 			//Various Errors preventing action
-			if (counter < 0)
-			{
-				return;
-			}
+			if (counter < 0)return;
 			if (statusValueNum < 1 || statusValueNum > 4)
 			{
 				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");

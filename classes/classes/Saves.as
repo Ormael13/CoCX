@@ -1404,9 +1404,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
+			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
 			var stype:StatusAffectType = StatusAffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
 			if (stype == null){
-				CoC_Settings.error("Cannot find status affect "+saveFile.data.statusAffects[i].statusAffectName);
+				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
 			player.createStatusAffect(stype,

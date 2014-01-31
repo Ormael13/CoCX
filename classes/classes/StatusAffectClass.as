@@ -22,5 +22,10 @@
 		{
 			return _stype;
 		}
+
+		public function toString():String
+		{
+			return "["+_stype+","+value1+","+value2+","+value3+","+value4+"]";
+		}
 	}
 }
