@@ -39,6 +39,7 @@ import classes.Appearance;
 					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + player.armorName + ", but you can certainly feel the vagina splitting from behind your testicles.  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
 					if (player.hipRating < 12 || player.buttRating < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
 					player.createVagina();
+					player.vaginas[0].clitLength = 0.5;
 					if (player.hipRating < 12) player.hipRating = 12;
 					if (player.buttRating < 12) player.buttRating = 12;
 				}
@@ -80,6 +81,7 @@ import classes.Appearance;
 				outputText("Moaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  ");
 				if (!player.hasVagina()) {
 					player.createVagina();
+					player.vaginas[0].clitLength = 0.5;
 					player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
 					if (player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");
