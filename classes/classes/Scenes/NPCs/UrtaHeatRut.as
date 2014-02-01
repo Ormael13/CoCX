@@ -26,10 +26,13 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText("  You ignore them all, concentrating on Urta.");
 
 	outputText("\n\nAs you approach, ");
-	if(urtaLove()) outputText(" she opens her arms to embrace you, and smiles\n ");
+	
+	if(urtaLove()) outputText(" she opens her arms to embrace you, and smiles.");
 	else outputText(" she smiles when she sees you, but then, gives the air a sniff and immediately seems to gain more color to the skin under the fur.  \"<i>Uh, I, I see.</i>\"  You sit down next to her, but even though she isn't even suggesting anything yet, you already find it hard to control yourself.");
+	
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("  Urta is right next to you, and she has already proven herself a good lay");
 	else outputText("  You keep reminding yourself what Urta is packing between her legs and how much precious semen it can give, and can't help but want to try that now");
+	
 	outputText(".  Not to mention, with or without the monster between her legs, her body is sexy as hell.");
 
 	outputText("\n\n\"<i>Well, you do help me with my own releases, so I suppose that's fair....");
