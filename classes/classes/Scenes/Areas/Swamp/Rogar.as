@@ -500,7 +500,14 @@ private function rogarFuckMenu():void {
 		getTied = kinkyWithDaOrc;
 		rubdub = rubdubWithDaOrcWithoutDucky;
 	}
-	simpleChoices("GetAnal",getAnal,"GiveAnal",giveAnal,"Frot",frot,"BroDrink",brodown,"GetTiedAnal",getTied,"OrcRubDown",rubdub,"No Thanks",noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice);
+	menu();
+	addButton(0, "GetAnal", getAnal);
+	addButton(1, "GiveAnal", giveAnal);
+	addButton(2, "Frot", frot);
+	addButton(3, "BroDrink", brodown);
+	addButton(4, "GetTiedAnal", getTied);
+	addButton(5, "OrcRubDown", rubdub);
+	addButton(6, "No Thanks", noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice);
 }
 
 //[No Thanks]
