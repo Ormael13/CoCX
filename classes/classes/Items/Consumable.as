@@ -31,7 +31,7 @@ import classes.Player;
 		override public function useItem(player:Player, output:Boolean, external:Boolean):void
 		{
 			if (canUse(player,output)){
-				if (!external) player.consumeItem(this,1);
+				if (!external && !game.debug) player.consumeItem(this,1);
 				doEffect(player,output);
 			}
 		}
