@@ -2079,11 +2079,17 @@ public function scyllaAndUrtaSittingInATree():void {
 	outputText("", true);
 	//Increment 'times caught with Scylla'
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143]++;
+	
+	
 	if(!urtaDrunk()) {
 		urtaAndScyllaBoningLikeBitchesSober();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0) {
+	
+	menu();
+	
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0) 
+	{
 		outputText("You meander towards the back-rooms and a canine waitress springs forward with a key clutched in her paw.  She blushes furiously and explains that she was tipped generously to hand it to you if you arrived.  You accept the proffered tool and smile.  It must be cheaper to pay someone to wait with a key than to fix the door each time the three of you meet up!  You snicker to yourself as you plunge the key into the lock's waiting receptacle, turn it, and push your way inside.  The scene in front of you is as arousing as it is familiar.\n\n", false);
 		
 		outputText("Urta is sitting down on a crate with her legs splayed and her torso leaning drunkenly in your direction.  Her tongue is hanging out and her eyes are lidded from alcohol as she notices you and gives another high-pitched whine, not of pain, but pleasure.  The source of her 'distress' is a black-robed figure with curly black locks of hair that hang around her head like a halo and thick, glossy red lips.  Those same lips are currently wrapped firmly around Urta's twitching, lust-swollen horse-cock just above her sheath.  You can clearly see the slight bulge of Urta's medial ring highlighted through the corrupted nun's neck as she bobs up and down, so absorbed in feeding her addiction that she failed to notice your entrance.\n\n", false);
@@ -2092,10 +2098,25 @@ public function scyllaAndUrtaSittingInATree():void {
 	
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  You close the door behind you carefully and drop the key on a crate.  It's time for some fun.\n\n", false);
 		
-		outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.  Bonding with the use of Scylla's lipples is also an option.)", false);
-		simpleChoices("Lap",makeUrtaSitOnYourLapWithScylla,"Jerk",watchTwoHotBitchesAndJerkIt,"LippleBond",lippleBondUrtaScylla,"Heartbreak",0,"",0);
+		// Butans
+		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		{
+			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
+			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");
+		}
+		else
+		{
+			outputText("(You could jerk off and watch.");
+		}
+		
+		addButton(1, "Jerk", watchTwoHotBitchesAndJerkIt);
+		addButton(2, "LippleBond", lippleBondUrtaScylla);
+		
+		outputText("  Bonding with the use of Scylla's lipples is also an option.)");
+	
 	}
-	else {
+	else 
+	{
 		outputText("You meander by the Wet Bitch's back rooms, trying not to look like a creeper as you listen for ", false);
 		if(!urtaLove()) outputText("Urta", false);
 		else outputText("your love", false);
@@ -2120,11 +2141,27 @@ public function scyllaAndUrtaSittingInATree():void {
 		
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  Thankfully the doorway is at such an angle that the bulk of the bar can't see inside, and it helps that no one seems inclined to bother the three of you for now.  What do you do?\n\n", false);
 		
-		outputText("(You could make Urta sit on YOUR lap for a change.  You could jerk off and watch.  You could throw them the finger and leave.  Scylla also has two pairs of lips unoccupied - playing with them could lead to something interesting.  You could tell Urta you never want to see her again.", false);
-		outputText(")", false);
-		
-		simpleChoices("Lap",makeUrtaSitOnYourLapWithScylla,"Jerk",watchTwoHotBitchesAndJerkIt,"LippleBond",lippleBondUrtaScylla,"Heartbreak",heartBreakHotelInTelAdre,"Leave",flipUrtaTheBird);
+		// Butans
+		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		{
+			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
+			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");
+		}
+		else
+		{
+			outputText("(You could jerk off and watch.");
+		}
+
+		addButton(1, "Jerk", watchTwoHotBitchesAndJerkIt);
+		addButton(2, "LippleBond", lippleBondUrtaScylla);
+
+		outputText("  You could throw them the finger and leave.  Scylla also has two pairs of lips unoccupied - playing with them could lead to something interesting.  You could tell Urta you never want to see her again.)");
+	
+		addButton(3, "Heartbreak", heartBreakHotelInTelAdre);
+		addButton(4, "Leave", flipUrtaTheBird);
 	}
+	
+
 }
 
 
@@ -2366,18 +2403,12 @@ private function watchTwoHotBitchesAndJerkIt():void {
 //[Lap Sittings!] - no taurs! (need size check also, to avoid implied analpocalypse -Z)
 private function makeUrtaSitOnYourLapWithScylla():void {
 	urtaSprite();
-	outputText("", true);
-	if(player.cockThatFits(urtaCapacity()) == -1) {
-		outputText("<b>Urta's pretty flexible but there's no way you'd get something that big inside her backdoor.</b>", false);
-		return;
-	}
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
-		outputText("<b>There's no way for her to sit in a centaur's lap!</b>", false);
-		return;
-	}
+
 	var x:Number = player.cockThatFits(urtaCapacity());
 	var y:Number = player.cockThatFits2(urtaCapacity());
+	
 	outputText("", true);
+	
 	outputText(images.showImage("urta-scylla-lapfuck"), false);
 	outputText("You smirk at the drunken fox and inform her in no uncertain words that you'll do more than watch.  She blinks at you, her inebriated mind unable to process new thoughts as you stalk forwards and sit behind her on the crate", false);
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText(", snaking your tail around her legs", false);

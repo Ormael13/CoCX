@@ -103,7 +103,9 @@ public function customPCSetup():void {
 		player.createPerk(PerkLib.Tank2,				0, 0, 0, 0);
 		player.createPerk(PerkLib.ThunderousStrikes,	0, 0, 0, 0);
 		player.createPerk(PerkLib.WeaponMastery,		0, 0, 0, 0);
-		player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);		
+		player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);
+		
+		player.createStatusAffect(StatusAffects.Heat, 10, 15, 96, 0);
 		
 		player.gems += 3000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
