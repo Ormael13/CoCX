@@ -10,6 +10,16 @@ public function customPCSetup():void {
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
+		
+		for (var i:int = 0; i < 2; i++)
+		{
+			player.createCock();
+			player.cocks[0].cockLength = 8;
+			player.cocks[0].cockThickness = 2;
+			player.cocks[0].cockType = CockTypesEnum.DOG;
+			player.cocks[0].knotMultiplier = 1.5;
+		}
+		
 		player.clitLength = 0.5;
 		player.fertility = 50;
 		player.gender = 2;
@@ -21,7 +31,7 @@ public function customPCSetup():void {
 		player.inte = 100;
 		player.sens = 100;
 		player.lib = 100;
-		player.cor = 67;
+		player.cor = 50;
 		notes = "Cheater!";
 		player.HP = maxHP();
 		player.hairLength = 10;

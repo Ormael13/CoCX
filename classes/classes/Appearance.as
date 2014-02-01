@@ -1904,28 +1904,40 @@
 		public static function assholeDescript(i_creature:Creature):String
 		{
 			var description:String = "";
-			//66% wetness description
-			if (rand(3) <= 1) {
-				description += {
-					ANAL_WETNESS_DRY: "",
-					ANAL_WETNESS_NORMAL: "",
-					ANAL_WETNESS_MOIST: "moist ",
-					ANAL_WETNESS_SLIMY: "slimy ",
-					ANAL_WETNESS_DROOLING: "drooling ",
-					ANAL_WETNESS_SLIME_DROOLING: "slime-drooling "
-				}[i_creature.ass.analWetness] || "";
+			
+			// The way this was setup didn't work. Trying to inline-define object key-values wasn't looking up the variable *VALUES* it was using the string representation
+			// of the variable name as the key.
+			// ie, querying ANAL_WETNESS_DESCRIPTORS[0] would actually return "undefined" rather than "".
+			// This is just fucking awful but I'm just making things work in the face of bugs I'm running into.
+			
+			// 66% Wetness Descript
+			var ANAL_WETNESS_DESCRIPTORS:Object = new Object(); 
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_DRY] = "";
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_NORMAL] = "";
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_MOIST] = "moist ";
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_SLIMY] = "slimy ";
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_DROOLING] = "drooling ";
+			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_SLIME_DROOLING] = "slime-drooling ";
+			
+			if (rand(3) <= 1)
+			{
+				description += ANAL_WETNESS_DESCRIPTORS[i_creature.ass.analWetness];
 			}
+			
+			var ANAL_TIGHTNESS_DESCRIPTORS:Object = new Object();
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_VIRGIN] = "virgin ";
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_TIGHT] = "tight ";
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_NORMAL] = "loose ";
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_LOOSE] = "roomy ";
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_STRETCHED] = "stretched ";
+			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_GAPING] = "gaping ";
+			
 			//25% tightness description
-			if (rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
-				description += {
-					ANAL_LOOSENESS_VIRGIN: "virgin ",
-					ANAL_LOOSENESS_TIGHT: "tight ",
-					ANAL_LOOSENESS_NORMAL: "loose ",
-					ANAL_LOOSENESS_LOOSE: "roomy ",
-					ANAL_LOOSENESS_STRETCHED: "stretched ",
-					ANAL_LOOSENESS_GAPING: "gaping "
-				}[i_creature.ass.analLooseness] || "";
+			if (rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) 
+			{
+				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
+			
 			//asshole descriptor
 			description += randomChoice("ass",
 					"anus",
