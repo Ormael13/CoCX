@@ -389,7 +389,7 @@
 				trace(this.short+".init2Female with "+this.vaginas.length+" vaginas");
 			}
 			if (bonusVCapacity >0){
-				this.createStatusAffect("Bonus vCapacity",bonusVCapacity,0,0,0);
+				this.createStatusAffect(StatusAffects.BonusVCapacity,bonusVCapacity,0,0,0);
 			}
 			genderCheck();
 			skipInit(2);
@@ -433,7 +433,7 @@
 		protected function init04Ass(looseness:Number = 0, wetness:Number = 0, bonusACapacity:Number = 0):void{
 			this.ass.analLooseness = looseness;
 			this.ass.analWetness = wetness;
-			if (bonusACapacity>0) this.createStatusAffect("Bonus aCapacity",bonusACapacity,0,0,0);
+			if (bonusACapacity>0) this.createStatusAffect(StatusAffects.BonusACapacity,bonusACapacity,0,0,0);
 			skipInit(4);
 		}
 
@@ -549,6 +549,12 @@
 			this.drop = new WeightedDrop(fixedDrop,1);
 		}
 
+		protected function init14NoDrop():void
+		{
+			skipInit(14);
+			this.drop = new WeightedDrop();
+		}
+
 		/**
 		 * Initializes droplist as a weighted droplist. Call .add(item,weight) of the
 		 * returned value to add them to list.
@@ -647,7 +653,7 @@
 		{
 			var attack:Boolean = true;
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0) {
 				attack &&= handleBlind();
 			}
 			attack &&= !playerDodged();
@@ -655,7 +661,7 @@
 		}
 
 		public function eAttack():void {
-			var attacks:int = statusAffectv1("attacks");
+			var attacks:int = statusAffectv1(StatusAffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
 				if (attackSucceeded()){
@@ -665,12 +671,12 @@
 					game.statScreenRefresh();
 					outputText("\n", false);
 				}
-				if (statusAffectv1("attacks") >= 0) {
-					addStatusValue("attacks", 1, -1);
+				if (statusAffectv1(StatusAffects.Attacks) >= 0) {
+					addStatusValue(StatusAffects.Attacks, 1, -1);
 				}
 				attacks--;
 			}
-			removeStatusAffect("attacks");
+			removeStatusAffect(StatusAffects.Attacks);
 			if (!game.combatRoundOver()) game.doNext(1);
 		}
 
@@ -777,17 +783,17 @@
 
 		public function doAI():void
 		{
-			if (hasStatusAffect("Stunned") >= 0) {
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
 				if (!handleStun()) return;
 			}
-			if (hasStatusAffect("Fear") >= 0) {
+			if (findStatusAffect(StatusAffects.Fear) >= 0) {
 				if (!handleFear()) return;
 			}
 			//Exgartuan gets to do stuff!
-			if (game.player.hasStatusAffect("Exgartuan") >= 0 && game.player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
+			if (game.player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && game.player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
 			}
-			if (hasStatusAffect("Constricted") >= 0) {
+			if (findStatusAffect(StatusAffects.Constricted) >= 0) {
 				if (!handleConstricted()) return;
 			}
 			//If grappling... TODO implement grappling
@@ -819,11 +825,11 @@
 		{
 			//Enemy struggles -
 			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
-			if (statusAffectv1("Constricted") <= 0) {
+			if (statusAffectv1(StatusAffects.Constricted) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
-				removeStatusAffect("Constricted");
+				removeStatusAffect(StatusAffects.Constricted);
 			}
-			addStatusValue("Constricted", 1, -1);
+			addStatusValue(StatusAffects.Constricted, 1, -1);
 			game.combatRoundOver();
 			return false;
 		}
@@ -833,18 +839,18 @@
 		 */
 		protected function handleFear():Boolean
 		{
-			if (statusAffectv1("Fear") == 0) {
+			if (statusAffectv1(StatusAffects.Fear) == 0) {
 				if (plural) {
-					removeStatusAffect("Fear");
+					removeStatusAffect(StatusAffects.Fear);
 					game.outputText("Your foes shake free of their fear and ready themselves for battle.", false);
 				}
 				else {
-					removeStatusAffect("Fear");
+					removeStatusAffect(StatusAffects.Fear);
 					game.outputText("Your foe shakes free of its fear and readies itself for battle.", false);
 				}
 			}
 			else {
-				addStatusValue("Fear", 1, -1);
+				addStatusValue(StatusAffects.Fear, 1, -1);
 				if (plural) game.outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
 				else game.outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
 			}
@@ -859,8 +865,8 @@
 		{
 			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!", false);
 			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
-			if (statusAffectv1("Stunned") <= 0) removeStatusAffect("Stunned");
-			else addStatusValue("Stunned", 1, -1);
+			if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
+			else addStatusValue(StatusAffects.Stunned, 1, -1);
 			game.combatRoundOver();
 			return false;
 		}
@@ -924,13 +930,13 @@
 			outputDefaultTeaseReaction(lustDelta);
 			if(lustDelta > 0) {
 				//Imp mob uber interrupt!
-			  	if(hasStatusAffect("ImpUber") >= 0) { // TODO move to proper class
+			  	if(findStatusAffect(StatusAffects.ImpUber) >= 0) { // TODO move to proper class
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;
 					lust -= 15;
-					removeStatusAffect("ImpUber");
-					createStatusAffect("ImpSkip",0,0,0,0);
+					removeStatusAffect(StatusAffects.ImpUber);
+					createStatusAffect(StatusAffects.ImpSkip,0,0,0,0);
 				}
 			}
 			applyTease(lustDelta);
@@ -1032,8 +1038,8 @@
 				result += ", "+Appearance.describeByScale(vagina.vaginalWetness,Appearance.DEFAULT_VAGINA_WETNESS_SCALES,"drier than","wetter than");
 				if (vagina.labiaPierced) result += ". Labia are pierced with "+vagina.labiaPLong;
 				if (vagina.clitPierced) result += ". Clit is pierced with "+vagina.clitPLong;
-				if (statusAffectv1("Bonus vCapacity")>0){
-					result+="; vaginal capacity is increased by "+statusAffectv1("Bonus vCapacity");
+				if (statusAffectv1(StatusAffects.BonusVCapacity)>0){
+					result+="; vaginal capacity is increased by "+statusAffectv1(StatusAffects.BonusVCapacity);
 				}
 				result+=".\n";
 			}
@@ -1048,8 +1054,8 @@
 				}
 			}
 			result += Pronoun3+" ass is "+Appearance.describeByScale(ass.analLooseness,Appearance.DEFAULT_ANAL_LOOSENESS_SCALES,"tighter than","looser than")+", "+Appearance.describeByScale(ass.analWetness,Appearance.DEFAULT_ANAL_WETNESS_SCALES,"drier than","wetter than");
-			if (statusAffectv1("Bonus aCapacity")>0){
-				result += "; anal capacity is increased by "+statusAffectv1("Bonus aCapacity");
+			if (statusAffectv1(StatusAffects.BonusACapacity)>0){
+				result += "; anal capacity is increased by "+statusAffectv1(StatusAffects.BonusACapacity);
 			}
 			result +=".\n\n";
 
@@ -1083,50 +1089,50 @@
 
 		public function combatRoundUpdate():void
 		{
-			if(hasStatusAffect("Milky Urta") >= 0) {
+			if(findStatusAffect(StatusAffects.MilkyUrta) >= 0) {
 				game.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
-			if(hasStatusAffect("TentacleCoolDown") >= 0) {
-				statusAffects[hasStatusAffect("TentacleCoolDown")].value1--;
-				if(statusAffects[hasStatusAffect("TentacleCoolDown")].value1 == 0) {
-					removeStatusAffect("TentacleCoolDown");
+			if(findStatusAffect(StatusAffects.TentacleCoolDown) >= 0) {
+				addStatusValue(StatusAffects.TentacleCoolDown,1,-1);
+				if(statusAffect(findStatusAffect(StatusAffects.TentacleCoolDown)).value1 == 0) {
+					removeStatusAffect(StatusAffects.TentacleCoolDown);
 				}
 			}
-			if(hasStatusAffect("Coon Whip") >= 0) {
-				if(statusAffectv2("Coon Whip") <= 0) {
-					armorDef += statusAffectv1("Coon Whip");
+			if(findStatusAffect(StatusAffects.CoonWhip) >= 0) {
+				if(statusAffectv2(StatusAffects.CoonWhip) <= 0) {
+					armorDef += statusAffectv1(StatusAffects.CoonWhip);
 					outputText("<b>Tail whip wears off!</b>\n\n");
-					removeStatusAffect("Coon Whip");
+					removeStatusAffect(StatusAffects.CoonWhip);
 				}
 				else {
-					addStatusValue("Coon Whip",2,-1);
+					addStatusValue(StatusAffects.CoonWhip,2,-1);
 					outputText("<b>Tail whip is currently reducing your foe");
 					if(plural) outputText("s'");
 					else outputText("'s");
-					outputText(" armor by " + statusAffectv1("Coon Whip") + ".</b>\n\n")
+					outputText(" armor by " + statusAffectv1(StatusAffects.CoonWhip) + ".</b>\n\n")
 				}
 			}
-			if(hasStatusAffect("Blind") >= 0) {
-				addStatusValue("Blind",1,-1);
-				if(statusAffectv1("Blind") <= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+				addStatusValue(StatusAffects.Blind,1,-1);
+				if(statusAffectv1(StatusAffects.Blind) <= 0) {
 					outputText("<b>" + capitalA + short + " is no longer blind!</b>\n\n", false);
-					removeStatusAffect("Blind");
+					removeStatusAffect(StatusAffects.Blind);
 				}
 				else outputText("<b>" + capitalA + short + " is currently blind!</b>\n\n", false);
 			}
-			if(hasStatusAffect("Earthshield") >= 0) {
+			if(findStatusAffect(StatusAffects.Earthshield) >= 0) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
 			}
-			if(hasStatusAffect("sandstorm") >= 0) {
+			if(findStatusAffect(StatusAffects.Sandstorm) >= 0) {
 				//Blinded:
-				if(player.hasStatusAffect("Blind") >= 0) {
+				if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 					outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
-					player.removeStatusAffect("Blind");
+					player.removeStatusAffect(StatusAffects.Blind);
 				}
 				else {
-					if(statusAffectv1("sandstorm") == 0 || statusAffectv1("sandstorm") % 4 == 0) {
-						player.createStatusAffect("Blind",0,0,0,0);
+					if(statusAffectv1(StatusAffects.Sandstorm) == 0 || statusAffectv1(StatusAffects.Sandstorm) % 4 == 0) {
+						player.createStatusAffect(StatusAffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
 					else {
@@ -1136,28 +1142,28 @@
 						outputText("</b>\n\n");
 					}
 				}
-				addStatusValue("sandstorm",1,1);
+				addStatusValue(StatusAffects.Sandstorm,1,1);
 			}
-			if(hasStatusAffect("Stunned") >= 0) {
+			if(findStatusAffect(StatusAffects.Stunned) >= 0) {
 				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n", false);
 			}
-			if(hasStatusAffect("Shell") >= 0) {
-				if(statusAffectv1("Shell") >= 0) {
+			if(findStatusAffect(StatusAffects.Shell) >= 0) {
+				if(statusAffectv1(StatusAffects.Shell) >= 0) {
 					outputText("<b>A wall of many hues shimmers around " + a + short + ".</b>\n\n");
-					addStatusValue("Shell",1,-1);
+					addStatusValue(StatusAffects.Shell,1,-1);
 				}
 				else {
 					outputText("<b>The magical barrier " + a + short + " erected fades away to nothing at last.</b>\n\n");
-					removeStatusAffect("Shell");
+					removeStatusAffect(StatusAffects.Shell);
 				}
 			}
-			if(hasStatusAffect("Izma Bleed") >= 0) {
+			if(findStatusAffect(StatusAffects.IzmaBleed) >= 0) {
 				//Countdown to heal
-				addStatusValue("Izma Bleed",1,-1);
+				addStatusValue(StatusAffects.IzmaBleed,1,-1);
 				//Heal wounds
-				if(statusAffectv1("Izma Bleed") <= 0) {
+				if(statusAffectv1(StatusAffects.IzmaBleed) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n", false);
-					removeStatusAffect("Izma Bleed");
+					removeStatusAffect(StatusAffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
 				else {
@@ -1167,14 +1173,14 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
 				}
 			}
-			if(hasStatusAffect("Timer") >= 0) {
-				if(statusAffectv1("Timer") <= 0)
-					removeStatusAffect("Timer");
-				addStatusValue("Timer",1,-1);
+			if(findStatusAffect(StatusAffects.Timer) >= 0) {
+				if(statusAffectv1(StatusAffects.Timer) <= 0)
+					removeStatusAffect(StatusAffects.Timer);
+				addStatusValue(StatusAffects.Timer,1,-1);
 			}
-			if(hasStatusAffect("Lust Stick") >= 0) {
+			if(findStatusAffect(StatusAffects.LustStick) >= 0) {
 				//LoT Effect Messages:
-				switch(statusAffectv1("Lust Stick")) {
+				switch(statusAffectv1(StatusAffects.LustStick)) {
 					//First:
 					case 1:
 						if(plural) outputText("One of " + a + short + " pants and crosses " + mf("his","her") + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + mf("he","she") + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n", false);
@@ -1201,45 +1207,45 @@
 						else outputText("Drops of pre-cum roll steadily out of " + a + short + "'s dick.  It's a marvel " + pronoun1 + " hasn't given in to " + pronoun3 + " lust yet.\n\n", false);
 						break;
 				}
-				addStatusValue("Lust Stick",1,1);
+				addStatusValue(StatusAffects.LustStick,1,1);
 				//Damage = 5 + bonus score minus
 				//Reduced by lust vuln of course
-				lust += Math.round(lustVuln * (5 + statusAffectv2("Lust Stick")));
+				lust += Math.round(lustVuln * (5 + statusAffectv2(StatusAffects.LustStick)));
 			}
-			if(hasStatusAffect("PCTailTangle") >= 0) {
+			if(findStatusAffect(StatusAffects.PCTailTangle) >= 0) {
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				game.dynStats("lus", 5+player.sens/10);
 			}
-			if(player.hasStatusAffect("Blind") >= 0 && hasStatusAffect("sandstorm") < 0) {
-				if(player.hasStatusAffect("Sheila Oil") >= 0) {
-					if(player.statusAffectv1("Blind") <= 0) {
+			if(player.findStatusAffect(StatusAffects.Blind) >= 0 && findStatusAffect(StatusAffects.Sandstorm) < 0) {
+				if(player.findStatusAffect(StatusAffects.SheilaOil) >= 0) {
+					if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
 						outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
-						player.removeStatusAffect("Blind");
+						player.removeStatusAffect(StatusAffects.Blind);
 					}
 					else {
 						outputText("<b>You scrub at the oily secretion with the back of your hand and wipe some of it away, but only smear the remainder out more thinly.  You can hear the demon giggling at your discomfort.</b>\n\n", false);
-						player.addStatusValue("Blind",1,-1);
+						player.addStatusValue(StatusAffects.Blind,1,-1);
 					}
 				}
 				else {
 					//Remove blind if countdown to 0
-					if(player.statusAffectv1("Blind") == 0) {
-						player.removeStatusAffect("Blind");
+					if(player.statusAffectv1(StatusAffects.Blind) == 0) {
+						player.removeStatusAffect(StatusAffects.Blind);
 						//Alert PC that blind is gone if no more stacks are there.
-						if(player.hasStatusAffect("Blind") < 0) {
+						if(player.findStatusAffect(StatusAffects.Blind) < 0) {
 							outputText("<b>Your eyes have cleared and you are no longer blind!</b>\n\n", false);
 						}
 						else outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
 					}
 					else {
-						player.addStatusValue("Blind",1,-1);
+						player.addStatusValue(StatusAffects.Blind,1,-1);
 						outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
 					}
 				}
 			}
-			if(hasStatusAffect("QueenBind") >= 0) {
+			if(findStatusAffect(StatusAffects.QueenBind) >= 0) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
 				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
 			}
@@ -1251,7 +1257,7 @@
 				game.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
-			if(hasStatusAffect("Lust Aura") >= 0) {
+			if(findStatusAffect(StatusAffects.LustAura) >= 0) {
 				if(player.lust < 33) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
 		 		if(player.lust >= 33 && player.lust < 66) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
 		  		if(player.lust >= 66) {

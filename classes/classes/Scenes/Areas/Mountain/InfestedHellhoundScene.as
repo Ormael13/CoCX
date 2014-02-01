@@ -4,8 +4,9 @@
 package classes.Scenes.Areas.Mountain
 {
 	import classes.BaseContent;
+import classes.StatusAffects;
 
-	public class InfestedHellhoundScene extends BaseContent
+public class InfestedHellhoundScene extends BaseContent
 	{
 		public function InfestedHellhoundScene()
 		{
@@ -30,7 +31,7 @@ package classes.Scenes.Areas.Mountain
 		{
 			outputText("", true);
 			//[BOTH INFESTED]
-			if (player.totalCocks() > 0 && player.hasStatusAffect("infested") >= 0) {
+			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 				//(LUST)
 				if (player.lust > 99) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
@@ -50,7 +51,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 			}
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
-			else if (player.hasStatusAffect("infested") < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
+			else if (player.findStatusAffect(StatusAffects.Infested) < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
 				if (player.lust > 99) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
@@ -96,7 +97,7 @@ package classes.Scenes.Areas.Mountain
 					outputText("The demonic dog backs away with what looks like a grin on its face after filling you with worms and boiling spooge, your urethra stretched and dripping with white squirming goop.  Pushed beyond your endurance, you start blacking out, your last thought a lamentation on how you'll be a carrier for these parasites, just like this demon-dog.", false);
 				}
 				//(+infested)
-				player.createStatusAffect("infested", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Infested, 0, 0, 0, 0);
 				dynStats("lib", 1, "sen", 1, "lus=", 0, "cor", 1);
 				player.cumMultiplier += .2;
 				cleanupAfterCombat();
@@ -135,10 +136,10 @@ package classes.Scenes.Areas.Mountain
 				//random chance of big lust boost as worms evacuate 
 				//your body.  When worms leave they take with them up 
 				//to 5 fertility, to a minimum of 10. 
-				if (player.hasStatusAffect("worm plugged") >= 0)
-					player.addStatusValue("worm plugged", 1, 1 + rand(5));
+				if (player.findStatusAffect(StatusAffects.WormPlugged) >= 0)
+					player.addStatusValue(StatusAffects.WormPlugged, 1, 1 + rand(5));
 				else
-					player.createStatusAffect("worm plugged", 1 + rand(5), 0, 0, 0);
+					player.createStatusAffect(StatusAffects.WormPlugged, 1 + rand(5), 0, 0, 0);
 				dynStats("lib", 1, "lus=", 0, "cor", 1);
 				cleanupAfterCombat();
 			}

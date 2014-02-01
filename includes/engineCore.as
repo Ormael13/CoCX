@@ -526,8 +526,11 @@ public function getButtonToolTipText( buttonText :String ) :String
 	buttonText = buttonText || '';
 
 	//Items
-    var itype:ItemType = ItemType.lookupItem(buttonText);
-    if (itype != null) toolTipText = itype.description;
+	if (/^....... x\d+$/.test(buttonText)){
+		buttonText = buttonText.substring(0,7);
+    	var itype:ItemType = ItemType.lookupItem(buttonText);
+    	if (itype != null) toolTipText = itype.description;
+	}
 	if(buttonText.indexOf("Demon Whip") != -1) {
 		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
 	}
@@ -1368,7 +1371,7 @@ public function displayStats(e:MouseEvent = null):void
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);
-	if(player.hasKeyItem("Bow") >= 0) outputText("<b>Bow Skill: </b>" + Math.round(player.statusAffectv1("Kelt")) + "\n", false);
+	if(player.hasKeyItem("Bow") >= 0) outputText("<b>Bow Skill: </b>" + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n", false);
 	outputText("<b>Lust Resistance: </b>" + (100-Math.round(lustPercent())) + "% (Higher is better.)\n", false);
 	outputText("<b>Spell Effect Multiplier: </b>" + (100 * spellMod()) + "%\n");
 	outputText("<b>Spell Cost: </b>" + spellCost(100) + "%\n");
@@ -1380,18 +1383,18 @@ public function displayStats(e:MouseEvent = null):void
 	
 	outputText("<b>Fertility (Base) Rating: </b>" + Math.round(player.fertility) + "\n", false);
 	outputText("<b>Fertility (With Bonuses) Rating: </b>" + Math.round(player.totalFertility()) + "\n", false);
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		outputText("<b>Hours Since Last Time Breastfed Someone: </b> " + player.statusAffectv2("Feeder"), false);
-		if(player.statusAffectv2("Feeder") >= 72) outputText(" (Too long! Sensitivity Increasing!)", false);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		outputText("<b>Hours Since Last Time Breastfed Someone: </b> " + player.statusAffectv2(StatusAffects.Feeder), false);
+		if(player.statusAffectv2(StatusAffects.Feeder) >= 72) outputText(" (Too long! Sensitivity Increasing!)", false);
 		outputText("\n", false);
 	}
 	
 	outputText("<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n", false);
 	outputText("<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n", false);
 	//MARBLE
-	if(player.statusAffectv3("Marble") > 0) {
+	if(player.statusAffectv3(StatusAffects.Marble) > 0) {
 		outputText("<b>Marble Milk Addiction: </b>", false);
-		if(player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0) outputText(Math.round(player.statusAffectv2("Marble")) + "%\n", false);
+		if(player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0) outputText(Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n", false);
 		else if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("0%\n", false);
 		else outputText("100%\n", false);
 	}
@@ -1412,11 +1415,11 @@ public function displayStats(e:MouseEvent = null):void
 		if(player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) preg++;
 		outputText(preg + "\n", false);
 	}        
-	if(player.hasStatusAffect("Slime Craving") >= 0) {
-		if(player.statusAffectv1("Slime Craving") >= 18) outputText("<b>Slime Craving:  </b>Active! You are currently losing strength and speed.  You should find fluids.\n", false);
+	if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
+		if(player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) outputText("<b>Slime Craving:  </b>Active! You are currently losing strength and speed.  You should find fluids.\n", false);
 		else {
-			if(player.findPerk(PerkLib.SlimeCore) >= 0) outputText("<b>Slime Stored:  </b>" + ((17 - player.statusAffectv1("Slime Craving")) * 2) + " hours until you start losing strength.\n", false);
-			else outputText("<b>Slime Stored:  </b>" + (17 - player.statusAffectv1("Slime Craving")) + " hours until you start losing strength.\n", false);
+			if(player.findPerk(PerkLib.SlimeCore) >= 0) outputText("<b>Slime Stored:  </b>" + ((17 - player.statusAffectv1(StatusAffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n", false);
+			else outputText("<b>Slime Stored:  </b>" + (17 - player.statusAffectv1(StatusAffects.SlimeCraving)) + " hours until you start losing strength.\n", false);
 		}
 	}
 	outputText("<b>Spells Cast: </b>" + flags[kFLAGS.SPELLS_CAST] + "\n");
@@ -1448,7 +1451,7 @@ public function displayStats(e:MouseEvent = null):void
 		if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
 		outputText(sophie + "\n");
 	}
-	if(player.statusAffectv2("Tamani") > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2("Tamani") + " (after all forms of natural selection)\n", false);
+	if(player.statusAffectv2(StatusAffects.Tamani) > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n", false);
 	if(urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaPregs.urtaKids() + "\n");
 	if(flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
 	if(emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
@@ -1492,9 +1495,9 @@ public function displayStats(e:MouseEvent = null):void
 		if(sheilaScene.sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
 		outputText("\n");
 	}
-	if(player.hasStatusAffect("Kelt") >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
-		if(player.statusAffectv2("Kelt") >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
-		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2("Kelt")/130*100) + "%\n", false);
+	if(player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
+		if(player.statusAffectv2(StatusAffects.Kelt) >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
+		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt)/130*100) + "%\n", false);
 	}
 	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(telAdre.rubi.rubiAffection()) + "%\n");
 	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
@@ -1507,10 +1510,10 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
-	if(player.hasStatusAffect("heat") >= 0) outputText("Heat - " + Math.round(player.statusAffectv3("heat")) + " hours remaining.\n", false);
-	if(player.hasStatusAffect("rut") >= 0) outputText("Rut - " + Math.round(player.statusAffectv3("rut")) + " hours remaining.\n", false);
-	if(player.statusAffectv1("Luststick") > 0) outputText("Luststick - " + Math.round(player.statusAffectv1("Luststick")) + " hours remaining.\n", false);
-	if(player.statusAffectv1("Black Cat Beer") > 0) outputText("Black Cat Beer - " + player.statusAffectv1("Black Cat Beer") + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+	if(player.findStatusAffect(StatusAffects.Heat) >= 0) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
+	if(player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
+	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
 	outputText("<b>Eggs Traded For: </b>" + flags[kFLAGS.EGGS_BOUGHT] + "\n");
 	doNext(1);
@@ -1538,7 +1541,7 @@ public function lustPercent():Number {
 	if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
 	if(lust < 25) lust = 25;
-	if(player.statusAffectv1("Black Cat Beer") > 0) {
+	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
@@ -1549,24 +1552,24 @@ public function lustPercent():Number {
 	//DRAWBACKS TO JUSTIFY IT.
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Bimbo body slows lust gains!
-	if((player.hasStatusAffect("Bimbo Champagne") >= 0 || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+	if((player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 	//Omnibus' Gift reduces lust gain by 15%
 	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 	//Luststick reduces lust gain by 10% to match increased min lust
 	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.hasStatusAffect("Berzerking") >= 0) lust *= .6;
+	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 	if (statIndex >= 0)
 	{
-		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELIEF || player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_LUST)
+		if (player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
 		{
-			lust *= player.statusAffects[statIndex].value2;
+			lust *= player.statusAffect(statIndex).value2;
 		}
 	}
 	
@@ -1809,7 +1812,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
 	//worms raise min lust!
-	if(player.hasStatusAffect("infested") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		if(player.lust < 50) player.lust = 50;
 	}
 	if(player.lust > 100) player.lust = 100;

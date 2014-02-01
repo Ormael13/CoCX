@@ -7,8 +7,9 @@ package classes.Scenes.Areas.Swamp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class CorruptedDriderScene extends BaseContent
 	{
@@ -218,7 +219,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("You mumble out a denial.  You're not a beast... you just like to take charge and fuck.  It's just so hard to resist jumping on a nice wet pussy and making it squirt while you pack it full... no!  That's not what...\n\n", false);
 
 			outputText("\"<i>Oooh, are you leaking out more pre-cum already?  You're insatiable!  I bet you start thinking about your next fuck before you even finish getting off, don't you?  You can deny it all you want, but I felt your dick puff up a little bit more as soon as I said it.  No matter what you think, your cock is a dumb, happy little tattle-tale that always tells the girls exactly what you're thinking.</i>\"", false);
-			if (player.statusAffectv1("Exgartuan") == 1) outputText("  Exgartuan mumbles telepathicaly, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("  Exgartuan mumbles telepathicaly, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
 			outputText("  She adds, \"<i>Face the music - there's nothing you love more than defeating someone and letting your dick tell you what to do.  You dumb... domineering... beast...</i>\"\n\n", false);
 
 			outputText("Gods!  It's getting so hard to think with that tight cunt clutching at your cock and the soft, feminine enunciations constantly interrupting your thoughts.  How can she concentrate with the stink of sex hanging so thick in the air?  Your " + cockDescript(x) + " is so horny, why aren't you fucking her yet?  You shudder weakly and remember ", false);

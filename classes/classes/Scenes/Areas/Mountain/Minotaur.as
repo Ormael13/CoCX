@@ -6,7 +6,8 @@
 	import classes.CockTypesEnum;
 	import classes.Cock;
 	import classes.Appearance;
-	import classes.internals.Utils;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -21,8 +22,8 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("PhyllaFight") >= 0) {
-				removeStatusAffect("PhyllaFight");
+			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+				removeStatusAffect(StatusAffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
 				game.desert.antsScene.phyllaBeatAMino();
 			} else {
@@ -32,8 +33,8 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect("PhyllaFight") >= 0) {
-				removeStatusAffect("PhyllaFight");
+			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);

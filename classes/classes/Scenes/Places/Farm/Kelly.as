@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.ItemType;
+import classes.StatusAffects;
 
 public class Kelly extends AbstractFarmContent{
 
@@ -51,7 +52,7 @@ private function hasPinkEgg():Boolean {
 public function breakingKeltOptions():void {
 	clearOutput();
 	spriteSelect(35);
-	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2("Kelt") >= 40 || player.hasStatusAffect("Kelt") < 0) {
+	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2(StatusAffects.Kelt) >= 40 || player.findStatusAffect(StatusAffects.Kelt) < 0) {
 		farm.keltScene.keltEncounter();
 		return;
 	}
@@ -990,7 +991,7 @@ private function punishKelly():void {
 		outputText("\n\n\"<i>Yes, [Master], I do,</i>\" she says, slightly louder and straightening her back.  You smile softly.  Such a good girl.");
 	}
 	menu();
-	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1("Tel'Adre") < 1) {
+	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1(StatusAffects.TelAdre) < 1) {
 		outputText("You'd like to take Kelly for a ride, but you don't have any good ideas for public places to humiliate her.");
 	}
 	else addButton(1,"Ride",rideKellyForPunishment);

@@ -12,8 +12,9 @@ package classes.Scenes.Areas
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.NPCs.Jojo;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{
@@ -30,11 +31,11 @@ package classes.Scenes.Areas
 		}
 		public function exploreDeepwoods():void
 		{
-			player.addStatusValue("exploredDeepwoods", 1, 1);
+			player.addStatusValue(StatusAffects.ExploredDeepwoods, 1, 1);
 			var chooser:Number = rand(5);
 			var temp2:Number = 0;
 			//Every tenth exploration finds a pumpkin if eligible!
-			if (player.statusAffectv1("exploredDeepwoods") % 10 == 0 && isHalloween()) {
+			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
 				//If Fera isn't free yet...
 				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0 && player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
 					if (date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE]) {
@@ -58,7 +59,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1("exploredDeepwoods") % 5 == 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
+			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
 				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", 13);
@@ -67,7 +68,7 @@ package classes.Scenes.Areas
 			}
 			//Tamani 20% encounter rate
 			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-				if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani") / 2) >= 12) {
+				if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2(StatusAffects.Tamani) / 2) >= 12) {
 					tamaniDaughtersScene.encounterTamanisDaughters();
 				}
 				else
@@ -184,13 +185,13 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//If Jojo lives in camp, never encounter him
-			if (player.hasStatusAffect("PureCampJojo") >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] == 1) {
+			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] == 1) {
 				chooser = rand(3);
 				if (chooser >= 1) chooser++;
 			}
 			//Chance to discover deepwoods
-			if ((player.exploredForest >= 20) && player.hasStatusAffect("exploredDeepwoods") < 0) {
-				player.createStatusAffect("exploredDeepwoods", 0, 0, 0, 0);
+			if ((player.exploredForest >= 20) && player.findStatusAffect(StatusAffects.ExploredDeepwoods) < 0) {
+				player.createStatusAffect(StatusAffects.ExploredDeepwoods, 0, 0, 0, 0);
 				outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
 				doNext(13);
 				return;
@@ -208,7 +209,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Marble randomness
-			if (player.exploredForest % 50 == 0 && player.exploredForest > 0 && player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
+			if (player.exploredForest % 50 == 0 && player.exploredForest > 0 && player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
 				//can be triggered one time after Marble has been met, but before the addiction quest starts.
 				clearOutput();
 				outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
@@ -250,7 +251,7 @@ package classes.Scenes.Areas
 				else {
 					//Tamani 25% of all goblin encounters encounter rate
 					if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-						if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani") / 2) >= 12) {
+						if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2(StatusAffects.Tamani) / 2) >= 12) {
 							tamaniDaughtersScene.encounterTamanisDaughters();
 						}
 						else
@@ -311,7 +312,7 @@ package classes.Scenes.Areas
 						doNext(13);
 						return;
 					}
-					if (player.hasStatusAffect("infested") >= 0) {
+					if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
 						kGAMECLASS.jojoScene.jojoSprite();
 						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 						outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);

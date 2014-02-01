@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Places.TelAdre
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-	import classes.PerkType;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.PerkLib;
+import classes.PerkType;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * Whee!
 	 * (No @ tag for coder)
 	 * @author Gedan
@@ -465,18 +466,13 @@
 			menu();
 			doNext(13);
 		}
-		
+
+	public static const MAX_MASSAGE_BONUS_DURATION:int = 24;			// Duration of the bonus
 		/**
 		 * Apply massage bonus. Bonuses are replaced when a new effect is placed on the player.
-		 * StatusAffect for all bonuses
-		 * StatusAffect Values:
-		 * v1 = bonus index
-		 * v2 = bonus value
-		 * v3 = remaining time
+		 * StatusAffects.UmasMassage for all bonuses
 		 * @param	selectedMassage
 		 */
-		public static const MASSAGE_BONUS_NAME:String = "Uma's Massage";	// StatusAffect name
-		public static const MAX_MASSAGE_BONUS_DURATION:int = 24;			// Duration of the bonus
 		public function applyMassageBonus(selectedMassage:int):void
 		{
 			if (selectedMassage < 0 || selectedMassage > 4)
@@ -485,13 +481,13 @@
 			}
 			else
 			{
-				var statIndex:int = player.hasStatusAffect(MASSAGE_BONUS_NAME);
+				var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 				var bonusValue:*;
 				
 				// Remove the old massage bonus if present
 				if (statIndex >= 0)
 				{
-					player.removeStatusAffect(MASSAGE_BONUS_NAME);
+					player.removeStatusAffect(StatusAffects.UmasMassage);
 				}
 				
 				if (selectedMassage == MASSAGE_RELIEF)
@@ -522,7 +518,7 @@
 				
 				if (bonusValue != undefined)
 				{
-					player.createStatusAffect(MASSAGE_BONUS_NAME, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
+					player.createStatusAffect(StatusAffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
 					flags[kFLAGS.UMA_TIMES_MASSAGED]++;
 				}
 			}
@@ -534,13 +530,13 @@
 		 */
 		public function updateBonusDuration(hours:int):void
 		{
-			var statIndex:int = player.hasStatusAffect(MASSAGE_BONUS_NAME);
+			var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
 			
 			if (statIndex >= 0)
 			{
-				player.statusAffects[statIndex].value3 -= hours;
+				player.statusAffect(statIndex).value3 -= hours;
 				
-				if (player.statusAffects[statIndex].value3 <= 0)
+				if (player.statusAffect(statIndex).value3 <= 0)
 				{
 					bonusExpired();
 				}
@@ -554,7 +550,7 @@
 		{
 			outputText("\n<b>You groan softly as a feeling of increased tension washes over you, no longer as loose as you were before.  It looks like the effects of Uma's massage have worn off.</b>\n");
 			
-			player.removeStatusAffect(MASSAGE_BONUS_NAME);
+			player.removeStatusAffect(StatusAffects.UmasMassage);
 		}
 		
 		/**

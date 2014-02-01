@@ -3,7 +3,8 @@ package classes
 {
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkType;
-import classes.internals.Utils;
+	import classes.StatusAffectType;
+	import classes.internals.Utils;
 
 	//import classes.CockClass;
 	public class Creature extends Utils
@@ -637,51 +638,28 @@ import classes.internals.Utils;
 		
 		//{region StatusEffects
 		//Create a status
-		public function createStatusAffect(statusName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
+		public function createStatusAffect(stype:StatusAffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:* = new StatusAffectClass();
+			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
 			statusAffects.push(newStatusAffect);
-			statusAffects[statusAffects.length - 1].statusAffectName = statusName;
-			statusAffects[statusAffects.length - 1].value1 = value1;
-			statusAffects[statusAffects.length - 1].value2 = value2;
-			statusAffects[statusAffects.length - 1].value3 = value3;
-			statusAffects[statusAffects.length - 1].value4 = value4;
+			trace("createStatusAffect -> "+statusAffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
 		//Remove a status
-		public function removeStatusAffect(statusName:String):void
+		public function removeStatusAffect(stype:StatusAffectType):void
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
-				//trace("ERROR: Status Affect could not be removed because player has no statuses.");
-				return;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
-				{
-					statusAffects.splice(counter, 1);
-					//trace("Attempted to remove \"" + statusName + "\" status.");
-					counter = 0;
-				}
-			}
+			var counter:Number = findStatusAffect(stype);
+			if (counter < 0) return;
+			statusAffects.splice(counter, 1);
+			trace("removeStatusAffect -> "+statusAffects.join(","));
 		}
 		
-		//TODO Change this to Boolean
-		public function hasStatusAffect(statusName:String):Number
+		public function findStatusAffect(stype:StatusAffectType):Number
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-				return -2;
-			while (counter > 0)
+			for (var counter:int = 0; counter < statusAffects.length; counter++)
 			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
+				if (statusAffect(counter).stype == stype)
 					return counter;
 			}
 			return -1;
@@ -689,150 +667,78 @@ import classes.internals.Utils;
 		//}endregion
 		
 		
-		public function changeStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
+		public function changeStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
-			var counter:Number = statusAffects.length;
+			var counter:Number = findStatusAffect(stype);
 			//Various Errors preventing action
-			if (statusAffects.length <= 0)
+			if (counter < 0)return;
+			if (statusValueNum < 1 || statusValueNum > 4)
+			{
+				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
+				return;
+			}
+			if (statusValueNum == 1)
+				statusAffect(counter).value1 = newNum;
+			if (statusValueNum == 2)
+				statusAffect(counter).value2 = newNum;
+			if (statusValueNum == 3)
+				statusAffect(counter).value3 = newNum;
+			if (statusValueNum == 4)
+				statusAffect(counter).value4 = newNum;
+		}
+		
+		public function addStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+		{
+			var counter:Number = findStatusAffect(stype);
+			//Various Errors preventing action
+			if (counter < 0)
 			{
 				return;
-					//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player has no status affects.");
 			}
-			while (counter > 0)
+			if (statusValueNum < 1 || statusValueNum > 4)
 			{
-				counter--;
-				//Find it, change it, quit out
-				if (statusAffects[counter].statusAffectName == statusName)
-				{
-					if (statusValueNum < 1 || statusValueNum > 4)
-					{
-						//trace("ERROR: ChangeStatusValue called with invalid status value number.");
-						return;
-					}
-					if (statusValueNum == 1)
-						statusAffects[counter].value1 = newNum;
-					if (statusValueNum == 2)
-						statusAffects[counter].value2 = newNum;
-					if (statusValueNum == 3)
-						statusAffects[counter].value3 = newNum;
-					if (statusValueNum == 4)
-						statusAffects[counter].value4 = newNum;
-					return;
-				}
-			}
-			//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player does not have the status affect.");
-		}
-		
-		public function addStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
-		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
+				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
 				return;
-					//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player has no status affects.");
 			}
-			while (counter > 0)
-			{
-				counter--;
-				//Find it, change it, quit out
-				if (statusAffects[counter].statusAffectName == statusName)
-				{
-					if (statusValueNum < 1 || statusValueNum > 4)
-					{
-						//trace("ERROR: ChangeStatusValue called with invalid status value number.");
-						return;
-					}
-					if (statusValueNum == 1)
-						statusAffects[counter].value1 += newNum;
-					if (statusValueNum == 2)
-						statusAffects[counter].value2 += newNum;
-					if (statusValueNum == 3)
-						statusAffects[counter].value3 += newNum;
-					if (statusValueNum == 4)
-						statusAffects[counter].value4 += newNum;
-					return;
-				}
-			}
-			//trace("ERROR: Looking for status '" + statusName + "' to change value " + statusValueNum + ", and player does not have the status affect.");
+			if (statusValueNum == 1)
+				statusAffect(counter).value1 += bonus;
+			if (statusValueNum == 2)
+				statusAffect(counter).value2 += bonus;
+			if (statusValueNum == 3)
+				statusAffect(counter).value3 += bonus;
+			if (statusValueNum == 4)
+				statusAffect(counter).value4 += bonus;
 		}
 		
-		public function statusAffectv1(statusName:String):Number
+		public function statusAffect(idx:int):StatusAffectClass
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for status '" + statusName + "', and player has no status affects.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
-					return statusAffects[counter].value1;
-			}
-			//trace("ERROR: Looking for status '" + statusName + "', but player does not have it.");
-			return 0;
+			return statusAffects [idx];
 		}
 		
-		public function statusAffectv2(statusName:String):Number
+		public function statusAffectv1(stype:StatusAffectType):Number
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for status '" + statusName + "', and player has no status affects.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
-					return statusAffects[counter].value2;
-			}
-			//trace("ERROR: Looking for status '" + statusName + "', but player does not have it.");
-			return 0;
+			var counter:Number = findStatusAffect(stype);
+			return (counter<0)?0:statusAffect(counter).value1;
 		}
 		
-		public function statusAffectv3(statusName:String):Number
+		public function statusAffectv2(stype:StatusAffectType):Number
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for status '" + statusName + "', and player has no status affects.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
-					return statusAffects[counter].value3;
-			}
-			//trace("ERROR: Looking for status '" + statusName + "', but player does not have it.");
-			return 0;
+			var counter:Number = findStatusAffect(stype);
+			return (counter<0)?0:statusAffect(counter).value2;
 		}
-		
-		public function statusAffectv4(statusName:String):Number
+
+		public function statusAffectv3(stype:StatusAffectType):Number
 		{
-			var counter:Number = statusAffects.length;
-			//Various Errors preventing action
-			if (statusAffects.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for status '" + statusName + "', and player has no status affects.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (statusAffects[counter].statusAffectName == statusName)
-					return statusAffects[counter].value4;
-			}
-			//trace("ERROR: Looking for status '" + statusName + "', but player does not have it.");
-			return 0;
+			var counter:Number = findStatusAffect(stype);
+			return (counter<0)?0:statusAffect(counter).value3;
 		}
-		
+
+		public function statusAffectv4(stype:StatusAffectType):Number
+		{
+			var counter:Number = findStatusAffect(stype);
+			return (counter<0)?0:statusAffect(counter).value4;
+		}
+
 		public function removeStatuses():void
 		{
 			var counter:Number = statusAffects.length;
@@ -1721,7 +1627,7 @@ import classes.internals.Utils;
 				bonus += 25;
 			if(findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
-			total = (bonus + statusAffectv1("Bonus vCapacity") + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
+			total = (bonus + statusAffectv1(StatusAffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
 		}
 		
@@ -1739,7 +1645,7 @@ import classes.internals.Utils;
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
-			return ((bonus + statusAffectv1("Bonus aCapacity") + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
+			return ((bonus + statusAffectv1(StatusAffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
 		}
 		
 		public function hasFuckableNipples():Boolean
@@ -1820,16 +1726,16 @@ import classes.internals.Utils;
 			//Prevent lactation decrease if lactating.
 			if (todo >= 0)
 			{
-				if (hasStatusAffect("Lactation Reduction") >= 0)
-					changeStatusValue("Lactation Reduction", 1, 0);
-				if (hasStatusAffect("Lactation Reduc0") >= 0)
-					removeStatusAffect("Lactation Reduc0");
-				if (hasStatusAffect("Lactation Reduc1") >= 0)
-					removeStatusAffect("Lactation Reduc1");
-				if (hasStatusAffect("Lactation Reduc2") >= 0)
-					removeStatusAffect("Lactation Reduc2");
-				if (hasStatusAffect("Lactation Reduc3") >= 0)
-					removeStatusAffect("Lactation Reduc3");
+				if (findStatusAffect(StatusAffects.LactationReduction) >= 0)
+					changeStatusValue(StatusAffects.LactationReduction, 1, 0);
+				if (findStatusAffect(StatusAffects.LactationReduc0) >= 0)
+					removeStatusAffect(StatusAffects.LactationReduc0);
+				if (findStatusAffect(StatusAffects.LactationReduc1) >= 0)
+					removeStatusAffect(StatusAffects.LactationReduc1);
+				if (findStatusAffect(StatusAffects.LactationReduc2) >= 0)
+					removeStatusAffect(StatusAffects.LactationReduc2);
+				if (findStatusAffect(StatusAffects.LactationReduc3) >= 0)
+					removeStatusAffect(StatusAffects.LactationReduc3);
 			}
 			if (todo > 0)
 			{
@@ -1983,7 +1889,7 @@ import classes.internals.Utils;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
-			quantity += statusAffectv1("rut");
+			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			if (quantity < 0)
@@ -2049,18 +1955,18 @@ import classes.internals.Utils;
 			return lizCockC;
 		}
 		
-		public function findFirstCockType(type:CockTypesEnum):Number
+		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
-			if (cocks[index].cockType == type)
+			if (cocks[index].cockType == ctype)
 				return index;
 			while (index < cocks.length)
 			{
 				index++;
-				if (cocks[index].cockType == type)
+				if (cocks[index].cockType == ctype)
 					return index;
 			}
-			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
+			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + ctype + " and could not find it.");
 			return 0;
 		}
 		
@@ -2284,17 +2190,11 @@ import classes.internals.Utils;
 			return (cocks[0].cockLength >= 20);
 		}
 		
-		//Deprecated
-		public function canSelfSuck():Boolean
-		{
-			return canAutoFellate();
-		}
-		
 		//PC can fly?
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (hasStatusAffect("Web") >= 0)
+			if (findStatusAffect(StatusAffects.Web) >= 0)
 				return false;
 			return wingType == 2 || wingType == 7 || wingType == 9 || wingType == 11 || wingType == 12;
 
@@ -2889,7 +2789,7 @@ import classes.internals.Utils;
 				else ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
-				if(hasStatusAffect("ButtStretched") >= 0) changeStatusValue("ButtStretched",1,0);
+				if(findStatusAffect(StatusAffects.ButtStretched) >= 0) changeStatusValue(StatusAffects.ButtStretched,1,0);
 			}
 			//If within top 10% of capacity, 25% stretch
 			if(cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
@@ -2909,9 +2809,9 @@ import classes.internals.Utils;
 			//Delay un-stretching
 			if(cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
-				if(hasStatusAffect("ButtStretched") < 0) createStatusAffect("ButtStretched",0,0,0,0);
+				if(findStatusAffect(StatusAffects.ButtStretched) < 0) createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue("ButtStretched",1,0);
+				else changeStatusValue(StatusAffects.ButtStretched,1,0);
 			}
 			if(stretched) {
 				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
@@ -2947,9 +2847,9 @@ import classes.internals.Utils;
 			//Delay anti-stretching
 			if(cArea >= .5 * vaginalCapacity()) {
 				//Cunt Stretched used to determine how long since last enlargement
-				if(hasStatusAffect("CuntStretched") < 0) createStatusAffect("CuntStretched",0,0,0,0);
+				if(findStatusAffect(StatusAffects.CuntStretched) < 0) createStatusAffect(StatusAffects.CuntStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue("CuntStretched",1,0);
+				else changeStatusValue(StatusAffects.CuntStretched,1,0);
 			}
 			if(stretched) {
 				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
@@ -2960,8 +2860,8 @@ import classes.internals.Utils;
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
-			if (hasStatusAffect("heat") >= 0)
-				counter += statusAffectv1("heat");
+			if (findStatusAffect(StatusAffects.Heat) >= 0)
+				counter += statusAffectv1(StatusAffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
 			if (findPerk(PerkLib.MaraesGiftFertility) >= 0)

@@ -60,7 +60,7 @@ To better understand which function to override for monster behaviour customizat
     5. A (evenly distributed) random action is chosen from `Monster.eAttack()` and all non-null non-zero `special`1..3.
     6. Description of `special`s was given before, supppose, `Monster.eAttack()` was called from `performCombatAction()`.
          By default:
-    7. In case the monster represents a mob, `statusAffectv1("attacks")` is checked for number of attacks to perform.
+    7. In case the monster represents a mob, `statusAffectv1(StatusAffects.attacks)` is checked for number of attacks to perform.
          For each attack:
          1. An `Monster.attackSucceeded()` is called, which by default:
             1. If monster is blind, try `Monster.handleBlind()` (`true` means continue attack). Default implementation

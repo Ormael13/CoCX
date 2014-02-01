@@ -32,7 +32,7 @@ package classes.Items.Armors
 					outputText("\n\nShe's gone before you can reply.  Sometimes she's more trouble than she's worth.");
 				}
 			}
-			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			player.armor.unequip(player,true);
 		}
 
 		public function SeductiveArmor()

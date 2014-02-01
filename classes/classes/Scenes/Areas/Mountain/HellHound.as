@@ -6,8 +6,9 @@
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -17,12 +18,12 @@
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
 				combatRoundOver();
 				return;
 			}
-			/*if(player.hasStatusAffect("Web-Silence") >= 0) {
+			/*if(player.hasStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
 				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n", false);
 				changeFatigue(10);
 				takeDamage(10+rand(20));
@@ -57,7 +58,7 @@
 			doNext(1);	
 		}
 		protected function hellhoundScent():void {
-			if(player.hasStatusAffect("NoFlee") >= 0) {
+			if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
 				if(spe == 100) {
 					hellhoundFire();
 					return;
@@ -70,7 +71,7 @@
 			else {
 				spe += 40;
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...", false);
-				player.createStatusAffect("NoFlee",0,0,0,0);
+				player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
 			}
 			combatRoundOver();
 			/*if(spe >= 80) {

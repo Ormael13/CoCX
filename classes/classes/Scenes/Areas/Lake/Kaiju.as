@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Kaiju extends AbstractLakeContent {
+public class Kaiju extends AbstractLakeContent {
 
 	public function Kaiju()
 	{
@@ -27,7 +28,7 @@ public function kaijuMeeting():void {
 		addButton(1,"No",noMeetingKaijus);
 	}
 	else {
-		if(player.hasStatusAffect("FactoryOverload") >= 0 && !kaijuCock()) kaijuGrowsWangus();
+		if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0 && !kaijuCock()) kaijuGrowsWangus();
 		else if(flags[kFLAGS.KAIJU_BAD_END_COUNTER] >= 5) kaijuBadEndToyBOOSH();
 		else repeatKaijuEncounter();
 	}
@@ -50,7 +51,7 @@ private function meetDatKaijuYo():void {
 	clearOutput();
 	spriteSelect(103);
 	flags[kFLAGS.KAIJU_MEETINGS] = 1;
-	if(player.hasStatusAffect("FactoryOverload") >= 0) flags[kFLAGS.KAIJU_COCK] = 1;
+	if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) flags[kFLAGS.KAIJU_COCK] = 1;
 	outputText("You step up onto the hill and slowly make your way to the top.  The rock seems to be unnaturally symmetrical, more like a large upside down oval.  Walking around, there seems to be little of interest to explore here.  You decide to head back for the boat when suddenly the island shifts and you are nearly knocked off your feet.  You look around, wondering if it was an earthquake or an attack when suddenly the island begins shaking violently.  You run for the boat, practically falling in as you almost lose your footing.  The island seems to be rising out of the water rapidly, until towering above you is a massive terrapin girl!  What you had mistaken for an island was really a large turtle shell!");
 	
 	outputText("\n\nShe takes in a tremendous gulp of air before stretching, arching her back as far her shell will let her while her green hands flutter near her monumental rack.  You take in the sight of the green giantess, from her wet yet curly red locks of hair, to her dark green, her almost black lips, her massive mammaries which she’s currently fondling quite lewdly, to the hard turtle shell, the front of which covers her belly yet supports her exposed breasts like some kind of perverse hard corset.  She pinches a pert nipple, cooing in pleasure before finally opening her eyes and taking notice of you.");
@@ -76,7 +77,7 @@ private function insultTheKaijuFirstMeeting():void {
 		outputText("\n\n\"<i>You are too rude,</i>\" she says in a huff.  \"<i>But I know how to fix you!</i>\" she begins to rise, standing to her full towering height.  Though much of her legs are still beneath the waves, her genitalia are in full display.  The lips of her feminine sex are moist, dripping with lake water and substantial moisture of their own.  They are surprisingly pink against the almost olive green of the rest of her.  But most shocking of all is that where a clit should be is instead a massive, gigantic green dong!");
 		outputText("\n\n\"<i>How about you put that mean mouth of yours to some good,</i>\" she tells you as she roughly picks you up between two large fingers and brings you to her stiffening cock.");
 		//[If player has learned the Whitefire spell]
-		if(player.hasStatusAffect("Knows Whitefire") >= 0 && (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + kGAMECLASS.spellCost(30) > 100)) {
+		if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 && (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + kGAMECLASS.spellCost(30) > 100)) {
 			outputText("\n\nSensing her desires, you try to quickly think of how to avoid pleasing the giant's large cock.  It occurs to you that you could use the spell whitefire to attack her.  Do you cast it?");
 			//[Yes][No]
 			menu();
@@ -478,7 +479,7 @@ private function talkToKaiju():void {
 		
 		outputText("\n\nHer body seems to quiver in delight as she continues on.  \"<i>I'm not sure why they want to taint the waters or what it is they use, but I found the spot where the corruption enters the lake and is the strongest.  I go there daily to absorb the warmth and delicious taint of those chemicals.  It increased my lust, and over time my size.");
 		//[If factory has been shut down and Marae was left uncorrupted]
-		if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("  But the flow of yummy fluids seems to have been stopped.");
+		if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.findStatusAffect(StatusAffects.FactoryOverload) < 0) outputText("  But the flow of yummy fluids seems to have been stopped.");
 		//[If the Factory was shut down and Marae corrupted]
 		else if(kaijuCock()) outputText("  But the pouring of liquids has been stopped for some reason, but not before there was one final, huge burst of tainted fluids. It was so strong and changed me even further, making me grow this,</i>\" she says as she rises further out of the lake's waters, revealing a large green cock.");
 		

@@ -11,7 +11,7 @@ public function masturbateMenu():void {
 	
 	//FAP BUTTON GOAADFADHAKDADK
 	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
-		if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)
+		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 			addButton(button,"Masturbate",eventParser,10);
 		else 
 			addButton(button,"Meditate",meditate);
@@ -45,7 +45,7 @@ public function masturbateMenu():void {
 	}
 	if(button == 1 && !fappingItems(false)) {
 		if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
-			if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)
+			if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 				eventParser(10);
 			else 
 				eventParser(3409);
@@ -207,7 +207,7 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		}
 	}
 	if(player.hasPerk("History: Religious") >= 0 && player.cor <= 66) {
-		if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0) {
+		if(player.hasStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
 			masturbText = "Masturbate";
 			masturbate = 10;
 		}
@@ -233,7 +233,7 @@ public function onaholeUse():void
 	
 	//Regular!
 	//Flag after first use!
-	if(player.hasStatusAffect("plain onahole used") < 0) player.createStatusAffect("plain onahole used",0,0,0,0);
+	if(player.findStatusAffect(StatusAffects.PlainOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.PlainOnaholeUsed,0,0,0,0);
 	//If player is already flagged, show repeated use text!
 	else {
 		//High Corruption
@@ -279,7 +279,7 @@ public function deluxeOnaholeUse():void {
 	//Deluxe!
 	if(player.hasKeyItem("Deluxe Onahole") >= 0) {
 		//Flag after first use!
-		if(player.hasStatusAffect("deluxe onahole used") < 0) player.createStatusAffect("deluxe onahole used",0,0,0,0);
+		if(player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.DeluxeOnaholeUsed,0,0,0,0);
 		//If player is already flagged, show repeated use text!
 		else {
 			//High Corruption
@@ -340,7 +340,7 @@ public function allNaturalOnaholeUse():void {
 	//All-natural!
 	if(player.hasKeyItem("All-Natural Onahole") >= 0) {
 		//Flag after first use!
-		if(player.hasStatusAffect("all-natural onahole used") < 0) player.createStatusAffect("all-natural onahole used",0,0,0,0);
+		if(player.findStatusAffect(StatusAffects.AllNaturalOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.AllNaturalOnaholeUsed,0,0,0,0);
 		//If player is already flagged, show repeated use text!
 		else {
 			//High corruption variant!
@@ -395,8 +395,8 @@ public function stimBeltUse():void {
 	//FIRST TIME USAGE
 	if((player.hasKeyItem("Self-Stimulation Belt") >= 0)) {
 		//First use! Flag after first use!
-		if(player.hasStatusAffect("used self-stim") < 0) {
-			player.createStatusAffect("used self-stim", 0,0,0,0);	
+		if(player.findStatusAffect(StatusAffects.used_self_dash_stim) < 0) {
+			player.createStatusAffect(StatusAffects.used_self_dash_stim, 0,0,0,0);
 			outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ", false);
 			outputText(player.breastCup(0), false);
 			outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.", false);
@@ -419,9 +419,9 @@ public function allNaturalStimBeltUse():void {
 	outputText("", true);
 	if(player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 		//First time!
-		if(player.hasStatusAffect("used natural self-stim") < 0) {
+		if(player.findStatusAffect(StatusAffects.UsedNaturalSelfStim) < 0) {
 			//Flag as used!
-			player.createStatusAffect("used natural self-stim", 0,0,0,0);
+			player.createStatusAffect(StatusAffects.UsedNaturalSelfStim, 0,0,0,0);
 			outputText("Brimming with anticipation, you put on the gloves to avoid prematurely triggering the machine. You place the belt down and strip yourself completely. Stepping through the straps of the garment, you pull it up. You take the time to align the nodule with the opening of your womanhood. After settling the knob to the entrance to your pussy, you take off the gloves, lay back and touch the amber pads with your fingers.\n\n", false);
 			outputText("You hear a distinctive squishing sound and you feel the belt tighten around your waist and pelvis. It becomes tighter and tighter until its removal is an impossibility because of your own bulk. While you are concerned, you maintain composure as the belt eventually stops tightening. There is a pause. A couple of minutes go by and little happens. You notice that the entire front of the belt is becoming warm. It is not the typical heat from a blanket or a piece of metal, but it feels like the warmth of flesh on flesh. You hear more squishing and you feel the nodule stir and rub against your opening. Your pleasure slowly begins to build and you are stimulated and amused by the teasing the apparatus seems to produce. Without warning, you feel your cunt stretch open as something thrusts inside you.\n\n", false);
 			doNext(2047);
@@ -718,9 +718,9 @@ public function genderlessMasturbate():void {
 	if(player.cor >= 80) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
 	//Tit foreplay
 	titForeplay();
-	if(player.hasStatusAffect("fapped genderless") < 0) {
+	if(player.findStatusAffect(StatusAffects.FappedGenderless) < 0) {
 		outputText("Now this might be a problem. Here you are ready to get your rocks off and you have no idea as how to do it. Nothing to do except some trial and error. You run your hands gently over where your genitals would be. Lightly you pet the skin and feel your finger tips tickle what was once your most pleasurable of places. While it feels incredibly nice, it just isn't getting you there. You teeter at the edge and it only frustrates you further. Unsure of what to do next, your body gives you a little nudge in an unexplored avenue and you decide to take the trip.\n\n", false);
-		player.createStatusAffect("fapped genderless",0,0,0,0);
+		player.createStatusAffect(StatusAffects.FappedGenderless,0,0,0,0);
 	}
 	//All times as a genderless person (possibly written for all genders perhaps not herm (not enough hands)) - 
 	outputText("Your " + assholeDescript() + " begins to twitch. It's practically crying out for attention.\n\n", false);
@@ -809,8 +809,8 @@ public function masturbateGo():void {
 		doNext(13);
 		return;
 	}
-	if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0) {
-		if(player.isNaga() && rand(2) == 0 && player.statusAffectv1("Exgartuan") == 1) exgartuan.exgartuanNagaStoleMyMasturbation();
+	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
+		if(player.isNaga() && rand(2) == 0 && player.statusAffectv1(StatusAffects.Exgartuan) == 1) exgartuan.exgartuanNagaStoleMyMasturbation();
 		else exgartuan.exgartuanMasturbation();
 		return;
 	}
@@ -1966,14 +1966,13 @@ public function deluxeDildo():void {
 		//Option Jojo veyeurism?
 		if(monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ", false);
-			if(player.hasStatusAffect("Tentacle Jojo") >= 0) outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.", false);
+			if(player.findStatusAffect(StatusAffects.TentacleJojo) >= 0) outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.", false);
 			else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.", false);
 		}
 		dynStats("lus=", 0);
 		doNext(13);
 		outputText("\n", false);
 		player.cuntChange(player.vaginalCapacity() * .9, true);
-		return;
 	}
 }
 
@@ -2359,7 +2358,7 @@ public function centaurGirlsGetHorseAids():void {
 public function getHugeEggsInCawk():void {
 	clearOutput();
 	//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
-	if(player.statusAffectv1("Exgartuan") == 1 && player.statusAffectv2("Exgartuan") == 0 && flags[kFLAGS.TIMES_EGGED_IN_COCK] == 0) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && flags[kFLAGS.TIMES_EGGED_IN_COCK] == 0) {
 		//requires Exgartuan awake
 		outputText("You decide it's time for a little fun.");
 		outputText("\n\nRemoving your [armor], you settle down ");
@@ -2551,7 +2550,7 @@ public function birthBeeEggsOutYourWang():void {
 //Scene Requires Fuckable Nipples, I'm going to aim at breasts around HH Cup or higher, since Exgartuan will push you over that from the bare minimum breast size - I'm thinking that breast pregnancy chance without Exgartuan will be nil/low and with Exgartuan will be extant/reasonable
 public function layEggsInYerTits():void {
 	clearOutput();
-	if(player.statusAffectv1("Exgartuan") == 2 && player.statusAffectv2("Exgartuan") == 0) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
 		//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
 		outputText("Smiling mischieviously to yourself, you look down to your possessed [chest] and tell Exgartuan that you have something you very much would like to do for her.");
 		outputText("\n\n\"<i>Oi bitch, I know what you're on about.  You think you can just lay eggs inside me?  Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
@@ -2635,8 +2634,8 @@ public function layEggsInYerTits():void {
 			if(player.bRows() < 2) outputText("\n\nEven your stomach is beginning to feel uncomfortably full when the final egg enters the ovipositor to begin its journey.  Once it pops into your gullet, you feel a great sense of relief wash over you accompanied by the last orgasm.  You pass out cradling your swollen stomach and [chest].");
 		}
 	}
-	if(player.hasStatusAffect("eggchest") < 0) {
-		player.createStatusAffect("eggchest",3 + rand(10),1 + rand(4),0,0);
+	if(player.findStatusAffect(StatusAffects.Eggchest) < 0) {
+		player.createStatusAffect(StatusAffects.Eggchest,3 + rand(10),1 + rand(4),0,0);
 		
 	}
 	dynStats("sen", 1, "lus=", 0);

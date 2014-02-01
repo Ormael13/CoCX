@@ -6,8 +6,9 @@ import classes.Appearance;
 import classes.CockTypesEnum;
 	import classes.ItemType;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Salon extends BaseContent{
+public class Salon extends BaseContent{
 
 	public function Salon()
 	{
@@ -19,13 +20,13 @@ public function hairDresser():void {
 	doYesNo(salonGreeting,13);
 }
 public function salonGreeting():void{
-	if (player.hasStatusAffect("hairdresser meeting") >= 0)
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0)
 	{
 		hairDresserRepeatGreeting();
 	}
 	else
 	{
-		player.createStatusAffect("hairdresser meeting", 0, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.HairdresserMeeting, 0, 0, 0, 0);
 		hairDresserGreeting();
 	}
 }

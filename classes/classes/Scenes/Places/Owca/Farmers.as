@@ -4,8 +4,9 @@ package classes.Scenes.Places.Owca
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -14,7 +15,7 @@ package classes.Scenes.Places.Owca
 
 		override protected function performCombatAction():void
 		{
-			createStatusAffect("attacks",4,0,0,0);
+			createStatusAffect(StatusAffects.Attacks,4,0,0,0);
 			eAttack();
 			combatRoundOver();
 		}

@@ -3,8 +3,9 @@
 	import classes.Monster;
 	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -22,7 +23,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ", false);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n", false);
 				return;
 			}
@@ -50,7 +51,7 @@
 			outputText("Before you can react, she gives you a chaste peck on the lips.  The harpy pulls back with a sultry smile, watching you expectantly.", false);
 			
 			//Already affected by it
-			if(player.hasStatusAffect("Luststick") >= 0) {
+			if(player.findStatusAffect(StatusAffects.Luststick) >= 0) {
 				outputText("  Blood rushes to " + game.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
@@ -58,7 +59,7 @@
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + game.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
 				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ", false);
@@ -68,7 +69,7 @@
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + game.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
 				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n", false);
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);		
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n", false);
 			}
 		}
 		
@@ -81,7 +82,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ", false);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -138,7 +139,7 @@
 			outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ", false);
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -207,7 +208,7 @@
 			var select:Number = 1;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
-			if (!player.hasCock() || hasStatusAffect("bimboBrawl") >= 0) {
+			if (!player.hasCock() || findStatusAffect(StatusAffects.BimboBrawl) >= 0) {
 				//Talons
 				special1 = talonsSophie;
 				//Batter
@@ -224,7 +225,7 @@
 				//compulsion
 				special3 = sophieCompulsionAttack;
 			}
-			if (player.hasCock() && hasStatusAffect("bimboBrawl") < 0) rando = 1 + rand(3);
+			if (player.hasCock() && findStatusAffect(StatusAffects.BimboBrawl) < 0) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) game.eventParser(special1);
 			if (rando == 2) game.eventParser(special2);
@@ -234,7 +235,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("bimboBrawl") >= 0)
+			if(findStatusAffect(StatusAffects.BimboBrawl) >= 0)
 				game.sophieFollowerScene.beatUpDebimboSophie();
 			else
 				game.sophieScene.sophieLostCombat();
@@ -242,7 +243,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect("bimboBrawl") >= 0)
+			if(findStatusAffect(StatusAffects.BimboBrawl) >= 0)
 				game.sophieFollowerScene.debimboSophieBeatsYouUp();
 			else if (pcCameWorms) {
 				outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");

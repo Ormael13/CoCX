@@ -2,7 +2,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.Appearance;
 	import classes.Monster;
-	import classes.internals.Utils;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -16,7 +17,7 @@ package classes.Scenes.Areas.Bog
 			setWeaponName("tongue");
 			setWeaponVerb("tongue-slap");
 			setWeaponAttack(10);
-			createStatusAffect("attacks", 1, 0, 0, 0);
+			createStatusAffect(StatusAffects.Attacks, 1, 0, 0, 0);
 			eAttack();
 			setWeaponAttack(30);
 			setWeaponName("claws");
@@ -28,7 +29,7 @@ package classes.Scenes.Areas.Bog
 		public function chameleonClaws():void
 		{
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
 			}
 			//Evade:
@@ -49,7 +50,7 @@ package classes.Scenes.Areas.Bog
 		public function rollKickClawWhatTheFuckComboIsThisShit():void
 		{
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
 			}
 			//Evade:

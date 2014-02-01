@@ -4,8 +4,9 @@
 	import classes.ItemType;
 	import classes.PerkLib;
 	import classes.Scenes.NPCs.*;
+import classes.StatusAffects;
 
-	import coc.view.MainView;
+import coc.view.MainView;
 
 	public class Camp extends NPCAwareContent{
 
@@ -45,14 +46,14 @@
 public function doCamp():void {
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
-		player.removeStatusAffect("Post Akbal Submission");
+	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
+		player.removeStatusAffect(StatusAffects.PostAkbalSubmission);
 		kGAMECLASS.forest.akbalScene.akbalSubmissionFollowup();
 		return;
 	}
-	if(player.hasStatusAffect("Post Anemone Beatdown") >= 0) {
+	if(player.findStatusAffect(StatusAffects.PostAnemoneBeatdown) >= 0) {
 		HPChange(Math.round(player.maxHP()/2),false);
-		player.removeStatusAffect("Post Anemone Beatdown");
+		player.removeStatusAffect(StatusAffects.PostAnemoneBeatdown);
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	gameState = 0;
@@ -90,7 +91,7 @@ public function doCamp():void {
 		kGAMECLASS.processJackFrostEvent();
 		return;
 	}
-	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
+	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		hideMenus();
 		milkWaifu.ratducto();
 		return;
@@ -239,7 +240,7 @@ public function doCamp():void {
 		}
 	}
 	//Jojo treeflips!
-	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		holliScene.JojoTransformAndRollOut();
 		hideMenus();
 		return;
@@ -257,18 +258,18 @@ public function doCamp():void {
 		return;
 	}
 	//Anemone birth followup!
-	if(player.hasStatusAffect("Camp Anemone Trigger") >= 0) {
-		player.removeStatusAffect("Camp Anemone Trigger");
+	if(player.findStatusAffect(StatusAffects.CampAnemoneTrigger) >= 0) {
+		player.removeStatusAffect(StatusAffects.CampAnemoneTrigger);
 		anemoneScene.anemoneKidBirthPtII();
 		hideMenus();
 		return;
 	}
 	//Exgartuan clearing
-	if(player.statusAffectv1("Exgartuan") == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
+	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
 		exgartuanCampUpdate();
 		return;
 	}
-	else if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() < 12) {
+	else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
 		exgartuanCampUpdate();
 		return;
 	}
@@ -279,7 +280,7 @@ public function doCamp():void {
 		return;
 	}
 	//Marble meets follower izzy when moving in
-	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.hasStatusAffect("Camp Marble") >= 0) {
+	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		isabellaFollowerScene.angryMurble();
 		hideMenus();
 		return;
@@ -310,7 +311,7 @@ public function doCamp():void {
 		return;
 	}
 	//Rathazul freaks out about jojo
-	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && campCorruptJojo()) {
+	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && campCorruptJojo()) {
 		finter.rathazulFreaksOverJojo();
 		hideMenus();
 		return;
@@ -328,15 +329,15 @@ public function doCamp():void {
 		return;
 	}
 	//Amily/Marble Freakout
-	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
+	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
 		finter.marbleVsAmilyFreakout();
 		hideMenus();
 		return;
 	}
 	//Amily and/or Jojo freakout about Vapula!!
-	if(vapulaSlave() && (player.hasStatusAffect("PureCampJojo") >= 0 || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))) {
+	if(vapulaSlave() && (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))) {
 		//Jojo but not Amily
-		if(player.hasStatusAffect("PureCampJojo") >= 0 && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))
+		if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))
 			vapula.mouseWaifuFreakout(false,true);
 		//Amily but not Jojo
 		else if((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt())) vapula.mouseWaifuFreakout(true,false);
@@ -371,7 +372,7 @@ public function doCamp():void {
 	if(places(false)) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
-	if(player.hasStatusAffect("Slime Craving Output") >= 0) player.removeStatusAffect("Slime Craving Output");
+	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
 	flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] = 0;
 	//Display Proper Buttons
@@ -421,7 +422,7 @@ public function doCamp():void {
 		else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
 	}
 	//Nursery
-	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusAffect("Camp Marble") >= 0) {
+	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		outputText("  Marble has built a fairly secure nursery amongst the rocks to house your ",false);
 		if(flags[kFLAGS.MARBLE_KIDS] == 0) outputText("future children", false);
 		else {
@@ -463,7 +464,7 @@ public function doCamp():void {
 		}
 	}
 	//Traps
-	if(player.hasStatusAffect("Defense: Canopy") >= 0) {
+	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) {
 		outputText("  A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.", false);
 	}
 	else outputText("  You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.", false);
@@ -480,7 +481,7 @@ public function doCamp():void {
 	}
 	//BIMBO SOPHAH
 	if(bimboSophie()) sophieBimbo.sophieCampLines();
-	if(player.hasStatusAffect("Camp Marble") >= 0) {
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two-handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
 		//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
@@ -493,7 +494,7 @@ public function doCamp():void {
 		//at 6-7 in the morning, scene always displays at this time
 		else if(model.time.hours == 6 || model.time.hours == 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
 		//after nightfall, scene always displays at this time unless PC is wormed
-		else if(model.time.hours == 21 && player.hasStatusAffect("infested") < 0) {
+		else if(model.time.hours == 21 && player.findStatusAffect(StatusAffects.Infested) < 0) {
 			outputText("Marble is hanging around her bedroll waiting for you to come to bed.  However, sometimes she lies down for a bit, and sometimes she paces next to it.");
 			if(flags[kFLAGS.MARBLE_LUST] > 30) outputText("  She seems to be feeling antsy.");
 		}
@@ -528,7 +529,7 @@ public function doCamp():void {
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
-	if(player.hasStatusAffect("Camp Rathazul") >= 0) {
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  <b>He's finished with the task you gave him!</b>", false);
@@ -553,7 +554,7 @@ public function doCamp():void {
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if(campCorruptJojo()) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 	//Pure Jojo
-	if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
+	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 	//Izma
 	if(izmaFollower()) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover.  It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric.  Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.  ", false);
@@ -575,15 +576,14 @@ public function doCamp():void {
 		outputText("\n\n");
 	}
 	//Clear bee-status
-	if(player.hasStatusAffect("paralyze venom") >= 0) {
-		temp = player.hasStatusAffect("paralyze venom");
-		dynStats("str", player.statusAffects[temp].value1,"spe", player.statusAffects[temp].value2);
-		player.removeStatusAffect("paralyze venom");
+	if(player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0) {
+		dynStats("str", player.statusAffectv1(StatusAffects.ParalyzeVenom),"spe", player.statusAffectv2(StatusAffects.ParalyzeVenom));
+		player.removeStatusAffect(StatusAffects.ParalyzeVenom);
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
 	//The uber horny
 	if(player.lust >= 100) {
-		if(player.hasStatusAffect("dysfunction") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
 			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n", false);
 		}
 		else if(flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
@@ -597,7 +597,7 @@ public function doCamp():void {
 		}
 	}
 	var baitText:String = "Masturbate";
-	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66 && !(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)) baitText = "Meditate";
+	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66 && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
 	//Initialize companions/followers
 	if(model.time.hours > 4 && model.time.hours < 23) {
 		if(followersCount() > 0) 
@@ -742,8 +742,8 @@ public function followersCount():Number {
 	var counter:Number = 0;
 	if(emberScene.followerEmber()) counter++;
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-	if(player.hasStatusAffect("PureCampJojo") >= 0) counter++;
-	if(player.hasStatusAffect("Camp Rathazul") >= 0) counter++;
+	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) counter++;
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) counter++;
 	if(followerShouldra()) counter++;
 	if(sophieFollower()) counter++;
 	if(helspawnFollower()) counter++;
@@ -768,7 +768,7 @@ public function loversCount():Number {
 	//Izma!
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) counter++;
 	if(isabellaFollower()) counter++;
-	if(player.hasStatusAffect("Camp Marble") >= 0) counter++;
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) counter++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if(followerKiha()) counter++;
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
@@ -834,9 +834,9 @@ public function campLoversMenu():void {
 			outputText("Isabella ", false);
 			var izzyCreeps:Array = [];
 			//Build array of choices for izzy to talk to
-			if(player.hasStatusAffect("Camp Rathazul") >= 0)
+			if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 				izzyCreeps[izzyCreeps.length] = 0;
-			if(player.hasStatusAffect("PureCampJojo") >= 0)
+			if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0)
 				izzyCreeps[izzyCreeps.length] = 1;
 			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 2;
@@ -876,7 +876,7 @@ public function campLoversMenu():void {
 		izmaEvent = izmaScene.izmaFollowerMenu;
 	}
 	//MARBLE
-	if(player.hasStatusAffect("Camp Marble") >= 0) {
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
 		//(Choose one of these at random to display each hour)
@@ -899,7 +899,7 @@ public function campLoversMenu():void {
 		temp = rand(6);
 		if(temp == 0) {
 			outputText("dripping water and stark naked from a bath in the stream", false);
-			if(player.hasStatusAffect("Camp Rathazul") >= 0) outputText(".  Rathazul glances over and immediately gets a nosebleed", false);
+			if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText(".  Rathazul glances over and immediately gets a nosebleed", false);
 		}
 		else if(temp == 1) outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe", false);
 		else if(temp == 2) outputText("dipping freshly-made darts into a jar of something that looks poisonous", false);
@@ -995,13 +995,13 @@ public function campFollowers():void {
 		shouldra = shouldraFollower.shouldraFollowerScreen;
 	}
 	//Pure Jojo
-	if(player.hasStatusAffect("PureCampJojo") >= 0) {
+	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 		jojoEvent = 2150;
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
-	if(player.hasStatusAffect("Camp Rathazul") >= 0) {
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		rathazulEvent = 2070;
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
@@ -1051,7 +1051,7 @@ public function rest():void {
 		outputText("You lie down to rest for four hours.\n", true);
 		timeQ = 4;
 		//Marble withdrawl
-		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
+		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			HPChange(timeQ * 510, true);
 			dynStats("tou", -.1, "int", -.1);
@@ -1080,7 +1080,7 @@ public function doWait():void {
 		outputText("You wait four hours...\n", false);
 		timeQ = 4;
 		//Marble withdrawl
-		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
+		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			//fatigue
 			fatigue(-1*timeQ); 
@@ -1135,7 +1135,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			return;
 		}
 		//Shouldra xgartuan fight
-		if(player.hasCock() && followerShouldra() && player.statusAffectv1("Exgartuan") == 1) {
+		if(player.hasCock() && followerShouldra() && player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
 				shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 				sleepRecovery(false);
@@ -1156,7 +1156,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
 		//Marble Sleepies
-		if(player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
+		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
 			if(marbleScene.marbleNightSleepFlavor()) {
 				sleepRecovery(false);
 				return;
@@ -1236,7 +1236,7 @@ public function sleepWrapper():void {
 
 public function sleepRecovery(display:Boolean = false):void {
 	//Marble withdrawl
-	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
+	if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 		HPChange(timeQ * 10, true);
 		dynStats("tou", -.1, "int", -.1);
@@ -1386,7 +1386,7 @@ public function nightSuccubiRepeat():void {
 			//Clear out any queue'ed events if bad-end
 			//coming.  PC has to dig his own grave.
 			if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
-				player.removeStatusAffect("succubiNight");
+				player.removeStatusAffect(StatusAffects.SuccubiNight);
 			}
 			fatigue(20);
 			player.cumMultiplier++;
@@ -1410,7 +1410,7 @@ public function places(display:Boolean):Boolean {
 	var bazaar:* = 0;
 	var owca:* = 0;
 	var dungeonsArg:* = 0;
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) 
+	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
 		dungeonsArg = dungeons;
 	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
 		owca = kGAMECLASS.owca.gangbangVillageStuff;
@@ -1418,14 +1418,14 @@ public function places(display:Boolean):Boolean {
 	//turn on ruins
 	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
 	//turn on teladre
-	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.hasStatusAffect("hairdresser meeting") >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
+	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
+	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
 	//turn on boat
-	if(player.hasStatusAffect("Boat Discovery") >= 0) _boat = kGAMECLASS.boat.boatExplore;
+	if(player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) _boat = kGAMECLASS.boat.boatExplore;
 	
 	//Turn on main farm encounter!
-	if(player.hasStatusAffect("Met Whitney") >= 0) {
-		if(player.statusAffects[player.hasStatusAffect("Met Whitney")].value1 > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
+	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
+		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
 	}
 	//Turn on bazaar encounter
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
@@ -1443,31 +1443,31 @@ private function dungeons():void {
 	//Turn on d2
 	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
 	//Turn on dungeon
-	if(player.hasStatusAffect("Found Factory") >= 0) addButton(1,"Factory",eventParser,11057);
+	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1,"Factory",eventParser,11057);
 	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
 	addButton(9,"Back",eventParser,71);
 }
 
 private function exgartuanCampUpdate():void {
 	//Update Exgartuan stuff
-	if(player.hasStatusAffect("Exgartuan") >= 0) 
+	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0)
 	{
-		trace("EXGARTUAN V1: " + player.statusAffectv1("Exgartuan") + " V2: " + player.statusAffectv2("Exgartuan"));
+		trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
 		//if too small dick, remove him
-		if(player.statusAffectv1("Exgartuan") == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) 
+		if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
 		{
 			outputText("", true);
 			outputText("<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.", false);
 			if(player.hasCock()) outputText("  Perhaps you got too small for Exgartuan to handle?</b>\n", false);
 			else outputText("  It looks like the demon didn't want to stick around without your manhood.</b>\n", false);
-			player.removeStatusAffect("Exgartuan");
+			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}
 		//Tit removal
-		else if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() < 12) 
+		else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 		{
 			outputText("", true);
 			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
-			player.removeStatusAffect("Exgartuan");
+			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}		
 	}
 	doNext(1);

@@ -11,6 +11,7 @@ package classes.Scenes.Areas.Forest
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.Scenes.Monsters.Imp;
+	import classes.StatusAffects;
 
 	public class KitsuneScene extends BaseContent
 	{
@@ -46,7 +47,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You are about to question her, but are interrupted as an imp flies out of the thicket, growling and clawing at you menacingly.  At least...  clearly it's <i>trying</i> to be menacing.  The melodramatic display comes off as more hilarious than anything, but the woman cowering behind you obviously feels threatened, so you might as well deal with the pest.");
 			// -> Standard Imp Battle
 			startCombat(new Imp());
-			monster.createStatusAffect("Kitsune Fight", 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.KitsuneFight, 0, 0, 0, 0);
 			doNext(1);
 			flags[kFLAGS.MET_KITSUNES]++;
 		}
@@ -943,8 +944,8 @@ package classes.Scenes.Areas.Forest
 			dynStats("lib", 1, "sen", 1, "lus=", 0);
 			player.boostLactation(1.5);
 			if (player.findPerk(PerkLib.Feeder) >= 0) {
-				player.addStatusValue("Feeder", 1, 1);
-				player.changeStatusValue("Feeder", 2, 0);
+				player.addStatusValue(StatusAffects.Feeder, 1, 1);
+				player.changeStatusValue(StatusAffects.Feeder, 2, 0);
 			}
 			cleanupAfterCombat();
 		}
@@ -1459,7 +1460,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("She cries out in protest as you wrestle her to the ground, uncorking the draft with your thumb and using your other hand to plug her nose.  You press the mouth of the vial up to her lips insistently, and it isn't long before she has to gasp for fresh air, allowing you to dump the contents down her throat.  She coughs and sputters a little, trying to spit it out, but you put a bit of pressure on her jaw to prevent exactly that, massaging her neck gently to help coerce her to swallow.  The moment the potent aphrodisiac begins to flow down her throat, you can feel the surface of her skin turn feverish with lust, a blush of deepest crimson spreading across her face.\n\n");
 
-			outputText("The powerful scent of feminine musk fills the air almost instantly, a viscous puddle spreading between her legs and soaking through the crotch of her robes." + ((player.dogCocks() > 0) || (player.hasStatusAffect("rut") >= 0) ? "  As the potent smell fills your nostrils, your " + cockDescript(x) + " swells in anticipation, reacting instinctively to the scent of a female in heat.  Lurid fantasies of plugging her sloppy snatch with your " + ((player.dogCocks() > 0) ? "knot" : cockDescript(x)) + " and stuffing her belly full of kits rush into your mind unbidden" + ((player.cor < 20) ? ", disturbing you slightly" : "") + "." : "") + "  Her body trembles and quakes with carnal need, pure animalistic desire burning in her eyes.  As the effects of her chemical-induced heat come into full swing, she struggles to maintain some semblance of rational thought, desperately willing herself to crawl away.\n\n");
+			outputText("The powerful scent of feminine musk fills the air almost instantly, a viscous puddle spreading between her legs and soaking through the crotch of her robes." + ((player.dogCocks() > 0) || (player.findStatusAffect(StatusAffects.Rut) >= 0) ? "  As the potent smell fills your nostrils, your " + cockDescript(x) + " swells in anticipation, reacting instinctively to the scent of a female in heat.  Lurid fantasies of plugging her sloppy snatch with your " + ((player.dogCocks() > 0) ? "knot" : cockDescript(x)) + " and stuffing her belly full of kits rush into your mind unbidden" + ((player.cor < 20) ? ", disturbing you slightly" : "") + "." : "") + "  Her body trembles and quakes with carnal need, pure animalistic desire burning in her eyes.  As the effects of her chemical-induced heat come into full swing, she struggles to maintain some semblance of rational thought, desperately willing herself to crawl away.\n\n");
 
 			outputText("You look on with mild amusement as she drags herself one, two, three feet away, and collapses in a shivering wreck, raising her ample rear into the air.  Her hips flex and pump in defiance of her will, all six of her golden tails raised high and fanned out as she claws out of her robes, exposing her drenched fuckhole and gorgeous tattooed ass.\n\n");
 
@@ -1473,7 +1474,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("You grin a bit at her declaration, reaching forward and sliding your finger down her spine gently.  She practically collapses under your light touch, convulsing in pleasure as every one of her tails bristles in response, nearly orgasming again from that alone." + ((player.cor < 33) ? "  You wonder if you've gone too far, and whether you should be somewhat concerned for the poor thing's sanity.  If you don't do something to satisfy her insatiable lust, though, that alone might be enough to break her." : "  You grin evilly, dragging your fingertips down your new pet's back and laughing as she spasms uncontrollably, spraying femcum unceasingly.  The little cocktease was so keen on making a fool of you before - where's her smug sense of superiority now?") + "\n\n");
 
-			if (player.dogCocks() > 0 || player.hasStatusAffect("rut") >= 0) outputText("The sweet musk of her voluminous fem-jizz fills your mind with a lustful haze, higher-order thought processes gradually shutting down as animalistic mating instinct begins to take over.  ");
+			if (player.dogCocks() > 0 || player.findStatusAffect(StatusAffects.Rut) >= 0) outputText("The sweet musk of her voluminous fem-jizz fills your mind with a lustful haze, higher-order thought processes gradually shutting down as animalistic mating instinct begins to take over.  ");
 			outputText("You slide your " + cockDescript(x) + " up between the supple mounds of her ass, groaning in pleasure as she begins to glide her hips back and forth along the shaft, cooing softly.  The warm, moist breath radiating off her sodden vagina caresses your ");
 			if (player.balls > 0) outputText(ballsDescriptLight());
 			else outputText(player.legs());
@@ -1482,7 +1483,7 @@ package classes.Scenes.Areas.Forest
 			outputText("  She raises her hips higher, whimpering a little as she desperately tries to line up your " + cockDescript(x) + " with her hungry fuckhole.\n\n");
 
 			outputText("\"<i>S-stop t-teasing...</i>\" she says breathlessly, whimpering as she fails to catch your " + cockHead(x) + " in her quivering snatch for the third time in a row.  Her hips clumsily rock back, a desperate whine escaping her throat as she tries to calm her shaking body enough to finally impale herself on your ever-hardening rod.");
-			if (player.dogCocks() > 0 || player.hasStatusAffect("rut") >= 0) {
+			if (player.dogCocks() > 0 || player.findStatusAffect(StatusAffects.Rut) >= 0) {
 				outputText("  Your animalistic need to impregnate the fertile female in front of you battles with your desire to tease her, but impulse is quickly winning out over rationality.  You can only hold yourself back for a few moments longer before you give in to baser instincts and plunge your shaft into her needy pussy");
 				if (player.cockArea(x) > 50) outputText(" heedless of whether she can handle it or not.  Thankfully, you needn't worry - her cunt eagerly swallows your cock whole with room to spare, somehow");
 			}
@@ -1497,7 +1498,7 @@ package classes.Scenes.Areas.Forest
 			outputText("\"<i>Nngah!  Fuck!  I-it feels s-so good!</i>\"\n\n");
 
 			outputText("You dig your fingertips into her massive, plush ass and begin to pound her wet snatch with all your might, grunting and groaning passionately.");
-			if (player.dogCocks() > 0 || player.hasStatusAffect("rut") >= 0) outputText("  Vivid fantasies of stuffing her pussy full of your virile semen race through your mind, unable to think of anything else.  Come whatever may, you know you MUST impregnate her - there's simply no other option.");
+			if (player.dogCocks() > 0 || player.findStatusAffect(StatusAffects.Rut) >= 0) outputText("  Vivid fantasies of stuffing her pussy full of your virile semen race through your mind, unable to think of anything else.  Come whatever may, you know you MUST impregnate her - there's simply no other option.");
 			outputText("  The force with which she mashes her voluptuous derriere back into your pelvis would surely leave you sore in the morning were it not for the expansive tattoo-adorned ass cushioning the blows.\n\n");
 
 			//if (dogCocks > 0)
@@ -1510,7 +1511,7 @@ package classes.Scenes.Areas.Forest
 			}
 			outputText("Gathering her tails into your arms, you pull them tight to your chest, eliciting a pleasured moan from the lust-maddened kitsune.  She lets out a pained squeal when you tug on them suddenly, using them for additional leverage as you redouble your powerful thrusting.  You can feel every pulse of her fluttering heartbeat through the walls of her vagina, liquid heat caressing and milking your cock as more juices squirt out around your " + ((player.dogCocks() > 0) ? "knot" : cockDescript(x) ) + ".\n\n");
 
-			outputText("Your pleasure begins to rise to a head, every passionate thrust bringing you closer and closer to your final, incredible release.  In preparation, you drop down over her, placing your hands on top of " + ((player.cor < 33) ? "hers." : "her wrists to pin her down.") + ( ((player.dogCocks() > 0) || player.hasStatusAffect("rut") >= 0) ? "  You are stricken with the urge to bite her neck, and indulge it, pinching the scruff of her shoulder between your teeth." : "") + "  With a roaring moan, you buck your hips one last time, slamming down against her well-cushioned rear with one final thrust, holding there as the pressure in your " + ((player.balls > 0) ? ballsDescriptLight() : "prostate" ) + " finally boils over.  ");
+			outputText("Your pleasure begins to rise to a head, every passionate thrust bringing you closer and closer to your final, incredible release.  In preparation, you drop down over her, placing your hands on top of " + ((player.cor < 33) ? "hers." : "her wrists to pin her down.") + ( ((player.dogCocks() > 0) || player.findStatusAffect(StatusAffects.Rut) >= 0) ? "  You are stricken with the urge to bite her neck, and indulge it, pinching the scruff of her shoulder between your teeth." : "") + "  With a roaring moan, you buck your hips one last time, slamming down against her well-cushioned rear with one final thrust, holding there as the pressure in your " + ((player.balls > 0) ? ballsDescriptLight() : "prostate" ) + " finally boils over.  ");
 
 			if (player.cumQ() <= 150) {
 				outputText("Your cock spasms uncontrollably, spewing stream after stream of potent jizz into her hungry snatch.  The instant it begins to flow inside her, she locks down into another incredible orgasm, fingers digging into the dirt while tears flow from the corner of her eyes, moaning powerfully.  Her walls milk and massage you, drinking deeply of your virile cum.");
@@ -1800,8 +1801,8 @@ package classes.Scenes.Areas.Forest
 			outputText("You carefully lay her on the ground, standing and donning your " + player.armorName + " once again.  The kitsune remains rooted in the spot, weighed down by her oversized tummy.  Something tells you she won't be moving from that spot for some time.");
 			//Advance time 1hr and return to camp. +Sensitivity
 			//You've now been milked, reset the timer for that
-			player.addStatusValue("Feeder", 1, 1);
-			player.changeStatusValue("Feeder", 2, 0);
+			player.addStatusValue(StatusAffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
 			dynStats("sen", 3, "lus=", 0);
 			cleanupAfterCombat();
 		}

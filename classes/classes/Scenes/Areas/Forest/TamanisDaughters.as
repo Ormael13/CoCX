@@ -2,8 +2,9 @@ package classes.Scenes.Areas.Forest
 {
 	import classes.Monster;
 	import classes.Scenes.Monsters.Goblin;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -32,8 +33,8 @@ package classes.Scenes.Areas.Forest
 		}
 		
 		private function tamaniShowsUp():void {
-			if(hasStatusAffect("Tamani") < 0 && rand(6) == 0) {
-				createStatusAffect("Tamani",0,0,0,0);
+			if(findStatusAffect(StatusAffects.Tamani) < 0 && rand(6) == 0) {
+				createStatusAffect(StatusAffects.Tamani,0,0,0,0);
 				outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n", false);
 				outputText("You can see Tamani lurking around the rear of the goblin pack, visibly berating her daughters.  On one hand it sounds like she might help you, but knowing goblins, she'll probably forget about her anger and help them subdue you for more cum...\n\n", false);
 				//(+5 mob strength)
@@ -47,7 +48,7 @@ package classes.Scenes.Areas.Forest
 				long += " <b>Tamani lurks in the back of the crowd, curvier than her brood and watching with a mixture of amusement and irritation.  She runs a hand through her pink and black hair, waiting for an opportunity to get involved...</b>";
 			}
 			//Tamani already there - chance of potion
-			else if(rand(4) == 0 && hasStatusAffect("Tamani") >= 0) {
+			else if(rand(4) == 0 && findStatusAffect(StatusAffects.Tamani) >= 0) {
 				goblinDrugAttack();
 			}
 		}
@@ -65,7 +66,7 @@ package classes.Scenes.Areas.Forest
 			var rando:int = rand(select);
 			//Tamani's Daughters get multiattacks!
 			if(rando == 0) {
-				createStatusAffect("attacks",int(player.statusAffectv2("Tamani")/2/10),0,0,0);
+				createStatusAffect(StatusAffects.Attacks,int(player.statusAffectv2(StatusAffects.Tamani)/2/10),0,0,0);
 				eAttack();
 			}
 			if(rando == 1) game.eventParser(special1);
@@ -103,9 +104,9 @@ package classes.Scenes.Areas.Forest
 			init09PrimaryStats(55,30,45,50,70,70,50);
 			init10Weapon("fists","tiny punch");
 			init11Armor("leather straps");
-			var bonusHP:Number = 50 + (int(player.statusAffectv2("Tamani")/2)*15);
+			var bonusHP:Number = 50 + (int(player.statusAffectv2(StatusAffects.Tamani)/2)*15);
 			init12Combat(bonusHP,30,.65,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			var level:int = 8 + (Math.floor(player.statusAffectv2("Tamani")/2/10));
+			var level:int = 8 + (Math.floor(player.statusAffectv2(StatusAffects.Tamani)/2/10));
 			init13Level(level,rand(15) + 5);
 		}
 

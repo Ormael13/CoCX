@@ -4,6 +4,8 @@ import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
+
 public class TentacleBeastScene extends BaseContent{
 
 
@@ -217,15 +219,15 @@ public function tentacleLossRape():void {
 	}
 	//Bad end + counter here
 	if(player.lust > 99) {
-		temp = player.hasStatusAffect("TentacleBadEndCounter");
+		temp = player.findStatusAffect(StatusAffects.TentacleBadEndCounter);
 		if(temp < 0) {
-			player.createStatusAffect("TentacleBadEndCounter",0,0,0,0);
+			player.createStatusAffect(StatusAffects.TentacleBadEndCounter,0,0,0,0);
 		}
 		else {
 			//count up
-			player.statusAffects[temp].value1++;
+			player.statusAffect(temp).value1++;
 			//Bad end
-			if(player.statusAffects[temp].value1 >= 3 && player.cor > 50 && player.gender == 3) {
+			if(player.statusAffect(temp).value1 >= 3 && player.cor > 50 && player.gender == 3) {
 				futaTentacleBadEnd();
 				return;
 			}

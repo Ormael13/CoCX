@@ -106,6 +106,8 @@
 		include "../../includes/appearanceDefs.as";
 
 		// /
+		private var _perkLib:PerkLib = new PerkLib();// to init the static
+		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
 		public var saves:Saves = new Saves();
 		// Items/

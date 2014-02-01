@@ -4,7 +4,8 @@ package classes.Scenes.Areas.HighMountains
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CockTypesEnum;
-	
+	import classes.StatusAffects;
+
 	/**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
 	 * 
@@ -45,9 +46,9 @@ package classes.Scenes.Areas.HighMountains
 		// Bundle of logic to determine if a player might "act" like a minotaur, based off of a couple of related statusAffects
 		public function actsLikeACow():Boolean
 		{
-			if (player.hasStatusAffect("heat")) return true;
-			if (player.hasStatusAffect("rut")) return true;
-			if (player.hasStatusAffect("dysfunction")) return true;
+			if (player.findStatusAffect(StatusAffects.Heat)) return true;
+			if (player.findStatusAffect(StatusAffects.Rut)) return true;
+			if (player.findStatusAffect(StatusAffects.Dysfunction)) return true;
 			return false;
 		}
 		
@@ -302,7 +303,7 @@ package classes.Scenes.Areas.HighMountains
 				lustMod *= 2;
 			}
 
-			player.createStatusAffect("Izumis Pipe Smoke", SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
+			player.createStatusAffect(StatusAffects.IzumisPipeSmoke, SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
 			
 			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
 			player.spe += deltaSpd;
@@ -319,13 +320,13 @@ package classes.Scenes.Areas.HighMountains
 		// Update the duration of the pipe smoke effect
 		public function updateSmokeDuration(hours:int):void
 		{
-			var affectIndex:int = player.hasStatusAffect("Izumis Pipe Smoke");
+			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
 
 			if (affectIndex >= 0)
 			{
-				player.statusAffects[affectIndex].value1 -= hours;
+				player.statusAffect(affectIndex).value1 -= hours;
 
-				if (player.statusAffects[affectIndex].value1 == 0)
+				if (player.statusAffect(affectIndex).value1 == 0)
 				{
 					this.smokeEffectWearsOff();
 				}
@@ -335,13 +336,13 @@ package classes.Scenes.Areas.HighMountains
 		// Method to contain removal mechanics + scene text to spit out
 		protected function smokeEffectWearsOff():void
 		{
-			var affectIndex:int = player.hasStatusAffect("Izumis Pipe Smoke");
+			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
 
 			if (affectIndex >= 0)
 			{
-				player.sens += Math.abs(player.statusAffects[affectIndex].value2);
-				player.spe -= player.statusAffects[affectIndex].value3;
-				player.lib -= player.statusAffects[affectIndex].value4;
+				player.sens += Math.abs(player.statusAffect(affectIndex).value2);
+				player.spe -= player.statusAffect(affectIndex).value3;
+				player.lib -= player.statusAffect(affectIndex).value4;
 				
 				if (player.sens > 100) player.sens = 100;
 				if (player.spe <= 0) player.spe = 1;
@@ -349,7 +350,7 @@ package classes.Scenes.Areas.HighMountains
 				
 				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
 				
-				player.removeStatusAffect("Izumis Pipe Smoke");
+				player.removeStatusAffect(StatusAffects.IzumisPipeSmoke);
 			}
 		}
 
@@ -876,7 +877,7 @@ package classes.Scenes.Areas.HighMountains
 
 				if (player.lactationQ() > 0) outputText("You let out a moan of pleasure as a sudden jet of milk spurts from your heavy breasts, splattering across the rocky ground.  Izumi doesn’t let up though, instead working your nipple even harder, almost feverishly pinching and squeezing away, forcing more and more of the warm liquid to be coaxed free of your bust.\n\n");
 
-				if ((player.hasStatusAffect("Breasts Milked") > 0) && (player.lactationQ() > 750))
+				if ((player.findStatusAffect(StatusAffects.BreastsMilked) > 0) && (player.lactationQ() > 750))
 				{
 					outputText("You instinctively relax and lean back into the cushioned softness of Izumi’s breasts as the familiar sensation of being milked washes over you.  Your breasts respond readily to the repeated stimulation, great jets of milk answering the insistent urging of Izumi’s fingers.  Her other hand detaches itself from your groin temporarily to begin cupping and squeezing at your bust as well, much to your enjoyment.  You lay there in her arms, gazing down at your [chest] as you are being milked, and you can’t help but think to yourself");
 

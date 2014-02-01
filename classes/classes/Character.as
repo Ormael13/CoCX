@@ -1,12 +1,8 @@
 ﻿package classes 
 {
-	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Places.TelAdre.UmasShop;
 
-	/**
+/**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
 	 * @author Yoffy
 	 */
@@ -21,13 +17,13 @@
 		public function get femininity():Number
 		{
 			var fem:Number = _femininity;
-			var statIndex:int = this.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
-			
+			var statIndex:int = this.findStatusAffect(StatusAffects.UmasMassage);
+
 			if (statIndex >= 0)
 			{
-				if (this.statusAffects[statIndex].value1 == UmasShop.MASSAGE_MODELLING_BONUS)
+				if (this.statusAffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
 				{
-					fem += this.statusAffects[statIndex].value2;
+					fem += this.statusAffect(statIndex).value2;
 				}
 			}
 			
@@ -459,9 +455,9 @@
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (hasStatusAffect("Contraceptives") >= 0 && arg < 1)
+			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
-			if (hasStatusAffect("gooStuffed") >= 0) 
+			if (findStatusAffect(StatusAffects.GooStuffed) >= 0)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
@@ -493,7 +489,7 @@
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (hasStatusAffect("Contraceptives") >= 0 && arg < 1)
+			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000

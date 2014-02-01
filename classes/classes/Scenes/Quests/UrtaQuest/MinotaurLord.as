@@ -7,8 +7,9 @@ package classes.Scenes.Quests.UrtaQuest
 	import classes.Items.WeaponLib;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+import classes.StatusAffects;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 	
 	/**
 	 * ...
@@ -24,10 +25,10 @@ package classes.Scenes.Quests.UrtaQuest
 
 		private function fidoAI():void
 		{
-			if (HP < 300 && statusAffectv1("Mino Milk") < 4) minotaurDrankMalk();
+			if (HP < 300 && statusAffectv1(StatusAffects.MinoMilk) < 4) minotaurDrankMalk();
 			else if (rand(4) == 0 && player.weaponName != "fists") minotaurDisarm();
-			else if (hasStatusAffect("Timer") < 0) minotaurLordEntangle();
-			else if (hasStatusAffect("Minotaur Entangled") >= 0) minotaurCumPress();
+			else if (findStatusAffect(StatusAffects.Timer) < 0) minotaurLordEntangle();
+			else if (findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) minotaurCumPress();
 			else {
 				if (rand(2) == 0) minotaurPrecumTease();
 				else eAttack();
@@ -38,20 +39,20 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("The minotaur lord snorts audibly and turns to look at his mistress.  \"<i>What is it, Fido, boy?  You thirsty?</i>\"  The hulking minotaur nods.");
 //Success:*
-			if (statusAffectv1("Mino Milk") < 3) {
+			if (statusAffectv1(StatusAffects.MinoMilk) < 3) {
 				outputText("\"<i>Catch!</i>\"  The succubus throws a bottle containing a milky-white substance to the minotaur.  He grabs it and uncorks the bottle, quickly chugging its contents with obvious enjoyment.  After he is done he looks even more energetic and ready to fight, and his cock looks even harder!");
 				addHP(300);
 				lust += 10;
-				if (hasStatusAffect("Mino Milk") < 0)
-					createStatusAffect("Mino Milk", 1, 0, 0, 0);
+				if (findStatusAffect(StatusAffects.MinoMilk) < 0)
+					createStatusAffect(StatusAffects.MinoMilk, 1, 0, 0, 0);
 				else
-					addStatusValue("Mino Milk", 1, 1);
+					addStatusValue(StatusAffects.MinoMilk, 1, 1);
 			}
 			//Failure:*
 			else {
 				outputText("\"<i>Well too bad!  We're all out of milk... but don't worry, my dear pet, I'll let you drink as much as you want after you're done with this bitch.</i>\"  The succubus replies, idly checking her elongated nails.");
 				outputText("\n\nThe minotaur glares at you and snorts, obviously pissed at not getting his serving...");
-				addStatusValue("Mino Milk", 1, 1);
+				addStatusValue(StatusAffects.MinoMilk, 1, 1);
 			}
 			kGAMECLASS.combatRoundOver();
 		}
@@ -67,7 +68,7 @@ package classes.Scenes.Quests.UrtaQuest
 		private function minotaurLordEntangle():void
 		{
 			outputText("The minotaur lord lashes out with his chain, swinging in a wide arc!\n");
-			createStatusAffect("Timer", 2 + rand(4), 0, 0, 0);
+			createStatusAffect(StatusAffects.Timer, 2 + rand(4), 0, 0, 0);
 //{dodge/whatever}
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You leap over the clumsy swing, allowing the chain to fly harmlessly underneath you!");
@@ -76,7 +77,7 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("You try to avoid it, but you're too slow, and the chain slaps into your hip, painfully bruising you with the strength of the blow, even through your armor.  The inertia carries the back half of the whip around you, and in a second, the chain has you all wrapped up with your arms pinned to your sides and your movement restricted.");
 				outputText("\n\n\"<i>Hahaha!  Good boy, Fido!  Leash that bitch up!</i>\"  The succubus laughs with glee.");
 				outputText("\n\n<b>You're tangled up in the minotaur lord's chain, and at his mercy, unless you can break free!</b>");
-				createStatusAffect("Minotaur Entangled", 0, 0, 0, 0);
+				createStatusAffect(StatusAffects.MinotaurEntangled, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -92,7 +93,7 @@ package classes.Scenes.Quests.UrtaQuest
 				if (player.lust >= 80) outputText(" and drippy");
 				outputText(" your cock has become.  You want another taste...");
 			}
-			removeStatusAffect("Minotaur Entangled");
+			removeStatusAffect(StatusAffects.MinotaurEntangled);
 			combatRoundOver();
 		}
 

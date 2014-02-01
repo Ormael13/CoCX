@@ -4,8 +4,9 @@ package classes.Scenes.NPCs
 	import classes.Cock;
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -15,7 +16,7 @@ package classes.Scenes.NPCs
 		//[Special Attacks]
 		private function IzmaSpecials1():void {
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Izma attempts to close the distance with you, but misses completely because of her blindness.\n", false);
 				return;
 			}
@@ -46,7 +47,7 @@ package classes.Scenes.NPCs
 
 		private function IzmaSpecials2():void {
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Izma blindly tries to clinch with you, but misses completely.\n", false);
 				return;
 			}
@@ -78,7 +79,7 @@ package classes.Scenes.NPCs
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 2-5% of health for the next three turns if successful)
 				damage = player.takeDamage(damage);
 				outputText("writhe as she painfully drags the blades of her glove down your back", false);
-				player.createStatusAffect("Izma Bleed",3,0,0,0);
+				player.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back", false);
 			outputText(" before breaking her embrace and leaping away. (" + damage + ")", false);

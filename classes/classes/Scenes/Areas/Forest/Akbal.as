@@ -7,8 +7,9 @@
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -22,7 +23,7 @@
 			//Chances to miss:
 			var damage:Number = 0;
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n", false);
 			}
 			//Determine if dodged!
@@ -94,12 +95,12 @@
 		public function akbalLustAttack():void
 		{
 			//*Lust Attack - 
-			if (player.hasStatusAffect("Whispered") < 0)
+			if (player.findStatusAffect(StatusAffects.Whispered) < 0)
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.", false);
 				//(Lust increase)
 				game.dynStats("lus", 7 + (100 - player.inte) / 10);
-				player.createStatusAffect("Whispered",0,0,0,0);
+				player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
 			else
@@ -120,10 +121,10 @@
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.", false);
 				//(Speed decrease)
 				game.dynStats("spe", speedChange);
-				if (player.hasStatusAffect("Akbal Speed") >= 0)
-					player.addStatusValue("Akbal Speed", 1, speedChange);
+				if (player.findStatusAffect(StatusAffects.AkbalSpeed) >= 0)
+					player.addStatusValue(StatusAffects.AkbalSpeed, 1, speedChange);
 				else
-					player.createStatusAffect("Akbal Speed", speedChange, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.AkbalSpeed, speedChange, 0, 0, 0);
 			}
 			//*Special Attack B - 
 			else

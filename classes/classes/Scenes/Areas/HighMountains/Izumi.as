@@ -3,8 +3,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
 	 * Most of the combat damage and stats will need to actually be tuned. I have no idea about what
 	 * these values should be for the intended effect.
@@ -47,7 +48,7 @@ package classes.Scenes.Areas.HighMountains
 		// Monster won, not player, gg for descriptive method names
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusAffect("Titsmother") >= 0)
+			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
 			{
 				this.cleanup();
 				game.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
@@ -65,13 +66,13 @@ package classes.Scenes.Areas.HighMountains
 		override protected function performCombatAction():void
 		{
 			// Handle chokeslam mechanics
-			if (player.hasStatusAffect("Chokeslam") >= 0)
+			if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0)
 			{
-				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusAffects[player.hasStatusAffect("Chokeslam")].value1);
+				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusAffectv1(StatusAffects.Chokeslam));
 				
-				player.statusAffects[player.hasStatusAffect("Chokeslam")].value1 -= 1;
+				player.addStatusValue(StatusAffects.Chokeslam,1,-1);
 				
-				if (player.statusAffectv1("Chokeslam") <= 0)
+				if (player.statusAffectv1(StatusAffects.Chokeslam) <= 0)
 				{
 					chokeSlamDamage();
 					cleanupChokeslam();
@@ -82,18 +83,18 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Handle groundpound
-			if (player.hasStatusAffect("Groundpound") >= 0)
+			if (player.findStatusAffect(StatusAffects.Groundpound) >= 0)
 			{
-				player.statusAffects[player.hasStatusAffect("Groundpound")].value1 -= 1;
+				player.addStatusValue(StatusAffects.Groundpound,1,-1);
 				
-				if (player.statusAffectv1("Groundpound") <= 0)
+				if (player.statusAffectv1(StatusAffects.Groundpound) <= 0)
 				{
 					cleanupGroundpound();
 				}
 			}
 			
 			// Handle titsmother
-			if (player.hasStatusAffect("Titsmother") >= 0)
+			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
 			{
 				combatRoundOver();
 				return;
@@ -102,24 +103,24 @@ package classes.Scenes.Areas.HighMountains
 			// Titsmother toggle; gonna need to play with this, it should only be used once per fight
 			if (this.HPRatio() <= 0.25)
 			{
-				if (this.hasStatusAffect("Used Titsmother") <= -1)
+				if (this.findStatusAffect(StatusAffects.UsedTitsmother) <= -1)
 				{
 					trace("Could use titsmother...");
 				}
 			}
 			
-			if ((this.HPRatio() <= 0.25) && (this.hasStatusAffect("Used Titsmother") <= -1))
+			if ((this.HPRatio() <= 0.25) && (this.findStatusAffect(StatusAffects.UsedTitsmother) <= -1))
 			{
 				if (combatDebug) trace("Using Titsmother!");
 				titSmother();
-				this.createStatusAffect("Used Titsmother", 0, 0, 0, 0);
+				this.createStatusAffect(StatusAffects.UsedTitsmother, 0, 0, 0, 0);
 				return;
 			}
 			else
 			{
 				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
 				
-				if (player.hasStatusAffect("Groundpound") <= -1)
+				if (player.findStatusAffect(StatusAffects.Groundpound) <= -1)
 				{
 					actions.push(groundPound);
 					actions.push(groundPound);
@@ -196,7 +197,7 @@ package classes.Scenes.Areas.HighMountains
 			else
 			{
 				outputText("Izumi surges towards you, smashing aside your guard and seizing you by the throat in the blink of an eye.  Lifting you above her head, you can only struggle to breathe as the enormous Oni grins at you like some sort of prize.");
-				player.createStatusAffect("Chokeslam", 3, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Chokeslam, 3, 0, 0, 0);
 				
 				if (combatDebug) trace("Applied Chokeslam effect");
 			}
@@ -284,11 +285,11 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat
 		public function cleanupChokeslam():void
 		{
-			if (player.hasStatusAffect("Chokeslam") >= 0)
+			if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0)
 			{
 				trace("Removing chokeslam");
 				
-				player.removeStatusAffect("Chokeslam");
+				player.removeStatusAffect(StatusAffects.Chokeslam);
 			}
 		}
 		
@@ -306,7 +307,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("The rumbling actually knocks you off your feet, sprawling on the ground and banging your head.  As the shaking subsides, you pull yourself upright, but you feel a little unsteady on your [feet] after the disorienting impact.");
 				
 				var spdReducedBy:int = int(player.spe * 0.1);
-				player.createStatusAffect("Groundpound", 3, spdReducedBy, 0, 0);
+				player.createStatusAffect(StatusAffects.Groundpound, 3, spdReducedBy, 0, 0);
 				game.dynStats("spe-", spdReducedBy);
 				
 				if (combatDebug) trace("Applying Groundslam slow");
@@ -318,13 +319,13 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat, fixup stats
 		public function cleanupGroundpound():void
 		{
-			if (player.hasStatusAffect("Groundpound") >= 0)
+			if (player.findStatusAffect(StatusAffects.Groundpound) >= 0)
 			{
 				// Can't use dynStats to achieve this, as it can give back more speed than we originally took away due to perks
-				player.spe += player.statusAffectv2("Groundpound");
+				player.spe += player.statusAffectv2(StatusAffects.Groundpound);
 				if (player.spe > 100) player.spe = 100;
 				
-				player.removeStatusAffect("Groundpound");
+				player.removeStatusAffect(StatusAffects.Groundpound);
 				
 				trace("Removing Groundpound slow effect");
 			}
@@ -339,7 +340,7 @@ package classes.Scenes.Areas.HighMountains
 			// Attack will ALWAYS hit, but be relatively easy to break out of
 			outputText("With a sudden burst of speed, the Oni woman bullrushes you, slapping aside your hasty defence.  You brace yourself for a powerful impact, but rather than strike you she instead thrusts her arm straight past your head.  Bemused, you turn your head to follow her fist, just in time to see her crook her elbow and yank you back towards her - hard.  Pulled right off your [feet] by the sudden strike, you slam [if (player.hasMuzzle)muzzle-|face-] first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
-			player.createStatusAffect("Titsmother", 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.Titsmother, 0, 0, 0, 0);
 			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
 			combatRoundOver();
 		}
@@ -347,9 +348,9 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat
 		public function cleanupTitsmother():void
 		{
-			if (player.hasStatusAffect("Titsmother") >= 0)
+			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
 			{
-				player.removeStatusAffect("Titsmother");
+				player.removeStatusAffect(StatusAffects.Titsmother);
 				if (combatDebug) trace("Removing Titsmother");
 			}
 		}

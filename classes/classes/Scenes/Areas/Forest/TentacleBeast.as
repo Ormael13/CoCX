@@ -6,8 +6,9 @@
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -33,7 +34,7 @@
 		private function tentacleEntwine():void {
 			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n", false);
 			//Not Trapped yet
-			if(player.hasStatusAffect("TentacleBind") < 0) {
+			if(player.findStatusAffect(StatusAffects.TentacleBind) < 0) {
 				//Success
 				if(int(Math.random()*(((player.spe)/2))) > 15 || (player.findPerk(PerkLib.Evade) >= 0 && int(Math.random()*(((player.spe)/2))) > 15)) {
 					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n", false);
@@ -48,7 +49,7 @@
 					//Genderless
 					else outputText("The creature quickly positions a long tentacle against your " + game.assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
 					game.dynStats("lus", (8+player.sens/20));
-					player.createStatusAffect("TentacleBind",0,0,0,0);
+					player.createStatusAffect(StatusAffects.TentacleBind,0,0,0,0);
 				}
 			}
 			combatRoundOver();
@@ -61,8 +62,8 @@
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.", false);
 			}
-			if (hasStatusAffect("PhyllaFight") >= 0) {
-				removeStatusAffect("PhyllaFight");
+			if (findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else {
@@ -79,16 +80,16 @@
 		{
 			if (hpVictory) {
 				outputText("Overcome by your wounds, you turn to make a last desperate attempt to run...\n\n");
-				if (hasStatusAffect("PhyllaFight") >= 0) {
-					removeStatusAffect("PhyllaFight");
+				if (findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+					removeStatusAffect(StatusAffects.PhyllaFight);
 					outputText("...and make it into the nearby tunnel.  ");
 					game.desert.antsScene.phyllaTentaclePCLoss();
 				} else
 					game.forest.tentacleBeastScene.tentacleLossRape();
 			} else {
 				outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
-				if(hasStatusAffect("PhyllaFight") >= 0) {
-					removeStatusAffect("PhyllaFight");
+				if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+					removeStatusAffect(StatusAffects.PhyllaFight);
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
 					game.desert.antsScene.phyllaTentaclePCLoss();
 				} else
@@ -99,7 +100,7 @@
 		override protected function performCombatAction():void
 		{
 			//tentacle beasts have special AI
-			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) game.eventParser(special1);
+			if (rand(2) == 0 || findStatusAffect(StatusAffects.TentacleCoolDown) >= 0) game.eventParser(special1);
 			else game.eventParser(special2);
 		}
 

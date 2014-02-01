@@ -9,8 +9,9 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
-	public class BeeGirlScene extends BaseContent
+public class BeeGirlScene extends BaseContent
 	{
 		public function BeeGirlScene()
 		{
@@ -41,7 +42,7 @@ package classes.Scenes.Areas.Forest
 			//Bee appears!
 			outputText("That's when she comes into view. A great woman, yellow and black, a Bee-like handmaiden would be the best comparison. She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen. Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly, bending into a smile as she sees you approach. Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n", false);
 			//Exgartuan messes with things!
-			if (player.statusAffectv1("Exgartuan") == 1 && player.cockArea(0) > 100 && player.statusAffectv2("Exgartuan") == 0) {
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
 				if (rand(2) == 0) {
 					outputText("Your " + cockDescript(0) + " wriggles free of your " + player.armorName + ", as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n", false);
 					outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + cockDescript(0) + ".  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, " + player.short + "?  I need some honeyyy!</i>\"\n\n", false);
@@ -564,7 +565,7 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				//Male + venomz
-				if ((player.hasStatusAffect("paralyze venom") >= 0 || player.hasStatusAffect("lust venom") >= 0) && !sexed && player.cockTotal() == 1) {
+				if ((player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0 || player.findStatusAffect(StatusAffects.lustvenom) >= 0) && !sexed && player.cockTotal() == 1) {
 					outputText("The bee-girl stands directly over you, looking down at you with a triumphant cute smile across her face, her eyes surveying every millimeter of your body. All you can do is lay there looking up at her fine figure and a profile of her ample breasts with a knowing smile on your face. She crouches down on all fours, just out of your reach, and begins to rhythmically shake her extended abdomen like a child's toy.\n\n", false);
 
 					outputText("Suddenly reality kicks in as you feel the venom coursing though your body, and your heart begins to race faster and faster by the minute. A dull pain swells deep inside your head as if it were about to explode; you try to lift your arms to cradle your head but can't, and slowly a new sensation takes over as your manhood begins to swell in size and length, trying to break through your clothes. A faint buzzing sound comes seemingly from nowhere, growing louder and getting closer every second. As the pain in your head decreases, you suddenly feel parched, your mouth as dry as the desert sands.  You try to let out a moan but all you can do is breathe rapidly, as if you are burning up inside.\n\n", false);
@@ -1328,8 +1329,8 @@ package classes.Scenes.Areas.Forest
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue("Feeder", 1, 1);
-			player.changeStatusValue("Feeder", 2, 0);
+			player.addStatusValue(StatusAffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
 			cleanupAfterCombat();
 		}
 

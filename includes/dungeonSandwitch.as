@@ -522,7 +522,7 @@ public function gangrush():void {
 	outputText("The witches close ranks and advance with raised fists, intent on beating you into submission!\n");
 	//3-5 attacks.at half strength
 	monster.str -= 10;
-	monster.createStatusAffect("attacks",2 + rand(3),0,0,0);
+	monster.createStatusAffect(StatusAffects.Attacks,2 + rand(3),0,0,0);
 	monster.eAttack();
 	monster.str += 10;
 	
@@ -605,14 +605,14 @@ public function sandstonesAreCool():void {
 			bonus = 5;
 			
 		}
-		player.createStatusAffect("lust stones",bonus,0,0,0);
+		player.createStatusAffect(StatusAffects.LustStones,bonus,0,0,0);
 		dynStats("lus", bonus * 2 + 5 + player.sens/7);
 	}
 	//[If attack misses]
 	else {
 		outputText("\nThe stones then make a ninety degree turn into the purple fire, and then nothing.  One sand-witch smacks another upside the head, yelling something about focusing.");
 	}
-	monster.removeStatusAffect("sandstorm");
+	monster.removeStatusAffect(StatusAffects.Sandstorm);
 	combatRoundOver();
 }
 
@@ -636,14 +636,14 @@ public function sandStormAttack():void {
 	else {
 		outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
 	}
-	monster.createStatusAffect("sandstorm",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Sandstorm,0,0,0,0);
 	combatRoundOver();
 }
 
 public function sandWitchMobAI():void {
-	if(monster.hasStatusAffect("sandstorm") < 0) sandStormAttack();
+	if(monster.findStatusAffect(StatusAffects.Sandstorm) < 0) sandStormAttack();
 	else if(monster.HPRatio() < .5) drankSomeMialk();
-	else if(monster.hasStatusAffect("sandstorm") >= 0 && rand(2) == 0 && player.hasStatusAffect("lust stones") < 0) sandstonesAreCool();
+	else if(monster.findStatusAffect(StatusAffects.Sandstorm) >= 0 && rand(2) == 0 && player.findStatusAffect(StatusAffects.LustStones) < 0) sandstonesAreCool();
 	else if(rand(3) == 0) headbuttABitch();
 	else gangrush();
 }
@@ -660,7 +660,7 @@ public function cumWitchAI():void {
 	if(player.hasCock()) choices[choices.length] = cumMagicAttack;
 	choices[choices.length] = bukkakeAttack;
 	choices[choices.length] = cocknosisAttack;
-	if(monster.hasStatusAffect("Shell") < 0) {
+	if(monster.findStatusAffect(StatusAffects.Shell) < 0) {
 		choices[choices.length] = shellDefense;
 		choices[choices.length] = shellDefense;
 		choices[choices.length] = shellDefense;
@@ -742,7 +742,7 @@ public function genderConfusionAttack():void {
 	outputText("Touching her alabaster staff to her brow, just under the brim of her hat, the Cum Witch makes a brief incantation and fixes you with her gaze.  Her eyes flash blindingly white, and then you feel her inside you, rifling through your memories, digging up memories of your childhood, your past, and throwing them against you.  ");
 	if(player.inte/5 + rand(20) + player.level/2 < 18) {
 		outputText("She batters your consciousness with conflicting memories of your gender, utterly dazing you.  How can you fight when you can barely tell who you are anymore?");
-		player.createStatusAffect("Confusion",0,0,0,0);
+		player.createStatusAffect(StatusAffects.Confusion,0,0,0,0);
 	}
 	else {
 		outputText("You parse the flood of information with mental focus and expel the intruder from your mind with a clenching of your sizable intellect.");
@@ -753,7 +753,7 @@ public function genderConfusionAttack():void {
 public function shellDefense():void {
 	//*Grants immunity to all magic-based attacks for the next two turns.
 	outputText("The Cum Witch holds her staff in both hands and rotates it in a circle, chanting all the while.  Her voice rises in pitch and intensity until she's screaming out unwords of power.  With one final cry, she slams her staff down into the ground hard enough to kick up a puff of sandy dust.  It quickly settles, but the Cum Witch has some kind of glittering, reflective shield around herself now!");
-	monster.createStatusAffect("Shell",3,0,0,0);
+	monster.createStatusAffect(StatusAffects.Shell,3,0,0,0);
 	combatRoundOver();
 }
 
@@ -1003,7 +1003,7 @@ public function beACumPumpPartII():void {
 public function cumPumpVolumeThree():void {
 	clearOutput();
 	outputText("With the champion brainwashed into a little more than a loyal cum-pump for the sand witches, they grow in number and strength with alarming speed.  In the space of eight years, the desert is transformed into a verdant forest.  For better or for worse, the witches finally rival the demons in power.  They spread their influence wider, eventually ");
-	if(player.hasStatusAffect("FactoryOverload") >= 0) outputText("destroying");
+	if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) outputText("destroying");
 	else outputText("rescuing");
 	outputText(" Marae.  Their abilities, numbers, and familiarity at dealing with demons lend them great success at battling Lethice's growing hordes, and within the span of another decade, the demons are exterminated.  The witches are hailed as saviors, and young females of all races seek to join them.  You, of course, inseminate all of them.");
 	
@@ -2485,7 +2485,7 @@ public function explainYourSelfToZeSandBitch():void {
 	
 	outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 	//(No new PG.  Corrupt version)
-	if(player.cor > player.inte || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+	if(player.cor > player.inte || monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 		outputText("  \"<i>There is some truth to your tale, [name], but I am a Sand Mother.  We are schooled in the art of sussing out the corrupt or unclean.  If we could not detect disguised demons and demonic agents, we would not flourish as we do now, and this great desert would not be on the cusp of resurrection.</i>\"");
 		outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 		outputText("\n\nThere's no way out, it's a fight!");
@@ -2519,7 +2519,7 @@ public function fightTheSandWitch():void {
 public function earthShield():void {
 	//Surrounds the witch a vortex of stones, raising her defense greatly and conferring 25% block to standard attacks.
 	outputText("Lowering her scepter towards the ground, the eight-foot tall sorceress suddenly grunts, lifting it as if carrying great weight.  As the small staff passes her chest, bits of stone and rock begin to lift out of the ground, accelerating into a vortex of earth that spins around her.  <b>It's going to be harder to hit her with physical attacks now!</b>");
-	monster.createStatusAffect("Earthshield",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Earthshield,0,0,0,0);
 	combatRoundOver();
 }
 //*GigaFire
@@ -2527,14 +2527,14 @@ public function gigaFire():void {
 	//Begins focusing into her staff, which floats in front of her.  PC disrupt attack by attacking.  Attack hits at half strength if disrupted.
 	outputText("Releasing the scepter, the Sand Mother spreads her hands, each glowing with eldritch, white flames.  Her heels slowly float up off the ground as she closes her eyes in concentration.  You can sense the power and heat rolling off her in waves, and if you don't do something to disrupt her, you'll likely be burned to a crisp.");
 	if(player.inte > 40) outputText("  She's not even looking at you and seems steeled against lusty interruptions.  Perhaps you can hit her hard enough to shatter her concentration.");
-	monster.createStatusAffect("Gigafire",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.Gigafire,0,0,0,0);
 	combatRoundOver();
 }
 
 public function gigaFire2():void {
 	var damage:int = 40 + rand(11);
 	//Not interrupted:
-	if(monster.statusAffectv1("Gigafire") < 10) {
+	if(monster.statusAffectv1(StatusAffects.Gigafire) < 10) {
 		outputText("The Sand Mother grabs her scepter in both hands, combining the flames that wreath them into an immense, blinding conflagration.  She points at you, and the fire washes out in a wave like a serpent, twisting at you as you try to avoid it, doubling back on itself whenever it misses.  It's unavoidable!  You're enveloped in the consuming fire!");
 		damage *= 3;
 	}
@@ -2544,7 +2544,7 @@ public function gigaFire2():void {
 	}
 	damage = takeDamage(damage);
 	outputText(" (" + damage + ")");
-	monster.removeStatusAffect("Gigafire");
+	monster.removeStatusAffect(StatusAffects.Gigafire);
 	combatRoundOver();
 }
 	
@@ -2586,7 +2586,7 @@ public function eatALightningBolt():void {
 //As ackbal, stuns the PC 1 round.  Cannot be resisted.
 public function getWhispered():void {
 	outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
-	player.createStatusAffect("Whispered",0,0,0,0);
+	player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
 	dynStats("lus", 15);
 	combatRoundOver();
 }
@@ -2594,16 +2594,16 @@ public function getWhispered():void {
 //Starts combat with sandstorm.  GigaFire's every fifth round.
 //Whispers every fourth.
 public function sandWitchMotherAI():void {
-	if(monster.hasStatusAffect("sandstorm") < 0) {
+	if(monster.findStatusAffect(StatusAffects.Sandstorm) < 0) {
 		sandStormAttack();
 		return;
 	}
-	if(monster.hasStatusAffect("Gigafire") >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Gigafire) >= 0) {
 		gigaFire2();
 		return;
 	}
 	var choices:Array = [];
-	if(player.hasStatusAffect("Whispered") < 0) choices[choices.length] = getWhispered;
+	if(player.findStatusAffect(StatusAffects.Whispered) < 0) choices[choices.length] = getWhispered;
 	choices[choices.length] = eatALightningBolt;
 	choices[choices.length] = sandMotherTelekinesis;
 	choices[choices.length] = gigaFire;
@@ -3541,13 +3541,13 @@ public function pullLever():void {
 //*Take Fertile Pills ✓Kirbu
 public function takeFertilePills():void {
 	clearOutput();
-	if(player.hasStatusAffect("Contraceptives") < 0) outputText("You aren't under the effects of a contraceptive, so taking a pink pill would do nothing.");
+	if(player.findStatusAffect(StatusAffects.Contraceptives) < 0) outputText("You aren't under the effects of a contraceptive, so taking a pink pill would do nothing.");
 	//{Contraceptives}
 	else {
 		outputText("It doesn't take you long to figure out that the pink pill should cancel the effects of your contraceptives.  You pop it into your mouth and swallow, feeling a tingle near your crotch after a moment.  You should be capable of bearing children again");
 		if(!player.hasVagina()) outputText(", should you ever grow a vagina");
 		outputText(".");
-		player.removeStatusAffect("Contraceptives");
+		player.removeStatusAffect(StatusAffects.Contraceptives);
 	}
 	doNext(1);
 }
@@ -3555,14 +3555,14 @@ public function takeFertilePills():void {
 public function takeBarrenPills():void {
 	clearOutput();
 	//{Already contraceptive'ed} 
-	if(player.hasStatusAffect("Contraceptives") >= 0) outputText("You're already under the effects of contraceptives.  Taking one of the brown pills wouldn't do anything.");
+	if(player.findStatusAffect(StatusAffects.Contraceptives) >= 0) outputText("You're already under the effects of contraceptives.  Taking one of the brown pills wouldn't do anything.");
 	//{TAKE DAT SHIT YO}
 	else {
 		outputText("You figure one of these brown pills should render you barren, and you pop it into your mouth, not wanting to be impregnated.");
 		if(player.pregnancyIncubation > 0) outputText("  Of course, you're already pregnant, and this doesn't seem to be doing anything about THAT.");
 		outputText("  You do feel an emptiness in your midsection, reassuring you that the pill did its job.");
 		if(!player.hasVagina()) outputText("  Now if you ever re-grow a vagina, you should be fine.");
-		player.createStatusAffect("Contraceptives",0,0,0,0);
+		player.createStatusAffect(StatusAffects.Contraceptives,0,0,0,0);
 	}
 	doNext(1);
 }

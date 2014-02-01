@@ -2,8 +2,9 @@ package classes.Scenes.NPCs
 {
 	import classes.Monster;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -18,7 +19,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -56,7 +57,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -89,7 +90,7 @@ package classes.Scenes.NPCs
 				else {
 					damage = player.takeDamage(damage);
 					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> (" + damage + ")\n", false);
-					player.createStatusAffect("Isabella Stunned",0,0,0,0);
+					player.createStatusAffect(StatusAffects.IsabellaStunned,0,0,0,0);
 				}
 			}
 			combatRoundOver();
@@ -99,7 +100,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -130,7 +131,7 @@ package classes.Scenes.NPCs
 				else {
 					damage = player.takeDamage(damage);
 					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> (" + damage + ")\n", false);
-					player.createStatusAffect("Throat Punch",2,0,0,0);
+					player.createStatusAffect(StatusAffects.ThroatPunch,2,0,0,0);
 				}
 			}
 			combatRoundOver();
@@ -150,11 +151,11 @@ package classes.Scenes.NPCs
 			//-If below 70% HP, 50% chance of milk drinking
 			if (HPRatio() < .7 && rand(3) == 0) drankMalkYaCunt();
 			//if PC has spells and isn't silenced, 1/3 chance of silence.
-			else if (player.hasSpells() && player.hasStatusAffect("Throat Punch") < 0 && rand(3) == 0) {
+			else if (player.hasSpells() && player.findStatusAffect(StatusAffects.ThroatPunch) < 0 && rand(3) == 0) {
 				isabellaThroatPunch();
 			}
 			//if PC isn't stunned, 1/4 chance of stun
-			else if (player.hasStatusAffect("Isabella Stunned") < 0 && rand(4) == 0) {
+			else if (player.findStatusAffect(StatusAffects.IsabellaStunned) < 0 && rand(4) == 0) {
 				isabellaStun();
 			}
 			else isabellaAttack();

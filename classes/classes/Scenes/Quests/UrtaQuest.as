@@ -235,7 +235,7 @@ private function startUrtaQuest():void {
 	player.hipRating = 12;
 	player.buttRating = 12;
 	player.ass.analLooseness = 2;
-	player.createStatusAffect("Bonus vCapacity",58,0,0,0);
+	player.createStatusAffect(StatusAffects.BonusVCapacity,58,0,0,0);
 	player.createVagina();
 	player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
@@ -488,7 +488,7 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	clearOutput();
 	outputText("You set out for " + player2.short + "'s camp, known to you thanks to the amazing efforts of your scouts.  Behind you, the tower slowly shrinks, less imposing now that you've finished that step on your journey.   Ahead lies uncertainty and struggle.  You know you'll likely wind up fighting the corrupted denizens of the lost regions of Mareth in your travels, and it's likely at least a demon or two will get in your way.  Still, as you exit the city gates, you give your home a forlorn gaze.  At least there's one bright patch ahead - your lover's camp.");
 	outputText("\n\nThe sun has set by the time you get there, but the darkness conceals your movements thanks to your natural fur color.  ");
-	if(player.hasStatusAffect("JojoNightWatch") >= 0 && player.hasStatusAffect("PureCampJojo") >= 0)
+	if(player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0)
 		outputText("You easily sneak past a mouse monk.  He's looking towards the sky mostly, perhaps watching for imps.  ");
 	if(flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.ANEMONE_KID] > 0) 
 		outputText("A confused-looking anemone with a " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " nearly sees you, but you duck around a rock and escape her notice.  ");
@@ -497,7 +497,7 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	if(camp.companionsCount() > 2) outputText("There are a number of people in the camp, but you avoid them as you head towards " + player2.short + "'s bunk.  ");
 	outputText("The camp looks pretty nice actually.  Living out here must have given " + player2.mf("him","her") + " plenty of time to improve it.");
 	outputText("\n\n" + player2.short + " is slumbering fitfully on " + player2.mf("his","her") + " blanket.  " + player2.mf("He","She") + " looks so cute, sleeping like this.  It's amazing how " + player2.mf("he","she") + " has the courage to stay out here, day after day, month after month, guarding this portal to keep " + player2.mf("his","her") + " village safe");
-	if(player.hasStatusAffect("DungeonShutDown") >= 0) outputText(", no matter why " + player2.mf("he","she") + " was sent here");
+	if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText(", no matter why " + player2.mf("he","she") + " was sent here");
 	outputText(".  You gently press on " + player2.mf("his","her") + " shoulder and shake " + player2.mf("him","her") + " awake, holding your index finger across " + player2.mf("his","her") + " lips to shush " + player2.mf("him","her") + " to silence.  " + player2.mf("His","Her") + " eyes snap open, worried until " + player2.mf("he","she") + " recognizes you.  \"<i>What are you doing here?</i>\" " + player2.mf("he","she") + " asks in a whisper.");
 	
 	//{TELL HIM ZE TRUFF}
@@ -1062,7 +1062,7 @@ private function urtaGameOver():void {
 
 public function urtaSpecials():void {
 	menuLoc = 3;
-	if(inCombat() && player.hasStatusAffect("Sealed") >= 0 && player.statusAffectv2("Sealed") == 5) {
+	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		kGAMECLASS.enemyAI();
@@ -1088,13 +1088,13 @@ private function urtaMetabolize():void {
 
 private function urtaSecondWind():void {
 	clearOutput();
-	if(monster.hasStatusAffect("Urta Second Winded") >= 0) {
+	if(monster.findStatusAffect(StatusAffects.UrtaSecondWinded) >= 0) {
 		outputText("You've already pushed yourself as hard as you can!");
 		menuLoc = 3;
 		doNext(5000);
 		return;
 	}
-	monster.createStatusAffect("Urta Second Winded",0,0,0,0);
+	monster.createStatusAffect(StatusAffects.UrtaSecondWinded,0,0,0,0);
 	HPChange(Math.round(player.maxHP()/2),false);
 	fatigue(-50);
 	dynStats("lus", -50);
@@ -1104,7 +1104,7 @@ private function urtaSecondWind():void {
 
 //Combo: 3x attack, higher miss chance, guaranteed hit vs blind
 private function urtaComboAttack():void {
-	if(player.hasStatusAffect("attacks") < 0) {
+	if(player.findStatusAffect(StatusAffects.Attacks) < 0) {
 		clearOutput();
 		if(player.fatigue + 25 > 100) {
 			outputText("You are too fatigued to use that attack!");
@@ -1114,28 +1114,28 @@ private function urtaComboAttack():void {
 		}
 		fatigue(25);
 	}
-	if(player.hasStatusAffect("attacks") < 0)
-		player.createStatusAffect("attacks",3,0,0,0);
+	if(player.findStatusAffect(StatusAffects.Attacks) < 0)
+		player.createStatusAffect(StatusAffects.Attacks,3,0,0,0);
 	else {
-		player.addStatusValue("attacks",1,-1);
+		player.addStatusValue(StatusAffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
-		if(player.statusAffectv1("attacks") <= 1) {
+		if(player.statusAffectv1(StatusAffects.Attacks) <= 1) {
 			trace("REMOVED ATTACKS");
-			player.removeStatusAffect("attacks");
+			player.removeStatusAffect(StatusAffects.Attacks);
 		}
 	}
 	//Blind
-	if(player.hasStatusAffect("Blind") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	var damage:Number;
 	//Determine if dodged!
-	if(monster.hasStatusAffect("Blind") < 0 && (rand(3) == 0 || (player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80))) {
+	if(monster.findStatusAffect(StatusAffects.Blind) < 0 && (rand(3) == 0 || (player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
-		if(player.hasStatusAffect("attacks") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
 			urtaComboAttack();
 			return;
 		}
@@ -1208,7 +1208,7 @@ private function urtaComboAttack():void {
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.hasStatusAffect("attacks") >= 0) {
+		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
 			trace("MORE ATTACK");
 			urtaComboAttack();
 			return;
@@ -1234,7 +1234,7 @@ private function urtaDirtKick():void {
 	}
 	fatigue(5);
 	//Blind
-	if(player.hasStatusAffect("Blind") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
@@ -1244,12 +1244,12 @@ private function urtaDirtKick():void {
 		kGAMECLASS.enemyAI();
 		return;
 	}
-	else if(monster.hasStatusAffect("Blind") >= 0) {
+	else if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
 	}
 	else {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
-		monster.createStatusAffect("Blind",2 + rand(3),0,0,0);
+		monster.createStatusAffect(StatusAffects.Blind,2 + rand(3),0,0,0);
 	}
 	kGAMECLASS.enemyAI();
 }
@@ -1265,13 +1265,13 @@ private function urtaSidewinder():void {
 	}
 	fatigue(10);
 	//Blind
-	if(player.hasStatusAffect("Blind") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
-	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+	if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -1341,10 +1341,10 @@ private function urtaSidewinder():void {
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if(monster.hasStatusAffect("Stunned") < 0 && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
+	if(monster.findStatusAffect(StatusAffects.Stunned) < 0 && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
 		if(monster.tou/10 + rand(20) + 1 < 20) {
 			outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
-			monster.createStatusAffect("Stunned",1,0,0,0);
+			monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
 		}
 	}
 	else if(monster.findPerk(PerkLib.Resolute) >= 0) {
@@ -1353,7 +1353,7 @@ private function urtaSidewinder():void {
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.hasStatusAffect("FirstAttack") >= 0) {
+		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -1377,24 +1377,24 @@ private function urtaVaultAttack():void {
 		return;
 	}
 	fatigue(20);
-	if(player.hasStatusAffect("Sealed") >= 0 && player.statusAffectv2("Sealed") == 0) {
+	if(player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 0) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		kGAMECLASS.enemyAI();
 		return;
 	}
 	//Blind
-	if(player.hasStatusAffect("Blind") >= 0) {
+	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You leap into the air, intent on slamming your " + player.weaponName + " into your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
-	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+	if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
-		if(player.hasStatusAffect("FirstAttack") >= 0) {
+		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -1418,7 +1418,7 @@ private function urtaVaultAttack():void {
 	damage *= 1.25;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(monster.hasStatusAffect("Stunned") >= 0 || rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if(monster.findStatusAffect(StatusAffects.Stunned) >= 0 || rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 2;
 	}
@@ -1467,7 +1467,7 @@ private function urtaVaultAttack():void {
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.hasStatusAffect("FirstAttack") >= 0) {
+		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -2184,7 +2184,7 @@ private function introSuccubiAndMinotaur():void {
 public function urtaSubmitsToMinotaurBadEnd():void {
 	clearOutput();
 	outputText("You mouth opens, drooling with hunger that you know only the sexy beast across from you can sate.");
-	if(monster.hasStatusAffect("Minotaur Entangled") >= 0) outputText("   Seeing the fire in your eyes change from a determined glare to a lusty look, the minotaur pulls you over, carefully unwinding the chain from around you, so as not to damage you.");
+	if(monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) outputText("   Seeing the fire in your eyes change from a determined glare to a lusty look, the minotaur pulls you over, carefully unwinding the chain from around you, so as not to damage you.");
 	outputText("  Your once foe removes his loincloth to fully expose the mammoth between his legs, three feet long and nearly twice as girthy as your own.  You're so dazed by his imposing manhood, that you totally miss him flinging his loincloth at you.  It smacks wetly into your face, smothering you in his syrupy spooge.");
 	outputText("\n\nFlopping down on your ass, tail swishing happily, you lap at the moist interior of the minotaur lord's only garment.  His constantly drooling cock has utterly soaked the fabric with his pre-cum.  It tastes and smells so strong, and you just can't get enough, humming happily as your tongue draws dollop after dollop into your greedy maw.  Your body shudders with each swallow, and your cock pulses below, rigid and fitfully flaring reflexively.");
 	
@@ -2441,8 +2441,8 @@ public function milkyUrtaTic():void {
 	else if(player.lust < 75) outputText("You don't know how much longer you'll be able to withstand the effects of the milk.");
 	else outputText("Those orbs full of milky goodness are starting to look more attractive by the minute... if you don't finish this quickly you might end up giving up!");
 	outputText("\n\n");
-	player.addStatusValue("Milky Urta",1,-1);
-	if(player.statusAffectv1("Milky Urta") <= 0) player.removeStatusAffect("Milky Urta");
+	player.addStatusValue(StatusAffects.MilkyUrta,1,-1);
+	if(player.statusAffectv1(StatusAffects.MilkyUrta) <= 0) player.removeStatusAffect(StatusAffects.MilkyUrta);
 	dynStats("lus", 10);
 }
 
@@ -2743,7 +2743,7 @@ private function postFuckUrtaUp():void {
 	outputText("\n\nThankfully, Urta spares you the trouble, waking up with a moan.  \"<i>Oh... I feel so full,</i>\" she grumbles, struggling to get up under the weight of her belly.  When she realises what's holding her down, she stops, staring at it in dumbfounded awe.  \"<i>" + player.short + ", is this really...?</i>\"  When you nod, she shakes her head in disbelief.   \"<i>Incredible... it really is real.  Oh, " + player.short + ", I just... I just don't have the words to tell you how I feel about this.</i>\"");
 	outputText("\n\nYou ask her what she's going to do now.  Urta looks thoughtful.  \"<i>Well... the Covenant would want me to stay with them and give birth to Taoth amongst them.  So, I guess, from here, I'll be going to them.</i>\"  She looks at her belly quietly, and you have a feeling she'd be looking at her feet instead if she could still see them.  \"<i>..." + player.short + "?  I don't suppose you would come with me?   Please?  I know you're dedicated to guarding this portal, but it would really mean a lot to me if I could have you at my side for however long this pregnancy is going to last.</i>\"");
 	outputText("\n\nYou give the matter some thought, and decide that the risk is worth it");
-	if(player.hasStatusAffect("DungeonShutDown") >= 0) outputText(" - besides, given you know that you're nothing but a sacrifice the demons are too lazy to collect, it's not like they'll really send an invasion through");
+	if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText(" - besides, given you know that you're nothing but a sacrifice the demons are too lazy to collect, it's not like they'll really send an invasion through");
 	outputText(".  Urta's joyous expression makes it quite clear that you chose the right choice.  The two of you gather your things, dress Urta in her clothes as best you can (adding a blanket for extra protection and modesty), ");
 	if(camp.followersCount() >= 2) outputText("leave instructions to your fellow camp-dwellers to look after the place, ");
 	outputText("and set off into the wasteland in the direction of Tel'Adre.  Urta needs to stop and rest on several occasions, weighed down by her sudden and highly advanced pregnancy, but she soldiers on without complaint, taking whatever support you give to her.  You can feel the strange god-child kicking incessantly inside her belly as you walk together.");

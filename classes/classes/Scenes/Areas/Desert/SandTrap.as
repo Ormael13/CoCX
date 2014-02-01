@@ -3,8 +3,9 @@
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -14,7 +15,7 @@
 		public function sandTrapWait():void {
 			clearOutput();
 			game.spriteSelect(97);
-			if(hasStatusAffect("Climbed") < 0) createStatusAffect("Climbed",0,0,0,0);
+			if(findStatusAffect(StatusAffects.Climbed) < 0) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
 			outputText("Instead of attacking, you turn away from the monster and doggedly attempt to climb back up the pit, digging all of your limbs into the soft powder as you climb against the sandslide.");
 			if(trapLevel() == 4) {
 				outputText("\n\nYou eye the ground above you.  The edge of the pit is too sheer, the ground too unstable... although it looks like you can fight against the currents carrying you further down, it seems impossible to gain freedom with the sand under the monster's spell.");
@@ -37,14 +38,14 @@
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(hasStatusAffect("level") < 0) createStatusAffect("level",4,0,0,0);
+			if(findStatusAffect(StatusAffects.Level) < 0) createStatusAffect(StatusAffects.Level,4,0,0,0);
 			if(adjustment != 0) {
-				addStatusValue("level",1,adjustment);
+				addStatusValue(StatusAffects.Level,1,adjustment);
 				//Keep in bounds ya lummox
-				if(statusAffectv1("level") < 1) changeStatusValue("level",1,1);
-				if(statusAffectv1("level") > 4) changeStatusValue("level",1,4);
+				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
+				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
 			}
-			return statusAffectv1("level");
+			return statusAffectv1(StatusAffects.Level);
 		}
 
 
@@ -77,21 +78,21 @@
 				outputText("  You can't get free in time and in a panic you realise you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
 				if(player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
-				if(hasStatusAffect("Climbed") < 0) createStatusAffect("Climbed",0,0,0,0);
+				if(findStatusAffect(StatusAffects.Climbed) < 0) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect("level") >= 0) {
-				if (trapLevel() == 4 && hasStatusAffect("Climbed") < 0) nestleQuikSandAttack();
+			if (findStatusAffect(StatusAffects.Level) >= 0) {
+				if (trapLevel() == 4 && findStatusAffect(StatusAffects.Climbed) < 0) nestleQuikSandAttack();
 				else sandTrapPheremones();
 //PC sinks a level (end of any turn in which player didn't successfully \"<i>Wait</i>\"):
-				if (hasStatusAffect("Climbed") < 0) {
+				if (findStatusAffect(StatusAffects.Climbed) < 0) {
 					outputText("\n\nRivulets of sand run past you as you continue to sink deeper into both the pit and the sand itself.");
 					trapLevel(-1);
 				}
-				else removeStatusAffect("Climbed");
+				else removeStatusAffect(StatusAffects.Climbed);
 				combatRoundOver();
 			} else super.performCombatAction();
 		}
@@ -114,7 +115,7 @@
 		public function SandTrap()
 		{
 			//1/3 have fertilized eggs!
-			if(rand(3) == 0) this.createStatusAffect("Fertilized",0,0,0,0);
+			if(rand(3) == 0) this.createStatusAffect(StatusAffects.Fertilized,0,0,0,0);
 			if (game.silly())		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
 				init01Names("the ", "sand tarp", "sandtrap", "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.");
 			else

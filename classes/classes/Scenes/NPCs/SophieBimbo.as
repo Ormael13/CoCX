@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class SophieBimbo extends NPCAwareContent
+public class SophieBimbo extends NPCAwareContent
 	{
 
 		public function SophieBimbo()
@@ -134,7 +135,7 @@ private function acceptBimboSophie():void {
 	
 	outputText("You sigh and show the bimbo around.  She seems extremely pleased by the arrangements, and once the tour is complete, she prances off to touch up her make-up, though you see her masturbating the whole time.", false);
 	
-	if(player.hasStatusAffect("Camp Rathazul") >= 0) outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
+	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?", false);
 	else if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("  Afterwards, she offers to lick Amily's twat, if Amily will do the same to her.  Amily ", false);
@@ -142,9 +143,9 @@ private function acceptBimboSophie():void {
 		else outputText("flushes hotly and wiggles her hips Sophie's way.  The slutty, corrupted mouse and Sophie will clearly be helping to sate each other's needs in your absence.", false);
 	}
 	//(After, she offers to lick Marble's cunt.  Marble doesn't even answer her.  She just turns to you and says, \"<i>Really?  Sweetie... just... keep her away from me.  She's so far gone, I guess you can keep her around if you need to, but don't let her bug me.</i>\")  
-	else if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
+	else if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...", false);
-	else if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
+	else if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
 	else if(kGAMECLASS.isabellaFollowerScene.isabellaFollower())
 		outputText("  Afterwards, she offers to lick Isabella's cunt.  Isabella answers sternly, \"<i>Nein!  But you can drink mein milk from time to time.</i>\"  The cow-girl is blushing hotly.  You've no doubt after a few nipple-licks she'll be spreading her thick thighs for the bimbo harpy.", false);
 	outputText("\n\n", false);

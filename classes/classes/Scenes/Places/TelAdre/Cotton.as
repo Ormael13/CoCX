@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
-	public class Cotton extends TelAdreAbstractContent {
+public class Cotton extends TelAdreAbstractContent {
 public function Cotton(){
 
 }
@@ -378,7 +379,7 @@ private function cottonChat():void {
 	if(flags[kFLAGS.TIMES_FUCKED_URTA] > 0) 
 		chats[chats.length] = 1;
 	//Edryn chance
-	if(player.hasStatusAffect("Edryn") >= 0) 
+	if(player.findStatusAffect(StatusAffects.Edryn) >= 0)
 		chats[chats.length] = 2;
 	//(Scylla chat)
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) 
@@ -412,9 +413,9 @@ private function cottonChat():void {
 	//(Scylla chat)
 	else if(choice == 3) {
 		//(if Scylla hasn't formed support group) 
-		if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
+		if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 5 && player.hasCock() && player.balls > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
 		//(if Scylla has formed support group)
-		else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
+		else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 5 && player.hasCock() && player.balls > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
 	}
 	//(Vala chat)
 	else if(choice == 4) {
@@ -1148,9 +1149,9 @@ public function nomSomeTitMilkCereal():void {
 	dynStats("lib", -0.5, "sen", -.5, "lus", -5);
 	player.boostLactation(0.05);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 	doNext(1);
 }
@@ -1867,9 +1868,9 @@ private function feedYourCottonKids():void {
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
 	dynStats("lus", -10);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 	player.boostLactation(0.5);
 	

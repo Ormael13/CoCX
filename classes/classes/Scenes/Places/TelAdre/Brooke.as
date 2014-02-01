@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
 //  BROOKE_AFFECTION:int = 915;
 //  BROOKE_SHOWERED_WITH:int = 916;
@@ -1078,7 +1079,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		//[if (hasBalls = true)
 		if(player.balls > 0)
 		{
-			if (player.hasStatusAffect("Uniball") < 0) 
+			if (player.findStatusAffect(StatusAffects.Uniball) < 0)
 			{
 				outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke\'s vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
 			}

@@ -2,8 +2,9 @@
 {
 	import classes.Appearance;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -119,7 +120,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if(player.hasStatusAffect("Feeder") >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {

@@ -6,7 +6,8 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	import classes.internals.Utils;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -30,12 +31,12 @@
 				game.dynStats("lus", 1);
 				var temp2:Function =null;
 				var temp3:Function =null;
-				if(player.hasStatusAffect("Feeder") >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
+				if(player.findStatusAffect(StatusAffects.Feeder) >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.beeGirlsGetsDildoed;
 				game.simpleChoices("Rape",game.forest.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
-			else if(player.hasStatusAffect("Feeder") >= 0) {
+			else if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 				if (hpVictory){
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				} else {

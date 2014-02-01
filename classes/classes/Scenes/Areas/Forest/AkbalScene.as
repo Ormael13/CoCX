@@ -9,8 +9,9 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class AkbalScene extends BaseContent
+public class AkbalScene extends BaseContent
 	{
 		public function AkbalScene()
 		{
@@ -858,7 +859,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect("Post Akbal Submission", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(16);
 				return;
 			}
@@ -935,7 +936,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect("Post Akbal Submission", 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(16);
 				return;
 			}
@@ -1014,7 +1015,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 				player.buttRating++;
 			}
-			player.createStatusAffect("Post Akbal Submission", 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(16);
 		}
 
@@ -1213,7 +1214,7 @@ package classes.Scenes.Areas.Forest
 			}
 			dynStats("lus=", 0, "cor", 5);
 			player.slimeFeed();
-			player.createStatusAffect("Post Akbal Submission", 0, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(16);
 		}
 

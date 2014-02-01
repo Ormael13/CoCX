@@ -8,7 +8,9 @@
 	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.Tamani;
 	import classes.Scenes.Monsters.GoblinAssassinScene;
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -44,17 +46,17 @@
 			//Temporary heat
 			if(color == "red") {
 				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-				if(player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
 			}
 			//Green poison
 			if(color == "green") {
 				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-				if(player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison,0,0,0,0);
 			}
 			//sticky flee prevention
 			if(color == "white") {
 				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-				if(player.hasStatusAffect("NoFlee") < 0) player.createStatusAffect("NoFlee",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.NoFlee) < 0) player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
 			}
 			//Increase fatigue
 			if(color == "black") {
@@ -140,6 +142,13 @@
 			init11Armor("leather straps");
 			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
+			init14WeightedDrop().
+					add(consumables.GOB_ALE, 5).
+					addMany(1, consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE, 1);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
 		}
 
 		override protected function performCombatAction():void

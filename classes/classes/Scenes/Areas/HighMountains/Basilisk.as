@@ -5,8 +5,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Player;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -19,8 +20,8 @@ package classes.Scenes.Areas.HighMountains
 				if(amount < 0) amount = 0;
 			}
 			player.spe -= amount;
-			if(player.hasStatusAffect("BasiliskSlow") >= 0) player.addStatusValue("BasiliskSlow",1,amount);
-			else player.createStatusAffect("BasiliskSlow",amount,0,0,0);
+			if(player.findStatusAffect(StatusAffects.BasiliskSlow) >= 0) player.addStatusValue(StatusAffects.BasiliskSlow,1,amount);
+			else player.createStatusAffect(StatusAffects.BasiliskSlow,amount,0,0,0);
 			showStatDown( 'spe' );
 			// speUp.visible = false;
 			// speDown.visible = true;
@@ -37,7 +38,7 @@ package classes.Scenes.Areas.HighMountains
 				game.dynStats("lus", 3);
 				//apply status here
 				basiliskSpeed(player,20);
-				player.createStatusAffect("Basilisk Compulsion",0,0,0,0);
+				player.createStatusAffect(StatusAffects.BasiliskCompulsion,0,0,0,0);
 			}
 			//Failure:
 			else {
@@ -62,7 +63,7 @@ package classes.Scenes.Areas.HighMountains
 
 		override protected function performCombatAction():void
 		{
-			if(player.hasStatusAffect("Basilisk Compulsion") < 0 && rand(3) == 0 && hasStatusAffect("Blind") < 0) compulsion();
+			if(player.findStatusAffect(StatusAffects.BasiliskCompulsion) < 0 && rand(3) == 0 && findStatusAffect(StatusAffects.Blind) < 0) compulsion();
 			else if(rand(3) == 0) basiliskTailSwipe();
 			else eAttack();
 		}

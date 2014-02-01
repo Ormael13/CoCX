@@ -5,8 +5,9 @@ import classes.CockTypesEnum;
 import classes.CoC_Settings;
 import classes.Appearance;
 	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class Roxanne extends BazaarAbstractContent{
+public class Roxanne extends BazaarAbstractContent{
 
 	public function Roxanne()
 	{
@@ -505,10 +506,10 @@ private function applyHangover():void {
 	//v4 = intelligence
 
 	//Already hungover?  Reset duration.
-	if(player.hasStatusAffect("Hangover") >= 0) player.changeStatusValue("Hangover",1,8);
+	if(player.findStatusAffect(StatusAffects.Hangover) >= 0) player.changeStatusValue(StatusAffects.Hangover,1,8);
 	//No hangover yet?  Create and yoink stats
 	else {
-		player.createStatusAffect("Hangover",8,0,0,0);
+		player.createStatusAffect(StatusAffects.Hangover,8,0,0,0);
 		//Strength minus 5
 		temp = 5;
 		while(temp > 0) {
@@ -519,7 +520,7 @@ private function applyHangover():void {
 				// strDown.visible = true;
 				// strUp.visible = false;
 				player.str--;
-				player.addStatusValue("Hangover",2,1);			
+				player.addStatusValue(StatusAffects.Hangover,2,1);
 			}
 		}
 		//speed minus 10
@@ -532,7 +533,7 @@ private function applyHangover():void {
 				// speDown.visible = true;
 				// speUp.visible = false;
 				player.spe--;
-				player.addStatusValue("Hangover",3,1);
+				player.addStatusValue(StatusAffects.Hangover,3,1);
 			}
 		}
 		//int minus 15
@@ -545,7 +546,7 @@ private function applyHangover():void {
 				// inteDown.visible = true;
 				// inteUp.visible = false;
 				player.inte--;
-				player.addStatusValue("Hangover",4,1);
+				player.addStatusValue(StatusAffects.Hangover,4,1);
 			}
 		}
 	}
