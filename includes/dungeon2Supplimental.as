@@ -2226,7 +2226,12 @@ public function incubusShop():void {
 		bimbo = 3542;
 		outputText("  Luckily, you do!");
 	}
-	choices("Numb Rox",2643,"Sens. Draft",2644,"Reducto",2645,"Demon Whip",2653,"Bimbo Liq",bimbo,"",0,"",0,"",0,"",0,"Leave",1);
+	choices(consumables.NUMBROX.shortName,2643,
+			consumables.SENSDRF.shortName,2644,
+			consumables.REDUCTO.shortName,2645,
+			weapons.SUCWHIP.shortName,2653,
+			consumables.BIMBOLQ.shortName,bimbo,
+			"",0,"",0,"",0,"",0,"Leave",1);
 }
 
 public function incubusBuy(itype:ItemType):void {

@@ -1332,15 +1332,15 @@ public function tailorShoppe():void {
 		outputText("at Victoria the Corgi Tailor.  As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.", false);
 	}
 	outputText("\n\n(What do you want to buy?)", false);
-	choices("Suitclothes",createCallBackFunction(buyClothes,armors.CLSSYCL),
-			"Rbbr Fetish",createCallBackFunction(buyClothes,armors.RBBRCLT),
-			"G. Clothes",createCallBackFunction(buyClothes,armors.ADVCLTH),
-			"Tube Top",createCallBackFunction(buyClothes,armors.TUBETOP),
-			"Overalls", createCallBackFunction(buyClothes,armors.OVERALL),
-			"Long Dress",createCallBackFunction(buyClothes,armors.B_DRESS),
-			"Bodysuit",createCallBackFunction(buyClothes,armors.T_BSUIT),
-			"Robes",createCallBackFunction(buyClothes,armors.M_ROBES),
-			"T.Lthr Pants",createCallBackFunction(buyClothes,armors.LTHRPNT),
+	choices(armors.CLSSYCL.shortName,createCallBackFunction(buyClothes,armors.CLSSYCL),
+			armors.RBBRCLT.shortName,createCallBackFunction(buyClothes,armors.RBBRCLT),
+			armors.ADVCLTH.shortName,createCallBackFunction(buyClothes,armors.ADVCLTH),
+			armors.TUBETOP.shortName,createCallBackFunction(buyClothes,armors.TUBETOP),
+			armors.OVERALL.shortName,createCallBackFunction(buyClothes,armors.OVERALL),
+			armors.B_DRESS.shortName,createCallBackFunction(buyClothes,armors.B_DRESS),
+			armors.T_BSUIT.shortName,createCallBackFunction(buyClothes,armors.T_BSUIT),
+			armors.M_ROBES.shortName,createCallBackFunction(buyClothes,armors.M_ROBES),
+			armors.LTHRPNT.shortName,createCallBackFunction(buyClothes,armors.LTHRPNT),
 			"Leave",telAdreMenu);
 }
 
@@ -1389,12 +1389,12 @@ public function armorShop():void {
 		}
 		else egg = kGAMECLASS.emberScene.getSomeStuff;
 	}
-	choices("Chn Bikini",createCallBackFunction(armorBuy, armors.CHBIKNI),
-			"Full Chain",createCallBackFunction(armorBuy, armors.FULLCHN),
-			"Full Plate",createCallBackFunction(armorBuy, armors.FULLPLT),
-			"Indec StAr",createCallBackFunction(armorBuy, armors.INDECST),
-			"Lthr Robes",createCallBackFunction(armorBuy, armors.LTHRROB),
-			"Scale Mail",createCallBackFunction(armorBuy, armors.SCALEML),
+	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
+			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
+			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
+			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
+			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
+			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
 			"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
 
@@ -1405,14 +1405,14 @@ public function weaponShop():void {
 	
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
 	
-	choices("Wingstick",createCallBackFunction(weaponBuy, consumables.W_STICK),
-			"L.Claymore",createCallBackFunction(weaponBuy, weapons.CLAYMOR),
-			"Warhammer",createCallBackFunction(weaponBuy, weapons.WARHAMR),
-			"Katana",createCallBackFunction(weaponBuy, weapons.KATANA),
-			"Spear",createCallBackFunction(weaponBuy, weapons.SPEAR),
-			"Whip",createCallBackFunction(weaponBuy, weapons.WHIP),
-			"W. Staff",createCallBackFunction(weaponBuy, weapons.W_STAFF),
-			"S.Gauntlet",createCallBackFunction(weaponBuy, weapons.S_GAUNT),
+	choices(consumables.W_STICK.shortName,createCallBackFunction(weaponBuy, consumables.W_STICK),
+			weapons.CLAYMOR.shortName,createCallBackFunction(weaponBuy, weapons.CLAYMOR),
+			weapons.WARHAMR.shortName,createCallBackFunction(weaponBuy, weapons.WARHAMR),
+			weapons.KATANA.shortName,createCallBackFunction(weaponBuy, weapons.KATANA),
+			weapons.SPEAR.shortName,createCallBackFunction(weaponBuy, weapons.SPEAR),
+			weapons.WHIP.shortName,createCallBackFunction(weaponBuy, weapons.WHIP),
+			weapons.W_STAFF.shortName,createCallBackFunction(weaponBuy, weapons.W_STAFF),
+			weapons.S_GAUNT.shortName,createCallBackFunction(weaponBuy, weapons.S_GAUNT),
 			"",0,"Leave",telAdreMenu);
 }
 private function weaponBuy(itype:ItemType):void {

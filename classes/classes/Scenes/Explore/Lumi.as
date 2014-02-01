@@ -60,7 +60,10 @@ public function lumiShop():void {
 	outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\n", false);
 	
 	//The player is given a list of choices, clicking on one gives the description and the price, like Giacomo.
-	simpleChoices("LustDraft",lumiLustDraftPitch,"GoblinAle",lumiPitchGobboAle,"OviElixir",lumiPitchOviElixer,"",0,"Leave",lumiLabChoices);
+	simpleChoices(consumables.L_DRAFT.shortName,lumiLustDraftPitch,
+			consumables.GOB_ALE.shortName,lumiPitchGobboAle,
+			consumables.OVIELIX.shortName,lumiPitchOviElixer,
+			"",0,"Leave",lumiLabChoices);
 }
 
 //Lust Draft
@@ -155,7 +158,15 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	else {
 		outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n", false);
 		//The player chooses an item that can be enhanced from a list, regardless of which is chosen, the text for the next part is the same.
-		choices("Fox Berry",fox,"Fox Jewel",kitsune,"GoldenSeed",seed,"KangaFruit",kanga,"LustDraft",lustDraft,"La Bova",laBova,"Ovi Elix",oviElix,"Sucb.Delite",succuDelight,"",0,"Back",lumiLabChoices);
+		choices(consumables.FOXBERY.shortName,fox,
+				consumables.FOXJEWL.shortName,kitsune,
+				consumables.GLDSEED.shortName,seed,
+				consumables.KANGAFT.shortName,kanga,
+				consumables.L_DRAFT.shortName,lustDraft,
+				consumables.LABOVA_.shortName,laBova,
+				consumables.OVIELIX.shortName,oviElix,
+				consumables.SDELITE.shortName,succuDelight,
+				"",0,"Back",lumiLabChoices);
 		return true;
 	}
 }
@@ -199,7 +210,7 @@ private function lumiEnhanceGo(itype:ItemType):void
 		nextItem = consumables.S_DREAM;
 	}
 	/*else if(itype == consumables.OVIELIX) {
-		nextItem = consumables.OviMax_;
+		nextItem = consumables.OVIMAX_;
 	} */
 	else if(itype == consumables.L_DRAFT) {
 		nextItem = consumables.F_DRAFT;

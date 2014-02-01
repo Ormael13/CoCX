@@ -8,10 +8,15 @@ package classes
 	public class ItemType
 	{
 		private static var ITEM_LIBRARY:Dictionary = new Dictionary();
+		private static var ITEM_SHORT_LIBRARY:Dictionary = new Dictionary();
 		public static const NOTHING:ItemType = new ItemType("NOTHING!");
 
 		public static function lookupItem(id:String):ItemType{
 			return ITEM_LIBRARY[id];
+		}
+
+		public static function lookupItemByShort(shortName:String):ItemType{
+			return ITEM_SHORT_LIBRARY[shortName];
 		}
 
 		public static function getItemLibrary():Dictionary
@@ -76,7 +81,11 @@ package classes
 			if (ITEM_LIBRARY[_id] != null) {
 				CoC_Settings.error("Duplicate itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
 			}
+			if (ITEM_SHORT_LIBRARY[_shortName] != null){
+				trace("WARNING: Item with duplicate shortname: '"+_id+"' and '"+(ITEM_SHORT_LIBRARY[this._shortName] as ItemType)._id+"' share "+this._shortName);
+			}
 			ITEM_LIBRARY[_id] = this;
+			ITEM_SHORT_LIBRARY[this._shortName] = this;
 		}
 
 

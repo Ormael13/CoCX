@@ -528,44 +528,13 @@ public function getButtonToolTipText( buttonText :String ) :String
 	//Items
 	if (/^....... x\d+$/.test(buttonText)){
 		buttonText = buttonText.substring(0,7);
-    	var itype:ItemType = ItemType.lookupItem(buttonText);
-    	if (itype != null) toolTipText = itype.description;
 	}
-	if(buttonText.indexOf("Demon Whip") != -1) {
-		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
-	}
-	if(buttonText == "GoblinAle") {
-		toolTipText = "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.";
-	}
-	if(buttonText.indexOf("W. Staff") != -1) {
-		toolTipText = "An oddly bent piece of solid wood favored by spell-casters.  It is said to be made of from one of Marae's roots and allow for easier magic use. (ATK: 3) (Cost: 350)";
-	}
-	if(buttonText.indexOf("L.Claymore") != -1) {
-		toolTipText = "A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)";
-	}
-	if(buttonText.indexOf("Warhammer") != -1) {
-		toolTipText = "A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)";
-	}
-	if(buttonText.indexOf("Katana") != -1) {
-		toolTipText = "A curved bladed weapon that cuts through flesh with the greatest of ease. (ATK: 10) (Cost: 500)";
-	}
-	if(buttonText.indexOf("Spear") != -1) {
-		toolTipText = "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  (ATK: 8) (Cost: 450)";
-	}
-	if(buttonText.indexOf("Whip") != -1) {
-		toolTipText = "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it! (ATK: 5) (Cost: 500)";
-	}
+	var itype:ItemType = ItemType.lookupItem(buttonText);
+	if (itype != null) toolTipText = itype.description;
+	itype = ItemType.lookupItemByShort(buttonText);
+	if (itype != null) toolTipText = itype.description;
 	if(buttonText.indexOf("Tail Whip") != -1) {
 		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
-	}
-	if(buttonText.indexOf("S.Gauntlet") != -1) {
-		toolTipText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
-	}
-	if(buttonText.indexOf("Vitality T.") != -1) {
-		toolTipText = "This potent tea is supposedly good for the strengthening the body.";
-	}
-	if(buttonText.indexOf("Scholars T.") != -1) {
-		toolTipText = "This powerful brew supposedly has mind-strengthening effects.";
 	}
 	if(buttonText.indexOf("Dual Belt") != -1) {
 		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
@@ -575,15 +544,6 @@ public function getButtonToolTipText( buttonText :String ) :String
 	}
 	if(buttonText.indexOf("Fake Mare") != -1) {
 		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
-	}
-	if(buttonText == "LustDraft") {
-		toolTipText = "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.";
-	}
-	if(buttonText == "OviElixir") {
-		toolTipText = "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.";
-	}
-	if(buttonText.indexOf("Cerulean P.") != -1) {
-		toolTipText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
 	}
 	//Combat
 	//COMBAT
