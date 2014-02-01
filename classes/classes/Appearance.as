@@ -410,7 +410,7 @@
 				CoC_Settings.error("<b>ERROR: CockDescript Called But No Cock Present</b>");
 				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 			}
-			if (i_creature.totalCocks() <= i_cockIndex && (i_cockIndex != 99 && i_cockIndex != -1)) {
+			if (i_creature.totalCocks() <= i_cockIndex || (i_cockIndex == 99 || i_cockIndex == -1)) {
 				CoC_Settings.error("<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>");
 				return "<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>";
 			}

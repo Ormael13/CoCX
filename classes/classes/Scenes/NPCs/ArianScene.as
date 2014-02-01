@@ -689,10 +689,20 @@ private function youDontMindBeingGayForArian():void {
 	outputText("You tell him that you don't have a problem with males, as long as they're cute.  You smile at him.  \"<i>You... do you really think I'm cute?</i>\"");
 	outputText("\n\nYou nod, it's not everyday you see a grown man acting like a hopeless virgin.  At the mention of the word ‘virgin' Arian recoils.... Surprised by this development you ask him if he really is a virgin.");
 	outputText("\n\nArian hides his face once more inside his covers and says in a whisper, \"<i>Yes....</i>\"");
-	outputText("\n\nWell, we'll have to fix that then.  You pull the covers off his face.  Slipping off his bed, you begin stripping off your [armor].  Arian shyly does the same, stripping out of his robes until he is laying in his bed, completely naked.");
+	outputText("\n\nWell, we'll have to fix that then.  You pull the covers off his face.  Slipping off his bed, you begin stripping off your [armor].  Arian shyly does the same, stripping out of his robes until he is laying in his bed, completely naked.\n\n");
 	//(Proceed Give Anal)
+	
+	// Redirecting the scene if the players cock is too big for the anal scene... not ideal, but its a QWIKFIX™
 	menu();
-	addButton(0,"Next",giveArianAnal);
+	if (player.cockThatFits(50) == -1)
+	{
+		addButton(0, "Next", getBlownByArian);
+	}
+	else
+	{
+		addButton(0, "Next", giveArianAnal);
+	}
+	
 }
 //[=Like Girls=]
 private function youLikeGirlsNotSickLizardDudes():void {
@@ -994,7 +1004,7 @@ private function talkToArianChoices():void {
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) addButton(0,"Sexy Talk",arianSexingTalk);
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 3) addButton(1,"Teach Magic",arianMagicLessons);
 	if(!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4,"Invite2Camp",inviteArianToCamp);
-	if(flags[kFLAGS.ARIAN_VIRGIN] == 0 && flags[kFLAGS.ARIAN_S_DIALOGUE] < 0) outputText("\n\n<b>Arian doesn't have much to talk about right now.  Maybe you ought to just visit him from time to time or find him an item that would help combat [Arian eir] sickness.</b>");
+	if(flags[kFLAGS.ARIAN_VIRGIN] == 0 && flags[kFLAGS.ARIAN_S_DIALOGUE] < 3) outputText("\n\n<b>Arian doesn't have much to talk about right now.  Maybe you ought to just visit him from time to time or find him an item that would help combat [Arian eir] sickness.</b>");
 	addButton(9,"Back",arianHomeMenu);
 }
 
@@ -1404,6 +1414,13 @@ private function giveArianAnal():void {
 	else	
 		outputText(images.showImage("arianmale-home-giveArianAnal"));	
 	
+	// This breaks the capacity-restriction, but it's a quickfix to make the scene stop crashing in lieu of writing new 
+	// content to work around the player not being able to call this scene from earlier interactions with Arian.
+	if (x == -1)
+	{
+		x = player.smallestCockIndex();
+	}
+		
 	outputText("You tell Arian that, if [Arian ey]'s willing, you'd like to take [Arian em] from behind.");
 	//AnalXP < 33
 	//Tight, sensitive enough to orgasm. (It hurts... but feels good)
