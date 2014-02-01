@@ -1380,23 +1380,40 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			var value3:Number = saveFile.data.perks[i].value3;
 			var value4:Number = saveFile.data.perks[i].value4;
 			var ptype:PerkType = PerkType.lookupPerk(id);
-			if (ptype == null) {
+			
+			if (ptype == null) 
+			{
 				trace("ERROR: Unknown perk id="+id);
-				(saveFile.data.perks as Array).splice(i,1);
-				continue;
+				
+				//(saveFile.data.perks as Array).splice(i,1);
+				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			}
-			player.createPerk(ptype,value1,value2,value3,value4);
-			if(isNaN(player.perk(i).value1)) {
-				if(player.perk(i).perkName == "Wizard's Focus") {
-					player.perk(i).value1 = .3;
+			else
+			{
+				trace("Creating perk : " + ptype);
+				player.createPerk(ptype,value1,value2,value3,value4);
+			
+				if (isNaN(player.perk(player.numPerks - 1).value1)) 
+				{
+					if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") 
+					{
+						player.perk(player.numPerks - 1).value1 = .3;
+					}
+					else
+					{
+						player.perk(player.numPerks).value1 = 0;
+					}
+					
+					trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
 				}
-				else player.perk(i).value1 = 0;
-				trace("NaN byaaaatch: " + player.perk(i).value1);
-			}
-			if(player.perk(i).perkName == "Wizard's Focus") {
-				if(player.perk(i).value1 == 0 || player.perk(i).value1 < 0.1) {
-					trace("Wizard's Focus boosted up to par (.5)");
-					player.perk(i).value1 = .5;
+			
+				if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") 
+				{
+					if (player.perk(player.numPerks - 1).value1 == 0 || player.perk(player.numPerks - 1).value1 < 0.1) 
+					{
+						trace("Wizard's Focus boosted up to par (.5)");
+						player.perk(player.numPerks - 1).value1 = .5;
+					}
 				}
 			}
 			//trace("Perk " + player.perk(i).id + " loaded.");

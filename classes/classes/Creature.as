@@ -380,6 +380,9 @@ import classes.PerkType;
 		public function get perks():Array {
 			return _perks;
 		}
+		public function get numPerks():int {
+			return _perks.length;
+		}
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
 		//TODO: Move monster status effects into perks. Needs investigation though.
