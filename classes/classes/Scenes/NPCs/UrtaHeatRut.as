@@ -26,7 +26,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText("  You ignore them all, concentrating on Urta.");
 
 	outputText("\n\nAs you approach, ");
-	if(urtaLove()) outputText(" she opens her arms to embrace you ");
+	if(urtaLove()) outputText(" she opens her arms to embrace you, and smiles\n ");
 	else outputText(" she smiles when she sees you, but then, gives the air a sniff and immediately seems to gain more color to the skin under the fur.  \"<i>Uh, I, I see.</i>\"  You sit down next to her, but even though she isn't even suggesting anything yet, you already find it hard to control yourself.");
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("  Urta is right next to you, and she has already proven herself a good lay");
 	else outputText("  You keep reminding yourself what Urta is packing between her legs and how much precious semen it can give, and can't help but want to try that now");
@@ -37,7 +37,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText("</i>\"  She leans closer to you, and ");
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("your eyes are quickly drawn to her full breasts as she whispers something to you. You're too hypnotized to care.");
 	else outputText("you lose yourself in your imagination about having Urta take you raw and pump you full of sperm.  There's a faint voice you hear, and you realize it's Urta's as you snap back to reality.");
-	outputText("  She coughs and repeats herself.  \"<i>Are you here because of your, um, condition? Youâ'd prefer to blow off some steam with ");
+	outputText("  She coughs and repeats herself.  \"<i>Are you here because of your, um, condition? You'd prefer to blow off some steam with ");
 	if(urtaLove()) outputText("your adorable, hot vixen");
 	else outputText("someone you know and trust");
 	outputText(", right?</i>\"");
