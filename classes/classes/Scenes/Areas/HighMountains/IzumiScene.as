@@ -385,11 +385,11 @@ package classes.Scenes.Areas.HighMountains
 			if (affectIndex >= 0)
 			{
 				player.sens += Math.abs(player.statusAffect(affectIndex).value2);
-				player.spe -= player.statusAffect(affectIndex).value3;
+				player.spe += player.statusAffect(affectIndex).value3;
 				player.lib -= player.statusAffect(affectIndex).value4;
 				
 				if (player.sens > 100) player.sens = 100;
-				if (player.spe <= 0) player.spe = 1;
+				if (player.spe > 100) player.spe = 100;
 				if (player.lib <= 0) player.lib = 1;
 				
 				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
