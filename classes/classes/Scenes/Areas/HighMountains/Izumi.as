@@ -157,7 +157,11 @@ import classes.StatusAffects;
 			}
 			else
 			{
-				outputText("  Her fist connects with your chin with a mighty crack, sending you sailing across the cave.  Izumi smirks at you as you [if (player.isNaga)raise back up onto your [legs]|stand] and dust yourself off.");
+				outputText("  Her fist connects with your chin with a mighty crack, sending you sailing across the cave.  Izumi smirks at you as you");
+				if (player.isNaga()) outputText(" raise back up onto your [legs]");
+				else outputText(" stand");
+				outputText(" and dust yourself off.");
+				
 				damage = player.takeDamage(damage);
 				outputText(" (" + damage + ")");
 			}
@@ -225,7 +229,11 @@ import classes.StatusAffects;
 			}
 			else
 			{
-				outputText("Izumi's grip around your throat continues to strangle the breath from your lungs as she holds you aloft.  Your fingers tighten in turn around the Oni's wrist, fighting against her [if (player.str < 90)immense|impressive] strength, in an attempt to free yourself from her crushing embrace, without success.");
+				outputText("Izumi's grip around your throat continues to strangle the breath from your lungs as she holds you aloft.  Your fingers tighten in turn around the Oni's wrist, fighting against her");
+				if (player.str < 90) outputText(" immense");
+				else outputText(" impressive"); 
+				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
+				
 				player.takeDamage(75 + rand(15));
 				doAI();
 			}
@@ -271,7 +279,11 @@ import classes.StatusAffects;
 		{
 			if (combatDebug) trace("Escaping from Chokeslam!");
 			
-			outputText("Scrabbling desperately against her wrist, you narrow your eyes at the Oni woman’s superior expression, [if (player.isBiped)raise a [leg] and kick her roundly|[if (player.isNaga)raise your tail and slap her solidly|and slap her square]] in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
+			outputText("Scrabbling desperately against her wrist, you narrow your eyes at the Oni woman’s superior expression,");
+			if (player.isBiped()) outputText(" raise a [leg] and kick her roundly");
+			else if (player.isNaga()) outputText(" raise your tail and slap her solidly");
+			else outputText(" and slap her square");
+			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow !”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
 			
@@ -338,7 +350,10 @@ import classes.StatusAffects;
 			if (combatDebug) trace("Titsmother attack!");
 			
 			// Attack will ALWAYS hit, but be relatively easy to break out of
-			outputText("With a sudden burst of speed, the Oni woman bullrushes you, slapping aside your hasty defence.  You brace yourself for a powerful impact, but rather than strike you she instead thrusts her arm straight past your head.  Bemused, you turn your head to follow her fist, just in time to see her crook her elbow and yank you back towards her - hard.  Pulled right off your [feet] by the sudden strike, you slam [if (player.hasMuzzle)muzzle-|face-] first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
+			outputText("With a sudden burst of speed, the Oni woman bullrushes you, slapping aside your hasty defence.  You brace yourself for a powerful impact, but rather than strike you she instead thrusts her arm straight past your head.  Bemused, you turn your head to follow her fist, just in time to see her crook her elbow and yank you back towards her - hard.  Pulled right off your [feet] by the sudden strike, you slam");
+			if (player.hasMuzzle()) outputText(" muzzle-");
+			else outputText(" face-");
+			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusAffect(StatusAffects.Titsmother, 0, 0, 0, 0);
 			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
@@ -378,11 +393,31 @@ import classes.StatusAffects;
 			{
 				if (rand(2) == 0)
 				{
-					outputText("“Hah!  Say goodnight, ‘cause I’m going to choke the fight right out of you!”  She cries exuberantly, forcibly mashing your face into her bosom.  It would appear that she is trying to throttle you, but only having one hand is making the task difficult.  You can breathe just fine, but having your face forced into the constantly jostling mass of tit-flesh before you is distracting to say the least.  You scrabble desperately against Izumi’s grip, trying not to think about where you’re placing your hands, or how soft and pliant the flesh beneath you is, or any number of other upsetting little details - but to no avail.  Izumi’s grip is incredibly strong.  You hang there for a moment, trying to get your breath back for another attempt as Izumi jostles and presses against you from all sides.");
+					clearOutput();
+					outputText("“Hah!  Say goodnight, ‘cause I’m going to choke the fight right out of you!”  She cries exuberantly, forcibly mashing your face into her bosom.  It would appear that she is trying to throttle you, but only having one hand is making the task difficult.  You can breathe just fine, but having your face forced into the constantly jostling mass of tit-flesh before you is distracting to say the least.\n\n");
+					outputText("You scrabble desperately against Izumi’s grip, trying not to think about where you’re placing your hands, or how soft and pliant the flesh beneath you is, or any number of other upsetting little details - but to no avail.  Izumi’s grip is incredibly strong.  You hang there for a moment, trying to get your breath back for another attempt as Izumi jostles and presses against you from all sides.");
 				}
 				else
 				{
-					outputText("[if (player.hasCock)Assaulted by the sensation of being pressed against such warm flesh, you can already feel [eachCock] starting to stiffen against your will.  Your hardening erection[if (player.totalCocks > 1)s] just makes things even more unbearable, as the harder [if (player.totalCocks > 1)they get|it gets], the more insistently your [if (player.totalCocks > 1)erections throb|erection throbs], pressed up against Izumi’s stomach muscles.  Her muscles ripple and undulate as she struggles to keep you in her grip, abs flexing, bumping, encircling your insistent erection[if (player.totalCocks > 1)s], stimulating you even further.  You realise in a flash of panic that if you don’t get out of this soon, you may actually... | Izumi’s bust encloses you on all sides, leaving you feeling like you’re trapped in some kind of breast sarcophagus.  The heat radiating from the soft flesh combines with the scent of whatever strange drug Izumi had been smoking, now hanging around her like some heady perfume.]]");
+					clearOutput();
+					if (player.hasCock())
+					{
+						outputText("Assaulted by the sensation of being pressed against such warm flesh, you can already feel [eachCock] starting to stiffen against your will.  Your hardening erection");
+						if (player.totalCocks() > 1) outputText("s");
+						outputText(" just makes things even more unbearable, as the harder");
+						if (player.totalCocks() > 1) outputText(" they get");
+						else outputText(" it gets");
+						outputText(", the more insistently your");
+						if (player.totalCocks() > 1) outputText(" erections throb");
+						else outputText(" erection throbs");
+						outputText(", pressed up against Izumi’s stomach muscles.  Her muscles ripple and undulate as she struggles to keep you in her grip, abs flexing, bumping, encircling your insistent erection");
+						if (player.totalCocks() > 1) outputText("s");
+						outputText(", stimulating you even further.  You realise in a flash of panic that if you don’t get out of this soon, you may actually... ");
+					}
+					else
+					{
+						outputText("Izumi’s bust encloses you on all sides, leaving you feeling like you’re trapped in some kind of breast sarcophagus.  The heat radiating from the soft flesh combines with the scent of whatever strange drug Izumi had been smoking, now hanging around her like some heady perfume.");
+					}
 				}
 				
 				game.dynStats("lus", player.lib / 20 + 5 + rand(5));
@@ -403,7 +438,14 @@ import classes.StatusAffects;
 			}
 			else
 			{
-				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground.... [if (player.isABiped == true) As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort. ] Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
+				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground....");
+				
+				if (player.isBiped()) 
+				{
+					outputText("  As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort.");
+				}
+				
+				outputText("  Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
 
 			outputText("“Oh my,” She purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...”");

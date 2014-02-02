@@ -2899,11 +2899,6 @@ import classes.PerkType;
 				return true;
 			return false;
 		}
-		
-		public function get isANaga():Boolean
-		{
-			return this.isNaga();
-		}
 
 		public function isTaur():Boolean
 		{
@@ -2911,20 +2906,10 @@ import classes.PerkType;
 				return true;
 			return false;
 		}
-		
-		public function get isATaur():Boolean
-		{
-			return this.isTaur();
-		}
 
 		public function isDrider():Boolean
 		{
 			return (lowerBody == 16);
-		}
-		
-		public function get isADrider():Boolean
-		{
-			return this.isDrider();
 		}
 
 		public function isGoo():Boolean
