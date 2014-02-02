@@ -212,7 +212,7 @@ private function sharkbustersVictory():void {
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("Which gender would you like to focus on?", false);
 		//male / female)
-		simpleChoices("male",ghostIzmaPenis,"female",sharkyEctoginas,"",0,"",0,"",0);
+		simpleChoices("Male",ghostIzmaPenis,"Female",sharkyEctoginas,"",0,"",0,"",0);
 	}
 	else if(player.hasVagina()) doNext(sharkyEctoginas);
 	else if(player.hasCock()) doNext(ghostIzmaPenis);
