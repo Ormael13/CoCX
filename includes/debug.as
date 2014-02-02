@@ -18,10 +18,10 @@ This is a testing tool intended to generate random button presses.
 
 **SERIOUSLY. YOU NEED TO BE SURE YOU WANT TO DO THIS, AND DO NOT COMPLAIN IF YOU TRIED IT JUST "BECAUSE YOU WERE CURIOUS"**
 
-If you have an open-game, it **WILL** cause your PC to take actions which you 
-probably do not intend. 
+If you have an open-game, it **WILL** cause your PC to take actions which you
+probably do not intend.
 
-**CAUTION. THE ONLY WAY TO STOP THE CHAOS MONKEY IS TO CLOSE THE GAME**   
+**CAUTION. THE ONLY WAY TO STOP THE CHAOS MONKEY IS TO CLOSE THE GAME**
 (Yeah, I want to fix that)
 	]]>, true, true);
 
@@ -69,7 +69,7 @@ public function initiateTheMonkey():void
 	outputText(<![CDATA[
 INITIATING MONKEY
 	]]>, true, true);
-	
+
 	this.monkey.createChaos();
 
 	if (this.player.str) // we're in a game
@@ -96,7 +96,7 @@ public function debugPane():void
 	outputText("\n<hr /> --------"); // HR Tag! WHY U NO WORK?
 
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
-	
+
 
 
 	if (CoC_Settings.haltOnErrors)  // Using a static class so I can grab it from anywhere.
@@ -109,7 +109,7 @@ public function debugPane():void
 	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
 	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
 
-	
+
 	outputText(images.showImage("monster-ceraph"));
 
 	menu();
@@ -142,8 +142,8 @@ public function doThatTestingThang():void
 {
 
 	// Excercise the parser. This should catch parser regressions, I think.
-	// 
-	// 
+	//
+	//
 
 	outputText(<![CDATA[
 
@@ -208,7 +208,7 @@ public function doThatTestingThang():void
 * \\\[allChestDesc\\\] - [allChestDesc]
 * \\\[player.armorName\\\] - [player.armorName]
 * \\\[player.skinFurScales\\\] - [player.skinFurScales]
-* \\\[chestDesc\\\] - [chestDesc]  
+* \\\[chestDesc\\\] - [chestDesc]
 
 
 **Two word nouns**
@@ -286,19 +286,27 @@ public function doThatTestingThang():void
 * 23 [if (player.biggestTitSize > 0)  HERP|DERP]
 * 24 \\\[if (player.biggestLactation > 0)  HERP|DERP\\\]
 * 24 [if (player.biggestLactation > 0)  HERP|DERP]
+* 25 \\\[if (player.isBiped == true) IS A BIPEDDDDD | not a biped. Wat?\\\]
+* 25 [if (player.isBiped == true) IS A BIPEDDDDD | not a biped. Wat?]
+* 26 \\\[if (player.isBiped) IS A BIPEDDDDD | not a biped. Wat?\\\]
+* 26 [if (player.isBiped) IS A BIPEDDDDD | not a biped. Wat?]
+* 27 \\\[if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?\\\]
+* 27 [if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?]
+
+
 
 **Arbitrary function calls**
 
 
-* \\\[eCockDescript 0\\\] - [eCockDescript 0]  
-* \\\[eCockDescript\\\] - [eCockDescript]  
+* \\\[eCockDescript 0\\\] - [eCockDescript 0]
+* \\\[eCockDescript\\\] - [eCockDescript]
 
-* \\\[cockDescript 0\\\] - [cockDescript 0]  
-* \\\[cockDescript\\\] - [cockDescript]  
-* Generic function calls will be cast to string  
-* \\\[player.cumQ\\\] - [player.cumQ]  
-* `\[kFLAGS_REF.ARIAN_COCK_SIZE\]` - [kFLAGS_REF.ARIAN_COCK_SIZE]  
-* `\[flags kFLAGS_REF.ARIAN_COCK_SIZE\]` - [flags kFLAGS_REF.ARIAN_COCK_SIZE]  
+* \\\[cockDescript 0\\\] - [cockDescript 0]
+* \\\[cockDescript\\\] - [cockDescript]
+* Generic function calls will be cast to string
+* \\\[player.cumQ\\\] - [player.cumQ]
+* `\[kFLAGS_REF.ARIAN_COCK_SIZE\]` - [kFLAGS_REF.ARIAN_COCK_SIZE]
+* `\[flags kFLAGS_REF.ARIAN_COCK_SIZE\]` - [flags kFLAGS_REF.ARIAN_COCK_SIZE]
 
 
 **Gender tests**
@@ -353,15 +361,15 @@ public function doThatTestingThang():void
 
 **Complex IF Statement thing**
 
-\\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
+\\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]
 [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
 
 **FancyQuotes!**
 
-Convert Apostrophes '  
+Convert Apostrophes '
 It's a herm!
 
-convert "  
+convert "
 "derp a herp"
 
 
