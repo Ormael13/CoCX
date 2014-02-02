@@ -1,4 +1,7 @@
-﻿
+﻿import coc.view.CoCButton;
+import flash.text.TextField;
+import flash.text.TextFormat;
+
 
 
 //MainMenu - kicks player out to the main menu
@@ -177,15 +180,44 @@ public function settingsScreen():void
 	choices("Toggle Debug", toggleDebug,
 			"Sprite Toggle", toggleSpritesFlag,
 			"EZ Mode", toggleEasyModeFlag,
-			"Silly Toggle", toggleSillyFlag,
-			"Null", 0,
+			"Larger Font", incFontSize,
+			"Controls", displayControls,
 			"Hyper Happy", toggleHyperHappy,
 			"Low Standards", toggleStandards,
-			"Null", 0,
-			"Controls", displayControls,
+			"Silly Toggle", toggleSillyFlag,
+			"Smaller Font", decFontSize,
 			"Back", mainMenu);
 }
 
+public function incFontSize():void
+{
+	var fmt:TextFormat = mainView.mainText.getTextFormat();
+	
+	if (fmt.size == null) fmt.size = 20;
+	
+	fmt.size = (fmt.size as Number) + 1;
+	
+	if ((fmt.size as Number) > 32) fmt.size = 32;
+	
+	trace("Font size set to: " + (fmt.size as Number));
+	mainView.mainText.setTextFormat(fmt);
+	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
+}
+
+public function decFontSize():void
+{
+	var fmt:TextFormat = mainView.mainText.getTextFormat();
+	
+	if (fmt.size == null) fmt.size = 20;
+	
+	fmt.size = (fmt.size as Number) - 1;
+	
+	if ((fmt.size as Number) < 14) fmt.size = 14;
+	
+	trace("Font size set to: " + (fmt.size as Number));
+	mainView.mainText.setTextFormat(fmt);
+	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
+}
 
 public function toggleStandards():void
 {

@@ -1,4 +1,5 @@
-﻿// // import flash.events.MouseEvent;
+﻿import flash.text.TextFormat;
+// // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
 // //const SPELLS_CAST:int = 868;
@@ -178,8 +179,19 @@ public function outputText(output:String,
 
 public function flushOutputTextToGUI():void
 {
+	var fmt:TextFormat;
+	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
+	{
+		fmt = mainView.mainText.getTextFormat();
+		fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+	}
 	
 	mainView.setOutputText( currentText );
+	
+	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
+	{
+		mainView.mainText.setTextFormat(fmt);
+	}
 }
 
 public function displayPerks(e:MouseEvent = null):void {
@@ -873,7 +885,8 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 
 	toolTipText = getButtonToolTipText( text );
 	mainView.showBottomButton( pos, text, callback, toolTipText );
-	mainView.setOutputText( currentText );
+	//mainView.setOutputText( currentText );
+	flushOutputTextToGUI();
 }
 
 public function hasButton(arg:*):Boolean {
@@ -958,7 +971,8 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 	_conditionallyShowButton( 8, text9, func9, arg9 );
 	_conditionallyShowButton( 9, text0, func0, arg0 );
 
-	mainView.setOutputText( currentText );
+	//mainView.setOutputText( currentText );
+	flushOutputTextToGUI();
 }
 
 
@@ -1029,7 +1043,8 @@ public function choices(text1:String, butt1:*,
 
 	// funcs = new Array();
 	// args = new Array();
-	mainView.setOutputText( currentText );
+	//mainView.setOutputText( currentText );
+	flushOutputTextToGUI();
 }
 
 /****
