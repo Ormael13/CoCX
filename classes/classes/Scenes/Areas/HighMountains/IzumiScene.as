@@ -1024,7 +1024,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("“<i>Feel free to come back if you want me to clean your clock again, yeah?</i>”  She calls after you with a grin.  You shake your head ruefully as you make your way down the mountain and back to your camp.  Overall, that could have gone better, but it could have gone a lot worse, too.\n\n");
 
 			menu();
-			doNext(13);
+			cleanupAfterCombat();
 		}
 
 		// Call this shit at the top of any "Stay" scene for shared initial content
