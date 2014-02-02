@@ -370,7 +370,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				player.statusAffect(affectIndex).value1 -= hours;
 
-				if (player.statusAffect(affectIndex).value1 == 0)
+				if (player.statusAffect(affectIndex).value1 <= 0)
 				{
 					this.smokeEffectWearsOff();
 				}
