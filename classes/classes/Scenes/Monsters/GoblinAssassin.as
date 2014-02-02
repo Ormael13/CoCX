@@ -140,7 +140,7 @@ import classes.StatusAffects;
 			init09PrimaryStats(45,55,110,95,65,35,60);
 			init10Weapon("needles","stabbing needles");
 			init11Armor("leather straps");
-			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init12Combat(70,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
 			init14WeightedDrop().
 					add(consumables.GOB_ALE, 5).
