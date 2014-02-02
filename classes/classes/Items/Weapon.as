@@ -13,7 +13,7 @@ package classes.Items
 		private var _perk:String;
 		private var _name:String;
 
-		override public function equip(player:Player, output:Boolean):void
+		override public function equip(player:Player, returnOldItem:Boolean, output:Boolean):void
 		{
 			if (output) clearOutput();
 			if (canUse(player,output)){
@@ -21,21 +21,23 @@ package classes.Items
 				if (output) {
 					outputText("You equip your " + longName + ".  ");
 				}
-				oldWeapon.unequip(player,output);
+				oldWeapon.unequip(player, returnOldItem, output);
 				player.setWeaponHiddenField(this);
 				equipped(player,output);
 			}
 		}
 
 
-		override public function unequip(player:Player,output:Boolean):void
+		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean):void
 		{
-			var itype:ItemType = unequipReturnItem(player,output);
-			if (itype != null){
-				if (output && itype == this)
-					outputText("You still have " + itype.longName + " left over.  ");
-				game.itemSwapping = true;
-				game.inventory.takeItem(this,false);
+			if (returnToInventory) {
+				var itype:ItemType = unequipReturnItem(player, output);
+				if (itype != null) {
+					if (output && itype == this)
+						outputText("You still have " + itype.longName + " left over.  ");
+					game.itemSwapping = true;
+					game.inventory.takeItem(this, false);
+				}
 			}
 			player.setWeaponHiddenField(WeaponLib.FISTS);
 			unequipped(player,output);

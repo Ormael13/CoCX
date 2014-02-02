@@ -11,7 +11,7 @@ package classes.Items.Armors
 	{
 
 
-		override public function unequip(player:Player, output:Boolean):void
+		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean):void
 		{
 		}
 

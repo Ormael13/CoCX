@@ -5,13 +5,12 @@ package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
 	import classes.Player;
 
 	public final class SeductiveArmor extends Armor
 	{
 
-		override public function equip(player:Player, output:Boolean):void
+		override public function equip(player:Player, returnOldItem:Boolean, output:Boolean):void
 		{
 			if(!game.ceraphFollowerScene.ceraphIsFollower()) {
 				if(output) {
@@ -32,7 +31,7 @@ package classes.Items.Armors
 					outputText("\n\nShe's gone before you can reply.  Sometimes she's more trouble than she's worth.");
 				}
 			}
-			player.armor.unequip(player,true);
+			player.armor.unequip(player, returnOldItem, output);
 		}
 
 		public function SeductiveArmor()

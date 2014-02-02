@@ -150,7 +150,7 @@ use namespace kGAMECLASS;
 				CoC_Settings.error(short+".armor is set to null");
 				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			}
-			value.equip(this, false);
+			value.equip(this, false, false);
 		}
 
 		// in case you don't want to call the value.equip
@@ -170,7 +170,7 @@ use namespace kGAMECLASS;
 				CoC_Settings.error(short+".weapon is set to null");
 				value = WeaponLib.FISTS;
 			}
-			value.equip(this,false);
+			value.equip(this, false, false);
 		}
 
 		// in case you don't want to call the value.equip

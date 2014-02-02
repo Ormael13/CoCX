@@ -237,7 +237,7 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 		//Remove weapon
 		player.createStatusAffect(StatusAffects.Disarmed,0,0,0,0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-		player.weapon = WeaponLib.FISTS;
+		player.weapon.unequip(player,false,true);
 		monster.createStatusAffect(StatusAffects.BowDisabled,0,0,0,0);
 		if(player.str < 80 && player.spe < 80) {
 			monster.createStatusAffect(StatusAffects.AttackDisabled,0,0,0,0);

@@ -175,7 +175,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("You don't react fast enough and the sticky webbing pulls your " + player.weaponName + " out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!", false);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
-				player.weapon = WeaponLib.FISTS;
+				player.weapon.unequip(player,false,true);
 				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 			}
 			combatRoundOver();

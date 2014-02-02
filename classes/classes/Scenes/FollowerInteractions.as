@@ -424,7 +424,7 @@ private function srslyPimpinGuyz():void {
 	player.itemSlot4.quantity = 0;
 	player.itemSlot5.quantity = 0;
 	player.armor = armors.C_CLOTH;
-	player.weapon = WeaponLib.FISTS;
+	player.weapon.unequip(player,false,true);
 	player.removeStatusAffect(StatusAffects.CampMarble);
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);

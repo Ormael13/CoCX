@@ -183,7 +183,7 @@ private function talkToMali():void {
 		outputText("\n\n\"<i>Please, come back soon.</i>\"");
 		outputText("\n\n(<b>Conclusion not yet complete...</b>)");
 		if(player.weapon == weapons.S_BLADE) {
-			player.weapon = WeaponLib.FISTS;
+			player.weapon.unequip(player,false,true);
 			player.removePerk(PerkLib.WizardsFocus);
 		}
 		else {

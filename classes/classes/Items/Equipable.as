@@ -52,12 +52,15 @@ package classes.Items
 			unequipEffect(player,output);
 		}
 
-		public function equip(player:Player,output:Boolean):void
+		public function equip(player:Player,returnOldItem:Boolean,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "equip", id);
 		}
 
-		public function unequip(player:Player,output:Boolean):void
+		/**
+		 * @param returnToInventory true if that item should be placed in player's inventory
+		 */
+		public function unequip(player:Player,returnToInventory:Boolean,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}
@@ -71,7 +74,7 @@ package classes.Items
 				}
 				return;
 			}
-			equip(player,output);
+			equip(player,true,output);
 		}
 
 		public function Equipable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null)

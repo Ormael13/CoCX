@@ -2848,26 +2848,22 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	//Drop axe if too short!
 	if(player.tallness < 78 && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);
-		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.L__AXE);
+		player.weapon.unequip(player,true,true);
 		return true;
 	}
 	if(player.weapon == weapons.L_HAMMR && player.tallness < 60) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n", true);
-		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.L_HAMMR);
+		player.weapon.unequip(player,true,true);
 		return true;
 	}		
 	if(player.weapon == weapons.CLAYMOR && player.str < 40) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n", true);
-		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.CLAYMOR);
+		player.weapon.unequip(player,true,true);
 		return true;
 	}
 	if(player.weapon == weapons.WARHAMR && player.str < 80) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n", true);
-		player.weapon = WeaponLib.FISTS;
-		inventory.takeItem(weapons.WARHAMR);
+		player.weapon.unequip(player,true,true);
 		return true;
 	}
 	//Drop beautiful sword if corrupted!
@@ -2875,7 +2871,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.cor >= 35) {
 			outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but could probably keep it in your inventory.</b>\n\n", false);
 			var oldWeapon:Weapon = player.weapon;
-			player.weapon = WeaponLib.FISTS;
+			player.weapon.unequip(player,false,true);
 			inventory.takeItem(oldWeapon);
 			return true;
 		}
