@@ -11,13 +11,13 @@ public function customPCSetup():void {
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
 		
-		for (var i:int = 0; i < 2; i++)
+		for (var i:int = 0; i < 10; i++)
 		{
 			player.createCock();
-			player.cocks[0].cockLength = 8;
-			player.cocks[0].cockThickness = 2;
-			player.cocks[0].cockType = CockTypesEnum.DOG;
-			player.cocks[0].knotMultiplier = 1.5;
+			player.cocks[i].cockLength = 12;
+			player.cocks[i].cockThickness = 2;
+			player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+			player.cocks[i].knotMultiplier = 1.5;
 		}
 		
 		player.clitLength = 0.5;
