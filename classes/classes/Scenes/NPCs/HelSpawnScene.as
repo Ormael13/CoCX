@@ -351,22 +351,24 @@ private function noKidsHel():void {
 public function helGotKnockedUp():void {
 	spriteSelect(68);
 	flags[kFLAGS.HEL_NTR_TRACKER] = 2;
-	//Hel Got Knocked Up by a Spiderboy, in All His Foreskinned Glory
+
+	outputText("\n<b>After your decision with Helia last night,</b> you decide to check in on your lusty salamander.  You find her sitting on a rock near her part of camp, knees held close to her chest, seemingly deep in thought.  She gives you a ");
+	if(flags[kFLAGS.HELSPAWN_DADDY] == 2) outputText("warm ");
+	else outputText("wan ");
+	outputText("smile as you approach, scooting over to allow you to sit beside her.  She almost seems distant, though she's quick to wrap her tail around your waist, hugging you close against her.");
+	outputText("\n\nAfter a few quiet minutes, you finally ask, \"<i>How'd it go?</i>\"");
+	outputText("\n\n\"<i>Well... let's just say it worked.  Unless you wanna hear the details?</i>\" she asks conspiratorially.");
+
+	menu();
+	//Hel Got Knocked Up by Mai
 	if(flags[kFLAGS.HELSPAWN_DADDY] == 2) {
-		outputText("\n<b>After your decision with Helia last night,</b> you decide to check in on your lusty salamander. You find her sitting on a rock near her part of camp, knees held close to her chest, seemingly deep in thought. She gives you a warm smile as you approach, scooting over to allow you to sit beside her. She almost seems distant, though she's quick to wrap her tail around your waist, hugging you close against her.");
-		outputText("\n\nAfter a few quiet minutes, you finally ask, \"<i>How'd it go?</i>\"");
-		outputText("\n\n\"<i>Well... let's just say it worked. Unless you wanna hear the details?</i>\" she asks conspiratorially.");
-		menu();
 		addButton(0,"Sure",sureHelGimmeMaiDetails);
-		addButton(1,"Nope",dontTellMeAboutSpiderboy);
-	}
-	else if(flags[kFLAGS.HELSPAWN_DADDY] == 1) {
-		outputText("\n<b>After your decision with Helia last night,</b> you decide to check in on your lusty salamander.  You find her sitting on a rock near her part of camp, knees held close to her chest, seemingly deep in thought.  She gives you a wan smile as you approach, scooting over to allow you to sit beside her.  She almost seems distant, though she's quick to wrap her tail around your waist, hugging you close against her.");
-		outputText("\n\nAfter a few quiet minutes, you finally ask, \"<i>How'd it go?</i>\"");
-		outputText("\n\n\"<i>Well... let's just say it worked. Unless you wanna hear the details?</i>\" she asks conspiratorially.");
-		menu();
-		addButton(0,"Sure",sureHelGimmeSpidahBoyDetails);		
 		addButton(1,"Nope",dontTellMeAboutMai);
+	}
+	//Hel Got Knocked Up by a Spiderboy
+	else if(flags[kFLAGS.HELSPAWN_DADDY] == 1) {
+		addButton(0,"Sure",sureHelGimmeSpidahBoyDetails);		
+		addButton(1,"Nope",dontTellMeAboutSpiderboy);
 	}
 }
 
