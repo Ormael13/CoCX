@@ -120,10 +120,11 @@ import classes.StatusAffects;
 			init11Armor("scales",30);
 			init12Combat(400,30,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,rand(5) + 8);
+			init14NoDrop();
 			initX_Specials(nagaPoisonBiteAttack,nagaConstrict,nagaTailWhip);
 
 		}
-		
+
 	}
 
 }

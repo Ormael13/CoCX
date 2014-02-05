@@ -101,7 +101,7 @@ public function doItems(eventNo:Number):void {
 			kGAMECLASS.enemyAI();
 			return;
 		}
-		outputText("\nWhich item will you use?", false);		
+		outputText("\nWhich item will you use?", false);
 		if(gameState == 1) choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 5000);
 		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
 		menuLoc = 1;
@@ -212,7 +212,7 @@ public function doItems(eventNo:Number):void {
 			outputText("They shift, stretching your " + sackDescript() + " tight as they gain inches of size.  You step to steady yourself as your center of balance shifts due to your newly enlarged " + ballsDescriptLight() + ".  ", false);
 		}
 		else {
-			player.ballSize += 1 + rand(2); 
+			player.ballSize += 1 + rand(2);
 			outputText("You feel your testicles shift, pulling the skin of your " + sackDescript() + " a little bit as they grow to " + ballsDescriptLight() + ".  ", false);
 		}
 		if(player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.", false);
@@ -223,8 +223,10 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1040) {
 		player.slimeFeed();
 		outputText("You sink the needle into the flesh of your " + allBreastsDescript() + " injecting each with a portion of the needle.\n\n", true);
-		if(player.breastRows.length == 1) player.growTits((1+rand(5)),1,true,1);
-		else player.growTits(1+rand(2),player.breastRows.length,true,1);
+		if(player.breastRows.length == 1)
+			player.growTits((1+rand(5)),1,true,1);
+		else
+			player.growTits(1+rand(2),player.breastRows.length,true,1);
 		dynStats("lus", 10);
 		itemGoNext();
 	}
@@ -268,7 +270,7 @@ public function doItems(eventNo:Number):void {
 		player.slimeFeed();
 		outputText("You sink the needle into each of your " + nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n", true);
 		//Grow nipples
-		outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n", false); 
+		outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n", false);
 		player.nippleLength += (rand(2) + 3)/10;
 		dynStats("lus", 15);
 		//NIPPLECUNTZZZ
@@ -362,7 +364,7 @@ public function doItems(eventNo:Number):void {
 	//Reducto Ballzzzz
 	else if(eventNo == 1054) {
 		outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
-		player.ballSize -= (2 + rand(4)); 
+		player.ballSize -= (2 + rand(4));
 		if(player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.", false);
@@ -496,7 +498,7 @@ public function doItems(eventNo:Number):void {
 			temp5 = 1070;
 			outputText("\n" + int(itemSlot5.itype.value/2) + " gems for " + itemSlot5.itype.longName + ".", false);
 		}
-		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) 
+		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1)
 			kath = kGAMECLASS.telAdre.katherine.visitKatherine;
 
 		choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1,
@@ -504,13 +506,13 @@ public function doItems(eventNo:Number):void {
 				(itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3,
 				(itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4,
 				(itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5,
-				"Kath's Alley", kath, 
-				"", 0, 
-				"", 0, 
-				"", 0, 
+				"Kath's Alley", kath,
+				"", 0,
+				"", 0,
+				"", 0,
 				"Back", kGAMECLASS.telAdre.telAdreMenu);
 	}
-	
+
 	//Sell item from slots
 	else if ((eventNo == 1066) || (eventNo == 1067) || (eventNo == 1068) || (eventNo == 1069) || (eventNo == 1070))
 	//   slot 1               slot 2                slot 3               slot 4               slot 5
@@ -538,11 +540,11 @@ public function doItems(eventNo:Number):void {
 
 		spriteSelect(47);
 		var itemValueTemp:int = int(slotTmp.itype.value/2);
-		if(itemValueTemp == 0) 
+		if(itemValueTemp == 0)
 			outputText("You hand over " + slotTmp.itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"", true);
-		else 
+		else
 			outputText("You hand over " + slotTmp.itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		
+
 		slotTmp.removeOneItem();
 
 		doNext(kGAMECLASS.telAdre.oswaldPawn);
@@ -620,7 +622,7 @@ public function doItems(eventNo:Number):void {
 	}
 	else if(eventNo == 1100) {
 		retrieveFromRacks(8, false);
-	}	
+	}
 	/* Armor RACK STORAGE */
 	else if(eventNo == 1101) {
 		placeInRacks(1, true);
@@ -669,7 +671,7 @@ public function doItems(eventNo:Number):void {
 	}
 	else if(eventNo == 1116) {
 		retrieveFromRacks(8, true);
-	}	
+	}
 	else if(eventNo == 1122) {
 		outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 		if(player.hipRating >= 15) {
@@ -720,7 +722,7 @@ public function doItems(eventNo:Number):void {
 		//Determine how to continue after using items or running from the items menu.
 		public function itemGoNext():void {
 			itemSubMenu = false;//hope it will work
-			
+
 			if(gameState == 4) {
 				//If at giacomo go back to him afterwards
 				doNext(2015);

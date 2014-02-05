@@ -20,22 +20,22 @@ use namespace kGAMECLASS;
 		{
 			game.outputText(text, clear);
 		}
-		
+
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;
-		
+
 		//Lust vulnerability
 		//TODO: Kept for backwards compatibility reasons but should be phased out.
 		public var lustVuln:Number = 1;
-		
+
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
-		
+
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
-		
+
 		//Number of times explored for new areas
 		public var explored:Number = 0;
 		public var exploredForest:Number = 0;
@@ -266,7 +266,7 @@ use namespace kGAMECLASS;
 			else if (diff<20) return 2;
 			else return 3;
 		}
-		
+
 		//Body Type
 		public function bodyType():String
 		{
@@ -389,7 +389,7 @@ use namespace kGAMECLASS;
 			}
 			return desc;
 		}
-		
+
 		public function race():String
 		{
 			//Determine race type:
@@ -423,8 +423,8 @@ use namespace kGAMECLASS;
 				if (balls > 0 && ballSize > 5)
 					race = "tanuki-morph";
 			}
-			if (dogScore() >= 4)				
-			{	
+			if (dogScore() >= 4)
+			{
 				race = "dog-morph";
 				if (faceType == 0)
 					race = "dog-" + mf("man", "girl");
@@ -496,7 +496,7 @@ use namespace kGAMECLASS;
 				race = "naga";
 			if (lowerBody == 4)
 				race = "centaur";
-			
+
 			if (gooScore() >= 3)
 			{
 				race = "goo-";
@@ -504,7 +504,7 @@ use namespace kGAMECLASS;
 			}
 			return race;
 		}
-		
+
 		//determine demon rating
 		public function demonScore():Number
 		{
@@ -527,7 +527,7 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			return demonCounter;
 		}
-		
+
 		//Determine Human Rating
 		public function humanScore():Number
 		{
@@ -550,7 +550,7 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			return humanCounter;
 		}
-		
+
 		//Determine minotaur rating
 		public function minoScore():Number
 		{
@@ -576,12 +576,12 @@ use namespace kGAMECLASS;
 				minoCounter--;
 			return minoCounter;
 		}
-		
+
 		public function get minotaurScore():Number
 		{
 			return this.minoScore();
 		}
-		
+
 		//Determine cow rating
 		public function cowScore():Number
 		{
@@ -608,7 +608,7 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			return minoCounter;
 		}
-		
+
 		public function sandTrapScore():int
 		{
 			var counter:int = 0;
@@ -622,7 +622,7 @@ use namespace kGAMECLASS;
 				counter++;
 			return counter;
 		}
-		
+
 		//Determine Bee Rating
 		public function beeScore():Number
 		{
@@ -651,7 +651,7 @@ use namespace kGAMECLASS;
 				beeCounter++;
 			return beeCounter;
 		}
-		
+
 		//Determine Dog Rating
 		public override function dogScore():Number
 		{
@@ -677,7 +677,7 @@ use namespace kGAMECLASS;
 				dogCounter++;
 			return dogCounter;
 		}
-		
+
 		public function mouseScore():Number
 		{
 			var coonCounter:Number = 0;
@@ -685,7 +685,7 @@ use namespace kGAMECLASS;
 				coonCounter++;
 			if (tailType == 16)
 				coonCounter++;
-			
+
 			if (faceType == 15)
 				coonCounter++;
 			if (faceType == 16)
@@ -693,14 +693,14 @@ use namespace kGAMECLASS;
 			//Fur only counts if some canine features are present
 			if (skinType == 1 && coonCounter > 0)
 				coonCounter++;
-			
+
 			if (tallness < 55 && coonCounter > 0)
 				coonCounter++;
 			if (tallness < 45 && coonCounter > 0)
 				coonCounter++;
 			return coonCounter;
 		}
-		
+
 		public function raccoonScore():Number
 		{
 			var coonCounter:Number = 0;
@@ -721,7 +721,7 @@ use namespace kGAMECLASS;
 				coonCounter++;
 			return coonCounter;
 		}
-		
+
 		//Determine Fox Rating
 		public override function foxScore():Number
 		{
@@ -747,7 +747,7 @@ use namespace kGAMECLASS;
 				foxCounter++;
 			return foxCounter;
 		}
-		
+
 		//Determine cat Rating
 		public function catScore():Number
 		{
@@ -773,7 +773,7 @@ use namespace kGAMECLASS;
 				catCounter++;
 			return catCounter;
 		}
-		
+
 		//Determine lizard rating
 		public function lizardScore():Number
 		{
@@ -794,7 +794,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			return lizardCounter;
 		}
-		
+
 		public function spiderScore():Number
 		{
 			var score:Number = 0;
@@ -814,7 +814,7 @@ use namespace kGAMECLASS;
 				score--;
 			return score;
 		}
-		
+
 		//Determine Horse Rating
 		public function horseScore():Number
 		{
@@ -834,7 +834,7 @@ use namespace kGAMECLASS;
 				horseCounter++;
 			return horseCounter;
 		}
-		
+
 		//Determine kitsune Rating
 		public function kitsuneScore():Number
 		{
@@ -881,11 +881,11 @@ use namespace kGAMECLASS;
 			//If the character has tail(s) other than fox tails, -1
 			if (tailType != 13)
 				kitsuneCounter--;
-			
+
 			return kitsuneCounter;
-		
+
 		}
-		
+
 		//Determine Horse Rating
 		public function dragonScore():Number
 		{
@@ -910,7 +910,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			return dragonCounter;
 		}
-		
+
 		//Goblinscore
 		public function goblinScore():Number
 		{
@@ -932,7 +932,7 @@ use namespace kGAMECLASS;
 			}
 			return horseCounter;
 		}
-		
+
 		//Gooscore
 		public function gooScore():Number
 		{
@@ -949,7 +949,7 @@ use namespace kGAMECLASS;
 				gooCounter++;
 			return gooCounter;
 		}
-		
+
 		//Nagascore
 		public function nagaScore():Number
 		{
@@ -964,7 +964,7 @@ use namespace kGAMECLASS;
 				nagaCounter++;
 			return nagaCounter;
 		}
-		
+
 		//Bunnyscore
 		public function bunnyScore():Number
 		{
@@ -990,7 +990,7 @@ use namespace kGAMECLASS;
 				bunnyCounter++;
 			return bunnyCounter;
 		}
-		
+
 		//Harpyscore
 		public function harpyScore():Number
 		{
@@ -1011,7 +1011,7 @@ use namespace kGAMECLASS;
 				harpy++;
 			return harpy;
 		}
-		
+
 		//Kangascore
 		public function kangaScore():Number
 		{
@@ -1030,7 +1030,7 @@ use namespace kGAMECLASS;
 				kanga++;
 			return kanga;
 		}
-		
+
 		//sharkscore
 		public function sharkScore():Number
 		{
@@ -1043,7 +1043,7 @@ use namespace kGAMECLASS;
 				sharkCounter++;
 			return sharkCounter;
 		}
-		
+
 		//Determine Mutant Rating
 		public function mutantScore():Number
 		{
@@ -1078,7 +1078,7 @@ use namespace kGAMECLASS;
 			}
 			return mutantCounter--;
 		}
-		
+
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)
@@ -1157,7 +1157,7 @@ use namespace kGAMECLASS;
 			}
 
 		}
-		
+
 		public function minoCumAddiction(raw:Number = 10):void {
 			//Increment minotaur cum intake count
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
@@ -1165,7 +1165,7 @@ use namespace kGAMECLASS;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
-			
+
 			//Turn off withdrawal
 			//if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 1;
 			//Reset counter
@@ -1185,7 +1185,7 @@ use namespace kGAMECLASS;
 			//Recheck to make sure shit didn't break
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
-		
+
 		}
 
 		public function hasSpells():Boolean
@@ -1261,7 +1261,9 @@ use namespace kGAMECLASS;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
 			if(findPerk(PerkLib.BigTits) >= 0 && rand(3) == 0 && amount < 1) amount=1;
-			var temp:uint = breastRows.length;
+
+			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
+			var temp:Number = breastRows.length;
 			if(growthType == 1) {
 				//Select smallest breast, grow it, move on
 				while(rowsGrown > 0) {
@@ -1279,42 +1281,65 @@ use namespace kGAMECLASS;
 					trace("Breastrow chosen for growth: " + String(temp2) + ".");
 					//Reuse temp to store growth amount for diminishing returns.
 					temp = amount;
-					//Diminishing returns!
-					if(breastRows[temp2].breastRating > 3) {
-						if(findPerk(PerkLib.BigTits) < 0) temp/=1.5;
-						else temp/=1.3;
+					if (!flags[kFLAGS.HYPER_HAPPY])
+					{
+						//Diminishing returns!
+						if(breastRows[temp2].breastRating > 3)
+						{
+							if(findPerk(PerkLib.BigTits) < 0)
+								temp /=1.5;
+							else
+								temp /=1.3;
+						}
+
+						// WHy are there three options here. They all have the same result.
+						if(breastRows[temp2].breastRating > 7)
+						{
+							if(findPerk(PerkLib.BigTits) < 0)
+								temp /=2;
+							else
+								temp /=1.5;
+						}
+						if(breastRows[temp2].breastRating > 9)
+						{
+							if(findPerk(PerkLib.BigTits) < 0)
+								temp /=2;
+							else
+								temp /=1.5;
+						}
+						if(breastRows[temp2].breastRating > 12)
+						{
+							if(findPerk(PerkLib.BigTits) < 0)
+								temp /=2;
+							else
+								temp  /=1.5;
+						}
 					}
-					if(breastRows[temp2].breastRating > 7) { 
-						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
-						else temp /= 1.5;
-					}
-					if(breastRows[temp2].breastRating > 9) { 
-						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
-						else temp /= 1.5;
-					}
-					if(breastRows[temp2].breastRating > 12) { 
-						if(findPerk(PerkLib.BigTits) < 0) temp/=2;
-						else temp /= 1.5;
-					}
+
 					//Grow!
+					trace("Growing breasts by ", temp);
 					breastRows[temp2].breastRating += temp;
 					rowsGrown--;
 				}
 			}
-			//Diminishing returns!
-			if(breastRows[0].breastRating > 3) {
-				if(findPerk(PerkLib.BigTits) < 0) amount/=1.5;
-				else amount/=1.3;
+
+			if (!flags[kFLAGS.HYPER_HAPPY])
+			{
+				//Diminishing returns!
+				if(breastRows[0].breastRating > 3) {
+					if(findPerk(PerkLib.BigTits) < 0) amount/=1.5;
+					else amount/=1.3;
+				}
+				if(breastRows[0].breastRating > 7) {
+					if(findPerk(PerkLib.BigTits) < 0) amount/=2;
+					else amount /= 1.5;
+				}
+				if(breastRows[0].breastRating > 12) {
+					if(findPerk(PerkLib.BigTits) < 0) amount/=2;
+					else amount /= 1.5;
+				}
 			}
-			if(breastRows[0].breastRating > 7) { 
-				if(findPerk(PerkLib.BigTits) < 0) amount/=2;
-				else amount /= 1.5;
-			}
-			if(breastRows[0].breastRating > 12) { 
-				if(findPerk(PerkLib.BigTits) < 0) amount/=2;
-				else amount /= 1.5;
-			}
-			/*if(breastRows[0].breastRating > 12) { 
+			/*if(breastRows[0].breastRating > 12) {
 				if(hasPerk("Big Tits") < 0) amount/=2;
 				else amount /= 1.5;
 			}*/
@@ -1338,33 +1363,41 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Breast Growth Finished...talk about changes.
+			trace("Growth ammout = ", amount);
 			if(display) {
 				if(growthType < 3) {
-					if(amount <= 2) {
-						if(breastRows.length > 1) outputText("Your rows of " + breastDescript(0) + " jiggle with added weight, growing a bit larger.", false); 
+					if(amount <= 2)
+					{
+						if(breastRows.length > 1) outputText("Your rows of " + breastDescript(0) + " jiggle with added weight, growing a bit larger.", false);
 						if(breastRows.length == 1) outputText("Your " + breastDescript(0) + " jiggle with added weight as they expand, growing a bit larger.", false);
 					}
-					if(amount > 2 && amount <= 4) {
+					else if(amount <= 4)
+					{
 						if(breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your rows of " + breastDescript(0) + " expand significantly.", false);
 						if(breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
 					}
-					if(amount > 4) {
+					else
+					{
 						if(breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
 						if(breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
 					}
-					if(biggestTitSize() >= 8.5 && nippleLength < 2) {
+					if(biggestTitSize() >= 8.5 && nippleLength < 2)
+					{
 						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
 						nippleLength = 2;
 					}
-					if(biggestTitSize() >= 7 && nippleLength < 1) {
+					if(biggestTitSize() >= 7 && nippleLength < 1)
+					{
 						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
 						nippleLength = 1;
 					}
-					if(biggestTitSize() >= 5 && nippleLength < .75) {
+					if(biggestTitSize() >= 5 && nippleLength < .75)
+					{
 						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
 						nippleLength = .75;
 					}
-					if(biggestTitSize() >= 3 && nippleLength < .5) {
+					if(biggestTitSize() >= 3 && nippleLength < .5)
+					{
 						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
 						nippleLength = .5;
 					}
@@ -1417,7 +1450,7 @@ use namespace kGAMECLASS;
 			if(findPerk(PerkLib.OmnibusGift) >= 0) {
 				if(min > 40) min += 10;
 				else if(min > 0) min += 20;
-				else min += 35;                
+				else min += 35;
 			}
 			//Nymph perk raises to 30
 			if(findPerk(PerkLib.Nymphomania) >= 0) {
@@ -1438,7 +1471,7 @@ use namespace kGAMECLASS;
 			}
 			if(findPerk(PerkLib.LuststickAdapted) > 0) {
 				if(min < 50) min += 10;
-				else min += 5;                
+				else min += 5;
 			}
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
@@ -1500,7 +1533,7 @@ use namespace kGAMECLASS;
 			if(findStatusAffect(StatusAffects.AkbalSpeed) >= 0) {
 				kGAMECLASS.dynStats("spe", statusAffectv1(StatusAffects.AkbalSpeed) * -1);
 				removeStatusAffect(StatusAffects.AkbalSpeed);
-			}		
+			}
 			if(findStatusAffect(StatusAffects.AmilyVenom) >= 0) {
 				kGAMECLASS.dynStats("str", statusAffectv1(StatusAffects.AmilyVenom),"spe", statusAffectv2(StatusAffects.AmilyVenom));
 				removeStatusAffect(StatusAffects.AmilyVenom);
@@ -1581,7 +1614,7 @@ use namespace kGAMECLASS;
 				spe += statusAffectv2(StatusAffects.AnemoneVenom);
 				//Make sure nothing got out of bounds
 				kGAMECLASS.dynStats("cor", 0);
-		
+
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				// speUp.visible = true;
@@ -1729,7 +1762,7 @@ use namespace kGAMECLASS;
 				if(cocks[0].cockLength >= 8 && cocks[0].cockLength-temp2 < 8){
 					if(cocks.length == 1) outputText("  <b>Most men would be overly proud to have a tool as long as yours.</b>", false);
 					if(cocks.length > 1) outputText("  <b>Most men would be overly proud to have one cock as long as yours, let alone " + multiCockDescript() + ".</b>", false);
-				}	
+				}
 				if(cocks[0].cockLength >= 12 && cocks[0].cockLength-temp2 < 12) {
 					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " is so long it nearly swings to your knee at its full length.</b>", false);
 					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " are so long they nearly reach your knee when at full length.</b>", false);
@@ -1800,7 +1833,7 @@ use namespace kGAMECLASS;
 			if (deadCock < 0) {
 				deadCock = cocks.length;
 			}
-			//Double loop - outermost counts down cocks to remove, innermost counts down 
+			//Double loop - outermost counts down cocks to remove, innermost counts down
 			while (deadCock > 0) {
 				//Find shortest cock and prune it
 				temp = cocks.length;

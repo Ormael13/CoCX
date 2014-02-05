@@ -10,12 +10,12 @@ package classes.Scenes.Quests.UrtaQuest
 import classes.StatusAffects;
 
 use namespace kGAMECLASS;
-	
+
 	/**
 	 * ...
 	 * @author aimozg
 	 */
-	public class MinotaurLord extends Monster 
+	public class MinotaurLord extends Monster
 	{
 
 		override protected function performCombatAction():void
@@ -149,11 +149,12 @@ use namespace kGAMECLASS;
 			init11Armor("thick fur");
 			init12Combat(700,50,0.33,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(15,rand(5) + 5);
+			init14NoDrop();
 			initX_Tail(TAIL_TYPE_COW);
 			initX_Specials(game.mountain.minotaurScene.minoPheromones);
 
 		}
-		
+
 	}
 
 }
