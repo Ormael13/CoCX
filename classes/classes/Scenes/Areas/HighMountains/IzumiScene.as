@@ -933,8 +933,8 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.PC_FETISH] >= 1)
 			{
 				menu();
-				addButton(0, "ShowMeOff", surrenderFemaleNonExhibitionVariant);
-				addButton(1, "HideMe", surrenderFemaleExhibitionVariant);
+				addButton(0, "ShowMeOff", surrenderFemaleExhibitionVariant);
+				addButton(1, "HideMe", surrenderFemaleNonExhibitionVariant);
 			}
 			else
 			{
