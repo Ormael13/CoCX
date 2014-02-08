@@ -72,6 +72,7 @@
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
+			skipInit(14);
 		}
 
 	}
