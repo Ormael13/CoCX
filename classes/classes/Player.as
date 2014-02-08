@@ -52,20 +52,22 @@ use namespace kGAMECLASS;
 		public var itemSlots:Array;
 
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-		private var _modArmorName:String = null;
+		private var _modArmorName:String = "";
 
 		public function get modArmorName():String
 		{
+			if (_modArmorName == null) _modArmorName = "";
 			return _modArmorName;
 		}
 
 		public function set modArmorName(value:String):void
 		{
+			if (value == null) value = "";
 			_modArmorName = value;
 		}
 
 		override public function get armorName():String {
-			if (_modArmorName != null) return _modArmorName;
+			if (_modArmorName.length > 0) return modArmorName;
 			return _armor.name;
 		}
 		override public function get armorDef():Number {

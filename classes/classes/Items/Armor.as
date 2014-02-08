@@ -38,6 +38,7 @@ package classes.Items
 				}
 			}
 			player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+			if (player.modArmorName.length > 0) player.modArmorName = "";
 			unequipped(player,output);
 		}
 
