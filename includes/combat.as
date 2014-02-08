@@ -2195,7 +2195,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	doNext(1);
 }
 public function display():void {
-	if (!monster.isFullyInit()){
+	if (!monster.isFullyInit() && !CoC_Settings.debugBuild){
 		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: "+
 				monster.initsCalled
 						.map(function(x:Boolean,idx:int,array:Array):String{return x?"":String(idx+1)})
