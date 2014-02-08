@@ -103,7 +103,7 @@ package classes
 		public static const MalonVisitedPostAddiction:StatusAffectType = mk("Malon Visited Post Addiction");
 		public static const MaraeComplete:StatusAffectType = mk("Marae Complete");
 		public static const MaraesLethicite:StatusAffectType = mk("Marae's Lethicite");
-		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start")
+		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start");
 		public static const Marble:StatusAffectType = mk("Marble");
 		public static const MarbleHasItem:StatusAffectType = mk("MarbleHasItem");
 		public static const MarbleItemCooldown:StatusAffectType = mk("MarbleItemCooldown");
