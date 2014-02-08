@@ -50,6 +50,8 @@ public class SwordInStone extends AbstractLakeContent
 				if (player.str < 40) outputText("pull as hard as you can, ", false);
 				
 				outputText("but the sword remains stubbornly lodged in its arboreal home.  Frustrated, you give up and resolve to try later.", false);
+				
+				doNext(13);
 			}
 			//If not corrupted...
 			else 
