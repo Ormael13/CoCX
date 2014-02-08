@@ -1371,6 +1371,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (player.breastRows[i].breastRating < 0)
 				player.breastRows[i].breastRating = 0;
 		}
+		
+		var hasHistoryPerk:Boolean = false;
+		
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
 		{
@@ -1382,6 +1385,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			
 			// Fix saves where the Whore perk might have been malformed.
 			if (id == "History: Whote") id = "History: Whore";
+			
+			// Some shit checking to track if the incoming data has an available History perk
+			if (id.indexOf("History:") != -1)
+			{
+				hasHistoryPerk = true;
+			}
 			
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			
@@ -1420,8 +1429,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					}
 				}
 			}
-			//trace("Perk " + player.perk(i).id + " loaded.");
 		}
+		
+		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
+		if (hasHistoryPerk == false && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] != 0)
+		{
+			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
+		}
+		
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
