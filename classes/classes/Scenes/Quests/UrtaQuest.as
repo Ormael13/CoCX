@@ -275,6 +275,7 @@ private function startUrtaQuest():void {
 	//GEAR!
 	player.weapon = weapons.URTAHLB;
 	player.armor = armors.URTALTA;
+	
 	//DISPLAY SOME SHIT YO
 	clearOutput();
 	flags[kFLAGS.URTA_QUEST_STATUS] = .75;

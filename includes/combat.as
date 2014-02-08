@@ -3717,16 +3717,21 @@ public function tease(justText:Boolean = false):void {
 		if(monster.plural) damage *= 1.3;
 		damage = (damage + rand(bonusDamage))*monster.lustVuln;
 		if (!justText) monster.teased(damage);
-		if(flags[kFLAGS.PC_FETISH] >= 1) {
+		
+		
+		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
+		{
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
 			if (!justText) dynStats("lus", 2 + rand(3));
 		}
-		if (!justText) teaseXP(1);
+		
+		// Similar to fetish check, only add XP if the player IS the player...
+		if (!justText && !urtaQuest.isUrta()) teaseXP(1);
 	}
 	//Nuttin honey
 	else {
-		if (!justText) teaseXP(5);
+		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
 		if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);
