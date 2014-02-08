@@ -6,12 +6,12 @@ package classes.Scenes.Quests.UrtaQuest
 import classes.StatusAffects;
 
 use namespace kGAMECLASS;
-	
+
 	/**
 	 * ...
 	 * @author aimozg
 	 */
-	public class MilkySuccubus extends AbstractSuccubus 
+	public class MilkySuccubus extends AbstractSuccubus
 	{
 
 		override protected function performCombatAction():void
@@ -105,6 +105,7 @@ use namespace kGAMECLASS;
 			init11Armor("demonic skin",10);
 			init12Combat(700,40,.3,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(16,rand(25)+10,50);
+			init14NoDrop();
 			initX_Horns(HORNS_DRACONIC_X2);
 			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 			initX_Tail(TAIL_TYPE_DEMONIC);
