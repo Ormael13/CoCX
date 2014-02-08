@@ -143,11 +143,11 @@ private function benoitSellMenu():void {
 		outputText("\n" + int(player.itemSlot3.itype.value/sellMod) + " gems for " + player.itemSlot3.itype.longName + ".", false);
 		temp3 = createCallBackFunction(benoitSellTransact,3);
 	}
-	if(player.itemSlot4.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
+	if(player.itemSlot4.quantity > 0 && int(player.itemSlot4.itype.value/sellMod) > 0) {
 		temp4 = createCallBackFunction(benoitSellTransact,4);
 		outputText("\n" + int(player.itemSlot4.itype.value/sellMod) + " gems for " + player.itemSlot4.itype.longName + ".", false);
 	}
-	if(player.itemSlot5.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
+	if(player.itemSlot5.quantity > 0 && int(player.itemSlot5.itype.value/sellMod) > 0) {
 		temp5 = createCallBackFunction(benoitSellTransact,5);
 		outputText("\n" + int(player.itemSlot5.itype.value/sellMod) + " gems for " + player.itemSlot5.itype.longName + ".", false);
 	}
