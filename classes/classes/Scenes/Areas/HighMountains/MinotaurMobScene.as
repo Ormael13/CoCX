@@ -1068,23 +1068,23 @@ private function disciplineEldestMinotaurSon():void {
 	spriteSelect(94);
 	outputText("Your wayward sons thought that they could get the drop on you.  Their macho machismo blinded them to the fact that they were nowhere in your league.  You sigh as you realize they will probably try to coax you into fucking them next time.  What is a mother to do?  As you loom over their battered bodies, they look up to you with eyes full of longing and engorged, twitching dicks.  You return their gaze by cracking your knuckles, causing your brutish progeny to cringe in fear.  Scrambling to their hooves, they all begin to make a hasty retreat.  The largest of your minotaur sons trips over his own hooves in a desperate attempt to flee from his mother.  When he tries to get back up, you put your weight on him, holding him down.  He turns his head back, trembling at the sight of you standing on his tail.\n\n", false);
 
-	outputText("\"Are you the oldest?\" you ask him with crossed arms and a stern gaze.\n\n", false);
+	outputText("\"<i>Are you the oldest?</i>\" you ask him with crossed arms and a stern gaze.\n\n", false);
 
-	outputText("\"Yeah,\" he snorted, trying to put up a facade of bravery.  He turns over, now lying on his back as if lounging on the ground.\n\n", false);
+	outputText("\"<i>Yeah,</i>\" he snorted, trying to put up a facade of bravery.  He turns over, now lying on his back as if lounging on the ground.\n\n", false);
 
-	outputText("\"Explain yourself,\" you demand.  \"As the oldest, you're supposed to set an example for your younger brothers.\"\n\n", false);
+	outputText("\"<i>Explain yourself,</i>\" you demand.  \"As the oldest, you're supposed to set an example for your younger brothers.\"\n\n", false);
 
-	outputText("\"A mother is supposed to set an example, and the only example you've set is being a dirty whore,\" he laughs.  \"Is it so wrong to want to give Mom her cum fix?\"\n\n", false);
+	outputText("\"<i>A mother is supposed to set an example, and the only example you've set is being a dirty whore,</i>\" he laughs.  \"<i>Is it so wrong to want to give Mom her cum fix?</i>\"\n\n", false);
 
 	outputText("Dissatisfied with your son's response, you promptly smack the taste out of his mouth, reminding him who has the real power.  The force of the smack causes him to simper like the minitaur he no doubt abuses routinely.  Sometimes a mother has to give her son some tough love.\n\n", false);
 
 	outputText("After the slap, you quickly remove the lower portion of your " + player.armorName + ", your son's wandering eyes meets your " + vaginaDescript(0) + ".  He's clearly pleased with what he sees; his equine-like cock twitches with approval and anticipation.  You certainly are not mother of the year; your womanhood glistens with sexual excitement.  Leaning down, you grab his chin with your right and force him to look you in the eyes.\n\n", false);
 
-	outputText("\"Your dick isn't getting any of mommy's pussy,\" you coo to him, causing him to sink into despair.\n\n", false);
+	outputText("\"<i>Your dick isn't getting any of mommy's pussy,</i>\" you coo to him, causing him to sink into despair.\n\n", false);
 
-	outputText("\"I-I just wanted to show you how much I love you,\" he said with a hint of honesty in his voice.\n\n", false);
+	outputText("\"<i>I-I just wanted to show you how much I love you,</i>\" he said with a hint of honesty in his voice.\n\n", false);
  
-	outputText("\"And wreck my pussy while you're at it?\" you point out, remembering one of the comments said during battle.  Before he has the chance to come up with some half-baked excuse, you grab the bull by the horns and thrust his head forward, silencing him with your " + vaginaDescript(0) + ".  \"If you want to show mommy how much you love her, then fuck my cunt with your tongue,\" you demand.\n\n", false);
+	outputText("\"<i>And wreck my pussy while you're at it?</i>\" you point out, remembering one of the comments said during battle.  Before he has the chance to come up with some half-baked excuse, you grab the bull by the horns and thrust his head forward, silencing him with your " + vaginaDescript(0) + ".  \"<i>If you want to show mommy how much you love her, then fuck my cunt with your tongue,</i>\" you demand.\n\n", false);
 
 	outputText("The burly beast is clearly unaccustomed to pleasuring another.  His eyes glance back up to you in confusion, unsure of what he's supposed to do.  For a few moments, his snout is just pressed against your skin.  When you give him a disapproving gaze, he begins to lick you with fervor.  Your son has absolutely no finesse at all.  His broad tongue sloppily slurps all over your " + vaginaDescript(0) + ".  In between his vehement slurps, his cold snout unintentionally caresses you.  The cold sensation of his snout is quickly overwhelmed by the warmth of his breath and tongue.  Your body trembles from the unexpected pleasure your amateurish son provides.\n\n", false);
 
