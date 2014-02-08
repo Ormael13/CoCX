@@ -117,14 +117,14 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1018) {
 		spriteSelect(49);
 		outputText("", true);
-		inventory.takeItem(consumables.BROWN_D);
+		inventory.takeItem(consumables.BLACK_D);
 		statScreenRefresh();
 		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
 	else if(eventNo == 1019) {
 		spriteSelect(49);
 		outputText("", true);
-		inventory.takeItem(consumables.BROWN_D);
+		inventory.takeItem(consumables.BLOND_D);
 		statScreenRefresh();
 		player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	}
