@@ -682,10 +682,15 @@ import classes.StatusAffects;
 		 */
 		public function hasNeedleworkPerk():Boolean
 		{
-			var pName:String = this.getNeedleworkPerk().name;
-			return pName != "";
-			
-
+			var pType:PerkType = this.getNeedleworkPerk();
+			if (pType != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		/**
