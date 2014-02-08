@@ -159,7 +159,7 @@ import classes.StatusAffects;
 			init12Combat(330,20,.20,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(15,rand(5) + 1);
 			initX_Specials();
-
+			skipInit(14);
 
 		}
 		

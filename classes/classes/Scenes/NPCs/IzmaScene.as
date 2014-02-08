@@ -896,7 +896,7 @@ private function chooseIzmaGloves():void {
 	
 	outputText("Meekly, she picks up the gloves and hands them to you.", false);
 	//(gain 1 Hooked gauntlets) 
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = weapons.H_GAUNT;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = weapons.H_GAUNT.id;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235]++;
 	cleanupAfterCombat();
 }
