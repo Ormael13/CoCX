@@ -115,6 +115,7 @@ public function arianHealth(arg:Number = 0):Number {
 		if(flags[kFLAGS.ARIAN_HEALTH] > 100) flags[kFLAGS.ARIAN_HEALTH] = 100;
 		else if(flags[kFLAGS.ARIAN_HEALTH] < 0) flags[kFLAGS.ARIAN_HEALTH] = 0;
 	}
+	trace("Arian HP: " + flags[kFLAGS.ARIAN_HEALTH]);
 	return flags[kFLAGS.ARIAN_HEALTH];
 }
 public function arianChestAdjective():String {
@@ -323,7 +324,7 @@ public function visitThePark():void {
 //First Visit
 public function visitAriansHouse():void {
 	clearOutput();
-	arianHealth(1);
+	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
 	if(arianFollower()) {
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
 		var temp:int = rand(10);
