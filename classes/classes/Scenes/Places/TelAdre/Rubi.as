@@ -1055,7 +1055,7 @@ public function teaseRubi():void {
 	}
 	//Girl Rubi!
 	else {
-		outputText("\n\nHaving something quite different in mind, you order Rubi to strip down.  With a curious look on [rubi eir] face, [rubi ey] does so, eagerly.  Each garment [rubi ey] peels from [rubi eir] soft ");
+		outputText("Having something quite different in mind, you order Rubi to strip down.  With a curious look on [rubi eir] face, [rubi ey] does so, eagerly.  Each garment [rubi ey] peels from [rubi eir] soft ");
 		if(flags[kFLAGS.RUBI_SKIN] == 0) outputText("pale");
 		else if(flags[kFLAGS.RUBI_SKIN] == 1) outputText("crimson");
 		else if(flags[kFLAGS.RUBI_SKIN] == 2) outputText("furred");

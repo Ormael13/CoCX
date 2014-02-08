@@ -115,7 +115,6 @@ public function arianHealth(arg:Number = 0):Number {
 		if(flags[kFLAGS.ARIAN_HEALTH] > 100) flags[kFLAGS.ARIAN_HEALTH] = 100;
 		else if(flags[kFLAGS.ARIAN_HEALTH] < 0) flags[kFLAGS.ARIAN_HEALTH] = 0;
 	}
-	trace("Arian HP: " + flags[kFLAGS.ARIAN_HEALTH]);
 	return flags[kFLAGS.ARIAN_HEALTH];
 }
 public function arianChestAdjective():String {
