@@ -64,7 +64,7 @@ package classes
 				"Sexual experience has made you more able to handle large insertions and more resistant to stretching.");
 		public static const HistorySmith:PerkType = mk("History: Smith", "History: Smith",
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 10%.");
-		public static const HistoryWhore:PerkType = mk("History: Whote", "History: Whote",
+		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 
 		// Ordinary (levelup) perks

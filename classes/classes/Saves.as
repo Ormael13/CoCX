@@ -1379,6 +1379,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			var value2:Number = saveFile.data.perks[i].value2;
 			var value3:Number = saveFile.data.perks[i].value3;
 			var value4:Number = saveFile.data.perks[i].value4;
+			
+			// Fix saves where the Whore perk might have been malformed.
+			if (id == "History: Whote") id = "History: Whore";
+			
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			
 			if (ptype == null) 
