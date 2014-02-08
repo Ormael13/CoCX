@@ -15,19 +15,6 @@ import classes.StatusAffects;
 
 	public class Imp extends Monster
 	{
-
-
-		//Special Attack 1
-		protected function impFire():void
-		{
-			outputText("The imp mutters something to himself, before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn or you torso, as well as an arousing heat in your groin.");
-			//[-HP // +Lust(minor)]
-			var damage:int = 40 + rand(10);
-			player.takeDamage(damage);
-			game.dynStats("lus", 20 + player.cor / 10);
-			combatRoundOver();
-		}
-
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (findStatusAffect(StatusAffects.KitsuneFight) >= 0) {
@@ -71,7 +58,7 @@ import classes.StatusAffects;
 					add(consumables.SUCMILK,3).
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
-			initX_Specials(5019,impFire);
+			initX_Specials(5019);
 			initX_Wings(WING_TYPE_IMP);
 
 		}
