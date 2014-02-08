@@ -1924,11 +1924,11 @@ public class AntsScene extends BaseContent
 
 			outputText("\n\nClearly not understanding your question was more playful than real, you cut her off by giving her boob a soft squeeze.  Both of you are clearly surprised when a white jet of milk practically fires out of her breast like a cannon ball, landing on the floor a few feet away.");
 
-			outputText("\n\nWithout warning, you strike at her areola like a viper, latching on and biting down playfully on her breast.  Your efforts are rewarded as your mouth is instantly flooded with warm and sweet liquid.  You hum approvingly and try your best to swallow the massive volume of milk that seems to endlessly pour out of her swollen breasts, but it proves too much.  Detaching yourself from her, you lick your lips and sigh as your hunger is completely slated - for milk anyway.");
+			outputText("\n\nWithout warning, you strike at her areola like a viper, latching on and biting down playfully on her breast.  Your efforts are rewarded as your mouth is instantly flooded with warm and sweet liquid.  You hum approvingly and try your best to swallow the massive volume of milk that seems to endlessly pour out of her swollen breasts, but it proves too much.  Detaching yourself from her, you lick your lips and sigh as your hunger is completely sated - for milk anyway.");
 
 			outputText("\n\nMoving your hands in between her thighs causes Phylla to moan as you spread her legs apart.  You see her wet cunt has already soaked her inner legs, and spreading them apart like this, you get a full view of her.  Her pussy seems to be visibly pulsating, squirting small amounts of her lubricant with each small contraction.");
 
-			outputText("\n\nYou wonder what the inside of her must feel like as you gently run your hand over her; an enormous warmth is being emitted from between her vagina before your fingers even fully reach her entrance.  You tease Phylla, commenting on how she's all nice and ready for you as you start to tease her moist fuck-hole and long clit with your fingers, watching as her glinting cunt almost begs to be penetrated as it spits her lubricant all over the floor.");
+			outputText("\n\nYou wonder what the inside of her must feel like as you gently run your hand over her; an enormous warmth is being emitted from her vagina before your fingers even fully reach her entrance.  You tease Phylla, commenting on how she's all nice and ready for you as you start to tease her moist fuck-hole and long clit with your fingers, watching as her glinting cunt almost begs to be penetrated as it spits her lubricant all over the floor.");
 
 			outputText("\n\n\"<i>Huangg~</i>\"  Phylla's body tightens as she moans, another egg must be coming.  \"<i>I can't... take mu~... more.</i>\"  She struggles to say between moaning gasps for air.  \"<i>I~...</i>\"");
 
@@ -2302,7 +2302,7 @@ public class AntsScene extends BaseContent
 
 			outputText("\n\nYou feel his salty payload erupt in bursts from his urethra, coating the back of your throat, and flooding into your mouth; causing you to puff out your cheeks a bit.  You hastily gulp it all down, feeling the warm load slide down your esophagus into your stomach.");
 			outputText("\n\nOnce you're done, you look over at Phylla and see she's just finishing her own 'meal.'  Watching her head bob up and down on her son's cock as the muscles of her neck work to swallow the salty snack is very sexy to watch.");
-			outputText("\n\nNow that your head is clearing up you see you've completely spent all five of your children as they collapse into a pile.  Phylla half crawls, half drags, herself over to you, semen and her own juices oozing from between her leg, leaving a small trail behind her.");
+			outputText("\n\nNow that your head is clearing up you see you've completely spent all five of your children as they collapse into a pile.  Phylla half crawls, half drags, herself over to you, semen and her own juices oozing from between her legs, leaving a small trail behind her.");
 			outputText("\n\n\"<i>I-I need more... not... done...</i>\"");
 			outputText("\n\nYou then realize Phylla wasn't crawling to you at all, but to the doorway.  Looking at the door you see at least four more males, fully erect and ready to go.");
 
