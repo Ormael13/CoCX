@@ -1221,6 +1221,7 @@ public function appearance(e:MouseEvent = null):void
 	mainView.setOutputText( currentText );
 	//menu();
 	//addButton(0,"Next",camp);
+	flushOutputTextToGUI();
 }
 
 public function sockDescript(index:int):void 
