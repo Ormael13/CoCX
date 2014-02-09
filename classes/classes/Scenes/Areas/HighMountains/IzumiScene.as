@@ -397,6 +397,10 @@ package classes.Scenes.Areas.HighMountains
 				if (player.spe > 100) player.spe = 100;
 				if (player.lib <= 0) player.lib = 1;
 				
+				showStatUp('spe');
+				showStatDown('sens');
+				showStatDown('lib');
+				
 				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
 				
 				player.removeStatusAffect(StatusAffects.IzumisPipeSmoke);
