@@ -141,8 +141,12 @@
 					else dynStats("lib", 3, "sen", 5, "lus", 10);
 				}
 				//TIT CHANGE 25% chance of shrinkage
-				if (rand(4) == 0) {
-					player.shrinkTits();
+				if (rand(4) == 0)
+				{
+					if (!flags[kFLAGS.HYPER_HAPPY])
+					{
+						player.shrinkTits();
+					}
 				}
 			}
 			//Mid-level changes
@@ -205,8 +209,12 @@
 				}
 				//Shrink breasts a more
 				//TIT CHANGE 50% chance of shrinkage
-				if (rand(2) == 0) {
-					player.shrinkTits();
+				if (rand(2) == 0)
+				{
+					if (!flags[kFLAGS.HYPER_HAPPY])
+					{
+						player.shrinkTits();
+					}
 				}
 			}
 			//High level change
@@ -222,8 +230,11 @@
 						growDemonCock(1);
 					}
 				}
-				player.shrinkTits();
-				player.shrinkTits();
+				if (!flags[kFLAGS.HYPER_HAPPY])
+				{
+					player.shrinkTits();
+					player.shrinkTits();
+				}
 			}
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
@@ -1356,29 +1367,33 @@
 					player.breastRows[0].breastRating = 2;
 					outputText("\n", false);
 				}
-				if (player.cocks.length > 0) {
-					temp = 0;
-					temp2 = player.cocks.length;
-					temp3 = 0;
-					//Find biggest cock
-					while (temp2 > 0) {
-						temp2--;
-						if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
-					}
-					//Shrink said cock
-					if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
-						player.cocks[temp].cockLength -= .5;
-						temp3 -= .5;
-						if (player.cocks[temp].cockThickness * 6 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-						if (player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-						if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
-					}
-					temp3 += player.cocks[temp].growCock((rand(3) + 1) * -1);
-					outputText("\n\n", false);
-					player.lengthChange(temp3, 1);
-					if (player.cocks[temp].cockLength < 2) {
-						outputText("  ", false);
-						player.killCocks(1);
+				if (!flags[kFLAGS.HYPER_HAPPY])
+				{
+					// Shrink cocks if you have them.
+					if (player.cocks.length > 0) {
+						temp = 0;
+						temp2 = player.cocks.length;
+						temp3 = 0;
+						//Find biggest cock
+						while (temp2 > 0) {
+							temp2--;
+							if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+						}
+						//Shrink said cock
+						if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
+							player.cocks[temp].cockLength -= .5;
+							temp3 -= .5;
+							if (player.cocks[temp].cockThickness * 6 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
+							if (player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
+							if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
+						}
+						temp3 += player.cocks[temp].growCock((rand(3) + 1) * -1);
+						outputText("\n\n", false);
+						player.lengthChange(temp3, 1);
+						if (player.cocks[temp].cockLength < 2) {
+							outputText("  ", false);
+							player.killCocks(1);
+						}
 					}
 				}
 			}
@@ -1416,7 +1431,7 @@
 				}
 				if (player.vaginas.length > 0) {
 					outputText("\n\n", false);
-//0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
+					//0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) {
 						if (player.vaginas.length == 1) outputText("Your " + vaginaDescript(0) + " gushes fluids down your leg as you spontaneously orgasm.", false);
 						else outputText("Your " + vaginaDescript(0) + "s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.", false);
@@ -2584,7 +2599,7 @@
 			outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
 		}
 
-//Oviposition Elixer!
+		//Oviposition Elixer!
 		/*
 		 v1 = egg type.
 		 v2 = size - 0 for normal, 1 for large
@@ -2828,7 +2843,10 @@
 					player.hipRating -= 2;
 				}
 				//Shrink tits!
-				if (player.biggestTitSize() > 0) player.shrinkTits();
+				if (player.biggestTitSize() > 0)
+				{
+					player.shrinkTits();
+				}
 				if (player.cocks.length > 0) {
 					//Multiz
 					if (player.cocks.length > 1) {
@@ -5699,10 +5717,14 @@
 			}
 			//-Shrink tits if above DDs.
 			//Cannot happen at same time as row removal
-			else if (changes < changeLimit && player.breastRows.length == 1 && rand(3) == 0 && player.breastRows[0].breastRating >= 7) {
+			else if (changes < changeLimit && player.breastRows.length == 1 && rand(3) == 0 && player.breastRows[0].breastRating >= 7 && !flags[kFLAGS.HYPER_HAPPY])
+{
 				changes++;
 				//(Use standard breast shrinking mechanism if breasts are under 'h')
-				if (player.breastRows[0].breastRating < 19) player.shrinkTits();
+				if (player.breastRows[0].breastRating < 19)
+				{
+					player.shrinkTits();
+				}
 				//(H+)
 				else {
 					player.breastRows[0].breastRating -= (4 + rand(4));
