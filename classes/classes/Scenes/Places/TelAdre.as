@@ -101,8 +101,8 @@ private function encounterTelAdre():void {
 	}
 	else {
 		outputText("Once again you find the gray fox, Urta, guarding the gates.  She nods at you and whistles for her companion, Edryn once again.  The centauress advances cautiously, and you submit herself to her inspection as she once again produces her magical amulet.  ", false);
-		telAdreCrystal();		
-	}	
+		telAdreCrystal();
+	}
 }
 
 //Alignment crystal goooooo
@@ -141,7 +141,7 @@ private function telAdreTour():void {
 	if(player.cor < 25) outputText("blush", false);
 	else outputText("chuckle", false);
 	outputText(" at the rather suggestive name as Urta turns around and says, \"<i>With how things are, we've all gotten a lot more comfortable with our sexuality.  I hope it doesn't bother you.</i>\"\n\n", false);
-	outputText("A bit further on, you're shown a piercing parlor, apparently another favorite of Urta's.  A cute human girl with cat-like ears peeks out the front and gives you both a friendly wave.  It's so strange to see so many people together in one place, doing things OTHER than fucking.  The whole thing makes you miss your hometown more than ever.  Tears come to your eyes unbidden, and you wipe them away, glad to at least have this one reminder of normalcy.  Urta politely pretends not to notice, though the tail she keeps wrapped around her leg twitches as she wraps up the tour.\n\n", false); 
+	outputText("A bit further on, you're shown a piercing parlor, apparently another favorite of Urta's.  A cute human girl with cat-like ears peeks out the front and gives you both a friendly wave.  It's so strange to see so many people together in one place, doing things OTHER than fucking.  The whole thing makes you miss your hometown more than ever.  Tears come to your eyes unbidden, and you wipe them away, glad to at least have this one reminder of normalcy.  Urta politely pretends not to notice, though the tail she keeps wrapped around her leg twitches as she wraps up the tour.\n\n", false);
 	outputText("She gives you a friendly punch on the shoulder and says, \"<i>Okay, gotta go!  Be good and stay out of trouble, alright?</i>\"\n\n", false);
 	outputText("Before you can answer, she's taken off back down the street, probably stopping off at 'The Wet Bitch' for a drink.  Strange, her departure was rather sudden...", false);
 	doNext(telAdreMenu);
@@ -218,7 +218,7 @@ private function armorShops():void {
 	{
 		addButton(3, "Clinic", umasShop.enterClinic);
 	}
-	
+
 	addButton(4,"Back",telAdreMenu);
 }
 
@@ -249,7 +249,23 @@ private function piercingStudio():void {
 	outputText("", true);
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
-	simpleChoices("Pierce",pierceMenu,"Remove",piercingRemove,"About Her",about,"",0,"Leave",telAdreMenu);
+	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+		simpleChoices("Pierce",pierceMenu,"Remove",piercingRemove,"About Her",about,"",0,"Leave",telAdreMenu);
+	else
+	{
+
+		outputText("\n\n(Low Standard mode!)\nAlternatively, she might be open to a quick fuck if you ask.");
+		choices("Pierce",pierceMenu,
+		        "Remove",piercingRemove,
+		        "",0,
+		        "AsFemale",createCallBackFunction(letsDoYaraSex,true),
+		        "AsMale",createCallBackFunction(letsDoYaraSex,false),
+		        "About Her",about,
+		        "",0,
+		        "",0,
+		        "",0,
+		        "Leave",telAdreMenu);
+	}
 }
 private function aboutYara():void {
 	spriteSelect(63);
@@ -265,44 +281,44 @@ private function pierceMenu():void {
 	spriteSelect(63);
 	hideUpDown();
 	var clit:Function = null;
-	if(player.hasVagina()) 
+	if(player.hasVagina())
 	{
-		if(player.vaginas[0].clitPierced == 0) 
+		if(player.vaginas[0].clitPierced == 0)
 		clit = clitPierce;
 	}
 	var dick:Function = null;
-	if(player.totalCocks() > 0) 
+	if(player.totalCocks() > 0)
 	{
-		if(player.cocks[0].pierced == 0) 
+		if(player.cocks[0].pierced == 0)
 			dick = dickPierce;
 	}
 	var ears:Function = null;
-	if(player.earsPierced == 0) 
+	if(player.earsPierced == 0)
 		ears = earPierce;
 	var eyebrow:Function = null;
-	if(player.eyebrowPierced == 0) 
+	if(player.eyebrowPierced == 0)
 		eyebrow = eyebrowPierce;
 	var lip:Function = null;
-	if(player.lipPierced == 0) 
+	if(player.lipPierced == 0)
 		lip = lipPierce;
 	var nipples:Function = null;
-	if(player.nipplesPierced == 0) 
+	if(player.nipplesPierced == 0)
 		nipples = nipplePierce;
 	var nose:Function = null;
-	if(player.nosePierced == 0) 
+	if(player.nosePierced == 0)
 		nose = nosePierce;
 	var tongue:Function = null;
-	if(player.tonguePierced == 0) 
+	if(player.tonguePierced == 0)
 		tongue = tonguePierce;
 	var vulva:Function = null;
-	if(player.hasVagina()) 
+	if(player.hasVagina())
 	{
 		if(player.vaginas[0].labiaPierced == 0) vulva = vulvaPierce;
 	}
 	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
 	if(clit != null || dick != null || ears != null || eyebrow != null || lip != null || nipples != null || nose != null || tongue != null || vulva != null)
 		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
-	else 
+	else
 	{
 		outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.", false);
 		doNext(piercingStudio);
@@ -387,7 +403,7 @@ private function vulvaPierce():void {
 }
 private function chooseStud():void {
 	piercingType = 1;
-	chooseMaterials();	
+	chooseMaterials();
 }
 private function chooseRing():void {
 	piercingType = 2;
@@ -395,15 +411,15 @@ private function chooseRing():void {
 }
 private function chooseLadder():void {
 	piercingType = 3;
-	chooseMaterials();	
+	chooseMaterials();
 }
 private function chooseHoop():void {
 	piercingType = 4;
-	chooseMaterials();	
+	chooseMaterials();
 }
 private function chooseChain():void {
 	piercingType = 5;
-	chooseMaterials();	
+	chooseMaterials();
 }
 
 private function chooseMaterials():void {
@@ -502,9 +518,9 @@ private function normalPierceAssemble():void {
 	//9. Lethite (Demon Lure)
 	//10. Fertite (Fertility Booster)
 	//11. Furrite (Attracts Furries)
-	//12. Crimsonite (+Min Lust) 
-	//13. 
-	//var piercingMat:Number = 0;	
+	//12. Crimsonite (+Min Lust)
+	//13.
+	//var piercingMat:Number = 0;
 	var shortP:String = "";
 	var longP:String = "";
 	player.gems -= 100;
@@ -675,7 +691,7 @@ private function normalPierceAssemble():void {
 				longP += "hoop";
 			}
 			break;
-		//5. Chain (nipples only)	
+		//5. Chain (nipples only)
 		case 5:
 			shortP += "chain";
 			longP += "chain";
@@ -746,7 +762,7 @@ private function normalPierceAssemble():void {
 		return;
 	}
 	//Dudes
-	else if(piercingLoc == 1 && player.cockThatFits(36) >= 0) {
+	else if(piercingLoc == 1 && (player.cockThatFits(36) >= 0 || flags[kFLAGS.HYPER_HAPPY])) {
 		yaraSex(false);
 		return;
 	}
@@ -923,7 +939,7 @@ public function oswaldPawn():void {
 	}
 	else {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
-		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.)", false);		
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.)", false);
 	}
 	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
@@ -963,22 +979,22 @@ private function enterBarTelAdre():void {
 	else barTelAdre();
 }
 public function barTelAdre():void {
-	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I 
+	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
 	spriteSelect( -1);
-	
+
 	hideUpDown();
 	var button:int = 0;
 	outputText("", true);
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
 		loppe.loppeFirstMeeting();
 		return;
-	}	
+	}
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ", false);
 	if(player.humanScore() <= 3) outputText("despite your altered appearance, ", false);
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.", false);
-	
-	menu();	
+
+	menu();
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",kGAMECLASS.followerInteractions.askAboutAmily);
@@ -1008,7 +1024,7 @@ public function barTelAdre():void {
 			}
 			//Mid-pregnancy appearance
 			else if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) {
-				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
+				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false);
 			}
 			//Appearance changes if has had kids
 			else if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
@@ -1033,7 +1049,7 @@ public function barTelAdre():void {
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
-	
+
 	//NIAMH
 	if(model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0) {
 		niamh.telAdreNiamh();
@@ -1085,7 +1101,7 @@ public function barTelAdre():void {
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				button = anotherButton(button,"Scylla",scylla.scyllaAdictsAnonV);
-			}			
+			}
 			//Round 2.5 Repeatable
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
@@ -1098,7 +1114,7 @@ public function barTelAdre():void {
 		katherine.catMorphIntr();
 		button = anotherButton(button,"ScyllaCats",katherine.katherineGreeting);
 	}
-	//URTA	
+	//URTA
 	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
@@ -1127,8 +1143,8 @@ public function barTelAdre():void {
 	}
 	//VALA
 	if(kGAMECLASS.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",kGAMECLASS.chooseValaInBar);
-	
-	addButton(9,"Leave",telAdreMenu);		
+
+	addButton(9,"Leave",telAdreMenu);
 }
 
 private function oldbarTelAdre():void {
@@ -1141,7 +1157,7 @@ private function oldbarTelAdre():void {
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
 		loppe.loppeFirstMeeting();
 		return;
-	}	
+	}
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ", false);
 	if(player.humanScore() <= 3) outputText("despite your altered appearance, ", false);
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.", false);
@@ -1166,7 +1182,7 @@ private function oldbarTelAdre():void {
 			}
 			//Mid-pregnancy appearance
 			else if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) {
-				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
+				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false);
 			}
 			//Appearance changes if has had kids
 			else if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
@@ -1221,7 +1237,7 @@ private function oldbarTelAdre():void {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
 				misc1 = scylla.scyllaAdictsAnonV;
-			}			
+			}
 			//Round 2.5 Repeatable
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
@@ -1296,7 +1312,7 @@ private function oldbarTelAdre():void {
 		nancy = auntNancy.interactWithAuntNancy;
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
-	
+
 	var rogarB:Function = null;
 	var rogarT:String = "HoodedFig";
 	if(flags[kFLAGS.ROGAR_PHASE] == 3 && flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_FUCKED_TODAY] == 0) {
@@ -1309,7 +1325,7 @@ private function oldbarTelAdre():void {
 		rogarT = "Rogar";
 		//Wet Bitch bar text when Ro'gar phase = 4:
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
-	}		
+	}
 	var kath:Number = 0;
 	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta2,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
@@ -1380,7 +1396,7 @@ public function armorShop():void {
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
-	
+
 	var egg:Function =null;
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
@@ -1402,9 +1418,9 @@ public function weaponShop():void {
 	outputText("", true);
 	spriteSelect(80);
 	outputText("The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.\n\n", false);
-	
+
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
-	
+
 	choices(consumables.W_STICK.shortName,createCallBackFunction(weaponBuy, consumables.W_STICK),
 			weapons.CLAYMOR.shortName,createCallBackFunction(weaponBuy, weapons.CLAYMOR),
 			weapons.WARHAMR.shortName,createCallBackFunction(weaponBuy, weapons.WARHAMR),
@@ -1473,17 +1489,17 @@ private function watchUrtaBeABadass():void {
 	outputText("", true);
 	kGAMECLASS.urta.urtaSprite();
 	outputText("You shoulder past the bulky centaurs, ignore the rough fur of the nearby wolves and hounds as it brushes against you, and press your way through to the center of the crowd.  Eventually the throng parts, revealing the embattled combatants.  A snarling wolf, nearly eight feet tall, towers over Urta.  The comparatively diminutive fox-woman is girded in light leather armor and dripping with sweat.  The larger wolf-man is staggering about, and his dark brown fur is matted with blood.\n\n", false);
-	
+
 	outputText("The bigger canid charges, snarling, with his claws extended.  Urta sidesteps and pivots, her momentum carrying her foot around in a vicious kick.  Her foot hits the side of the beast's knee hard enough to buckle it, and the wolf goes down on his knees with an anguished cry.  Urta slips under his arm and twists, turning his slump into a fall.  A cloud of dust rises from the heavy thud of the beast's body as it slams into the cobblestone street.\n\n", false);
-	
+
 	outputText("Now that it's immobile, you get can get a better look at the defeated combatant, and you're ", false);
 	if(player.findStatusAffect(StatusAffects.Infested) >= 0) outputText("aroused", false);
 	else if(player.cor < 50) outputText("horrified", false);
 	else outputText("confused", false);
 	outputText(" by what you see.  A pair of thick, demonic horns curve back over the beast's head, piercing through the bottoms of its wolf-like ears.  Its entire body is covered in rippling muscle, leaving you in no doubt of its strength.  Even with a broken knee, the wolf-man is clearly aroused: protruding from a bloated sheath, his massive dog-dick is fully erect, solid black in color, with an engorged knot.  Small white worms crawl over the surface of his penis, wriggling out of the tip and crawling down the length, leaving trails of slime behind them.\n\n", false);
-	
+
 	outputText("Urta kneels down onto the corrupted wolf's throat, cutting off its air as it foams and struggles under her.  With grim determination, she holds the weakening, demonically-tainted wolf underneath her, leaning all of her body-weight into her knee to keep it down.  It struggles for what seems like ages, but eventually the tainted wolf's eyes roll closed.  Urta nods and rises, watching closely as the beast's breathing resumes.\n\n", false);
-	
+
 	outputText("She barks, \"<i>Get this one outside the walls before he wakes.  I won't have this corrupted filth in our city, and make sure you get the wards updated.  If he manages to find his way back, you sorry excuses for guards will be going out with him.</i>\"\n\n", false);
 	outputText("A few dog-morphs in similar armor to Urta approach and lash ropes around the wolf's legs.  They hand a line to a centaur, and together the party begins dragging the unconscious body away.  With the action over, the crowd begins dispersing.  More than a few males nod to Urta respectfully.  She keeps her expression neutral and excuses herself to resume her rounds, wiping her hands off on her armor-studded skirt as she leaves.", false);
 	doNext(telAdreMenu);
@@ -1501,15 +1517,15 @@ public function gymDesc():void {
 	if(player.cor < 35) outputText("thankfully ", false);
 	else if(flags[kFLAGS.PC_FETISH] > 0 || player.cor > 80) outputText("unfortunately ", false);
 	outputText("have full sized walls to protect their users' privacy.  A breeze blows by, revealing that the open-air design provides great ventilation.  You note a wall of weights of different sizes and shapes, perfect for building muscle and bulking up.  There are also jogging tracks and even a full-sized, grass-covered track out back for centaurs to run on.  Though some of the equipment seems a bit esoteric in nature, you're sure you can make use of most of this stuff.\n\n", false);
-	
+
 	outputText("Though the gym sees heavy use by the city guard and various citizens, it's not too busy at present.", false);
 	//(Add possible character descripts here)
 	//(An extraordinarily well-muscled centaur male is by the weights, lifting some huge dumbbells and sweating like crazy.  In true centaur fashion, he's not wearing any clothes, but then again, male centaurs don't have much that regular clothes would hide.)
-	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)  
+	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)
 	outputText("  There's a centauress in a tank-top just inside the doorway with huge, rounded melons and perky nipples, but she merely coughs to get you to look up and says, \"<i>", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
 	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"", false);
-	
+
 	if(player.gems < 10 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("\n\n<b>You reach into your pockets for the fee and come up empty.  It looks like you won't get close to enough to use the equipment or meet anyone.  Damn!</b>", false);
 		//(back to tel'adre streets)
@@ -1525,7 +1541,7 @@ public function gymDesc():void {
 }
 
 private function gymMenu():void {
-	
+
 	var membership:Function =null;
 	var cotton2:Function =null;
 	var cottonB:String = "Horsegirl";
@@ -1536,28 +1552,28 @@ private function gymMenu():void {
 	var lottie2:* = lottie.lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
 	var loppe2:Function =null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
 		lottieB = "Lottie";
 	if(ifris.ifrisIntro())
 		ifris2 = ifris.approachIfris;
-	if(flags[kFLAGS.MET_IFRIS] > 0) 
+	if(flags[kFLAGS.MET_IFRIS] > 0)
 		ifrisB = "Ifris";
 	if(model.time.hours > 9 && model.time.hours <= 15) {
 		hyena = heckel.greetHeckel;
-		if(flags[kFLAGS.MET_HECKEL] > 0) 
+		if(flags[kFLAGS.MET_HECKEL] > 0)
 			hyenaB = "Heckel";
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500)
 		membership = buyGymLifeTimeMembership;
 	if(flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
 		if(cotton.cottonsIntro())
 			cotton2 = cotton.cottonGreeting;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] > 0) 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] > 0)
 		cottonB = "Cotton";
-	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) 
+	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
 		loppe2 = loppe.loppeGenericMeetings;
-	
+
 	choices("ChangeRoom",jasun.changingRoom,
 			cottonB,cotton2,
 			hyenaB,hyena,
@@ -1657,9 +1673,9 @@ private function goJogging():void {
 	else if(player.tou < 60) outputText("and you do quite well.  You jog around for nearly an hour, working up a healthy lather of sweat.  Even your " + player.legs() + " tingle and burn with exhaustion.", false);
 	//(<80 tou)
 	else if(player.tou < 80) outputText("and it doesn't faze you in the slightest.  You run lap after lap at a decent clip, working yourself until you're soaked with sweat and fairly tired.", false);
-	//(<90 tou) 
+	//(<90 tou)
 	else if(player.tou < 90) outputText("and you have a terrific time.  You can keep yourself just below your sprinting speed for the entire time, though you work up a huge amount of sweat in the process.", false);
-	//else) 
+	//else)
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.", false);
 	//Stat changes HERE!
 	if(player.spe < 40) dynStats("spe", .3);
@@ -1702,7 +1718,7 @@ private function goJogging():void {
 			player.hipRating--;
 		}
 	}
-	
+
 	//Thickness decrease!
 	outputText(player.modThickness(1,5+rand(2)), false);
 	//Muscleness boost!
@@ -1726,14 +1742,34 @@ private function yaraSex(girl:Boolean = true):void {
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);
 	//[not at all] [yeah baby]
-	if(girl) simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,true),"",0,"",0,"",0);
-	else simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,false),"",0,"",0,"",0);
+	if(girl)
+		simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,true),"",0,"",0,"",0);
+	else
+		simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,false),"",0,"",0,"",0);
 }
 
 private function letsDoYaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	var x:Number = player.cockThatFits(36);
+	if (flags[kFLAGS.HYPER_HAPPY])
+	{
+		x = player.cockThatFits(50000);
+	}
+	else if ((x == -1) && !girl)  // No cock that fits
+	{
+		if (player.hasVagina()) // But the PC has a vagoo! Swap over to female mode"
+		{
+			outputText("\"<i>Oh dear, cutie. There is no way I could take that huge cock of yours!</i>\" she says, looking rather crestfallen at your enormous member. \"<i>Oh well</i>\", she sighs. \"<i>I guess I'll just have to explore your feminine side instead</i>\"\n");
+			girl = true;
+
+		}
+		else
+		{
+			outputText("\"<i>I'm sorry, cutie. There is no way I could take that huge cock of yours!</i>\" she says, looking rather crestfallen at your enormous member. Maybe come back after you've shrunk it down to a reasonable size?");
+			return;
+		}
+	}
 	outputText("Her eyes widen as you begin to ", false);
 	if(player.lust < 50) outputText("protest", false);
 	else outputText("speak", false);
@@ -1752,19 +1788,19 @@ private function letsDoYaraSex(girl:Boolean = true):void {
 	outputText("Not content with simple penetration, it seems, the cat girl gets to work.", false);
 	if(player.balls > 0) outputText("  Her dexterous fingertips brush against your " + ballsDescriptLight() + ", light and fluttery strokes that send shivers coursing through you.  The near-lack of contact is at least as titillating than the less-subtle Marethians you've come across.", false);
 	outputText("  She scoots forward a bit, dragging her soaking cunt down your chest in an effort to reach your crotch.\n\n", false);
-	
+
 	//male
 	if(!girl && player.hasCock()) {
 		outputText("Yara's pursed lips touch down upon your cockhead, her head tilting from side to side as she vexingly and repeatedly kisses your " + cockDescript(x) + ".  However, she abruptly pauses, glancing sidelong at you expectantly.  When you don't immediately respond, she huffs a sigh - onto your dick - and raises her hips level with your nose.  After momentarily getting lost in the bouncing of her tight-yet-jiggly cheeks, you get the message, leaning forward and giving her puffy sex a long and lingering lick.  You're rewarded with a low-pitched and very satisfied groan.  Though you go in for another taste, the shining ring looped through her joy-buzzer attracts your oral attention like a magnet.  Gently as a newborn kitten, your teeth close down on the clit-embedded trinket.  Yara goes absolutely stiff as you begin to softly tug the piercing around, neatly paralyzed by the sensitivity.  Indistinguishable mewling tumbles from her mouth as she attempts to attune herself to your yanking antics.  Her lithe frame spasms in ecstasy, forcing you to release your grip on her, lest something unfortunate happen to her undercarriage.\n\n", false);
 
 		outputText("As soon as you release her from the mind-numbing grasp, she whips her hips forward (spattering your " + player.armorName + " with her downpour of girlcum), leaning back and hastily lining herself up with your " + cockDescript(x) + ".  Only hesitating for a second to leak a bit of lubricant onto your eager shaft, she plummets downwards, not stopping until her ass slams against your pelvis.\n\n", false);
-		
+
 		outputText("Yara takes total control, her death-grip on the armrests giving her full coital maneuverability.  Despite the easy entry, you can't believe how well her sopping-wet folds squeeze against you.  For a long while the only sounds heard are the slapping of her cheeks and the studded-up cat girl's halting pants of pleasure.  \"<i>I wanna say... your new piercing... works like a charm,</i>\" she mutters between throaty groans.\n\n", false);
 
 		outputText("Before you're even allowed to respond, Yara's pace quickens, her finish line in sight.  More than eager to help spur her on, your hands wrap around her slender waist.  She purrs in appreciation of your assistance.  It's not long before, with a victorious and primal scream, she throws all her weight downwards, splattering the mixture of pre-cum and femspunk and actually stinging you a bit with the force of her descent.\n\n", false);
 
 		outputText("The powerful motion is all the motivation your body needs.  Before either of you can even consider the ramifications of an internal ejaculation, your bodies seize up, caught in the familiar grasp of orgasmic bliss.  ", false);
-		
+
 		//([cum quantity time, normal L/M/H/S quantities {IT'S A MARVEL REFERENCE} <no new paragraph>]
 		//light and medium
 		if(player.cumQ() < 500) outputText("Yara's entire frame spasms as your load paints her private passage with snowy-white seed.  The cat girl writhes happily, arching her spine so far back your eyes nearly meet.\n\nYara dismounts your dick and hops to the ground in one fluid movement.", false);
@@ -1790,7 +1826,7 @@ private function letsDoYaraSex(girl:Boolean = true):void {
 		outputText("Yara looks up - down in her case - at your " + clitDescript() + ", your feminine fragrance riling her up as if it were catnip. Your work on her box is interrupted as your pleasure buzzer gets the oral shebang of a lifetime, eliciting a knowing laugh from deep within your teammate's throat.  Yara's lucky you redouble your clamp on her arms rather than sending the poor woman sliding to the ground as your body writhes in satisfaction.  But this is war, and you'll be damned if you're weak enough to go straight for the crown jewel as she has. No, you go to town, redefining what it means to eat out a pussy.  Your laborious toil is rewarded as the kitten's assault on your button eases up.  Her hold begins to waver, however, forcing you to yank your prey towards you.  The movement pierces through her contentment, her armlock strengthening as the air fills with the sound of a duo of muffled moans.\n\n", false);
 
 		outputText("Judging by the contortionist's wobbly embrace, you decide its the perfect time to go in for the kill.  Yara stands no chance as you pounce for her pierced clit, your tongue lodging itself between the loop and her love-button.  It takes all of her willpower to maintain the offensive on your nub nexus while standing firm in her grasp on your arms.  Your oral tugging and teasing proves to be the victor, however, marked by the femspunk making its way right onto your face.  The cocktail combined with the orgasmic-enhanced last ditch effort by Yara on your nether regions triggers your own satisfying outburst.  The chain reaction ends in both your couplings to falter, sending the feline sliding headfirst for the floor.\n\n", false);
-	
+
 		outputText("Her head stops short, though.  Through your gasping relief, you managed to lock onto her legs.  \"<i>Nice...nice catch,</i>\" is about all Yara manages to share before resuming her purring contentment upside down, limp arms spread across the floor.  After a minute or so, the two of you regain some sort of composure, but the spectacular gymnast from before can only bare to slink around on the ground as she reorients herself.  The most you need to do is fix the back of your chair, lifting it to a more comfortable height.  \"<i>Can you spare one more helping hand here, friend?</i>\" Yara requests, now having at least managed to at least sit up straight.  The two of you exchange a knowing glance as you lift the metal-worker back to her feet.", false);
 	}
 	dynStats("lus=", 0);
@@ -1805,7 +1841,8 @@ private function yvonneFlirt():void {
 	outputText("You step closer, glancing from her bulging, barely contained tits to her pouting lips and expressive, violet eyes.  A shock of sweat-matted auburn hair obscures part of her face, but the tall, buxom blacksmith nervously brushes it aside as she watches.  Once you're close enough to touch, you quietly and sincerely proclaim, \"<i>You're the most beautiful piece of craftsmanship in this entire store.</i>\"");
 	outputText("\n\nYvonne steps back, and you swear you can see a blush blooming through her fur, a fiery glow of embarrassment that spreads to the upper curve of her immense mammaries.  She folds her arms over her apron, unintentionally smushing those gigantic tits closer together and deepening her cleavage into a canyon. An immense sigh causes the plush plateau to sway pendulously as Yvonne answers, \"<i>");
 	dynStats("lus", (10+player.lib/10));
-	if(player.cockTotal() == 0 || player.tallness > 65 || player.cockThatFits(75) == -1) {
+	if(!flags[kFLAGS.LOW_STANDARDS_FOR_ALL] && (player.cockTotal() == 0 || player.tallness > 65 || player.cockThatFits(75) == -1))
+	{
 		outputText("Sorry, but you don't look like you'd be much fun.");
 		outputText("</i>\"");
 		doNext(armorShop);
@@ -1867,7 +1904,7 @@ private function flirtWithVictoria(itype:ItemType):void {
 	var x:Number = player.cockThatFits(70);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You take the clothes from her and give them a look over.  Setting them on the counter, you tell her that they're quite nice, but if she's interested you might have something that could fit in the back quite nicely as well.");
-	
+
 	if(x < 0) {
 		outputText("\n\nVictoria smirks and answers, \"<i>I measured your inseam, and what you're packing in there won't fit anywhere in a girl like me.  Maybe some other time, " + player.mf("studmuffin","sweet thing") + ".  Did you actually want to buy?</i>\"\n\nDo you still want to buy?");
 		doYesNo(curry(debitClothes,itype),tailorShoppe);
@@ -1876,39 +1913,46 @@ private function flirtWithVictoria(itype:ItemType):void {
 	outputText("\n\nIt takes her a moment to realize just what it is you're suggesting before her face splits into a wide grin.  <i>\"That right?  Well now, you can't say things like that without backin' 'em up, can you?\"</i>  she says with a low chuckle, pressing her curvy body into you.  <i>\"What do you say, I close the shop up quick, and you can show me just 'ow nicely you can fit, mm?\"</i>");
 
 	outputText("\n\nGiving your [butt] a squeeze, she hops off to turn the shop's open sign around and locks the door before closing all of the curtains.  Turning back to you, she pushes her ample cleavage up into ");
-	if(player.tallness >= 65) outputText("your stomach.");
-	else if(player.tallness >= 55) outputText("your chest.");
-	else outputText("your face.");
+	if(player.tallness >= 65)
+		outputText("your stomach.");
+	else if(player.tallness >= 55)
+		outputText("your chest.");
+	else
+		outputText("your face.");
 	outputText("  <i>\"Now then,  let's see what you've got!\"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>\"Well, well. Looks like I was right about you from the start,\"</i> she says, licking her lips again.  <i>\"Just a taste first, I think...\"</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your " + cockDescript(x) + ", giving it a few rapid licks before pulling off with a pop.");
-	
+
 	outputText("\n\n<i>\"Oh yes,  I think you'll do rather nicely.  In fact, I think I'm going to give you a special treat.\"</i>  Smirking up at you, the busty dog-girl unbuttons her top just beneath her ample chest.  Before you can puzzle out what it is she's doing, she takes your [cock] and stuffs it into the hole and up through her cleavage");
-	if(player.cocks[x].cockLength >= 5) outputText(" until the tip is poking out the top");
+	if(player.cocks[x].cockLength >= 5)
+		outputText(" until the tip is poking out the top");
 	outputText(".");
-	if(player.cocks[x].cockThickness > 3) outputText("  Her face scrunches up uncomfortably for a moment, your girth straining the seams of her shirt.  With a series of loud pops, her buttons all go flying in different directions, letting her ample, creamy flesh bounce free with a bountiful jiggle.  <i>\"Bloody hell, that was my favorite top...\"</i> she whines for a moment before squeezing her chest back together with her hands.");
+	if(player.cocks[x].cockThickness > 3)
+		outputText("  Her face scrunches up uncomfortably for a moment, your girth straining the seams of her shirt.  With a series of loud pops, her buttons all go flying in different directions, letting her ample, creamy flesh bounce free with a bountiful jiggle.  <i>\"Bloody hell, that was my favorite top...\"</i> she whines for a moment before squeezing her chest back together with her hands.");
 	else outputText("  She presses her arms inward to increase the pressure on your cock even further, and gives you another wide smile.  <i>\"Ready for this, love?\"</i>");
-	
+
 	outputText("\n\nShe begins to slowly move her disproportionately massive chest up and down your cock, ");
-	if(player.cocks[x].cockLength > 5) outputText("making sure to give the " + cockHead(x) + " a quick suck every time it breaches her mounds.");
-	else outputText("pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.");
+	if(player.cocks[x].cockLength > 5)
+		outputText("making sure to give the " + cockHead(x) + " a quick suck every time it breaches her mounds.");
+	else
+		outputText("pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.");
 
 	outputText("\n\n<i>\"Hvvng fnn?\"</i>  she asks, pausing her pillowy assault to lick over the end of your pecker once again.  You can only moan in response from the wonderful wet, squishy feeling washing over your sensitive organ.  <i>\"That's what I thought,\"</i> she says, releasing you with a wet pop.");
-	
+
 	outputText("\n\nVicky continues her marshmallowy assault for what feels like hours, slowing down every time you give even the slightest indication that you're about to cum.  <i>\"You might hate me for this now, love, but trust me.  It'll feel so much better once you finally do cum.\"</i>  She may be right, but it's agony to get so close to orgasm only to back away, and then draw close once more.  She's practically driving you crazy with lust with her tantalizingly slow tit-fuck.  As you feel your cum nearly boiling away in your [balls], only to have her back away once again, something inside of you snaps.");
-	
+
 	outputText("\n\nYou wrench your dick free of the confines of her pillowy mounds, and grab her around her plush middle.  She gives a surprised yelp as you nearly throw her against the counter and lift her butt up into the air.  <i>\"Ooooh, someone's excited!\"</i>  she nearly cheers, looking over her shoulder and wagging her plush rear up at you as her tail swishes back and forth, showing that she's nearly as consumed with lust as you are.  Flipping her long skirt up over her back, you violently pull her panties aside before you force your " + cockDescript(x) + " deep within her gushing folds.");
-	
+
 	outputText("\n\nShe squeals in surprise and pleasure as she's penetrated, thrusting her ample hips back at you as you begin to pound into her.  Her ass jiggles violently with every thrust, sending ripples through her creamy flesh.  You grip her around her soft middle as you slam against her hips, barely noticing every squeak she makes as her thick thighs are pounded into the side of the counter.  <i>\"Ah!  Oh, Marae, that feels incredible!\"</i>  she nearly screams as her monocle finally loses its grip on her face and goes flying, thankfully landing safely on a pile of scrap cloth.  If you were more sound of mind, you'd probably have dreaded the cost of repairing the broken eyepiece.");
 
 	outputText("\n\nSomehow, miraculously, you're able to hold back long enough to work your hands up her soft body and grip onto her enormous tits, mashing them in your hands as you find her rock-hard nipples.  She seems to be enjoying the rough treatment - quite a bit in fact - as the moment you give her hard nubs a quick tweak you feel her already rather tight pussy clamp down on your cock HARD.  It becomes nearly impossible to move as she cums explosively, screaming incoherently as she sprays your lower body with her liquid pleasure.");
-	
+
 	outputText("\n\nThe sudden resistance is all it takes to finally bring you over the edge, as with a loud roar of your own, you bury yourself deep inside of her still tightly clutching cunt and release.  [if (cumNormal = true) \"It would seem that what she said earlier was correct.  Your pent-up need surges up through your dick, firing your fertile seed straight into her unprotected womb.  She lets out a submissive whimper as your spurting dick triggers aftershocks within her exhausted body.  At last, her body relaxes, freeing your softening dick.\"][if (cumMedium = true) \"Thick, sticky, ropes of your cream fire deep within her grasping pussy, attempting to extinguish the fire you lit within her with your frantic rutting.  She whimpers beneath you as your ejaculation sends another wave of pleasure through her body, which clamps down even harder onto you than before.  Thankfully, it's not long before she releases you once again, going limp on the counter and breathing raggedly.\"][if (cumHigh = true) \"Your urethra distends as it funnels your thick, potent seed into the tightly gripping walls of Victoria's pussy.  She clenches down as the white torrent sends her into yet another orgasm, shuddering beneath you as her already thick stomach begins to distend with its load.  Her pussy continues to milk your dick of its load even as she rides the high of her last orgasm, her body desperate to draw out more of your thick cream.  Finally she releases you, your softening dick forced back out with a thick stream of your jizz, which begins to pool out onto the floor.\"][if (cumVeryHigh = true) You feel your dick swell as it nearly explodes within her, pouring thick streams of your seed deep into her fertile womb.  She lets out another loud squeal as her body clenches down into yet another orgasm, gripping your dick tighter than you ever thought possible as it tries to milk you for all you have.  Her plush stomach visibly distends with its contents as you dump your load within her, lifting her small body up from the surface of the counter somewhat.  Thankfully, her body soon relaxes, releasing your softening prick, which is followed by a thick, white fountain of jizz that soaks your legs and pools out onto the floor.]");
 	if(silly()) outputText("[if (cumExtreme = true) \"You groan loudly as your cock pours gallon after gallon of jizz deep into her spasming pussy.  She screams as another powerful orgasm wracks her body, triggered by the enormous amount of jizz you're shooting into her.  Her belly audibly sloshes with each of her movements as it continues to expand from the enormous amount of fluid you're pumping into her.  She attempts to clutch down on you as tightly as she can, trying to retain your enormous load; but the moment she releases even a little bit, she shoots forward from the enormous pressure of jizz within her, flopping down face-first onto some clothes on the other side of the counter.  Your thick cream continues to shoot up from between her limp legs, almost like a fountain, before gravity pulls it back down and it splatters all over the interior of the store.\"]");
 	else outputText("[if (cumExtreme = true) \"You groan loudly as your cock pours gallon after gallon of jizz deep into her spasming pussy.  She screams as another powerful orgasm wracks her body, triggered by the enormous amount of jizz you're shooting into her.  Her belly audibly sloshes with each of her movements as it continues to expand from the enormous amount of fluid you're pumping into her.  Thick streams of your seed shoot out all around your dick as she continues to squeeze down on you, trying to keep as much of it inside her massively pregnant-looking belly as possible before she finally releases, squirting your dick back out of her with a pop, followed by a veritable geyser of white. Your entire lower body is painted white as it gushes out, soaking into your clothes and covering the floor as she visibly deflates.\"]");
-	
+
 	outputText("\n\nFinally, your strength gives out and you fall backwards onto the floor, exhausted.  A few seconds later, Vicky slips backward off of the counter and lands on top of you.  Like you, she's completely unable to move, however unlike you it's more because she is completely insensate.  Her eyes have rolled back into her head and her tongue hangs out as she occasionally mutters something incoherent.");
-	
+
 	outputText("\n\nA few seconds later your body finally gives out completely and you pass out.  You wake up about an hour later, still on the floor with Vicky on the ground near you, leaning up against the counter with her legs splayed, cum still dripping from her used pussy.  <i>\"I uh... s'pose you wanna leave now?\"</i>  She asks, still sounding a bit loopy.  She climbs unsteadily to her feet, and walks, a bit bowlegged to the door, unlocking it before slumping back down the wall.  <i>\"Do come back for a visit, love!\"</i>  You pull your pants back up and crawl back out into the street.  Climbing back to your feet, you notice a few passersby chuckling at you before you close the door.  Before you leave, you think you can make out Victoria muttering, <i>\"Gonna have to clean this place up...\"</i>");
-	
+
 	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
