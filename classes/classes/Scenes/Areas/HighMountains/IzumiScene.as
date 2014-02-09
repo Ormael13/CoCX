@@ -362,7 +362,6 @@ package classes.Scenes.Areas.HighMountains
 			showStatUp('sens');
 			showStatUp('lib');
 			
-			
 			dynStats("lus", lustMod);
 		}
 
@@ -556,8 +555,8 @@ package classes.Scenes.Areas.HighMountains
 				else outputText(" chest and forcing you backwards onto the ground.");
 				outputText("  You grunt from the impact and try to sit up, but Izumi easily restrains you with a single well-muscled arm.  “<i> Well now, let’s see what we’re workin’ with here, shall we? </i>”  She announces casually, as she pulls aside your [armor] to reveal your cock.\n\n");
 
-				if (player.biggestCockLength() <= 4) surrenderSmallCock();
-				else if (player.biggestCockLength() <= 10) surrenderMediumCock();
+				if (player.biggestCockLength() <= 6) surrenderSmallCock();
+				else if (player.biggestCockLength() <= 14) surrenderMediumCock();
 				else surrenderLargeCock();
 			}
 			// Female
