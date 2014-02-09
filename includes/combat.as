@@ -1905,7 +1905,7 @@ public function combatStatusesUpdate():void {
 		}
 		//[When witches activate the stones for solid bodies]
 		else {
-			outputText("<b>The smooth stones start vibrating again, sending another wave of teasing bliss throughout your body.  The witches snicker at you as you try to withstand stand their attack.\n\n</b>");
+			outputText("<b>The smooth stones start vibrating again, sending another wave of teasing bliss throughout your body.  The witches snicker at you as you try to withstand their attack.\n\n</b>");
 		}
 		dynStats("lus", player.statusAffectv1(StatusAffects.LustStones) + 4);
 	}
