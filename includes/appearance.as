@@ -528,7 +528,7 @@
 	if(player.tailType == TAIL_TYPE_HORSE) 
 		outputText("  A long " + player.hairColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
 	if(player.tailType == TAIL_TYPE_FERRET)
-		outputText("Tail:  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.hairColor + " fur.", false);
+		outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.hairColor + " fur.", false);
 	if(player.tailType == TAIL_TYPE_DOG) 
 		outputText("  A fuzzy " + player.hairColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
 	if(player.tailType == TAIL_TYPE_DEMONIC) 
