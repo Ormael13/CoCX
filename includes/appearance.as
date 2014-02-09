@@ -1,4 +1,4 @@
-public function appearance(e:MouseEvent = null):void 
+﻿public function appearance(e:MouseEvent = null):void 
 {
 	funcs = new Array();
 	args = new Array();
@@ -60,7 +60,7 @@ public function appearance(e:MouseEvent = null):void
 		outputText("  <b>You are currently wearing " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
 	else outputText("  <b>You are currently wearing your " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
 	//Face
-	if(player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY || player.faceType == FACE_SPIDER_FANGS) 
+	if(player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY || player.faceType == FACE_SPIDER_FANGS || player.faceType == FACE_FERRET_MASK) 
 	{
 		if(player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO) 
 			outputText("  Your face is human in shape and structure, with " + player.skin() + ".", false);
@@ -74,6 +74,13 @@ public function appearance(e:MouseEvent = null):void
 			outputText("  The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.", false);
 		else if(player.faceType == FACE_SPIDER_FANGS) 
 			outputText("  A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.", false);
+		else if(player.faceType == FACE_FERRET_MASK)
+			outputText("  The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.", false);
+	}
+	else if(player.faceType == FACE_FERRET)
+	{
+		if(player.skinType == SKIN_TYPE_PLAIN) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.",false);
+		else outputText("  Your face is coated in " + player.hairColor + " fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 	}
 	else if(player.faceType == FACE_RACCOON_MASK) 
 	{
@@ -222,6 +229,8 @@ public function appearance(e:MouseEvent = null):void
 		else outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + " where your hair should be.", false);
 		if(player.earType == EARS_HORSE) 
 			outputText("  A pair of horse-like ears rise up from the top of your head.", false);
+		else if(player.earType == EARS_FERRET) 
+			outputText("  A pair of small, rounded ferret ears sit on top of your head.", false);
 		else if(player.earType == EARS_DOG) 
 			outputText("  A pair of dog ears protrude from your skull, flopping down adorably.", false);
 		else if(player.earType == EARS_COW) 
@@ -518,6 +527,8 @@ public function appearance(e:MouseEvent = null):void
 	//TAILS
 	if(player.tailType == TAIL_TYPE_HORSE) 
 		outputText("  A long " + player.hairColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
+	if(player.tailType == TAIL_TYPE_FERRET)
+		outputText("Tail:  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.hairColor + " fur.", false);
 	if(player.tailType == TAIL_TYPE_DOG) 
 		outputText("  A fuzzy " + player.hairColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
 	if(player.tailType == TAIL_TYPE_DEMONIC) 
@@ -591,6 +602,7 @@ public function appearance(e:MouseEvent = null):void
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
 		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
+	else if(player.lowerBody == LOWER_BODY_FERRET) outputText("  Two furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
 		outputText("  Your legs are muscled and jointed oddly, covered in fur, and end in a pair of bestial hooves.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_DOG) 
