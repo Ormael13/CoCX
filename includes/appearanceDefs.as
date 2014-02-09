@@ -42,6 +42,8 @@ public static const FACE_RACCOON_MASK:int                                       
 public static const FACE_RACCOON:int                                                =   14;
 public static const FACE_BUCKTEETH:int                                              =   15;
 public static const FACE_MOUSE:int                                                  =   16;
+public static const FACE_FERRET_MASK:int                                            =   17;
+public static const FACE_FERRET:int                                            =   18;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;
@@ -68,6 +70,7 @@ public static const EARS_FOX:int                                                
 public static const EARS_DRAGON:int                                                 =  10;
 public static const EARS_RACCOON:int                                                =  11;
 public static const EARS_MOUSE:int                                                  =  12;
+public static const EARS_FERRET:int                                                 =  13;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -104,6 +107,7 @@ public static const TAIL_TYPE_FOX:int                                           
 public static const TAIL_TYPE_DRACONIC:int                                          =  14;
 public static const TAIL_TYPE_RACCOON:int                                           =  15;
 public static const TAIL_TYPE_MOUSE:int                                             =  16;
+public static const TAIL_TYPE_FERRET:int                                                 =  17;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -140,6 +144,7 @@ public static const LOWER_BODY_TYPE_DRIDER_LOWER_BODY:int                       
 public static const LOWER_BODY_TYPE_FOX:int                                         =  17;
 public static const LOWER_BODY_TYPE_DRAGON:int                                      =  18;
 public static const LOWER_BODY_TYPE_RACCOON:int                                     =  19;
+public static const LOWER_BODY_FERRET:int                                           =  20;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
