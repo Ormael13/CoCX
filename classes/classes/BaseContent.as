@@ -733,6 +733,16 @@
 			kGAMECLASS.flags = val;
 		}
 		
+		protected function showStatDown(arg:String):void
+		{
+			kGAMECLASS.mainView.statsView.showStatDown(arg);
+		}
+		
+		protected function showStatUp(arg:String):void
+		{
+			kGAMECLASS.mainView.statsView.showStatUp(arg);
+		}
+		
 		/**
 		 * PRIMO BULLSHIT FUNCTION ACCESS
 		 */

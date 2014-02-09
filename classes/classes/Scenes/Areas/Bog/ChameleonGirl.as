@@ -140,6 +140,7 @@ import classes.internals.Utils;
 			init11Armor("skin", 20);
 			init12Combat(350, 30, .25, TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(14, 10 + rand(50));
+			skipInit(14);
 		}
 
 	}

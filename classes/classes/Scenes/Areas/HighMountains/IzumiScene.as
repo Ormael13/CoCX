@@ -358,6 +358,11 @@ package classes.Scenes.Areas.HighMountains
 			if (player.sens >= 100) player.sens = 100;
 			if (player.lib >= 100) player.lib = 100;
 			
+			showStatDown('spe');
+			showStatUp('sens');
+			showStatUp('lib');
+			
+			
 			dynStats("lus", lustMod);
 		}
 
@@ -384,8 +389,8 @@ package classes.Scenes.Areas.HighMountains
 
 			if (affectIndex >= 0)
 			{
-				player.sens += Math.abs(player.statusAffect(affectIndex).value2);
-				player.spe += player.statusAffect(affectIndex).value3;
+				player.spe += Math.abs(player.statusAffect(affectIndex).value2);
+				player.sens -= player.statusAffect(affectIndex).value3;
 				player.lib -= player.statusAffect(affectIndex).value4;
 				
 				if (player.sens > 100) player.sens = 100;
@@ -461,6 +466,8 @@ package classes.Scenes.Areas.HighMountains
 		// TODO: Bulk this up some, its way short.
 		protected function fuckinChegIt():void
 		{
+			hideUpDown();
+			
 			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 2;
 			
 			clearOutput();
@@ -474,6 +481,8 @@ package classes.Scenes.Areas.HighMountains
 		 */
 		protected function fightTheFuckhugeOni():void
 		{
+			hideUpDown();
+			
 			clearOutput();
 
 			// First time
@@ -527,6 +536,8 @@ package classes.Scenes.Areas.HighMountains
 		 */
 		protected function fuckhugeOniGetsWhatSheWants():void
 		{
+			hideUpDown();
+			
 			clearOutput();
 
 			// Male/Herms

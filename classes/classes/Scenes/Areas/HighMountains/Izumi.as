@@ -30,10 +30,10 @@ import classes.StatusAffects;
 			init06Skin("creamy-white");
 			init07Hair("golden", 25);
 			init08Face();
-			init09PrimaryStats(90, 90, 90, 80, 30, 25, 0);
+			init09PrimaryStats(90, 90, 90, 80, 30, 25, 15);
 			init10Weapon("fist", "punch");
 			init11Armor("silken kimono");
-			init12Combat(600, 0, 1, Monster.TEMPERMENT_LOVE_GRAPPLES, 0);
+			init12Combat(660, 10, 0.33, Monster.TEMPERMENT_LOVE_GRAPPLES, 0);
 			init13Level(22, 25 + rand(25), 75);
 			skipInit(14);
 		}
@@ -146,7 +146,7 @@ import classes.StatusAffects;
 		{
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 
-			var damage:int = int((str + 150) - rand(player.tou) - player.armorDef);
+			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
@@ -266,7 +266,7 @@ import classes.StatusAffects;
 
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
-			var damage:int = int ((str + 200) - rand(player.tou) - player.armorDef);
+			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
 			player.takeDamage(damage);
 			
 			outputText("(" + damage + ")");
@@ -289,7 +289,7 @@ import classes.StatusAffects;
 			
 			cleanupChokeslam();
 			
-			this.HP -= 25 + rand(player.str);
+			this.HP -= 50 + rand(player.str);
 			
 			combatRoundOver();
 		}
@@ -318,7 +318,7 @@ import classes.StatusAffects;
 			{
 				outputText("The rumbling actually knocks you off your feet, sprawling on the ground and banging your head.  As the shaking subsides, you pull yourself upright, but you feel a little unsteady on your [feet] after the disorienting impact.");
 				
-				var spdReducedBy:int = int(player.spe * 0.1);
+				var spdReducedBy:int = int(player.spe * 0.25);
 				player.createStatusAffect(StatusAffects.Groundpound, 3, spdReducedBy, 0, 0);
 				game.dynStats("spe-", spdReducedBy);
 				
@@ -356,7 +356,7 @@ import classes.StatusAffects;
 			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusAffect(StatusAffects.Titsmother, 0, 0, 0, 0);
-			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
+			game.dynStats("lus", (player.lib / 15) + 5 + rand(5));
 			combatRoundOver();
 		}
 		
@@ -420,7 +420,7 @@ import classes.StatusAffects;
 					}
 				}
 				
-				game.dynStats("lus", player.lib / 20 + 5 + rand(5));
+				game.dynStats("lus", player.lib / 15 + 5 + rand(5));
 				doAI();
 			}
 		}
