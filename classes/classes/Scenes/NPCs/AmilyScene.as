@@ -236,7 +236,7 @@ public class AmilyScene extends NPCAwareContent
 
 					return;
 				}
-			
+
 				//Man Meetinz!
 				if(player.gender == 1) {
 					//Desperate Plea
@@ -3087,21 +3087,47 @@ public class AmilyScene extends NPCAwareContent
 			}
 			var succubusMilk:Number = 0;
 			if(player.hasItem(consumables.P_S_MLK)) succubusMilk = 2456;
-			if(player.hasItem(consumables.SUCMILK) && flags[kFLAGS.AMILY_FOLLOWER] == 2) succubusMilk = 2456;
+			if(player.hasItem(consumables.SUCMILK) && flags[kFLAGS.AMILY_FOLLOWER] == 2)
+			{
+				succubusMilk = 2456;
+			}
 			var sDelight:Number = 0;
-			if(player.hasItem(consumables.SDELITE) && flags[kFLAGS.AMILY_FOLLOWER] == 2) sDelight = 2800;
+			if(player.hasItem(consumables.SDELITE) && flags[kFLAGS.AMILY_FOLLOWER] == 2)
+			{
+				sDelight = 2800;
+			}
 			var pinkEgg:Number = 0;
-			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG))) pinkEgg = 2457;
+			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG)))
+			{
+				pinkEgg = 2457;
+			}
 			var whiteEgg:Number = 0;
-			if(player.hasItem(consumables.WHITEEG) || player.hasItem(consumables.L_WHTEG)) whiteEgg = 2458;
+			if(player.hasItem(consumables.WHITEEG) || player.hasItem(consumables.L_WHTEG))
+			{
+				whiteEgg = 2458;
+			}
 			var brownEgg:Number = 0;
-			if(player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) brownEgg = 2459;
+			if(player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG))
+			{
+				brownEgg = 2459;
+			}
 			var purpleEgg:Number = 0;
-			if(player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) purpleEgg = 2460;
+			if(player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG))
+			{
+				purpleEgg = 2460;
+			}
+
+			// TODO: These are unimplemented
 			var reducto:Number = 0;
-			if(player.hasItem(consumables.REDUCTO)) reducto = 0;
+			if(player.hasItem(consumables.REDUCTO))
+			{
+				reducto = 0;
+			}
 			var lactaid:Number = 0;
-			if(player.hasItem(consumables.LACTAID)) lactaid = 0;
+			if(player.hasItem(consumables.LACTAID))
+			{
+				lactaid = 0;
+			}
 			var clothes:Number = 0;
 			var clothesT:String = "Clothes";
 			if(player.hasItem(armors.C_CLOTH)) {
@@ -3139,14 +3165,19 @@ public class AmilyScene extends NPCAwareContent
 		public function giveAmilyPureIncubusDraft():void {
 			amilySprite();
 			outputText("", true);
+
+			var maxSizePure:Number = 13;
+			var maxSizeCorr:Number = 15;
+			var maxSizeHypr:Number = 23;
+
 			//PURE AMILY
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//Herm amily is different
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 					//[Purified Incubus Draft - If Amily is Herm and has a 13" penis]
 					if(
-						(flags[kFLAGS.AMILY_WANG_LENGTH] >= 13 && !flags[kFLAGS.HYPER_HAPPY]) ||
-						(flags[kFLAGS.AMILY_WANG_LENGTH] >= 23 && flags[kFLAGS.HYPER_HAPPY])
+						(flags[kFLAGS.AMILY_WANG_LENGTH] >= maxSizePure && !flags[kFLAGS.HYPER_HAPPY]) ||
+						(flags[kFLAGS.AMILY_WANG_LENGTH] >= maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])
 						) {
 						outputText("Amily sees the vial you are holding as you approach and shakes her head.  \"<i>I'm not sure I should take any more of that stuff.</i>\"\n\n", false);
 
@@ -3204,7 +3235,8 @@ public class AmilyScene extends NPCAwareContent
 					flags[kFLAGS.AMILY_WANG_GIRTH] = 1;
 					doYesNo(corruptAmilyGetsDickMaxxedOut,corruptAmilyYouDeclineMaxxingHerDick);
 				}
-				else if(flags[kFLAGS.AMILY_WANG_LENGTH] < 15 && flags[kFLAGS.AMILY_WANG_GIRTH] < 3) {
+				else if(flags[kFLAGS.AMILY_WANG_LENGTH] < maxSizeCorr && flags[kFLAGS.AMILY_WANG_GIRTH] < 3)
+				{
 					//Consume dah goodies!
 					if(player.hasItem(consumables.INCUBID)) player.consumeItem(consumables.INCUBID);
 					else player.consumeItem(consumables.P_DRAFT);
@@ -3233,6 +3265,10 @@ public class AmilyScene extends NPCAwareContent
 		private function corruptAmilyGetsDickMaxxedOut():void {
 			outputText("", true);
 			amilySprite();
+
+			var maxSizeCorr:Number = 15;
+			var maxSizeHypr:Number = 23;
+
 			//(If PC has 2 feet that are not hooves)
 			if(player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 				outputText("You're not satisfied; it needs to be bigger. You put your " + player.foot() + " on her cock and begin stroking it, drawing more pleasured moans from the slutty corrupt futa-mouse. You stroke her into a orgasm, milky white fluid flows out of her dick to hit her in the chest and in the face; but you don't stop, her cock throbs and spills pre-cum, making your movements easier. You keep stroking her cock with you " + player.foot() + " vigorously, willing it to grow more and more; each time her cock throbs and orgasms it grows a bit more.\n\n", false);
@@ -3246,7 +3282,14 @@ public class AmilyScene extends NPCAwareContent
 				outputText("Amily is already covered in her own cum, her juices pooling under her; but you never stop, you keep stroking until she comes again, her cock growing more and more. Finally when one final orgasm brings it to just about 15 inches long and three thick. You grasp roughly on her cockhead with your hands and she comes one last time, coating your hands with spooge. \"<i>Clean this up,</i>\" you order her, presenting her with your messy hands. She obediently begins licking at the mess, tasting herself in the process. After you're clean you tell her you will call her when she you need her services again, that she is to practice with her new tool until you do so. \"<i>Yes... " + player.mf("Master","Mistress") + ",</i>\" she answers tiredly, panting.\n\n", false);
 			}
 			outputText("You abandon her in a heap of fluids and go about your own business.", false);
-			flags[kFLAGS.AMILY_WANG_LENGTH] = 15;
+			if (flags[kFLAGS.HYPER_HAPPY])
+			{
+				flags[kFLAGS.AMILY_WANG_LENGTH] = maxSizeHypr;
+			}
+			else
+			{
+				flags[kFLAGS.AMILY_WANG_LENGTH] = maxSizeCorr;
+			}
 			flags[kFLAGS.AMILY_WANG_GIRTH] = 3;
 			doNext(amilyFollowerEncounter);
 		}
@@ -3273,7 +3316,15 @@ public class AmilyScene extends NPCAwareContent
 
 
 			//((flags[kFLAGS.AMILY_WANG_LENGTH] >= 23 && flags[kFLAGS.AMILY_WANG_GIRTH] >= 5) && flags[kFLAGS.HYPER_HAPPY])
-
+			var maxSize:Number;
+			if (flags[kFLAGS.HYPER_HAPPY])
+			{
+				maxSize = 23;
+			}
+			else
+			{
+				maxSize = 15;
+			}
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] == 0) {
 				flags[kFLAGS.AMILY_WANG_LENGTH] = 4;
 				flags[kFLAGS.AMILY_WANG_GIRTH] = 1;
@@ -3281,9 +3332,13 @@ public class AmilyScene extends NPCAwareContent
 			else if(flags[kFLAGS.AMILY_WANG_LENGTH] < 15 || flags[kFLAGS.HYPER_HAPPY]){
 				flags[kFLAGS.AMILY_WANG_LENGTH]++;
 				flags[kFLAGS.AMILY_WANG_GIRTH] = 1 + ((flags[kFLAGS.AMILY_WANG_LENGTH]-4)/9);
+				if (flags[kFLAGS.AMILY_WANG_GIRTH] > 3)
+				{
+					flags[kFLAGS.AMILY_WANG_GIRTH] = 3;
+				}
 			}
-			else if(flags[kFLAGS.AMILY_WANG_LENGTH] >= 15) {
-				flags[kFLAGS.AMILY_WANG_LENGTH] = 15;
+			else if(flags[kFLAGS.AMILY_WANG_LENGTH] >= maxSize) {
+				flags[kFLAGS.AMILY_WANG_LENGTH] = maxSize;
 				flags[kFLAGS.AMILY_WANG_GIRTH] = 3;
 			}
 		}
@@ -3301,11 +3356,15 @@ public class AmilyScene extends NPCAwareContent
 			outputText("", true);
 			amilySprite();
 			//DAH PURE
+
+			var maxSizePure:Number = 5;
+			var maxSizeHypr:Number = 22;
+
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				outputText("You offer her a vial of demonic milk, assuring her as you do so that the corruptive elements have been removed from it.\n\n", false);
 
 				//(If Amily's breast size is smaller than DD-cup):
-				if((flags[kFLAGS.AMILY_CUP_SIZE] < 5) || ( flags[kFLAGS.AMILY_CUP_SIZE] < 22 && flags[kFLAGS.HYPER_HAPPY]) ){
+				if((flags[kFLAGS.AMILY_CUP_SIZE] < maxSizePure) || ( flags[kFLAGS.AMILY_CUP_SIZE] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY]) ){
 					outputText("She smiles at you. \"<i>I always did kind of want bigger breasts.</i>\" She admits, sheepishly. She takes it from you and eagerly chugs. She then drops the empty bottle, allowing it to smash on the ground, clutching her breasts and moaning ecstatically as they visibly swell, her clothes growing tighter as they do. When they finish, she squeezes them with glee. \"<i>Mmm... That feels nice. Did you want something else?</i>\"\n\n", false);
 					flags[kFLAGS.AMILY_CUP_SIZE]++;
 					player.consumeItem(consumables.P_S_MLK);
@@ -3443,11 +3502,16 @@ public class AmilyScene extends NPCAwareContent
 		public function giveAmilyAWhiteEgg():void {
 			outputText("", true);
 			amilySprite();
+
+			var maxSizePure:Number = 4;
+			var maxSizeCorr:Number = 4;
+			var maxSizeHypr:Number = 8;
+
 			outputText("You hold out a white egg, telling her that it will make her nipples grow.\n\n", false);
 			//Pure
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//(If Nipples are smaller than 4 inches:
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 4 || ( flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 8 && flags[kFLAGS.HYPER_HAPPY]) ) {
+				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < maxSizePure || ( flags[kFLAGS.AMILY_NIPPLE_LENGTH] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY]) ) {
 					outputText("She looks at it skeptically. \"<i>I guess bigger nipples would be more sensitive...</i>\" She mutters, but she takes it from you all the same. Unthinkingly biting off the top, she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she pulls at her top, allowing you to see her nipples swell and grow until they stop. She experimentally tweaks one, squeaking in shock at the sensation. \"<i>Well... I guess that they do feel kind of nice... Was there anything else?</i>\"\n\n", false);
 					if(player.hasItem(consumables.WHITEEG)) {
 						player.consumeItem(consumables.WHITEEG);
@@ -3459,7 +3523,10 @@ public class AmilyScene extends NPCAwareContent
 						flags[kFLAGS.AMILY_NIPPLE_LENGTH] += .7;
 						flags[kFLAGS.AMILY_NIPPLE_LENGTH] = int(flags[kFLAGS.AMILY_NIPPLE_LENGTH] * 100) / 100;
 					}
-					if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] > 4 && !flags[kFLAGS.HYPER_HAPPY]) flags[kFLAGS.AMILY_NIPPLE_LENGTH] = 4;
+					if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] > maxSizePure && !flags[kFLAGS.HYPER_HAPPY])
+					{
+						flags[kFLAGS.AMILY_NIPPLE_LENGTH] = maxSizePure;
+					}
 				}
 				//(If Nipples are 4 inches:
 				else {
@@ -3469,7 +3536,7 @@ public class AmilyScene extends NPCAwareContent
 			//Corrupt!
 			else {
 				//(If Nipples are smaller than 4 inches:
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 4) outputText("She looks at it and smiles knowingly. \"<i>Is " + player.mf("master","mistress") + " going to make this one's nipples into obscene toys?</i>\" she asks while accepting the egg.  She bites off the top and sucks down the contents in a practiced gulp.  Crushing the shell in her hand, she pulls at her top, allowing you to see her nipples swell and grow until they stop. She experimentally tweaks one, squeaking in shock at the sensation. \"<i>Thank you " + player.mf("master","mistress") + " for giving your slut such wonderful nipple-toys.  Would you like to abuse your slut's needy fuck-hole now?</i>\"\n\n", false);
+				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < maxSizeCorr) outputText("She looks at it and smiles knowingly. \"<i>Is " + player.mf("master","mistress") + " going to make this one's nipples into obscene toys?</i>\" she asks while accepting the egg.  She bites off the top and sucks down the contents in a practiced gulp.  Crushing the shell in her hand, she pulls at her top, allowing you to see her nipples swell and grow until they stop. She experimentally tweaks one, squeaking in shock at the sensation. \"<i>Thank you " + player.mf("master","mistress") + " for giving your slut such wonderful nipple-toys.  Would you like to abuse your slut's needy fuck-hole now?</i>\"\n\n", false);
 				else outputText("She looks at it and moans lewdly, \"<i>My nipples are going to be sure huge for you " + player.mf("master","mistress") + ".  No, nipples isn't right.  They're teats now.  Huge, swollen cow-teats on your mousey fuck-pet.  Lets make them bigger!</i>\" She bites off the top and sucks down the contents in a practiced gulp.  Crushing the shell in her hand, she pulls at her top, allowing you to see her nipples swell and hang even lower. She experimentally tweaks one, squeaking in shock at the sensation. \"<i>Thank you " + player.mf("master","mistress") + " for making your slut's body useless for anything but sex.  Would you like to abuse your slut's needy fuck-hole now?</i>\"\n\n", false);
 				if(player.hasItem(consumables.WHITEEG)) {
 					player.consumeItem(consumables.WHITEEG);
@@ -3490,10 +3557,15 @@ public class AmilyScene extends NPCAwareContent
 		public function giveAmilyABrownEgg():void {
 			outputText("", true);
 			amilySprite();
+
+			var maxSizePure:Number = 16;
+			var maxSizeCorr:Number = 20;
+			var maxSizeHypr:Number = 35;
+
 			outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n", false);
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//(If Amily's butt size is smaller than "jiggles with every step":
-				if(flags[kFLAGS.AMILY_ASS_SIZE] < 16 || ( flags[kFLAGS.AMILY_ASS_SIZE] < 20 && flags[kFLAGS.HYPER_HAPPY])) {
+				if(flags[kFLAGS.AMILY_ASS_SIZE] < maxSizePure || ( flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])) {
 					outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n", false);
 					dynStats("lus", 5);
 					if(player.hasItem(consumables.BROWNEG)) {
@@ -3504,14 +3576,14 @@ public class AmilyScene extends NPCAwareContent
 						player.consumeItem(consumables.L_BRNEG);
 						flags[kFLAGS.AMILY_ASS_SIZE] += 2+rand(3);
 					}
-					if (flags[kFLAGS.HYPER_HAPPY] && flags[kFLAGS.AMILY_ASS_SIZE] > 20)
+					if (flags[kFLAGS.HYPER_HAPPY] && flags[kFLAGS.AMILY_ASS_SIZE] > maxSizeHypr)
 					{
-						flags[kFLAGS.AMILY_ASS_SIZE] = 20;
+						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizeHypr;
 					}
 					else
 					{
-						if(flags[kFLAGS.AMILY_ASS_SIZE] > 19)
-							flags[kFLAGS.AMILY_ASS_SIZE] = 19;
+						if(flags[kFLAGS.AMILY_ASS_SIZE] > maxSizePure)
+							flags[kFLAGS.AMILY_ASS_SIZE] = maxSizePure;
 					}
 				}
 				//(If Amily's butt is "delightfully jiggly":
@@ -3522,7 +3594,7 @@ public class AmilyScene extends NPCAwareContent
 			//IMPURE
 			else {
 				//(If Amily's butt size is smaller than "jiggles with every step":
-				if(flags[kFLAGS.AMILY_ASS_SIZE] < 20) {
+				if(flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeCorr || ( flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])) {
 					outputText("\"<i>So, " + player.mf("master","mistress") + " would like " + player.mf("his","her") + " toy to have a little more padding around her horny puss and asshole?</i>\" she giggles. \"<i>I obey.</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, jiggling slightly. She pats it a few times, then shakes her head. \"<i>Will you be using your newly-improved cum-dumpster now?</i>\" she asks.\n\n", false);
 					dynStats("lus", 5);
 					if(player.hasItem(consumables.BROWNEG)) {
@@ -3533,7 +3605,10 @@ public class AmilyScene extends NPCAwareContent
 						player.consumeItem(consumables.L_BRNEG);
 						flags[kFLAGS.AMILY_ASS_SIZE] += 2+rand(3);
 					}
-					if(flags[kFLAGS.AMILY_ASS_SIZE] > 20) flags[kFLAGS.AMILY_ASS_SIZE] = 20;
+					if(flags[kFLAGS.AMILY_ASS_SIZE] > maxSizeHypr)
+					{
+						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizeHypr;
+					}
 				}
 				//(If Amily's butt is "delightfully jiggly":
 				else {
@@ -3547,10 +3622,15 @@ public class AmilyScene extends NPCAwareContent
 		public function giveAmilyAPurpleEgg():void {
 			outputText("", true);
 			amilySprite();
+			var maxSizePure:Number = 16;
+			var maxSizeCorr:Number = 20;
+			var maxSizeHypr:Number = 35;
+
 			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n", false);
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//(If Amily doesn't have "full, womanly hips":
-				if(flags[kFLAGS.AMILY_HIP_RATING] < 15 || ( flags[kFLAGS.AMILY_HIP_RATING] < 20 && flags[kFLAGS.HYPER_HAPPY])) {
+				if(flags[kFLAGS.AMILY_HIP_RATING] < maxSizePure || ( flags[kFLAGS.AMILY_HIP_RATING] < maxSizeCorr && flags[kFLAGS.HYPER_HAPPY]))
+				{
 					outputText("She looks at it thoughtfully. \"<i>Wider hips...? Well, if you really want, I guess I can try it.</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>I'm going to have to get used to walking like this, now.</i>\" She mutters, and then she awkwardly walks away.\n\n", false);
 					if(player.hasItem(consumables.PURPLEG)) {
 						player.consumeItem(consumables.PURPLEG);
@@ -3560,8 +3640,15 @@ public class AmilyScene extends NPCAwareContent
 						player.consumeItem(consumables.L_PRPEG);
 						flags[kFLAGS.AMILY_HIP_RATING] += 2+rand(3);
 					}
-					if(flags[kFLAGS.AMILY_HIP_RATING] > 16 && !flags[kFLAGS.HYPER_HAPPY]) flags[kFLAGS.AMILY_ASS_SIZE] = 16;
-					else if(flags[kFLAGS.AMILY_HIP_RATING] > 20) flags[kFLAGS.AMILY_ASS_SIZE] = 20;
+
+					if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizePure && !flags[kFLAGS.HYPER_HAPPY])
+					{
+						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizePure;
+					}
+					else if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizeCorr)
+					{
+						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizeCorr;
+					}
 				}
 				//(If Amily has "full, womanly hips":
 				else {
@@ -3572,7 +3659,7 @@ public class AmilyScene extends NPCAwareContent
 			//Corrupt
 			else {
 				//(If Amily doesn't have "full, womanly hips":
-				if(flags[kFLAGS.AMILY_HIP_RATING] < 20) {
+				if(flags[kFLAGS.AMILY_HIP_RATING] < maxSizeCorr) {
 					outputText("She looks at it thoughtfully. \"<i>" + player.mf("Master","Mistress") + " wants my hips even wider?  Are you going to use me as your private breeding stock?  Mmm, that turns me on!</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>Gods that made me wet!  Take me... let's fuck right now, please!</i>\" she begs.\n\n", false);
 					if(player.hasItem(consumables.PURPLEG)) {
 						player.consumeItem(consumables.PURPLEG);
