@@ -9,7 +9,7 @@ import classes.StatusAffects;
 	 * ...
 	 * @author ...
 	 */
-	public class Kiha extends Monster 
+	public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
 			game.spriteSelect(72);
@@ -181,11 +181,12 @@ import classes.StatusAffects;
 			init11Armor("thick scales",30);
 			init12Combat(430,10,0.4,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(16,rand(15) + 95);
+			skipInit(14);
 			initX_Wings(WING_TYPE_IMP,"huge");
 			initX_Tail(TAIL_TYPE_LIZARD);
 
 		}
-		
+
 	}
 
 }
