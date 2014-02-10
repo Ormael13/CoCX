@@ -1,4 +1,4 @@
-package classes
+﻿package classes
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -438,6 +438,11 @@ use namespace kGAMECLASS;
 				else
 					race = mf("fox-morph", "fox-girl");
 			}
+			if (ferretScore() >= 4)
+			{
+				if (skinType == 1) race = "ferret-morph";
+				else race = mf("fox-morph", "fox-girl");
+			}
 			if (kitsuneScore() >= 4)
 			{
 				race = "kitsune";
@@ -653,7 +658,18 @@ use namespace kGAMECLASS;
 				beeCounter++;
 			return beeCounter;
 		}
-
+		//Determine Ferret Rating!
+		public function ferretScore():Number
+		{
+			var counter:int = 0;
+			if (faceType == FACE_FERRET_MASK) counter++;
+			if (faceType == FACE_FERRET) counter+=2;
+			if (earType == EARS_FERRET) counter++;
+			if (tailType == TAIL_TYPE_FERRET) counter++;
+			if (lowerBody == LOWER_BODY_FERRET) counter++;
+			if (skinType == SKIN_TYPE_FUR && counter > 0) counter++;
+			return counter;
+		}
 		//Determine Dog Rating
 		public override function dogScore():Number
 		{
