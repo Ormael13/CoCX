@@ -1274,6 +1274,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.buttPregnancyIncubation = saveFile.data.buttPregnancyIncubation;
 		player.buttPregnancyType = saveFile.data.buttPregnancyType;
 		
+		var hasViridianCockSock:Boolean = false;
+
 		//ARRAYS HERE!
 		//Set Cock array
 		for (i = 0; i < saveFile.data.cocks.length; i++)
@@ -1287,9 +1289,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.cocks[i].cockLength = saveFile.data.cocks[i].cockLength;
 			player.cocks[i].cockType = CockTypesEnum.ParseConstantByIndex(saveFile.data.cocks[i].cockType);
 			player.cocks[i].knotMultiplier = saveFile.data.cocks[i].knotMultiplier;
-			if(saveFile.data.cocks[i].sock == undefined) player.cocks[i].sock = "";
-			else player.cocks[i].sock = saveFile.data.cocks[i].sock;
-			if(saveFile.data.cocks[i].pierced == undefined) {
+			if (saveFile.data.cocks[i].sock == undefined)
+				player.cocks[i].sock = "";
+			else
+			{
+				player.cocks[i].sock = saveFile.data.cocks[i].sock;
+				if (player.cocks[i].sock == "viridian") hasViridianCockSock = true;
+			}
+			if (saveFile.data.cocks[i].pierced == undefined)
+			{
 				player.cocks[i].pierced = 0;
 				player.cocks[i].pShortDesc = "";
 				player.cocks[i].pLongDesc = "";
@@ -1373,6 +1381,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		
 		var hasHistoryPerk:Boolean = false;
+		var hasLustyRegenPerk:Boolean = false;
 		
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
@@ -1385,6 +1394,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			
 			// Fix saves where the Whore perk might have been malformed.
 			if (id == "History: Whote") id = "History: Whore";
+			
+			// Fix saves where the Lusty Regeneration perk might have been malformed.
+			if (id == "Lusty Regeneration")
+				hasLustyRegenPerk = true;
+			else if (id == "LustyRegeneration")
+			{
+				id = "Lusty Regeneration";
+				hasLustyRegenPerk = true;
+			}
 			
 			// Some shit checking to track if the incoming data has an available History perk
 			if (id.indexOf("History:") != -1)
@@ -1435,6 +1453,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (hasHistoryPerk == false && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] != 0)
 		{
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
+		}
+		
+		// Fixup missing Lusty Regeneration perk, if the player has an equipped viridian cock sock and does NOT have the Lusty Regeneration perk
+		if (hasViridianCockSock == true && hasLustyRegenPerk == false)
+		{
+			player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0);
 		}
 		
 		//Set Status Array

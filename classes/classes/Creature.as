@@ -1895,8 +1895,7 @@ import classes.PerkType;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
-			if (quantity < 0)
-				//trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
+			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
 			return quantity;

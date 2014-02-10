@@ -246,7 +246,7 @@ package classes
 				"Increases chances of encountering demonic foes.");
 
 		// Cock sock perks
-		public static const LustyRegeneration:PerkType = mk("LustyRegeneration", "LustyRegeneration",
+		public static const LustyRegeneration:PerkType = mk("Lusty Regeneration", "Lusty Regeneration",
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour.");
 		public static const MidasCock:PerkType = mk("Midas Cock", "Midas Cock",
 				"Increases the gems awarded from victory in battle.");
