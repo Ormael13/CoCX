@@ -8541,16 +8541,17 @@
 			outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
 
 			//BAD END:
-			if(player.ferretScore() >= 5)
+			if(player.ferretScore() >= 6)
 			{
 				//Get warned!
 				if(flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
 					outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  Perhaps you should cut back on all the Ferret Fruit?");
 					player.inte -= 5 + rand(3);
 					if(player.inte < 5) player.inte = 5;
+					flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
 				}
 				//BEEN WARNED! BAD END! DUN DUN DUN
-				else
+				else if(rand(3) == 0)
 				{
 					//-If you fail to heed the warning, it’s game over:
 					outputText("\n\nAs you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
@@ -8570,6 +8571,7 @@
 			var x:int = 0;
 			if(rand(2) == 0) changeLimit++;
 			if(rand(2) == 0) changeLimit++;
+			if(rand(3) == 0) changeLimit++;
 
 			//Ferret Fruit Effects
 			//- + Thin: 
@@ -8580,7 +8582,7 @@
 				changes++;
 			}
 			//- If speed is > 80, increase speed:
-			if (player.spe > 80 && rand(3) == 0 && changes < changeLimit) {
+			if (player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour muscles begin to twitch rapidly, but the feeling is not entirely unpleasant.  In fact, you feel like running.");
 				dynStats("spe",1);
 				changes++;
@@ -8633,6 +8635,9 @@
 				if(temp >= 0 && rand(2) == 0 && changes < changeLimit)
 				{
 					outputText("\n\nA pinching sensation racks the entire length of your " + cockDescript(temp) + ".  Within moments, the sensation is gone, but it appears to have become smaller.");
+					player.cocks[temp].cockLength--;
+					if(rand(2) == 0) player.cocks[temp].cockLength--;
+					if(player.cocks[temp].cockLength >= 9) player.cocks[temp].cockLength -= rand(3) + 1;
 					if(player.cocks[temp].cockLength/6 >= player.cocks[temp].cockThickness) 
 					{
 						outputText("  Luckily, it doen’t seem to have lost its previous thickness.");
@@ -8686,15 +8691,35 @@
 				player.eyeType = 0;
 				changes++;
 			}
+			//Go into heat
+			if (rand(3) == 0 && changes < changeLimit && player.vaginas.length > 0 &&
+					player.pregnancyIncubation == 0) {
+				//Already in heat, intensify fertility further.
+				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
+					temp = player.findStatusAffect(StatusAffects.Heat);
+					player.statusAffect(temp).value1 += 5;
+					player.statusAffect(temp).value2 += 5;
+					player.statusAffect(temp).value3 += 48;
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
+				}
+				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
+				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
+					player.createStatusAffect(StatusAffects.Heat, 10, 15, 72, 0);
+					dynStats("lib", 15, "resisted", false, "noBimbo", true);
+				}
+				changes++;
+			}
 			//Turn ferret mask to full furface.
 			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>");
-				player.faceType == FACE_FERRET;
+				player.faceType = FACE_FERRET;
 				changes++;
 			}
 			//If face is human:
-			if(player.faceType == 0 && rand(4) == 0 && changes < changeLimit)
+			if(player.faceType == 0 && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nA horrible itching begins to encompass the area around your eyes.  You grunt annoyedly, rubbing furiously at the afflicted area.  Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed.  Your suspicions are confirmed.  The [skinFurScales] around your eyes has darkened.  <b>You now have a ferret mask!</b>");
 				player.faceType = FACE_FERRET_MASK;
@@ -8726,7 +8751,7 @@
 				changes++;
 			}
 			//Tail TFs!
-			if(player.tailType != TAIL_TYPE_FERRET && player.earType == EARS_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(player.tailType != TAIL_TYPE_FERRET && player.earType == EARS_FERRET && rand(3) == 0 && changes < changeLimit)
 			{
 				//If ears are ferret, no tail:
 				if(player.tailType == 0)
@@ -8778,12 +8803,12 @@
 
 				outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
 				changes++;
-				player.lowerBody == LOWER_BODY_FERRET;
+				player.lowerBody = LOWER_BODY_FERRET;
 			}
 			//If ears are not ferret:
-			if(player.earType != EARS_FERRET && rand(4) == 0 && changes < changeLimit && rand(4) == 0 && changes < changeLimit)
+			if(player.earType != EARS_FERRET && rand(4) == 0 && changes < changeLimit && rand(2.5) == 0 && changes < changeLimit)
 			{
-				outputText("\n\nYou squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that your ears have become small, fuzzy, and rounded, just like a ferret’s!");
+				outputText("\n\nYou squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>");
 				player.earType = EARS_FERRET;
 				changes++;
 			}

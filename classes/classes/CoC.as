@@ -334,7 +334,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.4.5";
+			ver = "0.8.4.6";
 			version = ver + " (<b>Fixes and Uma Blowjob Training; Refactoring</b>)";
 
 			//Indicates if building for mobile?
