@@ -850,7 +850,7 @@ package classes.Scenes.Areas.HighMountains
 					{
 						outputText("Sheepishly, you nod as Izumi manhandles your massive mammaries as though looking for evidence of their falseness.  She bites her bottom lip, glaring intently at you as she roughly runs her hands over your breasts.  Although the Oni woman’s palms are surprisingly soft, her treatment of your breasts is not - she practically mauls you, squeezing, groping, even pinching the soft flesh.\n\n");
 
-						outputText("“<i>Unbelievable...</i>” She mutters to herself, bitterly.  She looks up at you, confusion still plain upon your face, then scowls.  “<i>You don’t even know why I’m annoyed, do you?  Does having a chest THIS huge,</i>” she reaches out and pinches one of your [nipples] between her thumb and forefinger, causing you to yelp in surprise and pain.  “<i>Just seem normal to you?!</i>”  She grumbles in frustration before giving the nipple a sharp tug, causing you to cry out once again.  “<i>Forget it.</i>”]\n\n");
+						outputText("“<i>Unbelievable...</i>” She mutters to herself, bitterly.  She looks up at you, confusion still plain upon your face, then scowls.  “<i>You don’t even know why I’m annoyed, do you?  Does having a chest THIS huge,</i>” she reaches out and pinches one of your [nipples] between her thumb and forefinger, causing you to yelp in surprise and pain.  “<i>Just seem normal to you?!</i>”  She grumbles in frustration before giving the nipple a sharp tug, causing you to cry out once again.  “<i>Forget it.</i>”\n\n");
 					}
 					// High(er) corruption
 					else
