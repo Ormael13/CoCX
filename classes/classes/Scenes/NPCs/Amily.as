@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs
+﻿package classes.Scenes.NPCs
 {
 	import classes.CoC;
 	import classes.CoC_Settings;
