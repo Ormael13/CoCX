@@ -8530,7 +8530,7 @@
 			}
 		}
 		//Ferret Fruit
-		public function ferretTF():void {
+		public function ferretTF(player:Player):void {
 			//CoC Ferret TF (Ferret Fruit)
 			//Finding Ferret Fruit
 			//- Ferret Fruit may be randomly found while exploring the plains.
