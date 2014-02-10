@@ -108,10 +108,12 @@ public function ingredientsMenu():void {
 	outputText("Fox Berry - 5 gems.\n");
 	outputText("Ringtail Fig - 5 gems.\n");
 	outputText("Mouse Cocoa - 10 gems.\n");
+	outputText("Ferret Fruit - 20 gems.\n");
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
 	addButton(2,"Mouse Cocoa",buyCocoa);
+	addButton(3,"Ferret Fruit",buyFerretFruit);
 	addButton(9,"Back",checkBakeryMenu);
 }
 
@@ -244,6 +246,22 @@ private function buyCocoa():void {
 	player.gems -= 10;
 	statScreenRefresh();
 	inventory.takeItem(consumables.MOUSECO);
+}
+
+private function buyFerretFruit():void {
+	clearOutput();
+	if(player.gems < 20)
+	{
+		outputText("You can't afford one of those!");
+		menu();
+		addButton(0,"Next",ingredientsMenu);
+		return;
+	}
+	outputText("You pay twenty gems for a single ferret fruit.  ");
+	menuLoc = 29;
+	player.gems -= 20;
+	statScreenRefresh();
+	inventory.takeItem(consumables.FRRTFRT);
 }
 
 private function buyFig():void {

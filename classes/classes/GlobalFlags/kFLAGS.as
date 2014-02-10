@@ -1048,7 +1048,7 @@ public static const IZUMI_TIMES_GRABBED_THE_HORN:int                            
 public static const IZUMI_TIMES_LOST_FIGHT:int                                   	= 1040; // Times the player has been beaten by Izumi in a fight
 public static const IZUMI_SEEN_PC_GENDER:int                                   		= 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const CUSTOM_FONT_SIZE:int                                   			= 1042;
-public static const UNKNOWN_FLAG_NUMBER_01043:int                                   = 1043;
+public static const FERRET_BAD_END_WARNING:int                           	        = 1043;
 public static const UNKNOWN_FLAG_NUMBER_01044:int                                   = 1044;
 public static const UNKNOWN_FLAG_NUMBER_01045:int                                   = 1045;
 public static const UNKNOWN_FLAG_NUMBER_01046:int                                   = 1046;
