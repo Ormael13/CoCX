@@ -259,6 +259,8 @@
 	{
 		if(player.earType == EARS_HUMAN) 
 			outputText("  Your " + hairDescript() + " looks good on you, accentuating your features well.", false);
+		else if(player.earType == EARS_FERRET) 
+			outputText("  A pair of small, rounded ferret ears burst through the top of your " + hairDescript() + ".", false);
 		else if(player.earType == EARS_HORSE) 
 			outputText("  The " + hairDescript() + " on your head parts around a pair of very horse-like ears that grow up from your head.", false);
 		else if(player.earType == EARS_DOG) 
