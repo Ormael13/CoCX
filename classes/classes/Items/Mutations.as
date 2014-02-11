@@ -8634,19 +8634,22 @@
 				}
 				if(temp >= 0 && rand(2) == 0 && changes < changeLimit)
 				{
-					outputText("\n\nA pinching sensation racks the entire length of your " + cockDescript(temp) + ".  Within moments, the sensation is gone, but it appears to have become smaller.");
-					player.cocks[temp].cockLength--;
-					if(rand(2) == 0) player.cocks[temp].cockLength--;
-					if(player.cocks[temp].cockLength >= 9) player.cocks[temp].cockLength -= rand(3) + 1;
-					if(player.cocks[temp].cockLength/6 >= player.cocks[temp].cockThickness) 
+					if(player.cocks[temp].cockLength > 6)
 					{
-						outputText("  Luckily, it doen’t seem to have lost its previous thickness.");
+						outputText("\n\nA pinching sensation racks the entire length of your " + cockDescript(temp) + ".  Within moments, the sensation is gone, but it appears to have become smaller.");
+						player.cocks[temp].cockLength--;
+						if(rand(2) == 0) player.cocks[temp].cockLength--;
+						if(player.cocks[temp].cockLength >= 9) player.cocks[temp].cockLength -= rand(3) + 1;
+						if(player.cocks[temp].cockLength/6 >= player.cocks[temp].cockThickness) 
+						{
+							outputText("  Luckily, it doen’t seem to have lost its previous thickness.");
+						}
+						else 
+						{
+							player.cocks[temp].cockThickness = player.cocks[temp].cockLength/6;
+						}
+						changes++;
 					}
-					else 
-					{
-						player.cocks[temp].cockThickness = player.cocks[temp].cockLength/6;
-					}
-					changes++;
 				}
 			}
 			//-If the PC has quad nipples:
