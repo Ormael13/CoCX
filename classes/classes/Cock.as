@@ -29,7 +29,7 @@ package classes
 		 */
 		public function validate():String {
 			var error:String = "";
-			error += Utils.validateNonNegativeNumberFields(this,"CockClass.validate",["_cockLength","_cockThickness","_knotMultiplier","_pierced"]);
+			error += Utils.validateNonNegativeNumberFields(this,"Cock.validate",["cockLength","cockThickness","knotMultiplier","pierced"]);
 			if (!_isPierced){
 				if (_pShortDesc.length>0) error += "Not pierced but _pShortDesc = "+_pShortDesc+". ";
 				if (_pLongDesc.length>0) error += "Not pierced but pLong = "+_pLongDesc+". ";

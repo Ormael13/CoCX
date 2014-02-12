@@ -446,7 +446,9 @@
 					this.pronoun3 = "his";
 				}
 			}
-			return super.createCock(clength, cthickness, ctype);
+			var result:Boolean = super.createCock(clength, cthickness, ctype);
+			this.genderCheck();
+			return result;
 		}
 
 		override public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
@@ -463,7 +465,9 @@
 					this.pronoun3 = "her";
 				}
 			}
-			return super.createVagina(virgin, vaginalWetness, vaginalLooseness);
+			var result:Boolean = super.createVagina(virgin, vaginalWetness, vaginalLooseness);
+			this.genderCheck();
+			return result;
 		}
 
 		protected function initGenderless():void
@@ -974,7 +978,7 @@
 
 			// COMBAT AND OTHER STATS
 			result+=Hehas+"str="+str+", tou="+tou+", spe="+spe+", inte="+inte+", lib="+lib+", sens="+sens+", cor="+cor+".\n";
-			result += Pronoun1+" could "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
+			result += Pronoun1+" "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
 			result += Pronoun1 +" is guarded with "+armorPerk+" "+armorName+" (defense "+armorDef+", value "+armorValue+").\n";
 			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
 			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
