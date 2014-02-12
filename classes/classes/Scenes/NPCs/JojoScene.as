@@ -1,11 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
-public class JojoScene extends NPCAwareContent {
+	public class JojoScene extends NPCAwareContent {
 
 	public function JojoScene()
 	{

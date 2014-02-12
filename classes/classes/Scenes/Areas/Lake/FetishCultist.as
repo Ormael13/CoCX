@@ -1,14 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake
 {
-	import classes.Appearance;
-	import classes.Monster;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class FetishCultist extends Monster
 	{
@@ -29,14 +22,14 @@ import classes.StatusAffects;
 					if (armorName != PERVY_NUNS_CLOTHING) {
 						//Religious outfit!
 						long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath.  She is wearing a religious robe that closely hugs her curvacious shape. There is a specially-placed opening over her pussy lips.";
-						setArmorName(PERVY_NUNS_CLOTHING);
+						this.armorName = PERVY_NUNS_CLOTHING;
 						changed = true;
 					}
 					break;
 				case 1:
 					if (armorName != NOBLES_CLOTHING) {
 						//Noble outfit
-						setArmorName(NOBLES_CLOTHING);
+						this.armorName = NOBLES_CLOTHING;
 						long = "She's wearing a skimpy noble's dress, which lets you get a good look at her well-filled bra through an over-generous cleavage. Her skirt is so short that you clearly see her pussy lips.  She smiles at you in a rather cute way.  She looks like she's coming out of a painting, executed by a rather depraved and lust-filled artist.";
 						changed = true;
 					}
@@ -45,7 +38,7 @@ import classes.StatusAffects;
 					if (armorName != SWIMSUIT) {
 						//Swim outfit
 						long = "She's currently wearing a swimsuit that's apparently much too small for her, because it stretches across every curve and clearly outlines them for you to see.  Her sizable breasts look like they could burst through the fabric at any moment.  You can even see her erect nipples and her puffy lower lips.";
-						setArmorName(SWIMSUIT);
+						this.armorName = SWIMSUIT;
 						changed = true;
 					}
 					break;
@@ -53,7 +46,7 @@ import classes.StatusAffects;
 					if (armorName != TEACHERS_OUTFIT) {
 						//Pervy Teacher
 						long = "She's now wearing a teacher's outfit, complete with glasses, make-up, her black hair in a tight bun, and a serious-looking outfit... with no back side at all.  She turns to the side to give you a good look at her rear, smiling mischievously.";
-						setArmorName(TEACHERS_OUTFIT);
+						this.armorName = TEACHERS_OUTFIT;
 						changed = true;
 					}
 					break;
@@ -61,7 +54,7 @@ import classes.StatusAffects;
 					if (armorName != NAUGHTY_NURSES_UNIFORM) {
 						//Naughty Nurse
 						long = "The woman is wearing heavy make-up and a whorish nurse's suit, seemingly in white latex with two openings at her breasts and a large one on her crotch and inner thighs. It lets her blood-gorged pussy lips hang freely, which she displays proudly.";
-						setArmorName(NAUGHTY_NURSES_UNIFORM);
+						this.armorName = NAUGHTY_NURSES_UNIFORM;
 						changed = true;
 					}
 					break;
@@ -159,25 +152,37 @@ import classes.StatusAffects;
 		public function FetishCultist()
 		{
 			trace("FetishCultist Constructor!");
-			init01Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
-			init02Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
-			init03BreastRows("DD");
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
-			init05Body("5'7",HIP_RATING_AMPLE,BUTT_RATING_LARGE);
-			init06Skin("pale");
-			init07Hair("black",15);
-			init08Face();
-			init09PrimaryStats(35,25,30,1,75,80,90);
-			init10Weapon("whip","whip-crack");
-			init11Armor(FETISHY_OUTFIT);
-			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(2,5+rand(10));
-			init14WeightedDrop()
-					.add(consumables.LABOVA_,1)
+			this.a = "the ";
+			this.short = "fetish cultist";
+			this.imageName = "fetishcultist";
+			this.long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
+			createBreastRow(Appearance.breastCupInverse("DD"));
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = 5*12+7;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "pale";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(35, 25, 30, 1);
+			initLibSensCor(75, 80, 90);
+			this.weaponName = "whip";
+			this.weaponVerb="whip-crack";
+			this.armorName = FETISHY_OUTFIT;
+			this.lust = 25;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 2;
+			this.gems = 5+rand(10);
+			this.drop = new WeightedDrop().add(consumables.LABOVA_,1)
 					.add(weapons.RIDINGC,1)
 					.add(consumables.OVIELIX,2)
 					.add(consumables.L_DRAFT,6);
-			initX_Specials(cultistRaisePlayerLust,cultistLustTransfer);
+			this.special1 = cultistRaisePlayerLust;
+			this.special2 = cultistLustTransfer;
+			checkMonster();
 		}
 
 	}

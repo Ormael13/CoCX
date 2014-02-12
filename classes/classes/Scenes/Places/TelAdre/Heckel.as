@@ -1,6 +1,5 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.Appearance;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class Heckel extends TelAdreAbstractContent {

@@ -1,10 +1,7 @@
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.CockTypesEnum;
-	import classes.StatusAffects;
 
 	/**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.

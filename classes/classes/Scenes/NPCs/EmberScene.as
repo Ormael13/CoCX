@@ -3,10 +3,8 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-	import classes.StatusAffects;
 
 	public class EmberScene extends NPCAwareContent
 	{

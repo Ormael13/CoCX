@@ -1,6 +1,8 @@
 package classes
 {
 	import classes.CockTypesEnum;
+	import classes.internals.Utils;
+
 	public class Cock
 	{		
 		private var _cockLength:Number;
@@ -20,6 +22,23 @@ package classes
 		
 		//Sock
 		private var _sock:String;
+
+
+		/**
+		 * @return string description of errors
+		 */
+		public function validate():String {
+			var error:String = "";
+			error += Utils.validateNonNegativeNumberFields(this,"CockClass.validate",["_cockLength","_cockThickness","_knotMultiplier","_pierced"]);
+			if (!_isPierced){
+				if (_pShortDesc.length>0) error += "Not pierced but _pShortDesc = "+_pShortDesc+". ";
+				if (_pLongDesc.length>0) error += "Not pierced but pLong = "+_pLongDesc+". ";
+			} else {
+				if (_pShortDesc.length==0) error += "Pierced but no _pShortDesc. ";
+				if (_pLongDesc.length==0) error += "Pierced but no pLong. ";
+			}
+			return error;
+		}
 		
 		//constructor. Default type is HUMAN
 		public function Cock(i_cockLength:Number = 5.5, i_cockThickness:Number = 1, i_cockType:CockTypesEnum=null)

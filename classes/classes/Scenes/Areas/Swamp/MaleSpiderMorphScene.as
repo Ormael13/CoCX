@@ -3,7 +3,7 @@
  */
 package classes.Scenes.Areas.Swamp
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 

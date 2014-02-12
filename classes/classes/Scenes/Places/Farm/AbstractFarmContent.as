@@ -3,9 +3,8 @@
  */
 package classes.Scenes.Places.Farm
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.MarbleScene;
 	import classes.Scenes.Places.Farm;
 
 	public class AbstractFarmContent extends BaseContent

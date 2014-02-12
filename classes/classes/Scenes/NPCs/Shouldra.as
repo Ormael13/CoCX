@@ -1,9 +1,8 @@
 package classes.Scenes.NPCs
 {
-	import classes.CoC;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Monster;
-	import classes.PerkLib;
+	import classes.internals.*;
 
 	/**
 	 * ...
@@ -96,23 +95,35 @@ package classes.Scenes.NPCs
 
 		public function Shouldra()
 		{
-			init01Names("the ", "plain girl", "shouldra", "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.");
-			init02Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_NORMAL,40);
-			init03BreastRows("D");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
-			init05Body(65,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
-			init06Skin("white");
-			init07Hair("white",3);
-			init08Face();
-			init09PrimaryStats(45,30,5,110,100,0,33);
-			init10Weapon("fists","punches");
-			init11Armor("comfortable clothes");
-			init12Combat(30,10,1,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(4,0);
-			init14ChainedDrop().add(consumables.ECTOPLS,1/3);
-			initX_Specials();
-
-
+			this.a = "the ";
+			this.imageName = "plain girl";
+			this.long = "shouldra";
+			this.long = "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.tallness = 65;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.skinTone = "white";
+			this.hairColor = "white";
+			this.hairLength = 3;
+			initStrTouSpeInte(45, 30, 5, 110);
+			initLibSensCor(100, 0, 33);
+			this.weaponName = "fists";
+			this.weaponVerb="punches";
+			this.armorName = "comfortable clothes";
+			this.bonusHP = 30;
+			this.lust = 10;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 4;
+			this.gems = 0;
+			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
+			checkMonster();
 		}
 		
 	}

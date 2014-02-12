@@ -1,17 +1,9 @@
 package classes.Scenes.NPCs
 {
-	import classes.Scenes.Places.Boat.*;
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.WeightedDrop;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class Anemone extends Monster 
+	public class Anemone extends Monster
 	{
 
 
@@ -85,21 +77,39 @@ import classes.StatusAffects;
 
 		public function Anemone()
 		{
-			init01Names("the ", "anemone", "anemone", "The anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.");
-			init02Male(new Cock(7,1,CockTypesEnum.ANEMONE));
-			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE, 5);
-			init03BreastRows("B");
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,10);
-			init05Body("5'5",BUTT_RATING_NOTICEABLE,HIP_RATING_CURVY);
-			init06Skin("purple");
-			init07Hair("purplish-black",20,HAIR_ANEMONE);
-			init08Face();
-			init09PrimaryStats(40,20,40,50,55,35,50);
-			init10Weapon("tendrils","tentacle",5);
-			init11Armor("clammy skin");
-			init12Combat(120,30,.9,TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(4,rand(5) + 1);
-			init14FixedDrop(consumables.DRYTENT);
+			this.a = "the ";
+			this.imageName = "anemone";
+			this.long = "anemone";
+			this.long = "The anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.";
+			// this.plural = false;
+			this.createCock(7,1,CockTypesEnum.ANEMONE);
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 5, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("B"));
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.tallness = 5*12;
+			this.hipRating = HIP_RATING_CURVY;
+			this.buttRating = BUTT_RATING_NOTICEABLE;
+			this.skinTone = "purple";
+			this.hairColor = "purplish-black";
+			this.hairLength = 20;
+			this.hairType = HAIR_ANEMONE;
+			initStrTouSpeInte(40, 20, 40, 50);
+			initLibSensCor(55, 35, 50);
+			this.weaponName = "tendrils";
+			this.weaponVerb="tentacle";
+			this.weaponAttack = 5;
+			this.armorName = "clammy skin";
+			this.bonusHP = 120;
+			this.lust = 30;
+			this.lustVuln = .9;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 4;
+			this.gems = rand(5) + 1;
+			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
+			checkMonster();
 		}
 		
 	}

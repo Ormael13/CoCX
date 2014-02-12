@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
-import classes.GlobalFlags.kFLAGS;
-public class Loppe extends TelAdreAbstractContent {
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Loppe extends TelAdreAbstractContent {
 public function Loppe(){
 
 }

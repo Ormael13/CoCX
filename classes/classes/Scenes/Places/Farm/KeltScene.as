@@ -1,8 +1,7 @@
 ﻿package classes.Scenes.Places.Farm {
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
 
-public class KeltScene extends AbstractFarmContent{
+	public class KeltScene extends AbstractFarmContent{
 
 	public function KeltScene()
 	{

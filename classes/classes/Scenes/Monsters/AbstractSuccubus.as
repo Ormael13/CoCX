@@ -3,11 +3,9 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
 
-public class AbstractSuccubus extends Monster
+	public class AbstractSuccubus extends Monster
 	{
 		protected function whipAttack():void
 		{
@@ -76,8 +74,8 @@ public class AbstractSuccubus extends Monster
 				outputText("The succubus flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the whip experimentally, cackling with glee.", false);
 				createStatusAffect(StatusAffects.WhipReady, 0, 0, 0, 0);
 				str += 20;
-				setWeaponName("whip");
-				setWeaponVerb("brutal whip-crack");
+				this.weaponName = "whip";
+				this.weaponVerb = "brutal whip-crack";
 			}
 			combatRoundOver();
 		}

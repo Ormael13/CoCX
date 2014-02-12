@@ -1,15 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert
 {
-	import classes.Cock;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.*;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class SandTrap extends Monster 
+	public class SandTrap extends Monster
 	{
 		//Wait:
 		public function sandTrapWait():void {
@@ -116,24 +110,44 @@ import classes.StatusAffects;
 		{
 			//1/3 have fertilized eggs!
 			if(rand(3) == 0) this.createStatusAffect(StatusAffects.Fertilized,0,0,0,0);
-			if (game.silly())		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
-				init01Names("the ", "sand tarp", "sandtrap", "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.");
+			this.a = "the ";
+			if (game.silly())
+				this.short = "sand tarp";
 			else
-				init01Names("the ", "sandtrap", "sandtrap", "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.");
-			init02Male(new Cock(10,2,CockTypesEnum.HUMAN),2,4,3);
-			init03BreastRows([0,0]);
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
-			init05Body(rand(8) + 150,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("fair");
-			init07Hair("black",15);
-			init08Face();
-			init09PrimaryStats(55,10,45,55,60,45,50);
-			init10Weapon("claws","claw",10);
-			init11Armor("chitin",20);
-			init12Combat(100,20,.55,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(4,2 + rand(5));
-			init14ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
-			initX_Tail(TAIL_TYPE_DEMONIC);
+				this.short = "sandtrap";
+			this.imageName = "sandtrap";
+			this.long = "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.";
+			// this.plural = false;
+			this.createCock(10,2,CockTypesEnum.HUMAN);
+			this.balls = 2;
+			this.ballSize = 4;
+			this.cumMultiplier = 3;
+			// this.hoursSinceCum = 0;
+			this.createBreastRow(0,0);
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = rand(8) + 150;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "fair";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(55, 10, 45, 55);
+			initLibSensCor(60, 45, 50);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 10;
+			this.armorName = "chitin";
+			this.armorDef = 20;
+			this.bonusHP = 100;
+			this.lust = 20;
+			this.lustVuln = .55;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 4;
+			this.gems = 2 + rand(5);
+			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
+			this.tailType = TAIL_TYPE_DEMONIC;
+			checkMonster();
 		}
 		
 	}

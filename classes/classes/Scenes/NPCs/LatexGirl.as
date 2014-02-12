@@ -1,15 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
-	import classes.Appearance;
-	import classes.CockTypesEnum;
-	import classes.ItemType;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.GlobalFlags.kGAMECLASS;
 
-public class LatexGirl extends NPCAwareContent
+	public class LatexGirl extends NPCAwareContent
 	{
 
 		public function LatexGirl()

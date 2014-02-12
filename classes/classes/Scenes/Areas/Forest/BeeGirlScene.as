@@ -3,15 +3,11 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class BeeGirlScene extends BaseContent
+	public class BeeGirlScene extends BaseContent
 	{
 		public function BeeGirlScene()
 		{

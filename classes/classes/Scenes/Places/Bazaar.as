@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Places{
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Places.Bazaar.*;
 
 	public class Bazaar extends BaseContent {

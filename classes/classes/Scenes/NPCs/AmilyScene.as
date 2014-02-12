@@ -3,14 +3,11 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.Appearance;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class AmilyScene extends NPCAwareContent
+	public class AmilyScene extends NPCAwareContent
 	{
 		/*Amily the Mousegirl Breeder
 		 * Plus human stuff

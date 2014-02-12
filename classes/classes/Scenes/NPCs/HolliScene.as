@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class HolliScene extends NPCAwareContent {
+	public class HolliScene extends NPCAwareContent {
 
 	public function HolliScene()
 	{

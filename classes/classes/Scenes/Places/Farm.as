@@ -1,14 +1,9 @@
 ﻿package classes.Scenes.Places{
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-	import classes.PerkLib;
 	import classes.Scenes.NPCs.MarbleScene;
 	import classes.Scenes.Places.Farm.*;
-	import classes.StatusAffects;
 
 	use namespace kGAMECLASS;
 

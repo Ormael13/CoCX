@@ -1,19 +1,7 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.Scenes.Areas.Forest.Tamani;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class Goblin extends Monster
 	{
@@ -116,27 +104,42 @@ import classes.StatusAffects;
 
 		public function Goblin(noInit:Boolean=false)
 		{
-			init01Names("the ", "goblin", "goblin", "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?");
-			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 40);
-			init03BreastRows("E");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
-			init05Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("dark green");
-			init07Hair("purple",4);
-			init08Face();
-			init09PrimaryStats(12,13,35,42,45,45,60);
-			init10Weapon("fists","tiny punch");
-			init11Armor("leather straps");
-			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(1,rand(5) + 5);
-			init14WeightedDrop().
+			this.a = "the ";
+			this.imageName = "goblin";
+			this.long = "goblin";
+			this.long = "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("E"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.tallness = 35 + rand(4);
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "dark green";
+			this.hairColor = "purple";
+			this.hairLength = 4;
+			initStrTouSpeInte(12, 13, 35, 42);
+			initLibSensCor(45, 45, 60);
+			this.weaponName = "fists";
+			this.weaponVerb="tiny punch";
+			this.armorName = "leather straps";
+			this.lust = 50;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 1;
+			this.gems = rand(5) + 5;
+			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE,1);
-			initX_Specials(goblinDrugAttack,goblinTeaseAttack);
+			this.special1 = goblinDrugAttack;
+			this.special2 = goblinTeaseAttack;
+			checkMonster();
 		}
 
 	}

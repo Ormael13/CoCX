@@ -1,12 +1,10 @@
 ﻿package classes.Scenes{
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.WeaponLib;
-	import classes.PerkLib;
-	import classes.Scenes.NPCs.NPCAwareContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.StatusAffects;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.NPCs.NPCAwareContent;
 
-public class FollowerInteractions extends NPCAwareContent {
+	public class FollowerInteractions extends NPCAwareContent {
 
 		public function FollowerInteractions()
 		{

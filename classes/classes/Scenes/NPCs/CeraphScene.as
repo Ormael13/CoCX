@@ -3,12 +3,11 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
-import classes.StatusAffects;
 
-public class CeraphScene extends NPCAwareContent
+	public class CeraphScene extends NPCAwareContent
 	{
 		public function CeraphScene()
 		{

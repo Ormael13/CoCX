@@ -1,14 +1,7 @@
 package classes.Scenes.Camp
 {
-	import classes.CoC;
-	import classes.CockTypesEnum;
-import classes.Monster;
-	
-	/**
-	 * ...
-	 * @author aimozg
-	 * TODO Class is not configured for combat. Used in events only
-	 */
+	import classes.*;
+
 	public class ImpGang extends Monster
 	{
 		override public function get capitalA():String {

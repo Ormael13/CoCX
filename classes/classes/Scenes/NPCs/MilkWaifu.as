@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.NPCs {
-import classes.GlobalFlags.kFLAGS;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class MilkWaifu extends NPCAwareContent{
+	public class MilkWaifu extends NPCAwareContent{
 
 	public function MilkWaifu()
 	{

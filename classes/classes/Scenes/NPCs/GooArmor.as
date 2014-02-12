@@ -1,14 +1,10 @@
 package classes.Scenes.NPCs
 {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
 	import classes.Scenes.Areas.Lake.GooGirl;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
 	public class GooArmor extends GooGirl
 	{
 
@@ -37,21 +33,43 @@ import classes.StatusAffects;
 		public function GooArmor()
 		{
 			super(false);
-			init01Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
-			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
-			init03BreastRows("C");
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("blue",SKIN_TYPE_GOO);
-			init07Hair("black",15,HAIR_GOO);
-			init08Face();
-			init09PrimaryStats(60,50,50,40,60,35,50);
-			init10Weapon("goo sword","slash",60);
-			init11Armor("armor",50);
-			init12Combat(500,0,.35,Monster.TEMPERMENT_LOVE_GRAPPLES,fatigue);
-			init13Level(16,rand(25)+40);
-			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) init14FixedDrop(consumables.NUMBROX);
-			else init14FixedDrop();
+			this.a = "a ";
+			this.imageName = "Goo Armor";
+			this.long = "gooarmor";
+			this.long = "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
+			createBreastRow(Appearance.breastCupInverse("C"));
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(8) + 70;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "blue";
+			this.skinType = SKIN_TYPE_GOO;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_GOO];
+			this.skinAdj = "goopey";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			this.hairType = HAIR_GOO;
+			initStrTouSpeInte(60, 50, 50, 40);
+			initLibSensCor(60, 35, 50);
+			this.weaponName = "goo sword";
+			this.weaponVerb="slash";
+			this.weaponAttack = 60;
+			this.armorName = "armor";
+			this.armorDef = 50;
+			this.bonusHP = 500;
+			this.lustVuln = .35;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 16;
+			this.gems = rand(25)+40;
+			if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) {
+				this.drop = new WeightedDrop(consumables.NUMBROX, 1);
+			} else {
+				this.drop = new WeightedDrop();
+			}
+			checkMonster();
 		}
 		
 	}

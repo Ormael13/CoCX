@@ -1,15 +1,6 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	
-	/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
 
 	public class WormMass extends Monster
 	{
@@ -36,23 +27,35 @@
 		public function WormMass()
 		{
 			trace("WormMass Constructor!");
-			init01Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
-			init02Genderless();
-			init03BreastRows();
-			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
-			init05Body(1,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
-			init06Skin("white");
-			init07Hair();
-			init08Face();
-			init09PrimaryStats(35,5,10,1,90,60,90);
-			init10Weapon("worm","slap");
-			init11Armor("skin");
-			init12Combat(0,30,0,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(3,0);
-			initX_Specials(5054,5055);
-
-
-
+			this.a = "the ";
+			this.short = "worms";
+			this.imageName = "worms";
+			this.long = "Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.";
+			this.plural = true;
+			initGenderless();
+			this.pronoun1 = "they";
+			this.pronoun2 = "them";
+			this.pronoun3 = "their";
+			this.createBreastRow(0,0);
+			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = 1;
+			this.hipRating = HIP_RATING_SLENDER;
+			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.skinTone = "white";
+			initStrTouSpeInte(35, 5, 10, 1);
+			initLibSensCor(90, 60, 90);
+			this.weaponName = "worm";
+			this.weaponVerb="slap";
+			this.armorName = "skin";
+			this.lust = 30;
+			this.lustVuln = 0;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 3;
+			this.gems = 0;
+			this.special1 = 5054;
+			this.special2 = 5055;
+			checkMonster();
 		}
 
 	}

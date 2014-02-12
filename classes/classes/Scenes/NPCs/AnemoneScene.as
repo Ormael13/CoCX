@@ -3,19 +3,13 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemSlotClass;
-	import classes.ItemType;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Weapon;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class AnemoneScene extends BaseContent
+	public class AnemoneScene extends BaseContent
 	{
 		public function AnemoneScene()
 		{

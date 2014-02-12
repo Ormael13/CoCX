@@ -1,12 +1,8 @@
 package classes.Scenes.NPCs
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
 
-/**
+	/**
 	 * ...
 	 * @author ...
 	 */
@@ -144,23 +140,41 @@ import classes.StatusAffects;
 
 		public function Izma()
 		{
-			init01Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");
-			init02Male(new Cock(15,2.2),4,3);
-			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE,45);
-			init03BreastRows("DD");
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,30);
-			init05Body("5'5",HIP_RATING_CURVY,BUTT_RATING_NOTICEABLE);
-			init06Skin("striped orange");
-			init07Hair("silver",20);
-			init08Face();
-			init09PrimaryStats(80,90,85,65,75,25,40);
-			init10Weapon("clawed gauntlets","clawed punches",45);
-			init11Armor("bikini and grass skirt",8);
-			init12Combat(330,20,.20,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(15,rand(5) + 1);
-			initX_Specials();
-			skipInit(14);
-
+			this.a = "";
+			this.imageName = "Izma";
+			this.long = "izma";
+			this.long = "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.";
+			// this.plural = false;
+			this.createCock(15,2.2);
+			this.balls = 4;
+			this.ballSize = 3;
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 45, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("DD"));
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.tallness = 5*12+5;
+			this.hipRating = HIP_RATING_CURVY;
+			this.buttRating = BUTT_RATING_NOTICEABLE;
+			this.skinTone = "striped orange";
+			this.hairColor = "silver";
+			this.hairLength = 20;
+			initStrTouSpeInte(80, 90, 85, 65);
+			initLibSensCor(75, 25, 40);
+			this.weaponName = "clawed gauntlets";
+			this.weaponVerb="clawed punches";
+			this.weaponAttack = 45;
+			this.armorName = "bikini and grass skirt";
+			this.armorDef = 8;
+			this.bonusHP = 330;
+			this.lust = 20;
+			this.lustVuln = .20;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 15;
+			this.gems = rand(5) + 1;
+			this.initedDrop = true;
+			checkMonster();
 		}
 		
 	}

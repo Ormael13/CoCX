@@ -1,16 +1,12 @@
 package classes.Scenes.Quests.UrtaQuest
 {
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Monster;
 	import classes.Scenes.Monsters.AbstractSuccubus;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-use namespace kGAMECLASS;
-
-	/**
-	 * ...
-	 * @author aimozg
-	 */
+	use namespace kGAMECLASS;
+	
 	public class MilkySuccubus extends AbstractSuccubus
 	{
 
@@ -92,25 +88,48 @@ use namespace kGAMECLASS;
 
 		public function MilkySuccubus()
 		{
-			init01Names("the ", "milky succubus", "milkysuccubus", "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.");
-			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,300);
-			init03BreastRows("G");
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
-			init06Skin("blue");
-			init07Hair("black",13);
-			init08Face();
-			init09PrimaryStats(75,50,125,95,90,60,99);
-			init10Weapon("whip","whipping",10,"",150);
-			init11Armor("demonic skin",10);
-			init12Combat(700,40,.3,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(16,rand(25)+10,50);
-			init14NoDrop();
-			initX_Horns(HORNS_DRACONIC_X2);
-			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
-			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Specials(kissAttack,seduceAttack,whipAttack);
-
+			this.a = "the ";
+			this.imageName = "milky succubus";
+			this.long = "milkysuccubus";
+			this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 300, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("G"));
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(9) + 60;
+			this.hipRating = HIP_RATING_CURVY;
+			this.buttRating = BUTT_RATING_LARGE+1;
+			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.skinTone = "blue";
+			this.hairColor = "black";
+			this.hairLength = 13;
+			initStrTouSpeInte(75, 50, 125, 95);
+			initLibSensCor(90, 60, 99);
+			this.weaponName = "whip";
+			this.weaponVerb="whipping";
+			this.weaponAttack = 10;
+			this.weaponPerk = "";
+			this.weaponValue = 150;
+			this.armorName = "demonic skin";
+			this.armorDef = 10;
+			this.bonusHP = 700;
+			this.lust = 40;
+			this.lustVuln = .3;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 16;
+			this.gems = rand(25)+10;
+			this.additionalXP = 50;
+			this.drop = new WeightedDrop();
+			this.hornType = HORNS_DRACONIC_X2;
+			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingDesc = "tiny hidden";
+			this.tailType = TAIL_TYPE_DEMONIC;
+			this.special1 = kissAttack;
+			this.special2 = seduceAttack;
+			this.special3 = whipAttack;
+			checkMonster();
 		}
 
 	}

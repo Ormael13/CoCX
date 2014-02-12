@@ -3,13 +3,10 @@
  */
 package classes.Scenes.Areas.Mountain
 {
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class HellHoundScene extends BaseContent
+	public class HellHoundScene extends BaseContent
 	{
 		public function HellHoundScene()
 		{

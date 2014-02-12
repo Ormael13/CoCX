@@ -178,7 +178,7 @@ public function doCombat(eventNum:Number):void
 				//REGULAR MENU
 				else {
 					//Tease text should change based on perks!
-					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", debug ? 5166 : 0);
+					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", CoC_Settings.debugBuild ? 5166 : 0);
 				}
 			}
 	}
@@ -2195,23 +2195,23 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	doNext(1);
 }
 public function display():void {
-	if (!monster.isFullyInit() && !CoC_Settings.debugBuild){
-		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: "+
-				monster.initsCalled
-						.map(function(x:Boolean,idx:int,array:Array):String{return x?"":String(idx+1)})
-						.filter(function(x:String,idx:int,array:Array):Boolean{return x!=""})
-						.join(",")+
-				"</u></b>\n");
+	if (!monster.checkCalled && CoC_Settings.debugBuild){
+		outputText("<B>/!\\BUG! Monster.checkMonster() is not called! Calling it now...</B>");
+		monster.checkMonster();
+	}
+	if (monster.checkError != "" && CoC_Settings.debugBuild){
+		outputText("<B>/!\\BUG! Monster is not correctly initialized! <u>"+
+				monster.checkError+"</u></b>\n");
 	}
 	var percent:String = "";
 	var math:Number = monster.HPRatio();
 	percent = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 
-	trace("trying to show monster image!")
+	//trace("trying to show monster image!");
 	if (monster.imageName != "")
 	{
 		var monsterName:String = "monster-" + monster.imageName;
-		trace("Monster name = ", monsterName)
+		//trace("Monster name = ", monsterName);
 		outputText(images.showImage(monsterName), false,false);
 	}
 	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);

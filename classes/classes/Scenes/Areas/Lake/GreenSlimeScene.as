@@ -1,13 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake{
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.BaseContent;
-import classes.Appearance;
-import classes.CoC_Settings;
-import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
 
-public class GreenSlimeScene extends AbstractLakeContent{
+	public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
 //servuceLowCorruptionHighLust();
 //maleRapesOoze();

@@ -3,13 +3,12 @@
  */
 package classes.Scenes.Areas.Swamp
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class CorruptedDriderScene extends BaseContent
 	{

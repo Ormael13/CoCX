@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
-public class HelSpawnScene extends NPCAwareContent {
+	public class HelSpawnScene extends NPCAwareContent {
 
 	public function HelSpawnScene()
 	{

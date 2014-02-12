@@ -1,12 +1,8 @@
 ﻿package classes.Scenes.Places.Boat{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.CockTypesEnum;
-import classes.Appearance;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class Marae extends AbstractBoatContent{
+	public class Marae extends AbstractBoatContent{
 
 	public function Marae()
 	{

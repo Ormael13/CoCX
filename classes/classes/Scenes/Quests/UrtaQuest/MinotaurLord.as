@@ -1,20 +1,13 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.CoC;
-	import classes.Appearance;
-	import classes.Cock;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.WeaponLib;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
-	/**
-	 * ...
-	 * @author aimozg
-	 */
+
+
 	public class MinotaurLord extends Monster
 	{
 
@@ -135,24 +128,46 @@ use namespace kGAMECLASS;
 
 		public function MinotaurLord()
 		{
-			init01Names("the ", "minotaur lord", "minotaurlord", "Across from you is the biggest minotaur you've ever seen.  Fully eleven feet tall, this shaggy monstrosity has muscles so thick that they stand even through his thick, obscuring fur.  A leather collar with a tag indicates his status as 'pet' though it seems completely out of place on the herculean minotaur.  His legs and arms are like thick tree trunks, imposing and implacable, flexing fiercely with every movement.  This can only be a minotaur lord, a minotaur of strength and virility far beyond his lesser brothers. In his hands, a massive chain swings, connected to his collar, but used as an impromptu weapon for now.  A simple loincloth girds his groin, though it does little to hide the massive, erect length that tents it.  It winds up looking more like a simple, cloth condom than any sort of clothing, and it drips long strings of musky pre-slime in ribbons onto the ground.  Below, heavy testes, each easily the size of a basketball, swing in a taut, sloshing sack.  You can almost smell the liquid bounty he has for you, and the musk he's giving off makes it seem like a good idea...");
-			var ballSize:Number = 2 + rand(13);
-			init02Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2, ballSize,1.5,ballSize * 10);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,50);
-			init05Body(rand(37) + 84,HIP_RATING_AVERAGE, BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
-			init06Skin("red",SKIN_TYPE_FUR,"shaggy fur");
-			init07Hair(randomChoice("black","brown"),3);
-			init08Face(FACE_COW_MINOTAUR);
-			init09PrimaryStats(125,90,30,30,70,25,85);
-			init10Weapon("chain","chain-whip",50);
-			init11Armor("thick fur");
-			init12Combat(700,50,0.33,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(15,rand(5) + 5);
-			init14NoDrop();
-			initX_Tail(TAIL_TYPE_COW);
-			initX_Specials(game.mountain.minotaurScene.minoPheromones);
-
+			this.a = "the ";
+			this.imageName = "minotaur lord";
+			this.long = "minotaurlord";
+			this.long = "Across from you is the biggest minotaur you've ever seen.  Fully eleven feet tall, this shaggy monstrosity has muscles so thick that they stand even through his thick, obscuring fur.  A leather collar with a tag indicates his status as 'pet' though it seems completely out of place on the herculean minotaur.  His legs and arms are like thick tree trunks, imposing and implacable, flexing fiercely with every movement.  This can only be a minotaur lord, a minotaur of strength and virility far beyond his lesser brothers. In his hands, a massive chain swings, connected to his collar, but used as an impromptu weapon for now.  A simple loincloth girds his groin, though it does little to hide the massive, erect length that tents it.  It winds up looking more like a simple, cloth condom than any sort of clothing, and it drips long strings of musky pre-slime in ribbons onto the ground.  Below, heavy testes, each easily the size of a basketball, swing in a taut, sloshing sack.  You can almost smell the liquid bounty he has for you, and the musk he's giving off makes it seem like a good idea...";
+			// this.plural = false;
+			this.createCock(rand(13 + 24),2 + rand(3),CockTypesEnum.HORSE);
+			this.balls = 2;
+			this.ballSize = 2 + rand(13);
+			this.cumMultiplier = 1.5;
+			this.hoursSinceCum = this.ballSize * 10;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
+			this.tallness = rand(37) + 84;
+			this.hipRating = HIP_RATING_AVERAGE;
+			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.skinTone = "red";
+			this.skinType = SKIN_TYPE_FUR;
+			this.skinDesc = "shaggy fur";
+			this.hairColor = randomChoice("black","brown");
+			this.hairLength = 3;
+			this.faceType = FACE_COW_MINOTAUR;
+			initStrTouSpeInte(125, 90, 30, 30);
+			initLibSensCor(70, 25, 85);
+			this.weaponName = "chain";
+			this.weaponVerb="chain-whip";
+			this.weaponAttack = 50;
+			this.armorName = "thick fur";
+			this.bonusHP = 700;
+			this.lust = 50;
+			this.lustVuln = 0.33;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 15;
+			this.gems = rand(5) + 5;
+			this.drop = new WeightedDrop();
+			this.tailType = TAIL_TYPE_COW;
+			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			checkMonster();
 		}
 
 	}

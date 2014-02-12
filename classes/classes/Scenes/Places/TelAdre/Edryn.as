@@ -1,14 +1,9 @@
 package classes.Scenes.Places.TelAdre {
-	import classes.Appearance;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-import classes.StatusAffects;
 
-public class Edryn extends TelAdreAbstractContent {
+	public class Edryn extends TelAdreAbstractContent {
 public function Edryn(){
 
 }

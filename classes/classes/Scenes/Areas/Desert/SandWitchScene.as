@@ -1,8 +1,7 @@
 ﻿package classes.Scenes.Areas.Desert {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
 
 	public class SandWitchScene extends BaseContent{
 

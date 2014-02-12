@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
 //  BROOKE_AFFECTION:int = 915;
 //  BROOKE_SHOWERED_WITH:int = 916;

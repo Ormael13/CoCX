@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class Exgartuan extends NPCAwareContent {
+	public class Exgartuan extends NPCAwareContent {
 
 	public function Exgartuan()
 	{

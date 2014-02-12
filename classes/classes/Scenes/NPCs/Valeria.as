@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Lake.GooGirl;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Lake.GooGirl;
 
-public class Valeria extends NPCAwareContent {
+	public class Valeria extends NPCAwareContent {
 
 	public function Valeria()
 	{

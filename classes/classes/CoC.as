@@ -526,7 +526,6 @@
 			registerClassAlias("StatusAffectClass", StatusAffectClass);
 			registerClassAlias("VaginaClass", VaginaClass);
 			//registerClassAlias("Enum", Enum);
-			//registerClassAlias("CockClass", CockClass);
 
 			//Hide sprites
 			mainView.hideSprite();

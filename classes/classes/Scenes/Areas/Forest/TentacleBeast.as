@@ -1,18 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class TentacleBeast extends Monster
 	{
@@ -107,25 +96,52 @@ import classes.StatusAffects;
 		public function TentacleBeast()
 		{
 			trace("TentacleBeast Constructor!");
-			init01Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
-			init02Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);
-			init02Genderless();
-			init03BreastRows();
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(9) + 70,HIP_RATING_BOYISH,BUTT_RATING_BUTTLESS);
-			init06Skin("green",SKIN_TYPE_PLAIN,"bark");
-			init07Hair("green",1);
-			init08Face();
-			init09PrimaryStats(58,25,45,45,90,20,100);
-			init10Weapon("whip-tendril","thorny tendril",1);
-			init11Armor("rubbery skin",1);
-			init12Combat(350,10,0.8,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(6,rand(15)+5);
-			init14FixedDrop();
-			initX_Specials(tentaclePhysicalAttack,tentacleEntwine,tentaclePhysicalAttack);
-
-
-			initX_Tail(TAIL_TYPE_DEMONIC);
+			this.a = "the ";
+			this.short = "tentacle beast";
+			this.imageName = "tentaclebeast";
+			this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
+			// this.plural = false;
+			this.createCock(40,1.5);
+			this.createCock(60,1.5);
+			this.createCock(50,1.5);
+			this.createCock(20,1.5);
+			this.balls = 0;
+			this.ballSize = 0;
+			this.cumMultiplier = 3;
+			// this.hoursSinceCum = 0;
+			this.pronoun1 = "it";
+			this.pronoun2 = "it";
+			this.pronoun3 = "its";
+			this.createBreastRow(0,0);
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(9) + 70;
+			this.hipRating = HIP_RATING_BOYISH;
+			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.skinTone = "green";
+			this.skinType = SKIN_TYPE_PLAIN;
+			this.skinDesc = "bark";
+			this.hairColor = "green";
+			this.hairLength = 1;
+			initStrTouSpeInte(58, 25, 45, 45);
+			initLibSensCor(90, 20, 100);
+			this.weaponName = "whip-tendril";
+			this.weaponVerb="thorny tendril";
+			this.weaponAttack = 1;
+			this.armorName = "rubbery skin";
+			this.armorDef = 1;
+			this.bonusHP = 350;
+			this.lust = 10;
+			this.lustVuln = 0.8;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 6;
+			this.gems = rand(15)+5;
+			this.drop = new WeightedDrop(null, 1);
+			this.special1 = tentaclePhysicalAttack;
+			this.special2 = tentacleEntwine;
+			this.special3 = tentaclePhysicalAttack;
+			this.tailType = TAIL_TYPE_DEMONIC;
+			checkMonster();
 		}
 
 	}

@@ -3,11 +3,8 @@
  */
 package classes.Scenes.Areas.Swamp
 {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.WeaponLib;
-	import classes.Monster;
-	import classes.PerkLib;
-	import classes.StatusAffects;
 
 	public class AbstractSpiderMorph extends Monster
 	{

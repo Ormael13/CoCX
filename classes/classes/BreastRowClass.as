@@ -1,5 +1,7 @@
 ﻿package classes
 {
+	import classes.internals.Utils;
+
 	public class BreastRowClass
 	{
 		//constructor
@@ -14,7 +16,17 @@
 		//If it reaches 100 it reduces lactation multiplier.
 		public var milkFullness:Number = 0;
 		public var fullness:Number = 0;
-		public var fuckable:Boolean = false
+		public var fuckable:Boolean = false;
+
+		public function validate():String
+		{
+			var error:String = "";
+			error += Utils.validateNonNegativeNumberFields(this, "BreastRowClass.validate", [
+					"breasts", "nipplesPerBreast", "breastRating", "lactationMultiplier",
+					"milkFullness", "fullness"
+			]);
+			return error;
+		}
 		/*
 		0 - manchest
 		1 - A cup

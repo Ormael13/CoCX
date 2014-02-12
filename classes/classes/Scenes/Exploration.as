@@ -3,16 +3,13 @@
  */
 package classes.Scenes
 {
-	import classes.Appearance;
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.Monsters.GoblinAssassinScene;
-import classes.StatusAffects;
 
-public class Exploration extends BaseContent
+	public class Exploration extends BaseContent
 	{
 		public function Exploration()
 		{

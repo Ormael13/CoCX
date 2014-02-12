@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Quests{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.*;
-	import classes.Scenes.Quests.UrtaQuest.*;
 	import classes.Scenes.Areas.Plains.GnollSpearThrower;
 	import classes.Scenes.NPCs.NPCAwareContent;
+	import classes.Scenes.Quests.UrtaQuest.*;
+
 	public class UrtaQuest extends NPCAwareContent
 	{
 
@@ -19,9 +20,9 @@
  * @Author:
  */
 
-// import classes.creature;
+// 	import classes.*
 // import flash.events.MouseEvent;
-// import classes.ItemSlotClass;
+// 	import classes.*
 
 //const URTA_MET_HEL:int = 710;
 //const URTA_QUEST_STATUS:int = 711;

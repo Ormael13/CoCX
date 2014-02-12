@@ -1,17 +1,9 @@
 package classes.Scenes.NPCs
 {
-	import classes.Cock;
-	import classes.Monster;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class Ember extends Monster 
+	public class Ember extends Monster
 	{
 		private function emberMF(male:String,female:String):String{
 			return game.emberScene.emberMF(male,female);
@@ -149,34 +141,54 @@ import classes.StatusAffects;
 
 		public function Ember()
 		{
-			init01Names(" ", "Ember", "ember", "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.");
+			this.a = " ";
+			this.short = "Ember";
+			this.imageName = "ember";
+			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
+			// this.plural = false;
 			var gender:int = game.flags[kFLAGS.EMBER_GENDER];
 			if (gender==0){
-				init02Genderless("she","her","her");
+				this.pronoun1 = "she";
+				this.pronoun2 = "her";
+				this.pronoun3 = "her";
 			}
 			if(gender == 1 || gender == 3) {
-				init02Male(new Cock(16,2,CockTypesEnum.DRAGON),2,4,3);
+				this.createCock(16,2,CockTypesEnum.DRAGON);
+				this.balls = 2;
+				this.ballSize = 4;
+				this.cumMultiplier = 3;
+				// this.hoursSinceCum = 0;
 			}
 			if(gender >= 2) {
-				init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE,0,game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0);
-				init03BreastRows(["F"]);
+				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+				createBreastRow(Appearance.breastCupInverse("F"));
+			} else {
+				createBreastRow(Appearance.breastCupInverse("flat"));
 			}
-			if(gender == 1)
-			{
-				init03BreastRows(["flat"]);
-			}
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
-			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("red");
-			init07Hair("black",15);
-			init08Face();
-			init09PrimaryStats(75,75,75,75,50,35,game.flags[kFLAGS.EMBER_COR]);
-			init10Weapon("claws","claw",30);
-			init11Armor("scales",40);
-			init12Combat(600,20,.25,TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(15,0);
-			initX_Horns(HORNS_DRACONIC_X4_12_INCH_LONG);
-			initX_Tail(TAIL_TYPE_DRACONIC);
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = rand(8) + 70;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "red";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(75, 75, 75, 75);
+			initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 30;
+			this.armorName = "scales";
+			this.armorDef = 40;
+			this.bonusHP = 600;
+			this.lust = 20;
+			this.lustVuln = .25;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 15;
+			this.gems = 0;
+			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.tailType = TAIL_TYPE_DRACONIC;
+			checkMonster();
 		}
 		
 	}

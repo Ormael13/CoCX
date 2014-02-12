@@ -3,15 +3,10 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.PerkLib;
-	import classes.Player;
 	import classes.Scenes.Monsters.Imp;
-	import classes.StatusAffects;
 
 	public class KitsuneScene extends BaseContent
 	{

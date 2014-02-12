@@ -1,13 +1,8 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
-	import classes.CoC;
-	import classes.Monster;
-	
-	/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class HarpyMob extends Monster 
+	import classes.*;
+
+	public class HarpyMob extends Monster
 	{
 
 		override protected function performCombatAction():void
@@ -27,23 +22,47 @@ package classes.Scenes.Dungeons.HelDungeon
 
 		public function HarpyMob()
 		{
-			init01Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.",true);
-			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_GAPING_WIDE);
-			init03BreastRows("B");
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(8) + 70,HIP_RATING_CURVY+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_HARPY);
-			init06Skin("red",SKIN_TYPE_PLAIN,"feathers");
-			init07Hair("black",15);
-			init08Face(faceType,earType,tongueType,eyeType);
-			init09PrimaryStats(50,50,120,40,60,45,50);
-			init10Weapon("claw","claw",10);
-			init11Armor("armor",20);
-			init12Combat(1000,20,.2,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(18,rand(25)+140,50);
-			initX_Horns(HORNS_DEMON);
-			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Specials(special1,special2,special3);
-
+			this.a = "the ";
+			this.short = "harpy horde";
+			this.imageName = "harpymob";
+			this.long = "You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.";
+			this.plural = true;
+			this.pronoun1 = "they";
+			this.pronoun2 = "them";
+			this.pronoun3 = "their";
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
+			createBreastRow(Appearance.breastCupInverse("B"));
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(8) + 70;
+			this.hipRating = HIP_RATING_CURVY+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.lowerBody = LOWER_BODY_TYPE_HARPY;
+			this.skinTone = "red";
+			this.skinType = SKIN_TYPE_PLAIN;
+			this.skinDesc = "feathers";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(50, 50, 120, 40);
+			initLibSensCor(60, 45, 50);
+			this.weaponName = "claw";
+			this.weaponVerb="claw";
+			this.weaponAttack = 10;
+			this.armorName = "armor";
+			this.armorDef = 20;
+			this.bonusHP = 1000;
+			this.lust = 20;
+			this.lustVuln = .2;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 18;
+			this.gems = rand(25)+140;
+			this.additionalXP = 50;
+			this.hornType = HORNS_DEMON;
+			this.tailType = TAIL_TYPE_DEMONIC;
+			this.special1 = special1;
+			this.special2 = special2;
+			this.special3 = special3;
+			checkMonster();
 		}
 		
 	}

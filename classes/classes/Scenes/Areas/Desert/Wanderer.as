@@ -1,10 +1,7 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
+	import classes.*;
 
-public class Wanderer extends BaseContent{
+	public class Wanderer extends BaseContent{
 
 		public function Wanderer()
 		{

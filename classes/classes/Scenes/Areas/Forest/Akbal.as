@@ -1,19 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.WeightedDrop;
 
 	public class Akbal extends Monster
 	{
@@ -178,25 +166,52 @@ import classes.StatusAffects;
 		public function Akbal()
 		{
 			trace("Akbal Constructor!");
-			init01Names("", "Akbal", "akbal", "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.");
-			init02Male([new Cock(15,2.5,CockTypesEnum.DOG)],2,4,6,400);
-			init03BreastRows([0],[0],[0],[0]);
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
-			init05Body("4'",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
-			init06Skin("spotted",SKIN_TYPE_FUR);
-			init07Hair("black",5);
-			init08Face();
-			init09PrimaryStats(55,53,50,75,50,50,100);
-			init10Weapon("claws","claw-slash",5);
-			init11Armor("shimmering pelt",5);
-			init12Combat(20,30,0.8,TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(6,15);
-			init14WeightedDrop().
+			this.a = "";
+			this.short = "Akbal";
+			this.imageName = "akbal";
+			this.long = "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.";
+			// this.plural = false;
+			this.createCock(15,2.5,CockTypesEnum.DOG);
+			this.balls = 2;
+			this.ballSize = 4;
+			this.cumMultiplier = 6;
+			this.hoursSinceCum = 400;
+			createBreastRow();
+			createBreastRow();
+			createBreastRow();
+			createBreastRow();
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = 4*12;
+			this.hipRating = HIP_RATING_SLENDER;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "spotted";
+			this.skinType = SKIN_TYPE_FUR;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.hairColor = "black";
+			this.hairLength = 5;
+			initStrTouSpeInte(55, 53, 50, 75);
+			initLibSensCor(50, 50, 100);
+			this.weaponName = "claws";
+			this.weaponVerb="claw-slash";
+			this.weaponAttack = 5;
+			this.armorName = "shimmering pelt";
+			this.armorDef = 5;
+			this.bonusHP = 20;
+			this.lust = 30;
+			this.lustVuln = 0.8;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 6;
+			this.gems = 15;
+			this.drop = new WeightedDrop().
 					add(consumables.INCUBID,6).
 					add(consumables.W_FRUIT,3).
 					add(weapons.PIPE,1);
-			initX_Specials(akbalLustAttack,akbalSpecial,akbalHeal);
-			initX_Tail(TAIL_TYPE_DOG);
+			this.special1 = akbalLustAttack;
+			this.special2 = akbalSpecial;
+			this.special3 = akbalHeal;
+			this.tailType = TAIL_TYPE_DOG;
+			checkMonster();
 		}
 
 	}

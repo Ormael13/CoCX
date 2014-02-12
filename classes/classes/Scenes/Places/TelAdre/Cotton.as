@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class Cotton extends TelAdreAbstractContent {
+	public class Cotton extends TelAdreAbstractContent {
 public function Cotton(){
 
 }

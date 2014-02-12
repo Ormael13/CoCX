@@ -3,10 +3,9 @@
  */
 package classes.Scenes.Areas.Mountain
 {
-	import classes.BaseContent;
-import classes.StatusAffects;
+	import classes.*;
 
-public class InfestedHellhoundScene extends BaseContent
+	public class InfestedHellhoundScene extends BaseContent
 	{
 		public function InfestedHellhoundScene()
 		{

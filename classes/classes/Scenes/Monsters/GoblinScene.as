@@ -3,14 +3,10 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class GoblinScene extends BaseContent
+	public class GoblinScene extends BaseContent
 	{
 		public function GoblinScene()
 		{

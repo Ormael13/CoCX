@@ -3,18 +3,15 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.Appearance;
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.NPCs.Jojo;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{

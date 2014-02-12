@@ -1,6 +1,6 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
 
 	public class Raphael extends NPCAwareContent {
 

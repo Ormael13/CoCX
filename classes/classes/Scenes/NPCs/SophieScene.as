@@ -1,13 +1,10 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.BaseContent;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
 	import classes.Scenes.Areas.HighMountains.Harpy;
-	import classes.CoC_Settings;
-import classes.StatusAffects;
 
-public class SophieScene extends BaseContent {
+	public class SophieScene extends BaseContent {
 
 	public function SophieScene()
 	{

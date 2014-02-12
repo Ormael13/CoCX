@@ -1,12 +1,8 @@
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.CoC;
-	import classes.Appearance;
-	import classes.Cock;
-	import classes.Monster;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	
+
 	/**
 	 * ...
 	 * @author ...
@@ -149,33 +145,57 @@ package classes.Scenes.Areas.HighMountains
 
 		public function MinotaurMob()
 		{
-			if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20)		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
-				init01Names("the ","minotaur gang","minotaurmob",game.Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
+			this.a = "the ";
+			if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20)
+				this.short = "minotaur gang";
 			else
-				init01Names("the ","minotaur tribe","minotaurmob",game.Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
-			var ballSize:Number = 2 + rand(13);
-			init02Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2, ballSize,1.5,ballSize * 10);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,30);
-			init05Body(rand(37) + 84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
-			init06Skin("red",SKIN_TYPE_FUR,"shaggy fur");
-			init07Hair(randomChoice("black","brown"),3);
-			init08Face(FACE_COW_MINOTAUR);
-			init09PrimaryStats(65,60,30,20,40,15,35);
-			init10Weapon("fists","punches");
-			init11Armor("thick fur");
+				this.short = "minotaur tribe";
+			this.imageName = "minotaurmob";
+			this.long = game.Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+			this.plural = true;
+			this.pronoun1 = "they";
+			this.pronoun2 = "them";
+			this.pronoun3 = "their";
+			this.createCock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE);
+			this.balls = 2;
+			this.ballSize = 2 + rand(13);
+			this.cumMultiplier = 1.5;
+			this.hoursSinceCum = ballSize * 10;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.tallness = rand(37) + 84;
+			this.hipRating = HIP_RATING_AVERAGE;
+			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.skinTone = "red";
+			this.skinType = SKIN_TYPE_FUR;
+			this.skinDesc = "shaggy fur";
+			this.hairColor = randomChoice("black","brown");
+			this.hairLength = 3;
+			this.faceType = FACE_COW_MINOTAUR;
+			initStrTouSpeInte(65, 60, 30, 20);
+			initLibSensCor(40, 15, 35);
+			this.weaponName = "fists";
+			this.weaponVerb="punches";
+			this.armorName = "thick fur";
 			var bonusHP:Number = 340 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 			var lustVuln:Number = 0.45;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
 			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
-			init12Combat(bonusHP,30,lustVuln,Monster.TEMPERMENT_LUSTY_GRAPPLES);
+			this.bonusHP = bonusHP;
+			this.lust = 30;
+			this.lustVuln = lustVuln;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			var level:int = 11 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			if(level > 14) level = 14;
-			init13Level(level,rand(15) + 45);
-			initX_Tail(TAIL_TYPE_COW);
-			initX_Specials(game.mountain.minotaurScene.minoPheromones);
-			skipInit(14);
-
+			this.level = level;
+			this.gems = rand(15) + 45;
+			this.tailType = TAIL_TYPE_COW;
+			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.initedDrop = true;
+			checkMonster();
 		}
 	}
 

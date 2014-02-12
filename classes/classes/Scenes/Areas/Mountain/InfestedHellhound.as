@@ -1,11 +1,9 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
-	import classes.CoC_Settings;
-	import classes.Cock;
-	import classes.Monster;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.*;
 
-/**
+	/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -98,28 +96,51 @@ import classes.StatusAffects;
 		{
 			super(true);
 			trace("InfestedHellhound Constructor!");
-			init01Names("the ", "infested hellhound", "infestedhellhound", "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.");
-			init02Male([new Cock(9, 2), new Cock(9, 2)], 2, 5, 8);
-			init03BreastRows([0], [0], [0]);
-			init04Ass(ANAL_LOOSENESS_NORMAL, ANAL_WETNESS_NORMAL);
-			init05Body(47, HIP_RATING_AVERAGE, BUTT_RATING_AVERAGE + 1);
-			init06Skin("black", SKIN_TYPE_FUR);
-			init07Hair("red", 3);
-			init08Face();
-			init09PrimaryStats(65, 60, 50, 1, 95, 20, 100);
-			init10Weapon("claws", "claw", 5);
-			init11Armor("thick fur");
-			init12Combat(0, 50, 0.87, Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(5, 10 + rand(10));
-            init14WeightedDrop()
-            					.add(consumables.CANINEP, 3)
+			this.a = "the ";
+			this.short = "infested hellhound";
+			this.imageName = "infestedhellhound";
+			this.long = "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.";
+			// this.plural = false;
+			this.createCock(9, 2);
+			this.createCock(9, 2);
+			this.balls = 2;
+			this.ballSize = 5;
+			this.cumMultiplier = 8;
+			this.createBreastRow();
+			this.createBreastRow();
+			this.createBreastRow();
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = 47;
+			this.hipRating = HIP_RATING_AVERAGE;
+			this.buttRating = BUTT_RATING_AVERAGE + 1;
+			this.skinTone = "black";
+			this.skinType = SKIN_TYPE_FUR;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.hairColor = "red";
+			this.hairLength = 3;
+			initStrTouSpeInte(65, 60, 50, 1);
+			initLibSensCor(95, 20, 100);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 5;
+			this.armorName = "thick fur";
+			this.lust = 50;
+			this.lustVuln = 0.87;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 5;
+			this.gems = 10 + rand(10);
+            this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
             					.addMany(1, consumables.BULBYPP,
             							consumables.KNOTTYP,
             							consumables.BLACKPP,
             							consumables.DBLPEPP,
             							consumables.LARGEPP);
-			initX_Specials(hellhoundFire, hellhoundScent, hellHoundWormCannon);
-			initX_Tail(TAIL_TYPE_DOG);
+			this.special1 = hellhoundFire;
+			this.special2 = hellhoundScent;
+			this.special3 = hellHoundWormCannon;
+			this.tailType = TAIL_TYPE_DOG;
+			checkMonster();
 		}
 
 	}

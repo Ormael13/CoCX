@@ -1,16 +1,9 @@
 package classes.Scenes.Areas.Forest
 {
-	import classes.Cock;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
 	public class Kitsune extends Monster
 	{
 
@@ -196,32 +189,49 @@ import classes.StatusAffects;
 		{
 
 			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
-			init01Names("a ", "kitsune", "kitsune",
-					"A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({
+			this.a = "a ";
+			this.short = "kitsune";
+			this.imageName = "kitsune";
+			this.long = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({
 						"blonde": "long flaxen",
 						"black": "lustrous, ass-length black",
 						"red": "unkempt, shoulder-length reddish"
 					}[hairColor]) +
-							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.");
+							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
+			// this.plural = false;
 			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
-				init02Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),
-						2,2 + rand(13),1.5,player.ballSize * 10);
+				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN);
+				this.balls = 2;
+				this.ballSize = 2 + rand(13);
+				this.cumMultiplier = 1.5;
+				this.hoursSinceCum = ballSize * 10;
 			}
-			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL,20);
-			init03BreastRows("D");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,20);
-			init05Body(rand(24) + 60,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
-			init06Skin("pale");
-			init07Hair(hairColor,13 + rand(20));
-			init08Face();
-			init09PrimaryStats(35,45,90,95,60,65,45);
-			init10Weapon("claws","punch");
-			init11Armor("skin");
-			init12Combat(120,20,0.9,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(6,rand(10) + 10);
-			init14FixedDrop(consumables.FOXJEWL);
-			initX_Tail(TAIL_TYPE_FOX);
-
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 20, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.tallness = rand(24) + 60;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.skinTone = "pale";
+			this.hairColor = hairColor;
+			this.hairLength = 13 + rand(20);
+			initStrTouSpeInte(35, 45, 90, 95);
+			initLibSensCor(60, 65, 45);
+			this.weaponName = "claws";
+			this.weaponVerb="punch";
+			this.armorName = "skin";
+			this.bonusHP = 120;
+			this.lust = 20;
+			this.lustVuln = 0.9;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 6;
+			this.gems = rand(10) + 10;
+			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
+			this.tailType = TAIL_TYPE_FOX;
+			checkMonster();
 		}
 
 	}

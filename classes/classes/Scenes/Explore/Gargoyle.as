@@ -1,13 +1,9 @@
 ﻿package classes.Scenes.Explore{
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class Gargoyle extends BaseContent{
+	public class Gargoyle extends BaseContent{
 
 	public function Gargoyle()
 	{

@@ -1,11 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre{
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-import classes.Appearance;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class Katherine extends TelAdreAbstractContent{
+	public class Katherine extends TelAdreAbstractContent{
 
 	public function Katherine()
 	{

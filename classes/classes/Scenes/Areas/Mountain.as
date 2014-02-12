@@ -3,16 +3,14 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Mountain extends BaseContent
 	{

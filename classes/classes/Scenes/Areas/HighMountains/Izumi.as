@@ -1,19 +1,8 @@
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.CoC;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-import classes.StatusAffects;
 
-/**
-	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
-	 * Most of the combat damage and stats will need to actually be tuned. I have no idea about what
-	 * these values should be for the intended effect.
-	 * 
-	 * @author FeatureCreep
-	 * @editor Gedan
-	 * @programmer Gedan
-	 */
 	public class Izumi extends Monster
 	{
 		// Set trace outout for this classes' content.
@@ -21,21 +10,35 @@ import classes.StatusAffects;
 		
 		public function Izumi() 
 		{
-			init01Names("", "Izumi", "izumi", "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and weilding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horn juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.");
-			
-			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
-			init03BreastRows("FF"); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
-			init04Ass(ANAL_LOOSENESS_TIGHT, ANAL_WETNESS_DRY);
-			init05Body("9'0", HIP_RATING_AVERAGE, BUTT_RATING_TIGHT);
-			init06Skin("creamy-white");
-			init07Hair("golden", 25);
-			init08Face();
-			init09PrimaryStats(90, 90, 90, 80, 30, 25, 15);
-			init10Weapon("fist", "punch");
-			init11Armor("silken kimono");
-			init12Combat(660, 10, 0.33, Monster.TEMPERMENT_LOVE_GRAPPLES, 0);
-			init13Level(22, 25 + rand(25), 75);
-			skipInit(14);
+			this.a = "";
+			this.short = "Izumi";
+			this.imageName = "izumi";
+			this.long = "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and weilding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horn juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = 9*12+0;
+			this.hipRating = HIP_RATING_AVERAGE;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "creamy-white";
+			this.hairColor = "golden";
+			this.hairLength = 25;
+			initStrTouSpeInte(90, 90, 90, 80);
+			initLibSensCor(30, 25, 15);
+			this.weaponName = "fist";
+			this.weaponVerb="punch";
+			this.armorName = "silken kimono";
+			this.bonusHP = 660;
+			this.lust = 10;
+			this.lustVuln = 0.33;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 22;
+			this.gems = 25 + rand(25);
+			this.additionalXP = 75;
+			this.initedDrop = true;
+			checkMonster();
 		}
 
 		// Override won/lost calls

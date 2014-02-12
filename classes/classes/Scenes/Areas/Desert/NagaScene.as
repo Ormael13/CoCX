@@ -1,23 +1,8 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class NagaScene extends BaseContent{
+	public class NagaScene extends BaseContent{
 	public function NagaScene(){
 
 	}

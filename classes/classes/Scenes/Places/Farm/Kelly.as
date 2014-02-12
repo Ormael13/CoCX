@@ -1,11 +1,9 @@
 ﻿package classes.Scenes.Places.Farm{
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.ItemType;
-import classes.StatusAffects;
 
-public class Kelly extends AbstractFarmContent{
+	public class Kelly extends AbstractFarmContent{
 
 	public function Kelly()
 	{

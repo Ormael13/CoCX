@@ -3,13 +3,12 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Desert.*;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Desert extends BaseContent
 	{

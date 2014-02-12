@@ -1,14 +1,10 @@
 ﻿package classes.Scenes.Areas.Mountain {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Appearance;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class MinotaurScene extends BaseContent {
+	public class MinotaurScene extends BaseContent {
 
 		public function MinotaurScene()
 		{

@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-public class Jasun extends TelAdreAbstractContent{
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Jasun extends TelAdreAbstractContent{
 
 	public function Jasun()
 	{

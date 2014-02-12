@@ -1,11 +1,9 @@
 package classes.Scenes.NPCs{
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class ShouldraFollower extends NPCAwareContent {
+	public class ShouldraFollower extends NPCAwareContent {
 
 	public function ShouldraFollower()
 	{

@@ -1,15 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.Monster;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class Hel extends Monster 
+	public class Hel extends Monster
 	{
 
 		private function helAttack():void {
@@ -171,28 +166,49 @@ import classes.StatusAffects;
 
 		public function Hel()
 		{
-			
-			if (game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1)		// This is broken out because I need to be able to match against init01 instances with a regex in a sane manner. Please don't convert it back to a ternary statement
-				init01Names("the ","salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
-			else
-				init01Names("","Hel","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
-			init02Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL,85);
-			init03BreastRows("E+");
-			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
-			init05Body(90,HIP_RATING_CURVY+2, BUTT_RATING_LARGE+1);
-			init06Skin("dusky");
-			init07Hair("red",13);
-			init08Face();
-			init09PrimaryStats(80,70,75,60,65,25,30);
-			init10Weapon("sword","slashing blade",20);
-			init11Armor("scales",14,"",50);
-			init12Combat(275,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(16,10 + rand(5));
-			init14ChainedDrop().
+			if (game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1) {
+				this.a = "the ";
+				this.short = "salamander";
+			} else {
+				this.a = "";
+				this.short = "Hel";
+			}
+			this.imageName = "hel";
+			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
+			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			createStatusAffect(StatusAffects.BonusVCapacity,85,0,0,0);
+			createBreastRow(Appearance.breastCupInverse("E+"));
+			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,85,0,0,0);
+			this.tallness = 90;
+			this.hipRating = HIP_RATING_CURVY+2;
+			this.buttRating = BUTT_RATING_LARGE+1;
+			this.skinTone = "dusky";
+			this.hairColor = "red";
+			this.hairLength = 13;
+			initStrTouSpeInte(80, 70, 75, 60);
+			initLibSensCor(65, 25, 30);
+			this.weaponName = "sword";
+			this.weaponVerb="slashing blade";
+			this.weaponAttack = 20;
+			this.armorName = "scales";
+			this.armorDef = 14;
+			this.armorPerk = "";
+			this.armorValue = 50;
+			this.bonusHP = 275;
+			this.lust = 30;
+			this.lustVuln = .35;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 16;
+			this.gems = 10 + rand(5);
+			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
 					add(consumables.REPTLUM,0.7);
-			initX_Tail(TAIL_TYPE_LIZARD,0,0);
+			this.tailType = TAIL_TYPE_LIZARD;
+			this.tailRecharge = 0;
 			this.createStatusAffect(StatusAffects.Keen,0,0,0,0);
+			checkMonster();
 		}
 		
 	}

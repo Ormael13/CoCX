@@ -1,16 +1,10 @@
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.CoC;
-	import classes.Cock;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-/**
-	 * ...
-	 * @author aimozg
-	 */
-	public class Minerva extends Monster 
+	public class Minerva extends Monster
 	{
 
 		//Normal Attacks for all Minerva Types
@@ -199,23 +193,48 @@ import classes.StatusAffects;
 
 		public function Minerva()
 		{
-			init01Names("", "Minerva", "minerva", "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.");
-			init02Male(new Cock(16,3),2,3,3);
-			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL);
-			init03BreastRows("DD");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY);
-			init05Body("8'4",HIP_RATING_CURVY,BUTT_RATING_LARGE+1);
-			init06Skin("blue");
-			init07Hair("red",25);
-			init08Face();
-			init09PrimaryStats(50,65,95,75,30,25,45);
-			init10Weapon("halberd","slash",30,"",150);
-			init11Armor("comfortable clothes",1,"",5);
-			init12Combat(470,20,.2,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(16,rand(25)+10,50);
-			init14FixedDrop(consumables.PURPEAC);
-			initX_Wings(WING_TYPE_HARPY,"fluffy feathery");
-
+			this.a = "";
+			this.short = "Minerva";
+			this.imageName = "minerva";
+			this.long = "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
+			// this.plural = false;
+			this.createCock(16,3);
+			this.balls = 2;
+			this.ballSize = 3;
+			this.cumMultiplier = 3;
+			// this.hoursSinceCum = 0;
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			createBreastRow(Appearance.breastCupInverse("DD"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = 8*12+4;
+			this.hipRating = HIP_RATING_CURVY;
+			this.buttRating = BUTT_RATING_LARGE+1;
+			this.skinTone = "blue";
+			this.hairColor = "red";
+			this.hairLength = 25;
+			initStrTouSpeInte(50, 65, 95, 75);
+			initLibSensCor(30, 25, 45);
+			this.weaponName = "halberd";
+			this.weaponVerb="slash";
+			this.weaponAttack = 30;
+			this.weaponPerk = "";
+			this.weaponValue = 150;
+			this.armorName = "comfortable clothes";
+			this.armorDef = 1;
+			this.armorPerk = "";
+			this.armorValue = 5;
+			this.bonusHP = 470;
+			this.lust = 20;
+			this.lustVuln = .2;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 16;
+			this.gems = rand(25)+10;
+			this.additionalXP = 50;
+			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
+			this.wingType = WING_TYPE_HARPY;
+			this.wingDesc = "fluffy feathery";
+			checkMonster();
 		}
 		
 	}

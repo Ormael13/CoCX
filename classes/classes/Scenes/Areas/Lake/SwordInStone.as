@@ -1,13 +1,8 @@
 ﻿package classes.Scenes.Areas.Lake
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
-	import classes.Appearance;
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
 
-public class SwordInStone extends AbstractLakeContent
+	public class SwordInStone extends AbstractLakeContent
 	{
 		public function SwordInStone()
 		{

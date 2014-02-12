@@ -1421,7 +1421,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 			else
 			{
-				trace("Creating perk : " + ptype);
+				//trace("Creating perk : " + ptype);
 				player.createPerk(ptype,value1,value2,value3,value4);
 			
 				if (isNaN(player.perk(player.numPerks - 1).value1)) 
@@ -1435,7 +1435,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 						player.perk(player.numPerks).value1 = 0;
 					}
 					
-					trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
+					trace("NaN byaaaatch("+ptype+"): " + player.perk(player.numPerks - 1).value1);
 				}
 			
 				if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") 

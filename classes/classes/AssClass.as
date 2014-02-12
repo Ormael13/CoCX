@@ -1,5 +1,7 @@
 ﻿package classes
 {
+	import classes.internals.Utils;
+
 	public class AssClass
 	{
 		//constructor
@@ -21,5 +23,13 @@
 		//Used to determine thickness of knot relative to normal thickness
 		//Used during sex to determine how full it currently is.  For multi-dick sex.
 		public var fullness:Number = 0;
+
+		public function validate():String {
+			var error:String = "";
+			error += Utils.validateNonNegativeNumberFields(this, "AssClass.validate",[
+					"analWetness", "analLooseness", "fullness"
+			]);
+			return error;
+		}
 	}
 }
