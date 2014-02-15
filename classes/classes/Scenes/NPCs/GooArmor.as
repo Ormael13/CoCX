@@ -64,11 +64,7 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(25)+40;
-			if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) {
-				this.drop = new WeightedDrop(consumables.NUMBROX, 1);
-			} else {
-				this.drop = new WeightedDrop();
-			}
+			this.drop = new WeightedDrop();
 			checkMonster();
 		}
 		
