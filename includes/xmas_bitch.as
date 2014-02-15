@@ -3,48 +3,56 @@
 	return false;
 }
 
-public function xmasBitchEncounter():void {
+public function xmasBitchEncounter():void
+{
 	outputText("", true);
 	spriteSelect(9);
 	outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n", false);
-		
+
 	outputText("Standing there, innocent as can be, ");
-	if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
+	if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
 	else outputText("is the same elf you met last year.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
-	
+
 	outputText("The elf says, \"<i>Hiya " + player.short + "!  I brought you a");
-	if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("nother");
+	if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("nother");
 	outputText(" present, straight from the big man himself!</i>\"\n\n", false);
-	
-	if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) {
+
+	if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0)
+	{
 		outputText("Confused by her sudden re-appearance, you dumbly ask if you'll be getting the same thing as last year.\n\n");
-		outputText("She giggles, \"<i>Oh silly, that would spoil the surprise, wouldn't it?  We've got EVERYONE on our list, even Kelt, though he's getting coal AGAIN.  You'll get what you're supposed to get!</i>\"\n\n", false);
+
+		outputText("She giggles, \"<i>Oh silly, that would spoil the surprise, wouldn't it?  We've got EVERYONE on our list, even ");
+		if (flags[kFLAGS.KELT_BREAK_LEVEL] < 4) outputText("Kelt, though he's getting coal AGAIN");
+		else outputText("Kelly, though I think she's getting another big fat dildo");
+		outputText(".  You'll get what you're supposed to get!</i>\"\n\n", false);
 	}
-	else {
+	else
+	{
 		outputText("Confused by her appearance and the fact that she already knows you by name, you dumbly ask how she can possibly know who you are.\n\n", false);
 
 		outputText("She giggles, \"<i>Oh silly, don't you know what time of year it is?  We've got EVERYONE on our list, even ");
-		if(flags[kFLAGS.KELT_BREAK_LEVEL] < 4) outputText("Kelt, though he's getting coal this year");
+		if (flags[kFLAGS.KELT_BREAK_LEVEL] < 4) outputText("Kelt, though he's getting coal this year");
 		else outputText("Kelly, though I think she's getting a big fat dildo this year");
 		outputText(".</i>\"\n\n", false);
 	}
 	outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n", false);
-	if(player.cor >= 90 || monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+	if (player.cor >= 90 || monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
+	{
 		outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n", false);
-		if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
+		if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
 		//[Open Present] [Unwrap Elf] [Decline]
-		simpleChoices("OpenPresent",openXmasPresent,"",0,"Decline",declineXmasPresent,"",0,"",0);
+		simpleChoices("OpenPresent", openXmasPresent, "", 0, "Decline", declineXmasPresent, "", 0, "", 0);
 		return;
 	}
-	if(player.gender == 0) {
+	if (player.gender == 0)
+	{
 		outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  Just open it up!  Are you ready?</i>\"\n\n", false);
-		simpleChoices("OpenPresent",openXmasPresent,"",0,"Decline",declineXmasPresent,"",0,"",0);
+		simpleChoices("OpenPresent", openXmasPresent, "", 0, "Decline", declineXmasPresent, "", 0, "", 0);
 		return;
 	}
 	outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  You can unwrap it or unwrap me.  What'll it be?</i>\"\n\n", false);
 	//[Open Present] [Unwrap Elf] [Decline]
-	simpleChoices("OpenPresent",openXmasPresent,"Unwrap Elf",unwrapElfyPresent,"Decline",declineXmasPresent,"",0,"",0);
-	
+	simpleChoices("OpenPresent", openXmasPresent, "Unwrap Elf", unwrapElfyPresent, "Decline", declineXmasPresent, "", 0, "", 0);
 }
 
 //[Decline]
