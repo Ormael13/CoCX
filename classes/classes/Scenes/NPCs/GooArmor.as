@@ -34,14 +34,9 @@ import classes.StatusAffects;
 			}
 		}
 
-		public function GooArmor(known:Boolean=false)
+		public function GooArmor()
 		{
-			super(false);
-			if (!known){
-				init01Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
-			} else {
-				init01Names("a ", "Vala", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
-			}
+			init01Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
 			init03BreastRows("C");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
@@ -54,8 +49,7 @@ import classes.StatusAffects;
 			init11Armor("armor",50);
 			init12Combat(500,0,.35,Monster.TEMPERMENT_LOVE_GRAPPLES,fatigue);
 			init13Level(16,rand(25)+40);
-			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) init14FixedDrop(consumables.NUMBROX);
-			else init14FixedDrop();
+			init14FixedDrop();
 		}
 		
 	}
