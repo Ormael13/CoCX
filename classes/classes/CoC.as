@@ -295,12 +295,10 @@
 			
 			this.parser = new Parser(this, CoC_Settings);
 
-
 			this.model = new GameModel();
 			this.mainView = new MainView( this.model );
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
-
 
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
@@ -309,7 +307,6 @@
 			this.mainView.onLevelClick = levelUpGo;
 			this.mainView.onPerksClick = displayPerks;
 			this.mainView.onStatsClick = displayStats;
-
 
 			// Set up all the messy global stuff:
 			

@@ -377,6 +377,11 @@ package classes
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
+				
+		public static const ControlledBreath:ControlledBreathPerk = new ControlledBreathPerk();
+		public static const CleansingPalm:CleansingPalmPerk = new CleansingPalmPerk();
+		public static const Enlightened:EnlightenedPerk = new EnlightenedPerk();
+		
 
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");

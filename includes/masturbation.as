@@ -10,7 +10,7 @@ public function masturbateMenu():void {
 	}
 	
 	//FAP BUTTON GOAADFADHAKDADK
-	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
+	if((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 			addButton(button,"Masturbate",eventParser,10);
 		else 
@@ -2284,6 +2284,7 @@ public function meditate():void {
 	outputText("", true);
 	outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.", false);
 	dynStats("lus", -50, "cor", -.3);
+	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
 	doNext(14);
 }
 

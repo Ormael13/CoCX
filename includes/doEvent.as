@@ -1756,42 +1756,99 @@ public function doEvent(eventNo:Number):void
 			followerInteractions.catchRathazulNapping();
 			return;
 		}
+		
+		// Configure the options we're going to display in the menus
 		var jojoDefense:String = "N.Watch:";
 		var jojoRapeFuncNum:Number = 0;
-		outputText("You find Jojo sitting cross-legged on a flat rock with his staff leaning against his shoulder, thinking.  He looks to you and nods, \"<i>Greetings, " + player.short + ".  Is there something I could do to assist you?</i>\"\n\n", true);
+		
 		if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0)
 		{
 			jojoDefense += "On";
 			outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
 		}
 		else
+		{
 			jojoDefense += "Off";
+		}
+		
 		if (player.lust >= 33 && player.gender > 0)
+		{
 			jojoRapeFuncNum = 2153;
-		//Menu with worm purge
+		}
+		
+		// Worms overrides everything else
 		if (player.findStatusAffect(StatusAffects.Infested) >= 0)
 		{
 			outputText("As you approach the serene monk, you see his nose twitch.\n\n", false);
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
 			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
 		}
-		//normal menu
+		// Normal shit
 		else
-			simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
+		{
+			// Approach text
+			if (player.cor >= 40)
+			{
+				outputText("You approach the boulder where Jojo usually sits, and as soon as you're close Jojo approaches you with urgency. “<i>By Marae! [name], we must do something! I feel the corruption surrounding you like a dense fog. We need to meditate or I’m going to lose you!</i>” Jojo pleads.\n\n");
+			}
+			else if (player.cor > 10)
+			{
+				outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross legged with his eyes closed. He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, “<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret. If you want to I'd be happy to meditate with you as you rid yourself of it.</i>” he offers with a concerned look on his face.\n\n");
+			}
+			else
+			{
+				var selector:int = rand(3);
+				
+				if (selector == 0)
+				{
+					outputText("You walk toward the boulder where Jojo usually sits, and see him cross legged with his eyes closed.  At first he seems to be deep in meditation, but when you approach his mouth curls into a smile; he gets up and opens his eyes regarding you with a welcoming expression.  “<i>Greetings [name], is there anything I can assist you with?</i>”\n\n");
+				}
+				else if (selector == 1)
+				{
+					outputText("You walk up to the boulder where Jojo usually sits and find him a few paces behind it. He is standing and practicing his form, gracefully moving from one pose to the next. As you approach him you see his ears visibly perk and he turns his head towards you without breaking his stance, saying, “<i>Greetings [player name], is there anything I can assist you with?</i>”\n\n");
+				}
+				else if (selector == 2)
+				{
+					outputText("You find Jojo sitting cross-legged on a flat rock with his staff leaning against his shoulder, thinking.  He looks to you and nods, \"<i>Greetings, " + player.short + ".  Is there something I could do to assist you?</i>\"\n\n", true);
+				}
+			}
+			
+			// New "offer of help" menu
+			if (player.cor > 10)
+			{
+				outputText("Do you accept Jojo's help?\n\n");
+				simpleChoices("Yes", jojoScene.acceptOfferOfHelp, "No", jojoScene.refuseOfferOfHelp, "", 0, "", 0, "Rape", jojoRapeFuncNum);
+			}
+			else
+			{
+				// Old/regular menu
+				//simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
+				menu();
+				addButton(0, "Appearance", jojoScene.jojoAppearance);
+				addButton(1, "Talk", jojoScene.talkMenu);
+				if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] > 0) addButton(2, "Train", jojoScene.apparantlyJojoDOESlift);
+				addButton(3, "Meditate", eventParser, 2151);
+				addButton(4, jojoDefense, eventParser, 2152);
+				addButton(9, "Leave", eventParser, 74);
+			}
+		}
 	}
 	//New meditate
 	else if (eventNo == 2151)
 	{
 		jojoScene.jojoSprite();
+		
+		var doClear:Boolean = jojoScene.doClear;
+		
 		if (player.statusAffectv1(StatusAffects.Meditated) > 0)
 		{
-			outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", true);
+			outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", doClear);
 			if (player.lust > 40)
 				dynStats("lus", -10);
 			doNext(13);
 			return;
 		}
-		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicing to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", true);
+		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicing to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", doClear);
 		//OLD STAT LINE - dynStats("str", .25,"tou", .25, "spe", .25, "int", .25, "lib", -1, "lus", -10, "cor", -2);
 		//Reduces lust
 		dynStats("lus", -30);

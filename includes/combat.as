@@ -3806,7 +3806,10 @@ public function magicMenu():void {
 	}
 	outputText("What spell will you use?\n\n", true);
 	//WHITE SHITZ
-	if(player.lust >= 75) outputText("You are far too aroused to focus on white magic.\n\n", false);
+	var whiteLustCap:int = 75;
+	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) whiteLustCap += 10;
+	
+	if(player.lust >= whiteLustCap) outputText("You are far too aroused to focus on white magic.\n\n", false);
 	else {
 		if(player.findStatusAffect(StatusAffects.KnowsCharge) >= 0) {
 			if(player.findStatusAffect(StatusAffects.ChargeWeapon) < 0) chargeEvent = 5083;

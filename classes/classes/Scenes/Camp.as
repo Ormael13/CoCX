@@ -597,7 +597,7 @@ public function doCamp():void {
 		}
 	}
 	var baitText:String = "Masturbate";
-	if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66 && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
+	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
 	//Initialize companions/followers
 	if(model.time.hours > 4 && model.time.hours < 23) {
 		if(followersCount() > 0) 

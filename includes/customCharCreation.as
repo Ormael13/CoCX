@@ -31,7 +31,7 @@ public function customPCSetup():void {
 		player.inte = 100;
 		player.sens = 100;
 		player.lib = 100;
-		player.cor = 50;
+		player.cor = 0;
 		notes = "Cheater!";
 		player.HP = maxHP();
 		player.hairLength = 10;

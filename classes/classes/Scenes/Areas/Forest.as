@@ -282,13 +282,26 @@ use namespace kGAMECLASS;
 			if (chooser == 1) {
 				doNext(13);
 				outputText("", true);
-				if (kGAMECLASS.monk == 0) {
-					if (player.cor < 25) {
-						outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
-						dynStats("tou", .5, "int", 1);
-						doNext(13);
-						return;
+				
+				if (kGAMECLASS.monk == 0) 
+				{	
+					if (player.cor < 25)
+					{
+						if (player.level >= 4)
+						{
+							kGAMECLASS.monk = 1;
+							kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
+							return
+						}
+						else
+						{
+							outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
+							dynStats("tou", .5, "int", 1);
+							doNext(13);
+							return;
+						}
 					}
+				
 					kGAMECLASS.monk = 1;
 					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your " + player.feet() + " swept out from under you, and land hard on your back.\n\n", false);
@@ -306,12 +319,6 @@ use namespace kGAMECLASS;
 					return;
 				}
 				if (kGAMECLASS.monk == 1) {
-					if (player.cor < 10) {
-						outputText("You enjoy a peaceful walk in the woods, it gives you time to think.", true);
-						dynStats("tou", .5, "int", 1);
-						doNext(13);
-						return;
-					}
 					if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
 						kGAMECLASS.jojoScene.jojoSprite();
 						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
