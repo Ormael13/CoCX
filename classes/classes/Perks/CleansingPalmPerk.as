@@ -15,7 +15,7 @@ package classes.Perks
 
 		public function CleansingPalmPerk()
 		{
-			super("Controlled Breath", "Controlled Breath", "Jojo’s training allows you to recover more quickly. Increases rate of fatigue regeneration by 10%");
+			super("Cleansing Palm", "Cleansing Palm", "A ranged fighting technique of Jojo’s order, allows you to blast your enemies with waves of pure spiritual energy, weakening them and hurting the corrupt.");
 		}
 	}
 }

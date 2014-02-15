@@ -1049,9 +1049,9 @@ public static const IZUMI_TIMES_LOST_FIGHT:int                                  
 public static const IZUMI_SEEN_PC_GENDER:int                                   		= 1041; // Indicates if Izumi knows the PCs true gender/equipment (val in the last gender int that izumi knows the player was)
 public static const CUSTOM_FONT_SIZE:int                                   			= 1042; // Defines the currently set font size for output text elements. (Hacky, need to do something better, but this works for now.)
 public static const FERRET_BAD_END_WARNING:int                           	        = 1043;
-public static const TIMES_TALKED_WITH_JOJO:int                                   	= 1045; // Number of times the player has talked with Pure Jojo.
+public static const TIMES_TALKED_WITH_JOJO:int                                   	= 1044; // Number of times the player has talked with Pure Jojo.
 public static const TIMES_TRAINED_WITH_JOJO:int                                   	= 1045; // Number of times the player has trained with Jojo
-public static const UNKNOWN_FLAG_NUMBER_01046:int                                   = 1046;
+public static const UNLOCKED_JOJO_TRAINING:int                                   	= 1046;
 public static const UNKNOWN_FLAG_NUMBER_01047:int                                   = 1047;
 public static const UNKNOWN_FLAG_NUMBER_01048:int                                   = 1048;
 public static const UNKNOWN_FLAG_NUMBER_01049:int                                   = 1049;

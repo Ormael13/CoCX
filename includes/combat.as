@@ -1064,6 +1064,12 @@ public function doCombat(eventNum:Number):void
 			fantasize();
 			return;
 	}
+	if (eventNum == 5087)
+	{
+		doNext(5000);
+		spellCleansingPalm();
+		return;
+	}
 	//bite attack
 	if(eventNum == 5102) {
 		bite();
@@ -3831,7 +3837,14 @@ public function magicMenu():void {
 			else outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n", false);
 		}
 	}
-	choices("Charge W.",chargeEvent,"Blind",blindEvent,"Whitefire",whitefireEvent,"",0,"",0,"Arouse",arouseEvent,"Heal",healEvent,"Might",mightEvent,"",0,"Back",5000);
+	var cPalmEvent:* = 0;
+	// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
+	if (player.findPerk(PerkLib.CleansingPalm) >= 0)
+	{
+		cPalmEvent = 5087;
+	}
+	
+	choices("Charge W.",chargeEvent,"Blind",blindEvent,"Whitefire",whitefireEvent,"C.Palm",cPalmEvent,"",0,"Arouse",arouseEvent,"Heal",healEvent,"Might",mightEvent,"",0,"Back",5000);
 	menuLoc = 3;
 }
 public function spellMod():Number {
@@ -4094,6 +4107,57 @@ public function spellWhitefire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	outputText("\n\n", false);
+	flags[kFLAGS.SPELLS_CAST]++;
+	spellPerkUnlock();
+	monster.HP -= temp;
+	statScreenRefresh();
+	if(monster.HP < 1) doNext(endHpVictory);
+	else enemyAI();
+}
+
+public function spellCleansingPalm():void
+{
+	clearOutput();
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > 100) {
+		outputText("You are too tired to cast this spell.", true);
+		doNext(magicMenu);
+		return;
+	}
+	
+	menuLoc = 0;
+	fatigue(30,1);
+	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
+		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		enemyAI();
+		return;
+	}
+	
+	if (monster.short == "Jojo")
+	{
+		// Not a completely corrupted monkmouse
+		if (kGAMECLASS.monk < 2)
+		{
+			outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+	}
+	temp = int((player.inte / 3 + rand(player.inte / 2)) * spellMod()) * ((monster.cor - 10) / 25);
+	
+	if (temp > 0)
+	{
+		outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing them back a few feet.\n\n");
+	}
+	else
+	{
+		temp = 0;
+		outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
+	}
+	
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	monster.HP -= temp;

@@ -1743,6 +1743,7 @@ public function doEvent(eventNo:Number):void
 	//Jojo in camp
 	else if (eventNo == 2150)
 	{
+		clearOutput();
 		jojoScene.jojoSprite();
 		//Amily meets Jojo:
 		if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower())
@@ -1756,7 +1757,6 @@ public function doEvent(eventNo:Number):void
 			followerInteractions.catchRathazulNapping();
 			return;
 		}
-		
 		// Configure the options we're going to display in the menus
 		var jojoDefense:String = "N.Watch:";
 		var jojoRapeFuncNum:Number = 0;
@@ -1764,7 +1764,6 @@ public function doEvent(eventNo:Number):void
 		if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0)
 		{
 			jojoDefense += "On";
-			outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
 		}
 		else
 		{
@@ -1781,6 +1780,8 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("As you approach the serene monk, you see his nose twitch.\n\n", false);
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
+			
+			if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
 			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
 		}
 		// Normal shit
@@ -1805,7 +1806,7 @@ public function doEvent(eventNo:Number):void
 				}
 				else if (selector == 1)
 				{
-					outputText("You walk up to the boulder where Jojo usually sits and find him a few paces behind it. He is standing and practicing his form, gracefully moving from one pose to the next. As you approach him you see his ears visibly perk and he turns his head towards you without breaking his stance, saying, “<i>Greetings [player name], is there anything I can assist you with?</i>”\n\n");
+					outputText("You walk up to the boulder where Jojo usually sits and find him a few paces behind it. He is standing and practicing his form, gracefully moving from one pose to the next. As you approach him you see his ears visibly perk and he turns his head towards you without breaking his stance, saying, “<i>Greetings [name], is there anything I can assist you with?</i>”\n\n");
 				}
 				else if (selector == 2)
 				{
@@ -1823,10 +1824,12 @@ public function doEvent(eventNo:Number):void
 			{
 				// Old/regular menu
 				//simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
+				if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
+				
 				menu();
 				addButton(0, "Appearance", jojoScene.jojoAppearance);
 				addButton(1, "Talk", jojoScene.talkMenu);
-				if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] > 0) addButton(2, "Train", jojoScene.apparantlyJojoDOESlift);
+				if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", jojoScene.apparantlyJojoDOESlift);
 				addButton(3, "Meditate", eventParser, 2151);
 				addButton(4, jojoDefense, eventParser, 2152);
 				addButton(9, "Leave", eventParser, 74);
