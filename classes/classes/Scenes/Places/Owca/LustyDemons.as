@@ -67,7 +67,8 @@ public class LustyDemons extends Monster
 			initX_Specials(5043,5044);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Horns(HORNS_DEMON);
-			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
+			createStatusAffect(StatusAffects.Vapula, 0, 0, 0, 0);
+			skipInit(14);
 		}
 	}
 }

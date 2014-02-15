@@ -406,9 +406,6 @@ OH GOD SOMEONE FIX THIS DISASTER!!!!111one1ONE!
 //FURNITURE'S JUNK
 public function saveGameObject(slot:String, isFile:Boolean):void
 {
-
-
-	
 	//Autosave stuff
 	if (player.slotName != "VOID")
 		player.slotName = slot;
@@ -1382,6 +1379,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		var hasHistoryPerk:Boolean = false;
 		var hasLustyRegenPerk:Boolean = false;
+		var addedSensualLover:Boolean = false;
 		
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
@@ -1397,7 +1395,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			
 			// Fix saves where the Lusty Regeneration perk might have been malformed.
 			if (id == "Lusty Regeneration")
+			{
 				hasLustyRegenPerk = true;
+			}
 			else if (id == "LustyRegeneration")
 			{
 				id = "Lusty Regeneration";
@@ -1421,8 +1421,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 			else
 			{
-				trace("Creating perk : " + ptype);
-				player.createPerk(ptype,value1,value2,value3,value4);
+				if (ptype == PerkLib.SensualLover && addedSensualLover == true)
+				{
+					trace("Stripping duplicate SensualLover perk.");
+				}
+				else
+				{
+					if (ptype == PerkLib.SensualLover)
+					{
+						addedSensualLover = true;
+					}
+					
+					player.createPerk(ptype, value1, value2, value3, value4);
+				}
 			
 				if (isNaN(player.perk(player.numPerks - 1).value1)) 
 				{
@@ -1434,8 +1445,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					{
 						player.perk(player.numPerks).value1 = 0;
 					}
-					
-					trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
 				}
 			
 				if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") 

@@ -253,8 +253,13 @@ public function makeOutWithScyllaVDayII():void {
 	
 	outputText("\n\nAn hour or so later and quite a bit after sunset, you return to your camp, satisfied and pleased with how you celebrated this holiday...");
 	
-	outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
-	player.createPerk(PerkLib.SensualLover,0,0,0,0);
+	// Only add the perk if the player doesn't already have it.
+	if (player.findPerk(PerkLib.SensualLover) < 0)
+	{
+		outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
+		player.createPerk(PerkLib.SensualLover,0,0,0,0);
+	}
+	
 	doNext(14);
 }
 
@@ -345,8 +350,12 @@ public function fuckAbbyVDay():void {
 	
 	outputText("\n\nSated, you disentangle yourself from the clinging girl and lay her into her bed, with a kiss on her sweat-slick forehead.  She absently strokes between her legs, feeling the oozing jizz dribbling out of her stuffed snatch.  Maybe, for her, this is the meaning of the holiday: not just a casual fuck, but taking the time to really savor the body of someone who's important to you.  Even if it isn't love, in the strictest sense, being close to the people who impact your life is reason enough to find joy in your days.  You wish the little paladin a good night and, blowing out her candles, you take your leave.");
 	
-	outputText("\n\n(<b>You've received the Sensual Lover Perk!</b>)");
-	player.createPerk(PerkLib.SensualLover,0,0,0,0);
+	if (player.findPerk(PerkLib.SensualLover) < 0)
+	{
+		outputText("\n\n(<b>You've received the Sensual Lover Perk!</b>)");
+		player.createPerk(PerkLib.SensualLover,0,0,0,0);
+	}
+	
 	dynStats("sen", -3, "lus=", 0);
 	doNext(14);
 }
@@ -570,8 +579,12 @@ public function goForAPushayDivePasty():void {
 	
 	outputText("\n\nTrue, this might not have been the most romantic sex act, but it was certainly enjoyable for the two of you.");
 	
-	outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
-	player.createPerk(PerkLib.SensualLover,0,0,0,0);
+	if (player.findPerk(PerkLib.SensualLover) < 0)
+	{
+		outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
+		player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
+	}
+	
 	dynStats("sen", -2, "lus=", 0);
 	doNext(14);
 }

@@ -1450,7 +1450,7 @@ public function displayStats(e:MouseEvent = null):void
 		if(kihaFollower.followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
 		else outputText("<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n", false);
 	}
-	if(flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL]+ flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
+	if(flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	//Lottie stuff
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
 		outputText("<b>Lottie's Encouragement: </b>" + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);

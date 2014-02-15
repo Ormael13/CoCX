@@ -105,6 +105,9 @@ public function customPCSetup():void {
 		player.createPerk(PerkLib.WeaponMastery,		0, 0, 0, 0);
 		player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);
 		
+		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
+		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
+		
 		player.createStatusAffect(StatusAffects.Heat, 10, 15, 96, 0);
 		
 		player.gems += 3000;

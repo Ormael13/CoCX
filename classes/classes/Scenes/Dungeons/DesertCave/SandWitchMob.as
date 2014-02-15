@@ -39,9 +39,8 @@ package classes.Scenes.Dungeons.DesertCave
 			init10Weapon("fists","punches",0,"",150);
 			init11Armor("robes",1,"",5);
 			init12Combat(80,30,.5,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(4,rand(15) + 5);
-
-
+			init13Level(4, rand(15) + 5);
+			skipInit(14);
 		}
 		
 	}
