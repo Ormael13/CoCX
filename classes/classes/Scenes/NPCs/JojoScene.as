@@ -1298,17 +1298,16 @@ public function jojoLaysEggs():void {
 //Alternative Recruitment by LukaDoc 
 //Note: Since you are not corrupt here Jojo cannot sense you. 
 //Requirements: Level 4, Corruption < 20
-
 public function lowCorruptionJojoEncounter():void
 {
 	clearOutput();
 	jojoSprite();
 
-	outputText("Tired of exploring the forest for the moment, you decide to head back to camp.  Not feeling like taking the scenic route, you step through some bushes.  Immediately your mind registers a yelp, the instant you move to look at its source a white blur smacks you right on your head.");
+	outputText("Tired of exploring the forest for the moment, you decide to head back to camp.  Not feeling like taking the scenic route, you move to step through some bushes, but immediately your mind registers a yelp.  The instant you move to look at the source of the noise, a white blur smacks you right on your head.");
 
 	if (player.tou >= 50 && player.isBiped() == true)
 	{
-		outputText("  You take a few steps back, momentarily dazed.  Shaking it off you instantly ready your [weapon] and assume a fighting stance.\n\n");
+		outputText("  You take a few steps back, momentarily dazed.  Shaking it off, you ready your [weapon] and assume a fighting stance.\n\n");
 	}
 	else if (player.tou < 50 && player.isBiped() == false)
 	{
@@ -1316,11 +1315,11 @@ public function lowCorruptionJojoEncounter():void
 	}
 	else if (player.isTaur())
 	{
-		outputText("The blow does little more than leave you momentarily dazed but isn’t enough to knock you over, you shake it off and ready your [weapon] as you assume a fighting stance.\n\n");
+		outputText("The blow does little more than leave you momentarily dazed but isn’t enough to knock you over.  You shake it off and ready your [weapon] as you assume a fighting stance.\n\n");
 	}
 	else // Was originally isNaga() only, but this will also cover Drider just as well
 	{
-		outputText("You recoil as you are struck and the force of the blow does little more than leave you momentarily dazed. You assume a fighting stance, ready to defend yourself.\n\n");
+		outputText("You recoil as you are struck, but the force of the blow does little more than leave you momentarily dazed. You assume a fighting stance, ready to defend yourself.\n\n");
 	}
 
 	outputText("To your surprise you are greeted with the visage of a rather surprised mouse.\n\n");
@@ -1342,7 +1341,7 @@ public function acceptJojosApology():void
 
 	outputText("You forgive him for hitting you and apologize for spooking him yourself, prompting a relieved sigh.\n\n");
 
-	outputText("“<i>Thanks, it’s a relief to meet a friendly face,</i>” he says, breaking a smile. “<i>Oh, where are my manners!</i>”\n\n");
+	outputText("“<i>Thanks, it’s a relief to meet a friendly face,</i>” he says, his mouth breaking into a smile. “<i>Oh, where are my manners!</i>”\n\n");
 
 	lowCorruptionIntro();
 }
@@ -1353,9 +1352,10 @@ public function refuseJojosApology():void
 	clearOutput();
 	jojoSprite();
 
-	outputText("With a smile you curl up a fist and knock the unsuspecting mouse morph upside the head, causing him drop his staff and rub the spot where you slugged him. As he looks up at you you give his angry expression a shrug, telling him that now the two of you are even.\n\n");
+	outputText("With a smile you curl up a fist and knock the unsuspecting mouse morph upside the head, causing him drop his staff and rub the spot where you slugged him.  As he looks up at you you give his angry expression a shrug, telling him that now the two of you are even.\n\n");
 
-	outputText("“<i>O-Kay</i>” The mouse says slowly, suddenly watching your movements very closely with those quick little eyes of his, “<i>But I guess it’s fair, no harm done right?</i>”  It’s all water under the bridge to you now, after all you did slug him real good. The two of you agree to start over.\n\n");
+	outputText("“<i>O-Kay</i>” The mouse says slowly, suddenly watching your movements very closely with those quick little eyes of his, “<i>But I guess it’s fair, no harm done right?</i>”\n\n");
+	outputText("It’s all water under the bridge to you now; after all you did slug him real good. The two of you agree to start over.\n\n");
 
 	lowCorruptionIntro();
 }
@@ -1367,14 +1367,14 @@ public function lowCorruptionIntro():void
 
 	outputText("Now that you have the opportunity to take a good look at him, you notice that he is dressed in simple garbs reminiscent of a monk. A light-blue robe covers his flat chest, tied with a simple sash around his waist. His pants, similar to his robes, fit him snugly as well.\n\n");
 
-	outputText("His build is lithe, though you detect he isn’t weak by any means. His handshake is firm and transmits confidence, it’s clear that this mouse has trained well, though you can’t see any muscles with his robes covering him. His hair is short and as white as his fur, you’d guess he’s an albino if not for his brown eyes. Surprisingly, he doesn’t seem to be carrying anything on his person, save for a necklace made of holy beads.\n\n");
+	outputText("His build is lithe, though you detect he isn’t weak by any means. His handshake is firm and transmits confidence; it’s clear that this mouse has trained well, though you can’t see any hint of muscles with his robes covering him. His hair is short and as white as his fur, you’d guess he’s an albino if not for his brown eyes. Surprisingly, he doesn’t seem to be carrying anything on his person, save for a necklace made of beads.\n\n"); // Can't really presume that they're holy without knowing much more about him, rite?
 
 	outputText("He smiles knowingly, “<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>”\n\n");
 
 	outputText("Jojo sighs sadly, “<i>Enough of my woes.  Though I ");
 	if (player.cor <= 5) outputText("don't");
 	else outputText("barely");
-	outputText("feel any corruption within you, it’s always best to be prepared. Would you care to join me in meditation?</i>”\n\n");
+	outputText("feel any corruption within you, it’s always best to be prepared.  Would you care to join me in meditation?</i>”\n\n");
 	
 	menu();
 	addButton(0, "Meditate", eventParser, 2003); // OH GOD NO SEND HELP
@@ -1404,10 +1404,10 @@ public function acceptOfferOfHelp():void
 	clearOutput();
 	jojoSprite();
 
-	outputText("“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will... but let us not tempt fate.</i>” he says before the two of you get to it..\n\n");
+	outputText("“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,</i>” he says before the two of you get to it.\n\n");
 
 	this.doClear = false;
-	doNext(2151);
+	eventParser(2151);
 }
 
 //[No]
@@ -1416,7 +1416,7 @@ public function refuseOfferOfHelp():void
 	clearOutput();
 	jojoSprite();
 
-	outputText("You assure Jojo you're fine, and that you'll consider his offer.  “<i>But... I... We...  Alright, but please do not let the corruption get the better of you.  You're my friend and I couldn't bear to lose you to its vile influence.</i>”  Then he recomposes himself and asks, “so... is there anything I can assist you with?”\n\n");
+	outputText("You assure Jojo you're fine, and that you'll consider his offer.  “<i>But... I-We...  Alright, but please do not let the corruption get the better of you.  You’re my friend and I couldn't bear to lose you to its vile influence.</i>”  Then he recomposes himself and asks, “so... is there anything I can assist you with?”\n\n");
 	
 	//(Display normal Follower choices.)
 	// IF ONLY YOU KNEW HOW MUCH OF A PAIN IN THE ASS THIS WAS :(
@@ -1826,7 +1826,7 @@ public function apparantlyJojoDOESlift():void
 		if (player.fatigue >= 40)
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
-			outputText("“<i>Not yet [name]. Your body must be fit and rested before our training. Rest first, and come back to me later.</i>”\n\n");
+			outputText("“<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>”\n\n");
 
 			menu();
 			doNext(2150);

@@ -332,7 +332,7 @@
 
 			//Version NUMBER
 			ver = "0.8.4.7";
-			version = ver + " (<b>Fixes, Izumi Tweaks, MORE FIXES.</b>)";
+			version = ver + " (<b>Jojospansion.</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
