@@ -4146,11 +4146,16 @@ public function spellCleansingPalm():void
 			return;
 		}
 	}
+	
 	temp = int((player.inte / 3 + rand(player.inte / 2)) * spellMod()) * ((monster.cor - 10) / 25);
+	
+	var corruptionMulti:Number = (monster.cor - 20) / 25;
+	if (corruptionMulti > 2) corruptionMulti = 1.5;
 	
 	if (temp > 0)
 	{
 		outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing them back a few feet.\n\n");
+		outputText(monster.capitalA + monster.short + " takes " + temp + " damage.\n\n");
 	}
 	else
 	{
