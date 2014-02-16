@@ -1767,7 +1767,7 @@ public function jojoTalkSandCave():void
 		if (flags[kFLAGS.MORE_CUM_WITCHES] == 1)
 		{
 			outputText("You tell him how you tried to remedy the current cum witch’s situation by asking the Sand Mother to make more cum witches.\n\n");
-			outputText("He whistles low, “<i>That’s a bold move [name]. It seems like they would want that though, it’d allow them to... er... you know... more often, and make more sand witches in the long run wouldn’t it?</i>” As the question sound rhetorical you plow on ahead.\n\n");
+			outputText("He whistles low, “<i>That’s a bold move [name].  It seems like they would want that though, it’d allow them to, er, you know... more often, and make more sand witches in the long run wouldn’t it?</i>” As the question sound rhetorical you plow on ahead.\n\n");
 		}
 		//[if {PC allowed Cum Witches to rome}
 		else if (flags[kFLAGS.CUM_WITCHES_FIGHTABLE] == 1)
@@ -1799,7 +1799,7 @@ public function apparantlyJojoDOESlift():void
 	{
 		flags[kFLAGS.UNLOCKED_JOJO_TRAINING] = 1;
 		outputText("You ask Jojo if he can teach you how to fight like a monk.\n\n");
-		outputText("Jojo considers you for a moment before saying, “<i>Yes I can teach you the forms, skills and techniques I was taught by my order. Plus...</i>” Jojo gazes off into the distance, his attention drifing for a moment, “<i>since I am all that is left, it is up to me to bestow this knowledge upon a worthy soul.</i>”\n\n");
+		outputText("Jojo considers you for a moment before saying, “<i>Yes I can teach you the forms, skills and techniques I was taught by my order. Plus...</i>” Jojo gazes off into the distance, his attention drifing for a moment before he continues, “<i>since I am all that is left, it is up to me to bestow this knowledge upon a worthy soul.</i>”\n\n");
 
 		if (player.cor >= 25)
 		{
@@ -1893,7 +1893,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo gives you a big smile brimming with pride, “<i>Alright [Name]... let’s begin.</i>”\n\n");
 		outputText("Largely due to your increased endurance and improved technique the two of you spend more time sparring and dancing through the forms Jojo knows.  When it comes time for a brief lecture, Jojo pants as he sits with you, taking a minute to regain his breath.  Jojo’s lectures, instead of dealing with how to strike and defend oneself, deal with the nature of the soul.  You learn much about individuality, willpower and determination and after the lecture the two of you meditate on what you’ve learned for a few silent moments.\n\n");
 		outputText("Then the two of you are back up, sweeping gracefully through forms and striking invisible enemies with fierce blows.  By the end of the intense training session both you and Jojo are tired, having trained to both of your limits.\n\n");
-		outputText("As the two of you give each other decidedly shaky bows, Jojo says, “ < i > Great effort [name], you are... wow... I need a rest. I’ve earned it. < / i > ”  The two of you share a laugh and end you training.\n\n");
+		outputText("As the two of you give each other decidedly shaky bows, Jojo says, “<i>Great effort [name], you are... wow... I need a rest. I’ve earned it.</i>”  The two of you share a laugh and end you training.\n\n");
 		
 		fatigue(60);
 
@@ -1901,7 +1901,7 @@ public function apparantlyJojoDOESlift():void
 		{
 			trace("ADDING THIRD PERK");
 			//{text shows after generic 16th technique training session}
-			outputText("As you finish training you decide to meditate alone; returning to your bedroll, you you close your eyes and begin to breathe.  Then the world around you begins to sing to you.\n\n");
+			outputText("As you finish training you decide to meditate alone; returning to your bedroll, you you close your eyes and begin to breathe.  Then the world around you begins to sing.\n\n");
 			outputText("The camp is alive with the sounds of voices on the wind, of the ominous sizzling of the great scar between worlds that is the portal that brought you here.  You feel open to the universe as if it were a lady in a dress sitting next to you, that you could easily reach out and touch.  You feel liberated and free despite the fact that you are not moving a muscle.  You are ready for anything but expecting nothing.  You are neither thinking nor dreaming, you simply are.\n\n");
 
 			outputText("<b>(Perk Gained: Enlightened -</b> White magic threshold reduced. Meditation restores health. Grants the ability to meditate alone.<b>)</b>");
@@ -1913,7 +1913,7 @@ public function apparantlyJojoDOESlift():void
 	else
 	{
 		outputText("Jojo smiles, “<i>In all honesty [name], I should be asking you to teach me, but I’ll do my best.</i>”\n\n");
-		outputText("There are no lectures. Neither you nor Jojo are masters, but as of right now, the two of you have exhausted the small store of knowledge available to you from the Celestial Lotus.  You and Jojo instead practice to exhaustion, heaving and panting for breath, whilst still finding time to enjoy each others company.\n\n");
+		outputText("There are no lectures.  Neither you nor Jojo are masters, but as of right now, the two of you have exhausted the small store of knowledge available to you from the Celestial Lotus.  You and Jojo instead practice to exhaustion, heaving and panting for breath, whilst still finding time to enjoy each others company.\n\n");
 		
 		fatigue(60);
 
