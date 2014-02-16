@@ -1628,7 +1628,10 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	}
 	else if (player.findPerk(PerkLib.HistoryScholar) >= 0)
 	{
-		outputText("You tell Jojo about your insatiable thirst for knowledge and how you spent a lot of time in school. You tell him the story about how you ‘convinced’ Mr. Savin to let you read some of the rare books in his collection, skipping over how much begging and pleading was actually involved.\n\n");
+		outputText("You tell Jojo about your insatiable thirst for knowledge and how you spent a lot of time in school. You tell him the story about how you ‘convinced’ Mr. ");
+		if (kGAMECLASS.silly) outputText("Savin");
+		else outputText("Sellet")
+		outputText(" to let you read some of the rare books in his collection, skipping over how much begging and pleading was actually involved.\n\n");
 	}
 	else if (player.findPerk(PerkLib.HistorySlut) >= 0)
 	{
@@ -1646,7 +1649,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	}
 	else if (player.findPerk(PerkLib.HistoryWhore) >= 0)
 	{
-		outputText("You tell Jojo about how you spent a lot of your time... making money.  When the naive little monk asks how you just smile as you fondly remember the older whore, Poison, showing you the ropes and teaching the tricks of the trade.  Regardless of how it made people think of you you made good money doing... things.  Looking down at Jojo you tell him you sould things that you convinced people that they wanted to buy things.  He seems confused but shrugs it off.\n\n");
+		outputText("You tell Jojo about how you spent a lot of your time... making money.  When the naive little monk asks how, you just smile as you fondly remember the older whore, Poison, showing you the ropes and teaching the tricks of the trade.  Regardless of how it made people think of you, it was certainly good money.  In an attempt to hide some of the messier details of your past from the monk, you explain how you accepted... odd jobs for people, important work that not many others in the village would be willing to accept.  He seems confused but shrugs it off.\n\n");
 	}
 	else
 	{
@@ -1673,7 +1676,7 @@ public function jojoTalkFactory():void
 	{
 		outputText("His ears perk at the news as you continue, telling him that you destroyed the factory controls, which permanently shut down the factory - but released an enormous quantity of corrupted fluids into the environment.\n\n");
 
-		outputText("Jojo cocks his head to the side as he considers his words carefully before speaking, “<i>I guess it seems like the right move.  Permanently disabling the factory would not only deal a heavy blow to the demons, but also give the rest of us time to reclaim the forest... but I don’t know.  If the release of fluids was as much as you say it was then there’s a chance that it’ll do more bad than good.  I’ve seen what corruption does to this world and that much corrupted fluid flooding out all at once could really hurt our cause. I’m not saying it was the wrong thing to do, or lessening your accomplishment, but you have to be careful.  The demons aren’t just powerful, they’re deceptive.</i>”\n\n");
+		outputText("Jojo cocks his head to the side as he considers his words carefully before speaking, “<i>I guess it seems like the right move.  Permanently disabling the factory would not only deal a heavy blow to the demons, but also give the rest of us time to reclaim the forest... but I don’t know.  If the release of fluids was as much as you say it was then there’s a chance that it’ll do more harm than good.  I’ve seen what corruption does to this world and that much corrupted fluid flooding out all at once could really hurt our cause. I’m not saying it was the wrong thing to do, or lessening your accomplishment, but you have to be careful.  The demons aren’t just powerful, they’re deceptive.</i>”\n\n");
 
 		outputText("You listen to the monk’s council and despite his concerns he seems genuinely happy to hear you’ve struck a blow against the demonic regime.\n\n");
 	}
