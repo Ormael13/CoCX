@@ -3839,7 +3839,7 @@ public function magicMenu():void {
 	}
 	var cPalmEvent:* = 0;
 	// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
-	if (player.findPerk(PerkLib.CleansingPalm) >= 0)
+	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < 10)
 	{
 		cPalmEvent = 5087;
 	}
@@ -4146,11 +4146,11 @@ public function spellCleansingPalm():void
 			return;
 		}
 	}
-	
-	temp = int((player.inte / 3 + rand(player.inte / 2)) * spellMod()) * ((monster.cor - 10) / 25);
-	
+		
 	var corruptionMulti:Number = (monster.cor - 20) / 25;
-	if (corruptionMulti > 2) corruptionMulti = 1.5;
+	if (corruptionMulti > 1.5) corruptionMulti = 1.5;
+	
+	temp = int((player.inte / 3 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
 	
 	if (temp > 0)
 	{

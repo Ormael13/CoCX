@@ -48,6 +48,7 @@ import classes.StatusAffects;
 		// Monster won, not player, gg for descriptive method names
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			flags[kFLAGS.IZUMI_TIMES_LOST_FIGHT]++;
 			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
 			{
 				this.cleanup();
