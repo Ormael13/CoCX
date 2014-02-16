@@ -1134,6 +1134,7 @@ package classes.Scenes.Areas.HighMountains
 		public function fuckedUpByAFuckhugeOni(titLoss:Boolean = false):void
 		{
 			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 1;
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 			
 			clearOutput();
 
@@ -1410,6 +1411,7 @@ package classes.Scenes.Areas.HighMountains
 		protected function noDickNoVagNoService():void
 		{
 			lossSceneStay();
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 
 			outputText("Izumi’s fingers stroke questingly over your groin for a moment, then she frowns, confused.\n\n");
 
@@ -1443,6 +1445,8 @@ package classes.Scenes.Areas.HighMountains
 				else outputText(" ankle");
 				outputText(" with an iron grip.  “<i>I guess I’ll just have to eat ya.</i>”\n\n");
 			}
+			
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 
 			// TODO: Theres some logical holes with where/what Izumi can know about the players actual gender (A Standard Problem I guess)
 
@@ -1482,6 +1486,7 @@ package classes.Scenes.Areas.HighMountains
 		public function touchThatFluffyHorn():void
 		{
 			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 3;
+			flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN]++;
 			
 			clearOutput();
 
@@ -1589,6 +1594,8 @@ package classes.Scenes.Areas.HighMountains
 			menu();
 			addButton(0, "Let Go", letGoAndLeaveYouSillyFuck);
 
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
+			
 			if (player.hasVagina())
 			{
 				addButton(1, "TribHorn", tribThatRockyHornGirl);
