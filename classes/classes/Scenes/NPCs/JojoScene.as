@@ -1607,8 +1607,8 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
 
-	outputText("As you start up a conversation with Jojo the two of you speak at length about nothing really important or noteworthy, just small talk until he decides to ask you where you came from.  You tell him about Ingnam and your family there and the tradition of sending a champion through the portal.  When he asks why anyone would choose to come here you tell him how legends say in years a champion wasn’t sent through the portal terrible things happened to the village.\n\n");
-	outputText("“<i>That Portal?</i>” Jojo asks, pointing to the very portal you stumbled through. You nod and he asks, “<i>So... what were you like in Ingnam?</i>”\n\n");
+	outputText("As you start up a conversation with Jojo, the two of you speak at length about nothing really important or noteworthy, just small talk.  That is until the monk brings up the subject of your background.  You tell him about Ingnam and your family there, and the tradition of sending a champion through the portal.  When he asks why anyone would choose to come here, you tell him how legends say that in years a champion wasn’t sent through the portal, terrible things happened to the village.\n\n");
+	outputText("“<i>That portal?</i>” Jojo asks, pointing to the very portal you stumbled through. You nod and he asks, “<i>So... what were you like in Ingnam?</i>”\n\n");
 
 	if (player.findPerk(PerkLib.HistoryAlchemist) >= 0)
 	{
@@ -1616,7 +1616,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	}
 	else if (player.findPerk(PerkLib.HistoryFighter) >= 0)
 	{
-		outputText("You tell Jojo about how, growing up, you got into fights a lot.  You name names and tell him why and how each of those little brats had got what was coming to them. You tell him how you had planned to join the village guard but that became a pipe dream when it was announced that you were the next champion.\n\n");
+		outputText("You tell Jojo about how, growing up, you got into fights a lot.  You name names and tell him why and how each of those little brats had got what was coming to them. You tell him how you had planned to join the village guard, but that became a pipe dream when it was announced that you were the next champion.\n\n");
 	}
 	else if (player.findPerk(PerkLib.HistoryHealer) >= 0)
 	{
@@ -1632,9 +1632,9 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	}
 	else if (player.findPerk(PerkLib.HistorySlut) >= 0)
 	{
-		outputText("You tell Jojo about how you spent time... making friends.  Jojo looks at you weirdly and when you tell him you had a lot of... friends.... \n\n");
-		outputText("“<i>That’s nice I guess [name] but didn’t you have aspirations beyond being... erm... popular?</i>” he questions.\n\n");
-		outputText("You laugh and tell him that you were just really good and making friends you know, instead of the truth about how much of a slut you actually were.\n\n");
+		outputText("You tell Jojo about how you spent time... making friends.  Jojo looks at you weirdly and when you tell him you had a lot of friends....\n\n");
+		outputText("“<i>That’s nice I guess [name] but didn’t you have aspirations beyond being, erm... popular?</i>” he questions.\n\n");
+		outputText("You laugh and tell him that you were just really good and making friends, instead of the truth about how much of a slut you actually were.\n\n");
 	}
 	else if (player.findPerk(PerkLib.HistorySlacker) >= 0)
 	{
@@ -1653,7 +1653,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 		outputText("Somehow, you don’t seem to have a defined history perk... <b>Please report a bug!</b>\n\n");
 	}
 
-	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk the two of you decide the conversation is over and part ways.\n\n");
+	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk, the two of you decide the conversation is over and part ways.\n\n");
 
 	menu();
 	doNext(13);
@@ -1671,9 +1671,9 @@ public function jojoTalkFactory():void
 
 	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0)
 	{
-		outputText("His ears perk at the news as you continue, telling him that you destroyed the factory controls which permanently shut down the factory but released a giant amount of corrupted seed into the surrounding environment.\n\n");
+		outputText("His ears perk at the news as you continue, telling him that you destroyed the factory controls, which permanently shut down the factory - but released an enormous quantity of corrupted fluids into the environment.\n\n");
 
-		outputText("Jojo cocks his head to the side as he considers his words carefully before speaking, “<i>I guess it seems like the right move.  Permanently disabling the factory would not only be a heavy blow to the demons but also give the rest of us time to reclaim the forest... but I don’t know.  If the release of fluids was as much as you say it was then there’s a chance that it’ll do more bad than good.  I’ve seen what corruption does to this world and that much corrupted fluid flooding out all at once could really hurt our cause. I’m not saying it was the wrong thing to do or lessening your accomplishment but you have to be careful, the demons aren’t just powerful, they’re deceptive.</i>”\n\n");
+		outputText("Jojo cocks his head to the side as he considers his words carefully before speaking, “<i>I guess it seems like the right move.  Permanently disabling the factory would not only deal a heavy blow to the demons, but also give the rest of us time to reclaim the forest... but I don’t know.  If the release of fluids was as much as you say it was then there’s a chance that it’ll do more bad than good.  I’ve seen what corruption does to this world and that much corrupted fluid flooding out all at once could really hurt our cause. I’m not saying it was the wrong thing to do, or lessening your accomplishment, but you have to be careful.  The demons aren’t just powerful, they’re deceptive.</i>”\n\n");
 
 		outputText("You listen to the monk’s council and despite his concerns he seems genuinely happy to hear you’ve struck a blow against the demonic regime.\n\n");
 	}
@@ -1697,8 +1697,8 @@ public function jojoTalkSandCave():void
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
 
-	outputText("You tell Jojo about your having found a cave that served as a base for the sand witches of the desert and meeting the Sand Mother. You tell him about the whole ordeal and he listens with wide eyes and jaws agape. When you tell him about meeting the Sand Mother Jojo gasps.\n\n");
-	outputText("“<i>Wait… so you mean to tell me that these sand witches are... are... allies of Marae?  But they’re s-so... sexual.</i>”  He seems confused but you tell him that sex itself is part of nature and that there is nothing wrong with it.  He agrees with you, but decries the way the sand witches use their power.\n\n");
+	outputText("You tell Jojo about your discovery of a cave that served as a base for the sand witches of the desert. You tell him about the whole ordeal, and he listens with wide eyes and jaw agape. When you tell him about meeting the Sand Mother Jojo gasps.\n\n");
+	outputText("“<i>Wait... so you mean to tell me that these sand witches a-are... allies of Marae?  But they’re s-so... sexual.</i>”  He seems genuinely confused, but you tell him that sex is part of nature after all, and that there is nothing wrong or shameful about it.  He agrees with you, but decries the way the sand witches use their power.\n\n");
 
 	//if PC raped Sand Mother
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1)
@@ -1716,7 +1716,7 @@ public function jojoTalkSandCave():void
 	else if (flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 && flags[kFLAGS.SAND_MOTHER_DEFEATED] == 0)
 	{
 		outputText("You tell Jojo about how the Sand Mother spoke with you once you had battled your way to her.  You tell him she was reasonable and how the whole thing was, in the end, a simple misunderstanding.\n\n"); 
-		outputText("He marvels at the way you handled the situation, “<i>Many would have expected her trying to talk to them to be a trap [name] and hurried to attack her but not you... that is... wow [name] you are truly a great individual.\n\n");
+		outputText("He marvels at the way you handled the situation, “<i>Many would have expected her trying to talk to them to be a trap [name] and hurried to attack her but not you... that is... wow [name], you are truly a great individual.\n\n");
 	}
 	
 	//[if {PC met bath slut} 
@@ -1851,11 +1851,12 @@ public function apparantlyJojoDOESlift():void
 	if (player.findPerk(PerkLib.ControlledBreath) < 0 && player.findPerk(PerkLib.CleansingPalm) < 0 && player.findPerk(PerkLib.Enlightened) < 0)
 	{
 		outputText("Jojo gives you a bright cheerful smile, “<i>Alright [name]... let’s begin.</i>”\n\n");
-		outputText("Jojo’s teaching style periodically switches between lecture and sparring.  When he explains a concept or a strike he guides you through it, before asking you to try it on him. He is patient but firm.  He doesn’t punish you when you make a mistake, instead, corrects you and asks you to try again.  He doesn’t allow you to give up, and his teaching style stops you from feeling frustrated.\n\n");
-		outputText("The entire session is intense and each brief lecture and demonstration serves as a quick break to stop your body from giving out and help you build endurance.  By the end of the training session you are covered in sweat, your lungs heaving for breath.\n\n");
+		outputText("Jojo’s teaching style periodically switches between lecture and sparring.  When he explains a concept or a strike, he guides you through it before asking you to try it on him. He is patient but firm.  He doesn’t punish you when you make a mistake, instead, corrects you and asks you to try again.  He doesn’t allow you to give up, and his teaching style stops you from feeling frustrated.\n\n");
+		outputText("The entire session is intense, and each brief lecture or demonstration serves as a quick break to stop your body from giving out, and help you build endurance.\n\n");
+		outputText("By the end of the training session you are covered in sweat, your lungs heaving for breath.\n\n");
 		outputText("As you bow to Jojo he bows back and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
 		
-		//fatigue(60);
+		fatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 5)
 		{
@@ -1874,7 +1875,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo switches up the way he is instructing you.  Largely due to your increased endurance, the two of you spend more time moving through forms together and practicing strikes and maneuvers.  When it comes time for a brief lecture, he breaks out one of the few scrolls he has from his order and tells you what he knows about the contents.\n\n");
 		outputText("Before too long, the two of you are up again and practicing forms and mock strikes, even sparring briefly from time to time.  By the end of the intense training session you are covered in sweat... but so is Jojo, and neither of you are out of breath. As you bow to Jojo he returns the gesture and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
 		
-		//fatigue(60);
+		fatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 10)
 		{
@@ -1894,7 +1895,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Then the two of you are back up, sweeping gracefully through forms and striking invisible enemies with fierce blows.  By the end of the intense training session both you and Jojo are tired, having trained to both of your limits.\n\n");
 		outputText("As the two of you give each other decidedly shaky bows, Jojo says, “ < i > Great effort [name], you are... wow... I need a rest. I’ve earned it. < / i > ”  The two of you share a laugh and end you training.\n\n");
 		
-		//fatigue(60);
+		fatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 16 && player.inte >= 70)
 		{
@@ -1914,7 +1915,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo smiles, “<i>In all honesty [name], I should be asking you to teach me, but I’ll do my best.</i>”\n\n");
 		outputText("There are no lectures. Neither you nor Jojo are masters, but as of right now, the two of you have exhausted the small store of knowledge available to you from the Celestial Lotus.  You and Jojo instead practice to exhaustion, heaving and panting for breath, whilst still finding time to enjoy each others company.\n\n");
 		
-		//fatigue(60);
+		fatigue(60);
 
 		//{each scene only shows if the follower is there}
 		var enlightenedBlurbs:Array = new Array();
