@@ -4150,7 +4150,7 @@ public function spellCleansingPalm():void
 	var corruptionMulti:Number = (monster.cor - 20) / 25;
 	if (corruptionMulti > 1.5) corruptionMulti = 1.5;
 	
-	temp = int((player.inte / 3 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
+	temp = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
 	
 	if (temp > 0)
 	{
