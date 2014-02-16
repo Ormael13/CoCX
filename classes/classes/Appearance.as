@@ -1414,7 +1414,6 @@
 				"cooter",
 				"twat",
 				"cunt",
-				"bush",
 				"snatch",
 				"fuck-hole",
 				"muff"];
