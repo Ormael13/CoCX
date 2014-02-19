@@ -8545,7 +8545,7 @@
 			{
 				//Get warned!
 				if(flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
-					outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  Perhaps you should cut back on all the Ferret Fruit?");
+					outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
 					player.inte -= 5 + rand(3);
 					if(player.inte < 5) player.inte = 5;
 					flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;

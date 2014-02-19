@@ -1629,7 +1629,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	else if (player.findPerk(PerkLib.HistoryScholar) >= 0)
 	{
 		outputText("You tell Jojo about your insatiable thirst for knowledge and how you spent a lot of time in school. You tell him the story about how you ‘convinced’ Mr. ");
-		if (kGAMECLASS.silly) outputText("Savin");
+		if (kGAMECLASS.silly()) outputText("Savin");
 		else outputText("Sellet")
 		outputText(" to let you read some of the rare books in his collection, skipping over how much begging and pleading was actually involved.\n\n");
 	}
