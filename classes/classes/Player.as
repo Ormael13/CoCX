@@ -436,12 +436,14 @@ use namespace kGAMECLASS;
 				if (skinType == 1)
 					race = "fox-morph";
 				else
-					race = mf("fox-morph", "fox-girl");
+					race = "fox-" + mf("morph", "girl");
 			}
 			if (ferretScore() >= 4)
 			{
-				if (skinType == 1) race = "ferret-morph";
-				else race = mf("fox-morph", "fox-girl");
+				if (skinType == 1)
+					race = "ferret-morph";
+				else
+					race = "ferret-" + mf("morph", "girl");
 			}
 			if (kitsuneScore() >= 4)
 			{
