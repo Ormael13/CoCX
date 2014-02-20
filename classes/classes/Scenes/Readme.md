@@ -9,20 +9,23 @@ How to work with refactored Scenes, Monsters, and Items?
 
 ### Basics
 
-In the simplest case you just need to subclass Monster class and call all `init01Name()`..`init14____Drop()` functions using
-function docs and existing monsters as reference and example.
-
-Numbered `init` functions are **required** (they include basic appearance features and all core params), the ones
-starting with `initX_` are optional (e.g. special attacks, horns, tails, wings etc).
+Go to Monster constructor, copy its contents, uncomment, and follow the instructions.
+There is a number of fields that **MUST** be initialized. If you miss them, you will get a **/!\\BUG** message during
+ the combat.
 
 The resulting monster will have a default AI (which is randomly choose between physical attack or one of specials),
 will not have any victory/loss rape scenes (but still will drop gems and xp / take gems and 8 hours).
 
-To start the combat with that monster in the scene, just call `startCombat(new MyMonster());`.
+To start the combat with that monster in the scene, just call `startCombat(new MyMonster());`. You can also assign
+monster to a variable and modify it.
+
+You also should add the monster to `Scenes/Explore/ExploreDebug.allMonsters` array, so it will be combated in that debug
+scene. You can put it in the beginning of the array to quicky test it in debug mode. In that test also check the
+inspection and compare it with description.
 
 ### Special attacks
 
-Default monsters can have up to 3 special attacks which could be set up by `initX_Specials(special1:*=0,special2:*=0,special3:*=0)`.
+Default monsters can have up to 3 special attacks which could be set up by `initSpecials(special1:*=0,special2:*=0,special3:*=0)`.
 Arguments could be either 5xxx event codes (old-style, use **ONLY** for existing special) or function references.
 
 Any special attack at all the return points should call `combatRoundOver()` to mark end of monster action.
@@ -109,8 +112,24 @@ Generally 99% of monsters should subclass classes.Monster directly. However ther
  parameter like `noInit:Boolean=false` and if it is `true`, no (or partial) `initXXXX` methods are called. In subclass
  I call `super(true)` and re-init it as I want.
 3. The other approach (when monster is a *very* slight modification of another) is just subclass the parent monster
- and after `super()` call several `initXXXX` methods to update it. Don't forget to a) change the name. b) to **change**
-  gender, you need first call `init02Genderless()` to kill the genitals created in superclass and then setup the gender.
+ and after `super()` change some properties/fields to update it. Don't forget to a) change the name. b) to **change**
+ gender, you need first call `initGenderless()` to kill the genitals created in superclass and then setup the gender.
+
+## Monster event hooks
+
+If you want to You can set up event hooks that replace default behaviour by setting properties in monster instance.
+These hooks are:
+* `monster.onWon = Function(hpVictory:Boolean,pcCameWorms:Boolean)` to replace monster-won code. If the field is not null,
+ default behaviour is canceled, and you have to finish the combat manually.
+* `monster.onDefeated = Function(hpVictory:Boolean)` to replace monster-defeated code. Same as with `onWon`.
+* `monster.onPcRunAttempt = Function()` to replace various checks and possible combat end when player hits "Run".
+
+See property docs for more details.
+
+### Note
+
+Event hooks should be used in scenes to modify default monsters, and not in monster classes themselves. Monster classes
+should override the functions `won`, `defeated` to change behaviour from default.
 
 # Item classes
 

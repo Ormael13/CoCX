@@ -232,7 +232,7 @@
 			//// 2.3. Hermaphrodite
 			//// Just create cocks and vaginas. Last call determines pronouns.
 			//// 2.4. Genderless
-			///*REQUIRED*/ initGenderless();
+			///*REQUIRED*/ initGenderless(); // this functions removes genitals!
 
 			//// Note for 2.: during initialization pronouns are set in:
 			//// * createCock: he/him/his
@@ -474,6 +474,8 @@
 
 		protected function initGenderless():void
 		{
+			this.cocks = [];
+			this.vaginas = [];
 			initedGenitals = true;
 			if (plural) {
 				this.pronoun1 = "they";
