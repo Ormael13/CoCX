@@ -1,13 +1,9 @@
 ﻿package classes.Scenes.Areas.HighMountains {
-import classes.BaseContent;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.StatusAffects;
 
-public class MinervaScene extends BaseContent {
+	public class MinervaScene extends BaseContent {
 //const MINERVA_LOVE:int = 813;
 //const MINERVA_BACKSTORY:int = 814;
 //const MINERVA_BACKSTORY_LEARNED:int = 815;

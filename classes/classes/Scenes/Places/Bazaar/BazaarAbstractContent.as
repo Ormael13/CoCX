@@ -3,7 +3,7 @@
  */
 package classes.Scenes.Places.Bazaar
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.Bazaar;
 

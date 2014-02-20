@@ -1,12 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre
 {
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.PerkLib;
-import classes.PerkType;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
-/**
+	/**
 	 * Whee!
 	 * (No @ tag for coder)
 	 * @author Gedan

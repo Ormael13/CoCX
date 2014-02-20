@@ -1,5 +1,7 @@
 ﻿package classes
 {
+	import classes.internals.Utils;
+
 	public class VaginaClass
 	{
 		//constructor
@@ -25,7 +27,6 @@
 		//5 - Black bugvag
 		public var type:int = 0;
 		public var virgin:Boolean = true;
-		//Used to determine thickness of knot relative to normal thickness
 		//Used during sex to determine how full it currently is.  For multi-dick sex.
 		public var fullness:Number = 0;
 		public var labiaPierced:Number = 0;
@@ -34,7 +35,30 @@
 		public var clitPierced:Number = 0;
 		public var clitPShort:String = "";
 		public var clitPLong:String = "";
-		
+
+		public function validate():String
+		{
+			var error:String = "";
+			error += Utils.validateNonNegativeNumberFields(this, "VaginaClass.validate", [
+				"vaginalWetness", "vaginalLooseness", "type",
+				"fullness", "labiaPierced", "clitPierced"
+			]);
+			if (labiaPierced) {
+				if (labiaPShort == "") error += "Labia pierced but labiaPShort = ''. ";
+				if (labiaPLong == "") error += "Labia pierced but labiaPLong = ''. ";
+			} else {
+				if (labiaPShort != "") error += "Labia not pierced but labiaPShort = '" + labiaPShort + "'. ";
+				if (labiaPLong != "") error += "Labia not pierced but labiaPLong = '" + labiaPShort + "'. ";
+			}
+			if (clitPierced) {
+				if (clitPShort == "") error += "Clit pierced but labiaPShort = ''. ";
+				if (clitPLong == "") error += "Clit pierced but labiaPLong = ''. ";
+			} else {
+				if (clitPShort != "") error += "Clit not pierced but labiaPShort = '" + labiaPShort + "'. ";
+				if (clitPLong != "") error += "Clit not pierced but labiaPLong = '" + labiaPShort + "'. ";
+			}
+			return error;
+		}
 		
 		public function wetnessFactor():Number {
 			if(vaginalWetness == 0) return 1.25;

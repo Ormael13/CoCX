@@ -3,15 +3,12 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class AkbalScene extends BaseContent
+	public class AkbalScene extends BaseContent
 	{
 		public function AkbalScene()
 		{

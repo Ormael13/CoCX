@@ -3,7 +3,7 @@
  */
 package classes.Scenes.Areas.Bog
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class ChameleonGirlScene extends BaseContent

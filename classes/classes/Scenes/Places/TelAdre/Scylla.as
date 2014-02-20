@@ -1,11 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class Scylla extends TelAdreAbstractContent{
+	public class Scylla extends TelAdreAbstractContent{
 
 	public function Scylla()
 	{

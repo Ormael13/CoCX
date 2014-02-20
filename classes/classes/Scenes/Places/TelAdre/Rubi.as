@@ -1,9 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-	import classes.PerkLib;
 
 	public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){

@@ -1,12 +1,7 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC_Settings;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Appearance;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.StatusAffects;
 
 	public class Urta extends NPCAwareContent {
 

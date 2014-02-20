@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.Bog {
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-public class FrogGirlScene extends BaseContent {
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+
+	public class FrogGirlScene extends BaseContent {
 
 	public function FrogGirlScene()
 	{

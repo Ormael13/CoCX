@@ -1,15 +1,8 @@
 package classes.Scenes.Areas.Lake
 {
-	import classes.Appearance;
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
-import classes.internals.Utils;
+	import classes.*;
+	import classes.internals.*;
 
-	/**
-	 * ...
-	 * @author aimozg
-	 */
 	public class GooGirl extends Monster
 	{
 		/*Fight-
@@ -154,25 +147,46 @@ import classes.internals.Utils;
 		{
 			if (noInit) return;
 			var playerHasBigBoobs:Boolean = player.biggestTitSize() >= 3;
-			init01Names("the ", "goo-girl", "googirl", "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + game.biggestBreastSizeDescript() + ".") : ""));
-			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL, 9001);
-			init03BreastRows(playerHasBigBoobs ? player.biggestTitSize() : 3);
-			init04Ass(ANAL_LOOSENESS_TIGHT, ANAL_WETNESS_SLIME_DROOLING, 9001);
-			init05Body(rand(8) + 70, HIP_RATING_AMPLE, BUTT_RATING_LARGE, LOWER_BODY_TYPE_GOO);
+			this.a = "the ";
+			this.short = "goo-girl";
+			this.imageName = "googirl";
+			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + game.biggestBreastSizeDescript() + ".") : "");
+			// this.long = false;
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 9001, 0, 0, 0);
+			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.createStatusAffect(StatusAffects.BonusACapacity,9001,0,0,0);
+			this.tallness = rand(8) + 70;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.lowerBody = LOWER_BODY_TYPE_GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
-			init06Skin(tone, SKIN_TYPE_GOO);
-			init07Hair(tone, 12 + rand(10));
-			init08Face();
-			init09PrimaryStats(25, 25, 20, 30, 50, 40, 10);
-			init10Weapon("hands", "slap");
-			init11Armor("gelatinous skin");
-			init12Combat(40, 45, .75, Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(3, rand(5) + 1);
-			init14ChainedDrop()
-					.add(weapons.PIPE,1/10)
+			this.skinTone = tone;
+			this.skinType = SKIN_TYPE_GOO;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_GOO];
+			this.skinAdj = "goopey";
+			this.hairColor = tone;
+			this.hairLength = 12 + rand(10);
+			initStrTouSpeInte(25, 25, 20, 30);
+			initLibSensCor(50, 40, 10);
+			this.weaponName = "hands";
+			this.weaponVerb="slap";
+			this.armorName = "gelatinous skin";
+			this.bonusHP = 40;
+			this.lust = 45;
+			this.lustVuln = .75;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 3;
+			this.gems = rand(5) + 1;
+			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.WETCLTH,1/2)
 					.elseDrop(useables.GREENGL);
-			initX_Specials(5040, 5039, 5039);
+			this.special1 = 5040;
+			this.special2 = 5039;
+			this.special3 = 5039;
+			checkMonster();
 		}
 
 //Color types are presented as [Blue slimes/Purple Slimes/Clear Slimes]

@@ -1,27 +1,20 @@
 package classes.Scenes.Areas.Bog
 {
-	import classes.Appearance;
-	import classes.Monster;
-import classes.StatusAffects;
-import classes.internals.Utils;
+	import classes.*;
 
-	/**
-	 * ...
-	 * @author aimozg
-	 */
 	public class ChameleonGirl extends Monster
 	{
 
 		public function chameleonTongueAttack():void
 		{
-			setWeaponName("tongue");
-			setWeaponVerb("tongue-slap");
-			setWeaponAttack(10);
+			this.weaponName = "tongue";
+			this.weaponVerb = "tongue-slap";
+			this.weaponAttack = 10;
 			createStatusAffect(StatusAffects.Attacks, 1, 0, 0, 0);
 			eAttack();
-			setWeaponAttack(30);
-			setWeaponName("claws");
-			setWeaponVerb("claw");
+			this.weaponAttack = 30;
+			this.weaponName = "claws";
+			this.weaponVerb = "claw";
 			combatRoundOver();
 		}
 
@@ -127,20 +120,39 @@ import classes.internals.Utils;
 		public function ChameleonGirl()
 		{
 			var skinToneAdj:Array = randomChoice(SKIN_VARIATIONS);
-			init01Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
-			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
-			init03BreastRows("B");
-			init04Ass(ANAL_LOOSENESS_NORMAL, ANAL_WETNESS_DRY);
-			init05Body(rand(2) + 68, HIP_RATING_AMPLE + 2, BUTT_RATING_LARGE);
-			init06Skin(skinToneAdj[0], SKIN_TYPE_PLAIN, "skin", skinToneAdj[1]);
-			init07Hair("black", 15);
-			init08Face();
-			init09PrimaryStats(65, 65, 95, 85, 50, 45, 50);
-			init10Weapon("claws", "claw", 30);
-			init11Armor("skin", 20);
-			init12Combat(350, 30, .25, TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(14, 10 + rand(50));
-			skipInit(14);
+			this.a = "the ";
+			this.short = "chameleon girl";
+			this.imageName = "chameleongirl";
+			this.long = "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			createBreastRow(Appearance.breastCupInverse("B"));
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.tallness = rand(2) + 68;
+			this.hipRating = HIP_RATING_AMPLE + 2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = skinToneAdj[0];
+			this.skinType = SKIN_TYPE_PLAIN;
+			this.skinDesc = "skin";
+			this.skinAdj = skinToneAdj[1];
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(65, 65, 95, 85);
+			initLibSensCor(50, 45, 50);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 30;
+			this.armorName = "skin";
+			this.armorDef = 20;
+			this.bonusHP = 350;
+			this.lust = 30;
+			this.lustVuln = .25;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 14;
+			this.gems = 10 + rand(50);
+			this.drop = NO_DROP;
+			checkMonster();
 		}
 
 	}

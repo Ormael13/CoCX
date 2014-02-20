@@ -1,12 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest{
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class TentacleBeastScene extends BaseContent{
+	public class TentacleBeastScene extends BaseContent{
 
 
 	public function TentacleBeastScene()

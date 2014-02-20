@@ -1,18 +1,7 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class HellHound extends Monster
 	{
@@ -145,28 +134,51 @@ import classes.StatusAffects;
 		{
 			if (noInit) return;
 			trace("HellHound Constructor!");
-			init01Names("the ", "hellhound", "hellhound", "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.");
-			init02Male([new Cock(8,2,CockTypesEnum.DOG),new Cock(8,2,CockTypesEnum.DOG)],2,4,5);
-			init03BreastRows([0],[0],[0]);
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
-			init05Body(47,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_DOG);
-			init06Skin("black",SKIN_TYPE_FUR);
-			init07Hair("red",3);
-			init08Face();
-			init09PrimaryStats(55,60,40,1,95,20,100);
-			init10Weapon("claws","claw",10);
-			init11Armor("thick fur");
-			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(5,10+rand(10));
-			init14WeightedDrop()
-					.add(consumables.CANINEP, 3)
+			this.a = "the ";
+			this.short = "hellhound";
+			this.imageName = "hellhound";
+			this.long = "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.";
+			// this.plural = false;
+			this.createCock(8,2,CockTypesEnum.DOG);
+			this.createCock(8,2,CockTypesEnum.DOG);
+			this.balls = 2;
+			this.ballSize = 4;
+			this.cumMultiplier = 5;
+			// this.hoursSinceCum = 0;
+			this.createBreastRow();
+			this.createBreastRow();
+			this.createBreastRow();
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = 47;
+			this.hipRating = HIP_RATING_AVERAGE;
+			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.lowerBody = LOWER_BODY_TYPE_DOG;
+			this.skinTone = "black";
+			this.skinType = SKIN_TYPE_FUR;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.hairColor = "red";
+			this.hairLength = 3;
+			initStrTouSpeInte(55, 60, 40, 1);
+			initLibSensCor(95, 20, 100);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 10;
+			this.armorName = "thick fur";
+			this.lust = 25;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 5;
+			this.gems = 10+rand(10);
+			this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
 					.addMany(1, consumables.BULBYPP,
 							consumables.KNOTTYP,
 							consumables.BLACKPP,
 							consumables.DBLPEPP,
 							consumables.LARGEPP);
-			initX_Tail(TAIL_TYPE_DOG);
-			initX_Specials(hellhoundFire,hellhoundScent);
+			this.tailType = TAIL_TYPE_DOG;
+			this.special1 = hellhoundFire;
+			this.special2 = hellhoundScent;
+			checkMonster();
 		}
 
 	}

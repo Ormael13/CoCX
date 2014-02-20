@@ -1,10 +1,9 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.*;
 
-/**
+	/**
 	 * ...
 	 * @author ...
 	 */
@@ -333,21 +332,44 @@ import classes.StatusAffects;
 
 		public function GnollSpearThrower()
 		{
-			init01Names("the ", "gnoll spear-thrower", "gnollspearthrower", "You are fighting a gnoll.  An amalgam of voluptuous, sensual lady and snarly, pissed off hyena, she clearly intends to punish you for trespassing.  Her dark-tan, spotted hide blends into a soft cream-colored fur covering her belly and two D-cup breasts, leaving two black nipples poking through the fur.  A crude loincloth is tied around her waist, obscuring her groin from view.  A leather strap cuts between her heavy breasts, holding a basket of javelins on her back.  Large, dish-shaped ears focus on you, leaving no doubt that she can hear every move you make.  Sharp, dark eyes are locked on your body, filled with aggression and a hint of lust.");
-			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
-			init03BreastRows("D");
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,25);
-			init05Body(72,HIP_RATING_AMPLE,BUTT_RATING_TIGHT);
-			init06Skin("tawny",SKIN_TYPE_FUR);
-			init07Hair("black",22);
-			init08Face();
-			init09PrimaryStats(85,60,100,50,65,45,60);
-			init10Weapon("teeth","bite",0,"",25);
-			init11Armor("skin",2);
-			init12Combat(250,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(10,10 + rand(5));
-			init14ChainedDrop().add(consumables.GROPLUS,1/5).add(consumables.INCUBID,1/2).elseDrop(consumables.BROWN_D);
-			initX_Specials(hyenaJavelinAttack,hyenaSnapKicku,hyenaArousalAttack);
+			this.a = "the ";
+			this.short = "gnoll spear-thrower";
+			this.imageName = "gnollspearthrower";
+			this.long = "You are fighting a gnoll.  An amalgam of voluptuous, sensual lady and snarly, pissed off hyena, she clearly intends to punish you for trespassing.  Her dark-tan, spotted hide blends into a soft cream-colored fur covering her belly and two D-cup breasts, leaving two black nipples poking through the fur.  A crude loincloth is tied around her waist, obscuring her groin from view.  A leather strap cuts between her heavy breasts, holding a basket of javelins on her back.  Large, dish-shaped ears focus on you, leaving no doubt that she can hear every move you make.  Sharp, dark eyes are locked on your body, filled with aggression and a hint of lust.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,25,0,0,0);
+			this.tallness = 72;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "tawny";
+			this.skinType = SKIN_TYPE_FUR;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.hairColor = "black";
+			this.hairLength = 22;
+			initStrTouSpeInte(85, 60, 100, 50);
+			initLibSensCor(65, 45, 60);
+			this.weaponName = "teeth";
+			this.weaponVerb="bite";
+			this.weaponAttack = 0;
+			this.weaponPerk = "";
+			this.weaponValue = 25;
+			this.armorName = "skin";
+			this.armorDef = 2;
+			this.bonusHP = 250;
+			this.lust = 30;
+			this.lustVuln = .35;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 10;
+			this.gems = 10 + rand(5);
+			this.drop = new ChainedDrop().add(consumables.GROPLUS,1/5).add(consumables.INCUBID,1/2).elseDrop(consumables.BROWN_D);
+			this.special1 = hyenaJavelinAttack;
+			this.special2 = hyenaSnapKicku;
+			this.special3 = hyenaArousalAttack;
+			checkMonster();
 		}
 	}
 }

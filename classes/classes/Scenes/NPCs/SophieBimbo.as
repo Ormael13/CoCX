@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.GlobalFlags.kGAMECLASS;
 
-public class SophieBimbo extends NPCAwareContent
+	public class SophieBimbo extends NPCAwareContent
 	{
 
 		public function SophieBimbo()

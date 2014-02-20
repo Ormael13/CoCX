@@ -1,17 +1,7 @@
 ﻿package classes.Scenes.Areas.Desert
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class Naga extends Monster
 	{
@@ -107,26 +97,43 @@ import classes.StatusAffects;
 		{
 			if (noInit) return;
 			trace("Naga Constructor!");
-			init01Names("the ", "naga", "naga", "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, poisonous fangs and a long forked tongue moving rapidly as she hisses at you.");
-			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,40);
-			init03BreastRows("C");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
-			init05Body("5'10",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_NAGA);
-			init06Skin("mediterranean-toned");
-			init07Hair("brown",16);
-			init08Face();
-			init09PrimaryStats(28,20,35,42,55,55,40);
-			init10Weapon("fist","punch",3);
-			init11Armor("scales",5);
-			init12Combat(0,30,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(2,rand(5) + 8);
-			init14WeightedDrop().
+			this.a = "the ";
+			this.short = "naga";
+			this.imageName = "naga";
+			this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, poisonous fangs and a long forked tongue moving rapidly as she hisses at you.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("C"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.tallness = 5*12+10;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.lowerBody = LOWER_BODY_TYPE_NAGA;
+			this.skinTone = "mediterranean-toned";
+			this.hairColor = "brown";
+			this.hairLength = 16;
+			initStrTouSpeInte(28, 20, 35, 42);
+			initLibSensCor(55, 55, 40);
+			this.weaponName = "fist";
+			this.weaponVerb="punch";
+			this.weaponAttack = 3;
+			this.armorName = "scales";
+			this.armorDef = 5;
+			this.lust = 30;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 2;
+			this.gems = rand(5) + 8;
+			this.drop = new WeightedDrop().
 					add(null,1).
 					add(consumables.REPTLUM,5).
 					add(consumables.SNAKOIL,4);
-			initX_Specials(nagaPoisonBiteAttack,nagaConstrict,nagaTailWhip);
-
-
+			this.special1 = nagaPoisonBiteAttack;
+			this.special2 = nagaConstrict;
+			this.special3 = nagaTailWhip;
+			checkMonster();
 		}
 
 	}

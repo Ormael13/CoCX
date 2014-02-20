@@ -1,5 +1,5 @@
 ﻿package classes.Scenes.Areas.Plains{
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class BunnyGirl extends BaseContent{

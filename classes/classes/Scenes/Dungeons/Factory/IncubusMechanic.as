@@ -1,11 +1,9 @@
 package classes.Scenes.Dungeons.Factory
 {
-	import classes.CoC;
-	import classes.Cock;
+	import classes.*;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-		
+	import classes.internals.*;
+
 	public class IncubusMechanic extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void
@@ -44,23 +42,48 @@ package classes.Scenes.Dungeons.Factory
 		}
 
 		public function IncubusMechanic() {
-			init01Names("the ", "incubus mechanic", "incubusmechanic", "The demon before you is clad only in cut-off denim overalls.  Covered in stains of oil and other strange fluids, they appear to be in pretty rough shape.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, contrasting with the slovenly appearance of his clothing.  His face is rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He wears a narrow goatee on his chin that is kept skillfully braided.  A cocky smile always seems to grace his features, giving him an air of supreme confidence.");
-			init02Male(new Cock(12,1.75,CockTypesEnum.DEMON),2,2,3);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(9) + 70,HIP_RATING_AMPLE,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_DEMONIC_CLAWS);
-			init06Skin("light purple");
-			init07Hair("black",12);
-			init08Face(faceType,earType,tongueType,eyeType);
-			init09PrimaryStats(65,40,45,85,80,70,80);
-			init10Weapon("claws","claw",10,"",150);
-			init11Armor("demonic skin",10);
-			init12Combat(150,50,.5,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(8,rand(25)+10);
-			init14FixedDrop(consumables.GROPLUS);
-			initX_Specials(11035,11036);
-			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
+			this.a = "the ";
+			this.short = "incubus mechanic";
+			this.imageName = "incubusmechanic";
+			this.long = "The demon before you is clad only in cut-off denim overalls.  Covered in stains of oil and other strange fluids, they appear to be in pretty rough shape.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, contrasting with the slovenly appearance of his clothing.  His face is rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He wears a narrow goatee on his chin that is kept skillfully braided.  A cocky smile always seems to grace his features, giving him an air of supreme confidence.";
+			// this.plural = false;
+			this.createCock(12,1.75,CockTypesEnum.DEMON);
+			this.balls = 2;
+			this.ballSize = 2;
+			this.cumMultiplier = 3;
+			// this.hoursSinceCum = 0;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(9) + 70;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+			this.skinTone = "light purple";
+			this.hairColor = "black";
+			this.hairLength = 12;
+			initStrTouSpeInte(65, 40, 45, 85);
+			initLibSensCor(80, 70, 80);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 10;
+			this.weaponPerk = "";
+			this.weaponValue = 150;
+			this.armorName = "demonic skin";
+			this.armorDef = 10;
+			this.bonusHP = 150;
+			this.lust = 50;
+			this.lustVuln = .5;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 8;
+			this.gems = rand(25)+10;
+			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
+			this.special1 = 11035;
+			this.special2 = 11036;
+			this.tailType = TAIL_TYPE_DEMONIC;
+			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingDesc = "tiny hidden";
+			checkMonster();
 		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
-import classes.StatusAffects;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.

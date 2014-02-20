@@ -1,13 +1,9 @@
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Monster;
-	import classes.Player;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.ChainedDrop;
 
-/**
+	/**
 	 * ...
 	 * @author ...
 	 */
@@ -85,21 +81,46 @@ import classes.StatusAffects;
 
 		public function Basilisk()
 		{
-			init01Names("the ", "basilisk", "basilisk", "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  It has a thin but ropy build, its tightly muscled yellow underbelly the only part of its frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind its skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at its face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.");
-			init02Male([new Cock(6,2)],2,2);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
-			init05Body("6'2",HIP_RATING_SLENDER+1,BUTT_RATING_AVERAGE,LOWER_BODY_TYPE_LIZARD);
-			init06Skin("gray",SKIN_TYPE_SCALES);
-			init07Hair("none",0);
-			init08Face();
-			init09PrimaryStats(85,70,35,70,50,35,60);
-			init10Weapon("claws","claw",30);
-			init11Armor("scales",10,"",70);
-			init12Combat(200,30,.5,TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(12,rand(10) + 10);
-			init14ChainedDrop().add(consumables.REPTLUM,0.9);
-			initX_Tail(TAIL_TYPE_COW,0,0);
+			this.a = "the ";
+			this.short = "basilisk";
+			this.imageName = "basilisk";
+			this.long = "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  It has a thin but ropy build, its tightly muscled yellow underbelly the only part of its frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind its skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at its face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.";
+			// this.plural = false;
+			this.createCock(6,2);
+			this.balls = 2;
+			this.ballSize = 2;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.tallness = 6*12+2;
+			this.hipRating = HIP_RATING_SLENDER+1;
+			this.buttRating = BUTT_RATING_AVERAGE;
+			this.lowerBody = LOWER_BODY_TYPE_LIZARD;
+			this.skinTone = "gray";
+			this.skinType = SKIN_TYPE_SCALES;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_SCALES];
+			this.hairColor = "none";
+			this.hairLength = 0;
+			initStrTouSpeInte(85, 70, 35, 70);
+			initLibSensCor(50, 35, 60);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.weaponAttack = 30;
+			this.armorName = "scales";
+			this.armorDef = 10;
+			this.armorPerk = "";
+			this.armorValue = 70;
+			this.bonusHP = 200;
+			this.lust = 30;
+			this.lustVuln = .5;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 12;
+			this.gems = rand(10) + 10;
+			this.drop = new ChainedDrop().add(consumables.REPTLUM,0.9);
+			this.tailType = TAIL_TYPE_COW;
+			this.tailRecharge = 0;
+			checkMonster();
 		}
 		
 	}

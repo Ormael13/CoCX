@@ -1,15 +1,10 @@
 ﻿package classes.Scenes.Places{
-import classes.BaseContent;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-	import classes.Items.WeaponLib;
-	import classes.PerkLib;
 	import classes.Scenes.Places.Owca.*;
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class Owca extends BaseContent{
+	public class Owca extends BaseContent{
 
 	public function Owca()
 	{

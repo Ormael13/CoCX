@@ -6,7 +6,6 @@ import classes.PerkType;
 	import classes.StatusAffectType;
 	import classes.internals.Utils;
 
-	//import classes.CockClass;
 	public class Creature extends Utils
 	{
 
@@ -23,120 +22,48 @@ import classes.PerkType;
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
 		//"a" refers to how the article "a" should appear in text. 
-		public var short:String = "You";
-		public var a:String = "a ";
+		private var _short:String = "You";
+		private var _a:String = "a ";
+		public function get short():String { return _short; }
+		public function set short(value:String):void { _short = value; }
+		public function get a():String { return _a; }
+		public function set a(value:String):void { _a = value; }
 		public function get capitalA():String {
-			if (a.length == 0) return "";
-			return a.charAt(0).toUpperCase() + a.substr(1);
+			if (_a.length == 0) return "";
+			return _a.charAt(0).toUpperCase() + _a.substr(1);
 		}
-		
-		//Clothing/Armor
-		private var _armorName:String = "";
+
+		//Weapon
 		private var _weaponName:String = "";
 		private var _weaponVerb:String = "";
-		private var _armorDef:Number = 0;
-		private var _armorPerk:String = "";
 		private var _weaponAttack:Number = 0;
 		private var _weaponPerk:String = "";
 		private var _weaponValue:Number = 0;
+		public function get weaponName():String { return _weaponName; }
+		public function get weaponVerb():String { return _weaponVerb; }
+		public function get weaponAttack():Number { return _weaponAttack; }
+		public function get weaponPerk():String { return _weaponPerk; }
+		public function get weaponValue():Number { return _weaponValue; }
+		public function set weaponName(value:String):void { _weaponName = value; }
+		public function set weaponVerb(value:String):void { _weaponVerb = value; }
+		public function set weaponAttack(value:Number):void { _weaponAttack = value; }
+		public function set weaponPerk(value:String):void { _weaponPerk = value; }
+		public function set weaponValue(value:Number):void { _weaponValue = value; }
+		//Clothing/Armor
+		private var _armorName:String = "";
+		private var _armorDef:Number = 0;
+		private var _armorPerk:String = "";
 		private var _armorValue:Number = 0;
+		public function get armorName():String { return _armorName; }
+		public function get armorDef():Number { return _armorDef; }
+		public function get armorPerk():String { return _armorPerk; }
+		public function get armorValue():Number { return _armorValue; }
+		public function set armorValue(value:Number):void { _armorValue = value; }
+		public function set armorName(value:String):void { _armorName = value; }
+		public function set armorDef(value:Number):void { _armorDef = value; }
+		public function set armorPerk(value:String):void { _armorPerk = value; }
 
-
-		// since we cannot have public getters and protected setters...
-		protected function setArmorName(value:String):void
-		{
-			_armorName = value;
-		}
-
-		protected function setWeaponName(value:String):void
-		{
-			_weaponName = value;
-		}
-
-		protected function setWeaponVerb(value:String):void
-		{
-			_weaponVerb = value;
-		}
-
-		protected function setArmorDef(value:Number):void
-		{
-			_armorDef = value;
-		}
-
-		protected function setArmorPerk(value:String):void
-		{
-			_armorPerk = value;
-		}
-
-		protected function setWeaponAttack(value:Number):void
-		{
-			_weaponAttack = value;
-		}
-
-		protected function setWeaponPerk(value:String):void
-		{
-			_weaponPerk = value;
-		}
-
-		protected function setWeaponValue(value:Number):void
-		{
-			_weaponValue = value;
-		}
-
-		protected function setArmorValue(value:Number):void
-		{
-			_armorValue = value;
-		}
-
-		public function get weaponName():String
-		{
-			return _weaponName;
-		}
-
-		public function get weaponVerb():String
-		{
-			return _weaponVerb;
-		}
-
-		public function get weaponAttack():Number
-		{
-			return _weaponAttack;
-		}
-
-		public function get weaponPerk():String
-		{
-			return _weaponPerk;
-		}
-
-		public function get weaponValue():Number
-		{
-			return _weaponValue;
-		}
-
-		public function get armorName():String
-		{
-			return _armorName;
-		}
-
-		public function get armorDef():Number
-		{
-			return _armorDef;
-		}
-
-		public function get armorPerk():String
-		{
-			return _armorPerk;
-		}
-
-		public function get armorValue():Number
-		{
-			return _armorValue;
-		}
-
-
-
-
-//Primary stats
+		//Primary stats
 		public var str:Number = 0;
 		public var tou:Number = 0;
 		public var spe:Number = 0;
@@ -154,12 +81,15 @@ import classes.PerkType;
 		public var XP:Number = 0;
 		public var level:Number = 0;
 		public var gems:Number = 0;
+		public var additionalXP:Number = 0;
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		public var gender:int = GENDER_NONE;
-		public var tallness:Number = 0;
-		
+		private var _tallness:Number = 0;
+		public function get tallness():Number { return _tallness; }
+		public function set tallness(value:Number):void { _tallness = value; }
+
 		/*Hairtype
 		0- normal
 		1- feather
@@ -175,8 +105,12 @@ import classes.PerkType;
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		public var skinType:Number = SKIN_TYPE_PLAIN;
-		public var skinTone:String = "albino";
+		private var _skinType:Number = SKIN_TYPE_PLAIN;
+		public function get skinType():Number { return _skinType; }
+		public function set skinType(value:Number):void { _skinType = value; }
+		private var _skinTone:String = "albino";
+		public function get skinTone():String { return _skinTone; }
+		public function set skinTone(value:String):void { _skinTone = value; }
 		public var skinDesc:String = "skin";
 		public var skinAdj:String = "";
 		
@@ -241,9 +175,11 @@ import classes.PerkType;
 		10 - small dagron
 		11 - trogdor wings
 		12 - sandtrap wings*/
-		public var wingType:Number = WING_TYPE_NONE;
+		private var _wingType:Number = WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
-		
+		public function get wingType():Number { return _wingType; }
+		public function set wingType(value:Number):void { _wingType = value; }
+
 		/* lowerBody:
 		0 - normal
 		1 - hooves
@@ -369,7 +305,68 @@ import classes.PerkType;
 		public var clitLength:Number = .5;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
-		public var ass:AssClass = new AssClass();		
+		public var ass:AssClass = new AssClass();
+
+		public function validate():String
+		{
+			var error:String = "";
+			// 2. Value boundaries etc
+			// 2.1. non-negative Number fields
+			error += Utils.validateNonNegativeNumberFields(this,"Monster.validate",[
+				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
+				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
+				"skinType", "hairLength", "hairType",
+				"faceType", "earType", "tongueType", "eyeType",
+				"str", "tou", "spe", "inte", "lib", "sens", "cor",
+				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
+				// Same with armorDef, bonusHP, additionalXP
+				"weaponValue", "armorValue",
+				"lust", "fatigue",
+				"level", "gems",
+				"tailVenom", "tailRecharge", "horns",
+				"HP", "XP"
+			]);
+			// 2.2. non-empty String fields
+			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
+				"short",
+				"skinDesc",
+				"weaponName", "weaponVerb", "armorName"
+			]);
+			// 3. validate members
+			for each (var cock:Cock in cocks) {
+				error += cock.validate();
+			}
+			for each (var vagina:VaginaClass in vaginas) {
+				error += vagina.validate();
+			}
+			for each (var row:BreastRowClass in breastRows) {
+				error += row.validate();
+			}
+			error += ass.validate();
+			// 4. Inconsistent fields
+			// 4.1. balls
+			if (balls>0 && ballSize<=0){
+				error += "Balls are present but ballSize = "+ballSize+". ";
+			}
+			if (ballSize>0 && balls<=0){
+				error += "No balls but ballSize = "+ballSize+". ";
+			}
+			// 4.2. hair
+			if (hairLength <= 0) {
+				if (hairType != HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
+			}
+			// 4.3. tail
+			if (tailType == TAIL_TYPE_NONE) {
+				if (tailVenom != 0) error += "No tail but tailVenom = "+tailVenom+". ";
+			}
+			// 4.4. horns
+			if (hornType == HORNS_NONE){
+				if (horns>0) error += "horns > 0 but hornType = HORNS_NONE. ";
+			} else {
+				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
+			}
+			return error;
+		}
 		
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
@@ -645,7 +642,7 @@ import classes.PerkType;
 		{
 			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
 			statusAffects.push(newStatusAffect);
-			trace("createStatusAffect -> "+statusAffects.join(","));
+			//trace("createStatusAffect -> "+statusAffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
@@ -655,7 +652,7 @@ import classes.PerkType;
 			var counter:Number = findStatusAffect(stype);
 			if (counter < 0) return;
 			statusAffects.splice(counter, 1);
-			trace("removeStatusAffect -> "+statusAffects.join(","));
+			//trace("removeStatusAffect -> "+statusAffects.join(","));
 		}
 		
 		public function findStatusAffect(stype:StatusAffectType):Number
@@ -1302,7 +1299,7 @@ import classes.PerkType;
 				descript += "pierced";
 			}
 			//Goo - 1/4 chance
-			else if (skinType == 3 && rand(4) == 0)
+			else if (_skinType == 3 && rand(4) == 0)
 			{
 				rando = rand(3);
 				if (rando == 0)
@@ -2198,7 +2195,7 @@ import classes.PerkType;
 			//web also makes false!
 			if (findStatusAffect(StatusAffects.Web) >= 0)
 				return false;
-			return wingType == 2 || wingType == 7 || wingType == 9 || wingType == 11 || wingType == 12;
+			return _wingType == 2 || _wingType == 7 || _wingType == 9 || _wingType == 11 || _wingType == 12;
 
 		}
 		
@@ -2706,7 +2703,7 @@ import classes.PerkType;
 					}
 					catch (e:Error)
 					{
-						trace("Argument error in Creature[" + this.short + "]: " + e.message);
+						trace("Argument error in Creature[" + this._short + "]: " + e.message);
 					}
 					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
@@ -2994,10 +2991,10 @@ import classes.PerkType;
 				skinzilla += skinAdj + ", ";
 			//Fur handled a little differently since it uses
 			//haircolor
-			if (skinType == 1)
+			if (_skinType == 1)
 				skinzilla += hairColor + " ";
 			else
-				skinzilla += skinTone + " ";
+				skinzilla += _skinTone + " ";
 			skinzilla += skinDesc;
 			return skinzilla;
 		}

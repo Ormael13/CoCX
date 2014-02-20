@@ -1,10 +1,7 @@
 ﻿package classes.Scenes.Places.Bazaar{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.CockTypesEnum;
-import classes.CoC_Settings;
-import classes.Appearance;
-	import classes.ItemType;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class FapArena extends BazaarAbstractContent{
 

@@ -1,6 +1,6 @@
 ﻿package classes.Scenes.Places.TelAdre {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
 
 	public class Maddie extends TelAdreAbstractContent {
 public function Maddie(){

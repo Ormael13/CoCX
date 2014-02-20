@@ -1,16 +1,6 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	
-	/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
 
 	public class Jojo extends Monster
 	{
@@ -34,20 +24,38 @@
 		public function Jojo()
 		{
 			trace("Jojo Constructor!");
-			init01Names("", "Jojo", "jojo", "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.");
-			init02Male(new Cock(7.5,1.8),2,1,1,1000);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
-			init05Body("4'",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
-			init06Skin("white",SKIN_TYPE_FUR,"fur");
-			init07Hair("white",2);
-			init08Face();
-			init09PrimaryStats(35,40,65,55,15,40,0);
-			init10Weapon("paw","punch");
-			init11Armor("robes");
-			init12Combat(0,15,.9,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(4,rand(5) + 2);
-			initX_Specials(5021);
+			this.a = "";
+			this.short = "Jojo";
+			this.imageName = "jojo";
+			this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.";
+			// this.plural = false;
+			this.createCock(7.5,1.8);
+			this.balls = 2;
+			this.ballSize = 1;
+			this.cumMultiplier = 1;
+			this.hoursSinceCum = 1000;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = 4*12;
+			this.hipRating = HIP_RATING_SLENDER;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "white";
+			this.skinType = SKIN_TYPE_FUR;
+			this.skinDesc = "fur";
+			this.hairColor = "white";
+			this.hairLength = 2;
+			initStrTouSpeInte(35, 40, 65, 55);
+			initLibSensCor(15, 40, 0);
+			this.weaponName = "paw";
+			this.weaponVerb="punch";
+			this.armorName = "robes";
+			this.lust = 15;
+			this.lustVuln = .9;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 4;
+			this.gems = rand(5) + 2;
+			this.special1 = 5021;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
 			if(game.monk == 3) {
@@ -72,7 +80,8 @@
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
-			skipInit(14);
+			this.drop = NO_DROP;
+			checkMonster();
 		}
 
 	}

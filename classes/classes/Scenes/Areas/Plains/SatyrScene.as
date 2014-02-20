@@ -1,9 +1,6 @@
 ﻿package classes.Scenes.Areas.Plains{
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.BaseContent;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class SatyrScene extends BaseContent{

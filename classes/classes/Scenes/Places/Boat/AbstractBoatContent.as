@@ -3,7 +3,7 @@
  */
 package classes.Scenes.Places.Boat
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.Boat;
 

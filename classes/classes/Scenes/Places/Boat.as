@@ -3,15 +3,13 @@
  */
 package classes.Scenes.Places
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Lake.*;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.AnemoneScene;
+	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
-import classes.StatusAffects;
 
-public class Boat extends AbstractLakeContent
+	public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:Marae = new Marae();

@@ -1,14 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.BaseContent;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class SophieFollowerScene extends NPCAwareContent {
+	public class SophieFollowerScene extends NPCAwareContent {
 
 	public function SophieFollowerScene()
 	{

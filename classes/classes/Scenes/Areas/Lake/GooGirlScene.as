@@ -3,14 +3,11 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.CoC_Settings;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class GooGirlScene extends AbstractLakeContent
+	public class GooGirlScene extends AbstractLakeContent
 	{
 		public function GooGirlScene()
 		{

@@ -1,11 +1,9 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
 	import classes.Scenes.Areas.Swamp.SpiderMorphMob;
-import classes.StatusAffects;
 
-public class KihaFollower extends NPCAwareContent
+	public class KihaFollower extends NPCAwareContent
 	{
 
 		public function KihaFollower()

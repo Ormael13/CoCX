@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.Bazaar{
-import classes.GlobalFlags.kFLAGS;
-public class Lilium extends BazaarAbstractContent{
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Lilium extends BazaarAbstractContent{
 
 	public function Lilium()
 	{

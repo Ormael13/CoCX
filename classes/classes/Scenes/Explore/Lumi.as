@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Explore{
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
 
 	public class Lumi extends BaseContent{
 

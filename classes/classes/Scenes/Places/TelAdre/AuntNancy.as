@@ -1,5 +1,5 @@
 package classes.Scenes.Places.TelAdre {
-import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kFLAGS;
 
 //NECESSARY FLAGS:
 //263 - Met nancy

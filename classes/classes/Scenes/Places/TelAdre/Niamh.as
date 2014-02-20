@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-	import classes.Player;
-import classes.StatusAffects;
 
-public class Niamh extends TelAdreAbstractContent {
+	public class Niamh extends TelAdreAbstractContent {
 public function Niamh(){
 
 }

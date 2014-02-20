@@ -1,13 +1,8 @@
 ﻿package classes.Scenes.Places.Bazaar{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.CockTypesEnum;
-import classes.CoC_Settings;
-import classes.Appearance;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class Roxanne extends BazaarAbstractContent{
+	public class Roxanne extends BazaarAbstractContent{
 
 	public function Roxanne()
 	{

@@ -1,13 +1,10 @@
 ﻿package classes.Scenes.Areas.Swamp{
-import classes.BaseContent;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.TelAdre;
-import classes.StatusAffects;
 
-public class Rogar extends BaseContent{
+	public class Rogar extends BaseContent{
 
 	public function Rogar()
 	{

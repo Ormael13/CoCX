@@ -1,9 +1,8 @@
 ﻿package classes.Scenes.Places.Boat{
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class SharkGirlScene extends AbstractBoatContent{
+	public class SharkGirlScene extends AbstractBoatContent{
 
 	public function SharkGirlScene()
 	{

@@ -3,12 +3,10 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.*;
 	import classes.Items.Armors.LustyMaidensArmor;
-import classes.StatusAffects;
 
-public class FetishZealotScene extends AbstractLakeContent
+	public class FetishZealotScene extends AbstractLakeContent
 	{
 		public function FetishZealotScene()
 		{

@@ -1,14 +1,8 @@
 package classes.Scenes.Monsters
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	
-	/**
-	 * ...
-	 * @author aimozg
-	 */
+	import classes.*;
+	import classes.internals.*;
+
 	public class ImpLord extends Imp
 	{
 		//Special Attack 1
@@ -77,29 +71,47 @@ package classes.Scenes.Monsters
 		public function ImpLord()
 		{
 			super(true);
-			init01Names("the ", "imp lord", "implord", "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has no hair on his head, leaving his cold, lust-clouded, black eyes unobstructed.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works it's way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nThe greater imp, like most imps wears very little clothing, only a simple loincloth and satchel hang from his waist.  You also note that the imp has two barbell piercings in his nipples. The creature doesn't seem to have any weapons, aside from his sharp black finger nails.");
+			this.a = "the ";
+			this.short = "imp lord";
+			this.imageName = "implord";
+			this.long = "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has no hair on his head, leaving his cold, lust-clouded, black eyes unobstructed.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works it's way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nThe greater imp, like most imps wears very little clothing, only a simple loincloth and satchel hang from his waist.  You also note that the imp has two barbell piercings in his nipples. The creature doesn't seem to have any weapons, aside from his sharp black finger nails.";
+			// this.plural = false;
 			// Imps now only have demon dicks.
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
 			// shit out of any potions they can get their hands on.
-			init02Male(new Cock(rand(2)+11,2.5,CockTypesEnum.DEMON),2,1,3,20);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
-			init05Body(rand(14) + 40,HIP_RATING_BOYISH,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_HOOFED);
-			init06Skin("red");
-			init07Hair();
-			init08Face();
-			init09PrimaryStats(55,40,75,42,55,35,100);
-			init10Weapon("fist","punch",10);
-			init11Armor("leathery skin",5);
-			init12Combat(100,30,.65,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			init13Level(7,rand(15) + 25);
-			init14WeightedDrop().
+			this.createCock(rand(2)+11,2.5,CockTypesEnum.DEMON);
+			this.balls = 2;
+			this.ballSize = 1;
+			this.cumMultiplier = 3;
+			this.hoursSinceCum = 20;
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.tallness = rand(14) + 40;
+			this.hipRating = HIP_RATING_BOYISH;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.skinTone = "red";
+			initStrTouSpeInte(55, 40, 75, 42);
+			initLibSensCor(55, 35, 100);
+			this.weaponName = "fist";
+			this.weaponVerb="punch";
+			this.weaponAttack = 10;
+			this.armorName = "leathery skin";
+			this.armorDef = 5;
+			this.bonusHP = 100;
+			this.lust = 30;
+			this.lustVuln = .65;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 7;
+			this.gems = rand(15) + 25;
+			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,1).
 					add(consumables.LABOVA_,1).
 					add(consumables.INCUBID,6);
-			initX_Wings(WING_TYPE_IMP);
-			initX_Specials(5019);
-
+			this.wingType = WING_TYPE_IMP;
+			this.special1 = 5019;
+			checkMonster();
 		}
 		
 	}

@@ -3,11 +3,10 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.StatusAffects;
 
-public class FetishCultistScene extends AbstractLakeContent
+	public class FetishCultistScene extends AbstractLakeContent
 	{
 		public function FetishCultistScene()
 		{

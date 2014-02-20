@@ -1,9 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class IsabellaFollowerScene extends NPCAwareContent {
+	public class IsabellaFollowerScene extends NPCAwareContent {
 
 	public function IsabellaFollowerScene()
 	{

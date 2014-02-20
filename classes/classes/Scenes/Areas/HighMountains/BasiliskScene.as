@@ -3,13 +3,11 @@
  */
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class BasiliskScene extends BaseContent
+	public class BasiliskScene extends BaseContent
 	{
 		public function BasiliskScene()
 		{

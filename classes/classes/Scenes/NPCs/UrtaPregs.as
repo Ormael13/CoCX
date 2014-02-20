@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
+
 	public class UrtaPregs extends NPCAwareContent {
 
 		public function UrtaPregs()

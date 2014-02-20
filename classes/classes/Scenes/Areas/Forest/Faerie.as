@@ -1,12 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
 
-public class Faerie extends BaseContent{
+	public class Faerie extends BaseContent{
 
 	public function Faerie()
 	{

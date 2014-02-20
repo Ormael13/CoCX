@@ -1,11 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.Monster;
-	import classes.PerkLib;
+	import classes.*;
 	import classes.Scenes.Areas.HighMountains.Harpy;
-import classes.StatusAffects;
+	import classes.internals.*;
 
-/**
+	/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -258,25 +257,45 @@ import classes.StatusAffects;
 			super(true);
 			trace("Sophie Constructor!");
 		
-			init01Names("", "Sophie", "sophie", "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.");
-			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING_WIDE,40);
-			init03BreastRows("DD");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
-			init05Body("5'5",HIP_RATING_INHUMANLY_WIDE,BUTT_RATING_EXPANSIVE);
-			init06Skin("pink",SKIN_TYPE_PLAIN,"feathers");
-			init07Hair("pink",16);
-			init08Face();
-			init09PrimaryStats(55,40,110,60,60,50,60);
-			init10Weapon("talons","slashing talons",20);
-			init11Armor("feathers",5);
-			init12Combat(250,10,.3,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(11,20 + rand(25));
-			init14ChainedDrop()
-					.add(armors.W_ROBES,1/10)
+			this.a = "";
+			this.short = "Sophie";
+			this.imageName = "sophie";
+			this.long = "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("DD"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.tallness = 5*12+5;
+			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
+			this.buttRating = BUTT_RATING_EXPANSIVE;
+			this.skinTone = "pink";
+			this.skinType = SKIN_TYPE_PLAIN;
+			this.skinDesc = "feathers";
+			this.hairColor = "pink";
+			this.hairLength = 16;
+			initStrTouSpeInte(55, 40, 110, 60);
+			initLibSensCor(60, 50, 60);
+			this.weaponName = "talons";
+			this.weaponVerb="slashing talons";
+			this.weaponAttack = 20;
+			this.armorName = "feathers";
+			this.armorDef = 5;
+			this.bonusHP = 250;
+			this.lust = 10;
+			this.lustVuln = .3;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 11;
+			this.gems = 20 + rand(25);
+			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			initX_Wings(WING_TYPE_HARPY,"large feathery");
-			initX_Specials(harpyUberCharge,harpyTease);
-
+			this.wingType = WING_TYPE_HARPY;
+			this.wingDesc = "large feathery";
+			this.special1 = harpyUberCharge;
+			this.special2 = harpyTease;
+			checkMonster();
 		}
 
 	}

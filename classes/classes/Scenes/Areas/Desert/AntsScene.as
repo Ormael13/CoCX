@@ -3,16 +3,14 @@
  */
 package classes.Scenes.Areas.Desert
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Plains.Gnoll;
-import classes.StatusAffects;
 
-public class AntsScene extends BaseContent
+	public class AntsScene extends BaseContent
 	{
 		public function AntsScene()
 		{

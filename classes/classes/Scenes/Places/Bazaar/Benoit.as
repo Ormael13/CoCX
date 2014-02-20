@@ -1,8 +1,6 @@
 ﻿package classes.Scenes.Places.Bazaar {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
 //  TIMES_IN_BENOITS:int = 562;
 //  BENOIT_AFFECTION:int = 563;

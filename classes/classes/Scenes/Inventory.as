@@ -3,18 +3,14 @@
  */
 package classes.Scenes
 {
-	import classes.BaseContent;
-	import classes.CoC_Settings;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemSlotClass;
-	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Inventory extends BaseContent
 	{

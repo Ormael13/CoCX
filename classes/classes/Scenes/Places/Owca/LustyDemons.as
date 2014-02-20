@@ -3,23 +3,19 @@
  */
 package classes.Scenes.Places.Owca
 {
-	import classes.CoC;
-	import classes.Cock;
-	import classes.CockTypesEnum;
-	import classes.Monster;
-import classes.StatusAffects;
+	import classes.*;
 
-public class LustyDemons extends Monster
+	public class LustyDemons extends Monster
 	{
 
 		override protected function performCombatAction():void
 		{
 			str = 40;
-			setWeaponAttack(10);
+			this.weaponAttack = 10;
 			createStatusAffect(StatusAffects.Attacks, 4, 0, 0, 0);
 			eAttack();
 			str = 80;
-			setWeaponAttack(40);
+			this.weaponAttack = 40;
 			eAttack();
 			combatRoundOver();
 		}
@@ -49,26 +45,50 @@ public class LustyDemons extends Monster
 
 		public function LustyDemons()
 		{
-			init01Names("the ", "lusty demons", "demonmob", "You're facing a group of thirty demons of various kinds.  Imps, incubi and succubi of all sizes and colors are encircling you, doing their best to show their genitals or their gigantic rows of breasts, often both.  You can see an impressive number of towering cocks, drooling pussies, and jiggling tits wiggle around as they move.  Most of the genitalia are monstrous, ridiculously disproportionate to the actual demons sporting them - to say nothing of the imps!  Some of the succubi are winking at you, blowing invisible kisses as they dance in circles around your pole.  Among them, you can easily spot the tallest demoness of the horde, Vapula; her perfect purple-skinned body, big perky boobs, luscious buttocks, fleshy lips, and seductive stare draw your attention like a magnet.  She's sporting a pair of magnificent wings and her abundant hair gives her face a fierce, lion-like appearance.  While her eyes ravage you with an insatiable hunger, she gives orders with the assurance of a well-established dominatrix.",true);
-			init02Male([new Cock(18,2),new Cock(18,2,CockTypesEnum.DEMON)],2,1,3);
-			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("red");
-			init07Hair("black",15);
-			init08Face();
-			init09PrimaryStats(80,10,10,5,50,60,20);
-			init10Weapon("claws","claw");
-			init11Armor("demonic skin");
+			this.a = "the ";
+			this.short = "lusty demons";
+			this.imageName = "demonmob";
+			this.long = "You're facing a group of thirty demons of various kinds.  Imps, incubi and succubi of all sizes and colors are encircling you, doing their best to show their genitals or their gigantic rows of breasts, often both.  You can see an impressive number of towering cocks, drooling pussies, and jiggling tits wiggle around as they move.  Most of the genitalia are monstrous, ridiculously disproportionate to the actual demons sporting them - to say nothing of the imps!  Some of the succubi are winking at you, blowing invisible kisses as they dance in circles around your pole.  Among them, you can easily spot the tallest demoness of the horde, Vapula; her perfect purple-skinned body, big perky boobs, luscious buttocks, fleshy lips, and seductive stare draw your attention like a magnet.  She's sporting a pair of magnificent wings and her abundant hair gives her face a fierce, lion-like appearance.  While her eyes ravage you with an insatiable hunger, she gives orders with the assurance of a well-established dominatrix.";
+			this.plural = true;
+			this.pronoun1 = "they";
+			this.pronoun2 = "them";
+			this.pronoun3 = "their";
+			this.createCock(18,2);
+			this.createCock(18,2,CockTypesEnum.DEMON);
+			this.balls = 2;
+			this.ballSize = 1;
+			this.cumMultiplier = 3;
+			// this.hoursSinceCum = 0;
+			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.tallness = rand(8) + 70;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "red";
+			this.hairColor = "black";
+			this.hairLength = 15;
+			initStrTouSpeInte(80, 10, 10, 5);
+			initLibSensCor(50, 60, 20);
+			this.weaponName = "claws";
+			this.weaponVerb="claw";
+			this.armorName = "demonic skin";
 			//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
-			init12Combat(680,30,.3,TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(14,150 + rand(100));
-			initX_Specials(5043,5044);
-			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Horns(HORNS_DEMON);
-			createStatusAffect(StatusAffects.Vapula, 0, 0, 0, 0);
-			skipInit(14);
+			this.bonusHP = 680;
+			this.lust = 30;
+			this.lustVuln = .3;
+			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.level = 14;
+			this.gems = 150 + rand(100);
+			this.special1 = 5043;
+			this.special2 = 5044;
+			this.tailType = TAIL_TYPE_DEMONIC;
+			this.hornType = HORNS_DEMON;
+			this.horns = 2;
+			this.drop = NO_DROP;
+			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
+			checkMonster();
 		}
 	}
 }

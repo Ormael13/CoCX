@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.NPCs {
-import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-public class MarbleScene extends NPCAwareContent{
+	public class MarbleScene extends NPCAwareContent{
 
 	public function MarbleScene()
 	{

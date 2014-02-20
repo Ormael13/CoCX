@@ -1,16 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest{
-import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class TamainsDaughtersScene extends BaseContent {
+	public class TamainsDaughtersScene extends BaseContent {
 
 	public function TamainsDaughtersScene()
 	{

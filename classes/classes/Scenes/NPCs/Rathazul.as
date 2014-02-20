@@ -1,10 +1,8 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class Rathazul extends NPCAwareContent {
+	public class Rathazul extends NPCAwareContent {
 
 		public function Rathazul()
 		{

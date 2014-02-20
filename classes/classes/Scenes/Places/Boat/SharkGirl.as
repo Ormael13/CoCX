@@ -1,15 +1,7 @@
 ﻿package classes.Scenes.Places.Boat
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	
-	/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class SharkGirl extends Monster
 	{
@@ -48,28 +40,44 @@
 		public function SharkGirl()
 		{
 			trace("SharkGirl Constructor!");
-			init01Names("the ", "shark-girl", "sharkgirl", "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.");
-			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,15);
-			init03BreastRows("D");
-			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
-			init05Body("5'5",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("gray");
-			init07Hair("silver",16);
-			init08Face();
-			init09PrimaryStats(40,40,55,42,75,35,40);
-			init10Weapon("shark teeth","bite",3);
-			init11Armor("tough skin",5);
-			init12Combat(20,40,.9,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(4,rand(15) + 5);
-			init14WeightedDrop().
+			this.a = "the ";
+			this.short = "shark-girl";
+			this.imageName = "sharkgirl";
+			this.long = "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 15, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.tallness = 5*12+5;
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "gray";
+			this.hairColor = "silver";
+			this.hairLength = 16;
+			initStrTouSpeInte(40, 40, 55, 42);
+			initLibSensCor(75, 35, 40);
+			this.weaponName = "shark teeth";
+			this.weaponVerb="bite";
+			this.weaponAttack = 3;
+			this.armorName = "tough skin";
+			this.armorDef = 5;
+			this.bonusHP = 20;
+			this.lust = 40;
+			this.lustVuln = .9;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 4;
+			this.gems = rand(15) + 5;
+			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).
 					add(armors.S_SWMWR,1).
 					add(consumables.SHARK_T,5).
 					add(null,1);
-			initX_Specials(sharkTease,sharkTease);
-
-
-
+			this.special1 = sharkTease;
+			this.special2 = sharkTease;
+			checkMonster();
 		}
 
 	}

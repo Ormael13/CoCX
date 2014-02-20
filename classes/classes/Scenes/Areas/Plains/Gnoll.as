@@ -1,10 +1,9 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.Monster;
-	import classes.PerkLib;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.*;
 
-/**
+	/**
 	 * ...
 	 * @author ...
 	 */
@@ -370,23 +369,44 @@ import classes.StatusAffects;
 
 		public function Gnoll()
 		{
-			init01Names("the ", "gnoll", "gnoll", "This lanky figure is dappled with black spots across rough, tawny fur. Wiry muscle ripples along long legs and arms, all of it seeming in perpetual frenetic motion: every moment half flinching and half lunging.  The head bears a dark muzzle curled in a perpetual leer and bright orange eyes watching with a savage animal cunning.  Between the legs hang what appears at first to be a long, thin dong; however, on closer inspection it is a fused tube of skin composed of elongated pussy lips and clitoris.  The hyena girl is sporting a pseudo-penis, and judging by the way it bobs higher as she jinks back and forth, she's happy to see you!\n\nShe wears torn rags scavenged from some other, somewhat smaller, creature, and in one hand clutches a twisted club.");
-			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
-			init03BreastRows("C");
-			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,25);
-			init05Body("6'",HIP_RATING_AMPLE,BUTT_RATING_TIGHT);
-			init06Skin("tawny",SKIN_TYPE_FUR);
-			init07Hair("black",22);
-			init08Face();
-			init09PrimaryStats(80,70,75,60,65,25,60);
-			init10Weapon("twisted club","smash",0,"",25);
-			init11Armor("skin",2);
-			init12Combat(250,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(14,10 + rand(5));
-			init14ChainedDrop().
+			this.a = "the ";
+			this.short = "gnoll";
+			this.imageName = "gnoll";
+			this.long = "This lanky figure is dappled with black spots across rough, tawny fur. Wiry muscle ripples along long legs and arms, all of it seeming in perpetual frenetic motion: every moment half flinching and half lunging.  The head bears a dark muzzle curled in a perpetual leer and bright orange eyes watching with a savage animal cunning.  Between the legs hang what appears at first to be a long, thin dong; however, on closer inspection it is a fused tube of skin composed of elongated pussy lips and clitoris.  The hyena girl is sporting a pseudo-penis, and judging by the way it bobs higher as she jinks back and forth, she's happy to see you!\n\nShe wears torn rags scavenged from some other, somewhat smaller, creature, and in one hand clutches a twisted club.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
+			createBreastRow(Appearance.breastCupInverse("C"));
+			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,25,0,0,0);
+			this.tallness = 6*12;
+			this.hipRating = HIP_RATING_AMPLE;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "tawny";
+			this.skinType = SKIN_TYPE_FUR;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.hairColor = "black";
+			this.hairLength = 22;
+			initStrTouSpeInte(80, 70, 75, 60);
+			initLibSensCor(65, 25, 60);
+			this.weaponName = "twisted club";
+			this.weaponVerb="smash";
+			this.weaponAttack = 0;
+			this.weaponPerk = "";
+			this.weaponValue = 25;
+			this.armorName = "skin";
+			this.armorDef = 2;
+			this.bonusHP = 250;
+			this.lust = 30;
+			this.lustVuln = .35;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 14;
+			this.gems = 10 + rand(5);
+			this.drop = new ChainedDrop().
 					add(consumables.REDUCTO,1/5).
 					add(consumables.SUCMILK,1/2).
 					elseDrop(consumables.BLACK_D);
+			checkMonster();
 		}
 		
 	}

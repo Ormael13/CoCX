@@ -1,19 +1,7 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.Scenes.Areas.Forest.Tamani;
-	import classes.Scenes.Monsters.GoblinAssassinScene;
-import classes.StatusAffects;
-
-/**
-	 * ...
-	 * @author Fake-Name
-	 */
+	import classes.*;
+	import classes.internals.*;
 
 	public class GoblinAssassin extends Monster
 	{
@@ -129,26 +117,42 @@ import classes.StatusAffects;
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
 		{
-			init01Names("the ", "goblin assassin", "goblinassassin", "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.");
-			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 90);
-			init03BreastRows("E");
-			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,50);
-			init05Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("dark green");
-			init07Hair("blue",7);
-			init08Face();
-			init09PrimaryStats(45,55,110,95,65,35,60);
-			init10Weapon("needles","stabbing needles");
-			init11Armor("leather straps");
-			init12Combat(70,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(10,rand(50) + 25);
-			init14WeightedDrop().
+			if (noInit) return;
+			this.a = "the ";
+			this.short = "goblin assassin";
+			this.imageName = "goblinassassin";
+			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
+			// this.plural = false;
+			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createStatusAffect(StatusAffects.BonusVCapacity, 90, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("E"));
+			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
+			this.tallness = 35 + rand(4);
+			this.hipRating = HIP_RATING_AMPLE+2;
+			this.buttRating = BUTT_RATING_LARGE;
+			this.skinTone = "dark green";
+			this.hairColor = "blue";
+			this.hairLength = 7;
+			initStrTouSpeInte(45, 55, 110, 95);
+			initLibSensCor(65, 35, 60);
+			this.weaponName = "needles";
+			this.weaponVerb="stabbing needles";
+			this.armorName = "leather straps";
+			this.bonusHP = 70;
+			this.lust = 50;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 10;
+			this.gems = rand(50) + 25;
+			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
 					addMany(1, consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE, 1);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+			checkMonster();
 		}
 
 		override protected function performCombatAction():void

@@ -518,7 +518,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//Start the array if its the first bit
 			if (keyItems.length == 0)
 			{
-				trace("New Key Item Started Array! " + keyName);
+				//trace("New Key Item Started Array! " + keyName);
 				keyItems.push(newKeyItem);
 				arrayed = true;
 				keySlot = 0;
@@ -526,7 +526,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//If it belongs at the end, push it on
 			if (keyItems[keyItems.length - 1].keyName < keyName && !arrayed)
 			{
-				trace("New Key Item Belongs at the end!! " + keyName);
+				//trace("New Key Item Belongs at the end!! " + keyName);
 				keyItems.push(newKeyItem);
 				arrayed = true;
 				keySlot = keyItems.length - 1;
@@ -534,7 +534,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//If it belongs in the beginning, splice it in
 			if (keyItems[0].keyName > keyName && !arrayed)
 			{
-				trace("New Key Item Belongs at the beginning! " + keyName);
+				//trace("New Key Item Belongs at the beginning! " + keyName);
 				keyItems.splice(0, 0, newKeyItem);
 				arrayed = true;
 				keySlot = 0;
@@ -542,7 +542,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//Find the spot it needs to go in and splice it in.
 			if (!arrayed)
 			{
-				trace("New Key Item using alphabetizer! " + keyName);
+				//trace("New Key Item using alphabetizer! " + keyName);
 				counter = keyItems.length;
 				while (counter > 0 && !arrayed)
 				{
@@ -578,7 +578,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//Fallback
 			if (!arrayed)
 			{
-				trace("New Key Item Belongs at the end!! " + keyName);
+				//trace("New Key Item Belongs at the end!! " + keyName);
 				keyItems.push(newKeyItem);
 				keySlot = keyItems.length - 1;
 			}
@@ -588,7 +588,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			keyItems[keySlot].value2 = value2;
 			keyItems[keySlot].value3 = value3;
 			keyItems[keySlot].value4 = value4;
-			trace("NEW KEYITEM FOR PLAYER in slot " + keySlot + ": " + keyItems[keySlot].keyName);
+			//trace("NEW KEYITEM FOR PLAYER in slot " + keySlot + ": " + keyItems[keySlot].keyName);
 		}
 		
 		//Remove a key item

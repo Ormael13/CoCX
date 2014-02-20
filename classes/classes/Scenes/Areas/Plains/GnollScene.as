@@ -3,9 +3,7 @@
  */
 package classes.Scenes.Areas.Plains
 {
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 
 	public class GnollScene extends BaseContent
 	{

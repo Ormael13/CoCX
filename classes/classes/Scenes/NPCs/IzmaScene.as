@@ -1,15 +1,10 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class IzmaScene extends NPCAwareContent
+	public class IzmaScene extends NPCAwareContent
 	{
-		import classes.GlobalFlags.kFLAGS;
-		import classes.GlobalFlags.kGAMECLASS;
-		import classes.Appearance;
-		import classes.CockTypesEnum;
-
 		public function IzmaScene()
 		{
 		}

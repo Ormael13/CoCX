@@ -1,18 +1,16 @@
 ﻿package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.CoC;
-	import classes.Creature;
-	import classes.Monster;
-	import classes.CockTypesEnum;
-import classes.StatusAffects;
+	import classes.*;
+	import classes.internals.*;
 
-/**
+	/**
 	 * ...
 	 * @author Fake-Name
 	 */
 
 	// This doesn't work, because there is some obnoxious issues with the fact that we only have one instance of monster at any time, and static evaluation
 	// of the game leads the compiler to not know if setDescriptionForPlantPot() is available, therefore resulting in an error
+
 
 	public class EncapsulationPod extends Monster
 	{
@@ -78,21 +76,38 @@ import classes.StatusAffects;
 
 		public function EncapsulationPod()
 		{
-			init01Names("the ", "pod", "pod", "");
-			init02Genderless();
-			init03BreastRows([0,0]);
-			init04Ass();
-			init05Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
-			init06Skin("purple",SKIN_TYPE_PLAIN,"covering");
-			init07Hair("black",0);
-			init08Face();
-			init09PrimaryStats(90,1,1,1,1,1,100);
-			init10Weapon("","");
-			init11Armor("pod");
-			init12Combat(450,10,0,TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(12,1,80);
-			init14FixedDrop(weapons.JRAPIER);
-			initX_Specials(special1,special2,special3);
+			this.a = "the ";
+			this.short = "pod";
+			this.imageName = "pod";
+			this.long = "";
+			// this.plural = false;
+			initGenderless();
+			createBreastRow(0,0);
+			this.tallness = 120;
+			this.hipRating = HIP_RATING_SLENDER;
+			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.skinTone = "purple";
+			this.skinType = SKIN_TYPE_PLAIN;
+			this.skinDesc = "covering";
+			this.hairColor = "black";
+			this.hairLength = 0;
+			initStrTouSpeInte(90, 1, 1, 1);
+			initLibSensCor(1, 1, 100);
+			this.weaponName = "pod";
+			this.weaponVerb="pod";
+			this.armorName = "pod";
+			this.bonusHP = 450;
+			this.lust = 10;
+			this.lustVuln = 0;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 12;
+			this.gems = 1;
+			this.additionalXP = 80;
+			this.drop = new WeightedDrop(weapons.JRAPIER, 1);
+			this.special1 = special1;
+			this.special2 = special2;
+			this.special3 = special3;
+			checkMonster();
 		}
 
 	}

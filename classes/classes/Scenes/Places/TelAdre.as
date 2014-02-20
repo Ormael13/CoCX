@@ -1,13 +1,10 @@
 ﻿package classes.Scenes.Places{
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.ItemType;
-	import classes.PerkLib;
 	import classes.Scenes.Places.TelAdre.*;
-import classes.StatusAffects;
 
-/**
+	/**
  * The lovely town of Tel Adre
  * @author:
  */

@@ -1,11 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class HelFollower extends NPCAwareContent
+	public class HelFollower extends NPCAwareContent
 	{
 
 		public function HelFollower()

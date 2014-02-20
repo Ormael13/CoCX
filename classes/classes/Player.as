@@ -54,6 +54,52 @@ use namespace kGAMECLASS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 		private var _modArmorName:String = "";
 
+		override public function set armorValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.armorValue.");
+		}
+
+		override public function set armorName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.armorName.");
+		}
+
+		override public function set armorDef(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.armorDef.");
+		}
+
+		override public function set armorPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.armorPerk.");
+		}
+
+
+		override public function set weaponName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponName.");
+		}
+
+		override public function set weaponVerb(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponVerb.");
+		}
+
+		override public function set weaponAttack(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponAttack.");
+		}
+
+		override public function set weaponPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponPerk.");
+		}
+
+		override public function set weaponValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponValue.");
+		}
+
 		public function get modArmorName():String
 		{
 			if (_modArmorName == null) _modArmorName = "";

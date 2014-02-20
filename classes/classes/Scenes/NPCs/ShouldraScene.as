@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kFLAGS;
-import classes.StatusAffects;
 
-public class ShouldraScene extends NPCAwareContent {
+	public class ShouldraScene extends NPCAwareContent {
 
 	public function ShouldraScene()
 	{

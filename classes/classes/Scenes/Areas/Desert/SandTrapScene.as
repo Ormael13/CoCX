@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.BaseContent;
 	import classes.Items.Armors.LustyMaidensArmor;
-import classes.StatusAffects;
 
-public class SandTrapScene extends BaseContent{
+	public class SandTrapScene extends BaseContent{
 		private function get sandTrap():SandTrap{
 			return monster as SandTrap;
 		}

@@ -3,16 +3,12 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.Appearance;
-	import classes.BaseContent;
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.PerkLib;
 	import classes.Scenes.Camp.ImpGang;
-import classes.StatusAffects;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class ImpScene extends BaseContent
 	{

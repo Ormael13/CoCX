@@ -1,11 +1,9 @@
 package classes.Scenes.NPCs
 {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-import classes.StatusAffects;
 
-public class Vapula extends NPCAwareContent
+	public class Vapula extends NPCAwareContent
 	{
 		public function Vapula()
 		{

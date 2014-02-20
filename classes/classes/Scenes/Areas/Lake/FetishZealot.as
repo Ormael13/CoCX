@@ -1,14 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake
 {
-	import classes.Cock;
-	import classes.Items.ArmorLib;
-	import classes.Monster;
-	
-	/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
+	import classes.*;
+	import classes.internals.*;
 
 	public class FetishZealot extends Monster
 	{
@@ -29,14 +22,14 @@
 					//Religious outfit!
 					if (armorName != RELIGIOUS_CLOTHES) {
 						long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out of the front.";
-						setArmorName(RELIGIOUS_CLOTHES);
+						this.armorName = RELIGIOUS_CLOTHES;
 						changed = true;
 					}
 					break;
 				case 1:
 					//Pirate Outfit
 					if (armorName != PIRATE_CLOTHES) {
-						setArmorName(PIRATE_CLOTHES);
+						this.armorName = PIRATE_CLOTHES;
 						long = "You are faced with one of the strangest things you have ever seen in your life.  A stereotypical pirate, who has not replaced his hand with a hook, but rather a collection of sex toys.  You can see at least two dildos, a fleshlight, and numerous other toys that you're incapable of recognizing.";
 						changed = true;
 					}
@@ -45,7 +38,7 @@
 					//Military Uniform
 					if (armorName != MILITARY_CLOTHES) {
 						long = "In front of you is someone wearing a green military uniform.  They obviously aren't in any military you've ever heard of, as on his shoulder he has emblazoned <i>FF Army Sex Instructor</i>.  It seems you are his latest recruit...";
-						setArmorName(MILITARY_CLOTHES);
+						this.armorName = MILITARY_CLOTHES;
 						changed = true;
 					}
 					break;
@@ -53,7 +46,7 @@
 					//Leather fetish shiiiiite
 					if (armorName != LEATHER_CLOTHES) {
 						long = "The Zealot has taken on an appearance that seems more suitable for the level of perversion he exudes.  He is wearing a full-body suit of leather, with a cock case over his crotch; you can clearly see a large zipper on it.  The zipper handle is far bigger than you think is absolutely necessary.";
-						setArmorName(LEATHER_CLOTHES);
+						this.armorName = LEATHER_CLOTHES;
 						changed = true;
 					}
 					break;
@@ -61,7 +54,7 @@
 					//Student
 					if (armorName != STUDENTS_CLOTHES) {
 						long = "The Zealot seems to have taken on the appearance of a young adult wearing a student uniform of sorts; of course, this isn't any less perverted than any of the other costumes this man wears.  This one includes a number of loose straps that you're certain would cause large sections of his clothes to fall off if somebody pulled on them.";
-						setArmorName(STUDENTS_CLOTHES);
+						this.armorName = STUDENTS_CLOTHES;
 						changed = true;
 					}
 
@@ -151,25 +144,41 @@
 		{
 			trace("FetishZealot Constructor!");
 		
-			init01Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");
-			init02Male(new Cock(7,1.5));
-			init03BreastRows(0);
-			init04Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
-			init05Body("6'",HIP_RATING_BOYISH+1,BUTT_RATING_TIGHT);
-			init06Skin("tan");
-			init07Hair("black",4);
-			init08Face();
-			init09PrimaryStats(35,35,30,1,75,80,90);
-			init10Weapon("wavy dagger","stab",3);
-			init11Armor(RELIGIOUS_CLOTHES,5);
-			init12Combat(0,25,0.75,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(5,5+rand(10));
-			init14WeightedDrop()
-					.add(armors.C_CLOTH,1)
+			this.a = "the ";
+			this.short = "fetish zealot";
+			this.imageName = "fetishzealot";
+			this.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
+			// this.plural = false;
+			this.createCock(7,1.5);
+			createBreastRow(0);
+			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
+			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.tallness = 6*12;
+			this.hipRating = HIP_RATING_BOYISH+1;
+			this.buttRating = BUTT_RATING_TIGHT;
+			this.skinTone = "tan";
+			this.hairColor = "black";
+			this.hairLength = 4;
+			initStrTouSpeInte(35, 35, 30, 1);
+			initLibSensCor(75, 80, 90);
+			this.weaponName = "wavy dagger";
+			this.weaponVerb="stab";
+			this.weaponAttack = 3;
+			this.armorName = RELIGIOUS_CLOTHES;
+			this.armorDef = 5;
+			this.lust = 25;
+			this.lustVuln = 0.75;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			this.level = 5;
+			this.gems = 5+rand(10);
+			this.drop = new WeightedDrop().add(armors.C_CLOTH,1)
 					.add(consumables.L_DRAFT,4)
 					.add(weapons.L_DAGGR,1)
 					.add(null,4);
-			initX_Specials(zealotSpecial1,zealotSpecial2);
+			this.special1 = zealotSpecial1;
+			this.special2 = zealotSpecial2;
+			checkMonster();
 		}
 
 	}

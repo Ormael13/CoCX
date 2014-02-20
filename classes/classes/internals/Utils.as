@@ -4,7 +4,7 @@
 package classes.internals
 {
 	import classes.*;
-	public class Utils
+	public class Utils extends Object
 	{
 
 		public function Utils()
@@ -70,6 +70,24 @@ package classes.internals
 		public static function rand(max:Number):Number
 		{
 			return int(Math.random() * max);
+		}
+		public static function validateNonNegativeNumberFields(o:Object, func:String, nnf:Array):String
+		{
+			var error:String = "";
+			for each (var field:String in nnf) {
+				if (!o.hasOwnProperty(field) || !(o[field] is Number)) error += "Misspelling in "+func+".nnf: '"+field+"'. ";
+				else if (o[field] < 0) error += "Negative '"+field+"'. ";
+			}
+			return error;
+		}
+		public static function validateNonEmptyStringFields(o:Object, func:String, nef:Array):String
+		{
+			var error:String = "";
+			for each (var field:String in nef) {
+				if (!o.hasOwnProperty(field) || !(o[field] is String)) error += "Misspelling in "+func+".nef: '"+field+"'. ";
+				else if (o[field] == "") error += "Empty "+field+". ";
+			}
+			return error;
 		}
 	}
 }

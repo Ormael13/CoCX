@@ -3,17 +3,16 @@
  */
 package classes.Scenes
 {
-	import classes.Appearance;
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.Monsters.GoblinAssassinScene;
-import classes.StatusAffects;
+	import classes.Scenes.Explore.ExploreDebug;
+	import classes.Scenes.Monsters.*;
 
-public class Exploration extends BaseContent
+	public class Exploration extends BaseContent
 	{
+		public var exploreDebug:ExploreDebug = new ExploreDebug();
+
 		public function Exploration()
 		{
 		}
@@ -59,6 +58,7 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", kGAMECLASS.bog.exploreBog);
 			addButton(4, "Previous", goBackToPageI);
+			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Back", eventParser, 1);
 		}
 
@@ -72,7 +72,7 @@ public class Exploration extends BaseContent
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
-			
+
 			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
@@ -262,8 +262,6 @@ public class Exploration extends BaseContent
 			fatigue(5);
 			doNext(13);
 		}
-
-
 
 
 	}

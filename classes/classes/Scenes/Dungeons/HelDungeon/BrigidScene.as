@@ -3,7 +3,7 @@
  */
 package classes.Scenes.Dungeons.HelDungeon
 {
-	import classes.BaseContent;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class BrigidScene extends BaseContent

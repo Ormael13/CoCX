@@ -1,10 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.CockTypesEnum;
+	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
 
-public class Dominika extends TelAdreAbstractContent {
+	public class Dominika extends TelAdreAbstractContent {
 public function Dominika(){
 	
 }

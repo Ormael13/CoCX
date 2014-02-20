@@ -3,8 +3,7 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.FollowerInteractions;
 	import classes.Scenes.Places.TelAdre;
