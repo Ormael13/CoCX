@@ -37,7 +37,7 @@ package classes.Scenes.Areas.HighMountains
 			this.level = 22;
 			this.gems = 25 + rand(25);
 			this.additionalXP = 75;
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

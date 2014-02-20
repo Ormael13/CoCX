@@ -141,8 +141,8 @@ package classes.Scenes.NPCs
 		public function Izma()
 		{
 			this.a = "";
-			this.imageName = "Izma";
-			this.long = "izma";
+			this.short = "Izma";
+			this.imageName = "izma";
 			this.long = "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.";
 			// this.plural = false;
 			this.createCock(15,2.2);
@@ -173,7 +173,7 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 15;
 			this.gems = rand(5) + 1;
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

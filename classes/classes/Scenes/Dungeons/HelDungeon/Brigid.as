@@ -61,8 +61,8 @@ package classes.Scenes.Dungeons.HelDungeon
 		public function Brigid()
 		{
 			this.a = "";
-			this.imageName = "Brigid the Jailer";
-			this.long = "brigid";
+			this.short = "Brigid the Jailer";
+			this.imageName = "brigid";
 			this.long = "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
@@ -95,6 +95,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
+			this.horns = 2;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

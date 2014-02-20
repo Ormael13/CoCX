@@ -93,8 +93,8 @@
 			this.hairLength = 0;
 			initStrTouSpeInte(90, 1, 1, 1);
 			initLibSensCor(1, 1, 100);
-			this.weaponName = "";
-			this.weaponVerb="";
+			this.weaponName = "pod";
+			this.weaponVerb="pod";
 			this.armorName = "pod";
 			this.bonusHP = 450;
 			this.lust = 10;

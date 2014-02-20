@@ -155,6 +155,7 @@ package classes.Scenes.Places.Farm
 			this.level = 6;
 			this.gems = rand(5) + 5;
 			this.tailType = TAIL_TYPE_HORSE;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

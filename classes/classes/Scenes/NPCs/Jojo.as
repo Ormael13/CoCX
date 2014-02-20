@@ -25,8 +25,8 @@
 		{
 			trace("Jojo Constructor!");
 			this.a = "";
-			this.imageName = "Jojo";
-			this.long = "jojo";
+			this.short = "Jojo";
+			this.imageName = "jojo";
 			this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.";
 			// this.plural = false;
 			this.createCock(7.5,1.8);
@@ -80,7 +80,7 @@
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

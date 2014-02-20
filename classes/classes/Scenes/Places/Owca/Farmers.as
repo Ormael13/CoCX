@@ -60,7 +60,9 @@ package classes.Scenes.Places.Owca
 			this.special1 = 5043;
 			this.special2 = 5044;
 			this.hornType = HORNS_DEMON;
+			this.horns = 2;
 			this.tailType = TAIL_TYPE_DEMONIC;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

@@ -125,6 +125,7 @@
 			this.special2 = 5044;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
+			this.horns = 2;
 			checkMonster();
 		}
 

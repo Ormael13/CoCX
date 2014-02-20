@@ -55,6 +55,7 @@
 			this.gems = 0;
 			this.special1 = 5054;
 			this.special2 = 5055;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

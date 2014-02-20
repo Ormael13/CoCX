@@ -162,8 +162,8 @@ package classes.Scenes.NPCs
 		public function Kiha()
 		{
 			this.a = "";
-			this.imageName = "Kiha";
-			this.long = "kiha";
+			this.short = "Kiha";
+			this.imageName = "kiha";
 			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might  to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
@@ -194,7 +194,7 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(15) + 95;
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "huge";
 			this.tailType = TAIL_TYPE_LIZARD;

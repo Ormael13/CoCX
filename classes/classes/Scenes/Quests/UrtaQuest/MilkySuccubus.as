@@ -89,8 +89,8 @@ package classes.Scenes.Quests.UrtaQuest
 		public function MilkySuccubus()
 		{
 			this.a = "the ";
-			this.imageName = "milky succubus";
-			this.long = "milkysuccubus";
+			this.short = "milky succubus";
+			this.imageName = "milkysuccubus";
 			this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
@@ -121,14 +121,16 @@ package classes.Scenes.Quests.UrtaQuest
 			this.level = 16;
 			this.gems = rand(25)+10;
 			this.additionalXP = 50;
-			this.drop = new WeightedDrop();
+			this.drop = NO_DROP;
 			this.hornType = HORNS_DRACONIC_X2;
+			this.horns = 2;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

@@ -57,11 +57,11 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.level = 18;
 			this.gems = rand(25)+140;
 			this.additionalXP = 50;
-			this.hornType = HORNS_DEMON;
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = TAIL_TYPE_HARPY;
 			this.special1 = special1;
 			this.special2 = special2;
 			this.special3 = special3;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

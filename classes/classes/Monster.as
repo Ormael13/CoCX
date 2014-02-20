@@ -12,6 +12,9 @@
 	import classes.internals.ChainedDrop;
 	import classes.internals.RandomDrop;
 	import classes.internals.Utils;
+	import classes.internals.WeightedDrop;
+
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * ...
@@ -309,9 +312,7 @@
 
 			//// 14. Drop
 			//// 14.1. No drop
-			///*REQUIRED*/ this.initedDrop = true; // assuming you didn't assign this.drop
-			//// if you have set this.drop but want to revert to no drop
-			//// this.drop = new WeightedDrop();
+			///*REQUIRED*/ this.drop = NO_DROP;
 			//// 14.2. Fixed drop
 			///*REQUIRED*/ this.drop = new WeightedDrop(dropItemType);
 			//// 14.3. Random weighted drop
@@ -404,6 +405,7 @@
 		protected function set initedLibSensCor(value:Boolean):void{
 			initsCalled.lib_sens_cor = value;
 		}
+		protected const NO_DROP:WeightedDrop = new WeightedDrop();
 
 		public function isFullyInit():Boolean {
 			for each (var phase:Object in initsCalled) {
@@ -839,6 +841,37 @@
 		}
 
 		/**
+		 * Function(hpVictory) to call INSTEAD of default defeated(). Call it or finishCombat() manually
+		 */
+		public var onDefeated:Function = null;
+		/**
+		 * Function(hpVictory,pcCameWorms) to call INSTEAD of default won(). Call it or finishCombat() manually
+		 */
+		public var onWon:Function = null;
+		/**
+		 * Function() to call INSTEAD of common run attempt. Call runAway(false) to perform default run attempt
+		 */
+		public var onPcRunAttempt:Function = null;
+
+		/**
+		 * Final method to handle hooks before calling overriden method
+		 */
+		public final function defeated_(hpVictory:Boolean):void
+		{
+			if (onDefeated != null) onDefeated(hpVictory);
+			else defeated(hpVictory);
+		}
+
+		/**
+		 * Final method to handle hooks before calling overriden method
+		 */
+		public final function won_(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (onWon != null) onWon(hpVictory,pcCameWorms);
+			else won(hpVictory,pcCameWorms);
+		}
+
+		/**
 		 * Display tease reaction message. Then call applyTease() to increase lust.
 		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
 		 */
@@ -903,7 +936,7 @@
 			var have:String = plural ? "have" : "has";
 			var Heis:String = Pronoun1+" "+be+" ";
 			var Hehas:String = Pronoun1 + " " + have + " ";
-			result = "You are inspecting "+a+short+" (imageName='"+imageName+"'). You are fighting "+pronoun2+".\n\n";
+			result = "You are inspecting "+a+short+" (imageName='"+imageName+"', class='"+getQualifiedClassName(this)+"'). You are fighting "+pronoun2+".\n\n";
 			result += Heis+(Appearance.DEFAULT_GENDER_NAMES[gender]||("gender#"+gender))+
 					" with "+Appearance.numberOfThings(cocks.length,"cock") +
 					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
@@ -978,13 +1011,13 @@
 
 			// COMBAT AND OTHER STATS
 			result+=Hehas+"str="+str+", tou="+tou+", spe="+spe+", inte="+inte+", lib="+lib+", sens="+sens+", cor="+cor+".\n";
-			result += Pronoun1+" "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
+			result += Pronoun1+" can "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
 			result += Pronoun1 +" is guarded with "+armorPerk+" "+armorName+" (defense "+armorDef+", value "+armorValue+").\n";
 			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
 			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
 			if (special1 || special2 || special3){
 				result+=Hehas+[special1,special2,special3]
-								.filter(function(x:*,index:int,array:Array):Boolean{return x>0})
+								.filter(function(x:*,index:int,array:Array):Boolean{return x>0 || x is Function})
 								.length
 						+" special attacks.\n"
 			} else {

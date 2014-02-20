@@ -131,7 +131,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(5) + 8;
-			this.drop = new WeightedDrop();
+			this.drop = NO_DROP;
 			this.special1 = nagaPoisonBiteAttack;
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;

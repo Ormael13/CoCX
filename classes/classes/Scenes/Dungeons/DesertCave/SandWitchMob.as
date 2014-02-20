@@ -23,8 +23,8 @@ package classes.Scenes.Dungeons.DesertCave
 		public function SandWitchMob()
 		{
 			this.a = "the ";
-			this.imageName = "sand witches";
-			this.long = "sandwitchmob";
+			this.short = "sand witches";
+			this.imageName = "sandwitchmob";
 			this.long = "You are surrounded by a veritable tribe of sand witches.  Like the ones that roam the sands, they have simple robes, blond hair, and four big breasts that push at the concealing cloth immodestly.  Glowering at you hatefully, the pack of female spellcasters readies itself to drag you down with sheer numbers.";
 			this.plural = true;
 			this.pronoun1 = "they";
@@ -58,6 +58,7 @@ package classes.Scenes.Dungeons.DesertCave
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 4;
 			this.gems = rand(15) + 5;
+			this.drop = NO_DROP;
 			checkMonster();
 
 		}

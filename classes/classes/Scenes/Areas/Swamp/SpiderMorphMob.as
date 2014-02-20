@@ -129,6 +129,7 @@ package classes.Scenes.Areas.Swamp
 			this.special1 = 5043;
 			this.special2 = 5044;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

@@ -256,8 +256,8 @@
 		public function Amily()
 		{
 			this.a = "";
-			this.imageName = "Amily";
-			this.long = "amily";
+			this.short = "Amily";
+			this.imageName = "amily";
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
@@ -285,6 +285,7 @@
 			this.lustVuln = .85;
 			this.level = 4;
 			this.gems = 2 + rand(5);
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

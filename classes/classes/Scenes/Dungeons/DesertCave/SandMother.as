@@ -18,8 +18,8 @@ package classes.Scenes.Dungeons.DesertCave
 		public function SandMother()
 		{
 			this.a = "the ";
-			this.imageName = "Sand Mother";
-			this.long = "sandmother";
+			this.short = "Sand Mother";
+			this.imageName = "sandmother";
 			this.long = "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
@@ -52,6 +52,7 @@ package classes.Scenes.Dungeons.DesertCave
 			this.gems = rand(15) + 55;
 			this.createPerk(PerkLib.Resolute,0,0,0,0);
 			this.createPerk(PerkLib.Focused,0,0,0,0);
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

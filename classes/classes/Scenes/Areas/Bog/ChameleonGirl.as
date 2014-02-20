@@ -151,7 +151,7 @@ package classes.Scenes.Areas.Bog
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 14;
 			this.gems = 10 + rand(50);
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

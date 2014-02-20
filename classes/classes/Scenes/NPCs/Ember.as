@@ -187,7 +187,9 @@ package classes.Scenes.NPCs
 			this.level = 15;
 			this.gems = 0;
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.horns = 4;
 			this.tailType = TAIL_TYPE_DRACONIC;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		

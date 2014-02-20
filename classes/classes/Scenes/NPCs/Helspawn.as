@@ -189,7 +189,7 @@ private function calledShot():void {
 				'scimitar': "slash",
 				'scimitar and shield': "slash"}[weapon];
 			this.weaponAttack = 20;
-			this.armorName = "";
+			this.armorName = "scales";
 			this.armorDef = 12;
 			this.armorPerk = "";
 			this.armorValue = 50;
@@ -202,6 +202,7 @@ private function calledShot():void {
 			this.tailType = TAIL_TYPE_LIZARD;
 			this.tailRecharge = 0;
 			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 

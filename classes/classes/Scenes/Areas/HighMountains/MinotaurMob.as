@@ -194,7 +194,7 @@ package classes.Scenes.Areas.HighMountains
 			this.gems = rand(15) + 45;
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
-			this.initedDrop = true;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 	}

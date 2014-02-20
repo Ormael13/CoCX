@@ -10,24 +10,24 @@ public function inCombat():Boolean {
 
 public function endHpVictory():void
 {
-	monster.defeated(true);
+	monster.defeated_(true);
 }
 public function endLustVictory():void
 {
-	monster.defeated(false);
+	monster.defeated_(false);
 }
 public function endHpLoss():void
 {
-	monster.won(true,false);
+	monster.won_(true,false);
 }
 public function endLustLoss():void
 {
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 		infestOrgasm();
-		monster.won(false,true);
+		monster.won_(false,true);
 	} else {
-		monster.won(false,false);
+		monster.won_(false,false);
 	}
 }
 //combat is over. Clear shit out and go to main
@@ -178,7 +178,7 @@ public function doCombat(eventNum:Number):void
 				//REGULAR MENU
 				else {
 					//Tease text should change based on perks!
-					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", CoC_Settings.debugBuild ? 5166 : 0);
+					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", (CoC_Settings.debugBuild && !debug)? 5166 : 0);
 				}
 			}
 	}
@@ -2195,11 +2195,11 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	doNext(1);
 }
 public function display():void {
-	if (!monster.checkCalled && CoC_Settings.debugBuild){
-		outputText("<B>/!\\BUG! Monster.checkMonster() is not called! Calling it now...</B>");
+	if (!monster.checkCalled){
+		outputText("<B>/!\\BUG! Monster.checkMonster() is not called! Calling it now...</B>\n");
 		monster.checkMonster();
 	}
-	if (monster.checkError != "" && CoC_Settings.debugBuild){
+	if (monster.checkError != ""){
 		outputText("<B>/!\\BUG! Monster is not correctly initialized! <u>"+
 				monster.checkError+"</u></b>\n");
 	}
@@ -2249,10 +2249,10 @@ public function display():void {
 		outputText("  " + percent + "\n", false);
 		showMonsterLust();
 	}
-	//if (debug){
-	//	outputText("\n----\n");
-	//	outputText(monster.generateDebugDescription(),false);
-	//}
+	if (debug){
+		outputText("\n----------------------------\n");
+		outputText(monster.generateDebugDescription(),false);
+	}
 }
 public function showMonsterLust():void {
 	//Entrapped
@@ -4784,7 +4784,11 @@ public function possess():void {
 	if(!combatRoundOver()) enemyAI();
 }
 
-public function runAway():void {
+public function runAway(callHook:Boolean = true):void {
+	if (callHook && monster.onPcRunAttempt != null){
+		monster.onPcRunAttempt();
+		return;
+	}
 	outputText("", true);
 	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 4) {
 		clearOutput();

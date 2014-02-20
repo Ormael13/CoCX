@@ -23,15 +23,15 @@ package classes.Scenes.Dungeons.HelDungeon
 		public function PhoenixPlatoon()
 		{
 			this.a = "the ";
-			this.imageName = "phoenix platoon";
-			this.long = "phoenixmob";
+			this.short = "phoenix platoon";
+			this.imageName = "phoenixmob";
 			this.long = "You are faced with a platoon of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between salamander and harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each phoenix protecting herself and the warrior next to her with their tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			this.createCock();
-			this.balls = 0;
+			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
@@ -60,8 +60,10 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.gems = rand(25)+160;
 			this.additionalXP = 50;
 			this.hornType = HORNS_DRACONIC_X2;
+			this.horns = 2;
 			this.tailType = TAIL_TYPE_HARPY;
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
+			this.drop = NO_DROP;
 			checkMonster();
 		}
 		
