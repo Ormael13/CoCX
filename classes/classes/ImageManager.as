@@ -130,12 +130,19 @@
 					var decimalPt:int = imPath.lastIndexOf(".");
 					var prefix:String = imPath.slice(0, underscorePt+1);
 					var num:String = imPath.slice(underscorePt+1, decimalPt);
-					var postfix:String = imPath.slice(decimalPt, imPath.length);
 					num = String(int(num)+1);
-					var newPath:String = prefix+num+postfix;
-					trace("Trying to load sequential image at URL =", newPath, "Previous base URL = ", imPath);
-					_allImagePaths[newPath] = imId;
-					loadImageAtPath(newPath);
+
+
+					// Try all possible extensions.
+					for (var k:int = 0; k < _imgListXML.ExtensionList.ExtensionType.length(); k++)
+					{
+						// Programmatic extension concatenation! Woot.
+						var newPath:String = prefix+num+"."+_imgListXML.ExtensionList.ExtensionType[k];
+						trace("Trying to load sequential image at URL =", newPath, "Previous base URL = ", imPath);
+						_allImagePaths[newPath] = imId;
+						loadImageAtPath(newPath);
+
+					}
 
 				}
 
