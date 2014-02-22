@@ -111,12 +111,19 @@ public function dreamSelect():Boolean {
 	if(dreamtemp <= 5) outputText("\nYour rest is somewhat troubled with dirty dreams.\n", false);
 	else if(dreamtemp < 15) outputText("\nYou have trouble relaxing as your mind wanders, dreaming of ", false);
 	else outputText("\nYou barely rest, spending most of the time touching yourself and dreaming of ", false);
+	
 	//LUST CHANGES
 	//Well adjusted cuts gain in half!
-	if(player.findPerk(PerkLib.WellAdjusted) < 0) dynStats("lus", (-dreamtemp/2));
-	//Lust change!
-	dynStats("lus", dreamtemp);
-	if(player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", dreamtemp/3);
+	var dreamLust:Number = dreamtemp;
+	
+	// Lusty increases by 1/3rd
+	if (player.findPerk(PerkLib.Lusty) >= 0) dreamLust += (dreamtemp / 3);
+	
+	// Well Adjusted cuts by half
+	if (player.findPerk(PerkLib.WellAdjusted) >= 0) dreamLust = (dreamLust / 2);
+
+	if (dreamLust > 0) dynStats("lus", dreamLust);
+	
 	//ACTUAL DREAM TEXTS
 	if(dreamtemp > 5) {
 		//Roll for dream!
