@@ -51,7 +51,7 @@ package classes
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
 				"Alchemical experience makes items more reactive to your body.");
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
-				"Past full of conflict increases physical damage dealt by 10%.");
+				"A Past full of conflict increases physical damage dealt by 10%.");
 		public static const HistoryHealer:PerkType = mk("History: Healer", "History: Healer",
 				"Healing experience increases HP gains by 20%.");
 		public static const HistoryReligious:PerkType = mk("History: Religious", "History: Religious",
@@ -166,7 +166,7 @@ package classes
 				"You choose the 'Regeneration' perk, allowing you to heal 2% of max HP every hour and 1% of max HP every round of combat!");
 		public static const Regeneration2:PerkType = mk("Regeneration 2", "Regeneration 2",
 				"Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.",
-				"You choose the 'Regeneration 2' perk, giving an addition 2% of max HP per turn in combat and 4% of max HP per hour.");
+				"You choose the 'Regeneration 2' perk, giving you an additional 2% of max HP per turn in combat and 4% of max HP per hour.");
 		public static const Resistance:PerkType = mk("Resistance", "Resistance",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.");
