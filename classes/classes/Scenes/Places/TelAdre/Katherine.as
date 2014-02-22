@@ -1493,7 +1493,7 @@ private function suckleTacularKats():void {
 	outputText("Katherine's eyes widen with shock, and she smiles in disbelieving delight, quickly striding over and waiting, impatiently, as you find a comfortable position and sit down.  Once you have, she wastes no time in plopping down in front of you. She nuzzles her cheek against your breast but then, to your amazement, shyly backs away.\n\n", false);
 
 	outputText("\"<i>I... um... is this really okay?</i>\" she asks, her voice barely above a whisper.  With a hint of exasperation you roll ", false);
-	if(player.eyeType > EYES_FOUR_SPIDER_EYES) outputText("both sets of ", false);
+	if(player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("both sets of ", false);
 	outputText("your eyes and gently take her by the cheeks, insistently bringing her head close so that her lips are bumping right against your " + nippleDescript(0) + "s.  She takes the obvious hint and eagerly swallows it, eyes closing as she leans in and starts to suckle.  Purring with contentment, she sends the most delicious vibrations into your breasts, her rough, bristly tongue stroking and caressing to help coax your body into giving up its sweet, rich milk.\n\n", false);
 	
 	outputText("You're not sure how long you sit there with her in your arms, just listening to her purr as she quietly sucks and slurps, drinking everything you have to give.  She ", false);
