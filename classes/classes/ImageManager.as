@@ -203,13 +203,17 @@
 
 			//trace("imageID - ", _imageTable[imageID]);
 			var imageIndex:int = 0;
-			if (_imageTable[imageID].length > 1)
+			var image:Image = null;
+			if (_imageTable[imageID] != undefined)
 			{
-				imageIndex = Math.floor( Math.random() * _imageTable[imageID].length )
-				trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.")
+				// More than 1 image? Pick one at random.
+				if (_imageTable[imageID].length > 0)
+				{
+					imageIndex = Math.floor( Math.random() * _imageTable[imageID].length );
+					trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
+					image = _imageTable[imageID][imageIndex];	
+				}
 			}
-
-			var image:Image = _imageTable[imageID][imageIndex];
 
 			if (image != null)
 			{
