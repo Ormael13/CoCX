@@ -295,7 +295,16 @@ import classes.PerkType;
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
 		public var ballSize:Number = 0;
-		public var hoursSinceCum:Number = 0;
+		
+		private var _hoursSinceCum:Number = 0;
+		public function get hoursSinceCum():Number { return _hoursSinceCum; }
+		public function set hoursSinceCum(v:Number):void {
+			if (v == 0)
+			{
+				trace("noop");
+			}
+			_hoursSinceCum = v; 
+		}
 		
 		//FEMALE STUFF
 		//TODO: Box into Female genital class?

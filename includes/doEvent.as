@@ -39,7 +39,11 @@ public function doEvent(eventNo:Number):void
 		jojoScene.jojoSprite();
 		outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"", true);
 		
-		dynStats("str", .5,"tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", -1);
+		// Workaround to avoid meditation resetting hours since cum, because BLIND FIND REPLACING ON THE ENTIRE CODEBASE IS A LEGITIMATELY FANTASTIC FUCKING IDEA.
+		var hscT:int = player.hoursSinceCum;
+		dynStats("str", .5, "tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", -1);
+		player.hoursSinceCum = hscT;
+		
 		if (player.findStatusAffect(StatusAffects.JojoMeditationCount) < 0)
 			player.createStatusAffect(StatusAffects.JojoMeditationCount, 1, 0, 0, 0);
 		else
@@ -1847,14 +1851,21 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", doClear);
 			if (player.lust > 40)
+			{	
+				var hst:Number = player.hoursSinceCum;
 				dynStats("lus", -10);
+				player.hoursSinceCum = hst;
+			}
 			doNext(13);
 			return;
 		}
 		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicing to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", doClear);
 		//OLD STAT LINE - dynStats("str", .25,"tou", .25, "spe", .25, "int", .25, "lib", -1, "lus", -10, "cor", -2);
 		//Reduces lust
+		var leSigh:Number = player.hoursSinceCum;
 		dynStats("lus", -30);
+		player.hoursSinceCum = leSigh;
+		
 		//Corruption reduction - faster at high corruption
 		if (player.cor > 80)
 			dynStats("cor", -1);

@@ -1732,7 +1732,8 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	
 	player.sens+=sens;
 	player.lust+=lust2;
-	player.cor+=corr;
+	player.cor += corr;
+	
 	//Bonus gain for perks!
 	if(player.findPerk(PerkLib.Strong) >= 0 && stre >= 0) player.str+=stre*player.perk(player.findPerk(PerkLib.Strong)).value1;
 	if(player.findPerk(PerkLib.Tough) >= 0 && toug >= 0) player.tou+=toug*player.perk(player.findPerk(PerkLib.Tough)).value1;
