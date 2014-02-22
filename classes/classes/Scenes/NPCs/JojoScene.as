@@ -39,11 +39,11 @@ private function vaginaOrDicksOrCrotch():String {
 	return "FUKK: ERROR";
 }
 private function mouthMuzzle():String {
-	if(player.faceType >= FACE_HORSE) return "muzzle";
+	if (player.hasMuzzle()) return "muzzle";
 	return "mouth";
 }
 private function faceMuzzle():String {
-	if(player.faceType >= FACE_HORSE) return "muzzle";
+	if (player.hasMuzzle()) return "muzzle";
 	return "face";
 }
 public function tentacleJojo():Boolean {
