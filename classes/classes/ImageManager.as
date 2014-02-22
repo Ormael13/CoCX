@@ -58,11 +58,15 @@
 
 
 
-			for (var i:int = 0; i < _imgListXML.ImageSet.length(); i++)
+			for (var i:int = 0; i < _imgListXML.ImageList.ImageSet.length(); i++)
 			{
-				for (var j:int = 0; j <  _imgListXML.ImageSet[i].ImageFile.length(); j++)
+				for (var j:int = 0; j <  _imgListXML.ImageList.ImageSet[i].ImageFile.length(); j++)
 				{
-					_allImagePaths[_imgListXML.ImageSet[i].ImageFile[j]] = _imgListXML.ImageSet[i].@id;
+					for (var k:int = 0; k < _imgListXML.ExtensionList.ExtensionType.length(); k++)
+					{
+						// Programmatic extension concatenation! Woot.
+						_allImagePaths[_imgListXML.ImageList.ImageSet[i].ImageFile[j]+"."+_imgListXML.ExtensionList.ExtensionType[k]] = _imgListXML.ImageList.ImageSet[i].@id;
+					}
 				}
 			}
 			for (var imgPath:String in _allImagePaths)
