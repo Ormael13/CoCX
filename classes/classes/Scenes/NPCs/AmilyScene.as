@@ -1958,7 +1958,7 @@ package classes.Scenes.NPCs
 				outputText("it's almost like the fur on her cheeks has turned red.", false);
 			else
 				outputText("she nearly resembles an imp!", false);
-			outputText("  Excusing herself, you get dressed, receiving a lazy wave goodbye and a happy smile as you head out of the door and head for the main street, from there finding the way back to your camp.\n\n", false);
+			outputText("  Excusing yourself, you get dressed, receiving a lazy wave goodbye and a happy smile as you head out of the door and head for the main street, from there finding the way back to your camp.\n\n", false);
 			//Affection boost?
 			flags[kFLAGS.AMILY_AFFECTION] += 3;
 			dynStats("lus=", 0);
