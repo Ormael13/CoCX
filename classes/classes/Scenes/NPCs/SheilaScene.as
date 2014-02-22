@@ -4637,7 +4637,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	outputText("\n\n\"<i>Mmm...</i>\" she hums, reaching eagerly for your [cockHeadFit 56] with her finger as if getting it inside were the only thing that mattered.  You back up again, and she crawls over and onto you, rubbing her slimy cunt against your [legs].  Her strokes trigger a small orgasm in her, and as her pussy sprays a load of worms onto your " + player.skinFurScales() + " she kisses you affectionately, looking right into your eyes; you're flooded with nebulous mental images of fucking a slender, sickly pale Sheila as both of you are covered and hidden from the sunlight by a massive colony, of her riding you with her slithering, wormy pussy until the semen spitting from your [cockFit 56] leads the parasites within right to your slit, and, most disturbingly, of Sheila stretching your slick urethra wide open and climbing into your penis herself!  Shaking it off, you quickly break contact, pick up your stuff, and depart, leaving the infested woman behind... but the visions don't go away.");
 	
 	//reduce lust to min and then take 20 libido-based lust damage, lower PC corruption by 10, remove dickworm infestation, set sheilapreg = -2 (yes, -2; in case I want to use Worm Sheila later)
-	player.removeStatusAffect(StatusAffects.Infest);
+	player.removeStatusAffect(StatusAffects.Infested);
 	dynStats("lus=", 0, "cor", 10);
 	dynStats("lus", player.lib/5);
 	flags[kFLAGS.SHEILA_PREG] = -2;

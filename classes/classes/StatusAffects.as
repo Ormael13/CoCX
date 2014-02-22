@@ -70,7 +70,6 @@ package classes
 		public static const ImmolationSpell:StatusAffectType = mk("Immolation Spell");
 		public static const ImpGangBang:StatusAffectType = mk("Imp GangBang");
 		public static const IncubusBribed:StatusAffectType = mk("IncubusBribed");
-		public static const Infest:StatusAffectType = mk("Infest");
 		public static const Infested:StatusAffectType = mk("infested");
 		public static const IzmaBlowing:StatusAffectType = mk("IzmaBlowing");
 		public static const IzumisPipeSmoke:StatusAffectType = mk("Izumis Pipe Smoke");
