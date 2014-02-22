@@ -91,7 +91,7 @@ private function checkBakeryMenu():void {
 	menu();
 	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4),"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
 	
-	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "doughnuts", 5));
+	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "brownies", 5));
 	addButton(1,"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4));
 	addButton(2,"Cupcakes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
 	addButton(3,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5));
