@@ -57,8 +57,6 @@ package classes.Scenes.Places.Owca
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 10;
 			this.gems = rand(25)+40;
-			this.special1 = 5043;
-			this.special2 = 5044;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.tailType = TAIL_TYPE_DEMONIC;

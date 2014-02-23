@@ -1659,8 +1659,7 @@ public function zetazAI():void {
 	
 	//STANDARD COMBAT STATUS AFFECTS HERE
 	if(monster.findStatusAffect(StatusAffects.Stunned) >= 0) {
-		if(monster.plural) outputText("Your foes are too dazed from your last hit to strike back!", false);
-		else outputText("Your foe is too dazed from your last hit to strike back!", false);
+		outputText("Your foe is too dazed from your last hit to strike back!", false);
 		monster.removeStatusAffect(StatusAffects.Stunned);
 		combatRoundOver();
 		return;

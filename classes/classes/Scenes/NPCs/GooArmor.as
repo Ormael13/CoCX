@@ -32,7 +32,7 @@ package classes.Scenes.NPCs
 
 		public function GooArmor()
 		{
-			super(false);
+			super(true);
 			this.a = "a ";
 			this.short = "Goo Armor";
 			this.imageName = "gooarmor";

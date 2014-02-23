@@ -103,6 +103,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new MilkySuccubus();},
 			function ():Monster {return new Minerva();},
 			function ():Monster {return new MinotaurLord();},
+			function ():Monster {return new OmnibusOverseer();},
 			function ():Monster {return new PhoenixPlatoon();},
 			function ():Monster {return new SandMother();},
 			function ():Monster {return new SandWitchMob();},
@@ -138,38 +139,42 @@ package classes.Scenes.Explore
 
 			if (monsterIdx >= allMonsters.length) {
 				outputText("You have fought every monster.");
-				doNext(1);
-				return;
+			} else {
+				var m:Monster = allMonsters[monsterIdx]();
+				m.onDefeated = function (hpVictory:Boolean):void
+				{
+					gameState = 0;
+					getGame().clearStatuses(false);
+					statScreenRefresh();
+					exploreDebugMonsters(monsterIdx + 1);
+				};
+				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
+				{
+					gameState = 0;
+					getGame().clearStatuses(false);
+					statScreenRefresh();
+					exploreDebugMonsters(monsterIdx + 1);
+				};
+				m.onPcRunAttempt = function ():void
+				{
+					gameState = 0;
+					getGame().clearStatuses(false);
+					statScreenRefresh();
+					exploreDebugMonsters(monsterIdx + 1);
+				};
+				outputText("You are going to fight " + m.a + " " + m.short + ".");
+				addButton(0, "Fight", function():void{
+					outputText("\n\nStarting combat...");
+					startCombat(m);
+				});
+				addButton(1, "Skip", exploreDebugMonsters, monsterIdx+1);
+				addButton(2, "Heal", function():void{
+					player.HP = player.maxHP();
+					player.lust = 0;
+					statScreenRefresh();
+				});
 			}
-
-			var m:Monster = allMonsters[monsterIdx]();
-			m.onDefeated = function (hpVictory:Boolean):void
-			{
-				gameState = 0;
-				//doNext(curry(exploreDebugMonsters, monsterIdx + 1));
-				exploreDebugMonsters(monsterIdx + 1);
-			};
-			m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
-			{
-				gameState = 0;
-				exploreDebugMonsters(monsterIdx + 1);
-			};
-			m.onPcRunAttempt = function ():void
-			{
-				gameState = 0;
-				exploreDebugMonsters(monsterIdx + 1);
-			};
-			outputText("You are going to fight " + m.a + " " + m.short + ".");
-			addButton(0, "Fight", function():void{
-				outputText("\n\nStarting combat...");
-				startCombat(m);
-			});
-			addButton(1, "Skip", exploreDebugMonsters, monsterIdx+1);
-			addButton(2, "Heal", function():void{
-				player.HP = player.maxHP();
-				player.lust = 0;
-				statScreenRefresh();
-			});
+			if (monsterIdx>1) addButton(6, "Go Back", exploreDebugMonsters, monsterIdx-1);
 			addButton(9, "Enough", eventParser, 1);
 		}
 

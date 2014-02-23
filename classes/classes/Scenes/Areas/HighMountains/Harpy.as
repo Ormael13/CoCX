@@ -55,14 +55,7 @@
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				harpyUberCharge();
 			}
-			if (special1 > 0) select++;
-			if (special2 > 0) select++;
-			if (special3 > 0) select++;
-			var rando:int = int(Math.random() * select);
-			if (rando == 0) eAttack();
-			if (rando == 1) game.eventParser(special1);
-			if (rando == 2) game.eventParser(special2);
-			if (rando == 3) game.eventParser(special3);
+			super.performCombatAction();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

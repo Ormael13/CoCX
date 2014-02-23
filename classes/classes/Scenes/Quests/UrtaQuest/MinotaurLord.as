@@ -13,11 +13,6 @@ package classes.Scenes.Quests.UrtaQuest
 
 		override protected function performCombatAction():void
 		{
-			fidoAI();
-		}
-
-		private function fidoAI():void
-		{
 			if (HP < 300 && statusAffectv1(StatusAffects.MinoMilk) < 4) minotaurDrankMalk();
 			else if (rand(4) == 0 && player.weaponName != "fists") minotaurDisarm();
 			else if (findStatusAffect(StatusAffects.Timer) < 0) minotaurLordEntangle();

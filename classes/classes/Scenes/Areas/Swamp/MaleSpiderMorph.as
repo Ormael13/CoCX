@@ -3,7 +3,7 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.internals.*;
 
-	public class MaleSpiderMorph extends Monster
+	public class MaleSpiderMorph extends AbstractSpiderMorph
 	{
 
 

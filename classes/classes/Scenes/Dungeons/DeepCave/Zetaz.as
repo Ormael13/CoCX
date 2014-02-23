@@ -62,9 +62,6 @@ package classes.Scenes.Dungeons.DeepCave
 			this.gems = rand(55) + 150;
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
-			this.special1 = special1;
-			this.special2 = special2;
-			this.special3 = special3;
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "small";
 			checkMonster();

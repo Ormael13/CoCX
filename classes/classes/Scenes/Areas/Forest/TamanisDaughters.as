@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Forest
 {
 	import classes.*;
 	import classes.Scenes.Monsters.Goblin;
+	import classes.internals.WeightedDrop;
 
 	public class TamanisDaughters extends Goblin
 	{
@@ -26,7 +27,7 @@ package classes.Scenes.Areas.Forest
 			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n", false);
 			game.dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
 		}
-		
+
 		private function tamaniShowsUp():void {
 			if(findStatusAffect(StatusAffects.Tamani) < 0 && rand(6) == 0) {
 				createStatusAffect(StatusAffects.Tamani,0,0,0,0);
@@ -54,10 +55,10 @@ package classes.Scenes.Areas.Forest
 			//mid-round madness!
 			midRoundMadness();
 			tamaniShowsUp();
-				
-			if(special1 > 0) select++;
-			if(special2 > 0) select++;
-			if(special3 > 0) select++;
+
+			if(special1 > 0 || special1 is Function) select++;
+			if(special2 > 0 || special2 is Function) select++;
+			if(special3 > 0 || special3 is Function) select++;
 			var rando:int = rand(select);
 			//Tamani's Daughters get multiattacks!
 			if(rando == 0) {
@@ -87,7 +88,7 @@ package classes.Scenes.Areas.Forest
 
 		public function TamanisDaughters()
 		{
-			super(false);
+			super(true);
 			this.a = "the group of ";
 			this.short = "Tamani's daughters";
 			this.imageName = "tamanisdaughters";
@@ -119,6 +120,15 @@ package classes.Scenes.Areas.Forest
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8 + (Math.floor(player.statusAffectv2(StatusAffects.Tamani) / 2 / 10));
 			this.gems = rand(15) + 5;
+			this.drop = new WeightedDrop().
+					add(consumables.GOB_ALE,5).
+					addMany(1,consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE,1);
+			this.special1 = goblinDrugAttack;
+			this.special2 = goblinTeaseAttack;
 			checkMonster();
 		}
 

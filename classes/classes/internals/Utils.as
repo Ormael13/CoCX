@@ -75,7 +75,8 @@ package classes.internals
 		{
 			var error:String = "";
 			for each (var field:String in nnf) {
-				if (!o.hasOwnProperty(field) || !(o[field] is Number)) error += "Misspelling in "+func+".nnf: '"+field+"'. ";
+				if (!o.hasOwnProperty(field) || !(o[field] is Number) && o[field] != null) error += "Misspelling in "+func+".nnf: '"+field+"'. ";
+				else if (o[field] == null) error += "Null '"+field+"'. ";
 				else if (o[field] < 0) error += "Negative '"+field+"'. ";
 			}
 			return error;
@@ -84,8 +85,9 @@ package classes.internals
 		{
 			var error:String = "";
 			for each (var field:String in nef) {
-				if (!o.hasOwnProperty(field) || !(o[field] is String)) error += "Misspelling in "+func+".nef: '"+field+"'. ";
-				else if (o[field] == "") error += "Empty "+field+". ";
+				if (!o.hasOwnProperty(field) || !(o[field] is String) && o[field] != null) error += "Misspelling in "+func+".nef: '"+field+"'. ";
+				else if (o[field] == null) error += "Null '"+field+"'. ";
+				else if (o[field] == "") error += "Empty '"+field+"'. ";
 			}
 			return error;
 		}
