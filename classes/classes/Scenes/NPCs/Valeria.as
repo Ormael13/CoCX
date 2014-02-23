@@ -407,8 +407,8 @@ private function declineValeriasNeeds():void {
 
 private function takeValeria():void {
 	spriteSelect(79);
+	armors.GOOARMR.equip(player,true,true);
 	doNext(1);
-	player.armor = armors.GOOARMR;
 }
 
 public function valeriaAndGooThreeStuff():void {
