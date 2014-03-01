@@ -44,7 +44,7 @@ public function masturbateMenu():void {
 		button++;
 	}
 	if(button == 1 && !fappingItems(false)) {
-		if(player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) {
+		if((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 			if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 				eventParser(10);
 			else 
