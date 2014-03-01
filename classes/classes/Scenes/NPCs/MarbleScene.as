@@ -3040,6 +3040,10 @@ private function marblePreggoChance(preggerMult:Number):void {
 			flags[kFLAGS.MARBLE_PREGNACY_TYPE] = 1;
 		}
 	}
+	else
+	{
+		trace("Knockup failed");
+	}
 	
 }
 

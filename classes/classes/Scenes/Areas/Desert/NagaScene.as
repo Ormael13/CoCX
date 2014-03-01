@@ -923,7 +923,7 @@ private function eggUpANagaSpiderLike():void {
 	
 	outputText("\n\nThe tight sensation of the snake-lady's pussy wrapped around your egg-chute drives you even further into lust, and as your spidery limbs clasp her lower half tighter you throw your arms recklessly around her shoulders, smooshing her breasts into your [chest] as you lock lips and curl your tongue around hers.");
 	
-	outputText("\n\nHer squirming slows, and she begins to moan around your invading tongue, but you don't even  notice, jackhammering your pole into her over and barely remembering to breathe as you rut against her.  You're all but whimpering into her mouth, clasping her against you in your frenzied attempt to relieve yourself.");
+	outputText("\n\nHer squirming slows, and she begins to moan around your invading tongue, but you don't even notice, jackhammering your pole into her over and over, barely remembering to breathe as you rut against her.  You're all but whimpering into her mouth, clasping her against you in your frenzied attempt to relieve yourself.");
 	
 	outputText("\n\nFinally, muscles deep in your spider half seize and clench, and you shove her back against the sand as you arch your own, saliva dripping from both your mouths.  Your eggs flood through your ovipositor, the naga's stomach inflating near instantly with the weight of your unborn brood.  Her vagina clenches around your shaft in orgasm, dribbling femspunk around your swollen egg-chute.");
 	
