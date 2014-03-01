@@ -823,7 +823,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 			outputText("\n\nLoppe grins at you.  \"<i>I just knew you'd come back for more.</i>\"  She takes your hand in hers and fairly drags you along, already heading for the door.");
 		}
 		//(High Libido)
-		else if(player.minLust() >= 70) {
+		else if(player.lib >= 70) {
 			outputText("\n\nYou thought you held out pretty well last time.");
 			outputText("\n\nLoppe smiles teasingly at you.  \"<i>Really?  Care to remind me who was snoring on my bed, too spent to stay awake?</i>\"");
 			outputText("\n\nWho, indeed?  Didn't Loppe herself fall asleep at the same time?  Your lover giggles.  \"<i>I was just being nice, sugar; I thought you'd like to sleep with someone besides you.  But if you're so confident in your abilities, why don't you follow me and show me just what you're made of?</i>\"");
