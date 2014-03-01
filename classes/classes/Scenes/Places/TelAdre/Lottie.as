@@ -84,16 +84,17 @@ public function encounterLottie(charge:Boolean = false):void {
 	var comedy1:Number = 0;
 	var comedy2:Number = 0;
 	var comedy3:Number = 0;
-	
+
 	//Choice menu vars
 	//[Appearance][Talk][Exercise][Give Item][Sex][Hug]
 	var item:Number = 3133;
 	var sex:Number = 0;
 	var hug:Number = 3148;
-	
+
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00310] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00311] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00312] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00313] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00314] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00315] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00318] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00319] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00320] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298] > 0 && player.lust >= 33) sex = 3139;
-	
+
 	outputText("", true);
+	outputText(images.showImage("lottie-encounter"));
 	if(charge) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour at the gym into her hand.\n\n", false);
@@ -111,7 +112,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		outputText("You approach the pig girl as she tightly wraps a towel around herself, accentuating her plump figure. Eyes darting around and searching for anyone that may have been watching, the girl spots you walking toward her and squeals, clearly embarrassed by her body in front of someone as fit as yourself.  Quickly moving her attention elsewhere, the flustered lady starts walking briskly in the opposite direction only to end up face to face with a wall. She turns around and walks toward you, her cheeks noticeably redder than before.\n\n", false);
 
 		outputText("\"<i>Ah! Hello, I didn't quite see you there! Ohoho!</i>\" She blurts out as she awkwardly stretches out her arm for what appears to be a handshake. You mentally congratulate her less-than-subtle attempt to bury the past few seconds into the ground and return the gesture, much to her relief. You're certain she would've died of embarrassment if you hadn't. She sighs deeply and meets your gaze with a smile. You deduce that it's more than likely her first time here, hence the nervousness.  \"<i>I guess you've caught me in the act, huh? I've tried losing weight for years, but I've always lost the motivation.</i>\" The girl explains. \"<i>You know what they say – the first few steps are always the hardest.</i>\"  You nod in agreement as you both walk out of the pool area.\n\n", false);
-	
+
 		outputText("The pig girl begins to ramble on about her past attempts at dropping pounds, from eating strange pills to eating primarily eggs - most of them involved eating. You ask if she's ever exercised before. She looks visibly hurt at the sudden inquiry, but continues to talk. \"<i>To tell you the truth, I've never actually gone to a gym - I'd always stop at the front. I used to get away with eating what I liked because of my fast metabolism, but now it's caught up with me. I'm pretty porky now!</i>\"  She chuckles at her own joke, though obviously saddened by the realisation. You tell her she still looks great, for what it's worth.\n\n", false);
 
 		//[If Meet Full Requirements]
@@ -123,7 +124,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		//[If Don't Meet Full Requirements]
 		else {
 			outputText("\"<i>Oh, uh... thanks! Hey, listen – I gotta go start my yoga class now, but it was pretty great letting it all out with you. We should run into each other again sometime!</i>\"  The girl flashes a grin and jogs towards the showers.  \"<i>My name's Lottie, by the way!</i>\"\n\n", false);
-		
+
 			outputText("You aren't really doing much else here, so you decide to return home.", false);
 			doNext(13);
 		}
@@ -202,7 +203,7 @@ public function encounterLottie(charge:Boolean = false):void {
 			//first time
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00302] == 0) {
 				outputText("\"<i>H-hiya, " + player.short + "! I'm... I'm really glad you're being nice again. To be honest, when you're angry, it – I get really scared, y'know? But I'm glad even if we're just like this.</i>\" She throws you a genuine smile, she's confident that you won't mistreat her again. You smile back, silently assuring her that you won't, today.", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00302] = 1;	
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00302] = 1;
 			}
 			//[Encouragement moved from 30 to 31, regular]
 			else {
@@ -277,7 +278,7 @@ public function encounterLottie(charge:Boolean = false):void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00300] = lottieMorale();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] = lottieTone();
 }
-	
+
 
 //[Sex]
 private function fourthMeetingChooseSexWithLottie():void {
@@ -318,7 +319,7 @@ private function acceptBeingLottiesHamSandwich():void {
 	outputText("", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] = 1;
 	outputText("\"<i>A-ah, really? Y'mean it? This isn't some trick or something, right? You ain't about to go ahead and flake out on me, are you?</i>\" You assure her you're serious if she is, though you make a mental note that she's more likely to flake out than you are, given her history. \"<i>Eeee! Thanks, " + player.mf("big guy","babe") + " – I can't wait to get started! For the record, my name's Lottie. What about yourself?</i>\"  You tell her your name, and remark on her enthusiasm. \"<i>" + player.short + ", huh? Well " + player.short + ", I'm excited because I think the two of us are about to become super close! Do you feel it? Do ya?</i>\"  Lottie wiggles in excitement, loosening the already skimpy towel and revealing one of her perky nipples. You definitely feel something, that's for sure. She follows your eyes down to her breasts and reddens as she quickly covers herself up as best as she can - only succeeding in making her pillowy breasts push up against the towel, enhancing her cleavage.\n\n", false);
-	
+
 	outputText("You take this opportunity to get a good look at Lottie. She stands at around 4'8</i>\", considerably shorter than average, ", false);
 	if(player.tallness > 60) outputText("and shorter than you", false);
 	else if(player.tallness > 53) outputText("but you can't judge, being roughly the same height", false);
@@ -356,7 +357,7 @@ private function gotInShapeAcceptTrainingOffer():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] = 1;
 	outputText("", true);
 	outputText("\"<i>A-ah, really? Y'mean it? This isn't some trick or something, right? You ain't about to go ahead and flake out on me, are you?</i>\" You assure her you're serious if she is, though you make a mental note that she's more likely to flake out than you are, given her history. \"<i>Eeee! Thanks, " + player.mf("big guy","babe") + " – I can't wait to get started!</i>\" You chuckle, remarking on her enthusiasm. \"<i>Well " + player.short + ", I'm excited because I think the two of us are about to become super close! Do you feel it? Do ya?</i>\" Lottie wiggles in excitement, loosening the already skimpy towel and revealing one of her perky nipples. You definitely feel something, that's for sure. She follows your eyes down to her breasts and reddens as she quickly covers herself up as best as she can - only succeeding in making her pillowy breasts push up against the towel, increasing her cleavage.\n\n", false);
-	
+
 	outputText("You take this opportunity to get a good look at Lottie. She stands at around 4'8</i>\", considerably short on average, ", false);
 	if(player.tallness > 60) outputText("and shorter than you", false);
 	else if(player.tallness > 53) outputText("but you can't judge, being roughly the same height", false);
@@ -380,22 +381,22 @@ private function drinkWaterWithYourHamhock():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176] == 0) outputText("You've never had any experience with the yoga classes first hand, but you tell ", false);
 	else outputText("You've had experience with the yoga classes, so you tell ", false);
 	outputText("Lottie it's a great way to meet new people.\n\n", false);
-	
+
 	outputText("She seems to loosen up around the response, and eventually goes back to her friendly, albeit incredibly naive, demeanour. You both leave through the front of the gym a short time later – it's pretty dark at this point. Before you turn back home though, Lottie stops you. \"<i>Hey, y'know, I... I really had a lot of fun. I had no idea that gyms could be this great!</i>\" she beams, punching you in the shoulder before retracting her hand in slight pain. You decide to give her a thumbs up and a cheesy grin before walking away into the night, happy with the new friendship you've made.", false);
 	doNext(13);
 }
-	
+
 //[Shake]
 private function drinkLustWithYourHamhock():void {
 	spriteSelect(36);
 	outputText("", true);
 	outputText("You decide to down the cup of pink liquid, savoring the sweet taste as it pours down your throat. Your thirst quenched, you start to walk back towards the track when you're suddenly overcome with a warm feeling that stretches down to your groin. " + SMultiCockDesc() + " stirs from beneath your " + player.armorName + " – you need to fuck something, and fast.  \"<i>Uh, is something wrong?</i>\" Lottie glances over to you, noticing the bulge in your pants as it strains against your " + player.armorName + ". She looks up at your face, concerned about your well being. You grin and tell her you've had enough running.  Confused, Lottie asks what you mean.  You explain that you know a far more effective way to lose weight and stay in shape – in fact, it's how you got to be the way you are now.  You can see Lottie's eyes widen at the idea of such a technique, especially considering your own well-muscled physique.  \"<i>I'm all ears! What is it?</i>\"  She asks.  Clearly not getting the picture, you grab her hand and put it on your crotch.  Lottie quietly squeals and looks around to see if anyone noticed before looking back at you.  \"<i>Oh, um, I don't- I don't know about that, " + player.short + "...</i>\" She mumbles, her hand still remaining on your growing hard-on.  It's perfectly fine - you've trained like this with hundreds of people, you lie.  Lottie swallows and looks down at the sound of 'hundreds'.  Not being one to question your methods, she begins to stroke your hardening length through your " + player.armorName + ", using her palm to massage your shaft", false);
-	//[if balls] 
+	//[if balls]
 	if(player.balls > 0) outputText(" while her fingers nervously trace around your balls", false);
 	outputText(". You stop her for now, though not before softly squeezing her hand as it caresses your girth. You know where you two can go 'work out', you tell her. She nods, her eyes glued to your erection.\n\n", false);
-	
+
 	outputText("You take her by the hand and lead her into one of the empty saunas. \"<i>" + player.short + "...</i>\" You grab her by the hips and lean her against the wall, throwing off her towel and revealing her velvety skin underneath. Reaching down, you grab a handful of her luxurious ass, squeezing and slapping it lightly. Lottie moans into your shoulder and reaches towards your groin, removing your " + player.armorName + ". She begins stroking " + oMultiCockDesc() + " lightly, picking up the pace as you continue to work on her pert rump. You can't help but lust over her full figure, using one of your hands to firmly grope her pillowy jugs and reaching your other towards her glistening pussy. You move your hand over her cushiony rack, before burying your head into her bosom and eagerly sucking on one of her nipples, fondling the other between your thumb and forefinger. Your other hand is already fast at work, fingering her hot cunt. You can feel her legs about to buckle beneath their own weight. Lottie moans in between short, hot breaths, \"<i>Y-you're... really amazing, " + player.mf("guy","lady") + ".</i>\"  You give her chubby ass a hard slap in agreement.  Lottie squeals in glee, jerking your " + cockDescript(0) + " as it pokes into her soft stomach. The sensation of your tip rubbing against her velvety skin drives you wild.\n\n", false);
-	
+
 	outputText("You tell Lottie you've decided you're going to take her for a vigorous work out. She can only pant with anticipation.", false);
 	dynStats("lus", 99);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
@@ -407,20 +408,21 @@ private function drinkLustWithYourHamhock():void {
 public function analLottieMilkshake():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-in-teh-butzor"));
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("You brush her grip off of " + oMultiCockDesc() + ", only to turn her around and fit your girth between her large cheeks", false);
 	if(player.totalCocks() == 2) outputText(", managing to squeeze in your other cock along with it", false);
 	else if(player.totalCocks() > 2) outputText(", the rest of your dicks poking and prodding against her soft flesh", false);
 	outputText(".  \"<i>You sure do like my butt, huh?</i>\"  She giggles softly, satisfied that at least some of her fat is being put to use.  You groan as she starts to move her ample hips, massaging your " + cockDescript(x) + " within her jiggling buttocks.  Your tip brushes against her asshole, smearing pre-cum all over the hot entrance.  Lottie starts to push back towards your cock, clearly overcome with lust.  You wait a few seconds as she aimlessly grinds against you before you spread her cheeks and plunge your " + cockDescript(x) + " into her tight backdoor. Lottie squeals against the wall in delight as you fill her stomach and begin pounding away at her relentlessly, her large tits bouncing rhythmically. She continues to drive herself into you, her tight, fiery insides squeezing your length whilst you watch her heavy butt ripple with every thrust.\n\n", false);
-	
+
 	outputText("Lottie is a complete mess, gasping and convulsing underneath you as you plunge into her depths. Her mouth hangs wide open as she holds on to one of her plush tits, using her free hand to pleasure herself. You take hold of her lavish buttcheeks and force your length in deep, bottoming out inside her hot ass. You remain inside her and begin gyrating your hips, rubbing against the tight walls of her interior. Her legs collapse underneath you and you wrap one hand around her pot belly to hold her in place, resuming your thrusting.\n\n", false);
 
 	outputText("\"<i>A-aa-ah, I-I... AHH!</i>\" Lottie oinks noisily, her eyes rolling to the back of her head and her large thighs slapping against your own, pulling your " + cockDescript(x) + " further in. She shudders in orgasm", false);
 	if(player.balls > 0) outputText(", her soaked pussy rubbing against your balls", false);
 	outputText(".\n\n", false);
 
-	//[If Multi] 
+	//[If Multi]
 	if(player.cockTotal() > 1) {
 		outputText("Deciding you aren't done with her bouncy rear, you take ", false);
 		if(player.cockTotal() == 2) outputText("your other cock", false);
@@ -456,8 +458,9 @@ public function analLottieMilkshake():void {
 public function getSuckedOffByAHamSandwich():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-gives-you-a-blowjob"));
 	var x:Number = player.biggestCockIndex();
-	
+
 	outputText("You grab Lottie's shoulders and firmly move her down towards your crotch. She kneels down, face to face with your " + cockDescript(x) + ".  Feeling her hot breath against your " + player.skinFurScales() + ", you tell her to suck it.\n\n", false);
 
 	//[If player cock is at or below 4']
@@ -503,22 +506,22 @@ public function getSuckedOffByAHamSandwich():void {
 	if(player.cockTotal() > 1) outputText(" stops rubbing your " + cockDescript(x) + " to ", false);
 	//(Otherwise)
 	else outputText(" reaches down towards her dripping pussy; plunging two fingers into her wetness while using the other hand to ", false);
-	//If Balls] 
+	//If Balls]
 	if(player.balls > 0) outputText("knead your " + ballsDescriptLight(), false);
 	else outputText("reach around and squeeze your " + buttDescript(), false);
 	outputText(".  You grab the back of her head and pull her in further, bobbing her head while she slurps and sucks at your meatstick. The stimulation almost causes you to explode right then and there, but her bouncing tits give you an idea.\n\n", false);
-	
+
 	outputText("You slowly take your " + cockDescript(x) + " out of her hot mouth, a small *pop* breaking the silence as it escapes her plump, puckered lips. Grabbing one of her hefty tits in your hands, you rub your cockhead against her erect nipple, eliciting a small moan from the sweaty slut. You slap your " + cockDescript(x) + " against her sweaty chest a few times before burying it in between her cleavage, ", false);
-	//[If the player has a cock equal to or over 13'] 
+	//[If the player has a cock equal to or over 13']
 	if(player.cocks[x].cockLength > 12) outputText("your sensitive tip brushing against her eager mouth", false);
 	//Otherwise]
 	else outputText("resting comfortably in between her cushiony fuckpillows", false);
 	outputText(". Lottie wraps her tits around your length and begins working at pleasuring your every inch.\n\n", false);
-	
-	//[If the player has a cock equal to or over 13'] 
+
+	//[If the player has a cock equal to or over 13']
 	if(player.cocks[x].cockLength > 12) outputText("Licking at your cockhead, Lottie squishes her breasts against the rest of your member, making sure to lap up the stray beads of pre-cum squirting from your tip. Relishing the taste of your " + cockDescript(x) + " in her mouth she begins to suck at your head, flicking her tongue around your urethra and pressing her full lips against it, creating a vacuum of pleasure around your manhood.\n\n", false);
 
-	//[If Multi] 
+	//[If Multi]
 	if(player.cockTotal() > 1) {
 		outputText("You decide to make use of ", false);
 		if(player.cockTotal() == 2) outputText("your", false);
@@ -547,6 +550,7 @@ public function getSuckedOffByAHamSandwich():void {
 private function lotteryAppearance():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-examine-appearance"));
 	//[If Figure between 0 – 20]
 	if(lottieTone() <= 20) {
 		outputText("She stands at around 4'8</i>\", considerably short on average, ", false);
@@ -702,9 +706,9 @@ private function talkToPigSlut():void {
 	else if(lottieMorale() == 0 && lottieTone() == 100 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00315] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00315] = 1;
 		outputText("You tell Lottie that you want to talk, though the girl seems to be fidgeting – something important seems to have occupied her mind. She's broken out into a sweat, her nervousness getting the better of her before she decides to spill her thoughts. \"<i>I didn't want you to leave me!</i>\" she cries, loud enough to attract the attention of several cafe-goers who look your way, but quietly ignore what obviously isn't their business. \"<i>I've spent so much of my time... so much of your time to look like this, a-and I thought things would be better once I looked better, but...!</i>\" The girl looks up at you, on the verge of tearing up in frustration. You tell her you don't quite follow, when she quickly pulls you out of your seat and runs towards the yoga rooms. Inside, a girl sits alone on a mat, stretching her legs quite aimlessly when she spots the both of you and waves shyly. \"<i>" + player.short + "... this is Elle. She's... she's my friend.</i>\" You stand quietly, staring at the tanned beauty in front of you. She's naturally more athletic-looking than Lottie, having a thinner build and a smaller bust – though her wide hips certainly aren't something to laugh at. You're more intent on staring at her most glaring features, however. The bronze girl sports four arms, each of which ends in carapace-covered hands, giving off the impression of black wrist-gloves. Two spider-like arms are visibly poking from her back, though they seem more aesthetic than functional. Her neat, pale-blonde hair is tied in a side pony-tail which frames her soft face. Two black dots mark either side of her eyes, though you aren't sure if they're used for enhanced vision or decoration.\n\n", false);
-		
+
 		outputText("The spider-girl notices your curious gaze and smiles politely. You wonder why she hasn't introduced herself until she uses two of her hands to quickly and efficiently spin a small web between them, forming a visible sentence. 'Hi!' it reads. \"<i>Elle's a mute, so she spins sentences with her webs.</i>\" Lottie explains. You chuckle to yourself as you realise why such an attractive person would be able to make friends with the timid pig-girl. She seems to be at ease in the company of her arachnid-friend, so you decide to question her frustration earlier. Lottie looks up at you before taking another glance at Elle, who nods and stands up, advancing towards the both of you. \"<i>I... I thought you'd l-leave me once you were done with me.</i>\" Lottie slowly removes her top, her pillowy tits bouncing out of the fabric. \"<i>I want to be worth something to y-you, so... I'm making myself worth it.</i>\" She jumps out of her tight shorts, while you turn to look at the spider-girl, her bronze, slim body already undressed. She's quick, you think to yourself. \"<i>A-at first, Elle didn't want to do it. She doesn't know you at all, and... and it would've been weird to share me with someone else.</i>\" The sentence plays back in your head. It would've been weird to share... Lottie? What's going on? \"<i>B-but eventually I convinced her... because she's in love with me, like I am with you.</i>\" And then it clicks. Someone had fallen for your pig-slut, who took advantage of her feelings to convince her to fuck you. Just so you wouldn't leave her.\n\n", false);
-	
+
 		outputText("You might as well embrace the new member of your group.", false);
 		//[Threesome][Elle][Oh I Get It]
 		comedy1 = 0;
@@ -966,7 +970,7 @@ private function lottieFatLoserCulminationFuckChoice():void {
 	outputText("You've decided that Lottie's only worth one purpose now. A few minutes later and you've taken your whore to the washrooms. Mirrors line the sides of the walls to allow members to observe their physiques. It's entirely empty for the night, though you make sure to lock the door just in case. You turn around to see Lottie cowering in the corner. She knows what you want – and you swear on Mareth's giant tree titties you'll get it. Walking over, you bark at Lottie to strip down and get on all fours. She whimpers at your command, but knows full well what you'll do if she doesn't. Slowly, but surely, she pulls down her tank top, revealing her creamy tits as they bounce out of her clothing. It's not like you haven't seen them before, but her reluctance as she desperately tries to pull off her top while covering her tits at the same time stirs a primal reaction within you. The girl tries to remove her shorts as quickly as possible, but you growl at her to turn around and bend over, giving you a good view of her luscious ass as it juts out towards you. She peels her tight shorts off her hips slowly, revealing her pink, moist lips – the little slut's getting turned on, you laugh to yourself. With her naked body on full display, Lottie quietly moves down to the ground, positioning herself on all fours with her butt facing towards you. She looks behind herself to see your erect " + cockDescript(x) + " on full display, quickly squealing and looking away. You grin as you stroke yourself into fullness, walking over and placing yourself behind Lottie's full derriere. \"<i>" + player.short + "?</i>\" she gently sobs, \"<i>p-please don't do this.</i>\" With that, you grab her ample thighs and thrust forward, driving your " + cockDescript(x) + " straight into her trembling wetness.\n\n", false);
 
 	outputText("You groan as you feel her tight walls surrounding your length, Lottie screaming as she feels you invade her private area.  You continue your relentless advance, pounding your whore while you grunt in pleasure, calling her a worthless, fat piggy and slapping her ass while she squeals and moans. You watch your slut while she desperately tries to close her eyes and escape the reality occurring to her, but every push and pull of your " + cockDescript(x) + " inside her warm depths reminds her of where she is. Lottie cries desperately, at first for you to stop, but then for help. Fortunately for you, the walls of the washroom are curiously soundproofed, and any knocks at the door are gone as soon as they arrive. As you pork your prize, you bend over and press your body against the chubby girl, reaching around and squeezing her cushiony rack with one hand and supporting your weight on the other. Lottie unwillingly moans as you plunge your " + cockDescript(x) + " into her, feeling your hardness move along her inner walls. She keeps her head lowered towards the floor, the sight of her heavy breasts being squeezed and pulled by your hands in her peripheral vision. Lottie's cries and yelps grow quieter as you fuck her harder, her juices lubricating your hungry member. Eventually, you get bored of keeping her on all fours and with one slick flip you turn her over onto her back, revealing her pale figure to you. The pig-girl squeals and covers her face with her hands, not wanting to witness you pounding at her soaked cunt. You're not one to complain, instead focusing on suckling upon one of her breasts, your hand kneading the other.\n\n", false);
-	
+
 	outputText("You feel a familiar sensation as you drive faster into Lottie's pussy, sucking harder as you bring yourself closer to the edge. With one final thrust into her womb you lean back and release your hot spunk inside while she thrashes and yells in defiance. In your ecstasy you grab Lottie by the shoulders and pull her on top of you, your " + cockDescript(x) + " still spurting your cum inside. You both lay there, Lottie broken while you grab her jiggling asscheeks and hump into her for several more minutes of pure bliss.\n\n", false);
 	outputText("When you finally give in to exhaustion, you leave Lottie on the floor, your seed leaking out of her while she lays drooling and inattentive to her surroundings. You pat her on the butt and begin to make your way out of the gym, making sure to grab a ", false);
 	if(silly()) outputText("bacon ", false);
@@ -988,7 +992,7 @@ private function lottieFatLoserCulminationHumiliationChoice():void {
 	outputText("A few minutes later and you've taken your whore outside of the gym and around to the back, where an equipment shed lies in waiting. You make quick work of the lock, busting it open with a nearby metal pole. The two of you walk slowly inside, Lottie pausing behind you to gaze at the tools and exercise apparati littering the walls. Soon, you find what you're looking for. You've never been one to judge a person for their fetishes, but you make a mental note to thank the person who couldn't control theirs. A single leather collar attached to a leash dangles silently upon a hook attached to the walls of the shed. Grinning, you take it down, adjusting the length of the rope before handing it to Lottie. \"<i>W-what's this for, " + player.mf("sir","ma'am") + "?</i>\" she mumbles, but you pay no attention to her questioning as you loosen the collar and push it down on the girl's neck, tightening it before she can protest. \"<i>N-no! What are yo-!</i>\" Slap! You pelt your hand against her soft cheek, causing her to jerk on the rope and fall to the floor, miserable and in pain. Your slut slowly looks up at you with watering eyes, a hand to her face to quell the stinging sensation. \"<i>I... I understand.</i>\" She mutters quietly, picking up the leash and placing it in your hands, before standing on her knees and adopting a begging position in front of you. You grunt as the girl pulls out her small tongue, reluctantly licking at your groin to satisfy the beast behind your clothes. Just like a whore to assume that's what you're here for. You walk away from her attempts to fellate you, pulling on the leash and yanking your girl forwards. She gets up and starts walking behind you and out into the sunlight, before you stop her once more. No, you tell her – she has to strip down before she's presentable to the public. You want the world to know how well you've trained your fat little piggy.\n\n", false);
 
 	outputText("Lottie timidly removes her top, letting her plump breasts fall out while she bends over to pull down her tight shorts, her juicy ass squishing out of the fabric. While she undresses, you look back to the shed to see if there's anything you might be missing. Weights, large poles, a whip, some ro- wait, a whip? You smile devilishly as you walk over to pick it up, but you find it firmly glued to the shelves. Weird. Upon closer inspection, you spy a peculiar-looking device next to it. It appears to be a strap attached to a metal ring – and it gives you an idea. 'Where there's a whip, there's a way', you chuckle to yourself as you take the strap and bring it over to Lottie. Your pig slut is naked and ready, waiting on your command as you pull out the ring-shaped device and stretch the strap over her head, placing the metal ring inside her mouth and forcing the pale slut to make a permanent 'O'-shape with her lips. You tighten the gag, causing Lottie to cough uncomfortably as drool forms at the base of her mouth. Taking the leash, you drag Lottie away from the shed, her large ass jiggling as she tries to catch up to you. You figure you'll take her to the backstreets of Tel'Adre – you want people to see your work of art, but you know only the scum of the city will truly appreciate her for what she is. You pull the leash, leading Lottie through an alleyway and into a smaller, dirtier part of the desert city, an enclosed area with several food stalls littered around.  A majority of the lower-class citizens wander these parts, shuffling about as they haggle, argue and steal – as is usual in the slums. Most people notice your pig-girl trotting behind you, though few offer a second glance. The majority stand and stare as you present your trophy – a few of the more courageous ones openly masturbate to the site, whereas the braver still walk up and slap your pig on the ass, eliciting a squeal or a moan. You decide to up the ante while you walk through the commons, placing a hand between Lottie's pale thighs and thrusting two fingers into her pussy, the heat enveloping your digits as you shamelessly fingerfuck the poor girl.\n\n", false);
-	
+
 	outputText("On your walk, you find yourself in a familiar location – the back alleyway of the Wet Bitch. Figuring it wouldn't hurt to take your slut inside; you jerk your hand forward, forcing Lottie to walk towards the door – when you recognize the face of a furiously masturbating fox herm.  Urta looks at you while she pumps her thick horsecock relentlessly, winking at the pig-slut you've currently got on a leash. She doesn't seem to recognize you in the slightest, which could either mean she's somehow contracted serious amnesia, or she's a lot drunker than usual. \"<i>", false);
 	if(silly()) outputText("BACON BACON BACON BACON BACON BACON! GOTTA HAVE BACON!", false);
 	else outputText("Heyyy *hic* buddy, is she like your *hic* shex-slave or sumthin?", false);
@@ -1012,7 +1016,7 @@ public function lottieFatLoserCulminationLeaveComedyChoice():void {
 	spriteSelect(36);
 	outputText("", true);
 	outputText("You take one look at her before making your request. You tell her you want the pigslut to leave the gym, and never return. She stares, speechless, but immediately begins bawling at your feet. You're fine with staying here – but you never want to see her face again. For what it's worth, the girl is surprisingly light when you pick her up off her feet and carry her outside the gym. She's shivering, terrified of a life without you – so you'll give her something to remember you by. By now Lottie's stood up, walking pathetically away in tears, but you've already caught up to her, removing your pants and waddling in her direction while your " + cockDescript(0) + " swings to and fro. Before she notices, you've already thrust your entire package into her, fitting as much as you can inside before humping relentlessly. She screams, attracting the attention of a nearby guard on night watch – but you're not done yet. You take your moist member out and aim towards the advancing guard. Your brow furrows as you yell your final resolution. \"<i>TAKE THIS – MY LOVE, MY ANGER, AND ALL OF MY SORROW! CUUUUM CANNON!</i>\" With a hearty thrust, you plunge your junk forward, spurting an impossible amount of gooey spunk in the man's general direction, blasting him into the air and out of Tel'Adre's walls. \"<i>GO! GO! GO!</i>\" you shout, pumping jets of your seed at the enemy until he finally bursts into gory treats like a bloody fireworks display. You turn back to see Lottie cowering on the floor. You grin and take one final dip into her cunt, squirting a tiny amount of incredibly potent seed before walking away, leaving her abused and broken as you salute an imaginary American flag. You shed a single tear.\n\n", false);
-	
+
 	outputText("You discover much later that she's pregnant and miserable with your child.", false);
 	outputText("\n\n(<i>Lottie is no longer encounterable</i>.)", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
@@ -1033,7 +1037,7 @@ private function lottieHighMoraleFatLoveSelfOneTimeEvent():void {
 	if(player.cockArea(x) <= 40) outputText("her ample cheeks resting on your groin as you bottom out in her", false);
 	else outputText("though you only reach so far before you've filled her up entirely with your length", false);
 	outputText(". You decide to take matters into your own hands as you grab her thick hips and drive upwards, Lottie squealing as you begin to pump in and out of her. The pig-girl's creamy breasts pop out of her bra and jump to your thrusts, her fat legs hugging either side while she bounces upon you. \"<i>God, I-I love you! Unh, I feel so hot, babe!</i>\" She yells as you pork your lover enthusiastically. The slaps of her full buttcheeks hitting your groin pervade the air, your grunts accompanied by Lottie's orgasmic moaning.\n\n", false);
-	
+
 	outputText("As you feel yourself about to explode, you keep a tight grip on her hips before thrusting forward, filling her insides with your hot spunk. Lottie trembles in orgasm, the feeling of your cum inside of her sending her over the edge.", false);
 	if(player.cockTotal() > 1) {
 		outputText("  Your other cock", false);
@@ -1042,7 +1046,7 @@ private function lottieHighMoraleFatLoveSelfOneTimeEvent():void {
 		outputText(" not disappoint, spurting your essence all over the pig-girl.", false);
 	}
 	outputText("  You both lay on the mat, panting in ecstasy while your " + cockDescript(x) + " continues to ejaculate inside her.\n\n", false);
-	
+
 	outputText("A while later, you've both said your goodbyes for the night. Before you leave, you make sure to head out to the cafe to buy yourself a bacon shake. You love bacon shakes.\n\n", false);
 	//[Unlocks Cowgirl]
 	outputText("(<i>'Cowgirl' unlocked from Lottie's sex menu.</i>)", false);
@@ -1059,11 +1063,11 @@ private function lottieHighMoraleFatYoullGetThereOneTimeEvent():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("You tell Lottie that the way she looks right now shouldn't affect how she feels about herself as a person – her value isn't determined by her weight, and never will be. You pat her hand before giving her a thumbs up. You believe in her and you believe in her goal, whether it leads to a better appreciation for herself or her body. She's reassured by your words, stroking your hand gently. You make clear to the girl that you aren't going to leave her because of how she looks, because she's beautiful where it counts. Lottie melts, blushing hard at your compliments. \"<i>Oh, " + player.short + ", sometimes I wish I could be as brave as you, y'know?</i>\" she exclaims, sighing politely. Continuing your rant, you explain how all she needs is a little self confidence to get her going – she can't be afraid to take leaps into the deep end to get what she wants, right? She giggles at your enthusiasm, though takes your words into consideration. \"<i>Self confidence, huh?</i>\" Lottie mutters to herself. \"<i>" + player.short + "... could you come with me for a moment?</i>\"\n\n", false);
-	
+
 	outputText("You follow Lottie out into the pool area, waiting as she walks into the dressing room to get changed. When she comes out however, you're surprised to find that she hasn't changed into anything – in fact, she's removed all her clothes entirely!\n\n", false);
-	
+
 	outputText("The nude pig-girl stands in front of you, turning red at your hungry gaze. \"<i>I'm not comfortable with my body, but... if self confidence is the key to getting what I want, then... will you fuck me, " + player.short + "?</i>\"\n\n", false);
-	
+
 	outputText("In only seconds flat you remove your clothes to jump the piggy, whipping out your " + cockDescript(x) + " and pushing it against Lottie's wet slit, the pig-girl lying on her back while her legs rest upon your shoulders. With a hearty thrust you drive yourself into her, eliciting a loud moan while you pork her insides with your meat. Her thick thighs slap against you as you bend over to take a lustful grab at her melons, sucking at her nipple and pinching the other, her sweet taste enveloping your mouth. Lottie buries you in her cleavage, yelping as you piledrive her tight pussy into submission – but you've got more in store. Flipping her over, Lottie lies face down with her soft butt jutting up in the air, your persistent fucking driving her wild. You continue gripping onto her tits as you pound her flesh, every thrust accompanied by her pleasured grunts. Back and forth you mount her until the familiar sensation in your loins signal your release. You increase your pace, pounding her pussy until you pull your head back and ejaculate inside her inner walls, slamming in harder every few seconds with each burst.", false);
 	if(player.cockTotal() > 1) {
 		outputText("Your other cock", false);
@@ -1072,7 +1076,7 @@ private function lottieHighMoraleFatYoullGetThereOneTimeEvent():void {
 		outputText("in ecstasy, releasing all over her plump butt.", false);
 	}
 	outputText("\n\n", false);
-	
+
 	outputText("Sweaty and panting, Lottie lies on the floor, exhausted and full of your spunk. You slap her jiggling ass before walking out of the pool area, making sure to grab a ", false);
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
@@ -1091,9 +1095,9 @@ public function ewLottieNo():void {
 	spriteSelect(36);
 	outputText("", true);
 	outputText("You begin to talk about your story, about how you came to be in Mareth and how you got to be where you are now. You've encountered nasty things, and you've seen people become nasty things themselves. You also know that you've changed since then. You've become someone you didn't expect yourself to become in a million years – and whether it was for better or for worse was up to you to decide. You know you've been through hard times, but you've never once regretted the decisions you've made – because they led to her. To Lottie. The girl begins to tear up at your confession. \"<i>Oh, " + player.short + ", I...</i>\" But then you laugh. You laugh harder than you ever have since you came into this hellhole. In fact, you'd be willing to bet it was the first time you've ever laughed in Mareth. Lottie's face immediately scrunches up as she begins to bawl, but you could give less of a fuck as you stand up and point at the pig-slut as cafe-goers look at you both in curiosity. \"<i>ATTENTION FURRY ASSHOLES</i>\" you yell, much to the disgust of the anthropomorphic animal-people staring in your direction. \"<i>THIS SLUT – \"<i>you point to Lottie. \"<i>- WON'T EAT MY HAM SANDWICHES.</i>\" An audible gasp is heard from the growing crowd. Lottie's buried her head in her hands but your tirade continues. Walking to the counter, you take one look at the fuzzy clerk before he nods and hands you the aforementioned sandwich. Weird, you don't remember him being fuzzy – you really need to find a pair of fucking glasses in this sand pit. Regardless, you stomp over to the pig-girl, pulling her out of her seat and forcefully shoving the meaty meal down her throat. She gags for a second before unwillingly swallowing her own species. You grab her cheeks and pull her face several inches towards yours. \"<i>You disgust me.</i>\" You tell her, before whipping your " + cockDescript(0) + " out and fucking her ham and bread-filled mouth. </i>\"Here comes the mayonnaise train!</i>\" You yell, ejaculating straight down her gullet and into her flabby abyss.\n\n", false);
-	
+
 	outputText("For hours, people take turns pumping their seed into Lottie while you dance naked around her, chanting obscenities at the blurry people around you.\n\n", false);
-	
+
 	outputText("You really need glasses.", false);
 	//[Note: Lottie will no longer be encountered at the gym.]
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
@@ -1172,9 +1176,9 @@ private function lottieSuccessOneShot():void {
 	if(x < 0) x = 0;
 	if(player.tone > 30 || player.thickness < 70) {
 		outputText("You walk into the yoga area and are met with the smell of sweat and flowers pervading the room. You look over to the middle of the bare area to find Lottie bending over, her ass squished in tight booty shorts thrust in your direction. At the sound of your entrance she jerks up, looking over to you – you notice she's already removed her top. \"<i>Like what you see, babe?</i>\" she grins, cupping one of her heavy breasts in her palm. \"<i>I've been spending some time in the yoga room practicing some... positions. I thought you might like to try them out.</i>\" The pig-girl slides down to the floor, attempting the splits as her legs move apart in different directions. This girl is flexible as hell, you think to yourself.\n\n", false);
-		
-		outputText("Lottie gently asks for you to lie down on your back, to which you comply quite easily. You're comfortable, folding your arms behind your head to give you leverage as you watch your lover walk slowly to you, removing her shorts. Lottie turns around, her thick thighs straddling you as she sits down on your groin with her back facing your direction, giving you a perfect view of her curvy body and plump ass. Your " + cockDescript(x) + " nestles gently between her rosy cheeks, pulsing with lustful intent as the girl grabs her hips and begins to pleasure you through her ass. The silence of the room breaks at your fevered pants and grunts as Lottie's skillful assjob sends you through fits of ecstasy, every curve of her bottom jiggling against the heat of your member. Her pace picks up while she bounces upon you, squeezing and squashing her perfect ass until one final lift in the air is met with her plunging your length up into her hot interior. The feeling of your molten cock inside her immediately sends Lottie into fits of orgasmic bliss, the intense heat filling the pig-girl with pleasure. Her attempts to continue are thwarted by your " + cockDescript(x) + " scraping against her inner walls, her thick thighs clenched together while she slowly moves up and down upon you. Deciding to take things into your own hands, you thrust upwards, almost pushing the girl off with your strength and causing Lottie to squeal as you begin pounding her irresistible hole. Her lush buttcheeks jiggle with every movement you make, the rising and falling of her body moving in accordance to your own will. You pump in and out, keeping a steady rhythm inside the hot and bothered woman.\n\n", false); 
-	
+
+		outputText("Lottie gently asks for you to lie down on your back, to which you comply quite easily. You're comfortable, folding your arms behind your head to give you leverage as you watch your lover walk slowly to you, removing her shorts. Lottie turns around, her thick thighs straddling you as she sits down on your groin with her back facing your direction, giving you a perfect view of her curvy body and plump ass. Your " + cockDescript(x) + " nestles gently between her rosy cheeks, pulsing with lustful intent as the girl grabs her hips and begins to pleasure you through her ass. The silence of the room breaks at your fevered pants and grunts as Lottie's skillful assjob sends you through fits of ecstasy, every curve of her bottom jiggling against the heat of your member. Her pace picks up while she bounces upon you, squeezing and squashing her perfect ass until one final lift in the air is met with her plunging your length up into her hot interior. The feeling of your molten cock inside her immediately sends Lottie into fits of orgasmic bliss, the intense heat filling the pig-girl with pleasure. Her attempts to continue are thwarted by your " + cockDescript(x) + " scraping against her inner walls, her thick thighs clenched together while she slowly moves up and down upon you. Deciding to take things into your own hands, you thrust upwards, almost pushing the girl off with your strength and causing Lottie to squeal as you begin pounding her irresistible hole. Her lush buttcheeks jiggle with every movement you make, the rising and falling of her body moving in accordance to your own will. You pump in and out, keeping a steady rhythm inside the hot and bothered woman.\n\n", false);
+
 		outputText("Inevitably, you can feel your release approaching, and with one final push you grab a hold of the pig-girl's tight ass, slamming against her and pumping your spunk directly into her clenched pussy, your " + cockDescript(x) + " twitching as ropes of cum coat her insides. Lottie yelps, collapsing on the floor and full of your hot seed. You wipe your cock along her ass cleavage, leaving her as a sweaty, cum-filled mess on the floor. Walking out, you make sure to grab a ", false);
 		if(silly()) outputText("bacon ", false);
 		outputText("shake from the cafe. They're fantastic.\n\n", false);
@@ -1189,9 +1193,9 @@ private function lottieSuccessOneShot():void {
 		outputText("You wake up dazed, your forehead throbbing – you're also completely naked, but unharmed otherwise. When you try to move, however, you find yourself unable to shift from your position – you seem to be tied to a chair, your hands behind your back while your legs are bound to those of the seat. You observe your surroundings, noticing the recognizable brick walls and stocked shelves of the gym's equipment shed. The familiarity of the location leaves you somewhat relieved – at least you know where you are. A quick slap to the face brings your attention to the lean pig-girl in front of you. Her figure is somewhat obscured by the lack of sunlight inside the room, though you can tell she's mostly nude other than a small black g-string obscuring her nether regions. She also appears to be sporting black thigh-high boots, along with similarly coloured gloves that reach her armpits. Her expression is one of immense desire, smiling wryly as she examines your form. \"<i>You've gotten bigger.</i>\" She smiles, leaning on top of you and letting her heavy breasts smother your face. You take a lick at one of her nipples before she jerks back and hits you again. \"<i>Hahaha, not today, pig. All this extra weight is because you can't keep your mouth closed.</i>\" She spits, grabbing at the soft flesh of your ", false);
 		if(player.biggestTitSize() >= 2) outputText("tits", false);
 		else outputText("belly", false);
-		outputText(" and squeezing, as if she was playing with putty. \"<i>I've reached my goal, but it seems you need a bit of help reaching yours. If you don't mind, I think I'll be your personal trainer for today.</i>\" The horny pig-slut grabs a hold of your " + cockDescript(x) + ", keeping a firm grip on your member as she effortlessly jerks you off. \"<i>I think I'll release all of that thick, sticky spunk you've got hidden inside of your fat cock.</i>\" The velvet of her gloved hands sends small bouts of pleasure through your body, her technique clumsy but efficient. Lottie begins playing with her juicy nipples, twisting and rubbing them while she toys with your length. You shudder, looking down to find her mouth only inches away from your " + cockDescript(x) + ", her hot breath surrounding your tip. She takes one lick of your cockhead, and already you feel a tingling sensation as you start to orgasm – did she take something to cause this? Regardless, you pump mindlessly through her hands, looking for release, when Lottie grabs hard at your cock, plugging your cum and causing you to grunt in denial.\n\n", false); 
+		outputText(" and squeezing, as if she was playing with putty. \"<i>I've reached my goal, but it seems you need a bit of help reaching yours. If you don't mind, I think I'll be your personal trainer for today.</i>\" The horny pig-slut grabs a hold of your " + cockDescript(x) + ", keeping a firm grip on your member as she effortlessly jerks you off. \"<i>I think I'll release all of that thick, sticky spunk you've got hidden inside of your fat cock.</i>\" The velvet of her gloved hands sends small bouts of pleasure through your body, her technique clumsy but efficient. Lottie begins playing with her juicy nipples, twisting and rubbing them while she toys with your length. You shudder, looking down to find her mouth only inches away from your " + cockDescript(x) + ", her hot breath surrounding your tip. She takes one lick of your cockhead, and already you feel a tingling sensation as you start to orgasm – did she take something to cause this? Regardless, you pump mindlessly through her hands, looking for release, when Lottie grabs hard at your cock, plugging your cum and causing you to grunt in denial.\n\n", false);
 
-		//[If Cum Production Average] 
+		//[If Cum Production Average]
 		if(player.cumQ() < 500) outputText("\"<i>Hm. Your dick here seems to be twitching. Were you... were you going to cum for me?</i>\" you nod feverishly, anything to get her to release her grip. \"<i>No. Not here. In me.</i>\" She straddles you, plunging your " + cockDescript(x) + " into her depths and bouncing to a steady rhythm, her ample butt slapping against your groin. \"<i>Unh... do you like me fucking your fat ass, pig?</i>\" she yelps, holding onto your large body as you lay there, being serviced. \"<i>F-fuck! Fill me up, babe!</i>\" You grunt, the vice-like grip of her walls tightening against your member. With one steady push you explode inside of her, filling her up with your thick spunk. \"<i>Oh god, give me all your cum!</i>\" she yelps, her belly full of your molten liquid. Lottie lifts herself up, your " + cockDescript(x) + " dripping out and leaving a puddle underneath you. \"<i>H-hah, y-you're such a pig!</i>\" she stutters, obviously flustered from the sex but still attempting to keep up a dominant facade. You easily untie yourself from the binds and walk over to her, planting a kiss on her cheek before leaving through the shed door. \"<i>You... you could've escaped the whole time?</i>\" she squeaks, your only response a thumbs up as you walk away. On your way out, a milkshake vendor waves over to you – it's the guy from the cafe. You buy a bacon shake before deciding to head home. You fucking love bacon shakes.\n\n", false);
 
 		//[If Cum Production High]
@@ -1202,12 +1206,12 @@ private function lottieSuccessOneShot():void {
 		//[Unlocks FemDom]
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00319] = 1;
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
-		outputText("(<i>'FemDom'</i> unlocked in Lottie's sex menu</i>)", false);		
+		outputText("(<i>'FemDom'</i> unlocked in Lottie's sex menu</i>)", false);
 	}
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
-	
+
 //[Leave]
 private function leaveLottieInsteadOfYogaSex():void {
 	spriteSelect(36);
@@ -1253,7 +1257,7 @@ private function lottieWeights():void {
 }
 
 
-//[Boast] 
+//[Boast]
 private function boastAtLottie():void {
 	spriteSelect(36);
 	outputText("", true);
@@ -1261,7 +1265,7 @@ private function boastAtLottie():void {
 	if(silly()) outputText("large *pomf =3*", false);
 	else outputText("loud clonk", false);
 	outputText(". She looks up at you and sniffles, but you just grunt in response, disappointed with her efforts. She sighs and tries her best to do it again.\n\n", false);
-	
+
 	outputText("After a few more attempts at the weights, she eventually buckles under the pressure and gives up, walking home by herself. You snort and continue a few more well-earned reps before dropping down and recharging for the night.", false);
 	fatigue(10);
 	dynStats("str", .25);
@@ -1282,7 +1286,7 @@ private function trainWithLottie():void {
 	doNext(13);
 }
 
-//[Boast] 
+//[Boast]
 private function boastAtFitLottie():void {
 	spriteSelect(36);
 	outputText("", true);
@@ -1326,7 +1330,7 @@ private function goJoggingWithLottie():void {
 		simpleChoices("Sprint",sprintAndLeaveFitLottieBehind,"Jog",jogWithFitLottie,"",0,"",0,"",0);
 	}
 }
-//[Sprint] 
+//[Sprint]
 private function sprintAndLeaveLottieBehind():void {
 	spriteSelect(36);
 	outputText("", true);
@@ -1349,7 +1353,7 @@ private function jogWithLottie():void {
 	fatigue(10);
 	doNext(13);
 }
-//[Sprint] 
+//[Sprint]
 private function sprintAndLeaveFitLottieBehind():void {
 	spriteSelect(36);
 	outputText("", true);
@@ -1381,7 +1385,7 @@ private function lottieYoga():void {
 	simpleChoices("Alone",lottieYogaAlone,"Together",togetherLottieYoga,"",0,"",0,"",0);
 }
 
-//[Alone] 
+//[Alone]
 private function lottieYogaAlone():void {
 	spriteSelect(36);
 	outputText("", true);
@@ -1443,7 +1447,7 @@ private function waitAndShowLottieYourPoolBoner():void {
 	else if(player.biggestCockArea() < 5) outputText("secret shame", false);
 	else outputText("painfully average prick", false);
 	outputText(". You almost experience a tinge of regret from the now incredibly awkward silence, but it's thrown out the window as soon as you feel a soft hand grab your throbbing member. Looking up, Lottie's face has reddened considerably, but her curiosity overrides her shame as she begins to slowly massage you to full mast. \"<i>I... I did this?</i>\" she asks, facing you with large, wondering eyes. You grin and nod, taking her hand and helping her stroke it further, only to be met with a slap on your wrist as she removes her grip. You look up, frowning as Lottie laughs at the situation. \"<i>I'm – it's nice to know that someone likes me.</i>\" She stutters, smiling timidly. \"<i>But, um, we're here to exercise, " + player.mf("big guy","babe") + ". We should do that.</i>\" You groan at the sudden cockblock, but you can't really argue. She takes your hand and leads you into the water, but not before you playfully grab a handful of her plush ass.\n\n", false);
-	
+
 	outputText("A while later and you've both finished off several laps of the pool, exhausted from your progress. Lottie flashes you a large smile before you part ways, leaving you still somewhat aroused from the experience.", false);
 	outputText(player.modTone(100,2), false);
 	dynStats("lus", 80);
@@ -1485,7 +1489,7 @@ private function feedLottieAWholeCafe():void {
 	outputText("You decide that you're better off finding something at the cafe to feed the girl, though you know Lottie won't be too keen on eating something she'll know will make her bigger. Regardless, you tell her that you've skipped on breakfast, and you've been starving all day. Concerned, Lottie suggests you buy something to eat, but you tell her you wouldn't feel right doing so if Lottie had to stay and watch. She doesn't mind, but you push it further. Eventually, she gives in and tells you that she'll buy something to eat if you do. Smiling, you wander to the cafe, asking the clerk if they have anything available in stock from the bakery. He smiles before handing you some kind of puff pastry, while you pay the appropriate gems for the item as well as a random sandwich from the glass display. Sitting back down, you hand Lottie the treat while you eagerly munch down on your own meal. \"<i>Is... is this okay to eat?</i>\" she asks, examining the chocolate covered delicacy you've bought for her. Without waiting for your answer, Lottie bites into the chocolate and squeals as the fluffy cream insides squirt out. \"<i>Th-this is delicious! Ohmigosh!</i>\" In no time at all the chocolaty confection is erotically devoured by the greedy pig-girl, before she looks up at you in guilt. \"<i>I hope that wasn't bad for me or anything...</i>\" she sighs. You shrug, telling her that it probably won't affect her weight in the slightest.\n\n", false);
 	outputText("You secretly know it will.", false);
 	lottieTone(-5);
-	
+
 	doNext(13);
 }
 
@@ -1495,7 +1499,7 @@ public function feedLottieLaBova():void {
 	outputText("", true);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00322] == 0) {
 		outputText("You pick up the bottle of LaBova, making sure to secretly remove the label of the busty cowgirl before handing it over to Lottie. \"<i>This'll help me lose weight? Are you sure?</i>\" She says, observing the misty fluid as it swirls around the glass. You nod fervently, mentioning you've seen it trim waists and tone thighs. \"<i>Oh! Well... if you say so,</i>\" Lottie remarks, convinced by the assurance of a slimmer body.  \"<i>Here goes nothing!</i>\" The pig-girl exclaims before downing the grainy mixture in one fell swoop, complementing its sweet, milky taste. She looks down at her body, keen to observe the instantaneous change expected to occur. \"<i>Huh? I... I feel kinda funny, babe,</i>\"Lottie mutters, quickly looking towards you before squealing and turning down just in time to watch her breasts and hips grow slightly larger than before. \"<i>H-huh?! What's going on? What did you give me, " + player.short + "? Why would... w-wh...</i>\" Speechless, the now chubbier girl drops to the floor, unable to comprehend your actions. You smile at her new figure, crouching down and giving her milky tits a good squeeze. \"<i>I-I don't understand...</i>\" she whimpers, flinching at your touch. It might be a while before she accepts anything else from you, but you can't help feeling like you've done some good. She'll understand, in due time.", false);
-		
+
 	}
 	//[If LaBova – Repeat Encounter]
 	else {
@@ -1511,7 +1515,7 @@ public function giveLottieGroPlus():void {
 	spriteSelect(36);
 	outputText("", true);
 	outputText("You take out the needle filled with Gro+, taking care to flick it to remove any air bubbles that might have remained in the odd blue liquid. Lottie pales at the sight of the pointed object, and shakes her head several times before backing away. \"<i>Nuh-uh,</i>\" she begins, \"<i>there's no way I'm going to stick that thing anywhere, y'hear?</i>\" You figure it's going to take a lot of convincing to get her to take the needle.\n\n", false);
-	//[If Very High INT] 
+	//[If Very High INT]
 	if(player.inte >= 80) {
 		outputText("You take Lottie by the hand, surprising her with your suave movements. Spending a few minutes of her time, you reflect on the many situations you've found yourself caught in and how none of them seemed to have rewarded you well – until you took on the demonic factory. The porcine lady is glued to your every word as you describe the details of your adventure, distressed when you mention the enslaved humans and impressed by your (slightly exaggerated) recounting of your run-in with the omnibus. You hold up the now sacriligous needle in front of her, to clinch your epic tale. This, you tell her, was your reward. Without a second glance, Lottie seizes the needle and pokes it into the soft flesh of her breasts, ignorant of both the pain and the fact that you didn't mention the actual effects of the syringe. She waits with excited fervour for the reaction to begin, only to be surprised when her chest grows larger than before. Dropping the needle, she looks to you with tears beginning to well in her eyes and runs out of the cafe. If only she could see the glint in yours, she might be able to understand your intentions.", false);
 		lottieTone(-20);
@@ -1533,13 +1537,13 @@ public function giveLottieReducto():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00323] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00323]++;
 		outputText("You take the medicinal tube out and give it to Lottie, who notices the word 'Reducto' marked upon the side. \"<i>Are you sure this is okay, " + player.short + "?</i>\" she asks, clearly having doubts about leaving her weight loss to a small cylinder of weird paste. You're quite unsure yourself, considering the effects of the salve itself are quite strong, potentially decreasing anything she rubs it on to half its original size. Explaining your thoughts about its effectiveness, what was left of Lottie's enthusiasm has now lessened further. You still put your support behind the idea, though advising her to take precaution on the amount of paste to be used. She mumbles incoherently before opening the salve to reveal a small amount of the light concoction leaking from the tip. Lottie sighs. \"<i>Well... here goes nothing.</i>\" Taking the ointment, she places a small dab on her finger and rubs it around her rosy breasts, making sure to rub the cool mixture into her pale skin. She uses the remaining paste on her chubby stomach and soft thighs, massaging it in. In a matter of moments, all three areas shrink – but to the relief of both yourself and Lottie, the effects are noticeable, but slight. It appears as if she's lost a bit of weight.\n\n", false);
-	
+
 		outputText("Lottie sits still, unsure about the convenience of the results, but glad that you've helped.", false);
 	}
 	//[If Reducto, Repeat Encounter]
 	else {
 		outputText("You take the medicinal tube out and give it to Lottie, who recognises the word 'Reducto' marked upon the side and looks up at you. \"<i>Are you sure this is okay, " + player.short + "?</i>\" she asks, clearly having doubts about leaving her weight loss to a small cylinder of weird paste. You've been quite unsure yourself, considering the effects of the salve itself are quite strong, potentially decreasing anything she rubs it on to half its original size. Explaining your thoughts about its effectiveness, what was left of Lottie's enthusiasm has now lessened further. You still put your support behind the idea since it hasn't backfired so far, though you advise her to take precaution on the amount of paste to be used. She mumbles incoherently before opening the salve to reveal a small amount of the light concoction leaking from the tip. Lottie sighs. \"<i>Well... here goes nothing.</i>\" Taking the ointment, she places a small dab on her finger and rubs it around her rosy breasts, making sure to rub the cool mixture into her pale skin. She uses the remaining paste on her chubby stomach and soft thighs, massaging it in. In a matter of moments, all three areas shrink – but to the relief of both yourself and Lottie, the effects are noticeable, but slight. It appears as if she's lost a bit of weight.\n\n", false);
-	
+
 		outputText("Lottie sits still, unsure about the convenience of the results. but glad that you've helped.", false);
 	}
 	lottieTone(10);
@@ -1556,7 +1560,7 @@ public function hamSammitchTimeBIATCH():void {
 		outputText("You walk over to the cafe, Lottie watching as you order a sandwich from their menu. In a matter of seconds the collie-like clerk pulls one up from the glass display and hands it over to you", false);
 		if(silly()) outputText(", mumbling something about lifetime members receiving free pig-related food items", false);
 		outputText(". You exchange a smile before walking back to the table and handing Lottie the moist meal, explaining that you saw the ham sandwich the other day, figuring she might enjoy it. Lottie throws it on the floor. \"<i>What the heck is wrong with you?</i>\"\n\n", false);
-	
+
 		outputText("You reach for a high five that never comes.", false);
 	}
 	//[If Ham Sandwich, Repeat Encounter, High Corruption]
@@ -1589,7 +1593,7 @@ public function lottieFuck():void {
 	//[If Encouragement 0 – 30]
 	if(lottieMorale() <= 40) {
 		outputText("You take Lottie's hand in your own, though the girl seems to flinch at your touch. \"<i>D-did I do something?</i>\" she asks, slowly recoiling into her seat. You choose not to answer, though the both of you know what's coming next. Silently, you increase your grip on Lottie, leading her out of her seat and into the pool area, checking for any bystanders before taking her inside one of the empty saunas. Lottie grows more and more anxious as you undress yourself in front of her, taking out " + oMultiCockDesc() + " and stroking gently. She seems to shrink when you turn to her and ask her to do the same. \"<i>P-please, " + player.short + "... I... I like what we're doing, but,</i>\" she turns away from your wanting gaze before muttering, \"<i>I want to do this with someone special.</i>\" You scowl – it looks like you're going to have to take things into your own hands again. Walking towards the pig-slut, you grab the hem of her top and pull down, ripping it off to reveal her lovepillows which are covered hastily by her arms. \"<i>N-no! I... please, please don't do this...</i>\" Grabbing your " + cockDescript(x) + ", you step close enough for her to feel your hot breath against her skin. You rub the tip of your " + cockDescript(x) + " against her soft flesh, pre-cum leaking against her stomach as you thrust slowly. Your natural musk fills Lottie's button nose, and her increasingly shorter breaths give you the signal that she's ready to give up against your raging lust. \"<i>But " + player.short + ", I... I love...</i>\" A loud slap is heard as you press and play with her bottom, grinding your length in between her creamy thighs. \"<i>I... love...</i>\" Slap!  You wail on her ass and thrust hard between her legs. \"<i>F-fuck! I love you so much!</i>\" the pink whore cries, pulling off her shorts and turning around, grabbing your " + cockDescript(x) + " and rubbing it against the entrance to her wetness. You grin at your success, but you're not going to satiate her needs yet. You continue to fuck her thighs, slapping her luscious butt every so often and earning a squeal in response. You lean over and grab one of her heaving breasts, groping it roughly to the sound of your pelvis slapping against her fat legs. The feeling of your " + cockDescript(x) + " being squeezed against Lottie's thighs almost sends you to climax, before you get a better idea.\n\n", false);
-		
+
 		outputText("You turn Lottie around to face you, telling her you've decided you're going to take her for a vigorous work out. She only pants with anticipation.", false);
 		//[Anal][Oral] – [Doggystyle][Walkies][Threesome][Netorare]
 		var dog:Function = null;
@@ -1600,7 +1604,7 @@ public function lottieFuck():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00311] > 0) walk = lottieRepeatWalkies;
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] > 0) three = lottieRepeatThreesome;
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] > 0) neatrares = lottieRepeatSUPERNEATORARES;
-		
+
 		choices("Anal",analLottieMilkshake,"Oral",getSuckedOffByAHamSandwich,"Tentacle",tentacle,"",0,"",0,"Doggystyle",dog,"Walkies",walk,"Threesome",three,"Netorare",neatrares,"30Minute",thirtyMinute);
 	}
 	//[If Encouragement 30 – 60]
@@ -1610,7 +1614,7 @@ public function lottieFuck():void {
 		outputText(". \"<i>I... oh.</i>\" Taking Lottie's hand, you quickly lead her out of the cafe and into the pool area, looking for an empty sauna to sneak into. Considering that the gym's pool is only used by a few semi-aquatic humanoids and the odd ", false);
 		if(silly()) outputText("street ", false);
 		outputText("shark, your search isn't that difficult. Hopping into the toasty room, you quickly undress, Lottie still standing by the doorway. \"<i>H-hey, y'know, I didn't actually agree on this or a-anything...</i>\" she stutters, nervously fiddling with her top. Without missing a beat, you walk towards her and plant a kiss on her full lips, tasting her sweetness as you probe her mouth with your eager tongue. The girl melts underneath your touch, passionately returning your erotic display while you take the chance to slip Lottie out of her top, reaching into her shorts to feel between her creamy hips. She moans as you slowly push two fingers inside her moist wetness, simultaneously pulling out your " + cockDescript(x) + " and pushing her back against the wall. Lottie begins to jerk you off slowly, massaging the length of your " + cockDescript(x) + " with one hand while the other takes care at gently caressing your tip. You start to thrust into her hands on reflex while you claim her mouth, the feel of her sugary tongue wrapped around yours sending you both into fits of needy lust. You use your hands to reach around and squeeze her chubby derriere, lightly slapping it whilst a stray hand heads towards her source of hot desire. You slick your hand against her wetness, Lottie moaning in your mouth while you work towards bringing her to an early climax. However, the sudden roughness of your hands against her mound only causes a quick jerk to your " + cockDescript(x) + ", her soft hands tightening against your shaft. You groan in response, removing yourself from the lips of her mouth and instead placing your own against her erect nipple, sucking forcefully. The pig-slut grabs your head and pushes you towards her heaving chest, relinquishing her grip on your member to hug you closer.\n\n", false);
-		
+
 		outputText("Not wanting to be left unsatisfied, you tell her you've decided you're going to take her for a vigorous work out. She can only pant with anticipation.", false);
 		//[Anal][Oral]
 		simpleChoices("Anal",analLottieMilkshake,"Oral",getSuckedOffByAHamSandwich,"Tentacle",tentacle,"",0,"30Minute",thirtyMinute);
@@ -1622,7 +1626,7 @@ public function lottieFuck():void {
 		outputText(" against her plump asscheeks. \"<i>W-woah! I... well, okay...</i>\" she moans, reaching back to stroke your " + cockDescript(x) + " through your clothing while you grab a handful of her rosy ass, slapping and squishing it against your palm. You continue to hump relentlessly against Lottie's tight shorts, occasionally reaching around to feel her hot mound, causing the odd squeal or moan to emanate from her pouting lips. Eventually deciding clothes are the only thing between Lottie's lewd figure and your own " + cockDescript(x) + ", you simultaneously remove your outfit while ripping off her sweaty top, causing her breasts to spill out into your eager, groping hand. Despite your sudden stripping, Lottie immediately gets back into position, placing your cock in between her pillow-like asscheeks and moaning while you flick and tease her swollen nipples, rocking back and forth against you.\n\n", false);
 
 		outputText("Lottie whimpers in between short, hot breaths, \"<i>You're driving me crazy here, babe...</i>\" You give her chubby ass a hard slap in agreement. Lottie squeals in glee, jerking your " + cockDescript(x) + " as it pokes up through her ass. The sensation of your tip rubbing against her velvety skin drives you wild.\n\n", false);
-	
+
 		outputText("You turn Lottie around to face you, telling her you've decided you're going to take her for a vigorous work out. \"<i>I'll work you out, babe,</i>\" she moans in response.", false);
 		//[Anal][Oral] – [Quickie][Cowgirl][ReverseCowgirl][FemDom]
 		var quickie:Number = 0;
@@ -1637,17 +1641,18 @@ public function lottieFuck():void {
 	}
 	dynStats("lus", 50);
 }
- 
+
 //[Doggystyle]
 public function lottieRepeatDoggieStyle():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-doggie-style-repeat"));
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("A few minutes later and you've taken your whore to the washrooms. Mirrors line the sides of the walls to allow members to observe how far they've gone and how far they still need to go. It's entirely empty for the night, though you make sure to lock the door just in case. You turn around to see Lottie cowering in the corner. She knows what you want – and you swear on Mareth's giant tree titties you'll get it. With her naked body on full display, Lottie quietly moves down to the ground, positioning herself on all fours with her butt facing towards you. She looks behind herself to see your erect " + cockDescript(x) + " on full display, quickly squealing and looking away. You grin as you stroke yourself into fullness, walking over and placing yourself behind Lottie's full derriere. \"<i>" + player.short + "?</i>\" she gently sobs, \"<i>p-please don't do this.</i>\" With that, you grab her ample thighs and thrust forward, driving your " + cockDescript(x) + " straight into her tense wetness.\n\n", false);
 
-	outputText("You groan as you feel her tight walls surrounding your length, Lottie screaming as she feels you invade her private area.  You continue your relentless advance, pounding your whore while you grunt in pleasure, calling her a worthless fat piggy and slapping her ass while she squeals and moans. You watch your slut while she desperately tries to close her eyes and escape the reality occurring to her, but every push and pull of your " + cockDescript(x) + " inside her warm depths reminds her where she is. Lottie cries desperately, at first for you to stop, but then for help. Fortunately for you, the walls of the washroom are curiously soundproofed, and any knocks at the door are gone as soon as they arrive. As you pork your prize, you bend over and press your body against the chubby girl, reaching around and squeezing her cushiony rack with one hand and supporting your weight on the other. Lottie unwillingly moans as you plunge your " + cockDescript(x) + " into her, feeling your hardness move along her inner walls. She keeps her head lowered towards the floor, the sight of her heavy breasts being squeezed and pulled by your hands in her peripheral vision. Lottie's cries and yelps grow quieter as you fuck her harder, her juices lubricating your hungry member. Eventually, you get bored of keeping her on all fours, and with one slick flip you turn her over onto her back, revealing her pale figure to you. The pig-girl squeals and covers her face with her hands, not wanting to witness you pounding at her soaked cunt. You're not one to complain, instead focusing on suckling upon one of her breasts, your hand kneading the other.\n\n", false); 
-	
+	outputText("You groan as you feel her tight walls surrounding your length, Lottie screaming as she feels you invade her private area.  You continue your relentless advance, pounding your whore while you grunt in pleasure, calling her a worthless fat piggy and slapping her ass while she squeals and moans. You watch your slut while she desperately tries to close her eyes and escape the reality occurring to her, but every push and pull of your " + cockDescript(x) + " inside her warm depths reminds her where she is. Lottie cries desperately, at first for you to stop, but then for help. Fortunately for you, the walls of the washroom are curiously soundproofed, and any knocks at the door are gone as soon as they arrive. As you pork your prize, you bend over and press your body against the chubby girl, reaching around and squeezing her cushiony rack with one hand and supporting your weight on the other. Lottie unwillingly moans as you plunge your " + cockDescript(x) + " into her, feeling your hardness move along her inner walls. She keeps her head lowered towards the floor, the sight of her heavy breasts being squeezed and pulled by your hands in her peripheral vision. Lottie's cries and yelps grow quieter as you fuck her harder, her juices lubricating your hungry member. Eventually, you get bored of keeping her on all fours, and with one slick flip you turn her over onto her back, revealing her pale figure to you. The pig-girl squeals and covers her face with her hands, not wanting to witness you pounding at her soaked cunt. You're not one to complain, instead focusing on suckling upon one of her breasts, your hand kneading the other.\n\n", false);
+
 	outputText("You feel a familiar sensation as you drive faster into Lottie's pussy, sucking harder as you bring yourself closer to the edge. With one final thrust into her womb, you lean back and release your hot spunk inside while she thrashes and yells in defiance. In your ecstasy you grab Lottie by the shoulders and pull her on top of you, your " + cockDescript(x) + " still spurting your cum inside. You both lay there, Lottie broken while you grab her jiggling asscheeks and hump into her for several more minutes of pure bliss.\n\n", false);
 
 	outputText("When you finally give in to exhaustion, you leave Lottie on the floor, your seed leaking out of her while she lays drooling and inattentive to her surroundings. You pat her on the butt and begin to make your way out of the gym, making sure to grab a ", false);
@@ -1662,12 +1667,13 @@ public function lottieRepeatDoggieStyle():void {
 public function lottieRepeatWalkies():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-in-public-repeat"));
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("A few minutes later and you've taken your whore outside of the gym and around to the back, where an equipment shed lies waiting. You make quick work of the lock, busting it open with a nearby metal pole. The two of you walk slowly inside, Lottie pausing behind you to gaze at the tools and exercise apparati littering the walls. Soon, you find what you're looking for. You've never been one to judge a person for their fetishes, but you make a mental note to thank the person who couldn't control theirs. A single leather collar attached to a leash dangles silently upon a hook attached to the walls of the shed. Grinning, you take it down, adjusting the length of the rope before handing it to Lottie. \"<i>W-what's this for, " + player.mf("sir","ma'am") + "?</i>\" she mumbles, but you pay no attention to her questioning as you loosen the collar and push it down on the girl's neck, tightening it before she can protest. \"<i>N-no! What are yo-!</i>\" Slap! You pelt your hand against her soft cheek, causing her to jerk on the rope and fall to the floor, miserable and in pain. Your slut slowly looks up at you with watering eyes, a hand to her face to quell the stinging sensation. \"<i>I... I understand.</i>\" She mutters quietly, picking up the leash and placing it in your hands, before standing on her knees and adopting a begging position in front of you. You grunt as the girl pulls out her small tongue, reluctantly licking at your groin to satisfy the beast behind your clothes. Just like a whore to assume that's what you're here for. You walk away from her attempts to fellate you, pulling on the leash and yanking your girl forward. She gets up and starts walking behind you and out into the sunlight - you want the world to know how well you've trained your fat little piggy.\n\n", false);
-	
+
 	outputText("You look back to the shed to see if there's anything you might be missing. Weights, large poles, a whip, some rope, and – ah yes, the steel ring gag. 'Where there's a whip, there's a way', you chuckle to yourself as you take the strap and bring it over to Lottie. Your pig slut is naked and ready, waiting on your command as you pull out the ring-shaped device and stretch the strap over her head, placing the metal ring inside her mouth and forcing the pale slut to make a permanent 'O'-shape with her lips. You tighten the gag, causing Lottie to cough uncomfortably as drool forms at the base of her mouth. Taking the leash, you drag Lottie away from the shed, her large ass jiggling as she tries to catch up to you. You figure you'll take her to the backstreets of Tel'Adre – you want people to see your work of art, but you know only the scum of the city will truly appreciate her for what she is. You pull the leash, leading Lottie through an alleyway and into a smaller, dirtier part of the desert city, an enclosed area with several food stalls littered around.  A majority of the lower-class citizens wander these parts, shuffling about as they haggle, argue and steal – as is usual in the slums. Most people notice your pig-girl trotting behind you, though few offer a second glance. The majority stand and stare as you present your trophy – a few of the more courageous ones openly masturbate to the site, whereas the braver still walk up and slap your pig on the ass, eliciting a squeal or a moan. You decide to up the ante while you walk through the commons, placing a hand between Lottie's pale thighs and thrusting two fingers into her pussy, the heat enveloping your digits as you shamelessly fingerfuck the poor girl.\n\n", false);
-	
+
 	outputText("On your walk, you find yourself in a familiar location – the back alleyway of the Wet Bitch. Figuring it wouldn't hurt to take your slut inside; you jerk your hand forward, forcing Lottie to walk towards the door – when you recognize the face of a furiously masturbating fox herm.  Urta looks at you while she pumps her thick horsecock relentlessly, winking at the pig-slut you've currently got on a leash. She doesn't seem to recognize you again, which could either mean she's somehow contracted serious amnesia, or she's a lot drunker than usual. \"<i>", false);
 	if(!silly()) outputText("Heyyy, is she like *hic* your shex slave er shumthin?", false);
 	else outputText("Heyyy, do I shmell bacon?  I fucking love bacon!  BACON BACON BACON!", false);
@@ -1680,11 +1686,12 @@ public function lottieRepeatWalkies():void {
 	dynStats("sen", -2, "lus=", 0, "cor", 1);
 	doNext(13);
 }
-	
+
 //[Cowgirl]
 public function lottieRepeatCowGirl():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-cowgirl-repeat"));
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("A few minutes later and you've both gone to the yoga rooms – you've already placed a mat down while you wait for Lottie to change. Your rosy lover bounces into the empty, dim lit room, her ample thighs squishing out of a pair of super tight shorts, while her breasts fill over a sports bra. You're immediately turned on by the incredibly erotic display, Lottie catching scent of your increasingly hardening member and giggling while she crushes her boobs together in front of you. \"<i>I'm guessing you like what you see?</i>\" she purrs, walking over to you and pushing you down upon the gym mat. Lottie makes quick work of your lower clothes, your " + cockDescript(x) + " bouncing out and at attention, which she grabs hastily as she begins to jerk you off. The pig-girl presses your member against her moist slit, grinding it back and forth while her moans fill the empty room. You grunt in pleasure, jerking your hips slightly to help the process along, to which she replies by bending down to press her overflowing tits against your chest. You take your hands and slap them upon her ass, groping and squeezing while she moans into you. The girl shudders in bliss as the grinding sends her into an early orgasm. \"<i>I... I've got something better for you, babe...</i>\" she pants as she pulls apart the opening in her shorts to reveal her blushing pussy. Keeping a firm grip on your " + cockDescript(x) + ", Lottie lifts herself up and slowly lowers her body upon it, your tip parting her folds and entering her hot insides. You grunt at the sensation of her inner walls squeezing tightly against your member, ", false);
@@ -1698,9 +1705,9 @@ public function lottieRepeatCowGirl():void {
 		if(player.cockTotal() == 2) outputText(" does", false);
 		else outputText("s do", false);
 		outputText(" not disappoint, spurting your essence all over the pig-girl.", false);
-	} 
+	}
 	outputText("  You both lay on the mat, panting in ecstasy while your " + cockDescript(x) + " continues to ejaculate inside her.\n\n", false);
-	
+
 	outputText("A while later, you've both said your goodbyes for the night. Before you leave, you make sure to head out to the cafe to buy yourself a ", false);
 	if(silly()) outputText("bacon ", false);
 	outputText("shake.", false);
@@ -1718,7 +1725,7 @@ public function lottieRepeatQuickie():void {
 	if(x < 0) x = 0;
 
 	outputText("You follow Lottie out into the pool area, waiting as she walks into the dressing room to get changed. When she comes out however, you're surprised to find that she hasn't changed into anything – in fact, she's removed all her clothes entirely!\n\n", false);
-	
+
 	outputText("The nude pig-girl stands in front of you, turning red at your hungry gaze. \"<i>Will you f-fuck my pussy, " + player.short + "?</i>\"\n\n", false);
 
 	outputText("In moments flat you remove your clothes to jump the piggy, whipping out your " + cockDescript(x) + " and pushing it against Lottie's wet slit, the pig-girl lying on her back while her legs rest upon your shoulders. With a hearty thrust you drive yourself into her, eliciting a loud moan while you pork her insides with your meat. Her thick thighs slap against you as you bend over to take a lustful grab at her melons, sucking at her nipple and pinching the other, her sweet taste enveloping your mouth. Lottie buries you in her cleavage, yelping as you piledrive her tight pussy into submission – but you've got more in store. Flipping her over, Lottie lies face down with her soft butt jutting up in the air, your persistent fucking driving her wild. You continue gripping onto her tits as you pound her flesh, every thrust accompanied by her pleasured grunts. Back and forth you mount her until the familiar sensation in your loins signal your release. You increase your pace, pounding her pussy until you pull your head back and ejaculate inside her inner walls, slamming in harder every few seconds with each burst.", false);
@@ -1729,7 +1736,7 @@ public function lottieRepeatQuickie():void {
 		outputText("in ecstasy, releasing all over her plump butt.", false);
 	}
 	outputText("\n\n", false);
-	
+
 	outputText("Sweaty and panting, Lottie lies on the floor, exhausted and full of your spunk. You slap her jiggling ass before walking out of the pool area, making sure to grab a ", false);
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
@@ -1742,6 +1749,7 @@ public function lottieRepeatQuickie():void {
 public function lottieRepeatThreesome():void {
 	spriteSelect(36);
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-threesome-repeat"));
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("You both walk to the yoga rooms, to find Elle stretching in the empty area. She spots the both of you, waving hello -  but you all have other, dirtier intentions in mind. Elle strips down, her perky tits bouncing loose. You chuckle devilishly as you undress in front of your naked and wanting harem. Both of the girls blush nervously as they stare at your " + cockDescript(x) + " – though the hunger in their eyes suggests anything but anxiety. You lay down on your back, gesturing for the girls to come over to you. Lottie enthusiastically trots towards you, lying down in front of your member and popping the tip into her full lips, circling around with her agile tongue. The spider-girl grows more enthusiastic, hopping behind to lie next to Lottie, placing her hot mouth at the base of your shaft and licking softly. She runs her tongue along your length while Lottie sucks hungrily on your head, slurping beads of pre-cum and stopping every so often to plant her lips on her spider-friend, swapping saliva along with the taste of your cock. As you let the girls work on your slick member, the spider-slut removes herself before straddling your face, her wet pussy inches from your hungry maw. Lottie begins to work around your length while Elle leans forward and plunges it into her mouth, sucking hard and fast. She releases your tip with a wet pop, moaning as you dig your tongue inside her hot cunt, tasting her juices and sucking gently on her hard clit. Lottie moves herself above your length, lowering herself slowly until you buck upwards, slamming your " + cockDescript(x) + " directly inside of her. Both of the girls squeal and moan from either ends, Elle's thick thighs on either side of your head while she tries to pull you in deeper inside. Lottie's pillowy breasts heave as she bounces on top of you, leaning over to the spider-girl as they share a deep kiss. Elle's extra hands knead Lottie's breasts, while her main two hold onto her own hips, grinding along your face while you sip at her sweet nectar. Your techniques seem to work, as the spider-girl shudders in orgasm, her sweaty thighs clamping down on you while she shakes in ecstasy. Lottie climaxes soon after, holding on to Elle's head as the girl sucks gently on her soft nipple flesh, her inner walls tightening against you. As you feel your own release coming, you order your sluts to take themselves off of you, to which they comply. In seconds you've grabbed the spider-girl and forced her to spread her legs wide open, plunging your " + cockDescript(x) + " inside and squirting your hot spunk. Lottie positions herself on top of the girl, placing their pussies against each other and grinding in lust. Once you finish filling your spider-slut, you drive into the pig-girl, ropes of your cum splattering her inner walls. You continue thrusting in and out of the both of them for several minutes, before finishing up by letting each girl suckle at your cock. \"<i>Satisfactory,</i>\" you mumble, redressing and heading out the door, making sure to grab a ", false);
@@ -1802,20 +1810,20 @@ public function lottieRepeatFEMDOMFEMFDOM():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("You both walk into the yoga area and are met with the smell of sweat and flowers pervading the room. You look around, unable to find your lover until –THUNK! A heavy weight is brought down upon your head, pulling you down to the ground and away from consciousness as everything fades to black.\n\n", false);
-	
+
 	outputText("You wake up dazed, your forehead throbbing – you're also completely naked, but unharmed otherwise. When you try to move, however, you find yourself unable to shift from your position – you seem to be tied to a chair, your hands behind your back while your legs are bound to those of the seat. You observe your surroundings, noticing the recognizable brick walls and stocked shelves of the gym's equipment shed. The familiarity of the location leaves you somewhat relieved – at least you know where you are. A quick slap to the face brings your attention to the lean pig-girl in front of you. Her figure is somewhat obscured by the lack of sunlight inside the room, though you can tell she's mostly nude, other than a small black g-string obscuring her nether regions. She also appears to be sporting black thigh-high boots, along with similarly coloured gloves that reach her arm pits. Her expression is one of immense desire, smiling wryly as she examines your form. \"<i>You've gotten bigger.</i>\" She smiles, leaning on top of you and letting her heavy breasts smother your face. You take a lick at one of her nipples before she jerks back and hits you again. \"<i>Hahaha, not today, pig. All this extra weight is because you can't keep your mouth closed.</i>\" She spits, grabbing at the soft flesh of your ", false);
 	if(player.biggestTitSize() >= 2) outputText("tits", false);
 	else outputText("belly", false);
-	outputText(" and squeezing, as if she was playing with putty. \"<i>I've reached my goal, but it seems you need a bit of help reaching yours. If you don't mind, I think I'll be your personal trainer for today.</i>\" The horny pig-slut grabs a hold of your " + cockDescript(x) + ", keeping a firm grip on your member as she effortlessly jerks you off. \"<i>I think I'll release all of that thick, sticky spunk you've got hidden inside of your fat cock.</i>\" The velvet of her gloved hands sends small bouts of pleasure through your body, her technique clumsy but efficient. Lottie begins playing with her juicy nipples, twisting and rubbing them while she toys with your length. You shudder, looking down to find her mouth only inches away from your " + cockDescript(x) + ", her hot breath surrounding your tip. She takes one lick of your cockhead, and already you feel a tingling sensation as you start to orgasm – did she take something to cause this? Regardless, you pump mindlessly through her hands, looking for release, when Lottie grabs hard at your cock, plugging your cum and causing you to grunt in denial.\n\n", false); 
+	outputText(" and squeezing, as if she was playing with putty. \"<i>I've reached my goal, but it seems you need a bit of help reaching yours. If you don't mind, I think I'll be your personal trainer for today.</i>\" The horny pig-slut grabs a hold of your " + cockDescript(x) + ", keeping a firm grip on your member as she effortlessly jerks you off. \"<i>I think I'll release all of that thick, sticky spunk you've got hidden inside of your fat cock.</i>\" The velvet of her gloved hands sends small bouts of pleasure through your body, her technique clumsy but efficient. Lottie begins playing with her juicy nipples, twisting and rubbing them while she toys with your length. You shudder, looking down to find her mouth only inches away from your " + cockDescript(x) + ", her hot breath surrounding your tip. She takes one lick of your cockhead, and already you feel a tingling sensation as you start to orgasm – did she take something to cause this? Regardless, you pump mindlessly through her hands, looking for release, when Lottie grabs hard at your cock, plugging your cum and causing you to grunt in denial.\n\n", false);
 
-	//[If Cum Production Average] 
+	//[If Cum Production Average]
 	if(player.cumQ() <= 500) {
 		outputText("\"<i>Hm. Your dick here seems to be twitching. Were you... were you going to cum for me?</i>\" you nod feverishly, anything to get her to release her grip. \"<i>No. Not here. In me.</i>\" She straddles you, plunging your " + cockDescript(x) + " into her depths and bouncing to a steady rhythm, her ample butt slapping against your groin. \"<i>Unh... do you like me fucking your fat ass, pig?</i>\" she yelps, holding onto your large body as you lay there, being serviced. \"<i>F-fuck! Fill me up, babe!</i>\" You grunt, the vice-like grip of her walls tightening against your member. With one steady push you explode inside of her, filling her up with your thick spunk. \"<i>Oh god, give me all your cum!</i>\" she yelps, her belly full of your molten liquid. Lottie lifts herself up, your " + cockDescript(x) + " dripping out and leaving a puddle underneath you. \"<i>H-hah, y-you're such a pig!</i>\" she stutters, obviously flustered from the sex but still attempting to keep up a dominant facade. You easily untie yourself from the binds and walk over to her, planting a kiss on her cheek before leaving through the shed door. \"<i>You... you could've escaped the whole time?</i>\" she squeaks, your only response a thumbs up as you walk away. On your way out, a milkshake vendor waves over to you – it's the guy from the cafe. You buy a ", false);
 		if(silly()) outputText("bacon ", false);
 		outputText("shake before deciding to head home.", false);
 		if(silly()) outputText("  You fucking love bacon shakes.", false);
 	}
-	//[If Cum Production High] 
+	//[If Cum Production High]
 	else {
 		outputText("Unfortunately for her, you have far too much built up to stop now. With another thrust, your " + cockDescript(x) + " pulses in delight, exploding in orgasm as ropes of spunk splatter upon Lottie's face and tits. The girl gasps, the sheer amount of your seed painting her white. \"<i>N-no, stop! Oh god!</i>\" she yelps, before her mouth is filled with your hot essence. She forces herself to swallow, coughing as you grin at the defeated slut. \"<i>O-okay, y-you win, " + player.short + ".</i>\" she looks up at you and smiles, before untying your binds and setting you free. \"<i>But you have to admit, this was pretty fun, right?</i>\" You give her a thumbs up before walking out the door, leaving her to clean your thick mess. On the way out, a milkshake vendor waves over to you – it's the guy from the cafe. You buy a ", false);
 		if(silly()) outputText("bacon ", false);
@@ -1847,10 +1855,11 @@ public function hugTheShitOutOfYourHam():void {
 
 
 //iii-i. Tentacle Scene
-//Requires: Tentacle dicks. Obviously. Must have unlocked at least one other 
+//Requires: Tentacle dicks. Obviously. Must have unlocked at least one other
 //vaginal sex scene.
 public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 	outputText("", true);
+	outputText(images.showImage("lottie-fuck-her-with-tentacle-dick"));
 	var x:Number = -1;
 	var y:Number = -1;
 	var z:Number = -1;
@@ -1878,13 +1887,13 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 		counter++;
 	}
 	outputText("It isn't long before you've taken Lottie out to the shed behind the gym - due to the amount of visitors regularly coming in and out of the gym itself, the equipment seems to have been mostly removed - leaving bare shelves and a large concrete floor covered in spare gym mats.\n\n", false);
-	
+
 	outputText("The porcine girl takes the initiative as soon as you enter the room, stripping down and planting her cushiony ass upon the pile of mats in front of you.  \"<i>What're we gonna do in here, babe?</i>\" she asks, turning over onto her soft belly and rolling around, covering herself in an assortment of old, thin mattresses.  \"<i>Heh, I'm a pig in a blanket,</i>\" she squeaks, unaware of you slowly pacing towards her, your hand firmly stroking your " + multiCockDescriptLight() + ".  There's a time for games, you think, and a time for unleashing your myriad of undulating vine-beasts upon your curious pink slut.\n\n", false);
 	outputText("Removing your " + player.armorName + ", you let your " + multiCockDescriptLight() + " hang loose, a single vine stretching outwards and slapping Lottie upon the ass to remind you of why you're here.  She squeals, trapped underneath the heap of mattresses and doing little to help the situation she's found herself in.  \"<i>H-hey, uh, I've kinda found myself in a little pickle, " + player.mf("big guy","hon") + " - could you give me a hand?</i>\" Lottie chuckles, squirming around in an attempt to loosen herself from the pile, but inevitably failing.  You walk closer towards her, shifting away a few mattresses here and there to free her limbs.  She smiles apologetically as you lift up the last mattress, crawling back out of the pile only to squeak when you bring down the smallest - albeit, heaviest - mat onto her back, preventing her from moving any further and causing her face to be buried against the mattress below her, the girl's plump ass stretched directly up into the air.  The awkward position restricts the movement of anything outside of her forearms and neck, and the majority of the weight upon her back pushes her chest into her knees, disallowing her from stretching outwards.  Lottie turns her head to the side, giving her time to breathe and assess the situation.  She notices you stark naked, her eyes drawn down to the " + multiCockDescriptLight() + " laid before her.", false);
 	if(lottieMorale() <= 30) outputText("  She gives you a gloomy stare, before turning her head back down and plunging it into the mattress, already accepting her defeat", false);
 	else outputText("  She raises an eyebrow, though doesn't probe any further", false);
 	outputText(".\n\n", false);
-	
+
 	outputText("You grasp the base of your " + cockDescript(x) + " as it stretches forward, gently caressing Lottie's face before exploring the rest of her body, idly stroking the smooth curves of her hips or brushing against her hardening nipples.  The pig-girl moans quietly from the light petting while the feeling of her soft skin excites your hardening length, reminding you of your true intentions.  You walk behind her, obscuring yourself from Lottie's peripheral vision and crouching down to inspect the view of her perfectly rounded ass pointed conveniently into the air.  " + SMultiCockDesc() + " twitches in agitation, eager to plow the chubby slut trapped in front of you - and you aren't about to disappoint.\n\n", false);
 
 	//[if a single, lonely tentapenis]
@@ -1893,7 +1902,7 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 	outputText("writhing member as it stretches out, snaking towards Lottie's genitals and probing her moistened lips.  The tip of your vine-like length wriggles vertically along her eager hole, vibrating against her hardening clit and causing the sweating pig-whore to oink in pleasure.  She struggles to move her arms towards her aching need, desperate to relieve herself from the thick, stretching snake pushing against her slick cunt.  Without a word of warning, the hardened tentacle presses the side of its slick length firmly against her entrance, before whipping itself backwards and plunging into her heated hole.\n\n", false);
 
 	outputText("Lottie groans from pleasure while your thickened, snake-like cock lies pulsing inside her, trapped within the tightening walls of her womb.  You force the bestial length to curl back outwards, before pumping back with incredible force - plowing your girl with fevered abandon as the insatiable vine pushes her face into the mattress soaked with her saliva.\n\n", false);
-		
+
 	//[if extra cock] //this is to be added to the standard text
 	if(y >= 0) {
 		outputText("Seeing that you have extra junk left to be used, and she has some vacant holes, you quickly remedy this problematic situation; guiding your " + cockDescript(y) + " toward her moist butthole, you press the tip of your tree-like beast against her plush buttocks, literally stabbing her flesh with your penile flora.  The butt-slut doesn't seem to care: if anything, she squirms all the more, visibly aroused.  Her ass seems to stretch on its own as it braces itself for the imminent butt-devastation.  You welcome Lottie's efforts to comply to your anal needs and with a single thrust, you push ", false);
@@ -1927,7 +1936,7 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 							//[if another extra cock]//to be added to standard text
 							if(zzzzzzz >= 0) {
 								outputText("With another cock left unsatisfied, you place your thick, tentacled member against the soft flesh of Lottie's ass, driving it to and fro as the sensation of her chubby flesh drives you wild.\n\n", false);
-								//[if yet another extra fucking cock jesus tittyshitting christ] 
+								//[if yet another extra fucking cock jesus tittyshitting christ]
 							}
 						}
 					}
@@ -1960,6 +1969,7 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 //[Weights]
 public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText("", true);
+	outputText(images.showImage("lottie-ifris-threesome"));
 	outputText("\"<i>We're gonna burn that flab away, Ms. Porky,</i>\" you reply.  Swaggering over to the weights, determined to humiliate your work-out partner again, you see a flash of familiar crimson on your way.  It's Ifris!  The muscle aficionado's body is perfectly accentuated with all the right firmness, none of the fatty buildup heaped onto Lottie.  Ifris gives one of her signature claps as you settle down at the bench, gripping the heaviest set of weights.  With a wicked idea in mind, you beckon to the fit seductress and she happily complies.\n\n", false);
 
 	outputText("While Ifris sways over to you and assumes her usual position hovering over your head,  Lottie takes notice.  When she realizes what's going on, she whimpers, \"<i>I-I thought </i>we<i> were gonna work out together, Champion.</i>\"  Ifris lets out a delightful little giggle and places a hand on Lottie's pink shoulder.\n\n", false);
@@ -1967,7 +1977,7 @@ public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText("\"<i>He's a bit out of your league, don't you think?</i>\"  The trim red woman returns her gaze from Lottie to you and lovingly leans against your firm chest.  Her arms wrap around your body and she slowly starts undressing you.  Once your torso is bared, Ifris purrs, \"<i>Such a fine specimen; " + player.mf("he","she") + " really deserves some special attention.</i>\"  Ifris lowers her head to just above the waistline and pulls the bottoms of your " + player.armorName + " down a couple of inches.  To supply the devil with plenty of motivation, you begin lifting.  Her first kiss is planted directly below your belly button, and her tongue traces around the navel.  Each one of your rigid abdominal muscles is given a wet smooch.  She lingers right below your sternum and lifts her eyes up to yours.  Knowing that her next destination is higher up, you raise the weights till your arms straighten out, showing off as much as possible.  Her eyes brighten and she continues her journey.  The burden above your head takes up considerably less of your attention as Ifris breathes in deeply and nuzzles into your broad, sculpted trunk.  She listens to your heart, feeling the pumping in your chest.  Lottie's signature sniffle cuts into your bliss.  Laughing to yourself, you boast,  \"<i>Damn, it feels good to have someone so lovely show such respect.  It's relieving not to be disgusted when a woman gets close to me.</i>\"  You don't even bother to look at the pig; her incoherent babbles are satisfying enough.  Whether Ifris's devotion or Lottie's humiliation, something causes your prick to surge with life; your bottoms bulge considerably and threaten to rip open.\n\n", false);
 
 	outputText("You start pumping the weights swiftly to clear your head and to spur your devil lover on.  Ifris sits her chin upon your bulky chest, looking up at you as she snakes her ebony tongue across her plush breasts.  Eyes glazed over with lust, she starts sliding a hand over to your bulge.\n\n", false);
-	
+
 	outputText("You ask her to stop, quickly adding, \"<i>I've got someone to handle that; you just keep me company until it's out.</i>\"  You lower the weights onto the rack and tear your gaze from Ifris to Lottie.  As expected, she has tears in her eyes but is rooted in place.  Abandoning the tenderness you showed to Ifris, you command the pig to remove your pants.  She nods and haltingly steps towards you, then removes the prison around your member.\n\n", false);
 
 	outputText("Finally escaping its restraints, " + sMultiCockDesc() + " triumphantly lifts straight into the air.  You let out a sigh of relief, close your eyes and resume your workout.  Almost as an afterthought, you add, \"<i>Ifris, honey, go ahead.  Tubby, you stay out of this.  We know what happens when your greedy face wraps itself around my dick.</i>\"  A rather loud sob forces you to open one eye and regard Lottie with a cold stare.  Her face is a volatile mix of jealousy, anger and shame, tears sliding from her green eyes.  Your only reply is a dismissive snort.\n\n", false);
@@ -1979,8 +1989,8 @@ public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText("The sound actually speeds up and... girlish high pitched moans fill your ears?  Glancing at Ifris, it's apparent that her mouth is fixated on servicing you.  Not to mention her voice doesn't match the softer squealing sound.  A certain word tumbles through your head.  Squealing.  You don't want to be bothered with getting up, but you're determined to find the naughty sow causing a ruckus.  Turning your head to the side you locate the source of all the noise.  Lottie has crawled extremely close to you, only about a foot away from your head. She's on her knees with one hand buried deep into her gym shorts, explaining the shlicking sound.  Her other hand encompasses her heavy jugs, the thick flesh spilling out of her palm.  Noticing your gaze, Lottie quickly grabs a nipple and tugs earnestly.  Her plump breast stretches out and her hand works harder into her pussy.  She tries to show off for you with her constant tweaking, moaning as she pulls harder.  Apparently hitting an extra sensitive spot deep inside, Lottie gasps and releases the nipple, unleashing an enticing cascade of jiggling, bouncing breast.  The free hand joins its opposite in her groin, and very soon a pool of slutty juices forms around her pudgy bottom.\n\n", false);
 
 	outputText("With such a needy subject watching, you decide to finish up this exercise.  Ifris is still bobbing up and down the length of your dick.  You patiently await her trip to the top, and grab her cute little head.  Sliding your fingers through the rich locks of hair you almost feel a hint of shame about what you plan on doing next... almost.\n\n", false);
- 
-	outputText("You stand up and off the bench, holding Ifris so that her mouth is still around the tip of your prick.  Casually tossing your head towards Lottie, you attract her attention and demand, \"<i>Stop shoving your fingers in that fat pussy of yours and pay attention.</i>\"\n\n", false);  
+
+	outputText("You stand up and off the bench, holding Ifris so that her mouth is still around the tip of your prick.  Casually tossing your head towards Lottie, you attract her attention and demand, \"<i>Stop shoving your fingers in that fat pussy of yours and pay attention.</i>\"\n\n", false);
 
 	outputText("She obeys, blushing red.  \"<i>Now just look at that!</i>\" you continue, \"<i>You've been such a good girl during our training session.  I think you deserve a reward.</i>\"  Your mocking smile disappears, replaced with a snarl.  Both of your powerful hands tightly grip Ifris's head, causing her eyes to go wide.  Mustering all the strength you have left, you hold back the bubbling climax threatening to explode out of your balls.  You slam Ifris down to the very base of your cock, burying her head in your groin, then immediately afterwards, rocket your hips forward to send it flying up the length of your dick.\n\n", false);
 
@@ -1991,7 +2001,7 @@ public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText(".  Lottie is crying out in ecstasy next to you.  She pleads with you to let her have the next turn as your fuck-toy.  The pressure building up in your sack has finally reached its peak.  You abandon all delusions of control, giving in to the primal desire that has arisen.\n\n", false);
 
 	outputText("Your " + player.legs() + " go weak and your arms feel like slime as you push Ifris all the way down one more time.  The first geyser of cum overloads the pretty red gym-goer. She's nearly pushed off of your dick by the force of your first shot.  With no strength left, you let go of her silky hair and let her collapse onto the floor.  Her throat bulges and spunk dribbles out of her mouth.  The second wave overcomes you and you coat the floor with cum.  You barely register grabbing Lottie by the arm and hauling her over to Ifris.  Both women are still fingering their dripping pussies while you prepare one ultimate burst.  Darkness creeps into your vision as you angle your cock above both sluts.  Your urethra dilates and unleashes a barrage of seed; Ifris and Lottie coated in thick ropes of it.  They embrace under the rain of cream, mashing each other's drenched bodies together.\n\n", false);
-									  
+
 	outputText("Only swaying for a handful of seconds before collapsing into the two women, you black out.", false);
 	dynStats("lib", 1, "lus=", 0, "cor", 5);
 	doNext(lottieAndIfrisNTREpilogue);
@@ -2011,7 +2021,7 @@ private function lottieAndIfrisNTREpilogue():void {
 	}
 	else outputText("I had to make a show of fining you for public indecency, but you'll note your money is all still there.  Pay me back sometime, okay, hun?\n\n-Always up for you, Urta", false);
 	outputText("</i>\"\n\n", false);
-	
+
 	outputText("Satisfied, you get dressed and strut off towards camp.", false);
 	if(silly()) outputText("  You'll make damn sure to buy Urta a bacon shake tomorrow.", false);
 	doNext(13);

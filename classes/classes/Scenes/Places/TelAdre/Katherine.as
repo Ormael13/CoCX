@@ -104,10 +104,11 @@ public function katherineGreeting():void {
 	flags[kFLAGS.KATHERINE_UNLOCKED] = 1;
 	doNext(13);
 }
-	
+
 //Seeing Katherine
 public function visitKatherine():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-visit-alley"));
 	//If Back Alley button is selected
 	outputText("The back alley behind Oswald's pawnshop is quite unremarkable, except that it's reasonably clean.  A number of empty crates, old blankets and torn strips of cloth have been assembled into a makeshift \"<i>nest</i>\", the kind of place that a homeless vagrant would use as a resting place.\n\n", false);
 
@@ -260,6 +261,7 @@ private function askKatherineAboutLoveAndLust():void {
 //Katherine Appearance:
 private function katherinesAppearance():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-examine-her-appearance"));
 	outputText("Katherine stands before you, nervously watching as you scrutinize her form.  \"<i>Um... do you like what you see?</i>\"  Nervously trying to break the ice and amateurishly trying to flaunt her body, she strikes what might be a sexy pose... in her mind.\n\n", false);
 
 	outputText("Katherine is a lean-built hermaphroditic cat-morph, standing maybe 5' 2\" tall.  Her fur is black, but her shoulder-length hair, often worn forward and obscuring one of her leaf-green eyes, is neon pink.  She wears weatherbeaten, somewhat ragged, clearly second-hand clothing, consisting of a too-large shirt and a very tight pair of shorts.  At your gesture, she meekly undresses herself so that you can get a better look at her.\n\n", false);
@@ -275,7 +277,7 @@ private function katherinesAppearance():void {
 	outputText(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] + "\" thick knot", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s at their bases.  A pair of " + flags[kFLAGS.KATHERINE_BALL_SIZE] + "\" wide balls sway below her cocks, hanging just above her wet, eager cunt.\n\n", false);
 	else outputText(" at its base.  A pair of " + flags[kFLAGS.KATHERINE_BALL_SIZE] + "\" wide balls sway below her cock, hanging just above her wet, eager cunt.\n\n", false);
-	
+
 	outputText("When you're finished looking at her she quickly redresses herself, flaunting her rear at you as if by accident and waiting to see what else you want, reassured by your lack of comments.\n\n", false);
 	//Display default Katherine options
 	katherineMenu();
@@ -324,7 +326,7 @@ private function useReductoOnKat():void {
 		//[Knot] [Length] [Balls]
 		simpleChoices("Knot",knot,"Length",leng,"Balls",balls,"",0,"Back",giveKatherineAnItem);
 	}
-	
+
 }
 private function useRedoctoOnKatsKnot():void {
 	outputText("", true);
@@ -345,7 +347,7 @@ private function useRedoctoOnKatsKnot():void {
 		else outputText("narrowly dodge in surprise", false);
 		outputText(", at the expense of dropping and spilling what's left of the salve.  The hard flesh shrinks until the width has dropped by two whole inches, at which point the salve's effects wear off and her climax finishes... though, given that her knot remains swollen and her cock remains erect, you think she could probably go again.\n\n", false);
 	}
-	
+
 	outputText("She rewards you with a glowing, orgasmic smile.  \"<i>That was... incredible.  Thank you so much for the present... did you want to do anything else?  Maybe... have a little fun?</i>\" she asks, her voice low and husky with desire.\n\n", false);
 	//use 1x Reducto, reduce Kat knot size by 2, increase PC lust value, go to Kat sex menu
 	flags[kFLAGS.KATHERINE_KNOT_THICKNESS] -= 2;
@@ -397,7 +399,7 @@ private function useReductoOnKatsKock():void {
 	outputText("\"<i>God, that was... uughh,</i>\" Katherine groans, wiping her fur.  \"<i>I'm still so hard and horny, too... feels like I'll never go soft now.  Do you maybe... wanna help me with that?</i>\"  She turns a hopeful", false);
 	if(player.lib > 50) outputText(", if fatigued,", false);
 	outputText(" look on you.\n\n", false);
-	
+
 	//remove 2 inches from Kat's length, use 1x Reducto, increase PC lust value, go to Kat sex menu
 	flags[kFLAGS.KATHERINE_DICK_LENGTH] -= 2;
 	if(flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8) flags[kFLAGS.KATHERINE_DICK_LENGTH] = 8;
@@ -473,7 +475,7 @@ private function giveKatADoublePepper():void {
 	player.consumeItem(consumables.DBLPEPP);
 	katSexMenu();
 }
-	
+
 //Overly Large Pepper
 private function giveKatAOverlyLargePepper():void {
 	outputText("", true);
@@ -546,6 +548,7 @@ private function katPenetrate():void {
 private function penetrateKatsVag():void {
 	var x:Number = player.cockThatFits(70);
 	outputText("", true);
+	outputText(images.showImage("katherine-fuck-her-vagoo"));
 	outputText("You don't even need to think about it.  Your eyes are locked on the cat-herm's silken, sopping wet pussycat pussy, which is already dribbling femlube down her ", false);
 	outputText(katBalls() + " scrotum and puddling it onto the ground in anticipation.  Slipping off your garments, you saunter forward and gently stroke her damp lips, stage-whispering to her that it seems an obvious choice which hole you should take.  Katherine gives a playful giggle, a mewl of arousal, and repositions herself so that it's easier for her to support the two of you.\n\n", false);
 
@@ -585,6 +588,7 @@ private function penetrateKatsVag():void {
 //PC Penetrates Kath: Anal
 private function pcPenetratesKatAnally():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-fuck-her-bungholio"));
 	var x:Number = player.cockThatFits(70);
 	outputText("Thinking it over, your gaze falls upon the cat's ebony pucker, and you smile to yourself before telling Katherine that you want a shot at her back door.  Her eyes widen and she swallows hard, then she nods.  \"<i>O-Okay... if you're into that sort of thing...</i>\"\n\n", false);
 
@@ -595,17 +599,17 @@ private function pcPenetratesKatAnally():void {
 	outputText("No further encouragement needed, you press forward and begin sinking yourself into her tight black tailhole.  She moans like a virgin, her " + katCock() + " dog-cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" visibly jolting and her empty kitty-cunt clenching in sympathy as you slide yourself in.  Her anal walls lock around you like a vice of heated silk, gripping you and squeezing as if already trying to wring every last drop of cum out of you.  But you forge on, sliding inch after inch into her bowels until you can slide no more.  Then, slowly, you try to extract yourself - fighting every inch of the way, as her virgin-tight ass tries to suck you back.  Finally drawing most of what you put inside, you slide yourself home again, slamming harder and faster into her hips, then pulling out, repeating this over and over.\n\n", false);
-	
+
 	outputText("The herm cat gasps and moans, thrusting her sparsely-fleshed ass back to try and meet your hips as you continue to push, her inner walls milking and squeezing.  \"<i>Ah!  Do you - oh! - know what the - yeah, yeah, fuck me like that, fuck me there! - advantage of a herm - yesyesyes! - girlfriend is, " + player.short + "?</i>\" she manages to gasp out.\n\n", false);
 
 	outputText("You grunt and hiss as you abuse her insides, but manage to spare the breath to admit you don't.\n\n", false);
-		
+
 	outputText("\"<i>The advantage is - oh! ah! - I've got both sets of bits, so - ah! ah! AH! - it's good for me, like it'd be good for a guy!</i>\"  She lets out an excited yowl of bliss as you thrust particularly hard.  \"<i>Ohh... You're squeezing my prostate, rubbing all the parts in my ass that make my cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" jump, it's so good back there... so hard, so hot!  Fuck me, fuck me like an animal!</i>\" she screams, starting to jerk her own hips, knot-swollen cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" spewing pre-cum as she mock-humps the air.  She's gonna blow any second now...\n\n", false);
-	
+
 	outputText("But you beat her to the punch and, with a howl of your own, you cum inside her, flooding her bowels with your spunk", false);
 	if(player.cumQ() >= 500) outputText(" until her belly begins to bulge from all you've dumped in her", false);
 	if(player.cumQ() >= 1500) outputText(", swelling out and out until she looks like she could give birth soon and a part of you wonders if maybe she's going to start spouting your cum from her mouth", false);
@@ -631,6 +635,7 @@ private function pcPenetratesKatAnally():void {
 private function suckNFuck():void {
 	var x:Number = player.cockThatFits(70);
 	outputText("", true);
+	outputText(images.showImage("katherine-fuck-and-suck"));
 	outputText("You think it over, then find your gaze drifting to Katherine's sheath and the canine cockflesh within.  Recalling how you helped the poor herm shrink down her monster knot", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(", and remembering the flexibility of the cats you've seen, you find a very kinky idea coming to you.  You ask Katherine if she'd be willing to try a suck 'n' fuck.\n\n", false);
@@ -641,18 +646,18 @@ private function suckNFuck():void {
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(".  Making sure she's positioned so that she's not going to tumble off in mid-fuck, she takes hold of her thighs and bends over... and over... until she has practically pressed her nose into her own crotch.", false);
 	if(player.findPerk(PerkLib.Flexibility) < 0) outputText("  The sight is enough to make your spine wince in sympathy.", false);
-	//(player has Feline Flexibility: 
+	//(player has Feline Flexibility:
 	else outputText("  You watch how she does it, resolving to test your body and see if you can bend like that.", false);
 	outputText("  Having loosened up, she straightens her back until her mouth is hovering in front of the tip of her ", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("topmost ", false);
 	outputText("dog cock.  Her cat-like tongue, long and flat and bristly looking, reaches out to stroke the rubbery, conical tip, slurping around it and getting it nice and slick.  Then, she opens her mouth and starts bending forward again, gulping down all " + flags[kFLAGS.KATHERINE_DICK_LENGTH] + " inches of dog cock until she reaches the knot.  A moment's hesitation, to muster her courage, and then she engulfs it as well, pressing her nose flat against her own ballsack.\n\n", false);
 
 	outputText("This is your moment, and you step forward, gently but firmly taking hold of her thighs, positioning your " + cockDescript(x) + " against her slavering cunt.  Certain you are in position, you glide it home.  She shudders and audibly slurps on her cock as you sheathe yourself in her slick, velvety, burning hot nether lips.  You pull back and thrust home again, even as she begins to bob her head.\n\n", false);
-	
+
 	outputText("It is awkward, at first, the two of you trying to set up mutually complementary rhythms.  She hums and rumbles in her throat, striving to coax the most pleasure from her male genitalia, even as your thrusts and bucks make her cunt slurp and squelch, her copious lubricants slopping across your dick", false);
 	if(player.balls > 0) outputText(", your balls,", false);
 	outputText(" and your inner thighs.  But, as you keep going, you get into the rhythm and it becomes more pleasurable.\n\n", false);
-	
+
 	outputText("It's impossible to describe just how kinky this is; her hot, wet walls wrapped like a silken vise around your cock, her head bobbing and gurgling on her own right in front of you", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText(", and her lower shaft waving in the air between you as if to conduct the performance", false);
 	outputText(".  You thrust into her harder and harder; you can feel your climax coming... but she's the one who comes first.  With a muffled yowl, she squirts femcum from her cunt, splattering your belly in her juices.  The cry is cut off and her lips and cheeks visibly bulge as her knot suddenly inflates, trapping her cock in her own mouth and forcing her to drink every last drop as her balls release their cargo into her.  ", false);
@@ -663,7 +668,7 @@ private function suckNFuck():void {
 
 	outputText("And now, at last, it's your turn to cum, and with a loud moan you release into her.  ", false);
 	if(player.cumQ() <= 250) outputText("You spray everything you have into her sloppy, sopping-wet cunt, allowing it to join the other fluids already dripping from her gash.", false);
-	//Moderate Cum + 1</i>\" katballs: 
+	//Moderate Cum + 1</i>\" katballs:
 	else if(player.cumQ() <= 750) {
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("  Her belly bulges as you flood her womb with your sperm, visibly distended from your efforts.", false);
 		else outputText("  She looks heavily pregnant by the time you are done, her bellybutton beginning to brush against her chin.", false);
@@ -685,7 +690,7 @@ private function suckNFuck():void {
 		outputText("swollen, cum-filled gut for emphasis", false);
 	}
 	outputText(".  \"<i>I'm ready to try that again if ever you are.</i>\"\n\n", false);
-	
+
 	outputText("You promise her you'll remember that.  Redressed, you bid her farewell and head back out into the streets of Tel'Adre.\n\n", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	dynStats("sen", -1, "lus=", 0);
@@ -707,7 +712,7 @@ private function letKatKnotYou():void {
 	outputText("The mismatched herm steps up behind you and gives you a playful slap on your " + buttDescript() + ".  \"<i>Well, I've got dog dick", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(", so I'm just doing it the way nature intended,</i>\" she cracks.", false);
-	//(if player has anus & vagina: 
+	//(if player has anus & vagina:
 	if(player.hasVagina()) outputText("  \"<i>So, which hole do you want me to use?</b>\"", false);
 	//[Vagina] [Anus] [Double Penetrate] [Sucked 'n' Fucked]
 	var dubs:Function = null;
@@ -723,6 +728,7 @@ private function letKatKnotYou():void {
 //Get Penetrated (Vaginal)
 private function letKatKnotYourCuntPussyFuck():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-fucks-you-knottily-in-the-vagoo"));
 	outputText("You indicate to Katherine that you want it in your " + vaginaDescript() + ".\n\n", false);
 
 	outputText("Her furry hands promptly begin to rub possessively over your " + assDescript() + ", slowly moving up to take hold of your " + hipDescript() + ".  \"<i>Well, all right... if that's what you want...</i>\"  You feel her running ", false);
@@ -761,11 +767,11 @@ private function letKatKnotYourCuntPussyFuck():void {
 	cunt = player.vaginas[0].vaginalLooseness;
 	player.cuntChange(2 * flags[kFLAGS.KATHERINE_DICK_LENGTH],true,true,false);
 	outputText("  She lunges forward and grabs your shoulders, trying to push her way in deeper.", false);
-	//(if stretched: 
+	//(if stretched:
 	if(cunt < player.vaginas[0].vaginalLooseness) outputText("  The amount of swollen cockmeat she's stuffing inside you is on the border of being painful, but mostly it's pleasure that fills you.", false);
 	else outputText("  Thanks to the glovelike fit your pussy has on her knot, it feels nothing but good to be plugged up like this.", false);
 	outputText("\n\n", false);
-	
+
 	outputText("You shudder and gasp as your own climax suddenly rocks through you", false);
 	if(player.hasVagina()) outputText(", femcum splashing from your " + vaginaDescript(), false);
 	if(player.hasCock()) {
@@ -780,31 +786,31 @@ private function letKatKnotYourCuntPussyFuck():void {
 	outputText("She suddenly arches her back and lets out a yowl of pleasure as her orgasm follows, rippling through her; she cums, groaning, inside you", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText(", with more spurting from her second cock to glaze your belly and the ground below", false);
 	outputText(".  ", false);
-	//(1" balls: 
+	//(1" balls:
 	if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("She makes a surprisingly large amount of cum for such small balls, and you can feel it sloshing and slurping inside you, leaving you deliciously full of cat-cream.", false);
-	//(3" balls: 
+	//(3" balls:
 	else if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 3) outputText("Jet after jet of cum sprays inside you, flooding all the way up into your womb; by the time the dog-dicked cat stops, your belly is starting to bulge from all she's given you.", false);
-	//(5" balls: 
+	//(5" balls:
 	else {
 		outputText("She cums and she cums and she cums; how can she hold this much spooge inside her balls?  Your womb is flooded until by the time she finishes, you look certifiably pregnant and ", false);
-		//[6" knot: 
+		//[6" knot:
 		if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("only her huge knot is keeping everything plugged inside you.", false);
 		else outputText("some of it actually starts leaking out around her knot.", false);
 	}
 	outputText("  Her load spent, she collapses bonelessly onto her back - thanks to her knot, though, she remains plugged inside you and you yelp in shock as her weight pulls you backward.\n\n", false);
 
 	outputText("\"<i>Oops.  Sorry,</i>\" Katherine apologises.  ", false);
-	//(6" knot: 
+	//(6" knot:
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("\"<i>I'm afraid we're going to have to stay like this until I deflate - I don't want to think about how badly I'd hurt you trying to pull free.", false);
-	//(4" knot: 
+	//(4" knot:
 	else if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 4) outputText("\"<i>Give me a little while and I should deflate enough that I can pull free of you.", false);
 	else outputText("\"<i>If you pull hard enough, I should pop right out of you.", false);
 	outputText("</i>\"\n\n", false);
-	
+
 	//[(PC is very loose)
 	if(player.vaginalCapacity() >= 100) outputText("Nonplussed by the idea of waiting naked and penetrated in a back alley, and eager to see the look on Katherine's face, you pull apart anyway; your thoroughly stretched-out pussy relinquishes the knot with no more than a long sucking noise.  Free of her, you look back over your shoulder.  As you guessed, Katherine is sitting there wordlessly with her mouth open, staring alternately at the abused, cum-drooling lips of your pussy and at the enormous mass of flesh you just managed to pass through it.", false);
 	else outputText("You tell her that it's all right; you'll stay here with her until nature takes its course.  Even though you can't really see her, given your respective positions, you know she's smiling.", false);
-	outputText("\n\n", false);	
+	outputText("\n\n", false);
 
 	if(player.vaginalCapacity() < 100) outputText("About an hour later, she's deflated and y", false);
 	else outputText("Y", false);
@@ -819,6 +825,7 @@ private function letKatKnotYourCuntPussyFuck():void {
 //Get Penetrated (Anal)
 private function getPenetrated():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-fucks-you-knottily-in-the-bungholio"));
 	outputText("You indicate to Katherine that you want it in your " + assholeDescript() + ".\n\n", false);
 
 	outputText("\"<i>Well, I can't say I'm a big fan of the idea, but okay...</i>\"  Her furry hands promptly begin to rub possessively over your " + buttDescript() + ", slowly moving up to take hold of your " + hipDescript() + ".  \"<i>... if that's what you want.</i>\"  You feel her rubbing her ", false);
@@ -836,23 +843,23 @@ private function getPenetrated():void {
 	var butts:Number = player.ass.analLooseness;
 	player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2,true,true,false);
 	outputText("\n\n", false);
-	
+
 	if(butts > player.ass.analLooseness) outputText("You can't help but yelp in shock and look back over your shoulder at Katherine, who appears genuinely apologetic.  \"<i>Sorry!  But I need to penetrate sooner rather than later - or would you rather wait until my knot's fully swollen?</i>\"  You concede she has a point, but beg her to be more gentle if there's a next time.\n\n", false);
 
 	outputText("Fingers digging into your hips, she begins to thrust back and forth inside you", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText(", her secondary cock slapping wetly against your back", false);
 	outputText(".  She grunts and groans, \"<i>Oh- Oh yeah, you're unbelievable!", false);
-	//[(player has high harpy/shark/cat/dog/bunny score)  
+	//[(player has high harpy/shark/cat/dog/bunny score)
 	if(player.harpyScore() >= 4 || player.sharkScore() >= 4 || player.catScore() >=4 || player.dogScore() >= 4 || player.bunnyScore() >= 4)
 		outputText("  Mmm... yeah, that's it, moan for me, you little slut; who's the alpha bitch, huh?  Katherine's your alpha - go on, say it!</i>\"  She yells out, pounding herself into you with greater force and her claws extend just far enough to begin biting into your flesh, pinpricks of pain to counter the pleasure.\n\n", false);
 	else outputText("</i>\"\n\n", false);
-		
+
 	outputText("You moan and gasp, thrusting your ass back into your feline lover's midriff to facilitate your fucking", false);
 	if(player.isNaga() || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DEMONIC) {
 		outputText(",  snaking your tail up between her breasts and playfully stroking her cheek,", false);
 	}
 	outputText(" and crying out her name.  You can feel her knot starting to swell inside you even as she picks up the pace with which she hammers into you.\n\n", false);
-	
+
 	outputText("\"<i>Ohhh!  Gonna plug you up; fill you fulla kitty-cat spunk!</i>\" Katherine moans, her knot filling to its maximum size inside of you, anchoring you together so that she can no longer pull out.  She lunges forward and grabs your shoulders, trying to push her way in deeper.", false);
 	//(6" knot:
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("  It feels like she's trying to shove a melon inside you; and you cry out in equal parts pain and pleasure at being stuffed so full.", false);
@@ -878,11 +885,11 @@ private function getPenetrated():void {
 	outputText("She suddenly arches her back and lets out a yowl of pleasure as her orgasm follows, rippling through her; she cums, groaning, inside you", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText(", with more spurting from her second cock to glaze your back and drool off onto the ground below you", false);
 	outputText(".  ", false);
-	//(1" balls: 
+	//(1" balls:
 	if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("She makes a surprisingly large amount of cum for such small balls, and you can feel it sloshing and slurping inside you, leaving you deliciously full of cat-cream.", false);
 	//(3" balls:
 	else if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 3) outputText("Jet after jet of cum sprays inside you, flooding all the way up into your bowels; by the time the dog-dicked cat stops, your belly is starting to bulge from all the cum she's given you.", false);
-	//(5" balls: 
+	//(5" balls:
 	else {
 		outputText("She cums and she cums and she cums; how can she hold this much spooge inside her balls?  Your stomach is flooded with cum until, by the time she finishes, you look certifiably pregnant and ", false);
 		if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("only her huge knot is keeping everything plugged inside you", false);
@@ -892,13 +899,13 @@ private function getPenetrated():void {
 	outputText(".  Her load spent, she collapses bonelessly onto her back - thanks to her knot, though, she remains plugged inside you and you yelp in shock as her weight pulls you backward.\n\n", false);
 
 	outputText("\"<i>Oops.  Sorry,</i>\" Katherine apologises.  ", false);
-	//(6" knot: 
+	//(6" knot:
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("\"<i>I'm afraid we're going to have to stay like this until I deflate - I don't want to think about how badly I'd hurt you trying to pull free.", false);
-	//(4" knot: 
+	//(4" knot:
 	else if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 4) outputText("\"<i>Give me a little while and I should deflate enough that I can pull free of you.", false);
 	else outputText("\"<i>If you pull hard enough, I should pop right out of you.", false);
 	outputText("</i>\"\n\n", false);
-	
+
 	outputText("You tell her that it's all right; you'll stay here with her until nature takes its course. Even though you can't really see her, given your respective positions, you know she's smiling.\n\n", false);
 
 	outputText("About an hour later, she's deflated and you are able to get dressed, thank her, and head back to your camp.", false);
@@ -912,6 +919,7 @@ private function getPenetrated():void {
 //Get Penetrated (Double)
 private function getDoublePennedByKat():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-fucks-you-knottily-in-all-the-holes"));
 	outputText("You indicate to Katherine that you want it in both holes.\n\n", false);
 
 	outputText("She starts in shock at the proposal, then slowly, she nods her head.  \"<i>All right... if that's what you want.</i>\"  Despite her tone, her furry hands promptly begin to rub possessively over your " + assDescript() + ", slowly moving up to take hold of your " + hipDescript() + ".  \"<i>Hmm... this is so kinky, but I think it just might work...</i>\"  She murmurs, mostly to herself, and you feel her running her " + katCock() + " cocks against your sensitive pussy lips and your tingling anus, letting you feel their rubbery-smooth length, then, drawing back her hips, she suddenly thrusts the bottom one home without any hesitation.  The other slides along your asscrack harmlessly.", false);
@@ -945,13 +953,13 @@ private function getDoublePennedByKat():void {
 	outputText("  Her load spent, she collapses bonelessly onto her back - thanks to her knot, though, she remains plugged inside you and you yelp in shock as her weight pulls you backward until you're sitting on her.\n\n", false);
 
 	outputText("\"<i>Oops.  Sorry,</i>\" Katherine apologises.  ", false);
-	//(6" knot: 
+	//(6" knot:
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("\"<i>I'm afraid we're going to have to stay like this until I deflate - I don't want to think about how badly I'd hurt you trying to pull free.", false);
-	//(4" knot: 
+	//(4" knot:
 	else if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 4) outputText("\"<i>Give me a little while and I should deflate enough that I can pull free of you.", false);
 	else outputText("\"<i>If you pull hard enough, I should pop right out of you.", false);
 	outputText("</i>\"\n\n", false);
-	
+
 	outputText("You tell her that it's no matter if she can't pull out; you haven't gotten your own orgasm yet.  As you watch her face over your shoulder, her feline eyes widen.  \"<i>Oh!  I'm so sorry... gods, I wasn't even thinking.  What... what are you gonna do?</i>\"\n\n", false);
 
 	outputText("Turning back to hide your wicked grin, you begin to bounce up and down on her knotted, still-hard shafts.", false);
@@ -965,7 +973,7 @@ private function getDoublePennedByKat():void {
 	if(player.hasCock()) outputText("  " + SMultiCockDesc() + " celebrates with arcs of its own semen, spraying them in a patter on her legs and the ground in front of you.", false);
 	outputText("  The cat-woman gasps and twitches as her new ejaculation reverberates through her body, but forms no words, only looking up at the walls overhead.", false);
 	outputText("\n\n", false);
-	
+
 	outputText("About an hour later, she's deflated and you are finally able to rise off of her, get dressed, and head back to your camp.\n\n", false);
 	//minus lust, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.slimeFeed();
@@ -979,6 +987,7 @@ private function getDoublePennedByKat():void {
 private function suckedNFuckedByKat():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
+	outputText(images.showImage("katherine-suck-and-fucks-you"));
 	outputText("As you crouch, trying to figure out how you want your herm lover to take you, you start when you feel Katherine's fingers suddenly caressing your " + cockDescript(x) + ".\n\n", false);
 
 	outputText("\"<i>Hmm... I think you deserve a special treat, my sweet.  Roll over onto your back...</i>\" Katherine purrs, giving you a stroke to make you as stiff as possible before releasing you.\n\n", false);
@@ -1008,7 +1017,7 @@ private function suckedNFuckedByKat():void {
 	else if(player.hasVagina()) player.cuntChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	else player.buttChange(flags[kFLAGS.KATHERINE_DICK_LENGTH] * 2, true, true, false);
 	outputText("\n\n", false);
-	
+
 	outputText("\"<i>Now, then, let's give this a shot...</i>\" she murmurs to herself, beginning to slowly rock back and forth within you, sliding her cock", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 	outputText(" out and then thrusting home, her knot", false);
@@ -1033,11 +1042,11 @@ private function suckedNFuckedByKat():void {
 	outputText(".  She slumps forward with a groan of blissed-out relief, spent from her climax.\n\n", false);
 
 	outputText("And then it's your turn to cum, flooding the startled, oblivious cat's mouth with your remembrance and making her swallow rapidly to keep it down.  ", false);
-	//(Low/Normal: 
+	//(Low/Normal:
 	if(player.cumQ() <= 250) outputText("She drinks every last drop with gusto, popping wetly off of your cock and licking her lips as she audibly purrs with delight.", false);
-	//(High: 
+	//(High:
 	else if(player.cumQ() <= 600) outputText("She gulps it down desperately, stomach swelling with the influx of spunk, but manages to avoid spilling anything, popping her head free and gasping for breath as soon as she thinks you're done.", false);
-	//(Very High: 
+	//(Very High:
 	else outputText("You can see a hint of panic at the titanic cascade of fluids coming from your " + cockDescript(x) + ", but it's drowned out by sudden steely-eyed determination to drink every last drop.  Her belly swells out like a waterskin being held in a waterfall, rivulets of cum flooding from her overwhelmed mouth, but she manages to avoid pulling your cock out until you're finished.  Then she weakly manages to detach herself and gives you a triumphant expression, and a faint burp.\n\n", false);
 
 	outputText("With a groan she allows herself to collapse atop you, ", false);
@@ -1075,15 +1084,16 @@ private function oralKatherineChoices():void {
 //Give Katherine Oral scene, single cock
 private function giveKatOralPenisWingWang():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-give-her-blowjobs"));
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] == 1) {
 		outputText("With a small grin, you tell Katherine that you wouldn't mind satisfying her orally.\n\n", false);
-	
+
 		outputText("\"<i>But... " + player.short + ", are you sure? I mean, with the knot, that's a lot to work with...  And I don't want to leave you with nothing, either...</i>\"\n\n", false);
-	
+
 		outputText("You reassure her that you don't mind at all - in fact, you want to do this and probably will like doing it.\n\n", false);
-	
+
 		outputText("Avoiding eye contact and apparently blushing under the fur, Katherine answers.  \"<i>Okay.  If this is really what you want.  Just please, be careful, especially for your own good, okay?</i>\"\n\n", false);
-	
+
 		outputText("You motion for her to half-sit on a nearby ", false);
 		//([Non-centaur and below 8'6</i>\" tall]
 		if(!player.isTaur() && player.tallness < 102) outputText("empty crate", false);
@@ -1092,21 +1102,21 @@ private function giveKatOralPenisWingWang():void {
 		if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("both dog-dicks", false);
 		else outputText("her dog-dick", false);
 		outputText(" and her already-wet vagina", false);
-		//([if Katherine has her maximum 5 inch balls)] 
+		//([if Katherine has her maximum 5 inch balls)]
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] >= 5) outputText(" although her sizeable testicles mar your view of it somewhat", false);
 		outputText(".\n\n", false);
-	
+
 		outputText("The puss' pussy is your first target, as you approach her sitting position; as your tongue slowly licks her balls you gently pull them upwards and to the side, completely revealing her increasingly moist pussy.  You tease her about getting so excited but work to please nevertheless", false);
 		//([Corruption 70+]
 		if(player.cor >= 70) outputText(" - if only to prove your skill and make the kitten ever more dependent on you for release", false);
 		outputText(".\n\n", false);
-	
+
 		outputText("With a teasing lick, you circle around her clit and slowly move away, then back towards it.  Her cock seems to grow even harder and starts to drip pre-cum, threatening to dirty ", false);
-		//([Katherine's cock 8-10 inches] 
+		//([Katherine's cock 8-10 inches]
 		if(flags[kFLAGS.KATHERINE_DICK_LENGTH] < 10) outputText("your face", false);
 		else outputText("your hair", false);
 		outputText(".  A loud, frustrated mewl from above prompts you to start gently sucking on her clit, rewarding you with a stifled moan and the twitching of the small cat-morph's thighs.  You continue your attentions without pause, slipping the tip of your tongue inside her pussy to taste the generously flowing juices.\n\n", false);
-	
+
 		outputText("Deciding this part had enough attention for the moment, you slowly move up to her balls, gently sucking each one inside your mouth.  ", false);
 		if(player.tongueType > TONUGE_HUMAN) {
 			outputText("You allow your tongue to slide out and wrap about the lower part of her member, just below the barely recognizable thickening of her penis that marks the place where the knot will soon bulge", false);
@@ -1114,39 +1124,39 @@ private function giveKatOralPenisWingWang():void {
 			outputText(".  ", false);
 		}
 		outputText("Katherine moans again as you slowly trace the bottom side of her penis up towards the conical, pointy head.  You gently suck on the tip before slipping one of your fingers inside the cat-morph's pussy . She can't help herself and you feel her squirming, her thighs reflexively wrapping around your hand before she forcibly parts them.  Slowly, you bob your head up and down her cock", false);
-		//([Kat length >= 14] 
+		//([Kat length >= 14]
 		if(flags[kFLAGS.KATHERINE_DICK_LENGTH] >= 14) outputText(" having minor problems actually deepthroating the thing", false);
 		outputText(".  All the while, you finger her pussy - your hands are positively soaked by her excretions.  Grabbing her cock with the same hand that is now coated in her own juices, you start to jerk her off as you go back down on her clit; your other hand slips inside the cat-morph.\n\n", false);
-	
+
 		outputText("She mewls again, clearly doing her best to resist and prolong the pleasure.  After a while of molesting her clit and cock", false);
 		if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("s", false);
 		outputText(" simultaneously, you decide it's time to get somewhat more serious.\n\n", false);
-	
+
 		outputText("Deciding the girl's vagina is sufficiently teased for now, you move back to her erection, opening your mouth and slipping her inside.\n\n", false);
-	
-		//([Normal tongue] 
+
+		//([Normal tongue]
 		if(player.tongueType == TONUGE_HUMAN || player.tongueType > TONUGE_DEMONIC) outputText("Your hand remains in her pussy, however, adding to the multiple ways with which you please your lover.\n\n", false);
 		//[Naga tongue]
 		else if(player.tongueType == TONUGE_SNAKE) outputText("The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection. You gently hum into it before going nearly all the way down to the base, Katherine'ss eyes opening wide.  Your long, flexible forked tongue slips out and down, sliding along the side of her left testicle before finding your target: the cat-girl's clitoris.  Your other hand starts to gently tease her lower lips as you slowly move it, mostly pleasing her with your throat muscles and long, flexible tongue.\n\n", false);
 		// [Demonic tongue]
 		else outputText("The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection.  Stopping just before the place where her knot usually pops out, you decide to give the girl a treat.  Slowly, your incredibly long flexible tongue moves towards your kittenish partner's pussy, giving it a long, sloppy lick.  Katherine's hips shiver and she only barely stops herself from pushing them forward.  Rewarding that show of self-control, you move your tongue up to wrap it around the very base of her penis just as the entire length of your inhuman muscle slips from your mouth; you manage to get the tip of it down, then brush it against the cat-girl's vagina.  Katherine just stares at you wide-eyed as you slip your demonic appendage inside her pussy, effectively pleasing nearly all of her lower's body erogenous zones at once.\n\n", false);
-		
+
 		outputText("After a while of slurping on her cock and ", false);
 		if(player.tongueType == TONUGE_HUMAN || player.tongueType > TONUGE_DEMONIC) outputText("fingering her", false);
 		else if(player.tongueType == TONUGE_SNAKE) outputText("molesting her clit with your tongue", false);
 		else outputText("penetrating her with your tongue as you give her head", false);
 		outputText(", you decide it's time to slightly change tactics in order not to humiliate the girl by making her blow her load too quickly.  The cat-herm's balls were so far pretty badly treated, and you decide to amend that, slowly withdrawing from your blowjob and sinking your mouth down to her testicles.  You lick them softly before sucking one inside your mouth.\n\n", false);
-	
+
 		//{([Normal Tongue]
 		if(player.tongueType == TONUGE_HUMAN || player.tongueType > TONUGE_DEMONIC) {
-			//[If Katherine's balls are 1 inches wide] 
+			//[If Katherine's balls are 1 inches wide]
 			if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("You find it pretty easy to slip your tongue out further and gently lick her clit almost all the time while you're doing it.", false);
 			else if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 2) outputText("You can sometimes reach her pussy while toying with her balls, teasing it with your tongue.", false);
 			else outputText("You hoped to play with her pussy too, but the cat-girl's balls are too sizeable to do so with your tongue.  You can almost feel, maybe even hear the semen sloshing inside the big things, ready to shoot out any second.", false);
-	
+
 			outputText("You gently slide your fingers over the tip of her cock while teabagging her, but you don't want to give her an overload of sensations yet.\n\n", false);
 		}
-		//([Snake tongue] 
+		//([Snake tongue]
 		else if(player.tongueType == TONUGE_SNAKE) {
 			outputText("Balls or no balls in the way, you find it pretty easy to mercilessly toy with the girl's pussy using your long tongue.  You can easily tease her clit and even slip the tip inside, flicking at the sides of her inner walls as she purrs with delight at the gentler attentions and occasionally releases a silent moan.  You stroke ", false);
 			if(flags[kFLAGS.KATHERINE_DICK_COUNT] == 1) outputText("her", false);
@@ -1154,43 +1164,43 @@ private function giveKatOralPenisWingWang():void {
 			outputText(" cock at the base - this thing will have to wait for more attention.\n\n", false);
 			outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n", false);
 		}
-		//[Demon Tongue] 
+		//[Demon Tongue]
 		else {
 			outputText("You can feel Katherine shiver with helpless desire once she feels your excessively long tongue sliding over her balls.  You slide it upwards, teasing the knot area of her member, and then back down, oozing it over the poor kitten's clitoris and completely smothering it with your tongue.  Finally, you slip it inside as Katherine releases a loud scream of pleasure, then bites her own hand to silence herself.\n\n", false);
-	
+
 			outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n", false);
 		}
-		
+
 		outputText("You announce that the cat-girl is very welcome to cum soon, since this probably won't be a one time offer and she doesn't have to postpone things so desperately.\n\n", false);
-	
+
 		outputText("\"<i>Thank you,</i>\" she gasps before mewling, a small trickle of drool running down her chin.  Somehow, she looks too adorable for you to point that out. \"<i>Ummm... I don't know how you want to finish, but... watch the knot, Ok?  This is really amazing and it'd be such a waste if you were to harm yourself... I get the feeling that it'll start to bulge out really soon.</i>\"\n\n", false);
-	
+
 		outputText("You nod, before considering how exactly you will seal the deal and have the cat-girl get off.\n\n", false);
-	
+
 		//([Normal tongue]
 		if(player.tongueType == TONUGE_HUMAN || player.tongueType > TONUGE_DEMONIC) {
 			outputText("Deciding to follow her advice, you dive down to the girl's soaking-wet vagina, gently fondling her testicles as you softly roll them in your hand.  You start eating her out, licking her insides, and teasing her clit as your other hand jerks your hermaphrodite cat lover off.\n\n", false);
-	
+
 			outputText("You can feel your hand starting to hit some resistance and you realize her knot is starting to surge with blood. Taking advantage of the moment while you can, you drink her copious feminine juices while your tongue explores the inner walls of the kitty-cunt, then slightly increase your pace above.  With a lot of panting, a mewl and then a growl of ecstasy the cat-girl drenches your face as her pussy wraps tighter around your tongue, her semen flying out of her cock and landing over your hair and your backside.  Her thighs shiver as she closes them around your head, unable to let you go.", false);
 			if(flags[kFLAGS.KATHERINE_BALL_SIZE] >= 5) outputText("  You can't help but giggle into the cat-girl's pussy as you feel her drench you with her seed, painting you white.", false);
 			outputText("\n\n", false);
 		}
-		//([Naga tongue] 
+		//([Naga tongue]
 		else if(player.tongueType == TONUGE_SNAKE) {
 			outputText("With a smirk, you grab her cock around the base and lick your lips as Katherine shivers in anticipation.  Without much care for safety, you dive in, deep-throating the kitten up to the point where your lips meet your fingers.  It isn't the easiest thing you've ever done, but while having her deep down your throat you can extend your tongue far enough to lick her clit again.  The cat-girl is ecstatic at your simultaneous attentions.\n\n", false);
-			
+
 			outputText("Soon, you feel the telltale signs of her orgasm appearing.  Katherine is panting loudly, unable to control herself; her knot is bulging out and her pussy is getting wetter and wetter.", false);
 			//([Katherine's knot is 6 inches wide]
 			if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText("  Regrettably, the cat-girl's bulging knot makes it a lot harder to please her pussy with your long tongue in this position than you'd hoped, and you have to give it up once she's completely swollen.", false);
 			//([Player has a naga tail]
 			if(player.isNaga()) outputText("  You decide to play the snake part to the very end and, not content to leave her pussy unattended, you slip the tip of your long tail inside her.  She groans in ecstasy, finally reaching orgasm.", false);
 			else outputText("  Not content to let her pussy remain unattended, you slip two of your fingers inside her while teasing her clit with your knuckle.  She seems greatly pleased at your attention, as she shivers in orgasm moments afterwards.", false);
-	
+
 			outputText("Your ", false);
 			if(player.isNaga()) outputText("tail", false);
 			else outputText("fingers", false);
 			outputText(" get squeezed and drenched while you feel her erection twitch and pulse within your mouth.  You complete your motion, diving to the very verge of her knot and sucking on her intensely as she blows her seed into your mouth and your throat.\n\n", false);
-	
+
 			outputText("You greedily swallow your hermaphrodite lover's semen; ", false);
 			//([Katherine has 1 inch balls]
 			if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("the amount of it quite high for her size, substituting for a decent warm drink at least.", false);
@@ -1204,25 +1214,25 @@ private function giveKatOralPenisWingWang():void {
 			//([If 6 inches knot]
 			if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] >= 6) outputText(", even making it hard for you to keep your tongue buried all the way inside", false);
 			outputText(".\n\n", false);
-	
+
 			outputText("With a loud yowl, she cums, her pussy clenching around your demonic appendage and her penis twitching in your mouth.\n\n", false);
-	
-			//([Katherine has 1 inch balls] 
+
+			//([Katherine has 1 inch balls]
 			if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 1) outputText("She practically thrashes around in orgasm as you tease her balls with your tongue, your mouth milking her and devouring the cum she releases quite easily.", false);
 			else if(flags[kFLAGS.KATHERINE_BALL_SIZE] <= 2) outputText("Your tongue has no problems sliding across and teasing her balls as your mouth drinks her dick-milk.  There is quite a lot of it, but you don't complain.", false);
 			else outputText("Katherine's large testicles quiver on your tongue as they discharge their load.  You can feel it seeping inside you, slightly stretching your belly as you struggle to swallow it all.", false);
 			outputText("  All the while, her pussy rhythmically squeezes your tongue and covers it with girl-cum.\n\n", false);
-	
+
 			outputText("Once she's done climaxing, you allow her member to slide out of your mouth before rolling your tongue along her pussy, drinking her feminine juices.  Her initial yowl turns into soft purring as you delicately finish her up.\n\n", false);
 		}
 		// All scenes end here/
 		outputText("The deed done, you straighten your back and wink at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.\n\n", false);
-	
+
 		outputText("\"<i>You were amazing!</i>\" she exclaims, still short on breath.  ", false);
 		if(player.tongueType == TONUGE_DEMONIC) outputText("She runs her fingers along your lips.  \"<i>I think I might be falling in love with the monster inside that pretty cave.</i>\"", false);
 		else outputText("\"<i>I hope that if I ever get to repay the favor, I can do as well as you.</i>\"", false);
 		outputText("\n\n", false);
-	
+
 		outputText("She kisses you again, her hands running down your back.  You worry that if this keeps going you may end up going another round immediately, but you don't have that much time to lose.  Parting yourself from the cat-herm with a kiss, you go your separate ways.", false);
 	}
 	//Double Cock Scene
@@ -1254,7 +1264,7 @@ private function giveKatOralPenisWingWang():void {
 		outputText("  You continue to minister to her balls, wrapping your fingers around her straining cocks, jerking them off slowly before nudging the balls up and diving into her wet pussy.\n\n", false);
 
 		outputText("Your work here starts with soft kisses on her lower lips, and then slowly moves up to her clit.  Katherine's thighs gently bend as her feet rest on your shoulders, egging you on to give more attention to her drenched pussy.  You humor her, tongue sliding inside her as you suck on her clit while slowly jerking off both of her erections.  Her feminine juices start flowing even more freely - you find yourself suffused with almost as much taste as sound from her soft panting and moaning.\n\n", false);
-		
+
 		//([Demon tongue]
 		if(player.tongueType == TONUGE_DEMONIC) outputText("The opportunity for some extra service doesn't escape you; you suck her clit in with your lips as the long, prehensile organ you house in your mouth slides up against her balls, rolling them and assaulting the base of one of her erections, slowly wrapping around it.  After getting a good tongue-grip on it, you slither further around and past it to do the same to her other cock.  Then, slowly, you start to stroke the twin canine penises with the wet muscle, causing Katherine to shake with helpless pleasure.  Continuing to suck on her clit meanwhile, your large flexible tongue also gives her twin penises a dream jerk-off.\n\n", false);
 
@@ -1266,10 +1276,10 @@ private function giveKatOralPenisWingWang():void {
 
 		outputText("She pants and whimpers at the lost stimulation, hands barely restrained from grabbing the reins herself and capping your efforts.  \"<i>P... please!  I'm almost there!</i>\"  Not willing to make her suffer, you decide to finish the job and make your kitten cum.\n\n", false);
 
-		//([Normal/Naga Tongue] 
+		//([Normal/Naga Tongue]
 		if(player.tongueType <= TONUGE_SNAKE) {
 			outputText("You wrap both your hands around her members just above the knot and start stroking her off, aiming at your mouth as you lick the tips.  Her knots swell to full size as she starts panting.", false);
-			//([If the character has a naga lower body or a demon tail] 
+			//([If the character has a naga lower body or a demon tail]
 			if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("  Wanting to grant her maximum stimulation and complete release, you slip the tip of your tail inside the cat-girl, feeling her pussy gratefully squeeze it.", false);
 			outputText("\n\n", false);
 		}
@@ -1280,7 +1290,7 @@ private function giveKatOralPenisWingWang():void {
 		outputText("\n\n", false);
 
 		if(player.tongueType == TONUGE_DEMONIC) outputText("Your tongue quickly slides out of your mouth, twitching sinuously as Katherine's eyes go wide at the sight of it easily wrapping around both her erections.  Your hand starts playing with her balls as the other fingers her dripping wet cunt, pumping in and out as you feel her knots swell larger under your tongue.\n\n", false);
-		
+
 		outputText("Her erections release in unison, and thick rivulets of semen cover your face, tongue and even the inside of your mouth.  Her testicles twitch and pulse in your hand as her cunt grabs tightly at your fingers, covering them with her girlcum.", false);
 		//([Katherine has five inch balls]
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] >= 5) outputText("  The two of you are liberally coated with her spunk, your stroking tongue unable to catch all of it as she shoots off.", false);
@@ -1307,11 +1317,12 @@ private function katherineGivesPCOralAllDayLongDotJPG():void {
 	outputText("You tell Katherine you'd like to see what she can do with her tongue.  The black cat blinks in surprise, then grins widely.  \"<i>Well, that can be arranged...</i>\"  She purrs, taking you by the arm and leading you around to a specific crate.  Once you are seated and both of you are naked, she kneels in front of you.  \"<i>Now, let's see what you have, my dear...</i>\" she says, tail waving in the way that only a happy cat's does.\n\n", false);
 	if(player.hasCock() && (player.gender == 1 || rand(2) == 0)) doNext(katherineLicksAllTheBoyPenises);
 	else doNext(katherineGoesDownOnTheGirlsOhYahBabyLesbo);
-	
+
 }
 //[Female]
 private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-eats-out-your-vagoo"));
 	outputText("She gently strokes the lips of your " + vaginaDescript() + ", then leans in and gives it a deep, wet lick.  You can't restrain a shiver at the sensation; Katherine's tongue is unlike anything you've seen in this world so far, broad and bristly, but not so hard that it hurts.  It's like lots of little tongues all licking you at the same time.\n\n", false);
 
 	outputText("Without hesitation, she licks you again, and again, deep strokes that slide up from the very base of your cunny all the way to the tip, lingering on your " + clitDescript() + " and teasing your lovebutton.  You can't help but wrap your " + player.legs() + " around her head and pull her into your crotch, thrusting her face right into your cunt.\n\n", false);
@@ -1329,6 +1340,7 @@ private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 private function katherineLicksAllTheBoyPenises():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
+	outputText(images.showImage("katherine-gives-you-blowjobs/"));
 	outputText("She takes your shaft eagerly, gently stroking it with her fingers to coax it erect, then leaning in to lick the head with her softly bristled tongue, caressing and suckling at the " + cockHead(x) + ".", false);
 	if(player.hasVagina()) {
 		outputText("  One of her hands slides down your shaft", false);
@@ -1355,7 +1367,7 @@ private function katherineLicksAllTheBoyPenises():void {
 	else if(player.cumQ() <= 600) outputText("  She gulps it down desperately, stomach swelling with the influx of spunk, but manages to avoid spilling anything, popping her head free and gasping for breath as soon as she thinks you're done.", false);
 	else outputText("  You can see a hint of panic in her eyes at the titanic cascade of fluids coming from your " + cockDescript(x) + ", but it's drowned out by her determination to drink every last drop.  Her belly swells out like a waterskin being held in a waterfall, rivulets of cum flooding from her overwhelmed mouth, but she manages to hold on without taking the cock out of her mouth before you're finished.  Afterward, she detaches herself breathlessly from your cock and gives you a triumphant expression, and a faint burp.", false);
 	outputText("\n\n", false);
-	
+
 	outputText("Weakly, she collapses onto her furry behind on the ground, smiling up at you.  \"<i>I take it you enjoyed that?</i>\" she teases.  You admit she did very well, helping her up and to her own 'bed', then get dressed and head back out into Tel'Adre's streets.", false);
 	//lust -100 regardless of sex, return to wherever
 	dynStats("lus=", 0);
@@ -1368,6 +1380,7 @@ private function katDoubleHelixCraziness():void {
 	var x:Number = player.cockThatFits(70);
 	if(x < 0) x = 0;
 	outputText("", true);
+	outputText(images.showImage("katherine-double-helix-fuck"));
 	//PC must have a cock and a vagina and not be a centaur
 	outputText("You give the matter some choice... your partner here has both male and female sexual organs; which to choose...?  Then, recalling you have the same sort of sex arrangement, you feel a kinky idea coming on.  Gently, you ask if Katherine thinks she's flexible enough to use both her parts at the same time.\n\n", false);
 
@@ -1382,7 +1395,7 @@ private function katDoubleHelixCraziness():void {
 	else if(player.isGoo()) outputText("shifting your gooey blob", false);
 	else outputText("lifting your " + player.leg() + " up", false);
 	outputText(" so she has access to both your " + vaginaDescript(0) + " and your " + cockDescript(x) + ".\n\n", false);
-	
+
 	outputText("Katherine lies down across from you and wraps her legs around your own lower body, her honeypot aligned with your own.  \"<i>Okay... now push your dick down like this...</i>\" she says, shoving ", false);
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1) outputText("one of ", false);
 	outputText("her own canine-pecker", false);
@@ -1435,7 +1448,7 @@ private function katDoubleHelixCraziness():void {
 	//(PC Very High Cum Amount)
 	else outputText("You pay Katherine back in kind though, dumping your massive load inside the eager cat, bloating her belly until she looks a few months pregnant and is unable to take any more cum.  Some of it flows back to splatter against you, pooling beneath both of you in a messy pool of hot white jism.  Yet it doesn't seem likely to stop anytime soon; if it weren't for Katherine's knot you're pretty sure you'd have sent the cat rocketing straight off of your cock.  Katherine trembles and her pussy walls clench as if to hold more of your cum inside her, and indeed she inflates beyond her capacity for a while, until she relaxes and your load pours out of her.", false);
 	outputText("\n\n", false);
-	
+
 	outputText("You gasp for breath, mind still reeling from the earth-shaking pleasure you've experienced.  Your first instinct is to try to move, but you find you can't get up", false);
 	if(flags[kFLAGS.KATHERINE_BALL_SIZE] >= 4) outputText(", and not because your swollen stomach is weighing you down, either", false);
 	outputText(".  Katherine's knotty cock has locked her into your " + vaginaDescript() + ", leaving you tied together like a dog and his bitch.  With roughly equal parts exasperation and amusement, you comment that you thought she'd promised to slip free before her knot bound you both together.\n\n", false);
@@ -1488,6 +1501,7 @@ private function katDoubleHelixCraziness():void {
 //PC must lactate to have this option
 private function suckleTacularKats():void {
 	outputText("", true);
+	outputText(images.showImage("katherine-suckles-you"));
 	outputText("Feeling your " + chestDesc() + " and the milky goodness within, you ask Katherine if she likes milk the way her fellows do.  When the cat-morph gives you a puzzled look, you remove the upper part of your " + player.armorName + " and, fondling your tits with a smirk, tell her that you could use a little relief.\n\n", false);
 
 	outputText("Katherine's eyes widen with shock, and she smiles in disbelieving delight, quickly striding over and waiting, impatiently, as you find a comfortable position and sit down.  Once you have, she wastes no time in plopping down in front of you. She nuzzles her cheek against your breast but then, to your amazement, shyly backs away.\n\n", false);
@@ -1495,7 +1509,7 @@ private function suckleTacularKats():void {
 	outputText("\"<i>I... um... is this really okay?</i>\" she asks, her voice barely above a whisper.  With a hint of exasperation you roll ", false);
 	if(player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("both sets of ", false);
 	outputText("your eyes and gently take her by the cheeks, insistently bringing her head close so that her lips are bumping right against your " + nippleDescript(0) + "s.  She takes the obvious hint and eagerly swallows it, eyes closing as she leans in and starts to suckle.  Purring with contentment, she sends the most delicious vibrations into your breasts, her rough, bristly tongue stroking and caressing to help coax your body into giving up its sweet, rich milk.\n\n", false);
-	
+
 	outputText("You're not sure how long you sit there with her in your arms, just listening to her purr as she quietly sucks and slurps, drinking everything you have to give.  She ", false);
 	if(player.findPerk(PerkLib.Feeder) < 0 && player.lactationQ() < 1000) outputText("empties", false);
 	else outputText("does her best to empty", false);

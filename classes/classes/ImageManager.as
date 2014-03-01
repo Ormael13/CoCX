@@ -201,7 +201,7 @@
 		{
 			var imageString:String = "";
 
-			//trace("imageID - ", _imageTable[imageID]);
+			trace("showing imageID - ", imageID);
 			var imageIndex:int = 0;
 			var image:Image = null;
 			if (_imageTable[imageID] != undefined)
@@ -211,7 +211,7 @@
 				{
 					imageIndex = Math.floor( Math.random() * _imageTable[imageID].length );
 					trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
-					image = _imageTable[imageID][imageIndex];	
+					image = _imageTable[imageID][imageIndex];
 				}
 			}
 
