@@ -538,9 +538,16 @@ public function getButtonToolTipText( buttonText :String ) :String
 	buttonText = buttonText || '';
 
 	//Items
-	if (/^....... x\d+$/.test(buttonText)){
-		buttonText = buttonText.substring(0,7);
+	//if (/^....... x\d+$/.test(buttonText)){
+	//	buttonText = buttonText.substring(0,7);
+	//}
+	
+	// Fuck your regex
+	if (buttonText.indexOf(" x") != -1)
+	{
+		buttonText = buttonText.split(" x")[0];
 	}
+	
 	var itype:ItemType = ItemType.lookupItem(buttonText);
 	if (itype != null) toolTipText = itype.description;
 	itype = ItemType.lookupItemByShort(buttonText);
