@@ -4191,13 +4191,13 @@ public function spellPerkUnlock():void {
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
 public function hellFire():void {
 	outputText("", true);
-	if(player.fatigue + 20 > 100) {
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
 		outputText("You are too tired to breathe fire.\n", true);
 		doNext(5000);
 		return;
 	}
 	menuLoc = 0;
-	changeFatigue(20);
+	fatigue(20, 1);
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
@@ -4514,7 +4514,8 @@ public function spiderBiteAttack():void {
 //Whisper 
 public function superWhisperAttack():void {
 	outputText("", true);
-	if(player.fatigue + 10 > 100) {
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > 100)
+	{
 		outputText("You are too tired to focus this ability.", true);
 		doNext(5000);
 		return;
@@ -4531,7 +4532,7 @@ public function superWhisperAttack():void {
 		return;
 	}
 	menuLoc = 0;
-	changeFatigue(10);
+	fatigue(10, 1);
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		enemyAI();
@@ -4567,7 +4568,8 @@ public function superWhisperAttack():void {
 	//Effect of attack: Damages and stuns the enemy for the turn you used this attack on, plus 2 more turns. High chance of success.
 public function dragonBreath():void {
 	clearOutput();
-	if(player.fatigue + 20 > 100) {
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100)
+	{
 		outputText("You are too tired to breathe fire.", true);
 		doNext(5000);
 		return;
@@ -4579,7 +4581,7 @@ public function dragonBreath():void {
 		return;
 	}
 	menuLoc = 0;
-	changeFatigue(20);
+	fatigue(20, 1);
 	player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
 	var damage:Number = int(player.level * 8 + 25 + rand(10));
 	if(player.findStatusAffect(StatusAffects.DragonBreathBoost) >= 0) {
