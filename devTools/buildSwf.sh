@@ -6,6 +6,16 @@
 #
 # this is the actual call to mxmlc that builds a complete swf
 
+set -e
+
+OS=$(uname -s)
+FLEX_ROOT=/opt/flex
+ADT=${FLEX_ROOT}/bin/adt
+if [[ ${OS} =~ ^CYGWIN ]]; then
+    FLEX_ROOT=/c/APPS/flex_4_6
+    ADT="java -jar $(cygpath -w ${FLEX_ROOT})/lib/adt.jar"
+fi
+
 # pull out the version so we can use it for the filename.
 export COC_VERSION=`gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as`
 
@@ -20,7 +30,7 @@ git submodule update --init
 # This is intended to be run from the root of the git repo as such:
 # 'devTools/build.sh'
 # the paths are all relative to the repo root.
-/opt/flex/bin/mxmlc \
+${FLEX_ROOT}/bin/mxmlc \
 -use-network=false \
 -default-background-color=0x000000 \
 -static-link-runtime-shared-libraries=true \
@@ -40,10 +50,11 @@ export SWF_NAME=`ls ../binRepo/ | grep -i ^CoC.*\.swf$`
 
 echo Current SWF file name = $SWF_NAME
 
-/bin/sed -i -r "s/<content>CoC.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
+/bin/sed -i -r "s/<content>CoC.*\.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
 
 
-/opt/flex/bin/adt \
+
+$ADT \
 -package \
 -target apk \
 -storetype pkcs12 \
