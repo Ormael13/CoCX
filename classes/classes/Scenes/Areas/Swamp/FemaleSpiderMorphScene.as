@@ -239,7 +239,8 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("During your dreamless sleep, your body registers the feeling of your restraints being removed, but you slumber on, completely unaware.", false);
 			//[end]
-			dynStats("lib", 2, "sen", 1, "lus=", 0);
+			player.orgasm();
+			dynStats("lib", 2, "sen", 1);
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}
@@ -342,7 +343,8 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("Finally at peace, you go limp in the bonds, slipping into a deep slumber.  During your dreamless sleep, your body registers the feeling of your restraints being severed.", false);
 
-			dynStats("lib", 2, "sen", 1, "lus=", 0);
+			player.orgasm();
+			dynStats("lib", 2, "sen", 1);
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}
@@ -416,7 +418,8 @@ package classes.Scenes.Areas.Swamp
 				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!", false);
 			}
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.", false);
-			dynStats("lib", 2, "sen", 1, "lus=", 0);
+			player.orgasm();
+			dynStats("lib", 2, "sen", 1);
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}
@@ -513,7 +516,7 @@ package classes.Scenes.Areas.Swamp
 			if (player.cor < 33) outputText("In a moment of pity, you work to free her from the restraints before you leave.", false);
 			else if (player.cor < 66) outputText("You feel a little guilty, and before you go, you untie the bindings around her hands so that she'll be able to free herself.", false);
 			else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}
@@ -578,7 +581,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("you slap her across the face and tell her to toughen up.  She starts to bawl at that, curling into a tight little ball and openly weeping.", false);
 			outputText("  You get dressed and head back to camp.", false);
 
-			dynStats("lus=", 0);
+			player.orgasm();
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
@@ -647,7 +650,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("river", false);
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.", false);
 			if (y != 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
-			dynStats("lus=", 0);
+			player.orgasm();
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}

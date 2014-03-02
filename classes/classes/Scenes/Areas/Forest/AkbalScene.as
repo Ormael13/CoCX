@@ -127,7 +127,8 @@ package classes.Scenes.Areas.Forest
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.", false);
 			}
 			//END CENTAUR STUFF
-			dynStats("lust=",0,"cor+",1);
+			player.orgasm();
+			dynStats("cor+",1);
 			cleanupAfterCombat();
 		}
 
@@ -208,7 +209,8 @@ package classes.Scenes.Areas.Forest
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 				}
-				dynStats("lus=", 0, "cor", 1);
+				player.orgasm();
+				dynStats("cor", 1);
 				cleanupAfterCombat();
 					//END NAGA STUFF
 			}
@@ -295,7 +297,8 @@ package classes.Scenes.Areas.Forest
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 				}
-				dynStats("lus=", 0, "cor", 1);
+				player.orgasm();
+				dynStats("cor", 1);
 				cleanupAfterCombat();
 				return;
 					//END CENTAUR STUFF
@@ -353,7 +356,8 @@ package classes.Scenes.Areas.Forest
 				outputText("With a sadistic laugh you ride out your orgasm until you're reduced to a shuddering heap on the floor.  After you've recovered, you stand and gather your " + player.armorName + ", leaving Akbal in a groaning mess behind you.  He howls as he claws the ground, his barbed cock still rock hard beneath him.  As you walk away, you notice a group of imps watching you and the jaguar demon with their cocks out and leaking, their jagged teeth spread into feral grins.  You even spy a few goblins mixed in the crowd, and each is twirling a bottle of liquid while playing with their snatches.\n\n", false);
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.", false);
 			}
-			dynStats("lus=", 0, "cor", 1);
+			player.orgasm();
+			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
 
@@ -487,7 +491,8 @@ package classes.Scenes.Areas.Forest
 				player.knockUp(1, 432, 101);
 
 				player.cuntChange(monster.cockArea(0), true, true, false);
-				dynStats("lus=", 0, "cor", 1);
+				player.orgasm();
+				dynStats("cor", 1);
 			}
 			//TOIGHT
 			else if (player.vaginalCapacity() < monster.cockArea(0))
@@ -529,7 +534,7 @@ package classes.Scenes.Areas.Forest
 					outputText("He sits, dazed as your cum covers his groin, his meat still shiny from the torrent you dropped down upon it. Nevertheless, his face is twisted into a purr", false);
 				outputText(" as he sags against the tree trunk, overwhelmed by the pleasure. With a satisfied grin of your own, you pick up your " + player.armorName + " and head out. Perhaps you should look out for the \"<i>God of Terrestrial fire</i>\" again sometime...", false);
 				//{No Penetration or fluids exchanged = No corruption increase? Poss. Sensitivity increase/decrease due to fur and/or saliva}
-				dynStats("lus=", 0);
+				player.orgasm();
 			}
 			//= = = =
 			//Loose
@@ -576,7 +581,8 @@ package classes.Scenes.Areas.Forest
 				outputText(", his face twisted into a snarl of pleasure and satisfaction.\n\n", false);
 
 				outputText("You slowly come down from your orgasmic high, struggling to remove yourself from the demon's lap and heading unsteadily towards your " + player.armorName + " as fresh feline seed pours down your body, wincing at the slight bruising to your womanhood. Rubbing a hand over your stomach, you start to wonder if perhaps it was a touch risky to allow a demon to shoot his seed into your womb. However, despite the mild throbbing, you feel refreshed and oddly strengthened by Akbal's potent seed, glancing over your shoulder to see the once proud god revealing in his own release. Perhaps it wouldn't be a bad idea to seek him out some other time...", false);
-				dynStats("lus=", 0, "cor", 1);
+				player.orgasm();
+				dynStats("cor", 1);
 				//Imp pregnancy
 				//Preggers chance!
 				player.knockUp(1, 432, 101);
@@ -849,7 +855,8 @@ package classes.Scenes.Areas.Forest
 				//[+ 4-12 Corruption]
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
-				dynStats("spe", 1 + rand(2), "lus=", 0);
+				dynStats("spe", 1 + rand(2));
+				player.orgasm();
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
@@ -926,7 +933,8 @@ package classes.Scenes.Areas.Forest
 				//[+ 4-12 Corruption]
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
-				dynStats("spe", 1 + rand(2), "lus=", 0);
+				dynStats("spe", 1 + rand(2));
+				player.orgasm();
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
@@ -1005,7 +1013,8 @@ package classes.Scenes.Areas.Forest
 			//[+ 4-12 Corruption]
 			dynStats("cor", 4 + rand(8));
 			//[+ 1-2 Speed]
-			dynStats("spe", 1 + rand(2), "lus=", 0);
+			dynStats("spe", 1 + rand(2));
+			player.orgasm();
 			//[Chance of butt growth]
 			if (player.buttRating < 8)
 			{
@@ -1209,7 +1218,8 @@ package classes.Scenes.Areas.Forest
 				outputText("  Tingling in your sleep, your [butt] jiggles slightly as it softens along with the rest of your body, changed by Akbal's saliva to be a softer, more pleasant fuck.");
 				player.modTone(30, 5);
 			}
-			dynStats("lus=", 0, "cor", 5);
+			player.orgasm();
+			dynStats("cor", 5);
 			player.slimeFeed();
 			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(16);
@@ -1383,7 +1393,8 @@ package classes.Scenes.Areas.Forest
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
 
-			dynStats("lus=", 0, "cor", 3);
+			player.orgasm();
+			dynStats("cor", 3);
 			doNext(13);
 		}
 
@@ -1447,7 +1458,8 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nEvery nerve ending in your body explodes as you convulse atop the Jaguar.  With a hoarse groan, your [vagOrAss] begins to spasm around the embedded pleasure rod as it gushes more fluid than you thought possible.  Soon the Jaguar is soaked from waist to thigh.");
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest, you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
-			dynStats("lus=", 0, "cor", 3);
+			player.orgasm();
+			dynStats("cor", 3);
 			if (player.hasVagina())
 				player.knockUp(1, 432, 101);
 			doNext(13);
@@ -1519,7 +1531,8 @@ package classes.Scenes.Areas.Forest
 				//{corruption > 90}
 				else
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
-				dynStats("lus=", 0, "cor", 3);
+				player.orgasm();
+				dynStats("cor", 3);
 				doNext(13);
 			}
 			else
@@ -1568,7 +1581,8 @@ package classes.Scenes.Areas.Forest
 				if (player.hasCock())
 					outputText("  [EachCock] swells and explodes, shooting cream all over Akbal’s thighs, chest and face as you unload thick white rope after rope.");
 
-				dynStats("lus=", 0, "cor", 3);
+				player.orgasm();
+				dynStats("cor", 3);
 				if (player.hasVagina())
 					player.knockUp(1, 432, 101);
 				doNext(13);
@@ -1669,7 +1683,8 @@ package classes.Scenes.Areas.Forest
 				if (player.hasVagina())
 					player.knockUp(1, 432, 101);
 			}
-			dynStats("lus=", 0, "cor", 3);
+			player.orgasm();
+			dynStats("cor", 3);
 			doNext(13);
 		}
 
@@ -1820,7 +1835,8 @@ package classes.Scenes.Areas.Forest
 			}
 			if (player.hasVagina())
 				player.knockUp(1, 432, 101);
-			dynStats("lus=", 0, "cor", 3);
+			player.orgasm();
+			dynStats("cor", 3);
 			doNext(13);
 		}
 	}

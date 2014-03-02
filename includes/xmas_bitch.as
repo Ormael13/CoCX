@@ -195,7 +195,7 @@ public function dickXmasElfGo():void {
 	//(Go to followup for fucking scene)
 	//[Next]
 	doNext(xmasFuckFollowup);
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 
 //[FEMALE SCENE]	
@@ -225,7 +225,7 @@ public function vagFuckXmasElf():void {
 
 	outputText("You black out to the following words: \"<i>Good girl.  Keep cumming, let out all those naughty thoughts.  I can't wait to see you next year!</i>\"", false);
 	doNext(xmasFuckFollowupFems);
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 	
 //MANTASTIC FOLLOWUP:

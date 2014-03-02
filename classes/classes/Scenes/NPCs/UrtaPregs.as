@@ -442,7 +442,7 @@ private function wakeUpWithUrtaAfterStaying():void {
 	model.time.days++;
 	model.time.hours = 6;
 	statScreenRefresh();
-	dynStats("lus=", 0);
+	player.orgasm();
 	camp.sleepRecovery(false);
 	//PC Wakes with Urta
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
@@ -1282,7 +1282,8 @@ private function milkPregnantUrta():void {
 	//if PC has a dick and ain't a centaur:
 	if(player.hasCock() && !player.isTaur() && player.cockThatFits(urta.urtaCapacity())) {
 		outputText("\n\nYou pump into her a few more times, finishing off; then you  pull yourself out of her, dropping her hips on the mattress and panting.  \"<i>Are you supposed to be the farmer or the bull?</i>\" Urta chuckles softly, patting her swollen belly.");
-		dynStats("sen", -1, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -1);
 	}
 	outputText("\n\n\"<i>I can't say that would have ever been something I'd come up with...</i>\"  Urta notes.  \"<i>But it was actually kind of fun.</i>\"  You smile at her happily.  Maybe next time you should come up with something a bit more hardcore for your roleplay.");
 	
@@ -1417,7 +1418,8 @@ private function getBlownByPregnantUrta():void {
 		outputText("\n\nUrta makes a futile effort at wiping her eyes clean, then looks at you, the green glittering amidst the off-white expanse of your efforts.  \"<i>Well... maybe it was better I didn't swallow all that.</i>\"  She admits, then grins, \"<i>still, I hear this is good for stretch marks and fur conditioning.</i>\"");
 	}
 	outputText("\n\nYou're too tired to do much, except close your eyes and let the afterglow set in and slowly take you to dreamland.  The last thing you feel is one slimy fox-herm cuddling up to you, carefully positioning her overstuffed belly against you.");
-	dynStats("sen", 2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 2);
 	menu();
 	addButton(0,"Next",weirdUrtaCravingsConclusion);	
 }
@@ -1494,7 +1496,8 @@ private function holdOnYouAintGettingYerCumYetYouNaughtyFox():void {
 	outputText(" belly, clearly feeling tired even though she wasn't the one being pleasured this time.");
 
 	outputText("\n\nYou suddenly find yourself growing extremely drowsy after your recent climax, so you roll to give Urta enough room to lay down beside you.  You smile and pat the open spot beside you in hopes that Urta will join you for a quick nap.  Urta wastes no time in settling herself comfortably beside you, closing her eyes and drifting quietly off to sleep.");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	menu();
 	addButton(0,"Next",weirdUrtaCravingsConclusion);
 }
@@ -1609,7 +1612,8 @@ private function urtaRaepsJoo():void {
 	outputText(" and close your eyes, letting sleep take you over even as the fox behind you drools on your back and continues to pound your ass raw.");
 	
 	outputText("\n\nYou come to your senses and notice the amazing softness of the pillow you're laying on.  It feels so good you can't help but dig your head in and rub your cheek against it.  \"<i>You like that, do you?</i>\"  A familiar voice says, sounding rather amused.");
-	dynStats("sen", 3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 3);
 	menu();
 	addButton(0,"Next",partTwoOfUrtaBoning);
 }
@@ -2754,7 +2758,7 @@ private function getEggsHarvested():void {
 	
 	outputText("\n\nAs you lay there to savor the afterglow, the skunk suddenly sticks something hard and sweet in your mouth - it's a lollipop, just like the one she was using.  \"<i>You were very helpful and cooperative, so you deserve a lollipop.  Enjoy yourself and feel free to use my bed.  Now I have to go store and test your juices.</i>\"  She shakes the bottle, now filled with your juices, at you and enters her bathroom; a click indicating she's locked herself in.");
 	outputText("\n\nYou sigh and shake your head.  When the strength comes back to your limbs, you redress yourself and leave; what a strange woman.  Still, this lollipop is quite nice - ooh!  Your favorite flavor, too!");
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -2821,7 +2825,7 @@ private function liannaHandjobbies():void {
 	outputText("\n\nShe massages her throat a bit, then gets up and looks at you.  \"<i>Here.</i>\"  She grabs a lollipop from a pocket within her lab coat and hands it to you. You accept it with a little reluctance, still not sure what she's thinking.  \"For your contribution to my research.  Now feel free to rest on my bed as long as you need, I have to go process all this semen while it's still fresh.  See you later, and thank you.\"  She turns on her heels and walks towards her bathroom, closing the door and locking it in place.");
 	
 	outputText("\n\nYou sigh and shake your head.  When the strength comes back to your limbs, you redress yourself and leave; what a strange woman.  Still, this lollipop is quite nice - ooh!  Your favorite flavor, too!");
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 }

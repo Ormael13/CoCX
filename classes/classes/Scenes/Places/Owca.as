@@ -329,7 +329,8 @@ public function loseOrSubmitToVapula():void {
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
 	else if(player.findStatusAffect(StatusAffects.LostVillagerSpecial) >= 0) doNext(morningAfterRape);
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
-	dynStats("lib", 1, "sen", 2, "lus=", 0, "cor", 3);
+	player.orgasm();
+	dynStats("lib", 1, "sen", 2, "cor", 3);
 }
 
 private function wakeUpAfterDemonGangBangs():void {
@@ -448,7 +449,8 @@ private function rapeZeVapula():void {
 		outputText("\n\nA few meters away, outside the pit, you notice your items and your gear.  The village appears to be deserted.  Considering these demons will have a hard time threatening anyone with white goo oozing out of their absurdly stretched holes, you let them rest, wallowing in a pool of mixed spunk.  You pick up your belongings and head back to camp.");
 		if(silly()) outputText("  As you look back, you snicker, \"<i>Ass for ass, assholes.</i>\"");
 		//+med-high corruption, + strength/cons, -10 libido
-		dynStats("str", 1,"tou", 1, "lib", -4, "lus=", 0, "cor", 4);
+		player.orgasm();
+		dynStats("str", 1,"tou", 1, "lib", -4, "cor", 4);
 	}
 	//Victory rape using vagina/anus [Take Dicks in All Holes](Z)
 	else {
@@ -505,7 +507,8 @@ private function rapeZeVapula():void {
 		outputText("\n\nWhen you walk up to Vapula, she is barely recognizable.  Her will is utterly broken and she seems considerably mollified.  Your repeated denials made her mind collapse; she's but an empty shell driven crazy by her burning unsatisfied lust.  With a content smirk, you lean down and give her a tender kiss, enjoying the taste of secondhand sexual juices coating her lips.  You whisper to her, \"<i>Good night, beauty.</i>\"  She doesn't seem to hear your taunt.");
 		outputText("\n\nA few meters away, outside the pit, you notice your items and your " +player.armorName+ ". The village appears to be deserted. Considering these demons will have a hard time threatening anyone with white goo oozing out of their absurdly milked urethras, you let them rest, wallowing in their pool of mixed spunk.  You pick up your belongings and head back to camp.");
 		//+med-high corruption, + strength/cons, -10 libido, slimefeed, imp preg check
-		dynStats("str", 1,"tou", 1, "lib", -4, "lus=", 0, "cor", 4);
+		player.orgasm();
+		dynStats("str", 1,"tou", 1, "lib", -4, "cor", 4);
 		player.slimeFeed();
 		player.knockUp(1,432);
 	}
@@ -753,7 +756,8 @@ private function rapeRebecc(outside:Boolean = false):void {
 		outputText("\n\n(<b>Owca removed from the places menu.</b>)");
 	}
 	//minus lust, minus libido, plus corruption, remove village from places
-	dynStats("lib", -2, "lus=", 0, "cor", 5);
+	player.orgasm();
+	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	doNext(13);
 }

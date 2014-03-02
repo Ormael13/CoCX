@@ -599,7 +599,8 @@ public function penetradePureMouseWaifu():void {
 	
 	outputText("\n\nYou tell Amily, \"<i>Happy Holidays,</i>\" hugging her in post-coital affection.  \"<i>Happy Holidays, [name]... whatever that is,</i>\" she giggles.  \"<i>But, you know, we might just have a little late Winterfest present brewing after that bit of fun.</i>\"  She bats her eyes at you flirtatiously, patting her cum-stuffed belly.");
 	outputText("\n\nYou agree with her and enjoy your closeness a while longer...");
-	dynStats("lib", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 }
@@ -652,7 +653,8 @@ public function penetradeCorruptJojoAss():void {
 	outputText("\n\nLaughing at his reaction, you ask if he has learned how to properly fuck in the snow.  Jojo lifts his face, covered in half-frozen spunk-slush, and nods at you, too tired from his recent fucking to speak.");
 	
 	outputText("\n\nGood, now he should get his face cleaned up.  You order him to lick himself clean.  Without hesitation, Jojo starts doing exactly what you said, slurping up all of the cum-slush on his face and using his fingers to scrape the rest into his reach.  He then begins licking at his arms and chest, clearly not intending to stop until he has it all.   You nod in satisfaction, telling him to keep at it, you want to see him eat it all up...");
-	dynStats("lib", -3, "sen", -1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("lib", -3, "sen", -1, "cor", 1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
@@ -680,7 +682,8 @@ public function rideCorruptJojoCock():void {
 	outputText("\n\nYou wait until you're sure you dripped the last few drops of femcum from your cunt, then, with a groan, noisily pull yourself off of the mouse's now-limp dick.  Moving so that you are hovering it over Jojo's face, you authoritatively command your slave to clean up all the mouse-spunk he stuffed into your cunt.  The panting mouse-slut breaks out of his trance with a start, and quickly raises to get started and do your bidding, even as drops of your mixed juice and his slutty baby-batter drip on his face.  He drinks the spunk with joy, moaning in enjoyment at the act.");
 	
 	outputText("\n\nYou just stand and watch as he works, waiting for him to finish cleaning you up so you can get started on your next task...");
-	dynStats("lib", -3, "sen", -1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("lib", -3, "sen", -1, "cor", 1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;

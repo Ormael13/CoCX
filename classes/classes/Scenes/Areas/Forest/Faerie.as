@@ -35,7 +35,7 @@ public function encounterFaerie():void {
 			if(player.cockTotal() == 1) outputText("your dick", false);
 			else outputText("one of your dicks", false);
 			outputText(", too large for her tiny frame...the depraved image overwhelms your mind's eye and you find yourself shooting all over the ground furiously.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 		else outputText("\n\nYou try in vain to jump and catch her, but she's too high above you and much too fast.", false);
 		doNext(13);
@@ -137,7 +137,8 @@ private function faerieRAEP():void {
 		outputText("The faerie stumbles out of your snatch, giggling and scooping the slippery girl-goo off her body, licking it up.  She crawls up your body to your lips, giving you a cunt-flavored kiss and babbling happily, \"<i>Mmm your cunt makes me so warm and giggly!  I'm so fucking stoned!  Gawddess I'm hungry too – I'm gonna grab some food, and then come back for another dip in your honeypot ok?</i>\"\n\n", false);
 		outputText("She flits away, a little unsteady and reeking of female sex and desire.", false);
 	}
-	dynStats("lib", -2, "lus=", 0, "cor", .5);
+	player.orgasm();
+	dynStats("lib", -2, "cor", .5);
 	doNext(13);
 }
 
@@ -160,7 +161,8 @@ private function faerieDoNothing():void {
 		if(player.hasVagina()) outputText("You join her shortly after.  ", false);
 		outputText("The faerie goes limp and spirals to the ground, crashing gently and still twitching in the afterglow. Stepping back carefully, you leave her.", false);
 		if(player.biggestLactation() > 1.5) outputText("\n\nA copious gout of your milk escapes her rosy folds.", false);
-		dynStats("lib", -2, "lus=", 0);
+		player.orgasm();
+		dynStats("lib", -2);
 		doNext(13);
 		return;
 	}
@@ -169,7 +171,8 @@ private function faerieDoNothing():void {
 		if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("You drench the poor faerie completely in your female juices, soaking her hair and body. Overwhelmed and spent, you drop her to the ground and catch your breath. She licks up what's around her face, but is too weak to do anything else but lie in the dirt.\n\n", false);
 		else outputText("Shuddering, you maintain your composure and keep going, trying to ride the high for another. Eventually you look down and you can see the faerie's eyes have glazed over and rolled to the back of her head. Her cunt has started clamping down on you a lot harder, evidence of her state of near-constant orgasm. The random clenching brings you off again very quickly and you have an intense orgasm, joining your fae cohort.\n\n", false);
 		outputText("Time skips a beat and you eventually come down, gently relaxing your grip and disengaging the worn out faerie from your softening female parts. The faerie regains consciousness slowly and thanks you before flying off.", false);
-		dynStats("lib", -1, "lus=", 0);
+		player.orgasm();
+		dynStats("lib", -1);
 		doNext(13);
 		return;
 	}
@@ -225,7 +228,8 @@ private function faerieCaptureHJ():void {
 			//[Huge amount of cum:
 			else outputText("Your semen collides with her face and she is propelled off of your cock onto the pre soaked ground. Your " + ballsDescriptLight() + " continue pumping out cum like a hose until she's almost swimming in it.\n\n", false);
 		}
-		dynStats("lib", -.5, "lus=", 0);
+		player.orgasm();
+		dynStats("lib", -.5);
 		//Epilogue!
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 10) outputText("The faerie burps and giggles again before glaring up at you, accusing you with a mildly unfocused glare and asking, \"<i>Did you know we get drunk on cum?  Caushe I TRY SO HARRD not to get meshed up like this.</i>\"\n\n", false);
 		else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("The faerie burps and laughs drunkenly, patting the side of your " + player.leg() + " and slurring, \"<i>Oh by Marae's ripe titsh!  I needed that.  Do you thhink you could catsch me again?  I love feeling your cum coating my body.</i>\"\n\n", false);
@@ -258,7 +262,8 @@ private function faerieCaptureHJ():void {
 		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n", false);
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("She licks her fingers and rolls around laughing, \"<i>Hehe, who caresh!  I'm happy! WHEEEEE!</i>\"\n\n", false);
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...", false);
-		dynStats("lib", -.5, "lus=", 0);
+		player.orgasm();
+		dynStats("lib", -.5);
 		if(player.findStatusAffect(StatusAffects.Jizzpants) < 0) player.createStatusAffect(StatusAffects.Jizzpants,1,0,0,0);
 	}
 	doNext(13);

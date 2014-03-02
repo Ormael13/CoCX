@@ -1591,7 +1591,14 @@ public function testDynStatsEvent():void {
 	doNext(1);
 }
 
-//Modify stats
+/**
+ * Modify stats.
+ *
+ * Arguments should come in pairs nameOp:String, value:Number/Boolean <br/>
+ * where nameOp is ( stat_name + [operator] ) and value is operator argument<br/>
+ * valid operators are "=" (set), "+", "-", "*", "/", add is default.<br/>
+ * valid stat_names are "str", "tou", "spe", "int", "lib", "sen", "lus", "cor" or their full names; also "resisted"/"res" (apply lust resistance, default true) and "noBimbo"/"bim" (do not apply bimbo int gain reduction, default false)
+ */
 public function dynStats(... args):void
 {
 	// Check num of args, we should have a multiple of 2
@@ -1716,8 +1723,6 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
-	//If orgasm, set hours since cum to 0.
-	if(lust2 < 0) player.resetDickEjaculateTimer();
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;
 	if(libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;

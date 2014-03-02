@@ -292,7 +292,8 @@ public function doEvent(eventNo:Number):void
 	//Tentacle continuation!
 	else if (eventNo == 2010)
 	{
-		dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "lus=", 0, "cor", .5);
+		player.orgasm();
+		dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
 		//Pg2
 		if (player.gender == 1)
 		{
@@ -494,7 +495,8 @@ public function doEvent(eventNo:Number):void
 					outputText("As you depart, you note the plants' stalks bulging out obscenely, looking like overfull balloons.  They're stretched so thin as to be transparent, your cum sloshing about inside them as they attempt to digest their meals. Steady streams of your jism leak from the flowers' lips, unable to keep it all inside.", false);
 			}
 			//Stat changes!
-			dynStats("sen", 2, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", 2);
 			var booster:Number = 1;
 			if (player.balls == 0)
 				booster += 3;
@@ -516,7 +518,8 @@ public function doEvent(eventNo:Number):void
 			//Last PG
 			outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.", false);
 			player.slimeFeed();
-			dynStats("sen", 4, "lus=", 0, "cor", 1);
+			player.orgasm();
+			dynStats("sen", 4, "cor", 1);
 		}
 		doNext(13);
 	}
@@ -605,7 +608,8 @@ public function doEvent(eventNo:Number):void
 			outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n", false);
 			//Normal stat changes
 			player.slimeFeed();
-			dynStats("sen", 5, "lus=", 0, "cor", 2);
+			player.orgasm();
+			dynStats("sen", 5, "cor", 2);
 			//Xforms
 			//Change hair to green sometimes
 			if (rand(3) == 0 && player.hairColor != "green")
@@ -979,7 +983,8 @@ public function doEvent(eventNo:Number):void
 				//[Mechanics: Corruption increase same as male counterpart. No hit point recover for that night. When fatigue model is implemented, no fatigue recovery and add 25 points]
 		}
 		fatigue(20);
-		dynStats("lib", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("lib", .5);
 		doNext(2028);
 	}
 	//Succubi 
@@ -1300,7 +1305,8 @@ public function doEvent(eventNo:Number):void
 			outputText("you pass out with aching, empty balls.", false);
 		else
 			outputText("you pass out with " + multiCockDescriptLight() + " sore from exertion.", false);
-		dynStats("sen", -1, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -1);
 		doNext(13);
 	}
 	//Natural Stim Belt continuation
@@ -1311,7 +1317,8 @@ public function doEvent(eventNo:Number):void
 		outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING!!!! IT'S CUMMING INSIDE ME!!!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
 		outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
 		player.slimeFeed();
-		dynStats("lib", 1, "sen", (-0.5), "lus=", 0);
+		player.orgasm();
+		dynStats("lib", 1, "sen", (-0.5));
 		doNext(13);
 	}
 	//Natural Onahole Sales Pitch
@@ -1361,7 +1368,8 @@ public function doEvent(eventNo:Number):void
 			outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10), false);
 			outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ", false);
 			outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.", false);
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 		}
 		doNext(1);
 	}

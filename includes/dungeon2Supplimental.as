@@ -281,7 +281,7 @@ public function loseToImpMobII():void {
 	outputText("The desire to protect your village drips out between your legs, and thoughts of your independence are fucked away into nothing.  It feels good to cum, and your eyes cross when you see the bulge at your master's crotch, indicative of how well you're pleasing him.  It feels so good to obey!  Zetaz suddenly kisses you, and you enthusiastically respond in between orgasms.\n\n", false);
 	
 	outputText("You gladly live out the rest of your life, fucking and birthing imps over and over as their live-in broodmother.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	player.HP += 100;
 	//GAME OVER NERD
 	eventParser(5035);
@@ -326,7 +326,7 @@ public function impGangGetsRapedByMale():void {
 	outputText("\n\n", false);
 	
 	outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 //RAEP-F
@@ -349,7 +349,7 @@ public function impGangGetsRapedByFemale():void {
 	
 	outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.", false);
 	if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	player.knockUp(1,418,50);
 
 	cleanupAfterCombat();
@@ -517,7 +517,7 @@ public function loseToThisShitPartII():void {
 		outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.", false);
 		//(switch from loss to victory, sword loot)
 		monster.lust = 100;
-		dynStats("lus=", 0);
+		player.orgasm();
 	}
 	//[OPTIONAL MILK ESCAPE]
 	else if(player.lactationQ() > 3500 || (player.lactationQ() + player.cumQ() > 4500)) {
@@ -526,7 +526,7 @@ public function loseToThisShitPartII():void {
 		outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of slime and milk.  Your " + breastDescript(0) + " are still pouring out milk.  Clearly you weren't even close to done with your pleasure-induced lactation.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your milk was enough to sate them all?  Or maybe they've learned their lesson.", false);
 		//(switch from loss to victory, sword loot)
 		monster.lust = 100;
-		dynStats("lus=", 0);
+		player.orgasm();
 	}
 	//(GENDERLESS)
 	else if(player.gender == 0) {
@@ -537,7 +537,7 @@ public function loseToThisShitPartII():void {
 		outputText("You walk over to the skeleton and get a good look at it.  The bleached bone leers up at you knowingly, and its jaw is locked in a rictus grin.  Look down at the rapier, you decide to pick it up out of your mess and examine it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your genderless body must have saved you from sharing his fate.  The potential pods that carpet the floor don't even twitch at you, and you breathe a silent prayer of thanks while a dark part of you curses.", false);
 		monster.lust = 100;
 		monster.XP = 1;
-		dynStats("lus=", 0);
+		player.orgasm();
 	}
 	//Done if escaped
 	if(monster.lust == 100) {
@@ -629,7 +629,7 @@ public function useValaPtII():void {
 	outputText("", true);
 	hideUpDown();
 	fatigue(5,0);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//(Male)
 	if(player.gender == 1) {
 		outputText("Before the fairy can get any tighter, you figure it's time to loosen her back up. Grabbing fistfuls of her violet hair, you thrust forward, violently, slamming the chained fairy's head against the stone wall. \"<i>Fuck!</i>\" She shrieks in delight. \"<i>More, more!</i>\" All too happy to comply, you begin screwing her harder, the crushing pressure of her swollen labia milking your cock with every motion. The giant fairy seems to feed on your rough treatment, and begins to slap her ass back into you, in time with your thrusts, giggling aimlessly between her disjointed pleas for your cum. You grab her wobbling chest, figuring it'll be the best handhold you're going to find on the malnourished girl, and are rewarded with an orgasmic cry from the fairy. She clenches down on your " + cockDescript(0) + " as she clasps your hardness, her pulsing depths making you dig your fingers deeper into her supple flesh. Rocking against her at a painful pace, you grit your teeth and tighten your grip on her teats, their fluid depths yielding to your passionate throes. Her nipples swell and burst with milk, white cream spraying at your feet with each thrust, and you slide your hands down to pull at the lactating pink nubs, each burst of pale alabaster filling your lust to bursting.\n\n", false);
@@ -752,7 +752,7 @@ public function valaGetsSexedPtDuece():void {
 	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
-	dynStats("lus=", 0);
+	player.orgasm();
 	fatigue(5,0);
 	if(player.cockTotal() > 0) {
 		var x:Number = player.cockThatFits(60);
@@ -1104,7 +1104,7 @@ public function valaFightVictoryFuckPtII():void {
 
 		outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your thighs. You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + cockDescript(0) + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise, unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, her belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. That should keep her occupied while you root out the imps.", false);
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	//[End Encounter]
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 	//Mark as defeated in combat
@@ -1250,7 +1250,8 @@ public function useValaOHYEAHKOOLAIDPTII():void {
 		outputText("You clutch your " + allBreastsDescript() + " and squeeze your " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy, but it's a losing battle. Vala cums before you do, pulsing walls locking down and driving the dildo out, by painful inches, deeper into your body until the base is so far against your gut that it is pushed into your womb with a toe-curling pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your " + cockDescript(0) + " penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your " + buttDescript() + " against hers with each pulsing load, your " + vaginaDescript(0) + " clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both of Vala's milking holes pining you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as, your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You give your fairy girl's rump a slap on the way out- a reward for her brood mother-sized hips.\n\n", false);
 	}
 	//DAH END
-	dynStats("lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("cor", 1);
 	doNext(1);
 }
 
@@ -1332,7 +1333,8 @@ public function wakeMeUpBeforeValaGoGosPtII():void {
 		outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your " + hipDescript() + ". You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + multiCockDescriptLight() + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise, unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, the girl's belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. You're not sure what kind of fucked up child that little exchange would give her, but if anybody had the vagina to pass a monster, it'd be Vala. You probably won't get to find out, though. Who knows what kind of incubation period the chimera-kid will have?", false);
 	}
 	//[End Encounter]
-	dynStats("lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 	doNext(1);
 }
@@ -1482,7 +1484,7 @@ public function cleansedValaFuckHerBrainsOut():void {
 		}
 	}
 	doNext(cleansedValaFuckHerBrainsOutPtII);
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 
 //Part 2
@@ -1597,7 +1599,7 @@ public function faerieOrgyFuckMaleContinue():void {
 
 	outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n", false);
 	cheatTime(1);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(telAdre.barTelAdre);
 }
 
@@ -1616,7 +1618,7 @@ public function faerieOrgyFuckFemaleContinue():void {
 
 	outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.", false);
 	cheatTime(1);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(telAdre.barTelAdre);
 }
 
@@ -1989,7 +1991,8 @@ public function femaleZetazOverPtII():void {
 	outputText("Zetaz grunts and bottoms out, punching his tip into your cervix and blasting a thick rope of seed into your empty, ready womb.  You climax immediately from the act, and moan into the dog-cock that fills your mouth, using it like a ballgag.  There wasn't any natural buildup, just spunk hitting your womb and then a climax strong enough to make you see white.  Your " + vaginaDescript(0) + " clenches tightly, hugging and squeezing Zetaz's potent prick as it dumps more and more of his corrupt demon-spoo into your fertile breeding grounds.  The thick goop tingles in a way that makes you sure you'll be giving him a litter of horny little sons before long.  Maybe they'll fuck you like they do Vala?\n\n", false);
 	
 	outputText("The knot in your mouth pops out, and your belly gurgles, feeling very full.  The second imp must have come while his master was fertilizing your pussy.  You sigh and sag against your restraints as Zetaz steps away and lines begin to form.  In a few seconds, you've got a rubbery, spined cat-cock twitching inside your cunt, and are wrapping your sensitive lips around a horse-cock.  This must be what nirvana feels like.", false);
-	dynStats("lus=", 0, "cor", 50);
+	player.orgasm();
+	dynStats("cor", 50);
 	
 	//[Epilogue]
 	doNext(zetazBadEndEpilogue);
@@ -2018,7 +2021,7 @@ public function zetazBadEndEpilogue():void {
 		
 		outputText("After a few months the champion started to become acclimated to her new life, and began birthing imps in larger broods with shorter gestations.  She had become the ideal broodmother, and her worldview shrank down to two powerful priorities: acquiring cum, and birthing.", false);
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	player.HP += 150;
 	eventParser(5035);
 }
@@ -2102,7 +2105,8 @@ public function hermZetazOverPtII():void {
 	outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n", false);
 	
 	outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your " + player.face() + ".  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.", false);
-	dynStats("lus=", 0, "cor", 50);
+	player.orgasm();
+	dynStats("cor", 50);
 	doNext(zetazBadEndEpilogue);
 }
 	
@@ -2318,7 +2322,8 @@ public function valaCumBath2():void {
 	player.cumMultiplier += 2;
 	if(player.balls > 0) player.ballSize += .3;
 	flags[kFLAGS.VALA_CUMBATH_TIMES]++;
-	dynStats("lib", -1.5, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1.5);
 	doNext(13);
 }
 
@@ -2403,7 +2408,7 @@ public function bigValaDomsPC():void {
 	outputText("\n\nWhile you stand there, dripping sexual juices, Vala gradually starts to diminish in size.  Sadly, her breasts seem to return to normal faster than the rest, which leaves her disproportional while she journeys towards her normal shape.  She's still locked in climax, leaking an ever-shrinking amount of fluid.  The smaller she gets, the faster her change progresses.  Then, with an alarming abruptness, she flops down in the lake of lady-spunk she left behind, moaning pleasantly.");
 	outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 	player.slimeFeed();
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -2456,7 +2461,7 @@ public function bigValaLicksOffDudes():void {
 	
 	outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress and your [armor] back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 	
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -2519,7 +2524,8 @@ public function valaDommyVapula3Some():void {
 	}
 	outputText("\n\nVala climaxes, pulling you both out as a river of fem-spunk gushes out behind you, and you and your lust-locked demoness drag across the faerie's enhanced pleasure-buzzer, smearing her lusty juices across her pulsating, sensitive organ while you thoroughly feed your demoness's insatiable cum-hunger.");
 	outputText("\n\nEventually, you're dropped to the ground, panting for your breath while Vapula's tongue slowly withdraws.  You separate, realizing that during the lengthy cum Shouldra returned to you, and Vala is rapidly dwindling behind you.  The three of you have a playful swim in the stream to get cleaned up before Vala mends her clothing and goes on her way, thanking you for having the chance to feel what it's like to be in charge.");
-	dynStats("lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("cor", 1);
 	player.slimeFeed();
 	doNext(13);
 }
@@ -2551,7 +2557,8 @@ public function valaLoveyVapula3Some():void {
 	else outputText("[cock smallest]");
 	outputText(", ensuring that every single drop is passed into her ravenous gash.");
 	outputText("\n\nYou aren't sure how long you stay like that, but eventually, Vala finishes with her own pleasure and sets the pair of you down on the ground, still joined together, groin-to-groin.  You're so sensitive from your recent orgasm that separation is almost painful.  Only after you're free do you realize that Shouldra slipped back into you, and Vala is shrinking down behind you.  The three of you bathe and get dressed together, Vala using some strange magic to repair her dress before she goes.");
-	dynStats("lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("cor", 1);
 	player.slimeFeed();
 	doNext(13);
 }
@@ -2634,7 +2641,8 @@ public function kinathisValaStuff():void {
 	else outputText("\n\nYour eyes roll up, your mouth hangs open, and you grunt long and hard as your seed floods Vala’s tight, squeezing cunt like a frothy flood.  Wave after wave of your thick, creamy spunk forces its way through her convulsing cunt and right into her eager, waiting womb.  Your little lover wraps her legs around you, squeezing herself against you to get as much of your hot seed inside her body as she can.  Geysers of spunk force their way into her womb, filling it fuller and fuller until her belly swells.  Her once tight, flat tummy rounds out into a healthy, round cumbaby, your thick, yogurt like spunk overflowing from her over-stuffed snatch in sticky streams.");
 	
 	outputText("\n\nThe sweet relief of your orgasm washes over you, the blissful afterglow turning your arms and [legs] to jelly as you settle over your small panting lover.  Vala’s body is sweaty and hot from the passionate sex.  Her arms wrap around you, hugging her body against yours as she whispers to you and snuggles against you.  \"<i>Ohhh... that was... you are amazing...</i>\" she says blissfully as she nuzzles her face against your body, her cunt clenching hard around you as she cuddles up against you.  As you lay there holding her, you can hear her whisper softly to herself, muttering sweet nothings into the air to you.  Her fingers run over your [chest], drawing little shapes and hearts over your skin as she hums.  Smiling to yourself, you stroke her head and hold onto her, cuddling up with your tender fairy.  Leaning in, you plant a tender kiss in her hair before you settle in for the night with the oversized fairy.");
-	dynStats("lib", -1, "sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1, "sen", -2);
 	menu();
 	addButton(0,"Next",valaPartIIWaifuLove)
 }

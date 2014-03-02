@@ -386,7 +386,8 @@ public function doDungeon(eventNo:Number):void {
 				outputText("  ", false);
 			}
 			outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.", false);
-			dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
+			player.orgasm();
+			dynStats("int", -2, "lib", 4, "cor", 4);
 			player.slimeFeed();
 			player.createStatusAffect(StatusAffects.TensionReleased,0,0,0,0);
 		}
@@ -436,7 +437,8 @@ public function doDungeon(eventNo:Number):void {
 				//HERM
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
-				dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
+				player.orgasm();
+				dynStats("int", -2, "lib", 4, "cor", 4);
 				player.createStatusAffect(StatusAffects.TensionReleased,0,0,0,0);
 				player.addStatusValue(StatusAffects.TensionReleased,1,1);
 				player.slimeFeed();
@@ -819,7 +821,8 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11055) {
 		outputText("\n\nThe omnibus disappeared while you were examining the changes.  You guess you did get what you wanted.  You blush and smile, still feeling very horny.  You decide to use the privacy of the office to relieve the tension you've been building up since you arrived.\n\nYou masturbate quickly and efficiently, eager to calm down and resume your exploration.  In no time at all an orgasm crashes through your body.  Stretching and standing up, you find yourself still aroused.\n\nYou slap your forehead as realization washes over you - <b>the demoness' magic is keeping you from ever being totally satisfied!</b>\n(Perk Gained - Omnibus' Gift - Minimum lust has been increased!)", false);
 		player.createPerk(PerkLib.OmnibusGift,0,0,0,0);
-		dynStats("lus=", 0, "cor", 2);
+		player.orgasm();
+		dynStats("cor", 2);
 		cleanupAfterCombat();
 		return;
 	}

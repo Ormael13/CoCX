@@ -148,7 +148,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.cumQ() < 1000) outputText("streams", false);
 			else outputText("rivers", false);
 			outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -187,7 +187,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("\n\n", false);
 
 			outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -237,7 +237,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			//Pregnancy Goes Here
 			player.knockUp(13, 400, 151);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -315,7 +315,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText(SMultiCockDesc() + " explodes again, dumping every remaining drop from your " + ballsDescriptLight() + " directly onto your " + chestDesc() + " and belly.", false);
 			outputText("  Your eyelids flutter and droop, your tongue lolls out of your mouth, and you start drooling all over yourself.  Zombie-like, your body keeps shaking, locked in orgasm, even after the spider dumps you in the dirt and walks away.", false);
 			player.slimeFeed();
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -380,7 +380,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("You sigh and close your eyes, slowly slumping down while your hips keep twitching.  You've been sated, and though your body keeps hungering for more, you slip into unconsciousness.", false);
 			player.slimeFeed();
-			dynStats("lus=", 0);
+			player.orgasm();
 			player.knockUp(13, 400);
 			cleanupAfterCombat();
 		}
@@ -405,7 +405,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy", false);
 			if (player.hasCock()) outputText(" and raging hard on", false);
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 	}
 }

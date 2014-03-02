@@ -252,7 +252,7 @@ private function showOffForIfris():void {
 	//Stat changes HERE!
 	if(player.str < 90) dynStats("str", .5);
 	if(player.tou < 40) dynStats("tou", .3);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
@@ -334,7 +334,7 @@ private function ifrisDP():void {
 	//Stat changes HERE!
 	if(player.str < 90) dynStats("str", .75);
 	if(player.tou < 40) dynStats("tou", .5);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);

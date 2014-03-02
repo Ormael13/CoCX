@@ -217,7 +217,8 @@ internal function loseToSatyr():void {
 	//reduce lust, slimefeed, pregnatize me cap'n
 	player.slimeFeed();
 	satyrPreggo();
-	dynStats("sen", 3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 3);
 	if(player.cor < 50) dynStats("cor", 1);
 	cleanupAfterCombat();
 }
@@ -273,7 +274,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 	
@@ -309,7 +310,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 	
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realise he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 
@@ -387,7 +388,7 @@ private function willinglyBoneSatyr():void {
 	outputText("\n\nYou watch him as he goes, then manage to force yourself back to your feet and stagger off, lest something far less hospitable find you here.");
 	//slimefeed, reduce lust, impregnational geographic
 	player.slimeFeed();
-	dynStats("lus=", 0);
+	player.orgasm();
 	satyrPreggo();
 	doNext(13);
 }

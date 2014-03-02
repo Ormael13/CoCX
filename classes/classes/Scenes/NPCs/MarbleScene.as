@@ -212,7 +212,7 @@ private function rapeMarbleInHerRoom():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
 			//set player's lust to 0
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 		//now if the player doesn't fit
 		else {
@@ -222,8 +222,8 @@ private function rapeMarbleInHerRoom():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
 			//set player's lust to 0
-			dynStats("lus=", 0);
-		} 
+			player.orgasm();
+		}
 	}
 	//dickless girls
 	else if(player.vaginas.length > 0) {
@@ -234,7 +234,7 @@ private function rapeMarbleInHerRoom():void {
 			marbleRapeCorruptFantasy();
 		outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
 		//set player's lust to 0
-		dynStats("lus=", 0);
+		player.orgasm();
 	}
 	//the genderless option
 	else {
@@ -1327,7 +1327,7 @@ public function marbleSex2Continued(genders:Number) : void
 	else {
 		outputText("Marble sighs and gives you a big smile. \"<i>Sweetie, you're just as wonderful to be with as ever.  I'm always looking forward to our times together,</i>\" she tells you.  You would be inclined to agree with her.", false);
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	//– return to trigger
 }
 
@@ -1419,7 +1419,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		else outputText("other", false);
 		outputText(" " + nippleDescript(0) + " and starts the experience all over again.  By the end, her efforts have successfully rung an orgasm from you. After cleaning up a bit, Marble sends you off in high spirits.", false);
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 
 //(after addiction sex, standing sex)
@@ -1464,7 +1464,7 @@ public function marbleAddictionSex(newpage:Boolean = true):void {
 	if(player.tallness < 66) outputText("sets you down and ", false);
 	outputText("pushes you to arms length and asks you, \"<i>If it's alright with you, could we live together?</i>\"  You hesitate, before explaining that you don't think that's such a good idea. You explain that you aren't from this world, why you came here, and what you've found since doing so.  Marble looks at you for a moment before letting go of you and going over to her bed. Effortlessly, she lifts it up off the ground and turns to you.  \"<i>I can pull my weight, so don't you dare think I can't help you do something so important, champion.</i>\"  She says, setting the bed back down.  She barely is able to keep a straight face as she says \"<i>champion</i>\".  You smile and wonder how could you possibly turn down someone so wonderful?  \"<i>Well I guess that settles it, then,</i>\" she says happily, \"<i>I'll move right in.</i>\"", false);
 	//(set player lust to 0)
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 
 //(camp sex - masturbation aid, she stimulates the player with her breasts)
@@ -2227,7 +2227,8 @@ private function marbleCampSexNew():void {
 		}
 		outputText("\n\nA few minutes later, you release Marble's body from your grip and help her to a standing position with your tail.  She reaches a hand down to you and says, \"<i>I'm glad you had fun, sweetie; let's get you cleaned off, shall we?</i>\"");
 	}
-	dynStats("sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -3);
 }
 private function marbleNips():String {
 	if(player.findStatusAffect(StatusAffects.MarbleSpecials) < 0) {
@@ -2313,7 +2314,7 @@ private function rapeDAHMARBLEZ():void {
 					marbleRapeCorruptFantasy();
 				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
 				//set player's lust to 0
-				dynStats("lus=", 0);
+				player.orgasm();
 			}
 			//now if the player doesn't fit
 			else {
@@ -2323,8 +2324,8 @@ private function rapeDAHMARBLEZ():void {
 					marbleRapeCorruptFantasy();
 				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
 				//set player's lust to 0
-				dynStats("lus=", 0);
-			} 
+				player.orgasm();
+			}
 		}
 		//dickless girls
 		else if(player.vaginas.length > 0) {
@@ -2335,7 +2336,7 @@ private function rapeDAHMARBLEZ():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
 			//set player's lust to 0
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 		//the genderless option
 		else {
@@ -3053,7 +3054,8 @@ private function marbleSexFinish():void {
 	//After all Marble sex
 	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.", false);
 	//Set PC lust to 0
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	doNext(41);
 }
 

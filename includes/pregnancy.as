@@ -1296,7 +1296,8 @@ public function updatePregnancy():Boolean {
 		if(player.cor >= 90) outputText("You lick your lips, savoring the honeyed residue on them as you admire your thousands of children.  If only every night could be like this...\n", false);
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType=0;
-		dynStats("int", 1, "lib", 4, "sen", 3, "lus=", 0);
+		player.orgasm();
+		dynStats("int", 1, "lib", 4, "sen", 3);
 		if(player.buttChange(20, true)) outputText("\n", false);
 		if(player.buttRating < 17) {
 			//Guaranteed increase up to level 10
@@ -1429,7 +1430,8 @@ public function updatePregnancy():Boolean {
 		}
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
-		dynStats("lib", 1, "sen", 10, "lus=", 0, "cor", -2);
+		player.orgasm();
+		dynStats("lib", 1, "sen", 10, "cor", -2);
 	}
 	//Anemone birfs
 	//Anemone Pregnancy
@@ -1498,7 +1500,8 @@ public function updatePregnancy():Boolean {
 			outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n", false);
 			//(gain 1 nemo-dick, reduce lust to min)]
 			genderCheck();
-			dynStats("lib", 2, "sen", 5, "lus=", 0);
+			player.orgasm();
+			dynStats("lib", 2, "sen", 5);
 		}
 		//[(if PC has 10 existing cocks) && no kid
 		else {
@@ -1509,7 +1512,8 @@ public function updatePregnancy():Boolean {
 
 			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + multiCockDescriptLight() + " does the best ejaculation it can manange with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
 			//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
-			dynStats("lib", 2, "sen", 5, "lus=", 0);
+			player.orgasm();
+			dynStats("lib", 2, "sen", 5);
 			if(player.findStatusAffect(StatusAffects.AnemoneArousal) < 0) player.createStatusAffect(StatusAffects.AnemoneArousal,0,0,0,0);
 		}		
 		player.pregnancyIncubation = 0;
@@ -1565,7 +1569,8 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "lus=", 0, "cor", 7);
+		player.orgasm();
+		dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
 		if(player.buttRating < 10 && rand(2) == 0) {
 			player.buttRating++;
 			outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);
@@ -1644,7 +1649,8 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 		displayedUpdate = true;
 		//Hip and butt increase
 		if(player.buttRating < 12 && rand(2) == 0) {
@@ -1687,7 +1693,8 @@ public function updatePregnancy():Boolean {
 		amilyScene.pcBirthsAmilysKidsQuestVersion();
 		player.cuntChange(60, true, true, false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 		displayedUpdate = true;
 		outputText("\n", false);
 		player.pregnancyIncubation = 0;
@@ -1715,7 +1722,8 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1757,7 +1765,8 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1798,7 +1807,8 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5, "lus=", 0);
+		player.orgasm();
+		dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1847,7 +1857,8 @@ public function updatePregnancy():Boolean {
 					if(player.clitLength > 2 && player.clitLength <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ", false);
 					if(player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as your spread the slime around, vigorously frigging yourself until ", false); 
 					outputText("you quiver in orgasm, popping out the last of your eggs as your body twitches nervelessly on the ground.   In total you lay " + eggDescript() + ".", false);
-					dynStats("lus=", 0, "resisted", false);
+					player.orgasm();
+					dynStats("resisted", false);
 				}
 			}
 			//Large egg scene
@@ -1863,7 +1874,8 @@ public function updatePregnancy():Boolean {
 				outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ", false);
 				if(player.statusAffectv3(StatusAffects.Eggs) >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ", false);
 				outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".", false);
-				dynStats("lus=", 0, "resisted", false);
+				player.orgasm();
+				dynStats("resisted", false);
 			}
 			outputText("\n\n<b>You feel compelled to leave the eggs behind, ", false);
 			if(player.findStatusAffect(StatusAffects.AteEgg) >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);

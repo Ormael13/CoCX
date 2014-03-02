@@ -72,10 +72,11 @@ package classes.Scenes.Areas.Mountain
 			//(after either of them)
 			//(Lose player anal virginity; if player has vagina, lose vaginal virginity)
 			player.buttChange(monster.cockArea(0), true);
+			player.orgasm();
 			//[if not corrupt]
-			if (player.cor < 40) dynStats("tou", -2, "lus=", 0, "cor", 1);
+			if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 			//[if corrupt]
-			else dynStats("lus=", 0, "cor", 1.5);
+			else dynStats("cor", 1.5);
 			cleanupAfterCombat();
 		}
 
@@ -93,7 +94,7 @@ package classes.Scenes.Areas.Mountain
 			if (player.cocks.length > 1) outputText("One of the heads eagerly starts licking your " + cockDescript(0) + " while the other starts to work on your " + cockDescript(1) + ". The large, flat tongues give you a rather unusual feeling, but it is definitely effective.   As you approach your peak, the heads quickly take your " + cockDescript(0) + " and " + cockDescript(1) + " into their mouths. The pleasure from this new arrangement quickly overwhelms you, leaving you dazed.  When your senses return to you, you look up to see the hellhound's tongues running all over their mouths, clearly very happy.  With a pair of happy barks, the hellhound turns and runs away.", false);
 			//[if player has no endowments] 
 			if (player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'....", false);
-			else dynStats("lus=", 0);
+			else player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -361,10 +362,11 @@ package classes.Scenes.Areas.Mountain
 
 				outputText("Finally having finished, you relax your anal sphincter and allow his member to leave your anus. His members rise from the feel of the incredible amount of cum his quadruple balls pumped into your holes squirting back out to wash over them. The hellhound curls up, spent, his tail covering his privates. His rods look a little red from the intense fuck, and you're sure that in spite of his fiery nature he is experiencing a little more than a burning sensation.", false);
 				//--> increases corruption, usual post coital procedure
+				player.orgasm();
 				//[if not corrupt]
-				if (player.cor < 40) dynStats("tou", -2, "lus=", 0, "cor", 1);
+				if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 				//[if corrupt]
-				else dynStats("lus=", 0, "cor", 1.5);
+				else dynStats("cor", 1.5);
 				//Preggers chance!
 				player.knockUp(6, 352, 101);
 			}

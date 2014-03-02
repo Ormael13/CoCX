@@ -347,7 +347,8 @@ public function isabellaMorningWakeupCall():void {
 	outputText("</i>\"\n\n", false);
 	
 	outputText("You slump down while the tension oozes from your frame.  By the time you can move again, Isabella has walked off towards her section of camp.  Is it just you, or does her ass have a particularly sensuous sway this morning?", false);
-	dynStats("sen", -1.5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1.5);
 	doNext(1);
 }
 //No BJ's Plz 
@@ -508,7 +509,8 @@ private function repeatGermanBratwurstInCamp():void {
 	}
 	flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
 	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
-	dynStats("lib", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1);
 	doNext(13);
 }
 
@@ -654,7 +656,8 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("feels empty, devoid of any fluid left to spray on her.  ", false);
 	
 	outputText("You keep holding her with " + sMultiCockDesc() + " for a moment, both of you enjoying the powerful embrace as you literally dick-hug her.  The entirety of her body is dripping with your jism but she doesn't seem to care.  Eventually, you put her down, letting her splat in the puddle of juices that formed below your junk-prison.  At last, you unfold your arms.\n\n", false);
-	dynStats("lib", -1, "sen", -1, "lus=", 0, "cor", .3);
+	player.orgasm();
+	dynStats("lib", -1, "sen", -1, "cor", .3);
 	doNext(13);
 }
 
@@ -1102,7 +1105,8 @@ private function acceptCowpology():void {
 	//Clear burps!
 	if(player.findStatusAffect(StatusAffects.BurpChanged) >= 0)
 		player.removeStatusAffect(StatusAffects.BurpChanged);
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	//FIRST TIME
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("Flashing a smirk, you beckon her your way, stripping from your " + player.armorName + ".  With delicate and deliberate motions you pull the hem of Isabella's milk-stained blouse down, reaching into the depths of her cleavage and taking hold of her oversized breasts.  It takes effort to heave the heavy, fluid-filled mammaries up and out of her shirt.  Once exposed to the open air, her quadruplet of nipples twitch and stiffen, only swelling further as you alternatingly tease her teats with the edge of your fingernail.  You trace little circles along the areola, running up and over the nubs; your gentle-but-devastating caressing technique sets Isabella all a-shiver, knees knocking together in hardly-contained ecstasy.  If given enough time, you figure you could push the cow-girl to climax merely from nipple stimulation, but your own body demands satisfaction as well.\n\n", false);
@@ -1215,7 +1219,8 @@ internal function receiveAllTheCowTOngues():void {
 
 	outputText("\n\nYou give her a weak thumbs-up before passing out for a quick nap in her comfy chair.");
 	if(isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	doNext(13);
 }
 
@@ -1293,7 +1298,8 @@ private function fuckIsabella():void {
 		else outputText("\n\n\"<i>Gods, was I ever wrong about big cocks.  That was... You're incredible with that thing, [name].</i>\"");
 	}
 	outputText("\n\nYou grin and rub the big cow's hair before getting dressed.");
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	doNext(13);
 }
 
@@ -1401,7 +1407,8 @@ private function isabellaBarnFuckPartII():void {
 	outputText("\n\nYou laugh, and rest your head in the pillowy warmth of her milk-stained bosom.  You're nearly ready to drift off into a post-coitus drowse when you hear a sharp voice behind you, \"<i>Isabella?  You alright in there?</i>\"");
 	
 	outputText("\n\nYou look over your shoulders as Whitney throws the door open, her pitchfork at the ready, as if expecting some demon.  You grin sheepishly, your bare [ass] staring the farmer girl right in the face as your trouser snake drips onto the barn floor.  Silently, Whitney turns on a heel and withdraws, closing the door behind her.  A silent moment passes before you and Isabella erupt in laughter, both reaching for your clothes.");
-	dynStats("lib", -1, "sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1, "sen", -3);
 	fatigue(-25);
 	doNext(14);
 }

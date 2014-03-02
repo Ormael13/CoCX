@@ -143,7 +143,8 @@ package classes.Items.Armors
 			player.slimeFeed();
 			game.flags[kFLAGS.BIKINI_ARMOR_BONUS] += 2;
 			if(game.flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) game.flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
-			game.dynStats("sen", 2, "lus=", 0);
+			player.orgasm();
+			game.dynStats("sen", 2);
 			if(player.hasVirginVagina()) game.dynStats("cor", -1);
 			//If minotaur, increase addiction slightly.
 			if(monster is Minotaur || monster is MinotaurMob) player.minoCumAddiction(3);

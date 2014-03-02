@@ -472,7 +472,8 @@ public function displacerDreamII():void {
 	
 	outputText("\n\nA soft \"sssht\" noise comes from behind you, that hole in the metal cave opening up once more.  Curious, you twist around so that you and your alien lover are butt-to-butt, and trot towards the doorway, dragging her along with you, though she's too blissed out to care.");
 	outputText("\n\nAs you pass through the doorway, your vision suddenly goes white... and you wake up with a start.");
-	dynStats("lib", 2, "sen", 2, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", 2, "sen", 2);
 	menu();
 	addButton(0,"Next",displacerDreamIII);
 }

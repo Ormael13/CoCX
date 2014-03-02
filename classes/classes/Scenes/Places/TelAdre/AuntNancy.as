@@ -447,7 +447,8 @@ private function auntNancyPoonPartIV():void {
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	
 	//[70 % for Toughness, Strength to increase 2-6 points]
-	dynStats("str", .3,"tou", .3, "lus=", 0);
+	player.orgasm();
+	dynStats("str", .3,"tou", .3);
 	//[+35 Fatigue]
 	fatigue(35);
 	//[+20 Relationship with Aunt Nancy, PillowTalk += 1]

@@ -727,7 +727,7 @@ private function RaphaelPostFenceSex():void {
 	outputText("With a victorious glint, Raphael rolls you on your back while you're still dazed.  The fox, taking the sash from his hips and tying either end around your knees, brings your legs towards your chest.  He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you.  More deep thrusts follow, this time deep enough for the tip to titilate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n", false);
 
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(postRaphaelCoitus);
 
 }
@@ -1307,7 +1307,8 @@ private function kissRaphaelFirstTimeOrphanage():void {
 	
 	outputText("\n\nFinally, you beg of him to stop as the growing crescendo and steady rhythm becomes too much, not by pulling out, but by jamming into you one last time and simply keeping his wonderful cock in the magic spot for long enough to ride the sensation to a climax.");
 	player.slimeFeed();
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	menu();
 	addButton(0,"Next",followupToFirstTimeOrphanageRaphSex);
 }
@@ -1348,7 +1349,8 @@ private function cunnilingusWithRaphael():void {
 	//({High wetness multiplier}
 	else outputText("gushing a torrent of femcum into the air");
 	outputText(".  Raphael backs off a bit afterwards, giving you a few more laps of admiration around the throbbing fissure and cleaning you of any spillage. He ends with a tiny kiss, just inside your inner thigh.");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 }
 
@@ -1369,7 +1371,8 @@ private function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nDesperate for that little bit more, you reach down and start fondeling your " + clitDescript() + " too.  It brushing in against Raphael's soft white pubes tickles.");
 	
 	outputText("\n\nLooking him in the eyes again, you slaver on top of the fox.  Raphael simply lays back, lazily fondles your breasts and ass and looks at you to put in the effort around his cock.  Only after minutes of this, almost driving yourself towards the brink, does Raphael suddenly sit up sharply - an anguished snarl on his face - to hold you in a tight embrace and groan conceitedly.  You can feel his cock jerk up and grow an inch in size, before his passion escapes into your womanhood.  Allowing yourself as well, you follow him with a lazy orgasm and join him in his growl, while he squeezes you on your waist.");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 }
 //Available side by side to having sex: Dialogue scenes.

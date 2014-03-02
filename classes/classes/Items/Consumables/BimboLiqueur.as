@@ -175,7 +175,8 @@ import classes.Appearance;
 					player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 					if (player.inte > 21) player.inte = 21;
 				}
-				game.dynStats("int", -1, "lib", 4, "sen", 25, "lus=", 0);
+				player.orgasm();
+				game.dynStats("int", -1, "lib", 4, "sen", 25);
 				//FULL ON BITCHFACE
 				player.modFem(100, 100);
 				//Body

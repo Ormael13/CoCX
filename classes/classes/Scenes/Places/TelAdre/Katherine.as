@@ -580,7 +580,8 @@ private function penetrateKatsVag():void {
 
 	outputText("With a smile, you scratch her behind the ears in a way that the cats in your village loved, enjoy her contented purr, clean yourself off with some old rags that the cat laid aside, and then politely say goodbye, redressing yourself and heading back out in Tel'Adre.\n\n", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -626,7 +627,8 @@ private function pcPenetratesKatAnally():void {
 
 	outputText("With a smirk at her flattery, you give her a hand getting dressed, then dress yourself and head back out into the street.", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -693,7 +695,8 @@ private function suckNFuck():void {
 
 	outputText("You promise her you'll remember that.  Redressed, you bid her farewell and head back out into the streets of Tel'Adre.\n\n", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -816,7 +819,8 @@ private function letKatKnotYourCuntPussyFuck():void {
 	else outputText("Y", false);
 	outputText("ou get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -910,7 +914,8 @@ private function getPenetrated():void {
 
 	outputText("About an hour later, she's deflated and you are able to get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -977,7 +982,8 @@ private function getDoublePennedByKat():void {
 	outputText("About an hour later, she's deflated and you are finally able to rise off of her, get dressed, and head back to your camp.\n\n", false);
 	//minus lust, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.slimeFeed();
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1067,7 +1073,8 @@ private function suckedNFuckedByKat():void {
 	outputText(" deflate and you detach, you clean yourself off, get dressed, and head back out into the street.", false);
 	//lust -100, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.slimeFeed();
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1334,7 +1341,7 @@ private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("You simply groan at the absolutely terrible pun and get back up, redressing yourself and heading back into the streets after a quick peck to thank her for the time.", false);
 	doNext(13);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 //[Male/Herm]
 private function katherineLicksAllTheBoyPenises():void {
@@ -1370,7 +1377,7 @@ private function katherineLicksAllTheBoyPenises():void {
 
 	outputText("Weakly, she collapses onto her furry behind on the ground, smiling up at you.  \"<i>I take it you enjoyed that?</i>\" she teases.  You admit she did very well, helping her up and to her own 'bed', then get dressed and head back out into Tel'Adre's streets.", false);
 	//lust -100 regardless of sex, return to wherever
-	dynStats("lus=", 0);
+	player.orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1493,7 +1500,8 @@ private function katDoubleHelixCraziness():void {
 	//Player returns to camp without his lust, slimefeed
 	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	dynStats("lib", -1, "sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1, "sen", -1);
 	doNext(13);
 }
 

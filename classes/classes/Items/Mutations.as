@@ -263,7 +263,7 @@
 				outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(temp) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ", false);
 			}
 			if (temp > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.\n\nNearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 
 		public function tatteredScroll(player:Player):void
@@ -326,7 +326,8 @@
 				//RAEP
 				spriteSelect(50);
 				outputText("\n\nYou hear the soft impact of clothes hitting the ground behind you, and turn to see that the sand witch has found you! You cannot resist a peek at your uninvited guest, beholding a curvy dark-skinned beauty, her form dominated by a quartet of lactating breasts.  Somewhere in your lust-fogged mind you register the top two as something close to double-Ds, and her lower pair to be about Cs.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns around and drops, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far possible while suckling her clit.  Dimly you feel the milk spattering over you, splashing off you and into the cracked earth.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
-				dynStats("lib", 1, "sen", 5, "lus=", 0);
+				player.orgasm();
+				dynStats("lib", 1, "sen", 5);
 				player.slimeFeed();
 			}
 		}
@@ -1435,14 +1436,14 @@
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) {
 						if (player.vaginas.length == 1) outputText("Your " + vaginaDescript(0) + " gushes fluids down your leg as you spontaneously orgasm.", false);
 						else outputText("Your " + vaginaDescript(0) + "s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.", false);
-						if (tainted) dynStats("lus=", 0, "cor", 1);
-						else dynStats("lus=", 0);
+						player.orgasm();
+						if (tainted) dynStats("cor", 1);
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) {
 						if (player.vaginas.length == 1) outputText("Your pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your " + vaginaDescript(0) + ".  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.", false);
 						if (player.vaginas.length > 1) outputText("Your pussies feel hot and juicy, aroused and tender.  You cannot resist plunging your hands inside your " + vaginaDescript(0) + "s.  You quiver around your fingers, squirting copious fluids over yourself and the ground.  The fluids quickly disappear into the dirt.", false);
-						if (tainted) dynStats("lus=", 0, "cor", 1);
-						else dynStats("lus=", 0);
+						player.orgasm();
+						if (tainted) dynStats("cor", 1);
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) {
 						if (player.vaginas.length == 1) outputText("You feel a sudden trickle of fluid down your leg.  You smell it and realize it's your pussy-juice.  Your " + vaginaDescript(0) + " now drools lubricant constantly down your leg.", false);
@@ -3742,7 +3743,8 @@
 				if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss.  ", false);
 				outputText("Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.", false);
 				//increase player libido, and maybe sensitivity too?
-				dynStats("lib", 2, "sen", 1, "lus=", 0);
+				player.orgasm();
+				dynStats("lib", 2, "sen", 1);
 			}
 			if (player.lust > 100) player.lust = 100;
 			outputText("\n\n", false);

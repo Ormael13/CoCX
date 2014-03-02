@@ -255,7 +255,7 @@ private function useTheSexMachine():void {
 		}
 	}
 	fatigue(10);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 	}

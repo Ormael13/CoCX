@@ -526,7 +526,7 @@ private function consensualHotSophieDickings():void {
 	outputText("</i>\"\n\n", false);
 	//Apply harpy status.
 	luststickApplication(4);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//Sophiepreg
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
@@ -656,7 +656,7 @@ private function consensualSophieSexNoFit():void {
 	outputText("</i>\"\n\n", false);
 	//Apply harpy status.
 	luststickApplication(4);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//Sophiepreg
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
@@ -792,7 +792,8 @@ private function maleVictorySophieRape():void {
 	outputText("  Sophie's well-fucked slit gapes and drools whiteness once you pull out.  It won't be long until she has an egg at this rate.", false);
 	
 	//Victory - lust decrease, sensitivity decrease
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	//Fuck & Preg counter
 	sophieFucked();
 	cleanupAfterCombat();
@@ -848,7 +849,8 @@ private function maleVictorySophieRapeHUGE():void {
 	luststickApplication(8);
 	
 	//Victory - lust decrease, sensitivity decrease
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	//Fuck & Preg counter
 	sophieFucked();
 	cleanupAfterCombat();
@@ -906,7 +908,8 @@ private function sophieVictoryPussyGrind():void {
 	outputText("\"<i>Don't think I've given up on you yet.  One of these times you'll come around,</i>\" you declare as you get dressed.  Finished and refreshed, you slap her feathery ass and hop out of her nest to climb back down the mountain.", false);
 
 	//Victory - lust decrease, sensitivity decrease
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	//Fuck & Piss-off counter
 	sophieFucked(false);
 	cleanupAfterCombat();
@@ -951,7 +954,8 @@ private function fuckDatClit():void {
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
-	dynStats("sen", 1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 1);
 }
 	
 //LOSS SCENES
@@ -1000,7 +1004,8 @@ private function tinyDickSupremeSophieLoss():void {
 	
 	//END
 	//(0 libido-0 sensitivity and mino-blood numb-parts acknowledgements would be funny here; like, she can't get the PC off with the heat alone because he's so frigid and/or numb and has to employ the drugs in frustration. Almost like turning the tables on the tentacle monster. -Z)
-	dynStats("sen", 5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(8);
 	cleanupAfterCombat();
@@ -1045,7 +1050,8 @@ private function normalLossRapuuuuSophie():void {
 	}
 	
 	outputText("  Sophie's hips pull you in more tightly as you spend the last of your white goo within her depths.   She murmurs, \"<i>Not bad for your first shot.</i>\"  Her voice shifts and buzzes as she suggests, \"<i>You're getting even harder now, little " + player.mf("boy","girl") + ".  Mhmmm, you'll cum again soon.</i>\"  The words burrow inside you and seem to squeeze more blood into your " + cockDescript(x) + ".  It gets so hard it's painful, and the tightness of her walls is almost too much to bear.  The bird-woman's face gives a tender, but knowing smile when you cum the second time, and the third time, and the fourth...", false);
-	dynStats("sen", 5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(8);
 	cleanupAfterCombat();
@@ -1060,7 +1066,8 @@ private function tooBigForOwnGoodSophieLossRape():void {
 	outputText("Sophie reaches forwards with a clawed foot to pull down your armor, but your " + cockDescript(x) + " bursts free on its own.  She recoils in shock, nearly falling onto her feathery ass.   Sophie screeches, \"<i>How did you even hide that monster!?  I CAN'T TAKE THAT!</i>\"   She lashes and batters your head with her wings and kicks.  A particularly powerful hit lands just above your ears and things go black...\n\n", false);
 	
 	outputText("Hours later, you wake with an agonizing headache.   You sit up and fresh stabs of pain rock your world, nearly dropping you flat on your back again.  That harpy... she left you at the bottom of the mountain, and didn't even bother to cover your crotch back up!  Your " + cockDescript(x) + " is trembling, hard, and dripping pre-cum.  Its entire surface is covered in yellowish lip-prints, and judging from how tired you feel, Sophie found a way to make you cum numerous times.  With that many kisses covering you, you'll be hard for hours.  You get on your " + player.feet() + " and head back to camp.", false);
-	dynStats("sen", 5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(16);
 	cleanupAfterCombat();

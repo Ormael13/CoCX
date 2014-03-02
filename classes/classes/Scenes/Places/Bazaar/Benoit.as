@@ -557,7 +557,7 @@ private function eggySuggest():void {
 	}
 	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" Benoit says after he's managed to catch his breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at his slightly shell-shocked expression, and the light, happy sound seems to bring him around a bit.  He brushes your shoulder as he walks past you, feeling around the stock room until he finds a chest of drawers.  He opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" he says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
-	dynStats("lus=", 0);
+	player.orgasm();
 	if((player.pregnancyType == 5 || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
@@ -658,7 +658,7 @@ private function repeatSexWithBenoitLetHim():void {
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -742,7 +742,7 @@ private function repeatBenoitFuckTakeCharge():void {
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -857,7 +857,8 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	}
 	if(player.pregnancyType == 14) player.pregnancyType = 18;
 	doNext(13);
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 }
 
 //PC laying
@@ -908,7 +909,7 @@ public function popOutBenoitEggs():void {
 	else {
 		outputText("\n\nBenoit smiles proudly.  \"<i>I cannot zank you enough for zis.  Do not worry, I shall keep zem as safe as I ave ze ozzeir clutches.</i>\"\n");
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	player.pregnancyIncubation = 0;
 	player.pregnancyType = 0;
 	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
