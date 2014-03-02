@@ -133,6 +133,19 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		}
 		hasItems = true;
 	}
+	if(player.hasKeyItem("Dildo") >= 0)
+	{
+		if(menus) {
+			addButton(button,"Anal Dildo",dildoButts);
+			button++;
+			if(player.hasVagina()) 
+			{
+				addButton(button,"Dildo",stickADildoInYourVagooSlut);
+				button++;
+			}
+		}
+		hasItems = true;
+	}
 	if(menus) addButton(9,"Back",masturbateMenu);
 	return hasItems;
 }
@@ -2937,3 +2950,78 @@ public function gildedCockTurbate():void {
 	statScreenRefresh();
 	doNext(13);
 }
+
+function stickADildoInYourVagooSlut():void {
+	clearOutput();
+	if(player.hasVirginVagina())
+	{
+		//LOW CORRUPTION DEFLOWER
+		if(player.cor <= 50)
+		{
+			outputText("You blush nervously as you grasp your phallic toy. The firm dildo bends slightly as you hold it in your hand. You feel perverse to consider doing this, and shakingly undo the bottom of your [armor].");
+			outputText("\n\nSitting on your [butt], you begin to rub the length of the slender tube against your [vagina], the gentle stimulation calming your nerves and helping to relax the tension.  As you pick up the pace, moans begin to escape your lips.  Your [clit] fills with blood and twitches as the faux cock slides against it.  You tenderly caress your [chest] with your other hand, becoming more breathy as you do so. ");
+			if(player.wetness() <= 2) outputText("The toy slides easier as your juices cover it.");
+			else outputText("The toy slides effortly thanks to your copious, almost inhuman lubrication.");
+
+			outputText("\n\nSwallowing, you lean back and position the dildo toward your [vagina], the entrance twitching as it yearns for penetration. With an experimental push, you prod at the hole, jumping at the realization of how large the object really is. It's not nearly as thin, short, and bendable as a finger. You think about why you'd do such a thing. Your virginity too precious to risk a demon stealing away, or perhaps you're simply grown more perverted in this corrupt world. Whatever the case, you bite your lip and press the toy into you. Your decision made, the pain of your splitting hymen shoots through you. You gasp, easing the pressure on the toy, letting it sink one more inch before letting go altogether.");
+			player.cuntChange(8,true,true,false);
+			//Cunt change text go here!
+			outputText("\n\nBreathing heavily, you slowly pull the invasive, fake phallus from your stinging vagina. A light stain of blood now coats the first several inches of the dildo. Taking a deep breath, you push the toy back in, this time feeling less pain. The worst of the experience behind you, you gently pump in and out. Your once pure pussy is now accepting the intruder deeply. Your speed increases as you get used to it. Breathing heavier in between moans, you thrust your cherry-picker in towards unforeseen ecstasy. The tears in your eyes, accumulated from pain, well up even larger in pleasure. Using one hand to piston the imitation cock in your [vagina] and the other to massage around your [clit], the stimulation becomes almost unbearable. Even with the remnants of pain from your recent deflowering, you can't help but grind your [hips] and slide slowly onto your back in preparation for your first penetrative orgasm. Your moans becoming louder and more intense while vaginal juices drip down your buttcheeks. In one last screaming moan, your thighs lift, and you thrust the dildo as deeply into you as it will go, pushing you over the edge into orgasm.");
+			outputText("\n\nYou rest your [butt] back onto the ground and your arms limply at your sides. After several minutes of catching your breath, you pull the toy out of you with a sigh of relief and pleasure. The experience has been quite draining; you decide to rest for some time longer before washing up.");
+		}
+		//50+ Corruption Shit
+		else
+		{
+			outputText("\n\nYou blush perversely as you grasp your phallic toy. The firm dildo bends slightly as you hold it in your hand. A small jolt of giddiness runs through you as you remove your [armor].");
+			outputText("\n\nPrancing nude to a comfortable spot, you proceed to rest on your [butt] and place the toy cock aside as you eagerly prepare your [vagina]. You rub your lips gently as you relax your vaginal muscles. Not wishing to leave your mouth out of the fun, you grasp this dildo and begin to lick and suckle it. The passion of the act urging you on, you push a finger inside your [vagina]. Your tight grip on your finger emphasizes the inexperience of the little hole - a problem you're soon to fix.");
+			outputText("\n\nWith your faux phallus slick with saliva, you remove the digit from your virgin depths. You press the tip against your entrance, savouring your last moments of virginity. Your poor hymen was only an obstacle for cock, and you're the only one truly worthy of taking your virginity. You push the lust-driving object inside. Pain shoots through you, forcing a gasp from you, but failing to halt your beloved cherry-picker's progress. When you finally reach the greatest depth you can, you release the dildo, breathing deeply as the pain passes.");
+			//CUNT CHANGE CALL
+			player.cuntChange(8,true,true,false);
+			outputText("\n\nYet to be satisfied, you regain composure and start pumping into your freshly plucked flower. Your other hand rushes to massage and caress your sensitive [chest]. The fantasies of all the monstrous cocks you'll have thrusted into you spur the rough piston motion, eager to train your [vagina] for its fated task. You slide onto your back as your body devotes itself to pleasure, moans and whimpers fleeting from your mouth. The stimulation builds, only enhanced by the mild pain of inexperience, and within minutes you tense up and scream in ecstasy. Fluids squirt from your [vagina], and you smile gleefully. When the orgasm has passed, you pull your well-used toy from your newly trained slutting-slot. You bring the dildo to your lips to give it an affectionate kiss and lick your virginal blood from it's surface.");
+			outputText("\n\nAfter basking in the afterglow, you clean yourself up and redress.");
+		}
+	}
+	//Repeat Dildo For Ladyboners
+	else
+	{
+		outputText("You remove your [armor] and sit yourself down behind a rock not far from camp, being sure to bring your toy with you.");
+		outputText("\n\nSpreading your [legs], you rub two fingers between your lips, while also suckling your healthy-sized faux cock to lubricate it. Your [vagina] becomes slick with your juices in moments and you eagerly delve a finger into the thirsty hole. The digit goes in slowly and deeply, pleasuring your inner walls with tender stimulation. Your muscles begin to relax, and you feel ready to move onto the main event. Removing the saliva-slicked toy from your mouth, you trade it with your finger. The satisfying easing of the dildo into your nethers is matched by your feminine flavor pushing across your tongue. Muffled moans escape your plugged maw as the beloved toy sinks deep into your [vagina]. Using your free hand, you grope and caress your [chest].");
+			player.cuntChange(8,true,true,false);
+		outputText("\n\nThe erotic pumping of the phallic object picks up the pace as you gently build a rhythm with the beating of your heart and tensing of your vaginal walls. Your breathing heaves, and your moans become almost as desperate as they are lustful. Soon the pleasure is rising up into unstoppable tide of phallus-induced ecstasy, and you slide from against the rock to on your side, still fucking yourself with blissful joy. The constant thrusting of the toy begins to make you shake and lose rhythm, your body wanting only to fuck as hard and fast as possible.");
+		outputText("\n\nYour orgasm arrives with supreme relief as you force the dildo to your furthest depths. Juices spurt from your genitals, and you roll onto your back to rest. When your breathing regulates, you pull the thoroughly used toy from your [vagina] and prepare to return to camp.");
+	}
+	dynStats("sen", -1.5, "lus=", 0);
+	statScreenRefresh();
+	doNext(13);
+}
+
+//Dildo in the butt because why not?
+function dildoButts():void
+{
+	clearOutput();
+	outputText("A kinky idea crosses your mind, and you grab your dildo. Finding a safe spot a short distance from camp, you undo your [armor] and rest on your [butt].");
+	outputText("\n\nYou adjust your position as you spread your [legs], giving you the most comfortable access to your [asshole]. You sloppily lick an experimental finger and carry it down to the eager entrance between your cheeks. ");
+	if(player.analCapacity() <= 8) outputText("Your tight hole offers resistance at first, but soon relaxes with a tender, lubricated fingering.");
+	else outputText("Your experienced hole readily accepts your saliva-coated finger.");
+	outputText(" As you gently rub your insides, you use your free hand and reach up to pinch and rub your [nipples]. As the motions become easier, you push a second finger inside as well. You soon find your sensitive anal entrance begging for something more appropriate, and you happily oblige.");
+	outputText("\n\nGrabbing your toy, you give it several long wet licks before holding your [legs] up and sending the substitute cock to its true task. You rub the tip against your [asshole] momentarily before finally pushing it inside. Stuttering moans escape your lips as your butt gets it's much-needed fill of firm faux phallus");
+	if(silly()) outputText(", the alliteration of the experience further arousing you");
+	outputText(". Your toes curl as you begin to pull in and out, pumping the dildo with smooth motions. Your tongue hangs from your mouth, your breathing becomes heavy, and your moans lewdly express pure lust as you increase your tempo. Before too long, you feel your pucker becoming more sensitive and know an orgasm is quickly approaching.");
+	player.buttChange(8,true,true,false);
+	if(player.hasCock() && player.hasVagina()) outputText("\n\nYou moan in ecstasy while your [vagina] and " + multiCockDescriptLight() + " erupt with sex juices. ");
+	else if(player.hasCock()) outputText("\n\nYou moan in ecstasy while cum spurts from your " + multiCockDescriptLight() + ". ");
+	else if(player.hasVagina()) 
+	{
+		outputText("\n\nYou moan in ecstasy while juices ");
+		if(player.wetness() >= 4) outputText("squirt");
+		else outputText("trickle");
+		outputText(" from your [vagina]. ");
+	}
+	else outputText("\n\n");
+	outputText("Your body shakes and rocks from the anal orgasm before slumping onto your back. Happily tightening around the toy with each beat of your hammering heart, you rest.");
+	outputText("\n\nSome time later, you gather your things and return to camp.");
+	dynStats("sen", 0.5, "lus=", 0);
+	statScreenRefresh();
+	doNext(13);
+}
+
