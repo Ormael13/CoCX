@@ -331,8 +331,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.4.7";
-			version = ver + " (<b>Jojospansion.</b>)";
+			ver = "0.8.4.8";
+			version = ver + " (<b>Hypnagatizing Rubi</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
