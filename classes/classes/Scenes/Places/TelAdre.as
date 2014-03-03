@@ -384,7 +384,7 @@ private function nosePierce():void {
 private function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
-	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
+	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll be fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
 	simpleChoices("Ok",chooseStud,"",0,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 private function vulvaPierce():void {
