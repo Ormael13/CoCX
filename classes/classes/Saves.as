@@ -3,6 +3,8 @@
 
 	import classes.GlobalFlags.kGAMECLASS;
 
+	import flash.filesystem.File;
+	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.events.Event;
 	import flash.net.URLRequest;
@@ -23,6 +25,9 @@ public class Saves extends BaseContent{
 	}
 
 
+CONFIG::AIR {
+public var airFile:File;
+}
 public var file:FileReference;
 public var loader:URLLoader;
 
@@ -878,10 +883,21 @@ public function openSave():void
 	// Block when running the chaos monkey
 	if (!(kGAMECLASS.monkey.run))
 	{
-		file = new FileReference();
-		file.addEventListener(Event.SELECT, onFileSelected);
-		file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-		file.browse();
+		var fileFilter:FileFilter = new FileFilter("Documents", "*.sol");
+		CONFIG::AIR
+		{
+			airFile = new File();
+			airFile.addEventListener(Event.SELECT, onFileSelected);
+			airFile.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			airFile.browseForOpen("Open", [fileFilter]);
+		}
+		CONFIG::STANDALONE
+		{
+			file = new FileReference();
+			file.addEventListener(Event.SELECT, onFileSelected);
+			file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			file.browse([fileFilter]);
+		}
 		//var fileObj : Object = readObjectFromStringBytes("");
 		//loadGameFile(fileObj);
 	}
@@ -890,9 +906,18 @@ public function openSave():void
 
 public function onFileSelected(evt:Event):void
 {
-	file.addEventListener(Event.COMPLETE, onFileLoaded);
-	file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-	file.load();
+	CONFIG::AIR
+	{
+		airFile.addEventListener(Event.COMPLETE, onFileLoaded);
+		airFile.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+		airFile.load();
+	}
+	CONFIG::STANDALONE
+	{
+		file.addEventListener(Event.COMPLETE, onFileLoaded);
+		file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+		file.load();
+	}
 }
 
 public function onFileLoaded(evt:Event):void
@@ -927,7 +952,7 @@ public function onDataLoaded(evt:Event):void
 	{
 		// I want to be able to write some debug stuff to the GUI during the loading process
 		// Therefore, we clear the display *before* calling loadGameObject
-		outputText("", true);
+		outputText("Loading save...", true);
 		trace("OnDataLoaded! - Reading data", loader, loader.data.readObject);
 		var tmpObj:Object = loader.data.readObject();
 		trace("Read in object = ", tmpObj);
