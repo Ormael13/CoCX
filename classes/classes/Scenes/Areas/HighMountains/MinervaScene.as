@@ -655,53 +655,60 @@ private function bathTimeWithMinerva():void {
 
 //SEX SCENES!!!!!!!!!
 //PC Chooses Sex from Minerva's Options:
-private function minervaSexMenu(display:Boolean = true):void {
-	if(display) {
+private function minervaSexMenu(display:Boolean = true):void
+{
+	if (display)
+	{
 		clearOutput();
 		spriteSelect(95);
 		outputText("You tell Minerva that, this time, you'd like to have sex with her.");
 		//Default, first time:
-		if(flags[kFLAGS.TIMES_MINERVA_SEXED] == 0) {
+		if (flags[kFLAGS.TIMES_MINERVA_SEXED] == 0)
+		{
 			outputText("\n\n\Minerva blushes and looks you up and down, looking a little nervous.  \"<i>Well... it's been a long time since I have been with someone, let alone someone who wasn't some domineering beast...  I guess it would be all right, some companionship would be nice...");
 			//PC cock, add: 
-			if(player.hasCock()) outputText(" just... not in my vagina, all right?  That's... special.");
+			if (player.hasCock()) outputText(" just... not in my vagina, all right?  That's... special.");
 			outputText("  Did you have anything specific in mind?");
 			//PC female, add: "
-			if(player.hasVagina()) outputText("  Would you mind how we do it?  You're the one asking, so... would you want me to fuck your ass?  Or... do you want me to try to fit between those sexy hips of yours?");
+			if (player.hasVagina()) outputText("  Would you mind how we do it?  You're the one asking, so... would you want me to fuck your ass?  Or... do you want me to try to fit between those sexy hips of yours?");
 			outputText("</i>\"");
 		}
 		//Dick Too Big - PC exceed capacity
-		else if(rand(2) == 0 && player.hasCock() && player.cockThatFits(minervaACapacity()) < 0) {
+		else if (rand(2) == 0 && player.hasCock() && player.cockThatFits(minervaACapacity()) < 0)
 			outputText("Looking at the monstrous mass of your mammoth member, Minerva blushes hard and stares at it with wide eyes.  \"<i>Oh... oh my, that... that's </i>big</i>... I'm sorry, I don't think that's going to fit inside me, how about we try something else?  I'm sure we can come up with something!</i>\"  Minerva says with confidence.");
-		}
 		//{Repeated/No romance: 
-		else if(!minervaRomanced()) {
+		else if (!minervaRomanced())
+		{
 			outputText("\n\nMinerva blushes and looks you up and down, looking a little nervous to have sex, but seemingly more comfortable with the idea.  \"<i>Well, I suppose... last time was fun and felt really good, so why not?  Was there anything specific you wanted to do?");
-			if(player.hasVagina()) outputText("  Since you don't seem to mind... would you like me to fuck your ass or to squeeze into your cute cunny?");
+			if (player.hasVagina()) outputText("  Since you don't seem to mind... would you like me to fuck your ass or to squeeze into your cute cunny?");
 			outputText("</i>\"");
 		}
 		//Romanced: 
-		else {
+		else
+		{
 			outputText("\n\nMinerva blushes and smiles at you, looking pleased that you're eager to spend some quality time with her.  \"<i>Sure, love!  I always have fun when we lie together, and I could use some of our quality time.");
 			//PC cock, add:
-			if(player.hasCock()) outputText("  Since we're together, I'll even let you have my pussy, I bet you like the sound of that!");
+			if (player.hasCock()) outputText("  Since we're together, I'll even let you have my pussy, I bet you like the sound of that!");
 			//PC female, add:
-			if(player.hasVagina()) outputText("  I'd be happy to pound that cute butt of yours and stuff your hot pussy - which would you rather have, my dear?");
+			if (player.hasVagina()) outputText("  I'd be happy to pound that cute butt of yours and stuff your hot pussy - which would you rather have, my dear?");
 			outputText("</i>\"");
 		}
 	}
 	menu();
-	if(player.hasCock() && player.cockThatFits(minervaACapacity()) >= 0) 
-		addButton(0,"FuckHerButt",fuckMinervasAsshole);
-	if(player.hasCock() && player.cockThatFits(minervaVCapacity()) >= 0 && minervaRomanced()) {
-		addButton(1,"FuckCowgirl",minervaCowgirlSex);
-		addButton(2,"RestrainFuck",fuckMinervaWithHerHandsBehindHerBack);
+	var btnIdx:int = 0;
+	if (player.hasCock() && player.cockThatFits(minervaACapacity()) >= 0)
+		addButton(btnIdx++, "FuckHerButt", fuckMinervasAsshole);
+	if (player.hasCock() && player.cockThatFits(minervaVCapacity()) >= 0 && minervaRomanced())
+	{
+		addButton(btnIdx++, "FuckCowgirl", minervaCowgirlSex);
+		addButton(btnIdx++, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
 	}
-	if(player.hasVagina()) 
-		addButton(2,"TakeHerDick",minervaLapSex);
-	addButton(3,"EatHerOut",goDownOnAHermAndLoveItYouDirtySlutYou);
-	if(player.hasCock()) addButton(4,"Get BJ",letMinervaSuckYouOff);
-	addButton(9,"Leave",repeatEncounterMinerva);
+	if (player.hasVagina())
+		addButton(btnIdx++, "TakeHerDick", minervaLapSex);
+	addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
+	if (player.hasCock())
+		addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
+	addButton(9, "Leave", repeatEncounterMinerva);
 }
 
 //4-1= sex scene 1 male/herm:  Anal
