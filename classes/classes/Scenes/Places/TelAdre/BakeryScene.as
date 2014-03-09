@@ -311,8 +311,8 @@ private function talkBakeryMenu():void {
 		}
 	}
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her “uniform” is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");
-	if(flags[kFLAGS.MET_FROSTY] != 0) addButton(3,"Frosty",kGAMECLASS.Frosty.approachFrosty);
-	else addButton(3,"PinkGirl",kGAMECLASS.approachFrosty);
+	if(flags[kFLAGS.MET_FROSTY] != 0) addButton(3,"Frosty",kGAMECLASS.telAdre.frosty.approachFrosty);
+	else addButton(3,"PinkGirl",kGAMECLASS.telAdre.frosty.approachFrosty);
 	addButton(9,"Leave",bakeryuuuuuu);
 }
 private function rubiWrapper(rubiB:int = 0):void {

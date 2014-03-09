@@ -72,8 +72,18 @@ public function frostyMainMenu():void
 	addButton(2,"x10",cupcakeBuy,10);
 	addButton(3,"x20",cupcakeBuy,20);
 	if(flags[kFLAGS.SIGNED_FROSTYS_CONTRACT] == 0) addButton(9,"Contract",getAFuckingFuckContractFromFucks);
-	else addButton(8,"Specials",frostySpecialsMenu);
-	addButton(9,"Leave",telAdreMenu);
+	else addButton(8,"Specials",frostysLimitedSpecialMenu);
+	addButton(9,"Leave",kGAMECLASS.telAdre.telAdreMenu);
+	
+}
+
+function frostySpecialsMenu():void 
+{
+	
+}
+
+function cupcakeBuy(arg:int = 1):void 
+{
 	
 }
 
@@ -98,14 +108,14 @@ public function yesIWantYourFreeSampleYouFuckingDiseasedCupcakeSlut():void
 	clearOutput();
 	outputText("You follow Frosty to her booth. She goes behind the counter and spins the menu with her fingertip and stops it with the palm of her hand. She goes back to her business while you look over the menu, the lettering and style of it has changed into something more appealing and seductive.");
 	//[Specials Menu is shown]
-	//9999
+	frostySpecialsMenu();
 }
 
 //[No]
 public function noIDontWantAFreebieDiseaseYouSlut():void {
 	clearOutput();
 	outputText("You’re too busy right now, so you deny the free service. “<i>Okeydokey, see you around [name].</i>” Frosty does a twirl on one foot and runs back to her stand. Such a nice girl.");
-	doNext(13);
+	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
 }
 
 //[No](for the contract)
@@ -114,7 +124,7 @@ public function noContractForMeSloot():void {
 	outputText("Something about signing a contract doesn’t seem right to you, especially one for cupcakes. You shake your head no; she looks a bit sad about being rejected but quickly perks back up.");
 	outputText("\n\n“<i>Well, you can still buy my tasty cupcakes. You just won’t get any perks for buying them, but eating them is a benefit in its own way. Join the BETA if you change your mind on the whole thing.</i>”");
 	outputText("\n\nYou nod at her suggestion and make your way back to the main street.");
-	//9999
+	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
 }
 
 //[Choosing Buttons 1-4]
@@ -153,11 +163,11 @@ public function noIDontWantToSignYourFuckingContractGoddamned():void
 }
 
 //[Specials](If the player has signed the contract)
-public function frostysSpecialMenu():void
+public function frostysLimitedSpecialMenu():void
 {
 	clearOutput();
 	outputText("Frosty spins the menu with a fingertip and stops it with the palm of her hand. She goes back to her business while you look over the menu, the lettering and style of it has changed into something more appealing and seductive:\n\n1. Hand – 5. points\n2. Mouth-15. Points");
-	//9999
+	frostySpecialsMenu();
 }
 
 //[Hands]
@@ -174,8 +184,8 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 	outputText("\n\nShe wraps her sticky fingers around your cock, the syrup on them is as warm as the desert sun, slick like a cunt and her grip is as tight as a virgin’s slit. Each finger takes a turn to squeeze down on your member like she is playing a flute, a cock flute. She even makes a musical “doo-dah-lee-do” sound as she continues to “play” her song. Your cock begins hardening in her hand, pushing against her grip.");
 	outputText("\n\nMaking you feel like your cock is growing in leather a strap choking it. Only when it’s fully erect does she release you, strands of the syrup still connecting her fingers to the shaft of your [cock biggest]. She stares at her “handy” work and watches it pulsing and throbbing, just asking for her to give it the releases it wants so much. She makes a little giggle, amused by your involuntary actions.");
 	outputText("\n\n“<i>Ooooh, your ");
-	if(player.biggestCockLength() < 7) output("little");
-	else output("big");
+	if(player.biggestCockLength() < 7) outputText("little");
+	else outputText("big");
 	outputText(" friend is just waiting for me to milk his cream out. Tee-hee.</i>”");
 
 	outputText("\n\nHer hands re-grip your [cock biggest] just as hard as before and she begins pumping one hand, coating your cock in the desert-hot syrup. It feels like your dick is in the hottest cunt ever and Frostys hands are its pussy walls, squeezing down your entire length in hopes of getting you to release your hot cream all over them.");
@@ -187,8 +197,8 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 	outputText("\n\n“<i>Thank you for your business, hope to see you again.</i>”");
 	outputText("\n\nYou ask her who's gonna clean the syrup off your cock. “<i>Oh my, I guess I can’t leave your ");
 
-	if(player.biggestCockLength() < 7) output("little");
-	else output("big");
+	if(player.biggestCockLength() < 7) outputText("little");
+	else outputText("big");
 	outputText(" friend all covered in the sweet goo.</i>” She licks her lips in a seductive manner. Sweet, you were able to get a free BJ from her. Frosty kneels back down, opens her mouth and puts two fingers in there? She makes a high-pitched sound that rings in your ears and in the next instant you’re both suddenly dosed in a waterfall of ice-cold water. You sit there wondering what just happened while Frosty looks up behind you and yells: “<i>Thanks Terry!!!</i>”");
 
 	outputText("\n\n“<i>You’re Welcome,</i>” a low-toned voice replies. You stand up dripping-wet while Frosty is still kneeling with a grin on face.");
@@ -233,8 +243,8 @@ public function frostyForHerms():void
 	outputText("\n\nShe lifts your cock up, giving it small strokes while holding it up, to get a look at your cunt, which is getting aroused and puffy from the stimulation from your dick. She gives your clit a light poke with one finger and holds it there, giving both your sensitive bits a light electric feeling of pleasure. Your cock growing hard in her hand and your cunt getting wet under her finger, she frees you from her grasp teasing grip and poke.");
 	outputText("\n\nYour [cock biggest] stands erect and your [vagina] drips wetness. Frosty reaches under the chair and pulls out a bottle of syrup from there. She looks at the bottle with a grin, opens it, swirls it around like a fine wine and sniffs its sweet aroma in. Then she holds the bottle over your skyward pointing cock and tilts the bottle, spilling the desert-hot syrup onto your [cockHead biggest].");
 	outputText("\n\nIt pools a little bit on the head on then spills over, flowing down your shaft and onto ");
-	if(player.balls > 0) output("your [balls]");
-	else output("your pussy lips");
+	if(player.balls > 0) outputText("your [balls]");
+	else outputText("your pussy lips");
 	outputText(". Your cock throbs and your pussy twitches as the brown ooze pleasures both you sex organs. Frosty spills the entire bottle's contents over your pleasure bits and helps spreading the masses of syrup as she grips your [cock biggest] and strokes it with enthusiasm. She lets out little giggles here and there as your cock gets messy and sticky with the sweet liquid. Faster and faster she keeps stroking you, covering your entire dick and brining you to the edge of cumming, but then she quickly releases her grip. Your cock throbs like crazy now, you can almost feel the cum about to shoot out.");
 	outputText("\n\nOne little touch would send you over the edge, but after a few seconds your hard throbbing slows down to nothing and your cum feels like it’s going back into your body.");
 	outputText("\n\n“<i>The fun would be over too soon if I just made your cock explode now and I don’t want your hungry pussy to feel left out.</i>”");
@@ -242,8 +252,8 @@ public function frostyForHerms():void
 	outputText("\n\nGeez, the least she could have done was not giving you an intense case of blue balls, damn this hurts SO much right now. “<i>Ooooh...</i>” Frosty sees the slight look of pain on your face. “Here, let me make this all better.</i>” Frosty licks the palm of the hand she used to jerk you, taking extra care to lick and suck on her fingers. She takes a look at her fingers then your cunt, then back to her fingers, back to your cunt then takes a final look at her fingers. The dim-witted nymph then launches two wet fingers into your syrup-covered pussy. So much pleasure hits you that a hard shot of pre-cum shoots from your cock.");
 	outputText("\n\nIt would have ended up in Frosty’s curly hair, but she swiftly tilts her head back and catches the pre in her mouth, not missing a beat in pushing her fingers in and out of your cunt. She may act innocent but she is one grade A pleasure slut.");
 	outputText("\n\nHer pushing two fingers into you combined with rubbing them against your G-spot makes your tongue lol out like ");
-	if(player.hasPerk("Bimbo Brains") >= 0) output("the bimbo you are");
-	else output("a bimbo");
+	if(player.findPerk(PerkLib.BimboBrains) >= 0) outputText("the bimbo you are");
+	else outputText("a bimbo");
 	outputText(". Your vision blurs as she continues, adding stroking your cock to the pleasure roll. Your [cock biggest] instantly sprays a gush of spooge out only after two strokes. You moan in ecstasy as the cum launches high into the air. Frosty quickly positions the empty syrup bottle where the cum would land and most of it spills into the bottle. She lets go of your softening member and pushes a finger against your [clit], pressing and rubbing the pleasure button while digging two fingers into your fuck-hole, rubbing them against your sweet spot.");
 
 	outputText("\n\nShe keeps simultaneously rubbing both of your cunt’s weak spots until your cock grows hard again from the stimulation. Her clit-rubbing hand goes back to stroking your cock, Which is now damp with a hot mix of your cunt juice and her sweet syrup and somehow the thought about being pleasured by your own fuck juice makes you raging hard and eager to cum again.");
@@ -433,7 +443,7 @@ function analWithACupcakeSloot():void
 {
 	clearOutput();
 	//(If player has a cock, they are presented with this option)
-	if(player.hasCock())
+	if(pc.hasCock())
 	{
 		outputText("“<i>So you wanna be the pitcher or the catcher?</i>” she ask with devilish smile. What the hell is that suppose to mean?");
 		//[pitcher?]  [catcher?]

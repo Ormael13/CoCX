@@ -1053,7 +1053,7 @@ public static const TIMES_TALKED_WITH_JOJO:int                                  
 public static const TIMES_TRAINED_WITH_JOJO:int                                   	= 1045; // Number of times the player has trained with Jojo
 public static const UNLOCKED_JOJO_TRAINING:int                                   	= 1046;
 public static const MET_FROSTY:int                                   = 1047;
-public static const UNKNOWN_FLAG_NUMBER_01048:int                                   = 1048;
+public static const SIGNED_FROSTYS_CONTRACT:int                                   = 1048;
 public static const UNKNOWN_FLAG_NUMBER_01049:int                                   = 1049;
 public static const UNKNOWN_FLAG_NUMBER_01050:int                                   = 1050;
 public static const UNKNOWN_FLAG_NUMBER_01051:int                                   = 1051;
