@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places{
+﻿package classes.Scenes.Places {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -16,6 +16,7 @@
 		public var cotton:Cotton = new Cotton();
 		public var dominika:Dominika = new Dominika();
 		public var edryn:Edryn = new Edryn();
+		public var frosty:Frosty = new Frosty();
 		public var heckel:Heckel = new Heckel();
 		public var ifris:Ifris = new Ifris();
 		public var jasun:Jasun = new Jasun();
@@ -32,6 +33,7 @@
 
 		public function TelAdre()
 		{
+			
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;

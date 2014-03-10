@@ -1052,10 +1052,10 @@ public static const FERRET_BAD_END_WARNING:int                           	      
 public static const TIMES_TALKED_WITH_JOJO:int                                   	= 1044; // Number of times the player has talked with Pure Jojo.
 public static const TIMES_TRAINED_WITH_JOJO:int                                   	= 1045; // Number of times the player has trained with Jojo
 public static const UNLOCKED_JOJO_TRAINING:int                                   	= 1046;
-public static const UNKNOWN_FLAG_NUMBER_01047:int                                   = 1047;
-public static const UNKNOWN_FLAG_NUMBER_01048:int                                   = 1048;
-public static const UNKNOWN_FLAG_NUMBER_01049:int                                   = 1049;
-public static const UNKNOWN_FLAG_NUMBER_01050:int                                   = 1050;
+public static const MET_FROSTY:int                                   = 1047;
+public static const SIGNED_FROSTYS_CONTRACT:int                                   = 1048;
+public static const FROSTY_POINTS:int                                   = 1049;
+public static const SEEN_GENDERLESS_FROSTY_REJECTION:int                                   = 1050;
 public static const UNKNOWN_FLAG_NUMBER_01051:int                                   = 1051;
 public static const UNKNOWN_FLAG_NUMBER_01052:int                                   = 1052;
 public static const UNKNOWN_FLAG_NUMBER_01053:int                                   = 1053;
