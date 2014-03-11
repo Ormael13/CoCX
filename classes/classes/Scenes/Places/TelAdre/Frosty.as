@@ -243,7 +243,7 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 		//[Player is back at camp]}
 	}
 	//[If player is female]
-	else if(player.hasVagina())
+	else if(player.hasVagina() && !player.hasCock())
 	{
 		outputText("“<i>Okay, one dig-dug comin right up.</i>” she giggles at her own name for a fingering. She ducks under the table and pulls up a big, fancy cushioned chair that looks like it belongs to a noble and also shouldn’t be able to fit in the tiny space under her booth. She throws the chair right next to her stand and it lands perfectly, hardly making a sound. In one moment Frosty just disappears and reappears on the chair, sitting on its arm and waving her hand over to the seat, gesturing for you to sit. You follow her gesture and take a seat in the comfy chair, just sitting there makes you feel like the ruler of a land. Placing your arms on the armrests, you feel like a boss.");
 		outputText("\n\nFrosty has moved from the armrest and is now pulling at the bottom half of your [armor]. With one quick hard tug, she exposes your [butt] and [vagina] to the busy city street, a few people stop to gawk at the both of you. She places her thumbs on both sides of your cunt and stretches the lips wide and hard.");
@@ -332,7 +332,7 @@ public function useFrostysMouth():void
 		//[Player is back at camp]
 	}
 	//[If player is female]
-	else if(player.hasVagina())
+	else if(player.hasVagina() && !player.hasCock())
 	{
 		outputText("“<i>One sundae-eating coming right up!</i>\" You roll your eyes at the comment as Frosty blurs away her display then vaults over the counter with ease and is suddenly behind you. You quickly turn around just as she pushes your backside against her stand and falls to her knees. She’s about to pull the lower half of your [armor] off but decides not to. You wonder what she’s going to do as she stretches her jaw and sticks out her tongue for a few minutes. After she’s done with that, she cracks her neck and looks at your pants, like it’s a challenge. Then, in an instant, she’s able to undo your [armor] with just her tongue and teeth and has you standing waist-down naked. Now you have second thoughts of having any of your naughty bits near that mouth. Just before Frosty starts her mouth sex, she raises a finger like she’s remembering something and quickly crawls around to the back of the booth, wiggling her tooshie in the air.");
 		outputText("\n\nYou hear her rummaging under the counter and then she’s suddenly back in front of you, did she even crawl back around? In her hands is a yellow bottle shaped like a bee-girl and a thin black rope. She plops back down on her ass with her boobs doing a little jiggle when she lands. She holds the black rope up and tells you what it’s for.");
