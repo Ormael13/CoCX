@@ -3131,7 +3131,7 @@ package classes.Scenes.NPCs
 			if(player.hasItem(armors.C_CLOTH)) {
 				clothes = 2461;
 			}
-			if(player.hasItem(armors.S_SWMWR) && flags[kFLAGS.AMILY_OWNS_BIKINI] == 0 && player.hasCock() && !amilyCorrupt()) {
+			if(player.hasItem(armors.S_SWMWR) && flags[kFLAGS.AMILY_OWNS_BIKINI] == 0 && player.hasCock() && player.cockThatFits(61) >= 0 && !amilyCorrupt()) {
 				clothesT = "Bikini";
 				outputText("You could give her a bikini, then invite her for a swim in the stream to show it off.\n\n");
 				clothes = 3960;
@@ -7274,6 +7274,7 @@ package classes.Scenes.NPCs
 		//Go 'Swimming'
 		private function amilySwimFuckPartII():void {
 			var x:Number = player.cockThatFits(61);
+			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
 			outputText("The stream isn't far away, and the two of you reach it in practically no time.  The journey is slowed by the occasional teasing touches and whispered compliments between you and your lover.  Amily is giggling and flushed by the time you arrive, fanning herself with her hand even though it isn't THAT hot out.  Turning to face you, she sensually glides up against your [armor] and begins to rub your ");
 			if(player.hasCock()) outputText("package");
