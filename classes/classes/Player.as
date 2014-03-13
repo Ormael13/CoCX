@@ -1263,7 +1263,7 @@ use namespace kGAMECLASS;
 		{
 			return [StatusAffects.KnowsArouse,StatusAffects.KnowsHeal,StatusAffects.KnowsMight,StatusAffects.KnowsCharge,StatusAffects.KnowsBlind,StatusAffects.KnowsWhitefire]
 					.filter(function(item:StatusAffectType,index:int,array:Array):Boolean{
-						return this.findStatusAffect(item)>0;},this)
+						return this.findStatusAffect(item)>=0;},this)
 					.length;
 		}
 
