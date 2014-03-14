@@ -1,5 +1,4 @@
-#!/bin/bash 
-
+#!/bin/bash
 
 # This is one of several utility scripts used by Fake-Name's automated build setup
 # to automatically create compiled versions of the CoC codebase
@@ -52,7 +51,7 @@ echo Current SWF file name = $SWF_NAME
 
 /bin/sed -i -r "s/<content>CoC.*\.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
 
-
+echo Done. Building android package.
 
 $ADT \
 -package \
@@ -64,3 +63,22 @@ $ADT \
 ./devTools/application.xml \
 -C ../binRepo . \
 -C ./devTools/icons/android .
+
+
+## Fuck you Adobe. They no longer support air on linux. Assholes.
+## If you uncomment the below, it *may* build a air iOS package.
+
+# echo Android package built. Building iOS package.
+
+# $ADT \
+# -package \
+# -target ipa-ad-hoc \
+# -storetype pkcs12 \
+# -keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
+# -storepass testpassword \
+# -provisioning-profile ./devTools/cert/Fake.mobileprovision \
+# ../binRepo/CoC-${COC_VERSION}.ipa \
+# ./devTools/application.xml \
+# -C ../binRepo . \
+# -C ./devTools/icons/ios .
+

@@ -1274,6 +1274,10 @@ use namespace kGAMECLASS;
 
 		public function shrinkTits():void
 		{
+			if (flags[kFLAGS.HYPER_HAPPY])
+			{
+				return;
+			}
 			if(breastRows.length == 1) {
 				if(breastRows[0].breastRating > 0) {
 					//Shrink if bigger than N/A cups
@@ -1798,6 +1802,11 @@ use namespace kGAMECLASS;
 		}
 
 		public function lengthChange(temp2:Number, ncocks:Number):void {
+
+			if (temp2 < 0 && flags[kFLAGS.HYPER_HAPPY])  // Early return for hyper-happy cheat if the call was *supposed* to shrink a cock.
+			{
+				return;
+			}
 			//DIsplay the degree of length change.
 			if(temp2 <= 1 && temp2 > 0) {
 				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " has grown slightly longer.", false);

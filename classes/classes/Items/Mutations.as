@@ -506,86 +506,89 @@
 					changes++;
 				}
 			}
-			//Kills vagina size (and eventually the whole vagina)
-			if (player.vaginas.length > 0) {
-				if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_TIGHT) {
-					//tighten that bitch up!
-					outputText("\n\nYour " + vaginaDescript(0) + " clenches up painfully as it tightens up, becoming smaller and tighter.", false);
-					player.vaginas[0].vaginalLooseness--;
-				}
-				else {
-					outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + vaginaDescript(0) + " disappears forever</b>!", false);
-					//Goodbye womanhood!
-					player.removeVagina(0, 1);
-					if (player.cocks.length == 0) {
-						outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>", false);
-						player.createCock();
-						player.cocks[0].cockLength = player.clitLength + 2;
-						player.cocks[0].cockThickness = 1;
-						player.cocks[0].cockType = CockTypesEnum.HORSE;
-						player.clitLength = .25;
+			if (!flags[kFLAGS.HYPER_HAPPY])
+			{
+				//Kills vagina size (and eventually the whole vagina)
+				if (player.vaginas.length > 0) {
+					if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_TIGHT) {
+						//tighten that bitch up!
+						outputText("\n\nYour " + vaginaDescript(0) + " clenches up painfully as it tightens up, becoming smaller and tighter.", false);
+						player.vaginas[0].vaginalLooseness--;
 					}
-					player.genderCheck();
+					else {
+						outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + vaginaDescript(0) + " disappears forever</b>!", false);
+						//Goodbye womanhood!
+						player.removeVagina(0, 1);
+						if (player.cocks.length == 0) {
+							outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>", false);
+							player.createCock();
+							player.cocks[0].cockLength = player.clitLength + 2;
+							player.cocks[0].cockThickness = 1;
+							player.cocks[0].cockType = CockTypesEnum.HORSE;
+							player.clitLength = .25;
+						}
+						player.genderCheck();
+					}
+					changes++;
 				}
-				changes++;
-			}
-			//-Remove extra breast rows
-			if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
-				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
-				if (player.bRows() >= 3) outputText("abdomen", false);
-				else outputText("chest", false);
-				outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ", false);
-				if (player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
-				else outputText(player.skinTone + " " + player.skinDesc, false);
-				outputText(" remains. <b>You've lost a row of breasts!</b>", false);
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
-			}
-			//Shrink boobages till they are normal
-			else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
-				//Single row
-				if (player.breastRows.length == 1) {
-					//Shrink if bigger than B cups
-					if (player.breastRows[0].breastRating >= 1) {
-						temp = 1;
-						player.breastRows[0].breastRating--;
-						//Shrink again if huuuuge
-						if (player.breastRows[0].breastRating > 8) {
-							temp++;
+				//-Remove extra breast rows
+				if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+					changes++;
+					outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
+					if (player.bRows() >= 3) outputText("abdomen", false);
+					else outputText("chest", false);
+					outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ", false);
+					if (player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
+					else outputText(player.skinTone + " " + player.skinDesc, false);
+					outputText(" remains. <b>You've lost a row of breasts!</b>", false);
+					dynStats("sen", -5);
+					player.removeBreastRow(player.breastRows.length - 1, 1);
+				}
+				//Shrink boobages till they are normal
+				else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+					//Single row
+					if (player.breastRows.length == 1) {
+						//Shrink if bigger than B cups
+						if (player.breastRows[0].breastRating >= 1) {
+							temp = 1;
 							player.breastRows[0].breastRating--;
+							//Shrink again if huuuuge
+							if (player.breastRows[0].breastRating > 8) {
+								temp++;
+								player.breastRows[0].breastRating--;
+							}
+							//Talk about shrinkage
+							if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.", false);
+							if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.", false);
+							changes++;
 						}
-						//Talk about shrinkage
-						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.", false);
-						if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.", false);
-						changes++;
-					}
 
-				}
-				//multiple
-				else {
-					//temp2 = amount changed
-					//temp3 = counter
-					temp = 0;
-					temp2 = 0;
-					temp3 = 0;
-					if (player.biggestTitSize() >= 1) outputText("\n", false);
-					while (temp3 < player.breastRows.length) {
-						if (player.breastRows[temp3].breastRating >= 1) {
-							player.breastRows[temp3].breastRating--;
-							temp2++;
-							outputText("\n", false);
-							//If this isn't the first change...
-							if (temp2 > 1) outputText("...and y", false);
-							else outputText("Y", false);
-							outputText("our " + breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.", false);
-						}
-						temp3++;
 					}
-					if (temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
-					if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
-					if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
-					if (temp2 > 0) changes++;
+					//multiple
+					else {
+						//temp2 = amount changed
+						//temp3 = counter
+						temp = 0;
+						temp2 = 0;
+						temp3 = 0;
+						if (player.biggestTitSize() >= 1) outputText("\n", false);
+						while (temp3 < player.breastRows.length) {
+							if (player.breastRows[temp3].breastRating >= 1) {
+								player.breastRows[temp3].breastRating--;
+								temp2++;
+								outputText("\n", false);
+								//If this isn't the first change...
+								if (temp2 > 1) outputText("...and y", false);
+								else outputText("Y", false);
+								outputText("our " + breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.", false);
+							}
+							temp3++;
+						}
+						if (temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
+						if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
+						if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
+						if (temp2 > 0) changes++;
+					}
 				}
 			}
 			//Boosts cock size up to 36"x5".
@@ -1166,48 +1169,52 @@
 					}
 					changes++;
 				}
-				if (rand(2) == 0 && changes < changeLimit) {
-					//Shrink B's!
-					//Single row
-					if (player.breastRows.length == 1) {
-						//Shrink if bigger than B cups
-						if (player.breastRows[0].breastRating > 3) {
-							temp = 1;
-							player.breastRows[0].breastRating--;
-							//Shrink again if huuuuge
-							if (player.breastRows[0].breastRating > 8) {
-								temp++;
-								player.breastRows[0].breastRating--;
-							}
-							//Talk about shrinkage
-							if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + breastDescript(0) + " have shrunk to a " + player.breastCup(0) + ".", false);
-							if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.", false);
-							changes++;
-						}
 
-					}
-					//multiple
-					else {
-						//temp2 = amount changed
-						//temp3 = counter
-						temp2 = 0;
-						temp3 = player.breastRows.length;
-						if (player.biggestTitSize() > 3) outputText("\n", false);
-						while (temp3 > 0) {
-							temp3--;
-							if (player.breastRows[temp3].breastRating > 3) {
-								player.breastRows[temp3].breastRating--;
-								temp2++;
-								outputText("\n", false);
-								if (temp3 < player.breastRows.length - 1) outputText("...and y", false);
-								else outputText("Y", false);
-								outputText("our " + breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.", false);
+				if (!flags[kFLAGS.HYPER_HAPPY])
+				{
+					if (rand(2) == 0 && changes < changeLimit) {
+						//Shrink B's!
+						//Single row
+						if (player.breastRows.length == 1) {
+							//Shrink if bigger than B cups
+							if (player.breastRows[0].breastRating > 3) {
+								temp = 1;
+								player.breastRows[0].breastRating--;
+								//Shrink again if huuuuge
+								if (player.breastRows[0].breastRating > 8) {
+									temp++;
+									player.breastRows[0].breastRating--;
+								}
+								//Talk about shrinkage
+								if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + breastDescript(0) + " have shrunk to a " + player.breastCup(0) + ".", false);
+								if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.", false);
+								changes++;
 							}
+
 						}
-						if (temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
-						if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
-						if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
-						if (temp2 > 0) changes++;
+						//multiple
+						else {
+							//temp2 = amount changed
+							//temp3 = counter
+							temp2 = 0;
+							temp3 = player.breastRows.length;
+							if (player.biggestTitSize() > 3) outputText("\n", false);
+							while (temp3 > 0) {
+								temp3--;
+								if (player.breastRows[temp3].breastRating > 3) {
+									player.breastRows[temp3].breastRating--;
+									temp2++;
+									outputText("\n", false);
+									if (temp3 < player.breastRows.length - 1) outputText("...and y", false);
+									else outputText("Y", false);
+									outputText("our " + breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.", false);
+								}
+							}
+							if (temp2 == 2) outputText("\nYou feel so much lighter after the change.", false);
+							if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.", false);
+							if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.", false);
+							if (temp2 > 0) changes++;
+						}
 					}
 				}
 			}
@@ -1409,7 +1416,7 @@
 			//Increase pussy wetness or grow one!!
 			else if (rando > 75 && rando < 90) {
 				//Shrink cawk
-				if (player.cocks.length > 0) {
+				if (player.cocks.length > 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 					outputText("\n\n", false);
 					temp = 0;
 					temp2 = player.cocks.length;
@@ -2325,7 +2332,7 @@
 				changes++;
 			}
 			//-Remove extra breast rows
-			if (changes < changeLimit && player.bRows() > 2 && rand(3) == 0) {
+			if (changes < changeLimit && player.bRows() > 2 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				changes++;
 				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
 				if (player.bRows() >= 3) outputText("abdomen", false);
@@ -3254,7 +3261,7 @@
 				dynStats("cor", temp / 10);
 			}
 			//Sex bits - Duderiffic
-			if (player.totalCocks() > 0 && rand(2) == 0) {
+			if (player.totalCocks() > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				//If the player has at least one dick, decrease the size of each slightly,
 				outputText("\n\n", false);
 				temp = 0;
@@ -3826,7 +3833,7 @@
 				outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.", false);
 			}
 			//Shrink primary dick to no longer than 12 inches
-			else if (player.totalCocks() == 1 && rand(2) == 0 && changes < changeLimit) {
+			else if (player.totalCocks() == 1 && rand(2) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
 				if (player.cocks[0].cockLength > 12) {
 					changes++;
 					var temp3:Number = 0;
@@ -4665,7 +4672,7 @@
 				changes++;
 			}
 			//Shrink the boobalies down to A for men or C for girls.
-			if (changes < changeLimit && rand(4) == 0) {
+			if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				temp2 = 0;
 				temp3 = 0;
 				//Determine if shrinkage is required
@@ -4715,7 +4722,7 @@
 				changes++;
 			}
 			//Cat penorz shrink
-			if (player.catCocks() > 0 && rand(3) == 0 && changes < changeLimit) {
+			if (player.catCocks() > 0 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
 				//loop through and find a cat wang.
 				temp = 0;
 				for (var j:Number = 0; j < (player.cockTotal()); j++) {
@@ -5703,7 +5710,7 @@
 				player.genderCheck();
 			}
 			//-Remove extra breast rows
-			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0) {
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				changes++;
 				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
 				if (player.breastRows.length >= 3) outputText("abdomen", false);
@@ -6293,7 +6300,7 @@
 				changes++;
 			}
 			//-Remove breast rows over 2.
-			if (changes < changeLimit && player.bRows() > 2 && rand(3) == 0) {
+			if (changes < changeLimit && player.bRows() > 2 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				changes++;
 				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
 				if (player.bRows() >= 3) outputText("abdomen", false);
@@ -8536,7 +8543,7 @@
 			//- Ferret Fruit may be randomly found while exploring the plains.
 			//- Upon finding Ferret Fruit: “While searching the plains, you find an odd little tree with a curved trunk. The shape of its fruit appears to mimic that of the tree. A few of the fruits seem to have fallen off. You brush the dirt off of one of the fruits before placing in in your (x) pouch. (if there is no room in your inventory, you get the generic option to use now or abandon)
 			//- If you hover over the fruit in your inventory, this is its description:  “This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.”
-			//-Upon eating the fruit: 
+			//-Upon eating the fruit:
 			clearOutput();
 			outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
 
@@ -8564,7 +8571,7 @@
 			{
 				flags[kFLAGS.FERRET_BAD_END_WARNING] = 0;
 			}
-			
+
 			var changes:int = 0;
 			var changeLimit:int = 1;
 			var temp:int = 0;
@@ -8574,7 +8581,7 @@
 			if(rand(3) == 0) changeLimit++;
 
 			//Ferret Fruit Effects
-			//- + Thin: 
+			//- + Thin:
 			if(player.thickness > 15 && changes < changeLimit && rand(3) == 0)
 			{
 				outputText("\n\nEach movement feels a tiny bit easier than the last.  Did you just lose a little weight!? (+2 thin)");
@@ -8609,8 +8616,9 @@
 				if(player.buttRating > 23) player.buttRating--;
 				changes++;
 			}
+
 			//-If male with breasts or female/herm with breasts > B cup:
-			if((player.biggestTitSize() > 2 || (player.hasCock() && player.biggestTitSize() >= 1)) && rand(2) == 0 && changes < changeLimit) 
+			if(!flags[kFLAGS.HYPER_HAPPY] && (player.biggestTitSize() > 2 || (player.hasCock() && player.biggestTitSize() >= 1)) && rand(2) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cup your tits as they begin to tingle strangely.  You can actually feel them getting smaller in your hands!");
 				for(x = 0; x < player.bRows(); x++)
@@ -8634,17 +8642,17 @@
 				}
 				if(temp >= 0 && rand(2) == 0 && changes < changeLimit)
 				{
-					if(player.cocks[temp].cockLength > 6)
+					if(player.cocks[temp].cockLength > 6 && !flags[kFLAGS.HYPER_HAPPY])
 					{
 						outputText("\n\nA pinching sensation racks the entire length of your " + cockDescript(temp) + ".  Within moments, the sensation is gone, but it appears to have become smaller.");
 						player.cocks[temp].cockLength--;
 						if(rand(2) == 0) player.cocks[temp].cockLength--;
 						if(player.cocks[temp].cockLength >= 9) player.cocks[temp].cockLength -= rand(3) + 1;
-						if(player.cocks[temp].cockLength/6 >= player.cocks[temp].cockThickness) 
+						if(player.cocks[temp].cockLength/6 >= player.cocks[temp].cockThickness)
 						{
 							outputText("  Luckily, it doen’t seem to have lost its previous thickness.");
 						}
-						else 
+						else
 						{
 							player.cocks[temp].cockThickness = player.cocks[temp].cockLength/6;
 						}
@@ -8653,7 +8661,7 @@
 				}
 			}
 			//-If the PC has quad nipples:
-			if(player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) 
+			if(player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nA tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
 				for(x = 0; x < player.bRows(); x++)
@@ -8669,7 +8677,7 @@
 				player.gills = false;
 				changes++;
 			}
-			//If the PC has tentacle hair: 
+			//If the PC has tentacle hair:
 			if(player.hairType == HAIR_ANEMONE && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYour head feels strange as the tentacles you have for hair begin to recede back into your scalp, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
@@ -8687,7 +8695,7 @@
 				player.hairType = 0;
 				changes++;
 			}
-			//If the PC has four eyes: 
+			//If the PC has four eyes:
 			if(player.eyeType == EYES_FOUR_SPIDER_EYES && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
@@ -8770,11 +8778,11 @@
 				else if(player.tailType == TAIL_TYPE_RABBIT) outputText("\n\nYou feel a pressure at the base of your tiny, poofy bunny tail as it begins to lengthen, gaining at least another foot in length.  <b>You now have a ferret tail!</b>");
 				//If tail is reptilian/draconic, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_LIZARD) outputText("\n\nYou reach a hand behind yourself to rub at your backside as your tail begins to twist and warp, becoming much thinner than before.  It then sprouts a thick coat of fur.  <b>You now have a ferret tail!</b>");
-				//If tail is cow, has ferret ears: 
+				//If tail is cow, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_COW) outputText("\n\nYour tail begins to itch slightly as the poof at the end of your tail begins to spread across its entire surface, making all of its fur much more dense than it was before. It also loses a tiny bit of its former length. <b>You now have a ferret tail!</b>");
 				//If tail is cat, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_CAT) outputText("\n\nYour tail begins to itch as its fur becomes much denser than it was before.  It also loses a tiny bit of its former length.  <b>You now have a ferret tail!</b>");
-				//If tail is dog, has ferret ears: 
+				//If tail is dog, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_DOG) outputText("\n\nSomething about your tail feels... different.  You reach behind yourself, feeling it.  It feels a bit floppier than it was before, and the fur seems to have become a little more dense.  <b>You now have a ferret tail!</b>");
 				//If tail is kangaroo, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_KANGAROO) outputText("\n\nYour tail becomes uncomfortably tight as the entirety of its length begins to lose a lot of its former thickness.  The general shape remains tapered, but its fur has become much more dense and shaggy.  <b>You now have a ferret tail!</b>");
@@ -8790,18 +8798,18 @@
 				player.tailType = TAIL_TYPE_FERRET;
 				changes++;
 			}
-			//If naga, has ferret ears: 
+			//If naga, has ferret ears:
 			//(NOTE: this is the only exception to the legs coming after the tail, as the ferret tail will only go away right after it appears because of your snake lower half)
 			else if(player.isNaga() && player.earType == EARS_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a snake.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 				changes++;
 				player.lowerBody = LOWER_BODY_FERRET;
-			}	
+			}
 			//If legs are not ferret, has ferret ears and tail
 			if(player.lowerBody != LOWER_BODY_FERRET && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
-				//-If centaur, has ferret ears and tail: 
+				//-If centaur, has ferret ears and tail:
 				if(player.isTaur()) outputText("\n\nYou scream in agony as a horrible pain racks your entire horse lower half.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a horse.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 
 				outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
