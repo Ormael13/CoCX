@@ -295,7 +295,8 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 	}
 	frostyPoints(-5);
 	//[Player is back at camp]
-	dynStats("sen", -1, "lus=", 0);
+	dynStats("sen", -1);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -370,7 +371,8 @@ public function useFrostysMouth():void
 	}
 	frostyPoints(-15);
 	//[Player is back at camp]
-	dynStats("sen", -1, "lus=", 0);
+	dynStats("sen", -1);
+	player.orgasm();
 	doNext(13);
 }
 
