@@ -1839,14 +1839,31 @@ private function yvonneFlirt():void {
 	clearOutput();
 	outputText("You step closer, glancing from her bulging, barely contained tits to her pouting lips and expressive, violet eyes.  A shock of sweat-matted auburn hair obscures part of her face, but the tall, buxom blacksmith nervously brushes it aside as she watches.  Once you're close enough to touch, you quietly and sincerely proclaim, \"<i>You're the most beautiful piece of craftsmanship in this entire store.</i>\"");
 	outputText("\n\nYvonne steps back, and you swear you can see a blush blooming through her fur, a fiery glow of embarrassment that spreads to the upper curve of her immense mammaries.  She folds her arms over her apron, unintentionally smushing those gigantic tits closer together and deepening her cleavage into a canyon. An immense sigh causes the plush plateau to sway pendulously as Yvonne answers, \"<i>");
-	dynStats("lus", (10+player.lib/10));
-	if(!flags[kFLAGS.LOW_STANDARDS_FOR_ALL] && (player.cockTotal() == 0 || player.tallness > 65 || player.cockThatFits(75) == -1))
+	dynStats("lus", (10 + player.lib / 10));
+	
+	// Brain no want to work out the boolean logic shit here, broken out to ensure it will work as intended.
+	if (player.cockTotal() == 0)
 	{
 		outputText("Sorry, but you don't look like you'd be much fun.");
 		outputText("</i>\"");
 		doNext(armorShop);
 		return;
 	}
+	else if (player.tallness > 65 && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+	{
+		outputText("Sorry, but you don't look like you'd be much fun.");
+		outputText("</i>\"");
+		doNext(armorShop);
+		return;
+	}
+	else if (player.cockThatFits(75) == -1 && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+	{
+		outputText("Sorry, but you don't look like you'd be much fun.");
+		outputText("</i>\"");
+		doNext(armorShop);
+		return;
+	}
+	
 	if(flags[kFLAGS.YVONNE_FUCK_COUNTER] == 0) outputText("Well, I could use a quick fuck.  If you meant what you said, go change the sign to say 'out' please.");
 	else outputText("You want to go again, huh?  I do love working up a sweat...");
 	outputText("</i>\"");
