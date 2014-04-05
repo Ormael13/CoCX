@@ -68,8 +68,6 @@
 	import flash.utils.ByteArray;
 	import flash.system.Capabilities;
 	import flash.display.Sprite;
-	import fl.transitions.Tween;
-	import fl.transitions.easing.None;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -553,27 +551,21 @@
 			_updateHack.y = 799;
 		}
 
-		private var updateToggleState:Boolean = false;
-
 		public function forceUpdate():void
 		{
-			updateToggleState != updateToggleState;
+			_updateHack.x = 999;
+			_updateHack.addEventListener(Event.ENTER_FRAME, moveHackUpdate);
+		}
 
-			var startPos:int;
-			var endPos:int;
-
-			if (updateToggleState == false)
+		public function moveHackUpdate(e:Event):void
+		{
+			_updateHack.x -= 84;
+			
+			if (_updateHack.x < 0)
 			{
-				startPos = 999;
-				endPos = 0;
+				_updateHack.x = 0;
+				_updateHack.removeEventListener(Event.ENTER_FRAME, moveHackUpdate);
 			}
-			else
-			{
-				startPos = 0;
-				endPos = 999;
-			}
-
-			var tw:Tween = new Tween(_updateHack, "x", None.easeNone, startPos, endPos, 12, false);
 		}
 	}
 }
