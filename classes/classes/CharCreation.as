@@ -1,6 +1,7 @@
 ﻿package classes{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armors.GooArmor;
 	import classes.Items.WeaponLib;
 
 	import coc.view.MainView;
@@ -156,11 +157,21 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Lets get this bitch started
 	gameState = 0;
 	//NG+ Clothes reset
-	if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] + flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) {
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] + flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) 
+	{
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0;
-		player.armor= oldPlayer.armor;
+		
+		if (!(oldPlayer.armor is GooArmor))
+		{
+			player.armor = oldPlayer.armor;
+		}
+		else
+		{
+			player.setArmorHiddenField(armors.C_CLOTH);
+		}
+			
 		player.weapon= oldPlayer.weapon;
 	}
 	//Clothes clear
