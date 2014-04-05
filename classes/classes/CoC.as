@@ -67,6 +67,9 @@
 	import flash.text.*;
 	import flash.utils.ByteArray;
 	import flash.system.Capabilities;
+	import flash.display.Sprite;
+	import fl.transitions.Tween;
+	import fl.transitions.easing.None;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -182,6 +185,9 @@
 		public var telAdre:TelAdre = new TelAdre();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
+
+		// Force updates in Pepper Flash ahuehue
+		private var _updateHack:Sprite = new Sprite();
 
 		// Other scenes
 
@@ -529,15 +535,45 @@
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
 
-
 			this.addFrameScript( 0, this.run );
 		}
-
 
 		public function run():void
 		{
 			mainMenu();
 			this.stop();
+
+			_updateHack.name = "wtf";
+			_updateHack.graphics.beginFill(0xFF0000, 1);
+			_updateHack.graphics.drawRect(0, 0, 2, 2);
+			_updateHack.graphics.endFill();
+
+			stage.addChild(_updateHack);
+			_updateHack.x = 999;
+			_updateHack.y = 799;
+		}
+
+		private var updateToggleState:Boolean = false;
+
+		public function forceUpdate():void
+		{
+			updateToggleState != updateToggleState;
+
+			var startPos:int;
+			var endPos:int;
+
+			if (updateToggleState == false)
+			{
+				startPos = 999;
+				endPos = 0;
+			}
+			else
+			{
+				startPos = 0;
+				endPos = 999;
+			}
+
+			var tw:Tween = new Tween(_updateHack, "x", None.easeNone, startPos, endPos, 12, false);
 		}
 	}
 }

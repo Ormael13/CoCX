@@ -114,6 +114,7 @@ public function speech(output:String, speaker:String):void {
 
 	
 public function clearOutput():void {
+	forceUpdate();
 	currentText = "";
 	mainView.clearOutputText();
 }
