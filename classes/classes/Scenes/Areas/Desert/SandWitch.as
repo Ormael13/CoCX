@@ -9,6 +9,11 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			if (player.findStatusAffect(StatusAffects.StoneLust))
+			{
+				player.removeStatusAffect(StatusAffects.StoneLust);
+			}
+			
 			if (player.lust >= 33){
 				game.desert.sandWitchScene.beatSandwitch();
 			} else {
@@ -27,7 +32,7 @@
 				game.desert.sandWitchScene.sandwitchRape();
 			}
 		}
-
+		
 		public function SandWitch()
 		{
 			trace("SandWitch Constructor!");
