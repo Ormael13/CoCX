@@ -443,7 +443,8 @@ private function fuckFollowerSophie():void {
 	outputText("  Then, you black out, with your " + cockDescript(x));
 	if(y >= 0) outputText(" and " + cockDescript(y));
 	outputText(" still pulsing in ecstasy.  It was such a good cum...");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	if(sophieBimbo.sophieIsInSeason()) sophieBimbo.sophiePregChance();
 	menu();
 	addButton(0,"Next",sophieVagFollowerFollowup);
@@ -549,7 +550,8 @@ private function sophieBlowsSixtyNine():void {
 	//8 hours lust stick
 	sophieScene.luststickApplication(8);
 	//+10 lust
-	dynStats("sen", 1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 1);
 	dynStats("lus", 10);
 	doNext(13);
 }
@@ -607,7 +609,8 @@ private function forceSophieBlowjob():void {
 	outputText("</i>\"");
 	
 	outputText("\n\nYou get dressed with a self-satisfied sigh.");
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	doNext(13);
 }
 
@@ -700,7 +703,8 @@ public function sophieSmallDongTeases():void {
 	outputText("mess you made, wondering why you enjoyed that so much.");
 	
 	flags[kFLAGS.TIMES_MORNING_SOPHIE_FEMDOMMED]++;
-	dynStats("lib", -1, "sen", 3, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", -1, "sen", 3);
 	doNext(1);
 }
 
@@ -807,7 +811,7 @@ private function sophieSpecial():void {
 	outputText("\n\nIndeed, the intensity of her cunt quivering and pulsing around your cum-spewing member is too much and you black out for a moment, waking up with her tit in your mouth, your fingers in her cunt as she drips your cum everywhere.  She's still stroking your head as she cuddles up to you, possessively.");
 	
 	outputText("\n\nYou feel like you may need to rest a few hours.");
-	dynStats("lus=", 0);
+	player.orgasm();
 	if(sophieBimbo.sophieIsInSeason()) sophieBimbo.sophiePregChance();
 	fatigue(15);
 	doNext(13);
@@ -1023,7 +1027,7 @@ private function phaseTwoOfIncest(daughter:int):void {
 	outputText("\n\nFor nearly an hour you lay there, cuddling, kissing and stroking your daughter's body as she hogs you all to herself.  Despite how comfortable it is to cuddle with your daughter like this, you have to pull yourself away from her curvaceous, cock-pleasing body.  She can't help but pout as you pull away, clearly wanting to spend more time with her beloved " + player.mf("father","mother") + ".  Not wanting to leave her so disappointed, you reach around and give her a spank on the ass and pull her close to you, kissing her once more before promising to spend more time with her later.  With a smile, she giggles and nods, her mind happily thinking about the next time you will spend some quality time with her.");
 	//pass time 1 hour//
 	//return PC to camp interface//
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 }

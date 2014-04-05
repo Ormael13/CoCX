@@ -775,8 +775,8 @@ private function fuckMinervasAsshole():void {
 	}
 	//PC returns to main camp menu
 	flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
-	player.resetDickEjaculateTimer();
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -877,8 +877,8 @@ private function minervaCowgirlSex():void {
 	//Romanced ending:
 	else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon; I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
 	flags[kFLAGS.TIMES_MINERVA_COWGIRLED]++;
-	player.resetDickEjaculateTimer();
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -965,8 +965,8 @@ private function minervaLapSex():void {
 	else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
 	player.slimeFeed();
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
-	player.resetDickEjaculateTimer();
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1119,8 +1119,7 @@ private function letMinervaSuckYouOff():void {
 	
 	outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence.  Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go.  Pulling away from the siren you promise to return and visit her soon.");
 	//PC returns to camp.
-	player.resetDickEjaculateTimer();
-	dynStats("lus=", 0);
+	player.orgasm();
 
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
@@ -1185,8 +1184,8 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	
 	outputText("\n\nWith an amused grin, you give the sharky herm a pat on the rump before heading out, your hand sliding along that sexy tail of hers as you let the well-fucked woman rest.");
 	//PC returns to camp
-	dynStats("sen", -1, "lus=", 0);
-	player.resetDickEjaculateTimer();
+	dynStats("sen", -1);
+	player.orgasm();
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1263,8 +1262,8 @@ private function pcGetsEatenOutByMinerva():void {
 	outputText("\n\nWith that, you turn and start the long hike back to camp.");
 	flags[kFLAGS.MINERVA_LEZZES_OUT]++;
 	// PC returns to camp
-	dynStats("sen", -2, "lus=", 0);
-	player.resetDickEjaculateTimer();
+	dynStats("sen", -2);
+	player.orgasm();
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }

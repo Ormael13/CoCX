@@ -200,7 +200,8 @@ private function cinnabarNonHugeDickings():void {
 	if(player.cumQ() >= 1000) outputText(" and the floor mopped", false);
 	outputText(" before I can get my next customer.</i>\"\n\n", false);
 	
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 }
 	
@@ -330,7 +331,8 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	
 	outputText("Once she lets you go, you leave, and you find yourself milling over her statement about empathy for some time.", false);
 	//(-2 corruption!)
-	dynStats("sen", 3, "lus=", 0, "cor", -2);
+	player.orgasm();
+	dynStats("sen", 3, "cor", -2);
 	player.takeDamage(25);
 	doNext(13);
 }
@@ -381,7 +383,8 @@ private function cinnabarHuger():void {
 	outputText("You smile back and go get dressed; it's way past time you checked on your campsite.  As you open the door, you can hear Cinnabar humming happily and trying to clean all the mess from her sheets", false);
 	if(player.cumQ() >= 1000) outputText(", the sloshing in her belly still quite audible", false);
 	outputText(".", false);
-	dynStats("sen", -4, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -4);
 	doNext(13);
 }
 
@@ -431,7 +434,8 @@ private function cinnabarHuge():void {
 	outputText("Cinnabar looks at you over her shoulder and says, \"<i>What, you think I'd be taking " + player.mf("studs","breeders") + " like you if I couldn't really handle it?  Don't worry babe... I loved it.  You can come stretch me ANY time so long as you're hung like that!</i>\"  You smile – what a fuck – and go get dressed; it's past time you checked on your campsite.  As you depart, you can hear Cinnabar humming happily and trying to clean the sheets", false);
 	if(player.cumQ() > 500) outputText(", the sloshing in her belly still quite audible", false);
 	outputText(".", false);
-	dynStats("sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -3);
 	doNext(13);
 }
 
@@ -528,7 +532,8 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	outputText("\"<i>You're still here?  Go on, I've got a lot of cleaning up to do before my next customer!</i>\" grunts Cinnabar before returning to her task.  You run your hand through your " + hairDescript() + ", exasperated, but quite satisfied.  You'll definitely have to visit her again sometime.\n\n", false);
 	
 	outputText("While you're getting dressed, the repeated slurps and moans pause enough for Cinnabar to say, \"<i>I didn't mean to be rude... those dicks... those wonderful, plump cocks... they're a gift.  Come back soon " + player.mf("stud","baby") + ", your cream filling tastes gooood.</i>\"  She goes back to licking herself, and you can't help but have a huge grin as you walk out.", false);
-	dynStats("sen", -6, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -6);
 	doNext(13);
 }
 }

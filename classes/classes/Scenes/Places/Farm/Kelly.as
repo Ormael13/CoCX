@@ -272,7 +272,8 @@ private function breakKeltGo():void {
 			player.consumeItem(consumables.P_S_MLK,15);
 	}
 		
-	dynStats("lus=", 0, "cor", 5);
+	player.orgasm();
+	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 	doNext(13);
 }
@@ -379,7 +380,8 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nYou fuck her tits faster and faster until your [cock biggest] can't take any more boobflesh: it quivers on its own, the ultimate signal of your incoming climax.  Before you know it, you blast Kelly's face with your spooge.  A seemingly endless stream pours from your dong and paints the centaur-slut white, even moreso than before.  The few ropes that make it into her mouth are quickly swallowed down by the eager whore, and her tongue shamelessly slurps all the cum she can reach from her mouth.  She's getting addicted to your juices, wherever they come from.  A couple more days with this treatment and she'll turn into a complete cumslut, only craving your baby-batter.  This sure would be a nice change from the arrogant dick you used to see before, you think to yourself as you squeeze out the last drops of goo onto her face.");
 	
 	outputText("\n\nYou don't bother to speak anymore, just walking away as you pick up your [armor] and consider the future possibilities.  The bitch obviously enjoyed this 'lesson' more than she did last time.  Could it be that she's finally learning her true place?  Now all you need is another bunch of succubi milk, just in case the old Kelt within her stirs up in your absence...");
-	dynStats("lus=", 0, "cor", 5);
+	player.orgasm();
+	dynStats("cor", 5);
 	//consume items for 1x scene.
 	if(hasPinkEgg()) {
 		if(player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
@@ -399,7 +401,8 @@ internal function defeatKellyNDBREAKHIM():void {
 			player.consumeItem(consumables.P_S_MLK,10);
 	}
 
-	dynStats("lus=", 0, "cor", 5);
+	player.orgasm();
+	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
 	cleanupAfterCombat();
 }
@@ -485,7 +488,8 @@ internal function breakingKeltNumeroThree():void {
 	else 
 		player.consumeItem(consumables.P_S_MLK,5);
 
-	dynStats("lus=", 0, "cor", 5);
+	player.orgasm();
+	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
 	cleanupAfterCombat();
 }
@@ -563,7 +567,8 @@ private function finalKeltBreaking():void {
 	outputText("\n\n\"<i>Good girl.</i>\"");
 	
 	outputText("\n\nSatisfied, you pat Kelly's butt and walk away, still recovering from the supernatural orgasm.  Now that you've acquired a new pet, there's a whole new range of possibilities that are open for you...");
-	dynStats("lus=", 0, "cor", 8);
+	player.orgasm();
+	dynStats("cor", 8);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
 	doNext(13);
 }
@@ -795,7 +800,7 @@ private function fuckKellysCunt():void {
 	outputText(".</i>\"");
 	
 	outputText("\n\nYou slide back off, landing with a fresh spring in your step.  Then, you pick up your [armor] and head off to find Kelly's blanket - you need something to wipe all the cum and slime off your [legs] with.");
-	dynStats("lus=", 0);
+	player.orgasm();
 	kellyPreggers();
 	doNext(13);
 }
@@ -847,7 +852,7 @@ private function taurOnTaurSexKelly():void {
 	if(player.cor < 50) outputText("  You feel a little bad for her and help her up - she did just milk your dick in the way that only a centaur can.");
 	else outputText("  You snicker and walk away - she's already served her purpose.");
 	kellyPreggers();
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 
@@ -911,7 +916,8 @@ private function tentaFuckKelly():void {
 	if(player.cor < 33) outputText("but also a bit disgusted to watch such shameless, wanton behavior, ");
 	outputText("you walk away, letting the slut enjoy herself.");
 	kellyPreggers();
-	dynStats("sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -3);
 	doNext(13);
 }
 
@@ -1065,7 +1071,8 @@ private function getARimjobFromKelly():void {
 		outputText("\n\n\"<i>Th-thank you for the lesson, [Master],</i>\" she says.  She knows the drill by now; she quickly gets to her feet and then trots over to the off-white slimy mess you have created.  What a good girl.  Before she can get started you present your " + cockDescript(x) + "; she murmurs thanks for the gift and licks your oozing head spotless first before getting on with the main meal.  You rub her behind the ear as she licks away at the spent seed at your feet and then leave her to it.");
 		if(player.cumQ() >= 1000) outputText("  She is, after all, going to be here for a while.");
 	}
-	dynStats("sen", 3, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("sen", 3, "cor", 1);
 	doNext(13);
 }
 
@@ -1299,7 +1306,8 @@ private function rideKellyForPunishment():void {
 		
 		outputText("\n\n\"<i>Thank you, [Master],</i>\" she says, smiling at you devotedly.  Her voice hardens. \"<i>You were right.  I deserved that punishment, because from it I will learn to make sure you never have to do it again.  I will be the most obedient cumslut there ever was!</i>\" You smile and tell her to run along for now.  Your grin widens as you watch the girl who never learns leave.");
 	}
-	dynStats("sen", -1, "lus=", 0, "cor", .5);
+	player.orgasm();
+	dynStats("sen", -1, "cor", .5);
 	doNext(13);
 }
 
@@ -1377,7 +1385,8 @@ private function takeKellysVirginity():void {
 	else outputText("the shining juices that drip from her oh-so-equine entrance, gilding the smooth onyx lips with a slimey sheen.");
 	outputText("  Kelly has passed out in a puddle of her own making, and you leave her like that, getting dressed without a backwards glance.");
 	kellyPreggers();
-	dynStats("sen", -3, "lus=", 0, "cor", .5);
+	player.orgasm();
+	dynStats("sen", -3, "cor", .5);
 	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	doNext(13);
 }
@@ -1471,7 +1480,8 @@ private function kellyTitJob():void {
 		//High cum:
 		else outputText("\n\nYou go on and on, driven by a deep impulse to coat her with your potency, your dick flexing out string after string of jism until it aches with pleasure and you are dripping with sweat.  After what seems like minutes upon end of orgasm, you finally sigh and step back to admire your handiwork.  Kelly's face, shoulders and hair are absolutely plastered with cum, her eyes pasted shut.  As you watch her tongue emerges and does a wide circuit of her mouth, drawing in a big dollop of jizz which is then swallowed with a hum of pure contentment.\n\n\"<i>Mmm... I'm so lucky to have a [Master] who is so virile,</i>\" she purrs.  She unsticks her eyes with her fingers and gazes at you with contented pleasure as she licks them clean of oozing addiction.  \"<i>Thank you so much for giving me what I need, [Master]!</i>\" You tell her she's quite welcome as you use her braid to wipe your dick clean, climb back into your [armor], and leave her to enjoy her fix.");
 	}
-	dynStats("sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -3);
 	doNext(13);
 }
 
@@ -1509,7 +1519,8 @@ private function kellyPregSex():void {
  
 	outputText("\n\nYou grasp her generous hips and lock yourself into her cunt as it milks you with inhuman contractions. Your " + cockDescript(x) + " feels sucked in, squeezed and stretched to the point you believe it might rip.  However, this little worry is quickly drowned in a sea of never-ending ecstasy, as torrents after torrents of cum are being injected into the centauress' waiting womb; you know you won't be able to knock her up more than she already is but you've made her appear more pregnant than ever.  Kelly moans, whinnies and shudders as she absorbs more and more cum into her body until she looks ready to give birth to a full tribe.  When you're done and pull out, a fountain of various fluids spurts out of her manhandled cunt, and the slut sighs in satisfaction.  She does look more healthy than before despite having been forced to eat dirt like the whore she is.  Maybe your cum will have beneficial properties to your unborn centaur kids?");
 	
-	dynStats("sen", -4, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -4);
 	doNext(13);
 }
  
@@ -1662,7 +1673,7 @@ private function talkNHandToKelly():void {
 		
 		outputText("\n\n\"<i>Oh!  Sorry master, please excuse me.</i>\"  She bends in and sends her tongue looping and curling deliciously over your aching, oozing [cockHead] until it is gleaming.  You redress and give her a harder slap than usual on the ass as you leave.");
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 //Reward
@@ -1881,7 +1892,8 @@ private function giveKellyAppleSauce():void {
 		outputText("\"<i>That tastes better every time you make it [Master],</i>\" she purrs when you break away, gazing into your eyes lovingly.  \"<i>You should go into business with it.</i>\"  You grin at the idea and say who knows?  Maybe Mareth will eventually behave well enough to appreciate it as much as she does.  \"<i>I long for that day every moment of every day,</i>\" your slave replies fervently, stroking the hand you're holding her face with.");
 		outputText("\n\nYou dress yourself and amble back out of the stable with her before sending her on her way with a loving, jiggling swat to her boobs.");
 	}
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	flags[kFLAGS.KELLY_TIMES_APPLESAUCED]++;
 	doNext(13);
 }
@@ -2110,7 +2122,8 @@ private function kellyBJsAhoy():void {
 		
 		outputText("\n\n\"<i>See?  I'm a good girl, [Master].  Never doubt it!</i>\" she says with a wide grin, putting her arms around your waist and gazing up at you, profoundly proud of herself.  You suppose you should be mad at her for taking advantage of your out-of-control libido, but it's difficult to get really angry with a slave who sucks dick quite as well as she does.  After you've rested for a short while, you say goodbye to your cumslut centaur with a fond kiss on the forehead and a slap on the ass, before leaving the farm behind you.");
 	}
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 }
 }

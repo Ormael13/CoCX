@@ -869,7 +869,7 @@ private function feedLatexyCumIndirectly():void {
 	gooFluid(temp);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(4);
-	dynStats("lus=", 0);
+	player.orgasm();
 	doNext(13);
 }
 //Feed Lady-Cum Indirectly(F)
@@ -909,7 +909,7 @@ private function feedLatexyGirlCumIndirectly():void {
 	if(player.wetness() >= 3) temp+=5;
 	if(player.wetness() >= 4) temp+=5;
 	if(player.wetness() >= 5) temp+=5;
-	dynStats("lus=", 0);
+	player.orgasm();
 	gooFluid(temp);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(4);
@@ -1049,7 +1049,8 @@ private function feedLatexyCumDirectly():void {
 		gooFluid(temp);
 		//{Boost her happiness a tiny amount.}
 		gooObedience(5);
-		dynStats("sen", -2, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -2);
 		doNext(13);
 	}
 	//{DISOBEDIENT:}
@@ -1096,7 +1097,8 @@ private function maleDirectFeedLatexGooGoneWrong():void {
 	outputText("\n\nOrgasm slams into you with the force of a sledgehammer, turning your vision red and ringing your ears.  More wet slurps and squelches emanate from your groin as " + flags[kFLAGS.GOO_NAME] + " drinks deeper of your essence, coaxing fresh spurts of white from your thoroughly milked [balls].  As you fire your liquid bliss into her, your tired eyelids close.");
 	outputText("\n\n\"<i>You're not done yet, are you?</i>\" a sultry voice whispers, accompanied by fresh ministrations to your maleness.  \"<i>You promised to feed me, [Master], now come on, squirt in my slippery squeezes.  Give me your spunk!</i>\"  The voice begs and pleads, only silencing itself to plant itself back on your [cock biggest] again.  You lapse from conscious thought, only stirring to lift your hips high and release a fresh draught of nutrients for your greedy pet.");
 	menu();
-	dynStats("lib", .5, "sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", .5, "sen", -3);
 	addButton(0,"Next",feedCumDirectEpilogue);
 }
 //[Next]
@@ -1178,7 +1180,8 @@ private function feedLatexyGirlCumDirect():void {
 		
 		//{Boost her happiness a tiny amount.}
 		gooObedience(4);
-		dynStats("sen", -2, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -2);
 		doNext(13);
 	}
 	//{DISOBEDIENT; chose not to/could not Assert Control}
@@ -1200,7 +1203,8 @@ private function letLatexGooDrainCuntDry():void {
 	outputText("  The lurid squelches of her pumping, dildo-like limb fill the air, easily drowning out your more coherent vocalizations.  There's nothing you can do but cum for your latex goo-girl.  Nothing to do but feel pleasure and orgasm, feeding her every drop of your liquid pleasure, again and again.");
 	outputText("\n\nA whimper of protest slips out of your mouth, your [vagina] cums again, and " + flags[kFLAGS.GOO_NAME] + " drinks deeply once more.  With eyelids fluttering closed, you pass beyond conscious awareness, yielding your body to " + flags[kFLAGS.GOO_NAME] + " to claim again and again.");
 	menu();
-	dynStats("lib", .5, "sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("lib", .5, "sen", -3);
 	addButton(0,"Next",feedCumDirectEpilogueGirls);
 }
 
@@ -1242,7 +1246,8 @@ private function assertControlOverCuntDrainingLatexGoo():void {
 	else if(gooHappiness() < 66) outputText("\n\n\"<i>I'm sorry I got so forceful, [name].  I enjoy serving you... I do.</i>\"");
 	//{High happiness}
 	else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " nuzzles against you, her head coming to rest on your [chest].  \"<i>Sorry, [name]. I didn't mean to try and force you.  I love you when you're so assertive, so... dominant.</i>\"");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	gooFluid(30 + player.wetness() * 5);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(5);
@@ -1277,7 +1282,8 @@ private function tryToAssertMaleDomWhileLatexGooDrains():void {
 	//{High happiness}
 	else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " nuzzles against you, her head coming to rest on your [chest].  \"<i>Sorry, [name]. I didn't mean to try and force you.  I love you when you're so assertive, so... dominant.</i>\"");
 	temp = 30;
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	if(player.cumQ() >= 500) temp += 20;
 	gooFluid(temp);
 	//{Boost her happiness a tiny amount.}
@@ -1351,7 +1357,8 @@ private function femalePCDomFucksLatexGoo():void {
 		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " obeys, remembering the last time.  Two feet of tongue unspool from your [vagina] as she retracts it.  Her shining face obediently lowers in a bow, but you swear you can see a smile twisting the corners of her mouth.  You tell her she's a good pet, and a fresh flow of wetness escapes from her nethers.");
 		flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC]++;
 	}
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	gooFluid(5+player.wetness()*2);
 	gooObedience(5);
 	gooHappiness(2);
@@ -1448,7 +1455,8 @@ private function femalePCDomFucksLatexGooFuta():void {
 		outputText("\n\nYou nod, and then, before she dwell on her punishment, you give her a kiss.  She blushes purple afterward, giggling into her palm.");
 	}
 	outputText("  You get dressed and leave with a swagger in your step.  A smiling, solid goo-girl sits in your wake.");
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	player.slimeFeed();
 	flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC]++;
 	gooFluid(5+player.wetness()*2);
@@ -1549,7 +1557,8 @@ private function malePCDomFucksLatexGoo():void {
 	outputText("\n\nAs you get dressed, you realize your " + cockDescript(0) + " is totally clean.  It appears glossy, as if shined with spit, but there is no latex residue on it.  Somehow, her asshole must have absorbed her dried girl-cum and saliva back into her.  You didn't expect to get cleaner from anal sex, but it certainly let you end on a high note.  You get dressed with a swagger in your step and head back to the center of camp.");
 	outputText("\n\nIn your absence, a tired voice sighs, \"<i>That's... three.</i>\"");
 	temp = 15;
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	if(player.cumQ() >= 500) temp += 10;
 	if(player.cumQ() >= 1000) temp += 10;
 	if(player.cumQ() >= 1500) temp += 10;
@@ -1615,7 +1624,8 @@ private function feedLatexySomeMilk():void {
 	if(player.lactationQ() >= 8000) temp += 10;
 	gooFluid(temp);
 	fatigue(5);
-	dynStats("sen", 2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 2);
 	doNext(13);
 	
 }

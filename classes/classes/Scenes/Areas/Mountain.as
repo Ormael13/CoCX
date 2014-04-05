@@ -388,7 +388,8 @@ package classes.Scenes.Areas
 			outputText("\n\nYou awaken several hours later.  The minotaur and the cow-girl are nowhere to be seen, but your [armor] is left neatly folded next to you, along with a small bottle filled with some white liquid, most likely a gift from your \"bull\".");
 
 			outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
-			dynStats("lib", .5, "sen", -3, "lus=", 0, "cor", 1);
+			player.orgasm();
+			dynStats("lib", .5, "sen", -3, "cor", 1);
 			if (flags[kFLAGS.PC_FETISH] > 0) {
 				outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
 				dynStats("lus=", 100);

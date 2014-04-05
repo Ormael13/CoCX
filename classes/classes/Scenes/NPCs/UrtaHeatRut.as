@@ -425,7 +425,8 @@ private function soberUrtaSatingPCHeat():void {
 	urtaLove(1);
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
-	dynStats("lib",1,"sen-",2,"lus=",0);
+	player.orgasm();
+	dynStats("lib",1,"sen-",2);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	dynStats("lust=",0);

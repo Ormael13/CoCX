@@ -257,7 +257,8 @@ public function onaholeUse():void
 		else {
 			outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Reflexively, your hips begin bucking slightly, operating off pure instinct. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);
 		}
-		dynStats("sen", -.75, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -.75);
 		doNext(13);
 		return;
 	}
@@ -272,7 +273,8 @@ public function onaholeUse():void
 		outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
 		outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
 		doNext(2046);
-		dynStats("sen", -.75, "lus=", 0);
+		player.orgasm();
+		dynStats("sen", -.75);
 		return;
 	}
 	else {
@@ -283,7 +285,10 @@ public function onaholeUse():void
 		outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
 		outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
 		if(player.gender == 3) doNext(2050);
-		else dynStats("sen", -.75, "lus=", 0);
+		else {
+			player.orgasm();
+			dynStats("sen", -.75);
+		}
 		doNext(13);
 	}
 }
@@ -303,7 +308,8 @@ public function deluxeOnaholeUse():void {
 			else {
 				outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Reflexively, your hips begin bucking slightly, operating off pure instinct. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);
 			}
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 			doNext(13);
 			return;
 		}
@@ -322,7 +328,8 @@ public function deluxeOnaholeUse():void {
 			outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
 			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
 			outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 			doNext(2046);
 			return;
 		}
@@ -342,7 +349,8 @@ public function deluxeOnaholeUse():void {
 			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
 			outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
 			if(player.gender == 3) doNext(2050);
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 			doNext(13);
 			return;
 		}
@@ -359,12 +367,14 @@ public function allNaturalOnaholeUse():void {
 			//High corruption variant!
 			if(player.cor > 66) {
 				outputText("Grinning from ear to ear, you grab your 'pet' from your bag and bury your dick deep into its maw. Somewhat stunned by your zeal, the creature shifts about lethargically. You impatiently wobble your dong, shaking the creature with it, in an attempt to wake the little dick-milking bastard up. The beast eventually comes to life and begins doing the only thing it knows how to do. Securing itself to your erection and easily entering your well-stretched urethra, the creature inserts itself to begin another feeding session. Enjoying the creature's efforts to milk you of your fluids, you choose to up the ante a bit. You begin flexing your pelvic muscles to make your cock bob about. Along with the gentle pinch of pleasure your flexing gives you, the creature mistakes your self-pleasure for an attempt to dislodge it and stabs its tendril deeper into your prostate, creating an even sharper response. Throwing your head back as the pleasure washes over, you continuously flex yourself to make the beast plunder deeper inside you. Welling up with an impressive load, you grab the animal with both hands as you expertly control your ejaculation reflex. With an expertise borne from repeated self-exploration, you force feed the beast gout upon gout of your seed. The thing quickly bloats as your shots are more than a match for even its ravenous appetite. It swells quickly and releases itself from your body, obviously stuffed to the proverbial gills. Undaunted and unsatisfied, you launch the creature off your cock with another great eruption from your sex. The creature lands smartly on the ground where you quickly waddle over to unload the rest of your pent-up cum all over its shell. Satisfactorily drained and the beast covered completely in your lust, you wipe the sweat from your forehead and silently congratulate yourself on the impressive job you did on keeping your pet well fed. You check to make sure your vigor did not injure the creature and, satisfied that it was otherwise uninjured, set it aside to vegetate on the massive load of cum you fed it with.", false);
-				dynStats("lib", -1.5, "sen", .75, "lus=", 0, "cor", .5);
+				player.orgasm();
+				dynStats("lib", -1.5, "sen", .75, "cor", .5);
 			}
 			//low corruption variant!
 			else {
 				outputText("Part of you regretting the purchase, the other half longing for the intensity of pleasure, you reach into the bag to get the creature Giacomo laughingly labels an 'all-natural' onahole. Telling yourself that the creature needs to feed and has every right to survive as any other animal, you reluctantly place the beast on your stiff, implacable erection. Springing to life, the animal immediately bears down upon your shaft and clamps itself in place. With a greater adroitness, the creature's feeding tube breaches your urethra and muscles its way deep into your sex. Undulating its mass and flicking its tentacle, the creature forces your body to make the sexual fluid it needs to survive. Biting your lip and groaning, you can only endure the painful pleasure of your sensitive genitalia being forced to produce. The unique sensation of sex juice building in your body inflames the abomination, forcing it to move faster. Moments later, an orgasmic wave cramps your body into knots as you force semen into the creature. Load after load shoots into the beast and it swells up as it fattens from your lust. Once you are spent, the creature retracts the tendril, prompting one last cumshot from you, and releases your used and mildly abused prick. Collapsing to the ground, you fall asleep before you can recover from the encounter.", false);
-				dynStats("lib", -1.5, "sen", .75, "lus=", 0, "cor", .5);
+				player.orgasm();
+				dynStats("lib", -1.5, "sen", .75, "cor", .5);
 			}
 			doNext(13);
 			return;
@@ -381,7 +391,8 @@ public function allNaturalOnaholeUse():void {
 			outputText("\n\nThe more semen you produce, the harder the accursed thing sucks. Eventually, the pain subsides and only the unholy pleasure of such deep penetration and stimulation remains. THIS is what that crazy merchant was talking about. You have never cum so hard or as much as now. Your mind is polluted with lust and all you want is for this thing to keep milking you and leave you intoxicated with pleasure. The shock of this treatment sends you in and out of consciousness. You wake up only long enough to pump another load down its endless pipe. Each time you wake up to cum, you see the thing get fatter and fatter.", false);
 			outputText("\n\nAwake...out...awake, out. The next minutes, hours or whatever, are a blur. You sense the need to cum. You feel your muscles squeeze to force your seed out. You feel the animal, or whatever it is, suck the very life-milk from you. It grows fatter. You want to feel your muscles squeeze again! You want to feel the semen surge again! You want the thing to work your shaft some more! Endless pleasure. Endless orgasm. You faint.", false);
 			outputText("\n\nYou have no clue how much time has passed. However, you wake up with you sex organs sore from the inside out. There is small dribbles of cum on the ground and you see the thing has swelled up twice its size. Horrified, you reach to grab the thing to kill it. However, you are prevented from doing so for one reason; after you got over being penetrated, they were THE best orgasms you have ever had.", false);
-			dynStats("lib", -1.5, "sen", .75, "lus=", 0, "cor", .5);
+			player.orgasm();
+			dynStats("lib", -1.5, "sen", .75, "cor", .5);
 			doNext(13);
 			return;
 		}
@@ -397,7 +408,8 @@ public function allNaturalOnaholeUse():void {
 			outputText("\n\nThe more semen you produce, the harder the accursed thing sucks. Eventually, the pain subsides and only the unholy pleasure of such deep penetration and stimulation remains. THIS is what that crazy merchant was talking about. You have never cum so hard or as much as now. Your mind is polluted with lust and all you want is for this thing to keep milking you and leave you intoxicated with pleasure. The shock of this treatment sends you in and out of consciousness. You wake up only long enough to pump another load down its endless pipe. Each time you wake up to cum, you see the thing get fatter and fatter.", false);
 			outputText("\n\nAwake...out...awake, out. The next minutes, hours or whatever, are a blur. You sense the need to cum. You feel your muscles squeeze to force your seed out. You feel the animal, or whatever it is, suck the very life-milk from you. It grows fatter. You want to feel your muscles squeeze again! You want to feel the semen surge again! You want the thing to work your shaft some more! Endless pleasure. Endless orgasm. You faint.", false);
 			outputText("\n\nYou have no clue how much time has passed. However, you wake up with you sex organs sore from the inside out. There is small dribbles of cum on the ground and you see the thing has swelled up twice its size. Horrified, you reach to grab the thing to kill it. However, you are prevented from doing so for one reason; after you got over being penetrated, they were THE best orgasms you have ever had.", false);			
-			dynStats("lib", -1.5, "sen", .75, "lus=", 0, "cor", .5);
+			player.orgasm();
+			dynStats("lib", -1.5, "sen", .75, "cor", .5);
 			doNext(13);
 			return;
 		}
@@ -413,7 +425,8 @@ public function stimBeltUse():void {
 			outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ", false);
 			outputText(player.breastCup(0), false);
 			outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.", false);
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 			doNext(13);
 		}
 		//Repeated use!
@@ -422,7 +435,8 @@ public function stimBeltUse():void {
 			outputText("Switching the belt on, it begins to immediately vibrate and rub every sensitive part of your " + vaginaDescript(0) + ". You immediately glow with pleasure as the machine works its magic on your hungry pussy. Worried about the machine winding down, you re-crank the gear box occasionally to ensure that you get worked over by the tireless device as long as you can handle it.\n\n", false);
 			outputText("Eventually, the machine tweaks your nerves and your " + clitDescript() + " just right, triggering a massive orgasm that leaves you bucking wildly like an untamed horse, screaming in mind-numbing pleasure. Your uncontrollable movement dislodges the key from the gear box and you have no choice but to wait for the machine and your still-orgasming body to wind down, and THEN find the goddamn thing. After about fifteen minutes, the machine expends the last of its energy, leaving you a twitching heap until you can move to find the meddlesome key.\n\n", false);
 			outputText("Fortunately, you locate the key near your feet, saving you the money of having another made for the device. You put aside your machine, your lusts slaked, for now.", false);
-			dynStats("sen", -1, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", -1);
 			doNext(13);
 		}
 		player.cuntChange(1, true, true, false);
@@ -445,14 +459,16 @@ public function allNaturalStimBeltUse():void {
 			if(player.cor < 50) {
 				outputText("Shamed by the depths of your sexual needs, you don the abominable stimulation belt and brace for its eventual ravaging of your needy womanhood. Without waiting for you to touch the activator, the organic portion of the device, sensing your needs, engorges and buries itself in your vagina, beginning to pump with furious speed. The shock of the sudden stimulation convulses you backwards, leaving you writhing on the ground as the horrid symbiote undulates in a luridly sordid manner. You distinctly feel a nodule growing about your clitoris, shifting and changing into a sucker. The suction begins furiously working your clitoris as if it were a miniature penis, slurping, sucking and jerking away, prompting another painfully pleasurable wave of multiple orgasms.\n\n", false);
 				outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you.  Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.", false);
-				dynStats("lib", -1, "sen", .75, "lus=", 0, "cor", 1);
+				player.orgasm();
+				dynStats("lib", -1, "sen", .75, "cor", 1);
 				doNext(13);
 			}
 			//High corruption variant
 			else {
 				outputText("Barely taking the time to strip yourself down, you quickly slide the belt-shaped beast onto your hips. It immediately clamps down and begins the all-too-familiar plundering of your opening. It barrels deep into your box and quickly latches on your " + clitDescript() + " and the relieving pleasure of its thundering movements quench your need for pleasure. The creature quickly begins streaming its fluids inside you. No longer sensing pain, as you did when you first used the belt, you lay in endless bliss as the warmth of the fluid fills you up. The creature, sensing how much of its juice is in you, stops squirting and begins stirring the jizm it left. The unique pleasure of the hot fluid literally stirring and swirling inside you coaxes a wave of orgasms from your body, which draw the milk even deeper into your womanhood. It almost feels as if your body is absorbing the milk into your deepest recesses with each pelvic contraction.\n\n", false);
 				outputText("The creature lets out another torrent of cum and repeats the process. Drunk with lust, you are uncertain how you are containing so much spunk without it gushing out, as before. Every time you try to think about it, another orgasm destroys any attempt at rational thought. By the time the thing is done with you, hours and hours has already come. You crash from your hours-long orgasm, exhausted, and can only think of the next opportunity to have the belt about your loins.", false);
-				dynStats("lib", -.5, "sen", 1, "lus=", 0, "cor", 1.5);
+				player.orgasm();
+				dynStats("lib", -.5, "sen", 1, "cor", 1.5);
 				//Game over if fully corrupt!
 				if(player.cor >= 100) doNext(2042);
 				//Otherwise, 4 hours pass!
@@ -468,7 +484,8 @@ public function allNaturalStimBeltUse():void {
 public function masturbateJojo():void {
 	jojoScene.jojoSprite();
 	outputText("", true);
-	dynStats("lus=", 0, "cor", .5);
+	player.orgasm();
+	dynStats("cor", .5);
 	if(player.totalCocks() > 0 && player.findPerk(PerkLib.Whispered) >= 0 && rand(4) == 0) {
 		forest.akbalScene.whisperJojobait();
 		return;
@@ -1849,7 +1866,6 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.cumQ() >=7 && player.cumQ() < 10) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
 			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  You mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
 		}
-		player.resetDickEjaculateTimer();
 	}
 	//Vaginal CUMMING
 	if(player.vaginas.length > 0) {
@@ -1879,8 +1895,8 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 		titCum(player.cumQ());
 	}
 	//DONE!
-	dynStats("sen", (-0.5), "lus=", 0);
-	player.hoursSinceCum = 0;
+	player.orgasm();
+	dynStats("sen", (-0.5));
 }
 public function titCum(cumQuantity:Number = 3):void
 {
@@ -1982,7 +1998,7 @@ public function deluxeDildo():void {
 			if(player.findStatusAffect(StatusAffects.TentacleJojo) >= 0) outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.", false);
 			else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.", false);
 		}
-		dynStats("lus=", 0);
+		player.orgasm();
 		doNext(13);
 		outputText("\n", false);
 		player.cuntChange(player.vaginalCapacity() * .9, true);
@@ -2067,7 +2083,8 @@ public function centaurMasturbation():Boolean {
 		else if(player.cor > 33) outputText("You're a bit confused by how much you enjoyed the perverse activity.", false);
 		else outputText("You're horrified at what you're doing to deal with your inner perversions.", false);
 		//DONE!
-		dynStats("sen", (-0.5), "lus=", 0);
+		player.orgasm();
+		dynStats("sen", (-0.5));
 		player.hoursSinceCum = 0;
 	}
 	//Huge dick jerk
@@ -2198,7 +2215,8 @@ public function centaurMasturbation():Boolean {
 		}
 		outputText("Sated for now, you rest for an hour or so before climbing back atop your hooves.", false);
 		//DONE!
-		dynStats("sen", (-0.5), "lus=", 0);
+		player.orgasm();
+		dynStats("sen", (-0.5));
 		player.hoursSinceCum = 0;
 	}
 	//Failsafe - you suck.
@@ -2248,7 +2266,8 @@ public function lickYerGirlParts():void {
 	}
 	//Stats & next event
 	//DONE!
-	dynStats("sen", (-0.5), "lus=", 0);
+	player.orgasm();
+	dynStats("sen", (-0.5));
 	doNext(13);
 }
 public function catAutoLick():void {
@@ -2289,7 +2308,8 @@ public function catAutoLick():void {
 	}
 	//Stats & next event
 	//DONE!
-	dynStats("sen", (-0.5), "lus=", 0);
+	player.orgasm();
+	dynStats("sen", (-0.5));
 	doNext(13);
 }
 
@@ -2331,7 +2351,8 @@ public function centaurDudesGetHorseAids():void {
 	outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you.  You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + cockDescript(x) + " until the pleasure overwhelms you.  You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it, until she's full up and leaking onto the ground.\n\n", false);
 
 	outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, though it leaks your cum the entire way.", false);
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 	player.addKeyValue("Fake Mare",1,1);
 }
@@ -2360,7 +2381,8 @@ public function centaurGirlsGetHorseAids():void {
 	outputText("You sense your own orgasm coming as a hot, sticky fluid rushes into you.  You scream your pleasure as the statue unloads a load of hot faux-spunk into your womb, flooding your cunt with its strange seed.  So utterly and completely filled, you cannot hold back your orgasm.  You cum, your " + vaginaDescript() + " clamping down hard on the fake cock buried inside you, milking it for more and more of its thick, creamy spooge.\n\n", false);
 
 	outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + buttDescript() + ".  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.\n\n", false);
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 	player.addKeyValue("Centaur Pole",1,1);
 	trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
@@ -2500,7 +2522,7 @@ public function getHugeEggsInCawk():void {
 		flags[kFLAGS.DICK_EGG_INCUBATION] = 48;
 	}
 	player.dumpEggs();
-	dynStats("lus=", 0);
+	player.orgasm();
 	flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
 	doNext(13);
 }
@@ -2555,7 +2577,7 @@ public function birthBeeEggsOutYourWang():void {
 	
 	outputText("\n\nFeeling lighter and a bit happier than you have in a while, you pick yourself up and redress, quickly heading back to camp.\n");
 	flags[kFLAGS.DICK_EGG_INCUBATION] = 0;
-	dynStats("lus=", 0);
+	player.orgasm();
 }
 
 
@@ -2652,7 +2674,8 @@ public function layEggsInYerTits():void {
 		player.createStatusAffect(StatusAffects.Eggchest,3 + rand(10),1 + rand(4),0,0);
 		
 	}
-	dynStats("sen", 1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 1);
 	player.dumpEggs();
 	doNext(13);
 }
@@ -2823,7 +2846,8 @@ public function tentacleSelfFuck():void {
 	if(player.tentacleCocks() > 1) outputText("s");
 	outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
 	//(-2 sens + 1 per tentacle dick, -100 lust)
-	dynStats("sen", (-1*(1 + player.tentacleCocks())), "lus=", 0);
+	player.orgasm();
+	dynStats("sen", (-1*(1 + player.tentacleCocks())));
 	doNext(13);
 }
 
@@ -2896,7 +2920,8 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 			if(player.lib > 80) outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.", false);
 		}
 	}
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(13);
 }
 
@@ -2945,7 +2970,8 @@ public function gildedCockTurbate():void {
 	if(player.cumQ() >= 3000) gems += 5 + rand(6);
 	if(player.cumQ() >= 6000) gems += 5 + rand(6);
 	outputText("\n\nYou have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.");
-	dynStats("sen", -1, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1);
 	player.gems += gems;
 	statScreenRefresh();
 	doNext(13);
@@ -2990,7 +3016,8 @@ function stickADildoInYourVagooSlut():void {
 		outputText("\n\nThe erotic pumping of the phallic object picks up the pace as you gently build a rhythm with the beating of your heart and tensing of your vaginal walls. Your breathing heaves, and your moans become almost as desperate as they are lustful. Soon the pleasure is rising up into unstoppable tide of phallus-induced ecstasy, and you slide from against the rock to on your side, still fucking yourself with blissful joy. The constant thrusting of the toy begins to make you shake and lose rhythm, your body wanting only to fuck as hard and fast as possible.");
 		outputText("\n\nYour orgasm arrives with supreme relief as you force the dildo to your furthest depths. Juices spurt from your genitals, and you roll onto your back to rest. When your breathing regulates, you pull the thoroughly used toy from your [vagina] and prepare to return to camp.");
 	}
-	dynStats("sen", -1.5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -1.5);
 	statScreenRefresh();
 	doNext(13);
 }
@@ -3020,7 +3047,8 @@ function dildoButts():void
 	else outputText("\n\n");
 	outputText("Your body shakes and rocks from the anal orgasm before slumping onto your back. Happily tightening around the toy with each beat of your hammering heart, you rest.");
 	outputText("\n\nSome time later, you gather your things and return to camp.");
-	dynStats("sen", 0.5, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", 0.5);
 	statScreenRefresh();
 	doNext(13);
 }

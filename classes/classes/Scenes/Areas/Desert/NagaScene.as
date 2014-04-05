@@ -81,7 +81,7 @@ public function nagaEncounter():void {
 				
 				outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually the naga slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off into the desert.  You watch as she leaves and wave her a kiss goodbye before she disappears from your sight.\n\n", false);
 			}
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 		//chick secks
 		else if(player.hasVagina()) {
@@ -103,7 +103,7 @@ public function nagaEncounter():void {
 			outputText("You simply run your tongue around her ear, gently nibbling on it as you slowly impale your naga lover on your thick, nimble tail. Her tail whips back and forth across the sand as she slowly succumbs to the intense pleasure of your deep, intimate penetration. You begin to wriggle your own tail inside your naga friend and her response is immediate. First, she shudders as a chill of excitement rushes up her spine. As the sensation overwhelms her, she lets out a wail of satisfaction followed by a series of loud moans in time with your tail's various jerks and twists inside her. As the naga girl begins to climax, driven over the edge by your tail's intense sensations, her tail begins to flick about wildly. In a stroke of genius, you manage to grab the end of her tail, holding it more or less steady against your own " + clitDescript() + ". As her tail wiggles back and forth, it drives your " + clitDescript() + " insane, rubbing it back and forth over and over again. You prolong your friend's climax by driving your wriggling tail ever deeper inside her and soon you find yourself close to orgasm. As you feel your own climax commence, you clench your teeth and lean against your partner, your breasts mashing together and your juices beginning to intermingle. As you both begin to calm down again, chests heaving, the only thing you can think to do is kiss your partner.\n\n", false);
     		outputText("She returns your kiss, but while you are distracted she prepares herself to help you in the same way you helped her. She begins to rub her tail along your " + vaginaDescript(0) + ", getting it wet. As you feel her scaly member begin to slide inside your own " + vaginaDescript(0) + ", the very thought gets you excited. Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her. As you continue to passionately kiss each other, your tongues wrapping around one another and your arms wrapped around each other's warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. The both of you collapse upon the sand, too focused on one another to care about the surroundings.  That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the sand next to your friend, and you can't help but notice how cute she looks asleep. Your tails are still buried within one another, testament to the intensity of your lovemaking. You loved until the both of you collapsed, side by side, juices dripping out into the dry desert sands. You slowly remove your tail from inside her body, and simultaneously pull hers from your " + vaginaDescript(0) + ". You kiss her on the cheek, and are just close enough to hear her whisper, \"<i>Will we ever meet again?</i>\"  You lean in close, and whisper a simple \"<i>Yes.</i>\" Then, you leave her to her well-deserved rest, and slowly meander back to your camp, your brain still intoxicated with passion.\n\n", false);
 			player.cuntChange(30,true,false,true);
-			dynStats("lus=", 0);
+			player.orgasm();
 			outputText("You think it would be a very good idea to come to the desert more often.", false);
 			doNext(15);
 			return;
@@ -147,7 +147,7 @@ public function nagaEncounter():void {
 
 private function gooNagaRape():void {
 	outputText("", true);
-	dynStats("lus=", 0);
+	player.orgasm();
 	outputText("You look over at the prone form of the naga lying in the sand, her ", false);
 	if(monster.HP < 0) outputText("weak ", false);
 	else outputText("flushed ", false);
@@ -242,7 +242,7 @@ private function gooNagaRape():void {
 //3) Victory male
 private function nagaVictoryMale():void {
 	outputText("", true);
-	dynStats("lus=", 0);
+	player.orgasm();
 	//Male or 50% herms
 	if(player.totalCocks() > 0) {
 		//Centaur
@@ -322,7 +322,7 @@ private function nagaVictoryMale():void {
 		}
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 	return;
 }
@@ -380,7 +380,7 @@ private function nagaVictoryFemale():void {
 		}
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 	return;
 }
@@ -420,7 +420,7 @@ private function nagaVictoryGenderless():void {
 		}
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 	return;    	
 }
@@ -674,7 +674,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		
 		outputText("You bring your mouth back to her awaiting hole and redouble your efforts. You can feel that she is nearing her peak as you continue to lick at her pussy. With a final shudder the naga climaxes, squeezing you firmly against her, coating your chin and nose with her thick honey.  As the naga relaxes her grip you slide out from her loosened tail coils.  Exhausted, you lose consciousness, but when you awake, you grab your things and leave the moistened sands behind.", false);
 	}
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 
@@ -939,7 +939,7 @@ private function eggUpANagaSpiderLike():void {
 	
 	outputText("\n\nA while later, you awaken alone in the desert sand.  Getting your shaky legs under you and stifling a yawn, you head back to camp.  You should come to the desert more often.");
 	player.dumpEggs();
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 
@@ -981,7 +981,7 @@ private function beePositANagaPlease():void {
 	outputText(" a parting sting.  Her moans of excitement jump an octave, and you listen to them with a happy, almost gloating smile while you get dressed.");
 	outputText("\n\nYou should definitely come to the desert more often.");
 	player.dumpEggs();
-	dynStats("lus=", 0);
+	player.orgasm();
 	cleanupAfterCombat();
 }
 	}

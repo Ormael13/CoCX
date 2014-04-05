@@ -312,7 +312,7 @@ private function goblinHairDresserFacefuck():void {
 	if(player.cumQ() >= 250) outputText(" She can't hold it all and suddenly starts swallowing as runnels of it escape her nose and a wave of it rolls down her lips.", false);
 	outputText("  In time it ends, and she pops back, spitting most of the cum into a funnel.  It washes down a pipe and you have to wonder if there's some horny goblin girl at the other end with her cunt spread wide.", false);
 	outputText("\n\nThe hair-dressing goblin matron sputters a bit before licking her lips clean and beaming a happy smile at you.\n\n", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	hairDressingMainMenu();
 }
 private function hairDressingMainMenu():void {
@@ -477,7 +477,8 @@ private function minotaurCumBukkakeInSalon():void {
 	
 	outputText("The strength goes completely out of your " + player.legs() + ", but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...", false);
 	//[NEXT]
-	dynStats("lib", 2, "sen", 2, "lus=", 0, "cor", 2);
+	player.orgasm();
+	dynStats("lib", 2, "sen", 2, "cor", 2);
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {
@@ -679,7 +680,7 @@ private function fuckLynnette():void {
 		lynnetteApproval(25);
 	}
 	flags[kFLAGS.LYNNETTE_FUCK_COUNTER]++;
-	dynStats("lus=", 0);
+	player.orgasm();
 	flags[kFLAGS.LYNNETTE_CARRYING_COUNT] = 3 + rand(3);
 	if(player.cumQ() >= 1000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
 	if(player.cumQ() >= 2000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);

@@ -1314,7 +1314,8 @@ public function nightSuccubiRepeat():void {
 		doNext(1);
 		return;
 	}
-	dynStats("lus=", 0, "cor", 2);
+	player.orgasm();
+	dynStats("cor", 2);
 	if(player.gender == 1) {
 		if(player.cor < 66) {
 			outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ", false);
@@ -1394,7 +1395,8 @@ public function nightSuccubiRepeat():void {
 	menuLoc = 14;
 	inventory.takeItem(consumables.CERUL_P);
 	outputText("\n", false);
-	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
 }
 //Places menu
 public function places(display:Boolean):Boolean {

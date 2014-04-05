@@ -396,7 +396,7 @@ private function fapResults(place:Number = 3):void {
 	if(place <= 1) {
 		outputText("You quickly stand back up and start dressing yourself.  Before you go, the cute little referee hands you a small box, her coy smile and nude body somehow awakening " + sMultiCockDesc() + " again. Ye Gods, it never ends.  \"<i>Here's a little something for being the winner of this session.  Hope you enjoy your prize.  Come and play again!</i>\"\n\n", false);
 		//You find [random item from the list: ~300 gems, gro+, succubi's dream, large blue egg]. (minus 100 lust, plus 5 lust, other stat effects as you like)
-		dynStats("lus=", 0);
+		player.orgasm();
 		dynStats("lus", 5);
 		temp = rand(4);
 		var itype:ItemType;
@@ -418,7 +418,7 @@ private function fapResults(place:Number = 3):void {
 			itype = consumables.L_BLUEG;
 			break;
 		}			
-		dynStats("lus=", 0);
+		player.orgasm();
 		dynStats("lus", 5);
 		menuLoc = 2;
 		inventory.takeItem(itype);
@@ -431,7 +431,7 @@ private function fapResults(place:Number = 3):void {
 	}
 	//[if you lost]
 	else outputText("You awkwardly remove the dick from your ass, start cleaning yourself from all the dirt and cum before leaving the tent.  Before you go, the nude referee approaches you and gently squeezes your " + cockDescript(x) + "; you still wince from the pounding it took earlier.  \"<i>Awww, looks like you had a rough time, didn't you?  Well, it happens sometimes.  Hopefully you will get better at this.  See you next game!</i>\"", false);
-	dynStats("lus=", 0);
+	player.orgasm();
 	dynStats("lus", 5);
 	doNext(13);
 }

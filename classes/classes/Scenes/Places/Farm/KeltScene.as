@@ -528,7 +528,7 @@ private function keltMainEncounter3():void {
 			outputText("Some time later, Kelt's enormous cock softens enough to slip out of your abused cunt, a virtual torrent of cum flowing out afterwards.  You lay on the bale of hay, panting tiredly, hands pressed to your full belly.  Kelt looks down at you, and snorts.\r\r", false);
 			outputText("\"<i>That's a good look for you.  Come back tomorrow if it doesn't take, slut.  I'll be glad to do the job again.</i>\"\r\r", false);
 			player.slimeFeed();
-			dynStats("lus=", 0);
+			player.orgasm();
 			outputText("He leaves you without another word.", false);
 			//(+5 Submissive)
 			player.addStatusValue(StatusAffects.Kelt,2,5);
@@ -661,7 +661,8 @@ private function keltMainEncounterPostBlowjob():void {
 			//(+10 Submissiveness)
 			if(player.buttChange(70,true)) outputText("\r\r", false);
 			player.addStatusValue(StatusAffects.Kelt,2,10);
-			dynStats("lus=", 0, "cor", 1);
+			player.orgasm();
+			dynStats("cor", 1);
 			return;
 		}
 		//(Otherwise)
@@ -985,7 +986,8 @@ private function fuckKeltsShitUp():void {
 		outputText("Taking pity on him, you turn and release the rope, shoving his exhausted body over.  He hits the ground hard and his tightly bound cock bounces in the dirt underneath him.  You gingerly untie the bulging centaur-shaft, noting how massively bloated it is with pent up arousal.  As each layer of rope is peeled off, cum starts to leak from him in greater and greater quantities.  With the release of the last knot, he begins spurting helplessly.  You pat his flank and say, \"<i>Good bitch.  Now why don't you go find some succubus milk so you can look the part?</i>\"\r\r", false);
 		outputText("You redress before the comatose centaur gets a chance to come to his senses, and wonder if he'll recover enough of his pride to face you again.", false);
 	}
-	dynStats("int", 2, "lus=", 0, "cor", 4);
+	player.orgasm();
+	dynStats("int", 2, "cor", 4);
 	player.createStatusAffect(StatusAffects.KeltOff,0,0,0,0);
 	doNext(13);
 }

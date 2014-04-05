@@ -879,7 +879,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				dynStats("lus", 2+rand(15));
 				if(player.lust >= 100) {
 					outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.", false);
-					dynStats("sen", 2, "lus=", 0);
+					player.orgasm();
+					dynStats("sen", 2);
 					//Tongue orgasming makes it last longer.
 					player.changeStatusValue(StatusAffects.LustyTongue,1,player.statusAffectv1(StatusAffects.LustyTongue)+10);
 					
@@ -2172,7 +2173,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			dynStats("lus=", 0);
+			player.orgasm();
 			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
@@ -2195,7 +2196,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			dynStats("lus=", 0);
+			player.orgasm();
 			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?

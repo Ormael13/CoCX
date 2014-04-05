@@ -272,7 +272,8 @@ public function fuckTheAngelBadEndPartII():void {
 	outputText("\n\nThankfully, you're out of that mess and heading for camp. That slut is cold.");
 	//[End of event. Possible expansions include finding her as a difficult combat encounter, or raping her while she sleeps.]
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
-	dynStats("lus=", 0, "cor", 10);
+	player.orgasm();
+	dynStats("cor", 10);
 	doNext(13);
 }
 
@@ -357,7 +358,7 @@ public function stayForPretendNTRGoodWinjobSex():void {
 	//IF MASTURBATED: 
 	if(player.lust >= 100) {
 		outputText("\n\nYou take the opportunity to do up your [armor] before either of them notices.");
-		dynStats("lus=", 0);
+		player.orgasm();
 	}
 	//[Next]
 	menu();

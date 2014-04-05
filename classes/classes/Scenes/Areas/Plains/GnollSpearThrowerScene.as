@@ -148,7 +148,8 @@ package classes.Scenes.Areas.Plains
 			//<For Slimes> 
 			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.", false);
 			outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.", false);
-			dynStats("sen", 2, "lus=", 0);
+			player.orgasm();
+			dynStats("sen", 2);
 			cleanupAfterCombat();
 		}
 
@@ -234,7 +235,7 @@ package classes.Scenes.Areas.Plains
 				outputText("  You feel your knees weaken as her muzzle works harder and faster, trying to drain you of every drop.  He paws wrap around your waist and powerful arms lift you and lay you on the ground as that talented muzzle continues to milk you dry.\n\n", false);
 			}
 			outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your " + player.armorName + " neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -266,7 +267,7 @@ package classes.Scenes.Areas.Plains
 			outputText("That final action is too much for your abused body.  Pure ecstasy floods through your mind as your " + vaginaDescript(0) + " spasms wildly.  Your honey splashes out of you, the hyena trying to catch the juices on her tongue, though much splatters over her tawny throat and breasts.  Her deft tongue delves inside of you, twisting and heightening your orgasm.  The world fades to nothing but pleasure.\n\n", false);
 
 			outputText("When you awake some time later, still heady with pleasure, you find your " + player.armorName + " piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 	}

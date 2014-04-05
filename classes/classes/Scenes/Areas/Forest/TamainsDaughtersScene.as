@@ -318,7 +318,8 @@ private function fuckYoDaughtersHomie():void {
 			dynStats("tou", -.75, "int", -1, "lib", .5);
 		}
 	}
-	dynStats("lib", 1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("lib", 1, "cor", 1);
 	//Knock the bitches up, boost libido, corruption
 	knockUpDaughters();
 	player.cumMultiplier += .3;
@@ -673,7 +674,8 @@ private function legTamanisDaughtersRAEPYou():void {
 		}
 	}
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
-	dynStats("str", -.5,"int", -.5, "lib", 1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 	knockUpDaughters();
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(15);
@@ -816,7 +818,8 @@ private function tamaniDaughtersCombatLossDrain():void {
 	//boost cum production slightly.
 	player.cumMultiplier += .3;
 	//increase libido, slight corruption, minus stregth and speed.
-	dynStats("str", -.5,"int", -.5, "lib", 1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 }
 
 private function tamaniDaughtersBadEndChoice():void {
@@ -985,7 +988,8 @@ private function loseToDaughtersWithTamaniThere():void {
 	kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
-	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "lus=", 0, "cor", 1);
+	player.orgasm();
+	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1044,7 +1048,7 @@ internal function loseToDaughters():void {
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 			kGAMECLASS.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 		outputText("\n\nYou give up, you're just too turned on by the sea of sexually charged deviants to resist them anymore.  You're ready to fuck them all.", false);
 		if(player.cockTotal() == 0) {

@@ -408,13 +408,23 @@ import classes.PerkType;
 			//keyItems = new Array();
 		}
 
+		[Deprecated]
 		public function resetDickEjaculateTimer():void
 		{
 			// Reset hoursSinceCum 
 			// trace("YOU IS JIZZING OMGLOLWTFBBQ!", this.hoursSinceCum)
 			this.hoursSinceCum = 0;
 		}
-		
+
+		/**
+		 * Shorthand for lust=0 and resetDickEjaculateTimer, but in future can do other things (update statistics, do something perk-dependant etc)
+		 */
+		public function orgasm():void
+		{
+			game.dynStats("lus=",0,"res",false);
+			hoursSinceCum = 0;
+		}
+
 		//Functions			
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void

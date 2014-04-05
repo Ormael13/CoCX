@@ -383,7 +383,8 @@ public function doCombat(eventNum:Number):void
 		if(monk == 2 || monk == 3)
 		{
 				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
-				dynStats("lib", -10, "lus=", 0, "cor", -15);
+				player.orgasm();
+				dynStats("lib", -10., "cor", -15);
 				if (player.lib < 10) {
 					player.lib = 0;
 					dynStats("lib", 15);
@@ -420,7 +421,8 @@ public function doCombat(eventNum:Number):void
 					}
 					player.slimeFeed();
 					hideUpDown();
-					dynStats("lus=", 0, "cor", 1);
+					player.orgasm();
+					dynStats("cor", 1);
 					statScreenRefresh();
 				}
 				//HP Defeat

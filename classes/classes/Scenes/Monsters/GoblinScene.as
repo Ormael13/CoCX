@@ -86,7 +86,7 @@ package classes.Scenes.Monsters
 					outputText("She plants a kiss on your lips and mutters, \"<i>Can't forget this,</i>\" as he puts her dildo away. You find yourself smiling and watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance. Your eyelids drift closed and your lips go numb as her drugged lipstick begins to put you out.\n\n", false);
 
 					outputText("Your eyes roll up into your head, leaving you looking dumber than ever. Damn, like, that was, like, totally fucking amazing!", false);
-					dynStats("lus=", 0);
+					player.orgasm();
 					cleanupAfterCombat();
 					return;
 				}
@@ -142,7 +142,7 @@ package classes.Scenes.Monsters
 					outputText("!</i>\"\n\n", false);
 					outputText("She giggles again and leans over to kiss you on the lips, smearing her thick bubbly lips across your own and leaving you tasting the bubble-gum of her lipstick.  You find yourself smiling dreamily and slipping into unconsciousness...there must have been something in that lipstick!", false);
 					cleanupAfterCombat();
-					dynStats("lus=", 0);
+					player.orgasm();
 				}
 				//[DICK FITS]
 				else {
@@ -163,7 +163,7 @@ package classes.Scenes.Monsters
 					outputText(". In no time your crotch is feeling tight and full.  You feel fit to burst, and you're surely dripping pre into the goblin's hungry cunt.  She pats your chest knowingly, rocking back and forth slowly and sighing contentedly.  \"<i>Feel that hun?  That's my special alchemical creation, designed to put your body into an incredibly potent rut.  In a few seconds you'll have too much jizz to hold in, and you'll have to cum for me.  Are you ready baby?  Don't hold back now, my cunt's waiting,</i>\" she coos.\n\n", false);
 					outputText("Your dick obeys happily, thickening slightly as your abdominal muscles clench with the force of your orgasm.  The goblin's pupils shrink and her eyes roll back as the first torrent of cum splatters against her cervix.  She quivers when the pressure builds up and begins to fill her womb.  You clench again, this time pressing against her as the drug's effects begin wearing off.  Her belly stretches out slightly from all the cum packed inside her, but you know you aren't done.   She drools, her tongue hanging lewdly from her mouth as you pump load after load into her fertile womb, but like all good things, it does come to an end.\n\n", false);
 					outputText("The goblin regains consciousness, and flops off of you, grabbing her belly and smiling blissfully, before staggering up to her feet.  She thanks you, \"<i>Mmmm good job stud.  I'll have to let my daughters know how to find you once they're born.  I think you've got what it takes for me to start my own tribe!</i>\"  Patting your still-dripping member, the pregnant goblin leans down and gives you a wet kiss with her glossy lips.  You smile contentedly and close your eyes, barely realizing her lipstick was drugged before you pass out.", false);
-					dynStats("lus=", 0);
+					player.orgasm();
 					cleanupAfterCombat();
 				}
 				//[END MALE]
@@ -188,7 +188,7 @@ package classes.Scenes.Monsters
 				outputText(".\n\n", false);
 				outputText("She plants a kiss on your lips and mutters, \"<i>Can't forget this,</i>\" as she puts her dildo away.  You find yourself smiling and watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance.  Your eyelids drift closed and your lips go numb as her drugged lipstick puts you out.  ", false);
 				player.cuntChange(player.vaginalCapacity(), true);
-				dynStats("lus=", 0);
+				player.orgasm();
 				cleanupAfterCombat();
 			}
 		}
@@ -298,7 +298,7 @@ package classes.Scenes.Monsters
 			outputText("The tight confines of the goblin's asshole prove too much for you. Your body convulses wildly as you unload a massive load in her. Spent, you throw the little whore onto the ground; you have no further use for her at the moment.\n\n", false);
 			outputText("As you pick up your " + player.armorName + " and begin to get dressed, you glance at the goblin. Her hands began to dig in her now stretched out anus, desperately trying to gather up the cum you deposited in her. Smirking, you walk away nonchalantly, quite pleased with yourself.", false);
 			cleanupAfterCombat();
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 
 //[FEMSAUCE]
@@ -326,7 +326,7 @@ package classes.Scenes.Monsters
 
 				outputText("You casually dress, ignoring the pants and moans from the blissed-out goblin, and prepare to leave. Taking one last look over your shoulder, you realize her fluids have made a puddle bigger than her. She'll probably have a hell of a hangover when she wakes up. You sigh and trot off, feeling a bit guilty about overdoing it.", false);
 				cleanupAfterCombat();
-				dynStats("lus=", 0);
+				player.orgasm();
 			}
 			//Goblin victory rape, female naga:
 			else if (player.isNaga()) {
@@ -373,7 +373,7 @@ package classes.Scenes.Monsters
 
 				outputText("Thoroughly confused about what just happened, you decide not to test fate by sticking around near the heavily drugged creature and make for camp as soon as you've grabbed your things.", false);
 				cleanupAfterCombat();
-				dynStats("lus=", 0);
+				player.orgasm();
 			}
 			else {
 				outputText(images.showImage("goblin-win-female-rapedfem"));
@@ -406,7 +406,7 @@ package classes.Scenes.Monsters
 				if (player.cor < 50) outputText("a bit guilty about overdoing it.", false);
 				else outputText("thoroughly satisfied with your revenge.", false);
 				cleanupAfterCombat();
-				dynStats("lus=", 0);
+				player.orgasm();
 			}
 		}
 
@@ -484,7 +484,8 @@ package classes.Scenes.Monsters
 			outputText("You stand and prepare to leave, looking down at the goblin slut you just finished with.\n\n", false);
 			outputText("\"<i>I hope my daughters are a better fuck than their bitch mother,</i>\" you say. \"<i>Tell'em to find me if they want to get split like a log too.</i>\"", false);
 			outputText("\n\nShe absolutely will.", false);
-			dynStats("lus=", 0, "cor", 1);
+			player.orgasm();
+			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
 
@@ -521,7 +522,7 @@ package classes.Scenes.Monsters
 			else outputText("soaking her and leaving her in a thick puddle of seed. ", false);
 			outputText("The green slut seems to handle it pretty well, even going so far as to scoop up your spunk and rub it into her cunt as she masturbates.  She licks her lips as she watches you redress, a sultry smile on her cum-painted face, \"<i>You tasted as good as I thought stud!  Maybe shrink that bad-boy down and come visit me for a better visit next time ok?  Hopefully by then all this baby batter I'm cramming into my box will give me a nice belly for you to rub!</i>\"\n\n", false);
 			outputText("You shake your head and leave, somewhat drained and relieved by the experience.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -602,7 +603,7 @@ package classes.Scenes.Monsters
 				outputText(", you make your way back to camp, satisfied.", false);
 			}
 			cleanupAfterCombat();
-			dynStats("lus=", 0);
+			player.orgasm();
 		}
 
 
@@ -630,7 +631,7 @@ package classes.Scenes.Monsters
 
 			outputText("Squirming right-side up, covered in sweat and mud, the emerald girl's face screws into an expression of confusion as she pokes at the bulge of her abdomen. \"What… that doesn't feel right,\" she mumbles, pushing at her skin with both hands. Checking her cunny with a long, middle finger, she pulls it out clean, devoid of the ivory cream she expected. \"The fuck? A condom?\" she screeches. \"You bastard!\" Pushing at her belly with increasingly frantic motions, her mouth gapes when the seed-loaded balloon bounces right back, still intact. \"Why won't it burst?\" she demands. You politely inform her that spider silk is terribly strong and oh so sticky. Reaching her fingers into her slit, she tries to pull it out and gasps at the feeling of her inner walls being pulled by the clinging webbing. Despite her best effort, the silk bubble stays right where you left it, snugly glued in place by your binding webbing. You laugh and wish her luck trying to get it out as you gather your clothes and walk away. So full of cum and yet unable to get any of it into her womb, the goblin girl moans helplessly, fingering herself in desperation, as if her orgasm could dislodge the treasure you've left inside of her.", false);
 
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -673,7 +674,7 @@ package classes.Scenes.Monsters
 			outputText(".  You slowly release yourself from her tight body, finishing off by covering her curved back and pert rump with the rest of your seed.\n\n", false);
 
 			outputText("You pick yourself back up, jerking yourself slowly as cum dribbles from your " + cockDescript(x) + " onto the collapsed body of the goblin.  It'll be awhile before she comes back to consciousness, but you're certain she'll have a better appreciation for sex when she does.", false);
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 
@@ -720,7 +721,7 @@ package classes.Scenes.Monsters
 
 			outputText("\n\nLaying her down in the shade, you put your clothes back on, glad to be free of the extra weight and ready to continue your adventure.");
 			player.dumpEggs();
-			dynStats("lus=", 0);
+			player.orgasm();
 			cleanupAfterCombat();
 		}
 	}

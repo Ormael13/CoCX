@@ -269,7 +269,7 @@ public function feedScyllaVDay():void {
 	clearOutput();
 	//{The PC titfucks Scylla again, and then gets her to suck them off, resulting in two quick orgasm and a big nice load of food for Scylla. How far can you fall to get off? On such a nice day, too!}
 	outputText("You feed Scylla what feels like a gallon of jizz!");
-	dynStats("lus=", 0);
+	player.orgasm();
 	outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 	doNext(14);
@@ -356,7 +356,8 @@ public function fuckAbbyVDay():void {
 		player.createPerk(PerkLib.SensualLover,0,0,0,0);
 	}
 	
-	dynStats("sen", -3, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -3);
 	doNext(14);
 }
 
@@ -514,7 +515,8 @@ public function fuckPastieForVDay():void {
 	
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(14);
 }
 
@@ -549,7 +551,8 @@ public function rubPastieOnYourWangDawg():void {
 	// (You have gained the One Track Mind perk!)
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(14);
 }
 
@@ -585,7 +588,8 @@ public function goForAPushayDivePasty():void {
 		player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 	}
 	
-	dynStats("sen", -2, "lus=", 0);
+	player.orgasm();
+	dynStats("sen", -2);
 	doNext(14);
 }
 
