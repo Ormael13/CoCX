@@ -44,7 +44,7 @@ package classes.Scenes.NPCs
 		private function IzmaSpecials2():void {
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
-				outputText("Izma blindly tries to clinch with you, but misses completely.\n", false);
+				outputText("Izma blindly tries to clinch you, but misses completely.\n", false);
 				return;
 			}
 			//Determine if dodged!
@@ -54,12 +54,12 @@ package classes.Scenes.NPCs
 			}
 			//Determine if evaded
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("Izma tries to clinch with you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n", false);
+				outputText("Izma tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n", false);
 				return;
 			}
 			//("Misdirection"
 			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Izma ducks and weaves forward to clinch with you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n", false);
+				outputText("Izma ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n", false);
 				return;
 			}
 			//Determine if cat'ed
@@ -70,7 +70,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			damage = Math.round(130 - rand(player.tou+player.armorDef));
 			if(damage < 0) damage = 0;
-			outputText("Izma ducks and jinks, working to close quarters, and clinches with you. Unable to get your weapon into play, you can only ", false);
+			outputText("Izma ducks and jinks, working to close quarters, and clinches you. Unable to get your weapon into play, you can only ", false);
 			if(player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 2-5% of health for the next three turns if successful)
 				damage = player.takeDamage(damage);

@@ -93,7 +93,7 @@ public function isabellaGreeting():void {
 				outputText("she glances down at your ", false);
 				if(player.cocks[player.shortestCockIndex()].cockLength < 20) outputText("large", false);
 				else outputText("gigantic", false);
-				outputText(" bulge.  Isabella sighs and mumbles something about too big to be fun.", false);
+				outputText(" bulge.  Isabella sighs and mumbles something about it being too big to be any fun.", false);
 			}
 			outputText("\n\n", false);
 		}
@@ -290,7 +290,7 @@ public function nomOnMommaIzzysTits():void {
 		
 		outputText("Perhaps it's your thirst, the large cow-girl's aura, or some hidden instinct, but you find yourself starting to swirl your tongue about the grouped nipples and suckle.  Isabella groans happily and rewards your hunger with a steady flow of sweet, warm milk.  The flow is still slow - more a constant trickle from all four nipples that combines into a decent stream - but, thirsty as you are, you suckle and swallow all the same.  The cradling arm shifts slightly, pressing you harder against her bronze skin until you're practically smothered in smooth brown tit-flesh.  You suckle a little harder and the trickle becomes a stream, easily filling your mouth with such speed that you barely have to suck.  With the caramel mound blocking your vision, you go ahead and close your eyes, letting them rest as you gulp down another mouthful of increasingly sweet breast-milk.\n\n", false);
 		
-		outputText("You sigh and nuzzle Isabella affectionately, drinking calmly of her milk, unaware of the increasing warmth and pink tinge that bloom on her skin.  Nectar-flavored milk and the constant rhythm of sucking, swallowing, and breathing become your world as you let yourself lean harder on the pillowy cow-tits.  The air grows hot and humid from having two bodies entwined so close together, and a tangy, familiar smell bubbles up in the air, accompanied by the faint squish of Isabella's free hand.  You can feel it brushing your " + buttDescript() + " with each pumping motion, masturbating the cow-girl's lust-swollen snatch with powerful strokes.\n\n", false);
+		outputText("You sigh and nuzzle Isabella affectionately, drinking calmly of her milk, unaware of the increasing warmth and pink tinges that bloom on her skin.  Nectar-flavored milk and the constant rhythm of sucking, swallowing, and breathing become your world as you let yourself lean harder on the pillowy cow-tits.  The air grows hot and humid from having two bodies entwined so close together, and a tangy, familiar smell bubbles up in the air, accompanied by the faint squish of Isabella's free hand.  You can feel it brushing your " + buttDescript() + " with each pumping motion, masturbating the cow-girl's lust-swollen snatch with powerful strokes.\n\n", false);
 		
 		outputText("The ordinarily arousing noises don't have much of an effect on you, busy as you are.  In fact, the repeated schlicking is soothing in its own way, a constant background thrum that lulls your troubled mind.  Through rapidly fading thirst, you start to suck hard, curious how long it'll take her milk-squirting cow-tits to drain.  The white fluid gushes over your tongue and into your throat, nearly drowning you and forcing you to gulp it down in huge swallows or let go, and you don't want to let go.  Your fingers dig into the soft breast, squeezing it as you truly latch on and ride the tidal wave of white until it finally exhausts itself and slows to a trickle.\n\n", false);
 		
@@ -304,12 +304,12 @@ public function nomOnMommaIzzysTits():void {
 		//(Mandiggity!)
 		//(Male and it fits end)
 		if(player.hasCock() && x >= 0) {
-			outputText("You wake up an hour later in a massive sprawl of blankets.  There's a soft pillow below you and another one above, and your struggle to dig your way out until a pair of arms wrap around you.  Those aren't pillows – you're trapped between the cow-girl's breasts!  You carefully slide downwards, giving her large, leaking nipples a longing look as you extricate yourself from the embrace with care.  She snores on, blissfully ignorant of your departure as you find your " + player.armorName + " and re-dress.  There's a hint of tight soreness in your groin, and after reaching down to adjust yourself, your hand comes up reeking of feminine cow-girl.  ", false);
+			outputText("You wake up an hour later in a massive sprawl of blankets.  There's a soft pillow below you and another one above, and you struggle to dig your way out until a pair of arms wrap around you.  Those aren't pillows – you're trapped between the cow-girl's breasts!  You carefully slide downwards, giving her large, leaking nipples a longing look as you extricate yourself from the embrace with care.  She snores on, blissfully ignorant of your departure as you find your " + player.armorName + " and re-dress.  There's a hint of tight soreness in your groin, and after reaching down to adjust yourself, your hand comes up reeking of feminine cow-girl.  ", false);
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) {
 				outputText("S-she raped you in your sleep?  You aren't sure how she pulled it off, but your ", false);
 				if(player.balls > 0) outputText("balls feel", false);
 				else outputText("body feels", false);
-				outputText(" so empty and sated you must have gotten off a few times.  Well, all things considered you feel quite rested, even if you got a bit more than asked for.  Maybe next time you'll at least stay awake for the fun parts!", false);
+				outputText(" so empty and sated you must have gotten off a few times.  Well, all things considered you feel quite rested, even if you got a bit more than you asked for.  Maybe next time you'll at least stay awake for the fun parts!", false);
 			}
 			else {
 				outputText("She sleep-fucked you again!  You sigh and wipe your hand off on your " + player.leg() + ", bemused by the cow-girl who seems too shy to sleep with someone who's awake.  Still, you feel completely sated in every way.  It's going to be a good ", false);

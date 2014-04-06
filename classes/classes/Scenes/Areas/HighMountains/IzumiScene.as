@@ -21,7 +21,7 @@ package classes.Scenes.Areas.HighMountains
 		 */
 
 		// Return a height-based nickname for the player
-		public function heightDesc():String
+		public function heightDesc(doName:Boolean = true):String
 		{
 			if (rand(4) != 0) return "kid";
 			else
@@ -30,7 +30,11 @@ package classes.Scenes.Areas.HighMountains
 				if (player.tallness < 72) return "short-stuff";
 				if (player.tallness < 84) return "shorty";
 				if (player.tallness < 96) return "kid";
-				else return player.short;
+				else
+				{
+					if (doName) return player.short;
+					else return "kid";
+				}
 			}
 		}
 		
@@ -291,7 +295,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText(" exposing a delicious view of her thigh, the creamy-white flesh almost screaming out for your caresses.");
 			outputText("  If she notices, then she doesn’t seem to care.\n\n");
 			
-			outputText("“<i>Better, right?</i>”  She asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been awhile since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc() +"?</i>”  Whoever she is, she seems friendly enough");
+			outputText("“<i>Better, right?</i>”  She asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been awhile since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc(false) +"?</i>”  Whoever she is, she seems friendly enough");
 			if (player.tallness <= 96) outputText(" - if a little... imposing -");
 			else outputText(",");
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
@@ -1528,7 +1532,7 @@ package classes.Scenes.Areas.HighMountains
 				 
 				outputText("“<i><b>Tooooooooohhhhhhhhhhh!</b></i>” She roars, her voice only a low rumble at first but quickly growing to a thunderous crescendo.  You can only watch, astounded at the bizarre spectacle, as Izumi’s roar starts to reverberate within the cave.  Izumi continues to bellow the strange warcry, cords of muscle visible against her neck from the strain of her warcry.\n\n");
 
-				outputText("Izumi was pretty strong when she claimed to be just playing around and using only a single hand to fight you, but there’s nothing playful about her appearance now.  In fact, in her strange, crouched stance, muscles straining against some invisible force, snarling and roaring at the empty air as she stares into nothing, you can’t help but feel she looks like nothing more than a crazed monster…  a demon, straight out of a story made to scare wayward children. You have to do something, you realize.  You have to interrupt her, before she finishes whatever it is she’s doing!\n\n");
+				outputText("Izumi was pretty strong when she claimed to be just playing around and using only a single hand to fight you, but there’s nothing playful about her appearance now.  In fact, in her strange, crouched stance, muscles straining against some invisible force, snarling and roaring at the empty air as she stares into nothing, you can’t help but feel she looks like nothing more than a crazed monster...  a demon, straight out of a story made to scare wayward children. You have to do something, you realize.  You have to interrupt her, before she finishes whatever it is she’s doing!\n\n");
 
 				// Tease victory
 				if (monster.lust >= 100) // I assume LustMax is always presumed to be 100?
@@ -1579,9 +1583,15 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("Izumi blinks once, twice, as the hair-raising visage she was maintaining drops almost immediately.\n\n");
 
-				outputText("“Um,”  She says, surprisingly quietly given her formerly berserk appearance.  “C-Could you please let go of that?” She asks, slowly sinking to her knees.  Your feet touch solid ground again, Izumi’s hand still wrapped limply around your neck, apparently forgotten.\n\n");
+				outputText("“<i>Um,</i>”  She says, surprisingly quietly given her formerly berserk appearance.");
+				if (player.spe < 90 || player.str < 90)
+				{
+					outputText("“<i>C-Could you please let go of that?</i>” She asks, slowly sinking to her knees.  Your feet touch solid ground again, Izumi’s hand still wrapped limply around your neck, apparently forgotten.\n\n");
+					outputText("“<i>Really. Um. Please let go.</i>”");
+				}
+				else outputText("“<i>C-Could you please let go of that?</i>”");  
 
-				 outputText("“Really.  Um.  Please let go.”  She says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  “T-That isn’t something you should touch.  So, y-you’ll let go now, right?”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.\n\n");
+				outputText(" she says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  “<i>T-That isn’t something you should touch.  So, y-you’ll let go now, right?</i>”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.\n\n");
 
 				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “Hey,” She says, simply, her voice wavering. “Hey,” She repeats. “Come on now. Enough is enough, right?”");
 			}

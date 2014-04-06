@@ -107,7 +107,7 @@
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(80, 10, 10, 5);
-			initLibSensCor(50, 60, 20);
+			initLibSensCor(50, 60, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.armorName = "demonic skin";

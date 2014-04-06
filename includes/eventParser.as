@@ -2304,7 +2304,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				else if(flags[kFLAGS.ANEMONE_WATCH] > 0) {
-					outputText("\n<b>Kid A seems fairly well fed in the morning, and you note trail of slim</b>\n");
+					outputText("\n<b>Kid A seems fairly well fed in the morning, and you note a trail of slime leading off in the direction of the lake.</b>\n"); // Yeah, blah blah travel weirdness. Quickfix so it seems logically correct.
 					needNext = true;
 				}
 			}
