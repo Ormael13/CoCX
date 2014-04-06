@@ -1,9 +1,10 @@
 ﻿//MARBLE_BOYS = Number of boys birthed
 //MARBLE_PURIFIED = Marble purified
 //CLARA_PURIFIED = Is clara purified?
-//CLARA_IMPRISONER = Is Clara Imprisoned?
+//CLARA_IMPRISONED = Is Clara Imprisoned?
 //CLARA_RELEASED = Is Clara released?
-
+//MARBLE_BREAST_SIZE = the size of her titons (0=DD cup, 1=G, 2=HH, 3=J)
+//MARBLE_TIME_SINCE_NURSED_IN_HOURS = Really fucking obvious.
 
 
 package classes.Scenes.NPCs {
@@ -215,7 +216,7 @@ package classes.Scenes.NPCs {
 	//Clara Appears in Camp
 	//happens at the start of the sixth day after sending Marble to her family.
 	//Clara is the youngest of Marble’s sisters, she is great at cracking funny jokes, and telling stories, and has an overall upbeat nature.  She does have this almost sinister smile that sometimes appears on her face when looking at the PC.  She looks like Marble in most respects, other than having black and white blotched pattern fur, and being a bit shorter and less endowed than Marble.  She is 6’2", and has GG cup breasts.
-	function claraShowsUpInCampBECAUSESHESACUNT():void
+	public function claraShowsUpInCampBECAUSESHESACUNT():void
 	{
 		clearOutput();
 		output("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!\"</i>  Marble excitedly exclaims at the sight of you coming out of your tent.  <i>\"Let me introduce you to my sister, Clara.\"</i>");
@@ -344,7 +345,7 @@ package classes.Scenes.NPCs {
 	//Low Intelligence Outcome
 	//Always happens if the PC’s intelligence is too low.  Characters with mid or high intelligence can voluntarily trigger this scene anyway.
 	//Clara tricks everyone into drinking the drugged tea, and the PC wakes up outside the camp with their mouth on Clara’s chest.  They have the choice to either fight back, or give in.  If they fight back, they’ll be at a severe disadvantage.
-	function lowIntelligenceGetsDruggedByCowSluts():void
+	public function lowIntelligenceGetsDruggedByCowSluts():void
 	{
 		clearOutput();
 		output("Once everyone has a cup, Clara smiles at all of you and holds her own cup up to her mouth and says, \"<i>To Marble’s purification and meeting new friends.</i>\"");
@@ -361,7 +362,7 @@ package classes.Scenes.NPCs {
 		addButton(0,"Next",partTwoOfLowIntelligencePCsFallingForTheIncrediblyObviousCowCuntsTrap);
 		
 	}
-	function partTwoOfLowIntelligencePCsFallingForTheIncrediblyObviousCowCuntsTrap():void
+	public function partTwoOfLowIntelligencePCsFallingForTheIncrediblyObviousCowCuntsTrap():void
 	{
 		//set PC’s health to max, fatigue to 40, and lust to 50.  Advance time by 6 hours.
 		//9999
@@ -396,7 +397,7 @@ package classes.Scenes.NPCs {
 		startCombat(9999);
 	}
 	//Chose submit
-	function voluntarilyChooseCowCuntBadEndYouBad():void
+	public function voluntarilyChooseCowCuntBadEndYouBad():void
 	{
 		clearOutput();
 		output("Giving into the desires that your addiction has granted you, you return to Clara’s breast.  Much to the young cow-girl’s moans and sighs of pleasure.  \"<i>Ahh, yes, that's a goood " + player.mf("boy","girl") + ",</i>\" is whispered in your ear.");
@@ -458,7 +459,7 @@ package classes.Scenes.NPCs {
 	}
 	//High Intelligence Outcome
 	//The PC realizes that Clara does not have good intentions and that there is likely something wrong with the tea as she is passing it out.  They have the option of calling her out on it while she is still passing the tea out, say nothing but don’t drink the tea, or say nothing and drink the tea anyway.  The later two options lead to the moderate and low intelligence options respectively.
-	function highIntelligenceOutcomesVsCowCuntDrugs(teaDrinkers:int):void
+	public function highIntelligenceOutcomesVsCowCuntDrugs(teaDrinkers:int):void
 	{
 		clearOutput();
 		output("It is obvious to you that Clara is up to something, she’s been behaving oddly every time she’s spoken to you, and this sharing of tea seems even odder.  You carefully watch as she counts up cups and starts pouring them out, then starts handing them out.  You also notice that her ingredients also included something from outside her tea kit.");
@@ -471,7 +472,7 @@ package classes.Scenes.NPCs {
 	}
 	//Call Clara Out
 	//If they call Clara out, then Clara panics while giving Marble her tea.  She takes Marble out with her mace and then confronts what is left of the party.
-	function highIntelligenceCallClaraOut():void
+	public function highIntelligenceCallClaraOut():void
 	{
 		clearOutput();
 		output("You stop Clara when she goes to hand Marble a cup and calmly ask her why she hasn’t given herself a cup too?  \"<i>Oh, I uh,</i>\" she stutters uncertainly.  You continue to push her and ask what the vial of extra fluid she added to the pot was just after she finished.  \"<i>Uh, just some special flavoring!</i>\" comes out in a nervous exclamation.");
@@ -607,7 +608,7 @@ package classes.Scenes.NPCs {
 		menu();
 		addButton(0,"Next",losingToCowCuntsPageII);
 	}
-	function losingToCowCuntsPageII():void
+	public function losingToCowCuntsPageII():void
 	{
 		clearOutput();
 		output("It is then that you realize with a shock that a familiar urge is welling up inside you.  No, it is much stronger then you remember it being before.  You want breastmilk.  You <i>need</i> breastmilk, and if you don’t get it, you’ll die.  To make matters worse, you know who’s breastmilk it is too.  Clara, Marble’s younger sister, has fatally addicted you to her milk.");
@@ -646,7 +647,7 @@ package classes.Scenes.NPCs {
 	}
 	//Nursing from Clara
 	//The PC then nurses from Clara.  Them being unable to do anything else should be emphasized.  Clara should also make a demand of the PC related to their lovers and quest as a condition for nursing.
-	function cowCuntBadEndPartIII():void
+	public function cowCuntBadEndPartIII():void
 	{
 		clearOutput();
 		output("Her gaze is not a pleasant one, to say the least.  \"<i>Aw, don’t be afraid,</i>\"  She coos in response to your expression.  \"<i>You’ve earned the right to drink my milk.  You should be happy!</i>\"  Still smiling, she reaches up and opens up her shirt.  The sight of her bountiful mammaries brings your need back to the top of your priorities, pushing fear out of the way.  You can’t help but lick your lips.  \"<i>Ooh, I like that face.  You’ll have to show it too me more often.  Now, come and drink your fill.</i>\"");
@@ -662,7 +663,7 @@ package classes.Scenes.NPCs {
 		addButton(cowCuntBadEndPartIV);
 	}
 
-	function cowCuntBadEndPartIV():void
+	public function cowCuntBadEndPartIV():void
 	{
 		clearOutput();
 		output("Now you get a chance to see a softer side to Clara.  The cow-girl gently takes your head and guides you to the other nipple.  She continues to hold you with one arm as you gently start drinking.  With her other hand, she caresses you.  She starts with your head, slowly cleaning up your " + hairDescript() + ".  Your feeder then delivers a small pinch to your cheek, and you hear her say, \"<i>You really are a damn sexy piece of woork.</i>\"");
@@ -699,7 +700,7 @@ package classes.Scenes.NPCs {
 	//Clara complements the PC on managing to avoid letting their cock grow to "stupidly big" proportions like so many other natives of the world, and then proceeds to violate them with her vagina.  Make a note that she is a virgin.  She promises them that they will continue to meet her needs for much time to come.
 
 	//cock n is the largest cock that will fit in Clara’s 20 capacity
-	function badEndDickThatFitsClara():void
+	public function badEndDickThatFitsClara():void
 	{
 		clearOutput();
 		var x:int = player.cockThatFits(20);
@@ -722,7 +723,7 @@ package classes.Scenes.NPCs {
 	}
 	//PC does not have a cock that fits, but does have at least one cock
 	//Clara gets upset over the PC’s cock(s) being too big to fit her.  If the PC can fit Marble, she will have a bit of a rant on Marble talking about learning to accept larger cocks.
-	function cockTooBigForCowCuntageBadEndage():void
+	public function cockTooBigForCowCuntageBadEndage():void
 	{
 		clearOutput();
 		output("\"<i>Now, we do have one problem.  ");
@@ -750,7 +751,7 @@ package classes.Scenes.NPCs {
 	}
 	//PC is cockless
 	//The PC is made to eat Clara out, while also being assured that soon enough they’ll be changed to better suit Clara’s needs.
-	function cocklessPCsGetAbusedByCowCunts():void
+	public function cocklessPCsGetAbusedByCowCunts():void
 	{
 		clearOutput();
 		output("Clara straddles head with her legs and looks down at you.  \"<i>Now you’re going to lick me until I’m satisfied.  Also, don’t you dare doo anything unless I tell you to, got it?</i>\"  She doesn’t wait for a response.  \"<i>Goood, now let's get started.</i>\"  The cow-girl promptly drops her snatch onto your face.");
@@ -802,7 +803,7 @@ package classes.Scenes.NPCs {
 	//Jump ahead a significant amount of time, and drop in on the PC doing a job for Clara, then slaving around for her while she lounges around, then a sex scene where she takes her pleasure out of the PC, and finally a nursing scene.  At this point, the PC will have one dick that is to Clara’s exact prefered specifications.  I think a cat one with proportions of 9x1.6 is appropriate.
 
 	//Clara now has a nice house or cottage out in the woods.  She has two other husbands in addition to the PC that are also addicted to her milk.  The PC is higher in power then those other two.
-	function finalBadEndWithCowCunt():void
+	public function finalBadEndWithCowCunt():void
 	{
 		clearOutput();
 		output("Years later...");
@@ -828,7 +829,7 @@ package classes.Scenes.NPCs {
 
 	//Win scenes against Clara
 	//PC defeats Clara outside camp
-	function defeatClaraCuntInAFight():void
+	public function defeatClaraCuntInAFight():void
 	{
 		clearOutput();
 		//Clara is taken out by Marble
@@ -922,7 +923,7 @@ package classes.Scenes.NPCs {
 	}
 	//Marble spanks Clara
 	//Just let Marble punish Clara like the bad girl she is.
-	function murbleSpanksCowCunt():void
+	public function murbleSpanksCowCunt():void
 	{
 		clearOutput();
 		output("Marble seems to have a good idea on how to punish Clara already, so you just sit back and watch.");
@@ -943,7 +944,7 @@ package classes.Scenes.NPCs {
 	}
 	//PC and Marble rape Clara
 	//Double team Clara, will be rough forceful sex.
-	function pcAndMurbleDoubleTeamCowButt():void
+	public function pcAndMurbleDoubleTeamCowButt():void
 	//does not work with centaur, naga, drider, or goo bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
 	{
 		clearOutput();
@@ -1013,7 +1014,7 @@ package classes.Scenes.NPCs {
 	//NTR Clara
 	//The PC and Marble have unusually rough and passionate sex in front of Clara, this is to show how much more real your love is to Marble.  It only serves to piss off Clara and make her jealous.
 	//does not work with centaur or drider bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
-	function NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG():void {
+	public function NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG():void {
 		clearOutput();
 		output("You ");
 		output("step forward and tell Marble that you think that since Clara thinks your love for one another isn't real.  How about the two of you show her just how real it is?  \"<i>Good idea, " + player.short + ",</i>\" your lover tersely replies through her still seething visage and steps forwards.  In an instant you're forcibly pulled into a strong passionate kiss upon humanlike lips while a decidedly inhumanly long tongue invades your mouth.  \<i>Wait, are you two just gooing to fuck right in front of me?</i>\" comes an incredulous voice from somewhere behind the woman you're kissing.  Neither of you pay it any mind and continue to taste, devour, and lavish affection on each other's mouths.  An angry grunt comes once more from the woman you're showing what loves means to, sounds of a struggle accompany it.");
@@ -1047,7 +1048,7 @@ package classes.Scenes.NPCs {
 	}
 	//Futa Marble rapes Clara
 	//Similar to the threesome, but Marble is the only participant.
-	function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock():void
+	public function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock():void
 	{
 		clearOutput();
 		output("You call out to Marble and suggest that she should use her new \"appendage\" to punish Clara.  She hesitates for a moment, then nods.  You doubt that you could have ever gotten her to do something like that if she wasn't as worked up as she is.");
@@ -1066,7 +1067,7 @@ package classes.Scenes.NPCs {
 	}
 	//Calm Marble down
 	//The end to all other punishment scenes, or if the player doesn't want to punish Clara.
-	function calmMurblesFatAssDown():void
+	public function calmMurblesFatAssDown():void
 	{
 		clearOutput();
 		output("That's enough.  You put your hand on Marble's shoulder and she turns to you in surprise.  Her body is still shaking with barely controlled rage, eyes filled with pain and anger mixed together, the flood of tears is just barely kept at bay.  You tell her to calm down and take a deep breath while wrapping your arms tightly around her body.  Instantly her body freezes in place for several moments, then she bursts into tears and ");
@@ -1090,7 +1091,7 @@ package classes.Scenes.NPCs {
 		//9999
 	}
 	//Rathazul Finishing Marble’s Potion
-	function rathazulFinishingMarblesPotion():void
+	public function rathazulFinishingMarblesPotion():void
 	{
 		//Initial check
 		clearOutput();
@@ -1324,318 +1325,251 @@ function purificationQuestFinal():void
 	doNext(15);
 }
 
-//Post Purification Content
-//Note that much of this post purification content is going to be left for a future expansion.  It is possible that helping Marble find a new future for herself will not happen at all, due to falling interest in CoC thanks to the upcoming release of TiTS.  For now pregnancies, sex scenes, and conversations will all that will be changed.
-
-//The old content headings have been moved to a different document.
-
-//New variables to track:
-//Marble's breast size, used to track Marble's breast size now.  Replaces the corruption controller.
-//0=DD cup, 1=G, 2=HH, 3=J
-//function marbleBreastSize() returns either DD, G, HH, or J depending on her current size.  If purification is not finished, returns HH if Marble's corruption is > 30, otherwise returns G.
-//Marble's time since last nursed, represented in hours.
-//Increases by 1 every hour.
-//When at 30 hours, Marble will go to the farm and get milked, dropping this down to 0 again.
-//Pure Marble’s Appearance
-//Change Marble's breast size on her appearance screen to use marbleBreastSize()
-//Giving Pure Marble Items and Transforming Her
-//Scenes for adding or removing Marble's cock remain the same as for tainted Marble
 //Purified Succubus milk
 //Used to increase Marble's bust size.
-/*"Do you want to ask Marble to grow her breasts bigger?"
-//PC chooses yes or no
-
+function purifiedSuccubusMilkForPureMarbles():void
+{
+	output("Do you want to ask Marble to grow her breasts bigger?");
+	//PC chooses yes or no
+	menu();
+	addButton(0,"Yes",actuallyGrowPureMarblesTittiesForFunzies);
+	addButton(1,"No",);
+}
 //if yes
-"You offer Marble a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger."
-
-if (Marble's breast size < 3)
+function actuallyGrowPureMarblesTittiesForFunzies():void
 {
-"\"<i>Alright, if you say so.</i>\"  Marble lifts the bottle to her mouth, and drinks the substance down.  She lets out a soft sigh and starts massaging her bouncy tit flesh as it expands outwards.  Through her shirt, you can see her " + marbleBreastSize() + " breasts balloon into "
-
-//increase Marble's breast size by 1
-
-marbleBreastSize() + " melons!"
-
-if (Marble's breast size == 1)
-{
-"Your mate examines her now larger bust, and gets a feel for it.  \"<i>Hmm, not quite what I'm use too, but it's better than those tiny things that I use to have.  Thank you sweetie!</i>\""
-} else if (Marble's breast size == 2)
-{
-"Your mate gives her chest a shake, then smiles happily.  \"<i>Thank you so much sweetie!  Now this feels much better, a good balance, nice weight, and just think of what I could do to you with these girls.</i>\""
-} else
-{
-"Your mate tentatively grips her massive mammaries.  \"<i>Wow, sweetie, isn't this a bit much?  I don't think I'll grow my girls anymore than this.</i>\"  She stretches her shoulders a bit.  \"<i>Ow, I hope this pain in my shoulders doesn't last...</i>\""
+	clearOutput();
+	output("You offer Marble a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
+	//if (Marble's breast size < 3)
+	if(flags[kFLAGS.MARBLE_BREAST_SIZE] < 3)
+	{
+		output("\n\n\"<i>Alright, if you say so.</i>\"  Marble lifts the bottle to her mouth, and drinks the substance down.  She lets out a soft sigh and starts massaging her bouncy tit flesh as it expands outwards.  Through her shirt, you can see her " + marbleBreastSize() + " breasts balloon into ");
+		//increase Marble's breast size by 1
+		flags[kFLAGS.MARBLE_BREAST_SIZE]++;
+		output(marbleBreastSize() + " melons!");
+		//if (Marble's breast size == 1)
+		if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 1)
+		{
+			output("\n\nYour mate examines her now larger bust, and gets a feel for it.  \"<i>Hmm, not quite what I'm use too, but it's better than those tiny things that I use to have.  Thank you sweetie!</i>\"");
+		}
+		//else if (Marble's breast size == 2)
+		else if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 2)
+		{
+			output("\n\nYour mate gives her chest a shake, then smiles happily.  \"<i>Thank you so much sweetie!  Now this feels much better, a good balance, nice weight, and just think of what I could do to you with these girls.</i>\"");
+		}
+		else
+		{
+			output("\n\nYour mate tentatively grips her massive mammaries.  \"<i>Wow, sweetie, isn't this a bit much?  I don't think I'll grow my girls anymore than this.</i>\"  She stretches her shoulders a bit.  \"<i>Ow, I hope this pain in my shoulders doesn't last...</i>\"");
+		}
+		//remove a bottle of pure succubus milk from the PC's inventory
+		player.consumeItem(consumables.P_S_MLK);
+		//increase Marble's lust by 5
+		flags[kFLAGS.MARBLE_LUST] += 5;
+		if(flags[kFLAGS.MARBLE_LUST] > 100) flags[kFLAGS.MARBLE_LUST] = 100;
+	}
+	else
+	{
+		output("\n\n\"<i>Sorry sweetie,</i>\" she says handing the bottle back to you, \"<i>I think my breasts are big enough as they are.</i>\"");
+		//no effect
+	}
+	doNext(13);
 }
 
-//remove a bottle of pure succubus milk from the PC's inventory
-//increase Marble's lust by 5
-} else
-{
-"\"<i>Sorry sweetie,</i>\" she says handing the bottle back to you, \"<i>I think my breasts are big enough as they are.</i>\"
-//no effect
-}
-Reducto
+//Reducto
 //Used to shrink Marble's breasts
-"Do you want to ask Marble to shrink her breasts down?"
-
-//PC chooses yes/no
+function pureMurbleUsesReducto():void
+{
+	clearOutput();
+	output("Do you want to ask Marble to shrink her breasts down?");
+	menu();
+	addButton(0,"Yes",pureMurblePCChoosesYesToShrinkeyTits);
+	addButton(1,"No",);
+}
 
 //if yes
-"You offer Marble a jar of reducto and tell her you'd like her to reduce her bust's size a bit."
-
-if (Marble's breast size > 0)
+function pureMurblePCChoosesYesToShrinkeyTits():void
 {
-"\"<i>Alright, if you say so.</i>\"  Marble opens the jar of reducto, lifts up her top, and slathers the green gel onto her breasts.  She lets out a soft sigh as the substance takes effect, and her tremendous " + MarbleBreastSize() + " tits slowly shrink in size, becoming a pair of more modest "
-
-//decrease Marble's breast size by 1
-
-MarbleBreastSize() + " sized breasts."
-
-if (Marble's breast size == 0)
-{
-"Your mate grips one of her sizable DDs, and gives an exaggerated sigh.  \"<i>This is just so tiny.  Remember that I'm only doing this because I care about you sweetie.  I'm not going to shrink them any further.</i>\""
-} else if (Marble's breast size ==1)
-{
-"Your mate gives an experimental bounce of her now reduced chest, \"<i>Hmm, I guess this isn't too bad, do you like the new me, sweetie?</i>\""
-} else
-{
-"You mate gives her shoulders a roll, then stretches her back.  \"<i>Oh, that's such a relief!</i>\" she says to you with a huge smile, \"<i>Thank you so much sweetie, this is about the right size for me.</i>\"
+	clearOutput();
+	output("You offer Marble a jar of reducto and tell her you'd like her to reduce her bust's size a bit.");
+	if (flags[kFLAGS.MARBLE_BREAST_SIZE] > 0)
+	{
+		output("\n\n\"<i>Alright, if you say so.</i>\"  Marble opens the jar of reducto, lifts up her top, and slathers the green gel onto her breasts.  She lets out a soft sigh as the substance takes effect, and her tremendous " + MarbleBreastSize() + " tits slowly shrink in size, becoming a pair of more modest "
+		//decrease Marble's breast size by 1
+		flags[kFLAGS.MARBLE_BREAST_SIZE]--;
+		output(MarbleBreastSize() + " sized breasts.");
+		if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 0)
+		{
+			output("\n\nYour mate grips one of her sizable DDs, and gives an exaggerated sigh.  \"<i>This is just so tiny.  Remember that I'm only doing this because I care about you sweetie.  I'm not going to shrink them any further.</i>\"");
+		}
+		//else if (Marble's breast size ==1)
+		else if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 1)
+		{
+			output("\n\nYour mate gives an experimental bounce of her now reduced chest, \"<i>Hmm, I guess this isn't too bad, do you like the new me, sweetie?</i>\"");
+		}
+		else
+		{
+			output("\n\nYou mate gives her shoulders a roll, then stretches her back.  \"<i>Oh, that's such a relief!</i>\" she says to you with a huge smile, \"<i>Thank you so much sweetie, this is about the right size for me.</i>\"");
+		}
+		//remove a jar of reducto from the PC's inventory
+		player.consumeItem(consumables.REDUCTO);
+		//decrease Marble's lust by 5
+		flags[kFLAGS.MARBLE_LUST] -= 5;
+		if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
+	}
+	else 
+	{
+		output("\n\n\"<i>What?  Sweetie, I'm already so tiny, I'm afraid I couldn't bring myself to get any smaller.  Sorry.</i>\"  She hands you back the jar of reducto.");
+	}
+	doNext(13);
 }
-//remove a jar of reducto from the PC's inventory
-//decrease Marble's lust by 5
-} else 
-{
-"\"<i>What?  Sweetie, I'm already so tiny, I'm afraid I couldn't bring myself to get any smaller.  Sorry.</i>\"  She hands you back the jar of reducto." 
-}
 
-Lactaid
+//Lactaid
 //Increase Marble's time since last nursed/milked by 10 hours, allowing a PC to instantly nurse from her again.
-"You hand Marble a bottle of lactaid, and ask her to drink it.  She nods to you and brings the flask to her lips.  \"<i>Doesn't taste too bad.  Ooo!</i>\" she cries out in surprise, then lets out a sensual moan and starts caressing and playing with her bovine breasts through her top.  She tweaks her nipples, and squeezes the tit flesh in earnest, then lets out one long sigh that sounds almost like a moo.  \"<i>I might have just had a small tit orgasm there...</i>\"  She shakes her head and focuses on you again.  \"<i>Sweetie, I think that just filled up my breasts with a lot of milk.  I have plenty now, if you're interested...</i>\""
-
-//increase Marble's time since last nursed by 10
-//increase Marble's lust by 20
-Nursing from Pure Marble
-if (time since last nursing is < 4 hours)
+function lactaidForPureMurble():void
 {
-"Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She gives you a sad look and informs you that no, she hasn't yet built up enough milk for you to have more.  Purifying her has made it take a bit longer for her to produce milk."
-} else
-{
-"Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She smiles at you and tells you she was worried you'd never ask, then leads you to a familiar, secluded part of the rocks around the camp."
-
-"Once you arrive, your lover teases you a bit by grabbing her " + marbleBreastSize() + " breasts through her top and playing around with them for a moment.  The bouncy flesh rolls around her hands in a very pleasant manner, and you feel your mouth water in anticipation of the delicious milk hidden within."
-
-"You're given a sultry smile, and Marble hooks her shirt with her thumb pulling it up over her chest, letting her bovine bust spill forth.  The invitation to partake in her revitalizing and rich fluids comes not long after, and you waste no time in doing just that.  "
-
-if (player.tallness()<65)
-{
-"The tall cow-lady takes a seat on the rocks and you jump onto her lap, "
-} else if (player.tallness()<84)
-{
-"You lean forward and "
-} else
-{
-"You lift up the cow-lady to get access, "
+	clearOutput();
+	output("You hand Marble a bottle of lactaid, and ask her to drink it.  She nods to you and brings the flask to her lips.  \"<i>Doesn't taste too bad.  Ooo!</i>\" she cries out in surprise, then lets out a sensual moan and starts caressing and playing with her bovine breasts through her top.  She tweaks her nipples, and squeezes the tit flesh in earnest, then lets out one long sigh that sounds almost like a moo.  \"<i>I might have just had a small tit orgasm there...</i>\"  She shakes her head and focuses on you again.  \"<i>Sweetie, I think that just filled up my breasts with a lot of milk.  I have plenty now, if you're interested...</i>\"");
+	//increase Marble's time since last nursed by 10
+	flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] += 10;
+	//increase Marble's lust by 20
+	flags[kFLAGS.MARBLE_LUST] >= 5;
+	if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
+	player.consumeItem(consumables.LACTAID);
 }
 
-"in seconds your lips are wrapped around her teats, and her wonderful milk is flowing forth."
-
-"While her pure milk doesn't have the same effect as when it was addictive, you must admit that it's still extremely delicious.  The rich liquid gushes out, filling your mouth with bliss evoking sweetness. This time around, the flow's speed is far from unmanageable and so you drink with a steady pace rather than wild abandon. Greedily gulping down the white gold, it soothes your dry throat and waiting stomach. Thanks to the comparably moderate stream, you are actually able to appreciate the pleasant feel of the nipple that your lips are clamped to."
-
-"While savoring the taste, you think that you should give some special attention to the fleshy nub in your mouth, and let your tongue play over the tip.  A few flicks and then a careful circle yields a very pleasant groan.  At the same time, Marble's hands run across your face and head while she mutters gentle words of encouragement and gratitude."
-
-"As you drink, you feel the aches and pains of the day wash away, and new energy fills your body.  The strengthening properties have vanished with the corruption and although the healing properties are weaker, they yet remain.  The flow starts to slow, and you take that as the cue to switch over to the other tit.  A satisfying sigh of pleasure accompanies this switch, and the gentle bovine gives your head a gentle hug, stroking the back of your head."
-
-"Finally, your tender moment with your mate comes to an end, and the last of her milk flows down your throat.  You separate, and a small burp escapes your lips.  Marble giggles at this and tells you to come and see her again whenever you're feeling thirsty.  She should be ready to nurse you again in about four hours."
-//Restore 20% of PC's health
-//Restore 30 fatigue
-//increase lust by 15
-//increase Marble lust by 10
-}
-//end event
-
-Marble leaves because you’re too corrupted (above 60)
-//Happens during the purification quest once Marble's corruption is under 30.  If a corrupt follower has been recruited at this point, she will also leave.
-//Marble will warn the PC if their corruption is getting too high (over 50), and leaves when at 60.
-Warning about corruption
-"Marble comes up to you with a worried look on her face.  \"<i>Uh, sweetie?  I'm getting worried about you.  You're trying to put so much effort into freeing me of corruption, but you seem to be slipping away yourself...</i>\"  She looks at the ground, rubs her hands a few times desperately trying to spit the words out.  \"<i>I don't think I'll be able to stay by your side if you keep falling like that.  Please find a way to clear yourself of the corruption that's gripping you!</i>\""
-
-"She runs off, not looking back.  You get the impression that she really doesn't like what she just said, and she's desperately trying to avoid letting what's happening to you bother her.  Should you really care though?"
-//end event
-Leaving from corruption
-//PC's corruption is now too high.
-"Marble approaches you with a somber expression on her face, her things strapped to a pack on her back"
-
-if (PC has more than one child with Marble)
+//Nursing from Pure Marble
+function nursingFromPureMarble():void
 {
-" , and with her children in tow"
-} else if (PC has one child with Marble)
-{
-" , and holding her child's hand"
-}
+	clearOutput();
+	//if(time since last nursing is < 4 hours)
+	if(flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] < 4)
+	{
+		output("Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She gives you a sad look and informs you that no, she hasn't yet built up enough milk for you to have more.  Purifying her has made it take a bit longer for her to produce milk.");
+		//9999
+	}
+	else
+	{
+		output("Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She smiles at you and tells you she was worried you'd never ask, then leads you to a familiar, secluded part of the rocks around the camp.");
+		output("\n\nOnce you arrive, your lover teases you a bit by grabbing her " + marbleBreastSize() + " breasts through her top and playing around with them for a moment.  The bouncy flesh rolls around her hands in a very pleasant manner, and you feel your mouth water in anticipation of the delicious milk hidden within.");
+		output("\n\nYou're given a sultry smile, and Marble hooks her shirt with her thumb pulling it up over her chest, letting her bovine bust spill forth.  The invitation to partake in her revitalizing and rich fluids comes not long after, and you waste no time in doing just that.  ");
+		if (player.tallness < 65)
+		{
+			output("The tall cow-lady takes a seat on the rocks and you jump onto her lap, ");
+		} 
+		else if (player.tallness < 84)
+		{
+			output("You lean forward and ");
+		}
+		else
+		{
+			output("You lift up the cow-lady to get access, ");
+		}
+		output("in seconds your lips are wrapped around her teats, and her wonderful milk is flowing forth.");
 
-".  \"<i>I'm sorry sweetie.  I tried to warn you, but-</i>\" she stops for a moment and takes a deep breath to steady herself.  "
+		output("\n\nWhile her pure milk doesn't have the same effect as when it was addictive, you must admit that it's still extremely delicious.  The rich liquid gushes out, filling your mouth with bliss evoking sweetness. This time around, the flow's speed is far from unmanageable and so you drink with a steady pace rather than wild abandon. Greedily gulping down the white gold, it soothes your dry throat and waiting stomach. Thanks to the comparably moderate stream, you are actually able to appreciate the pleasant feel of the nipple that your lips are clamped to.");
+		output("\n\nWhile savoring the taste, you think that you should give some special attention to the fleshy nub in your mouth, and let your tongue play over the tip.  A few flicks and then a careful circle yields a very pleasant groan.  At the same time, Marble's hands run across your face and head while she mutters gentle words of encouragement and gratitude.");
+		output("\n\nAs you drink, you feel the aches and pains of the day wash away, and new energy fills your body.  The strengthening properties have vanished with the corruption and although the healing properties are weaker, they yet remain.  The flow starts to slow, and you take that as the cue to switch over to the other tit.  A satisfying sigh of pleasure accompanies this switch, and the gentle bovine gives your head a gentle hug, stroking the back of your head.");
+		output("\n\nFinally, your tender moment with your mate comes to an end, and the last of her milk flows down your throat.  You separate, and a small burp escapes your lips.  Marble giggles at this and tells you to come and see her again whenever you're feeling thirsty.  She should be ready to nurse you again in about four hours.");
+		//Restore 20% of PC's health
+		HPChange(Math.round(maxHP()*.2),false);
+		//Restore 30 fatigue
+		fatigue(30);
+		//increase lust by 15
+		stats(0,0,0,0,0,0,15,0);
+		//increase Marble lust by 10
+		flags[kFLAGS.MARBLE_LUST] += 10
+		if(flags[kFLAGS.MARBLE_LUST] > 0) flags[kFLAGS.MARBLE_LUST] = 100;
+		doNext(13);
+	}
 
-if (PC has at least one child with Marble)
-{
-"\"<i>Mommy, what's wrong?</i>\"  The young one holding Marble's hand asks nervously.\"<i>Hush now, little one.  We have to go away for awhile,</i>\" the bovine mother responds and turns back to you.  "
-}
+	//Marble leaves because you’re too corrupted (above 60)
+	//Happens during the purification quest once Marble's corruption is under 30.  If a corrupt follower has been recruited at this point, she will also leave.
+	//Marble will warn the PC if their corruption is getting too high (over 50), and leaves when at 60.
+	//Warning about corruption
+	public function marbleWarnsPCAboutCorruption():void
+	{
+		clearOutput();
+		output("Marble comes up to you with a worried look on her face.  \"<i>Uh, sweetie?  I'm getting worried about you.  You're trying to put so much effort into freeing me of corruption, but you seem to be slipping away yourself...</i>\"  She looks at the ground, rubs her hands a few times desperately trying to spit the words out.  \"<i>I don't think I'll be able to stay by your side if you keep falling like that.  Please find a way to clear yourself of the corruption that's gripping you!</i>\"");
+		output("\n\nShe runs off, not looking back.  You get the impression that she really doesn't like what she just said, and she's desperately trying to avoid letting what's happening to you bother her.  Should you really care though?");
+		//end event
+		doNext(1);
+	}
+	//Leaving from corruption
+	//PC's corruption is now too high.
+	public function marbleLeavesThePCOverCorruption():void
+	{
+		clearOutput();
+		output("Marble approaches you with a somber expression on her face, her things strapped to a pack on her back");
+		//if (PC has more than one child with Marble)
+		if(flags[kFLAGS.MARBLE_KIDS] > 1) output(" , and with her children in tow");
+		//else if (PC has one child with Marble)
+		else if(flags[kFLAGS.MARBLE_KIDS] == 1) output(", and holding her child's hand");
+		output(".  \"<i>I'm sorry sweetie.  I tried to warn you, but-</i>\" she stops for a moment and takes a deep breath to steady herself.  ");
+		//if (PC has at least one child with Marble)
+		if(flags[kFLAGS.MARBLE_KIDS] > 0)
+		{
+			output("\"<i>Mommy, what's wrong?</i>\"  The young one holding Marble's hand asks nervously.\"<i>Hush now, little one.  We have to go away for awhile,</i>\" the bovine mother responds and turns back to you.  ");
+		}
+		output("\"<i>You've gotten too corrupted, and I can't stay here with you anymore.  Please find a way to free yourself from the taint within you so that I can come back.  Goodbye.</i>\"");
+		output("\n\nSo, the woman whom you helped escape from the grip of corruption, leaves you behind.  Driven away thanks to your own fall to the very same force from which you freed her.");
+		//Marble and her kids (if any) are removed from the farm and camp, she will only return once the PC's corruption is below 40, and Vapula, Holi, Corrupted Jojo, and Corrupted Amily are not in camp.
 
-"\"<i>You've gotten too corrupted, and I can't stay here with you anymore.  Please find a way to free yourself from the taint within you so that I can come back.  Goodbye.</i>\""
+		//9999
+		doNext(13);
+	}
+	//Marble comes back after your corruption drops below 40
+	public function pureMarbleDecidesToBeLessOfABitch():void
+	{
+		//happens after Marble has left the PC due to their corruption getting too high, and there are no corrupt followers in camp.  She returns during the day once the PC's corruption has gone below 40.
+		clearOutput();
+		output("While checking your traps to insure that they're still working, you hear a voice call out from outside the camp, \"<i>Sweetie!</i>\"  You look up and see the smiling face of Marble");
+		//if (PC has at least one child with Marble)
+		if(flags[kFLAGS.MARBLE_KIDS] > 0) output(" and that of your child");
+		//if (PC has two or more children with Marble) 
+		if(flags[kFLAGS.MARBLE_KIDS] > 1) output("ren");
+		output(" just outside the camp.  She must have somehow found out about your purification.");
 
-"So, the woman whom you helped escape from the grip of corruption, leaves you behind.  Driven away thanks to your own fall to the very same force from which you freed her."
+		output("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>I'm so glad you managed to free yourself from the worst of the taint.</i>\"  She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?");
+		//re-add Marble and her kids to the camp and farm
+		//9999
+		doNext(13);
+	}
 
-//Marble and her kids (if any) are removed from the farm and camp, she will only return once the PC's corruption is below 40, and Vapula, Holi, Corrupted Jojo, and Corrupted Amily are not in camp.
-Leaving from corrupted follower
-//Marble leaves the camp because you acquired a corrupted follower.  I'm going to need some help with these
-
-Marble comes back after your corruption drops below 40
-//happens after Marble has left the PC due to their corruption getting too high, and there are no corrupt followers in camp.  She returns during the day once the PC's corruption has gone below 40.
-"While checking your traps to insure that they're still working, you hear a voice call out from outside the camp, \"<i>Sweetie!</i>\"  You look up and see the smiling face of Marble"
-
-if (PC has at least one child with Marble)
-{
-" and that of your child"
-if (PC has two or more children with Marble) { "ren" }
-}
-
-" just outside the camp.  She must have somehow found out about your purification."
-
-"She excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>I'm so glad you managed to free yourself from the worst of the taint.</i>\"  She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?"
-
-//re-add Marble and her kids to the camp and farm
-Pure Marble gives birth  (Includes male and female bovine monster folk)
-//Since Marble has been purified, she can now give birth to male bovine monster folk.
-*/
-
-
-//Clara prison camp descriptions
-//displayed in the camp description if Clara was imprisoned in camp.
-"Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  "
-
-if (Clara was purified)
-{
-if (rand(10)==0)
-{
-"You catch Clara staring at you for a moment, then her gaze once again returns to some distant mountain top.  She has not taken her purification well."
-} else
-{
-"As always, Clara sits within, staring off into the distance.  She has not taken her purification well."
-}
-} else
-{
-if (time of day <= 7 OR >= 20)
-{
-"Clara is laying sprawled out on the ground of her cage, snoring loudly."
-} else
-{
-temp=rand(4);
-switch (temp)
-{
-case 0:
-"Clara is currently fidgeting with her clothing, it looks like she's doing some repairs or embroidery.  It's one of the few grateful moments of quiet you get from her."
-break;
-
-case 1:
-"Clara is heckling and throwing insults at your followers right now.  It's very annoying, but everyone ignores her."
-break;
-
-case 2:
-"Clara is currently engaged in trying to tempt you into letting her out of her cage and becoming addicted to her.  It's much the same as all her previous attempts..."
-break;
-
-case 3:
-"Clara is currently loudly whining about the conditions of her confinement to anyone who is willing to listen, which is no one."
-break;
-}
-}
-}
-
-Child interactions (unedited)
-Marble's child camp descriptions (changes highlighted)
-//requires at least 1 kid of any gender
-“Marble herself is nursing (one of your cow-girl children/your cow-girl child) with a content look on her face.”
-
-“Marble herself is watching your kid(s) playing around the camp right now.”
-
-//requires at least 2 daughters
-“Marble herself is involved in a play fight with two of your kids brandishing small sticks.  It seems that the <i>mommy monster</i> is terrorising the camp and needs to be stopped by the <i>Mighty Moo and her sidekick Bovine Lass</i>.”
-
-//requires at least 2 sons
-"Marble herself is currently refereeing a wrestling match between two of your sons.  It seems like it's a contest to see which one of them gets to go for a ride between her breasts in a game of <i>Bull Blasters</i>, while the loser has to sit on her shoulders."
-
-//requires at least 2 kids of any gender
-“Marble herself is out right now; she's taken her kids to go visit Whitney.  You're sure though that she'll be back within the hour, so you could just wait if you needed her.”
-
-//requires at least 4 kids
-“Marble herself is in the camp right now, telling a story about her travels around the world to her kids as they gather around her.  The children are completely enthralled by her words.  You can't help but smile.”
-
-//requires at least 6 kids, and no other parental characters in camp
-“Marble is currently tending to your kids, but she looks a bit stressed out right now.  It looks like “ + numberOfcow-girls()+numberOfBull-boys() + “ might just be too many for her to handle on her own...”
-
-//requires at least 1 kid of any gender, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
-“Marble herself is currently in the nursery, putting your child/children to bed.”
-Old interactions (changes in yellow)
-Bovine Saviour and tales of adventure can be left as female child only scenes. 
-Tales of adventure 
-//requires at least 2 kids of any gender
-“When you approach the nursery, the faces of your kids immediately light up and as one they cry out, \”<i>" + player.mf("Dad","Mom") + "!  Tell us a story!</i>\”  They crowd around you, excited at the prospect of hearing of your adventures.  It would seem that, once again, the kids will be the ones that decide what will be happening in your time with them.”
-
-“You launch into another tale of your exploits (that may or may not have actually happened to you) much to the enjoyment of your little ones.  They listen with rapt attention and smiles on their faces as you talk of your successes, worried looks when you sound like you might be in danger, and great cheers when you do make it out all right.  ([corruption check, <=40] You do make sure to skip over the items of a more explicit nature throughout.)  Eventually your story comes to an end, and you bid farewell to your kids.”
-
-//increase fatigue by 5 per kid, decrease lust by 5 per kid, and decrease libido by 1, advance time by 1 hour
-//end event
-
-Marble teaching her children how to construct small things and work with wood.
-//requires at least 2 kids of any gender
-“You notice Marble is sitting on some wood logs with your children. Curious, you decide to check what exactly is going on.”
-
-“\“<i>Mommy, it broke again!</i>\””
-
-“Apparently, Marble is attempting to teach your children how to properly create wooden structures, starting by constructing small ‘houses' and little toys from several pieces of wood.  It would appear (2 kids: both // 3 kids and more : about half of your children) have at least some knack for it.”
-
-“With infinite motherly patience, Marble sits down next to your children and again shows them how to make the basic supports.  You smile before departing to continue with your other work.”
-//end scene
-
-Marble asking the PC to take their children for a walk and gather some herbs for supper since she is very tired.
-//requires at least 6 kids of any gender
-“Marble looks up when you approach and gives you a weary smile.  \“<i>Hello, sweetie.”
-With a smile of your own, you tell her that she seems a bit too tired to attend your kids for the rest of the day and ask if there's anything you can do to help.
-“S...Sweetie, I can take care of things. I know you're busy doing other important...”
-You silence her and kindly explain that the kids are your own as well as hers, and therefore you also share some of the responsibility for them; moreover, you can't bear to watch her tired all the time from their sheer numbers.  She smiles again.
-“Thank you.  You really are amazing.  Well, I certainly could use a rest...  And we still have to get some stuff done for dinner, so if you could take them and gather some herbs as spice, it would both give them something to do and be greatly helpful.”
-
-With a nod, you call your brood and announce that all of you will be gathering some important plants for Mommy Marble.  The kids swarm around you and just the walk to the edge of the forest is enough for you to notice how tiring it can be dealing with all of them.
-
-“(Daddy/Mommy)!  Is this it?  Is this it?”
-
-They're certainly very energetic but have a tendency to simply grab things and ask you if they're the good ones rather than simply gathering what you instruct them to gather.  You swear one has picked out something that looks almost like a poisonous toadstool from your home, and yet another brought you a Whisker Fruit.  You gently collect them and send the kids back out, then quietly dispose of all the hazardous items.  This continues for a while, but eventually your basket is full.  
-//no new PG
-[ Int <30]Having gathered the things that looked like they were what Marble might need, you return to camp.[/]
-
-[Int 31-70]You're well aware of which herbs Marble usually uses as spices and mostly keep to it, through you also gather others you think are safe, wondering if she'd be able to make something of them.[/]
-
-[Int 71+] You know Marble's “spices” by heart and are well aware of what here can also be used as these. Gathering them all with your children, you return to camp well-stuffed with them.[/]
-
-Your kids are just a little bit tired from all the work and it doesn't seem they'll pester Marble much more today.  One of them even grabs you, complaining, “(Daddy/Mommy), I'm sleepy!”  You pat her head and smile, telling her that you'll be home soon enough.
-
-Approaching the camp, Marble is already waiting for you and seems a lot more relaxed and rested.  Taking the baskets with the herbs from you, she beams you a beautiful smile, then
-[Height below 5 feet]grabs you and immediately lifts you up to her chest, giving you a big hug.[/]
-[Height above 5 feet]embraces you strongly, pressing her warm body against yours.[/]
-
-“Thank you sweetie.  I love you.”
-
-//increase fatigue by 15, decrease lust by 10, and decrease libido by 1
-//Takes 1-2 hours?
-//gain 1x Whisker Fruit
-//end event
-
-New child interactions
-A bull boy asking you to tell him about your home, and what you're hoping to accomplish in the future.  Ends with him wanting to build a future too.
-Something about "Auntie Clara" who is inside the camp cage.  Needs a variation for if she's being rude to most of the camp members and one for if she's just staring off into space most of the time.
-Two bull boys challenge you to a series of competitive games.  They give it their all, while you obviously go easy on them (but don't necessarily tell them that).
-A bull-boy and cow-girl go adventuring together, with the boy playing the part of a wizard and the girl of a warrior.
-Misc changes
-Once Marble has been purified, the option to break up with her is disabled.
-The nursery needs to be updated to account for having two child counts (male and female), as well as the player's stats screen.  The current children scene requirements can stay as they are, since they refer to female children only.
-
+	//Clara prison camp descriptions
+	//displayed in the camp description if Clara was imprisoned in camp.
+	public function claraCampAddition():void
+	{
+		outputText("Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
+		//if (Clara was purified)
+		if(flags[KFLAGS.CLARA_PURIFIED] > 0)
+		{
+			if(rand(10)==0) output("You catch Clara staring at you for a moment, then her gaze once again returns to some distant mountain top.  She has not taken her purification well.");
+			else output("As always, Clara sits within, staring off into the distance.  She has not taken her purification well.");
+		}
+		else
+		{
+			//if (time of day <= 7 OR >= 20)
+			if(hours <= 7 || hours >= 20) output("Clara is laying sprawled out on the ground of her cage, snoring loudly.");
+			else
+			{
+				temp = rand(4);
+				switch (temp)
+				{
+					case 0:
+						outputText("Clara is currently fidgeting with her clothing, it looks like she's doing some repairs or embroidery.  It's one of the few grateful moments of quiet you get from her.");
+						break;
+					case 1:
+						outputText("Clara is heckling and throwing insults at your followers right now.  It's very annoying, but everyone ignores her.");
+						break;
+					case 2:
+						outputText("Clara is currently engaged in trying to tempt you into letting her out of her cage and becoming addicted to her.  It's much the same as all her previous attempts....");
+						break;
+					case 3:
+						outputText("Clara is currently loudly whining about the conditions of her confinement to anyone who is willing to listen, which is no one.");
+						break;
+				}
+			}
+		}
+		outputText("\n\n");
+	}
 }

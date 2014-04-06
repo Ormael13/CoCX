@@ -44,6 +44,22 @@ override public function marbleFollower():Boolean {
 	return player.findStatusAffect(StatusAffects.CampMarble) >= 0;
 }
 
+//function marbleBreastSize() returns either DD, G, HH, or J depending on her current size.  If purification is not finished, returns HH if Marble's corruption is > 30, otherwise returns G.
+function marbleBreastSize():String
+{
+	if(flags[kFLAGS.MARBLE_PURIFIED] > 0)
+	{
+		if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 0) return "DD cup";
+		else if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 1) return"G cup";
+		else return "J cup";
+	}
+	else
+	{
+		if(player.statusAffectv4(StatusAffects.Marble) > 30) return "HH cup";
+		else return "G cup"
+	}
+}
+
 //Initial encounter (1 hour duration) - comes up in the barn volunteering to help milk:
 public function encounterMarbleInitially():void {
 	spriteSelect(41);
@@ -3293,10 +3309,10 @@ private function marbleAppearance():void {
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <=1) outputText(", human until about half-way down her thigh.  The lower portion of her legs is covered in thick dark brown fur and ends in a pair of bestial hooves.\n\n",false);
 	else outputText(" that are oddly jointed and end in a pair of bestial hooves.\n\n",false);
 
-	if(player.statusAffectv4(StatusAffects.Marble) <=15) outputText("She has two pillowy breasts, each supporting a 0.4-inch lactating " + marbleNip() + ".  She could easily fill a DD-cup bra.\n\n", false);
-	else if(player.statusAffectv4(StatusAffects.Marble)<=25) outputText("She has two large breasts, each supporting a 0.6-inch lactating " + marbleNip() + ".  She could easily fill an E-cup bra.\n\n", false);
-	else if(player.statusAffectv4(StatusAffects.Marble)<=35) outputText("She has two basketball-sized breasts, each supporting a 0.8-inch milk-seeping " + marbleNip() + ".  She could easily fill a G-cup bra.\n\n", false);
-	else outputText("She has two basketball-sized breasts, each supporting a 1-inch milk-seeping " + marbleNip() + ".  She could easily fill an HH-cup bra.\n\n",false);
+	if(player.statusAffectv4(StatusAffects.Marble) <=15) outputText("She has two pillowy breasts, each supporting a 0.4-inch lactating " + marbleNip() + ".  She could easily fill a " + marbleBreastSize() + " bra.\n\n", false);
+	else if(player.statusAffectv4(StatusAffects.Marble)<=25) outputText("She has two large breasts, each supporting a 0.6-inch lactating " + marbleNip() + ".  She could easily fill a " + marbleBreastSize() + ".\n\n", false);
+	else if(player.statusAffectv4(StatusAffects.Marble)<=35) outputText("She has two basketball-sized breasts, each supporting a 0.8-inch milk-seeping " + marbleNip() + ".  She could easily fill a " + marbleBreastSize() + " bra.\n\n", false);
+	else outputText("She has two basketball-sized breasts, each supporting a 1-inch milk-seeping " + marbleNip() + ".  She could easily fill an " + marbleBreastSize() + " bra.\n\n",false);
 	
 	//Additions to Marble's appearance screen
 	//Marble's Pregnancy

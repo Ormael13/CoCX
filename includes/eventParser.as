@@ -965,7 +965,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 			player.removePerk(PerkLib.Flexibility);
 		}
+		//Marble stuff pt I
 		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
+			//Lactation whoopie!
+			if(flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] < 100) flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS]++;
 			//Increment Marble's Lust
 			if(flags[kFLAGS.MARBLE_LUST] < -100) flags[kFLAGS.MARBLE_LUST] = -100;
 			if(rand(2) == 0) flags[kFLAGS.MARBLE_LUST] += 1;

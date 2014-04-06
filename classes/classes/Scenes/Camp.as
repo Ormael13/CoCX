@@ -477,6 +477,10 @@ public function doCamp():void {
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
 		outputText("On the outer edges, half-hidden behind a rock, is a large, very healthy tree.  It grew fairly fast, but seems to be fully developed now.  Holli, Marae's corrupt spawn, lives within.\n\n");
 	}
+	if(flags[kFLAGS.CLARA_IMPRISONED] > 0)
+	{
+		//claraCampAddition();
+	}
 	//BIMBO SOPHAH
 	if(bimboSophie()) sophieBimbo.sophieCampLines();
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
@@ -500,16 +504,30 @@ public function doCamp():void {
 			//requires at least 6 kids, and no other parental characters in camp
 			if(rand(2) == 0 && flags[kFLAGS.MARBLE_KIDS] > 5) outputText("Marble is currently tending to your kids, but she looks a bit stressed out right now.  It looks like " + num2Text(flags[kFLAGS.MARBLE_KIDS]) + " might just be too many for her to handle on her own...");
 			//requires at least 4 kids
-			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 3) outputText("Marble herself is in the camp right now, telling a story about her travels around the world to her kids as they gather around her.  The girls are completely enthralled by her words.  You can't help but smile.");
+			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 3) outputText("Marble herself is in the camp right now, telling a story about her travels around the world to her kids as they gather around her.  The children are completely enthralled by her words.  You can't help but smile.");
+			//Requires 2 boys
+			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_BOYS] > 1)
+			{
+				outputText("Marble herself is currently refereeing a wrestling match between two of your sons.  It seems like it's a contest to see which one of them gets to go for a ride between her breasts in a game of <i>Bull Blasters</i>, while the loser has to sit on her shoulders.");
+			}
 			//requires at least 2 kids
-			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 1) outputText("Marble herself is involved in a play fight with two of your kids brandishing small sticks.  It seems that the <i>mommy monster</i> is terrorising the camp and needs to be stopped by the <i>Mighty Moo and her sidekick Bovine Lass</i>.");
+			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] - flags[kFLAGS.MARBLE_BOYS] > 1) outputText("Marble herself is involved in a play fight with two of your kids brandishing small sticks.  It seems that the <i>mommy monster</i> is terrorising the camp and needs to be stopped by the <i>Mighty Moo and her sidekick Bovine Lass</i>.");
 			else if(rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 1) outputText("Marble herself is out right now; she's taken her kids to go visit Whitney.  You're sure though that she'll be back within the hour, so you could just wait if you needed her.");
 			else {
 				//requires at least 1 kid
-				outputText("Marble herself is nursing ");
-				if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("one of your cow-girl children");
-				else outputText("your cow-girl child");
-				outputText(" with a content look on her face.");
+				if(rand(2) == 0) 
+				{
+					outputText("Marble herself is nursing ");
+					if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("one of your cow-girl children");
+					else outputText("your cow-girl child");
+					outputText(" with a content look on her face.");
+				}
+				else 
+				{
+					outputText("Marble herself is watching your kid");
+					if(flags[kFLAGS.MARBLE_KIDS] > 0) outputText("s");
+					outputText(" playing around the camp right now.");
+				}
 			}
 		}
 		//(Choose one of these at random to display each hour)
