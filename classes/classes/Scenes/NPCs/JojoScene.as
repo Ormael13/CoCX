@@ -1399,8 +1399,8 @@ public function lowCorruptionIntro():void
 	outputText("He smiles knowingly, “<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>”\n\n");
 
 	outputText("Jojo sighs sadly, “<i>Enough of my woes.  Though I ");
-	if (player.cor <= 5) outputText("don't");
-	else outputText("barely");
+	if (player.cor <= 5) outputText("don't ");
+	else outputText("barely ");
 	outputText("feel any corruption within you, it’s always best to be prepared.  Would you care to join me in meditation?</i>”\n\n");
 	
 	menu();

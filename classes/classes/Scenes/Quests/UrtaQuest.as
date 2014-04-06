@@ -861,7 +861,7 @@ private function morningAfterCampVisitEmbark(truth:Boolean):void {
 
 	if (truth)
 	{
-		outputText(" before you promise, \"< i > I'll come back to you, stronger and ready for kids, I promise.</i>\"\n\n");
+		outputText(" before you promise, \"<i> I'll come back to you, stronger and ready for kids, I promise.</i>\"\n\n");
 	}
 	else
 	{

@@ -21,7 +21,7 @@ package classes.Scenes.Areas.HighMountains
 		 */
 
 		// Return a height-based nickname for the player
-		public function heightDesc():String
+		public function heightDesc(doName:Boolean = true):String
 		{
 			if (rand(4) != 0) return "kid";
 			else
@@ -30,7 +30,11 @@ package classes.Scenes.Areas.HighMountains
 				if (player.tallness < 72) return "short-stuff";
 				if (player.tallness < 84) return "shorty";
 				if (player.tallness < 96) return "kid";
-				else return player.short;
+				else
+				{
+					if (doName) return player.short;
+					else return "kid";
+				}
 			}
 		}
 		
@@ -291,7 +295,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText(" exposing a delicious view of her thigh, the creamy-white flesh almost screaming out for your caresses.");
 			outputText("  If she notices, then she doesn’t seem to care.\n\n");
 			
-			outputText("“<i>Better, right?</i>”  She asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been awhile since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc() +"?</i>”  Whoever she is, she seems friendly enough");
+			outputText("“<i>Better, right?</i>”  She asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been awhile since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc(false) +"?</i>”  Whoever she is, she seems friendly enough");
 			if (player.tallness <= 96) outputText(" - if a little... imposing -");
 			else outputText(",");
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
