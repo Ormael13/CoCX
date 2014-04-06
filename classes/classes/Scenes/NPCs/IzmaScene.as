@@ -2261,7 +2261,7 @@ private function chooseToFlirtWithIzma():void {
 	spriteSelect(32);
 	outputText("", true);
 	outputText("You smile at Izma and tell her you appreciate the offer and that you think she'll be beautiful whether she becomes a mommy or a daddy.  In fact, the mental image of her heavily pregnant, ");
-	if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("her huge cock barely able to poke past her baby-filled belly, ";
+	if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("her huge cock barely able to poke past her baby-filled belly, ");
 	outputText("her DD-cups full of milk, watching as she waddles around the camp, is a very attractive one.  She smirks at you .  \"<i> You're such a perv.</i>\"");
 	
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("  But she glances between her legs and sees her massive cock poking out of her skirt.");
