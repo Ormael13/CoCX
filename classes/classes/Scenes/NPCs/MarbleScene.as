@@ -1652,7 +1652,7 @@ private function marbleKidsPlaytime():void {
 	//requires at least 2 kids
 	if(select == 2) {
 		outputText("When you approach the nursery, the faces of your kids immediately light up and as one they cry out, \"<i>" + player.mf("Dad","Mom") + "!  Tell us a story!</i>\"  They crowd around you, excited at the prospect of hearing of your adventures.  It would seem that, once again, the kids will be the ones that decide what will be happening in your time with them.");
-		outputText("\n\nYou launch into another tale of your exploits (that may or may not have actually happened to you) much to the enjoyment of your little girls.  They listen with rapt attention and smiles on their faces as you talk of your successes, worried looks when you sound like you might be in danger, and great cheers when you do make it out all right.");
+		outputText("\n\nYou launch into another tale of your exploits (that may or may not have actually happened to you) much to the enjoyment of your little ones.  They listen with rapt attention and smiles on their faces as you talk of your successes, worried looks when you sound like you might be in danger, and great cheers when you do make it out all right.");
 		//([corruption check, <=40] 
 		if(player.cor < 66) outputText("  You do make sure to skip over the items of a more explicit nature throughout.");
 		outputText("  Eventually your story comes to an end, and you bid farewell to your kids.");
@@ -2512,62 +2512,90 @@ public function marblePoopsBaybees():void {
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n", false);
 		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n", false);
-		outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has", false);
-		//Does the PC note that she is not a futa?
-		//If (Marble has a cock)
-		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
-		outputText(".   The little girl's face is a really pretty one; you're sure that she'll grow up to be like her mom.  You hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble's milk.\n\n", false);
-		//If (PC is addicted to Marble)
-		if(player.findPerk(PerkLib.MarblesMilk) >= 0) {
-			outputText("\"<i>Don't worry sweetie,</i>\" Marble tells you, \"<i>somehow I know that she won't get addicted.\"</i>  ", false);
-		} 
-		else {
-			outputText("\"<i>Oh my,\"</i> Marble says to you, \"<i>It's just as wonderful as when you suckled me when my milk was addictive; I'd forgotten the feeling.\"</i>  ", false);
-		}
-		outputText("Marble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.\n\n", false);
-		//since the PC must either be addicted, or have removed Marble's addictive trait in order to father a child with her, there is no need for a check for addiction here!
-		outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ", false);
-		//Marble chooses a random name from this list, assuming that there isn't already a child with that name, in which case she'll say she can't think of a name, and ask the PC to come up with one.
-		if(flags[kFLAGS.MARBLE_KIDS] == 0) {
-			temp = rand(10);
-			switch(temp) {
-				case 0:
-					outputText("Aura", false);
-					break;
-				case 1:
-					outputText("Miran", false);
-					break;
-				case 2:
-					outputText("Lin", false);
-					break;
-				case 3:
-					outputText("Mary", false);
-					break;
-				case 4:
-					outputText("Bess", false);
-					break;
-				case 5:
-					outputText("Tina", false);
-					break;
-				case 6:
-					outputText("Rill", false);
-					break;
-				case 7:
-					outputText("Wendy", false);
-					break;
-				case 8:
-					outputText("Rainy", false);
-					break;
-				case 9:
-					outputText("Nicky", false);
-					break;
-			}
-			outputText(", yes, that's a good name for her.</i>\"", false);
+		if(flags[kFLAGS.MARBLE_PURIFIED] > 0 && rand(2) == 0)
+		{
+			outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts balling and see that it is infact a young bovine boy that the two of you have brought into the world.  You can already tell he has all the bovine features of his mother, save his gender.  The little boy’s face is a really cute one; you’re sure that he’ll grow up to be a strong handsome man.", false);
 
-		}
-		else {
-			outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
+			//is this Marble's first boy?  Flag n is the number of male children Marble has given birth to
+			if (flags[kFLAGS.MARBLE_BOYS] ==0)
+			{
+				outputText("\n\nWhen you hand the boy to Marble she looks at the boy for a few moments in surprise before putting the crying child to her chest.  The little boy stops crying at once and starts eagerly gobbling down Marble’s milk\n\n", false);
+
+				outputText("You ask her why she hesitated like that.  \"<i>Oh?</i>\" she starts, looking up at you, \"<i>Sorry sweetie, it's just that I never thought I would give birth to a boy.  It just never occurred to me.</i>\"  Then her expression changes.", false);
+			}
+			else
+			{
+				outputText("\n\nYou hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble’s milk.", false);
+			}
+
+			outputText("\n\n\"<i>Oh my,\"</i> Marble says to you, \"<i>Its just as wonderful as when you suckled me when my milk was addictive; I’d forgotten the feeling.\"</i>  ", false);
+			outputText("\n\nMarble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.", false);
+
+			//since the PC must either be addicted, or have removed Marble’s addictive trait in order to father a child with her, there is no need for a check for addiction here!
+			outputText("\n\nOnce the two of you have had your fill, Marble puts the child inside the nursery.  The little boy is already starting to look like he is a few years old, and is already trotting around on his little hoofs.  Marble turns to look at you and says, \”<i>Hmm, well Sweetie, I can’t think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
+
+			//note that these may have to change, I'm not sure if they'll belong here or not
+			flags[kFLAGS.MARBLE_BOYS]++;  //again, n is the flag for the number of male kids Marble has had
 		} 
+		else
+		{
+			outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has", false);
+			//Does the PC note that she is not a futa?
+			//If (Marble has a cock)
+			if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
+			outputText(".   The little girl's face is a really pretty one; you're sure that she'll grow up to be like her mom.  You hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble's milk.\n\n", false);
+			//If (PC is addicted to Marble)
+			if(player.findPerk(PerkLib.MarblesMilk) >= 0) {
+				outputText("\"<i>Don't worry sweetie,</i>\" Marble tells you, \"<i>somehow I know that she won't get addicted.\"</i>  ", false);
+			} 
+			else {
+				outputText("\"<i>Oh my,\"</i> Marble says to you, \"<i>It's just as wonderful as when you suckled me when my milk was addictive; I'd forgotten the feeling.\"</i>  ", false);
+			}
+			outputText("Marble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.\n\n", false);
+			//since the PC must either be addicted, or have removed Marble's addictive trait in order to father a child with her, there is no need for a check for addiction here!
+			outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ", false);
+			//Marble chooses a random name from this list, assuming that there isn't already a child with that name, in which case she'll say she can't think of a name, and ask the PC to come up with one.
+			if(flags[kFLAGS.MARBLE_KIDS] == 0) {
+				temp = rand(10);
+				switch(temp) {
+					case 0:
+						outputText("Aura", false);
+						break;
+					case 1:
+						outputText("Miran", false);
+						break;
+					case 2:
+						outputText("Lin", false);
+						break;
+					case 3:
+						outputText("Mary", false);
+						break;
+					case 4:
+						outputText("Bess", false);
+						break;
+					case 5:
+						outputText("Tina", false);
+						break;
+					case 6:
+						outputText("Rill", false);
+						break;
+					case 7:
+						outputText("Wendy", false);
+						break;
+					case 8:
+						outputText("Rainy", false);
+						break;
+					case 9:
+						outputText("Nicky", false);
+						break;
+				}
+				outputText(", yes, that's a good name for her.</i>\"", false);
+
+			}
+			else {
+				outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
+			}
+		}
 		//cow-girl child is added to the nursery, her name is set to \"<i>childName</i>\"
 		flags[kFLAGS.MARBLE_KIDS]++;
 		doNext(1);
