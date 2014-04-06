@@ -1605,25 +1605,54 @@ public function updatePregnancy():Boolean {
 			//Increase PC's hips as per normal, add to birth counter
 		}
 		else {
+
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble rushes over and sees that it's time for you to give birth, so she picks you up and supports you as you continue pushing the child out of your now-gaping " + vaginaDescript(0) + ".", false);
-			player.cuntChange(20,true,true,false);
-			outputText("\n\nFor the next few minutes, you can't do much else but squeeze the large form inside your belly out.  Marble tries to help a little, pulling your nether lips open even further to make room for the head.  You gasp as you push the head out, and you hear Marble give a little cry of joy.  \"<i>It's a daughter of mine!</i>\" she tells you, but you can barely hear her due to the focus you're putting into the task of bringing this child out.\n\n", false);
-			outputText("You give an almighty heave and finally manage to push the shoulders out. The rest is downhill from there.  Once you've pushed the child completely out, Marble lays you down on the ground.  You rest there for a few moments, trying to catch your breath after the relatively difficult birthing.  When you finally have a chance to get up, you see that Marble has a small cowgirl cradled in her arms, suckling on her nipple.  You can hardly believe that you managed to push out a girl that big!  Marble seems to understand and tells you that the child is actually a fair bit bigger now than when she came out.\n\n", false);
-			outputText("She helps you stand up and gives you the little girl to suckle for yourself.  ", false);
-			if(player.statusAffectv4(StatusAffects.Marble) >= 20) {
-				outputText("As the child contentedly drinks from your " + nippleDescript(0) + ", Marble tells you, \"<i>Sweetie, somehow I know that our kids won't have to worry about the addictive milk.  It will only make them healthy and strong.</i>\"  You nod at her and put the child into the nursery.  ", false);
-			} 
-			else {
-				outputText("You put the child to your breast and let her drink down your milk.  You sign in contentment and Marble says, \"<i>See sweetie?  It's a really good feeling, isn't it?</i>\"  You can't help but nod in agreement.  After a minute the little girl has had enough and you put her into the nursery.\n\n", false);
+			//50% chance of it being a boy if Marble has been purified
+			if(flags[kFLAGS.MARBLE_PURIFIED] > 0 && rand(2) == 0)
+			//it's a boy!
+			{
+				outputText("\n\nFor the next few minutes, you can’t do much else but squeeze the large form inside your belly out.  Marble tries to help a little, pulling your nether lips open even further to make room for the head.  You gasp as you push the head out, and you hear Marble give a little cry of joy.  \"<i>It’s a son of mine!</i>\" she tells you, but you can barely hear her due to the focus you’re putting into the task of bringing this child out.", false);
+				outputText("\n\nYou give an almighty heave and finally manage to push the shoulders out. The rest is downhill from there.  Once you’ve pushed the child completely out, Marble lays you down on the ground.  You rest there for a few moments, trying to catch your breath after the relatively difficult birthing.  When you finally have a chance to get up, you see that Marble has a small bull boy cradled in her arms, suckling on her nipple.  You can hardly believe that you managed to push out a boy that big!  Marble seems to understand and tells you that the child is actually a fair bit bigger now than when he came out.", false);
+				outputText("\n\nShe helps you stand up and gives you the little boy to suckle for yourself.", false);
+				outputText("\n\nYou put the child to your breast and let him drink down your milk.  You sign in contentment and Marble says, \"<i>See sweetie?  It’s a really good feeling, isn’t it?</i>\"  You can’t help but nod in agreement.  After a minute the little boy has had enough and you put him into the nursery.", false);
+			
+				outputText("The little boy is already starting to look like he is a few years old; he’s trotting around on his little hoofs.", false);
+				//Increase the size of the PC’s hips, as per normal for pregnancies, increase birth counter
+				if(player.hipRating < 10) {
+					player.hipRating++;
+					outputText("After the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
+				}
+				if (flags[kFLAGS.MARBLE_BOYS] == 0)
+				//has Marble had male kids before?
+				{
+					outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.", false);
+				}
+				//Add to marble-kids:
+				flags[kFLAGS.MARBLE_KIDS]++;
+				flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
 			}
-			outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.", false);
-			//Add to marble-kids:
-			flags[kFLAGS.MARBLE_KIDS]++;
-		}
-		//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
-		if(player.hipRating < 10) {
-			player.hipRating++;
-			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
+			else // end of new content
+			//it's a girl!
+			{
+				player.cuntChange(20,true,true,false);
+				outputText("\n\nFor the next few minutes, you can't do much else but squeeze the large form inside your belly out.  Marble tries to help a little, pulling your nether lips open even further to make room for the head.  You gasp as you push the head out, and you hear Marble give a little cry of joy.  \"<i>It's a daughter of mine!</i>\" she tells you, but you can barely hear her due to the focus you're putting into the task of bringing this child out.\n\n", false);
+				outputText("You give an almighty heave and finally manage to push the shoulders out. The rest is downhill from there.  Once you've pushed the child completely out, Marble lays you down on the ground.  You rest there for a few moments, trying to catch your breath after the relatively difficult birthing.  When you finally have a chance to get up, you see that Marble has a small cowgirl cradled in her arms, suckling on her nipple.  You can hardly believe that you managed to push out a girl that big!  Marble seems to understand and tells you that the child is actually a fair bit bigger now than when she came out.\n\n", false);
+				outputText("She helps you stand up and gives you the little girl to suckle for yourself.  ", false);
+				if(player.statusAffectv4(StatusAffects.Marble) >= 20) {
+					outputText("As the child contentedly drinks from your " + nippleDescript(0) + ", Marble tells you, \"<i>Sweetie, somehow I know that our kids won't have to worry about the addictive milk.  It will only make them healthy and strong.</i>\"  You nod at her and put the child into the nursery.  ", false);
+				} 
+				else {
+					outputText("You put the child to your breast and let her drink down your milk.  You sign in contentment and Marble says, \"<i>See sweetie?  It's a really good feeling, isn't it?</i>\"  You can't help but nod in agreement.  After a minute the little girl has had enough and you put her into the nursery.\n\n", false);
+				}
+				outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.", false);
+				//Add to marble-kids:
+				flags[kFLAGS.MARBLE_KIDS]++;
+			}
+			//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
+			if(player.hipRating < 10) {
+				player.hipRating++;
+				outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
+			}
 		}
 		outputText("\n", false);
 		displayedUpdate = true;
