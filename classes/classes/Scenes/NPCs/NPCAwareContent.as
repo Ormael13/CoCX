@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 08.01.14.
  */
 package classes.Scenes.NPCs
@@ -185,6 +185,10 @@ package classes.Scenes.NPCs
 		protected function get marbleScene():MarbleScene
 		{
 			return kGAMECLASS.marbleScene;
+		}
+		protected function get marblePurification():MarblePurification
+		{
+			return kGAMECLASS.marblePurification;
 		}
 		public function marbleFollower():Boolean
 		{

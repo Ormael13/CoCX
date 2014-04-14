@@ -1582,8 +1582,15 @@ public function interactWithMarbleAtCamp():void {
 	var giveItemEvent:Number = 0;
 	var sexEvent:Function = null;
 	var playtime:Function = null;
+	var marbleGoEvent:Function = null;
 	//Text to display for when the Marble button is pressed
-	outputText("How will you interact with Marble?",true);
+	clearOutput();
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 2) outputText("How will you interact with Marble?",true);
+	//Reminder to visit Rathazul
+	else
+	{
+		outputText("<i>\"Hello, sweetie; have you had a chance to talk to that alchemist yet? I’m so close to being pure at last, but I need his help if I’m to get over this last hurdle.\"</i>",true);
+	}
 	/*List the six buttons, first four on the top row, second two on the 
 	bottom row, the milk and gathered buttons do not appear if Marble has 
 	nothing to give for them, the talk button does not appear if the player's 
@@ -1601,6 +1608,9 @@ public function interactWithMarbleAtCamp():void {
 	if(flags[kFLAGS.MARBLE_KIDS] > 0) playtime = marbleKidsPlaytime;
 	if(player.hasItem(consumables.OVIELIX)) giveItemEvent = 2128;
 	if(player.hasItem(consumables.PROBOVA)) giveItemEvent = 2128;
+	if(player.hasItem(consumables.P_LBOVA)) giveItemEvent = 2128;
+
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 3 && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 0) marbleGoEvent = marblePurification.murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether;
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = marbleSexExpanded;
@@ -1612,7 +1622,7 @@ public function interactWithMarbleAtCamp():void {
 			"Release",sexEvent,
 			"Playtime",playtime,
 			"Break Up",breakUpWithMarble,
-			"",0,
+			"Go",marbleGoEvent,
 			"Back",camp.campLoversMenu);
 }
 
@@ -1914,13 +1924,13 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n", true);
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if(player.statusAffectv1(StatusAffects.MarbleHasItem) <= 4) {
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 4) {
 		menuLoc = 2;
 		inventory.takeItem(consumables.VITAL_T);
 		player.removeStatusAffect(StatusAffects.MarbleHasItem);
 	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if(player.statusAffectv1(StatusAffects.MarbleHasItem) <= 7) {
+	else if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 7) {
 		menuLoc = 2;
 		inventory.takeItem(armors.LEATHRA);
 		player.removeStatusAffect(StatusAffects.MarbleHasItem);
@@ -3092,7 +3102,6 @@ private function marblePreggoChance(preggerMult:Number):void {
 	
 }
 
-
 private function marbleSexFinish():void {
 	spriteSelect(41);
 	//After all Marble sex
@@ -3263,6 +3272,7 @@ public function giveMarbleTheProBovas4Sho():void {
 	clearOutput();
 	spriteSelect(41);
 	player.consumeItem(consumables.PROBOVA);
+	
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) {
 		outputText("Marble nods and downs the contents.  Nothing happens for a moment... then she gasps and grabs at her chest, stumbling forward slightly.  The cow-girl straightens up and releases her grip, then pulls open her top to look at her breasts.  <b>Each is now decorated with sets of four nipples, like the teats of a cow.  She has also gained about 4 inches in height, judging against the backdrop of the camp.</b>  Marble takes a few minutes to test her new nipples, squeezing them gently and sighing as dribbles of milk decorate her areolae in fours instead of one, then looks at you and says, \"<i>This isn't really so bad.  Actually, it feels nice.  If you find another dose, I'm willing to drink it - just to see what happens, of course.</i>\"");
 		//Set Marble's nippes to quads, set her height to 6'8</i>\", increase Marble's vaginal capacity by 10, increase Marble corruption by 4

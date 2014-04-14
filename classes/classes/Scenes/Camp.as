@@ -69,6 +69,27 @@ public function doCamp():void {
 		fixHistory();
 		return;
 	}
+	//Cor < 50
+	//No corrupt: Jojo, Amily, or Vapula
+	//Purifying Murble
+	if(marbleScene.marbleFollower() && player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0)
+	{
+		hideMenus();
+		marblePurification.BLUHBLUH();
+		return;
+	}
+	if(marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7))
+	{
+		hideMenus();
+		marblePurification.rathazulsMurbelReport();
+		return;
+	}
+	if(marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] == 1)
+	{
+		hideMenus();
+		marblePurification.claraShowsUpInCampBECAUSESHESACUNT();
+		return;
+	}
 	if(arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
 		hideMenus();
 		arianScene.wakeUpAfterArianSleep();
@@ -486,8 +507,10 @@ public function doCamp():void {
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two-handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
+		//Marble is out!
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 		//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
-		if(flags[kFLAGS.MARBLE_KIDS] >= 1 && (model.time.hours == 19 || model.time.hours == 20)) {
+		else if(flags[kFLAGS.MARBLE_KIDS] >= 1 && (model.time.hours == 19 || model.time.hours == 20)) {
 			outputText("Marble herself is currently in the nursery, putting your ");
 			if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("child");
 			else outputText("children");
@@ -895,18 +918,24 @@ public function campLoversMenu():void {
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
-		//(Choose one of these at random to display each hour)
-		if(temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.", false);
-		if(temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.", false);
-		if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.", false);
-		if(temp == 3) {
-			outputText("Marble herself is resting on her bedroll right now.", false);
+		//Normal Murbles
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4)
+		{
+			//(Choose one of these at random to display each hour)
+			if(temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.", false);
+			if(temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.", false);
+			if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.", false);
+			if(temp == 3) {
+				outputText("Marble herself is resting on her bedroll right now.", false);
+			}
+			if(temp == 4) {
+				outputText("Marble herself is wandering around the camp right now.", false);
+			}
+			if(temp < 3) outputText("  You're sure she'd be back in moments if you needed her.", false);
+			marbleEvent = marbleScene.interactWithMarbleAtCamp;
 		}
-		if(temp == 4) {
-			outputText("Marble herself is wandering around the camp right now.", false);
-		}
-		if(temp < 3) outputText("  You're sure she'd be back in moments if you needed her.", false);
-		marbleEvent = marbleScene.interactWithMarbleAtCamp;
+		//Out getting family
+		else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n", false);
 	}
 	//AMILY

@@ -30,6 +30,8 @@ package classes
 		public static const CampAnemoneTrigger:StatusAffectType = mk("Camp Anemone Trigger");
 		public static const CampMarble:StatusAffectType = mk("Camp Marble");
 		public static const CampRathazul:StatusAffectType = mk("Camp Rathazul");
+		public static const ClaraCombatRounds:StatusAffectType = mk("Clara Combat Rounds");
+		public static const ClaraFoughtInCamp:StatusAffectType = mk("Clara Fought In Camp");
 		public static const CockPumped:StatusAffectType = mk("Cock Pumped");
 		public static const Contraceptives:StatusAffectType = mk("Contraceptives");
 		public static const CuntStretched:StatusAffectType = mk("CuntStretched");

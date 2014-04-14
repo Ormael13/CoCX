@@ -1,4 +1,4 @@
-
+﻿
 //Event No's 2000 4999 use this function
 
 public function doEvent(eventNo:Number):void
@@ -1602,6 +1602,7 @@ public function doEvent(eventNo:Number):void
 		var ttemp5:Function = null;
 		var ttemp6:Function = null;
 		var ttemp7:Function = null;
+		var ttemp8:Function = null;
 		if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1))
 			ttemp2 = marbleScene.giveMarbleLactaid;
 		if (player.hasItem(consumables.P_DRAFT, 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
@@ -1617,8 +1618,10 @@ public function doEvent(eventNo:Number):void
 			ttemp7 = marbleScene.giveMarbleTheProBovas4Sho;
 		if (player.hasItem(consumables.OVIELIX, 1))
 			ttemp3 = marbleScene.marbleOvulatesLikeMadDawg;
+		if (player.hasItem(consumables.P_LBOVA,1) && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 1)
+			ttemp8 = marblePurification.giveMarblePureQuestLabova;
 		outputText("What item do you want to give Marble?", true);
-		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "Pro Bova", ttemp7, "", 0, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
+		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "Pro Bova", ttemp7, "P.LaBova", ttemp8, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
 	}
 	else if (eventNo == 2134)
 	{

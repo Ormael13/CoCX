@@ -966,6 +966,26 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.removePerk(PerkLib.Flexibility);
 		}
 		//Marble stuff pt I
+		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] > 0)
+		{
+			flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1]--;
+			//Stick it at 1 so I can trigger it off the camp screen.
+			if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] <= 1)
+			{
+				flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 1;
+			}
+		}
+		//Counter 2!
+		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] > 0)
+		{
+			flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2]--;
+			//Stick it at 1 so I can trigger it off the camp screen.
+			if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] <= 1)
+			{
+				flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 1;
+			}
+		}
+		//more marbles!
 		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 			//Lactation whoopie!
 			if(flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] < 100) flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS]++;

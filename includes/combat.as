@@ -2300,6 +2300,18 @@ public function showMonsterLust():void {
 		//(Enemy dangerously aroused) 
 		if(monster.lust >= 90) outputText("You can see her thighs coated with clear fluids, the feathers matted and sticky as she struggles to contain her lust.", false);
 	}
+	else if(monster is Clara)
+	{
+		//Clara is becoming aroused
+		if(monster.lust <= 40)	 {}
+		else if(monster.lust <= 65) outputText("The anger in her motions is weakening.");
+		//Clara is somewhat aroused
+		else if(monster.lust <= 75) outputText("Clara seems to be becoming more aroused than angry now.");
+		//Clara is very aroused
+		else if(monster.lust <= 85) outputText("Clara is breathing heavily now, the signs of her arousal becoming quite visible now.");
+		//Clara is about to give in
+		else outputText("It looks like Clara is on the verge of having her anger overwhelmed by her lusts.");
+	}
 	//{Bonus Lust Descripts}
 	else if(monster.short == "Minerva") {
 		if(monster.lust < 40) {}

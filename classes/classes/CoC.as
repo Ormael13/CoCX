@@ -161,6 +161,7 @@
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
 		public var marbleScene:MarbleScene = new MarbleScene();
+		public var marblePurification:MarblePurification = new MarblePurification();
 		public var milkWaifu:MilkWaifu = new MilkWaifu();
 		public var raphael:Raphael = new Raphael();
 		public var rathazul:Rathazul = new Rathazul();

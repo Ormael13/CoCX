@@ -14,6 +14,12 @@
 	//After he has crafted 3 things for the player, option to move into camp.
 public function encounterRathazul():void {
 	spriteSelect(49);
+
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
+	{
+		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
+		return;
+	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -10);
@@ -45,6 +51,11 @@ public function encounterRathazul():void {
 
 public function campRathazul():void {
 	spriteSelect(49);
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
+	{
+		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
+		return;
+	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return;
