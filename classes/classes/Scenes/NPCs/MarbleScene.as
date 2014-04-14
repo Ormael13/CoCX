@@ -1583,6 +1583,7 @@ public function interactWithMarbleAtCamp():void {
 	var sexEvent:Function = null;
 	var playtime:Function = null;
 	var marbleGoEvent:Function = null;
+	var goEventString:String = "";
 	//Text to display for when the Marble button is pressed
 	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 2) outputText("How will you interact with Marble?",true);
@@ -1600,6 +1601,10 @@ public function interactWithMarbleAtCamp():void {
 	if(player.findStatusAffect(StatusAffects.MarbleHasItem) >= 0) gatherEvent = marbleGathered;
 	//The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted
 	if(player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID)) giveItemEvent = 2128;
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && player.hasItem(consumables.LACTAID)) giveItemEvent = 2128;
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && player.hasItem(consumables.P_S_MLK)) giveItemEvent = 2128;
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && player.hasItem(consumables.REDUCTO)) giveItemEvent = 2128;
+	
 	if(player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 		if(player.hasItem(consumables.PINKEGG)) giveItemEvent = 2128;
@@ -1610,7 +1615,15 @@ public function interactWithMarbleAtCamp():void {
 	if(player.hasItem(consumables.PROBOVA)) giveItemEvent = 2128;
 	if(player.hasItem(consumables.P_LBOVA)) giveItemEvent = 2128;
 
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 3 && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 0) marbleGoEvent = marblePurification.murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether;
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 3 && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 0) {
+		marbleGoEvent = marblePurification.murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether;
+		goEventString = "Go";
+	}
+	else if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) 
+	{
+		marbleGoEvent = marblePurification.nursingFromPureMarble;
+		goEventString = "Nurse";
+	}
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = marbleSexExpanded;
@@ -1622,7 +1635,7 @@ public function interactWithMarbleAtCamp():void {
 			"Release",sexEvent,
 			"Playtime",playtime,
 			"Break Up",breakUpWithMarble,
-			"Go",marbleGoEvent,
+			goEventString,marbleGoEvent,
 			"Back",camp.campLoversMenu);
 }
 
@@ -3244,7 +3257,7 @@ Marble's nipples are set to quads
 She gains 4 points of corruption
 */
 
-private function marbleCuntCapacity():Number {
+public function marbleCuntCapacity():Number {
 	var size:Number = 36;
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 1) {
 		size += 10;
@@ -3351,7 +3364,6 @@ private function marbleAppearance():void {
 	else outputText("She has one bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.", false);
 	doNext(interactWithMarbleAtCamp);
 }
-
 
 //Requirements:
 //- PC is a naga

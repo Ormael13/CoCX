@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters
+﻿package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.internals.*;
@@ -108,7 +108,8 @@ package classes.Scenes.Monsters
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,1).
 					add(consumables.LABOVA_,1).
-					add(consumables.INCUBID,6);
+					add(consumables.INCUBID,6).
+					add(consumables.SUCMILK,6);
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = 5019;
 			checkMonster();

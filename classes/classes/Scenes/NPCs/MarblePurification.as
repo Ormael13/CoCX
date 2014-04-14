@@ -223,6 +223,7 @@ package classes.Scenes.NPCs {
 	public function claraShowsUpInCampBECAUSESHESACUNT():void
 	{
 		clearOutput();
+		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 0;
 	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!\"</i>  Marble excitedly exclaims at the sight of you coming out of your tent.  <i>\"Let me introduce you to my sister, Clara.\"</i>");
 	 	outputText("\n\nThe other woman, whom you presume is Clara, certainly does look like she is related to Marble.  She is obviously another Lacta Bovine, with many of the same features as ");
 		//[Marble has cow face or not]
@@ -533,8 +534,8 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\nYou stand up as well and ready your " + player.weaponName + ", since even with such opposition it looks like the mad cow-girl still plans on fighting you.  A few minutes and bruises later, her beaten body proves this to have been a bit of a mistake on her part.");
 
 			//Proceed to after combat in camp.
-			startCombatWithMarbleSister(true);
-			monster.HP = 0;
+			menu();
+			addButton(0,"Next",defeatClaraCuntInAFight, true);
 		}
 		//No other fighters in camp
 		//if Marble is the only fighting follower, then the PC fights Clara on even ground for x number of rounds, before Marble wakes back up and ends the fight.
@@ -667,8 +668,8 @@ package classes.Scenes.NPCs {
 
 		//Proceed to either the has fitted cock, no fitted cock,  or has not cock variants.
 		menu();
-		if(!pc.hasCock()) addButton(0,"Next",cocklessPCsGetAbusedByCowCunts);
-		else if(pc.cockThatFits(20) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
+		if(!player.hasCock()) addButton(0,"Next",cocklessPCsGetAbusedByCowCunts);
+		else if(player.cockThatFits(20) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
 		else addButton(0,"Next",badEndDickThatFitsClara);
 	}
 
@@ -713,7 +714,7 @@ package classes.Scenes.NPCs {
 		else outputText("Your penis is");
 	 	outputText(" too big for a virgin like me to fit!  How the hell am I suppose to get that inside me?</i>\"  Clara stands up and starts stomping around the room.  ");
 		//if (PC has at least one dick that will fit inside Marble’s current capacity)
-		if(player.cockThatFits(9999) >= 0)
+		if(player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0)
 		{
 		 	outputText("\"<i>’It’s not a flaw, it’s a feature,’ she said, ‘This is why we train ourselves to take big endowments,’ she said!  Fuck you Marble!  I’m not sticking that stupid big thing inside me.</i>\"  ");
 		}
@@ -809,40 +810,45 @@ package classes.Scenes.NPCs {
 
 	//Win scenes against Clara
 	//PC defeats Clara outside camp
-	public function defeatClaraCuntInAFight():void
+	public function defeatClaraCuntInAFight(cheated:Boolean = false):void
 	{
-		//Clara is taken out by Marble
-		//If the camp fight lasts 10 rounds
-		if(player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10 && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0)
-		{
-			clearOutput();
-		 	outputText("A loud boom reverberates through the air as Marble uses her hammer to strike Clara on the back of the head, returning the favor that took her out earlier.  Your assailant drops to the ground instantly, ending the fight right there.  You consider asking if the young bovine will be all right, but given that Marble seems to have picked herself back up in a hurry, that is unlikely to be a problem.  Instead you ask your mate to see how she is holding up.  Other than a bump on the head, Marble tells you she'll be fine.  Bovine fortitude is once again proven to be formidable as Clara stirs on the ground.  In less than a minute, you and Marble are standing over the defeated, but conscious, form of your lover's sister.");
-		}
-		//Continue to common camp victory
-		//PC drags Clara back to camp, was originally planning on putting more rapes here, but 7 with Marble are probably enough.
-		else if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0)
-		{
-		 	outputText("Worried about the others, you head out of the cellar and drag Clara and her things with you.  Thanks to the strange way that travel works in this world, it doesn't take you long to find your way back to camp.  You catch your followers there just before they head out to go looking for you and dump your would be kidnaper before them.  Marble steps up next to you and looks down at her sister.");
-			//continue to common victory
-		}
-		//PC Defeats Clara in camp
-		//PC gets to rape Clara with Marble, if they wish to.
+		if(cheated) clearOutput();
 		else
 		{
-			//if (PC either stopped Clara from drugging everyone, or Marble was the only one drugged)
-			if(9999 == 0 || kGAMECLASS.camp.companionsCount() <= 2)
+			//Clara is taken out by Marble
+			//If the camp fight lasts 10 rounds
+			if(player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10 && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0)
 			{
-			 	outputText("With Clara incapacitated for now, you go to check on Marble and make sure she is alright.  Thankfully she seems to be fine.  You don't plan on underestimating a bovine's fortitude again in the near future.  Since her sister won't be going anywhere soon, you wait for a while to let her recover.  This doesn't take too long, and soon you and your lover are standing over the defeated form of the young-bovine.");
-			}
-			else
-			{
-			 	outputText("With Clara incapacitated for now, you go and check on your followers to make sure they're alright.  Thankfully, it seems that they're just asleep.  On a whim, you check through the calculating cow's pack to see if she has anything to counter the effects of her drug.  As luck would have it, she does have a conveniently labeled pouch of herbs for just that purpose.  Since the young bovine won't be going anywhere soon, you administer the wake up herbs to your camp crew.  This doesn't take long, and soon you and Marble are standing over the defeated form of your lover's sister.");
+				clearOutput();
+			 	outputText("A loud boom reverberates through the air as Marble uses her hammer to strike Clara on the back of the head, returning the favor that took her out earlier.  Your assailant drops to the ground instantly, ending the fight right there.  You consider asking if the young bovine will be all right, but given that Marble seems to have picked herself back up in a hurry, that is unlikely to be a problem.  Instead you ask your mate to see how she is holding up.  Other than a bump on the head, Marble tells you she'll be fine.  Bovine fortitude is once again proven to be formidable as Clara stirs on the ground.  In less than a minute, you and Marble are standing over the defeated, but conscious, form of your lover's sister.");
 			}
 			//Continue to common camp victory
+			//PC drags Clara back to camp, was originally planning on putting more rapes here, but 7 with Marble are probably enough.
+			else if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0)
+			{
+			 	outputText("Worried about the others, you head out of the cellar and drag Clara and her things with you.  Thanks to the strange way that travel works in this world, it doesn't take you long to find your way back to camp.  You catch your followers there just before they head out to go looking for you and dump your would be kidnaper before them.  Marble steps up next to you and looks down at her sister.");
+				//continue to common victory
+			}
+			//PC Defeats Clara in camp
+			//PC gets to rape Clara with Marble, if they wish to.
+			else
+			{
+				//if (PC either stopped Clara from drugging everyone, or Marble was the only one drugged)
+				if(kGAMECLASS.camp.companionsCount() <= 2)
+				{
+				 	outputText("With Clara incapacitated for now, you go to check on Marble and make sure she is alright.  Thankfully she seems to be fine.  You don't plan on underestimating a bovine's fortitude again in the near future.  Since her sister won't be going anywhere soon, you wait for a while to let her recover.  This doesn't take too long, and soon you and your lover are standing over the defeated form of the young-bovine.");
+				}
+				else
+				{
+				 	outputText("With Clara incapacitated for now, you go and check on your followers to make sure they're alright.  Thankfully, it seems that they're just asleep.  On a whim, you check through the calculating cow's pack to see if she has anything to counter the effects of her drug.  As luck would have it, she does have a conveniently labeled pouch of herbs for just that purpose.  Since the young bovine won't be going anywhere soon, you administer the wake up herbs to your camp crew.  This doesn't take long, and soon you and Marble are standing over the defeated form of your lover's sister.");
+				}
+				//Continue to common camp victory
+			}
+			outputText("\n\n");
 		}
 		//Common victory
 		//Raping or punishing Clara in camp with your followers
-	 	outputText("\n\n\"<i>Clara, what the hell were you trying to pull there?</i>\" Marble demands of her sister, her hands shaking in rage.");
+	 	outputText("\"<i>Clara, what the hell were you trying to pull there?</i>\" Marble demands of her sister, her hands shaking in rage.");
 	 	outputText("\n\n\"<i>Getting a mate, what doo you think?  I was going to take " + player.mf("lover-boy","lover-girl") + " here away to live with me,</i>\" comes the incredulous reply.");
 	 	outputText("\n\n\"<i>Getting a... out of my sweetie?!  We're already mates, where do you go off thinking you can just come in here and steal " + player.mf("him","her") + "?</i>\"");
 	 	outputText("\n\n\"<i>No sis, you had your chance.  " + player.short + " isn't addicted to you, that means that " + player.mf("he","she") + "'s up for grabs.  That's how things work for our race.</i>\"");
@@ -891,7 +897,7 @@ package classes.Scenes.NPCs {
 		//(if PC either has a cock with an area under 20 or a vagina) 
 		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) outputText("use Marble's unstable state of mind to get her into a forceful threesome with Clara, ");
 		//(if PC either has a cock that will fit Marble, or has a vagina)
-		if((player.hasCock() && player.cockThatFits(9999) >= 0) || player.hasVagina()) outputText("have sex in front of Clara so she can see what your love really is, ");
+		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) outputText("have sex in front of Clara so she can see what your love really is, ");
 		//(if Marble is a futa)
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText("egg Marble into violating Clara with her cock, ");
 	 	outputText(" or try to calm Marble down so that she doesn't do anything to her sister.");
@@ -899,7 +905,11 @@ package classes.Scenes.NPCs {
 		menu();
 		//PC chooses what kind of victory scene they want to do to Clara.
 		//options are: Spank (can always do), Threesome (if the PC has a cock that is under 20 area, or a vagina), "NTR" (if PC has a cock that will fit Marble, or a vagina), Marble cock (if Marble has a cock), and Calm down (always possible).
-		//9999
+		addButton(0,"Spank",murbleSpanksCowCunt);
+		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt);
+		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) addButton(2,"NTR",NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG);
+		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3,"Marble Cock",futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock);
+		addButton(4,"Calm Down",calmMurblesFatAssDown);
 	}
 	//Marble spanks Clara
 	//Just let Marble punish Clara like the bad girl she is.
@@ -920,7 +930,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou mention to the girl on the ground that she should take a look at what her sister found.  Those tear filled eyes open wide in absolute terror at the sight.  \"<i>You're, hah, you're crazy!</i>\" she manages to gasp out between sobs.  Like most of the pitiful girl's comments up until now, this one is ignored.  The harsh mistress of the law has come, and that mistress is going to make a bad bovine's bum blue.");
 	 	outputText("\n\nMarble picks her sister up off the ground and roughly tosses her onto one of the sitting logs around the firepit.  Clara continues to sob and beg for the abuse to stop, but it is all in vain.  Marble squats down slightly behind her, winds up, and brings down the first of many harsh smakes against her rear end.  Your mate doesn't let up on her punishment until every last inch of Clara's heinous hindquarters has been covered in blue welts.  By this point, the wannabe kidnapper and slaver is nothing but a slobbering, incoherent mess.");
 		//continue to calm Marble down
-		//9999
+		menu();
+		addButton(0,"Next",calmMurblesFatAssDown);
 	}
 	//PC and Marble rape Clara
 	//Double team Clara, will be rough forceful sex.
@@ -988,8 +999,10 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\nIt's around the same time that the girl under you cries out a long loud moo through Marble's womanhood, signalling her surrender to your lips.  You pull back and see your mate regard her sister with disappointment, you poke the bad bound girl in the belly and tell her to finish the job.  She gasps and returns to licking cow-girl snatch enough to bring out a nice low moan and moo from your mate's body.");
 		 	outputText("\n\nYour hot and sweaty bodies separate from one another, each face bearing the fluids of one another's orgasms.  Clara is coughing and sputtering, \"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No woonder " + player.short + " didn't want you!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
 		}
+		player.orgasm();
 		//proceed to calm Marble down
-		//9999
+		menu();
+		addButton(0,"Next",calmMurblesFatAssDown);
 	}
 	//NTR Clara
 	//The PC and Marble have unusually rough and passionate sex in front of Clara, this is to show how much more real your love is to Marble.  It only serves to piss off Clara and make her jealous.
@@ -1002,7 +1015,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nFrom there, you decide it is time to let your partner lead for a while.  She is quite happy to roll her massive melons around your face while you snuggle against the wonderfully smooth skin.  Abruptly, you feel the woman whose breasts you're trapped within turnaround.  \"<i>The fuck is this, sis?</i>\" the voice is spitting mad now.  You can hear that it's behind you, evidently someone wants to make sure the audience gets a full view of your sexual escapade.");
 	 	outputText("\n\nAfter a little more rack riding, Marble decides that it is time to get onto the main event.  She uncharacteristically violently forces you into a sitting position and tears the rest of your garments off.  You don't even get a chance to pull off her skirt before ");
 		//if (PC has a cock that fits)
-		var x:int = player.cockThatFits(9999);
+		var x:int = player.cockThatFits(marbleScene.marbleCuntCapacity());
 		if(player.hasCock() && x >= 0)
 		{
 		 	outputText("she drops herself onto your " + cockDescript(x) + ".  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
@@ -1025,6 +1038,8 @@ package classes.Scenes.NPCs {
 		//set lust to 0
 		player.orgasm();
 		//Proceed to calm Marble down
+		menu();
+		addButton(0,"Next",calmMurblesFatAssDown);
 	}
 	//Futa Marble rapes Clara
 	//Similar to the threesome, but Marble is the only participant.
@@ -1042,8 +1057,10 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYour mate's carefully paced thrusts are becoming more and more frantic, bringing out louder and louder moans from the younger cow-girl.  \"<i>Maa, what, ooo, haa.</i>\"  She can't even raise her voice in protest anymore.  The first-timer is far too blown away from the feeling of the sex.  She still struggles against her bonds, but you think that she's more likely trying to play with her wildly bouncing breasts.  Loud squelching accompanies the sexual sounds coming off the two sweaty girls, one tied up and the other humping.  Both are making similar sounds at this point, but it isn't too hard to tell them apart.  The younger sister's have a much stronger cow blend to them, while Marble's are much quieter.");
 	 	outputText("\n\nA loud, \"<i>MOOOO!</i>\" abruptly rises in crescendo out of the random moans, gasps, and gibbering mess that use to be Clara.  However, her sister doesn't stop with that orgasm and continues to pound away, bringing back the babbling wreck for a few more moments.  Then, Marble's own orgam rises out in her characteristic gasp and long low moan.  A much more subdued moo then the younger sister's.");
 	 	outputText("\n\nThe futa in this equation pants for a few moments, then asks, \"<i>Have... you, ha... learned your lesson now?</i>\"  When the answer comes in a incoherent moan, it looks like Marble might be about to start round two!");
+	 	dynStats("lus",20);
 		//proceed to Calm Marble down
-		//9999
+		menu();
+		addButton(0,"Next",calmMurblesFatAssDown);
 	}
 	//Calm Marble down
 	//The end to all other punishment scenes, or if the player doesn't want to punish Clara.
@@ -1068,7 +1085,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nEventually the two of you separate, and you get a chance to see Marble's face once more.  While her eyes are red, puffy, and rimmed with tears, they shine with joy, matching the great smile on her lips.  \"<i>Thank you sweetie, without you, I would have been more like... her,</i>\" she indicates her sister, a small frown once again creasing her features.");
 	 	outputText("\n\nYou suggest that now would probably be a good time to check on Rathazul, before deciding what to do with Clara.  \"<i>Good idea, it will give me some time to clear my head.</i>\"  The two of you leave the tied up bovine where she is and head over to the elderly alchemist's side of the camp.");
 		//Proceed to Rathazul finishing Marble's Potion.
-		//9999
+		menu();
+		addButton(0,"Next",rathazulFinishingMarblesPotion);
 	}
 	//Rathazul Finishing Marble’s Potion
 	public function rathazulFinishingMarblesPotion():void
@@ -1091,16 +1109,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou've got some time to kill now, you guess.  Is there something you want to spend it doing?");
 	
 		menu();
-		addButton(0,"WaitItOut",waitItOut4MurbleStuff);
-		addButton(1,"Leave",eventParser,13);
-	}
-
-	//Wait it out
-	function waitItOut4MurbleStuff():void
-	{
-		//Leads straight to Formula is done
-		//9999
-		
+		addButton(0,"Next",theFormulaIsDone);
 	}
 	//Let Marble know the formula is done
 	function theFormulaIsDone():void
@@ -1131,7 +1140,7 @@ package classes.Scenes.NPCs {
 	 	outputText("Of course, you know what happened next,</i>\" she sighs.");
 
 	 	outputText("\n\nYou remember; that's how the whole effort to purify her started in the first place.  It's what brought Clara to your camp.");
-	 	outputText("\n\nMarble laughs, \"<i>I barely lasted a few days....  You know how it bothers me when I can't nurse you like any other Lacta Bova out there?  As Clara said, I do want to addict you to my milk and fully mark you as mine.  I want to make sure I'm the only woman to share a bed with you and keep you all to myself.  Every day, I have to fight my instincts not to just push you down and force my milk down your throat.  The milkers help ease the burden some, but they can only do so much for me.");
+	 	outputText("\n\nMarble laughs, \"<i>I barely lasted a few days....  You know how it bothers me when I can't nurse you like any other Lacta Bova out there?  As Clara said, I do want to addict you to my milk and fully mark you as mine.  I want to make sure I'm the only woman to share a bed with you and keep you all to myself.  Every day, I have to fight my instincts not to just push you down and force my milk down your throat.  The milkers help ease the burden some, but they can only do so much for me.</i>\"");
 	 	outputText("\n\n\"<i>The most troubling part about all this is that I think of what my mom did to my dad, and that I would have done the same thing to you.  If you had become addicted to me, I wouldn't have even realized I was doing it either.  You would have been slowly twisted into my perfect mate, and as sick as that sounds, I genuinely want that.  Almost every part of my being wants that so much.  Ever since I was a little girl, I've dreamt of having a mate just like daddy....</i>\"");
 	 	outputText("\n\nMarble looks at you once more, somewhat passively.  You swear her expression is that of someone waiting for her execution.  \"<i>So, " + player.short + ", now you know the real me.  Can you still love me?</i>\"  You reach out to your lover's face and caress her cheek.  She then takes your hand and holds it tight against her face. In an instant, her stoicism shatters, and tears look to be on the verge of streaming down her face once more.  You tell her that everything will work out; it'll just take one step at a time.");
 
@@ -1144,7 +1153,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\n\"<i>You mean, purify her?  That's brilliant!  Goddess knows, if anyone deserves that, it's her.  We won't have to lock her up to know she's safe, and she'll have to find something better to do with her life then getting slaves!</i>\"");
 
 		//continue to Marble is purified
-
+		menu();
+		addButton(0,"Next",purifyMarbleComplete);
 	}
 
 	//Marble is purified
@@ -1193,7 +1203,8 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\nIt's with very light hearts and spirits you and the father of your children return to report the results of the formula.  \"<i>Excelent!  I will be sure to watch them closely to be sure that there are no lingering effects, but you and your family are likely now the first pure bovine-kin on Mareth in a long time.</i>\"");
 		}
 		//continue to Dealing with Clara
-		//9999
+		menu();
+		addButton(0,"Next",dealingWithCowCuntPostPurification);
 	}
 
 	//Dealing with Clara
@@ -1207,12 +1218,14 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\n\"<i>Congratulations!  You're not a Lacta Bovine anymore.  It isn't like I was trying to stop you from doing that, but now you sure as hell don't deserve a mate anymore.  You can't even claim one.</i>\"  Clara turns her attention to you, \"<i>Did you hear that, " + player.mf("lover-boy","lover-girl") + "?  You don't deserve a pseudo Lacta Bovine like her.  I can give you want you really want.</i>\"");
 
 	 	outputText("\n\n\"<i>I can't believe this Clara, why are you even bothering at this point?</i>\"");
-	 	outputText("\n\n\"<i>Fuck off, mutant.</i>\" she dismisses her sister in an instant.  \"<i>I want to tell my destined mate what kind of a life [he/she] is missing out on!  I know you still want true lacta bovine milk.  Once you've tasted it, you know that you truly want it forever.  Come away with me, be my slave, and you'll be truly happy again!</i>\" a sick smile plays over her face, her madness clear for all to see.");
+	 	outputText("\n\n\"<i>Fuck off, mutant.</i>\" she dismisses her sister in an instant.  \"<i>I want to tell my destined mate what kind of a life " + player.mf("he","she") + " is missing out on!  I know you still want true lacta bovine milk.  Once you've tasted it, you know that you truly want it forever.  Come away with me, be my slave, and you'll be truly happy again!</i>\" a sick smile plays over her face, her madness clear for all to see.");
 	 	outputText("\n\nMarble sighs, then speaks once more, \"<i>I figured you should know at least that, sister, before we decided what to do with you.</i>\"  She turns to you, \"<i>Well, " + player.short + ", you were the one she tried to kidnap and enslave.  What do you think we should do with her?</i>\"");
 	 	outputText("\n\nAs you and Marble were discussing before, purifying Clara would be a very fitting punishment for her.  It will forever prevent her from ever addicting anyone to her, and you won't need to worry about letting her out.  Of course, she certainly won't like that one bit.");
 
 		//PC chooses to purify or not to purify.
-		//9999
+		menu();
+		addButton(0,"Purify",purifyMurblesSister);
+		addButton(1,"Don't",dontPurifyClara);
 	}
 
 	//Purify
@@ -1228,9 +1241,11 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nWhen the process finishes, Clara is remarkably silent, and doesn't offer any more resistance to her bonds.  Now the question is what to do with her.");
 	 	outputText("\n\nYou guess you could also build a cage in the camp if you really want to keep an eye on her yourself.  That will make her another mouth to feed, and you'll have to hear her ranting every day.  Still, the saying does go, \"keep your enemies closer.\"");
 	 	outputText("\n\nIf you're feeling especially generous, you could just let her go, with not more than a promise to never come back or try to kidnap you again.");
+	 	flags[kFLAGS.CLARA_PURIFIED] = 1;
 		//PC makes their choice: Tel'Adre, camp cage, let go."
 		menu();
-		//9999
+		addButton(0,"Cage",cageDatCowCunt);
+		addButton(1,"Let Go",letGoOfMarblesCowCuntSister);
 	}
 
 	//Camp Cage
@@ -1239,9 +1254,11 @@ package classes.Scenes.NPCs {
 		clearOutput();
 	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgement on this matter.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The purified cow-girl offers no resistance this whole time, and is eerily silent once inside her cell.  You do occasionally catch her angrily staring at you.");
+	 	flags[kFLAGS.CLARA_IMPRISONED] = 1;
 		//Clara is marked as having been purified and caged in camp.
-		//9999
 		//continue to purification quest final
+		menu();
+		addButton(0,"Next",purificationQuestFinal);
 	}
 	//Let go
 	function letGoOfMarblesCowCuntSister():void
@@ -1250,8 +1267,9 @@ package classes.Scenes.NPCs {
 	 	outputText("You say that now that Clara is no danger to anyone anymore, she is free to go, so long as she promises to never bother you or your followers again.  Marble nods at this and says she agrees with your decision.");
 	 	outputText("\n\nYou and Marble untie Clara from her bonds, give her her things, and escort her out of the camp.  She doesn't even look at either of you until she is at the edge and you tell her to leave and never come back.  She gives you one look, a look of pure rage and anger, of one who is swearing vengeance, then as soon as it started, it is over.  She steps out of the camp, and warps away into the world.");
 		//Clara is marked as having been purified and released.
-		//9999
 		//continue to purification quest final
+		menu();
+		addButton(0,"Next",purificationQuestFinal);
 	}
 
 	//Don't purify
@@ -1262,7 +1280,9 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou guess you could also build a cage in the camp if you really want to keep an eye on her yourself.  That will make her another mouth to feed, and you'll have to hear her ranting every day.  Still, the saying does go, \"keep your enemies closer.\"");
 	 	outputText("\n\nIf you're feeling especially generous, you could just let her go, with not more than a promise to never come back or try to kidnap you again.");
 		//PC makes their choice: Tel'Adre, camp cage, let go."
-		//9999
+		menu();
+		addButton(0,"Cage",stickUnpurifiedClaraInACage);
+		addButton(1,"Let Go",letCorruptCowCuntGo);
 	}
 
 	//Camp Cage
@@ -1273,8 +1293,10 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\n\"<i>So that's it then.  You're just going to lock me up in a cage?  You can't do that!  I'm fucking Clara, daughter of Hana!  You can't just throw me in a damn cage!</i>\"  Despite her protests, she can't offer any real resistance, bound as she is.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The bars certainly don't do much to cut out the noise of her taunts and demands, unfortunately.");
 		//Clara is marked as having not been purified and caged in camp
+		flags[kFLAGS.CLARA_IMPRISONED] = 1;
 		//continue to purification quest final
-		//9999
+		menu();
+		addButton(0,"Next",purificationQuestFinal);
 	}
 
 	//Let go
@@ -1286,7 +1308,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou release her from her bonds, give her her things, and escort her from the camp.  She gives you a wicked smile, then steps out of the camp and warps away.  You hope that wasn't a mistake.");
 		//Clara is marked as having not been purified and released
 		//continue to purification quest final
-		//9999
+		menu();
+		addButton(0,"Next",purificationQuestFinal);
 	}
 
 	//Purification quest final
@@ -1294,10 +1317,15 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
-	 	outputText("\n\nYou've gained x exp for helping Marble attain purity.");
+	 	outputText("\n\nYou've gained 500 exp for helping Marble attain purity.");
 		//increase exp by x
-		//9999
+		player.XP += 500;
 		//Marble corruption is set to 10
+		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
+		flags[kFLAGS.MARBLE_PURIFIED] = 1;
+		player.changeStatusValue(StatusAffects.Marble,4,10);
+		gameState = 0;
+		player.clearStatuses(false);
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
 		//advance time of day by 4 hours
 		//end event
@@ -1306,13 +1334,14 @@ package classes.Scenes.NPCs {
 
 	//Purified Succubus milk
 	//Used to increase Marble's bust size.
-	function purifiedSuccubusMilkForPureMarbles():void
+	public function purifiedSuccubusMilkForPureMarbles():void
 	{
+		clearOutput();
 	 	outputText("Do you want to ask Marble to grow her breasts bigger?");
 		//PC chooses yes or no
 		menu();
 		addButton(0,"Yes",actuallyGrowPureMarblesTittiesForFunzies);
-		addButton(1,"No",eventParser,9999);
+		addButton(1,"No",eventParser,2128);
 	}
 	//if yes
 	function actuallyGrowPureMarblesTittiesForFunzies():void
@@ -1351,18 +1380,18 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\n\"<i>Sorry sweetie,</i>\" she says handing the bottle back to you, \"<i>I think my breasts are big enough as they are.</i>\"");
 			//no effect
 		}
-		doNext(13);
+		doNext(2128);
 	}
 
 	//Reducto
 	//Used to shrink Marble's breasts
-	function pureMurbleUsesReducto():void
+	public function pureMurbleUsesReducto():void
 	{
 		clearOutput();
 	 	outputText("Do you want to ask Marble to shrink her breasts down?");
 		menu();
 		addButton(0,"Yes",pureMurblePCChoosesYesToShrinkeyTits);
-		addButton(1,"No",eventParser,9999);
+		addButton(1,"No",eventParser,2128);
 	}
 
 	//if yes
@@ -1399,12 +1428,12 @@ package classes.Scenes.NPCs {
 		{
 		 	outputText("\n\n\"<i>What?  Sweetie, I'm already so tiny, I'm afraid I couldn't bring myself to get any smaller.  Sorry.</i>\"  She hands you back the jar of reducto.");
 		}
-		doNext(13);
+		doNext(2128);
 	}
 
 	//Lactaid
 	//Increase Marble's time since last nursed/milked by 10 hours, allowing a PC to instantly nurse from her again.
-	function lactaidForPureMurble():void
+	public function lactaidForPureMurble():void
 	{
 		clearOutput();
 	 	outputText("You hand Marble a bottle of lactaid, and ask her to drink it.  She nods to you and brings the flask to her lips.  \"<i>Doesn't taste too bad.  Ooo!</i>\" she cries out in surprise, then lets out a sensual moan and starts caressing and playing with her bovine breasts through her top.  She tweaks her nipples, and squeezes the tit flesh in earnest, then lets out one long sigh that sounds almost like a moo.  \"<i>I might have just had a small tit orgasm there...</i>\"  She shakes her head and focuses on you again.  \"<i>Sweetie, I think that just filled up my breasts with a lot of milk.  I have plenty now, if you're interested...</i>\"");
@@ -1424,7 +1453,7 @@ package classes.Scenes.NPCs {
 		if(flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] < 4)
 		{
 		 	outputText("Feeling a bit thirsty, you ask Marble if theres any chance she has some milk for you.  She gives you a sad look and informs you that no, she hasn't yet built up enough milk for you to have more.  Purifying her has made it take a bit longer for her to produce milk.");
-			//9999
+			doNext(marbleScene.interactWithMarbleAtCamp);
 		}
 		else
 		{
@@ -1456,7 +1485,8 @@ package classes.Scenes.NPCs {
 			//increase lust by 15
 			kGAMECLASS.stats(0,0,0,0,0,0,15,0);
 			//increase Marble lust by 10
-			flags[kFLAGS.MARBLE_LUST] += 10
+			flags[kFLAGS.MARBLE_LUST] += 10;
+			flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] = 0;
 			if(flags[kFLAGS.MARBLE_LUST] > 0) flags[kFLAGS.MARBLE_LUST] = 100;
 			doNext(13);
 		}
@@ -1471,6 +1501,7 @@ package classes.Scenes.NPCs {
 		clearOutput();
 	 	outputText("Marble comes up to you with a worried look on her face.  \"<i>Uh, sweetie?  I'm getting worried about you.  You're trying to put so much effort into freeing me of corruption, but you seem to be slipping away yourself...</i>\"  She looks at the ground, rubs her hands a few times desperately trying to spit the words out.  \"<i>I don't think I'll be able to stay by your side if you keep falling like that.  Please find a way to clear yourself of the corruption that's gripping you!</i>\"");
 	 	outputText("\n\nShe runs off, not looking back.  You get the impression that she really doesn't like what she just said, and she's desperately trying to avoid letting what's happening to you bother her.  Should you really care though?");
+	 	flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 1;
 		//end event
 		doNext(1);
 	}
@@ -1493,8 +1524,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\"<i>You've gotten too corrupted, and I can't stay here with you anymore.  Please find a way to free yourself from the taint within you so that I can come back.  Goodbye.</i>\"");
 	 	outputText("\n\nSo, the woman whom you helped escape from the grip of corruption, leaves you behind.  Driven away thanks to your own fall to the very same force from which you freed her.");
 		//Marble and her kids (if any) are removed from the farm and camp, she will only return once the PC's corruption is below 40, and Vapula, Holi, Corrupted Jojo, and Corrupted Amily are not in camp.
-
-		//9999
+		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 1;
+		player.removeStatusAffect(StatusAffects.CampMarble);
 		doNext(13);
 	}
 	//Marble comes back after your corruption drops below 40
@@ -1511,15 +1542,16 @@ package classes.Scenes.NPCs {
 
 	 	outputText("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>I'm so glad you managed to free yourself from the worst of the taint.</i>\"  She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?");
 		//re-add Marble and her kids to the camp and farm
-		//9999
+		player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 0;
+		flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 0;
 		doNext(13);
 	}
-
 	//Clara prison camp descriptions
 	//displayed in the camp description if Clara was imprisoned in camp.
 	public function claraCampAddition():void
 	{
-		outputText("Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
+		outputText("  Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
 		//if (Clara was purified)
 		if(flags[kFLAGS.CLARA_PURIFIED] > 0)
 		{
@@ -1550,7 +1582,6 @@ package classes.Scenes.NPCs {
 				}
 			}
 		}
-		outputText("\n\n");
 	}
 }
 }

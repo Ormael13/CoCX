@@ -1603,8 +1603,13 @@ public function doEvent(eventNo:Number):void
 		var ttemp6:Function = null;
 		var ttemp7:Function = null;
 		var ttemp8:Function = null;
+		var ttemp9:Function = null;
+		var ttemp10:Function = null;
 		if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1))
-			ttemp2 = marbleScene.giveMarbleLactaid;
+		{
+			if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5) ttemp2 = marbleScene.giveMarbleLactaid;
+			else ttemp2 = marblePurification.lactaidForPureMurble;
+		}
 		if (player.hasItem(consumables.P_DRAFT, 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
 			ttemp4 = marbleScene.MarbleDigsDraftsYo;
 		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
@@ -1620,8 +1625,13 @@ public function doEvent(eventNo:Number):void
 			ttemp3 = marbleScene.marbleOvulatesLikeMadDawg;
 		if (player.hasItem(consumables.P_LBOVA,1) && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 1)
 			ttemp8 = marblePurification.giveMarblePureQuestLabova;
+		if (player.hasItem(consumables.P_S_MLK,1) && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
+			ttemp9 = marblePurification.purifiedSuccubusMilkForPureMarbles;
+		if (player.hasItem(consumables.REDUCTO,1) && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
+			ttemp10 = marblePurification.pureMurbleUsesReducto;
+			
 		outputText("What item do you want to give Marble?", true);
-		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "Pro Bova", ttemp7, "P.LaBova", ttemp8, "", 0, "", 0, "Back", marbleScene.interactWithMarbleAtCamp);
+		choices("Lactaid", ttemp2, "OviElixir", ttemp3, "P.Incub Dr", ttemp4, "Pink Egg", ttemp5, "L.Pink Egg", ttemp6, "Pro Bova", ttemp7, "P.LaBova", ttemp8, "P.SuccMilk", ttemp9, "ReductoBust", ttemp10, "Back", marbleScene.interactWithMarbleAtCamp);
 	}
 	else if (eventNo == 2134)
 	{

@@ -1067,8 +1067,8 @@ public static const MARBLE_RATHAZUL_COUNTER_1:int                               
 public static const MARBLE_PURIFICATION_STAGE:int                                   = 1059;
 public static const MURBLE_TEA_DRINKER_COUNT:int                                   = 1060;
 public static const MARBLE_RATHAZUL_COUNTER_2:int                                   = 1061;
-public static const UNKNOWN_FLAG_NUMBER_01062:int                                   = 1062;
-public static const UNKNOWN_FLAG_NUMBER_01063:int                                   = 1063;
+public static const MARBLE_WARNED_ABOUT_CORRUPTION:int                                   = 1062;
+public static const MARBLE_LEFT_OVER_CORRUPTION:int                                   = 1063;
 public static const UNKNOWN_FLAG_NUMBER_01064:int                                   = 1064;
 public static const UNKNOWN_FLAG_NUMBER_01065:int                                   = 1065;
 public static const UNKNOWN_FLAG_NUMBER_01066:int                                   = 1066;

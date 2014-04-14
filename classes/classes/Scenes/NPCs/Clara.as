@@ -52,7 +52,32 @@
 			else if(rand(2) == 0) outputText("Clara seems to relax for a moment and bounces her breasts in her hands.  \"<i>Come on, you know how good it is to drink cow-girl milk, just give up!</i>\" she coos.  Despite yourself, you can’t help but remember what it was like, and find yourself becoming aroused.");
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
 			outputText("\n");
-			game.dynStats("lus",7+player.lib/20);
+			game.dynStats("lus",5+player.lib/20);
+			combatRoundOver();
+		}
+
+		//Once Clara is at half health or lower, she'll cast blind.
+		function claraCastsBlind():void
+		{
+			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
+			//Successful: 
+			if(player.inte / 5 + rand(20) + 1 < 14)
+			{
+				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
+				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
+			}
+			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
+			combatRoundOver();
+		}
+		function claraGropesBlindPCs():void
+		{
+			//Clara gropes the PC while they're blinded.  Damage is based on corruption + sensitivity.
+			if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) outputText("Suddenly Clara wraps an arm around you, and sticks a hand into your " + player.armorName + "!  She is able to give your " + multiCockDescriptLight + " a good fondle before you can push her away.  \"<i>Admit it - I make you soo hard, don't I?</i>\" she taunts you behind your dazzled vision.");
+			//Vagina: 
+			else if(player.hasVagina()) outputText("A sudden rush of Clara's hoofs clopping is the only warning you get before her attack comes, and you try to bring up your guard, only for her to deftly move past your defense and stick a hand into your " + player.armorName + "!  She manages to worm her way to your [vagina] and pinches your [clit] before you can push her back out!  \"<i>Hmm, yeah, you're soo wet for me.</i>\" she taunts you behind your dazzled vision.");
+			//Bum: 
+			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
+			game.dynStats("lus",7+player.lib/15);
 			combatRoundOver();
 		}
 		//Every round if you're in Clara’s base; the PC’s lust is raised slightly.
@@ -72,9 +97,13 @@
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
 			}
+			else if(player.findStatusAffect(StatusAffects.Blind) >= 0)
+			{
+				claraGropesBlindPCs();
+			}
 			else
 			{
-				var actions:Array = [eAttack,claraDrugAttack,claraTeaseAttack];
+				var actions:Array = [eAttack,claraDrugAttack,claraTeaseAttack,claraCastsBlind];
 				var action = rand(actions.length);
 				trace("ACTION SELECTED: " + action);
 				actions[action]();

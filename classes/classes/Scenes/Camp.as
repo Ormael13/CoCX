@@ -69,26 +69,50 @@ public function doCamp():void {
 		fixHistory();
 		return;
 	}
-	//Cor < 50
-	//No corrupt: Jojo, Amily, or Vapula
-	//Purifying Murble
-	if(marbleScene.marbleFollower() && player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0)
+	if(marbleScene.marbleFollower())
 	{
-		hideMenus();
-		marblePurification.BLUHBLUH();
-		return;
-	}
-	if(marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7))
-	{
-		hideMenus();
-		marblePurification.rathazulsMurbelReport();
-		return;
-	}
-	if(marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] == 1)
-	{
-		hideMenus();
-		marblePurification.claraShowsUpInCampBECAUSESHESACUNT();
-		return;
+		//Cor < 50
+		//No corrupt: Jojo, Amily, or Vapula
+		//Purifying Murble
+		if(player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0)
+		{
+			hideMenus();
+			marblePurification.BLUHBLUH();
+			return;
+		}
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
+		{
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50)
+			{
+				hideMenus();
+				marblePurification.marbleWarnsPCAboutCorruption();
+				return;
+			}
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60)
+			{
+				hideMenus();
+				marblePurification.marbleLeavesThePCOverCorruption();
+				return;
+			}
+			if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
+			{
+				hideMenus();
+				marblePurification.pureMarbleDecidesToBeLessOfABitch();
+				return;
+			}
+		}
+		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7))
+		{
+			hideMenus();
+			marblePurification.rathazulsMurbelReport();
+			return;
+		}
+		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] == 1)
+		{
+			hideMenus();
+			marblePurification.claraShowsUpInCampBECAUSESHESACUNT();
+			return;
+		}
 	}
 	if(arianFollower() && flags[kFLAGS.ARIAN_MORNING] == 1) {
 		hideMenus();
@@ -439,6 +463,10 @@ public function doCamp():void {
 		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
 		else if(model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
 		else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+	}
+	if(flags[kFLAGS.CLARA_IMPRISONED] > 0) 
+	{
+		marblePurification.claraCampAddition();
 	}
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
