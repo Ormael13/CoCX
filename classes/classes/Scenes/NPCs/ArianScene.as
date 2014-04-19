@@ -606,7 +606,7 @@ private function bargeInOnArian():void {
 	outputText("\n\nSlowly you approach the hiding lizard, and sit on his bed.  You let him know you're flattered to be his object of desire, and that there's no need to hide himself.  If he felt this way about you he should just have said so.");
 	outputText("\n\nArian peeks from under his covers.  \"<i>Y - You mean you're not mad at me?</i>\"  You smile and tell him you aren't.  Arian visibly relaxes, letting his covers fall on his chest.");
 	//(if PC is male)
-	if(player.gender == 1) {
+	if(player.hasCock() && !player.hasVagina()) {
 		outputText("\n\n\"<i>I just assumed... since we're both male....</i>\" He explains himself, fidgeting.  \"<i>I didn't know if you... well... if you would mind that....</i>\"");
 		outputText("\n\nYou raise your eyebrow, it seems that Arian is not opposed to some male on male.... What do you tell him?");
 		//[Don't mind] [Like Girls]
@@ -615,14 +615,14 @@ private function bargeInOnArian():void {
 		addButton(1,"Like Girls",youLikeGirlsNotSickLizardDudes);
 	}
 	//(else if PC is genderless)
-	else if (player.gender == 0) {
+	else if (!player.hasCock() && !player.hasVagina()) {
 		outputText("\n\n\"<i>I just assumed... since we're both male....</i>\"  He fidgets with his hands.  \"<i>I didn't know if you... well... if you would mind that....</i>\"");
 		outputText("\n\nYou stop him in his tracks, and tell him you're not exactly male.  You strip your undergarments and let Arian gaze in fascination at your crotch - your clean, smooth, genderless crotch.  Not believing what he is seeing Arian crawls forward to touch your crotch, mesmerized.  \"<i>How?  You... I... we can't....</i>\"  You silence him with a finger, and tell him there's plenty you two can do.");
 		//(Display Sex Menu)
 		arianSexMenu(false);
 	}
 	//(else if PC is female)
-	else if (player.gender == 2) {
+	else if (!player.hasCock() && player.hasVagina()) {
 		outputText("\n\n\"<i>It's just that... well... you're so beautiful and I'm... I didn't think you....</i>\"  He trails off.");
 		outputText("\n\nYou tell him he looks adorable, especially when he's acting like a hopeless virgin.  At the mention of the word ‘virgin' Arian recoils.  Surprised by this development, you ask him if he really is a virgin.");
 		outputText("\n\nArian hides his face once more inside his covers and says in a whisper, \"<i>Yes....</i>\"");
@@ -1786,9 +1786,11 @@ private function getBlownByArian():void {
 //PC must have a cock that fits (cock area 50 or less)
 private function penetrateArian():void {
 	var x:int = player.cockThatFits(50);
+	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+
 	outputText(images.showImage("arianfemale-home-penetrate"));
 	outputText("You admire the transgendered lizan's body, from her feminized features, down past her [arian chest], all the way to her shapely thighs.  You tell Arian that the change looks very good on her; few boys would really be so naturally pretty when turned into a ");
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("dick");
@@ -3826,7 +3828,6 @@ public function arianEggingEvent():void {
 		outputText("\n\nAs you enter the tent, you are greeted with the sight of Arian laying on her bed, naked, as she rubs her belly in a slow circular motion.  She spots you walking towards her and greets you with a smile.  \"<i>Hello, [name].  I have a new clutch of eggs growing inside me, would you like me to try and create a colored egg for you?</i>\"");
 	}
 	//(Display Color Options, in the future you will also have the option of telling her you want to fertilise her eggs.) (Also include a leave option.)
-	//9999
 	menu();
 	addButton(0,"Brown",pickAnEggArian,"brown");
 	addButton(1,"Purple",pickAnEggArian,"purple");
