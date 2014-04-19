@@ -2179,7 +2179,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		var ceraph:Number = 0;
 		//Ceraph's dreams - overlaps normal night-time dreams.
 		//Once every 10 days if 1, once every 7 days if 2, once every 5 days if 3
-		temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219];
+		temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220];
 		if(temp == 1) ceraph = 10;
 		else if(temp == 2) ceraph = 7;
 		else if(temp == 3) ceraph = 5;
