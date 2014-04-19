@@ -40,7 +40,7 @@ package classes.Items.Armors
 						outputText("You grunt in discomfort, your " + player.multiCockDescriptLight() + " flopping free from the thong's confines. The tight material rubbing against your dicks does manage to turn you on slightly.  ");
 					}
 					game.dynStats("lus", 5);
-					if(player.biggestCockArea() >= 20) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + player.cockDescript(0) + " has popped out of the top, completely exposed.  Maybe if you shrunk your male parts down a little...");
+					if(player.biggestCockArea() >= 20) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + player.cockDescript(player.biggestCockIndex()) + " has popped out of the top, completely exposed.  Maybe if you shrunk your male parts down a little...");
 					//[If dick is 7+ inches OR balls are apple-sized]
 					else if(player.ballSize > 5) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + player.ballsDescriptLight() + " hang on the sides, exposed.  Maybe if you shrunk your male parts down a little...");
 				}
