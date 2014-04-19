@@ -353,7 +353,7 @@ private function auntNancyPoonPartIII():void {
 	if(player.hasCock()) {
 		var x:Number = player.shortestCockIndex();
 		var y:Number = player.longestCock();
-		outputText("You can feel it when the spider-lady's pussy begins to quiver in delight. Aunt Nancy soon moans, then cries out in incredible pleasure.  The lower half of her eyes all close, while the others all roll up into her head in ecstasy.  \"<i>Yes!  YEEEEESSSSSSS!</i>\" she hisses with throaty, feminine indulgence.  The tiny feelers in her otherwise-silky-smooth vagina suddenly begin to squeeze and pull at your " + cockDescript(x) + ", and you let out a bellow of pleasure of your own as you feel your ", false);
+		outputText("You can feel it when the spider-lady's pussy begins to quiver in delight. Aunt Nancy soon moans, then cries out in incredible pleasure.  The lower half of her eyes all close, while the others all roll up into her head in ecstasy.  \"<i>Yes!  YEEEEESSSSSSS!</i>\" she hisses with throaty, feminine indulgence.  The tiny feelers in her otherwise silky-smooth vagina suddenly begin to squeeze and pull at your " + cockDescript(x) + ", and you let out a bellow of pleasure of your own as you feel your ", false);
 		//[If PC has balls]
 		if(player.balls > 0) outputText(ballsDescriptLight() + " tense, churning and tightening.", false);
 		//Else:]
@@ -413,7 +413,7 @@ private function auntNancyPoonPartIII():void {
 	}
 	//[Else:]
 	else {
-		outputText("You can feel it when the spider-lady's pussy begins to quiver in delight.  Aunt Nancy soon moans, then cries out in incredible pleasure.  The lower half of her eyes all close, while the others all roll up into her head in ecstasy.  \"<i>Yes!  YEEEEESSSSSSS!</i>\" she hisses with throaty, feminine indulgence.  The tiny feelers in her otherwise-silky-smooth vagina suddenly begin to squeeze and pull at your fingers, and her own fingers are soon touching sensitive places of their own inside of your ", false);
+		outputText("You can feel it when the spider-lady's pussy begins to quiver in delight.  Aunt Nancy soon moans, then cries out in incredible pleasure.  The lower half of her eyes all close, while the others all roll up into her head in ecstasy.  \"<i>Yes!  YEEEEESSSSSSS!</i>\" she hisses with throaty, feminine indulgence.  The tiny feelers in her otherwise silky-smooth vagina suddenly begin to squeeze and pull at your fingers, and her own fingers are soon touching sensitive places of their own inside of your ", false);
 		//[If PC has a vagina:]
 		if(player.hasVagina()) outputText(vaginaDescript(0) + " and ", false);
 		outputText(assholeDescript() + ".\n\n", false);

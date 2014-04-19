@@ -107,7 +107,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("Ranging through mountains and valleys, you find yourself back at Izumi’s camp.  Remembering the outcome of your last visit, you peer cautiously around the mouth of the cave.  Izumi, as before, is seated by the fire, puffing away at whatever bizarre narcotic she keeps in her pipe.  She catches sight of you almost immediately, frowns slightly, then raises a hand in a hesitant greeting.  There’s an awkward silence for a moment, during which Izumi avoids your gaze.\n\n");
 
-					outputText("“<i>So, uh...</i>”  She begins.  Then she scowls, blushing slightly.  “<i>So, you came back to apologize, right?  You damn well better have!  In fact, I’m not forgiving you until I’ve made you feel as humiliated as I did, so just give in already, okay?!</i>”\n\n");
+					outputText("“<i>So, uh...</i>” she begins.  Then she scowls, blushing slightly.  “<i>So, you came back to apologize, right?  You damn well better have!  In fact, I’m not forgiving you until I’ve made you feel as humiliated as I did, so just give in already, okay?!</i>”\n\n");
 			}
 			else
 			{
@@ -225,9 +225,9 @@ package classes.Scenes.Areas.HighMountains
 
 			if (player.tallness < 108)
 			{
-				outputText("You can still hear the humming, but at first, there doesn’t seem to be anyone around.  You creep closer to the tent, until suddenly, a huge shadow at the front of the tent shifts.  You freeze, straining your eyes through the darkness, as you suddenly realise that’s not a shadow at all - It’s an enormous figure!  You must have gasped, as without warning the humming stops.\n\n");
+				outputText("You can still hear the humming, but at first, there doesn’t seem to be anyone around.  You creep closer to the tent, until suddenly, a huge shadow at the front of the tent shifts.  You freeze, straining your eyes through the darkness, as you suddenly realise that’s not a shadow at all - it’s an enormous figure!  You must have gasped, as without warning the humming stops.\n\n");
 
-				outputText("“<i>Hm?</i>” the shadow grunts, then speaks.  “<i>Oh?  Now how did you find your way in here, I wonder?</i>”  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath and a small light flares up briefly in the darkness, then the shadow speaks again.  “<i>Well, whatever. It’s been awhile since I had company, ");
+				outputText("“<i>Hm?</i>” the shadow grunts, then speaks.  “<i>Oh?  Now how did you find your way in here, I wonder?</i>”  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath and a small light flares up briefly in the darkness, then the shadow speaks again.  “<i>Well, whatever. It’s been a while since I had company, ");
 
 				if (player.minoScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the the stupid brutes who usually wander around these parts.  ");
 				else if (player.dogScore() > 3) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
@@ -295,7 +295,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText(" exposing a delicious view of her thigh, the creamy-white flesh almost screaming out for your caresses.");
 			outputText("  If she notices, then she doesn’t seem to care.\n\n");
 			
-			outputText("“<i>Better, right?</i>”  She asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been awhile since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc(false) +"?</i>”  Whoever she is, she seems friendly enough");
+			outputText("“<i>Better, right?</i>” she asks, and you nod.  “<i>Sorry, I didn’t realise the smoke was getting to you at first.  It’s been a while since I’ve seen anything but a minotaur or a demon, at least ones that seem more interested in polite conversation than reaming everything in sight.</i>”  She grimaces, briefly.  “<i>So, what’s your story, " + this.heightDesc(false) +"?</i>”  Whoever she is, she seems friendly enough");
 			if (player.tallness <= 96) outputText(" - if a little... imposing -");
 			else outputText(",");
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
@@ -449,7 +449,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("“<i>You know, you’re pretty cute.  Did I already say that?  Well even if I did, it’s true.  I like brave people.  I like people who challenge themselves.  You’re pretty brave, surviving in a place like this all alone, you know?</i>”  Without warning, she leans forwards over the dying fire, the ruddy light from the coals illuminates her face from below, giving her a decidedly sinister air.\n\n");
 
-				outputText("“<i>I think it’s about time you repaid me for my hospitality.</i>”  She says, her eyes glittering dangerously in the firelight.  “<i>After all, you came into my camp uninvited... that’s pretty rude, you know?  I think I might take offence to that.</i>”  As she speaks, she slinks closer to you on all fours like some kind of predatory cat, about to make the final killing leap upon it’s helpless prey... Her personality has changed completely from the gentle giant you were speaking with a second ago.  You suddenly wonder if perhaps the smoke is somehow affecting her.\n\n");
+				outputText("“<i>I think it’s about time you repaid me for my hospitality.</i>”  She says, her eyes glittering dangerously in the firelight.  “<i>After all, you came into my camp uninvited... that’s pretty rude, you know?  I think I might take offence to that.</i>”  As she speaks, she slinks closer to you on all fours like some kind of predatory cat, about to make the final killing leap upon its helpless prey... Her personality has changed completely from the gentle giant you were speaking with a second ago.  You suddenly wonder if perhaps the smoke is somehow affecting her.\n\n");
 
 				outputText("“<i>I think you’d better make it up to me, yeah?</i>”  She continues, slurring her words slightly as she reaches out with one hammer-like hand, then seizes hold of your [armor].  “<i>Otherwise I might get nasty.  And you don’t want me to get <i>nasty</i> with ya’, do ya’?</i>”\n\n");
 			}
@@ -509,7 +509,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("“<i>So, you’re not gonna apologize?!</i>” Izumi scowls at you, blushing slightly. “<i>You’re a real jerk, you know that?  Fine then, I’ll just have to spank some manners into you!  Don’t cry!</i>”\n\n");
 
-				outputText("She drops into a fighting stance once again, but this time, instead of bending one arm behind her back, she hesitantly holds it up in front of her horn.  Her blush deepens as you stare at her.  “<i>Y-You cheat! I’m not falling for that kind of thing again!</i>” She explains, hotly.\n\n");
+				outputText("She drops into a fighting stance once again, but this time, instead of bending one arm behind her back, she hesitantly holds it up in front of her horn.  Her blush deepens as you stare at her.  “<i>Y-You cheat! I’m not falling for that kind of thing again!</i>” she explains hotly.\n\n");
 			}
 			// PC lost last fight
 			else if (flags[kFLAGS.IZUMI_LAST_ENCOUNTER] == 1)
@@ -554,7 +554,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Suddenly, she lunges forwards, one enormous hand planting itself onto your");
 				if (player.isTaur()) outputText(" flank and forcing you sideways onto the ground.");
 				else outputText(" chest and forcing you backwards onto the ground.");
-				outputText("  You grunt from the impact and try to sit up, but Izumi easily restrains you with a single well-muscled arm.  “<i> Well now, let’s see what we’re workin’ with here, shall we? </i>”  She announces casually, as she pulls aside your [armor] to reveal your cock.\n\n");
+				outputText("  You grunt from the impact and try to sit up, but Izumi easily restrains you with a single well-muscled arm.  “<i>Well now, let’s see what we’re workin’ with here, shall we?</i>” she announces casually, as she pulls aside your [armor] to reveal your cock.\n\n");
 
 				if (player.biggestCockLength() <= 6) surrenderSmallCock();
 				else if (player.biggestCockLength() <= 14) surrenderMediumCock();
@@ -1168,9 +1168,9 @@ package classes.Scenes.Areas.HighMountains
 			if(player.isNaga()) outputText(" slither");
 			else outputText(" walk"); 
 			outputText(" out of the cave without any trouble.  On the other hand...");
-			if (player.lust >= 75) outputText(" the idea of sex with Izumi <i>is</i> quite a tantalizing prospect.");
-			else outputText(".");
-			outputText("  From your position, you can clearly make out how tightly her kimono clings to her substantial assets, how only a thin scrap of material dangling between those powerful thighs - not even reaching low enough to touch the floor - obscures your vision and prevents you from seeing <i>everything</i>.");
+			if (player.lust >= 75) outputText(" the idea of sex with Izumi <i>is</i> quite a tantalizing prospect.  F");
+			else outputText(" f");
+			outputText("rom your position, you can clearly make out how tightly her kimono clings to her substantial assets, how only a thin scrap of material dangling between those powerful thighs - not even reaching low enough to touch the floor - obscures your vision and prevents you from seeing <i>everything</i>.");
 			if (player.lust >= 75) outputText("  Despite yourself, you have to wonder exactly what it would feel like to slide between those giant sweat-slicked thighs, bury your face into Izumi’s mountainous bust, and just let your libido run wild.");
 			outputText("\n\n");
 
@@ -1323,7 +1323,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("“<i>Alright, I see you’re ready.  Let’s get this thing started, shall we?</i>”  She chuckles, squatting down tantalizingly over your [cock biggest].  To your surprise, however, she spins around in place, turning her back to you while maintaining her position.  It isn’t until her hand reaches back to grab at your erection and begins guiding it towards her plowable rear that you realise what she’s doing.  She catches your eye and pauses, her face colouring slightly.\n\n");
 
-			outputText("“<i>What?</i>”  She asks, sounding a little embarrassed.  “<i>Girls are allowed to like stuff like this too, you know..</i>”  You can’t help but smile at her insecurity as you reach forwards and grip her hips, pulling her backwards onto your erection.  She gasps and her eyes widen slightly in surprise as your [cockhead biggest] slips inside her, but then her distinctive grin returns.  “<i>Oh, so it’s like that, is it? Well, let’s see how ya like this!</i>”\n\n");
+			outputText("“<i>What?</i>” she asks, sounding a little embarrassed.  “<i>Girls are allowed to like stuff like this too, you know..</i>”  You can’t help but smile at her insecurity as you reach forwards and grip her hips, pulling her backwards onto your erection.  She gasps and her eyes widen slightly in surprise as your [cockhead biggest] slips inside her, but then her distinctive grin returns.  “<i>Oh, so it’s like that, is it? Well, let’s see how ya like this!</i>”\n\n");
 
 			outputText("Without another word, Izumi drops her hips, forcing the entirety of your length into her asshole right down to the base.  She grunts appreciatively as your cock sinks deeply into her rear, grinding her hips into yours experimentally, twisting and turning, scraping your cock across as much of her insides as possible.\n\n");
 
@@ -1344,7 +1344,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("With a primal roar, you bury yourself to the hilt in the Oni girl’s backside as your orgasm explodes out of you.  Izumi lets out a triumphant laugh, arching her back in pleasure at the sensation of your cum flooding her insides");
 			if (player.totalCocks() > 1)
 			{
-				outputText(", the cock ");
+				outputText(", the cock");
 				if (player.totalCocks() > 2) outputText("s");
 				outputText(" not buried to the root in Izumi’s butt erupting in concert, splattering the joining between you with musky jizz.");
 			}
@@ -1357,7 +1357,7 @@ package classes.Scenes.Areas.HighMountains
 
 			// TODO: probably add some cumq variants here
 
-			outputText("“<i>Hah. So, looks like you had fun after all, huh?</i>”  She says when she finally deigns to release you, your softening erection slipping slickly free of her as she stands and stretches, the muscles undulating attractively across her body.  “<i>It’s been a long time since I had someone else to do that kind of thing with, so I’m glad to know I’m still up to scratch, you know? Ahaha!</i>”\n\n");
+			outputText("“<i>Hah. So, looks like you had fun after all, huh?</i>” she says when she finally deigns to release you, your softening erection slipping slickly free of her as she stands and stretches, the muscles undulating attractively across her body.  “<i>It’s been a long time since I had someone else to do that kind of thing with, so I’m glad to know I’m still up to scratch, you know? Ahaha!</i>”\n\n");
 
 			outputText("Izumi stands there with her hands on her hips, apparently unconcerned about being naked as she rolls her neck to relieve some of the stiffness built up there.  Despite having only just cum, the sight of the leonine woman standing so unabashedly naked before you, stretching out her body without a care in the world is undeniably arousing.  Even as the thought hits you, though, the dull ache in your hips reminds you that you had probably better not push your luck.\n\n");
 
@@ -1509,7 +1509,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("Without warning, Izumi suddenly brings one leg up, swings it wide and smashes it back down onto the ground.  A second later, she does the same with her other leg, assuming some kind of strange, half-crouching stance.  You ready yourself for an attack, but instead Izumi takes a deep breath, clenches her fists, and then....\n\n");
 				 
-				outputText("“<i><b>Tooooooooohhhhhhhhhhh!</b></i>” She roars, her voice only a low rumble at first but quickly growing to a thunderous crescendo.  You can only watch, astounded at the bizarre spectacle, as Izumi’s roar starts to cause tiny tremors to run through the cave, knocking over several small objects strewn around her camp.  Izumi continues to bellow the strange warcry, cords of muscle visible against her neck from the strain of…  Whatever it is she’s doing.\n\n");
+				outputText("“<i><b>Tooooooooohhhhhhhhhhh!</b></i>” She roars, her voice only a low rumble at first but quickly growing to a thunderous crescendo.  You can only watch, astounded at the bizarre spectacle, as Izumi’s roar starts to cause tiny tremors to run through the cave, knocking over several small objects strewn around her camp.  Izumi continues to bellow the strange war-cry, cords of muscle visible against her neck from the strain of... whatever it is she’s doing.\n\n");
 				 
 				outputText("And then you feel it.  Weakly at first, but growing in strength with every passing moment; waves of energy start rolling off of Izumi, each stronger than the last, making your hair stand on end.  Somehow, the oni’s roar is causing her to positively <i>radiate</i> power – and that power is growing stronger every second.  You begin to worry that you might actually be in real danger here.  Izumi was pretty strong when she claimed to be just playing around and using only a single hand to fight you, but there’s nothing playful about her appearance now.  In fact, in her strange, crouched stance, muscles straining against some invisible force, snarling and roaring at the empty air as she stares into nothing, you can’t help but feel she looks like nothing more than a crazed monster...  a demon, straight out of a story made to scare wayward children.  You have to do something, you realize.  You have to interrupt her, before she finishes whatever it is she’s doing!\n\n");
 
@@ -1519,7 +1519,7 @@ package classes.Scenes.Areas.HighMountains
 				 
 				outputText("Izumi blinks, once, twice, as the hair-raising aura dissipates almost immediately.\n\n");
 				 
-				outputText("“Um,” She says, surprisingly quietly given her formerly berserk appearance.  “C-Could you please let go of that?”  She asks, slowly sinking to her knees.  Your feet touch solid ground again, Izumi’s hand still wrapped limply around your neck, apparently forgotten.\n\n");
+				outputText("“Um,” she says, surprisingly quietly given her formerly berserk appearance.  “C-Could you please let go of that?” she asks, slowly sinking to her knees.  Your feet touch solid ground again, Izumi’s hand still wrapped limply around your neck, apparently forgotten.\n\n");
 				 
 				outputText("“<i>Really.  Um.  Please let go.</i>”  She says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  After all, maybe you’ve seized on the source of all her magical strength, or something?  You have no idea, so you decide to simply ask.  “<i>No.  Um.  No... It’s just, um.  T-That isn’t something you should touch.  So, y-you’ll let go now, right?</i>”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.  Interesting....\n\n");
 				 
@@ -1625,7 +1625,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Against the wishes of your libido, you decide to let Izumi off the hook.  You release her horn, soliciting a relieved gasp from Izumi, then take a step back.  The Oni woman straightens hastily and shoots you a grateful look before scurrying back into her tent, emerging a few moments later with an oversized fistful of gems.\n\n");
 
-			outputText("“<i>Here,</i>” She says, hurriedly.  “<i>I don’t need ‘em, and the minotaurs around this place drop ‘em like candy once you slap ‘em around a little, so they’re all yours.  And, uh...</i>” She blushes, looking distinctly awkward, before adding;  “<i>Thanks for being such a good sport and stopping when I asked.  And stuff.  I-It’s just, that’s kind of a sensitive area, and it’s pretty rude to touch a girl there, you know?  So... you know.</i>”  She trails off, lamely.  You shake your head, feeling a little bemused as you accept the glittering payoff.\n\n");
+			outputText("“<i>Here,</i>” she says, hurriedly.  “<i>I don’t need ‘em, and the minotaurs around this place drop ‘em like candy once you slap ‘em around a little, so they’re all yours.  And, uh...</i>” She blushes, looking distinctly awkward, before adding, “<i>Thanks for being such a good sport and stopping when I asked.  And stuff.  I-It’s just, that’s kind of a sensitive area, and it’s pretty rude to touch a girl there, you know?  So... you know.</i>”  She trails off, lamely.  You shake your head, feeling a little bemused as you accept the glittering payoff.\n\n");
 
 			outputText("You stow the gems safely away, reassuring Izumi that you have absolutely no intent of suddenly leaping on her and grabbing her horn again, then turn to make your way out of the cave.  Just as you pass the rock, however, you hear Izumi calling out from behind you.  You turn to see her hovering in the cave mouth looking uncharacteristically nervous.\n\n");
 
@@ -1643,7 +1643,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("You decide to let Izumi off the hook - up to a point.  You release her horn, soliciting a relieved gasp from Izumi, then take a step back.  The Oni woman straightens hastily and shoots you a grateful look before turning back to her tent.\n\n");
 
-			outputText("“<i>I’ve got some gems back here somewhere...</i>”  She says, but you interrupt, grabbing her sleeve and pulling her back towards you.  Deciding to take the direct route, you surprise Izumi by ambushing her with a sudden hug, burying your [face] in her expansive bust.  “<i>Huh?! I- What are you- Oh. </i>Oh!<i></i>”  She says as comprehension dawns.  “<i>You want to, uh...?</i>”  She trails off staring at you as you look up at her from your comfortable position sandwiched between her breasts - got it in one.\n\n");
+			outputText("“<i>I’ve got some gems back here somewhere...</i>” she says, but you interrupt, grabbing her sleeve and pulling her back towards you.  Deciding to take the direct route, you surprise Izumi by ambushing her with a sudden hug, burying your [face] in her expansive bust.  “<i>Huh?! I- What are you- Oh. </i>Oh!<i></i>”  She says as comprehension dawns.  “<i>You want to, uh...?</i>” she trails off, staring at you as you look up at her from your comfortable position sandwiched between her breasts - got it in one.\n\n");
 
 			outputText("“<i>Huh,</i>”  Izumi murmurs, rubbing her chin thoughtfully.  “<i>So you get the best of me, get me in a compromising position, then just let me go ‘cause I ask... But you still wanna fuck?</i>”  You nod emphatically, causing Izumi to chuckle.  “<i>You’re pretty unusual, kid, you know that? It’s not often I run into the chivalrous type. I gotta admit, it’s a refreshing change from the ‘a penis in every hole’ crowd. Hmm...</i>”  She eyes you thoughtfully for a moment, then gives a defeated shrug, smiling broadly.  “<i>Well, ya beat me, so it looks like ya get to do whatever ya want. I’m completely at your mercy, so if you were gonna do something lewd, I guess I’d have no choice but to go along with it.</i>”  The burly woman grins");
 			if (player.tallness < 80) outputText(" down");
@@ -1657,13 +1657,13 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Your roving hands locate one already hardening nipple and bring it up to your mouth. Izumi lets out a hiss as you latch onto her breast, sucking and licking away at the stiffening flesh with abandon.\n\n");
 
-			outputText("“<i>Hey,</i>” She groans quietly.  “<i>I’ve got two, you know?</i>”  She pulls her kimono aside, a blush beginning to spread across the broad plain of her features as she awkwardly presents her other breast to you. You can’t help but smirk a little as you change position slightly to suckle and grope at the new arrival instead, much to Izumi’s clear enjoyment.\n\n");
+			outputText("“<i>Hey,</i>” she groans quietly.  “<i>I’ve got two, you know?</i>”  She pulls her kimono aside, a blush beginning to spread across the broad plain of her features as she awkwardly presents her other breast to you. You can’t help but smirk a little as you change position slightly to suckle and grope at the new arrival instead, much to Izumi’s clear enjoyment.\n\n");
 
 			outputText("Suddenly painfully aware of the rising sensation in your crotch, you detach yourself from Izumi’s boobs in order to undo the rest of her kimono, pulling it aside to hang there limply as you inspect Izumi’s body.  You lean back into her, planting a kiss on her stomach - clearly not what Izumi expected as, somewhat cutely, she actually flinches at the sensation - before gliding a hand down between her legs.  To your surprise, she’s actually already wet; although you do find yourself wondering if it’s from your expert manipulation or the fight beforehand....\n\n");
 
 			outputText("“<i>Hey, hold it a sec,</i>”  Izumi pipes up suddenly.  “<i>Let’s try it like this, since I don’t really wanna do it standing up...</i>”  She detaches from you, backing away in order to take a seat with her back resting against one of the cave walls.  Satisfied that her new position is comfortable, she turns to you, locking you with a gaze that can only be described as ‘come hither’.  Spreading her legs shamelessly wide, she displays herself to you alluringly, beckoning with one finger.\n\n");
 
-			outputText("“Well?  Come on already,”  She says, smirking lasciviously.  “You wanted to do me, right? Well then, you’d better hurry up and get started before I get embarrassed...”\n\n");
+			outputText("“<i>Well?  Come on already,</i>” she says, smirking lasciviously.  “You wanted to do me, right? Well then, you’d better hurry up and get started before I get embarrassed...”\n\n");
 
 			outputText("You advance on Izumi, noting the hungry light in her eyes as you remove your [armor].  Her half-discarded kimono acts as a sort of blanket, softening the ground as you crawl in between the enormous woman’s thighs, positioning yourself to thrust into your new conquest.  “<i>Yeah, let’s do it, "+ this.heightDesc() +"... I’m ready, so show me what you’ve got.</i>”  She murmurs, half to herself, and you’re only too happy to oblige.\n\n");
 
@@ -1681,13 +1681,13 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("It’s obvious that she wants you to be a little more vigorous, but you decide to hold off for a moment.  You keep up a slow, easy rhythm, luxuriating in the way that Izumi’s pussy seems to try and latch onto your [cock biggest] as you draw back, as though unwilling to let you go, before sliding back inside of her welcoming folds.  Izumi groans, her fingernails rolling across your back as she clenches her fist in frustration.\n\n");
 
-			outputText("“<i>H-Hey, you deaf?! I said you can go faster, you know?</i>”  She scowls, clearly embarrassed.  “<i>So... you gonna do it, or what?!</i>”  She gives you a plaintive look, half crushing embarrassment, half pleading desperation. You answer her by burying your face between her breasts, nuzzling against the warm flesh as your hips begin to move faster and faster.  From the way her breath suddenly catches in her throat, you can tell your thrusts are having the desired effect.\n\n");
+			outputText("“<i>H-Hey, you deaf?! I said you can go faster, you know?</i>” she scowls, clearly embarrassed.  “<i>So... you gonna do it, or what?!</i>”  She gives you a plaintive look, half crushing embarrassment, half pleading desperation. You answer her by burying your face between her breasts, nuzzling against the warm flesh as your hips begin to move faster and faster.  From the way her breath suddenly catches in her throat, you can tell your thrusts are having the desired effect.\n\n");
 
 			outputText("Izumi runs her hand through her hair, moaning in arousal as you exert yourself, thrusting into her with enough force to send small tremors juddering through her frame.  Each time you bottom out inside her, your [hips] colliding with a lewd and clearly audible slap, she lets out a cute little yelp; a momentary, almost inaudible acknowledgement of the pleasure you’re giving her.\n\n");
 
 			outputText("The two of you remain like that for some time, Izumi becoming progressively more hot under the collar as your lovemaking continues.  The brash, bullish woman you met earlier seems to have completely melted away, replaced by this new version of Izumi; all blushes and breathy moans.  She looks at you, awkwardly, as though wrestling with some internal dilemma, her face flushed and hot.\n\n");
 
-			outputText("“<i>Um.  This is really nice.  I just... can you maybe do a thing for me?  It’s nothing hard!</i>”  She murmurs, so quietly you can barely hear her.  “<i>D-Do you think you could maybe... you know. Touch it?</i>”  She looks away again, shyly.  You aren’t quite sure what she means at first, so you just stare at her blankly for a moment.  \n\n");
+			outputText("“<i>Um.  This is really nice.  I just... can you maybe do a thing for me?  It’s nothing hard!</i>” she murmurs, so quietly you can barely hear her.  “<i>D-Do you think you could maybe... you know. Touch it?</i>”  She looks away again, shyly.  You aren’t quite sure what she means at first, so you just stare at her blankly for a moment.  \n\n");
 
 			outputText("She looks back, clocking your expression, then bites her lip.  “<i>M-My horn. Since we’re already, you know... gettin’ intimate anyway, it’s okay, so...</i>”  She trails off, clearly embarrassed beyond belief.  Feeling a little bemused, but willing to oblige, you steady yourself on one hand and reach up to gently grip Izumi’s horn with the other.\n\n");
 
@@ -1697,17 +1697,17 @@ package classes.Scenes.Areas.HighMountains
 			if (player.biggestTitSize() > 0) outputText(" against your own");
 			outputText(" as she gasps for air.\n\n");
 
-			outputText("“<i>Ah, shit,</i>” She gasps suddenly, “<i>I think, I don’t think I’m gonna be able to hold it any longer, s-sorry... ah! Nghahh, oh shit, here it comes!</i>”  Izumi’s eyes go wide as she suddenly jerks forwards slightly, arching her back away from the wall, her fingernails scraping across your back and the walls of her pussy clamping down around you like a vice.  She wraps her free hand around the back of your head, pulling you into her so hard that it’s almost painful.  You feel your own orgasm rising in turn and bury yourself up to the hilt, forcing yourself as deeply into Izumi as you can possibly manage.  She wails in orgasmic gratitude, her legs wrapping themselves around your waist and locking together, forcing you to remain where you are, buried deep within her as her muscles go insane, juddering and squeezing, stimulating every inch of your cock, forcing your orgasm out of you as though she bore it a grudge.\n\n");
+			outputText("“<i>Ah, shit,</i>” she gasps suddenly, “<i>I think, I don’t think I’m gonna be able to hold it any longer, s-sorry... ah! Nghahh, oh shit, here it comes!</i>”  Izumi’s eyes go wide as she suddenly jerks forwards slightly, arching her back away from the wall, her fingernails scraping across your back and the walls of her pussy clamping down around you like a vice.  She wraps her free hand around the back of your head, pulling you into her so hard that it’s almost painful.  You feel your own orgasm rising in turn and bury yourself up to the hilt, forcing yourself as deeply into Izumi as you can possibly manage.  She wails in orgasmic gratitude, her legs wrapping themselves around your waist and locking together, forcing you to remain where you are, buried deep within her as her muscles go insane, juddering and squeezing, stimulating every inch of your cock, forcing your orgasm out of you as though she bore it a grudge.\n\n");
 
 			outputText("You let out a loud, bestial grunt of satisfaction as you feel your cum surging through your length, exploding out of you in powerful jets and splashing across the walls of Izumi’s waiting hole.  Izumi shudders beneath you with every spurt, jerking her hips upwards and staring blankly into space, letting out short, almost disbelieving little gasps as your heat spreads slowly within her.\n\n");
 
 			outputText("As your orgasms subside, you feel her go limp below you, slumping back against the wall.  Feeling decidedly spent yourself, you’re content to just lay where you are for a while, head comfortably cushioned by her breasts, enjoying the decidedly pleasant sensation of slowly softening while still inside your Oni partner.\n\n");
 
-			outputText("“<i>Haha, hahh,</i>” Izumi mutters, sounding almost regretful, “<i>Ah, geez. I really came, huh... and from you playing with my horn, too...</i>” She laments.  She covers her eyes with one hand and grins ruefully, her face still reddened from her recent orgasm.  “<i>That’s so embarrassing...</i>”\n\n");
+			outputText("“<i>Haha, hahh,</i>” Izumi mutters, sounding almost regretful, “<i>Ah, geez. I really came, huh... and from you playing with my horn, too...</i>” she laments.  She covers her eyes with one hand and grins ruefully, her face still reddened from her recent orgasm.  “<i>That’s so embarrassing...</i>”\n\n");
 
 			outputText("On a whim, you decide to try and cheer the big woman up a little.  Propping yourself up on one shaky arm, you lean forwards and plant a kiss directly on her mouth.  Izumi’s fingers split open in front of you to reveal a pair of amber eyes that can only be described as ‘surprised’, or possibly even ‘shocked’.  You break off the kiss, and she stares at you in complete disbelief, her expression unreadable.  After a long moment, she speaks.\n\n");
 
-			outputText("“<i>U-Um. Thanks, but p-please don’t do things like that again.,</i>” She stammers. “<i>Not that I hate you for it, or anything!  It was nice, it’s just, I-I don’t, uh... I don’t really know what to, uh, you know...</i>”  She sees your expression and sighs, apologetically.  “<i>Sorry, I just never know how to react to stuff like this. Don’t worry about it, okay?</i>”  She smiles, stroking your hair lovingly.\n\n");
+			outputText("“<i>U-Um. Thanks, but p-please don’t do things like that again,</i>” she stammers. “<i>Not that I hate you for it, or anything!  It was nice, it’s just, I-I don’t, uh... I don’t really know what to, uh, you know...</i>”  She sees your expression and sighs, apologetically.  “<i>Sorry, I just never know how to react to stuff like this. Don’t worry about it, okay?</i>”  She smiles, stroking your hair lovingly.\n\n");
 
 			outputText("You decide not to make an issue of it, since Izumi is clearly embarrassed.  The two of you redress, and as you make to leave, Izumi whistles for your attention.  You turn, and she throws you a small leather bag, which you open to discover a handful of gems inside.\n\n");
 
@@ -1807,7 +1807,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("“<i>Tch, I should have known...</i>”  Izumi grumbles.  “<i>Well, whatever.  Just just hurry up and blow your load before- H-Hey wait, what are you doing back there?!</i>”  She raises her voice in alarm as your intent becomes clear, lining your [cock biggest] up not with her obediently displayed pussy, but with her asshole.\n\n");
 
-				outputText("“<i>Hey!  W-Who said you could use that hole?!</i>”  She yells.  You just flash her a charming smile, then return to the much more interesting business of getting ready to fuck her ass raw.  She glares at you for a moment, then turns back to the wall with a snort.  “<i>Whatever.  I won’t lose.</i>”  She growls.\n\n");
+				outputText("“<i>Hey!  W-Who said you could use that hole?!</i>” she yells.  You just flash her a charming smile, then return to the much more interesting business of getting ready to fuck her ass raw.  She glares at you for a moment, then turns back to the wall with a snort.  “<i>Whatever.  I won’t lose,</i>”  she growls.\n\n");
 
 				outputText("Ignoring her, you begin to force your aching erection into the tight hole below you.  It’s a surprisingly snug fit, given how huge Izumi is, something you’re only too happy to enjoy as you sink your turgid dick into her bowels.  Whether it’s because of her species or simply something to do with the muscles covering her frame you’re not sure, but as you slide inside of her, every inch of your cock seems to be being gripped by the Oni girl’s bountiful ass, massaged on all sides by coaxing, undulating muscle.  It’s simply too much to bear; with one powerful thrust, you bury yourself up to the [sheath], actually forcing Izumi to grunt in surprise and discomfort.\n\n");
 
@@ -1820,7 +1820,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("On a whim, you reach out with one hand to trace a line down Izumi’s spine, marvelling at the vast expanse of toned backflesh stretched out in front of you.  Your fingers’ feathery touch clearly has some kind of effect on the poor girl too, as she visibly shudders as you reach the small of her back.  Still hilted within her as deeply as you can go, you grope at her substantial butt with one hand, while the other dances little circles across her spine.  Finally, she snaps.\n\n");
 
-				outputText("“<i>Will you cut that out?!  Stop trying to get all romantic or whatever, you.... Just stop it!  Okay?!  I thought you were meant to be </i>raping<i> me!?</i>”\n\n");
+				outputText("“<i>Will you cut that out?!  Stop trying to get all romantic or whatever, you....  Just stop it!  Okay?!  I thought you were meant to be </i>raping<i> me!?</i>”\n\n");
 
 				outputText("Well, if she insists... reaching up, you grab a handful of her golden mane, wrap it around your fists and start to pound forwards with your hips, ramming yourself repeatedly home against Izumi’s plowable cheeks while jerking backwards on your newfound ‘reins’ for support.\n\n");
 
@@ -1834,7 +1834,7 @@ package classes.Scenes.Areas.HighMountains
 				{
 					outputText("You relax as your orgasms subsides, content that you’ve now thoroughly shown Izumi who’s the boss.  You slip free of her abused ass, a small trickle of cum dripping out after you, and you’re surprised to notice that Izumi seems to be a hell of a lot wetter than she was when you first started.  You raise an eyebrow at her as she stares backwards over her shoulder.\n\n");
 
-					outputText("“<i>What?  It’s a natural thing, asshole,</i>” She snarls.  “<i>It’s not like I liked it. What kind of person would get off from that?  I’m not one of those freaks!</i>”  You shake your head at her in amusement, then motion for her to turn around and face the wall again again.  She pales slightly, clearly worried you’re about to try for a second round, but quietly does as she’s told.\n\n");
+					outputText("“<i>What?  It’s a natural thing, asshole,</i>” she snarls.  “<i>It’s not like I liked it. What kind of person would get off from that?  I’m not one of those freaks!</i>”  You shake your head at her in amusement, then motion for her to turn around and face the wall again again.  She pales slightly, clearly worried you’re about to try for a second round, but quietly does as she’s told.\n\n");
 
 					outputText("You don’t quite have the energy for that just now though, so instead, you pick up your clothes and make for the exit.  As you walk past Izumi’s discarded clothing, you spy a small pouch full of gems that you hadn’t noticed before.  You snatch that too, making a speedy escape before the Oni girl realises she could probably make it to her feet before you got her horn by this point....\n\n");
 				}
@@ -1857,7 +1857,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("Her expression soon changes as you unveil your [cock biggest], however.  One look at your thickening meat is all it takes to evaporate the last of her bad attitude, replacing it with fear.\n\n");
 
-				outputText("“<i>N-No way!</i>”  She stammers.  “<i>That’s not real, right?!</i>”  You just grin, raising your hefty rod and slapping it down between her soft, pliable cheeks, taking the opportunity to run your hands over the contours of her ass.  You squeeze and grope her backside, enjoying the warm feeling of her bare skin rubbing against your rising erection as you rock your hips backwards and forwards in preparation.\n\n");
+				outputText("“<i>N-No way!</i>” she stammers.  “<i>That’s not real, right?!</i>”  You just grin, raising your hefty rod and slapping it down between her soft, pliable cheeks, taking the opportunity to run your hands over the contours of her ass.  You squeeze and grope her backside, enjoying the warm feeling of her bare skin rubbing against your rising erection as you rock your hips backwards and forwards in preparation.\n\n");
 
 				outputText("“<i>Hey, c’mon now, seriously?  You want to do me with </i>that<i> thing?!</i>”  There’s undisguised panic in Izumi’s voice at this point.  You nod, enjoying a sense of complete role reversal.  Izumi stares at your bloated shaft nervously for a moment, then turns back to the wall with an involuntary little whimper.\n\n");
 
@@ -1867,11 +1867,11 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("If the process is physically draining for you however, you can only imagine how it must feel for Izumi.  She leans against the rock wall in front of her, arms shaking with exertion, gasping for breath and shivering as you slowly withdraw your mighty pillar from her ass.  Your [cockhead biggest] reaches her ring once again, but you don’t pull out all the way, instead preparing yourself to thrust back inside her in earnest.  The besieged Oni looks back at your over her shoulder with a pleading expression, clearly defeated.\n\n");
 
-				outputText("“<i>Come on, please!  I-I give, okay?</i>”  She almost looks like she’s on the verge of tears, although whether from the admission that she’s been beaten or from the anal invasion, you’re not quite sure.  Seeing that you don’t seem to be about to relent, she goes one step further; “<i>But I’m scared! What if it hurts?! Please be gentle, I’m only small!</i>” She wails.\n\n");
+				outputText("“<i>Come on, please!  I-I give, okay?</i>”  She almost looks like she’s on the verge of tears, although whether from the admission that she’s been beaten or from the anal invasion, you’re not quite sure.  Seeing that you don’t seem to be about to relent, she goes one step further; “<i>But I’m scared! What if it hurts?! Please be gentle, I’m only small!</i>” she wails.\n\n");
 
 				outputText("<i>Small?</i>  You have to wonder exactly where she got that idea, but given that she looks legitimately upset, you decide to cut her a break.  Besides, you’re not sure you could even manage to get up to the speed you’d like, given how obnoxiously tight Izumi is turning out to be.  Instead, you start up a more leisurely pace, slowly pushing your hips forwards again and enjoying the sensation of being gently enveloped by Izumi’s tight, welcoming hole once again.  She shudders again, but this time it seems to be more out of relief than anything else.\n\n");
 
-				outputText("“<i>Thanks...</i>”  She sniffs gratefully as she turns back to the wall, apparently content to let you do as you will now that she’s not worried about you suddenly increasing your speed.  Given free reign, you’re able to shift your position somewhat to achieve a better angle as you slowly push down into her, enjoying a slightly deeper penetration as a result.  It’s not much, but as Izumi’s quivering ass-muscles massage your titanic girth on all sides, you’re more than happy to take it.\n\n");
+				outputText("“<i>Thanks...</i>” she sniffs gratefully as she turns back to the wall, apparently content to let you do as you will now that she’s not worried about you suddenly increasing your speed.  Given free reign, you’re able to shift your position somewhat to achieve a better angle as you slowly push down into her, enjoying a slightly deeper penetration as a result.  It’s not much, but as Izumi’s quivering ass-muscles massage your titanic girth on all sides, you’re more than happy to take it.\n\n");
 
 				outputText("You keep up your measured pace for a few more minutes, luxuriating in the sensation of being so tightly engulfed by the cushiony softness of Izumi’s ass.  You grope and squeeze her plump backside as you slowly pump in and out of her, the pliant flesh rolling beneath your fingers as you explore Izumi’s curves.\n\n");
 
@@ -1913,7 +1913,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Izumi stiffens instantly, her eyes going wide and staring into nothing as she lets out a quiet, strangled squeak.  You can’t help but leer a little at the sight of the enormous woman, muscles quivering, completely at the mercy of your tender, tentacled ministrations.  You resolve to take your time a little and enjoy the sensation, as apparently so long as you keep your grip on Izumi’s horn, you have what can only be described as a captive audience.  And <i>speaking of</i> that horn....\n\n");
 
-			outputText("Izumi’s eyes roll back into their sockets and she grits her teeth, grunting as your prehensile member flexes, tightening and loosening rhythmically around her horn.  It’s amazing, you think, how quickly Izumi’s attitude changed once you grabbed it.  The confident, domineering woman is completely gone, and instead she shivers nervously in your grip like a virgin on her wedding night.  Apparently, it’s an incredibly sensitive organ, a suspicion that is confirmed when you slowly begin to roll the tentacle wrapped around the horn up and down it’s length, causing Izumi to immediately let out a startled “Ah!” and flinch again at the sensation, straining against her bonds.\n\n");
+			outputText("Izumi’s eyes roll back into their sockets and she grits her teeth, grunting as your prehensile member flexes, tightening and loosening rhythmically around her horn.  It’s amazing, you think, how quickly Izumi’s attitude changed once you grabbed it.  The confident, domineering woman is completely gone, and instead she shivers nervously in your grip like a virgin on her wedding night.  Apparently, it’s an incredibly sensitive organ, a suspicion that is confirmed when you slowly begin to roll the tentacle wrapped around the horn up and down its length, causing Izumi to immediately let out a startled “Ah!” and flinch again at the sensation, straining against her bonds.\n\n");
 
 			outputText("With a quick lurch, you pull Izumi’s legs up and apart, exposing her crotch and the vast expanse of her thighs to boot.  She wears no underwear, but frankly you’d probably be more surprised if she did.  She pants and grunts before you, the sweat from her body gleaming in the firelight with her unfastened kimono hanging dangerously from her breasts.  You lean in between her thighs as though to inspect her, causing her to suddenly flush crimson.  Or perhaps that was the sensation of another of your tentacled appendages slipping under the silky folds of her kimono to repeatedly flick at her nipple, already hardened by your treatment of her horn?  You may never know.\n\n");
 
@@ -1926,9 +1926,9 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You’re not satisfied just with that though, particularly when the main event is displayed so tantalizingly before you.  Raising yet another tentacle, you plunge forwards and force yourself into Izumi’s pussy, penetrating her fully.  Despite her increased size, she’s surprisingly tight, but you’re still able to comfortably push in deeper than you’d probably be able to with a smaller partner.  Izumi grunts and sways in the impromptu sling you’ve set up, rocking backwards and forwards as you pump into her from two different angles.  It’s an interesting experience to say the least, double-dicking an amazonian monster-woman while simultaneously ensuring she can’t fight back by molesting her magical horn.  For good measure, you give the horn another quick squeeze and roll the coiled tentacle wrapping it around a little, eliciting a high pitched squeal from Izumi, her entire body going momentarily tense.\n\n");
 
 			outputText("When she relaxes, her face is completely flushed, her eyes looking distinctly fogged with arousal.  She isn’t struggling or resisting anymore; in fact, you realise, she’s even begun to roll her hips in time with your thrusts, helping you to penetrate her deeper, harder, stronger.  She seems to be functioning almost on automatic, stretching her neck forwards to accept more of your length as you thrust into her mouth, then twisting her head to the side as you pull out, stimulating more of your member than your previous thrusting.  Even her moaning seems quieter, more submissive, as though she’s accepted her role in the proceedings - or at least blocked out everything but the sensations she’s feeling enough to enjoy them.");
-			if (player.tentacleCocks() >= 10) outputText("  You decide to test the theory, snaking another prehensile appendage into each of her open, outstretched palms.  Sure enough, after a few fumbling attempts, Izumi manages to grasp the concept of a handjob and awkwardly starts to jerk them off.\n\n");
+			if (player.tentacleCocks() >= 10) outputText("  You decide to test the theory, snaking another prehensile appendage into each of her open, outstretched palms.  Sure enough, after a few fumbling attempts, Izumi manages to grasp the concept of a handjob and awkwardly starts to jerk them off.");
 
-			outputText("Regardless, you’re still not finished.  After all, there’s still one hole left unaccounted for, and after all the trouble she’s given you, it hardly seems fair that she should just get to check out and enjoy the ride.  Izumi’s eyes widen as she feels your final tentacock slide between her buttcheeks, rubbing against the slick flesh, tracing an ominous ring around her hole before prodding demandingly at the entrance to her ass.\n\n");
+			outputText("\n\nRegardless, you’re still not finished.  After all, there’s still one hole left unaccounted for, and after all the trouble she’s given you, it hardly seems fair that she should just get to check out and enjoy the ride.  Izumi’s eyes widen as she feels your final tentacock slide between her buttcheeks, rubbing against the slick flesh, tracing an ominous ring around her hole before prodding demandingly at the entrance to her ass.\n\n");
 
 			outputText("Then, without warning, you plunge in, hard.  Izumi screws one eye shut, wincing in shock, her whole body tensing again as she arches her back in a futile defence against the sudden anal intrusion.  Your flexible tentacle just follows her, however, ensuring there’s nowhere she can twist or turn to that will let her escape.  Before long you’re pumping away at her at full force again, your tentacles undulating madly as they repeatedly slip and slam into every single one of Izumi’s holes.  \n\n");
 
@@ -1951,13 +1951,13 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("An evil idea begins to form inside your head.  You give Izumi’s horn a quick yank, causing her to yelp out loud, flinching massively.\n\n");
 
-			outputText("You direct her to kneel down with a growl.  Izumi opens her mouth to argue, then thinks better of it.  “<i>Okay! Okay, look, I’m cooperating.  Ha ha, you sure showed me, boy is my face re-Oh.</i>” She stops, eyes widening a little as you use your free hand to pull out [eachCock], stroking it towards hardness mere inches from her face.  She stares, mesmerized, as your hand rolls up and down your stiffening erection right in front of her.  \n\n");
+			outputText("You direct her to kneel down with a growl.  Izumi opens her mouth to argue, then thinks better of it.  “<i>Okay! Okay, look, I’m cooperating.  Ha ha, you sure showed me, boy is my face re-Oh.</i>” She stops, eyes widening a little as you use your free hand to pull out [oneCock], stroking it towards hardness mere inches from her face.  She stares, mesmerized, as your hand rolls up and down your stiffening erection right in front of her.  \n\n");
 
-			outputText("You smile, and on a whim, you decide to start stroking Izumi’s horn in the same way, matching stroke for stroke.  She flinches again and her hands reach up to grip weakly at your wrist.  “<i>Hands down!</i>” You bark, and they fall away instantly to rest on her knees, her hands clenching and unclenching repeatedly as she grits her teeth against the feeling of you rubbing at her horn.\n\n");
+			outputText("You smile, and on a whim, you decide to start stroking Izumi’s horn in the same way, matching stroke for stroke.  She flinches again and her hands reach up to grip weakly at your wrist.  “<i>Hands down!</i>” you bark, and they fall away instantly to rest on her knees, her hands clenching and unclenching repeatedly as she grits her teeth against the feeling of you rubbing at her horn.\n\n");
 
 			outputText("Finally, you’re fully erect, Izumi’s occasionally-wincing gaze locked on the [cockhead biggest] of your [cock biggest], bobbing in the air in front of her.  Your smile widens into a leer as you put phase two of your ingenious plan into action.\n\n");
 
-			outputText("“<i>Kiss it.</i>” You order. Izumi’s eyes flicker briefly to look up at your face, but by this point she knows better than to attempt disobedience.  Leaning hesitantly forwards, Izumi purses her lips as she moves in for the kiss.");
+			outputText("“<i>Kiss it,</i>” you order. Izumi’s eyes flicker briefly to look up at your face, but by this point she knows better than to attempt disobedience.  Leaning hesitantly forwards, Izumi purses her lips as she moves in for the kiss.");
 
 			var cockIndex:int = player.biggestCockIndex();
 
@@ -1968,7 +1968,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Satisfied, you decide it’s time to move onto phase three.  Yanking hard on Izumi’s horn, you thrust your [hips] forwards at the same time, forcing your cock into her mouth.  She lets out a garbled yell of surprise as you slam into her throat, although you’re not sure if she’s more upset about the treatment of her mouth or her horn.  Regardless, it’s all the same to you; nothing more than a pleasant vibration....\n\n");
 
-			outputText("“<i>Suck it!</i>” You command, as Izumi stares up at you with a pleading expression, tears beginning to form in the corners of her eyes due to lack of oxygen - or possibly just the rough treatment of her hyper-sensitive horn.  She lets out another whimper as you squeeze it, showing her what happens when she’s too slow, then she finally begins to work you over in earnest.\n\n");
+			outputText("“<i>Suck it!</i>” you command, as Izumi stares up at you with a pleading expression, tears beginning to form in the corners of her eyes due to lack of oxygen - or possibly just the rough treatment of her hyper-sensitive horn.  She lets out another whimper as you squeeze it, showing her what happens when she’s too slow, then she finally begins to work you over in earnest.\n\n");
 
 			outputText("Her mouth latches onto you like a vacuum, sucking on your [cockHead biggest] so strongly it makes your knees weak, her tongue performing bizarre oral gymnastics around your cock.  You can only grunt in surprised appreciation; whatever else you might think about her, Izumi is <i>good</i> at this.  Or maybe she’s just desperate, trying to force you to cum as quickly as possible so that you’ll release her precious horn?  That seems distinctly possible, so you decide to take steps to counter it.\n\n");
 
@@ -1980,7 +1980,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Satisfied that she’s had enough time to soak in the idea of being subservient and powerless, you get back to the business at hand; getting yourself off with the convenient aid of Izumi’s face.  You push her back, still gripping her horn as her lips slip free of your erection, leaving little trails of saliva dangling between your cock and her abused throat.\n\n");
 
-			outputText("“<i>Wha-</i>” She stammers hazily, but you jerk her horn powerfully upwards, causing her face to freeze up in an agonized grimace as you force her down onto her back.  Repositioning yourself, you forcibly insert your cock once again into the warm, welcoming confines of Izumi’s throat.  Unfortunately, you still can’t really get into it from this angle, but then an idea hits you.  Still buried in Izumi’s mouth, you suddenly spin around to rest one leg on either side of her face - and causing Izumi to let out an incensed squeak as your [cock biggest] swirls around inside her mouth.  You lean back, grabbing her horn with a fresh hand before releasing the by now quite awkward grip you had before.\n\n");
+			outputText("“<i>Wha-</i>” she stammers hazily, but you jerk her horn powerfully upwards, causing her face to freeze up in an agonized grimace as you force her down onto her back.  Repositioning yourself, you forcibly insert your cock once again into the warm, welcoming confines of Izumi’s throat.  Unfortunately, you still can’t really get into it from this angle, but then an idea hits you.  Still buried in Izumi’s mouth, you suddenly spin around to rest one leg on either side of her face - and causing Izumi to let out an incensed squeak as your [cock biggest] swirls around inside her mouth.  You lean back, grabbing her horn with a fresh hand before releasing the by now quite awkward grip you had before.\n\n");
 
 			outputText("From this angle, you have a much better line of approach to Izumi’s throat, giving you a far deeper maximum thrust - something you happily take advantage of almost immediately in order to fuck Izumi’s mouth in earnest.");
 			if (player.balls > 0) outputText("  As an amusing added bonus to your new angle, Izumi’s face actually provides a comfortable little platform for you to rest your [balls] on. You can’t help but smile when she lets out an aggravated little growl as your balls come to rest on her face for the first time, the warm air rushing in and out of her nose as she tries - and fails - not to breathe <i>too</i> deeply, providing a surprisingly pleasant sensation.\n\n");
@@ -2003,7 +2003,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Finally, it becomes apparent that you’re now completely done...  as is Izumi.  The two of you remain where you are, panting, for a few moments.  You’re the first to regain your feet, while Izumi burbles to herself, unable to even muster up the energy to even wipe her face.\n\n");
 
-			outputText("“<i>Oh man, and I was so...</i>” She mutters, her hands clenching and unclenching just above her waist. Then she drags herself to her feet and stumbles away towards her tent, rubbing her forearm absently.  “<i>I uh, I gotta, gotta go do a thing for a sec...</i>” She mumbles, disappearing inside the tent.  For your part, you’re left completely alone, exhausted, inside the big woman’s cave.  You decide that now might be a good time to take your leave.\n\n");
+			outputText("“<i>Oh man, and I was so...</i>” she mutters, her hands clenching and unclenching just above her waist. Then she drags herself to her feet and stumbles away towards her tent, rubbing her forearm absently.  “<i>I uh, I gotta, gotta go do a thing for a sec...</i>” she mumbles, disappearing inside the tent.  For your part, you’re left completely alone, exhausted, inside the big woman’s cave.  You decide that now might be a good time to take your leave.\n\n");
 
 			outputText("On the way out, you notice a small leather bag just laying out in the open.  Inspecting it, you discover it to be filled with a small fortune in gems!  You decide to take it with you - after all, it’s not like Izumi seems to need the money, plus she <i>did</i> try to rape you, so it’s technically a trophy.  Feeling decidedly more light hearted about your situation, you leave the cave and make your way back to camp, happily inspecting the gems as you go.\n\n");
 
