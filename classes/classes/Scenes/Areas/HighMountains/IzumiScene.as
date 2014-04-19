@@ -91,6 +91,8 @@ package classes.Scenes.Areas.HighMountains
 		{
 			clearOutput();
 
+			if (flags[kFLAGS.IZUMI_LAST_ENCOUNTER] == 0) flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 2;
+			
 			if (flags[kFLAGS.IZUMI_LAST_ENCOUNTER] == 1)
 			{
 				outputText("Remembering the outcome of your last visit, you peer cautiously around the mouth of the cave.  Izumi, as before, is seated by the fire, happily puffing away at whatever bizarre narcotic she keeps in her pipe.  She sees you almost immediately, raising a hand cheerfully and beckoning for you to enter.\n\n");
