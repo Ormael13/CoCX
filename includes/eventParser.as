@@ -2092,7 +2092,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//BIG EVENTS GO IN HERE
 		//BIG EVENTS GO IN HERE
 		//MARBLE POOPS BAYBEEZ
-		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1) {
+		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1 && marbleScene.marbleAtCamp()) {
 			marbleScene.marblePoopsBaybees();
 			return true;
 		}		
