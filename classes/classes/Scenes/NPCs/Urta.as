@@ -1035,7 +1035,7 @@ internal function goBackToUrtasForLuvinz():void {
 		outputText("  The busty fox has already retreated from the front-room, the half-soaked dress on the floor the only indication she was there with you a moment ago.\n\n", false);
 		outputText("You follow a trail of pre-cum on the floor and the scent of copious female arousal deeper into the apartment, around a corner, and into Urta's relatively small bedroom.  Your vulpine lover is reclined on her bed, wearing nothing but lacy stockings and a latex cock-sheath.  ", false);
 		if(player.totalCocks() > 0) outputText("In her hand is another sheath, ready to gird your own equipment in a fashion similar to her own.  ", false);
-		urtaHomeLuvLuvinsMenu();
+		doNext(urtaHomeLuvLuvinsMenu);
 		return;
 	}
 	outputText("Urta smiles broadly and gives you a grateful peck on the cheek.  She makes like she's going to rise, then stirs uncomfortably, her eyes flashing down towards her crotch.  The fox settles back down and asks, \"<i>Would you mind paying off my tab while I slip out of here?  You've gotten me a bit too exposed to stand around trying to pay,</i>\" as she fishes out a coin-purse.  Tossing a few gems and odd coins your way, your over-endowed lover gives you a longer kiss before pushing you away from the table.\n\n", false);
