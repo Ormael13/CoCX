@@ -977,6 +977,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 1;
 				}
 			}
+			//Counting down to purity!
+			if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0)
+			{
+				if(flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] < 200)
+				{
+					flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING]++;
+				}
+			}
 			//Counter 2!
 			if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] > 0)
 			{
@@ -1003,7 +1011,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffectv4(StatusAffects.Marble) > 50) flags[kFLAGS.MARBLE_LUST] += .3;
 			if(player.statusAffectv4(StatusAffects.Marble) > 70) flags[kFLAGS.MARBLE_LUST] += .3;
 			//If bitch-bin is in construction
-			if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
+			if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100 && marbleScene.marbleAtCamp()) {
 				flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 				if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 					spriteSelect(41);
@@ -1014,7 +1022,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			
 			//Marble find items check
-			else if(player.findStatusAffect(StatusAffects.MarbleHasItem) < 0) {
+			else if(player.findStatusAffect(StatusAffects.MarbleHasItem) < 0 && marbleScene.marbleAtCamp()) {
 				// Off cooldown
 				if(player.findStatusAffect(StatusAffects.MarbleItemCooldown) < 0) {
 					if(rand(10) == 0) {

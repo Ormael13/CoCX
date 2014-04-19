@@ -6,6 +6,14 @@
 //MARBLE_BREAST_SIZE = the size of her titons (0=DD cup, 1=G, 2=HH, 3=J)
 //MARBLE_TIME_SINCE_NURSED_IN_HOURS = Really fucking obvious.
 
+/*
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 0 = unstarted
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 1 = Started, gathering labova
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 2 = Potions gathered, need to talk to Rathazul
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 3 = Started wiv Ratazul
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 4 = Marble is out getting her sister
+flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 5 = QUEST COMPLETE
+*/
 
 package classes.Scenes.NPCs {
 	import classes.*;
@@ -18,7 +26,6 @@ package classes.Scenes.NPCs {
 	{
 	}
 
-	
 
 	/*Purifying Marble
 	Quest starts a few days after recruiting Marble to camp if they’re not addicted to her.  She will approach the PC and tell them that not nursing her is a real burden for her, and ask them to help her purify herself.  This quest will not start if the PC’s corruption is over 50, or has any corrupt character in camp (corrupt Jojo, corrupt Amily, Vapula).
@@ -507,17 +514,17 @@ package classes.Scenes.NPCs {
 		{
 		 	outputText("\n\nClara starts to advance on you with her mace out, and eyes in rage, but hesitates when she realizes that other guests to the tea party have stood up as well, and readied their weapons.");
 			//if (Amily is in camp)
-			if(amilyScene.amilyFollower() == 0)
+			if(amilyScene.amilyFollower())
 			{
 			 	outputText("\n\nSnarling with a surprisingly savage expression for such a normally meek mouse, Amily whips out her familiar blowgun and loads it with a dart from somewhere about her person, falling back to ensure she is a safe distance for firing.");
 			}
 			//if (Helia is in camp)
-			if(followerHel() == 0)
+			if(followerHel())
 			{
 			 	outputText("\n\n\"<i>You bitch, you'll pay for that,</i>\" Hel growls, drawing the scimitar from her hip and leveling it right at the woman in defiant challenge.");
 			}
 			//if (Isabella is in camp)
-			if(isabellaFollower() == 0)
+			if(isabellaFollower())
 			{
 			 	outputText("\n\n\"<i>Little bitch!</i>\"  The cowgirl snarls, standing up to her full impressive height.  \"<i>I will teach you not to try something like this again.</i>\"  Isabella grabs her shield and brandishes it prominently, ready to use it for defense and to bludgeon.");
 			}
@@ -1443,6 +1450,7 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_LUST] >= 5;
 		if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
 		player.consumeItem(consumables.LACTAID);
+		doNext(2128);
 	}
 
 	//Nursing from Pure Marble
@@ -1481,7 +1489,7 @@ package classes.Scenes.NPCs {
 			//Restore 20% of PC's health
 			HPChange(Math.round(player.maxHP()*.2),false);
 			//Restore 30 fatigue
-			fatigue(30);
+			fatigue(-30);
 			//increase lust by 15
 			kGAMECLASS.stats(0,0,0,0,0,0,15,0);
 			//increase Marble lust by 10

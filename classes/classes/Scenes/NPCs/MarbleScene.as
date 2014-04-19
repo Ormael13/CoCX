@@ -43,6 +43,15 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 override public function marbleFollower():Boolean {
 	return player.findStatusAffect(StatusAffects.CampMarble) >= 0;
 }
+public function marbleAtCamp():Boolean
+{
+	if(marbleFollower())
+	{
+		if(flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] > 0) return false;
+		else return true;
+	}
+	return false;
+}
 
 //function marbleBreastSize() returns either DD, G, HH, or J depending on her current size.  If purification is not finished, returns HH if Marble's corruption is > 30, otherwise returns G.
 function marbleBreastSize():String
@@ -3097,7 +3106,8 @@ private function marblePreggoChance(preggerMult:Number):void {
 	preggerOdds *= preggerMult;
 	//GET HER PREGNANT
 	trace("MARBLE PREGGO ODDS: " + preggerOdds);
-	if(rand(100) < preggerOdds && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+	
+	if(rand(100) < preggerOdds && (player.findPerk(PerkLib.MarblesMilk) >= 0 || flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)) {
 		//SHUT UP SHES ALREADY PREGNANT
 		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {}
 		//NO SHE AINT

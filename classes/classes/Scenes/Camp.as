@@ -74,7 +74,9 @@ public function doCamp():void {
 		//Cor < 50
 		//No corrupt: Jojo, Amily, or Vapula
 		//Purifying Murble
-		if(player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0)
+		if(player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() 
+			&& flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] >= 200
+			&& player.findPerk(PerkLib.MarblesMilk) < 0)
 		{
 			hideMenus();
 			marblePurification.BLUHBLUH();
@@ -1229,7 +1231,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
 		//Marble Sleepies
-		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
+		if(marbleScene.marbleAtCamp() && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
 			if(marbleScene.marbleNightSleepFlavor()) {
 				sleepRecovery(false);
 				return;

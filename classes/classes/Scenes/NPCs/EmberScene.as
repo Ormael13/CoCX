@@ -2597,7 +2597,7 @@ package classes.Scenes.NPCs
 			}
 			//(High Cum Amount)
 			else {
-				outputText("\n\nEmber insists on drinking every single drop, even though " + emberMF("he", "she") + " can barely contain the amazing amount of cum you're pumping into her eager ");
+				outputText("\n\nEmber insists on drinking every single drop, even though " + emberMF("he", "she") + " can barely contain the amazing amount of cum you're pumping into " + emberMF("his", "her") + " eager ");
 				if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) outputText("mouth");
 				else outputText("maw");
 				outputText(".  For a moment you get the impression " + emberMF("he", "she") + "'s drowning on your cum and try to pull away, but Ember won't have it; " + emberMF("he", "she") + " coaxes you back into position with careful encouragement from " + emberMF("his", "her") + " sharp teeth and continues drinking.  By the time you're done, " + emberMF("he", "she") + " looks almost pregnant from how distended " + emberMF("his", "her") + " cum-filled stomach is.");
@@ -2684,7 +2684,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe dragon moans softly and growls, stretching " + emberMF("him", "her") + "self once more to take you.  You consider saying something, but remembering Ember's words from the first time, you figure that if " + emberMF("he", "she") + "'s doing this, then it's because " + emberMF("he", "she") + " wants to... so you just give " + emberMF("him", "her") + " a reassuring smile.");
 				outputText("\n\nTaking notice of your smile, Ember stops " + emberMF("his", "her") + " preparations.  \"<i>W-what are you smiling about?</i>\"");
 				outputText("\n\n" + emberMF("He", "She") + " looks cute, getting ready just like for " + emberMF("his", "her") + " first time.  Ember turns away as the memory returns.  After a few moments of silence, " + emberMF("he", "she") + " moans once more as " + emberMF("he", "she") + " resumes working " + emberMF("his", "her") + " fingers on " + emberMF("his", "her") + " ass.");
-				outputText("\n\nOnce " + emberMF("he", "she") + " feels " + emberMF("he", "she") + "'s ready, " + emberMF("he", "she") + " extracts " + emberMF("his", "her") + " fingers from her puckered rose, now blooming, and turns to you.");
+				outputText("\n\nOnce " + emberMF("he", "she") + " feels " + emberMF("he", "she") + "'s ready, " + emberMF("he", "she") + " extracts " + emberMF("his", "her") + " fingers from " + emberMF("his", "her") + " puckered rose, now blooming, and turns to you.");
 			}
 			outputText("\n\n\"<i>Listen up.  You only do what I tell you.  I want to be in complete control of this.  If you try or do anything that makes me hurt later, I swear I'll smack you.  Understood?</i>\"");
 			outputText("\n\nYou ");
