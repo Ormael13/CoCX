@@ -87,6 +87,7 @@ package classes.Scenes.Places.Owca
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.drop = NO_DROP;
+			this.cor = 100;
 			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
 			checkMonster();
 		}
