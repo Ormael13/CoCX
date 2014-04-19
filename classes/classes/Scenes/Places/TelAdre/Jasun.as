@@ -60,6 +60,7 @@ private function meetJasun():void {
 		if(player.gender <= 1) {
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning back to the mirror.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] = 0;
 			doNext(13);
 			return;
 		}

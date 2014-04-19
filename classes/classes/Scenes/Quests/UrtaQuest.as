@@ -907,7 +907,7 @@ public function winFuckAGoblinBroodmotherAsUrta():void {
 
 	outputText("\n\n\"<i>Hmm... that feels nice, but quit teasing me and let me catch a ride on that big pony of yours,</i>\" the goblin MILF says, licking her lips and beginning to pant.");
 
-	outputText("\n\nYou push your hardening horse-cock against her muff, probing her wet slit.  \"<i>Atta girl!</i>\"  The goblin moans.  You smile mischievously, getting a perfect idea of what to do next in order to piss off the goblin slut.  You quickly pull away and straddle her, pressing her generous bosom together and shoving your equine-prick between them, fucking them slowly as you smirk at the goblin whore.");
+	outputText("\n\nYou push your hardening horse-cock against her muff, probing her wet slit.  \"<i>Atta girl!</i>\"  The goblin moans.  You smile mischievously, getting a perfect idea of what to do next in order to piss off the goblin slut.  You quickly pull away and straddle her, pressing down on her generous together and shoving your equine-prick between them, fucking them slowly as you smirk at the goblin whore.");
 
 	outputText("\n\n\"<i>H-Hey!  You can't tease me and... and... hmm... that smells kinda nice,</i>\" she comments, eyes fixated on your pumping dick.  She licks her lips demurely, trying to bring your shaft closer so she can suck on it.  You smirk at her wanton eagerness and teasingly begin to slide yourself deeper into the canyon of her mighty cleavage, bringing the as-yet unflared tip almost close enough for her to kiss before pulling it back out again, sliding it through her increasingly pre-slicked boobs.");
 
