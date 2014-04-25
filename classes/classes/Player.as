@@ -1272,9 +1272,9 @@ use namespace kGAMECLASS;
 			return Appearance.hairDescription(this);
 		}
 
-		public function shrinkTits():void
+		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
 		{
-			if (flags[kFLAGS.HYPER_HAPPY])
+			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
 			{
 				return;
 			}

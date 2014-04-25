@@ -370,10 +370,10 @@ public function doItems(eventNo:Number):void {
 	//Reducto Breasts
 	else if(eventNo == 1055) {
 		outputText("You smear the foul-smelling ointment all over your " + allBreastsDescript() + ", covering them entirely as the paste begins to get absorbed into your " + player.skinDesc + ".\n", true);
-		player.shrinkTits();
+		player.shrinkTits(true);
 		if(rand(2) == 0 && player.biggestTitSize() >= 1) {
 			outputText("\nThe effects of the paste continue to manifest themselves, and your body begins to change again...", false);
-			player.shrinkTits();
+			player.shrinkTits(true);
 		}
 		outputText("\nThe last of it wicks away into your skin, completing the changes.", false);
 		dynStats("sen", -2, "lus", -5);
