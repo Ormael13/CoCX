@@ -13,7 +13,7 @@ package classes.Scenes.Areas.Swamp
 		//Drider kiss!
 		public function driderKiss():void {
 			var temp:int;
-			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibres.\n\n", false);
+			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibers.\n\n", false);
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("She's too blind to get anywhere near you.\n", false);
@@ -34,7 +34,7 @@ package classes.Scenes.Areas.Swamp
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
 				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
 				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//("Misdirection"
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
@@ -43,7 +43,7 @@ package classes.Scenes.Areas.Swamp
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
 				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
 				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//Determine if cat'ed
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
@@ -52,7 +52,7 @@ package classes.Scenes.Areas.Swamp
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
 				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n", false);
 				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n", false);
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
+				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			
 			else if(player.findStatusAffect(StatusAffects.DriderKiss) < 0) {

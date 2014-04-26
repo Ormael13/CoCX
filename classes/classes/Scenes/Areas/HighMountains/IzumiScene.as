@@ -700,7 +700,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText(" chest");
 			outputText(" and instead leans on her elbow, leaving you uncomfortably free and completely unsure of what to do with yourself as she wraps her hand around your [cock biggest] and slowly begins to stroke you.  Her palms are warm and pleasingly soft, something you didn’t expect from the well-muscled Oni woman.\n\n");
 
-			outputText("Her pace is glacially slow, but as her hand rolls gently up and down your length, she somehow manages to find each and every secret spot, every sensitive place, causing you to flinch and quiver under her grasp.  You grit your teeth and squirm in discomfort as Izumi teases your cock in an entirely new way.  Already, you can feel your body rebelling at the bizarre, paradoxical sensations.  Unable to comprehend what is happening, every fibre in your body screams a single thought in unison; <b>faster</b>.\n\n");
+			outputText("Her pace is glacially slow, but as her hand rolls gently up and down your length, she somehow manages to find each and every secret spot, every sensitive place, causing you to flinch and quiver under her grasp.  You grit your teeth and squirm in discomfort as Izumi teases your cock in an entirely new way.  Already, you can feel your body rebelling at the bizarre, paradoxical sensations.  Unable to comprehend what is happening, every fiber in your body screams a single thought in unison; <b>faster</b>.\n\n");
 
 			outputText("Without warning, your hips spasm and buck");
 			if (player.isTaur()) outputText(" upwards");
@@ -1595,7 +1595,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText(" she says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  “<i>T-That isn’t something you should touch.  So, y-you’ll let go now, right?</i>”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.\n\n");
 
-				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “Hey,” She says, simply, her voice wavering. “Hey,” She repeats. “Come on now. Enough is enough, right?”");
+				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “Hey,” She says, simply, her voice wavering. “Hey,” She repeats. “Come on now. Enough is enough, right?”\n\n");
 			}
 
 			outputText("You could play nice and let the Oni go free... she is asking nicely, after all.  On the other hand, after the way she tried to ravage you earlier, you figure Izumi’s arrogant attitude could use being taken down a notch or two.  The only question is, what exactly are you going to do?\n\n");
@@ -2030,7 +2030,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Extricating yourself from Izumi’s clutches, you scoot forwards, ignoring the whimpering girl below you.  You press your [vag] against her horn, causing her to shiver and let out a panicked whine, tensing up as she anticipates the onslaught to come.  Rather than try to pull the horn fully <i>into</i> you, however, you begin to roll your hips, grinding your dampening nethers against the uneven surface.\n\n");
 
-			outputText("Izumi’s horn is covered in a myriad small bumps, faults and angles, causing you to let out an appreciative hiss or a surprised gasp whenever an unexpected ridge or lump rubs against your most sensitive parts.  Despite it’s bony, rocky appearance, Izumi’s horn is actually warm to the touch - a pleasant discovery, given that you were expecting it to be as cold and hard as the stone it resembles.  Judging by the sounds coming from beneath you, it would appear that Izumi has already been reduced to a quivering wreck, unable to do anything but stammer out a long series of croaking, staccato “A-a-aa-a-a” noises.  In a strange way, her helplessness is actually kind of cute.\n\n");
+			outputText("Izumi’s horn is covered in a myriad small bumps, faults and angles, causing you to let out an appreciative hiss or a surprised gasp whenever an unexpected ridge or lump rubs against your most sensitive parts.  Despite its bony, rocky appearance, Izumi’s horn is actually warm to the touch - a pleasant discovery, given that you were expecting it to be as cold and hard as the stone it resembles.  Judging by the sounds coming from beneath you, it would appear that Izumi has already been reduced to a quivering wreck, unable to do anything but stammer out a long series of croaking, staccato “A-a-aa-a-a” noises.  In a strange way, her helplessness is actually kind of cute.\n\n");
 
 			outputText("You have other concerns on your mind just now though, as you’re really beginning to enjoy your new toy.  You roll your [hips] with ever-increasing force, mashing your [vagina] into the slickening protrusion as you use Izumi’s horn to grind yourself closer and closer to your encroaching orgasm.  You grip the horn even tighter, eliciting a high-pitched whine from Izumi as you press it into your crotch as hard as you can manage, rubbing yourself onto it with even greater ferocity, your juices beginning to flow in earnest, trickling down onto Izumi’s face as you ride her face, relentlessly tribbing yourself towards climax.\n\n");
 
@@ -2056,7 +2056,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("With a final thump, Izumi’s hips drop back down to the ground, her arms flopping uselessly to her side.  After a moment or two of mutual, panting recover, you unsteadily step off of her and scratch at your head, as the aftermath of your orgasm begins to subside.  For her part, Izumi lays flat on her back, unmoving, her eyes glassy and unfocused, breathing as though she had just run a marathon.  Between her legs, you can dimly make out an unmistakable damp streak, glistening across the cave floor in the darkness.  You smirk at the sight, deciding to add one final little insult to the proceedings.\n\n");
 
-			outputText("“<i>You came, didn’t you?</i>” You ask, sweetly.  Izumi trembles a little, her eyes rolling over to you.  She seems to be having trouble focussing.\n\n");
+			outputText("“<i>You came, didn’t you?</i>” You ask, sweetly.  Izumi trembles a little, her eyes rolling over to you.  She seems to be having trouble focusing.\n\n");
 
 			outputText("“<i>..’es,</i>”  She croaks, almost inaudibly.  She sounds as though she’s on the verge of tears, presumably from embarrassment - you’re pretty certain you haven’t actually done anything that could hurt her.  You shake your head, chuckling to yourself as you redress and rummage through Izumi’s belongings for a trophy.\n\n");
 
