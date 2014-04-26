@@ -1605,7 +1605,7 @@ public function doEvent(eventNo:Number):void
 		var ttemp8:Function = null;
 		var ttemp9:Function = null;
 		var ttemp10:Function = null;
-		if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1))
+		if ((player.findPerk(PerkLib.MarblesMilk) >= 0 || flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) && player.hasItem(consumables.LACTAID, 1))
 		{
 			if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5) ttemp2 = marbleScene.giveMarbleLactaid;
 			else ttemp2 = marblePurification.lactaidForPureMurble;

@@ -60,6 +60,7 @@ function marbleBreastSize():String
 	{
 		if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 0) return "DD cup";
 		else if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 1) return"G cup";
+		else if(flags[kFLAGS.MARBLE_BREAST_SIZE] == 2) return "HH cup";
 		else return "J cup";
 	}
 	else
@@ -1691,8 +1692,16 @@ private function marbleKidsPlaytime():void {
 	//Bovine Saviour (Z)
 	//requires exactly 1 kid  (just put it on the RNG; players get knocked up so much and lots of people have 10+ Marble kids already -Z)
 	if(select == 1) {
-		outputText("Your daughter immediately clops up to you and jumps into your arms.  \"<i>" + player.mf("Daddy, daddy","Mommy, mommy") + "!  Play with me!</i>\"  You laugh at the girl in your arms, so young and yet full of energy.  She proceeds to rope you into a grand adventure, where you play the parts of the one who searches for a hero to save their camp, and the monster that has to be stopped, and also the monster's hostage that needs to be saved, while she is the great bovine saviour that carries out this grand quest.");
-		outputText("\n\nThe game finally ends with the bovine saviour victorious over the horde of ravenous monsters  - somewhere along the line it was decided that hostages were no fun and single combat wasn't impressive enough, and you exhausted your theatrical skills to provide a bevy of satisfyingly scary faces and growls - and the people of the land (you) rejoicing.  You're left a bit tired afterwards, but you certainly don't regret having played with your child.");
+		if(flags[kFLAGS.MARBLE_KIDS] == 1 && flags[kFLAGS.MARBLE_BOYS] == 1)
+		{
+			outputText("Your son immediately clops up to you and jumps into your arms.  \"<i>" + player.mf("Daddy, daddy","Mommy, mommy") + "!  Play with me!</i>\"  You laugh at the boy in your arms, so young and yet full of energy.  He proceeds to rope you into a grand adventure, where you play the parts of the one who searches for a hero to save their camp, and the monster that has to be stopped, and also the monster's hostage that needs to be saved, while she is the great bovine saviour that carries out this grand quest.");
+			outputText("\n\nThe game finally ends with the bovine saviour victorious over the horde of ravenous monsters  - somewhere along the line it was decided that hostages were no fun and single combat wasn't impressive enough, and you exhausted your theatrical skills to provide a bevy of satisfyingly scary faces and growls - and the people of the land (you) rejoicing.  You're left a bit tired afterwards, but you certainly don't regret having played with your child.");
+		}
+		else
+		{
+			outputText("Your daughter immediately clops up to you and jumps into your arms.  \"<i>" + player.mf("Daddy, daddy","Mommy, mommy") + "!  Play with me!</i>\"  You laugh at the girl in your arms, so young and yet full of energy.  She proceeds to rope you into a grand adventure, where you play the parts of the one who searches for a hero to save their camp, and the monster that has to be stopped, and also the monster's hostage that needs to be saved, while she is the great bovine saviour that carries out this grand quest.");
+			outputText("\n\nThe game finally ends with the bovine saviour victorious over the horde of ravenous monsters  - somewhere along the line it was decided that hostages were no fun and single combat wasn't impressive enough, and you exhausted your theatrical skills to provide a bevy of satisfyingly scary faces and growls - and the people of the land (you) rejoicing.  You're left a bit tired afterwards, but you certainly don't regret having played with your child.");
+		}
 		//increase fatigue by 10, decrease lust by 5, and decrease libido by 1, advance time by 1 hour
 		fatigue(10);
 	}
@@ -1709,10 +1718,10 @@ private function marbleKidsPlaytime():void {
 	}
 	//Take us to see Auntie (Z)
 	if(select == 3) {
-		outputText("Marble calls you over and asks that you take the girls to visit with Whitney - she'd like to do some things around camp while they aren't around.  You nod and turn to your daughters and tell them it is time to go and visit Auntie Whitney.  \"<i>Yay!</i>\" they shout and all start to crowd around.  You inform Marble that you'll be back in an hour, and proceed to the farm with your children, the youngest one holding your hand shyly.");
+		outputText("Marble calls you over and asks that you take the kids to visit with Whitney - she'd like to do some things around camp while they aren't around.  You nod and turn to your children and tell them it is time to go and visit Auntie Whitney.  \"<i>Yay!</i>\" they shout and all start to crowd around.  You inform Marble that you'll be back in an hour, and proceed to the farm with your children, the youngest one holding your hand shyly.");
 		outputText("\n\nThanks to the queer nature of travel in this land, it takes you no time at all to arrive at the edge of Whitney's peaceful island in the demon-blight.  Before long, the girls start to run ahead, eagerly anticipating the visit with the southern belle.  By the time you arrive at Whitney's house, she's already let the mini-Marbles inside, and is entertaining them in her sitting room.  There is an excited cry when she presents them with her latest homemade toy.");
 		outputText("\n\nYou join her with the kids and help keep them under control while they play with their Auntie and the toy she's made them.  As tiring as it is for the canine farmer, you can tell that she loves spending time with these kids and listening to their excited voices call her <i>Auntie</i>.");
-		outputText("\n\nWhen the hour is nearly up, you tell the girls that it is time to wind down and get ready to leave.  There is some protests, but they don't last long when Whitney promises a treat to each of them as they leave.  She goes off into the kitchen briefly, and when you've got the girls all ready to leave, she reappears with a tray of muffins, one for each girl.  It is with smiling faces full of baked goodness that your girls return to camp.");
+		outputText("\n\nWhen the hour is nearly up, you tell your offspring that it is time to wind down and get ready to leave.  There are some protests, but they don't last long when Whitney promises a treat to each of them as they leave.  She goes off into the kitchen briefly, and when you've got the girls all ready to leave, she reappears with a tray of muffins, one for each child.  It is with smiling faces full of baked goodness that your kids return to camp.");
 		//increase fatigue by 5 per kid, decrease lust by 5 per kid, and decrease libido by 1, advance time by 1 hour
 		fatigue(10);
 		//end event
@@ -1946,13 +1955,13 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n", true);
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 4) {
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 4) {
 		menuLoc = 2;
 		inventory.takeItem(consumables.VITAL_T);
 		player.removeStatusAffect(StatusAffects.MarbleHasItem);
 	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 7) {
+	else if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusAffectv1(StatusAffects.MarbleHasItem) <= 7) {
 		menuLoc = 2;
 		inventory.takeItem(armors.LEATHRA);
 		player.removeStatusAffect(StatusAffects.MarbleHasItem);
@@ -1978,7 +1987,8 @@ private function marbleInfo():void {
 	} 
 	else
 	{
-		outputText("So long as you don't drink milk from Marble's breasts again, you don't have to worry about getting addicted.  ", false)
+		if(flags[kFLAGS.MARBLE_PURIFIED] == 0) outputText("So long as you don't drink milk from Marble's breasts again, you don't have to worry about getting addicted.  ", false);
+		else outputText("Now that she's been purified, you can drink as much of her milk as you like without fear.  ");
 	}
 	outputText("Once camp improvements have been implemented, you will be able to get her to work on upgrading the camp instead of searching for supplies.", false);
 	doNext(interactWithMarbleAtCamp);

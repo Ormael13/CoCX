@@ -1614,7 +1614,7 @@ public function updatePregnancy():Boolean {
 				outputText("\n\nFor the next few minutes, you can’t do much else but squeeze the large form inside your belly out.  Marble tries to help a little, pulling your nether lips open even further to make room for the head.  You gasp as you push the head out, and you hear Marble give a little cry of joy.  \"<i>It’s a son of mine!</i>\" she tells you, but you can barely hear her due to the focus you’re putting into the task of bringing this child out.", false);
 				outputText("\n\nYou give an almighty heave and finally manage to push the shoulders out. The rest is downhill from there.  Once you’ve pushed the child completely out, Marble lays you down on the ground.  You rest there for a few moments, trying to catch your breath after the relatively difficult birthing.  When you finally have a chance to get up, you see that Marble has a small bull boy cradled in her arms, suckling on her nipple.  You can hardly believe that you managed to push out a boy that big!  Marble seems to understand and tells you that the child is actually a fair bit bigger now than when he came out.", false);
 				outputText("\n\nShe helps you stand up and gives you the little boy to suckle for yourself.", false);
-				outputText("\n\nYou put the child to your breast and let him drink down your milk.  You sign in contentment and Marble says, \"<i>See sweetie?  It’s a really good feeling, isn’t it?</i>\"  You can’t help but nod in agreement.  After a minute the little boy has had enough and you put him into the nursery.", false);
+				outputText("\n\nYou put the child to your breast and let him drink down your milk.  You sigh in contentment and Marble says, \"<i>See sweetie?  It’s a really good feeling, isn’t it?</i>\"  You can’t help but nod in agreement.  After a minute the little boy has had enough and you put him into the nursery.", false);
 			
 				outputText("The little boy is already starting to look like he is a few years old; he’s trotting around on his little hoofs.", false);
 				//Increase the size of the PC’s hips, as per normal for pregnancies, increase birth counter
@@ -1642,7 +1642,7 @@ public function updatePregnancy():Boolean {
 					outputText("As the child contentedly drinks from your " + nippleDescript(0) + ", Marble tells you, \"<i>Sweetie, somehow I know that our kids won't have to worry about the addictive milk.  It will only make them healthy and strong.</i>\"  You nod at her and put the child into the nursery.  ", false);
 				} 
 				else {
-					outputText("You put the child to your breast and let her drink down your milk.  You sign in contentment and Marble says, \"<i>See sweetie?  It's a really good feeling, isn't it?</i>\"  You can't help but nod in agreement.  After a minute the little girl has had enough and you put her into the nursery.\n\n", false);
+					outputText("You put the child to your breast and let her drink down your milk.  You sigh in contentment and Marble says, \"<i>See sweetie?  It's a really good feeling, isn't it?</i>\"  You can't help but nod in agreement.  After a minute the little girl has had enough and you put her into the nursery.\n\n", false);
 				}
 				outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.", false);
 				//Add to marble-kids:

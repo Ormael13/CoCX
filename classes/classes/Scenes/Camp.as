@@ -69,6 +69,15 @@ public function doCamp():void {
 		fixHistory();
 		return;
 	}
+	if(!marbleScene.marbleFollower())
+	{
+		if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
+		{
+			hideMenus();
+			marblePurification.pureMarbleDecidesToBeLessOfABitch();
+			return;
+		}
+	}
 	if(marbleScene.marbleFollower())
 	{
 		//Cor < 50
@@ -94,12 +103,6 @@ public function doCamp():void {
 			{
 				hideMenus();
 				marblePurification.marbleLeavesThePCOverCorruption();
-				return;
-			}
-			if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
-			{
-				hideMenus();
-				marblePurification.pureMarbleDecidesToBeLessOfABitch();
 				return;
 			}
 		}
