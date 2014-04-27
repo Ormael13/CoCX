@@ -1070,7 +1070,7 @@ public static const MARBLE_RATHAZUL_COUNTER_2:int                               
 public static const MARBLE_WARNED_ABOUT_CORRUPTION:int                                   = 1062;
 public static const MARBLE_LEFT_OVER_CORRUPTION:int                                   = 1063;
 public static const MARBLE_COUNTUP_TO_PURIFYING:int                                   = 1064;
-public static const UNKNOWN_FLAG_NUMBER_01065:int                                   = 1065;
+public static const KATHERINE_MET_SCYLLA                                            = 1065; // Whether Katherine was met via Scylla.
 public static const UNKNOWN_FLAG_NUMBER_01066:int                                   = 1066;
 public static const UNKNOWN_FLAG_NUMBER_01067:int                                   = 1067;
 public static const UNKNOWN_FLAG_NUMBER_01068:int                                   = 1068;
