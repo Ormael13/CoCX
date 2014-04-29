@@ -1538,7 +1538,10 @@ private function suckleTacularKats():void {
 	else outputText("  Katherine looks more like a balloon than a cat, her belly swollen hugely from her titanic liquid repast.  You can hear her stomach's contents sloshing softly around inside her when she moves and thusly jostles them.", false);
 	outputText("  With a smirk, you ask if she feels good from having helped you with your little milk problem.\n\n", false);
 
-	outputText("The cat herm stirs herself from your grip and cuddles up to you, nuzzling against your neck and tucking her chin into your shoulder.  Then she lets out a burp that echoes off the alley walls.  \"<i>I feel great,</i>\" she tells you, totally unabashed.  \"<i>I must say, I've drunk from people before... but nobody makes milk as wonderful as yours... except maybe that nun!</i>\"\n\n", false);
+	outputText("The cat herm stirs herself from your grip and cuddles up to you, nuzzling against your neck and tucking her chin into your shoulder.  Then she lets out a burp that echoes off the alley walls.  \"<i>I feel great,</i>\" she tells you, totally unabashed.  \"<i>I must say, I've drunk from people before... but nobody makes milk as wonderful as yours", false);
+	if(flags[kFLAGS.KATHERINE_MET_SCYLLA])
+		outputText("... except maybe that nun", false);
+	outputText("!</i>\"\n\n", false);
 
 	outputText("Smiling at the flattery, you help the very well-fed cat out of your lap, then quietly put your clothes back on and head out into the streets.\n\n", false);
 	//some lust loss, satisfy feeder, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
