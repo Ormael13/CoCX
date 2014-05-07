@@ -35,7 +35,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("Turning to the side, " + a + short + " raises " + mf("his", "her") + " abdomen and unleashes a spray of webbing in your direction!  ", false);
 			//Blind dodge change
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to the blindness.", false);
+				outputText(capitalA + short + " misses completely due to their blindness.", false);
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("The spider-" + mf("boy", "girl") + " lunges forward with " + mf("his", "her") + " mouth open, " + mf("his", "her") + " two needle-like fangs closing rapidly.  ", false);
 			//Blind dodge change
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to the blindness.", false);
+				outputText(capitalA + short + " misses completely due to their blindness.", false);
 			}
 			//Determine if dodged!
 			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {

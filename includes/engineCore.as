@@ -474,7 +474,7 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.Acclimation));
 	}
 	//Tier 1 Corruption Perks - acclimation over-rides
-	else if(player.level >= 6)
+	if(player.level >= 6)
 	{
 		if(player.cor >= 60 && player.findPerk(PerkLib.CorruptedLibido) >= 0) {
 			_add(new PerkClass(PerkLib.Sadist));

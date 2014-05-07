@@ -1051,7 +1051,9 @@ private function Scylla6DUCK():void {
 private function Scylla6SLOW():void {
 	spriteSelect(59);
 	outputText("", true);
-	outputText("Too late, you realize the pickpockets were a distraction, and before you can whip around, a heavy weight cracks against the side of your skull, turning your world into a pin point of pain in an ocean of black unconsciousness. You muscles become jelly and you don't remember falling to your knees or slumping against the brick wall of the alley, but the last thing you remember is the soft jingling of a small bell.\n\n", false);
+	outputText("Too late, you realize the pickpockets were a distraction, and before you can whip around, a heavy weight cracks against the side of your skull, turning your world into a pin point of pain in an ocean of black unconsciousness. You muscles become jelly and you don't remember falling to your knees or slumping against the brick wall of the alley", false);
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) outputText(", but the last thing you remember is the soft jingling of a small bell", false);
+	outputText(".\n\n", false);
 	dynStats("lus", 5+player.lib/20);
 	//[If the Player is Lactating]
 	if(player.biggestLactation() >= 1 && rand(2) == 0) {
@@ -1076,9 +1078,13 @@ private function Scylla6SLOW():void {
 		outputText("The cats are milling around her colossal chest, anxious and jittery. Between Scylla's position and the pressure her bound arms are putting on her supple tit flesh, the nun's nipples have begun leaking drops of her creamy, thick milk, the smell of which seems to be driving the cats wild. Still, they're holding back, perhaps because they've never seen lips on boobs before. Maybe it's the concussion talking, but between the sight of all that exposed flesh and the heat pouring off of their puffed genitals, you're starting to feel a little hot under the collar. They haven't noticed you yet. What will you do?\n\n", false);
 
 		var submit:Function = null;
-		if(player.hasVagina()) submit = Scylla6NoMilkSubmit;
-		//[Get Help]    [Submit (VAGINA+DICk ONLY)]    [Rape]
-		simpleChoices("Get Help",Scylla6NoMilkGetHelp,"Submit",submit,"Rape",Scylla6NoMilkRAPETHEWORLD,"",0,"",0);
+		var rapeWorld:Function = null;
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) {
+			if (player.hasVagina()) submit = Scylla6NoMilkSubmit;
+			rapeWorld = Scylla6NoMilkRAPETHEWORLD;
+		}
+		//[Get Help] [Submit (VAGINA+DICk ONLY)] [Rape]
+		simpleChoices("Get Help", Scylla6NoMilkGetHelp, "Submit", submit, "Rape", rapeWorld, "", 0, "", 0);
 
 	}
 }

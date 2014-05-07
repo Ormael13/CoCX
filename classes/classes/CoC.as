@@ -336,8 +336,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.4.12";
-			version = ver + " (<b>Fixing Bugs Aplenty</b>)";
+			ver = "0.8.4.13";
+			version = ver + " (<b>Katherine Handjob Unlocking</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
