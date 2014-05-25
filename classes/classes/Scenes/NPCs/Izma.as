@@ -64,7 +64,7 @@ package classes.Scenes.NPCs
 			}
 			//Determine if cat'ed
 			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				outputText("Izma tries to lock you in a clinch, but your cat-like flexible makes it easy to twist away from her grab.\n", false);
+				outputText("Izma tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n", false);
 				return;
 			}
 			var damage:Number = 0;
