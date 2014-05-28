@@ -1,0 +1,13 @@
+package classes.Scenes.Areas.Forest
+{
+	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+
+	public class ErlKingScene extends BaseContent
+	{
+		public function ErlKing()
+		{
+		
+		}
+	}
+}
