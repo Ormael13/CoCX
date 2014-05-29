@@ -2569,6 +2569,7 @@ public function marblePoopsBaybees():void {
 	if(flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 1) {
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n", false);
+		
 		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n", false);
 		if(flags[kFLAGS.MARBLE_PURIFIED] > 0 && rand(2) == 0)
 		{
@@ -2583,7 +2584,7 @@ public function marblePoopsBaybees():void {
 			}
 			else
 			{
-				outputText("\n\nYou hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble’s milk.", false);
+				outputText("\n\nYou hand Marble the child and she puts the crying child to her chest. The little boy stops crying at once and starts eagerly gobbling down Marble’s milk.", false);
 			}
 
 			outputText("\n\n\"<i>Oh my,\"</i> Marble says to you, \"<i>Its just as wonderful as when you suckled me when my milk was addictive; I’d forgotten the feeling.\"</i>  ", false);
