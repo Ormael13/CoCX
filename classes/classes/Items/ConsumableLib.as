@@ -121,7 +121,9 @@ package classes.Items
 		public const W_STICK:WingStick = new WingStick();
 		public const WETCLTH:SimpleConsumable = mk("WetClth","WetClth", "a wet cloth dripping with slippery slime", m.gooGasmic, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.");
 		public const WHITEDY:SimpleConsumable = mk("WhiteDy","WhiteDy", "a vial of white hair dye", curry(m.hairDye, "white"), "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const WHITEEG:SimpleConsumable = mk("WhiteEg","WhiteEg", "a milky-white egg", curry(m.whiteEgg, false),"This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.");
+		public const WHITEEG:SimpleConsumable = mk("WhiteEg", "WhiteEg", "a milky-white egg", curry(m.whiteEgg, false), "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.");
+		
+		public const PRNPKR:SimpleConsumable = mk("PrnsPkr", "PrnsPkr", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid.");
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];

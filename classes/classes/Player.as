@@ -20,7 +20,7 @@ use namespace kGAMECLASS;
 		{
 			game.outputText(text, clear);
 		}
-
+		
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;

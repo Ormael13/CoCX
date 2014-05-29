@@ -23,13 +23,16 @@ package classes.Scenes.Areas
 		public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
+		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public function Forest()
 		{
 		}
 		public function exploreDeepwoods():void
 		{
 			player.addStatusValue(StatusAffects.ExploredDeepwoods, 1, 1);
+			
 			var chooser:Number = rand(5);
+			
 			var temp2:Number = 0;
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
@@ -72,6 +75,18 @@ package classes.Scenes.Areas
 					tamaniScene.encounterTamani();
 				return;
 			}
+			
+			if (flags[kFLAGS.ERLKING_DISABLED] == 0 && flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] == 4)
+			{
+				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] = 0;
+				erlkingScene.encounterWildHunt();
+				return;
+			}
+			else
+			{
+				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER]++;
+			}
+			
 			//Faerie
 			if (chooser == 0) {
 				faerie.encounterFaerie();
