@@ -317,7 +317,7 @@ public function creditsScreen():void {
 	outputText("<li> ComfyCushion (Muff Wrangler)</li>");
 	outputText("<li> B (Brooke)</li>");
 	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
-	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment)");
+	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment)</li>");
 	outputText("<li> Schpadoinkle (Victoria Sex)</li>");
 	outputText("<li> Donto (Ro'gar the Orc, Polar Pete)</li>");
 	outputText("<li> Angel (Additional Amily Scenes)</li>");

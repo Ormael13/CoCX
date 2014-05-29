@@ -939,7 +939,7 @@ private function getEggflated():void {
 	outputText("  Your vision swims and when you blink back the dizziness, you find your gut has bloated to the size of ");
 	if(!isEaster()) outputText("advanced pregnancy");
 	else outputText("gluttonous excess");
-	outputText(".  Though her cushioning balls have emptied some of their load inside you, they're still huge enough to support you both, so you regretfully begin to slide off the bunny girl's cock, eggs filling the gape her distended shaft leaves.  Pausing, with the tip at the cusp of your flush lower lips, you turn around atop the delirious bunny, popping her crest out, a rivulet of ");
+	outputText(".  Though her cushioning balls have emptied some of their load inside you, they're still huge enough to support you both, so you regretfully begin to slide off the bunny girl's cock, eggs filling the gap her distended shaft leaves.  Pausing, with the tip at the cusp of your flush lower lips, you turn around atop the delirious bunny, popping her crest out, a rivulet of ");
 	if(!isEaster()) outputText("cum");
 	else outputText("cream");
 	outputText(" leaking from your freshly stuffed snatch.  With a guiding hand, you steer her surging spout to your [ass] and drop your full ");
