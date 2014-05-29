@@ -3629,6 +3629,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	//lparchive.org/Deadly-Premonition
 	camp.sleepRecovery(false);
 	model.time.hours = 7;
+	model.time.days++;
 	doNext(1);
 }
 
