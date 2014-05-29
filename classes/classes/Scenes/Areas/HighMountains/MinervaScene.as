@@ -834,7 +834,9 @@ private function minervaCowgirlSex():void {
 	else {
 		outputText("\n\nNot nearly done with you yet, Minerva squeezes down on you tightly with her exquisite cunt, her tentacles may have let go, but they are still squirming around, the playful things preparing a second dose of their potent payload.  \"<i>I'm </i>so<i> not done with you yet, I want this to be memorable.</i>\"");
 	
-		outputText("\n\nHeaving gasps of breath, you ask her what she has in mind.  \"<i>Mmm... well, I don't want you getting tired, so I'm going to go first...</i>\" she says with a grin as she runs her hands up your [chest].  The siren's tentacles slither over your balls and the base of your " + cockDescript(x) + ", stinging you again and again like an overzealous jellyfish, pumping more of her aphrodisiac venom into your genitals in mind-numbing quantities.");
+		outputText("\n\nHeaving gasps of breath, you ask her what she has in mind.  \"<i>Mmm... well, I don't want you getting tired, so I'm going to go first...</i>\" she says with a grin as she runs her hands up your [chest].  The siren's tentacles slither over");
+		if (player.balls > 0) outputText(" your balls and");
+		outputText(" the base of your " + cockDescript(x) + ", stinging you again and again like an overzealous jellyfish, pumping more of her aphrodisiac venom into your genitals in mind-numbing quantities.");
 		if(player.hasVagina()) outputText("  A few even slither down into your [vagina] to sting you there as well, making sure you are, at least temporarily, turned into a sex-hungry beast.");
 	}
 	
@@ -1175,7 +1177,9 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	}
 	//Holy shit!:
 	else {
-		outputText("\n\nYour inhuman load fills the siren's accepting belly with what can only be described as a flood, as gallons of your hot spooge instantly bloat her belly, swelling her womb like a balloon of raw fertility.  Minerva groans and lets out mindless gurgles as you unload your overproductive balls into her.  To even your amazement, her hungry womb is able to contain much of your sperm before she can take no more, each blast of potent cum now gushing from between your bodies, the floor soon looking like someone dumped a barrel full of raw milk on the ground before you're finally done.");
+		outputText("\n\nYour inhuman load fills the siren's accepting belly with what can only be described as a flood, as gallons of your hot spooge instantly bloat her belly, swelling her womb like a balloon of raw fertility.");
+		if (player.balls > 0) outputText("  Minerva groans and lets out mindless gurgles as you unload your overproductive balls into her.");  
+		outputText("  To even your amazement, her hungry womb is able to contain much of your sperm before she can take no more, each blast of potent cum now gushing from between your bodies, the floor soon looking like someone dumped a barrel full of raw milk on the ground before you're finally done.");
 		outputText("\n\nLooking down at her now gravid, overstuffed form, Minerva slowly gets up, only to sit down on the rock and hold her swollen belly in her arms with surprising gentleness.  \"<i>Uuugh... oh gods... I feel like I'm gonna burst...  Don't think I'll ever get used to this...</i>\" she says with a groan as she looks down at her taut tummy.  \"<i>Ooohh... I look like I'm about to give birth to twins... or triplets...</i>\" she says with a small smile on her face, despite how she seems to complain.");
 	}
 	outputText("\n\nFinally letting go of the well-fucked herm's sides, you ease her into a comfortable rest against the rock, your lust spent into her still quivering body as she pants and sighs with satisfaction.  \"<i>That was amazing... I don't know how you do it, but you never cease to amaze, do you?</i>\"  she asks with a throaty coo, looking back at you, a deep blush on her face making it clear that she enjoyed everything you did with her.");
