@@ -1063,7 +1063,7 @@ flagReplacements =  [
 ["UNKNOWN_FLAG_NUMBER_01062",                                       "UNKNOWN_FLAG_NUMBER_01062"],                      # 1062;
 ["UNKNOWN_FLAG_NUMBER_01063",                                       "UNKNOWN_FLAG_NUMBER_01063"],                      # 1063;
 ["UNKNOWN_FLAG_NUMBER_01064",                                       "UNKNOWN_FLAG_NUMBER_01064"],                      # 1064;
-["UNKNOWN_FLAG_NUMBER_01065",                                       "UNKNOWN_FLAG_NUMBER_01065"],                      # 1065;
+["KATHERINE_MET_SCYLLA",                                            "KATHERINE_MET_SCYLLA"],                           # Whether Katherine was met via Scylla.
 ["UNKNOWN_FLAG_NUMBER_01066",                                       "UNKNOWN_FLAG_NUMBER_01066"],                      # 1066;
 ["UNKNOWN_FLAG_NUMBER_01067",                                       "UNKNOWN_FLAG_NUMBER_01067"],                      # 1067;
 ["UNKNOWN_FLAG_NUMBER_01068",                                       "UNKNOWN_FLAG_NUMBER_01068"],                      # 1068;
