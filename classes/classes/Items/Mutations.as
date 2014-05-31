@@ -7556,14 +7556,16 @@
 			if (choice == 0) {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-				inventory.takeItem(consumables.FOXJEWL);
+				inventory.takeItem(consumables.FOXJEWL, false);
+				kGAMECLASS.supressGoNext = true;
 			}
 			//[Fox Berries]
 			else if (choice == 1) {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
 				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 				//add Fox Berries to inventory
-				inventory.takeItem(consumables.FOXBERY);
+				inventory.takeItem(consumables.FOXBERY, false);
+				kGAMECLASS.supressGoNext = true;
 			}
 			//[Gems]
 			else if (choice == 2) {
@@ -7580,7 +7582,8 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
 				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
 				//add Kitsune Tea/Scholar's Tea to inventory
-				inventory.takeItem(consumables.SMART_T);
+				inventory.takeItem(consumables.SMART_T, false);
+				kGAMECLASS.supressGoNext = true;
 			}
 			//[Hair Dye]
 			else if (choice == 4) {
@@ -7594,7 +7597,8 @@
 
 				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
 				//add <color> Dye to inventory
-				inventory.takeItem(itype);
+				inventory.takeItem(itype, false);
+				kGAMECLASS.supressGoNext = true;
 			}
 			//[Knowledge Spell]
 			else if (choice == 5) {
@@ -7651,7 +7655,8 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 				outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  At least you managed to salvage a shard of black chitin from it...</b>  ");
 				//add B. Chitin to inventory*/
-				inventory.takeItem(useables.B_CHITN);
+				inventory.takeItem(useables.B_CHITN, false);
+				kGAMECLASS.supressGoNext = true;
 			}
 		}
 

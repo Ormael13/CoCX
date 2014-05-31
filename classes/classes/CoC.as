@@ -245,6 +245,7 @@
 		public var gameState:Number;
 		public var menuLoc:Number;
 		public var itemSubMenu:Boolean;
+		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
 		public var currentText:String;
 

@@ -691,7 +691,7 @@ public function doItems(eventNo:Number):void {
 		private function useItem(itype:ItemType,external:Boolean):void
 		{
 			(itype as Useable).useItem(player,true,external);
-			if (!itemSwapping && !itemSubMenu) itemGoNext();
+			if (!itemSwapping && !itemSubMenu && !kGAMECLASS.supressGoNext) itemGoNext();
 			itemSwapping = false;
 		}
 
@@ -703,9 +703,11 @@ public function doItems(eventNo:Number):void {
 			} else {
 				outputText("You cannot use " + slotTmp.itype.longName + "!\n\n", true);
 			}
-			if (!itemSubMenu && !itemSwapping) {
+			if (!itemSubMenu && !itemSwapping && !kGAMECLASS.supressGoNext) {
 				if (!inCombat())
+				{
 					doNext(1000);
+				}
 				else if (menuLoc == 1) {
 					menuLoc = 0;
 					if (!combatRoundOver()) {
@@ -713,6 +715,10 @@ public function doItems(eventNo:Number):void {
 						enemyAI();
 					}
 				}
+			}
+			else
+			{
+				kGAMECLASS.supressGoNext = false;
 			}
 		}
 		//Determine how to continue after using items or running from the items menu.

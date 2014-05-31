@@ -112,6 +112,8 @@ public function customPCSetup():void {
 		
 		player.gems += 3000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
+		
+		inventory.takeItem(consumables.KITGIFT);
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
