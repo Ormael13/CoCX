@@ -674,7 +674,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nIt then becomes rather apparent exactly what Clara really wants to play with now, and you feel her fingers slip down and around your body.  She gets herself a handful of your " + buttDescript() + ", and then slips her fingers into your crevice.  That finger doesn't stop until it's pushed itself inside your " + assholeDescript() + " and triggered a response that makes Clara laugh with delight.  Feeling emboldened, the bovine girl thrusts another finger into your back entrance and starts wiggling them around.");
 	 	outputText("\n\nBy now you’re so over aroused from nursing that you cum on the spot from her playing with your ass.  The nipple that you’d been sucking on up until now slips out of your mouth, and the woman holding you lies you back on the ground, smiling.  Clearly your orgasm did not go unnoticed by her.  \"<i>I’m definitely going to have to find new ways to play with you after this,</i>\" she says, that crazed smile back on her face, \"<i>but for now, I think it is time for soome sex.</i>\"");
 
-		//Proceed to either the has fitted cock, no fitted cock,  or has not cock variants.
+		//Proceed to either the has fitted cock, no fitted cock, or has not cock variants.
 		menu();
 		if(!player.hasCock()) addButton(0,"Next",cocklessPCsGetAbusedByCowCunts);
 		else if(player.cockThatFits(20) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
