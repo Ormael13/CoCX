@@ -325,7 +325,7 @@ package classes.Scenes.NPCs
 			//(if PC has >= 50 int)
 			if (player.inte >= 50) {
 				outputText("\n\nYou feel electricity run down your spine as you pass by a far wall in the back of the cave; inspecting the wall, you quickly locate an odd rock.  When you pick it up, you realize it has some sort of inscription drawn all over the underside; figuring it's probably the source of the ward, you fling the rock at the far wall, shattering it into many pieces.");
-				outputText("\n\nYou feel a small pulse of energy run through the chamber and into the corridor.  Running towards the entrance; you discover that you can easily remove the egg.   It begins to glow softly as you remove it from the cave; at first you take it for a trick of the light, but remember there isn't any in this damned dark swamp!");
+				outputText("\n\nYou feel a small pulse of energy run through the chamber and into the corridor.  Running towards the entrance; you discover that you can easily remove the egg.  It begins to glow softly as you remove it from the cave; at first you take it for a trick of the light, but remember there isn't any in this damned dark swamp!");
 			}
 			//(else if PC has >= 90 str)
 			else if (player.str >= 90) {
@@ -1004,7 +1004,7 @@ package classes.Scenes.NPCs
 				emberAffection(5);
 			}
 			else {
-				outputText("\n\nEmber begins talking about dragon habits, and the cave mouth framing " + emberMF("him", "her") + " makes you wonder why dragons dig such dens.  Ember shrugs.  \"<i>It's convenient.  The stone is tough and can resist all forms of hazard,  plus I'll always know I can keep my stuff safe inside.</i>\"  " + emberMF("he", "she") + " stares at " + emberMF("his", "her") + " den in deep thought.");
+				outputText("\n\nEmber begins talking about dragon habits, and the cave mouth framing " + emberMF("him", "her") + " makes you wonder why dragons dig such dens.  Ember shrugs.  \"<i>It's convenient.  The stone is tough and can resist all forms of hazard, plus I'll always know I can keep my stuff safe inside.</i>\"  " + emberMF("he", "she") + " stares at " + emberMF("his", "her") + " den in deep thought.");
 				outputText("\n\n\"<i>It's kinda small though... I might need a bigger one if...</i>\"  Ember stops abruptly");
 				if (flags[kFLAGS.EMBER_ROUNDFACE] == 1) outputText(", a blush creeping onto " + emberMF("his", "her") + " cheeks");
 				outputText(".");
@@ -1338,7 +1338,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber sighs and turns to look at you.  \"<i>I hope you'll stay away from those stupid bulls from now on.  Next time you have a craving");
 				//(Male/HermEmber:
 				if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText(", especially for sucking cock,");
-				outputText(" you should come to me instead; I'll help you.</i>\"  Then as if realising what " + emberMF("he", "she") + "'s just implied, Ember looks away; and hurriedly adds,  \"<i>But not the way you're thinking...</i>\"");
+				outputText(" you should come to me instead; I'll help you.</i>\"  Then as if realising what " + emberMF("he", "she") + "'s just implied, Ember looks away; and hurriedly adds, \"<i>But not the way you're thinking...</i>\"");
 				outputText("\n\nYou simply lift an eyebrow and ask how else " + emberMF("he", "she") + " intends to help.");
 				outputText("\n\n\"<i>J-just forget it!</i>\"  " + emberMF("He", "She") + " turns to walk away, stopping briefly to stifle another burp and hold " + emberMF("his", "her") + " belly.  You call out to the dragon that eating minotaurs, bones and all, really can't be good for " + emberMF("his", "her") + " stomach; in fact, given the near-constant bellyaching and belching " + emberMF("he", "she") + "'s suffered through, maybe it's " + emberMF("him", "her") + " that needs the help?  Some medicine, or at least a bellyrub?");
 				outputText("\n\n\"<i>B-bellyrub?  What do I look like!?  A pet!?</i>\" Ember yells, rubbing " + emberMF("his", "her") + " belly " + emberMF("him", "her") + "self.");
@@ -1430,7 +1430,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou decide to continue drinking Ember's blood; intent on acquiring all the power it can bring out from within you.");
 				//output tf from below
 				emberTFs();
-				outputText("\n\nAs you break the kiss; Ember leans over, supporting " + emberMF("him", "her") + "self on your shoulders.   \"<i>Ugh... I guess we overdid it... I feel woozy.</i>\"");
+				outputText("\n\nAs you break the kiss; Ember leans over, supporting " + emberMF("him", "her") + "self on your shoulders.  \"<i>Ugh... I guess we overdid it... I feel woozy.</i>\"");
 				outputText("\n\nYou quickly offer " + emberMF("him", "her") + " a helping hand, inquiring if " + emberMF("he", "she") + " is all right.  Ember accepts your help, using your hand to balance " + emberMF("him", "her") + "self.  \"<i>I-I'll be fine... just, no more sharing for the day...</i>\"");
 			}
 			doNext(13);
@@ -1849,7 +1849,7 @@ package classes.Scenes.NPCs
 			outputText(images.showImage("ember-drink-her-milk"));
 			outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
 			if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText(", scaly");
-			outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.   With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk.");
+			outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk.");
 			//Summary:
 			//Usable only through Follower menu
 			//Restore Health and Fatigue
@@ -2832,7 +2832,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nEmber's throaty moan devolves into a roar of intense pleasure as her tail loops around your neck, not constricting nor choking you, just helping the dragon stabilize herself as she is rocked by her intense orgasm and rewards you with a bountiful helping of sweet dragon juice.");
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her throbbing shaft, not intending to be left out of the fun, records the event by marking the tree bark with white dragon spooge.");
 
-			outputText("\n\nSlowly Ember crumbles, her legs no longer able to hold her up; her claws dig long scratching marks on the tree as she falls to her knees and the tail around your neck slithers sensually, massaging you.   Finally with a gasp and sigh, Ember falls on her back, gazing up at you through half-lidded eyes; you gasp in surprise as the tail suddenly grips your neck and pulls you down for a upside-down kiss.  Ember doesn't seem to mind tasting herself as she licks around inside your mouth and then your face.");
+			outputText("\n\nSlowly Ember crumbles, her legs no longer able to hold her up; her claws dig long scratching marks on the tree as she falls to her knees and the tail around your neck slithers sensually, massaging you.  Finally with a gasp and sigh, Ember falls on her back, gazing up at you through half-lidded eyes; you gasp in surprise as the tail suddenly grips your neck and pulls you down for a upside-down kiss.  Ember doesn't seem to mind tasting herself as she licks around inside your mouth and then your face.");
 
 			outputText("\n\nYou wait until she takes her tongue out of your mouth and smile at her, then stroke her cheek and ask if it was good for her.  \"<i>The best...</i>\" Ember whispers airily.  You smile and bend down to kiss her again; there's a risk she'll give you a nip for presumption, but you favor the odds she'll let you get away with it.");
 
@@ -3215,7 +3215,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nEmber leans over you, panting, " + emberMF("his", "her") + " hot breath mere inches from your " + player.face() + ", gazing at you through half-lidded, lust-addled eyes.  \"<i>You feel so good... so hot... so sexy...</i>\" Ember says mid-pant.  You pant right back, reaching up and wrapping your arms around " + emberMF("his", "her") + " neck, staring back at " + emberMF("him", "her") + " with the same expression and telling " + emberMF("him", "her") + " you think " + emberMF("he", "she") + " feels just as good.");
 
-			outputText("\n\nEmber thrusts deeply into you and gasps;  pre shoots out of " + emberMF("his", "her") + " cock into your well lubed tunnel and " + emberMF("he", "she") + " stops moving.  \"<i>I-I'm getting close...</i>\" Ember warns, trembling in pleasure as your walls constrict and grab at " + emberMF("his", "her") + " shaft, eager for the friction that sets your nerves alight with pleasure.");
+			outputText("\n\nEmber thrusts deeply into you and gasps; pre shoots out of " + emberMF("his", "her") + " cock into your well lubed tunnel and " + emberMF("he", "she") + " stops moving.  \"<i>I-I'm getting close...</i>\" Ember warns, trembling in pleasure as your walls constrict and grab at " + emberMF("his", "her") + " shaft, eager for the friction that sets your nerves alight with pleasure.");
 
 			outputText("\n\nYou snarl back softly through your teeth; you're not ready yet!  Well, if " + emberMF("he", "she") + "'s close, then " + emberMF("he", "she") + " needs to go faster, so you can cum too!  You wrap your arms and [legs] jealously around " + emberMF("him", "her") + ", pistoning back and forth with all the speed and force you can muster, using every muscle you can control in your [vagina] to milk and squeeze your draconic lover... yes, yes, just a little more... Ember groans at your sudden movements, faltering and crashing atop you limply as the overwhelming pleasure saps " + emberMF("him", "her") + " of all " + emberMF("his", "her") + " strength.");
 
