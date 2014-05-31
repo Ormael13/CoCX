@@ -21,7 +21,7 @@ package classes.Items
 		public const BONSTRP:ArmorWithPerk = mk2("BonStrp","BonStrp","barely-decent bondage straps","a set of bondage straps",0,600,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.");
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
-		public const CHBIKNI:ArmorWithPerk = mk2("ChBikni","Chn Bikini","revealing chainmal bikini","a chainmail bikini",2,700,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light",
+		public const CHBIKNI:ArmorWithPerk = mk2("ChBikni","Chn Bikini","revealing chainmail bikini","a chainmail bikini",2,700,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light",
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const CLSSYCL:Armor = mk("ClssyCl","Suitclothes","classy suitclothes","a set of classy suit-clothes",1,400,"A set of classy suitclothes.","Light");
 		public const FULLCHN:Armor = mk("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");

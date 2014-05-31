@@ -1763,8 +1763,8 @@ package classes.Scenes.NPCs
 
 				outputText("You shake your head \"<i>no</i>", false);
 				if(!sexAfter) {
-					if(flags[kFLAGS.AMILY_FOLLOWER] == 0) outputText("\", politely excuse yourself, and head back to your own camp. It sounds like she's doing better at keeping a steady supply of food and water going then you are.  But if that's the case... why does she look so thin?\n\n", false);
-					else outputText("\", politely excuse yourself, and sit back down in camp.  It sounds like she's doing better at keeping a steady supply of food and water going then you are.  But if that's the case... why does she look so thin?\n\n", false);
+					if(flags[kFLAGS.AMILY_FOLLOWER] == 0) outputText("\", politely excuse yourself, and head back to your own camp. It sounds like she's doing better at keeping a steady supply of food and water going than you are.  But if that's the case... why does she look so thin?\n\n", false);
+					else outputText("\", politely excuse yourself, and sit back down in camp.  It sounds like she's doing better at keeping a steady supply of food and water going than you are.  But if that's the case... why does she look so thin?\n\n", false);
 				}
 				else outputText(".\"", false);
 			}
