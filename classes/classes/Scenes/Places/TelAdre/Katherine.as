@@ -1666,6 +1666,7 @@ function interveneWithKittyKats5():void
 	else outputText("You could take her here and now, but her ‘friends’ might come back and help her. Or a member of the watch might find you. Better to play the long game with this very fuckable kitty.");
 	//(Set KATHERINE_UNLOCKED to -1)
 	flags[kFLAGS.KATHERINE_UNLOCKED] = -1;
+	
 	//(remove 10 gems from inventory)
 	player.gems -= 10;
 	outputText("\n\nYou free your legs, go to the crate, and collect your gear. Katherine remains on the ground, eyes squeezed shut. She’s tucked her erection inside her shirt and she’s clutching it to herself, seemingly trying to force it to die down. You count out 10 gems and press them into her hand.");
@@ -1945,8 +1946,16 @@ function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo():void
 	if(player.short == "Kath" || player.short == "Katherine" || player.short == "Helena" || player.short == "Evelyn" || player.short == "Oswald") outputText(". <i>\"Well isn’t that a coincidence! All right, ");
 	else outputText(", rolling the foreign word around in her mouth. \"<i>Well, ");
 	outputText("[name], that was an amazing first date. I hope we can do some more things like that - and believe me, I’ve got some ideas!");
+	
 	//(Set KATHERINE_UNLOCKED to 1)
 	flags[kFLAGS.KATHERINE_UNLOCKED] = 1;
+	
+	// Setup her cock defaults
+	flags[kFLAGS.KATHERINE_DICK_COUNT] = 1;
+	flags[kFLAGS.KATHERINE_DICK_LENGTH] = 8;
+	flags[kFLAGS.KATHERINE_KNOT_THICKNESS] = 6;
+	flags[kFLAGS.KATHERINE_BALL_SIZE] = 1;
+	
 	outputText("\n\n(<b>Katherine can now be encountered behind Oswald's!</b>)");
 	doNext(13);
 }
