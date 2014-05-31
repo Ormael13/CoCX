@@ -211,7 +211,7 @@ private function helpArianWhenYouMeetHim():void {
 	
 	outputText("\n\nThe lizan gasps and covers his mouth, startled.  \"<i>Oh, forgive me.  How rude, I should have introduced myself before.</i>\"  He clears his throat and starts, \"<i>My name is Arian, and as you can see, I'm a lizan.  I just wanted to go out for a little while, but my aides are intent on keeping me in bed; they say I'm not well enough to be going out... but I say if anyone knows my body, that would be me!  And if I feel like going out, then so the gods help me, I will!</i>\"  He finishes forcefully, before realizing he's rambling.  \"<i>Oh, forgive me... this really isn't your problem, sorry for troubling you,</i>\" he says, letting his head hang.");
 
-	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now,  so I'll be seeing you.</i>\"  [Arian Ey] smiles at you in a friendly way.");
+	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now, so I'll be seeing you.</i>\"  [Arian Ey] smiles at you in a friendly way.");
 	
 	outputText("\n\nYou decide to leave him for the moment, and head back to the camp.");
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
@@ -257,7 +257,7 @@ public function visitThePark():void {
 		outputText("\n\n\"<i>Ah...  Now we're getting to why I'm in such a miserable state.  You see I've found a new way to use white magic; one that results in far more powerful spells;  problem is it is very unhealthy for the caster.</i>\"  [Arian Ey] smiles at you weakly.  \"<i>In order to achieve a state of complete concentration, I stop all my bodily functions.  My heart stops beating, I stop breathing, I dedicate all of my being to the spell I wish to cast.  This is very dangerous, but thanks to this I am able to achieve a degree of concentration that no other mage can.</i>\"  He gauges your reaction.  \"<i>So what would you say?  Impressive?  Reckless?  Stupid?</i>\"");
 		outputText("\n\nYou admit that's an impressive feat to pull off... but, can't he just cast magic the usual way?  Wouldn't that be better for him, if his technique is so much more draining and physically challenging than the conventional style?");
 		
-		outputText("\n\n\"<i>Yes, you are correct my friend.  And while I do use my magic in the traditional fashion now, that simply was not an option.</i>\"  He coughs.  \"<i>But that is a story for another time,  I think I've held you enough for now.</i>\"  He closes his eyes and leans back.");
+		outputText("\n\n\"<i>Yes, you are correct my friend.  And while I do use my magic in the traditional fashion now, that simply was not an option.</i>\"  He coughs.  \"<i>But that is a story for another time, I think I've held you enough for now.</i>\"  He closes his eyes and leans back.");
 		
 		outputText("\n\nYou excuse yourself and head back to camp.");
 	}
@@ -1299,7 +1299,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("Upon arriving at the camp, the first thing Arian notices is the shimmering portal.  \"<i>Is this... where you came from?</i>\" Arian asks.");
 	outputText("\n\nYou nod your head and confirm that, yes, this was your doorway from your world into Mareth.");
 	outputText("\n\n\"<i>I heard that sometimes people from other worlds wandered into Mareth through portals, but I have never seen one up close before.</i>\"  Arian stares deeply at the portal.  \"<i>It's beautiful... and menacing, too.</i>\"  Shaking [Arian em]self out of [Arian eir] reverie, Arian takes an open spot close to your tent.");
-	outputText("\n\n[Arian Ey] sets [Arian eir] overfull bag down and asks,  \"<i>Is it okay if I stay here?</i>\"");
+	outputText("\n\n[Arian Ey] sets [Arian eir] overfull bag down and asks, \"<i>Is it okay if I stay here?</i>\"");
 	outputText("\n\nYou tell the reptilian wizard that should be fine.  But surely even someone with [Arian eir] scaly hide can't just sleep out in the open on bare earth?");
 	outputText("\n\nArian laughs.  \"<i>Of course not, silly.  I'm going to set up my own tent here.</i>\"");
 	outputText("\n\nTent? You repeat.  You tell [Arian em] that you never saw [Arian em] bring a tent here.");
@@ -1733,7 +1733,7 @@ private function getBlownByArian():void {
 	if(flags[kFLAGS.ARIAN_HAS_BLOWN] == 0) {
 		outputText("\n\nAs you gasp in pleasure, you cannot help but wonder when did Arian get so skillful with [Arian eir] mouth, you thought [Arian ey] said [Arian ey] was a virgin before you came along.");
 		outputText("\n\nYou ask if Arian's sure [Arian ey] was a virgin until [Arian ey] met you.");
-		outputText("\n\nArian lets go of your cock, kissing its [cockHead biggest] before replying,  \"<i>Yes, I'm sure... but I practiced a lot on myself...</i>\"");
+		outputText("\n\nArian lets go of your cock, kissing its [cockHead biggest] before replying, \"<i>Yes, I'm sure... but I practiced a lot on myself...</i>\"");
 	
 		outputText("\n\nOn [Arian em]self?!  You blurt out; just how flexible is [Arian ey]?!");
 		
