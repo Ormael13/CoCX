@@ -125,7 +125,6 @@ private function urtaSexMenu():void {
 
 
 internal function urtaPregAppearance():void {
-	clearOutput();
 	//Stages 1-2: 
 	if(flags[kFLAGS.URTA_INCUBATION] < 96) outputText("Urta is sitting at her usual table, looking more clear-eyed and sober than usual.  She looks extremely happy, tail wagging gently behind her, and she gives you a thrilled look when she sees you, smiling blissfully and patting her belly in a meaningful gesture.");
 	//Stages 3-6
