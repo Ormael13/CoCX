@@ -552,11 +552,11 @@ public function doCamp():void {
 		//at 6-7 in the morning, scene always displays at this time
 		else if(model.time.hours == 6 || model.time.hours == 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
 		//after nightfall, scene always displays at this time unless PC is wormed
-		else if(model.time.hours == 21 && player.findStatusAffect(StatusAffects.Infested) < 0) {
+		else if(model.time.hours >= 21 && player.findStatusAffect(StatusAffects.Infested) < 0) {
 			outputText("Marble is hanging around her bedroll waiting for you to come to bed.  However, sometimes she lies down for a bit, and sometimes she paces next to it.");
 			if(flags[kFLAGS.MARBLE_LUST] > 30) outputText("  She seems to be feeling antsy.");
 		}
-		else if(flags[kFLAGS.MARBLE_KIDS] > 0) {
+		else if(flags[kFLAGS.MARBLE_KIDS] > 0 && model.time.hours < 19) {
 			//requires at least 6 kids, and no other parental characters in camp
 			if(rand(2) == 0 && flags[kFLAGS.MARBLE_KIDS] > 5) outputText("Marble is currently tending to your kids, but she looks a bit stressed out right now.  It looks like " + num2Text(flags[kFLAGS.MARBLE_KIDS]) + " might just be too many for her to handle on her own...");
 			//requires at least 4 kids
