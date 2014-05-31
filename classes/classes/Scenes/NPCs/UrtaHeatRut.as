@@ -876,12 +876,12 @@ private function drunkUrtaRidesARutPCsCock():void {
 
 	//player returns to camp and loses 4 hours//
 	dynStats("lib",2,"sen-",10,"lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
-	dynStats("lust=",0);
+	player.orgasm();
+	player.orgasm();
+	player.orgasm();
+	player.orgasm();
+	player.orgasm();
+	player.orgasm();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
