@@ -963,19 +963,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var game:CoC = getGame();
 	game.dungeonLoc = 0;
 	game.inDungeon = false;
-	var silly:Boolean = false;
-	var easy:Boolean = false;
-	var sprite:Boolean = false;
-	//If at initial title
-	if (player.str == 0)
-	{
-		if (flags[kFLAGS.SHOW_SPRITES_FLAG])
-			sprite = true;
-		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-			easy = true;
-		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-			silly = true;
-	}
 
 	//Autosave stuff
 	player.slotName = slot;
@@ -1008,13 +995,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (saveFile.data.flags[i] != undefined)
 				flags[i] = saveFile.data.flags[i];
 		}
-		
-		//If at initial title
-		if (sprite)
-			flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = easy;
-		if (silly)
-			flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
 		
 		//PIERCINGS
 		
