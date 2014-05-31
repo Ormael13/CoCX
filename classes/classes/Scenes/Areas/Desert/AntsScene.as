@@ -1069,7 +1069,7 @@ package classes.Scenes.Areas.Desert
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && flags[kFLAGS.ANT_KIDS] >= 10) addButton(2, "Lesbian Sex", birfingSexWithAntsForDasLadies);
 				//Orgy w/ Colony (Female)
 				//You tell Phylla you're interested in 'inspecting' your children.
-				if (flags[kFLAGS.ANT_KIDS] > 10) addButton(4, "Orgy (Female)", antColonyOrgy4Ladies);
+				if (flags[kFLAGS.ANT_KIDS] > 10 && player.cor >= 75) addButton(4, "Orgy (Female)", antColonyOrgy4Ladies);
 			}
 			//Drider/Bee impregnation scene for Phylla (universal unless otherwise specified, which will include varied intros and stuff.
 			//Sex > [Egg Phylla]
