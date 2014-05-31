@@ -1074,7 +1074,7 @@ public static const TIMES_ENCOUNTERED_PRINCESS_GWYNN:int                        
 public static const WILD_HUNT_ENCOUNTERS:int                                   		= 1066;	// Total wild hunt encounters
 public static const ERLKING_DISABLED:int                                   			= 1067; // Wild hunt/Erlking has been disabled
 public static const ERLKING_ENCOUNTER_COUNTER:int                                   = 1068;
-public static const UNKNOWN_FLAG_NUMBER_01069:int                                   = 1069;
+public static const KATHERINE_MET_SCYLLA:int                                   = 1069;
 public static const UNKNOWN_FLAG_NUMBER_01070:int                                   = 1070;
 public static const UNKNOWN_FLAG_NUMBER_01071:int                                   = 1071;
 public static const UNKNOWN_FLAG_NUMBER_01072:int                                   = 1072;
