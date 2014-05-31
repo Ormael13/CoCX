@@ -16,6 +16,7 @@ flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 5 = QUEST COMPLETE
 */
 
 package classes.Scenes.NPCs {
+	import adobe.utils.CustomActions;
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -300,6 +301,22 @@ package classes.Scenes.NPCs {
 			{
 			 	outputText("\n\nYou walk over to Hel's hammock at the edge of camp and ask the fiery berserker if she'd like to join you for a cup of tea.  She cocks an eyebrow, \"<i>Don't you have something a little, uh, stronger somewhere?</i>\"  Still, with a little urging, she agrees to go to the campfire.");
 				//temp follower variable ++
+				teaDrinkers++;
+			}
+			// if (isabella is in camp)
+			if (isabellaFollower())
+			{
+				outputText("\n\nYou head towards the corner of the camp that Isabella claims as her own and ask if the cow-girl warrioress would like to share some tea with the rest of you.");
+				
+				if (isabellaAccent())
+				{
+					outputText("  Isabella jumps from her chair, “Tea?  Ooh, ja!  I hear tea und milk iz sehr gut combination, ja?”  Well, she seems rather enthusiastic if nothing else.");
+				}
+				else
+				{
+					outputText("  Isabella jumps from her chair, “Tea? Ooh, yes!  I hear tea and milk is a really good combination, yes? I've never had the opportunity to try it though...”  Well, she seems rather enthusiastic if nothing else.");
+				}
+				
 				teaDrinkers++;
 			}
 			//if (Izma is in camp)
