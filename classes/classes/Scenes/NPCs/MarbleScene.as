@@ -519,7 +519,7 @@ private function turnDownMarbleSexFirstTime():void {
 	outputText("She stares at you for a few moments as your refusal sinks in.  \"<i>So you don't feel the same way about me...  I'm sorry, I won't ever ask you again,</i>\" she says sadly.  \"<i>Maybe I'll see you later.</i>\" She directs you out the door.  You realize that refusing her will permanently affect your relationship.", false);
 	doNext(13);
 	//(affection drops to 50, it can no longer be raised above 50)
-	player.addStatusValue(StatusAffects.Marble,1,-30);
+	player.changeStatusValue(StatusAffects.Marble, 1, 50);
 	//(increase player inte)
 	dynStats("int", 4);
 	doNext(13);
@@ -1519,7 +1519,10 @@ public function marbleStatusChange(affection:Number, addiction:Number, isAddicte
 		player.addStatusValue(StatusAffects.Marble,1,affection);
 		player.addStatusValue(StatusAffects.Marble,2,addiction);
 	}
-	if(isAddicted != -1) player.changeStatusValue(StatusAffects.Marble,3,isAddicted);
+	if (isAddicted != -1) player.changeStatusValue(StatusAffects.Marble, 3, isAddicted);
+	
+	trace("Marble Affection: " + player.statusAffectv1(StatusAffects.Marble));
+	trace("Marble Addiction: " + player.statusAffectv2(StatusAffects.Marble));
 }
 
 private function applyMarblesMilk():void {
@@ -3311,7 +3314,7 @@ public function giveMarbleTheProBovas4Sho():void {
 		outputText("Marble nods and downs the contents.  Nothing happens for a moment... then she gasps and grabs at her chest, stumbling forward slightly.  The cow-girl straightens up and releases her grip, then pulls open her top to look at her breasts.  <b>Each is now decorated with sets of four nipples, like the teats of a cow.  She has also gained about 4 inches in height, judging against the backdrop of the camp.</b>  Marble takes a few minutes to test her new nipples, squeezing them gently and sighing as dribbles of milk decorate her areolae in fours instead of one, then looks at you and says, \"<i>This isn't really so bad.  Actually, it feels nice.  If you find another dose, I'm willing to drink it - just to see what happens, of course.</i>\"");
 		//Set Marble's nippes to quads, set her height to 6'8</i>\", increase Marble's vaginal capacity by 10, increase Marble corruption by 4
 		flags[kFLAGS.MARBLE_BOVA_LEVEL] = 1;
-		player.addStatusValue(StatusAffects.Marble,4,4);
+		marbleStatusChange(4, 4);
 	}
 	//end event
 	else {

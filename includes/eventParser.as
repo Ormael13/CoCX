@@ -1615,7 +1615,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Prevent addiction from passing 60 if not yet revealed that your addicted
 		if(player.statusAffectv3(StatusAffects.Marble) <= 0) {
-			if(player.statusAffectv2(StatusAffects.Marble) > 60) player.addStatusValue(StatusAffects.Marble,2,60);
+			if (player.statusAffectv2(StatusAffects.Marble) > 60)
+			{
+				player.changeStatusValue(StatusAffects.Marble, 2, 60);
+			}
 		}
 		//Withdrawl removal if you get unaddicted.
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
