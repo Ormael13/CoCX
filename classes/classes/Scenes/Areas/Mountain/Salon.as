@@ -145,7 +145,7 @@ private function hairDresserRepeatGreeting():void {
 		outputText("As soon as you enter the Salon, Lynnette is beaming ");
 		if(player.tallness >= 48) outputText("up ");
 		outputText("at you. \"<i>Hey there, honey. Come for some more service or to check up on the kids?</i>\" She pats her now-flat midsection. \"<i>I popped them out last night. We had " + num2Text(flags[kFLAGS.LYNNETTE_CARRYING_COUNT]) + " kids... all girls, of course.</i>\" She tucks a lock of beautifully styled hair behind an elfin ear. \"<i>Now you be sure and let me know when you want to contribute to my baby-bank again.</i>\"");
-		if(flags[kFLAGS.LYNNETTE_BABY_COUNT] > 0) outputText("\n\nA few new, green faces can be seen looking your way and blushing as they work the gloryholes,probably from a previous litter. They grow up so fast.");
+		if(flags[kFLAGS.LYNNETTE_BABY_COUNT] > 0) outputText("\n\nA few new, green faces can be seen looking your way and blushing as they work the gloryholes, probably from a previous litter. They grow up so fast.");
 		flags[kFLAGS.LYNNETTE_BABY_COUNT] += flags[kFLAGS.LYNNETTE_CARRYING_COUNT];
 		flags[kFLAGS.LYNNETTE_CARRYING_COUNT] = 0;
 		//If favorite!

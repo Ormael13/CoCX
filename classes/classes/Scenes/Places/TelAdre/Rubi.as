@@ -1493,6 +1493,10 @@ private function rubiAppearance():void {
 		outputText("pussy topped off by a little love button");
 		outputText(".  Though you can't see it, you know Rubi's got a perfect little asshole, between [rubi eir] buttcheeks, right where it belongs.");
 	}
+	else
+	{
+		outputText(".");
+	}
 
 	outputText("\n\nSwaying behind [rubi em] is a red spaded tail, which coils around [rubi eir] leg occasionally.  ");
 	if(flags[kFLAGS.RUBI_FEET] == 1) outputText("Finally, Rubi stands on a long black spike that makes [rubi em] walk as though [rubi ey] were wearing high heels.");
@@ -2093,7 +2097,7 @@ private function fancyDate():void {
 		player.gems -= 10;
 		statScreenRefresh();
 		outputText("\n\nSince your lover is dressed up for a night on the town, you decide to take [rubi em] to the fanciest restaurant in all of Tel'Adre.  Together, hand in hand, the two of you strike out of Rubi's small, yet cozy home, and head off in search of the best eatery in town.  Rubi directs you over a few streets, and you find yourself in front of \"Bigby's Cafe\", a large, imposing restaurant front.  Columns of fine marble flank the entrance to this impeccable shop.");
-		outputText("\n\nYou offer Rubi your arm, like a " + rubiMF("gentleman","lady") + " should, which [rubi ey] accepts graciously, and you escort [rubi eir] inside.  A well-dressed bunny-boy meets you inside and escorts you to a table before handing you each a menu.  He bows and mentions that your waiter will be right with you.  You glance over your menu briefly, only recognizing a few entrees.  Many of the dishes seem to be foreign, at least to you.");
+		outputText("\n\nYou offer Rubi your arm, like a " + rubiMF("gentleman","lady") + " should, which [rubi ey] accepts graciously, and you escort [rubi em] inside.  A well-dressed bunny-boy meets you inside and escorts you to a table before handing you each a menu.  He bows and mentions that your waiter will be right with you.  You glance over your menu briefly, only recognizing a few entrees.  Many of the dishes seem to be foreign, at least to you.");
 
 		outputText("\n\nYour waiter, a broad-shouldered wolf man who wouldn't look out of place in a guard's uniform, arrives moments later.  Rubi orders a fillet of fish, claiming that [rubi ey] is feeling a bit nostalgic.  You decide to order the same thing, as you're certain you could only understand what a fraction of the things on the menu were.  The waiter nods, retrieves your menus, and heads back to the kitchen.");
 		outputText("\n\nThis gives you and Rubi a chance to watch the other people in the restaurant.  Despite its fancy exterior, many of the patrons are dressed simply.  You wouldn't be surprised to see these people at the bakery, or the Wet Bitch for that matter.  You wonder briefly if Rubi is overdressed, though with how happy [rubi ey] looks in that outfit, you're certain [rubi ey] wouldn't care.");
@@ -2163,7 +2167,7 @@ private function barDate():void {
 	rubiSprite();
 	outputText("\n\nYou think carefully about where you could go.  Your companion is not quite dressed well enough for any kind of fancy dinner, but you think you could head down to the local bar for a drink or two.  You wrap your arm around Rubi's waist and together the two of you head out onto the streets of Tel'Adre.  You head from street to street until you come upon the local bar, the \"Wet Bitch\".");
 
-	outputText("\n\nYou slip inside with your date and find a place up at the bar.  When the bartender moves down to your side of the bar, Rubi brushes brightly and asks, \"<i>Oh, can I get a sex on the beach?</i>\"  You laugh to yourself and order one as well.  The bartender nods and begins mixing the two drinks up.  Meanwhile, Rubi turns around on the stool to watch the rest of the bar.");
+	outputText("\n\nYou slip inside with your date and find a place up at the bar.  When the bartender moves down to your side of the bar, Rubi blushes brightly and asks, \"<i>Oh, can I get a sex on the beach?</i>\"  You laugh to yourself and order one as well.  The bartender nods and begins mixing the two drinks up.  Meanwhile, Rubi turns around on the stool to watch the rest of the bar.");
 
 	outputText("\n\n\"<i>This place is great,</i>\" [rubi ey] comments as you turn around as well.  \"<i>Almost everyone comes by here at some point.  It's a great place to people watch.  See, check those two out,</i>\" [rubi ey] says, pointing out a pair of young spider-morph females.  \"<i>When I started coming to the bar, they hadn't even met.  I've managed to see their first meeting, their first date, and several of them down the road.  They make such a cute couple, don't they?</i>\"");
 
@@ -2225,7 +2229,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		if(flags[kFLAGS.RUBI_NIPPLE_TYPE] == 1) outputText("black ");
 		outputText("nipples, which jut straight up, straining against the sheer fabric of the negligee.  A soft gasp escapes Rubi's soft lips as [rubi ey] pinches one ");
 		if(flags[kFLAGS.RUBI_NIPPLE_TYPE] == 1) outputText("ebon ");
-		outputText("nipple, while [rubi eir] other hand flutters down between [rubi eir] thighs to stroke [rubi eir]");
+		outputText("nipple, while [rubi eir] other hand flutters down between [rubi eir] thighs to stroke [rubi eir] ");
 		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(rubiCock());
 		else outputText("quickly dampening pussy");
 		outputText(".");
@@ -2250,7 +2254,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 
 		outputText("\n\nThe sweet little creature before you moans lightly as more of the dildo's length presses inside, until [rubi ey] finds [rubi ey]'s bottomed out, reaching the large flared bottom of the dildo.  Rubi's soft rosy lips curl upwards in a proud smile.  [rubi Eir] hand and tail take a renewed grip on the fake cock, and [rubi ey] lifts [rubi eir] hips a few inches before slamming them back down onto the dildo.");
 
-		outputText("\n\nYou bite your lip and find [eachCock] straining against your [armor] and close your eyes for a moment, letting your imagination take over.  You imagine Rubi astride your naked body, your hands moving up [rubi eir] own.  The sensations of thrusting inside your lover overtake you like a breath of fresh air.  Rubi's hips gyrate atop you, and you can feel a powerful urge building inside of you....");
+		outputText("\n\nYou bite your lip and find [eachCock] straining against your [armor] and close your eyes for a moment, letting your imagination take over.  You imagine Rubi astride your naked body, your hands moving up [rubi eir] own.  The sensations of thrusting inside your lover overtake you like a breath of fresh air.  Rubi's hips gyrate atop you, and you can feel a powerful urge building inside of you...");
 
 		outputText("\n\nYou're brought back to reality by a sudden moan from Rubi.  Your eyes bolt open and focus on the demon-" + rubiMF("boy","girl") + "'s slender frame, which is quivering madly.  [rubi Eir] ");
 		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(rubiCock() + " is standing at full attention, bobbing up and down as Rubi fucks [rubi emself] on the dildo");

@@ -3031,7 +3031,7 @@ function dildoButts():void
 	if(player.analCapacity() <= 8) outputText("Your tight hole offers resistance at first, but soon relaxes with a tender, lubricated fingering.");
 	else outputText("Your experienced hole readily accepts your saliva-coated finger.");
 	outputText(" As you gently rub your insides, you use your free hand and reach up to pinch and rub your [nipples]. As the motions become easier, you push a second finger inside as well. You soon find your sensitive anal entrance begging for something more appropriate, and you happily oblige.");
-	outputText("\n\nGrabbing your toy, you give it several long wet licks before holding your [legs] up and sending the substitute cock to its true task. You rub the tip against your [asshole] momentarily before finally pushing it inside. Stuttering moans escape your lips as your butt gets it's much-needed fill of firm faux phallus");
+	outputText("\n\nGrabbing your toy, you give it several long wet licks before holding your [legs] up and sending the substitute cock to its true task. You rub the tip against your [asshole] momentarily before finally pushing it inside. Stuttering moans escape your lips as your butt gets its much-needed fill of firm faux phallus");
 	if(silly()) outputText(", the alliteration of the experience further arousing you");
 	outputText(". Your toes curl as you begin to pull in and out, pumping the dildo with smooth motions. Your tongue hangs from your mouth, your breathing becomes heavy, and your moans lewdly express pure lust as you increase your tempo. Before too long, you feel your pucker becoming more sensitive and know an orgasm is quickly approaching.");
 	player.buttChange(8,true,true,false);

@@ -1279,7 +1279,7 @@ private function inviteArianToCamp():void {
 	outputText("\n\n\"<i>I'm happy for you, " + arianMF("master","mistress") + ", I really am,</i>\" Boon says.");
 	outputText("\n\n\"<i>Make sure you're taking care of yourself, " + arianMF("master","mistress") + ".  Don't forget to bathe regularly and eat well... and contact us once in awhile... and visit on the holidays,</i>\" Laika says, sniffing.");
 	
-	outputText("\n\nArian smiles at [Arian eir] pupils.  \"<i>I'm not your " + arianMF("master","mistress") + " anymore.  From now on you're full-fledged mages.  Remember all that you learned and I'm sure you'll be okay.</i>\"");
+	outputText("\n\nArian smiles at [Arian eir] pupils.  \"<i>I'm not your " + arianMF("master","mistress") + " anymore.  From now on you're full-fledged mages.  Remember all that you learned, and I'm sure you'll be okay.</i>\"");
 	outputText("\n\nBoon is the first to break the hug, followed shortly by Laika.  The twins then turn to you.");
 	
 	outputText("\n\n\"<i>Please, [name], take good care of the " + arianMF("mas","mis") + "... err... Arian.  [Arian Ey] might be a handful sometimes, but [Arian ey]'s a really good person,</i>\" Boon says with a bow.");
@@ -1312,8 +1312,8 @@ private function takeYerLizardHomePartII():void {
 	
 	outputText("\n\nAs you walk inside you can't help but gasp in amazement... clearly you have underestimated the lizan.  The inside of the tent is pretty big comparing to the outside, and you see all the tools and facilities one would need to live in the wilderness with relative comfort.");
 	
-	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in [Arian eir] house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lightning up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
-	if(camp.followersCount() > 1) outputText(" and your companions");
+	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in [Arian eir] house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lighting up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
+	if(camp.followersCount() > 1) outputText(" and your other companions");
 	outputText(".");
 	
 	outputText("\n\n\"<i>So what do you think?  Cozy?</i>\" Arian asks.");
