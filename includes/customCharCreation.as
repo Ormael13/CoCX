@@ -68,7 +68,7 @@ public function customPCSetup():void {
 		player.tailType = TAIL_TYPE_NONE;
 		player.armType = ARM_TYPE_HUMAN;
 		player.hairLength = 69.2;
-		player.hairType = 2;
+		player.hairType = 4;
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
 		player.createKeyItem("Bow",0,0,0,0);

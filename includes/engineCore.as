@@ -651,7 +651,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
 	}
 	//Sting
-	if(buttonText.indexOf("Sting") != -1) {                        
+	if(buttonText.length == 5 && buttonText.indexOf("Sting") != -1) {                        
 		toolTipText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
 	}
 	//Web
