@@ -42,7 +42,7 @@ package classes.Scenes.NPCs
 		//-fights through lust
 		//-raises lust at initial encounter
 		//-main attack is a sweep of tentacles that inflicts lust and temp loss of speed/str if it connects
-		//imilar to tentacle monsters but more genteel; 100% chance of escaping from combat as long as PC is not distracted by lust > 60
+		//-similar to tentacle monsters but more genteel; 100% chance of escaping from combat as long as PC is not distracted by lust > 60
 		//-very high HP but very low speed means they do not dodge or hit often; however, see below
 		//-direct attacks cause PC to touch tentacles with a high probability, getting a shock of venom that lowers speed/str and inflames lust
 		//-drops [TF item] and maybe some other lake- or factory-related item
@@ -242,7 +242,7 @@ package classes.Scenes.NPCs
 				if (player.lust > 99) outputText(", which she's currently diddling with the hand she's not using to stroke her cock", false);
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand ", false);
 				if (player.tallness > 48) outputText("over", false);
-				else outputText("next", false);
+				else outputText("before", false);
 				outputText(" her, her eyes widen as she beholds the sheer amount of cock you have.\n\n", false);
 
 				outputText("You smile at how stunned she is by you, and waggle your erect " + multiCockDescriptLight() + " from side-to-side.  The anemone obediently watches it swing, like a hypnotist's pendulum; her mouth reflexively opens as all her conscious thought is temporarily sidetracked.  You push on the shaft with one hand and move the tip down relative to her body, watching bemused as the girl tries to keep her mouth in line with it until it goes too low for her neck and snaps her out of her daze.  She closes her mouth and looks at you quizzically.  <i>\"No?\"</i> she asks.  You answer by pushing forward slightly, bumping the head of your " + cockDescript(0) + " against her <i>mons pubis</i>.  The skin on her face darkens a bit as she realizes your intention... which turns out to be a blush, by the looks of the shy glance she gives you next!  <i>\"Umm.\"</i>  She gives it a moment of concerned study before her natural instincts take over and the anemone's fingers", false);
@@ -267,7 +267,7 @@ package classes.Scenes.NPCs
 				outputText(".", false);
 				//[(mega skeet)
 				if (player.cumQ() > 1500) outputText("  Eventually she can't hold in the sheer volume of your ejaculate, and it erupts from her mouth in a white spray.  Spurt after spurt goes into and then out of her, dribbling out of her slack mouth and down her face until her hair is covered with seed.", false);
-				outputText("  She takes the opportunity to squeeze along the length of your cock, pushing out as much semen as you have to offer as she moans in orgaiastic delight at the fluid injection.", false);
+				outputText("  She takes the opportunity to squeeze along the length of your cock, pushing out as much semen as you have to offer as she moans in orgiastic delight at the fluid injection.", false);
 				outputText("\n\n", false);
 
 				outputText("Eventually both you and she are spent and limp, and you draw your " + cockDescript(0) + " out of her, making an extended, wet sucking noise.  As you pull up your gear and make your way up the beach, ", false);
@@ -441,7 +441,7 @@ package classes.Scenes.NPCs
 					if (player.totalCocks() > 1) {
 						outputText(" as ", false);
 						//[(dick2 = no)
-						if (player.totalCocks() == 2) outputText("your cocks shoots", false);
+						if (player.totalCocks() == 2) outputText("your cocks shoot", false);
 						else outputText("the rest of your " + multiCockDescriptLight() + " shoot", false);
 						outputText(" all over her face and hair, ", false);
 						//[(small skeet)
@@ -1649,7 +1649,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			spriteSelect(71);
-			outputText("Time to reclaim your barrel.   Gesturing to get her attention, you grab the anemone by her upper arm and lift her to her feet.  She looks at you in confusion, but you set your face and drag her along with you as you make your way to the lake.");
+			outputText("Time to reclaim your barrel.  Gesturing to get her attention, you grab the anemone by her upper arm and lift her to her feet.  She looks at you in confusion, but you set your face and drag her along with you as you make your way to the lake.");
 			outputText("\n\nReaching the shore, you push Kid A into the water and point out toward the center of the lake as she falls to her knees in the surf.  She looks absolutely miserable... until a green and purple swirl bobs to the surface next to her.  The new arrival greets your former tenant with cheer, squeezing her waist from behind and eliciting a gasp of surprise.");
 			outputText("\n\nKid A turns her head to face the stranger.  \"<i>Um... hi?</i>\" she offers, hesitantly.");
 			outputText("\n\n\"<i>Um... hi!</i>\" the other parrots, a grin splitting her face wide open.");
@@ -1808,7 +1808,7 @@ package classes.Scenes.NPCs
 
 		 physical changes:
 		 - may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
-		 "As the gentle tingling of the tentacle's remining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>
+		 "As the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>
 
 		 -may randomly remove bee wings:
 		 "Your wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>"

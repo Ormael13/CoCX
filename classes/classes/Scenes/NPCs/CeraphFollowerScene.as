@@ -1126,7 +1126,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText(" while her cock shrinks to what looks approximately like six inches of meat, an outright tiny penis for Mareth", false);
 			outputText(".\n\n", false);
 
-			outputText("Though much of her shrinks, her lips grow.   While unsurprising, it remains very enjoyable to watch.  Her lower lip rounds and swells, while her upper grows further defined.  Like a bruise, they darken, until no color but a glossy void remains.  As though they were being drawn directly into her skin, the lines of her tattoos begin to spread, starting from a single circle across her breast until the latticework of ink covers her tanned body.\n\n", false);
+			outputText("Though much of her shrinks, her lips grow.  While unsurprising, it remains very enjoyable to watch.  Her lower lip rounds and swells, while her upper grows further defined.  Like a bruise, they darken, until no color but a glossy void remains.  As though they were being drawn directly into her skin, the lines of her tattoos begin to spread, starting from a single circle across her breast until the latticework of ink covers her tanned body.\n\n", false);
 
 			outputText("Dominika stands before you, nude and unrestricted. She licks her lips slowly.\n\n", false);
 
@@ -1163,7 +1163,7 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("  A single bead of pre-cum forms slowly at the tip of her prick, growing larger until it finally slips down into the curve of her head, sliding down her shaft and into your lap.", false);
 				outputText("  She brushes her hair back behind her ear, sitting up straighter. In her quest to indulge in and feel your prick against all the warm flesh inside, she's neglected to keep you pinned.\n\n", false);
 
-				outputText("Grabbing her shoulders, you surprise her once more by twisting and rolling on top of her.  \"<i>No!</i>\" she shouts immediately, knowing your plot,  \"<i>You " + player.mf("bastard", "bitch") + "!  No one puts me on my own back!</i>\"  You remind her that facts need more proof than the assumption that things will never change.  She spits at you, but you take solace in the fact that your hands are over her wrists and your " + cockDescript(0) + " is shoved so deep in Dominika there's a chance she could spit up cum when you're done rather than swallow it.  Presuming, of course, that her vagina is connected to her stomach, which it probably is not.\n\n", false);
+				outputText("Grabbing her shoulders, you surprise her once more by twisting and rolling on top of her.  \"<i>No!</i>\" she shouts immediately, knowing your plot, \"<i>You " + player.mf("bastard", "bitch") + "!  No one puts me on my own back!</i>\"  You remind her that facts need more proof than the assumption that things will never change.  She spits at you, but you take solace in the fact that your hands are over her wrists and your " + cockDescript(0) + " is shoved so deep in Dominika there's a chance she could spit up cum when you're done rather than swallow it.  Presuming, of course, that her vagina is connected to her stomach, which it probably is not.\n\n", false);
 
 				outputText("Yet.  You haven't decided what you'll make her put in her mouth now that she's here.\n\n", false);
 
@@ -1669,7 +1669,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nShe is doing better, but why not see how far she can take her tainted body?  \"<i>Wider!</i>\" you bark.  Without missing a beat, Ceraph slips her fingers inside her sopping box itself and pulls it open until you can see inside her.  A veritable forest of feelers and growths in various shades of purple and black writhe on every inner surface of her vagina.  Actually seeing them move makes you feel a little nauseous, but at the same time, you can't help but note the tingling arousal spreading up from your groin.");
 
-			outputText("\n\nAt the back of her vagina, the omnibus's cervix almost glows, several shades lighter than the surrounding flesh.   You smile and order her to open it.  Ceraph grunts with effort, but you are rewarded by the sight of the tiny slit dilating.  There is certainly something to be said for how... accommodating demonic corruption can make a creature's body.");
+			outputText("\n\nAt the back of her vagina, the omnibus's cervix almost glows, several shades lighter than the surrounding flesh.  You smile and order her to open it.  Ceraph grunts with effort, but you are rewarded by the sight of the tiny slit dilating.  There is certainly something to be said for how... accommodating demonic corruption can make a creature's body.");
 
 			outputText("\n\nYou position yourself behind your slave and begin slowly working your ovipositor into her.  With her fingers still pulling her sex open, all you feel is the slight tickling as the longest of the growths stroke your alien member.  Ceraph coos beneath you as the tapered head of your egg tube butts up against her cervix.  You barely have to exert any pressure to get into her tainted womb, as it welcomes you by sliding open further.  Your breathing becomes rough as you feel muscles inside your abdomen contract, bringing the first egg from deep inside you; your demon whore goes crazy as she feels the base of your organ swelling, grinding her ass against your hips.");
 

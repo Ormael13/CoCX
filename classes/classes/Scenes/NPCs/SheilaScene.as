@@ -1187,7 +1187,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		if(player.hasCock()) outputText(", even after Sheila finishes wiping her face clean and stares at you");
 		outputText(", so you just content yourself with lying next to the woman for a while.");
 		
-		//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock;  if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
+		//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
 		if(player.hasCock())
 		{
 			player.orgasm();
@@ -2013,7 +2013,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	}
 	//(PC corruption < sheila corruption)
 	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
-		outputText("your resistance is condemned to die in failure as Sheila lets out a quavering scream of pleasure and wraps her arms and legs around you, pinning you inside.  Her vagina convulses around your cock powerfully; you could swear you feel yourself stretching longer and longer as her rippling pussy pulls you deeper in.  Just when you think that your dick must be a mile long,  her whole body tenses up and her fingernails dig into your back.  Wearing a madwoman's expression, Sheila stares open-mouthed at you as her muscles lock and her pussy quivers out its fitful orgasm; even her ");
+		outputText("your resistance is condemned to die in failure as Sheila lets out a quavering scream of pleasure and wraps her arms and legs around you, pinning you inside.  Her vagina convulses around your cock powerfully; you could swear you feel yourself stretching longer and longer as her rippling pussy pulls you deeper in.  Just when you think that your dick must be a mile long, her whole body tenses up and her fingernails dig into your back.  Wearing a madwoman's expression, Sheila stares open-mouthed at you as her muscles lock and her pussy quivers out its fitful orgasm; even her ");
 		if(sheilaCorruption() < 30) outputText("perky");
 		else outputText("pillowy");
 		outputText(" breasts seem to be held taut, compressed and motionless.  Suddenly she rams her hips into yours violently and throws her head back, and before you can issue a word of protest, her cunt wrings your " + cockDescript(x) + " one last time with almost supernatural heat; your mind clouds over and a wracking orgasm shoots to the base of your spine, echoing back with the first wave of your ejaculation.");
@@ -2610,7 +2610,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 	//forced fellatio branch, for cocks sticking out <= arm length
 	//[(if not horse and smallest cock length <= 35% of height OR if horse and 120% of height <= smallest cock length <= 155% of height)
 	if(dick) {
-		outputText("\n\nYou seize the girl by her hair, cutting off her escape and depositing her in front of you once again.  Still holding her tight, you guide her shut mouth to the tip of your [cock shortest].  \"<i>Oral,</i>\" you demand tersely, grabbing your shaft and smearing her lips with the pre-cum you're beginning to drip.   Sheila's eyes close like her mouth and she tries to pull away, but you shake her until she's looking at you again and point at your cock insistently.  \"<i>Oral,</i>\" you repeat, pulling her hair harder.  \"<i>Or we can slip you out of those pants instead, if you prefer...</i>\"");
+		outputText("\n\nYou seize the girl by her hair, cutting off her escape and depositing her in front of you once again.  Still holding her tight, you guide her shut mouth to the tip of your [cock shortest].  \"<i>Oral,</i>\" you demand tersely, grabbing your shaft and smearing her lips with the pre-cum you're beginning to drip.  Sheila's eyes close like her mouth and she tries to pull away, but you shake her until she's looking at you again and point at your cock insistently.  \"<i>Oral,</i>\" you repeat, pulling her hair harder.  \"<i>Or we can slip you out of those pants instead, if you prefer...</i>\"");
 		
 		outputText("\n\nHer mouth opens in either pain or alarm; you take advantage of the accommodation and shove your prick at it, ");
 		//[(cock width <= 6")
@@ -3095,7 +3095,7 @@ private function sheilaForcedOralGeneric():void {
 	outputText("\n\nThe woman jerks a bit as you enter her, but sighs in relaxation.  \"<i>That's good... come on mate, lick me more.</i>\"  She pushes her cunt against your [face], trying to take your tongue deeper.");
 	//[(if d-mon/dragon/naga or other future long tongue)
 	if(player.tongueType > TONUGE_HUMAN) {
-		outputText("  A sly look crosses your face at her request; she notices it but has no time to dismount before your long tongue shoots into her, stroking the nerves around her entrance as you unspool.  \"<i>Ah-ahhh!</i>\" she moans,  \"<i>What the hell... is with your mouth?</i>\"");
+		outputText("  A sly look crosses your face at her request; she notices it but has no time to dismount before your long tongue shoots into her, stroking the nerves around her entrance as you unspool.  \"<i>Ah-ahhh!</i>\" she moans, \"<i>What the hell... is with your mouth?</i>\"");
 		outputText("\n\nPetulantly you stare at her as you work, unable to speak with your tongue unrolled in her cunt.  She blushes under your gaze, then leans forward and wraps her arms around you, brushing the top of your head with her shirt-clad " + sheilaCup() + " breasts.  \"<i>You're r-right, mate... rude to talk with your mouth f-full... aaah!</i>\"  A little firm spot inside of her provokes this last reaction; you experimentally run your tongue over it again, and the woman shudders violently.");
 		
 		outputText("\n\n\"<i>N-no... what are you t-touching?  That feels so...</i>\"  Sheila's unable to complete a thought as you assault your new find with your oral explorer, and just clings to your head as if it were a family heirloom.  You rub and rub, but she steadfastly refuses to climax; eventually your tongue actually gets tired and sore, yet every time you try to draw it out and rest she pulls your hair again, begging you not to stop, to stroke that spot again, and again.");
@@ -3171,7 +3171,7 @@ private function normalSheilaPregNotifNumberOne():void {
 	outputText("\n\nYou oblige, planting yourself next to her.  She leans affectionately against you, though her nervousness doesn't disappear - if anything, it becomes more acute.");
 	if(player.cor < 50) outputText("  A hand placed around her shoulder seems to steady her a bit.");
 	
-	outputText("\n\n\"<i>Well, y'see,</i>\" she begins,  \"<i>I ah... had... your baby.</i>\"");
+	outputText("\n\n\"<i>Well, y'see,</i>\" she begins, \"<i>I ah... had... your baby.</i>\"");
 	
 	outputText("\n\nMan, what?!  Your expression speaks volumes, and she launches into a hurried explanation without a word from you.");
 	
@@ -4529,7 +4529,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		
 		outputText("\n\n\"<i>This is where our baby will grow, lover.  Thank you for it.  See you soon.</i>\"  Her eyes soften as she releases her grip, then she stands up and departs with tails waving happily.  After a few minutes to regain your strength, you collect your things and leave as well.");
 		
-		//if long scene, sheilapreg check,  reduce lust, reduce libido, slimefeed if corr < 50; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
+		//if long scene, sheilapreg check, reduce lust, reduce libido, slimefeed if corr < 50; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 		sheilaPreg();
 		player.orgasm();
 		dynStats("lib", -1);
@@ -4844,7 +4844,7 @@ private function bigDickAndThighs():void {
 		//[(multi)
 		if(player.cockTotal() > 1) {
 			outputText("\n\nYou shudder at her surprising facility, but your mind still latches onto a way to get even more pleasure.  \"<i>Fine,</i>\" you agree, \"<i>but it won't be easy for you.</i>\"  Lining up your other prick");
-			if(player.cockTotal() == 2) outputText(",  you slide it through her legs between your first cock and her cunt, plowing through her entrance like a furrow; she quakes and you can feel it contracting against your skin.  ");
+			if(player.cockTotal() == 2) outputText(", you slide it through her legs between your first cock and her cunt, plowing through her entrance like a furrow; she quakes and you can feel it contracting against your skin.  ");
 			else outputText("s, you push them through the woman's legs one by one, smearing warm precum on her thighs as you do; her pussy squeezes against the top of your [cock biggest] as you coat her skin with your fluids.  ");
 		}
 		else outputText("\n\n");
@@ -4905,7 +4905,7 @@ private function bigDickAndThighs():void {
 	outputText("I can put it in you any time I want.</i>\"  She sticks her tongue out at you, and the seed dripping from her lips oozes onto it.");
 	outputText("\n\nShaking your head, you leave her behind.");
 	
-	//reduce lust, reduce libido, reduce sens,  +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50
+	//reduce lust, reduce libido, reduce sens, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50
 	player.orgasm();
 	dynStats("lib", -1, "sen", -1);
 	if(player.cor < 50) {
