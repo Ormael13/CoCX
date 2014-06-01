@@ -110,6 +110,8 @@ public function customPCSetup():void {
 		
 		player.createStatusAffect(StatusAffects.Heat, 10, 15, 96, 0);
 		
+		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
+		
 		player.gems += 3000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		

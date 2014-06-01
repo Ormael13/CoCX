@@ -411,8 +411,9 @@ private function declineValeriasNeeds():void {
 
 private function takeValeria():void {
 	spriteSelect(79);
-	armors.GOOARMR.equip(player,true,true);
-	doNext(1);
+	armors.GOOARMR.equip(player, true, true);
+	if (mainView.bottomButtons[9].labelText.indexOf("Abandon") == -1) doNext(1);
+	//doNext(1);
 }
 
 public function valeriaAndGooThreeStuff():void {

@@ -13,7 +13,7 @@ package classes.Items.Armors
 
 		override protected function unequipReturnItem(player:Player,output:Boolean):ItemType
 		{
-			if (output && player.armorName != player.armor.longName){
+			if (output && player.armorName != player.armor.name){
 				outputText("The " + player.armorName + " revert into a pair of comfortable clothes, as if by magic.  ");
 			}
 			return this;
