@@ -112,6 +112,18 @@ public function katherineGreeting():void {
 	doNext(13);
 }
 
+public function fixKathsCock():void
+{
+	if (flags[kFLAGS.KATHERINE_DICK_COUNT] == 0 || flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8)
+	{
+		// Setup her cock defaults
+		flags[kFLAGS.KATHERINE_DICK_COUNT] = 1;
+		flags[kFLAGS.KATHERINE_DICK_LENGTH] = 8;
+		flags[kFLAGS.KATHERINE_KNOT_THICKNESS] = 6;
+		flags[kFLAGS.KATHERINE_BALL_SIZE] = 1;
+	}
+}
+
 //Seeing Katherine
 public function visitKatherine():void {
 	outputText("", true);
@@ -119,6 +131,8 @@ public function visitKatherine():void {
 	//If Back Alley button is selected
 	outputText("The back alley behind Oswald's pawnshop is quite unremarkable, except that it's reasonably clean.  A number of empty crates, old blankets and torn strips of cloth have been assembled into a makeshift \"<i>nest</i>\", the kind of place that a homeless vagrant would use as a resting place.\n\n", false);
 
+	fixKathsCock();
+	
 	outputText("Katherine the cat is currently ", false);
 	var num:Number = rand(5);
 	if(num == 0) outputText("sitting in a corner", false);
