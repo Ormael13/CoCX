@@ -568,7 +568,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		minoCumAddiction(15);
 	}
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
-	else outputText("\n\nHe lifts you into the air, with little effort hefting your insignificant weight, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
+	else outputText("\n\nHe lifts you into the air, hefting your insignificant weight with little effort, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
 	
 	//Vag stretch texts
 	if (player.hasVagina()) player.cuntChange((24 * 3), true, false, true);

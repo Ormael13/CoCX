@@ -1262,7 +1262,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			else if(rand(2) == 0) {
 				outputText("As you lay down to sleep for " + num2Text(timeQ) + " hour");
 				if(timeQ > 1) outputText("s");
-				outputText(", you find the harpy-girl, Sophie, snuggling herself under her blankets with you.  She slips in between your arms and guides your hands to her enormous breasts, her backside already snug against your loins.  She whispers, \"<i>Something to think about for next morning...  Sweet dreams,</i>\" as she settles in for the night.");
+				outputText(", you find the harpy-girl, Sophie, snuggling herself under her blankets with you.  She slips in between your arms and guides your hands to her enormous breasts, her backside already snug against your loins.  She whispers, \"<i>Something to think about for next morning...  Sweet dreams.</i>\" as she settles in for the night.");
 			}
 			//(4)
 			else {
@@ -1371,7 +1371,7 @@ public function nightSuccubiRepeat():void {
 		}
 		//REPEAT
 		else {
-			outputText("\nAs you begin to relax, you hear footsteps behind you, expecting the unholy interloper and pray for a better…and more understanding... encounter.\n\n", false);
+			outputText("\nAs you begin to relax, you hear footsteps behind you, expecting the unholy interloper and pray for a better... and more understanding... encounter.\n\n", false);
 
 			outputText("You turn around, hoping for an exciting encounter only to find a rather short, plain-faced woman with horned-rim glasses and a purple dress on. She appears to be holding a stack of papers in her hand.\n\n", false);
 
