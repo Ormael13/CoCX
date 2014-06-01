@@ -1441,6 +1441,10 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			amilySprite();
 			var convo:Number = rand(15);
+			
+			// Bump past convo #12 if she's already at camp because it doesn't make much sense by this point.
+			if (convo == 12 && amilyFollower()) convo++;
+			
 			//Girls dont get to listen to amily talk about being knocked up.
 			//Herms either unless she's okay'ed them for dad-hood.
 			if(player.gender == 2 || (player.gender == 3 && flags[kFLAGS.AMILY_HERM_QUEST] < 2)) convo = rand(12);
