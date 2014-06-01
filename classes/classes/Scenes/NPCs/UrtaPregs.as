@@ -188,7 +188,7 @@ internal function urtaPreggoApproached():void {
 		outputText("The pregnant fox's normal skimpy black dress has given up the ghost; her belly's just too big for her to squeeze into it without tearing it apart.  Instead, she's adopted a much more casual look; a knee-length pleated skirt and a midriff-baring t-shirt that has wispy strands of fishnet trailing under it and resting on the gray-furred expanse of her belly.  The shirt itself looks a little on the damp side where her nipples are; the milk must be coming in.  She rubs her stomach and smiles triumphantly at you.  \"<i>Look at me, lover; I'm really starting to get big now.  This just feels so wonderful; you don't know how long I've been dreaming about this happening to me.</i>\"");
 		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) outputText("\n\nYou can hear the precum dripping into a slowly-growing puddle under the table, and she gives you her most wicked grin.  \"<i>Turns out my belly's not the only thing growing... care to help the mother of your child with her needs, [name]?</i>\"");
 		//[Not Horny: 
-		else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.   \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
+		else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.  \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urta.urtaDialogueMenu);
 		addButton(9,"Leave",telAdre.barTelAdre);
@@ -303,7 +303,7 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 	
 	outputText("\n\nShe moans softly as she kisses you back, squeezing your hand, flexing it a little harder as her contractions wrack her.  She clearly wasn't kidding around when she said they actually felt kind of good; you can see her gown starting to tent out of the corner of your eye.");
 	
-	outputText("\n\nA soft knocking comes from the door.  Urta breaks her lip lock with you with a slightly embarrassed giggle.  \"<i>Come in, please.</i>\"  She calls out.  The door opens to reveal a turtle-man wearing a white coat.  He adjusts his purple necktie before saying,  \"<i>Good Evening.  My name is Doctor Donatello, and I'll be overseeing your delivery today.</i>\"  He smiles.");
+	outputText("\n\nA soft knocking comes from the door.  Urta breaks her lip lock with you with a slightly embarrassed giggle.  \"<i>Come in, please.</i>\"  She calls out.  The door opens to reveal a turtle-man wearing a white coat.  He adjusts his purple necktie before saying, \"<i>Good Evening.  My name is Doctor Donatello, and I'll be overseeing your delivery today.</i>\"  He smiles.");
 	
 	//1st time:
 	if(flags[kFLAGS.URTA_TIMES_BIRTHED] == 0) {
@@ -390,7 +390,7 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 	}
 	//else:
 	else {
-		outputText("\n\nYou look at Urta knowingly, already anticipating what comes next.   Urta gives you a coy grin, looking up at you from hooded eyes.  \"<i>Well, I hardly think you need me to tell you where the three of us go from here... if you have the time, that is?</i>\"");
+		outputText("\n\nYou look at Urta knowingly, already anticipating what comes next.  Urta gives you a coy grin, looking up at you from hooded eyes.  \"<i>Well, I hardly think you need me to tell you where the three of us go from here... if you have the time, that is?</i>\"");
 	}
 	//set all appropriate birth variables here.
 	flags[kFLAGS.URTA_TIMES_BIRTHED]++;
@@ -742,7 +742,7 @@ public function PCGivesBirf():void {
 	}
 	//Herm:
 	else {
-		outputText("\n\nUrta is silent for several nerve-wracking moments, a sad expression on her face.  She chokes back a sob and hugs the baby tightly to her breast.  \"<i>Oh, my little angel... mommy Urta will always love you.  I'm so sorry... [name]?  She takes after her daddy (and her other mommy).</i>\"  She shyly reveals that the baby you've given her is a herm.   She's got a little ");
+		outputText("\n\nUrta is silent for several nerve-wracking moments, a sad expression on her face.  She chokes back a sob and hugs the baby tightly to her breast.  \"<i>Oh, my little angel... mommy Urta will always love you.  I'm so sorry... [name]?  She takes after her daddy (and her other mommy).</i>\"  She shyly reveals that the baby you've given her is a herm.  She's got a little ");
 		if(rand(2) == 0) {
 			outputText("vulpine");
 			flags[kFLAGS.URTA_LATESTBORN_COCKTYPE] = 2;
@@ -793,7 +793,7 @@ public function PCGivesBirf():void {
 public function urtaIsHappyAboutPregnancyAtTheBar():void {
 	clearOutput();
 	flags[kFLAGS.URTA_INCUBATION_CELEBRATION] = 1;
-	outputText("As you enter Urta's favorite bar,  you notice immediately that the mood seems to be more festive; a shy and happily embarrassed-looking Urta is surrounded at her table by well-wishers, all clutching mugs in hands.  Nancy spots you from her position behind the bar, where she's busy doling out drinks, and grins widely.  \"<i>Hey, everybody!  Here's the baby-daddy!</i>\"  She calls, and you are promptly surrounded by laughing, cheering, teasing people, who shake your hand, compliment you on your potency, slap your back or shoulder and teasingly invite you to try your studliness on them.  Somehow, amidst the confusion, you find yourself seated next to Urta, who smiles at you and pats your hand.");
+	outputText("As you enter Urta's favorite bar, you notice immediately that the mood seems to be more festive; a shy and happily embarrassed-looking Urta is surrounded at her table by well-wishers, all clutching mugs in hands.  Nancy spots you from her position behind the bar, where she's busy doling out drinks, and grins widely.  \"<i>Hey, everybody!  Here's the baby-daddy!</i>\"  She calls, and you are promptly surrounded by laughing, cheering, teasing people, who shake your hand, compliment you on your potency, slap your back or shoulder and teasingly invite you to try your studliness on them.  Somehow, amidst the confusion, you find yourself seated next to Urta, who smiles at you and pats your hand.");
 	
 	outputText("\n\n\"<i>Once they found out I was pregnant, Nancy insisted on throwing a little celebration for me.  It's kind of flattering, really... I just wish I could enjoy the free drinks.</i>\"  She says, sighing and licking her lips as the drider begins dishing out yet more drinks to the thirsty crowd of regulars.");
 	
@@ -868,7 +868,7 @@ internal function talkToUrtaAboutHerHouse():void {
 	
 	outputText("\n\nYou question her about the expenses of maintaining that place, though.  Won't she have financial problems?");
 	
-	outputText("\n\nShe chuckles,  \"<i>No, no, don't worry about that.  I'm the captain of the Watch, after all.  My paycheck is nothing to sneeze at.  Throw in my nest egg and the recent bonus to my pay, and... well, let's just say that money isn't on my list of immediate concerns.</i>\"  She then gives you a mock-offended look, \"<i>What?  Did you think I boozed my way from paycheck to paycheck before I met you?  My old place was a mess because, frankly, I didn't care enough to do anything more - it gave me privacy and a place to sleep, that was all I needed.  I didn't have someone in my life to make me believe my life really mattered back then... not like now.</i>\"  She concludes, giving you a soft smile.  \"<i>So, that answer your questions?</i>\"");
+	outputText("\n\nShe chuckles, \"<i>No, no, don't worry about that.  I'm the captain of the Watch, after all.  My paycheck is nothing to sneeze at.  Throw in my nest egg and the recent bonus to my pay, and... well, let's just say that money isn't on my list of immediate concerns.</i>\"  She then gives you a mock-offended look, \"<i>What?  Did you think I boozed my way from paycheck to paycheck before I met you?  My old place was a mess because, frankly, I didn't care enough to do anything more - it gave me privacy and a place to sleep, that was all I needed.  I didn't have someone in my life to make me believe my life really mattered back then... not like now.</i>\"  She concludes, giving you a soft smile.  \"<i>So, that answer your questions?</i>\"");
 	
 	outputText("\n\nYou think about it and nod, smiling at her and thanking her for the explanation.");
 	
@@ -930,9 +930,9 @@ private function talkAboutLiana():void {
 	}
 	outputText("\n\nSo..., you ask; how exactly did Urta find Lianna as a potential babysitter?  Come to think of it, where did she find her?");
 	
-	outputText("\n\n\"<i>I had a few of my subordinates distribute ads and scout for anyone interested.  With you living out of town and me being the Watch Captain and all, I really needed someone to live in-house.  Just in case anything happens.</i>\"  She nods, smiling triumphantly.  \"<i>I got a few contacts from people interested and set up some interviews,  Lianna was the best of the bunch.</i>\"  Then she adds.  \"<i>Plus she was cute too.</i>\"  You can't resist noting that it figures that would play a role in this.  ");
+	outputText("\n\n\"<i>I had a few of my subordinates distribute ads and scout for anyone interested.  With you living out of town and me being the Watch Captain and all, I really needed someone to live in-house.  Just in case anything happens.</i>\"  She nods, smiling triumphantly.  \"<i>I got a few contacts from people interested and set up some interviews, Lianna was the best of the bunch.</i>\"  Then she adds.  \"<i>Plus she was cute too.</i>\"  You can't resist noting that it figures that would play a role in this.  ");
 	
-	outputText("\n\nThen you ask if Urta's really so willing to trust her children's safety to Lianna.  Something about her doesn't feel right - those experiments she wants to do give you a sinister vibe...  \"<i>To be honest... sometimes I get the same vibe from her, lover.  But trust me, I checked her background twice over, and aside from a few mishaps, she's never produced anything that could harm another person,  plus she was tutored by a renowned alchemist.  And while it may be hard for you to notice, it's clear to me that our child");
+	outputText("\n\nThen you ask if Urta's really so willing to trust her children's safety to Lianna.  Something about her doesn't feel right - those experiments she wants to do give you a sinister vibe...  \"<i>To be honest... sometimes I get the same vibe from her, lover.  But trust me, I checked her background twice over, and aside from a few mishaps, she's never produced anything that could harm another person, plus she was tutored by a renowned alchemist.  And while it may be hard for you to notice, it's clear to me that our child");
 	if(urtaKids() > 1) outputText("ren have");
 	else outputText(" has");
 	outputText(" a special place in her heart.</i>\"");
@@ -994,12 +994,12 @@ private function massagePregnantUrtasBelly():void {
 	}
 	outputText("\n\n\"<i>Before you start, lover, maybe you should grab me one of my condoms?  Otherwise, I won't be the only one covered in cream by the time this is over,</i>\" she says, trying to joke about it.  She has a point.  You run off to her bedroom to fetch an unused condom and hand it over to her.  Urta takes it and slowly rolls it with practiced expertise down her blunt cock, until the business end is sheathed in protective latex.");
 	
-	outputText("\n\nNow that this has been dealt with, you can finally get started.  You aim the lid at Urta's belly-button, squirting a huge helping of cream on her.  She yips softly, \"<i>That's cold!</i>\" and then giggles,  \"<i>And it tickles!</i>\"");
+	outputText("\n\nNow that this has been dealt with, you can finally get started.  You aim the lid at Urta's belly-button, squirting a huge helping of cream on her.  She yips softly, \"<i>That's cold!</i>\" and then giggles, \"<i>And it tickles!</i>\"");
 	if(flags[kFLAGS.TIMES_MASSAGED_URTA_BELLY] == 0) outputText("  She looks at you and her newly cream-adorned belly contemplatively.  \"<i>I never knew my sweet tooth would bring me to this...</i>\"");
 	
 	outputText("\n\nYou squish the big pile of cream with a hand and begin rubbing it over her belly, spreading it around until her belly is covered by a thin, white, slippery layer.  Urta moans softly, arching her shoulders as she enjoys your hands on the sensitive skin covered by her glossy fur.  \"<i>You're good with your hands, lover,</i>\" she flatters you.");
 	
-	outputText("\n\nSmiling mischievously, you reach for the can and squirt some cream over her sensitive black nipples.   The vixen giggles and wriggles in place, \"<i>It feels like clouds tickling over my nipples,</i>\" she laughs.  It's evidently pleasurable in other ways, too; you can see precum beginning to distend the head of her condom out of the corner of your eye.  You begins spreading the cream over her breasts, just like her belly.  \"<i>Hey, now, what are you doing?  This is supposed to be a <b>belly</b> rub, lover,</i>\" Urta playfully scolds you, tail wagging all the same.");
+	outputText("\n\nSmiling mischievously, you reach for the can and squirt some cream over her sensitive black nipples.  The vixen giggles and wriggles in place, \"<i>It feels like clouds tickling over my nipples,</i>\" she laughs.  It's evidently pleasurable in other ways, too; you can see precum beginning to distend the head of her condom out of the corner of your eye.  You begin spreading the cream over her breasts, just like her belly.  \"<i>Hey, now, what are you doing?  This is supposed to be a <b>belly</b> rub, lover,</i>\" Urta playfully scolds you, tail wagging all the same.");
 	
 	outputText("\n\nYou throw her a fake apology and tell her you'll clean it all up.  Then, you proceed to let your ");
 	if(player.tongueType == TONUGE_SNAKE) outputText("forked ");
@@ -1536,7 +1536,7 @@ private function urtaRaepsJoo():void {
 	
 	outputText("\n\nYou swallow audibly, still trying to remove the top of your [armor].  \"<i>Now it's my turn to play, lover...</i>\" Urta chides, then strips down herself - the skirt comes off effortlessly, having been held on by a loose side fastener, and she easily shucks the shirt up and over her head, standing before you in all her naked, fluffy, pregnant, erect glory.  With a yip of glee she suddenly charges at you, knocking you firmly to the ground and rolling you around so that you are laying on your front, more or less, with your ass up in the air.  You start getting suspicions of what the pregnant herm has in mind when you feel her wide-tipped cock rubbing against your [butt], smearing wet precum in a slimy stain across your bottoms.");
 
-	outputText("\n\nYou tell her to get a hold of herself, she's never going to get anything done like this.  If she wants to do anything, first of all, she could at least let you strip.  Urta growls as she tightens her grip on your upper arms, pressing her breasts and bulging belly into your back.  \"<i>And let you have another chance to try and run out on me?  No way!</i>\"  She suddenly nips the back of your neck, not hard enough to actually hurt you, but definitely hard enough for you to realise what she just did.   \"<i>Sides, all I need is to get these underthings of yours off...</i>\"");
+	outputText("\n\nYou tell her to get a hold of herself, she's never going to get anything done like this.  If she wants to do anything, first of all, she could at least let you strip.  Urta growls as she tightens her grip on your upper arms, pressing her breasts and bulging belly into your back.  \"<i>And let you have another chance to try and run out on me?  No way!</i>\"  She suddenly nips the back of your neck, not hard enough to actually hurt you, but definitely hard enough for you to realise what she just did.  \"<i>Sides, all I need is to get these underthings of yours off...</i>\"");
 	
 	outputText("\n\nBefore you can protest, she attacks the lower half of your clothes, practically ripping it apart in her desire to expose your hindquarters.  You can feel her tearing off your underwear with her teeth, and definitely hear her growling and shaking it madly in her mouth like a dog with a rat before she spits it away with disdain.  \"<i>Oooh... yeah.</i>\"  She croons, running her nimble, supple fingers over each curving cheek of your [butt].  \"<i>You got such a sexy ass.</i>\"  She informs you, rubbing her belly up over the swell of your ass into the small of your back so she can then position the flared tip of her equine dick against your [asshole].  She rubs and thrusts against you, crudely lubing you up with the copious amounts of herm precum flowing from her she-cock.  Finally deeming you satisfactorily wet, she positions the tip of her dick so that it's pressing insistently against your back passage...");
 	
@@ -2096,7 +2096,7 @@ private function giveTheKidsABath():void {
 	else outputText("his");
 	outputText(" hair and start to massage it... now, just how do you shampoo somebody covered from head to toe in fur...?");
 
-	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks,  \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
+	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks, \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("daughter");
 	else outputText("son");
 	outputText(" flicks ");
@@ -2110,7 +2110,7 @@ private function giveTheKidsABath():void {
 	outputText("'s ear and tell ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("her");
 	else outputText("him");
-	outputText(" to apologise to Lianna for that.  \"<i>It's all right, [name].  " + urtaKidsText("He's just a kid","She's just a kid","They're just kids") + ", you can't expect to bathe kids and not get wet.</i>\"  You think you have a pretty clear idea of why Urta picked Lianna to care for the children.  Casually, you ask if Lianna's got any younger siblings; she seems like she's got a lot of practice at this.  She shakes her head,  \"<i>This is the first time I got a job where kids are involved.  Either way, it's a lot easier than taking care of minotaurs.</i>\"  You can't help but wonder if she really did somehow take care of minotaurs at one point, or if this is just some colloquial expression.");
+	outputText(" to apologise to Lianna for that.  \"<i>It's all right, [name].  " + urtaKidsText("He's just a kid","She's just a kid","They're just kids") + ", you can't expect to bathe kids and not get wet.</i>\"  You think you have a pretty clear idea of why Urta picked Lianna to care for the children.  Casually, you ask if Lianna's got any younger siblings; she seems like she's got a lot of practice at this.  She shakes her head, \"<i>This is the first time I got a job where kids are involved.  Either way, it's a lot easier than taking care of minotaurs.</i>\"  You can't help but wonder if she really did somehow take care of minotaurs at one point, or if this is just some colloquial expression.");
 	
 	outputText("\n\n\"<i>Here, let me help you.</i>\"  She squeezes a handful of shampoo on her hands and begins scrubbing your ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("daughter");
@@ -2196,7 +2196,7 @@ private function noBathPleaseUrtaLian():void {
 	
 	outputText("\n\nWith a shrug, you promptly squeeze a sizable mass of liquid soap over her shoulders, put the bottle down, and then start to massage it into the soft, luxuriant black and white fur that covers her body.  You ask her how you're doing.  \"<i>Pretty good, but scrub my upper back a bit more.</i>\"  You begin caressing and squeezing her shoulders, trying your best to rub out any knots or tension she can feel, asking her to speak up about what she wants you to do.  \"<i>Just finish up with my lower back and I'm good.</i>\"  You confirm you understand, then roll your hands down into the small of her back, hovering above her ass but never straying down that far, as she gives no sign she wants you to go that low.  Finally, you declare you're done.  She gets up and stretches herself, her tail waving lazily as she does so, then she turns to look at you.  \"<i>You sure you don't want me to scrub your back?</i>\"");
 	
-	outputText("\n\nYou tell her that you're sure; besides, it's probably time you got going anyway.  \"<i>Alright then.</i>\"  She goes to the shower to rinse off.   Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
+	outputText("\n\nYou tell her that you're sure; besides, it's probably time you got going anyway.  \"<i>Alright then.</i>\"  She goes to the shower to rinse off.  Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
 	fatigue(-25);
 	doNext(14);
 }
@@ -2219,7 +2219,7 @@ private function getABackWashFromLianna():void {
 	
 	outputText("\n\nYou tell her it was the least you could do after she was so diligent at doing your back.");
 	
-	outputText("\n\n\"<i>If you'll excuse me, I gotta go rinse off,</i>\" She says moving towards the shower.   Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
+	outputText("\n\n\"<i>If you'll excuse me, I gotta go rinse off,</i>\" She says moving towards the shower.  Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
 	fatigue(-30);
 	dynStats("lus", player.sens/10);
 	doNext(13);
@@ -2444,7 +2444,7 @@ private function talkAboutLiannasLubeSpray():void {
 	
 	outputText("\n\nThat still seems a bit foolish, but you decide it's not your place to lecture.");
 	
-	outputText("\n\nFinished with her explanation, she adjusts her glasses and asks,  \"<i>Something else?</i>\"");
+	outputText("\n\nFinished with her explanation, she adjusts her glasses and asks, \"<i>Something else?</i>\"");
 	
 	//(Display options)
 	talkToLiana(false);
@@ -2528,7 +2528,7 @@ private function lubeSpraySideEffects():void {
 Use:
 You inhale the strong, musky scent of the fluid, then grit your teeth and toss it back in a single gulp.  It's got an oily kind of taste, but there's barely a mouthful of it and it slides down your belly quick and easy, leaving a slight queasiness in your guts as the aftereffect.
 
-A strange dampness starts around your [anus], you remove your lower garments and observe.   You clutch your [ass] as it starts drooling its own natural lubricant.  Almost as if in sympathy, your mouth starts feeling wet, and you find yourself hard-pressed to keep from drooling as your saliva glands kick into overdrive, making your mouth far wetter and slicker.
+A strange dampness starts around your [anus], you remove your lower garments and observe.  You clutch your [ass] as it starts drooling its own natural lubricant.  Almost as if in sympathy, your mouth starts feeling wet, and you find yourself hard-pressed to keep from drooling as your saliva glands kick into overdrive, making your mouth far wetter and slicker.
 
 {If PC has a dick:
 Your [multiCock] begin dripping clear looking pre on the floor, despite none of them being fully erect.
@@ -2546,7 +2546,7 @@ Almost as suddenly as the effects started, they all dissipate.  Though you're vi
 Aside from the effects you suffered through earlier, you don't notice any other changes to your body.
 }
 {If Increasing anal wetness (Rare):
-You realize your ass still feels moist and clench your butt,  you squeak with surprise as {some/even more} juices are squeezed out of your [asshole].  {<b>Your anus is now permanently wet, ensuring it will always be lubed. </b> / <b>Your anus is even wetter, ensuring even better lubrication</b>}
+You realize your ass still feels moist and clench your butt, you squeak with surprise as {some/even more} juices are squeezed out of your [asshole].  {<b>Your anus is now permanently wet, ensuring it will always be lubed. </b> / <b>Your anus is even wetter, ensuring even better lubrication</b>}
 }
 {If Increasing vaginal wetness (Must have vagina)
 You notice your vagina is still dripping, and realize that its not getting any drier.  <b>Your vaginal wetness has been increased.</b>
@@ -2782,7 +2782,7 @@ private function liannaHandjobbies():void {
 		outputText(", effectively binding them at their base.  You groan hollowly at this; though this certainly will mean less mess, you're not so sure you're going to enjoy the sensation of trying to cum through the " + num2Text(player.cockTotal()-1) + " cocks that have been blocked up.  Satisfied with her work, she looks at your [cock biggest].");
 	}
 	outputText("\n\nFirst Lianna reaches behind herself and you see her brows furrow slightly.  Moments later, you hear a wet splash and she moves her hands back to her front, rubbing the slick lube all over them.  Having done that, she begins massaging your cock, lathering it with plenty of lube.  You shiver at her reactions, cock throbbing with pleasure and the coolness of her natural lube further stimulating your sensitive skin.  She reaches back to gather another handful of lube and apply it to your cock, ensuring that you're as slick as you'll get.  \"<i>This should be good enough.</i>\"  You nod your head; if this is the foreplay, then let's see what the real thing is!");
-	outputText("\n\nNext she takes the condom in her hand and remove its wrapping.  You restrain yourself from twitching too much, waiting for her to begin.  Lianna, however, just looks at the condom as if trying to puzzle it out.  You're about to say something when she says,  \"<i>I guess that really is the best way of doing it.</i>\"  The skunkette discards her lollipop, throwing the shaft in a nearby trash, and puts the condom between her lips.  You watch her curiously, wondering what's going through her strange excuse for a mind.");
+	outputText("\n\nNext she takes the condom in her hand and remove its wrapping.  You restrain yourself from twitching too much, waiting for her to begin.  Lianna, however, just looks at the condom as if trying to puzzle it out.  You're about to say something when she says, \"<i>I guess that really is the best way of doing it.</i>\"  The skunkette discards her lollipop, throwing the shaft in a nearby trash, and puts the condom between her lips.  You watch her curiously, wondering what's going through her strange excuse for a mind.");
 	
 	outputText("\n\nLianna takes your [cock biggest] in both her hands and proceeds to take it inside her mouth, shoving as much of your shaft down her throat as she can.  You moan appreciatively as she swallows you, feeling something soft and slick inside her mouth stretching itself expertly across your cock.  She pulls away to reveal the slick condom, perfectly placed on your shaft.  You don't know where she learned to do it that way, or why, but you're not arguing with the results.  She makes a few more adjustments to ensure nothing will leak.  \"<i>Good, now I'd say you're ready.</i>\"");
 	
