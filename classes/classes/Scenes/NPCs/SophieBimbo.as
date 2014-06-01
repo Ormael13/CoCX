@@ -1499,7 +1499,7 @@ public function sophiesEggHatches():void {
 		//First Harpy:
 		//-Pink plumage, big tits and (sensitive) lips, normal harpy hips. (blue eyes)
 		if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-			outputText("\n\nThe first thing that comes to mind when you see your newborn (or is that new-hatched?) daughter is.....'fluffy.'  She's covered in adorably soft, pink down, with big blue eyes that peer around curiously.  She looks cute as hell");
+			outputText("\n\nThe first thing that comes to mind when you see your newborn - or is that new-hatched? - daughter is... 'fluffy.'  She's covered in adorably soft, pink down, with big blue eyes that peer around curiously.  She looks cute as hell");
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", though her lips are a little larger than you'd think was normal - maybe she inherited it from her mom?");
 			else outputText(".");
 			outputText("  The harpy chick is actually about as big as a four or five year old, and she looks up at Sophie curiously.");
@@ -1588,7 +1588,7 @@ public function sophieKidMaturation():void {
 		//Second Harpy:
 		//-Badonkadonk to 9000.  Blond feathers that grow very long. (violet eyes)
 		if(flags[kFLAGS.DAUGHTER_TWO_BIMBO] == 1) outputText("\n\nHer ass expands immensely along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her immense rump swells until it's positively gravity-defying, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps a B or C cup at best guess.  The blond feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, posh bottom.");
-		else outputText("\n\nHer ass expands along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her swollen rump swells until it's positively posh, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps a A or B cup at best guess.  The feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, enlarged bottom.");
+		else outputText("\n\nHer ass expands along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her swollen rump swells until it's positively posh, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps an A or B cup at best guess.  The feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, enlarged bottom.");
 	}
 	//Third daughter
 	else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 2) {

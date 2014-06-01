@@ -378,7 +378,7 @@ public function doEvent(eventNo:Number):void
 		//single coochie
 		if (player.vaginas.length == 1)
 		{
-			outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away. Covered completely in cum, you see that your clitoris swelled up to ", true);
+			outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away. Covered completely in cum, you see that your clitoris has swollen up to ", true);
 			spriteSelect(100);
 			//Big clit girls get huge clits
 			if ((player.findPerk(PerkLib.BigClit) >= 0 && player.clitLength > 2) || player.clitLength > 3)
@@ -389,7 +389,7 @@ public function doEvent(eventNo:Number):void
 			outputText("Bruised and sore, you pass into unconsciousness ", false);
 		}
 		else {
-			outputText("Satisfied, the creature drops you smartly and withdraws its limbs from you and lumbers away. Covered completely in cum, you see that your " + player.vaginas.length + " clits swelled up to almost four inches in length. Bruised and sore, you pass into unconsciousness, ", true);
+			outputText("Satisfied, the creature drops you smartly and withdraws its limbs from you and lumbers away. Covered completely in cum, you see that your " + player.vaginas.length + " clits have swollen up to almost four inches in length. Bruised and sore, you pass into unconsciousness, ", true);
 			spriteSelect(100);
 		}
 		//Not too corrupt
@@ -397,12 +397,12 @@ public function doEvent(eventNo:Number):void
 			outputText("too intoxicated with lust to fume over your violation. ", false);
 		//Very corrupt
 		else
-			outputText("too intoxicated with lust continue the pleasure. ", false);
+			outputText("too intoxicated with lust to continue the pleasure. ", false);
 		//If has big-clit grow to max of 6"
 		if (player.clitLength < 7 && player.clitLength >= 3.5 && player.findPerk(PerkLib.BigClit) >= 0)
 		{
 			player.clitLength += .1 + player.cor / 100;
-			outputText("Your massive clitty eventually diminishes, retaining a fair portion of it's former glory.  It is now " + int(player.clitLength * 10) / 10 + " inches long when aroused, ", false);
+			outputText("Your massive clitty eventually diminishes, retaining a fair portion of its former glory.  It is now " + int(player.clitLength * 10) / 10 + " inches long when aroused, ", false);
 			if (player.clitLength < 5)
 				outputText("like a tiny cock.", false);
 			if (player.clitLength >= 5 && player.clitLength < 7)
@@ -418,7 +418,7 @@ public function doEvent(eventNo:Number):void
 		}
 		//Mention that clit doesn't grow if your big enough.
 		else
-			outputText("In time it returns to it's normal size, losing all the extra volume.", false);
+			outputText("In time it returns to its normal size, losing all the extra volume.", false);
 		if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		player.slimeFeed();
