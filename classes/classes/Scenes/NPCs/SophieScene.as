@@ -84,7 +84,7 @@ public function meetSophieRepeat():void {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ", false);
 			if(player.tallness > 72) outputText("The harpy struggles with your weight and is clearly out of breath by the time she gets you up to her nest.", false);
 			else outputText("The flight is thankfully brief, and she actually gives you a good view of the mountain-side as she brings you up to her nest.", false);
-			outputText("  Sophie releases and you drops smartly onto the far side.  She pants, \"<i>It's breeding time.  " + player.mf("Boy","Girl") + ", fertilize me; NOW.</i>\"\n\n", false);
+			outputText("  Sophie releases her talons and you drop smartly onto the far side.  She pants, \"<i>It's breeding time.  " + player.mf("Boy","Girl") + ", fertilize me; NOW.</i>\"\n\n", false);
 			
 			//(low lust?)
 			if(player.lust < 60 || rand(3) <= 1) {
