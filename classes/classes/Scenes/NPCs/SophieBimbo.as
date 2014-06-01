@@ -918,7 +918,7 @@ private function sophieImpregnationSex():void {
 	if(player.cockTotal() == 1) outputText("s");
 	outputText(" up, proud and erect.  ");
 	if(player.cockTotal() == 1) outputText("It wobbles");
-	else outputText("they wobble");
+	else outputText("They wobble");
 	outputText(", ");
 	if(player.cockTotal() > 1) outputText("each ");
 	outputText("bouncing up and down.  Sophie's eyes never leave the bobbing erection");
@@ -931,7 +931,7 @@ private function sophieImpregnationSex():void {
 	else outputText("them");
 	outputText(", startling the dazed bimbo from her vacuous stare.");
 	
-	outputText("\n\nSophie blinks innocently as she slowly pieces her thoughts back together.  She eventually settles on something, and her face tilts upwards lashes lowered, her smoking-hot gaze firmly meeting yours.  \"<i>So big,</i>\" she chirps while taking your ");
+	outputText("\n\nSophie blinks innocently as she slowly pieces her thoughts back together.  She eventually settles on something, and her face tilts upwards, lashes lowered, her smoking-hot gaze firmly meeting yours.  \"<i>So big,</i>\" she chirps while taking your ");
 	if(player.balls > 0) outputText("[balls]");
 	else outputText("[sheath]");
 	outputText(" in her hand and beginning a slow, sensuous massage.  \"<i>You got <b>soooo</b> hard for me... and you're getting harder... so... very... hard...</i>\"  She's using that singsong, compelling voice again, vibrating her words right into your head, body, and most importantly, overly tumescent prick.  [EachCock] begins to bounce in the air, pulsing rhythmically with each heartbeat, the veins thickening visibly with pulses, fat and engorged.  You groan as she fondles your maleness expertly.  Her feathers tickle at your thighs, on your [legs], and against the " + player.skinFurScales() + " of your loins.");
@@ -940,9 +940,9 @@ private function sophieImpregnationSex():void {
 	
 	outputText("\n\nThose gold lips slowly descend towards your " + cockHead(x) + " before stopping a hairsbreadth away.  They slowly open, spreading agonizingly apart, exhaling hot puffs of breath over your sensitive, tremendously aroused boner.  Sophie smiles deviously, a surprisingly cunning glint shining in her eyes when she glances back up at you.  This entire time, her hands have been continuing their deft manipulations of your genitals, stirring the bubbling cauldron of lust that is your crotch well past boiling.  She breathily exhales on your cock, whispering, \"<i>So hard... so hot... so full... so ready for sex!</i>\" to it and you at the same time in that familiar, hypnotic tone she's been using.  \"<i>You're going to fuck me <b>so</b> hard, like crazy hard.  You're totally going to mount this pussy again and again.  It'll make your dick feel <b>so</b> good you won't want to pull out, not even after you've cum.  It's like, just that good.</i>\"");
 	
-	outputText("\n\nYou shudder as her words take effect.  Sophie's surprisingly focused now, driven in her determination to have you fuck that glorious... sopping wet... beautiful pussy.  You can't wait any more!  You grab hold of the slow-witted bimbo's head and push it down over [oneCock], surrounding yourself with the soft pleasure of her plump, enveloping, and tingling lips.  Her plush cockpillows suckle into a vacuum-tight seal around you as you crudely face-fuck her, bathing your manhood in tingling aphrodisiac lip-gloss.  Sophie's spittle froths at the corners of her luscious lips.  Her nostrils flare as she sucks in lungfuls of air each time you yank her back.  Of course, the air she inhales utterly saturated with the scent of your maleness and laden with virile pheromones, makes her slit drop slick moisture onto your [foot].");
+	outputText("\n\nYou shudder as her words take effect.  Sophie's surprisingly focused now, driven in her determination to have you fuck that glorious... sopping wet... beautiful pussy.  You can't wait any more!  You grab hold of the slow-witted bimbo's head and push it down over [oneCock], surrounding yourself with the soft pleasure of her plump, enveloping, and tingling lips.  Her plush cockpillows suckle into a vacuum-tight seal around you as you crudely face-fuck her, bathing your manhood in tingling aphrodisiac lip-gloss.  Sophie's spittle froths at the corners of her luscious lips.  Her nostrils flare as she sucks in lungfuls of air each time you yank her back.  Of course, the air she inhales, utterly saturated with the scent of your maleness and laden with virile pheromones, makes her slit drop slick moisture onto your [foot].");
 	
-	outputText("\n\nHer mouth feels good, <i>really</i> good, but that dripping on your [leg] reminds you that there's a juicy pussy just waiting to be jizzed inside, and your cock... it <b>needs</b> to enter it.  To fuck it hard!  Sophie's mouth is a pale substitute for her creamy pussy.  You force her off, the airhead's plush, cock-sucking lips still connected to you by a shimmering wet web of drool.");
+	outputText("\n\nHer mouth feels good, <i>really</i> good, but that dripping on your [leg] reminds you that there's a juicy pussy just waiting to be jizzed inside, and your cock... it <b>needs</b> to enter it... to fuck it hard!  Sophie's mouth is a pale substitute for her creamy pussy.  You force her off, the airhead's plush, cock-sucking lips still connected to you by a shimmering wet web of drool.");
 	
 	outputText("\n\nSophie pants, \"<i>Fuck me, [name].  Fuck me super hard!</i>\" She tries to crawl around on all fours, her swollen breasts dragging across your lower body as she turns.  As soon as her ass pivots towards you, you lose it.  Her heart-shaped rump is so curvy, so pert, and delightfully soft that you cannot resist your body's impulses, the breeding call that sings through every fiber of your being.  <b>You have to mount it!</b> Her feathery thighs are slick with sensuous moisture, and lewd drops of sexual need drip out from the bottom of that bodacious butt, slipping free of the glittering delta that is Sophie's sex.  It's like a golden target, a bull's-eye just waiting for a cock to spear it.");
 	
@@ -970,7 +970,7 @@ private function sophieImpregnationSex():void {
 	if(player.balls > 0) outputText(", and your [balls] begin to rhythmically pulse in your [sack]");
 	else outputText(", something inside you begins to clench rhythmically");
 	outputText(".  Sophie's pussy stretches around your increasing thickness, dripping its amber honey");
-	if(player.cockTotal() > 1) outputText(" over your extra, thighslapping cock");
+	if(player.cockTotal() > 1) outputText(" over your extra, thigh slapping cock");
 	if(player.cockTotal() > 2) outputText("s");
 	outputText(".  Responding, the warm ecstasy inside you rushes out in a tremendous spurt, squirting globs of thick white cum into the harpy's receptive cunt again and again.");
 	if(player.cockTotal() > 1) outputText("  Ropes of creamy spunk drizzle over the ground and the underside of Sophie's tits, but the lust-drunk harpy doesn't seem to mind any more than you do.");
@@ -1004,7 +1004,7 @@ private function sophieImpregnationSex():void {
 	else outputText("\n\nSophie moans, \"<i>Oooh, I didn't - ungh - want it in my like, butt, or anything!</i>\"");
 	outputText("\n\nTaking a reddened cheek in each hand you pull them apart before releasing them, letting them tap around your [sheath]'s sides.  You begin to properly drill her ass");
 	if(y >= 0) outputText(" and pussy");
-	outputText(" with confident, sure strokes.  Your answer, never spoken aloud becomes evident by your actions: she got you this horny, and you're going to impregnate every hole, no matter how long it takes.  Her asshole is tight, almost <ii>too tight</i> after having experienced her pussy, and you can feel the next batch of cum already beginning to churn in your [balls], a heavy, warm weight growing larger and larger.");
+	outputText(" with confident, sure strokes.  Your answer, never spoken aloud, becomes evident by your actions: she got you this horny, and you're going to impregnate every hole, no matter how long it takes.  Her asshole is tight, almost <i>too tight</i> after having experienced her pussy, and you can feel the next batch of cum already beginning to churn in your [balls], a heavy, warm weight growing larger and larger.");
 	
 	outputText("\n\nSophie's gorgeous rump feels amazing, but you're getting tired of doing all the work yourself.  You let go of her plump, squishy buttcheeks and wrap your arms around her torso, just under her tits and lean back, pulling the soft-bodied bimbo bird up on top of you as you recline backwards.  Her weight causes her bottom to squish down against you, enveloping your [hips] in smooth skin and down-soft feathers.  The big-butted harpy might be dumb, but she <b>knows</b> sex!  She immediately begins to bounce on top of you, her tight asshole clenching as she lifts up and drags her bountiful butt off you.  Your gold-glossed pole");
 	if(y >= 0) outputText("s are");
@@ -1081,7 +1081,7 @@ private function giantCocksImpregnateSophie():void {
 	
 	outputText("Damn, the voluptuous harpy is right - [eachCock] really, <i>really</i> wants to fuck her pussy, but there's just no way it'll fit!  You start disrobing anyway, figuring you'll find a way to blast a few loads of jizz deep into that dripping wet, mature cunt.  As soon as your [armor] is off, [eachCock] begins filling to its full, obscene size.  You truly have tremendous genitals by any standard, and you can't wait to put them to use.  They feel too good not to!");
 	
-	outputText("\n\nSophie giggles, \"<i>Wow, [name], you're like, gig-... gigant... really big, and stuff!</i>\"  She kneels next to you, taking both hands to wrap around your enormous member, feeling the smooth, sensitive skin pulsing against her fingertips.  The veins thicken noticeably, each almost as big as her pinky finger when fully dilated, inflating [eachCock] like an absurd balloon.  Sophie immediately plants a kiss on the swelling underside, leaving behind a perfect, puckered kissmark in gold.  That spot tingles wonderfully, which only encourages your building tumescence.  As your semi-hard cock droops over her head, she hugs it, kissing it again and again, heedlessly planting more and more aphrodisiac all over the most sensitive areas of your " + cockDescript(x) + ".  Before you know it, you're rigid and horny, tingling all over from whatever drug she has in her gloss and too turned on to care.");
+	outputText("\n\nSophie giggles, \"<i>Wow, [name], you're like, gig... gigant... really big, and stuff!</i>\"  She kneels next to you, taking both hands to wrap around your enormous member, feeling the smooth, sensitive skin pulsing against her fingertips.  The veins thicken noticeably, each almost as big as her pinky finger when fully dilated, inflating [eachCock] like an absurd balloon.  Sophie immediately plants a kiss on the swelling underside, leaving behind a perfect, puckered kissmark in gold.  That spot tingles wonderfully, which only encourages your building tumescence.  As your semi-hard cock droops over her head, she hugs it, kissing it again and again, heedlessly planting more and more aphrodisiac all over the most sensitive areas of your " + cockDescript(x) + ".  Before you know it, you're rigid and horny, tingling all over from whatever drug she has in her gloss and too turned on to care.");
 	
 	outputText("\n\nPeeking out from under the mass of flesh, Sophie looks up to meet your gaze and says, \"<i>Oooh, [name], you're so virile!  I bet the cum is just all sloshy-woshy ");
 	if(player.balls > 0) outputText("in those plump balls of yours");
@@ -1128,7 +1128,7 @@ public function sophieMoveInAttempt():void {
 	
 	outputText("\n\n\"<i>Could I like, sleep with you at night?  I thought... maybe... since you got me pre- preg... preggers and stuff, you wouldn't mind me snuggling with you while we slept?</i>\" she asks hopefully, blinking her long lashes innocently at you.  \"<i>I promise, I won't bother you or wake you up in the night or anything...  I just want someone to like, hold when it's cold.</i>\" She immediately adds, \"<i>And I make a really good pillow, ever since you gave me that drink!</i>\" Sophie playfully bounces her boobs for effect, blushing as she awaits your response.");
 	
-	outputText("\n\nThe bimbo harpy seems genuine in her desire for companionship, though judging from the moisture that trickles from her cleft and down her feathery thighs, she'll probably be fucking at some point, even if it isn't in the middle of the night.  Do you want to take the posh-bodied girl to bed with you at night?");
+	outputText("\n\nThe bimbo harpy seems genuine in her desire for companionship, though judging from the moisture that trickles from her cleft and down her feathery thighs, she'll probably be fucking you at some point, even if it isn't in the middle of the night.  Do you want to take the posh-bodied girl to bed with you at night?");
 	menu();
 	addButton(0,"Yes",yesSophieSleepWith);
 	addButton(1,"Nah",noSophieSleepWith);
