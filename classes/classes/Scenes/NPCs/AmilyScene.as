@@ -1360,11 +1360,11 @@ package classes.Scenes.NPCs
 
 			outputText("Amily nods, then puts a finger to either side of her mouth in order to whistle piercingly. All around you, from behind walls and out of holes in roofs, mousy faces begin to pop up. There are dozens of them! Their fur is primarily white, black, brown and mottlings of the three, but you see some that have your own hair color as well. You gape for a moment in shock, and then begin to ask, \"<i>These are...?</i>\"\n\n", false);
 
-			outputText("\"<i>The results of the litters that you fathered upon me, yes.</i>\" Amily nods. \"<i>They are my children – my tribe – and we are now numerous and strong enough to leave these lands... find a new place to carve out a home for us.</i>\"\n\n", false);
+			outputText("\"<i>The results of the litters that you fathered with me, yes.</i>\" Amily nods. \"<i>They are my children – my tribe – and we are now numerous and strong enough to leave these lands... find a new place to carve out a home for us.</i>\"\n\n", false);
 
 			outputText("As you watch, they begin gathering at one street opening behind their mother. They're clad in rags and wield makeshift weapons, but look determined and surprisingly fierce.\n\n", false);
 
-			outputText("\"<i>This is goodbye, " + player.short + ". You may not have been the most noble of men... but you did help me in my quest, and I am grateful – no matter how selfish your reasons may have been.</i>\"\n\n", false);
+			outputText("\"<i>This is goodbye, " + player.short + ". You may not have been the most noble of [men]... but you did help me in my quest, and I am grateful – no matter how selfish your reasons may have been.</i>\"\n\n", false);
 
 			outputText("Amily inclines her head towards you in a respectful nod, and then joins her vast brood as they begin to march away purposefully. You watch them go until they have vanished from sight, then shake your head with a sneer. Like you need her or her brats, anyway! Spinning on your heel, you stride purposefully out of this dump of a village; you don't intend to come back here again.\n\n", false);
 
@@ -1396,7 +1396,23 @@ package classes.Scenes.NPCs
 
 			outputText("\"<i>These are...?</i>\" You begin hesitantly, unable to say it.\n\n", false);
 
-			outputText("\"<i>Our children, yours and mine, planted by you inside of me.</i>\" Amily trills happily.\n\n", false);
+			outputText("“<i>Our children, yours and mine");
+			// Mix
+			if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
+			{
+				outputText(".</i>”");
+			}
+			// Only PC birth
+			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] == 0)
+			{
+				outputText(", planted by me inside of you.</i>”");
+			}
+			// Only Amily birth
+			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] == 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
+			{
+				outputText(", planted by you inside of me.</i>”");
+			}
+			outputText("  Amily trills happily.\n\n", false);
 
 			outputText("You can only stare at the multitude in shock. From somewhere inside you, a lone thought wondering what your mother would say at the sight of so many grandchildren rears itself, only to be brushed aside when the realization of what else Amily said manages to sink in. You ask if she's leaving.\n\n", false);
 
