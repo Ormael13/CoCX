@@ -324,7 +324,7 @@ public function useFrostysMouth():void
 
 		outputText("\n\nYou put both hands behind her head and ram your cock down her throat, causing a streak of honey to shoot out the corner of her mouth. You hold your [cock biggest] down her throat, feeling its hot sticky honey-walls constrict around it as she wiggles her tongue on the underside, honey drooling out. You hear, or more likely feel, her trying to talk as her throat vibrates with speech and hot air travels through it. You pull your [cock biggest] out of her mouth with a pop, Frosty doesn’t even look like she just had a dick in her throat, she looks like she normally does except for the spit and honey-mix glistening on her chest.");
 		outputText("\n\n“<i>Nymphs are made to be fucked [name], you can be as rough as you want and I’ll smile and take it. Just for a loyal customer like you.</i>”");
-		outputText("\n\n“<i>Made to be fucked....</i>” Let’s see how true that is. You shove your cock back down her throat and bob her head up and down your [cock biggest]’s shaft, forcing her to make loud wet slurping noises every time you pull her head back. She seems more uncomfortable from having her head tossed back and forth than from a dick being thrusting down her throat.");
+		outputText("\n\n“<i>Made to be fucked...</i>” Let’s see how true that is. You shove your cock back down her throat and bob her head up and down your [cock biggest]’s shaft, forcing her to make loud wet slurping noises every time you pull her head back. She seems more uncomfortable from having her head tossed back and forth than from a dick being thrusting down her throat.");
 		outputText("\n\nShe starts massaging the underside of your [cock biggest] with her tongue, moving it in waves, hoping this will make you cum sooner and stop treating her head like a ball but just like a ball, when you let go of her head she continues to slurps up and down on your cock. You lean back, relax and enjoy this delicious mouth-fucking, her wet noises are like sweet pleasurable music to your ears. You let her mouth bring you to the edge of climax and when you feel like you’re about to blow your load, you shove your dick in as far as you can and deposit all your cream directly down her throat, thrusting your [hips] a little in the afterglow.");
 
 		outputText("\n\nYou let go of Frosty and she slides her mouth off your cock, a trail of gooey honey still connects her lips to your [cockHead biggest]. She sits there dazed, looking more dizzy than short of breath. “<i>Oh!!! Look at the little birdies flying around my head.</i>” She looks wondrously at nothing over her head while trying to keep her balance as her head moves in circles. Her eyes locks onto one “birdie” and her spinning head tries to follow it. She keeps tracking it until she turns a full 180 and sees that a queue of customers have formed behind her and is now face-to-horse cock with one of the more “happier” ones. She lets out an “eep” and quickly worms her way behind her stand.");
@@ -346,7 +346,7 @@ public function useFrostysMouth():void
 
 		outputText("\n\nThe nymph licks it back up, then swipes her tongue over your clit again and locks her lips around it, hugging your clit into her mouth while her honey-coated tongue dances on it for a fleeting moment as she goes to licking your cunt in long rapid strides with her tongue. Her head goes in the same up and down motion of her tongue as she keeps her eyes like a cat lapping up a yummy saucer of milk. Her mouth goes and you moan in joy as you wrap your legs around her and place one hand on her head, holding a lock of her pink hair and pushing her face hard against your pleasure button. Letting out all your own pleasure-honey, it spills onto Frosty's face and hair, making her look like a bucket of water has fallen on her. Your hand letting go of her head, she removes her face from your [vagina] and shakes her face dry, flinging droplets of your love-honey all over the place. Reminds you of seeing a wet dog doing the same thing.");
 
-		outputText("\n\n“<i>Ooooh....I wanted to catch the honey in my mouth.</i>” She sticks her bottom lip out and pouts. How cute, she has her sad face on. You try to cheer her up by commenting about all the customers she has. She looks confused by your comment and turns around to see a line of soaking-wet cunts. She lets out an “eep” and quickly worms her way behind her stand. You hear her nomming on something and a “blah” of disgust. “<i>I hate black licorice... ahhh...</i>” You hear her mutter, then she pops back up to set herself on display in less than a second. A horse girl pardons herself as she takes your place in front of Frosty’s stand and a stack of papers is presented to her. “<i>All you have to do is sign here and you’ll get a free sample of my services.</i>”");
+		outputText("\n\n“<i>Ooooh... I wanted to catch the honey in my mouth.</i>” She sticks her bottom lip out and pouts. How cute, she has her sad face on. You try to cheer her up by commenting about all the customers she has. She looks confused by your comment and turns around to see a line of soaking-wet cunts. She lets out an “eep” and quickly worms her way behind her stand. You hear her nomming on something and a “blah” of disgust. “<i>I hate black licorice... ahhh...</i>” You hear her mutter, then she pops back up to set herself on display in less than a second. A horse girl pardons herself as she takes your place in front of Frosty’s stand and a stack of papers is presented to her. “<i>All you have to do is sign here and you’ll get a free sample of my services.</i>”");
 		//[Player is back at camp]
 	}
 	//[If player is Herm]
@@ -513,20 +513,20 @@ function pitcherInTheRyeAndByRyeIMeanFrostysBrownHole():void
 
 “Mph, you reply as you begin to rock your [hips], starting the pleasurable fiction. As you begin revving up, a centauress trot over to the booth. She has blonde hair done up in a bun and is sporting  two big lovely breast. She looks perplexed on why you're standing behind Frosty and why she’s breathing heavily and has a flushed look on her face. It’s doesn’t take long for her to put two and two together. She’s about to give you two some privately but Frosty quickly stops her.
 	
-“Oh...mmmmm....Don’t mind....oh geez......him/her....it’s part....slow a bit [name]...it’s part of the service.”
+“Oh... mmmmm... Don’t mind... oh geez... him/her... it’s part... slow a bit [name]...it’s part of the service.”
 	
 The centauress comes back, trying her best to ignore you fucking the back-door of the person she’s talking to.
 	
-“oh...ummmmm...yes. I would like to buy some of your.......” she pauses when you really start pounding it into Frosty, making her body jiggle and her eyes close as she try to ignore you and focus on her job. The centauress is almost  mesmerized by this display of lust,  how eagerly you move your hips to ram your [cock.noun] into Frosty and how she’s like putty in your hand as you do this. The centauress shakes her mind back to her objective.
+“oh... ummmmm... yes. I would like to buy some of your...” she pauses when you really start pounding it into Frosty, making her body jiggle and her eyes close as she try to ignore you and focus on her job. The centauress is almost  mesmerized by this display of lust,  how eagerly you move your hips to ram your [cock.noun] into Frosty and how she’s like putty in your hand as you do this. The centauress shakes her mind back to her objective.
 	
 “I was wonder if I could buy some of those deluxe cupcakes.”  Frosty tries to reply to her 
-“Ooooooooo-k......how man-man-many do you-Mmmmmmmmmmmm-want!” The centauress replies with a “five” focusing more on your cock pounding into that ass. “Would yooooooou like-like to sign up for our-oh goddess this is sooooooo good- our Sweets and Sex program. You can-can-can-Oooooooooo!” Frosty throws her head back, puts a hand over her heart and lets out a long moan. You feel a hot stream her nymph cum running down her orgasim twitching legs, clearly she is getting off on this faster than you are. Must be an exhibitionist.
+“Ooooooooo-k... how man-man-many do you-Mmmmmmmmmmmm-want!” The centauress replies with a “five” focusing more on your cock pounding into that ass. “Would yooooooou like-like to sign up for our-oh goddess this is sooooooo good- our Sweets and Sex program. You can-can-can-Oooooooooo!” Frosty throws her head back, puts a hand over her heart and lets out a long moan. You feel a hot stream her nymph cum running down her orgasim twitching legs, clearly she is getting off on this faster than you are. Must be an exhibitionist.
 
 [if player is exhibest]
 [, just like  you. Knowing this centauress is watching ass fuck this pink slut makes your cock even harder, like you can feel her eyes on your cock. You could blow your load into her colon right now, but you hold back. You want this curious horse-cunt to look on longer.]
 
 Frosty regains as much composure as she can with you still going at it. She goes back to talking to the centauress, who looks more flushed than Frosty does right now
-“As-as-as I was saying. yooooou can get get p-p-points.....”  Frosty let’s out a moan, she’s been holding back, out.
+“As-as-as I was saying. yooooou can get get p-p-points...”  Frosty let’s out a moan, she’s been holding back, out.
 “points! for every i-i-i-item you buy.  The-the-these point can be used to-to-to fuck meeeee!!!!” she blurts out that last part out and just fully indulges herself in you. Sticking her tongue out like a panting bitch, her eyes dreamily half-closed  with lusty ass pleasure. Letting out any little moan that builds up in her.  “More,MORE!” she yells and you grab her long legs out from under her and hold them up.  Frosty entire weight is pushed down on your [cockDescript(0)] and her pink ass-hole is bounced every time you thrust up, making her pink tits jiggle out  from her top and bounce as fuck this nympho slut. 
 
 The centauress stares at this show, biting on her knuckle and holding her side. Making her already big chest puppies look even perkier.  She must be trying to hold back some new feeling she has, now that she’s seeing your cock going directly into Frosty’s ass, in and out as she moans like a bimbo in heat. She must be imagining what it must feels like while trying to resist the thought at the same time. You gaze catches the centauress’, she bashfully looks away. Taking a side-glance at your fuck stick.  
@@ -604,7 +604,7 @@ a shot of a surprised cumming painted on the front of Frosty’s booth.
 [If gender-less]
 a feeling of a phantom orgasim enveloping your body.
 [else]
-Frosty’s laughing hysterically as your continue to shriek, holding her side with the cock still in you. “HAHAHAHAHA!!! TALK ABOUT SURPRISE BUTT-SEX!!! Ooooooh, I wish I could see the look on your face when I did that. *hehehe*.”  You give Frosty a cold look “Oh come on, don’t be like that...tell ya what. I’ll give ya another cumming...on the house of course.” 
+Frosty’s laughing hysterically as your continue to shriek, holding her side with the cock still in you. “HAHAHAHAHA!!! TALK ABOUT SURPRISE BUTT-SEX!!! Ooooooh, I wish I could see the look on your face when I did that. *hehehe*.”  You give Frosty a cold look “Oh come on, don’t be like that... tell ya what. I’ll give ya another cumming... on the house of course.” 
 
 You continue to stare at her with those cold eyes, her smiling back at them, hoping you’ll accept this apology of her’s. You stare at her a bit more and then let out a huff of defeat and push your [buttDescript]  back against her crotch as way of saying “Apology accepted.”
 
@@ -625,7 +625,7 @@ you feel building up in your groin and then releasing a glow of ecstasy cross yo
 [else]
 Frosty makes a satisfied sigh and thrusted her hip to make sure you satisfied. She releases your hair, your head thudding against the countertop. She snaps her fingers again and the toy shrivels out of your (assholeDescript) and dangels back to between her ankels, leaving your ass-hole gaping wide open. 
 
-“Now that I think about it, I should have used some form of lube.....oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think you butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
+“Now that I think about it, I should have used some form of lube... oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think you butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
 
 A dog-morph stands there with the biggest knotted cock you've ever seen. You quickly gather all your things and make you way past him. He looks to Frosty to relieve him of his stresses. You hear Frosty say “All you have to do is sign these.”
 
@@ -633,7 +633,7 @@ A dog-morph stands there with the biggest knotted cock you've ever seen. You qui
 Spanking
 ( Wrote this when I was tired as fuck, this is the fuck up zone of the fuck zone)
 Another service gender-less can have
-	You point down at the service you want, Frosty looks down at it and her eyes go wide. She quickly pull a clipboard, that’s holding a decent stack of paper in place, from the under counter. The worried nymph flips  through the papers, stopping at one of the pages towards the back. Her finger scans down the paper, and stops. She look over the paper and then down at the service you selected. She gulps down the worry look on face and tries to smile “So you do have enough points for that service....hehehehe......” She nervously tries to giggle “Are there ANY other services you would be interested in, like one that isn’t this one?”  
+	You point down at the service you want, Frosty looks down at it and her eyes go wide. She quickly pull a clipboard, that’s holding a decent stack of paper in place, from the under counter. The worried nymph flips  through the papers, stopping at one of the pages towards the back. Her finger scans down the paper, and stops. She look over the paper and then down at the service you selected. She gulps down the worry look on face and tries to smile “So you do have enough points for that service... hehehehe...” She nervously tries to giggle “Are there ANY other services you would be interested in, like one that isn’t this one?”  
 
 She doesn’t seem to like this service, are you sure you want her to go through with this?
 
@@ -645,7 +645,7 @@ She wipes the worry off her brow and goes back to her happy face.
 
 
 [Yes]
-You tap your finger over the “Spanking” text. “Sooooooo..... do you want to spank me or do want me to spank you?”
+You tap your finger over the “Spanking” text. “Sooooooo... do you want to spank me or do want me to spank you?”
 [Her]	[You](available if you have the masochist perk)
 
 [Her]
@@ -658,9 +658,9 @@ Frosty pulls a big fancy chair out from under the counter, she carries it over t
 
 It’s a paddle that has nicely sized holes in it to counter air resistance and a few dull metal studs embedded in the wood between the holes, to leave some marks on the flesh it abuses.  Done examining the fine piece of wood, you lightly smack it in the palm of your hand and look over at Frosty. 
 
-“Oh.....I wonder where that came from....heh...?”   You take a look at the handle and you can see that it has a label. “Property of Frosty Cakes.” is written there in fancy calligraphy. Yeah, you “wonder” too. You caught this bitch red-handed trying to cheat you out of your full service, well that isn’t gonna be the only thing that thing red ass on her won’t fix. 
+“Oh... I wonder where that came from... heh...?”   You take a look at the handle and you can see that it has a label. “Property of Frosty Cakes.” is written there in fancy calligraphy. Yeah, you “wonder” too. You caught this bitch red-handed trying to cheat you out of your full service, well that isn’t gonna be the only thing that thing red ass on her won’t fix. 
 
-You scuff past her, Frosty flinching at the air of authority that surrounds you, strikes her. You take a seat on the chair and pat for her to take her place. As Frosty prepares to lay herself across your lap, you see that she still has her bikini-bottom protecting her luscious rump. You tell her that she must first remove the offending garment. The spanking you have in mind for her is going to have her bare, allowing you to see the progress of changing her bright pink skin into a more appealing red colour. She nervously fiddles with the strings and is soon standing ass naked, trying to avoid your eyes like a child  who’s know they’re about to be punished. 
+You scuff past her, Frosty flinching at the air of authority that surrounds you, strikes her. You take a seat on the chair and pat for her to take her place. As Frosty prepares to lay herself across your lap, you see that she still has her bikini-bottom protecting her luscious rump. You tell her that she must first remove the offending garment. The spanking you have in mind for her is going to have her bare, allowing you to see the progress of changing her bright pink skin into a more appealing red color. She nervously fiddles with the strings and is soon standing ass naked, trying to avoid your eyes like a child  who’s know they’re about to be punished. 
 
 She stands in front of you, hoping that you’ll change your mind in your mind in the last second. NOPE! You grab her by the wrist and forcefully bend her across your lap. She squirms a little but she settles down for you, after all, she can’t back out of a contract.  You rub and squeeze her delicate ass, it’s feels warm, soft and overall, nice to touch. She makes little whimpers, readying her body for your abuse. 
 
@@ -677,9 +677,9 @@ There’s a devious idea  you could with that free service, wonder how happy she
 Pick by default if player doesn’t meet the requirement
 You give a stern wack on her knuckles, she quickly retreats her hands from her tender bottom. Defeated in her attempts, the most she can do is bite on her knuckle now, continuing to take your harsh attacks on her tender bottom, while tears of agony drip off her face. *Whack-whack whack-whack* 
 
-“.......you’re so cruel....” she whimpers. You give her red bottom five more smacks, making her voice falters mid sentence. Her cries of pain becoming mere little whimpers. Perhaps her voice got tired of screaming and crying or her ass is just numb to the pain now.  Her derriere is now the lovely crimson red you desired her to have, almost looking like sun-burn. You cease your attacks, letting the numbness of pain subside and allow feeling return to her abused bum. She has calmed down too, still sobbing a little, as the pain lingers slightly. You rub your hand over this the raw red flesh, the heat of her body repairing the damage radiates off her, as you feel the small divots the dull studs made from each strike. You a poke a finger into the tender area and the abused nymph grunts of pain. Yep, she isn’t going be sitting right for a days. You tell her you’re done. 
+“...you’re so cruel...” she whimpers. You give her red bottom five more smacks, making her voice falters mid sentence. Her cries of pain becoming mere little whimpers. Perhaps her voice got tired of screaming and crying or her ass is just numb to the pain now.  Her derriere is now the lovely crimson red you desired her to have, almost looking like sun-burn. You cease your attacks, letting the numbness of pain subside and allow feeling return to her abused bum. She has calmed down too, still sobbing a little, as the pain lingers slightly. You rub your hand over this the raw red flesh, the heat of her body repairing the damage radiates off her, as you feel the small divots the dull studs made from each strike. You a poke a finger into the tender area and the abused nymph grunts of pain. Yep, she isn’t going be sitting right for a days. You tell her you’re done. 
 
-“Thank You.....*sob*.....thank you, sweet merciful Marae....”  She weakly gets on her feet and gently walks her way back to the stand, her steps staggered as she tries to walk in way that doesn’t hurt too much. A passing by red mouse girl sees Frosty’s red and checkered ass 
+“Thank You... *sob*... thank you, sweet merciful Marae...”  She weakly gets on her feet and gently walks her way back to the stand, her steps staggered as she tries to walk in way that doesn’t hurt too much. A passing by red mouse girl sees Frosty’s red and checkered ass 
 
 “Hey! Nice ass honey!” and gives the bottom a nice hard clawed hand slap on the toosh. Frosty yelps like a bitch and zooms into the barkery, leaving the Mouse-girl in the wake of a pink whoosh. You smirk at the confused Mouse-girl whose fur is now wind blown to one side. Maybe Frosty has some creams or potions in the barkery to heal what you just did to her.
 [Spanking cost double points from now on]
@@ -689,7 +689,7 @@ You give a stern wack on her knuckles, she quickly retreats her hands from her t
 [You]
 She lets out a huge sigh of relief, her entire body relaxing after hearing this good news then a wicked grin cracks across her face. 
 	
-“Ohhhh...so you’ve been a naughty boy/girl? Well I know what to do with the likes of you.”
+“Ohhhh... so you’ve been a naughty boy/girl? Well I know what to do with the likes of you.”
 She reaches under the table and throws a fancy chair on the ground next to her stand. Then walks from her side of the counter, holding something behind her back and has an impish smile on. 
 
 “I got a surprise for you!!!” 
@@ -718,7 +718,7 @@ Frosty waves you good-bye as you walk away from her booth, surprisingly, no line
 
 5voice and the word “FAT” to be echoed around the shop. You stand there with a smirk on your face as the poor Talking-Ham looks to the ground, shocked and ashamed.  Frosty ignores your rudeness, and examines the girl, eyeing her pudgy form head to toe. The cupcake vendor looks to be in deep thought, before taking a deep breath and bursting into laughter. Holding her sides and pointing at the walking pork-rind. The devastated ham  is about to run off with tears in her eyes, but you grab her before she gets away from your arm’s reach and hold her there. This is too good to just let her run away.  
 
-	Frosty regains her mind and slows down a bit, her laughs becoming light chuckles before she talks again. “You may not be the skinniest person I’ve seen but you’re not the fattest...or the biggest.” Maybe you should have let the girl run, this isn’t as amusing as you thought it would be.
+	Frosty regains her mind and slows down a bit, her laughs becoming light chuckles before she talks again. “You may not be the skinniest person I’ve seen but you’re not the fattest... or the biggest.” Maybe you should have let the girl run, this isn’t as amusing as you thought it would be.
 
 “Bu-but I am fat” she trembles. “When I was smaller, the other children would say that I could crush the everything with my butt! They used to make me sit on pillows, saying that if i sat down, I would cause earthquakes!” You sigh, if the demons were as timid as this miserable pig, you’d be able to complete your quest within the day. Actually, probably in a few hours. The remaining time could be spent making their insufferable forms your bitches.
 
@@ -756,7 +756,7 @@ Maddie thinks about it for a bit after Frosty explains the rules, then nods her 
 
 Maddie makes a fist and only pulls her arm back a little. Frosty braces herself as she closes her eyes and nervously grits her teeth. *WHAM!!!* Maddie’s fist rams into Frosty, hitting her so hard that she is knocked out from underneath her hat, it falling to the ground of where she stood. Her body is launched across the bakery and slams into the east wall, cracking an imprint of her silhouette onto it. Everyone looks at Frosty as she falls off the wall with a *thunk* and lays face down for a minute. She slowly picks herself up, looking like she broke something, and limps back towards Maddie. She struggles to bend down to get the hat that was she knocked out of and puts it back on her mess of pink hair. Then she gruffs out 
 
-“...Ok...You win...” before collapsing on the floor. The victorious cupcake-girl does a little cheer and flicks the strange pastry in her mouth. She takes one bite and shallow, letting a out a satisfied sigh. Then she looks at the unconscious nymph by her feet and picks her up, slinging her over her shoulder. “Come on Frosty, you need to get some bed rest.”  The giant carries the little creature into the back-rooms.  You wipe the crumbs from off your face and get up to leave but not before taking one last look at the imprint of Frosty. You wonder who’s gonna pay for that.
+“...Ok... You win...” before collapsing on the floor. The victorious cupcake-girl does a little cheer and flicks the strange pastry in her mouth. She takes one bite and shallow, letting a out a satisfied sigh. Then she looks at the unconscious nymph by her feet and picks her up, slinging her over her shoulder. “Come on Frosty, you need to get some bed rest.”  The giant carries the little creature into the back-rooms.  You wipe the crumbs from off your face and get up to leave but not before taking one last look at the imprint of Frosty. You wonder who’s gonna pay for that.
 
 -WIP-*/
 
