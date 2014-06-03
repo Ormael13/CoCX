@@ -213,7 +213,7 @@ Attack descript: You open your mouth wide, your shark teeth extending out. Snarl
 Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your \" + armorName + \"  down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.
 +
 
-You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair colour has changed into a silvery color, just like that of a shark girl!
+You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!
 +
 
 You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and changing into a shiny grey color. Your skin now feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.
