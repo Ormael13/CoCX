@@ -13,6 +13,7 @@
 	private function get marbleScene():MarbleScene {
 		return kGAMECLASS.marbleScene;
 	}
+	public var farmCorruption:FarmCorruption = new FarmCorruption();
 
 	public function Farm(){
 
@@ -114,6 +115,123 @@ private function talkWhitney():void {
 		centaurToysHoooooo();
 		return;
 	}
+	
+	// Requires: PC has met both Marble and Kelt
+	if (flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] > 0 && player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 0)
+	{
+		flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] = 1;
+		
+		outputText("You find Whitney in her usual spot underneath her tree, nose in book. She smiles at you distractedly as you approach.");
+
+		outputText("\n\n“<i>Notice you’ve been nosey-ing around the place,</i>” she says. It’s difficult to tell from her bluff tone whether she’s teasing or accusing you; the dog morph has the mannerisms of a woman who has lived alone for some time. “<i>What do you make of my lil' place?</i>” You answer truthfully that is very peaceful and pretty, almost incongruously so in this savage and rapacious land. You say it seems like a very well-run operation, given that the only people who seem to be working on it are her, Marble and... your brow clouds. Whitney smiles understandingly.");
+
+		outputText("\n\n“<i>Those two are hard workers, in their own different ways. Doubt I’d be able to keep the farm going without them.</i>” She sighs. “<i>When you are out in the sticks like this, you have to make allowances for the people you find yourself lumped together with. Be understanding, and look for the good in everyone. If you set boundaries and stand firm by 'em you can get by with most anyone.</i>” She looks you in the eye. “<i>You should be careful how much time you spend around just anyone, though. Some folks don’t have your best interests at heart. Some others think they do, and they’re even more dangerous. Know what I mean?</i>” Not particularly, but you get the distinct impression you’re being warned about something. Feeling slightly unsettled, you politely take your leave. Whitney nods once and returns to her book, the picture of placidity.");
+		
+		return;
+	}
+	
+	// Requires: PC has entered Tel’Adre
+	if (player.findStatusAffect(StatusAffects.TelAdre) >= 0 && player.statusAffectv1(StatusAffects.TelAdre) >= 1 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 0 && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 1)
+	{
+		flags[kFLAGS.WHITNEY_TALK_TELADRE] = 1;
+		
+		outputText("You find the dog woman sitting on a stool, engaged in hand-milking a cow. She looks up sharply at your approach but smiles readily enough when she sees it’s you.");
+
+		outputText("\n\n“<i>Hey stranger! How you doin'?</i>” Feeling slightly strange standing next to her whilst she pulls briskly at the teats of the cow staring dully into your face, you describe the rather incredible city in the desert you stumbled upon recently and ask whether she’s ever visited it. “<i>Heh. Well, of course I have,</i>” says Whitney, not looking up. “<i>Used to live there, back in the day. Urta still around? Went to school with her, and afterwards she persuaded me to join the guard with her. Everydog has a duty! That was her by-word.</i>” The dog morph laughs. “<i>She was just scared of bunking on her own. Silly thing, but a good friend.</i>”");
+		
+		outputText("\n\nYou ask why she left.");
+		
+		outputText("\n\n“<i> I had my reasons. I grew up in the country, </i>” she goes on after a short pause, “<i>and never held much with city life. Particularly not hot, dusty, close ‘n stinky city life. Course farm life is stinky too,</i>” she acknowledges as she heaves up the milk pail and starts to walk it towards a barn. You offer to help, but she shakes her head. “<i> But least here it’s stink you’ve created yourself. I moved out here eight years ago, and never regretted it. As for Urta... well, she was finding better friends at the bottom of bottles by then. </i>” She disappears into the barn with the milk, and you decide to leave it at that.");
+		
+		return;
+	}
+
+	// Requires: PC has found High Mountain
+	if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 0 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 1)
+	{
+		flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] = 1;
+		
+		outputText("You find Whitney outside the milking shed, carefully writing labels at a trestle table and sticking them on large bottles of milk.");
+		//[PC has used milking device:
+		if (player.findStatusAffect(StatusAffects.BreastsMilked) >= 0)
+		{
+			outputText(" You are uncomfortably aware of the number of them which are labelled ‘[name]’, and a charged memory of strong suction on your [nipples] comes back to you.");
+		}
+
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] != -1)
+		{
+			// Jojo only
+			outputText(" At the far end there is a small alabaster cluster labelled ‘Jojo’.");
+		}
+		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		{
+			// Isabella Only
+			outputText(" At the far end there is a small alabaster cluster labelled ‘Isabella’.");
+		}
+		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		{
+			// Both
+			outputText(" At the far end there is one alabaster cluster labelled ‘Jojo’, another labelled ‘Isabella’.");
+		}
+			
+		outputText(" You ask her who she sells it all to.");
+
+		outputText("\n\n“<i>Centaurs ‘n goblins mainly,</i>” she replies. “<i>Sometimes even get the mountain folk coming down here to trade. Milk’s a rare enough commodity to a harpy or basilisk to get 'em to stop ruttin' an' fighting for two minutes and buy some.</i>” She sighs. “<i>Used to be you could talk with em, get news, but they mostly don’t even bother doing that anymore - just point at what they want, throw their gems down and leave. Gnolls and imps like milk too,</i>” she goes on in a harder tone, “<i>but they prefer tryin' stealin' it. Marble and Kelt deal with them.</i>”");
+		
+		// [PC has used milking device:
+		if (player.findStatusAffect(StatusAffects.BreastsMilked) >= 0)
+		{
+			outputText("\n\nShe smiles at you. “<i>I charge top gem for your produce, of course. Human milk is a very rare commodity these days, and it has a powerful calming effect on most anyone. Folks love it for their kids.</i>”");
+		}
+		
+		//[PC has used cock milker: 
+		if (player.findStatusAffect(StatusAffects.CockPumped) >= 0)
+		{
+			if (player.findStatusAffect(StatusAffects.BreastsMilked) < 0) outputText("\n\n");
+			
+			outputText("You notice a number of smaller bottles filled with a creamy fluid on the table, arranged in a cargo container. It takes you a moment to realise what it is. “<i>Why d’you think I pay you for it?</i> ” says Whitney with a laugh, catching your expression. “<i>I kin use some of it for my herd, but it’s just as easy to sell it to goblins ‘n harpies. Much better to buy it from me than to waste energy catching and beating it out of a satyr. 'Sides, how'd ya think I kept my hair so luxurious? Goblin hairdressers are top notch.</i>”");
+		}
+		
+		return;
+		
+	}
+	
+	// Requires: PC cleared Factory
+	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && flags[kFLAGS.WHITNEY_TALK_DUNGEON] == 0 && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 1)
+	{
+		flags[kFLAGS.WHITNEY_TALK_DUNGEON] = 1;
+		
+		outputText("Whitney isn’t anywhere around the farm buildings. You take a guess and walk out to the tree in the far field: sure enough you spot a figure in a sunhat sat underneath it as you draw close. Having spent a fair amount of time around the farm you have come to appreciate that this is indeed the best spot on it; it is on a small rise from which the shade of the mighty oak allows a person to see all the farm buildings and the lake, though the latter is beyond the curve of the land, glimmering in the near distance. Whitney looks up at you as you take it in, listening to the wind in the leaves.");
+
+		outputText("\n\n“<i>Look like you’ve got a story to tell, [name]. What’s up?</i>” Haltingly at first, you describe your attack on the demon factory, the sexual horrors you found inside, and finally the revelation the overseer gloatingly laid on you: that the elders of Ignam sold your village’s youth into twisted slavery, and how you only narrowly avoided that same fate. Whitney’s eyes are quite round by the time you’ve finished.");
+
+		outputText("\n\n“<i>That’s... that’s an amazing tale, [name]. It’s so easy down here to believe that such evil doesn’t exist in this world but it does; oh it does. An' there're people as brave as you that are willing to stand against it. That’s difficult to believe sometimes too.</i>” She looks away and opens her mouth several times, stopping each time, before finally going on in a quieter tone.");
+
+		outputText("\n\n“<i>I knew a guy who was like you, once. Met him soon after I joined up with the Tel’Adre guard. Kind ‘n funny in a stupid kinda way, 'an brave. Liked him enough that I married him.</i>” She looks off down to the lake. “<i>You have to be real brave to sign up for desert patrol. It ain’t for your benefit. It ain’t for Tel’Adre’s benefit. It’s just to scout for folks who are in trouble, survivors and runaways. The demons know about the existence of the city, oh they do, and they’re always lookin' for ways in. I think they're mostly lookin' to poison it like they did with the goblins, but they like informers too - captives. Gods, do they like captives.</i>”");
+		
+		outputText("\n\nShe stops for such a long while that you wonder whether she’s finished. “<i>Could- could you recognise any of those prisoners? The ones from your town. You said some of em stayed even when you freed em. What did you think about that? I often wonder- is it better never to know what happened to somebody, or find em and discover nothing but a twisted shell of what you remember: a soulless monster who even likes what’s been done to em?</i>” She stops and you think you see tears glittering in eyes still gazing at the lake. You wait a little longer but evidently that’s all you’re getting. You put a hand on her shoulder and then quietly walk away.");
+		
+		return;
+	}
+
+	// Subsequent visit
+	if (flags[kFLAGS.WHITNEY_TALK_DUNGEON_FOLLOWUP] == 0 && flags[kFLAGS.WHITNEY_TALK_DUNGEON] == 1)
+	{
+		flags[kFLAGS.WHITNEY_TALK_DUNGEON_FOLLOWUP] = 1;
+		
+		outputText("You find Whitney hard at work in the pepper patch. You approach her cautiously, but when she sees you she hails you brightly.");
+
+		outputText("\n\n“<i>Hey there [name]! I’m afraid I’m almost done here fer the day - can’t get your hands dirty this time, I’m afraid!</i>” You hold the gate open as she hauls a paper bag full of peppers over and plonks it on the ground. As you are closing it again a hand falls on yours.");
+
+		outputText("\n\n“<i>Listen [name],</i>” says Whitney hesitantly, “<i>I reckon I might come across as a bit... distant sometimes, but you know I 'preciate you coming down here to talk all the time, right? I like that a lot. Nobody 'round here is exactly a great conversationalist, and it’s nice to have someone who jus' listens. Particularly if they’re off savin' the world rest of the time.</i>” Slightly taken aback by her sincerity, you say it’s no big deal; you like hanging around the farm with her, too. She smiles broadly at that, and then with a nod of her head invites you to walk with her down to the storage barn. As delicately as you can, you ask her if she left Tel’Adre because of what happened to her husband.");
+
+		outputText("\n\n“<i>Color kinda disappeared from that place for me,</i>” she replies. “<i>Maybe I coulda done what Urta did and used alcohol to make it feel better, but... I dunno. I couldn’t bear the sympathy and I couldn’t bear hanging around the same places he once did. I just wanted to be on my own. So I sold everything I had, used it to buy seed and supplies, then came out here, where I knew there was a ruin of a farm.</i>” She laughs shortly. “<i>'Course I knew. My family used to live here, 'til the demons came. My ma and pa thought they were so dang lucky to get me to Tel’Adre in one piece, and they thought I was so dang crazy to come out here again. Just told em it was something I had to do.</i>” She shakes her head fondly as she throws a knot in the pepper bag’s mouth and then shoves it into the gloom of the barn. “<i>Pa still sometimes comes out here, try’na persuade me to sell up and move back. Sell to who, I tell him? Anyways I think I’m reasonably safe. Demons have got bigger fish to fry these days.</i>” She looks at you with something different in her expression, and it takes you a while to realise what it is - real belief.");
+
+		outputText("\n\nYou say goodbye with a hug and leave with a funny feeling in your gut.");
+		
+		return;
+	}
+	
 	temp = rand(6);
 	if(temp == 0) outputText("It doesn't take long to find the independent farmer-girl.\n\n", false);
 	if(temp == 1) outputText("She's patrolling the edges of her farm with a wicked-looking scythe in hand.  She nods to you as you approach and fall in beside her.\n\n", false);

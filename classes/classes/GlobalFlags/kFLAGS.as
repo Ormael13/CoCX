@@ -1075,11 +1075,11 @@ public static const WILD_HUNT_ENCOUNTERS:int                                   	
 public static const ERLKING_DISABLED:int                                   			= 1067; // Wild hunt/Erlking has been disabled
 public static const ERLKING_ENCOUNTER_COUNTER:int                                   = 1068;
 public static const KATHERINE_MET_SCYLLA:int                                   = 1069;
-public static const UNKNOWN_FLAG_NUMBER_01070:int                                   = 1070;
-public static const UNKNOWN_FLAG_NUMBER_01071:int                                   = 1071;
-public static const UNKNOWN_FLAG_NUMBER_01072:int                                   = 1072;
-public static const UNKNOWN_FLAG_NUMBER_01073:int                                   = 1073;
-public static const UNKNOWN_FLAG_NUMBER_01074:int                                   = 1074;
+public static const WHITNEY_TALK_MURBLE_AND_KELT:int                                   = 1070; // Player has done the talk with Whitney requiring they have metl Murble and Kelt
+public static const WHITNEY_TALK_TELADRE:int                                   = 1071; // Player talked to Whitney about TelAdre
+public static const WHITNEY_TALK_HIGH_MOUNTAIN:int                                   = 1072; // Player talked to Whitney about the High Mountains
+public static const WHITNEY_TALK_DUNGEON:int                                   = 1073; // Player talked to Whitney about shutting D1 down
+public static const WHITNEY_TALK_DUNGEON_FOLLOWUP:int                                   = 1074; // Player talked to Whitney about D1 #
 public static const UNKNOWN_FLAG_NUMBER_01075:int                                   = 1075;
 public static const UNKNOWN_FLAG_NUMBER_01076:int                                   = 1076;
 public static const UNKNOWN_FLAG_NUMBER_01077:int                                   = 1077;

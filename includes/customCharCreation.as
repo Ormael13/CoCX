@@ -116,6 +116,9 @@ public function customPCSetup():void {
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		
 		inventory.takeItem(consumables.KITGIFT);
+		
+		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
+		player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
