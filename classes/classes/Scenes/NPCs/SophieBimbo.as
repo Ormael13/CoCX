@@ -295,7 +295,7 @@ private function changeEggs():void
 	clearOutput();
 	sophieSprite();
 	
-	outputText("You ask Sophie if will change the type of eggs that she is producing for you.");
+	outputText("You ask Sophie to change the type of eggs that she is producing for you.");
 	
 	outputText("\n\n<i>Sure thing, babe,</i>” she giggles. “<i>Don’t you know about, like, the pretty lil colors that come out of the water over there? What color would you like, babe?</i>”");
 	
@@ -336,9 +336,7 @@ private function postEggSelector(selected:String):void
 	clearOutput();
 	sophieSprite();
 	
-	selected = selected.toLowerCase();
-	
-	outputText("\n\n“<i>I’ll make some nice " + selected + " eggs just for you then, good looking,</i>” she says. “<i>I can only make, like, one once a week, though. All the rest gotta be sold. I’ll put it with the weekly earnings, ok?</i>”");
+	outputText("\n\n“<i>I’ll make some nice " + selected.toLowerCase() + "eggs just for you then, good looking,</i>” she says. “<i>I can only make, like, one once a week, though. All the rest gotta be sold. I’ll put it with the weekly earnings, ok?</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;

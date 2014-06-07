@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-
+	import classes.GlobalFlags.kGAMECLASS;
+	
 	public class SophieFollowerScene extends NPCAwareContent {
 
 	public function SophieFollowerScene()
@@ -244,7 +245,7 @@ public function followerSophieMainScreen():void {
 	clearOutput();
 	sophieBimbo.sophieSprite();
 	//Sophie is in season
-	if(sophieBimbo.sophieIsInSeason() && player.hasCock()) {
+	if(sophieBimbo.sophieIsInSeason() && player.hasCock() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		//Replacement Greeting Screen For In Season
 		//Similar to bimbo sophie
 		outputText("Sophie's entire soft body jiggles and shudders visibly when she hears you call her.  Her walk towards you is a bit too fast to be sensuous, despite her best attempts, and her tail feathers twitch, fanning a breeze towards you that reeks of pheromones and her needy sex.  She puts a hand on her hip, making a small show of her jiggling butt and immense mammaries as she gives you a wink and stares at you with lowered eyelids, bedroom eyes seeking to provoke more arousal from you.  Her finger presses against your [chest] as she speaks, slowly and seductively, trying to accentuate every word by adding the power of her lips to it.  \"<i>Sooo, you wanted to see me?  That's good, because Momma Sophie wanted to see you as well.</i>\"");
@@ -274,25 +275,154 @@ public function followerSophieMainScreen():void {
 		addButton(9,"Back",camp.campFollowers);
 		return;
 	}
-	else {
+	else if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Sophie leans back in her nest as you approach, her prominent, bare F-cups on display.  She's completely nude, as always, and sits with her avian legs shamelessly spread, revealing the slick slit of her womanhood framed by downy-soft platinum blonde feathers.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?  Come for a cuddle in my welcoming wings, maybe; or for something more... exciting?</i>\"");
 		else outputText("Sophie leans back in her nest as you approach, her prominant, bare DD-cups on display.  She's completely nude, as always, and sits with her avian legs demurely crossed, concealing the slick slit of her womanhood from you.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?</i>\"");
 	}
+	else
+	{
+		outputText("When you call her name, Sophie's gold-glossed lips curve upward in a smile. She takes her time picking her way out of her nest, and then glides down to you.");
+
+		outputText("\n\n“<i>Need something from Momma Sophie?</i>” she coos.");
+	}
+	
 	//BimboBody Sophie Follower, Options*
 	menu();
 	addButton(0,"Appearance",sophieAppearance);
 	if(player.lust >= 33) addButton(1,"Sex",sexWithFollowerSophie);
 	else outputText("\n\nYou aren't aroused enough to sleep with Sophie at the moment.");
-	addButton(8,"Sleep With",sleepWithSophieToggle);
-	if(flags[kFLAGS.SLEEP_WITH] == "Sophie") {
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(8,"Sleep With",sleepWithSophieToggle);
+	if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		addButton(8,"NoSleepWith",sleepWithSophieToggle);
 		outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
 	}
-	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
+	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",sophieBimbo.daughterCheckup);
 	}
-	addButton(9,"Back",camp.campFollowers);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Back", camp.campFollowers);
+	else addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(2, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(2, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 0) addButton(3, "Harvest Eggs", harvestEggs);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) 
+	{
+		addButton(3 "Change Eggs", changeEggs);
+		addButton(4, "Stop Harvest", stopHarvest);
+	}
+	
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You tell your live-in harpy that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Sophie isn’t exactly enthused by this idea.");
+
+	outputText("\n\n“<i>I'm here to be with you, not till some farm,</i>” she flounces. She looks at you slyly and sidles her warm, pillowy weight into your side. “<i>Wouldn’t you get lonely out here on your own, [name]? Yes, you would. Give mama Sophie a kiss and we’ll forget all about this...</i>” You take a step back and firmly point in the direction of the farm.");
+	
+	outputText("\n\nHer whining and complaining can be heard long after her pink feathers have disappeared over the rise. She’ll be useless as a worker, you think, but she’s considerably more vigilant and sharp than she lets herself on to be. And who knows, maybe she can produce some eggs whilst she’s there.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You tell her she’s welcome to head back to camp now.");
+
+	outputText("\n\n“<i>Thank the Gods,</i>” she says, rolling her eyes. “<i>Any longer out here and I was going to suffocate from boredom.</i>” She kisses your cheek affectionately before stretching her huge wings out to fly off in the direction of the portal.");
+
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function harvestEggs():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain colour whilst she’s here.");
+
+	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What colour would you like?</i>”");
+	
+	eggSelector();
+}
+
+public var eggColors:Array = [
+"Black",
+"Blue",
+"Brown",
+"Pink",
+"Purple",
+"White",
+]
+
+public var eggTypes:Array = [
+consumable.L_BLKEG,
+consumable.L_BLUEG,
+consumable.L_BRNEG,
+consumable.L_PNKEG,
+consumable.L_PRPEG,
+consumable.L_WHTEG,
+]
+
+private function eggSelector():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	for (var i:int = 0; i < eggColors.length; i++)
+	{
+		addButton(i, eggColors[i], postEggSelector, eggColors[i]);
+	}
+}
+
+private function postEggSelector(selected:String):void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>” she says with a small grin. “<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>”");
+	
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function stopHarvest():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You tell Sophie to stop giving you eggs; you’d rather she’d put them towards making the farm money.");
+
+	outputText("\n\n“<i>Awww,</i>” she replies with pleading eyes. “<i>Couldn't you just fuck some REAL eggs into me instead?</i>”");
+
+	outputText("\n\nYou respond to the negative, earning a pout from the busty hen. She looks like she's going to obey you regardless.");
+
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function changeEggs():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You ask Sophie if she will change the type of eggs that she is producing for you.");
+	
+	outputText("\n\n<i>I'd </i>much<i> prefer you to be fucking me full of eggs yourself, but I guess I can change just for you...</i>”");
+	
+	eggSelector();
 }
 
 //[Sex]
