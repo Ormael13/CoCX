@@ -40,6 +40,8 @@ public function farmExploreEncounter():void {
 	//Repeat Offender
 	else {
 		spriteSelect(62);
+		if (farmCorruption.takeoverPrompt() == true) return;
+		
 		if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
 			clearOutput();
 			outputText("As soon as you head to the farm, Whitney comes storming up to meet you.  \"<i>What in tarnation do you think you're pulling?!</i>\"");
