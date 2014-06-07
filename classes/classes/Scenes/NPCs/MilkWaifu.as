@@ -131,11 +131,38 @@ public function ratducto():void {
 //Milky's Menu (Accessed from the FOLLOWERS tab)
 public function milkyMenu():void {
 	clearOutput();
-	outputText("You wander over to " + flags[kFLAGS.MILK_NAME] + "'s pool, and find the dusky girl sitting at its rim, ");
-	if(flags[kFLAGS.MILK_SIZE] == 0) outputText("lying face-down on her massive rack, her plump little ass sticking up in the air for all to see.  Seeing you approach, she brightens up and shifts her titanic bust around to face you, all bright-eyes and smiles.  \"<i>Milk time?</i>\"");
-	else if(flags[kFLAGS.MILK_SIZE] == 1) outputText("arms crossed under her hefty, milky bust to support their still-sizable weight.  She smiles as you approach, able to stand up under her own power to give you a hug, milky tits pressed tight against you.  \"<i>I-is it milk time?</i>\" she asks, cupping her tits for you.");
-	else outputText("her long, tanned legs dangling into the tub.  She jumps up when you approach, and though still a bit unsteady with such easy movements, she's quick to leap into your arms, nuzzling into your neck and pressing her firm, perky DD-cup breasts against you, little trickles of milk staining your chest through the little shift she's wearing.  \"<i>[name],</i>\" she purrs happily.");
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0)
+	{
+		outputText("You wander over to " + flags[kFLAGS.MILK_NAME] + "'s pool, and find the dusky girl sitting at its rim, ");
+		if(flags[kFLAGS.MILK_SIZE] == 0) outputText("lying face-down on her massive rack, her plump little ass sticking up in the air for all to see.  Seeing you approach, she brightens up and shifts her titanic bust around to face you, all bright-eyes and smiles.  \"<i>Milk time?</i>\"");
+		else if(flags[kFLAGS.MILK_SIZE] == 1) outputText("arms crossed under her hefty, milky bust to support their still-sizable weight.  She smiles as you approach, able to stand up under her own power to give you a hug, milky tits pressed tight against you.  \"<i>I-is it milk time?</i>\" she asks, cupping her tits for you.");
+		else outputText("her long, tanned legs dangling into the tub.  She jumps up when you approach, and though still a bit unsteady with such easy movements, she's quick to leap into your arms, nuzzling into your neck and pressing her firm, perky DD-cup breasts against you, little trickles of milk staining your chest through the little shift she's wearing.  \"<i>[name],</i>\" she purrs happily.");
+	}
+	else
+	{
+		if (flags[kFLAGS.MILK_SIZE] == 0)
+		{
+			outputText("[bathgirlname] shakes vaguely out of her boob daze as you pick your way over to her.");
 
+			outputText("\n\n“<i>Bath time?</i>”");
+		}
+		else
+		{
+			outputText("[bathgirlname] smiles at you as you pick your way over to her.");
+
+			outputText("\n\n“<i>Hello [name]. Is there something you need?</i>”");
+		}
+	}
+
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
+	{
+		if (flags[kFLAGS.MILK_SIZE] == 0)
+		{
+			// Bath Girl cannot walk
+			outputText("\n\nAlthough her massive lactation would no doubt be a boon to your farm, there’s no way you can install [bathgirlname] there in her current state. Maybe you could talk to Whitney about building a new tank there, though.");
+		}
+	}
+	
 	//Options:
 	//Milk Time!  (HHH or DD boobs)
 	//Milk Bath (Giant or HHH boobs)
@@ -146,8 +173,43 @@ public function milkyMenu():void {
 	if(flags[kFLAGS.MILK_SIZE] > 0) addButton(1,"Milk Time!",nyanCatMilkTime);
 	if(flags[kFLAGS.MILK_SIZE] < 2) addButton(2,"Milk Bath",milkBathTime);
 	if(flags[kFLAGS.MILK_SIZE] < 2 && player.hasKeyItem("Super Reducto") >= 0) addButton(3,"Reducto",superReductoUsage);
-	if(flags[kFLAGS.MILK_SIZE] > 0 && player.lust >= 33 && player.hasCock()) addButton(5,"Titfuck",titFuckDatMilkSlut);
-	addButton(9,"Back",camp.campSlavesMenu);
+	if(flags[kFLAGS.MILK_SIZE] > 0 && player.lust >= 33 && player.hasCock()) addButton(4,"Titfuck",titFuckDatMilkSlut);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0 && flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0) addButton(5, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(9, "Back", camp.campSlavesMenu);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	
+	outputText("\n\nYou describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
+
+	outputText("“<i>Ok,</i>” says [bathgirlmame], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
+
+	if (player.cor >= 90)
+	{
+		outputText("\n\nIt darkly but deliciously occurs to you that once she’s at the farm, it would be fairly easy to re-boobify her, build her a new tank and massively increase the amount of milk your farm produces.");
+	}
+
+	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	
+	//TODO
+	throw new Error("Placeholder"):
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 //Appearance

@@ -852,7 +852,7 @@ public function campLoversMenu():void {
 	var marbleEvent:Function = null;
 	var izmaEvent:Function = null;
 	var kihaButt:Function = null;
-	var amilyEvent:Number = 0;
+	var amilyEvent:Function = null;
 	var hel:Function = null;
 	var nieve:int = 0;
 	clearOutput();
@@ -985,7 +985,7 @@ public function campLoversMenu():void {
 		else if(temp == 4) outputText("and she flops down on her nest to have a rest", false);
 		else outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy", false);
 		outputText(".\n\n", false);
-		amilyEvent = 2427;
+		amilyEvent = amilyScene.amilyFollowerEncounter;
 	}
 	//Amily out freaking Urta?
 	else if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
@@ -994,7 +994,7 @@ public function campLoversMenu():void {
 	if(arianScene.arianFollower()) outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 	//choices("Amily",amilyEvent,"Helia",hel,"Isabella",isabellaButt,"Izma",izmaEvent,"Kiha",kihaButt,"Marble",marbleEvent,"Nieve",nieve,"",0,"",0,"Back",1);	
 	menu();
-	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
+	if(amilyEvent != null) addButton(0,"Amily",amilyEvent);
 	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
 	if (hel != null) addButton(2,"Helia",hel);
 	if (isabellaButt != null) addButton(3,"Isabella",isabellaButt);
@@ -1042,7 +1042,6 @@ public function campSlavesMenu():void {
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) {
 		outputText("Your well-endowed, dark-skinned milk-girl is here.  She flicks hopeful eyes towards you whenever she thinks she has your attention.\n\n");
 	}
-	
 	//choices("Amily",amilyEvent,"Ceraph",ceraph,"Jojo",jojoEvent,"Sophie",sophieEvent,"Vapula",vapula,"",0,"",0,"",0,flags[kFLAGS.GOO_NAME],goo,"Back",1);	
 	menu();
 	if (amilyEvent != null) addButton(0,"Amily", amilyEvent);

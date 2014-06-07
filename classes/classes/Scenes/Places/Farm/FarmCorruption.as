@@ -559,6 +559,22 @@ package classes.Scenes.Places.Farm
 				outputText("You can see something black shimmering wetly underneath Whitney’s porch which can only be a certain latex goo.");
 			}
 			
+			// BathSlut
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				
+				if (flags[kFLAGS.MILK_SIZE] > 0)
+				{
+					outputText("[bathgirlname] is rather predictably in the cow shed, milking the cattle. She looks tan, bright and happy; the country air is doing her good.");
+				}
+				else
+				{
+					outputText("[bathgirlname] is sat on the edge of her tank next to the cow shed, rubbing her huge tits in slow, mesmeric patterns. Her gaze is vacant except when it lands on you, whereon it becomes hopeful.");
+				}
+			}
+			
 			farmMenu();
 		}
 		
@@ -583,6 +599,8 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", kGAMECLASS.vapula.callSlaveVapula);
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(4, flags[kFLAGS.GOO_NAME], kGAMECLASS.latexGirl.approachLatexy);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(5, flags[kFLAGS.MILK_NAME], kGAMECLASS.milkWaifu.milkyMenu);
 			
 			addButton(9, "Back", farmMenu);
 		}

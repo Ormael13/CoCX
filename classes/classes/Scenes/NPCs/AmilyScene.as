@@ -2554,7 +2554,7 @@ package classes.Scenes.NPCs
 					oral2 = corruptAmilyLickPussiesLikeAPro;
 					scissor = corruptAmilyScissorsLikeAPro;
 				}
-				choices("Anal",anal,"Get BJ",oral,"Get Licked",oral2,"GetPen'ed",penetrated,"Scissor",scissor,"Vagina",fuckCunt,"",0,"",0,"",0,"Nevermind",2427);
+				choices("Anal",anal,"Get BJ",oral,"Get Licked",oral2,"GetPen'ed",penetrated,"Scissor",scissor,"Vagina",fuckCunt,"",0,"",0,"",0,"Nevermind",amilyFollowerEncounter);
 			}
 			else {
 				//[Genderless PC Tries Sex]
