@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-
+	import classes.GlobalFlags.kGAMECLASS;
+	
 	public class IsabellaFollowerScene extends NPCAwareContent {
 
 	public function IsabellaFollowerScene()
@@ -64,6 +65,11 @@ internal function isabellaAffection(mod:int = 0):int {
 	if(flags[kFLAGS.ISABELLA_AFFECTION] > 100) flags[kFLAGS.ISABELLA_AFFECTION] = 100;
 	else if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
 	return flags[kFLAGS.ISABELLA_AFFECTION];
+}
+
+public function isabellaSprite():void
+{
+	spriteSelect(31);
 }
 
 //Isabella Moves In Intro
@@ -138,26 +144,37 @@ private function moveTheBitchIn():void {
 public function callForFollowerIsabella():void {
 	spriteSelect(31);
 	outputText("", true);
-	outputText("You get Isabella's attention and call the busty cow-girl your way.  She seems a bit consterned as she breaks away from her previous task, but as she closes in towards you, she's all smiles.  You're given plenty of time to appreciate the curvaceous beauty's body while she ambles over.\n\n", false);
-	
-	outputText("The cow-girl is about seven and a half feet tall.  Instead of feet, she has hooves, complete with fur that grows part-way up her legs.  Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips.  Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples.  Unlike most of the rest of her, her face is not spotted with dark and white patches.  Instead it is pure, unbroken chocolate in color.  Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls.  She even has a pair of cow ears that flick back and forth from time to time.\n\n", false);
-	
-	outputText("Isabella ", false);
-	if(player.tallness < 72) outputText("picks you up in her arms and embraces you with a crushing hug, nearly burying you in her boobflesh before she lets you go.", false);
-	else outputText("gives you a crushing hug, smashing her tits flat against your body.", false);
-	outputText("  She says, \"<i>", false);
-	if(isabellaAccent()) outputText("Hi " + player.short + "!  Vat do you need from Izabella?", false);
-	else outputText("Hiya " + player.short + "!  Anything I can help you with?", false);
-	outputText("</i>\"", false);
-	if(player.hasCock()) {
-		if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
-			outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)", false);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0)
+	{
+		outputText("You get Isabella's attention and call the busty cow-girl your way.  She seems a bit consterned as she breaks away from her previous task, but as she closes in towards you, she's all smiles.  You're given plenty of time to appreciate the curvaceous beauty's body while she ambles over.\n\n", false);
+		
+		outputText("The cow-girl is about seven and a half feet tall.  Instead of feet, she has hooves, complete with fur that grows part-way up her legs.  Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips.  Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples.  Unlike most of the rest of her, her face is not spotted with dark and white patches.  Instead it is pure, unbroken chocolate in color.  Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls.  She even has a pair of cow ears that flick back and forth from time to time.\n\n", false);
+		
+		outputText("Isabella ", false);
+		if(player.tallness < 72) outputText("picks you up in her arms and embraces you with a crushing hug, nearly burying you in her boobflesh before she lets you go.", false);
+		else outputText("gives you a crushing hug, smashing her tits flat against your body.", false);
+		outputText("  She says, \"<i>", false);
+		if(isabellaAccent()) outputText("Hi " + player.short + "!  Vat do you need from Izabella?", false);
+		else outputText("Hiya " + player.short + "!  Anything I can help you with?", false);
+		outputText("</i>\"", false);
+		if(player.hasCock()) {
+			if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
+				outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)", false);
+			}
+			else {
+				outputText("\n\nYou could ask Isabella to give you blowjobs in the morning. (In Sex Menu)", false);
+			}
+			if(player.shortestCockLength() > 9) outputText("  Sadly, you're too big for her to be interested in sucking you off right now.", false);
 		}
-		else {
-			outputText("\n\nYou could ask Isabella to give you blowjobs in the morning. (In Sex Menu)", false);
-		}
-		if(player.shortestCockLength() > 9) outputText("  Sadly, you're too big for her to be interested in sucking you off right now.", false);
 	}
+	else
+	{
+		outputText("Isabella puts down the milk canister she’s carrying and wipes her brow at your approach.");
+
+		if (isabellaAccent()) outputText("\n\n“<i>Guten tag, [name]. What can Isabella help you with?</i>”");
+		else outputText("\n\n“<i>Hello [name]. What can Isabella help you with?</i>”");
+	}
+	
 	var accent:Function = null;
 	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) accent = isabellasAccentCoaching;
 	var milk:Function = null;
@@ -167,7 +184,44 @@ public function callForFollowerIsabella():void {
 		pro = isabellaBurps;
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
 	}
-	choices("Accent Coach",accent,"Get Milk",milk,"GiveProBova",pro,"Sex",campIzzySexMenu,"Spar",isabellaSparMenu,"",0,"",0,"",0,"",0,"Back",camp.campLoversMenu);
+	choices("Accent Coach", accent, "Get Milk", milk, "GiveProBova", pro, "Sex", campIzzySexMenu, "Spar", isabellaSparMenu, "", 0, "", 0, "", 0, "", 0, "Back", camp.campLoversMenu);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(5, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	isabellaSprite();
+	
+	outputText("“<i>Do you think you could do me a favour?</i>” you say to the Teutonic tit-monster. “<i>There’s a farm near here, down by the lake. I need anyone who is strong, and vigilant, and... has a lot of milk...</i>” To your relief, Isabella responds well to the idea.");
+
+	if (isabellaAccent()) outputText("\n\n“<i>Ja, I know of this place from mein own travels. The baurehund is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now unsere farm, I will gladly help!</i>”");
+	else outputText("\n\n“<i>Yes, I know of this place from my own travels. The farmdog is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now our farm, I will gladly help!</i>”");
+
+	outputText("\n\nShe happily packs up and then sways off in the direction of the lake. She will get along very well with Whitney, you think, as well as providing the farm with a great deal of both strength and milk.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] = 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	isabellaSprite();
+	
+	outputText("“<i>Could you head back to camp? It’s just... it’s getting a little lonely at night up there.</i>” Your gambit pays off and Isabella pinches your cheek in delight.");
+
+	if (isabellaAccent()) outputText("\n\n“<i>Aww, is mein little kuschelbar getting all cold and lonely by [himself]? Isabella will come back and keep you warm, ja, very warm indeed!</i>”");
+	else outputText("\n\n“<i>Aww, is my little teddybear getting all cold and lonely by [himself]? Isabella will come back and keep you warm, yes, very warm indeed!</i>” You leave her to pack up her things and go.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function campIzzySexMenu():void {

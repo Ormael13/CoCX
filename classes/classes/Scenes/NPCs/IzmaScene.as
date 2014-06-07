@@ -25,6 +25,11 @@ override public function izmaFollower():Boolean {
 	return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1;
 }
 
+public function izmaSprite():void
+{
+	spriteSelect(32);
+}
+
 public function meetIzmaAtLake():void {
 	spriteSelect(32);
 	outputText("", true);
@@ -1529,32 +1534,43 @@ private function submitToLakeIzma():void {
 public function izmaFollowerMenu():void {
 	spriteSelect(32);
 	outputText("", true);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
+	{
 	//Izma pops 'em out!
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 1) {
-		IzmaPoopsBabies();
-		return;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 1) {
+			IzmaPoopsBabies();
+			return;
+		}
+		outputText("You call for Izma and she approaches, asking, \"<i>What can I do for my Alpha?</i>\"\n\n", false);
+		//Izma Pregnancy Stages:
+		//300 hours long
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 250) {}
+		//200-250
+		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 200) outputText("You can't help noticing that Izma seems very nauseous this morning; she's literally green around the gills.  When you investigate, though, she waves you off, insisting that she's fine; she just has a bit of a stomach bug.", false);
+		//150-200
+		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 150) outputText("Izma comes up to you, looking concerned.  \"<i>" + player.short + ", do you think I've gained weight?</i>\" she asks.  Looking at her, particularly at the stomach she's holding her hands over, you have to confess that it is starting to bulge out in a noticeable paunch.  At her crestfallen look, you suggest that maybe she's pregnant.  At that, she looks delighted.  \"<i>You really think so?</i>\" she asks, hopefully.  You assure her that you're certain of it; after all, she's very good at watching her weight.  Pleased, she kisses you and then heads off for a swim.", false);
+		//100-150
+		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 100) outputText("There is no doubt about it now; Izma's pregnant.  She's grown gravid more rapidly than any of the expecting mothers you remember seeing back in your village, but she seems to be having all of the same aches and pains.  She's grown lethargic and irritable, and complains about not being able to fit into her old clothes.  Still, despite that, she seems happy; she's always rubbing her belly with unmistakable pride.  You also think you've noticed her casting you \"<i>come hither</i>\" looks more frequently than before.", false);
+		//50-100
+		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 50) outputText("Izma's started to go around completely naked now.  She insists that she's grown too big to fit into her clothes, but you're kind of skeptical about that; she's as big as the women in your village got when they were near the end, but they managed to fit into their clothes, and theirs were a lot more restrictive than a bikini and grass skirt combo.  Still, you're not objecting to the view it provides, and she definitely seems to enjoy that; you never knew a shark tail could be wiggled in an enticing manner over shapely buttocks until you came to this world...", false);
+		//1-50
+		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] >= 1) {
+			outputText("Izma's certain the baby will come soon.  You're inclined to believe her; she's huge now.  She still wears no clothing, but there's definitely a practical reason for it");
+			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("- you don't think her skirt would be able to cope with how often she gets erect now, her huge cock rubbing along");
+			else outputText(", her juices staining");
+			outputText(" the underside of her swollen belly...  Izma spends much of her time in the water, now; she says it's to soothe her skin.  Given you've seen her explosively cum all over herself from ");
+			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("the friction of her cock against her bulge, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+			else outputText("the friction of her thighs as she moves, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+		}
 	}
-	outputText("You call for Izma and she approaches, asking, \"<i>What can I do for my Alpha?</i>\"\n\n", false);
-	//Izma Pregnancy Stages:
-	//300 hours long
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 250) {}
-	//200-250
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 200) outputText("You can't help noticing that Izma seems very nauseous this morning; she's literally green around the gills.  When you investigate, though, she waves you off, insisting that she's fine; she just has a bit of a stomach bug.", false);
-	//150-200
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 150) outputText("Izma comes up to you, looking concerned.  \"<i>" + player.short + ", do you think I've gained weight?</i>\" she asks.  Looking at her, particularly at the stomach she's holding her hands over, you have to confess that it is starting to bulge out in a noticeable paunch.  At her crestfallen look, you suggest that maybe she's pregnant.  At that, she looks delighted.  \"<i>You really think so?</i>\" she asks, hopefully.  You assure her that you're certain of it; after all, she's very good at watching her weight.  Pleased, she kisses you and then heads off for a swim.", false);
-	//100-150
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 100) outputText("There is no doubt about it now; Izma's pregnant.  She's grown gravid more rapidly than any of the expecting mothers you remember seeing back in your village, but she seems to be having all of the same aches and pains.  She's grown lethargic and irritable, and complains about not being able to fit into her old clothes.  Still, despite that, she seems happy; she's always rubbing her belly with unmistakable pride.  You also think you've noticed her casting you \"<i>come hither</i>\" looks more frequently than before.", false);
-	//50-100
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 50) outputText("Izma's started to go around completely naked now.  She insists that she's grown too big to fit into her clothes, but you're kind of skeptical about that; she's as big as the women in your village got when they were near the end, but they managed to fit into their clothes, and theirs were a lot more restrictive than a bikini and grass skirt combo.  Still, you're not objecting to the view it provides, and she definitely seems to enjoy that; you never knew a shark tail could be wiggled in an enticing manner over shapely buttocks until you came to this world...", false);
-	//1-50
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] >= 1) {
-		outputText("Izma's certain the baby will come soon.  You're inclined to believe her; she's huge now.  She still wears no clothing, but there's definitely a practical reason for it");
-		if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("- you don't think her skirt would be able to cope with how often she gets erect now, her huge cock rubbing along");
-		else outputText(", her juices staining");
-		outputText(" the underside of her swollen belly...  Izma spends much of her time in the water, now; she says it's to soothe her skin.  Given you've seen her explosively cum all over herself from ");
-		if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("the friction of her cock against her bulge, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
-		else outputText("the friction of her thighs as she moves, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+	else
+	{
+		outputText("Izma smiles and puts away her book at your approach.");
+
+		outputText("\n\n“<i>What can I do for you, Alpha?</i>”");
 	}
+	
 	//[Sex (If lust is 30+)] [Talk] [Appearance]
 	var sex:Function = null;
 	if(player.lust >= 33) sex = izmaSexMenu;
@@ -1570,7 +1586,47 @@ public function izmaFollowerMenu():void {
 		deDickT = "Go Herm";
 		deDickB = izmaDickToggle;
 	}
-	choices("Appearance",izmaPearance,"Books",IzmaCampBooks,"Children",kids,"Sex",sex,"Talk",talkWivIzma,"Tooth",gatASharkTooth,"",0,"",0,deDickT,deDickB,"Back",camp.campLoversMenu);
+	choices("Appearance", izmaPearance, "Books", IzmaCampBooks, "Children", kids, "Sex", sex, "Talk", talkWivIzma, "Tooth", gatASharkTooth, "", 0, "", 0, deDickT, deDickB, "Back", camp.campLoversMenu);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(1, "", null);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(2, "", null);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(6, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	izmaSprite();
+	
+	outputText("You tell your beta that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Izma’s brow furrows as she takes this in.");
+
+	outputText("\n\n“<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>”");
+
+	outputText("\n\n“<i>Not at all,</i>” you reply. “<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>” This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
+	
+	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labour and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	izmaSprite();
+	
+	outputText("You tell her to head back to camp; she will be more use to her alpha there.");
+
+	outputText("\n\n“<i>Whatever you say.</i>” She grins and wrinkles her nose. “<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>” You leave Izma to pack up her things and go.");
+
+	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 //Get a tiger shark tooth

@@ -102,7 +102,7 @@ package classes.Scenes.Places.Farm
 			}
 			
 			// If Sophie is producing, count up time since last egg and gib a new one when ready
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1)
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] > 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1)
 			{
 				if (flags[kFLAGS.FARM_EGG_COUNTDOWN] == 0)
 				{
@@ -483,7 +483,7 @@ package classes.Scenes.Places.Farm
 			{
 				if (!firstInsert) outputText("\n\n");
 				firstInsert = false;
-				outputText("Amily is in the pepper patch with a trowel, happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
+				outputText("Amily is in the pepper patch with a trowel happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
 				
 			}
 			
@@ -492,7 +492,7 @@ package classes.Scenes.Places.Farm
 			{
 				if (!firstInsert) outputText("\n\n");
 				firstInsert = false;
-				outputText("You cannot see Jojo, but you have no doubt he was aware of your presence the moment you arrived and that he’s somewhere nearby, watching.");
+				outputText("You cannot see Jojo but you have no doubt he was aware of your presence the moment you arrived, and that he’s somewhere nearby, watching.");
 			}
 			
 			// Bimbo Sophie
@@ -500,7 +500,31 @@ package classes.Scenes.Places.Farm
 			{
 				if (!firstInsert) outputText("\n\n");
 				firstInsert = false;
-				outputText("You cannot see Sophie, but distinctive coos and giggles are coming from the hen coop.");
+				outputText("You cannot see Sophie but distinctive coos and giggles are coming from the hen coop.");
+			}
+			
+			// Regular Sophie
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("Sophie has put together a huge nest on top of the hen coop from which she pensively stares out at the lake. When she sees you looking she brightens noticeably and begins to preen her plumage.");
+			}
+			
+			// Izma
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("Izma is sitting in Whitney’s old spot below the oak tree, curled up in a book.");
+			}
+			
+			// Isabella
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("Isabella is hauling steel canisters in and out of the milking barn, singing merrily to herself as she does.");
 			}
 			
 			farmMenu();
@@ -511,26 +535,43 @@ package classes.Scenes.Places.Farm
 			menu();
 			addButton(4, "Slaves", slavesAtFarmMenu);
 			addButton(5, "Lovers", loversAtFarmMenu);
+			addButton(6, "Followers", followersAtFarmMenu);
+		}
+		
+		private function slavesAtFarm():void
+		{
+			menu();
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", kGAMECLASS.jojoScene.corruptCampJojo);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) addButton(2, "Sophie", kGAMECLASS.sophieBimbo.approachBimboSophieInCamp);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", kGAMECLASS.vapula.callSlaveVapula);
+			
+			addButton(9, "Back", farmMenu);
 		}
 		
 		private function followersAtFarmMenu():void
 		{
 			menu();
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", kGAMECLASS.jojoScene.corruptCampJojo);
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) addButton(2, "Sophie", kGAMECLASS.sophieBimbo.approachBimboSophieInCamp);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
 			
-			addButton(9, "Back", farmMenu);
+			addButton(0, "Back", farmMenu);
 		}
 		
 		private function loversAtFarmMenu():void
 		{
 			menu();
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(0, "Izma", kGAMECLASS.izmaScene.izmaFollowerMenu);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", eventParser, 9999);
 			
-			addButton(0, "Back", farmMenu);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", kGAMECLASS.isabellaFollowerScene.callForFollowerIsabella);
+			
+			addButton(0, "Back, farmMenu);
 		}
 	}
 
