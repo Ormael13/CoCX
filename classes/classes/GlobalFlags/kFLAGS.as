@@ -1111,8 +1111,8 @@ public static const FOLLOWER_PRODUCTION_SOPHIE:int                              
 public static const FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE:int                                   = 1103;
 public static const FARM_EGG_STORED:int                                   = 1104;
 public static const FARM_EGG_COUNTDOWN:int                                   = 1105;
-public static const UNKNOWN_FLAG_NUMBER_01106:int                                   = 1106;
-public static const UNKNOWN_FLAG_NUMBER_01107:int                                   = 1107;
+public static const FOLLOWER_PRODUCTION_VAPULA:int                                   = 1106;
+public static const FOLLOWER_AT_FARM_VAPULA_GIBS_MILK:int                                   = 1107;
 public static const UNKNOWN_FLAG_NUMBER_01108:int                                   = 1108;
 public static const UNKNOWN_FLAG_NUMBER_01109:int                                   = 1109;
 public static const UNKNOWN_FLAG_NUMBER_01110:int                                   = 1110;

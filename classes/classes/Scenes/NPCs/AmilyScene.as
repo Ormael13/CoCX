@@ -5516,6 +5516,8 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
 				
 				outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes to you [master].</i>”");
+				
+				throw new Error("Gibs item.");
 			}
 			
 			menu();

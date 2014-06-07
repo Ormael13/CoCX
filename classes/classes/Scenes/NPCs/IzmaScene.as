@@ -1591,7 +1591,7 @@ public function izmaFollowerMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(1, "", null);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(2, "", null);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(6, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
@@ -1776,6 +1776,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 }
 
 private function izmaPreg():void {
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) return;
 	//PREGGO CHANCES
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;

@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Vapula extends NPCAwareContent
 	{
@@ -152,8 +153,23 @@ package classes.Scenes.NPCs
 		{
 			if (output) {
 				clearOutput();
-				outputText("You gently tap Vapula on her shoulder and tell her you intend to put her goddess-like body to use.  She grunts at first but quickly smiles at you kinkily, letting you see her fangs as she voraciously stares at your crotch. You tear open the rags she's stitched together and cup her bouncy breasts. She swiftly responds with a passionate kiss, moaning in lust and quickly undressing you as you literally tongue-fuck each other. One of her hands darts at your crotch, slowly massaging it as she presses her body against your own, letting you feel the warmth of her jiggly bosom against your chest. You decide to return the favor; moving your own hands down, you slap her firm-yet-ample ass, getting a good grope of her purple flesh; your other hand starts exploring the depth of her vaginal recesses. She pulls back and openly cries in pleasure, her whole body shaking between your arms, a trickle of delicious succubus-saliva hanging between your lips.  After a few minutes of playful teasing, you release her; she stares at you with longing and flirtatious eyes.");
-				outputText("\n\n\"<i>Want to have some fun, " + player.short + "?</i>\"");
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0)
+				{
+					outputText("You gently tap Vapula on her shoulder and tell her you intend to put her goddess-like body to use.  She grunts at first but quickly smiles at you kinkily, letting you see her fangs as she voraciously stares at your crotch. You tear open the rags she's stitched together and cup her bouncy breasts. She swiftly responds with a passionate kiss, moaning in lust and quickly undressing you as you literally tongue-fuck each other. One of her hands darts at your crotch, slowly massaging it as she presses her body against your own, letting you feel the warmth of her jiggly bosom against your chest. You decide to return the favor; moving your own hands down, you slap her firm-yet-ample ass, getting a good grope of her purple flesh; your other hand starts exploring the depth of her vaginal recesses. She pulls back and openly cries in pleasure, her whole body shaking between your arms, a trickle of delicious succubus-saliva hanging between your lips.  After a few minutes of playful teasing, you release her; she stares at you with longing and flirtatious eyes.");
+					outputText("\n\n\"<i>Want to have some fun, " + player.short + "?</i>\"");
+				}
+				else
+				{
+					outputText("Vapula mooches over when you call her name, resentfully kicking an imp out of the way as she does. “<i>Yes, [master]?</i>” she says, with exaggerated sweetness.");
+					
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 1)
+					{
+						flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] = 2;
+						outputText("\n\nYou wordlessly hold out your hand. Leering, Vapula places some bottled succubus milk into it.");
+						
+						throw new Error("Gib item.");
+					}
+				}
 			}
 			//Option: Appearance
 			//Option: Talk
@@ -180,10 +196,78 @@ package classes.Scenes.NPCs
 			//Requires bipedal-ness
 			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = spankVapulaLikeABoss;
 			else threesome = vapulaThreesomeMenu;
+			
 			choices("Appearance", fapulaFapfapfapAppearance,
 					"Talk", talkToVapulaForSomeReason,
 					"Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome, "Spank", spank,
 					"", 0, "", 0, "", 0, "Leave", camp.campSlavesMenu);
+					
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(6, "Go Camp", backToCamp);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 0) addButton(7, "Harvest Milk", harvestMilk);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
+					
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function sendToFarm():void
+		{
+			clearOutput();
+			
+			outputText("You tell your succubus concubine that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Vapula laughs long and hard at this.");
+
+			outputText("\n\n“<i>Good one [master],</i>” she guffaws. “<i>Me! Working on a farm! Taking orders from a dog! You’ve got such a wicked sense of humor, I wish I could coil it and suck it dry. You... you really can’t be serious about this, can you?</i>” she asks, sobering as she catches your expression.");
+
+			outputText("“<i>I am. Her working with a succubus will teach her just as important a lesson as it will you, slaving in the dirt for my benefit. Don’t worry... I’ll be over to check up on you frequently, and if you’re </i>really<i> good I’ll give you something better to milk than your average cow when I do.</i>” ");
+
+			outputText("Vapula argues for a while longer, but you stand firm and eventually, complaining bitterly under her breath, the succubus stomps off in the direction of the lake. It’s difficult to believe she will be anything like a competent worker, you think, and the cloud of imps she will inevitably take with her means she’s pretty dubious in the protection stakes too; on the other hand, such close exposure to an out-and-out demon will surely have an interesting effect on Whitney.");
+			
+			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 1;
+			
+			doNext(13);
+		}
+		
+		private function backToCamp():void
+		{
+			clearOutput();
+			
+			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Vapula fist pumps the sky.");
+
+			outputText("\n\n“<i>Yessssss! You will NOT regret this, [master]. Oh, I am SO out of here!</i>” She practically sprints out of the farm yard, leaving you to laugh and then cough in the dust cloud she leaves.");
+			
+			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 0;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function harvestMilk():void
+		{
+			clearOutput();
+			
+			outputText("You tell Vapula that you want her hooked up to a milking machine whenever possible; you need her fluids.");
+
+			outputText("\n\n“<i>Ooh, so that’s why you wanted me to come out here!</i>” Vapula grins and her fingers reach for a breast, already fantasising about insistent pressure on her nipples.");
+			
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("“<i>It’ll sure as hell beat whatever disgusting thing the bitch would have me doing instead. Why don’t you make her build a concentration machine? Lethice has loads; makes one dose of cream go so much further.</i>”");
+			else outputText("“<i>As you insist, [master]. It’ll sure as hell beat working.</i>”");
+			
+			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 1;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function stopHarvest():void
+		{
+			clearOutput();
+			
+			outputText("You tell Vapula to stop producing succubus milk; you’re practically drowning in the stuff.");
+
+			outputText("\n\n“<i>Well, that was the whole idea, [master]. Sure you don’t want to drink some more? Alright, alright!</i>” A familiarly sulky expression descends on the demon’s face as you deny her her second most favourite activity.");
+			
+			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 0;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 		}
 
 //Vapula Appearance - this bitch is purpler than a Nigerian (Z)

@@ -104,6 +104,8 @@ public function corruptCampJojo():void {
 			outputText("\n\nYou wordlessly hold out your hand. Trembling, Jojo lays an incubus draft on it.");
 			
 			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”");
+			
+			throw new Error("Gibs item.");
 		}
 		else
 		{
