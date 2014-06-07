@@ -21,6 +21,12 @@
 //const FARM_DISABLED:int = 464;
 
 public function farmExploreEncounter():void {
+
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] > 0)
+	{
+		farmCorruption.rootScene();
+	}
+	
 	var temporary:Number = 0;
 	//Farm not yet discovered
 	if(player.statusAffectv1(StatusAffects.MetWhitney) < 2) {
@@ -86,6 +92,7 @@ public function farmExploreEncounter():void {
 		addButton(9,"Leave",eventParser,13);		
 	}		
 }
+
 //[YES]
 private function whitneyMilkerHookup(breast:Boolean = true):void {
 	spriteSelect(62);

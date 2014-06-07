@@ -2048,10 +2048,6 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.caressAmilyHaveSex();
 	}
-	else if (eventNo == 2427)
-	{
-		amilyScene.amilyFollowerEncounter();
-	}
 	else if (eventNo == 2429)
 	{
 		amilyScene.talkToAmilyCamp();

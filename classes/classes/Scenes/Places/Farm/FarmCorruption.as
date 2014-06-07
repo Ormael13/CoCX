@@ -83,8 +83,16 @@ package classes.Scenes.Places.Farm
 			// Now figure out how many gems we're gonna get for the day
 			flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] += farmValue();
 
+			// If Amily is producing, stack up some milks to gib
+			if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 1 && flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1)
+			{
+				flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
+			}
+			
 			// Increment days since last paid out
 			flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] += 1;
+			
+			return modValue;
 		}
 
 		public function farmProtection():int
@@ -166,7 +174,7 @@ package classes.Scenes.Places.Farm
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] == 1) fValue += 1;
 
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_MARB] == 1) fValue == 2;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 1) fValue == 2;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) fValue += 3;
 			else if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 2) fValue += 7;
@@ -384,6 +392,36 @@ package classes.Scenes.Places.Farm
 			// (Option never displayed again, -5 Corruption)
 			dynStats("cor-", 5);
 			doNext(13);
+		}
+		
+		public function rootScene():void
+		{
+			clearOutput();
+			spriteSelect(62);
+			
+			var insertions:int = 0;
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0)
+			{
+				outputText("Amily is in the pepper patch with a trowel, happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
+				insertions++;
+			}
+			
+			farmMenu();
+		}
+		
+		public function farmMenu():void
+		{
+			menu();
+			addButton(4, "Slaves", followersAtFarmMenu);
+		}
+		
+		private function followersAtFarmMenu():void
+		{
+			menu();
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
+			
+			addButton(9, "Back", farmMenu);
 		}
 	}
 

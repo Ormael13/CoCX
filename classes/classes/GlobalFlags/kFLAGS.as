@@ -1099,10 +1099,10 @@ public static const FARM_CORRUPTION_FIRST_DATE:int                              
 public static const FOLLOWER_AT_FARM_MARBLE:int                                   = 1091;
 public static const FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT:int                                   = 1092;
 public static const FARM_CORRUPTION_GEMS_WAITING:int                                   = 1093;
-public static const UNKNOWN_FLAG_NUMBER_01094:int                                   = 1094;
-public static const UNKNOWN_FLAG_NUMBER_01095:int                                   = 1095;
-public static const UNKNOWN_FLAG_NUMBER_01096:int                                   = 1096;
-public static const UNKNOWN_FLAG_NUMBER_01097:int                                   = 1097;
+public static const FARM_UPGRADES_REFINERY:int                                   = 1094;
+public static const WHITNEY_CORRUPTION_COMPLETE:int                                   = 1095;
+public static const FOLLOWER_PRODUCTION_AMILY:int                                   = 1096;
+public static const FARM_SUCCUMILK_STORED:int                                   = 1097;
 public static const UNKNOWN_FLAG_NUMBER_01098:int                                   = 1098;
 public static const UNKNOWN_FLAG_NUMBER_01099:int                                   = 1099;
 public static const UNKNOWN_FLAG_NUMBER_01100:int                                   = 1100;

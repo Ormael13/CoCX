@@ -2399,8 +2399,13 @@ package classes.Scenes.NPCs
 				//If pregnancy not enabled, GTFO
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 0) return;
 			}
+			
 			//Cant repreg if already preg!
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) return;
+			if (flags[kFLAGS.AMILY_INCUBATION] > 0) return;
+			
+			// Cant preg if at the farm
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) return;
+			
 			//25% + gradually increasing cumQ bonus
 			if(rand(4) == 0 || player.cumQ() > rand(1000)) {
 				flags[kFLAGS.AMILY_INCUBATION] = 168;
@@ -2515,7 +2520,13 @@ package classes.Scenes.NPCs
 			else {
 				//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
-				choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",camp.campSlavesMenu);
+				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur, "", 0, "", 0, "", 0, "", 0, "Back", camp.campSlavesMenu);
+				
+				if (flags[kFLAGS.AMILY_INCUBATION] == 0)
+				{
+					addButton(4, "Talk", talkWithCORRUPTCUNTAtFarm);
+					addButton(5, "Farmwork", sendCorruptCuntToFarm);
+				}
 			}
 		}
 
@@ -5473,6 +5484,78 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			doNext(13);
 		}
+		
+		private function sendCorruptCuntToFarm():void
+		{
+			clearOutput();
+			amilySprite();
+			
+			outputText("You tell your pet mouse that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says.");
+
+			outputText("\n\n“<i>You’re... you’re sending me away?</i>” An expression of miserable horror dawns on Amily’s face. “<i>Have... have I done something to offend you [master]? Please punish me any way you see fit, I deserve it, but please don’t take me away from your glorious person!</i>” You laugh fondly.");
+
+			outputText("\n\n“<i>This isn’t a punishment, but I need you to be doing more than sitting around diddling yourself to the thought of servicing me. I’ll visit often and keep you well fed, don’t worry about that - and all that farm work will make you nice and limber for when I’m throwing you around. Go on now.</i>” Slightly mollified but still looking uncertain, Amily gets up off her knees and trundles off in the direction of the lake.");
+			
+			outputText("\n\nShe will make a hard worker for Whitney, you think, but you doubt she will be much use protection wise.");
+			
+			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 1;
+			doNext(13);
+		}
+		
+		private function talkWithCORRUPTCUNTAtFarm():void
+		{
+			clearOutput();
+			amilySprite();
+			
+			outputText("Amily is kneeling before you before you’ve even finished calling her name. She looks a bit dusty but her pussy gleams cleanly and invitingly.");
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] == 1)
+			{
+				flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
+				if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] > 0) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY]--;
+				outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
+				
+				outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes to you [master].</i>”");
+			}
+			
+			menu();
+			if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(0, "Harvest Milk", harvestMilk);
+			else addButton(0, "Stop Harvesting", stopHarvestingMilk);
+			addButton(1, "Chat", talkWithCORRUPTCUNT, false);
+			addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function harvestMilk():void
+		{
+			clearOutput();
+			amilySprite();
+			
+			outputText("You tell Amily that you want her hooked up to a milking machine whenever possible; you need her fluids.");
+
+			outputText("\n\n“<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>” Amily quivers, staining the ground beneath her with pussy juices at the thought.");
+			
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>”");
+			else outputText("\n\n“<i>It will be an honour, [master]!</i>”");
+			
+			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function stopHarvestingMilk():void
+		{
+			clearOutput();
+			amilySprite();
+			
+			outputText("You tell Amily to stop producing succubus milk; you’re practically drowning in the stuff.");
+
+		outputText("\n\n“<i>Ooh... what a fabulous idea.</i>” Amily moans and begins to paw at her vagina. You cough deliberately before she can immerse herself entirely in the fantasy. “<i>O-of course [master]. I’ll stop immediately.</i>”");
+			
+			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 0;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
 		private function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
 			outputText("", true);
 			amilySprite();
@@ -5777,7 +5860,8 @@ package classes.Scenes.NPCs
 
 				outputText("You chuckle a little and tell her you'll think about it.  As you leave, she begins to masturbate, no doubt fantasizing about being used by a tentacle beast.");
 			}
-			doNext(13);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(13);
+			else doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 		}
 
 

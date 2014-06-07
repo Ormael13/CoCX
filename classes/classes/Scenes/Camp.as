@@ -998,7 +998,7 @@ public function campLoversMenu():void {
 	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
 	if (hel != null) addButton(2,"Helia",hel);
 	if (isabellaButt != null) addButton(3,"Isabella",isabellaButt);
-	if (izma != null) addButton(4,"Izma",izmaEvent);
+	if (izmaEvent != null) addButton(4,"Izma",izmaEvent);
 	addButton(5,"Kiha",kihaButt);
 	if (marbleEvent != null) addButton(6,"Marble",marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
@@ -1008,7 +1008,7 @@ public function campLoversMenu():void {
 public function campSlavesMenu():void {
 	clearOutput();
 	var vapula2:Function = null;
-	var amilyEvent:Number = 0;
+	var amilyEvent:Function = null;
 	var ceraph:Number = 0;
 	var sophieEvent:Function = null;
 	var jojoEvent:Function = null;
@@ -1037,7 +1037,7 @@ public function campSlavesMenu():void {
 	//Modified Camp/Follower List Description:
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
-		amilyEvent = 2427;
+		amilyEvent = amilyScene.amilyFollowerEncounter;
 	}
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) {
 		outputText("Your well-endowed, dark-skinned milk-girl is here.  She flicks hopeful eyes towards you whenever she thinks she has your attention.\n\n");
@@ -1045,7 +1045,7 @@ public function campSlavesMenu():void {
 	
 	//choices("Amily",amilyEvent,"Ceraph",ceraph,"Jojo",jojoEvent,"Sophie",sophieEvent,"Vapula",vapula,"",0,"",0,"",0,flags[kFLAGS.GOO_NAME],goo,"Back",1);	
 	menu();
-	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
+	if (amilyEvent != null) addButton(0,"Amily", amilyEvent);
 	if(ceraph > 0) addButton(1,"Ceraph",eventParser,ceraph);
 	if (jojoEvent != null) addButton(2,"Jojo",jojoEvent);
 	if (sophieEvent != null) addButton(3,"Sophie",sophieEvent);
