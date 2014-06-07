@@ -65,31 +65,52 @@ public function jojoMutationOfferNo():void {
 }
 //CORRUPT CAMP JOJO
 public function corruptCampJojo():void {
+	clearOutput();
 	jojoSprite();
-	//Corrupt Amily and Jojo sexings
-	if(flags[kFLAGS.AMILY_FOLLOWER] == 2 && amilyScene.amilyFollower() && campCorruptJojo() && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
-		flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] = 7;
-		hideMenus();
-		amilyTeachingJojoBJ();
-		return;
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0)
+	{
+		//Corrupt Amily and Jojo sexings
+		if(flags[kFLAGS.AMILY_FOLLOWER] == 2 && amilyScene.amilyFollower() && campCorruptJojo() && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
+			flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] = 7;
+			hideMenus();
+			amilyTeachingJojoBJ();
+			return;
+		}
+		//Oh shit goes down! (Wiv Tentacles)
+		if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.findStatusAffect(StatusAffects.TentacleJojo) >= 0) {
+			finter.amilyDiscoversJojoWithTentaclesAndShitOhBoy();
+			return;
+		}
+		//Oh shit goes down! (No tentacles)
+		else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && player.findStatusAffect(StatusAffects.TentacleJojo) < 0) {
+			finter.amilyIsPissedAtYouForRuiningJojo();
+			return;
+		}
+		//Offer lethicite jojo tf if the player is ready
+		if(player.findStatusAffect(StatusAffects.JojoTFOffer) < 0 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
+			jojoMutationOffer();
+			player.createStatusAffect(StatusAffects.JojoTFOffer,0,0,0,0);
+			return;
+		}
+		outputText("Before you call for your corrupted pet, how do you want to use him?", true);
 	}
-	//Oh shit goes down! (Wiv Tentacles)
-	if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.findStatusAffect(StatusAffects.TentacleJojo) >= 0) {
-		finter.amilyDiscoversJojoWithTentaclesAndShitOhBoy();
-		return;
+	else
+	{
+		outputText("Jojo slinks out of a barn when you call his name, hating and loving every step he takes towards you. He looks dusty and worn out but his dick still strains at the sight of you.");
+		
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] == 1)
+		{
+			flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] = 2;
+			outputText("\n\nYou wordlessly hold out your hand. Trembling, Jojo lays an incubus draft on it.");
+			
+			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”");
+		}
+		else
+		{
+			outputText("\n\n“<i>What can I do for [master]?</i>”");
+		}
 	}
-	//Oh shit goes down! (No tentacles)
-	else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && player.findStatusAffect(StatusAffects.TentacleJojo) < 0) {
-		finter.amilyIsPissedAtYouForRuiningJojo();
-		return;
-	}
-	//Offer lethicite jojo tf if the player is ready
-	if(player.findStatusAffect(StatusAffects.JojoTFOffer) < 0 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
-		jojoMutationOffer();
-		player.createStatusAffect(StatusAffects.JojoTFOffer,0,0,0,0);
-		return;
-	}
-	outputText("Before you call for your corrupted pet, how do you want to use him?", true);
+	
 	var tent:Number = 0;
 	if(tentacleJojo() && player.lust >= 33) tent = 2137;
 	var milkHim:Function = null;
@@ -108,18 +129,81 @@ public function corruptCampJojo():void {
 	var sex:Number = 0;
 	if(player.gender > 0 && player.lust >= 33) sex = 2138;
 	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) hairCare = jojoPaysForPerms;
-	choices("Sex",sex,"TentacleSex",tent,"Milk Him",milkHim,"TentacleMilk",tentaMilk,"HairCare",hairCare,"Lay Eggs",eggs,"",0,"",0,"",0,"Back",camp.campSlavesMenu);
+	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", 0, "", 0, "", 0, "Back", camp.campSlavesMenu);
+	
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) addButton(6, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(6, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 0) addButton(7, "Harvest Draft", harvestJojoDraft);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1) addButton(7, "Stop Harvest", stopHarvestJojoDraft);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
-/*OLD FOLLOWER JOJO CODE
-	if(player.hasStatusAffect(StatusAffects.TentacleJojo) >= 0) {
-		outputText("Do you want to use his tentacles or just the mouse?", true);
-		simpleChoices("Tentacles",2137,"Normal",2138,"",0,"",0,"Back",74);
-		return;
-	}
-	masturbateJojo();
-	return;
-}*/
 
+private function harvestJojoDraft():void
+{
+	clearOutput();
+	jojoSprite();
+	
+	outputText("You tell Jojo that you want him hooked up to a cock milker whenever possible; you need his fluids.");
+
+	outputText("\n\n“<i>Th-that’s why you wanted me to come out here? To... harvest me?</i>” Jojo’s mouth opens to the monstrosity of it, even as his dick strains helplessly to the selfsame idea.");
+	
+	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry [master], but there’s no device around here that could be used t-to do that. Talk to Mistress Whitney, maybe she can have one built.</i>”");
+	else outputText("\n\n“<i>As you wish master,</i>” he whispers.");
+	
+	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function stopHarvestJojoDraft():void
+{
+	clearOutput();
+	jojoSprite();
+	
+	outputText("You tell Jojo to stop producing incubus draft; you’re practically drowning in the stuff. Jojo closes his eyes, and you grin as you envisage the image you’ve just planted in his mind.");
+
+	outputText("\n\n“<i>Would you like that, Jojo? To literally drown in your [master]’s fluids? Well, maybe later. For now, when you’re fapping to the idea, squirt your useless cum somewhere other than into a bottle, got that?</i>”");
+
+	outputText("\n\n“<i>Yes [master],</i>” says Jojo lowly.");
+
+	flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	jojoSprite();
+	
+	outputText("You tell your pet mouse");
+	if (tentacleJojo()) outputText("-come-tentacle-beast");
+	outputText( "that he is to head towards the lake, find a farm, present himself to the lady who works there and do as she says.");
+
+	outputText("\n\nA mixture of expressions vie for control of Jojo’s face as he swallows this information; you grin as you realise that being at the farm will simply amplify the fact he is both delighted and horrified at being away from you.");
+
+	outputText("\n\n“<i>I need you to be doing more than jacking off to the thought of servicing me, frankly. Don’t worry though, slut, I will always be close by, and if you’re really lucky and work hard, I might come and fuck you so rotten you can’t walk every now and then. Go on now!</i>”");
+
+	outputText("\n\n“<i>As... as you wish [master],</i>” whispers Jojo, and shakily walks off towards the lake. He will make a decent worker for Whitney, you think, and his haunted midnight pacing will at least add a bit of vigilance to the farm.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] = 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	jojoSprite();
+	
+	outputText("You tell him to head back to camp; there are things you need to do to him you can’t do whilst he’s here. Repeatedly. Jojo trembles, manages a bow, and then slowly trails off towards camp.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
 
 public function jojoMutationOfferYes():void {
 	jojoSprite();

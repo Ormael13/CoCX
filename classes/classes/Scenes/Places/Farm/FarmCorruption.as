@@ -2,6 +2,10 @@ package classes.Scenes.Places.Farm
 {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.ConsumableLib;
+	import classes.Items.Consumables.SimpleConsumable;
+	import classes.ItemSlotClass;
+	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 	import classes.StatusAffects;
 	
 	/**
@@ -84,15 +88,88 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] += farmValue();
 
 			// If Amily is producing, stack up some milks to gib
-			if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 1 && flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1)
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 1 && flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1)
 			{
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 1;
 				flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
+			}
+			
+			// If jojo is producing, stack up some drafts to gib
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1 && flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1)
+			{
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] = 1;
+				flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
+			}
+			
+			// If Sophie is producing, count up time since last egg and gib a new one when ready
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1)
+			{
+				if (flags[kFLAGS.FARM_EGG_COUNTDOWN] == 0)
+				{
+					flags[kFLAGS.FARM_EGG_STORED] = 1;
+				}
+				else
+				{
+					flags[kFLAGS.FARM_EGG_COUNTDOWN]--;
+				}
 			}
 			
 			// Increment days since last paid out
 			flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] += 1;
 			
 			return modValue;
+		}
+		
+		public function collectTheGoodies():void
+		{
+			clearOutput();
+			
+			outputText("You can see the following items stashed around the place all haphazard like:");
+			
+			outputText("\n");
+			
+			// Get gems
+			player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
+			flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
+			
+			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0) offerItems(kFLAGS.FARM_SUCCUMILK_STORED);
+			if (flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0) offerItems(kFLAGS.FARM_INCUDRAFT_STORED);
+			if (flags[kFLAGS.FARM_EGG_STORED] > 0) offerItems(kFLAGS.FARM_EGG_STORED);
+		}
+		
+		private function getItemObj(flag:int):SimpleConsumable
+		{
+			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
+			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
+			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE])];
+		}
+		
+		private function offerItems(flag:int):void
+		{
+			outputText("\n");
+			
+			outputText("<b>");
+			
+			if (flags[flag] > 1) outputText(flags[flag] + "x ");
+			outputText(getItemObj(flag).longName);
+			
+			outputText("</b>");
+			outputText("\n");
+		}
+		
+		private function takeItems(flag:int):void
+		{
+			var item:SimpleConsumable = getItemObj(flag);
+			
+			if (flag == kFLAGS.FARM_EGG_STORED)
+			{
+				flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
+			}
+			
+			inventory.takeItem(item);
+			flags[flag]--;
+			
+			doNext(collectTheGoodies);
 		}
 
 		public function farmProtection():int
@@ -399,12 +476,31 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			spriteSelect(62);
 			
-			var insertions:int = 0;
+			var firstInsert:Boolean = true;
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0)
+			// Amily
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
 			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
 				outputText("Amily is in the pepper patch with a trowel, happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
-				insertions++;
+				
+			}
+			
+			// Jojo
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("You cannot see Jojo, but you have no doubt he was aware of your presence the moment you arrived and that he’s somewhere nearby, watching.");
+			}
+			
+			// Bimbo Sophie
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("You cannot see Sophie, but distinctive coos and giggles are coming from the hen coop.");
 			}
 			
 			farmMenu();
@@ -413,15 +509,28 @@ package classes.Scenes.Places.Farm
 		public function farmMenu():void
 		{
 			menu();
-			addButton(4, "Slaves", followersAtFarmMenu);
+			addButton(4, "Slaves", slavesAtFarmMenu);
+			addButton(5, "Lovers", loversAtFarmMenu);
 		}
 		
 		private function followersAtFarmMenu():void
 		{
 			menu();
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", kGAMECLASS.jojoScene.corruptCampJojo);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) addButton(2, "Sophie", kGAMECLASS.sophieBimbo.approachBimboSophieInCamp);
 			
 			addButton(9, "Back", farmMenu);
+		}
+		
+		private function loversAtFarmMenu():void
+		{
+			menu();
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
+			
+			addButton(0, "Back", farmMenu);
 		}
 	}
 

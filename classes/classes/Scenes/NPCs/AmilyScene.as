@@ -2524,8 +2524,8 @@ package classes.Scenes.NPCs
 				
 				if (flags[kFLAGS.AMILY_INCUBATION] == 0)
 				{
-					addButton(4, "Talk", talkWithCORRUPTCUNTAtFarm);
-					addButton(5, "Farmwork", sendCorruptCuntToFarm);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(4, "Talk", talkWithCORRUPTCUNTAtFarm);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farmwork", sendCorruptCuntToFarm);
 				}
 			}
 		}
@@ -5522,7 +5522,22 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(0, "Harvest Milk", harvestMilk);
 			else addButton(0, "Stop Harvesting", stopHarvestingMilk);
 			addButton(1, "Chat", talkWithCORRUPTCUNT, false);
+			addButton(2, "Go Camp", backToCamp);
 			addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+		}
+		
+		private function backToCamp():void
+		{
+			clearOutput();
+			amilySprite();
+			
+			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Amily bites her lip, trembling with excitement.");
+
+			outputText("\n\n“<i>Immediately, [master]!</i>” You watch the purple blur disappear over the hill and laugh to yourself.");
+			
+			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 0;
+			
+			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 		}
 		
 		private function harvestMilk():void
@@ -5537,7 +5552,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>”");
 			else outputText("\n\n“<i>It will be an honour, [master]!</i>”");
 			
-			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
 			
 			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 		}

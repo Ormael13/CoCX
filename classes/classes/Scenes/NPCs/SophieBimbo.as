@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Consumables.SimpleConsumable;
 
 	public class SophieBimbo extends NPCAwareContent
 	{
@@ -54,6 +55,8 @@ public function sophieIsInSeason():Boolean {
 }
 
 internal function sophiePregChance():void {
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) return;
+	
 	//25% + gradually increasing cumQ bonus
 	if(rand(4) == 0 || player.cumQ() > rand(1000)) {
 		flags[kFLAGS.SOPHIE_INCUBATION] = 168;
@@ -166,7 +169,9 @@ public function sophieCampLines():void {
 //Approach Texts
 public function approachBimboSophieInCamp(output:Boolean = true):void {
 	sophieSprite();
-	if(output) {
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0)
+	{
+		if(output) {
 		outputText("", true);
 		if(sophieIsInSeason() && player.hasCock()) {
 			//New Sophie Greeting*
@@ -221,7 +226,21 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 				dynStats("lus", 10);
 			}
 		}
+		}
 	}
+	else
+	{
+		if (output)
+		{
+			clearOutput();
+			sophieSprite();
+			
+			outputText("Sophie emerges from the hen coop and wiggles her way over to you when you call her name.");
+
+			outputText("\n\n“<i>Hey babe! I’m just incub... inclu... clued... sitting on some eggs. The nice dog lady says I’m perfectly designed for that!</i>” She pats her vast bottom proudly.");
+		}
+	}
+	
 	menu();
 	if(player.lust < 33 && output) outputText("\n\n<b>You aren't turned on enough right now to make use of Sophie's 'services'.</b>", false);
 	else if(player.lust >= 33) {
@@ -235,7 +254,7 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",daughterCheckup);
 	}
-	if(flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 1) {
+	if(flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		if(flags[kFLAGS.SLEEP_WITH] != "Sophie") {
 			if(output) outputText("\n\nYou could invite her to share the bed with you at night.");
 			addButton(8,"SleepWith",moveSophieInRepeat);
@@ -246,9 +265,133 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 		}
 	}
 	//choices("Nice Fuck",vag2,"Mean Fuck",vag,"FuckHerAss",anal,"Get Licked",getLicked,"Ovi Elixer",ovi,"Titty-Fuck",titFuck,"",0,"",0,"",0,"Leave",campSlavesMenu);
-	addButton(9,"Leave",camp.campSlavesMenu);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.SOPHIE_INCUBATION] == 0) addButton(1, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(1, "Go Camp", backToCamp);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 0) addButton(2, "Harvest Eggs", harvestEggs);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHOE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(2, "Change Eggs", changeEggs);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(3, "Stop Harvest", stopHarvest);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Leave", camp.campSlavesMenu);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
+private function harvestEggs():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain color whilst she’s here.");
+
+	outputText("\n\n“<i>Of course I can, silly,</i>” she giggles. “<i>Don’t you know about, like, the pretty lil colors that come out of the water over there?</i>” She points in the direction of the lake. “<i>The doggie takes me for like a walk down there all the time. The colors go whoomf, right into where it feels good!</i>” She demonstrates graphically. “<i>What color would you like, babe?</i>”");
+	
+	eggSelector();
+}
+
+private function changeEggs():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You ask Sophie if will change the type of eggs that she is producing for you.");
+	
+	outputText("\n\n<i>Sure thing, babe,</i>” she giggles. “<i>Don’t you know about, like, the pretty lil colors that come out of the water over there? What color would you like, babe?</i>”");
+	
+	eggSelector();
+}
+
+public var eggColors:Array = [
+"Black",
+"Blue",
+"Brown",
+"Pink",
+"Purple",
+"White",
+]
+
+public var eggTypes:Array = [
+consumable.L_BLKEG,
+consumable.L_BLUEG,
+consumable.L_BRNEG,
+consumable.L_PNKEG,
+consumable.L_PRPEG,
+consumable.L_WHTEG,
+]
+
+private function eggSelector():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	for (var i:int = 0; i < eggColors.length; i++)
+	{
+		addButton(i, eggColors[i], postEggSelector, eggColors[i]);
+	}
+}
+
+private function postEggSelector(selected:String):void
+{
+	clearOutput();
+	sophieSprite();
+	
+	selected = selected.toLowerCase();
+	
+	outputText("\n\n“<i>I’ll make some nice " + selected + " eggs just for you then, good looking,</i>” she says. “<i>I can only make, like, one once a week, though. All the rest gotta be sold. I’ll put it with the weekly earnings, ok?</i>”");
+	
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function stopHarvest():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You tell Sophie to stop giving you eggs; you’d rather she’d put them towards making the farm money.");
+
+	if (silly) outputText("\n\n“<i>I only wish I had your keenly developed financial acumen and, like, grasp of small scale agricultural supply and demand, babe. Whatever you say!</i>”");
+	else outputText("“<i>I only wish I was good with numbers and things,</i>” Sophie sighs wistfully, picking at her bellybutton. “<i>Then I’d know when to give you my eggs and, and when to give them to the doggie. Whatever you say anyways, babe!</i>”");
+	
+	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("“<i>I want you to head towards the lake,</i>” you say to your pet bimbo, “<i>and find a farm. You’re to present yourself to th...</i>“ you stop. Sophie is staring at you in complete incomprehension, fingering herself impulsively.");
+
+	outputText("\n\n“<i>There were a lot of, like, big words in there, babe. What’s a farm?</i>” You sigh.");
+	
+	outputText("\n\nIt takes you a while and you need to draw several diagrams in the dust, but eventually Sophie gets the picture.");
+
+	outputText("\n\n“<i>Ooh, I’m going on, like, an adventure!</i>” She giggles excitedly, bouncing up and down. If there is one thing the harpy can do, it’s bounce. “<i>I’m gonna milk cows and lay lotsa eggs for the nice dog lady and, and you’ll visit sometimes and we’ll fuck, right?</i>” You confirm that will be the case. Sophie claps with glee, and then begins to hop-glide her way towards the lake. She’ll be pretty useless as a worker or a protector for Whitney, you think, but she will easily make up for that in egg production.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 2;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	sophieSprite();
+	
+	outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Sophie’s face falls a bit.");
+
+	outputText("\n\n“<i>Aww, I was having fun here, too. Oh well!</i>” Her disappointment lasts for as long as it takes her to flap over the gate, after which one of her own feathers distracts her. Luckily, the wind is blowing in the direction of your camp.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 0;
+	
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+}
 
 private function bimboSophieSexMenu():void {
 	clearOutput();
