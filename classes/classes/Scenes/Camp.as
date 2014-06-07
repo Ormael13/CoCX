@@ -817,20 +817,20 @@ public function followersCount():Number {
 	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) counter++;
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) counter++;
 	if(followerShouldra()) counter++;
-	if(sophieFollower()) counter++;
+	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if(helspawnFollower()) counter++;
 	return counter;
 }
 public function slavesCount():Number {
 	var counter:Number = 0;
-	if(latexGooFollower()) counter++;
-	if(vapulaSlave()) counter++;
-	if(campCorruptJojo()) counter++;
-	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) counter++;
+	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
+	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
+	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
+	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
 	//Bimbo sophie
-	if(bimboSophie()) counter++;
+	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if(ceraphIsFollower()) counter++;
-	if(milkSlave()) counter++;
+	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
 public function loversCount():Number {
@@ -838,9 +838,9 @@ public function loversCount():Number {
 	if(arianScene.arianFollower()) counter++;
 	if(followerHel()) counter++;
 	//Izma!
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) counter++;
-	if(isabellaFollower()) counter++;
-	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) counter++;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if(followerKiha()) counter++;
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
@@ -892,7 +892,7 @@ public function campLoversMenu():void {
 		kihaButt = kihaScene.encounterKiha;
 	}
 	//Isabella
-	if(isabellaFollower()) {
+	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 		isabellaButt = isabellaFollowerScene.callForFollowerIsabella;
 		if(model.time.hours >= 21 || model.time.hours <= 5) outputText("Isabella is sound asleep in her bunk and quietly snoring.", false);
 		else if(model.time.hours == 6) outputText("Isabella is busy eating some kind of grain-based snack for breakfast.  The curly-haired cow-girl gives you a smile when she sees you look her way.", false);
@@ -912,9 +912,9 @@ public function campLoversMenu():void {
 				izzyCreeps[izzyCreeps.length] = 1;
 			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 2;
-			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
+			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0)
 				izzyCreeps[izzyCreeps.length] = 3;
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
 				izzyCreeps[izzyCreeps.length] = 4;
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
@@ -943,12 +943,12 @@ public function campLoversMenu():void {
 		outputText("\n\n", false);		
 	}
 	//Izma
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n", false);
 		izmaEvent = izmaScene.izmaFollowerMenu;
 	}
 	//MARBLE
-	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
+	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
 		//Normal Murbles
@@ -996,11 +996,11 @@ public function campLoversMenu():void {
 	menu();
 	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
 	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
-	addButton(2,"Helia",hel);
-	addButton(3,"Isabella",isabellaButt);
-	addButton(4,"Izma",izmaEvent);
+	if (hel != null) addButton(2,"Helia",hel);
+	if (isabellaButt != null) addButton(3,"Isabella",isabellaButt);
+	if (izma != null) addButton(4,"Izma",izmaEvent);
 	addButton(5,"Kiha",kihaButt);
-	addButton(6,"Marble",marbleEvent);
+	if (marbleEvent != null) addButton(6,"Marble",marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
 	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",kGAMECLASS.desert.antsScene.introductionToPhyllaFollower);
 	addButton(9,"Back",eventParser,1);
@@ -1013,33 +1013,33 @@ public function campSlavesMenu():void {
 	var sophieEvent:Function = null;
 	var jojoEvent:Function = null;
 	var goo:Function = null;
-	if(vapulaSlave()) {
+	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 		vapula.vapulaSlaveFlavorText();
 		outputText("\n\n");
 		vapula2 = vapula.callSlaveVapula;
 	}
 	//Bimbo Sophie
-	if(bimboSophie()) {
+	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		sophieBimbo.sophieCampLines();
 		sophieEvent = sophieBimbo.approachBimboSophieInCamp;
 	}
-	if(latexGooFollower()) {
+	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) {
 		outputText(flags[kFLAGS.GOO_NAME] + " lurks in a secluded section of rocks, only venturing out when called for or when she needs to gather water from the stream.\n\n");
 		goo = latexGirl.approachLatexy;
 	}
 	if(ceraphIsFollower()) ceraph = 3041;
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
-	if(campCorruptJojo()) {
+	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) {
 		outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 		jojoEvent = jojoScene.corruptCampJojo;
 	}
 	//Modified Camp/Follower List Description:
-	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
+	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 		amilyEvent = 2427;
 	}
-	if(milkSlave()) {
+	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) {
 		outputText("Your well-endowed, dark-skinned milk-girl is here.  She flicks hopeful eyes towards you whenever she thinks she has your attention.\n\n");
 	}
 	
@@ -1047,11 +1047,11 @@ public function campSlavesMenu():void {
 	menu();
 	if(amilyEvent > 0) addButton(0,"Amily",eventParser,amilyEvent);
 	if(ceraph > 0) addButton(1,"Ceraph",eventParser,ceraph);
-	addButton(2,"Jojo",jojoEvent);
-	addButton(3,"Sophie",sophieEvent);
-	addButton(4,"Vapula",vapula2);
-	if(milkSlave()) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
-	addButton(8,flags[kFLAGS.GOO_NAME],goo);
+	if (jojoEvent != null) addButton(2,"Jojo",jojoEvent);
+	if (sophieEvent != null) addButton(3,"Sophie",sophieEvent);
+	if (vapula2 != null) addButton(4,"Vapula",vapula2);
+	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
+	if (goo != null) addButton(8,flags[kFLAGS.GOO_NAME],goo);
 	addButton(9,"Back",eventParser,1);
 }
 
@@ -1088,7 +1088,7 @@ public function campFollowers():void {
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
-	if(sophieFollower()) {
+	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		if(rand(5) == 0) outputText("Sophie is sitting by herself, applying yet another layer of glittering lip gloss to her full lips.\n\n");
 		else if(rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 		else if(rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
@@ -1234,7 +1234,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
 		//Marble Sleepies
-		if(marbleScene.marbleAtCamp() && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble") {
+		if(marbleScene.marbleAtCamp() && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 			if(marbleScene.marbleNightSleepFlavor()) {
 				sleepRecovery(false);
 				return;
@@ -1244,7 +1244,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			arianScene.sleepWithArian();
 			return;
 		}
-		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower())) {
+		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			//Night Time Snuggle Alerts!*
 			//(1) 
 			if(rand(4) == 0) {
