@@ -70,7 +70,9 @@
 				"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 				"vagorass"					: function(thisPtr:*):* { return (thisPtr.player.hasVagina() ? thisPtr.vaginaDescript() : thisPtr.assholeDescript()); },
 				"weapon"					: function(thisPtr:*):* { return thisPtr.player.weaponName;},
-				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;}
+				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName; },
+				
+				"latexyname"				: function(thisPtr:*):* { return thisPtr.flags[kFLAGS.GOO_NAME]; }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}
 
 		}

@@ -576,7 +576,39 @@ public function approachLatexy():void {
 	addButton(0,"Feed Her",feedLatexy);
 	if(player.gender > 0 && player.lust >= 33) addButton(1,"Use Her",useLatexy);
 	addButton(3,"Breast Size",setLatexysBustSize);
-	addButton(4,"Dick Options",changeGooDick);
+	addButton(4, "Dick Options", changeGooDick);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(5, "Go Camp", backToCamp);
+}
+
+private function sendToFarm():void
+{
+	clearOutput();
+	
+	outputText("You tell your goo pet that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. The word “lake” has the effect you expected it would have; joy creases [latexyname]’s liquid face as you mention the Promised Land.");
+
+	outputText("\n\n“<i>No sneaking off,</i>” you warn. “<i>I want you to work hard and earn the fluids you’ll be given.</i>”");
+
+	outputText("\n\n“<i>As you wish [master],</i>” she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the wilful goo some good.");
+	
+	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 1;
+	
+	doNext(13);
+}
+
+private function backToCamp():void
+{
+	clearOutput();
+	
+	outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. [latexyname] pauses and then glances over towards the lake, clearly unhappy at the prospect of being torn away from it. However, she knows her place.");
+	
+	outputText("\n\nYou watch the creature make its slow, ponderous progress back towards camp.");
+
+	//[+1 Obedience and -1 Happiness every two days kept at the farm]
+	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function useLatexy():void {

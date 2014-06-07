@@ -114,6 +114,22 @@ package classes.Scenes.Places.Farm
 				}
 			}
 			
+			// If Vapula is producing, stack up some milks to gib
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1)
+			{
+				flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
+				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
+				
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 1;
+			}
+			
+			// If Latexy is at the farm, further modify her status values
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
+			{
+				kGAMECLASS.latexGirl.gooHappiness( -0.5);
+				kGAMECLASS.latexGirl.gooObedience(  0.5);
+			}
+			
 			// Increment days since last paid out
 			flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] += 1;
 			
@@ -527,6 +543,22 @@ package classes.Scenes.Places.Farm
 				outputText("Isabella is hauling steel canisters in and out of the milking barn, singing merrily to herself as she does.");
 			}
 			
+			// Vapula
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("Vapula is slouched against a barn wall, looking like the world’s grumpiest one woman gang. Not even a number of comatose imps nearby seem to have been able to cheer her up.");
+			}
+			
+			// Latexy
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
+			{
+				if (!firstInsert) outputText("\n\n");
+				firstInsert = false;
+				outputText("You can see something black shimmering wetly underneath Whitney’s porch which can only be a certain latex goo.");
+			}
+			
 			farmMenu();
 		}
 		
@@ -549,6 +581,8 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) addButton(2, "Sophie", kGAMECLASS.sophieBimbo.approachBimboSophieInCamp);
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", kGAMECLASS.vapula.callSlaveVapula);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(4, flags[kFLAGS.GOO_NAME], kGAMECLASS.latexGirl.approachLatexy);
 			
 			addButton(9, "Back", farmMenu);
 		}
