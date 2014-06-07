@@ -2356,17 +2356,6 @@ public function doEvent(eventNo:Number):void
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 2;
 		rathazul.chooseArmorOrRobes();
 	}
-	else if (eventNo == 3041)
-	{
-		if (rand(24) == 0 && player.hasCock())
-			ceraphFollowerScene.catgirlEncounter();
-		else if (rand(24) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00293] == 0)
-			ceraphFollowerScene.carephCorruptionSlaves();
-		else if (rand(24) <= 1 && player.gender > 0)
-			ceraphFollowerScene.encounterZetsuko();
-		else
-			ceraphFollowerScene.ceraphFollowerAppearance();
-	}
 	else if (eventNo == 3077)
 	{
 		telAdre.lottie.gotInShapeComedyDeclineLottie();

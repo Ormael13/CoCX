@@ -23,6 +23,24 @@ package classes.Scenes.NPCs
 		{
 			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] > 0;
 		}
+		
+		public function ceraphFollowerEncounter(forceCeraph:Boolean = false):void
+		{
+			if (forceCeraph)
+			{
+				ceraphFollowerAppearance();
+				return;
+			}
+			
+			if (rand(24) == 0 && player.hasCock())
+				catgirlEncounter();
+			else if (rand(24) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00293] == 0)
+				carephCorruptionSlaves();
+			else if (rand(24) <= 1 && player.gender > 0)
+				encounterZetsuko();
+			else
+				ceraphFollowerAppearance();
+		}
 
 //[Actually Ceraph] - 
 		public function ceraphFollowerAppearance(output:Boolean = true):void
@@ -1452,7 +1470,7 @@ package classes.Scenes.NPCs
 				//[(Biggest )Penis] [Smallest Penis][Vagina] [TopBreastRow] [2ndBreastRow] [3rdBreastRow]
 				choices("Penis", wang, "Smallest Penis", smallestWang, "Vagina", vag, "Breasts", breasts, "BreastsRow2", breasts2, "BreastsRow3", breasts3, "", 0, "", 0, "", 0, "Back", ceraphFollowerAppearance);
 			}
-			else doNext(3041);
+			else doNext(ceraphFollowerAppearance);
 		}
 
 		private function ceraphFollowerCockTaking(smallest:Boolean = false):void

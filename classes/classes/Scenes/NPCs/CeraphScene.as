@@ -634,7 +634,7 @@ package classes.Scenes.NPCs
 			if (gameState < 1 || gameState > 2) {
 				//Load ceraph and set up win conditions
 				startCombat(new Ceraph());
-				leave = 3041;
+				leave = ceraphFollowerScene.ceraphFollowerAppearance;
 				//Exit combat
 				gameState = 0;
 				monster.lust = 100;
@@ -674,7 +674,11 @@ package classes.Scenes.NPCs
 				 */
 			}
 			else {
-				if (gameState < 1 || gameState > 2) doNext(3041);
+				if (gameState < 1 || gameState > 2)
+				{
+					menu();
+					addButton(0, "Next", ceraphFollowerScene.ceraphFollowerAppearance);
+				}
 				else cleanupAfterCombat();
 			}
 		}

@@ -1009,7 +1009,7 @@ public function campSlavesMenu():void {
 	clearOutput();
 	var vapula2:Function = null;
 	var amilyEvent:Function = null;
-	var ceraph:Number = 0;
+	var ceraph:Function = null;
 	var sophieEvent:Function = null;
 	var jojoEvent:Function = null;
 	var goo:Function = null;
@@ -1027,7 +1027,7 @@ public function campSlavesMenu():void {
 		outputText(flags[kFLAGS.GOO_NAME] + " lurks in a secluded section of rocks, only venturing out when called for or when she needs to gather water from the stream.\n\n");
 		goo = latexGirl.approachLatexy;
 	}
-	if(ceraphIsFollower()) ceraph = 3041;
+	if (ceraphIsFollower()) ceraph = ceraphFollowerScene.ceraphFollowerEncounter;
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) {
@@ -1045,7 +1045,7 @@ public function campSlavesMenu():void {
 	//choices("Amily",amilyEvent,"Ceraph",ceraph,"Jojo",jojoEvent,"Sophie",sophieEvent,"Vapula",vapula,"",0,"",0,"",0,flags[kFLAGS.GOO_NAME],goo,"Back",1);	
 	menu();
 	if (amilyEvent != null) addButton(0,"Amily", amilyEvent);
-	if(ceraph > 0) addButton(1,"Ceraph",eventParser,ceraph);
+	if (ceraph != null) addButton(1,"Ceraph", ceraph);
 	if (jojoEvent != null) addButton(2,"Jojo",jojoEvent);
 	if (sophieEvent != null) addButton(3,"Sophie",sophieEvent);
 	if (vapula2 != null) addButton(4,"Vapula",vapula2);
