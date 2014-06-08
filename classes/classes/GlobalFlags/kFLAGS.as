@@ -1129,11 +1129,11 @@ public static const WHITNEY_DISABLED_FOR_DAY:int                                
 public static const WHITNEY_DEFURRED:int                                   = 1121;
 public static const WHITNEY_DOM:int                                   = 1122;
 public static const FARM_UPGRADES_MILKTANK:int                                   = 1123;
-public static const UNKNOWN_FLAG_NUMBER_01124:int                                   = 1124;
-public static const UNKNOWN_FLAG_NUMBER_01125:int                                   = 1125;
-public static const UNKNOWN_FLAG_NUMBER_01126:int                                   = 1126;
-public static const UNKNOWN_FLAG_NUMBER_01127:int                                   = 1127;
-public static const UNKNOWN_FLAG_NUMBER_01128:int                                   = 1128;
+public static const QUEUE_BREASTMILKER_UPGRADE:int                                   = 1124;
+public static const QUEUE_COCKMILKER_UPGRADE:int                                   = 1125;
+public static const QUEUE_REFINERY_UPGRADE:int                                   = 1126;
+public static const QUEUE_CONTRACEPTIVE_UPGRADE:int                                   = 1127;
+public static const QUEUE_MILKTANK_UPGRADE:int                                   = 1128;
 public static const UNKNOWN_FLAG_NUMBER_01129:int                                   = 1129;
 public static const UNKNOWN_FLAG_NUMBER_01130:int                                   = 1130;
 public static const UNKNOWN_FLAG_NUMBER_01131:int                                   = 1131;

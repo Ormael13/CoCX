@@ -1060,9 +1060,135 @@ package classes.Scenes.Places.Farm
 			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0) addButton(1, "Cock Milker", investmentCockMilkerNotCorrupt);
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) addButton(2, "Refinery", investmentRefineryNotCorrupt);
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0) addButton(3, "Contraceptive", investmentContraceptiveNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0) addButton(4, "MilkTank", investmentMilktankNotCorrupt);
+			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave()) addButton(4, "MilkTank", investmentMilktankNotCorrupt);
 
 			addButton(9, "Back", dogeNotCorruptYetMenu);
+		}
+
+		private function investmentBreastMilkerNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You say you’d like a breast milker installed, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
+
+			outputText("\n\n“<i>I have a few spare parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+
+			//[Do it][No]
+			menu();
+			addButton(0, "Do it", doBreastMilkerInvestment);
+			addButton(1, "No", investmentGoNotCorrupt);
+		}
+
+		private function doBreastMilkerInvestment():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 1000;
+
+			outputText("\n\nYou silently hand over a hefty bag of gems. Whitney stows it away.");
+
+			outputText("\n\n“<i>Should have that ready to go by tomorrow, if y’all come back then.</i>”");
+
+			flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function investmentCockMilkerNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("\n\nYou say you’d like a semen extractor built, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
+
+			outputText("\n\n“<i>I have a few spare milkin parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+
+			menu();
+			addButton(0, "Do it", doCockMilkerInvestment);
+			addButton(1, "No", investmentGoNotCorrupt);
+		}
+
+		private function doCockMilkerInvestment():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 1000;
+
+			outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
+
+			outputText("\n\n“<i>Should have that ready to go by tomorrow, if y’all come back then.</i>”");
+
+			flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function investmentRefineryNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You say you want a machine built that could concentrate the fluids your followers produce into actual transformatives. Whitney shudders, but is in no position to argue.");
+
+			outputText("\n\n“<i>A refinery, then? I guess it wouldn’t be too hard to throw up a still of sorts and adapt it from there. It’ll cost money though, ‘ticularly if you want it to be used by anyone for anything. If you give me 1500 gems, I kin see what I kin do.</i>”");
+
+			menu();
+			addButton(0, "Do it", doRefineryInvestment);
+			addButton(1, "No", investmentGoNotCorrupt);
+		}
+
+		private function doRefineryInvestment():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 1500;
+
+			outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
+
+			outputText("\n\n“<i>I will try and get... that... ready in a few days time, if y’all come back then.</i>”");
+
+			flags[kFLAGS.QUEUE_REFINERY_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function investmentContraceptiveNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You ask Whitney if she knows of any natural contraceptive that grows in Mareth.");
+
+			outputText("\n\n“<i>The stuff that some of the sharks use, y’mean? Sure. You find it growing in clumps in loamy patches in the forest and along the lake. Most nobody in those parts uses it o’course, owing to them all being locked in a baby arms race with each other.</i>” You say you’d like her to set some land aside and grow it. “<i>If you want. I need seed though, and plenty of compost - only grows in very moist soil as I said. 750 gems can probably make it happen.</i>”");
+
+			menu();
+			addButton(0, "Do it", doContraceptiveInvestment);
+			addButton(1, "No", investmentGoNotCorrupt);
+		}
+
+		private function doContraceptiveInvestment():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 750;
+
+			outputText("You hand over the dough. Whitney stows it away.");
+
+			outputText("\n\n“<i>It doesn’t take long to grow, but it’ll still take time,</i>” she says. “<i>I’ll lay the seeds tomorrow and you’ll be able to start pickin it in a week’s time.</i>”");
+
+			//[“Harvest Contraceptive” option added to main farm menu in 7 days time]
+			doNext(13);
+		}
+
+		private function investmentMilktankNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
 		}
 
 		private function deFurDoge():void
