@@ -72,6 +72,27 @@ package classes.Scenes.Places.Farm
 			return false;
 		}
 
+		public function whitneyDom():Boolean
+		{
+			if (flags[kFLAGS.WHITNEY_DOM] == 1) return true;
+			return false;
+		}
+
+		public function whitneyDefurred():Boolean
+		{
+			if (flags[kFLAGS.WHITNEY_DEFURRED] == 1) return true;
+			return false;
+		}
+
+		public function whitneyHasTattoo():Boolean
+		{
+			if (flags[kFLAGS.WHITNEY_TATTOO_COLLAR] != 0) return true;
+			if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) return true;
+			if (flags[kFLAGS.WHITNEY_TATOO_LOWERBACK] != 0) return true;
+			if (flags[kFLAGS.WHINTEY_TATOO_BUTT] != 0) return true;
+			return false;
+		}
+
 		// Called once per day, check all the followers that have been set to the farm and change whitneys corruption as appropriate
 		// Also going to use this to handle Gem value updates and shit.
 		public function updateFarmCorruption():int
@@ -137,6 +158,19 @@ package classes.Scenes.Places.Farm
 
 					flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 1;
 					flags[kFLAGS.MILK_SIZE] = 0;
+				}
+			}
+
+			// Branding
+			if (flags[kFLAGS.QUEUE_BRANDING_UPGRADE] != 0)
+			{
+				flags[kFLAGS.QUEUE_BRANDING_UPGRADE]++
+
+				if (flags[kFLAGS.QUEUE_BRANDING_UPGRADE] > 2)
+				{
+					flags[kFLAGS.QUEUE_BRANDING_UPGRADE] = 0;
+					flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] = 1;
+					flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] = 1;
 				}
 			}
 
@@ -730,7 +764,8 @@ package classes.Scenes.Places.Farm
 				else addButton(0, "Whitney", dogeCorruptedMissionComplete);
 			}
 
-			addButton(0, "Whitney", eventParser, 9999);
+			if (flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE] == 0) addButton(0, "Whitney", dogeNotCorruptYet);
+			else addButton(0, "Whitney", whitneyCorruptMenu);
 			
 			if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
 			
@@ -1108,16 +1143,17 @@ package classes.Scenes.Places.Farm
 			addButton(1, "", null);
 		}
 
-		private function investmentGoNotCorrupt():void
+		private function investmentMenu():void
 		{
 			menu();
-			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] == 0) addButton(0, "Breast Milker", investmentBreastMilkerNotCorrupt);
-			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilkerNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) addButton(2, "Refinery", investmentRefineryNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptiveNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktankNotCorrupt);
+			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] == 0) addButton(0, "Breast Milker", investmentBreastMilker);
+			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilker);
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) addButton(2, "Refinery", investmentRefinery);
+			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptive);
+			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
 
-			addButton(9, "Back", dogeNotCorruptYetMenu);
+			if (whitneyCorrupt()) addButton(9, "Back", dogeNotCorruptYetMenu);
+			else addButton(9, "Back", dogeCorruptedMissionComplete);
 		}
 
 		private function investmentBreastMilkerNotCorrupt():void
@@ -1125,49 +1161,27 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			whitneySprite();
 
-			outputText("You say you’d like a breast milker installed, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
+			if (!whitneyCorrupt())
+			{
+				outputText("You say you’d like a breast milker installed, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
 
-			outputText("\n\n“<i>I have a few spare parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+				outputText("\n\n“<i>I have a few spare parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+			}
+			else
+			{
+				outputText("You say you’d like a breast milker installed, one that you could make use of. Whitney lets her gaze sink down to your [chest].");
+
+				outputText("\n\n“<i>Want to get closer to nature, [master]?</i>” she says, grinning slyly. “<i>I have a few spare parts knockin around, but most everything will have to be specially ordered if you want it. If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+			}
 
 			//[Do it][No]
 			menu();
 			if (player.gems >= 1000) addButton(0, "Do it", doBreastMilkerInvestment);
-			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
-			addButton(1, "No", turnDownInvestmentNotCorrupt);
+			else addButton(0, "Do it", turnDownInvestment, true);
+			addButton(1, "No", turnDownInvestment);
 		}
 
 		private function doBreastMilkerInvestment():void
-		{
-			clearOutput();
-			whitneySprite();
-
-			player.gems -= 1000;
-
-			outputText("\n\nYou silently hand over a hefty bag of gems. Whitney stows it away.");
-
-			outputText("\n\n“<i>Should have that ready to go by tomorrow, if y’all come back then.</i>”");
-
-			flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] = 1;
-
-			doNext(13);
-		}
-
-		private function investmentCockMilkerNotCorrupt():void
-		{
-			clearOutput();
-			whitneySprite();
-
-			outputText("\n\nYou say you’d like a semen extractor built, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
-
-			outputText("\n\n“<i>I have a few spare milkin parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
-
-			menu();
-			if (player.gems >= 1000) addButton(0, "Do it", doCockMilkerInvestment);
-			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true)
-			addButton(1, "No", turnDownInvestmentNotCorrupt);
-		}
-
-		private function doCockMilkerInvestment():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -1178,24 +1192,82 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Should have that ready to go by tomorrow, if y’all come back then.</i>”");
 
+			flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function investmentCockMilker():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			if (!whitneyCorrupt())
+			{
+				outputText("You say you’d like a semen extractor built, one that you could make use of. Whitney frowns, but doesn’t seem as thrown by this idea as you expected.");
+
+				outputText("\n\n“<i>I have a few spare milkin parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+			}
+			else
+			{
+				outputText("You say you’d like a semen extractor built, one that you could make use of. Whitney bites her lip at the implication.");
+
+				outputText("\n\n“<i>I have a few spare milkin parts knockin around, but most everything will have to be specially ordered if you want that, [master],</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
+			}
+
+			menu();
+			if (player.gems >= 1000) addButton(0, "Do it", doCockMilkerInvestment);
+			else addButton(0, "Do it", turnDownInvestment, true)
+			addButton(1, "No", turnDownInvestment);
+		}
+
+		private function doCockMilkerInvestment():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 1000;
+
+			if (!whitneyCorrupt())
+			{
+				outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
+
+				outputText("\n\n“<i>Should have that ready to go by tomorrow, if y’all come back then.</i>”");
+			}
+			else
+			{
+				outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
+
+				outputText("\n\n“<i>Should have that ready to go by tomorrow, [master]!</i>”");
+			}
+
 			flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] = 1;
 
 			doNext(13);
 		}
 
-		private function investmentRefineryNotCorrupt():void
+		private function investmentRefinery():void
 		{
 			clearOutput();
 			whitneySprite();
 
-			outputText("You say you want a machine built that could concentrate the fluids your followers produce into actual transformatives. Whitney shudders, but is in no position to argue.");
+			if (!whitneyCorrupt())
+			{
+				outputText("You say you want a machine built that could concentrate the fluids your followers produce into actual transformatives. Whitney shudders, but is in no position to argue.");
 
-			outputText("\n\n“<i>A refinery, then? I guess it wouldn’t be too hard to throw up a still of sorts and adapt it from there. It’ll cost money though, ‘ticularly if you want it to be used by anyone for anything. If you give me 1500 gems, I kin see what I kin do.</i>”");
+				outputText("\n\n“<i>A refinery, then? I guess it wouldn’t be too hard to throw up a still of sorts and adapt it from there. It’ll cost money though, ‘ticularly if you want it to be used by anyone for anything. If you give me 1500 gems, I kin see what I kin do.</i>”");
+			}
+			else
+			{
+				outputText("You say you want a machine built that could concentrate the fluids your followers produce into actual transformatives.");
+
+				outputText("\n\n“<i>A refinery, [master]? What a delicious thought.</i>” The dog girl closes her eyes and drifts off into an erotic reverie. You wait patiently until she finally opens her eyes with a sigh and comes back to you. “<i>I guess it wouldn’t be too hard to throw up a still of sorts and adapt it from there. It’ll cost money though, ‘ticularly if you want it to be used by anyone for anything. If you give me 1500 gems, I ‘kin see what I ‘kin do.</i>”");
+			}
 
 			menu();
 			if (player.gems >= 1500) addButton(0, "Do it", doRefineryInvestment);
-			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
-			addButton(1, "No", turnDownInvestmentNotCorrupt);
+			else addButton(0, "Do it", turnDownInvestment, true);
+			addButton(1, "No", turnDownInvestment);
 		}
 
 		private function doRefineryInvestment():void
@@ -1214,19 +1286,28 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function investmentContraceptiveNotCorrupt():void
+		private function investmentContraceptive():void
 		{
 			clearOutput();
 			whitneySprite();
 
-			outputText("You ask Whitney if she knows of any natural contraceptive that grows in Mareth.");
+			if (!whitneyCorrupt())
+			{
+				outputText("You ask Whitney if she knows of any natural contraceptive that grows in Mareth.");
 
-			outputText("\n\n“<i>The stuff that some of the sharks use, y’mean? Sure. You find it growing in clumps in loamy patches in the forest and along the lake. Most nobody in those parts uses it o’course, owing to them all being locked in a baby arms race with each other.</i>” You say you’d like her to set some land aside and grow it. “<i>If you want. I need seed though, and plenty of compost - only grows in very moist soil as I said. 750 gems can probably make it happen.</i>”");
+				outputText("\n\n“<i>The stuff that some of the sharks use, y’mean? Sure. You find it growing in clumps in loamy patches in the forest and along the lake. Most nobody in those parts uses it o’course, owing to them all being locked in a baby arms race with each other.</i>” You say you’d like her to set some land aside and grow it. “<i>If you want. I need seed though, and plenty of compost - only grows in very moist soil as I said. 750 gems can probably make it happen.</i>”");
+			}
+			else
+			{
+				outputText("You ask Whitney if she knows of any natural contraceptive that grows in Mareth.");
+
+				outputText("\n\n“<i>The stuff that some of the sharks use, y’mean? Sure. You find it growing in clumps in loamy patches in the forest and along the lake. Most nobody in those parts uses it o’course, owing to them all being locked in a baby arms race with each other.</i>” You say you’d like her to set some land aside and grow it. “<i>If you want, [master]. I need seed though, and plenty of compost- only grows in very moist soil as I said. 750 gems can probably make it happen.</i>”");
+			}
 
 			menu();
 			if (player.gems >= 750) addButton(0, "Do it", doContraceptiveInvestment);
-			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
-			addButton(1, "No", turnDownInvestmentNotCorrupt);
+			else addButton(0, "Do it", turnDownInvestment, true);
+			addButton(1, "No", turnDownInvestment);
 		}
 
 		private function doContraceptiveInvestment():void
@@ -1236,49 +1317,77 @@ package classes.Scenes.Places.Farm
 
 			player.gems -= 750;
 
-			outputText("You hand over the dough. Whitney stows it away.");
+			if (!whitneyCorrupt())
+			{
+				outputText("You hand over the dough. Whitney stows it away.");
 
-			outputText("\n\n“<i>It doesn’t take long to grow, but it’ll still take time,</i>” she says. “<i>I’ll lay the seeds tomorrow and you’ll be able to start pickin it in a week’s time.</i>”");
+				outputText("\n\n“<i>It doesn’t take long to grow, but it’ll still take time,</i>” she says. “<i>I’ll lay the seeds tomorrow and you’ll be able to start pickin it in a week’s time.</i>”");
+			}
+			else
+			{
+				outputText("You hand over the dough. Whitney stows it away.");
+
+				outputText("\n\n“<i>It doesn’t take long to grow, but it’ll still take time, [master],</i>” she says. “<i>I’ll lay the seeds tomorrow and you’ll be able to start pickin’ it in a week’s time.</i>”");
+			}
 
 			//[“Harvest Contraceptive” option added to main farm menu in 7 days time]
 			flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] = 1;
 			doNext(13);
 		}
 
-		private function investmentMilktankNotCorrupt():void
+		private function investmentMilktank():void
 		{
 			clearOutput();
 			whitneySprite();
 
-			// If Bathgirl normal:
-			if (flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
+			if (!whitneyCorrupt())
 			{
-				outputText("\n\nYou tell Whitney you want her to give [bathgirlName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
+				// If Bathgirl normal:
+				if (flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
+				{
+					outputText("You tell Whitney you want her to give [bathgirlName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
 
-				outputText("\n\n“<i>Wh-what?</i>” says the dog woman, aghast. “<i>The pretty lil’ thing who works in the cowshed? She told me you cured her. She’s so happy an, an now you want to... uncure her?</i>” ");
+					outputText("\n\n“<i>Wh-what?</i>” says the dog woman, aghast. “<i>The pretty lil’ thing who works in the cowshed? She told me you cured her. She’s so happy an, an now you want to... uncure her?</i>” ");
 
-				outputText("\n\nExactly, you say primly. You need her to produce more milk. Whitney looks like she’s going to refuse, but once she’s stared into your unblinking eyes and remembered a few things, she looks at her feet and sighs miserably. “<i>I could probably do that. Because she trusts you, she trusts me, and- 400 gems,</i>” she finishes in a mumble.");
+					outputText("\n\nExactly, you say primly. You need her to produce more milk. Whitney looks like she’s going to refuse, but once she’s stared into your unblinking eyes and remembered a few things, she looks at her feet and sighs miserably. “<i>I could probably do that. Because she trusts you, she trusts me, and- 400 gems,</i>” she finishes in a mumble.");
+				}
+				// If Bathgirl boobed and at camp: 
+				else
+				{
+					outputText("You tell Whitney you want her to build a swimming tank at the farm, then come to your camp, take away your expensively acquired milk slave and install her in it. The dog woman slowly absorbs this.");
+
+					outputText("\n\n“<i>400 gems,</i>” she says finally.");
+				}
 			}
-			// If Bathgirl boobed and at camp: 
 			else
 			{
-				outputText("You tell Whitney you want her to build a swimming tank at the farm, then come to your camp, take away your expensively acquired milk slave and install her in it. The dog woman slowly absorbs this.");
+				if (flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
+				{
+					outputText("You tell Whitney you want her to give [bathslutName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
 
-				outputText("\n\n“<i>400 gems,</i>” she says finally.");
+					outputText("\n\n“<i>[Master] you are so wicked,</i>” the dog woman whispers with overt glee. “<i>Pumpin that silly slut full of growth hormones ‘til all she can think about are her big, juicy tits- oh Gods, gimme gems, 400 should do it, I want to start right now!</i>”");
+				}
+				else
+				{
+					outputText("\n\nYou tell Whitney you want her to build a swimming tank at the farm before coming to your camp, taking away your expensively acquired milk slave and installing her in it. ");
+
+					outputText("\n\n“<i>Of course, [master],</i>” says Whitney, a grin creeping onto her face at the prospect of another slave under her thumb. “<i>400 gems’ll make it happen.</i>”");
+				}
 			}
 
 			menu();
-			if (player.gems >= 400) addButton(0, "Do it", doMilktalkInvestmentNotCorrupt);
-			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
-			addButton(1, "No", turnDownInvestmentNotCorrupt);
+			if (player.gems >= 400) addButton(0, "Do it", doMilktalkInvestment);
+			else addButton(0, "Do it", turnDownInvestment, true);
+			addButton(1, "No", turnDownInvestment);
 		}
 
-		private function doMilktankInvestmentNotCorrupt():void
+		private function doMilktankInvestment():void
 		{
 			clearOutput();
 			whitneySprite();
 
-			outputText("You press the gems into your taskmaster’s hand, turn and leave without another word. Your thoughts turn to huge, delightfully plush brown boobs and luxurious milky baths; it will be well worth it. ");
+			if (!whitneyCorrupt()) outputText("You press the gems into your taskmaster’s hand, turn and leave without another word. Your thoughts turn to huge, delightfully plush brown boobs and luxurious milky baths; it will be well worth it. ");
+			else outputText("You press the gems into your taskmaster’s hand, turn and leave without another word. Your thoughts turn to huge, delightfully plush, brown boobs, of luxurious milky baths; it will be well worth the cost. ");
 
 			// In each case Bath girl reverts to her boobed state and is at farm
 			flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] = 1;
@@ -1291,13 +1400,22 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			whitneySprite();
 
-			// Any “No” option:
-			outputText("Whitney shrugs, nonplussed.");
+			if (!whitneyCorrupt())
+			{
+				// Any “No” option:
+				outputText("Whitney shrugs, nonplussed.");
 
-			if (money) outputText("\n\n“<i>Come back with the money.</i>”");
-			else outputText("\n\n“<i>Come back if you change your mind. With the money.</i>”");
+				if (money) outputText("\n\n“<i>Come back with the money.</i>”");
+				else outputText("\n\n“<i>Come back if you change your mind. With the money.</i>”");
+			}
+			else
+			{
+				outputText("Whitney shrugs with a simper. ");
 
-			investmentGoNotCorrupt();
+				outputText("\n\n“<i>Come back any time if ya change your mind, [master]. S’long you got the money, it won’t be hard to do.</i>”");
+			}
+
+			investmentMenu();
 		}
 
 		private function deFurDoge():void
@@ -1437,7 +1555,432 @@ package classes.Scenes.Places.Farm
 
 		private function dogeCorruptedMissionComplete():void
 		{
+			if (flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] == 1)
+			{
+				brandingAvailableTalk();
+				return;
+			}
 
+			menu();
+			addButton(0, "Appearance", corruptWhitneyAppearance);
+			addButton(1, "Investment", investmentMenu);
+			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 1 || flags[kFLAGS.QUEUE_BRANDING_UPGRADE] == 0) addButton(2, "Branding", brandingMenu);
+		}
+
+		private function corruptWhitneyAppearance():void
+		{
+			outputText("\n\nWhitney is a 5’8” dog ");
+			if (whitneyDefurred()) outputText(" girl");
+			else outputText(" morph")
+			outputText(".");
+
+			if (whitneyDefurred()) outputText(" Her muzzle is suggestive of a golden retriever but really she could be any breed.");
+			else outputText(" Her human transformation has rendered her pretty in a delicate, diffident kind of way.");
+
+			if (whitneyDefurred()) outputText(" In sharp contrast to her otherwise fairly thin features, her lips are plump and a depthless black, shining like wet tar. She constantly moves her tongue over them unconsciously.");
+
+			outputText("\n\nAlthough she continues to dress in the same modest cotton blouses and long skirts she always has, complete with holes cut in to allow her short, perky tail to poke through, the cut of it and the way she moves and swings herself about, livid with arousal and near-constant sexual frustration, makes the demure outfit more perverse than anything a demon could dream up.");
+
+			if (whitneyHasTattoo())
+			{
+				outputText("\n\nShe has ");
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE]);
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0 && flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText("; ");
+				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS]);
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0 && (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0 || flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0)) outputText("; ");
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK]);
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0 && (flags[kFLAGS.WHITNEY_TATTO_LOWERBACK] != 0 || flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0 || flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0)) outputText("; ");
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.WHITNET_TATTOO_BUTT]);
+			}
+
+			if (!whitneyDefurred()) outputText("\n\nHer fur is sandy, dusking to black at her extremities.");
+			else outputText("\n\nHer skin is a sandy colour, and she wears black nail varnish.");
+
+			outputText(" Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair, flecked now with deep, red desire. Whilst she is beyond the softness of youth, it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her small breasts pert against her unprepossessing work-clothes. She has one anus, between her tight asscheeks where it belongs.");
+
+			dogeCorruptedMissionComplete();
+			addButton(0, "", null);
+		}
+
+		private function brandingMenu():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 0)
+			{
+				outputText("\n\nYou idly put an arm around Whitney, drawing her into you. You want her in the right frame of mind before you lead her down this path of inquiry. Her breath is hot and heavy against your [chest], her desire-lit eyes unable to tear away from yours as your hand slides down the curve of her back and round around her enjoyably tight ass. You ask her what she knows about branding.");
+
+				outputText("\n\n“<i>I don’t brand my herd, [master],</i>” she says in a low voice, as you smooth your hand upwards and slip your fingers underneath her skirt. “<i>’s a very cruel practice and without any other farms round there’s no need for it anyway.</i>” But surely she must know of ways to mark cattle, you go on. Ways to make it immediately clear who owns them. You put not-so-subtle emphases on certain words as you touch her sopping vagina, slipping two fingers in easily. “<i>Mayhap... mayhap I do, [master],</i>” the dog woman groans, her breath coming in gulps and hisses as your digits move in her warm wetness. “<i>Somethin’, somethin’ from my granddaddy’s day. If you give me 500 gems and some time, I could... go and make a few things happen...</i>”");
+
+				menu();
+				if (player.gems >= 500) addButton(0, "Do it", getBrandingStuff);
+				else addButton(0, "Do it", dontGetBrandingStuff);
+				addButton(1, "No", dontGetBrandingStuff);
+			}
+		}
+
+		private function getBrandingStuff():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			player.gems -= 500;
+
+			outputText("You stroke at her tiny, bulging button relentlessly until she releases a wordless bark of ecstasy, soaking your hand with a gratifyingly large gush of femcum. As she pants into your chest you wipe one hand clean on her clothes and press the money into her [paws/hands] with the other.");
+
+			outputText("\n\n“<i>Make it happen,</i>” you murmur into her floppy ear, before turning and leaving.");
+
+			flags[kFLAGS.QUEUE_BRANDING_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function dontGetBrandingStuff():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You stroke at her tiny bulging button until you adjudge she’s on the edge, before withdrawing your hand completely. Maybe some other time, you say airily.");
+
+			outputText("\n\n“<i>Oh [master],</i>” groans Whitney, in a tone of deepest exasperation, her hands between her thighs.");
+			if (whitneyDom()) outputText(" “<i>You’ll pay for that later, I swear!</i>”");
+			outputText(" Grinning, you turn and leave.");
+
+			dogeCorruptedMissionComplete();
+		}
+
+		private function brandingAvailableTalk():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("“<i>[Master]! [Master], I’ve done as you asked,</i>” says Whitney, her tail wagging frantically as you approach. Her eyes are lit with glee and she’s got a cow with her on tether. You settle down and watch as she produces unassuming pots of black and red ink, and a sheaf of what looks like blotting paper.");
+
+			outputText("\n\n“<i>Thought nobody sold this stuff anymore,</i>” she says with a shake of the head as she unstops a vial. A sharp, solvent smell presses into your nostrils. “<i>But it’s amazing what you kin’ find in that bazaar place, ain’t it? Watch.</i>” She dips a long ");
+			if (whitneyDefurred()) outputText(" fingernail");
+			else outputText(" claw");
+			outputText(" into the pot, withdraws it and then, dripping black fluid, presses it against the cow’s ample backside. The animal moos and swishes its tail in mild protest, but it doesn’t seem in any grievous amount of pain as Whitney’s digit moves, artfully tracing a large number 12 with the ink.");
+
+			outputText("\n\n“<i>Then we take some of the paper and press it on to seal it... like so….</i>” There’s a faint hissing sound as Whitney covers the 12 with the white sheet, but again the cow barely seems to notice. When she peels it off she gestures for you to take a look for yourself. This is probably the first and hopefully the last time you inspect a cow’s backside so scrupulously but you can only be impressed by what you see - the number is dried and apparently ingrained deep into the heavy flesh, resisting your own attempts to rub it off easily. This will suit your own purposes perfectly.");
+
+			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses. She’s look at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [master]?</i>”");
+
+			flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] = 0;
+
+			menu();
+			addButton(0, "Yes", testBranding);
+			addButton(1, "No", dontTestBranding);
+		}
+
+		private function testBranding():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You return her devilish grin with interest.");
+
+			outputText("\n\n“<i>Since you’ve been such a productive girl, I guess you do deserve a reward. Take your clothes off.</i>” ");
+
+			outputText("\n\nThe dog girl eagerly strips whilst you carefully take the pot of black ink and consider where, and what, to put on her.");
+
+			brandSlotSelect();
+		}
+
+		private var slotNames:Array = [
+		"collarbone",
+		"shoulders",
+		"lower back",
+		"butt" ];
+
+		public function brandSlotSelect():void
+		{
+			menu();
+			if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", brandSelect, 0)
+			if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", brandSelect, 1);
+			if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", brandSelect, 2);
+			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] == 0) addButton(3, "Butt", brandSelect, 3);
+		}
+
+		public function brandSelect(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("What will you draw on her " + slotNames[slot] + "?");
+
+			menu();
+			addButton(0, "Tribal", tribalTattoo, slot);
+			addButton(1, "Heart", heartTattoo, slot);
+			addButton(2, "Property Of", propertyTattoo, slot);
+			addButton(3, "#1 Bitch", no1Tattoo, slot);
+			// addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
+			// addButton(5, "Pussylicker", champPussylickerTattoo, slot);
+		}
+
+		private function collarboneIntro():void
+		{
+			outputText("You command her to kneel in front of you and be still. Your lithe, naked dog girl does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on her, and then seal it on with the paper.");
+		}
+
+		private function shouldersIntro():void
+		{
+			outputText("You command her to kneel facing away from you and be still. Your lithe, naked dog girl does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on her, and then seal it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
+
+			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at.</i>”");
+		}
+
+		private function lowerbackIntro():void
+		{
+			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on her, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
+
+			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at...</i>”");
+		}
+
+		private function buttIntro():void
+		{
+			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
+
+			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at. Ooh!</i>” You give her new tattoo a playful slap.");
+		}
+
+		private function tattooMerge():void
+		{
+			outputText("\n\nAfter you’re done horsing around, Whitney redresses, unable to stop her hand drifting to the new, indelible inscription on her body as she does.");
+
+			outputText("\n\n“<i>I’m glad you like what I’ve gotten you, [master],</i>” she says. “<i>I’ll put it in the barn so if you ever get the urge to, um, mark more cattle, it’s there. Just be warned [master], magic ink ain’t cheap - each mark’ll cost a good 50 gems.</i>”");
+
+			outputText("\n\nYou tell her she’s done very well, before turning and leaving.");
+		}
+
+		private function tribalTattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "A tribal tattoo, all snaking, erotic lines, across her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>You’ve got skilled fingers, [master],</i>” she says, touching what you’ve drawn admiringly. “<i>Although guess I already knew that.</i>”");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function heartTattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "A plump, red love heart tattoo on her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>You’ve got skilled fingers, [master],</i>” she says, touching what you’ve drawn admiringly. “<i>Although guess I already knew that.</i>”");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function propertyTattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "“Property of [Name]” tattooed across her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with an exasperated, flustered laugh, when she looks down at what is now inscribed for all to see on her chest.");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function no1Tattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "“No. 1 Bitch” tattooed across her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with an exasperated, flustered laugh, when she looks down at what is now inscribed for all to see on her chest.");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function champCocksuckerTattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "“Champion Cocksucker” tattooed across her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with an exasperated, flustered laugh, when she looks down at what is now inscribed for all to see on her chest.");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function champPussylickerTattoo(slot:int):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			var tText:String = "“Champion Pussylicker” tattooed across her ";
+
+			if (slot == 0)
+			{
+				collarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with an exasperated, flustered laugh, when she looks down at what is now inscribed for all to see on her chest.");
+				tText += "collarbone";
+				flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] += tText;
+			}
+			else if (slot == 1)
+			{
+				shouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				lowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				buttIntro();
+				tText += "butt";
+				flags[kFLAGS.WHITNEY_TATTOO_BUTT] = tText;
+			}
+
+			tattooMerge();
+		}
+
+		private function dontTestBranding():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("Maybe later, you say. Whitney looks disappointed.");
+
+			outputText("\n\n“<i>Fine. I’ll put it in the barn so if you ever get the urge to, um, mark some cattle, it’s there. Be warned though [master], that ink ain’t cheap- each mark’ll cost 50 gems.</i>”");
+
+			outputText("\n\nYou tell her she’s done very well, before turning and leaving.");
+
+			doNext(13);
 		}
 	}
 
