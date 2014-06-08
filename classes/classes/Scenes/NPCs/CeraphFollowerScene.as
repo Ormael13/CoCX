@@ -42,6 +42,11 @@ package classes.Scenes.NPCs
 				ceraphFollowerAppearance();
 		}
 
+		public function ceraphSprite():void
+		{
+			spriteSelect(87);
+		}
+		
 //[Actually Ceraph] - 
 		public function ceraphFollowerAppearance(output:Boolean = true):void
 		{
@@ -73,6 +78,45 @@ package classes.Scenes.NPCs
 			}
 			else sexMenu = ceraphSexMenu;
 			choices("Sex", sexMenu, "", 0, "", 0, "", 0, "Partswap", giveFollowerBodyBits, "Roleplay", rp, "Get Fetish", gainFetish, "RemoveFetish", loseFetish, dickToggle, cawkTawgle, "Leave", camp.campSlavesMenu);
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(1, "Farm Work", helpWithFarm);
+		}
+		
+		private function helpWithFarm():void
+		{
+			clearOutput();
+			ceraphSprite();
+			
+			outputText("You ask Ceraph if she can help you with the farm you recently acquired.");
+
+			outputText("\n\n“<i>You mean work on a farm? Don’t be ridiculous, [name]!</i>” She chortles, before coughing as she catches your expression. “<i>I don’t think me or any of my pets are cut out for farming,</i>” she says, tapping her chin. “<i>Or at least not that kind you have in mind. But I could mark the place as being under demon protection if you like. I can only do it once,</i>” she warns. “<i>And it will wear off eventually.</i>”");
+
+			menu();
+			addButton(0, "Do It", doFarmShit);
+			addButton(1, "Later", noFarmShitYet);
+		}
+		
+		private function doFarmShit():void
+		{
+			clearOutput();
+			ceraphSprite();
+			
+			outputText("“<i>Very well,</i>” she smirks. “<i>Anything else?</i>”");
+			
+			ceraphFollowerAppearance(false);
+		}
+		
+		private function noFarmShityet():void
+		{
+			clearOutput();
+			ceraphSprite();
+			
+			outputText("\n\n“<i>I’ll go over there tonight then,</i>” she says. There’s a far-away gleam of excitement in her eyes as she tugs on a nipple; only now does it occur to you what ‘marked as being under demon protection’ might entail. “<i>Anything else, [master]?</i>”");
+			
+			flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] = 1;
+			kGAMECLASS.farm.farmCorruption.whitneyCorruption(10);
+			
+			ceraphFollowerAppearance(false);
 		}
 
 		private function ceraphSexMenu():void

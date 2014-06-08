@@ -65,6 +65,9 @@ package classes.Scenes.Places.Farm
 		// Also going to use this to handle Gem value updates and shit.
 		public function updateFarmCorruption():int
 		{
+			// Early exit if we've not actually started the corruption process
+			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] <= 0) return;
+			
 			// Figure out how much corruption we're going to slap on to Whitney
 			var modValue:int = -1;
 
@@ -128,6 +131,25 @@ package classes.Scenes.Places.Farm
 			{
 				kGAMECLASS.latexGirl.gooHappiness( -0.5);
 				kGAMECLASS.latexGirl.gooObedience(  0.5);
+			}
+			
+			// If Ceraph is doing her thing
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0)
+			{
+				flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH]++;
+				
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 7) flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] = -1;
+			}
+			
+			// If Holli is doing her thing
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
+			{
+				flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI]++;
+				
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 20) flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = -1;
+				
+				modValue += 10;
+				whitneyCorruption(2);
 			}
 			
 			// Increment days since last paid out
@@ -242,6 +264,8 @@ package classes.Scenes.Places.Farm
 			{
 				protection += 1;
 			}
+			
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0) protection += 7;
 
 			return protection;
 		}

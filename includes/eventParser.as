@@ -1966,6 +1966,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(latexGirl.gooHappiness() < 75) latexGirl.gooObedience(-1,false);
 				if(latexGirl.gooHappiness() >= 90) latexGirl.gooObedience(1,false);
 			}
+			
+			// Holli Fuck Tracking
+			if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 1) flags[kFLAGS.HOLLI_FUCKED_TODAY] = 0;
+			
+			// Farm Corruption updating
+			farm.farmCorruption.updateFarmCorruption();
+			
 			//Marble Preggo Counter
 			if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
 				flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] -= 24;

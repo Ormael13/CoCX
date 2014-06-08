@@ -143,8 +143,55 @@ public function treeMenu(output:Boolean = true):void {
 			addButton(5,"Guarding",askBrokenHolliToGuard);
 			addButton(9,"Leave",eventParser,1000);
 		}
-
+		
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);
 	}
+}
+
+private function helpWithFarm():void
+{
+	clearOutput();
+	
+	outputText("You ask if a plant goddess might not be able to help the farm you recently acquired.");
+
+	outputText("\n\n“<i>Ah yes,</i>” Holli breathes. “<i>The patch of verdant orderliness between me and mother. It feels bright and cold to me... the life that grows there so starchy and dull. Empty calories.</i>” You wait as she hums to herself absently.");
+
+	// PC not had sex with Holli that day:
+	if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 0)
+	{
+		outputText("\n\n“<i>I could help with your little patch of boringness,</i>” Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. “<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>” You roll your eyes. You can guess what you have to do in order to get this being’s help.");
+
+		treeMenu(false);
+	}
+	else
+	{
+		outputText("\n\n“<i>I can help you with it,</i>” she says eventually. “<i>But nourishing such dullness will take effort. I can give your produce a boost, but only once, and it won’t last forever. Would you like that?</i>”");
+
+		menu();
+		addButton(0, "Yes", doFarmFuckery);
+		addButton(1, "No", noPlzDontFuckWithFarm);
+	}
+}
+
+private function doFarmFuckery():void
+{
+	clearOutput();
+	outputText("Holli closes her eyes and hums. The sound seems to reverberate in your bones, and you feel the ground move uneasily below you. Holli’s roots shift ponderously, and you hear new growth crackling, burying eagerly through the soil, moisture being taken in. The tree woman opens her eyes to lazily grin at you as the portentous sounds below you continue.");
+
+	outputText("\n\n“<i>It’s happening. I hope you and your doggie enjoy what I have done!</i>”");
+
+	flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = 1;
+	
+	doNext(13);
+}
+
+private function noPlzDontFuckWithFarm():void
+{
+	clearOutput();
+	
+	outputText("“<i>Such a fickle mortal,</i>” she sighs. “<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>”");
+	
+	treeMenu(false);
 }
 
 private function fertilizeHolli(cock:Boolean = true):void {
@@ -576,6 +623,7 @@ private function slapAmilysWhoreFace():void {
 //(FUCK DAT TREE BITCH)
 private function fuckHolliInZeFlowerPuss():void {
 	clearOutput();
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	var x:int = player.biggestCockIndex();
 	outputText("With a knowing smile, you toss your [armor] aside and say, \"<i>Let's do this.</i>\"  [EachCock] juts out, hard and proud from your body, pointed straight towards the entrancing woman before you.  She leans down from her perch in the tree and rolls her shoulders from side to side, jiggling her pale green assets back and forth, traces of syrup hanging from her pendulous melons.");
 	outputText("\n\n\"<i>Well, come on over then, ");
@@ -668,6 +716,7 @@ private function haveAMapleSyrupSnack():void {
 //Tentacle Ride (looks ok)(C)
 private function level4RideHollisTentacruels():void {
 	clearOutput();
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	//(PC voluntary gets tentacle pounded, and high from flower pussy spores.  clitoral BJ?  Nipple suckers!}
 	outputText("You smirk knowingly and suggest to Holli that she take you for a ride... if she knows what you mean.  This earns you a pleased applause from the delighted demon dryad, and she immediately sets to helping you undress, her eager tentacles lowering from the tree and arching up like searching snakes.  You let her remove your [armor] with the patience of a goddess, shivering slightly when the sticky gear is peeled away from your eager undercarriage.");
 	outputText("\n\n\"<i>Oh, you're going to love this, [name],</i>\" the demon tree promises, \"<i>Just lie back into my tentacles, and let me do the work.  You'll feel so good, you'll NEVER want to leave.</i>\"");
@@ -788,6 +837,7 @@ private function begHolli4Watches():void {
 
 private function domUpSomeHolli():void {
 	clearOutput();
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	outputText("You swagger up to the tree and put your hand on the bark beside Holli.  Glancing over, she quips, \"<i>Is that supposed to be intimidating?</i>\"  The dryad smirks ingratiatingly.  \"<i>I'm the offshoot of a demon goddess.  I don't think you thought this through.</i>\"");
 	outputText("\n\nSlapping your palm down on the other side, you look her right in her oddly gold and black eyes and tell her in no uncertain terms that she is going to serve and service you at your slightest whim.  Any choice she thinks she has is nothing more than an illusion.");
 	var domPowah:Number = player.level;
@@ -892,6 +942,7 @@ private function holliGetsDickDommed():void {
 //.PC Has 10 Tentacle Go Full On Monster With Her
 private function fullOnTentacleTasticGangBangForHolli():void {
 	clearOutput();
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	outputText("You remove your [armor] and expose your writhing mass of wriggling tendrils to the tree-tart.  She places a hand over her mouth and exhales, \"<i>Oh my, Mother Marae sure knows how to pick them, doesn't she?</i>\"");
 	outputText("\n\nExercising considerable control over your vegetative peckers, you extend one forward, the phallic tentacle lurching out to silence the troublesome tree in a split-second.  Holli gives up a strangled, \"<i>h-urk!</i>\" and rocks back into her tree's entrances, eyes crossed to look at the green snake protruding from her lips.  Her mouth feels good around the purple-tinged cock-tip you've forced inside, but you think her throat would feel better.  Your tentacle tool stretches, lengthening with supernatural agility, and you push the fresh flesh down Holli's gullet, distending her throat with the imprint of your length.  Her esophagus instinctively works to swallow the obstruction, which serves you just fine.  The tight oral pleasure has you oozing droplets of pre-seed directly into her belly, but you're far from ready to blow.  After all, with nine more penises, satisfaction remains a good ways away.");
 	outputText("\n\nHolli reaches up at the pioneering phallus.  You aren't sure if she's trying to pull it out or massage it, but her hands could be put to better use.  Snapping out, two tendrils lance forward, twining around the dryad's arms before she can bother the busy cock in her mouth.  They snugly entwine her limbs with warm cockflesh and pull taut.  No matter how she struggles, the oppressive penises hold her restrained.  You push the busy tentacles harder, forcing them to climb higher.  Their heads push into her fingers, then past, giving the demoness a firm hold on your sensitive tendrils.");
@@ -924,6 +975,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 //Vaginally Dominate Tentacles
 private function vaginalDomHollisTentacruels():void {
 	clearOutput();
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	outputText("You sashay over to your favorite tentacular tree and trace your finger through Holli's cleavage, purring, \"<i>I'm feeling a little randy.  Do me a favor and bring your 'little' friends down to play, would you?</i>\"  The commanding tone of your voice leaves little doubt that the question is anything but.  With a little bit of fear in her black, tainted eyes, Holli nods meekly.  A rain of green, phallic tentacles pours out of the robust canopy above, hanging behind you idly, though a few of them arch up like snakes sensing prey.  You hold your immobilized pet's chin in your hand and tilt her head up slightly so she sees you eye to eye.");
 	outputText("\n\n\"<i>Good pet,</i>\" you coo, releasing her and turning about, making sure to sway your [hips] hypnotically and remind her just what she's going to get.  The closest tentacle sways in your direction to nuzzle on your " + player.skinFurScales() + ".  You raise your palm to support it, gliding your palm along the underside while you shrug out of your [armor].  The phallic vine eagerly rubs against you like an affectionate pet, though clear sap leaks from the moist slit at its tip.  You squeeze it just behind the purple-tinged tip and pull, dragging it over toward Holli.");
 	outputText("\n\nThe demon-dryad tilts her head uncertainly as she's confronted with one of her own unholy malenesses.  You set the long shaft in between her heavy breasts and step back to observe your handiwork.  The tendril wiggles happily and begins to slide through her cleavage, rocking her back a little from the force of its affections.  Holli gasps, surprised by her lack of control and the masturbatory tit-fuck.  Her eyes cross, trying to lock onto it as it pushes through her tits, the purple tip butting up against her chin at the apex of its path.  You pump the shaft a few feet back to encourage it, and the pulsing prehensile penis plunges through her lips.");
