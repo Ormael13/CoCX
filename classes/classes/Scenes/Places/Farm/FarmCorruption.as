@@ -93,6 +93,24 @@ package classes.Scenes.Places.Farm
 			return false;
 		}
 
+		public function whitneyOralTrain(mod:int = 0):int
+		{
+			if (mod == 0) return flags[kFLAGS.WHITNEY_ORAL_TRAINING];
+
+			flags[kFLAGS.WHITNEY_ORAL_TRAINING] += mod;
+
+			if (flags[kFLAGS.WHITNEY_ORAL_TRAINING] > 100) flags[kFLAGS.WHITNEY_ORAL_TRAINING] = 100;
+			if (flags[kFLAGS.WHITNEY_ORAL_TRAINING] < 0) flags[kFLAGS.WHITNEY_ORAL_TRAINING] = 0;
+
+			return flags[kFLAGS.WHITNEY_ORAL_TRAINING];
+		}
+
+		public function whitneyMaxedOralTraining():Boolean
+		{
+			if (flags[kFLAGS.WHITNEY_ORAL_TRAINING] == 100) return true;
+			return false;
+		}
+
 		// Called once per day, check all the followers that have been set to the farm and change whitneys corruption as appropriate
 		// Also going to use this to handle Gem value updates and shit.
 		public function updateFarmCorruption():int
@@ -1564,7 +1582,7 @@ package classes.Scenes.Places.Farm
 			menu();
 			addButton(0, "Appearance", corruptWhitneyAppearance);
 			addButton(1, "Investment", investmentMenu);
-			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 1 || flags[kFLAGS.QUEUE_BRANDING_UPGRADE] == 0) addButton(2, "Branding", brandingMenu);
+			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 1 || flags[kFLAGS.QUEUE_BRANDING_UPGRADE] < 1) addButton(2, "Branding", brandingMenu);
 		}
 
 		private function corruptWhitneyAppearance():void
@@ -1618,6 +1636,105 @@ package classes.Scenes.Places.Farm
 				else addButton(0, "Do it", dontGetBrandingStuff);
 				addButton(1, "No", dontGetBrandingStuff);
 			}
+			else
+			{
+				clearOutput();
+
+				outputText("Your thoughts turn to the ingenious magic of your tattooing gear, stashed away in the barn. Grinning, you consider who you will summon to brand.");
+
+				if (player.gems < 50) outputText("\n\n<b>You don't have enough gems to afford a new brand for any of your slaves.</b>");
+
+				menu();
+
+				if (player.gems >= 50)
+				{
+					if (hasFreeTattooSlot("whitney")) addButton(0, "Whitney", brandWhitney);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1 && hasFreeTattooSlot("amily")) addButton(1, "Amily", brandAmily);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && hasFreeTattooSlot("jojo")) addButton(2, "Jojo", brandJojo);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2 && hasFreeTattooSlot("sophie")) addButton(3, "Sophie", brandBimboSophie);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) && hasFreeTattoSlot("sophie")) addButton(3, "Sophie", brandSophie)
+
+				addButton(9, "Back", dogeCorruptedMissionComplete);
+			}
+		}
+
+		private function hasFreeTattooSlot(name:String):Boolean
+		{
+			if (name == "whitney")
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] == 0) return true;
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] == 0) return true;
+				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] == 0) return true;
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] == 0) return true;
+				return false;
+			}
+			else if (name == "amily")
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] == 0) return true;
+				if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] == 0) return true;
+				if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] == 0) return true;
+				if (flags[kFLAGS.AMILY_TATTOO_BUTT] == 0) return true;
+				return false;
+			}
+			else if (name == "jojo")
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] == 0) return true;
+				if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] == 0) return true;
+				if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] == 0) return true;
+				if (flags[kFLAGS.JOJO_TATTOO_BUTT] == 0) return true;
+				return false;
+			}
+			else if (name == "sophie")
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] == 0) return true;
+				if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] == 0) return true;
+				if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] == 0) return true;
+				if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] == 0) return true;
+				return false;
+			}
+		}
+
+		private function brandWhitney():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("Whitney knows exactly what it means when you head off to the barn where she stashed your “branding” equipment; the dog girl is already eagerly stripped down by the time you’ve returned. You hold the pots of ink and consider where, and what, to put on her.");
+
+			brandSlotSelect();
+		}
+
+		private function brandAmily():void
+		{
+			clearOutput();
+
+			outputText("You retrieve the pots of ink and paper from the barn and, smiling, tell your pet mouse you’re going to give her a treat.");
+
+			outputText("\n\n“<i>How exciting!</i>” she squeaks. “<i>Is it your");
+			if (player.hasCock()) outputText(" dick");
+			else if (player.hasVagina()) outputText(" pussy");
+			else outputText(" body");
+			outputText(", [master]? That’s my favourite type of treat.</i>” You consider where, and what, to put on her.");
+
+			amilyBrandSlotSelect();
+		}
+
+		private function brandJojo():void
+		{
+			clearOutput();
+
+			outputText("You retrieve the pots of ink and paper from the barn and, smiling brightly, tell your pet mouse you’re going to give him a special treat. Jojo knows all too well the nature of your treats. He closes his eyes and waits for the worst as you consider where and what to put on him.");
+
+			jojoBrandSlotSelect();
+		}
+
+		private function brandBimboSophie():void
+		{
+			clearOutput();
+
+			outputText("You retrieve the pots of ink and paper from the barn and, smiling, tell your pet harpy you’re going to give her a treat.");
+
+			bimboSophieSlotSelect();
 		}
 
 		private function getBrandingStuff():void
@@ -1702,6 +1819,24 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] == 0) addButton(3, "Butt", brandSelect, 3);
 		}
 
+		public function amilyBrandSlotSelect():void
+		{
+			menu();
+			if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", amilyBrandSelect, 0)
+			if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", amilyBrandSelect, 1);
+			if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", amilyBrandSelect, 2);
+			if (flags[kFLAGS.AMILY_TATTOO_BUTT] == 0) addButton(3, "Butt", amilyBrandSelect, 3);
+		}
+
+		public function jojoBrandSlotSelect():void
+		{
+			menu();
+			if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", jojoBrandSelect, 0)
+			if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", jojoBrandSelect, 1);
+			if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", jojoBrandSelect, 2);
+			if (flags[kFLAGS.JOJO_TATTOO_BUTT] == 0) addButton(3, "Butt", jojoBrandSelect, 3);
+		}
+
 		public function brandSelect(slot:int):void
 		{
 			clearOutput();
@@ -1714,13 +1849,55 @@ package classes.Scenes.Places.Farm
 			addButton(1, "Heart", heartTattoo, slot);
 			addButton(2, "Property Of", propertyTattoo, slot);
 			addButton(3, "#1 Bitch", no1Tattoo, slot);
-			// addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
-			// addButton(5, "Pussylicker", champPussylickerTattoo, slot);
+			if (player.hasCock() && whitneyMaxedOralTraining())) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
+			if (player.hasVagina() && whitneyMaxedOralTraining()) addButton(5, "Pussylicker", champPussylickerTattoo, slot);
+		}
+
+		public function amilyBrandSelect(slot:int):void
+		{
+			clearOutput();
+
+			outputText("What will you draw on her " + slotNames[slot] + "?");
+
+			menu();
+			addButton(0, "Tribal", amilyTribalTattoo, slot);
+			addButton(1, "Heart", amilyHeartTattoo, slot);
+			addButton(2, "Property Of", amilyPropertyTattoo, slot);
+			addButton(3, "Breeding Bitch", amilyBreedingBitchTattoo, slot);
+			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", amilyCockGoesHereTattoo, slot);
+			if (player.hasVagina()) addButton(5, "Mommy's Girl", amilyMommysGirlTattoo);
+		}
+
+		public function jojoBrandSelect(slot:int):void
+		{
+			clearOutput();
+
+			outputText("What will you draw on his " + slotNames[slot] + "?");
+
+			menu();
+			addButton(0, "Tribal", jojoTribalTattoo, slot);
+			addButton(1, "Heart", jojoHeartTattoo, slot);
+			addButton(2, "Property Of", jojoHeartTattoo, slot);
+			addButton(3, "Sissy Slut", jojoHeartTattoo, slot);
+			if (pc.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
+			if (pc.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
 		}
 
 		private function collarboneIntro():void
 		{
 			outputText("You command her to kneel in front of you and be still. Your lithe, naked dog girl does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on her, and then seal it on with the paper.");
+		}
+
+		private function amilyCollarboneIntro():void
+		{
+			outputText("You command her to kneel in front of you and be still. The succubus mouse does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on her, and then seal it on with the paper. ");
+		}
+
+		private function jojoCollarboneIntro():void
+		{
+			outputText("You command him to kneel in front of you and be still. The mouse-demon does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on him, and then seal it on with the paper. ");
+
+			outputText("\n\n“<i>Th-thanks, [master],</i>” he says, when he looks down and sees what you’ve permanently inscribed on his chest. You tussle his adorable ears and tell him he’s quite welcome.");
 		}
 
 		private function shouldersIntro():void
@@ -1730,6 +1907,20 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at.</i>”");
 		}
 
+		private function jojoShouldersIntro():void
+		{
+			outputText("You command him to kneel facing away from you and be still. The mouse-demon does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on him, and then seal it on with the paper. ");
+
+			outputText("\n\n“<i>Th-thanks, [master],</i>” he says. He pauses. “<i>I don’t suppose I could know what it-?</i>” You tussle his adorable ears and tell him of course not.");
+		}
+
+		private function amilyShouldersIntro():void
+		{
+			outputText("You command her to kneel facing away from you and be still. Your succubus mouse does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on her and then seal it on with the paper. ");
+
+			outputText("\n\n“<i>What did you draw, [master]?</i>” she says eagerly. Laughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw [master], you know they’ll just lie and say it’s something like ‘breeding bitch’. C’mon, please tell me!</i>”");
+		}
+
 		private function lowerbackIntro():void
 		{
 			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on her, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
@@ -1737,11 +1928,39 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at...</i>”");
 		}
 
+		private function jojoLowerbackIntro():void
+		{
+			outputText("You command him to set himself face down across your [legs], as if he were about to receive a spanking. The mouse-demon does so, staying perfectly still as you dip your finger into the ink, carefully draw your design on him and then seal it on with the paper. ");
+
+			outputText("\n\n“<i>Th-thanks, [master],</i>” he says. He pauses. “<i>I don’t suppose I could know what it-?</i>” You tussle his adorable ears and tell him of course not.");
+		}
+
+		private function amilyLowerBackIntro():void
+		{
+			outputText("You command her to set herself face down across your [legs], as if she were about to receive a spanking. Your succubus mouse does so, her giggles at her own compromising position turning to a sharp coo as you dip your finger into the ink and carefully draw your design on her, before sealing it on with the paper. ");
+
+			outputText("\n\n“<i>What did you draw, [master]?</i>” she says eagerly. Laughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw [master], you know they’ll just lie and say it’s something like ‘breeding bitch’. C’mon, please tell me!</i>”");
+		}
+
 		private function buttIntro():void
 		{
-			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
+			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper.");
 
-			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at. Ooh!</i>” You give her new tattoo a playful slap.");
+			outputText("\n\n“<i>What did you draw, [master]?</i>” she says eagerly. Laughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at. Ooh!</i>” You give her new tattoo a playful slap.");
+		}
+
+		private function amilyButtIntro():void
+		{
+			outputText("You command her to set herself face down across your [legs], as if she were about to receive a spanking. Your succubus mouse does so, her laughter at her own compromising position turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper. ");
+
+			outputText("\n\n“<i>What did you draw, [master]?</i>” she says eagerly. Laughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw [master], you know they’ll just lie and say it’s something like ‘breeding bitch’. C’mon, please tell me! Ooh!</i>” That tattoo is going to be pretty irresistible, you think, as you admire your red handprint over it.");
+		}
+
+		private function jojoButtIntro():void
+		{
+			outputText("You command him to set himself face down across your [legs], as if he were about to receive a spanking. The mouse-demon does so, staying perfectly still as you dip your finger into the ink, carefully draw your design onto the softest part of his body and then seal it on with the paper. ");
+
+			outputText("\n\n“<i>Th-thanks, [master],</i>” he says. He pauses. “<i>I don’t suppose I could know what it-?</i>” You give his new tattoo a playful slap and tell him of course not.");
 		}
 
 		private function tattooMerge():void
@@ -1751,6 +1970,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>I’m glad you like what I’ve gotten you, [master],</i>” she says. “<i>I’ll put it in the barn so if you ever get the urge to, um, mark more cattle, it’s there. Just be warned [master], magic ink ain’t cheap - each mark’ll cost a good 50 gems.</i>”");
 
 			outputText("\n\nYou tell her she’s done very well, before turning and leaving.");
+
+			doNext(13);
 		}
 
 		private function tribalTattoo(slot:int):void
@@ -1789,6 +2010,74 @@ package classes.Scenes.Places.Farm
 			tattooMerge();
 		}
 
+		private function amilyTribalTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A tribal tattoo, all snaking, erotic lines, across her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>Does this make me more beautiful to you, [master]?</i>” she says, touching what you’ve drawn admiringly. “<i>If so... it’s exactly what I wanted.</i>”");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerBackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function jojoTribalTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A tribal tattoo, all snaking, erotic lines, across his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackTattoo();
+				tText += "lowerback";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
 		private function heartTattoo(slot:int):void
 		{
 			clearOutput();
@@ -1823,6 +2112,75 @@ package classes.Scenes.Places.Farm
 			}
 
 			tattooMerge();
+		}
+
+		private function amilyHeartTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A plump, red love heart tattoo on her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>Does this make me more beautiful to you, [master]?</i>” she says, touching what you’ve drawn admiringly. “<i>If so... it’s exactly what I wanted.</i>”");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function jojoHeartTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A plump, red love heart tattoo on his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				tText += "collarbone";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
 		}
 
 		private function propertyTattoo(slot:int):void
@@ -1861,6 +2219,74 @@ package classes.Scenes.Places.Farm
 			tattooMerge();
 		}
 
+		private function amilyPropertyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Property of [Name]” tattooed across her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with a delighted laugh when she looks down at what is now inscribed for all to see on her naked chest.");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function jojoPropertyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Property of [Name]” tattooed across his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				flags[kFLAGS.JOJO_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
 		private function no1Tattoo(slot:int):void
 		{
 			clearOutput();
@@ -1897,6 +2323,41 @@ package classes.Scenes.Places.Farm
 			tattooMerge();
 		}
 
+		private function amilyBreedingBitchTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Breeding Bitch” tattooed across her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with a delighted laugh when she looks down at what is now inscribed for all to see on her naked chest.");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
 		private function champCocksuckerTattoo(slot:int):void
 		{
 			clearOutput();
@@ -1931,6 +2392,144 @@ package classes.Scenes.Places.Farm
 			}
 
 			tattooMerge();
+		}
+
+		private function amilyCockGoesHereTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Cock Goes Here” tattooed across her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with a delighted laugh when she looks down at what is now inscribed for all to see on her naked chest.");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function jojoCockGoesHereTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Cock Goes Here” tattooed across his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				tText += "collarbone";
+				flags[kFLAGS.JOJO_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function amilyMommysGirlTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Mommy’s Girl” tattooed across her ";
+
+			if (slot == 0)
+			{
+				amilyCollarboneIntro();
+				outputText("\n\n“<i>As if I ever need reminding of that, [master],</i>” she says with a delighted laugh when she looks down at what is now inscribed for all to see on her naked chest.");
+				tText += "collarbone";
+				flags[kFLAGS.AMILY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				amilyShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.AMILY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				amilyLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				amilyButtIntro();
+				tText += "butt";
+				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function jojoMommysBoyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Mommy’s Boy” tattooed across his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				tText += "collarbone";
+				flags[kFLAGS.JOJO_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackIntro();
+				tText += "lowerback";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
 		}
 
 		private function champPussylickerTattoo(slot:int):void
