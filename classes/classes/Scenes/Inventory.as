@@ -835,6 +835,12 @@ public function doItems(eventNo:Number):void {
 				doNext(kGAMECLASS.telAdre.bakeryScene.ingredientsMenu);
 				return;
 			}
+			// Farm Corruption item stash
+			if (menuLoc == 30)
+			{
+				doNext(kGAMECLASS.farm.farmCorruption.collectTheGoodies);
+				return;
+			}
 			if(menuLoc == 2) doNext(13);
 			else doNext(1);
 		}

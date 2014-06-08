@@ -37,9 +37,18 @@ package classes.Scenes.Places.Farm
 
 		public function whitneyCorruption(mod:int = 0):int
 		{
-			if (mod != 0) flags[kFLAGS.WHITNEY_CORRUPTION] += mod;
+			if (mod != 0)
+			{
+				flags[kFLAGS.WHITNEY_CORRUPTION] += mod;
+				
+				// Track highest corruption value
+				if (flags[kFLAGS.WHITNEY_CORRUPTION] > flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST]) flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST] = flags[kFLAGS.WHITNEY_CORRUPTION];
+			}
+			
+			// Track "completion" of farm corruption
 			var corruptionFinished:int = flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE];
 
+			// Clamp values to valid min/max
 			if (flags[kFLAGS.WHITNEY_CORRUPTION] < 0) flags[kFLAGS.WHITNEY_CORRUPTION] = 0;
 			if (flags[kFLAGS.WHITNEY_CORRUPTION] >= 120)
 			{
@@ -152,6 +161,12 @@ package classes.Scenes.Places.Farm
 				whitneyCorruption(2);
 			}
 			
+			// Contraceptives
+			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 1)
+			{
+				if (flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] == 0) flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] = 1;
+			}
+			
 			// Increment days since last paid out
 			flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] += 1;
 			
@@ -162,17 +177,30 @@ package classes.Scenes.Places.Farm
 		{
 			clearOutput();
 			
-			outputText("You can see the following items stashed around the place all haphazard like:");
+			// Get gems
+			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7)
+			{
+				outputText("You stroll over to the big rock at the edge of the pepper patch, smiling as you see a small burlap sack shoved underneath a fold in the stone. You scoop it up, open it and count out " + flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] + " gems.");
+				
+				if (farmValue < 25) outputText(" You frown; it seems like a feeble amount for such a large operation. Perhaps you could talk to Whitney about that.");
+				
+				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
+				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
+			}
 			
 			outputText("\n");
 			
-			// Get gems
-			player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
-			flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
-			
+			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0)
+			{
+				outputText("\nYour ‘farmers’ have been busy under the watchful eye of their assigned task mistress. A small bundle of goods have been stashed with the gems just awaiting your arrival.\n\n");
+			}
+						
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0) offerItems(kFLAGS.FARM_SUCCUMILK_STORED);
 			if (flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0) offerItems(kFLAGS.FARM_INCUDRAFT_STORED);
 			if (flags[kFLAGS.FARM_EGG_STORED] > 0) offerItems(kFLAGS.FARM_EGG_STORED);
+			if (flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) offerItems(kFLAGS.FARM_CONTRACEPTIVE_STORED);
+			
+			addButton(9, "Back", rootScene);
 		}
 		
 		private function getItemObj(flag:int):SimpleConsumable
@@ -180,15 +208,15 @@ package classes.Scenes.Places.Farm
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
 			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE])];
+			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
 		}
 		
 		private function offerItems(flag:int):void
 		{
-			outputText("\n");
-			
 			outputText("<b>");
 			
 			if (flags[flag] > 1) outputText(flags[flag] + "x ");
+			else outputText("A ");
 			outputText(getItemObj(flag).longName);
 			
 			outputText("</b>");
@@ -204,6 +232,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			}
 			
+			kGAMECLASS.menuLoc = 30;
 			inventory.takeItem(item);
 			flags[flag]--;
 			
@@ -515,87 +544,94 @@ package classes.Scenes.Places.Farm
 		{
 			clearOutput();
 			spriteSelect(62);
+						
+			// Whitney not corrupt
+			if (!whitneyCorrupt())
+			{
+				outputText("You stand on the rise you’ve taken to using to look down on the farm which you are invested in.")
+				
+				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
+				
+				if (flags[kFLAGS.FARM_UPGRADES_CONTRAPCEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
+			}
+			else
+			{
+				outputText("You stand on your rise and take in your slave farm. [Silly: [Masculine: You feel an irresistible hankering for a cigar.][Feminine: You feel an irresistible hankering for a cigarette holder.]] [Refinery built: A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.] [Contraceptive planted: Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.]");
+			}
+
+			// [Follower taster and “blessing” text goes here]
 			
-			var firstInsert:Boolean = true;
+			// Ceraphs Influence
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0)
+			{
+				outputText("\n\nThere is an indefinable aura of corruption slathered across the farm; you can taste it at the back of your throat, you can practically see it like a blaze on your retina from looking at a purple light too long. The area has definitely been marked by a demon.");
+			}
+			
+			// Holli Influence
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
+			{
+				outputText("\n\nThe crops and grass which surround you seem to blaze with life, almost feverishly so. Suggestively shaped vines have curled up one or two of the trees, and some of the wildflowers look... different. Holli’s blessing has caused everything on the farm to grow faster, but if you peer closely at the grass at your feet, you can make out the purple tendrils of corruption within.");
+			}
 			
 			// Amily
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("Amily is in the pepper patch with a trowel happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
+				outputText("\n\nAmily is in the pepper patch with a trowel happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
 				
 			}
 			
 			// Jojo
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("You cannot see Jojo but you have no doubt he was aware of your presence the moment you arrived, and that he’s somewhere nearby, watching.");
+				outputText("\n\nYou cannot see Jojo but you have no doubt he was aware of your presence the moment you arrived, and that he’s somewhere nearby, watching.");
 			}
 			
 			// Bimbo Sophie
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("You cannot see Sophie but distinctive coos and giggles are coming from the hen coop.");
+				outputText("\n\nYou cannot see Sophie but distinctive coos and giggles are coming from the hen coop.");
 			}
 			
 			// Regular Sophie
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("Sophie has put together a huge nest on top of the hen coop from which she pensively stares out at the lake. When she sees you looking she brightens noticeably and begins to preen her plumage.");
+				outputText("\n\nSophie has put together a huge nest on top of the hen coop from which she pensively stares out at the lake. When she sees you looking she brightens noticeably and begins to preen her plumage.");
 			}
 			
 			// Izma
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("Izma is sitting in Whitney’s old spot below the oak tree, curled up in a book.");
+				outputText("\n\nIzma is sitting in Whitney’s old spot below the oak tree, curled up in a book.");
 			}
 			
 			// Isabella
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("Isabella is hauling steel canisters in and out of the milking barn, singing merrily to herself as she does.");
+				outputText("\n\nIsabella is hauling steel canisters in and out of the milking barn, singing merrily to herself as she does.");
 			}
 			
 			// Vapula
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("Vapula is slouched against a barn wall, looking like the world’s grumpiest one woman gang. Not even a number of comatose imps nearby seem to have been able to cheer her up.");
+				outputText("\n\nVapula is slouched against a barn wall, looking like the world’s grumpiest one woman gang. Not even a number of comatose imps nearby seem to have been able to cheer her up.");
 			}
 			
 			// Latexy
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				outputText("You can see something black shimmering wetly underneath Whitney’s porch which can only be a certain latex goo.");
+				outputText("\n\nYou can see something black shimmering wetly underneath Whitney’s porch which could only be a certain latex goo.");
 			}
 			
 			// BathSlut
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
 			{
-				if (!firstInsert) outputText("\n\n");
-				firstInsert = false;
-				
 				if (flags[kFLAGS.MILK_SIZE] > 0)
 				{
-					outputText("[bathgirlname] is rather predictably in the cow shed, milking the cattle. She looks tan, bright and happy; the country air is doing her good.");
+					outputText("\n\n[Bathgirlname] is rather predictably in the cow shed, milking the cattle. She looks tan, bright and happy; the country air is doing her good.");
 				}
 				else
 				{
-					outputText("[bathgirlname] is sat on the edge of her tank next to the cow shed, rubbing her huge tits in slow, mesmeric patterns. Her gaze is vacant except when it lands on you, whereon it becomes hopeful.");
+					outputText("\n\n[Bathgirlname] is sat on the edge of her tank next to the cow shed, rubbing her huge tits in slow, mesmeric patterns. Her gaze is vacant except when it lands on you, whereon it becomes hopeful.");
 				}
 			}
 			
@@ -605,12 +641,97 @@ package classes.Scenes.Places.Farm
 		public function farmMenu():void
 		{
 			menu();
-			addButton(4, "Slaves", slavesAtFarmMenu);
-			addButton(5, "Lovers", loversAtFarmMenu);
-			addButton(6, "Followers", followersAtFarmMenu);
+			
+			if (!whitneyCorrupt()) addButton(0, "Whitney", dogeNotCorruptYet);
+			else addButton(0, "Whitney", dogeCorruptedMissionComplete);
+
+			addButton(0, "Whitney", eventParser, 9999);
+			
+			if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
+			
+			if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(Keltoff) < 0)
+			{
+				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(2, "Kelly", farm.kelly.breakingKeltOptions);
+				else if (flags[kFLAGS.KELT_BREAK_LEVEL] > 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
+				else addButton(2, "Kelt", farm.kelly.breakingKeltOptions);
+			}
+			
+			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) 
+			{
+				if (player.findStatusAffect(StatusAffects.Milked) >= 0) 
+				{
+					outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
+				}
+				
+				addButton(3,"Get Milked", farm.getMilked);
+			}
+			
+			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
+			{
+				addButton(4,"Milk Cock", farm.cockPumping);
+			}
+			
+			addButton(5, "Farm", corruptingTheFarmExplore);
+			
+			if (slavesAtFarm()) addButton(6, "Slaves", slavesAtFarmMenu);
+			if (loversAtFarm()) addButton(7, "Lovers", loversAtFarmMenu);
+			if (followersAtFarm()) addButton(8, "Followers", followersAtFarmMenu);
+			
+			addButton(9, "Leave", eventParser, 13);
 		}
 		
-		private function slavesAtFarm():void
+		private function corruptingTheFarmExplore():void
+		{
+			menu();
+			
+			addButton(0, "Explore", farm.exploreFarm);
+			
+			addButton(1, "Collect", collectTheGoodies);
+			
+			addButton(9, "Back", farmMenu);
+		}
+		
+		private function keltAChangeInManagement():void
+		{
+			clearOutput();
+			
+			outputText("“<i>Hear there’s been a change in management,</i>” says Kelt, clopping to a halt in front of you. You confirm that that is the case. The big centaur looks at you thoughtfully. There’s something different in his dark eyes and rugged scowl than his usual wearied contempt. Grudging admiration?");
+
+			outputText("“<i>Find it difficult to believe someone like you could put a bitch in her place,</i>” he says eventually. “<i>Perhaps you’ve got bigger balls than I thought you had."); 
+			if (player.balls == 0) outputText(" So to speak, anyway.");
+			outputText("</i>” He snorts, and trots towards the butts. “<i>Just don’t expect me to treat you any different. As long as you’re getting free instruction from me, I’m the master and you’re the whelp. Got that?</i>”");
+			
+			outputText("\n\nYou reply evenly you can get along with that, and he’s welcome to stay on at the farm, but if he lays a finger on any of your own slaves you’re going to break every bone in his hands. Kelt roars with laughter.");
+
+			outputText("“<i>Do I look like I want or need your sloppy seconds? Godsdamn, I can only imagine what kind of pathetic creatures would have </i>you<i> lording it over them. What a joke! Now, are we going to go watch you fail miserably to hit a target from five yards or what?</i>”");
+
+			outputText("It’s better than you were expecting from him in all honesty. You take your bow out and silently follow him to the archery range.");
+			
+			flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] = 1;
+			
+			doNext(13);
+		}
+		
+		private function numSlavesAtFarm():int
+		{
+			var count:int = 0;
+
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) count++;
+
+			return count;
+		}
+
+		private function slavesAtFarm():Boolean
+		{
+			if (numSlavesAtFarm() > 0) return true;
+		}
+
+		private function slavesAtFarmMenu():void
 		{
 			menu();
 			
@@ -629,6 +750,20 @@ package classes.Scenes.Places.Farm
 			addButton(9, "Back", farmMenu);
 		}
 		
+		private function numFollowersAtFarm():int
+		{
+			var count:int = 0;
+
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) count++;
+
+			return count;
+		}
+
+		private function followersAtFarm():Boolean
+		{
+			if (numFollowersAtFarm() > 0) return true;
+		}
+
 		private function followersAtFarmMenu():void
 		{
 			menu();
@@ -638,6 +773,21 @@ package classes.Scenes.Places.Farm
 			addButton(0, "Back", farmMenu);
 		}
 		
+		private function numLoversAtFarm():int
+		{
+			var count:int = 0;
+
+			if (flags[kFLAGS.FOLLOTER_AT_FARM_IZMA] > 0) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] > 0) count++;
+
+			return count;
+		}
+
+		private function loversAtFarm():Boolean
+		{
+			if (numLoversAtFarm() > 0) return true;
+		}
+
 		private function loversAtFarmMenu():void
 		{
 			menu();
@@ -647,7 +797,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", kGAMECLASS.isabellaFollowerScene.callForFollowerIsabella);
 			
-			addButton(0, "Back, farmMenu);
+			addButton(0, "Back", farmMenu);
 		}
 	}
 

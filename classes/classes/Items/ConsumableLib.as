@@ -124,6 +124,8 @@ package classes.Items
 		public const WHITEEG:SimpleConsumable = mk("WhiteEg", "WhiteEg", "a milky-white egg", curry(m.whiteEgg, false), "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.");
 		
 		public const PRNPKR:SimpleConsumable = mk("PrnsPkr", "PrnsPkr", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid.");
+		
+		public const HRBCNT:SimpleConsumable = mk("HrblCnt", "HrblCnt", "a bundle of verdant green leaves", m.herbalContraceptive, "A small bundle of verdant green leaves.");
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];

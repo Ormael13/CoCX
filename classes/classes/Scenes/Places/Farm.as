@@ -407,7 +407,7 @@ private function workFarm():void {
 	inventory.takeItem(itype);
 }
 
-private function meetMarble():void {
+public function meetMarble():void {
 	var marbling:Number = 0;
 	//Pre-addiction events(explore events take 1 hour, working ones take 3)
 	if(player.statusAffectv3(StatusAffects.Marble) == 0) {
@@ -443,7 +443,7 @@ private function meetMarble():void {
 	}
 }
 
-private function exploreFarm():void {
+public function exploreFarm():void {
 	var marbling:Number = 0;
 	var explore:Number = 0;
 	
@@ -557,7 +557,7 @@ private function exploreFarm():void {
 	}
 }
 
-private function getMilked():void {
+public function getMilked():void {
 	/*MILK YOU TIT-PUMPZ ONLY
 	(Milk production TOTAL= breastSize x 10 * lactationMultiplier * breast total * milking-endurance (1- default, maxes at 2.  Builds over time as milking as done)
 	(Small – 0.01 mLs – Size 1 + 1 Multi)
@@ -802,7 +802,7 @@ private function getMilked():void {
 	doNext(13);
 }
 
-private function cockPumping():void {
+public function cockPumping():void {
 	var cumQ:Number = player.cumQ() * (rand(10) + 90) / 100;
 	outputText("", true);
 	//First time barn entrance

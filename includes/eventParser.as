@@ -1,4 +1,5 @@
 ﻿import classes.GlobalFlags.kFLAGS;
+import classes.Player;
 
 //Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
@@ -1972,6 +1973,20 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			
 			// Farm Corruption updating
 			farm.farmCorruption.updateFarmCorruption();
+			
+			// Herbal contraceptives countdown
+			if (player.findStatusAffect(StatusAffects.Contraceptives) >= 0)
+			{
+				if ((player as Player).statusAffectv1(StatusAffects.Contraceptives) == 1)
+				{
+					(player as Player).addStatusValue(StatusAffects.Contraceptives, 2, -1);
+					
+					if (player.statusAffectv1(StatusAffects.Contraceptives) < 0)
+					{
+						(player as Player).removeStatusAffect(StatusAffects.Contraceptives);
+					}
+				}
+			}
 			
 			//Marble Preggo Counter
 			if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
