@@ -85,6 +85,61 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] = 2;
 			}
 
+			// Process queued farm upgrades
+
+			// Breastmilkers
+			if (flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] != 0 && player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0)
+			{
+				flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] = 0;
+				player.createKeyItem("Breast Milker - Installed At Whitney's Farm", 0, 0, 0, 0);
+			}
+
+			// Cockmilkers
+			if (flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] != 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0)
+			{
+				flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] = 0;
+				player.createKeyItem("Cock Milker - Installed At Whitney's Farm", 0, 0, 0, 0);
+			}
+
+			// Contraceptives
+			if (flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] != 0)
+			{
+				flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE]++;
+
+				if (flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] > 7)
+				{
+					flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] = 1;
+					flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] = 0;
+				}
+			}
+
+			// Refinery
+			if (flags[kFLAGS.QUEUE_REFINERY_UPGRADE] != 0)
+			{
+				flags[kFLAGS.QUEUE_REFINERY_UPGRADE]++;
+
+				if (flags[kFLAGS.QUEUE_REFINERY_UPGRADE] > 3)
+				{
+					flags[kFLAGS.FARM_UPGRADES_REFINERY] = 1;
+					flags[kFLAGS.QUEUE_REFINERY_UPGRADE] = 0
+				}
+			}
+
+			// Milktank
+			if (flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] != 0)
+			{
+				flags[kFLAGS.QUEUE_MILKTANK_UPGRADE]++;
+
+				if (flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] > 3)
+				{
+					flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] = 0;
+					flags[kFLAGS.FARM_UPGRADES_MILKTANK] = 1;
+
+					flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 1;
+					flags[kFLAGS.MILK_SIZE] = 0;
+				}
+			}
+
 			// Figure out how much corruption we're going to slap on to Whitney
 			var modValue:int = -1;
 
@@ -1056,11 +1111,11 @@ package classes.Scenes.Places.Farm
 		private function investmentGoNotCorrupt():void
 		{
 			menu();
-			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0) addButton(0, "Breast Milker", investmentBreastMilkerNotCorrupt);
-			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0) addButton(1, "Cock Milker", investmentCockMilkerNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) addButton(2, "Refinery", investmentRefineryNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0) addButton(3, "Contraceptive", investmentContraceptiveNotCorrupt);
-			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave()) addButton(4, "MilkTank", investmentMilktankNotCorrupt);
+			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] == 0) addButton(0, "Breast Milker", investmentBreastMilkerNotCorrupt);
+			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilkerNotCorrupt);
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) addButton(2, "Refinery", investmentRefineryNotCorrupt);
+			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptiveNotCorrupt);
+			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktankNotCorrupt);
 
 			addButton(9, "Back", dogeNotCorruptYetMenu);
 		}
@@ -1076,8 +1131,9 @@ package classes.Scenes.Places.Farm
 
 			//[Do it][No]
 			menu();
-			addButton(0, "Do it", doBreastMilkerInvestment);
-			addButton(1, "No", investmentGoNotCorrupt);
+			if (player.gems >= 1000) addButton(0, "Do it", doBreastMilkerInvestment);
+			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
+			addButton(1, "No", turnDownInvestmentNotCorrupt);
 		}
 
 		private function doBreastMilkerInvestment():void
@@ -1106,8 +1162,9 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>I have a few spare milkin parts knockin around, but most everything will have to be specially ordered if you want that,</i>” she says. “<i>If you can pony up 1000 gems, I can get what you need brought in, built, and installed.</i>”");
 
 			menu();
-			addButton(0, "Do it", doCockMilkerInvestment);
-			addButton(1, "No", investmentGoNotCorrupt);
+			if (player.gems >= 1000) addButton(0, "Do it", doCockMilkerInvestment);
+			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true)
+			addButton(1, "No", turnDownInvestmentNotCorrupt);
 		}
 
 		private function doCockMilkerInvestment():void
@@ -1136,8 +1193,9 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>A refinery, then? I guess it wouldn’t be too hard to throw up a still of sorts and adapt it from there. It’ll cost money though, ‘ticularly if you want it to be used by anyone for anything. If you give me 1500 gems, I kin see what I kin do.</i>”");
 
 			menu();
-			addButton(0, "Do it", doRefineryInvestment);
-			addButton(1, "No", investmentGoNotCorrupt);
+			if (player.gems >= 1500) addButton(0, "Do it", doRefineryInvestment);
+			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
+			addButton(1, "No", turnDownInvestmentNotCorrupt);
 		}
 
 		private function doRefineryInvestment():void
@@ -1166,8 +1224,9 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>The stuff that some of the sharks use, y’mean? Sure. You find it growing in clumps in loamy patches in the forest and along the lake. Most nobody in those parts uses it o’course, owing to them all being locked in a baby arms race with each other.</i>” You say you’d like her to set some land aside and grow it. “<i>If you want. I need seed though, and plenty of compost - only grows in very moist soil as I said. 750 gems can probably make it happen.</i>”");
 
 			menu();
-			addButton(0, "Do it", doContraceptiveInvestment);
-			addButton(1, "No", investmentGoNotCorrupt);
+			if (player.gems >= 750) addButton(0, "Do it", doContraceptiveInvestment);
+			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
+			addButton(1, "No", turnDownInvestmentNotCorrupt);
 		}
 
 		private function doContraceptiveInvestment():void
@@ -1182,6 +1241,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>It doesn’t take long to grow, but it’ll still take time,</i>” she says. “<i>I’ll lay the seeds tomorrow and you’ll be able to start pickin it in a week’s time.</i>”");
 
 			//[“Harvest Contraceptive” option added to main farm menu in 7 days time]
+			flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] = 1;
 			doNext(13);
 		}
 
@@ -1189,6 +1249,55 @@ package classes.Scenes.Places.Farm
 		{
 			clearOutput();
 			whitneySprite();
+
+			// If Bathgirl normal:
+			if (flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
+			{
+				outputText("\n\nYou tell Whitney you want her to give [bathgirlName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
+
+				outputText("\n\n“<i>Wh-what?</i>” says the dog woman, aghast. “<i>The pretty lil’ thing who works in the cowshed? She told me you cured her. She’s so happy an, an now you want to... uncure her?</i>” ");
+
+				outputText("\n\nExactly, you say primly. You need her to produce more milk. Whitney looks like she’s going to refuse, but once she’s stared into your unblinking eyes and remembered a few things, she looks at her feet and sighs miserably. “<i>I could probably do that. Because she trusts you, she trusts me, and- 400 gems,</i>” she finishes in a mumble.");
+			}
+			// If Bathgirl boobed and at camp: 
+			else
+			{
+				outputText("You tell Whitney you want her to build a swimming tank at the farm, then come to your camp, take away your expensively acquired milk slave and install her in it. The dog woman slowly absorbs this.");
+
+				outputText("\n\n“<i>400 gems,</i>” she says finally.");
+			}
+
+			menu();
+			if (player.gems >= 400) addButton(0, "Do it", doMilktalkInvestmentNotCorrupt);
+			else addButton(0, "Do it", turnDownInvestmentNotCorrupt, true);
+			addButton(1, "No", turnDownInvestmentNotCorrupt);
+		}
+
+		private function doMilktankInvestmentNotCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You press the gems into your taskmaster’s hand, turn and leave without another word. Your thoughts turn to huge, delightfully plush brown boobs and luxurious milky baths; it will be well worth it. ");
+
+			// In each case Bath girl reverts to her boobed state and is at farm
+			flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] = 1;
+
+			doNext(13);
+		}
+
+		private function turnDownInvestmentNotCorrupt(money:Boolean = false):void
+		{
+			clearOutput();
+			whitneySprite();
+
+			// Any “No” option:
+			outputText("Whitney shrugs, nonplussed.");
+
+			if (money) outputText("\n\n“<i>Come back with the money.</i>”");
+			else outputText("\n\n“<i>Come back if you change your mind. With the money.</i>”");
+
+			investmentGoNotCorrupt();
 		}
 
 		private function deFurDoge():void
