@@ -20,6 +20,11 @@
 	}
 //const FARM_DISABLED:int = 464;
 
+	public function whitneySprite():void
+	{
+		spriteSelect(62);
+	}
+	
 public function farmExploreEncounter():void {
 
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] > 0)
