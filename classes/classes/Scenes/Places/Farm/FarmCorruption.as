@@ -4093,6 +4093,174 @@ package classes.Scenes.Places.Farm
 
 			doNext(13);
 		}
+
+		private function numAmilyTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.AMILY_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function amilyFullTribalTats():Boolean
+		{
+			if (numAmilyTribalTats() == 4) return true;
+			return false;
+		}
+
+		private function numJojoTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.JOJO_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function jojoFullTribalTats():Boolean
+		{
+			if (numJojoTribalTats() == 4) return true;
+			return false;
+		}
+
+		private function numSophieTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function sophieFullTribalTats():Boolean
+		{
+			if (numSophieTribalTats() == 4) return true;
+			return false;
+		}
+
+		private function numVapulaTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.VAPULA_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.VAPULA_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.VAPULA_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.VAPULA_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function vapulaFullTribalTats():Boolean
+		{
+			if (numVapulaTribalTats() == 4) return true;
+			return false;
+		}
+
+		private function numKellyTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.KELLY_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.KELLY_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function kellyFullTribalTats():Boolean
+		{
+			if (numKellyTribalTats() == 4) return true;
+			return false;
+		}
+
+		private function numMilkyTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function milkyFullTribalTats():Boolean
+		{
+			if (numMilkyTribalTats() == 4) return true;
+			return false;
+		}
 	}
 
 }
