@@ -1166,7 +1166,7 @@ public static const MILKY_TATTOO_COLLARBONE:int                                 
 public static const MILKY_TATTOO_SHOULDERS:int                                   = 1158;
 public static const MILKY_TATTOO_LOWERBACK:int                                   = 1159;
 public static const MILKY_TATTOO_BUTT:int                                   = 1160;
-public static const UNKNOWN_FLAG_NUMBER_01161:int                                   = 1161;
+public static const WHITNEY_DOM_FIRST_PLEASURE:int                                   = 1161;
 public static const UNKNOWN_FLAG_NUMBER_01162:int                                   = 1162;
 public static const UNKNOWN_FLAG_NUMBER_01163:int                                   = 1163;
 public static const UNKNOWN_FLAG_NUMBER_01164:int                                   = 1164;
