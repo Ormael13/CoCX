@@ -1796,6 +1796,8 @@ package classes.Scenes.Places.Farm
 
 			outputText("Whitney knows exactly what it means when you head off to the barn where she stashed your “branding” equipment; the dog girl is already eagerly stripped down by the time you’ve returned. You hold the pots of ink and consider where, and what, to put on her.");
 
+			player.gems -= 50;
+
 			brandSlotSelect();
 		}
 
@@ -1811,6 +1813,8 @@ package classes.Scenes.Places.Farm
 			else outputText(" body");
 			outputText(", [master]? That’s my favourite type of treat.</i>” You consider where, and what, to put on her.");
 
+			player.gems -= 50;
+
 			amilyBrandSlotSelect();
 		}
 
@@ -1819,6 +1823,8 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 
 			outputText("You retrieve the pots of ink and paper from the barn and, smiling brightly, tell your pet mouse you’re going to give him a special treat. Jojo knows all too well the nature of your treats. He closes his eyes and waits for the worst as you consider where and what to put on him.");
+
+			player.gems -= 50;
 
 			jojoBrandSlotSelect();
 		}
@@ -1842,6 +1848,8 @@ package classes.Scenes.Places.Farm
 				outputText("\n\nShaking your head, you consider where and what you’re going to put on her.");
 			}
 
+			player.gems -= 50;
+
 			bimboSophieSlotSelect();
 		}
 
@@ -1855,6 +1863,8 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou consider where and what you’re going to put on her.");
 
+			player.gems -= 50;
+
 			vapulaSlotSelect();
 		}
 
@@ -1863,6 +1873,8 @@ package classes.Scenes.Places.Farm
 			outputText("You retrieve the pots of ink and paper from the barn and smilingly tell your centaur cumslut you’re going to give her a treat.");
 
 			outputText("\n\n“<i>Ok,</i>” she says meekly, her wide, green eyes on the objects in your hand. “<i>It won’t hurt, will it?</i>” Like you fucking her in the ass, you tell her soothingly, any initial pain will be more than worth the eventual satisfaction. As she blushes rosily, you consider where and what you’re going to put on her.");
+
+			player.gems -= 50;
 
 			kellySlotSelect();
 		}
@@ -1875,6 +1887,8 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Skin pictures? O-ok, I guess.</i>” She breaks her brittle display of casualness with a laugh. “<i>I’ve always quite liked butterflies - You don’t see them out in the desert much. If you’re going to draw something - maybe you could...?</i>”");
 
+			player.gems -= 50;
+
 			smallMilkySlotSelect();
 		}
 
@@ -1885,6 +1899,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n[bathgirlName] blinks up at you, and then frowns hard as she considers this.");
 
 			outputText("\n\n“<i>Bath time?</i>” she eventually replies.");
+
+			player.gems -= 50;
 
 			bigMilkySlotSelect();
 		}
@@ -2048,6 +2064,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "#1 Bitch", no1Tattoo, slot);
 			if (player.hasCock() && whitneyMaxedOralTraining())) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
 			if (player.hasVagina() && whitneyMaxedOralTraining()) addButton(5, "Pussylicker", champPussylickerTattoo, slot);
+
+			addButton(9, "Back", brandSlotSelect);
 		}
 
 		public function amilyBrandSelect(slot:int):void
@@ -2063,6 +2081,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Breeding Bitch", amilyBreedingBitchTattoo, slot);
 			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", amilyCockGoesHereTattoo, slot);
 			if (player.hasVagina()) addButton(5, "Mommy's Girl", amilyMommysGirlTattoo);
+
+			addButton(9, "Back", amilyBrandSlotSelect);
 		}
 
 		public function jojoBrandSelect(slot:int):void
@@ -2078,6 +2098,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Sissy Slut", jojoHeartTattoo, slot);
 			if (pc.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
 			if (pc.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
+
+			addButton(9, "Back", jojoBrandSlotSelect);
 		}
 
 		public function bimboSophieBrandSelect(slot:int):void
@@ -2093,7 +2115,9 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Property Of", bimboSophiePropertyOfTattoo, slot);
 			addButton(4, "Breeding Bitch", bimboSophieBreedingBitchTattoo, slot);
 			if (slot == 3) addButton(5, "Wide Load", bimboSophieWideLoadTattoo, slot);
-			if (player.hasCock() && slot == 2) addButton(6, "Cock Goes Here", bimboSophieCockGoesHereTattoo, slot); 
+			if (player.hasCock() && slot == 2) addButton(6, "Cock Goes Here", bimboSophieCockGoesHereTattoo, slot);
+
+			addButton(9, "Back", bimboSophieSlotSelect);
 		}
 
 		public function vapulaBrandSelect(slot:int):void
@@ -2109,6 +2133,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Cum Addict", vapulaCumAddictTattoo, slot);
 			if (slot == 2 || slot == 3) addButton(4, "Buttslut", vapulaButtslutTattoo, slot);
 			if (!pc.hasCock()) addButton(5, "Dildo Polisher", vapulaDildoPolisherTattoo, slot);
+
+			addButton(9, "Back", vapulaSlotSelect);
 		}
 
 		public function kellyBrandSelect(slot:int):void
@@ -2124,6 +2150,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "#1 Filly", kellyNo1FillyTattoo, slot);
 			if (silly) addButton(4, "Dick Won", kellyDickWonTattoo, slot);
 			if (slot == 1) addButton(5, "Horseshoe", kellyHorseshoeTattoo, slot);
+
+			addButton(9, "Back", kellySlotSelect);
 		}
 
 		public function smallMilkyBrandSelect(slot:int):void
@@ -2139,7 +2167,9 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Property Of", smallMilkyPropertyOfTattoo, slot);
 			addButton(4, "Bath Toy", smallMilkyBathToyTattoo, slot);
 			if (slot == 0) addButton(5, "Mega Milk", smallMilkyMegaMilkTattoo, slot);
-			if (slot == 0 && pc.hasCock()) "Cock Cozy", smallMilkyBathToyTattoo, slot);
+			if (slot == 0 && pc.hasCock()) "Cock Cozy", smallMilkyCockCozyTattoo, slot);
+
+			addButton(9, "Back", smallMilkySlotSelect);
 		}
 
 		public function bigMilkyBrandSelect(slot:int):void
@@ -2155,6 +2185,8 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Bath Toy", bigMilkyBathToyTattoo, slot);
 			if (slot == 0) addButton(4, "Mega Milk", bigMilkyMegaMilkTattoo, slot);
 			if (slot == 0 && pc.hasCock()) addButton(5, "Cock Cozy", bigMilkyCockCozyTattoo, slot);
+
+			addButton(9, "Back", bigMilkySlotSelect);
 		}
 
 		private function collarboneIntro():void
@@ -2606,6 +2638,210 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
+		private function smallMilkyTribalTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A tribal tattoo, all snaking, erotic lines, across her ";
+
+			if (slot == 0)
+			{
+				smallMilkyCollarboneIntro();
+				outputText("“<i>Oh hey, that’s quite pretty.</i>” [bathgirlName] smiles down at what you’ve drawn as you withdraw the pen. “<i>Thanks, [name]!</i>” You kiss her fondly on the forehead and send her on her way.");
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				smallMilkyShouldersIntro();
+				outputText("\n\n“<i>So, uh…</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				smallMilkyLowerBackIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				smallMilkyButtIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function bigMilkyTribalTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A tribal tattoo, all snaking, erotic lines, across her ";
+
+			if (slot == 0)
+			{
+				bigMilkyCollarboneIntro();
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				bigMilkyShouldersIntro();
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				bigMilkyLowerBackTattoo();
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				bigMilkyButtIntro();
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function bigMilkyHeartTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A plump, red love heart tattoo on her ";
+
+			if (slot == 0)
+			{
+				bigMilkyCollarboneIntro();
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				bigMilkyShouldersIntro();
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				bigMilkyLowerBackTattoo();
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				bigMilkyButtIntro();
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function bigMilkyPropertyOfTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Property of [Name]” tattooed across her ";
+
+			if (slot == 0)
+			{
+				bigMilkyCollarboneIntro();
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				bigMilkyShouldersIntro();
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				bigMilkyLowerBackTattoo();
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				bigMilkyButtIntro();
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function bigMilkyBathToyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Bath Toy” tattooed across her ";
+
+			if (slot == 0)
+			{
+				bigMilkyCollarboneIntro();
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				bigMilkyShouldersIntro();
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				bigMilkyLowerBackTattoo();
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				bigMilkyButtIntro();
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function bigMilkyMegaMilkTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Mega Milk” tattooed across her collarbone.";
+			bigMilkyCollarboneIntro();
+			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+
+
+			doNext(13);
+		}
+
+		private function bigMilkyCockCozyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Cock Cozy” tattooed across her collarbone.";
+			bigMilkyCollarboneIntro();
+			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+
+
+			doNext(13);
+		}
+
 		private function heartTattoo(slot:int):void
 		{
 			clearOutput();
@@ -2813,6 +3049,276 @@ package classes.Scenes.Places.Farm
 				kellyButtIntro();
 				tText += "butt.";
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function smallMilkyHeartTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "A plump, red love heart tattoo on her ";
+
+			if (slot == 0)
+			{
+				smallMilkyCollarboneIntro();
+				outputText("“<i>Oh hey, that’s quite pretty.</i>” [bathgirlName] smiles down at what you’ve drawn as you withdraw the pen. “<i>Thanks, [name]!</i>” You kiss her fondly on the forehead and send her on her way.");
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				smallMilkyShouldersIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?...</i>”");
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				smallMilkyLowerBackIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				smallMilkyButtIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function smallMilkyPropertyOfTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Property of [Name]” tattooed across her ";
+
+			if (slot == 0)
+			{
+				smallMilkyCollarboneIntro();
+				outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment colouring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				smallMilkyShouldersIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?...</i>”");
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				smallMilkyLowerBackIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				smallMilkyButtIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function smallMilkyBathToyTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Bath Toy” tattooed across her ";
+
+			if (slot == 0)
+			{
+				smallMilkyCollarboneIntro();
+				outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment colouring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				smallMilkyShouldersIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?...</i>”");
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				smallMilkyLowerBackIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				smallMilkyButtIntro();
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before putting her down to go stow the branding gear away.");
+
+				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
+
+		private function smallMilkyMegaMilkTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Mega Milk” tattooed across her collarbone.";
+
+			smallMilkyCollarboneIntro();
+			outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment colouring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
+			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+
+			doNext(13);
+		}
+
+		private function smallMilkyCockCozyTattoo():void
+		{
+			clearOutput();
+
+			var tText:String = "“Cock Cozy” tattooed across her collarbone.";
+
+			smallMilkyCollarboneIntro();
+			outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment colouring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
+			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+
+			doNext(13);
+		}
+
+		private function numMilkyButterflyTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE].indexOf("A butterfly") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS].indexOf("A butterfly") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK].indexOf("A butterfly") >= 0) count++;
+			}
+			if (flags[kFLAGS.MILKY_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_BUTT].indexOf("A butterfly") >= 0) count++;
+			}
+			return count;
+		}
+
+		private function smallMilkyButterflyTattoo():void
+		{
+			clearOutput();
+
+			var tText:String = "A butterfly, its four leaf-like wings in flight, tattooed across her ";
+
+			if (slot == 0)
+			{
+				smallMilkyCollarboneIntro();
+
+				if (numMilkyButterflyTats() < 3)
+				{
+					outputText("\n\nShe looks down with growing delight as the four winged shape becomes apparent, and then almost completely ruins it by gushing with glee, making her chest quiver, as you add the final red flourishes. Once you’re finished she plants a big kiss on your lips.");
+
+					outputText("\n\n“<i>Thank you so much [name], that’s beautiful! I can’t wait to show it off to everyone else around here!</i>” You smile as you watch her leave, her fingers trailing over her new butterfly, adjusting her clothes to make the most of it.");
+				}
+				else
+				{
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+
+					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
+				}
+
+				tText += "collarbone.";
+				flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				smallMilkyShouldersIntro();
+
+				if (numMilkyButterflyTats() < 3)
+				{
+					outputText("\n\n[bathgirlName]’s back quivers when you trace a four winged shape; she’s worked out what you’re doing. Grinning, you tell her to be still. She still almost ruins it by gushing with glee as you add the final red flourishes. Once you’re finished she immediately gets up and plants a big kiss on your lips.");
+
+					outputText("\n\n“<i>Thank you so much [name]! I can’t wait to show it off to everyone else around here!</i>” You smile as you watch her leave, her fingers trailing over her new butterfly, adjusting her clothes to make the most of it.");
+				}
+				else
+				{
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+
+					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
+				}
+
+				tText += "shoulders.";
+				flags[kFLAGS.MILKY_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				smallMilkyLowerBackIntro();
+
+				if (numMilkyButterflyTats() < 3)
+				{
+					outputText("\n\n[bathgirlName]’s back quivers when you trace a four winged shape; she’s worked out what you’re doing. Grinning, you tell her to be still, but she almost ruins it by gushing with glee as you add the final red flourishes. Once you’re finished she immediately gets up and plants a big kiss on your lips.");
+
+					outputText("\n\n“<i>Thank you so much [name]! I can’t wait to show it off to everyone else around here!</i>” You smile as you watch her leave, her fingers trailing over her new butterfly, attempting to adjust her clothes to make the most of it.");
+				}
+				else
+				{
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+
+					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
+				}
+
+				tText += "lower back.";
+				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				smallMilkyButtIntro();
+
+				if (numMilkyButterflyTats() < 3)
+				{
+					outputText("\n\n[bathgirlName]’s back quivers when you trace a four winged shape; she’s worked out what you’re doing. Grinning, you tell her to be still. She still almost ruins it by gushing with glee as you add the final red flourishes. Once you’re finished she immediately gets up and plants a big kiss on your lips.");
+
+					outputText("\n\n“<i>Thank you so much [name]! I can’t wait to show it off to – well, I am so pleased with it, anyway!</i>” You smile as you watch her leave, her fingers trailing over her new butterfly, attempting to adjust her clothes to make the most of it.");
+				}
+				else
+				{
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+
+					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
+				}
+
+				tText += "butt.";
+				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
 			doNext(13);
