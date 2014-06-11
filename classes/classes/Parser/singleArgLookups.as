@@ -77,6 +77,7 @@
 				"cockplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "cock" : "cocks"; },
 				"dickplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "dick" : "dicks"; },
 				"headplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "head" : "heads"; },
+				"prickplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "prick" : "pricks"; },
 				"boy"						: function(thisPtr:*):* { return thisPtr.player.mf("boy", "girl"); },
 				"guy"						: function(thisPtr:*):* { return thisPtr.player.mf("guy", "girl"); }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}

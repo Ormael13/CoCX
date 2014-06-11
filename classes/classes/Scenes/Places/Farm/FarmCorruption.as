@@ -2008,106 +2008,169 @@ package classes.Scenes.Places.Farm
 
 		private function firstCockOralTrainingStageThree():void
 		{
-You smile at Whitney as you take off your... you stop, frowning down at her. Did she whimper just then? She’s completely still, staring at you intently with her big, deep, brown eyes. Without saying a word and pretending to be interested in the sky above, you continue to disrobe, doing it slowly, placing every piece of your [armor] down on the ground with careful deliberation. There is no mistaking it this time - as your [cock biggest] finally bobs into view Whitney moans deep in her throat, squirming uncomfortably in her kneeling position as her gaze bores deep into your crotch. You smile softly, sit yourself down, open your [hips] wide, and wait. 
+			clearOutput();
+			whitneySprite();
 
-Male 
+			outputText("You smile at Whitney as you take off your... you stop, frowning down at her. Did she whimper just then? She’s completely still, staring at you intently with her big, deep, brown eyes. Without saying a word and pretending to be interested in the sky above, you continue to disrobe, doing it slowly, placing every piece of your [armor] down on the ground with careful deliberation. There is no mistaking it this time - as your [cock biggest] finally bobs into view Whitney moans deep in her throat, squirming uncomfortably in her kneeling position as her gaze bores deep into your crotch. You smile softly, sit yourself down, open your [hips] wide, and wait.");
 
-Once you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at your [cock biggest]. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin. {Balls: You sigh blissfully as the flat, warm flannel-like tongue spreads itself across your [balls], covering every inch, each sensitive orb taken into your slave’s mouth to be suckled gently until they are thrumming and bulging with packed heat, the loving attention laved on them made all the better by the soft, lustful moans drifting up from between your legs as she polishes them.} 
+			//Male 
+			if (!player.hasVagina())
+			{
+				outputText("\n\nOnce you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at your [cock biggest]. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin.");
+				if (player.balls > 0) outputText(" You sigh blissfully as the flat, warm flannel-like tongue spreads itself across your [balls], covering every inch, each sensitive orb taken into your slave’s mouth to be suckled gently until they are thrumming and bulging with packed heat, the loving attention laved on them made all the better by the soft, lustful moans drifting up from between your legs as she polishes them.");
 
-She rises until her head is level with your semi-erect prick and with long, careful, exquisite licks makes it fiercely erect, running her tongue along its full length and then swirling it around your head, pressing into the sensitive spots she knows will make you dense and tight with need. {Multicock: As she bathes your [cock biggest] in delicious sensation she wraps her hand around your [cock biggest2], softening and then tightening her grip, sliding up and down its stem until it is every bit as rock-hard as the one she is lapping at. She no longer struggles with doing three things at once - the wet roughness and the smooth dryness combine beautifully as she continues to frig herself, making you open your mouth to the shifting delectation inundating your overgrowth of cocks.}
+				outputText("\n\nShe rises until her head is level with your semi-erect prick and with long, careful, exquisite licks makes it fiercely erect, running her tongue along its full length and then swirling it around your head, pressing into the sensitive spots she knows will make you dense and tight with need.");
+				if (player.cocks.length > 1) outputText(" As she bathes your [cock biggest] in delicious sensation she wraps her hand around your [cock biggest2], softening and then tightening her grip, sliding up and down its stem until it is every bit as rock-hard as the one she is lapping at. She no longer struggles with doing three things at once - the wet roughness and the smooth dryness combine beautifully as she continues to frig herself, making you open your mouth to the shifting delectation inundating your overgrowth of cocks.");
 
-When she finally envelopes your jutting head with her mouth, you cannot help but groan with delight. She does it ever so slowly, letting her thin lips slide gradually down your shaft whilst hollowing her cheeks with syncopated suction, blanketing more and more of your [cock biggest] in sucking, liquid warmth. Her head bobs as she immediately finds a sensual rhythm, sending her tongue sliding downwards as her mouth withdraws to your bulbous tip and then back up as she buries your length deep into her mouth, using the alternating movement to send pulses of sheer ecstasy through your groin. 
+				outputText("\n\nWhen she finally envelopes your jutting head with her mouth, you cannot help but groan with delight. She does it ever so slowly, letting her thin lips slide gradually down your shaft whilst hollowing her cheeks with syncopated suction, blanketing more and more of your [cock biggest] in sucking, liquid warmth. Her head bobs as she immediately finds a sensual rhythm, sending her tongue sliding downwards as her mouth withdraws to your bulbous tip and then back up as she buries your length deep into her mouth, using the alternating movement to send pulses of sheer ecstasy through your groin.");
 
-You close your eyes, happy to sit back and let your pleasure inexorably build. It is here, at last, you encounter a problem. The wet, sucking seal around your prick stops for a few moments, accompanied by a profound moan, before starting again, only to stop another ten seconds later. You look down, baffled, and after watching your bitch extend and recede a couple of times, you spot the issue: your effort to link pleasure with servicing you in her mind has finally worked too well. 
+				outputText("\n\nYou close your eyes, happy to sit back and let your pleasure inexorably build. It is here, at last, you encounter a problem. The wet, sucking seal around your prick stops for a few moments, accompanied by a profound moan, before starting again, only to stop another ten seconds later. You look down, baffled, and after watching your bitch extend and recede a couple of times, you spot the issue: your effort to link pleasure with servicing you in her mind has finally worked too well. ");
 
-With one hand schlicking away at her sopping pussy Whitney has become so turned on sucking your cock that she has to pause entirely every few moments to stop herself from orgasming against your instructions. Her eyes closed, profoundly concerned with pleasuring you, she grunts in deep frustration as she pauses again to rest around the bulging meat spreading her lips wide, her heat refusing to simmer down. The final part of her training unfolds itself to you in the sunken, red part of your mind and you grin slowly.
+				outputText("\n\nWith one hand schlicking away at her sopping pussy Whitney has become so turned on sucking your cock that she has to pause entirely every few moments to stop herself from orgasming against your instructions. Her eyes closed, profoundly concerned with pleasuring you, she grunts in deep frustration as she pauses again to rest around the bulging meat spreading her lips wide, her heat refusing to simmer down. The final part of her training unfolds itself to you in the sunken, red part of your mind and you grin slowly.");
 
-“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around your [eachCock], dazed with dick.
+				outputText("\n\n“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around your [eachCock], dazed with dick.");
 
-“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.
+				outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
 
-player.totalCocks() >= 3
-{
-“<i>Put your other hand on this.</i>” Slowly she withdraws her fingers from her panties and wraps them around your [cock biggest3]. You sigh to the hot, damp pressure now ringing yet another constituent of your obscene tangle of pricks. “<i>Work them both at the same time - that’s it….</i>” She exceeds your expectations by swiftly picking up a steady beat, jerking your cocks with her smooth, exacting grasp in tandem. Focused back on [eachCock] she quickly forgets her doubt, slipping easily back into subspace.
-}
-else
-{
-“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it….</i>” You sigh as she swiftly picks up a steady beat {multicock: jerking both your cocks with her smooth, exacting grasp in tandem}.
-}
+				if(player.cocks.length > 2)
+				{
+					outputText("\n\n“<i>Put your other hand on this.</i>” Slowly she withdraws her fingers from her panties and wraps them around your [cock biggest3]. You sigh to the hot, damp pressure now ringing yet another constituent of your obscene tangle of pricks. “<i>Work them both at the same time - that’s it...</i>” She exceeds your expectations by swiftly picking up a steady beat, jerking your cocks with her smooth, exacting grasp in tandem. Focused back on [eachCock] she quickly forgets her doubt, slipping easily back into subspace.");
+				}
+				else
+				{
+					outputText("\n\n“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it...</i>” You sigh as she swiftly picks up a steady beat" + ((player.cocks.length > 1) ? " jerking both your cocks with her smooth, exacting grasp in tandem") + ".");
+				}
 
-“<i>Now get back to your main task.</i>” You hum with deep approval as once again your [cock biggest] is swaddled in mouth flesh, her tongue sliding up and down your shaft in the same masterful, alternating oscillation {multicock: all the while your [cock biggest2] {and [cock biggest3]} bulge and vibrate with pleasure in her pumping hand{s}}. Though it would be so easy to lose yourself entirely to her expert movements you keep abreast it for now, holding a close eye on the dog woman kneeling in front of you, entirely devoted now to pleasuring you. 
+				outputText("\n\n“<i>Now get back to your main task.</i>” You hum with deep approval as once again your [cock biggest] is swaddled in mouth flesh, her tongue sliding up and down your shaft in the same masterful, alternating oscillation");
+				if (player.cocks.length > 1)
+				{
+					outputText(" all the while your [cock biggest2]");
+					if (player.cocks.length > 2) outputText(" and [cock biggest3]");
+					outputText(" bulge and vibrate with pleasure in her pumping hand");
+					if (player.cocks.length > 2) outputText("s");
+				}
+				outputText(". Though it would be so easy to lose yourself entirely to her expert movements you keep abreast it for now, holding a close eye on the dog woman kneeling in front of you, entirely devoted now to pleasuring you.");
 
-You don’t even need to look at her to know your plan is working perfectly. Muffled grunts, slurps and moans fill the air below you, Whitney’s mind now linking sexual release so deeply to gratifying you that she drips and throbs to being on her knees having her mouth and hands packed with your cock without any help whatsoever.
+				outputText("\n\nYou don’t even need to look at her to know your plan is working perfectly. Muffled grunts, slurps and moans fill the air below you, Whitney’s mind now linking sexual release so deeply to gratifying you that she drips and throbs to being on her knees having her mouth and hands packed with your cock without any help whatsoever.");
 
-The sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your maleness and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her {mouth/throat}. She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of {the back of her mouth/her gullet} as you spear decisively inwards. 
+				outputText("\n\nThe sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your maleness and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her" + ((player.biggestCockLength() < 8) ? " mouth" : " throat") +". She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of " + ((player.biggestCockLength() < 8) ? "the back of her mouth" : "her gullet") + " as you spear decisively inwards. ");
 
-You can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark wordlessly with each bucket of jizz you fountain down her throat. There’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her master. 
+				outputText("\n\nYou can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark wordlessly with each bucket of jizz you fountain down her throat. There’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her master. ");
 
-{Multicock: She doesn’t forget the cock{s} trapped in her grasp for a moment; she milks {it/them} as hard as you’re fucking her mouth, and {they/it} flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your {twin/triple/transcendent} high; {it/they} paint her skirt with {its/their} generous discharge.} {Huge CumQ: Once you’re almost done, as ever you pull out and spurt the last few creamy ropes across her face and clothes. Red with her own huge high, the dog woman does her level best to catch them in her mouth.}
+				if (player.cocks.length > 1 || player.cumQ() >= 1500) outputText("\n\n");
+				if (player.cocks.length > 1)
+				{
+					outputText("She doesn’t forget the cock");
+					if (player.cocks.length > 2) outputText("s");
+					outputText(" trapped in her grasp for a moment; she milks");
+					if (player.cocks.length > 2) outputText(" them");
+					else outputText(" it");
+					outputText(" as hard as you’re fucking her mouth, and");
+					if (player.cocks.length > 2) outputText(" they flex");
+					else outputText(" it flexes");
+					outputText(" out cum just as eagerly as the first, delirium seizing you as you are clenched by your");
+					if (player.cocks.length == 2) outputText(" twin");
+					else if (player.cocks.length == 3) outputText(" triple");
+					else outputText(" transcendent");
+					outputText(" high;")
+					if (player.cocks.length > 2) outputText(" they paint");
+					else outputText(" it paints");
+					outputText(" her skirt with")
+					if (player.cocks.length > 2) outputText(" their");
+					else outputText(" its");
+					outputText(" generous discharge. ");
+				}
+				if (player.cumQ() >= 1500)
+				{
+					outputText("Once you’re almost done, as ever you pull out and spurt the last few creamy ropes across her face and clothes. Red with her own huge high, the dog woman does her level best to catch them in her mouth.");
+				}
 
-Once you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, {Monocock: Whitney cleans your [cock biggest] with her flat tongue, lapping your oozing head clean, deliciously soothing your aching cock.} {Multicock: Whitney cleans all of your pricks with her flat tongue, lapping each of your oozing heads clean, deliciously soothing your aching cock.} She moans the low, blissed-out moan of an addict as she cleans you up, actually gently pumping your spent prick{s} to make the last of it drool out. Gods... just these sounds and sensations, the gentle licking at your [cock biggest]’s tip and the little gasping exhale as she manages to coax a final drop onto her thirsty tongue, make you want to do it all over again... if only she hadn’t just drained you utterly. You pull her up before she makes your cock ache even more, pressing her firm, petite body into your [chest] and gaze proudly and complacently at your champion cocksucker.
+				outputText("\n\nOnce you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, " + ((player.cocks.length == 1) ? "Whitney cleans your [cock biggest] with her flat tongue, lapping your oozing head clean, deliciously soothing your aching cock" : "Whitney cleans all of your pricks with her flat tongue, lapping each of your oozing heads clean, deliciously soothing your aching cock") + ". She moans the low, blissed-out moan of an addict as she cleans you up, actually gently pumping your spent [prickplural] to make the last of it drool out. Gods... just these sounds and sensations, the gentle licking at your [cock biggest]’s tip and the little gasping exhale as she manages to coax a final drop onto her thirsty tongue, make you want to do it all over again... if only she hadn’t just drained you utterly. You pull her up before she makes your cock ache even more, pressing her firm, petite body into your [chest] and gaze proudly and complacently at your champion cocksucker.");
 
-“<i>Think I’ve got it,</i>” she whispers, grinning back at you woozily, red throbbing deep in the brown pools of her eyes. You rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.
+				outputText("\n\n“<i>Think I’ve got it,</i>” she whispers, grinning back at you woozily, red throbbing deep in the brown pools of her eyes. You rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.");
+			}
+			//Herm
+			else if (player.hasVagina())
+			{
 
-Herm 
+			outputText("\n\nOnce you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at your [cock biggest]. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin. This time she shows remarkable initiative by burying deep into your crotch to first push her lips and questing tongue onto your [vagina]. ");
 
-Once you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at your [cock biggest]. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin. This time she shows remarkable initiative by burying deep into your crotch to first push her lips and questing tongue onto your [vagina]. 
+			outputText("\n\nYou sigh as she laps at your pussy, first circling your outer lips gently before pushing in, smoothing over your sensitive walls before finding your [clit], humming contentedly as she spreads the thin, wet blanket of her tongue over it, pushing and dabbing at it until it is bulging needily and your tunnel is dripping excitement. Given she’s a novice at that, she’s - you gasp as she sends another sumptuous twinge rippling through you - she’s very good. Once she’s got you nice and wet she replaces her masterful tongue with her warm hand, gently fingering your clit as she moves up.");
 
-You sigh as she laps at your pussy, first circling your outer lips gently before pushing in, smoothing over your sensitive walls before finding your [clit], humming contentedly as she spreads the thin, wet blanket of her tongue over it, pushing and dabbing at it until it is bulging needily and your tunnel is dripping excitement. Given she’s a novice at that, she’s - you gasp as she sends another sumptuous twinge rippling through you - she’s very good. Once she’s got you nice and wet she replaces her masterful tongue with her warm hand, gently fingering your clit as she moves up.
+			if (player.balls > 0) outputText("\n\nYou sigh blissfully as the flat, warm flannel-like tongue spreads itself across your [balls], covering every inch, each sensitive orb taken into your slave’s mouth to be suckled gently until they are thrumming and bulging with packed heat, the loving attention laved on them made all the better by the soft, lustful moans drifting up from between your legs as she polishes them. ");
+			outputText("She rises until her head is level with your semi-erect prick and with long, careful, exquisite licks makes it fiercely erect, running her tongue along its full length and then swirling it around your head, pressing into the sensitive spots she knows will make you dense and tight with need. You close your eyes as the pleasure inundating both your male and female sex combine, a slow but brilliant chemical reaction consuming you from within.");
 
-{Balls: You sigh blissfully as the flat, warm flannel-like tongue spreads itself across your [balls], covering every inch, each sensitive orb taken into your slave’s mouth to be suckled gently until they are thrumming and bulging with packed heat, the loving attention laved on them made all the better by the soft, lustful moans drifting up from between your legs as she polishes them.} She rises until her head is level with your semi-erect prick and with long, careful, exquisite licks makes it fiercely erect, running her tongue along its full length and then swirling it around your head, pressing into the sensitive spots she knows will make you dense and tight with need. You close your eyes as the pleasure inundating both your male and female sex combine, a slow but brilliant chemical reaction consuming you from within.
+			outputText("\n\nWhen she finally envelopes your jutting head with her mouth, you cannot help but groan with delight. She does it ever so slowly, letting her thin lips slide gradually down your shaft whilst hollowing her cheeks with syncopated suction, blanketing more and more of your [cock biggest] in sucking, liquid warmth. Her head bobs as she immediately finds a sensual rhythm, sending her tongue sliding downwards as her mouth withdraws to your bulbous tip and then back up as she buries your length deep into her mouth, using the alternating movement to send pulses of sheer ecstasy through your groin. ");
 
-When she finally envelopes your jutting head with her mouth, you cannot help but groan with delight. She does it ever so slowly, letting her thin lips slide gradually down your shaft whilst hollowing her cheeks with syncopated suction, blanketing more and more of your [cock biggest] in sucking, liquid warmth. Her head bobs as she immediately finds a sensual rhythm, sending her tongue sliding downwards as her mouth withdraws to your bulbous tip and then back up as she buries your length deep into her mouth, using the alternating movement to send pulses of sheer ecstasy through your groin. 
+			outputText("\n\nYou close your eyes, happy to sit back and let your pleasure inexorably build. It is here, at last, you encounter a problem. The wet, sucking seal around your prick stops for a few moments, accompanied by a profound moan, before starting again, only to stop another ten seconds later. You look down, baffled, and after watching your bitch extend and recede a couple of times, you spot the issue: your effort to mentally link pleasure with servicing you has finally worked too well.");
 
-You close your eyes, happy to sit back and let your pleasure inexorably build. It is here, at last, you encounter a problem. The wet, sucking seal around your prick stops for a few moments, accompanied by a profound moan, before starting again, only to stop another ten seconds later. You look down, baffled, and after watching your bitch extend and recede a couple of times, you spot the issue: your effort to mentally link pleasure with servicing you has finally worked too well.
+			outputText("\n\nWith one hand schlicking away at her sopping pussy Whitney has become so turned on sucking your cock that she has to pause entirely every few moments to stop herself from orgasming against your instructions. Her eyes closed, profoundly concerned with pleasuring you, she grunts in pure frustration as she pauses again to rest around the bulging meat spreading her lips wide, her heat refusing to simmer down. The final part of her training unfolds itself to you in the sunken, red part of your mind and you grin slowly.");
 
-With one hand schlicking away at her sopping pussy Whitney has become so turned on sucking your cock that she has to pause entirely every few moments to stop herself from orgasming against your instructions. Her eyes closed, profoundly concerned with pleasuring you, she grunts in pure frustration as she pauses again to rest around the bulging meat spreading her lips wide, her heat refusing to simmer down. The final part of her training unfolds itself to you in the sunken, red part of your mind and you grin slowly.
+			outputText("\n\n“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around [eachCock], dazed with dick.");
 
-“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around [eachCock], dazed with dick.
+			outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
 
-“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.
+			if (player.cocks.length >= 2)
+			{
+				outputText("\n\n“<i>Put your other hand on this.</i>” Slowly she withdraws her fingers from her panties and wraps them around your [cock biggest2]. You sigh at the hot, damp pressure now ringing another constituent of your obscene tangle of pricks. “<i>Work them at the same time... that’s it...</i>” She exceeds your expectations by swiftly picking up a steady beat, jerking both your second cock and curling her searching fingers into your [vagina] in tandem, once again making the overwhelming sensation of combined male and female sexual excitement build inside you. Focused back on [eachCock] and pussy she quickly forgets her doubt, slipping easily back into subspace.");
+			}
+			else
+			{
+				outputText("\n\n“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it...</i>” You sigh as she swiftly picks up a steady beat, wringing the neglected trunk of your cock whilst curling her searching fingers into your [vagina] in tandem, once again making the overwhelming sensation of combined male and female sexual excitement build inside you.");
+			}
 
-player.totalCocks() >= 2
-{
-“<i>Put your other hand on this.</i>” Slowly she withdraws her fingers from her panties and wraps them around your [cock biggest2]. You sigh at the hot, damp pressure now ringing another constituent of your obscene tangle of pricks. “<i>Work them at the same time... that’s it….</i>” She exceeds your expectations by swiftly picking up a steady beat, jerking both your second cock and curling her searching fingers into your [vagina] in tandem, once again making the overwhelming sensation of combined male and female sexual excitement build inside you. Focused back on [eachCock] and pussy she quickly forgets her doubt, slipping easily back into subspace.
-}
-else player.totalCocks() == 1
-{
-“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it….</i>” You sigh as she swiftly picks up a steady beat, wringing the neglected trunk of your cock whilst curling her searching fingers into your [vagina] in tandem, once again making the overwhelming sensation of combined male and female sexual excitement build inside you.
-}
+			outputText("\n\n“<i>Now get back to your main task.</i>” You hum with deep approval as once again your [cock biggest] is swaddled in mouth flesh, her tongue sliding up and down your shaft in the same masterful, alternating oscillation all the while your [vagina] " + ((player.cocks.length >= 2) ? "and [cock biggest2] thrum and vibrate" : "thrums and vibrates") + " with pleasure from her teasing hands. Though it would be so easy to lose yourself entirely to her expert movements you keep abreast it for now, keeping a close eye on the dog woman kneeling in front of you, entirely devoted now to pleasuring you.");
 
-“<i>Now get back to your main task.</i>” You hum with deep approval as once again your [cock biggest] is swaddled in mouth flesh, her tongue sliding up and down your shaft in the same masterful, alternating oscillation all the while your [vagina] {Multicock: and [cock biggest2]} thrums and vibrates with pleasure from her teasing hands. Though it would be so easy to lose yourself entirely to her expert movements you keep abreast it for now, keeping a close eye on the dog woman kneeling in front of you, entirely devoted now to pleasuring you. 
+			outputText("\n\nYou don’t even need to look at her to know your plan is working perfectly. Muffled grunts, slurps and moans fill the air below you, Whitney’s mind now linking sexual release so deeply to debasing herself and gratifying you that she drips and throbs to being on her knees and having her mouth and hands packed with your cock, buried in your cunt, without any help whatsoever.");
 
-You don’t even need to look at her to know your plan is working perfectly. Muffled grunts, slurps and moans fill the air below you, Whitney’s mind now linking sexual release so deeply to debasing herself and gratifying you that she drips and throbs to being on her knees and having her mouth and hands packed with your cock, buried in your cunt, without any help whatsoever.
+			outputText("\n\nThe sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your extensive sex and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of " + ((player.biggestCockLength() < 8) "the back of her mouth" : "her gullet") + " as you spear decisively inwards.");
 
-The sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your extensive sex and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her {mouth/throat}. She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of {the back of her mouth/her gullet} as you spear decisively inwards. 
+			outputText("\n\nYou can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark wordlessly with each bucket of jizz you fountain down her throat. There’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her master. ");
 
-You can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark wordlessly with each bucket of jizz you fountain down her throat. There’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her master. 
+			outputText("\n\nHer fingers slip and slide around your [vagina] and it quivers and contracts in shared orgasm, " + ((player.wetness() > 2) ? "soaking her arm as it gutters your juices, ") + "heightening the ecstasy you feel to mind-blowing heights. ");
+			if (player.cocks.length > 1) outputText(" She doesn’t forget the cock trapped in her grasp for a moment either; she milks it as hard as you’re fucking her mouth, and it flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your triple high as it paints her skirt with its generous discharge.");
+			if (player.cumQ() >= 1500) outputText(" Once you’re almost done, as ever you pull out and spurt the last few creamy ropes across her face and clothes. Red with her own huge high, the dog woman does her level best to catch them in her mouth.");
 
-Her fingers slip and slide around your [vagina] and it quivers and contracts in shared orgasm, {High wetness: soaking her arm as it gutters your juices}, heightening the ecstasy you feel to mind-blowing heights. {Multicock: She doesn’t forget the cock trapped in her grasp for a moment either; she milks it as hard as you’re fucking her mouth, and it flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your triple high as it paints her skirt with its generous discharge.} {High CumQ: Once you’re almost done, as ever you pull out and spurt the last few creamy ropes across her face and clothes. Red with her own huge high, the dog woman does her level best to catch them in her mouth.}
+			outputText("\n\nOnce you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, ");
+			if (player.cocks.length == 1) outputText("Whitney first cleans your [vagina] and then your [cock biggest] with her flat tongue, polishing your dripping pussy and thighs to a shine before lapping your oozing head clean, deliciously soothing your aching cock.");
+			else outputText("Whitney uses her flat tongue to clean first your [vagina], polishing your dripping pussy and thighs to a shine, and then each of your pricks, lapping the oozing heads clean, deliciously soothing your aching cocks.");
+			outputText(" She moans the low, blissed-out moan of an addict as she cleans you up, actually gently pumping your spent [prickplural] to make the last of it drool out. Gods... just these sounds and sensations, the gentle licking at your [cock biggest]’s tip and the little gasping exhale as she manages to coax a final drop onto her thirsty tongue, make you want to do it all over again... if only she hadn’t so adroitly drained you utterly. You pull her up before she makes your cock ache even more, pressing her firm, petite body into your [chest] and gaze proudly and complacently at your champion cocksucker.");
 
-Once you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, {Monocock: Whitney first cleans your [vagina] and then your [cock] with her flat tongue, polishing your dripping pussy and thighs to a shine before lapping your oozing head clean, deliciously soothing your aching cock.} {Multicock: Whitney uses her flat tongue to clean first your [vagina], polishing your dripping pussy and thighs to a shine, and then all of your pricks, lapping each of your oozing heads clean, deliciously soothing your aching cock.} She moans the low, blissed-out moan of an addict as she cleans you up, actually gently pumping your spent prick{s} to make the last of it drool out. Gods... just these sounds and sensations, the gentle licking at your [cock biggest]’s tip and the little gasping exhale as she manages to coax a final drop onto her thirsty tongue, make you want to do it all over again... if only she hadn’t so adroitly drained you utterly. You pull her up before she makes your cock ache even more, pressing her firm, petite body into your [chest] and gaze proudly and complacently at your champion cocksucker.
+			outputText("\n\n“<i>Think I’ve got it,</i>” she whispers, grinning back at you woozily, red throbbing deep in the brown pools of her eyes. You rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.");
+			}
 
-“<i>Think I’ve got it,</i>” she whispers, grinning back at you woozily, red throbbing deep in the brown pools of her eyes. You rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.
+			player.orgasm();
+			dynStats("sen-", 1);
+			doNext(13);
 		}
 
 		private function cockOralTrainingStageThree():void
 		{
-You smirk at the dog woman knelt before you, letting the silence draw out. She watches you with barely contained anticipation, constantly running her tongue over her lips, her short tail whipping against her skirt as you slowly take off the lower components of your [armor]. As before you do it at a tortuously slow pace; you savour the stifled moans and whimpers below you. 
+			clearOutput();
+			whitneySprite();
 
-When you finally settle down and heft your [cock biggest] into view as the last of Whitney’s restraint breaks down and she pants openly, her tongue lolling out as she stares avidly at the instrument of her downfall. You let it brush gently against her face {Multicock:, allowing your other cock{s} to unfurl and bob behind it} {and} {Vagina: leisurely exposing your moist [vagina]} {at the same time}, perfuming the air around her with your heavy musk.
+outputText("\n\nYou smirk at the dog woman knelt before you, letting the silence draw out. She watches you with barely contained anticipation, constantly running her tongue over her lips, her short tail whipping against her skirt as you slowly take off the lower components of your [armor]. As before you do it at a tortuously slow pace; you savour the stifled moans and whimpers below you.");
 
-“<i>Oh Gods.</i>” she moans, unable to look away as she swallows heavily.
+outputText("\n\nWhen you finally settle down and heft your [cock biggest] into view as the last of Whitney’s restraint breaks down and she pants openly, her tongue lolling out as she stares avidly at the instrument of her downfall. You let it brush gently against her face");
+if (player.cocks.length >= 2) outputText(", allowing your other cock");
+if (player.cocks.length > 2) outputText("s");
+if (player.cocks.length >= 2) outputText(" to unfurl and bob behind it");
+if (player.hasVagina() && player.cocks.length >= 2) outputText(" and");
+if (player.hasVagina()) outputText(", leisurely exposing your moist [vagina]");
+if (player.cocks.length >= 2 && player.hasVagina()) outputText(" at the same time");
+outputText(", perfuming the air around her with your heavy musk.");
 
-“<i>Time for the last thing you need to learn,</i>” you say softly. You glory in the result of all your hard work in front of you inwardly but outwardly display no emotion. “<i>I own a lot of sluts who need fucking and not a great deal of time. So if you want to enjoy what I’ve given you, if you want to be a shameless bitch who wants for nothing but being on her knees and sucking my cock, to moan and wet yourself as you drink my cum, then you will have to ask for it. Nicely.</i>”
+outputText("\n\n“<i>Oh Gods.</i>” she moans, unable to look away as she swallows heavily.");
 
-“<i>Yes!</i>” The tail wags harder. 
+outputText("\n\n“<i>Time for the last thing you need to learn,</i>” you say softly. You glory in the result of all your hard work in front of you inwardly but outwardly display no emotion. “<i>I own a lot of sluts who need fucking and not a great deal of time. So if you want to enjoy what I’ve given you, if you want to be a shameless bitch who wants for nothing but being on her knees and sucking my cock, to moan and wet yourself as you drink my cum, then you will have to ask for it. Nicely.</i>”");
 
-“<i>Alright. Put your hands out in front of you, bend them. Back straight. Good. Now repeat after me: Please [Master], may I suck your cock?</i>”
+outputText("\n\n“<i>Yes!</i>” The tail wags harder. ");
 
-“<i>Please [master] may I suck your cock,</i>” says Whitney feverishly, blurring the words together, her soulful, needy gaze never leaving yours as she begs in front of you. You lean back and take time to consider it.
+outputText("\n\n“<i>Alright. Put your hands out in front of you, bend them. Back straight. Good. Now repeat after me: Please [master], may I suck your cock?</i>”");
 
-“<i>Very well,</i>” you say coolly. “<i>But next time you will say it clearer. Begin.</i>”
+outputText("\n\n“<i>Please [master] may I suck your cock,</i>” says Whitney feverishly, blurring the words together, her soulful, needy gaze never leaving yours as she begs in front of you. You lean back and take time to consider it.");
+
+outputText("\n\n“<i>Very well,</i>” you say coolly. “<i>But next time you will say it clearer. Begin.</i>”");
 
 Male 
 

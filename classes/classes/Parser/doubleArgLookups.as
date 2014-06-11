@@ -16,7 +16,10 @@
 			"one"		: function(thisPtr:*):*{ return thisPtr.oMultiCockDesc(); },
 			"largest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
 			"biggest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
+			"biggest2"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex2()); },
+			"biggest3"  : function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex3()); },
 			"smallest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.smallestCockIndex()); },
+			"smallest2" : function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.smallestCockIndex2()); },
 			"longest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.longestCock()); },
 			"shortest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.shortestCockIndex()); }
 		}
@@ -25,8 +28,11 @@
 		public var cockHeadLookups:Object = // For subject: "cockHead"
 		{
 			"biggest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
+			"biggest2"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex2()); },
+			"biggest3"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex3()); },
 			"largest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
 			"smallest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.smallestCockIndex()); },
+			"smallest2"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.smallestCockIndex2()); },
 			"longest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.longestCock()); },			// the *head* of a cock has a length? Wut?
 			"shortest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.shortestCockIndex()); }
 		}
