@@ -73,7 +73,12 @@
 				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName; },
 				
 				"latexyname"				: function(thisPtr:*):* { return thisPtr.flags[kFLAGS.GOO_NAME]; },
-				"bathgirlname"				: function(thisPtr:*):* { return thisPtr.flags[kFLAGS.MILK_NAME]; }
+				"bathgirlname"				: function(thisPtr:*):* { return thisPtr.flags[kFLAGS.MILK_NAME]; },
+				"cockplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "cock" : "cocks"; },
+				"dickplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "dick" : "dicks"; },
+				"headplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "head" : "heads"; },
+				"boy"						: function(thisPtr:*):* { return thisPtr.player.mf("boy", "girl"); },
+				"guy"						: function(thisPtr:*):* { return thisPtr.player.mf("guy", "girl"); }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}
 
 		}
