@@ -274,8 +274,53 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(3, "Stop Harvest", stopHarvest);
 	
+	addButton(9, "Appearance", sophieBimboAppearance);
+
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Leave", camp.campSlavesMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+}
+
+//Appearance:
+private function sophieBimboAppearance():void {
+	clearOutput();
+	outputText("Sophie is a big, buxom harpy, no two ways about her.  She has ");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("very ");
+	outputText("long ");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("platinum-blond");
+	else outputText("pink");
+	outputText(" 'hair' that dangles off her shoulders, like a bird's plumage.  She wears a thick layer of golden lipstick over her plump");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", super-sized");
+	outputText(" lips at all times, like most of her kind, the gloss capable of giving her voice a compelling quality or inducing arousal on contact with males or herms.  Her face lacks the youthful quality found among many of her sisters, though you don't see any of the lines that would indicate age.");
+	
+	outputText("\n\nSophie's breasts are ");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("so immense they would drag her to the ground if she tried to fly, a sexy, lingering aftereffect of the draft you gave her.  The wobbly bimbo-tits look to be about F-cups.");
+	else outputText("unusually large.  The buxom harpy does seem slightly encumbered by them, but still capable of flight.  Her breasts look to be about DD-cups, nice and big enough for a soft squeeze or rough tit-fuck.");
+	
+	outputText("\n\nShe has a glittering, moist pussy concealed between her thick thighs, both of which start the feathery covering that reaches all the way to her bird-like, taloned feet.  Her jiggly backside wobbles slightly with every exaggerated step she takes, with her long tailfeathers fanning above it.  You're sure there's a tight butthole located between them, where it belongs, but you can't really get a look at it with all the plump ass surrounding it.");
+	
+	outputText("\n\nSophie's arms are covered in feathers as well, and are somewhat wing-like in appearance, though she has human hands at the ends of them.  Her primary wings are larger and sprout out above her shoulder blades.  She often keeps them folded out of the way behind her, but she can kick up a huge dust-storm with them when she wants.");
+
+	if (farm.farmCorruption.hasTattoos("sophie"))
+	{
+		outputText("\n\n");
+		if (farm.farmCorruption.sophieFullTribalTats())
+		{
+			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
+		}
+		else
+		{
+			if (farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			else outputText("She has ");
+
+			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] + "\n");
+			if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] + "\n");
+			if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] + "\n");
+			if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_BUTT] + "\n");
+		}
+	}
+	
+	menu();
+	addButton(0,"Back",approachBimboSophieInCamp, false);
 }
 
 private function harvestEggs():void

@@ -625,6 +625,26 @@ private function kellyAppearance():void {
 	//4:
 	else if(flags[kFLAGS.KELLY_INCUBATION] >= 1) outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
 	
+	if (farm.farmCorruption.hasTattoos("kelly"))
+	{
+		outputText("\n\n");
+		if (farm.farmCorruption.kellyFullTribalTats())
+		{
+			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
+		}
+		else
+		{
+			if (farm.farmCorruption.numTattoos("kelly") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			else outputText("She has ");
+
+			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_COLLARBONE] + "\n");
+			if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_SHOULDERS] + "\n");
+			if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_LOWERBACK] + "\n");
+			if (flags[kFLAGS.KELLY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_BUTT] + "\n");
+			outputText("\n");
+		}
+	}
+
 	//Kids flavour text
 	if(flags[kFLAGS.KELLY_KIDS] > 0) {
 		if(flags[kFLAGS.KELLY_KIDS] == 1) {

@@ -2648,7 +2648,7 @@ package classes.Scenes.NPCs
 					}
 					else
 					{
-						if (farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:");
+						if (farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 						else outputText("\nShe has ");
 
 						if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_COLLARBONE] + "\n");
