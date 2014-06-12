@@ -204,6 +204,18 @@ package classes.Scenes.Places.Farm
 				}
 			}
 
+			// Orgyroom
+			if (flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] != 0)
+			{
+				flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE]++;
+
+				if (flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] > 7)
+				{
+					flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] = 0;
+					flags[kFLAGS.FARM_UPGRADES_ORGYROOM] = 2;
+				}
+			}
+
 			// Figure out how much corruption we're going to slap on to Whitney
 			var modValue:int = -1;
 
@@ -693,6 +705,11 @@ package classes.Scenes.Places.Farm
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
 				
 				if (flags[kFLAGS.FARM_UPGRADES_CONTRAPCEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
+
+				if (flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] > 1)
+				{
+					outputText("\n\nIt looks as if Whitney has been doing some major renovation work in and around her farmhouse. The window to her front room has been taken out, white sheets have been draped over everything and by the look of the narrow pits she’s dug it looks as if she’s putting in some plumbing. Whatever she’s building it’s still a work in progress.")
+				}
 			}
 			else
 			{
@@ -1591,6 +1608,13 @@ package classes.Scenes.Places.Farm
 				return;
 			}
 
+			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 2)
+			{
+				orgyRoomTalk();
+				flags[kFLAGS.FARM_UPGRADES_ORGYROOM] = 1;
+				return;
+			}
+
 			clearOutput();
 			whitneySprite();
 
@@ -1613,6 +1637,7 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 1 || flags[kFLAGS.QUEUE_BRANDING_UPGRADE] < 1) addButton(2, "Branding", brandingMenu);
 			if (whitneyDom()) addButton(3, "Pleasure", whitneyDomPleasure);
 			else addButton(3, "Pleasure", whitneySubPleasure);
+			orgyRoomRouter();
 		}
 
 		private function whitneySubPleasure():void
@@ -5835,6 +5860,364 @@ package classes.Scenes.Places.Farm
 			if (numMilkyTribalTats() == 4) return true;
 			return false;
 		}
+
+		private function orgyRoomRouter():void
+		{
+			var doFunctor:Function = null;
+
+			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 0 && flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] == 0)
+			{
+				doFunctor = wantOrgyRoom;
+			}
+
+			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 1)
+			{
+				if (whitneyDom())
+				{
+					// Nothing... yet. Hopefully.
+				}
+				else
+				{
+					if (!player.isGoo() && !player.isTaur() && (player.hasCock() || player.hasVagina())) doFunctor = orgyRoomSubMassage;
+				}
+			}
+
+			if (doFunctor != null) addButton(4, "Massage", doFunctor);
+		}
+
+		private function wantOrgyRoom():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("“<i>[Master],</i>” says Whitney haltingly, after she’s knelt in front of you. “<i>May I make a suggestion?</i>” You shrug nonchalantly. “<i>Well... it’s just you often roll in here looking quite worn out, like. From fightin’ demons and dragons and such, whatever it is you do out there in the wastelands. It must be real important, cause you’re often banged up. To mention nothing of you needing to take care of... your chattel...</i>” she closes her eyes and sighs deeply. ");
+
+			outputText("\n\nYou move your [lowerBody] restlessly when the silence drags out a bit. “<i>Well, understand I kin only talk as a farmer. But if I got a prime "+ player.mf("stud", "mare") +" who is constantly exerting themselves - a lot of the time it’s them who’s doing it not me, they’re just so big and, and dominant they don’t want to stop throwing themselves around even for a moment - they get stress injuries. Which just get worse the more they try and pretend they don’t exist. Now I ain’t saying you got something like that, but when I see you come here, all forceful and fretful, and then leave in such a rush - it breaks my heart a little. Cos I could help you, at least a bit. Don’t look after livestock your whole life without learning some about muscle groups and medicine. I could help you not be the [guy] who suddenly keels over in the middle of a fight screamin’ their hamstring’s gone.</i>”");
+
+			outputText("\n\nYou look at her shrewdly. She doesn’t move her hands from her knees during all of this, hasn’t tried to touch you at all, demonstrated what she might be capable of. You ask what she’s really suggesting here.");
+
+			outputText("\n\n“<i>I want to make it really good for you [master],</i>” she says fervently. “<i>So if you give me 2200 gems...</i>”");
+
+			outputText("\n\n“<i>2200 gems?!</i>”");
+
+			outputText("\n\n“<i>...I could convert my front room into a relaxation room for you,</i>” the dog woman goes on doggedly. “<i>It would have everything I need to properly take care of you. Like a hot tub. And I would pack it with all the sorts of things...</i>“ she sighs dreamily again “<i>all the sorts of things a big, strong "+ pc.mf("lord", "lady") +" of the land might want. For when [he] is taking care of [his] servants. Like lots of em. At the same time.</i>”");
+
+			var noT:String = "No";
+			if (player.gems >= 2200) addButton(0, "Yes", getOrgyRoom);
+			else noT = "Too Much";
+
+			addButton(1, "No", noOrgyRoomPlz);
+		}
+
+		private function getOrgyRoom():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("It’s a heavy investment, but her description of what she intends has definitely piqued your interest. Slowly you turn and, with a flick of the head, indicate the rock where she leaves the farm’s profit each week. Whitney breaks out onto a wide grin, her hands scrunching up on her skirt.");
+
+			outputText("\n\n“<i>You won’t regret this [master], I promise!</i>”");
+
+			player.gems -= 2200;
+
+			doNext(13);
+		}
+
+		private function noOrgyRoomPlz():void
+		{
+			clearOutput();
+			whitneySprite();
+			
+			outputText("You tell her it’s a fine idea, but it will have to wait for now.");
+
+			outputText("\n\n“<i>I can wait,</i>” your taskmistress murmurs, the picture of serenity. “<i>I just don’t know if the knot in your triceps can. It would be a good investment [master], trust me.</i>”");
+
+			doNext(dogeCorruptedMissionComplete);
+
+			// Orgy Room added to Investments menu
+		}
+
+		private function orgyRoomTalk():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You can hear Whitney humming to herself happily as you approach her outside the milking shed, and when she sees you she rushes over to clutch at your arm excitedly.");
+
+			outputText("\n\n“<i>It’s finished [master], c’mon, let me show you!</i>” You are lead by the hand to the front of her whiteboard farmstead, which carries the bald, awkward look of a facade recently rebuilt, and then spirited inside. She leads you to her front room and, grinning proudly from ear to ear, steps to one side to let you in.");
+
+			outputText("\n\nGood gods, did she say this was going to be a relaxation room? One scan of it tells you immediately you’re more likely to be spending time straining yourself silly in here. She has painted the whole room a deep red, furnished it with a black massage slab and rambling cushion hillsides, put the gas lights in here in dim, patterned shades. With the heavy purple curtains drawn the effect is sultry, to say the least. In one corner is the piece de resistance: a blocky, sunken hollow resplendent in brass and porcelain which can only be the promised hot tub. Your taskmistress all but drags you over to it with her hot little hand to demonstrate how it works.");
+
+			outputText("\n\n“<i>My grandpa put together a suction pump to bring water up from the lake decades ago,</i>” she says. “<i>He used to say that one winter usin’ the outhouse with lumbago was enough. It was me who bought the magic heater though. Expensive, but so, so good after a long day on the farm.</i>” There’s already a small amount of water in the tub; with a twist of a knob more gushes out of a faucet. Steam idly curls its way upwards, as does the faint, unpleasant smell of sulphur. ");
+
+			outputText("\n\n“<i>And… with a bit of expansion and adjustment to the generator….</i>” She twists another brass knob, and bubbles explode into life in the water below, making the surface seethe. You’re so enthralled with it that when something hisses nears your ear it makes you start. Whitney simpers apologetically, a glass bottle with a pump nozzle in her hand. Heavy, spicy fragrance pushes into your nose, masking the smell of rotten eggs. She really did think of everything.");
+
+			outputText("\n\nTrying not to appear too overawed, you turn away to take in more of her not-even-pretending-to-be-a massage parlour. On a shelf near the hot tub she has stacked an irregular range of bottled oils and dildos. You might be wrong but it looks like a number of other things are stacked up there. Black, leather things. ");
+			if (whitneyDom()) outputText("The sight sends a shuddering thrill down your spine. “<i>You didn’t think I’d forget those, did you [master]? We both know how important they are for properly relaxing you,</i>” Whitney murmurs, pushing her hot suppleness into your side. ");
+			else outputText("You raise an eyebrow at these and Whitney giggles and blushes. “<i>Just in case you’re feeling adventurous, [master]. Or, um, want help.</i>”");
+			outputText("You might be able to recognise those but you have no idea what the final object you can make out in the room’s dusky gloom is, stood against the far wall. It’s at least four foot tall and looks like an ornate stone urn, with a round bottom, a thin body, some sort of square contraption at the top, and a series of long tubes emerging from its stem. There’s a very small brazier next to it, with a few pebbles of charcoal huffing feebly at the bottom.");
+
+			outputText("\n\n“<i>Saw this at the Bazaar whilst I was getting supplies and had to pick it up too.</i>” Whitney says happily. She produces a ball of brown pulp, sticks it into the square compartment, and then scatters a few tiny coals onto the thin metal mesh on top. “<i>You know about numb-root, don’t you [master]? They use it to make rock candy, I grow some of it with the peppers. Well, it’s got a much better effect if you take it like...</i>” She takes one of the flexible tubes and blows gently down it. There’s a faint bubbling sound at the bottom of the device. She proffers the hose to you.");
+
+			outputText("\n\nCautiously you stick it into your mouth and take a slight pull. Smoke immediately shoots down your throat, but it isn’t at all harsh and carcinogenic as you were expecting; instead you get nothing but a mouthful of warm, fragrant air with a cloying herbal edge. You hand the pipe back and frown thoughtfully. You don’t feel any immediate effect. Except... you reach your hand out and experimentally touch Whitney’s jaw. Your fingers feel ever so slightly blunt, desensitised.");
+
+			outputText("\n\n“<i>It’s got nowhere near the same power as the candy,</i>” the dog woman explains excitedly. “<i>It’ll wear off after a while, but if you take a few huffs, you’ll be able to last a lot longer in here than you might otherwise.</i>” Her breath comes faster, her corrupted mind overwhelmed with sprouting and rooting possibilities. ");
+			if (!whitneyDom()) outputText("“<i>It’s exactly what a harem owner needs, [master] - with this you could take care of me and your other sluts all night, every night!</i>”");
+			else outputText("“<i>I could do so many things to you [master], if you were on this stuff. And for so long. Just imagine it!</i>”");
+			outputText(" You don’t feel woozy or spaced out at all - if anything, you feel slightly more aware and in control of your surroundings, it’s just that your skin feels like it’s coated with something vaguely fuzzy. ");
+
+			outputText("\n\nYou marvel at it all. Whitney has combined her natural practicality with the filthy imagination you’ve implanted in her to give you something here that you never asked for but is something you now realise you’ve badly needed ever since you started collecting bitches: a very well-equipped harem chamber. The thought of putting it to thorough use sends blood sinking down to your groin. You grab her by the waist, delighted, and ask in a laughing tone what kind of dirty little girl is contracted to make a physio room and turns out a bordello?");
+
+			outputText("\n\n“<i>You didn’t really think I was going to make a boring old clinic, did you?</i>” she chortles in return. Her hands snake down to your [butt], her eyes staring into yours, pulsing with lust. “<i>I know what you like, [master]. And what you want, I want.</i>” You kiss her hungrily, bending your mouth into hers and snaking your tongue around hers whilst your hands greedily move across each other’s bodies, know she’s imagining what you’ll do with each other in here just as vividly as you are. ");
+
+			outputText("\n\nReluctantly you pull away before you get too involved, telling her as you head to the door you tell her she had better be prepared for when you come back later to give it a thorough test drive. She just bites her lip to this, and you feel her eyes burning into your back as you leave the farmhouse.");
+
+			doNext(13);
+		}
+
+		private function orgyRoomSubMassage():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("You say in a grand, wearied tone that you’ve arrived from another hard day of bringing Mareth to its knees, and that you require the services of your pet masseuse. ");
+
+			outputText("\n\n“<i>At once, [master]!</i>” Whitney’s eyes flick across your body once and then she is on her feet, running to the farmstead. You follow at a more leisured pace, enjoying the warm, sultry air of your farm, allowing her time to get herself prepared. By the time you pace through her front door and enter the orgy room, an even warmer breath of air is there to press into your face.");
+
+			outputText("\n\nWhitney has got the hot tub bubbling away and has lit a number of candles around the massage slab, filling the plush, exotic space with a soft glow of heat and light. Rubbing her hands into a towel, she indicates the slab with a smile. You slowly clamber out of your clothes. After all the frenetic fighting and fucking you’ve been doing recently, just that action, baring your flesh in this secure, warm environment with your trusted slave on standby, feels very good indeed. You sigh as");
+			if (player.isBiped()) outputText(" you clamber onto the heated slab, placing your chin on your hands on the cushion at the end");
+			else if (player.isDrider()) outputText(" you tick-tack over and sink your spider underbelly onto the heated marble, before resting your human half down as well. Whitney was foresighted enough to make the slab quite long, and you complete the action in comfort");
+			else if (player.isNaga()) outputText(" you slither over and slide onto the heated slab, placing your chin on your hands on the cushion at the end. You allow your long, heavy tail to pool onto the floor below");
+			outputText(".");
+
+			outputText("\n\nThere’s the sound of cloth falling onto the floor behind you, which you realise is Whitney taking her garments off when a moment later you feel her "+ ((whitneyDefurred()) ? "smooth" : "fluffy") +" thighs brush into your side, sitting herself down gently at the bottom of your back. You are not exactly sure how you’re going to relax with her moist pussy pushing into your rise of your [butt], but you give her the benefit of the doubt for now.");
+
+			outputText("\n\n“<i>Ok [master],</i>” she sighs. The sound of oily palms being rubbed together above you. “<i>First, I need you to start breathin’ slow and deep. In time with me, if you can.</i>” You do as she says, filling your lungs to full capacity before gradually exhaling. You feel self-conscious at first but, as you listen for her own breath and fall in time to it the tactile rhythm of it deepens the serenity of the room, and as nothing but your own synchronised breathing fills the space for long moments, makes you feel connected with the dog girl knelt on you.");
+
+			outputText("\n\nAs you breathe all the way out, her warm, greased hands press into the bottom of your ribcage, and slowly push upwards as you inhale, either side of your spine. She digs her black nails in ever so slightly when she gets to your shoulders, before withdrawing to slide her fingers back downwards as you exhale, almost as if she were pressing the air gently out of your chest. The warm, oily pressure sweeps upwards again as you exhale... the way she moves with your breathing accentuates the sensation of being connected to her, moving together as if your body is an instrument that she is accompanying in perfect time. ");
+
+			outputText("\n\nHer hands move up to your shoulders, pressing together and rotating across each of your shoulder-blades before returning soothingly to your back, very gently compressing the bumps of your spine as she curves down, sending little twinges of sensation nibbling through your core. Once she’s finished with each, she turns her searching, sliding fingers to your arms, going with the grain of your muscles, sliding up and down your biceps until they feel like kneaded dough. ");
+
+			outputText("\n\nOnce your upper body has completely relaxed under her oily palms she becomes slightly more vigorous; at the end of each sensuous slide she digs her grip in just a bit, working at the knots and tension she finds buried in your flesh. And there are a lot. You don’t really realise whilst you’re caught up in the wild, impulsive lifestyle you have adopted since you arrived in Mareth, but your body carries the testament of a great deal of travelling, fighting and sleeping rough. You murmur appreciatively as Whitney worshipfully seeks out every strain and tension she can find in your torso and lightly wrings them out, as if you were a ball of string she is meticulously untangling.");
+
+			outputText("\n\nYou are all but lost to the gliding balm of her hands, but it begins to woozily occur to you, as you respire in time with her, that her breathing isn’t quite level; it occasionally catches, or goes slightly faster. After another few moments of enjoying her touch you begin to notice when this happens: every time her fingers move over one of the many mild scars and lumps you carry from your time adventuring. You grin; it’s pleasing to imagine soothing over the proof of your many hard victories turns her on a bit. ");
+
+			outputText("\n\nThe erotic tension builds as she finishes with your arms and slides her palms down to your [butt]. You don’t think this part of your anatomy needs much work but she goes about it anyway, sighing deeply as she moves her oiled hands in slow, wide circuits across the convex of your "+ ((player.buttRating() >= 6) ? "soft" : "brawny") +" rear. After she’s finished making your butt feel red and smooth she dips a heated, greasy hand between your [hips] and");
+			if (player.hasCock()) outputText(" grips your [cock]");
+			else if (player.hasVagina()) outputText(" traces the entrance of your [vagina]");
+			outputText(" for a moment... before sliding out with a throaty giggle, moving on down to your hips.");
+
+			outputText("\n\nThe thicker flesh here takes longer to work loose, but your pet is patient, and eventually the lattice of muscles and meat in your thighs relax under the relentless smooth wash of the pads of her hands, giving up all the small aches and strains that are buried in there as she sends her fingers questing along their lines and valleys. Pausing to rub more oil into her hands and shuffle further down the slab, she moves on finally to your [legs].");
+
+			// Biped: 
+			if (player.isBiped())
+			{
+				outputText("\n\nShe spends a short time with your calves before encapsulating a [foot] in her oily hands.");
+				if (!(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_NAGA || player.lowerBody == LOWER_BODY_TYPE_GOO || player.lowerBody == LOWER_BODY_TYPE_PONY))
+				{
+					outputText(" Your mouth opens as a twinge of pure pleasure veins up your [leg] as she massages the soft arch of the sole, making your");
+					if (player.hasCock() outputText(" cock thicken");
+					if (player.hasCock() && player.hasVagina()) outputText(" and your");
+					if (player.hasVagina()) outputText(" pussy moisten");
+					outputText(".");
+
+					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
+					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_CLAWS) outputText(" claws");
+					else outputText(" toes")
+					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
+				}
+				else
+				{
+					outputText("\n\nShe spends a short time with your strangely jointed calves before encapsulating a hoof in her oily hands. Your mouth opens as a twinge of pure pleasure veins up your leg as she massages the soft underbelly of your foot behind the unyielding keratin, making your");
+					if (player.hasCock()) outputText(" cock thicken");
+					if (player.hasCock() && player.hasVagina()) outputText(" and your");
+					if (player.hasVagina()) outputText(" pussy moisten");
+					outputText(".");
+					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the joining of flesh and hoof, working out every bit of dirt and rock wedged in there before returning deliberately to stroke at the underbelly, indulging that nervous link until you are deep in the unexpected bliss of it, before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other hoof.");
+				}
+			}
+			// Drider: 
+			else if (player.isDrider())
+			{
+				outputText("\n\nYou didn’t really expect even the most devoted of servants to try massaging the vast and intricate octet of exoskeleton legs that is your mode of locomotion, but Whitney seems determined to try. She places her hands around one armoured leg stem and slides her fingers into the main joint, working at it carefully but closely. With eight legs you find you can easily ignore the aches and stiffness you sometimes develop in one or the other - to have this kind of attention lavished on a usually ignored part of your anatomy feels very nice indeed. You lift the leg so she can work on the next joint down, asking lowly where on Mareth she learnt to massage spiders?");
+
+				outputText("\n\n“<i>It’s just from watching you, [master].</i>” she replies quietly, as pleasurable sensation inundates your second joint. “<i>When you sc- walk around, you can see where the stress lands and builds. All animals that move around a lot have the same needs, least when it comes to their hinges.</i>”");
+
+				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind your undercarriage as the questing, rubbing oil moves onto your second leg. You grin. “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
+
+				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. “<i>Your next leg [master], please.</i>” You smile serenely as you lift the next intricate point into her warm, waiting grasp. It takes almost as long again for her to rub oil into each of your legs as she spent on the rest of her body, but it’s well worth it.");
+			}
+			// Naga: 
+			else if (player.isNaga())
+			{
+				outputText("\n\nYou didn’t really expect even the most devoted of servants to try massaging your long, reptilian half, but Whitney seems determined to try. She slides her hands all around the thick joining of your hips to your tubular bottom half and moves slowly down, simply glossing the scales of your top half in glistening pleasure. When she gets nearer the thin end though she begins to work more strenuously, working the thick, obdurate muscles beneath your hide loose, focusing particularly on the flexible groups on your underbelly whose flowing undulation you use to move. The patient massage sends lazy pleasure veining up your trunk, and with a delighted sigh ask where on Mareth she learnt to massage snakes?");
+
+				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
+
+				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
+				if (player.tongueType == TONGUE_TYPE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
+
+				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");
+			}
+
+			outputText("\n\nWith one last glide of the hand from your [lowerBody] up to your neck, Whitney steps off the slab. You roll over and gaze at her contentedly, revelling in the smooth glow she has worked into every part of your form. You not only feel incredibly relaxed and limber, but also profoundly connected to your body - you feel as if you can move with grace and oiled precision, do exactly what you intend with the right inflection with every movement.");
+
+			outputText("\n\n“<i>Was that good for you, [master]?</i>” the dog girl says, smiling the gratified smile of a job well done.");
+			if (player.lust >= 33) outputText(" The hot tub bubbles quietly behind her and it is not just oil which is making your skin glow. This would be the moment to pursue a happy ending if you so wished.");
+			else outputText(" You play with the idea of ‘rewarding’ her but... damn. She’s actually managed to relax you <i>too</i> much. You thank her regally, redress, and head out the door, enjoying the lightness of step and self-control which thrums through you.");
+
+			if (player.lust >= 33 && (player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 || player.hasVagina()))
+			{
+				addButton(0, "Happy Ending", orgyRoomSubMassageHappyEnding);
+				addButton(1, "Leave", eventParser, 13);
+			}
+			else
+			{
+				addButton(0, "Next", eventParser, 13);
+			}
+		}
+
+		private function orgyRoomSubMassageHappyEnding():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("\n\nYou silently rise from the slab and put your arm around your masseuse’s tight body. It radiates heat into you as you send a hand sliding down the curve of her back to squeeze at her tight, supple butt.");
+
+			outputText("\n\n“<i>M-[master].</i>” Whitney giggles, lowering the gaze of her red-flecked eyes and pushing her hands into your chest with faux-modesty. “<i>You’ll undo all the muscle therapy we’ve done if you go and get oil all over - oop!</i>”");
+			if (player.tallness >= 67)
+			{
+				outputText(" With a single movement you swing her hot, compact weight over your shoulder. You growl into her ear that she’s still got plenty to do if she’s to finish her job of thoroughly relaxing every part of you.");
+
+				outputText("\n\n“<i>Oh my!</i>” comes the laughing reply from behind your head. “<i>You’d better show me what part of you still needs a good massage, then….</i>” Carefully you carry her over to the hot tub, divesting her of her work-skirt as you do, and plonk her on the edge. She doesn’t need any help to rip her blouse off, her hungry eyes running up and down your oiled, naked form as you slowly step into the bubbling water.");
+			}
+			else
+			{
+				outputText(" You tighten your grip on her pert behind and growl that she’s still got plenty to do if she’s to finish her job of thoroughly relaxing every part of you.");
+
+				outputText("\n\n“<i>Oh my!</i>” she laughs in return. “<i>You’d better show me what part of you still needs a massage then, big [boy]....</i>” You lead her over to the hot tub, divesting her of her work-skirt as you do, and plonk her on the edge. She doesn’t need any help to rip her blouse off, her hungry eyes running up and down your oiled, naked form as you slowly step into the bubbling water.");
+			}
+
+			outputText("\n\nYou sigh as you sink further and further into the tub, the hot water and air wrapping itself around your limbs and groin, a virtual second massage for your ridiculously pampered form. If you could feel more at peace with the world, you’d be horizontal. That said... you sit and watch through heavily lidded eyes the deeply enjoyable sight of Whitney following suit on the opposite side, sinking her slim, brown body into the water, gasping slightly as her tidy, pretty pussy disappears beneath the roiling surface. Even in the heavy humidity the nipples on her prim, perky breasts remain rock hard, pointing at you accusingly, and blood pumps insistently to your groin, leaving you feeling light-headed in the heat.");
+
+			if (player.hasCock() && player.hasVagina()) outputText(" You take a long moment to consider which of your sexes you will satisfy yourself with.");
+
+			//[Male][Female]/[Next]
+			if (player.cockThatFits(whitneyVagCapacity() * 1.33) != -1) addButton(0, "Male", subHappyEndingMale);
+			if (player.hasVagina()) addButton(1, "Female", subHappyEndingFemale);
+		}
+
+		private function subHappyEndingMale():void
+		{
+			clearOutput();
+			var cockThatFits:int = player.cockThatFits(whitneyVagCapacity() * 1.33);
+			var hasBiggerCock:Boolean = false;
+
+			if (cockThatFits != biggestCock()) hasBiggerCock = true;
+
+			outputText("You drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, sinking your fingers into her tight, welcoming hole. ");
+
+			outputText("\n\nYou slide your [cock " + cockThatFits + "] up and down her abdomen and then between her lips, hardening it as you tease at her wetness with it.");
+			if (hasBiggerCock) outputText(" Your [cock biggest], so used to getting preferential treatment, bulges in agitation and the lizard impulse to fuck her wide and silly with it saturates the back of your mind; but you know it makes much more sense to keep her nice and tight rather than turn her into another blown out whore in a single bull-in-a-china-shop fuckfest. And anyway... as you test her with your [cock " + cockThatFits + "], you slide your [cock biggest] up her abdomen, enjoying the smoothness of her flesh on one side and the sloshing hot foam on the other. Whitney hums with pleasure and clasps the thick cock pointing towards her breasts in her hands, slowly rubbing it up and down as you prepare to penetrate her.}");
+
+			// First time:
+			if (flags[kFLAGS.MASSAGE_HAPPY_ENDINGS] == 0)
+			{
+				outputText("\n\n“<i>Been a while, I take it?</i>” you say softly, as you line your [cock " + cockThatFits +"] up to her pink slit, sighing at its soft, delicious resistance.");
+
+				outputText("\n\n“<i>Seems like- like forever, [master]. I don’t know why I- ooh...</i>” the thought is lost as you sink into her, pushing deep into her depths, exhaling at how her moist walls push into your prick from every direction. You go slow, stopping and withdrawing almost all the way out when her breath catches in her throat, before gently spearing your way into that delicious tightness again, each time dipping a little further in. Her body remembers the rhythm of it quickly - no doubt aided by the corruption you’ve mired her in - and in no time her hips are gripping into yours, willing the return strokes of your [cock " + cockThatFits + "].");
+			}
+			// Subsequent: 
+			else
+			{
+				outputText("\n\nShe gasps as you push open her lips and spear into her depths with one thrust. Her pussy is used to your [cock " + cockThatFits + "] now, still deliciously tight and clenching but welcoming as well, perfectly designed to holster and squeeze every inch of your modestly sized prick with wet pleasure. Within a few moments your hips are touching hers, taking your cock down to the hilt. Her thighs tighten around your frame and you begin to lose yourself in the soft, slow rhythm.");
+			}
+
+			outputText("\n\n“<i>Breathe in time with me if you can,</i>” you murmur with a mocking edge, looking into her eyes as you push gently into her. “<i>If you can’t manage it - I might have to go a bit faster.</i>” It’s meant as a tease but as you slowly rock into her, pushing her back into the side of the hot tub with the languorous washes of your body’s motion, she determinedly falls into time with your breathing, once again filling the sultry, warm space of the room with the sensual, intimate sound of your shared respiration. ");
+
+			outputText("\n\nThe sensation of sliding in and out of her whilst buried deep in the heat and froth of the tub is exquisite, however her thorough massage has left you feeling very much in control of your body, in control of everything - even Whitney, her heavy breathes matching your own exactly, her supple frame wrapped and clenched around yours. You feel like you could stay here, lavishing in the steam and the tightness of your slave for a great deal longer...");
+
+			outputText("\n\nWhitney’s breath catches, her hand gripping harder");
+			if (hasBiggerCock) outputText(" [cock biggest]");
+			else if (player.isBiped()) outputText(" against your [hips]");
+			else outputText(" around your back");
+			outputText(" momentarily. You grin, and begin to pump into her a little harder, using the full breadth of movement afforded to you by your oiled, [hips] to do so. It has the effect you anticipated. After a few more moments gamely keeping time with your own heavy exhalations the dog girl you’re buried into gasps, unable to contain herself. You winch her legs up by the knees and go at her faster again, still using the full movement of your pelvis to withdraw and sink every inch of your [cock " + cockThatFits + "], pushing into her pink tightness vigorously enough for the water around to splash briskly, buried into her even deeper. ");
+
+			outputText("\n\nWhitney does her best to keep her breath steady as you bump and press her back into the side of the tub, but as you use the extra leverage afforded to you by holding her thighs up to push into her walls at a new angle she can’t contain herself and bites hard into your shoulder to prevent herself crying out. You grin, enjoying the contrast between the sharpness of her love bite and the soft warmth which inundates every other part of your body. You have to give her credit for quick thinking, but it’s not going to stop you picking up the pace again...");
+
+			outputText("\n\nThe breathing tease quickly cascades to the point where she stops trying, and she moans, yelps and squeals as you fuck her with heavy, quick strokes, going as fast as you can in the heavy humidity, her self-control gone and insensate to everything but your dick filling every inch of her tight pussy. You deeply enjoyed getting her into this state, but you’d be lying if you felt the same level of discipline you did to begin with - now you push into her just as eagerly, glorying in her every shrill cry, your nerve endings buzzing as the pressure builds in your");
+			if (player.balls > 0) outputText(" [balls].");
+			else outputText(" groin.");
+
+			outputText("\n\nYou hold her tight and join in her groans as you holster every inch of your [cock " + cockThatFits + "] into her and unload, clenching and pulsing your seed into her. If she didn’t manage it before the dog girl certainly does now; her back arches and her eyes roll as you fill her womb full of your hot spunk, her pussy squeezing around you almost unbearably close, almost sucking the cum out of you.");
+			if (player.cumQ() >= 1500) outputText(" Her small capacity is almost immediately filled and jizz spurts out with every rich thrust you make, polluting the water around you with your massive load.");
+			if (hasBiggerCock) outputText(" Whitney has stroked and tantalised your [cock biggest] with her hot hands and smooth belly intermittently this whole time, and as your orgasm builds and overwhelms you she gets her just reward for it; you jet cum from [eachCock], pasting first her face and then her tight breasts with your thick cream as you ride her hard.");
+
+			happyEndingMerge();
+
+		}
+
+		private function subHappyEndingFemale():void
+		{
+			clearOutput();
+			whitneySprite();
+
+			outputText("\n\nYou drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, brushing through the neat thatch of her public hair to sink your fingers into her tight, welcoming hole.  You winch one of your [legs] over hers, pushing your [vagina] against hers, sighing as your lips touch and rub over each other. ");
+
+			if (player.hasCock()) outputText("\n\nYour [cock biggest], so used to getting the premium treatment, bulges in agitation and the male impulse to fuck her wide and silly with it saturates the back of your mind - but in this steamy, leisured moment you are much more interested in indulging your female side. And anyway... as you push your [vagina] into her, you slide your [cock biggest] up her abdomen, enjoying the smoothness of her flesh on one side and the sloshing hot foam on the other. Whitney hums with pleasure and clasps the thick cock pointing towards her breasts in her hands, slowly rubbing it up and down as you prepare to scissor her.");
+
+			// First time:
+			if (flags[kFLAGS.MASSAGE_HAPPY_ENDINGS] == 0)
+			{
+				outputText("\n\n“<i>Been a while, I take it?</i>” you say softly, sighing at the soft, delicious resistance of her puffy vulva against your [clit].");
+
+				outputText("\n\n“<i>Never - never with another woman, mistress. I don’t know why I - ooh...</i>” the thought is lost as you clench into her, melding your pussies together emphatically. At first she is frozen, apparently without a clue as to what to do or how to react to the pressure of your mound against hers, flexing into her lips and inner pink pleasantly. You go as slowly and sensually as you can, sliding your grip over her supple, wet flesh, kissing and licking her face and neck possessively, murmuring encouragement when she sighs blissfully to a movement of your hand or hip. You unlock her slowly but surely, and it isn’t long before she is flexing back into you eagerly, giving as well as taking your sex.");
+			}
+			// Subsequent: 
+			else
+			{
+				outputText("\n\nShe gasps as you clench into her, locking your bodies together forcefully. She is used to your [vagina] now and gladly pushes her slim frame back into yours, your pussies rubbing over and around each other, teasing first your clit and then hers until they are both bulging needily.  Your sex wettens and unfurls as you scissor against her deeply. Her thighs tighten around your own and you begin to lose yourself in the soft, slow, sapphic rhythm.");
+			}
+
+			outputText("\n\n“<i>Breathe in time with me if you can,</i>” you murmur with a mocking edge, looking into her eyes as you push gently into her. “<i>If you can’t manage it - I might have to go a bit faster.</i>” It’s meant as a tease but as you slowly rock against her, pushing her back into the side of the hot tub with the languorous washes of your body’s motion, she determinedly falls into time with your breathing, once again filling the sultry, warm space of the room with the intimate sound of your shared respiration. ");
+
+			outputText("\n\nThe sensation of sliding against her whilst buried deep in the heat and froth of the tub is exquisite, however her thorough massage has left you feeling very much in control of your body, in control of everything, even Whitney.  Her heavy breaths match your own exactly, her supple frame wrapped and clenched around yours. You feel like you could stay here, lavishing in the steam and the tightness of your slave for a great deal longer....");
+
+			outputText("\n\nWhitney’s breath catches, her hand gripping harder");
+			if (player.hasCock()) outputText(" [cock biggest]");
+			else if (player.isBiped()) outputText(" against your [hips]");
+			else outputText(" around your back");
+			outputText(" momentarily. You grin, and begin to pump into her a little harder, using the full breadth of moment afforded to you by your [hips] to do so. It has the effect you’d expect. After a few more moments gamely keeping time with your own heavy exhalations the dog girl you’re tangled with bursts into gasps, unable to contain herself. In response you lower your head and suck her hard nipples, engulfing them with your mouth before chewing first one and then the other gently, pushing your [clit] against her pink tightness vigorously enough for the water around to splash briskly as you do. ");
+
+			outputText("\n\nWhitney does her best to keep her breath steady as you bump and press her back into the side of the tub, but as you pull a tan nipple outwards with your lips she can’t contain herself and bites hard into your shoulder to prevent herself crying out. You grin, enjoying the contrast between the sharpness of her love bite and the soft warmth which inundates every other part of your body. You have to give her credit for quick thinking, but it’s not going to stop you picking up the pace again...");
+
+			outputText("\n\nThe breathing tease quickly cascades to the point where she stops trying, and she moans, yelps and squeals as you rut against her with heavy, quick strokes.  You’re going as fast as you can in the smothering humidity, whilst her self-control is long gone; she’s insensate to everything but your pussies and clits grinding into each other. You deeply enjoyed getting her into this state, but you’d be lying if you felt the same level of discipline you did to begin with - now you grind against her just as eagerly, glorying in her every shrill cry, your nerve endings buzzing as heat builds in your crotch. ");
+
+			outputText("\n\nYou hold her tight and join in her groans as you wrap as much of yourself around her as you can, your [chest] pushing into her sorely teased nipples as your [vagina] quivers and then clenches. If she didn’t manage it before the dog girl certainly does now; her back arches and her eyes roll as her tight cunt squeezes in sympathetic orgam with you.");
+			if (player.wetness >= 5) outputText(" Your pussy spurts excitement gleefully with each thrust, utterly drowning her own in your juices, polluting the water around you with your musk.");
+			if (player.hasCock()) outputText(" Whitney has stroked and tantalised your [cock biggest] with her hot hands and smooth belly intermittently this whole time, and as your orgasm builds and overwhelms you she gets her just reward for it; you jet cum from [eachCock], pasting first her face and then her tight breasts with your thick cream as you ride her hard.");
+
+			happyEndingMerge();
+		}
+
+		private function happyEndingMerge():void
+		{
+			outputText("\n\nOnce you have thrashed the last of it out you disentangle yourself and sink off down to one side, gasping for air, your heart thudding. It certainly pays not to get too vigorous too fast in the sweltering heat of this thing - as it is sweat beads your forehead and your vision swims for a few seconds as you stare up at the ceiling, waiting for the pulse beating in your brow to calm. In a beatific haze you listen to Whitney’s own breathing return to normal, feel her slide her arms back around your frame beneath the foam.");
+
+			outputText("\n\n“<i>Are you fully relaxed now?</i>” she asks, in a low, teasing voice. “<i>Or am I going to have to massage you all over again?</i>” ");
+
+			outputText("\n\nGods... how wonderful it would be to stay in here forever, alternating between getting oiled and fucking her silly. However, you know these sessions wouldn’t feel half as good if you didn’t spend the rest of your time wilfully exerting yourself elsewhere. You pull her into you, give her a nice scratch behind the ear and tell her that her [master] feels thoroughly unwound, and that she’s a good girl. Thwip thwip thwip thwip goes her tail in the water.");
+
+			outputText("\n\nAfter a short time enjoying the heat and closeness of your slave’s body a bit more you get up, towel down, and leave, enjoying the cleanliness, lightness of step and self-control which thrums through you as you head out the front door.");
+
+			// [Whether happy ending taken or not PC gets +10% exp and +10% crit chance for 24 hours after massage]
+			flags[kFLAGS.MASSAGE_HAPPY_ENDINGS]++;
+			player.orgasm();
+			dynStats("sen-", 1);
+			doNext(13);
+		}
+
 	}
 
 }
