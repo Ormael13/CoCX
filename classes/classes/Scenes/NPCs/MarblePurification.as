@@ -1137,7 +1137,7 @@ package classes.Scenes.NPCs {
 		addButton(0,"Next",theFormulaIsDone);
 	}
 	//Let Marble know the formula is done
-	function theFormulaIsDone():void
+	public function theFormulaIsDone():void
 	{
 		clearOutput();
 	 	outputText("Rathazul tells you that the formula is ready, so you head over to Marble to let her know.");
@@ -1183,7 +1183,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Marble is purified
-	function purifyMarbleComplete():void
+	public function purifyMarbleComplete():void
 	{
 		clearOutput();
 	 	outputText("The two of you arrive at Rathazul's workspace, and find the owner awaiting you, holding a bottle of whitish fluid with gold streaks running throughout.  \"<i>So is that the formula?</i>\"  Marble asks looking at the bottle.");
@@ -1234,7 +1234,7 @@ package classes.Scenes.NPCs {
 
 	//Dealing with Clara
 	//She can be made to promise to never try and take the PC again, and then sent away.  She can also be forcibly purified with Rathazul's formula, forever making her incapable of addicting the PC or anyone else to her milk.  A later expansion that brings her back or have her be found somewhere else can be written.
-	function dealingWithCowCuntPostPurification():void
+	public function dealingWithCowCuntPostPurification():void
 	{
 		clearOutput();
 	 	outputText("Now there is only one more loose end in this whole effort to purify Marble: her sister.");
@@ -1254,7 +1254,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Purify
-	function purifyMurblesSister():void
+	public function purifyMurblesSister():void
 	{
 		clearOutput();
 	 	outputText("You ask Marble for the bottle of Rathazul's formula.  She nods, hands it to you and says, \"<i>Yeah, I think that's the best choice too.</i>\"");
@@ -1274,7 +1274,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Camp Cage
-	function cageDatCowCunt():void
+	public function cageDatCowCunt():void
 	{
 		clearOutput();
 	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgement on this matter.");
@@ -1286,7 +1286,7 @@ package classes.Scenes.NPCs {
 		addButton(0,"Next",purificationQuestFinal);
 	}
 	//Let go
-	function letGoOfMarblesCowCuntSister():void
+	public function letGoOfMarblesCowCuntSister():void
 	{
 		clearOutput();
 	 	outputText("You say that now that Clara is no danger to anyone anymore, she is free to go, so long as she promises to never bother you or your followers again.  Marble nods at this and says she agrees with your decision.");
@@ -1298,7 +1298,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Don't purify
-	function dontPurifyClara():void
+	public function dontPurifyClara():void
 	{
 		clearOutput();
 	 	outputText("No, you'll offer her the mercy of letting her keep her precious corruption.  Marble tells you she will respect your decision on that matter.  Now the question is what to do with her.");
@@ -1311,7 +1311,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Camp Cage
-	function stickUnpurifiedClaraInACage():void
+	public function stickUnpurifiedClaraInACage():void
 	{
 		clearOutput();
 	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll be no threat to anyone anymore.  Marble nods to you and says that she trusts your judgement on this matter.");
@@ -1325,7 +1325,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Let go
-	function letCorruptCowCuntGo():void
+	public function letCorruptCowCuntGo():void
 	{
 		clearOutput();
 	 	outputText("You say that you're going to let Clara go, but she has to promise to never return, bother you or anyone in your camp ever again.  Marble gives you a look of shock and asks if you're absolutely certain you want to do that.  When you give her the affirmative, she sighs and says that she'll trust your judgement on this matter.");
@@ -1338,7 +1338,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Purification quest final
-	function purificationQuestFinal():void
+	public function purificationQuestFinal():void
 	{
 		clearOutput();
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
@@ -1369,7 +1369,7 @@ package classes.Scenes.NPCs {
 		addButton(1,"No",eventParser,2128);
 	}
 	//if yes
-	function actuallyGrowPureMarblesTittiesForFunzies():void
+	public function actuallyGrowPureMarblesTittiesForFunzies():void
 	{
 		clearOutput();
 	 	outputText("You offer Marble a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
@@ -1420,7 +1420,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//if yes
-	function pureMurblePCChoosesYesToShrinkeyTits():void
+	public function pureMurblePCChoosesYesToShrinkeyTits():void
 	{
 		clearOutput();
 	 	outputText("You offer Marble a jar of reducto and tell her you'd like her to reduce her bust's size a bit.");
@@ -1472,7 +1472,7 @@ package classes.Scenes.NPCs {
 	}
 
 	//Nursing from Pure Marble
-	function nursingFromPureMarble():void
+	public function nursingFromPureMarble():void
 	{
 		clearOutput();
 		//if(time since last nursing is < 4 hours)

@@ -279,16 +279,16 @@ package classes.Scenes.NPCs
 			outputText("\n\nShe has a pink, wet pussy, although you know it can be stretched to take members of any size.  Drops of fem-juice often drip from her lush fuck-hole, leaving a trail behind her as she walks.");
 			outputText("\n\nVapula has a tight asshole, placed right between her plush buttcheeks where it belongs.");
 
-			if (farm.farmCorruption.hasTattoos("vapula"))
+			if (kGAMECLASS.farm.farmCorruption.hasTattoo("vapula"))
 			{
 				outputText("\n\n");
-				if (farm.farmCorruption.vapulaFullTribalTats())
+				if (kGAMECLASS.farm.farmCorruption.vapulaFullTribalTats())
 				{
 					outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 				}
 				else
 				{
-					if (farm.farmCorruption.numTattoos("vapula") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+					if (kGAMECLASS.farm.farmCorruption.numTattoos("vapula") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 					else outputText("She has ");
 
 					if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] + "\n");

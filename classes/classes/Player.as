@@ -1161,6 +1161,12 @@ use namespace kGAMECLASS;
 				total = total * 1.5;
 			return total;
 		}
+		
+		public function isLactating():Boolean
+		{
+			if (lactationQ() > 0) return true;
+			return false;
+		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
 			if (vaginas.length==0) return false;

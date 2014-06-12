@@ -205,7 +205,7 @@ private function backToCamp():void
 	clearOutput();
 	
 	//TODO
-	throw new Error("Placeholder"):
+	throw new Error("Placeholder");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	
@@ -230,26 +230,26 @@ private function milkWriteFuAppearance():void {
 	
 	outputText("\n\nBetween her lithe legs and childbearing hips is her cunt, a short stripe of dark, downy hair drawing your attention just above it.  And, hidden between her pert cheeks is her tight little backdoor, right where it belongs.");
 
-	if (farm.farmCorruption.hasTattoos("milky"))
+	if (kGAMECLASS.farm.farmCorruption.hasTattoo("milky"))
 	{
 		outputText("\n\n");
-		if (farm.farmCorruption.milkyFullTribalTats())
+		if (kGAMECLASS.farm.farmCorruption.milkyFullTribalTats())
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
-		else if (farm.farmCorruption.numMilkyButterflyTats() == 4)
+		else if (kGAMECLASS.farm.farmCorruption.numMilkyButterflyTats() == 4)
 		{
 			outputText("She is covered from head to tail in tattooed butterflies, as if the pretty insects are attracted to her chocolate skin. When she moves she does it with an extra bounce and flick of the head, admiring how she looks as she goes.");
 		}
 		else
 		{
-			if (farm.farmCorruption.numTattoos("milky") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			if (kGAMECLASS.farm.farmCorruption.numTattoos("milky") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
-			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] + "\n");
-			if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] + "\n");
-			if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] + "\n");
-			if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_BUTT] + "\n");
+			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.MILKY_TATTOO_COLLARBONE] + "\n");
+			if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.MILKY_TATTOO_SHOULDERS] + "\n");
+			if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.MILKY_TATTOO_LOWERBACK] + "\n");
+			if (flags[kFLAGS.MILKY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.MILKY_TATTOO_BUTT] + "\n");
 		}
 	}
 

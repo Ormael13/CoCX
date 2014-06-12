@@ -39,7 +39,7 @@
 		[Embed(source="../../img/images.xml",mimeType="application/octet-stream")]
 
 		private static const XML_IMAGES:Class;
-		var _imgListXML:XML;
+		private var _imgListXML:XML;
 
 		public function ImageManager(stage:Stage)
 		{
@@ -82,10 +82,10 @@
 		{
 			var imgLoader:Loader = new Loader();
 
-			var f = function(key:String)
+			var f:Function = function(key:String):Function
 			{
 
-				return function(e:Event)
+				return function(e:Event):void
 				{
 					fileLoaded(e, key);
 				}

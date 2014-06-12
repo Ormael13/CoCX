@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.*;
 	
 	public class SophieFollowerScene extends NPCAwareContent {
 
@@ -33,6 +34,11 @@ override public function sophieFollower():Boolean {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[kFLAGS.SOPHIE_DEBIMBOED] > 0) return true;
 	if(flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) return true;
 	return false;
+}
+
+public function sophieSprite():void
+{
+	kGAMECLASS.sophieBimbo.sophieSprite();
 }
 
 //Un-Bimbo*
@@ -275,7 +281,7 @@ public function followerSophieMainScreen():void {
 		addButton(9,"Back",camp.campFollowers);
 		return;
 	}
-	else if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 {
+	else if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Sophie leans back in her nest as you approach, her prominent, bare F-cups on display.  She's completely nude, as always, and sits with her avian legs shamelessly spread, revealing the slick slit of her womanhood framed by downy-soft platinum blonde feathers.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?  Come for a cuddle in my welcoming wings, maybe; or for something more... exciting?</i>\"");
 		else outputText("Sophie leans back in her nest as you approach, her prominant, bare DD-cups on display.  She's completely nude, as always, and sits with her avian legs demurely crossed, concealing the slick slit of her womanhood from you.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?</i>\"");
 	}
@@ -309,7 +315,7 @@ public function followerSophieMainScreen():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 0) addButton(3, "Harvest Eggs", harvestEggs);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) 
 	{
-		addButton(3 "Change Eggs", changeEggs);
+		addButton(3, "Change Eggs", changeEggs);
 		addButton(4, "Stop Harvest", stopHarvest);
 	}
 	
@@ -364,14 +370,23 @@ public var eggColors:Array = [
 "White",
 ]
 
-public var eggTypes:Array = [
-consumable.L_BLKEG,
-consumable.L_BLUEG,
-consumable.L_BRNEG,
-consumable.L_PNKEG,
-consumable.L_PRPEG,
-consumable.L_WHTEG,
-]
+private var _eggTypes:Array
+
+public function get eggTypes():Array
+{
+	if (_eggTypes == null)
+	{
+		_eggTypes = [
+			consumables.L_BLKEG,
+			consumables.L_BLUEG,
+			consumables.L_BRNEG,
+			consumables.L_PNKEG,
+			consumables.L_PRPEG,
+			consumables.L_WHTEG,
+		]
+	}
+	return _eggTypes;
+}
 
 private function eggSelector():void
 {
@@ -461,16 +476,16 @@ private function sophieAppearance():void {
 	
 	outputText("\n\nSophie's arms are covered in feathers as well, and are somewhat wing-like in appearance, though she has human hands at the ends of them.  Her primary wings are larger and sprout out above her shoulder blades.  She often keeps them folded out of the way behind her, but she can kick up a huge dust-storm with them when she wants.");
 
-	if (farm.farmCorruption.hasTattoos("sophie"))
+	if (kGAMECLASS.farm.farmCorruption.hasTattoo("sophie"))
 	{
 		outputText("\n\n");
-		if (farm.farmCorruption.sophieFullTribalTats())
+		if (kGAMECLASS.farm.farmCorruption.sophieFullTribalTats())
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
 		else
 		{
-			if (farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			if (kGAMECLASS.farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
 			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] + "\n");

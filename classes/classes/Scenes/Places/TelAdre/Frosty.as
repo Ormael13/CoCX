@@ -77,7 +77,7 @@ public function frostyMainMenu():void
 	
 }
 
-function frostySpecialsMenu(free:Boolean = false):void 
+public function frostySpecialsMenu(free:Boolean = false):void 
 {
 	//1. Hand – 5. points
 	//2. Mouth-15. Points
@@ -90,7 +90,7 @@ function frostySpecialsMenu(free:Boolean = false):void
 	addButton(9,"Back",approachFrosty);
 }
 
-function cupcakeBuy(arg:int = 1):void 
+public function cupcakeBuy(arg:int = 1):void 
 {
 	clearOutput();
 	outputText("You make your purchase and swiftly devour the results. They're surprisingly delicious!");

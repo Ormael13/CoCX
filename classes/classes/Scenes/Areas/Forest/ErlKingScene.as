@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Forest
 
 	public class ErlKingScene extends BaseContent
 	{
-		public function ErlKing()
+		public function ErlKingScene()
 		{
 
 		}

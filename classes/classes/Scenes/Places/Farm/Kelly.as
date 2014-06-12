@@ -625,7 +625,7 @@ private function kellyAppearance():void {
 	//4:
 	else if(flags[kFLAGS.KELLY_INCUBATION] >= 1) outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
 	
-	if (farm.farmCorruption.hasTattoos("kelly"))
+	if (farm.farmCorruption.hasTattoo("kelly"))
 	{
 		outputText("\n\n");
 		if (farm.farmCorruption.kellyFullTribalTats())

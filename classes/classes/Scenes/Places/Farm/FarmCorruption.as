@@ -86,10 +86,10 @@ package classes.Scenes.Places.Farm
 
 		public function whitneyHasTattoo():Boolean
 		{
-			if (flags[kFLAGS.WHITNEY_TATTOO_COLLAR] != 0) return true;
+			if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) return true;
 			if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) return true;
-			if (flags[kFLAGS.WHITNEY_TATOO_LOWERBACK] != 0) return true;
-			if (flags[kFLAGS.WHINTEY_TATOO_BUTT] != 0) return true;
+			if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) return true;
+			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) return true;
 			return false;
 		}
 
@@ -128,7 +128,7 @@ package classes.Scenes.Places.Farm
 		public function updateFarmCorruption():int
 		{
 			// Early exit if we've not actually started the corruption process
-			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] <= 0) return;
+			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] <= 0) return flags[kFLAGS.WHITNEY_CORRUPTION];
 			
 			// If Whitney was disabled the previous day, set the flag for a follow up
 			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] == 1)
@@ -321,7 +321,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("You stroll over to the big rock at the edge of the pepper patch, smiling as you see a small burlap sack shoved underneath a fold in the stone. You scoop it up, open it and count out " + flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] + " gems.");
 				
-				if (farmValue < 25) outputText(" You frown; it seems like a feeble amount for such a large operation. Perhaps you could talk to Whitney about that.");
+				if (farmValue() < 25) outputText(" You frown; it seems like a feeble amount for such a large operation. Perhaps you could talk to Whitney about that.");
 				
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
@@ -348,6 +348,9 @@ package classes.Scenes.Places.Farm
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
 			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE])];
 			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
+			
+			trace("No valid argument given.");
+			return null;
 		}
 		
 		private function offerItems(flag:int):void
@@ -704,7 +707,7 @@ package classes.Scenes.Places.Farm
 				
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
 				
-				if (flags[kFLAGS.FARM_UPGRADES_CONTRAPCEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
+				if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
 
 				if (flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] > 1)
 				{
@@ -714,12 +717,12 @@ package classes.Scenes.Places.Farm
 			else
 			{
 				outputText("You stand on your rise and take in your slave farm. ");
-				if (silly)
+				if (silly())
 				{
-					outputText(player.mf("You feel an irresistible hankering for a cigar.", "You feel an irresistible hankering for a cigarette holder.");
+					outputText(player.mf("You feel an irresistible hankering for a cigar.", "You feel an irresistible hankering for a cigarette holder."));
 				}
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
-				if (flags[kFLAGS.FARM_UPGRADES_CONTRAPCEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
+				if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
 			}
 
 			// [Follower taster and “blessing” text goes here]
@@ -816,7 +819,7 @@ package classes.Scenes.Places.Farm
 			
 			if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
 			
-			if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(Keltoff) < 0)
+			if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0)
 			{
 				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(2, "Kelly", farm.kelly.breakingKeltOptions);
 				else if (flags[kFLAGS.KELT_BREAK_LEVEL] > 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
@@ -896,6 +899,7 @@ package classes.Scenes.Places.Farm
 		private function slavesAtFarm():Boolean
 		{
 			if (numSlavesAtFarm() > 0) return true;
+			return false;
 		}
 
 		private function slavesAtFarmMenu():void
@@ -929,6 +933,7 @@ package classes.Scenes.Places.Farm
 		private function followersAtFarm():Boolean
 		{
 			if (numFollowersAtFarm() > 0) return true;
+			return false;
 		}
 
 		private function followersAtFarmMenu():void
@@ -944,7 +949,7 @@ package classes.Scenes.Places.Farm
 		{
 			var count:int = 0;
 
-			if (flags[kFLAGS.FOLLOTER_AT_FARM_IZMA] > 0) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] > 0) count++;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] > 0) count++;
 
 			return count;
@@ -953,6 +958,7 @@ package classes.Scenes.Places.Farm
 		private function loversAtFarm():Boolean
 		{
 			if (numLoversAtFarm() > 0) return true;
+			return false;
 		}
 
 		private function loversAtFarmMenu():void
@@ -1051,7 +1057,7 @@ package classes.Scenes.Places.Farm
 				return;
 			}
 
-			if (whitneyMenu() >= 91 && whitneyMenu() <= 119)
+			if (whitneyCorruption() >= 91 && whitneyCorruption() <= 119)
 			{
 				// 91-119 Farm Corruption
 				if (flags[kFLAGS.WHITNEY_MENU_91_119] == 0)
@@ -1142,7 +1148,7 @@ package classes.Scenes.Places.Farm
 
 			addButton(0, "Appearance", whitneyAppearanceNotCorrupt);
 			addButton(1, "Prosperity", prosperityGoNotCorrupt);
-			addButton(2, "Investment", investmentGoNotCorrupt);
+			addButton(2, "Investment", investmentMenu);
 
 			addButton(9, "Back", rootScene);
 
@@ -1235,7 +1241,7 @@ package classes.Scenes.Places.Farm
 			else addButton(9, "Back", dogeCorruptedMissionComplete);
 		}
 
-		private function investmentBreastMilkerNotCorrupt():void
+		private function investmentBreastMilker():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -1455,7 +1461,7 @@ package classes.Scenes.Places.Farm
 			}
 
 			menu();
-			if (player.gems >= 400) addButton(0, "Do it", doMilktalkInvestment);
+			if (player.gems >= 400) addButton(0, "Do it", doMilktankInvestment);
 			else addButton(0, "Do it", turnDownInvestment, true);
 			addButton(1, "No", turnDownInvestment);
 		}
@@ -1474,7 +1480,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function turnDownInvestmentNotCorrupt(money:Boolean = false):void
+		private function turnDownInvestment(money:Boolean = false):void
 		{
 			clearOutput();
 			whitneySprite();
@@ -1734,7 +1740,7 @@ package classes.Scenes.Places.Farm
 			}
 			else
 			{
-				return cockOralTrainingMaxed();
+				return cockOralTrainingMaxed;
 			}
 		}
 
@@ -1772,7 +1778,11 @@ package classes.Scenes.Places.Farm
 
 		private function firstOralTraining():void
 		{
-			outputText("You grin down at your newly acquired slave. It’s certainly a fitting position for a literal bitch, and whether she’s adopted it knowingly or not she’s got the stance down perfectly - the yearning eyes, the slowly wagging tail, back and neck straight. A tempting image of a biscuit balanced on a nose surfaces in your mind... but it is swiftly banished by more pressing thoughts, carnal impulses sinking down to your groin at the sight of your kneeling dog girl. She watches avidly as you slowly peel off your [armor], exposing " + ((player.hasCock() ? "[eachCock]") + ((player.hasCock() && player.hasVagina()) ? " and ") + ((player.hasVagina()) ? "[vagina]") +". You tell her huskily it’s time she learnt how to service you.");
+			outputText("You grin down at your newly acquired slave. It’s certainly a fitting position for a literal bitch, and whether she’s adopted it knowingly or not she’s got the stance down perfectly - the yearning eyes, the slowly wagging tail, back and neck straight. A tempting image of a biscuit balanced on a nose surfaces in your mind... but it is swiftly banished by more pressing thoughts, carnal impulses sinking down to your groin at the sight of your kneeling dog girl. She watches avidly as you slowly peel off your [armor], exposing");
+			if (player.hasCock()) outputText(" [eachCock]");
+			if (player.hasCock() && player.hasVagina()) outputText(" and");
+			if (player.hasVagina()) outputText(" [vagina]");
+			outputText(". You tell her huskily it’s time she learnt how to service you.");
 
 			outputText("\n\n“<i>I - I want to do that, [master],</i>” she replies tensely. She’s having problems knowing what to look at, her eyes flitting between your gaze and the demanding sight of your " + ((player.hasCock()) ? "[cock biggest]" : "lush cunt") + ", eventually settling on the first. “<i>I want to serve you best I can, but I - don’t know if - it’s just, I’ve never really - I mean, once or twice, but I’ve never been very....</i>“ your growing urge makes you feel impatient and you think about stifling her meek babbling with a good face fucking... but no. There are much better ways of getting the best out of inexperienced slaves.");
 
@@ -1780,7 +1790,10 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>I, I will try, [master],</i>” she says. You reach down and hold her around the jaw-line.");
 
-			outputText("\n\n“<i>No,</i>” you say firmly." + ((silly) ? " “<i>Do. Or do not. There is no try.</i>”" : " “<i>You will.</i>”") + " Determination lines the dog woman’s mouth.");
+			outputText("\n\n“<i>No,</i>” you say firmly.");
+			if (silly()) outputText(" “<i>Do. Or do not. There is no try.</i>”");
+			else outputText(" “<i>You will.</i>”");
+			outputText(" Determination lines the dog woman’s mouth.");
 
 			outputText("\n\n“<i>Yes, [master]. I will tr- I will.</i>” She takes a long breath and transfers her gaze to " + ((player.hasCock()) ? "[eachCock]" : "[vagina]") +", looking for all the world like she’s about to embark on a marathon.");
 
@@ -1905,7 +1918,9 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nEventually you cannot hold your lust back. You grab her by the head and begin to thrust deep into her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". Her breath hisses through her nose as she lets you use her mouth, struggling to keep her fingers schlicking away; you coo as your own hard movements force her to move her hands fast and erratically, skittering across your urgently bulging button and making you pump into her wet, milking warmth all the more frenetically.");
 
-				outputText("\n\n“<i>Cum, bitch.</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; you crow with delight as your [vagina] quivers and then clenches in orgasm in ecstatic sympathy with your male sex, " + ((player.wetness() <= 2) ? "wetting your slave’s hand" : "absolutely soaking your slave’s arm") + " with femjizz as it does. She shudders around you and her eyes roll as she finds her own high rooting in her pussy; you are extremely gratified to note that, despite being on a plane of submissive pleasure far away, she still manages to swallow every drop of cum you eject" + (player.cumQ() >= 1500) ? " which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") + ".");
+				outputText("\n\n“<i>Cum, bitch.</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; you crow with delight as your [vagina] quivers and then clenches in orgasm in ecstatic sympathy with your male sex, " + ((player.wetness() <= 2) ? "wetting your slave’s hand" : "absolutely soaking your slave’s arm") + " with femjizz as it does. She shudders around you and her eyes roll as she finds her own high rooting in her pussy; you are extremely gratified to note that, despite being on a plane of submissive pleasure far away, she still manages to swallow every drop of cum you eject");
+				if (player.cumQ() >= 1500)  outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+				outputText(".");
 
 				outputText("\n\nYou exhale long and low when you’re finally done, feeling a glow of intense satisfaction. You gaze dozily down at your slave, who is panting hoarsely, her eyes still closed. You can’t help but notice she occasionally and impulsively licks her lips, as if she is searching for the flavour of something delicious.");
 
@@ -1928,7 +1943,9 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nEventually you cannot hold your lust back. You grab her by the head and begin to thrust deep into her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". Her breath hisses through her nose as she lets you use her mouth, struggling to keep her fingers schlicking away; you coo as your own hard movements force her to move her hands faster and more erratically, skittering across your urgently bulging button and making you pump into her wet, milking warmth all the more frenetically.");
 
-				outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; you crow with delight as your [vagina] quivers and then clenches in orgasm in ecstatic sympathy with your male sex, " + ((player.wetness() <= 2) ? "wetting your slave’s hand" : "absolutely soaking your slave’s arm") + " with femjizz as it does. She shudders around you and her eyes roll as she finds her own high rooting in her pussy; you are extremely gratified to note that, despite being on a plane of submissive pleasure far away, she still manages to swallow every drop of cum you eject" + ((player.cumQ() >= 1500) ? " which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") + ".");
+				outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; you crow with delight as your [vagina] quivers and then clenches in orgasm in ecstatic sympathy with your male sex, " + ((player.wetness() <= 2) ? "wetting your slave’s hand" : "absolutely soaking your slave’s arm") + " with femjizz as it does. She shudders around you and her eyes roll as she finds her own high rooting in her pussy; you are extremely gratified to note that, despite being on a plane of submissive pleasure far away, she still manages to swallow every drop of cum you eject");
+				if (player.cumQ() >= 1500) outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+				outputText(".");
 
 				outputText("\n\nYou exhale long and low when you’re finally done, feeling a glow of intense satisfaction. You gaze dozily down at your slave, who is panting hoarsely, her eyes still closed. You can’t help but notice she occasionally and impulsively licks her lips, as if she is searching for the flavour of something delicious.");
 
@@ -1951,7 +1968,9 @@ package classes.Scenes.Places.Farm
 
 					outputText("\n\nEventually you cannot hold your lust back. You grab her by the head and begin to thrust deep into her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". Her breath hisses through her nose as she lets you use her mouth, struggling to keep her fingers schlicking away; you coo as your own hard movements force her to push slightly into your ass, making you pump into her wet, milking warmth all the more frenetically.");
 
-					outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject" + ((player.cumQ() >= 1500) ? " which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") + ".");
+					outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject");
+					if (player.cumQ() >= 1500) outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+					outputText(".");
 				}
 				// Moolticock? Moolticock!
 				else
@@ -1967,7 +1986,10 @@ package classes.Scenes.Places.Farm
 					outputText("\n\nEventually you cannot hold your lust back. You grab her by the head and begin to thrust deep into her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". Her breath wheezes through her nose as she lets you use her mouth, struggling to keep her both sets of teasing fingers moving; you coo as your own hard movements force her to move the hand on your [cock biggest2] fast and erratically, wringing your urgently bulging prick tightly and making you pump into her wet, milking warmth all the more frenetically.");
 				}
 
-				outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject" + ((player.cumQ() >= 1500) ? "which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") + "." + ((player.cocks.length > 1) ? "The second cock trapped in her grasp flexes out cum just as eagerly as the first, sweat standing out on your forehead as you are clenched by your twin high; it paints her skirt with its generous discharge."));
+				outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject");
+				if (player.cumQ() >= 1500) outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+				outputText(".");
+				if (player.cocks.length > 1) outputText(" The second cock trapped in her grasp flexes out cum just as eagerly as the first, sweat standing out on your forehead as you are clenched by your twin high; it paints her skirt with its generous discharge.");
 			}
 			//Male without balls:
 			else if (!player.hasVagina() && player.balls == 0)
@@ -1994,7 +2016,9 @@ package classes.Scenes.Places.Farm
 
 					outputText("\n\nEventually you cannot hold your lust back. You grab her by the head and begin to thrust deep into her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". Her breath hisses through her nose as she lets you use her mouth, struggling to keep her fingers schlicking away; you coo as your own hard movements force her to push slightly into your ass, making you pump into her wet, milking warmth all the more frenetically.");
 
-					outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject" + ((player.cumQ() >= 1500) ? " which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") +".");
+					outputText("\n\n“<i>Cum, bitch,</i>” you grit as you surge to your own high. Whitney’s muffled moans are what you hear as your cock-slit dilates and pumps jizz down her throat; she shudders around you and her eye rolls as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject");
+					if (player.cumQ() >= 1500) outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+					outputText(".");
 				}
 			}
 
@@ -2003,7 +2027,9 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("\n\nYou exhale long and low when you’re finally done, feeling a glow of intense satisfaction. You gaze dozily down at your slave, who is panting hoarsely, her eyes still closed. You can’t help but notice she occasionally and impulsively licks her lips, as if she is searching for the flavour of something delicious.");
 
-				outputText("\n\n“<i>Gods, that was am- something, master,</i>” she says eventually. “<i>Did... did I do well?</i>” You rub behind her floppy ear and tell her she’s getting better, but - and you say this pointedly - she’s still quite forgetful. You watch her closely as she mumbles an apology and then leans back in to clean your oozing [cock biggest]" + ((player.cocks.length > 1) ? "and [cock biggest2]") + ". There’s an eagerness on display here which you don’t think was there before as she laps at your cock [headplural], and you think she even stifles a disappointed whine when she’s finished. Smiling softly, you get up, dress and send her on her way.");
+				outputText("\n\n“<i>Gods, that was am- something, master,</i>” she says eventually. “<i>Did... did I do well?</i>” You rub behind her floppy ear and tell her she’s getting better, but - and you say this pointedly - she’s still quite forgetful. You watch her closely as she mumbles an apology and then leans back in to clean your oozing [cock biggest]");
+				if (player.cocks.length > 1) outputText(" and [cock biggest2]");
+				outputText(". There’s an eagerness on display here which you don’t think was there before as she laps at your cock [headplural], and you think she even stifles a disappointed whine when she’s finished. Smiling softly, you get up, dress and send her on her way.");
 			}
 
 			player.orgasm();
@@ -2026,13 +2052,21 @@ package classes.Scenes.Places.Farm
 				if (player.balls > 0) outputText("\n\nShe begins as you’ve already bid her, bending in to lap at your [balls], silently sending her warm, wet tongue rolling and questing around your gonads, polishing every inch of them, taking each into her mouth intermittently to bathe them in close, sucking attention. ");
 				if (player.cocks.length > 1) outputText("She wraps her hand around your [cock biggest2] when she’s ready, giving it an experimental pump before beginning to softly and slowly work it, remembering exactly how to grip and bend its girth as she prepares for the main course.");
 
-				outputText("\n\nShe rises up and engulfs your [cock biggest] in wet, sucking warmness, already hard from the sight of her eager frigging. You sigh as she gets to work, her head bobbing as she sinks more and more of your length into her welcoming mouth. Again there is a slight sense of awkwardness; " + ((player.cocks.length > 1) ? "she occasionally forgets the length bulging in her hand so eager is she to push her lips further down your [cock biggest] and work at her own clit, and you need to murmur to get her to concentrate." : "she still occasionally forgets the length buried in her mouth, so eager is she to work keenly at her own clit, and you need to murmur to get her to concentrate.") + " Nonetheless, the worshipful pleasure inundating your groin is close to masterful and you find yourself drifting away on it, closing your eyes and forgetting about instruction, lost entirely in the waves of your bitch’s soft, exact, ecstatic movements, her sighs and slurps filling your ears.");
+				outputText("\n\nShe rises up and engulfs your [cock biggest] in wet, sucking warmness, already hard from the sight of her eager frigging. You sigh as she gets to work, her head bobbing as she sinks more and more of your length into her welcoming mouth. Again there is a slight sense of awkwardness; ");
+				if (player.cocks.length > 1) outputText("she occasionally forgets the length bulging in her hand so eager is she to push her lips further down your [cock biggest] and work at her own clit, and you need to murmur to get her to concentrate.");
+				else outputText("she still occasionally forgets the length buried in her mouth, so eager is she to work keenly at her own clit, and you need to murmur to get her to concentrate.");
+				outputText(" Nonetheless, the worshipful pleasure inundating your groin is close to masterful and you find yourself drifting away on it, closing your eyes and forgetting about instruction, lost entirely in the waves of your bitch’s soft, exact, ecstatic movements, her sighs and slurps filling your ears.");
 
 				outputText("\n\nWhen your orgasm begins to build, stoked so fiercely by your slave’s warm worship, you’re so far away you almost forget to give the order. However as your seed rises you chance a look down, meeting soulful brown eyes gazing back at you, and remember.");
 
-				outputText("\n\n“<i>Cum.</i>” you manage, as you close your eyes and throw yourself into it. Whitney’s muffled moans are what you hear as your body tenses, your cock-slit dilates and you surge jizz down her throat; she shudders around you and her eyes roll as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject" + ((player.cumQ() >= 1500) ? "which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes") + "." + ((player.cocks.length > 1) ? " The second cock trapped in her grasp flexes out cum just as eagerly as the first, sweat standing out on your forehead as you are clenched by your twin high; it paints her skirt with its generous discharge."));
+				outputText("\n\n“<i>Cum.</i>” you manage, as you close your eyes and throw yourself into it. Whitney’s muffled moans are what you hear as your body tenses, your cock-slit dilates and you surge jizz down her throat; she shudders around you and her eyes roll as she finds her own high rooting around in her pussy. You are extremely gratified to note that, despite being on a plane of submissive pleasure far above you, she still manages to swallow every drop of cum you eject");
+				if (player.cumQ() >= 1500) outputText(" which is no mean feat, given it feels like you’ve fucked what feels like a gallon of it down her gullet. Once you’re almost done, as ever you spurt the last few creamy ropes across her face and clothes");
+				outputText(".");
+				if (player.cocks.length > 1) outputText(" The second cock trapped in her grasp flexes out cum just as eagerly as the first, sweat standing out on your forehead as you are clenched by your twin high; it paints her skirt with its generous discharge.");
 
-				outputText("\n\nOnce you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, " + ((player.cocks.length == 1) ? "Whitney cleans your [cock biggest] with her flat tongue, humming as she laps your oozing head clean, deliciously soothing your aching cock." : "Whitney cleans first your [cock biggest2] and then your [cock biggest] with her flat tongue, humming as she laps each of your oozing heads clean, deliciously soothing your aching cock."));
+				outputText("\n\nOnce you have tensed your last you sigh beatifically and float high and formless on your post-blowjob haze. You close your eyes as, without any bidding, ");
+				if (player.cocks.length == 1) outputText("Whitney cleans your [cock biggest] with her flat tongue, humming as she laps your oozing head clean, deliciously soothing your aching cock.");
+				else outputText("Whitney cleans first your [cock biggest2] and then your [cock biggest] with her flat tongue, humming as she laps each of your oozing heads clean, deliciously soothing your aching cock.");
 
 				outputText("\n\n“<i>Did you enjoy that, [master]?</i>” she says with a slightly woozy edge. She looks slightly drunk, her eyes heavy-lidded. “<i>Think I’ve... think I’ve got it.</i>” She’s become very accomplished, but you know instinctively she’s not quite as good as she can be quite yet. Holding her gaze, you tell her she’s doing well - but the very best cocksuckers never stop finding ways of bettering themselves. Your dog girl accepts this will a slight frown.");
 
@@ -2095,7 +2129,9 @@ package classes.Scenes.Places.Farm
 				}
 				else
 				{
-					outputText("\n\n“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it...</i>” You sigh as she swiftly picks up a steady beat" + ((player.cocks.length > 1) ? " jerking both your cocks with her smooth, exacting grasp in tandem") + ".");
+					outputText("\n\n“<i>Put your hand here.</i>” Slowly she withdraws her fingers from her panties and wraps them around the base of your [cock biggest]. You sigh at the hot, damp pressure now ringing the very bottom of your saliva-glossed member. “<i>Work it right there... that’s it...</i>” You sigh as she swiftly picks up a steady beat");
+						if (player.cocks.length > 1) outputText(" jerking both your cocks with her smooth, exacting grasp in tandem");
+						outputText(".");
 				}
 
 				outputText("\n\n“<i>Now get back to your main task.</i>” You hum with deep approval as once again your [cock biggest] is swaddled in mouth flesh, her tongue sliding up and down your shaft in the same masterful, alternating oscillation");
@@ -2180,11 +2216,16 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou don’t even need to look at her to know your plan is working perfectly. Muffled grunts, slurps and moans fill the air below you, Whitney’s mind now linking sexual release so deeply to debasing herself and gratifying you that she drips and throbs to being on her knees and having her mouth and hands packed with your cock, buried in your cunt, without any help whatsoever.");
 
-			outputText("\n\nThe sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your extensive sex and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of " + ((player.biggestCockLength() < 8) "the back of her mouth" : "her gullet") + " as you spear decisively inwards.");
+			outputText("\n\nThe sight and sound of her inundates your senses with the same drowning intensity of the pleasure enveloping your extensive sex and you pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suction of her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") + ". She moans deeply as you begin to use her like this, and even when you’re face fucking her she does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of ");
+			if (player.biggestCockLength() < 8) outputText("the back of her mouth");
+			else outputText("her gullet");
+			outputText(" as you spear decisively inwards.");
 
 			outputText("\n\nYou can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark wordlessly with each bucket of jizz you fountain down her throat. There’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her master. ");
 
-			outputText("\n\nHer fingers slip and slide around your [vagina] and it quivers and contracts in shared orgasm, " + ((player.wetness() > 2) ? "soaking her arm as it gutters your juices, ") + "heightening the ecstasy you feel to mind-blowing heights. ");
+			outputText("\n\nHer fingers slip and slide around your [vagina] and it quivers and contracts in shared orgasm, ");
+			if (player.wetness() > 2) outputText("soaking her arm as it gutters your juices, ");
+			outputText("heightening the ecstasy you feel to mind-blowing heights. ");
 			if (player.cocks.length > 1) outputText(" She doesn’t forget the cock trapped in her grasp for a moment either; she milks it as hard as you’re fucking her mouth, and it flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your triple high as it paints her skirt with its generous discharge.");
 			if (player.cumQ() >= 1500) outputText(" Once you’re almost done, as ever you pull out and spurt the last few creamy ropes across her face and clothes. Red with her own huge high, the dog woman does her level best to catch them in her mouth.");
 
@@ -2309,16 +2350,28 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nYou keep a close eye on your slave bobbing away below you, but there really is no need to. She knows exactly what she’s doing now, every movement of her hands and mouth guided with exact precision to send lavish sensation and dense heat pulsing through your groin. Doing this to you is possibly giving her even more pleasure than what you’re getting out of it. She moans and gasps as she sinks her mouth down your cock, almost as if it were a second vagina you were penetrating, mired in the corrupted tangle of submissive impulses you have planted deep within her. You grin as you admire your petite cock slave worshipping your body. That would be a thing wouldn’t it, changing her mouth into a nice, wet pussy? Well, you can’t manage that but... you groan as she sends her tongue sliding right down to your base whilst she sucks almost your whole length tight and close... you think she does deserve a mark of recognition, for all her hard learning.");
 
-				outputText("\n\nYou grab hold of those thoughts, filling them with a black power as the drowning intensity of the pleasure inundating your sex increases and you begin to pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suck of her " + ((player.biggestCockLength() < 8) ? "mouth" : "throat") +". With some effort you stay afloat and consider the dog woman as she whimpers in delight to you hammering into her juicy mouth");
+				outputText("\n\nYou grab hold of those thoughts, filling them with a black power as the drowning intensity of the pleasure inundating your sex increases and you begin to pump upwards to an irresistible high, grasping her head and beginning to thrust deep into the tight suck of her ");
+				if (player.biggestCockLength() < 8) outputText("mouth");
+				else outputText("throat");
+				outputText(". With some effort you stay afloat and consider the dog woman as she whimpers in delight to you hammering into her juicy mouth");
 				if (player.balls > 0) outputText(", your saliva-glossed [balls] beating against her chin");
 				outputText(". If there is one deficiency to her right now it is her fairly thin, pale lips. No cocksucking champion has lips like that - they need to be big, bee-stung, constantly wet with the movements of a needy tongue. Luscious whore pillows worthy of having your cock slide between them. You push these succulent, evil thoughts deep into your groin, deep into the heat building inexorably there. ");
 
-				outputText("\n\nEven when you’re face fucking her Whitney does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of " + ((player.biggestCockLength() < 8) ? "the back of her mouth" : "her gullet") + " as you spear decisively inwards. You can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark and howl with each bucket of jizz you fountain down her throat. ");
+				outputText("\n\nEven when you’re face fucking her Whitney does exactly the right things, hollowing her cheeks as you pull outwards to suck deliciously at your receding shaft then softening her mouth completely to give you the best access possible to the beautiful, tight warmth of ");
+				if (player.biggestCockLength() < 8) outputText("the back of her mouth");
+				else outputText("her gullet");
+				outputText(" as you spear decisively inwards. You can’t find the words as you fly into your golden, ecstatic high; you throw your head back as you bury as much of your cock into her as you can, sweat standing out on your brow as you bark and howl with each bucket of jizz you fountain down her throat. ");
 
 				outputText("\n\nThere’s a series of shrill, strangled squeals below you, her body shakes around you and you know without needing to see Whitney is cumming too, purely from the slavering joy of swallowing every last drop of the thick seed thrust into her by her [master]. Her fingers slip and slide around your [vagina] and it quivers and contracts in shared orgasm");
 				if (player.wetness() > 2) outputText(", soaking her arm as it gutters your juices");
 				outputText(", heightening the ecstasy you feel to mind-blowing heights.");
-				if (player.cocks.length > 1) outputText(" She doesn’t forget the cock trapped in her grasp for a moment; she milks it as hard as you’re fucking her mouth, and it flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your " + ((player.cocks.length == 2) "triple" : "transcendent") + " high; it paints her skirt with its generous discharge.");
+				if (player.cocks.length > 1)
+				{
+					outputText(" She doesn’t forget the cock trapped in her grasp for a moment; she milks it as hard as you’re fucking her mouth, and it flexes out cum just as eagerly as the first, delirium seizing you as you are clenched by your ");
+					if (player.cocks.length == 2) outputText("triple");
+					else outputText("transcendent");
+					outputText(" high; it paints her skirt with its generous discharge.");
+				}
 
 				outputText("\n\nShe suddenly gasps in shock, and you quickly look down. Her lips look swollen, and they seem to be darkening. Grunting in exultation, you keep pumping your length into her mouth, finding new legs at this overt demonstration of your corrupt power. With each jet of cum you thrust past them, her lips swell up and darken a little more; her eyes roll as they plump up and begin to shine with a wet, depthless black to your frenetic fucking. Eventually you can give her no more and withdrawing you stumble back, stars swimming in your eyes from the force of it.");
 
@@ -2365,7 +2418,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\nWhen she finally envelopes your jutting head with her mouth, you cannot help but groan with delight. She does it ever so slowly, letting her full, frictionless lips glissade over your sensitive cock slit before opening wide and sliding gradually down your shaft, hollowing her cheeks with syncopated suction, blanketing more and more of your [cock biggest] in sucking, liquid warmth. Her head bobs as she immediately finds a sensual rhythm, sending her tongue sliding downwards as her mouth withdraws to your bulbous tip and then back up as she buries your length deep into her mouth, using the alternating movement to send sheer ecstasy pulsing through your groin. There is no need for instruction anymore, no need to do anything but to enjoy that plump, wet seal sliding up and down your prick, a tide of warm, shifting pleasure which carries you off into an extended sexual euphoria.");
 
 				outputText("\n\nSuch is her mastery now Whitney probably could make you cum any time if she wanted to, but just like you she wants to keep this going for as long as she possibly can, so she blows you incredibly slowly and sensually. Her intermittent hungry moans send pleasurable vibrations through your cock, pushing as much of her sensitive, cum-addicted lips around your girth as she can. ");
-				if (player.cocks.length > 1) outputText("In the long, delicious daze that follows you move her around"):
+				if (player.cocks.length > 1) outputText("In the long, delicious daze that follows you move her around");
 				if (player.cocks.length == 2) outputText(", switching her attention to your [cock biggest2] for a while");
 				else if (player.cocks.length >= 3) outputText(" switching her attention first to one cock and then the other");
 				if (player.cocks.length > 1) outputText(" so that each of your fiercely erect pricks has time to enjoy the tight, sucking embrace of her mouth.");
@@ -2466,7 +2519,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function firstvaginaOralTraining():void
+		private function firstVaginaOralTraining():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -2532,7 +2585,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function firstvaginaOralTrainingStageTwo():void
+		private function firstVaginaOralTrainingStageTwo():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -2637,7 +2690,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function firstvaginaOralTrainingStageThree():void
+		private function firstVaginaOralTrainingStageThree():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -2973,7 +3026,14 @@ package classes.Scenes.Places.Farm
 			}
 
 			// {merge}
-			outputText("\n\nShe thrashes into you forcefully for as long as you continue to spurt and dribble " + ((player.hasCock()) "cum" : "femcum") + ", and only after relaxing for a long, heavy moment on your face does she finally slide off you. You heave and pant for breath, still cuffed to the bed, rivulets of femcum trickling down your face, your tongue and " + ((player.hasCock()) ? "[cock biggest]") + ((player.hasCock() && player.hasVagina()) ? " and ") + ((player.hasVagina()) ? "[vagina]") + " aching, oozing. In a deep, post-coital haze you feel someone take a towel to your body before curling into you, throwing a dense thigh over you, holding and running her hands over you possessively as you recover. ");
+			outputText("\n\nShe thrashes into you forcefully for as long as you continue to spurt and dribble ");
+			if (player.hasCock()) outputText("cum");
+			else outputText("femcum");
+			outputText(", and only after relaxing for a long, heavy moment on your face does she finally slide off you. You heave and pant for breath, still cuffed to the bed, rivulets of femcum trickling down your face, your tongue and ");
+			if (player.hasCock()) outputText("[cock biggest]"); 
+			if (player.hasCock() && player.hasVagina()) outputText(" and ");
+			if (player.hasVagina()) outputText("[vagina]");
+			outputText(" aching, oozing. In a deep, post-coital haze you feel someone take a towel to your body before curling into you, throwing a dense thigh over you, holding and running her hands over you possessively as you recover. ");
 
 			outputText("\n\nIt’s only after these enforced cuddles that Whitney finally undoes your clasps and lets you get up. She watches you dress with heavy-lidded satisfaction and sighs wistfully as you get up and head to the door. But one session at a time with this creature you’ve created is about as much as you think you can physically take.");
 
@@ -3004,7 +3064,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nIn a position of complete supplication, your face and [chest] forced down into the bed, you look up in trepidation as your monstrously skilled slave mistress shifts around to your front end. She’s smiling her fanged smile down at you as she dangles the last two items she retrieved from her dressing table.");
 
 			// PC female & has Vapula
-			if (player.hasVagina() && !player.hasCock() && vapulaSlave())
+			if (player.hasVagina() && !player.hasCock() && kGAMECLASS.vapula.vapulaSlave())
 			{
 				outputText("\n\nThe wooden paddle in one hand perhaps isn’t much of a surprise, but the other... it’s a double ended strap-on, one end relatively small and flexible-looking, the other a purple monster with garish leopard spots painted across its bumps. It’s immediately recognisable to you and you look up at Whitney with a kind of horror, whose grin only widens.");
 
@@ -3044,17 +3104,29 @@ package classes.Scenes.Places.Farm
 
 			if (capacty >= 200)
 			{
-				outputText("\n\nThe dog woman huffs in surprise as she slides her prosthetic length in with ease, your " + ((player.hasVagina()) ? "deep, eager vagina" : "oily, well-used passage" + " eagerly swallowing it up until her hard hips are pressed against your [butt].");
+				outputText("\n\nThe dog woman huffs in surprise as she slides her prosthetic length in with ease, your ");
+				if (player.hasVagina()) outputText("deep, eager vagina");
+				else outputText("oily, well-used passage");
+				outputText(" eagerly swallowing it up until her hard hips are pressed against your [butt].");
 
-				outputText("\n\n“<i>You’re no stranger to cock, are you [boy]l?</i>” she breathes. You jerk in shock as the paddle lands with a sharp report on your ass cheek. “<i>When you aren’t strutting around here, I bet you " + ((player.hasVagina()) ? "sit and spread em for anything going, don’t you?" : "I bet you get on your knees for anything with a nice, juicy cock, right?") + " What would your other slaves think of that? My secret little slut.</i>” ");
+				outputText("\n\n“<i>You’re no stranger to cock, are you [boy]?</i>” she breathes. You jerk in shock as the paddle lands with a sharp report on your ass cheek. “<i>When you aren’t strutting around here, I bet you ");
+				if (player.hasVagina()) outputText("sit and spread em for anything going, don’t you?");
+				else outputText("I bet you get on your knees for anything with a nice, juicy cock, right?");
+				outputText(" What would your other slaves think of that? My secret little slut.</i>” ");
 
 				outputText("\n\nYou’d like to retort with something along the lines of fucking not equalling submitting but you’re not exactly in a good position to speak up, and it’s getting hard to concentrate on anything but the urge gripping your body and the intense, checkered sensations Whitney is pressing on you.");
 			}
 			else
 			{
-				outputText("\n\nThe dog woman works her way into you slowly, groaning in satisfaction at the " + ((player.hasVagina()) ? "take of your tight cunt" : "give of your tight ass") + ", pushing the other end of the dildo into her. An even louder moan is forced out of your throat by the intensity of your tunnel being packed full of cock, albeit an imitation.");
+				outputText("\n\nThe dog woman works her way into you slowly, groaning in satisfaction at the ");
+				if (player.hasVagina()) outputText("take of your tight cunt");
+				else outputText("give of your tight ass");
+				outputText(", pushing the other end of the dildo into her. An even louder moan is forced out of your throat by the intensity of your tunnel being packed full of cock, albeit an imitation.");
 
-				outputText("\n\n“<i>S’it,</i>” Whitney breathes exultantly, as her hard hips finally press against your [butt], the whole thing buried in you. “<i>Cry for me, [boy]! This is something you need, isn’t it? Something to think about when you’re lordin’ it over your " + ((player.hasVagina()) ? "servants, you tight, bossy little bitch" : "cattle, you tight, bossy little boy-bitch") + ".</i>” ");
+				outputText("\n\n“<i>S’it,</i>” Whitney breathes exultantly, as her hard hips finally press against your [butt], the whole thing buried in you. “<i>Cry for me, [boy]! This is something you need, isn’t it? Something to think about when you’re lordin’ it over your ");
+				if (player.hasVagina()) outputText("servants, you tight, bossy little bitch");
+				else outputText("cattle, you tight, bossy little boy-bitch");
+				outputText(".</i>” ");
 
 				outputText("\n\nYou jerk in shock as the paddle lands with a sharp report on your ass cheek. You try to remember when you ever agreed to this kind of treatment, but it’s getting hard to concentrate on anything but the urge gripping your body and the acute, checkered sensations Whitney is pressing on you.");
 			}
@@ -3248,10 +3320,11 @@ package classes.Scenes.Places.Farm
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1 && hasFreeTattooSlot("amily")) addButton(1, "Amily", brandAmily);
 					//if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && hasFreeTattooSlot("jojo")) addButton(2, "Jojo", brandJojo);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2 && hasFreeTattooSlot("sophie")) addButton(3, "Sophie", brandBimboSophie);
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) && hasFreeTattooSlot("vapula")) addButton(4, "Vapula", brandVapula);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && hasFreeTattooSlot("vapula")) addButton(4, "Vapula", brandVapula);
 					if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && hasFreeTattooSlot("kelly")) addButton(5, "Kelly", brandKelly);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0 && hasFreeTattooSlot("milky")) addButton(6, flags[kFLAGS.MILK_NAME], brandSmallMilky);
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] == 0 && hasFreeTattooSlot("milky")) addBUtton(6, flags[kFLAGS.MILK_NAME], brandBigMilky);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] == 0 && hasFreeTattooSlot("milky")) addButton(6, flags[kFLAGS.MILK_NAME], brandBigMilky);
+				}
 
 				addButton(9, "Back", dogeCorruptedMissionComplete);
 			}
@@ -3718,7 +3791,7 @@ package classes.Scenes.Places.Farm
 			addButton(1, "Heart", heartTattoo, slot);
 			addButton(2, "Property Of", propertyTattoo, slot);
 			addButton(3, "#1 Bitch", no1Tattoo, slot);
-			if (player.hasCock() && whitneyMaxedOralTraining())) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
+			if (player.hasCock() && whitneyMaxedOralTraining()) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
 			if (player.hasVagina() && whitneyMaxedOralTraining()) addButton(5, "Pussylicker", champPussylickerTattoo, slot);
 
 			addButton(9, "Back", brandSlotSelect);
@@ -3752,8 +3825,8 @@ package classes.Scenes.Places.Farm
 			addButton(1, "Heart", jojoHeartTattoo, slot);
 			addButton(2, "Property Of", jojoHeartTattoo, slot);
 			addButton(3, "Sissy Slut", jojoHeartTattoo, slot);
-			if (pc.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
-			if (pc.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
+			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
+			if (player.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
 
 			addButton(9, "Back", jojoBrandSlotSelect);
 		}
@@ -3788,7 +3861,7 @@ package classes.Scenes.Places.Farm
 			addButton(2, "Property Of", vapulaPropertyOfTattoo, slot);
 			addButton(3, "Cum Addict", vapulaCumAddictTattoo, slot);
 			if (slot == 2 || slot == 3) addButton(4, "Buttslut", vapulaButtslutTattoo, slot);
-			if (!pc.hasCock()) addButton(5, "Dildo Polisher", vapulaDildoPolisherTattoo, slot);
+			if (!player.hasCock()) addButton(5, "Dildo Polisher", vapulaDildoPolisherTattoo, slot);
 
 			addButton(9, "Back", vapulaSlotSelect);
 		}
@@ -3804,7 +3877,7 @@ package classes.Scenes.Places.Farm
 			addButton(1, "Heart", kellyHeartTattoo, slot);
 			addButton(2, "Property Of", kellyPropertyOfTattoo, slot);
 			addButton(3, "#1 Filly", kellyNo1FillyTattoo, slot);
-			if (silly) addButton(4, "Dick Won", kellyDickWonTattoo, slot);
+			if (silly()) addButton(4, "Dick Won", kellyDickWonTattoo, slot);
 			if (slot == 1) addButton(5, "Horseshoe", kellyHorseshoeTattoo, slot);
 
 			addButton(9, "Back", kellySlotSelect);
@@ -3823,7 +3896,7 @@ package classes.Scenes.Places.Farm
 			addButton(3, "Property Of", smallMilkyPropertyOfTattoo, slot);
 			addButton(4, "Bath Toy", smallMilkyBathToyTattoo, slot);
 			if (slot == 0) addButton(5, "Mega Milk", smallMilkyMegaMilkTattoo, slot);
-			if (slot == 0 && pc.hasCock()) "Cock Cozy", smallMilkyCockCozyTattoo, slot);
+			if (slot == 0 && player.hasCock()) addButton(6, "Cock Cozy", smallMilkyCockCozyTattoo, slot);
 
 			addButton(9, "Back", smallMilkySlotSelect);
 		}
@@ -3840,7 +3913,7 @@ package classes.Scenes.Places.Farm
 			addButton(2, "Property Of", bigMilkyPropertyOfTattoo, slot);
 			addButton(3, "Bath Toy", bigMilkyBathToyTattoo, slot);
 			if (slot == 0) addButton(4, "Mega Milk", bigMilkyMegaMilkTattoo, slot);
-			if (slot == 0 && pc.hasCock()) addButton(5, "Cock Cozy", bigMilkyCockCozyTattoo, slot);
+			if (slot == 0 && player.hasCock()) addButton(5, "Cock Cozy", bigMilkyCockCozyTattoo, slot);
 
 			addButton(9, "Back", bigMilkySlotSelect);
 		}
@@ -4173,7 +4246,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				jojoLowerbackTattoo();
+				jojoLowerbackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
 			}
@@ -4210,7 +4283,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bimboSophieLowerBackTattoo();
+				bimboSophieLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 			}
@@ -4245,7 +4318,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				vapulaLowerBackTattoo();
+				vapulaLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 			}
@@ -4280,7 +4353,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				kellyLowerBackTattoo();
+				kellyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.KELLY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4358,7 +4431,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bigMilkyLowerBackTattoo();
+				bigMilkyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4392,7 +4465,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bigMilkyLowerBackTattoo();
+				bigMilkyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4426,7 +4499,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bigMilkyLowerBackTattoo();
+				bigMilkyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4460,7 +4533,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bigMilkyLowerBackTattoo();
+				bigMilkyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.MILKY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4555,7 +4628,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				amilyLowerbackIntro();
+				amilyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4626,7 +4699,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bimboSophieLowerBackTattoo();
+				bimboSophieLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 			}
@@ -4661,7 +4734,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				vapulaLowerBackTattoo();
+				vapulaLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 			}
@@ -4696,7 +4769,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				kellyLowerBackTattoo();
+				kellyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.KELLY_TATTOO_LOWERBACK] = tText;
 			}
@@ -4868,7 +4941,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function numMilkyButterflyTats():int
+		public function numMilkyButterflyTats():int
 		{
 			var count:int = 0;
 			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] is String)
@@ -4890,7 +4963,7 @@ package classes.Scenes.Places.Farm
 			return count;
 		}
 
-		private function smallMilkyButterflyTattoo():void
+		private function smallMilkyButterflyTattoo(slot:int):void
 		{
 			clearOutput();
 
@@ -5013,7 +5086,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				kellyLowerBackTattoo();
+				kellyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.KELLY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5048,7 +5121,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				kellyLowerBackTattoo();
+				kellyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.KELLY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5083,7 +5156,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				kellyLowerBackTattoo();
+				kellyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.KELLY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5154,7 +5227,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				amilyLowerbackIntro();
+				amilyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5225,7 +5298,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bimboSophieLowerBackTattoo();
+				bimboSophieLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 			}
@@ -5260,7 +5333,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				vapulaLowerBackTattoo();
+				vapulaLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 			}
@@ -5295,7 +5368,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				vapulaLowerBackTattoo();
+				vapulaLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 			}
@@ -5315,7 +5388,7 @@ package classes.Scenes.Places.Farm
 
 			var tText:String = "“Buttslut” tattooed in a red love heart across her lower back.";
 
-			vapulaLowerBackTattoo();
+			vapulaLowerBackIntro();
 			tText += "lower back.";
 			flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 
@@ -5343,7 +5416,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				vapulaLowerBackTattoo();
+				vapulaLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 			}
@@ -5380,7 +5453,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bimboSophieLowerBackTattoo();
+				bimboSophieLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 			}
@@ -5417,7 +5490,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				bimboSophieLowerBackTattoo();
+				bimboSophieLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 			}
@@ -5437,7 +5510,7 @@ package classes.Scenes.Places.Farm
 
 			var tText:String = "“Cock Goes Here” tattooed across her lower back.";
 
-			bimboSophieLowerBackTattoo();
+			bimboSophieLowerBackIntro();
 			flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 
 			doNext(13);
@@ -5512,7 +5585,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				amilyLowerbackIntro();
+				amilyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5583,7 +5656,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				amilyLowerbackIntro();
+				amilyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5652,7 +5725,7 @@ package classes.Scenes.Places.Farm
 			}
 			else if (slot == 2)
 			{
-				amilyLowerbackIntro();
+				amilyLowerBackIntro();
 				tText += "lower back.";
 				flags[kFLAGS.AMILY_TATTOO_LOWERBACK] = tText;
 			}
@@ -5796,7 +5869,8 @@ package classes.Scenes.Places.Farm
 
 		public function whitneyFullTribalTats():Boolean
 		{
-			if (numWhitneyTribalTats()) == 4) return true;
+			if (numWhitneyTribalTats() == 4) return true;
+			return false;
 		}
 
 		public function amilyFullTribalTats():Boolean
@@ -5984,7 +6058,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>2200 gems?!</i>”");
 
-			outputText("\n\n“<i>...I could convert my front room into a relaxation room for you,</i>” the dog woman goes on doggedly. “<i>It would have everything I need to properly take care of you. Like a hot tub. And I would pack it with all the sorts of things...</i>“ she sighs dreamily again “<i>all the sorts of things a big, strong "+ pc.mf("lord", "lady") +" of the land might want. For when [he] is taking care of [his] servants. Like lots of em. At the same time.</i>”");
+			outputText("\n\n“<i>...I could convert my front room into a relaxation room for you,</i>” the dog woman goes on doggedly. “<i>It would have everything I need to properly take care of you. Like a hot tub. And I would pack it with all the sorts of things...</i>“ she sighs dreamily again “<i>all the sorts of things a big, strong "+ player.mf("lord", "lady") +" of the land might want. For when [he] is taking care of [his] servants. Like lots of em. At the same time.</i>”");
 
 			var noT:String = "No";
 			if (player.gems >= 2200) addButton(0, "Yes", getOrgyRoom);
@@ -6086,7 +6160,10 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou are all but lost to the gliding balm of her hands, but it begins to woozily occur to you, as you respire in time with her, that her breathing isn’t quite level; it occasionally catches, or goes slightly faster. After another few moments of enjoying her touch you begin to notice when this happens: every time her fingers move over one of the many mild scars and lumps you carry from your time adventuring. You grin; it’s pleasing to imagine soothing over the proof of your many hard victories turns her on a bit. ");
 
-			outputText("\n\nThe erotic tension builds as she finishes with your arms and slides her palms down to your [butt]. You don’t think this part of your anatomy needs much work but she goes about it anyway, sighing deeply as she moves her oiled hands in slow, wide circuits across the convex of your "+ ((player.buttRating() >= 6) ? "soft" : "brawny") +" rear. After she’s finished making your butt feel red and smooth she dips a heated, greasy hand between your [hips] and");
+			outputText("\n\nThe erotic tension builds as she finishes with your arms and slides her palms down to your [butt]. You don’t think this part of your anatomy needs much work but she goes about it anyway, sighing deeply as she moves her oiled hands in slow, wide circuits across the convex of your ");
+			if (player.buttRating >= 6) outputText("soft");
+			else outputText("brawny");
+			outputText(" rear. After she’s finished making your butt feel red and smooth she dips a heated, greasy hand between your [hips] and");
 			if (player.hasCock()) outputText(" grips your [cock]");
 			else if (player.hasVagina()) outputText(" traces the entrance of your [vagina]");
 			outputText(" for a moment... before sliding out with a throaty giggle, moving on down to your hips.");
@@ -6100,13 +6177,13 @@ package classes.Scenes.Places.Farm
 				if (!(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_NAGA || player.lowerBody == LOWER_BODY_TYPE_GOO || player.lowerBody == LOWER_BODY_TYPE_PONY))
 				{
 					outputText(" Your mouth opens as a twinge of pure pleasure veins up your [leg] as she massages the soft arch of the sole, making your");
-					if (player.hasCock() outputText(" cock thicken");
+					if (player.hasCock()) outputText(" cock thicken");
 					if (player.hasCock() && player.hasVagina()) outputText(" and your");
 					if (player.hasVagina()) outputText(" pussy moisten");
 					outputText(".");
 
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
-					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_CLAWS) outputText(" claws");
+					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_DRAGON) outputText(" claws");
 					else outputText(" toes")
 					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
 				}
@@ -6139,7 +6216,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
 
 				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
-				if (player.tongueType == TONGUE_TYPE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				if (player.tongueType == TONUGE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
 				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");
@@ -6198,7 +6275,7 @@ package classes.Scenes.Places.Farm
 			var cockThatFits:int = player.cockThatFits(whitneyVagCapacity() * 1.33);
 			var hasBiggerCock:Boolean = false;
 
-			if (cockThatFits != biggestCock()) hasBiggerCock = true;
+			if (cockThatFits != player.biggestCockArea()) hasBiggerCock = true;
 
 			outputText("You drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, sinking your fingers into her tight, welcoming hole. ");
 
@@ -6279,7 +6356,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nThe breathing tease quickly cascades to the point where she stops trying, and she moans, yelps and squeals as you rut against her with heavy, quick strokes.  You’re going as fast as you can in the smothering humidity, whilst her self-control is long gone; she’s insensate to everything but your pussies and clits grinding into each other. You deeply enjoyed getting her into this state, but you’d be lying if you felt the same level of discipline you did to begin with - now you grind against her just as eagerly, glorying in her every shrill cry, your nerve endings buzzing as heat builds in your crotch. ");
 
 			outputText("\n\nYou hold her tight and join in her groans as you wrap as much of yourself around her as you can, your [chest] pushing into her sorely teased nipples as your [vagina] quivers and then clenches. If she didn’t manage it before the dog girl certainly does now; her back arches and her eyes roll as her tight cunt squeezes in sympathetic orgam with you.");
-			if (player.wetness >= 5) outputText(" Your pussy spurts excitement gleefully with each thrust, utterly drowning her own in your juices, polluting the water around you with your musk.");
+			if (player.wetness() >= 5) outputText(" Your pussy spurts excitement gleefully with each thrust, utterly drowning her own in your juices, polluting the water around you with your musk.");
 			if (player.hasCock()) outputText(" Whitney has stroked and tantalised your [cock biggest] with her hot hands and smooth belly intermittently this whole time, and as your orgasm builds and overwhelms you she gets her just reward for it; you jet cum from [eachCock], pasting first her face and then her tight breasts with your thick cream as you ride her hard.");
 
 			happyEndingMerge();

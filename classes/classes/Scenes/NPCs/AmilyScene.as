@@ -2639,16 +2639,16 @@ package classes.Scenes.NPCs
 				// [Horsecock]
 				outputText("pink pussy in between her legs; "+stopSayingNetherlipsFuck+".\n", false);
 
-				if (farm.farmCorruption.amilyHasTattoo())
+				if (kGAMECLASS.farm.farmCorruption.hasTattoo("amily"))
 				{
 					outputText("\n");
-					if (farm.farmCorruption.amilyFullTribalTats())
+					if (kGAMECLASS.farm.farmCorruption.amilyFullTribalTats())
 					{
 						outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.\n")
 					}
 					else
 					{
-						if (farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+						if (kGAMECLASS.farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 						else outputText("\nShe has ");
 
 						if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_COLLARBONE] + "\n");

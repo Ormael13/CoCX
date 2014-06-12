@@ -57,7 +57,7 @@
 		}
 
 		//Once Clara is at half health or lower, she'll cast blind.
-		function claraCastsBlind():void
+		public function claraCastsBlind():void
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
@@ -69,7 +69,7 @@
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
 			combatRoundOver();
 		}
-		function claraGropesBlindPCs():void
+		public function claraGropesBlindPCs():void
 		{
 			//Clara gropes the PC while they're blinded.  Damage is based on corruption + sensitivity.
 			if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) outputText("Suddenly Clara wraps an arm around you, and sticks a hand into your " + player.armorName + "!  She is able to give your " + multiCockDescriptLight + " a good fondle before you can push her away.  \"<i>Admit it - I make you soo hard, don't I?</i>\" she taunts you behind your dazzled vision.");
@@ -104,7 +104,7 @@
 			else
 			{
 				var actions:Array = [eAttack,claraDrugAttack,claraTeaseAttack,claraCastsBlind];
-				var action = rand(actions.length);
+				var action:int = rand(actions.length);
 				trace("ACTION SELECTED: " + action);
 				actions[action]();
 			}

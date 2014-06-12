@@ -5,6 +5,9 @@
 		// results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
 		// tags not present in the singleArgConverters object return an error message.
 		//
+		import classes.GlobalFlags.kFLAGS;
+		import classes.GlobalFlags.kGAMECLASS;
+		
 		public var singleArgConverters:Object =
 		{
 				// all the errors related to trying to parse stuff if not present are

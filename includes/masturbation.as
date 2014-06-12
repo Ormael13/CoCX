@@ -2977,7 +2977,7 @@ public function gildedCockTurbate():void {
 	doNext(13);
 }
 
-function stickADildoInYourVagooSlut():void {
+public function stickADildoInYourVagooSlut():void {
 	clearOutput();
 	if(player.hasVirginVagina())
 	{
@@ -3023,7 +3023,7 @@ function stickADildoInYourVagooSlut():void {
 }
 
 //Dildo in the butt because why not?
-function dildoButts():void
+public function dildoButts():void
 {
 	clearOutput();
 	outputText("A kinky idea crosses your mind, and you grab your dildo. Finding a safe spot a short distance from camp, you undo your [armor] and rest on your [butt].");

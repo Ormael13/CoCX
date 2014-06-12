@@ -3470,7 +3470,7 @@ public function giveRubiClothes(itype:ItemType = null):void {
 }
 
 //Rubi's Bimbofication
-function hypnoBimboficationForRubiSloots():void
+public function hypnoBimboficationForRubiSloots():void
 {
 	clearOutput();
 	outputText("You slither out of your [armor], flicking your tongue hungrily at the air, tasting the petite boy's desire. He is so attracted to you, and yet, he's trying so hard to be classy about it. It's cute in its own way, but you'd rather see him be more... honest about his drives. You want the cute, ");

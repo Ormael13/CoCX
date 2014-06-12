@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 			ceraphFollowerAppearance(false);
 		}
 		
-		private function noFarmShityet():void
+		private function noFarmShitYet():void
 		{
 			clearOutput();
 			ceraphSprite();

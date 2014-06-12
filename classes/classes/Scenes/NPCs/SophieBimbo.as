@@ -270,7 +270,7 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(1, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 0) addButton(2, "Harvest Eggs", harvestEggs);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHOE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(2, "Change Eggs", changeEggs);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(2, "Change Eggs", changeEggs);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(3, "Stop Harvest", stopHarvest);
 	
@@ -300,16 +300,16 @@ private function sophieBimboAppearance():void {
 	
 	outputText("\n\nSophie's arms are covered in feathers as well, and are somewhat wing-like in appearance, though she has human hands at the ends of them.  Her primary wings are larger and sprout out above her shoulder blades.  She often keeps them folded out of the way behind her, but she can kick up a huge dust-storm with them when she wants.");
 
-	if (farm.farmCorruption.hasTattoos("sophie"))
+	if (kGAMECLASS.farm.farmCorruption.hasTattoo("sophie"))
 	{
 		outputText("\n\n");
-		if (farm.farmCorruption.sophieFullTribalTats())
+		if (kGAMECLASS.farm.farmCorruption.sophieFullTribalTats())
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
 		else
 		{
-			if (farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			if (kGAMECLASS.farm.farmCorruption.numTattoos("sophie") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
 			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] + "\n");
@@ -356,14 +356,23 @@ public var eggColors:Array = [
 "White",
 ]
 
-public var eggTypes:Array = [
-consumable.L_BLKEG,
-consumable.L_BLUEG,
-consumable.L_BRNEG,
-consumable.L_PNKEG,
-consumable.L_PRPEG,
-consumable.L_WHTEG,
-]
+private var _eggTypes:Array;
+
+public function get eggTypes():Array
+{
+	if (_eggTypes == null)
+	{
+		_eggTypes = [
+			consumables.L_BLKEG,
+			consumables.L_BLUEG,
+			consumables.L_BRNEG,
+			consumables.L_PNKEG,
+			consumables.L_PRPEG,
+			consumables.L_WHTEG,
+		]
+	}
+	return _eggTypes;
+}
 
 private function eggSelector():void
 {
@@ -396,7 +405,7 @@ private function stopHarvest():void
 	
 	outputText("You tell Sophie to stop giving you eggs; you’d rather she’d put them towards making the farm money.");
 
-	if (silly) outputText("\n\n“<i>I only wish I had your keenly developed financial acumen and, like, grasp of small scale agricultural supply and demand, babe. Whatever you say!</i>”");
+	if (silly()) outputText("\n\n“<i>I only wish I had your keenly developed financial acumen and, like, grasp of small scale agricultural supply and demand, babe. Whatever you say!</i>”");
 	else outputText("“<i>I only wish I was good with numbers and things,</i>” Sophie sighs wistfully, picking at her bellybutton. “<i>Then I’d know when to give you my eggs and, and when to give them to the doggie. Whatever you say anyways, babe!</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 0;

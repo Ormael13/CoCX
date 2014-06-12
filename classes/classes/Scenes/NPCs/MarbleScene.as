@@ -54,7 +54,7 @@ public function marbleAtCamp():Boolean
 }
 
 //function marbleBreastSize() returns either DD, G, HH, or J depending on her current size.  If purification is not finished, returns HH if Marble's corruption is > 30, otherwise returns G.
-function marbleBreastSize():String
+public function marbleBreastSize():String
 {
 	if(flags[kFLAGS.MARBLE_PURIFIED] > 0)
 	{

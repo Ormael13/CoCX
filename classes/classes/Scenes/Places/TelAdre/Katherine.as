@@ -1590,7 +1590,7 @@ public function ambushByVagrantKittyKats():void
 }
 
 //Get Help:
-function getHelpVsKittyKats():void
+public function getHelpVsKittyKats():void
 {
 	clearOutput();
 	outputText("Fighting three people at once is a lot harder than dealing with one opponent. Still, from the look of them you could probably mop the floor with these three. Out there in the wastes that would be the right thing to do, but Tel’Adre has its own laws and its own watch. Since you’re an outsider you decide you’d be better off finding a patrol.");
@@ -1601,7 +1601,7 @@ function getHelpVsKittyKats():void
 }
 
 //Intervene:
-function interveneWithKittyKats():void
+public function interveneWithKittyKats():void
 {
 	clearOutput();
 	outputText("Fighting three people at once is a lot harder than dealing with one opponent. Still, from the look of them you could probably mop the floor with these three. You square your shoulders and march down the alley. If you look intimidating enough maybe they’ll just scatter.");
@@ -1613,7 +1613,7 @@ function interveneWithKittyKats():void
 }
 
 //Intervene (Part 2):
-function interveneWithKittyKats2():void
+public function interveneWithKittyKats2():void
 {
 	clearOutput();
 	outputText("You blink your eyes. Ugh - even that hurts! You can’t see anyone in front of you, but then you hear someone take a step towards you. A male cat morph, perhaps even one of the ones who was threatening the younger woman, stands over you with a wooden plank in one hand.");
@@ -1631,7 +1631,7 @@ function interveneWithKittyKats2():void
 }
 
 //Intervene (Part 3):
-function interveneWithKittyKats3():void
+public function interveneWithKittyKats3():void
 {
 	clearOutput();
 	outputText("You ask her why she’s worried about the milk. She looks down at you, seems to decide you aren’t much of a threat right now and sits down on the edge of a crate.");
@@ -1648,7 +1648,7 @@ function interveneWithKittyKats3():void
 }
 
 //Intervene (Part 4):
-function interveneWithKittyKats4():void
+public function interveneWithKittyKats4():void
 {
 	clearOutput();
 	outputText("For a while you lie still and she stares off into space. She’s obviously distracted by her hunger, but how can you use that? A plan forms and you ask her why, if cats love milk, did they just leave you here.");
@@ -1668,7 +1668,7 @@ function interveneWithKittyKats4():void
 }
 
 //Intervene (Part 5):
-function interveneWithKittyKats5():void
+public function interveneWithKittyKats5():void
 {
 	clearOutput();
 	outputText("\"<i>Kath - Katherine</i>\" she blurts out. That’s when you feel something growing between you. A hot bump seems to have developed. It dawns on you that this very feminine kitty is actually a herm, and from the size and pressure of that bump you’re guessing she’s packing a real monster down there.");
@@ -1692,7 +1692,7 @@ function interveneWithKittyKats5():void
 }
 
 //Leave:
-function leaveKittyKatsLikeANeeeeeerrrrd():void
+public function leaveKittyKatsLikeANeeeeeerrrrd():void
 {
 	clearOutput();
 	outputText("You decide you’re better off not getting involved. After all, who knows what she’s done? She’s obviously a stray and could have stolen something from one of the others. Heck, with all the perverts you’ve seen in this land she could have a rape fetish. Surely she would scream to attract the guard if she were in real trouble.");
@@ -1731,7 +1731,7 @@ public function repeatAmbushKatherineRecruitMent():void
 }
 
 //Bargain:
-function bargainForKittahKatPussah():void
+public function bargainForKittahKatPussah():void
 {
 	clearOutput();
 	outputText("Since sex is so prevalent in this land, you decide to try something that would have got you in a load of trouble back in Ingnam. You tell Evelyn that you’d be willing to give the rest of them some gems in exchange for a little time with one of her friends.");
@@ -1746,7 +1746,7 @@ function bargainForKittahKatPussah():void
 }
 
 //Bargain (Part 2):
-function bargainForKittahKataPussah2():void
+public function bargainForKittahKataPussah2():void
 {
 	clearOutput();
 	outputText("Kath’s shoulders sag, and she sits down heavily on a crate. She looks up at you and says, \"<i>I joined the vagrant cats so I wouldn’t have to sell myself. Not that most people want me. And now my ‘friends’ just sold my ass for a drink of milk.</i>\" She sniffs a little and adds, \"<i>I won’t fight, there’s no point. Just do whatever you want.</i>\"");
@@ -1764,7 +1764,7 @@ function bargainForKittahKataPussah2():void
 }
 
 //Donate:
-function donateToCatSlutsYouCatSlut():void
+public function donateToCatSlutsYouCatSlut():void
 {
 	clearOutput();
 	outputText("You tell the cat morphs that you know they’re just doing this because they’re hungry. You say that last time they needed 25 gems and you stick your hand into your coinpurse, pulling out a handful of stones.");
@@ -1781,7 +1781,7 @@ function donateToCatSlutsYouCatSlut():void
 }
 
 //Donate (Part 2):
-function donateToCatSlutsYouCatSlutPt2():void
+public function donateToCatSlutsYouCatSlutPt2():void
 {
 	clearOutput();
 	outputText("Kath leans against the wall and tries to flick some grime off her shirt. Once the other cat morphs are out of the alley she quietly asks where you’re going. You say that on the way here you saw a restaurant just down the street. Would she like to accompany you?");
@@ -1800,7 +1800,7 @@ function donateToCatSlutsYouCatSlutPt2():void
 }
 
 //Threaten:
-function threatenCatSluts():void
+public function threatenCatSluts():void
 {
 	clearOutput();
 	outputText("You cross your arms and tell Evelyn that her little ambush isn’t going to work a second time. They can either scram, now, and set up in some other alley, or they can try and take you.");
@@ -1820,7 +1820,7 @@ function threatenCatSluts():void
 }
 
 //Second Talk with Katherine:
-function secondTalkWithKatherine():void
+public function secondTalkWithKatherine():void
 {
 	clearOutput();
 	outputText("A short walk takes you to the restaurant where you grab a table and ask Katherine what she’d like. Without hesitation she says, \"<i>A milkshake! Oh, it’s been soooo long since I had one.</i>\"");
@@ -1835,7 +1835,7 @@ function secondTalkWithKatherine():void
 }
 
 //First Time with Katherine:
-function firstTimeWithKatherineUTerribleScrub():void
+public function firstTimeWithKatherineUTerribleScrub():void
 {
 	clearOutput();
 	outputText("You ask Katherine what’s wrong. She looks at her feet and asks, \"<i>Why are you being so nice to me? I like you, but I don’t know why you like me and - and I don’t want to screw up.</i>\"");
@@ -1879,7 +1879,7 @@ function firstTimeWithKatherineUTerribleScrub():void
 //This is used in the new recruitment path and is also available as a repeatable scene once
 //Katherine is accessible in the alley behind the pawn shop. At the pawn shop I think this scene //should be available even if lust < 33, since you’re doing this for and to her.
 //Makes use of katKnot(), a new helper function which is listed under implementation details.
-function handjobbiesFurrDemCatFurries():void
+public function handjobbiesFurrDemCatFurries():void
 {
 	clearOutput();
 	outputText("You pull Kath into your lap and she purrs. Both your hands slide under her shirt and begin to ");
@@ -1940,7 +1940,7 @@ function handjobbiesFurrDemCatFurries():void
 }
 
 //First Time with Katherine (Part 2):
-function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo():void
+public function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo():void
 {
 	clearOutput();
 	outputText("You help Kath get to her feet and she gives you a big hug. A few sniffles lead to some sobs before she pulls herself together enough to say, \"<i>I didn’t believe anyone cared about me.</i>\"");
