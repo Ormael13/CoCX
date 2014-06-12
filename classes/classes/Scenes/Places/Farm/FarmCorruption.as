@@ -1664,7 +1664,7 @@ package classes.Scenes.Places.Farm
 			}
 
 			menu();
-			addButton(0, "Appearance", corruptWhitneyAppearance);
+			addButton(0, "Appearance", whitneyAppearanceCorrupt);
 			addButton(1, "Investment", investmentMenu);
 			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 1 || flags[kFLAGS.QUEUE_BRANDING_UPGRADE] < 1) addButton(2, "Branding", brandingMenu);
 			if (whitneyDom()) addButton(3, "Pleasure", whitneyDomPleasure);
@@ -3214,41 +3214,6 @@ package classes.Scenes.Places.Farm
 			}
 
 			doNext(13);
-		}
-
-		private function corruptWhitneyAppearance():void
-		{
-			outputText("\n\nWhitney is a 5’8” dog ");
-			if (whitneyDefurred()) outputText(" girl");
-			else outputText(" morph")
-			outputText(".");
-
-			if (whitneyDefurred()) outputText(" Her muzzle is suggestive of a golden retriever but really she could be any breed.");
-			else outputText(" Her human transformation has rendered her pretty in a delicate, diffident kind of way.");
-
-			if (whitneyDefurred()) outputText(" In sharp contrast to her otherwise fairly thin features, her lips are plump and a depthless black, shining like wet tar. She constantly moves her tongue over them unconsciously.");
-
-			outputText("\n\nAlthough she continues to dress in the same modest cotton blouses and long skirts she always has, complete with holes cut in to allow her short, perky tail to poke through, the cut of it and the way she moves and swings herself about, livid with arousal and near-constant sexual frustration, makes the demure outfit more perverse than anything a demon could dream up.");
-
-			if (whitneyHasTattoo())
-			{
-				outputText("\n\nShe has ");
-				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE]);
-				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0 && flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText("; ");
-				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS]);
-				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0 && (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0 || flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0)) outputText("; ");
-				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK]);
-				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0 && (flags[kFLAGS.WHITNEY_TATTO_LOWERBACK] != 0 || flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0 || flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0)) outputText("; ");
-				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.WHITNET_TATTOO_BUTT]);
-			}
-
-			if (!whitneyDefurred()) outputText("\n\nHer fur is sandy, dusking to black at her extremities.");
-			else outputText("\n\nHer skin is a sandy colour, and she wears black nail varnish.");
-
-			outputText(" Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair, flecked now with deep, red desire. Whilst she is beyond the softness of youth, it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her small breasts pert against her unprepossessing work-clothes. She has one anus, between her tight asscheeks where it belongs.");
-
-			dogeCorruptedMissionComplete();
-			addButton(0, "", null);
 		}
 
 		private function brandingMenu():void

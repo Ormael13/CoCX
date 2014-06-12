@@ -2637,9 +2637,28 @@ package classes.Scenes.NPCs
 				if(flags[kFLAGS.AMILY_VAGINAL_WETNESS] == 4) outputText("dripping, ", false);
 				if (flags[kFLAGS.AMILY_VAGINAL_WETNESS] >= 5) outputText("soaked, ", false);
 				// [Horsecock]
-				outputText("pink pussy in between her legs; "+stopSayingNetherlipsFuck+".", false);
+				outputText("pink pussy in between her legs; "+stopSayingNetherlipsFuck+".\n", false);
+
+				if (farm.farmCorruption.amilyHasTattoo())
+				{
+					outputText("\n");
+					if (farm.farmCorruption.amilyFullTribalTats())
+					{
+						outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.\n")
+					}
+					else
+					{
+						if (farm.farmCorruption.numTattoos("amily") > 1) outputText("She has the following tattoos emblazoned across her body:");
+						else outputText("\nShe has ");
+
+						if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_COLLARBONE] + "\n");
+						if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_SHOULDERS] + "\n");
+						if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_LOWERBACK] + "\n");
+						if (flags[kFLAGS.AMILY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.AMILY_TATTOO_BUTT] + "\n");
+					}
+				}
 			}
-			outputText("\n\nShe has a tiny pink pucker between her mousey butt-cheeks, where it belongs.");
+			outputText("\nShe has a tiny pink pucker between her mousey butt-cheeks, where it belongs.");
 			//Back to amily menu
 			doNext(amilyFollowerEncounter);
 		}
