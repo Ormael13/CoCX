@@ -1157,7 +1157,39 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nWhitney is a 5’8” dog morph, dressed in a modest cotton blouse and faded long skirt, which has a hole cut in it to allow her short, perky tail to poke through. Her muzzle is suggestive of a golden retriever but really she could be any breed. Her fur is sandy, dusking to black at her extremities. Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair. She is beyond the flush of youth, however it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her hips and ass widened only with muscle, her small breasts pert against her unprepossessing work-clothes. She has one anus, nestled between her tight buttcheeks where it belongs.");
 
+			menu();
 			dogeNotCorruptYetMenu();
+			addButton(0, "", null);
+		}
+		
+		private function whitneyAppearanceCorrupt():void
+		{
+			clearOutput();
+			whitneySprite();
+			
+			outputText("Whitney is a 5’8” dog");
+			if (whitneyDefurred()) outputText("-girl. Her human transformation has rendered her pretty in a delicate, diffident kind of way.");
+			else outputText("-morph. Her muzzle is suggestive of a golden retriever but really she could be any breed.");
+			if (whitneyMaxedOralTraining()) outputText(" In sharp contrast to her otherwise fairly thin features, her lips are plump and a depthless black, shining like wet tar. She constantly moves her tongue over them unconsciously.");
+			outputText(" Although she continues to dress in the same modest cotton blouses and long skirts she always has, complete with holes cut in to allow her short, perky tail to poke through, the cut of it and the way she moves and swings herself about, livid with arousal and near-constant sexual frustration, makes the demure outfit more perverse than anything a demon could dream up.\n");
+
+			if (whitneyHasTattoo())
+			{
+				if (numTattoos("whitney") > 1) outputText("\nShe has the following tattoos emblazoned across her body:");
+				else outputText("\nShe has ")
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] + "\n");
+				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] + "\n");
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] + "\n");
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_BUTT] + "\n");
+			} 
+
+			outputText("\n");
+			if (!whitneyDefurred()) outputText(" Her fur is sandy, dusking to black at her extremities");
+			else outputText(" Her skin is a sandy colour, and she wears black nail varnish");
+			outputText(". Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair, flecked now with deep, red desire. Whilst she is beyond the softness of youth, it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her small breasts pert against her unprepossessing work-clothes. She has one anus, between her tight asscheeks where it belongs.");
+
+			menu();
+			dogeCorruptedMissionComplete();
 			addButton(0, "", null);
 		}
 
@@ -3386,6 +3418,66 @@ package classes.Scenes.Places.Farm
 			{
 				throw new Error("Unable to determine correct NPC flags.");
 			}
+		}
+
+		public function numTattoos(name:String):int
+		{
+			var count:int = 0;
+
+			if (name == "whitney")
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "amily")
+			{
+				if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.AMILY_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "jojo")
+			{
+				if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.JOJO_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "sophie")
+			{
+				if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "vapula")
+			{
+				if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.VAPULA_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.VAPULA_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "kelly")
+			{
+				if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.KELLY_TATTOO_BUTT] != 0) count++;
+			}
+			else if (name == "milky")
+			{
+				if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] != 0) count++;
+				if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] != 0) count++;
+				if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] != 0) count++;
+				if (flags[kFLAGS.MILKY_TATTOO_BUTT] != 0) count++;
+			}
+			else
+			{
+				throw new Error("Unable to determine correct NPC flags.");
+			}
+			return count;
 		}
 
 		private function brandWhitney():void
@@ -5713,6 +5805,33 @@ package classes.Scenes.Places.Farm
 				if (flags[kFLAGS.AMILY_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
 			}
 			return count;
+		}
+
+		private function numWhitneyTribalTats():int
+		{
+			var count:int = 0;
+			if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] is String)
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] is String)
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] is String)
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] is String)
+			{
+				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT].indexOf("A tribal tattoo") >= 0) count++;
+			}
+			return count;
+		}
+
+		public function whitneyFullTribalTats():Boolean
+		{
+			if (numWhitneyTribalTats()) == 4) return true;
 		}
 
 		public function amilyFullTribalTats():Boolean
