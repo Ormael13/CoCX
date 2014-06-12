@@ -1168,7 +1168,7 @@ public static const MILKY_TATTOO_LOWERBACK:int                                  
 public static const MILKY_TATTOO_BUTT:int                                   = 1160;
 public static const WHITNEY_DOM_FIRST_PLEASURE:int                                   = 1161;
 public static const FARM_UPGRADES_ORGYROOM:int                                   = 1162;
-public static const UNKNOWN_FLAG_NUMBER_01163:int                                   = 1163;
+public static const MASSAGE_HAPPY_ENDINGS:int                                   = 1163;
 public static const UNKNOWN_FLAG_NUMBER_01164:int                                   = 1164;
 public static const UNKNOWN_FLAG_NUMBER_01165:int                                   = 1165;
 public static const UNKNOWN_FLAG_NUMBER_01166:int                                   = 1166;
