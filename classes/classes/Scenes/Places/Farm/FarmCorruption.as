@@ -48,9 +48,6 @@ package classes.Scenes.Places.Farm
 				
 				// Track highest corruption value
 				if (flags[kFLAGS.WHITNEY_CORRUPTION] > flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST]) flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST] = flags[kFLAGS.WHITNEY_CORRUPTION];
-				
-				trace("Whitney corruption changed by " + String(mod));
-				trace("Whitney corruption now at " + String(mod + flags[kFLAGS.WHITNEY_CORRUPTION]));
 			}
 			
 			// Cap the values into the appropriate range
@@ -82,6 +79,9 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.WHITNEY_CORRUPTION] = 120;
 			}
 
+			trace("Whitney corruption changed by " + String(mod));
+			trace("Whitney corruption now at " + String(flags[kFLAGS.WHITNEY_CORRUPTION]));
+				
 			return flags[kFLAGS.WHITNEY_CORRUPTION];
 		}
 
@@ -226,18 +226,18 @@ package classes.Scenes.Places.Farm
 			// Figure out how much corruption we're going to slap on to Whitney
 			var modValue:Number = -1;
 
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) modValue += 1;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) modValue += 1;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) modValue += 0.5;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) modValue += 0.5;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 2) modValue += 0.5;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) modValue += 2;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) modValue += 0.5;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) modValue += 2;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) modValue += 2;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) modValue += 1;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) modValue += 1;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 2) modValue += 2;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) modValue += 4;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) modValue += 1;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
 			{
-				modValue += 2;
+				modValue += 4;
 			}
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] == 1) modValue += 1;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] == 1) modValue += 2;
 
 			whitneyCorruption(modValue);
 
@@ -819,21 +819,18 @@ package classes.Scenes.Places.Farm
 		{
 			menu();
 			
-			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] == 0)
+			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] != 1)
 			{
 				if (!whitneyCorrupt()) addButton(0, "Whitney", dogeNotCorruptYet);
 				else addButton(0, "Whitney", dogeCorruptedMissionComplete);
 			}
-
-			if (flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE] == 0) addButton(0, "Whitney", dogeNotCorruptYet);
-			else addButton(0, "Whitney", dogeCorruptedMissionComplete);
 			
 			if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
 			
 			if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0)
 			{
 				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(2, "Kelly", farm.kelly.breakingKeltOptions);
-				else if (flags[kFLAGS.KELT_BREAK_LEVEL] > 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
+				else if (flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
 				else addButton(2, "Kelt", farm.kelly.breakingKeltOptions);
 			}
 			
@@ -1077,17 +1074,19 @@ package classes.Scenes.Places.Farm
 
 					outputText("There is a sultry atmosphere around the farm these days. The air feels warmer than it should and the breeze which curls over the fields carries with it a musky, enticing perfume which presses irresistibly into your nose and the back of your throat. When you find Whitney on her porch you can’t help but think she looks considerably more relaxed than she has done of late; perhaps it’s just too hard to remain tense in these conditions. ");
 
-				outputText("\n\n“<i>Yes, [name],</i>” she says, so softly you can barely hear her. “<i>What can I do for you?</i>” Cautiously, you ask her how she feels about the changes you have made around the farm.");
+					outputText("\n\n“<i>Yes, [name],</i>” she says, so softly you can barely hear her. “<i>What can I do for you?</i>” Cautiously, you ask her how she feels about the changes you have made around the farm.");
 
-				outputText("\n\n“<i>You were right,</i>” she says, again in that incredibly low voice, before clearing her throat and going on in a louder tone, the words spilling out of her. “<i>I hated you when you first came here demanding a share of the farm, more than anything I’ve ever hated in a long time. Someone taking control of my family’s farm, what I had worked on for all these years, through what seemed to me like pure vindictiveness… I fantasized about killing you, didja know that? Shooting you through the neck when you were tendin’ to something else. The only thing that stopped me I think was fear: fear that you were so powerful that you’d survive it somehow. How miserable I was back then... but at some point I just said fuck it, you know? If I couldn’t work up the courage to fight you, what was the point in stayin’ miserable and angry the whole time? And the more I let go of it...</i>”");
+					outputText("\n\n“<i>You were right,</i>” she says, again in that incredibly low voice, before clearing her throat and going on in a louder tone, the words spilling out of her. “<i>I hated you when you first came here demanding a share of the farm, more than anything I’ve ever hated in a long time. Someone taking control of my family’s farm, what I had worked on for all these years, through what seemed to me like pure vindictiveness… I fantasized about killing you, didja know that? Shooting you through the neck when you were tendin’ to something else. The only thing that stopped me I think was fear: fear that you were so powerful that you’d survive it somehow. How miserable I was back then... but at some point I just said fuck it, you know? If I couldn’t work up the courage to fight you, what was the point in stayin’ miserable and angry the whole time? And the more I let go of it...</i>”");
 
-				outputText("\n\nAs she talks, you delve into your pocket and bring out a gem, this time with deliberate slowness. Whitney’s eyes are immediately drawn to it and she pauses; you softly motion for her to continue, slowly turning the small, glittering kaleidoscope in your fingers as you do. “<i>...It’s just so much more </i>fun<i> around here these days. The farm feels like it’s alive, I am makin so much more money and... the more I open my mind, the more I let go of those old hates, the more I can think, the more I can feel. Gods, I am feeling things I haven’t in years. I see the way you order your followers around and it feels powerful, I make them do as I will and it feels right, like I’m taking control and shaping the world instead of just layin back and watchin it pass me by. It feels like... like...</i>”");
+					outputText("\n\nAs she talks, you delve into your pocket and bring out a gem, this time with deliberate slowness. Whitney’s eyes are immediately drawn to it and she pauses; you softly motion for her to continue, slowly turning the small, glittering kaleidoscope in your fingers as you do. “<i>...It’s just so much more </i>fun<i> around here these days. The farm feels like it’s alive, I am makin so much more money and... the more I open my mind, the more I let go of those old hates, the more I can think, the more I can feel. Gods, I am feeling things I haven’t in years. I see the way you order your followers around and it feels powerful, I make them do as I will and it feels right, like I’m taking control and shaping the world instead of just layin back and watchin it pass me by. It feels like... like...</i>”");
 
-				outputText("\n\n“<i>Like you’re waking up,</i>” you say. You twist the gem back and forth, shining tiny, scattering beams of blinding light into the dog morph’s eyes. Her mouth hands open and her breath is shallow. “Like since I’ve taken control you’ve woken up to everything that life has to offer, everything that </i>I<i> have to offer, the horizons that appear when you submit to my will. This farm is many times the place it was when you were closed up in your old life of petty certainties. You just told me that and like the farm, </i>you<i> are becoming more and more real the further you open yourself to me.”");
+					outputText("\n\n“<i>Like you’re waking up,</i>” you say. You twist the gem back and forth, shining tiny, scattering beams of blinding light into the dog morph’s eyes. Her mouth hands open and her breath is shallow. “<i>Like since I’ve taken control you’ve woken up to everything that life has to offer, everything that </i>I<i> have to offer, the horizons that appear when you submit to my will. This farm is many times the place it was when you were closed up in your old life of petty certainties. You just told me that and like the farm, </i>you<i> are becoming more and more real the further you open yourself to me.</i>”");
 
-				outputText("\n\nYou think the doggie is close now, so very close to fully opening her mind and entirely tasting reality. All she needs to do is one thing to demonstrate her commitment....");
+					outputText("\n\nYou think the doggie is close now, so very close to fully opening her mind and entirely tasting reality. All she needs to do is one thing to demonstrate her commitment....");
 
-				outputText("\n\n”<i>What is that,</i>” says Whitney dully. You smile, gently bringing the twisting gem to a halt and putting it back into your pouch. You will know what that is when you are truly ready, you say. With that you turn and leave her, swaying vaguely on the porch, her eyes far, far away. As long as you can keep her immersed in the atmosphere you’ve conjured up over the farm, you think she’ll be ready for the final stage of your plan soon enough.");
+					outputText("\n\n“<i>What is that,</i>” says Whitney dully. You smile, gently bringing the twisting gem to a halt and putting it back into your pouch. You will know what that is when you are truly ready, you say. With that you turn and leave her, swaying vaguely on the porch, her eyes far, far away. As long as you can keep her immersed in the atmosphere you’ve conjured up over the farm, you think she’ll be ready for the final stage of your plan soon enough.");
+					doNext(rootScene);
+					return;
 				}
 				else
 				{
@@ -1119,6 +1118,10 @@ package classes.Scenes.Places.Farm
 					outputText("\n\nSoftly, still spinning the gem, you ask her what she called you. Whitney makes a noise which is familiar to you but which you’ve never heard emanating from her; a faint, high pitched whine from the back of her throat. Again, gently but firmly, you ask her what word she used.");
 
 					outputText("\n\n“<i>...[Master],</i>” she says, quietly. You smile triumphantly. It’s time to move onto the final stage of your high-stakes business merger, however such is your control over the dog morph now you could make her change for you, if you so wished.");
+					
+					menu();
+					addButton(0, "Change Her", deFurDoge);
+					addButton(1, "Don't Change", dontDeFurDoge);
 
 					///[Defur][Get on with it]
 				}
@@ -1151,6 +1154,8 @@ package classes.Scenes.Places.Farm
 			outputText("“<i>I know what you’re tryin to do,</i>” the dog woman says abruptly as you conclude your business and turn to leave. “<i>You think that if you make me work with your slaves, poison this place with your influence and demon magic, you’ll turn me into one of your puppets too. Evil osmosis, or somethin.</i>” She laughs bitterly. There’s an almost hysterical note to it. Maybe you’re kidding yourself but you think there might also be a brittle, perverse note of excitement in there too. “<i>It don’t work like that. All you’re doing with this business is surroundin me with examples of your cruelty, of what corruption and ill-will can do to ordinary folks. I can stand against it, and I will.</i>”");
 
 			outputText("\n\nYou shrug nonchalantly, retrieve a gem from your purse and spin it on your fingertips with the same affected casualness. It’s not about corruption, you say; you aren’t in league with the demons, you have a soul. All you want to do is make the very best of this farm, and open her mind to new possibilities, new ways of thinking. The gem glitters with sunlight as you spin it rhythmically. You think that she’s spent too long on her own; has become so set in her ways she sees anything that changes her world as a threat, even if it is for her own benefit. She should open her eyes and open her mind to the success you’re bringing to her fields; maybe she’d learn how rich life can be if she let go of her prejudices, and accept that from your wider experience you know better. You pinch the gem to a stop and look at Whitney. She stares at the pretty object a moment longer before shaking her head and bringing her eyes up to yours, slightly dazed. You turn and leave, smiling quietly to yourself.");
+			
+			doNext(rootScene);
 		}
 
 		private function dogeNotCorruptYetMenu():void
@@ -1172,11 +1177,10 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			whitneySprite();
 
-			outputText("\n\nWhitney is a 5’8” dog morph, dressed in a modest cotton blouse and faded long skirt, which has a hole cut in it to allow her short, perky tail to poke through. Her muzzle is suggestive of a golden retriever but really she could be any breed. Her fur is sandy, dusking to black at her extremities. Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair. She is beyond the flush of youth, however it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her hips and ass widened only with muscle, her small breasts pert against her unprepossessing work-clothes. She has one anus, nestled between her tight buttcheeks where it belongs.");
+			outputText("Whitney is a 5’8” dog morph, dressed in a modest cotton blouse and faded long skirt, which has a hole cut in it to allow her short, perky tail to poke through. Her muzzle is suggestive of a golden retriever but really she could be any breed. Her fur is sandy, dusking to black at her extremities. Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair. She is beyond the flush of youth, however it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her hips and ass widened only with muscle, her small breasts pert against her unprepossessing work-clothes. She has one anus, nestled between her tight buttcheeks where it belongs.");
 
 			menu();
 			dogeNotCorruptYetMenu();
-			addButton(0, "", null);
 		}
 		
 		private function whitneyAppearanceCorrupt():void
@@ -1192,7 +1196,7 @@ package classes.Scenes.Places.Farm
 
 			if (whitneyHasTattoo())
 			{
-				if (numTattoos("whitney") > 1) outputText("\nShe has the following tattoos emblazoned across her body:");
+				if (numTattoos("whitney") > 1) outputText("\nShe has the following tattoos emblazoned across her body:\n");
 				else outputText("\nShe has ")
 				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] + "\n");
 				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] + "\n");
@@ -1201,13 +1205,12 @@ package classes.Scenes.Places.Farm
 			} 
 
 			outputText("\n");
-			if (!whitneyDefurred()) outputText(" Her fur is sandy, dusking to black at her extremities");
-			else outputText(" Her skin is a sandy colour, and she wears black nail varnish");
+			if (!whitneyDefurred()) outputText("Her fur is sandy, dusking to black at her extremities");
+			else outputText("Her skin is a sandy colour, and she wears black nail varnish");
 			outputText(". Her ears are floppy, her eyes are a dark brown which matches her shoulder-length hair, flecked now with deep, red desire. Whilst she is beyond the softness of youth, it is obvious from looking at her that she has never known childbirth; though hardened from many years of farm work her frame is relatively slim, her small breasts pert against her unprepossessing work-clothes. She has one anus, between her tight asscheeks where it belongs.");
 
 			menu();
-			dogeCorruptedMissionComplete();
-			addButton(0, "", null);
+			dogeCorruptedMissionComplete(false);
 		}
 
 		private function prosperityGoNotCorrupt():void
@@ -1236,7 +1239,6 @@ package classes.Scenes.Places.Farm
 			if (!lowValue && !lowProtection) outputText("\n\n“<i>Difficult to complain. This place is doing better than I’ve ever known, even going back to my grandma’s day. As long as we keep up this level of hard work and security, we’ll keep making this kinda scratch.</i>” You look at her, unsmiling, and she is momentarily thrown. “<i>It’s not.... You aren’t-? Well, the only way we’d earn more money is- but I’d never…</i>” she trails off, not looking at you.");
 
 			dogeNotCorruptYetMenu();
-			addButton(1, "", null);
 		}
 
 		private function investmentMenu():void
@@ -1290,7 +1292,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] = 1;
 
-			doNext(13);
+			doNext(rootScene);
 		}
 
 		private function investmentCockMilker():void
@@ -1339,7 +1341,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] = 1;
 
-			doNext(13);
+			doNext(rootScene);
 		}
 
 		private function investmentRefinery():void
@@ -1379,7 +1381,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.QUEUE_REFINERY_UPGRADE] = 1;
 
-			doNext(13);
+			doNext(rootScene);
 		}
 
 		private function investmentContraceptive():void
@@ -1428,7 +1430,7 @@ package classes.Scenes.Places.Farm
 
 			//[“Harvest Contraceptive” option added to main farm menu in 7 days time]
 			flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] = 1;
-			doNext(13);
+			doNext(rootScene);
 		}
 
 		private function investmentMilktank():void
@@ -1488,7 +1490,7 @@ package classes.Scenes.Places.Farm
 			// In each case Bath girl reverts to her boobed state and is at farm
 			flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] = 1;
 
-			doNext(13);
+			doNext(rootScene);
 		}
 
 		private function turnDownInvestment(money:Boolean = false):void
@@ -1649,31 +1651,34 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function dogeCorruptedMissionComplete():void
+		private function dogeCorruptedMissionComplete(output:Boolean = true):void
 		{
-			if (flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] == 1)
+			if (flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] == 1 && output)
 			{
 				brandingAvailableTalk();
 				return;
 			}
 
-			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 2)
+			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 2 && output)
 			{
 				orgyRoomTalk();
 				flags[kFLAGS.FARM_UPGRADES_ORGYROOM] = 1;
 				return;
 			}
 
-			clearOutput();
-			whitneySprite();
+			if (output)
+			{
+				clearOutput();
+				whitneySprite();
+			}
 
-			if (whitneyDom())
+			if (whitneyDom() && output)
 			{
 				outputText("Whitney is in front of you before you’ve finished calling her name.");
 
 				outputText("\n\n“<i>Yes, [master]?</i>” she husks, staring hungrily into your eyes. A state of nervous energy, the sense she’s only barely controlling the urge to grab you with great effort, never leaves her. “<i>Business? Or pleasure.</i>”");
 			}
-			else
+			else if (output)
 			{
 				outputText("Whitney is knelt in front of you before you’ve finished calling her name. Her tail wags as her soulful brown eyes look up at you, lit up with depthless lust.");
 
@@ -1687,6 +1692,7 @@ package classes.Scenes.Places.Farm
 			if (whitneyDom()) addButton(3, "Pleasure", whitneyDomPleasure);
 			else addButton(3, "Pleasure", whitneySubPleasure);
 			orgyRoomRouter();
+			addButton(9, "Back", rootScene);
 		}
 
 		private function whitneySubPleasure():void
@@ -3801,7 +3807,7 @@ package classes.Scenes.Places.Farm
 			addButton(0, "Tribal", tribalTattoo, slot);
 			addButton(1, "Heart", heartTattoo, slot);
 			addButton(2, "Property Of", propertyTattoo, slot);
-			addButton(3, "#1 Bitch", no1Tattoo, slot);
+			addButton(3, "No.1 Bitch", no1Tattoo, slot);
 			if (player.hasCock() && whitneyMaxedOralTraining()) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
 			if (player.hasVagina() && whitneyMaxedOralTraining()) addButton(5, "Pussylicker", champPussylickerTattoo, slot);
 
@@ -3887,7 +3893,7 @@ package classes.Scenes.Places.Farm
 			addButton(0, "Tribal", kellyTribalTattoo, slot);
 			addButton(1, "Heart", kellyHeartTattoo, slot);
 			addButton(2, "Property Of", kellyPropertyOfTattoo, slot);
-			addButton(3, "#1 Filly", kellyNo1FillyTattoo, slot);
+			addButton(3, "No.1 Filly", kellyNo1FillyTattoo, slot);
 			if (silly()) addButton(4, "Dick Won", kellyDickWonTattoo, slot);
 			if (slot == 1) addButton(5, "Horseshoe", kellyHorseshoeTattoo, slot);
 
@@ -4035,7 +4041,7 @@ package classes.Scenes.Places.Farm
 
 		private function lowerbackIntro():void
 		{
-			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on her, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
+			outputText("You command her to set herself down on your [legs], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on her, before sealing it on with the paper. “<i>What did you draw, [master]?</i>” she says eagerly.");
 
 			outputText("\n\nLaughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at...</i>”");
 		}
@@ -4095,7 +4101,7 @@ package classes.Scenes.Places.Farm
 
 		private function buttIntro():void
 		{
-			outputText("You command her to set herself down on your [lowerBody], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper.");
+			outputText("You command her to set herself down on your [legs], as if she were about to receive a spanking. Your lithe, naked dog girl does so, her laughter at her own compromising permission turning to a sharp coo as you dip your finger into the ink and carefully draw your design on the softest part of her anatomy, before sealing it on with the paper.");
 
 			outputText("\n\n“<i>What did you draw, [master]?</i>” she says eagerly. Laughing, you admire it for yourself and then say she’ll have to ask one of your other slaves... and hope they tell the truth. “<i>Aw no, come on, tell me what it is! It’s a rude word, isn’t it? [Master], it better not be somethin’ the slaves are gonna laugh at. Ooh!</i>” You give her new tattoo a playful slap.");
 		}
@@ -6061,7 +6067,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("“<i>[Master],</i>” says Whitney haltingly, after she’s knelt in front of you. “<i>May I make a suggestion?</i>” You shrug nonchalantly. “<i>Well... it’s just you often roll in here looking quite worn out, like. From fightin’ demons and dragons and such, whatever it is you do out there in the wastelands. It must be real important, cause you’re often banged up. To mention nothing of you needing to take care of... your chattel...</i>” she closes her eyes and sighs deeply. ");
 
-			outputText("\n\nYou move your [lowerBody] restlessly when the silence drags out a bit. “<i>Well, understand I kin only talk as a farmer. But if I got a prime "+ player.mf("stud", "mare") +" who is constantly exerting themselves - a lot of the time it’s them who’s doing it not me, they’re just so big and, and dominant they don’t want to stop throwing themselves around even for a moment - they get stress injuries. Which just get worse the more they try and pretend they don’t exist. Now I ain’t saying you got something like that, but when I see you come here, all forceful and fretful, and then leave in such a rush - it breaks my heart a little. Cos I could help you, at least a bit. Don’t look after livestock your whole life without learning some about muscle groups and medicine. I could help you not be the [guy] who suddenly keels over in the middle of a fight screamin’ their hamstring’s gone.</i>”");
+			outputText("\n\nYou move your [legs] restlessly when the silence drags out a bit. “<i>Well, understand I kin only talk as a farmer. But if I got a prime "+ player.mf("stud", "mare") +" who is constantly exerting themselves - a lot of the time it’s them who’s doing it not me, they’re just so big and, and dominant they don’t want to stop throwing themselves around even for a moment - they get stress injuries. Which just get worse the more they try and pretend they don’t exist. Now I ain’t saying you got something like that, but when I see you come here, all forceful and fretful, and then leave in such a rush - it breaks my heart a little. Cos I could help you, at least a bit. Don’t look after livestock your whole life without learning some about muscle groups and medicine. I could help you not be the [guy] who suddenly keels over in the middle of a fight screamin’ their hamstring’s gone.</i>”");
 
 			outputText("\n\nYou look at her shrewdly. She doesn’t move her hands from her knees during all of this, hasn’t tried to touch you at all, demonstrated what she might be capable of. You ask what she’s really suggesting here.");
 
@@ -6075,6 +6081,7 @@ package classes.Scenes.Places.Farm
 			if (player.gems >= 2200) addButton(0, "Yes", getOrgyRoom);
 			else noT = "Too Much";
 
+			menu();
 			addButton(1, "No", noOrgyRoomPlz);
 		}
 
@@ -6233,7 +6240,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");
 			}
 
-			outputText("\n\nWith one last glide of the hand from your [lowerBody] up to your neck, Whitney steps off the slab. You roll over and gaze at her contentedly, revelling in the smooth glow she has worked into every part of your form. You not only feel incredibly relaxed and limber, but also profoundly connected to your body - you feel as if you can move with grace and oiled precision, do exactly what you intend with the right inflection with every movement.");
+			outputText("\n\nWith one last glide of the hand from your [legs] up to your neck, Whitney steps off the slab. You roll over and gaze at her contentedly, revelling in the smooth glow she has worked into every part of your form. You not only feel incredibly relaxed and limber, but also profoundly connected to your body - you feel as if you can move with grace and oiled precision, do exactly what you intend with the right inflection with every movement.");
 
 			outputText("\n\n“<i>Was that good for you, [master]?</i>” the dog girl says, smiling the gratified smile of a job well done.");
 			if (player.lust >= 33) outputText(" The hot tub bubbles quietly behind her and it is not just oil which is making your skin glow. This would be the moment to pursue a happy ending if you so wished.");

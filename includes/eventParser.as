@@ -512,11 +512,11 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue(StatusAffects.EmberNapping,1,-1);
 			if(player.statusAffectv1(StatusAffects.EmberNapping) <= 0) player.removeStatusAffect(StatusAffects.EmberNapping);
 		}
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			sophieFollowerScene.sophieDaughterDebimboUpdate();
 			needNext = true;
 		}
-		if(sophieBimbo.bimboSophie() || sophieFollowerScene.sophieFollower()) {
+		if((sophieBimbo.bimboSophie() || sophieFollowerScene.sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 				flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER]--;
 				if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] < 1) flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 1;
@@ -652,7 +652,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Amily lays eggs that were oviposited.
-		if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] > 0) {
+		if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN]--;
 			if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] <= 0) {
 				amilyScene.amilyLaysEggsLikeABitch();
@@ -663,7 +663,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 		}
 		//Vapula gives a dildo
-		if(vapula.vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2) {
+		if(vapula.vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 			vapula.vapulaGivesPCAPresent();
 			needNext = true;
 		}
@@ -835,7 +835,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				outputText("<b>\nYour drugged lipstick fades away, leaving only the faintest residue on your lips.  You'll have to put on more if you want to be able to kiss your foes into submission!</b>\n", false);
 			}
 		}
-		if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] > 0) {
+		if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) {
 			flags[kFLAGS.JOJO_EGGCUBATE_COUNT]--;
 			if(flags[kFLAGS.JOJO_EGGCUBATE_COUNT] == 1) {
 				jojoScene.jojoLaysEggs();
@@ -851,7 +851,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Izma Pregger counter
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 1) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250]--;
 			//Fix out of bounds
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] < 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 1;
@@ -1072,12 +1072,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1) flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] = 1;
 		}
 		//Update Amily's preggo counter
-		if(flags[kFLAGS.AMILY_INCUBATION] > 1) {
+		if(flags[kFLAGS.AMILY_INCUBATION] > 1 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 			flags[kFLAGS.AMILY_INCUBATION]--;
 			if(flags[kFLAGS.AMILY_INCUBATION] < 1) flags[kFLAGS.AMILY_INCUBATION] = 1;
 		}
 		//if in camp and birthing, display scene!
-		if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 1) {
+		if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 			outputText("\n", false);
 			amilyScene.amilyPopsOutKidsInCamp();
 			flags[kFLAGS.AMILY_INCUBATION] = 0;
@@ -1835,7 +1835,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.findStatusAffect(StatusAffects.Luststick) >= 0) player.removeStatusAffect(StatusAffects.Luststick);
 		}
 		//Sophie's love
-		if((player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+		if((player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && model.time.hours == 10 && sophieBimbo.bimboSophie() && flags[kFLAGS.SOPHIE_INCUBATION] == 0 && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			sophieBimbo.bimboSophieLustStickSurprise();
 			needNext = true;
 		}
@@ -1906,7 +1906,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
 			bazaar.benoit.updateBenoitInventory();
 			if(player.pregnancyIncubation <= 0) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
-			if(vapula.vapulaSlave()) {
+			if(vapula.vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 				if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
 				else flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 			}
@@ -1921,7 +1921,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
 			flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 			//Isabella milk
-			if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0) {
+			if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 				flags[kFLAGS.ISABELLA_MILKED_YET]++;
 			}
 			//Reduce lust-stick resistance building
@@ -2130,7 +2130,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !sophieBimbo.bimboSophie() && !sophieFollowerScene.sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0) {
+		if(model.time.hours == 6 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !sophieBimbo.bimboSophie() && !sophieFollowerScene.sophieFollower() && player.hasCock() && flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			sophieFollowerScene.sophieFollowerIntro();
 			return true;
 		}
@@ -2197,7 +2197,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			followerInteractions.amilyUrtaMorningAfter();
 			return true;
 		}
-		if(flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6) {
+		if(flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 			vapula.femaleVapulaRecruitmentPartII();
 			return true;
 		}
@@ -2374,7 +2374,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Chance of threesomes!
-		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
+		if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 			trace("ISABELLA/HELL TEST");
 			//Hell/Izzy threesome intro
 			if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
@@ -2389,7 +2389,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(model.time.hours == 2 && vapula.vapulaSlave() && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+		if(model.time.hours == 2 && vapula.vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
 			vapula.vapulaForceFeeds();
 			return true;
 		}
@@ -2399,7 +2399,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Call secksins!
 				if(player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
 					//VapulaSurprise
-					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0)
+					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0)
 						vapula.vapulaAssistsCeruleanSuccubus();
 					//Normal night succubi shit
 					else {
@@ -2437,13 +2437,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//MORNING FUX
-		if(model.time.hours == 6 && sophieBimbo.bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
+		if(model.time.hours == 6 && sophieBimbo.bimboSophie() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 			outputText("\n<b><u>Something odd happens that morning...</u></b>");
 			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 120) sophieBimbo.fuckYoPregnantHarpyWaifu(true);
 			else sophieBimbo.sophieFenCraftedSex(true);
 			return true;
 		}
-		if(model.time.hours == 6 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
+		if(model.time.hours == 6 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			sophieFollowerScene.sophieSmallDongTeases();
 			return true;
 		}
@@ -2476,13 +2476,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
-					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
-					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
+					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
+					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
@@ -2515,13 +2515,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
-					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
-					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
+					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
+					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
@@ -2578,16 +2578,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
-					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
-					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
+					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 					//if Izma is there, tag for freakout!
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
+					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 				}
@@ -2616,15 +2616,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\n", false);
 					//(Marble now appears at the camp)
 					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
-					if(isabellaFollowerScene.isabellaFollower()) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
+					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
-					if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
+					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 						flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
+					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 						flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
 					else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
@@ -2700,7 +2700,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
+		if(model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
 			isabellaFollowerScene.isabellaMorningWakeupCall();
 			return true;
@@ -2725,12 +2725,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Sophie Izma 3some
-		if(sophieBimbo.bimboSophie() && izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+		if(sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && izmaScene.izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0&& flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
 			flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
 			sophieBimbo.sophieAndIzmaPlay();
 			return true;
 		}
-		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+		if(izmaScene.izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0&& flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
 			izmaScene.izmaDomsLatexy();
 			return true;
 		}

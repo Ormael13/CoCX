@@ -33,6 +33,7 @@
 		private const MAXSIZE:int = 400;
 
 		public var xmlLoadError:Boolean = false;
+		private var logErrors:Boolean = false;
 
 		//The magic embedding sauce. Skips around sandbox issue by embedding the
 		//xml into the swf. Makes it possible to load images even from a browser.
@@ -201,7 +202,7 @@
 		{
 			var imageString:String = "";
 
-			trace("showing imageID - ", imageID);
+			if (logErrors) trace("showing imageID - ", imageID);
 			var imageIndex:int = 0;
 			var image:Image = null;
 			if (_imageTable[imageID] != undefined)
@@ -210,7 +211,7 @@
 				if (_imageTable[imageID].length > 0)
 				{
 					imageIndex = Math.floor( Math.random() * _imageTable[imageID].length );
-					trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
+					if (logErrors) trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
 					image = _imageTable[imageID][imageIndex];
 				}
 			}

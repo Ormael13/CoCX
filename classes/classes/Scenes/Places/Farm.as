@@ -30,6 +30,7 @@ public function farmExploreEncounter():void {
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] > 0)
 	{
 		farmCorruption.rootScene();
+		return;
 	}
 	
 	var temporary:Number = 0;

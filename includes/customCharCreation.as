@@ -112,7 +112,7 @@ public function customPCSetup():void {
 		
 		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
 		
-		player.gems += 3000;
+		player.gems += 30000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		
 		inventory.takeItem(consumables.KITGIFT);
@@ -153,7 +153,7 @@ public function customPCSetup():void {
 		
 		// Milky
 		flags[kFLAGS.MILK_NAME] = "Milky";
-		
+		flags[kFLAGS.MILK_SIZE] = 2;
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();

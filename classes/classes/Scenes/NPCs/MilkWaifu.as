@@ -186,9 +186,9 @@ private function sendToFarm():void
 {
 	clearOutput();
 	
-	outputText("\n\nYou describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
+	outputText("You describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
 
-	outputText("“<i>Ok,</i>” says [bathgirlmame], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
+	outputText("“<i>Ok,</i>” says [bathgirlname], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
 
 	if (player.cor >= 90)
 	{
