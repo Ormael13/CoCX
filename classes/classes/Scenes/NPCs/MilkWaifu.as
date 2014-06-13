@@ -163,6 +163,11 @@ public function milkyMenu():void {
 		}
 	}
 	
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] == 0)
+	{
+		outputText("\n\n<b>(You'd have to find some way to reduce the size [bathgirlname]'s massive tits before you could send her back to camp.)</b>");
+	}
+	
 	//Options:
 	//Milk Time!  (HHH or DD boobs)
 	//Milk Bath (Giant or HHH boobs)
@@ -205,7 +210,9 @@ private function backToCamp():void
 	clearOutput();
 	
 	//TODO
-	throw new Error("Placeholder");
+	outputText("“<i>I want you to head on back to camp,</i>” you tell her. “<i>You’ll be more useful to me there.</i>” [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
+
+	outputText("“<i>As you wish.</i>” She wipes her hands before walking slowly down and out of the farm’s gate.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	
