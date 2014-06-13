@@ -2525,7 +2525,7 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.AMILY_INCUBATION] == 0)
 				{
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(4, "Talk", talkWithCORRUPTCUNTAtFarm);
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farmwork", sendCorruptCuntToFarm);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendCorruptCuntToFarm);
 				}
 			}
 		}

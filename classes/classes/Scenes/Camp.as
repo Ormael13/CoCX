@@ -536,7 +536,7 @@ public function doCamp():void {
 		//claraCampAddition();
 	}
 	//BIMBO SOPHAH
-	if(bimboSophie()) sophieBimbo.sophieCampLines();
+	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) sophieBimbo.sophieCampLines();
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two-handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
@@ -615,7 +615,7 @@ public function doCamp():void {
 		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your bedroll. A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n", false);
 	}
 	//Corrupt mousebitch!
-	else if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+	else if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 	}
 	//Amily out freaking Urta?
@@ -624,11 +624,11 @@ public function doCamp():void {
 	}
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
-	if(campCorruptJojo()) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
+	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 	//Pure Jojo
 	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 	//Izma
-	if(izmaFollower()) {
+	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover.  It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric.  Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.  ", false);
 		temp = rand(3);
 		//Text 1} I

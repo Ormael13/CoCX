@@ -182,7 +182,7 @@ private function sendToFarm():void
 	
 	outputText("You tell your pet mouse");
 	if (tentacleJojo()) outputText("-come-tentacle-beast");
-	outputText( "that he is to head towards the lake, find a farm, present himself to the lady who works there and do as she says.");
+	outputText( " that he is to head towards the lake, find a farm, present himself to the lady who works there and do as she says.");
 
 	outputText("\n\nA mixture of expressions vie for control of Jojo’s face as he swallows this information; you grin as you realise that being at the farm will simply amplify the fact he is both delighted and horrified at being away from you.");
 

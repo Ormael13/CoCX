@@ -40,7 +40,7 @@ package classes.Scenes.Places.Farm
 			return count;
 		}
 
-		public function whitneyCorruption(mod:int = 0):int
+		public function whitneyCorruption(mod:Number = 0):int
 		{
 			if (mod != 0)
 			{
@@ -48,13 +48,32 @@ package classes.Scenes.Places.Farm
 				
 				// Track highest corruption value
 				if (flags[kFLAGS.WHITNEY_CORRUPTION] > flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST]) flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST] = flags[kFLAGS.WHITNEY_CORRUPTION];
+				
+				trace("Whitney corruption changed by " + String(mod));
+				trace("Whitney corruption now at " + String(mod + flags[kFLAGS.WHITNEY_CORRUPTION]));
 			}
 			
 			// Cap the values into the appropriate range
-			if (flags[kFLAGS.FARM_CORRUPTION_APPROACHED_WHITNEY] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 30 ) flags[kFLAGS.WHITNEY_CORRUPTION] = 30;
-			else if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 60) flags[kFLAGS.WHITNEY_CORRUPTION] = 60;
-			else if (flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 90) flags[kFLAGS.WHITNEY_CORRUPTION] = 90;
-			else if (flags[kFLAGS.WHITNEY_MENU_91_119] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 119) flags[kFLAGS.WHITNEY_CORRUPTION] = 119;
+			if (flags[kFLAGS.FARM_CORRUPTION_APPROACHED_WHITNEY] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 30 )
+			{
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 30;
+				trace("Whitney at 30 corruption clamp.");
+			}
+			else if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 60)
+			{
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 60;
+				trace("Whitney at 60 corruption clamp.");
+			}
+			else if (flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 90)
+			{
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 90;
+				trace("Whitney at 90 corruption clamp.");
+			}
+			else if (flags[kFLAGS.WHITNEY_MENU_91_119] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 119)
+			{
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 119;
+				trace("Whitney at 119 corruption clamp");
+			}
 
 			// Clamp values to valid min/max
 			if (flags[kFLAGS.WHITNEY_CORRUPTION] < 0) flags[kFLAGS.WHITNEY_CORRUPTION] = 0;
@@ -91,18 +110,6 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) return true;
 			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) return true;
 			return false;
-		}
-
-		public function whitneyOralTrain(mod:int = 0):int
-		{
-			if (mod == 0) return flags[kFLAGS.WHITNEY_ORAL_TRAINING];
-
-			flags[kFLAGS.WHITNEY_ORAL_TRAINING] += mod;
-
-			if (flags[kFLAGS.WHITNEY_ORAL_TRAINING] > 100) flags[kFLAGS.WHITNEY_ORAL_TRAINING] = 100;
-			if (flags[kFLAGS.WHITNEY_ORAL_TRAINING] < 0) flags[kFLAGS.WHITNEY_ORAL_TRAINING] = 0;
-
-			return flags[kFLAGS.WHITNEY_ORAL_TRAINING];
 		}
 
 		public function whitneyCockArea():Number
@@ -217,7 +224,7 @@ package classes.Scenes.Places.Farm
 			}
 
 			// Figure out how much corruption we're going to slap on to Whitney
-			var modValue:int = -1;
+			var modValue:Number = -1;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) modValue += 1;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) modValue += 1;
@@ -226,9 +233,8 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 2) modValue += 0.5;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) modValue += 2;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) modValue += 0.5;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] <= 20)
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
 			{
-				flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI]++;
 				modValue += 2;
 			}
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] == 1) modValue += 1;
@@ -277,8 +283,8 @@ package classes.Scenes.Places.Farm
 			// If Latexy is at the farm, further modify her status values
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
 			{
-				kGAMECLASS.latexGirl.gooHappiness( -0.5);
-				kGAMECLASS.latexGirl.gooObedience(  0.5);
+				kGAMECLASS.latexGirl.gooHappiness( -0.5, false);
+				kGAMECLASS.latexGirl.gooObedience(  0.5, false);
 			}
 			
 			// If Ceraph is doing her thing
@@ -295,9 +301,6 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI]++;
 				
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 20) flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = -1;
-				
-				modValue += 10;
-				whitneyCorruption(2);
 			}
 			
 			// Contraceptives
@@ -474,7 +477,11 @@ package classes.Scenes.Places.Farm
 		public function takeoverPrompt():Boolean
 		{
 			if (flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 1) return false;
-			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) return false; // Hook the corrupt menu here
+			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
+			{
+				farmMenu();
+				return true; // Hook the corrupt menu here
+			}
 			
 			if (player.cor >= 70 && corruptFollowers() >= 2 && player.level >= 12)
 			{
@@ -651,12 +658,16 @@ package classes.Scenes.Places.Farm
 					outputText("\n\n“<i>If Kelt is willing to take direction from someone like you he will take it from me, I think,</i>” you say, shrugging casually. “<i>If you think I’m frightened of that moronic blowhard you’ve got another thing coming.</i>”");
 				}
 
-				outputText("\n\nYou have to admit, it’s going to be plenty painful if she fires it, so much so that you don’t know what will happen afterwards; an image of an inferno consuming a barn flits through your mind. After what seems like an hour of deliberation, though, Whitney lowers the crossbow.");
+				outputText("\n\nYou have to admit, it’s going to be plenty painful if she fires her crossbow at you, so much so that you don’t know what will happen afterwards; an image of an inferno consuming a barn flits through your mind. After what seems like an hour of deliberation, though, Whitney lowers the weapon.");
 
 				outputText("\n\n“<i>Alright. Alright, maybe you got me, stranger. I don’t have eyes in the back of my head, so maybe I do need... insurance.</i>” She spits the last word. “<i>Just so long as you stay the fuck away from me, I will do as you say.</i>” You beam.");
 			}
 
-			outputText("\n\n“<i>Smart decision. I’ll send along help to you as soon as I can. I look forward to a long and prosperous business relationship with you.</i>” You bow deeply, turn and move almost all the way to the gate before raising a finger. “<i>Oh, just one more thing. I will be expecting a cut. Seeing as how I’m invested in your little operation now and all. Shall we say 20%? If you cannot bear giving me the money yourself, just leave it underneath the rock over yonder every week. Do that and we won’t have any... problems.</i>” You smirk at her. She looks at you as if she’s never seen you before in her life, incapable of words. “<i>I guess that’s settled then. Always a pleasure talking to you, Whitney.</i>” You throw your [hips] out in an exaggerated swagger as you slowly make your way back to camp, knowing the dog morph’s eyes will follow you until you disappear into the distance.");
+			outputText("\n\n“<i>Smart decision. I’ll send along help to you as soon as I can. I look forward to a long and prosperous business relationship with you.</i>” You bow deeply, turn and move almost all the way to the gate before raising a finger.");
+			
+			outputText("\n\n“<i> Oh, just one more thing. I will be expecting a cut. Seeing as how I’m invested in your little operation now and all. Shall we say 20 % ? If you cannot bear giving me the money yourself, just leave it underneath the rock over yonder every week. Do that and we won’t have any... problems.</i>” You smirk at her.");
+			
+			outputText("\n\nShe looks at you as if she’s never seen you before in her life, incapable of words. “<i>I guess that’s settled then. Always a pleasure talking to you, Whitney.</i>” You throw your [hips] out in an exaggerated swagger as you slowly make your way back to camp, knowing the dog morph’s eyes will follow you until you disappear into the distance.");
 
 			flags[kFLAGS.FARM_CORRUPTION_STARTED] = 1;
 			

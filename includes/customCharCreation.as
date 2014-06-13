@@ -31,7 +31,7 @@ public function customPCSetup():void {
 		player.inte = 100;
 		player.sens = 100;
 		player.lib = 100;
-		player.cor = 50;
+		player.cor = 71;
 		notes = "Cheater!";
 		player.HP = maxHP();
 		player.hairLength = 10;
@@ -119,6 +119,41 @@ public function customPCSetup():void {
 		
 		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
 		player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
+		
+		// Izma
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;
+		
+		// Vapula
+		flags[kFLAGS.VAPULA_FOLLOWER] = 1;
+		
+		// Amily
+		flags[kFLAGS.AMILY_FOLLOWER] = 2;
+		
+		// Jojo
+		monk = 5;
+		
+		// Bimbo Sophie
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
+		
+		// Isabella
+		flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
+		
+		// Latexy
+		flags[kFLAGS.GOO_SLAVE_RECRUITED] = 1;
+		flags[kFLAGS.GOO_NAME] = "Latexy";
+		flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
+		flags[kFLAGS.GOO_HAPPINESS] = 100;
+		flags[kFLAGS.GOO_OBEDIENCE] = 100;
+		
+		// Ceraph
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
+		
+		// Holli
+		flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;
+		
+		// Milky
+		flags[kFLAGS.MILK_NAME] = "Milky";
+		
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
