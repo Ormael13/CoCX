@@ -98,6 +98,31 @@ public function corruptCampJojo():void {
 	{
 		outputText("Jojo slinks out of a barn when you call his name, hating and loving every step he takes towards you. He looks dusty and worn out but his dick still strains at the sight of you.");
 		
+		// Appearance splice lel
+		outputText("\n\nJojo is an anthropomorphic mouse with immaculate white fur. His brown eyes stare at you with a mixture of despair and unrequited need. Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed. He’s naked, with a large tainted throbbing member bouncing at attention. A fuzzy sack with painfully large looking balls dangles between his legs.");
+		if (tentacleJojo()) outputText(" A number of tentacles vaugley resembling cocks have sprouted from his back and groin. They sway restlessly around him, oozing thick, fragrant pre from their tips.");
+		
+		if (kGAMECLASS.farm.farmCorruption.hasTattoo("jojo"))
+		{
+			outputText("\n\n");
+			if (kGAMECLASS.farm.farmCorruption.jojoFullTribalTats())
+			{
+				outputText("He is covered from head to tail in tribal tattoos, erotic lines snaking all over his naked frame, giving him the look of a barely tamed savage.")
+			}
+			else
+			{
+				if (kGAMECLASS.farm.farmCorruption.numTattoos("jojo") > 1) outputText("He has the following tattoos emblazoned across his body:\n");
+				else outputText("He has ");
+
+				if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.JOJO_TATTOO_COLLARBONE] + "\n");
+				if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.JOJO_TATTOO_SHOULDERS] + "\n");
+				if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.JOJO_TATTOO_LOWERBACK] + "\n");
+				if (flags[kFLAGS.JOJO_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.JOJO_TATTOO_BUTT] + "\n");
+				outputText("\n");
+			}
+		}
+
+		
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] == 1)
 		{
 			flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] = 2;

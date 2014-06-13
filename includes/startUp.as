@@ -82,8 +82,8 @@ public function startupScreenBody():void
 
 Edited By: SoS, Zeikfried, Prisoner416, Ashi, and Others
 
-Open-source version modifications by:  
-Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42, Gedan, aimozg
+Open-source contributions by:  
+Amygdala, Yoffy, Fake-Name, Cmacleod42, Gedan, aimozg
 
 Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
 
@@ -378,7 +378,7 @@ public function creditsScreen():void {
 	outputText("<li> EdgeofReality (Gym fucking machine)</li>");
 	outputText("<li> Bronycray (Heckel the Hyena)</li>");
 	outputText("<li> Sablegryphon (Gnoll spear-thrower)</li>");
-	outputText("<li> Nonesuch (Basilisk, Sandtraps, assisted with Owca/Vapula)</li>");
+	outputText("<li> Nonesuch (Basilisk, Sandtraps, assisted with Owca/Vapula, Whitney Farm Corruption)</li>");
 	outputText("<li> Anonymous Individual (Lilium, PC Birthing Driders)</li>");
 	outputText("<li> PKD (Owca, Vapula, Fap Arena, Isabella Tentacle Sex, Lottie Tentacle Sex)</li>");
 	outputText("<li> Shamblesworth (Half of Niamh, Shouldra the Ghost-Girl, Ceraph Roleplaying As Marble, Yara Sex, Shouldra Follow Expansion)</li>");
@@ -395,6 +395,7 @@ public function creditsScreen():void {
 	outputText("<li> Aeron the Demoness (Generic Goblin Anal, Disciplining the Eldest Minotaur)</li>");
 	outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 	outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
+	outputText("<li> Frogapus (The Wild Hunt)</li>");
 	outputText("<li> Fenoxo (Everything Else)</li>");
 	outputText("</ul>");
 	outputText("<b>Oviposition Update Credits - Names in Order Appearance in Oviposition Document</b>");
