@@ -1879,7 +1879,7 @@ import classes.PerkType;
 			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				percent += 0.03;
 			if (findPerk(PerkLib.MagicalVirility) >= 0)
-				percent += 5;
+				percent += 0.05;
 			//Messy Orgasms?
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
