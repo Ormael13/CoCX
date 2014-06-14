@@ -127,6 +127,12 @@ package classes.Scenes
 				}
 				//Used for chosing 'repeat' encounters.
 				var choosey:Number = rand(6);
+				//2 (gargoyle) is never chosen once cathedral is discovered.
+				if(choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
+				{
+					choosey = rand(5);
+					if(choosey >= 2) choosey++;
+				}
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
@@ -138,7 +144,7 @@ package classes.Scenes
 					kGAMECLASS.lumi.lumiEncounter();
 					return;
 				}
-				else if (choosey == 2 || debug) {
+				else if (choosey == 2) {
 					player.explored++;
 					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
 					else kGAMECLASS.gargoyle.returnToCathedral();

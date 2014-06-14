@@ -1489,6 +1489,18 @@ public function places(display:Boolean):Boolean {
 	var bazaar:* = 0;
 	var owca:* = 0;
 	var dungeonsArg:* = 0;
+	var cathedral:* = 0;
+
+	if(flags[kFLAGS.PLACES_PAGE] != 0 && display)
+	{
+		placesPage2();
+		return true;
+	}
+	if(flags[kFLAGS.FOUND_CATHEDRAL] == 1) 
+	{
+		if (flags[kFLAGS.GAR_NAME] == 0) cathedral = kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork;
+		else cathedral = kGAMECLASS.gargoyle.returnToCathedral;
+	}
 	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
 		dungeonsArg = dungeons;
 	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
@@ -1510,11 +1522,26 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
+		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED] || cathedral;
 	}
 	//Make choices
-	choices("Bazaar",bazaar,"Boat", _boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2, "TownRuins",ruins,"Back",1);
+	choices("Bazaar",bazaar,"Boat",_boat,"Cathedral",cathedral,"Dungeons",dungeonsArg,"Next",placesPage2,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2,"Back",1);
 	return true;
+}
+
+private function placesPage2():void
+{
+	menu();
+	flags[kFLAGS.PLACES_PAGE] = 1;
+	//turn on ruins
+	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0,"TownRuins",eventParser,2371);
+	addButton(4,"Previous",placesToPage1);
+	addButton(9,"Back",eventParser,1);
+}
+private function placesToPage1():void
+{
+	flags[kFLAGS.PLACES_PAGE] = 0;
+	places(true);
 }
 
 private function dungeons():void {

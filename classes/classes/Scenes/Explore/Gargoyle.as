@@ -67,6 +67,9 @@ private function gargoyleMeeting2():void {
 	outputText("\n\n\"<i>Break my bonds to make me tame.</i>\"");
 	
 	outputText("\n\nYou suppose you could break the chains on the statue.  But who knows what will happen if you do?");
+	
+	flags[kFLAGS.FOUND_CATHEDRAL] = 1;
+	outputText("\n\n<b>You have discovered the cathedral. You can return here in the future by selecting it from the 'Places' menu in your camp.</b>\n");
 	//(Display [Break Chains] and [Don't Break] options)
 	menu();
 	addButton(1,"Don't Break",dontBreakThatShit);
@@ -229,6 +232,7 @@ private function reassureTheGargoyle():void {
 //[i](Whenever the player returns to the Cathedral, play one of the following introductions, then the “Cathedral Interior” scenes. )[/i]
 //[b]Player Returns to the Cathedral A[/b]
 public function returnToCathedral(woken:Boolean = false):void {
+	flags[kFLAGS.FOUND_CATHEDRAL] = 1;
 	if(!woken) {
 		clearOutput();
 		if(rand(3) == 0) outputText("You make your way back to the ruined Cathedral in the wastelands.  You notice some of the debris has been cleared away from the courtyard, and some of the windows have been boarded up.  " + flags[kFLAGS.GAR_NAME] + "'s obviously been working since you last left, trying to make the building more habitable.  With your path less obstructed than before, you enter.");

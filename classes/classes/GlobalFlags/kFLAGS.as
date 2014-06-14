@@ -1170,8 +1170,8 @@ public static const WHITNEY_DOM_FIRST_PLEASURE:int                              
 public static const FARM_UPGRADES_ORGYROOM:int                                   = 1162;
 public static const MASSAGE_HAPPY_ENDINGS:int                                   = 1163;
 public static const QUEUE_ORGYROOM_UPGRADE:int                                   = 1164;
-public static const UNKNOWN_FLAG_NUMBER_01165:int                                   = 1165;
-public static const UNKNOWN_FLAG_NUMBER_01166:int                                   = 1166;
+public static const FOUND_CATHEDRAL:int                                             = 1165;
+public static const PLACES_PAGE:int                                   = 1166;
 public static const UNKNOWN_FLAG_NUMBER_01167:int                                   = 1167;
 public static const UNKNOWN_FLAG_NUMBER_01168:int                                   = 1168;
 public static const UNKNOWN_FLAG_NUMBER_01169:int                                   = 1169;
