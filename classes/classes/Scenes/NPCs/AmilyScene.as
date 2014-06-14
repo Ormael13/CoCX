@@ -2474,14 +2474,16 @@ package classes.Scenes.NPCs
 						flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
 						outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
 						
-						outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>”");
+						outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>”\n\n");
 						
 						menuLoc = 31;
 						inventory.takeItem(consumables.SUCMILK);
+						return;
 					}
 					else
 					{
 						amilyMenu(false);
+						return;
 					}
 				}
 			}

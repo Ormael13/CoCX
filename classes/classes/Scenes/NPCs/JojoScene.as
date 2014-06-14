@@ -128,7 +128,7 @@ public function corruptCampJojo():void {
 			flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] = 2;
 			outputText("\n\nYou wordlessly hold out your hand. Trembling, Jojo lays an incubus draft on it.");
 			
-			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”");
+			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”\n\n");
 			
 			menuLoc = 33;
 			inventory.takeItem(consumables.INCUBID);
@@ -181,7 +181,7 @@ private function harvestJojoDraft():void
 	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry [master], but there’s no device around here that could be used t-to do that. Talk to Mistress Whitney, maybe she can have one built.</i>”");
 	else outputText("\n\n“<i>As you wish [master],</i>” he whispers.");
 	
-	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1;
+	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] = 1;
 	
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }

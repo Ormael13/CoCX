@@ -165,7 +165,7 @@ package classes.Scenes.NPCs
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 1)
 					{
 						flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] = 2;
-						outputText("\n\nYou wordlessly hold out your hand. Leering, Vapula places some bottled succubus milk into it.");
+						outputText("\n\nYou wordlessly hold out your hand. Leering, Vapula places some bottled succubus milk into it.\n\n");
 						
 						menuLoc = 32;
 						inventory.takeItem(consumables.SUCMILK);
