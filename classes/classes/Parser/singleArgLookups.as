@@ -83,7 +83,9 @@
 				"prickplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "prick" : "pricks"; },
 				"boy"						: function(thisPtr:*):* { return thisPtr.player.mf("boy", "girl"); },
 				"guy"						: function(thisPtr:*):* { return thisPtr.player.mf("guy", "girl"); },
-				"wings"						: function(thisPtr:*):* { return thisPtr.wingsDescript(); }
+				"wings"						: function(thisPtr:*):* { return thisPtr.wingsDescript(); },
+				"tail"						: function(thisPtr:*):* { return thisPtr.tailDescript(); },
+				"onetail"					: function(thisPtr:*):* { return thisPtr.oneTailDescript(); }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}
 
 		}

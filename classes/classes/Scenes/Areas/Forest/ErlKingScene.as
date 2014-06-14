@@ -346,7 +346,7 @@ package classes.Scenes.Areas.Forest
 			else repeatWildHuntGivenToTheHounds();
 		}
 
-		protected function repeatWildHuntGivenToTheHounds():void
+		public function repeatWildHuntGivenToTheHounds():void
 		{
 			outputText("“<i>How disappointing,</i>” drips the refined voice of the Erlking.  His horse’s hooves thud softly on the ground as he walks below you.  The cane at his side clicks against the forest floor with every other step.  You have just enough wherewithal to understand his words as your fingers grip the net.\n\n");
 
@@ -386,7 +386,7 @@ package classes.Scenes.Areas.Forest
 			outputText("After all, comes a thought in your fog-addled head, they’ve earned the right to do whatever they want to their prey.\n\n");
 
 			outputText("It doesn’t take the two dog men long.  They rock back and forth, shoving their thick cocks in and out of your submissive, helpless body.  The one in front grabs your head, burying your [face] into his crotch, so deep that your tongue licks against the throbbing bulge of his knot, your nose buried in the thick fur above his shaft.");
-			if (player.tailType != TAIL_TYPE_NONE) outputText("  The Hound behind grabs you by your [tail], using it as a handhold as he trusts over and over into your [asshole].");
+			if (player.tailType != TAIL_TYPE_NONE) outputText("  The Hound behind grabs you by your [tail], using it as a handhold as he thrusts over and over into your [asshole].");
 			else outputText("  The Hound behind grabs you by your [ass], thrusting into you again and again.");
 			outputText("  You tremble, completely dominated by the two powerful males as they make you their prey-bitch.\n\n");
 

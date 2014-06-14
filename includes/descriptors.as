@@ -43,6 +43,12 @@ public function tongueDescript():String {
 public function wingsDescript():String {
 	return Appearance.wingsDescript(player);
 }
+public function tailDescript():String {
+	return Appearance.tailDescript(player);
+}
+public function oneTail():String {
+	return Appearance.oneTailDescript(player);
+}
 
 public function ballsDescriptLight(forcedSize:Boolean = true):String {
 	return Appearance.ballsDescription(forcedSize, true, player);

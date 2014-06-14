@@ -37,7 +37,8 @@ public function customPCSetup():void {
 		player.hairLength = 10;
 		player.skinType = SKIN_TYPE_PLAIN;
 		player.faceType = FACE_HUMAN;
-		player.tailType = TAIL_TYPE_NONE;
+		player.tailType = TAIL_TYPE_FOX;
+		player.tailVenom = 4;
 		player.tongueType = TONUGE_HUMAN;
 		player.femininity = 90;
 		player.beardLength = 0;
@@ -65,7 +66,6 @@ public function customPCSetup():void {
 		player.wingDesc = "non-existant";
 		player.earType = EARS_HUMAN;
 		player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		player.tailType = TAIL_TYPE_NONE;
 		player.armType = ARM_TYPE_HUMAN;
 		player.hairLength = 69.2;
 		player.hairType = 4;
