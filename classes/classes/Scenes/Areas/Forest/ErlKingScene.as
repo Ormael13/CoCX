@@ -557,7 +557,7 @@ package classes.Scenes.Areas.Forest
 			if (player.balls == 0) outputText(" new");
 			outputText(" balls and runs halfway up your shiny red pecker, forming a sheath.");
 			if (player.wingType != 0) outputText("  You whine, rolling on your back and with a start, realize that your wings must have fallen off while you were distracted with your cock.");
-			outputText("  You smile and open-mouthed doggie smile, feeling the warm churning of cum building in your throbbing balls.  You ache for release, wanting nothing more than to stroke yourself.  You raise your black-nailed hands to your cock, but stop short, knowing instinctively that masturbating is verboten.\n\n");
+			outputText("  You smile and open-mouthed doggie smile, feeling the warm churning of cum building in your throbbing balls.  You ache for release, wanting nothing more than to stroke yourself.  You raise your black-nailed hands to your cock, but stop short, knowing instinctively that masturbating is forbidden.\n\n");
 
 			outputText("Instead, you curl your stomach, trying to reach your cock with your mouth.");
 			if (player.faceType != FACE_DOG) outputText("  The world bends alarmingly as your nose pushes out, creating a black-furred muzzle where your mouth once was.");
