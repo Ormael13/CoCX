@@ -5554,32 +5554,6 @@ package classes.Scenes.NPCs
 			doNext(13);
 		}
 		
-		private function talkWithCORRUPTCUNTAtFarm():void
-		{
-			clearOutput();
-			amilySprite();
-			
-			outputText("Amily is kneeling before you before you’ve even finished calling her name. She looks a bit dusty but her pussy gleams cleanly and invitingly.");
-			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] == 1)
-			{
-				flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
-				if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] > 0) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY]--;
-				outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
-				
-				outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes to you [master].</i>”");
-				
-				throw new Error("Gibs item.");
-			}
-			
-			menu();
-			if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(0, "Harvest Milk", harvestMilk);
-			else addButton(0, "Stop Harvesting", stopHarvestingMilk);
-			addButton(1, "Chat", talkWithCORRUPTCUNT, false);
-			addButton(2, "Go Camp", backToCamp);
-			addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
-		}
-		
 		private function backToCamp():void
 		{
 			clearOutput();

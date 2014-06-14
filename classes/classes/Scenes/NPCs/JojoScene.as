@@ -130,7 +130,9 @@ public function corruptCampJojo():void {
 			
 			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”");
 			
-			throw new Error("Gibs item.");
+			menuLoc = 33;
+			inventory.takeItem(consumables.INCUBID);
+			return;
 		}
 		else
 		{

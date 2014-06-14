@@ -343,6 +343,7 @@ package classes.Scenes.Places.Farm
 				
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
+				flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] = 0;
 			}
 			
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0)
@@ -408,11 +409,9 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			}
 			
+			flags[flag]--;
 			kGAMECLASS.menuLoc = 30;
 			inventory.takeItem(item);
-			flags[flag]--;
-			
-			doNext(collectTheGoodies);
 		}
 
 		public function farmProtection():int
@@ -894,6 +893,16 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7 || flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) addButton(1, "Collect", collectTheGoodies);
 			
 			addButton(9, "Back", farmMenu);
+		}
+		
+		public function collectionAvailable():Boolean
+		{
+			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7) return true;
+			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0) return true;
+			if (flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0) return true;
+			if (flags[kFLAGS.FARM_EGG_STORED] > 0) return true;
+			if (flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) return true;
+			return false;
 		}
 		
 		private function keltAChangeInManagement():void

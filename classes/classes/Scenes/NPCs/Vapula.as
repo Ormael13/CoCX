@@ -167,7 +167,9 @@ package classes.Scenes.NPCs
 						flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] = 2;
 						outputText("\n\nYou wordlessly hold out your hand. Leering, Vapula places some bottled succubus milk into it.");
 						
-						throw new Error("Gib item.");
+						menuLoc = 32;
+						inventory.takeItem(consumables.SUCMILK);
+						return;
 					}
 				}
 			}

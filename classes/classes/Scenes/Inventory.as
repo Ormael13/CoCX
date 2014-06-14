@@ -838,12 +838,29 @@ public function doItems(eventNo:Number):void {
 			// Farm Corruption item stash
 			if (menuLoc == 30)
 			{
-				doNext(kGAMECLASS.farm.farmCorruption.collectTheGoodies);
+				if (kGAMECLASS.farm.farmCorruption.collectionAvailable())
+				{
+					doNext(kGAMECLASS.farm.farmCorruption.collectTheGoodies);
+				}
+				else
+				{
+					doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+				}
 				return;
 			}
 			if (menuLoc == 31)
 			{
 				doNext(kGAMECLASS.amilyScene.amilyFollowerEncounter);
+				return;
+			}
+			if (menuLoc == 32)
+			{
+				doNext(kGAMECLASS.vapula.callSlaveVapula);
+				return;
+			}
+			if (menuLoc == 33)
+			{
+				doNext(kGAMECLASS.jojoScene.corruptCampJojo);
 				return;
 			}
 			if(menuLoc == 2) doNext(13);

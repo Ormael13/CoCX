@@ -386,9 +386,6 @@ public function get eggTypes():Array
 
 private function eggSelector():void
 {
-	clearOutput();
-	sophieSprite();
-	
 	for (var i:int = 0; i < eggColors.length; i++)
 	{
 		addButton(i, eggColors[i], postEggSelector, eggColors[i]);
