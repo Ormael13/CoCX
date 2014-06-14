@@ -177,7 +177,7 @@ private function harvestJojoDraft():void
 	outputText("\n\n“<i>Th-that’s why you wanted me to come out here? To... harvest me?</i>” Jojo’s mouth opens to the monstrosity of it, even as his dick strains helplessly to the selfsame idea.");
 	
 	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry [master], but there’s no device around here that could be used t-to do that. Talk to Mistress Whitney, maybe she can have one built.</i>”");
-	else outputText("\n\n“<i>As you wish master,</i>” he whispers.");
+	else outputText("\n\n“<i>As you wish [master],</i>” he whispers.");
 	
 	if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1;
 	

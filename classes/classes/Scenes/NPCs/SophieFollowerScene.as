@@ -65,8 +65,6 @@ private function yesDebimboSophie():void {
 	clearOutput();
 	player.consumeItem(consumables.DEBIMBO);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2) flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 1;
-	
 	outputText("You grab the air-headed harpy and pull her over to you, pressing her impressive chest against you as you ready your intellectual beverage.  \"<i>Oooh! Hey, babe, what'cha got there?</i>\" Sophie asks, staring wide-eyed at the tincture.  Telling her not to worry about it, you pop the cork and bring the vial's neck up to Sophie's mouth, her big, full lips parting eagerly.  \"<i>Hey, is it wine?  I could just <b>DIE</b> for some wine!  Then maybe, like, a good hard fucking afterwards!</i>\" she declares, jumping excitedly in your grasp - almost making you spill the drink.  You grasp her chin, steadying the harpy's head just long enough to upend the liquid into her mouth, making sure to drain every last drop into her before you tickle her throat, forcing her to swallow it all in one audible gulp.");
 	
 	outputText("\n\n\"<i>Ew!  That TOTALLY wasn't booze!</i>\" Sophie complains, struggling out of your grasp and pouting, feather arms crossed beneath her heavy bosom.  You observe her for a long moment, waiting... waiting....  \"<i>Hey, I like, don't feel so good...</i>\" Sophie finally says, clutching her head, fingers running through her thick blonde locks.  \"<i>Ugh, I don't... Why... Oh, shit, where am I?  And what happened to my TITS!?</i>\" Sophie staggers forward, blinking hard.  When she looks up at you a moment later, you can see that gleam of intelligence flaring brightly once more in her blue eyes.");
@@ -92,8 +90,6 @@ private function yesDebimboSophie():void {
 //Bimbo Again! (You monster)
 private function bimboSophieAgain():void {
 	clearOutput();
-	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 2;
 	
 	outputText("Oh no, fuck this!  You lunge forward, seizing the recovering harpy while removing another Bimbo Liqueur from your belt.  \"<i>Wha- No!</i>\" she cries, but too late!  You pop the cork, and dump the braincell-killing booze down her gullet, keeping her mouth muffled and nose pinched shut until she swallows it allllllll down like the good little slut she truly is; the spent bottle rolling around on the floor as the sound of wet gulping fills the air.  The deed done, she slumps to the ground, her eyes crossing with familiar confusion as the liqueur does its job, frying her brain back into oblivion.");
 	
@@ -332,7 +328,7 @@ private function sendToFarm():void
 	
 	outputText("\n\nHer whining and complaining can be heard long after her pink feathers have disappeared over the rise. She’ll be useless as a worker, you think, but she’s considerably more vigilant and sharp than she lets herself on to be. And who knows, maybe she can produce some eggs whilst she’s there.");
 	
-	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1;
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 1;
 	
 	doNext(13);
 }
@@ -407,7 +403,12 @@ private function postEggSelector(selected:String):void
 	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>” she says with a small grin. “<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
-	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] != selected)
+	{
+		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+		flags[kFLAGS.FARM_EGG_STORED] = 0;
+		flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
+	}
 	
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }

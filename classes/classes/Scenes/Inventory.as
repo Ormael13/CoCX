@@ -841,6 +841,11 @@ public function doItems(eventNo:Number):void {
 				doNext(kGAMECLASS.farm.farmCorruption.collectTheGoodies);
 				return;
 			}
+			if (menuLoc == 31)
+			{
+				doNext(kGAMECLASS.amilyScene.amilyFollowerEncounter);
+				return;
+			}
 			if(menuLoc == 2) doNext(13);
 			else doNext(1);
 		}

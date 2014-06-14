@@ -376,9 +376,6 @@ public function get eggTypes():Array
 
 private function eggSelector():void
 {
-	clearOutput();
-	sophieSprite();
-	
 	for (var i:int = 0; i < eggColors.length; i++)
 	{
 		addButton(i, eggColors[i], postEggSelector, eggColors[i]);
@@ -390,10 +387,15 @@ private function postEggSelector(selected:String):void
 	clearOutput();
 	sophieSprite();
 	
-	outputText("\n\n“<i>I’ll make some nice " + selected.toLowerCase() + "eggs just for you then, good looking,</i>” she says. “<i>I can only make, like, one once a week, though. All the rest gotta be sold. I’ll put it with the weekly earnings, ok?</i>”");
+	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + " eggs just for you then, good looking,</i>” she says. “<i>I can only make, like, one once a week, though. All the rest gotta be sold. I’ll put it with the weekly earnings, ok?</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
-	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] != selected)
+	{
+		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+		flags[kFLAGS.FARM_EGG_STORED] = 0;
+		flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
+	}
 	
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
@@ -426,7 +428,7 @@ private function sendToFarm():void
 
 	outputText("\n\n“<i>Ooh, I’m going on, like, an adventure!</i>” She giggles excitedly, bouncing up and down. If there is one thing the harpy can do, it’s bounce. “<i>I’m gonna milk cows and lay lotsa eggs for the nice dog lady and, and you’ll visit sometimes and we’ll fuck, right?</i>” You confirm that will be the case. Sophie claps with glee, and then begins to hop-glide her way towards the lake. She’ll be pretty useless as a worker or a protector for Whitney, you think, but she will easily make up for that in egg production.");
 	
-	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 2;
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 1;
 	
 	doNext(13);
 }

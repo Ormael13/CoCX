@@ -2459,7 +2459,32 @@ package classes.Scenes.NPCs
 			//Non corrupt!
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("As you approach the mouse-woman, her big, hairless ears twitch and she turns to face you with a smile. \"<i>Hi, " + player.short + "! What's up?</i>\" She grins at you.\n\n", false);
 			//Corrupt!
-			else outputText("\"<i>Amily!</i>\" you yell. In no time a purplish blur rushes towards you; skidding to a halt, she kneels before you, hands behind her back, fully exposed. \"<i>Yes my " + player.mf("master","mistress") + "?</i>\" Amily says seductively, licking her lips.\n\n", false);
+			else
+			{
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0)
+				{
+					outputText("\"<i>Amily!</i>\" you yell. In no time a purplish blur rushes towards you; skidding to a halt, she kneels before you, hands behind her back, fully exposed. \"<i>Yes my " + player.mf("master", "mistress") + "?</i>\" Amily says seductively, licking her lips.\n\n", false);
+				}
+				else
+				{
+					outputText("Amily is kneeling before you before you’ve even finished calling her name. She looks a bit dusty but her pussy gleams cleanly and invitingly.");
+					
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] == 1)
+					{
+						flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
+						outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
+						
+						outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>”");
+						
+						menuLoc = 31;
+						inventory.takeItem(consumables.SUCMILK);
+					}
+					else
+					{
+						amilyMenu(false);
+					}
+				}
+			}
 
 			//NOT PREG
 			if(flags[kFLAGS.AMILY_INCUBATION] > 150) {}
@@ -2522,10 +2547,17 @@ package classes.Scenes.NPCs
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
 				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur, "", 0, "", 0, "", 0, "", 0, "Back", camp.campSlavesMenu);
 				
-				if (flags[kFLAGS.AMILY_INCUBATION] == 0)
+				if (flags[kFLAGS.AMILY_INCUBATION] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(4, "Talk", talkWithCORRUPTCUNTAtFarm);
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendCorruptCuntToFarm);
+					addButton(5, "Farm Work", sendCorruptCuntToFarm);
+				}
+				
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
+				{
+					addButton(5, "Go Camp", backToCamp);
+					if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(6, "Harvest Milk", harvestMilk);
+					else addButton(6, "Stop Harvest", stopHarvestingMilk);
+					addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 				}
 			}
 		}
@@ -2564,7 +2596,8 @@ package classes.Scenes.NPCs
 
 				outputText("As she collapses onto the ground, crying her heart out, you silently redress yourself and slink away. All this blubbering has turned you off, and it's obvious that nothing can be done until you've grown a cock, a pussy, or both.", false);
 				dynStats("lus", -20);
-				doNext(1);
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(1);
+				else doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 			}
 		}
 
