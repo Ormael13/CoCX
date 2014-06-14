@@ -1950,7 +1950,7 @@
 		
 		public static function wingsDescript(i_creature:Creature):String
 		{
-			return DEFAULT_WING_NAMES[i_creature.wingType];
+			return DEFAULT_WING_NAMES[i_creature.wingType] + " wings";
 		}
 
 		private static function humanDescript(cockNum:Number):String
