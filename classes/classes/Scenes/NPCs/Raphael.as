@@ -309,6 +309,7 @@ private function RaphaelChooseReject():void {
 
 //{When player chooses [Frisk] after second encounter}
 private function RaphaelChooseFrisk():void {
+	flags[kFLAGS.FUCK_YOU_GOT_MINE_RAPHAEL] = 0;
 	outputText("", true);
 	outputText("You flash a playful smile and express the desire to get your jewelry back.\n\n", false);
 
