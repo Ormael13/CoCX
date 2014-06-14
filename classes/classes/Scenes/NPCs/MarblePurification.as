@@ -1465,7 +1465,7 @@ package classes.Scenes.NPCs {
 		//increase Marble's time since last nursed by 10
 		flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] += 10;
 		//increase Marble's lust by 20
-		flags[kFLAGS.MARBLE_LUST] >= 5;
+		flags[kFLAGS.MARBLE_LUST] += 20;
 		if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
 		player.consumeItem(consumables.LACTAID);
 		doNext(2128);
