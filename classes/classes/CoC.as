@@ -25,7 +25,7 @@
 	// This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser.Main.Parser; 	// import getting long enough yet?
+	import classes.Parser.Parser;
 
 	import classes.Scenes.*;
 	import classes.Scenes.Areas.*;

@@ -1,5 +1,5 @@
 ﻿
-package classes.Parser.Main
+package classes.Parser
 {
 	// import classes.CoC;
 
@@ -74,7 +74,7 @@ package classes.Parser.Main
 		public var parserState:Object = new Object();
 
 		// provides singleArgConverters
-		include "../singleArgLookups.as";
+		include "./singleArgLookups.as";
 
 		// Does lookup of single argument tags ("[cock]", "[armor]", etc...) in singleArgConverters
 		// Supported variables are the options listed in the above
@@ -154,7 +154,7 @@ package classes.Parser.Main
 
 		// provides twoWordNumericTagsLookup and twoWordTagsLookup, which use
 		// cockLookups/cockHeadLookups, and rubiLookups/arianLookups respectively
-		include "../doubleArgLookups.as";
+		include "./doubleArgLookups.as";
 
 
 
@@ -303,7 +303,7 @@ package classes.Parser.Main
 
 
 		// Provides the conditionalOptions object
-		include "../conditionalConverters.as";
+		include "./conditionalConverters.as";
 
 		// converts a single argument to a conditional to
 		// the relevant value, either by simply converting to a Number, or
