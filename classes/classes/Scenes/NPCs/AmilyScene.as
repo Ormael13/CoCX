@@ -5607,7 +5607,7 @@ package classes.Scenes.NPCs
 			var convo:Number = rand(13);
 			//Girls dont get to listen to amily talk about being knocked up.
 			//Herms either unless she's okay'ed them for dad-hood.
-			if(player.gender == 2 || (player.gender == 3 && flags[kFLAGS.AMILY_HERM_QUEST] < 2)) convo = rand(12);
+			// if(player.gender == 2 || (player.gender == 3 && flags[kFLAGS.AMILY_HERM_QUEST] < 2)) convo = rand(12); <-- I think this is likely a copypaste issue from the original talk menu.
 			//Boost affection!
 			flags[kFLAGS.AMILY_AFFECTION] += 2 + rand(3);
 			dynStats("cor", .34);
@@ -5905,8 +5905,7 @@ package classes.Scenes.NPCs
 
 				outputText("You chuckle a little and tell her you'll think about it.  As you leave, she begins to masturbate, no doubt fantasizing about being used by a tentacle beast.");
 			}
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(13);
-			else doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(13);
 		}
 
 
