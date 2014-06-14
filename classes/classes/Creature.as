@@ -1733,7 +1733,25 @@ import classes.PerkType;
 			}
 			return breastRows[index].lactationMultiplier;
 		}
-		
+		public function milked():void
+		{
+			if (findStatusAffect(StatusAffects.LactationReduction) >= 0)
+				changeStatusValue(StatusAffects.LactationReduction, 1, 0);
+			if (findStatusAffect(StatusAffects.LactationReduc0) >= 0)
+				removeStatusAffect(StatusAffects.LactationReduc0);
+			if (findStatusAffect(StatusAffects.LactationReduc1) >= 0)
+				removeStatusAffect(StatusAffects.LactationReduc1);
+			if (findStatusAffect(StatusAffects.LactationReduc2) >= 0)
+				removeStatusAffect(StatusAffects.LactationReduc2);
+			if (findStatusAffect(StatusAffects.LactationReduc3) >= 0)
+				removeStatusAffect(StatusAffects.LactationReduc3);
+			if (findPerk(PerkLib.Feeder) >= 0)
+			{
+				//You've now been milked, reset the timer for that
+				addStatusValue(StatusAffects.Feeder,1,1);
+				changeStatusValue(StatusAffects.Feeder, 2, 0);
+			}
+		}
 		public function boostLactation(todo:Number):Number
 		{
 			if (breastRows.length == 0)

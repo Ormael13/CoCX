@@ -582,9 +582,7 @@ package classes.Scenes.Monsters
 			outputText("You feel the imp's mighty gulps start to slow down until he lets out a sigh of relief. While imps may be small, they're very hungry creatures. Your " + nippleDescript(0) + " slips out of the imp's mouth, and you gently lay it down on the ground. It gives a few gentle burps before dozing off; you can see that the imp's erection has retracted, and its belly has expanded significantly. You smile to yourself and, feeling fully satisfied, you stand up.", false);
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
-			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder,1,1);
-			player.changeStatusValue(StatusAffects.Feeder,2,0);
+			player.milked();
 			cleanupAfterCombat();
 		}
 		

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 03.01.14.
  */
 package classes.Scenes.Areas.Plains
@@ -158,7 +158,7 @@ package classes.Scenes.Areas.Plains
 			spriteSelect(54);
 			outputText("", true);
 			outputText("The gnoll draws one final javelin, the sharp point distinct as it points at you.  The javelin drops, sticking deep into the dry ground, as the amazon is too");
-			if (monster.HP() <= 0) outputText(" dazed");
+			if (monster.HP <= 0) outputText(" dazed");
 			else outputText(" aroused");
 			outputText(" to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.", false);
 			var vagoo:Function =null;
