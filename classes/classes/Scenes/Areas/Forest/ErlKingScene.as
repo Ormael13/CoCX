@@ -381,7 +381,9 @@ package classes.Scenes.Areas.Forest
 
 			outputText("The Hound begins fucking your face roughly, leaving salty precum on your tongue, cock throbbing between your lips.  You feel grateful that the Hound has chosen to simply fuck you, and you want nothing more than to do the best job possible for the Hound.\n\n");
 
-			outputText("You groan around the Hound’s dick as you feel a pressure against your [asshole].  The beast squeezes your [ass] cheeks as he shoves his foot-long doggie cock into your rear.  You yelp, realizing what’s to come, and try to wriggle away, but, pinned between the two Hounds, there’s no escape.  The Hounds growl in unison and you freeze, cowed by the two powerful males who want their way with your frightened, vulnerable body.\n\n");
+			outputText("You groan around the Hound’s dick as you feel a pressure against your [asshole].  The beast squeezes your [ass] cheeks as he shoves his foot-long doggie cock into your rear. ");
+			player.buttChange(12 * 3, true, false, false);
+			outputText(" You yelp, realizing what’s to come, and try to wriggle away, but, pinned between the two Hounds, there’s no escape.  The Hounds growl in unison and you freeze, cowed by the two powerful males who want their way with your frightened, vulnerable body.\n\n");
 
 			outputText("After all, comes a thought in your fog-addled head, they’ve earned the right to do whatever they want to their prey.\n\n");
 
@@ -405,6 +407,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			fatigue(10);
 			player.orgasm();
+			player.slimeFeed();
 
 			menu();
 			doNext(13);
@@ -437,7 +440,7 @@ package classes.Scenes.Areas.Forest
 			addButton(1, "Prize?", whatsMyPrize);
 			addButton(2, "Stop", stopTheMadness);
 			addButton(3, "Surrender", surrenderToTheHounds);
-			addButton(4, "Question", howDareYou);
+			addButton(4, "Revenge", howDareYou);
 
 		}
 
@@ -606,7 +609,10 @@ package classes.Scenes.Areas.Forest
 					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
 
-					outputText("“<i>Take me, Huntsman,</i>” you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.\n\n");
+					outputText("“<i>Take me, Huntsman,</i>” you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
+					
+					player.cuntChange(12 * 3, true, true, false);
+					outputText("\n\n");
 
 					outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, holding you under the arms, fucking you against the tree.  The rough bark scratches your back as he thrusts deep inside you.  You feel the triple rings of his prepuce rubbing against your inner walls.\n\n");
 
@@ -625,7 +631,10 @@ package classes.Scenes.Areas.Forest
 					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, tweaking each nipple before trailing down your stomach, grasping [oneCock]\n\n");
 
-					outputText("“<i>Take me, Huntsman,</i>” you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.\n\n");
+					outputText("“<i>Take me, Huntsman,</i>” you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
+					
+					player.buttChange(12 * 3, true, true, false);
+					outputText("\n\n");
 
 					outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, one at the small of your back, steadying you, fucking you against the tree.  The other squeezes tight around your dick, jacking you off, gloved hand stroking you roughly in time to his thrusts.  The coarse bark of the tree scratches at your back as you feel the triple rings of his prepuce rubbing against the inner walls of your [asshole].  \n\n");
 
@@ -644,7 +653,10 @@ package classes.Scenes.Areas.Forest
 
 				if (player.hasVagina() && !player.hasCock())
 				{
-					outputText("With your [chest] against the rough bark, he lifts your [tail], exposing your [pussy] to the swelling head of his equine cock.  With a soft sound, he pushes between your lips, letting you feel each prepuce ring as they squeeze into you.\n\n");
+					outputText("With your [chest] against the rough bark, he lifts your [tail], exposing your [pussy] to the swelling head of his equine cock.  With a soft sound, he pushes between your lips, letting you feel each prepuce ring as they squeeze into you.");
+					
+					player.cuntChange(12 * 3, true, true, false);
+					outputText("\n\n");
 
 					outputText("You wrap your arms around the trunk of the tree as his hands grip your flanks.  His own equine legs begin thrusting him against you, his ribbed cock sliding in and out of your [pussy], the ridges of his horselike shaft massaging you from the inside.  The force of his fucking ginds your [chest] against the tree.");
 					if (player.biggestLactation() > 0) outputText("  The friction begins milking you, making you ooze milk down the trunk.");
@@ -680,6 +692,7 @@ package classes.Scenes.Areas.Forest
 			if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
 			else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
 			player.orgasm();
+			player.slimeFeed();
 
 			menu();
 			doNext(13);
