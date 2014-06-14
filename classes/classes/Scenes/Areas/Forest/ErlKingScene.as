@@ -604,7 +604,7 @@ package classes.Scenes.Areas.Forest
 					outputText("With your back against the tree, he guides your");
 					if (player.isBiped() || player.isDrider() || player.isGoo()) outputText(" [legs] up, letting them wrap around his back.");
 					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
-					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [breasts] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
+					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
 
 					outputText("“<i>Take me, Huntsman,</i>” you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.\n\n");
 
