@@ -339,7 +339,7 @@ private function dominateHeckelConclusion():void {
 	else if(player.cor < 33) outputText("You blush a bit at that, uncomfortable at your sex being so public but unwilling to stop.");
 	else if(player.cor < 66) outputText("You smirk a little at that while barely acknowledge the worry of being caught nagging at your consciousness.");
 	else outputText("You grin widely at that and secretly hope that the whole gym will come in to see their 'alpha' laid low.");
-	outputText("  Never stopping their probing motions, your fingertips dance through the hyena's sopping passageway, caresssing the underswell of her virile nutsack, and occasionally brush the sensitive fur along her inner thighs.  Heckel is squirming and writhing atop the table, dominated by the mere twitches of your digits, a panting bitch in heat just begging for rough impalement on [oneCock].");
+	outputText("  Never stopping their probing motions, your fingertips dance through the hyena's sopping passageway, caressing the underswell of her virile nutsack, and occasionally brush the sensitive fur along her inner thighs.  Heckel is squirming and writhing atop the table, dominated by the mere twitches of your digits, a panting bitch in heat just begging for rough impalement on [oneCock].");
 	outputText("\n\nStepping to the side but never leaving the hyena's arousal-engorged box empty, you flop your [cock biggest] across her nose");
 	if(player.cockTotal() > 2) outputText(", fanning the others across her neck and forehead, burying her in penis.");
 	else if(player.cockTotal() == 2) outputText(", dropping your [cock smallest] alongside it over her eyes, burying her in penis.");
