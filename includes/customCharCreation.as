@@ -61,7 +61,7 @@ public function customPCSetup():void {
 		player.tallness = 109;
 		player.tailVenom = 0;
 		player.tailRecharge = 0;
-		player.wingType = WING_TYPE_NONE;
+		player.wingType = WING_TYPE_DRACONIC_LARGE;
 		player.wingDesc = "non-existant";
 		player.earType = EARS_HUMAN;
 		player.lowerBody = LOWER_BODY_TYPE_HUMAN;

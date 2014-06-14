@@ -1562,9 +1562,13 @@ private function suckleTacularKats():void {
 	dynStats("sen", -2, "lus", -40);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
-	//You've now been milked, reset the timer for that
-	player.addStatusValue(StatusAffects.Feeder,1,1);
-	player.changeStatusValue(StatusAffects.Feeder,2,0);
+	
+	if (player.findPerk(PerkLib.Feeder) >= 0)
+	{
+		//You've now been milked, reset the timer for that
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+	}
 }
 
 //With Quiet Browser and Adjatha’s permission I have been working on finishing Katherine’s Employment Expansion so that it can be coded into CoC. This document covers a part of that. It has been mentioned before that meeting Katherine is quite complex. Many have suggested having an alternate recruitment route. Since I’m writing even more content for Kath I decided to tackle the recruitment route too.

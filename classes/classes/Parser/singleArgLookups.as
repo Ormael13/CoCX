@@ -82,7 +82,8 @@
 				"headplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "head" : "heads"; },
 				"prickplural"				: function(thisPtr:*):* { return (thisPtr.player.cocks.length == 1) ? "prick" : "pricks"; },
 				"boy"						: function(thisPtr:*):* { return thisPtr.player.mf("boy", "girl"); },
-				"guy"						: function(thisPtr:*):* { return thisPtr.player.mf("guy", "girl"); }
+				"guy"						: function(thisPtr:*):* { return thisPtr.player.mf("guy", "girl"); },
+				"wings"						: function(thisPtr:*):* { return thisPtr.wingsDescript(); }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}
 
 		}

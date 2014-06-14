@@ -40,6 +40,9 @@ public function OMultiCockDesc():String {
 public function tongueDescript():String {
 	return Appearance.tongueDescription(player);
 }
+public function wingsDescript():String {
+	return Appearance.wingsDescript(player);
+}
 
 public function ballsDescriptLight(forcedSize:Boolean = true):String {
 	return Appearance.ballsDescription(forcedSize, true, player);

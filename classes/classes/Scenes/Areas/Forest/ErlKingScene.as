@@ -239,7 +239,7 @@ package classes.Scenes.Areas.Forest
 			}
 		}
 
-		protected function repeatWildHuntEncounter():void
+		public function repeatWildHuntEncounter():void
 		{
 			clearOutput();
 
