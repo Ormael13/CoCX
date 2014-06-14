@@ -310,11 +310,11 @@ package classes.Scenes.NPCs {
 				
 				if (isabellaAccent())
 				{
-					outputText("  Isabella jumps from her chair, “Tea?  Ooh, ja!  I hear tea und milk iz sehr gut combination, ja?”  Well, she seems rather enthusiastic if nothing else.");
+					outputText("  Isabella jumps from her chair, “<i>Tea?  Ooh, ja!  I hear tea und milk iz sehr gut combination, ja?</i>”  Well, she seems rather enthusiastic if nothing else.");
 				}
 				else
 				{
-					outputText("  Isabella jumps from her chair, “Tea? Ooh, yes!  I hear tea and milk is a really good combination, yes? I've never had the opportunity to try it though...”  Well, she seems rather enthusiastic if nothing else.");
+					outputText("  Isabella jumps from her chair, “<i>Tea? Ooh, yes!  I hear tea and milk is a really good combination, yes? I've never had the opportunity to try it though...</i>”  Well, she seems rather enthusiastic if nothing else.");
 				}
 				
 				teaDrinkers++;
@@ -915,7 +915,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nMarble swallows before saying, \"<i>Do you have any idea of what " + player.short + " is trying to do?  " + player.mf("He","She") + " is trying to defeat the demons!  To stop the corruption for good!</i>\"");
 	 	outputText("\n\nAt this Clara bursts out laughing, \"<i>Oh, and save the world I take it?  This " + player.race() + "?  Don't be ridiculous.</i>\"");
 	 	outputText("\n\nMarble starts quivering in rage once more.");
-	 	outputText("\n\n\"<i>Seriously, there is no damn way someone as pathetic as " + player.short + " could accomplish that,</i>\" she continues while struggling to her feet.  </i>\"You need to be like a twenty foot giant, champion fighter, god master of magic to pull a stunt like wiping out the demons.  " + player.short + " is none of those things.  Do you really think someone who could would actually care about a lowly Lacta Bovine like you?</i>\"  Clara pokes her finger into Marble's chest.  \"<i>I guess the saying among our kind is right, 'the first daughter has the sourest milk.'</i>\"");
+	 	outputText("\n\n\"<i>Seriously, there is no damn way someone as pathetic as " + player.short + " could accomplish that,</i>\" she continues while struggling to her feet.  \"<i>You need to be like a twenty foot giant, champion fighter, god master of magic to pull a stunt like wiping out the demons.  " + player.short + " is none of those things.  Do you really think someone who could would actually care about a lowly Lacta Bovine like you?</i>\"  Clara pokes her finger into Marble's chest.  \"<i>I guess the saying among our kind is right, 'the first daughter has the sourest milk.'</i>\"");
 	 	outputText("\n\nYou can't help but muse that a cow-girl's endurance is something that should never be underestimated.  Their strength certainly isn't as great, but is still more than an average human's by a fair margin.  Making someone who is quite strong completely enraged is generally a bad idea.  Especially when that someone has been working on a farm for close to a year lifting increasingly heavy loads and training with a massive hammer.");
 	 	outputText("\n\nClara doesn't stand a chance.  In a matter of moments, she's brought to the ground once more, tightly bound up in a thick rope.  \"<i>Time to teach you a lesson!</i>\"  Marble yells with a look of rage in her eyes.");
 	 	outputText("\n\nHow should you punish Clara?  You could let Marble spank Clara, ");
@@ -1160,7 +1160,7 @@ package classes.Scenes.NPCs {
 		}
 		else
 		{
-		 	outputText("When you told me why you couldn't rely on my milk, the memories of all who I let drink directly from my breasts hit me all at once, and I didn't know what to think about all that.  What saved me was your love.  It went beyond the bliss of giving milk, and I thought that it was all I'd actually need.  The day you stopped me from running away for good, when you revealed your feelings for me, that you cared more about me than my milk, I felt wonderfu,l and my love for you blossomed full bloom that day.  ");
+		 	outputText("When you told me why you couldn't rely on my milk, the memories of all who I let drink directly from my breasts hit me all at once, and I didn't know what to think about all that.  What saved me was your love.  It went beyond the bliss of giving milk, and I thought that it was all I'd actually need.  The day you stopped me from running away for good, when you revealed your feelings for me, that you cared more about me than my milk, I felt wonderful and my love for you blossomed full bloom that day.  ");
 		}
 	 	outputText("Of course, you know what happened next,</i>\" she sighs.");
 
