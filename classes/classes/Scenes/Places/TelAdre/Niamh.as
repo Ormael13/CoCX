@@ -286,10 +286,10 @@ private function corruptOrBimboNiamhIntro():void {
 	outputText("maybe even a Succubus Milk?  You'll have to consider your options.  On the other hand, of course, something that corruptive would probably mutate her booze-filled boobs, most likely forcing her out of Tel'Adre altogether... and may fall back on your own head, to boot.  What do you do?");
 
 	//[Bimbo][Succubus][Maybe Later] (spacebar should select 'Maybe Later' as long as it's a repeatable
-	var bimbo:int = 0;
-	if(player.hasItem(consumables.BIMBOLQ)) bimbo = 3533;
-	var succMilk:int = 0;
+
 	outputText("\n\n(Editors Note: Succubi Milk Option Currently in beta)\n\n\n");
+	
+	menu();
 	if (player.hasItem(consumables.BIMBOLQ)) addButton(0, "Bimbo", giveNiamphBimboLiquer);
 	if (player.hasItem(consumables.SUCMILK)) addButton(1, "S.Milk", giveNiamphSuccubiMilk);
 	addButton(4, "Back", eventParser, 3532);

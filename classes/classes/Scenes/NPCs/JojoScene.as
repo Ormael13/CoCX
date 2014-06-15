@@ -873,14 +873,11 @@ private function amilyTeachingJojoBJ():void {
 	flags[kFLAGS.TIMES_AMILY_AND_JOJO_PLAYED_TIMES]++;
 	//Universal Outro
 	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.  [if (hasCock = true) \"Do you surprise them both by allowing Amily to demonstrate on you?\" else \"Do you want to watch them fuck?\"]");
-	var demonstrate:* = 0;
-	if(player.hasCock()) 
-		demonstrate = 3452;
-	simpleChoices("Demonstrate",BJRidesGETYOUONE,
-			"Watch",amilyAndJojoFuck,
-			"",0,
-			"",0,
-			"Leave",1);
+	
+	menu();
+	if (player.hasCock()) addButton(0, "Demonstrate", BJRidesGETYOUONE);
+	addButton(1, "Watch", amilyAndJojoFuck);
+	addButton(4, "Leave", eventParser, 1);
 }
 //Scene 1 Result: Male Gets BJ (Z)
 private function BJRidesGETYOUONE():void {
