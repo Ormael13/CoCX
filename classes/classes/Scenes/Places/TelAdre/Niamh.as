@@ -290,7 +290,9 @@ private function corruptOrBimboNiamhIntro():void {
 	if(player.hasItem(consumables.BIMBOLQ)) bimbo = 3533;
 	var succMilk:int = 0;
 	outputText("\n\n(Editors Note: Succubi Milk Option Currently in beta)\n\n\n");
-	simpleChoices("Bimbo",giveNiamphBimboLiquer,"S.Milk",giveNiamphSuccubiMilk,"",0,"",0,"Back",3532);
+	if (player.hasItem(consumables.BIMBOLQ)) addButton(0, "Bimbo", giveNiamphBimboLiquer);
+	if (player.hasItem(consumables.SUCMILK)) addButton(1, "S.Milk", giveNiamphSuccubiMilk);
+	addButton(4, "Back", eventParser, 3532);
 }
 //[Maybe Later]
 public function maybeLaterNiamh():void {
