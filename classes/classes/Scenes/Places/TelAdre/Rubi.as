@@ -1456,12 +1456,11 @@ private function rubiAppearance():void {
 	//(red/siren skin)
 	else outputText("dusky black");
 	outputText(", [rubi eir] ");
-	if(flags[kFLAGS.RUBI_EYE_TYPE] == 1) outputText("slitted ");
+	//if(flags[kFLAGS.RUBI_EYE_TYPE] == 1) outputText("slitted ");
 	if(flags[kFLAGS.RUBI_EYE_TYPE] == 0 || rubiBimbo()) outputText("green");
 	else if(flags[kFLAGS.RUBI_EYE_TYPE] == 1)
-		outputText("purple");
-	else
-		outputText("black");
+		outputText("solid black");
+	//else outputText("black");
 	outputText(" eyes framed with eyeliner, belying [rubi eir] masculine origins.  ");
 	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) outputText("Two tiny horns extend upwards from [rubi eir] hairline, solid black in color.  ");
 	outputText("A pair of ");
