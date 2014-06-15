@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class InfestedHellhoundScene extends BaseContent
 	{
