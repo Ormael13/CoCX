@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs {
+﻿package classes.Scenes.NPCs {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
@@ -3433,22 +3433,19 @@ private function giveMarbleTailjobRelease():void {
 	doNext(1);
 }
 
-
-
 // TheDarkMaster's Marble in her Milker
 private function milkMarble():void
 {
 	clearOutput();
-	
 	if( flags[kFLAGS.MARBLE_MILKED_BEFORE] < 1 )
 	{
-		outputText( "With an unusually bright look in her eye, Marble comes up to you and asks, \"<i>Hey sweetie, I was just about to go get milked, when I realized that you've never actually been with me while I was being milked.  How would you feel like getting a tour of the set up that Whitney has for me?</i>\"  Then a mischievous look crosses her face, \"<i>Maybe we could even do something a little, intimate too?</i>\"" );
+		outputText( "With an unusually bright look in her eye, Marble comes up to you and asks, \"<i>Hey sweetie, I was just about to go get milked when I realized that you've never actually been with me for it.  How would you feel like getting a tour of the setup that Whitney has for me?</i>\"  Then a mischievous look crosses her face, \"<i>Maybe we could even do something a little... intimate too?</i>\"" );
 		
 		outputText( "[pg]There is no harm in checking out her stall, at least.  You agree to go with her." );
 		
-		outputText( "[pg]The two of you hold hands and quickly warp over to Whitney's farm, and with a wave to the proprietor, Marble escorts you to the barn.  The smells of the place are as familiar as ever, but this particular trip has an unusual feel to it, since you're going to visit a room you've never been in before." );
+		outputText( "[pg]The two of you hold hands and quickly warp over to Whitney's farm and, with a wave to the proprietor, Marble escorts you to the barn.  The smells of the place are as familiar as ever, but this particular trip has an unusual feel to it since you're going to visit a room you've never been in before." );
 		
-		outputText( "[pg]Your lover shows you the stall with her name on it, and ushers you inside.  The room is a pretty cozy affair, with a large padded chair and small table in the center, a waist high railing on one side, and a long bench in on the other.  The milking machine hangs from the ceiling on a rail, letting it be used in any part of the room." );
+		outputText( "[pg]Your lover shows you the stall with her name on it and ushers you inside.  The room is a pretty cozy affair, with a large padded chair and small table in the center, a waist high railing on one side, and a long bench in on the other.  The milking machine hangs from the ceiling on a rail, allowing it be used in any part of the room." );
 		
 		outputText( "[pg]Your amorous guide gives an animated rundown of the uses of her pieces of furniture, the chair is what she usually sits in while reading, the bar if she's got stiff legs, and the bench if she's really worn out.  Once finished, you do notice there is a book sitting on the table right now and ask Marble what she's reading.  She uncharacteristically bites her thumb a bit nervously and says in a low voice that it's the book she was reading while doing research when you were addicted to her." );
 		
@@ -3477,7 +3474,7 @@ private function milkMarble():void
 	if( flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 ) flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] = 0;
 	menu();
 	addButton( 0, "Cunnilingus", milkMarbleCunnilingling );
-	if( player.cockThatFits(marbleCuntCapacity()) > 0 && (player.isBiped() || player.isNaga() || player.isGoo()) ) addButton( 1, "Fuck Her", milkMarbleFuckDatCowPussy );
+	if( player.cockThatFits(marbleCuntCapacity()) >= 0 && (player.isBiped() || player.isNaga() || player.isGoo()) ) addButton( 1, "Fuck Her", milkMarbleFuckDatCowPussy );
 	if( player.hasVagina() && flags[kFLAGS.MARBLE_DICK_TYPE] > 0 && (player.isBiped() || player.isGoo()) ) addButton( 2, "Take Her", milkMarbleTakeHerDick );
 	addButton( 3, "Her on Bar", milkMarbleOnTheBar );
 	addButton( 4, "Leave", milkMarbleNoMilking );
@@ -3488,11 +3485,11 @@ private function milkMarbleCunnilingling():void
 {
 	clearOutput();
 	
-	outputText( "You suggest that maybe she's like it if you licked her vagina while being milked." );
+	outputText( "You suggest that maybe she'd like it if you licked her vagina while being milked." );
 	
-	outputText( "[pg]A huge smile spreads across her face, \"<i>Oh sweetie, that sounds like it would be wonderful!  You're the best, you know that?</i>\"" );
+	outputText( "[pg]A huge smile spreads across her face, \"<i>Oh sweetie, that sounds like it would be wonderful!  You're the best; you know that?</i>\"" );
 	
-	outputText( "[pg]She takes a seat on the edge of the chair in the middle of the room, and spreads her legs wide.  Her skirt slips up her " );
+	outputText( "[pg]She takes a seat on the edge of the chair in the middle of the room and spreads her legs wide.  Her skirt slips up her " );
 	if( flags[kFLAGS.MARBLE_BOVA_LEVEL] < 1 ) outputText( "semi-human" );
 	else outputText( "inhuman" );
 	outputText( " legs, giving you a clear look at her waiting womanhood.  With a coy sideways glance, she wiggles her fingers in invitation for you to go down on her." );
@@ -3500,21 +3497,21 @@ private function milkMarbleCunnilingling():void
 	outputText( "[pg]In order to get the show on the road, you " );
 	if( player.isBiped() ) outputText( "get down on your knees, and slowly crawl forward" );
 	else outputText( "lower your body close to the ground, and slowly inch forward" );
-	outputText( " like an animal whose found something they want.  When you get close to to her, your lover runs a finger up the inside of her thigh, as her tail sneaks its way up around her waist and drapes itself over your prize." );
+	outputText( " like an animal who's found something they want.  When you get close to to her, your lover runs a finger up the inside of her thigh as her tail sneaks its way up around her waist and drapes itself over your prize." );
 	
-	outputText( "[pg]Arriving at a hard brown hoof, your wrap your arm about her coarsely furred leg and rest your head against the bestial appendage.  You stroke and run your fingers through her fur to a soft giggle above you while the machine continues to pump and whirl.  You tease her a bit more, before raising yourself up, bit by bit, until you're at eye level with her tail covered opening, a small tuft of hair decorated with a pink bow hiding your goal.  No, it's a present gift wrapped for you." );
+	outputText( "[pg]Arriving at a hard brown hoof, you wrap your arm about her coarsely furred leg and rest your head against the bestial appendage.  You stroke and run your fingers through her fur to a soft giggle above you while the machine continues to pump and whirl.  You tease her a bit more before raising yourself up, bit by bit, until you're at eye level with her tail-covered opening. A small tuft of hair decorated with a pink bow is all that hides your goal.  No, it's a present, gift wrapped for you." );
 	
 	outputText( "[pg]You take hold of two strands of the bow and tell Marble she shouldn't have given you such a gift." );
 	
-	outputText( "[pg]\"<i>Oh not at all sweetie, you deserve it!</i>\"" );
+	outputText( "[pg]\"<i>Oh, not at all sweetie.  You deserve it!</i>\"" );
 	
 	outputText( "[pg]You slip the bow open, unwrapping your present, and pull her tail aside to reveal her moist and inviting opening and exclaim that it was what you always wanted!" );
 	
-	outputText( "[pg]\"<i>Oh, I'm so glad you like it, why don't you try it out right now?</i>\"" );
+	outputText( "[pg]\"<i>Oh, I'm so glad you like it.  Why don't you try it out right now?</i>\"" );
 	
-	outputText( "[pg]She doesn't have to give you the suggestion twice, you dive in at once, sticking your [tongue] deep into her recesses, and tasting her cow-girl nectar.  Her folds accept you easily, and an eager moan slips out of the woman above you.  Her fingers run over your [hair], while you withdraw from your initial sortie to scout out the entrance more." );
+	outputText( "[pg]She doesn't have to give you the suggestion twice.  You dive in at once, sticking your [tongue] deep into her recesses, and tasting her cow-girl nectar.  Her folds accept you easily, and an eager moan slips out of the woman above you.  Her fingers run over your [hair] while you withdraw from your initial sortie to scout out the entrance more." );
 	
-	outputText( "[pg]In response to your tugging and toying with her outer folds, Marble's hips jerk forward slightly, and you see her love button pulse and engorge itself.  There is a happy moan, and her tail manages to find itself flicking your face.  You swat the pesky wrappings away, and continue your efforts at bringing your mate to the height of pleasure.  The next target, her clit." );
+	outputText( "[pg]In response to your tugging and toying with her outer folds, Marble's hips jerk forward slightly, and you see her love button pulse and engorge itself.  There is a happy moan, and her tail manages to find itself flicking your face.  You swat the pesky wrappings away and continue your efforts at bringing your mate to the height of pleasure.  The next target: her clit." );
 	
 	outputText( "[pg]There is a long drawn out cry of joy when you bring your [tongue] to the source of her womanly pleasure.  " );
 	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText( "With the first flick across its pink flesh, Marble grabs ahold of her [Marble.cock], and tightly squeezes it, slowly pushing her hand down it." );
@@ -3527,23 +3524,21 @@ private function milkMarbleCunnilingling():void
 	
 	outputText( "[pg]\"<i>Ahhhhooooo!</i>\"  The wonderful bovine women gives a grateful cry of pleasure as your teeth nip into her nub of engorged skin and a burst of liquid sprays out onto your chin.  " );
 	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText ("Of course, there is also a spurt of white which sprays out over her lap and your head.  " );
-	outputText( "Obviously while the milkers don't normally get her aroused, they can seriously amplify the effects of any pleasure she gets." );
+	outputText( "Obviously, while the milkers don't normally get her aroused, they can seriously amplify the effects of any pleasure she gets." );
 	
 	outputText( "[pg]You ask your lover if that was good." );
 	
-	outputText( "[pg]\"<i>Lovely, thanks for giving me the best start to being milked sweetie.</i>\"  She notices that you're all wet, \"<i>Oh, here, let me get that for you.</i>\" and she wipes the fluid off your [face] with a grin." );
+	outputText( "[pg]\"<i>Lovely. Thanks for giving me the best start to being milked sweetie.</i>\"  She notices that you're all wet, \"<i>Oh, here, let me get that for you.</i>\" and she wipes the fluid off your [face] with a grin." );
 	
-	outputText( "[pg]You then do her bow back up on her tail, and say you'll save the rest for later." );
+	outputText( "[pg]You then tie her bow back up on her tail and say you'll save the rest for later." );
 	
-	outputText( "[pg]\"<i>Oh, I'll be looking forward to it, see you later sweetie!</i>\"  She gives you a slightly awkward peck on the cheek around the milking tubes, and sends you in a blissful state." );
-	
+	outputText( "[pg]\"<i>Oh, I'll be looking forward to it.  See you later sweetie!</i>\"  She gives you a slightly awkward peck on the cheek around the milking tubes, and sends you in a blissful state." );
 	
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	var pLust:int = int( 20 + ((player.lib + player.cor) / 10) );
 	dynStats( "lus", pLust );
 	dynStats( "sen", 1 );
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 
@@ -3552,61 +3547,66 @@ private function milkMarbleFuckDatCowPussy():void
 	var x:int = player.cockThatFits( marbleCuntCapacity() );
 	clearOutput();
 	
-	outputText( "You wonder aloud if maybe she'd be interested in a little intercourse action, you'd be perfectly prepared to provide for her." );
+	outputText( "You wonder aloud if maybe she'd be interested in a little intercourse action. You'd be perfectly prepared to provide for her." );
 	
 	outputText( "[pg]\"<i>Hmm, well, your offer is tempting, but I'm going to have to see what's available before I make a final decision.</i>\"" );
 	
-	outputText( "[pg]With a flourish, you remove your [ArmorName] and do a little sweep over your " + cockDescript(x) + ", and ask her if everything is to her needs." );
+	outputText( "[pg]With a flourish, you remove your [armor] and do a little sweep over your " + cockDescript(x) + ", asking her if everything is to her needs." );
 	
-	if( 1 /*PC is wearing fetish clothes and their cock is visible, Not sure how to check for this - noobsaleh*/ ) outputText( "[pg]\"<i>I appreciate the little show, but I could already see you just fine, come closer so I can get a better idea.</i>\"" );
-	else outputText( "\"<i>Hmm, yes, I think that will work.  Come closer so I can make a more thorough inspection.</i>\"" );
+	if((player.findPerk(PerkLib.BulgeArmor) >= 0 || player.modArmorName == "backless female teacher's clothes" || player.modArmorName == "bridle bit and saddle set" || player.modArmorName == "headdress, necklaces, and many body-chains" || player.modArmorName == "bondage patient clothes" || player.modArmorName == "crotch-revealing clothes" || player.modArmorName == "cute servant's clothes" || player.modArmorName == "maid's clothes" || player.modArmorName == "servant's clothes") && player.hasCock())
+	{
+		outputText( "[pg]\"<i>I appreciate the little show, but I could already see you just fine.  Come closer so I can get a better idea.</i>\"" );
+	}
+	else outputText( "[pg]\"<i>Hmm, yes, I think that will work.  Come closer so I can make a more thorough inspection.</i>\"" );
 
 	outputText( "[pg]You step forward and allow your lover to get \"acquainted\" with your goods." );
 	
-	outputText( "[pg]She squats down, and makes a show of looking you over carefully, humming to herself along the way.  Her breath tickling your skin slightly, and quickly bringing you to full hardness.  With one finger, she taps your tip a few times, then runs it along your glans.  Finally she finishes her examination of your manhood by gripping it in her hand, and giving it a few experimental pumps." );
+	outputText( "[pg]She squats down and makes a show of looking you over carefully, humming to herself along the way.  Her breath tickling your skin slightly and quickly bringing you to full hardness.  With one finger, she taps your tip a few times, then runs it along your glans.  Finally she finishes her examination of your manhood by gripping it in her hand and giving it a few experimental pumps." );
 	
-	outputText( "[pg]She stands back up and looks at you with a serious expression on her face.  \"<i>Your penis has met my expectations, and I do believe that I will be taking it into my vagina.  Please lay down on the bench over there, and we can begi-hahahahaha!</i>\"  Her face finally cracks and she bursts out laughing over the little game the two of you have been playing." );
+	outputText( "[pg]She stands back up and looks at you with a serious expression on her face.  \"<i>Your penis has met my expectations, and I do believe that I will be taking it into my vagina.  Please lay down on the bench over there and we can begi-hahahahaha!</i>\"  Her face finally cracks and she bursts out laughing over the little game the two of you have been playing." );
 	
 	if( player.tallness < 68 )
 	{
-		outputText( "[pg]\"<i>Oh sweetie,</i>\" she pulls you into a deep hug against her chest, \"<i>it's too much!  Hah, hahahahaha!  No more joking around, I need you inside me now.</i>\"  She carefully carries you over to the bench, and lays you down on your back, then straddles the bench above your " + cockDescript(x) + ".  \"<i>Are you ready for me?</i>\" she calls out in a deep husky voice, breasts heaving, tail swishing, and all the while the milker machine continues to hum above her." );
+		outputText( "[pg]\"<i>Oh sweetie.</i>\"  She pulls you into a deep hug against her chest.  \"<i>It's too much!  Hah, hahahahaha!  No more joking around.  I need you inside me now.</i>\"  She carefully carries you over to the bench and lays you down on your back, then straddles the bench above your " + cockDescript(x) + ".  \"<i>Are you ready for me?</i>\" she calls out in a deep husky voice, breasts heaving, tail swishing, and all the while the milker machine continues to hum above her." );
 	}
 	else
 	{
-		outputText( "[pg]You pull her into a deep hug as she continues to be in hysterics, and gently caress her hair.  You assure her that if the games are too much, you can skip straight to the action." );
+		outputText( "[pg]You pull her into a deep hug as she continues to her hysterics and gently caress her hair.  You assure her that if the games are too much, you can skip straight to the action." );
 		
-		outputText( "[pg]After a moment she settles down and returns the embrace.  \"<i>Hmmhmm, yes, no more joking around, I need you inside me now.</i>\"" );
+		outputText( "[pg]After a moment she settles down and returns the embrace.  \"<i>Hmmhmm, yes.  No more joking around.  I need you inside me now.</i>\"" );
 		
-		outputText( "[pg]You break away from her and casually walk over to the bench and lay down on top of it.  Marble follows immediately behind you, and before you've even finished laying down she's already standing above, with a hungry look on her face, breasts heaving, and tail swishing." );
+		outputText( "[pg]You break away from her and casually walk over to the bench and lay down on top of it.  Marble follows immediately behind you, and before you've even finished laying down, she's already standing above with a hungry look on her face, breasts heaving, and tail swishing." );
 		
 		outputText( "[pg]\"<i>Are you ready for me?</i>\" she asks in a deep husky voice." );
 	}
 	
 	outputText( "[pg]With a grin, you tell her you're always ready for her." );
 	
-	outputText( "[pg]The words have barely left your mouth before Marble drops her waist and engulfs your " + cockDescript(x) + ", swallowing it up to the base in a single motion.  \"<i>Ohhhhhh, yes!</i>\"  Marble happily rubs her belly with one hand, while another cubs her breast.  She shakes her hips side to side a couple times, savoring the feeling of your cock rubbing back and forth across her insides." );
+	outputText( "[pg]The words have barely left your mouth before Marble drops her waist and engulfs your " + cockDescript(x) + ", swallowing it up to the base in a single motion.  \"<i>Ohhhhhh, yes!</i>\"  Marble happily rubs her belly with one hand, while another cubs her breast.  She shakes her hips from side to side a couple times, savoring the feeling of your cock rubbing back and forth across her insides." );
 	
-	outputText( "[pg]Then both hands come down and push down on your stomach, and she begins a rapid rocking motion forward and backwards on your member, keeping every bit of your length deep inside her and putting it into a spinning trip around her passage, while she starts giving low happy moans of pleasure.  You look up at your lover, and get a good view of the expression of bliss upon her face, but also get a chance to see the milk draining from her chest." );
+	outputText( "[pg]Then both hands come down and push down on your stomach, and she begins a rapid forward and backward rocking motion on your member, keeping every bit of your length deep inside her, putting it into a spinning trip around her passage while she starts giving low happy moans of pleasure.  You look up at your lover and get a good view of the expression of bliss upon her face, but also get a chance to see the milk draining from her chest." );
 	
-	outputText( "[pg]With each push and pull upon your member, there is a rapid spurt of milk that the machine is only just able to keep up with.  After a moment, you realize that it isn't actually able to keep up, her milk is coming out too fast for the milker!  You try to warn your bovine lover, but it's too late.  With a pop, the suction cups fly off of Marble's breasts, spraying milk everywhere, and there is a bang from the machine as it shuts down." );
+	outputText( "[pg]With each push and pull on your member, there is a rapid spurt of milk that the machine is only just able to keep up with.  After a moment, you realize that it isn't actually able to keep up, her milk is coming out too fast for the milker!  You try to warn your bovine lover, but it's too late.  With a pop, the suction cups fly off of Marble's breasts, spraying milk everywhere, and there is a bang from the machine as it shuts down." );
 	
 	outputText( "[pg]\"<i>Oh no!  Damn it, now what?</i>\" Marble stops moving and looks around worried." );
 	
 	if( player.findPerk(PerkLib.MarblesMilk) >= 0 )
 	{
-		outputText( "[pg]You quickly sit up and take it upon yourself to continue the efforts of the milking machine, bringing with your actions a surprised gasp, followed by a contented sigh, and Marble resuming the movements of her hips.  The ambrosia of her breasts suddenly increases in quantity once more, and it actually feels like it's being pumped into your mouth.  You're happy to rise to the challenge of drinking it all while Marble continues to ride your body." );
+		outputText( "[pg]You quickly sit up and take it upon yourself to continue the efforts of the milking machine, bringing with your actions a surprised gasp, followed by a contented sigh, and Marble resuming the movements of her hips.  The ambrosia from her breasts increases in quantity once more, and it actually feels like it's being pumped into your mouth.  You're happy to rise to the challenge of drinking it all while Marble continues to ride your body." );
 		
 		outputText( "[pg]Where the machine failed to handle Marble's increased production, you succeed in draining everything.  Heck, the feel of yourself bouncing around Marble's passage while she pushes against you and bounces back and forth only edges you on further than normal.  With one hand on her shoulder for leverage, you use the other to massage her bosom and coax even more milk out of her, greedily devouring as much of your favorite drug as possible." );
 		
 		outputText( "[pg]Almost an hour later, the flow from both of Marble's breasts has slowed to a trickle, and both of you have cum at least three times in a haze of both sexual and chemical pleasure.  Marble gives a contented sigh and informs you that she thinks she'll be taking a nap now, wondering whether or not she should make a habit of breaking the milker, given what happens afterwards." );
-		
+		player.orgasm();
+		player.orgasm();
 		player.orgasm();
 		dynStats( "lus", 20 );
 		flags[kFLAGS.MARBLE_LUST] = 15;
-		dynStats( "lib", 1 );
+		dynStats( "lib", .3 );
 		if( player.cor < player.statusAffectv4(StatusAffects.Marble) ) dynStats( "cor", 1 );
-		dynStats( "tou", 1 );
-		dynStats( "str", 1 );
+		dynStats( "tou", .1 );
+		dynStats( "str", .1 );
+		dynStats( "sen", -2 );
 		marblePreggoChance(1);
 	}
 	else if( player.statusAffectv4(StatusAffects.Marble) > 30 )
@@ -3617,40 +3617,38 @@ private function milkMarbleFuckDatCowPussy():void
 		
 		outputText( "[pg]After rubbing against you for a bit, the stimulation on your length just isn't enough for you anymore, and try to start thrusting up into your lover's passage.  Marble seems to be in agreement in what she wants, and her motions switch from a gentle rocking into meeting each of your thrusts with a pumping of her own, trying to drain your manhood while you try to drain her breasts." );
 		
-		outputText( "[pg]Finally the two of you cry out together in orgasmic pleasure, and you spray out your seed into her passage, mixing with a rush of her own fluids into a slurry of sexual fluids sloshing around your " + cockDescript(x) + ".  The two of you settle down, with Marble laying down on you contentedly for a moment." );
+		outputText( "[pg]Finally the two of you cry out together in orgasmic pleasure, and you spray out your seed into her passage, mixing with a rush of her own fluids into a slurry of sex juices sloshing around your " + cockDescript(x) + ".  The two of you settle down, with Marble laying down on you contentedly for a moment." );
 		
-		outputText( "[pg]Suddenly a voice with a Southern drawl call out from above you, \"<i>You kids havin a lots of fun down there?</i>\"" );
+		outputText( "[pg]Suddenly a voice with a southern drawl call out from above you, \"<i>You kids havin a lots of fun down there?</i>\"" );
 		
-		outputText( "[pg]The two of you stare at each other in surprise, and tense up." );
+		outputText( "[pg]The two of you stare at each other in surprise and tense up." );
 		
-		outputText( "[pg]\"<i>Next time, please try to be a bit gentler on the equipment, if ya don't mind.  I'd rather not have to do fix it every time you two get frisky.</i>\"  There is a slam of metal on metal, as Whitney finishes working on the broken milker and it whirls back to life." );
+		outputText( "[pg]\"<i>Next time, please try to be a bit gentler on the equipment, if ya don't mind.  I'd rather not have to do fix it every time you two get frisky.</i>\"  There is a slam of metal on metal as Whitney finishes working on the broken milker and it whirls back to life." );
 		
-		outputText( "[pg]You and Marble each look each other in the eye and burst out laughing.  You then help her reattach the cups and and excuse yourself.  Just as you're leaving, Marble blows you a kiss, and says, \"<i>We should definitely do this again some time, let's just give Whitney a break first.</i>\"" );
+		outputText( "[pg]You and Marble each look each other in the eye and burst out laughing.  You then help her reattach the cups and and excuse yourself.  Just as you're leaving, Marble blows you a kiss and says, \"<i>We should definitely do this again sometime.  Let's just give Whitney a break first.</i>\"" );
 		
 		player.orgasm();
 		flags[kFLAGS.MARBLE_LUST] = 5;
-		dynStats( "sen", 1 );
+		dynStats( "sen", -2 );
 	}
 	else
 	{
-		outputText( "[pg]You assure Marble that it will be fine, and grab a bucket that was sitting under the bench and offer to continue her milking by hand.  She looks like she is going to object for a moment, before nodding.  You help her turn herself around while keeping your manhood firmly embedded within her.  She puts the bucket down at the end of the bench, and you reach your hands around her to grip her massive mammaries." );
+		outputText( "[pg]You assure Marble that it will be fine and grab a bucket that was sitting under the bench and offer to continue her milking by hand.  She looks like she is going to object for a moment before nodding.  You help her turn herself around while keeping your manhood firmly embedded within her.  She puts the bucket down at the end of the bench, and you reach your hands around her to grip her massive mammaries." );
 		
-		outputText( "[pg]You roll the soft pliable flesh around in your hands for a few moments, with appreciative moans from their owner.  Then you start pinching and pulling on sensitive " + marbleNips() + ", sending a jolt through her body that makes her tail shoot straight up.  Almost instantly after that she resumes rubbing herself against your manhood, sending it sweeping through her insides once more while her delightfully shaped rear end slides around against your waist." );
+		outputText( "[pg]You roll the soft pliable flesh around in your hands for a few moments, garnering appreciative moans from their owner.  Then you start pinching and pulling on her " + marbleNips() + ", sending a jolt through her body that makes her tail shoot straight up.  Almost instantly after that, she resumes rubbing herself against your manhood, sending it sweeping through her insides once more while her delightfully shaped rear-end slides around against your waist." );
 		
-		outputText( "[pg]You give a gasp of pleasure of your own, and try your best to properly milk her nipples in the same way that the cows back home were milked, in spite of how roughly your milkee is fucking right now.  If anything, being milked has made her more aggressive, and her tail is swishing around madly." );
+		outputText( "[pg]You give a gasp of pleasure of your own and try your best to properly milk her nipples in the same way that cows back home were milked, in spite of how roughly your milkee is fucking right now.  If anything, being milked has made her more aggressive, and her tail is swishing around madly." );
 		
-		outputText( "[pg]It takes a few minutes of effort, but when you find yourself finally closing with the peak of an orgasm, there is a spray, followed by a ping, and you finally manage to get some milk flowing from Marble's breasts.  Just in time for her to scream in pleasure and drive herself back into you more forcefully than before.  Her tail shoots straight up again, twitches twice, and you're thrown over the edge as well." );
+		outputText( "[pg]It takes a few minutes of effort, but when you find yourself finally closing with the peak of an orgasm, there is a spray followed by a ping. You finally manage to get some milk flowing from Marble's breasts, just in time for her to scream in pleasure and drive herself back into you more forcefully than before.  Her tail shoots straight up again, twitches twice, and you're thrown over the edge as well." );
 		
 		outputText( "[pg]The two of you cum together at least three times over the next hour or so, and while your hand milking certainly isn't as efficient as Whitney's machine, it manages well enough in satisfying your bovine lover.  When you go to tell the farmer what happened to her device, she is rather surprised at just how nonchalant and pleasant the two of you were about it.  As she put it, \"<i>Most folks generally feel bad when they go round breaking other people's things.</i>\"  Though, you're certain she knew what you'd been up to." );
 		
 		player.orgasm();
 		flags[kFLAGS.MARBLE_LUST] = 10;
-		dynStats( "sen", 1 );
+		dynStats( "sen", -2 );
 		marblePreggoChance(1);
 	}
-	
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 
@@ -3662,44 +3660,45 @@ private function milkMarbleTakeHerDick():void
 	
 	outputText( "[pg]She looks thoughtful for a moment, tapping her finger against her lips while her tail swishes back and forth.  With the tubes coming off of her nipples, it actually looks rather comical." );
 	
-	outputText( "[pg]Spotting your look, she frowns at you, \"<i>Oh, you think this is silly do you, [name]?  I'll have you know that I'm seriously trying to figure out how to make this work.</i>\"  She indicates her, rather physical, attachment to the room, and the furnishings it has available to it." );
+	outputText( "[pg]Spotting your look, she frowns at you, \"<i>Oh, you think this is silly do you, [name]?  I'll have you know that I'm seriously trying to figure out how to make this work.</i>\"  She indicates her rather physical attachment to the room, and the furnishings it has available to it." );
 	
-	outputText( "[pg]You give it a little thought, then suggest why don't you lean up against that railing while she fucks you from behind." );
+	outputText( "[pg]You give it a little thought, then suggest that you could lean up against that railing while she fucks you from behind." );
 	
 	outputText( "[pg]\"<i>Take you from behind, huh?  I'd really rather look into your eyes while I'm having sex, but there aren't many options here, are there?</i>\"" );
 	
 	outputText( "[pg]To silence her complaining, you quickly strip" );
 	if( player.tallness < 56 ) outputText( ", grab a box," );
-	outputText( " and lean against the railing, then shake your [ass] in her direction with your [vagina] wet with arousal on full display.  You look back at her to see if you're having the desired effect." );
+	outputText( " and lean against the railing, then shake your [ass] in her direction with your vagina on full display, wet with arousal.  You look back at her to see if you're having the desired effect." );
 	
-	outputText( "[pg]Marble is licking her lips with a nervous look on her face, while holding her tail in her hand and running her fingers through it's brush.  \"<i>You make a very persuasive argument, sweetie.  Plus, if you're looking at me like that, I guess I really don't have anything to complain about, do I?</i>\"" );
+	outputText( "[pg]Marble is licking her lips with a nervous look on her face while holding her tail in her hand and running her fingers through it's brush.  \"<i>You make a very persuasive argument, sweetie.  Plus, if you're looking at me like that, I guess I really don't have anything to complain about, do I?</i>\"" );
 	
-	outputText( "[pg]She strips off her short skirt, and takes up a position behind you, hands on your hips and erect cock pressed against your entrance.  You look down between your legs and catch sight of her tail hanging down between her legs, the barest hint of movement to it.  \"<i>Well sweetie, are you ready for me?</i>\"" );
+	outputText( "[pg]She strips off her short skirt and takes up a position behind you, hands on your hips and erect cock pressed against your entrance.  You look down between your legs and catch sight of her tail hanging down between her legs, the barest hint of movement to it.  \"<i>Well sweetie, are you ready for me?</i>\"" );
 	
-	outputText( "[pg]You retort that you wouldn't have been if you hadn't suggested this in the first place." );
+	outputText( "[pg]You retort that if you weren't, you wouldn't have suggested this in the first place." );
 	
 	outputText( "[pg]\"<i>Heh, good point.  Alright, here I go...</i>\"  She slowly works her way inside you, inch by inch.  " );
 	if( player.vaginalCapacity() < flags[kFLAGS.MARBLE_DICK_LENGTH] * flags[kFLAGS.MARBLE_DICK_THICKNESS] ) outputText( "With each new bit of length inserted, she waits a few moments for you to adjust to her size, letting you fill out to accommodate her.  " );
-	player.cuntChange( 8, true );
 	outputText( "With the final bit of her inserted into you, her tail suddenly shoots straight up out of your sight, and she lets out a long exaggerated sigh of pleasure as the milking machine continues to whirl above her." );
+	player.cuntChange( 8, true, true, false );
 	
-	outputText( "[pg]\"<i>Oh sweetie, you feel so wonderful, I actually feel a bit strange right now, like I want to....</i>\"  She starts thrusting into your entrance with great gusto, eliciting a surprised gasp from you; Marble isn't normally this energetic when it comes to sex!  Being milked is probably making her more aggressive than usual, though given how good she is making you feel, you can't really complain." );
+	outputText( "[pg]\"<i>Oh sweetie, you feel so wonderful.  I actually feel a bit strange right now, like I want to....</i>\"  She starts thrusting into your entrance with great gusto, eliciting a surprised gasp from you; Marble isn't normally this energetic when it comes to sex!  Being milked is probably making her more aggressive than usual, though given how good she is making you feel, you can't really complain." );
 	
 	outputText( "[pg]She starts playing with your backside with her hand, massaging your " );
-	if( player.buttRating <= 4 && !player.isGoo() ) outputText( "taught" );
+	if( player.buttRating <= 4 && !player.isGoo() ) outputText( "taut" );
 	else outputText( "jiggling" );
-	outputText( " flesh while her seven inch length continues to push and pull into your womanhood.  Egged on by her enthusiasm, you start putting in some effort into the sex yourself, by pushing your backside tight against her with each push forward and shaking it back and forth with each pull out of your interior." );
+	outputText( " flesh while her " + num2Text(Math.round(flags[kFLAGS.MARBLE_DICK_LENGTH])) + " inch length continues to push and pull into your womanhood.  Egged on by her enthusiasm, you start putting in some effort into the sex yourself by pushing your backside tight against her with each push forward and shaking it back and forth with each pull out of your interior." );
 	
-	outputText( "[pg]The stimulation sends Marble wild, and in short order she is flooding you with her hermaphroditic seed.  However, she doesn't slow down at all, and simply continues to lovingly abuse your backside and mound of pleasure.  You look down between your legs once more to see her tail has started swinging lengthwise with her body, every last inch of her body and mind are fixed on breeding with you, triggering a triumphant laugh from you as you cum yourself." );
+	outputText( "[pg]The stimulation sends Marble wild, and in short order she is flooding you with her hermaphroditic seed.  However, she doesn't slow down at all and simply continues to lovingly abuse your backside and mound of pleasure.  You look down between your legs once more to see her tail has started swinging lengthwise with her body, every last inch of her body and mind are fixed on breeding with you, triggering a triumphant laugh from you as you cum yourself." );
 	
-	outputText( "[pg]Nearly an hour later, Marble finally calms down and looks down at what she has managed to do to you.  \"<i>Oh my!  Sweetie, I'm sorry, I'm not sure what came over me...</i>\" she freezes when she sees your happy expression, and you inform her that you rather liked seeing that side of her, the two of you will have to do this again some time." );
+	outputText( "[pg]Nearly an hour later, Marble finally calms down and looks down at what she has managed to do to you.  \"<i>Oh my!  Sweetie, I'm sorry, I'm not sure what came over me...</i>\" she freezes when she sees your happy expression, and you inform her that you rather liked seeing that side of her. The two of you will have to do this again some time." );
 	
 	player.orgasm();
+	player.orgasm();
+	player.orgasm();
 	flags[kFLAGS.MARBLE_LUST] = 10;
-	dynStats( "lib", 1 );
+	dynStats( "lib", .5 );
 	player.knockUp( 8, 368, 150 );
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 
@@ -3715,28 +3714,28 @@ private function milkMarbleOnTheBar():void
 	
 	outputText( "[pg]After a few more moments of thought, Marble gives you a very serious look, \"<i>You don't get complete control, I'll be giving the instructions here, oh, and you'd better do a good job.</i>\"   Suddenly she smiles, \"<i>Otherwise, I'll just have to turn things around!</i>\"" );
 	
-	outputText( "[pg]You wonder if maybe you want her to turn things around, while she rests her hands on the bar, then drapes herself over it with her breasts swinging underneath.  She turns her head towards you behind her, and swings her ribbon decorated tail back and forth a few times.  You'd best not keep her waiting when she actually took you up on your request, so you strip down and step up behind her." );
+	outputText( "[pg]You wonder if maybe you want her to turn things around while she rests her hands on the bar, then drapes herself over it with her breasts swinging underneath.  She turns her head towards you and swings her ribbon decorated tail back and forth a few times.  You'd best not keep her waiting when she actually took you up on your request, so you strip down and step up behind her." );
 	
-	outputText( "[pg]\"<i>Alright sweetie, time to get me ready, let's see how you do.</i>\"  She turns her head back, and simply waits for you to start while the milking machine continues to hum above her." );
+	outputText( "[pg]\"<i>Alright sweetie, time to get me ready.  Let's see how you do.</i>\"  She turns her head back, and simply waits for you to start while the milking machine continues to hum above her." );
 	
-	outputText( "[pg]You start by lifting up her skirt, and expose her round ass to the air, and the lips of her womanhood below it.  Of course, there is also the base of her tail just above it, which continues to swish back and forth somewhat indignantly overtop of her openings.  Next you take a handful of her generous asscheeks, rolling them around in your hands and kneading the soft bouncy flesh.  Though not as expansive as her bust by any means, Marble undeniably has quite the pleasant backside." );
+	outputText( "[pg]You start by lifting up her skirt to expose her round ass to the air and the lips of her womanhood below it.  Of course, there is also the base of her tail just above it which continues to swish back and forth somewhat indignantly overtop of her openings.  Next, you take a handful of her generous asscheeks, rolling them around in your hands and kneading the soft bouncy flesh.  Though not as expansive as her bust by any means, Marble undeniably has quite the pleasant backside." );
 	
-	outputText( "[pg]\"<i>Hmm,</i>\" comes a pleased moan from the cowgirl in front of you, and her tail lifts up, ever so slightly as the first signs of moisture and arousal form around her womanhood." );
+	outputText( "[pg]\"<i>Hmm,</i>\" comes a pleased moan from the cowgirl in front of you, and her tail lifts up ever so slightly as the first signs of moisture and arousal form around her womanhood." );
 	
-	outputText( "[pg]Next you run a finger across her entrance, teasing her ever so slightly.  A small jolt flies through her body, and her tail shoots straight up." );
+	outputText( "[pg]Next, you run a finger across her entrance, teasing her ever so slightly.  A small jolt flies through her body, and her tail shoots straight up." );
 	
 	outputText( "[pg]\"<i>Ah, that's a good start sweetie, now, put a finger inside me.</i>\"" );
 	
 	outputText( "[pg]The words are barely out of her mouth, when you push your index finger into her lower lips.  There is a low squelch while it slips inside, which starts again when you stir your finger around in a few circles.  This causes Marble's tail to curl around your hand and try to pull your finger out.  Once a little ways out, her tail tries to force your hand back into her waiting snatch." );
 	
-	outputText( "[pg]\"<i>Maybe you need my help after all, want to let my tail do the talking sweetie?  Let me show you how I like being penetrated.  Then again, your tongue might be nice to feel next too...\"<i>" );
+	outputText( "[pg]\"<i>Maybe you need my help after all.  Want to let my tail do the talking sweetie?  Let me show you how I like being penetrated.  Then again, your tongue might be nice to feel next too...\"</i>" );
 	
 	if( player.cockThatFits(marbleCuntCapacity()) > 0 ) outputText( "[pg]You idly consider grabbing and pulling on her tail, so you could have a chance to take charge, though Marble would probably try and take control in that case for sure..." );
 	
 	menu();
 	addButton( 0, "Follow Tail", milkMarbleBarFollowTail );
 	addButton( 1, "Cunnilingus", milkMarbleBarCunnilingling );
-	if( player.cockThatFits(marbleCuntCapacity()) > 0 ) addButton( 2, "Pull Tail", milkMarbleBarPullTail );
+	if( player.cockThatFits(marbleCuntCapacity()) >= 0 ) addButton( 2, "Pull Tail", milkMarbleBarPullTail );
 	addButton( 3, "Leave", milkMarbleLeaveAfterBar );
 }
 
@@ -3751,9 +3750,9 @@ private function milkMarbleBarFollowTail():void
 	
 	outputText( "[pg]She gives a low chuckle, \"<i>Why don't you wait and find out?</i>\"" );
 	
-	if( x > 0 )
+	if( x >= 0 )
 	{
-		outputText( "[pg]Her ribbon adorned bovine appendage slowly unwraps from your wrist, and instead searches around your crotch for something else.  Eventually the tuff comes into contact with your " + cockDescript(x) + ", and runs its fur across your length lovingly for a few times, then curls around your base and pulls you in towards Marble's waiting womanhood." );
+		outputText( "[pg]Her ribbon adorned, bovine appendage slowly unwraps from your wrist and instead searches around your crotch for something else.  Eventually the tuff comes into contact with your " + cockDescript(x) + ", and runs its fur across your length lovingly for a few times, then curls around your base and pulls you in towards Marble's waiting womanhood." );
 		
 		outputText( "[pg]\"<i>Mhehehe, found it!</i>\"" );
 		
@@ -3761,49 +3760,49 @@ private function milkMarbleBarFollowTail():void
 		
 		outputText( "[pg]\"<i>Oh I know sweetie, but it's always so much fun looking.</i>\"" );
 		
-		outputText( "[pg]Sliding into her interior is a slow, but enjoyable process.  Each inch you pass in makes you want to just slam yourself home in an instant, but you wait to let Marble's tail guide the way.  Finally you're fully inside her, and she lets out a long soft moan of pleasure, followed by shaking her hips side to side a few times.  " );
-		if( y > 0 ) outputText( "You find your " + cockDescript(y) + " slide up comfortably in between her cheeks, and squeeze them together a bit to give it a nice tight valley of soft flesh to run through." );
+		outputText( "[pg]Sliding into her interior is a slow but enjoyable process.  Each inch you pass in makes you want to just slam yourself home in an instant, but you wait to let Marble's tail guide the way.  Finally you're fully inside her, and she lets out a long soft moan of pleasure, followed by shaking her hips side to side a few times." );
+		if( y >= 0 ) outputText( "  You find your " + cockDescript(y) + " slides up comfortably in between her cheeks, and squeeze them together a bit to give it a nice tight valley of soft flesh to run through." );
 		
-		outputText( "[pg]Your guide string tightens up a bit, in time with the end of your lover's cry of pleasure.  \"<i>Hmmm, mine, all mine.</i>\" you barely catch Marble whisper under her breath, then her tail relaxes a bit and pushes back against your waist.  Understanding the direction, you pull your cock back out of its \"owner's\" home.  Though you haven't gone far before she tightens on you once more, and you realize that you were suppose to switch directions again, and focus your attention once more on the fluff that's showing you the way." );
+		outputText( "[pg]Your guide string tightens up a bit in time with the end of your lover's cry of pleasure.  \"<i>Hmmm, mine, all mine.</i>\" You barely catch Marble whisper under her breath, then her tail relaxes a bit and pushes back against your waist.  Understanding the direction, you pull your cock back out of its \"owner's\" home.  Though you haven't gone far before she tightens on you once more, and you realize that you were suppose to switch directions again. You focus your attention once more on the fluff that's showing you the way." );
 		
-		outputText( "[pg]Everything is focused onto three things, the feel of aroused cunt surrounding your shaft, rippling and squelching with each slow plunge and retreat from its depths, the soft springy ass and hip curves under your hands that runs oh so pleasantly under your hands, and of course, Marble's tail curled around the base of your " + cockDescript(x) + ".  The sensation of that thin appendage with the sweat and sex covered plum of fur, which is constantly quivering and twitching in time with the movements of your two bodies, your entire focus is on that." );
+		outputText( "[pg]Everything centers onto three things: the feel of aroused cunt surrounding your shaft, rippling and squelching with each slow plunge and retreat from its depths, the soft springy ass and hip curves under your hands that runs oh so pleasantly under your hands, and of course, Marble's tail curled around the base of your " + cockDescript(x) + ".  The sensation of her thin appendage, soaked and sweat yet still soft with fur, constantly quivering and twitching in time with the movements of your two bodies, draws your entire focus." );
 	}
 	else
 	{
-		outputText( "[pg]Her ribbon adorned bovine appendage slowly pulls your hand out of her wet slit, and directs you up the side of her rump until you find something hiding out in her pocket.  Her tail rubs against the long hard shape a few times, and then you grasp and pull out a long black rubery object from your lover's skirt, her double dildo." );
+		outputText( "[pg]Her ribbon adorned bovine appendage slowly pulls your hand out of her wet slit and directs you up the side of her rump until you find something hiding out in her pocket.  Her tail rubs against the long hard shape a few times, and then you grasp and pull out a long black rubery object from your lover's skirt: her double dildo." );
 		
 		outputText( "[pg]You ask Marble if there is any chance you've found what she wanted?" );
 		
-		outputText( "[pg]\"<i>Why yes sweetie, what gave it away?</i>\"" );
+		outputText( "[pg]\"<i>Why yes sweetie.  What gave it away?</i>\"" );
 		
 		outputText( "[pg]It was just a hunch." );
 		
-		outputText( "[pg]You adjust your grip on her personal toy, and press one end against her waiting womanhood.  Just as you're about to ask her if she's ready for it, her tail suddenly jerks forward, sliding the tool inside her.  She gasps while the false cock quickly slides up to its centerpiece into her depths, then giggles when you try to pull it back out, but find she's clapped down on it hard." );
+		outputText( "[pg]You adjust your grip on her personal toy and press one end against her waiting womanhood.  Just as you're about to ask her if she's ready for it, her tail suddenly jerks forward, sliding the tool inside her.  She gasps while the false cock quickly slides up to its centerpiece into her depths, then giggles when you try to pull it back out. Unfortunately, you find she's clapped down on it hard." );
 		
-		outputText( "[pg]\"<i>What's wrong sweetie?  You haven't managed to get stuck have you?  Here, let me give you a hand...</i>\"" );
+		outputText( "[pg]\"<i>What's wrong sweetie?  You haven't managed to get stuck have you?  Here, let me give you a hand....</i>\"" );
 		
-		outputText( "[pg]Abruptly her tail reverses it's pressure and allows you to extract her toy from its sheath, at least a little ways.  Then you flip directions yourself, and push it back in to the hilt.  There is a sharp intake of breath from your lovely lover, and you give her rear a small smack.  In response she tightens around your wrist, and it sounds like she might be about to get mad at you, instead she chuckles a bit." );
+		outputText( "[pg]Abruptly, her tail reverses it's pressure and allows you to extract her toy from its sheath - at least a little ways.  Then, you flip directions yourself and push it back in to the hilt.  There is a sharp intake of breath from your lovely lover, and you give her rear a small smack.  In response she tightens around your wrist, and it sounds like she might be about to get mad at you.  Instead she chuckles a bit." );
 		
-		outputText( "[pg]\"<i>Alright, no more teasing,you're more than just a plaything after all.  I've got to let you do something.</i>\"" );
+		outputText( "[pg]\"<i>Alright, no more teasing.  You're more than just a plaything after all.  I've got to let you do something.</i>\"" );
 		
-		outputText( "[pg]Finally she allows you to freely build her pleasure, and tease her body.  You can focus on bringing her to blissful sexual release, by playing with her wonderful plump rump, twisting and pumping her with her dildo to the sound of lewd squelching that can just be heard over the hum of the milker and Marble's moans of pleasure, and lastly the quivering of her tail.  The tail that serves as a subtle guide to the ways of your lover's tunnel." );
+		outputText( "[pg]Finally, she allows you to freely build her pleasure and tease her body.  You can focus on bringing her to blissful sexual release by playing with her wonderful plump rump, twisting and pumping her with her dildo to the sound of lewd squelching that can just be heard over the hum of the milker and Marble's moans of pleasure, and lastly, the quivering of her tail.  The tail that serves as a subtle guide to the ways of your lover's tunnel." );
 	}
 	
-	outputText( "[pg]You're so engaged into the activity, that you barely register a long low call of ecstasy come out of cow-girl mate.  The same cry that is something between a moo and a long sigh that you've come to know very well.  At the same time, she manages to knock the hoses off her breasts, and there is a splash as her milk hits the floor of the stall, which steadily slows to a trickle, then only a few drops." );
+	outputText( "[pg]You're so engaged into the activity, that you barely register a long low call of ecstasy come out of cow-girl mate.  That same cry that is something between a moo and a long sigh that you've come to know very well.  At the same time, she manages to knock the hoses off her breasts, and there is a splash as her milk hits the floor of the stall, which steadily slows to a trickle, then only a few drops." );
 	
 	if( x > 0 )
 	{
-		outputText( "[pg]Finally the grip on your root relaxes, and you're finally able to explode inside her, while her tail slowly slips off of you, and falls limp next to the connection between your bodies.  Several gasps and groans come out of your lips, and you ask Marble if she was satisfied." );
+		outputText( "[pg]Finally, the grip on your root relaxes, and you're finally able to explode inside her. Her tail slowly slips off of you and falls limp next to the connection between your bodies.  Several gasps and groans come out of your lips, and you ask Marble if she was satisfied." );
 	}
 	else
 	{
 		outputText( "[pg]The hold on your hand tightens to a death grip, and you have no choice but to let go of her dildo and desperately struggle to free your constricted limb from her tail.  When you finally do manage to free yourself, you start rubbing your tingling fingers and ask Marble if putting your hand to sleep was a sign that she was satisfied." );
 	}
 	
-	outputText( "[pg]Your lover girl straightens up and turns around to face you.  She fixes you with a stern look for a few moments, before pulling you into a deep french kiss.  \"<i>Well, if you're always that good at following directions, I'm not sure how I wouldn't be.</i>\"" );
+	outputText( "[pg]Your lover girl straightens up and turns around to face you.  She fixes you with a stern look for a few moments before pulling you into a deep french kiss.  \"<i>Well, if you're always that good at following directions, I'm not sure how I wouldn't be.</i>\"" );
 	
 	flags[kFLAGS.MARBLE_LUST] = 10;
-	if( x > 0 )
+	if( x >= 0 )
 	{
 		player.orgasm();
 		marblePreggoChance(1);
@@ -3813,8 +3812,7 @@ private function milkMarbleBarFollowTail():void
 		var pLust:int = int( 10 + player.lib / 10 );
 		dynStats( "lus", pLust );
 	}
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 
@@ -3875,30 +3873,30 @@ private function milkMarbleBarPullTail():void
 	
 	outputText( "[pg]There is a loud clop as Marble stomps her hoof on the ground angrily.  With a huff, she lifts herself up on the bar and kicks back with both her legs, sending you flying onto your back and knocking the wind from your lungs.  You gasp for breath a few times, then look up to see Marble looming over you with a wicked smile on her face." );
 	
-	outputText( "[pg]\"<i>I warned you that I'd be taking charge if you couldn't behave yourself, didn't I [name]?</i>\"  She sits down on your stomach, and presses her hand against your " + biggestBreastSizeDescript() + ", squeezing you somewhat painfully.  \"<i>Now you're going to be punished!</i>\"  Given her expression, you get the impression that maybe she actually wanted you to misbehave!" );
+	outputText( "[pg]\"<i>I warned you that I'd be taking charge if you couldn't behave yourself, didn't I [name]?</i>\"  She sits down on your stomach, and presses her hand against your [chest], squeezing you somewhat painfully.  \"<i>Now you're going to be punished!</i>\"  Given her expression, you get the impression that maybe she actually wanted you to misbehave!" );
 	
-	outputText( "[pg]Your aggressive mate moves forward and straddles herself overtop of your face, and shakes her snatch back and forth a few times just above your head.  A few drops of her lubricant drip down onto you, followed by a flick across the nose, delivered by the tail you just grabbed.  At the same time, you're bathed in the deep scent of her aroused sex.  " );
-	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText( "She grabs her erect member, and rubs it against your cheek a few times, spreading around some of her pre-cum." );
+	outputText( "[pg]Your aggressive mate moves forward and straddles your face, shaking her snatch back and forth a few times just above your head.  A few drops of her lubricant drip down onto you, followed by a flick across the nose, delivered by the tail you just grabbed.  At the same time, you're bathed in the deep scent of her aroused sex." );
+	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText( "  She grabs her erect member, and rubs it against your cheek a few times, spreading around some of her pre-cum." );
 	
 	outputText( "[pg]\"<i>You like it when I take charge, don't you?  Hmmhmm, yes...</i>\"" );
 	
 	if( flags[kFLAGS.MARBLE_DICK_TYPE] == 0 )
 	{
-		outputText( "[pg]She drops her hips, and roughly forces her womanhood down onto your face, cutting off your ability to breath.  You sputter and gasp underneath her at the sudden suffocation, though it lasts only a few seconds before she releases you." );
+		outputText( "[pg]She drops her hips and roughly forces her womanhood down onto your face, cutting off your ability to breathe.  You sputter and gasp underneath her at the sudden suffocation, though it lasts only a few seconds before she releases you." );
 		
-		outputText( "[pg]\"<i>Aww, was that too rough?  Don't worry, I'll be a bit more gentle.</i>\"" );
+		outputText( "[pg]\"<i>Aww, was that too rough?  Don't worry.  I'll be a bit more gentle.</i>\"" );
 		
-		outputText( "[pg]Marble then settles herself down a bit more gently, this time giving you plenty of room to breath while also keeping your mouth tightly locked against her slick passage." );
+		outputText( "[pg]Marble then settles herself down a bit more gently, this time giving you plenty of room to breathe while also keeping your mouth tightly locked against her slick passage." );
 		
 		outputText( "[pg]\"<i>Alright, let's put that rude tongue of yours to a much better job.  Lick me.</i>\"" );
 		
-		outputText( "[pg]You do as you're bid, and get an approving smile in response.  Digging deeper inside her, you feel under her folds and plunge into her depths.  " );
+		outputText( "[pg]You do as you're bid and get an approving smile in response.  Digging deeper inside her, you feel under her folds and plunge into her depths.  " );
 		if(player.tongueType > TONUGE_HUMAN) outputText( "You take full advantage of your inhumanly long tongue to fill her up, running across her passage all the way to the entrance to her womb and then back to her lower lips." );
-		else outputText( "You send your tongue as far into her passage as it will go, and wriggle around her lower lips trying to please your aggressive bovine lover to the best of your abilities." );
+		else outputText( "You send your tongue as far into her passage as it will go and wriggle around her lower lips, trying to please your aggressive bovine lover to the best of your abilities." );
 	}
 	else
 	{
-		outputText( "[pg]She forces your mouth open and pushes her hips forward, roughly shoving her seven inch cock into your hapless mouth and down your throat.  You choke and sputter in surprise at the sudden suffocation, but it only lasts a few seconds before she pulls back out." );
+		outputText( "[pg]She forces your mouth open and pushes her hips forward, roughly shoving her " + num2Text(Math.round(flags[kFLAGS.MARBLE_DICK_LENGTH])) + "-inch cock into your hapless mouth and down your throat.  You choke and sputter in surprise at the sudden suffocation, but it only lasts a few seconds before she pulls back out." );
 		
 		outputText( "[pg]\"<i>Aww, was that too rough?  Don't worry, I'll be a bit more gentle.</i>\"" );
 		
@@ -3915,27 +3913,27 @@ private function milkMarbleBarPullTail():void
 	
 	outputText( "[pg]\"<i>Hmm, sorry sweetie, I just thought I'd try something.  It didn't feel the way I expect, but I really like the way you look with my tail in your mouth like that.  If you suck on it for a bit, I might be able to forgive you for yanking it before.</i>\"" );
 	
-	outputText( "[pg]You run your tongue around the sweaty fur, and get an approving look from your bovine lover.  Then you shake your jaw back and forth a few times and slowly let her bush slide out of your mouth.  As the last of the hair slips out, you give a small kiss to the tip." );
+	outputText( "[pg]You run your tongue around the sweaty fur and get an approving look from your bovine lover.  Then you shake your jaw back and forth a few times and slowly let her bush slide out of your mouth.  As the last of the hair slips out, you give a small kiss to the tip." );
 	
-	outputText( "[pg]\"<i>Did you like that sweetie?  " );
-	if( silly() ) outputText( "Want to brush your teeth with my tail next time?  " );
-	outputText( "</i>\"  She nods and considers you for a moment.  \"<i>Well, I think I'm feeling a lot better now, I think I can forgive you for what you did.  In fact, you did such a good job that I think I'll give you a reward!</i>\"" );
+	outputText( "[pg]\"<i>Did you like that sweetie?" );
+	if( silly() ) outputText( "  Want to brush your teeth with my tail next time?" );
+	outputText( "</i>\"  She nods and considers you for a moment.  \"<i>Well, I think I'm feeling a lot better now.  I think I can forgive you for what you did.  In fact, you did such a good job that I think I'll give you a reward!</i>\"" );
 	
-	outputText( "[pg]With a smile you ask her what she's got planned for you." );
+	outputText( "[pg]With a smile, you ask her what she's got planned for you." );
 	
-	outputText( "[pg]She repositions herself overtop of your waist and eyes your male member.  \"<i>Obviously this thing here is in need of some treatment, since you were so eager to try and take charge with it before.</i>\"  She drops down and brings the flaps of her womanhood into contact with the front of your shaft, and runs them over it a couple of times.  \"<i>Look how hard you are, you really want me to take you inside me, don't you?  You want so much to give complete control of your long, hard, dick, to me to use as I see fit.</i>\"" );
+	outputText( "[pg]She repositions herself overtop of your waist and eyes your male member.  \"<i>Obviously this thing here is in need of some treatment, since you were so eager to try and take charge with it before.</i>\"  She drops down and brings the flaps of her womanhood into contact with the front of your shaft and runs them over it a couple of times.  \"<i>Look how hard you are.  You really want me to take you inside me, don't you?  You want so much to give complete control of your long, hard, dick, to me to use as I see fit.</i>\"" );
 	
-	outputText( "[pg]She doesn't let you respond, she's already decided what is going to happen, and that's for you to go inside her and be used by her as she sees fit.  She strokes your " + cockDescript(x) + " with one finger, then pushes it into her waiting cunt.  You slip easily into her very well lubricated passage, and groan as it clamps down on you.  Every part of your shaft is being tightly wrapped in the ring of her vaginal muscles, and you can't help but groan in pleasure." );
+	outputText( "[pg]She doesn't let you respond.  She's already decided what is going to happen, and that's for you to go inside her and be used by her as she sees fit.  She strokes your " + cockDescript(x) + " with one finger, then pushes it into her waiting cunt.  You slip easily into her very well lubricated passage and groan as it clamps down on you.  Every part of your shaft is being tightly wrapped in the ring of her vaginal muscles, and you can't help but groan in pleasure." );
 	
-	outputText( "[pg]She shakes her hips side to side a few times, spinning your shaft around her interior, then stops and considers you.  \"<i>You know, I was thinking that maybe I'm giving you too much of a reward, or maybe not enough of one?</i>\"  The same wicked look when she first knocked you over crosses her eyes once more.  \"<i>Let's try something new...</i>\"  She turns away from you, and puts her hand somewhere behind her, outside of your view." );
+	outputText( "[pg]She shakes her hips side to side a few times, spinning your shaft around her interior, then stops and considers you.  \"<i>You know, I was thinking that maybe I'm giving you too much of a reward, or maybe not enough of one?</i>\"  The same wicked look when she first knocked you over crosses her eyes once more.  \"<i>Let's try something new...</i>\"  She turns away from you and puts her hand somewhere behind her, outside of your view." );
 	
-	outputText( "[pg]After a moment, you suddenly feel something pushing up against the entrance to your [vagorass]!  You try to ask what Marble has planned, but the pressure forces something bushy into your hole.  She just stuck her tail into your [vagorass]!" );
+	outputText( "[pg]After a moment, you suddenly feel something pushing up against the entrance to your [vagOrAss]!  You try to ask what Marble has planned, but the pressure forces something bushy into your hole.  She just stuck her tail into your [vagOrAss]!" );
 	
-	outputText( "[pg]\"<i>Well sweetie, what do you think?</i>\"  It quivers a few times as Marble resumes the rocking of her wide womanly hips.  \"<i>Never mind, if you don't like it, well you can just try and end this as soon as possible, if you do like it, then I guess...</i>\"  She leans forward as she switches from a swinging movement to a bounce on your " + cockDescript(x) + ", and her furry tuff of a backend appendage starts to push its way in deeper sliding easily thanks to your saliva on it.  \"<i>you'll just have to bear it as long as you can!</i>\"" );
+	outputText( "[pg]\"<i>Well sweetie, what do you think?</i>\"  It quivers a few times as Marble resumes the rocking of her wide womanly hips.  \"<i>Never mind, if you don't like it, well you can just try and end this as soon as possible.  If you do like it, then I guess...</i>\"  She leans forward as she switches from a swinging movement to a bounce on your " + cockDescript(x) + ", and her furry tufft of a backend appendage starts to push its way in deeper sliding easily thanks to your saliva on it.  \"<i>You'll just have to bear it as long as you can!</i>\"" );
 	
-	outputText( "[pg]You've never seen Marble this aggressive before, but the cause is rather obvious, the wiring milking machine that's currently attached to her breasts.  Obviously giving milk is triggering some kind of dominance instinct, and it's incredibly sexy!" );
+	outputText( "[pg]You've never seen Marble this aggressive before, but the cause is rather obvious: the whirring milking machine that's currently attached to her breasts.  Obviously giving milk is triggering some kind of dominance instinct, and it's incredibly sexy!" );
 	
-	outputText( "[pg]Your lover laughs uproariously as she continues to ride you hard and fast, bringing up the pleasure in your lower body just as hard and fast.  Whether or not you want it, you can feel an orgasm rapidly building up within you, easily detectable to your rider from the increased rate of your gasps and cries of pleasure.  For her part, Marble is rapidly approaching her peak as well, and with a practiced rhythm, the two of you cum in unison as your lover's tail pops out of your [vagorass]." );
+	outputText( "[pg]Your lover laughs uproariously as she continues to ride you hard and fast, bringing up the pleasure in your lower body just as hard and fast.  Whether or not you want it, you can feel an orgasm rapidly building up within you, easily detectable to your rider from the increased rate of your gasps and cries of pleasure.  For her part, Marble is rapidly approaching her peak as well, and with a practiced rhythm, the two of you cum in unison as your lover's tail pops out of your [vagOrAss]." );
 	
 	outputText( "[pg]The bovine woman gasps a few times above you in exhaustion, her great breasts heaving with each breath.  She then reaches down and pulls your head up and cradles it to her chest, smiling very happily.  \"<i>Well sweetie, if you ever want me to play rough again, you know what to do.  I'm looking forward to any other adventures the two of us have in the bedroom, are you?</i>\"" );
 	
@@ -3944,11 +3942,9 @@ private function milkMarbleBarPullTail():void
 	player.orgasm();
 	dynStats( "lus", 20 );
 	flags[kFLAGS.MARBLE_LUST] = 15;
-	dynStats( "lib", -1 );
-	dynStats( "sen", -1 );
+	dynStats( "sen", -2 );
 	marblePreggoChance(1);
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 
@@ -3956,32 +3952,27 @@ private function milkMarbleLeaveAfterBar():void
 {
 	clearOutput();
 	
-	outputText( "You don't answer Marble, and instead continue to finger her womanhood until she cries out in orgasm.  You tell her you'd be happy to help her out again whenever she'd like someone to accompany her to get milked." );
+	outputText( "You don't answer Marble and instead continue to finger her womanhood until she cries out in orgasm.  You tell her you'd be happy to help her out again whenever she'd like someone to accompany her to get milked." );
 	
 	outputText( "[pg]She is a bit disappointed that you didn't go further after getting her on the bar, but doesn't have a problem with you leaving.  She does tell you that she's looking forward to having you in her milker again some time." );
 	
-	
 	var pLust:int = int( 5 + player.lib / 20 );
 	dynStats( "lus", pLust );
-	flags[kFLAGS.MARBLE_LUST] = 5;
-	model.time.hours++;
-	doNext(13);
+	flags[kFLAGS.MARBLE_LUST] += 5;
+	doNext(14);
 }
 
 
 private function milkMarbleNoMilking():void
 {
 	clearOutput();
-	
 	outputText( "You shake your head and say that you think you'll be fine." );
 	
 	outputText( "[pg]\"<i>Oh, alright then sweetie, I'll see you later.</i>\"  She takes a seat in the chair in the middle of the room and picks up where she left off in her book.  You excuse yourself and return back to camp." );
 	
-	model.time.hours++;
-	doNext(13);
+	doNext(14);
 }
 
 }
 }
-}
-}
+
