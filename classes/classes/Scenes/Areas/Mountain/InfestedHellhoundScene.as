@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class InfestedHellhoundScene extends BaseContent
 	{
@@ -101,6 +102,10 @@ package classes.Scenes.Areas.Mountain
 				player.orgasm();
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				player.cumMultiplier += .2;
+				if(flags[kFLAGS.EVER_INFESTED] == 0) {
+					flags[kFLAGS.EVER_INFESTED] = 1;
+					if(player.cor < 25) player.cor = 25;
+				}
 				cleanupAfterCombat();
 			}
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
