@@ -344,6 +344,7 @@ package classes.Scenes.Places.Farm
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
 				flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] = 0;
+				kGAMECLASS.showStats();
 			}
 			
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0)
@@ -1298,7 +1299,7 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptive);
 			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
 
-			if (whitneyCorrupt()) addButton(9, "Back", dogeNotCorruptYetMenu);
+			if (!whitneyCorrupt()) addButton(9, "Back", dogeNotCorruptYetMenu);
 			else addButton(9, "Back", dogeCorruptedMissionComplete);
 		}
 
@@ -1333,6 +1334,7 @@ package classes.Scenes.Places.Farm
 			whitneySprite();
 
 			player.gems -= 1000;
+			showStats();
 
 			outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
 
@@ -1373,6 +1375,7 @@ package classes.Scenes.Places.Farm
 			whitneySprite();
 
 			player.gems -= 1000;
+			showStats();
 
 			if (!whitneyCorrupt())
 			{
@@ -1422,6 +1425,7 @@ package classes.Scenes.Places.Farm
 			whitneySprite();
 
 			player.gems -= 1500;
+			showStats();
 
 			outputText("You silently hand over a hefty bag of gems. Whitney stows it away.");
 
@@ -1451,8 +1455,14 @@ package classes.Scenes.Places.Farm
 			}
 
 			menu();
-			if (player.gems >= 750) addButton(0, "Do it", doContraceptiveInvestment);
-			else addButton(0, "Do it", turnDownInvestment, true);
+			if (player.gems >= 750)
+			{
+				addButton(0, "Do it", doContraceptiveInvestment);
+			}
+			else
+			{
+				addButton(0, "Do it", turnDownInvestment, true);
+			}
 			addButton(1, "No", turnDownInvestment);
 		}
 
@@ -1462,6 +1472,7 @@ package classes.Scenes.Places.Farm
 			whitneySprite();
 
 			player.gems -= 750;
+			showStats();
 
 			if (!whitneyCorrupt())
 			{
@@ -3607,6 +3618,7 @@ package classes.Scenes.Places.Farm
 			outputText("Whitney knows exactly what it means when you head off to the barn where she stashed your “branding” equipment; the dog girl is already eagerly stripped down by the time you’ve returned. You hold the pots of ink and consider where, and what, to put on her.");
 
 			player.gems -= 50;
+			showStats();
 
 			brandSlotSelect();
 		}
@@ -3624,7 +3636,8 @@ package classes.Scenes.Places.Farm
 			outputText(", [master]? That’s my favourite type of treat.</i>” You consider where, and what, to put on her.");
 
 			player.gems -= 50;
-
+			showStats();
+			
 			amilyBrandSlotSelect();
 		}
 
@@ -3635,6 +3648,7 @@ package classes.Scenes.Places.Farm
 			outputText("You retrieve the pots of ink and paper from the barn and, smiling brightly, tell your pet mouse you’re going to give him a special treat. Jojo knows all too well the nature of your treats. He closes his eyes and waits for the worst as you consider where and what to put on him.");
 
 			player.gems -= 50;
+			showStats();
 
 			jojoBrandSlotSelect();
 		}
@@ -3659,6 +3673,7 @@ package classes.Scenes.Places.Farm
 			}
 
 			player.gems -= 50;
+			showStats();
 
 			bimboSophieSlotSelect();
 		}
@@ -3674,7 +3689,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nYou consider where and what you’re going to put on her.");
 
 			player.gems -= 50;
-
+			showStats();
+			
 			vapulaSlotSelect();
 		}
 
@@ -3685,7 +3701,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>Ok,</i>” she says meekly, her wide, green eyes on the objects in your hand. “<i>It won’t hurt, will it?</i>” Like you fucking her in the ass, you tell her soothingly, any initial pain will be more than worth the eventual satisfaction. As she blushes rosily, you consider where and what you’re going to put on her.");
 
 			player.gems -= 50;
-
+			showStats();
+			
 			kellySlotSelect();
 		}
 
@@ -3698,7 +3715,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>Skin pictures? O-ok, I guess.</i>” She breaks her brittle display of casualness with a laugh. “<i>I’ve always quite liked butterflies - You don’t see them out in the desert much. If you’re going to draw something - maybe you could...?</i>”");
 
 			player.gems -= 50;
-
+			showStats();
+			
 			smallMilkySlotSelect();
 		}
 
@@ -3711,7 +3729,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>Bath time?</i>” she eventually replies.");
 
 			player.gems -= 50;
-
+			showStats();
+			
 			bigMilkySlotSelect();
 		}
 
@@ -3721,6 +3740,7 @@ package classes.Scenes.Places.Farm
 			whitneySprite();
 
 			player.gems -= 500;
+			showStats();
 
 			outputText("You stroke at her tiny, bulging button relentlessly until she releases a wordless bark of ecstasy, soaking your hand with a gratifyingly large gush of femcum. As she pants into your chest you wipe one hand clean on her clothes and press the money into her [paws/hands] with the other.");
 
@@ -6159,7 +6179,8 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>You won’t regret this [master], I promise!</i>”");
 
 			player.gems -= 2200;
-
+			showStats();
+			
 			doNext(13);
 		}
 
