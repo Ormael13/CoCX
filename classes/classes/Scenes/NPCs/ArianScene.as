@@ -167,6 +167,7 @@ public function meetArian():void {
 	clearOutput();
 	outputText("As you wander Tel'Adre's streets, you pass by one of the many dark alleys that litter the half-empty city; you hear the sound of hacking, rasping coughs.  Following your ears, you see a hooded figure wrapped in a form-concealing cloak slumped against the wall, bent over and coughing loudly, wheezing for breath.  They really don't sound very well at all... on the other hand, it could be a setup for muggers or something.  Maybe you shouldn't try playing the good samaritan here...");
 	//[Help] [Don't Help]
+	
 	menu();
 	addButton(0,"Help",helpArianWhenYouMeetHim);
 	addButton(1,"Don't Help",dontHelpArianWhenYouMeetHim);
@@ -189,6 +190,11 @@ private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 //[=Help=]
 private function helpArianWhenYouMeetHim():void {
 	clearOutput();
+
+	flags[kFLAGS.ARIAN_PARK] = 1;
+	flags[kFLAGS.ARIAN_COCK_SIZE] = 1;
+	flags[kFLAGS.ARIAN_CAPACITY] = 50;
+	
 	outputText("You approach the hooded figure with caution, asking if they're alright; it feels a little silly to say that, but you can't think of much else to say.");
 	
 	outputText("\n\n\"<i>Just... help me up,</i>\" a masculine voice asks, between coughs.");
@@ -211,14 +217,12 @@ private function helpArianWhenYouMeetHim():void {
 	
 	outputText("\n\nThe lizan gasps and covers his mouth, startled.  \"<i>Oh, forgive me.  How rude, I should have introduced myself before.</i>\"  He clears his throat and starts, \"<i>My name is Arian, and as you can see, I'm a lizan.  I just wanted to go out for a little while, but my aides are intent on keeping me in bed; they say I'm not well enough to be going out... but I say if anyone knows my body, that would be me!  And if I feel like going out, then so the gods help me, I will!</i>\"  He finishes forcefully, before realizing he's rambling.  \"<i>Oh, forgive me... this really isn't your problem, sorry for troubling you,</i>\" he says, letting his head hang.");
 
-	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now, so I'll be seeing you.</i>\"  [Arian Ey] smiles at you in a friendly way.");
+	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now, so I'll be seeing you.</i>\"  He smiles at you in a friendly way.");
 	
 	outputText("\n\nYou decide to leave him for the moment, and head back to the camp.");
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
 	outputText("\n\n(<b>The park has been added to Tel'Adre's menu.</b>)");
-	flags[kFLAGS.ARIAN_PARK] = 1;
-	flags[kFLAGS.ARIAN_COCK_SIZE] = 1;
-	flags[kFLAGS.ARIAN_CAPACITY] = 50;
+
 	arianHealth(1);
 	doNext(13);
 }
