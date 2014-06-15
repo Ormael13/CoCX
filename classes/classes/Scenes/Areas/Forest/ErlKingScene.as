@@ -264,7 +264,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Unfazed, you cross your arms and stand firm, staring down the menacing fog. \n\n");
 
-			outputText("The sounds of the hunt grow louder and louder until the trees, themselves, appear to be shaking with the sounds of the approaching hunt.  You stand tall, refusing to play the Huntsman’s twisted game.\n\n");
+			outputText("The sounds of the hunt grow louder and louder until the trees themselves appear to be shaking with the sounds of the approaching hunt.  You stand tall, refusing to play the Huntsman’s twisted game.\n\n");
 
 			outputText("The Hunt’s deafening approach abruptly quiets.  Like a tide going out, the fog drains away from around you, leaving the forest clear and calm. Slowly, the sounds of birdsong and insects return to the woods around you.  \n\n");
 

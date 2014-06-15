@@ -22,7 +22,7 @@ public function encounterFaerie():void {
 				outputText("\n\nYou snatch her out of the air fairly easily.  She seems like she's slowed down a little.   She squirms and wriggles, begging you, \"<i>Please don't cover me in cum again... I get so drunk and feel even sluttier afterwards.  I don't want to be a slut!</i>\"\n\nShe pouts, but blushes.  Do you make her get you off again?", false);
 			}
 			else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) {
-				outputText("\n\nYou grasp the dizzy faerie out of the air with ease, smiling as you feel the flood of wetness between her thighs moistening your hand.  She wriggles and moans, \"<i>No, not again!  I want another cum-bath so bad...but I'm losing myself to it.  It's hard to keep flowers pollinated when you're jilling off half the day and waiting for a nice hard cock to wander your way...</i>\"\n\nShe wants to get you off almost as you do.  Do you make her service you again?", false);
+				outputText("\n\nYou grasp the dizzy faerie out of the air with ease, smiling as you feel the flood of wetness between her thighs moistening your hand.  She wriggles and moans, \"<i>No, not again!  I want another cum-bath so bad... but I'm losing myself to it.  It's hard to keep flowers pollinated when you're jilling off half the day and waiting for a nice hard cock to wander your way...</i>\"\n\nShe wants to get you off almost as you do.  Do you make her service you again?", false);
 			}
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your " + player.armorName + " and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?", false);
 			dynStats("lus", player.lib/10+2);
@@ -34,7 +34,7 @@ public function encounterFaerie():void {
 			outputText("\n\nYou groan miserably with frustration. Desperate for stimulation, you sink to your knees and start jacking off, the faerie's visage still fresh in your mind. You catch a fleeting glimpse of yourself tightly gripping the faerie's legs in each of your fists, dragging her toward ", false);
 			if(player.cockTotal() == 1) outputText("your dick", false);
 			else outputText("one of your dicks", false);
-			outputText(", too large for her tiny frame...the depraved image overwhelms your mind's eye and you find yourself shooting all over the ground furiously.", false);
+			outputText(", too large for her tiny frame... the depraved image overwhelms your mind's eye and you find yourself shooting all over the ground furiously.", false);
 			player.orgasm();
 		}
 		else outputText("\n\nYou try in vain to jump and catch her, but she's too high above you and much too fast.", false);
@@ -98,8 +98,8 @@ private function faerieRAEP():void {
 		
 		//(small) <= .50\"  
 		if(player.clitLength <= .5) {
-			outputText("She pulls apart your lips, revealing your tiny bud and repositioning herself to plant her feet inside you.  The flawless skin of her thighs pulls another gasp of pleasure from your lips.  They squeeze tightly around your " + clitDescript() + ", scissoring her gash across its sensitive surface.   You squirm, too engrossed in the rough grinding your button is receiving to worry about the faerie.   She clings to you, hanging on for dear life as your crotch nearly throws her free.  During the gyrations, she's slammed back into the " + clitDescript() + ", instantly penetrated the nub with a wet 'schlick'.\n\n", false); 
-			outputText("Squeeling and bouncing as she hangs on tightly, the faerie noisily orgasms around your clit, squirting her own fluids into your aching " + vaginaDescript(0) + ".  The fluid tingles, and you shove your fingers in, smearing the sticky-sweet faerie-cum through your passage.   Before you can get far with it, your own orgasm goes off, squeezing your fingers and rippling around them, trying to milk your hand as if it was a dick.  Your legs go weak and wobbly, forcing you down on your " + buttDescript() + " as the waves of pleasure flow through you, soaking the faerie in girlcum.\n\n", false); 
+			outputText("She pulls apart your lips, revealing your tiny bud and repositioning herself to plant her feet inside you.  The flawless skin of her thighs pulls another gasp of pleasure from your lips.  They squeeze tightly around your " + clitDescript() + ", scissoring her gash across its sensitive surface.   You squirm, too engrossed in the rough grinding your button is receiving to worry about the faerie.   She clings to you, hanging on for dear life as your crotch nearly throws her free.  During the gyrations, she's slammed back into the " + clitDescript() + ", instantly penetrated by the nub with a wet 'schlick'.\n\n", false); 
+			outputText("Squealing and bouncing as she hangs on tightly, the faerie noisily orgasms around your clit, squirting her own fluids into your aching " + vaginaDescript(0) + ".  The fluid tingles, and you shove your fingers in, smearing the sticky-sweet faerie-cum through your passage.   Before you can get far with it, your own orgasm goes off, squeezing your fingers and rippling around them, trying to milk your hand as if it was a dick.  Your legs go weak and wobbly, forcing you down on your " + buttDescript() + " as the waves of pleasure flow through you, soaking the faerie in girlcum.\n\n", false); 
 		}
 		//(medium) <= .1.25\"
 		else if(player.clitLength <= 1.25) {
@@ -109,14 +109,14 @@ private function faerieRAEP():void {
 		}
 		//(streeeetch – large) <= 4.5\"
 		else if(player.clitLength <= 4.5) {
-			outputText("Entranced by the growing " + clitDescript() + ", the faerie caresses her body, watching your love-button swell up, not stopping until it looks too huge for her tiny frame.  She climbs in a circle around it, awestruck by the size and majesty of your cock-like button.    She looks up at you, aroused but worried, saying, \"<i>You're so...BIG.  Oh goddess, I want to feel it inside me!</i>\"\n\n", false);
+			outputText("Entranced by the growing " + clitDescript() + ", the faerie caresses her body, watching your love-button swell up, not stopping until it looks too huge for her tiny frame.  She climbs in a circle around it, awestruck by the size and majesty of your cock-like button.    She looks up at you, aroused but worried, saying, \"<i>You're so... BIG.  Oh goddess, I want to feel it inside me!</i>\"\n\n", false);
 			outputText("She grabs hold of its slippery surface with both hands and jumps, lifting her lower body up before gravity yanks it back down onto the tip of your " + clitDescript() + ".  The tip barely slips in, despite the slippery wetness of the faerie.   She screams, though in pleasure or pain you cannot be sure.  You reason that it must be pleasure, because the faerie is wiggling her hips and grabbing hold of the rest of your " + clitDescript() + ", straining to pull herself further down the fem-cock.  Her belly starts to distort, displaying the cylindrical bulge on her tummy, expanding and contracting slightly as each of your heart-beats works through your clit.\n\n", false); 
 			outputText("In time, she manages to fully impale herself, quivering in orgasm as she gets off from the vibrations your pounding heart sends through your " + clitDescript() + ".  Her tongue lolls out and her eyes roll back, shut down by the extreme penetration, pain, and pleasure of the act.  You feel her cum soaking into you, sliding down into your slit and making your sensitive slit tingle.  Watching her get off is all it takes to bring you to orgasm with her, and the walls of your " + vaginaDescript(0) + " clamp down hungrily, contracting and gushing fluids over the faerie as she lies there, impaled on your crotch like a perverted ornament.\n\n", false);
 		}
 		//(too big) (else – hump dat shit)
 		else {
 			outputText("Entranced by your swollen " + clitDescript() + ", the faerie watches it slowly erect, filling with blood like a smooth over-sensitive cock.  She tentatively touches it, gasping and pulling back when it twitches in response.   With a look of awe, she turns to you and says, \"<i>There's no way I could take this beautiful monster, but I know I can make it feel good!</i>\"\n\n", false); 
-			outputText("She jumps onto it, making it bounce in the air as it takes her relatively insubstantial weight.  Embracing it in a full-body hug, she starts grinding on it, smearing her thick faerie juices into the clit and giggling everytime you twitch from the feeling.  You squirm, sinking down from the raw sensation, your " + player.legs() + " giving out underneath you.   Grabbing hold of a stump, your try to steady yourself, but the faerie humping your " + clitDescript() + " is interfering with your motor ability, and you slump into the forest loam, happily twitching as orgasm washes over you.\n\n", false);
+			outputText("She jumps onto it, making it bounce in the air as it takes her relatively insubstantial weight.  Embracing it in a full-body hug, she starts grinding on it, smearing her thick faerie juices into the clit and giggling every time you twitch from the feeling.  You squirm, sinking down from the raw sensation, your " + player.legs() + " giving out underneath you.   Grabbing hold of a stump, you try to steady yourself, but the faerie humping your " + clitDescript() + " is interfering with your motor ability, and you slump into the forest loam, happily twitching as orgasm washes over you.\n\n", false);
 			outputText("Your " + clitDescript() + " jumps, throwing the tiny woman off.  She slips and scrabbles across the surface of your " + vaginaDescript(0) + ", sliding into your soaking gash.  She's squeezed tightly, sloshed around in the wetness of your orgasm.   The faerie's eyes cross, as she grows dizzy and battered in the sizzling whirlpool that is your groin.\n\n", false);
 		}
 	}
@@ -129,12 +129,12 @@ private function faerieRAEP():void {
 	//[REPEAT LOW]
 	else if(player.statusAffectv1(StatusAffects.FaerieFemFuck) <= 5) {
 		outputText("The faerie slowly drags herself out of your " + vaginaDescript(0) + ", smiling broadly with her eyes dilated wide.  She slips off you, dropping to the ground and giggling, \"<i>Everything feels so soft.  Mmmm that was fun!</i>\"\n\n", false);
-		outputText("The little woman spins around happily, proclaiming, \"<i>The  colors are like, so bright!  Oh gosh, I'm hungry!  See you and your clit later, just don't let me fall in your snatch, it fucks me up so much.  I don't think I can handle much more or I'll be crawling between your legs every chance I get!</i>\"\n\n", false);
+		outputText("The little woman spins around happily, proclaiming, \"<i>The colors are like, so bright!  Oh gosh, I'm hungry!  See you and your clit later, just don't let me fall in your snatch, it fucks me up so much.  I don't think I can handle much more or I'll be crawling between your legs every chance I get!</i>\"\n\n", false);
 		outputText("She flits away, calling out, \"<i>Bye sweetie!</i>\"", false);
 	}
 	//[SLUTTIN IT UP] 
 	else {
-		outputText("The faerie stumbles out of your snatch, giggling and scooping the slippery girl-goo off her body, licking it up.  She crawls up your body to your lips, giving you a cunt-flavored kiss and babbling happily, \"<i>Mmm your cunt makes me so warm and giggly!  I'm so fucking stoned!  Gawddess I'm hungry too – I'm gonna grab some food, and then come back for another dip in your honeypot ok?</i>\"\n\n", false);
+		outputText("The faerie stumbles out of your snatch, giggling and scooping the slippery girl-goo off her body, licking it up.  She crawls up your body to your lips, giving you a cunt-flavored kiss and babbling happily, \"<i>Mmm your cunt makes me so warm and giggly!  I'm so fucking stoned!  Gawddess, I'm hungry too – I'm gonna grab some food, and then come back for another dip in your honeypot, ok?</i>\"\n\n", false);
 		outputText("She flits away, a little unsteady and reeking of female sex and desire.", false);
 	}
 	player.orgasm();
@@ -144,7 +144,7 @@ private function faerieRAEP():void {
 
 private function faerieShooAway():void {
 	spriteSelect(17);
-	outputText("You shake your hands, shooing away the tiny faerie.  She's clearly been touched by the magics of this land and you want nothing to do with her.   With a pouting look, she turns and buzzes away.", true);
+	outputText("You shake your hands, shooing away the tiny faerie.  She's clearly been touched by the magics of this land and you want nothing to do with her. With a pouting look, she turns and buzzes away.", true);
 	doNext(13);
 }
 
@@ -215,7 +215,7 @@ private function faerieCaptureHJ():void {
 	if(player.isTaur()) {
 		outputText("The tiny Faerie climbs on top of your " + cockDescript(0), false);
 		if(player.cockTotal() > 0) outputText("largest " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
-		outputText(" and crawls about on it for a while, getting used to its shape and taking in deep lungfuls of its musky odour. She wraps herself around you and begins rubbing herself up and down your hard length. As she moves around her tiny slit leaks cum in long streaks, teasing you with a cunt you can't penetrate. Pre begins to leak steadily from your tip as the faerie continues to work her way around, moaning quietly and betraying her inner desire.\n\n", false);
+		outputText(" and crawls about on it for a while, getting used to its shape and taking in deep lungfuls of its musky odor. She wraps herself around you and begins rubbing herself up and down your hard length. As she moves around her tiny slit leaks cum in long streaks, teasing you with a cunt you can't penetrate. Pre begins to leak steadily from your tip as the faerie continues to work her way around, moaning quietly and betraying her inner desire.\n\n", false);
 		outputText("Your body begins to naturally jerk forward and backward, attempting to hump the mare that isn't there. You can feel the faerie sliding about until she clenches onto you tighter, which only serves to make you hump harder. Realizing her mistake too late, she attempts to loosen herself, but your wild bucking sends her flying forward.\n\n", false);
 		outputText("She smashes onto the end of your " + multiCockDescriptLight() + " and grasps at it. Her face crushes into your urethra as her tiny legs wrap themselves around the tip. Your wildly flailing cock starts to grow larger as your orgasm approaches, but the faerie doesn't notice as she happily drinks up your pre.\n\n", false);
 		//[No testicles:
@@ -233,7 +233,7 @@ private function faerieCaptureHJ():void {
 		//Epilogue!
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 10) outputText("The faerie burps and giggles again before glaring up at you, accusing you with a mildly unfocused glare and asking, \"<i>Did you know we get drunk on cum?  Caushe I TRY SO HARRD not to get meshed up like this.</i>\"\n\n", false);
 		else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("The faerie burps and laughs drunkenly, patting the side of your " + player.leg() + " and slurring, \"<i>Oh by Marae's ripe titsh!  I needed that.  Do you thhink you could catsch me again?  I love feeling your cum coating my body.</i>\"\n\n", false);
-		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n", false);
+		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm, it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n", false);
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("She licks her fingers and rolls around laughing, \"<i>Hehe, who caresh!  I'm happy! WHEEEEE!</i>\"\n\n", false);
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...", false);
 	}
@@ -259,7 +259,7 @@ private function faerieCaptureHJ():void {
 		outputText(", giggling drunkenly.  ", false);
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 10) outputText("The faerie burps and giggles again before glaring up at you, accusing you with a mildly unfocused glare and asking, \"<i>Did you know we get drunk on cum?  Caushe I TRY SO HARRD not to get meshed up like this.</i>\"\n\n", false);
 		else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("The faerie burps and laughs drunkenly, patting the side of your " + player.leg() + " and slurring, \"<i>Oh by Marae's ripe titsh!  I needed that.  Do you thhink you could catsch me again?  I love feeling your cum coating my body.</i>\"\n\n", false);
-		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n", false);
+		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm, it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n", false);
 		if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) outputText("She licks her fingers and rolls around laughing, \"<i>Hehe, who caresh!  I'm happy! WHEEEEE!</i>\"\n\n", false);
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...", false);
 		player.orgasm();

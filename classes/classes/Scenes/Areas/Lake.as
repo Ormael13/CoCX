@@ -248,7 +248,7 @@ package classes.Scenes.Areas
 				if (player.findStatusAffect(StatusAffects.FetishOn) < 0) {
 					player.createStatusAffect(StatusAffects.FetishOn, 0, 0, 0, 0);
 					outputText("While exploring, you notice something unusual on the lake.  This something is quickly moving towards you at a surprising rate, much faster than anything you've ever seen before.  Wary of meeting new things in this world after your previous experiences, you decide to slip behind a nearby hill and watch it while hidden.  Soon the object comes into view and you can see that it is a boat of some kind.  It looks almost like a large open box on the water with some kind of gazebo on it.  Despite how fast it is moving, you can't see any oars or means of moving the boat.  It slows somewhat when it gets close to the shore, but is still going about as fast as you can run when it hits the shore and extends some kind of gangplank onto the lake shore.  With a close up view, you estimate that it is six feet across, ten feet long, and doesn't actually seem to have very much of it underwater.  You guess that it must be magic in some way.  There are several robe-clad figures on board.\n\n", true);
-					outputText("After a moment, a number of the figures disembark down the gangplank and immediately go off in different directions.  You count half a dozen of them, and guess that they are female when one of them passes by close to you and you see the hole in her outfit over her naughty bits.  You look back at the boat to see it close the gangplank, and move back onto the lake, with only one of the figures still on board.  Surprised to hear a sudden yell, you look to the side and see the clothing of the one who passed you earlier shifts and twists before becoming some pink outfit that clings to her backside.  You are stunned for a moment as she disappears from sight before you shake your head and move on.  It seems there are new residents to the lake.\n\n<b>(Fetish Cultists can now be encountered!)</b>", false);
+					outputText("After a moment, a number of the figures disembark down the gangplank and immediately go off in different directions.  You count half a dozen of them, and guess that they are female when one of them passes by close to you and you see the hole in her outfit over her naughty bits.  You look back at the boat to see it close the gangplank, and move back onto the lake, with only one of the figures still on board.  Surprised to hear a sudden yell, you look to the side and see the clothing of the one who passed you earlier shift and twist before becoming some pink outfit that clings to her backside.  You are stunned for a moment as she disappears from sight before you shake your head and move on.  It seems there are new residents to the lake.\n\n<b>(Fetish Cultists can now be encountered!)</b>", false);
 
 					//(increase player lust from the sights they saw)
 					dynStats("lus", 5);
@@ -271,7 +271,7 @@ package classes.Scenes.Areas
 			flags[kFLAGS.MET_OTTERGIRL]++;
 			//First Time
 			if (flags[kFLAGS.MET_OTTERGIRL] == 1) {
-				outputText("Your exploration of the lakeside take you further than you've gone before.  The water here is almost completely still, its waters ");
+				outputText("Your exploration of the lakeside takes you further than you've gone before.  The water here is almost completely still, its waters ");
 				if (player.findStatusAffect(StatusAffects.FactoryOverload) < 0) outputText("crystal clear, giving you a stunning view of the lakebed");
 				else outputText("only slightly clouded, giving you an obscured view of the lakebed");
 				outputText(".  Fish dart to and fro within the waters, caring little for your explorations above the waves.");
@@ -353,7 +353,7 @@ package classes.Scenes.Areas
 			else outputText("\n\n\"<i>Whoa nellie,</i>\" she says, her eyes going wide as they feast upon your giant cock.  \"<i>That.  That right there, darlin', is one grade-A trouser snake.  I've seen centaurs that'd look like geldings next to you.</i>\"");
 			outputText("  She leisurely stretches out across your stomach and chest, letting her cunt come to rest right in front of your face.");
 
-			outputText("\n\nYou feel slender but powerful fingers wrap around your cock, followed shortly after by a pair of lips. They encircle your " + cockHead(x) + " and suck, creating a delightful tingling sensation that travel down your cock and into your core.");
+			outputText("\n\nYou feel slender but powerful fingers wrap around your cock, followed shortly after by a pair of lips. They encircle your " + cockHead(x) + " and suck, creating a delightful tingling sensation that travels down your cock and into your core.");
 
 			outputText("\n\n\"<i>Hey darlin', better get to lickin', we want this ");
 			//{(lil dicks)

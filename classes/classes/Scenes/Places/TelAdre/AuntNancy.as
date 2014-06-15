@@ -184,7 +184,7 @@ private function timeForAuntNancySpiderCooch():void {
 	if(player.biggestTitSize() >= 1) outputText(" and taking the opportunity to grope your " + player.allBreastsDescript() + " right through your " + player.armorName, false);
 	outputText(".\n\n", false);
 
-	outputText("\"<i>Come in to my parlor,</i>\" she whispers into your ear, licking it gently before sticking the tip of her long tongue into the hole before pressing her soft lips against the lobe of it.\n\n", false);
+	outputText("\"<i>Come into my parlor,</i>\" she whispers into your ear, licking it gently before sticking the tip of her long tongue into the hole before pressing her soft lips against the lobe of it.\n\n", false);
 
 	outputText("Then, she lets go of you and skitters easily up to her door, opening it and slipping inside.", false);
 	//[Gain 30 Lust, New Page]

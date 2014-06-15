@@ -33,7 +33,7 @@ package classes.Scenes.Places
 			}
 			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ", true);
 			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
-				outputText("The water appears somewhat muddy and has a faint pungeant odor.  ", false);
+				outputText("The water appears somewhat muddy and has a faint pungent odor.  ", false);
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 			}
 			//3% chance of finding lost daughters
