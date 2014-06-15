@@ -1814,7 +1814,7 @@ private function giveKellyAppleSauce():void {
 		outputText("\n\n\"<i>Oh.  Um.  Well...</i>\" she furrows her brow as if remembering a very distant time.  \"<i>I used to like fruit.</i>\"  She laughs a bit.  \"<i>A stereotype really, you know, horses and apples?  Whitney even planted me a couple of apple trees across the back, but I never took care of them because I was a bit of a jerk-off back then.</i>\"");
 		outputText("\n\nAt least your jerk off-ing is put to good use these days, you say kindly.  \"<i>That's nice of you to say, [Master],</i>\" replies the centaur solemnly.  She's wringing her hands, her thoughts elsewhere.");
 		if (!farm.farmCorruption.whitneyCorrupt()) outputText(" \"<i>I'd like to go and check on it, but... I don't think Whitney likes me much anymore.  I'd hate to cause more trouble than I already have.</i>\"");
-		else outputText("“<i>I’d hate to get into Mistress Whitney’s bad books.  I’ve caused enough trouble already.</i>”");
+		else outputText("“<i>I'd like to go and check on it, but... I’d hate to get into Mistress Whitney’s bad books.  I’ve caused enough trouble already.</i>”");
 		outputText(" You 'pfft' and wave your hand airily to show what YOU think of Whitney.  You tell her to stay put - as her treat, you'll go check on the orchard and bring back some apples for her, if there are any.");
 		outputText("\n\n\"<i>You will?  I- well, thank you so much [Master], but you'll be careful, won't you?</i>\" she says fretfully, still wringing her hands.  You go into her barn, grab a metal bowl and then stride off gallantly, as if setting off to take on Lethice herself, when in fact your epic quest involves jumping over a fence and walking 200 yards through some light woodland.");
 		
