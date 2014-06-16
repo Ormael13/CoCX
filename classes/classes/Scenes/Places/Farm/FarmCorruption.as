@@ -613,7 +613,7 @@ package classes.Scenes.Places.Farm
 			addButton(2, "Never", takeoverPromptNever);
 		}
 		
-		protected function takeoverPromptNow():void
+		public function takeoverPromptNow():void
 		{
 			clearOutput();
 			
