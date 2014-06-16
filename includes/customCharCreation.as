@@ -11,15 +11,18 @@ public function customPCSetup():void {
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
 		
-		for (var i:int = 0; i < 10; i++)
-		{
-			player.createCock();
-			player.cocks[i].cockLength = 12;
-			player.cocks[i].cockThickness = 2;
-			player.cocks[i].cockType = CockTypesEnum.TENTACLE;
-			player.cocks[i].knotMultiplier = 1.5;
-		}
+		player.createCock();
+		player.cocks[0].cockLength = 10;
+		player.cocks[0].cockThickness = 2;
+		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
+		player.cocks[0].knotMultiplier = 1.5;
 		
+		player.createCock();
+		player.cocks[1].cockLength = 20;
+		player.cocks[1].cockThickness = 2;
+		player.cocks[1].cockType = CockTypesEnum.HORSE
+		player.cocks[1].knotMultiplier = 1.5;
+	
 		player.clitLength = 0.5;
 		player.fertility = 50;
 		player.gender = 2;
@@ -666,7 +669,7 @@ public function customPCSetup():void {
 		player.cor = 30;
 		player.lib = 30;
 		player.sens = 10;
-		outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling, they would be further troubled if they could see your feet!  And lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingram and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
+		outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingram and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
 	}
 	if(player.short == "Nami") {
 		//Female with the sand-trap black pussy

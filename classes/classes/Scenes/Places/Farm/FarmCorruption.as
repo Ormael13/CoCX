@@ -733,7 +733,7 @@ package classes.Scenes.Places.Farm
 			{
 				flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] = 3;
 
-				outputText("“<i>[name]? [name]!</i>” You turn and watch Whitney shyly step out from the shadow of the barn. She has retained her slim frame and modest clothes, however her fur is all gone and has been replaced by skin of the same sandy colour. Human feet peek out from underneath her skirt, and... well. You take a few moments to drink in her human face, still quintessentially Whitney in her long, delicate features, thin but easy smile and rosy colour accentuating her high cheekbones; pretty but not beautiful. The only dog features she has kept are her floppy ears and short, perky tail. Scratch that; as you smile approvingly she smiles widely in return, laughing almost in relief, revealing quite pointed teeth and a thinner-than-normal tongue. Still, it’s a pretty decent effort all round.");
+				outputText("“<i>[name]? [name]!</i>” You turn and watch Whitney shyly step out from the shadow of the barn. She has retained her slim frame and modest clothes, however her fur is all gone and has been replaced by skin of the same sandy colour. Human feet peek out from underneath her skirt, and... well. You take a few moments to drink in her human face, still quintessentially Whitney in her long, delicate features, thin but easy smile and rosy color accentuating her high cheekbones; pretty but not beautiful. The only dog features she has kept are her floppy ears and short, perky tail. Scratch that; as you smile approvingly she smiles widely in return, laughing almost in relief, revealing quite pointed teeth and a thinner-than-normal tongue. Still, it’s a pretty decent effort all round.");
 
 				outputText("\n\n“<i>Very good girl,</i>” you say. You slowly approach her. “<i>Such swiftness and willingness to change is an excellent sign. You and I will go very far together indeed.</i>” Again you stand directly in front of her, again you stare deep into her brown eyes; you wait until her breath comes shallow once more. “<i>Now, where were we?</i>”");
 
@@ -1122,9 +1122,9 @@ package classes.Scenes.Places.Farm
 
 					outputText("\n\nAs she talks, you delve into your pocket and bring out a gem, this time with deliberate slowness. Whitney’s eyes are immediately drawn to it and she pauses; you softly motion for her to continue, slowly turning the small, glittering kaleidoscope in your fingers as you do. “<i>...It’s just so much more </i>fun<i> around here these days. The farm feels like it’s alive, I am makin so much more money and... the more I open my mind, the more I let go of those old hates, the more I can think, the more I can feel. Gods, I am feeling things I haven’t in years. I see the way you order your followers around and it feels powerful, I make them do as I will and it feels right, like I’m taking control and shaping the world instead of just layin back and watchin it pass me by. It feels like... like...</i>”");
 
-					outputText("\n\n“<i>Like you’re waking up,</i>” you say. You twist the gem back and forth, shining tiny, scattering beams of blinding light into the dog morph’s eyes. Her mouth hands open and her breath is shallow. “<i>Like since I’ve taken control you’ve woken up to everything that life has to offer, everything that </i>I<i> have to offer, the horizons that appear when you submit to my will. This farm is many times the place it was when you were closed up in your old life of petty certainties. You just told me that and like the farm, </i>you<i> are becoming more and more real the further you open yourself to me.</i>”");
+					outputText("\n\n“<i>Like you’re waking up,</i>” you say. You twist the gem back and forth, shining tiny, scattering beams of blinding light into the dog morph’s eyes. Her mouth hangs open and her breath is shallow. “<i>Like since I’ve taken control you’ve woken up to everything that life has to offer, everything that </i>I<i> have to offer, the horizons that appear when you submit to my will. This farm is many times the place it was when you were closed up in your old life of petty certainties. You just told me that and like the farm, </i>you<i> are becoming more and more real the further you open yourself to me.</i>”");
 
-					outputText("\n\nYou think the doggie is close now, so very close to fully opening her mind and entirely tasting reality. All she needs to do is one thing to demonstrate her commitment....");
+					outputText("\n\nYou think the doggie is close now, so very close to fully opening her mind and entirely tasting reality. All she needs to do is one thing to demonstrate her commitment...");
 
 					outputText("\n\n“<i>What is that,</i>” says Whitney dully. You smile, gently bringing the twisting gem to a halt and putting it back into your pouch. You will know what that is when you are truly ready, you say. With that you turn and leave her, swaying vaguely on the porch, her eyes far, far away. As long as you can keep her immersed in the atmosphere you’ve conjured up over the farm, you think she’ll be ready for the final stage of your plan soon enough.");
 					doNext(rootScene);
@@ -1527,7 +1527,7 @@ package classes.Scenes.Places.Farm
 			{
 				if (flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
 				{
-					outputText("You tell Whitney you want her to give [bathslutName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
+					outputText("You tell Whitney you want her to give [bathgirlName] an intensive course of Gro-plus and Lactaid, and to build a small swimming tank to house her.");
 
 					outputText("\n\n“<i>[Master] you are so wicked,</i>” the dog woman whispers with overt glee. “<i>Pumpin that silly slut full of growth hormones ‘til all she can think about are her big, juicy tits- oh Gods, gimme gems, 400 should do it, I want to start right now!</i>”");
 				}
@@ -1669,7 +1669,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>GOOD girl!</i>” She grins happily and her tail wags furiously as you rub her behind the ear. “<i>That’s how I expect to find you every time I come to visit. Now run along, go and make my farm spin gold. I will be along later to see if you need rewarding or punishing.</i>”");
 
-			outputText("\n\n“<i>At once, [master]!</i>” The dog girl is on her feet and off towards the farm in one swift movement, new determination etched into her posture. Your take-over of the farm is complete; you should expect to see a larger share of the profits now Whitney is your slave taskmaster, entirely bent on serving you.");
+			outputText("\n\n“<i>At once, [master]!</i>” The dog girl is on her feet and off towards the farm in one swift movement, new determination etched into her posture. Your take-over of the farm is complete; you should expect to see a larger share of the profits now that Whitney is your slave taskmaster, entirely bent on serving you.");
 
 			doNext(13);
 		}
@@ -1709,7 +1709,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Later. There will be an endless later, now you have fully opened your mind to me. For now... run along, go and make my farm spin gold.</i>”");
 
-			outputText("\n\n“<i>At once, [master]!</i>” The dog girl turns and is off towards the farm in one swift movement, new determination etched into her posture. Your take-over of the farm is complete; you should expect to see a larger share of the profits now Whitney is your slave taskmaster, entirely bent on serving you.");
+			outputText("\n\n“<i>At once, [master]!</i>” The dog girl turns and is off towards the farm in one swift movement, new determination etched into her posture. Your take-over of the farm is complete; you should expect to see a larger share of the profits now that Whitney is your slave taskmaster, entirely bent on serving you.");
 
 
 			flags[kFLAGS.WHITNEY_DOM] = 1;
@@ -2982,7 +2982,7 @@ package classes.Scenes.Places.Farm
 		{
 			outputText("You are slightly apprehensive about this, but you’ve gone to the trouble of crafting Whitney into a fairly unique slave, and it seems churlish not to test just how deep the dominating streak you’ve brought out in her goes. You tell her you could do with a bit of relaxation.");
 
-			outputText("\n\n“<i>Of course, [master]. Relaxation,</i>” murmurs Whitney. She drops a heavy tonal wink over her last two words as she entwines her arm around yours. “<i>Perhaps you’d like to come inside my house? Been making one or two, mmm, adjustments I’d like you to see.</i>” She may be quite petite but it strikes you how strong a lifetime of physical labour has made her; it feels like a small, hot bundle of rope wrapped around your arm which is leading you up the board steps and through the door of Whitney’s farmhouse.");
+			outputText("\n\n“<i>Of course, [master]. Relaxation,</i>” murmurs Whitney. She drops a heavy tonal wink over her last two words as she entwines her arm around yours. “<i>Perhaps you’d like to come inside my house? Been making one or two, mmm, adjustments I’d like you to see.</i>” She may be quite petite but it strikes you how strong a lifetime of physical labor has made her; it feels like a small, hot bundle of rope wrapped around your arm which is leading you up the board steps and through the door of Whitney’s farmhouse.");
 
 			outputText("\n\nHer front rooms are pretty much what you expected- sparsely but cosily furnished, polished wood and burnished iron much in evidence- but Whitney is not interested in giving you a tour. She leads you upstairs, opens the door to her bedroom and, with a wide, toothy grin, directs you to have a look inside. ");
 
@@ -3053,11 +3053,11 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nThe rough oral you’ve been forced to give has sunk heat into your loins and it doesn’t take much of her hands’ gentle stroking for your cock to stand at full mast. You continue to lap away at her moist sex, working away from her labia momentarily to lick up the lubricant which has trickled out before bending in again, directed by the sounds of gratification coming from above you. ");
 
-				outputText("\n\nShe lifts her thighs up and then heavily drops them down, up and then down, allowing you to breathe momentarily before pressing her hot, heavy need imperiously down again. All the while she continues stroking your [cock biggest], letting her hand go soft and then suddenly pumping it with tight vigour. She works her grasp all around your cock but concentrates particularly on the sweet spot two thirds of the way up, stroking that sensitive, bulging stretch over and over. Gods, that is good. You feel your orgasm rising, you begin to thrust your [hips] towards it... Whitney’s hand suddenly grips fiercely around your cock, making you almost choke into her twat.");
+				outputText("\n\nShe lifts her thighs up and then heavily drops them down, up and then down, allowing you to breathe momentarily before pressing her hot, heavy need imperiously down again. All the while she continues stroking your [cock biggest], letting her hand go soft and then suddenly pumping it with tight vigor. She works her grasp all around your cock but concentrates particularly on the sweet spot two thirds of the way up, stroking that sensitive, bulging stretch over and over. Gods, that is good. You feel your orgasm rising, you begin to thrust your [hips] towards it... Whitney’s hand suddenly grips fiercely around your cock, making you almost choke into her twat.");
 
 				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then...</i>” Her hand begins to move again, wringing and stroking your cock with loving care until you feel your blood rising again - and then she grips hard, forcing you back down, but not far, as the teasing begins afresh a few seconds later. ");
 
-				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave mistress - you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the smouldering need suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth. ");
+				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave mistress - you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the smoldering need suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth. ");
 
 				outputText("\n\nYour masterful ministrations elicit a coo from her and she rewards your diligent work by lifting her lower body upwards again, allowing you take a deep, gulping breath before she sits down hard, once again riding your face with hot, wiry, determined energy. Her thighs close around your ears, your eyes are covered by her shifting, jouncing butt and your whole world narrows down to your mouth fucking and being fucked, whilst her smooth, loving, tormenting fingers keep you perpetually edged, your bulging [cock biggest] almost singing with frustration.");
 
@@ -3072,13 +3072,13 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\n“<i>Got so many things to play with tucked away in here!</i>” comes her merry voice again, as you feel her other hand creep between your thighs and touch the lips of your [vagina]; you groan into the confines of her flesh as her fingers slide into your crevice, circling your [clit]. The rough oral you’ve been subjected to has sunk heat into your loins and it doesn’t take much of her hands’ gentle but insistent working of your cock and cunt for you to stand at full mast, for you to start beading excitement. ");
 
-				outputText("\n\nYou continue to lap away at her own moist sex, working away from her labia momentarily to lick up the lubricant which has trickled out before bending in again, directed by the sounds of gratification coming from above you. She lifts her thighs up and then heavily drops them down, up and then down, allowing you to breathe momentarily before pressing her hot, heavy need imperiously down again, all the while stroking your [cock biggest], letting her hand go soft and then suddenly pumping it with tight vigour. She works her grasp all around your cock but concentrates particularly on the sweet spot two thirds of the way up, stroking that sensitive, bulging stretch over and over. ");
+				outputText("\n\nYou continue to lap away at her own moist sex, working away from her labia momentarily to lick up the lubricant which has trickled out before bending in again, directed by the sounds of gratification coming from above you. She lifts her thighs up and then heavily drops them down, up and then down, allowing you to breathe momentarily before pressing her hot, heavy need imperiously down again, all the while stroking your [cock biggest], letting her hand go soft and then suddenly pumping it with tight vigor. She works her grasp all around your cock but concentrates particularly on the sweet spot two thirds of the way up, stroking that sensitive, bulging stretch over and over. ");
 
 				outputText("\n\nHer other hand curls into your female sex, probing deeper into your [vagina], stroking at your sensitive walls, withdrawing to flick at your clit, bulging now well out of its hood. Gods, that is good. You feel your orgasm rising, you begin to thrust your [hips] towards it... Whitney’s hands suddenly grip fiercely around your cock and withdraw entirely from your pussy, making you almost choke into her twat.");
 
 				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then…</i>” Her hand begins to move again, wringing and stroking your cock with loving care until you feel your blood rising again - and then she grips hard, forcing you back down, but not far, as the teasing begins afresh a few seconds later. ");
 
-				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave mistress - you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the smouldering need suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth.");
+				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave mistress - you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the smoldering need suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth.");
 
 				outputText("\n\nYour masterful ministrations elicit a coo from her, as she rewards your diligent work by lifting her lower body upwards again, allowing you to take a deep, gulping breath before sitting down hard, once again riding your face with hot, wiry, determined energy. Her thighs close around your ears, your eyes are covered by her shifting, jouncing butt and your whole world narrows down to your mouth fucking and being fucked, whilst her smooth, loving, tormenting fingers keep you perpetually edged, your bulging [cock biggest] almost singing with frustration.");
 
@@ -3134,7 +3134,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("Once her clothes are off, Whitney climbs onto the bed with you. She takes a few seconds to consider you, and you can’t help but do the same to her; drink in her slim, supple frame, her narrow thighs and arms threaded with tight muscle, moderated by the slight touches of softness here and there. Particularly her small, perky breasts with their hard, brown nipples. Your eyes come up to meet hers, knowing and wicked.");
 
-			outputText("\n\n“<i>Glad you’re enjoying the view,</i>” she says, a grin twitching the corners of her mouth. “<i>Now you’re going to return the favour. Turn around. On your knees.</i>” Slowly you do " + ((!player.isBiped()) ? "as close as you can to what" : "") + " she asks, shifting yourself around on your lower body until you are facing the other way. A hand firmly presses into the back of your head, forcing your nose down into the clean-smelling sheets and your ass up. Heat spreads across your face as Whitney’s other hand lands on your [butt] and moves across it with a testing, admiring possessiveness.");
+			outputText("\n\n“<i>Glad you’re enjoying the view,</i>” she says, a grin twitching the corners of her mouth. “<i>Now you’re going to return the favor. Turn around. On your knees.</i>” Slowly you do " + ((!player.isBiped()) ? "as close as you can to what" : "") + " she asks, shifting yourself around on your lower body until you are facing the other way. A hand firmly presses into the back of your head, forcing your nose down into the clean-smelling sheets and your ass up. Heat spreads across your face as Whitney’s other hand lands on your [butt] and moves across it with a testing, admiring possessiveness.");
 
 			outputText("\n\n“<i>D’you know how hard it is to control myself when you’re striding around outside, swinging this bit of business around behind you?</i>” she says huskily. The hand on your head has disappeared; there’s a repetitive, slippery sound coming from behind you and you don’t have to guess to know where it’s gone. “<i>D’you bend over so much just to tease me? I swear you do. I swear you do, you secret little slut.</i>” She grasps your rump hard suddenly, making you gasp. “<i>All the other slaves kin look, but only I get to touch it like this. And I ain’t gonna waste that. I’m gonna make you pay for flauntin such a nice, " + ((player.buttRating <= 4) ? "tight ass" : "big bottom") + ", I swear... sit still.</i>”");
 
@@ -3151,7 +3151,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("\n\nThe wooden paddle in one hand perhaps isn’t much of a surprise, but the other... it’s a double ended strap-on, one end relatively small and flexible-looking, the other a purple monster with garish leopard spots painted across its bumps. It’s immediately recognisable to you and you look up at Whitney with a kind of horror, whose grin only widens.");
 
-				outputText("\n\n“<i>Oh yes. Your succubus was only too glad to let me borrow this when I asked her for help in the bedroom with you. D’you know, she seemed to have the darndest idea you were going to use it on me? Shows how much she knows. Oh c’mon, [player],</i>” she croons, waggling the demonic dildo in front of you teasingly. “<i>As if you never fantasised about gettin it from the other end. And as if you’ve got a choice at this point anyway.</i>”");
+				outputText("\n\n“<i>Oh yes. Your succubus was only too glad to let me borrow this when I asked her for help in the bedroom with you. D’you know, she seemed to have the darndest idea you were going to use it on me? Shows how much she knows. Oh c’mon, [name],</i>” she croons, waggling the demonic dildo in front of you teasingly. “<i>As if you never fantasised about gettin it from the other end. And as if you’ve got a choice at this point anyway.</i>”");
 			}
 			else
 			{
@@ -3199,7 +3199,7 @@ package classes.Scenes.Places.Farm
 				}
 
 				outputText("\n\n“<i>You’re no stranger to cock, are you [boy]?</i>” she breathes. You jerk in shock as the paddle lands with a sharp report on your ass cheek. “<i>When you aren’t strutting around here, I bet you ");
-				if (player.hasVagina()) outputText("sit and spread em for anything going, don’t you?");
+				if (player.hasVagina()) outputText("sit and spread ‘em for anything going, don’t you?");
 				else outputText("I bet you get on your knees for anything with a nice, juicy cock, right?");
 				outputText(" What would your other slaves think of that? My secret little slut.</i>” ");
 
@@ -3229,7 +3229,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\nYou jerk in shock as the paddle lands with a sharp report on your ass cheek. You try to remember when you ever agreed to this kind of treatment, but it’s getting hard to concentrate on anything but the urge gripping your body and the acute, checkered sensations Whitney is pressing on you.");
 			}
 
-			outputText("\n\nShe withdraws almost all the way out, the knobbed head pulling at your " + ((player.hasVagina()) ? "entrance before thrusting back into your [vagina]" : "sphincter before thrusting back into your [ass]") + ", bringing the paddle down on your reddened behind as she does. In, slap, out, in, slap, out, first one cheek, then the other....");
+			outputText("\n\nShe withdraws almost all the way out, the knobbed head pulling at your " + ((player.hasVagina()) ? "entrance before thrusting back into your [vagina]" : "sphincter before thrusting back into your [ass]") + ", bringing the paddle down on your reddened behind as she does. In, slap, out, in, slap, out, first one cheek, then the other...");
 
 			outputText("\n\nThe panties in your mouth are dense with the taste and smell of the dog woman’s excitement; stuck high in your nose and throat, the rich musk makes you feel impossibly turned on, and there’s no getting away from it. Although your intention was to take your ‘relaxation’ in a stoical silence befitting of your position, you can’t stop yourself whining and moaning around the soiled cotton, welcoming each hard slap to your [butt] as it heralds another firm stroke from the delightfully thick and bumpy cock" + ((player.hasCock()) ? " bumping delightfully against your prostate, making [eachCock] thrum and bulge urgently in pleasure" : "") + ".");
 
@@ -3252,7 +3252,7 @@ package classes.Scenes.Places.Farm
 			doNext(13);
 		}
 
-		private function whitneyDomRide():void
+		public function whitneyDomRide():void
 		{
 			clearOutput();
 			whitneySprite();
@@ -3273,21 +3273,21 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nHer warm hand curls around your [cock biggest], squeezing until her grip is almost painfully tight before receding to the faintest of touches, then increasing the strength of her hold again. Tight... relaxed. Tight... relaxed. Your breath comes quicker as your cock inevitably hardens to the almost tortuous treatment. A slippery, rhythmic sound reaches your ears and it takes you a moment to realise it has nothing to do with what’s being done to you.");
 
-			outputText("\n\n“<i>Yeah,</i>” hisses Whitney, as she masturbates both you and herself at the same time, glorying in the control she has over the supine form before her. “<i>So powerful - and all mine. Mine!</i>” You arch your back as begins to jerk you hard, your [cock biggest] bulging in her grasp - and then gasp as something clamps around the base of your dick.");
+			outputText("\n\n“<i>Yeah,</i>” hisses Whitney, as she masturbates both you and herself at the same time, glorying in the control she has over the supine form before her. “<i>So powerful - and all mine. Mine!</i>” You arch your back as she begins to jerk you hard, your [cock biggest] bulging in her grasp - and then gasp as something clamps around the base of your dick.");
 
 			outputText("\n\n“<i>There we go,</i>” your slave mistress sighs, continuing to stroke your helplessly engorged dick softly, finger catching the cock ring she’s placed around it. “<i>Wouldn’t want you getting away from me, would we? That’d ruin </i>all<i> the fun.</i>” She laughs, long, low and wicked, and you feel wet softness as she pushes her pussy against your captive prick.");
 
 			// Too big:
 			// Try and find a cock that will fit within vagCap + 33%
 			// This is probably wrong as fuck but it's close enough.
-			var cockI:int = player.cockThatFits(whitneyVagCapacity() * 1.33);
-			var tooBig:Boolean;
+			var cockI:int = player.cockThatFits(whitneyVagCapacity() * 1.33) + 1;
+			var tooBig:Boolean = false;
 
 			// Catch a no-cock-fits scenario so we can do things.
-			if (cockI == -1)
+			if (cockI == 0)
 			{
 				tooBig = true;
-				cockI = player.smallestCock();
+				cockI = player.smallestCock() + 1;
 			}
 
 			if (tooBig)
@@ -3331,7 +3331,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("\n\nYour mouth opens as she begins to revolve her supple hips, sliding her wet opening up and down your [cock "+ cockI +"]. Your cock is forcibly hardened and sensitised to the point that you can feel her lips parted around your huge girth, her tiny clit pushing up and down every vein and bulge it encounters. You can’t help but try and thrust your way into that tantalisingly warm, wet hole; you groan as with a laugh she pulls away from your crown, shifts herself around, and rubs at the top side of your cock instead. She seems intent on masturbating herself on every inch of your [cock "+ cockI +"], frosting every inch with her femjizz... and she has a fair amount of ground to cover.");
 
-				outputText("\n\n“<i>You’re a pragmatist, aren’t ya, [name]?</i>” she says to herself thoughtfully as she slides against your base, her fingers pressing into the sensitive spot near the top. You can’t do anything but pant in reply, trapped in a never-ending moment of heat, even if you knew how to answer her musings. “<i>Other [guys] who put together a harem, they’d grow a massive dick, just to signal their status, y’know? Not you, though. You keep it nice an modest, just so you can fit it in every hole you can.</i>” She laughs again, softer this time, her clit pushing into your stiff raphe, making you open your mouth. The urge to bury yourself into her only grows with each second but you know she will only lift that teasing, tantalising wetness away if you try. It strikes you as slightly odd she’s not using her hands to torment you as well; with the care she’s holding herself it’s almost as if she’s carrying something. There is a faint, bland, hot smell in the air.");
+				outputText("\n\n“<i>You’re a pragmatist, aren’t ya, [name]?</i>” she says to herself thoughtfully as she slides against your base, her fingers pressing into the sensitive spot near the top. You can’t do anything but pant in reply, trapped in a never-ending moment of heat, even if you knew how to answer her musings. “<i>Other [guy]s who put together a harem, they’d grow a massive dick, just to signal their status, y’know? Not you, though. You keep it nice an modest, just so you can fit it in every hole you can.</i>” She laughs again, softer this time, her clit pushing into your stiff raphe, making you open your mouth. The urge to bury yourself into her only grows with each second but you know she will only lift that teasing, tantalising wetness away if you try. It strikes you as slightly odd she’s not using her hands to torment you as well; with the care she’s holding herself it’s almost as if she’s carrying something. There is a faint, bland, hot smell in the air.");
 
 				outputText("\n\n“<i>An so every hole can use you. Kinda a slutty thing, ain’t it? Oh, you can pretend you’re just being sensible with a prick like this, but y’know what a length like this says to me? It says ‘I’m anyone’s. I aim to please. Use me.’</i>” She grunts the last two words savagely as she finally thrusts down, sinking the upper half of your trapped, bulging cock into her tight cunt. She revolves her hips slowly but surely, bending you into her; you can’t help but gasp at the delicious kneading softness inundating your head. ");
 
@@ -3749,7 +3749,7 @@ package classes.Scenes.Places.Farm
 			player.gems -= 500;
 			showStats();
 
-			outputText("You stroke at her tiny, bulging button relentlessly until she releases a wordless bark of ecstasy, soaking your hand with a gratifyingly large gush of femcum. As she pants into your chest you wipe one hand clean on her clothes and press the money into her [paws/hands] with the other.");
+			outputText("You stroke at her tiny, bulging button relentlessly until she releases a wordless bark of ecstasy, soaking your hand with a gratifyingly large gush of femcum. As she pants into your chest you wipe one hand clean on her clothes and press the money into her "+ ((whitneyDefurred()) ? "hands" : "paws") +" with the other.");
 
 			outputText("\n\n“<i>Make it happen,</i>” you murmur into her floppy ear, before turning and leaving.");
 
@@ -3779,14 +3779,14 @@ package classes.Scenes.Places.Farm
 
 			outputText("“<i>[Master]! [Master], I’ve done as you asked,</i>” says Whitney, her tail wagging frantically as you approach. Her eyes are lit with glee and she’s got a cow with her on tether. You settle down and watch as she produces unassuming pots of black and red ink, and a sheaf of what looks like blotting paper.");
 
-			outputText("\n\n“<i>Thought nobody sold this stuff anymore,</i>” she says with a shake of the head as she unstops a vial. A sharp, solvent smell presses into your nostrils. “<i>But it’s amazing what you kin’ find in that bazaar place, ain’t it? Watch.</i>” She dips a long ");
+			outputText("\n\n“<i>Thought nobody sold this stuff anymore,</i>” she says with a shake of the head as she unstops a vial. A sharp, solvent smell presses into your nostrils. “<i>But it’s amazing what you kin’ find in that bazaar place, ain’t it? Watch.</i>” She dips a long");
 			if (whitneyDefurred()) outputText(" fingernail");
 			else outputText(" claw");
 			outputText(" into the pot, withdraws it and then, dripping black fluid, presses it against the cow’s ample backside. The animal moos and swishes its tail in mild protest, but it doesn’t seem in any grievous amount of pain as Whitney’s digit moves, artfully tracing a large number 12 with the ink.");
 
 			outputText("\n\n“<i>Then we take some of the paper and press it on to seal it... like so….</i>” There’s a faint hissing sound as Whitney covers the 12 with the white sheet, but again the cow barely seems to notice. When she peels it off she gestures for you to take a look for yourself. This is probably the first and hopefully the last time you inspect a cow’s backside so scrupulously but you can only be impressed by what you see - the number is dried and apparently ingrained deep into the heavy flesh, resisting your own attempts to rub it off easily. This will suit your own purposes perfectly.");
 
-			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses. She’s look at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [master]?</i>”");
+			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses and looks at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [master]?</i>”");
 
 			flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] = 0;
 
@@ -6389,10 +6389,10 @@ package classes.Scenes.Places.Farm
 		private function subHappyEndingMale():void
 		{
 			clearOutput();
-			var cockThatFits:int = player.cockThatFits(whitneyVagCapacity() * 1.33);
+			var cockThatFits:int = player.cockThatFits(whitneyVagCapacity() * 1.33) + 1;
 			var hasBiggerCock:Boolean = false;
 
-			if (cockThatFits != player.biggestCockArea()) hasBiggerCock = true;
+			if (player.cockArea(cockThatFits -1) != player.biggestCockArea()) hasBiggerCock = true;
 
 			outputText("You drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, sinking your fingers into her tight, welcoming hole. ");
 

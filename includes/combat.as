@@ -677,7 +677,7 @@ public function doCombat(eventNum:Number):void
 			}
 			if (player.lust >= 65) {
 				outputText("As the demons mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ", false);
-				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the	nearest inviting demonic hole.", false);
+				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the nearest inviting demonic hole.", false);
 				if (player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.", false);
 				if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.", false);
 				if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.", false);
@@ -1522,7 +1522,7 @@ public function attack():void {
 			//50% Bleed chance
 			if(player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) {
 				monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many, bloody gashes your hooked gauntlets leave behind.", false);
+				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
 				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
 			}
 		}
@@ -2005,7 +2005,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) {
 		if(flags[kFLAGS.PC_FETISH] >= 2) {
-			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
+			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you and have you at its mercy.\n\n");
 			dynStats("lus", 3);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
@@ -2075,7 +2075,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.KissOfDeath) >= 0) {
 		//Effect 
-		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted....\n\n", false);
+		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n", false);
 		dynStats("lus", 5);
 		takeDamage(15);		
 	}

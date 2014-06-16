@@ -21,7 +21,7 @@
 				case 0:
 					//Religious outfit!
 					if (armorName != RELIGIOUS_CLOTHES) {
-						long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out of the front.";
+						long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none of them included the large slit at the front that lets his above average sized human dick stick out of the front.";
 						this.armorName = RELIGIOUS_CLOTHES;
 						changed = true;
 					}
