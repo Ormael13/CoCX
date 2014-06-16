@@ -6185,7 +6185,7 @@ package classes.Scenes.Places.Farm
 				noT = "Too Much";
 			}
 			
-			addButton(1, "No", noOrgyRoomPlz);
+			addButton(1, noT, noOrgyRoomPlz);
 		}
 
 		private function getOrgyRoom():void
