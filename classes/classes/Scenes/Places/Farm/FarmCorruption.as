@@ -6131,7 +6131,7 @@ package classes.Scenes.Places.Farm
 		{
 			var doFunctor:Function = null;
 
-			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 0 && flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] == 0)
+			if (flags[kFLAGS.FARM_UPGRADES_ORGYROOM] == 0 && flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] == 0 && !whitneyDom())
 			{
 				doFunctor = wantOrgyRoom;
 			}
