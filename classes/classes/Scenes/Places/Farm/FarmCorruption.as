@@ -6167,12 +6167,19 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>2200 gems?!</i>”");
 
 			outputText("\n\n“<i>...I could convert my front room into a relaxation room for you,</i>” the dog woman goes on doggedly. “<i>It would have everything I need to properly take care of you. Like a hot tub. And I would pack it with all the sorts of things...</i>“ she sighs dreamily again “<i>all the sorts of things a big, strong "+ player.mf("lord", "lady") +" of the land might want. For when [he] is taking care of [his] servants. Like lots of em. At the same time.</i>”");
-
-			var noT:String = "No";
-			if (player.gems >= 2200) addButton(0, "Yes", getOrgyRoom);
-			else noT = "Too Much";
-
+	
 			menu();
+			
+			var noT:String = "No";
+			if (player.gems >= 2200) 
+			{
+				addButton(0, "Yes", getOrgyRoom);
+			}
+			else 
+			{
+				noT = "Too Much";
+			}
+			
 			addButton(1, "No", noOrgyRoomPlz);
 		}
 
