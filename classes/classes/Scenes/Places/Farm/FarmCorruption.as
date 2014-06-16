@@ -25,7 +25,7 @@ package classes.Scenes.Places.Farm
 			
 		}
 		
-		protected function corruptFollowers():int
+		public function corruptFollowers():int
 		{
 			var count:int = 0;
 			
@@ -530,7 +530,7 @@ package classes.Scenes.Places.Farm
 					
 					return true;
 				}
-				else if (flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] == 2)
+				else if (flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] == 3 || flags[kFLAGS.FARM_DISABLED] == 1)
 				{
 					clearOutput();
 					takeoverPromptMerge();
@@ -715,6 +715,7 @@ package classes.Scenes.Places.Farm
 		protected function takeoverPromptNever():void
 		{
 			clearOutput();
+			flags[kFLAGS.FARM_CORRUPTION_DISABLED] = 1;
 			
 			outputText("You close your eyes and take deep, shuddering breaths, drawing in the sweet, grass scented air and listening to the quiet, gentle peace which surrounds this place. The putrid ideas and viciously colourful images crowding your mind fade bit by bit, your blood cools and slowly, eventually, you find inner tranquillity.  You promise yourself that come what may you’ll never do anything to this patch of peace you found in this world so long ago, if only as a reminder of what you once were. A heavy lump gathering in your throat, you turn and leave.");
  

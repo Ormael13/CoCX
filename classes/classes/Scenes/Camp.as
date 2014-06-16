@@ -1516,7 +1516,7 @@ public function places(display:Boolean):Boolean {
 	
 	//Turn on main farm encounter!
 	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
-		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && flags[kFLAGS.FARM_DISABLED] == 0) farm = kGAMECLASS.farm.farmExploreEncounter;
+		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0))) farm = kGAMECLASS.farm.farmExploreEncounter;
 	}
 	//Turn on bazaar encounter
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
