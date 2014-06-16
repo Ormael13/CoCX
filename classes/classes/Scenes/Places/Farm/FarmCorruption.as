@@ -992,7 +992,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !kGAMECLASS.sophieBimbo.bimboSophie()) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
 			
-			addButton(0, "Back", farmMenu);
+			addButton(9, "Back", farmMenu);
 		}
 		
 		private function numLoversAtFarm():int
@@ -3417,7 +3417,7 @@ package classes.Scenes.Places.Farm
 				{
 					if (hasFreeTattooSlot("whitney")) addButton(0, "Whitney", brandWhitney);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1 && hasFreeTattooSlot("amily")) addButton(1, "Amily", brandAmily);
-					//if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && hasFreeTattooSlot("jojo")) addButton(2, "Jojo", brandJojo);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && hasFreeTattooSlot("jojo")) addButton(2, "Jojo", brandJojo);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie() && hasFreeTattooSlot("sophie")) addButton(3, "Sophie", brandBimboSophie);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && hasFreeTattooSlot("vapula")) addButton(4, "Vapula", brandVapula);
 					if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && hasFreeTattooSlot("kelly")) addButton(5, "Kelly", brandKelly);
