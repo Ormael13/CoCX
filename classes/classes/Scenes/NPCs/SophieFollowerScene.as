@@ -342,6 +342,8 @@ private function backToCamp():void
 
 	outputText("\n\n“<i>Thank the Gods,</i>” she says, rolling her eyes. “<i>Any longer out here and I was going to suffocate from boredom.</i>” She kisses your cheek affectionately before stretching her huge wings out to fly off in the direction of the portal.");
 
+	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 0;
+	
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
