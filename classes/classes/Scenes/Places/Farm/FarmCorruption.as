@@ -3399,7 +3399,7 @@ package classes.Scenes.Places.Farm
 
 			if (flags[kFLAGS.FARM_CORRUPTION_BRANDING_MENU_UNLOCKED] == 0)
 			{
-				outputText("\n\nYou idly put an arm around Whitney, drawing her into you. You want her in the right frame of mind before you lead her down this path of inquiry. Her breath is hot and heavy against your [chest], her desire-lit eyes unable to tear away from yours as your hand slides down the curve of her back and round around her enjoyably tight ass. You ask her what she knows about branding.");
+				outputText("You idly put an arm around Whitney, drawing her into you. You want her in the right frame of mind before you lead her down this path of inquiry. Her breath is hot and heavy against your [chest], her desire-lit eyes unable to tear away from yours as your hand slides down the curve of her back and round around her enjoyably tight ass. You ask her what she knows about branding.");
 
 				outputText("\n\n“<i>I don’t brand my herd, [master],</i>” she says in a low voice, as you smooth your hand upwards and slip your fingers underneath her skirt. “<i>’s a very cruel practice and without any other farms round there’s no need for it anyway.</i>” But surely she must know of ways to mark cattle, you go on. Ways to make it immediately clear who owns them. You put not-so-subtle emphases on certain words as you touch her sopping vagina, slipping two fingers in easily. “<i>Mayhap... mayhap I do, [master],</i>” the dog woman groans, her breath coming in gulps and hisses as your digits move in her warm wetness. “<i>Somethin’, somethin’ from my granddaddy’s day. If you give me 500 gems and some time, I could... go and make a few things happen...</i>”");
 
@@ -3694,7 +3694,7 @@ package classes.Scenes.Places.Farm
 		{
 			outputText("You retrieve the pots of ink and paper from the barn and, smiling, tell your succubus you’re going to give her a treat.");
 
-			outputText("\n\n“<i>What’s that supposed to be, [name]?</i>” she says, peering at your tools. “<i>Tattooing gear? Wow, that’s crude. You know Lethice has artists whose pens make you feel whatever is drawn on you, so….</i>” You say you don’t give a stuff what Lethice has, you’re here now and you going to tattoo exactly what you like on her.");
+			outputText("\n\n“<i>What’s that supposed to be, [name]?</i>” she says, peering at your tools. “<i>Tattooing gear? Wow, that’s crude. You know Lethice has artists whose pens make you feel whatever is drawn on you, so...</i>” You say you don’t give a stuff what Lethice has, you’re here now and you going to tattoo exactly what you like on her.");
 
 			outputText("\n\n“<i>Hhh, I love it when you get all forceful, [master],</i>” Vapula purrs. She narrows her eyes at you provocatively. “<i>Treat me then. I’ve been ever so good.</i>”");
 
@@ -3936,8 +3936,8 @@ package classes.Scenes.Places.Farm
 			menu();
 			addButton(0, "Tribal", jojoTribalTattoo, slot);
 			addButton(1, "Heart", jojoHeartTattoo, slot);
-			addButton(2, "Property Of", jojoHeartTattoo, slot);
-			addButton(3, "Sissy Slut", jojoHeartTattoo, slot);
+			addButton(2, "Property Of", jojoPropertyTattoo, slot);
+			addButton(3, "Sissy Slut", jojoSissySlutTattoo, slot);
 			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
 			if (player.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
 
@@ -5387,6 +5387,40 @@ package classes.Scenes.Places.Farm
 
 			doNext(13);
 		}
+		
+		private function jojoSissySlutTattoo(slot:int):void
+		{
+			clearOutput();
+
+			var tText:String = "“Sissy Slut” tattooed across his ";
+
+			if (slot == 0)
+			{
+				jojoCollarboneIntro();
+				tText += "collarbone.";
+				flags[kFLAGS.JOJO_TATTOO_COLLARBONE] = tText;
+			}
+			else if (slot == 1)
+			{
+				jojoShouldersIntro();
+				tText += "shoulders.";
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = tText;
+			}
+			else if (slot == 2)
+			{
+				jojoLowerbackIntro();
+				tText += "lower back.";
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = tText;
+			}
+			else if (slot == 3)
+			{
+				jojoButtIntro();
+				tText += "butt.";
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
+			}
+
+			doNext(13);
+		}
 
 		private function bimboSophiePropertyOfTattoo(slot:int):void
 		{
@@ -5502,7 +5536,6 @@ package classes.Scenes.Places.Farm
 			var tText:String = "“Buttslut” tattooed in a red love heart across her lower back.";
 
 			vapulaLowerBackIntro();
-			tText += "lower back.";
 			flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 
 			doNext(13);

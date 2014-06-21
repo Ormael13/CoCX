@@ -1174,7 +1174,7 @@ public static const FOUND_CATHEDRAL:int                                         
 public static const PLACES_PAGE:int                                   				= 1166;
 public static const FUCK_YOU_GOT_MINE_RAPHAEL:int                                   = 1167;
 public static const MARBLE_MILKED_BEFORE:int                                   = 1168;
-public static const UNKNOWN_FLAG_NUMBER_01166:int                                   = 1169;
+public static const TATTOO_SAVEFIX_APPLIED:int                                   = 1169;
 public static const UNKNOWN_FLAG_NUMBER_01167:int                                   = 1170;
 public static const UNKNOWN_FLAG_NUMBER_01171:int                                   = 1171;
 public static const UNKNOWN_FLAG_NUMBER_01172:int                                   = 1172;

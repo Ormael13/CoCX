@@ -1441,6 +1441,45 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0);
 		}
 		
+		if (flags[kFLAGS.TATTOO_SAVEFIX_APPLIED] == 0)
+		{
+			// Fix some tatto texts that could be broken
+			if (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] is String && (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] as String).indexOf("lower back.lower back") != -1)
+			{
+				flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] as String).split(".")[0] + ".";
+			}
+			
+			
+			var refunds:int = 0;
+			
+			if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] is String)
+			{
+				refunds++;
+				flags[kFLAGS.JOJO_TATTOO_LOWERBACK] = 0;
+			}
+			
+			if (flags[kFLAGS.JOJO_TATTOO_BUTT] is String)
+			{
+				refunds++;
+				flags[kFLAGS.JOJO_TATTOO_BUTT] = 0;
+			}
+			
+			if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] is String)
+			{
+				refunds++;
+				flags[kFLAGS.JOJO_TATTOO_COLLARBONE] = 0;
+			}
+			
+			if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] is String)
+			{
+				refunds++;
+				flags[kFLAGS.JOJO_TATTOO_SHOULDERS] = 0;
+			}
+			
+			player.gems += 50 * refunds;
+			flags[kFLAGS.TATTOO_SAVEFIX_APPLIED] = 1;
+		}
+		
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
