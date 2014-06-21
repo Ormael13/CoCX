@@ -607,6 +607,8 @@ private function backToCamp():void
 	
 	outputText("\n\nYou watch the creature make its slow, ponderous progress back towards camp.");
 
+	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 0;
+	
 	//[+1 Obedience and -1 Happiness every two days kept at the farm]
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }

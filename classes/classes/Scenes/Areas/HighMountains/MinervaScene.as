@@ -816,7 +816,7 @@ private function minervaCowgirlSex():void {
 	
 	outputText("\n\nBiting her lip, she pushes down harder, sinking her soothingly cool pussy down until your whole cock is engulfed in her tight, cilia-filled snatch.  \"<i>Mmm, oh yesss... don't you just love how your " + cockDescript(x) + " stretches me... and all those little things in there, stroking you like little tongues.  Tell me how much you need to cum.  Tell me and I'll let you blow your pent-up load deep inside me.  I doubt you could get me pregnant, I'm probably too unstable to breed with someone like you.  Or maybe you'd like to take a gamble and try?  Do it, fill my pussy with your cum!</i>\"");
 	
-	outputText("\n\nYou plead with her, begging her to let you cum.  You NEED to cum, you feel like you're going to burst!  You ache for relief.  \"<i>please, let her release yourself into your womb!</i>\" you cry out to her.  Licking her lips in anticipation, Minerva lets go of your dick, her cum-blocking tentacles relaxing around you and letting the pressure off of your swollen prick.  With a hollow groan of release, you unleash everything you have into her, flooding her waiting womb with your spooge.");
+	outputText("\n\nYou plead with her, begging her to let you cum.  You NEED to cum, you feel like you're going to burst!  You ache for relief.  \"<i>Please, let me release myself into your womb!</i>\" you cry out to her.  Licking her lips in anticipation, Minerva lets go of your dick, her cum-blocking tentacles relaxing around you and letting the pressure off of your swollen prick.  With a hollow groan of release, you unleash everything you have into her, flooding her waiting womb with your spooge.");
 	
 	//Low-moderate cum:
 	if(player.cumQ() < 500) {

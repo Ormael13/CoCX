@@ -1637,7 +1637,7 @@ private function talkNHandToKelly():void {
 		outputText("\n\n\"<i>So,</i>\" says Kelly with feigned casualness as she masturbates you.  \"<i>When can I move in with you, [Master]?  I don't mind if you've got other sluts, you know.  I know someone as virile as you needs many.</i>\"  You sigh, enjoying the coils of pleasure around your [cocks], receding then tightening, wondering how you'll field this one.  Your rising seed pushes open a black doorway in your mind and you smirk.");
 		
 		outputText("\n\n\"<i>You can move in with me once you've paid me back.</i>\"");
-		outputText("\n\n\"<i>Paid...paid you back? What do you mean?</i>\"");
+		outputText("\n\n\"<i>Paid... paid you back? What do you mean?</i>\"");
 		outputText("\n\n\"<i>For all the trouble I went through, bringing out your true self.  That pretty, needy pussy, those big whorish jugs, that thirst for cum, all the things you enjoy so much....  Do you know how difficult getting all that succubus milk together was?  It doesn't grow on trees, slave.  Then there's all that rich jizz I have to keep feeding you.  I'm rendering YOU a service when I use your wanton body, not the other way around.  Every time I deign to plug one of your slut-holes with hot cock, you are falling more and more in debt with me.</i>\"");
 		
 		outputText("\n\n\"<i>I-I'm sorry [Master],</i>\" Kelly whispers, her hot hands sliding up and down your [cock]");

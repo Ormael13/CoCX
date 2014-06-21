@@ -677,7 +677,7 @@ public function doCombat(eventNum:Number):void
 			}
 			if (player.lust >= 65) {
 				outputText("As the demons mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ", false);
-				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the	nearest inviting demonic hole.", false);
+				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the nearest inviting demonic hole.", false);
 				if (player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.", false);
 				if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.", false);
 				if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.", false);
@@ -1522,7 +1522,7 @@ public function attack():void {
 			//50% Bleed chance
 			if(player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) {
 				monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many, bloody gashes your hooked gauntlets leave behind.", false);
+				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
 				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
 			}
 		}
@@ -2005,7 +2005,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) {
 		if(flags[kFLAGS.PC_FETISH] >= 2) {
-			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
+			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you and have you at its mercy.\n\n");
 			dynStats("lus", 3);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
@@ -2075,7 +2075,7 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.KissOfDeath) >= 0) {
 		//Effect 
-		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted....\n\n", false);
+		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n", false);
 		dynStats("lus", 5);
 		takeDamage(15);		
 	}
@@ -2316,9 +2316,9 @@ public function showMonsterLust():void {
 	else if(monster.short == "Minerva") {
 		if(monster.lust < 40) {}
 		//(40)
-		else if(monster.lust < 60) outputText("Letting out a groan Minerva shakes her head focusing on the fight at hand.  The bulge in her short is getting larger, but the siren ignores her growing hard-on and continues to keep fighting.  ");
+		else if(monster.lust < 60) outputText("Letting out a groan Minerva shakes her head, focusing on the fight at hand.  The bulge in her short is getting larger, but the siren ignores her growing hard-on and continues fighting.  ");
 		//(60) 
-		else if(monster.lust < 80) outputText("Tentacles are squirming out from the crotch of her shorts as the throbbing bulge grows bigger and bigger.  Becoming harder and harder... for Minerva to ignore.  And a damp spot has formed just below the bulge.  ");
+		else if(monster.lust < 80) outputText("Tentacles are squirming out from the crotch of her shorts as the throbbing bulge grows bigger and bigger, becoming harder and harder... for Minerva to ignore.  A damp spot has formed just below the bulge.  ");
 		//(80)
 		else outputText("She's holding onto her weapon for support as her face is flushed and pain-stricken.  Her tiny, short shorts are painfully holding back her quaking bulge, making the back of the fabric act like a thong as they ride up her ass and struggle against her cock.  Her cock-tentacles are lashing out in every direction.  The dampness has grown and is leaking down her leg.");
 	}
@@ -2346,7 +2346,7 @@ public function showMonsterLust():void {
 		//(sub 70)
 		else if(monster.lust < 70) outputText("Kelt's member has grown to its full size and even flared a little at the tip.  It bobs and sways with every movement he makes, reminding him how aroused you get him.  ");
 		//(sub 80)
-		else if(monster.lust < 80) outputText("Kelt has unabashedly aroused at this point.  His skin is flushed, his manhood is erect, and a thin bead of pre has begun to bead underneath.  ");
+		else if(monster.lust < 80) outputText("Kelt is unabashedly aroused at this point.  His skin is flushed, his manhood is erect, and a thin bead of pre has begun to bead underneath.  ");
 		//(sub 90)
 		else if(monster.lust < 90) outputText("Kelt seems to be having trouble focusing.  He keeps pausing and flexing his muscles, slapping his cock against his belly and moaning when it smears his pre-cum over his equine underside.  ");
 		//(sub 100) 
@@ -3161,7 +3161,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//14 Brood Mother
 		case 14:
-			if(rand(2) == 0) outputText("You tear open your " + player.armorName + " and slip a few fingers into your well-used birth canal, giving your opponent a good look at what they're missing.  \"<i>C'mon stud,</i>\" you say, voice dripping with lust and desire, \"<i>Come to mama " + player.short + " and fuck my pussy 'till your baby batter just POURS out.  I want your children inside of me, I want your spawn crawling out of this cunt and begging for my milk.  Come on, FUCK ME PREGNANT!</i>\"", false);
+			if(rand(2) == 0) outputText("You tear open your " + player.armorName + " and slip a few fingers into your well-used birth canal, giving your opponent a good look at what they're missing.  \"<i>C'mon stud,</i>\" you say, voice dripping with lust and desire, \"<i>Come to mama " + player.short + " and fuck my pussy 'til your baby batter just POURS out.  I want your children inside of me, I want your spawn crawling out of this cunt and begging for my milk.  Come on, FUCK ME PREGNANT!</i>\"", false);
 			else outputText("You wiggle your " + hipDescript() + " at your enemy, giving them a long, tantalizing look at the hips that have passed so very many offspring.  \"<i>Oh, like what you see, bad boy?  Well why don't you just come on over and stuff that cock inside me?  Give me your seed, and I'll give you suuuuch beautiful offspring.  Oh?  Does that turn you on?  It does!  Come on, just let loose and fuck me full of your babies!</i>\"", false);
 			chance += 2;
 			damage += 4;
@@ -3240,7 +3240,7 @@ public function tease(justText:Boolean = false):void {
 				outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.", false);
 			}
 			else {
-				outputText("Panting with your unstoppable lust for the deliscious, impregnatable cunt before you, you yank off your " + player.armorName + " with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state and grab her shoulders.  ", false);
+				outputText("Panting with your unstoppable lust for the delicious, impregnable cunt before you, you yank off your " + player.armorName + " with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state and grab her shoulders.  ", false);
 				outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!", false);
 			}
 			penis = true;
@@ -3296,7 +3296,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//32 Genderless servant clothes
 		case 32:
-			outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your " + buttDescript() + " really is, all you have to offer downstairs.", false);
+			outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.", false);
 			ass = true;
 			chance++;
 			damage += 2;
@@ -3422,7 +3422,7 @@ public function tease(justText:Boolean = false):void {
 				damage += 3;
 			}
 			else if(cows == 5) {
-				outputText("You crouch low, letting your breasts dangle in front of you.  Each hand caresses on in turn as you slowly milk yourself onto your thighs, splashing white, creamy milk over your hips and sex.");
+				outputText("You crouch low, letting your breasts dangle in front of you.  Each hand caresses one in turn as you slowly milk yourself onto your thighs, splashing white, creamy milk over your hips and sex.");
 				vagina = true;
 				breasts = true;
 				chance++;
@@ -4231,7 +4231,7 @@ public function hellFire():void {
 		damage += 25;
 	}
 	if(monster.short == "Isabella") {
-		outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to sides.\n\n", false);
+		outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 		outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
@@ -4708,7 +4708,7 @@ public function fireballuuuuu():void {
 	else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ", false);
 
 	if(monster.short == "Isabella") {
-		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to sides.\n\n", false);
+		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 		outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;

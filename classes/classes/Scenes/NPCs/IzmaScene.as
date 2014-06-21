@@ -1608,7 +1608,7 @@ private function sendToFarm():void
 
 	outputText("\n\n“<i>Not at all,</i>” you reply. “<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>” This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
 	
-	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labour and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
+	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
 	

@@ -276,9 +276,13 @@ private function rapeMarbleInHerRoom():void {
 	//Pass several hours
 	//Just before Marble hits the player with her hammer in original rape scene
 	outputText("Satisfied, you pull back from the cow-girl's quivering body, and collect her hammer from the floor, informing her that you'll be taking it as compensation for the trouble she's caused you.  After dressing, you exit the barn.");
-	outputText("\n\nA very angry looking Whitney is staring at you.  \"<i>It seems I misjudged you, [name].  The fuck did you do to Marble?</i>\"  Seems to be a rhetorical question; the knowledge and her reaction to it are already all over her face.  \"<i>Don't you dare ever fucking come back here.  This place is a sanctuary from your kind, and I will kill to protect it.</i>\"  You snort and leave the farm, keeping Marble's hammer.  You didn't like the place anyway.");
-	//Farm is removed from places and cannot be rediscovered.  Later, if written, going back to the farm can trigger a fight with Whitney or the other residents of the farm instead.
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)
+	{
+		outputText("\n\nA very angry looking Whitney is staring at you.  \"<i>It seems I misjudged you, [name].  The fuck did you do to Marble?</i>\"  Seems to be a rhetorical question; the knowledge and her reaction to it are already all over her face.  \"<i>Don't you dare ever fucking come back here.  This place is a sanctuary from your kind, and I will kill to protect it.</i>\"  You snort and leave the farm, keeping Marble's hammer.  You didn't like the place anyway.");
+	}
+	
 	flags[kFLAGS.FARM_DISABLED] = 1;
+	
 	//End event
 	cleanupAfterCombat();
 }
@@ -1661,7 +1665,7 @@ private function marbleTalkOverhaul():void {
 	if( (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5 && flags[kFLAGS.MARBLE_LUST] >= 20) || (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] >= 4) )
 	{
 		outputText( "[pg]<b>Marble is fidgeting around uncomfortably, perhaps she needs to be milked?</b>" );
-		addButton( 1, "Milking", milkMarble );
+		addButton( 2, "Milking", milkMarble );
 	}
 	if(player.cor<50 && player.statusAffectv4(StatusAffects.Marble)<60) addButton(1,"Just Talk",talkWithMarbleAtCamp);
 	addButton(9,"Back",interactWithMarbleAtCamp);

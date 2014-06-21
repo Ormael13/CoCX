@@ -33,6 +33,16 @@ public function farmExploreEncounter():void {
 		return;
 	}
 	
+	if (farmCorruption.takeoverPrompt() == true) return;
+	
+	if (flags[kFLAGS.FARM_DISABLED] == 1)
+	{
+		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
+		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Marble you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
+		doNext(13);
+		return;
+	}
+	
 	var temporary:Number = 0;
 	//Farm not yet discovered
 	if(player.statusAffectv1(StatusAffects.MetWhitney) < 2) {
@@ -52,7 +62,7 @@ public function farmExploreEncounter():void {
 	//Repeat Offender
 	else {
 		spriteSelect(62);
-		if (farmCorruption.takeoverPrompt() == true) return;
+		
 		
 		if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
 			clearOutput();
@@ -311,7 +321,7 @@ private function talkWhitney():void {
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
 }
 
-private function workFarm():void {
+public function workFarm():void {
 	var marbling:Number = 0;
 	outputText("", true);
 	//In withdrawl odds are higher.

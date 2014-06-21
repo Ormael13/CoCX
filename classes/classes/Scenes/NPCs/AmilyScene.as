@@ -5580,7 +5580,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n“<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>” Amily quivers, staining the ground beneath her with pussy juices at the thought.");
 			
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>”");
-			else outputText("\n\n“<i>It will be an honour, [master]!</i>”");
+			else outputText("\n\n“<i>It will be an honor, [master]!</i>”");
 			
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
 			
