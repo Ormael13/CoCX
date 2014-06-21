@@ -46,7 +46,7 @@ public function wingsDescript():String {
 public function tailDescript():String {
 	return Appearance.tailDescript(player);
 }
-public function oneTail():String {
+public function oneTailDescript():String {
 	return Appearance.oneTailDescript(player);
 }
 
