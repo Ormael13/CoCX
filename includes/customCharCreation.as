@@ -157,6 +157,22 @@ public function customPCSetup():void {
 		// Milky
 		flags[kFLAGS.MILK_NAME] = "Milky";
 		flags[kFLAGS.MILK_SIZE] = 2;
+		
+		// Rubi Testing
+		flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
+		flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
+		flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;
+		flags[kFLAGS.RUBI_TUBE_TOP] = 1;
+		flags[kFLAGS.RUBI_BODYSUIT] = 1;
+		flags[kFLAGS.RUBI_LONGDRESS] = 1;
+		flags[kFLAGS.RUBI_TIGHT_PANTS] = 1;
+		flags[kFLAGS.RUBI_NURSE_CLOTHES] = 1;
+		flags[kFLAGS.RUBI_SWIMWEAR] = 1;
+		flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
+		flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
+		flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
+		flags[kFLAGS.RUBI_AFFECTION] = 100;
+		flags[kFLAGS.RUBI_INTRODUCED] = 1;
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();

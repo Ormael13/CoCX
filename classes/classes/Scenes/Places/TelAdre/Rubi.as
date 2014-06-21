@@ -230,6 +230,7 @@ internal function rubiIntros():Number {
 	outputText("\n");
 	return 3894;
 }
+
 //Approach Rubi scenes
 public function approachRubiScenes():void {
 	outputText(images.showImage("rubi-at-cafe"), false);
@@ -251,7 +252,8 @@ public function approachRubiScenes():void {
 		if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) choices[choices.length] = 2;
 		if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) choices[choices.length] = 3;
 		//(Green Adventurer's Clothing (Normal)
-		if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) choices[choices.length] = 4;
+		// There's NO content covering this outfit here, so I'm commenting it out.
+		//if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) choices[choices.length] = 4;
 		//(Tube Top (Normal))
 		if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) choices[choices.length] = 5;
 		//(Bodysuit (Normal))

@@ -53,8 +53,6 @@ public function brookeCapacity():Number {
 	return 60;
 }
 
-
-
 //Occurs automatically after the second time you choose to hit the showers after a workout.  From then, the choice to ‘hit the showers’ then becomes either visit the machine or to actually go to the shower.
 public function meetBrookeFirstTime():void {
 	clearOutput();
