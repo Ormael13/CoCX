@@ -3518,7 +3518,7 @@ private function milkMarbleCunnilingling():void
 	outputText( "[pg]In response to your tugging and toying with her outer folds, Marble's hips jerk forward slightly, and you see her love button pulse and engorge itself.  There is a happy moan, and her tail manages to find itself flicking your face.  You swat the pesky wrappings away and continue your efforts at bringing your mate to the height of pleasure.  The next target: her clit." );
 	
 	outputText( "[pg]There is a long drawn out cry of joy when you bring your [tongue] to the source of her womanly pleasure.  " );
-	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText( "With the first flick across its pink flesh, Marble grabs ahold of her [Marble.cock], and tightly squeezes it, slowly pushing her hand down it." );
+	if( flags[kFLAGS.MARBLE_DICK_TYPE] > 0 ) outputText( "With the first flick across its pink flesh, Marble grabs ahold of her "+ marbleCock() +", and tightly squeezes it, slowly pushing her hand down it." );
 	else outputText( "With the first flick across its pink flesh, Marble grabs onto an arm of her chair, gripping it tightly." );
 	outputText( "  You can't help but laugh and ask her if your treatment is too much, suggesting that maybe you should save playing more for later." );
 	
