@@ -2475,7 +2475,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.statusAffectv1(StatusAffects.Marble) >= 90) {
 					outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble, 0, 0, 0, 0);
+					flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
@@ -2514,7 +2515,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nMarble looks relieved, like a great weight has been lifted from her shoulders.  \"<i>I'm glad you won't need me anymore then,</i>\" she says, her face falling, \"<i>Now, no one will mind if I disappear.</i>\"  You look at her in surprise and quickly grab her arms.  You tell her with no uncertainty that if she disappeared, you would forever miss her.  You don't care about her milk, it doesn't matter; it is her as a person that matters to you.  You wouldn't have done all those things or spent all that time together if you didn't care about her.  She bursts into tears and hugs you tightly to her breasts.\n\n", false);
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
-					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble, 0, 0, 0, 0);
+					flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
@@ -2577,7 +2579,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble, 0, 0, 0, 0);
+					flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
@@ -2615,7 +2618,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					marbleScene.marbleAddictionSex(false);
 					outputText("\n", false);
 					//(Marble now appears at the camp)
-					player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+					player.createStatusAffect(StatusAffects.CampMarble, 0, 0, 0, 0);
+					flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 					if(isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
 					player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)

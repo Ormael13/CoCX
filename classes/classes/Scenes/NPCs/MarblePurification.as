@@ -1571,6 +1571,7 @@ package classes.Scenes.NPCs {
 		player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 0;
 		flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 0;
+		flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 		doNext(13);
 	}
 	//Clara prison camp descriptions
