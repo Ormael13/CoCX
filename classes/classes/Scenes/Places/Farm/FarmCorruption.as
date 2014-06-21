@@ -6200,6 +6200,8 @@ package classes.Scenes.Places.Farm
 			player.gems -= 2200;
 			showStats();
 			
+			flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] = 1;
+			
 			doNext(13);
 		}
 
@@ -6350,6 +6352,7 @@ package classes.Scenes.Places.Farm
 			if (player.lust >= 33) outputText(" The hot tub bubbles quietly behind her and it is not just oil which is making your skin glow. This would be the moment to pursue a happy ending if you so wished.");
 			else outputText(" You play with the idea of ‘rewarding’ her but... damn. She’s actually managed to relax you <i>too</i> much. You thank her regally, redress, and head out the door, enjoying the lightness of step and self-control which thrums through you.");
 
+			menu();
 			if (player.lust >= 33 && (player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 || player.hasVagina()))
 			{
 				addButton(0, "Happy Ending", orgyRoomSubMassageHappyEnding);
@@ -6366,7 +6369,7 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			whitneySprite();
 
-			outputText("\n\nYou silently rise from the slab and put your arm around your masseuse’s tight body. It radiates heat into you as you send a hand sliding down the curve of her back to squeeze at her tight, supple butt.");
+			outputText("You silently rise from the slab and put your arm around your masseuse’s tight body. It radiates heat into you as you send a hand sliding down the curve of her back to squeeze at her tight, supple butt.");
 
 			outputText("\n\n“<i>M-[master].</i>” Whitney giggles, lowering the gaze of her red-flecked eyes and pushing her hands into your chest with faux-modesty. “<i>You’ll undo all the muscle therapy we’ve done if you go and get oil all over - oop!</i>”");
 			if (player.tallness >= 67)
@@ -6446,7 +6449,7 @@ package classes.Scenes.Places.Farm
 			clearOutput();
 			whitneySprite();
 
-			outputText("\n\nYou drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, brushing through the neat thatch of her public hair to sink your fingers into her tight, welcoming hole.  You winch one of your [legs] over hers, pushing your [vagina] against hers, sighing as your lips touch and rub over each other. ");
+			outputText("You drift across and envelope her in your body, your [chest] pushing into the soft suppleness of her small breasts. Feeling your urge but not overcome by it in your relaxed state you instead take time to enjoy the give and take of your slave’s body, her flat stomach planing over yours, the feeling of her hard nipples against your chest, her long, "+ ((whitneyDefurred()) ? "smooth" : "downy") +" legs tangling with yours in the slow motion of the water.  Her breath catches in her chest, panting and trembling there as you push your hand between her thighs, brushing through the neat thatch of her public hair to sink your fingers into her tight, welcoming hole.  You winch one of your [legs] over hers, pushing your [vagina] against hers, sighing as your lips touch and rub over each other. ");
 
 			if (player.hasCock()) outputText("\n\nYour [cock biggest], so used to getting the premium treatment, bulges in agitation and the male impulse to fuck her wide and silly with it saturates the back of your mind - but in this steamy, leisured moment you are much more interested in indulging your female side. And anyway... as you push your [vagina] into her, you slide your [cock biggest] up her abdomen, enjoying the smoothness of her flesh on one side and the sloshing hot foam on the other. Whitney hums with pleasure and clasps the thick cock pointing towards her breasts in her hands, slowly rubbing it up and down as you prepare to scissor her.");
 

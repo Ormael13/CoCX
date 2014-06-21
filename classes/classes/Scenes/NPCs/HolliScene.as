@@ -441,7 +441,8 @@ private function fuckTheFlower():void {
 	dynStats("cor", 1);
 	fatigue(5);
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
-	flags[kFLAGS.TIMES_FUCKED_FLOWER] = 1;
+	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	doNext(13);
 }
 
@@ -480,7 +481,8 @@ private function rideTheWalrusP3():void {
 	player.orgasm();
 	dynStats("lib", 1, "sen", -5);
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
-	flags[kFLAGS.TIMES_RIDDEN_FLOWER] = 1;
+	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;;
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	doNext(13);
 }
 
@@ -935,6 +937,7 @@ private function holliGetsDickDommed():void {
 	player.orgasm();
 	dynStats("sen", -2, "cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli();
 	doNext(13);
 }
@@ -968,6 +971,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	player.orgasm();
 	dynStats("lib", .4, "sen", -3, "cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli();
 	fertilizeHolli();
 	doNext(13);
@@ -1014,6 +1018,7 @@ private function vaginalDomHollisTentacruels():void {
 	outputText(".  The second time, you make it up.  Holli is a mess.  Everything from the shoulders up is glazed white, while the rest of her body has strings of seed dangling like obscene Christmas ornaments.  Around you, there's small puddles of seed rapidly vanishing into the wasted earth - each of the other tentacles erupted with its brothers, spurting uselessly as you ignored it.");
 	outputText("\n\nYou give Holli a peck on her cheek, savoring the flavor and say, \"<i>Good girl.</i>\"  Then, you get dressed, trying to ignore the squishing wetness between your thighs.");
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
+	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli(false);
 	player.slimeFeed();
 	player.orgasm();
