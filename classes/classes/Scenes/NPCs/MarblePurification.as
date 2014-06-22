@@ -96,12 +96,13 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 		player.consumeItem(consumables.P_LBOVA);
-	 	outputText("You tell Marble that you managed to get some LaBova alchemically purified, and you want her to drink some. Your bovine lover meets your eyes calmly and nods, holding out her hand for the vial, which you hand over to her. She opens the bottle of creamy, milk-based fluid and chugs it down without hesitation.");
+	 	outputText("You tell Marble that you managed to get some LaBova alchemically purified, and you want her to drink some.");
 		//First time
 		if(flags[kFLAGS.TIMES_GIVEN_MARBLE_PURE_LABOVA] == 0)
 		{
 			//Marble’s corruption is reduced by 4
-			player.addStatusValue(StatusAffects.Marble,4,-4);
+			player.addStatusValue(StatusAffects.Marble, 4, -4);
+			outputText("\n\nYour bovine lover meets your eyes calmly and nods, holding out her hand for the vial, which you hand over to her. She opens the bottle of creamy, milk-based fluid and chugs it down without hesitation.");
 		 	outputText("\n\nShe promptly drops the empty bottle on the ground, where it smashes, her hands going to her stomach and pressing themselves against it. She grimaces in pain, her stomach audibly gurgling as it rebels against the alien fluid she’s forced herself to drink. She arches her back and lets out a pained moan as her ");
 			if(player.statusAffectv2(StatusAffects.MarbleSpecials) == 4) outputText("eight");
 			else outputText("two");
@@ -121,7 +122,8 @@ package classes.Scenes.NPCs {
 		else
 		{
 			//Marble’s corruption is reduced by 4
-			player.addStatusValue(StatusAffects.Marble,4,-4);
+			player.addStatusValue(StatusAffects.Marble, 4, -4);
+			outputText("\n\nYour bovine lover meets your eyes calmly and nods, holding out her hand for the vial, which you hand over to her. She opens the bottle of creamy, milk-based fluid and chugs it down without hesitation.");
 		 	outputText("\n\nShe quickly hurries to remove her shirt lest she stain it again, allowing her great, heavy");
 			if(flags[kFLAGS.MARBLE_BOVA_LEVEL] > 1) outputText(", fur covered");
 		 	outputText(" breasts to dangle freely. Stoically she bears the pain as her stomach loudly rumbles and groans, holding her breasts up proudly as her ");
