@@ -52,13 +52,9 @@ public function getClass(obj:Object):Class
 
 //ASSetPropFlags(Object.prototype, ["clone"], 1);
 
-public function loadSaveDisplay(slot:String, slotName:String):String
+public function loadSaveDisplay(saveFile:Object, slotName:String):String
 {
 	var holding:String = "";
-	//Initialize the save file
-	var saveFile:* = SharedObject.getLocal(slot, "/");
-	//trace(slot+".data="+(function(x){var z=[];for (var i in x){z.push(i);}return z})(saveFile.data).join(","));
-	var pfileHolding:Creature;
 	if (saveFile.data.exists)
 	{
 		if (saveFile.data.notes == undefined)
@@ -84,20 +80,99 @@ public function loadSaveDisplay(slot:String, slotName:String):String
 	return slotName + ":  <b>EMPTY</b>\r     \r";
 }
 
+CONFIG::AIR
+{
+
+public function loadScreenAIR():void
+{
+	var airSaveDir:File = File.documentsDirectory.resolvePath(savedGameDir);
+	var fileList:Array = airSaveDir.getDirectoryListing();
+	var maxSlots:int = saveFileNames.length;
+	var slots:Array = new Array(maxSlots);
+	var gameObjects:Array = new Array(maxSlots);
+
+	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
+	
+	var i:uint = 0;
+	for (var fileCount:uint = 0; fileCount < fileList.length; fileCount++)
+	{
+		// We can only handle maxSlots at this time
+		if (i >= maxSlots)
+			break;
+
+		// Only check files expected to be save files
+		var pattern:RegExp = /\.coc$/i;
+		if (!pattern.test(fileList[fileCount].url))
+			continue;
+
+		gameObjects[i] = getGameObjectFromFile(fileList[fileCount]);
+		outputText(loadSaveDisplay(gameObjects[i], String(i+1)), false);
+				
+		if (gameObjects[i].data.exists)
+		{
+			//trace("Creating function with indice = ", i);
+			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			{
+				slots[i] = function() : void 		// Anonymous functions FTW
+				{
+					trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
+					outputText("", true);
+					loadGameObject(gameObjects[i]);
+					outputText("Slot " + String(i+1) + " Loaded!");
+					statScreenRefresh();
+					doNext(1);
+				}
+			})(i);
+		}
+		else
+		{
+			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
+		}
+		i++;
+	}
+	
+	choices("Slot 1", slots[0], 
+	"Slot 2", slots[1], 
+	"Slot 3", slots[2], 
+	"Slot 4", slots[3], 
+	"Slot 5", slots[4], 
+	"Slot 6", slots[5], 
+	"Slot 7", slots[6],
+	"Slot 8", slots[7], 
+	"Slot 9", slots[8], 
+	"Back", 30);
+}
+
+public function getGameObjectFromFile(aFile:File):Object
+{
+	var stream:FileStream = new FileStream();
+	var bytes:ByteArray = new ByteArray();
+	try
+	{
+		stream.open(aFile, FileMode.READ);
+		stream.readBytes(bytes);
+		stream.close();
+		return bytes.readObject();
+	}
+	catch (error:Error)
+	{
+		outputText("Failed to read save file, " + aFile.url + " (" + error.message + ")", true);
+	}
+	return NULL;
+ }
+
+}
+
 public function loadScreen():void
 {
-	var test:*;
-	
 	var slots:Array = new Array(saveFileNames.length);
 		
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
-		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
-		
-		
-		test = SharedObject.getLocal(saveFileNames[i], "/");
+		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
+		outputText(loadSaveDisplay(test, String(i + 1)), false);
 		if (test.data.exists)
 		{
 			//trace("Creating function with indice = ", i);
@@ -152,9 +227,8 @@ public function saveScreen():void
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
-		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
-		
-		
+		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
+		outputText(loadSaveDisplay(test, String(i + 1)), false);
 		trace("Creating function with indice = ", i);
 		(function(i:int) : void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 		{
@@ -262,7 +336,6 @@ public function saveLoad(e:MouseEvent = null):void
 
 public function deleteScreen():void
 {
-	var test:*;
 	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
 	
 
@@ -271,10 +344,8 @@ public function deleteScreen():void
 	
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
-		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
-		
-		
-		test = SharedObject.getLocal(saveFileNames[i], "/");
+		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
+		outputText(loadSaveDisplay(test, String(i + 1)), false);
 		if (test.data.exists)
 		{
 			//slots[i] = loadFuncs[i];
@@ -292,8 +363,6 @@ public function deleteScreen():void
 		else
 			delFuncs[i] = 0;	//disable buttons for empty slots
 	}
-	
-	// outputText(loadSaveDisplay("CoC_1", "1") + loadSaveDisplay("CoC_2", "2") + loadSaveDisplay("CoC_3", "3") + loadSaveDisplay("CoC_4", "4") + loadSaveDisplay("CoC_5", "5") + loadSaveDisplay("CoC_6", "6") + loadSaveDisplay("CoC_7", "7") + loadSaveDisplay("CoC_8", "8") + loadSaveDisplay("CoC_9", "9"), false);
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
 	choices("Slot 1", delFuncs[0], 
@@ -911,20 +980,16 @@ public function openSave():void
 	// Block when running the chaos monkey
 	if (!(kGAMECLASS.monkey.run))
 	{
-		var fileFilter:FileFilter = new FileFilter("Documents", "*.sol");
 		CONFIG::AIR
 		{
-			airFile = new File();
-			airFile.addEventListener(Event.SELECT, onFileSelected);
-			airFile.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-			airFile.browseForOpen("Open", [fileFilter]);
+			loadScreenAIR();
 		}
 		CONFIG::STANDALONE
 		{
 			file = new FileReference();
 			file.addEventListener(Event.SELECT, onFileSelected);
 			file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-			file.browse([fileFilter]);
+			file.browse();
 		}
 		//var fileObj : Object = readObjectFromStringBytes("");
 		//loadGameFile(fileObj);
