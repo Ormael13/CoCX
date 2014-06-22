@@ -8,7 +8,7 @@
 		//Special Attack 1
 		protected function impFire():void
 		{
-			outputText("The imp mutters something to himself, before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn or you torso, as well as an arousing heat in your groin.");
+			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin.");
 			//[-HP // +Lust(minor)]
 			var damage:int = 40 + rand(10);
 			player.takeDamage(damage);
