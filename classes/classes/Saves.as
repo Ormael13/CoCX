@@ -4,6 +4,8 @@
 	import classes.GlobalFlags.kGAMECLASS;
 
 	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.events.Event;
@@ -33,6 +35,7 @@ public var loader:URLLoader;
 
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
+public var savedGameDir:String = "data/com.fenoxo.coc";
 
 public function cloneObj(obj:Object):Object
 {
@@ -794,12 +797,37 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	{
 		if (!(kGAMECLASS.monkey.run))
 		{
-			file = new FileReference();
 			//outputText(serializeToString(saveFile.data), true);
 			var bytes:ByteArray = new ByteArray();
 			bytes.writeObject(saveFile);
-			file.save(bytes, null);
-			outputText("Attempted to save to file.", true);
+			CONFIG::AIR
+			{
+				// saved filename: "name of character".coc
+				var airSaveDir:File = File.documentsDirectory.resolvePath(savedGameDir);
+				var airFile:File = airSaveDir.resolvePath(player.short + ".coc");
+				var stream:FileStream = new FileStream();
+				try
+				{
+					airSaveDir.createDirectory();
+					stream.open(airFile, FileMode.WRITE);
+					stream.writeBytes(bytes);
+					stream.close();
+					outputText("Saved to file: " + airFile.url, true);
+					doNext(1);
+				}
+				catch (error:Error)
+				{
+					backupAborted = true;
+					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")", true);
+					doNext(1);
+				}
+			}
+			CONFIG::STANDALONE
+			{
+				file = new FileReference();
+				file.save(bytes, null);
+				outputText("Attempted to save to file.", true);
+			}
 		}
 	}
 	else if (!processingError)
