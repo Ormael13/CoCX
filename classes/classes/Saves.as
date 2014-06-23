@@ -86,11 +86,21 @@ CONFIG::AIR
 public function loadScreenAIR():void
 {
 	var airSaveDir:File = File.documentsDirectory.resolvePath(savedGameDir);
-	var fileList:Array = airSaveDir.getDirectoryListing();
+	var fileList:Array = new Array();
 	var maxSlots:int = saveFileNames.length;
 	var slots:Array = new Array(maxSlots);
 	var gameObjects:Array = new Array(maxSlots);
 
+	try
+	{
+		airSaveDir.createDirectory();
+		fileList = airSaveDir.getDirectoryListing();
+	}
+	catch (error:Error)
+	{
+		outputText("Error reading save directory: " + airSaveDir.url + " (" + error.message + ")", true);
+		return;		
+	}
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
 	
 	var i:uint = 0;
