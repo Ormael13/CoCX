@@ -128,6 +128,7 @@ package classes
 		public static const NoMoreMarble:StatusAffectType = mk("No More Marble");
 		public static const Oswald:StatusAffectType = mk("Oswald");
 		public static const PlainOnaholeUsed:StatusAffectType = mk("plain onahole used");
+		public static const PhoukaWhiskeyAffect:StatusAffectType = mk("PhoukaWhiskeyAffect");
 		public static const PostAkbalSubmission:StatusAffectType = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusAffectType = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusAffectType = mk("PureCampJojo");

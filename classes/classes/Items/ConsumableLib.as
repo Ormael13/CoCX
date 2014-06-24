@@ -6,10 +6,13 @@ package classes.Items
 	import classes.BaseContent;
 	import classes.CoC;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Consumables.BeeHoney;
 	import classes.Items.Consumables.BimboLiqueur;
 	import classes.Items.Consumables.DeBimbo;
 	import classes.Items.Consumables.LustStick;
 	import classes.Items.Consumables.OvipositionElixir;
+	import classes.Items.Consumables.PhoukaWhiskey;
+	import classes.Items.Consumables.RizzaRoot;
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.Items.Consumables.WingStick;
 	import classes.Player;
@@ -21,7 +24,8 @@ package classes.Items
 		public const B__BOOK:SimpleConsumable = mk("B. Book","B. Book", "a small book with a midnight-black cover", m.blackSpellbook, "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.", 40);
 		public const B_GOSSR:SimpleConsumable = mk("B.Gossr","B.Gossr", "a bundle of black, gossamer webbing", curry(m.sweetGossamer, 1), "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?");
 		public const BC_BEER:SimpleConsumable = mk("BC Beer","BC Beer", "a mug of Black Cat Beer", function(player:Player):void{getGame().telAdre.niamh.blackCatBeerEffects(player)}, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.", 1);
-		public const BEEHONY:SimpleConsumable = mk("BeeHony","BeeHony", "a small vial filled with giant-bee honey", curry(m.pureHoney, false), "This fine crystal vial is filled with a thick amber liquid that glitters dully in the light.  You can smell a sweet scent, even though it is tightly corked.");
+		public const BEEHONY:BeeHoney			= new BeeHoney(false);
+		//mk("BeeHony","BeeHony", "a small vial filled with giant-bee honey", curry(m.pureHoney, false), "This fine crystal vial is filled with a thick amber liquid that glitters dully in the light.  You can smell a sweet scent, even though it is tightly corked.");
 		public const BIMBOCH:SimpleConsumable = mk("BimboCh","BimboCh", "a bottle of bimbo champagne", curry(function(player:Player):void{getGame().telAdre.niamh.bimboChampagne(player,true,true)}), null, 1);
 		public const BIMBOLQ:BimboLiqueur = new BimboLiqueur();
 		public const BLACK_D:SimpleConsumable = mk("Black D","Black D", "a vial of black hair dye", curry(m.hairDye, "black"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
@@ -88,13 +92,15 @@ package classes.Items
 		public const P_LBOVA:SimpleConsumable = mk("P.LBova","P.LBova", "a bottle containing a white fluid labeled \"Pure LaBova\"", curry(m.laBova, false, false),"A bottle containing a misty fluid with a grainy texture; it has a long neck and a ball-like base.  The label has a stylized picture of a well-endowed cow-girl nursing two guys while they jerk themselves off. It has been purified by Rathazul.");
 		public const P_PEARL:SimpleConsumable = mk("P.Pearl","P.Pearl", "a pure pearl", m.purePearl, null,1000);
 		public const P_S_MLK:SimpleConsumable = mk("P.S.Mlk","P.S.Mlk", "an untainted bottle of Succubi milk", curry(m.succubiMilk, false), "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.", 20);
+		public const P_WHSKY:PhoukaWhiskey		= new PhoukaWhiskey();
 		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", 120);
 		public const PINKDYE:SimpleConsumable = mk("PinkDye","PinkDye", "a vial of bright pink hair dye", curry(m.hairDye, "neon pink"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
 		public const PINKEGG:SimpleConsumable = mk("PinkEgg","PinkEgg", "a pink and white mottled egg", curry(m.pinkEgg, false),"This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.");
 		public const PRFRUIT:SimpleConsumable = mk("PrFruit","PrFruit", "a purple fruit", m.purpleFruitEssrayle, "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.");
 		public const PROBOVA:SimpleConsumable = mk("ProBova","ProBova", "a bottle containing a misty fluid labeled \"ProBova\"", curry(m.laBova, true, true), "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.");
 		public const PSDELIT:SimpleConsumable = mk("PSDelit","PSDelit", "an untainted bottle of \"Succubi's Delight\"", curry(m.succubisDelight, false),  "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", 20);
-		public const PURHONY:SimpleConsumable = mk("PurHony","PurHony", "a crystal vial filled with glittering honey", curry(m.pureHoney, true), "This fine crystal vial is filled with a thick amber liquid that glitters in the light.  You can smell a sweet scent, even though it is tightly corked.", 40);
+		public const PURHONY:BeeHoney			= new BeeHoney(true);
+		//public const PURHONY:SimpleConsumable = mk("PurHony","PurHony", "a crystal vial filled with glittering honey", curry(m.pureHoney, true), "This fine crystal vial is filled with a thick amber liquid that glitters in the light.  You can smell a sweet scent, even though it is tightly corked.", 40);
 		public const PURPDYE:SimpleConsumable = mk("PurpDye","PurpDye", "a vial of purple hair dye", curry(m.hairDye, "purple"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
 		public const PURPEAC:SimpleConsumable = mk("PurPeac","PurPeac", "a pure peach", m.purityPeach, "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it.", 10);
 		public const PURPLEG:SimpleConsumable = mk("PurplEg","PurplEg", "a purple and white mottled egg", curry(m.purpleEgg, false),"This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.");
@@ -102,6 +108,7 @@ package classes.Items
 		public const REPTLUM:SimpleConsumable = mk("Reptlum","Reptlum", "a vial of Reptilum", m.reptilum, "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.");
 		public const REDUCTO:SimpleConsumable = mk("Reducto","Reducto", "a salve marked as 'Reducto'", m.reducto, "This container full of paste can be used to shrink a body part down by a significant amount.", 30);
 		public const RINGFIG:SimpleConsumable = mk("RingFig","RingFig","a ringtail fig", m.ringtailFig,"A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.");
+		public const RIZZART:RizzaRoot			= new RizzaRoot();
 		public const S_DREAM:SimpleConsumable = mk("S.Dream","S.Dream", "a bottle of 'Succubus' Dream'", m.succubisDream, "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.");
 		public const S_GOSSR:SimpleConsumable = mk("S.Gossr","S.Gossr", "a bundle of pink, gossamer webbing", curry(m.sweetGossamer,0), "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?");
 		public const SDELITE:SimpleConsumable = mk("SDelite","Sucb.Delite", "a bottle of 'Succubi's Delight'", curry(m.succubisDelight, true),"This precious fluid is often given to men a succubus intends to play with for a long time.");
