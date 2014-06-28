@@ -476,7 +476,11 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 
 //Introduction -- Followers -> Helia
 public function heliaFollowerMenu(display:Boolean = true):void {
-	if(display) clearOutput();
+	if(display) 
+	{
+		clearOutput();
+		spriteSelect(68);
+	}
 	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
 		if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] == 0 && display && player.biggestCockArea() > heliaAnalCapacity()) {
 			heliaAnalTrainingPrompt();
