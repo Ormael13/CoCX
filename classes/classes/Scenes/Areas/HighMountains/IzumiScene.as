@@ -1525,7 +1525,7 @@ package classes.Scenes.Areas.HighMountains
 				 
 				outputText("“<i>Really.  Um.  Please let go.</i>”  She says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  After all, maybe you’ve seized on the source of all her magical strength, or something?  You have no idea, so you decide to simply ask.  “<i>No.  Um.  No... It’s just, um.  T-That isn’t something you should touch.  So, y-you’ll let go now, right?</i>”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.  Interesting....\n\n");
 				 
-				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “<i>Hey,</i>” She says, simply, her voice wavering.  “<i>Hey,</i>” She repeats. “<i>Come on now.  Enough is enough, right?</i>”\n\n");
+				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “<i>Hey,</i>” she says, simply, her voice wavering.  “<i>Hey,</i>” she repeats. “<i>Come on now.  Enough is enough, right?</i>”\n\n");
 			}
 			// Super awesome Gedan edit mode!
 			else
@@ -1595,7 +1595,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText(" she says, swallowing hard and staring at nothing.  Given her sudden change of attitude, you can’t help but wonder if your grip on the horn is somehow responsible.  “<i>T-That isn’t something you should touch.  So, y-you’ll let go now, right?</i>”  Izumi stammers.  You stare at her, fascinated by her complete change of personality; gone is the confident, domineering Oni you originally met.  Instead, Izumi, kneels nervously before you, staring intently into space and trying her level best not to move.\n\n");
 
-				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “Hey,” She says, simply, her voice wavering. “Hey,” She repeats. “Come on now. Enough is enough, right?”\n\n");
+				outputText("Experimentally, you roll your thumb over the rocky surface of the horn.  Instantly, Izumi <i>visibly</i> flinches, her eyes widening in surprise and shock.  “<i>Hey,</i>” She says, simply, her voice wavering. “<i>Hey,</i>” She repeats. “<i>Come on now. Enough is enough, right?</i>”\n\n");
 			}
 
 			outputText("You could play nice and let the Oni go free... she is asking nicely, after all.  On the other hand, after the way she tried to ravage you earlier, you figure Izumi’s arrogant attitude could use being taken down a notch or two.  The only question is, what exactly are you going to do?\n\n");
@@ -1665,7 +1665,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("“<i>Hey, hold it a sec,</i>”  Izumi pipes up suddenly.  “<i>Let’s try it like this, since I don’t really wanna do it standing up...</i>”  She detaches from you, backing away in order to take a seat with her back resting against one of the cave walls.  Satisfied that her new position is comfortable, she turns to you, locking you with a gaze that can only be described as ‘come hither’.  Spreading her legs shamelessly wide, she displays herself to you alluringly, beckoning with one finger.\n\n");
 
-			outputText("“<i>Well?  Come on already,</i>” she says, smirking lasciviously.  “You wanted to do me, right? Well then, you’d better hurry up and get started before I get embarrassed...”\n\n");
+			outputText("“<i>Well?  Come on already,</i>” she says, smirking lasciviously.  “<i>You wanted to do me, right? Well then, you’d better hurry up and get started before I get embarrassed...</i>”\n\n");
 
 			outputText("You advance on Izumi, noting the hungry light in her eyes as you remove your [armor].  Her half-discarded kimono acts as a sort of blanket, softening the ground as you crawl in between the enormous woman’s thighs, positioning yourself to thrust into your new conquest.  “<i>Yeah, let’s do it, "+ this.heightDesc() +"... I’m ready, so show me what you’ve got.</i>”  She murmurs, half to herself, and you’re only too happy to oblige.\n\n");
 
@@ -1769,9 +1769,9 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("“<i>Wha-</i>”  Izumi opens her mouth to object, but is cut off by another blistering slap to the rump.  She winces in pain, then roars in outrage.  “<i>Why, you little piece of-</i>”  Another slap hammers home, cutting her off again.  “<i>Fine! Fine, I’ll- Fine.</i>”  She repeats, apparently more to calm herself down than to reassure you.  There’s a long, awkward pause as she glares off into the gloom of the cave.  You raise your hand again, threateningly, and she grimaces before finally responding.\n\n");
 
-				outputText("“It’s big.”  She spits.\n\n");
+				outputText("“<i>It’s big,</i>” she spits.\n\n");
 
-				outputText("“How big?”  You ask, feeling pleased with yourself.\n\n");
+				outputText("“<i>How big?</i>” you ask, feeling pleased with yourself.\n\n");
 
 				outputText("“<i>Fuck, I don’t-</i>”  You raise an eyebrow, your hand still raised threateningly above her reddening rump.  She glares at it for a moment.  “<i>Fine. I get it, already. It’s.. Really big, okay?  Huge.  Massive.</i>”  She growls.\n\n");
 
