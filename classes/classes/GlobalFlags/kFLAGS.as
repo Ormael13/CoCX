@@ -1189,7 +1189,7 @@ public static const UNKNOWN_FLAG_NUMBER_01180:int                               
 public static const UNKNOWN_FLAG_NUMBER_01181:int                                   = 1181;
 public static const UNKNOWN_FLAG_NUMBER_01182:int                                   = 1182;
 public static const UNKNOWN_FLAG_NUMBER_01183:int                                   = 1183;
-public static const UNKNOWN_FLAG_NUMBER_01184:int                                   = 1184;
+public static const KATHERINE_RANDOM_RECRUITMENT_DISABLED:int                       = 1184;
 public static const UNKNOWN_FLAG_NUMBER_01185:int                                   = 1185;
 public static const UNKNOWN_FLAG_NUMBER_01186:int                                   = 1186;
 public static const UNKNOWN_FLAG_NUMBER_01187:int                                   = 1187;

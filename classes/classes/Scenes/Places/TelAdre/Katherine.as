@@ -1658,7 +1658,7 @@ public function interveneWithKittyKats4():void
 	else outputText("\n\nShe presses her hand gently against your chest and her pupils dilate. \"<i>No. They... they must have checked, must have sniffed for it.</i>\"");
 
 	outputText("\n\nShe starts to fumble with your [armor], her hunger clearly overriding her better judgement. That’s your opening. You punch upward with your bound hands, catching her in the gut and knocking the wind out of her.");
-	outputText("\n\nShe’s not much of a fighter and in one move the situation is reversed. She’s flat on her back, gasping for air, and you’re sitting on top of her, holding her tightly between your knees. If she gets her wits about her she might still be able to escape, so you put your hands over her mouth and tell her to untie you in your most commanding tone.");
+	outputText("\n\nShe’s not much of a fighter, and in one move, the situation is reversed. She’s flat on her back, gasping for air, and you’re sitting on top of her, holding her tightly between your knees. If she gets her wits about her she might still be able to escape, so you put your hands over her mouth and tell her to untie you in your most commanding tone.");
 	outputText("\n\nShe freezes in place, staring into your eyes. Then her fingers reach up and, after some fumbling, free your hands. You remind her that considering she just robbed you calling out isn’t a good idea. Then take your hands away and ask what her name is.");
 	//[Next]
 	//Leads to Intervene (Part 5) 
@@ -1672,6 +1672,24 @@ public function interveneWithKittyKats5():void
 	outputText("\"<i>Kath - Katherine</i>\" she blurts out. That’s when you feel something growing between you. A hot bump seems to have developed. It dawns on you that this very feminine kitty is actually a herm, and from the size and pressure of that bump you’re guessing she’s packing a real monster down there.");
 	outputText("\n\n\"<i>P - Please - nooo!</i>\" she cries, but it’s too late. Her belt can’t cinch tight enough and her cock snakes through the gap. You suspect she’d be turning bright red if it weren’t for her fur. Speaking of red, the cock is bright red and doesn’t belong on any kind of cat. The continued swelling near the base confirms it. Katherine has the cock of a canine, and that cock has a huge knot.");
 	outputText("\n\nShe whimpers, \"<i>I just wanted food,</i>\" and tries to hide her cock by curling into a ball under you. ");
+	outputText("\n\nIf you help Kath, it might pay off in more than karma... if you're into that sort of thing. You could also turn your back on her, likely forever.");
+	menu();
+	addButton(0,"Help",helpKathAfterInterruptu);
+	addButton(1,"Leave",leaveKathYouDontWantThatNastyHermCock);
+}
+
+function leaveKathYouDontWantThatNastyHermCock():void
+{
+	clearOutput();
+	outputText("You decide you’re better off not getting involved with some weird sort of hermaphroditic chimera. She's obviously more trouble than she's worth and best avoided.");
+	outputText("\n\nPutting it out of your mind you walk deeper into the city. You’ve got things to take care of.");
+	flags[kFLAGS.KATHERINE_RANDOM_RECRUITMENT_DISABLED] = 1;
+	doNext(telAdre.telAdreMenu);
+}
+
+function helpKathAfterInterruptu():void
+{
+	clearOutput();
 	//(corruption <25)
 	if(player.cor < 25) outputText("You feel you just have to do something for her. She needs food and she’s ashamed of her own body. That’s rare in this land, but it’s not a good way to live your life.");
 	else if(player.cor < 75) outputText("Right now she needs food, no question. If you help her out maybe she’ll be more willing to talk to you in future. Maybe you can become a friend to her, maybe more.");
