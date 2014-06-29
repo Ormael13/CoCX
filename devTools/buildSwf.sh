@@ -66,6 +66,7 @@ ${COMMON_OPTS} \
 classes/classes/CoC.as
 
 # Build the Android package
+# swf-version=14 == AIR 3.1
 # swf-version=21 == AIR 3.8
 # swf-version=24 == AIR 13.0
 echo "Build AIR SWF ${SWF_NAME}"
@@ -75,7 +76,7 @@ ${COMMON_OPTS} \
 -define+=CONFIG::STANDALONE,false \
 -o tmp/CoC-${COC_VERSION}.swf \
 +configname=airmobile \
--swf-version=21 \
+-swf-version=14 \
 classes/classes/CoC.as
 
 /bin/sed -r \
