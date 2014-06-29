@@ -10,7 +10,7 @@
     <movie height="600" />
     <movie version="3" />
     <movie minorVersion="9" />
-    <movie platform="AIR" />
+    <movie platform="AIR Mobile" />
     <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->

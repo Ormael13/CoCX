@@ -1,0 +1,1 @@
+"C:\Program Files\Adobe\Adobe Flash CC 2014\AIR13.0\bin\adl.exe" -profile mobileDevice -screensize 800x600:800x600 %cd%\application.xml
