@@ -69,6 +69,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		//6 = hellhound
 		//7 = centaur
 		//8 = MARBLZ
+		public const PREGNANCY_FAERIE:int = 24; //Indicates you are carrying a phouka or faerie baby. Which one is determined by the PREGNANCY_CORRUPTION flag
 		public var pregnancyType:Number = 0;
 		public var pregnancyIncubation:Number = 0;
 		

@@ -742,6 +742,14 @@
 				outputText("<b>Your stomach is so full of frog eggs that you look about to birth at any moment, your belly wobbling and shaking with every step you take, packed with frog ovum.</b>");
 			else outputText("<b>You're stuffed so full with eggs that your belly looks obscenely distended, huge and weighted with the gargantuan eggs crowding your gut. They make your gait a waddle and your gravid tummy wobble obscenely.</b>");
 		}
+		else if (player.pregnancyType == player.PREGNANCY_FAERIE){ //Belly size remains constant throughout the pregnancy
+			outputText("<b>Your belly remains swollen like a watermelon. ");
+			if (player.pregnancyIncubation <= 100)
+				outputText("It's full of liquid, though unlike a normal pregnancy the passenger you’re carrying is tiny.</b>");
+			else if (player.pregnancyIncubation <= 140)
+				outputText("It feels like it’s full of thick syrup or jelly.</b>");
+			else outputText("It still feels like there’s a solid ball inside your womb.</b>");    
+		}
 		else 
 		{
 			if(player.pregnancyIncubation <= 336 && player.pregnancyIncubation > 280)

@@ -6,6 +6,10 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.ConsumableLib;
+	import classes.Items.Consumables.BeeHoney;
+	import classes.Items.Consumables.PhoukaWhiskey;
+	import classes.Items.Consumables.RizzaRoot;
 	import classes.Scenes.Areas.Bog.*;
 
 	use namespace kGAMECLASS;
@@ -14,6 +18,7 @@ package classes.Scenes.Areas
 	{
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
+		public var phoukaScene:PhoukaScene = new PhoukaScene();
 		public function Bog()
 		{
 		}
@@ -25,7 +30,12 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
+			if ((isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)) {
+				phoukaScene.phoukaHalloween(); //Must have met them enough times to know what they're called, have some idea of their normal behaviour
+				return;
+			}
 			if (player.buttPregnancyIncubation == 0 && rand(3) == 0) frogGirlScene.findTheFrogGirl();
+            else if (rand(3) == 0) phoukaScene.phoukaEncounter();
 			else if (rand(2) == 0) chameleonGirlScene.encounterChameleon();
 			else {
 				clearOutput();

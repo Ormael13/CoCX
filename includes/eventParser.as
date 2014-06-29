@@ -1,5 +1,6 @@
 ﻿import classes.GlobalFlags.kFLAGS;
 import classes.Player;
+import classes.Items.Consumable;
 
 //Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
@@ -759,6 +760,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				needNext = true;
 			}
 		}
+		if(player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) > 0) {
+            player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 1, -1); //Count down hours until player is not drunk
+            if (player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) <= 0) {
+				consumables.P_WHSKY.phoukaWhiskeyExpires(player);
+                needNext = true;
+            }
+        }
 		//EMBER STUFF
 		if(emberScene.followerEmber() && player.findStatusAffect(StatusAffects.EmberNapping) < 0) {
 			//Mino cum freakout - PC partly addicted!

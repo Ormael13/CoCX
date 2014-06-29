@@ -37,7 +37,10 @@ public function updatePregnancy():Boolean {
 	}
 	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.pregnancyIncubation = 1;
 	//IF INCUBATION IS VAGINAL
-	if(player.pregnancyIncubation > 1) {
+	if (player.pregnancyIncubation > 1) {
+		if (player.pregnancyType == player.PREGNANCY_FAERIE) {
+			displayedUpdate = bog.phoukaScene.phoukaPregUpdate();
+		}
 		if(player.pregnancyType == 22) {
 			displayedUpdate = sandPregUpdate();
 		}
@@ -1239,6 +1242,13 @@ public function updatePregnancy():Boolean {
 			}
 		}
 	}
+	//Give birth to either a faerie or a phouka
+	if (player.pregnancyIncubation == 1 && player.pregnancyType == player.PREGNANCY_FAERIE) {
+			bog.phoukaScene.phoukaPregBirth();
+			displayedUpdate = true;
+			player.pregnancyIncubation = 0;
+			player.pregnancyType = 0;
+		}
 	//Give birf if its time... to ANAL EGGS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 23) {
 		bog.frogGirlScene.birthFrogEggsAnal();
