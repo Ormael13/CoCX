@@ -239,28 +239,28 @@ package classes.Scenes.Areas.HighMountains
 				else if (player.lizardScore() > 3) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
 				else outputText("plus you don’t look like the troglodytes who usually wander around these parts.  ");
 				outputText("Sit down, sit down!</i>”\n\n");
-
-				outputText("Cautiously, you edge towards the lip of the fire, and");
-				if (player.tallness >= 108)
-				{
-					outputText(" a");
-				}
-				else 
-				{
-					outputText(" the");
-				}
-				outputText(" shadow leans forward, finally becoming visible.");
-				if (player.tallness < 108)
-				{
-					outputText("  For a moment, you’re stunned into silence; the figure looks completely human, aside from two important factors.  The first, her size; she looks as though someone had tried to build a human but got the scale wrong.  By the looks of her, if she was standing upright she would tower at least around eight or nine feet in height, and she looks broad enough to carry a horse on her back.");
-				}
-				else
-				{
-					outputText("  With the opportunity to finally study the strange woman in detail, you’re stunned into silence.  She looks completely human, aside from two important factors.  The first, her size; she looks as though someone had tried to build a human but got the scale wrong.  A fact you’re made aware of every time you venture from camp; it’s not every day you meet somebody just as tall as yourself."); 
-				}
-				
-				outputText("  The second factor, of course, would be the enormous curved horn of red, rock-like bone that juts proudly from her forehead.  Still, they’re no less inhuman than some of the other creatures you’ve encountered since arriving....\n\n");
 			}
+
+			outputText("Cautiously, you edge towards the lip of the fire, and");
+			if (player.tallness >= 108)
+			{
+				outputText(" a");
+			}
+			else 
+			{
+				outputText(" the");
+			}
+			outputText(" shadow leans forward, finally becoming visible.");
+			if (player.tallness < 108)
+			{
+				outputText("  For a moment, you’re stunned into silence; the figure looks completely human, aside from two important factors.  The first, her size; she looks as though someone had tried to build a human but got the scale wrong.  By the looks of her, if she was standing upright she would tower at least around eight or nine feet in height, and she looks broad enough to carry a horse on her back.");
+			}
+			else
+			{
+				outputText("  With the opportunity to finally study the strange woman in detail, you’re stunned into silence.  She looks completely human, aside from two important factors.  The first, her size; she looks as though someone had tried to build a human but got the scale wrong.  A fact you’re made aware of every time you venture from camp; it’s not every day you meet somebody just as tall as yourself."); 
+			}
+			
+			outputText("  The second factor, of course, would be the enormous curved horn of red, rock-like bone that juts proudly from her forehead.  Still, they’re no less inhuman than some of the other creatures you’ve encountered since arriving....\n\n");
 
 			outputText("“<i>Hmm?</i>”  She looks blankly at you.  The sudden realisation that you’ve been staring at her horn for an uncomfortably long time hits you.  “<i>What?  Is there something on my face?</i>”  Blushing, you open your mouth to answer, but as you breathe in, a rush of coarse smoke down your throat");
 			if (player.tou < 60) outputText(" causes you to cough and splutter.\n\n");
