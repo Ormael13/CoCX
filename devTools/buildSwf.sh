@@ -66,12 +66,16 @@ ${COMMON_OPTS} \
 classes/classes/CoC.as
 
 # Build the Android package
+# swf-version=21 == AIR 3.8
+# swf-version=24 == AIR 13.0
 echo "Build AIR SWF ${SWF_NAME}"
-${FLEX_ROOT}/bin/amxmlc \
+${FLEX_ROOT}/bin/mxmlc \
 ${COMMON_OPTS} \
 -define+=CONFIG::AIR,true \
 -define+=CONFIG::STANDALONE,false \
 -o tmp/CoC-${COC_VERSION}.swf \
++configname=airmobile \
+-swf-version=21 \
 classes/classes/CoC.as
 
 /bin/sed -r \
@@ -98,6 +102,8 @@ echo Done. Building android package.
 ## If you uncomment the below, it *may* build a air iOS package.
 
 # echo Android package built. Building iOS package.
+
+# fyi, this takes 20+ minutes on a stock-clock i7 920.
 
 # $ADT \
 # -package \

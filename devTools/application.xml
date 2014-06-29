@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/13.0">
+<application xmlns="http://ns.adobe.com/air/application/3.8">
   <id>com.fenoxo.coc</id>
   <versionNumber>0.8.9</versionNumber>
   <versionLabel>CoC_0.8.9</versionLabel>
@@ -12,12 +12,12 @@
     <title>Corruption of Champions</title>
     <!-- Please don't change the following line -->
     <!-- Some of the automated build tools match against it to insert the proper swf name at compile-time -->
-    <content>./CoC-AIR.swf</content>
+    <content>CoC.swf</content>
     <visible>true</visible>
     <fullScreen>true</fullScreen>
     <autoOrients>true</autoOrients>
     <aspectRatio>any</aspectRatio>
-    <renderMode>direct</renderMode>
+    <renderMode>gpu</renderMode>
     <!--<depthAndStencil>true</depthAndStencil>-->
     <!-- required for 3D -->
     <systemChrome>standard</systemChrome>

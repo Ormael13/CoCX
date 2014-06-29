@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\CoC-STANDALONE.swf" />
+    <movie path="CoC-STANDALONE.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
