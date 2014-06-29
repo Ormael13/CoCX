@@ -290,7 +290,7 @@ public function helFollowersIntro():void {
 		outputText("\n\nLaughing, you lead Hel along towards her new home.");
 	}
 	//If Bimbo Sophie is at Camp:
-	else if(flags[kFLAGS.HEL_INTROS_LEVEL] < 4 && bimboSophie()) {
+	else if(flags[kFLAGS.HEL_INTROS_LEVEL] < 4 && bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		flags[kFLAGS.HEL_INTROS_LEVEL] = 4;
 		outputText("As you help Hel string up her hammock between a few of the rocks inside your perimeter, you hear the tell-tale flapping of useless wings and a clattering of claws on the hard-packed dirt.  You brace for impact as your bimbo harpy prances up to you, planting a big, wet kiss on your cheek");
 		//{PC lust goes up if not immunized to luststick}
