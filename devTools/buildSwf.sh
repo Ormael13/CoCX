@@ -94,7 +94,7 @@ $ADT \
 ../binRepo/CoC-${COC_VERSION}.apk \
 ./tmp/application.xml \
 -C tmp . \
--C ./devTools/icons icons
+-C ./devTools/icons .
 
 rm -rf tmp
 

@@ -72,10 +72,10 @@
   </iPhone>
 
   <icon>
-    <image29x29>icons/icon_29.png</image29x29>
-    <image57x57>icons/icon_57.png</image57x57>
-    <image72x72>icons/icon_72.png</image72x72>
-    <image512x512>icons/icon_512.png</image512x512>
+    <image29x29>icon_29.png</image29x29>
+    <image57x57>icon_57.png</image57x57>
+    <image72x72>icon_72.png</image72x72>
+    <image512x512>icon_512.png</image512x512>
   </icon>
 
 </application>
