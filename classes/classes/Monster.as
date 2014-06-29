@@ -1223,5 +1223,41 @@
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
 		}
+		
+		public function handleAwardItemText(itype:ItemType):void
+		{ //New Function, override this function in child classes if you want a monster to output special item drop text
+			if (itype != null) outputText("\nThere is " + itype.longName + " on your defeated opponent.  ");
+		}
+
+		public function handleAwardText():void
+		{ //New Function, override this function in child classes if you want a monster to output special gem and XP text
+			//This function doesn’t add the gems or XP to the player, it just provides the output text
+			if (this.gems == 1) outputText("\n\nYou snag a single gem and " + this.XP + " XP as you walk away from your victory.");
+			else if (this.gems > 1) outputText("\n\nYou grab " + this.gems + " gems and " + this.XP + " XP from your victory.");
+			else if (this.gems == 0) outputText("\n\nYou gain " + this.XP + " XP from the battle.");
+		}
+		
+		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
+		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
+			//This function doesn’t take the gems away from the player, it just provides the output text
+			if (!inDungeon) {
+				outputText("\n\nYou'll probably come to your senses in eight hours or so");
+				if (player.gems > 1)
+					outputText(", missing " + gemsLost + " gems.");
+				else if (player.gems == 1)
+					outputText(", missing your only gem.");
+				else outputText(".");
+			}
+			else {
+				outputText("\n\nSomehow you came out of that alive");
+				if (player.gems > 1)
+					outputText(", but after checking your gem pouch, you realize you're missing " + gemsLost + " gems.");
+				else if (player.gems == 1)
+					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
+				else outputText(".");
+			}
+			return 16; //This allows different monsters to delay the player by different amounts of time after a combat loss.
+		}				//13 == One hour, 14 == Two hours, 15 == Four hours and 16 == Eight Hours
+
 	}
 }

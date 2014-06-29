@@ -66,16 +66,10 @@ public function cleanupAfterCombat():void {
 				doNext(13);
 				return;
 			}
-			temp = rand(10) + 1 + Math.round(monster.level/2);
-			if(!inDungeon) {
-				if(player.gems == 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing your only gem.", false);
-				if(player.gems > 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing " + temp + " gems.", false);
-			}
-			else {
-				temp += 20 + monster.level*2;
-				outputText("\n\nSomehow you came out of that alive, but after checking your gem pouch, you realize you're missing " + num2Text(temp) + ".");
-			}
-			if(temp > player.gems) temp = player.gems;
+			temp = rand(10) + 1 + Math.round(monster.level / 2);
+			if (inDungeon) temp += 20 + monster.level*2;
+			if (temp > player.gems) temp = player.gems;
+			var timePasses:int = monster.handleCombatLossText(inDungeon, temp); //Allows monsters to customize the loss text and the amount of time lost
 			player.gems -= temp;
 			gameState = 0;
 			//BUNUS XPZ
@@ -90,7 +84,7 @@ public function cleanupAfterCombat():void {
 				menuLoc = 18;
 				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]));
 			}
-			else doNext(16);
+			else doNext(timePasses);
 		}
 	}
 	//Not actually in combat
@@ -1841,8 +1835,8 @@ public function dropItem(monster:Monster):void {
 	if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 		itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
 	}
+	monster.handleAwardItemText(itype); //Each monster can now override the default award text
 	if(itype != null) {
-		outputText("\nThere is " + itype.longName + " on your defeated opponent.  ", false);
 		if(!inDungeon) menuLoc = 2;
 		inventory.takeItem(itype);
 	}
@@ -1854,9 +1848,7 @@ public function awardPlayer():void
 		if(monster.gems >= 20) monster.gems++;
 		monster.gems += 2;
 	}
-	if(monster.gems == 1) outputText("\n\nYou snag a single gem and " + monster.XP + " XP as you walk away from your victory.", false);
-	if(monster.gems > 1) outputText("\n\nYou grab " + monster.gems + " gems and " + monster.XP + " XP from your victory.", false);
-	if(monster.gems == 0) outputText("\n\nYou gain " + monster.XP + " XP from the battle.", false);
+	monster.handleAwardText(); //Each monster can now override the default award text
 	if(!inDungeon) doNext(13);
 	else doNext(1);
 	dropItem(monster);

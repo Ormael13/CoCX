@@ -395,6 +395,7 @@ public function creditsScreen():void {
 	outputText("<li> Aeron the Demoness (Generic Goblin Anal, Disciplining the Eldest Minotaur)</li>");
 	outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 	outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
+	outputText("<li> Indirect (Phouka)</li>");
 	outputText("<li> Frogapus (The Wild Hunt)</li>");
 	outputText("<li> Fenoxo (Everything Else)</li>");
 	outputText("</ul>");

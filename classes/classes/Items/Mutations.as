@@ -2266,7 +2266,7 @@
 			}
 		}
 
-		public function pureHoney(pure:Boolean,player:Player):void
+		public function pureHoney(pure:Boolean, player:Player):void
 		{
 			player.slimeFeed();
 			outputText("", true);
@@ -2279,6 +2279,19 @@
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//Drink text
 			outputText("Opening the crystal vial, you are greeted by a super-concentrated wave of sweet honey-scent.  It makes you feel lightheaded.  You giggle and lick the honey from your lips, having drank down the syrupy elixir without a thought.", true);
+			if (pure && player.isPregnant() && player.pregnancyType == player.PREGNANCY_FAERIE) { //Pure Honey can reduce the corruption of a phouka baby
+				if (flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
+					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
+				}
+				else if (flags[kFLAGS.PREGNANCY_CORRUPTION] < 1) { //Child is faerie, loves pure honey
+					outputText("A warm sensation starts in your belly and runs all through your body.  It's almost as if you're feeling music and you guess your passenger enjoyed the meal.");
+				}
+				else { //Child is on the line, will become a faerie with this drink
+					outputText("At first you feel your baby struggle against the honey, then it seems to grow content and enjoy it.");
+				}
+				flags[kFLAGS.PREGNANCY_CORRUPTION]--;
+				return; //No transformative effects for the player because the pure honey was absorbed by the baby
+			}
 			//Corruption reduction
 			if (changes < changeLimit && pure) {
 				outputText("\n\n", false);
@@ -8878,5 +8891,6 @@
 				fatigue(-10);
 			}
 		}
+		
 	}
 }
