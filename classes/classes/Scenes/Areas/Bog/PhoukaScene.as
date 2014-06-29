@@ -151,7 +151,16 @@ package classes.Scenes.Areas.Bog
 					case 4:
 					case 5:
 					case 6: //Offers you a chance to submit, which leads to the various defeat sex scenes
-						outputText(" considers for a moment and then says <i>“You can't get away from me right now, so why don't you enjoy it?  Otherwise maybe I bring in some of my friends an we all have at ya.”</i>");
+						outputText(" considers for a moment and then says <i>“You can't get away from me right now, so why don't you enjoy it?  Otherwise maybe I bring in some of my friends an we all have at ya.”</i> The confidence in the " + phoukaName() + "'s gaze suggests he isn't bluffing.  He slowly circles you, hovering a few feet out of reach.  His eyes seem to be drinking in every detail of your body in a way that [if (corruption < 50)makes shivers run down your spine][if (corruption >= 50)makes your heart beat faster].\n\nThe " + phoukaName() + " continues: ");
+						if (player.hasVagina())
+							outputText("<i>“Maybe yer inta bunnies, hrm?  Big bunny with a nice hard cock and strong legs, I can do that fer ya.  Fill that tight little muff o' yers up with a big load o' spunk!”\n\n“Or maybe ");
+						else
+							outputText("<i>“");
+						outputText("I could change inta a goat for ya.  That suit yer fancy?  Is it a fond dream o' yers to let a goat blow its load in yer cornhole?");
+						if (player.hasVagina()) 
+							outputText("\n\nOh, there's one more ye might like.  Ever rode a stallion?  Ever wondered what it'd be like ta pack what a horse has between its legs inta what you've got tween yers?  Just say the word missy an I'll change inta stallion an spilt ye wide open.”</i>");
+						else
+							outputText("  If it ain't then tough shite, cause that's what I want.”</i>");
 						menu();
 						phoukaSexAddStandardMenuChoices();
 						addButton(4, "Fight", phoukaStartFight);
