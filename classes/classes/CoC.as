@@ -337,7 +337,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.8";
+			ver = "0.8.9";
 			version = ver + " (<b>Farm Corruption</b>)";
 
 			//Indicates if building for mobile?
