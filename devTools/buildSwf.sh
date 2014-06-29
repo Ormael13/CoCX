@@ -87,7 +87,7 @@ echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
 
 $ADT \
 -package \
--target apk \
+-target apk-debug \
 -storetype pkcs12 \
 -keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
 -storepass testpassword \
