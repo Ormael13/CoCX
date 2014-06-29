@@ -2041,7 +2041,7 @@ public function apparantlyJojoDOESlift():void
 		{
 			trace("ADDING THIRD PERK");
 			//{text shows after generic 16th technique training session}
-			outputText("As you finish training you decide to meditate alone; returning to your bedroll, you you close your eyes and begin to breathe.  Then the world around you begins to sing.\n\n");
+			outputText("As you finish training you decide to meditate alone; returning to your bedroll, you close your eyes and begin to breathe.  Then the world around you begins to sing.\n\n");
 			outputText("The camp is alive with the sounds of voices on the wind, of the ominous sizzling of the great scar between worlds that is the portal that brought you here.  You feel open to the universe as if it were a lady in a dress sitting next to you, that you could easily reach out and touch.  You feel liberated and free despite the fact that you are not moving a muscle.  You are ready for anything but expecting nothing.  You are neither thinking nor dreaming, you simply are.\n\n");
 
 			outputText("<b>(Perk Gained: Enlightened -</b> White magic threshold reduced. Meditation restores health. Grants the ability to meditate alone.<b>)</b>");
@@ -2065,7 +2065,7 @@ public function apparantlyJojoDOESlift():void
 		// Lookit all these different ways followers are tracked! fml.
 		if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) enlightenedBlurbs.push("You can hear Marble humming a song to herself you can’t place.");
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
-		if (kGAMECLASS.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
+		if (kGAMECLASS.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
