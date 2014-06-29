@@ -633,18 +633,18 @@ package classes.Scenes.Areas.Bog
 			if (postCombat) {
 				outputText("As you collapse the " + phoukaName());
 				if (phoukaForm == PHOUKA_FORM_HORSE)
-					outputText(" circles you in a slow trot, finally stopping directly in front of you.");
+					outputText(" circles you in a slow trot, his top half shaping into a centaur form before finally stopping directly in front of you.");
 				else
-					outputText(" begins to shapeshift in front of you.  It grows and grows, finally taking the form of a massive black stallion with an equally massive prick.");
+					outputText(" begins to shapeshift in front of you.  It grows and grows, finally taking the form of a massive, black, centaur stallion with an equally massive prick.");
 			}
 			else { //Phouka can’t be a horse if the player is choosing this. Must be either a faerie or a bunny.
 				if (player.cor <= 50)
-					outputText("Perhaps this land is finally starting to get to you.  You tell the " + phoukaName() + " you want him to fuck you with a great big horse cock.  The " + phoukaName() + "'s eyes light up. <i>“Sure thing missy”</i> he says, and his form stretches into that of a huge, black furred stallion.  You hope he'll be gentle with a willing partner.");
+					outputText("Perhaps this land is finally starting to get to you.  You tell the " + phoukaName() + " you want him to fuck you with a great big horse cock.  The " + phoukaName() + "'s eyes light up. <i>“Sure thing missy”</i> he says, and his form stretches into that of a huge, black furred, centaur stallion.  You hope he'll be gentle with a willing partner.");
 				else
-					outputText("The more you think about it the more you decide you could use a real fucking.  You smile at the " + phoukaName() + ", telling him you want the biggest cock he can muster.  The " + phoukaName() + "morphs into the form you expected, that of a black stallion [if (tallness <= 96)taller than you are][if (tallness > 96)that's about your height].  Maybe that tree trunk between his legs can scratch your itch.");
+					outputText("The more you think about it the more you decide you could use a real fucking.  You smile at the " + phoukaName() + ", telling him you want the biggest cock he can muster.  The " + phoukaName() + "morphs into the form you expected, that of a black, centaur stallion [if (tallness <= 96)taller than you are][if (tallness > 96)that's about your height].  Maybe that tree trunk between his legs can scratch your itch.");
 			}
 			phoukaForm = PHOUKA_FORM_HORSE;
-			outputText("  On closer inspection the 'horse' is a bit unusual.  For a start, he has shiny green eyes.  Parts of his flanks look like thin wings pressed against its sides.  His nose is a little shorter and his face a lot more human than you would have expected.  He sees you looking him over and says <i>[if (isTaur = true)“I've been waitin for this.  A nice big mare to fuck the daylights out of][if (isTaur = false)“Yer gonna be sorry ye weren't born with four legs and a cunt you could lose an arm in princess].”</i>\n\n");
+			outputText("  On closer inspection the centaur is a bit unusual.  For a start, he has shiny green eyes.  Parts of his flanks look like thin wings pressed against its sides.  His nose is a little shorter and his face a lot more human than you would have expected.  He sees you looking him over and says <i>[if (isTaur = true)“I've been waitin for this.  A nice big mare to fuck the daylights out of][if (isTaur = false)“Yer gonna be sorry ye weren't born with four legs and a cunt you could lose an arm in princess].”</i>\n\n");
 			if (!postCombat || lustLoss)
 				outputText("Considering the fire in your vagina that's crying out to be quenched, you don't care how big this horse's cock is.  You just need something to fill you NOW.");
 			else
