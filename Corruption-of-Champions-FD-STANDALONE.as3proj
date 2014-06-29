@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\CorruptionofChampionsFD.swf" />
+    <movie path="bin\CoC-STANDALONE.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
@@ -44,7 +44,7 @@
     <option loadExterns="" />
     <option staticLinkRSL="True" />
     <option additional="-show-actionscript-warnings=true&#xA;-show-binding-warnings=true&#xA;-show-unused-type-selector-warnings=true" />
-    <option compilerConstants="" />
+    <option compilerConstants="CONFIG::STANDALONE,true&#xA;CONFIG::AIR,false" />
     <option minorVersion="" />
   </build>
   <!-- SWC Include Libraries -->

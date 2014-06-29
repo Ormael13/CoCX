@@ -3,9 +3,13 @@
 
 	import classes.GlobalFlags.kGAMECLASS;
 
-	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
+	CONFIG::AIR 
+	{
+		import flash.filesystem.File;
+		import flash.filesystem.FileMode;
+		import flash.filesystem.FileStream;
+	}
+	
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.events.Event;
@@ -168,7 +172,7 @@ public function getGameObjectFromFile(aFile:File):Object
 	{
 		outputText("Failed to read save file, " + aFile.url + " (" + error.message + ")", true);
 	}
-	return NULL;
+	return null;
  }
 
 }
