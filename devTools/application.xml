@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/3.8">
+<application xmlns="http://ns.adobe.com/air/application/3.1">
   <id>com.fenoxo.coc</id>
   <versionNumber>0.8.9</versionNumber>
   <versionLabel>CoC_0.8.9</versionLabel>
