@@ -79,6 +79,7 @@ ${COMMON_OPTS} \
 -swf-version=14 \
 classes/classes/CoC.as
 
+echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
 /bin/sed -r \
     -e "s@(<versionNumber>).*(<\/versionNumber>)@\1${COC_VERSION_APK}\2@" \
     -e "s@(<content>).*(<\/content>)@\1${SWF_NAME}\2@" \

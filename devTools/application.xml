@@ -16,7 +16,8 @@
     <visible>true</visible>
     <fullScreen>true</fullScreen>
     <autoOrients>true</autoOrients>
-    <aspectRatio>any</aspectRatio>
+    <!-- 3.1 doesn't support "any" aspectRatio??? -->
+    <aspectRatio>landscape</aspectRatio>
     <renderMode>gpu</renderMode>
     <!--<depthAndStencil>true</depthAndStencil>-->
     <!-- required for 3D -->
@@ -68,14 +69,12 @@
       ]]>
     </InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
-    <forceCPURenderModeForDevices>iPad1,1 iPhone1,1 iPhone1,2 iPod1,1</forceCPURenderModeForDevices>
   </iPhone>
 
   <icon>
     <image29x29>icons/icon_29.png</image29x29>
     <image57x57>icons/icon_57.png</image57x57>
     <image72x72>icons/icon_72.png</image72x72>
-    <image144x144>icons/icon_144.png</image144x144>
     <image512x512>icons/icon_512.png</image512x512>
   </icon>
 
