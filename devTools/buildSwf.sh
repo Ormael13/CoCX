@@ -58,8 +58,9 @@ COMMON_OPTS="\
 
 # Build standalone SWF
 echo "Build standalone ${SWF_NAME}"
-${FLEX_ROOT}/bin/mxmlc \
+${FLEX_ROOT}/bin/amxmlc \
 ${COMMON_OPTS} \
+-debug \
 -define+=CONFIG::AIR,false \
 -define+=CONFIG::STANDALONE,true \
 -o ../binRepo/CoC-${COC_VERSION}.swf \
@@ -88,6 +89,7 @@ echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
 $ADT \
 -package \
 -target apk-debug \
+-listen \
 -storetype pkcs12 \
 -keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
 -storepass testpassword \
