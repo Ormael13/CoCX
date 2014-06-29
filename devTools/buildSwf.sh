@@ -16,20 +16,35 @@ if [[ ${OS} =~ ^CYGWIN ]]; then
 fi
 
 # pull out the version so we can use it for the filename.
-export COC_VERSION=`gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as`
+COC_VERSION=$(gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as)
+COC_VERSION_APK=$(echo ${COC_VERSION} | awk -F. '{ print $1 "." $2 "." $3 }')
+SWF_NAME="CoC-${COC_VERSION}.swf"
 
 echo "Build version = ${COC_VERSION}"
 
 # Clean up old build-artifacts (probably unnecessary with buildbot's build mechanisms)
-rm -f ../binRepo/CoC*.swf
+rm -f ../binRepo/CoC*.{apk,swf}
+
+# ADT packages all files in dirs specified by '-C DIR' so always use clean dir
+rm -rf tmp
+mkdir tmp
 
 # Force the submodules to be up to date.
-git submodule update --init
+GIT_SUBMODULE="\
+classes/showdown \
+"
+for dir in $GIT_SUBMODULE; do
+    if [ ! -e "$dir/.git" ]; then
+	git submodule init $dir
+    else
+	git submodule update $dir
+    fi
+done
 
 # This is intended to be run from the root of the git repo as such:
 # 'devTools/build.sh'
 # the paths are all relative to the repo root.
-${FLEX_ROOT}/bin/mxmlc \
+COMMON_OPTS="\
 -use-network=false \
 -default-background-color=0x000000 \
 -static-link-runtime-shared-libraries=true \
@@ -39,19 +54,30 @@ ${FLEX_ROOT}/bin/mxmlc \
 -source-path+=classes \
 -library-path+=./lib/bin/MainView.swc \
 -library-path+=./lib/bin/ScrollPane.swc \
+"
+
+# Build standalone SWF
+echo "Build standalone ${SWF_NAME}"
+${FLEX_ROOT}/bin/mxmlc \
+${COMMON_OPTS} \
+-define+=CONFIG::AIR,false \
+-define+=CONFIG::STANDALONE,true \
 -o ../binRepo/CoC-${COC_VERSION}.swf \
 classes/classes/CoC.as
 
 # Build the Android package
-echo Patching xml file to build android package
+echo "Build AIR SWF ${SWF_NAME}"
+${FLEX_ROOT}/bin/amxmlc \
+${COMMON_OPTS} \
+-define+=CONFIG::AIR,true \
+-define+=CONFIG::STANDALONE,false \
+-o tmp/CoC-${COC_VERSION}.swf \
+classes/classes/CoC.as
 
-export SWF_NAME=`ls ../binRepo/ | grep -i ^CoC.*\.swf$`
-
-echo Current SWF file name = $SWF_NAME
-
-/bin/sed -i -r "s/<content>CoC.*\.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
-
-echo Done. Building android package.
+/bin/sed -r \
+    -e "s@(<versionNumber>).*(<\/versionNumber>)@\1${COC_VERSION_APK}\2@" \
+    -e "s@(<content>).*(<\/content>)@\1${SWF_NAME}\2@" \
+    ./devTools/application.xml > ./tmp/application.xml
 
 $ADT \
 -package \
@@ -60,10 +86,13 @@ $ADT \
 -keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
 -storepass testpassword \
 ../binRepo/CoC-${COC_VERSION}.apk \
-./devTools/application.xml \
--C ../binRepo . \
+./tmp/application.xml \
+-C tmp . \
 -C ./devTools/icons/android .
 
+rm -rf tmp
+
+echo Done. Building android package.
 
 ## Fuck you Adobe. They no longer support air on linux. Assholes.
 ## If you uncomment the below, it *may* build a air iOS package.
@@ -81,4 +110,3 @@ $ADT \
 # ./devTools/application.xml \
 # -C ../binRepo . \
 # -C ./devTools/icons/ios .
-

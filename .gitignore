@@ -15,3 +15,4 @@ Corruption-of-Champions.as3proj
 *.sol
 *.swc
 /out
+/tmp
