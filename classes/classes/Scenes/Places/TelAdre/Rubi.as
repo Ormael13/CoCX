@@ -2787,6 +2787,21 @@ private function giveRubiATFItem(itype:ItemType):void {
 			flags[kFLAGS.RUBI_SHE] = 0;
 			flags[kFLAGS.RUBI_CUNTTYPE] = 0;
 		}
+		//(If Rubi gets red skin)
+		if(rand(3) == 0 && flags[kFLAGS.RUBI_SKIN] != 1 && itype == consumables.INCUBID) {
+			outputText("\n\nRubi clutches [rubi eir] stomach suddenly as you notice red spots appearing on [rubi eir] ");
+			if(flags[kFLAGS.RUBI_SKIN] != 2) outputText("skin");
+			else outputText("coat of fur");
+			outputText(".  The blotches soon spread, rapidly overtaking [rubi eir] body.  ");
+			if(flags[kFLAGS.RUBI_SKIN] == 2) outputText("Meanwhile the silky soft fur that covered [rubi eir] body seems to be falling out as this red menace takes over.  ");
+			outputText("In no time at all, [rubi eir] smooth, hairless skin now appears to be a deep crimson, matching the color of [rubi eir] spade tail that [rubi ey] received long ago.");
+			flags[kFLAGS.RUBI_SKIN] = 1;
+		}
+		//(If Rubi gets horns)
+		if(rand(3) == 0 && flags[kFLAGS.RUBI_HORNTYPE] == 0 && itype == consumables.INCUBID) {
+			outputText("\n\nRubi's hands suddenly dart up, clutching [rubi eir] head as though [rubi ey] has a massive headache.  [rubi Ey] feels around blindly, trying to locate the source of the pain, and then you see it.  Two small bulges appear on [rubi eir] forehead, just at the hairline.  They grow larger and larger until the skin splits cleanly open revealing shiny black bone.  Horns.  They grow up and backwards, forming light ridges.  They don't quite grow completely past [rubi eir] head, however, before the growth stops.  Rubi calms and stands.  [rubi Eir] hands roam over every inch of [rubi eir] new addition as glances in the mirror, marveling at [rubi eir] demonic appearance.");
+			flags[kFLAGS.RUBI_HORNTYPE] = 1;
+		}
 	}
 	//Gro+
 	//Can choose Boobs or Penis. Grow that body part by 2.
