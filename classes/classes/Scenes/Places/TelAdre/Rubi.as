@@ -253,7 +253,8 @@ public function approachRubiScenes():void {
 		if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) choices[choices.length] = 3;
 		//(Green Adventurer's Clothing (Normal)
 		// There's NO content covering this outfit here, so I'm commenting it out.
-		//if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) choices[choices.length] = 4;
+		//There is content, but it is under Adventurer's Outfit.
+		if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) choices[choices.length] = 4;
 		//(Tube Top (Normal))
 		if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) choices[choices.length] = 5;
 		//(Bodysuit (Normal))
@@ -382,7 +383,7 @@ public function approachRubiScenes():void {
 		outputText("ere's the menu, babe.  Think about what you want and let me know when you're ready.</i>\"  [rubi Ey] stands and moves to clean off a nearby table, [rubi eir] red spaded tail swishing behind [rubi em] sensually.");
 
 		//(Adventurer's Outfit)
-		if(select == 15) {
+		if(select == 4) {
 			 outputText("[rubi Ey]'s dressed differently today, having foregone the normal waitress uniform for a large green tunic which looks more like a dress on [rubi em], along with brown tights and a pointed green hat.  At [rubi eir] waist is a wooden sword alongside [rubi eir] normal notepad.  Were Rubi more masculine, you might think [rubi ey] looks like an adventurer of some kind, but in reality [rubi ey] looks like a normal girl in a strange hat.");
 			if(flags[kFLAGS.RUBI_BREAST_SIZE] >= 4) outputText("  In an odd sort of way, [rubi ey] looks like an adventurer who met the wrong end of a witch's curse.");
 		}
