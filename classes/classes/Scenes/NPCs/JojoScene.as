@@ -872,7 +872,9 @@ private function amilyTeachingJojoBJ():void {
 	}
 	flags[kFLAGS.TIMES_AMILY_AND_JOJO_PLAYED_TIMES]++;
 	//Universal Outro
-	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.  [if (hasCock = true) \"Do you surprise them both by allowing Amily to demonstrate on you?\" else \"Do you want to watch them fuck?\"]");
+	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.");
+	if (player.hasCock()) outputText(" Do you surprise them both by allowing Amily to demonstrate on you?");
+	else outputText(" Do you want to watch them fuck?");
 	
 	menu();
 	if (player.hasCock()) addButton(0, "Demonstrate", BJRidesGETYOUONE);
