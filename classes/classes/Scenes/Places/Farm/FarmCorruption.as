@@ -121,7 +121,7 @@ package classes.Scenes.Places.Farm
 		public function whitneyVagCapacity():Number
 		{
 			// Stolen from Sheila. Whitney wasn't chaste prior to corruption, so it stands to reason she'd be able to take /something/ reasonably sized given CoC standards.
-			return 32;
+			return 44;
 		}
 
 		public function whitneyMaxedOralTraining():Boolean
@@ -6386,7 +6386,7 @@ package classes.Scenes.Places.Farm
 			else outputText(" You play with the idea of ‘rewarding’ her but... damn. She’s actually managed to relax you <i>too</i> much. You thank her regally, redress, and head out the door, enjoying the lightness of step and self-control which thrums through you.");
 
 			menu();
-			if (player.lust >= 33 && (player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 || player.hasVagina()))
+			if (player.lust >= 33 && (player.hasCock() && player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 || player.hasVagina()))
 			{
 				addButton(0, "Happy Ending", orgyRoomSubMassageHappyEnding);
 				addButton(1, "Leave", eventParser, 13);
@@ -6420,9 +6420,13 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou sigh as you sink further and further into the tub, the hot water and air wrapping itself around your limbs and groin, a virtual second massage for your ridiculously pampered form. If you could feel more at peace with the world, you’d be horizontal. That said... you sit and watch through heavily lidded eyes the deeply enjoyable sight of Whitney following suit on the opposite side, sinking her slim, brown body into the water, gasping slightly as her tidy, pretty pussy disappears beneath the roiling surface. Even in the heavy humidity the nipples on her prim, perky breasts remain rock hard, pointing at you accusingly, and blood pumps insistently to your groin, leaving you feeling light-headed in the heat.");
 
-			if (player.hasCock() && player.hasVagina()) outputText(" You take a long moment to consider which of your sexes you will satisfy yourself with.");
+			if (player.hasCock() && player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 && player.hasVagina())
+			{
+				outputText(" You take a long moment to consider which of your sexes you will satisfy yourself with.");
+			}
 
 			//[Male][Female]/[Next]
+			menu();
 			if (player.cockThatFits(whitneyVagCapacity() * 1.33) != -1) addButton(0, "Male", subHappyEndingMale);
 			if (player.hasVagina()) addButton(1, "Female", subHappyEndingFemale);
 		}
