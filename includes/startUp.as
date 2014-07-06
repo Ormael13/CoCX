@@ -317,7 +317,7 @@ public function creditsScreen():void {
 	outputText("<li> ComfyCushion (Muff Wrangler)</li>");
 	outputText("<li> B (Brooke)</li>");
 	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
-	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment)</li>");
+	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment, Phouka)</li>");
 	outputText("<li> Schpadoinkle (Victoria Sex)</li>");
 	outputText("<li> Donto (Ro'gar the Orc, Polar Pete)</li>");
 	outputText("<li> Angel (Additional Amily Scenes)</li>");
@@ -395,7 +395,6 @@ public function creditsScreen():void {
 	outputText("<li> Aeron the Demoness (Generic Goblin Anal, Disciplining the Eldest Minotaur)</li>");
 	outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 	outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
-	outputText("<li> Indirect (Phouka)</li>");
 	outputText("<li> Frogapus (The Wild Hunt)</li>");
 	outputText("<li> Fenoxo (Everything Else)</li>");
 	outputText("</ul>");

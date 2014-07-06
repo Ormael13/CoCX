@@ -335,7 +335,7 @@ package classes.Scenes.Areas.Bog
 				menu();
 				addButton(0, "Leave", phoukaDrinkLeave);
 				if (player.lust >= 33) {
-					addButton(1, "Anal Ride", phoukaSexFaerieNonCombat); //Works for all
+					addButton(1, "Ride Faerie", phoukaSexFaerieNonCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemaleNonCombat); //Male or Herm Only
 				}
 			}
