@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by K.Quesom 11.06.14
  */
 package classes.Scenes.Areas.Bog
@@ -9,12 +9,14 @@ package classes.Scenes.Areas.Bog
 	public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
-		{ //Only the bunny, goat and horse forms make physical attacks
+		{ 
+			var damage:int;
+			//Only the bunny, goat and horse forms make physical attacks
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to his blindness!\n", false);
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY) {
-				var damage:int = Math.round((60 + 30 + 10) - rand(player.tou) - player.armorDef); //60 == Bunny Strength, 30 == Bunny Weapon Attack
+				damage = Math.round((60 + 30 + 10) - rand(player.tou) - player.armorDef); //60 == Bunny Strength, 30 == Bunny Weapon Attack
 				outputText("The bunny morph hops towards you.  At the last second he changes direction and throws a kick toward you with his powerful hind legs.");
 				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
 					outputText("\nThrowing yourself out of the way, you manage to avoid the kick.  The " + this.short + " hops out of reach and prepares for another attack.");
@@ -26,7 +28,7 @@ package classes.Scenes.Areas.Bog
 				}
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_GOAT) {
-				var damage:int = Math.round((80 + 40 + 10) - rand(player.tou) - player.armorDef); //80 == Goat Strength, 40 == Goat Weapon Attack
+				damage = Math.round((80 + 40 + 10) - rand(player.tou) - player.armorDef); //80 == Goat Strength, 40 == Goat Weapon Attack
 				outputText("The goat morph races toward you, head down.");
 				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
 					outputText("\nThrowing yourself out of the way, you manage to keep from getting skewered.");
@@ -38,7 +40,7 @@ package classes.Scenes.Areas.Bog
 				}
 			}
 			else { //HORSE
-				var damage:int = Math.round((95 + 55 + 10) - rand(player.tou) - player.armorDef); //95 == Horse Strength, 55 == Horse Weapon Attack
+				damage = Math.round((95 + 55 + 10) - rand(player.tou) - player.armorDef); //95 == Horse Strength, 55 == Horse Weapon Attack
 				outputText("The stallion charges you, clearly intending to trample you under its hooves.");
 				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect() || (damage <= 0))
 					outputText("\nAs the stallion passes you twist in place and manage to stay clear of its legs.");
