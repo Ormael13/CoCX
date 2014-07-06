@@ -120,9 +120,9 @@ package classes.Items.Consumables
 			var libidoSensCombined:int = player.statusAffectv3(StatusAffects.PhoukaWhiskeyAffect);
 			var intSpeedCombined:int = player.statusAffectv4(StatusAffects.PhoukaWhiskeyAffect);
 			
-			var sensChange:int = libidoSensCombined & 256;
+			var sensChange:int = libidoSensCombined & 255;
 			var libidoChange:int = (libidoSensCombined - sensChange) / 256;
-			var intChange:int = intSpeedCombined & 256;
+			var intChange:int = intSpeedCombined & 255;
 			var speedChange:int = (intSpeedCombined - intChange) / 256;
 			game.dynStats("lib", -libidoChange , "sens", sensChange, "spe", speedChange, "int", intChange); //Get back all the stats you lost
 			player.removeStatusAffect(StatusAffects.PhoukaWhiskeyAffect);
