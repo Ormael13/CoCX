@@ -115,9 +115,9 @@
 			kGAMECLASS.statScreenRefresh();
 		}
 
-		protected function cleanupAfterCombat():void
+		protected function cleanupAfterCombat(nextFunc:* = 13):void
 		{
-			kGAMECLASS.cleanupAfterCombat();
+			kGAMECLASS.cleanupAfterCombat(nextFunc);
 		}
 
 		protected function combatRoundOver():void
