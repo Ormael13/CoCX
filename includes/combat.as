@@ -30,8 +30,9 @@ public function endLustLoss():void
 		monster.won_(false,false);
 	}
 }
+
 //combat is over. Clear shit out and go to main
-public function cleanupAfterCombat():void {
+public function cleanupAfterCombat(nextFunc:* = 13):void {
 	if(gameState == 1 || gameState == 2) {
 		//clear status
 		clearStatuses(false);
@@ -49,7 +50,7 @@ public function cleanupAfterCombat():void {
 				gameState = 0;
 				player.HP = 1;
 				statScreenRefresh();
-				doNext(13);
+				doNext(nextFunc);
 				return;
 			}
 			//Next button is handled within the minerva loss function
@@ -63,7 +64,7 @@ public function cleanupAfterCombat():void {
 				gameState = 0;
 				player.HP = 1;
 				statScreenRefresh();
-				doNext(13);
+				doNext(nextFunc);
 				return;
 			}
 			temp = rand(10) + 1 + Math.round(monster.level / 2);
@@ -88,7 +89,7 @@ public function cleanupAfterCombat():void {
 		}
 	}
 	//Not actually in combat
-	else doNext(13);
+	else doNext(nextFunc);
 }
 //5000 6999
 public function doCombat(eventNum:Number):void

@@ -331,6 +331,7 @@ public function loseOrSubmitToVapula():void {
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	player.orgasm();
 	dynStats("lib", 1, "sen", 2, "cor", 3);
+	flags[kFLAGS.REBECCS_LAST_PLEA] = 0;
 }
 
 private function wakeUpAfterDemonGangBangs():void {
@@ -350,6 +351,7 @@ private function wakeUpAfterDemonGangBangs():void {
 //Victory (Z)
 public function defeetVapulasHorde():void {
 	clearOutput();
+	flags[kFLAGS.REBECCS_LAST_PLEA] = 0;
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] <= 0) {
 		subdueVapula();
 		return;
@@ -522,6 +524,7 @@ private function rapeZeVapula():void {
 //[displayed after the second encounter text and right away in subsequent encounters]
 private function owcaMainScreenOn():void {
 	clearOutput();
+	
 	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !kGAMECLASS.vapula.vapulaSlave()) {
 		rebeccsLastPlea();
 		return;
@@ -759,7 +762,9 @@ private function rapeRebecc(outside:Boolean = false):void {
 	player.orgasm();
 	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
-	doNext(13);
+	
+	if (inCombat()) cleanupAfterCombat();
+	else doNext(13);
 }
 
 //Desperate Villagers (Z)
@@ -867,14 +872,16 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-	doNext(gangbangVillageStuff);
+	if (inCombat()) cleanupAfterCombat(gangbangVillageStuff);
+	else doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
 private function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	doNext(13);
+	if (inCombat()) cleanupAfterCombat();
+	else doNext(13);
 }
 //Rebecc's Last Plea (Z)
 private function rebeccsLastPlea():void {

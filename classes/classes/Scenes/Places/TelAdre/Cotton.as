@@ -279,7 +279,7 @@ private function acceptYoga():void {
 	var option3:Function =null;
 	var option4:Function =null;
 	if(player.fatigue > 80) {
-		outputText("You're wayyy too tired to do any yoga right now.", false);
+		outputText("You're way too tired to do any yoga right now.", false);
 		doNext(telAdre.telAdreMenu);
 		return;
 	}
