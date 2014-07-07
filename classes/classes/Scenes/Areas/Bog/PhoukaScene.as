@@ -818,10 +818,12 @@ package classes.Scenes.Areas.Bog
 			}
 			if (phoukaForm == PHOUKA_FORM_FAERIE)
 				outputText("\n\nThe " + phoukaName() + "'s whole body deflates along with his cock.  You're too tired to stop him as he");
-			else if (phoukaForm == 1)
+			else if (phoukaForm == PHOUKA_FORM_HORSE)
 				outputText("\n\nThe black furred horse steps back, yanking his member out of your devastated cunt and transforms into a faerie.  He");
-			else
+			else if (phoukaForm == PHOUKA_FORM_BUNNY)
 				outputText("\n\nThe black furred bunny pulls out of you and shifts into the form of a faerie.  He");
+			else
+				outputText("\n\nHe");
 			if (postCombat) outputText(" rummages around in your gem pouch and then");
 			outputText(" takes to the air and hovers nearby as if waiting for something.\n\n");
 			if (player.isPregnant()) {
