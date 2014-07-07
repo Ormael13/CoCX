@@ -96,7 +96,7 @@ public function encounterLottie(charge:Boolean = false):void {
 	outputText("", true);
 	outputText(images.showImage("lottie-encounter"));
 	if(charge) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour at the gym into her hand.\n\n", false);
 			player.gems -= 10;
 			statScreenRefresh();
@@ -378,7 +378,7 @@ private function drinkWaterWithYourHamhock():void {
 	outputText("You decide that drinking the mysterious, bubbling concoction wouldn't exactly be the best of ideas – there's more than enough proof in Mareth to suggest at least that much.  Playing it safe, you take the water and drink, your thirst quenched by the cool liquid trickling down your throat. You turn to Lottie, who smiles back as she starts stretching for another round at jogging.  \"<i>Ready to go again?</i>\" she asks, bending over to massage her feet and unintentionally presenting her lush booty. Jumping up, you run back to the track, reminding yourself to jerk off to the image of Lottie's ass later.\n\n", false);
 	outputText("<b>...</b>\n", false);
 	outputText("Both you and Lottie sit back and relax, choosing to hang at the gym's cafe for a while, exhausted from the good workout. The pig-girl chatters on about her figure, listing off areas of her body she would change in a heartbeat if she had the chance – for a girl who's spent most of the day talking about how self-conscious she is of her body, she certainly loves to bring up the subject. You snap out of your train of thought and look over to Lottie, realising she's leaned over to stare directly at you, both of her heavy breasts squished between her arms to show off her impressive cleavage. \"<i>Um, " + player.short + "? I asked if they were any good...</i>\" She stammers, embarrassed by her question. It's a great rack, you respond nonchalantly, telling the porcine girl that she should be very proud of them – though by the deep, flushed red her face is turning, it's immediately obvious that wasn't the question. \"<i>Th-that wasn't the question!</i>\" she reiterates, covering her chest with her hands. \"<i>I j-just wanted to know if the yoga classes here were any good!</i>\" You laugh quietly to yourself at the mistake, though judging by Lottie's embarrassed stare she doesn't find the situation quite as funny.  ", false);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176] == 0) outputText("You've never had any experience with the yoga classes first hand, but you tell ", false);
+	if(flags[kFLAGS.TIMES_HAD_YOGA] == 0) outputText("You've never had any experience with the yoga classes first hand, but you tell ", false);
 	else outputText("You've had experience with the yoga classes, so you tell ", false);
 	outputText("Lottie it's a great way to meet new people.\n\n", false);
 

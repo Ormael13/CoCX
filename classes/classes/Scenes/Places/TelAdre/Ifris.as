@@ -92,7 +92,7 @@ private function liftWhileIfrisWatches():void {
 	spriteSelect(28);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	outputText("", true);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
@@ -118,7 +118,7 @@ private function showOffForIfris():void {
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	fatigue(30);
 	outputText("", true);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();

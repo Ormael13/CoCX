@@ -25,7 +25,7 @@
 public function changingRoom():void {
 	//Charge for gym if no lifetime member!
 	outputText("", true);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();

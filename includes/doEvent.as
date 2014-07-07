@@ -786,7 +786,7 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(23);
 		outputText("Which book are you interested in perusing?", true);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] > 0)
+		if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0)
 			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
 		else
 			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "", 0, "Back", 2015);

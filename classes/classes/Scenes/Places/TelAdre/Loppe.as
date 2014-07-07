@@ -479,7 +479,7 @@ private function gossipWithLoppe():void {
 	//Lottie
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
+	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
 	addButton(9,"Back",talkWithLoppe);
 }

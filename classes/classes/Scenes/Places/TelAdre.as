@@ -1530,10 +1530,10 @@ public function gymDesc():void {
 	//(An extraordinarily well-muscled centaur male is by the weights, lifting some huge dumbbells and sweating like crazy.  In true centaur fashion, he's not wearing any clothes, but then again, male centaurs don't have much that regular clothes would hide.)
 	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)
 	outputText("  There's a centauress in a tank-top just inside the doorway with huge, rounded melons and perky nipples, but she merely coughs to get you to look up and says, \"<i>", false);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
 	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"", false);
 
-	if(player.gems < 10 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(player.gems < 10 && flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("\n\n<b>You reach into your pockets for the fee and come up empty.  It looks like you won't get close to enough to use the equipment or meet anyone.  Damn!</b>", false);
 		//(back to tel'adre streets)
 		doNext(telAdreMenu);
@@ -1570,13 +1570,13 @@ private function gymMenu():void {
 		if(flags[kFLAGS.MET_HECKEL] > 0)
 			hyenaB = "Heckel";
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500)
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
 		membership = buyGymLifeTimeMembership;
 	if(flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
 		if(cotton.cottonsIntro())
 			cotton2 = cotton.cottonGreeting;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] > 0)
+	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0)
 		cottonB = "Cotton";
 	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
 		loppe2 = loppe.loppeGenericMeetings;
@@ -1601,7 +1601,7 @@ private function buyGymLifeTimeMembership():void {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
 		dynStats("lus", (10+player.lib/10));
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] = 1;
+	flags[kFLAGS.LIFETIME_GYM_MEMBER] = 1;
 	player.gems -= 500;
 	statScreenRefresh();
 	//[Bring up gym menu]
@@ -1613,12 +1613,12 @@ private function weightLifting():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 75) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}
@@ -1659,12 +1659,12 @@ private function goJogging():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 70) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}

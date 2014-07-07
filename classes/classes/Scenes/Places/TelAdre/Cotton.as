@@ -85,9 +85,9 @@ private function cottonPregPCChance():void {
 public function cottonsIntro():Boolean {
 	if(model.time.hours >= 12 && model.time.hours <= 18) {
 		//Gym intro scene (haven't met):
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] == 0) outputText("\n\nYou see a tall, busty horse-girl doing some stretches over on a nearby mat.  Even from this far away, you can tell from the bulge in her pants that she's no ordinary 'girl'.", false);
+		if(flags[kFLAGS.COTTON_MET_FUCKED] == 0) outputText("\n\nYou see a tall, busty horse-girl doing some stretches over on a nearby mat.  Even from this far away, you can tell from the bulge in her pants that she's no ordinary 'girl'.", false);
 		//Gym intro scene (met, haven't had sex):
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] == 1) outputText("\n\nYou spot Cotton, the busty hermaphrodite horse-girl, doing her yoga on a nearby mat.", false);
+		else if(flags[kFLAGS.COTTON_MET_FUCKED] == 1) outputText("\n\nYou spot Cotton, the busty hermaphrodite horse-girl, doing her yoga on a nearby mat.", false);
 		//Gym intro scene (met, have had sex):
 		else outputText("\n\nYou spot Cotton, the busty hermaphrodite horse-girl, doing her yoga on a nearby mat. She gives you a wink, a smile and a little wave.", false);
 		//There!
@@ -101,10 +101,10 @@ public function cottonGreeting():void {
 	spriteSelect(12);
 	outputText("", true);
 	outputText(images.showImage("cotton-greeting"));
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("The centauress sees you starting for the horse-girl and says, \"<i>Go ahead and talk, but if you want to work out with her I'll have to charge you.</i>\"\n\n", false);
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("The centauress sees you starting for the horse-girl and says, \"<i>Go ahead and talk, but if you want to work out with her I'll have to charge you.</i>\"\n\n", false);
 	//Greeting (first time):
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 1;
+	if(flags[kFLAGS.COTTON_MET_FUCKED] == 0) {
+		flags[kFLAGS.COTTON_MET_FUCKED] = 1;
 		outputText("You wander over to the equine on the mat, curious as to what she's doing.  She stretches out on her mat, spine flexed.  Her head cranes backwards to see you approach.  \"<i>Oh, hi there!</i>\" She grins an upside-down grin at you and finishes her stretch before standing up.  ", false);
 		//(If PC height is greater than 6'6</i>\"
 		if(player.tallness > 78) outputText("Despite her impressive stature, you still look down on her.", false);
@@ -193,29 +193,29 @@ private function cottonMenu():void {
 private function centaurNagaBodyBookStuff():void {
 	spriteSelect(12);
 	//Havent been told about the book yet?
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] == 0) {
+	if(flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] == 0) {
 		outputText("\"<i>I'd love to teach you, but I'm afraid I don't know any good routines for your... body type. Sorry, pet...</i>\" she trails off, as if considering something, and then turns back to you, saying, \"<i>Actually, I think I might know where you could find a book of exercises that would work for you. A traveling salesman came by once, and I saw it in his wares, a book of advanced yoga techniques, aimed at the more exotically shaped denizens of Mareth. I didn't pick it up, of course, because I didn't need it. But if you could find the salesman and bring the book back to me, I'd most definitely be able to coach you.</i>\"", false);
 		//(Adds Yoga Book to Giacomo's inventory under Books)
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244]++;
+		flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER]++;
 		doNext(13);
 	}
 	//Come back wtih book first time
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] == 1 && player.hasKeyItem("Yoga Guide") >= 0) {
+	else if(flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] == 1 && player.hasKeyItem("Yoga Guide") >= 0) {
 		outputText("\"<i>Have you retrieved the book I mentioned?</i>\" You nod and hand the leather-bound book over to her. She grins and flicks through the pages. \"<i>Oooh, yes I thought as much... Mm-hm... Oh my, nagas can stretch like that?</i>\" Suddenly remembering you're here, she says, \"<i>I'll study this quickly. Come back later and I'll be able to give you a great workout.</i>\"", false);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244]++;
+		flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER]++;
 		doNext(13);
 	}
 	//Been told about the book but dont have it.
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] == 1) {
+	else if(flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] == 1) {
 		outputText("\"<i>Have you retrieved the book I mentioned?</i>\" You shake your head sadly, and she sighs. \"<i>Well, until you do there's not much I can do for you.</i>\"", false);
 		doNext(13);
 	}
 	//First time with book
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] == 2) {
+	else if(flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] == 2) {
 		//(On approach with Centaur/Naga body first time after giving the book)
 		outputText("You approach Cotton, who gives you an exuberant grin. \"<i>I've read through the book and I'm pretty confident I can coach you now. What do you say we give it a go? I've arranged for some proper yoga clothes for you. Well, really just the top, but that's what matters for you, isn't it?</i>\"\n\n", false);
 		outputText("Do you want to engage in Yoga with her?", false);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244]++;
+		flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER]++;
 		cottonMenu();
 	}
 	else if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == 20)
@@ -283,12 +283,12 @@ private function acceptYoga():void {
 		doNext(telAdre.telAdreMenu);
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems < 10) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems < 10) {
 		outputText("Before you can start the yogo the centauress steps in and says, \"<i>Ten gems for gym fees.</i>\"\n\nYou fish around in your pouches, but you just don't have enough.  Maybe some other time!", false);
 		doNext(13);
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 		outputText("The centauress collects ten gems for gym fees before the two of you can get into it.\n\n", false);
@@ -311,7 +311,7 @@ private function acceptYoga():void {
 		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
 	}
 	//First time
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176] == 0) {
+	else if(flags[kFLAGS.TIMES_HAD_YOGA] == 0) {
 		outputText("\"<i>Good, good, you won't regret it. First things first, pet, let's get you out of that dreadful clothing.</i>\"  She leads you to the lockers and helps you strip out of your " + player.armorName + ".", false);
 		if(player.gender == 3) outputText("  She spies your crotch and smiles, \"<i>Oh, best of both worlds, are we? Well you're in good company then.</i>\"", false);
 		//(If PC is male:
@@ -331,7 +331,7 @@ private function acceptYoga():void {
 	}
 	//(Repeat Encounter (Didn't have sex))
 	//Done yoga > 0 && met type = 1
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176] > 0) {
+	else if(flags[kFLAGS.COTTON_MET_FUCKED] == 1 && flags[kFLAGS.TIMES_HAD_YOGA] > 0) {
 		outputText("You change into your yoga clothes and approach Cotton, saying you'd love another yoga workout. Cotton smiles and sets up a mat for you. You spend the next half an hour trying different poses and stretches while she corrects you, sometimes pressing her body against yours to show you how it's done.\n\n", false);
 
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says, \"<i>I know you weren't comfortable with our shower before, so I won't join you this time. But if you ever change your mind, just say the word.</i>\"", false);
@@ -368,7 +368,7 @@ private function acceptYoga():void {
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176]++;
+	flags[kFLAGS.TIMES_HAD_YOGA]++;
 	fatigue(20);
 	dynStats("spe", 1, "lus", (5+player.lib/20+player.sens/20));
 }
@@ -464,7 +464,7 @@ private function cottonShowerFunTimes():void {
 //(Fuck Her)
 private function cottonFirstTimeFuckHer():void {
 	spriteSelect(12);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	outputText("", true);
 	outputText(images.showImage("cotton-first-fuck"));
 	var x:Number = player.cockThatFits(100);
@@ -490,7 +490,7 @@ private function cottonFirstTimeFuckHer():void {
 //(Get fucked, as Male)
 private function cottonFucksYou():void {
 	spriteSelect(12);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	outputText("", true);
 	outputText(images.showImage("cotton-fucks-you"));
 	player.slimeFeed();
@@ -568,7 +568,7 @@ private function cottonFucksYou():void {
 //(Service her, any gender)
 private function serviceFirstTimeCotton():void {
 	spriteSelect(12);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	player.slimeFeed();
 	outputText("", true);
 	outputText(images.showImage("cotton-first-time-give-her-blowjob"));
@@ -598,7 +598,7 @@ private function refuseFirstTimeCotton():void {
 
 //(Shower Sex, Fuck Her)
 private function fuckCottonInShowerRepeat():void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	spriteSelect(12);
 	outputText("", true);
 	outputText(images.showImage("cotton-shower-fuck-repeat"));
@@ -641,7 +641,7 @@ private function fuckCottonInShowerRepeat():void {
 			//(and if PC is lactating)
 			if(player.biggestLactation() >= 1) {
 				outputText("  Her efforts are soon rewarded as milk begins seeping from your " + nippleDescript(0) + ". Cotton's eyes turn up to your face in surprise, but she doesn't remove her mouth, instead taking the time to gulp down your tasty milk. It isn't long before she draws back, wipes her mouth and practically tackles your other breast, eager to drain it of its precious cargo. You can't help but moan as a draining sensation overwhelms you. After a moment, Cotton pulls away and smacks her lips. \"<i>That is some tasty, tasty milk, pet, I might have to taste you more often.</i>\"", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 			}
 			//(else is PC is not lactating)
 			else outputText("  Cotton soon switches to the other breast, teasing your " + nippleDescript(0) + " with her talented tongue.", false);
@@ -718,7 +718,7 @@ private function fuckCottonInShowerRepeat():void {
 			//(and if PC is lactating)
 			if(player.biggestLactation() >= 1) {
 				outputText("  Her efforts are soon rewarded as milk begins seeping from your " + nippleDescript(0) + ". Cotton's eyes turn up to your face in surprise, but she doesn't remove her mouth, instead taking the time to gulp down your tasty milk. It isn't long before she draws back, wipes her mouth and practically tackles your other breast, eager to drain it of its precious cargo. You can't help but moan as a draining sensation overwhelms you. After a moment, Cotton pulls away and smacks her lips. \"<i>That is some tasty, tasty milk, pet, I might have to taste you more often.</i>\"", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 			}
 			//(else is PC is not lactating)
 			else outputText("  Cotton soon switches to the other breast, teasing your " + nippleDescript(0) + " with her talented tongue.", false);
@@ -797,7 +797,7 @@ private function fuckCottonInShowerRepeat():void {
 			//(and if PC is lactating)
 			if(player.biggestLactation() >= 1) {
 				outputText("  Her efforts are soon rewarded as milk begins seeping from your " + nippleDescript(0) + ". Cotton's eyes turn up to your face in surprise but she doesn't remove her mouth, instead taking the time to gulp down your tasty milk. It isn't long before she draws back, wipes her mouth and practically tackles your other breast, eager to drain it of its precious cargo. You can't help but moan as a draining sensation overwhelms you. After a moment, Cotton pulls away and smacks her lips. \"<i>That is some tasty, tasty milk, pet, I might have to taste you more often.</i>\"", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 			}
 			//(else is PC is not lactating)
 			else outputText("  Cotton soon switches to the other breast, teasing your " + nippleDescript(0) + " with her talented tongue.", false);
@@ -856,7 +856,7 @@ private function fuckCottonInShowerRepeat():void {
 private function cottonFucksYouInShowerRepeat():void {
 	spriteSelect(12);
 	player.slimeFeed();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	outputText("", true);
 	outputText(images.showImage("cotton-shower-fucks-you-repeat"));
 	/*OLD SEX SCENES HERE
@@ -906,7 +906,7 @@ private function cottonFucksYouInShowerRepeat():void {
 			//(and if PC is lactating)
 			if(player.biggestLactation() >= 1) {
 				outputText("  Her efforts are soon rewarded as milk begins seeping from your " + nippleDescript(0) + ". Cotton's eyes turn up to your face in surprise, but she doesn't remove her mouth, instead taking the time to gulp down your tasty milk. It isn't long before she draws back, wipes her mouth and practically tackles your other breast, eager to drain it of its precious cargo. You can't help but moan as the draining sensation overwhelms you. After a moment, Cotton pulls away and smacks her lips. \"<i>That is some tasty, tasty milk, little pet.  I simply must have you for breakfast sometime.</i>\"", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 			}
 			//(else is PC is not lactating)
 			else outputText("  Cotton soon switches to the other breast, teasing your " + nippleDescript(0) + " with her talented tongue.", false);
@@ -965,7 +965,7 @@ private function cottonFucksYouInShowerRepeat():void {
 			//(and if PC is lactating)
 			if(player.biggestLactation() >= 1) {
 				outputText("  Her efforts are soon rewarded as milk begins seeping from your " + nippleDescript(0) + ". Cotton's eyes turn up to your face in surprise, but she doesn't remove her mouth, instead taking the time to gulp down your tasty milk. It isn't long before she draws back, wipes her mouth and practically tackles your other breast, eager to drain it of its precious cargo. You can't help but moan as a draining sensation overwhelms you. After a moment, Cotton pulls away and smacks her lips. \"<i>That is some tasty, tasty milk, little pet.  I simply must have you for breakfast...</i>\"", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 			}
 			//(else is PC is not lactating)
 			else outputText("  Cotton soon switches to the other breast, teasing your " + nippleDescript(0) + " with her talented tongue.", false);
@@ -1028,7 +1028,7 @@ public function cottonTantricSex():void {
 	outputText("", true);
 	outputText(images.showImage("cotton-tantric-sex"));
 	player.slimeFeed();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] = 2;
+	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	//OLD TANTRIC SMEX
 	/*outputText("You decide to ask instead about using yoga to blow off some steam. She grins, \"<i>I know just what you need. It's called tantric sex, and I think you're just limber and quick enough to try it.</i>\"\n\n", false);
 
@@ -1085,7 +1085,7 @@ public function cottonTantricSex():void {
 		//(If PC is lactating, add)
 		if(player.biggestLactation() >= 1) {
 			outputText("  You feel a familiar sensation welling up in your breasts as milk begins pouring into Cotton's mouth. She grins as best she can without letting go of your tit, eagerly drinking down your milk. In yet another moment of trepidation, you realize you can taste your own milk slipping over Cotton's tongue. You smack your lips. It tastes sweet and creamy, and oh-so warm. Cotton moves to your next nipple, letting the first dribble milk onto the both of you. Again Cotton sucks on your " + nippleDescript(0) + " for a moment before it begins dispensing its precious cargo into her mouth. You taste every gulp, each one sweeter than the next, before Cotton pulls back and smacks her lips together. \"<i>You taste so sweet, pet. I simply must have you around for breakfast…</i>\"", false);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 1;
+			flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 		}
 		//(else if PC is not lactating)
 		else outputText("  She quickly switches to the other nipple, her tongue expertly teasing and tantalizing it before pulling away once more.", false);

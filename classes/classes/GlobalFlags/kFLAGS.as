@@ -172,7 +172,7 @@ public static const PC_PENDING_PREGGERS:int                                     
 public static const AMILY_PC_GENDER:int                                             =  164; // 
 public static const AMILY_HERM_QUEST:int                                            =  165; //  1=amily flipped out, 2=accepted as amily's dad1=Amily Flipped Out, 2=Accepted As Amily'S Dad
 public static const AMILY_ALLOWS_FERTILITY:int                                      =  166; // 
-public static const UNKNOWN_FLAG_NUMBER_00167:int                                   =  167; // Permanent Gym Membership? (1 = yes)
+public static const LIFETIME_GYM_MEMBER:int                                   =  167; // Permanent Gym Membership? (1 = yes)
 public static const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet?
 public static const UNKNOWN_FLAG_NUMBER_00169:int                                   =  169; // Times cooked Amily's Drug
 public static const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Amily's Corruption Value
@@ -181,8 +181,8 @@ public static const AMILY_VAGINAL_WETNESS:int                                   
 public static const UNKNOWN_FLAG_NUMBER_00173:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.	0=Not freaked out, 1=Freaked out
 public static const UNKNOWN_FLAG_NUMBER_00174:int                                   =  174; // Times Dominika Sucked off horsecocks
 public static const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
-public static const UNKNOWN_FLAG_NUMBER_00176:int                                   =  176; // Cotton - TIMES HAD YOGA
-public static const UNKNOWN_FLAG_NUMBER_00177:int                                   =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
+public static const TIMES_HAD_YOGA:int                                   =  176; // Cotton - TIMES HAD YOGA
+public static const COTTON_MET_FUCKED:int                                   =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
 public static const UNKNOWN_FLAG_NUMBER_00178:int                                   =  178; // Gym paid fees today?
 public static const UNKNOWN_FLAG_NUMBER_00179:int                                   =  179; // Met Jasun
 public static const UNKNOWN_FLAG_NUMBER_00180:int                                   =  180; // Times fucked Jasun
@@ -249,8 +249,8 @@ public static const UNKNOWN_FLAG_NUMBER_00240:int                               
 public static const UNKNOWN_FLAG_NUMBER_00241:int                                   =  241; // mino explained what he needs yet?
 public static const UNKNOWN_FLAG_NUMBER_00242:int                                   =  242; // , 3 =stayed, 4 = epilogue'ed
 public static const UNKNOWN_FLAG_NUMBER_00243:int                                   =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.	Mod%8=0, present
-public static const UNKNOWN_FLAG_NUMBER_00244:int                                   =  244; // Cotton Unusual Yoga Guidebook tracker
-public static const UNKNOWN_FLAG_NUMBER_00245:int                                   =  245; // Cotton Breakfast Club
+public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                                   =  244; // Cotton Unusual Yoga Guidebook tracker
+public static const COTTON_BREAKFAST_CLUB:int                                   =  245; // Cotton Breakfast Club
 public static const UNKNOWN_FLAG_NUMBER_00246:int                                   =  246; // Tiger Tooth Countdown
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
 public static const UNKNOWN_FLAG_NUMBER_00248:int                                   =  248; // Izma Preggers Discussion

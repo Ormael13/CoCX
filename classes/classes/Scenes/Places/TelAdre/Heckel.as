@@ -75,7 +75,7 @@ private function heckelTraining():void {
 	if(flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] + flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL] == 0) {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, her unsettling grin returns.  \"<i>Excellent!  Let me just get cleaned up and we'll start with some stretches.</i>\"\n\n", false);
 		
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 			player.gems -= 10;
 			statScreenRefresh();
@@ -98,7 +98,7 @@ private function heckelTraining():void {
 	}
 	//FOLLOWUP SECKZ
 	else {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0) {
+		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 			player.gems -= 10;
 			statScreenRefresh();

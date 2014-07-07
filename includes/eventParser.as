@@ -2706,8 +2706,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Cotton's cereal overlapps marbleliciousness
-		if(model.time.hours == 6 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 0;
+		if(model.time.hours == 6 && flags[kFLAGS.COTTON_BREAKFAST_CLUB] == 1 && player.biggestLactation() >= 2) {
+			flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 0;
 			telAdre.cotton.nomSomeTitMilkCereal();
 			return true;
 		}
