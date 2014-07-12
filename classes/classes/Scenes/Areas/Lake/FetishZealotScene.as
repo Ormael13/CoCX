@@ -91,7 +91,7 @@ package classes.Scenes.Areas.Lake
 			if (broseph == "dude") {
 				//set the player's armor to their new male teacher outfit, see lower down for a full description.
 				if (player.armorValue <= 0) {
-					player.modArmorName = "backless female teacher's clothes";  //can you think of a better way of putting this?
+					player.modArmorName = "formal vest, tie, and crotchless pants";  //can you think of a better way of putting this?
 				}
 				outputText("You smooth down your detached pants, and look at your exposed dick for a few moments, wondering if there was anything you said that may have upset him.  ", false);
 			}
