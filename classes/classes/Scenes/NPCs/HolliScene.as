@@ -195,7 +195,7 @@ private function noPlzDontFuckWithFarm():void
 }
 
 private function fertilizeHolli(cock:Boolean = true):void {
-	//20% chance per sexing.  Up to bonus 20% for jizz or fertility!
+	//20% chance per sexing.  Up to bonus 20% for jizz or fertility! Max 62%.
 	var odds:Number = 20;
 	if(cock && player.hasCock()) {
 		odds += player.cumQ()/300;
@@ -203,7 +203,6 @@ private function fertilizeHolli(cock:Boolean = true):void {
 		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) odds += 10;
 		if(player.findPerk(PerkLib.FerasBoonAlpha) >= 0) odds += 10;
 		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
-		if(odds > 80) odds = 80;
 	}
 	if(!cock && player.hasVagina()) {
 		odds += player.totalFertility()/5;
@@ -211,7 +210,6 @@ private function fertilizeHolli(cock:Boolean = true):void {
 		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) odds += 10;
 		if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) odds += 10;
 		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
-		if(odds > 80) odds = 80;
 	}
 	if(odds >= rand(101)) {
 		flags[kFLAGS.HOLLI_FRUIT] += 1 + rand(Math.floor(odds/10));
