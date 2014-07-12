@@ -2004,7 +2004,10 @@ public function apparantlyJojoDOESlift():void
 		{
 			trace("ADDING FIRST PERK");
 			outputText("“<i>Breathing is key.</i>”\n\n");
-			outputText("Jojo’s constantly repeated words resonate within you as you realize you’ve learned to control your breathing. It takes you less time to rest than normal and you feel as though you are bursting with energy because of it.  Your [fullChest] rises and falls smoothly even in the heat of battle.  From now on you know you’ll recover more quickly.\n\n");
+			outputText("Jojo’s constantly repeated words resonate within you as you realize you’ve learned to control your breathing. It takes you less time to rest than normal and you feel as though you are bursting with energy because of it.  Your [fullChest]");
+			if (player.biggestTitSize() == 0) outputText(" rises and falls");
+			else outputText(" rise and fall");
+			outputText(" smoothly even in the heat of battle.  From now on you know you’ll recover more quickly.\n\n");
 
 			outputText("<b>(Perk Gained: Controlled Breath -</b> Increases rate of fatigue regeneration by 10%<b>)</b>");
 			player.createPerk(PerkLib.ControlledBreath, 0, 0, 0, 0);
