@@ -1555,6 +1555,7 @@ package classes.Scenes.Places.Farm
 
 			// In each case Bath girl reverts to her boobed state and is at farm
 			flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] = 1;
+			player.gems -= 400;
 
 			doNext(rootScene);
 		}
