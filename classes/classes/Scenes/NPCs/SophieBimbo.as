@@ -252,16 +252,16 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	}
 	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
-		addButton(7,"Daughter",daughterCheckup);
+		addButton(5,"Daughter",daughterCheckup);
 	}
 	if(flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		if(flags[kFLAGS.SLEEP_WITH] != "Sophie") {
 			if(output) outputText("\n\nYou could invite her to share the bed with you at night.");
-			addButton(8,"SleepWith",moveSophieInRepeat);
+			addButton(6,"SleepWith",moveSophieInRepeat);
 		}
 		else {
 			if(output) outputText("\n\nYou're currently sharing your bed with Sophie at night.  You could kick her out.");
-			addButton(8,"NoSnuggles",noSophieSleepWith);
+			addButton(6,"NoSnuggles",noSophieSleepWith);
 		}
 	}
 	//choices("Nice Fuck",vag2,"Mean Fuck",vag,"FuckHerAss",anal,"Get Licked",getLicked,"Ovi Elixer",ovi,"Titty-Fuck",titFuck,"",0,"",0,"",0,"Leave",campSlavesMenu);
@@ -274,7 +274,7 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) addButton(3, "Stop Harvest", stopHarvest);
 	
-	addButton(9, "Appearance", sophieBimboAppearance);
+	addButton(7, "Appearance", sophieBimboAppearance);
 
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Leave", camp.campSlavesMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
