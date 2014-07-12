@@ -121,7 +121,7 @@ public function customPCSetup():void {
 		inventory.takeItem(consumables.KITGIFT);
 		
 		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
-		player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
+		//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
 		
 		// Izma
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;

@@ -4164,7 +4164,11 @@ public function spellCleansingPalm():void
 	
 	if (temp > 0)
 	{
-		outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing them back a few feet.\n\n");
+		outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
+		if ((monster as Monster).plural == true) outputText(" them");
+		else outputText((monster as Monster).mfn(" him", " her", " it"));
+		outputText(" back a few feet.\n\n");
+		
 		outputText(monster.capitalA + monster.short + " takes " + temp + " damage.\n\n");
 	}
 	else
