@@ -270,22 +270,22 @@ public function mutateJojo():void {
 	outputText("It doesn't take long.  A plaintive whine escapes him as his hand creeps around his waist.  You grin and push him onto his back, stepping onto his wrist to pin his hand in place.  You drop the crystal dildo onto his chest with a single command, \"<i>Use it</i>\".\n\n", false);
 	outputText("Jojo shivers and takes your offering with his free hand, slowly hefting it and dragging it lower.  He looks up at you questioningly, and you gesture impatiently at him to quit wasting your time.  The dildo's crown presses against his sphincter, stopping for a second as the bitch-boy relaxes, and then begins its long journey inward.  Jojo's eyes roll up a bit and his prick starts pumping out a clear stream of his pre-cum, wetting most of his belly.  Finally the pinkish-hued balls press against his bum.  He's taken the whole thing.\n\n", false);
 	outputText("While you still have one of the mouse's hands pinned under your " + player.foot() + ", his other has already released the tainted sex-toy, and journeyed up to his pre-cum spurting cock.  You waste no time and push his hand away as you jump on top of him, being sure to grind your " + vaginaOrDicksOrCrotch() + " against his slick boner.  He keeps whining plaintively and wriggling his hips against you, but you deny him any further stimulation, instead focusing on keeping him horny while the tainted dildo settles in.\n\n", false);
-	outputText("Jojo's moans reach a fevered pitch as a soft buzzing begins to fill the air behind you.  You turn around and see that the lethicite-crafted dildo has begun to vibrate inside of him!  Somehow you can feel that this is the time to change him – that his form is malleable and ready.  Your hand finds itself wrapped around the base of his cock, bottling him up until you're ready, while you lean up to his cute mouse-ears and start to whisper, \"<i><i>Aww, does my little rodent-bitch want to cum?</i></i>\"\n\n", false);
+	outputText("Jojo's moans reach a fevered pitch as a soft buzzing begins to fill the air behind you.  You turn around and see that the lethicite-crafted dildo has begun to vibrate inside of him!  Somehow you can feel that this is the time to change him – that his form is malleable and ready.  Your hand finds itself wrapped around the base of his cock, bottling him up until you're ready, while you lean up to his cute mouse-ears and start to whisper, \"<i>Aww, does my little rodent-bitch want to cum?</i>\"\n\n", false);
 	outputText("He shakes his head and whines again, trembling underneath you.\n\n", false); 
-	outputText("\"<i><i>Too bad slut,</i></i>\" you say while you give his balls a squeeze, \"<i><i>you can't cum until I've changed you into the perfect fuck-toy.  A toy that can just keep cumming, more than once.  A toy who can fill more than one hole at a time.  A toy I could share with my friends, who could keep up with a succubus and an incubus simultaneously.  You'll be that toy for me.  My delicious fuck-puppet that cums on command with tentacle-dicks and pussy-vines aplenty.</i></i>\"\n\n", false);
+	outputText("\"<i>Too bad slut,</i>\" you say while you give his balls a squeeze, \"<i>you can't cum until I've changed you into the perfect fuck-toy.  A toy that can just keep cumming, more than once.  A toy who can fill more than one hole at a time.  A toy I could share with my friends, who could keep up with a succubus and an incubus simultaneously.  You'll be that toy for me.  My delicious fuck-puppet that cums on command with tentacle-dicks and pussy-vines aplenty.</i>\"\n\n", false);
 	outputText("Jojo's eyes roll back until all you can see is the whites.  His mouth lolls open from pleasure and lets loose a constant stream of pants and moans.  Already you can feel his cock squirming in your hand, thrashing to get free.  The dildo starts vibrating louder, and his pre-cum manages to start spurting free again, despite your tight grip on his member.  You see his shoulders bulge as something starts wriggling under his skin, thrashing back and forth until they sprout free as a pair of tentacles.\n\n", false); 
 	outputText("Uncontrolled, the tentacles curl down to Jojo's vine-like member, wrapping it in coils until your hand is forced off and wriggling around it.  You note each of his new appendages is developing a flare at their tips, and the puddle of pre seems to be growing faster than it ever did before.\n\n", false);
-	outputText("You whisper, \"<i><i>Good bitch, you'll be able to fuck every hole around you, won't you?  But all I see is an ass and a mouth for cocks.  You need some nice tight cock-sleeves don't you?</i></i>\"\n\n", false);
+	outputText("You whisper, \"<i>Good bitch, you'll be able to fuck every hole around you, won't you?  But all I see is an ass and a mouth for cocks.  You need some nice tight cock-sleeves don't you?</i>\"\n\n", false);
 	outputText("On cue, you feel his tail curl up your back, already longer than it ever was before.  To your surprise the fur is vanishing, leaving you feeling smooth rubbery skin.  It splits three ways in an instant, but each grows thicker than his tail ever was before.  One curls over your shoulder as if looking for something, and reveals a strange sucking opening, sticky with some kind of fluid and filled with undulating fleshy ridges.\n\n", false);
-	outputText("You smile and give the opening a lick – it's sweet – and turn back to his ear, \"<i><i>Now you're where I want you bitch.  Feel that dildo squeezing your prostate?  You'll cum just from that won't you?  Take those new tentacles off your dick and aim them at your face, I want to watch you give yourself a facial and cum all over yourself just from my other toy.</i></i>\"\n\n", false);
+	outputText("You smile and give the opening a lick – it's sweet – and turn back to his ear, \"<i>Now you're where I want you bitch.  Feel that dildo squeezing your prostate?  You'll cum just from that won't you?  Take those new tentacles off your dick and aim them at your face, I want to watch you give yourself a facial and cum all over yourself just from my other toy.</i>\"\n\n", false);
 	outputText("Despite looking lost to the pleasure, his body obeys, releasing his dick and aiming his shoulder-tentacles at his open mouth.  You can see now that each is a dark green color, and capped with a shiny purplish head, just like the vines in the corrupted glade.  Each of them starts flaring wider, and you feel his cock snake up between your ", false);
 	if(player.biggestTitSize() < 1) outputText("bodies", false);
 	else outputText(allBreastsDescript(), false);
 	outputText(", until it pops out just under his chin, looking like a fatter version of the twins on his shoulders.  All three start flaring wider in preparation, and you know he is about to erupt.\n\n", false);
-	outputText("\"<i><i>Good toy,</i></i>\" you whisper, \"<i><i>cum for your ", false);
+	outputText("\"<i>Good toy,</i>\" you whisper, \"<i>cum for your ", false);
 	if(player.gender <= 1) outputText("master", false);
 	else outputText("mistress", false);
-	outputText(".</i></i>\"\n\n", false);
+	outputText(".</i>\"\n\n", false);
 	outputText("He submits happily, a smile overtaking his face in spite of his eyes rolled back and his tongue drooling all over his muzzle.  His entire body quakes, and you feel bulges beginning to pass under your ", false);
 	if(player.biggestTitSize() >= 1) outputText(allBreastsDescript(), false);
 	else outputText("chest", false);
@@ -318,13 +318,13 @@ public function useTentacleJojo():void {
 	var titFucking:Boolean = false;
 	var cumPuddle:Boolean = false;
 	var milkPuddle:Boolean = false;
-	outputText("You call out, \"<i><i>Sluuuuuut!</i></i>\"\n\n", true);
+	outputText("You call out, \"<i>Sluuuuuut!</i>\"\n\n", true);
 	outputText("A few seconds later Jojo comes bounding into camp on all fours, blushing furiously and with his ass high in the air, trying to keep his tumescent mouse-member from dragging along the ground.  He presents himself to you, putting his hands behind his back and displaying his prick.  It squirms and wriggles obscenely in a way that nothing that thick should be able to move.  Jojo is biting his lip and blushing hard at his uncontrollable display.  You note that despite his blush, the tiny lumps on his shoulders are growing larger and taking on a purplish hue, while his three tails have begun to disentangle themselves behind him.\n\n", false);
 	outputText("Desperation hangs thick about him in the air as his newfound additions react to your summons.  Somehow he knows you wanted to use them, but he's trying to hold himself back like a good bitch.  You egg him on a bit, taunting, \"<i>Awww, look at the cute little tentacles begging to come out and play,</i>\" while you begin to brush your fingertips along underside of his writhing cock.  Jojo's eye cross from the pleasure, his member growing longer and longer under your touches until it's swaying in the air, snake-like, with its flared purple tip lying in the palm of your hand.\n\n", false);
 	outputText("You drop it, letting it smack into the floor with a wet-sound 'SPLAT' that creates a puddle of pre-cum on the ground.  With your hands free, it is easy to quickly remove your " + player.armorName + " and toss it back towards your tent.  By the time you turn back around, his snake-like member is curling up your thigh, towards your " + assholeOrPussy() + ".  ", false);
 	if(player.hasVagina()) outputText("You feel it split in half, dividing in order to take you from both ends.  ", false);
 	outputText("You marvel at just how hard it is to dominate someone who can fuck you from a few feet away and wrap you up with a half-dozen appendages before you just give in and decide to enjoy it.\n\n", false); 
-	outputText("You put your arms on your hips and say, \"<i><i>Go ahead and ravage me then, but if I don't love every second of it you'll regret it.</i></i>\"\n\n", false);
+	outputText("You put your arms on your hips and say, \"<i>Go ahead and ravage me then, but if I don't love every second of it you'll regret it.</i>\"\n\n", false);
 	outputText("Looking very much like a starving man looking at a steak, Jojo smiles serenely and lashes out with his shoulder-tentacles, grabbing your arms and pinning them to your waist.  They wrap about your middle and lift you off the ground with ease.  Suspended in front of him, you're effortlessly rotated in place until your " + assholeDescript() + " is in the air and your legs splayed apart, with the mutant-mouse's primary tentacle getting ever closer to your " + assholeDescript(), false);
 	if(player.hasVagina()) outputText(" and " + vaginaDescript(0), false);
 	outputText(".\n\n", false);
@@ -352,7 +352,7 @@ public function useTentacleJojo():void {
 				else {
 					outputText("rubbing against your thighs and smearing them with lubricant while one of them easily sucks your " + clitDescript() + " inside.", false);
 					//(If big clit – 
-					if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by 1000 tongues.", false);
+					if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 				}
 				outputText("\n\n", false);
 			}
@@ -377,7 +377,7 @@ public function useTentacleJojo():void {
 				if(player.hasVagina()) {
 					outputText("out your " + clitDescript() + " and sucking it inside.", false);
 					//(If big clit – 
-					if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by 1000 tongues.", false);
+					if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 				}
 				else outputText("to rub itself along your taint, massaging the sensitive skin with its slimy lubricants.", false);
 				outputText("\n\n", false);
@@ -389,7 +389,7 @@ public function useTentacleJojo():void {
 			if(player.cockArea(0) > 60) outputText("laboriously working to swallow", false);
 			else if(player.cockArea(0) >= 20) outputText("engulfing", false);
 			else outputText("easily swallowing", false);
-			outputText(" your " + multiCockDescriptLight() + " in tight vises of pleasure.  The sensation is overhwelmingly pleasurable, like having three cocks being licked and sucked by 1000 tongues.", false);
+			outputText(" your " + multiCockDescriptLight() + " in tight vises of pleasure.  The sensation is overwhelmingly pleasurable, like having three cocks being licked and sucked by a thousand tongues.", false);
 			//(if extra: 
 			if(player.cockTotal() > 3) outputText("  The remaining " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
 			outputText("\n\n", false);
@@ -399,7 +399,7 @@ public function useTentacleJojo():void {
 	if(player.totalCocks() == 0 && player.hasVagina()) {
 		outputText("One of Jojo's tail-tentacles slides underneath his body, shooting forwards to seek out your " + clitDescript() + ".  It pauses an inch or two away and opens up a horrific orifice full of wriggling tentacles and slick fluids.  The next moment it lunges forwards and sucks it inside.", false);
 		//(If big clit – 
-		if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by 1000 tongues.", false);
+		if(player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 		else outputText("  The sensation was unreal, and you find yourself wishing your clit was bigger so you could feel even more of the tendrils pleasure-hole.", false);
 		outputText("\n\n", false);
 	}
@@ -421,7 +421,7 @@ public function useTentacleJojo():void {
 	else {
 		//With cunt
 		if(player.hasVagina()) {
-			if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into oversized cum-receptacles", false);
+			if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into your oversized cum-receptacles", false);
 			else {
 				if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication", false);
 				else outputText("forcing their way inside your " + vaginaDescript(0) + " and " + assholeDescript(), false);
@@ -429,7 +429,7 @@ public function useTentacleJojo():void {
 		}
 		//Just butt
 		else {
-			if(player.ass.analLooseness >= 4) outputText(" practically falling into oversized cum-receptacle", false);
+			if(player.ass.analLooseness >= 4) outputText(" practically falling into your oversized cum-receptacle", false);
 			else {
 				if(player.ass.analWetness >= 3) outputText(" sliding inside easily thanks to your copious lubrication", false);
 				else outputText("forcing its way inside your " + assholeDescript(), false);
@@ -448,21 +448,21 @@ public function useTentacleJojo():void {
 		if(player.cockTotal() == 1) outputText("  The tentacle on your " + multiCockDescriptLight() + " seems appreciative, and begins sucking to swallow down all your pre.", false);
 		if(player.cockTotal() > 1) outputText("  The tentacles on your " + multiCockDescriptLight() + " seem appreciative, and begin sucking to swallow down all your pre.", false);
 	}
-	if(player.hasVagina()) outputText("  Your " + vaginaDescript(0) + " spasms around the invader, clenching uncontrollably as its plowed by the thick vine-prick.", false);
+	if(player.hasVagina()) outputText("  Your " + vaginaDescript(0) + " spasms around the invader, clenching uncontrollably as it's plowed by the thick vine-prick.", false);
 	outputText("\n\n", false);
 	outputText("You feel the bindings around your waist sliding and twisting to free up some of their length.  The pair of tentacle-cocks rear up before your " + allBreastsDescript() + " like hungry snakes eyeing a mouse.\n\n", false);
 	//(Large tits &/or multitits with no lactation)
 	if((player.biggestTitSize() >= 4 || (player.biggestTitSize() >= 4 && player.breastRows.length > 1)) && player.biggestLactation() < 2) {
 		titFucking = true;
-		outputText("The twin tentacles erupt like kinked up garden-hoses that have suddenly become free, splattering your chest thick white goop.  They spurt until all of your " + breastDescript(0) + " are painted white with warm dripping goop.  One of the purple-headed monsters slides into the mess, while the other ties itself around your " + breastDescript(0) + ", squeezing its brother tightly between the walls of cum-slickened titflesh.  The swollen purple head bumps your chin, smearing you with its cum, as it begins to fuck your tits.  Glob after glob of mouse-cum spatters up from your chest into your chin and mouth, eventually soaking your " + faceMuzzle() + " and neck.\n\n", false);
+		outputText("The twin tentacles erupt like kinked up garden-hoses that have suddenly become free, splattering your chest with thick white goop.  They spurt until all of your " + breastDescript(0) + " are painted white with warm dripping goop.  One of the purple-headed monsters slides into the mess, while the other ties itself around your " + breastDescript(0) + ", squeezing its brother tightly between the walls of cum-slickened titflesh.  The swollen purple head bumps your chin, smearing you with its cum as it begins to fuck your tits.  Glob after glob of mouse-cum spatters up from your chest into your chin and mouth, eventually soaking your " + faceMuzzle() + " and neck.\n\n", false);
 	}
 	//(Lactating highly)
 	if(player.biggestLactation() >= 2) {
 		nippleSucking = true;
-		outputText("The heads split apart, dividing into quarters as they reveal a wet openings with pink, tongue-like appendages.  Milk begins to leak from your nipples as their intent becomes clear, and you inwardly scold yourself for ", false);
+		outputText("The heads split apart, dividing into quarters as they reveal wet openings with pink, tongue-like appendages.  Milk begins to leak from your nipples as their intent becomes clear, and you inwardly scold yourself for ", false);
 		if(player.cor < 80) outputText("being such a wanton slut", false);
 		else outputText("giving it up too easily", false);
-		outputText(".  Jojo's dick-mouths latch on and suck hard, pulling your " + nippleDescript(0) + "s deep into their internal resevoir and stimulating your breasts to release a torrent of milk.  ", false);
+		outputText(".  Jojo's dick-mouths latch on and suck hard, pulling your " + nippleDescript(0) + "s deep into their internal reservoir and stimulating your breasts to release a torrent of milk.  ", false);
 		if(player.cowScore() >= 5) outputText("You find yourself mooing in contentment as your fuck-slave works to milk you.  ", false);
 		outputText("You watch with a happy smile, enjoying the sensations as the tentacles bulge and move milk-distended knots down their lengths towards Jojo.  They are so full that the sloshing whiteness actually becomes visible through the 'skin' of his tendrils.", false);
 		if(player.breastRows.length > 1) {
@@ -496,13 +496,13 @@ public function useTentacleJojo():void {
 		else outputText(".  ", false);
 		//(If big clit being sucked – 
 		if(player.cockTotal() <= 2 && player.balls == 0) {
-			outputText("The tentacle locked around your " + clitDescript() + " bulges out a bit as your clit throbs from the orgasm, before it sucks harder, making your clitty even larger.  You squeel from the raw sensation until the tentacle pops off, satisfied, leaving your clit looking like an angry red cock.  ", false);
+			outputText("The tentacle locked around your " + clitDescript() + " bulges out a bit as your clit throbs from the orgasm, before it sucks harder, making your clitty even larger.  You squeal from the raw sensation until the tentacle pops off, satisfied, leaving your clit looking like an angry red cock.  ", false);
 			player.clitLength += .25;
 		}
 		outputText("Both tentacles pull out, still dripping whiteness that puddles in your holes.", false);
 	}
 	else {
-		outputText("tentacle in your " + assholeDescript() + " thickens perceptibly.  Bulges of cum work their way down the main tentacle, spreading your " + assholeDescript() + " wide before stuffing you full of mouse cream.  You can feel your bowels filling, expanding you until you look mildly pregnant.  Your body spasms around them, locked in the throes of orgasm.  The tentacle pull out, still dripping whiteness that puddles in your well-used hole.", false);
+		outputText("tentacle in your " + assholeDescript() + " thickens perceptibly.  Bulges of cum work their way down the main tentacle, spreading your " + assholeDescript() + " wide before stuffing you full of mouse cream.  You can feel your bowels filling, expanding you until you look mildly pregnant.  Your body spasms around them, locked in the throes of orgasm.  The tentacle pulls out, still dripping whiteness that puddles in your well-used hole.", false);
 	}
 	//Dick milkings ahoy!
 	if(player.cockTotal() > 0) {
@@ -523,13 +523,13 @@ public function useTentacleJojo():void {
 			else outputText(".", false);
 		}
 		if(player.cockTotal() > 1) {
-			outputText("The tentacles working over your " + multiCockDescript() + " clamp down and wriggle deliciously around you.  You can't help but cum from the assault, feeding the tentacles your hot spoogy load.  They drinks it down eagerly", false);
+			outputText("The tentacles working over your " + multiCockDescript() + " clamp down and wriggle deliciously around you.  You can't help but cum from the assault, feeding the tentacles your hot spoogy load.  They drink it down eagerly", false);
 			if(player.cumQ() >= 100) {
 				outputText(", but after a few moments they begin to struggle with the sheer output.", false);
 				if(player.cumQ() >= 300) {
 					outputText("  When you finally finish, they're bloated and dripping your cum all over your crotch.", false);
 					if(player.cumQ() >= 600) {
-						outputText("  You pump the tentacles so full they turn pinkish-white and bloat obscenely, before suddenly releasing a backflow that soaks you in spunk from the waist down. They drops to the ground limp and spent", false);
+						outputText("  You pump the tentacles so full they turn pinkish-white and bloat obscenely, before suddenly releasing a backflow that soaks you in spunk from the waist down. They drop to the ground limp and spent", false);
 						if(player.cumQ() >= 800) outputText(" but you don't stop cumming until they lie in a deep puddle of jizz", false);
 						outputText(".", false);
 						cumPuddle = true;
@@ -550,7 +550,7 @@ public function useTentacleJojo():void {
 			player.nippleLength += .25;
 		}
 		else outputText("  Somehow you know they won't get any bigger from his rough treatment.", false);
-		outputText("  Your " + allBreastsDescript() + " finally feel emptied, it's a relief.\n\n", false);
+		outputText("  Your " + allBreastsDescript() + " finally feel emptied; it's a relief.\n\n", false);
 		milkPuddle = true;
 	}
 	//Titfucking breastgasm
@@ -579,7 +579,7 @@ public function useTentacleJojo():void {
 		else outputText("on the ground", false);
 	}
 	outputText(".  You moan in frustration, feeling the fluid soak into your skin, secretly wishing he could've fucked you into unconsciousness.  ", false);
-	outputText("The mouse kneels over you and begins licking your body, cleaning you with his tongue.  The tentacles join in, noisily slurping up every ounce of fluid from your form until you're clean and sated.  Sighing dreamily from the attention, you close your eyes and murmer, \"<i><i>Good boy.</i></i>\" When you open them, he's trotting away towards the forest, his tentacles well-hidden again...\n\n", false);
+	outputText("The mouse kneels over you and begins licking your body, cleaning you with his tongue.  The tentacles join in, noisily slurping up every ounce of fluid from your form until you're clean and sated.  Sighing dreamily from the attention, you close your eyes and murmer, \"<i>Good boy.</i>\" When you open them, he's trotting away towards the forest, his tentacles well-hidden again...\n\n", false);
 	player.buttChange(40, true);
 	player.cuntChange(40, true);
 	player.orgasm();
