@@ -1504,6 +1504,9 @@ public function displayStats(e:MouseEvent = null):void
 	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
 	outputText("<b>Eggs Traded For: </b>" + flags[kFLAGS.EGGS_BOUGHT] + "\n");
+	if(player.statusAffectv1(StatusAffects.Birthed) > 0) {
+		outputText("<b>Births: </b>" + player.statusAffectv1(StatusAffects.Birthed) + "\n");
+	}
 	doNext(1);
 }
 
