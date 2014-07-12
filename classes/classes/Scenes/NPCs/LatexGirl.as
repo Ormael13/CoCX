@@ -1431,7 +1431,7 @@ private function femalePCDomFucksLatexGooFuta():void {
 	outputText("  You take a few experimental bounces, enjoying the feeling of that " + gooCock() + " pressing on your folds and stirring against your insides.  Your pet reaches up to grab onto your [hips] for support.  She pants ");
 	if(player.isTaur()) outputText("into your haunches");
 	else if(player.tallness >= 84) outputText("against your side");
-	else if(player.tallness >= 70) outputText("into your shouder");
+	else if(player.tallness >= 70) outputText("into your shoulder");
 	else if(player.tallness >= 60) outputText("into your neck");
 	else outputText("over your head");
 	outputText(", trying to pull herself up against you, deeper inside you.");
