@@ -328,7 +328,7 @@ package classes.Scenes.Areas.HighMountains
 					if(flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 						outputText("\n\nHe feels around the clutter of his store room until he finds what he's looking for: A battered old basket stuffed with a soft pillow.  You raise an eyebrow at the liberal amounts of dog hair the pillow is covered with and Benoit coughs apologetically.");
 						outputText("\n\n“E isn't 'appy about me taking is bed, but to 'ell wizzim; e always gets is 'air on everysing anyway.” You spend some time arranging the eggs where they will be safe and warm.  Although you know they can't be, Benoit's blind eyes seem to be fixed upon the brood when you have finished.");
-						outputText("\n\n“And zese eggs are different?” he says hesitantly.  “Zere will be…little girls?”  You shrug and say even if they aren't female, at least he'll have some sons he can keep away from the mountain.  He sets his jaw and nods.");
+						outputText("\n\n“And zese eggs are different?” he says hesitantly.  “Zere will be...little girls?”  You shrug and say even if they aren't female, at least he'll have some sons he can keep away from the mountain.  He sets his jaw and nods.");
 					}
 					//[Not first time: 
 					else {

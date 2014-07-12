@@ -647,7 +647,7 @@ private function marbleAddiction(newPage:Boolean):void {
 private function wantMarbleAddiction():void {
 	spriteSelect(41);
 	outputText("", true);
-	outputText("You smile and tell her that her milk is the most wonderful thing you've ever had. You'll always want to drink it and do not care if it's addictive.  She gives a small smile before softly saying, \"<i>Are you sure, sweetie?</i>\"  You nod eagerly and try to continue drinking… but you can't bring yourself to do it.  You really want to drink from her, but your body doesn't seem to let you.  \"<i>What's wrong, sweetie?</i>\" she asks, confused at your hesitation, \"<i>I thought you wanted to drink my milk?</i>\"  You explain to her that you're trying, but you just can't bring yourself to.  \"<i>I'm not stopping you sweetie, go ahead.</i>\"  As if a floodgate had been opened, you rush forward and start guzzling down her breast milk once again.  After you've finished, you pull back and look up at Marble. She takes a moment to think before saying slowly, \"<i>So you can't drink without my permission?</i>\"  She smiles down at you, though you can't help but feel a little uncomfortable at this apparent power she has over you.  You decide to excuse yourself and get up.  As you go to the door, Marble calls out to you, \"<i>Sweetie, just come back whenever you get thirsty ok?  I'm looking forward to seeing how you are.</i>\"  She giggles softly as you go out the door, leaving you to wonder if you just made a big mistake.", false);
+	outputText("You smile and tell her that her milk is the most wonderful thing you've ever had. You'll always want to drink it and do not care if it's addictive.  She gives a small smile before softly saying, \"<i>Are you sure, sweetie?</i>\"  You nod eagerly and try to continue drinking... but you can't bring yourself to do it.  You really want to drink from her, but your body doesn't seem to let you.  \"<i>What's wrong, sweetie?</i>\" she asks, confused at your hesitation, \"<i>I thought you wanted to drink my milk?</i>\"  You explain to her that you're trying, but you just can't bring yourself to.  \"<i>I'm not stopping you sweetie, go ahead.</i>\"  As if a floodgate had been opened, you rush forward and start guzzling down her breast milk once again.  After you've finished, you pull back and look up at Marble. She takes a moment to think before saying slowly, \"<i>So you can't drink without my permission?</i>\"  She smiles down at you, though you can't help but feel a little uncomfortable at this apparent power she has over you.  You decide to excuse yourself and get up.  As you go to the door, Marble calls out to you, \"<i>Sweetie, just come back whenever you get thirsty ok?  I'm looking forward to seeing how you are.</i>\"  She giggles softly as you go out the door, leaving you to wonder if you just made a big mistake.", false);
 	//(increase affection by 5)
 	//(set knowAddiction to 1)
 	marbleStatusChange(5,0,1);
@@ -1302,7 +1302,7 @@ private function standardSex(newpage:Boolean = true):void {
 		}
 		//(player is a herm)
 		if(player.gender == 3) {
-			outputText("Marble's eyes widen as you show off your equipment.  \"<i>You have both?</i>\" she says in awe. \"<i>I'm not sure if I can pleasure both parts of you at the same time… which would you prefer to use?</i>\"\n\nWhich of your genitals do you want to have sex with?", false);
+			outputText("Marble's eyes widen as you show off your equipment.  \"<i>You have both?</i>\" she says in awe. \"<i>I'm not sure if I can pleasure both parts of you at the same time... which would you prefer to use?</i>\"\n\nWhich of your genitals do you want to have sex with?", false);
 			//– player chooses: dick(s)/vagina, base on choice, treat the rest of the encounter as if they were male or female
 			simpleChoices("Maleness",2112,"Female",2113,"",0,"",0,"",0);
 			return;
@@ -1840,7 +1840,7 @@ private function talkWithMarbleAtCamp():void {
 	//The player has met the Goddess Marae
 	if(player.findStatusAffect(StatusAffects.MetMarae) >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 1)
 	{
-		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world…</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"",false);
+		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world...</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"",false);
 		//Level up!
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 1;
 	}
@@ -2748,7 +2748,7 @@ public function marbleNightSleepFlavor():Boolean {
 	///START NEW MARBLE NIGHT LOGIC
 	//This section does not happen if Marble's lust is at or over 50, the requests for sex or oral come instead then.
 	if(player.gender == 0) {
-		outputText("As you and Marble lie down for the night, she whispers into your ear, \"<i>Sweetie, if it isn't too much trouble, I'd really like it if you would grow a penis for me.  If you can't do that, then could you at least get a vagina?  I'll understand if it's too much trouble, I just wanted to get that off my chest…</i>\" After a moment of getting comfortable, the two of you go to sleep.\n\n", false);
+		outputText("As you and Marble lie down for the night, she whispers into your ear, \"<i>Sweetie, if it isn't too much trouble, I'd really like it if you would grow a penis for me.  If you can't do that, then could you at least get a vagina?  I'll understand if it's too much trouble, I just wanted to get that off my chest...</i>\" After a moment of getting comfortable, the two of you go to sleep.\n\n", false);
 		return false;
 	}
 	else if(flags[kFLAGS.MARBLE_LUST] < 50 || player.gender == 0) {
@@ -2946,7 +2946,7 @@ private function marbleNightSexDudes():void {
 	}
 	//otherwise, Marble doesn't mind, she'll hold all of them instead
 	else {
-		outputText("Nothing will stop your advance; your cock will be fully enveloped inside Marble's body.  \"<i>That's right sweetie… Ah, let me fully envelop you.</i>\"  With a sigh of satisfaction, your bodies come completely together.\n\n", false);
+		outputText("Nothing will stop your advance; your cock will be fully enveloped inside Marble's body.  \"<i>That's right sweetie... Ah, let me fully envelop you.</i>\"  With a sigh of satisfaction, your bodies come completely together.\n\n", false);
 	}
 	outputText("You look Marble in the eye and the two of you relish the moment; you are two lovers, connected in the most enjoyable of ways.  ", false);
 	//Is Marble going to take the initiative here?

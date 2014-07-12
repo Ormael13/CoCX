@@ -1118,7 +1118,7 @@ package classes.Scenes.Places.Farm
 
 					outputText("\n\n“<i>Yes, [name],</i>” she says, so softly you can barely hear her. “<i>What can I do for you?</i>” Cautiously, you ask her how she feels about the changes you have made around the farm.");
 
-					outputText("\n\n“<i>You were right,</i>” she says, again in that incredibly low voice, before clearing her throat and going on in a louder tone, the words spilling out of her. “<i>I hated you when you first came here demanding a share of the farm, more than anything I’ve ever hated in a long time. Someone taking control of my family’s farm, what I had worked on for all these years, through what seemed to me like pure vindictiveness… I fantasized about killing you, didja know that? Shooting you through the neck when you were tendin’ to something else. The only thing that stopped me I think was fear: fear that you were so powerful that you’d survive it somehow. How miserable I was back then... but at some point I just said fuck it, you know? If I couldn’t work up the courage to fight you, what was the point in stayin’ miserable and angry the whole time? And the more I let go of it...</i>”");
+					outputText("\n\n“<i>You were right,</i>” she says, again in that incredibly low voice, before clearing her throat and going on in a louder tone, the words spilling out of her. “<i>I hated you when you first came here demanding a share of the farm, more than anything I’ve ever hated in a long time. Someone taking control of my family’s farm, what I had worked on for all these years, through what seemed to me like pure vindictiveness... I fantasized about killing you, didja know that? Shooting you through the neck when you were tendin’ to something else. The only thing that stopped me I think was fear: fear that you were so powerful that you’d survive it somehow. How miserable I was back then... but at some point I just said fuck it, you know? If I couldn’t work up the courage to fight you, what was the point in stayin’ miserable and angry the whole time? And the more I let go of it...</i>”");
 
 					outputText("\n\nAs she talks, you delve into your pocket and bring out a gem, this time with deliberate slowness. Whitney’s eyes are immediately drawn to it and she pauses; you softly motion for her to continue, slowly turning the small, glittering kaleidoscope in your fingers as you do. “<i>...It’s just so much more </i>fun<i> around here these days. The farm feels like it’s alive, I am makin so much more money and... the more I open my mind, the more I let go of those old hates, the more I can think, the more I can feel. Gods, I am feeling things I haven’t in years. I see the way you order your followers around and it feels powerful, I make them do as I will and it feels right, like I’m taking control and shaping the world instead of just layin back and watchin it pass me by. It feels like... like...</i>”");
 
@@ -1292,7 +1292,7 @@ package classes.Scenes.Places.Farm
 			// Value low, Protection high: 
 			else if (lowValue && !lowProtection) outputText("\n\n“<i>Feel plenty safe at night, I can tell you that. You got this place protected better than a bank vault.</i>” Whitney shrugs. “<i>Trouble is, the vault is empty. Guards ‘d be great but they don’t scratch the earth for a living. I need hard workers, people who’ll produce stuff, earners. That’s what this place is crying out for right now.</i>”");
 			// Value high, Protection high: 
-			if (!lowValue && !lowProtection) outputText("\n\n“<i>Difficult to complain. This place is doing better than I’ve ever known, even going back to my grandma’s day. As long as we keep up this level of hard work and security, we’ll keep making this kinda scratch.</i>” You look at her, unsmiling, and she is momentarily thrown. “<i>It’s not.... You aren’t-? Well, the only way we’d earn more money is- but I’d never…</i>” she trails off, not looking at you.");
+			if (!lowValue && !lowProtection) outputText("\n\n“<i>Difficult to complain. This place is doing better than I’ve ever known, even going back to my grandma’s day. As long as we keep up this level of hard work and security, we’ll keep making this kinda scratch.</i>” You look at her, unsmiling, and she is momentarily thrown. “<i>It’s not.... You aren’t-? Well, the only way we’d earn more money is- but I’d never...</i>” she trails off, not looking at you.");
 
 			dogeNotCorruptYetMenu();
 		}
@@ -1590,7 +1590,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("You put away the gem and move into Whitney, holding her gaze as you gently place your finger and thumb along her jaw line. She doesn’t pull away and lets out a shuddering sigh as you touch her.");
 
-			outputText("\n\n“<i>I’m glad you have finally opened your mind to everything I can do for you, understood what our relationship truly is,</i>” you say. “<i>And I’m ready to teach you all sorts of things. However…</i>” you pinch into her muzzle very slightly and Whitney tenses, unable to tear her gaze away from your eyes. “<i>This isn’t acceptable. Walking, talking animals are an aberration in my eyes. And you know what happens to aberrations, don’t you Whitney?</i>” She doesn’t reply; she’s deep under your influence, deep under your words. “<i>But you’re a smart girl. A girl who has worked with transformatives her whole life. So I’ll come back tomorrow, and you will be different, in a more suitable form, and then we will discuss your exciting new future properly. Ok?</i>”");
+			outputText("\n\n“<i>I’m glad you have finally opened your mind to everything I can do for you, understood what our relationship truly is,</i>” you say. “<i>And I’m ready to teach you all sorts of things. However...</i>” you pinch into her muzzle very slightly and Whitney tenses, unable to tear her gaze away from your eyes. “<i>This isn’t acceptable. Walking, talking animals are an aberration in my eyes. And you know what happens to aberrations, don’t you Whitney?</i>” She doesn’t reply; she’s deep under your influence, deep under your words. “<i>But you’re a smart girl. A girl who has worked with transformatives her whole life. So I’ll come back tomorrow, and you will be different, in a more suitable form, and then we will discuss your exciting new future properly. Ok?</i>”");
 
 			outputText("\n\n“<i>‘s,</i>” says Whitney, very quietly. You smile at her warmly, and release your grip.");
 
@@ -2839,7 +2839,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nWhen you finally settle down and expose your [vagina] the last of Whitney’s restraint to sit quietly breaks down and she pants openly, her tongue lolling out as she stares avidly at the instrument of her downfall. You send a hand roaming down your front, sighing dreamily as you touch a [nipple] as you slide down before gasping as you pierce your [vagina] with a single finger, already gleaming with the knowledge of what is ahead. The air is perfumed with your heavy musk.");
 
-			outputText("\n\n“<i>Oh Gods….</i>” Whitney moans, unable to look away as she swallows heavily.");
+			outputText("\n\n“<i>Oh Gods...</i>” Whitney moans, unable to look away as she swallows heavily.");
 
 			outputText("\n\n“<i>I am not sure you deserve this.</i>” you say. You glory in the result of all your hard work in front of you inwardly, slowly fingering yourself, but outwardly display no emotion except faint disdain. “<i>You could not even get halfway through servicing me last time before you were whorishly wetting your panties. Why should I give the task of caring for my beautiful body to such a feckless slut?</i>”");
 
@@ -3082,7 +3082,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nHer other hand curls into your female sex, probing deeper into your [vagina], stroking at your sensitive walls, withdrawing to flick at your clit, bulging now well out of its hood. Gods, that is good. You feel your orgasm rising, you begin to thrust your [hips] towards it... Whitney’s hands suddenly grip fiercely around your cock and withdraw entirely from your pussy, making you almost choke into her twat.");
 
-				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then…</i>” Her hand begins to move again, wringing and stroking your cock with loving care until you feel your blood rising again - and then she grips hard, forcing you back down, but not far, as the teasing begins afresh a few seconds later. ");
+				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then...</i>” Her hand begins to move again, wringing and stroking your cock with loving care until you feel your blood rising again - and then she grips hard, forcing you back down, but not far, as the teasing begins afresh a few seconds later. ");
 
 				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave mistress - you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the smoldering need suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth.");
 
@@ -3103,7 +3103,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nWhilst her hips smother your face, her hands curl into your female sex, one probing deep into your [vagina], stroking at your sensitive walls, whilst the other circles and flicks at your clit, bulging now well out of its hood. Gods, that is good. You feel your orgasm rising, you begin to thrust your [hips] towards it... Whitney’s hands suddenly withdraw entirely from your pussy and a hand smacks flat on your stomach, making you almost choke into her twat.");
 
-				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then…</i>” Her hand begins to move again, ever so gently stroking your clit until you feel your blood rising again - and then she withdraws, forcing you back down, but not far, as the teasing begins afresh a few seconds later.");
+				outputText("\n\n“<i>No,</i>” she says. It’s in the same light, teasing tone, but such is the cold steel underlying it you feel a finger run down your spine. “<i>You’re not going anywhere until you get me off again. Until then...</i>” Her hand begins to move again, ever so gently stroking your clit until you feel your blood rising again - and then she withdraws, forcing you back down, but not far, as the teasing begins afresh a few seconds later.");
 
 				outputText("\n\nYou’re trapped here, being edged with horrible expertise by your slave lesbian mistress- you’ve got to make her cum a second time before this drives you mad! You attack her pussy with a vengeance, using the urge physically suppressed in every other part of your body to tongue at her pearly channel as hard as you can, lapping at the wet softness briskly before turning your attention to her clit again, flicking at it with the very tip of your tongue before smothering it with your mouth.");
 
@@ -3790,7 +3790,7 @@ package classes.Scenes.Places.Farm
 			else outputText(" claw");
 			outputText(" into the pot, withdraws it and then, dripping black fluid, presses it against the cow’s ample backside. The animal moos and swishes its tail in mild protest, but it doesn’t seem in any grievous amount of pain as Whitney’s digit moves, artfully tracing a large number 12 with the ink.");
 
-			outputText("\n\n“<i>Then we take some of the paper and press it on to seal it... like so….</i>” There’s a faint hissing sound as Whitney covers the 12 with the white sheet, but again the cow barely seems to notice. When she peels it off she gestures for you to take a look for yourself. This is probably the first and hopefully the last time you inspect a cow’s backside so scrupulously but you can only be impressed by what you see - the number is dried and apparently ingrained deep into the heavy flesh, resisting your own attempts to rub it off easily. This will suit your own purposes perfectly.");
+			outputText("\n\n“<i>Then we take some of the paper and press it on to seal it... like so...</i>” There’s a faint hissing sound as Whitney covers the 12 with the white sheet, but again the cow barely seems to notice. When she peels it off she gestures for you to take a look for yourself. This is probably the first and hopefully the last time you inspect a cow’s backside so scrupulously but you can only be impressed by what you see - the number is dried and apparently ingrained deep into the heavy flesh, resisting your own attempts to rub it off easily. This will suit your own purposes perfectly.");
 
 			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses and looks at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [master]?</i>”");
 
@@ -4497,7 +4497,7 @@ package classes.Scenes.Places.Farm
 			else if (slot == 1)
 			{
 				smallMilkyShouldersIntro();
-				outputText("\n\n“<i>So, uh…</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
+				outputText("\n\n“<i>So, uh...</i>” she says when you’re done. “<i>What did you do?</i>” Something much better than a butterfly you say, grinning as you touch the permanent marking before turning to go stow the branding gear away.");
 
 				outputText("\n\n“<i>Yes, but what is it? [name]? Hello?</i>”");
 				tText += "shoulders.";
@@ -5095,7 +5095,7 @@ package classes.Scenes.Places.Farm
 				}
 				else
 				{
-					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like...</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
 
 					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
 				}
@@ -5115,7 +5115,7 @@ package classes.Scenes.Places.Farm
 				}
 				else
 				{
-					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like...</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
 
 					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
 				}
@@ -5135,7 +5135,7 @@ package classes.Scenes.Places.Farm
 				}
 				else
 				{
-					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like...</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
 
 					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
 				}
@@ -5155,7 +5155,7 @@ package classes.Scenes.Places.Farm
 				}
 				else
 				{
-					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like…</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
+					outputText("\n\n“Oh for...” [bathgirlName] sighs with exasperation as, through long experience, she quickly discerns what you’re drawing. Grinning, you tell her again to be still. “<i>I know I said I liked butterflies [name],</i>” she says when you’re done. “<i>But look at me! They’re crawling all over me, it’s ridiculous. I look like... like...</i>” like you took a bath in butterflies, you suggest, sitting back and drinking in her naked, lepidopteron covered form. And it’s absolutely adorable.");
 
 					outputText("\n\n“<i>I’m going to be very careful about what I say I like to you in future,</i>” she says, visibly struggling to stay angry as she turns herself around and around to admire herself. “<i>I guess - they definitely make me look different, don’t they?</i>” You kiss her fondly on the forehead and send her on her way with a clap on the butterfly.");
 				}
@@ -6266,7 +6266,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>My grandpa put together a suction pump to bring water up from the lake decades ago,</i>” she says. “<i>He used to say that one winter usin’ the outhouse with lumbago was enough. It was me who bought the magic heater though. Expensive, but so, so good after a long day on the farm.</i>” There’s already a small amount of water in the tub; with a twist of a knob more gushes out of a faucet. Steam idly curls its way upwards, as does the faint, unpleasant smell of sulfur. ");
 
-			outputText("\n\n“<i>And… with a bit of expansion and adjustment to the generator….</i>” She twists another brass knob, and bubbles explode into life in the water below, making the surface seethe. You’re so enthralled with it that when something hisses nears your ear it makes you start. Whitney simpers apologetically, a glass bottle with a pump nozzle in her hand. Heavy, spicy fragrance pushes into your nose, masking the smell of rotten eggs. She really did think of everything.");
+			outputText("\n\n“<i>And... with a bit of expansion and adjustment to the generator...</i>” She twists another brass knob, and bubbles explode into life in the water below, making the surface seethe. You’re so enthralled with it that when something hisses nears your ear it makes you start. Whitney simpers apologetically, a glass bottle with a pump nozzle in her hand. Heavy, spicy fragrance pushes into your nose, masking the smell of rotten eggs. She really did think of everything.");
 
 			outputText("\n\nTrying not to appear too overawed, you turn away to take in more of her not-even-pretending-to-be-a massage parlor. On a shelf near the hot tub she has stacked an irregular range of bottled oils and dildos. You might be wrong but it looks like a number of other things are stacked up there. Black, leather things. ");
 			if (whitneyDom()) outputText("The sight sends a shuddering thrill down your spine. “<i>You didn’t think I’d forget those, did you [master]? We both know how important they are for properly relaxing you,</i>” Whitney murmurs, pushing her hot suppleness into your side. ");
@@ -6410,7 +6410,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText(" With a single movement you swing her hot, compact weight over your shoulder. You growl into her ear that she’s still got plenty to do if she’s to finish her job of thoroughly relaxing every part of you.");
 
-				outputText("\n\n“<i>Oh my!</i>” comes the laughing reply from behind your head. “<i>You’d better show me what part of you still needs a good massage, then….</i>” Carefully you carry her over to the hot tub, divesting her of her work-skirt as you do, and plonk her on the edge. She doesn’t need any help to rip her blouse off, her hungry eyes running up and down your oiled, naked form as you slowly step into the bubbling water.");
+				outputText("\n\n“<i>Oh my!</i>” comes the laughing reply from behind your head. “<i>You’d better show me what part of you still needs a good massage, then...</i>” Carefully you carry her over to the hot tub, divesting her of her work-skirt as you do, and plonk her on the edge. She doesn’t need any help to rip her blouse off, her hungry eyes running up and down your oiled, naked form as you slowly step into the bubbling water.");
 			}
 			else
 			{

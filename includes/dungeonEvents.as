@@ -247,7 +247,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11032) {
 		spriteSelect(30);
 		if(player.hasKeyItem("Hentai Comic") >= 0) {
-			outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect… wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"", true);
+			outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"", true);
 			simpleChoices("Fight",11031,"Trade",11034,"Submit",11033,"",0,"",0);
 		}
 		else {

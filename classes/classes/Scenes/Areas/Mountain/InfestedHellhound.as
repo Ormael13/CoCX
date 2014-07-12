@@ -43,7 +43,7 @@
 						else outputText(multiCockDescriptLight(), false);
 						outputText(" wriggle", false);
 						if (player.balls == 0 && player.cockTotal() == 1) outputText("s", false);
-						outputText(" hotly, expelling a few of your own worms in response along with a dribble of thick pre-cum.   You wonder what it would feel like to let his worms crawl inside you…", false);
+						outputText(" hotly, expelling a few of your own worms in response along with a dribble of thick pre-cum.   You wonder what it would feel like to let his worms crawl inside you...", false);
 						game.dynStats("lus", 10);
 					} else {
 						CoC_Settings.error("Infested but no cock!");

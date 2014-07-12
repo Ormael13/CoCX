@@ -427,7 +427,7 @@ private function cottonChat():void {
 	else if(choice == 5) {
 		//(If Jojo hasn't been corrupted)
 		if(kGAMECLASS.monk == 1) {
-			outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre and beyond. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation, which I incorporate into my yoga. Here, let's try.</i>\" You spend the rest of the workout in meditative poses, and by the time you're done, you feel… lighter somehow.\n\n", false);
+			outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre and beyond. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation, which I incorporate into my yoga. Here, let's try.</i>\" You spend the rest of the workout in meditative poses, and by the time you're done, you feel... lighter somehow.\n\n", false);
 			dynStats("cor", -1);
 		}
 		//(If Jojo has been corrupted)
@@ -916,16 +916,16 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("She continues kissing down your belly, reaching your centaur body. She makes you turn around so your rear end is in the spray of water with her.", false);
 		//(If PC has a large penis, bigger than Cotton's capacity, add)
 		if(player.hasCock()) {
-			if(player.cockArea(0) > 70) outputText("  \"<i>Oh my, what's this?</i>\" She puts a hand under your enormous, yet embarrassingly limp cock and lifts it slightly. \"<i>My little pet has such a big dick… Just how I like it. Perhaps next time I'll get to try it out… but not today, hm? This is all about you right now.</i>\"", false);
+			if(player.cockArea(0) > 70) outputText("  \"<i>Oh my, what's this?</i>\" She puts a hand under your enormous, yet embarrassingly limp cock and lifts it slightly. \"<i>My little pet has such a big dick... Just how I like it. Perhaps next time I'll get to try it out... but not today, hm? This is all about you right now.</i>\"", false);
 			//(If PC has a penis under 4</i>\", add)
 			else if(player.longestCockLength() < 4) outputText("  \"<i>Awww, what's this?</i>\" She puts a hand under your embarrassingly small and limp cock and lifts it slightly. \"<i>It's so cute and tiny. And it certainly knows its place. Only room for one cock right now, not that this is much of a cock.</i>\" She giggles and plants a kiss on the tip, \"<i>It is cute though. I love it.</i>\"", false);
 			//(If PC has a penis neither large or small, add)
-			else outputText("Cotton puts a hand under your embarrassingly limp cock and smiles, \"<i>You know how to show a girl you like her… There's only room for one cock right now.</i>\"", false);
+			else outputText("Cotton puts a hand under your embarrassingly limp cock and smiles, \"<i>You know how to show a girl you like her... There's only room for one cock right now.</i>\"", false);
 		}
 		//(If PC has a vagina)
-		if(player.hasVagina()) outputText("  Spying your " + vaginaDescript(0) + ", Cotton smiles and flicks your " + clitDescript() + " teasingly before slipping two fingers inside your folds and bringing them to her mouth, licking them clean. \"<i>Mmm… I love the taste of your juices, pet…</i>\"", false);
+		if(player.hasVagina()) outputText("  Spying your " + vaginaDescript(0) + ", Cotton smiles and flicks your " + clitDescript() + " teasingly before slipping two fingers inside your folds and bringing them to her mouth, licking them clean. \"<i>Mmm... I love the taste of your juices, pet...</i>\"", false);
 		//(if PC is genderless)
-		if(player.gender == 0) outputText("  She places a hand on your bare crotch and quirks an eyebrow. \"<i>Well this is new… Certainly not bad though.</i>\" She runs a hand along your bare mound, which somehow manages to send ripples of pleasure up your spine.", false);
+		if(player.gender == 0) outputText("  She places a hand on your bare crotch and quirks an eyebrow. \"<i>Well this is new... Certainly not bad though.</i>\" She runs a hand along your bare mound, which somehow manages to send ripples of pleasure up your spine.", false);
 		outputText("\n\n", false);
 
 		outputText("Cotton continues the kisses down to your " + player.legs() + " and stands, dragging over a bench from the locker room before standing on it and giving your " + buttDescript() + " a good smack. You turn back and give her a coy look, which she returns and gives your flank another smack.", false);
@@ -975,16 +975,16 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("She continues kissing a trail down your belly and to your crotch.", false);
 		if(player.hasCock()) {
 			//(If PC has a large penis, bigger than Cotton's capacity, add)
-			if(player.biggestCockArea() > 70) outputText("  \"<i>Oh my, what's this?</i>\" She puts a hand under your enormous, yet embarrassingly limp cock and lifts it slightly. \"<i>My little pet has such a big dick… Just how I like it. Perhaps next time I'll get to try it out… but not today, hm? This is all about you right now.</i>\"", false);
+			if(player.biggestCockArea() > 70) outputText("  \"<i>Oh my, what's this?</i>\" She puts a hand under your enormous, yet embarrassingly limp cock and lifts it slightly. \"<i>My little pet has such a big dick... Just how I like it. Perhaps next time I'll get to try it out... but not today, hm? This is all about you right now.</i>\"", false);
 			//(If PC has a penis under 4</i>\", add)
 			if(player.longestCockLength() < 4) outputText("  \"<i>Awww, what's this?</i>\" She puts a hand under your embarrassingly small and limp cock and lifts it slightly. \"<i>It's so cute and tiny. And it certainly knows its place. Only room for one cock right now, not that this is much of a cock.</i>\" She giggles and plants a kiss on the tip, \"<i>It is cute though. I love it.</i>\"", false);
 			//(If PC has a penis neither large or small, add)
-			else outputText("  Cotton puts a hand under your embarrassingly limp cock and smiles, \"<i>You know how to show a girl you like her… There's only room for one cock right now.</i>\"", false);
+			else outputText("  Cotton puts a hand under your embarrassingly limp cock and smiles, \"<i>You know how to show a girl you like her... There's only room for one cock right now.</i>\"", false);
 		}
 		//(If PC has a vagina)
-		if(player.hasVagina()) outputText("  Spying your " + vaginaDescript(0) + ", Cotton smiles and flicks your " + clitDescript() + " teasingly before slipping two fingers inside your folds and bringing them to her mouth, licking them clean. \"<i>Mmm… I love the taste of your juices, pet…</i>\"", false);
+		if(player.hasVagina()) outputText("  Spying your " + vaginaDescript(0) + ", Cotton smiles and flicks your " + clitDescript() + " teasingly before slipping two fingers inside your folds and bringing them to her mouth, licking them clean. \"<i>Mmm... I love the taste of your juices, pet...</i>\"", false);
 		//(if PC is genderless)
-		if(player.gender == 0) outputText("  She places a hand on your bare crotch and quirks an eyebrow. \"<i>Well this is new… Certainly not bad though.</i>\" She runs a hand along your bare mound, which somehow manages to send ripples of pleasure up your spine.", false);
+		if(player.gender == 0) outputText("  She places a hand on your bare crotch and quirks an eyebrow. \"<i>Well this is new... Certainly not bad though.</i>\" She runs a hand along your bare mound, which somehow manages to send ripples of pleasure up your spine.", false);
 		outputText("\n\n", false);
 
 		//(If Naga body)
@@ -1047,18 +1047,18 @@ public function cottonTantricSex():void {
 	//(Tantric Sex ONLY available for humanoids and naga, still requires 50+ Speed)
 	outputText("Knowing full well what she plans for the showers, you instead ask about more \"<i>advanced</i>\" forms of yoga. With a certain coy emphasis on advanced. She grins, \"<i>I know just what you mean. It's called tantric sex, and I think you're just limber and quick enough to try it.</i>\"\n\n", false);
 
-	outputText("She leads you to a private area in the gym, a large room where one side of the wall is covered in mirrors with a long bar across it. You'd guess this room is used for dance lessons, or other activities that require large amounts of space. She sets up a large mat on the floor, big enough for the both of you to sit on and then some, and proceeds to strip. \"<i>It's best to do this naked… we don't want our clothing to block our spiritual energies. Or, y'know, other things,</i>\" she says with a light laugh. You nod and strip down as well.\n\n", false);
+	outputText("She leads you to a private area in the gym, a large room where one side of the wall is covered in mirrors with a long bar across it. You'd guess this room is used for dance lessons, or other activities that require large amounts of space. She sets up a large mat on the floor, big enough for the both of you to sit on and then some, and proceeds to strip. \"<i>It's best to do this naked... we don't want our clothing to block our spiritual energies. Or, y'know, other things,</i>\" she says with a light laugh. You nod and strip down as well.\n\n", false);
 
 	outputText("Cotton sits on one end of the mat, crossing her hooved feet under her in the traditional meditative position. You sit on the other side and do the same. \"<i>Now we match our breathing, little pet. In, and out. Each breath brings our spirits closer to each other.</i>\" You inhale deeply, and she does the same. Then out. This continues for minutes, just breathing, until in one exhalation you feel a shiver run down your spine.\n\n", false);
 
-	outputText("\"<i>And our spirits are joined… for now,</i>\" she laughs and runs her hands along her upper torso, and in a weird, sort of detached way, you feel it. You touch your chest, rubbing a " + nippleDescript(0) + " experimentally, and you see Cotton visibly shiver and give you an approving nod. Whatever she did… you can feel what she feels, however faintly, and vice-versa!\n\n", false);
+	outputText("\"<i>And our spirits are joined... for now,</i>\" she laughs and runs her hands along her upper torso, and in a weird, sort of detached way, you feel it. You touch your chest, rubbing a " + nippleDescript(0) + " experimentally, and you see Cotton visibly shiver and give you an approving nod. Whatever she did... you can feel what she feels, however faintly, and vice-versa!\n\n", false);
 
 	outputText("\"<i>Now comes the yoga portion of this little workout,</i>\" she says as she uncurls her legs, spreading them wide and long on the mat. She bends her knees and leans back, propping herself up on her arms. Her jet-black equine cock stands at full attention, pulsing steadily. \"<i>Come sit down on my cock, pet, and we'll get this party started right.</i>\"\n\n", false);
 
 	outputText("Gulping slightly, you stand and approach her. Cotton runs a hand along her member, causing you to shiver with the", false);
 	if(player.hasCock()) outputText(" familiar", false);
 	else outputText(" alien", false);
-	outputText(" sensations on an unfamiliar part of your body… well, her body. You stand over her hips and slowly lower yourself down, impaling your " + player.assholeOrPussy() + " on her meaty tool. In addition to the beautiful sensation of being filled, you also get the sensation of warm, tight constriction on your phantom cock.", false);
+	outputText(" sensations on an unfamiliar part of your body... well, her body. You stand over her hips and slowly lower yourself down, impaling your " + player.assholeOrPussy() + " on her meaty tool. In addition to the beautiful sensation of being filled, you also get the sensation of warm, tight constriction on your phantom cock.", false);
 	//(for Naga Body, add)
 	if(player.isNaga()) outputText("  You impale yourself fully, settling down and sitting on her lap, stretching your snake-like body out behind and to one side of her, with your arms propping you up as you lean back.", false);
 	//(for Humanoid Body, add)
@@ -1084,7 +1084,7 @@ public function cottonTantricSex():void {
 		outputText("Cotton returns the favor, her short-snouted mouth latching on to one " + nippleDescript(0) + " and sucking it relentlessly. The sensations you get from this are, if anything, greater than normal. Your nipples feel like they're on fire, with every molecule aching to be touch, licked, sucked and teased.", false);
 		//(If PC is lactating, add)
 		if(player.biggestLactation() >= 1) {
-			outputText("  You feel a familiar sensation welling up in your breasts as milk begins pouring into Cotton's mouth. She grins as best she can without letting go of your tit, eagerly drinking down your milk. In yet another moment of trepidation, you realize you can taste your own milk slipping over Cotton's tongue. You smack your lips. It tastes sweet and creamy, and oh-so warm. Cotton moves to your next nipple, letting the first dribble milk onto the both of you. Again Cotton sucks on your " + nippleDescript(0) + " for a moment before it begins dispensing its precious cargo into her mouth. You taste every gulp, each one sweeter than the next, before Cotton pulls back and smacks her lips together. \"<i>You taste so sweet, pet. I simply must have you around for breakfast…</i>\"", false);
+			outputText("  You feel a familiar sensation welling up in your breasts as milk begins pouring into Cotton's mouth. She grins as best she can without letting go of your tit, eagerly drinking down your milk. In yet another moment of trepidation, you realize you can taste your own milk slipping over Cotton's tongue. You smack your lips. It tastes sweet and creamy, and oh-so warm. Cotton moves to your next nipple, letting the first dribble milk onto the both of you. Again Cotton sucks on your " + nippleDescript(0) + " for a moment before it begins dispensing its precious cargo into her mouth. You taste every gulp, each one sweeter than the next, before Cotton pulls back and smacks her lips together. \"<i>You taste so sweet, pet. I simply must have you around for breakfast...</i>\"", false);
 			flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 1;
 		}
 		//(else if PC is not lactating)
@@ -1092,7 +1092,7 @@ public function cottonTantricSex():void {
 		outputText("\n\n", false);
 	}
 
-	outputText("\"<i>One last pose, pet, the head game.</i>\"  She grips your " + hipDescript() + " and stands up in one fluid motion. You quickly latch on to her, making sure you don't fall. Cotton's cock shifts with the motion, going slightly deeper and you reflexively clench, which you feel on your phantom cock. \"<i>Now we just lay you down…</i>\" You gulp and release your hold on Cotton's neck, slowly letting yourself lean backwards. The cock shifts within you, feeling so strange and alien as you move down. Finally your head hits the floor, so you curve your neck slightly, letting your shoulders and head rest on the mat.\n\n", false);
+	outputText("\"<i>One last pose, pet, the head game.</i>\"  She grips your " + hipDescript() + " and stands up in one fluid motion. You quickly latch on to her, making sure you don't fall. Cotton's cock shifts with the motion, going slightly deeper and you reflexively clench, which you feel on your phantom cock. \"<i>Now we just lay you down...</i>\" You gulp and release your hold on Cotton's neck, slowly letting yourself lean backwards. The cock shifts within you, feeling so strange and alien as you move down. Finally your head hits the floor, so you curve your neck slightly, letting your shoulders and head rest on the mat.\n\n", false);
 
 	//(for Naga bodies)
 	if(player.isNaga()) outputText("Cotton takes a firm grip on your hips and ass, making sure you don't slip, so you carefully uncoil your body and slip it between Cotton's legs, then coiling it around her waist, chest, and between her breasts. The feeling is quite intense, though at this angle Cotton's cock doesn't fit completely inside you.", false);
@@ -1144,9 +1144,9 @@ public function nomSomeTitMilkCereal():void {
 	//(Event proper)
 	outputText("You quickly arise and ready your weapon, prepared for anything to come through the brush. After a moment, a large dark shape bursts through the bushes. You're about to strike when you recognize the figure! It's Cotton from the gym in Tel'Adre! Rather than her normal yoga outfit, she's wearing a tight brown shirt and loose brown pants, along with a backpack slung across one shoulder.\n\n", false);
 
-	outputText("The horse girl holds up her hands in a nonthreatening manner. \"<i>Whoa there, pet. I just came by to join you for breakfast.</i>\" You sigh and put your weapon away. \"<i>Jumpy huh?</i>\" she says, looking around your camp. \"<i>You've got a pretty good setup here. I don't know why you don't just move into Tel'Adre. I've got a nice little place we could share… But no matter.</i>\"\n\n", false);
+	outputText("The horse girl holds up her hands in a nonthreatening manner. \"<i>Whoa there, pet. I just came by to join you for breakfast.</i>\" You sigh and put your weapon away. \"<i>Jumpy huh?</i>\" she says, looking around your camp. \"<i>You've got a pretty good setup here. I don't know why you don't just move into Tel'Adre. I've got a nice little place we could share... But no matter.</i>\"\n\n", false);
 
-	outputText("You invite her over to your bedroll and sit down. She follows suit and removes her backpack, digging through it for a minute, retrieving a clay bowl and a large brown bag. She opens the bag and pours out a bowlful of grains and oats. \"<i>Normally I just eat my breakfast raw… but today I want to try something a little different.</i>\"", false);
+	outputText("You invite her over to your bedroll and sit down. She follows suit and removes her backpack, digging through it for a minute, retrieving a clay bowl and a large brown bag. She opens the bag and pours out a bowlful of grains and oats. \"<i>Normally I just eat my breakfast raw... but today I want to try something a little different.</i>\"", false);
 
 	outputText("Cotton sets the bowl down in your lap and pulls down the front of your " + player.armorName + ", exposing your " + chestDesc() + " to the cool morning breeze. A shiver runs down your spine and your nipples immediately begin to harden, as if knowing what this equine girl has in mind. Cotton leans down and wraps her lips around one " + nippleDescript(0) + ", sucking sensually and flicking the tip with her tongue.\n\n", false);
 
@@ -1160,7 +1160,7 @@ public function nomSomeTitMilkCereal():void {
 
 	outputText("You chat about inconsequential things, mostly the Tel'Adre rumor mill, while you both eat from the bowl. When it's completely gone, Cotton licks out the bowl and packs everything up.\n\n", false);
 
-	outputText("\"<i>Thanks, pet, that was delicious. I'll be sure to stop by another time so we can share a meal. Feel free to come by the gym too. We can get a little more… personal.</i>\" She kisses you on the cheek, and then departs back towards Tel'Adre.", false);
+	outputText("\"<i>Thanks, pet, that was delicious. I'll be sure to stop by another time so we can share a meal. Feel free to come by the gym too. We can get a little more... personal.</i>\" She kisses you on the cheek, and then departs back towards Tel'Adre.", false);
 
 	//(Event should increase lust (by 10?), or maybe reduce it if the player has the Feeder perk. Should also increase the character's lactation rating, or at least prevent it from decaying.)
 	dynStats("lib", -0.5, "sen", -.5, "lus", -5);

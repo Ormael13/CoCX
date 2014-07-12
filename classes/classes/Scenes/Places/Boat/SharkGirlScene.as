@@ -191,7 +191,7 @@ private function sharkBadEnd2():void {
 	outputText("Several months and mutations later...\n\n", false);
 	outputText("You plunge your cock into yet another shark girl, the third one in the past hour, and finger two others at the same time. You've been fucking without stop for weeks now. Ever since you were morphed into a shark man, sex is almost the only thing you can think about. At one point you recalled that you had a name, and you vaguely remember having to do something important... Not as important as this, though. Not as important as breeding your harem.\n\n", false);
 	outputText("\"<i>My, he's... Certainly a virile creature isn't he?</i>\" a tiger shark asks, taking a seat on a nearby rock. Another shark girl chuckles in response, \"<i>Oh I know. Our numbers have practically doubled because of him.</i>\" She gestures to several heavily pregnant shark girls lazing on the sands, caressing their bumps happily.\n\n", false);
-	outputText("\"<i>Wow. When I heard rumors of your pack getting a new male, I had to check it out for myself. But I didn't think he'd be anything like this…</i>\" the tiger shark says, rubbing her own genitalia. You blow your load inside the shark girl before pausing a moment to catch your breath, your quad of cantaloupe-sized balls churning with more cum. You look up, ready to start on another girl, and catch sight of a human moving across the shoreline. A grin spreads across your face at the sight and you direct the girls' attention to the lone human.\n\n", false);
+	outputText("\"<i>Wow. When I heard rumors of your pack getting a new male, I had to check it out for myself. But I didn't think he'd be anything like this...</i>\" the tiger shark says, rubbing her own genitalia. You blow your load inside the shark girl before pausing a moment to catch your breath, your quad of cantaloupe-sized balls churning with more cum. You look up, ready to start on another girl, and catch sight of a human moving across the shoreline. A grin spreads across your face at the sight and you direct the girls' attention to the lone human.\n\n", false);
 	outputText("\"<i>Fresh meat!</i>\"", false);
 	eventParser(5035);
 }
@@ -233,7 +233,7 @@ Decrease intellect 1-3 points (Down to 40 points)
 ---------------------------
 Slutty Swimwear
 
-Item description: An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.
+Item description: An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.
 
 armorDef: 0
 armorPerk: Greatly increases effectiveness of 'Tease' ability.
@@ -280,7 +280,7 @@ internal function sharkLossRape():void {
 		if(player.gender == 3) outputText("Seeing your " + cockDescript(0) + " puts a smile on the shark girl's face as she takes a firm grip on your erection. \"<i>Well, you're just full of surprises, aren't you? Maybe I'll give this bad boy a whirl sometime. For now though...</i>\"  ", false);
 		outputText("Her gaze drifts over to your " + vaginaDescript(0) + " and she licks her lips in delight. \"<i>Now that's what I'm looking for! Tell you what dear, you get me wet and I might just give you some pleasure too</i>\"\n\n", false);
 		
-		outputText("She roughly grabs you by the hair and pulls your face into her drooling cunt, your tongue instinctively probing into her. \"<i>Mmm… don't you dare stop licking you dumb bitch, if you know what's good for you,</i>\" she orders. You reply by speeding up your tongue work. You're a little ashamed to admit it, but her dominant command makes you feel rather hot and bothered.\n\n", false);
+		outputText("She roughly grabs you by the hair and pulls your face into her drooling cunt, your tongue instinctively probing into her. \"<i>Mmm... don't you dare stop licking you dumb bitch, if you know what's good for you,</i>\" she orders. You reply by speeding up your tongue work. You're a little ashamed to admit it, but her dominant command makes you feel rather hot and bothered.\n\n", false);
 		outputText("The shark girl eventually sighs happily and relaxes her grip on your hair, pulling your head away a few inches. \"<i>Not bad bitch, not bad. Now get on your back.</i>\" You obey your mistress's command and flop onto your back. A sense of joy fills you as she positions her crotch in front of your face and moves her own head between your legs. You quickly resume eating her out, and this time she joins in the feast. It's not too long before the two of you orgasm, spraying girl-cum onto each other's faces.\n\n", false);
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.", false);
 		//(Corruption +2, Intelligence -4)

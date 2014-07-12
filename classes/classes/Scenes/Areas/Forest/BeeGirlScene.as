@@ -1174,13 +1174,13 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Now that the bee-girl is unable to flit her wings and create that buzzing drone that seems to rob you of your senses, you can see her for what she truly is: Prey.\n\n", false);
 
-			outputText("She struggles against the coil of your tail, but her thin limbs are nothing compared to the rippling cord of muscles that makes up your lower half. You can feel her abdomen pulsing as if trying in vain to sting you, but you have her completely immobilized. \"<i>Pleazzze,</i>\" she begs, \"<i>Don't hurt me… I juzzzt wanted to zzzerve my queen.</i>\"\n\n", false);
+			outputText("She struggles against the coil of your tail, but her thin limbs are nothing compared to the rippling cord of muscles that makes up your lower half. You can feel her abdomen pulsing as if trying in vain to sting you, but you have her completely immobilized. \"<i>Pleazzze,</i>\" she begs, \"<i>Don't hurt me... I juzzzt wanted to zzzerve my queen.</i>\"\n\n", false);
 
 			outputText("You stare into her eyes with your reptilian gaze and flit your tongue in response, as much to increase her anxiety as to taste her heat and her fear with the vomeronasal organ in the roof of your mouth. Even from here, you can taste the fragrant liquid dripping out of her honeypot and coating your scales. Though it is divine, you know you are in complete control.\n\n", false);
 
 			outputText("She shuts her eyes out of fear at first.  \"<i>Pleazzze,</i>\" she continues to plead for her life, \"<i>Don't eat me! I have children! Thousandzzz of them!</i>\" You ignore her cries and gaze mercilessly at her – savoring her desperation. As time passes, she comes to realize that she hasn't been eaten yet. The bee-girl opens her eyes slowly, one after the other – and that's when you know you have her.\n\n", false);
 
-			outputText("\"<i>What…</i>\" she asks hazily, \"<i>What are you zzztaring... at...</i>\" Her words begin to trail off as your gaze locks with hers, hypnotizing her. You watch as her lids begin to droop, and you can feel her muscles becoming slack within your coils. The emotionless expression you're wearing hides the sheer delight you feel.\n\n", false);
+			outputText("\"<i>What...</i>\" she asks hazily, \"<i>What are you zzztaring... at...</i>\" Her words begin to trail off as your gaze locks with hers, hypnotizing her. You watch as her lids begin to droop, and you can feel her muscles becoming slack within your coils. The emotionless expression you're wearing hides the sheer delight you feel.\n\n", false);
 
 			outputText("It takes a few minutes, but you relish every second of the bee-girl's conscious mind slipping away. You unwind your tail from around her, never breaking your gaze for even a second. To your pleasure, your captive continues to stand still on her own volition.", false);
 			doNext(nagaRapesPt2TheExtremeContinuationOfAwesome);

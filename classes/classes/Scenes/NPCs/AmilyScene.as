@@ -176,7 +176,7 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_MET] == 0) flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 			//Amily gone/hiding super hard
 			if(flags[kFLAGS.AMILY_IS_BATMAN] > 0 || flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 1  || flags[kFLAGS.AMILY_TREE_FLIPOUT] > 0) {
-				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs… everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village.", false);
+				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village.", false);
 				doNext(13);
 				return;
 			}
@@ -207,7 +207,7 @@ package classes.Scenes.NPCs
 			}
 			//Amily Un-encounterable (worms):
 			if(flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
-				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs… everything is covered with dust and grime. For hours you explore, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.", false);
+				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. For hours you explore, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.", false);
 				doNext(13);
 				return;
 			}
@@ -255,7 +255,7 @@ package classes.Scenes.NPCs
 
 						outputText("Curious what she has to say, you agree.\n\n", false);
 
-						outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down… but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
+						outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 						//Accept her / Turn her down gently / Turn her down bluntly
 						var fur:Number = 0;
 						if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) fur = 3174;
@@ -485,7 +485,7 @@ package classes.Scenes.NPCs
 
 							outputText("Blushing, you explain to her that you aren't actually a woman. She looks very puzzled at this.\n\n", false);
 
-							outputText("\"<i>But you have boobs… and I don't see a crotch-bulge,</i>\" she says, sounding almost petulant. \"<i>I don't smell a vagina, either... Wait, are you telling me you don't have either pair of genitals?</i>\" she asks, clearly dumbfounded.\n\n", false);
+							outputText("\"<i>But you have boobs... and I don't see a crotch-bulge,</i>\" she says, sounding almost petulant. \"<i>I don't smell a vagina, either... Wait, are you telling me you don't have either pair of genitals?</i>\" she asks, clearly dumbfounded.\n\n", false);
 
 							outputText("Embarrassed, you admit that is so.\n\n", false);
 
@@ -600,7 +600,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 
 			/*FAILSAFE - ALL GENDERS HAVE HAD THERE GO AN NOTHING HAPPENED!
-			outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs… everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.", false);
+			outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.", false);
 			doNext(13);
 			return;*/
 		}
@@ -696,7 +696,7 @@ package classes.Scenes.NPCs
 
 			outputText("You tell her that this is precisely what she's asking you to do, and you'll be happy to do so if that is what she wants.\n\n", false);
 
-			outputText("She still looks disgruntled. \"<i>Very well, come on. I suppose it was too much to hope that you would be roaming this world and yet still have some decorum when it comes to sex…</i>\" She begins leading the way and you follow. She doesn't have much of a butt to stare at, but you can already think of some interesting things to do with that tail of hers...\n\n", false);
+			outputText("She still looks disgruntled. \"<i>Very well, come on. I suppose it was too much to hope that you would be roaming this world and yet still have some decorum when it comes to sex...</i>\" She begins leading the way and you follow. She doesn't have much of a butt to stare at, but you can already think of some interesting things to do with that tail of hers...\n\n", false);
 
 			outputText("Your brash enthusiasm has made Amily uncomfortable, and your quick surrender to baser impulses has made you slightly more lustful.", false);
 			//Offer accepted
@@ -777,7 +777,7 @@ package classes.Scenes.NPCs
 			}
 			//[Player Speed is 50 or higher]
 			else {
-				outputText("You manage to leap backwards just in time to avoid a strike that could have seriously hurt you. Amily recovers quickly and readies her knife again, only to realize that it's you. An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well… no harm, no foul, I guess…</i>\"\n\n", false);
+				outputText("You manage to leap backwards just in time to avoid a strike that could have seriously hurt you. Amily recovers quickly and readies her knife again, only to realize that it's you. An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well... no harm, no foul, I guess...</i>\"\n\n", false);
 			}
 			doNext(amilyRemeetingContinued);
 		}
@@ -985,7 +985,7 @@ package classes.Scenes.NPCs
 				}
 				//[Medium Affection]
 				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She smiles at you. \"<i>Well… I was feeling a little tired, a little lonely, and… maybe a little horny. Why not?</i>\"\n\n", false);
+					outputText("She smiles at you. \"<i>Well... I was feeling a little tired, a little lonely, and... maybe a little horny. Why not?</i>\"\n\n", false);
 
 					outputText("She crooks a finger at you as a gesture to follow her.\n\n", false);
 					//[/ Go to random [Conversation], then to [Medium Affection Sex]]
@@ -1139,7 +1139,7 @@ package classes.Scenes.NPCs
 				}
 				//[Medium Affection]
 				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well… no harm, no foul, I guess…</i>\"\n\n", false);
+					outputText("An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well... no harm, no foul, I guess...</i>\"\n\n", false);
 				}
 				//[High Affection]
 				else {
@@ -1178,7 +1178,7 @@ package classes.Scenes.NPCs
 			}
 			//[Player Speed is 50 or higher]
 			else {
-				outputText("You manage to leap backwards just in time to avoid a strike that could have seriously hurt you. Amily recovers quickly and readies her knife again, only to realize that it's you. An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well… no harm, no foul, I guess...</i>\"\n\n", false);
+				outputText("You manage to leap backwards just in time to avoid a strike that could have seriously hurt you. Amily recovers quickly and readies her knife again, only to realize that it's you. An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well... no harm, no foul, I guess...</i>\"\n\n", false);
 				outputText("She shifts awkwardly. \"<i>Ah... do you have the time to talk? There's something I want to get off my chest,</i>\" Amily nervously asks.\n\n", false);
 			}
 			desperateFinallyAmily();
@@ -1187,7 +1187,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("Curious what she has to say, you agree.\n\n", false);
 
-			outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down… but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
+			outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 
 			//Accept her / Turn her down gently / Turn her down bluntly
 			simpleChoices("Accept Her",desperateAmilyPleaAcceptHer,"TurnDownGently",desperateAmilyPleaTurnDown,"TurnDownBlunt",desperateAmilyPleaTurnDownBlunt,"",0,"",0);
@@ -4570,7 +4570,7 @@ package classes.Scenes.NPCs
 
 			outputText("You undress and press your erect " + cockDescript(0) + " against Amily's buttcrack, rubbing your shaft on her ass and enjoying the grip of her soft yet firm ass; beads of pre-cum begin forming and sliding down your " + cockDescript(0) + ", and you order Amily, \"<i>Prepare yourself for me.</i>\" Amily complies silently until her spaded tail digs into her pussy, drawing a moan from the excited mousette as she tail-fucks herself for a bit, before pulling her juice-slickened tail out. You distance yourself to allow her access and she rubs her slick tail-tip all over her asshole, lubing it up for you; then she rubs the still-wet spade along your " + cockDescript(0) + ", slickening it and massaging your shaft all at once. \"<i>That's enough,</i>\" You say; her tail immediately releases your " + cockDescript(0) + " and goes back to its erect position.\n\n", false);
 
-			outputText("You press your cockhead against Amily's throbbing ass and, with a groan, push inside. Amily moans lewdly, the pain of having her ass penetrated not even registering beyond the pleasure of the act. \"<i>Yesssss… " + player.mf("Master","Mistress") + ", fuck your mousy slut's ass! Fuck me until my ass is gaping wide. Oh! " + player.mf("master","mistress") + ", I love being your fucktoy!</i>\" Amily screams in praise as you fill her insides.\n\n", false);
+			outputText("You press your cockhead against Amily's throbbing ass and, with a groan, push inside. Amily moans lewdly, the pain of having her ass penetrated not even registering beyond the pleasure of the act. \"<i>Yesssss... " + player.mf("Master","Mistress") + ", fuck your mousy slut's ass! Fuck me until my ass is gaping wide. Oh! " + player.mf("master","mistress") + ", I love being your fucktoy!</i>\" Amily screams in praise as you fill her insides.\n\n", false);
 
 			//[(if PC is huge)
 			if(player.cockArea(0) >= 61) outputText("You force as much of your shaft in as you can; until you reach a point where pushing against Amily just rocks her and your shaft won't go deeper. Amily "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"squeaks":"squeals")+" desperately. \"<i>No, no, no! I want all of " + player.mf("master","mistress") + ". Please " + player.mf("master","mistress") + "! Push harder!</i>\" Amily says, gripping the floor with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"claws":"hands")+" and pushing back herself. But no matter how much you try, you're unable to drive any more of your " + cockDescript(0) + " inside.", false);

@@ -1897,7 +1897,7 @@
 			outputText("</i>\"  Then, she playfully licks along the underside of your cock, putting that lengthy tongue to work. \"<i>");
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("You don't taste bad, all things considered.");
 			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("I think I'm starting to get used to your taste, [name].");
-			else outputText("Mmmm….  Don't tell anyone, but I think I'm starting to like helping you like this.");
+			else outputText("Mmmm...  Don't tell anyone, but I think I'm starting to like helping you like this.");
 			outputText("</i>\"");
 			
 			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");

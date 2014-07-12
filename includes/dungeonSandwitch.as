@@ -2820,7 +2820,7 @@ public function scissorAndDrink():void {
 	
 	outputText("\n\n\"<i>Shut up.  You and your ilk have done nothing but cause me trouble.  The least you can do is cooperate and enjoy it while I get off on you,</i>\" you growl, giving her heavy chest a firm squeeze in warning.");
 	
-	outputText("\n\nThe witch queen pants as you withdraw the finger, \"<i>You won't break me, demon-slave!  …But I can't fight you any longer.  Just know that you will not break me!</i>\"");
+	outputText("\n\nThe witch queen pants as you withdraw the finger, \"<i>You won't break me, demon-slave!  ...But I can't fight you any longer.  Just know that you will not break me!</i>\"");
 	
 	outputText("\n\nWhatever.  You grope the top two tits until rivers of milk are running onto her bottommost bosom, the creamy milk sheeting down the thin, fabric covering, turning it semi-transparent and clingy.  The Sand Mother's dusky cheeks color slightly as she watches her breast's creamy issue spill out in rivers, undoubtedly dripping down the interior of her garments in even greater quantities.  You grab one of her plump nipples and squeeze it from base to tip, spraying a gout of milk into your waiting mouth.  Finally starting to enjoy it, the Sand Mother moans and arches her back, pressing her milk-laden chest into your hand.  You lick the lactose-bearing juice from your lips.  She tastes great!");
 	

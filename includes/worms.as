@@ -57,7 +57,7 @@ public function wormsFemale():void {
 
 public function wormsMale():void {
 	spriteSelect(76);
-	outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again…straight towards you at an alarming rate.\n\n", true);
+	outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again...straight towards you at an alarming rate.\n\n", true);
 	outputText("What do you do?", false);
 	simpleChoices("Confront", 5056, "Do Nothing",5057,"",0,"",0,"Run",5053);
 }

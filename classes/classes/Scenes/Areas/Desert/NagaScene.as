@@ -168,7 +168,7 @@ private function gooNagaRape():void {
 	}
 	//(if not corrupt)
 	else {
-		outputText("the thought is almost too horrible to consider, but still…", false);
+		outputText("the thought is almost too horrible to consider, but still...", false);
 	}
 	outputText("  You slide your gooey form over her body, resting at her crotch. She tries to push you off, but you easily resist her.\n\n", false);
     outputText("Looking down, you see a scale covered slit at her crotch. Bringing a hand down to it, you stroke it gently and feel the naga twitch beneath you. You slowly open the slit to reveal the moist folds of her pussy. You start to tease her by stroking her netherlips, the naga moaning in response. You gradually slide your fingers in, moving them inside of her to see just how far her lips can spread. The naga continues to pant and moan under your touch, her tail thrashing in the sand.\n\n", false);
