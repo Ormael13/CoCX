@@ -157,7 +157,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Lets get this bitch started
 	gameState = 0;
 	//NG+ Clothes reset
-	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] + flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) 
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] != 0) 
 	{
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
@@ -172,7 +172,7 @@ public function newGameGo(e:MouseEvent = null):void {
 			player.setArmorHiddenField(armors.C_CLOTH);
 		}
 			
-		player.weapon= oldPlayer.weapon;
+		player.setWeaponHiddenField(oldPlayer.weapon);
 	}
 	//Clothes clear
 	else {
