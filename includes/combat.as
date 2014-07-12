@@ -970,7 +970,8 @@ public function doCombat(eventNum:Number):void
 			if (monster.short == "Isabella") {
 				if (monster.findStatusAffect(StatusAffects.Blind) >= 0) outputText("Isabella hears the shot and turns her shield towards it, completely blocking it with her wall of steel.\n\n", false);
 				else outputText("You arrow thunks into Isabella's shield, completely blocked by the wall of steel.\n\n", false);
-				outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n", false);
+				if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n", false);
+				else outputText("\"<i>You remind me of the horse-people.  They cannot deal with my shield either!</i>\" cheers Isabella.\n\n", false);
 				enemyAI();
 				return;
 			}
@@ -2890,7 +2891,7 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 41;
 	}
 	//42 Urta teases!
-	if(player.short == "Urta" && player.hasCock() && player.hasVagina() && player.balls > 0) {
+	if(urtaQuest.isUrta()) {
 		choices[choices.length] = 42;
 		choices[choices.length] = 42;
 		choices[choices.length] = 42;
@@ -4072,7 +4073,9 @@ public function spellBlind():void {
 		if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>", false);
 		else outputText("is blinded!</b>", false);
 		monster.createStatusAffect(StatusAffects.Blind,5*spellMod(),0,0,0);
-		if(monster.short == "Isabella") outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
+		if(monster.short == "Isabella")
+			if (isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
+			else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.", false);
 		if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.", false);
 		if(monster.short == "plain girl") {
 			outputText("  Remarkably, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused. The girl flashes a radiant smile at you, and the battle continues.", false);
@@ -4086,7 +4089,7 @@ public function spellBlind():void {
 	statScreenRefresh();
 	enemyAI();
 }
-//(30) Whitefire – burns the enemy for int/5 * spellMod + rand(int/2*spellMod).
+//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 public function spellWhitefire():void {
 	outputText("", true);
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > 100) {
@@ -4225,7 +4228,8 @@ public function hellFire():void {
 	}
 	if(monster.short == "Isabella") {
 		outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-		outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
 	}
@@ -4702,7 +4706,8 @@ public function fireballuuuuu():void {
 
 	if(monster.short == "Isabella") {
 		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-		outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
 	}
@@ -5440,13 +5445,13 @@ public function kitsuneIllusion():void {
 		enemyAI();
 		return;
 	}
-	//Decrease enemy hit chance and increase their susceptibility to lust attacks.
+	//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
 	outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
-	//(succeed)
-	if(player.inte/10 + rand(20) + 1 > monster.inte/10 + 10) {
+	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster.
+	if(player.inte/10 + rand(20) > monster.inte/10 + 9) {
+	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
 		outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
-		monster.spe -= 20;
-		if(monster.spe < -50) monster.spe = -20;
+		if(monster.spe >= 0) monster.spe -= 20;
 		if(monster.lustVuln >= 1.1) monster.lustVuln += .1;
 	}
 	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");

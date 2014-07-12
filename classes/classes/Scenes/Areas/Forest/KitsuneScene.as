@@ -212,7 +212,7 @@ package classes.Scenes.Areas.Forest
 		}
 
 //[Leave] (C)
-		private function leaveKitsune(talked:Boolean = true):void
+		private function leaveKitsune(talked:Boolean = false):void
 		{
 			clearOutput();
 			kitsuneSprite();
@@ -1138,7 +1138,7 @@ package classes.Scenes.Areas.Forest
 			//[Feeder]
 			if (player.findPerk(PerkLib.Feeder) >= 0)
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
-			addButton(9, "Leave", cleanupAfterCombat);
+			addButton(9, "Leave", leaveKitsune);
 		}
 
 		private function kitsuneButton(button:int, nam:String, func:*):int
