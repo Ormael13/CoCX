@@ -70,7 +70,7 @@ package classes.Scenes.Places.Owca
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(80, 10, 10, 5);
-			initLibSensCor(50, 60, 20);
+			initLibSensCor(50, 60, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.armorName = "demonic skin";
@@ -87,7 +87,6 @@ package classes.Scenes.Places.Owca
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.drop = NO_DROP;
-			this.cor = 100;
 			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
 			checkMonster();
 		}
