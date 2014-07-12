@@ -38,7 +38,7 @@ package classes.Scenes.Areas.Lake
 			var changedCock:Boolean = false;
 			var changedBoobs:Boolean = false;
 			var sexed:Boolean = false;
-			outputText("The thoughts of fetishes have become so strong that they override everything else.  You see the cultist moving towards you, but you can't possibly fight anymore.  She reaches out and touches you, and you fall to the ground as the multitudes of thoughts cascade into one.\n\n", false);
+			outputText("The thoughts of fetishes have become so strong that they override everything else.  You see the cultist moving towards you, but you can't possibly fight any more.  She reaches out and touches you, and you fall to the ground as the multitudes of thoughts cascade into one.\n\n", false);
 			//ZOOKEEPER RAEPS.  WEIRDOZ
 			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 				//Special centaur version by Astronomy
@@ -63,7 +63,7 @@ package classes.Scenes.Areas.Lake
 						if (player.inte <= 10) cultistBadEnd();
 						//(ending after all cultist rape scenes)
 						else {
-							outputText("A few hours later and your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
+							outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
 							if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 							else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 							outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
@@ -76,13 +76,13 @@ package classes.Scenes.Areas.Lake
 					}
 				}
 				//common opening to all animal forms
-				outputText("You look up and find that you're behind a set of bars.  You panic for a moment before hearing someone whistling and turn towards the source of the sound, a feeling of dread falling over you as you recognize the tune.  The zoo keeper turns the corner, she is a busty girl wearing a tiny brown tube top with a name tag that says \"Featsy's Slutty Beast Stables - Stable-Mistress\".  She has a similarly coloured brown cap, and a belt around her otherwise bare waist and long legs.  She is spinning a keyring around her finger while whistling her tune.  She stops at your cell and turns to look at you with a smile on her face, catching the keys in her hand.\n\n", false);
+				outputText("You look up and find that you're behind a set of bars.  You panic for a moment before hearing someone whistling and turn towards the source of the sound, a feeling of dread falling over you as you recognize the tune.  The zoo keeper turns the corner; she is a busty girl wearing a tiny brown tube top with a name tag that says \"Featsy's Slutty Beast Stables - Stable-Mistress\".  She has a similarly colored brown cap, and a belt around her otherwise bare waist and long legs.  She is spinning a keyring around her finger while whistling her tune.  She stops at your cell and turns to look at you with a smile on her face, catching the keys in her hand.\n\n", false);
 				//Centaur
 				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 					//The scene for centaurs, greetings
-					outputText("\"<i>Well horsey, ready to entertain the guests?  Opening time is in twenty minutes.</i>\"  You shudder and look around for a moment. You're inside a square cell fifteen feet across, with a large, durable bed flat in a corner, and a feeding trough on the other side.  It's where you entertain your guests, and your keepers.  You yourself are now wearing a saddle, with a bridle and bit.  You shake your head and fidget around on your four legs for a moment, trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you and the thoughts that would be suitable are those of an exotic sex slave.\n\n", false);
+					outputText("\"<i>Well horsey, ready to entertain the guests?  Opening time is in twenty minutes.</i>\"  You shudder and look around for a moment. You're inside a square cell fifteen feet across, with a large, durable bed flat in a corner, and a feeding trough on the other side.  It's where you entertain your guests, and your keepers.  You are now wearing a saddle, with a bridle and bit.  You shake your head and fidget around on your four legs for a moment, trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you and the thoughts that would be suitable are those of an exotic sex slave.\n\n", false);
 					//It's time to bend down for, you're too high up to lick her right now
-					outputText("The sound of the door to your cell being unlocked brings you out of your reverie and you remember why you where so worried before; your keeper has come to <i>play</i> with you before you start working.  The magic glyphs around the cell activate, keeping you from doing anything but whimper slightly as she steps inside with a sick grin on her face and calmly tells you \"<i>Now ", false);
+					outputText("The sound of the door to your cell being unlocked brings you out of your reverie and you remember why you were so worried before; your keeper has come to <i>play</i> with you before you start working.  The magic glyphs around the cell activate, keeping you from doing anything but whimper slightly as she steps inside with a sick grin on her face and calmly tells you \"<i>Now ", false);
 
 					//is that centaur worthy of being called mighty, or is he/she a mini?
 					if (player.tallness > 72) outputText("mighty", false);
@@ -106,7 +106,7 @@ package classes.Scenes.Areas.Lake
 					outputText("\"<i>Alright now, you slutty horse,</i>\" she says as she removes your mouth bit, \"<i>it's time to put your tongue to the only use it's good for.</i>\"  She puts her hands on either side of your head and roughly forces your " + player.face() + " between her legs, stopping you from seeing anything, but the feel and smell of her warm, dripping sex is overpowering.  You open your mouth and, just as you've been trained to do and have done countless times before, you start to lick her needy snatch.  \"<i>Oh, good horsey,</i>\" she moans as she starts to ride your face, \"<i>this is what you were meant to do!</i>\"\n\n", false);
 
 					//she likes to ride you, doesn't she?
-					outputText("You can't do anything but continue to lick and probe her folds while she continues to push you deeper inside her.  At the same time, she pushes herself up onto you more and more, so that her weight pushes your " + player.face() + " deeper into her slobbering depths.  In moments, your keeper is creaming herself all over your face while you simultaneously achieve your own release.  She dismounts from your face and walks back outside the cage, whistling that same tune again while you keep your head bent in shame from having gotten a release from doing something like that; again!  \"<i>Don't look so sad, horsey, soon more will be here to avail themselves of the pleasures you have to offer</i>\" your keeper says to you with that same, sick grin on her face again before she locks the cage and walks away.\n\n", false);
+					outputText("You can't do anything but continue to lick and probe her folds while she continues to push you deeper inside her.  At the same time, she pushes herself up onto you more and more, so that her weight pushes your " + player.face() + " deeper into her slobbering depths.  In moments, your keeper is creaming herself all over your face while you simultaneously achieve your own release.  She dismounts from your face and walks back outside the cage, whistling that same tune again while you keep your head bent in shame from having gotten a release from doing something like that; again!  \"<i>Don't look so sad, horsey, soon more will be here to avail themselves of the pleasures you have to offer.</i>\" your keeper says to you with that same, sick grin on her face again before she locks the cage and walks away.\n\n", false);
 
 					//make sure the PC is properly dressed after such a scene
 					if (player.armorValue == 0) player.modArmorName = "bridle bit and saddle set";
@@ -115,7 +115,7 @@ package classes.Scenes.Areas.Lake
 					if (player.inte <= 10) cultistBadEnd();
 					//(ending after all cultist rape scenes)
 					else {
-						outputText("A few hours later and your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
+						outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
 						if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 						else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
@@ -129,10 +129,10 @@ package classes.Scenes.Areas.Lake
 				//Naga
 				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 					//The scene for naga's getting their tails raped, start with the greetings
-					outputText("\"<i>Slick serpent, are you ready to entertain our guests?  Opening time is in 20 minutes.</i>\" You shudder and look around for a moment, you're inside a square cell fifteen feet across, with a pile of multi-coloured pillows in the middle of the cell and a few hot stones on the sides of the room.  Its where you entertain your guests, and your keepers.  You shake your head and steady the headdress while fiddling with the multitudes of necklaces you're wearing. You keep trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you, and the thoughts that would be suitable are those of an exotic sex slave...\n\n", false);
+					outputText("\"<i>Slick serpent, are you ready to entertain our guests?  Opening time is in 20 minutes.</i>\" You shudder and look around for a moment; you're inside a square cell fifteen feet across, with a pile of multi-colored pillows in the middle of the cell and a few hot stones on the sides of the room.  It's where you entertain your guests, and your keepers.  You shake your head and steady your headdress while fiddling with the multitudes of necklaces you're wearing. You keep trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you, and the thoughts that would be suitable are those of an exotic sex slave...\n\n", false);
 
 					//step inside and hold on for dear life
-					outputText("The sound of the door to your cell being unlocked brings you out of your reverie and you remember why you where so worried before; your keeper has come to <i>play</i> with you before you start working.  The magic glyphs around the cell activate, keeping you from doing anything but whimper slightly as she steps inside with a sick grin on her face and calmly tells you \"<i>Okay, smooth mover, get up against the wall so I can play with my favorite toy.</i>\"  You sigh and back the human part of your mixed body against the wall, leaving the tip of your tail on the pillows; you know what she wants.  \"<i>Now that's a good snake, you'd better hold on.</i>\" the irony of her words is not lost on you as you feel shackles shoot out from the walls and grab your arms, forcing you to be spread eagle.\n\n", false);
+					outputText("The sound of the door to your cell being unlocked brings you out of your reverie and you remember why you were so worried before; your keeper has come to <i>play</i> with you before you start working.  The magic glyphs around the cell activate, keeping you from doing anything but whimper slightly as she steps inside with a sick grin on her face and calmly tells you \"<i>Okay, smooth mover, get up against the wall so I can play with my favorite toy.</i>\"  You sigh and back the human part of your mixed body against the wall, leaving the tip of your tail on the pillows; you know what she wants.  \"<i>Now that's a good snake, you'd better hold on.</i>\" the irony of her words is not lost on you as you feel shackles shoot out from the walls and grab your arms, forcing you to be spread eagle.\n\n", false);
 
 					//Now lets see that girl use your tail for her pleasure.
 					outputText("With a cute ah, your keeper plops herself down on the pile of pillows, spreading her legs wide so you can clearly see her wet and ready sex pot.  You can't help but feel aroused at the sight, ", false);
@@ -160,9 +160,9 @@ package classes.Scenes.Areas.Lake
 						outputText("your " + multiCockDescriptLight() + " can thrust up into the air.  You make a few futile thrusts into the air, desperate to find some way to get release from your mixed genitals.  \"<i>Hmm, sorry snakey, but I can't pick one of those to play with, maybe if you had only one...</i>\" she says to you with a snark, but you know she is lying and is clearly enjoying your frustration.\n\n", false);
 					}
 
-					outputText("\"<i>Now what was I going to fill this needy hole with?</i>\" she says, tapping her chin before looking down at the tip of your tail and spreading her arms in mock wonder.  \"<i>There we go, this is perfect!</i>\" she exclaims before grabbing your tail and pulling on it roughly, stretching your body out uncomfortably before she guides the tip into her waiting snatch.  She sighs and looks up at you before saying \"<i>Now THAT'S a sex toy!</i>\" before starting to spinning your tail around her depths and pistoning her body back and forth on it.\n\n", false);
+					outputText("\"<i>Now what was I going to fill this needy hole with?</i>\" she says, tapping her chin before looking down at the tip of your tail and spreading her arms in mock wonder.  \"<i>There we go, this is perfect!</i>\" she exclaims before grabbing your tail and pulling on it roughly, stretching your body out uncomfortably before she guides the tip into her waiting snatch.  She sighs and looks up at you before saying \"<i>Now THAT'S a sex toy!</i>\" before starting to spin your tail around her depths and pistoning her body back and forth on it.\n\n", false);
 
-					outputText("The feeling of her fluids running all over your tail is such an exotic and arousing feeling, as per usual, but it only leaves you feeling more frustrated that you can't get proper release.  Thankfully for you, you don't have to wait long for the release to come, as you feel your keeper spray the proof of her release onto your tail, you finally feel your own release.  You can only hang your head in shame from having gotten a release from being used like that, again!  \"<i>Don't look so bad snaky, the customers like to see someone high and mighty before they come in here and beat you into the ground.</i>\" You don't bother looking back up at her as she locks the cage and your restraints finally release you.\n\n", false);
+					outputText("The feeling of her fluids running all over your tail is such an exotic and arousing feeling, as per usual, but it only leaves you feeling more frustrated that you can't get proper release.  Thankfully for you, you don't have to wait long for the release to come; as you feel your keeper spray the proof of her release onto your tail, you finally feel your own release.  You can only hang your head in shame from having gotten a release from being used like that, again!  \"<i>Don't look so bad snaky, the customers like to see someone high and mighty before they come in here and beat you into the ground.</i>\" You don't bother looking back up at her as she locks the cage and your restraints finally release you.\n\n", false);
 
 					//put them in the right attire after seeing this
 					if (player.armorValue == 0) player.modArmorName = "headdress, necklaces, and many body-chains";
@@ -171,7 +171,7 @@ package classes.Scenes.Areas.Lake
 					if (player.inte <= 10) cultistBadEnd();
 					//(ending after all cultist rape scenes)
 					else {
-						outputText("A few hours later and your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
+						outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
 						if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 						else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Lake
 			//Nurse raeeeepp
 			//if(monster.armorName == "naughty nurse's uniform" && !sexed) {
 			if (rand(2) == 0 && !sexed) {
-				outputText("You stand up and look over at the cultist, she is now wearing a nurse's uniform with bared breasts.  You notice that your " + player.armorName + " changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.", false);
+				outputText("You stand up and look over at the cultist. She is now wearing a nurse's uniform with bared breasts.  You notice that your " + player.armorName + " changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.", false);
 				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 					outputText("  It also dawns to your fogged mind that you now have a human-looking lower body, though your sexual organs are unchanged.", false);
 					if (player.cockTotal() > 0) outputText("  As you see your " + multiCockDescriptLight() + ", 'incredibly large' is the only qualifier you can think of.", false);
@@ -212,7 +212,7 @@ package classes.Scenes.Areas.Lake
 						outputText("they are producing more milk than before.  ", false);
 						player.boostLactation(.6);
 					}
-					outputText("Satisfied, the nurse rises from you and says, \"<i>Wow!  I really hope I get a chance to do that again sometime, but for now I've got to go take care of another patient.  Don't do anything too exciting until I get back, alright?  I'll check on you again as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
+					outputText("Satisfied, the nurse rises from you and says, \"<i>Wow!  I really hope I get a chance to do that again sometime, but for now I've got to go take care of another patient.  Don't do anything too exciting until I get back, all right?  I'll check on you again as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					dynStats("sen", 3);
 					changed = true;
 					changedBoobs = true;
@@ -221,7 +221,7 @@ package classes.Scenes.Areas.Lake
 				if (player.cocks.length > 0 && !changed) {
 					outputText("The smile disappears from her lips and she says, \"<i>Now if I understand it correctly, you are beset by random panic attacks due to unnaturally low levels of cum production.  To address this issue, I will be giving you a special injection at the site.</i>\"");
 					outputText("\n\nShe briefly steps out of the room before returning with a syringe.  \"<i>It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.  I'll even get to have some fun after.</i>\"  Smiling again, she takes hold of your " + cockDescript(0) + " and pushes the needle into the base of it.  The nurse starts humming a pleasant tune, while you try to cry out in pain into the gag and struggle against the bindings.  However, they prove to be quite secure, and you can't do anything about the pain you feel spreading throughout your " + multiCockDescriptLight() + ".  Thankfully, it doesn't take very long before the nurse pulls the needle out and, to your immense relief, the pain quickly subsides.");
-					outputText("\n\nThe nurse stops humming before setting the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " up and down between them.  It is an exquisite experience having her tit fuck you, and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  You cum and cum and cum, much more then you usually would.  Satisfied, the nurse rises from you and says, \"<i>That should do it, in the future you won't produce as much cum when you orgasm as you just did, but you should be producing at a more natural level.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
+					outputText("\n\nThe nurse stops humming before setting the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " up and down between them.  It is an exquisite experience having her tit fuck you, and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  You cum and cum and cum, much more then you usually would.  Satisfied, the nurse rises from you and says, \"<i>That should do it, in the future you won't produce as much cum when you orgasm as you just did, but you should be producing at a more natural level.  For now, I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					player.cumMultiplier += 2;
 					dynStats("sen", 3);
 					changed = true;
@@ -243,7 +243,7 @@ package classes.Scenes.Areas.Lake
 					if (player.biggestLactation() >= 1) outputText(" start lactating even more.  ", false);
 					//[if breasts are not lactating]
 					else outputText(" start lactating.  ", false);
-					outputText("Nodding approvingly, the nurse says  'Good, for now I've got to go take care of another patient, don't you do anymore running about until I get back ok?' as she turns away and goes out the door.", false);
+					outputText("Nodding approvingly, the nurse says  \"<i>Good, for now I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?</i>\" as she turns away and goes out the door.", false);
 					player.boostLactation(1.5);
 					changed = true;
 					dynStats("sen", 3);
@@ -251,12 +251,12 @@ package classes.Scenes.Areas.Lake
 				}
 				//(4 - if player has only a vagina and no breasts)
 				if (player.vaginas.length > 0 && !changed) {
-					outputText("The smile disappears from her lips and she says 'Now if I understand it correctly, you are beset by random panic attacks due to an unusually sized clitoris, coupled with a lack of breasts.  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your clitoris.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by turning your clitoris into a penis, it even has the added benefit of removing the unneeded vagina.' she says to you in a pleasant voice while pulling the needle out.  You look down to see that you " + clitDescript() + " is indeed growing larger, and you can feel your womb disappearing within you.\n\n", false);
+					outputText("The smile disappears from her lips and she says 'Now if I understand it correctly, you are beset by random panic attacks due to an unusually sized clitoris, coupled with a lack of breasts.  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your clitoris.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by turning your clitoris into a penis. It even has the added benefit of removing the unneeded vagina.' she says to you in a pleasant voice while pulling the needle out.  You look down to see that you " + clitDescript() + " is indeed growing larger, and you can feel your womb disappearing within you.\n\n", false);
 					player.pregnancyType = 0;
 					player.pregnancyIncubation = 0;
 					player.createCock();
 					player.removeVagina(0, 1);
-					outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your old femininity use to lie.  The nurse sets the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says 'Looks to me like its working properly.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!'  She gives you a wink, and turns to walk out the door.", false);
+					outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your old femininity used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>Looks to me like its working properly.  For now, I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					dynStats("sen", 3);
 					changed = true;
 					player.genderCheck();
@@ -266,7 +266,7 @@ package classes.Scenes.Areas.Lake
 				if (player.gender == 0 && !changed) {
 					outputText("The smile disappears from her lips and she says 'Now if I understand it correctly, you are beset by random panic attacks due to a lack of genitals.'  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your crotch.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by giving you a penis,' she says to you smiling while pulling the needle out 'and then, I get to be the first to play with it!'.  You look down to see that the flesh where she injected you is pushing out of your body, becoming larger and more defined as the seconds tick by.\n\n", false);
 					player.createCock();
-					outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your bare crotch use to lie.  The nurse sets the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says 'That was fun, maybe later we can practice more.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!'  She gives you a wink, and turns to walk out the door.", false);
+					outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your bare crotch used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>That was fun, maybe later we can practice more.  For now, I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					dynStats("sen", 3);
 					changed = true;
 					player.genderCheck();
@@ -312,7 +312,7 @@ package classes.Scenes.Areas.Lake
 					if (player.cocks.length == 2) outputText("Your " + cockDescript(1) + " rubs against her skin pleasantly.  ", false);
 					//[if player has more then 2 dicks] 
 					if (player.cocks.length > 2) outputText("The rest of your " + multiCockDescriptLight() + " rubs against her skin pleasantly.  ", false);
-					outputText("Thanks to your extended foreplay, your mistress quickly comes to a climax that reverberates through both your bodies, causing you release yourself into your mistress and cover your fingers with your other fluids.", false);
+					outputText("Thanks to your extended foreplay, your mistress quickly comes to a climax that reverberates through both your bodies, causing you to release yourself into your mistress and cover your fingers with your other fluids.", false);
 					//[if player has multiple dicks] 
 					if (player.cocks.length > 1) outputText("  You take special care to make sure that the rest of your cum does not get on your mistress in any way.", false);
 					outputText("\n\nSatisfied, your mistress rises off of you and dresses.  She tells you that she is going for a walk, and that you should continue your duties now.  ", false);
@@ -329,8 +329,8 @@ package classes.Scenes.Areas.Lake
 						outputText("'I'm glad to see you remember your place.  I wish you to first rub my feet, then move up my legs, and finally, start relieving the tension in my lower lips with your capable hands.'\n\n", false);
 						outputText("Eager to please your mistress, now reclining on a lovely chair, you crawl to her, remove her shoes, and start to massage her feet.  Your hands seem to move with the will of some outside force and they expertly work to please your mistress.  Pushed on by her approving groans, you work your way up her legs, removing clothing as you go, until you reach her hips.  There, to your mistress' great delight, you run your hands over her hips, butt, and then start to rub her hips, lower lips, and clit.\n\n", false);
 						outputText("After a minute of this, she stops you and says 'Good, I am now ready to have you inside of me boy.  Show me your " + multiCockDescriptLight() + " that I keep you here for.'\n\n", false);
-						outputText("With cry of joy you lift the front flap on your pants revealing your very erect " + multiCockDescriptLight() + " and lie on the ground ready to please your mistress the best way you can.  You watch your mistress rise off her chair and slowly lower herself onto your " + cockDescript(0) + " moaning in pleasure.  Her interior is so familiar and so wonderful.  ", false);
-						if (player.vaginas.length > 0) outputText("You feel desire start to well up in your " + vaginaDescript(0) + ", but you resist the urge to act on it, that's not why your mistress keeps you. ", false);
+						outputText("With a cry of joy you lift the front flap on your pants revealing your very erect " + multiCockDescriptLight() + " and lie on the ground ready to please your mistress the best way you can.  You watch your mistress rise off her chair and slowly lower herself onto your " + cockDescript(0) + " moaning in pleasure.  Her interior is so familiar and so wonderful.  ", false);
+						if (player.vaginas.length > 0) outputText("You feel desire start to well up in your " + vaginaDescript(0) + ", but you resist the urge to act on it; that's not why your mistress keeps you. ", false);
 						outputText("She starts to rock back and forth, your " + cockDescript(0) + " bringing her to the height of pleasure. ", false);
 						if (player.cocks.length == 2) outputText("Your " + cockDescript(1) + " rubs against her skin pleasantly.  ", false);
 						if (player.cocks.length > 2) outputText("The rest of your " + multiCockDescriptLight() + " rub against her skin pleasantly.  ", false);
@@ -352,7 +352,7 @@ package classes.Scenes.Areas.Lake
 						outputText("After a minute of this, she says 'Good.  Now finger yourself before me, girl.  Show me that " + vaginaDescript(0) + " that I keep you here for.'\n\n", false);
 						outputText("You lay back on the ground and raise your skirt, showing off your engorged " + clitDescript() + " and " + vaginaDescript(0) + ".  With a pleased squeal you plunge your fingers into your waiting " + vaginaDescript(0) + " and start wriggling them around in the way that your mistress loves.  ", false);
 						//[if player has a dick]
-						if (player.cocks.length > 0) outputText("You feel a desire rising in your erect " + multiCockDescriptLight() + " but you ignore it, that's not what your mistress told you to play with.  ", false);
+						if (player.cocks.length > 0) outputText("You feel a desire rising in your erect " + multiCockDescriptLight() + " but you ignore it; that's not what your mistress told you to play with.  ", false);
 						outputText("Thanks to the extended foreplay, the sight of you quickly brings your mistress to climax, a climax that quickly fills you as well, causing you to cum all over your fingers.\n\n", false);
 						outputText("Satisfied, your mistress rises and dresses,  She tells you that she is going for a walk, and that you should continue your duties now.  ", false);
 					}
@@ -372,7 +372,7 @@ package classes.Scenes.Areas.Lake
 				if (player.inte <= 10) cultistBadEnd();
 				//(ending after all cultist rape scenes)
 				else {
-					outputText("A few hours later and your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
+					outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
 					if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 					else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
@@ -571,7 +571,7 @@ package classes.Scenes.Areas.Lake
 			}
 			//It fits!
 			else {
-				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the cultist at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them.  Then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n", false);
+				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the cultist at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them, then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n", false);
 
 				outputText("The cultist shows you how to activate the toy and they hum to life.  Quivering slightly, the two of you push the vibrating toys deep inside of yourselves.  The feeling of the toy filling up your " + vaginaDescript(0) + " is quite an experience.  ", false);
 				if (player.vaginalCapacity() < 75) outputText("It takes some effort to get it inside you, but is well worth the effort.", false);
@@ -633,9 +633,9 @@ package classes.Scenes.Areas.Lake
 
 			outputText("You can't understand the gibberish coming out of her mouth.\n\n", false);
 
-			outputText("\"<i>Ummmmm….No? Please return to your reward.</i>\"\n\n", false);
+			outputText("\"<i>Ummmmm... no? Please return to your reward.</i>\"\n\n", false);
 
-			outputText("The cultist girl continues to nurse, this relaxes your mind a little and everything slowly changes back to the cozy cabin. You look around the cabin; it becomes a transparent mix with the lake whenever you concentrate on a single detail, you can make out a maid outfit thrown on the floor and two milk filled buckets on a table. Your surveying ends when the cultist begins taking deep hard suckles and circles your nipple with her tongue before lightly biting it. Her hand is playing with your other boob, wobbling and squeezing it like it was some toy.\n\n", false);
+			outputText("The cultist girl continues to nurse; this relaxes your mind a little and everything slowly changes back to the cozy cabin. You look around the cabin; it becomes a transparent mix with the lake whenever you concentrate on a single detail, you can make out a maid outfit thrown on the floor and two milk filled buckets on a table. Your surveying ends when the cultist begins taking deep hard suckles and circles your nipple with her tongue before lightly biting it. Her hand is playing with your other boob, wobbling and squeezing it like it was some toy.\n\n", false);
 
 			outputText("Soon her thong becomes wet with arousal and her mouth comes off your " + nippleDescript(0) + " to ask, \"<i>Please " + player.mf("Master", "Mistress") + ", will you fix the aching in my loins?</i>\"\n\n", false);
 

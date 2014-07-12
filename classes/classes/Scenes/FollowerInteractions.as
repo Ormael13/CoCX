@@ -46,9 +46,9 @@ public function amilyIsPissedAtYouForRuiningJojo():void {
 	
 	outputText("\"<i>What did you DO TO HIM!?</i>\" her voice shrieks.  She's behind you!  You pivot, praying the enraged mouse doesn't hit you with the same dart, and you see Amily half-hidden behind a rock.  Her blowgun is clutched in a trembling hand as she sobs with grief.  So she figured it out...\n\n", false);
 	
-	outputText("Amily screams, \"<i>Don't even try to lie!  I met him before you did this to him, and HE TOLD ME IT WAS YOU before he passed out!  We...we have to fix him.  I don't know why you would do something like this, but he-he's broken.  Utterly.  Please.  Find some pure honey and we can fix him!</i>\"\n\n", false);
+	outputText("Amily screams, \"<i>Don't even try to lie!  I met him before you did this to him, and HE TOLD ME IT WAS YOU before he passed out!  We... we have to fix him.  I don't know why you would do something like this, but he- he's broken.  Utterly.  Please.  Find some pure honey and we can fix him!</i>\"\n\n", false);
 	
-	outputText("(You're at a crossroads, you can help Amily purify Jojo, but the mouse will likely never give you a chance to corrupt him again.  Alternatively, you could tell the bitch off and keep your favorite fuck-pet.)", false);
+	outputText("(You're at a crossroads. You can help Amily purify Jojo, but the mouse will likely never give you a chance to corrupt him again.  Alternatively, you could tell the bitch off and keep your favorite fuck-pet.)", false);
 	
 	//[Fix him] [Fuck off]
 	simpleChoices("Fix Him",2498,"Fuck Off",2499,"",0,"",0,"",0);

@@ -222,7 +222,7 @@ package classes.Scenes.Areas.Lake
 			//Otherwise, continue on here
 			//continue on to Cultist bad end.  I'll expand these later when where doing the cathedral.
 			else {
-				outputText("A few hours later and your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the zealot is nowhere to be seen.", false);
+				outputText("A few hours later your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the zealot is nowhere to be seen.", false);
 			}
 			//If there were changes to the player's genitals
 			//same as cultist
