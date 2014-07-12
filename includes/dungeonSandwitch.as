@@ -2243,7 +2243,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 			outputText("\n\nShe grunts, \"<i>Don't tell me you're a virgin?</i>\"  You nod and bite your lip as you try to endure.  Sanura stops immediately at that news, mulling it over with a detached expression, a smile slowly spreading across her features.  \"<i>Really?</i>\" she asks as her hips begin to slowly work at your ass once more, slowly picking back up to their old tempo.  \"<i>Then it's a good thing you're getting to ride my magic cock and not some brute's.  It might hurt a little, but I promise this will be buttsex worth remembering....</i>\"");
 		}
 		//Non-virgin
-		else outputText("\n\nShe grunts, \"<i>Gods, you're tighter than a virgin imp's asshole!</i></i>\"");
+		else outputText("\n\nShe grunts, \"<i>Gods, you're tighter than a virgin imp's asshole!</i>\"");
 	}
 	//Merge, no new PG
 	outputText("\n\nThat's no small comfort to your poor, sore rectum.  It's going to be left gaped by this monstrous woman in short order, pounded into open, stretched submission, just like its owner.  The pain of being opened up this forcefully is enough to bring a tear to your eye and a strange surge of excitement through your crotch.  How can you be enjoying this?  You don't have long to ponder it, your muscles are caving in underneath Sanura's butt-battering fucking, slowly, inexorably stretching to handle her fat flare.  Gods!  You whimper as your [asshole] abruptly gives up the ghost and allows Sanura's phantom member inside, inches of her tingly fuck-tool nestling inside you in seconds.");

@@ -798,17 +798,17 @@ private function arianStoryDialogue2():void {
 	clearOutput();
 	arianHealth(1);
 	outputText("You look Arian over, remarking that he seems to be getting better after all.");
-	outputText("\n\n\"<i><i>Thanks to you.</i></i>\" Arian smiles, then he looks down and sighs.  You ask him what's wrong.");
-	outputText("\n\n\"<i><i>I've been having... erm, confusing dreams lately.</i></i>\" Arian explains. Curious, you ask him what sorts of dreams; not bad ones, you hope.");
-	outputText("\n\nArian quickly says, \"<i><i>No! Not bad ones! Just... unusual I'd say....</i></i>\"");
-	outputText("\n\nYou look at him questioningly.  \"<i><i>Maybe it's best if I tell you....</i></i>\"");
-	outputText("\n\nArian clears [Arian eir] throat and begins explaining, \"<i>First I'm standing somewhere - I don't know where - in Tel'Adre.  I'm all alone, but I'm happy; I'm expecting someone.  When the person I'm expecting arrives, we talk - I don't remember the subject now.</i></i>\" Arian fidgets.");
+	outputText("\n\n\"<i>Thanks to you.</i>\" Arian smiles, then he looks down and sighs.  You ask him what's wrong.");
+	outputText("\n\n\"<i>I've been having... erm, confusing dreams lately.</i>\" Arian explains. Curious, you ask him what sorts of dreams; not bad ones, you hope.");
+	outputText("\n\nArian quickly says, \"<i>No! Not bad ones! Just... unusual I'd say....</i>\"");
+	outputText("\n\nYou look at him questioningly.  \"<i>Maybe it's best if I tell you....</i>\"");
+	outputText("\n\nArian clears [Arian eir] throat and begins explaining, \"<i>First I'm standing somewhere - I don't know where - in Tel'Adre.  I'm all alone, but I'm happy; I'm expecting someone.  When the person I'm expecting arrives, we talk - I don't remember the subject now.</i>\" Arian fidgets.");
 	outputText("\n\nYou tell him he needs to try and remember what happened if he wants to really hear what you think, but so far it doesn't sound so strange.");
-	outputText("\n\n\"<i><i>You see, the strange part is... it's what happens later.</i></i>\"  Arian blushes in embarrassment.  \"<i><i>We go to my room and I... I'm sorry I can't talk about it!</i></i>\"  Arian blushes even more.");
+	outputText("\n\n\"<i>You see, the strange part is... it's what happens later.</i>\"  Arian blushes in embarrassment.  \"<i>We go to my room and I... I'm sorry I can't talk about it!</i>\"  Arian blushes even more.");
 	outputText("\n\nIt doesn't take you long to figure out what kind of dreams he's been having.  With a faint smile on your lips, you give him a comforting pat on the shoulder and tell him that there's nothing to worry about in having such dreams.");
-	outputText("\n\nArian looks at you, still embarrassed.  \"<i><i>But the person I meet.... I don't know if it would be appropriate.... Maybe the corruption is getting to me?</i></i>\"");
+	outputText("\n\nArian looks at you, still embarrassed.  \"<i>But the person I meet.... I don't know if it would be appropriate.... Maybe the corruption is getting to me?</i>\"");
 	outputText("\n\nYou ask him why he feels like that - what's wrong with [Arian eir] dream lover?  ...Is he worried because [Arian eir] lover is a boy?  Or maybe a girl with a cock?");
-	outputText("\n\nArian swallows audibly.  \"<i><i>No, that's not the point....  I mean... maybe... just... just forget about it....  I'm feeling a bit tired.... Do you mind if we talk some other time?</i></i>\"");
+	outputText("\n\nArian swallows audibly.  \"<i>No, that's not the point....  I mean... maybe... just... just forget about it....  I'm feeling a bit tired.... Do you mind if we talk some other time?</i>\"");
 	//ArianSDialogue++;
 	flags[kFLAGS.ARIAN_S_DIALOGUE]++;
 	//[Drop It] [Pry]
@@ -831,7 +831,7 @@ private function arianStoryPry():void {
 	outputText("Oh, no, you're not letting him wriggle out of this that easily.  You playfully tap [Arian eir] nose and tell him he should come clean and confess");
 	if (player.cor < 40) outputText("; he'll sleep better with the burden off [Arian eir] conscience");
 	outputText(".");
-	outputText("\n\nArian closes [Arian eir] eyes and admits.  \"<i><i>It's someone close!</i></i>\"  He blurts out, hiding himself under the covers.");
+	outputText("\n\nArian closes [Arian eir] eyes and admits.  \"<i>It's someone close!</i>\"  He blurts out, hiding himself under the covers.");
 	outputText("\n\nWell, now, that's intriguing... still, no matter how you try, he won't say anything more and he won't come out.  It's quite clear what's going on so all you can do is sigh, do your best to pat [Arian eir] head through the covers, and tell him you'll come back another day and that you're sorry for being so nosey.  You then turn and walk out the door, heading down the stairs and back to camp.");
 	doNext(13);
 }
@@ -841,7 +841,7 @@ private function arianStoryPry():void {
 private function arianDialogue3():void {
 	clearOutput();
 	arianHealth(1);
-	outputText("Before you can say anything, Arian asks you, \"<i><i>[name], I've been wondering....  Do you have any interest in magic?  You've done so much for me; I believe I should return the favor somehow.</i></i>\"");
+	outputText("Before you can say anything, Arian asks you, \"<i>[name], I've been wondering....  Do you have any interest in magic?  You've done so much for me; I believe I should return the favor somehow.</i>\"");
 	//ArianSDialogue++;
 	flags[kFLAGS.ARIAN_S_DIALOGUE]++;
 	//[Yes] [No]
@@ -853,9 +853,9 @@ private function arianDialogue3():void {
 //=Yes=
 private function yesArianShouldMagicTeach():void {
 	clearOutput();
-	outputText("You tell [Arian em] that sounds fascinating.  You'd love to learn how to cast spells the way [Arian ey] can, and you're grateful [Arian ey] wants to take you on as an apprentice.  Especially when [Arian ey]'s already so busy with the ones [Arian ey] already has.  Arian rubs the back of [Arian eir] neck.  \"<i><i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i></i>\"  [Arian Ey] smiles at you.  \"<i><i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i></i>\"");
+	outputText("You tell [Arian em] that sounds fascinating.  You'd love to learn how to cast spells the way [Arian ey] can, and you're grateful [Arian ey] wants to take you on as an apprentice.  Especially when [Arian ey]'s already so busy with the ones [Arian ey] already has.  Arian rubs the back of [Arian eir] neck.  \"<i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i>\"  [Arian Ey] smiles at you.  \"<i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i>\"");
 	
-	outputText("\n\nYou smirk and point out that's basically what you meant, but you're definitely still interested either way.  Arian nods happily.  \"<i><i>Okay, then, where to start....</i></i>\"");
+	outputText("\n\nYou smirk and point out that's basically what you meant, but you're definitely still interested either way.  Arian nods happily.  \"<i>Okay, then, where to start....</i>\"");
 	
 	//(Go to Talk about Magic)
 	menu();
@@ -866,7 +866,7 @@ private function yesArianShouldMagicTeach():void {
 private function noArianShouldntMagicTeach():void {
 	clearOutput();
 	outputText("You think it over for a moment, and then tell Arian that while you are flattered by the offer and willing to consider it, you can't say that you want to study magic right this moment.  You'd like to discuss it at some other time, please.");
-	outputText("\n\nArian nods happily.  \"<i><i>Certainly, I'd be happy to be of some help to you.  So... is there something you'd like to do today?</i></i>\"");
+	outputText("\n\nArian nods happily.  \"<i>Certainly, I'd be happy to be of some help to you.  So... is there something you'd like to do today?</i>\"");
 	
 	//(display options) 
 	arianHomeMenu();
@@ -877,31 +877,31 @@ private function noArianShouldntMagicTeach():void {
 private function arianImbue():void {
 	clearOutput();
 	arianHealth(1);
-	outputText("Before you can say anything, Arian gasps, \"<i><i>Oh, [name].  I have a surprise for you.</i></i>\"  Arian says with a smile.");
+	outputText("Before you can say anything, Arian gasps, \"<i>Oh, [name].  I have a surprise for you.</i>\"  Arian says with a smile.");
 	
 	outputText("\n\nA surprise?  What is it?");
-	outputText("\n\nArian opens a drawer in [Arian eir] work desk and removes a small package, neatly wrapped and adorned with a small ribbon.  \"<i><i>For you.</i></i>\"  Arian says, handing over the gift.");
+	outputText("\n\nArian opens a drawer in [Arian eir] work desk and removes a small package, neatly wrapped and adorned with a small ribbon.  \"<i>For you.</i>\"  Arian says, handing over the gift.");
 	
 	outputText("\n\nYou reach out and gently take it from [Arian em], carefully opening the package.  A part of you briefly wonders if it might be an engagement ring, then dismisses the thought - surely not, not even here in Tel'Adre.  Once the package is open, you gaze upon a silver necklace: the design is intricate and exotic - very beautiful.  Held by its unusual chain lies a small silver plate with a rune adorning the center, although you don't recognize the rune.");
-	outputText("\n\nArian smiles at you.  \"<i><i>Do you like it?  I made it myself.</i></i>\"");
+	outputText("\n\nArian smiles at you.  \"<i>Do you like it?  I made it myself.</i>\"");
 	
-	outputText("\n\nYou study the fascinating piece, and tell [Arian em] the honest truth: it's beautiful.  You never would have expected [Arian em] to be such a crafts[Arian man].  Arian blushes at your flattery.  \"<i><i>Thanks, I'm glad you like it.  But let me explain - that is not a common necklace; it's actually a magical talisman.  I wanted to give you something that would be useful in your adventures,</i></i>\" Arian explains.");
+	outputText("\n\nYou study the fascinating piece, and tell [Arian em] the honest truth: it's beautiful.  You never would have expected [Arian em] to be such a crafts[Arian man].  Arian blushes at your flattery.  \"<i>Thanks, I'm glad you like it.  But let me explain - that is not a common necklace; it's actually a magical talisman.  I wanted to give you something that would be useful in your adventures,</i>\" Arian explains.");
 	
-	outputText("\n\nYou smile at [Arian em], and promptly hang the necklace around your neck, telling [Arian em] it's as thoughtful as it is attractive.  Arian blushes.  \"<i><i>There is just a... well, a tiny problem.</i></i>\"");
+	outputText("\n\nYou smile at [Arian em], and promptly hang the necklace around your neck, telling [Arian em] it's as thoughtful as it is attractive.  Arian blushes.  \"<i>There is just a... well, a tiny problem.</i>\"");
 	
-	outputText("\n\nYou freeze nervously.  Problem...?  You wonder if putting it on was such a good idea now.  Arian nods.  \"<i><i>I haven't actually imbued the talisman with any spell, since I don't have any ingredients to do so.  Sorry, [name].</i></i>\"  Arian looks down disappointed.");
+	outputText("\n\nYou freeze nervously.  Problem...?  You wonder if putting it on was such a good idea now.  Arian nods.  \"<i>I haven't actually imbued the talisman with any spell, since I don't have any ingredients to do so.  Sorry, [name].</i>\"  Arian looks down disappointed.");
 	
 	outputText("\n\nYou heave a sigh of relief; is that all?  Well, what if you just bring [Arian em] some ingredients next time you drop in, hmm?  Would that help [Arian em] put the finishing touches on it?");
 	
-	outputText("\n\nArian smiles and nods.  \"<i><i>Of course.  But I should warn you that the talisman can only hold one spell, although once it's been imbued with a spell you may use it to your heart's content... I mean... as long as you don't get too tired doing so....  I have a list of spells and things that I need to complete a spell; all you have to do is bring the ingredients and tell me which spell you want.</i></i>\"");
+	outputText("\n\nArian smiles and nods.  \"<i>Of course.  But I should warn you that the talisman can only hold one spell, although once it's been imbued with a spell you may use it to your heart's content... I mean... as long as you don't get too tired doing so....  I have a list of spells and things that I need to complete a spell; all you have to do is bring the ingredients and tell me which spell you want.</i>\"");
 	
 	outputText("\n\nYou thank Arian, such a gift is bound to be useful in your travels.");
 	
-	outputText("\n\nArian bites [Arian eir] lower lips.  \"<i><i>So... is there anything you'd like to do?  Maybe....</i></i>\" Arian blushes.  \"<i><i>You could thank me properly... for the gift.</i></i>\" [Arian Ey] eyes you up and down, resting [Arian eir] gaze on the floor as [Arian ey] fidgets.");
+	outputText("\n\nArian bites [Arian eir] lower lips.  \"<i>So... is there anything you'd like to do?  Maybe....</i>\" Arian blushes.  \"<i>You could thank me properly... for the gift.</i>\" [Arian Ey] eyes you up and down, resting [Arian eir] gaze on the floor as [Arian ey] fidgets.");
 	
 	outputText("\n\nOh-hooo....  Your smoldering eyes burn holes in the nervously embarrassed lizan, and you give [Arian em] your sexiest glare as you ask whatever [Arian ey] means by \"<i>thanking [Arian em] properly</i>\"...?  You reach out and stroke the side of [Arian eir] face to emphasize your words, watching [Arian em] shudder anticipatorily at your touch.");
 	
-	outputText("\n\nArian swallows audibly.  \"<i><i>I... I... I want you!</i></i>\" Arian blurts out, averting [Arian eir] gaze in embarrassment, fidgeting even more in what you've come to recognize as a sign [Arian ey] is aroused.");
+	outputText("\n\nArian swallows audibly.  \"<i>I... I... I want you!</i>\" Arian blurts out, averting [Arian eir] gaze in embarrassment, fidgeting even more in what you've come to recognize as a sign [Arian ey] is aroused.");
 	
 	outputText("\n\nDo you have sex with Arian?");
 	player.createKeyItem("Arian's Talisman",0,0,0,0);
@@ -925,9 +925,9 @@ private function yesPlotSexArian():void {
 private function noPlotSexNauArian():void {
 	clearOutput();
 	outputText("You apologize to the lizan, telling [Arian em] that you aren't in the mood right now....");
-	outputText("\n\nArian looks a bit disappointed, but doesn't press the issue.  \"<i><i>Oh... Okay then, but... maybe, next time?</i></i>\" [Arian ey] asks hopefully, smiling nervously despite [Arian eir] embarrassment....");
+	outputText("\n\nArian looks a bit disappointed, but doesn't press the issue.  \"<i>Oh... Okay then, but... maybe, next time?</i>\" [Arian ey] asks hopefully, smiling nervously despite [Arian eir] embarrassment....");
 	
-	outputText("\n\n Maybe next time, you agree. Arian grins at you.  \"<i><i>Okay, then.  Is there something else you'd like to do?</i></i>\"");
+	outputText("\n\n Maybe next time, you agree. Arian grins at you.  \"<i>Okay, then.  Is there something else you'd like to do?</i>\"");
 	
 	//(Display Options)
 	arianHomeMenu();
@@ -938,13 +938,13 @@ private function noPlotSexNauArian():void {
 private function arianPlot4():void {
 	clearOutput();
 	arianHealth(1);
-	outputText("Before you can say anything, Arian says, \"<i><i>Oh, I have good news, [name]!</i></i>\"");
+	outputText("Before you can say anything, Arian says, \"<i>Oh, I have good news, [name]!</i>\"");
 	outputText("\n\nGood news?  What is it?");
-	outputText("\n\n\"<i><i>I'm feeling well enough that I think I can channel my magic through you and help you if you feel you're getting overwhelmed by this world's corruption.  But due to the intensity of the treatment, I don't think I'd be able to do it more than once per day....</i></i>\"");
+	outputText("\n\n\"<i>I'm feeling well enough that I think I can channel my magic through you and help you if you feel you're getting overwhelmed by this world's corruption.  But due to the intensity of the treatment, I don't think I'd be able to do it more than once per day....</i>\"");
 	
 	outputText("\n\nYou tell [Arian em] that, even if it's only once every 24 hours, that could be a very useful trick, and thank [Arian em] for being willing to make such a sacrifice on your behalf.");
 	
-	outputText("\n\nArian smiles brightly at you.  \"<i><i>No problem.  I'd do anything for you.</i></i>\"  [Arian Ey] gazes into your eyes in silence... perhaps a bit too long....  You clear your throat and Arian seems to snap out of [Arian eir] trance.  \"<i><i>Oh!  Umm... is there something you want to do?</i>\"  [Arian Ey] fidgets.");
+	outputText("\n\nArian smiles brightly at you.  \"<i>No problem.  I'd do anything for you.</i>\"  [Arian Ey] gazes into your eyes in silence... perhaps a bit too long....  You clear your throat and Arian seems to snap out of [Arian eir] trance.  \"<i>Oh!  Umm... is there something you want to do?</i>\"  [Arian Ey] fidgets.");
 	
 	//(Display Options)
 	//ArianSDialogue++;
@@ -956,15 +956,15 @@ private function arianPlot4():void {
 private function arianPlot5():void {
 	clearOutput();
 	arianHealth(1);
-	outputText("Before you can say anything, Arian stops you.  \"<i><i>I've been meaning to ask you something, [name].  I've been feeling a lot better lately; in fact, I may be even better than I was before.</i></i>\"  Arian blushes.");
+	outputText("Before you can say anything, Arian stops you.  \"<i>I've been meaning to ask you something, [name].  I've been feeling a lot better lately; in fact, I may be even better than I was before.</i>\"  Arian blushes.");
 	
-	outputText("\n\n\"<i><i>I wanted to ask you if we could... well... live together?</i></i>\"  Arian bites [Arian eir] lower lip.");
+	outputText("\n\n\"<i>I wanted to ask you if we could... well... live together?</i>\"  Arian bites [Arian eir] lower lip.");
 
 	outputText("\n\nYou explain to Arian about the portal, and your mission as the champion - how due to your duties, you cannot just move here and live with [Arian em].");
 	
-	outputText("\n\nArian quickly adds, \"<i><i>Oh... No....  You wouldn't be moving here.  I would be the one moving in with you....");
+	outputText("\n\nArian quickly adds, \"<i>Oh... No....  You wouldn't be moving here.  I would be the one moving in with you....");
 	if(camp.companionsCount() > 1) outputText("  There are other people living with you already, so what's one more?  Right?");
-	outputText("</i></i>\"");
+	outputText("</i>\"");
 	
 	outputText("\n\nYou ponder [Arian eir] request...  On one hand, having someone who understands magic would be of great help for your quest, and you've come to enjoy Arian's company, but what about Boon and Laika?");
 	
@@ -982,7 +982,7 @@ private function arianPlot5():void {
 //[=Accept=]
 private function acceptArianMovingIntoCamp():void {
 	clearOutput();
-	outputText("You tell Arian you'd be delighted to have [Arian em] move in with you.  Arian's face lights up like a kid's who's been given a bucket of candy.  \"<i><i>Really!?  Great!  I'll pack my stuff and we can go right away!</i></i>\"");
+	outputText("You tell Arian you'd be delighted to have [Arian em] move in with you.  Arian's face lights up like a kid's who's been given a bucket of candy.  \"<i>Really!?  Great!  I'll pack my stuff and we can go right away!</i>\"");
 	
 	//(Skip to ‘Invite to Camp')
 	menu();
@@ -992,7 +992,7 @@ private function acceptArianMovingIntoCamp():void {
 //[=Deny=]
 private function denyAriansMoveIn():void {
 	clearOutput();
-	outputText("You tell Arian you'd like some time to think about it.  Arian looks disappointed at first, but smiles at you all the same.  \"<i><i>I understand... no pressure....  So, what are we going to do today?</i></i>\"");
+	outputText("You tell Arian you'd like some time to think about it.  Arian looks disappointed at first, but smiles at you all the same.  \"<i>I understand... no pressure....  So, what are we going to do today?</i>\"");
 	
 	//(Display Options)
 	arianHomeMenu();
@@ -1001,7 +1001,7 @@ private function denyAriansMoveIn():void {
 //Talk
 private function talkToArianChoices():void {
 	clearOutput();
-	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i><i>I love talking with you; so what do you want to talk about?</i></i>\"");
+	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i>I love talking with you; so what do you want to talk about?</i>\"");
 
 	menu();
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) addButton(0,"Sexy Talk",arianSexingTalk);
@@ -1021,13 +1021,13 @@ private function arianMagicLessons():void {
 	
 	//(if ArianMLesson >= 4)
 	if(flags[kFLAGS.ARIAN_LESSONS] >= 4) {
-		outputText("\n\nArian raises [Arian eir] hand, stopping you in your tracks.  \"<i><i>I appreciate your enthusiasm, [name].  But first you must rest and let the lessons of the day sink in.  I promise I'll teach you more tomorrow.</i></i>\"  Arian smiles at you.");
+		outputText("\n\nArian raises [Arian eir] hand, stopping you in your tracks.  \"<i>I appreciate your enthusiasm, [name].  But first you must rest and let the lessons of the day sink in.  I promise I'll teach you more tomorrow.</i>\"  Arian smiles at you.");
 		
 		outputText("\n\nMaybe [Arian ey]'s right... you tell [Arian em] you'll ask [Arian em] to teach you more tomorrow and excuse yourself.");
 		doNext(13);
 		return;
 	}
-	outputText("\n\nArian nods.  \"<i><i>Of course!  Now where do I begin....</i></i>\"");
+	outputText("\n\nArian nods.  \"<i>Of course!  Now where do I begin....</i>\"");
 	
 	//(if PC int < 25) //Basics!
 	if(player.inte < 25) {
@@ -1650,7 +1650,7 @@ private function giveArianAnal():void {
 		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("  [Arian Eir] throbbing cock flexes and shoots one last rope of lizan-cum against your belly.");
 		outputText("  [Arian Eir] ass grips you forcefully, forming a vacuum and finally loosens.  \"<i>That... that wash da best,</i>\"  Arian slurs, before finally collapsing on [Arian eir] bed.");
 		
-		outputText("\n\nYou find yourself collapsing on top of the collapsed lizan, heaving to regain your breath after such a vigorous fuck.  Finally, you regain sufficient energy to pull yourself free of the absent-minded sucking of [Arian eir] ass, which wetly slurps shut afterwards to hold your seed inside.  \"<i><i>I feel so empty when you're not inside,</i></i>\" Arian utters tiredly.");
+		outputText("\n\nYou find yourself collapsing on top of the collapsed lizan, heaving to regain your breath after such a vigorous fuck.  Finally, you regain sufficient energy to pull yourself free of the absent-minded sucking of [Arian eir] ass, which wetly slurps shut afterwards to hold your seed inside.  \"<i>I feel so empty when you're not inside,</i>\" Arian utters tiredly.");
 		
 		//(ArianAssChat == 0)
 		if(flags[kFLAGS.ARIAN_ASS_CHAT] == 0) {
@@ -3059,7 +3059,7 @@ private function useReductoOnArianCocks():void {
 	else if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) {
 		outputText("Then, [Arian ey] coaxes [Arian eir] twin reptilian-peckers out of their hiding place.  Finally [Arian ey] applies the paste to both shafts in turn.");
 		
-		outputText("\n\nIt takes a short while for anything to happen, but when it does Arian groans.  \"<i><i>S-something feels different.  Ugh, this feels weird.</i>\"  You two watch as [Arian eir] shafts slowly reduce in size, then to your surprise merge together forming one average-sized cock, much like the one Arian sported before.");
+		outputText("\n\nIt takes a short while for anything to happen, but when it does Arian groans.  \"<i>S-something feels different.  Ugh, this feels weird.</i>\"  You two watch as [Arian eir] shafts slowly reduce in size, then to your surprise merge together forming one average-sized cock, much like the one Arian sported before.");
 		
 		outputText("\n\n\"<i>I guess I'm back to begin a lizan with a single cock,</i>\" Arian says with a slight tinge of regret.  You cheer [Arian em] up by saying that's the way you prefer it, besides is it really that bad, having only one cock?  Arian smiles at you.  \"<i>I guess it isn't too bad, just unusual for my species, but if you like me like this, then I'm okay with it.</i>\"  You nod and pat [Arian em] gently on the head.  \"<i>So... is there anything else you'd like to do?</i>\"");
 		//(Back to Options menus)

@@ -104,7 +104,7 @@ package classes.Scenes.NPCs
 				else {
 					outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Wary of the demon's abilities, you tie up her hands with a few tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n", false);
 				}
-				outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i><i>Please don't rape me, champion!  Don't tie me down and rape me like a helpless village-girl!</i></i>\"\n\n", false);
+				outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please don't rape me, champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n", false);
 
 				if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.", false);
 				else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.", false);
@@ -125,22 +125,22 @@ package classes.Scenes.NPCs
 				else outputText("and with a mighty effort, you force your over-sized cock inside her.  For a moment all you can do is stare in awe as it distorts her body – the fact that such a thing is possible puzzles you", false);
 				outputText(".  Her interior is inhumanly hot and covered with thousands of slippery protrusions, each rubbing against your dick's flesh.  The orgy of sensation is incredible, and you immediately begin fucking your bound, demonic captive as the need to orgasm rises within you.\n\n", false);
 
-				outputText("The defeated omnibus mewls in mock protest, \"<i><i>Oh, don't cum in my demonic twat, dear champion!  If you do, you'll never want any other pussy ever again!</i></i>\"\n\n", false);
+				outputText("The defeated omnibus mewls in mock protest, \"<i>Oh, don't cum in my demonic twat, dear champion!  If you do, you'll never want any other pussy ever again!</i>\"\n\n", false);
 
 				outputText("You grunt, pounding her harder and faster than before, knowing you couldn't pull out of her vise-like pleasure-hole if you wanted to.  It feels too good to hold out or resist, and you drop down, adjusting your angle as you rape the beautiful omnibus.  You're grunting like an animal, humping her as fast as your body will let you, but she lies under you with a serene and enticing expression, as if she's greatly enjoying the situation and awaiting your orgasm.  You pinch her nipple roughly, irritated by her superior air, but it only makes her wriggling pussy get even wetter.  It clamps down on you, wringing your " + cockDescript(0) + " dry as it erupts in a powerful orgasm.\n\n", false);
 
-				outputText("Ceraph squeals happily, her sultry visage fracturing into an uninhibited expression of pleasure as she cries, \"<i><i>Fill me with your seed, champion!  Dominate the demon with your mighty spear!</i></i>\"\n\n", false);
+				outputText("Ceraph squeals happily, her sultry visage fracturing into an uninhibited expression of pleasure as she cries, \"<i>Fill me with your seed, champion!  Dominate the demon with your mighty spear!</i>\"\n\n", false);
 
 				outputText("Her purple-hued pussy spasms around you, its oddly textured interior rippling and sucking in time with your ejaculations, drinking down your cum.  Ceraph squirms happily while her body absorbs your jizz with her impossibly pleasurable hole.", false);
 				if (player.cumQ() >= 500 && player.cumQ() < 1000) outputText("  Her belly begins to rise with the volume of cum she's absorbed, and you finish your orgasm with a mildly pregnant demon underneath you.", false);
 				else if (player.cumQ() >= 1000) outputText("  Her belly rises quickly from the volume of cum you're pumping into her, swelling up until she looks ready to give birth, but her taut purple body seems to handle the strain quite well, save for her belly-button turning into an outtie with an abrupt 'pop'.", false);
 				outputText("  The omnibus' nubby shaft twitches happily and squirts out tiny dribbles of demon-semen, too left out by the sex to achieve a truly enjoyable orgasm, but more than willing to leak cum.\n\n", false);
 
-				outputText("Ceraph exhales with exhaustion and rubs her hands over her belly, cooing, \"<i><i>So, you really did give up all your semen to me.  I guess I'll have to name the first imp I birth from this after you, won't I?</i></i>\"\n\n", false);
+				outputText("Ceraph exhales with exhaustion and rubs her hands over her belly, cooing, \"<i>So, you really did give up all your semen to me.  I guess I'll have to name the first imp I birth from this after you, won't I?</i>\"\n\n", false);
 
 				if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n", false);
 				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n", false);
-				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i><i>I'll be sure to spit him on my cock first chance I get, dear.</i></i>\"\n\n", false);
+				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit him on my cock first chance I get, dear.</i>\"\n\n", false);
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus.  She isn't worth your time.", false);
 			}
 			else {
@@ -150,7 +150,7 @@ package classes.Scenes.NPCs
 				//[hp] 
 				else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n", false);
 
-				outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i><i>Please, don't rape me Champion!  Don't tie me down and rape me like a helpless village-girl!</i></i>\"\n\n", false);
+				outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please, don't rape me Champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n", false);
 
 				if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.", false);
 				else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.", false);
@@ -166,14 +166,14 @@ package classes.Scenes.NPCs
 				outputText("The " + cockHead(0) + " of your " + cockDescript(0) + " squishes flat against her twat, too big for her prodigious demon-cunt to swallow.  Spurred by frustrated desires, you lift her legs and wrap her girlcum-slicked thighs about your ", false);
 				if (player.cockTotal() > 1) outputText("primary ", false);
 				outputText(cockDescript(0) + ". Ceraph's smooth skin and soft thigh-flesh form a comfortably tight masturbation tube.  Starting slowly, you begin rocking back and forth, sawing your prodigious cock-flesh over her body.  The demoness swivels her hips underneath your " + cockDescript(0) + ", her slippery gash and near-crushed member feverishly rubbing into you.  Though you didn't get to truly violate her, her thighs and unblemished skin are more than good enough to bring you to the brink of orgasm.\n\n", false);
-				outputText("The defeated omnibus wraps her arms around your " + cockDescript(0) + " and whines lustily, \"<i><i>No, please!  You'll cover me in seed and despoil my face!  Please don't glaze me in that awful stuff!</i></i>\"\n\n", false);
+				outputText("The defeated omnibus wraps her arms around your " + cockDescript(0) + " and whines lustily, \"<i>No, please!  You'll cover me in seed and despoil my face!  Please don't glaze me in that awful stuff!</i>\"\n\n", false);
 				outputText("You grunt, hold the captive by her ankles, and use her like a disposable sex-toy.  The slap of your " + hipDescript() + " slapping into her thighs echoes loudly, nearly drowning out the wet squishing of your " + cockDescript(0) + " with each violent brush against her cuntlips.  ", false);
 
 				if (player.cocks[0].cockLength < 18) outputText("Your " + cockHead(0) + " crests between her breasts with every stroke, bumping against her chin.  It grows larger as the pleasure of the act intensifies to orgasmic levels.\n\n", false);
 				else if (player.cocks[0].cockLength < 24) outputText("Your " + cockHead(0) + " slides over her cheek with every stroke, leaving a trail of pre-cum on her face.  The smudges of glistening pre grow larger and larger as the pleasure of the act nears orgasmic levels.\n\n", false);
 				else outputText("Your " + cockDescript(0) + " slides over her face with every stroke, smearing the demon's hair with your thick pre-seed before you pull back and dribble it on her face.  The pleasure of the act is incredible, and you feel yourself getting harder as the sensation nears orgasmic levels.\n\n", false);
 
-				outputText("Ceraph squeals and blubbers incoherently for a moment as she cums, eventually managing to scream out, \"<i><i>Yes, splatter me with seed!  Punish this lowly demon with your powerful spunk.  Dominaaaaate meeee~</i></i>\"\n\n", false);
+				outputText("Ceraph squeals and blubbers incoherently for a moment as she cums, eventually managing to scream out, \"<i>Yes, splatter me with seed!  Punish this lowly demon with your powerful spunk.  Dominaaaaate meeee~</i>\"\n\n", false);
 
 				outputText("Underneath your own mammoth erection, you can feel Ceraph's smaller cock twisting and squirming, unloading its own hot fluids onto her sweat-slicked belly.  She wriggles and twitches under you, her thigh muscles clenching and releasing in time with her spurts as they push you beyond your limit.  You watch your " + cockDescript(0) + " as it strains and squirts, dumping your thick load into the demon's ", false);
 				if (player.cocks[0].cockLength < 18) outputText("tits", false);
@@ -183,11 +183,11 @@ package classes.Scenes.NPCs
 				if (player.cumQ() >= 1000) outputText("  Your prodigious fertility quickly forms a puddle around her, leaving the deceptive seductress practically submerged in cum.", false);
 				outputText("\n\n", false);
 
-				outputText("You sigh, feeling immense relief, and remove your softening bulk from atop her form.  Ceraph exhales in exhaustion and smears the mixture of cum over her belly, cooing, \"<i><i>So you really did give me a huge load.  I'll be sure to scoop a few batches of it into my womb so we can have lots of imps together.</i></i>\"\n\n", false);
+				outputText("You sigh, feeling immense relief, and remove your softening bulk from atop her form.  Ceraph exhales in exhaustion and smears the mixture of cum over her belly, cooing, \"<i>So you really did give me a huge load.  I'll be sure to scoop a few batches of it into my womb so we can have lots of imps together.</i>\"\n\n", false);
 
 				if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n", false);
 				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n", false);
-				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i><i>I'll be sure to spit them on my cock first chance I get, dear.</i></i>\"\n\n", false);
+				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit them on my cock first chance I get, dear.</i>\"\n\n", false);
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.", false);
 			}
@@ -209,7 +209,7 @@ package classes.Scenes.NPCs
 			//[hp] 
 			else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Mindful of the demon's abilities, you tie up her hands with some tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her pulsating black demon-cock.\n\n", false);
 
-			outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i><i>Please don't rape me!  I took a vow of chastity!</i></i>\"\n\n", false);
+			outputText("Ceraph licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please don't rape me!  I took a vow of chastity!</i>\"\n\n", false);
 
 			if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to get off on a sex-demon's tool.", false);
 			else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.", false);
@@ -224,7 +224,7 @@ package classes.Scenes.NPCs
 			if (player.vaginalCapacity() < 12) outputText("unable to take the entire exquisite cock inside you.  The nubs squirm and wiggle, practically vibrating and massaging your internal muscles, and you're unable to stop yourself from bouncing on top of her, spearing yourself repeatedly upon the thick rod.\n\n", false);
 			else outputText("able to take the entire exquisite cock inside you.  The nubs squirm and wiggle, practically vibrating and massaging your internal muscles, and you're unable to stop yourself from bouncing on top of her, spearing yourself repeatedly upon the thick rod.\n\n", false);
 
-			outputText("Ceraph cries in mock protest, \"<i><i>No, don't make me cum inside you!  Please Champion, I swore not to spill my seed, lest I father a bastard child!</i></i>\"\n\n", false);
+			outputText("Ceraph cries in mock protest, \"<i>No, don't make me cum inside you!  Please Champion, I swore not to spill my seed, lest I father a bastard child!</i>\"\n\n", false);
 
 			outputText("The sensations of her vibrating nodules ensure you don't have the will or the strength to pull off of her, and what little power your " + player.legs() + " have is used to keep bouncing and grinding on top of her, filling the air with wet squelches and slippery squishes.  You fall forwards, barely catching yourself before you slam into the sultry demoness.  Your ", false);
 			if (player.biggestTitSize() < 1) outputText("chest ", false);
@@ -236,14 +236,14 @@ package classes.Scenes.NPCs
 
 			outputText("The omnibus' facade of feigned innocence drops under the force of the hot, wet fuck.  Her mouth opens into an 'o' of pleasure, and you feel her rod thicken as it begins pumping the proof of her ecstasy inside you.  The nodules that cover Ceraph's demonic erection wildly vibrate as she orgasms, throwing you over the edge and into the midst of a body-shaking orgasm.  Demon-seed floods your womb, squeezed inside it by your body's orgasmic contractions.  You shudder with the demon as you both begin calming down.\n\n", false);
 
-			outputText("She groans, \"<i><i>Ooooh... Champion why did you make me despoil your womb?  ", false);
+			outputText("She groans, \"<i>Ooooh... Champion why did you make me despoil your womb?  ", false);
 			if (player.pregnancyIncubation == 0) outputText("You're only feeding the swarms of imps that are despoiling this land.", false);
 			else outputText("I'm sure whatever baby you have in there won't enjoy being so soaked in corruption.", false);
-			outputText("</i></i>\"\n\n", false);
+			outputText("</i>\"\n\n", false);
 
 			if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n", false);
 			else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n", false);
-			else outputText("You bend over and rub your belly while whispering in her ear, \"<i><i>Like mother, like child.</i></i>\"\n\n", false);
+			else outputText("You bend over and rub your belly while whispering in her ear, \"<i>Like mother, like child.</i>\"\n\n", false);
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n", false);
 			player.cuntChange(monster.cockArea(0), true);
 			player.orgasm();
@@ -261,7 +261,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph advances on your ", false);
 			if (player.HP < 1) outputText("prone ", false);
 			else outputText("lust-consumed ", false);
-			outputText("form, whispering calmly as she pulls a pair of gleaming, green piercings from a pouch, \"<i><i>Oh, don't worry baby, you're going to love this so much.  These piercings are special, and they'll help you learn to enjoy the things I'm going to teach you.</i></i>\"\n\n", false);
+			outputText("form, whispering calmly as she pulls a pair of gleaming, green piercings from a pouch, \"<i>Oh, don't worry baby, you're going to love this so much.  These piercings are special, and they'll help you learn to enjoy the things I'm going to teach you.</i>\"\n\n", false);
 
 			if (player.earsPierced > 0) outputText("With a dismissive gesture, Ceraph murmurs words of dark magic and the piercings in your ears drop to the ground, leaving behind smooth, unbroken flesh.  ", false);
 			//(BUSINESS AS USUAL GENTLEMEN)
@@ -271,7 +271,7 @@ package classes.Scenes.NPCs
 			if (player.cockTotal() > 0) outputText("cock bounce in time with your fluttering heartbeats", false);
 			else if (player.hasVagina()) outputText("vagina get wetter and wetter", false);
 			else outputText("parted lips and confused expression", false);
-			outputText(" as the new thoughts and desires settle themselves inside you.  She gives you a gentle pat and explains, \"<i><i>It's ok baby, you're an exhibitionist now.  The moment I put those cursed earrings in your cute little ears, they slid their magic deep inside you, teaching you how to be a good " + player.mf("boy", "girl") + " and get turned on by exposing yourself.</i></i>\"\n\n", false);
+			outputText(" as the new thoughts and desires settle themselves inside you.  She gives you a gentle pat and explains, \"<i>It's ok baby, you're an exhibitionist now.  The moment I put those cursed earrings in your cute little ears, they slid their magic deep inside you, teaching you how to be a good " + player.mf("boy", "girl") + " and get turned on by exposing yourself.</i>\"\n\n", false);
 
 			outputText("Judging by how hot the idea is getting you, Ceraph is right – <b>whether you like it or not, you're an exhibitionist now.</b>", false);
 			player.earsPierced = 1;
@@ -287,18 +287,18 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("Ceraph giggles as she closes in on you once again.  Unable to fight back, you lie there as she once again massages your temples, using her magic to paralyze your body.  She's all too happy to build up the suspense as she pulls out a pair of shining black studs, \"<i><i>Oh, did you want to know what these are going to teach you?  Well, how about I slide them into your ", false);
+			outputText("Ceraph giggles as she closes in on you once again.  Unable to fight back, you lie there as she once again massages your temples, using her magic to paralyze your body.  She's all too happy to build up the suspense as she pulls out a pair of shining black studs, \"<i>Oh, did you want to know what these are going to teach you?  Well, how about I slide them into your ", false);
 			if (player.hasFuckableNipples()) outputText("slut", false);
 			else if (player.nippleLength < 1) outputText("cute", false);
 			else outputText("tight", false);
-			outputText("-nipples and you tell me all about your fetishes and which one makes you the hottest.  OK?</i></i>\"\n\n", false);
+			outputText("-nipples and you tell me all about your fetishes and which one makes you the hottest.  OK?</i>\"\n\n", false);
 
 			//If already pierced
 			if (player.nipplesPierced > 0) outputText("With a dismissive gesture, Ceraph murmurs words of dark magic, and the piercings in your nipples drop to the ground, leaving behind smooth, unbroken flesh.  ", false);
 			//Business as usual!
 			outputText("The demon doesn't give you a chance to reply, instead she focuses on aligning the business ends of the piercings with your sensitive nipple-flesh.  Your right " + nippleDescript(0) + " is pierced in one smooth motion, nearly making you scream in pain.  As she fastens it on, you feel goosebumps spread over your body in a wave.  The second piercing doesn't seem to hurt as bad, but the sensation of spreading goosebumps is far more noticeable.  Your eyes dart wildly, afraid at what new kind of fetish Ceraph has forced upon you.\n\n", false);
 
-			outputText("She smiles down at you and teases, \"<i><i>Still haven't figured it out?  I'll give you a hint:  Isn't being paralyzed nearly the same as being tied down?</i></i>\"\n\n", false);
+			outputText("She smiles down at you and teases, \"<i>Still haven't figured it out?  I'll give you a hint:  Isn't being paralyzed nearly the same as being tied down?</i>\"\n\n", false);
 
 			outputText("Your body goes beet-red as it suddenly tries to struggle against her invisible restraints.  It really is!  You nearly cry as the restraint turns you on more and more.  Ceraph's cursed piercings have given you a fetish for being restrained.  You nearly faint when you think of the tentacle monsters, and you know you have no hope of resisting if they ever bind you up.  <b>Somehow you'll have to get used to being a bondage fetishist...</b>", false);
 			dynStats("lus", 25, "cor", 5);
@@ -314,7 +314,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i><i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i></i>\"\n\n", false);
+			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
 
 			outputText("The idea turns you on immensely, and you pant and gasp as ", false);
 			if (player.totalCocks() > 0) {
@@ -356,7 +356,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.PC_FETISH] = 3;
 			outputText("As she finishes, you realize she didn't even try to restrain you!  Feeling a second wind, you twist out of her grasp before she can take advantage of your new piercing and lash out with a vicious punch.  Ceraph doesn't even try to move.  The demon watches calmly as your fist gets closer and closer, then stops, the punch turning into a gentle caress.  Horrified, you try to smack her with a " + player.leg() + ", but all you manage to do is stroke it along her inner thigh.\n\n", false);
 
-			outputText("\"<i><i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i></i>\" she laughs.\n\n", false);
+			outputText("\"<i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i>\" she laughs.\n\n", false);
 
 			outputText("You tremble in impotent fury at the violation as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
 			dynStats("lus", 25, "cor", 5);
@@ -368,7 +368,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i><i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i></i>\"\n\n", false);
+			outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i>\"\n\n", false);
 
 			outputText("It shames you to admit it, but you desperately want to be naked and restrained, paraded around to tease and amuse Ceraph's enemies.  You know the desires were forced on you by her cursed piercings, but it doesn't make it any easier to deny the feelings they've brought out in you.  The sexy demon-dom would be happy to feed you foreign desires and stoke them into a burning blaze that would burn away your doubts and worries.  Do you give in and become her bondage slave?\n\n", false);
 			simpleChoices("Yes", agreeToBecomeCeraphsFuckpetBondageToyBitchSlut, "No", finalCeraphEncounterChoiceNo, "Fight", finalCeraphEncounterStartFight, "", 0, "", 0);
@@ -379,7 +379,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("You tell Ceraph no, emphatically, over and over.  She gives you a smirk and says, \"<i><i>Whatever.  It's only a matter of time.  You'll join me soon, pet.</i></i>\"\n\n", false);
+			outputText("You tell Ceraph no, emphatically, over and over.  She gives you a smirk and says, \"<i>Whatever.  It's only a matter of time.  You'll join me soon, pet.</i>\"\n\n", false);
 
 			outputText("With that declaration she departs, leaving you confused and horny.", false);
 			doNext(13);
@@ -408,26 +408,26 @@ package classes.Scenes.NPCs
 			else if (player.cockTotal() > 0) outputText("  Your " + cockDescript(0) + " grows rock hard as you wonder if she'll give you a Jacob's ladder full of new fetishes and thoughts.", false);
 			else outputText("  Your body hums with arousal as you wonder if she'll give you a cock and cunt, pierce them both, and fill you with new fetishes and sexy submissive thoughts.", false);
 
-			outputText("\n\nWith your mind made up, you give Ceraph a solemn nod.  The demon smiles knowingly and saunters up to you.  She grabs you by the head and looks you dead in the eye, as if searching for something.  Moments drag by until she releases you all at once, taking her whip and binding it crudely around your neck.  She pulls on it, forcing you down to the dirt, and commands, \"<i><i>Pets crawl.  And they don't wear clothes.</i></i>\"\n\n", false);
+			outputText("\n\nWith your mind made up, you give Ceraph a solemn nod.  The demon smiles knowingly and saunters up to you.  She grabs you by the head and looks you dead in the eye, as if searching for something.  Moments drag by until she releases you all at once, taking her whip and binding it crudely around your neck.  She pulls on it, forcing you down to the dirt, and commands, \"<i>Pets crawl.  And they don't wear clothes.</i>\"\n\n", false);
 
 			outputText("She spends a few moments undressing you, then gives your " + buttDescript() + " a few smacks to suitably redden it.  Horrified at the treatment but more turned on than ever, you endure the humiliation, crawling after your mistress as she leads you to a new, sexy life on an impromptu leash.  You lose track of time, just focusing on putting one hand in front of the other.  Multiple times you catch glimpses of demons and monsters from the fringe of your vision, but none of them seem keen on approaching your mistress or her new slave, you.  Every time you feel their eyes on your naked " + player.skinDesc + ", you're rocked with sexual pleasure.\n\n", false);
 
 			outputText("Absorbed in your own thoughts, you barely notice the light dim or the solid thunk of a door closing behind you.  Happy moans bring you out of your dazed state.  You've arrived at Ceraph's lair.  The demon is barely paying attention to you, holding on to your leash as she walks around greeting her other pets.  She ruffles the hair of a tiny boy wearing naught but doggie-ears and an inventive looking butt-plug that gives him the appearance of having a tail.  Ceraph tickles the crotch of a girl with more than a few demonic features.  She's tied to the wall, with two vibrators strapped hilt-deep in her abused nipple-cunts.  Her original sex is drooling but totally unfilled as she squirms in her straps while Ceraph touches her.\n\n", false);
 
-			outputText("There are many more slaves just like those two throughout Ceraph's home.  Some are little more than furniture, some she treats like artwork, and others she uses for her sexual enjoyment.  She announces, \"<i><i>Pets, meet your new " + player.mf("brother", "sister") + ".  I think I'll just call " + player.mf("him", "her") + " 'pet'.  " + player.mf("He", "She") + " needs to learn her place and we're going to be teaching and piercing " + player.mf("him", "her") + " all week.</i></i>\"\n\n", false);
+			outputText("There are many more slaves just like those two throughout Ceraph's home.  Some are little more than furniture, some she treats like artwork, and others she uses for her sexual enjoyment.  She announces, \"<i>Pets, meet your new " + player.mf("brother", "sister") + ".  I think I'll just call " + player.mf("him", "her") + " 'pet'.  " + player.mf("He", "She") + " needs to learn her place and we're going to be teaching and piercing " + player.mf("him", "her") + " all week.</i>\"\n\n", false);
 
-			outputText("The whip is uncurled from around your neck, and you look up, unsure of what to do.  Ceraph coos, \"<i><i>Good pet.  Just stay like that and pout for me.</i></i>\"\n\n", false);
+			outputText("The whip is uncurled from around your neck, and you look up, unsure of what to do.  Ceraph coos, \"<i>Good pet.  Just stay like that and pout for me.</i>\"\n\n", false);
 
 			outputText("Not seeing the harm and seeking to endear yourself to your mistress, you thrust your lower lip out.  Your obediance is rewarded by a sharp snap of dazzling pain.  Licking experimentally, you feel the smooth band that loops over the center of your lip. ", false);
 			//if pierced there
 			if (player.lipPierced > 0) outputText("The previous piercing has vanished!  ", false);
 			outputText("Mistress is so kind to give you such a pretty piercing!  The ease you find yourself calling her mistress shocks you, but that's what she is, isn't she?  She's your mistress and owner, and you are her pet.  You catch her looking at you expectantly and you realize she's waiting for something.\n\n", false);
 
-			outputText("You lick your new lip-ring nervously and say, \"<i><i>Thank you mistress, pet is so happy to be pierced again!</i></i>\"\n\n", false);
+			outputText("You lick your new lip-ring nervously and say, \"<i>Thank you mistress, pet is so happy to be pierced again!</i>\"\n\n", false);
 
-			outputText("What the hell?  Did you just call yourself pet?  You struggle internally, thinking, \"<i><i>When did pet start thinking of " + player.mf("him", "her") + "self as pet?</i></i>\"  A tingle of new arousal shivers through you – Mistress Ceraph has made it impossible for you to think or call yourself anything other than pet!  What else is she going to do to you?\n\n", false);
+			outputText("What the hell?  Did you just call yourself pet?  You struggle internally, thinking, \"<i>When did pet start thinking of " + player.mf("him", "her") + "self as pet?</i>\"  A tingle of new arousal shivers through you – Mistress Ceraph has made it impossible for you to think or call yourself anything other than pet!  What else is she going to do to you?\n\n", false);
 
-			outputText("\"<i><i>Oh it's so cute watching my pets and toys truly learn their new names.  Now come here pet, a good pet wears a collar so everyone knows who " + player.mf("he", "she") + " belongs to,</i></i>\" says Mistress as she pulls a thick black collar off a hook on the wall.  Compliant, you allow her to fasten it around your neck, waggling your ", false);
+			outputText("\"<i>Oh it's so cute watching my pets and toys truly learn their new names.  Now come here pet, a good pet wears a collar so everyone knows who " + player.mf("he", "she") + " belongs to,</i>\" says Mistress as she pulls a thick black collar off a hook on the wall.  Compliant, you allow her to fasten it around your neck, waggling your ", false);
 			if (player.tailType == TAIL_TYPE_NONE) outputText("backside", false);
 			else outputText("tail", false);
 			outputText(" back and forth to show Mistress how happy you are.  Obedience slowly crowds your mind, rolling over your other thoughts and concerns inexorably.  Your worries, cares, and troubles slide away, replaced with an all-consuming need to please.", false);
@@ -452,7 +452,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(88);
-			outputText("A cute goblin steps out of the bushes, holding a pair of green earrings up to the light.  She politely asks, \"<i><i>Hey cutey!  I've got some spare earrings I made the other day.  I was wondering if you want them?  As you can see, my ears are already full, and my daughters are a bunch of ungrateful cunts.</i></i>\"\n\n", false);
+			outputText("A cute goblin steps out of the bushes, holding a pair of green earrings up to the light.  She politely asks, \"<i>Hey cutey!  I've got some spare earrings I made the other day.  I was wondering if you want them?  As you can see, my ears are already full, and my daughters are a bunch of ungrateful cunts.</i>\"\n\n", false);
 
 			outputText("The goblin's ears are covered in a dazzling array of piercings of all varieties.  She isn't dressed nearly as slutty as most of the goblins you've seen.\n\n", false);
 			outputText("Do you let her put the earrings in your ears?", false);
@@ -467,7 +467,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			outputText("You decline, informing the petite girl you have no interest in her earrings.  She shrugs and laughs, her form distorting as it grows taller, twisting as her skin lightens, her breasts bulge, and a pair of cute horns breaks out of the skin of her forehead.  She pockets the earrings and stretches, revealing a glistening demon-snatch capped with a modest cock growing from where her clit should be.\n\n", false);
 
-			outputText("The demon introduces herself, \"<i><i>Well if you want to do this the hard way, that's fine by me.  The ones that fight the hardest break down into the most submissive slaves.  Just remember that this is the beginning of your life as Ceraph the Omnibus' slave-" + player.mf("boy", "girl") + ".</i></i>\"\n\n", false);
+			outputText("The demon introduces herself, \"<i>Well if you want to do this the hard way, that's fine by me.  The ones that fight the hardest break down into the most submissive slaves.  Just remember that this is the beginning of your life as Ceraph the Omnibus' slave-" + player.mf("boy", "girl") + ".</i>\"\n\n", false);
 
 			outputText("Ceraph adopts a suggestive pose and tweaks her nipple, clearly more intent on turning you on than physically harming you.", false);
 			//FIGHTO
@@ -483,10 +483,10 @@ package classes.Scenes.NPCs
 			if (player.earsPierced > 0) outputText("Miraculously, your old earrings just fall out.  ", false);
 			outputText("The earrings snap into place with a painful and definitive *click*, and dizziness hits you so hard that you nearly fall.  The goblin catches you, steadying you as you blink a few times and adjust to the sensation.\n\n", false);
 
-			outputText("When you feel steady again, you look up and see that the tiny goblin has transformed into a nude, hermaphroditic demon!  She grins knowingly and caresses your body.  You step back and she says, \"<i><i>Awww, don't look so shocked dear.  You just took your first step into becoming one of my pets!  I'm Ceraph, and we're going to be getting VERY familiar with each other.</i></i>\"\n\n", false);
+			outputText("When you feel steady again, you look up and see that the tiny goblin has transformed into a nude, hermaphroditic demon!  She grins knowingly and caresses your body.  You step back and she says, \"<i>Awww, don't look so shocked dear.  You just took your first step into becoming one of my pets!  I'm Ceraph, and we're going to be getting VERY familiar with each other.</i>\"\n\n", false);
 			outputText("Her forwardness brings a blush to your face and kindles a bonfire in your loins.  Somehow the thought of being nude in front of her is far more arousing than it ought to be.  You keep trying to banish the thought, but all you can think of is your nudity and how much hornier it's making you.\n\n", false);
 
-			outputText("Ceraph breaks your reverie with a chuckle, \"<i><i>Oh baby, I see you're starting to figure it out.  Let me break it down for you.  <b>Those earrings have given you a fetish for exhibitionism.</b>  Being exposed and humiliated makes you hornier than a dog in heat, and even if you found a way to remove them, it's too late – they've forever linked nudity and humiliation with desire and lust in your easy little mind.  Get used to it and I'll be back to introduce you to another fun little fetish.</i></i>\"\n\n", false);
+			outputText("Ceraph breaks your reverie with a chuckle, \"<i>Oh baby, I see you're starting to figure it out.  Let me break it down for you.  <b>Those earrings have given you a fetish for exhibitionism.</b>  Being exposed and humiliated makes you hornier than a dog in heat, and even if you found a way to remove them, it's too late – they've forever linked nudity and humiliation with desire and lust in your easy little mind.  Get used to it and I'll be back to introduce you to another fun little fetish.</i>\"\n\n", false);
 
 			outputText("The slutty demon walks away with a sexy sway, and you're too confused and turned on by your predicament to pursue her.  It looks like you'll have to do with a little extra arousal whenever you're exposed in public.\n\n", false);
 			player.earsPierced = 1;
@@ -501,9 +501,9 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("Ceraph saunters out of the bushes and gives you a disapproving look, \"<i><i>I tried this the easy way.  Now we're doing it the hard way.</i></i>\"\n\n", false);
+			outputText("Ceraph saunters out of the bushes and gives you a disapproving look, \"<i>I tried this the easy way.  Now we're doing it the hard way.</i>\"\n\n", false);
 
-			outputText("She uncurls a whip that lights aflame and says, \"<i><i>Time for your spanking!</i></i>\"\n\n", false);
+			outputText("She uncurls a whip that lights aflame and says, \"<i>Time for your spanking!</i>\"\n\n", false);
 			startCombat(new Ceraph());
 		}
 
@@ -520,7 +520,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("Ceraph once again appears to you, licking her lips and repeatedly swatting a riding crop against her thigh.  She asks, \"<i><i>Have you come to love the exposure, the helplessness, of being nude and restrained?  Does your body ache for me to turn you into a bound love-pet yet?  We could keep going down this road my pet-to-be, just one more piercing and then you'll be ready.</i></i>\"\n\n", false);
+			outputText("Ceraph once again appears to you, licking her lips and repeatedly swatting a riding crop against her thigh.  She asks, \"<i>Have you come to love the exposure, the helplessness, of being nude and restrained?  Does your body ache for me to turn you into a bound love-pet yet?  We could keep going down this road my pet-to-be, just one more piercing and then you'll be ready.</i>\"\n\n", false);
 			outputText("Do you let her pierce you?", false);
 			//[Yes] [No]
 			doYesNo(yesOHGODYESPIERCELEVEL3, level3CeraphOfferNo);
@@ -532,7 +532,7 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			spriteSelect(7);
 			outputText("You let Ceraph know that you refuse to let her violate your body and mind in such a way.  She shrugs nonchalantly and tugs on the crop, stretching it into a whip that bursts into flames.\n\n", false);
-			outputText("\"<i><i>Mortals always want to do things the hard way,</i></i>\" she sighs.\n\n", false);
+			outputText("\"<i>Mortals always want to do things the hard way,</i>\" she sighs.\n\n", false);
 			outputText("<b>You've got a fight on your hands!</b>", false);
 			startCombat(new Ceraph());
 		}
@@ -542,7 +542,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("", true);
 			spriteSelect(7);
-			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.	The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i><i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i></i>\"\n\n", false);
+			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.	The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
 			outputText("The idea turns you on immensely, and you pant and gasp as ", false);
 			if (player.totalCocks() > 0) {
 				outputText("pre-cum oozes from ", false);
@@ -585,7 +585,7 @@ package classes.Scenes.NPCs
 				player.eyebrowPLong = "seamless, diamond eyebrow-stud";
 			}
 			outputText("  As she finishes, you feel grateful that she's so willing to lavish you with such sexy jewelry and teach you how to enjoy these wonderful new experiences.  You give her a wet kiss, wondering what she's done to you, but in the end you don't really care.  Somehow you know it's going to make you feel even more like a horny, hot, and obedient sex-pot for your demonic mistress.\n\n", false);
-			outputText("\"<i><i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i></i>\" she laughs.\n\n", false);
+			outputText("\"<i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i>\" she laughs.\n\n", false);
 			outputText("You tremble with barely restrained lust as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything in the world.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
 			flags[kFLAGS.PC_FETISH] = 3;
 			doNext(13);
@@ -705,13 +705,13 @@ package classes.Scenes.NPCs
 			outputText("Ceraph throws her head back and laughs as you ", false);
 			if (player.HP < 1) outputText("slump down, defeated", false);
 			else outputText("give up and start masturbating", false);
-			outputText(", \"<i><i>Really?  Is that it?  After being under my magic for so long, you try to make a stand and fail, like this?!  Pathetic.</i></i>\"\n\n", false);
+			outputText(", \"<i>Really?  Is that it?  After being under my magic for so long, you try to make a stand and fail, like this?!  Pathetic.</i>\"\n\n", false);
 
 			outputText("The demonic hermaphrodite steps one foot onto your chest", false);
 			if (player.biggestTitSize() > 1) outputText(", right between your " + player.allBreastsDescript(), false);
 			outputText(".  Her foot is arched like a high-heel, with a bone-like protrusion forming the heel and digging painfully into your chest.  She looks down at you, watching with a bemused expression while her right hand traces idle circles over her puffy feminine sex.  You can't help but enjoy the situation, pinned under the sexy demon and restrained by her heel.  Ceraph smirks and taunts, \"<i>So what am I to do you with you?  I want you to submit to my harem, not become a bound and unwilling slave.</i>\"\n\n", false);
 
-			outputText("She reaches down to pinch one of your erect nipples, \"<i><i>Though I'm sure you'd enjoy the restraint and humiliation...  I suppose I'll just have to punish you for your transgression and hope you've learned your lesson.  Now I'm not letting you go until you get me off or suffocate, so I hope you have a talented tongue!</i></i>\"\n\n", false);
+			outputText("She reaches down to pinch one of your erect nipples, \"<i>Though I'm sure you'd enjoy the restraint and humiliation...  I suppose I'll just have to punish you for your transgression and hope you've learned your lesson.  Now I'm not letting you go until you get me off or suffocate, so I hope you have a talented tongue!</i>\"\n\n", false);
 
 			outputText("For a brief, confused moment you wonder what she means, but then your hands and " + player.legs() + " are swiftly hog-tied together with her whip.  Ceraph is so quick at her task that she finishes before your dumbstruck mind gets a handle on the situation.  You're utterly helpless to resist this demon's whims, and the best you can do to resist her would be to roll on your side.  It would be a hopelessly futile gesture, and you resolve to deal with whatever is to come without showing any fear or remorse.\n\n", false);
 
@@ -719,7 +719,7 @@ package classes.Scenes.NPCs
 
 			outputText("Her nodule-covered demon-cock flops across your nose and forehead, already dripping with thick pre-cum that slowly rolls up towards your " + hairDescript() + ".  Ceraph's well manicured hand wraps around, stroking it and totally blocking your view while her pussy continues to block your airflow.  Knowing that you've no choice but to get her off, you struggle with arousal of your own from the crude restraint. You open wide and plunge your tongue inside her, tasting her sweet yet tangy fluids and feeling the oddly-textured interior of her passage.\n\n", false);
 
-			outputText("Ceraph moans out, \"<i><i>Ooooh good fuck-toy, eat out your mistress' box!  How does it feel to suffocate on submission and fragrant demon-cunt?</i></i>\"\n\n", false);
+			outputText("Ceraph moans out, \"<i>Ooooh good fuck-toy, eat out your mistress' box!  How does it feel to suffocate on submission and fragrant demon-cunt?</i>\"\n\n", false);
 
 			outputText("Rocking her hips, she grinds herself into you, enhancing her stimulation as you begin to run out of breath.  With a mix of frantic sexual need and desire for oxygen, you lash your tongue around inside her, tilting your head slightly to rub your nose against her clit.  Your efforts pay off, and the demon's taunts die off into moans and gasps that you would think were cute, were you not being smothered in dripping demon-box.\n\n", false);
 
@@ -734,7 +734,7 @@ package classes.Scenes.NPCs
 				outputText("Your " + vaginaDescript(0) + " twitches, aching with the desire to be touched or filled, and your hips twitch lewdly, desperate for sensation.  ", false);
 			}
 
-			outputText("The perverse sexuality fills you with need, but Ceraph only smirks and puts her foot against your cheek, shoving your face into the sex-fluid-filled mud.  She mutters, \"<i><i>It looks like you managed to save a few brain-cells this time slut.  Because you've been so disobedient you don't get to cum with me.  You can lay here and ache for sex for a few hours I think.</i></i>\"\n\n", false);
+			outputText("The perverse sexuality fills you with need, but Ceraph only smirks and puts her foot against your cheek, shoving your face into the sex-fluid-filled mud.  She mutters, \"<i>It looks like you managed to save a few brain-cells this time slut.  Because you've been so disobedient you don't get to cum with me.  You can lay here and ache for sex for a few hours I think.</i>\"\n\n", false);
 
 			outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.", false);
 			dynStats("lus", 200);
@@ -753,9 +753,9 @@ package classes.Scenes.NPCs
 			outputText("You laugh at Ceraph's ", false);
 			if (monster.HP < 1) outputText("beaten, prone", false);
 			else outputText("prone, masturbating", false);
-			outputText(" form, \"<i><i>You fucking demons are all the same.  That smug superiority complex makes you forget that being a demon doesn't come with an invincibility clause.</i></i>\"\n\n", false);
+			outputText(" form, \"<i>You fucking demons are all the same.  That smug superiority complex makes you forget that being a demon doesn't come with an invincibility clause.</i>\"\n\n", false);
 
-			outputText("The hermaphrodite dominatrix frigs her dripping slit, getting off on the dominance in your words, but she still manages to snarl defiantly, \"<i><i>F-uuuck off.  Just... rape me or whatever and get it over with.</i></i>\"\n\n", false);
+			outputText("The hermaphrodite dominatrix frigs her dripping slit, getting off on the dominance in your words, but she still manages to snarl defiantly, \"<i>F-uuuck off.  Just... rape me or whatever and get it over with.</i>\"\n\n", false);
 
 			outputText("She's quite the sore loser!  You drop your " + player.armorName + " on the ground and stroke your ", false);
 			if (player.cockTotal() > 1) outputText("largest ", false);
@@ -764,18 +764,18 @@ package classes.Scenes.NPCs
 			else outputText("Both her hands are too busy at her groin to help her escape.", false);
 			outputText("\n\n", false);
 
-			outputText("You drop the swollen mass of dick-flesh on top her, pinning her under the weight of your lust.  Ceraph gasps in shock and pain, but her hard nipples are pressing tightly into your " + cockDescript(x) + "'s underside.  The slut is loving it – could she secretly be a submissive?  It doesn't matter one way or the other; this demon is going to pay.  You shimmy back, dragging the elephantine fuck-stick over the defeated demon's body until the bloated tip is resting on her purplish demon-snatch.  She screams, \"<i><i>OH FUCK NO!  That would kill me!  Please, don't!</i></i>\"\n\n", false);
+			outputText("You drop the swollen mass of dick-flesh on top her, pinning her under the weight of your lust.  Ceraph gasps in shock and pain, but her hard nipples are pressing tightly into your " + cockDescript(x) + "'s underside.  The slut is loving it – could she secretly be a submissive?  It doesn't matter one way or the other; this demon is going to pay.  You shimmy back, dragging the elephantine fuck-stick over the defeated demon's body until the bloated tip is resting on her purplish demon-snatch.  She screams, \"<i>OH FUCK NO!  That would kill me!  Please, don't!</i>\"\n\n", false);
 
 			outputText("Please?  She said the magic words.  ", false);
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i><i>A little help please, Exgartuan?</i></i>\"  ", false);
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i>A little help please, Exgartuan?</i>\"  ", false);
 			else outputText("You blink your eyes closed and focus your corruptive powers in your crotch.  ", false);
 			outputText("Pleasure blooms in your midsection, spreading through your over-sized prick until it begins to dribble from the tip in the form of black ooze.  The viscous, dark substance splashes into Ceraph's demonic cunt, wicking into her drippy hole in in an instant.  She moans, probably getting off on the influx of perverse magic.  The effect is immediate and gravity is able to pull your tip into her unassisted.  The demon's corrupted cunt starts to stretch around you, and you haven't even started to push!\n\n", false);
 
-			outputText("The flawless skin of her thighs slips through your fingers before you get a grip on her legs, just below the knees.  Ceraph is alternatively moaning and begging, \"<i><i>Wha-what are you doing to meeee?  Stop... please... don't... push it in!  Oh by the Queen, it's good... it shouldn't feel goooooood...</i></i>\"\n\n", false);
+			outputText("The flawless skin of her thighs slips through your fingers before you get a grip on her legs, just below the knees.  Ceraph is alternatively moaning and begging, \"<i>Wha-what are you doing to meeee?  Stop... please... don't... push it in!  Oh by the Queen, it's good... it shouldn't feel goooooood...</i>\"\n\n", false);
 
 			outputText("She doesn't seem to mind receiving it at all.  You push forwards into the clenching tightness of a demon's pussy and groan with delight at the feeling of her tight walls clamping down on you.  The once-dominatrix's belly visibly distorts, mirroring the shape of your member as her cunt expands to handle you.  Her curvy hips visibly shift, spreading apart as Ceraph's body bends to your will.  Your " + cockHead(x) + " hits a token block of resistance, but a quick spurt of black, transformative cum dilates her cervix to allows you to pass through. The demonic love canal continues to widen in order to accept the gift of your " + cockDescript(x) + " and you have an easy time pushing the distortion past her belly button to just below her large, firm breasts.\n\n", false);
 
-			outputText("Even with your dark magic twisting her body, it doesn't look like Ceraph's body can take any more.  Her mind sure as hell can't; her eyes are rolled most of the way back and she's panting pornographic nonsense, \"<i><i>Fuck.. ahh... pussy-cock... oooh... so... big... more... cum-sleeve...</i></i>\"  You're a bit disappointed that you've broken her already, but it quickly fades when you feel her body sucking more of you inside her.  It might be her inherent magic falling under your influence, or maybe her fractured personality has decided to assist you in fully penetrating her.  Whatever the case, a cylindrical bulge forms between her tits, mirroring every vein of your " + cockDescript(x) + " through her skin.\n\n", false);
+			outputText("Even with your dark magic twisting her body, it doesn't look like Ceraph's body can take any more.  Her mind sure as hell can't; her eyes are rolled most of the way back and she's panting pornographic nonsense, \"<i>Fuck.. ahh... pussy-cock... oooh... so... big... more... cum-sleeve...</i>\"  You're a bit disappointed that you've broken her already, but it quickly fades when you feel her body sucking more of you inside her.  It might be her inherent magic falling under your influence, or maybe her fractured personality has decided to assist you in fully penetrating her.  Whatever the case, a cylindrical bulge forms between her tits, mirroring every vein of your " + cockDescript(x) + " through her skin.\n\n", false);
 
 			outputText("Ceraph's throat balloons out to handle your girth, just in time for her to suck you further inside.  You aren't even pushing forwards at this point; her entire body feels like the inside of a succubus' cunt, entirely focused on pleasing male organs.  Her babbles cut off into pleased gurgles, and then die down entirely.  You aren't sure how she's breathing, but her jaw unhinges and stretches obscenely.  You can actually see your tainted pre-cum spilling out from between her lips to run down her face, and then your cunt-slicked tip is tasting the air.", false);
 			if (player.cocks[x].cockLength < 68) outputText("  It's impossible!  You aren't long enough for that.  Her body must have shrunk itself to a more appropriate length...", false);
@@ -803,7 +803,7 @@ package classes.Scenes.NPCs
 			else if (player.cockTotal() > 2) outputText(" and marvel at the cum your other cocks dumped into the puddle", false);
 			outputText(".  Ceraph's pussy gapes at least " + num2Text(int(player.cocks[x].cockThickness + 1)) + " inches wide, pushing her hips so far apart as to make it difficult to walk.  She shudders, drooling spit, pussy-juice, and sperm as her mouth, neck, and chest tighten up.  Her lower body doesn't change one iota; your magics are still overpowering her natural abilities below the waist.  The abused dom twitches a few more times before her eyes reappear and she pulls her tongue back into her mouth.\n\n", false);
 
-			outputText("Ceraph gasps, \"<i><i>Ohhhhkay.  That felt goooooooood.</i></i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i><i>You've shown me a good time, mortal.", false);
+			outputText("Ceraph gasps, \"<i>Ohhhhkay.  That felt goooooooood.</i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i>You've shown me a good time, mortal.", false);
 			if (gameState < 1 || gameState > 2) {
 				outputText("</i>\"", false);
 				player.orgasm();
@@ -814,7 +814,7 @@ package classes.Scenes.NPCs
 			outputText("  That's rarer than you know, so I'm feeling a little generous.  ", false);
 			if (flags[kFLAGS.PC_FETISH] > 0) outputText("I'll remove some of my magic from you if you want, and I'll even let you keep the piercing.  Would you like that?", false);
 			else outputText("I'd be willing to give you a few extra gems to keep you motivated to do something like this again.  I LIKE surprises. How about it?", false);
-			outputText("</i></i>\"\n\n", false);
+			outputText("</i>\"\n\n", false);
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
 				outputText("Exgartuan mumbles, \"<i>Yeah I love me too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n", false);
 				//Put Exgartuan to bed.  Awww he's so cute!

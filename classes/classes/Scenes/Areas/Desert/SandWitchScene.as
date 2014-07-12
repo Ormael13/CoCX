@@ -128,7 +128,7 @@ private function sandwitchRaped():void {
 					outputText("Thrusting deep, you hit bottom, and marvel at the sensations as you feel the head of your " + cockDescript(0) + " rub against the end of her slick cunts, only making you lust after her more. As though responding to your will, your " + cockDescript(0) + " grows just a tiny bit more in length and thickness.  ", false);
 					outputText("With a satisfied growl of lust from yourself, and a screech of pain from the sand witch, you break past her cervix and into her womb. Pulling out, you rub yourself against her wet outer lips, bringing yourself closer and closer to your peak as the sand witch struggles, her eyes turning wide with fright as she starts to understand you hold more power than her.  ", false);
 					outputText("With a bestial cry of lust, you shove your shaft deep within one of her vaginas, past her cervix and into her womb where you blast your potent, corrupted, demon-tainted seed.  ", false);
-					outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, revelling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her womb, feeling it splatter and bubble around your " + cockDescript(0) + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
+					outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, reveling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her womb, feeling it splatter and bubble around your " + cockDescript(0) + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
 					outputText("Finally finished, you pull your " + cockDescript(0) + " from one of her well-used slits, your " + cockDescript(0) + " drooling cum even now. With a grin, you walk away, happy with your little encounter.  ", false);
 					player.orgasm();
 				}
@@ -145,7 +145,7 @@ private function sandwitchRaped():void {
 				outputText("With a satisfied growl of lust from yourself, and a screech of pain from the sand witch, you break past her cervixes and into her wombs. Pulling the heads of your " + multiCockDescriptLight() + " from her wombs, you rub and rut at the outside of her cunts, bringing yourself closer and closer to your peak as the sand witch struggles, her eyes turning wide with fright as she starts to understand you hold more power than her.  ", false);
 				outputText("With a beastial cry of lust, you shove your shafts deep within her vaginas, past her cervices and into her womb where you blast your potent, corrupted, demon-tainted seed.  ", false);
 				//A few dicks...
-				outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, revelling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her wombs, feeling it splatter and bubble around your " + multiCockDescriptLight() + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
+				outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, reveling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her wombs, feeling it splatter and bubble around your " + multiCockDescriptLight() + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
 				outputText("Finally finished, you pull your " + multiCockDescriptLight() + " from her well used slits, your " + multiCockDescriptLight() + " drooling cum even now. With a grin, you walk away, happy with your little encounter.  ", false);
 			}
 			cleanupAfterCombat();
@@ -165,7 +165,7 @@ private function sandwitchBewbs():void {
 	outputText("You move yourself atop the defeated sand witch, and bring your lips to her breasts.  The moment the first drop of milk touches your tongue, you drink, hungrily, needfully, demandingly. You grope and massage her breasts as she leans back and cries out, her eyes wide in surprise. You guzzle and drink her sweet cream, the small seedlings underneath you appearing to rustle and move as you drink the alabaster flow once intended for the desert sands.  ", false);
 	outputText("Warmth fills your gluttonous belly, and the sand witch places a hand to your stomach, rubbing it lightly as you drink from her breasts, moving on when the one you're drinking from is drained.  ", false);
 	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your " + player.skinDesc + " and the scents are driving you wild with lust.  ", false);
-	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy, too late you realize she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ", false);
+	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy; you realize too late that she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ", false);
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...", false);
 	player.slimeFeed();
 	dynStats("lus", 25);
@@ -252,7 +252,7 @@ private function sandwitchCentaurBoning():void {
 				outputText("under her expert hands. ", false);
 			}
 		}
-		outputText("You can somehow feel her arousal pouring through her milk and into your skin, filling you with her own sensations and making your entire body vibrate like a sexual tuning fork.  As the sensations grow to be overwhelming, you feel yourself stumbling and slowing until you finally come to a stop. Panting, you listen to the sand witch's voice whispering sweet nothings into your ear...  But the nothings seem to be having an effect.\n\n", false);
+		outputText("You can somehow feel her arousal pouring through her milk and into your skin, filling you with her own sensations and making your entire body vibrate like a sexual tuning fork.  As the sensations grow to be overwhelming, you feel yourself stumbling and slowing until you finally come to a stop. Panting, you listen to the sand witch's voice whispering sweet nothings into your ear... but the nothings seem to be having an effect.\n\n", false);
 		//[GoTo: SW-1]
 		if(SWCentaurMore(1)) return;
 	}
@@ -274,7 +274,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 	//{ GoTo results }}
 	//[SW_1]
 	if(argument == 1) {
-		outputText("Too late you realize that she has been casting a spell for the past few minutes. Before you can react, everything grows dark.", false);
+		outputText("You realize too late that she has been casting a spell for the past few minutes. Before you can react, everything grows dark.", false);
 		//[Whatever effect the witch has if the player wins, rapes her, and she gets to cast a spell] [end]
 		//1 change
 		player.orgasm();
@@ -304,7 +304,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 		//Make lactation happen
 		if(player.biggestLactation() < 3) {
 			player.boostLactation(.7);
-			outputText("\n\n(Your breasts feel fuller...riper...milkier...)", false);
+			outputText("\n\n(Your breasts feel fuller... riper... milkier...)", false);
 			return false;
 		}
 		//Libido boost if nothing else
@@ -432,9 +432,9 @@ private function SWCentaurMore(argument:Number):Boolean {
 	if(argument == 3) {
 		outputText("As she begins to seem less skittish, you reach your hands into her robe and push it off of her shoulders, revealing a beautiful body underneath.  A pair of pussies is betraying the sand witch's arousal - her thighs are already dripping wet.  You begin to tease her four breasts as you lower your mouth to her lips for a passionate kiss.  Breaking off the kiss and grinning, you ", false);
 		//[STR > 50]
-		if(player.str > 50) outputText("pick her up and toss her unto your back. ", false);
+		if(player.str > 50) outputText("pick her up and toss her onto your back. ", false);
 		//[STR < 50]
-		else outputText("offer her your hand and help her unto your back. ", false);
+		else outputText("offer her your hand and help her onto your back. ", false);
 		outputText("Your strong hooves carry you across the clear desert at a light trot.  Without her robes to protect her, you can feel the witch's bare pussies grinding against your back as she presses her quad of breasts against your shoulders.  Her moans intensify more and more as you pick up the pace.", false);
 	}
 	return false;
@@ -444,10 +444,10 @@ private function SWCentaurMore(argument:Number):Boolean {
 private function knotSandwitch():void {
 	spriteSelect(50);
 	outputText("", true);
-	outputText("You press the tip of your " + cockDescript(0) + " at the entrance of her fragent flower.  It slides in, thanks to the pre already dribbling from your cock, your eyes rolling back in your head from her touch of her slippery folds.  You can't help but suddenly stab the length of your " + cockDescript(0) + " to the hilt within her, moaning as the tip pushes against her cervix.\n\n", false);
-	outputText("As your " + cockDescript(0) + " stirs within her, she begins to push back, her velvet walls gripping you tightly as you get a extra bit more inside.  She pulls free and pounds in again, causing her to grunt from the force of your knot stretching her.  Your balls swing back and forth, slapping and bouncing against her ass in a delicious way.  You can feel the beginnings of the orgasm building within your loins, pulsing up through the tip of your " + cockDescript(0) + ". As the pleasure increases, your body readies itself for the spill, and your knot begins to swell.  ", false);
+	outputText("You press the tip of your " + cockDescript(0) + " at the entrance of her fragent flower.  It slides in, thanks to the pre already dribbling from your cock, your eyes rolling back in your head from the touch of her slippery folds.  You can't help but suddenly stab the length of your " + cockDescript(0) + " to the hilt within her, moaning as the tip pushes against her cervix.\n\n", false);
+	outputText("As your " + cockDescript(0) + " stirs within her, she begins to push back, her velvet walls gripping you tightly as you get a extra bit inside.  She pulls free and pounds in again, causing her to grunt from the force of your knot stretching her.  Your balls swing back and forth, slapping and bouncing against her ass in a delicious way.  You can feel the beginnings of the orgasm building within your loins, pulsing up through the tip of your " + cockDescript(0) + ". As the pleasure increases, your body readies itself for the spill, and your knot begins to swell.  ", false);
    outputText("You begin to buck into her at a frenzied pace, your body's need to release your motivation.  At first, your knot swelling is an extra sensation, a tightness that squeezes deliciously as more and more blood is forced inside by sheer stimulation.\n\n", false);
-	outputText("Then it begins to get in the way, preventing your length from going all the way in, causing the pointed tip of your " + cockDescript(0) + " to lust for the unattainable depths of her cunt.  You press in, and get the sensation of the knot being squeezed in, crushing you with warm wet pleasure within her spasming cunt, only to releasing as you pull free.  As it continues to swell, you can no longer get your dick all the way inside her, your sperm-swollen knot bloated beyond her capacity.  Your desire is almost at it's peak, within your grasp, but without that vice-like tightness around your knot it will be hard to cum.  ", false);
+	outputText("Then it begins to get in the way, preventing your length from going all the way in, causing the pointed tip of your " + cockDescript(0) + " to lust for the unattainable depths of her cunt.  You press in, and get the sensation of the knot being squeezed in, crushing you with warm wet pleasure within her spasming cunt, only to release as you pull free.  As it continues to swell, you can no longer get your dick all the way inside her, your sperm-swollen knot bloated beyond her capacity.  Your desire is almost at its peak; within your grasp, but without that vice-like tightness around your knot it will be hard to cum.  ", false);
 	outputText("You grunt and push hard, desperate to force the bulbous cock-flesh inside, and you're rewarded as it pops in with a wet squelch. The tightening pressure around the base of your " + cockDescript(0) + " pushes you over the edge, and the cum begins to shoot in her tight hole, with your " + cockDescript(0) + " trapped inside!\n\n", false);
   	//ORGAZMO
   	if(player.cumQ() < 25) outputText("The cum slicks your dick as you continue trying to hump, easing the over-sensation of your dick while you're glued together by the bulbous knot locked in her snatch.", false);
@@ -460,7 +460,7 @@ private function knotSandwitch():void {
 //Sandwitch multi-cock corrupt rape
 private function rapeSandwitchMultis():void {
 	spriteSelect(50);
-	outputText("With the corruption of this realm comfortably throbbing in your shameless veins, you feel your mind opening to new possibilities.  Despite the slickly perfect fit of the sand witch's multiple pussies as you pound into her, and the way she moans with each thrust of your titanic members, you feel there are still some further alleys of pleasure within her left to explore.  Long inured to carnal pleasure that would have rendered your earlier, purer, self unconscious,  your mind wanders back to the witch's weapon of lust, the vibrating stone of pleasure.  You feel it's time to give her a dose of her own medicine.\n\n", true);
+	outputText("With the corruption of this realm comfortably throbbing in your shameless veins, you feel your mind opening to new possibilities.  Despite the slickly perfect fit of the sand witch's multiple pussies as you pound into her, and the way she moans with each thrust of your titanic members, you feel there are still some further alleys of pleasure within her left to explore.  Long inured to carnal pleasure that would have rendered your earlier, purer self unconscious,  your mind wanders back to the witch's weapon of lust, the vibrating stone of pleasure.  You feel it's time to give her a dose of her own medicine.\n\n", true);
 	outputText("You grin wickedly at the humiliated and whimpering witch as you rape her.  Between involuntary gasps of pleasure as you steadily pound into her sopping snatches, she looks afraid, not knowing the source of your mirth.  It soon becomes clear enough. She struggles a little once she hears the low buzzing of her own corrupted pleasure stone and bucks and thrashes as you push the persistent little charm into her tight, but well-cum-lubed ass.  The feel of the stone vibrating within her spreads through to your cocks, enhancing the pleasure as she clenches and spasmes while being violated multiple ways.  All too soon, it brings you to a gushing orgasm.  As you finally withdraw from the troublesome sand witch, you spit on her milk-oozing form and take your leave.", false);
 	player.orgasm();
 	cleanupAfterCombat();
@@ -621,7 +621,7 @@ private function eggwitchForeplay():void {
 	outputText("Knowing how the desert witch feels at this moment, you decide to help ease her into receiving your young.  Slowly, you slide your fingers up the uneasy woman's legs, the sensation of your hands along her delicate frame soliciting a pitiful gasp from the sand witch as she receives the caress.  Gradually working upwards, your palms curve and twist along the blonde beauty's thighs, all the while causing her to shudder from the stimulus, her ");
 	if(player.totalCocks() > 1) outputText(num2Text(player.cockTotal() + 1));
 	else outputText("two");
-	outputText(" clits all hard from the apparent promise of your carnal attentions.  Positioned between her thighs, your hands rest and you wait for the eager gaze of her eyes, the imploring of your continued progress.  And the sand witch doesn't disappoint; her needy eyes beseech you to splay her legs open and get intimately acquainted with her naughty bits.");
+	outputText(" clits all hard from the apparent promise of your carnal attentions.  Positioned between her thighs, your hands rest and you wait for the eager gaze of her eyes, the imploring of your continued progress.  The sand witch doesn't disappoint; her needy eyes beseech you to splay her legs open and get intimately acquainted with her naughty bits.");
 	
 	outputText("\n\nGrinning in delight at the desert vixen's willful submission, you oblige her desires and spread her thighs apart; the aroma and heat of her excitement rising to your nostrils is the perfect greeting and welcome for you.  With blood surging to your sex");
 	if(player.cockTotal() > 1 || player.gender == 3) outputText("es");
@@ -653,7 +653,7 @@ private function getToFuckingWithZeEggsInWitch():void {
 	else {
 		outputText("The sight of the sand witch's apprehension brings a furious scowl to your face; she was willing to assault you for her own perverted delight, and yet she shakes like a coward at the prospect of a truly unique fuck?  The nerve of this woman!  She wouldn't afford you the courtesy of some 'persuasive' foreplay if the roles were reversed; so why should you?  Dismissing her uncertainty, you tell the sorcerer that you know she craves a good screw like everything else around here and to drop the act, descending upon her and pinning her to the ground in a display of unbridled sexual fury.  Her eyes go wide in fear as your form presses her into the hot sand, rightly concerned that you're going to force her to receive your lusts and unborn young.");
 		
-		outputText("\n\nHer laboured breathing becomes ever more erratic as the bulbous mass of your ovipositor un-sheaths and presses against her lubricated sex, her whole body tensing up in horror at what is to come.");
+		outputText("\n\nHer labored breathing becomes ever more erratic as the bulbous mass of your ovipositor un-sheaths and presses against her lubricated sex, her whole body tensing up in horror at what is to come.");
 		
 		outputText("\n\nBut what would this serve, really? To force yourself on her?  You KNOW the tainted, wanton whore lies just beneath the surface of this woman's form; the whore that begs to be fucked and taken roughly by you.  All she needs is a little persuasion to admit she wants this, to have her accept the slut within.  The sand witch shivers as you whisper into her ear that you know she hungers for your other-worldly appendage in her pussy; that the facade of being apprehensive about this is but an illusion to deny her very nature.  You know deep down she wants nothing more than to lie back and join with you in carnal bliss; and you can make that happen - she just needs to <i>admit it</i>, to stop lying to herself.  Heavy, ponderous breathing and a twitch of the eyes is your response, the sand witch struggling to find meaning in what you say.");
 		
@@ -696,7 +696,7 @@ private function laySomeEggsInThatWitchFinally():void {
 	else outputText(" through her rectal walls");
 	outputText(".  With a meticulous push, the forerunner of your young manages to infiltrate her passage, working its way valiantly into her depths with every convulsion.");
 	
-	outputText("\n\n\"<i>OH GODS!</i>\" the sorceress cries out, wrapping her legs tightly around you and moaning as the egg makes its journey upwards.  The quiet coos of bliss turn loud as the shell of your brood eases past her inner ring, your mate's muscles clamping down hard on your ovipositor as she seemingly tries to milk your appendage for all its worth.  With a low grumble, the egg reaches its target and slides ");
+	outputText("\n\n\"<i>OH GODS!</i>\" the sorceress cries out, wrapping her legs tightly around you and moaning as the egg makes its journey upwards.  The quiet coos of bliss turn loud as the shell of your brood eases past her inner ring, your mate's muscles clamping down hard on your ovipositor as she seemingly tries to milk your appendage for all it's worth.  With a low grumble, the egg reaches its target and slides ");
 	if(cunt) outputText("into her waiting womb");
 	else outputText("as far as you can safely tuck it");
 	outputText(", nestled and sound until the scramble for life can begin.");
@@ -743,7 +743,7 @@ public function sammitchBirthsDriders():void {
 	//Occurs 8 days (or moar appropriate time) after fertile oviposition, triggered when exploring the Desert
 	outputText("As you struggle with the loose footing of the hot desert sand, a weak howl reaches your ears.  Curiously, you stop and listen, trying to locate the potential source of the sound.  Yet all you can really hear is the wind against the sand-blasted, desolate terrain, giving you cause to shrug it off and continue on your merry way.");
 	
-	outputText("\n\nThat is, until another howl reaches your ear; much louder than before.  Upon reflection that howl of wind sounds anything but; you surmise that someone is nearby and probably in distress... or the throes of sex, because who knows in this place?");
+	outputText("\n\nThat is, until another howl reaches your ear; much louder than before.  Upon reflection that howl of wind sounds anything but; you surmise that someone is nearby and probably in distress... or in the throes of sex, because who knows in this place?");
 	
 	outputText("\n\nTrying your best to locate the cries amidst the light sand storms, you set out in the general direction that you heard them from.  Struggling to see where you are going as sand blows in your eyes, you happen to stumble upon the prone form of a desert traveller; judging from their shape, the traveller is most definitely female... and apparently with child!  ");
 	if(player.cor < 50) outputText("Intending to help");
@@ -775,7 +775,7 @@ private function helpZeWithBirfBabies():void {
 	
 	//PC is a drider/centaur/whatever:
 	if(player.isTaur() || player.isDrider()) {
-		outputText("\n\n\"<i>I-I can't get up; it hurts too much!</i>\" she cries out, despairing of making it somewhere safe in time, despairing that your children will be born and die out here, all in the same day.  Sternly, you tell her to get on your lower half, sinking to the ground to allow her to hobble up.");
+		outputText("\n\n\"<i>I-I can't get up; it hurts too much!</i>\" she cries out, despairing of making it somewhere safe in time, and that your children will be born and die out here, all in the same day.  Sternly, you tell her to get on your lower half, sinking to the ground to allow her to hobble up.");
 	
 		outputText("\n\n\"<i>Please, not too fast!</i>\" she calls out from behind you, clearly trying her best to not have the labors of your lust right here and now.  Rising to your [feet], you attempt to recall which way to go, only to realize that it doesn't matter.  Concentrating on the camp, you yell at the sand witch to hold on, then ");
 		if(player.isDrider()) outputText("skitter");
@@ -797,8 +797,8 @@ private function reluctantlyHelpZeWitch():void {
 
 	//PC is a drider/centaur/whatever:  
 	if(player.isDrider() || player.isTaur()) {
-		outputText("\n\n\"<i>I-I can't get up, it hurts too much!</i>\" she cries out, despairing of making it somewhere safe it in time, despairing that your children will be born and die out here, all in the same day.  Annoyed at her lack of common sense, you tell her to get on your back, sinking to the ground to allow her to hobble up.");
-		outputText("\n\n\"<i>Please, not too fast!</i>\" she calls out, clearly trying her best to not have the labors of your lust right here and now.  You'll be goddamned furious if she ends up having the kids right here and now; it's a bear to clean parts of you when you arms can't reach them!  Rising to your feet, you attempt to recall which direction to go, only to realize that you're lost.  Even better- well, actually, it doesn't matter.  Concentrating on the camp, you yell at the sand witch to hold on, then ");
+		outputText("\n\n\"<i>I-I can't get up, it hurts too much!</i>\" she cries out, despairing of making it somewhere safe it in time, and that your children will be born and die out here, all in the same day.  Annoyed at her lack of common sense, you tell her to get on your back, sinking to the ground to allow her to hobble up.");
+		outputText("\n\n\"<i>Please, not too fast!</i>\" she calls out, clearly trying her best to not have the labors of your lust right here and now.  You'll be goddamned furious if she ends up having the kids right here and now; it's a bear to clean parts of you when your arms can't reach them!  Rising to your feet, you attempt to recall which direction to go, only to realize that you're lost.  Even better- well, actually, it doesn't matter.  Concentrating on the camp, you yell at the sand witch to hold on, then ");
 		if(player.isDrider()) outputText("skitter");
 		else outputText("gallop");
 		outputText(" across the dry desert sea...");
@@ -813,7 +813,7 @@ private function reluctantlyHelpZeWitch():void {
 //prompt with --Next-- button
 private function sandwitchBirthsYourMonstrosities():void {
 	clearOutput();
-	outputText("After what seems like forever, you finally reach the outskirts of camp, stopping just outside of the perimeter to lay the sand witch on the cool dirt.  \"<i>H-here they come!</i>\" she cries out, before wincing in agony.  Splaying her legs, she finally relaxes and allows the birthing process to continue unhindered, the tell-tale signs slowly flowing out of her as green goop.  The pained expression on her face suddenly turns euphoric as the birthing fluids escape from her, acting as an numbing agent and aphrodisiac in the process.  Before long your newly hatched children emerge from their mother's body, covered in all sorts of liquids.  One by one they scurry out, amazed and awestruck by this strange new world they've finally entered into.  That soon gives way to hunger; the children are obviously thirsty and starved from the whole ordeal.  Clamouring up their mother, the fruits of your union quickly ascend to the sand witch's two pairs of breasts, minimizing any infighting for feeding rights.");
+	outputText("After what seems like forever, you finally reach the outskirts of camp, stopping just outside of the perimeter to lay the sand witch on the cool dirt.  \"<i>H-here they come!</i>\" she cries out, before wincing in agony.  Splaying her legs, she finally relaxes and allows the birthing process to continue unhindered, the tell-tale signs slowly flowing out of her as green goop.  The pained expression on her face suddenly turns euphoric as the birthing fluids escape from her, acting as an numbing agent and aphrodisiac in the process.  Before long your newly hatched children emerge from their mother's body, covered in all sorts of liquids.  One by one they scurry out, amazed and awestruck by this strange new world they've finally entered into.  That soon gives way to hunger; the children are obviously thirsty and starved from the whole ordeal.  Clamoring up their mother, the fruits of your union quickly ascend to the sand witch's two pairs of breasts, minimizing any infighting for feeding rights.");
 	
 	outputText("\n\nRelieved to have finally carried the children to term, the sand witch lies back against the grass and smiles, jubilant that she was able to undergo such a joyous experience.  Humming her happiness to all those within earshot, she relishes this fleeting moment of motherhood as your young drink their fill and skitter shakily off, no doubt heading for the swamp.");
 	
@@ -834,11 +834,11 @@ private function sandwitchBirthsYourMonstrosities():void {
 public function witchBirfsSomeBees():void {
 	clearOutput();
 	//Occurs 8 days (or moar appropriate time) after fertile oviposition; triggered when exploring the Desert
-	outputText("\n\nAs you trudge through the windy desolation of the desert, the familiar hum of buzzing bees can be heard.  You muse to yourself, trying to figure out what a swarm of bees is doing all the way out here.  Then it hits you; that sand witch you mated with must be nearby!  And she's probably given birth!");
+	outputText("\n\nAs you trudge through the windy desolation of the desert, the familiar hum of buzzing bees can be heard.  You muse to yourself, trying to figure out what a swarm of bees is doing all the way out here.  Then it hits you; that sand witch you mated with must be nearby, and she's probably given birth!");
 	
 	outputText("\n\nRushing towards the crescendo of loud buzzing, you stumble upon the haughty sorceress lying in the sand, with the tell-tale aftermath of bee-brand oviposition pooled around her buttocks.  The swarm stays only for a few brief moments");
 	if(silly()) outputText(", echoing tiny little cries of \"<i>@</i>\"");
-	outputText("; likely it was just waiting for someone to find their mother before taking off in the general direction of the forest.  The weak voice of the desert vixen fills the air as she speaks to you.  \"<i>That... was the best.  I can't believe I'm a mother!</i>\"  She gives you a look of appreciation for showing her how pleasurable being a host can be.  Seeing she needs her rest, you give a nod and turn to leave... only to feel a hand grasp at your [leg].  \"<i>I would be disappointed if you didn't come around and 'say hello' more often; keep that in mind " + player.mf("handsome","beautiful") + ".</i>\"  She coos, before drifting off to sleep.  She'll be fine in this shady part of the desert while she rests; the dune currently obstructing the sun and keeping her from being burned from the sun's rays.");
+	outputText("; likely it was just waiting for someone to find their mother before taking off in the general direction of the forest.  The weak voice of the desert vixen fills the air as she speaks to you.  \"<i>That... was the best.  I can't believe I'm a mother!</i>\"  She gives you a look of appreciation for showing her how pleasurable being a host can be.  Seeing she needs her rest, you give a nod and turn to leave... only to feel a hand grasp at your [leg].  \"<i>I would be disappointed if you didn't come around and 'say hello' more often; keep that in mind " + player.mf("handsome","beautiful") + ".</i>\"  She coos, before drifting off to sleep.  She'll be fine in this shady part of the desert while she rests, the dune currently obstructing the sun and keeping her from being burned from the sun's rays.");
 	
 	outputText("\n\nContent with how things turned out, you head back to camp and decide on the next course of action for today.");
 	flags[kFLAGS.EGG_WITCH_COUNTER] = 0;
