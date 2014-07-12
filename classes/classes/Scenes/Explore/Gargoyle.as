@@ -460,7 +460,10 @@ private function tailFuckGargoyleScene():void {
 	clearOutput();
 	outputText("Without warning, you grab " + flags[kFLAGS.GAR_NAME] + "'s thick, spiked tail and give it a playful yank.  She lets out a surprised \"<i>EEP,</i>\" but settles down after you tell her to cop a squat and stiffen it up.  Obediently, she assumes a low crouch and stiffens her tail into a “U” shape between her legs, its tip pointed straight up between your belly and her face.  You ruffle her hair and strip out of your [armor], soon standing nude before the gargoyle.  At a command from you, the brutal stone spikes protruding from her tail's tip retract, leaving the appendage a smooth, cool surface.");
 	
-	outputText("\n\nWith a little balancing help from a nearby pew, you balance yourself over the narrow tip of her tail and slowly lower yourself down upon it.  The tip slips through your lower lips easily, its stone cold surface sending a chill up your spine as you slide down the gargoyle's shaft.  You shudder as you finally bottom out on her tail, taking it until your cunt is almost painfully stretched by her ever-thickening tail and you can feel the tip pressing against the entrance to your womb.");
+	outputText("\n\nWith a little balancing help from a nearby pew, you balance yourself over the narrow tip of her tail and slowly lower yourself down upon it.  The tip slips through your lower lips easily, its stone cold surface sending a chill up your spine as you slide down the gargoyle's shaft.");
+	player.cuntChange(15, true, true, true); 
+	outputText("You shudder as you finally bottom out on her tail, taking it until your cunt is almost painfully stretched by her ever - thickening tail and you can feel the tip pressing against the entrance to your womb.");
+	
 	
 	outputText("\n\nNow firmly inside your depths, " + flags[kFLAGS.GAR_NAME] + " begins to wiggle her tail inside you, slithering a few inches in and out of your [vagina].  Encouraging her, you grasp her shoulders for support and push your cunt a little closer to her face.  Taking the hint, she snakes out her long tongue and gives your clitty a little flick, eliciting an immediate gasp of pleasure from you.  She's soon engaging in a double-assault on you, suckling on your [clit] one moment, and ramming her tail into your [vagina] the next.");
 	
