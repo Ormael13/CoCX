@@ -2145,7 +2145,7 @@ private function kellyBJsAhoy():void {
 		}
 	}
 	//[merge]
-	outputText("\n\n\"<i>Thank you for using me, [Master],</i>\" she says once you're finished, grinning happily as she gazes at the off-white goo splattered across her breasts, her cheeks rosy with exertion.  “But, couldn't you have made it in my mouth?  I would have swallowed it all down, you know.  I'm a good girl.</i>\"");
+	outputText("\n\n\"<i>Thank you for using me, [Master],</i>\" she says once you're finished, grinning happily as she gazes at the off-white goo splattered across her breasts, her cheeks rosy with exertion.  \"<i>But, couldn't you have made it in my mouth?  I would have swallowed it all down, you know.  I'm a good girl.</i>\"");
 	outputText("\n\nYou laugh as you settle yourself down facing towards her");
 	if(!player.isTaur()) outputText(", still clutching your pleasantly aching prick");
 	outputText(", saying you know she is, but it's a lot more pleasing to you to see her get her fix this way.  Quickly cottoning on, the centaur stares at you with her lustful green eyes as she lifts a cum-spattered boob to her mouth.");

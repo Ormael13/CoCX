@@ -1519,23 +1519,23 @@ private function giveArianAnal():void {
 		else {
 			outputText("\n\n\"<i>This didn't apply to me, since I was originally male.  Ah!  B-but I guess since I'm a girl now, I'm starting to develop some sensitivity back there.  It really feels good....  Hmm....</i>\"");
 			outputText("\n\nYou smile and comment that since [Arian ey]'s a girl now, should [Arian eir] ass have gotten the sensitivity boost by default if that's the case?");
-			outputText("\n\n\"<i>I don't know... maybe so... but then again, lizan females don't have these either,</i>\"  Arian replies, lifting herself off the mattress to show you her ");
-			if(flags[kFLAGS.ARIAN_BREASTS] == 1) outputText("perky");
-			else if(flags[kFLAGS.ARIAN_BREASTS] == 2) outputText("rounded");
-			else outputText("pillowy");
-			outputText("mounds.");
+			outputText("\n\n\"<i>I don't know... maybe so... but then again, lizan females don't have these either,</i>\"  Arian replies, lifting herself off the mattress to show you her");
+			if(flags[kFLAGS.ARIAN_BREASTS] == 1) outputText(" perky");
+			else if(flags[kFLAGS.ARIAN_BREASTS] == 2) outputText(" rounded");
+			else outputText(" pillowy");
+			outputText(" mounds.");
 			
 			outputText("\n\nYou can't resist sneaking an admiring grope of the lizan's presented bosom, admitting that gaining breasts in exchange for anal affinity sounds like a fair trade, but you aren't complaining about Arian's bust either.  Arian gasps and drops chest-first onto the bed.  \"<i>They are sensitive, too.</i>\"  Arian smiles nervously at you.");
 		}
-		outputText("\n\nYou sneak a probing hand under and up between Arian's legs.  Oh ho!  You grin as ");
+		outputText("\n\nYou sneak a probing hand under and up between Arian's legs.  Oh ho!  You grin as");
 		if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
-			outputText("a ");
-			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("pair of dripping cocks");
-			else outputText("dripping cock");
-			if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText(" and ");
+			outputText(" a");
+			if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText(" pair of dripping cocks");
+			else outputText(" dripping cock");
+			if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText(" and");
 		}
-		if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("a sopping wet pussy");
-		outputText("greet");
+		if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText(" a sopping wet pussy");
+		outputText(" greet");
 		if((flags[kFLAGS.ARIAN_VAGINA] == 0 && flags[kFLAGS.ARIAN_DOUBLE_COCK] == 0) || (flags[kFLAGS.ARIAN_VAGINA] == 1 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0)) outputText("s");
 		outputText(" your touch.  What a little slut Arian is turning into; [Arian ey]'s already raring to go, and even knowing it's going to be [Arian eir] ass that's getting fucked, too!");
 		
@@ -1575,7 +1575,7 @@ private function giveArianAnal():void {
 		else if(player.cumQ() < 1000) outputText("\n\nArian's butt feels so good that you can't help but paint it in white.  Gob after gob of searing hot cum flows from your " + cockHead(x) + " and into the lizan's willing bowels.  You can't help but continue thrusting inside [Arian eir] deliciously slick insides, even as Arian's distended sphincter tries its best to hold you in place.  By the time you're done, Arian looks like [Arian ey]'s three months pregnant; after a few final thrusts, you're confident you've given [Arian em] all that you can muster for the moment and pull out of the lizan's hungry ass.");
 		//(High Cum Amount)
 		else {
-			outputText("\n\nYou bury yourself as deep as you can into the lizan's behind and brace yourself, holding onto [Arian eir] hips as the first of many jets of cum finally escapes your throbbing " + cockDescript(x) + ".  You can feel the groaning lizan shudder with each blast that you pump into [Arian eir] inviting interior; each of your sticky ropes of cum filling him up until [Arian eir] belly looks as big as a beach ball.  Arian's contracted sphincter tries its best to hold your prodigious load in, but it can't hope to contain it all; soon white jism explodes from around the seal of your cock.  Trails of your pleasure run down the lizan's legs to soak the bedsheets along with the lizan's own fluids.  One final jet pushes Arian off your shaft, and you gaze at the messy results of your recent activities.");
+			outputText("\n\nYou bury yourself as deep as you can into the lizan's behind and brace yourself, holding onto [Arian eir] hips as the first of many jets of cum finally escapes your throbbing " + cockDescript(x) + ".  You can feel the groaning lizan shudder with each blast that you pump into [Arian eir] inviting interior; each of your sticky ropes of cum filling [Arian em] up until [Arian eir] belly looks as big as a beach ball.  Arian's contracted sphincter tries its best to hold your prodigious load in, but it can't hope to contain it all; soon white jism explodes from around the seal of your cock.  Trails of your pleasure run down the lizan's legs to soak the bedsheets along with the lizan's own fluids.  One final jet pushes Arian off your shaft, and you gaze at the messy results of your recent activities.");
 		}
 		
 		outputText("\n\nFor a moment you admire your handiwork, but all too soon the exhaustion of your recent tryst catches up to you and you collapse atop the lizan, almost as blissed out as [Arian ey] is....");
@@ -1664,7 +1664,7 @@ private function giveArianAnal():void {
 			
 			outputText("\n\nYes.  Yes you do, you declare.  \"<i>Good, because I like you in my ass, so I don't have to change?</i>\"");
 			
-			outputText("\n\nYou still have to confess it was a shock that someone as respectable as Arian is would get so enthusiastically into anal - and on the receiving end, no less - but you don't want him to change just for your sake.");
+			outputText("\n\nYou still have to confess it was a shock that someone as respectable as Arian is would get so enthusiastically into anal - and on the receiving end, no less - but you don't want [Arian em] to change just for your sake.");
 			
 			outputText("\n\n\"<i>This is all new to me.  I'd never been with anyone before you came, so there is no problem if I act like... well, like that?  Because I could change if it really bothers you...</i>\"");
 			
@@ -1677,7 +1677,7 @@ private function giveArianAnal():void {
 			outputText("\n\nYou chuckle. Not right this moment, no, you tell [Arian em]; the two of you just had a pretty intense session, you need a few moments to recover; besides that you have other matters that need your attention.  Arian looks down in disappointment, pouting.  Now, now, there's no need for that, you can always have some fun another time.  \"<i>Alright then... see you later?</i>\"  You nod.  \"<i>Ok... I'll be waiting.</i>\"");
 			
 			outputText("\n\nYou promptly gather your clothes and quietly make your way ");
-			if(!arianFollower()) outputText("back to Tel'adre's streets, and from there back to camp.");
+			if(!arianFollower()) outputText("back to Tel'Adre's streets, and from there back to camp.");
 			else outputText("out of [Arian eir] tent.");
 			flags[kFLAGS.ARIAN_ASS_CHAT]++;
 		}
@@ -1688,7 +1688,7 @@ private function giveArianAnal():void {
 			
 			outputText("\n\nWell, this greedy little lizard of yours will have to wait until you're ready.  But if [Arian ey]'s good, maybe you'll come back later, you tell [Arian em], playfully tapping [Arian em] on the snout for emphasis.  \"<i>Okay, I'll be waiting.</i>\"  [Arian Ey] grins happily.");
 			outputText("\n\nSmiling back at [Arian em] you gather your clothes and quietly make your way ");
-			if(!arianFollower()) outputText("back to Tel'adre's streets, and from there back to camp.");
+			if(!arianFollower()) outputText("back to Tel'Adre's streets, and from there back to camp.");
 			else outputText("out of [Arian eir] tent.");
 		}
 	}
