@@ -533,7 +533,7 @@ private function keltMainEncounter3():void {
 			//(+5 Submissive)
 			player.addStatusValue(StatusAffects.Kelt,2,5);
 			//(Pregnancy Chance)
-			if((player.fertility + player.bonusFertility()) >= rand(50) && player.pregnancyIncubation == 0) {
+			if((player.totalFertility()) >= rand(50) && player.pregnancyIncubation == 0) {
 				player.pregnancyType = 7;
 				player.pregnancyIncubation = 420;
 				trace("PLAYER GOT KNOCKED UP BY KELT");

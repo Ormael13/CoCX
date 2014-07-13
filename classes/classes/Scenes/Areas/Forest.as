@@ -241,7 +241,7 @@ package classes.Scenes.Areas
 				//Vags + Fertility boosts imp probability
 				if (player.totalCocks() > 0) impGob--;
 				if (player.hasVagina()) impGob++;
-				if (player.fertility + player.bonusFertility() >= 30) impGob++;
+				if (player.totalFertility() >= 30) impGob++;
 				if (player.cumQ() >= 200) impGob--;
 				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
 					if (impGob <= 3) impGob += 2;
