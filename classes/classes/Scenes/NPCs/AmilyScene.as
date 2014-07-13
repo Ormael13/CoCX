@@ -78,7 +78,7 @@ package classes.Scenes.NPCs
 		//  AMILY_OFFERED_DEFURRY:int = 336; // 1 = Offered to defurry Amily
 		//  AMILY_NOT_FURRY:int = 337; // 1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
 		//  AMILY_IS_BATMAN:int = 338; // 1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
-		//
+		//  AMILY_TREE_FLIPOUT:int = 599; // 0 = Amily doesn't know 'bout fuckflowers; 1 = Amily saw tree but you enhanced your calm and kept silent; 2 = HOLLI DIES and Amily comes back, but SHE WILL REMEMBER THIS, you monster. (See BATMAN FLIPOUT above)
 		// //1 = timer started, 30 = RIPE FOR INCEST
 		//  AMILY_INCEST_COUNTDOWN_TIMER:int = 436;
 		//
@@ -177,6 +177,13 @@ package classes.Scenes.NPCs
 			//Amily gone/hiding super hard
 			if(flags[kFLAGS.AMILY_IS_BATMAN] > 0 || flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 1  || flags[kFLAGS.AMILY_TREE_FLIPOUT] > 0) {
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village.", false);
+				doNext(13);
+				return;
+			}
+			//Schrödinger Amily corrupted that damn place!
+			else if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+				amilySprite();
+				outputText("You enter the ruined village, still laughing at your past nefarious deeds. Maybe it's just your imagination, but you feel like this entire place reeks of corruption now... You explore for an hour, then go back to your camp, knowing your tainted slave will be more than happy to satisfy your urges.", false);
 				doNext(13);
 				return;
 			}
