@@ -2077,7 +2077,7 @@ public function combatStatusesUpdate():void {
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n", false);
 		dynStats("lus", (player.statusAffectv1(StatusAffects.DemonSeed) + int(player.sens/30) + int(player.lib/30) + int(player.cor/30)));
 	}
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.vaginas.length > 0 && monster.totalCocks() > 0) {
+	if(player.inHeat && player.vaginas.length > 0 && monster.totalCocks() > 0) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ", false);
 		outputText("If you don't end this quickly you'll give in to your heat.\n\n", false);
@@ -2692,13 +2692,13 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
+		if(player.inHeat) choices[choices.length] = 14;
 	}
 	//15 Nipplecunts
 	if(player.hasFuckableNipples()) {
@@ -3159,7 +3159,7 @@ public function tease(justText:Boolean = false):void {
 			else outputText("You wiggle your " + hipDescript() + " at your enemy, giving them a long, tantalizing look at the hips that have passed so very many offspring.  \"<i>Oh, like what you see, bad boy?  Well why don't you just come on over and stuff that cock inside me?  Give me your seed, and I'll give you suuuuch beautiful offspring.  Oh?  Does that turn you on?  It does!  Come on, just let loose and fuck me full of your babies!</i>\"", false);
 			chance += 2;
 			damage += 4;
-			if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
+			if(player.inHeat) {
 				chance += 2;
 				damage += 4;
 			}

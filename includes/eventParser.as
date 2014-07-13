@@ -1270,7 +1270,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Heat-check!
 		//Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0)
+		if(player.inHeat)
 		{
 			if(player.statusAffectv3(StatusAffects.Heat) <= 1 || player.vaginas.length == 0)
 			{
@@ -2193,7 +2193,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(player.findStatusAffect(StatusAffects.EmberNapping) < 0) {
 			//Ember get's a whiff of fuckscent and knocks up PC!
-			if(emberScene.followerEmber() && player.hasVagina() && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.pregnancyIncubation == 0 && player.findStatusAffect(StatusAffects.EmberFuckCooldown) < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
+			if(emberScene.followerEmber() && player.hasVagina() && player.inHeat && player.pregnancyIncubation == 0 && player.findStatusAffect(StatusAffects.EmberFuckCooldown) < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 				emberScene.emberRapesYourHeatness();
 				return true;
 			}
@@ -2333,7 +2333,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
 		if(temp > 7) temp = 7;
 		if(player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
-		if(player.findStatusAffect(StatusAffects.Heat) >= 0) temp += 2;
+		if(player.inHeat) temp += 2;
 		if(vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2(StatusAffects.Tamani) >= 40) {

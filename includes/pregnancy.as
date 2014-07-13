@@ -13,7 +13,7 @@ public function updatePregnancy():Boolean {
 		return false;
 	}
 	//Cancel Heat
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
+	if(player.inHeat) {
 		outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n", false);
 		//Remove bonus libido from heat
 		dynStats("lib", -player.statusAffectv2(StatusAffects.Heat));

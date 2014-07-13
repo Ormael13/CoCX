@@ -4613,7 +4613,7 @@
 			//Sexual changes would go here if I wasn't a tard.
 			//Heat
 			if (and(4) == 0 && changes < changeLimit) {
-        var intensified:Boolean = (player.findStatusAffect(StatusAffects.Heat) >= 0);
+        var intensified:Boolean = player.inHeat;
         
         if(player.goIntoHeat(false)) {
           if(intensified) {
@@ -8243,7 +8243,7 @@
 			//fem fertility up and heat (suppress if pregnant)
 			//not already in heat (add heat and lust)
 			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
-        var intensified:Boolean = (player.findStatusAffect(StatusAffects.Heat) >= 0);
+        var intensified:Boolean = player.inHeat;
         if(player.goIntoHeat(false)) {
           if(intensified) {
   					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");

@@ -16,10 +16,10 @@ internal function approachSoberUrtaHeatRutProc():void {
 	clearOutput();
 	urta.urtaSprite();
 	outputText("As you walk over to the table where your foxy herm-lover sits, you think you see eyes following you, your presence attracting an unusual amount of attention. ");
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock() && player.hasVagina()) outputText(" Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
+	if(player.inHeat && player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock() && player.hasVagina()) outputText(" Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
 	else if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText(" Males stare at you with a hint of challenge in their eyes, whilst females eye you attentively. Herms don't seem sure whether they want to fight you or fuck you.");
 	//(Player in heat
-	else if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasVagina()) outputText(" Males, and individuals who look like females at first, until you spot the telltale bulge of at least one cock in garments or hanging freely between their legs, stare at you with obvious desire as you go, more than a few erections starting to form in your wake.");
+	else if(player.inHeat && player.hasVagina()) outputText(" Males, and individuals who look like females at first, until you spot the telltale bulge of at least one cock in garments or hanging freely between their legs, stare at you with obvious desire as you go, more than a few erections starting to form in your wake.");
 	outputText("  You ignore them all, concentrating on Urta.");
 
 	outputText("\n\nAs you approach, ");
@@ -33,7 +33,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText(".  Not to mention, with or without the monster between her legs, her body is sexy as hell.");
 
 	outputText("\n\n\"<i>Well, you do help me with my own releases, so I suppose that's fair....");
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasVagina()) outputText("  You... smell good, so I at least hope you're not here to tease me.");
+	if(player.inHeat && player.hasVagina()) outputText("  You... smell good, so I at least hope you're not here to tease me.");
 	outputText("</i>\"  She leans closer to you, and ");
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("your eyes are quickly drawn to her full breasts as she whispers something to you. You're too hypnotized to care.");
 	else outputText("you lose yourself in your imagination about having Urta take you raw and pump you full of sperm.  There's a faint voice you hear, and you realize it's Urta's as you snap back to reality.");
@@ -48,7 +48,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText(" focus is on the hips of the fox-morph");
 	else outputText(" focus on catching a glimpse of that amazing cock, and you keep imagining what can she do with it");
 	outputText(".  Your aggressive hormonal state demands that you ");
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) outputText(" put a baby in her, then let her put a baby in you");
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) outputText(" put a baby in her, then let her put a baby in you");
 	else if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText(" put a baby in her so she can push it out of those beautiful hips");
 	else outputText(" put that beautiful big cock into your needy [vagina]");
 	//[If Urta's fertility quest wasnât done]
@@ -60,7 +60,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	else outputText("  I'm really flattered you thought of me when in such a state!</i>\"");
 
 	outputText("\n\nSuddenly, the instincts get a bit too strong and the moment you enter a somewhat long, dark, separate alley, You put your arms around Urta and push your ");
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) outputText("mixed genitals");
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) outputText("mixed genitals");
 	else if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("[cock biggest]");
 	else outputText("[vagina]");
 	outputText(" against her backside.");
@@ -68,7 +68,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText("\n\n\"<i>Um, you know, I'm horny, too, but at least wait till we get to my place...</i>\"");
 
 	//Player in heat and rut:
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) {
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) {
 		outputText("\n\nYou turn Urta around and see in her eyes a desire nearly as big as in yours.  You practically throw yourself at her, pushing her against the wall, mauling her big breasts, assaulting her lips and rubbing your thighs against her big, erect horse-dong, not really sure yet how the hell you'll satisfy all your body's desires at once.  Urta growls with desire, ripping her dress open and the two of you quickly toss your [armor] all over the place.");
 		outputText("\n\nUrta looks like she's aboat to say something, but then she stops, confusion pushing aside horniness, if only for the moment.  \"<i>I... What are you going to use?  Your cock?  Your pussy?</i>\" she asks, panting with eagerness to begin.");
 		//[Cock] [Pussy])
@@ -110,7 +110,7 @@ internal function approachDrunkenUrta():void {
 	urta.urtaSprite();
 	outputText("As you walk over to the table where your foxy herm-lover sits, you think you see eyes following you, your presence attracting an unusual amount of attention.");
 	//Player in heat and rut:
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock() && player.hasVagina()) outputText("  Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
+	if(player.inHeat && player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock() && player.hasVagina()) outputText("  Males, females and herms alike stare at you with a mixture of puzzlement, longing and hostility, as if unsure whether they want to fight with you, fuck you senseless or be fucked senseless by you.");
 	else if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("  Males stare at you with a hint of challenge in their eyes, whilst females eye you attentively. Herms don't seem sure whether they want to fight you or fuck you.");
 	//Player in heat:
 	else outputText("  Males, and individuals who look like females at first, until you spot the telltale bulge of at least one cock in garments or hanging freely between their legs, stare at you with obvious desire as you go, more than a few erections starting to form in your wake.");
@@ -158,14 +158,14 @@ private function interestedInUburDrunkurtaRuts():void {
 	outputText("You raise an eyebrow and ask Urta if she minds telling you the reason for such attention and how exactly do you smell like.");
 
 	//Rut And Heat:
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) outputText("\n\n\"<i>Gods, sexy!  You smell like you walked in here to make babies - like you want to grab the girls and the herms and plough them full of cum, even as you let the guys and the herms stuff your greedy cunt full of baby juice and make you just as pregnant.  It's the best smell ever...</i>\"");
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) outputText("\n\n\"<i>Gods, sexy!  You smell like you walked in here to make babies - like you want to grab the girls and the herms and plough them full of cum, even as you let the guys and the herms stuff your greedy cunt full of baby juice and make you just as pregnant.  It's the best smell ever...</i>\"");
 	//Rut:
 	else if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.hasCock()) outputText("\n\n\"<i>Well, let me put it like this: you smell like you walked in here to grab every girl here by the hips and breed them all for hours on end, until the whole lot of them's knocked up</i>\"");
 
-	else if(player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasVagina()) outputText("\n\n\"<i>Well, let me put it like this: You smell like you walked in here to tease and flirt with every man and herm in the place... stride into the middle of the floor like a queen, then pull off your clothes and bend over to let yourself be fucked and bred for hours until you were well and truly knocked up.</i>\"");
+	else if(player.inHeat && player.hasVagina()) outputText("\n\n\"<i>Well, let me put it like this: You smell like you walked in here to tease and flirt with every man and herm in the place... stride into the middle of the floor like a queen, then pull off your clothes and bend over to let yourself be fucked and bred for hours until you were well and truly knocked up.</i>\"");
 
 	//If player is in both heat and rut: 
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) {
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) {
 		outputText(" Urta shudders with desire and, to your shock, she starts openly fondling her huge prick ");
 		if(!urtaLove()) outputText("under her skirt");
 		else outputText("through her quickly-soaked dress");
@@ -206,7 +206,7 @@ private function drunkUrtaIntroPartDuex(chosenSex:int = 1, newl:Boolean = true):
 
 	outputText("\n\nYou're a bit surprised by the reaction, and while you're still putty in her hands, Urta pushes you onto the bar table with strength nigh-impossible for her frame.  You feel wood under your back.  Her tail unfolds and presents her already erect equine penis to you, ");
 	//Player in both : 
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.findStatusAffect(StatusAffects.Heat) >= 0 && player.hasCock() && player.hasVagina()) outputText("and she proceeds to maul her breasts, pre-cum seeping copiously from her cock and her snatch drooling over her balls and onto the floor.");
+	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.inHeat && player.hasCock() && player.hasVagina()) outputText("and she proceeds to maul her breasts, pre-cum seeping copiously from her cock and her snatch drooling over her balls and onto the floor.");
 	else if(chosenSex == 1) outputText("but she doesn't seem to mind it for the moment.  Rather, the fur between her thighs appears to be rapidly soaking.");
 	else outputText("which she seems more than intent to push into you, although you do see a bit of female lubricant sliding down her balls.");
 

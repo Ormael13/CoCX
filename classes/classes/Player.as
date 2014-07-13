@@ -1978,7 +1978,7 @@ use namespace kGAMECLASS;
 			}
 			
 			//Already in heat, intensify further.
-			if (this.findStatusAffect(StatusAffects.Heat) >= 0) {
+			if (this.inHeat) {
 				if(intensificationIfOngoing == 0) {
 					return false;
 				}
@@ -1993,7 +1993,7 @@ use namespace kGAMECLASS;
 				game.dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-			if (this.findStatusAffect(StatusAffects.Heat) < 0) {
+			else {
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 				}

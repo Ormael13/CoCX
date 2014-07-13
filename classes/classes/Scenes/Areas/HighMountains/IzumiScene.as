@@ -47,7 +47,7 @@ package classes.Scenes.Areas.HighMountains
 		// Bundle of logic to determine if a player might "act" like a minotaur, based off of a couple of related statusAffects
 		public function actsLikeACow():Boolean
 		{
-			if (player.findStatusAffect(StatusAffects.Heat)) return true;
+			if (player.inHeat) return true;
 			if (player.findStatusAffect(StatusAffects.Rut)) return true;
 			if (player.findStatusAffect(StatusAffects.Dysfunction)) return true;
 			return false;

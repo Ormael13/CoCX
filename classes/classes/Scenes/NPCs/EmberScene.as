@@ -3254,13 +3254,13 @@ package classes.Scenes.NPCs
 			outputText("\nA pair of scaly, clawed hands suddenly grab your [hips] and you feel Ember take a big whiff of your scent. \"<i>So good... you smell so good, y'know [name]?</i>\"");
 
 			outputText("\n\nYou don't even start at " + emberMF("his", "her") + " actions; all you can think of is the deep need burning in your crotch, ");
-			if (player.hasVagina() && player.findStatusAffect(StatusAffects.Heat) >= 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
+			if (player.hasVagina() && player.inHeat && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
 				outputText("your [vagina] aching to be filled and your womb put to its proper purpose");
 			else outputText("[eachCock] burning to be seeding ripe, ready wombs");
 			outputText(".");
 
 			outputText("\n\nEmber responds by ");
-			if (player.hasVagina() && player.findStatusAffect(StatusAffects.Heat) >= 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
+			if (player.hasVagina() && player.inHeat && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
 				outputText("humping against you, smearing your thigh with dragon pre.");
 			else outputText("tightly pressing her drooling, puffy netherlips on your thighs.");
 			outputText("  \"<i>I need you, [name].  I need you so badly... can you see how badly I need you?</i>\" Ember asks, panting in barely contained lust.  \"<i>I want to fuck you so badly... Let's make a baby now!</i>\"");
@@ -3315,7 +3315,7 @@ package classes.Scenes.NPCs
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:
 			//PC not pregnant, Ember has dick, PC is in heat.
-			else if (player.pregnancyIncubation == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.findStatusAffect(StatusAffects.Heat) >= 0) {
+			else if (player.pregnancyIncubation == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.inHeat) {
 				getKnockedUpByEmbrahBroBaby();
 			}
 			//Male scene

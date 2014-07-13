@@ -2892,11 +2892,15 @@ import classes.PerkType;
 			}
 			return stretched;
 		}
+		
+		public function get inHeat():Boolean {
+			return findStatusAffect(StatusAffects.Heat) >= 0;
+		}
 
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
-			if (findStatusAffect(StatusAffects.Heat) >= 0)
+			if (inHeat)
 				counter += statusAffectv1(StatusAffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
