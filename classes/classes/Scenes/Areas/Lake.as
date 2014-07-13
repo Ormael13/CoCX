@@ -186,7 +186,7 @@ package classes.Scenes.Areas
 			}
 			else if (select == 1) {
 				//No boat, no kaiju
-				if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0 && player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) ) {
+				if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0 && player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) {
 					kaiju.kaijuMeeting();
 					return;
 				}
