@@ -20,7 +20,7 @@ public function customPCSetup():void {
 		player.createCock();
 		player.cocks[1].cockLength = 20;
 		player.cocks[1].cockThickness = 2;
-		player.cocks[1].cockType = CockTypesEnum.HORSE
+		player.cocks[1].cockType = CockTypesEnum.TENTACLE;
 		player.cocks[1].knotMultiplier = 1.5;
 	
 		player.clitLength = 0.5;
@@ -119,6 +119,11 @@ public function customPCSetup():void {
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		
 		inventory.takeItem(consumables.KITGIFT);
+		inventory.takeItem(consumables.MINOBLO);
+		inventory.takeItem(consumables.MINOBLO);
+		inventory.takeItem(consumables.MINOBLO);
+		inventory.takeItem(consumables.MINOBLO);
+		inventory.takeItem(consumables.MINOBLO);
 		
 		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
 		//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);

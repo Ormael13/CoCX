@@ -594,49 +594,65 @@
 			}
 			//Boosts cock size up to 36"x5".
 			if (changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
+				var selectedCock:int = -1;
+				for (var i:int = 0; i < player.cocks.length; i++)
+				{
+					if (player.cocks[i].cockType == CockTypesEnum.HORSE && (player.cocks[i].cockLength < 36 || player.cocks[i].cockThickness < 5))
+					{
+						selectedCock = i;
+						break;
+					}
+				}
+				
 				//Length first
-				if (player.cocks[0].cockLength < 36 && player.cocks[0].cockType == CockTypesEnum.HORSE) {
+				if (selectedCock != -1) {
 					//Thickness too if small enough
-					if (player.cocks[0].cockThickness < 5) {
+					if (player.cocks[selectedCock].cockThickness < 5) {
 						//Increase by 2 + rand(8), and store the actual amount in temp
-						temp = player.increaseCock(2 + rand(8), 0);
-						temp += player.cocks[0].thickenCock(1);
+						temp = player.increaseCock(2 + rand(8), selectedCock);
+						temp += player.cocks[selectedCock].thickenCock(1);
 						//Comment on length changes
-						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(0) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
-						if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + cockDescript(0) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.", false);
-						if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see your member grow slightly longer.", false);
+						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
+						if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.", false);
+						if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see [oneCock] grow slightly longer.", false);
 						//Add a blurb about thickness...
 						outputText("  To your delight and surprise, you discover it has grown slightly thicker as well!", false);
 					}
 					//Just length...
 					else {
 						//Increase by 2 + rand(8), and store the actual amount in temp
-						temp = player.increaseCock(2 + rand(8), 0);
+						temp = player.increaseCock(2 + rand(8), selectedCock);
 						//Comment on length changes
-						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(0) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
-						if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + cockDescript(0) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.", false);
-						if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see your member grow slightly longer.", false);
+						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
+						if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.", false);
+						if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see [oneCock] grow slightly longer.", false);
 					}
-					changes++;
-				}
-				//if too long check thickness
-				else if (player.cocks[0].cockThickness < 5 && player.cocks[0].cockType == CockTypesEnum.HORSE) {
-					player.cocks[0].thickenCock(1);
-					outputText("\n\nMuch to your delight and surprise, you discover your " + cockDescript(0) + " has thickened noticeably.", false);
 					changes++;
 				}
 			}
 			//Morph dick to horsediiiiick
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-				if (player.cocks[0].cockType != CockTypesEnum.HORSE) {
+				var selectedCock:int = -1;
+				for (var i:int = 0; i < player.cocks.length; i++)
+				{
+					if (player.cocks[i].cockType != CockTypesEnum.HORSE)
+					{
+						selectedCock = i;
+						break;
+					}
+				}
+				
+				if (selectedCock != -1) {
 					//Text for humandicks or others
-					if (player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
+					if (player.cocks[selectedCock].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCock].cockType.Index > 2) outputText("\n\nYour " + cockDescript(selectedCock) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
 					//Text for dogdicks
-					if (player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
-					player.cocks[0].cockType = CockTypesEnum.HORSE;
-					player.increaseCock(4, 0);
+					if (player.cocks[selectedCock].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(selectedCock) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(selectedCock) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(selectedCock) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+					player.cocks[selectedCock].cockType = CockTypesEnum.HORSE;
+					player.increaseCock(4, selectedCock);
 					dynStats("lib", 5, "sen", 4, "lus", 35);
-					outputText("<b>  You now have a horse-penis.</b>", false);
+					outputText("<b>  You now have a");
+					if (player.horseCocks() > 1) outputText("nother")
+					outputText(" horse-penis.</b>", false);
 					changes++;
 				}
 			}
