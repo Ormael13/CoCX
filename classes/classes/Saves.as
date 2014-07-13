@@ -1612,6 +1612,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			flags[kFLAGS.TATTOO_SAVEFIX_APPLIED] = 1;
 		}
 		
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 1)
+		{
+			flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
+			trace("Force-reverting Marble At Farm flag to 0.");
+		}
+		
 		//Set Status Array
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
