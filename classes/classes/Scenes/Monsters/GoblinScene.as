@@ -45,7 +45,7 @@ package classes.Scenes.Monsters
 		{
 			spriteSelect(24);
 			outputText("", true);
-			if (player.findPerk(PerkLib.BimboBrains) >= 0) {
+			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {
 					outputText(images.showImage("goblin-loss-female-bimbodildo"));

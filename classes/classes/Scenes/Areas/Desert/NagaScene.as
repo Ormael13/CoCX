@@ -429,7 +429,7 @@ internal function nagaFUCKSJOOOOOO():void {
 	outputText("", true);
 	//BIMBO!  LIKE, TOTALLY AWESOME AND CUM!
 	//[Naga-on-Female Bimbo Loss Scene]
-	if(player.findPerk(PerkLib.BimboBrains) >= 0 && player.hasVagina()) {
+	if((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && player.hasVagina()) {
 		outputText("You fall to your knees, like usual, your sexy form shaking with desire.\n\n", false);
 
 		outputText("The naga slowly approaches you with a smile of delight, devouring you with her eyes like the easy little thing you are. When she is close enough, she slides her tail under you and brings you closer to her. As she hisses in your ear, a chill goes down your spine: You don't understand a word she is saying. That seems to happen a lot with your tiny brain, but at least you can tell by the tones that she won't be going easy on you. Your nipples harden at the thought, and your " + vaginaDescript(0) + " agrees. Now astride the base of her tail and facing towards her, your eyes are directed to her crotch where a scaly covering rests where you would guess -- if you had the brains -- that a vagina should be. The naga brings a hand down and gently starts caressing this nether region. You know exactly what she is doing, and you, like, totally feel the need for sex with her burn inside you. You quickly strip yourself of your " + player.armorName + " and throw yourself brainlessly onto her awaiting pussy. Without any complaints whatsoever, you pull her lips apart and start licking, looking up at her wide-eyed and 'O'-lipped between licks.\n\n", false);
