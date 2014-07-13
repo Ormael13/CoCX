@@ -49,12 +49,6 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1000) {
 		itemSwapping = false;
 		hideUpDown();
-		if(player.findStatusAffect(StatusAffects.GottaOpenGift) >= 0) {
-			clearOutput();
-			player.removeStatusAffect(StatusAffects.GottaOpenGift);
-			kGAMECLASS.mutations.kitsuneGiftResult();
-			return;
-		}
 		if(itemSlot1.quantity > 0) temp1 = createCallBackFunction(useItemInInventory,itemSlot1);
 		if(itemSlot2.quantity > 0) temp2 = createCallBackFunction(useItemInInventory,itemSlot2);
 		if(itemSlot3.quantity > 0) temp3 = createCallBackFunction(useItemInInventory,itemSlot3);

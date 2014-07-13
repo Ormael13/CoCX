@@ -130,7 +130,9 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.emberScene.beatEmberSpar();
+			//Hackers gonna hate. Tested and working as intended.
+			if (hpVictory) game.emberScene.beatEmberSpar();
+			else emberReactsToLustiness();
 		}
 
 
