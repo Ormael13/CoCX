@@ -1964,5 +1964,43 @@ use namespace kGAMECLASS;
 				ballSize = 1;
 			}
 		}
+		
+		// Attempts to put the player in heat (or deeper in heat).
+		// Returns true if successful, false if not.
+		// The player cannot go into heat if she is already pregnant or is a he.
+		// By default, this function will slightly intensify heat if it's already 
+		// ongoing. You can control the intensity or turn it off with the second
+		// parameter.
+		public function goIntoHeat(output:Boolean, intensificationIfOngoing:int = 1, duration:int = 48, fertilityStrength:int = 10, libidoStrength:int = 15):Boolean {
+			if(!this.hasVagina() || this.pregnancyIncubation != 0) {
+				// No vagina or already pregnant, can't go into heat.
+				return false;
+			}
+			
+			//Already in heat, intensify further.
+			if (this.findStatusAffect(StatusAffects.Heat) >= 0) {
+				if(intensificationIfOngoing == 0) {
+					return false;
+				}
+				
+				if(output) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
+				}
+				temp = this.findStatusAffect(StatusAffects.Heat);
+				this.statusAffect(temp).value1 += 5 * intensificationIfOngoing;
+				this.statusAffect(temp).value2 += 5 * intensificationIfOngoing;
+				this.statusAffect(temp).value3 += 48 * intensificationIfOngoing;
+				game.dynStats("lib", 5, "resisted", false, "noBimbo", true);
+			}
+			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
+			if (this.findStatusAffect(StatusAffects.Heat) < 0) {
+				if(output) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
+				}
+				this.createStatusAffect(StatusAffects.Heat, fertilityStrength, libidoStrength, duration, 0);
+				game.dynStats("lib", 15, "resisted", false, "noBimbo", true);
+			}
+			return true;
+		}
 	}
 }

@@ -1670,18 +1670,8 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText("heat");
-					//Already in heat, intensify fertility further.
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					if (temp >= 0) {
-						player.statusAffect(temp).value1 += 5;
-						player.statusAffect(temp).value2 += 5;
-						player.statusAffect(temp).value3 += 48;
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					} else {
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-						dynStats("lib", 15, "resisted", false, "noBimbo", true);
-					}
+					
+					player.goIntoHeat(false);
 					changes++;
 				}
 				outputText("</b>.");
@@ -1934,19 +1924,8 @@ package classes.Scenes.NPCs
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
@@ -2016,19 +1995,8 @@ package classes.Scenes.NPCs
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
@@ -2136,19 +2104,8 @@ package classes.Scenes.NPCs
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
