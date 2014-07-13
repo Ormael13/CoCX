@@ -530,6 +530,15 @@ package classes.Scenes.NPCs
 			}*/
 
 			//[Normal Remeeting]
+			//Did the PC genderchange?  OH SHIT SON!
+			//Alternatively: get bitched at
+			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
+			//Stripped this out since it was making her flip out weirdly at genderless folks
+			//|| (player.gender == 0 && flags[kFLAGS.AMILY_AFFECTION] < 15)) {
+				doNext(amilyNewGenderConfrontation);
+				return;
+			}
+			
 			outputText("Curious on how Amily is holding up, you head back into the ruined village. This time you don't bother trying to hide your presence, hoping to attract Amily's attention quicker. After all, she did say that the place is basically empty of anyone except her, and you can otherwise handle a measly Imp or Goblin.\n\n", false);
 			//[Amily is not pregnant]
 			if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
@@ -581,14 +590,6 @@ package classes.Scenes.NPCs
 				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("She groans softly. \"<i>This isn't an easy task, you know. But I still want to thank you. Maybe, when these ones are born, you'll be willing to help me make some more?</i>\" She asks, her tail gently waving behind her.\n\n", false);
 				//[High Affection]
 				else outputText("\"<i>I should have known you were coming; they always start kicking up a storm when you're here – did you know that?</i>\" She smiles beatifically. \"<i>They know their daddy already, they do. With your help, a new generation of my people will have a chance to grow up free from the taint of demons. Was there something on your mind?</i>\"\n\n", false);
-			}
-			//Did the PC genderchange?  OH SHIT SON!
-			//Alternatively: get bitched at
-			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
-			//Stripped this out since it was making her flip out weirdly at genderless folks
-			//|| (player.gender == 0 && flags[kFLAGS.AMILY_AFFECTION] < 15)) {
-				doNext(amilyNewGenderConfrontation);
-				return;
 			}
 			//Sex / Talk / Talk then sex
 			var efficiency:Number = 0;
