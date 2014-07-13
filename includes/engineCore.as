@@ -296,7 +296,9 @@ public function levelUpGo(e:MouseEvent = null):void {
 
 public function perkBuyMenu():void {
 	outputText("", true);
+	
 	var perkList:Array = buildPerkList();
+	
 	if(perkList.length == 0) {
 		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
@@ -311,7 +313,14 @@ public function perkBuyMenu():void {
 		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
 		mainView.aCb.x = 210;
 		mainView.aCb.y = 108;
-		mainView.aCb.visible = true;
+		
+		//mainView.aCb.visible = true;
+		if (mainView.aCb.parent == null)
+		{
+			mainView.addChild(mainView.aCb);
+			mainView.aCb.visible = true;
+		}
+		
 		mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
 	}

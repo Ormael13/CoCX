@@ -1,4 +1,5 @@
 ﻿import coc.view.CoCButton;
+import coc.view.MainView;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -7,7 +8,8 @@ import flash.text.TextFormat;
 //MainMenu - kicks player out to the main menu
 public function mainMenu(e:MouseEvent = undefined):void 
 {
-
+	stage.focus = (mainView as MainView).mainText;
+	
 	if(CONFIG::debug)
 	{
 		CoC_Settings.debugBuild = true;
@@ -17,6 +19,10 @@ public function mainMenu(e:MouseEvent = undefined):void
 		CoC_Settings.debugBuild = false;
 	}
 
+	if (mainView.aCb.parent != null)
+	{
+		mainView.removeChild(mainView.aCb);
+	}
 
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;

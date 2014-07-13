@@ -343,17 +343,23 @@ public function doSystem(eventNo:Number):void {
 
 		case 114:
 			stage.focus = null;
-			mainView.aCb.visible = false;
-			applyPerk(tempPerk);
+			//mainView.aCb.visible = false;
+			if (mainView.aCb.parent != null)
+			{
+				mainView.removeChild(mainView.aCb);
+				applyPerk(tempPerk);
+			}
 			return;
-
 
 		case 115:
 			stage.focus = null;
-			mainView.aCb.visible = false;
-			eventParser(1);
+			//mainView.aCb.visible = false;
+			if (mainView.aCb.parent != null)
+			{
+				mainView.removeChild(mainView.aCb);
+				eventParser(1);
+			}
 			return;
-
 
 		case 116:
 			perkBuyMenu();
