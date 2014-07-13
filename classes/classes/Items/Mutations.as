@@ -7557,36 +7557,15 @@
 		public function kitsunesGift(player:Player):void
 		{
 			clearOutput();
-			if (inCombat()) {
-				outputText("You cannot use this item in combat.  ");
-				if (!debug) {
-					kGAMECLASS.itemSubMenu = true;
-					inventory.takeItem(consumables.KITGIFT);
-				}
-				return;
-			}
-			//Inventory Description:
-			//Sell Value: 1 gem (gives incentive to risk opening it)
-			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?");
-			//player.createStatusAffect(StatusAffects.Gotta_Open_Gift,0,0,0,0);
-			kitsuneGiftResult(false);
-
-		}
-
-		public function kitsuneGiftResult(clear:Boolean = true):void
-		{
-			if (clear)clearOutput();
-			else outputText("\n\n");
-			kGAMECLASS.itemSubMenu = true;
+			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?\n\n");
 			//Opening the gift randomly results in one of the following:
-			var choice:int = rand(10);
+			var choice:int = rand(12);
 			menuLoc = 28;
 			//[Fox Jewel]
 			if (choice == 0) {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
 				inventory.takeItem(consumables.FOXJEWL, false);
-				kGAMECLASS.supressGoNext = true;
 			}
 			//[Fox Berries]
 			else if (choice == 1) {
@@ -7594,7 +7573,6 @@
 				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 				//add Fox Berries to inventory
 				inventory.takeItem(consumables.FOXBERY, false);
-				kGAMECLASS.supressGoNext = true;
 			}
 			//[Gems]
 			else if (choice == 2) {
@@ -7604,7 +7582,6 @@
 				player.gems += gems;
 				//add X gems to inventory
 				statScreenRefresh();
-				doNext(1000);
 			}
 			//[Kitsune Tea/Scholar's Tea] //Just use Scholar's Tea and drop the "trick" effect if you don't want to throw in another new item.
 			else if (choice == 3) {
@@ -7612,7 +7589,6 @@
 				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
 				//add Kitsune Tea/Scholar's Tea to inventory
 				inventory.takeItem(consumables.SMART_T, false);
-				kGAMECLASS.supressGoNext = true;
 			}
 			//[Hair Dye]
 			else if (choice == 4) {
@@ -7627,7 +7603,6 @@
 				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
 				//add <color> Dye to inventory
 				inventory.takeItem(itype, false);
-				kGAMECLASS.supressGoNext = true;
 			}
 			//[Knowledge Spell]
 			else if (choice == 5) {
@@ -7636,7 +7611,6 @@
 				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 				//Increase INT and Libido, +10 LUST
 				dynStats("int", 4, "sen", 2, "lus", 10);
-				doNext(1000);
 			}
 			//[Thief!]
 			else if (choice == 6) {
@@ -7646,7 +7620,6 @@
 				// Lose X gems as though losing in battle to a kitsune
 				player.gems -= 2 + rand(15);
 				statScreenRefresh();
-				doNext(1000);
 			}
 			//[Prank]
 			else if (choice == 7) {
@@ -7655,7 +7628,6 @@
 				outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
 				//Advance time 1 hour, -20 LUST
 				dynStats("lus", -20);
-				doNext(1000);
 			}
 			//[Aphrodisiac]
 			else if (choice == 8) {
@@ -7663,29 +7635,23 @@
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
 				//+100 LUST
 				dynStats("lus=", 100, "resisted", false);
-				doNext(1000);
 			}
 			//[Wither]
 			else if (choice == 9) {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
-				// -15 STR and -15 TUF
 				dynStats("str", -5, "tou", -5);
-				doNext(1000);
 			}
 			//[Dud]
 			else if (choice == 10) {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.");
 				outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  What a ripoff!</b>");
-				doNext(1000);
 			}
 			//[Dud...  Or is it?]
 			else {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 				outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  At least you managed to salvage a shard of black chitin from it...</b>  ");
-				//add B. Chitin to inventory*/
 				inventory.takeItem(useables.B_CHITN, false);
-				kGAMECLASS.supressGoNext = true;
 			}
 		}
 
