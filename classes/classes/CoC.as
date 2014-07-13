@@ -337,8 +337,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.9";
-			version = ver + " (<b>Farm Corruption</b>)";
+			ver = "0.8.10";
+			version = ver + " (<b>Bugfix Rollup Edition</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
