@@ -54,7 +54,6 @@
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
 			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
@@ -77,11 +76,7 @@
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 4;
 			this.gems = rand(15) + 1;
-			this.drop = new WeightedDrop().add(consumables.BEEHONY,4)
-					.add(consumables.OVIELIX,1)
-					.addMany(1,consumables.W__BOOK,
-							useables.B_CHITN,
-							null,1);
+			this.drop = new WeightedDrop().add(consumables.BEEHONY,4).addMany(1,consumables.OVIELIX,consumables.W__BOOK,useables.B_CHITN,null);
 			this.antennae = ANTENNAE_BEE;
 			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
