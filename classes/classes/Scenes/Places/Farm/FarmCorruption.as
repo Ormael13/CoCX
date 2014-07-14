@@ -1743,7 +1743,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("Whitney is in front of you before you’ve finished calling her name.");
 
-				outputText("\n\n“<i>Yes, [master]?</i>” she husks, staring hungrily into your eyes. A state of nervous energy, the sense she’s only barely controlling the urge to grab you with great effort, never leaves her. “<i>Business? Or pleasure.</i>”");
+				outputText("\n\n“<i>Yes, [name]?</i>” she husks, staring hungrily into your eyes. A state of nervous energy, the sense she’s only barely controlling the urge to grab you with great effort, never leaves her. “<i>Business? Or pleasure.</i>”");
 			}
 			else if (output)
 			{
@@ -2210,7 +2210,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\n“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around your [eachCock], dazed with dick.");
 
-				outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
+				outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you, [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
 
 				if(player.cocks.length > 2)
 				{
@@ -2290,7 +2290,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Stop,</i>” you murmur. There’s a reluctant popping sound. Whitney’s big brown eyes take a while to focus on you around [eachCock], dazed with dick.");
 
-			outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
+			outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you, [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
 
 			if (player.cocks.length >= 2)
 			{
@@ -2355,7 +2355,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Alright. Put your hands out in front of you, bend them. Back straight. Good. Now repeat after me: Please [master], may I suck your cock?</i>”");
 
-			outputText("\n\n“<i>Please [master] may I suck your cock,</i>” says Whitney feverishly, blurring the words together, her soulful, needy gaze never leaving yours as she begs in front of you. You lean back and take time to consider it.");
+			outputText("\n\n“<i>Please [master], may I suck your cock,</i>” says Whitney feverishly, blurring the words together, her soulful, needy gaze never leaving yours as she begs in front of you. You lean back and take time to consider it.");
 
 			outputText("\n\n“<i>Very well,</i>” you say coolly. “<i>But next time you will say it clearer. Begin.</i>”");
 
@@ -2988,7 +2988,7 @@ package classes.Scenes.Places.Farm
 		{
 			outputText("You are slightly apprehensive about this, but you’ve gone to the trouble of crafting Whitney into a fairly unique slave, and it seems churlish not to test just how deep the dominating streak you’ve brought out in her goes. You tell her you could do with a bit of relaxation.");
 
-			outputText("\n\n“<i>Of course, [master]. Relaxation,</i>” murmurs Whitney. She drops a heavy tonal wink over her last two words as she entwines her arm around yours. “<i>Perhaps you’d like to come inside my house? Been making one or two, mmm, adjustments I’d like you to see.</i>” She may be quite petite but it strikes you how strong a lifetime of physical labor has made her; it feels like a small, hot bundle of rope wrapped around your arm which is leading you up the board steps and through the door of Whitney’s farmhouse.");
+			outputText("\n\n“<i>Of course, [name]. Relaxation,</i>” murmurs Whitney. She drops a heavy tonal wink over her last two words as she entwines her arm around yours. “<i>Perhaps you’d like to come inside my house? Been making one or two, mmm, adjustments I’d like you to see.</i>” She may be quite petite but it strikes you how strong a lifetime of physical labor has made her; it feels like a small, hot bundle of rope wrapped around your arm which is leading you up the board steps and through the door of Whitney’s farmhouse.");
 
 			outputText("\n\nHer front rooms are pretty much what you expected- sparsely but cosily furnished, polished wood and burnished iron much in evidence- but Whitney is not interested in giving you a tour. She leads you upstairs, opens the door to her bedroom and, with a wide, toothy grin, directs you to have a look inside. ");
 
@@ -3126,7 +3126,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nIt’s only after these enforced cuddles that Whitney finally undoes your clasps and lets you get up. She watches you dress with heavy-lidded satisfaction and sighs wistfully as you get up and head to the door. But one session at a time with this creature you’ve created is about as much as you think you can physically take.");
 
-			outputText("\n\n“<i>I hope you feel suitably relaxed, [master],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
+			outputText("\n\n“<i>I hope you feel suitably relaxed, [name],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 
 			player.orgasm();
 
@@ -3252,7 +3252,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou’d like to rest longer, but you can’t. With some difficulty you get the dog woman to let go of you, put your clothes back on and head to the door, walking with a distinctly knock-kneed gait. She laughs softly as she watches you go.");
 
-			outputText("\n\n“<i>I hope you feel suitably relaxed, [master],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
+			outputText("\n\n“<i>I hope you feel suitably relaxed, [name],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 
 			player.orgasm();
 			doNext(13);
@@ -3385,7 +3385,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\nShe watches you dress and sighs wistfully as you get up and head to the door. But one session at a time with this creature you’ve managed to create is about as much as you think you can physically take. The marks from this encounter will be with you for a while.");
 
-				outputText("\n\n“<i>I hope you feel suitably relaxed, [master],” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
+				outputText("\n\n“<i>I hope you feel suitably relaxed, [name],” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 				
 				player.orgasm();
 			}
@@ -3402,7 +3402,7 @@ package classes.Scenes.Places.Farm
 			{
 				outputText("You idly put an arm around Whitney, drawing her into you. You want her in the right frame of mind before you lead her down this path of inquiry. Her breath is hot and heavy against your [chest], her desire-lit eyes unable to tear away from yours as your hand slides down the curve of her back and round around her enjoyably tight ass. You ask her what she knows about branding.");
 
-				outputText("\n\n“<i>I don’t brand my herd, [master],</i>” she says in a low voice, as you smooth your hand upwards and slip your fingers underneath her skirt. “<i>’s a very cruel practice and without any other farms round there’s no need for it anyway.</i>” But surely she must know of ways to mark cattle, you go on. Ways to make it immediately clear who owns them. You put not-so-subtle emphases on certain words as you touch her sopping vagina, slipping two fingers in easily. “<i>Mayhap... mayhap I do, [master],</i>” the dog woman groans, her breath coming in gulps and hisses as your digits move in her warm wetness. “<i>Somethin’, somethin’ from my granddaddy’s day. If you give me 500 gems and some time, I could... go and make a few things happen...</i>”");
+				outputText("\n\n“<i>I don’t brand my herd, [name],</i>” she says in a low voice, as you smooth your hand upwards and slip your fingers underneath her skirt. “<i>’s a very cruel practice and without any other farms round there’s no need for it anyway.</i>” But surely she must know of ways to mark cattle, you go on. Ways to make it immediately clear who owns them. You put not-so-subtle emphases on certain words as you touch her sopping vagina, slipping two fingers in easily. “<i>Mayhap... mayhap I do, [name],</i>” the dog woman groans, her breath coming in gulps and hisses as your digits move in her warm wetness. “<i>Somethin’, somethin’ from my granddaddy’s day. If you give me 500 gems and some time, I could... go and make a few things happen...</i>”");
 
 				menu();
 				if (player.gems >= 500) addButton(0, "Do it", getBrandingStuff);
@@ -3771,7 +3771,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("You stroke at her tiny bulging button until you adjudge she’s on the edge, before withdrawing your hand completely. Maybe some other time, you say airily.");
 
-			outputText("\n\n“<i>Oh [master],</i>” groans Whitney, in a tone of deepest exasperation, her hands between her thighs.");
+			outputText("\n\n“<i>Oh "+(whitneyDom())?"[name]":"[master]"+",</i>” groans Whitney, in a tone of deepest exasperation, her hands between her thighs.");
 			if (whitneyDom()) outputText(" “<i>You’ll pay for that later, I swear!</i>”");
 			outputText(" Grinning, you turn and leave.");
 
@@ -3792,7 +3792,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Then we take some of the paper and press it on to seal it... like so...</i>” There’s a faint hissing sound as Whitney covers the 12 with the white sheet, but again the cow barely seems to notice. When she peels it off she gestures for you to take a look for yourself. This is probably the first and hopefully the last time you inspect a cow’s backside so scrupulously but you can only be impressed by what you see - the number is dried and apparently ingrained deep into the heavy flesh, resisting your own attempts to rub it off easily. This will suit your own purposes perfectly.");
 
-			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses and looks at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [master]?</i>”");
+			outputText("\n\n“<i>S’long as you know what you want and move yer finger carefully, you can tattoo anything on anything,</i>” says Whitney. “<i>‘S much easier to do than brandin’, and it’s magic that lasts for years an’ years.</i>” She pauses and looks at you with a sly, knowing grin. “<i>Perhaps you’d like to test it out for yourself, [name]?</i>”");
 
 			flags[kFLAGS.QUEUE_BRANDING_AVAILABLE_TALK] = 0;
 
