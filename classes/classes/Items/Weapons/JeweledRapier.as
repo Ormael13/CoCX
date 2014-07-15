@@ -17,7 +17,7 @@ package classes.Items.Weapons
 
 		public function JeweledRapier()
 		{
-			super("JRapier","JRapier","jeweled rapier","a jeweled rapier","slash",13,1400,"This jeweled rapier is ancient but untarnished.  The hilt is wonderfully made, and fits your hand like a tailored glove.  The blade is shiny and perfectly designed for stabbing.");
+			super("JRapier","JRapier","jeweled rapier","a jeweled rapier","piercing stab",13,1400,"This jeweled rapier is ancient but untarnished.  The hilt is wonderfully made, and fits your hand like a tailored glove.  The blade is shiny and perfectly designed for stabbing.");
 		}
 	}
 }

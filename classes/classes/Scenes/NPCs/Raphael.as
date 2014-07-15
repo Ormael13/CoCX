@@ -587,7 +587,7 @@ private function RaphaelPicnicSkill():void {
 
 		outputText("Only a minute later do you take the chance to stand still and feel the weapon within your grasp.  The hilt cups your hand and you look down upon the weapon standing away from your body with admiration.  When you run a proud finger along its firm length, you shiver.  You could get used to the idea of being a cheeky lady fencer, free and in control.\n\n", false);
 
-		outputText("<i>\"Magnefique.\"</i> Raphael comments, pleased.  <i>\"You could use some work on how to wield it properly, but only because you weren't born with one in hand like I was.\"</i> He smiles, saunters closer to you and releases the rapier from your intoxicated grip by fondling your fingers.  <i>\"You still need a master to show you how to thrust and parry properly.\"</i>\n\n", false);
+		outputText("<i>\"Magnifique.\"</i> Raphael comments, pleased.  <i>\"You could use some work on how to wield it properly, but only because you weren't born with one in hand like I was.\"</i> He smiles, saunters closer to you and releases the rapier from your intoxicated grip by fondling your fingers.  <i>\"You still need a master to show you how to thrust and parry properly.\"</i>\n\n", false);
 		
 		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 2;

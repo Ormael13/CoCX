@@ -1411,8 +1411,9 @@ public function attack():void {
 	}
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
+	//Add in enemy armor if needed. Rapiers and spears ignore this step since they are piercing weapons.
+	//MMM - Will make things much easier to check in the future if more weapons of this kind are implemented. 
+	if (player.weaponName.indexOf("rapier") < 0 && player.weaponName.indexOf("spear") < 0) {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
 		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
