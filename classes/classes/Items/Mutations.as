@@ -657,7 +657,7 @@
 				}
 			}
 			//Males go into rut
-			if (player.totalCocks() > 0 && rand(4) == 0) {
+			if (rand(4) == 0) {
 				player.goIntoRut(true);
 			}
 			//Anti-masturbation status
