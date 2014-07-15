@@ -1986,19 +1986,19 @@ use namespace kGAMECLASS;
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
 				}
-				game.dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				temp = findStatusAffect(StatusAffects.Heat);
 				statusAffect(temp).value1 += 5 * intensificationIfOngoing;
 				statusAffect(temp).value2 += 5 * intensificationIfOngoing;
 				statusAffect(temp).value3 += 48 * intensificationIfOngoing;
+				game.dynStats("lib", 5 * intensificationIfOngoing, "resisted", false, "noBimbo", true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			else {
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 				}
-				game.dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				createStatusAffect(StatusAffects.Heat, fertilityStrength, libidoStrength, duration, 0);
+				game.dynStats("lib", libidoStrength, "resisted", false, "noBimbo", true);
 			}
 			return true;
 		}
