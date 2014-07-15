@@ -111,7 +111,7 @@ public function customPCSetup():void {
 		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
 		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
 		
-		player.goIntoHeat(false, 0, 96);
+		player.goIntoHeat(false, 2);
 		
 		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
 		

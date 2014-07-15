@@ -2005,7 +2005,7 @@
 			}
 			//Go into heat
 			if (rand(2) == 0 && changes < changeLimit) {
-        if(player.goIntoHeat(true, 1, 72)) {
+        if(player.goIntoHeat(true)) {
           changes++;
         }
 			}
@@ -3680,7 +3680,7 @@
 			//Heat/Rut for those that can have them if "fuck draft"
 			if (fuck) {
 				//Try to go into intense heat.
-        player.goIntoHeat(true, 2, 96, 20, 20);
+        player.goIntoHeat(true, 2);
 				//Males go into rut
 				player.goIntoRut(true);
 			}
@@ -4446,7 +4446,7 @@
 			outputText("", true);
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
 			//Try to go into intense heat
-      if(player.goIntoHeat(true, 2, 96, 20, 20)) {
+      if(player.goIntoHeat(true, 2)) {
         changes++;
       }
 			//Males go into rut
