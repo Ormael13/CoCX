@@ -2896,6 +2896,10 @@ import classes.PerkType;
 		public function get inHeat():Boolean {
 			return findStatusAffect(StatusAffects.Heat) >= 0;
 		}
+		
+		public function get inRut():Boolean {
+			return findStatusAffect(StatusAffects.Rut) >= 0;
+		}
 
 		public function bonusFertility():Number
 		{

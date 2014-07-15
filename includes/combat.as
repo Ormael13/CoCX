@@ -1594,7 +1594,7 @@ public function goreAttack():void {
 			outputText("You lower your head and charge, slamming into " + monster.a + monster.short + " and burying both your horns into " + monster.pronoun2 + "!  ", false);
 		}
 		//Bonus damage for rut!
-		if(player.findStatusAffect(StatusAffects.Rut) >= 0 && monster.cockTotal() > 0) {
+		if(player.inRut && monster.cockTotal() > 0) {
 			outputText("The fury of your rut lent you strength, increasing the damage!  ", false);
 			damage += 5;
 		}
@@ -2082,7 +2082,7 @@ public function combatStatusesUpdate():void {
 		outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ", false);
 		outputText("If you don't end this quickly you'll give in to your heat.\n\n", false);
 	}
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && player.totalCocks() > 0 && monster.hasVagina()) {
+	if(player.inRut && player.totalCocks() > 0 && monster.hasVagina()) {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		if(player.totalCocks() > 1) outputText("Each of y", false);
 		else outputText("Y", false);
@@ -2757,7 +2757,7 @@ public function tease(justText:Boolean = false):void {
 		}
 	}
 	//23 RUT
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && monster.hasVagina() && player.hasCock()) {
+	if(player.inRut && monster.hasVagina() && player.hasCock()) {
 		choices[choices.length] = 23;
 		choices[choices.length] = 23;
 		choices[choices.length] = 23;
@@ -4887,7 +4887,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Rut doesnt let you run from dicks.
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0 && monster.totalCocks() > 0) {
+	if(player.inRut && monster.totalCocks() > 0) {
 		outputText("The thought of another male in your area competing for all the pussy infuriates you!  No way will you run!", true);
 		menuLoc = 3;
 		doNext(5000);

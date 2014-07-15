@@ -1300,7 +1300,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Rut-check!
 		//Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
-		if(player.findStatusAffect(StatusAffects.Rut) >= 0)
+		if(player.inRut)
 		{
 			trace("RUT:" + player.statusAffectv3(StatusAffects.Rut));
 			if(player.statusAffectv3(StatusAffects.Rut) <= 1 || player.totalCocks() == 0)
@@ -2197,7 +2197,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				emberScene.emberRapesYourHeatness();
 				return true;
 			}
-			else if(emberScene.followerEmber() && player.hasCock() && player.findStatusAffect(StatusAffects.Rut) >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.findStatusAffect(StatusAffects.EmberFuckCooldown) < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
+			else if(emberScene.followerEmber() && player.hasCock() && player.inRut && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.findStatusAffect(StatusAffects.EmberFuckCooldown) < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
 				emberScene.emberRapesYourHeatness();
 				return true;
 			}

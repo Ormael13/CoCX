@@ -48,7 +48,7 @@ package classes.Scenes.Areas.HighMountains
 		public function actsLikeACow():Boolean
 		{
 			if (player.inHeat) return true;
-			if (player.findStatusAffect(StatusAffects.Rut)) return true;
+			if (player.inRut) return true;
 			if (player.findStatusAffect(StatusAffects.Dysfunction)) return true;
 			return false;
 		}

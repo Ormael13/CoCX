@@ -2010,7 +2010,7 @@ use namespace kGAMECLASS;
 			}
 			
 			//Has rut, intensify it!
-			if (findStatusAffect(StatusAffects.Rut) >= 0) {
+			if (inRut) {
 				if(intensificationIfOngoing == 0) {
 					return false;
 				}
