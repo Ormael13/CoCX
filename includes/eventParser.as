@@ -2307,10 +2307,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 				return true;
 			}
-			else if(player.viridianChange()) {
-				fuckedUpCockDreamChange();
-				return true;
-			}
 			//Randomly generated dreams here
 			else if((player.lib > 50 || player.lust > 40) && model.time.hours == 3) 
 			{
