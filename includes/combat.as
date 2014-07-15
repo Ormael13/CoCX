@@ -5469,27 +5469,27 @@ public function kitsuneIllusion():void {
 		if(monster.spe >= 0) monster.spe -= 20;
 		//Lust vulnerability handler: Replaces the old, useless handler, while still preventing Illusion from being overpowered.
 		//Enemy is immune. They won't enter the trickster.
-		if (monster.lustVuln <= 0) outputText("  You focus as hard as you can and attempt to lure them into a world of ecstasy, but it's a complete waste of time. They don't seem to feel anything at all.\n\n");
+		if (monster.lustVuln <= 0) outputText("You focus as hard as you can and attempt to lure them into a world of ecstasy, but it's a complete waste of time. They don't seem to feel anything at all.\n\n");
 		//If lust vulnerability already is 100% or more, don't try anything funny.
-		else if (monster.lustVuln >= 1) outputText("  They literally are entranced by the dancing forms. Smiling coyly, you sense they're already as vulnerable as they can be to your lusty assaults.\n\n");
+		else if (monster.lustVuln >= 1) outputText("They literally are entranced by the dancing forms. Smiling coyly, you sense they're already as vulnerable as they can be to your lusty assaults.\n\n");
 		else {
 			// ENTER THE LUSTY TRICKSTER
-			if (monster.lustVuln >= 0.5) outputText("  They don't seem so reluctant to enter the trickster dance, ready to fall prey to your spell. With a broad smile, you channel even more energy and intensify their cravings for sex!\n\n");
-			else outputText("  You grin mischievously. It's almost like they're forced to enter the trickster dance against their own will. They strive hard to resist your magic, but you can still tell they've grown slightly weaker to desire!\n\n");
+			if (monster.lustVuln >= 0.5) outputText("They don't seem so reluctant to enter the trickster dance, ready to fall prey to your spell. With a broad smile, you channel even more energy and intensify their cravings for sex!\n\n");
+			else outputText("You grin mischievously. It's almost like they're forced to enter the trickster dance against their own will. They strive hard to resist your magic, but you can still tell they've grown slightly weaker to desire!\n\n");
 			// Base +5% Lust Vulnerability.
 			monster.lustVuln += 0.05;
 			// So pure! Extra +10% Lust Vulnerability.
 			if (player.cor == 0)
 			{
-				outputText("  As a perfectly pure entity, your projections were bound to have a considerable impact.");
+				outputText("As a perfectly pure entity, your projections were bound to have a considerable impact. ");
 				monster.lustVuln += 0.1;
 				if (player.level > 20)
 				{
 					//Extra +15% Lust Vulnerability. Illusion mastery GET!
-					outputText(" Your mastery allowed you to create such a beautiful and enthralling world you'd almost fall for it yourself. You smile in contemplation as the eerie illusion slowly fades away.\n\n");
+					outputText("Your mastery allowed you to create such a beautiful and enthralling world you'd almost fall for it yourself. You smile in contemplation as the eerie illusion slowly fades away.\n\n");
 					monster.lustVuln += 0.15;
 				}
-				else outputText("You feel you might even be able to get closer to your true power with some more experience...\n\n");
+				else outputText("You feel like you might even be able to get closer to your true power with some more experience...\n\n");
 			}
 			//Cap to 100% Lust Vulnerability, but only if the target didn't have more than that before.
 			if (monster.lustVuln > 1) monster.lustVuln = 1;
