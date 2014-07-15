@@ -630,10 +630,11 @@
 					changes++;
 				}
 			}
-			//Morph dick to horsediiiiick
+			//Morph dick to horsedick
+			//Prevent duplicate declaration warnings on compile
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-				var selectedCock:int = -1;
-				for (var i:int = 0; i < player.cocks.length; i++)
+				selectedCock = -1;
+				for (i = 0; i < player.cocks.length; i++)
 				{
 					if (player.cocks[i].cockType != CockTypesEnum.HORSE)
 					{
