@@ -993,7 +993,7 @@ public function updatePregnancy():Boolean {
 				outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  ", false);
 				if(player.cor < 40) outputText("Afterwards you feel somewhat disgusted with yourself, but horny.</b>\n", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("You estimate you'll give birth in the next few days.  You hope the birth is as erotically charged as the pregnancy has been.</b>\n", false);
-				if(player.cor >= 75) outputText("You find yourself daydreaming about about birthing cilia-covered worms, orgasming each time their thousands of stingers brush by your clit and fill it full of sensation-enhancing drugs.</b>\n", false);
+				if(player.cor >= 75) outputText("You find yourself daydreaming about birthing cilia-covered worms, orgasming each time their thousands of stingers brush by your clit and fill it full of sensation-enhancing drugs.</b>\n", false);
 				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", (10+player.lib/20));
 				displayedUpdate = true;
 			}

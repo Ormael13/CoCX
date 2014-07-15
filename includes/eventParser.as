@@ -1229,7 +1229,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.removePerk(PerkLib.Oviposition);
 			}
 			else if(player.bunnyScore() < 3 && player.findPerk(PerkLib.BunnyEggs) >= 0) {
-				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
+				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
 				needNext = true;
 				player.removePerk(PerkLib.BunnyEggs);
 			}

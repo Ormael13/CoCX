@@ -760,7 +760,7 @@ private function arianStoryDialogue1():void {
 	
 	outputText("\n\n\"<i>So you can imagine how thrilled I was to get not one, but two people who would have to pay attention to every single instruction I gave them.</i>\"  Arian looks down, a slight tinge of regret on [Arian eir] face.  \"<i>I was pretty mean at first.  I wound up taking my frustrations out on them, but thankfully they found it in their hearts to forgive me.  We've been very close ever since.</i>\"  Arian smiles.");
 	outputText("\n\nYou tell him that it's good to hear they got to know each other properly; is that why Arian gave particular attention to ensuring they escaped when [Arian eir] academy was attacked?");
-	outputText("\n\nArian shakes [Arian eir] head.  \"<i>Not exactly.  It was my intention to defeat all of the invading demons; I was arrogant and it cost me greatly.  I only managed to save Boon and Laika because they were the closest to me when the wave of dark magic hit us.  I used much of my power and concentration to resist the the wave's effects... it was brutal.</i>\"");
+	outputText("\n\nArian shakes [Arian eir] head.  \"<i>Not exactly.  It was my intention to defeat all of the invading demons; I was arrogant and it cost me greatly.  I only managed to save Boon and Laika because they were the closest to me when the wave of dark magic hit us.  I used much of my power and concentration to resist the wave's effects... it was brutal.</i>\"");
 	
 	outputText("\n\nDoes that have something to do why he's so frail now - the stress of shielding himself and [Arian eir] apprentices from the demons' black magic?");
 	
@@ -3903,7 +3903,7 @@ public function arianLaysEggs():void {
 	
 	outputText("\n\nYou nod your head, and begin sorting through the eggs.  Most of them look like common eggs, not that much different from large chicken eggs.  Eventually, you find one that seems to be appropriate.  Separating this egg from the others, you check one more time and find out that Arian only managed to lay one " + color + " egg.  Still, that's good enough for you.  You take the egg and turn to place it gently on the nearby counter.  When you turn to check up on Arian though you spot the lizan, casually lifting one of the \"<i>normal</i>\" eggs, sizing it up.");
 	
-	outputText("\n\nArian pays no attention to you, instead hungrily inspecting her just-laid egg.  A trickle of drool oozes out of of the corner of her mouth and is lapped up with a quick flick of a long tongue before she opens her jaws and crams the whole egg inside.  She mouths it around before she manages to puncture it, audibly sucking out the insides before spitting the crushed but still-intact eggshell out into her hand.  She grabs another and gobbles it down with the same eagerness as before, spitting out the shell after sucking out the contents.");
+	outputText("\n\nArian pays no attention to you, instead hungrily inspecting her just-laid egg.  A trickle of drool oozes out of the corner of her mouth and is lapped up with a quick flick of a long tongue before she opens her jaws and crams the whole egg inside.  She mouths it around before she manages to puncture it, audibly sucking out the insides before spitting the crushed but still-intact eggshell out into her hand.  She grabs another and gobbles it down with the same eagerness as before, spitting out the shell after sucking out the contents.");
 	
 	outputText("\n\nYou cough, trying to remind the hungry lizan before you, that you're still in the room...");
 	
