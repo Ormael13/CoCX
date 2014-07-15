@@ -3,9 +3,9 @@
 
 package classes.GlobalFlags
 {
-	public class kFLAGS
-	{
-	public static const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
+public class kFLAGS
+{
+public static const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0; // DISCOVERED: Never used. LOL.
 public static const MARBLE_PREGNACY_INCUBATION:int                                  =    1; // Marble Pregnancy Incubation
 public static const MARBLE_PREGNACY_TYPE:int                                        =    2; // Marble Pregnancy Type" Description="1 = cowgirl
 public static const MARBLE_LUST:int                                                 =    3; // Marble Lust
@@ -173,9 +173,9 @@ public static const AMILY_PC_GENDER:int                                         
 public static const AMILY_HERM_QUEST:int                                            =  165; //  1=amily flipped out, 2=accepted as amily's dad1=Amily Flipped Out, 2=Accepted As Amily'S Dad
 public static const AMILY_ALLOWS_FERTILITY:int                                      =  166; // 
 public static const LIFETIME_GYM_MEMBER:int                                   =  167; // Permanent Gym Membership? (1 = yes)
-public static const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet?
+public static const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet? 0=no 1=POTENT MIXTURE GO
 public static const UNKNOWN_FLAG_NUMBER_00169:int                                   =  169; // Times cooked Amily's Drug
-public static const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Amily's Corruption Value
+public static const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Requires Potent Mixture ^. 0-1-2=Stalking steps. 3+ = BRACE FOR IMPACT. 
 public static const AMILY_HAS_BALLS_AND_SIZE:int                                    =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
 public static const UNKNOWN_FLAG_NUMBER_00173:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.	0=Not freaked out, 1=Freaked out

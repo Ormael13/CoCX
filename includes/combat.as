@@ -3292,34 +3292,34 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//32 Genderless servant clothes
 		case 32:
-			outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.", false);
+			outputText("You turn your back to your " + monster.mf("master","mistress") + " and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.", false);
 			ass = true;
 			chance++;
 			damage += 2;
 			break;
 		//33 Crotch Revealing Clothes (herm only?)
 		case 33:
-			outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + player.mf("master","mistress") + " is looking to sample what is on display.", false);
+			outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + monster.mf("master","mistress") + " is looking to sample what is on display.", false);
 			chance += 2;
 			damage += 4;
 			break;
 		//34 Maid Costume (female only)
 		case 34:
-			outputText("You give a rather explicit curtsey towards " + monster.a + monster.short + " and ask them if your " + player.mf("master","mistress") + " is interested in other services today.", false);
+			outputText("You give a rather explicit curtsey towards " + monster.a + monster.short + " and ask them if your " + monster.mf("master","mistress") + " is interested in other services today.", false);
 			chance ++;
 			damage += 2;
 			breasts = true;
 			break;
 		//35 Servant Boy Clothes (male only)
 		case 35:
-			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if, " + player.mf("Master","Mistress") + " would like you to use your " + multiCockDescriptLight() + " on them?", false);
+			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if " + monster.mf("Master","Mistress") + " would like you to use your " + multiCockDescriptLight() + " on them?", false);
 			penis = true;
 			chance++;
 			damage += 2;
 			break;
 		//36 Bondage Patient Clothes (done):
 		case 36:
-			outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care, feeling up for it?</i>\" you tease.", false);
+			outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care; feeling up for it, " + monster.mf("master","mistress") + "?</i>\" you tease.", false);
 			damage+= 2;
 			chance++;
 			break;
