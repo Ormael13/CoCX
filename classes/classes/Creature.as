@@ -3355,9 +3355,9 @@ import classes.PerkType;
 		{
 			if (findPerk(PerkLib.BigCock) >= 0)
 				increase *= perk(findPerk(PerkLib.BigCock)).value1;
-			if (findPerk(PerkLib.PhallicPotential) >= 0)
+			if (cocks[cockNum].sock == "scarlet")
 				increase *= 1.5;
-			if (findPerk(PerkLib.PhallicRestraint) >= 0)
+			if (cocks[cockNum].sock == "cobalt")
 				increase *= .25;
 			return cocks[cockNum].growCock(increase);
 		}

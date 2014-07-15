@@ -700,41 +700,73 @@ private function cockSockTarget(target:int):void {
 //Yes
 private function yesPutDatSockOnMe(target:int):void {
 	clearOutput();
+
+	var conflict:Boolean = false;
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") {
-		if(player.findPerk(PerkLib.MidasCock) < 0) player.createPerk(PerkLib.MidasCock,0,0,0,0);
-		player.gems -= 3000;
+		if(player.findPerk(PerkLib.MidasCock) < 0) {
+			player.createPerk(PerkLib.MidasCock,0,0,0,0);
+			player.gems -= 3000;
+		}
+		else {
+			conflict = true;
+		}
 	}
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;
-		if(player.findPerk(PerkLib.PhallicRestraint) < 0) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
+		// if(player.findPerk(PerkLib.PhallicRestraint) < 0) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
 	}
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
-		if(player.findPerk(PerkLib.PhallicPotential) < 0) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
+		//if(player.findPerk(PerkLib.PhallicPotential) < 0) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
 		player.gems -= 250;
 	}
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
-		if(player.findPerk(PerkLib.LustyRegeneration) < 0) player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
-		player.gems -= 1000;
+		if(player.findPerk(PerkLib.LustyRegeneration) < 0) {
+			player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
+			player.gems -= 1000;
+		}
+		else {
+			conflict = true;
+		}
 	}
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
 		if(player.findPerk(PerkLib.PentUp) < 0) player.createPerk(PerkLib.PentUp,10,0,0,0);
 		else player.addPerkValue(PerkLib.PentUp,1,5);
 	}
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "alabaster") player.gems -= 25;
+
 	if(flags[kFLAGS.SOCK_HOLDING] == "wool") player.gems -= 10;
-	player.cocks[target].sock = flags[kFLAGS.SOCK_HOLDING];
-	statScreenRefresh();
-	outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(target) + ", and she licks her lips.  With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
+
+	outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(target) + ", and she licks her lips.  ");
+
+	if (!conflict) { // There's no conflict. DO IT!!!
+		player.cocks[target].sock = flags[kFLAGS.SOCK_HOLDING];
+		statScreenRefresh();
+
+		outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
 	
-	outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + cockHead(target) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
+		outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + cockHead(target) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
 	
-	outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
-	//(Cock-sock get! +5 Corruption, +5 Arousal)
-	dynStats("lus", 5, "cor", 2);
-	menu();
-	addButton(0,"Next",gretasGarments);
+		outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
+		//(Cock-sock get! +2 Corruption, +5 Arousal)
+		dynStats("lus", 5, "cor", 2);
+		menu();
+		addButton(0,"Next",gretasGarments);
+	}
+	else { // Conflict! NOOOOO! Pull up! Pull up!
+
+		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"")
+		menu();
+		addButton(0,"Next",gretasGarments);		
+	}
 }
 
 private function noCockSock():void {
