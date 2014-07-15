@@ -5424,10 +5424,10 @@ public function kitsuneTerror():void {
 	enemyAI();
 }
 
-//Illusion
+//Illusion V2
 public function kitsuneIllusion():void {
 	clearOutput();
-	//Fatigue Cost: 25
+	//Base Fatigue Cost: 25.
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > 100) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
@@ -5438,29 +5438,64 @@ public function kitsuneIllusion():void {
 		doNext(5160);
 		return;
 	}
+	//Waste a turn and 20 fatigue (instead of 25 as the PC gets interrupted) against worms.
+	if(monster.short == "worms") {
+		outputText("As you concentrate to materialize the illusion, a loud 'plop' emerges from the slimy mass, breaking your focus. The worms clearly have no imagination and you've just wasted a turn!\n\n", true);
+		changeFatigue(20);
+		enemyAI();
+		return;
+	}
+	//Save fatigue but waste a turn against pod or dense foes. Fixed pod-only description.
 	if(monster.short == "pod" || monster.inte == 0) {
-		outputText("In the tight confines of this pod, there's no use making such an attack!\n\n", true);
-		changeFatigue(1);
+		outputText("You quickly notice that such an ability would be pointless in this situation and come back to your senses. However, the enemy still finds enough time to take advantage of your frustration!\n\n", true);
 		enemyAI();
 		return;
 	}
 	menuLoc = 0;
-	fatigue(25,1);
+	fatigue(25, 1);
+	//Waste a turn and full fatigue cost if target has Shell.
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		enemyAI();
 		return;
 	}
-	//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
+	//Decrease enemy speed and attempt to increase their susceptibility to lust attacks.
 	outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
 	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster.
+	//Keep randomness to prevent OP.
 	if(player.inte/10 + rand(20) > monster.inte/10 + 9) {
-	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
+		//Reduce speed down to -20.
 		outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
 		if(monster.spe >= 0) monster.spe -= 20;
-		if(monster.lustVuln >= 1.1) monster.lustVuln += .1;
+		//Lust vulnerability handler: Replaces the old, useless handler, while still preventing Illusion from being overpowered.
+		//Enemy is immune. They won't enter the trickster.
+		if (monster.lustVuln <= 0) outputText("  You focus as hard as you can and attempt to lure them into a world of ecstasy, but it's a complete waste of time. They don't seem to feel anything at all.\n\n");
+		//If lust vulnerability already is 100% or more, don't try anything funny.
+		else if (monster.lustVuln >= 1) outputText("  They literally are entranced by the dancing forms. Smiling coyly, you sense they're already as vulnerable as they can be to your lusty assaults.\n\n");
+		else {
+			// ENTER THE LUSTY TRICKSTER
+			if (monster.lustVuln >= 0.5) outputText("  They don't seem so reluctant to enter the trickster dance, ready to fall prey to your spell. With a broad smile, you channel even more energy and intensify their cravings for sex!\n\n");
+			else outputText("  You grin mischievously. It's almost like they're forced to enter the trickster dance against their own will. They strive hard to resist your magic, but you can still tell they've grown slightly weaker to desire!\n\n");
+			// Base +5% Lust Vulnerability.
+			monster.lustVuln += 0.05;
+			// So pure! Extra +10% Lust Vulnerability.
+			if (player.cor == 0)
+			{
+				outputText("  As a perfectly pure entity, your projections were bound to have a considerable impact.");
+				monster.lustVuln += 0.15;
+				if (player.level > 20)
+				{
+					//Extra +15% Lust Vulnerability. Illusion mastery GET!
+					outputText(" Your mastery allowed you to create such a beautiful and enthralling world you'd almost fall for it yourself. You smile in contemplation as the eerie illusion slowly fades away.\n\n");
+					monster.lustVuln += 0.1;
+				}
+				else outputText("You feel you might even be able to get closer to your true power with some more experience...\n\n");
+			}
+			//Cap to 100% Lust Vulnerability, but only if the target didn't have more than that before.
+			if (monster.lustVuln > 1) monster.lustVuln = 1;
+		}
 	}
-	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");
+	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations. You frown in disappointment, well aware what you were trying to accomplish wasn't such an easy task.\n\n");
 	enemyAI();
 }
 
