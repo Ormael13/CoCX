@@ -1651,21 +1651,8 @@ package classes.Scenes.NPCs
 				outputText("... too late, you realize that <b>Ember's blood has sent your draconic body into ");
 				if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 					outputText("rut");
-					//Rut affects:
-					//v1 - bonus cum production
-					//v2 - bonus libido
-					//v3 - time remaining!
-					//Has rut, intensify it!
-					if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-						player.addStatusValue(StatusAffects.Rut, 1, 100);
-						player.addStatusValue(StatusAffects.Rut, 2, 5);
-						player.addStatusValue(StatusAffects.Rut, 3, 48);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
-					else {
-						player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
+					
+					player.goIntoRut(false);
 					changes++;
 				}
 				else {
@@ -1906,21 +1893,8 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
@@ -1977,21 +1951,8 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
@@ -2086,21 +2047,8 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");

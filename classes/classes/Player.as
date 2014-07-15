@@ -2002,5 +2002,41 @@ use namespace kGAMECLASS;
 			}
 			return true;
 		}
+		
+		public function goIntoRut(output:Boolean, intensificationIfOngoing:int = 1, duration:int = 100, productionStrength:int = 150, libidoStrength:int = 5):Boolean {
+			if (!hasCock()) {
+				// No cocks, can't go into rut.
+				return false;
+			}
+			
+			//Has rut, intensify it!
+			if (findStatusAffect(StatusAffects.Rut) >= 0) {
+				if(intensificationIfOngoing == 0) {
+					return false;
+				}
+				
+				if(output) {
+					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
+				}
+				
+				addStatusValue(StatusAffects.Rut, 1, 100 * intensificationIfOngoing);
+				addStatusValue(StatusAffects.Rut, 2, 5 * intensificationIfOngoing);
+				addStatusValue(StatusAffects.Rut, 3, 48 * intensificationIfOngoing);
+				game.dynStats("lib", 5 * intensificationIfOngoing, "resisted", false, "noBimbo", true);
+			}
+			else {
+				if(output) {
+					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+				}
+				
+				//v1 - bonus cum production
+				//v2 - bonus libido
+				//v3 - time remaining!
+				createStatusAffect(StatusAffects.Rut, duration, productionStrength, libidoStrength, 0);
+				game.dynStats("lib", libidoStrength, "resisted", false, "noBimbo", true);
+			}
+			
+			return true;
+		}
 	}
 }
