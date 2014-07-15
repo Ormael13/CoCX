@@ -5482,12 +5482,12 @@ public function kitsuneIllusion():void {
 			if (player.cor == 0)
 			{
 				outputText("  As a perfectly pure entity, your projections were bound to have a considerable impact.");
-				monster.lustVuln += 0.15;
+				monster.lustVuln += 0.1;
 				if (player.level > 20)
 				{
 					//Extra +15% Lust Vulnerability. Illusion mastery GET!
 					outputText(" Your mastery allowed you to create such a beautiful and enthralling world you'd almost fall for it yourself. You smile in contemplation as the eerie illusion slowly fades away.\n\n");
-					monster.lustVuln += 0.1;
+					monster.lustVuln += 0.15;
 				}
 				else outputText("You feel you might even be able to get closer to your true power with some more experience...\n\n");
 			}
