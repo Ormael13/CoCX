@@ -2735,7 +2735,7 @@ package classes.Scenes.NPCs
 			if(player.hasCock() || (player.hasVagina() && flags[kFLAGS.AMILY_WANG_LENGTH] > 0)) {
 				//Make babies option
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 0) {
-					outputText("Amily is currently taking herbs that will prevent pregnancy and keep her sterile.\n\n", false);
+					outputText("Amily is currently taking herbs that will prevent " + ((flags[kFLAGS.AMILY_INCUBATION] > 0) ? "further" : "") + "pregnancies and keep her sterile.\n\n", false);
 					bText = "MakeBabies";
 					babies = 2775;
 					//Send make babies to an appropriate override
@@ -2745,7 +2745,9 @@ package classes.Scenes.NPCs
 				}
 				//No Babies Option
 				else {
-					outputText("Amily is currently off her infertility herbs and may get pregnant.\n\n", false);
+					outputText("Amily is currently off her infertility herbs and ", false);
+					if (flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("may get pregnant.\n\n");
+					else outputText("is currently pregnant.\n\n");
 					bText = "No Babies";
 					babies = 2775;
 				}
