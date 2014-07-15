@@ -1287,17 +1287,18 @@ public function attack():void {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		(monster as SandTrap).trapLevel(-4);
 	}
+	//If 2 (or more), don't enter this branch. Off: Never attempt to double attack. Way to waste a perk point.
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) player.removeStatusAffect(StatusAffects.FirstAttack);
 		else {
-			//Always!
+			//0 - Forced: Double attack capped at 60 Strength maximum.
 			if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
-			//Alternate!
+			//1 - Dynamic: Single attack if Strength if less than 61, else double attack.
 			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
 		}
 	}
-	//"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
-	//Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+	//Attack twice with bare fists like a monk... I mean brawler.
+	//Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious!
 	else if(urtaQuest.isUrta()) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			player.removeStatusAffect(StatusAffects.FirstAttack);
@@ -1711,14 +1712,12 @@ public function combatMisdirect():Boolean {
 
 //DEAL DAMAGE
 public function doDamage(damage:Number):Number {
-	if(player.findPerk(PerkLib.Sadist) >= 0) {
-		damage *= 1.2;
-		dynStats("lus", 3);
-	}
-	if(monster.HP - damage <= 0) {
-		if(monster.findPerk(PerkLib.LastStrike) >= 0) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-	}
+		if(player.findPerk(PerkLib.Sadist) >= 0) {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
+	
+	if(monster.HP - damage <= 0) doNext(endHpVictory);
 	
 	// Uma's Massage Bonuses
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
