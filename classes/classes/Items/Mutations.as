@@ -632,8 +632,8 @@
 			}
 			//Morph dick to horsediiiiick
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-				selectedCock:int = -1;
-				for (i:int = 0; i < player.cocks.length; i++)
+				var selectedCock:int = -1;
+				for (var i:int = 0; i < player.cocks.length; i++)
 				{
 					if (player.cocks[i].cockType != CockTypesEnum.HORSE)
 					{
