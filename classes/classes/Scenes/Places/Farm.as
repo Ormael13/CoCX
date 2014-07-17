@@ -974,7 +974,6 @@ public function cockPumping():void {
 			}
 			outputText(".  Every time you get a good grip and start to pull, a shiver of pleasure shoots down " + sMultiCockDesc() + " and robs you of your focus and muscle control.  Practically helpless against the tubes, you feel " + sMultiCockDesc() + " get harder and harder as the machine sucks out more pre-cum along with the milky aftershocks of your last massive orgasm.\n\n", false);
 		}
-		player.orgasm();
 		//TO BAD ENDAGE
 		doNext(milkerBadEnd1);
 		return;
@@ -1066,16 +1065,39 @@ public function cockPumping():void {
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
+		if(player.cumQ() < 1000) player.cumMultiplier++;
+		if (payout == 1) outputText(Num2Text(payout) + " gem rolls ", false);
+		else outputText(Num2Text(payout) + " gems roll", false);
+	
+	outputText("out into a collection plate.  Whitney really put a lot of work into this! ", false);
+	
 		player.gems += payout;
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
-		if(player.cumQ() < 1000) player.cumMultiplier++;
-		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);
-		else outputText(Num2Text(payout) + " gems roll out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gems and g", false);
 	}
-	else outputText("You g", false);
-	outputText("o on your way, whistling happily and feeling like taking a nap.", false);
-	dynStats("lus", -150);
+	if (player.findPerk(PerkLib.MidasCock) >= 0) {
+		
+		var gems:int = rand(2) + 2;
+		if (player.cumQ() > 20)
+			gems *= 3;
+		
+		if (payout > 0) {
+			outputText("\n\nAs you take your payment, <b>y", false);
+		}
+		else {
+			outputText("\n\n<b>Y", false);
+		}
+		
+		outputText("ou see a few sparkling gems in your trail of cum on the floor. You reach down and pick up all " + gems + " of them</b>, and then you are", false);
+		
+		player.gems += gems;
+		
+	}
+	else {
+		outputText("\n\nYou go", false);
+	}
+	outputText(" on your way, whistling happily and feeling like taking a nap.", false);
+	player.orgasm();
 	doNext(13);
 }
 

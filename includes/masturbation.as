@@ -72,7 +72,7 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		hasItems = true;
 	}
 	if(player.hasKeyItem("All-Natural Onahole") >= 0 && player.cocks.length > 0) {
-		if(!player.isTaur() || player.tallness * (5/6) >= player.cocks[player.longestCock()].cockLength) {
+		if(!player.isTaur() || player.cocks[player.longestCock()].cockLength >= player.tallness * (5/6) ) {
 			if(menus) {
 				addButton(button,"AN Onahole",eventParser,51);
 				button++;
@@ -81,7 +81,7 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		}
 	}
 	if(player.hasKeyItem("Deluxe Onahole") >= 0 && player.cocks.length > 0) {
-		if(!player.isTaur() || player.tallness * (5/6) >= player.cocks[player.longestCock()].cockLength) {
+		if(!player.isTaur() || player.cocks[player.longestCock()].cockLength >= player.tallness * (5/6)) {
 			if(menus) {
 				addButton(button,"D Onahole",eventParser,50);
 				button++;
@@ -90,7 +90,7 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		}
 	}
 	if(player.hasKeyItem("Plain Onahole") >= 0 && player.cocks.length > 0) {
-		if(!player.isTaur() || player.tallness * (5/6) >= player.cocks[player.longestCock()].cockLength) {
+		if(!player.isTaur() || player.cocks[player.longestCock()].cockLength >= player.tallness * (5/6)) {
 			if(menus) {
 				addButton(button,"Onahole",eventParser,48);
 				button++;
@@ -239,122 +239,83 @@ public function fappingItems(menus:Boolean = true):Boolean {
 //onaHole use - game should already have checked if player has a cock! CHECK BEFORE CALLING
 public function onaholeUse():void
 {
-	var onaholeText:Boolean = false;
 	//Clear text for new stuff
 	outputText("", true);
-	//Break text down by onahole type
 	
-	//Regular!
 	//Flag after first use!
-	if(player.findStatusAffect(StatusAffects.PlainOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.PlainOnaholeUsed,0,0,0,0);
+	if (player.findStatusAffect(StatusAffects.PlainOnaholeUsed) < 0) {
+		player.createStatusAffect(StatusAffects.PlainOnaholeUsed, 0, 0, 0, 0);
+		
+		outputText("You get naked and settle down with your new toy. The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure. ", false);
+
+		if(player.cockTotal() > 1)
+			outputText("With your free hand, you slap your " + multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ", false);
+		else
+			outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock.", false);
+	
+			outputText("\n\nMuch to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft. Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches and swells with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.", false);
+		
+			outputText("\n\nYour body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.", false);
+	}
 	//If player is already flagged, show repeated use text!
 	else {
-		//High Corruption
-		if(player.cor > 66) {
-			outputText("Amused, yet annoyed by the aching of your loins, you take out the well-used onahole to give yourself a good, old-fashioned cock milking. With singular purpose, you impale the toy on your " + cockDescript(0) + " and begin hammering away as if the world depended upon your orgasm. Your fist is but a blur as the toy pumps your " + cockDescript(0) + " beyond any degree of reason. Relishing in each cramp of pleasure as your cum builds, you flex your well-toned pelvic muscles to both heighten your pleasure and to prevent premature release of the impressive batch you are working on. As time passes, even your impressive physical control is no match for the need to unload your spunk. Waiting until the pressure mashes the base of your cock, you strip the toy away from your shaft and with a great squeeze of your crotch, let loose an impressive stream of cock juice that arcs several yards away. Impressed with your own orgasm, you smile, grit your teeth and continue clenching your crotch muscles in an attempt to repeat your massive distance in the orgasm. Lance upon lance of fuck-milk hoses the area down as you empty yourself of your overwhelming lust. After a few dozen shots, your body empties itself of its needs and fatigue strikes you. Cleaning yourself up and rearranging your area to avoid the massive cum puddle you made, you lay back to recuperate your strength knowing that your dick will demand more attention later.", false);
-		}
-		//Low corruption
-		else {
-			outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Reflexively, your hips begin bucking slightly, operating off pure instinct. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);
-		}
-		player.orgasm();
-		dynStats("sen", -.75);
-		doNext(13);
-		return;
+		
+		if (player.cor > 66)
+			onaholeRepeatUse(true);
+		else
+			onaholeRepeatUse(false);
 	}
-	//Multicock!
-	if(player.cockTotal() > 1)  {
-		//Not all-natural onahole
-		outputText("You get naked and settle down with your new toy.  ", false);
-		outputText("The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure.\n\n", false);
-		outputText("With your free hand, you slap your " + multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ", false);
-		outputText("Much to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft.  ", false);
-		outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches and swells with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
-		outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
-		outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
+	
+	player.orgasm();
+	dynStats("sen", -.75);
+					
+	if (player.cockTotal() > 1)
 		doNext(2046);
-		player.orgasm();
-		dynStats("sen", -.75);
-		return;
-	}
-	else {
-		outputText("You get naked and settle down with your new toy.  ", false);
-		outputText("The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure.\n\n", false);
-		outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock.  ", false);
-		outputText("Much to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft.  ", false);
-		outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
-		outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
-		if(player.gender == 3) doNext(2050);
-		else {
-			player.orgasm();
-			dynStats("sen", -.75);
-		}
-		doNext(13);
-	}
+	
+	if (player.gender == 3)
+		doNext(2050);
+		
+	doNext(13);
 }
 public function deluxeOnaholeUse():void {
 	outputText("", true);
-	//Deluxe!
-	if(player.hasKeyItem("Deluxe Onahole") >= 0) {
-		//Flag after first use!
-		if(player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) player.createStatusAffect(StatusAffects.DeluxeOnaholeUsed,0,0,0,0);
-		//If player is already flagged, show repeated use text!
-		else {
-			//High Corruption
-			if(player.cor > 66) {
-				outputText("Amused, yet annoyed by the aching of your loins, you take out the well-used onahole to give yourself a good, old-fashioned cock milking. With singular purpose, you impale the toy on your " + cockDescript(0) + " and begin hammering away as if the world depended upon your orgasm. Your fist is but a blur as the toy pumps your " + cockDescript(0) + " beyond any degree of reason. Relishing in each cramp of pleasure as your cum builds, you flex your well-toned pelvic muscles to both heighten your pleasure and to prevent premature release of the impressive batch you are working on. As time passes, even your impressive physical control is no match for the need to unload your spunk. Waiting until the pressure mashes the base of your cock, you strip the toy away from your shaft and with a great squeeze of your crotch, let loose an impressive stream of cock juice that arcs several yards away. Impressed with your own orgasm, you smile, grit your teeth and continue clenching your crotch muscles in an attempt to repeat your massive distance in the orgasm. Lance upon lance of fuck-milk hose the area down as you empty yourself of your overwhelming lust. After a few dozen shots, your body empties itself of its needs and fatigue strikes you. Cleaning yourself up and rearranging your area to avoid the massive cum puddle you made, you lay back to recuperate your strength knowing that your dick will demand more attention later.", false);
-			}
-			//Low corruption
-			else {
-				outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Reflexively, your hips begin bucking slightly, operating off pure instinct. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);
-			}
-			player.orgasm();
-			dynStats("sen", -1);
-			doNext(13);
-			return;
-		}
-		//Multicock!
-		if(player.cockTotal() > 1)  {
-			outputText("You get naked and settle down with your new toy.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) {
-				outputText("You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n", false);
-			}
-			else {
-				outputText("The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure.\n\n", false);
-			}
+	
+	//Flag after first use!
+	if (player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) {
+		player.createStatusAffect(StatusAffects.DeluxeOnaholeUsed,0,0,0,0);
+	
+		outputText("You get naked and settle down with your new toy. You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n", false);
+
+		if(player.cockTotal() > 1)
 			outputText("With your free hand, you slap your " + multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As you 'deflower' the toy, you are floored by how realistic it REALLY does feel. Giacomo must use one of these himself, as it does feel damn close to a real twat. You especially enjoy how it manages to squeeze you with just the right amount of pressure.  ", false);
-			else outputText("Much to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft.  ", false);
-			outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
-			outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
-			player.orgasm();
-			dynStats("sen", -1);
-			doNext(2046);
-			return;
-		}
-		//Single!
-		else {
-			outputText("You get naked and settle down with your new toy.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) {
-				outputText("You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n", false);
-			}	
-			else {
-				outputText("The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure.\n\n", false);
-			}
-			outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As you 'deflower' the toy, you are floored by how realistic it REALLY does feel. Giacomo must use one of these himself, as it does feel damn close to a real twat. You especially enjoy how it manages to squeeze with just the right amount of pressure.  ", false);
-			else outputText("Much to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft.  ", false);
-			outputText("Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.  ", false);
-			if(player.hasKeyItem("Deluxe Onahole") >= 0) outputText("As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!  ", false);
-			outputText("Your body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.  ", false);
-			if(player.gender == 3) doNext(2050);
-			player.orgasm();
-			dynStats("sen", -1);
-			doNext(13);
-			return;
-		}
+		else
+			outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock. ", false);
+			
+		outputText("As you 'deflower' the toy, you are floored by how realistic it REALLY does feel. Giacomo must use one of these himself, as it does feel damn close to a real twat. You especially enjoy how it manages to squeeze with just the right amount of pressure.", false);
+			
+		outputText("\n\nWithout hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper. As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!", false);
+			
+		outputText("\n\nYour body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.", false);
 	}
+	//If player is already flagged, show repeated use text!
+	else {
+		
+		if (player.cor > 66)
+			onaholeRepeatUse(true);
+		else
+			onaholeRepeatUse(false);
+	}
+	
+	player.orgasm();
+	dynStats("sen", -1.5);
+					
+	if (player.cockTotal() > 1)
+		doNext(2046);
+		
+	if (player.gender == 3)
+		doNext(2050);
+		
+	doNext(13);
 }
 public function allNaturalOnaholeUse():void {
 	outputText("", true);
@@ -2286,19 +2247,80 @@ public function catAutoLick():void {
 		//1st time
 		if(flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0) {
 			flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
+			
 			outputText("You undress from your " + player.armorName + " and take a seat on the ground. You take a look at your transformed body, making notes of things you haven't noticed before. Suddenly, an idea pops into your head: the cats back at the village could reach any place on their body with their tongues! You wonder... closing your eyes and slowly bending down, you try to get as close as possible to your " + cockDescript(0) + ". It only takes a moment before you feel warm breath blowing against your dick. You open your eyes, coming face to face with your erect member. Your body is twisted and bent in a way that only cats can manage. You huff a cloud of hot air on your pecker, and the resulting sensation causes your eyes to roll back in your head. That was incredible and it's about to get better as another thought passes through your head, giving you a dirty smile.\n\n", false);
 
 			outputText("You lick the head of your throbbing man-meat and another bodyshaking shudder flows through you. You do it a few more times, enjoying the sensations running around inside of you. You bend down farther and lick from the base of your dick to the head. Slowly, you take the head inside of your mouth and begin sucking on it, trying to keep the drool in your mouth. The feeling is enough to make you cum, but you hold it in and move on. You take a few more inches inside your mouth as you begin pumping and thrusting, making lewd noises of moaning and sucking. The feeling is better than any blowjob you've ever had. You start to pump faster and faster, desperate to cum all over your own face. Just thinking about the fact that you're doing this to yourself turns you on even more. You take the rest of your " + cockDescript(0) + " inside of your mouth. You can smell the musty scent coming off of your " + sackDescript() + ". Your throat closes up on your member as you hum and flick your tongue across its head.\n\n", false);
 			
-			outputText("A very familiar feeling of pleasure rushes through your body, causing you to shudder. You pull your cock out and begin to stroke it as you suck on the tip, practically drinking your pre-cum. You can feel your cum building up as it gets ready to be released. After flicking your tongue against the tip of your " + cockDescript(0) + ", you feel the flood of cum flowing up your dick. Suddenly, a feeling of complete bliss takes over your body, and you start to squirm and writhe as cum shoots down your throat. You pull off of the tip and let the next burst hit your face. Soon, the torrent of cum subsides, though your hips are still jerking in the air from the intense orgasm. You take a moment to lie down properly and decide to take a small cat nap.", false);
+			outputText("A very familiar feeling of pleasure rushes through your body, causing you to shudder. You pull your cock out and begin to stroke it as you suck on the tip, practically drinking your pre-cum. You can feel your cum building up as it gets ready to be released. After flicking your tongue against the tip of your " + cockDescript(0) + ", you feel the flood of cum flowing up your dick", false);
+			
+			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+		
+				flags[kFLAGS.MIDAS_JERKED]++
+		
+				var gems:int = midasCockJackingGemsRoll();
+
+				outputText(" along with a sudden chill from your Gilded cock sock causing you to reflexively pull off your " + cockDescript(0) + "'s tip just as the complete bliss of orgasm fills your body. Your face is less than an inch from your cock head as you watch your cum shoot up into the air. Caught in the light of the golden cocksock, it beads and twists in the light, crystallizing into a glittering shower. A ", false);
+	if(player.cumQ() < 25) outputText("sprinkle of");
+	else if(player.cumQ() < 250) outputText("rain of");
+	else outputText("torrent of");
+	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + " as you arc your back higher and higher until the only thing touching the ground is the top of your head and the tips of your toes! Your hips continue jerking in the air from the intense orgasm for a little while after the cum stops flowing.\n\n<b>You take a few moments to collect all the glittering gems you just squirted all over the place, all " + gems + " of them</b>, before curling up and taking a short cat nap.", false);
+	
+			player.gems += gems;
+			}
+			else {
+				outputText(". Suddenly, a feeling of complete bliss takes over your body, and you start to squirm and writhe as cum shoots down your throat. You pull off of the tip and let the next burst hit your face. Soon, the torrent of cum subsides, though your hips are still jerking in the air from the intense orgasm. You take a moment to lie down properly and decide to take a small cat nap.", false);
+			}
 		}
 		//[Repeatable]
 		else {
+			flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
+			
 			outputText("You quickly undress from your " + player.armorName + ", your cock drooling with pre-cum in anticipation of your tongue's magic. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart, before leaning back and sticking your erect " + cockDescript(0) + " forward. After holding for a moment, you switch positions, leaning your chest forward and sticking your " + assDescript() + " out for all to see – if anyone was around. You alternate leaning back and forth; it looks like you're fucking some invisible bitch. Soon, your spine is nice and limber – working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself. Being naked in this position has allowed your man-meat to be exposed to the elements, and you feel a cool breeze brushing against your cock.  It throbs harder, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg. You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cock throbbing and leaking pre-cum, eagerly waiting for you to lick and suck it. You soon put the leg down, hornier then you've ever been. You do some quick jaw stretches as you lay down on your bed roll. Throwing one leg over your head, you easily bend your head down to your member.\n\n", false);
 			
 			outputText("Your " + cockDescript(0) + " is now poking at the left cheek of your " + player.face() + "; you miscalculated how much flexibility you needed. You use your tongue to guide the eager meat-rod into your dripping wet mouth. Your lips latch around the tip, sucking on it while your tongue rolls around the head. You begin leaning your head forward, bringing the " + cockDescript(0) + " further into your mouth. Your tongue massages the underside as you stick it out to cover as much cock as you can. Small bits of pre-cum shoot out, sending its salty taste down your throat. You lift your head off and your tongue follows close behind, leaving a trail of saliva and resulting in a slurp as you continue to lick the throbbing head. You take the cock down your throat once more, bobbing your head up and down the shaft while flicking your tongue from left to right. You begin moving your head faster and harder, making you let out lewd gagging sounds, but it feels too good to stop now. Your entire cock is soaked in saliva, dripping down your shaft and onto the ground. Soon you're moving your hips as much as you can; you are no longer giving yourself a blowjob – you're throat-fucking yourself. The lewd, gagging sound grows louder and more aggressive; anyone passing by would think you were choking a chicken.\n\n", false);
 			
-			outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + cockDescript(0) + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. This releases the pent-up pressure through your cock and down your throat. It's too much for you to handle; your cheeks fill up with cum and you pull your head back, making a loud popping sound when you finally free your mouth, as the cum pooled in your cheeks spills out all over your cock. Your cock spurts a few more lines of sperm onto your stomach. You stroke the exhausted member a few times, milking the last drops of cum out. Satisfying the final bits of lust, you lay down on the bedroll and fall into a short cat nap.", false);
+			outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + cockDescript(0) + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. ", false);
+			
+			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+		
+				flags[kFLAGS.MIDAS_JERKED]++;
+		
+				var gems:int = midasCockJackingGemsRoll();
+				
+				outputText("You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. You once again feel a slight chill as you reach the point-of-no-return and you let your " + cockDescript(0) + " pop free of your mouth. You watch in glee as your seed slit parts to begin the sparkling shower you know is coming. Your cum, caught in the light of the golden cocksock, beads and twists in the light, crystallizing into a glittering shower. A ", false);
+	if(player.cumQ() < 25) outputText("sprinkle of");
+	else if(player.cumQ() < 250) outputText("rain of");
+	else outputText("torrent of");
+	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + " as you arc your back higher and higher until the only thing touching the ground is the top of your head and the tips of your toes! Your hips continue jerking in the air from the intense orgasm for a little while after the cum stops flowing.\n\n<b>You take a few moments to collect all the glittering gems you just squirted all over the place, all " + gems + " of them</b>, before curling up and taking a short cat nap.", false);
+				
+				player.gems += gems;
+			
+			}
+			else {
+				if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 10 && player.balls > 1 && rand(5) == 0) {
+					outputText("But it's not enough and you are forced to come up for air.", false);
+					
+					outputText("\n\nWhile gasping for air, you scowl at your " + cockDescript(0) + " in disapproval. That's when your " + sackDescript() + " catches your attention. It's gleaming with your sex sheen and you watch ne of your balls slowly slide off to one side.", false);
+					
+					outputText("\n\nYou think you can make it! You throw your other leg over your head and both feet come to rest on your back. You push your mouth towards your " + sackDescript() + ", slowly walking your toes down your back. You are only an inch from your " + ballsDescriptLight() + " now and your own aroma fills your nostrils, spurring your on. Then, finally, you are there! And it nearly knocks you out! The sensation of your own balls in your mouth is incredible--you can feel them churning in your mouth--and your [feet] start kneeding your back. You bring your hands up to massage your " + ballsDescriptLight() + " as well, making them take turns in your mouth. Completely intoxicated by your own scent you loose all track of time--there is only the bliss of sucking, licking, and massaging your own balls...", false)
+					
+					outputText("\n\nAbrubtly you realize that your " + sMultiCockDesc() + " have soaked your torso in precum--apparently you've been on the edge for some time. In one swift motion, you pick your head up and slam your mouth down over your " + cockDescript(0) + " leaving your hands to continue their ball massage.", false);
+					
+					//add cum quantity conditional text...
+					outputText("\n\nThe release is immediate. You feel the contractions of your climax against your [face], your [feet] involuntarly start massaging your back, and you feel your " + cockDescript(0) + " expand and contract in your mouth as seed pumps through it into your stomach. It's more relaxing than anything else--each contraction makes you feel like you might be melting a little, like you might remain in this position forever.", false);
+					
+					outputText("\n\nYour [feet] and hands are still masagging their respective charges when you realize you are starting to go flaccid! You make an attempt to massage every last drop of cum from your " + ballsDescriptLight() + ", sucking on your " + cockDescript(0) + " continuously as it goes down. It slowly slips from your mouth once it's completely deflated, causing you to frown slightly. Still feeling great in this position, you go down on your " + sackDescript() + " again--alternating between licking and sucking them with your mouth and massaging them with your hands.", false);
+					
+					outputText("\n\nFinally satiated, you begin untangling yourself and realize how sweaty and sticky you are. Again, remembering the cats from your village, you begin to lick ever square inch clean you can reach just like they do and you discover a new form of pleasure. After you lick yourself clean, you stretch out into the spread-eagle position to get a few small kinks out and to admire your naked body glistening in your spit. As you begin to doze off, <b>you think your balls feel a little denser.</b>", false)
+					
+					modCumMultiplier(0.3);
+				}
+				else {
+					outputText("This releases the pent - up pressure through your cock and down your throat. It's too much for you to handle; your cheeks fill up with cum and you pull your head back, making a loud popping sound when you finally free your mouth, as the cum pooled in your cheeks spills out all over your cock. Your cock spurts a few more lines of sperm onto your stomach. You stroke the exhausted member a few times, milking the last drops of cum out. Satisfying the final bits of lust, you lay down on the bedroll and fall into a short cat nap.", false);
+				}
+				
+			}
 		}
 	}
 	else 
@@ -2341,16 +2363,34 @@ public function centaurDudesGetHorseAids():void {
 	else outputText("lining up with the toy's gaping cunt", false);
 	outputText(".  You rear your " + hipDescript() + " and slam yourself into the mare's waiting hole.\n\n", false);
 	
-	outputText("The toy's passage seems to shift and contract around your " + cockDescript(x) + ", molding itself to perfectly sheathe you.  What a marvelous little toy!  You slide on up until you hilt yourself, your crotch pressed against the mare's wide ass as your " + chestDesc() + " squeezes against her back.  Now fully mounted, you begin to rut on the mare toy, slapping your hips ", false);
-	if(player.balls > 0) outputText("and " + ballsDescriptLight() + " ", false);
+	outputText("The toy's passage seems to shift and contract around your " + cockDescript(x) + ", molding itself to perfectly sheathe you.  What a marvelous little toy!  You slide on up until you hilt yourself, your crotch pressed against the mare's wide ass as your " + chestDesc() + " squeezes against her back.  Now fully mounted, you begin to rut on the mare toy, slapping your hips", false);
+	if(player.balls > 0) outputText(" and " + ballsDescriptLight(), false);
 	outputText(" hard against her rump as you pound into her tight, slick ", false);
 	if(player.cockArea(x) >= 30) outputText("horsecunt", false);
 	else outputText("asshole", false);
 	outputText(".\n\n", false);
 
-	outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you.  You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + cockDescript(x) + " until the pleasure overwhelms you.  You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it, until she's full up and leaking onto the ground.\n\n", false);
+	outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you.  You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + cockDescript(x) + " until the pleasure overwhelms you.  You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it", false);
+	
+	if(player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+		
+		flags[kFLAGS.MIDAS_JERKED]++
+		
+		var gems:int = midasCockJackingGemsRoll();
+		
+		outputText( ".\n\nSated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  <b>You are startled to see glittering gems pouring from her ", false);
+		if(player.cockArea(x) >= 30) outputText("horsecunt", false);
+		else outputText("asshole", false);
+		outputText( " and you scramble to gather all " + gems + " of them up.</b> Satisfied you didn't miss any shinies, you disassemble the toy and haul it off back to your stash.", false );
+		
+		player.gems += gems;
+	}
+	else {
+		outputText(", until she's full up and leaking onto the ground.\n\n", false);
 
-	outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, though it leaks your cum the entire way.", false);
+		outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.", false);
+	}
+
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(13);
@@ -2963,12 +3003,9 @@ public function gildedCockTurbate():void {
 	else if(player.cumQ() < 250) outputText("a rain of");
 	else outputText("a torrent of");
 	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".");
-	var gems:int = 5 + rand(6);
-	if(player.cumQ() >= 25) gems += 5 + rand(6);
-	if(player.cumQ() >= 250) gems += 5 + rand(6);
-	if(player.cumQ() >= 1000) gems += 5 + rand(6);
-	if(player.cumQ() >= 3000) gems += 5 + rand(6);
-	if(player.cumQ() >= 6000) gems += 5 + rand(6);
+
+	var gems:int = midasCockJackingGemsRoll();
+
 	outputText("\n\nYou have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.");
 	player.orgasm();
 	dynStats("sen", -1);
@@ -3053,3 +3090,60 @@ public function dildoButts():void
 	doNext(13);
 }
 
+public function midasCockJackingGemsRoll():int
+{
+	var gems:int = 10 + rand(20);
+
+	if (player.cumQ() >= 1000)
+		gems += player.cumQ() / 100;
+
+	if (gems > 90)
+		gems = 90 + rand(20);
+
+	return gems;
+}
+
+public function onaholeRepeatUse(corrupted:Boolean):void
+{
+			if(corrupted) {
+			outputText("Amused, yet annoyed by the aching of your loins, you take out the well-used onahole to give yourself a good, old-fashioned cock milking. With singular purpose, you impale the toy on your " + cockDescript(0) + " and begin hammering away as if the world depended upon your orgasm. Your fist is but a blur as the toy pumps your " + cockDescript(0) + " beyond any degree of reason. Relishing in each cramp of pleasure as your cum builds, you flex your well-toned pelvic muscles to both heighten your pleasure and to prevent premature release of the impressive batch you are working on. As time passes, even your impressive physical control is no match for the need to unload your spunk. Waiting until the pressure mashes the base of your cock, you strip the toy away from your shaft and with a great squeeze of your crotch, let loose an impressive stream of cock juice that arcs several yards away. Impressed with your own orgasm, you smile, grit your teeth and continue clenching your crotch muscles in an attempt to repeat your massive distance in the orgasm. Lance upon lance of fuck-milk hoses the area down as you empty yourself of your overwhelming lust. After a few dozen shots, your body empties itself of its needs and fatigue strikes you. After cleaning yourself up and rearranging your area to avoid the massive cum puddle you made, ", false)
+			
+			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+		
+				flags[kFLAGS.MIDAS_JERKED]++
+		
+				var gems:int = midasCockJackingGemsRoll();
+				
+				outputText("<b>you relize the puddle is shimmering strangly. Looking closer you see that your man milk is coalescing into gems! You start collecting them, counting them as you go. You end up with " + gems + " gems and very little cum.</b>", false);
+				
+				player.gems += gems;
+			}
+			else {
+			outputText("you lay back to recuperate your strength knowing that your dick will demand more attention later.", false);
+			}
+		}
+		else {
+			outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Pure instict takes over, and your hips begin to buck reflexively. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body", false);
+	
+			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+		
+				flags[kFLAGS.MIDAS_JERKED]++
+		
+				var gems:int = midasCockJackingGemsRoll();
+				
+				outputText(". You pop the toy from your rod and let your reflexes hump the sky.", false);
+				
+				outputText("\n\nPanting and humping hard, you watch the jet of cum shimmers through the air. Caught in the light of the golden cocksock, it beads and twists into small crystals.  In a glittering shower, ");
+	if(player.cumQ() < 25) outputText("a sprinkle of");
+	else if(player.cumQ() < 250) outputText("a rain of");
+	else outputText("a torrent of");
+	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".\n\n<b>You force yourself to pick up the " + gems + " gems before passing out.</b>");
+	
+				player.gems += gems;
+			}
+			else {
+			outputText("as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);
+			}
+		}
+	
+}

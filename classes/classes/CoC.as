@@ -101,6 +101,8 @@
 		include "../../includes/transform.as";
 		
 		include "../../includes/engineCore.as";
+		
+		include "../../includes/TFsAndRolls.as";
 
 		// Lots of constants
 		//include "../../includes/flagDefs.as";

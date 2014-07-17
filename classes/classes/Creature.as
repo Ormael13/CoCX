@@ -299,10 +299,10 @@ import classes.PerkType;
 		private var _hoursSinceCum:Number = 0;
 		public function get hoursSinceCum():Number { return _hoursSinceCum; }
 		public function set hoursSinceCum(v:Number):void {
-			if (v == 0)
+			/*if (v == 0)
 			{
 				trace("noop");
-			}
+			}*/
 			_hoursSinceCum = v; 
 		}
 		
@@ -408,21 +408,18 @@ import classes.PerkType;
 			//keyItems = new Array();
 		}
 
-		[Deprecated]
-		public function resetDickEjaculateTimer():void
-		{
-			// Reset hoursSinceCum 
-			// trace("YOU IS JIZZING OMGLOLWTFBBQ!", this.hoursSinceCum)
-			this.hoursSinceCum = 0;
-		}
-
-		/**
-		 * Shorthand for lust=0 and resetDickEjaculateTimer, but in future can do other things (update statistics, do something perk-dependant etc)
-		 */
 		public function orgasm():void
 		{
 			game.dynStats("lus=",0,"res",false);
 			hoursSinceCum = 0;
+			
+			if (findPerk(PerkLib.MidasCock) >= 0) {
+			
+				var randomCock:int = rand( cocks.length - 1 );
+				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + 2; // int so AS rounds to whole numbers
+				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>" );
+				gems += bonusGems;
+	}
 		}
 
 		//Functions			
@@ -3349,17 +3346,6 @@ import classes.PerkType;
 			else
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
 			return fertilizedEggs();
-		}
-
-		public function increaseCock(increase:Number, cockNum:Number):Number
-		{
-			if (findPerk(PerkLib.BigCock) >= 0)
-				increase *= perk(findPerk(PerkLib.BigCock)).value1;
-			if (cocks[cockNum].sock == "scarlet")
-				increase *= 1.5;
-			if (cocks[cockNum].sock == "cobalt")
-				increase *= .25;
-			return cocks[cockNum].growCock(increase);
 		}
 
 		public function breastCup(rowNum:Number):String
