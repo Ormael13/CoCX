@@ -4002,19 +4002,14 @@ internal function loseToSheila(consensual:Boolean = false):void {
 	//Loss - if PC manages to lose by HP somehow (overrides all other losses)
 	if(player.HP < 1 && !consensual) {
 		outputText("Your erstwhile opponent's eyes glimmer with excitement as you collapse from your injuries, and she runs over to you.  The demon strips off your [armor] eagerly, but you can't stay awake for the fun.  Consciousness slips away and you pass out.");
-		//--Next--
-		model.time.hours += 8;
-		if(model.time.hours > 23) {
-			model.time.hours -= 24;
-			model.time.days++;
-		}
+		cheatTime(8);
 		menu();
 		addButton(0,"Next",loseToDemonSheila);
 	}
 	else {
 		var choices:Array = new Array();
 		//Loss - normal cocks get rode (for cockarea <= 56)
-		if(player.hasCock() && player.cockThatFits(56) >= 0) 
+		if(player.hasCock() && player.cockThatFits(56) >= 0)
 			choices[choices.length] = loseToNormalSheilaAndGetRidden;
 		//Loss - tail-spade sounding for fuckhueg cock (for cockarea > 56)
 		if(player.hasCock() && player.biggestCockArea() > 56)

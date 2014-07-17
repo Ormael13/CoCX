@@ -4716,7 +4716,7 @@
 					//temp3 stores how many rows are changed
 					temp3 = 0;
 					for (var k:Number = 0; k < player.breastRows.length; k++) {
-						//If this row is over threshhold
+						//If this row is over threshold
 						if (player.breastRows[k].breastRating > temp2) {
 							//Big change
 							if (player.breastRows[k].breastRating > 10) {

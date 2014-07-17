@@ -428,10 +428,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	//used to store if hair needs to display
 	var tempNext:Boolean = false;
 	var textHolder:String = "";
-	var threshhold:Number = 0;
+	var threshold:Number = 0;
 	var temp2:Number = 0;
 	
-	while(timeQ > threshhold) {
+	while(timeQ > threshold) {
 		model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 		if(player.ballSize > 400) player.ballSize = 400;
@@ -2127,9 +2127,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//BIG EVENTS GO IN HERE
-		//BIG EVENTS GO IN HERE
-		//BIG EVENTS GO IN HERE
-		//BIG EVENTS GO IN HERE
 		//MARBLE POOPS BAYBEEZ
 		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1 && marbleScene.marbleAtCamp()) {
 			marbleScene.marblePoopsBaybees();
@@ -2731,7 +2728,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Marble is still available at farm
 				if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
 					marbleScene.postAddictionFarmMornings();
-					threshhold--;
+					threshold--;
 					needNext = true;
 				}
 			}
@@ -3012,14 +3009,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 }
 
 public function cheatTime(time:Number):void {
-	while(time > 0) {
-		time--;
-		model.time.hours++;
-		if(model.time.hours > 23) {
-			model.time.days++;
+	//TIME PARADOX - QUICK FFW OR RW IN SCENES.
+	//Check for new day just in case.
+	model.time.hours += time;
+	if(model.time.hours > 23) {
 			model.time.hours = 0;
+			model.time.days++;
 		}
-	}
 	statScreenRefresh();
 }
 
@@ -3032,27 +3028,27 @@ public function growHair(amount:Number = .1):Boolean {
 		return true;
 	}
 	else if(player.hairLength >= 1 && temp < 1) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 3 && temp < 3) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 6 && temp < 6) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 10 && temp < 10) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 16 && temp < 16) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 26 && temp < 26) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+		outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
 	else if(player.hairLength >= 40 && temp < 40) {
