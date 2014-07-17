@@ -6,7 +6,6 @@
 	public final class Mutations extends BaseContent
 	{
 		include "../../../includes/appearanceDefs.as";
-		include "../../../includes/TFsAndRolls.as";
 
 		public function Mutations()
 		{
@@ -94,8 +93,8 @@
 				if (player.cocks.length == 1) {
 					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.", false);
 					else outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.", false);
-					if (rand(4) == 0) temp = increaseCock( player, 0, 3);
-					else temp = increaseCock( player, 0, 1);
+					if (rand(4) == 0) temp = player.increaseCock(0, 3);
+					else temp = player.increaseCock(0, 1);
 					dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + temp * 3, "cor", tainted ? 1 : 0);
 					if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.", false);
 					if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.", false);
@@ -116,8 +115,8 @@
 							temp2 = temp;
 						}
 					}
-					if (int(Math.random() * 4) == 0) temp3 = increaseCock(player, temp2, 3);
-					else temp3 = increaseCock(player, temp2, 1);
+					if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
+					else temp3 = player.increaseCock(temp2, 1);
 					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3, "cor", 1);
 					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
 					//Grammar police for 2 cocks
@@ -157,7 +156,7 @@
 					temp = player.cocks.length;
 					while (temp > 0) {
 						temp--;
-						temp2 = increaseCock(player, temp, rand(3) + 2);
+						temp2 = player.increaseCock(temp, rand(3) + 2);
 						temp3 = player.cocks[temp].thickenCock(1);
 						if (temp3 < .1) player.cocks[temp].cockThickness += .05;
 					}
@@ -181,7 +180,7 @@
 				if (player.cocks.length == 1) {
 					outputText("\n\nYour cock fills to its normal size and begins growing... ", false);
 					temp3 = player.cocks[0].thickenCock(1);
-					temp2 = increaseCock(player, 0, rand(3) + 2);
+					temp2 = player.increaseCock(0, rand(3) + 2);
 					player.lengthChange(temp2, 1);
 					//Display the degree of thickness change.
 					if (temp3 >= 1) {
@@ -610,7 +609,7 @@
 					//Thickness too if small enough
 					if (player.cocks[selectedCock].cockThickness < 5) {
 						//Increase by 2 + rand(8), and store the actual amount in temp
-						temp = increaseCock(player, selectedCock, 2 + rand(8));
+						temp = player.increaseCock(selectedCock, 2 + rand(8));
 						temp += player.cocks[selectedCock].thickenCock(1);
 						//Comment on length changes
 						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
@@ -622,7 +621,7 @@
 					//Just length...
 					else {
 						//Increase by 2 + rand(8), and store the actual amount in temp
-						temp = increaseCock(player, selectedCock, 2 + rand(8));
+						temp = player.increaseCock(selectedCock, 2 + rand(8));
 						//Comment on length changes
 						if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.", false);
 						if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.", false);
@@ -649,7 +648,7 @@
 					//Text for dogdicks
 					if (player.cocks[selectedCock].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(selectedCock) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(selectedCock) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(selectedCock) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					player.cocks[selectedCock].cockType = CockTypesEnum.HORSE;
-					increaseCock(player, selectedCock, 4);
+					player.increaseCock(selectedCock, 4);
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 					outputText("<b>  You now have a");
 					if (player.horseCocks() > 1) outputText("nother")
@@ -991,21 +990,21 @@
 						if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
 							outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
 							temp = player.addHorseCock();
-							temp2 = increaseCock(player, temp, rand(4) + 4);
+							temp2 = player.increaseCock(temp, rand(4) + 4);
 							temp3 = 1;
 							dynStats("lib", 5, "sen", 4, "lus", 35);
 						}
 						if (player.cocks[0].cockType == CockTypesEnum.DOG) {
 							temp = player.addHorseCock();
 							outputText("\n\nYour " + Appearance.dogDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
-							temp2 = increaseCock(player, temp, rand(4) + 4);
+							temp2 = player.increaseCock(temp, rand(4) + 4);
 							temp3 = 1;
 							dynStats("lib", 5, "sen", 4, "lus", 35);
 						}
 						if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 							temp = player.addHorseCock();
 							outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
-							temp2 = increaseCock(player, temp, rand(4) + 4);
+							temp2 = player.increaseCock(temp, rand(4) + 4);
 							temp3 = 1;
 							dynStats("lib", 5, "sen", 4, "lus", 35);
 						}
@@ -1030,7 +1029,7 @@
 						//Already have a sheath
 						if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.", false);
 						else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + cockDescript(temp) + "'s root, tightening and pulling your " + cockDescript(temp) + " inside its depths.", false);
-						temp2 = increaseCock(player, temp, rand(4) + 4);
+						temp2 = player.increaseCock(temp, rand(4) + 4);
 						outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.", false);
 						outputText("  <b>You now have a horse-cock.</b>", false);
 					}
@@ -1042,7 +1041,7 @@
 				else {
 					//single cock
 					if (player.cocks.length == 1) {
-						temp2 = increaseCock(player, 0, rand(3) + 1);
+						temp2 = player.increaseCock(0, rand(3) + 1);
 						temp = 0;
 						dynStats("sen", 1, "lus", 10);
 					}
@@ -1063,7 +1062,7 @@
 						}
 						//Grow smallest cock!
 						//temp2 changes to growth amount
-						temp2 = increaseCock(player, temp, rand(4) + 1);
+						temp2 = player.increaseCock(temp, rand(4) + 1);
 						dynStats("sen", 1, "lus", 10);
 					}
 					outputText("\n\n", false);
@@ -1412,7 +1411,7 @@
 							if (player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
 							if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
 						}
-						temp3 += increaseCock(player, temp, (rand(3) + 1) * -1);
+						temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
 						outputText("\n\n", false);
 						player.lengthChange(temp3, 1);
 						if (player.cocks[temp].cockLength < 2) {
@@ -1447,7 +1446,7 @@
 					if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
 						player.cocks[temp].cockLength -= .5;
 					}
-					temp3 = increaseCock(player, temp, -1 * (rand(3) + 1));
+					temp3 = player.increaseCock(temp, -1 * (rand(3) + 1));
 					player.lengthChange(temp3, 1);
 					if (player.cocks[temp].cockLength < 3) {
 						outputText("  ", false);
@@ -1906,7 +1905,7 @@
 					//GET LONGER
 					//single cock
 					if (player.cocks.length == 1) {
-						temp2 = increaseCock(player, 0, rand(4) + 3);
+						temp2 = player.increaseCock(0, rand(4) + 3);
 						temp = 0;
 						dynStats("sen", 1, "lus", 10);
 					}
@@ -1927,7 +1926,7 @@
 						}
 						//Grow smallest cock!
 						//temp2 changes to growth amount
-						temp2 = increaseCock(player, temp, rand(4) + 3);
+						temp2 = player.increaseCock(temp, rand(4) + 3);
 						dynStats("sen", 1, "lus", 10);
 						if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
 					}
@@ -2240,7 +2239,7 @@
 			if (player.cocks.length > 0) {
 				outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.", false);
 				if (player.cocks[0].cockLength < 12) {
-					temp = increaseCock(player, 0, rand(2) + 2);
+					temp = player.increaseCock(0, rand(2) + 2);
 					outputText("\n\n", false);
 					player.lengthChange(temp, 1);
 				}
@@ -2808,7 +2807,7 @@
 						temp = player.cocks.length;
 						while (temp > 0) {
 							temp--;
-							temp2 = increaseCock(player, temp, rand(3) + 2);
+							temp2 = player.increaseCock(temp, rand(3) + 2);
 							temp3 = player.cocks[temp].thickenCock(1);
 						}
 						player.lengthChange(temp2, player.cocks.length);
@@ -2831,7 +2830,7 @@
 					if (player.cocks.length == 1) {
 						outputText("\n\nYour " + multiCockDescript() + " fills to its normal size... and begins growing... ", false);
 						temp3 = player.cocks[0].thickenCock(1);
-						temp2 = increaseCock(player, 0, rand(3) + 2);
+						temp2 = player.increaseCock(0, rand(3) + 2);
 						player.lengthChange(temp2, 1);
 						//Display the degree of thickness change.
 						if (temp3 >= 1) {
@@ -2892,7 +2891,7 @@
 						temp = player.cocks.length;
 						while (temp > 0) {
 							temp--;
-							temp2 = increaseCock(player, temp, rand(3) + 5);
+							temp2 = player.increaseCock(temp, rand(3) + 5);
 							temp3 = player.cocks[temp].thickenCock(1.5);
 						}
 						player.lengthChange(temp2, player.cocks.length);
@@ -2915,7 +2914,7 @@
 					if (player.cocks.length == 1) {
 						outputText("\n\nYour " + multiCockDescript() + " fills to its normal size... and begins growing...", false);
 						temp3 = player.cocks[0].thickenCock(1.5);
-						temp2 = increaseCock(player, 0, rand(3) + 5);
+						temp2 = player.increaseCock(0, rand(3) + 5);
 						player.lengthChange(temp2, 1);
 						//Display the degree of thickness change.
 						if (temp3 >= 1) {
@@ -3308,7 +3307,7 @@
 					player.cocks[temp].cockLength -= .5;
 					temp3 -= .5;
 				}
-				temp3 += increaseCock(player, temp, (rand(3) + 1) * -1);
+				temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
 				player.lengthChange(temp3, 1);
 				if (player.cocks[temp].cockLength < 2) {
 					outputText("  ", false);
@@ -3875,7 +3874,7 @@
 						player.cocks[0].cockLength -= .5;
 						temp3 -= .5;
 					}
-					temp3 += increaseCock(player, 0, (rand(3) + 1) * -1);
+					temp3 += player.increaseCock(0, (rand(3) + 1) * -1);
 					player.lengthChange(temp3, 1);
 				}
 			}
@@ -7859,7 +7858,7 @@
 							if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
 						}
 						player.cocks[temp].cockLength -= 0.5;
-						increaseCock(player, temp, Math.round(player.cocks[temp].cockLength * 0.33) * -1);
+						player.increaseCock(temp, Math.round(player.cocks[temp].cockLength * 0.33) * -1);
 					}
 					temp++;
 				}

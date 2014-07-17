@@ -1964,5 +1964,54 @@ use namespace kGAMECLASS;
 				ballSize = 1;
 			}
 		}
+		public function modCumMultiplier(delta:Number):Number
+		{
+			trace("modCumMultiplier called with: " + delta);
+		
+			if (delta == 0) {
+				trace( "Whoops! modCumMuliplier called with 0... aborting..." );
+				return delta;
+			}
+			else if (delta > 0) {
+				trace("and increasing");
+				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
+					trace("and MessyOrgasms found");
+					delta *= 1.5
+				}
+			}
+			else if (delta < 0) {
+				trace("and decreasing");
+				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
+					trace("and MessyOrgasms found");
+					delta *= 0.5
+				}
+			}
+
+			trace("and modifying by " + delta);
+			cumMultiplier += delta;
+			return delta;
+		}
+
+		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
+		{
+			var bigCock:Boolean = false;
+	
+			if (findPerk(PerkLib.BigCock) >= 0)
+				bigCock = true;
+
+			return cocks[cockNum].growCock(lengthDelta, bigCock);
+		}
+		
+		public function increaseEachCock(lengthDelta:Number):Number
+		{
+			var totalGrowth = 0;
+			
+			for (var i:Number = 0; i < cocks.length; i++) {
+				trace( "increaseEachCock at: " + i);
+				totalGrowth += increaseCock(i as Number, lengthDelta);
+			}
+			
+			return totalGrowth;
+		}
 	}
 }

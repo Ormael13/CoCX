@@ -62,7 +62,7 @@ package classes
 			return cockThickness * cockLength;
 		}
 		
-		public function growCock(lengthDelta:Number, bigCock:Boolean, bigCockVal1:Number):Number
+		public function growCock(lengthDelta:Number, bigCock:Boolean):Number
 		{
 			
 			if (lengthDelta == 0) {
@@ -78,10 +78,10 @@ package classes
 			if (lengthDelta > 0) { // growing
 				trace("and growing...");
 				threshhold = 24;
-				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
+				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
 					trace("growCock found BigCock Perk");
-					lengthDelta *= bigCockVal1;
+					lengthDelta *= 1.5;
 					threshhold += 12;
 				}
 				// Not a human cock? Multiple the length before dimishing returns set in by 3
@@ -109,7 +109,7 @@ package classes
 				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
 					trace("growCock found BigCock Perk");
-					lengthDelta /= bigCockVal1;
+					lengthDelta *= 0.5;
 					threshhold += 12;
 				}
 				// Not a human cock? Add 12 to the length before dimishing returns set in
@@ -131,7 +131,7 @@ package classes
 					lengthDelta /= 2;
 			}
 
-			trace("then changing by:" + lengthDelta);
+			trace("then changing by: " + lengthDelta);
 
 			cockLength += lengthDelta;
 			
@@ -190,9 +190,8 @@ package classes
 					increase--;
 				}
 				increase = 0;
-				return amountGrown;
 			}
-			if (increase < 0)
+			else if (increase < 0)
 			{
 				while (increase < 0)
 				{
@@ -217,6 +216,7 @@ package classes
 					increase++;
 				}
 			}
+			trace("thickenCock called and thickened by: " + amountGrown);
 			return amountGrown;
 		}	
 		

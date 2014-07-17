@@ -1065,7 +1065,7 @@ public function cockPumping():void {
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
-		if(player.cumQ() < 1000) player.cumMultiplier++;
+		if (player.cumQ() < 1000) player.modCumMultiplier(1);
 		if (payout == 1) outputText(Num2Text(payout) + " gem rolls ", false);
 		else outputText(Num2Text(payout) + " gems roll", false);
 	
