@@ -1847,10 +1847,10 @@ public function dropItem(monster:Monster):void {
 }
 public function awardPlayer():void
 {
-	if (player.findPerk(PerkLib.MidasCock) >= 0) {
+	if (player.countCockSocks("gilded") > 0) {
 		//trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
 		
-		var bonusGems:int = monster.gems * 0.15 + 5; // int so AS rounds to whole numbers
+		var bonusGems:int = monster.gems * 0.15 + 5 * player.countCockSocks("gilded"); // int so AS rounds to whole numbers
 		monster.gems += bonusGems;
 		//trace( "to: " + monster.gems )
 	}

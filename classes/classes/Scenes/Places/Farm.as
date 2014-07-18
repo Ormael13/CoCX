@@ -1075,10 +1075,12 @@ public function cockPumping():void {
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
 	}
-	if (player.findPerk(PerkLib.MidasCock) >= 0) {
+	if (player.countCockSocks("gilded") > 0) {
 		
-		var gems:int = rand(2) + 2;
-		if (player.cumQ() > 20)
+		var gems:int = rand(2) + 2 * player.countCockSocks("gilded");
+		if (player.cumQ() > 1000)
+			gems *= 4;
+		else if (player.cumQ() > 200)
 			gems *= 3;
 		
 		if (payout > 0) {

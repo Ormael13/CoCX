@@ -904,7 +904,7 @@ public static const SOCK_COUNTER:int                                            
 public static const SOCK_HOLDING:int                                                =  896; // 
 public static const FOUND_SOCKS:int                                                 =  897; // 
 public static const SOCKS_BOUGHT:int                                                =  898; // 
-public static const MIDAS_JERKED:int                                                =  899; // 
+public static const GILDED_JERKED:int                                                =  899; // 
 public static const PHYLLA_INHERITED_KNOWLEDGE:int                                  =  900; // 
 public static const PHYLLA_IZMA_TALK:int                                            =  901; // 
 public static const AKBAL_TIMES_BITCHED:int                                         =  902; // 

@@ -11,7 +11,7 @@
 // SOCK_HOLDING:int = 896;
 // FOUND_SOCKS:int = 897;
 // SOCKS_BOUGHT:int = 898;
-// MIDAS_JERKED:int = 899;
+// GILDED_JERKED:int = 899;
 //Set Up With The Travelling, Tainted Bazaar
 public function Bazaar(){
 }
@@ -512,7 +512,7 @@ private function gretasGarments():void {
 	menu();
 	if(flags[kFLAGS.FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
 	else {
-		if(flags[kFLAGS.FOUND_SOCKS] == 2 && player.hasCock() && player.hasSockRoom()) addButton(1,"Browse Socks",browseDemSocksSon);
+		if(flags[kFLAGS.FOUND_SOCKS] == 2 && player.cocks.length > 0 && player.hasSockRoom()) addButton(1,"Browse Socks",browseDemSocksSon);
 		if(player.hasSock()) addButton(2,"Remove Sock",takeOffDatSock);
 	}
 	if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) addButton(0,"Bikini",askGretaAboutZeBikini);
@@ -705,15 +705,8 @@ private function yesPutDatSockOnMe(target:int):void {
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
 
-	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") {
-		if(player.findPerk(PerkLib.MidasCock) < 0) {
-			player.createPerk(PerkLib.MidasCock,0,0,0,0);
-			player.gems -= 3000;
-		}
-		else {
-			conflict = true;
-		}
-	}
+	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") player.gems -= 3000;
+
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;

@@ -416,7 +416,7 @@ import classes.PerkType;
 			if (findPerk(PerkLib.MidasCock) >= 0) {
 			
 				var randomCock:int = rand( cocks.length - 1 );
-				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + 2; // int so AS rounds to whole numbers
+				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + 2 * countCockSocks("gilded"); // int so AS rounds to whole numbers
 				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>" );
 				gems += bonusGems;
 	}
@@ -2191,7 +2191,7 @@ import classes.PerkType;
 		
 		public function hasSockRoom():Boolean
 		{
-			var index:int = cockTotal();
+			var index:int = cocks.length;
 			while (index > 0)
 			{
 				index--;
@@ -2204,10 +2204,18 @@ import classes.PerkType;
 		// Deprecated
 		public function hasSock(arg:String = ""):Boolean
 		{
-			if (countCockSocks(arg) > 0)
-				return true;
-			else
-				return false;
+			var index:int = cocks.length;
+			
+			while (index > 0)
+			{
+				index--;
+				if (cocks[index].sock != "")
+				{
+				if (arg == "" || cocks[index].sock == arg)
+					return true;
+				}
+			}
+			return false
 		}
 		public function countCockSocks(type:String):int
 		{

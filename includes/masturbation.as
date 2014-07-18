@@ -248,7 +248,7 @@ public function onaholeUse():void
 		
 		outputText("You get naked and settle down with your new toy. The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure. ", false);
 
-		if(player.cockTotal() > 1)
+		if(player.cocks.length > 1)
 			outputText("With your free hand, you slap your " + multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ", false);
 		else
 			outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock.", false);
@@ -269,7 +269,7 @@ public function onaholeUse():void
 	player.orgasm();
 	dynStats("sen", -.75);
 					
-	if (player.cockTotal() > 1)
+	if (player.cocks.length > 1)
 		doNext(2046);
 	
 	if (player.gender == 3)
@@ -286,7 +286,7 @@ public function deluxeOnaholeUse():void {
 	
 		outputText("You get naked and settle down with your new toy. You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n", false);
 
-		if(player.cockTotal() > 1)
+		if(player.cocks.length > 1)
 			outputText("With your free hand, you slap your " + multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ", false);
 		else
 			outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock. ", false);
@@ -309,7 +309,7 @@ public function deluxeOnaholeUse():void {
 	player.orgasm();
 	dynStats("sen", -1.5);
 					
-	if (player.cockTotal() > 1)
+	if (player.cocks.length > 1)
 		doNext(2046);
 		
 	if (player.gender == 3)
@@ -341,7 +341,7 @@ public function allNaturalOnaholeUse():void {
 			return;
 		}
 		//MultiCock!
-		if(player.cockTotal() > 1) {
+		if(player.cocks.length > 1) {
 			outputText("Scratching your head, you wonder how such a goofy contraption can offer the extreme pleasures Giacomo was peddling. Shrugging your shoulders, you disrobe and quickly stir your she-cock for a nice quick fuck. With little difficulty, you push the two cushions aside as you penetrate the toy. It feels very warm, like the warmth of flesh. You push the onahole down on your cock until you bottom out. You feel some sort of soft protrusion in the base of the toy, pressing against the opening of your cock.", false);
 			outputText("\n\nYou begin gently stroking yourself with the toy. You decide for a nice, leisurely pace over your usual marathon moods. The toy is warm and is very pleasurable. While hardly worthy of the sales pitch made by Giacomo, you feel that it was worth the money. If nothing else, it is different.", false);
 			outputText("\n\nWithout warning, you feel immense pressure clamp down upon your cock. Shocked, you instinctively try to pull out. Your efforts only succeed in jerking the toy up shaft for a moment before it plunges back down. Whatever went wrong, your cock is stuck. You feel a pulse from the two cushions inside the onahole. The thing lurches forward on your cock and it is now embedded deeper. Frustrated, you start thumping your trapped pecker against the ground, trying to shake the thing loose. To no avail, the thing lurches forward on your cock. You now feel the annoying impression against the head of your cock as you bottom out.", false);
@@ -805,15 +805,9 @@ public function masturbateGo():void {
 		else exgartuan.exgartuanMasturbation();
 		return;
 	}
-	if(player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
-		if(player.hasSock("gilded")) {
-			gildedCockTurbate();
-			flags[kFLAGS.MIDAS_JERKED] = 1;
-			return;
-		}
-		else {
-			player.removePerk(PerkLib.MidasCock);
-		}
+	if(player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
+		gildedCockTurbate();
+		return;
 	}
 	var autofellatio:Boolean = false;
 	var hermtastic:Boolean = false;
@@ -871,7 +865,7 @@ public function masturbateGo():void {
 	\\*****************************/
 
 	//Cock masturbation!
-	if(player.cockTotal() == 1) {
+	if(player.cocks.length == 1) {
 		//New lines for masturbation!
 		outputText("\n\n", false);
 		//1.8 thick enough to satisfy all women
@@ -991,9 +985,9 @@ public function masturbateGo():void {
 		}
 	}
 	//MULTICOCK
-	else if(player.cockTotal() > 1) {
+	else if(player.cocks.length > 1) {
 		//Duo!
-		if(player.cockTotal() == 2) {
+		if(player.cocks.length == 2) {
 			//Grab it
 			//Play with sheath if has one
 			if(player.hasSheath()) {
@@ -1022,7 +1016,7 @@ public function masturbateGo():void {
 							nippleFuck = true; 
 							if(multiTitFuck()) autofellatio = true;
 						}
-						else if(player.dogCocks() != player.cockTotal()) //if you have something that will fit
+						else if(player.dogCocks() != player.cocks.length) //if you have something that will fit
 						{ 
 							nippleFuck = true; 
 							autofellatio = true;
@@ -1069,7 +1063,7 @@ public function masturbateGo():void {
 							nippleFuck = true; 
 							if(multiTitFuck()) autofellatio = true;
 						} 
-						else if(player.dogCocks() != player.cockTotal()) //if you have something that will fit
+						else if(player.dogCocks() != player.cocks.length) //if you have something that will fit
 						{ 
 							nippleFuck = true;
 							autofellatio = true;
@@ -1101,7 +1095,7 @@ public function masturbateGo():void {
 				}
 			}			
 		}
-		if(player.cockTotal() >= 3) {
+		if(player.cocks.length >= 3) {
 			//Grab it
 			//Play with sheath if has one
 			if(player.hasSheath()) {
@@ -1109,7 +1103,7 @@ public function masturbateGo():void {
 			}
 			//Prep bit + variance based on thickness
 			outputText("You grasp one of your " + multiCockDescriptLight() + " in each hand, ", false);
-			if(player.averageCockThickness() <= 1.8) outputText("wrapping your fingers around each tool and just holding yourself, the feelings of your " + player.cockTotal()+ " cocks making you feel giddy.  ", false);
+			if(player.averageCockThickness() <= 1.8) outputText("wrapping your fingers around each tool and just holding yourself, the feelings of your " + player.cocks.length+ " cocks making you feel giddy.  ", false);
 			else outputText("squeezing as many of your tools as your fingers can encircle.  The feeling of rubbing your bundle of cocks together is indescribable.  Your eyes roll back in uncontrollable pleasure.  ", false);
 			//Get into it
 			//Play with it if <= 10"
@@ -1129,13 +1123,13 @@ public function masturbateGo():void {
 						{
 							nippleFuck = true; 
 							if(multiTitFuck()) autofellatio = true;
-						} else if(player.dogCocks() != player.cockTotal()) //if you have something that will fit
+						} else if(player.dogCocks() != player.cocks.length) //if you have something that will fit
 						{ 
 							nippleFuck = true;
 							autofellatio = true;
-							if(player.normalCocks() > 0 && player.cockTotal() - player.dogCocks() == 1) titFuckSingle();
-							if(player.horseCocks() > 0 && player.cockTotal() - player.dogCocks() == 1) horseTitFuckSingle();
-							if(player.cockTotal() - player.dogCocks() > 1) multiTitFuck();
+							if(player.normalCocks() > 0 && player.cocks.length - player.dogCocks() == 1) titFuckSingle();
+							if(player.horseCocks() > 0 && player.cocks.length - player.dogCocks() == 1) horseTitFuckSingle();
+							if(player.cocks.length - player.dogCocks() > 1) multiTitFuck();
 						} //if you only have dogcocks that are too big, no nipple fuck! Otherwise, run normal multiTitFuck
 					} else
 					{
@@ -1177,13 +1171,13 @@ public function masturbateGo():void {
 							nippleFuck = true; 
 							if(multiTitFuck()) autofellatio = true;
 						} 
-						else if(player.dogCocks() != player.cockTotal()) //if you have something that will fit
+						else if(player.dogCocks() != player.cocks.length) //if you have something that will fit
 						{ 
 							nippleFuck = true;
 							autofellatio = true;
-							if(player.normalCocks() > 0 && player.cockTotal() - player.dogCocks() == 1) titFuckSingle();
-							if(player.horseCocks() > 0 && player.cockTotal() - player.dogCocks() == 1) horseTitFuckSingle();
-							if(player.cockTotal() - player.dogCocks() > 1) multiTitFuck();
+							if(player.normalCocks() > 0 && player.cocks.length - player.dogCocks() == 1) titFuckSingle();
+							if(player.horseCocks() > 0 && player.cocks.length - player.dogCocks() == 1) horseTitFuckSingle();
+							if(player.cocks.length - player.dogCocks() > 1) multiTitFuck();
 						} //if you only have dogcocks that are too big, no nipple fuck! Otherwise, run normal multiTitFuck
 					} else
 					{
@@ -1243,9 +1237,9 @@ public function masturbateGo():void {
 	orgazmo(autofellatio, nippleFuck);
 	//POST MASTUBLATORY BLISS
 	outputText("\n\n", false)
-	if(player.cockTotal() > 0) {
+	if(player.cocks.length > 0) {
 		//Single Cock
-		if(player.cockTotal() == 1) {
+		if(player.cocks.length == 1) {
 			if(player.lib < 30) outputText("You quickly fall asleep, spent. ", false);
 			if(player.lib >= 30 && player.lib < 55) outputText("You roll and begin to doze, your semi-erect " + cockDescript(0) + " flopping against you. ", false);
 			if(player.lib >= 55 && player.lib <= 80) {
@@ -1256,7 +1250,7 @@ public function masturbateGo():void {
 			if(player.lib > 80) outputText("You groan and drift to sleep, your rigid " + cockDescript(0) + " pulsing and throbbing with continual lust.", false);
 		}
 		//Multi Cock
-		if(player.cockTotal() > 1) {
+		if(player.cocks.length > 1) {
 			if(player.lib < 30) outputText("You quickly fall asleep, spent. ", false);
 			if(player.lib >= 30 && player.lib < 55) outputText("You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ", false);
 			if(player.lib >= 55 && player.lib <= 80) {
@@ -1593,7 +1587,7 @@ public function multiTitFuck():Boolean
 			outputText("A word that might have been \"multidivisication\" drifts through your lust-fogged brain, and you begin to position two dicks against a poor, unsuspecting nipple, preparing to double-penetrate.  ", false);
 			//does this give enough space?
 			if(holeTotal*2 >= fittableCocks) outputText("You giggle with glee as you realize that you will be able to jam every single one of your " + multiCockDescriptLight() + " into your abused nipples, thanks to double-penetration! ", false);
-			else outputText("With a flash of irritation, you realize that even if you stick two cocks in each hole, you still won't be able to fit all " + num2Text(player.cockTotal()) + " of your dicks into your abused tits. Deciding to make the best of it, you prepare to stuff in as many as you can. ", false);
+			else outputText("With a flash of irritation, you realize that even if you stick two cocks in each hole, you still won't be able to fit all " + num2Text(player.cocks.length) + " of your dicks into your abused tits. Deciding to make the best of it, you prepare to stuff in as many as you can. ", false);
 		} 
 		else outputText("Accepting that you cant do anything about it, you start pushing. ", false);
 	}
@@ -1751,9 +1745,9 @@ public function multiNippleFuckPrep(randomCock:Number):void {
 //ORGASM COOOOAD
 public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 	outputText("\n\n", false);
-	if(player.cockTotal() > 0) 
+	if(player.cocks.length > 0) 
 	{
-		if(player.cockTotal() == 1) {
+		if(player.cocks.length == 1) {
 			outputText("The sensations prove too much for you, and you feel the tightness building in your ", false);
 			if(player.normalCocks() == 1) outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ", false);
 			else if(player.hasKnot()) outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your " + cockDescript(0) + ".  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ", false);
@@ -1789,7 +1783,7 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			}			
 		}
 		//MULTICOCK
-		if(player.cockTotal() > 1) {
+		if(player.cocks.length > 1) {
 			outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ", false);
 			//Primary Dog
 			if(player.dogCocks() > player.normalCocks() && player.dogCocks() > player.horseCocks()) 
@@ -1929,7 +1923,7 @@ public function deluxeDildo():void {
 		//(Pretty wet)
 		else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) {
 			outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your " + vaginaDescript(0) + ", gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ", false);
-			if(player.cockTotal() > 0) {
+			if(player.cocks.length > 0) {
 				outputText("Even your " + multiCockDescript() + " ache", false);
 				if(player.totalCocks() == 1) outputText("s", false);
 				outputText(" and pulse", false);
@@ -2052,7 +2046,7 @@ public function centaurMasturbation():Boolean {
 	else if(selector == 1) {
 		//reset plurality and primary cock.
 		plural = false;
-		if(player.cockTotal() > 1) plural = true;
+		if(player.cocks.length > 1) plural = true;
 		primary = player.longestCock()
 		outputText("You shrug out of your " + player.armorName + ", not that it does much to impede your " + multiCockDescriptLight() + " as a centaur.   ", false);
 		if(player.cor < 33) outputText("Sighing in disappointment and shame, ", false);
@@ -2193,7 +2187,7 @@ public function centaurMasturbation():Boolean {
 			outputText("You still can't reach around to masturbate yourself.  Being half-horse sure is inconvenient!\n\n", false);
 		}
 		//(If Milker)
-		if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0) outputText("Perhaps you could visit the cock-milker you have set up at Whitney's farm and drain off the arousal?  Or maybe you'll just have to find a willing partner somewhere.", false);
+		if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cocks.length > 0) outputText("Perhaps you could visit the cock-milker you have set up at Whitney's farm and drain off the arousal?  Or maybe you'll just have to find a willing partner somewhere.", false);
 		else outputText("It looks like you'll have to find a partner to relieve your pent up need, but in your current state you'll probably be on the receiving end of whatever you can get!", false);
 	}
 	if(scene.length == 0) return false;
@@ -2254,9 +2248,9 @@ public function catAutoLick():void {
 			
 			outputText("A very familiar feeling of pleasure rushes through your body, causing you to shudder. You pull your cock out and begin to stroke it as you suck on the tip, practically drinking your pre-cum. You can feel your cum building up as it gets ready to be released. After flicking your tongue against the tip of your " + cockDescript(0) + ", you feel the flood of cum flowing up your dick", false);
 			
-			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 		
-				flags[kFLAGS.MIDAS_JERKED]++
+				flags[kFLAGS.GILDED_JERKED]++
 		
 				var gems:int = midasCockJackingGemsRoll();
 
@@ -2282,9 +2276,9 @@ public function catAutoLick():void {
 			
 			outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + cockDescript(0) + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. ", false);
 			
-			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 		
-				flags[kFLAGS.MIDAS_JERKED]++;
+				flags[kFLAGS.GILDED_JERKED]++;
 		
 				var gems:int = midasCockJackingGemsRoll();
 				
@@ -2372,9 +2366,9 @@ public function centaurDudesGetHorseAids():void {
 
 	outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you.  You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + cockDescript(x) + " until the pleasure overwhelms you.  You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it", false);
 	
-	if(player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+	if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 		
-		flags[kFLAGS.MIDAS_JERKED]++
+		flags[kFLAGS.GILDED_JERKED]++
 		
 		var gems:int = midasCockJackingGemsRoll();
 		
@@ -2507,7 +2501,7 @@ public function getHugeEggsInCawk():void {
 		//[If herm:] 
 		if(player.gender == 3) {
 			outputText("\n\nYou examine your cock");
-			if(player.cockTotal() > 1) outputText("s");
+			if(player.cocks.length > 1) outputText("s");
 			outputText(" as well as your pussy, and decide to try the latter first.  You flex your still-unfamiliar muscles and curl your abdomen back across yourself, straining to pull it into place, but it just isn't flexible enough to curl that far. Even using your arms, ");
 			if(player.str > 50) outputText("even with your considerable strength, ");
 			outputText("you cannot manage to bend it far enough to get there.  You actually start to feel a pain where your abdomen connects to the rest of your body, and you disregard this as a bad idea.");
@@ -2645,9 +2639,9 @@ public function layEggsInYerTits():void {
 		outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Exgartuan, that falls off into waves as the eggs continue to inexorably push into your [chest].  You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Exgartuan knows what's going on in your breasts better than you, you'd worry.");
 		outputText("\n\nAs it is, Exgartuan is stifling all movement and protest you might be able to muster to be beholden to her moment.  You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
 		//[if (cocks > 1) 
-		if(player.cockTotal() > 1) outputText("  Your cocks, while still erect, are doing little more than dribbling cum over your breasts and tubes, devoid of the force and power they usually have.");
+		if(player.cocks.length > 1) outputText("  Your cocks, while still erect, are doing little more than dribbling cum over your breasts and tubes, devoid of the force and power they usually have.");
 		//[if (cocks = 1)]
-		else if(player.cockTotal() == 1) outputText("  Your [cock], while still erect, does little more than dribble cum over your breasts and tubes, devoid of the force and power that usually comes with orgasm.");
+		else if(player.cocks.length == 1) outputText("  Your [cock], while still erect, does little more than dribble cum over your breasts and tubes, devoid of the force and power that usually comes with orgasm.");
 		//[if (hasVagina = true)]
 		if(player.hasVagina()) outputText("  Your [vagina] lets sticky fluids out slowly around your thighs; you are only able to tell by the damp feel of your [legs].  \"It feels fantastic!");
 		outputText("\n\nAll too soon, the eggs come to a stop, with your breasts feeling as if they've gained numerous cup sizes in, weight at least, from the orbs of your children.  You remove the ovipositors from your [nipples] with a gentle awe, both to the euphoria and to Exgartuan.");
@@ -2728,7 +2722,7 @@ public function tentacleSelfFuck():void {
 	var x:int = -1;
 	var y:int = -1;
 	temp = 0;
-	while (temp < player.cockTotal()) {
+	while (temp < player.cocks.length) {
 		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			if(x == -1) x = temp;
 		}
@@ -2736,7 +2730,7 @@ public function tentacleSelfFuck():void {
 	}
 	//Pick a second dick that isn't the first.
 	temp = 0;
-	while(temp < player.cockTotal()) {
+	while(temp < player.cocks.length) {
 		if(temp != x) {
 			if(y < 0) y = temp;
 			else if(rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.TENTACLE) y = temp;
@@ -2764,12 +2758,12 @@ public function tentacleSelfFuck():void {
 	else if(player.wetness() <= 4) outputText("sloppy and wet");
 	else outputText("beyond soaked");
 	outputText(".  The slick slit is slowly parting as you reach to wrangle the wiggly cock");
-	if(player.cockTotal() > 1) {
+	if(player.cocks.length > 1) {
 		outputText(", brushing your hand against your other ");
 		if(player.lust <= 70) outputText("half-hard");
 		else outputText("erect");
 		outputText(" penis");
-		if(player.cockTotal() > 1) outputText("es");
+		if(player.cocks.length > 1) outputText("es");
 		outputText(" on the way");
 	}
 	outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from an human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it it's somewhere warm and tight.");
@@ -2800,7 +2794,7 @@ public function tentacleSelfFuck():void {
 	//{no new PG}  Three + Tentalce fork - one in mouth
 	if(player.tentacleCocks() >= 3) {
 		outputText("  The pleasured noises that have been issuing forth from your 'O'-gaped lips are cut off by a sudden intrusion from another of your arboreal phalluses.   This one punches straight into your throat without pause, sliding so smoothly across your tongue that you barely care about gagging when it feels so good.  Trickles of your sweet pre-cum are dribbling out from [eachCock] into your holes");
-		if(player.tentacleCocks() < player.cockTotal()) outputText(" and the open air");
+		if(player.tentacleCocks() < player.cocks.length) outputText(" and the open air");
 		outputText(".");
 		if(player.biggestTitSize() >= 4) outputText("  Laying right between your boobs, it doesn't take long for the shaft to extend far enough to loop around each tit, sliding slowly encircling each curvy mound as it presses them together around itself, getting a titfuck while it plows your unresisting mouth.");
 	}
@@ -2854,12 +2848,12 @@ public function tentacleSelfFuck():void {
 		else if(player.cumQ() < 500) outputText("in huge blobs");
 		else outputText("like a virile sprinkler");
 		outputText(".");
-		if(player.cockTotal() > 2) {
+		if(player.cocks.length > 2) {
 			outputText("  The other one");
-			if(player.cockTotal() > 3) outputText("s match");
+			if(player.cocks.length > 3) outputText("s match");
 			else outputText(" matches");
 			outputText(" it in output, even though you haven't done anything to stimulate ");
-			if(player.cockTotal() == 3) outputText("it");
+			if(player.cocks.length == 3) outputText("it");
 			else outputText("them");
 			outputText(".  The sensations coming from your prehensile penises are just so overwhelming that it's like a whole-body-gasm.");
 		}
@@ -2896,7 +2890,7 @@ public function tentacleSelfFuck():void {
 public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	var x:int = -1;
 	temp = 0;
-	while(temp < player.cockTotal()) {
+	while(temp < player.cocks.length) {
 		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			x = temp;
 			if(rand(2) == 0) break;
@@ -2936,9 +2930,9 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	if(player.cumQ() >= 1500) outputText("  Your poor insides cannot handle the enormous cumshot being unloaded in your [asshole] and a significant volume of spunk dribbles outside, carelessly polluting the floor.");
 	//[Standard text for other cocks cumming goes here.]
 	outputText("  You groan and lazily remove your " + cockDescript(x) + " from your anus as you give in to your pleasure-induced drowsiness.");
-	if(player.cockTotal() > 0) {
+	if(player.cocks.length > 0) {
 		//Single Cock
-		if(player.cockTotal() == 1) {
+		if(player.cocks.length == 1) {
 			if(player.lib < 30) outputText("  You quickly fall asleep, spent. ", false);
 			if(player.lib >= 30 && player.lib < 55) outputText("  You roll and begin to doze, your semi-erect " + cockDescript(0) + " flopping against you. ", false);
 			if(player.lib >= 55 && player.lib <= 80) {
@@ -2949,7 +2943,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 			if(player.lib > 80) outputText("  You groan and drift to sleep, your rigid " + cockDescript(0) + " pulsing and throbbing with continual lust.", false);
 		}
 		//Multi Cock
-		if(player.cockTotal() > 1) {
+		if(player.cocks.length > 1) {
 			if(player.lib < 30) outputText("  You quickly fall asleep, spent. ", false);
 			if(player.lib >= 30 && player.lib < 55) outputText("  You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ", false);
 			if(player.lib >= 55 && player.lib <= 80) {
@@ -2969,23 +2963,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 //Select [Gilded Sock] from Masturbation menu
 public function gildedCockTurbate():void {
 	clearOutput();
-	var x:int = -1;
-	temp = 0;
-	while(temp < player.cockTotal()) {
-		if(player.cocks[temp].sock == "gilded") {
-			x = temp;
-			break;
-		}
-		temp++;
-	}
-	//Did I fuck up?
-	if(x < 0) 
-	{
-		CoC_Settings.error("");
-		outputText("ERROR, NO GILDED COCK.");
-		doNext(13);
-		return;
-	}
+
 	outputText("You disrobe, shivering softly.  Biting your lip, you look down, realizing that though the day is warm the gleaming metallic sleeve on your cock is cool, almost chill.");
 	outputText("\n\nThe light catches the golden cock-sock, scattering light through the area.  You grin as you grasp it, rubbing your thumb against the smooth top of the sheath, with your fingers rubbing against the tight leather cords beneath.  Your cock swells against the metallic walls of the cocksock, and though you're clearly growing warmer, the gleaming sheath stays cool to the touch.");
 	
@@ -3006,10 +2984,11 @@ public function gildedCockTurbate():void {
 
 	var gems:int = midasCockJackingGemsRoll();
 
-	outputText("\n\nYou have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.");
+	outputText("\n\n<b>You have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.</b>");
 	player.orgasm();
 	dynStats("sen", -1);
 	player.gems += gems;
+	flags[kFLAGS.GILDED_JERKED]++
 	statScreenRefresh();
 	doNext(13);
 }
@@ -3094,11 +3073,19 @@ public function midasCockJackingGemsRoll():int
 {
 	var gems:int = 10 + rand(20);
 
-	if (player.cumQ() >= 1000)
-		gems += player.cumQ() / 100;
-
-	if (gems > 90)
-		gems = 90 + rand(20);
+	if (player.cumQ() >= 10000 * (player.countCockSocks("gilded")))
+		gems += player.cumQ() / 1350;
+	else if (player.cumQ() >= 5000 * (player.countCockSocks("gilded")))
+		gems += player.cumQ() / 450;
+	else if (player.cumQ() >= 2500 * (player.countCockSocks("gilded")))
+		gems += player.cumQ() / 150;
+	else if (player.cumQ() >= 1000 * (player.countCockSocks("gilded")))
+		gems += player.cumQ() / 50;
+	else
+		gems += player.cumQ() / 10;
+		
+	if (gems > 200 * (player.countCockSocks("gilded")))
+		gems = 200 * player.countCockSocks("gilded") + rand(20);
 
 	return gems;
 }
@@ -3108,9 +3095,9 @@ public function onaholeRepeatUse(corrupted:Boolean):void
 			if(corrupted) {
 			outputText("Amused, yet annoyed by the aching of your loins, you take out the well-used onahole to give yourself a good, old-fashioned cock milking. With singular purpose, you impale the toy on your " + cockDescript(0) + " and begin hammering away as if the world depended upon your orgasm. Your fist is but a blur as the toy pumps your " + cockDescript(0) + " beyond any degree of reason. Relishing in each cramp of pleasure as your cum builds, you flex your well-toned pelvic muscles to both heighten your pleasure and to prevent premature release of the impressive batch you are working on. As time passes, even your impressive physical control is no match for the need to unload your spunk. Waiting until the pressure mashes the base of your cock, you strip the toy away from your shaft and with a great squeeze of your crotch, let loose an impressive stream of cock juice that arcs several yards away. Impressed with your own orgasm, you smile, grit your teeth and continue clenching your crotch muscles in an attempt to repeat your massive distance in the orgasm. Lance upon lance of fuck-milk hoses the area down as you empty yourself of your overwhelming lust. After a few dozen shots, your body empties itself of its needs and fatigue strikes you. After cleaning yourself up and rearranging your area to avoid the massive cum puddle you made, ", false)
 			
-			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 		
-				flags[kFLAGS.MIDAS_JERKED]++
+				flags[kFLAGS.GILDED_JERKED]++
 		
 				var gems:int = midasCockJackingGemsRoll();
 				
@@ -3125,9 +3112,9 @@ public function onaholeRepeatUse(corrupted:Boolean):void
 		else {
 			outputText("Much to your annoyance and embarrassment, you feel the need to relieve yourself of your tension. Sighing in reservation, you remove the used onahole from your sack. Operating with a mind of its own, your " + cockDescript(0) + " springs to attention, anticipating the coming stimulation and release. Your member easily pushes past the opening in the toy and you begin working your penis with some vigor. Pleasure begins to pulse through your " + cockDescript(0) + " as you build yourself up. The force of the building fluids pushes against your inner organs, creating the paradoxical sensation of pain and pleasure. Pure instict takes over, and your hips begin to buck reflexively. With a sudden, sharp pinch at the base of your member, the need to cum takes over your body", false);
 	
-			if (player.findPerk(PerkLib.MidasCock) >= 0 && flags[kFLAGS.MIDAS_JERKED] == 0) {
+			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 		
-				flags[kFLAGS.MIDAS_JERKED]++
+				flags[kFLAGS.GILDED_JERKED]++
 		
 				var gems:int = midasCockJackingGemsRoll();
 				
