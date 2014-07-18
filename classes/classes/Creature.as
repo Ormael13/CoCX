@@ -2201,19 +2201,25 @@ import classes.PerkType;
 			return false
 		}
 		
+		// Deprecated
 		public function hasSock(arg:String = ""):Boolean
 		{
-			var index:int = cockTotal();
-			while (index > 0)
-			{
-				index--;
-				if (cocks[index].sock != "")
-				{
-					if (arg == "" || cocks[index].sock == arg)
-						return true;
+			if (countCockSocks(arg) > 0)
+				return true;
+			else
+				return false;
+		}
+		public function countCockSocks(type:String):int
+		{
+			var count:int = 0;
+			
+			for (var i:Number = 0; i < cocks.length; i++) {
+				if (cocks[i].sock == type) {
+					count++
 				}
 			}
-			return false
+			trace("countCockSocks found " + count + " " + type);
+			return count;
 		}
 		
 		public function canAutoFellate():Boolean
