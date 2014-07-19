@@ -352,7 +352,7 @@
 			else if (player.cor < 75) dynStats("cor", .5);
 			else dynStats("cor", .25);
 			outputText("\n\nIntermittent waves of numbness wash through your body, turning into a warm tingling that makes you feel sensitive all over.  The warmth flows through you, converging in your loins and bubbling up into lust.", false);
-			if (player.totalCocks() > 0) {
+			if (player.cocks.length > 0) {
 				outputText("  ", false);
 				if (player.cockTotal() == 1) outputText("Y", false);
 				else outputText("Each of y", false);
@@ -657,7 +657,7 @@
 				}
 			}
 			//Males go into rut
-			if (player.totalCocks() > 0 && rand(4) == 0) {
+			if (player.cocks.length > 0 && rand(4) == 0) {
 				//Rut affects:
 				//v1 - bonus cum production
 				//v2 - bonus libido
@@ -678,9 +678,9 @@
 			}
 			//Anti-masturbation status
 			if (rand(4) == 0 && changes < changeLimit && player.findStatusAffect(StatusAffects.Dysfunction) < 0) {
-				if (player.totalCocks() > 0) outputText("\n\nYour " + cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
+				if (player.cocks.length > 0) outputText("\n\nYour " + cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
 				else if (player.hasVagina()) outputText("\n\nYour " + vaginaDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
-				if (player.totalCocks() > 0 || player.hasVagina()) {
+				if (player.cocks.length > 0 || player.hasVagina()) {
 					player.createStatusAffect(StatusAffects.Dysfunction, 96, 0, 0, 0);
 					changes++;
 				}
@@ -3291,7 +3291,7 @@
 				dynStats("cor", temp / 10);
 			}
 			//Sex bits - Duderiffic
-			if (player.totalCocks() > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+			if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				//If the player has at least one dick, decrease the size of each slightly,
 				outputText("\n\n", false);
 				temp = 0;
@@ -3327,7 +3327,7 @@
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
-				if (player.totalCocks() == 0 && !player.hasVagina()) {
+				if (player.cocks.length == 0 && !player.hasVagina()) {
 					player.createVagina();
 					player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
@@ -3744,7 +3744,7 @@
 					}
 				}
 				//Males go into rut
-				if (player.totalCocks() > 0) {
+				if (player.cocks.length > 0) {
 					//Rut affects:
 					//v1 - bonus cum production
 					//v2 - bonus libido
@@ -3845,7 +3845,7 @@
 			}
 			//SEXYTIEMS
 			//Multidick killa!
-			if (player.totalCocks() > 1 && rand(3) == 0 && changes < changeLimit) {
+			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				player.killCocks(1);
 				changes++;
@@ -3864,7 +3864,7 @@
 				outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.", false);
 			}
 			//Shrink primary dick to no longer than 12 inches
-			else if (player.totalCocks() == 1 && rand(2) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+			else if (player.cocks.length == 1 && rand(2) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
 				if (player.cocks[0].cockLength > 12) {
 					changes++;
 					var temp3:Number = 0;
@@ -4548,7 +4548,7 @@
 				}
 			}
 			//Males go into rut
-			else if (player.totalCocks() > 0) {
+			else if (player.cocks.length > 0) {
 				//Rut affects:
 				//v1 - bonus cum production
 				//v2 - bonus libido
@@ -4776,7 +4776,7 @@
 					//Check for any more!
 					temp2 = 0;
 					j++;
-					for (j; j < player.totalCocks(); j++) {
+					for (j; j < player.cocks.length; j++) {
 						//Found another cat wang!
 						if (player.cocks[j].cockType == CockTypesEnum.CAT) {
 							//Long enough - change it
@@ -4919,9 +4919,9 @@
 			if (player.lib < 100 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ", false);
 				//(DICK)
-				if (player.totalCocks() > 0 && (player.gender != 3 || rand(2) == 0)) {
+				if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
 					outputText("filling ", false);
-					if (player.totalCocks() > 1) outputText("each of ", false);
+					if (player.cocks.length > 1) outputText("each of ", false);
 					outputText("your " + multiCockDescriptLight() + " with the desire to breed.  You get a bit hornier when you realize your sex-drive has gotten a boost.", false);
 				}
 				//(COOCH)
@@ -4961,7 +4961,7 @@
 			//-Lizard dick - first one
 			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
 				//Find the first non-lizzy dick
-				for (temp2 = 0; temp2 < player.totalCocks(); temp2++) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
@@ -4990,7 +4990,7 @@
 			//Requires 1 lizard cock, multiple cocks
 			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
-				for (temp2 = 0; temp2 < player.totalCocks(); temp2++) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
@@ -5011,7 +5011,7 @@
 				dynStats("lib", 3, "lus", 10);
 			}
 			//-Grows second lizard dick if only 1 dick
-			if (player.lizardCocks() == 1 && player.totalCocks() == 1 && rand(4) == 0 && changes < changeLimit) {
+			if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA knot of pressure forms in your groin, forcing you off your " + player.feet() + " as you try to endure it.  You examine the affected area and see a lump starting to bulge under your " + player.skinDesc + ", adjacent to your " + cockDescript(0) + ".  The flesh darkens, turning purple", false);
 				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES)
 					outputText(" and shedding " + player.skinDesc, false);
@@ -7008,7 +7008,7 @@
 			}
 
 			//dog cocks!
-			if (changes < changeLimit && rand(3) == 0 && player.dogCocks() < player.totalCocks()) {
+			if (changes < changeLimit && rand(3) == 0 && player.dogCocks() < player.cocks.length) {
 				var choices:Array = [];
 				counter = player.cockTotal();
 				while (counter > 0) {
