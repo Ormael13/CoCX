@@ -272,6 +272,7 @@ public function onaholeUse():void
 		switch(rand(2)) {
 			case 0: doNext(2046); break;
 			case 1: doNext(2050); break;
+			default: trace("Onahole to-be-continued unexpected state..."); break;
 		}
 	}
 	else if (player.cocks.length > 1) {
@@ -323,6 +324,7 @@ public function deluxeOnaholeUse():void {
 		switch(rand(2)) {
 			case 0: doNext(2046); break;
 			case 1: doNext(2050); break;
+			default: trace("Onahole to-be-continued unexpected state..."); break;
 		}
 	}
 	else if (player.cocks.length > 1) {
