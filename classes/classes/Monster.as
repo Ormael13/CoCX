@@ -213,7 +213,7 @@
 			//// this.initedXXX property to true, e.g. this.initedGenitals = true;
 
 			//// 1. Names and plural/singular
-			///*REQUIRED*/ this.a = "a";
+			///*REQUIRED*/ this.a = "the "; //PREVENTS ENGRISH "A MONSTER BLINKED/A MONSTER IS BLINDED"
 			///*REQUIRED*/ this.short = "short";
 			///*OPTIONAL*/ // this.imageName = "imageName"; // default ""
 			///*REQUIRED*/ this.long = "long";

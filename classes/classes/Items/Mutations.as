@@ -630,10 +630,11 @@
 					changes++;
 				}
 			}
-			//Morph dick to horsediiiiick
+			//Morph dick to horsedick
+			//Prevent duplicate declaration warnings on compile
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-				var selectedCock:int = -1;
-				for (var i:int = 0; i < player.cocks.length; i++)
+				selectedCock = -1;
+				for (i = 0; i < player.cocks.length; i++)
 				{
 					if (player.cocks[i].cockType != CockTypesEnum.HORSE)
 					{
@@ -4715,7 +4716,7 @@
 					//temp3 stores how many rows are changed
 					temp3 = 0;
 					for (var k:Number = 0; k < player.breastRows.length; k++) {
-						//If this row is over threshhold
+						//If this row is over threshold
 						if (player.breastRows[k].breastRating > temp2) {
 							//Big change
 							if (player.breastRows[k].breastRating > 10) {
@@ -8829,7 +8830,7 @@
 				//If tail is kangaroo, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_KANGAROO) outputText("\n\nYour tail becomes uncomfortably tight as the entirety of its length begins to lose a lot of its former thickness.  The general shape remains tapered, but its fur has become much more dense and shaggy.  <b>You now have a ferret tail!</b>");
 				//If tail is fox, has ferret ears:
-				else if(player.tailType == TAIL_TYPE_FOX) outputText("\n\nYour tail begins to itch as its fur loses a lot of of its former density.  It also appears to have lost a bit of length.  <b>You now have a ferret tail!</b>");
+				else if(player.tailType == TAIL_TYPE_FOX) outputText("\n\nYour tail begins to itch as its fur loses a lot of its former density.  It also appears to have lost a bit of length.  <b>You now have a ferret tail!</b>");
 				//If tail is raccoon, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_RACCOON) outputText("\n\nYour tail begins to itch as its fur loses a lot of its former density, losing its trademark ring pattern as well.  It also appears to have lost a bit of length.  <b>You now have a ferret tail!</b>");
 				//If tail is horse, has ferret ears:

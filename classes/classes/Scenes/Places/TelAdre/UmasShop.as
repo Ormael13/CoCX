@@ -16,7 +16,7 @@
 	 * so I can fix the stuff up to the point where I'm happy AND the author(s) have had their input too, but I'm putting that down to how... rough some parts of the Uma doc are. 
 	 *
 	 * I COULD have made use of Fake-Names new methods of including scene content, but this content file is a proof of concept for new class-based sceneadditions. 
-	 * As such, I've left it as "similar" as possible to older content throughout the the game for clarity purposes. Anything I add past this point will probably use
+	 * As such, I've left it as "similar" as possible to older content throughout the game for clarity purposes. Anything I add past this point will probably use
 	 * Fake-Name's Scene Parsing stuff as much as possible.
 	 *
 	 * I'm also VERY tempted to say the bonuses from massages and acpuncture sessions should be dropped, and they should be turned into like a HP recovery/fatigue recovery deal.
@@ -1662,7 +1662,7 @@
 		{
 			clearOutput();
 
-			outputText("You give a knowing wink to the mare masseur and say you'd like to see her magic fingers put to work. You particularly want to see if she can can pick the locks and open your secret treasure box.\n\n");
+			outputText("You give a knowing wink to the mare masseur and say you'd like to see her magic fingers put to work. You particularly want to see if she can pick the locks and open your secret treasure box.\n\n");
 			outputText("\"<i>Very well, dear.  Come with me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment\".\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, ");
 

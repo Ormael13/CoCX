@@ -1465,7 +1465,7 @@ public function titFuckSingle():void
 		//if it barely fits
 		if(Math.round(player.cockArea(0)) == player.vaginalCapacity())
 		{
-			if(player.averageVaginalLooseness() < 2) outputText("Your poor, tortured nipple is barely up to the task of accepting the " + cockDescript(0) + ", but accept it it does. ", false);
+			if(player.averageVaginalLooseness() < 2) outputText("Your poor, tortured nipple is barely up to the task of accepting the " + cockDescript(0) + ", but accept it does. ", false);
 			if(player.averageVaginalLooseness() >= 2 && player.averageVaginalLooseness() < 4) outputText("The engorged opening at the end of your swollen nipple is stretched to its limit as you shove your " + cockDescript(0) + " home. ", false);
 			if(player.averageVaginalLooseness() >= 4) {
 				if(player.normalCocks() > 0) outputText("The swollen lips of your bloated nipple stretch around the tip of your " + cockDescript(0) + " swallowing it like an enormous mouth. ", false);
@@ -2762,7 +2762,7 @@ public function tentacleSelfFuck():void {
 		if(player.cocks.length > 1) outputText("es");
 		outputText(" on the way");
 	}
-	outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from an human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it it's somewhere warm and tight.");
+	outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from an human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it's somewhere warm and tight.");
 	if(y >= 0) outputText("  It loops around your " + cockDescript(y) + " while you fight with it, strangling the other phallus in tight coils of squeezing, floral friction.");
 	
 	outputText("\n\nYou arch your back as you try to contain the unexpected waves of desire that flood your groin, but it's no use.  In the span of a few seconds, you decide to accept that you need to fuck something now.  Foreplay is no longer an option.");

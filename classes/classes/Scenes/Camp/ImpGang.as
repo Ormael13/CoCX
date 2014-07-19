@@ -21,7 +21,7 @@ package classes.Scenes.Camp
 			this.cocks[2].knotMultiplier = 2;
 			this.balls = 2;
 			this.ballSize = 3;
-			this.a = "a mob of imps";
+			this.a = "the mob of imps ";
 			this.short = "imp gang";
 			this.skinTone = "imp mob";
 		}

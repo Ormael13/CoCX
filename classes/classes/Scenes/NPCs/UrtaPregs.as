@@ -2098,7 +2098,7 @@ private function giveTheKidsABath():void {
 	else outputText("his");
 	outputText(" hair and start to massage it... now, just how do you shampoo somebody covered from head to toe in fur...?");
 
-	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks, \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
+	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks, \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("daughter");
 	else outputText("son");
 	outputText(" flicks ");

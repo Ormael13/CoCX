@@ -1287,17 +1287,18 @@ public function attack():void {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		(monster as SandTrap).trapLevel(-4);
 	}
+	//If 2 (or more), don't enter this branch. Off: Never attempt to double attack. Way to waste a perk point.
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) player.removeStatusAffect(StatusAffects.FirstAttack);
 		else {
-			//Always!
+			//0 - Forced: Double attack capped at 60 Strength maximum.
 			if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
-			//Alternate!
+			//1 - Dynamic: Single attack if Strength if less than 61, else double attack.
 			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
 		}
 	}
-	//"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
-	//Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+	//Attack twice with bare fists like a monk... I mean brawler.
+	//Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious!
 	else if(urtaQuest.isUrta()) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			player.removeStatusAffect(StatusAffects.FirstAttack);
@@ -1411,8 +1412,9 @@ public function attack():void {
 	}
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
+	//Add in enemy armor if needed. Rapiers and spears ignore this step since they are piercing weapons.
+	//MMM - Will make things much easier to check in the future if more weapons of this kind are implemented. 
+	if (player.weaponName.indexOf("rapier") < 0 && player.weaponName.indexOf("spear") < 0) {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
 		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
@@ -1710,14 +1712,12 @@ public function combatMisdirect():Boolean {
 
 //DEAL DAMAGE
 public function doDamage(damage:Number):Number {
-	if(player.findPerk(PerkLib.Sadist) >= 0) {
-		damage *= 1.2;
-		dynStats("lus", 3);
-	}
-	if(monster.HP - damage <= 0) {
-		if(monster.findPerk(PerkLib.LastStrike) >= 0) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-	}
+		if(player.findPerk(PerkLib.Sadist) >= 0) {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
+	
+	if(monster.HP - damage <= 0) doNext(endHpVictory);
 	
 	// Uma's Massage Bonuses
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
@@ -3294,34 +3294,34 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//32 Genderless servant clothes
 		case 32:
-			outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.", false);
+			outputText("You turn your back to your " + monster.mf("master","mistress") + " and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.", false);
 			ass = true;
 			chance++;
 			damage += 2;
 			break;
 		//33 Crotch Revealing Clothes (herm only?)
 		case 33:
-			outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + player.mf("master","mistress") + " is looking to sample what is on display.", false);
+			outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + monster.mf("master","mistress") + " is looking to sample what is on display.", false);
 			chance += 2;
 			damage += 4;
 			break;
 		//34 Maid Costume (female only)
 		case 34:
-			outputText("You give a rather explicit curtsey towards " + monster.a + monster.short + " and ask them if your " + player.mf("master","mistress") + " is interested in other services today.", false);
+			outputText("You give a rather explicit curtsey towards " + monster.a + monster.short + " and ask them if your " + monster.mf("master","mistress") + " is interested in other services today.", false);
 			chance ++;
 			damage += 2;
 			breasts = true;
 			break;
 		//35 Servant Boy Clothes (male only)
 		case 35:
-			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if, " + player.mf("Master","Mistress") + " would like you to use your " + multiCockDescriptLight() + " on them?", false);
+			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if " + monster.mf("Master","Mistress") + " would like you to use your " + multiCockDescriptLight() + " on them?", false);
 			penis = true;
 			chance++;
 			damage += 2;
 			break;
 		//36 Bondage Patient Clothes (done):
 		case 36:
-			outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care, feeling up for it?</i>\" you tease.", false);
+			outputText("You pull back one of the straps on your bondage cloths and let it snap back.  \"<i>I need some medical care; feeling up for it, " + monster.mf("master","mistress") + "?</i>\" you tease.", false);
 			damage+= 2;
 			chance++;
 			break;
@@ -5426,10 +5426,10 @@ public function kitsuneTerror():void {
 	enemyAI();
 }
 
-//Illusion
+//Illusion V2
 public function kitsuneIllusion():void {
 	clearOutput();
-	//Fatigue Cost: 25
+	//Base Fatigue Cost: 25.
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > 100) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
@@ -5440,29 +5440,64 @@ public function kitsuneIllusion():void {
 		doNext(5160);
 		return;
 	}
+	//Waste a turn and 20 fatigue (instead of 25 as the PC gets interrupted) against worms.
+	if(monster.short == "worms") {
+		outputText("As you concentrate to materialize the illusion, a loud 'plop' emerges from the slimy mass, breaking your focus. The worms clearly have no imagination and you've just wasted a turn!\n\n", true);
+		changeFatigue(20);
+		enemyAI();
+		return;
+	}
+	//Save fatigue but waste a turn against pod or dense foes. Fixed pod-only description.
 	if(monster.short == "pod" || monster.inte == 0) {
-		outputText("In the tight confines of this pod, there's no use making such an attack!\n\n", true);
-		changeFatigue(1);
+		outputText("You quickly notice that such an ability would be pointless in this situation and come back to your senses. However, the enemy still finds enough time to take advantage of your frustration!\n\n", true);
 		enemyAI();
 		return;
 	}
 	menuLoc = 0;
-	fatigue(25,1);
+	fatigue(25, 1);
+	//Waste a turn and full fatigue cost if target has Shell.
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		enemyAI();
 		return;
 	}
-	//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
+	//Decrease enemy speed and attempt to increase their susceptibility to lust attacks.
 	outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
 	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster.
+	//Keep randomness to prevent OP.
 	if(player.inte/10 + rand(20) > monster.inte/10 + 9) {
-	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
+		//Reduce speed down to -20.
 		outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
 		if(monster.spe >= 0) monster.spe -= 20;
-		if(monster.lustVuln >= 1.1) monster.lustVuln += .1;
+		//Lust vulnerability handler: Replaces the old, useless handler, while still preventing Illusion from being overpowered.
+		//Enemy is immune. They won't enter the trickster.
+		if (monster.lustVuln <= 0) outputText("You focus as hard as you can and attempt to lure them into a world of ecstasy, but it's a complete waste of time. They don't seem to feel anything at all.\n\n");
+		//If lust vulnerability already is 100% or more, don't try anything funny.
+		else if (monster.lustVuln >= 1) outputText("They literally are entranced by the dancing forms. Smiling coyly, you sense they're already as vulnerable as they can be to your lusty assaults.\n\n");
+		else {
+			// ENTER THE LUSTY TRICKSTER
+			if (monster.lustVuln >= 0.5) outputText("They don't seem so reluctant to enter the trickster dance, ready to fall prey to your spell. With a broad smile, you channel even more energy and intensify their cravings for sex!\n\n");
+			else outputText("You grin mischievously. It's almost like they're forced to enter the trickster dance against their own will. They strive hard to resist your magic, but you can still tell they've grown slightly weaker to desire!\n\n");
+			// Base +5% Lust Vulnerability.
+			monster.lustVuln += 0.05;
+			// So pure! Extra +10% Lust Vulnerability.
+			if (player.cor == 0)
+			{
+				outputText("As a perfectly pure entity, your projections were bound to have a considerable impact. ");
+				monster.lustVuln += 0.1;
+				if (player.level > 20)
+				{
+					//Extra +15% Lust Vulnerability. Illusion mastery GET!
+					outputText("Your mastery allowed you to create such a beautiful and enthralling world you'd almost fall for it yourself. You smile in contemplation as the eerie illusion slowly fades away.\n\n");
+					monster.lustVuln += 0.15;
+				}
+				else outputText("You feel like you might even be able to get closer to your true power with some more experience...\n\n");
+			}
+			//Cap to 100% Lust Vulnerability, but only if the target didn't have more than that before.
+			if (monster.lustVuln > 1) monster.lustVuln = 1;
+		}
 	}
-	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");
+	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations. You frown in disappointment, well aware what you were trying to accomplish wasn't such an easy task.\n\n");
 	enemyAI();
 }
 

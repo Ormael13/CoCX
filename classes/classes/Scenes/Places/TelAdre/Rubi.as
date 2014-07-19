@@ -2148,7 +2148,7 @@ private function exhibitionistDate():void {
 	else outputText("glistening, wet pussy");
 	outputText(".");
 
-	outputText("\n\nThe female equine's jaw drops slightly and her eyes dart between the demon-" + rubiMF("boy","girl") + "'s crotch, and both you and Rubi's faces.  The two of you rush past quickly, until the latest target of your your lover's exhibitionism is out of sight.");
+	outputText("\n\nThe female equine's jaw drops slightly and her eyes dart between the demon-" + rubiMF("boy","girl") + "'s crotch, and both you and Rubi's faces.  The two of you rush past quickly, until the latest target of your lover's exhibitionism is out of sight.");
 
 	outputText("\n\nRubi begins giggling madly once the two of you duck into an alleyway.  \"<i>That was so great!  Did you see her face?  Aaaah, I love it!</i>\"  It takes several minutes for Rubi to calm down, and by the time [rubi ey]'s done, [rubi ey]'s practically dragging you back out onto the streets.  \"<i>Come on, I wanna flash some more people,</i>\" [rubi ey] says, simply.  Looks like [rubi ey]'s really enjoying [rubi em]self.");
 

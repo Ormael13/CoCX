@@ -189,7 +189,7 @@ package classes.Scenes.Areas.Forest
 		{
 
 			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
-			this.a = "a ";
+			this.a = "the ";
 			this.short = "kitsune";
 			this.imageName = "kitsune";
 			this.long = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({

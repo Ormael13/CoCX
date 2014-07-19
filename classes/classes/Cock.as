@@ -206,7 +206,7 @@ package classes
 						temp /= 2;
 					if (cockThickness < 4 && cockLength < 24)
 						temp /= 2;
-					//MINIMUM Thickness of OF .5!
+					//MINIMUM Thickness of .5!
 					if (cockThickness <= .5)
 						temp = 0;
 					//Start adding up bonus length

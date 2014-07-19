@@ -340,7 +340,7 @@ package classes.Scenes.Areas.Lake
 					}
 					//(variant 2: maid, requires vagina)
 					else if (player.vaginas.length > 0) {
-						outputText("You see that your " + player.armorName + " have become an apron over a plain dress with high stockings and simple black shoes.  They make you look like you would be at home keeping a a manor clean and tidy, if it were not for the rather short skirt and lack of undergarments that give easy access to your " + vaginaDescript(0), false);
+						outputText("You see that your " + player.armorName + " have become an apron over a plain dress with high stockings and simple black shoes.  They make you look like you would be at home keeping a manor clean and tidy, if it were not for the rather short skirt and lack of undergarments that give easy access to your " + vaginaDescript(0), false);
 						//[if player has a dick] 
 						if (player.cocks.length > 0) outputText(", your " + multiCockDescriptLight() + ",", false);
 						outputText(" and your " + buttDescript() + ".\n\n", false);
