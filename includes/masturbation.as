@@ -2327,7 +2327,8 @@ public function catAutoLick():void {
 public function meditate():void {
 	outputText("", true);
 	outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.", false);
-	dynStats("lus", -50, "cor", -.3);
+	
+	dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
 	doNext(14);
 }
