@@ -112,7 +112,7 @@ private function playDumbToTamanisDaughters():void {
 		return;
 	}
 	
-	outputText("The leader stamps her foot in a fit of rage.  It would be more imposing if she wasn't three feet tall... Her eyes lock onto your crotch and she says, \"<i>Last chance.   We're getting our ", false);
+	outputText("The leader stamps stamps her foot in a fit of rage.  It would be more imposing if she wasn't three feet tall... Her eyes lock onto your crotch and she says, \"<i>Last chance.   We're getting our ", false);
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] == 1) outputText("first ", false);
 	outputText("litters one way or another!</i>\"\n\n", false);
 	

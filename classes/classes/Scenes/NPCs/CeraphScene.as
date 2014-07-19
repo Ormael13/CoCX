@@ -769,7 +769,7 @@ package classes.Scenes.NPCs
 			outputText("Please?  She said the magic words.  ", false);
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i>A little help please, Exgartuan?</i>\"  ", false);
 			else outputText("You blink your eyes closed and focus your corruptive powers in your crotch.  ", false);
-			outputText("Pleasure blooms in your midsection, spreading through your over-sized prick until it begins to dribble from the tip in the form of black ooze.  The viscous, dark substance splashes into Ceraph's demonic cunt, wicking into her drippy hole in an instant.  She moans, probably getting off on the influx of perverse magic.  The effect is immediate and gravity is able to pull your tip into her unassisted.  The demon's corrupted cunt starts to stretch around you, and you haven't even started to push!\n\n", false);
+			outputText("Pleasure blooms in your midsection, spreading through your over-sized prick until it begins to dribble from the tip in the form of black ooze.  The viscous, dark substance splashes into Ceraph's demonic cunt, wicking into her drippy hole in in an instant.  She moans, probably getting off on the influx of perverse magic.  The effect is immediate and gravity is able to pull your tip into her unassisted.  The demon's corrupted cunt starts to stretch around you, and you haven't even started to push!\n\n", false);
 
 			outputText("The flawless skin of her thighs slips through your fingers before you get a grip on her legs, just below the knees.  Ceraph is alternatively moaning and begging, \"<i>Wha-what are you doing to meeee?  Stop... please... don't... push it in!  Oh by the Queen, it's good... it shouldn't feel goooooood...</i>\"\n\n", false);
 

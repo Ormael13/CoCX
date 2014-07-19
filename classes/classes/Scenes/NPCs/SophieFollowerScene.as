@@ -696,7 +696,7 @@ private function sophieBlowsSixtyNine():void {
 	else if(player.balls > 0) {
 		outputText("  She tenderly caresses your [sack], allowing her fingers to dance over your [balls].  It seems the harpy is considerate of all your needs in a way that makes you even harder, so full it almost hurts.");
 	}
-	else outputText("She tenderly strokes a long nail across the sensitive skin of your taint.  It seems she's being very considerate to your pleasure, so considerate she has you so hard and full that it almost hurts.");
+	else outputText("She tenderly strokes a long nail across the sensitive skin of your taint.  It seems she's being very considerate to your pleasure, so considerate she has you so hard hard and full that it almost hurts.");
 	outputText("  Her feathery hair dangles over your [legs], tickling you as she noisily slurps and sucks, while you moan directly into her bare-skinned twat.  The vibrations set her dripping even more fiercely than before.  You do your best to dutifully drink it down.");
 	
 	outputText("\n\nSophie hums happily as you begin to drip directly onto her tongue, the pre-cum bubbling out of your spit-polished cum-slit in a steady flow.  Though you know just what is plying your " + cockDescript(x) + " with slices of heavenly sensation, your gloss-drugged mind begins to slip into fantasy anyway.  Just like in the real world, Sophie's cunt is slathering your [face] with her fragrant arousal, and your pole is smothered with amber aphrodisiacs.  In the fantasy though, there's a pussy squeezing down on you and a second set of thick harpy thighs clenching around your waist.  Those fertile, egg-bearing thighs are bouncing up and down your length, and the twat above you is ripe with arousal, bounded above by a belly swollen with incubating life that will someday be your daughter.  Every morning you're sucked off to completion by one of your girls and kissed until your lips and rod are slathered to an amber shine.  Then you lie back and partake in the fruits of your position as " + player.mf("king","breeder-queen") + " of the harpies: creampie after creampie, tangy harpy-cunt to lick, and skilled fellatio every single time your lust begins to flag.  You groan into the slit above, your hands grabbing hold of the juicy haunches and pulling them down into you.");
@@ -789,7 +789,7 @@ private function forceSophieBlowjob():void {
 //Get that vajajay in yo face.
 private function sophieSixtyNine():void {
 	clearOutput();
-	outputText("Sophie cocks an eyebrow and asks, \"<i>A little sapphic delight for the horny champion?</i>\"  She snorts and rolls her eyes, \"<i>No thanks.  I'm not really that into girls.</i>\"  It doesn't seem like she's up for it.");
+	outputText("Sophie cocks an eyebrow and asks, \"<i>A little sapphic delight for the horny champion?</i>\"  She snorts and rolls her eyes, \"<i>No thanks.  I'm not really that in to girls.</i>\"  It doesn't seem like like she's up for it.");
 	menu();
 	addButton(0,"Next",sleepWithSophieToggle);
 }

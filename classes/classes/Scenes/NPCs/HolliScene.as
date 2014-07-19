@@ -659,7 +659,7 @@ private function fuckHolliInZeFlowerPuss():void {
 	if(player.cockArea(x) >= 100) outputText("the air, where it hangs for a moment before splattering down atop the plant-girl's leaf-colored hair and face, forming a gossamer shroud.");
 	else outputText("her mouth, which works noisily to swallow the hot load even as you inject it into her.  After a few swallows, she leans back and lets you shoot it up into the air, so that it can fall down over her face and hair, into a gossamer shroud.");
 	//highish cum:  
-	if(player.cumQ() >= 500) outputText("  You keep blasting heavy ropes of seed until her body and trunk are painted with goo, and then you cum some more, smattering spunk until she looks more like a gooey waterfall than a fey creature.");
+	if(player.cumQ() >= 500) outputText("  You keep blasting heavy ropes of seed until her body and trunk are painted with with goo, and then you cum some more, smattering spunk until she looks more like a gooey waterfall than a fey creature.");
 	if(player.cumQ() >= 1500) outputText("  Before you know it, there's a lake around the two of you and a small river running downhill away from camp.");
 	outputText("  A mischievous grin breaks out under the goopy facial, followed by an unnaturally long tongue that pulls gobs of the stuff into the dryad's hungry mouth.  Once she can see again, the girl gives her tits a squeeze and affectionately kisses your cock, practically worshipping it with sloppy-sweet licks.");
 
@@ -1028,6 +1028,7 @@ private function threatenHolli():void {
 	clearOutput();
 	outputText("You snarl and threaten to burn the barked bitch to the ground if she won't make herself useful after you ask politely.");
 	outputText("\n\n\"<i>You threaten me with fire?!  Now?  [name], you could have uprooted my sapling and tossed it in the fire.  You could have made a bonfire to char my flower to cinders.  You could even have called upon magic to torch my tree while it was still young.  Now?  My bark is stronger than iron and flush with the power of an invigorated goddess.  You had opportunities to rid yourself of me before Marae had invested this much time and energy into your gift.  Trying to destroy such a personal present now would draw her attention... and her ire.</i>\"");
+	
 	outputText("\n\nThat is a compelling point.  ");
 	if(player.level < 30) outputText("Mighty as you are, Marae is likely still beyond your power.  Perhaps you should just ignore this demon for the time being.");
 	else outputText("Marae is likely beyond your power yet, but... you feel like she might not pressure you too hard if you can make a suitably credible threat.");
@@ -1043,12 +1044,16 @@ private function threatenHolli():void {
 }
 
 
+
+
 //Hit Her With Your Hand (requires failing to threaten) -Z
 //replaces Threaten button once PC fails threaten
 private function slapDatHo():void {
 	clearOutput();
 	outputText("You slap the slut in the tree on the thighs, sending a ripple up her body; she regards you with a sneer, confident that her previous implication, that between her and her mother, only a fool would attack, will be enough to stop you from removing her by force.  You might still be able to if you're powerful enough, but... she has the energy of a demon 'goddess' flowing into her.  You should be <b>very</b> sure of yourself before you resort to open confrontation, lest you make your campsite uninhabitable.");
 	outputText("\n\n\"<i>What do you want, meat?  Come to play?</i>\"");
+	
+	//[Cut Her Down][Call Jojo(requires talisman)][Ignore Her]
 	//ignore returns to previous menu and is default spacebar option
 	menu();
 	addButton(0,"CutHerDown",cutHerDown);
@@ -1056,32 +1061,43 @@ private function slapDatHo():void {
 	addButton(4,"Ignore",treeMenu,true);
 }
 
-//[Cut Her Down - FIGHT HOLLI]
+//[Cut Her Down]
 private function cutHerDown():void {
 	clearOutput();
 	outputText("\"<i>Are you serious?  You really want to be broken that badly, my little toy?</i>\"  The demon folds her arms over her hefty chest, her earlier, suggestive posture completely absent now.  \"<i>You know my bark is as strong as any armor, right?  That Marae herself - the land itself - bolsters me?  Take that back right now, and I'll let you return to my good graces... if you put your face in the dirt and plead for the duty to pleasure me whenever I want.</i>\"");
+	
+	//(if PC weapon = Large Axe)
 	if(player.weaponName == "large axe") {
 		outputText("\n\nThat's a trick.  You get your axe.  A tree is a tree, after all, and you quietly test the blade with your thumb meaningfully while the demon looks on.  She seems to quail slightly at the sight of it, but soon recovers her composure.  The jade-skinned succubus slides back into her tree, until only her livid face is visible in the middle of its hard surface.  Several roots burst from the ground around you as her visage takes on a fierce, thunderous aspect; she's trying to strike first!");
 	}
 	else {
 		outputText("\n\n\"<i>So... you're armored and have magic?  Just like all the other tainted insects I crush.</i>\"");
+		
 		outputText("\n\nThe verdant demon looks incensed at your words, and withdraws into her tree; bark slides over her body until only her face is visible.  It contorts with rage as roots burst from the ground around you and she begins to attack!");
 	}
+	//go to fight
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
 	startCombat(new Holli());
 }
 
-//[Call Jojo - FIGHT HOLLI]
+//[Call Jojo]
 private function callDatJojo():void {
 	clearOutput();
 	player.removeKeyItem("Jojo's Talisman");
 	outputText("You take out the small talisman you got from the mouse monk, wondering just how to summon him with it.  A small string dangles from the side; when you pull it, you can feel a stitch coming undone and the weight of the talisman shifts toward the bottom.  A thick, billowing yellow smoke begins to pour out.  God, this reeks!  You hurl it away before the smell can permeate your clothing, and it sets off an echoing bang when it hits the ground!  It's not long before Jojo appears from the edge of the forest and calls to you.");
+	
 	outputText("\n\n\"<i>Apologies, [name], but the sound and smell were the only way I could be sure of knowing and finding you when you needed me!</i>\"  He raises a cloth over his nose, then hefts his staff.  \"<i>If you choose to fight this demon plant creature, I will try to start a blaze to limit her ability to regrow.  It will take a lot of wood to burn a tree so unnatural, so I will not be able to do much else but ferry tinder from the stock I've been laying in.  You will have to hold her attention.</i>\"");
+	
+	//[(if not made hostile by fight yet)]
 	outputText("\n\n\"<i>What is this?</i>\" the demon tree roars, breaking in on your conversation.  \"<i>First you set off silly toys that foul my air, and now you talk of burning me?!  I will not tolerate this!</i>\"  Her voluptuous body pulls back into the tree and bark closes over all of her form except her face.  Roots burst violently from the ground, waving with menace.  \"<i>I will break you both!</i>\"  Jojo quickly scurries off to fetch the first armfuls of wood, leaving you to withstand the onslaught!");
+	//go to fight
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
 	startCombat(new Holli());
 	monster.createStatusAffect(StatusAffects.JojoIsAssisting,0,0,0,0);
 }
+
+
+
 
 internal function defeatHolli():void {
 	clearOutput();
@@ -1091,16 +1107,35 @@ internal function defeatHolli():void {
 		outputText("Weary, the succubus godling folds into her tree, unwilling to allow you the sight of her defeat.  With her energy suppressed, you're free to ");
 		if(player.weaponName != "large axe") outputText("fetch an axe and ");
 		outputText("hack at her trunk, laboriously peeling bark and making wedge-shaped cuts in it as you try to fell the abomination.  It takes nearly eight hours, but eventually the gnarled tree topples.  No sooner does it fall than it shrivels and turns to ash.");
-		cheatTime(7);
+		temp = 7;
+		while(temp > 0) {
+			temp--;
+			model.time.hours++;
+			if(model.time.hours > 23) {
+				model.time.days++;
+				model.time.hours = 0;
+			}
+		}
+		statScreenRefresh();
 	}
 	//Win with Jojo -Z
 	else {
 		outputText("The fire-blackened mouse cheers at you as the succubus groans and retreats completely into her bark.  \"<i>Well done, [name]!  Help me carry tinder and we can burn this abomination to the ground!</i>\"");
 		outputText("\n\nWeary but recognizing the need to finish this now, you help the monk haul firewood to the base of the tree until the blaze roars like a bonfire.  It takes hours of carrying wood and eventually cutting it as well, but finally the tree is nothing but ash.");
-		cheatTime(3);
+		temp = 3;
+		while(temp > 0) {
+			temp--;
+			model.time.hours++;
+			if(model.time.hours > 23) {
+				model.time.days++;
+				model.time.hours = 0;
+			}
+		}
+		statScreenRefresh();
 		//[(if no Vapula)]
 		if(!vapulaSlave()) {
 			outputText("\n\nThe monk nods to you.  With the demon gone, you could probably invite him to remain in camp - after all, you are quite a good team.  Do you offer to let Jojo stay?");
+			//[yes][no]
 			menu();
 			addButton(0,"Yes",recruitJojoToCamp);
 			addButton(1,"No",dontRecruitJojoToCamp);
