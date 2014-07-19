@@ -334,8 +334,8 @@ public function deluxeOnaholeUse():void {
 	}
 	else {
 		player.orgasm();
-		doNext(13)
-	};
+		doNext(13);
+	}
 }
 public function allNaturalOnaholeUse():void {
 	outputText("", true);
