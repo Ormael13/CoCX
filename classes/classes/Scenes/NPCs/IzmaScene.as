@@ -562,7 +562,7 @@ private function loseToIzma():void {
 		}
 		outputText("As you collapse in defeat, you're aware of the pretty tigershark stalking around you and removing her clothing.  She grabs hard on your " + player.armorName + " and undresses you with minimal effort, revealing your ", false);
 		if(player.lust < 40) outputText("limp cock and barely-engorged cunt", false);
-		else if(player.lust < 70) outputText("turgid erection and moist cunt", false);
+		else if(player.lust < 70) outputText("turgid erection and and moist cunt", false);
 		else outputText("throbbing erection and slavering cunt.", false);
 		outputText("\n\n", false);
 
@@ -1737,7 +1737,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 			return;
 			//outputText("You remove your hand from her mark and instead place it squarely on her cock, wrapping your fingers around its two-inch-thick girth.\n\n", false);
 		}
-		else outputText("  Still, the sight of her curvaceous cleavage bouncing gives you an idea.  You reach up to cup your strong lover's hard bosom, enjoying the sight of her slightly-upturned nipples pointing up at the sky.  You flick them gently as she rides you, sometimes squeezing and tugging encouragingly.\n\n");
+		else outputText("  Still, the sight of her curvaceous cleavage bouncing gives you an idea.  You reach up to cup your strong lover's hard bosom, enjoying the sight of her slightly-upturned nipples pointing up at at the sky.  You flick them gently as she rides you, sometimes squeezing and tugging encouragingly.\n\n");
 	}
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) {
 		if(lastHalf) clearOutput();

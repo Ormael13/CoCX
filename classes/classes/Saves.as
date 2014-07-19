@@ -822,9 +822,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.gameState = gameState;
 		
 		//Time and Items
-		//Catch and solve invalid hour and day exception when saving (or hacking)
-		saveFile.data.hours = (model.time.hours < 0) ? 0 : model.time.hours % 24;
-		saveFile.data.days = (model.time.days < 0) ? 0 : model.time.days;
+		saveFile.data.hours = model.time.hours;
+		saveFile.data.days = model.time.days;
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
@@ -1723,10 +1722,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Days
 		//Time and Items
-		//Catch invalid hour and day exceptions when loading
-		model.time.hours = saveFile.data.hours < 0 ? 0 : saveFile.data.hours % 24;
-		model.time.days = saveFile.data.days < 0 ? 0 : saveFile.data.days;
-		player.autoSave = saveFile.data.autoSave == undefined ? false : saveFile.data.autoSave;
+		model.time.hours = saveFile.data.hours;
+		model.time.days = saveFile.data.days;
+		if (saveFile.data.autoSave == undefined)
+			player.autoSave = false;
+		else
+			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
 		game.whitney = saveFile.data.whitney;

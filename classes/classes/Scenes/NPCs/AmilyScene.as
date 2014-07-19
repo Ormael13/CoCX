@@ -9,78 +9,91 @@ package classes.Scenes.NPCs
 
 	public class AmilyScene extends NPCAwareContent
 	{
-		// Amily the Mousegirl Breeder
-		// Plus human stuff
-		// =============================================
-		// Sorry for this, but it makes it a helluva lot easier for us to read it - Harb & MMM
-		// AMILY_MET:int=35; // 0=not met 1=met
-		// AMILY_VILLAGE_ENCOUNTERS_DISABLED:int=36; // 0=false 1=true 44=village button
-		// AMILY_GROSSED_OUT_BY_WORMS:int=37; // 0=SAFER WITHOUT WORMS; 1=VERMIPHOBIA! GO AWAY! (changes to 0 if worms are gone)
-		// AMILY_AFFECTION:int=38; // <15 LOW; 15-39 MEDIUM; 40+ HIGH
-		// AMILY_OFFER_ACCEPTED:int=39; // 1 = true, 0 = not yet
-		// AMILY_BIRTH_TOTAL:int=40;
-		// AMILY_INCUBATION:int=41; // 0 = not pregnant, otherwise hours till birth 168
-		// AMILY_FUCK_COUNTER:int=42;
-		// AMILY_FOLLOWER:int=43; // 0=Stranger 1=Lover 2=Slave
-		// AMILY_VILLAGE_ACCESSIBLE:int=44; // 0=no 1=yes
-		// AMILY_WANG_LENGTH:int=45; // 0=Female; >0 HERM: <3" squat; 3-<5" short; 5-<7" average; 7-<9" long; 10-<13" huge; 13-<18" massive; 18-<30" enormous; 30"+ towering;
-		// AMILY_WANG_GIRTH:int=46; // 0=Female; 0.75-1" narrow; >1-1.4" ample; >1.4-2" broad; >2-3.5" fat; 3.5"+ distended
-		// AMILY_CUP_SIZE:int=47; // Default 1. [50% CHANCE OF PREFIX] 0-2:Small, little, perky. 3-4:Ample. 5-6:Big, large, pillowy, jiggly. 7-12:Basket-ball sized, whorish, pornstar-like, jiggling. 13-17:Beach-ball sized. 18+ Mountainous, immense. [RANDOM SUFFIX:] tits, boobs, breasts, love-pillows (>6).
-		// AMILY_NIPPLE_LENGTH:int=48; // Default 0.3. 
-		// AMILY_HIP_RATING:int=49; // Default 6.
-		// AMILY_ASS_SIZE:int=50; // Default 6.
-		// AMILY_LACTATION_RATE:int=51; // Default 0. Randomly replaces breast prefix/suffix. >1.5: Milky tits (cup 4 or less) or breasts (5+) (10% chance). >2: milk-udders (10% chance). <1: jugs *or* 1-<2.5: milk jugs *or* 2.5+ udders (10% chance).
-		// AMILY_CLOTHING:int=52; // Default "rags".
-		// AMILY_MET_PURE_JOJO:int = 74;
-		// AMILY_SPAR_WITH_PURE_JOJO:int = 75;
-		// AMILY_PISSED_PC_CORRUPED_JOJO:int = 76;
-		// AMILY_WAIT_FOR_PC_FIX_JOJO:int = 77;
-		// AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO:int = 78;
-		// AMILY_DISCOVERED_TENTATLE_JOJO:int = 81;
-		// AMILY_MET_RATHAZUL:int = 82;
-		// MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT:int = 85;
-		// AMILY_NOT_FREAKED_OUT:int = 86;
-		// AMILY_MET_AS:int=158; // INITIAL gender. 0=G 1=M 2=F 3=H
-		// AMILY_CONFESSED_LESBIAN:int=159; // 1=yes,2=and accepted
-		// AMILY_TIMES_FUCKED_FEMPC:int=160;
-		// AMILY_HERM_TIMES_FUCKED_BY_FEMPC:int=161;
-		// PC_TIMES_BIRTHED_AMILYKIDS:int=162; // PC births from Amily
-		// PC_PENDING_PREGGERS:int=163; // 1=yes,2=finished
-		// AMILY_PC_GENDER:int=164; // CURRENT gender. 0=G 1=M 2=F 3=H.
-		// AMILY_HERM_QUEST:int=165; // 1=amily flipped out, 2=accepted as amily's dad
-		// AMILY_ALLOWS_FERTILITY:int = 166; (1 = yes)
-		// AMILY_CORRUPT_FLIPOUT:int = 168; Default 0. 1=POTENT MIXTURE GO
-		// AMILY_GOTTA_COOK_SNACK:int = 169; Default 0. 1-2 Mixture cooking steps. 3+ = MIXTURE READY.
-		// AMILY_STALKING_PROGRESS:int = 170; Requires Potent Mixture. 0-2 Stalking steps. 3+ = CORRUPT AMILY RAPE, BRACE FOR IMPACT.
-		// AMILY_HAS_BALLS_AND_SIZE:int = 171;
-		// AMILY_VAGINAL_WETNESS:int = 172;
-		// AMILY_TAINT_WARNING:int = 175; //0:Safe 1:Warned because 50+ Corruption, back to 0 if Corruption drops below 50
-		// AMILY_OFFERED_DEFURRY:int = 336; // 1 = Offered to defurry Amily
-		// AMILY_NOT_FURRY:int = 337; // 1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
-		// AMILY_IS_BATMAN:int = 338; // 1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
-		// AMILY_VISITING_URTA:int = 346;
-		// AMILY_NEED_TO_FREAK_ABOUT_URTA:int = 347;
-		// AMILY_TIMES_BUTTFUCKED_PC:int = 419;
-		// TIMES_FUCKED_AMILYBUTT:int = 420;
-		// TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
-		// AMILY_X_JOJO_COOLDOWN:int = 435;
-		// AMILY_INCEST_COUNTDOWN_TIMER:int = 436; //1 = timer started, 30 = RIPE FOR INCEST
-		// AMILY_TREE_FLIPOUT:int = 599; // 0 = Amily doesn't know 'bout fuckflowers; 1 = Amily saw tree but you enhanced your calm and kept silent; 2 = HOLLI DIES and Amily comes back, but SHE WILL REMEMBER THIS, you monster. (See BATMAN FLIPOUT above)
-		// AMILY_OVIPOSITED_COUNT:int = 629;
-		// AMILY_OVIPOSITED_COUNTDOWN:int = 630;
-		// AMILY_OVIPOSITION_UNLOCKED:int = 631;
-		// AMILY_TIMES_SWIMFUCKED:int = 635;
-		// AMILY_OWNS_BIKINI:int = 636;
-		// AMILY_X_IZMA_POTION_3SOME:int = 771;
-		// GIVEN_AMILY_NURSE_OUTFIT:int = 775;
-		// AMILY_TATTOO_COLLARBONE:int = 1137;
-		// AMILY_TATTOO_SHOULDERS:int = 1138;
-		// AMILY_TATTOO_LOWERBACK:int = 1139;
-		// AMILY_TATTOO_BUTT:int = 1140;
+		/*Amily the Mousegirl Breeder
+		 * Plus human stuff
+		=============================================
+		35	-met Amily? (0 = not met, 1 = met)
+		36	-Amily village encounters disabled (1 = true) (44 for village button)
+		37	-Amily encounters disabled due to worms (1=she freaked out.  Goes to 0 automatically if uninfected)
+		38	-Amily Affection (< 15 = low.  In between = medium. 40+= high affect)
+		39	-Amily Offer Accepted? (1 = true, 0 = not yet)
+		40	-Amily Birth Total (no explanation needed)
+		41	-Amily Pregnancy Incubation - 0 = not pregnant, otherwise hours till birth 168
+		42	-Fucked Amily Counter
+		43	-Follower Toggle for amily (1 = follower, 0 = not)
+		44	-Amily's Village Unlocked (1=village button on, 0=off)
+		45	Amily's Wang Length
+		46	Amily's Wang Thickness
+		47	Amily's Cup Size (1 to 5)
+		48	Nipple Length from .3 to 4"
+		49	Amily Hip Rating - girly to womanly
+		50	Can increase ass from "unremarkable ass" to "delightfully jiggly"
+		51	Amily Lactation Rating
+		52	Amily Clothing
+		158 -What did the PC meet amily as
+		159	-Has Amily Confessed Lesbian Love? (1 = yes, 2= yes and you accepted)
+		160	Times PC and Amily have done girlygirl sex
+		161	Times PC and Herm-Amily have done girlygirl sex
+		162	Times PC has birthed Amily's brood
+		163	Is PC pending preggo completion? (1 = yes, 2 = finished)
+		164	Amily remembers PC gender
+		165	Amily Herm Quest (1 = amily has flipped out, 2 = accepted to be amily's dad
+		166 Amily Allowing Fertility In Camp? (1 = yes)
+		*/
+		// Sorry for this, but it makes it a helluva lot easier for me to read it - Harb
+		//  AMILY_VISITING_URTA:int = 346;
+		//  AMILY_NEED_TO_FREAK_ABOUT_URTA:int = 347;
+		//  AMILY_MET:int=35; //  (0 = not met, 1 = met)
+		//  AMILY_VILLAGE_ENCOUNTERS_DISABLED:int=36; // 1=true,44=village button
+		//  AMILY_GROSSED_OUT_BY_WORMS:int=37; // 1=freaked out
+		//  AMILY_AFFECTION:int=38; //  (< 15 = low.  In between = medium. 40+= high affect)
+		//  AMILY_OFFER_ACCEPTED:int=39; //  (1 = true, 0 = not yet)
+		//  AMILY_BIRTH_TOTAL:int=40; //
+		//  AMILY_INCUBATION:int=41; //   0 = not pregnant, otherwise hours till birth 168
+		//  AMILY_FUCK_COUNTER:int=42; //
+		//  AMILY_FOLLOWER:int=43; //
+		//  AMILY_VILLAGE_ACCESSIBLE:int=44; //
+		//  AMILY_WANG_LENGTH:int=45; //
+		//  AMILY_WANG_GIRTH:int=46; //
+		//  AMILY_CUP_SIZE:int=47; // 5-Jan
+		//  AMILY_NIPPLE_LENGTH:int=48; // 0.3-4
+		//  AMILY_HIP_RATING:int=49; // girly-womanly
+		//  AMILY_ASS_SIZE:int=50; //
+		//  AMILY_LACTATION_RATE:int=51; //
+		//  AMILY_CLOTHING:int=52; //
+		//  AMILY_MET_AS:int=158; //
+		//  AMILY_CONFESSED_LESBIAN:int=159; // 1=yes,2=and accepted
+		//  AMILY_TIMES_FUCKED_FEMPC:int=160; //
+		//  AMILY_HERM_TIMES_FUCKED_BY_FEMPC:int=161; //
+		//  PC_TIMES_BIRTHED_AMILYKIDS:int=162; //
+		//  PC_PENDING_PREGGERS:int=163; // 1=yes,2=finished
+		//  AMILY_PC_GENDER:int=164; //
+		//  AMILY_HERM_QUEST:int=165; // 1=amily flipped out, 2=accepted as amily's dad
+		//  AMILY_ALLOWS_FERTILITY:int = 166; //
+		//  AMILY_CORRUPT_FLIPOUT:int = 168;
+		//  AMILY_TIMES_BUTTFUCKED_PC:int = 419;
+		//  TIMES_FUCKED_AMILYBUTT:int = 420;
+		//
+		// // NEEDS NEW NUMBERS AND SHIT
+		//  AMILY_OFFERED_DEFURRY:int = 336; // 1 = Offered to defurry Amily
+		//  AMILY_NOT_FURRY:int = 337; // 1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
+		//  AMILY_IS_BATMAN:int = 338; // 1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
+		//  AMILY_TREE_FLIPOUT:int = 599; // 0 = Amily doesn't know 'bout fuckflowers; 1 = Amily saw tree but you enhanced your calm and kept silent; 2 = HOLLI DIES and Amily comes back, but SHE WILL REMEMBER THIS, you monster. (See BATMAN FLIPOUT above)
+		// //1 = timer started, 30 = RIPE FOR INCEST
+		//  AMILY_INCEST_COUNTDOWN_TIMER:int = 436;
+		//
+		//  AMILY_OVIPOSITED_COUNT:int = 629;
+		//  AMILY_OVIPOSITED_COUNTDOWN:int = 630;
+		//  AMILY_OVIPOSITION_UNLOCKED:int = 631;
+		//  AMILY_TIMES_SWIMFUCKED:int = 635;
+		//  AMILY_OWNS_BIKINI:int = 636;
+		//  AMILY_X_IZMA_POTION_3SOME:int = 771;
+		//  GIVEN_AMILY_NURSE_OUTFIT:int = 775;
+
+
 		// NEW EVENTS:
 		// 3172 = Ask to defur Amily
 		// 3174 = Defur Amily at camp (both corrupt/noncorrupt)
-		
 		override public function amilyFollower():Boolean {
 			if(flags[kFLAGS.AMILY_FOLLOWER] > 0) {
 				//Amily not a follower while visiting Urta
@@ -2735,7 +2748,7 @@ package classes.Scenes.NPCs
 			if(player.hasCock() || (player.hasVagina() && flags[kFLAGS.AMILY_WANG_LENGTH] > 0)) {
 				//Make babies option
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 0) {
-					outputText("Amily is currently taking herbs that will prevent " + ((flags[kFLAGS.AMILY_INCUBATION] > 0) ? "further" : "") + "pregnancies and keep her sterile.\n\n", false);
+					outputText("Amily is currently taking herbs that will prevent pregnancy and keep her sterile.\n\n", false);
 					bText = "MakeBabies";
 					babies = 2775;
 					//Send make babies to an appropriate override
@@ -2745,9 +2758,7 @@ package classes.Scenes.NPCs
 				}
 				//No Babies Option
 				else {
-					outputText("Amily is currently off her infertility herbs and ", false);
-					if (flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("may get pregnant.\n\n");
-					else outputText("is currently pregnant.\n\n");
+					outputText("Amily is currently off her infertility herbs and may get pregnant.\n\n", false);
 					bText = "No Babies";
 					babies = 2775;
 				}
@@ -7322,7 +7333,7 @@ package classes.Scenes.NPCs
 			//(Males/Herms)
 			if(player.hasCock()) {
 				outputText("Unable to hold yourself back, you grab her hips and raise them up, desperate to feel yourself buried as deeply into her as possible.  She groans as your [cockHead] grazes along her dripping entrance, running a hand down her body to position you.  Your breath catches in your throat when her hand clutches your member, turning into a ragged moan as she rocks her hips against you, pressing your tip against her to slowly spread her lips.  You can only pant whilst your body is wracked with pleasure, clenching your teeth to try and stop yourself from crying out as Amily soaks your length with arousal");
-				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her shaft oozing thick globs of pre-cum that roll down her cock to smear against your own as she moves against you");
+				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her shaft oozing thick globs of pre-cum that that roll down her cock to smear against your own as she moves against you");
 				outputText(".");
 			}
 			//(Females + AmilyUndicked)

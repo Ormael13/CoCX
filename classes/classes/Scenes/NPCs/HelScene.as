@@ -335,7 +335,7 @@ private function declineHelSexings():void {
 	outputText("", true);
 	outputText("You thank her for the offer, but politely decline.\n\n", false);
 
-	if(inCombat()) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ", false);
+	if(inCombat()) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking her her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ", false);
 	outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n", false);
 
 	outputText("You nod, and return the wave before heading back to your camp.", false);

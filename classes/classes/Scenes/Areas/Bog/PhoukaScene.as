@@ -320,7 +320,7 @@ package classes.Scenes.Areas.Bog
 					outputText("\n\nThe stories continue and the phouka gets progressively more and more drunk. Finally he topples over, utterly drunk.");
 				else
 					outputText("\n\nAs you drink another cup of whiskey the phouka topples over, utterly drunk. You've been feeling the effects but your drinking buddy is done.");
-				outputText("  He lets out a little giggle and begins to shrink. Tendrils of black smoke rise from the bunny morph’s black fur as he shrinks back to the size and shape of a faerie.");
+				outputText("  He lets out a little giggle and begins to shrink. Tendrils of black smoke rise from the bunny morph’s black fur as he shrinks back to to the size and shape of a faerie.");
 				phoukaForm = PHOUKA_FORM_FAERIE;
 				if (player.lust < 33)
 					outputText("  It looks like he needs a nap and you take that as your cue to get out of here.");

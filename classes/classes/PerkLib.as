@@ -7,8 +7,17 @@ package classes
 
 	public class PerkLib
 	{
-		// Sand Mother uses this perk to resist mind attacks. NOT a player perk.
-		public static const Focused:PerkType = mk("Focused", "Focused",	"");
+
+		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
+		public static const Brawler:PerkType = mk("Brawler", "Brawler",
+				"Brawling experience allows you to make two unarmed attacks in a turn.",
+				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
+		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut",
+				"");
+		public static const Focused:PerkType = mk("Focused", "Focused",
+				"");
+		public static const LastStrike:PerkType = mk("Last Strike", "Last Strike",
+				"");
 
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",

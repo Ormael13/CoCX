@@ -464,7 +464,7 @@ private function lieThere():void {
 	outputText("[pg]\"<i>That's right, you bitch.  So get your fat scaly ass out of the way!</i>\"", false);
 	outputText("[pg]\"<i>FAT!?</i>\"  Hel fumes, her tail swaying dangerously behind her.  \"<i>You're just jealous you don't have an ass as fine as this one!</i>\"", false);
 	outputText("[pg]Kiha scowls, turning a half-circle so her muscular ass is clearly visible.  \"<i>Ha! Like I have ANYTHING to be jealous of!  You're the one that ought to be jealous!</i>\"", false);
-	outputText("[pg]Hel stomps her foot in outrage.  \"<i>Oh, fuck you! My ass is LEAGUES better than that mound of shitter-muscle.</i>\"", false);
+	outputText("[pg]Hel stomps her foot in outrage.  \"<i>Oh, fuck you! My ass is LEAGUES better that that mound of shitter-muscle.</i>\"", false);
 	outputText("[pg]\"<i>SHITTER MUSCLE!?!</i>\"", false);
 	outputText("[pg]\"<i>Shitter muscle,</i>\" Hel says with a sneer.  \"<i>And to top it all off... You've got small tits.  Why the hell would " + player.short + " want those little things over THESE,</i>\" she laughs, cupping her big E-cups for emphasis.", false);
 	outputText("[pg]\"<i>Oh, like " + player.short + " would even look twice at those floppy things!</i>\" Kiha growls, grabbing her own D-cups defensively.  \"<i>" + player.mf("He","She") + " OBVIOUSLY prefers smaller, perkier boobs.  Don't you, " + player.short + "?</i>\"", false);
@@ -532,7 +532,7 @@ private function jumpDaBitches():void {
 	}
 	//[Else, If Multicock]
 	else {
-		outputText("[pg]Not wanting to let such a lewd mouth as Hel's go to waste, you grab your [cock 2] out of your armor and press its head against Hel's lips.  She starts to protest, but just like you did with Kiha, as soon as she opens her mouth to complain you ram your secondary cock in, burying its length in her face.  She gags and gasps, but you just grab both girls by the hair and start to fellate yourself with them, ramming their faces down your cocks until you're a spit-slicked mess, until both girls have become completely compliant, simply allowing you to use them.", false);
+		outputText("[pg]Not wanting to let such a lewd mouth as Hel's go to waste, you grab your [cock 2] out of your armor and press its head against Hel's lips.  She starts to protest, but just like you did with Kiha, as soon as as she opens her mouth to complain you ram your secondary cock in, burying its length in her face.  She gags and gasps, but you just grab both girls by the hair and start to fellate yourself with them, ramming their faces down your cocks until you're a spit-slicked mess, until both girls have become completely compliant, simply allowing you to use them.", false);
 	}
 	//[scenes recombine]
 	outputText("[pg]Tiring of the scaly girls' oral ministrations, you pull them back off your cock", false);
@@ -692,7 +692,7 @@ private function lovingHugsGirlFuckSex():void {
 	outputText("Kiha gently rubs your mons and teases, \"<i>Awful wet down here, huh?  I kind of figured you would be a bit less... shameless.</i>\"  She goes on to drag a finger through your slippery slit, carefully keeping her claw from catching on you as she rubs your [clit].  The overload of sensation steals your retort from your lips, leaving you nothing to do but moan and lift your hips into her insistent pressure, so eager for more pleasure that your body seems to move on its own.  The dragoness giggles, \"<i>Is this all I have to do to defeat you?  Just... slip a finger in your twat and turn you to jelly?</i>\"", false);
 	outputText("[pg]Twisting your body, you grab hold of Kiha and pull her atop you, the sudden motion dragging her away from your sensitive nethers - for now.  Pulling on her legs, you get the feisty dragon-girl's pussy positioned right above you.  Of course, that means her face is right above your [vag] as well.  Kiha exhales over your lips, basting your nethers in moist, arousing heat that shoots tingles of delight down your [clit].  She teases, \"<i>You're wetter than a goblin that got into the canine peppers down here!</i>\"");
 	outputText("[pg]You shut her up by nosing up against her prominant bud.  The streamers of fem-slime that drip down on your face are easy to ignore as you get into tonguing her out.  It helps that most of it winds up pouring into your mouth, letting your senses be subsumed in the tangy taste and feel of her womanhood.  Kiha shudders and shuts up.  It seems she's managed to just sit back and enjoy sex for what it is.");
-	outputText("[pg]A moment later, a bolt of pleasure hits your [vag].  Kiha is humming away at your box, lapping hungrily at your juices and returning the favor.  The inside of her abode is starting to reek of arousal and sexual fluids, inundated with enough female pheromones to make you both a bit dizzy.  The dragoness's dark vulva is so smooth and kissable, so perfectly lickable, that your attentions grow ever more fevered.  Perfectly in sync with you, Kiha tends to your own lusts with expert licks of her long, reptilian tongue.", false);
+	outputText("[pg]A moment later, a bolt of pleasure hits your [vag].  Kiha is humming away at your box, lapping hungrily at your juices and returning the favor.  The inside of her abode is starting to reek of arousal and sexual fluids, inundated with enough female pheromones to make make you both a bit dizzy.  The dragoness's dark vulva is so smooth and kissable, so perfectly lickable, that your attentions grow ever more fevered.  Perfectly in sync with you, Kiha tends to your own lusts with expert licks of her long, reptilian tongue.", false);
 	outputText("[pg]Kiha mutters, \"<i>Gonna... gonna...</i>\" into your pussy, but before she can finish, you slam yours down on her face, grinding yourself off on her nose while you take her to orgasm.  Your body burns with lust, and once you taste the warrior-woman's burst of girl-honey on your tongue, you moan and buck your " + hipDescript() + " harder, frigging your [clit] off on her nose until the pleasure makes you seize, juices ");
 	if(player.wetness() < 3) outputText("dripping ");
 	else if(player.wetness() < 4) outputText("running ");
@@ -822,13 +822,13 @@ private function hangOutWithKiha():void {
 		if(!followerKiha()) {
 			outputText("Looking up from the dragoness to the treetops, you notice that Kiha's little islet has a surprisingly spacious clearing above it - probably why the dragoness chose this spot to make her home in the first place, since it's easier to take off and land without branches crashing into you every time.  You notice the ");
 			if(model.time.hours < 21) outputText("particularly cloudy day above you, with great pink and purple clouds drifting across the demonically-tainted horizon");
-			else outputText("stars are out, a thousand little pin-pricks in the heavens", false);
+			else outputText("stars are out, a thousand thousand little pin-pricks in the heavens", false);
 			outputText(".");
 		}
 		else {
 			outputText("Looking up from your dragoness lover, you note the particularly clear ");
 			if(model.time.hours < 21) outputText("day around your camp - thick pink and purple clouds are rolling lazily over the wasteland, shimmering behind the great maw of the portal");
-			else outputText("night in the wastelands.  The stars are out, as they always are at night in your part of Mareth, a thousand little pin-pricks in the heavens");
+			else outputText("night in the wastelands.  The stars are out, as they always are at night in your part of Mareth, a thousand thousand little pin-pricks in the heavens");
 			outputText(".");
 		}
 		outputText("[pg]With your dragoness friend close at hand, what might have been an average ");
@@ -1696,7 +1696,7 @@ private function beABitchDumbass():void {
 private function fightForDominanceWithDragonCunnies():void {
 	clearOutput();
 	spriteSelect(72);
-	outputText("You inform her that you doubt she'll be hurting you today.  With an almost child-like sense of glee, you ready your [weapon] and step into the dragoness's intimidating presence.");
+	outputText("You inform her that you doubt she'll be be hurting you today.  With an almost child-like sense of glee, you ready your [weapon] and step into the dragoness's intimidating presence.");
 	outputText("[pg]\"<i>I wouldn't have it any other way, [name],</i>\" she says as she grins, raising her axe into a more combat-ready stance.  It's time to prove your worth!");
 	//[Leads to a fight]
 	startCombat(new Kiha());
