@@ -413,10 +413,10 @@ import classes.PerkType;
 			game.dynStats("lus=",0,"res",false);
 			hoursSinceCum = 0;
 			
-			if (findPerk(PerkLib.MidasCock) >= 0) {
+			if (countCockSocks("gilded") > 0) {
 			
 				var randomCock:int = rand( cocks.length - 1 );
-				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + 2 * countCockSocks("gilded"); // int so AS rounds to whole numbers
+				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
 				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>" );
 				gems += bonusGems;
 	}
