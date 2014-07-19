@@ -71,6 +71,16 @@ package classes.internals
 		{
 			return int(Math.random() * max);
 		}
+		/** 
+		* Generates a truly "random" number
+		* @return Random Number
+		* from http://v2.scriptplayground.com/tutorials/as/generate-random-number-in-actionscript-3/
+		*/ 
+		public static function randomNumber(low:Number=0, high:Number=1):Number
+		{
+			return Math.floor(Math.random() * (1+high-low)) + low;
+		}
+		
 		public static function validateNonNegativeNumberFields(o:Object, func:String, nnf:Array):String
 		{
 			var error:String = "";

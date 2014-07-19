@@ -1077,11 +1077,10 @@ public function cockPumping():void {
 	}
 	if (player.countCockSocks("gilded") > 0) {
 		
-		var gems:int = rand(2) + 2 * player.countCockSocks("gilded");
+		var gems:int = rand(2) + player.countCockSocks("gilded");
+		
 		if (player.cumQ() > 1000)
-			gems *= 4;
-		else if (player.cumQ() > 200)
-			gems *= 3;
+			gems *= 1.5;
 		
 		if (payout > 0) {
 			outputText("\n\nAs you take your payment, <b>y", false);
