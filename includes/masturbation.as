@@ -269,8 +269,7 @@ public function onaholeUse():void
 	dynStats("sen", -.75);
 
 	if (player.cocks.length > 1 && player.gender == 3) {
-		trace("herm roll");
-		switch(Utils.randomChoice(0, 1)) {
+		switch(rand(2)) {
 			case 0: doNext(2046); break;
 			case 1: doNext(2050); break;
 		}
@@ -321,7 +320,7 @@ public function deluxeOnaholeUse():void {
 	dynStats("sen", -1.5);
 					
 	if (player.cocks.length > 1 && player.gender == 3) { // Multi-cocked herms get random "to be continued" scene...
-		switch(Utils.randomNumber(0, 1)) {
+		switch(rand(2)) {
 			case 0: doNext(2046); break;
 			case 1: doNext(2050); break;
 		}
