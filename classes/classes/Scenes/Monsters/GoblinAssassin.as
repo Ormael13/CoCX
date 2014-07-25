@@ -151,7 +151,7 @@
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE, 1);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
 			checkMonster();
 		}
 

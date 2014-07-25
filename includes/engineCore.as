@@ -303,7 +303,7 @@ public function perkBuyMenu():void {
 		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
 		outputText(".", false);
-		doNext(115);
+		doNext(1);
 		return;
 	}
 	if (testingBlockExiting){

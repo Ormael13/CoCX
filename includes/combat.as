@@ -1296,7 +1296,9 @@ public function attack():void {
 			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
 		}
 	}
-	else if(player.findPerk(PerkLib.Brawler) >= 0 && player.weaponName == "fists") {
+	//"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
+	//Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+	else if(urtaQuest.isUrta()) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
 			player.removeStatusAffect(StatusAffects.FirstAttack);
 		}

@@ -62,7 +62,7 @@ package classes.Scenes.Quests.UrtaQuest
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE,1);
+							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
 			checkMonster();
