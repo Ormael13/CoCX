@@ -553,7 +553,7 @@ public function exploreFarm():void {
 			dynStats("lus", 10);
 		}
 		//[if no horse dick, a deep cow or horse vag, and in heat]
-		else if(player.findStatusAffect(StatusAffects.Heat) >= 0) {
+		else if(player.inHeat) {
 			outputText("Maybe it wants a bull? You do, one with long, thick dick-meat to satisfy your starving fuck-hole...\n\n", false);
 			dynStats("lus", 15);
 		}

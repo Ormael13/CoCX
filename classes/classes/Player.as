@@ -1964,5 +1964,79 @@ use namespace kGAMECLASS;
 				ballSize = 1;
 			}
 		}
+		
+		// Attempts to put the player in heat (or deeper in heat).
+		// Returns true if successful, false if not.
+		// The player cannot go into heat if she is already pregnant or is a he.
+		// 
+		// First parameter: boolean indicating if function should output standard text.
+		// Second parameter: intensity, an integer multiplier that can increase the 
+		// duration and intensity. Defaults to 1.
+		public function goIntoHeat(output:Boolean, intensity:int = 1):Boolean {
+			if(!hasVagina() || pregnancyIncubation != 0) {
+				// No vagina or already pregnant, can't go into heat.
+				return false;
+			}
+			
+			//Already in heat, intensify further.
+			if (inHeat) {
+				if(output) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
+				}
+				temp = findStatusAffect(StatusAffects.Heat);
+				statusAffect(temp).value1 += 5 * intensity;
+				statusAffect(temp).value2 += 5 * intensity;
+				statusAffect(temp).value3 += 48 * intensity;
+				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+			}
+			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
+			else {
+				if(output) {
+					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
+				}
+				createStatusAffect(StatusAffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
+				game.dynStats("lib", 15 * intensity, "resisted", false, "noBimbo", true);
+			}
+			return true;
+		}
+		
+		// Attempts to put the player in rut (or deeper in heat).
+		// Returns true if successful, false if not.
+		// The player cannot go into heat if he is a she.
+		// 
+		// First parameter: boolean indicating if function should output standard text.
+		// Second parameter: intensity, an integer multiplier that can increase the 
+		// duration and intensity. Defaults to 1.
+		public function goIntoRut(output:Boolean, intensity:int = 1):Boolean {
+			if (!hasCock()) {
+				// No cocks, can't go into rut.
+				return false;
+			}
+			
+			//Has rut, intensify it!
+			if (inRut) {
+				if(output) {
+					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
+				}
+				
+				addStatusValue(StatusAffects.Rut, 1, 100 * intensity);
+				addStatusValue(StatusAffects.Rut, 2, 5 * intensity);
+				addStatusValue(StatusAffects.Rut, 3, 48 * intensity);
+				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
+			}
+			else {
+				if(output) {
+					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+				}
+				
+				//v1 - bonus cum production
+				//v2 - bonus libido
+				//v3 - time remaining!
+				createStatusAffect(StatusAffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
+				game.dynStats("lib", 150 * intensity, "resisted", false, "noBimbo", true);
+			}
+			
+			return true;
+		}
 	}
 }

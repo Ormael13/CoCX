@@ -1651,37 +1651,14 @@ package classes.Scenes.NPCs
 				outputText("... too late, you realize that <b>Ember's blood has sent your draconic body into ");
 				if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 					outputText("rut");
-					//Rut affects:
-					//v1 - bonus cum production
-					//v2 - bonus libido
-					//v3 - time remaining!
-					//Has rut, intensify it!
-					if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-						player.addStatusValue(StatusAffects.Rut, 1, 100);
-						player.addStatusValue(StatusAffects.Rut, 2, 5);
-						player.addStatusValue(StatusAffects.Rut, 3, 48);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
-					else {
-						player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
+					
+					player.goIntoRut(false);
 					changes++;
 				}
 				else {
 					outputText("heat");
-					//Already in heat, intensify fertility further.
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					if (temp >= 0) {
-						player.statusAffect(temp).value1 += 5;
-						player.statusAffect(temp).value2 += 5;
-						player.statusAffect(temp).value3 += 48;
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					} else {
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-						dynStats("lib", 15, "resisted", false, "noBimbo", true);
-					}
+					
+					player.goIntoHeat(false);
 					changes++;
 				}
 				outputText("</b>.");
@@ -1916,37 +1893,13 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
@@ -1998,37 +1951,13 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
@@ -2118,37 +2047,13 @@ package classes.Scenes.NPCs
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						//Rut affects:
-						//v1 - bonus cum production
-						//v2 - bonus libido
-						//v3 - time remaining!
-						//Has rut, intensify it!
-						if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-							player.addStatusValue(StatusAffects.Rut, 1, 100);
-							player.addStatusValue(StatusAffects.Rut, 2, 5);
-							player.addStatusValue(StatusAffects.Rut, 3, 48);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						else {
-							player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 5;
-							player.statusAffect(temp).value2 += 5;
-							player.statusAffect(temp).value3 += 48;
-							dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-							dynStats("lib", 15, "resisted", false, "noBimbo", true);
-						}
+						
+						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
 				}
@@ -3297,13 +3202,13 @@ package classes.Scenes.NPCs
 			outputText("\nA pair of scaly, clawed hands suddenly grab your [hips] and you feel Ember take a big whiff of your scent. \"<i>So good... you smell so good, y'know [name]?</i>\"");
 
 			outputText("\n\nYou don't even start at " + emberMF("his", "her") + " actions; all you can think of is the deep need burning in your crotch, ");
-			if (player.hasVagina() && player.findStatusAffect(StatusAffects.Heat) >= 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
+			if (player.hasVagina() && player.inHeat && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
 				outputText("your [vagina] aching to be filled and your womb put to its proper purpose");
 			else outputText("[eachCock] burning to be seeding ripe, ready wombs");
 			outputText(".");
 
 			outputText("\n\nEmber responds by ");
-			if (player.hasVagina() && player.findStatusAffect(StatusAffects.Heat) >= 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
+			if (player.hasVagina() && player.inHeat && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3))
 				outputText("humping against you, smearing your thigh with dragon pre.");
 			else outputText("tightly pressing her drooling, puffy netherlips on your thighs.");
 			outputText("  \"<i>I need you, [name].  I need you so badly... can you see how badly I need you?</i>\" Ember asks, panting in barely contained lust.  \"<i>I want to fuck you so badly... Let's make a baby now!</i>\"");
@@ -3358,7 +3263,7 @@ package classes.Scenes.NPCs
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:
 			//PC not pregnant, Ember has dick, PC is in heat.
-			else if (player.pregnancyIncubation == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.findStatusAffect(StatusAffects.Heat) >= 0) {
+			else if (player.pregnancyIncubation == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.inHeat) {
 				getKnockedUpByEmbrahBroBaby();
 			}
 			//Male scene

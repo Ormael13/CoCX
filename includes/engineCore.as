@@ -1507,8 +1507,8 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
-	if(player.findStatusAffect(StatusAffects.Heat) >= 0) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
-	if(player.findStatusAffect(StatusAffects.Rut) >= 0) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
+	if(player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
+	if(player.inRut) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
 	if(player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
 	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");

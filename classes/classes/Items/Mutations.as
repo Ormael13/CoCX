@@ -657,24 +657,8 @@
 				}
 			}
 			//Males go into rut
-			if (player.totalCocks() > 0 && rand(4) == 0) {
-				//Rut affects:
-				//v1 - bonus cum production
-				//v2 - bonus libido
-				//v3 - time remaining!
-				//Has rut, intensify it!
-				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-					player.addStatusValue(StatusAffects.Rut, 1, 100);
-					player.addStatusValue(StatusAffects.Rut, 2, 5);
-					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-					player.addStatusValue(StatusAffects.Rut, 3, 48);
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				else {
-					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
+			if (rand(4) == 0) {
+				player.goIntoRut(true);
 			}
 			//Anti-masturbation status
 			if (rand(4) == 0 && changes < changeLimit && player.findStatusAffect(StatusAffects.Dysfunction) < 0) {
@@ -1168,23 +1152,10 @@
 						changes++;
 					}
 				}
-				if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0) {
-					//Already in heat, intensify fertility further.
-					if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-						temp = player.findStatusAffect(StatusAffects.Heat);
-						player.statusAffect(temp).value1 += 5;
-						player.statusAffect(temp).value2 += 5;
-						player.statusAffect(temp).value3 += 48;
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
-					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-					if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
-						player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-						dynStats("lib", 15, "resisted", false, "noBimbo", true);
-					}
-					changes++;
+				if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
+          if (player.goIntoHeat(true)) {
+            changes++;
+          }
 				}
 
 				if (!flags[kFLAGS.HYPER_HAPPY])
@@ -2033,24 +2004,10 @@
 				changes++;
 			}
 			//Go into heat
-			if (rand(2) == 0 && changes < changeLimit && player.vaginas.length > 0 &&
-					player.pregnancyIncubation == 0) {
-				//Already in heat, intensify fertility further.
-				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffect(temp).value1 += 5;
-					player.statusAffect(temp).value2 += 5;
-					player.statusAffect(temp).value3 += 48;
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
-					player.createStatusAffect(StatusAffects.Heat, 10, 15, 72, 0);
-					dynStats("lib", 15, "resisted", false, "noBimbo", true);
-				}
-				changes++;
+			if (rand(2) == 0 && changes < changeLimit) {
+        if(player.goIntoHeat(true)) {
+          changes++;
+        }
 			}
 			if (changes < changeLimit && player.dogScore() >= 3 && rand(4) == 0) {
 				changes++;
@@ -3722,47 +3679,10 @@
 
 			//Heat/Rut for those that can have them if "fuck draft"
 			if (fuck) {
-				//Go into heat if girly
-				if (player.hasVagina()) {
-					//Non preggoz only!
-					if (player.pregnancyIncubation == 0) {
-						//Already in heat, intensify fertility further.
-						if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-							outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
-							temp = player.findStatusAffect(StatusAffects.Heat);
-							player.statusAffect(temp).value1 += 10;
-							player.statusAffect(temp).value2 += 10;
-							player.statusAffect(temp).value3 += 96;
-							dynStats("lib", 10, "resisted", false, "noBimbo", true);
-						}
-						//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-						if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-							outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
-							player.createStatusAffect(StatusAffects.Heat, 20, 20, 96, 0);
-							dynStats("lib", 20, "resisted", false, "noBimbo", true);
-						}
-					}
-				}
+				//Try to go into intense heat.
+        player.goIntoHeat(true, 2);
 				//Males go into rut
-				if (player.totalCocks() > 0) {
-					//Rut affects:
-					//v1 - bonus cum production
-					//v2 - bonus libido
-					//v3 - time remaining!
-					//Has rut, intensify it!
-					if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-						player.addStatusValue(StatusAffects.Rut, 1, 100);
-						player.addStatusValue(StatusAffects.Rut, 2, 5);
-						player.addStatusValue(StatusAffects.Rut, 3, 48);
-						outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-					}
-					else {
-						player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-						dynStats("lib", 5, "resisted", false, "noBimbo", true);
-						outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-					}
-				}
+				player.goIntoRut(true);
 			}
 			//ORGAZMO
 			if (player.lust >= 100 && gameState == 0) {
@@ -4525,55 +4445,20 @@
 			var changes:Number = 0;
 			outputText("", true);
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
-			//Go into heat if girly
-			if (player.hasVagina()) {
-				//Non preggoz only!
-				if (player.pregnancyIncubation == 0) {
-					//Already in heat, intensify fertility further.
-					if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.\n", false);
-						temp = player.findStatusAffect(StatusAffects.Heat);
-						player.statusAffect(temp).value1 += 10;
-						player.statusAffect(temp).value2 += 10;
-						player.statusAffect(temp).value3 += 96;
-						dynStats("lib", 10, "resisted", false, "noBimbo", true);
-					}
-					//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-					if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-						outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
-						player.createStatusAffect(StatusAffects.Heat, 20, 20, 96, 0);
-						dynStats("lib", 20, "resisted", false, "noBimbo", true);
-					}
-					changes++;
-				}
-			}
+			//Try to go into intense heat
+      if(player.goIntoHeat(true, 2)) {
+        changes++;
+      }
 			//Males go into rut
-			else if (player.totalCocks() > 0) {
-				//Rut affects:
-				//v1 - bonus cum production
-				//v2 - bonus libido
-				//v3 - time remaining!
-				//Has rut, intensify it!
-				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
-					player.addStatusValue(StatusAffects.Rut, 1, 100);
-					player.addStatusValue(StatusAffects.Rut, 2, 5);
-					player.addStatusValue(StatusAffects.Rut, 3, 48);
-					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				else {
-					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
-					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
+			else if(player.goIntoRut(true)) {
 				changes++;
 			}
 			else {
-				//Boost vaginal capacity without gaping
+				//Boost anal capacity without gaping
 				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 80) {
 					if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accomodating somehow.  Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
+					outputText("\n\nYou feel... more accommodating somehow.  Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
 					changes++;
 				}
 				else {
@@ -4676,31 +4561,24 @@
 			}
 			//Sexual changes would go here if I wasn't a tard.
 			//Heat
-			if (player.pregnancyIncubation == 0 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
-				//Not 'heat'ed yet.
-				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-					outputText("\n\nThe interior of your " + vaginaDescript(0) + " clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ", false);
-					if (player.skinType == SKIN_TYPE_FUR) outputText("underneath your fur ", false);
-					outputText("as images and fantasies ", false);
-					if (player.cor < 50) outputText("assault ", false);
-					else outputText("fill ", false);
-					outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
-					player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-					dynStats("lib", 15, "lus", 15, "resisted", false, "noBimbo", true);
-
-				}
-				//Intensify cat heat
-				else {
-					if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
-					else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffect(temp).value1 += 5;
-					player.statusAffect(temp).value2 += 5;
-					player.statusAffect(temp).value3 += 48;
-					dynStats("lib", 5, "lus", 5, "resisted", false, "noBimbo", true);
-
-				}
-				changes++;
+			if (and(4) == 0 && changes < changeLimit) {
+        var intensified:Boolean = player.inHeat;
+        
+        if(player.goIntoHeat(false)) {
+          if(intensified) {
+  					if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
+  					else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
+          }
+          else {
+  					outputText("\n\nThe interior of your " + vaginaDescript(0) + " clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ", false);
+  					if (player.skinType == SKIN_TYPE_FUR) outputText("underneath your fur ", false);
+  					outputText("as images and fantasies ", false);
+  					if (player.cor < 50) outputText("assault ", false);
+  					else outputText("fill ", false);
+  					outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
+          }
+  				changes++;
+        }
 			}
 			//Shrink the boobalies down to A for men or C for girls.
 			if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -7125,23 +7003,10 @@
 				}
 			}
 			//HEAT!
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(6) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
-				//Already in heat, intensify fertility further.
-				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffect(temp).value1 += 5;
-					player.statusAffect(temp).value2 += 5;
-					player.statusAffect(temp).value3 += 48;
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
-					player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-					dynStats("lib", 15, "resisted", false, "noBimbo", true);
-				}
-				changes++;
+			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(6) == 0 && changes < changeLimit) {
+        if(player.goIntoHeat(true)) {
+  				changes++;
+        }
 			}
 			//[Grow Fur]
 			//FOURTH
@@ -8292,38 +8157,34 @@
 			}
 			//fem fertility up and heat (suppress if pregnant)
 			//not already in heat (add heat and lust)
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit && player.pregnancyIncubation == 0 && player.hasVagina()) {
-				//Already in heat, intensify fertility further.
-				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
-					//[(no mino cum in inventory)]
-					if (!player.hasItem(consumables.MINOCUM)) {
-						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
-					}
-					else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
-					//(mino cum in inventory and non-horse, 100 lust)
-					else {
-						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
-						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
-						player.minoCumAddiction(5);
-						player.knockUp(2, 432, 175);
-						player.consumeItem(consumables.MINOCUM);
-					}
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffect(temp).value1 += 5;
-					player.statusAffect(temp).value2 += 5;
-					player.statusAffect(temp).value3 += 48;
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-					outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
-					player.createStatusAffect(StatusAffects.Heat, 10, 15, 48, 0);
-					dynStats("lib", 15, "resisted", false, "noBimbo", true);
-					player.fertility++;
-				}
-				changes++;
-			}
+			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
+        var intensified:Boolean = player.inHeat;
+        if(player.goIntoHeat(false)) {
+          if(intensified) {
+  					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
+  					//[(no mino cum in inventory)]
+  					if (!player.hasItem(consumables.MINOCUM)) {
+  						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
+  					}
+  					else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
+  					//(mino cum in inventory and non-horse, 100 lust)
+  					else {
+  						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
+  						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
+  						player.minoCumAddiction(5);
+  						player.knockUp(2, 432, 175);
+  						player.consumeItem(consumables.MINOCUM);
+  					}
+          }
+          else {
+  					outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
+            
+            // Also make a permanent nudge.
+  					player.fertility++;
+          }
+          changes++;
+        }
+      }
 
 			//bodypart changes:
 			//gain ears
@@ -8745,24 +8606,10 @@
 				changes++;
 			}
 			//Go into heat
-			if (rand(3) == 0 && changes < changeLimit && player.vaginas.length > 0 &&
-					player.pregnancyIncubation == 0) {
-				//Already in heat, intensify fertility further.
-				if (player.findStatusAffect(StatusAffects.Heat) >= 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
-					temp = player.findStatusAffect(StatusAffects.Heat);
-					player.statusAffect(temp).value1 += 5;
-					player.statusAffect(temp).value2 += 5;
-					player.statusAffect(temp).value3 += 48;
-					dynStats("lib", 5, "resisted", false, "noBimbo", true);
-				}
-				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.findStatusAffect(StatusAffects.Heat) < 0) {
-					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
-					player.createStatusAffect(StatusAffects.Heat, 10, 15, 72, 0);
-					dynStats("lib", 15, "resisted", false, "noBimbo", true);
-				}
-				changes++;
+			if (rand(3) == 0 && changes < changeLimit) {
+        if(player.goIntoHeat(true)) {
+  				changes++;
+        }
 			}
 			//Turn ferret mask to full furface.
 			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_FERRET && rand(4) == 0 && changes < changeLimit)

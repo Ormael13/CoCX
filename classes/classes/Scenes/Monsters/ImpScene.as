@@ -1313,7 +1313,7 @@ package classes.Scenes.Monsters
 						outputText("You wonder what this will do to whatever is growing in your womb...  ", false);
 					}
 					else {
-						if(player.findStatusAffect(StatusAffects.Heat) >= 0) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.", false);
+						if(player.inHeat) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.", false);
 						else if(player.pregnancyIncubation <= 0) {
 							if(player.cor > 75) outputText("With an appreciative moan, you bury your fingers in its slimy warmth, hoping you are pregnant with some fiendish offspring, and lose consciousness.", false);
 							else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.", false);
