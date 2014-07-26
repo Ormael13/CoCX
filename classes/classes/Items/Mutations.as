@@ -4423,10 +4423,7 @@
 			if (player.ass.analLooseness > 1) player.ass.analLooseness = 1;
 			if (player.ass.analWetness > 1) player.ass.analWetness = 1;
 			//Clear breasts
-			while (player.breastRows.length > 0) {
-				player.removeBreastRow(0, 1);
-				trace("1 row of breasts purged.");
-			}
+			player.breastRows = [];
 			player.createBreastRow();
 			player.nippleLength = .25;
 			//Girls and herms get bewbs back
