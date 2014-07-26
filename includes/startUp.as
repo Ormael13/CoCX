@@ -86,10 +86,11 @@ public function startupScreenBody():void
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
 
-Edited By: SoS, Zeikfried, Prisoner416, Ashi, and Others
+Edited By:<br>
+&nbsp; &nbsp; &nbsp; Ashi, SoS, Prisoner416, Zeikfried, et al
 
-Open-source contributions by:  
-Amygdala, Yoffy, Fake-Name, Cmacleod42, Gedan, aimozg
+Open-source contributions by:<br>
+&nbsp; &nbsp; &nbsp; aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al
 
 Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
 

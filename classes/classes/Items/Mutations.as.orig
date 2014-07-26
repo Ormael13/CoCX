@@ -656,12 +656,31 @@
 					changes++;
 				}
 			}
-			
 			//Males go into rut
+<<<<<<< HEAD
 			if (rand(4) == 0) {
 				player.goIntoRut(true);
+=======
+			if (player.cocks.length > 0 && rand(4) == 0) {
+				//Rut affects:
+				//v1 - bonus cum production
+				//v2 - bonus libido
+				//v3 - time remaining!
+				//Has rut, intensify it!
+				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+					player.addStatusValue(StatusAffects.Rut, 1, 100);
+					player.addStatusValue(StatusAffects.Rut, 2, 5);
+					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
+					player.addStatusValue(StatusAffects.Rut, 3, 48);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
+				}
+				else {
+					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
+					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
+				}
+>>>>>>> 8a6c7893e64b7073020b7c1502cc56d9bf529e15
 			}
-			
 			//Anti-masturbation status
 			if (rand(4) == 0 && changes < changeLimit && player.findStatusAffect(StatusAffects.Dysfunction) < 0) {
 				if (player.cocks.length > 0) outputText("\n\nYour " + cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.", false);
@@ -3684,7 +3703,29 @@
 				//Try to go into intense heat.
         player.goIntoHeat(true, 2);
 				//Males go into rut
+<<<<<<< HEAD
 				player.goIntoRut(true);
+=======
+				if (player.cocks.length > 0) {
+					//Rut affects:
+					//v1 - bonus cum production
+					//v2 - bonus libido
+					//v3 - time remaining!
+					//Has rut, intensify it!
+					if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+						player.addStatusValue(StatusAffects.Rut, 1, 100);
+						player.addStatusValue(StatusAffects.Rut, 2, 5);
+						player.addStatusValue(StatusAffects.Rut, 3, 48);
+						outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
+						dynStats("lib", 5, "resisted", false, "noBimbo", true);
+					}
+					else {
+						player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
+						dynStats("lib", 5, "resisted", false, "noBimbo", true);
+						outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+					}
+				}
+>>>>>>> 8a6c7893e64b7073020b7c1502cc56d9bf529e15
 			}
 			//ORGAZMO
 			if (player.lust >= 100 && gameState == 0) {
@@ -4452,7 +4493,28 @@
         changes++;
       }
 			//Males go into rut
+<<<<<<< HEAD
 			else if(player.goIntoRut(true)) {
+=======
+			else if (player.cocks.length > 0) {
+				//Rut affects:
+				//v1 - bonus cum production
+				//v2 - bonus libido
+				//v3 - time remaining!
+				//Has rut, intensify it!
+				if (player.findStatusAffect(StatusAffects.Rut) >= 0) {
+					player.addStatusValue(StatusAffects.Rut, 1, 100);
+					player.addStatusValue(StatusAffects.Rut, 2, 5);
+					player.addStatusValue(StatusAffects.Rut, 3, 48);
+					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
+				}
+				else {
+					player.createStatusAffect(StatusAffects.Rut, 150, 5, 100, 0);
+					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
+				}
+>>>>>>> 8a6c7893e64b7073020b7c1502cc56d9bf529e15
 				changes++;
 			}
 			else {
@@ -4561,33 +4623,27 @@
 				dynStats("lib", 1, "sen", .25);
 				changes++;
 			}
-			
 			//Sexual changes would go here if I wasn't a tard.
 			//Heat
-			if (rand(4) == 0 && changes < changeLimit) 
-			{
-				var intensified:Boolean = player.inHeat;
+			if (and(4) == 0 && changes < changeLimit) {
+        var intensified:Boolean = player.inHeat;
         
-				if (player.goIntoHeat(false)) 
-				{
-					if (intensified) 
-					{
-						if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
-						else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
-					}
-					else 
-					{
-						outputText("\n\nThe interior of your " + vaginaDescript(0) + " clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ", false);
-						if (player.skinType == SKIN_TYPE_FUR) outputText("underneath your fur ", false);
-						outputText("as images and fantasies ", false);
-						if (player.cor < 50) outputText("assault ", false);
-						else outputText("fill ", false);
-						outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
-					}
-					changes++;
-				}
+        if(player.goIntoHeat(false)) {
+          if(intensified) {
+  					if (rand(2) == 0) outputText("\n\nThe itch inside your " + vaginaDescript(0) + " is growing stronger, and you desperately want to find a nice cock to massage the inside.", false);
+  					else outputText("\n\nThe need inside your " + vaginaDescript(0) + " grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.", false);
+          }
+          else {
+  					outputText("\n\nThe interior of your " + vaginaDescript(0) + " clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ", false);
+  					if (player.skinType == SKIN_TYPE_FUR) outputText("underneath your fur ", false);
+  					outputText("as images and fantasies ", false);
+  					if (player.cor < 50) outputText("assault ", false);
+  					else outputText("fill ", false);
+  					outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
+          }
+  				changes++;
+        }
 			}
-			
 			//Shrink the boobalies down to A for men or C for girls.
 			if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				temp2 = 0;
@@ -7435,108 +7491,108 @@
 			menuLoc = 28;
 			
 			switch(rand(12)) {
-			//[Fox Jewel]
+				//[Fox Jewel]
 				case 0: 
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
-				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-				inventory.takeItem(consumables.FOXJEWL, false);
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
+					outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
+					inventory.takeItem(consumables.FOXJEWL, false);
 				break;
 
-			//[Fox Berries]
+				//[Fox Berries]
 				case 1:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
-				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
-				//add Fox Berries to inventory
-				inventory.takeItem(consumables.FOXBERY, false);
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
+					outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
+					//add Fox Berries to inventory
+					inventory.takeItem(consumables.FOXBERY, false);
 				break;
 
-			//[Gems]
+				//[Gems]
 				case 2:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it is filled to the brim with shining gems!");
-				var gems:int = 2 + rand(20);
-				outputText("\n\n<b>You've received " + num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
-				player.gems += gems;
-				//add X gems to inventory
-				statScreenRefresh();
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it is filled to the brim with shining gems!");
+					var gems:int = 2 + rand(20);
+					outputText("\n\n<b>You've received " + num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
+					player.gems += gems;
+					//add X gems to inventory
+					statScreenRefresh();
 				break;
 
-			//[Kitsune Tea/Scholar's Tea] //Just use Scholar's Tea and drop the "trick" effect if you don't want to throw in another new item.
+				//[Kitsune Tea/Scholar's Tea] //Just use Scholar's Tea and drop the "trick" effect if you don't want to throw in another new item.
 				case 3:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
-				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
-				//add Kitsune Tea/Scholar's Tea to inventory
-				inventory.takeItem(consumables.SMART_T, false);
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
+					outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
+					//add Kitsune Tea/Scholar's Tea to inventory
+					inventory.takeItem(consumables.SMART_T, false);
 				break;
 
-			//[Hair Dye]
+				//[Hair Dye]
 				case 4:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small vial filled with hair dye!");
-				var itype:ItemType = [
-					consumables.RED_DYE,
-					consumables.BLOND_D,
-					consumables.BLACK_D,
-					consumables.WHITEDY
-				][rand(4)];
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small vial filled with hair dye!");
+					var itype:ItemType = [
+						consumables.RED_DYE,
+						consumables.BLOND_D,
+						consumables.BLACK_D,
+						consumables.WHITEDY
+					][rand(4)];
 
-				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
-				//add <color> Dye to inventory
-				inventory.takeItem(itype, false);
+					outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
+					//add <color> Dye to inventory
+					inventory.takeItem(itype, false);
 				break;
 
-			//[Knowledge Spell]
+				//[Knowledge Spell]
 				case 5:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but it seems like there's nothing else inside.  As you peer into the box, a glowing circle filled with strange symbols suddenly flashes to life!  Light washes over you, and your mind is suddenly assaulted with new knowledge...  and the urge to use that knowledge for mischief!");
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but it seems like there's nothing else inside.  As you peer into the box, a glowing circle filled with strange symbols suddenly flashes to life!  Light washes over you, and your mind is suddenly assaulted with new knowledge...  and the urge to use that knowledge for mischief!");
 
-				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
-				//Increase INT and Libido, +10 LUST
-				dynStats("int", 4, "sen", 2, "lus", 10);
+					outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
+					//Increase INT and Libido, +10 LUST
+					dynStats("int", 4, "sen", 2, "lus", 10);
 				break;
 
-			//[Thief!]
+				//[Thief!]
 				case 6:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it leaps into your item pouch, then hops away and gallavants into the woods, carting off a small fortune in gems.");
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it leaps into your item pouch, then hops away and gallavants into the woods, carting off a small fortune in gems.");
 
-				outputText("\n\n<b>The kitsune's familiar has stolen your gems!</b>");
-				// Lose X gems as though losing in battle to a kitsune
-				player.gems -= 2 + rand(15);
-				statScreenRefresh();
+					outputText("\n\n<b>The kitsune's familiar has stolen your gems!</b>");
+					// Lose X gems as though losing in battle to a kitsune
+					player.gems -= 2 + rand(15);
+					statScreenRefresh();
 				break;
 
-			//[Prank]
+				//[Prank]
 				case 7:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it pulls a large calligraphy brush from thin air and leaps up into your face, then hops away and gallavants off into the woods.  Touching your face experimentally, you come away with a fresh coat of black ink on your fingertips.");
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it pulls a large calligraphy brush from thin air and leaps up into your face, then hops away and gallavants off into the woods.  Touching your face experimentally, you come away with a fresh coat of black ink on your fingertips.");
 
-				outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
-				//Advance time 1 hour, -20 LUST
-				dynStats("lus", -20);
+					outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
+					//Advance time 1 hour, -20 LUST
+					dynStats("lus", -20);
 				break;
 
-			//[Aphrodisiac]
+				//[Aphrodisiac]
 				case 8:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
-				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
-				//+100 LUST
-				dynStats("lus=", 100, "resisted", false);
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
+					outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
+					//+100 LUST
+					dynStats("lus=", 100, "resisted", false);
 				break;
 
-			//[Wither]
+				//[Wither]
 				case 9:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
-				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
-				dynStats("str", -5, "tou", -5);
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
+					outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
+					dynStats("str", -5, "tou", -5);
 				break;
 
-			//[Dud]
+				//[Dud]
 				case 10:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.");
-				outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  What a ripoff!</b>");
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.");
+					outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  What a ripoff!</b>");
 				break;
 
-			//[Dud...  Or is it?]
+				//[Dud...  Or is it?]
 				case 11:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
+					outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 					outputText("\n\n<b>At least you managed to salvage a shard of black chitin from it...</b>  ");
-				inventory.takeItem(useables.B_CHITN, false);
+					inventory.takeItem(useables.B_CHITN, false);
 				break;
 
 				default: trace("Kitsune's gift roll foobar..."); break;

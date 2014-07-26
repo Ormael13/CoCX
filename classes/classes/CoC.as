@@ -337,8 +337,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.11";
-			version = ver + " (<b>Perkwelp Edition</b>)";
+			ver = "0.8.12";
+			version = ver + " (<b>Cocksock Deluxe\(TM\) Edition</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

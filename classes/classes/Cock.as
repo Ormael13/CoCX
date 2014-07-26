@@ -62,74 +62,86 @@ package classes
 			return cockThickness * cockLength;
 		}
 		
-		public function growCock(increase:Number):Number
+		public function growCock(lengthDelta:Number, bigCock:Boolean):Number
 		{
-			var amountGrown:Number = 0;
-			var lengthDelta:Number = 0;
-			if (increase > 0)
-			{
-				trace("growcock increasing..");
-				while (increase > 0)
-				{
-					lengthDelta = 1;
-					//Cut length growth for huge dicked
-					if (cockLength > 10 && cockType != CockTypesEnum.HUMAN) 
-						lengthDelta /= 2;
-					if (cockType == CockTypesEnum.HUMAN && cockLength > 17)
-						lengthDelta /= 2;
-					//Cut again for massively dicked
-					if (cockType != CockTypesEnum.HUMAN && cockLength > 24)
-						lengthDelta /= 2;
-					if (cockType == CockTypesEnum.HUMAN && cockLength > 40)
-						lengthDelta /= 2;
-					//Start adding up bonus length
-					amountGrown += lengthDelta;
-					cockLength += lengthDelta;
-					lengthDelta = 0;
-					increase--;
-				}
-				increase = 0;
+			
+			if (lengthDelta == 0) {
+				trace("Whoops! growCock called with 0, aborting...");
+				return lengthDelta;
 			}
-			//Decrease
-			if (increase < 0)
-			{
-				trace("growcock decreasing..");
-				while (increase < 0)
-				{
-					lengthDelta = -1;
-					//Cut length growth for huge dicked
-					if (cockLength < 5 && cockType != CockTypesEnum.HUMAN)
-					{
-						lengthDelta /= 2;
-					}
-					//Cut length loss, horses lose slower
-					if (cockType == CockTypesEnum.HUMAN && cockLength < 10)
-						lengthDelta /= 3;
-					else if (cockLength < 10)
-						lengthDelta /= 2;
-					//Cut again for massively dicked
-					if (cockType == CockTypesEnum.HUMAN && cockLength < 4)
-						lengthDelta /= 3;
-					else if (cockLength < 4)
-						lengthDelta /= 2;
-					if (cockType == CockTypesEnum.HUMAN && cockLength < 6)
-						lengthDelta /= 3;
-					else if (cockLength < 6)
-						lengthDelta /= 2;
-					//MINIMUM LENGTH OF 1!
-					if (cockLength == 1)
-						lengthDelta = 0;
-					//Start adding up bonus length
-					amountGrown += lengthDelta;
-					cockLength += lengthDelta;
-					lengthDelta = 0;
-					increase++;
+			
+			var threshhold:int = 0;
+			
+			trace("growcock starting at:" +lengthDelta);
+
+
+			if (lengthDelta > 0) { // growing
+				trace("and growing...");
+				threshhold = 24;
+				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
+				if (bigCock) {
+					trace("growCock found BigCock Perk");
+					lengthDelta *= 1.5;
+					threshhold += 12;
 				}
-				//Cut down thickness if disproportional
-				if (cockThickness > cockLength * .33)
-					cockThickness = cockLength * .33;
+				// Not a human cock? Multiple the length before dimishing returns set in by 3
+				if (cockType != CockTypesEnum.HUMAN)
+					threshhold *= 2;
+				// Modify growth for cock socks
+				if (sock == "scarlet") {
+					trace("growCock found Scarlet sock");
+					lengthDelta *= 1.5;
+				}
+				else if (sock == "cobalt") {
+					trace("growCock found Cobalt sock");
+					lengthDelta *= .5;
+				}
+				// Do diminishing returns
+				if (cockLength > threshhold) 
+					lengthDelta /= 4;
+				else if (cockLength > threshhold / 2)
+					lengthDelta /= 2;
 			}
-			return amountGrown;
+			else {
+				trace("and shrinking...");
+				
+				threshhold = 0;
+				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
+				if (bigCock) {
+					trace("growCock found BigCock Perk");
+					lengthDelta *= 0.5;
+					threshhold += 12;
+				}
+				// Not a human cock? Add 12 to the length before dimishing returns set in
+				if (cockType != CockTypesEnum.HUMAN)
+					threshhold += 12;
+				// Modify growth for cock socks
+				if (sock == "scarlet") {
+					trace("growCock found Scarlet sock");
+					lengthDelta *= 0.5;
+				}
+				else if (sock == "cobalt") {
+					trace("growCock found Cobalt sock");
+					lengthDelta *= 1.5;
+				}
+				// Do diminishing returns
+				if (cockLength > threshhold) 
+					lengthDelta /= 3;
+				else if (cockLength > threshhold / 2)
+					lengthDelta /= 2;
+			}
+
+			trace("then changing by: " + lengthDelta);
+
+			cockLength += lengthDelta;
+			
+			if (cockLength < 1)
+				cockLength = 1;
+
+			if (cockThickness > cockLength * .33)
+				cockThickness = cockLength * .33;
+
+			return lengthDelta;
 		}
 		
 		public function thickenCock(increase:Number):Number
@@ -178,9 +190,8 @@ package classes
 					increase--;
 				}
 				increase = 0;
-				return amountGrown;
 			}
-			if (increase < 0)
+			else if (increase < 0)
 			{
 				while (increase < 0)
 				{
@@ -205,6 +216,7 @@ package classes
 					increase++;
 				}
 			}
+			trace("thickenCock called and thickened by: " + amountGrown);
 			return amountGrown;
 		}	
 		

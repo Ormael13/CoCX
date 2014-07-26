@@ -1847,10 +1847,12 @@ public function dropItem(monster:Monster):void {
 }
 public function awardPlayer():void
 {
-	if(player.findPerk(PerkLib.MidasCock) >= 0) {
-		if(monster.gems >= 50) monster.gems++;
-		if(monster.gems >= 20) monster.gems++;
-		monster.gems += 2;
+	if (player.countCockSocks("gilded") > 0) {
+		//trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
+		
+		var bonusGems:int = monster.gems * 0.15 + 5 * player.countCockSocks("gilded"); // int so AS rounds to whole numbers
+		monster.gems += bonusGems;
+		//trace( "to: " + monster.gems )
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if(!inDungeon) doNext(13);
