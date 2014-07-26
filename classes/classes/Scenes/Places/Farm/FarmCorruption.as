@@ -3333,7 +3333,7 @@ package classes.Scenes.Places.Farm
 				dynStats("lib+", 1);
 			}
 			// Medium - cock area is within 33% of Whitneys cap without going over.
-			else if (player.cockArea(cockI) > (whitneyVagCapacity() * 0.66))
+			else if (player.cockArea(cockI - 1) > (whitneyVagCapacity() * 0.66))
 			{
 				outputText("\n\nYour mouth opens as she begins to revolve her supple hips, sliding her wet opening up and down your [cock "+ cockI +"]. Your cock is forcibly hardened and sensitized to the point that you can feel her lips parted around your huge girth, her tiny clit pushing up and down every vein and bulge it encounters. You can’t help but try and thrust your way into that tantalizingly warm, wet hole; you groan as with a laugh she pulls away from your crown, shifts herself around, and rubs at the top side of your cock instead. She seems intent on masturbating herself on every inch of your [cock "+ cockI +"], frosting every inch with her femjizz... and she has a fair amount of ground to cover.");
 

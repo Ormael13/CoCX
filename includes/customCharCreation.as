@@ -12,16 +12,11 @@ public function customPCSetup():void {
 		player.breastRows[0].breastRating = 5;
 		
 		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2;
+		player.cocks[0].cockLength = 4;
+		player.cocks[0].cockThickness = 1;
 		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 		player.cocks[0].knotMultiplier = 1.5;
 		
-		player.createCock();
-		player.cocks[1].cockLength = 20;
-		player.cocks[1].cockThickness = 2;
-		player.cocks[1].cockType = CockTypesEnum.TENTACLE;
-		player.cocks[1].knotMultiplier = 1.5;
 	
 		player.clitLength = 0.5;
 		player.fertility = 50;
@@ -164,19 +159,19 @@ public function customPCSetup():void {
 		flags[kFLAGS.MILK_SIZE] = 2;
 		
 		// Rubi Testing
-		flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
-		flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
-		flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;
-		flags[kFLAGS.RUBI_TUBE_TOP] = 1;
-		flags[kFLAGS.RUBI_BODYSUIT] = 1;
-		flags[kFLAGS.RUBI_LONGDRESS] = 1;
-		flags[kFLAGS.RUBI_TIGHT_PANTS] = 1;
-		flags[kFLAGS.RUBI_NURSE_CLOTHES] = 1;
-		flags[kFLAGS.RUBI_SWIMWEAR] = 1;
-		flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
-		flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
-		flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
-		flags[kFLAGS.RUBI_AFFECTION] = 100;
+		//flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
+		//flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
+		//flags[kFLAGS.RUBI_GREEN_ADVENTURER] = 1;
+		//flags[kFLAGS.RUBI_TUBE_TOP] = 1;
+		//flags[kFLAGS.RUBI_BODYSUIT] = 1;
+		//flags[kFLAGS.RUBI_LONGDRESS] = 1;
+		//flags[kFLAGS.RUBI_TIGHT_PANTS] = 1;
+		//flags[kFLAGS.RUBI_NURSE_CLOTHES] = 1;
+		//flags[kFLAGS.RUBI_SWIMWEAR] = 1;
+		//flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
+		//flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
+		//flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
+		flags[kFLAGS.RUBI_AFFECTION] = 75;
 		flags[kFLAGS.RUBI_INTRODUCED] = 1;
 	}
 	if(player.short == "Vahdunbrii") {
