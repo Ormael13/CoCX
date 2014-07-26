@@ -114,7 +114,7 @@ public function katherineGreeting():void {
 
 public function fixKathsCock():void
 {
-	if (flags[kFLAGS.KATHERINE_DICK_COUNT] == 0 || flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8)
+	if (flags[kFLAGS.KATHERINE_DICK_COUNT] == 0 || flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8 || flags[kFLAGS.KATHERINE_KNOT_THICKNESS] < 2 || flags[kFLAGS.KATHERINE_BALL_SIZE] < 1)
 	{
 		// Setup her cock defaults
 		flags[kFLAGS.KATHERINE_DICK_COUNT] = 1;
@@ -201,12 +201,23 @@ private function askKatherineAboutGang():void {
 
 	outputText("She looks around, as if expecting them to suddenly appear.  \"<i>Okay... just, promise me you won't tell them anything I tell you?</i>\"  When you give your word, she sighs softly.  \"<i>Well, we're basically just what we look like; a bunch of homeless cats who figured out there was strength in numbers.  We're not really friends, exactly, we just know we can trust each other and we band together to do what we need to do.</i>\"\n\n", false);
 
-	outputText("You ask her just what they actually do; after all, you did first meet them when they ambushed you ", false);
-	if(flags[kFLAGS.KATHERINE_MET_SCYLLA])
-		outputText("and Scylla ", false);
-	outputText("to get at some milk.\n\n", false);
+	outputText("You ask her just what they actually do");
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] == 1)
+	{
+		outputText(" after all, you did first meet them when they ambushed you ", false);
+		if(flags[kFLAGS.KATHERINE_MET_SCYLLA])
+			outputText("and Scylla ", false);
+		outputText("to get at some milk.\n\n", false);
+		
+		outputText("Katherine flushes with embarrassment.  \"<i>Yes, well... that's honestly not the first time they've done that.  ");
+	} 
+	else
+	{
+		outputText(".");
+		outputText("\n\nKatherine flushes with embarrassment.  \"<i>Well...  ");
+	}
 
-	outputText("Katherine flushes with embarrassment.  \"<i>Yes, well... that's honestly not the first time they've done that.  We all like milk and sometimes have problems getting food, and so we go after lactating women and herms to feed on them - we don't usually mug people,</i>\" she hastily appends, \"<i>so the Watch aren't chasing us constantly.  Much as they may complain, milk thefts with no actual monetary damages generally aren't important enough for them to bother with.</i>\"\n\n", false);
+	outputText("We all like milk and sometimes have problems getting food, and so we go after lactating women and herms to feed on them - we don't usually mug people,</i>\" she hastily appends, \"<i>so the Watch aren't chasing us constantly.  Much as they may complain, milk thefts with no actual monetary damages generally aren't important enough for them to bother with.</i>\"\n\n", false);
 
 	outputText("You point out that, either way, attacking people for what is basically their bodily fluid has got to be a dangerous risk to take in this city.  A lot of the people around look like they can take care of themselves.\n\n", false);
 
@@ -1978,7 +1989,7 @@ public function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo(
 	outputText("[name], that was an amazing first date. I hope we can do some more things like that - and believe me, I’ve got some ideas!");
 	
 	//(Set KATHERINE_UNLOCKED to 1)
-	flags[kFLAGS.KATHERINE_UNLOCKED] = 1;
+	flags[kFLAGS.KATHERINE_UNLOCKED] = 2;
 	
 	// Setup her cock defaults
 	flags[kFLAGS.KATHERINE_DICK_COUNT] = 1;

@@ -482,7 +482,7 @@ public function doItems(eventNo:Number):void {
 			temp5 = 1070;
 			outputText("\n" + int(itemSlot5.itype.value/2) + " gems for " + itemSlot5.itype.longName + ".", false);
 		}
-		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1)
+		if(flags[kFLAGS.KATHERINE_UNLOCKED] >= 1)
 			kath = kGAMECLASS.telAdre.katherine.visitKatherine;
 
 		choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1,
