@@ -1489,6 +1489,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.breastRows[i].breastRating = 0;
 		}
 		
+		// Force the creation of the default breast row onto the player if it's no longer present
+		if (player.breastRows.length == 0) player.createBreastRow();
+		
 		var hasHistoryPerk:Boolean = false;
 		var hasLustyRegenPerk:Boolean = false;
 		var addedSensualLover:Boolean = false;

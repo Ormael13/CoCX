@@ -2800,6 +2800,10 @@ import classes.PerkType;
 			{
 				//trace("ERROR: removeBreastRow called but cocks do not exist.");
 			}
+			else if (breastRows.length == 1 || breastRows.length - totalRemoved < 1)
+			{
+				//trace("ERROR: Removing the current breast row would break the Creature classes assumptions about breastRow contents.");
+			}
 			else
 			{
 				if (arraySpot > breastRows.length - 1)
@@ -3740,6 +3744,8 @@ import classes.PerkType;
 
 		public function canTitFuck():Boolean
 		{
+			if (breastRows.length == 0) return false;
+			
 			var counter:Number = breastRows.length;
 			var index:Number = 0;
 			while (counter > 0) {
@@ -3754,6 +3760,8 @@ import classes.PerkType;
 
 		public function mostBreastsPerRow():Number
 		{
+			if (breastRows.length == 0) return 2;
+			
 			var counter:Number = breastRows.length;
 			var index:Number = 0;
 			while (counter > 0) {
