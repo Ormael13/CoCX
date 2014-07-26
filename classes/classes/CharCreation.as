@@ -205,11 +205,9 @@ public function newGameGo(e:MouseEvent = null):void {
 		trace("1 vagina purged.");
 	}
 	//Clear breasts
-	while(player.breastRows.length > 0)
-	{
-		player.removeBreastRow(0,1);
-		trace("1 row of breasts purged.");
-	}
+	player.breastRows = [];
+	player.createBreastRow();
+	
 	//Clear Statuses
 	while(player.statusAffects.length > 0) {
 		player.removeStatuses();
