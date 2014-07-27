@@ -2278,7 +2278,7 @@ public function catAutoLick():void {
 		
 				var gems:int = midasCockJackingGemsRoll();
 				
-				outputText("You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. You once again feel a slight chill as you reach the point-of-no-return and you let your " + cockDescript(0) + " pop free of your mouth. You watch in glee as your seed slit parts to begin the sparkling shower you know is coming. Your cum, caught in the light of the golden cocksock, beads and twists in the light, crystallizing into a glittering shower. A ", false);
+				outputText("You once again feel a slight chill as you reach the point-of-no-return and you let your " + cockDescript(0) + " pop free of your mouth. You watch in glee as your seed slit parts to begin the sparkling shower you know is coming. Your cum, caught in the light of the golden cocksock, beads and twists in the light, crystallizing into a glittering shower. A ", false);
 	if(player.cumQ() < 25) outputText("sprinkle of");
 	else if(player.cumQ() < 250) outputText("rain of");
 	else outputText("torrent of");
