@@ -420,6 +420,7 @@ public function creditsScreen():void {
 	outputText("<li> Quiet Browser (Bee Oviposition of Urta)</li>");
 	outputText("<li> Bagpuss (Laying Eggs In Pure Amily)</li>");
 	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
+	outputText("<li> Gardeford (Helia x Bimbo Sophie Threesomes)</li>");
 	outputText("</ul>");
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
 	doNext(mainMenu);
