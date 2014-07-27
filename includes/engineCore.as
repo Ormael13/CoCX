@@ -1368,156 +1368,154 @@ public function displayStats(e:MouseEvent = null):void
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);
-	if(player.hasKeyItem("Bow") >= 0) outputText("<b>Bow Skill: </b>" + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n", false);
-	outputText("<b>Lust Resistance: </b>" + (100-Math.round(lustPercent())) + "% (Higher is better.)\n", false);
-	outputText("<b>Spell Effect Multiplier: </b>" + (100 * spellMod()) + "%\n");
-	outputText("<b>Spell Cost: </b>" + spellCost(100) + "%\n");
-	outputText("<b>Tease Skill Level (Out of 5): </b> " + player.teaseLevel + "\n", false);
-	
+	if (player.hasKeyItem("Bow") >= 0) outputText("<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n", false);
+	outputText("<b>Lust Resistance:</b> " + (100-Math.round(lustPercent())) + "% (Higher is better.)\n", false);
+	outputText("<b>Spell Effect Multiplier:</b> " + (100 * spellMod()) + "%\n");
+	outputText("<b>Spell Cost:</b> " + spellCost(100) + "%\n");
+	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) outputText("<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n", false);
+	outputText("<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n", false);
+
 	if (player.statusAffectv1(StatusAffects.Birthed) > 0) {
 		outputText("\n<b><u>Children</u></b>\n");
-		outputText("<b>Births: </b>" + player.statusAffectv1(StatusAffects.Birthed) + "\n");
+		outputText("<b>Births:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
 	}
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid: </b>" + flags[kFLAGS.BENOIT_EGGS] + "\n");
-	if(flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton: </b>" + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
-	if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn: </b>" + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("<b>Children With Izma: </b>" + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n", false);
-	if(flags[kFLAGS.MARBLE_KIDS] > 0) outputText("<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n", false);
-	if(flags[kFLAGS.ANT_KIDS] > 0) outputText("<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n");
-	if(flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) outputText("<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n");
-	if(flags[kFLAGS.SHEILA_JOEYS] > 0) outputText("<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n");
-	if(flags[kFLAGS.SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n");
-	
-	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
-	{        
-		outputText("<b>Children With Sophie:</b> ");
-		var sophie:int = 0;
-		if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
-		sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
-		if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
-		outputText(sophie + "\n");
-	}
-	if(player.statusAffectv2(StatusAffects.Tamani) > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n", false);
-	if(urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaPregs.urtaKids() + "\n");
-	if(flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
-	if(emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
-	if(emberScene.emberChildren() > 0) {
-		outputText("<b>Ember Offspring (Males): </b>" + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
-		outputText("<b>Ember Offspring (Females): </b>" + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
-		outputText("<b>Ember Offspring (Herms): </b>" + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
+	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
+	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
+	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
+	if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
+	if (emberScene.emberChildren() > 0) {
+		outputText("<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
+		outputText("<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
+		outputText("<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
 	}
 	if (flags[kFLAGS.EMBER_EGGS] > 0) outputText("<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n");
-	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
-	if(mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette Children: </b>" + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) {
-		outputText("<b>Number of Adult Minotaur Offspring: </b>" + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("<b>Children With Izma:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n", false);
+	if (mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
+	if (flags[kFLAGS.MARBLE_KIDS] > 0) outputText("<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n", false);
+	if (flags[kFLAGS.ANT_KIDS] > 0) outputText("<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n");
+	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) outputText("<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n");
+	if (flags[kFLAGS.SHEILA_JOEYS] > 0) outputText("<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n");
+	if (flags[kFLAGS.SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n");
+	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
+	{
+		outputText("<b>Children With Sophie:</b> ");
+		var sophie:int = 0;
+		if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
+		sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+		if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
+		outputText(sophie + "\n");
 	}
-	
+	if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
+	if (player.statusAffectv2(StatusAffects.Tamani) > 0) outputText("<b>Children With Tamani:</b> " + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n", false);
+	if (urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n");
+	//Mino sons
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) outputText("<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
+
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
-	outputText("<b>Anal Capacity: </b>" + Math.round(player.analCapacity()) + "\n");
-	outputText("<b>Anal Looseness: </b>" + Math.round(player.ass.analLooseness) + "\n");
-	
-	outputText("<b>Fertility (Base) Rating: </b>" + Math.round(player.fertility) + "\n", false);
-	outputText("<b>Fertility (With Bonuses) Rating: </b>" + Math.round(player.totalFertility()) + "\n", false);
-	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-		outputText("<b>Hours Since Last Time Breastfed Someone: </b> " + player.statusAffectv2(StatusAffects.Feeder), false);
-		if(player.statusAffectv2(StatusAffects.Feeder) >= 72) outputText(" (Too long! Sensitivity Increasing!)", false);
+	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
+	outputText("<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n");
+	outputText("<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n", false);
+	outputText("<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n", false);
+	if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		outputText("<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusAffectv2(StatusAffects.Feeder), false);
+		if (player.statusAffectv2(StatusAffects.Feeder) >= 72) outputText(" (Too long! Sensitivity Increasing!)", false);
 		outputText("\n", false);
 	}
-	if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)
-		outputText("<b>Times Had Fun with Feline Flexibility: </b>" + flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] + "\n", false);
+	if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0) outputText("<b>Times Had Fun with Feline Flexibility:</b> " + flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] + "\n", false);
 	outputText("<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n", false);
 	outputText("<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n", false);
 	//MARBLE
-	if(player.statusAffectv3(StatusAffects.Marble) > 0) {
-		outputText("<b>Marble Milk Addiction: </b>", false);
-		if(player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0) outputText(Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n", false);
-		else if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("0%\n", false);
+	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
+		outputText("<b>Marble Milk Addiction:</b> ", false);
+		if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0) outputText(Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n", false);
+		else if (player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("0%\n", false);
 		else outputText("100%\n", false);
 	}
 	//MINO!
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
-		if(player.findPerk(PerkLib.MinotaurCumAddict) < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n", false);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		if (player.findPerk(PerkLib.MinotaurCumAddict) < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n", false);
 		else outputText("<b>Minotaur Cum Addiction:</b> 100+%\n", false);
 	}
-	if(player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0) outputText("<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n");
+	if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0) outputText("<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n");
 	outputText("<b>Pregnancy Speed Multiplier:</b> ", false);
 	var preg:Number = 1;
-	if(player.findPerk(PerkLib.Diapause) >= 0) outputText("? (Variable due to Diapause)\n", false);
+	if (player.findPerk(PerkLib.Diapause) >= 0) outputText("? (Variable due to Diapause)\n", false);
 	else {
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) preg++;
-		if(player.findPerk(PerkLib.BroodMother) >= 0) preg++;
-		if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) preg++;
-		if(player.findPerk(PerkLib.MagicalFertility) >= 0) preg++;
-		if(player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) preg++;
+		if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) preg++;
+		if (player.findPerk(PerkLib.BroodMother) >= 0) preg++;
+		if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) preg++;
+		if (player.findPerk(PerkLib.MagicalFertility) >= 0) preg++;
+		if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) preg++;
 		outputText(preg + "\n", false);
 	}        
-	if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
-		if(player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) outputText("<b>Slime Craving:  </b>Active! You are currently losing strength and speed.  You should find fluids.\n", false);
+	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
+		if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) outputText("<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n", false);
 		else {
-			if(player.findPerk(PerkLib.SlimeCore) >= 0) outputText("<b>Slime Stored:  </b>" + ((17 - player.statusAffectv1(StatusAffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n", false);
-			else outputText("<b>Slime Stored:  </b>" + (17 - player.statusAffectv1(StatusAffects.SlimeCraving)) + " hours until you start losing strength.\n", false);
+			if (player.findPerk(PerkLib.SlimeCore) >= 0) outputText("<b>Slime Stored:</b> " + ((17 - player.statusAffectv1(StatusAffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n", false);
+			else outputText("<b>Slime Stored:</b> " + (17 - player.statusAffectv1(StatusAffects.SlimeCraving)) + " hours until you start losing strength.\n", false);
 		}
 	}
-	outputText("<b>Spells Cast: </b>" + flags[kFLAGS.SPELLS_CAST] + "\n");
-	if(player.hasVagina()) outputText("<b>Vaginal Capacity: </b>" + Math.round(player.vaginalCapacity()) + "\n");
-	if(player.hasVagina()) outputText("<b>Vaginal Looseness: </b>" + Math.round(player.looseness()) + "\n");
-	
+	outputText("<b>Spells Cast:</b> " + flags[kFLAGS.SPELLS_CAST] + "\n");
+	if (player.hasVagina()) outputText("<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n");
+	if (player.hasVagina()) outputText("<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n");
+
 	outputText("<b><u>\nInterpersonal Stats</u></b>\n", false);
-	if(flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianScene.arianHealth()) + "\n");
-	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter: </b>" + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
-	if(bazaar.benoit.benoitAffection() > 0) outputText("<b>" + bazaar.benoit.benoitMF("Benoit","Benoite") + " Affection: </b>" + Math.round(bazaar.benoit.benoitAffection()) + "%\n");
-	if(flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(telAdre.brooke.brookeAffection()) + "\n");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0) outputText("<b>Body Parts Taken By Ceraph: </b>" + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n", false);
-	if(helFollower.helAffection() > 0) outputText("<b>Helia Affection: </b>" + Math.round(helFollower.helAffection()) + "%\n");
-	if(helFollower.helAffection() >= 100) outputText("<b>Helia Bonus Points: </b>" + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
-	if(flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
+	if (flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health:</b> " + Math.round(arianScene.arianHealth()) + "\n");
+	if (flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter:</b> " + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
+	if (bazaar.benoit.benoitAffection() > 0) outputText("<b>" + bazaar.benoit.benoitMF("Benoit","Benoite") + " Affection:</b> " + Math.round(bazaar.benoit.benoitAffection()) + "%\n");
+	if (flags[kFLAGS.BROOKE_MET] > 0) outputText("<b>Brooke Affection:</b> " + Math.round(telAdre.brooke.brookeAffection()) + "\n");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0) outputText("<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n", false);
+	if (emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
+	if (helFollower.helAffection() > 0) outputText("<b>Helia Affection:</b> " + Math.round(helFollower.helAffection()) + "%\n");
+	if (helFollower.helAffection() >= 100) outputText("<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n");
+	if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 		outputText("<b>Isabella Affection:</b> ", false);
-		if(!isabellaFollowerScene.isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
+		if (!isabellaFollowerScene.isabellaFollower()) outputText(Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false);
 		else outputText("100%\n", false);
 	}
-	if(flags[kFLAGS.ANEMONE_KID] > 0) {
+	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
+		if (player.statusAffectv2(StatusAffects.Kelt) >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
+		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt)/130*100) + "%\n", false);
+	}
+	if (flags[kFLAGS.ANEMONE_KID] > 0) {
 		outputText("<b>Kid A's Confidence:</b> " + anemoneScene.kidAXP() + "%\n");
 	}
-	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
-		if(kihaFollower.followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
+	if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
+		if (kihaFollower.followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
 		else outputText("<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n", false);
 	}
 	//Lottie stuff
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
-		outputText("<b>Lottie's Encouragement: </b>" + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);
-		outputText("<b>Lottie's Figure: </b>" + telAdre.lottie.lottieTone() + " (higher is better)\n", false);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+		outputText("<b>Lottie's Encouragement:</b> " + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);
+		outputText("<b>Lottie's Figure:</b> " + telAdre.lottie.lottieTone() + " (higher is better)\n", false);
 	}
-	if(mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette's Approval: </b>" + mountain.salon.lynnetteApproval() + "\n");
-	//Mino sons
-	if(flags[kFLAGS.OWCAS_ATTITUDE] > 0) outputText("<b>Owca's Attitude: </b>" + flags[kFLAGS.OWCAS_ATTITUDE] + "\n");
-	if(flags[kFLAGS.SHEILA_XP] != 0) {
-		outputText("<b>Sheila's Corruption: </b>" + sheilaScene.sheilaCorruption());
+	if (mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette's Approval:</b> " + mountain.salon.lynnetteApproval() + "\n");
+	if (flags[kFLAGS.OWCAS_ATTITUDE] > 0) outputText("<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n");
+	if (telAdre.rubi.rubiAffection() > 0) {
+		outputText("<b>Rubi's Affection:</b> " + Math.round(telAdre.rubi.rubiAffection()) + "%\n");
+		outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
+	}
+	if (flags[kFLAGS.SHEILA_XP] != 0) {
+		outputText("<b>Sheila's Corruption:</b> " + sheilaScene.sheilaCorruption());
 		if(sheilaScene.sheilaCorruption() > 100) outputText(" (Yes, it can go above 100)");
 		outputText("\n");
 	}
-	if(player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
-		if(player.statusAffectv2(StatusAffects.Kelt) >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
-		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt)/130*100) + "%\n", false);
+	if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
+		if (urta.urtaLove()) outputText("<b>Urta Status:</b> Lover\n");
+		else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status:</b> Ashamed\n");
+		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
+		else outputText("<b>Urta Status:</b> Ready To Confess Love\n");
 	}
-	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(telAdre.rubi.rubiAffection()) + "%\n");
-	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
-	
-	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-		if(urta.urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
-		else if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
-		else if(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
-		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");
-	}
-	
+
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
-	if(player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
-	if(player.inRut) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
-	if(player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
-	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+	if (player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
+	if (player.inRut) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
+	if (player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
+	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
-	outputText("<b>Eggs Traded For: </b>" + flags[kFLAGS.EGGS_BOUGHT] + "\n");
-	
+	outputText("<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n");
+
 	doNext(1);
 }
 
