@@ -338,7 +338,7 @@
 
 			//Version NUMBER
 			ver = "0.8.12";
-			version = ver + " (<b>Cocksock Deluxe\(TM\) Edition</b>)";
+			version = ver + " (<b>Harpy Slut 4 Lover Mine</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
