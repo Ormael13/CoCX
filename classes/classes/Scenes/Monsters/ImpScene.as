@@ -1675,7 +1675,7 @@ package classes.Scenes.Monsters
 		}
 		
 		//FEEDER BREASTFEED RAPE
-		private function feederBreastfeedRape():void {
+		public function feederBreastfeedRape():void {
 			clearOutput();
 			outputText(images.showImage("implord-win-female-breastfeed"), false);
 			outputText("Standing over the fallen creature you lean forward and grab him by the horns, forcing his face against your [chest].  He protests wildly for a few moments, until you tire of this game.  Pushing him back to the ground, you step on his chest, keeping him pinned.  You start massaging your [nipple] and quickly feel your corrupt milk building up.  Timing things just right, you pinch your [nipple] one last time, causing a small eruption of milk to shoot out, just as you give the imp a swift kick to the gut.");
