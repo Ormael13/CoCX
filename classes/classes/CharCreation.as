@@ -206,7 +206,6 @@ public function newGameGo(e:MouseEvent = null):void {
 	}
 	//Clear breasts
 	player.breastRows = [];
-	player.createBreastRow();
 	
 	//Clear Statuses
 	while(player.statusAffects.length > 0) {
