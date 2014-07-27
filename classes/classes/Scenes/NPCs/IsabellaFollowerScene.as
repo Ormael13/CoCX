@@ -157,14 +157,22 @@ public function callForFollowerIsabella():void {
 		if(isabellaAccent()) outputText("Hi " + player.short + "!  Vat do you need from Izabella?", false);
 		else outputText("Hiya " + player.short + "!  Anything I can help you with?", false);
 		outputText("</i>\"", false);
-		if(player.hasCock()) {
-			if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
-				outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)", false);
+		if (player.hasCock()) {
+			if (player.shortestCockLength() > 9)
+			{
+				outputText("\n\nSadly, you're too big for Isabella to be interested in providing you with morning blowjobs.");
 			}
-			else {
-				outputText("\n\nYou could ask Isabella to give you blowjobs in the morning. (In Sex Menu)", false);
+			else
+			{
+				if (flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) 
+				{
+					outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)", false);
+				}
+				else 
+				{
+					outputText("\n\nYou could ask Isabella to give you blowjobs in the morning. (In Sex Menu)", false);
+				}
 			}
-			if(player.shortestCockLength() > 9) outputText("  Sadly, you're too big for her to be interested in sucking you off right now.", false);
 		}
 	}
 	else

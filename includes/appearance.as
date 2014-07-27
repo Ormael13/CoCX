@@ -613,7 +613,7 @@
 		outputText("  Below your waist your flesh is fused together into a very long snake-like tail.", false);
 	//Horse body is placed higher for readability purposes
 	else if(player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
-		outputText("  Your perfect lissom legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
+		outputText("  Your perfect lissomelegs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS) 
 		outputText("  Your lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_BEE) 
