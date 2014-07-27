@@ -1930,8 +1930,10 @@ public function combatStatusesUpdate():void {
 	}
 	if(player.findStatusAffect(StatusAffects.UBERWEB) >= 0)
 		outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n", false);
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0 && monster.findStatusAffect(StatusAffects.Sandstorm) < 0) {
-		if(player.findStatusAffect(StatusAffects.SheilaOil) >= 0) {
+	if (player.findStatusAffect(StatusAffects.Blind) >= 0 && monster.findStatusAffect(StatusAffects.Sandstorm) < 0) 
+	{
+		if (player.findStatusAffect(StatusAffects.SheilaOil) >= 0) 
+		{
 			if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
 				outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
 				player.removeStatusAffect(StatusAffects.Blind);
@@ -1941,17 +1943,21 @@ public function combatStatusesUpdate():void {
 				player.addStatusValue(StatusAffects.Blind,1,-1);
 			}
 		}
-		else {
+		else 
+		{
 			//Remove blind if countdown to 0
-			if(player.statusAffectv1(StatusAffects.Blind) == 0) {
+			if (player.statusAffectv1(StatusAffects.Blind) == 0) 
+			{
 				player.removeStatusAffect(StatusAffects.Blind);
 				//Alert PC that blind is gone if no more stacks are there.
-				if(player.findStatusAffect(StatusAffects.Blind) < 0) {
+				if (player.findStatusAffect(StatusAffects.Blind) < 0) 
+				{
 					outputText("<b>Your eyes have cleared and you are no longer blind!</b>\n\n", false);
 				}
 				else outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
 			}
-			else {
+			else 
+			{
 				player.addStatusValue(StatusAffects.Blind,1,-1);
 				outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
 			}

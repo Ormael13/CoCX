@@ -189,7 +189,7 @@ private function resetToPC():void {
 
 
 //Urta Appearance Screen(C)*
-private function startUrtaQuest():void {
+public function startUrtaQuest():void {
 	clearOutput();
 	trace("Cloning PC's items")
 	// *SERIALIZE* out the players current Player object + items
@@ -877,7 +877,7 @@ private function morningAfterCampVisitEmbark(truth:Boolean):void {
 
 //Goblin Encounter(C)*
 //Intro(C)*
-private function runIntoAGoblin(camped:Boolean = false):void {
+public function runIntoAGoblin(camped:Boolean = false):void {
 	clearOutput();
 	if(camped) {
 		outputText("Holding the pendant in front of you, you set off in a random direction from the camp, hoping it will give you some kind of sign.  A couple times, you could swear it flickered with an inner light, but the passing luminance could just be a reflection of the omnipresent sun.  You wipe the sweat from your brow and turn around, a little confused as to how you should progress.");

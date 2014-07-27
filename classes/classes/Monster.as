@@ -1170,33 +1170,6 @@
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				game.dynStats("lus", 5+player.sens/10);
 			}
-			if(player.findStatusAffect(StatusAffects.Blind) >= 0 && findStatusAffect(StatusAffects.Sandstorm) < 0) {
-				if(player.findStatusAffect(StatusAffects.SheilaOil) >= 0) {
-					if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
-						outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
-						player.removeStatusAffect(StatusAffects.Blind);
-					}
-					else {
-						outputText("<b>You scrub at the oily secretion with the back of your hand and wipe some of it away, but only smear the remainder out more thinly.  You can hear the demon giggling at your discomfort.</b>\n\n", false);
-						player.addStatusValue(StatusAffects.Blind,1,-1);
-					}
-				}
-				else {
-					//Remove blind if countdown to 0
-					if(player.statusAffectv1(StatusAffects.Blind) == 0) {
-						player.removeStatusAffect(StatusAffects.Blind);
-						//Alert PC that blind is gone if no more stacks are there.
-						if(player.findStatusAffect(StatusAffects.Blind) < 0) {
-							outputText("<b>Your eyes have cleared and you are no longer blind!</b>\n\n", false);
-						}
-						else outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
-					}
-					else {
-						player.addStatusValue(StatusAffects.Blind,1,-1);
-						outputText("<b>You are blind, and many physical attacks will miss much more often.</b>\n\n", false);
-					}
-				}
-			}
 			if(findStatusAffect(StatusAffects.QueenBind) >= 0) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
 				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);

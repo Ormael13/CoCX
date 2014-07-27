@@ -2938,7 +2938,7 @@ private function giveArianLactaid():void {
 		else outputText("pillowy");
 		outputText(" breasts grow before your eyes.  \"<i>My breasts... d-do something, [name]!</i>\" Arian pleads.  Unsure of what you should be doing, you grab her breasts and begin kneading them as they grow in your hands; her erect nipples poking your palms.  \"<i>Ah... that feels good!  Don't stop!</i>\"");
 		
-		outputText("\n\nYou can't resist a wry comment asking if this was maybe a ploy by Arian to get you to massage her breasts?  Because she seriously didn't need to play games if that's what she wanted.  Her only reply is a moan of pleasure.  You chuckle and shake you head, continuing the massage, and that's when you notice dampness growing across your palms; lifting your hand up, you visually confirm and report to Arian that it worked; she's making milk.  That must be why her breasts grew; to make room for the milk.");
+		outputText("\n\nYou can't resist a wry comment asking if this was maybe a ploy by Arian to get you to massage her breasts?  Because she seriously didn't need to play games if that's what she wanted.  Her only reply is a moan of pleasure.  You chuckle and shake your head, continuing the massage, and that's when you notice dampness growing across your palms; lifting your hand up, you visually confirm and report to Arian that it worked; she's making milk.  That must be why her breasts grew; to make room for the milk.");
 		
 		outputText("\n\n\"<i>G-great.  So, I guess it worked.  What do we do now?</i>\" Arian asks, still panting.");
 		
