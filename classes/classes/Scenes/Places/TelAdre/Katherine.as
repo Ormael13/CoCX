@@ -1689,7 +1689,7 @@ public function interveneWithKittyKats5():void
 	addButton(1,"Leave",leaveKathYouDontWantThatNastyHermCock);
 }
 
-function leaveKathYouDontWantThatNastyHermCock():void
+public function leaveKathYouDontWantThatNastyHermCock():void
 {
 	clearOutput();
 	outputText("You decide you’re better off not getting involved with some weird sort of hermaphroditic chimera. She's obviously more trouble than she's worth and best avoided.");
@@ -1698,7 +1698,7 @@ function leaveKathYouDontWantThatNastyHermCock():void
 	doNext(telAdre.telAdreMenu);
 }
 
-function helpKathAfterInterruptu():void
+public function helpKathAfterInterruptu():void
 {
 	clearOutput();
 	//(corruption <25)
