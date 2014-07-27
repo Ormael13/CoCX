@@ -3636,7 +3636,7 @@ package classes.Scenes.Places.Farm
 			brandSlotSelect();
 		}
 
-		private function brandAmily():void
+		public function brandAmily():void
 		{
 			clearOutput();
 
@@ -3923,7 +3923,7 @@ package classes.Scenes.Places.Farm
 			addButton(2, "Property Of", amilyPropertyTattoo, slot);
 			addButton(3, "Breeding Bitch", amilyBreedingBitchTattoo, slot);
 			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", amilyCockGoesHereTattoo, slot);
-			if (player.hasVagina()) addButton(5, "Mommy's Girl", amilyMommysGirlTattoo);
+			if (player.hasVagina()) addButton(5, "Mommy's Girl", amilyMommysGirlTattoo, slot);
 
 			addButton(9, "Back", amilyBrandSlotSelect);
 		}
