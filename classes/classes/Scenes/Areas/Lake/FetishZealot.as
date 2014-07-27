@@ -93,7 +93,7 @@
 		//Gimp gear;
 		if(armorName == LEATHER_CLOTHES) {
 			//The Zealot has taken on an appearance that seems more suitable for the level of perversion he exudes.  He is wearing a full-body suit of leather, with a cock case over his crotch; you can clearly see a large zipper on it.  The zipper handle is far bigger than you think is absolutely necessary.
-			outputText("The Zealot turns around and gives you a full view of his tight leather clad body, he smacks his ass and says \"<i>You like what you see, don't you " + player.mf("stud","slut") + "?</i>\"  You can't help but be incredibly aroused by the scene.", false);
+			outputText("The Zealot turns around and gives you a full view of his tight leather clad body.  He smacks his ass and says \"<i>You like what you see, don't you " + player.mf("stud","slut") + "?</i>\"  You can't help but be incredibly aroused by the scene.", false);
 		}
 		//Well dressed and well groomed student in uniform;
 		if(armorName == STUDENTS_CLOTHES) {

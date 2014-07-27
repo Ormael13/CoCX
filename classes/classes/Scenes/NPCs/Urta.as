@@ -976,7 +976,7 @@ internal function getAPublicFacialFromUrta():void {
 	if(player.biggestTitSize() < 1) outputText("chest.  ", false);
 	else outputText("cleavage.  ", false);
 	outputText("Urta paints you with the stuff, until you're practically oozing cum.  It does eventually stop, and you wipe the jism from your eyes", false);
-	if(player.cor > 60) outputText(", being sure to lick your fingers clean afterwords", false);
+	if(player.cor > 60) outputText(", being sure to lick your fingers clean afterwards", false);
 	outputText(".\n\n", false);
 
 	if(player.cor > 50) {
