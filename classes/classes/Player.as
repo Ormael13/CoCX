@@ -2004,7 +2004,7 @@ use namespace kGAMECLASS;
 		
 		public function increaseEachCock(lengthDelta:Number):Number
 		{
-			var totalGrowth = 0;
+			var totalGrowth:Number = 0;
 			
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
