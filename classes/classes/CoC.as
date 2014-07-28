@@ -337,7 +337,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.12";
+			ver = "0.8.13";
 			version = ver + " (<b>Harpy Slut 4 Lover Mine</b>)";
 
 			//Indicates if building for mobile?
