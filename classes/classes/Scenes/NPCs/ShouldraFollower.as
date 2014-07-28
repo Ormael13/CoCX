@@ -1000,7 +1000,7 @@ private function shouldraCockBloating101():void {
 		if(!player.hasSheath()) outputText("crotch");
 		else outputText("sheath");
 		outputText(" in short order.  Shouldra happily grasps your fuller dick, stroking it vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.", false);
-		player.cocks[0].growCock(4);
+		player.increaseCock(0, 4);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .25;
 	}
@@ -1008,7 +1008,7 @@ private function shouldraCockBloating101():void {
 	else {
 		outputText("Your bouquet of cocks twitches and thickens, each gaining more than an inch of new vibrance.  Shouldra wastes no time in grouping them together, your hands stroking them vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
 		for(var i:Number =0;i<player.cocks.length;i++) {
-			player.cocks[i].growCock(2);
+			player.increaseCock(i, 2);
 			player.cocks[i].cockLength += 1;
 			player.cocks[i].cockThickness += .25;
 		}
