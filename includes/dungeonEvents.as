@@ -398,7 +398,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ", false);
 				//Grow dick!
 				if(player.cocks.length > 0) {
-					player.lengthChange(player.cocks[0].growCock(5), player.cocks.length);
+					player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
 					if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
 						outputText("You feel yourself gain in thickness as well, to match your new length.  ", false);
 						temp = player.cocks.length;
