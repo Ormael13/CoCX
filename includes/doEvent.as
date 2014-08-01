@@ -50,7 +50,7 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("\n\nJojo nods respectfully at you when the meditation session is over and smiles.  ");
 			//Forest Jojo Eligible for Invite After Meditation but There's Trash in Camp -Z
-			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && temp % 5 == 0)
+			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.statusAffectv1(StatusAffects.JojoMeditationCount) % 5 == 0)
 			{
 				//replaces 'Jojo nods respectfully at you [...] "It seems you have quite a talent for this. [...]"' invite paragraphs while Treefingers is getting slut all over your campsite
 				//gives Small Talisman if PC never had follower Jojo or used it and ran from the fight
@@ -65,10 +65,9 @@ public function doEvent(eventNo:Number):void
 				{
 					outputText("Jojo nods at you respectfully.  \"<i>Well done today; your dedication is impressive.  We could meditate together more often.</i>\"");
 					outputText("\n\nAs much as you'd like to, you can't stay in the forest, and you can't invite him back with you right now.  Reluctantly, you mention the stubborn, demonic godseed's presence on the borders of your camp.  Jojo's eyebrows furrow in concentration.");
-					outputText("\n\n\"<i>Yes, that's a problem.  Oh, that we did not have to resist the very spirit of the land!  [name], take this.  Use it to call me if the demon gives you trouble; I will come and render what aid I can.</i>\"  The monk fishes in his robe and places a small talisman into your hand.");
+					outputText("\n\n\"<i>Yes, that's a problem.  Oh, that we did not have to resist the very spirit of the land!  [name], take this.  Use it to call me if the demon gives you trouble; I will come and render what aid I can.</i>\"  The monk fishes in his robe and places a small talisman into your hand.\n\n(Gained Key Item: Jojo's Talisman)");
 					//get a small talisman if not have one
 					player.createKeyItem("Jojo's Talisman", 0, 0, 0, 0);
-					outputText("\n\n(Gained Key Item: Jojo's Talisman)");
 				}
 				doNext(14);
 				return;
@@ -76,7 +75,7 @@ public function doEvent(eventNo:Number):void
 			else
 				outputText("\"<i>It seems you have quite a talent for this.  We should meditate together more often.</i>\"", false);
 		}
-		if (temp % 5 == 0)
+		if (player.statusAffectv1(StatusAffects.JojoMeditationCount) % 5 == 0)
 		{
 			outputText("\n\nYou ponder and get an idea - the mouse could stay at your camp.  There's safety in numbers, and it would be easier for the two of you to get together for meditation sessions.  Do you want Jojo's company at camp?", false);
 			doYesNo(2149, 14);
