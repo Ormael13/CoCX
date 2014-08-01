@@ -1375,10 +1375,6 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) outputText("<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n", false);
 	outputText("<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n", false);
 
-	if (player.statusAffectv1(StatusAffects.Birthed) > 0) {
-		outputText("\n<b><u>Children</u></b>\n");
-		outputText("<b>Births:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
-	}
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
 	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
 	outputText("<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n");
@@ -1479,6 +1475,10 @@ public function displayStats(e:MouseEvent = null):void
 		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status:</b> Ready To Confess Love\n");
 	}
+	
+	outputText("\n<b><u>Children</u></b>\n");
+	
+	if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("<b>Time Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
 	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
 	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
