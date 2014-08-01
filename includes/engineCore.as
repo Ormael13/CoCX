@@ -1478,7 +1478,7 @@ public function displayStats(e:MouseEvent = null):void
 	
 	outputText("\n<b><u>Children</u></b>\n");
 	
-	if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("<b>Time Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
+	if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("<b>Times Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
 	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
 	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
