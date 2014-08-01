@@ -1379,38 +1379,6 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("\n<b><u>Children</u></b>\n");
 		outputText("<b>Births:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
 	}
-	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
-	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
-	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
-	if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
-	if (emberScene.emberChildren() > 0) {
-		outputText("<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
-		outputText("<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
-		outputText("<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
-	}
-	if (flags[kFLAGS.EMBER_EGGS] > 0) outputText("<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("<b>Children With Izma:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n", false);
-	if (mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
-	if (flags[kFLAGS.MARBLE_KIDS] > 0) outputText("<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n", false);
-	if (flags[kFLAGS.ANT_KIDS] > 0) outputText("<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n");
-	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) outputText("<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n");
-	if (flags[kFLAGS.SHEILA_JOEYS] > 0) outputText("<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n");
-	if (flags[kFLAGS.SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n");
-	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
-	{
-		outputText("<b>Children With Sophie:</b> ");
-		var sophie:int = 0;
-		if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
-		sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
-		if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
-		outputText(sophie + "\n");
-	}
-	if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
-	if (player.statusAffectv2(StatusAffects.Tamani) > 0) outputText("<b>Children With Tamani:</b> " + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n", false);
-	if (urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n");
-	//Mino sons
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) outputText("<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
-
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
 	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
 	outputText("<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n");
@@ -1424,6 +1392,11 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0) outputText("<b>Times Had Fun with Feline Flexibility:</b> " + flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] + "\n", false);
 	outputText("<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n", false);
 	outputText("<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n", false);
+	
+	if (flags[kFLAGS.FAP_ARENA_SESSIONS] > 0) {
+		outputText("<b>Times Circle Jerked in the Arena:</b> " + flags[kFLAGS.FAP_ARENA_SESSIONS] + "\n<b>Victories in the Arena:</b> " + flags[kFLAGS.FAP_ARENA_VICTORIES] + "\n", false);
+	}
+		
 	//MARBLE
 	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
 		outputText("<b>Marble Milk Addiction:</b> ", false);
@@ -1506,6 +1479,38 @@ public function displayStats(e:MouseEvent = null):void
 		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status:</b> Ready To Confess Love\n");
 	}
+	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
+	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
+	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
+	
+	if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
+	if (emberScene.emberChildren() > 0) {
+		outputText("<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
+		outputText("<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
+		outputText("<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");
+	}
+	if (flags[kFLAGS.EMBER_EGGS] > 0) outputText("<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("<b>Children With Izma:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]+flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n", false);
+	if (mountain.salon.lynnetteApproval() != 0) outputText("<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n");
+	if (flags[kFLAGS.MARBLE_KIDS] > 0) outputText("<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n", false);
+	if (flags[kFLAGS.ANT_KIDS] > 0) outputText("<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n");
+	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) outputText("<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n");
+	if (flags[kFLAGS.SHEILA_JOEYS] > 0) outputText("<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n");
+	if (flags[kFLAGS.SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n");
+	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
+	{
+		outputText("<b>Children With Sophie:</b> ");
+		var sophie:int = 0;
+		if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
+		sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+		if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
+		outputText(sophie + "\n");
+	}
+	if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
+	if (player.statusAffectv2(StatusAffects.Tamani) > 0) outputText("<b>Children With Tamani:</b> " + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n", false);
+	if (urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n");
+	//Mino sons
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) outputText("<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
 
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
 	if (player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);

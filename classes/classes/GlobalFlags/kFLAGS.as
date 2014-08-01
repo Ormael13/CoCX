@@ -339,8 +339,8 @@ public static const UNKNOWN_FLAG_NUMBER_00330:int                               
 public static const UNKNOWN_FLAG_NUMBER_00331:int                                   =  331; // Times Jojo Milked
 public static const UNKNOWN_FLAG_NUMBER_00332:int                                   =  332; // Jojo milk cooldown 4 hours
 public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
-public static const UNKNOWN_FLAG_NUMBER_00334:int                                   =  334; // Times fap arena'ed
-public static const UNKNOWN_FLAG_NUMBER_00335:int                                   =  335; // Fap Arena victories
+public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
+public static const FAP_ARENA_VICTORIES:int                                         =  335; // Fap Arena victories
 public static const AMILY_OFFERED_DEFURRY:int                                       =  336; //  1 = Offered to defurry Amily
 public static const AMILY_NOT_FURRY:int                                             =  337; //  1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
 public static const AMILY_IS_BATMAN:int                                             =  338; //  1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
