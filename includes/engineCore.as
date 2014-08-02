@@ -1374,14 +1374,14 @@ public function displayStats(e:MouseEvent = null):void
 	outputText("<b>Spell Cost:</b> " + spellCost(100) + "%\n");
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) outputText("<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n", false);
 	outputText("<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n", false);
-
-	if (player.statusAffectv1(StatusAffects.Birthed) > 0) {
-		outputText("\n<b><u>Children</u></b>\n");
-		outputText("<b>Births:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
-	}
+	
+	outputText("\n<b><u>Children</u></b>\n");
+	
+	if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("<b>Times Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
 	if (flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n");
 	if (flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n");
+	
 	if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n", false);
 	if (emberScene.emberChildren() > 0) {
 		outputText("<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
@@ -1424,6 +1424,11 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0) outputText("<b>Times Had Fun with Feline Flexibility:</b> " + flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] + "\n", false);
 	outputText("<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n", false);
 	outputText("<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n", false);
+	
+	if (flags[kFLAGS.FAP_ARENA_SESSIONS] > 0) {
+		outputText("<b>Times Circle Jerked in the Arena:</b> " + flags[kFLAGS.FAP_ARENA_SESSIONS] + "\n<b>Victories in the Arena:</b> " + flags[kFLAGS.FAP_ARENA_VICTORIES] + "\n", false);
+	}
+		
 	//MARBLE
 	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
 		outputText("<b>Marble Milk Addiction:</b> ", false);
@@ -1506,6 +1511,7 @@ public function displayStats(e:MouseEvent = null):void
 		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status:</b> Ready To Confess Love\n");
 	}
+	
 
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
 	if (player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);

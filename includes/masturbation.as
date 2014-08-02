@@ -2291,7 +2291,7 @@ public function catAutoLick():void {
 				if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 10 && player.balls > 1 && rand(5) == 0) {
 					outputText("But it's not enough and you are forced to come up for air.", false);
 					
-					outputText("\n\nWhile gasping for air, you scowl at your " + cockDescript(0) + " in disapproval. That's when your " + sackDescript() + " catches your attention. It's gleaming with your sex sheen and you watch ne of your balls slowly slide off to one side.", false);
+					outputText("\n\nWhile gasping for air, you scowl at your " + cockDescript(0) + " in disapproval. That's when your " + sackDescript() + " catches your attention. It's gleaming with your sex sheen and you watch one of your balls slowly slide off to one side.", false);
 					
 					outputText("\n\nYou think you can make it! You throw your other leg over your head and both feet come to rest on your back. You push your mouth towards your " + sackDescript() + ", slowly walking your toes down your back. You are only an inch from your " + ballsDescriptLight() + " now and your own aroma fills your nostrils, spurring your on. Then, finally, you are there! And it nearly knocks you out! The sensation of your own balls in your mouth is incredible--you can feel them churning in your mouth--and your [feet] start kneeding your back. You bring your hands up to massage your " + ballsDescriptLight() + " as well, making them take turns in your mouth. Completely intoxicated by your own scent you loose all track of time--there is only the bliss of sucking, licking, and massaging your own balls...", false)
 					
