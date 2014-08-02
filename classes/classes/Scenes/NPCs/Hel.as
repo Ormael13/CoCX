@@ -12,48 +12,47 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(1);
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
-				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe-spe) / 4) + 80)) > 80) {
 				outputText("You nimbly dodge the salamander's massive sword thrust!", false);
-				return;
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n", false);
-				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
-				return;
 			}
 			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
-				return;
 			}
 			//Determine damage - str modified by enemy toughness!
-			damage = int((str + weaponAttack) - rand(player.tou/2) - player.armorDef/2);
-			if(damage > 0) damage = player.takeDamage(damage);
-			//No damage
-			if(damage <= 0) {
-				damage = 0;
-				//Due to toughness or amor...
-				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
-				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
-			}
-			//Take Damage
-			else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. (" + damage + ")", false);
-			if(damage > 0) {
-				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-					lust += 5 * lustVuln;
+			else
+			{
+				damage = int((str + weaponAttack) - rand(player.tou/2) - player.armorDef/2);
+				if(damage > 0) damage = player.takeDamage(damage);
+				//No damage
+				if(damage <= 0) {
+					damage = 0;
+					//Due to toughness or amor...
+					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+				}
+				//Take Damage
+				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. (" + damage + ")", false);
+				if(damage > 0) {
+					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
+						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
+						lust += 5 * lustVuln;
+					}
 				}
 			}
+			
 			statScreenRefresh();
 			outputText("\n", false);
 			combatRoundOver();
@@ -133,7 +132,9 @@ package classes.Scenes.NPCs
 		}
 		override protected function performCombatAction():void
 		{
+			trace("Hel Perform Combat Action Called");
 			var select:Number = rand(3);
+			trace("Selected: " + select);
 			switch(select) {
 				case 0:
 					helAttack();

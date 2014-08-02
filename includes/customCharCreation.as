@@ -82,6 +82,8 @@ public function customPCSetup():void {
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 	
+		player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
+		
 		player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
 		player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
 		player.createPerk(PerkLib.Berzerker, 			0, 0, 0, 0);
