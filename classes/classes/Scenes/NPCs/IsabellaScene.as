@@ -1068,7 +1068,9 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText("Isabella moans", false);
 	if(monster.HP < 1) outputText(", forgetting her wounds between the sight of your naked body and her lewd, compromised position", false);
 	else outputText(" lustily, begging to be penetrated with her body while her voice tries to make love to your ears", false);
-	outputText(".  \"<i>Vould you... put it inside me?  Please, I'm so sorry I didn't let you ravish me.  Take me, violate me vith your spear of lust!</i>\" she pleads.  Her attempt to talk dirty is so bad it nearly makes you cringe.  She was better off moaning and mooing like a beast in heat, and perhaps it would be best to treat her like one.\n\n", false);
+	if (isabellaAccent()) outputText(".  \"<i>Vould you... put it inside me?  Please, I'm so sorry I didn't let you ravish me.  Take me, violate me vith your spear of lust!</i>\"");
+	else outputText(".  \"<i>Would you... put it inside me? Please, I'm so sorry I didn't let you ravish me. Take me, violate me with your spear of lust!</i>\"");
+	outputText(" she pleads.  Her attempt to talk dirty is so bad it nearly makes you cringe.  She was better off moaning and mooing like a beast in heat, and perhaps it would be best to treat her like one.\n\n", false);
 	
 	outputText("You advance and grab her tail, yanking the bovine appendage back to pull those glorious ass-cheeks closer to your " + cockDescript(x) + ".  ", false);
 	if(player.cockTotal() > 1) {
