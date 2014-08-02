@@ -28,7 +28,7 @@ public function customPCSetup():void {
 		player.spe = 100;
 		player.inte = 100;
 		player.sens = 100;
-		player.lib = 100;
+		player.lib = 30;
 		player.cor = 71;
 		notes = "Cheater!";
 		player.HP = maxHP();
@@ -108,19 +108,16 @@ public function customPCSetup():void {
 		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
 		player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
 		
-		player.goIntoHeat(false, 2);
-		
 		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
 		
 		player.gems += 30000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		
-		inventory.takeItem(consumables.KITGIFT);
-		inventory.takeItem(consumables.MINOBLO);
-		inventory.takeItem(consumables.MINOBLO);
-		inventory.takeItem(consumables.MINOBLO);
-		inventory.takeItem(consumables.MINOBLO);
-		inventory.takeItem(consumables.MINOBLO);
+		inventory.takeItem(consumables.F_DRAFT);
+		inventory.takeItem(consumables.F_DRAFT);
+		inventory.takeItem(consumables.F_DRAFT);
+		inventory.takeItem(consumables.F_DRAFT);
+		inventory.takeItem(consumables.F_DRAFT);
 		
 		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
 		//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);

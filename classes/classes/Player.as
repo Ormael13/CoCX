@@ -2082,7 +2082,7 @@ use namespace kGAMECLASS;
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusAffect(StatusAffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
-				game.dynStats("lib", 150 * intensity, "resisted", false, "noBimbo", true);
+				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
 			}
 			
 			return true;
