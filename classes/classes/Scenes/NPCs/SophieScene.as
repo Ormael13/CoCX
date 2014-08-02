@@ -380,9 +380,11 @@ private function cramANippleInIt():void {
 			outputText("  Maybe you'll let me try your 'other' milk next time?</i>\"  The harpie laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n", false);
 			//(+25 lust)
 			dynStats("lus", 25);
+			
+			// Only progress the recruitment path if Sophie sees the players cock.
+			flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 		}
 		else outputText("</i>\"\n\n", false);
-		flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	}
 	//prevent lactation reduction and slightly boost
 	player.boostLactation(.1);
@@ -684,8 +686,6 @@ private function sophieFucked(dicked:Boolean = true):void {
 	flags[kFLAGS.FUCKED_SOPHIE_COUNTER]++;
 }
 
-
-
 public function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) return;
@@ -712,10 +712,6 @@ public function luststickApplication(hours:Number = 4):void {
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
 	else player.createStatusAffect(StatusAffects.Luststick,hours,0,0,0);
 }
-
-
-
-
 
 internal function sophieLostCombat():void {
 	sophieBimbo.sophieSprite();
