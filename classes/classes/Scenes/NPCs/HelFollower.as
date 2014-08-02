@@ -2195,13 +2195,13 @@ private function helAndSluttyHarpyMale():void
 
 	outputText("You take Helia’s hand and lead her through the camp in an attempt to find someone to include in your threesome. After some searching you see Sophie sitting on a rock and get a wonderful idea. You ask Hel if she would be ok with a threesome with the busty harpy. Her smile turns to a serious frown for a moment.");
 
-	outputText("\n\n<i>“She wouldn't be my first choice, but if you really want to...”</i> she says, fidgeting with her tail. You thank her profusely, and give her a quick kiss before going to get Sophie’s attention. Hel’s expression returns to a smile, not quite as big as before, but still happy. You manage to get the harpies attention, and she beams like a ray of sunshine. She practically bounces over to you on the balls of her feet.");
+	outputText("\n\n<i>“She wouldn't be my first choice, but if you really want to...”</i> she says, fidgeting with her tail. You thank her profusely, and give her a quick kiss before going to get Sophie’s attention. Hel’s expression returns to a smile, not quite as big as before, but still happy. You manage to get the harpy's attention, and she beams like a ray of sunshine. She practically bounces over to you on the balls of her feet.");
 		
 	outputText("\n\n<i>“Hey, are you guys going to have sex? Can I have some too?”</i> Sophie asks with unbound enthusiasm. She makes sure to rub against your body as she asks, making full use of her massive breasts. You ask her if she’d like to join you and Helia in a threesome. Sophie looks over to the taller salamander girl and smiles seductively before walking toward a now cross looking Helia who seems to be rethinking the merits of this choice. ");
 
-	outputText("\n\nSophie’s head barely lines up with Hel’s sizeable cleavage. The slutty harpy Gives Hel the biggest hug she can, and then buries her face between Hel’s tits. Helia looks so flustered you can almost see a mushroom cloud of steam bubbling out of her head. She eventually calms down enough to talk, and directs a glare at Sophie. The oblivious bimbo grins up at her and grabs her around the legs, pulling them out from under her and making the taller girl fall onto her back.");
+	outputText("\n\nSophie’s head barely lines up with Hel’s sizeable cleavage. The slutty harpy gives Hel the biggest hug she can, and then buries her face between Hel’s tits. Helia looks so flustered you can almost see a mushroom cloud of steam bubbling out of her head. She eventually calms down enough to talk, and directs a glare at Sophie. The oblivious bimbo grins up at her and grabs her around the legs, pulling them out from under her and making the taller girl fall onto her back.");
 
-	outputText("\n\n<i>“Oww, you stupid bird, watch what your do-mpph”</i> Helia growls, but is cut off at the end when Sophie sits directly on her face. You can hear your fiery lover trying to continue her complaints beneath the harpies massive assflesh, but her voice is so muffled you can’t make out the words. Sophie crooks a finger to beckon you over, pulling aside the salamander’s bikini bottom. You move over to Hel, stripping out of your [armor] as you go, and kneel between her legs");
+	outputText("\n\n<i>“Oww, you stupid bird, watch what you're do-mpph”</i> Helia growls, but is cut off at the end when Sophie sits directly on her face. You can hear your fiery lover trying to continue her complaints beneath the harpy's massive assflesh, but her voice is so muffled you can’t make out the words. Sophie crooks a finger to beckon you over, pulling aside the salamander’s bikini bottom. You move over to Hel, stripping out of your [armor] as you go, and kneel between her legs");
 
 	outputText("\n\nYou slowly begin to inch your [cock] Into Helia’s love furnace. Her complaints turn into a drawn out moan as you slide inside of her, her body shivering slightly. The shudders nearly set your bimbo slut off, and you see rivulets of her juices flowing over Hel’s chin, down her neck, and pooling on the ground. You gingerly pull up her chainmail bikini and palm one of her breasts, circling it around the nipple as you plant a kiss on the other.");
 
@@ -2212,7 +2212,7 @@ private function helAndSluttyHarpyMale():void
 
 	outputText("\n\n<i>“Gah... stupid harpy,”</i> Helia says between breaths, but she makes no further action to remove her. You slip your [cock] back into Helia’s burning tunnel and begin thrusting slowly in and out. The transitions between her insides and the cool air make you feel like coming immediately, but the pleasurable moans that arise from your lover make the resistance worth it. ");
 
-	outputText("\n\nSophie silences Hel’s moans by giving her a big sloppy kiss, sliding her tongue into the salamanders mouth. Helia’s eyes widen in surprise at first, but as you continue to pound her they droop back down and she returns Sophie’s kiss. ");
+	outputText("\n\nSophie silences Hel’s moans by giving her a big sloppy kiss, sliding her tongue into the salamander's mouth. Helia’s eyes widen in surprise at first, but as you continue to pound her they droop back down and she returns Sophie’s kiss. ");
 
 	// 1 cock
 	if (player.cocks.length == 1)
@@ -2265,7 +2265,7 @@ private function helAndSluttyHarpyMale():void
 	}
 	// Merge
 
-	outputText("\n\nHel grasps handfuls of Sophie’s feathers as her body locks in orgasm. Sophie lies insensate against the taller girls neck, tongue hanging out and drooling onto her skin. You lean over the senseless bimbo, giving Hel a long apology kiss.");
+	outputText("\n\nHel grasps handfuls of Sophie’s feathers as her body locks in orgasm. Sophie lies insensate against the taller girl's neck, tongue hanging out and drooling onto her skin. You lean over the senseless bimbo, giving Hel a long apology kiss.");
 
 	outputText("\n\n<i>“Don’t think I’ll just do this whenever you want”</i> She says when the kiss is broken, but she’s smiling as she says it, so you smile back and retrieve your armor. Sophie has fallen asleep on top of Helia, who seems to also have resigned to take a nap.");
 
@@ -2280,7 +2280,7 @@ private function helAndSluttyHarpyFemale():void
 
 	outputText("You grasp Helia’s hand and pull her to another part of your camp. On the way you try to think of someone to include in your threesome. You pause for a moment of serious thought and decide you want a threesome with her and Sophie.  You Inform her of your thoughts, and her smile flattens to a serious look.");
 
-	outputText("\n\n<i>“She wouldn't be my first choice, but I suppose we can,”</i> she says, shifting a little uncomfortably in place. You take her in your arms, giving her a big kiss before tugging her off to find Sophie. Her smile returns, albeit slightly smaller, and she lets herself be lead.");
+	outputText("\n\n<i>“She wouldn't be my first choice, but I suppose we can,”</i> she says, shifting a little uncomfortably in place. You take her in your arms, giving her a big kiss before tugging her off to find Sophie. Her smile returns, albeit slightly smaller, and she lets herself be led.");
 
 	outputText("\n\nAfter a little searching you find the harpy absent-mindedly preening her platinum blonde feathers. When she notices you she lets out a small cry of joy, plopping off her rock to saunter your way, her massive tits and ass jiggling invitingly with each step. You can see streams of juices trickling from her always ready twat, slicked down the inside of her thick thighs.");
 		
@@ -2296,9 +2296,9 @@ private function helAndSluttyHarpyFemale():void
 
 	outputText("\n\nFinally Hel gives in and starts rubbing her tongue around your vulva. You sigh in sweet bliss as it moves. Her breath feels like it would keep you warm in the middle of a blizzard. You lean to one side and see Sophie lovingly mopping up Helia’s juices with her tongue. Her eyes are glazed over and her licks are slow and long, making sure to get as much as she can with each brushing motion.");
 
-	outputText("\n\nYou look over your shoulder to see Helia in a similar state. Her eyelids drooping happily as she moans into you, her tongue caressing your sex with short licks. Sophie’s giant ass and pussy lie before you, glistening with sweat and sexual fluids. You did mention a possible reward for her, and judging by Helia’s state she deserves it.");
+	outputText("\n\nYou look over your shoulder to see Helia in a similar state, her eyelids drooping happily as she moans into you, her tongue caressing your sex with short licks. Sophie’s giant ass and pussy lie before you, glistening with sweat and sexual fluids. You did mention a possible reward for her, and judging by Helia’s state she deserves it.");
 
-	outputText("\n\nYou hoist the bimbo harpies massive ass up closer to your face and slide your tongue down her moist vulva, settling on her puffy clit at the end and Slathering it with your mouths liquid affection. Her sweet juices dribble over your chin and slide down your [chest] and stomach. Your front half is completely drenched in harpy juices, but you don’t care. Helia’s ministrations are beginning to get to you.");
+	outputText("\n\nYou hoist the bimbo harpy's massive ass up closer to your face and slide your tongue down her moist vulva, settling on her puffy clit at the end and slathering it with your mouth's liquid affection. Her sweet juices dribble over your chin and slide down your [chest] and stomach. Your front half is completely drenched in harpy juices, but you don’t care. Helia’s ministrations are beginning to get to you.");
 
 	outputText("\n\n<i>“Ooooh yeahh, thats like, perfect [name], keep licking mama Sophie like that”</i> Sophie coos between moans, as if you needed to be told. Helia seems to notice that you’re getting more into it, and ups her game. You moan loudly as Helia’s long tongue slips deeper into your cunt, licking your walls as it goes. Her mouth sucks on your hole and her bottom lip brushes against your [clit].");
 
@@ -2312,7 +2312,6 @@ private function helAndSluttyHarpyFemale():void
 
 	outputText("\n\nSeeing your fiery lover orgasm makes you realize how close your own explosion of pleasure is. You try to hold out as long as possible to feel her wonderfully hot tongue playing across your deepest, most intimate parts. As much as you would want for it to last forever your body can’t take any more of the pleasurable barrage. You cum hard, drenching Helia’s face with freshly heated love juice.");
 
-	outputText("\n\n");
 	// has cock
 	if (player.cocks.length == 1)
 	{
