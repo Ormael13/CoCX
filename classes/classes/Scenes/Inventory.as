@@ -235,16 +235,25 @@ public function doItems(eventNo:Number):void {
 		outputText("You sink the needle into the base of your " + multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n", true);
 		if(player.cocks.length == 1) {
 			outputText("Your " + cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ", false);
+			
+			player.increaseCock(0, 4);
+			player.cocks[0].cockLength += 1; // This was forcing "what was said" to match "what actually happened" no matter what increase/growCock /actually/ did.
+			player.cocks[0].cockThickness += 0.5; // And growCock never actually touched thickness. Nor does the new version. Thickness mod was stripped out entirely.
 		}
 		//MULTI
 		else {
 			outputText("Your " + multiCockDescriptLight() + " twitch and thicken, each member pouring out more than an inch of new length from your ", false);
+			
+			for (var i:int = 0; i < player.cocks.length; i++)
+			{
+				player.increaseCock(i, 2);
+				player.cocks[i].cockLength += 1;
+				player.cocks[i].cockThickness += 0.5;
+			}
 		}
 		
 		if(player.hasSheath()) outputText("sheath.", false);
 		else outputText("crotch.", false);
-		
-		player.increaseEachCock(5);
 		
 		dynStats("sen", 2, "lus", 10);
 		itemGoNext();
