@@ -672,8 +672,10 @@ private function approachKelly():void {
 		punishKelly();
 		return;
 	}
+	
 	//Descriptions and Flavour Text
-	outputText("You aren't welcome on the farm proper, but you can go visit Kelly's field.");
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0) outputText("You aren't welcome on the farm proper, but you can go visit Kelly's field.");
+	
 	//09:00-11:00, 2 or more children:
 	if(model.time.hours >= 9 && model.time.hours <= 11 && flags[kFLAGS.KELLY_KIDS] >= 2) {
 		outputText("\n\nKelly is standing in the shadow of her barn, an expression of blissful contentment on her face as she nurses your ");
@@ -731,7 +733,8 @@ private function approachKelly():void {
 	//Showing up resets Kelly's desire not to fap without you
 	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
-	addButton(9,"Leave",eventParser,13);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", eventParser, 13);
+	else addButton(9, "Back", farm.farmCorruption.rootScene);
 }
 
 private function kellySexMenu():void {
