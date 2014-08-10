@@ -632,23 +632,23 @@
 			}
 			//Morph dick to horsediiiiick
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-				var selectedCock:int = -1;
-				for (var i:int = 0; i < player.cocks.length; i++)
+				var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
 				{
-					if (player.cocks[i].cockType != CockTypesEnum.HORSE)
+					if (player.cocks[indexI].cockType != CockTypesEnum.HORSE)
 					{
-						selectedCock = i;
+						selectedCockValue = indexI;
 						break;
 					}
 				}
 				
-				if (selectedCock != -1) {
+				if (selectedCockValue != -1) {
 					//Text for humandicks or others
-					if (player.cocks[selectedCock].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCock].cockType.Index > 2) outputText("\n\nYour " + cockDescript(selectedCock) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
+					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);
 					//Text for dogdicks
-					if (player.cocks[selectedCock].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(selectedCock) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(selectedCock) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(selectedCock) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
-					player.cocks[selectedCock].cockType = CockTypesEnum.HORSE;
-					player.increaseCock(selectedCock, 4);
+					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.dogDescript(selectedCockValue) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.dogDescript(selectedCockValue) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.horseDescript(selectedCockValue) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+					player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
+					player.increaseCock(selectedCockValue, 4);
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 					outputText("<b>  You now have a");
 					if (player.horseCocks() > 1) outputText("nother")
@@ -2616,7 +2616,7 @@
 			//Females!
 			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.", true);
 			//If player already has eggs, chance of size increase!
-			if (player.pregnancyType == 5) {
+			if (player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
 				if (player.findStatusAffect(StatusAffects.Eggs) >= 0) {
 					//If eggs are small, chance of increase!
 					if (player.statusAffectv2(StatusAffects.Eggs) == 0) {
@@ -2638,7 +2638,7 @@
 			//If the player is not pregnant, get preggers with eggs!
 			if (player.pregnancyIncubation == 0) {
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!", false);
-				player.knockUp(5, 50, 1, 1);
+				player.knockUp(player.PREGNANCY_OVIELIXIR_EGGS, player.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 				//v1 = egg type.
 				//v2 = size - 0 for normal, 1 for large
 				//v3 = quantity
@@ -2646,7 +2646,7 @@
 				changes++;
 			}
 			//If no changes, speed up pregnancy.
-			if (changes == 0 && player.pregnancyIncubation > 20 && player.pregnancyType != 9) {
+			if (changes == 0 && player.pregnancyIncubation > 20 && player.pregnancyType != player.PREGNANCY_BUNNY) {
 				outputText("\n\nYou gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.", false);
 				player.pregnancyIncubation -= int(player.pregnancyIncubation * .3 + 10);
 				if (player.pregnancyIncubation < 1) player.pregnancyIncubation = 2;
@@ -5177,12 +5177,12 @@
 			//If pregnancy, warning!
 			if (pregnantChange) {
 				outputText("\n<b>Your egg-stuffed ", false);
-				if (player.pregnancyType == 9) {
+				if (player.pregnancyType == player.PREGNANCY_BUNNY) {
 					outputText("womb ", false);
-					if (player.buttPregnancyType == 9) outputText("and ", false);
+					if (player.buttPregnancyType == player.PREGNANCY_BUNNY) outputText("and ", false);
 				}
-				if (player.buttPregnancyType == 9) outputText("backdoor ", false);
-				if (player.buttPregnancyType == 9 && player.pregnancyType == 9) outputText("rumble", false);
+				if (player.buttPregnancyType == player.PREGNANCY_BUNNY) outputText("backdoor ", false);
+				if (player.buttPregnancyType == player.PREGNANCY_BUNNY && player.pregnancyType == player.PREGNANCY_BUNNY) outputText("rumble", false);
 				else outputText("rumbles", false);
 				outputText(" oddly, and you have a hunch that something's about to change</b>.", false);
 			}
@@ -8192,7 +8192,7 @@
   						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
   						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
   						player.minoCumAddiction(5);
-  						player.knockUp(2, 432, 175);
+						player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR, 175);
   						player.consumeItem(consumables.MINOCUM);
   					}
           }

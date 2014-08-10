@@ -58,7 +58,7 @@ package classes.Scenes.NPCs
 
 		private function anemonePreg():void
 		{
-			player.knockUp(10, 256, 101);
+			player.knockUp(player.PREGNANCY_ANEMONE, player.INCUBATION_ANEMONE, 101);
 		}
 
 		public function kidAXP(diff:Number = 0):Number

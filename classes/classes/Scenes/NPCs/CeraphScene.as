@@ -248,7 +248,7 @@ package classes.Scenes.NPCs
 			player.cuntChange(monster.cockArea(0), true);
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3,"cor", 1);
-			player.knockUp(1, 400, 61);
+			player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (gameState < 1 || gameState > 2) doNext(13);
 			else cleanupAfterCombat();
 		}

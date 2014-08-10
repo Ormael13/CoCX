@@ -37,17 +37,17 @@ package classes.Items.Consumables
 			//			-1 = No (single pregnancy, womb), -2 = No (single pregnancy, colon), -3 = No (double pregnancy, both not OK), -4 = No (double pregnancy, one OK, one not)
 			if (player.pregnancyIncubation == 0) {				
 				if (player.buttPregnancyIncubation == 0) return 0; //No baby. Simplest, most common case
-				if (player.buttPregnancyType == 19) return 2;
+				if (player.buttPregnancyType == player.PREGNANCY_SATYR) return 2;
 				return -2;
 			}
 			if (player.buttPregnancyIncubation == 0) { //Single pregnancy, carried in the womb
-				if (player.pregnancyType == 19) return 1;
+				if (player.pregnancyType == player.PREGNANCY_SATYR) return 1;
 				if (player.pregnancyType == player.PREGNANCY_FAERIE) return 1;
 				return -1;
 			}
 			//Double pregnancy
-			var wombBabyLikesAlcohol:Boolean = (player.pregnancyType == 19) || (player.pregnancyType == player.PREGNANCY_FAERIE);
-			var colonBabyLikesAlcohol:Boolean = (player.buttPregnancyType == 19);
+			var wombBabyLikesAlcohol:Boolean = (player.pregnancyType == player.PREGNANCY_SATYR) || (player.pregnancyType == player.PREGNANCY_FAERIE);
+			var colonBabyLikesAlcohol:Boolean = (player.buttPregnancyType == player.PREGNANCY_SATYR);
 			if (wombBabyLikesAlcohol && colonBabyLikesAlcohol) return 3;
 			if (!wombBabyLikesAlcohol && !colonBabyLikesAlcohol) return -3;
 			return -4;

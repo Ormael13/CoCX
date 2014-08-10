@@ -299,10 +299,10 @@ private function sandTrapPregChance():void {
 	//Only happens if PC aint already buttpregged
 	if(player.buttPregnancyIncubation == 0) {
 		if(monster.findStatusAffect(StatusAffects.Fertilized) >= 0) {
-			player.buttPregnancyType = 4;
+			player.buttPregnancyType = player.PREGNANCY_BUTT_SANDTRAP_FERTILE;
 		}
-		else player.buttPregnancyType = 5;
-		player.buttPregnancyIncubation = 42;
+		else player.buttPregnancyType = player.PREGNANCY_BUTT_SANDTRAP;
+		player.buttPregnancyIncubation = player.INCUBATION_BUTT_SANDTRAP;
 	}
 }
 

@@ -1343,7 +1343,7 @@ public function menFuckUpSomeCumWitch():void {
 		outputText("\n\nRising slowly, you withdraw yourself from the goo-glazed pussy beneath you and try to ignore the matching river of white that pours out from betwixt your thighs.  You make sure to lean over your onyx lover, salting her with her own dripping seed until the flow slows to a trickle.  She meekly protests at first, then gives up with a lusty sigh, smearing her skin with pristine white as her mind slides back into the gutter.  You make sure to admire your work while you get dressed.");
 		//(cum, then +5 lust){preg check for sammitches}
 		//sand witch preg
-		player.knockUp(22,360,90);
+		player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 		player.orgasm();
 		dynStats("lus", 5);
 	}
@@ -1476,7 +1476,7 @@ public function ladyVictorySex():void {
 	
 	outputText("\n\nYou recover after a few minutes and rise up, legs shaking at the overpowering sensation of the witch's withdrawing phallus, but you make it up with spunk pouring from your [vagina].  What a victory!");
 	
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 	player.orgasm();
 	if(inDungeon) {
 		if(inCombat()) cleanupAfterCombat();
@@ -1591,7 +1591,7 @@ public function resistSavinStuff():void {
 	dynStats("sen", 2);
 	cleanupAfterCombat();
 	//knock up hurrrr
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 }
 //Do Nothing
 public function doNotResistSavin():void {
@@ -1609,7 +1609,7 @@ public function doNotResistSavin():void {
 	dynStats("sen", 2);
 	cleanupAfterCombat();
 	//knock up hurrrr
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 }
 
 	

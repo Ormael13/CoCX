@@ -127,7 +127,7 @@ package classes.Scenes.NPCs
 				//Enable village encounters
 				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 				//Change to plain mouse birth!
-				if (player.pregnancyType == 11) player.pregnancyType = 4;
+				if (player.pregnancyType == player.PREGNANCY_AMILY) player.pregnancyType = player.PREGNANCY_MOUSE;
 				//FLAG THAT THIS SHIT WENT DOWN
 				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 				//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.

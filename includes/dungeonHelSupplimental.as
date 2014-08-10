@@ -870,7 +870,7 @@ public function phoenixAginal():void {
 	outputText("\n\nUnable to take the cumulative pleasure, the phoenix cums.  You go wide-eyed as her burning hot cum pours into your waiting womb, scalding your depths with her sizzling, potent seed.  You can only keep riding her, letting her jizz flow into you until the heat and pleasure sends you over the edge too.  You hug the phoenix tight as orgasm hits you, shuddering and gasping as ecstasy threatens to overwhelm you.  Your [vagina] milks your lover for every last drop until, breathless, you release your death-hold on your lover, letting her flop, insensate, to the ground.");
 
 	outputText("\n\nYou stand, a bit bow-legged, and watch as a bucket's worth of her extra seed pours out of your sodden twat, pooling on the phoenix's breasts and belly.  Giggling, you stumble off her and collect your [armor].");
-	player.knockUp(5,120,100);
+	player.knockUp(player.PREGNANCY_OVIELIXIR_EGGS, 120, 100);
 	//v1 = egg type.
 	//v2 = size - 0 for normal, 1 for large
 	//v3 = quantity

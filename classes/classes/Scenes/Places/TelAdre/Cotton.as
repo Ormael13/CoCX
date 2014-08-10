@@ -66,11 +66,11 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 private function cottonPregPCChance():void {
 	//No kids yet - lucky!
 	if(flags[kFLAGS.COTTON_KID_COUNT] == 0 && flags[kFLAGS.COTTON_HERBS_OFF] == 0) {
-		player.knockUp(20,350,600);
+		player.knockUp(player.PREGNANCY_COTTON, player.INCUBATION_COTTON, 600);
 	}
 	else {
-		if(flags[kFLAGS.COTTON_HERBS_OFF] == 0) player.knockUp(20,350,1000);
-		else player.knockUp(20,350,100);
+		if(flags[kFLAGS.COTTON_HERBS_OFF] == 0) player.knockUp(player.PREGNANCY_COTTON, player.INCUBATION_COTTON, 1000);
+		else player.knockUp(player.PREGNANCY_COTTON, player.INCUBATION_COTTON, 100);
 	}
 }
 
@@ -140,7 +140,7 @@ public function cottonGreeting():void {
 			return;*/
 			centaurNagaBodyBookStuff();
 		}
-		else if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == 20)
+		else if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == player.PREGNANCY_COTTON)
 		{
 			//Lamaze Class*
 			//Approach Cotton, PC visibly pregnant (at least 2nd trimester, or whatever is equivalent in CoC-land)
@@ -218,7 +218,7 @@ private function centaurNagaBodyBookStuff():void {
 		flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER]++;
 		cottonMenu();
 	}
-	else if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == 20)
+	else if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == player.PREGNANCY_COTTON)
 	{
 		//Lamaze Class*
 		//Approach Cotton, PC visibly pregnant (at least 2nd trimester, or whatever is equivalent in CoC-land)
@@ -294,7 +294,7 @@ private function acceptYoga():void {
 		outputText("The centauress collects ten gems for gym fees before the two of you can get into it.\n\n", false);
 	}
 	//(Yes) LAMAZE
-	if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == 20)
+	if((player.pregnancyIncubation <= 225 && player.pregnancyIncubation > 0) && player.pregnancyType == player.PREGNANCY_COTTON)
 	{
 		outputText("You change into your yoga clothes and approach Cotton, saying you'd love a lamaze class. Cotton smiles and sets up a mat for you, then sits down, urging you to sit in front of her.  You do so, feeling the bulge in her pants pressing against your rump, and her breasts at your back.  You spend the next fifteen minutes doing breathing exercises like this, and another fifteen minutes doing stretches on an exercise ball.  As you're working out, Cotton presses her body against yours, running her hands around your swollen belly at every opportunity.\n\n");
 

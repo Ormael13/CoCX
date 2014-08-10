@@ -1102,7 +1102,7 @@ public function jojoRape():void {
 			}
 			player.cuntChange(3, true);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			//The end
 			if(player.lib > 50 && player.cor > 80) {
 				outputText("\n\n<b>You feel a familiar power growing within you and decide to unleash it.</b>  You grab the prayer beads from his outfit and spit on them, making them slick and wet.  Holding them below his flagging cock, you focus on the demonic visions in your mind, slowly but constantly milking larger and larger dollops of cum onto the once holy beads.  Jojo moans as he comes to understand your intent, and turns around, shaking his lithe mouse-bum at you.  You lean over him, whispering into his ear, \"<i>Each defiled bead I push into you is going to make you more of a willing slut.  More of a willing receptacle for demon cum.  More of a fountain of desire waiting to be tapped by Succubi.  More my toy.</i>\"\n\n", false);
@@ -1189,7 +1189,7 @@ public function jojoRape():void {
 			}
 			outputText("", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		if(player.gender == 3) {
 			outputText("You spread your legs and crook your finger, beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling, his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
@@ -1225,7 +1225,7 @@ public function jojoRape():void {
 			}
 			outputText("", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		outputText("", false);
 	}
@@ -1255,7 +1255,7 @@ public function jojoRape():void {
 			if(player.cockTotal() == 3) outputText("A multitude of thick cum-streams splatter over Jojo from head to waist as your " + multiCockDescriptLight() + " hose him down.  ", false);
 			outputText("\n\nSatisfied at last, you pull yourself away from the dazed mouse.  His shaft is still swollen with need, his hands irresistibly stroking it, eyes vacant.  You're going to corrupt him so much more next time.\n\n", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 	}
 	//First rape;
@@ -1326,7 +1326,7 @@ public function jojoRape():void {
 			monk+=1;
 			
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		else if (player.gender == 3) 
 		{

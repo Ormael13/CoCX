@@ -446,7 +446,7 @@ private function girlRapeAMinotaur():void {
 	player.orgasm();
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	player.knockUp(2,432);
+	player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
 private function minotaurGetsRapedByHerms():void {
@@ -465,7 +465,7 @@ private function minotaurGetsRapedByHerms():void {
 	player.orgasm();
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	player.knockUp(2,432);
+	player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
 
@@ -600,7 +600,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			dynStats("tou", -.5, "sen", 1, "lus", -5, "cor", 1);
 		}
 		//Preggers chance!
-		player.knockUp(2,432);
+		player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
 	}
 	if(player.cockTotal() > 0 && (player.sens + rand(40) > 50)) {
 		outputText("You orgasm, ", false);

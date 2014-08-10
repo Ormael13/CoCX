@@ -553,7 +553,7 @@ public function masturbateJojo():void {
 			if(player.vaginalCapacity() >= 36) outputText("You shift forward, and then tilt your hips and drive back, taking his length into your wide stretched body. You laugh at him, barely able to feel his dick within you, and whisper into his ear, \"<i>Just like a mouse to be tiny...</i>\" You watch his blush as you start to grind and roll atop his cock and belly, taking all the pleasure that you can from your slut.  ", false);
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock. You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand up off of him and dismiss him with a wave of your hand.  ", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.cuntChange(36.4, true);
 		}
 		//Cuntboy 2: Anal Gentle		
@@ -624,7 +624,7 @@ public function masturbateJojo():void {
 			if(player.vaginalCapacity() >= 36) outputText("You shift forward, and then tilt your hips and drive back, taking his length into your wide stretched body. You laugh at him, barely able to feel his dick within you, and whisper into his ear, \"<i>Just like a mouse to be tiny...</i>\" You watch his blush as you start to grind and roll atop his cock and belly, taking all the pleasure that you can from your slut.  ", false);
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock. You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.  ", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.cuntChange(36.4, true);
 		}
 		//Female 4: Smother Vaginal
@@ -687,7 +687,7 @@ public function masturbateJojo():void {
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock, and your own " + multiCockDescriptLight() + " to explode with thick splashes of your hot cum across his chest and belly.  ", false);
 			outputText("You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.", false);
 			//Preggers chance!
-			player.knockUp(4,432);
+			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.cuntChange(36.4, true);
 		}
 	}	
@@ -2276,15 +2276,15 @@ public function catAutoLick():void {
 		
 				flags[kFLAGS.GILDED_JERKED]++;
 		
-				var gems:int = midasCockJackingGemsRoll();
+				var gemsCreated:int = midasCockJackingGemsRoll(); //Changed as gems caused a duplicate var warning
 				
 				outputText("You once again feel a slight chill as you reach the point-of-no-return and you let your " + cockDescript(0) + " pop free of your mouth. You watch in glee as your seed slit parts to begin the sparkling shower you know is coming. Your cum, caught in the light of the golden cocksock, beads and twists in the light, crystallizing into a glittering shower. A ", false);
 	if(player.cumQ() < 25) outputText("sprinkle of");
 	else if(player.cumQ() < 250) outputText("rain of");
 	else outputText("torrent of");
-	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + " as you arc your back higher and higher until the only thing touching the ground is the top of your head and the tips of your toes! Your hips continue jerking in the air from the intense orgasm for a little while after the cum stops flowing.\n\n<b>You take a few moments to collect all the glittering gems you just squirted all over the place, all " + gems + " of them</b>, before curling up and taking a short cat nap.", false);
+	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + " as you arc your back higher and higher until the only thing touching the ground is the top of your head and the tips of your toes! Your hips continue jerking in the air from the intense orgasm for a little while after the cum stops flowing.\n\n<b>You take a few moments to collect all the glittering gems you just squirted all over the place, all " + gemsCreated + " of them</b>, before curling up and taking a short cat nap.", false);
 				
-				player.gems += gems;
+				player.gems += gemsCreated;
 			
 			}
 			else {
@@ -3089,6 +3089,7 @@ public function midasCockJackingGemsRoll():int
 
 public function onaholeRepeatUse(corrupted:Boolean):void
 {
+	var gemsCreated:int = 0; //Changed as gems caused a duplicate var warning
 			if(corrupted) {
 			outputText("Amused, yet annoyed by the aching of your loins, you take out the well-used onahole to give yourself a good, old-fashioned cock milking. With singular purpose, you impale the toy on your " + cockDescript(0) + " and begin hammering away as if the world depended upon your orgasm. Your fist is but a blur as the toy pumps your " + cockDescript(0) + " beyond any degree of reason. Relishing in each cramp of pleasure as your cum builds, you flex your well-toned pelvic muscles to both heighten your pleasure and to prevent premature release of the impressive batch you are working on. As time passes, even your impressive physical control is no match for the need to unload your spunk. Waiting until the pressure mashes the base of your cock, you strip the toy away from your shaft and with a great squeeze of your crotch, let loose an impressive stream of cock juice that arcs several yards away. Impressed with your own orgasm, you smile, grit your teeth and continue clenching your crotch muscles in an attempt to repeat your massive distance in the orgasm. Lance upon lance of fuck-milk hoses the area down as you empty yourself of your overwhelming lust. After a few dozen shots, your body empties itself of its needs and fatigue strikes you. After cleaning yourself up and rearranging your area to avoid the massive cum puddle you made, ", false)
 			
@@ -3096,11 +3097,11 @@ public function onaholeRepeatUse(corrupted:Boolean):void
 		
 				flags[kFLAGS.GILDED_JERKED]++
 		
-				var gems:int = midasCockJackingGemsRoll();
+				gemsCreated = midasCockJackingGemsRoll();
 				
-				outputText("<b>you relize the puddle is shimmering strangly. Looking closer you see that your man milk is coalescing into gems! You start collecting them, counting them as you go. You end up with " + gems + " gems and very little cum.</b>", false);
+				outputText("<b>you relize the puddle is shimmering strangly. Looking closer you see that your man milk is coalescing into gems! You start collecting them, counting them as you go. You end up with " + gemsCreated + " gems and very little cum.</b>", false);
 				
-				player.gems += gems;
+				player.gems += gemsCreated;
 			}
 			else {
 			outputText("you lay back to recuperate your strength knowing that your dick will demand more attention later.", false);
@@ -3113,7 +3114,7 @@ public function onaholeRepeatUse(corrupted:Boolean):void
 		
 				flags[kFLAGS.GILDED_JERKED]++
 		
-				var gems:int = midasCockJackingGemsRoll();
+				gemsCreated = midasCockJackingGemsRoll(); //Changed as gems caused a duplicate var warning
 				
 				outputText(". You pop the toy from your rod and let your reflexes hump the sky.", false);
 				
@@ -3121,9 +3122,9 @@ public function onaholeRepeatUse(corrupted:Boolean):void
 	if(player.cumQ() < 25) outputText("a sprinkle of");
 	else if(player.cumQ() < 250) outputText("a rain of");
 	else outputText("a torrent of");
-	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".\n\n<b>You force yourself to pick up the " + gems + " gems before passing out.</b>");
+	outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".\n\n<b>You force yourself to pick up the " + gemsCreated + " gems before passing out.</b>");
 	
-				player.gems += gems;
+				player.gems += gemsCreated;
 			}
 			else {
 			outputText("as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.", false);

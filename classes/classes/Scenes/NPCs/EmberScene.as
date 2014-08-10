@@ -941,17 +941,17 @@ package classes.Scenes.NPCs
 		{
 			//Checks for special scenes go here!
 			//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
-			if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == 5) {
+			if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
 				emberBitchesAboutPCBeingFullOfEggs();
 				doNext(13);
 				return;
 			}
-			if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200 && player.pregnancyType != 17 && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+			if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200 && player.pregnancyType != player.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
 				manEmberBitchesAboutPCPregnancy();
 				doNext(13);
 				return;
 			}
-			if (player.pregnancyIncubation > 0 && player.pregnancyType == 17 && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
+			if (player.pregnancyIncubation > 0 && player.pregnancyType == player.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
 				emberTalksToPCAboutPCDragoNPregnancy();
 				doNext(13);
 				return;
@@ -3366,7 +3366,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
-			player.knockUp(17, 336, 1, 1);
+			player.knockUp(player.PREGNANCY_EMBER, player.INCUBATION_EMBER, 1, 1);
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));
 		}

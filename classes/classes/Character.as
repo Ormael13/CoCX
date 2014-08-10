@@ -59,17 +59,63 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		//Body tone i.e. Lithe, stocky, etc
 		public var tone:Number = 0;
 		
-		//Preggos
-		//TODO: Document pregancy types. Both butt and normal. Mainly butts though.
-		//1 = imp
-		//2 = minotaur
-		//3 = tentacle
-		//4 = mouse
-		//5 = EGGZ
-		//6 = hellhound
-		//7 = centaur
-		//8 = MARBLZ
-		public const PREGNANCY_FAERIE:int = 24; //Indicates you are carrying a phouka or faerie baby. Which one is determined by the PREGNANCY_CORRUPTION flag
+		//Pregancy types. Both butt and normal.
+		public const PREGNANCY_IMP:int                   =   1;
+		public const PREGNANCY_MINOTAUR:int              =   2;
+		public const PREGNANCY_MOUSE:int                 =   4;
+		public const PREGNANCY_OVIELIXIR_EGGS:int        =   5; //Also caused by Phoenixes apparently
+		public const PREGNANCY_HELL_HOUND:int            =   6;
+		public const PREGNANCY_CENTAUR:int               =   7;
+		public const PREGNANCY_MARBLE:int                =   8;
+		public const PREGNANCY_BUNNY:int                 =   9;
+		public const PREGNANCY_ANEMONE:int               =  10;
+		public const PREGNANCY_AMILY:int                 =  11;
+		public const PREGNANCY_IZMA:int                  =  12;
+		public const PREGNANCY_SPIDER:int                =  13;
+		public const PREGNANCY_BASILISK:int              =  14;
+		public const PREGNANCY_DRIDER:int                =  15;
+		public const PREGNANCY_GOO_GIRL:int              =  16;
+		public const PREGNANCY_EMBER:int                 =  17;
+		public const PREGNANCY_BENOIT:int                =  18;
+		public const PREGNANCY_SATYR:int                 =  19;
+		public const PREGNANCY_COTTON:int                =  20;
+		public const PREGNANCY_URTA:int                  =  21;
+		public const PREGNANCY_SAND_WITCH:int            =  22;
+		public const PREGNANCY_FROG_GIRL:int             =  23;
+		public const PREGNANCY_FAERIE:int                =  24; //Indicates you are carrying either a phouka or faerie baby. Which one is determined by the PREGNANCY_CORRUPTION flag
+
+		public const PREGNANCY_BUTT_BEE:int              =   2;
+		public const PREGNANCY_BUTT_DRIDER:int           =   3;
+		public const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
+		public const PREGNANCY_BUTT_SANDTRAP:int         =   5; //Sandtrap did not have fertilized eggs
+
+		public const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
+		public const INCUBATION_MINOTAUR:int             = 432;
+		public const INCUBATION_MOUSE:int                = 350;
+		public const INCUBATION_OVIELIXIR_EGGS:int       =  50;
+		public const INCUBATION_HELL_HOUND:int           = 352;
+		public const INCUBATION_CENTAUR:int              = 420;
+		public const INCUBATION_MARBLE:int               = 368;
+		public const INCUBATION_BUNNY_BABY:int           = 200;
+		public const INCUBATION_BUNNY_EGGS:int           = 808; //High time indicates neon egg pregnancy
+		public const INCUBATION_ANEMONE:int              = 256;
+		public const INCUBATION_IZMA:int                 = 300;
+		public const INCUBATION_SPIDER:int               = 400;
+		public const INCUBATION_BASILISK:int             = 250;
+		public const INCUBATION_DRIDER:int               = 400;
+		public const INCUBATION_GOO_GIRL:int             =  85;
+		public const INCUBATION_EMBER:int                = 336;
+		public const INCUBATION_SATYR:int                = 160;
+		public const INCUBATION_COTTON:int               = 350;
+		public const INCUBATION_URTA:int                 = 515;
+		public const INCUBATION_SAND_WITCH:int           = 360;
+		public const INCUBATION_FROG_GIRL:int            =  30;
+		public const INCUBATION_FAERIE:int               = 200;
+		
+		public const INCUBATION_BUTT_BEE:int             =  48;
+		public const INCUBATION_BUTT_DRIDER:int          = 200;
+		public const INCUBATION_BUTT_SANDTRAP:int        =  42;
+
 		public var pregnancyType:Number = 0;
 		public var pregnancyIncubation:Number = 0;
 		

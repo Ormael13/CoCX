@@ -863,16 +863,16 @@ private function barBeerOrgyTits():void {
 			temp = rand(6);
 			switch(temp) {
 				case 0:
-					player.knockUp(2,350);
+					player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
 					break;
 				case 1:
-					player.knockUp(4,350);
+					player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE);
 					break;
 				case 2:
-					player.knockUp(4,350);
+					player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 					break;
 				default:
-					player.knockUp(7,360);
+					player.knockUp(player.PREGNANCY_CENTAUR, player.INCUBATION_CENTAUR);
 					break;
 			}
 		}
