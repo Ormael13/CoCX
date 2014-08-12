@@ -1367,14 +1367,29 @@ public function displayStats(e:MouseEvent = null):void
 {
 	spriteSelect(-1);
 	outputText("", true);
-	outputText("<b><u>Combat Stats</u></b>\n", false);
-	if (player.hasKeyItem("Bow") >= 0) outputText("<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n", false);
-	outputText("<b>Lust Resistance:</b> " + (100-Math.round(lustPercent())) + "% (Higher is better.)\n", false);
-	outputText("<b>Spell Effect Multiplier:</b> " + (100 * spellMod()) + "%\n");
-	outputText("<b>Spell Cost:</b> " + spellCost(100) + "%\n");
-	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) outputText("<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n", false);
-	outputText("<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n", false);
 	
+	// Begin Combat Stats
+	var combatStats:String = "";
+	
+	if (player.hasKeyItem("Bow") >= 0)
+		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n";
+		
+	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";
+	
+	combatStats += "<b>Spell Effect Multiplier:</b> " + (100 * spellMod()) + "%\n";
+	
+	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
+	
+	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
+		combatStats += "<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n";
+	
+	combatStats += "<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n";
+	
+	if (combatStats != "")
+		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
+	// End Combat Stats
+	
+	// Begin Children Stats
 	outputText("\n<b><u>Children</u></b>\n");
 	
 	if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("<b>Times Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n");
@@ -1410,7 +1425,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (urtaPregs.urtaKids() > 0) outputText("<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n");
 	//Mino sons
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) outputText("<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
+	// End Children Stats
 
+	// Begin Hidden Stats
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
 	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
 	outputText("<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n");
@@ -1463,7 +1480,9 @@ public function displayStats(e:MouseEvent = null):void
 	outputText("<b>Spells Cast:</b> " + flags[kFLAGS.SPELLS_CAST] + "\n");
 	if (player.hasVagina()) outputText("<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n");
 	if (player.hasVagina()) outputText("<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n");
-
+	// End Hidden Stats
+	
+	// Begin Interpersonal Stats
 	outputText("<b><u>\nInterpersonal Stats</u></b>\n", false);
 	if (flags[kFLAGS.ARIAN_PARK] > 0) outputText("<b>Arian's Health:</b> " + Math.round(arianScene.arianHealth()) + "\n");
 	if (flags[kFLAGS.ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter:</b> " + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n");
@@ -1511,17 +1530,35 @@ public function displayStats(e:MouseEvent = null):void
 		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status:</b> Ready To Confess Love\n");
 	}
+	// End Interpersonal Stats
+	// Begin Ongoing Stat Effects
+	var statEffects:String = "";
 	
+	if (player.inHeat)
+		statEffects += "Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining\n";
+		
+	if (player.inRut)
+		statEffects += "Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining\n";
+		
+	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
+		statEffects += "Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining\n";
+		
+	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
+		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
+	
+	if (statEffects != "")
+		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
+	// End Ongoing Stat Effects
 
-	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
-	if (player.inHeat) outputText("Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining.\n", false);
-	if (player.inRut) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
-	if (player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
-	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+	// Begin Misc Stat
+	var miscStats:String = "";
 
-	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
-	outputText("<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n");
-
+	if (flags[kFLAGS.EGGS_BOUGHT] > 0)
+		miscStats += "<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n";
+		
+	if (miscStats != "")
+		outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
+	// End Misc Stat
 	doNext(1);
 }
 
