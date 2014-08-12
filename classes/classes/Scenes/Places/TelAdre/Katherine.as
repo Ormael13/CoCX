@@ -1932,7 +1932,7 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("\n\nThe heat is intense and Kath’s " + katKnot() + " knot swells at your ministrations. Kath’s hips jerk forward, looking for a pussy to pack it into.");
 	}
 	outputText("\n\nKath’s next moan comes from the bottom of her lungs. Thanks to you she’s already horny and now you decide to overload her senses. You fingers cup her balls for just a moment before slipping into her dripping cunt.");
-	outputText("\n\nHer head tilts back, and she tries to find you mouth with her own. As your tongues entwine, you begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub. Your other hand ");
+	outputText("\n\nHer head tilts back, and she tries to find your mouth with her own. As your tongues entwine, you begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub. Your other hand ");
 	//(if KATHERINE_DICK_COUNT == 2)
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] == 2) 
 	{
