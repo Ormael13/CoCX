@@ -2763,7 +2763,7 @@ public function tentacleSelfFuck():void {
 		if(player.cocks.length > 1) outputText("es");
 		outputText(" on the way");
 	}
-	outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from an human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it it's somewhere warm and tight.");
+	outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from an human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it's somewhere warm and tight.");
 	if(y >= 0) outputText("  It loops around your " + cockDescript(y) + " while you fight with it, strangling the other phallus in tight coils of squeezing, floral friction.");
 	
 	outputText("\n\nYou arch your back as you try to contain the unexpected waves of desire that flood your groin, but it's no use.  In the span of a few seconds, you decide to accept that you need to fuck something now.  Foreplay is no longer an option.");

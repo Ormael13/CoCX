@@ -231,7 +231,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("“<i>Hm?</i>” the shadow grunts, then speaks.  “<i>Oh?  Now how did you find your way in here, I wonder?</i>”  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath and a small light flares up briefly in the darkness, then the shadow speaks again.  “<i>Well, whatever. It’s been a while since I had company, ");
 
-				if (player.minoScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the the stupid brutes who usually wander around these parts.  ");
+				if (player.minoScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
 				else if (player.dogScore() > 3) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
 				else if (player.goblinScore() > 3) outputText("plus you don't seem to be as insufferable as the rest of those little green whores who trollop around these parts, hunting their next lay.  ");
 				else if (player.demonScore() > 3) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
@@ -1836,7 +1836,7 @@ package classes.Scenes.Areas.HighMountains
 				{
 					outputText("You relax as your orgasms subsides, content that you’ve now thoroughly shown Izumi who’s the boss.  You slip free of her abused ass, a small trickle of cum dripping out after you, and you’re surprised to notice that Izumi seems to be a hell of a lot wetter than she was when you first started.  You raise an eyebrow at her as she stares backwards over her shoulder.\n\n");
 
-					outputText("“<i>What?  It’s a natural thing, asshole,</i>” she snarls.  “<i>It’s not like I liked it. What kind of person would get off from that?  I’m not one of those freaks!</i>”  You shake your head at her in amusement, then motion for her to turn around and face the wall again again.  She pales slightly, clearly worried you’re about to try for a second round, but quietly does as she’s told.\n\n");
+					outputText("“<i>What?  It’s a natural thing, asshole,</i>” she snarls.  “<i>It’s not like I liked it. What kind of person would get off from that?  I’m not one of those freaks!</i>”  You shake your head at her in amusement, then motion for her to turn around and face the wall again.  She pales slightly, clearly worried you’re about to try for a second round, but quietly does as she’s told.\n\n");
 
 					outputText("You don’t quite have the energy for that just now though, so instead, you pick up your clothes and make for the exit.  As you walk past Izumi’s discarded clothing, you spy a small pouch full of gems that you hadn’t noticed before.  You snatch that too, making a speedy escape before the Oni girl realises she could probably make it to her feet before you got her horn by this point....\n\n");
 				}

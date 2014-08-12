@@ -390,7 +390,7 @@ private function femaleRapesOoze():void {
 	}
 	else if(player.biggestTitSize() >= 0)
 	{
-		outputText("You pull the member tight against your body and run your hands along its length, rubbing it over belly as the shaft throbs and pulses beneath your touch.  You lean lean forward a little and rub the tip of it against your " + allBreastsDescript() + ", smiling as it leaves a little bit of greenish fluid behind.  After enduring your ministrations for a short time the creature begins moving its hips in time with you.  You hold in a slight gasp as the ooze's shaft shifts, changing into a perfectly sculpted human cock, a full foot and a half long.\n\n", false);
+		outputText("You pull the member tight against your body and run your hands along its length, rubbing it over belly as the shaft throbs and pulses beneath your touch.  You lean forward a little and rub the tip of it against your " + allBreastsDescript() + ", smiling as it leaves a little bit of greenish fluid behind.  After enduring your ministrations for a short time the creature begins moving its hips in time with you.  You hold in a slight gasp as the ooze's shaft shifts, changing into a perfectly sculpted human cock, a full foot and a half long.\n\n", false);
 	}
 	/*
 	else
@@ -419,7 +419,7 @@ private function femaleRapesOoze():void {
 	}
 	else
 	{
-		outputText("  You hesitate at the sheer size of of the slime's cock and the creature, sensing your hesitation, reaches up with its strong arms and grips your ass, forcefully pushing you onto itself.  ", false);
+		outputText("  You hesitate at the sheer size of the slime's cock and the creature, sensing your hesitation, reaches up with its strong arms and grips your ass, forcefully pushing you onto itself.  ", false);
 	}
 	outputText("The thing's cock, though rigid, somehow manages to squish and expand wherever needed to conform perfectly to your insides, adapting to your " + vaginaDescript(0) + " with ease as you ride it.", false);
 	//penis arousal text

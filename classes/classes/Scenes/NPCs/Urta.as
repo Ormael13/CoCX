@@ -3580,7 +3580,7 @@ private function pegUrtasAssMessy():void {
 	if(player.cockArea(x) > urtaCapacity()) outputText("most of you ");
 	else outputText("your entire length ");
 	outputText("before she can react, clinging to every inch of cock-flesh as it's forced deeper into her interior.  A wave of ecstasy washes through the fox, slackening her muscles in a ripple that travels from her waist to her lips in a second.  Her annoyance morphs into slack-jawed pleasure, and her protests deteriorate into babbling vocalizations of enjoyment.  Before she can recover, you pull back and thrust again, battering her sphincter repeatedly as you begin to truly pound the fox's ass.");
-	outputText("\n\nUrta moans, \"<i>Fuck me me!  Fuck my ass, [name]!  Gods");
+	outputText("\n\nUrta moans, \"<i>Fuck me!  Fuck my ass, [name]!  Gods");
 	if(urtaDrunk()) outputText("h");
 	outputText(", why does it feel s");
 	if(urtaDrunk()) outputText("h");
@@ -4492,7 +4492,7 @@ private function wearZeCollar():void {
 	//(Jump down to Scene Proper)
 	//Second Time
 	else if(flags[kFLAGS.URTA_PETPLAY_DONE] == 1) {
-		outputText("You spy the collar sitting on a nearby dresser and pick it up.  It's still a marvelous piece of leather... although it looks different.  A shiny metal, heart-shaped tag dangles from from it.  Urta catches you checking out the collar and sits down at the edge of her bed.  \"<i>Go on then, [name].  Read it,</i>\" she urges you with a soft whisper.");
+		outputText("You spy the collar sitting on a nearby dresser and pick it up.  It's still a marvelous piece of leather... although it looks different.  A shiny metal, heart-shaped tag dangles from it.  Urta catches you checking out the collar and sits down at the edge of her bed.  \"<i>Go on then, [name].  Read it,</i>\" she urges you with a soft whisper.");
 		outputText("\n\nThe little, shiny golden tag says '<i>Property of Urta</i>' in soft, flowing script.  Urta fidgets nervously as you run a finger over the engraved words, as though confirming they're real.  \"<i>It's not too much, is it?</i>\" she asks, pulling at the hem of her stockings fitfully.  \"<i>I just thought, since we were playing like this... we could make it official.  Just while we're 'playing' like this, of course.</i>\"");
 
 		outputText("\n\nYou answer her question by snapping the collar on, stripping down to your birthday suit and kneeling in front of your Owner");
