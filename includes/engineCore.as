@@ -1500,10 +1500,24 @@ public function displayStats(e:MouseEvent = null):void
 		bodyStats += preg + "\n";
 	}
 	
-	if (player.vaginas.length > 0 )
-		bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n";
+	if (player.cocks.length > 0) {
+		bodyStats += "<b>Total Cocks:</b> " + player.cocks.length + "\n";
+
+		var totalCockLength:Number = 0;
+		var totalCockGirth:Number = 0;
+		
+		for (var i:Number = 0; i < player.cocks.length; i++) {
+				totalCockLength += player.cocks[i].cockLength;
+				totalCockGirth += player.cocks[i].cockThickness
+		}
+				
+		bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
+		bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
+		
+	}
+	
 	if (player.vaginas.length > 0)
-		bodyStats += "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
+		bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n" + "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
 
 	if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
 		bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
@@ -1546,7 +1560,7 @@ public function displayStats(e:MouseEvent = null):void
 	var addictStats:String = "";
 	//Marble Milk Addition
 	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
-		addictStats += "<b>Marble Milk Addiction:</b> ";
+		addictStats += "<b>Marble Milk:</b> ";
 		if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0)
 			addictStats += Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n";
 		else if (player.findPerk(PerkLib.MarbleResistant) >= 0)
@@ -1558,9 +1572,9 @@ public function displayStats(e:MouseEvent = null):void
 	// Mino Cum Addiction
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
 		if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
-		addictStats += "<b>Minotaur Cum Addiction:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
+		addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
 		else
-			addictStats += "<b>Minotaur Cum Addiction:</b> 100+%\n";
+			addictStats += "<b>Minotaur Cum:</b> 100+%\n";
 	}
 	
 	if (addictStats != "")
