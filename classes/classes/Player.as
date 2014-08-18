@@ -1519,25 +1519,25 @@ use namespace kGAMECLASS;
 			//Bimbo body boosts minimum lust by 40
 			if(findStatusAffect(StatusAffects.BimboChampagne) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
 				if(min > 40) min += 10;
-				else if(min > 0) min += 20;
+				else if(min >= 20) min += 20;
 				else min += 40;
 			}
 			//Omnibus' Gift
 			if(findPerk(PerkLib.OmnibusGift) >= 0) {
 				if(min > 40) min += 10;
-				else if(min > 0) min += 20;
+				else if(min >= 20) min += 20;
 				else min += 35;
 			}
 			//Nymph perk raises to 30
 			if(findPerk(PerkLib.Nymphomania) >= 0) {
 				if(min >= 40) min += 10;
-				else if(min > 0) min += 15;
+				else if(min >= 20) min += 15;
 				else min += 30;
 			}
 			//Oh noes anemone!
 			if(findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
 				if(min >= 40) min += 10;
-				else if(min > 0) min += 20;
+				else if(min >= 20) min += 20;
 				else min += 30;
 			}
 			//Hot blooded perk raises min lust!
