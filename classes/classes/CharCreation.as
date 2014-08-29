@@ -362,7 +362,7 @@ public function doCreation(eventNo:Number):void {
 	}
 	//tomboy b-type
 	if(eventNo == 10006) {
-		player.femininity = 30;
+		player.femininity = 56;
 		player.hipRating = 2;
 		player.buttRating = 0;
 		player.breastRows[0].breastRating = 2;
