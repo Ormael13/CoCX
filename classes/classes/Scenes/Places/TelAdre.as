@@ -209,22 +209,23 @@ public function telAdreMenu():void {
 	if(flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5,"Park",kGAMECLASS.arianScene.visitThePark);
 	addButton(6,"Pawn",oswaldPawn);
 	addButton(7,"Tower",library.visitZeMagesTower);
-	addButton(8,"Weapons",weaponShop);
+
 	addButton(9,"Leave",eventParser,13);
 }
 
 private function armorShops():void {
 	menu();
-	addButton(0,"Blacksmith",armorShop);
-	addButton(1,"Piercing",piercingStudio);
+	addButton(0, "Blacksmith", armorShop);
+	addButton(1, "Piercing", piercingStudio);
 	addButton(2, "Tailor", tailorShoppe);
-
+	addButton(3, "Weapons", weaponShop);
+	addButton(4, "Jewellery", jewelShopEntry);
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
-		addButton(3, "Clinic", umasShop.enterClinic);
+		addButton(5, "Clinic", umasShop.enterClinic);
 	}
 
-	addButton(4,"Back",telAdreMenu);
+	addButton(9,"Back",telAdreMenu);
 }
 
 public function houses():void {
@@ -1397,6 +1398,7 @@ private function debitClothes(itype:ItemType):void {
 	inventory.takeItem(itype);
 }
 
+//Armor Shop
 public function armorShop():void {
 	outputText("", true);
 	spriteSelect(64);
@@ -1420,7 +1422,31 @@ public function armorShop():void {
 			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
 			"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
+private function armorBuy(itype:ItemType):void {
+	spriteSelect(64);
+	outputText("", true);
+	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
+	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	if(player.gems < itype.value) {
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		//Goto shop main menu
+		doNext(armorShop);
+		return;
+	}
+	else outputText("\n\nDo you buy it?", false);
+	//Go to debit/update function or back to shop window
+	doYesNo(curry(debitArmor,itype),armorShop);
+}
 
+private function debitArmor(itype:ItemType):void {
+	spriteSelect(64);
+	outputText("", true);
+	player.gems -= itype.value;
+	statScreenRefresh();
+	menuLoc = 9;
+	inventory.takeItem(itype);
+}
+//Weapon Shop
 public function weaponShop():void {
 	outputText("", true);
 	spriteSelect(80);
@@ -1459,30 +1485,84 @@ private function debitWeapon(itype:ItemType):void {
 	menuLoc = 15;
 	inventory.takeItem(itype);
 }
-private function armorBuy(itype:ItemType):void {
-	spriteSelect(64);
+
+//Jewellery shop
+public function jewelShopEntry():void {
 	outputText("", true);
-	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
-	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	outputText("You enter the jewellery store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
+	outputText("<i>\"Welcome to my jewellery store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. It stays on until you take them off,\"</i> the lizan says.", false);
+
+	choices("Next", jewelShopInside,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0)
+}
+public function jewelShopInside():void {
+	outputText("", true);
+	outputText("<i>So what will it be?</i>", false);
+	choices("Normal rings", jewelShopPageI,
+			"Enchanted rings", jewelShopPageII,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"Leave", telAdreMenu)
+}
+
+public function jewelShopPageI():void {
+	choices(jewelries.SILVRNG.shortName, createCallBackFunction(jewelBuy, jewelries.SILVRNG),
+			jewelries.GOLDRNG.shortName, createCallBackFunction(jewelBuy, jewelries.GOLDRNG),
+			jewelries.PLATRNG.shortName, createCallBackFunction(jewelBuy, jewelries.PLATRNG),
+			jewelries.LTHCRNG.shortName, createCallBackFunction(jewelBuy, jewelries.LTHCRNG),
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"Back",jewelShopInside);	
+}	
+public function jewelShopPageII():void {
+	choices(jewelries.CRIMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.CRIMRNG),
+			jewelries.ICE_RNG.shortName, createCallBackFunction(jewelBuy, jewelries.ICE_RNG),
+			jewelries.FERTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.FERTRNG),
+			jewelries.LIFERNG.shortName, createCallBackFunction(jewelBuy, jewelries.LIFERNG),
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"Back",jewelShopInside);	
+}	
+
+private function jewelBuy(itype:ItemType):void {
+	outputText("", true);
+	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
-		doNext(armorShop);
+		doNext(jewelShopInside);
 		return;
 	}
-	else outputText("\n\nDo you buy it?", false);
+	else outputText("\n\nDo you buy it?\n\n", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(curry(debitArmor,itype),armorShop);
+	doYesNo(curry(debitJewel, itype), jewelShopInside);
 }
-
-private function debitArmor(itype:ItemType):void {
-	spriteSelect(64);
-	outputText("", true);
+private function debitJewel(itype:ItemType):void {
 	player.gems -= itype.value;
 	statScreenRefresh();
-	menuLoc = 9;
+	menuLoc = 34;
 	inventory.takeItem(itype);
 }
+
 
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;

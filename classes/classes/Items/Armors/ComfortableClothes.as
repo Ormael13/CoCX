@@ -21,7 +21,7 @@ package classes.Items.Armors
 
 		public function ComfortableClothes()
 		{
-			super("C.Cloth","C.Cloth","comfortable clothes","a set of comfortable clothes",0,0,"These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)","Light");
+			super("C.Cloth","C.Cloth","comfortable clothes","a set of comfortable clothes",0,0,"These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements. \n\nType: Clothing \nDefense: 0 \nBase value: 0","Light");
 		}
 	}
 }

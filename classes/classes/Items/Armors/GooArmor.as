@@ -42,7 +42,7 @@ package classes.Items.Armors
 
 		public function GooArmor()
 		{
-			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!");
+			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! But the real question is, how did you manage to get this into your inventory? Tsk, tsk. \n\nType: Heavy armor \nDefense: 22 \nBase value: 1 \nSpecial: Regeneration + Increased Fantasize");
 		}
 
 

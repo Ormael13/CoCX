@@ -465,9 +465,17 @@ public function doCamp():void {
 	}
 	//Live in-ness
 	else {
-		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
-		else if(model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
-		else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		{
+			if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
+			else if(model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
+			else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+		}
+	}
+	//Cabin! Requires at least 20 days passed.
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+	{
+		outputText("Your new home is as comfy as a camp site can be.  Your cabin is situated near the edge of your camp and the fire-pit is set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter. ", false);
 	}
 	if(flags[kFLAGS.CLARA_IMPRISONED] > 0) 
 	{
@@ -609,6 +617,32 @@ public function doCamp():void {
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
+	else
+	{
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1)
+		{
+			outputText("There is a note on your ", false);
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+			{
+				outputText("bed inside your cabin.", false);
+			}
+			else
+			{
+				outputText("bedroll", false);
+			}
+			outputText(". It reads \"<i>Come see me at the lake. I've finished your spider silk ", false)
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1)
+			{
+				outputText("armor", false);
+			}
+			else
+			{
+				outputText("robes", false);
+			}
+			outputText(". ~Rathazul</i>\".", false);
+			outputText("\n\n", false);			
+		}
+	}
 	//MOUSEBITCH
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.");
@@ -668,6 +702,7 @@ public function doCamp():void {
 			placesNum = 0;
 		}
 	}
+
 	var baitText:String = "Masturbate";
 	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
 	//Initialize companions/followers
@@ -698,8 +733,18 @@ public function doCamp():void {
 			restEvent = 11;
 		}
 	}
+	
+	//Unlock something in character creation.
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
+	{
+		if (player.gender == 3)
+		{
+			(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1)
+			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>")
+		}
+	}
+	
 	//Menu
-
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
 	//Lovers
 	//Followers
@@ -1087,6 +1132,7 @@ public function campFollowers():void {
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
+
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		if(rand(5) == 0) outputText("Sophie is sitting by herself, applying yet another layer of glittering lip gloss to her full lips.\n\n");
 		else if(rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
@@ -1124,24 +1170,38 @@ public function campFollowers():void {
 
 public function rest():void {
 	campQ = true;
-	if(timeQ == 0) {
-		outputText("You lie down to rest for four hours.\n", true);
+	outputText("", true);
+	//Multiplier
+	var multiplier:Number = 1.0;
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+	{
+		multiplier += 0.5; //Cabin has that comfortable bed. Even more comfortable than sleeping on your bedroll! Adds 0.5 to multiplier.
+	}
+	//Fatigue recovery
+	var fatRecovery:Number = 4;
+	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
+	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+	if (timeQ == 0) {
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		{
+			outputText("You head inside your cabin to rest. ", false);
+		}
+		outputText("You lie down to rest for four hours.\n", false);
 		timeQ = 4;
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-			HPChange(timeQ * 510, true);
+			HPChange(timeQ * 5 * multiplier, true);
 			dynStats("tou", -.1, "int", -.1);
 			//fatigue
-			fatigue(-2*timeQ);
-			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-1*timeQ);
+			fatRecovery /= 2;
+			fatigue(-fatRecovery * timeQ * multiplier);
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
-			HPChange(timeQ * 10, true);
+			HPChange(timeQ * 10 * multiplier, true);
 			//fatigue
-			fatigue(-4*timeQ); 
-			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-2*timeQ);
+			fatigue(-fatRecovery * timeQ * multiplier); 
 		}
 	}
 	else {
@@ -1153,6 +1213,10 @@ public function rest():void {
 public function doWait():void {
 	campQ = true;
 	outputText("", true);
+	//Fatigue recovery
+	var fatRecovery:Number = 2;
+	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
+	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if(timeQ == 0) {
 		outputText("You wait four hours...\n", false);
 		timeQ = 4;
@@ -1160,14 +1224,13 @@ public function doWait():void {
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			//fatigue
-			fatigue(-1*timeQ); 
-			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-0.5*timeQ);
+			fatRecovery /= 2;
+			fatigue(-fatRecovery * timeQ);
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
 			//fatigue
-			fatigue(-2*timeQ); 	
-			if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-1*timeQ);
+			fatigue(-fatRecovery * timeQ); 
 		}
 	}
 	else {
@@ -1232,6 +1295,10 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
+		{
+			outputText("You head inside your cabin to turn yourself in for the night. ")
+		}
 		//Marble Sleepies
 		if(marbleScene.marbleAtCamp() && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 			if(marbleScene.marbleNightSleepFlavor()) {
@@ -1312,10 +1379,15 @@ public function sleepWrapper():void {
 }
 
 public function sleepRecovery(display:Boolean = false):void {
+	var multiplier:Number = 1.0;
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+	{
+		multiplier += 0.5;
+	}
 	//Marble withdrawl
 	if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-		HPChange(timeQ * 10, true);
+		HPChange(timeQ * 10 * multiplier, true);
 		dynStats("tou", -.1, "int", -.1);
 		//fatigue
 		fatigue(-int(player.fatigue/2));
@@ -1324,13 +1396,13 @@ public function sleepRecovery(display:Boolean = false):void {
 	//Mino withdrawal
 	else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 		if(display) outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n", false);
-		HPChange(timeQ * 15, true);
+		HPChange(timeQ * 15 * multiplier, true);
 		fatigue(-int(player.fatigue/2)); 
 		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
 	}
 	//REGULAR HP/FATIGUE RECOVERY
 	else {
-		HPChange(timeQ * 20, display);
+		HPChange(timeQ * 20 * multiplier, display);
 		//fatigue
 		fatigue(-player.fatigue); 
 	}

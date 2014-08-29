@@ -34,10 +34,11 @@ package coc.view {
                     "sensBar",    "senText",     "senNum",      // "sensUp",     "sensDown",
                     "corBar",     "corText",     "corNum",      // "corUp",      "corDown",
                     "lustBar",    "lustText",    "lustNum",     // "lustUp",     "lustDown",
+					"minLustBar",
                     "fatigueBar", "fatigueText", "fatigueNum",  // "fatigueUp",  "fatigueDown",
                     "HPBar",      "HPText",      "HPNum",       // "hpUp",       "hpDown",
                                   "levelText",   "levelNum",    // "levelUp",
-                                   "xpText",     "xpNum",       // "xpUp",       "xpDown",
+                    "XPBar",	  "xpText",     "xpNum",       // "xpUp",       "xpDown",
                     "coreStatsText",
                     "advancementText",
                     "combatStatsText",
@@ -84,7 +85,7 @@ package coc.view {
 				var fVal:* = Math.floor( value );
 				var dispText:String;
 				
-				if (fVal >= 10000)
+				if (fVal >= 1000000)
 				{
 					dispText = "++++";
 				}
@@ -109,7 +110,7 @@ package coc.view {
             // this.visible = true;
 
             setStatText( "coreStatsText",
-                "<b><u>Name : {NAME}</u>\nCore Stats</b>"
+                "<b><u>Name: {NAME}</u>\nCore Stats</b>"
                     .replace( "{NAME}", model.player.short ) );
 
             setStatText( "strNum", model.player.str );
@@ -120,13 +121,13 @@ package coc.view {
             setStatText( "senNum", model.player.sens );
             setStatText( "corNum", model.player.cor );
             setStatText( "fatigueNum", model.player.fatigue );
-            setStatText( "HPNum", model.player.HP );
+            setStatText( "HPNum", model.player.HP + "/" + model.maxHP());
             setStatText( "lustNum", model.player.lust );
             setStatText( "levelNum", model.player.level );
-            setStatText( "xpNum", model.player.XP );
+            setStatText( "xpNum", model.player.XP + " / " + model.player.level * 100 + " (" + Math.floor(model.player.XP / (model.player.level * 100)) + "%)");
 
             setStatText( "timeText",
-                "<b><u>Day #: {DAYS}</u></b>\n<b>Time : {HOURS}:00</b>"
+                "<b><u>Day#: {DAYS}</u></b>\n<b>Time: {HOURS}:00</b>"
                     .replace( "{DAYS}", model.time.days )
                     .replace( "{HOURS}", model.time.hours ) );
 
@@ -139,7 +140,9 @@ package coc.view {
             setStatBar( "corBar", model.player.cor/100 );
             setStatBar( "fatigueBar", model.player.fatigue/100 );
             setStatBar( "HPBar", model.player.HP/model.maxHP() );
-            setStatBar( "lustBar", model.player.lust/100 );
+            setStatBar( "lustBar", model.player.lust / 100 );
+			setStatBar( "minLustBar", model.player.minLust / 100);
+			setStatBar( "XPBar", (model.player.XP / (model.player.level * 100)) );
             setStatText( "gemsNum", model.player.gems );
         };
 

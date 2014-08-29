@@ -2905,7 +2905,7 @@ public static const UNKNOWN_FLAG_NUMBER_02896:int                               
 public static const UNKNOWN_FLAG_NUMBER_02897:int                                   = 2897;
 public static const UNKNOWN_FLAG_NUMBER_02898:int                                   = 2898;
 public static const UNKNOWN_FLAG_NUMBER_02899:int                                   = 2899;
-public static const UNKNOWN_FLAG_NUMBER_02900:int                                   = 2900;
+public static const CAMP_BUILT_CABIN:int        		                            = 2900;
 public static const UNKNOWN_FLAG_NUMBER_02901:int                                   = 2901;
 public static const UNKNOWN_FLAG_NUMBER_02902:int                                   = 2902;
 public static const UNKNOWN_FLAG_NUMBER_02903:int                                   = 2903;
@@ -2985,7 +2985,7 @@ public static const UNKNOWN_FLAG_NUMBER_02976:int                               
 public static const UNKNOWN_FLAG_NUMBER_02977:int                                   = 2977;
 public static const UNKNOWN_FLAG_NUMBER_02978:int                                   = 2978;
 public static const UNKNOWN_FLAG_NUMBER_02979:int                                   = 2979;
-public static const UNKNOWN_FLAG_NUMBER_02980:int                                   = 2980;
+public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; //Unlocked hermaphrodite.
 public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981;
 public static const UNKNOWN_FLAG_NUMBER_02982:int                                   = 2982;
 public static const UNKNOWN_FLAG_NUMBER_02983:int                                   = 2983;
@@ -2995,12 +2995,12 @@ public static const UNKNOWN_FLAG_NUMBER_02986:int                               
 public static const UNKNOWN_FLAG_NUMBER_02987:int                                   = 2987;
 public static const UNKNOWN_FLAG_NUMBER_02988:int                                   = 2988;
 public static const UNKNOWN_FLAG_NUMBER_02989:int                                   = 2989;
-public static const UNKNOWN_FLAG_NUMBER_02990:int                                   = 2990;
-public static const UNKNOWN_FLAG_NUMBER_02991:int                                   = 2991;
-public static const UNKNOWN_FLAG_NUMBER_02992:int                                   = 2992;
-public static const UNKNOWN_FLAG_NUMBER_02993:int                                   = 2993;
+public static const GAME_DIFFICULTY:int  			                                = 2990; // 0 is medium, 1 is hard, 2 is nightmare mode. Affects levels of encounter.
+public static const HARDCORE_MODE:int       				                        = 2991; // 0 is disabled, 1 is enabled. Forces save and causes deletion of save file on bad end.
+public static const SURVIVAL_MODE:int         			 	                        = 2992; // 0 is disabled, 1 is enabled. Enables hunger.
+public static const PC_HUNGER:int               				                    = 2993; // Goes from 0 to 100. 100 is full, 0 is starving.
 public static const UNKNOWN_FLAG_NUMBER_02994:int                                   = 2994;
-public static const UNKNOWN_FLAG_NUMBER_02995:int                                   = 2995;
+public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // disables corruption requirement for certain buttfuck scenes.
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;

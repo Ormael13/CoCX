@@ -604,6 +604,9 @@
 		protected function get armors():ArmorLib{
 			return kGAMECLASS.armors;
 		}
+		protected function get jewelries():JewelryLib{
+			return kGAMECLASS.jewelries;
+		}
 		protected function get inventory():Inventory{
 			return kGAMECLASS.inventory;
 		}

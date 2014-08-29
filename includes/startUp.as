@@ -36,7 +36,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	gameState = 3;
 
 
-	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
+	outputText("<b>Corruption of Champions (" + version + ")</b> - Modded by Kitteh6660", true);
 	
 	if (CoC_Settings.debugBuild)
 		outputText(" Debug Build.");
@@ -306,6 +306,9 @@ public function creditsScreen():void {
 	outputText("<li> SoS</li>");
 	outputText("<li> Prisoner416</li>");
 	outputText("<li> Chibodee</li>");
+	outputText("<b>Modifications</b>\n");
+	outputText("<ul>");
+	outputText("<li> Kitteh6660</li>");
 	outputText("</ul>");
 	outputText("");
 	outputText("<b>Graphical Prettiness:</b>")

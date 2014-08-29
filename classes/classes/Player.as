@@ -6,6 +6,8 @@ import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
+import classes.Items.Jewelry;
+import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -50,10 +52,13 @@ use namespace kGAMECLASS;
 		public var itemSlot4:ItemSlotClass;
 		public var itemSlot5:ItemSlotClass;
 		public var itemSlots:Array;
-
+		
+		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		private var _jewelry:Jewelry = JewelryLib.NOTHING;
 		private var _modArmorName:String = "";
 
+		//override public function set armors
 		override public function set armorValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.armorValue.");
@@ -74,7 +79,7 @@ use namespace kGAMECLASS;
 			CoC_Settings.error("ERROR: attempt to directly set player.armorPerk.");
 		}
 
-
+		//override public function set weapons
 		override public function set weaponName(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponName.");
@@ -100,6 +105,32 @@ use namespace kGAMECLASS;
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponValue.");
 		}
 
+		//override public function set jewelries
+		override public function set jewelryName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryName.");
+		}
+		
+		override public function set jewelryEffectId(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectId.");
+		}
+		
+		override public function set jewelryEffectMagnitude(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude.");
+		}
+				
+		override public function set jewelryPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk.");
+		}
+		
+		override public function set jewelryValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue.");
+		}
+		
 		public function get modArmorName():String
 		{
 			if (_modArmorName == null) _modArmorName = "";
@@ -112,6 +143,7 @@ use namespace kGAMECLASS;
 			_modArmorName = value;
 		}
 
+		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
 			return _armor.name;
@@ -159,7 +191,7 @@ use namespace kGAMECLASS;
 		override public function get armorValue():Number {
 			return _armor.value;
 		}
-		private var _weapon:Weapon = WeaponLib.FISTS;
+		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
 		}
@@ -186,7 +218,24 @@ use namespace kGAMECLASS;
 		override public function get weaponValue():Number {
 			return _weapon.value;
 		}
-
+		
+		//override public function get jewelries. Disabled until I can figure fix.
+		override public function get jewelryName():String {
+			return _jewelry.name;
+		}
+		override public function get jewelryEffectId():Number {
+			return _jewelry.effectId;
+		}
+		override public function get jewelryEffectMagnitude():Number {
+			return _jewelry.effectMagnitude;
+		}
+		override public function get jewelryPerk():String {
+			return _jewelry.perk;
+		}
+		override public function get jewelryValue():Number {
+			return _jewelry.value;
+		}
+			
 		public function get armor():Armor
 		{
 			return _armor;
@@ -226,7 +275,29 @@ use namespace kGAMECLASS;
 		{
 			this._weapon = value;
 		}
+		
+		//Jewelry, added by Kitteh6660
+		public function get jewelry():Jewelry
+		{
+			return _jewelry;
+		}
 
+		public function set jewelry(value:Jewelry):void
+		{
+			if (value == null){
+				CoC_Settings.error(short+".jewelry is set to null");
+				value = JewelryLib.NOTHING;
+			}
+			value.equip(this, false, false);
+		}
+
+		// in case you don't want to call the value.equip
+		public function setJewelryHiddenField(value:Jewelry):void
+		{
+			this._jewelry = value;
+		}
+
+		
 		// Hacky workaround shit for ByteArray.readObject
 		public function Player()
 		{
@@ -1519,25 +1590,25 @@ use namespace kGAMECLASS;
 			//Bimbo body boosts minimum lust by 40
 			if(findStatusAffect(StatusAffects.BimboChampagne) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
 				if(min > 40) min += 10;
-				else if(min >= 20) min += 20;
+				else if(min > 0) min += 20;
 				else min += 40;
 			}
 			//Omnibus' Gift
 			if(findPerk(PerkLib.OmnibusGift) >= 0) {
 				if(min > 40) min += 10;
-				else if(min >= 20) min += 20;
+				else if(min > 0) min += 20;
 				else min += 35;
 			}
 			//Nymph perk raises to 30
 			if(findPerk(PerkLib.Nymphomania) >= 0) {
 				if(min >= 40) min += 10;
-				else if(min >= 20) min += 15;
+				else if(min > 0) min += 15;
 				else min += 30;
 			}
 			//Oh noes anemone!
 			if(findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
 				if(min >= 40) min += 10;
-				else if(min >= 20) min += 20;
+				else if(min > 0) min += 20;
 				else min += 30;
 			}
 			//Hot blooded perk raises min lust!
@@ -1566,6 +1637,20 @@ use namespace kGAMECLASS;
 				min += 10;
 				if(eggs() >= 40) min += 10;
 			}
+			//Jewelry effects
+			if (jewelryEffectId == 1)
+			{
+				min += jewelryEffectMagnitude;
+			}
+			if (jewelryEffectId == 2)
+			{
+				min -= jewelryEffectMagnitude;
+				if (min > (100 - jewelryEffectMagnitude))
+				{
+					min = (100 - jewelryEffectMagnitude);
+				}
+			}
+			
 			if(min < 30 && armorName == "lusty maiden's armor") min = 30;
 			return min;
 		}

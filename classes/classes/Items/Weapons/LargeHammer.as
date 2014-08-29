@@ -26,7 +26,7 @@ package classes.Items.Weapons
 
 		public function LargeHammer()
 		{
-			super("L.Hammr","L.Hammr","large hammer","Marble's large hammer","smash",16,90,"This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.","Large");
+			super("L.Hammr","L.Hammr","large hammer","Marble's large hammer","smash",16,90,"This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances. \n\nType: Weapon (Heavy) \Attack: 16 \nBase value: 90 \nRequires height of 5'0\".","Large");
 		}
 	}
 }

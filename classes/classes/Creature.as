@@ -62,7 +62,22 @@ import classes.PerkType;
 		public function set armorName(value:String):void { _armorName = value; }
 		public function set armorDef(value:Number):void { _armorDef = value; }
 		public function set armorPerk(value:String):void { _armorPerk = value; }
-
+		//Jewelry!
+		private var _jewelryName:String = "";
+		private var _jewelryEffectId:Number = 0;
+		private var _jewelryEffectMagnitude:Number = 0;
+		private var _jewelryPerk:String = "";
+		private var _jewelryValue:Number = 0;
+		public function get jewelryName():String { return _jewelryName; }
+		public function get jewelryEffectId():Number { return _jewelryEffectId; }
+		public function get jewelryEffectMagnitude():Number { return _jewelryEffectMagnitude; }
+		public function get jewelryPerk():String { return _jewelryPerk; }
+		public function get jewelryValue():Number { return _jewelryValue; }
+		public function set jewelryValue(value:Number):void { _jewelryValue = value; }
+		public function set jewelryName(value:String):void { _jewelryName = value; }
+		public function set jewelryEffectId(value:Number):void { _jewelryEffectId = value; }
+		public function set jewelryEffectMagnitude(value:Number):void { _jewelryEffectId = value; }
+		public function set jewelryPerk(value:String):void { _jewelryPerk = value; }
 		//Primary stats
 		public var str:Number = 0;
 		public var tou:Number = 0;
@@ -1880,8 +1895,12 @@ import classes.PerkType;
 			//Messy Orgasms?
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
+			//Fertite ring bonus!
+			if (jewelryName == "fertite ring")
+				percent += 0.1;
 			if (percent > 1)
 				percent = 1;
+
 			return percent;
 		}
 		
@@ -1925,6 +1944,8 @@ import classes.PerkType;
 				quantity += 200;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+			if (jewelryName == "fertite ring")
+				quantity *= (1 + (jewelryEffectMagnitude / 10))
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
@@ -2931,6 +2952,8 @@ import classes.PerkType;
 				counter += 10;
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
+			if (jewelryName == "fertite ring")
+				counter += jewelryEffectMagnitude
 			return counter;
 		}
 

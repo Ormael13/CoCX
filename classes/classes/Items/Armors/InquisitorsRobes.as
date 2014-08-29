@@ -25,7 +25,7 @@ package classes.Items.Armors
 
 		public function InquisitorsRobes()
 		{
-			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 8, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.", "Light",
+			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 8, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you. \n\nType: Clothing \nDefense: 8 \nBase value: 2,000 \nSpecial: Blood Mage", "Light",
 					PerkLib.BloodMage, 0, 0, 0, 0);
 		}
 	}

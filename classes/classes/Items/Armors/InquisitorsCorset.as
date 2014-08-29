@@ -44,7 +44,7 @@ package classes.Items.Armors
 
 		public function InquisitorsCorset()
 		{
-			super("I.Corst","I.Corst","inquisitor's corset","an inquisitor's corset",4,2000,"This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.","Light");
+			super("I.Corst","I.Corst","inquisitor's corset","an inquisitor's corset",4,2000,"This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you. \n\nType: Clothing \nDefense: 4 \nBase value: 2,000 \nSpecial: Blood Mage + Slutty Seduction","Light");
 		}
 	}
 }

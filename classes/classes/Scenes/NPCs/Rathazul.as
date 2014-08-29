@@ -108,6 +108,10 @@ private function rathazulWorkOffer():Boolean {
 	var debimbo:int = 0;
 	var lethiciteDefense:Number = 0;
 	var dyes:Function = null;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+		collectRathazulArmor();
+		return true;
+	}
 	if(player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
 		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
@@ -191,7 +195,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//SPOIDAH
 	var silk:Number = 0;
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 5;
 		spoken = true;
 		totalOffers++;
@@ -325,7 +329,7 @@ public function RathazulArmorMenu():void {
 	if(player.hasItem(useables.B_CHITN, 5)) {
 		beeArmor = 2180;
 	}
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = craftSilkArmor;
 	}
 	simpleChoices("BeeArmor",beeArmor,"GelArmor",gelArmor,"SpiderSilk",silk,"",0,"Back",2070);

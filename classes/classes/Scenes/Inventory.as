@@ -54,10 +54,11 @@ public function doItems(eventNo:Number):void {
 		if(itemSlot3.quantity > 0) temp3 = createCallBackFunction(useItemInInventory,itemSlot3);
 		if(itemSlot4.quantity > 0 && itemSlot4.unlocked) temp4 = createCallBackFunction(useItemInInventory,itemSlot4);
 		if(itemSlot5.quantity > 0 && itemSlot5.unlocked) temp5 = createCallBackFunction(useItemInInventory,itemSlot5);
-		outputText("<b><u>Equipment:</u></b>\n", true);
-		outputText("<b>Weapon</b>: " + player.weaponName + " (Attack - " + player.weaponAttack + ")\n", false);
-		outputText("<b>Armor : </b>" + player.armorName + " (Defense - " + player.armorDef + ")\n", false);
-		if(player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n", false);
+		outputText("<b><u>Equipment</u></b>\n", true);
+		outputText("<b>Weapon:</b> " + player.weaponName + " (Attack: " + player.weaponAttack + ")\n", false);
+		outputText("<b>Armour:</b> " + player.armorName + " (Defense: " + player.armorDef + ")\n", false);
+		outputText("<b>Accessory:</b> " + player.jewelryName + "\n", false)
+		if(player.keyItems.length > 0) outputText("<b><u>\nKey Items</u></b>\n", false);
 		temp = 0;
 		while(temp < player.keyItems.length) {
 			outputText(player.keyItems[temp].keyName + "\n", false);
@@ -93,7 +94,7 @@ public function doItems(eventNo:Number):void {
 		}
 		outputText("\nWhich item will you use?", false);
 		if(gameState == 1) choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 5000);
-		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
+		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "Unequip", manageEquipment, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
 		menuLoc = 1;
 	}
 	//Auburn Dyes
@@ -860,6 +861,11 @@ public function doItems(eventNo:Number):void {
 				doNext(kGAMECLASS.jojoScene.corruptCampJojo);
 				return;
 			}
+			if (menuLoc == 34)
+			{
+				doNext(kGAMECLASS.telAdre.jewelShopInside);
+				return;
+			}
 			if(menuLoc == 2) doNext(13);
 			else doNext(1);
 		}
@@ -999,6 +1005,10 @@ public function doItems(eventNo:Number):void {
 			else if (menuLoc == 29)
 			{
 				abandon = kGAMECLASS.telAdre.bakeryScene.ingredientsMenu;
+			}
+			else if (menuLoc == 34)
+			{
+				abandon = kGAMECLASS.telAdre.jewelShopInside;
 			}
 			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), createCallBackFunction2(replaceItem,itype,itemSlot1),
 					(itemSlot2.itype.shortName + " x" + itemSlot2.quantity), createCallBackFunction2(replaceItem,itype,itemSlot2),
@@ -1218,6 +1228,53 @@ public function doItems(eventNo:Number):void {
 			doNext(1028);
 		}
 
+		public function manageEquipment():void {
+			outputText("Which would you like to unequip?", true)
+			menu();
+			if (player.weaponName != "fists")
+			{
+				addButton(0, "Weapon", unequipWeapon);
+			}
+			if (player.armorName != "comfortable underclothes")
+			{
+				addButton(1, "Armour", unequipArmor);
+			}			
+			if (player.jewelryName != "nothing")
+			{
+				addButton(2, "Accessory", unequipJewel);
+			}			
+			addButton(9, "Back", returnToItems)
+			
+		}
+		//Unequip!
+		public function unequipWeapon():void {
+			if (player.weaponName != "fists")
+			{
+				outputText("You unequip your " + player.weaponName + ". ", true);
+				player.weapon.unequip(player, true, false);
+				doNext(manageEquipment);
+			}
+		}
+		public function unequipArmor():void {
+			if (player.armorName != "comfortable underclothes")
+			{
+				outputText("You unequip your " + player.armorName + ". ", true);
+				player.armor.unequip(player, true, false);
+				doNext(manageEquipment);
+			}
+		}
+		public function unequipJewel():void {
+			if (player.jewelryName != "nothing")
+			{
+				outputText("You unequip your " + player.jewelryName + ". ", true);
+				player.jewelry.unequip(player, true, false);
+				doNext(manageEquipment);
+			}
+		}
+		public function returnToItems():void {
+			doItems(1000);
+		}
+		
 		//Place item slot into the first dump spot.
 		public function placeInRacks(slotNum:Number, armor:Boolean = false):void {
 			outputText("", true);

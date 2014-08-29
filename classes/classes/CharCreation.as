@@ -10,6 +10,9 @@
 
 	public class CharCreation extends BaseContent{
 
+	//Hacky solution
+	var unlockedHerm:Boolean = false;
+	
 public function newGameGo(e:MouseEvent = null):void {
 	funcs = [];
 	args = [];
@@ -38,7 +41,7 @@ public function newGameGo(e:MouseEvent = null):void {
 		silly = true;
 	mainView.setButtonText( 0, "Newgame" ); // b1Text.text = "Newgame";
 	flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
-
+	
 	outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\nWhat is your name?", true);
 
 	/*CODE FROM CMACLOAD HERE
@@ -179,6 +182,14 @@ public function newGameGo(e:MouseEvent = null):void {
 		player.setArmorHiddenField(armors.C_CLOTH);
 		player.setWeaponHiddenField(WeaponLib.FISTS);
 	}
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 1)
+	{
+		unlockedHerm = true;
+	}
+	else
+	{
+		unlockedHerm = false;
+	}
 	//Clear plot storage array!
 	flags = new DefaultDict();
 
@@ -238,7 +249,7 @@ public function doCreation(eventNo:Number):void {
 		player.createBreastRow();
 		player.breastRows[0].breastRating = 0;
 		outputText("\n\n\n\n\nYou are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?", true);
-		simpleChoices("Lean", 10003, "Average", 10002, "Thick", 10005, "Girly", 10004, "", 0);
+		simpleChoices("Lean", 10003, "Average", 10002, "Thick", 10005, "Girly", 10004, "Dickgirl", 10113);
 		player.gender = 1;
 		player.hairLength=1;
 	}
@@ -255,8 +266,31 @@ public function doCreation(eventNo:Number):void {
 		player.tallness = 67;
 		player.breastRows[0].breastRating = 3;
 		outputText("\n\n\n\n\nYou are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?", true);
-		simpleChoices("Slender", 10003, "Average", 10002, "Curvy", 10005, "Tomboyish", 10006, "", 0);
+		simpleChoices("Slender", 10003, "Average", 10002, "Curvy", 10005, "Tomboyish", 10006, "Cuntboi", 10113);
 		player.gender = 2;
+	}
+	//HERMAPHRODITE
+	if(eventNo == 10101) {
+		player.str+=1;
+		player.tou+=1;
+		player.spe+=1;
+		player.inte+=1;
+		player.clitLength = .5;
+		player.tone = 45;
+		player.createCock();
+		player.cocks[0].cockLength = 5.5;
+		player.cocks[0].cockThickness = 1;
+		player.cocks[0].cockType = CockTypesEnum.HUMAN;
+		player.cocks[0].knotMultiplier = 1;
+		player.fertility = 10;
+		player.hairLength=10;
+		player.createBreastRow();
+		player.createVagina();
+		player.tallness = 69;
+		player.breastRows[0].breastRating = 2;
+		outputText("\n\n\n\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
+		simpleChoices("Slender", 10003, "Average", 10002, "Curvy", 10005, "Masculine", 10111, "Feminine", 10112);
+		player.gender = 3;
 	}
 	//Average b-type
 	if(eventNo == 10002) {
@@ -328,10 +362,49 @@ public function doCreation(eventNo:Number):void {
 	}
 	//tomboy b-type
 	if(eventNo == 10006) {
-		player.femininity = 56;
+		player.femininity = 30;
 		player.hipRating = 2;
 		player.buttRating = 0;
 		player.breastRows[0].breastRating = 2;
+		player.tone = 50;
+		eventParser(10007);
+	}
+	//dickgirl/cuntboi b-type
+	if(eventNo == 10113) {
+		if(player.gender == 1) {
+			player.hipRating = 6;
+			player.buttRating = 6;
+			player.femininity = 70;
+			player.thickness = 40;
+			player.breastRows[0].breastRating = 3;
+			player.str -= 1;
+		}
+		if(player.gender == 2) {
+			player.hipRating = 2;
+			player.buttRating = 0;
+			player.femininity = 30;
+			player.thickness = 30;
+			player.tone += 5;
+			player.str += 1;
+		}
+		eventParser(10007);
+	}
+
+	//masculine herm b-type
+	if(eventNo == 10111) {
+		player.femininity = 56;
+		player.hipRating = 2;
+		player.buttRating = 0;
+		player.breastRows[0].breastRating = 0;
+		player.tone = 50;
+		eventParser(10007);
+	}
+	//feminine herm b-type
+	if(eventNo == 10112) {
+		player.femininity = 70;
+		player.hipRating = 4;
+		player.buttRating = 6;
+		player.breastRows[0].breastRating = 3;
 		player.tone = 50;
 		eventParser(10007);
 	}
@@ -401,6 +474,7 @@ public function doCreation(eventNo:Number):void {
 		outputText("\n\nEvery person is born with a gift.  What's yours?", true);
 		if(player.gender == 1) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Cock", 10027, "Lots of Jizz", 10028, "", 0, "", 0);
 		if(player.gender == 2) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Breasts", 10029, "Big Clit", 10030, "Fertile", 10031, "Wet Vagina", 10032);
+		if(player.gender == 3) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Cock", 10027, "Big Clit", 10030, "Fertile", 10031, "Wet Vagina", 10032);
 	}
 	//Strong
 	if(eventNo == 10021) {
@@ -567,7 +641,6 @@ public function doCreation(eventNo:Number):void {
 				}
 				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			}
-
 			newGameGo(e);
 			outputText("\n\n\n<b>You must select a name.</b>", false);
 			return;
@@ -583,16 +656,22 @@ public function doCreation(eventNo:Number):void {
 		}
 		player.short = mainView.nameBox.text;
 		mainView.nameBox.visible = false;
-		outputText("\n\n\n\nAre you a man or a woman?", true);
-		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);
+		if(unlockedHerm == true){
+			outputText("\n\n\n\nAre you a man or a woman? \n\nOr a hermaphrodite as you've unlocked hermaphrodite option!", true);
+			simpleChoices("Man", 10000, "Woman", 10001, "Herm", 10101, "", 0, "", 0);
+		}
+		else{
+			outputText("\n\n\n\nAre you a man or a woman?", true);
+			simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);			
+		}
 	}
 	//New Game+
 	if(eventNo == 10035) {
 		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 		if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
-		while(player.level > 1) {
-			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
+		while (player.level > 1) {
 			player.level--;
+			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 		}
 		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 		newGameGo(e);
@@ -691,6 +770,7 @@ public function doCreation(eventNo:Number):void {
 		}
 		return;
 	}
+	
 	if(eventNo == 10045) {
 		if(flags[kFLAGS.CUSTOM_PC_ENABLED] == 1) {
 			clearOutput();
@@ -698,6 +778,11 @@ public function doCreation(eventNo:Number):void {
 			kGAMECLASS.customPCSetup();
 			doNext(10045);
 			return;
+		}
+		//Ensures it's permanently unlocked.
+		if (unlockedHerm == true)
+		{
+			flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 		}
 		statScreenRefresh();
 		model.time.hours = 11;
@@ -766,7 +851,13 @@ public function noCustomProfile():void {
 	player.short = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
 	outputText("Your name carries little significance beyond it being your name.  What is your gender?");
-	simpleChoices("Male", 10000, "Female", 10001, "", 0, "", 0, "", 0);
+	if(unlockedHerm == true){
+		outputText("\n\nHermaphrodite option is already unlocked.");
+		simpleChoices("Male", 10000, "Woman", 10001, "Herm", 10101, "", 0, "", 0);
+	}
+	else{
+		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);			
+	}
 }
 
 //Determines if has character creation bonuses

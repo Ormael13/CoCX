@@ -137,7 +137,7 @@ package classes.Items.Consumables
                 
         public function PhoukaWhiskey()
         {
-			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", phoukaWhiskeyEffect, 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat.");
+			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", phoukaWhiskeyEffect, 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Food & Beverages");
         }
 
     }

@@ -19,7 +19,7 @@ package classes.Items.Weapons
 
 		public function RaphaelsRapier()
 		{
-			super("RRapier","RRapier","vulpine rapier","Raphael's vulpine rapier","slash",8,1000,"He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.");
+			super("RRapier","RRapier","vulpine rapier","Raphael's vulpine rapier","slash",8,1000,"He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you. \n\nType: Weapon (Sword) \Attack: 8 \nBase value: 1,000");
 		}
 	}
 }

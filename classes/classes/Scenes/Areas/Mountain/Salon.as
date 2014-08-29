@@ -391,8 +391,8 @@ private function dyeMenu():void {
 			"Orange",createCallBackFunction(buyDye,consumables.ORANGDY),
 			"Pink",createCallBackFunction(buyDye,consumables.PINKDYE),
 			"Purple",createCallBackFunction(buyDye,consumables.PURPDYE),
-			"Back",hairDressingMainMenu,
-			"Ext.Serum",createCallBackFunction(buyDye,consumables.EXTSERM),"",0,"",0,"",0,"",0);
+			"Green",createCallBackFunction(buyDye,consumables.GREEN_D),
+			"Ext.Serum",createCallBackFunction(buyDye,consumables.EXTSERM),"",0,"",0,"",0,"Back",hairDressingMainMenu);
 }
 
 

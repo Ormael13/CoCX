@@ -86,7 +86,7 @@ package classes
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
 		public static const Berzerker:PerkType = mk("Berzerker", "Berzerker",
 				"[if(player.str>=75)" +
-						"Grants 'Berzerk' ability." +
+						"Grants 'Berserk' ability." +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",

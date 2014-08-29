@@ -802,6 +802,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			if (level <= 20) max += level * 15;
 			else max += 20 * 15;
+			if (jewelryEffectId == 5) max += jewelryEffectMagnitude
 			max = Math.round(max);
 			if (max > 999) max = 999;
 			return max;

@@ -27,7 +27,7 @@ package classes.Items.Consumables
 
 		public function LustStick()
 		{
-			super("LustStk","LustStk","a tube of golden lipstick",applyLustStick,ConsumableLib.DEFAULT_VALUE,"This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.");
+			super("LustStk","LustStk","a tube of golden lipstick",applyLustStick,ConsumableLib.DEFAULT_VALUE,"This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin. \n\nType: Consumable");
 		}
 	}
 }
