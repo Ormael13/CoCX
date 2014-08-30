@@ -103,7 +103,7 @@ private function rathazulWorkOffer():Boolean {
 	var totalOffers:Number = 0;
 	var spoken:Boolean = false;
 	var gelArmor:Function = null;
-	var beeArmor:Number = 0;
+	var beeArmor:Function = null;
 	var purify:Function = null;
 	var debimbo:int = 0;
 	var lethiciteDefense:Number = 0;
@@ -135,7 +135,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("The elderly rat looks at you intently and offers, \"<i>I see you've gathered a piece of chitin from the giant bees of the forests.  If you bring me five pieces I could probably craft it into some tough armor.</i>\"\n\n", false);
 		spoken = true;
 		if(player.hasItem(useables.B_CHITN,5)) {
-			beeArmor = 2180;
+			beeArmor = craftCarapace;
 			totalOffers++;
 		}
 		else {
@@ -230,7 +230,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	if(totalOffers > 0) {
 		var armor:Function = null;
-		if(beeArmor > 0 || gelArmor != null || silk > 0) armor = RathazulArmorMenu;
+		if(beeArmor != null || gelArmor != null || silk > 0) armor = RathazulArmorMenu;
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
@@ -318,8 +318,9 @@ private function makeADeBimboDraft():void {
 public function RathazulArmorMenu():void {
 	spriteSelect(49);
 	var gelArmor:Function = null;
+	var beeArmor:Function = null;
 	var silk:Function = null;
-	var beeArmor:Number = 0;
+
 	outputText("Which armor project would you like to pursue with Rathazul?", true);
 	//Item crafting offer
 	if(player.hasItem(useables.GREENGL, 5)) {
@@ -327,12 +328,12 @@ public function RathazulArmorMenu():void {
 	}
 	//Item crafting offer
 	if(player.hasItem(useables.B_CHITN, 5)) {
-		beeArmor = 2180;
+		beeArmor = craftCarapace;
 	}
 	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = craftSilkArmor;
 	}
-	simpleChoices("BeeArmor",beeArmor,"GelArmor",gelArmor,"SpiderSilk",silk,"",0,"Back",2070);
+	simpleChoices("GelArmor",gelArmor,"BeeArmor",beeArmor,"SpiderSilk",silk,"",0,"Back",2070);
 }
 private function craftSilkArmor():void {
 	spriteSelect(49);
@@ -377,7 +378,16 @@ private function declineSilkArmorCommish():void {
 }
 public function chooseArmorOrRobes():void {
 	spriteSelect(49);
-	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
+	outputText("Rathazul grunts in response and goes back to work.  ", true);
+	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+	{
+		outputText("You turn back to the center of your camp", false);
+	}
+	else
+	{
+		outputText("You head back to your camp", false);
+	}
+	outputText(", wondering if the old rodent will actually deliver the wondrous item that he's promised you.", false);
 	doNext(13);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 24;
 	trace("274: " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274]);
@@ -420,6 +430,19 @@ private function craftOozeArmor():void {
 	if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
 }
 
+private function craftCarapace():void {
+	spriteSelect(49);
+	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ", true);
+	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);
+	if(player.gender >= 2) outputText(" with stockings and garters", false);
+	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n", false);
+	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
+	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
+	player.destroyItems(useables.B_CHITN, 5);
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	inventory.takeItem(armors.BEEARMR);
+}
+
 private function buyDyes():void {
 	spriteSelect(49);
 	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?", true);
@@ -434,17 +457,6 @@ public function carapaceFind():void {
 	inventory.takeItem(useables.B_CHITN);
 }
 
-public function craftCarapace():void {
-	spriteSelect(49);
-	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ", true);
-	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);
-	if(player.gender >= 2) outputText(" with stockings and garters", false);
-	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n", false);
-	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
-	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
-	player.destroyItems(useables.B_CHITN, 5);
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
-	inventory.takeItem(armors.BEEARMR);
-}
+
 }
 }

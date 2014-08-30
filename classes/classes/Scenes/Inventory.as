@@ -1539,7 +1539,7 @@ public function doItems(eventNo:Number):void {
 						temp2++;
 					}
 					if(temp2 > 0) outputText("You add " + temp2 + "x " + itype.shortName + " into storage slot number ", false);
-					outputText(num2Text(temp+-17) + ".\n", false);
+					outputText(num2Text(temp-17) + ".\n", false);
 				}
 				temp++;
 			}
@@ -1552,7 +1552,7 @@ public function doItems(eventNo:Number):void {
 				if(gearStorage[temp].quantity == 0) {
 					(gearStorage[temp] as ItemSlotClass).setItemAndQty(itype,qty);
 					outputText("You place " + qty + "x " + itype.shortName + " into storage slot ", false);
-					outputText(num2Text(temp+1) + ".\n", false);
+					outputText(num2Text(temp-17) + ".\n", false);
 					temp = 25;
 					qty = 0;
 				}

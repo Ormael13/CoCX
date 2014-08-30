@@ -1938,13 +1938,6 @@ public function doEvent(eventNo:Number):void
 		outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...", true);
 		doNext(jojoScene.jojoRape);
 	}
-	//Rathazul Armor Crafting
-	else if (eventNo == 2180)
-	{
-		doNext(13);
-		rathazul.craftCarapace();
-	}
-	
 	//Buy breast-milker from whitney
 	else if (eventNo == 2182)
 	{
