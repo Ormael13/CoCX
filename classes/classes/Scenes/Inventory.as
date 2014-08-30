@@ -10,6 +10,9 @@ package classes.Scenes
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
 	import classes.Items.Jewelry;
+	import classes.Items.ArmorLib;
+	import classes.Items.WeaponLib;
+	import classes.Items.JewelryLib;
 
 	use namespace kGAMECLASS;
 
@@ -1328,9 +1331,11 @@ public function doItems(eventNo:Number):void {
 			{
 				menuLoc = 36;
 				outputText("You unequip your " + player.weaponName + ". ", true);
+				var temp:ItemType = player.weapon;
+				player.setWeaponHiddenField(WeaponLib.FISTS);
+				takeItem(temp);
+				//doNext(manageEquipment);
 				
-				doNext(manageEquipment);
-				player.weapon.unequip(player, true, false);
 			}
 		}
 		public function unequipArmor():void {
@@ -1338,9 +1343,10 @@ public function doItems(eventNo:Number):void {
 			{
 				menuLoc = 36;
 				outputText("You unequip your " + player.armorName + ". ", true);
-				
-				doNext(manageEquipment);
-				player.armor.unequip(player, true, false);
+				var temp:ItemType = player.armor;
+				player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+				takeItem(temp);				
+				//doNext(manageEquipment);
 			}
 		}
 		public function unequipJewel():void {
@@ -1348,9 +1354,10 @@ public function doItems(eventNo:Number):void {
 			{
 				menuLoc = 36;
 				outputText("You unequip your " + player.jewelryName + ". ", true);
-				
-				doNext(manageEquipment);
-				player.jewelry.unequip(player, true, false);
+				var temp:ItemType = player.jewelry;
+				player.setJewelryHiddenField(JewelryLib.NOTHING);
+				takeItem(temp);	
+				//doNext(manageEquipment);
 			}
 		}
 		public function returnToItems():void {
