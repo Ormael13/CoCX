@@ -1521,6 +1521,7 @@ public function displayStats(e:MouseEvent = null):void
 
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
 	outputText("<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n");
+	outputText("<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n");
 
 	doNext(1);
 }

@@ -2,7 +2,8 @@
 package classes
 {
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.PerkType;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkType;
 	import classes.StatusAffectType;
 	import classes.internals.Utils;
 
@@ -427,6 +428,7 @@ import classes.PerkType;
 		{
 			game.dynStats("lus=",0,"res",false);
 			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED] += 1
 			
 			if (countCockSocks("gilded") > 0) {
 			

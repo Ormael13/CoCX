@@ -1181,7 +1181,7 @@ public static const PHOUKA_ENCOUNTER_STATUS:int                                 
 public static const PHOUKA_LORE:int                                                 = 1173; // 0 when you don't know what they're called, 1 once you learn their name, higher values as you hear more drunken stories.
 public static const PREGNANCY_CORRUPTION:int                                        = 1174; // Starts at 2 when you get pregnant. Drops if you drink pure honey, rises if you drink phouka whiskey
 public static const TREACLE_MINE_YEAR_DONE:int                                      = 1175; // Same as for the Fera encounter, this is a once a year halloween deal
-public static const UNKNOWN_FLAG_NUMBER_01176:int                                   = 1176;
+public static const TIMES_ORGASMED:int                                		        = 1176; // How many times you orgasmed!
 public static const UNKNOWN_FLAG_NUMBER_01177:int                                   = 1177;
 public static const UNKNOWN_FLAG_NUMBER_01178:int                                   = 1178;
 public static const UNKNOWN_FLAG_NUMBER_01179:int                                   = 1179;
@@ -1205,7 +1205,7 @@ public static const UNKNOWN_FLAG_NUMBER_01196:int                               
 public static const UNKNOWN_FLAG_NUMBER_01197:int                                   = 1197;
 public static const UNKNOWN_FLAG_NUMBER_01198:int                                   = 1198;
 public static const UNKNOWN_FLAG_NUMBER_01199:int                                   = 1199;
-public static const UNKNOWN_FLAG_NUMBER_01200:int                                           = 1200;
+public static const UNKNOWN_FLAG_NUMBER_01200:int                                   = 1200;
 public static const UNKNOWN_FLAG_NUMBER_01201:int                                   = 1201;
 public static const UNKNOWN_FLAG_NUMBER_01202:int                                   = 1202;
 public static const UNKNOWN_FLAG_NUMBER_01203:int                                   = 1203;
