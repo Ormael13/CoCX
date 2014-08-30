@@ -455,6 +455,33 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[kFLAGS.HEL_PREGNANCY_INCUBATION]--;
 			if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) flags[kFLAGS.HEL_PREGNANCY_INCUBATION] = 1;
 		}
+		//Ring of Purity and Corruption
+		if (player.jewelryEffectId == 8)
+		{
+			dynStats("cor", (player.jewelryEffectMagnitude/10));
+		}
+		//Hunger!
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+			//Caps hunger at 100.
+			if (flags[kFLAGS.PC_HUNGER] > 100)
+			{
+				flags[kFLAGS.PC_HUNGER] = 100;
+			}
+			//Hunger drain rate. If above 50, 2 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
+			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
+			if (flags[kFLAGS.PC_HUNGER] > 50)
+			{
+				flags[kFLAGS.PC_HUNGER] -= 1;
+			}
+			if (flags[kFLAGS.PC_HUNGER] > 25)
+			{
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+			if (flags[kFLAGS.PC_HUNGER] > 0)
+			{
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+		}
 		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 		genderCheck();
 		if(player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
@@ -477,7 +504,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Well adjusted perk
 		else {
 			//Raise lust
-			dynStats("lus", player.lib * 0.02);
+			dynStats("lus", player.lib * 0.02, "resisted", false);
 			//Double lust rise if lusty.
 			if(player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false);
 		}

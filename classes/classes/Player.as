@@ -1620,6 +1620,9 @@ use namespace kGAMECLASS;
 				if(min < 50) min += 10;
 				else min += 5;
 			}
+			if(findStatusAffect(StatusAffects.Infested) >= 0) {
+				if(min < 50) min = 50;
+			}
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
 			min += perkv1(PerkLib.PentUp);

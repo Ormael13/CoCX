@@ -1511,7 +1511,7 @@ public function jewelShopInside():void {
 			"", 0,
 			"", 0,
 			"", 0,
-			"", 0,
+			"Jewelry Box", jewelShopBuyBox,
 			"", 0,
 			"", 0,
 			"", 0,
@@ -1535,13 +1535,53 @@ public function jewelShopPageII():void {
 			jewelries.ICE_RNG.shortName, createCallBackFunction(jewelBuy, jewelries.ICE_RNG),
 			jewelries.FERTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.FERTRNG),
 			jewelries.LIFERNG.shortName, createCallBackFunction(jewelBuy, jewelries.LIFERNG),
-			"", 0,
-			"", 0,
+			jewelries.POWRRNG.shortName, createCallBackFunction(jewelBuy, jewelries.POWRRNG),
+			jewelries.PURERNG.shortName, createCallBackFunction(jewelBuy, jewelries.PURERNG),
 			"", 0,
 			"", 0,
 			"", 0,
 			"Back",jewelShopInside);	
 }	
+
+public function jewelShopBuyBox():void {
+	outputText("", true);
+	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)
+	{
+		outputText("<b>You already own a jewelry box!</b>")
+		doNext(jewelShopInside);
+		return;
+	}
+	outputText("You look around for a while then see something that catches your eyes. A finely-polished jewelry box sits on table. The price tag says that it costs 500 gems. The box comes complete with a hinged lid and several small drawers.\n\n", false);
+	outputText("The lizan then walks over to you and asks \"<i>See something you'd like to buy?</i>\" You then ask him about the jewelry box. \n\n", false);
+	outputText("\"<i>We have plenty of them. This is a finely crafted box. It's designed to hold nine different rings and amulets. Of course, it's secure! It has combination lock. With the right code, you can unlock it. And it can be yours for only 500 gems!</i>\"\n\n", false);
+	outputText("Do you buy it?", false);
+	if (player.gems >= 500)
+	{
+		doYesNo(jewelShopBuyBoxYes, jewelShopBuyBoxNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(jewelShopInside);
+	}
+}	
+
+public function jewelShopBuyBoxYes():void {
+	player.gems -= 500;
+	statScreenRefresh();
+	outputText("You hand over five hundred gems to the lizan. ", true);
+	outputText("He then exclaims\"<i>Sold!</i>\" as he hands over the jewelry box to you. You take your time to set the combination and memorize it should you need to access your jewelry box.\n\n", false);
+	outputText("<b>Gained Key Item: Jewelry Box!</b>", false)
+	player.createKeyItem("Equipment Storage - Jewelry Box", 0, 0, 0, 0);
+	doNext(jewelShopInside);
+}	
+public function jewelShopBuyBoxNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Very well. Let me know if you've changed your mind,</i>\" he says.", false);
+	doNext(jewelShopInside);
+}	
+
+
 
 private function jewelBuy(itype:ItemType):void {
 	outputText("", true);

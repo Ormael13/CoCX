@@ -28,7 +28,7 @@ package classes.Items.Weapons
 
 		public function DragonShellShield()
 		{
-			super("DrgnShl","DrgnShl","dragon-shell shield","a dragon-shell shield","smack",0,1500,"A durable shield that has been forged from the remains of the dragon egg you found in the swamp. Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Weapon (Others) \Attack: 0 \nBase value: 1,500 \nProtects against 'liquid attacks'.","Large");
+			super("DrgnShl","DrgnShl","dragon-shell shield","a dragon-shell shield","smack",0,1500,"A durable shield that has been forged from the remains of the dragon egg you found in the swamp. Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Weapon (Others) \nAttack: 0 \nBase value: 1,500 \nProtects against 'liquid attacks'.","Large");
 		}
 	}
 }

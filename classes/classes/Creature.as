@@ -1944,8 +1944,10 @@ import classes.PerkType;
 				quantity += 200;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
-			if (jewelryName == "fertite ring")
-				quantity *= (1 + (jewelryEffectMagnitude / 10))
+			if (jewelryEffectId == 3)
+				quantity *= (1 + (jewelryEffectMagnitude / 100))
+			if (jewelryEffectId == 4)
+				quantity *= (1 - (jewelryEffectMagnitude / 100))			
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
@@ -2952,8 +2954,10 @@ import classes.PerkType;
 				counter += 10;
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
-			if (jewelryName == "fertite ring")
-				counter += jewelryEffectMagnitude
+			if (jewelryEffectId == 3)
+				counter *= (1 + (jewelryEffectMagnitude / 100))
+			if (jewelryEffectId == 4)
+				counter *= (1 - (jewelryEffectMagnitude / 100))
 			return counter;
 		}
 

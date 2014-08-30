@@ -36,7 +36,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	gameState = 3;
 
 
-	outputText("<b>Corruption of Champions (" + version + ")</b> - Modded by Kitteh6660", true);
+	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
 	
 	if (CoC_Settings.debugBuild)
 		outputText(" Debug Build.");
@@ -117,13 +117,14 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
 	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
+	if (flags[kFLAGS.ITS_EVERY_DAY])
+		outputText("\n\n<b>Eternal holiday enabled.</b>");
 	if(isEaster())
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
 	if(isValentine())
 		outputText("\n\n<b>It's Valentine's!</b>");
 	if(helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
-
 
 }
 

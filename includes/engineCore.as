@@ -1801,11 +1801,36 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.inte > 100) player.inte= 100;
 	if(player.inte < 1) player.inte = 1;
 	if(player.lib > 100) player.lib = 100;
-	//Minimum libido = 15.
-	if(player.lib < 50 && player.armorName == "lusty maiden's armor") player.lib = 50;
-	else if(player.lib < 15 && player.gender > 0) player.lib = 15;
-	else if(player.lib < 10 && player.gender == 0) player.lib = 10;
-	if (player.lib < minLust() * 2 / 3) player.lib = minLust() * 2 / 3;
+	if(player.lib < 0) player.lib = 0;
+	//Minimum libido. Rewritten.
+	var minLib:Number = 0;
+	if (player.gender > 0) 
+	{
+		minLib = 15;
+	} 
+	else 
+	{
+		minLib = 10;
+	}
+	if (player.armorName == "lusty maiden's armor") {
+		if (minLib < 50)
+		{
+			minLib = 50;
+		}
+	}
+	if (minLib < (minLust() * 2 / 3))
+	{
+		minLib = (minLust() * 2 / 3);
+	}
+	if (player.jewelryEffectId == 7)
+	{
+		minLib -= player.jewelryEffectMagnitude;
+	}
+	//Applies minimum libido.
+	if (player.lib < minLib)
+	{
+		player.lib = minLib;
+	}
 	
 	//Minimum sensitivity.
 	if(player.sens > 100) player.sens = 100;
@@ -1823,10 +1848,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
-	//worms raise min lust!
-	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
-		if(player.lust < 50) player.lust = 50;
-	}
+	//worms moved to minLust() in Player.as.
 	if(player.lust > 100) player.lust = 100;
 	if(player.lust < 0) player.lust = 0;
 

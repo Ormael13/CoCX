@@ -1205,7 +1205,7 @@ public static const UNKNOWN_FLAG_NUMBER_01196:int                               
 public static const UNKNOWN_FLAG_NUMBER_01197:int                                   = 1197;
 public static const UNKNOWN_FLAG_NUMBER_01198:int                                   = 1198;
 public static const UNKNOWN_FLAG_NUMBER_01199:int                                   = 1199;
-public static const UNKNOWN_FLAG_NUMBER_01200:int                                   = 1200;
+public static const UNKNOWN_FLAG_NUMBER_01200:int                                           = 1200;
 public static const UNKNOWN_FLAG_NUMBER_01201:int                                   = 1201;
 public static const UNKNOWN_FLAG_NUMBER_01202:int                                   = 1202;
 public static const UNKNOWN_FLAG_NUMBER_01203:int                                   = 1203;
@@ -2998,8 +2998,8 @@ public static const UNKNOWN_FLAG_NUMBER_02989:int                               
 public static const GAME_DIFFICULTY:int  			                                = 2990; // 0 is medium, 1 is hard, 2 is nightmare mode. Affects levels of encounter.
 public static const HARDCORE_MODE:int       				                        = 2991; // 0 is disabled, 1 is enabled. Forces save and causes deletion of save file on bad end.
 public static const SURVIVAL_MODE:int         			 	                        = 2992; // 0 is disabled, 1 is enabled. Enables hunger.
-public static const PC_HUNGER:int               				                    = 2993; // Goes from 0 to 100. 100 is full, 0 is starving.
-public static const UNKNOWN_FLAG_NUMBER_02994:int                                   = 2994;
+public static const HUNGER_ENABLED:int               				                = 2993; // Determines if hunger is enabled. 1 is enabled.
+public static const PC_HUNGER:int                                                   = 2994; // Goes from 0 to 100. 100 is full, 0 is starving.
 public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // disables corruption requirement for certain buttfuck scenes.
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;

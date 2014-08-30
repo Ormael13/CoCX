@@ -21,7 +21,7 @@ package classes.Items.Weapons
 
 		public function Fists()
 		{
-			super("Fists  ", "Fists", "fists","fists \n\nType: Weapon (Unarmed) \Attack: 0 \nBase value: N/A","punch",0);
+			super("Fists  ", "Fists", "fists","fists \n\nType: Weapon (Unarmed) \nAttack: 0 \nBase value: N/A","punch",0);
 		}
 	}
 }

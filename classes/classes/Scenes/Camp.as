@@ -34,7 +34,10 @@
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(armor);
 		}
-
+		protected function hasItemsInBox():Boolean
+		{
+			return kGAMECLASS.inventory.hasItemsInBox();
+		}
 		public function Camp()
 		{
 		}
@@ -757,7 +760,7 @@ public function stash(exists:Boolean = true):Boolean {
 	
 	//Use to know if to show/hide stash.
 	if(exists) {
-		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
+		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
 	}
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
@@ -771,6 +774,8 @@ public function stash(exists:Boolean = true):Boolean {
 	var weaponRetrieve:Function = null;
 	var armorRack:Number = 0;
 	var armorRetrieve:Number = 0;
+	var jewelBox:Number = 0;
+	var jewelRetrieve:Number = 0;
 	var barrel:* = 0;
 	outputText("", true);
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
@@ -845,7 +850,47 @@ public function stash(exists:Boolean = true):Boolean {
 		}
 		outputText(".\n\n", false);
 	}
-	choices("Chest Store",storeStuff,"Chest Take",retrieveStuff,"W.Rack Put",weaponRack,"W.Rack Take",weaponRetrieve,"Anemone",barrel,"A.Rack Put",armorRack,"A.Rack Take",armorRetrieve,"",0,"",0,"Back",1);
+	var jewelNames:Array = [];
+	//Jewelry Box
+	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
+		trace(gearStorage);
+		trace(gearStorage.length);
+
+		outputText("Your jewelry box is located ", false);
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		{
+			outputText("on your nightstand next to your bed inside your cabin.", false);
+		}
+		else
+		{
+			outputText("next to your bedroll.", false);
+		}		
+		jewelBox = 1206;
+		if(hasItemsInBox()) {
+			jewelRetrieve = 1207;
+			temp = 18;
+			outputText("  It currently holds ", false);
+			while(temp < 27) {
+				if(gearStorage[temp].quantity > 0) {
+					jewelNames[jewelNames.length] = gearStorage[temp].itype.longName;
+				}
+				temp++;
+			}
+			if(jewelNames.length == 1) outputText(jewelNames[0], false);
+			else if(jewelNames.length == 2) outputText(jewelNames[0] + " and " + jewelNames[1], false);
+			else {
+				temp = 0;
+				while(temp < jewelNames.length) {
+					outputText(jewelNames[temp], false);
+					if(temp + 2 >= jewelNames.length && temp + 1 < jewelNames.length) outputText(", and ", false);
+					else if(temp + 1 < jewelNames.length) outputText(", ", false);
+					temp++;
+				}
+			}
+		}
+		outputText(".\n\n", false);
+	}
+	choices("Chest Store",storeStuff,"Chest Take",retrieveStuff,"W.Rack Put",weaponRack,"W.Rack Take",weaponRetrieve,"Anemone",barrel,"A.Rack Put",armorRack,"A.Rack Take",armorRetrieve,"J.Box Store",jewelBox,"J.Box Take",jewelRetrieve,"Back",1);
 	return true;
 }
 	

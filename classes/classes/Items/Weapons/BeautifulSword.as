@@ -14,7 +14,13 @@ package classes.Items.Weapons
 
 		override public function get attack():Number
 		{
-			return 7 + int(10 - game.player.cor / 3);
+			if (game.player.cor < 35) {
+				return 7 + int(10 - game.player.cor / 3);
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
 
@@ -33,7 +39,7 @@ package classes.Items.Weapons
 
 		public function BeautifulSword()
 		{
-			super("B.Sword", "B.Sword", "beautiful sword","a beautiful shining sword", "slash", 7, 400, "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade. \n\nType: Weapon (Sword) \Attack: Varies \nBase value: 400 \nRequires corruption of less than 35. The less corrupt you are, the more powerful this sword is.","holySword");
+			super("B.Sword", "B.Sword", "beautiful sword","a beautiful shining sword", "slash", 7, 400, "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade. \n\nType: Weapon (Sword) \nAttack: Depends on corruption \nBase value: 400 \nSpecial: Requires corruption of less than 35.","holySword");
 		}
 	}
 }

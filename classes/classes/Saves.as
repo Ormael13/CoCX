@@ -1694,14 +1694,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		//Set gear slot array
-		if (saveFile.data.gearStorage == undefined || saveFile.data.gearStorage.length < 18)
+		if (saveFile.data.gearStorage == undefined || saveFile.data.gearStorage.length < 27)
 		{
 			//trace("OLD SAVES DO NOT CONTAIN ITEM STORAGE ARRAY - Creating new!");
 			inventory.initializeGearStorage();
 		}
 		else
 		{
-			for (i = 0; i < saveFile.data.gearStorage.length && gearStorage.length < 20; i++)
+			for (i = 0; i < saveFile.data.gearStorage.length && gearStorage.length < 30; i++)
 			{
 				gearStorage.push(new ItemSlotClass());
 					//trace("Initialize a slot for one of the item storage locations to load.");

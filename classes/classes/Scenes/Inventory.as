@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.Items.Armor;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
+	import classes.Items.Jewelry;
 
 	use namespace kGAMECLASS;
 
@@ -35,6 +36,8 @@ package classes.Scenes
 		private function itemSlot(idx:int):ItemSlotClass{
 			return player.itemSlots[idx];
 		}
+		
+		
 public function doItems(eventNo:Number):void {
 	var temp1:* = 0;
 	var temp2:* = 0;
@@ -588,7 +591,10 @@ public function doItems(eventNo:Number):void {
 		placeInRacks(5, false);
 	}
 	else if(eventNo == 1090) {
-		pickItemToRacks();
+		pickItemToRacks(false);
+	}
+	else if(eventNo == 1091) {
+		chooseRacksSlot(false);
 	}
 	else if(eventNo == 1092) {
 		retrieveFromRacks(0, false);
@@ -666,6 +672,56 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1116) {
 		retrieveFromRacks(8, true);
 	}
+	/* Jewelry Box STORAGE */
+	else if(eventNo == 1201) {
+		placeInBox(1);
+	}
+	else if(eventNo == 1202) {
+		placeInBox(2);
+	}
+	else if(eventNo == 1203) {
+		placeInBox(3);
+	}
+	else if(eventNo == 1204) {
+		placeInBox(4);
+	}
+	else if(eventNo == 1205) {
+		placeInBox(5);
+	}
+	else if(eventNo == 1206) {
+		pickItemToBox();
+	}
+	else if(eventNo == 1207) {
+		chooseBoxSlot();
+	}
+	else if(eventNo == 1208) {
+		retrieveFromBox(0);
+	}
+	else if(eventNo == 1209) {
+		retrieveFromBox(1);
+	}
+	else if(eventNo == 1210) {
+		retrieveFromBox(2);
+	}
+	else if(eventNo == 1211) {
+		retrieveFromBox(3);
+	}
+	else if(eventNo == 1212) {
+		retrieveFromBox(4);
+	}
+	else if(eventNo == 1213) {
+		retrieveFromBox(5);
+	}
+	else if(eventNo == 1214) {
+		retrieveFromBox(6);
+	}
+	else if(eventNo == 1215) {
+		retrieveFromBox(7);
+	}
+	else if(eventNo == 1216) {
+		retrieveFromBox(8);
+	}
+
 	else if(eventNo == 1122) {
 		outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 		if(player.hipRating >= 15) {
@@ -866,6 +922,17 @@ public function doItems(eventNo:Number):void {
 				doNext(kGAMECLASS.telAdre.jewelShopInside);
 				return;
 			}
+			if (menuLoc == 35)
+			{
+				doNext(1207);
+				return;
+			}
+			if (menuLoc == 36)
+			{
+				doNext(returnToItems);
+				return;
+			}
+
 			if(menuLoc == 2) doNext(13);
 			else doNext(1);
 		}
@@ -1009,6 +1076,14 @@ public function doItems(eventNo:Number):void {
 			else if (menuLoc == 34)
 			{
 				abandon = kGAMECLASS.telAdre.jewelShopInside;
+			}
+			else if (menuLoc == 35)
+			{
+				abandon = 1207;
+			}
+			else if (menuLoc == 36)
+			{
+				abandon = manageEquipment;
 			}
 			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), createCallBackFunction2(replaceItem,itype,itemSlot1),
 					(itemSlot2.itype.shortName + " x" + itemSlot2.quantity), createCallBackFunction2(replaceItem,itype,itemSlot2),
@@ -1231,6 +1306,7 @@ public function doItems(eventNo:Number):void {
 		public function manageEquipment():void {
 			outputText("Which would you like to unequip?", true)
 			menu();
+			menuLoc = 36;
 			if (player.weaponName != "fists")
 			{
 				addButton(0, "Weapon", unequipWeapon);
@@ -1250,25 +1326,31 @@ public function doItems(eventNo:Number):void {
 		public function unequipWeapon():void {
 			if (player.weaponName != "fists")
 			{
+				menuLoc = 36;
 				outputText("You unequip your " + player.weaponName + ". ", true);
-				player.weapon.unequip(player, true, false);
+				
 				doNext(manageEquipment);
+				player.weapon.unequip(player, true, false);
 			}
 		}
 		public function unequipArmor():void {
 			if (player.armorName != "comfortable underclothes")
 			{
+				menuLoc = 36;
 				outputText("You unequip your " + player.armorName + ". ", true);
-				player.armor.unequip(player, true, false);
+				
 				doNext(manageEquipment);
+				player.armor.unequip(player, true, false);
 			}
 		}
 		public function unequipJewel():void {
 			if (player.jewelryName != "nothing")
 			{
+				menuLoc = 36;
 				outputText("You unequip your " + player.jewelryName + ". ", true);
-				player.jewelry.unequip(player, true, false);
+				
 				doNext(manageEquipment);
+				player.jewelry.unequip(player, true, false);
 			}
 		}
 		public function returnToItems():void {
@@ -1377,13 +1459,13 @@ public function doItems(eventNo:Number):void {
 
 		//Check to see if anything is stored in racks
 		public function hasItemsInRacks(armor:Boolean = false):Boolean {
-			var goal:Number = 0;
-			if(armor) goal = 9;
-			temp = gearStorage.length;
-			if(!armor) temp = 9;
-			while(temp > goal) {
-				temp--;
-				if(gearStorage[temp].quantity > 0) return true;
+			var goal:Number = 9;
+			if(armor) goal = 18;
+			temp = 0;
+			if(armor) temp = 9;
+			while(temp < goal) {
+				if (gearStorage[temp].quantity > 0) return true;
+				temp++;
 			}
 			return false;
 		}
@@ -1408,14 +1490,129 @@ public function doItems(eventNo:Number):void {
 			inventory.takeItem(itype);
 		}
 
+		//Place item slot into the first dump spot.
+		public function placeInBox(slotNum:Number):void {
+			outputText("", true);
+			var itype:ItemType = null;
+			var qty:Number = 0;
+			var temp2:Number = 0;
+			//Load the item stats from the slot that's being emptied, and empty the slot.
+			if(slotNum == 1) {
+				qty = itemSlot1.quantity;
+				itype = itemSlot1.itype;
+				itemSlot1.emptySlot()
+			}
+			if(slotNum == 2) {
+				qty = itemSlot2.quantity;
+				itype = itemSlot2.itype;
+				itemSlot2.emptySlot()
+			}
+			if(slotNum == 3) {
+				qty = itemSlot3.quantity;
+				itype = itemSlot3.itype;
+				itemSlot3.emptySlot()
+			}
+			if(slotNum == 4) {
+				qty = itemSlot4.quantity;
+				itype = itemSlot4.itype;
+				itemSlot4.emptySlot()
+			}
+			if(slotNum == 5) {
+				qty = itemSlot5.quantity;
+				itype = itemSlot5.itype;
+				itemSlot5.emptySlot()
+			}
+			//Place in the first free slot
+			temp = 18;
+			var goal:Number = 27;
+			//Check for slots with free space for the item.  If so fill them and move on
+			//until out of items to place
+			while(temp < goal && qty > 0) {
+				//If there is a slot with the item and room
+				if(gearStorage[temp].itype == itype && gearStorage[temp].quantity < 5) {
+					//temp2 is used for counting items placed in a slot.
+					temp2 = 0;
+					//Place items in 1 at a time until out of room or items
+					while(gearStorage[temp].quantity < 5 && qty > 0) {
+						qty--;
+						gearStorage[temp].quantity++;
+						temp2++;
+					}
+					if(temp2 > 0) outputText("You add " + temp2 + "x " + itype.shortName + " into storage slot number ", false);
+					outputText(num2Text(temp+-17) + ".\n", false);
+				}
+				temp++;
+			}
+			//Talk about items if they're all gone.
+			temp = 18;
+			goal = 27;
+			
+			//check if a suitable slot is found.  If so, load in, and quit out.
+			while(temp < goal && qty > 0) {
+				if(gearStorage[temp].quantity == 0) {
+					(gearStorage[temp] as ItemSlotClass).setItemAndQty(itype,qty);
+					outputText("You place " + qty + "x " + itype.shortName + " into storage slot ", false);
+					outputText(num2Text(temp+1) + ".\n", false);
+					temp = 25;
+					qty = 0;
+				}
+				temp++;
+			}
+			if(qty > 0) {
+				outputText("There is no room for the remaining " + qty + "x " + itype.shortName + ".  You leave it in your inventory.\n", false);
+				//Put remaining back in slot.
+				if(slotNum == 1) {
+					itemSlot1.setItemAndQty(itype, qty);
+				}
+				if(slotNum == 2) {
+					itemSlot2.setItemAndQty(itype, qty);
+				}
+				if(slotNum == 3) {
+					itemSlot3.setItemAndQty(itype, qty);
+				}
+				if(slotNum == 4) {
+					itemSlot4.setItemAndQty(itype, qty);
+				}
+				if(slotNum == 5) {
+					itemSlot5.setItemAndQty(itype, qty);
+				}
+			}
+			else doNext(1206);
+		}
+
+		//Check to see if anything is stored in jewelry box
+		public function hasItemsInBox():Boolean {
+			var goal:Number = 27;
+			temp = 18;
+			while(temp < goal) {
+				if(gearStorage[temp].quantity > 0) return true;
+				temp++;
+			}
+			return false;
+		}
+		//Grab an item from the selected weapon slot.
+		public function retrieveFromBox(slotNum:Number):void {
+			slotNum += 18
+			if(gearStorage[slotNum].quantity == 0) {
+				outputText("That slot is empty.", true);
+				return;
+			}
+			var itype:ItemType = gearStorage[slotNum].itype;
+			gearStorage[slotNum].quantity--;
+			outputText("", true);
+			doNext(1207);
+			menuLoc = 35;
+			inventory.takeItem(itype);
+		}
+		
 		//Retrieval List - lets you select the correct gear slot
 		public function chooseRacksSlot(armor:Boolean = false):void {
 			/*if(!hasItemsInGearStorage()) {
 				eventParser(1);
 				return;
 			}*/
-			var temp2:Number = 0;
 			var temp1:Number = 0;
+			var temp2:Number = 0;
 			var temp3:Number = 0;
 			var temp4:Number = 0;
 			var temp5:Number = 0;
@@ -1425,16 +1622,15 @@ public function doItems(eventNo:Number):void {
 			var temp9:Number = 0;
 			var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
 			//Set goals
-			var goal:Number = 0;
-			if(armor) goal = 9;
+			var goal:Number = 9;
+			if(armor) goal = 18;
 			//This modifies the event numbers for armor rack.
 			var bonus:Number = 0;
 			if(armor) bonus = 16;
 			//Set loop starting place
-			if(armor) temp = 18;
-			else temp = 9;
-			while(temp > goal) {
-				temp--;
+			if(armor) temp = 9;
+			else temp = 0;
+			while(temp < goal) {
 				trace("TEMP: " + temp);
 				if(gearStorage[temp].quantity > 0) {
 					if(temp == 0 || temp == 9) temp1 = 1092 + bonus;
@@ -1449,6 +1645,7 @@ public function doItems(eventNo:Number):void {
 					if(!armor) slotDescs[temp] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
 					else slotDescs[(temp-9)] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
 				}
+				temp++;
 			}
 			hideUpDown();
 			outputText("What rack slot do you wish to take an item from?", true);
@@ -1464,8 +1661,8 @@ public function doItems(eventNo:Number):void {
 		}
 		//Store - let you select an item slot, then a weapon slot.
 		public function pickItemToRacks(armor:Boolean = false):void {
-			var temp2:Number = 0;
 			var temp1:Number = 0;
+			var temp2:Number = 0;
 			var temp3:Number = 0;
 			var temp4:Number = 0;
 			var temp5:Number = 0;
@@ -1494,6 +1691,72 @@ public function doItems(eventNo:Number):void {
 			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 			if(!armor) menuLoc = 20;
 			else menuLoc = 22;
+		}
+		//Jewelry box!
+		public function chooseBoxSlot():void 
+		{
+			var temp1:Number = 0;
+			var temp2:Number = 0;
+			var temp3:Number = 0;
+			var temp4:Number = 0;
+			var temp5:Number = 0;
+			var temp6:Number = 0;
+			var temp7:Number = 0;
+			var temp8:Number = 0;
+			var temp9:Number = 0;
+			var slotDescs:Array = ["","","","","","","","","","","","","","","",""];
+			//Set goals
+			var goal:Number = 27;
+			//This modifies the event numbers for armor rack.
+			var bonus:Number = 0;
+			//Set loop starting place
+			temp = 18;
+			while (temp < goal) 
+			{
+				trace("TEMP: " + temp);
+				if (gearStorage[temp].quantity > 0) 
+				{
+					if(temp == 18) temp1 = 1208 + bonus;
+					if(temp == 19) temp2 = 1209 + bonus;//1031;
+					if(temp == 20) temp3 = 1210 + bonus;
+					if(temp == 21) temp4 = 1211 + bonus;
+					if(temp == 22) temp5 = 1212 + bonus;
+					if(temp == 23) temp6 = 1213 + bonus;
+					if(temp == 24) temp7 = 1214 + bonus;
+					if(temp == 25) temp8 = 1215 + bonus;
+					if(temp == 26) temp9 = 1216 + bonus;
+					slotDescs[temp-18] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
+				}
+				temp++;
+			}
+			hideUpDown();
+			outputText("What jewelry box slot do you wish to take an item from?", true);
+			if (temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7 + temp8 == 0) 
+			{
+				outputText("\n<b>You have no items stored in this jewelry box.", false);
+			}
+			choices(slotDescs[0], temp1, slotDescs[1], temp2, slotDescs[2], temp3, slotDescs[3], temp4, slotDescs[4], temp5, slotDescs[5], temp6, slotDescs[6], temp7, slotDescs[7], temp8, slotDescs[8], temp9, "Back", 2951);
+			menuLoc = 35;
+		}
+		//Store - let you select an item slot.
+		public function pickItemToBox():void 
+		{
+			var temp1:Number = 0;
+			var temp2:Number = 0;
+			var temp3:Number = 0;
+			var temp4:Number = 0;
+			var temp5:Number = 0;
+			var bonus:Number = 0;
+			hideUpDown();
+			if(itemSlot1.quantity > 0 && itemSlot1.itype is Jewelry) temp1 = 1201 + bonus;
+			if(itemSlot2.quantity > 0 && itemSlot2.itype is Jewelry) temp2 = 1202 + bonus;
+			if(itemSlot3.quantity > 0 && itemSlot3.itype is Jewelry) temp3 = 1203 + bonus;
+			if(itemSlot4.quantity > 0 && itemSlot4.itype is Jewelry && itemSlot4.unlocked) temp4 = 1204 + bonus;
+			if(itemSlot5.quantity > 0 && itemSlot5.itype is Jewelry && itemSlot5.unlocked) temp5 = 1205 + bonus;
+			outputText("What item slot do you wish to empty into your jewelry box?", true);
+			if(temp1 + temp2 + temp3 + temp4 + temp5 == 0) outputText("\n<b>You have no appropriate items to put in this jewelry box.</b>", false);
+			choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			menuLoc = 35;
 		}
 
 		/*
@@ -1565,7 +1828,7 @@ public function initializeGearStorage():void {
 	}
 	//Rebuild a new one!
 	var newSlot:*;
-	while(gearStorage.length < 18) {
+	while(gearStorage.length < 27) {
 		newSlot = new ItemSlotClass();
 		gearStorage.push(newSlot);
 	}

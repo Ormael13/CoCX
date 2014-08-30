@@ -23,7 +23,7 @@ package classes.Items.Weapons
 
 		public function EldritchStaff()
 		{
-			super("E.Staff","E.Staff","eldritch staff","an eldritch staff","thwack",10,WeaponLib.DEFAULT_VALUE,"This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power. \n\nType: Weapon (Magical) \Attack: 10 \nBase value: 6 \nSpecial: Wizard's Focus (+60% spell effect multiplier)","Wizard's Focus");
+			super("E.Staff","E.Staff","eldritch staff","an eldritch staff","thwack",10,WeaponLib.DEFAULT_VALUE,"This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power. \n\nType: Weapon (Magical) \nAttack: 10 \nBase value: 6 \nSpecial: Wizard's Focus (+60% spell effect multiplier)","Wizard's Focus");
 		}
 	}
 }
