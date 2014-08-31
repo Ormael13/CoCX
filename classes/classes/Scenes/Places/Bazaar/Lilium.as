@@ -202,7 +202,7 @@ private function liliumDickRidah():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)
-	player.knockUp(1,418);
+	player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
 	doNext(13);
 }
 

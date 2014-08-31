@@ -593,7 +593,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	//Enable village encounters
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!
-	if(player.pregnancyType == 11) player.pregnancyType = 4;
+	if (player.pregnancyType == player.PREGNANCY_AMILY) player.pregnancyType = player.PREGNANCY_MOUSE;
 	doNext(1);
 }
 

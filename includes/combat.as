@@ -408,7 +408,7 @@ public function doCombat(eventNum:Number):void
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
 						player.cuntChange(monster.cocks[0].cockThickness, true);
 						//Preggers chance!
-						player.knockUp(4, 432, 101);
+						player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 					}
 					if (player.gender == 0) {
 						outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);

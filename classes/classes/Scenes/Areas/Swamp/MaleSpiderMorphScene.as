@@ -236,7 +236,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("paying no heed to the thick flows of spunk that drip down your " + player.legs() + ".", false);
 			player.slimeFeed();
 			//Pregnancy Goes Here
-			player.knockUp(13, 400, 151);
+			player.knockUp(player.PREGNANCY_SPIDER, player.INCUBATION_SPIDER, 151);
 			player.orgasm();
 			cleanupAfterCombat();
 		}
@@ -381,7 +381,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You sigh and close your eyes, slowly slumping down while your hips keep twitching.  You've been sated, and though your body keeps hungering for more, you slip into unconsciousness.", false);
 			player.slimeFeed();
 			player.orgasm();
-			player.knockUp(13, 400);
+			player.knockUp(player.PREGNANCY_SPIDER, player.INCUBATION_SPIDER);
 			cleanupAfterCombat();
 		}
 

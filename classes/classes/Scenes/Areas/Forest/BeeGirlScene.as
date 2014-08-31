@@ -200,8 +200,8 @@ package classes.Scenes.Areas.Forest
 				player.slimeFeed();
 				//Anal bee pregnancy!
 				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = 48;
-					player.buttPregnancyType = 2;
+					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
+					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
 				}
 				player.buttChange(25, true);
 			}
@@ -225,8 +225,8 @@ package classes.Scenes.Areas.Forest
 				dynStats("int", -.5);
 				//Anal bee pregnancy!
 				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = 48;
-					player.buttPregnancyType = 2;
+					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
+					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
 				}
 			}
 			//non-dicked version
@@ -277,8 +277,8 @@ package classes.Scenes.Areas.Forest
 				player.slimeFeed();
 				//Anal bee pregnancy!
 				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = 48;
-					player.buttPregnancyType = 2;
+					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
+					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
 				}
 				player.buttChange(25, true);
 			}
@@ -556,8 +556,8 @@ package classes.Scenes.Areas.Forest
 					dynStats("int", -.5, "lus=", 100);
 					//Anal bee pregnancy!
 					if (player.totalFertility() > rand(100) && player.buttPregnancyType == 0) {
-						player.buttPregnancyIncubation = 48;
-						player.buttPregnancyType = 2;
+						player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
+						player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
 					}
 				}
 				player.slimeFeed();
@@ -596,8 +596,8 @@ package classes.Scenes.Areas.Forest
 					dynStats("int", -.5);
 					//Anal bee pregnancy!
 					if (rand(3) == 0 && player.buttPregnancyType == 0) {
-						player.buttPregnancyIncubation = 48;
-						player.buttPregnancyType = 2;
+						player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
+						player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
 					}
 					player.buttChange(25, true, true, false);
 

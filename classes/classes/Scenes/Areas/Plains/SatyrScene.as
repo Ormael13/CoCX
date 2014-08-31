@@ -396,15 +396,15 @@ private function willinglyBoneSatyr():void {
 
 //Pregnancy Stuff (Z)
 private function satyrPreggo():void {
-	if(player.hasVagina()) {
-		if(player.pregnancyIncubation == 0 && player.pregnancyType == 0) {
-			player.knockUp(19,160);
+	if (player.hasVagina()) {
+		if (player.pregnancyIncubation == 0 && player.pregnancyType == 0) {
+			player.knockUp(player.PREGNANCY_SATYR, player.INCUBATION_SATYR);
 		}
 	}
 	else {
-		if(player.buttPregnancyIncubation == 0 && player.buttPregnancyType == 0) {
-			player.buttPregnancyType = 19;
-			player.buttPregnancyIncubation = 160;
+		if (player.buttPregnancyIncubation == 0 && player.buttPregnancyType == 0) {
+			player.buttPregnancyType = player.PREGNANCY_SATYR;
+			player.buttPregnancyIncubation = player.INCUBATION_SATYR;
 		}
 	}
 }

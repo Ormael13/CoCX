@@ -235,10 +235,10 @@ private function bunbunFucksYourVag():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.", false);
 	//(Easter vag-preg + 8 hours pass)
 	if(player.bunnyScore() < 4) {
-		player.knockUp(9,808);
+		player.knockUp(player.PREGNANCY_BUNNY, player.INCUBATION_BUNNY_EGGS);
 	}
 	else {
-		player.knockUp(9,200,60);
+		player.knockUp(player.PREGNANCY_BUNNY, player.INCUBATION_BUNNY_BABY, 60);
 	}
 	player.orgasm();
 	dynStats("lib", 1, "sen", -3);
@@ -329,8 +329,8 @@ private function bunbunFucksPCInAss():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.", false);
 	//(Easter ass-preg + 8 hours pass)
 	if(player.buttPregnancyIncubation == 0) {
-		player.buttPregnancyIncubation = 808;
-		player.buttPregnancyType = 9;
+		player.buttPregnancyIncubation = player.INCUBATION_BUNNY_EGGS;
+		player.buttPregnancyType = player.PREGNANCY_BUNNY;
 	}
 	player.orgasm();
 	dynStats("lib", 1, "sen", 1);
@@ -960,10 +960,10 @@ private function getEggflated():void {
 	outputText("Eventually, enough of the eggs melt to let you stand under your own power.  You grab your [armor] but hold off on putting it on until you have a chance to shrink down to a more normal size.  Before you leave, you make sure to remove the rope from her wrists, for when she gathers her orgasm-blasted wits.");
 	//[If full bunny morph, End Encounter. Weight up, sensitivity down, fertility up.]
 	if(player.bunnyScore() < 4) {
-		player.knockUp(9,808);
+		player.knockUp(player.PREGNANCY_BUNNY, player.INCUBATION_BUNNY_EGGS);
 	}
 	else {
-		player.knockUp(9,200,60);
+		player.knockUp(player.PREGNANCY_BUNNY, player.INCUBATION_BUNNY_BABY, 60);
 		player.fertility++;
 	}
 	outputText(player.modThickness(100,3));

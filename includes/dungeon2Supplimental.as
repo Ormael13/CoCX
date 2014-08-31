@@ -350,8 +350,7 @@ public function impGangGetsRapedByFemale():void {
 	outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.", false);
 	if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
 	player.orgasm();
-	player.knockUp(1,418,50);
-
+	player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 14, 50);
 	cleanupAfterCombat();
 }
 

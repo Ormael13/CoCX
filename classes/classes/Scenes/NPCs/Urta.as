@@ -3755,7 +3755,7 @@ private function fillMeUpPleaseUrta():void {
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	player.slimeFeed();
-	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(21,515,25);
+	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
 	player.orgasm();
 	dynStats("lib", .2, "sen", -3);
 }
