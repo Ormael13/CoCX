@@ -1184,13 +1184,13 @@ public static const TREACLE_MINE_YEAR_DONE:int                                  
 public static const PLAYER_INFECTED_HELLHOUNDS:int									= 1176;
 public static const PLAYER_INFECTED_MINOTAURS:int                                   = 1177;
 public static const PLAYER_INFECTED_IMPS:int										= 1178;
-public static const UNKNOWN_FLAG_NUMBER_01179:int                                   = 1179;
-public static const UNKNOWN_FLAG_NUMBER_01180:int                                   = 1180;
-public static const UNKNOWN_FLAG_NUMBER_01181:int                                   = 1181;
-public static const UNKNOWN_FLAG_NUMBER_01182:int                                   = 1182;
-public static const UNKNOWN_FLAG_NUMBER_01183:int                                   = 1183;
+public static const FEMOIT_UNLOCKED:int                                   = 1179; // Unlocked the option to feminise Benoit
+public static const BIMBO_FEMOIT_UNLOCKED:int                                   = 1180; // Unlocked the option to bimbofy Benoit
+public static const BENOIT_STATUS:int                                   = 1181; // Benoits "mode" -- 0 = Male, 1 = Fem, 2 = Bimbo
+public static const FEMOIT_NEXTDAY_EVENT:int                                   = 1182; // Proc the event the following day when you visit - stores the minimum day number that the event can proc on.
+public static const FEMOIT_TALKED_TO:int                                   = 1183;
 public static const KATHERINE_RANDOM_RECRUITMENT_DISABLED:int                       = 1184;
-public static const UNKNOWN_FLAG_NUMBER_01185:int                                   = 1185;
+public static const TIMES_FUCKED_FEMOIT:int                                   = 1185;
 public static const UNKNOWN_FLAG_NUMBER_01186:int                                   = 1186;
 public static const UNKNOWN_FLAG_NUMBER_01187:int                                   = 1187;
 public static const UNKNOWN_FLAG_NUMBER_01188:int                                   = 1188;

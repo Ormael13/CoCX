@@ -27,8 +27,8 @@ public class Benoit extends BazaarAbstractContent {
 
 //Fen, you'll need a function to determine gendered pronouns and version of name for this character. I've formatted all the eligible places I found in the order of [male/female]. -Z
 public function benoitMF(stringM:String,stringF:String):String {
-	if(1 == 1) return stringM;
-	else return stringF;
+	if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) return stringF;
+	return stringM;
 }
 private function benoitLover():Boolean {
 	return flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] >= 2;
@@ -62,6 +62,7 @@ private function benoitKnocksUpPCCheck():void {
 //Introduction Scenes
 public function benoitIntro():void {
 	clearOutput();
+	var suggestText:String = "";
 	var suggest:Function = null;
 	var womb:Function = null;
 	if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
@@ -71,11 +72,17 @@ public function benoitIntro():void {
 		
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls his claws protectively into what appears to be a pile of robes sitting next to him, which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && flags[kFLAGS.BENOIT_STATUS] == 0) {
 		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
+		suggestText = "Suggest";
 	}
-	else {
+	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] != 0 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= this.getGame().model.time.days)
+	{
+		femoitNextDayEvent();
+	}
+	else
+	{
 		//Subsequent Visit, Affection 0-10: 
 		if(benoitAffection() <= 10) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then looks at you sourly.  \"<i>Well?</i>\" he rasps.");
 		//Benoit reacts after fucking the PC.
@@ -83,12 +90,25 @@ public function benoitIntro():void {
 			firstTimeAfterBoningEncounterBenoit();
 		else if(benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in his seat.  \"<i>Allo again, " + player.short + ".  What brings you 'ere?</i>\"");
 		//Subsequent Visit, Affection 35+ but pre-lover/pre-fem: 
-		else outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then smiles widely.  \"<i>If it isn't my favorite customer!  Do not 'ang around out zere, [name]; please, come in and let us, 'ow you say, chew ze fat.</i>\"");
+		else outputText("Once again, you carefully enter the gloom of "+ benoitMF("Benoit", "Benoite") +"'s salvage shop.  The proprietor sniffs the air as you enter, and then smiles widely.  \"<i>If it isn't my favorite customer!  Do not 'ang around out zere, [name]; please, come in and let us, 'ow you say, chew ze fat.</i>\"");
 	}
-	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina()) suggest = eggySuggest;
+
+	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && flags[kFLAGS.BENOIT_STATUS] == 0)
+	{
+		suggest = eggySuggest;
+		suggestText = "Suggest";
+	}
+
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0) womb = tryToConvertToBassyWomb;
-	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,"Suggest",suggest,"Basil. Womb",womb,"",0,"",0,"",0,"",0,"Leave",2855);
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS == 0]) womb = tryToConvertToBassyWomb;
+
+	var fem:Function;
+	var bimbo:Function;
+
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) fem = benoitFeminise;
+	if (flags[kFLAGS.BIMBO_FEMOIT_UNLOCKED] == 1) && flags[kFLAGS.BENOIT_STATUS] == 0) bimbo = benoitBimbofy;
+
+	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkTopics,suggestText,suggest,"Basil. Womb",womb,"Feminise",fem,"Bimbofy",bimbo,"",0,"",0,"Leave",2855);
 }
 
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
@@ -269,6 +289,7 @@ public function updateBenoitInventory():void {
 //Talk
 private function talkToBenoit():void {
 	clearOutput();
+
 	//(+5 Affection per day if used)
 	if(flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
@@ -303,6 +324,31 @@ private function talkToBenoit():void {
 		
 		outputText("\n\nHe shrugs. \"<i>What were we going to do?  Go down and throw ourselves on the mercy of the races 'oo despise us?  Ze demons offered to set us high in zeir service, augment our natural abilities if we agreed to help zem.  I suppose zey did, at zat.</i>\"  Benoit scratches a long groove in his counter, trembling with anger.  \"<i>By making us all male zey made sure we are always fixated on finding egg bearers, on keeping ze harpies down, and bringing scrap and statues to zem so zey don't do anysing worse to us.  We are just a brainless natural defence to zem now, in zeir mountain hideaways.  Don't go up ze mountain or ze evil basilisks will get you!  Bastards.  Bastards.</i>\"  Benoit finishes mutilating the wood in front of him and sighs.  \"<i>But zat is by ze by.  Are you going to buy sumsing or not?</i>\"");
 	}
+	// First time Femoit talk
+	else if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0)
+	{
+		flags[kFLAGS.FEMOIT_TALKED_TO]++;
+		outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
+
+		outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
+
+		if (!pc.hasCock()) outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
+		else
+		{
+			outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>” Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. “I ‘ave a purpose now.”\"<i>");
+
+			menu();
+			doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
+		}
+
+		return;
+	}
+	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && (flags[kFLAGS.FEMOIT_UNLOCKED] == 0 || flags[kFLAGS.BIMBO_FEMOIT_UNLOCKED] == 0))
+	{
+		femoitInitialTalk();
+		doNext(13);
+		return;
+	}
 	//Subsequent Talk
 	else {
 		var choice:int;
@@ -317,6 +363,13 @@ private function talkToBenoit():void {
 			choices[choices.length] = 11;
 			choices[choices.length] = 12;
 			choices[choices.length] = 13;
+		}
+		// Femoit specials
+		if (flags[kFLAGS.BENOIT_STATUS] != 0)
+		{
+			choices.push(14);
+			choices.push(15);
+			if (benoitLover()) choices.push(16);
 		}
 		//trace("BENOIT CHOICE: " + choice);
 		//Pick one and go!
@@ -390,7 +443,7 @@ private function talkToBenoit():void {
 		else if(choice == 10) {
 			outputText("You ask Benoit there is anything useful he can tell you about the demon strongholds.");
 			
-			outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" he sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
+			outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" "+benoitMF("he","she")+" sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
 		}
 		else if(choice == 11) {
 			outputText("You ask Benoit if he can suggest anything to help you fight his brethren in the high mountains.");
@@ -418,6 +471,38 @@ private function talkToBenoit():void {
 			outputText("You ask Benoit if he really, <b>really</b> can tell who you are just by smell.");
 			
 			outputText("\n\n\"<i>Well, of course I can,</i>\" he says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+		}
+		else if (choice == 14)
+		{
+			outputText("You ask Benoite how she’s getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.");
+
+			outputText("\n\n“<i>It is... different,</i>” she says eventually, before laughing at the platitude.  “<i>Ze ‘ole wizzing situation, zis is terrible for instance.  I do not know [name], I am so busy during ze day and it ‘appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like ‘ow somesing smells, and zen I catch myself sinking... would Benoit ‘ave sought zat? Is my perception different because I ‘ave different ‘ormones swirling around my ‘ead?</i>” She turns the plate around in her hands absently. “<i>Zerr are... uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realise I am doing somesing which is... male.  Like, somesing I would never ‘ave sought about before, walking with feet splayed instead of in a line.  A ‘undred and one sings to remember to not stand out.  Zat is wearying.</i>”");
+
+			if (benoitLover() && pc.hasCock() && pc.hasVagina()) outputText("\n\nShe smiles shyly at you. “<i>I am very lucky in one respect zo, because I ‘ave not ‘ad to resink what I find attractive to lie wizzyou.  Whatever you ‘ave between your legs you smell and feel female to me, and zat is a comfort.</i>”");
+			else if (benoitLover() && pc.hasCock() && !pc.hasVagina())
+			{
+				outputText("She smiles shyly at you. “<i>One sing I ‘ave definitely ‘ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per’aps zis is also why I ‘ave not sought about it too much; it is better just to rely on instinct.</i>”");
+				outputText("\n\nCharming, you say.");
+				outputText("\n\nBenoite grins wider at your affected hurt. “<i>Oh do not worry [name], you ‘ave a beautiful personality.  And ow important exactly do you sink your personal appearance is to me?</i>”");
+	}
+			else
+			{
+				outputText("\n\nShe smiles shyly at you. “<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>”");
+				outputText("\n\nYou point out that that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
+				outputText("\n\nBenoite nods thoughtfully. “<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>”");
+			}
+		}
+		else if (choice == 15)
+		{
+			outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
+
+			outputText("\n\n“<i>Zat is why I am wearing zis cunning disguise,</i>” she says, patting her large beret.  She lowers her voice to a growl. “<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>” she goes on in her normal tone, tightening her apron. “<i>Most of ze demons oo come ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>” She grins her long, meandering smile at you and you take her point.");
+		}
+		else if (choice == 16)
+		{
+			outputText("You ask Benoite if she really can tell who you are just by smell.");
+
+			outputText("\n\n“<i>Well, of course I can, zilly,</i>” she says teasingly. “<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>”");
 		}
 	}
 	doNext(13);
@@ -915,151 +1000,165 @@ public function popOutBenoitEggs():void {
 	//doNext(1);
 }
 
+//Feminising
 
+//Opening Talk
+//Requires: Affection 40+, Have already talked to Benoit at least once, have not had sex with Benoit
+public function femoitInitialTalk():void
+{
+	clearOutput();
 
+	outputText("You ask Benoit if he has ever thought about trying to do something to help his people's plight.");
+
+	outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" he says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about making certain... zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" he tails off, shrugging unhappily.  \"<i>But I just torment myself sinking about zis, [name].  Ze demons made us very resistant to change.  I would need somesing very powerful for me to become... somesing useful.</i>\"");
 
 /*
-Feminising
+	if (player.hasItem(consumables.BIMBOLQ))
+	{
+		outputText("\n\nA certain pink, effervescent liqueur suddenly feels very heavy in your pouch.  That would certainly be powerful enough to give Benoit what he wants... along with a lot of side effects.");
 
-Opening Talk
+		outputText("\n\n(\"<i>Bimbofy</i>\" option added to " + benoitMF("Benoit's","Benoite's") + " menu.)");
 
+		flags[kFLAGS.BIMBO_FEMOIT_UNLOCKED] = 1;
+	}
+	*/
 
-Requires: Affection 40+, Have already talked to Benoit at least once, have not had sex with Benoit
+	if (player.inte >= 60)
+	{
+		outputText("\n\nYou reckon that even a resistant creature could be made to transform to the opposite sex, with a strong enough potion, and ask Benoit about it.");
 
-You ask Benoit if he has ever thought about trying to do something to help his people's plight.
+		outputText("\n\n\"<i>Well... if you got a double dose of purified zuccubus milk, a large pink egg, zome ovi-elixir and some reptilum, you could probably do it...</i>\"");
 
-The basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" he says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about making certain... zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" he tails off, shrugging unhappily.  \"<i>But I just torment myself sinking about zis, [name].  Ze demons made us very resistant to change.  I would need somesing very powerful for me to become... somesing useful.</i>\"
+		outputText("\n\n(\"<i>Feminise</i>\" option added to " + benoitMF("Benoit's","Benoite's") + " menu.)");
 
-[Intelligence 60+: You reckon that even a resistant creature could be made to transform to the opposite sex, with a strong enough potion, and ask Benoit about it.
+		flags[kFLAGS.FEMOIT_UNLOCKED] = 1;
+	}
+	else
+	{
+		outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so end up simply sympathising with him.  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, with a smile.  \"<i>It is a foolish dream.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
+	}
+}
 
-\"<i>Well... if you got a double dose of purified zuccubus milk, a large pink egg, zome ovi-elixir and some reptilum, you could probably do it...</i>\" (\"<i>Feminize</i>\" option added to interaction menu)]
+// Feminise
 
-//Bimbo path NYI; comment out if coding this now
-[Bimbo Liqueur in inventory: A certain pink, effervescent liqueur suddenly feels very heavy in your pouch.  That would certainly be powerful enough to give Benoit what he wants... along with a lot of side effects. (\"<i>Bimbofy</i>\" option added to interaction menu)]
+public function benoitFeminise():void
+{
+	clearOutput();
 
-[Intelligence <60, no Liqueur: You rack your brain but can't think of anything that could help Benoit, so end up simply sympathising with him.  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, with a smile.  \"<i>It is a foolish dream.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"]
-Feminise
+	// Ingredients not in inventory
+	if (!player.hasItem(consumables.P_S_MLK, 2) || !player.hasItem(consumables.L_PNKEG) || !player.hasItem(consumables.OVIELIX) || !player.hasItem(consumables.REPTLUM))
+	{
+		outputText("You don't have the necessary ingredients to attempt this yet.");
+	}
+	else
+	{
+		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 
+		outputText("\n\n\"<i>I - what?</i>\" the basilisk says, bewildered.  \"<i>But... [name], zat was just fantasy!  I was not expecting you to...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You crack the egg against the bowl and then beat it into the milk; the goop takes on a pink cake-mix texture until you pour in the ovi-elixir, which thins it as well as filling the close market stall with a rather bad, sulfuric smell.  Carefully you drip in the reptilum whilst continuing to stir; eventually the liquid in front of you takes on a livid lime color.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  He slowly clasps his fingers around it, staring blindly into the concoction.");
 
-[Ingredients not in inventory: You don't have the necessary ingredients to attempt this yet.]
+		outputText("\n\n\"<i>And you sink zis will actually work?</i>\" he says eventually.  \"<i>Zat it will...change me?</i>\" You honestly have no idea - and you're quite glad Benoit can't see the color of it - but you tell him as confidently as you can that it will.  He sighs raggedly, his claws trembling slightly.  \"<i>Oh well, what is the worst that it could do - make me deaf?</i>\"  A look of horror settles on his face as the words leave his mouth, but he manages to shake the thought away and lifts the bowl to his lips.  \"<i>Sante,</i>\" he manages with a small smile, and then drinks.");
 
-Two purified succubus milks, a large pink egg, an ovi-elixir and reptilum in inventory: You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.
+		outputText("\n\nYou watch as the potion slides into his mouth and down his gullet.  When it is all gone he sets the bowl down and licks his lips thoughtfully.");
 
-\"<i>I - what?</i>\" the basilisk says, bewildered.  \"<i>But... [name], zat was just fantasy!  I was not expecting you to...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You crack the egg against the bowl and then beat it into the milk; the goop takes on a pink cake-mix texture until you pour in the ovi-elixir, which thins it as well as filling the close market stall with a rather bad, sulfuric smell.  Carefully you drip in the reptilum whilst continuing to stir; eventually the liquid in front of you takes on a livid lime color.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  He slowly clasps his fingers around it, staring blindly into the concoction.
+		outputText("\n\n\"<i>Well...not ze worst sing I have ever tasted,</i>\" he says. \"<i>It could 'ave used more alcoh-hol zo.  Uh.  Uhhhhhhh...</i>\"  He clenches the desk as a tremendous gurgling sound emanates from his gut.  Pierre whines, and unconsciously both you and the dog back away from the basilisk as he begins to twitch and spasm.  There is a grinding noise as his bones begin to shift; although he is holding onto the counter as hard as he can, he cannot stop knocking bottles and trinkets onto the floor as his flesh begins to move.  His torso sucks in, a great deal of mass moving downwards; the sound of long johns giving at the seams trades with an unpleasant cracking and popping sound as his shoulders shift inwards.  There is a sprouting sound as iridescent red feathers emerge upon his crown; below his clenched teeth and eyes, his jaw line softens and moves upwards.  The basilisk's now slighter front bulges faintly, and with that the transformation stops, or at least the transformation you can readily observe.  Judging by the way his gut continues to groan and the way he continues to clutch the wooden surface hard enough to leave yet more claw marks, something fairly significant is happening in the ruins of Benoit's long johns.");
 
-\"<i>And you sink zis will actually work?</i>\" he says eventually.  \"<i>Zat it will...change me?</i>\" You honestly have no idea - and you're quite glad Benoit can't see the color of it - but you tell him as confidently as you can that it will.  He sighs raggedly, his claws trembling slightly.  \"<i>Oh well, what is the worst that it could do - make me deaf?</i>\"  A look of horror settles on his face as the words leave his mouth, but he manages to shake the thought away and lifts the bowl to his lips.  \"<i>Sante,</i>\" he manages with a small smile, and then drinks.
+		outputText("\n\n\"<i>Zut.  Fucking.  Alors,</i>\" the basilisk manages at last.  The creature's voice has gone up by several octaves; although it is still deep, it now sounds rather... husky.  \"<i>Zat was almost as bad as zat time I tried goblin food.  Is...is zat me?</i>\" Benoit puts a claw to his... no, her throat in a panic.  Her hands then roam downwards and upwards, each new protuberance and crevice discovered amplifying her disquiet.  \"<i>Zis...zis can't be real,</i>\" she mutters.  \"<i>Zis can't actually 'ave 'appened...</i>\"  She turns as if to try and shake herself out of a dream, and knocks over a pile of books with her behind.  Your one salient thought as you watch is that whatever else you've managed to do to the blind basilisk, she certainly has it going on now.  She stands in the fairly impressive mess the two of you have created wringing her hands, apparently unwilling to move her new physique around for fear of knocking over even more of the stock.");
 
-You watch as the potion slides into his mouth and down his gullet.  When it is all gone he sets the bowl down and licks his lips thoughtfully.
+		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says Benoit unevenly.  \"<i>Zis is...I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
-\"<i>Well...not ze worst sing I have ever tasted,</i>\" he says. \"<i>It could 'ave used more alcoh-hol zo.  Uh.  Uhhhhhhh...</i>\"  He clenches the desk as a tremendous gurgling sound emanates from his gut.  Pierre whines, and unconsciously both you and the dog back away from the basilisk as he begins to twitch and spasm.  There is a grinding noise as his bones begin to shift; although he is holding onto the counter as hard as he can, he cannot stop knocking bottles and trinkets onto the floor as his flesh begins to move.  His torso sucks in, a great deal of mass moving downwards; the sound of long johns giving at the seams trades with an unpleasant cracking and popping sound as his shoulders shift inwards.  There is a sprouting sound as iridescent red feathers emerge upon his crown; below his clenched teeth and eyes, his jaw line softens and moves upwards.  The basilisk's now slighter front bulges faintly, and with that the transformation stops, or at least the transformation you can readily observe.  Judging by the way his gut continues to groan and the way he continues to clutch the wooden surface hard enough to leave yet more claw marks, something fairly significant is happening in the ruins of Benoit's long johns.
+		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days + 1;
 
-\"<i>Zut.  Fucking.  Alors,</i>\" the basilisk manages at last.  The creature's voice has gone up by several octaves; although it is still deep, it now sounds rather... husky.  \"<i>Zat was almost as bad as zat time I tried goblin food.  Is...is zat me?</i>\" Benoit puts a claw to his... no, her throat in a panic.  Her hands then roam downwards and upwards, each new protuberance and crevice discovered amplifying her disquiet.  \"<i>Zis...zis can't be real,</i>\" she mutters.  \"<i>Zis can't actually 'ave 'appened...</i>\"  She turns as if to try and shake herself out of a dream, and knocks over a pile of books with her behind.  Your one salient thought as you watch is that whatever else you've managed to do to the blind basilisk, she certainly has it going on now.  She stands in the fairly impressive mess the two of you have created wringing her hands, apparently unwilling to move her new physique around for fear of knocking over even more of the stock.
+		menu();
+		doNext(13);
+	}
+}
 
-\"<i>C... could you come back tomorrow?</i>\" says Benoit unevenly.  \"<i>Zis is...I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.
+public function femoitNextDayEvent():void
+{
+	clearOutput();
 
-Next visit: A strange, faint sound is emanating from the salvage shop.  It's only when you duck cautiously into the stall proper that you realise it's the sound of a basilisk humming.  Benoit stops to sniff the air when you come in, immediately puts down the mug she is polishing, and beckons you inside.
+	flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = 0;
+	flags[kFLAGS.BENOIT_STATUS] = 1;
 
-\"<i>[name]!</i>\" she says brightly.  \"<i>Do not be standing around zere!  Come in, I want to talk to you.</i>\"  You work your way to the counter and take her in.  She is wearing a beret instead of a fez, and an apron over her front, which combine to more or less disguise her new feathers and small, ornamental chest bumps.  However it is easy, or at least it is to you, to notice in the basilisk's jaw-line and considerable new hips and butt that her gender has definitely changed... you can only assume that her sex has as well, concealed under that apron.  She doesn't seem to mind you checking her out, or maybe she just doesn't realise.  You ask how Ben- you stop.
+	outputText("A strange, faint sound is emanating from the salvage shop.  It's only when you duck cautiously into the stall proper that you realise it's the sound of a basilisk humming.  Benoit stops to sniff the air when you come in, immediately puts down the mug she is polishing, and beckons you inside.");
 
-\"<i>You can call me Benoite.  Ben - oy,</i>\" she says, smiling.  \"<i>Zat is easy to adapt to, yes?  And I am fine.  Better zan fine; your potion worked perfectly.  I feel like I 'ave a new life now - before I was a sad excuse of a basilisk, going nowhere.  Now I 'ave a purpose.  A raison d'etre.  Also, being female 'as made me realize 'ow badly zis place needs a clean.  I get more customers now!</i>\"  She leans across the counter, her smile fading.  \"<i>Seriously, [name], you 'ave done my people a service I cannot repay.  I can lay eggs, zere can be more female basilisks, away from Lethice and 'er thugs.  All zis time I 'ave been trading potions, I could 'ave done it myself, and I never did.  Per'aps I sought I was too much a man or somesing.  Pah!  I was a coward, a cringing coward.  You forced me to decide, and because of zat, my people 'ave a chance.  Sank you.</i>\"  She sounds slightly choked, and stops for a moment. \"<i>It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say.</i>\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i>Now... is sir/madam buying or selling or what?</i>\"
+	outputText("\n\n\"<i>[name]!</i>\" she says brightly.  \"<i>Do not be standing around zere!  Come in, I want to talk to you.</i>\"  You work your way to the counter and take her in.  She is wearing a beret instead of a fez, and an apron over her front, which combine to more or less disguise her new feathers and small, ornamental chest bumps.  However it is easy, or at least it is to you, to notice in the basilisk's jaw-line and considerable new hips and butt that her gender has definitely changed... you can only assume that her sex has as well, concealed under that apron.  She doesn't seem to mind you checking her out, or maybe she just doesn't realise.  You ask how Ben- you stop.");
 
-[Benoite buys at same rate Oswald does and sells at a 33% discount]
-Benoite Interactions
+	outputText("\n\n\"<i>You can call me Benoite.  Ben - oy,</i>\" she says, smiling.  \"<i>Zat is easy to adapt to, yes?  And I am fine.  Better zan fine; your potion worked perfectly.  I feel like I 'ave a new life now - before I was a sad excuse of a basilisk, going nowhere.  Now I 'ave a purpose.  A raison d'etre.  Also, being female 'as made me realize 'ow badly zis place needs a clean.  I get more customers now!</i>\"  She leans across the counter, her smile fading.  \"<i>Seriously, [name], you 'ave done my people a service I cannot repay.  I can lay eggs, zere can be more female basilisks, away from Lethice and 'er thugs.  All zis time I 'ave been trading potions, I could 'ave done it myself, and I never did.  Per'aps I sought I was too much a man or somesing.  Pah!  I was a coward, a cringing coward.  You forced me to decide, and because of zat, my people 'ave a chance.  Sank you.</i>\"  She sounds slightly choked, and stops for a moment. \"<i>It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say.</i>\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i>Now... is " pc.mf("sir", "madam") + " buying or selling or what?</i>\"");
 
+	//[Benoite buys at same rate Oswald does and sells at a 33% discount]
+}
 
-First talk: You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.
+//Benoite Interactions
 
-\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"
+public function femoitFirstTimeNo():void
+{
+	clearOutput();
+	outputText("You let her down as kindly as you can.");
+	outputText("\n\n“<i>No, you are right,</i>” she says in a casual tone, although the colour is still very high in her scales. “<i>It would be way too weird zat, wouldn’t it? I will find someone though, never fear.  As I said before...</i>” Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. “<i>I ‘ave a purpose now.</i>”");
+	outputText("\n\nCatching a subtle tone of dissapointment in Benoite's voice, you bid her a quick farewell and head back to camp, deciding to give her some time to recover.");
+	menu();
+	doNext(13);
+}
 
-[PC doesn't have penis: You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"]
+public function femoitFirstTimeYes():void
+{
+	flags[kFLAGS.TIMES_FUCKED_FEMOIT]++;
 
-[PC has penis: You ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much-\"<i>]
+	clearOutput();
+	outputText("Smiling, you reach across the counter and squeeze Benoite's hands until her nervous babble dies out and she smiles back.  Still holding her hand, you move behind the crates and then gently lead her behind the stall's canopy.");
 
-Yes/No
+	outputText("\n\nWhat passes for Benoite's back office is perfect for your purposes; the two wagons between which her stall is sandwiched close together here and the triangular space is filled with crates and unsorted salvage.  You carefully inch your blind charge to a clear cranny and push her against a wooden wall, leaning into her as you gently undo her apron.  The excited bustle, thump and clatter of the carnival sounds like it's coming from a million miles away.");
 
-No: You let her down as kindly as you can.
+	outputText("\n\n\"<i>Zis is so weird,</i>\" she mumbles as you drop the garment onto the packed dirt and slowly move your hands up her smooth body to take her beret; you can't imagine what's going through her head, but looking into Benoite's snub lizard face and cloudy grey eyes, you can only agree with the sentiment.  Still...your eyes are drawn to her softer jaw line, her swollen chest and her bright feathers.  The fact that you did this to her, literally emasculated her and that she now wants you to take her, touches something deep and you eagerly begin to peel off your [armor], blood rushing to your groin. ");
 
-\"<i>No, you are right,</i>\" she says in a casual tone, although the crest is still very high on her head.  \"<i>It would be way too weird zat, wouldn't it?  I will find someone zough, never fear.  As I said before...</i>\"  Benoite points two fingers at her blind eyes and then at the stall entrance.   There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"
+	outputText("\n\n\"<i>Zis will sound strange,</i>\" says Benoite in a shivery voice, as you eventually stand before her naked, \"<i>But... would you mind if I just touched you a bit first?  All I know about you is ze sound of your voice.</i>\"  You acquiesce and draw close, sighing as she gently lays her hands upon you, holding her index claws back as she begins to move them slowly up and down.");
 
-Subsequent Talk
-
-
-[randomly generated, added to talk options from before]
-
-* You ask Benoite how she's getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.
-
-\"<i>It is...different,</i>\" she says eventually, before laughing at the platitude.  \"<i>Ze 'ole wizzing situation, zis is terrible for instance.  I do not know, [name], I am so busy during ze day and it 'appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like 'ow somesing smells, and zen I catch myself sinking... would Benoit 'ave sought zat?  Is my perception different because I 'ave different 'ormones swirling around my 'ead?</i>\"  She turns the plate around in her hands absently.  \"<i>Zerr are...uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realise I am doing somesing which is... male.  Like, somesing I would never 'ave sought about before, walking with feet splayed instead of in a line.  A 'undred and one sings to remember to not stand out.  Zat is wearying.</i>\"
-
-[PC lover, herm: She smiles shyly at you.  \"<i>I am very lucky in one respect zo, because I 'ave not 'ad to resink what I find attractive to lie wiz you.  Whatever you 'ave between your legs you smell and feel female to me, and zat is a comfort.</i>\"
-
-[PC lover, male: She smiles shyly at you.  \"<i>One sing I 'ave definitely 'ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per'aps zis is also why I 'ave not sought about it too much; it is better just to rely on instinct.</i>\"  How charming.  Benoite grins wider at your affected hurt.  \"<i>Oh, do not worry [name], you 'ave a beautiful personality.  And 'ow important exactly do you sink your personal appearance is to me?</i>\"]
-
-[Not lover: She smiles shyly at you.  \"<i>Listen to me, ow you say, riveting on.  You, I am guessing, do not see what ze big fuss is - you 'umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>\" You point out that your mutability is not always an advantage - it can be used against you, and this land is full of types who would be only too keen to do so.  Benoite nods thoughtfully.  \"<i>I never sought about it like zat.  Ze demons just love slaves zey can change wiz a few potions, don't zey?  You are right [name], I will count my blessings in ze future.  'Owever, I still find it a bit disconcerting when my body... responds... to ze smell of a male in rut.  I... 'ave still not worked up ze courage to ask anyone directly... even zo zere is still one person in particular I fancy.  But, ['e/she] has already done zo much for me... per'aps it would be asking too much, even zo I want my first time to be wis zat person... (present Yes/No) choice again]
-
-* You ask Benoite there is anything useful she can tell you about the demon strongholds.
-\"<i>I'm afraid I cannot be very elpful zere, [name],</i>\" she sighs. \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"
-
-* You ask Benoite if she isn't worried that demon customers won't notice what she is.
-
-\"<i>Zat is why I am wearing zis cunning disguise,</i>\" she says, patting her large beret.  She lowers her voice to a growl. \"<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I 'ave to be worrying much,</i>\" she goes on in her normal tone, tightening her apron. \"<i>Most of ze demons 'oo come ere are not very bright; zey are not very interested in anysing except when zey are next banging zeir bits togezer.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>\" She grins her long, meandering smile at you and you take her point.
-
-
-//lover only
-* You ask Benoite if she really can tell who you are just by smell.
-
-[Lover: \"<i>Well, of course I can, zilly,</i>\" she says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"]
-
-Sex
-
-
-Initial Yes: Smiling, you reach across the counter and squeeze Benoite's hands until her nervous babble dies out and she smiles back.  Still holding her hand, you move behind the crates and then gently lead her behind the stall's canopy.
-
-What passes for Benoite's back office is perfect for your purposes; the two wagons between which her stall is sandwiched close together here and the triangular space is filled with crates and unsorted salvage.  You carefully inch your blind charge to a clear cranny and push her against a wooden wall, leaning into her as you gently undo her apron.  The excited bustle, thump and clatter of the carnival sounds like it's coming from a million miles away.
-
-\"<i>Zis is so weird,</i>\" she mumbles as you drop the garment onto the packed dirt and slowly move your hands up her smooth body to take her beret; you can't imagine what's going through her head, but looking into Benoite's snub lizard face and cloudy grey eyes, you can only agree with the sentiment.  Still...your eyes are drawn to her softer jaw line, her swollen chest and her bright feathers.  The fact that you did this to her, literally emasculated her and that she now wants you to take her, touches something deep and you eagerly begin to peel off your [armor], blood rushing to your groin. 
-
-\"<i>Zis will sound strange,</i>\" says Benoite in a shivery voice, as you eventually stand before her naked, \"<i>But... would you mind if I just touched you a bit first?  All I know about you is ze sound of your voice.</i>\"  You acquiesce and draw close, sighing as she gently lays her hands upon you, holding her index claws back as she begins to move them slowly up and down.
-
-[Human/Ghost/unsorted (fuck kangaroos): Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>You 'umans are so squishy, fuzzy and 'ot,</i>\" she giggles huskily. \"<i>'Ow can you stand it?</i>\"]
-
-[Demon: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"]
-
-[Dog enough for ears and tail: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogsm but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"]
-
-[Cat/Bunny ears and Cat/Bunny tail: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.
-
-[Avian with wings and claws:  Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"]
-
-[Reptile scales or Naga: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She starts slightly when she touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>You didn't do zis just for me, did you [name]?</i>\" she murmurs.  \"<i>I 'ave to admit - it feels very good.</i>\"]
-
-[Bee with wings and boots: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your diaphanous wings and follows them up as far as she can reach, her grip on your sensitive membranes making you twitch a bit; then she sends her hands trailing down your carapace-armored limbs. \"<i>I always sought you just liked wearing big boots,</i>\" she murmurs. \"<i>But zis is actually a part of you?  'Ow...interesting.</i>\"]
-
-[Centaur: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"]
-
-[Drider: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"]
-
-[Slime: Her warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" she murmurs as her hands sink into your soft, amorphous mass.  \"<i>But zis is... good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" she asks incredulously as she gently pokes a finger into you.  You answer her question by laughing.  \"<i>Zat must come in very useful,</i>\" she says.  You push yourself slowly up her arms and tell her she has no idea.]
-
-Benoite's hands travel down your torso until, with a sharp intake of breath, she touches your \"<i> + cockDescript(0) + \"<i>.  After a pause, she slowly wraps her dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.  
-[cock 10 inches or less long: Although this is evidently an uncanny experience for her, she does manage a cocky smile as her hand moves around your sex.  \"<i>Mine was bigger,</i>\" she teases.  You reward her cheek by doing some feeling yourself, grasping her large, supple behind, making her squeak as you move into her.][cock  >10 inches: This is evidently an uncanny experience for her, the alien nature of it deepening as her hands moves around your sex. \"<i>'Oly Gods, [name]; you are a monster,</i>\" she says thickly.  You smile and decide it's time to do some feeling yourself; you grasp her large, supple behind, making her squeak as you move into her.]
-
-The scent of your arousal is in the air and as Benoite inhales it in her own breath comes heavier.  Still grasping her butt, you spread her hips to reveal her genital slit, gleaming with wetness.  Bracing her against the wall, you press your \"<i> + cock Descript(0) + \"<i> against her ready sex.  \"<i>Please be gentle,</i>\" says a husky, nervous voice below you.  You respond by slowly pushing open her lips and sliding your head into her warmth.
-
-Benoite's pussy is virginally tight and you go as slowly as you can, lightly moving your hips as you work more of your length in.  Sharp claws grasp your back as you feel resistance that gives as you push more of yourself in; blood trickles down your shaft to drip onto the floor.  You keep working her slowly, withdrawing almost completely before sinking yourself in, using your head on the outward pull to tease at the clit hidden in her folds.  Benoite seems almost frozen by what's happening; she simply clutches at your back, breathing heavily and allowing you to do all the work.  You don't mind; whatever her mind is thinking her body is responding to your methodical treatment, her lips widening and slick moisture oiling your dick as you press into that tight, graspingly tight tunnel.  [cock <15 inches no balls: Eventually you manage to hilt yourself entirely in her depths, your stomach pressing against her own tight belly.  ][if balls: Eventually you manage to hilt yourself in her depths, your \"<i> + ballsDescriptLight() + \"<i> pressing into her sex as your stomach bumps into her own tight belly.  ][cock >15 inches no balls: Eventually you manage to bottom out, your dick pressed against her cervix.  [if balls:  Eventually you manage to bottom out, your dick pressed against her cervix, your \"<i> + BallsDescriptLight() + \"<i> swinging heavily below your shaft.  ]Staying like that for a moment, you slowly withdraw almost all of the way out before pushing all the way in again, continuing the process, your grunts melding with Benoite's soft moans at the almost-agonizingly slow sex, exercising all the self-restraint you have not to begin pounding away at the basilisk's deliciously tight cunt.  Occasionally you pause at the deepest moment, waiting for your blood to cool down and letting Benoite get used to the sensation of being fully stuffed by you.
-
-Slowly, eventually, Benoite gets into it, her frozen limbs thawing to your loving, careful movement.  Beginning to pant, she moves her powerful hips with you, trying to draw your dick further into her.  Gratefully you begin to pick up the pace, thrusting into her with increasing force.  Her claws grip your back painfully as she pushes herself into you, the soft leather of her chest bumps squeezing into your \"<i> + allBreastsDescript() + \"<i>. [Lactation: the pressure and arousal makes your [nipple] dribble milk, spattering fluids across both of your chests.]  Soon the two of you are thrashing into each other, Benoite moaning huskily as you batter her against the wagon wall, both seeking your peak together, each pushing the other a bit further upwards.  Your world is lost to everything but the warm tightness around your \"<i> + cockDescript(0) + \"<i> and the pressure against your chest.
-Benoite howls as she orgasms, clutching you for dear life as she pushes as much of herself into you as she can.  The contractions around your cock are too much and with a bestial, wordless sound, you cum.  Your mind superseded by everything but that all-conquering animal imperative to breed, you hilt as much of yourself in Benoite, pushing as much of your seed upwards as you can, delivering rope after rope of cum until it dribbles out of her, dripping onto the floor to mingle with her blood.
-
-Eventually you pulse your last drop and return to yourself; slowly you lower Benoite to her feet.  She staggers slightly and clutches a stack of crates for support, your cum still beading out of her.
-
-\"<i>Phew!</i>\" she says after she's managed to catch her breath.  \"<i>That was...somesing.</i>\" You're slightly worried you went a bit too far with her, but when she has recovered herself a bit she advances on you with a wide, blissed-out grin.  She feels around until she finds your hands.  You suppose the done thing at this point is to kiss her, but you're not entirely sure how to do that.  As you hesitate, she opens her mouth, unrolls her long tongue and licks your face.  The sensation is warm and sticky and you find yourself laughing at the strange tenderness of the gesture. 
-
-\"<i>Sank you for zat, [name],</i>\" she says huskily. \"<i>Of course, I will need you to do zat again if it doesn't take.  And again, once ze first clutch is done.  Basically we will be doing zis a lot.  Purely for ze purpose of procreation, you understand.</i>\"  Grinning, you lead her back inside the shop and after squeezing her hand, take your leave.
-
-Subsequent Sex
-
-Requires: Benoite not pregnant
-
+	if (player.isTaur()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"");
+	else if (player.isDrider()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"");
+	else if (player.demonScore() > 4) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"")
+	else if (player.dogScore() >= 4 && player.earType == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogsm but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
+	else if ((player.bunnyScore() >= 4 && player.earType == 7 && player.tailType == 10) || (player.catScore() >= 4 && player.earType == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
+	else if (player.harpyScore() >= 4 && player.wingType != 0 && player.armType == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");
+	else if (player.beeScore() >= 4 && player.wingType != 0 && player.lowerBody = 7) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your diaphanous wings and follows them up as far as she can reach, her grip on your sensitive membranes making you twitch a bit; then she sends her hands trailing down your carapace-armored limbs. \"<i>I always sought you just liked wearing big boots,</i>\" she murmurs. \"<i>But zis is actually a part of you?  'Ow...interesting.</i>\"");
+	else if (player.gooScore() >= 4 && player.skinType == 3) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" she murmurs as her hands sink into your soft, amorphous mass.  \"<i>But zis is... good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" she asks incredulously as she gently pokes a finger into you.  You answer her question by laughing.  \"<i>Zat must come in very useful,</i>\" she says.  You push yourself slowly up her arms and tell her she has no idea.");
+	else if (player.skinType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She starts slightly when she touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>You didn't do zis just for me, did you [name]?</i>\" she murmurs.  \"<i>I 'ave to admit - it feels very good.</i>\"");
+	else outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>You 'umans are so squishy, fuzzy and 'ot,</i>\" she giggles huskily. \"<i>'Ow can you stand it?</i>\"");
+
+	outputText("\n\nBenoite's hands travel down your torso until, with a sharp intake of breath, she touches your [cock].  After a pause, she slowly wraps her dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.");
+	if (player.biggestCockLength() <= 10) outputText("  Although this is evidently an uncanny experience for her, she does manage a cocky smile as her hand moves around your sex.  \"<i>Mine was bigger,</i>\" she teases.  You reward her cheek by doing some feeling yourself, grasping her large, supple behind, making her squeak as you move into her.");
+	else outputText("  This is evidently an uncanny experience for her, the alien nature of it deepening as her hands moves around your sex. \"<i>'Oly Gods, [name]; you are a monster,</i>\" she says thickly.  You smile and decide it's time to do some feeling yourself; you grasp her large, supple behind, making her squeak as you move into her.");
+
+	outputText("\n\nThe scent of your arousal is in the air and as Benoite inhales it in her own breath comes heavier.  Still grasping her butt, you spread her hips to reveal her genital slit, gleaming with wetness.  Bracing her against the wall, you press your [cock] against her ready sex.  \"<i>Please be gentle,</i>\" says a husky, nervous voice below you.  You respond by slowly pushing open her lips and sliding your head into her warmth.");
+
+	outputText("Benoite's pussy is virginally tight and you go as slowly as you can, lightly moving your hips as you work more of your length in.  Sharp claws grasp your back as you feel resistance that gives as you push more of yourself in; blood trickles down your shaft to drip onto the floor.  You keep working her slowly, withdrawing almost completely before sinking yourself in, using your head on the outward pull to tease at the clit hidden in her folds.  Benoite seems almost frozen by what's happening; she simply clutches at your back, breathing heavily and allowing you to do all the work.  You don't mind; whatever her mind is thinking her body is responding to your methodical treatment, her lips widening and slick moisture oiling your dick as you press into that tight, graspingly tight tunnel.");
+	if (player.biggestCockLength() < 15 && player.balls == 0) outputText("  Eventually you manage to hilt yourself entirely in her depths, your stomach pressing against her own tight belly.");
+	else if (player.biggestCockLength() < 15player.balls > 0) outputText("  Eventually you manage to hilt yourself in her depths, your [balls] pressing into her sex as your stomach bumps into her own tight belly.");
+	else if (player.biggestCockLength() >= 15 && player.balls == 0) outputText("  Eventually you manage to bottom out, your dick pressed against her cervix.");
+	else if (player.biggestCockLength() >= 15 && player.balls > 0) outputText("  Eventually you manage to bottom out, your dick pressed against her cervix, your [balls] swinging heavily below your shaft.");
+	outputText("  Staying like that for a moment, you slowly withdraw almost all of the way out before pushing all the way in again, continuing the process, your grunts melding with Benoite's soft moans at the almost-agonizingly slow sex, exercising all the self-restraint you have not to begin pounding away at the basilisk's deliciously tight cunt.  Occasionally you pause at the deepest moment, waiting for your blood to cool down and letting Benoite get used to the sensation of being fully stuffed by you.");
+
+	outputText("\n\nSlowly, eventually, Benoite gets into it, her frozen limbs thawing to your loving, careful movement.  Beginning to pant, she moves her powerful hips with you, trying to draw your dick further into her.  Gratefully you begin to pick up the pace, thrusting into her with increasing force.  Her claws grip your back painfully as she pushes herself into you, the soft leather of her chest bumps squeezing into your [fullChest].");
+	if (player.isLactating()) outputText(" The pressure and arousal makes your [nipples] dribble milk, spattering fluids across both of your chests.");
+	outputText("  Soon the two of you are thrashing into each other, Benoite moaning huskily as you batter her against the wagon wall, both seeking your peak together, each pushing the other a bit further upwards.  Your world is lost to everything but the warm tightness around your [cock] and the pressure against your chest.");
+
+	outputText("\n\nBenoite howls as she orgasms, clutching you for dear life as she pushes as much of herself into you as she can.  The contractions around your cock are too much and with a bestial, wordless sound, you cum.  Your mind superseded by everything but that all-conquering animal imperative to breed, you hilt as much of yourself in Benoite, pushing as much of your seed upwards as you can, delivering rope after rope of cum until it dribbles out of her, dripping onto the floor to mingle with her blood.");
+
+	outputText("\n\nEventually you pulse your last drop and return to yourself; slowly you lower Benoite to her feet.  She staggers slightly and clutches a stack of crates for support, your cum still beading out of her.");
+
+	outputText("\n\n\"<i>Phew!</i>\" she says after she's managed to catch her breath.  \"<i>That was...somesing.</i>\" You're slightly worried you went a bit too far with her, but when she has recovered herself a bit she advances on you with a wide, blissed-out grin.  She feels around until she finds your hands.  You suppose the done thing at this point is to kiss her, but you're not entirely sure how to do that.  As you hesitate, she opens her mouth, unrolls her long tongue and licks your face.  The sensation is warm and sticky and you find yourself laughing at the strange tenderness of the gesture. ");
+
+	outputText("\n\n\"<i>Sank you for zat, [name],</i>\" she says huskily. \"<i>Of course, I will need you to do zat again if it doesn't take.  And again, once ze first clutch is done.  Basically we will be doing zis a lot.  Purely for ze purpose of procreation, you understand.</i>\"  Grinning, you lead her back inside the shop and after squeezing her hand, take your leave.");
+
+	player.orgasm();
+	menu();
+	doNext(13);
+}
+
+// Subsequent Sex
+// Requires: Benoite not pregnant
+public function femoitSexIntro():void
+{
 Once again, you take Benoite's hand and lead her into the back room.  Your free hand roams underneath her apron as you carefully pick out a path through the junk and Benoite is swiftly in on the game too; her fingers slide downwards to pinch and fondle at her favorite parts of you.  By the time you make it into the storage space you are practically falling over each other, laughing as you fumble off each other's clothes.
 
 Benoite's fingers travel down your sides as you lift her apron off her, her warm, smooth touch eventually falling upon your \"<i> + cockDescript(0) + \"<i>; already aware of every inch of you she rubs and coils you expertly, softly pumping you until you are straining before circling around your head with one finger ever so faintly, grinning slyly as she does.  Grunting with need, you push her insistently down onto the packed soil, shaking out of the last of your underclothes; Benoite spreads her thighs for you, her genital lips widened and moist with readiness. [In clutch: her stomach bulges with clutch and the air is thick with female musk; the sight and smell of overwhelming ripeness speaks to your body in a way which bypasses your higher cognition entirely, sending you growling on top her, barely even hearing her giggle.]
