@@ -1197,7 +1197,7 @@ public static const FEMOIT_READY_FOR_EGGS:int                                   
 public static const FEMOIT_FIRST_CLUTCH_MISSED:int                                   = 1189;
 public static const FEMOIT_EGGS_LAID:int                                   = 1190;
 public static const FEMOIT_HELPED_LAY:int                                   = 1191;
-public static const UNKNOWN_FLAG_NUMBER_01192:int                                   = 1192;
+public static const FEMOIT_SPOONED:int                                   = 1192;
 public static const UNKNOWN_FLAG_NUMBER_01193:int                                   = 1193;
 public static const UNKNOWN_FLAG_NUMBER_01194:int                                   = 1194;
 public static const UNKNOWN_FLAG_NUMBER_01195:int                                   = 1195;
