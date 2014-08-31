@@ -2913,6 +2913,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			inventory.takeItem(itype);
 			return true;
 		}
+		// Benoit preggers update
+		if (flags[kFLAGS.FEMOIT_EGGS] > 0) flags[kFLAGS.FEMOIT_INCUBATION]--; // We're not capping it, we're going to use negative values to figure out diff events
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...
