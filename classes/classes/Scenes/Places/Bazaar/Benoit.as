@@ -174,7 +174,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] != 0 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= this.getGame().model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0)
+	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= this.getGame().model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0)
 	{
 		femoitNextDayEvent();
 	}
@@ -266,7 +266,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0 && player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0)
+	if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0 && player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
 	{
 		suggest = femoitSexIntro;
 		suggestText = "Sex";
@@ -291,14 +291,18 @@ private function buyOrSellExplanationFirstTime():void {
 public function benoitsBuyMenu():void {
 	clearOutput();
 	if(flags[kFLAGS.BENOIT_1] == 0) updateBenoitInventory();
-	if(flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime();
+	if (flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime();
+	var buyMod:Number = 2;
+	
+	if (flags[kFLAGS.BENOIT_STATUS] == 1) buyMod = 1.66;
+	
 	else {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating his latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>", false);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + 2*ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value);
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
@@ -317,7 +321,7 @@ private function benoitSellMenu():void {
 		outputText("\"<i>Let us feel what you are trying to palm off upon me zis time, zen,</i>\" sighs Benoit, sitting down and opening his hand to you.");
 	}
 	var sellMod:int = 3;
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
+	if(flags[kFLAGS.BENOIT_EGGS] > 0 || flags[kFLAGS.BENOIT_STATUS] != 0) sellMod = 2;
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Estimates</u></b>", false);
 	if(player.itemSlot1.quantity > 0 && int(player.itemSlot1.itype.value/sellMod) > 0) {
 		outputText("\n" + int(player.itemSlot1.itype.value/sellMod) + " gems for " + player.itemSlot1.itype.longName + ".", false);
@@ -496,7 +500,7 @@ private function talkToBenoit():void {
 		outputText("\n\nHe shrugs. \"<i>What were we going to do?  Go down and throw ourselves on the mercy of the races 'oo despise us?  Ze demons offered to set us high in zeir service, augment our natural abilities if we agreed to help zem.  I suppose zey did, at zat.</i>\"  Benoit scratches a long groove in his counter, trembling with anger.  \"<i>By making us all male zey made sure we are always fixated on finding egg bearers, on keeping ze harpies down, and bringing scrap and statues to zem so zey don't do anysing worse to us.  We are just a brainless natural defence to zem now, in zeir mountain hideaways.  Don't go up ze mountain or ze evil basilisks will get you!  Bastards.  Bastards.</i>\"  Benoit finishes mutilating the wood in front of him and sighs.  \"<i>But zat is by ze by.  Are you going to buy sumsing or not?</i>\"");
 	}
 	// First time Femoit talk
-	else if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0)
+	else if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0 && flags[kFLAGS.BENOIT_STATUS] != 0)
 	{
 		flags[kFLAGS.FEMOIT_TALKED_TO]++;
 		outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
@@ -514,7 +518,7 @@ private function talkToBenoit():void {
 
 		return;
 	}
-	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && (flags[kFLAGS.FEMOIT_UNLOCKED] == 0 || flags[kFLAGS.BIMBO_FEMOIT_UNLOCKED] == 0))
+	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
 	{
 		femoitInitialTalk();
 		doNext(13);
@@ -1238,6 +1242,7 @@ public function benoitFeminise():void
 		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says Benoit unevenly.  \"<i>Zis is...I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
 		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days + 1;
+		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
 
 		menu();
 		doNext(13);
@@ -1249,12 +1254,17 @@ public function femoitNextDayEvent():void
 	clearOutput();
 
 	flags[kFLAGS.BENOIT_STATUS] = 1;
+	flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 2;
 
 	outputText("A strange, faint sound is emanating from the salvage shop.  It's only when you duck cautiously into the stall proper that you realise it's the sound of a basilisk humming.  Benoit stops to sniff the air when you come in, immediately puts down the mug she is polishing, and beckons you inside.");
 
 	outputText("\n\n\"<i>[name]!</i>\" she says brightly.  \"<i>Do not be standing around zere!  Come in, I want to talk to you.</i>\"  You work your way to the counter and take her in.  She is wearing a beret instead of a fez, and an apron over her front, which combine to more or less disguise her new feathers and small, ornamental chest bumps.  However it is easy, or at least it is to you, to notice in the basilisk's jaw-line and considerable new hips and butt that her gender has definitely changed... you can only assume that her sex has as well, concealed under that apron.  She doesn't seem to mind you checking her out, or maybe she just doesn't realise.  You ask how Ben- you stop.");
 
-	outputText("\n\n\"<i>You can call me Benoite.  Ben - oy,</i>\" she says, smiling.  \"<i>Zat is easy to adapt to, yes?  And I am fine.  Better zan fine; your potion worked perfectly.  I feel like I 'ave a new life now - before I was a sad excuse of a basilisk, going nowhere.  Now I 'ave a purpose.  A raison d'etre.  Also, being female 'as made me realize 'ow badly zis place needs a clean.  I get more customers now!</i>\"  She leans across the counter, her smile fading.  \"<i>Seriously, [name], you 'ave done my people a service I cannot repay.  I can lay eggs, zere can be more female basilisks, away from Lethice and 'er thugs.  All zis time I 'ave been trading potions, I could 'ave done it myself, and I never did.  Per'aps I sought I was too much a man or somesing.  Pah!  I was a coward, a cringing coward.  You forced me to decide, and because of zat, my people 'ave a chance.  Sank you.</i>\"  She sounds slightly choked, and stops for a moment. \"<i>It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say.</i>\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i>Now... is " + player.mf("sir", "madam") + " buying or selling or what?</i>\"");
+	outputText("\n\n\"<i>You can call me Benoite.  Ben - oy,</i>\" she says, smiling.  \"<i>Zat is easy to adapt to, yes?  And I am fine.  Better zan fine; your potion worked perfectly.  I feel like I 'ave a new life now - before I was a sad excuse of a basilisk, going nowhere.  Now I 'ave a purpose.  A raison d'etre.  Also, being female 'as made me realize 'ow badly zis place needs a clean.  I get more customers now!</i>\"");
+	
+	outputText("\n\nShe leans across the counter, her smile fading.  \"<i> Seriously, [name], you 'ave done my people a service I cannot repay.  I can lay eggs, zere can be more female basilisks, away from Lethice and 'er thugs.  All zis time I 'ave been trading potions, I could 'ave done it myself, and I never did.  Per'aps I sought I was too much a man or somesing.  Pah!  I was a coward, a cringing coward.  You forced me to decide, and because of zat, my people 'ave a chance.  Sank you. </i>\"");
+	
+	outputText("\n\nShe sounds slightly choked, and stops for a moment. \"<i> It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say. </i >\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i> Now... is " + player.mf("sir", "madam") + " buying or selling? </i>\" ");
 
 	//[Benoite buys at same rate Oswald does and sells at a 33% discount]
 }
@@ -1339,19 +1349,28 @@ public function femoitSexIntro():void
 
  		outputText("\n\nYou cup her large, supple behind and push into her wet opening, sighing as you reach a comfortable depth before slowly sliding in and out.  Benoite's hands move over you, reminding herself of you with dry, smooth pressure as you find a slow, silky rhythm.  The basilisk arches her back and moans hoarsely as you push more and more of your wick into her depths; she moves with you, wriggling her body to gently work your [cock] this way and that to enhance your sensation.");
 
- 		if (player.biggestCockLength() < 15) outputText("  Soon you are hilting yourself in her depths, making her gasp as you slap into her.");
- 		else outputText("  Soon you are bottoming out in her, making her gasp as your hulking length spreads her wide.");
+		outputText("\n\n");
+ 		if (player.biggestCockLength() < 15) outputText("Soon you are hilting yourself in her depths, making her gasp as you slap into her.");
+ 		else outputText("Soon you are bottoming out in her, making her gasp as your hulking length spreads her wide.");
  		outputText("  You quickly pick up the pace as you enter rut, thrusting into your basilisk lover with red-flecked abandon, her powerful thighs working with yours to make each return plunge into her warm depths more gratifying than the last.");
- 		if (!player.isTaur()) outputText("  Eventually, sweat dripping off you, you grab her thighs and heave them upwards so that you can really go to town, drawing yourself almost all the way out of her before smacking back into her,");
- 		if (!benoitInClutch()) outputText(" your stomach beating out a slapping rhythm against her own flat abdomen.");
- 		else outputText(" your stomach beating out a slapping rhythm against her bulging, gravid abdomen.");
- 		outputText("  Benoite moans, squeals and eventually screams to your exertions, her fluids spurting and spattering against your groin");
+		
+		outputText("\n\n");
+ 		if (!player.isTaur())
+		{
+			outputText("Eventually, sweat dripping off you, you grab her thighs and heave them upwards so that you can really go to town, drawing yourself almost all the way out of her before smacking back into her,");
+			if (!benoitInClutch()) outputText(" your stomach beating out a slapping rhythm against her own flat abdomen.  ");
+			else outputText(" your stomach beating out a slapping rhythm against her bulging, gravid abdomen.  ");
+		}
+ 		outputText("Benoite moans, squeals and eventually screams to your exertions, her fluids spurting and spattering against your groin");
  		if (player.balls > 0) outputText(" and [balls].  You tumble over your peak as her cunt suddenly tightens around yours, sending surge after surge of cum into her fertile depths, your body seized in a rictus of pleasure.");
  		if (player.cumQ() >= 2500) outputText("  The quantity of it is such that it quickly dribbles back out around your cock and pools on the floor.");
 
 		outputText("\n\nAfter you have both rode out the last of your mutual orgasm you lie for a time on the floor tangled together, enjoying the feeling of your smooth, scaly lover.");
 
 		outputText("\n\n\"<i>Big, zilly stud,</i>\" she says fondly, as she moves her hands, painting a picture of you in this moment she can hold on the walls of her mind for days to come.  Eventually, you get up, redress and quietly take your leave.  In your haze you manage to feel glad that she didn't leave quite so many claw marks on your back this time.");
+		
+		benoitKnockUp();
+		player.orgasm();
 	}
 	else if (benoitRegularPreggers() && (!player.isTaur() || (player.isTaur() && (player.tallness * (5/6) < player.cocks[player.longestCock()].cockLength))))
 	{
