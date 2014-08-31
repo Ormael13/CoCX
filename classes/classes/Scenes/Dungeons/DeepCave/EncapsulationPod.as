@@ -28,7 +28,7 @@
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
-			if(findStatusAffect(StatusAffects.Round) < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
+			if(findStatusAffect(StatusAffects.Round) < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  Your only chance of escape is to create a way out!";
 			//[Round 2 Description]
 			else if(statusAffectv1(StatusAffects.Round) == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
@@ -38,22 +38,22 @@
 			}
 			//[Round 3 Description]
 			else if(statusAffectv1(StatusAffects.Round) == 3) {
-				_long = "You're trapped inside the pod and being raped by it's many tentacles!   The pooling slime is constantly rising, and in a few moments it will have reached your groin.  The viscous sludge makes it hard to move and the smell of it is making it even harder to think or stand up.  The tentacles assaulting your groin don't stop moving for an instant, and in spite of yourself, some part of you wants them to make you cum quite badly.";
+				_long = "You're trapped inside the pod and being raped by its many tentacles!   The pooling slime is constantly rising, and in a few moments it will have reached your groin.  The viscous sludge makes it hard to move and the smell of it is making it even harder to think or stand up.  The tentacles assaulting your groin don't stop moving for an instant, and in spite of yourself, some part of you wants them to make you cum quite badly.";
 			}
 			//[Round 4 Description]
 			else {
-				_long = "You're trapped inside the pod and being violated from by tentacles from the shoulders down!  The slime around your waist is rising even faster now.  It will probably reach ";
+				_long = "You're trapped inside the pod and being violated by tentacles from the shoulders down!  The slime around your waist is rising even faster now.  It will probably reach ";
 				if(player.biggestTitSize() >= 1) _long += "the underside of your " + game.allBreastsDescript();
 				else _long += "your chest";
 				_long += " in moments.  You're being fucked by a bevy of tentacles while your nipples are ";
 				if(!player.hasFuckableNipples()) _long += "fondled ";
 				else _long += "fucked ";
-				_long += "by more of the slippery fungal protrusions.  It would be so easy to just relax back in the fluid and let it cradle you while you're pleasured.  You barely even smell the sweet, thought-killing scent from before, but you're hips are rocking on their own and you stumble every time you try to move.  Your resistance is about to give out!";
+				_long += "by more of the slippery fungal protrusions.  It would be so easy to just relax back in the fluid and let it cradle you while you're pleasured.  You barely even smell the sweet, thought-killing scent from before, but your hips are rocking on their own and you stumble every time you try to move.  Your resistance is about to give out!";
 			}
 			//[DAMAGE DESCRIPTS – Used All Rounds]
 			//[Greater than 80% Life]
 			if(HPRatio() > 0.8) {
-				_long += "  The pulsing luminescence continues to oscillate in a regular rhythm.  You haven't done enough damage to the thing to effect it in the slightest.";
+				_long += "  The pulsing luminescence continues to oscillate in a regular rhythm.  You haven't done enough damage to the thing to affect it in the slightest.";
 			}
 			//[Greater than 60% Life]
 			else if(HPRatio() > 0.6) {

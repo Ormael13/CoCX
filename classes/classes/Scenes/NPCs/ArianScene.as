@@ -2681,7 +2681,7 @@ private function giveIncubusDraftToArian():void {
 		if(flags[kFLAGS.ARIAN_COCK_SIZE] == 2) {
 			flags[kFLAGS.ARIAN_COCK_SIZE]++;
 			dynStats("lus", 10+player.lib/20);
-			outputText("\n\n[Arian Ey] manages to tuck it in, although you have the impression you wouldn't have to reach too far inside to feel it's tip.");
+			outputText("\n\n[Arian Ey] manages to tuck it in, although you have the impression you wouldn't have to reach too far inside to feel its tip.");
 			
 			outputText("\n\n\"<i>It's a tight fit, but I think I can still keep it inside,</i>\" Arian sighs in pleasure.  \"<i>It did feel good though; thank you, [name].</i>\"");
 			

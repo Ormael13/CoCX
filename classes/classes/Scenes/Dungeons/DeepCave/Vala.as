@@ -60,7 +60,7 @@ package classes.Scenes.Dungeons.DeepCave
 			else {
 				addStatusValue(StatusAffects.Vala,1,1);
 				if(statusAffectv1(StatusAffects.Vala) == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
-				else if(statusAffectv1(StatusAffects.Vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself? Won't you like that?</i>\"", false);
+				else if(statusAffectv1(StatusAffects.Vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself! Won't you like that?</i>\"", false);
 				else if(statusAffectv1(StatusAffects.Vala) == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
 				else if(statusAffectv1(StatusAffects.Vala) == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
 				else if(statusAffectv1(StatusAffects.Vala) == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);

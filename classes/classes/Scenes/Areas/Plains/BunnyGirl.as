@@ -131,7 +131,7 @@ private function rapeBunBun():void {
 	
 		outputText("Your belly feels warm and wet, and as you pull back to examine the bunny, the source of the moisture is revealed.  The girl isn't a girl at all!  She's got a hard 14-inch dick and a pair of bouncing, egg-sized balls that are working quite hard to leak bunny-cum onto you.  You reach down underneath the orbs and thankfully find another source of wetness.  At least you weren't completely wrong!  You're dealing with a hermaphrodite, and a horny one at that.  Why would she bother resisting when her body is so thrilled to be so close to you?\n\n", false);
 		
-		outputText("The horny bun-herm follows your gaze and breaks into a slowly spreading grin, revealing a pair of cute buck-teeth as she asks, \"<i>Oh you just wanted to fuck?  Why didn't you just ask?  I thought you were going to eat me!</i>\"  Her confident declaration does little to hide the bright red blush coloring her cheeks, making it clear this situation is a little strange to her.\n\n", false);
+		outputText("The horny bun-herm follows your gaze and breaks into a slowly spreading grin, revealing a pair of cute buck-teeth as she asks, \"<i>Oh, you just wanted to fuck?  Why didn't you just ask?  I thought you were going to eat me!</i>\"  Her confident declaration does little to hide the bright red blush coloring her cheeks, making it clear this situation is a little strange to her.\n\n", false);
 		
 		dynStats("lus", 10, "cor", 3);
 		outputText("(If you're going to sex her, which of her body parts will you use?", false);
@@ -180,7 +180,7 @@ private function bunbunFucksYourVag():void {
 	player.cuntChange(35, true);
 	outputText("\n\n", false);
 	
-	outputText("While the bunny was content to remain passive up till this point, a fire lights in her eyes now that she's had a taste of pussy.  Her petite hands grab hold of your " + assDescript() + " while she pulls her powerful, oddly-jointed legs underneath of her.  A split second later she pushes up with enough force to bounce you a few inches into the air before you drop down on top of her.  ", false);
+	outputText("While the bunny was content to remain passive up until this point, a fire lights in her eyes now that she's had a taste of pussy.  Her petite hands grab hold of your " + assDescript() + " while she pulls her powerful, oddly-jointed legs underneath of her.  A split second later she pushes up with enough force to bounce you a few inches into the air before you drop down on top of her.  ", false);
 	if(player.tallness >= 72) {
 		outputText("Your sheer weight makes her grunt in discomfort when you land back atop her, but the squish of copious sexual fluids nearly drowns it out. She even squirts another thick gout of pre inside you.  ", false);
 		if(player.cor < 33) outputText("You'll have to try to slow your descent next time!  ", false);
@@ -201,7 +201,7 @@ private function bunbunFucksYourVag():void {
 	player.cuntChange(70, true);
 	outputText("\n\n", false);
 	
-	outputText("The girl underneath you is thrashing and moaning, chanting, \"<i>yes...eggs eggs EGGS! YES!</i>\" while her ovipositor-like cock robs you of your strength and slides egg-shaped bulges inside you.  Amazingly, your " + vaginaDescript(0) + " is awash with pleasure, and you reach down to ", false);
+	outputText("The girl underneath you is thrashing and moaning, chanting, \"<i>Yes... eggs eggs EGGS! YES!</i>\" while her ovipositor-like cock robs you of your strength and slides egg-shaped bulges inside you.  Amazingly, your " + vaginaDescript(0) + " is awash with pleasure, and you reach down to ", false);
 	if(player.clitLength >= 4) outputText("fondle your " + clitDescript() + " a moment before wrapping your hand around it and stroking the girl-cock excitedly.", false);
 	else outputText("caress your " + clitDescript() + " a moment before you start to circle it with a finger, teasing it expertly.", false);
 	if(player.cockTotal() > 0) {
@@ -286,7 +286,7 @@ private function bunbunFucksPCInAss():void {
 	else outputText("sliding inside them, fucking their cunt-like interiors as you start to lose yourself to the pleasure.", false);
 	outputText("  The bunny reaches down to your " + assDescript() + " and gives it a gentle caress and squeeze.  A moment later both her hands are holding your butt-cheeks, guiding you up and down as you bounce atop her faster and faster.\n\n", false);
 		
-	outputText("You stroke the downy fur of her thighs through your fingers, marveling at her softness as you let the bunny start to set a tempo so fast that her pre-cum is squirting out with each wet, gushy fuck.   She occasionally gives your ass a gentle slap and starts moaning and panting out loud with every heated penetration, \"<i>Fuck...Breed...MMmm...Yes....Eggs eggs pleaseletmeegg!</i>\" It's hard to pay attention with the rising pleasure surging through your body", false);
+	outputText("You stroke the downy fur of her thighs through your fingers, marveling at her softness as you let the bunny start to set a tempo so fast that her pre-cum is squirting out with each wet, gushy fuck.   She occasionally gives your ass a gentle slap and starts moaning and panting out loud with every heated penetration, \"<i>Fuck... breed... mmm... yes... eggs eggs pleaseletmeegg!</i>\" It's hard to pay attention with the rising pleasure surging through your body", false);
 	if(player.cockTotal() > 0) {
 		outputText(", and " + sMultiCockDesc() + " pouring incredibly sticky pre-cum each time she squeezes your prostate", false);
 	}
