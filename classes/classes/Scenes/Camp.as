@@ -30,13 +30,9 @@
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
-		protected function hasItemsInRacks(armor:Boolean = false):Boolean
+		protected function hasItemsInRacks(type:Number = 0):Boolean
 		{
-			return kGAMECLASS.inventory.hasItemsInRacks(armor);
-		}
-		protected function hasItemsInBox():Boolean
-		{
-			return kGAMECLASS.inventory.hasItemsInBox();
+			return kGAMECLASS.inventory.hasItemsInRacks(type);
 		}
 		public function Camp()
 		{
@@ -419,7 +415,7 @@ public function doCamp():void {
 	var lovers:* = 0;
 	var slaves:* = 0;
 	var storage:* = 0;
-	if(stash()) storage = 2951;
+	if(stash()) storage = initiateStash;
 	if(places(false)) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
@@ -642,7 +638,7 @@ public function doCamp():void {
 			{
 				outputText("robes", false);
 			}
-			outputText(". ~Rathazul</i>\".", false);
+			outputText(". -Rathazul</i>\".", false);
 			outputText("\n\n", false);			
 		}
 	}
@@ -754,7 +750,10 @@ public function doCamp():void {
 	//Slaves
 
 }
-
+public function initiateStash():void {
+	trace("Initiating stash");
+	stash(false);
+}	
 
 public function stash(exists:Boolean = true):Boolean {
 	
@@ -770,12 +769,12 @@ public function stash(exists:Boolean = true):Boolean {
 	var storeStuff:Number = 0;
 	if(hasItemsInStorage()) retrieveStuff = kGAMECLASS.inventory.chooseRetrievalSlot;
 	if(itemStorage.length > 0) storeStuff = 1028;
-	var weaponRack:Number = 0;
+	var weaponRack:Function = null;
 	var weaponRetrieve:Function = null;
-	var armorRack:Number = 0;
-	var armorRetrieve:Number = 0;
-	var jewelBox:Number = 0;
-	var jewelRetrieve:Number = 0;
+	var armorRack:Function = null;
+	var armorRetrieve:Function = null;
+	var jewelBox:Function = null;
+	var jewelRetrieve:Function = null;
 	var barrel:* = 0;
 	outputText("", true);
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
@@ -796,9 +795,9 @@ public function stash(exists:Boolean = true):Boolean {
 	//Weapon rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
 		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.", false);
-		weaponRack = 1090;
-		if(hasItemsInRacks(false)) {
-			weaponRetrieve = inventory.chooseRacksSlot;
+		weaponRack = inventory.initiateStoreWeaponRack;
+		if(hasItemsInRacks(0)) {
+			weaponRetrieve = inventory.initiateTakeWeaponRack;
 			temp = 0;
 			outputText("  It currently holds ", false);
 			while(temp < 9) {
@@ -825,9 +824,9 @@ public function stash(exists:Boolean = true):Boolean {
 	//Armor Rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
 		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.", false);
-		armorRack = 1106;
-		if(hasItemsInRacks(true)) {
-			armorRetrieve = 1107;
+		armorRack = inventory.initiateStoreArmorRack;
+		if(hasItemsInRacks(1)) {
+			armorRetrieve = inventory.initiateTakeArmorRack;
 			temp = 9;
 			outputText("  It currently holds ", false);
 			while(temp < 18) {
@@ -853,9 +852,6 @@ public function stash(exists:Boolean = true):Boolean {
 	var jewelNames:Array = [];
 	//Jewelry Box
 	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
-		trace(gearStorage);
-		trace(gearStorage.length);
-
 		outputText("Your jewelry box is located ", false);
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
 		{
@@ -865,9 +861,9 @@ public function stash(exists:Boolean = true):Boolean {
 		{
 			outputText("next to your bedroll.", false);
 		}		
-		jewelBox = 1206;
-		if(hasItemsInBox()) {
-			jewelRetrieve = 1207;
+		jewelBox = inventory.initiateStoreJewelryBox;
+		if(hasItemsInRacks(2)) {
+			jewelRetrieve = inventory.initiateTakeJewelryBox;
 			temp = 18;
 			outputText("  It currently holds ", false);
 			while(temp < 27) {

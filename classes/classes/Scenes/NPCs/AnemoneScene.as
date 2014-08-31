@@ -1117,7 +1117,7 @@ package classes.Scenes.NPCs
 				}
 
 			}
-			addButton(9, "Back", eventParser, 2951);
+			addButton(9, "Back", eventParser, camp.initiateStash);
 		}
 
 //[Item](only appears if hourssinceKiditem flag >= 16)
@@ -1212,7 +1212,7 @@ package classes.Scenes.NPCs
 			if (player.itemSlot5.unlocked && giveableToAnemone(player.itemSlot5))
 				temp5 = createCallBackFunction(placeInAnemone,5);
 			if (temp1 != null || temp2 != null || temp3 != null || temp4 != null || temp5 != null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
-			choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", camp.initiateStash);
 		}
 
 		public function placeInAnemone(slot:Number = 1):void

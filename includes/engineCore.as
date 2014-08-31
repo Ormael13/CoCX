@@ -682,6 +682,9 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Inventory") != -1) {                
 		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
+	if(buttonText.indexOf("Items") != -1) {                
+		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
+	}
 	if(buttonText.indexOf("AutoSav") != -1) {                
 		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
 		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";

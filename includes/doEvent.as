@@ -2323,10 +2323,11 @@ public function doEvent(eventNo:Number):void
 		statScreenRefresh();
 		doNext(2017);
 	}
-	else if (eventNo == 2951)
+	//Disabled. All references to calling for stash has changed and the lines may be deleted.
+	/*else if (eventNo == 2951)
 	{
 		camp.stash(false);
-	}
+	}*/
 	else if (eventNo == 2968)
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] = 1;
