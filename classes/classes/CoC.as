@@ -338,8 +338,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15";
-			version = ver + " (<b>Green dyes + Jewelries</b>)";
+			ver = "0.8.14_modtest1";
+			version = ver + " (<b>Mod Test 1</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
