@@ -2254,7 +2254,7 @@
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//Drink text
 			outputText("Opening the crystal vial, you are greeted by a super-concentrated wave of sweet honey-scent.  It makes you feel lightheaded.  You giggle and lick the honey from your lips, having drank down the syrupy elixir without a thought.", true);
-			if (pure && player.isPregnant() && player.pregnancyType == player.PREGNANCY_FAERIE) { //Pure Honey can reduce the corruption of a phouka baby
+			if (pure && player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) { //Pure Honey can reduce the corruption of a phouka baby
 				if (flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
 					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
 				}
@@ -2615,8 +2615,16 @@
 			var changes:Number = 0;
 			//Females!
 			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.", true);
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) {
+				outputText("\n\nFor a moment you feel even more bloated than you already are. That feeling is soon replaced by a dull throbbing pain. It seems that with Valeria's goo filling your womb the ovielixir is unable to work its magic on you.");
+				return;
+			}
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_WORM_STUFFED) {
+				outputText("\n\nFor a moment you feel even more bloated than you already are. That feeling is soon replaced by a dull throbbing pain. It seems that with the worms filling your womb the ovielixir is unable to work its magic on you.");
+				return;
+			}
 			//If player already has eggs, chance of size increase!
-			if (player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 				if (player.findStatusAffect(StatusAffects.Eggs) >= 0) {
 					//If eggs are small, chance of increase!
 					if (player.statusAffectv2(StatusAffects.Eggs) == 0) {
@@ -2638,7 +2646,7 @@
 			//If the player is not pregnant, get preggers with eggs!
 			if (player.pregnancyIncubation == 0) {
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!", false);
-				player.knockUp(player.PREGNANCY_OVIELIXIR_EGGS, player.INCUBATION_OVIELIXIR_EGGS, 1, 1);
+				player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 				//v1 = egg type.
 				//v2 = size - 0 for normal, 1 for large
 				//v3 = quantity
@@ -2646,10 +2654,11 @@
 				changes++;
 			}
 			//If no changes, speed up pregnancy.
-			if (changes == 0 && player.pregnancyIncubation > 20 && player.pregnancyType != player.PREGNANCY_BUNNY) {
+			if (changes == 0 && player.pregnancyIncubation > 20 && player.pregnancyType != PregnancyStore.PREGNANCY_BUNNY) {
 				outputText("\n\nYou gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.", false);
-				player.pregnancyIncubation -= int(player.pregnancyIncubation * .3 + 10);
-				if (player.pregnancyIncubation < 1) player.pregnancyIncubation = 2;
+				var newIncubation:int = player.pregnancyIncubation - int(player.pregnancyIncubation * .3 + 10);
+				if (newIncubation < 2) newIncubation = 2;
+				player.knockUpForce(player.pregnancyType, newIncubation);
 				trace("Pregger Count New total:" + player.pregnancyIncubation);
 			}
 		}
@@ -5177,12 +5186,12 @@
 			//If pregnancy, warning!
 			if (pregnantChange) {
 				outputText("\n<b>Your egg-stuffed ", false);
-				if (player.pregnancyType == player.PREGNANCY_BUNNY) {
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) {
 					outputText("womb ", false);
-					if (player.buttPregnancyType == player.PREGNANCY_BUNNY) outputText("and ", false);
+					if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("and ", false);
 				}
-				if (player.buttPregnancyType == player.PREGNANCY_BUNNY) outputText("backdoor ", false);
-				if (player.buttPregnancyType == player.PREGNANCY_BUNNY && player.pregnancyType == player.PREGNANCY_BUNNY) outputText("rumble", false);
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("backdoor ", false);
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY && player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("rumble", false);
 				else outputText("rumbles", false);
 				outputText(" oddly, and you have a hunch that something's about to change</b>.", false);
 			}
@@ -8192,7 +8201,7 @@
   						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
   						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
   						player.minoCumAddiction(5);
-						player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR, 175);
+						player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 175);
   						player.consumeItem(consumables.MINOCUM);
   					}
           }

@@ -3,15 +3,37 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class SandWitchScene extends BaseContent{
-
-		public function SandWitchScene()
-		{
-		}
+	public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 
 //const EGG_WITCH_TYPE:int = 589;
 //const EGG_WITCH_COUNTER:int = 588;
 
+		public var pregnancy:PregnancyStore;
+
+		public function SandWitchScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.EGG_WITCH_TYPE, kFLAGS.EGG_WITCH_COUNTER, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_BEE_EGGS, 96);
+												//Event: 0 (= not pregnant), 1, 2 (< 96)
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_DRIDER_EGGS, 96);
+												//Event: 0 (= not pregnant), 1, 2 (< 96)
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			trace("\nSand Witch time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) pregnancy.knockUpForce(); //Silently clear the Sand Witch's pregnancy if the player has not met her in time
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 internal function sandwitchRape():void {
 	spriteSelect(50);
 	player.clearStatuses(false);
@@ -727,10 +749,11 @@ private function laySomeEggsInThatWitchFinally():void {
 	else outputText("goopy");
 	outputText(" lubricant drooling out of her in the absence of your intimate plug.  Utterly overwhelmed and exhausted, the sand witch resigns herself to gathering strength in the bright, blistering gaze of the desert sun.  Smiling to yourself, you take to re-donning your discarded [armor], remarking as you leave that you look forward to the next encounter; a sentiment the sorceress must agree with as she weakly waves to you, holding her stomach with her arms and filled with motherly delight at the thought of carrying your brood.");
 	//Give her ze eggs!
-	if(player.fertilizedEggs() > 0) {
-		flags[kFLAGS.EGG_WITCH_COUNTER] = 1;
-		if(player.canOvipositBee()) flags[kFLAGS.EGG_WITCH_TYPE] = 1;
-		else flags[kFLAGS.EGG_WITCH_TYPE] = 2;
+	if (player.fertilizedEggs() > 0) {
+		if (player.canOvipositBee())
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 192);
+		else
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 192);
 	}
 	player.dumpEggs();
 	player.orgasm();
@@ -824,9 +847,8 @@ private function sandwitchBirthsYourMonstrosities():void {
 	outputText(", whisper in her ear that you'll see her again...");
 	
 	//[(corr >= 60)
-	if(player.cor >= 60) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
-	flags[kFLAGS.EGG_WITCH_COUNTER] = 0;
-	flags[kFLAGS.EGG_WITCH_TYPE] = 0;
+	if (player.cor >= 60) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
+	pregnancy.knockUpForce(); //Clear Pregnancy
 	doNext(13);
 }
 
@@ -841,8 +863,7 @@ public function witchBirfsSomeBees():void {
 	outputText("; likely it was just waiting for someone to find their mother before taking off in the general direction of the forest.  The weak voice of the desert vixen fills the air as she speaks to you.  \"<i>That... was the best.  I can't believe I'm a mother!</i>\"  She gives you a look of appreciation for showing her how pleasurable being a host can be.  Seeing she needs her rest, you give a nod and turn to leave... only to feel a hand grasp at your [leg].  \"<i>I would be disappointed if you didn't come around and 'say hello' more often; keep that in mind " + player.mf("handsome","beautiful") + ".</i>\"  She coos, before drifting off to sleep.  She'll be fine in this shady part of the desert while she rests, the dune currently obstructing the sun and keeping her from being burned from the sun's rays.");
 	
 	outputText("\n\nContent with how things turned out, you head back to camp and decide on the next course of action for today.");
-	flags[kFLAGS.EGG_WITCH_COUNTER] = 0;
-	flags[kFLAGS.EGG_WITCH_TYPE] = 0;
+	pregnancy.knockUpForce(); //Clear Pregnancy
 	doNext(13);
 }
 

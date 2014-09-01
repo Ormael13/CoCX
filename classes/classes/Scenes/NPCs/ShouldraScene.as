@@ -3,11 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class ShouldraScene extends NPCAwareContent {
-
-	public function ShouldraScene()
-	{
-	}
+	public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface {
 
 //const TIMES_MET_SHOULDRA:int = 351;
 //const TIMES_BEATEN_SHOULDRA:int = 352;
@@ -26,6 +22,63 @@
 //const SLIMEGINAED:int = 509;
 //const GHOST_GIRL_SLIME_X_SHOULDRA_COUNTER:int = 510;
 
+		public function ShouldraScene()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			if (flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] >= 1) flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN]--;
+			if (shouldraFollower.followerShouldra()) {
+				if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.hasCock() && rand(10) == 0) {
+					if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 1) {
+						shouldraFollower.exgartumonAndShouldraFightPartII();
+						needNext = true;
+					}
+					else if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 2) {
+						shouldraFollower.exgartumonAndShouldraFightPartIII();
+						needNext = true;
+					}
+				}
+				flags[kFLAGS.SHOULDRA_SLEEP_TIMER]--;
+				if (shouldraFollower.shouldersWarnings()) needNext = true;
+				if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] == 0 || (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < 0 && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] % 16 == 0)) {
+					shouldraFollower.shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
+					needNext = true;
+				}
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			//Ghostgirl recruitment priority
+			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
+				kGAMECLASS.shouldraFollower.morningShouldraAlert();
+				return true;
+			}
+			//Ghostgirl pissed off dreams
+			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
+				kGAMECLASS.shouldraFollower.nightTimeShouldraRapesThePC();
+				return true;
+			}
+			//Ghostgirl madness
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] > 0) {
+				if (player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina())
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 0;
+				else {
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
+					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0) {
+						paladinModeFollowup();
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 //Intro
 internal function shouldraGreeting():void {

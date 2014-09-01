@@ -7,18 +7,39 @@ package classes.Scenes.Areas.Swamp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class FemaleSpiderMorphScene extends BaseContent
+	public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInterface
 	{
+
+		public var pregnancy:PregnancyStore;
+
 		public function FemaleSpiderMorphScene()
 		{
+			pregnancy = new PregnancyStore(kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE, kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 100);
+												//Event: 0 (= not pregnant),  1,  2 (< 100)
+			CoC.timeAwareClassAdd(this);
 		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) pregnancy.knockUpForce(); //Silently clear the spider morph's pregnancy if the player doesn't see the egg sac in time
+			trace("\nFemale Spidermorph time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 		public function fSpiderMorphGreeting():void
 		{
 			outputText("", true);
 			spriteSelect(73);
 			//Egg sack sometimes
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] < 100) {
+			if (pregnancy.event == 2) { //If she's past event 2 then she has laid the eggs
 				findASpiderMorphEggSack();
 				return;
 			}
@@ -582,7 +603,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("  You get dressed and head back to camp.", false);
 
 			player.orgasm();
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
 		}
@@ -649,7 +670,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.cumQ() < 500) outputText("gush", false);
 			else outputText("river", false);
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.", false);
-			if (y != 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
+			if (y != 1) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
 			player.orgasm();
 			if (!inCombat()) doNext(13);
 			else cleanupAfterCombat();
@@ -663,7 +684,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You stumble upon a huge, webbed sack hanging from a tree.  Examining it closer, you see that bound up inside it are nearly a dozen webs, each containing a wriggling form.  They start moving faster and faster, perhaps reacting to the nearby movement, before the shells finally shatter and unleash their cargo.  Inside each is a tiny, six inch tall humanoid figure, each resembling a child in miniature.  Remarkably, their features remind you of your own, and before the significance of that fact settles in, they drop to the ground and scurry away on their tiny, carapace-covered legs.\n\n", false);
 
 			outputText("You're left scratching your head when you realize they were your own children, birthed by the spider-morph you fucked not so long ago.\n\n", false);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 0;
+			pregnancy.knockUpForce(); //Clear Spidermorph pregnancy
 			doNext(13);
 		}
 

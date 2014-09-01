@@ -43,6 +43,11 @@ use namespace kGAMECLASS;
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
+		//Player pregnancy variables and functions
+		override public function pregnancyUpdate():Boolean {
+			return game.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
+		}
+
 		// Inventory
 		public var itemSlot1:ItemSlotClass;
 		public var itemSlot2:ItemSlotClass;

@@ -297,13 +297,10 @@ private function genderlessLoss():void {
 
 private function sandTrapPregChance():void {
 	//Only happens if PC aint already buttpregged
-	if(player.buttPregnancyIncubation == 0) {
-		if(monster.findStatusAffect(StatusAffects.Fertilized) >= 0) {
-			player.buttPregnancyType = player.PREGNANCY_BUTT_SANDTRAP_FERTILE;
-		}
-		else player.buttPregnancyType = player.PREGNANCY_BUTT_SANDTRAP;
-		player.buttPregnancyIncubation = player.INCUBATION_BUTT_SANDTRAP;
-	}
+	if (monster.findStatusAffect(StatusAffects.Fertilized) >= 0)
+		player.buttKnockUp(PregnancyStore.PREGNANCY_SANDTRAP_FERTILE, PregnancyStore.INCUBATION_SANDTRAP, 1, 1);
+	else
+		player.buttKnockUp(PregnancyStore.PREGNANCY_SANDTRAP, PregnancyStore.INCUBATION_SANDTRAP, 1, 1);
 }
 
 public function birfSandTarps():void {

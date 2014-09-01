@@ -44,8 +44,8 @@ package classes.Scenes.Areas
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}
-			if (flags[kFLAGS.EGG_WITCH_COUNTER] >= 4 && flags[kFLAGS.EGG_WITCH_TYPE] > 0 && rand(4) == 0) {
-				if (flags[kFLAGS.EGG_WITCH_TYPE] == 2) sandWitchScene.sammitchBirthsDriders();
+			if (sandWitchScene.pregnancy.event == 2 && rand(4) == 0) {
+				if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) sandWitchScene.sammitchBirthsDriders();
 				else sandWitchScene.witchBirfsSomeBees();
 				return;
 			}

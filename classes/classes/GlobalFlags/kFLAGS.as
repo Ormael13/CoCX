@@ -5,9 +5,9 @@ package classes.GlobalFlags
 {
 	public class kFLAGS
 	{
-	public static const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
-public static const MARBLE_PREGNACY_INCUBATION:int                                  =    1; // Marble Pregnancy Incubation
-public static const MARBLE_PREGNACY_TYPE:int                                        =    2; // Marble Pregnancy Type" Description="1 = cowgirl
+public static const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
+public static const MARBLE_PREGNANCY_INCUBATION:int                                 =    1; // Marble Pregnancy Incubation
+public static const MARBLE_PREGNANCY_TYPE:int                                       =    2; // Marble Pregnancy Type" Description="1 = cowgirl
 public static const MARBLE_LUST:int                                                 =    3; // Marble Lust
 public static const MARBLE_DICK_TYPE:int                                            =    4; // Marble Dick Type
 public static const MARBLE_DICK_LENGTH:int                                          =    5; // Marble Dick Length
@@ -76,7 +76,7 @@ public static const TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY:int               
 public static const EDRYN_PREGNANCY_INCUBATION:int                                  =   68; // 
 public static const EDRYN_NUMBER_OF_KIDS:int                                        =   69; // EDRYN: Kids
 public static const EDRYN_NEVER_SEE_AGAIN:int                                       =   70; // EDRYN: NEVER SEE AGAIN
-public static const EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET:int                           =   71; // EDRYN: Pregnancy Panic happen?
+public static const EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET:int                          =   71; // EDRYN: Pregnancy Panic happen?
 public static const EDRYN_NEEDS_TO_TALK_ABOUT_KID:int                               =   72; // EDRYN: Gotta talk about kid
 public static const EDRYN_GIFT_COUNTER:int                                          =   73; // EDRYN: GOOD HAND OUTS
 public static const AMILY_MET_PURE_JOJO:int                                         =   74; // AMILY: Met pure jojo
@@ -98,7 +98,7 @@ public static const COMBAT_BONUS_XP_VALUE:int                                   
 public static const MET_SOPHIE_COUNTER:int                                          =   90; // Met Sophie?
 public static const FUCKED_SOPHIE_COUNTER:int                                       =   91; // Times Had Sex With Sophie
 public static const BREASTFEAD_SOPHIE_COUNTER:int                                   =   92; // Times Breastfed Sophie
-public static const SOPHIE_WILD_EGG_COUNTDOWN_TIMER:int                             =   93; // Sophie's Egg Countdown Timer
+public static const SOPHIE_PREGNANCY_TYPE:int                                       =   93; // Was previously SOPHIE_WILD_EGG_COUNTDOWN_TIMER
 public static const SOPHIE_EGGS_LAID:int                                            =   94; // Sophie eggs laid
 public static const PC_CURRENTLY_LUSTSTICK_AFFECTED:int                             =   95; // N
 public static const SOPHIE_ANGRY_AT_PC_COUNTER:int                                  =   96; // Sophie Pissed Off Counter
@@ -255,10 +255,10 @@ public static const UNKNOWN_FLAG_NUMBER_00246:int                               
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
 public static const UNKNOWN_FLAG_NUMBER_00248:int                                   =  248; // Izma Preggers Discussion
 public static const UNKNOWN_FLAG_NUMBER_00249:int                                   =  249; // Pregnancy Enabled (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00250:int                                   =  250; // Izma's Incubation timer
-public static const UNKNOWN_FLAG_NUMBER_00251:int                                   =  251; // Izma sharkgirls
-public static const UNKNOWN_FLAG_NUMBER_00252:int                                   =  252; // Izma tigersharks
-public static const UNKNOWN_FLAG_NUMBER_00253:int                                   =  253; // Izma Nu Book Countdown
+public static const IZMA_INCUBATION:int                                             =  250; // Izma's Incubation timer
+public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
+public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
+public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
 public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes)
 public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (Should this be 1=yes?)
 public static const UNKNOWN_FLAG_NUMBER_00256:int                                   =  256; // PC decided to approach Isabella's camp yet? 1
@@ -274,12 +274,12 @@ public static const UNKNOWN_FLAG_NUMBER_00265:int                               
 public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
 public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
-public static const PLAYER_DISARMED_WEAPON_ATTACK:int                                   =  269; // weapon damage
+public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
-public static const UNKNOWN_FLAG_NUMBER_00271:int                                   =  271; // Spider Preggo Timer
+public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
 public static const UNKNOWN_FLAG_NUMBER_00272:int                                   =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
-public static const UNKNOWN_FLAG_NUMBER_00274:int                                   =  274; // Rathazul silk armor queue - 1 = armor done!
+public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes
 public static const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
 public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
@@ -289,7 +289,7 @@ public static const UNKNOWN_FLAG_NUMBER_00280:int                               
 public static const UNKNOWN_FLAG_NUMBER_00281:int                                   =  281; // TIMES ENCOUNTERED LOTTIE
 public static const UNKNOWN_FLAG_NUMBER_00282:int                                   =  282; // Sophie Bimbo Follower?
 public static const UNKNOWN_FLAG_NUMBER_00283:int                                   =  283; // Sophie Disabled Forever
-public static const UNKNOWN_FLAG_NUMBER_00284:int                                   =  284; // Has Ovi Event Procced?
+public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
 public static const UNKNOWN_FLAG_NUMBER_00285:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
 public static const UNKNOWN_FLAG_NUMBER_00286:int                                   =  286; // Have Ceraph's belly-button piercing
 public static const UNKNOWN_FLAG_NUMBER_00287:int                                   =  287; // Carrying Careph's token?
@@ -337,7 +337,7 @@ public static const UNKNOWN_FLAG_NUMBER_00328:int                               
 public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329; // Minos wasting a turn? (1 = yes)
 public static const UNKNOWN_FLAG_NUMBER_00330:int                                   =  330; // Cooldown on minotaur cum repeat messages
 public static const UNKNOWN_FLAG_NUMBER_00331:int                                   =  331; // Times Jojo Milked
-public static const UNKNOWN_FLAG_NUMBER_00332:int                                   =  332; // Jojo milk cooldown 4 hours
+public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
 public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
 public static const FAP_ARENA_VICTORIES:int                                         =  335; // Fap Arena victories
@@ -441,7 +441,7 @@ public static const KIHA_CHOKED_OUT_PC:int                                      
 public static const VALA_CUMBATH_TIMES:int                                          =  433; // 
 public static const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int                           =  434; // 
 public static const AMILY_X_JOJO_COOLDOWN:int                                       =  435; // 
-public static const AMILY_INCEST_COUNTDOWN_TIMER:int                                =  436; // 1 = timer started, 30 = RIPE FOR INCEST
+public static const AMILY_INCEST_COUNTDOWN_TIMER:int                                =  436; // 1 = timer started, 30 days = RIPE FOR INCEST
 public static const YVONNE_FUCK_COUNTER:int                                         =  437; // 
 public static const TIMES_CERAPH_PORTAL_FUCKED:int                                  =  438; // 
 public static const IZMA_NO_COCK:int                                                =  439; // 
@@ -591,7 +591,7 @@ public static const URTA_EGGS:int                                               
 public static const URTA_FERTILE_EGGS:int                                           =  583; // 
 public static const URTA_EGG_FORCE_EVENT:int                                        =  584; // 
 public static const URTA_TIMES_EGG_PREGGED:int                                      =  585; // 
-public static const URTA_EGG_INCUBATION:int                                         =  586; // 
+public static const URTA_PREGNANCY_TYPE:int                                         =  586; //Previously URTA_EGG_INCUBATION
 public static const URTA_FLATBELLY_NOTICE:int                                       =  587; // 
 public static const EGG_WITCH_COUNTER:int                                           =  588; // 
 public static const EGG_WITCH_TYPE:int                                              =  589; // 
@@ -727,7 +727,7 @@ public static const URTA_TENTACLE_GAPED:int                                     
 public static const URTA_IS_VULQUINE_MENACE:int                                     =  719; // 
 public static const URTA_RAPED_MINO_LORD:int                                        =  720; // 
 public static const URTA_MINO_AND_SUCCUBI_SLAVE:int                                 =  721; // 
-public static const EDRYN_BIRF_COUNTDOWN:int                                        =  722; // 
+public static const EDRYN_PREGNANCY_TYPE:int                                        =  722; //In previous versions was EDRYN_BIRF_COUNTDOWN - Corrected in Saves.unFuckSave()
 public static const URTA_FERTILE:int                                                =  723; // 
 public static const URTA_PREG_EVERYBODY:int                                         =  724; // 
 public static const KELT_BREAK_LEVEL:int                                            =  725; // 
@@ -747,7 +747,7 @@ public static const SOPHIE_INCUBATION:int                                       
 public static const SOPHIE_BROACHED_SLEEP_WITH:int                                  =  739; // 
 public static const SOPHIE_ADULT_KID_COUNT:int                                      =  740; // 
 public static const SOPHIE_DAUGHTER_MATURITY_COUNTER:int                            =  741; // 
-public static const SOPHIE_CAMP_EGG_COUNTDOWN:int                                          =  742; // 
+public static const SOPHIE_CAMP_EGG_COUNTDOWN:int                                   =  742; // 
 public static const SOPHIE_FAMILY_INCEST:int                                        =  743; // 
 public static const RATHAZUL_DEBIMBO_OFFERED:int                                    =  744; // 
 public static const SOPHIE_DEBIMBOED:int                                            =  745; // 
@@ -767,7 +767,7 @@ public static const HAD_KID_A_DREAM:int                                         
 public static const CUSTOM_PC_ENABLED:int                                           =  759; // 
 public static const SHEILA_CORRUPTION:int                                           =  760; // 
 public static const SHEILA_XP:int                                                   =  761; // 
-public static const SHEILA_PREG:int                                                 =  762; // 
+public static const SHEILA_PREGNANCY_INCUBATION:int                                 =  762; //Previously SHEILA_PREG
 public static const SHEILA_JOEYS:int                                                =  763; // 
 public static const SHEILA_DEMON:int                                                =  764; // 
 public static const SHEILA_CITE:int                                                 =  765; // 
@@ -913,7 +913,7 @@ public static const KELLY_BONUS_BOOB_ROWS:int                                   
 public static const KELLY_INCUBATION:int                                            =  905; // 
 public static const KELLY_TIMES_PEPPERED:int                                        =  906; // 
 public static const KELLY_HEAT_TIME:int                                             =  907; // 
-public static const KELLY_KIDS:int                                                  =  908; // 
+public static const KELLY_KIDS:int                                                  =  908; //
 public static const KELLY_FIRST_KID_GENDER:int                                      =  909; // 
 public static const KAIJU_MEETINGS:int                                              =  910; // 
 public static const KAIJU_DISABLED:int                                              =  911; // 
@@ -973,7 +973,7 @@ public static const HELIA_TALK_SEVEN:int                                        
 public static const HEL_NTR_TRACKER:int                                             =  965; // 
 public static const HEL_BONUS_POINTS:int                                            =  966; // 
 public static const HEL_PREGNANCY_INCUBATION:int                                    =  967; // 
-public static const HEL_PREGNANCY_NOTICES:int                                       =  968; // 
+public static const HELIA_PREGNANCY_TYPE:int                                        =  968; //Previously HEL_PREGNANCY_NOTICES
 public static const HAD_FIRST_HELSPAWN_TALK:int                                     =  969; // 
 public static const HELSPAWN_INCEST:int                                             =  970; // 
 public static const HEL_TALK_EIGHT:int                                              =  971; // 
@@ -1184,41 +1184,41 @@ public static const TREACLE_MINE_YEAR_DONE:int                                  
 public static const PLAYER_INFECTED_HELLHOUNDS:int									= 1176;
 public static const PLAYER_INFECTED_MINOTAURS:int                                   = 1177;
 public static const PLAYER_INFECTED_IMPS:int										= 1178;
-public static const FEMOIT_UNLOCKED:int                                   = 1179; // Unlocked the option to feminise Benoit
-public static const BIMBO_FEMOIT_UNLOCKED:int                                   = 1180; // Unlocked the option to bimbofy Benoit
-public static const BENOIT_STATUS:int                                   = 1181; // Benoits "mode" -- 0 = Male, 1 = Fem, 2 = Bimbo
-public static const FEMOIT_NEXTDAY_EVENT:int                                   = 1182; // Proc the event the following day when you visit - stores the minimum day number that the event can proc on.
-public static const FEMOIT_TALKED_TO:int                                   = 1183;
+public static const FEMOIT_UNLOCKED:int                                             = 1179; // Unlocked the option to feminise Benoit
+public static const BIMBO_FEMOIT_UNLOCKED:int                                       = 1180; // Unlocked the option to bimbofy Benoit
+public static const BENOIT_STATUS:int                                               = 1181; // Benoits "mode" -- 0 = Male, 1 = Fem, 2 = Bimbo
+public static const FEMOIT_NEXTDAY_EVENT:int                                        = 1182; // Proc the event the following day when you visit - stores the minimum day number that the event can proc on.
+public static const FEMOIT_TALKED_TO:int                                            = 1183;
 public static const KATHERINE_RANDOM_RECRUITMENT_DISABLED:int                       = 1184;
-public static const TIMES_FUCKED_FEMOIT:int                                   = 1185;
-public static const FEMOIT_EGGS:int                                   = 1186;
-public static const FEMOIT_INCUBATION:int                                   = 1187;
-public static const FEMOIT_READY_FOR_EGGS:int                                   = 1188;
-public static const FEMOIT_FIRST_CLUTCH_MISSED:int                                   = 1189;
-public static const FEMOIT_EGGS_LAID:int                                   = 1190;
-public static const FEMOIT_HELPED_LAY:int                                   = 1191;
-public static const FEMOIT_SPOONED:int                                   = 1192;
+public static const TIMES_FUCKED_FEMOIT:int                                         = 1185;
+public static const FEMOIT_EGGS:int                                                 = 1186;
+public static const FEMOIT_INCUBATION:int                                           = 1187;
+public static const FEMOIT_READY_FOR_EGGS:int                                       = 1188;
+public static const FEMOIT_FIRST_CLUTCH_MISSED:int                                  = 1189;
+public static const FEMOIT_EGGS_LAID:int                                            = 1190;
+public static const FEMOIT_HELPED_LAY:int                                           = 1191;
+public static const FEMOIT_SPOONED:int                                              = 1192;
 public static const FEMOIT_NEXTDAY_EVENT_DONE:int                                   = 1193;
-public static const VALA_HEALED_HONEY:int                                   = 1194;
-public static const UNKNOWN_FLAG_NUMBER_01195:int                                   = 1195;
-public static const UNKNOWN_FLAG_NUMBER_01196:int                                   = 1196;
-public static const UNKNOWN_FLAG_NUMBER_01197:int                                   = 1197;
-public static const UNKNOWN_FLAG_NUMBER_01198:int                                   = 1198;
-public static const UNKNOWN_FLAG_NUMBER_01199:int                                   = 1199;
-public static const UNKNOWN_FLAG_NUMBER_01200:int                                   = 1200;
-public static const UNKNOWN_FLAG_NUMBER_01201:int                                   = 1201;
-public static const UNKNOWN_FLAG_NUMBER_01202:int                                   = 1202;
-public static const UNKNOWN_FLAG_NUMBER_01203:int                                   = 1203;
-public static const UNKNOWN_FLAG_NUMBER_01204:int                                   = 1204;
-public static const UNKNOWN_FLAG_NUMBER_01205:int                                   = 1205;
-public static const UNKNOWN_FLAG_NUMBER_01206:int                                   = 1206;
-public static const UNKNOWN_FLAG_NUMBER_01207:int                                   = 1207;
-public static const UNKNOWN_FLAG_NUMBER_01208:int                                   = 1208;
-public static const UNKNOWN_FLAG_NUMBER_01209:int                                   = 1209;
-public static const UNKNOWN_FLAG_NUMBER_01210:int                                   = 1210;
-public static const UNKNOWN_FLAG_NUMBER_01211:int                                   = 1211;
-public static const UNKNOWN_FLAG_NUMBER_01212:int                                   = 1212;
-public static const UNKNOWN_FLAG_NUMBER_01213:int                                   = 1213;
+public static const VALA_HEALED_HONEY:int                                           = 1194;
+public static const AMILY_PREGNANCY_TYPE:int                                        = 1195;
+public static const AMILY_BUTT_PREGNANCY_TYPE:int                                   = 1196;
+public static const FEMALE_SPIDERMORPH_PREGNANCY_TYPE:int                           = 1197;
+public static const PHYLLA_VAGINAL_PREGNANCY_TYPE:int                               = 1198;
+public static const TAMANI_PREGNANCY_TYPE:int                                       = 1199;
+public static const TAMANI_PREGNANCY_INCUBATION:int                                 = 1200;
+public static const TAMANI_PREGNANCY_COUNT:int                                      = 1201; //Just how many has she got stuffed in there?
+public static const TAMANI_TIMES_IMPREGNATED:int                                    = 1202;
+public static const TAMANI_MET:int                                                  = 1203;
+public static const TAMANI_NUMBER_OF_DAUGHTERS:int                                  = 1204;
+public static const TAMANI_DAUGHTERS_PREGNANCY_TYPE:int                             = 1205;
+public static const TAMANI_DAUGHTERS_PREGNANCY_COUNT:int                            = 1206;
+public static const IZMA_PREGNANCY_TYPE:int                                         = 1207;
+public static const EMBER_PREGNANCY_TYPE:int                                        = 1208;
+public static const JOJO_BUTT_PREGNANCY_TYPE:int                                    = 1209;
+public static const SHEILA_DISABLED:int                                             = 1210; //1 = Told to avoid or you refused apology, 2 = Baby Issues, 3 = Worm Infested, 4 = Jojo's 'Wife'
+public static const SHEILA_PREGNANCY_TYPE:int                                       = 1211;
+public static const KELLY_PREGNANCY_TYPE:int                                        = 1212;
+public static const KELLY_KIDS_MALE:int                                             = 1213; //Tracks number of sons with Kelly. Total number of children is stored in KELLY_KIDS
 public static const UNKNOWN_FLAG_NUMBER_01214:int                                   = 1214;
 public static const UNKNOWN_FLAG_NUMBER_01215:int                                   = 1215;
 public static const UNKNOWN_FLAG_NUMBER_01216:int                                   = 1216;

@@ -162,31 +162,30 @@ public function doCamp():void {
 			return;
 		}
 	}
-	if(helFollower.isHeliaBirthday() && kGAMECLASS.helScene.followerHel() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
-		hideMenus();
-		helFollower.heliasBirthday();
-		return;
-	}
-	if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] >= 1 && kGAMECLASS.helScene.followerHel()) {
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 300 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 0) {
+	if (kGAMECLASS.helScene.followerHel()) {
+		if (helFollower.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
 			hideMenus();
-			helSpawnScene.bulgyCampNotice();
+			helFollower.heliasBirthday();
 			return;
 		}
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 200 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 1) {
-			hideMenus();
-			helSpawnScene.heliaSwollenNotice();
-			return;
-		}
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 100 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 2) {
-			hideMenus();
-			helSpawnScene.heliaGravidity();
-			return;
-		}
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 1 && (model.time.hours == 6 || model.time.hours == 7)) {
-			hideMenus();
-			helSpawnScene.heliaBirthtime();
-			return;
+		if (kGAMECLASS.helScene.pregnancy.isPregnant) {
+			switch (kGAMECLASS.helScene.pregnancy.eventTriggered()) {
+				case 2: hideMenus();
+						helSpawnScene.bulgyCampNotice();
+						return;
+				case 3: hideMenus();
+						helSpawnScene.heliaSwollenNotice();
+						return;
+				case 4: hideMenus();
+						helSpawnScene.heliaGravidity();
+						return;
+				default:
+						if (kGAMECLASS.helScene.pregnancy.incubation == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
+							hideMenus();
+							helSpawnScene.heliaBirthtime();
+							return;
+						}
+			}
 		}
 	}
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7) {
@@ -231,7 +230,7 @@ public function doCamp():void {
 		return;
 	}
 	//Bimbo Sophie Move In Request!
-	if(bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 140)
+	if (bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && sophieScene.pregnancy.event >= 2)
 	{
 		hideMenus();
 		sophieBimbo.sophieMoveInAttempt();
@@ -334,20 +333,20 @@ public function doCamp():void {
 		return;
 	}
 	//Cotton preg freakout
-	if(player.pregnancyIncubation <= 280 && player.pregnancyIncubation >= 0 && player.pregnancyType == player.PREGNANCY_COTTON &&
+	if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 	   	flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
 		kGAMECLASS.telAdre.cotton.goTellCottonShesAMomDad();
 		hideMenus();
 		return;
 	}
 	//Bimbo Sophie finds ovi elixer in chest!
-	if(bimboSophie() && hasItemInStorage(consumables.OVIELIX) && rand(5) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0 && player.gender > 0) {
+	if(bimboSophie() && hasItemInStorage(consumables.OVIELIX) && rand(5) == 0 && flags[kFLAGS.TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR] == 0 && player.gender > 0) {
 		sophieBimbo.sophieEggApocalypse();
 		hideMenus();
 		return;
 	}
 	//Amily + Urta freakout!
-	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
+	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
 		finter.amilyUrtaReaction();
 		hideMenus();
 		return;
@@ -602,9 +601,9 @@ public function doCamp():void {
 	//RATHAZUL
 	//if rathazul has joined the camp
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] <= 1) {
+		if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  <b>He's finished with the task you gave him!</b>", false);
+			if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  <b>He's finished with the task you gave him!</b>", false);
 			outputText("\n\n", false);
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
@@ -1080,9 +1079,9 @@ public function campFollowers():void {
 	//if rathazul has joined the camp
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		rathazulEvent = 2070;
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] <= 1) {
+		if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  He's finished with the task you gave him!", false);
+			if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  He's finished with the task you gave him!", false);
 			outputText("\n\n", false);
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
@@ -1178,7 +1177,7 @@ public function doWait():void {
 }
 
 public function doSleep(clrScreen:Boolean = true):void {
-	if(flags[kFLAGS.URTA_INCUBATION] >= 384 && model.time.hours >= 20 && model.time.hours < 2) {
+	if (kGAMECLASS.urta.pregnancy.incubation == 0 && kGAMECLASS.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
 		urtaPregs.preggoUrtaGivingBirth();
 		return;
 	}

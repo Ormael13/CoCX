@@ -3,7 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class IsabellaScene extends NPCAwareContent {
+	public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface {
 //Isabella Flags:
 //256	PC decided to approach Isabella's camp yet? 1
 //257	Met Isabella?
@@ -13,6 +13,44 @@
 //261  Times Izzy sleep-raped the PC?
 //-Has PC raped her?
 
+		public function IsabellaScene()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] > 0) { //Isabella is angry at the player
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260]--;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] > 300) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 300;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
+			}			
+			if (flags[kFLAGS.ISABELLA_MILK_COOLDOWN] > 0) {
+				flags[kFLAGS.ISABELLA_MILK_COOLDOWN]--;
+				if (flags[kFLAGS.ISABELLA_MILK_COOLDOWN] < 0) flags[kFLAGS.ISABELLA_MILK_COOLDOWN] = 0;
+			}
+			if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
+				flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN]--;
+			}
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 0;
+				if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
+					flags[kFLAGS.ISABELLA_MILKED_YET]++;
+				}
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
+				spriteSelect(31);
+				isabellaFollowerScene.isabellaMorningWakeupCall();
+				return true;
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 public function isabellaGreeting():void {
 	spriteSelect(31);

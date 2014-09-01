@@ -3,12 +3,32 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Lake.GooGirl;
 
-	public class Valeria extends NPCAwareContent {
+	public class Valeria extends NPCAwareContent implements TimeAwareInterface {
 
-	public function Valeria()
-	{
-	}
+		public function Valeria()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
 
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (player.statusAffectv1(StatusAffects.GooStuffed) > 0) {
+				player.addStatusValue(StatusAffects.GooStuffed,1,-1);
+				if (player.statusAffectv1(StatusAffects.GooStuffed) <= 0)
+				{
+					valeria.birthOutDatGooSlut();
+					return true;
+				}
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+	
 //const VELARIA_FUTA:int = 499;
 
 //Camp Menu -- [Followers] -- [Valeria]
@@ -449,10 +469,10 @@ public function valeriaAndGooThreeStuff():void {
 	else outputText("\n\nJust like last time, the fuck-hungry goo-slut is taking command.");
 	outputText("  She surprises you by contorting your body with pressure from an unexpected angle, tipping you head over heels, right toward the wide-eyed goo-girl you just managed to defeat!");
 	
-	outputText("\n\nYou splash " + player.face() + "-first into a cushiony mass of forgiving slime, but the momentum only carries you partway into the humanoid puddle. A semi-solid lump bumps off your cheek as you come to rest, floating inside a " + (monster as GooGirl).gooColor() + " prison. Shaking your head to clear your vision, you try to determine what you hit, but all you can see is a filmy blur, and you can't breathe either. Your cheeks puff out while you struggle to surface. As always, Valeria has your back. Her unsubtle drawl vibrates, \"<i>I gotcha, partner,</i>\" wetly against your eardrums as you are bodily rotated, slowly pushing your head through " + (monster as GooGirl).gooColor4() + " surface while your body is thoroughly ensconced in slime.");
+	outputText("\n\nYou splash " + player.face() + "-first into a cushiony mass of forgiving slime, but the momentum only carries you partway into the humanoid puddle. A semi-solid lump bumps off your cheek as you come to rest, floating inside a " + (monster as GooGirl).gooColor() + " prison. Shaking your head to clear your vision, you try to determine what you hit, but all you can see is a filmy blur, and you can't breathe either. Your cheeks puff out while you struggle to surface. As always, Valeria has your back. Her unsubtle drawl vibrates, \"<i>I gotcha, partner,</i>\" wetly against your eardrums as you are bodily rotated, slowly pushing your head through the " + (monster as GooGirl).gooColor4() + " surface while your body is thoroughly ensconced in slime.");
 	outputText("\n\nNo matter how you try to move, you can't budge an inch! The liquid weights of the twin, fluid females may as well be composed of iron for all they give; the harder you struggle, the firmer their restraining force grows. At the same time, the torturous touches that helped goad you into this course of action return, only far firmer and more insistent.");
 	outputText("\n\nThe bluish");
-	if(monster.skinTone != "blue") outputText((monster as GooGirl).gooColor6());
+	if (monster.skinTone != "blue") outputText(" " + (monster as GooGirl).gooColor6());
 	outputText(" juices slowly meld together until you cannot tell one from the other, and they firm up into a semi-translucent, flat-bottomed sphere, trapping you there. Your debauched and hopelessly aroused state is visible to any who would wander by, stroked by dark-colored currents that wrap around your ");
 	if(player.hasCock() || player.hasVagina()) outputText("genitals");
 	else outputText("[asshole]");
@@ -468,6 +488,7 @@ public function valeriaAndGooThreeStuff():void {
 	menu();
 	addButton(0,"Next",valeriaGooRapeII);
 }
+
 private function valeriaGooRapeII():void {
 	clearOutput();
 	outputText("The lump that bumped you earlier smacks off ");
@@ -604,8 +625,12 @@ private function valeriaGooRapeII():void {
 	//v2 = cock fill = 1, balls fill = 2
 	//v3 = cunt fill?
 	//v4 = tit fill?
-	player.createStatusAffect(StatusAffects.GooStuffed,10+rand(300),0,0,0);
-	if(player.hasVagina()) player.changeStatusValue(StatusAffects.GooStuffed,3,1);
+	player.createStatusAffect(StatusAffects.GooStuffed, 10 + rand(300), 0, 0, 0);
+	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+	if (player.hasVagina()) {
+		player.changeStatusValue(StatusAffects.GooStuffed, 3, 1);
+		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+	}
 	if(player.hasCock()) {
 		if(player.balls > 0) player.changeStatusValue(StatusAffects.GooStuffed,2,2);
 		else player.changeStatusValue(StatusAffects.GooStuffed,2,1);
@@ -642,6 +667,8 @@ public function birthOutDatGooSlut():void {
 	}
 	outputText("\n\nYou pant to try and catch your breath as the fluid gathers up beside you and grows a friendly, smiling face. It gives you a simple smile and a kiss on your brow before leaving you to recover, heading in the direction of the lake.\n");
 	player.removeStatusAffect(StatusAffects.GooStuffed);
+	player.knockUpForce(); //Clear the false pregnancy
+	player.buttKnockUpForce(); //Clear the false pregnancy
 }
 
 /*MISC. Valeria Interactions

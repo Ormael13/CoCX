@@ -1417,8 +1417,17 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 		
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0)
-		childStats += "<b>Children With Izma:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n";
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
+		childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
+		
+	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
+		childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
+		
+	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
+		
+	if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 		
 	if (mountain.salon.lynnetteApproval() != 0)
 		childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
@@ -1451,8 +1460,8 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0)
 		childStats += "<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n";
 		
-	if (player.statusAffectv2(StatusAffects.Tamani) > 0)
-		childStats += "<b>Children With Tamani:</b> " + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n";
+	if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
+		childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
 		
 	if (urtaPregs.urtaKids() > 0)
 		childStats += "<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n";

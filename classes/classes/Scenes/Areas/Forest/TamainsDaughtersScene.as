@@ -3,11 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class TamainsDaughtersScene extends BaseContent {
-
-	public function TamainsDaughtersScene()
-	{
-	}
+	public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
 
 //New Status:
 //+Tamani's Husband – (Still need too big loss scene and centaur version)
@@ -51,20 +47,54 @@
 	//Tamani's Daughters gets much harder @ #40
 	//Tamani's Daughters gets nigh-impossible @ #60
 
+		public var pregnancy:PregnancyStore;
+
+		public function TamainsDaughtersScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_TYPE, kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN, 0, 0);
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance(); //Preg should be 7*24, ends at 0 to -48 --> 9*24, ends at 0
+			trace("\nTamani's Daughters time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT];
+				flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 0;
+				pregnancy.knockUpForce(); //Clear Pregnancy
+			}
+			//Put a cap on daughters if they havent been met yet.
+			if (flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 30) {
+				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = 30;
+			}
+			//Lower daughter population by 1 every fourth day once population gets high
+			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && model.time.days % 4 == 0) {
+				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]--;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+
+		internal static var tamaniPresent:Boolean = false; //Used to communicate between this class and TamanisDaughters.as
+		
 //Prime daughter tit-size
 //12-20 – C
 //21- 40 DD
 //41 –60 E
 //30+ - F mother fucker!
 private function tdCup():String {
-	var gobs:Number = player.statusAffectv2(StatusAffects.Tamani);
-	if(gobs < 20) return "C";
-	else if(gobs < 30) return "D";
-	else if(gobs < 40) return "DD";
-	else if(gobs < 50) return "E";
-	else if(gobs < 60) return "EE";
-	else return "F";
-	return "OMGWTF";
+	if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 20) return "C";
+	else if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 30) return "D";
+	else if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 40) return "DD";
+	else if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 50) return "E";
+	else if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 60) return "EE";
+	return "F";
 }
 
 
@@ -74,15 +104,17 @@ public function encounterTamanisDaughters():void {
 	flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
 	outputText("", true);
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 0 && rand(10) == 0) {
-		outputText("While roaming along, you find your path ahead blocked by " + num2Text(int(player.statusAffectv2(StatusAffects.Tamani)/4)) + " goblins.  At the forefront of the mob is Tamani", false);
+		tamaniPresent = true;
+		outputText("While roaming along, you find your path ahead blocked by " + num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4)) + " goblins.  At the forefront of the mob is Tamani", false);
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight",createCallBackFunction(fightTamanisDaughters,true), "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
 		return;
 	}
+	tamaniPresent = false;
 	outputText("While roaming along, you find your path ahead blocked by ", false);
-	outputText(num2Text(int(player.statusAffectv2(StatusAffects.Tamani)/4)) + " goblins.  You ", false);
+	outputText(num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4)) + " goblins.  You ", false);
 	if(player.weaponName == "fists") outputText("ready your fists ", false);
 	else outputText("draw your weapon ", false);
 	outputText("and glance around evaluating your options.   Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the goblin-women steps forwards, her " + tdCup() + "-breasts jiggling, barely contained by the bondage ropes she has tied around herself.\n\n", false);
@@ -121,13 +153,13 @@ private function playDumbToTamanisDaughters():void {
 }
 
 //[Fight Them]
-private function fightTamanisDaughters(tamani:Boolean = false):void {
+private function fightTamanisDaughters():void {
 	outputText("", true);
 	
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n", false);
 	startCombat(new TamanisDaughters());
 	spriteSelect(57);
-	if(tamani) {
+	if (tamaniPresent) {
 		//(+5 mob strength)
 		monster.str += 5;
 		//(+5 mob toughness)
@@ -137,7 +169,6 @@ private function fightTamanisDaughters(tamani:Boolean = false):void {
 		monster.lust -= 20;
 		//append combat desc
 		monster.long += " <b>Tamani lurks in the back of the crowd, curvier than her brood and watching with a mixture of amusement and irritation.  She runs a hand through her pink and black hair, waiting for an opportunity to get involved...</b>";
-		monster.createStatusAffect(StatusAffects.Tamani,0,0,0,0);
 	}
 	return;
 }
@@ -150,12 +181,9 @@ private function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
-	var daughters:Number = int(player.statusAffectv2(StatusAffects.Tamani)/2);
-	var tamani:Boolean = false;
-	if(monster.findStatusAffect(StatusAffects.Tamani) >= 0) tamani = true;
+	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	
 	outputText("", true);
-	
 	outputText("You shrug out of your " + player.armorName + " and grab hold of ", false);
 	if(cocks == 1) outputText("your ", false);
 	else outputText("one of your ", false);
@@ -171,7 +199,7 @@ private function fuckYoDaughtersHomie():void {
 	//(Fits)
 	if(primary >= 0) {
 		outputText("You pick a random body from the crowd, impaling her on your " + cockDescript(primary) + ".  The others crowd around, jealous of your chosen cock-sleeve.   She looks up at you, blissful as she hugs against you and grinds her tight body down, raping her virginal hole on the firmness of your " + cockDescript(primary) + ".   The others massage your " + player.legs() + ", licking and nibbling your skin as they compete to tempt you into taking them next.", false);
-		if(tamani) {
+		if (tamaniPresent) {
 			outputText("  Tamani pushes aside the smaller sluts and ", false);
 			if(player.balls > 0) outputText("cups your " + ballsDescriptLight() + ".", false);
 			else outputText("licks your taint.", false);
@@ -181,7 +209,7 @@ private function fuckYoDaughtersHomie():void {
 		outputText("In no time, the vise-like grip of her cunt and thrill of taking her virginal passage push you beyond your threshold.  You groan and pump thick loads of jism deep into the tiny twat", false);
 		if(player.cumQ() >= 500) outputText(", bloating her belly until she gurgles and squishes on top of you", false);
 		outputText(".  She falls off with her eyes crossed as her sisters scramble to take her place.", false);
-		if(monster.findStatusAffect(StatusAffects.Tamani) >= 0) {
+		if (tamaniPresent) {
 			outputText("  Tamani shoves the rest of them away and mounts you, ", false);
 			if(player.tallness >= 60) outputText("scrabbling up enough to ", false);
 			outputText("kiss you roughly on the lips, tasting of cherries and sweat.  Your body goes limp, dropping down onto your back as your green mistress has her way with you.\n\n", false);
@@ -191,7 +219,7 @@ private function fuckYoDaughtersHomie():void {
 		}
 		
 		outputText("You're swarmed as you lie in the mud, covered head to toe in nubile young goblin flesh.  Some part of you KNOWS you're being raped, but you're so effectively drugged there really isn't anything to do but try to enjoy it.   The tight goblin-cunt wrapped around your dickflesh refuses to let it go soft, massaging it with clenching ripples of muscle.  ", false);
-		if(tamani) {
+		if (tamaniPresent) {
 			outputText("Tamani's massive jugs rest against your " + breastDescript(0) + ", bouncing and wobbling.  She crosses her arms over them and sucks on a finger, watching your expression with a mix of amusement and arousal.  She asks, \"<i>So what do you think of your daughters, sweet stuff?  They're just aching for a taste of their daddy's spunk, and it's hard to keep so many rambunctious sluts under control.</i>\"\n\n", false);
 		}
 		else outputText("Tamani's daughter looks up at you, giggling happily while her hips vigorously abuse you.   She asks, \"<i>Do you think my cunt is tighter than mom's is?  Bet you never thought you'd be fucking one of your daughters pregnant, did you?</i>\"\n\n", false);
@@ -201,12 +229,12 @@ private function fuckYoDaughtersHomie():void {
 		else if(player.cor < 66) outputText("You came here to make things better for everyone... well, at least you're helping these girls. Y", false);
 		else outputText("You came here to make things better, but you know you'll keep knocking up Tamani every chance you get.  It's too much fun to resist adding to the sea of green girls. Y", false);
 		outputText("ou moan as a drooling green cunt is pressed into your " + player.face() + ", smothering away any protests you might have offered.  Your tongue laps away, servicing another one of your many goblin offspring as best it can.  It plunges deep to harvest her nectar, making her soak you with juice, performing oral as if it were possessed.  Your eyes cross and you feel your release building, cresting in a wave as it prepares to dump into your ");
-		if(!tamani) outputText("daughter");
+		if (!tamaniPresent) outputText("daughter");
 		else outputText("favorite goblin MILF");
 		outputText(".\n\n", false);
 
 		outputText("The pressure of orgasm spikes as the first blast takes ", false);
-		if(!tamani) outputText("your goblin daughter", false);
+		if (!tamaniPresent) outputText("your goblin daughter", false);
 		else outputText("Tamani", false);
 		outputText(" in her waiting womb, painting her walls white.  Each successive glob mixes into the slurry of sexual fluids brewing in her slit, until it starts to dribble out.  The goblin on your face cums noisily, filling your mouth with female moisture.   With no other choice, you swallow it down while your tongue keeps trying to pleasure her.  A sudden void of sensation and cold air overtakes your " + cockDescript(primary) + " as you hear the goblins squabbling.  In no time flat a fresh cunt is squeezing over your still-orgasming member, clamping down to form a tight seal as you pump it full of even more fertile seed.\n\n", false);
 
@@ -217,9 +245,9 @@ private function fuckYoDaughtersHomie():void {
 			else outputText("Your gut clenches painfully as something inside puffs up.  Pressure builds at the base of your cock and you realize somehow you're more full of cum than ever before.", false);
 			outputText("\n\n", false);
 		
-			if(tamani) {
+			if (tamaniPresent) {
 				outputText("Tamani pushes the slut on your face off and plants herself there, smearing your " + player.face() + " with a mixture of cum and vaginal wetness.  ", false);
-				if(player.statusAffectv1(StatusAffects.Tamani) > 0) {
+				if (kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) {
 					outputText("She rubs her pregnancy swollen belly", false);
 				}
 				else outputText("She fondles her nipples", false);
@@ -243,7 +271,7 @@ private function fuckYoDaughtersHomie():void {
 			//(Go to end unless daughters > 20)
 			if(daughters > 20) {
 				outputText("You lie there, feeling like an empty husk.  The crowd starts to disperse", false);
-				if(tamani) outputText(" while Tamani walks away", false);
+				if (tamaniPresent) outputText(" while Tamani walks away", false);
 				outputText(", but a few of the little sluts don't look satisfied yet.  They crowd around.  One straddles your chest and begins dancing in an erotic display.  Somehow, your " + cockDescript(primary) + " still manages to twitch weakly in response.  Another goblin opens a satchel and pulls out some fruit and a canteen.  She delicately begins feeding you, clearing wanting you to regain your strength.  It seems they aren't finished with you yet.  You down what feels like gallons of water, and then find yourself presented with another flask of pink goo.  Shrugging, you gulp it down willingly, enjoying the sensation of your " + cockDescript(0) + " re-inflating to its maximum, turgid size.\n\n", false);
 				
 				outputText("Sighing happily, you lie there as the remainder of your daughters take you, fucking you one after another.  The whole time you don't stop eating, converting all of the girl's rations into gallons of baby batter.  Your daughters don't seem to mind, and take turns posing sexily and feeding you while they take turns riding your pole until they're bloating and pregnant.  By the time the last one rises up on shaky legs, you're exhausted and your eyes are drifting closed.  ", false);
@@ -254,7 +282,7 @@ private function fuckYoDaughtersHomie():void {
 		//(Normal end)
 		if(daughters <= 20) {
 			outputText("Exhausted and shaken by the ordeal, you lie there as the girls regroup, gathering any dripping seed into bottles or their puffy cunts.  Several of them blow you kisses", false);
-			if(tamani) outputText(" and Tamani passionately frenches you.", false);
+			if (tamaniPresent) outputText(" and Tamani passionately frenches you.", false);
 			else outputText(".", false);
 			outputText("  One of them licks your sore member and says, \"<i>Thanks for all the cream!</i>\"\n\n", false);
 		}
@@ -265,7 +293,7 @@ private function fuckYoDaughtersHomie():void {
 		
 		outputText("The idea sounds great to you.  Two of the horny sluts are already climbing forwards while their sisters lay out, pulling their vulva apart and toying with their tiny green clits.  They must be twins, because aside from their wildly different hair, their features are identical.  The paired cock-sluts both kiss your swollen " + cockHead(0) + ", then drag their lips and tongues over your length.  At first they're working in sync, but as their efforts intensify they slowly get out of rhythm, until they're each slobbering over a different part of your " + cockDescript(0) + ".\n\n", false);
 		
-		if(tamani) {
+		if (tamaniPresent) {
 			outputText("Tamani steps up and reaches into a pouch.  As she withdraws her hand, you get your first glimpse of her cargo.  It appears to be a massive double-ended dildo, pink and floppy.  One end is shaped like a canine, with a huge knot, while the other ends in the flared tip of a horse-cock.  Tamani grunts as she spears herself with the pointed canine side, even forcing the massive dildo's knot inside.  She releases the dildo and the horse-half bobbles imposingly in front of her, dripping pink fluids.  She grins up at you saying, \"<i>If my daughters are going to claim all your cream, I'm going to make sure you don't hold back.  You saw the knot on this thing, didn't you?  Well, it's filled with aphrodisiacs, so when I cum and clamp down on it, you'll be forced to squirt every ounce of seed into my girls.</i>\"\n\n", false);
 		
 			outputText("She disappears behind you and you cringe, knowing this will probably be at least slightly uncomfortable.  ", false);
@@ -286,20 +314,20 @@ private function fuckYoDaughtersHomie():void {
 		else outputText("shaft", false);
 		outputText(" as she presses her hard nipples up against your " + player.legs() + ". ", false);
 		//(No Tamani:
-		if(!tamani) outputText("She presses something against your backdoor and before you have a chance to react, something hot and wet is filling your " + assholeDescript() + ".  You look down as she pulls out a tube of pink residue, and sways with burning desire.\n\n", false);
+		if (!tamaniPresent) outputText("She presses something against your backdoor and before you have a chance to react, something hot and wet is filling your " + assholeDescript() + ".  You look down as she pulls out a tube of pink residue, and sways with burning desire.\n\n", false);
 		else outputText("The feeling of the ridges and flare of Tamani's fake cock as it slides inside you makes you sway on your feet, drunk with the lust its fluids have induced.   You sway back and forth with burning desire as both of the twins caress and stroke your meat, coaxing as much pleasure from it as possible.\n\n", false);
 			
 		outputText("You explode, coming harder than ever from the pressure and drugs buried against your prostate.  One of the twins, tired of waiting, pulls your " + cockDescript(0) + " over and shoves your tip against her slickened folds.  You manage to pump a thick blob of cum deep inside her before her sister snatches it away, grinding her own hungry twat against you until her entire groin is stained white.  They glare at each other, but after seemingly being sated, they return to fondling your " + cockDescript(0) + " together, using it like a hose to drench their smiling sisters with the remaining cum.\n\n", false);
 		
-		if(tamani) {
+		if (tamaniPresent) {
 			outputText("Tamani pushes hard and screams behind you, \"<i>OH FUCK YES KNOCK THEIR LITTLE CUNTS UP!  Oooooohh...</i>\"\n\n", false);
 			
 			outputText("Her voice trails off into indecipherable gibberish as her orgasm takes her.  You can feel the horse-dick shaped dildo in your ass squirting its tainted fluids into you as Tamani's cunt clenches down on its other side.  Abruptly, the entire thing slides out, and you hear Tamani collapse in the grass.  You turn around as your cock responds to the drugs again, and note that she's totally out of it, mashing her tits with both hands and trembling with short involuntary muscle spasms.\n\n", false);
 		}
-		if(!tamani) outputText("You're handed another bottle as t", false);
+		if (!tamaniPresent) outputText("You're handed another bottle as t", false);
 		else outputText("T", false);
 		outputText("he girls shift position, rearranging themselves so that those who got the most love-juice are now positioned alongside you.  ", false);
-		if(!tamani) outputText("You shrug and drink it, ", false);
+		if (!tamaniPresent) outputText("You shrug and drink it, ", false);
 		else outputText("You begin ", false);
 		outputText(" feeling hornier and hornier, as ready now as you were when you got here.  Twitching, your " + cockDescript(0) + " announces its readiness to repaint these living cum-sponges.  A trio of goblin tongues slip over your shaft, and lip-gloss smeared lips worship every ounce of your life-giving rod.  One of the girls, an older one with prominent breasts, breaks off and begins to scale her way up your body.  She doesn't stop until she's sitting on your shoulders with her hot messy cunt pressed against your face.\n\n", false);
 		
@@ -321,6 +349,7 @@ private function fuckYoDaughtersHomie():void {
 	player.orgasm();
 	dynStats("lib", 1, "cor", 1);
 	//Knock the bitches up, boost libido, corruption
+	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	player.cumMultiplier += .3;
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
@@ -332,9 +361,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
-	var daughters:Number = int(player.statusAffectv2(StatusAffects.Tamani)/2);
-	var tamani:Boolean = false;
-	if(monster.findStatusAffect(StatusAffects.Tamani) >= 0) tamani = true;
+	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(50);	
 	
@@ -374,7 +401,7 @@ private function legTamanisDaughtersRAEPYou():void {
 		else outputText("  They rise up off your wilting members.  The eldest daughter blows you a kiss and says, \"<i>I think you got us pregnant Daddy!</i>\"\n\n", false);
 		
 		//TAMANI IS THERE: 
-		if(tamani) {
+		if (tamaniPresent) {
 			outputText("Tamani shoves the cum-filled girls out of her way and looks down at you with an expression of disdain, \"<i>I swear honey, the way you act, I think your dick is already a slave to goblin-twat.</i>\"\n\n", false);
 			
 			outputText("She gives ", false);
@@ -474,7 +501,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	//[NO FIT]
 	else {
 		//	[No Tamani]
-		if(!tamani) {
+		if (!tamaniPresent) {
 			outputText("Effortlessly, Tamani's daughter launches herself onto you, straddling your body as she tries to work your " + cockDescript(0) + " into her tight gash.  No matter how hard she tries, she just can't get it in.  She looks up at you in confusion and asks, \"<i>How in Marae's cunt can my Mom take this beast?</i>\"\n\n", false);
 			
 			outputText("Frowning in consternation, she presses it down onto your belly and sits on top, spreading her cunt as wide as she can around the bulge your urethra makes on the underside of your " + cockDescript(0) + ".  Though you can't see her, the feeling of her starting to slide along your length is wonderfully pleasurable.  After a few moments you can feel her getting into it, leaning over and pressing her taut body and heavy breasts against you as well.  Incredibly turned on by the mental picture you're forced to form, you attack the cunt riding your " + player.face() + ", licking it with feverish intensity.\n\n", false);
@@ -676,6 +703,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
+	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(15);
@@ -689,7 +717,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	
 	//Vars
 	var cocks:Number = player.totalCocks();
-	var daughters:Number = int(player.statusAffectv2(StatusAffects.Tamani)/2);
+	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 
 	outputText("Your efforts to resist were in vain – there's simply too many of your slutty daughters to fight off.  The crowd flows over your ", false);
 	if(player.HP < 1) outputText("defeated", false);
@@ -996,26 +1024,20 @@ private function loseToDaughtersWithTamaniThere():void {
 
 
 private function knockUpDaughters():void {
-	//Already preggers
-	if(flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
-		
-	}
-	//Not pregnant yet
-	else {
-		flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] = 3;
-		//Determine how many kids...
-		//Start at 2, add more according to cum levels and chance
-		player.addStatusValue(StatusAffects.Tamani,2,2);
-		var cum:Number = player.cumQ();
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) player.addStatusValue(StatusAffects.Tamani,2,3);
-		if(cum >= 50 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 100 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 200 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 300 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 400 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 500 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-		if(cum >= 600 && rand(2) == 0) player.addStatusValue(StatusAffects.Tamani,2,1);
-	}
+	if (pregnancy.isPregnant) return;
+	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 216); //Nine day long pregnancy, just like mom
+	//Determine how many kids...
+	flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 2;
+	var cum:Number = player.cumQ();
+	//Breeder perk is awesome
+	if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] += 3;
+	if (cum >=  50 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 100 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 200 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 300 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 400 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 500 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 600 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 }
 
 internal function combatWinAgainstDaughters():void {
@@ -1056,7 +1078,7 @@ internal function loseToDaughters():void {
 			cleanupAfterCombat();
 			return;
 		}
-		if(monster.findStatusAffect(StatusAffects.Tamani) >= 0) {
+		if (tamaniPresent) {
 			if(rand(2) == 0) doNext(loseToDaughtersWithTamaniThere);
 			else doNext(legTamanisDaughtersRAEPYou);
 			return;
@@ -1075,7 +1097,7 @@ internal function loseToDaughters():void {
 			cleanupAfterCombat();
 			return;
 		}
-		if(monster.findStatusAffect(StatusAffects.Tamani) >= 0) {
+		if (tamaniPresent) {
 			doNext(loseToDaughtersWithTamaniThere);
 			return;
 		}

@@ -2,11 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Roxanne extends BazaarAbstractContent{
-
-	public function Roxanne()
-	{
-	}
+	public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
 
 //Roxanne Poisontail
 //-no hair, 
@@ -43,6 +39,43 @@ WIN:
 //226 -Is PC losing the Roxanne's drinking contest intentionally?
 //227 -Drinking Contest Bonus Score
 
+		public function Roxanne()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			//Increase Roxanne's growing dick size...
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]++;
+			//Reset if she finds someone to take it (random at high values)
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
+			//hangover status stuff
+			if (player.findStatusAffect(StatusAffects.Hangover) >= 0) {
+			//Countdown
+				if (player.statusAffectv1(StatusAffects.Hangover) > 0) player.addStatusValue(StatusAffects.Hangover,1,-1);
+				else {
+					outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n", false);
+					//Restore stats
+					player.str += player.statusAffectv2(StatusAffects.Hangover);
+					player.spe += player.statusAffectv3(StatusAffects.Hangover);
+					player.inte += player.statusAffectv4(StatusAffects.Hangover);
+					dynStats("cor", 0);
+					//Clear status
+					player.removeStatusAffect(StatusAffects.Hangover);
+					return true;
+				}
+			}
+			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--; //Reduce drinking contest bonus
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 //[Drinking Table Appearance]
 public function RoxanneAppearance():Function {
 	//When she there?

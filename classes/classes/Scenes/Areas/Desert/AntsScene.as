@@ -10,11 +10,8 @@ package classes.Scenes.Areas.Desert
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Plains.Gnoll;
 
-	public class AntsScene extends BaseContent
+	public class AntsScene extends BaseContent implements TimeAwareInterface
 	{
-		public function AntsScene()
-		{
-		}
 
 //  ANTS_PC_FAILED_PHYLLA:int = 467;
 //  ANT_COLONY_KEPT_HIDDEN:int = 468;
@@ -54,11 +51,41 @@ package classes.Scenes.Areas.Desert
 
 //  DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int = 925;
 
+		public var pregnancy:PregnancyStore;
+
+		public function AntsScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.PHYLLA_VAGINAL_PREGNANCY_TYPE, kFLAGS.PHYLLA_DRIDER_INCUBATION, 0, 0);
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			trace("\nPhylla time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) {
+					//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
+					if (rand(5) == 0 && flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS]++;
+					if (model.time.hours == 24) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
+				}
+				if (flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
+				if (phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 		public function phyllaWaifu():Boolean
 		{
 			return flags[kFLAGS.ANT_WAIFU] > 0;
 		}
-
+		
 		public function antColonyEncounter():void
 		{
 			//WAIFU GET!
@@ -628,7 +655,7 @@ package classes.Scenes.Areas.Desert
 					//Persuasion failure:
 					outputText("\n\nPhylla ponders for a moment and shakes her head.  \"<i>I'm sorry [name], I'm not comfortable with that right now.");
 					//(If player has already impregnated Phylla:
-					if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] > 0) outputText("  I just can't hold anything else inside me. I'm sorry! Please don't be mad... I mean I will!  Just a-after... this batch...");
+					if (pregnancy.isPregnant) outputText("  I just can't hold anything else inside me. I'm sorry! Please don't be mad... I mean I will!  Just a-after... this batch...");
 					//(If player has not impregnated: I mean...I just don't feel comfortable with that right now...
 					outputText("</i>\"\n\n\"<i>Maybe later though...</i>\"");
 					//End of persuasion failure
@@ -645,7 +672,7 @@ package classes.Scenes.Areas.Desert
 					outputText("\n\n\"<i>UGH! It hurts... a little~ feels so strange... I-mea~ good!</i>\" she cries out.");
 					outputText("\n\nYou comfort her while telling her that you have a few more on the way; something that causes Phylla to beam with pride at the thought of being filled with so much new life that she will eventually birth.  Egg after egg slides into Phylla, causing her stomach to bulge bigger and bigger with your brood as you stuff more into her.  At last, the final egg is laid inside of Phylla, and with a loud pop, you  retract your ovipositor from her love hole;  you know it'll recover in time.  Phylla rubs her belly and gleams with delight, filled with her lover's future children that will help the colony to grow strong.");
 					player.dumpEggs();
-					if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] == 0) flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] = 8;
+					if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
 				}
 				// (End Drider Continuation)
 			}
@@ -978,7 +1005,7 @@ package classes.Scenes.Areas.Desert
 		{
 			if (flags[kFLAGS.PHYLLA_CAPACITY] < 50) flags[kFLAGS.PHYLLA_CAPACITY] = 50;
 			clearOutput();
-			if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] == 1) {
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				phyllaLaysSomeDriderEggs();
 				return;
 			}
@@ -2413,7 +2440,7 @@ package classes.Scenes.Areas.Desert
 		private function phyllaLaysSomeDriderEggs():void
 		{
 			clearOutput();
-			flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] = 0;
+			pregnancy.knockUpForce(); //Clear Pregnancy
 			outputText("As you near Phylla's bedchamber you can hear an 'Eeep!' of surprise and worry. Thinking she might be in trouble you burst into the room.  Glancing around for any immediate danger you only see Phylla's vagina drooling a green, slimy mucus.  The way she holds her very pregnant stomach and splays her legs out on the bedspread suggests that your recently laid spawn are ready to hatch.  \"<i>[name], it's time!  UGH!  I don't... have to words to express how weird this feels!</i>\"  Phylla cries out, somewhat scared at the green ooze that trickled out of her.");
 
 			//PC has less than 75 corruption:
@@ -2483,7 +2510,7 @@ package classes.Scenes.Areas.Desert
 			//empty eggs and such!
 			player.dumpEggs();
 			//set phylla drider preggo timer
-			flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] = 8;
+			if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
 			doNext(13);
 		}
 
@@ -2602,7 +2629,8 @@ package classes.Scenes.Areas.Desert
 //Sex > [Egg Phylla]
 		private function eggDatBitch():void
 		{
-			//C is a Female/Herm Drider:
+			clearOutput();
+			//PC is a Female/Herm Drider:
 			if (player.canOvipositSpider()) outputText("While Phylla appears to be sexually sated, the heaviness in your spider abdomen begs for release.\n\n");
 			//First Time:
 			if (flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA] == 0) {
@@ -2617,7 +2645,7 @@ package classes.Scenes.Areas.Desert
 			if (rand(20) + 1 + player.inte / 20 < 10) {
 				outputText("\n\nPhylla ponders for a moment and shakes her head.  \"<i>I'm sorry, [name], I'm not comfortable with that right now.");
 				//If player has already impregnated Phylla with drider eggs and fails the check:
-				if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] > 0) outputText("\n\n\"<i>I just can't hold anything else inside me.  I'm sorry!  Please don't be mad... I mean, I will!  Just a-after... this batch.</i>\"");
+				if (pregnancy.isPregnant) outputText("\n\n\"<i>I just can't hold anything else inside me.  I'm sorry!  Please don't be mad... I mean, I will!  Just a-after... this batch.</i>\"");
 				//Else player has not impregnated:
 				else outputText("\n\n\"<i>I mean... I just, don't feel comfortable with that right now. Maybe later, though.</i>\"");
 				doNext(13);
@@ -2648,7 +2676,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nAt last, the final egg laid inside of Phylla, you retract your ovipositor from her love hole; it'll recover in time. Phylla rubs her belly and gleams with delight, filled with her lover's future children that will help the colony to grow strong.");
 				//PC Drider eggs will take 8 days regardless of where she houses them to hatch. (3
 				//through 8 children per pregnancy)
-				if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] == 0) flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] = 8;
+				if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
 				flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA]++;
 				player.orgasm();
 				player.dumpEggs();

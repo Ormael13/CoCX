@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Mountain
 				if (player.cor < 40) outputText("You moan as your insides begin to heat up. The uncomfortably hot sensation only grows as more and more of its fiery seed is pumped into your body. After what feels like an eternity, the beast pulls out of you. He gives your " + vaginaDescript(0) + " and your " + assholeDescript() + " a single extended lick with its long dog-like tongue before running off out of sight. The tainted heat inside you proves to be too much and you pass out. After some time passes, you wake up to find the corrupt warmth inside you has thankfully faded away. You're able to stand up again, but the damage is done and the creature's seed has left you feeling rather weak.", false);
 				else outputText("His flaming seed brings about a pleasure you had not expected; your insides feel like they are burning with passion and power.  It is an incredible and fiery experience, one that you don't think you could have had if it wasn't for the power of corruption that you've gained since you got here. Too soon, the beast pulls out of you.  He gives your " + vaginaDescript(0) + " and your " + assholeDescript() + " a single extended lick with his long dog-like tongue before he runs off. You quickly look over and manage to catch a glimpse of its tail before it disappears from view, just before your body falls into a deep sleep. When you wake, you can still feel the afterglow of the hot seed inside you.", false);
 				//Preggers chance!
-				player.knockUp(player.PREGNANCY_HELL_HOUND, player.INCUBATION_HELL_HOUND, 101);
+				player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
 			}
 			else {
 				outputText("Your lower body explodes with pain as the hellhound forces himself in too quickly for your " + assholeDescript() + " to handle. He pauses and pants for a few seconds, but you barely have enough time to catch your breath before the beast starts thrusting in and out again. However, this time the beast starts pumping in and out more gently, only a short distance at a time as the hellhound continues panting.  As the pain in your " + assholeDescript() + " fades, you start feeling strong pleasure from it. Each thrust of the beast's lower manhood, combined with the upper one tickling and teasing your " + buttDescript() + " above it brings you closer and closer to your peak.\n\n", false);
@@ -368,7 +368,7 @@ package classes.Scenes.Areas.Mountain
 				//[if corrupt]
 				else dynStats("cor", 1.5);
 				//Preggers chance!
-				player.knockUp(player.PREGNANCY_HELL_HOUND, player.INCUBATION_HELL_HOUND, 101);
+				player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
 			}
 			cleanupAfterCombat();
 		}

@@ -3,11 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class Kelly extends AbstractFarmContent{
-
-	public function Kelly()
-	{
-	}
+	public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
 //const KELT_BREAK_LEVEL:int = 725;
 //const KELLY_CUNT_TYPE:int = 726;
@@ -41,6 +37,38 @@ Kelt will first try to turn himself back male, in order to continue the mind bre
 
 Every encounter raises corruption by 5, except the last one that raises corruption by 8. In order to achieve the last encounter your corruption level must not be lower than it was at the third encounter.*/
 
+		public var pregnancy:PregnancyStore;
+
+		public function Kelly()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
+												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			trace("\nKelly time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
+				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
+			}
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+				kellyPopsOutARunt();
+				pregnancy.knockUpForce(); //Clear Pregnancy
+				return true;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 private function hasPinkEgg():Boolean {
 	return (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG));
 }
@@ -603,8 +631,8 @@ private function kellyAppearance():void {
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde]
 	
 	outputText("\n\nShe sports a pair of soft DD-cup breasts.  Each one is ornate with a 0.5 inch nipple, often rock-hard in arousal.");
-	if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("  Beneath those, she has a second row of jiggly tits, just aching to be squeezed.");
-	if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("  Drops of milk often dribble from her tits, betraying her potent lactation.");
+	if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("  Beneath those, she has a second row of jiggly tits, just aching to be squeezed.");
+	if (pregnancy.isPregnant) outputText("  Drops of milk often dribble from her tits, betraying her potent lactation.");
 	//[enter vagina text] 
 	outputText("\n\nKelly has a ");
 	//[virgin]
@@ -612,19 +640,20 @@ private function kellyAppearance():void {
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) outputText("pink pussy");
 	else outputText("puffy, black mare-cunt");
 	outputText(" placed below her hindquarters.  It is almost constantly dripping rivulets of moisture when you're around.  Its shining openness seems to welcome you in her warmth.");
-	if(flags[kFLAGS.KELLY_HEAT_TIME] > 0 && flags[kFLAGS.KELLY_INCUBATION] == 0) outputText("<b>  There is so much leaking from her that you think she might be in heat, rendering her more receptive to impregnation.</b>");
+	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0 && !pregnancy.isPregnant) outputText("<b>  There is so much leaking from her that you think she might be in heat, rendering her more receptive to impregnation.</b>");
 	outputText("\n\nShe has a human-like asshole, placed right between her horse butt-cheeks where it belongs.");
 	
-	//[enter pregnancy text]
-	//1: 
-	if(flags[kFLAGS.KELLY_INCUBATION] >= 280) outputText("\n\n<b>Her barrel-like belly is bulging slightly more than it normally does.</b>");
-	//2:
-	else if(flags[kFLAGS.KELLY_INCUBATION] >= 200) outputText("\n\n<b>Her pregnancy is becoming obvious, her horse belly more and more distended each day.</b>");
-	//3:
-	else if(flags[kFLAGS.KELLY_INCUBATION] >= 100) outputText("\n\nHer belly is swollen and often wiggles around as your rambunctious offspring moves inside her.");
-	//4:
-	else if(flags[kFLAGS.KELLY_INCUBATION] >= 1) outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
-	
+	switch (pregnancy.event) {
+		case 1: outputText("\n\n<b>Her barrel-like belly is bulging slightly more than it normally does.</b>");
+				break;
+		case 2: outputText("\n\n<b>Her pregnancy is becoming obvious, her horse belly more and more distended each day.</b>");
+				break;
+		case 3: outputText("\n\n<b>Her belly is swollen and often wiggles around as your rambunctious offspring moves inside her.</b>");
+				break;
+		case 4: outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
+				break;
+		default:
+	}
 	if (farm.farmCorruption.hasTattoo("kelly"))
 	{
 		outputText("\n\n");
@@ -739,19 +768,19 @@ private function approachKelly():void {
 
 private function kellySexMenu():void {
 	menu();
-	if(player.hasCock() && player.lust >= 33) {
-		if(player.cockThatFits(300) >= 0 || flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
-			if(flags[kFLAGS.KELLY_INCUBATION] > 0) addButton(0,"Preg Fuck",kellyPregSex);
-			else if(!player.isTaur()) addButton(0,"Fuck Cunt",fuckKellysCunt);
+	if (player.hasCock() && player.lust >= 33) {
+		if (player.cockThatFits(300) >= 0 || flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
+			if (pregnancy.isPregnant) addButton(0,"Preg Fuck",kellyPregSex);
+			else if (!player.isTaur()) addButton(0,"Fuck Cunt",fuckKellysCunt);
 			else addButton(0,"Fuck Cunt",taurOnTaurSexKelly);
-			if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] == 0) addButton(0,"VirginFuck",takeKellysVirginity);
-			if(player.tentacleCocks() >= 2) addButton(1,"TentaFuck",tentaFuckKelly);
+			if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] == 0) addButton(0,"VirginFuck",takeKellysVirginity);
+			if (player.tentacleCocks() >= 2) addButton(1,"TentaFuck",tentaFuckKelly);
 		}
 		else outputText("\n<b>You're too big to fuck her vagina.</b>");
-		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0 && player.cockThatFits(18,"length") < 0 && !player.isTaur()) {
+		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0 && player.cockThatFits(18,"length") < 0 && !player.isTaur()) {
 			outputText("\n<b>You're too big to fuck her tits.  Maybe if you gave her something to make her grow more...</b>");
 		}
-		else if(!player.isTaur()) addButton(2,"Titfuck",kellyTitJob);
+		else if (!player.isTaur()) addButton(2,"Titfuck",kellyTitJob);
 		addButton(3,"Blowjob",kellyBJsAhoy);
 		addButton(4,"Talk And HJ",talkNHandToKelly);
 	}
@@ -818,7 +847,7 @@ private function fuckKellysCunt():void {
 	outputText("You lay immobile on her back, panting while her wonderful cunt drains you of every drop.");
 	
 	outputText("\n\nOnce your lust is spent, you reach forward to grope a tit, commenting, \"<i>Atta girl.  Now why don't you lay down and rest a while");
-	if(flags[kFLAGS.KELLY_INCUBATION] == 0) outputText(" so the cum can turn you into a proper broodmare");
+	if (!pregnancy.isPregnant) outputText(" so the cum can turn you into a proper broodmare");
 	else outputText(", maybe knit some for the kids you're going to be pumping out for me non-stop");
 	outputText(".</i>\"");
 	
@@ -1468,7 +1497,7 @@ private function kellyTitJob():void {
 	
 	outputText("As Kelly eagerly trots towards you your eyes are naturally drawn to her breasts, bouncing gently with her swaying canter.  They are just slightly too big and pert to be of non-demonic origin; every step she takes makes them palpitate, her fat, tan curves dancing for you in the sunlight, her erect nipples begging to be touched and teased");
 	//[Lactation:
-	if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", glittering beads of milk flicking here and there as she advances");
+	if (pregnancy.isPregnant) outputText(", glittering beads of milk flicking here and there as she advances");
 	outputText(".  The weight of them must be a constant reminder to her of the obscene changes you have wrought upon her body, of the deep need you have implanted into her mind, of the fact she is shaped the way she is because you have willed it.  Your " + cockDescript(x) + " is straining against your [armor] by the time Kelly has come to a halt in front of you, her lips parting and her nipples hardening even further as she pushes into your aura.  She grins coquettishly when she sees where you're staring, turning her eyes downwards and then slowly back to yours.");
 	outputText("\n\n\"<i>Does [Master] see something " + player.mf("he","she") + " likes?</i>\" There is no question in your lust reddened mind of how you're going to satisfy yourself.");
 	
@@ -1477,7 +1506,7 @@ private function kellyTitJob():void {
 	//Dick 17 inches or less:
 	if(player.cocks[x].cockLength <= 18) {
 		outputText("\n\nYou hold her by the shoulders and begin to move your " + cockDescript(x) + " up and down her valley, sighing as Kelly clasps her breasts and squashes her softness into your length, encapsulating it in her warm, yielding flesh.  Pre leaks from your tip to the shifting, pillowy pleasure inundating your hard cock, slicking Kelly's tender skin with your scent and providing you with the lubrication you need to pick up the pace.  The centauress coos as you grip her harder and begin to fuck her pillows, her eyes closed as she is swallowed by your presence and feral smell, each second you spend using her like this making her more and more sensitive and pliant to your touch.  She is an expert by now at servicing you; as you thrust into her she rolls her wrists so that your dick is caught in gentle boobquakes, her breasts pressing tightly upon your prick from all angles one second and then pulling away the next, pressing in like the tightest pussy imaginable and then pulling away to leave nothing but yielding softness...");
-		if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, coating it in warm whiteness before sliding back into her valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
+		if (pregnancy.isPregnant) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, coating it in warm whiteness before sliding back into her valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
 		outputText("  Her expression is one of deep concentration and as you quicken the pace and thrust further upwards she bends her chin down to lick at your head as it presents itself between her pressed together tits.");
 	
 		outputText("\n\n\"<i>Ooh...</i>\" she moans as she rolls her tongue around her mouth. \"<i>Why do you taste so godsdamn good, [Master]?</i>\" You are too busy to reply; your cock bulging now with real need you thrust your cock between her cleavage with all you've got, lost to everything but that sleeve of hot, wet flesh.");
@@ -1496,7 +1525,7 @@ private function kellyTitJob():void {
 		outputText("\n\n\"<i>So that's why you made me grow four of them!</i>\" Of course, you say; your slaves have to be suitably shaped to be able to properly service a [Master] as mighty as you.  Now, you say as you hold her by the shoulders and begin to move your " + cockDescript(x) + " up and down her long, twin valley, hush and properly attend to your cumslut duties.");
 		outputText("\n\nYou sigh as Kelly obediently clasps her top breasts and squashes her softness into your length, encapsulating it in her warm, yielding flesh.  You clasp her bottom boobs and do the same; whilst not as big as her first row, there is still more than enough plush fatness there to wrap your girth in warmth.  Pre leaks from your tip to the shifting, pillowy pleasure inundating your hard cock, slicking Kelly's tender skin with your scent; you slowly pull your " + cockDescript(x) + " all the way down and then up again, ensuring the full valley is given the lubrication you need to pick up the pace.  The centauress coos as you grip her harder and begin to fuck her pillows, her eyes closed as she is swallowed by your presence and feral smell, each second you spend using her like this making her more and more sensitive and pliant to your touch.");
 		outputText("\n\nShe is an expert by now at servicing you; as you thrust into her she rolls her wrists so that your dick is caught in gentle boobquakes, her breasts pressing tightly upon your prick from all angles one second and then pulling away the next, pressing in like the tightest pussy imaginable and then pulling away to leave nothing but yielding softness... you try and mimic the movement with the boobs you are holding, but you simply don't have the experience at serving your prick that she does; the base of your totem-like cock is caught in soft, savage kneading whilst your more sensitive top half is being treated to a mercurial, gentle massage.");
-		if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, running it over all four of her tits until it is coated with warm whiteness, before sliding back into her obscene valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
+		if (pregnancy.isPregnant) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, running it over all four of her tits until it is coated with warm whiteness, before sliding back into her obscene valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
 		outputText("  Her expression is one of deep concentration and as you quicken the pace and thrust further upwards she bends her chin to lick at your head as it presents itself between her pressed together tits.");
 		outputText("\n\n\"<i>Ooh...</i>\" she moans as she rolls her tongue around her mouth. \"<i>Why do you taste so godsdamn good, [Master]?</i>\" You are too busy to reply; your cock bulging now with real need you thrust your cock between her extensive cleavage with all you've got, lost to everything but that sleeve of hot, wet flesh.  Kelly's tongue flicks intermittently over your head and she moves her boobs up and down briskly, rubbing your dick in an alternating motion.  You squeeze her bottom row brutally hard, making her gasp as you thrust yourself upwards to a body-seizing high.  Sweat beads your brow and you throw your head back as you cum; your ears are full of the slimy sound of prick against boob and the ecstatic, muffled sounds Kelly makes as she opens her mouth wide and swallows your first load whole.  Your seed rises upwards and outwards and you ride your pulsing orgasm, thrusting your [hips] with each surge to blast your slave with jizz.");
 		if(player.cumQ() < 250) outputText("\n\nWhen you have finally emptied yourself, you sigh and step back to admire your handiwork.  You've given her a pretty impressive facial, her brow and cheeks splattered with your cream; however what is in range of her tongue is quickly disappearing.\n\n\"<i>Mmm... thank you for the load, [Master]!</i>\" she says, contented pleasure glittering in her eyes as she guides another oozing dollop of addiction down her throat.  You tell her she's quite welcome as you use her braid to wipe your dick clean, climb back into your [armor], and leave her to enjoy her fix.");
@@ -1512,12 +1541,12 @@ private function kellyTitJob():void {
 //Preggers
 /*Chance for Kelta to be pregnant is 1% for every 20 mL, capping at 80%.*/
 private function kellyPreggers():void {
-	if(flags[kFLAGS.KELLY_INCUBATION] > 0) return;
+	if (pregnancy.isPregnant) return;
 	var x:int = Math.round(player.cumQ() / 20);
-	if(x > 80) x = 80;
-	if(flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
-	if(rand(100) + 1 <= 80) {
-		flags[kFLAGS.KELLY_INCUBATION] = 336;
+	if (x > 80) x = 80;
+	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
+	if (rand(100) + 1 <= 80) {
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR - 84);
 		trace("Kelly knocked up.");
 	}
 }
@@ -1568,8 +1597,9 @@ public function kellyPopsOutARunt():void {
 	outputText("\n\nSatisfied to see your offspring will grow strong and healthy for you, you pat Kelly's head, tell her she's a good breeding slut and walk away; the motherly centaur sighs at the compliment.  \"<i>Thank you, [name]!  You were right, this really is my place, being used and breeding beautiful sluts for you.  I hope you will treat them as well as you treated me!</i>\"");
 	//[if corr > 80]
 	if(player.cor > 80) outputText("\n\nYou grin as vivid pictures of how you'll be treating your soon-to-be-grown kids draw themselves in your mind. Right now they're still a little young, but someday...\n");
-	flags[kFLAGS.KELLY_FIRST_KID_GENDER] = gender;
+	if (flags[kFLAGS.KELLY_KIDS] == 0) flags[kFLAGS.KELLY_FIRST_KID_GENDER] = gender;
 	flags[kFLAGS.KELLY_KIDS]++;
+	if (gender == 1) flags[kFLAGS.KELLY_KIDS_MALE]++;
 }
 
 //Talk n Hand
@@ -1977,7 +2007,7 @@ private function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls > 2) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act fills her with deep, shameful lust.  Supporting her soft, ");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("milk-laden ");
+				if (pregnancy.isPregnant) outputText("milk-laden ");
 				outputText("breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.  Whatever the cause the result is the same: pleasure thrums through your groin and up your [cock biggest], and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -1985,7 +2015,7 @@ private function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though- your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls > 2) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//[Dominika dreams:
 				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
@@ -2004,7 +2034,7 @@ private function kellyBJsAhoy():void {
 				outputText("After curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act, supporting her soft, ");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("milk-laden ");
+				if (pregnancy.isPregnant) outputText("milk-laden ");
 				outputText("breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch, fills her with deep, shameful lust.  Whatever the cause, the result is the same: pleasure thrums through your groin and up your [cock biggest], and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//Huge balls:
@@ -2012,7 +2042,7 @@ private function kellyBJsAhoy():void {
 				outputText("After curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though; your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft ");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//Dominika dreams:
 				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
@@ -2064,7 +2094,7 @@ private function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act fills her with deep, shameful lust- supporting her soft");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if (pregnancy.isPregnant) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.  Whatever the cause the result is the same.  Pleasure thrums through your groin and up your [cock biggest] and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -2072,7 +2102,7 @@ private function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though - your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
 				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
@@ -2090,7 +2120,7 @@ private function kellyBJsAhoy():void {
 				outputText("  After curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act, supporting her soft");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if (pregnancy.isPregnant) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch, fills her with deep, shameful lust.  Whatever the cause the result is the same; pleasure thrums through your groin and up your [cock biggest] and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -2098,7 +2128,7 @@ private function kellyBJsAhoy():void {
 				outputText("  After curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though - your testicles, bulging and tight with arousal, are simply too big.  After a short pause, she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if (pregnancy.isPregnant) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
 				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
