@@ -339,7 +339,7 @@
 
 			//Version NUMBER
 			ver = "0.8.14_modtest2";
-			version = ver + " (<b>Mod Test 2</b>)";
+			version = ver + " (<b>Now with Hardcore Mode!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
