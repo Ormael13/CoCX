@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.GooArmor;
 	import classes.Items.WeaponLib;
+	import classes.Saves;
 
 	import coc.view.MainView;
 
@@ -229,6 +230,86 @@ public function newGameGo(e:MouseEvent = null):void {
 	inventory.initializeGearStorage();
 }
 
+
+//For now
+private function chooseSlotHardcore1():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_1";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore2():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_2";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore3():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_3";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore4():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_4";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore5():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_5";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore6():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_6";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore7():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_7";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore8():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_8";
+	doNext(startTheGame);
+}	
+private function chooseSlotHardcore9():void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_9";
+	doNext(startTheGame);
+}	
+
+private function chooseModeNormal():void {
+	outputText("You have chosen Normal Mode. This is a classic gameplay mode.", true)
+	flags[kFLAGS.HARDCORE_MODE] = 0;
+	flags[kFLAGS.HUNGER_ENABLED] = 0;
+	doNext(startTheGame);
+}	
+
+private function chooseModeRealistic():void {
+	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically.", true)
+	flags[kFLAGS.HARDCORE_MODE] = 0;
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	flags[kFLAGS.PC_HUNGER] = 80;
+	doNext(startTheGame);
+}	
+
+private function chooseModeHardcore():void {
+	outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. ", true)
+	flags[kFLAGS.HARDCORE_MODE] = 1;
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	flags[kFLAGS.PC_HUNGER] = 80;
+	choices("Slot 1", chooseSlotHardcore1,
+			"Slot 2", chooseSlotHardcore2,
+			"Slot 3", chooseSlotHardcore3,
+			"Slot 4", chooseSlotHardcore4,
+			"Slot 5", chooseSlotHardcore5,
+			"Slot 6", chooseSlotHardcore6,
+			"Slot 7", chooseSlotHardcore7,
+			"Slot 8", chooseSlotHardcore8,
+			"Slot 9", chooseSlotHardcore9,
+			"Back", chooseGameModes)
+}	
+
+//Choose the game mode when called!
+private function chooseGameModes():void {
+	outputText("Choose a game mode.\n\n", true);
+	outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n", false);
+	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. Currently not fully baked yet.\n", false);
+	outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
+	
+	simpleChoices("Normal", chooseModeNormal, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0, "", 0);
+}	
 
 public function doCreation(eventNo:Number):void {
 	var e:MouseEvent;
@@ -761,7 +842,7 @@ public function doCreation(eventNo:Number):void {
 		else historyPerk = PerkLib.HistorySmith;
 		player.createPerk(historyPerk,0,0,0,0);
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
-			eventParser(10045);
+			eventParser(chooseGameModes);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 		}
 		else {
@@ -771,33 +852,7 @@ public function doCreation(eventNo:Number):void {
 		return;
 	}
 	
-	if(eventNo == 10045) {
-		if(flags[kFLAGS.CUSTOM_PC_ENABLED] == 1) {
-			clearOutput();
-			flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
-			kGAMECLASS.customPCSetup();
-			doNext(10045);
-			return;
-		}
-		//Ensures it's permanently unlocked.
-		if (unlockedHerm == true)
-		{
-			flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
-		}
-		statScreenRefresh();
-		model.time.hours = 11;
-		outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
-		outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n", false);
-		outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n", false);
-		outputText("The cave is unusually warm and damp, ", false);
-		if(player.gender == 2) outputText("and your body seems to feel the same way, flushing as you feel a warmth and dampness between your thighs. ", false);
-		else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ", false);
-		outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...", false);
-		showStats();
-		dynStats("lus", +15);
-		doNext(2000);
-		return;
-	}
+
 	//Slut
 	if(eventNo == 10046) {
 		outputText("You managed to spend most of your time having sex.  Quite simply, when it came to sex, you were the village bicycle - everyone got a ride.  Because of this, your body is a bit more resistant to penetrative stretching, and has a higher upper limit on what exactly can be inserted.  Is this your history?", true);
@@ -827,6 +882,38 @@ public function doCreation(eventNo:Number):void {
 
 }
 
+private function startTheGame():void {
+	if(flags[kFLAGS.CUSTOM_PC_ENABLED] == 1) {
+		clearOutput();
+		flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
+		kGAMECLASS.customPCSetup();
+		doNext(startTheGame);
+		return;
+	}
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+		trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
+		getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+	}
+	//Ensures it's permanently unlocked.
+	if (unlockedHerm == true)
+	{
+		flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
+	}
+	statScreenRefresh();
+	model.time.hours = 11;
+	outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
+	outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n", false);
+	outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n", false);
+	outputText("The cave is unusually warm and damp, ", false);
+	if(player.gender == 2) outputText("and your body seems to feel the same way, flushing as you feel a warmth and dampness between your thighs. ", false);
+	else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ", false);
+	outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...", false);
+	showStats();
+	dynStats("lus", +15);
+	doNext(2000);
+	return;
+}
+
 public function useCustomProfile():void {
 	flags[kFLAGS.CUSTOM_PC_ENABLED] = 1;
 	clearOutput();
@@ -836,7 +923,7 @@ public function useCustomProfile():void {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 		flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 		kGAMECLASS.customPCSetup();
-		doNext(10045);
+		doNext(startTheGame);
 	}
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");

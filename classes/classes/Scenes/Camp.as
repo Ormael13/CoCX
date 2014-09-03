@@ -41,6 +41,13 @@
 //  SLEEP_WITH:int = 701;
 
 public function doCamp():void {
+	//Force autosave on HARDCORE MODE!
+	if (player.slotName != "VOID" && mainView.getButtonText( 0 ) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
+	{
+		trace("Autosaving to slot: " + player.slotName);
+		
+		getGame().saves.saveGame(player.slotName);
+	}
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
@@ -686,6 +693,13 @@ public function doCamp():void {
 		player.removeStatusAffect(StatusAffects.ParalyzeVenom);
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
+	
+	//Hunger check!
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 25)
+	{
+		outputText("<b>Your stomach is growling loudly. You have to eat something.</b>\n\n", false);
+	}
+	
 	//The uber horny
 	if(player.lust >= 100) {
 		if(player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
@@ -745,10 +759,17 @@ public function doCamp():void {
 	
 	//Menu
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
-	//Lovers
-	//Followers
-	//Slaves
-
+	//Bad end
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 0)
+	{
+		//Bad end at 0 HP!
+		if (player.HP <= 0 && (player.str + player.tou) < 20 )
+		{
+			outputText("Too weak to be able to stand up, you slump down on the ground. Your vision blurs as the world around you finally fades to black. \n\nYou are dead.", true);
+			player.HP = 0;
+			eventParser(5035);
+		}
+	}
 }
 public function initiateStash():void {
 	trace("Initiating stash");
@@ -1218,6 +1239,13 @@ public function rest():void {
 	{
 		multiplier += 0.5; //Cabin has that comfortable bed. Even more comfortable than sleeping on your bedroll! Adds 0.5 to multiplier.
 	}
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	{
+		if (flags[kFLAGS.PC_HUNGER] < 25)
+		{
+			multiplier *= 0.5
+		}
+	}
 	//Fatigue recovery
 	var fatRecovery:Number = 4;
 	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
@@ -1229,6 +1257,14 @@ public function rest():void {
 		}
 		outputText("You lie down to rest for four hours.\n", false);
 		timeQ = 4;
+		//Hungry
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+		{
+			if (flags[kFLAGS.PC_HUNGER] < 25)
+			{
+				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
+			}
+		}
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
@@ -1425,6 +1461,14 @@ public function sleepRecovery(display:Boolean = false):void {
 	{
 		multiplier += 0.5;
 	}
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	{
+		if (flags[kFLAGS.PC_HUNGER] < 25)
+		{
+			outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n", false);
+			multiplier *= 0.5;
+		}
+	}	
 	//Marble withdrawl
 	if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);

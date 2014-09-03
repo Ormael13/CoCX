@@ -1415,6 +1415,18 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0) outputText("<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
 
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	{
+		outputText("<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + "/100 (");
+		if (flags[kFLAGS.PC_HUNGER] <= 0) outputText("<font color=\"#ff0000\">Dying</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 1 && flags[kFLAGS.PC_HUNGER] < 10) outputText("<font color=\"#660000\">Starving</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) outputText("Very hungry");
+		if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50) outputText("Hungry");
+		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) outputText("Not hungry");
+		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) outputText("Satiated");
+		if (flags[kFLAGS.PC_HUNGER] >= 90) outputText("Full");
+		outputText(")\n", false);
+	}
 	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
 	outputText("<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n");
 	outputText("<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n", false);

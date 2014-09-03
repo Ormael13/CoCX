@@ -283,6 +283,7 @@ package classes.Scenes.NPCs
 			//(also slimefeed!)
 			dynStats("str", 5 + rand(5), "tou", 5 + rand(5), "int", 5 + rand(5), "cor", 20);
 			player.slimeFeed();
+			player.refillHunger(100);
 			doNext(13);
 		}
 

@@ -17,7 +17,7 @@ package classes.Items.Consumables
         public function BeeHoney(pure:Boolean)
         {
 			var honeyName:String = (pure ? "PurHony" : "BeeHony");
-			var honeyLong:String = (pure ? "a crystal vial filled with glittering honey" : "a small vial filled with giant-bee honey \n\nType: Transformative item");
+			var honeyLong:String = (pure ? "a crystal vial filled with glittering honey" : "a small vial filled with giant-bee honey");
 			var honeyDesc:String = "This fine crystal vial is filled with a thick amber liquid that glitters" + (pure ? " " : " dully ") + "in the light.  You can smell a sweet scent, even though it is tightly corked. \n\nType: Transformative item";
 			super(honeyName, honeyName, honeyLong, beeHoneyEffect, (pure ? PURE_HONEY_VALUE : 3), honeyDesc);
         }

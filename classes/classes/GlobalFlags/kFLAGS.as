@@ -2986,7 +2986,7 @@ public static const UNKNOWN_FLAG_NUMBER_02977:int                               
 public static const UNKNOWN_FLAG_NUMBER_02978:int                                   = 2978;
 public static const UNKNOWN_FLAG_NUMBER_02979:int                                   = 2979;
 public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; //Unlocked hermaphrodite.
-public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981;
+public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981; 
 public static const UNKNOWN_FLAG_NUMBER_02982:int                                   = 2982;
 public static const UNKNOWN_FLAG_NUMBER_02983:int                                   = 2983;
 public static const UNKNOWN_FLAG_NUMBER_02984:int                                   = 2984;
@@ -2997,7 +2997,7 @@ public static const UNKNOWN_FLAG_NUMBER_02988:int                               
 public static const UNKNOWN_FLAG_NUMBER_02989:int                                   = 2989;
 public static const GAME_DIFFICULTY:int  			                                = 2990; // 0 is medium, 1 is hard, 2 is nightmare mode. Affects levels of encounter.
 public static const HARDCORE_MODE:int       				                        = 2991; // 0 is disabled, 1 is enabled. Forces save and causes deletion of save file on bad end.
-public static const SURVIVAL_MODE:int         			 	                        = 2992; // 0 is disabled, 1 is enabled. Enables hunger.
+public static const HARDCORE_SLOT:int         			 	                        = 2992; //
 public static const HUNGER_ENABLED:int               				                = 2993; // Determines if hunger is enabled. 1 is enabled.
 public static const PC_HUNGER:int                                                   = 2994; // Goes from 0 to 100. 100 is full, 0 is starving.
 public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // disables corruption requirement for certain buttfuck scenes.

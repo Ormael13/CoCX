@@ -1640,14 +1640,17 @@ public function doItems(eventNo:Number):void {
 			eventParser(5035);
 		}
 		public function giveHumanizer():void {
-			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
-				outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
-				eventParser(5035);
-				return;
-			}
-			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
-			inventory.takeItem(consumables.HUMMUS_);
-			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
+			//if (!flags[kFLAGS.HARDCORE_MODE] > 0)
+			//{
+				if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
+					outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
+					eventParser(5035);
+					return;
+				}
+				outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
+				inventory.takeItem(consumables.HUMMUS_);
+				flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
+			//}
 		}
 		//Create a storage slot
 		public function createStorage():Boolean {

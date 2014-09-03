@@ -671,7 +671,7 @@ private function sheilaReconcileKay2():void {
 	outputText("\n\n\"<i>Ah, here,</i>\" she says abruptly, pulling out a biscuit and holding it out to you as well.  You take it with care; it feels slightly slippery to the touch.  \"<i>Fish oil cracker,</i>\" Sheila explains.  \"<i>Made it myself this morning.  Eat nothing but rabbit and you get stonkered with headaches and fat cravings - any lean meat, really.  Most bushrangers find out the hard way.  I'm not cook enough to make it tasty, so get it down first and bog in afterward.</i>\"  She beams a smile as you eye up the unappetizing morsel of dry, fishy bread and swallow it in a single mouthful, then grimace.  Despite the kindly concern evidenced by the gesture, she... definitely wasn't sugar-coating the description.");
 	
 	outputText("\n\nThe two of you devour the first half of the meat in greedy silence, picking morsels from the bones without remorse; Sheila finishes before you and spits the second half of the rabbit, then begins holding it over the fire as she did the first.  Peering over your nearly-bare rabbit quarter at her, you turn the question you've been shaping in your head over a few times.");
-	
+	player.refillHunger(50);
 	outputText("\n\n\"<i>So how is it that you and your friends come to live out here by yourselves?</i>\"");
 	
 	outputText("\n\nShe stops humming and looks absently at the meat for a while, as if deciding whether to answer, and for a moment you despair of ever piercing the veil of her bluffness.");

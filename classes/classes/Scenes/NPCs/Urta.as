@@ -4133,6 +4133,7 @@ internal function slurpFawkesCocksForFunAndInflation():void {
 	outputText("\n\nYou say goodbye to Urta as you head back towards camp, your stomach sloshing with each step.");
 	dynStats("lus", 10+player.lib/10);
 	player.slimeFeed();
+	player.refillHunger(100);
 	flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;

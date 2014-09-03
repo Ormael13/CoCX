@@ -3,6 +3,9 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.Minotaur;
 
 import coc.view.MainView;
+import classes.Saves;
+
+import flash.net.SharedObject;
 
 public function inCombat():Boolean {
 	return gameState == 1 || gameState == 2;
@@ -428,8 +431,8 @@ public function doCombat(eventNum:Number):void
 			}
 			cleanupAfterCombat();
 	}
-			//Sand witch bad end
-			//GAME OVERS
+	//Sand witch bad end
+	//GAME OVERS
 	if(eventNum == 5025)
 	{
 		if (!this.testingBlockExiting)
@@ -449,16 +452,27 @@ public function doCombat(eventNum:Number):void
 			else {
 				gameState = 0;
 				doNext(13);
-
 			}
-
 			inDungeon = false;
 	}
-			//Soft Game Over - for when you want to leave the text on-screen
+	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 
 			if (!this.testingBlockExiting) {
 				outputText("\n\n<b>GAME OVER</b>", false);
+				
+				//Delete save on hardcore.
+				if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+					outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+					flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
+					var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+					if (test.data.exists)
+					{
+						trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+						test.clear();
+					}
+				}
+				
 				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "Debug Cheat", 1);
 				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
 				mainView.showMenuButton(MainView.MENU_NEW_MAIN);
@@ -466,7 +480,7 @@ public function doCombat(eventNum:Number):void
 				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 				mainView.hideMenuButton(MainView.MENU_LEVEL);
 				mainView.hideMenuButton(MainView.MENU_PERKS);
-
+				
 				gameState = 0;
 			}
 			else {
@@ -476,7 +490,7 @@ public function doCombat(eventNum:Number):void
 			}
 			inDungeon = false;
 	}
-			//Sand which(lol) end Pt 1
+	//Sand which(lol) end Pt 1
 	if(eventNum == 5026)
 	{
 			outputText("You awaken in a candlelit stone shrine of some sort, resting naked and facedown on some warm, comfortable body pillows. Remembering your fight against the witch, you hurriedly try to get up, only to gasp with surprise when a painful weight pulls on your chest. Glancing down to find the source of the weight, you blink with shock, then fight rising panic – the \"pillows\" that you are lying on are your own breasts, swollen to such a size that you cannot possibly lift them!\n\n", true);
@@ -1013,6 +1027,7 @@ public function doCombat(eventNum:Number):void
 			else if (monster.plural) outputText(monster.capitalA + monster.short + " look down at the arrow that now protrudes from one of " + monster.pronoun3 + " bodies", false);
 			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			damage = doDamage(damage);
 			monster.lust -= 20;
 			if (monster.lust < 0) monster.lust = 0;
@@ -1225,7 +1240,8 @@ public function bite():void {
 	
 	//Deal damage and update based on perks
 	if(damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		damage = doDamage(damage);
 	}
 	
@@ -1434,7 +1450,7 @@ public function attack():void {
 		
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowAttack) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-	
+	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	//One final round
 	damage = Math.round(damage);
 	
@@ -1465,7 +1481,8 @@ public function attack():void {
 		}
 	}
 	if(damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		damage = doDamage(damage);
 	}
 	if(damage <= 0) {
@@ -1608,7 +1625,8 @@ public function goreAttack():void {
 		//CAP 'DAT SHIT
 		if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
 		if(damage > 0) {
-			if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			damage = doDamage(damage);
 		}
 		//Different horn damage messages
@@ -2165,8 +2183,11 @@ public function regeneration(combat:Boolean = true):void {
 	if(combat) {
 		//Regeneration
 		healingPercent = 0;
-		if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
-		if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
+		if (flags[kFLAGS.PC_HUNGER] > 0 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		{
+			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
+			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
+		}
 		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
 		if(player.armorName == "goo armor") healingPercent += 2;
 		if(player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
@@ -2176,8 +2197,11 @@ public function regeneration(combat:Boolean = true):void {
 	else {
 		//Regeneration
 		healingPercent = 0;
-		if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 2;
-		if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 4;
+		if (flags[kFLAGS.PC_HUNGER] > 0 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		{
+			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 2;
+			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 4;
+		}
 		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
 		if(player.armorName == "goo armor") healingPercent += 3;
 		if(player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 2;
@@ -3875,6 +3899,7 @@ public function spellMod():Number {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+	if (player.jewelryEffectId == 9) mod += (player.jewelryEffectMagnitude / 100);
 	return mod;
 }
 public function spellArouse():void {
@@ -4377,7 +4402,8 @@ public function kick():void {
 	//Apply AND DONE!
 	damage -= reduction;
 	//Damage post processing!
-	if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+	if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	//(None yet!)
 	if(damage > 0) damage = doDamage(damage);
 	

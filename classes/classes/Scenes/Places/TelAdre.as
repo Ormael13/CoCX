@@ -1490,7 +1490,7 @@ private function debitWeapon(itype:ItemType):void {
 public function jewelShopEntry():void {
 	outputText("", true);
 	outputText("You enter the jewellery store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
-	outputText("<i>\"Welcome to my jewellery store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. It stays on until you take them off,\"</i> the lizan says.", false);
+	outputText("<i>\"Welcome to my jewellery store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
 
 	choices("Next", jewelShopInside,
 			"", 0,
@@ -1537,7 +1537,7 @@ public function jewelShopPageII():void {
 			jewelries.LIFERNG.shortName, createCallBackFunction(jewelBuy, jewelries.LIFERNG),
 			jewelries.POWRRNG.shortName, createCallBackFunction(jewelBuy, jewelries.POWRRNG),
 			jewelries.PURERNG.shortName, createCallBackFunction(jewelBuy, jewelries.PURERNG),
-			"", 0,
+			jewelries.MYSTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.MYSTRNG),
 			"", 0,
 			"", 0,
 			"Back",jewelShopInside);	

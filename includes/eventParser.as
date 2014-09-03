@@ -460,13 +460,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		{
 			dynStats("cor", (player.jewelryEffectMagnitude/10));
 		}
-		//Hunger!
+		//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-			//Caps hunger at 100.
-			if (flags[kFLAGS.PC_HUNGER] > 100)
-			{
-				flags[kFLAGS.PC_HUNGER] = 100;
-			}
+
 			//Hunger drain rate. If above 50, 2 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
 			if (flags[kFLAGS.PC_HUNGER] > 50)
@@ -480,6 +476,31 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if (flags[kFLAGS.PC_HUNGER] > 0)
 			{
 				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+			//Caps hunger at 100. Occurs after hunger tick so you'll be able to see hunger showing 100/100.
+			if (flags[kFLAGS.PC_HUNGER] > 100)
+			{
+				flags[kFLAGS.PC_HUNGER] = 100;
+			}
+			if (flags[kFLAGS.PC_HUNGER] <= 0)
+			{
+				//Lose HP and makes fatigue go up. Lose body weight and muscles.
+				takeDamage(maxHP() / 50);
+				fatigue(2);
+				player.modThickness(1, 1);
+				player.modTone(1, 1);
+				if (rand(3) == 0) player.buttRating--;
+				if (rand(3) == 0) player.hipRating--;
+				dynStats("str", -0.5);
+				dynStats("tou", -0.5);
+			}
+			//Goo armor prevents starvation completely!
+			if (player.armorName == "goo armor")
+			{
+				if (flags[kFLAGS.PC_HUNGER] < 10)
+				{
+					flags[kFLAGS.PC_HUNGER] = 10;
+				}
 			}
 		}
 		if(izmaScene.izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;

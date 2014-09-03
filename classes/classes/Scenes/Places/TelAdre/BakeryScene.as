@@ -344,6 +344,7 @@ public function nomnomnom(name:String,price:Number):void {
 		outputText(", none of them tries to make a move.  Pity.", false);
 		dynStats("lus", (20+player.lib/10));
 		player.minoCumAddiction(10);
+		player.refillHunger(20);
 	}
 	else {
 		outputText("You hand over " + num2Text(flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) + " gems and get your " + flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] + ".  A moment later you're at a table, licking the sugary residue from your fingertips and wondering just how they make the food so damned good.", false);
@@ -358,6 +359,7 @@ public function nomnomnom(name:String,price:Number):void {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
 				player.hipRating++;
 			}
+			player.refillHunger(25);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cookies") {
 			outputText(player.modTone(0,1), false);
@@ -366,6 +368,7 @@ public function nomnomnom(name:String,price:Number):void {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
 				player.hipRating++;
 			}
+			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "brownies") {
 			outputText(player.modThickness(100,4), false);
@@ -373,6 +376,7 @@ public function nomnomnom(name:String,price:Number):void {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + hipDescript() + " definitely got wider.", false);
 				player.hipRating += 2;
 			}
+			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cupcakes") {
 			outputText(player.modTone(0,4), false);
@@ -380,6 +384,7 @@ public function nomnomnom(name:String,price:Number):void {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles with a good bit of extra weight.", false);
 				player.buttRating += 2;
 			}
+			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "pound cake") {
 			outputText(player.modTone(0,2), false);
@@ -392,6 +397,7 @@ public function nomnomnom(name:String,price:Number):void {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your " + hipDescript() + " widen?", false);
 				player.hipRating++;
 			}
+			player.refillHunger(50);
 		}
 	}
 	//doNext(bakeryuuuuuu);

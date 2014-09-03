@@ -23,6 +23,7 @@
 //Cerulean P.
 		public function ceruleanPotion(player:Player):void
 		{
+			
 			player.slimeFeed();
 			//Repeat genderless encounters
 			if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
@@ -43,11 +44,13 @@
 				if (player.statusAffectv1(StatusAffects.SuccubiNight) < 3) player.addStatusValue(StatusAffects.SuccubiNight,1,1);
 			}
 			else player.createStatusAffect(StatusAffects.SuccubiNight, 1, 0, 0, 0);
+			player.refillHunger(20);
 		}
 
 //Vitality Tincture
 		public function vitalityTincture(player:Player):void
 		{
+			
 			player.slimeFeed();
 			outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more fit and healthy.", true);
 			//str change
@@ -64,20 +67,24 @@
 			//Chance of fitness change
 			if (HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.", false);
 			if (rand(3) == 0) outputText(player.modTone(95, 3), false);
+			player.refillHunger(10);
 		}
 
 //Scholar's Tea
 		public function scholarsTea(player:Player):void
 		{
+			
 			player.slimeFeed();
 			outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.", true);
 			if (rand(3) == 0) outputText(player.modTone(15, 1), false);
 			dynStats("int", (2.5 + rand(5)));
+			player.refillHunger(10);
 		}
 
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
+			
 			player.slimeFeed();
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -241,6 +248,7 @@
 			player.genderCheck();
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2), false);
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2), false);
+			player.refillHunger(10);
 		}
 
 		public function growDemonCock(growCocks:Number):void
@@ -382,6 +390,7 @@
 				flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
 				outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 			}
+			player.refillHunger(25);
 		}
 
 		public function minotaurBlood(player:Player):void
@@ -800,9 +809,9 @@
 				HPChange(50, true);
 				dynStats("lus", 50);
 			}
-
+			player.refillHunger(25);
 		}
-
+		
 		public function equinum(player:Player):void
 		{
 			player.slimeFeed();
@@ -1155,9 +1164,9 @@
 					}
 				}
 				if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
-          if (player.goIntoHeat(true)) {
-            changes++;
-          }
+					if (player.goIntoHeat(true)) {
+						changes++;
+					}
 				}
 
 				if (!flags[kFLAGS.HYPER_HAPPY])
@@ -1300,7 +1309,7 @@
 				HPChange(20, true);
 				dynStats("lus", 3);
 			}
-
+			player.refillHunger(15);
 		}
 
 		public function succubiMilk(tainted:Boolean,player:Player):void
@@ -1506,6 +1515,7 @@
 				if (rand(3) == 0) outputText(player.modTone(20, 2), false);
 			}
 			player.genderCheck();
+			player.refillHunger(20);
 		}
 
 //1-Oversized Pepper (+size, thickness)
@@ -2189,7 +2199,7 @@
 				HPChange(20, true);
 				dynStats("lus", 3);
 			}
-
+			player.refillHunger(15);
 		}
 
 		public function impFood(player:Player):void
@@ -2239,6 +2249,7 @@
 				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!", false);
 				player.tallness -= 1 + rand(3);
 			}
+			player.refillHunger(20);
 		}
 
 		public function pureHoney(pure:Boolean, player:Player):void
@@ -2418,6 +2429,7 @@
 				player.gills = false;
 				changes++;
 			}
+			player.refillHunger(15);
 		}
 
 		public function succubisDelight(tainted:Boolean,player:Player):void
@@ -2492,6 +2504,7 @@
 			if (player.balls > 0 && rand(3) == 0) {
 				outputText(player.modFem(12, 3), false);
 			}
+			player.refillHunger(10);
 		}
 
 		public function succubisDream(player:Player):void
@@ -2578,6 +2591,7 @@
 			if (player.balls > 0 && rand(3) == 0) {
 				outputText(player.modFem(12, 5), false);
 			}
+			player.refillHunger(15);
 		}
 
 		public function greenGel(player:Player):void
@@ -2652,6 +2666,7 @@
 				if (player.pregnancyIncubation < 1) player.pregnancyIncubation = 2;
 				trace("Pregger Count New total:" + player.pregnancyIncubation);
 			}
+			player.refillHunger(10);
 		}
 
 //butt expansion
@@ -2661,15 +2676,18 @@
 			if (!large) {
 				outputText("You feel a bit of additional weight on your backside as your " + buttDescript() + " gains a bit more padding.", true);
 				player.buttRating++;
+				player.refillHunger(20);
 			}
 			else {
 				outputText("Your " + buttDescript() + " wobbles, nearly throwing you off balance as it grows much bigger!", true);
 				player.buttRating += 2 + rand(3);
+				player.refillHunger(60);
 			}
 			if (rand(3) == 0) {
 				if (large) outputText(player.modThickness(100, 8), false);
 				else outputText(player.modThickness(95, 3), false);
 			}
+			
 		}
 
 //hip expansion
@@ -2679,10 +2697,12 @@
 			if (!large || player.hipRating > 20) {
 				outputText("You stumble as you feel your " + hipDescript() + " widen, altering your gait slightly.", false);
 				player.hipRating++;
+				player.refillHunger(20);
 			}
 			else {
 				outputText("You stagger wildly as your hips spread apart, widening by inches.  When the transformation finishes you feel as if you have to learn to walk all over again.", false);
 				player.hipRating += 2 + rand(2);
+				player.refillHunger(60);
 			}
 			if (rand(3) == 0) {
 				if (large) outputText(player.modThickness(80, 8), false);
@@ -2718,6 +2738,7 @@
 					outputText("You feel a tingle deep inside your body, just above your " + vaginaDescript(0) + ", as if you were becoming more fertile.\n\n", false);
 					player.fertility += 5;
 				}
+				player.refillHunger(20);
 			}
 			//LARGE
 			else {
@@ -2737,6 +2758,7 @@
 					outputText("You feel a powerful tingle deep inside your body, just above your " + vaginaDescript(0) + ". Instinctively you know you have become more fertile.\n\n", false);
 					player.fertility += 10;
 				}
+				player.refillHunger(60);
 			}
 			if (rand(3) == 0) {
 				if (large) outputText(player.modFem(100, 8), false);
@@ -2808,6 +2830,7 @@
 					}
 
 				}
+				player.refillHunger(20);
 			}
 			//LARGE
 			else {
@@ -2890,8 +2913,8 @@
 						}
 						dynStats("lib", 1, "sen", 1, "lus", 20);
 					}
-
 				}
+				player.refillHunger(60);
 			}
 			if (rand(3) == 0) {
 				if (large) outputText(player.modFem(0, 8), false);
@@ -2911,6 +2934,7 @@
 					player.nippleLength += .2;
 					dynStats("lus", 15);
 				}
+				player.refillHunger(20);
 			}
 			//LARGE
 			else {
@@ -2933,6 +2957,7 @@
 				}
 				//Talk about if anything was changed.
 				if (temp2 > 0) outputText("\n\nYour " + allBreastsDescript() + " tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>", false);
+				player.refillHunger(60);
 			}
 		}
 
@@ -2972,6 +2997,7 @@
 						}
 					}
 				}
+				player.refillHunger(20);
 			}
 			//Large
 			if (large) {
@@ -3024,6 +3050,7 @@
 						}
 					}
 				}
+				player.refillHunger(60);
 			}
 		}
 
@@ -3166,6 +3193,7 @@
 				player.addStatusValue(StatusAffects.BottledMilk, 1, (6 + rand(6)));
 			}
 			else player.createStatusAffect(StatusAffects.BottledMilk, 12, 0, 0, 0);
+			player.refillHunger(20);
 		}
 
 		/*Purified LaBova:
@@ -3591,6 +3619,7 @@
 			if (rand(3) == 0) outputText(player.modFem(79, 3), false);
 			if (rand(3) == 0) outputText(player.modThickness(70, 4), false);
 			if (rand(5) == 0) outputText(player.modTone(10, 5), false);
+			player.refillHunger(20);
 		}
 
 
@@ -3682,7 +3711,7 @@
 			//Heat/Rut for those that can have them if "fuck draft"
 			if (fuck) {
 				//Try to go into intense heat.
-        player.goIntoHeat(true, 2);
+				player.goIntoHeat(true, 2);
 				//Males go into rut
 				player.goIntoRut(true);
 			}
@@ -3706,6 +3735,7 @@
 			}
 			if (player.lust > 100) player.lust = 100;
 			outputText("\n\n", false);
+			player.refillHunger(15);
 		}
 
 		public function goblinAle(player:Player):void
@@ -3903,6 +3933,7 @@
 				if (rand(2) == 0) player.modThickness(20, 3);
 				if (rand(2) == 0) player.modTone(15, 5);
 			}
+			player.refillHunger(15);
 		}
 
 		public function gooGasmic(player:Player):void
@@ -4197,6 +4228,7 @@
 			if (changes == 0) {
 				outputText("\n\nNothing happened.  Weird.", false);
 			}
+			player.refillHunger(5);
 		}
 
 
@@ -4308,6 +4340,7 @@
 			 }*/
 			//Default change - blah
 			if (changes == 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?", false);
+			player.refillHunger(5);
 		}
 
 		public function extensionSerum(player:Player):void
@@ -4445,9 +4478,9 @@
 			outputText("", true);
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
 			//Try to go into intense heat
-      if(player.goIntoHeat(true, 2)) {
-        changes++;
-      }
+			if(player.goIntoHeat(true, 2)) {
+				changes++;
+			}
 			//Males go into rut
 			else if(player.goIntoRut(true)) {
 				changes++;
@@ -4767,6 +4800,7 @@
 				if (player.gender < 2) if (rand(2) == 0) outputText(player.modFem(65, 1), false);
 				else outputText(player.modFem(85, 2), false);
 			}
+			player.refillHunger(20);
 		}
 
 		public function reptilum(player:Player):void
@@ -5141,6 +5175,7 @@
 				HPChange(50, true);
 				dynStats("lus", 3);
 			}
+			player.refillHunger(20);
 		}
 
 
@@ -5496,6 +5531,7 @@
 					}
 				}
 			}
+			player.refillHunger(20);
 		}
 
 		public function goldenSeed(type:Number,player:Player):void
@@ -5816,6 +5852,7 @@
 				changes++;
 			}
 			if (changes == 0) outputText("\n\nAside from being a tasty treat, it doesn't seem to do anything to you this time.", false);
+			player.refillHunger(10);
 		}
 
 		/*
@@ -6056,6 +6093,7 @@
 				outputText("\n\nIt did not seem to have any effects, but you do feel better rested.", false);
 				fatigue(-40);
 			}
+			player.refillHunger(20);
 		}
 
 //[Giant Chocolate Cupcake] – 500 gems
@@ -6068,6 +6106,7 @@
 			outputText("As you relax in your sugar-coma, you realize your muscle definition is fading away, disappearing until your " + player.skinDesc + " looks nearly as soft and spongy as Maddie's own.  You caress the soft, pudgy mass and shiver in delight, dimly wondering if this is how the cupcake-girl must feel all the time.", false);
 			outputText(player.modTone(0, 100), false);
 			outputText(player.modThickness(100, 100), false);
+			player.refillHunger(100);
 		}
 
 		public function sweetGossamer(type:Number,player:Player):void
@@ -6332,6 +6371,7 @@
 				outputText("\n\nThe sweet silk energizes you, leaving you feeling refreshed.", false);
 				fatigue(-33);
 			}
+			player.refillHunger(5);
 		}
 
 		public function applyLustStick(player:Player):void
@@ -6355,6 +6395,7 @@
 
 		public function broBrew(player:Player):void
 		{
+			player.slimeFeed();
 			outputText("", true);
 			//no drink for bimbos!
 			if (player.findPerk(PerkLib.BimboBody) >= 0) {
@@ -6510,6 +6551,7 @@
 			}
 			if (player.inte > 21) player.inte = 21;
 			dynStats("str", 33, "tou", 33, "int", -1, "lib", 4, "lus", 40);
+			player.refillHunger(30);
 		}
 
 
@@ -6521,6 +6563,7 @@
 //Bottle of Ectoplasm Text
 		public function ectoplasm(player:Player):void
 		{
+			player.slimeFeed();
 			outputText("", true);
 			outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up to your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste, at least, is unexpectedly pleasant.  Almost tastes like oranges.", false);
 			var changes:Number = 0;
@@ -6602,14 +6645,17 @@
 
 			//Sample possession text (>79 int, perhaps?):  With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.
 			//Failure:  With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.
+			player.refillHunger(20);
 		}
 
 		public function isabellaMilk(player:Player):void
 		{
+			player.slimeFeed();
 			outputText("", true);
 			outputText("You swallow down the bottle of Isabella's milk.", false);
 			if (player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)", false);
 			fatigue(-33);
+			player.refillHunger(20);
 		}
 
 
@@ -6697,6 +6743,7 @@
 				//(add one level of hairlength)
 				changes++;
 			}
+			player.refillHunger(20);
 		}
 
 //ITEMS START
@@ -6747,11 +6794,13 @@
 			outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.", false);
 			dynStats("sen", -3);
 			if (player.sens < 1) player.sens = 1;
+			player.refillHunger(20);
 		}
 
 //2. Sensitivity Draft
 		public function sensitivityDraft(player:Player):void
 		{
+			player.slimeFeed();
 			outputText("", true);
 			outputText("You pop the cork on this small vial and drink down the clear liquid.  It makes your lips and tongue tingle strangely, letting you feel each globule of spit in your mouth and each breath of air as it slides past your lips.", false);
 
@@ -6773,6 +6822,7 @@
 			}
 			else outputText("You worry it'll make it harder to resist the attentions of a demon.", false);
 			dynStats("sen", 10, "lus", 5);
+			player.refillHunger(15);
 		}
 
 		public function foxTF(enhanced:Boolean,player:Player):void
@@ -7009,9 +7059,9 @@
 			}
 			//HEAT!
 			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(6) == 0 && changes < changeLimit) {
-        if(player.goIntoHeat(true)) {
-  				changes++;
-        }
+				if(player.goIntoHeat(true)) {
+						changes++;
+				}
 			}
 			//[Grow Fur]
 			//FOURTH
@@ -7102,10 +7152,12 @@
 				outputText("\n\nWell that didn't do much, but you do feel a little refreshed!");
 				fatigue(-5);
 			}
+			player.refillHunger(15);
 		}
 
 		public function godMead(player:Player):void
 		{
+			player.slimeFeed();
 			clearOutput();
 			outputText("You take a hearty swig of mead, savoring the honeyed taste on your tongue.  Emboldened by the first drink, you chug the remainder of the horn's contents in no time flat.  You wipe your lips, satisfied, and let off a small belch as you toss the empty horn aside.");
 
@@ -7128,14 +7180,17 @@
 			//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
 			//[If player already has beard] A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.
 			//Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
+			player.refillHunger(20);
 		}
 
 		public function sheepMilk(player:Player):void
 		{
+			player.slimeFeed();
 			outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated", true);
 			//-30 fatigue, -2 libido, -10 lust]
 			fatigue(-30);
 			dynStats("lib", -.25, "lus", -10, "cor", -0.5);
+			player.refillHunger(20);
 		}
 
 //Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
@@ -7155,7 +7210,8 @@
 				//(if PC has breath weapon)
 				outputText("\n\nA sudden surge of energy fills your being and you feel like you could blast anything to atoms with a single breath, like the mighty dragons of legends.");
 			}
-			fatigue(-20);
+			fatigue( -20);
+			player.refillHunger(50);
 		}
 
 
@@ -7628,6 +7684,7 @@
 			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) dynStats("cor", 0.5);
 			dynStats("cor", 0.1);
 			HPChange(Math.round(player.maxHP() * .25), false);
+			player.refillHunger(30);
 		}
 
 //Trap Oil
@@ -7908,6 +7965,7 @@
 			outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.");
 			fatigue(-15);
 			HPChange(Math.round(player.maxHP() * 0.25), false);
+			player.refillHunger(25);
 		}
 
 //New Item: "Purple Fruit"
@@ -7916,6 +7974,7 @@
 //>When Used
 		public function purpleFruitEssrayle(player:Player):void
 		{
+			player.slimeFeed();
 			clearOutput();
 			outputText("You bite into the fruit Essrayle gave you with little hesitation.  It's amazingly sweet, with a texture that's rather gummy.  The juice is a candied grape syrup that fills your cheeks and flows down your throat with far more fluid than the size of the plant should allow.  You hastily devour the entire thing, unable to stop yourself once you've started.");
 			outputText("\n\nA tingling warmth shifts to a roaring inferno in your veins, your heart-rate spiking abruptly.  The intensity of it almost makes your body feel molten!  But, as quickly as it came, the sensation fades into merely a pleasing warmth that settles in your chest.");
@@ -7931,6 +7990,7 @@
 			//[Player gains quad nipples, milk production and libido way up]
 			dynStats("lib", 5);
 			player.boostLactation(3 * player.bRows());
+			player.refillHunger(30);
 		}
 
 //TF Items
@@ -8102,6 +8162,7 @@
 				outputText("\n\nYawning, you figure you could really use a nap.");
 				fatigue(5);
 			}
+			player.refillHunger(30);
 		}
 
 //MouseCo
@@ -8113,7 +8174,6 @@
 		public function mouseCocoa(player:Player):void
 		{
 			clearOutput();
-
 			var changes:int = 0;
 			var changeLimit:int = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -8178,34 +8238,32 @@
 			//fem fertility up and heat (suppress if pregnant)
 			//not already in heat (add heat and lust)
 			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
-        var intensified:Boolean = player.inHeat;
-        if(player.goIntoHeat(false)) {
-          if(intensified) {
-  					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
-  					//[(no mino cum in inventory)]
-  					if (!player.hasItem(consumables.MINOCUM)) {
-  						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
-  					}
-  					else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
-  					//(mino cum in inventory and non-horse, 100 lust)
-  					else {
-  						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
-  						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
-  						player.minoCumAddiction(5);
-  						player.knockUp(2, 432, 175);
-  						player.consumeItem(consumables.MINOCUM);
-  					}
-          }
-          else {
-  					outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
-            
-            // Also make a permanent nudge.
-  					player.fertility++;
-          }
-          changes++;
-        }
-      }
-
+				var intensified:Boolean = player.inHeat;
+				if(player.goIntoHeat(false)) {
+					if(intensified) {
+						outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
+						//[(no mino cum in inventory)]
+						if (!player.hasItem(consumables.MINOCUM)) {
+							outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
+						}
+						else if (player.lust < 100 || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
+						//(mino cum in inventory and non-horse, 100 lust)
+						else {
+							outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
+							//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
+							player.minoCumAddiction(5);
+							player.knockUp(2, 432, 175);
+							player.consumeItem(consumables.MINOCUM);
+						}
+					}
+					else {
+						outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
+						// Also make a permanent nudge.
+						player.fertility++;
+					}
+					changes++;
+				}
+			}
 			//bodypart changes:
 			//gain ears
 			if (player.earType != EARS_MOUSE && changes < changeLimit && rand(4) == 0) {
@@ -8285,6 +8343,7 @@
 				player.skinType = SKIN_TYPE_FUR;
 				changes++;
 			}
+			player.refillHunger(10);
 		}
 
 //special attack - bite?
@@ -8457,6 +8516,7 @@
 					player.hairColor = "pink";
 				}
 			}
+			player.refillHunger(15);
 		}
 		
 		//Ferret Fruit
@@ -8627,9 +8687,9 @@
 			}
 			//Go into heat
 			if (rand(3) == 0 && changes < changeLimit) {
-        if(player.goIntoHeat(true)) {
-  				changes++;
-        }
+				if(player.goIntoHeat(true)) {
+						changes++;
+				}
 			}
 			//Turn ferret mask to full furface.
 			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_FERRET && rand(4) == 0 && changes < changeLimit)
@@ -8739,6 +8799,7 @@
 				changes++;
 				fatigue(-10);
 			}
+			player.refillHunger(20);
 		}
 	}
 }

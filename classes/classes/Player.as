@@ -1285,6 +1285,38 @@ use namespace kGAMECLASS;
 			return stretched;
 		}
 
+		public function refillHunger(amnt:Number = 0):void {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			{
+				flags[kFLAGS.PC_HUNGER] += amnt;
+				if (flags[kFLAGS.PC_HUNGER] > 100)
+				{
+					flags[kFLAGS.PC_HUNGER] = 100;
+				}
+				//Messages
+				if (flags[kFLAGS.PC_HUNGER] < 25)
+				{
+					outputText("\n<b>You are no longer starving but you still need to eat more.</b>")
+				}
+				if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50)
+				{
+					outputText("\n<b>The growling sound in your stomach seems to quiet down.</b>")
+				}
+				if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75)
+				{
+					outputText("\n<b>Your stomach no longer growls.</b>")
+				}
+				if (flags[kFLAGS.PC_HUNGER] > 75 && flags[kFLAGS.PC_HUNGER] <= 90)
+				{
+					outputText("\n<b>You feel so satisfied.</b>")
+				}
+				if (flags[kFLAGS.PC_HUNGER] > 90)
+				{
+					outputText("\n<b>You stomach feels so full.</b>")
+				}			
+			}
+		}
+		
 		public function slimeFeed():void{
 			if(findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
 				//Reset craving value

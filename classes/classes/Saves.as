@@ -230,6 +230,12 @@ public function saveScreen():void
 	mainView.nameBox.visible = true;
 	
 	// var test; // Disabling this variable because it seems to be unused.
+	if (flags[kFLAGS.HARDCORE_MODE] > 0)
+	{
+		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", false);
+		saveGame(flags[kFLAGS.HARDCORE_SLOT])
+		return;
+	}
 	
 	outputText("", true);
 	if (player.slotName != "VOID")
@@ -537,9 +543,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		getGame().notes = mainView.nameBox.text;
 	}
 	else
+	{
 		saveFile.data.notes = getGame().notes;
-	mainView.nameBox.visible = false;
-	
+		mainView.nameBox.visible = false;
+	}
+	if (flags[kFLAGS.HARDCORE_MODE] > 0)
+	{
+		saveFile.data.notes = "<font color=\"#ff0000\">HARDCORE MODE</font>";
+	}
 	var processingError:Boolean = false;
 	var dataError:Error;
 	
