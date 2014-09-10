@@ -357,8 +357,9 @@ public function doSystem(eventNo:Number):void {
 			if (mainView.aCb.parent != null)
 			{
 				mainView.removeChild(mainView.aCb);
-				eventParser(1);
+				
 			}
+			eventParser(1);
 			return;
 
 		case 116:
@@ -463,17 +464,17 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 
-			//Hunger drain rate. If above 50, 2 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
+			//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
 			if (flags[kFLAGS.PC_HUNGER] > 50)
 			{
-				flags[kFLAGS.PC_HUNGER] -= 1;
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
 			}
 			if (flags[kFLAGS.PC_HUNGER] > 25)
 			{
 				flags[kFLAGS.PC_HUNGER] -= 0.5;
 			}
-			if (flags[kFLAGS.PC_HUNGER] > 0)
+			if (flags[kFLAGS.PC_HUNGER] > 0 && player.armorName != "goo armor")
 			{
 				flags[kFLAGS.PC_HUNGER] -= 0.5;
 			}
@@ -499,7 +500,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			{
 				if (flags[kFLAGS.PC_HUNGER] < 10)
 				{
-					flags[kFLAGS.PC_HUNGER] = 10;
+					flags[kFLAGS.PC_HUNGER] = 25;
+					outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
 				}
 			}
 		}

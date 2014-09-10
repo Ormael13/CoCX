@@ -621,7 +621,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.level = player.level;
 		saveFile.data.gems = player.gems;
 		saveFile.data.perkPoints = player.perkPoints;
-		
+		saveFile.data.statPoints = player.statPoints;
 		//Appearance
 		saveFile.data.gender = player.gender;
 		saveFile.data.femininity = player.femininity;
@@ -1191,7 +1191,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.setJewelryHiddenField((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING);
 		} else {
 			player.jewelry = JewelryLib.NOTHING;
-			for each (var itype:ItemType in ItemType.getItemLibrary()) {
+			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
 					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
 					found = true;
@@ -1250,6 +1250,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.perkPoints = saveFile.data.perkPoints;
 		
+		if (saveFile.data.statPoints == undefined)
+			player.statPoints = 0;
+		else
+			player.statPoints = saveFile.data.statPoints;
 		//Appearance
 		player.gender = saveFile.data.gender;
 		if (saveFile.data.femininity == undefined)

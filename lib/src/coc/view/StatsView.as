@@ -185,7 +185,7 @@ package coc.view {
 
             this.upDownsContainer.visible = true;
 
-            allStats = [ "str", "tou", "spe", "inte", "lib", "sens", "cor", "lust" ];
+            allStats = [ "str", "tou", "spe", "inte", "lib", "sens", "cor", "lust", "hp" ];
 
             for each( statName in allStats ) {
                 oldStatName = _oldStatNameFor( statName );

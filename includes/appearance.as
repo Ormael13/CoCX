@@ -55,10 +55,12 @@
 	outputText("", true);
 	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
-	outputText("You are a " + Math.floor(player.tallness/12) + " foot " + player.tallness%12 + " inch tall " + race + ", with " + player.bodyType() + ".", false);
+	outputText("You are a " + Math.floor(player.tallness/12) + " foot " + player.tallness%12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 	if(player.armorName == "comfortable clothes") 
 		outputText("  <b>You are currently wearing " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
 	else outputText("  <b>You are currently wearing your " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
+	if (player.jewelryName != "nothing") 
+		outputText("<b> Girding one of your fingers is " + player.jewelryName + ".</b> ")
 	//Face
 	if(player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY || player.faceType == FACE_SPIDER_FANGS || player.faceType == FACE_FERRET_MASK) 
 	{

@@ -10,7 +10,8 @@ package classes.Scenes.Areas
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.NPCs.Jojo;
-
+	import classes.Scenes.Camp.CabinProgress;
+	
 	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
@@ -24,6 +25,7 @@ package classes.Scenes.Areas
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
+		public var cabinProgress:CabinProgress = new CabinProgress();
 		public function Forest()
 		{
 		}
@@ -31,9 +33,12 @@ package classes.Scenes.Areas
 		{
 			player.addStatusValue(StatusAffects.ExploredDeepwoods, 1, 1);
 			
-			var chooser:Number = rand(5);
+			var chooser:Number = rand(6);
 			
 			var temp2:Number = 0;
+			
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) chooser = rand(5);
+			
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
 				//If Fera isn't free yet...
@@ -163,9 +168,13 @@ package classes.Scenes.Areas
 			if (chooser == 3) {
 				akbalScene.supahAkabalEdition();
 			}
-			else if (chooser == 4) {
+			if (chooser == 4) {
 				if (rand(3) == 0) kitsuneScene.kitsuneShrine();
 				else kitsuneScene.enterTheTrickster();
+			}
+			if (chooser >= 5) {
+				cabinProgress.gatherWoods();
+				return;
 			}
 		}
 
@@ -175,18 +184,20 @@ package classes.Scenes.Areas
 			player.exploredForest++;
 
 			trace("FOREST EVENT CALLED");
-			var chooser:Number = rand(4);
+			var chooser:Number = rand(5);
 			var temp2:Number = 0;
 			//Cut bee encounter rate 50%
 			if (chooser == 3 && rand(2)) chooser = rand(3);
 			//Quick changes:
 			//If monk is fully corrupted, encounter him less (unless haz ferriiite).
+
 			if (chooser == 1 && kGAMECLASS.monk >= 2) {
 				temp = rand(4);
 				if (temp == 0) chooser = 0;
 				if (temp == 1) chooser = 2;
 				if (temp == 2) chooser = 3;
 			}
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) chooser = rand(4);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -198,7 +209,8 @@ package classes.Scenes.Areas
 			}
 			//If Jojo lives in camp, never encounter him
 			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] == 1) {
-				chooser = rand(3);
+				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4) chooser = rand(3)
+				else chooser = rand(4)
 				if (chooser >= 1) chooser++;
 			}
 			//Chance to discover deepwoods
@@ -358,7 +370,7 @@ package classes.Scenes.Areas
 			if (chooser == 2) {
 				trace("TRACE TENTACRUELS");
 				outputText("", true);
-				temp = rand(5);
+				temp = rand(4);
 				//Oh noes, tentacles!
 				if (temp == 0) {
 					//Tentacle avoidance chance due to dangerous plants
@@ -459,6 +471,11 @@ package classes.Scenes.Areas
 					return;
 				}
 				beeGirlScene.beeEncounter();
+			}
+			if (chooser >= 4) {
+				trace("Triggering!")
+				cabinProgress.gatherWoods();
+				return;
 			}
 		}
 		//[FOREST]

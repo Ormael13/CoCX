@@ -39,7 +39,7 @@ package coc.view {
 			this.labelField = labelField;
 			this.backgroundGraphic = backgroundGraphic;
 
-			this.mouseChildren = false;
+			//this.mouseChildren = false;
 
 			this.addEventListener( MouseEvent.ROLL_OVER, this.hover );
 			this.addEventListener( MouseEvent.ROLL_OUT, this.dim );

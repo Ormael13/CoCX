@@ -230,7 +230,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	if(totalOffers > 0) {
 		var armor:Function = null;
-		if(beeArmor != null || gelArmor != null || silk > 0) armor = RathazulArmorMenu;
+		if(beeArmor != null || gelArmor != null || silk > 0 || player.hasKeyItem("Tentacled Bark Plates") >= 0) armor = RathazulArmorMenu;
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
@@ -316,24 +316,28 @@ private function makeADeBimboDraft():void {
 
 
 public function RathazulArmorMenu():void {
+	menu();
 	spriteSelect(49);
-	var gelArmor:Function = null;
-	var beeArmor:Function = null;
-	var silk:Function = null;
+	//var gelArmor:Function = null;
+	//var beeArmor:Function = null;
+	//var silk:Function = null;
 
 	outputText("Which armor project would you like to pursue with Rathazul?", true);
 	//Item crafting offer
 	if(player.hasItem(useables.GREENGL, 5)) {
-		gelArmor = craftOozeArmor;
+		addButton(0, "GelArmor", craftOozeArmor);
 	}
 	//Item crafting offer
 	if(player.hasItem(useables.B_CHITN, 5)) {
-		beeArmor = craftCarapace;
+		addButton(1, "BeeArmor", craftCarapace);
 	}
 	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
-		silk = craftSilkArmor;
+		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
-	simpleChoices("GelArmor",gelArmor,"BeeArmor",beeArmor,"SpiderSilk",silk,"",0,"Back",2070);
+	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
+		addButton(3, "T.Bark Armor", craftMaraeArmor);
+	}
+	addButton(9, "Back", eventParser, 2070);
 }
 private function craftSilkArmor():void {
 	spriteSelect(49);
@@ -441,6 +445,19 @@ private function craftCarapace():void {
 	player.destroyItems(useables.B_CHITN, 5);
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(armors.BEEARMR);
+}
+
+private function craftMaraeArmor():void {
+	outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n", true)
+	outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n", false)
+	outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You realize the armor is missing pants. \n\n", false);
+	outputText("\"<i>Something wrong? Nothing to protect your modesty? Surprise!</i>\"  He hands you a silken loincloth", false);
+	if(player.gender >= 2) outputText(" with stockings and garters", false);
+	outputText(". You thank him for the armor.\n\n", false)
+	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
+	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
+	player.removeKeyItem("Tentacled Bark Plates");
+	inventory.takeItem(armors.TBARMOR);
 }
 
 private function buyDyes():void {

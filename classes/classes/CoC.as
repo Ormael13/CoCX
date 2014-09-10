@@ -338,8 +338,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.14_modtest2";
-			version = ver + " (<b>Now with Hardcore Mode!</b>)";
+			ver = "0.8.14_mod0.5";
+			version = ver + " (<b>Massive mod update</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

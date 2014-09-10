@@ -56,7 +56,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//mainView.mainText.autoSize = true;
 
 	//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
-	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
+	simpleChoices("OK",confirmName,"",0,"",0,"",0,"",0);
 	mainView.nameBox.x = mainView.mainText.x + 5;
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 
@@ -64,7 +64,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//mainView.nameBox.x = 510;
 	//mainView.nameBox.y = 265;
 	mainView.nameBox.text = "";
-
+	mainView.nameBox.maxChars = 16;
 	//Reset autosave
 	player.slotName = "VOID";
 	player.autoSave = false;
@@ -269,6 +269,9 @@ private function chooseSlotHardcore9():void {
 	doNext(startTheGame);
 }	
 
+//-----------------
+//-- GAME MODES
+//-----------------
 private function chooseModeNormal():void {
 	outputText("You have chosen Normal Mode. This is a classic gameplay mode.", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
@@ -311,575 +314,706 @@ private function chooseGameModes():void {
 	simpleChoices("Normal", chooseModeNormal, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0, "", 0);
 }	
 
-public function doCreation(eventNo:Number):void {
-	var e:MouseEvent;
-	var historyPerk:PerkType;
-	//MAN
-	if(eventNo == 10000) {
-		player.str+=3;
-		player.tou+=2;
-		player.balls = 2;
-		player.ballSize = 1;
-		player.createCock();
-		player.tallness = 71;
-		player.tone = 60;
-		player.cocks[0].cockLength = 5.5;
-		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = CockTypesEnum.HUMAN;
-		player.cocks[0].knotMultiplier = 1;
-		player.createBreastRow();
-		player.breastRows[0].breastRating = 0;
-		outputText("\n\n\n\n\nYou are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?", true);
-		simpleChoices("Lean", 10003, "Average", 10002, "Thick", 10005, "Girly", 10004, "Dickgirl", 10113);
-		player.gender = 1;
-		player.hairLength=1;
-	}
-	//WOMAN
-	if(eventNo == 10001) {
-		player.spe+=3;
-		player.inte+=2;
-		player.clitLength = .5;
-		player.tone = 30;
-		player.fertility = 10;
-		player.hairLength=10;
-		player.createBreastRow();
-		player.createVagina();
-		player.tallness = 67;
-		player.breastRows[0].breastRating = 3;
-		outputText("\n\n\n\n\nYou are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?", true);
-		simpleChoices("Slender", 10003, "Average", 10002, "Curvy", 10005, "Tomboyish", 10006, "Cuntboi", 10113);
-		player.gender = 2;
-	}
-	//HERMAPHRODITE
-	if(eventNo == 10101) {
-		player.str+=1;
-		player.tou+=1;
-		player.spe+=1;
-		player.inte+=1;
-		player.clitLength = .5;
-		player.tone = 45;
-		player.createCock();
-		player.cocks[0].cockLength = 5.5;
-		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = CockTypesEnum.HUMAN;
-		player.cocks[0].knotMultiplier = 1;
-		player.fertility = 10;
-		player.hairLength=10;
-		player.createBreastRow();
-		player.createVagina();
-		player.tallness = 69;
-		player.breastRows[0].breastRating = 2;
-		outputText("\n\n\n\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
-		simpleChoices("Slender", 10003, "Average", 10002, "Curvy", 10005, "Masculine", 10111, "Feminine", 10112);
-		player.gender = 3;
-	}
-	//Average b-type
-	if(eventNo == 10002) {
-		if(player.gender == 1) {
-			player.hipRating = 4;
-			player.buttRating = 4;
-			player.femininity = 30;
-		}
-		if(player.gender == 2) {
-			player.hipRating = 6;
-			player.buttRating = 6;
-			player.femininity = 70;
-		}
-		eventParser(10007);
-	}
+//-----------------
+//-- GENDER CHOICES
+//-----------------
+private function chooseMale():void {
+	player.gender = 1;
+	//Attributes
+	player.str += 3;
+	player.tou += 2;
+	//Body attributes
+	player.tallness = 71;
+	player.tone = 60;
+	player.hairLength=1;
+	//Genetalia
+	player.balls = 2;
+	player.ballSize = 1;
+	player.createCock();
+	player.cocks[0].cockLength = 5.5;
+	player.cocks[0].cockThickness = 1;
+	player.cocks[0].cockType = CockTypesEnum.HUMAN;
+	player.cocks[0].knotMultiplier = 1;
+	//Breasts
+	player.createBreastRow();	
+	player.breastRows[0].breastRating = 0;
+	//Choices
+	outputText("\n\nYou are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?", true);
+	simpleChoices("Lean", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Thick", chooseBodyTypeThick, "Girly", chooseBodyTypeGirlyOrTomboyish, "Dickgirl", chooseBodyTypeDickgirlOrCuntboy);
+}
+private function chooseFemale():void {
+	player.gender = 2;
+	//Attributes
+	player.spe+=3;
+	player.inte+= 2;
+	//Body attributes
+	player.tallness = 67;
+	player.tone = 30;
+	player.hairLength = 10;
+	player.fertility = 10;
+	//Genetalia
+	player.createVagina();
+	player.clitLength = .5;
+	//Breasts
+	player.createBreastRow();
+	player.breastRows[0].breastRating = 3;
+	//Choices
+	outputText("\n\nYou are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?", true);
+	simpleChoices("Slender", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Curvy", chooseBodyTypeThick, "Tomboyish", chooseBodyTypeGirlyOrTomboyish, "Cuntboi", chooseBodyTypeDickgirlOrCuntboy);
+}
+private function chooseHerm():void {
+	player.gender = 3;
+	//Attributes
+	player.str+=1;
+	player.tou+=1;
+	player.spe+=1;
+	player.inte+= 1;
+	//Body attributes
+	player.tallness = 69;
+	player.tone = 45;
+	player.hairLength = 10;
+	player.fertility = 10;
+	//Genetalia
+	player.createVagina();
+	player.clitLength = .5;
+	player.createCock();
+	player.cocks[0].cockLength = 5.5;
+	player.cocks[0].cockThickness = 1;
+	player.cocks[0].cockType = CockTypesEnum.HUMAN;
+	player.cocks[0].knotMultiplier = 1;
+	//Breasts
+	player.createBreastRow();
+	player.breastRows[0].breastRating = 2;
+	//Choices
+	outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
+	simpleChoices("Slender", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Curvy", chooseBodyTypeThick, "Masculine", chooseMasculineHerm, "Feminine", chooseFeminineHerm);
+}
+
+//-----------------
+//-- BODY BUILDS
+//-----------------
+private function chooseBodyTypeLean():void {
 	//lean b-type
-	if(eventNo == 10003) {
-		if(player.gender == 1) {
-			player.hipRating = 2;
-			player.buttRating = 2;
-			player.femininity = 34;
-			player.thickness = 30;
-		}
-		if(player.gender == 2) {
-			player.hipRating = 6;
-			player.buttRating = 2;
-			player.femininity = 66;
-			player.thickness = 30;
-			player.tone += 5;
-		}
-		player.str -= 1;
-		player.spe += 1;
-		eventParser(10007);
+	if (player.gender == 1) {
+		//Body modifiers
+		player.hipRating = 2;
+		player.buttRating = 2;
+		player.femininity = 34;
+		player.thickness = 30;
 	}
-	//girly b-type
-	if(eventNo == 10004) {
+	if (player.gender == 2) {
+		//Body modifiers
+		player.hipRating = 6;
+		player.buttRating = 2;
+		player.femininity = 66;
+		player.thickness = 30;
+		player.tone += 5;
+	}
+	//Attribute modifiers
+	player.str -= 1;
+	player.spe += 1;
+	menuSkinComplexion();
+}
+private function chooseBodyTypeAverage():void {
+	//Average b-type
+	if (player.gender == 1) {
+		//Body modifiers
+		player.hipRating = 4;
+		player.buttRating = 4;
+		player.femininity = 30;
+	}
+	if (player.gender == 2) {
+		//Body modifiers
+		player.hipRating = 6;
+		player.buttRating = 6;
+		player.femininity = 70;
+	}
+	menuSkinComplexion();
+}
+private function chooseBodyTypeThick():void {
+	if (player.gender == 1) {
+		//Body modifiers
+		player.hipRating = 4;
+		player.buttRating = 6;
+		player.femininity = 29;
+		player.thickness = 70;
+		player.tone -= 5;
+		//Attribute modifiers
+		player.spe -= 4;
+		player.str += 2;
+		player.tou += 2;
+	}
+	if (player.gender == 2) {
+		//Body modifiers
+		player.hipRating = 8;
+		player.buttRating = 8;
+		player.femininity = 71;
+		player.thickness = 70;
+		player.breastRows[0].breastRating++;
+		//Attribute modifiers
+		player.spe -= 2;
+		player.str += 1;
+		player.tou += 1;
+	}
+	menuSkinComplexion();
+}
+private function chooseBodyTypeGirlyOrTomboyish():void {
+	if (player.gender == 1) {
+		//Body modifiers
 		player.hipRating = 2;
 		player.buttRating = 6;
-		player.breastRows[0].breastRating = 1;
 		player.femininity = 50;
-		eventParser(10007);
+		player.tone = 26;
+		player.breastRows[0].breastRating = 1;
+		//Attribute modifiers
 		player.str -= 2;
 		player.spe += 2;
-		player.tone = 26;
 	}
-	//thick b-type
-	if(eventNo == 10005) {
-		if(player.gender == 1) {
-			player.hipRating = 4;
-			player.buttRating = 6;
-			player.spe -= 4;
-			player.str += 2;
-			player.tou += 2;
-			player.femininity = 29;
-			player.thickness = 70;
-			player.tone -= 5;
-		}
-		if(player.gender == 2) {
-			player.spe -= 2;
-			player.str += 1;
-			player.tou += 1;
-			player.femininity = 71;
-			player.hipRating = 8;
-			player.buttRating = 8;
-			player.thickness = 70;
-			player.breastRows[0].breastRating++;
-		}
-		eventParser(10007);
-	}
-	//tomboy b-type
-	if(eventNo == 10006) {
-		player.femininity = 56;
+	if (player.gender == 2) {
+		//Body modifiers
 		player.hipRating = 2;
 		player.buttRating = 0;
+		player.femininity = 56;
+		player.tone = 50;
 		player.breastRows[0].breastRating = 2;
-		player.tone = 50;
-		eventParser(10007);
 	}
-	//dickgirl/cuntboi b-type
-	if(eventNo == 10113) {
-		if(player.gender == 1) {
-			player.hipRating = 6;
-			player.buttRating = 6;
-			player.femininity = 70;
-			player.thickness = 40;
-			player.breastRows[0].breastRating = 3;
-			player.str -= 1;
-		}
-		if(player.gender == 2) {
-			player.hipRating = 2;
-			player.buttRating = 0;
-			player.femininity = 30;
-			player.thickness = 30;
-			player.tone += 5;
-			player.str += 1;
-		}
-		eventParser(10007);
+	menuSkinComplexion();
+}
+private function chooseBodyTypeDickgirlOrCuntboy():void {
+	if (player.gender == 1) {
+		//Body modifiers
+		player.hipRating = 6;
+		player.buttRating = 6;
+		player.femininity = 70;
+		player.thickness = 40;
+		player.hairLength = 10;	
+		player.breastRows[0].breastRating = 3;
+		//Attribute modifiers
+		player.str -= 1;
 	}
-
-	//masculine herm b-type
-	if(eventNo == 10111) {
-		player.femininity = 56;
+	if (player.gender == 2) {
+		//Body modifiers
 		player.hipRating = 2;
 		player.buttRating = 0;
-		player.breastRows[0].breastRating = 0;
-		player.tone = 50;
-		eventParser(10007);
+		player.femininity = 30;
+		player.thickness = 30;
+		player.hairLength = 2;
+		player.tone += 5;
+		//Attribute modifiers
+		player.str += 1;
 	}
-	//feminine herm b-type
-	if(eventNo == 10112) {
+	menuSkinComplexion();
+}
+private function chooseAndrogynousHerm():void {
+		player.femininity = 50;
+		player.hipRating = 4;
+		player.buttRating = 2;
+		player.hairLength = 5;
+		player.tone = 50;
+		player.breastRows[0].breastRating = 1;
+	menuSkinComplexion();
+}
+private function chooseMasculineHerm():void {
+		player.femininity = 30;
+		player.hipRating = 2;
+		player.buttRating = 0;
+		player.hairLength = 1;
+		player.tone = 50;
+		player.breastRows[0].breastRating = 0;
+	menuSkinComplexion();
+}
+private function chooseFeminineHerm():void {
 		player.femininity = 70;
 		player.hipRating = 4;
 		player.buttRating = 6;
-		player.breastRows[0].breastRating = 3;
+		player.hairLength = 10;
 		player.tone = 50;
-		eventParser(10007);
-	}
-	//Choose complexion
-	if(eventNo == 10007) {
-		outputText("\n\n\n\n\nWhat is your complexion?", true);
-		simpleChoices("Light", 10008, "Olive", 10009, "Dark", 10010, "Ebony", 10011, "", 0);
-	}
-	if(eventNo == 10008) {
-		player.skinTone = "light";
-		eventParser(10012);
-	}
-	if(eventNo == 10009) {
-		player.skinTone = "olive";
-		eventParser(10012);
-	}
-	if(eventNo == 10010) {
-		player.skinTone = "dark";
-		eventParser(10012);
-	}
-	if(eventNo == 10011) {
-		player.skinTone = "ebony";
-		eventParser(10012);
-	}
-	if(eventNo == 10012) {
-		outputText("\n\n\nYou selected a " + player.skinTone + " complexion.\n\nWhat color is your hair?", true);
-		choices("Blonde", 10013, "Brown", 10014, "Black", 10015, "Red", 10016, "Gray", 10017, "White", 10018, "Auburn", 10019, "", 0, "", 0, "", 0);
-	}
-	//Set blonde hair
-	if(eventNo == 10013) {
-		player.hairColor = "blonde";
-		eventParser(10020);
-	}
-	//set brown hair
-	if(eventNo == 10014) {
-		player.hairColor = "brown";
-		eventParser(10020);
-	}
-	//set black hair
-	if(eventNo == 10015) {
-		player.hairColor = "black";
-		eventParser(10020);
-	}
-	//set red hair
-	if(eventNo == 10016) {
-		player.hairColor = "red";
-		eventParser(10020);
-	}
-	//set gray hair
-	if(eventNo == 10017) {
-		player.hairColor = "gray";
-		eventParser(10020);
-	}
-	//set white hair
-	if(eventNo == 10018) {
-		player.hairColor = "white";
-		eventParser(10020);
-	}
-	//set auburn hair
-	if(eventNo == 10019) {
-		player.hairColor = "auburn";
-		eventParser(10020);
-	}
-	//Gender endowment choices
-	if(eventNo == 10020) {
-		outputText("You have " + hairDescript() + ".", true);
-		outputText("\n\nEvery person is born with a gift.  What's yours?", true);
-		if(player.gender == 1) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Cock", 10027, "Lots of Jizz", 10028, "", 0, "", 0);
-		if(player.gender == 2) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Breasts", 10029, "Big Clit", 10030, "Fertile", 10031, "Wet Vagina", 10032);
-		if(player.gender == 3) choices("Strength", 10021, "Toughness", 10022, "Speed", 10023, "Smarts", 10024, "Libido", 10025, "Touch", 10026, "Big Cock", 10027, "Big Clit", 10030, "Fertile", 10031, "Wet Vagina", 10032);
-	}
-	//Strong
-	if(eventNo == 10021) {
-		outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.\n", true);
-		doYesNo(10033, 10020);
-		temp = 1;
-	}
-	//Tough
-	if(eventNo == 10022) {
-		outputText("Are you unusually tough? (+5 Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.\n", true);
-		doYesNo(10033, 10020);
-		temp = 2;
-	}
-	//Fast
-	if(eventNo == 10023) {
-		outputText("Are you very quick?  (+5 Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.\n", true);
-		doYesNo(10033, 10020);
-		temp = 3;
-	}
-	//Smart
-	if(eventNo == 10024) {
-		outputText("Are you a quick learner?  (+5 Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.\n", true);
-		doYesNo(10033, 10020);
-		temp = 4;
-	}
-	//Libido
-	if(eventNo == 10025) {
-		outputText("Do you have an unusually high sex-drive?  (+5 Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...\n", true);
-		temp = 5;
-		doYesNo(10033, 10020);
-	}
-	//Light Touch
-	if(eventNo == 10026) {
-		outputText("Is your skin unusually sensitive?  (+5 Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.\n", true);
-		temp = 6;
-		doYesNo(10033, 10020);
-	}
-	//Big Cock
-	if(eventNo == 10027) {
-		outputText("Do you have a big cock?  (+2\" Cock Length)\n\nA bigger cock will make it easier to get off any sexual partners, but only if they can take your size.\n", true);
-		temp = 7;
-		doYesNo(10033, 10020);
-	}
-	//Messy Orgasms
-	if(eventNo == 10028) {
-		outputText("Are your orgasms particularly messy?  (+50% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.\n", true);
-		doYesNo(10033, 10020);
-		temp = 8;
-	}
-	//Big Tits
-	if(eventNo == 10029) {
-		outputText("Are your breasts bigger than average? (DD cups)\n\nLarger breasts will allow you to lactate greater amounts, tit-fuck larger cocks, and generally be a sexy bitch.\n", true);
-		doYesNo(10033, 10020);
-		temp = 9;
-	}
-	//Big clit
-	if(eventNo == 10030) {
-		outputText("Do you have a big clit?  (1\" Long)\n\nA large enough clit may eventually become as large as a cock.  It also makes you gain lust much faster during oral or manual stimulation.\n", true);
-		doYesNo(10033, 10020);
-		temp = 10;
-	}
-	//Fertility
-	if(eventNo == 10031) {
-		outputText("Is your family particularly fertile?  (+15% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.\n", true);
-		temp = 11;
-		doYesNo(10033, 10020);
-	}
-	//Wet pussy
-	if(eventNo == 10032) {
-		outputText("Does your pussy get particularly wet?  (+1 Vaginal Wetness)\n\nVaginal wetness will make it easier to take larger cocks, in turn helping you bring the well-endowed to orgasm quicker.\n", true);
-		doYesNo(10033, 10020);
-		temp = 12;
-	}
-	if(eventNo == 10033)
+		player.breastRows[0].breastRating = 3;
+	menuSkinComplexion();
+}
+
+//-----------------
+//-- SKIN COLOURS
+//-----------------
+private function menuSkinComplexion():void {
+	outputText("What is your complexion?", true);
+	choices("Light", chooseComplexionLight, "Olive", chooseComplexionOlive, "Dark", chooseComplexionDark, "Ebony", chooseComplexionEbony, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", 0);	
+}	
+
+private function chooseComplexionLight():void {
+	player.skinTone = "light";
+	menuHairColor();
+}
+private function chooseComplexionOlive():void {
+	player.skinTone = "olive";
+	menuHairColor();
+}
+private function chooseComplexionDark():void {
+	player.skinTone = "dark";
+	menuHairColor();
+}	
+private function chooseComplexionEbony():void {
+	player.skinTone = "ebony";
+	menuHairColor();
+}	
+
+//-----------------
+//-- HAIR COLOURS
+//-----------------
+private function menuHairColor():void {
+	mainView.nameBox.visible = false;
+	outputText("You selected a " + player.skinTone + " complexion.\n\nWhat color is your hair?", true);
+	choices("Blonde", chooseHairBlonde, "Brown", chooseHairBrown, "Black", chooseHairBlack, "Red", chooseHairRed, "Gray", chooseHairGray, "White", chooseHairWhite, "Auburn", chooseHairAuburn, "", 0, "", 0, "Back", menuSkinComplexion);
+}	
+
+private function chooseHairBlonde():void {
+	player.hairColor = "blonde";
+	setHeight();
+}
+private function chooseHairBrown():void {
+	player.hairColor = "brown";
+	setHeight();
+}
+private function chooseHairBlack():void {
+	player.hairColor = "black";
+	setHeight();
+}
+private function chooseHairRed():void {
+	player.hairColor = "red";
+	setHeight();
+}
+private function chooseHairGray():void {
+	player.hairColor = "gray";
+	setHeight();
+}
+private function chooseHairWhite():void {
+	player.hairColor = "white";
+	setHeight();
+}
+private function chooseHairAuburn():void {
+	player.hairColor = "auburn";
+	setHeight();
+}
+
+//-----------------
+//-- HEIGHT
+//-----------------
+private function setHeight():void {
+	menu();
+	if (kGAMECLASS.testingBlockExiting)
 	{
-
-
-		if(temp == 1) {
-			player.str += 5;
-			player.tone += 7;
-			player.thickness += 3;
-			//Add bonus +25% strength gain
-			player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
-		}
-		if(temp == 2) {
-			player.tou += 5;
-			player.tone += 5;
-			player.thickness += 5;
-			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-			player.HP = kGAMECLASS.maxHP();
-		}
-		if(temp == 3) {
-			player.spe += 5;
-			player.tone += 10;
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
-		}
-		if(temp == 4) {
-			player.inte += 5;
-			player.thickness -= 5;
-			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-		}
-		if(temp == 5) {
-			player.lib += 5;
-			player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
-		}
-		if(temp == 6) {
-			player.sens += 5;
-			player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
-		}
-		if(temp == 7) {
-			player.femininity -= 5;
-			player.cocks[0].cockLength = 8;
-			player.cocks[0].cockThickness = 1.5;
-			trace("Creation - cock modded to 8inches");
-			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
-		}
-		if(temp == 8) {
-			player.femininity -= 2;
-			player.cumMultiplier = 1.5;
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-		}
-		if(temp == 9) {
-			player.femininity += 5;
-			player.breastRows[0].breastRating += 2;
-			player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
-		}
-		if(temp == 10) {
-			player.femininity -= 5;
-			player.clitLength = 1;
-			player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
-		}
-		if(temp == 11) {
-			player.femininity += 5;
-			player.fertility += 25;
-			player.hipRating+=2;
-			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
-		}
-		if(temp == 12) {
-			player.femininity += 7;
-			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-			player.createPerk(PerkLib.WetPussy,2,0,0,0);
-		}
-		eventParser(10036);
+		// We're running under the testing script.
+		// Stuff a number in the box and go go go
+		mainView.nameBox.text = "69";
 	}
-	//Choose name
-	if(eventNo == 10034)
+	outputText("You have " + hairDescript() + ".", true);
+	outputText("\n\nSet your height in inches.", false)
+	outputText("\nYou can choose any height between 4 feet (48 inches) and 8 feet (96 inches).", false)
+	mainView.nameBox.visible = true;
+	mainView.nameBox.maxChars = 2;
+	mainView.nameBox.restrict = "0-9";
+	if (player.gender == 0)
 	{
-		if (kGAMECLASS.testingBlockExiting)
-		{
-			// We're running under the testing script.
-			// Stuff a name in the box and go go go
-			mainView.nameBox.text = "Derpy"
-		}
-		else if(mainView.nameBox.text == "")
-		{
+		mainView.nameBox.text = "69";
+	}
+	if (player.gender == 1)
+	{
+		mainView.nameBox.text = "71";
+	}
+	if (player.gender == 2)
+	{
+		mainView.nameBox.text = "67";
+	}	
+	if (player.gender == 3)
+	{
+		mainView.nameBox.text = "69";
+	}	
+	choices("OK", confirmHeight, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", menuHairColor);
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+}
+private function confirmHeight():void {
+	mainView.nameBox.visible = false;
+	if (int(mainView.nameBox.text) < 48)
+	{
+		outputText("That is below your minimum height choices!", true)
+		//Off to the height selection!
+		doNext(setHeight);
+		return;
+	}
+	if (int(mainView.nameBox.text) > 96)
+	{
+		outputText("That is above your maximum height choices!", true)
+		//Off to the height selection!
+		doNext(setHeight);
+		return;
+	}
+	if (mainView.nameBox.text == "")
+	{
+		outputText("Please input your height. Off you go to the height selection!", true)
+		//Off to the height selection!
+		doNext(setHeight);
+		return;
+	}
+	player.tallness = int(mainView.nameBox.text)
+	mainView.nameBox.maxChars = 16;
+	mainView.nameBox.restrict = null;
+	outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)
+	doYesNo(menuPerk, setHeight);
+}	
 
-			//If part of newgame+, don't fully wipe.
-			if(player.XP > 0 && player.explored == 0) {
-				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
-				if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
-				while(player.level > 1) {
-					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
-					player.level--;
-				}
-				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
-			}
-			newGameGo(e);
-			outputText("\n\n\n<b>You must select a name.</b>", false);
-			return;
-		}
-		else if(customName(mainView.nameBox.text)) {
-			clearOutput();
-			outputText("This name, like you, is special.  Do you live up to your name or continue on, assuming it to be coincidence?");
-			mainView.nameBox.visible = false;
-			menu();
-			addButton(0,"SpecialName",useCustomProfile);
-			addButton(1,"Continue On",noCustomProfile);
-			return;
-		}
-		player.short = mainView.nameBox.text;
-		mainView.nameBox.visible = false;
-		if(unlockedHerm == true){
-			outputText("\n\n\n\nAre you a man or a woman? \n\nOr a hermaphrodite as you've unlocked hermaphrodite option!", true);
-			simpleChoices("Man", 10000, "Woman", 10001, "Herm", 10101, "", 0, "", 0);
-		}
-		else{
-			outputText("\n\n\n\nAre you a man or a woman?", true);
-			simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);			
-		}
-	}
-	//New Game+
-	if(eventNo == 10035) {
-		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
-		if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
-		while (player.level > 1) {
-			player.level--;
-			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
-		}
-		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
-		newGameGo(e);
-		return;
-	}
-	//======================
-	//  HISTORIEZ
-	//======================
-	if(eventNo == 10036) {
-		outputText("Before you became a champion, you had other plans for your life.  What were you doing before?", true);
-		choices("Alchemy",10037,"Fighting",10038,"Healing",10039,"Religion",10040,"Schooling",10041,"Slacking",10042,"Slutting",10046,"Smithing",10043,"Whoring",10047,"",0);
-		return;
-	}
-	//Alchemy
-	if(eventNo == 10037) {
-		outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?", true);
-		temp = 10037;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Fightan'
-	if(eventNo == 10038) {
-		outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical attacks.  Is this your history?", true);
-		temp = 10038;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Healin'
-	if(eventNo == 10039) {
-		outputText("You often spent your free time with the village healer, learning how to tend to wounds.  Healing items and effects are 20% more effective.  Is this your history?", true);
-		temp = 10039;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Religions
-	if(eventNo == 10040) {
-		outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?", true);
-		temp = 10040;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Scholar
-	if(eventNo == 10041) {
-		outputText("You spent much of your time in school, and even begged the richest man in town, Mr. Savin, to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?", true);
-		temp = 10041;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Slacker
-	if(eventNo == 10042) {
-		outputText("You spent a lot of time slacking, avoiding work, and otherwise making a nuisance of yourself.  Your efforts at slacking have made you quite adept at resting, and your fatigue comes back 20% faster.  Is this your history?", true);
-		temp = 10042;
-		doYesNo(10044,10036);
-		return;
-	}
-	//Smith
-	if(eventNo == 10043) {
-		outputText("You managed to get an apprenticeship with the local blacksmith.  Because of your time spent at the blacksmith's side, you've learned how to fit armor for maximum protection.  Is this your history?", true);
-		temp = 10043;
-		doYesNo(10044,10036);
-		return;
-	}
-	if(eventNo == 10044) {
-		//Alchemist
-		if(temp == 10037) historyPerk = PerkLib.HistoryAlchemist;
-		else if(temp == 10038) historyPerk = PerkLib.HistoryFighter;
-		else if(temp == 10039) historyPerk = PerkLib.HistoryHealer;
-		else if(temp == 10040) historyPerk = PerkLib.HistoryReligious;
-		else if(temp == 10041) historyPerk = PerkLib.HistoryScholar;
-		else if(temp == 10042) historyPerk = PerkLib.HistorySlacker;
-		else if(temp == 10046) {
-			historyPerk = PerkLib.HistorySlut;
-			if(player.hasVagina()) {
-				player.vaginas[0].virgin = false;
-				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-			}
-			player.ass.analLooseness = 1;
-		}
-		else if(temp == 10047) {
-			historyPerk = PerkLib.HistoryWhore;
-			if(player.hasVagina()) {
-				player.vaginas[0].virgin = false;
-				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-			}
-			player.ass.analLooseness = 1;
-		}
-		else historyPerk = PerkLib.HistorySmith;
-		player.createPerk(historyPerk,0,0,0,0);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
-			eventParser(chooseGameModes);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
-		}
-		else {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
-			eventParser(1);
-		}
-		return;
-	}
+//-----------------
+//-- STARTER PERKS
+//-----------------
+private function menuPerk():void {
+	choices("", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+	outputText("\n\nEvery person is born with a gift.  What's yours?", true);
+	addButton(0, "Strength", choosePerkStrength);
+	addButton(1, "Toughness", choosePerkToughness);
+	addButton(2, "Speed", choosePerkSpeed);
+	addButton(3, "Smarts", choosePerkIntelligence);
 	
+	addButton(5, "Libido", choosePerkLibido);
+	addButton(6, "Touch", choosePerkSensitivity);
+	addButton(7, "Perversion", choosePerkCorruptionYouMonster);
 
-	//Slut
-	if(eventNo == 10046) {
-		outputText("You managed to spend most of your time having sex.  Quite simply, when it came to sex, you were the village bicycle - everyone got a ride.  Because of this, your body is a bit more resistant to penetrative stretching, and has a higher upper limit on what exactly can be inserted.  Is this your history?", true);
-		temp = 10046;
-		doYesNo(10044,10036);
+	addButton(4, "Next", menuPerkII);
+	addButton(9, "Back", setHeight);
+}	
+
+private function menuPerkII():void {
+	choices("", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+	if (player.gender == 1)
+	{
+		addButton(0, "Big Cock", choosePerkBigCock);
+		addButton(1, "Lots of Jizz", choosePerkMessyOrgasms);
+	}
+	if (player.gender == 2)
+	{
+		addButton(0, "Big Breasts", choosePerkBigBoobs);
+		addButton(1, "Big Clit", choosePerkBigClit);
+		addButton(2, "Fertile", choosePerkFertile);
+		addButton(3, "Wet Vagina", choosePerkWetgina);
+	}
+	if (player.gender == 3)
+	{
+		addButton(0, "Big Cock", choosePerkBigCock);
+		addButton(1, "Lots of Jizz", choosePerkMessyOrgasms);
+		addButton(2, "Big Breasts", choosePerkBigBoobs);
+		addButton(3, "Big Clit", choosePerkBigClit);
+		
+		addButton(5, "Fertile", choosePerkFertile);
+		addButton(6, "Wet Vagina", choosePerkWetgina);
+	}
+	addButton(4, "Previous", menuPerk);
+	addButton(9, "Back", setHeight);
+}
+
+private function choosePerkStrength():void {
+	outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 1;	
+}	
+private function choosePerkToughness():void {
+	outputText("Are you unusually tough? (+5 Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 2;
+}	
+private function choosePerkSpeed():void {
+	outputText("Are you very quick?  (+5 Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 3;
+}	
+private function choosePerkIntelligence():void {
+	outputText("Are you a quick learner?  (+5 Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 4;
+}
+private function choosePerkLibido():void {
+	outputText("Do you have an unusually high sex-drive?  (+5 Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...\n", true);
+	temp = 5;
+	doYesNo(confirmPerk, menuPerk);
+}
+private function choosePerkSensitivity():void {
+	outputText("Is your skin unusually sensitive?  (+5 Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.\n", true);
+	temp = 6;
+	doYesNo(confirmPerk, menuPerk);
+}
+private function choosePerkCorruptionYouMonster():void {
+	outputText("Are you unusually perverted?  (+5 Corruption)\n\Corruption affects certain scenes and having a higher corruption makes you more prone to Bad Ends.\n", true);
+	temp = 13;
+	doYesNo(confirmPerk, menuPerk);
+}	
+private function choosePerkBigCock():void {
+	outputText("Do you have a big cock?  (+2\" Cock Length)\n\nA bigger cock will make it easier to get off any sexual partners, but only if they can take your size.\n", true);
+	temp = 7;
+	doYesNo(confirmPerk, menuPerk);
+}
+private function choosePerkMessyOrgasms():void {
+	outputText("Are your orgasms particularly messy?  (+50% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 8;
+}
+private function choosePerkBigBoobs():void {
+	outputText("Are your breasts bigger than average? (DD cups)\n\nLarger breasts will allow you to lactate greater amounts, tit-fuck larger cocks, and generally be a sexy bitch.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 9;
+}
+private function choosePerkBigClit():void {
+	outputText("Do you have a big clit?  (1\" Long)\n\nA large enough clit may eventually become as large as a cock.  It also makes you gain lust much faster during oral or manual stimulation.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 10;
+}
+private function choosePerkFertile():void {
+	outputText("Is your family particularly fertile?  (+15% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.\n", true);
+	temp = 11;
+	doYesNo(confirmPerk, menuPerk);
+}
+private function choosePerkWetgina():void {
+	outputText("Does your pussy get particularly wet?  (+1 Vaginal Wetness)\n\nVaginal wetness will make it easier to take larger cocks, in turn helping you bring the well-endowed to orgasm quicker.\n", true);
+	doYesNo(confirmPerk, menuPerk);
+	temp = 12;
+}
+
+private function confirmPerk():void {
+	if(temp == 1) {
+		player.str += 5;
+		player.tone += 7;
+		player.thickness += 3;
+		//Add bonus +25% strength gain
+		player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
+	}
+	if(temp == 2) {
+		player.tou += 5;
+		player.tone += 5;
+		player.thickness += 5;
+		player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
+		player.HP = kGAMECLASS.maxHP();
+	}
+	if(temp == 3) {
+		player.spe += 5;
+		player.tone += 10;
+		player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+	}
+	if(temp == 4) {
+		player.inte += 5;
+		player.thickness -= 5;
+		player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+	}
+	if(temp == 5) {
+		player.lib += 5;
+		player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
+	}
+	if(temp == 6) {
+		player.sens += 5;
+		player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
+	}
+	if(temp == 7) {
+		player.femininity -= 5;
+		player.cocks[0].cockLength = 8;
+		player.cocks[0].cockThickness = 1.5;
+		player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+	}
+	if(temp == 8) {
+		player.femininity -= 2;
+		player.cumMultiplier = 1.5;
+		player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+	}
+	if(temp == 9) {
+		player.femininity += 5;
+		player.breastRows[0].breastRating += 2;
+		player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
+	}
+	if(temp == 10) {
+		player.femininity -= 5;
+		player.clitLength = 1;
+		player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
+	}
+	if(temp == 11) {
+		player.femininity += 5;
+		player.fertility += 25;
+		player.hipRating+=2;
+		player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
+	}
+	if(temp == 12) {
+		player.femininity += 7;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		player.createPerk(PerkLib.WetPussy,2,0,0,0);
+	}	
+	if(temp == 13) {
+		player.cor += 5;
+		player.createPerk(PerkLib.Pervert,0.25,0,0,0);
+	}	
+	menuHistory();
+}
+
+//-----------------
+//-- HISTORY PERKS
+//-----------------
+private function menuHistory():void {
+	outputText("Before you became a champion, you had other plans for your life.  What were you doing before?", true);
+	choices("Alchemy",chooseHistoryAlchemy,"Fighting",chooseHistoryFighting,"Healing",chooseHistoryHealing,"Religion",chooseHistoryReligion,"Schooling",chooseHistorySchooling,"Slacking",chooseHistorySlacking,"Smithing",chooseHistorySmithing,"Slutting",chooseHistorySlutting,"Whoring",chooseHistoryWhoring,"Fortune",chooseHistoryFortune);
+}
+
+private function chooseHistoryAlchemy():void {
+	outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?", true);
+	temp = 11;
+	doYesNo(confirmHistory, menuHistory);
+}
+private function chooseHistoryFighting():void {
+	outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical attacks.  Is this your history?", true);
+	temp = 12;
+	doYesNo(confirmHistory, menuHistory);
+}
+private function chooseHistoryHealing():void {
+	outputText("You often spent your free time with the village healer, learning how to tend to wounds.  Healing items and effects are 20% more effective.  Is this your history?", true);
+	temp = 13;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistoryReligion():void {
+	outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?", true);
+	temp = 14;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistorySchooling():void {
+	outputText("You spent much of your time in school, and even begged the richest man in town, Mr. Savin, to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?", true);
+	temp = 15;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistorySlacking():void {
+	outputText("You spent a lot of time slacking, avoiding work, and otherwise making a nuisance of yourself.  Your efforts at slacking have made you quite adept at resting, and your fatigue comes back 20% faster.  Is this your history?", true);
+	temp = 16;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistorySmithing():void {
+	outputText("You managed to get an apprenticeship with the local blacksmith.  Because of your time spent at the blacksmith's side, you've learned how to fit armor for maximum protection.  Is this your history?", true);
+	temp = 17;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistorySlutting():void {
+	outputText("You managed to spend most of your time having sex.  Quite simply, when it came to sex, you were the village bicycle - everyone got a ride.  Because of this, your body is a bit more resistant to penetrative stretching, and has a higher upper limit on what exactly can be inserted.  Is this your history?", true);
+	temp = 18;
+	doYesNo(confirmHistory,menuHistory);
+}
+private function chooseHistoryWhoring():void {
+	outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  Is this your history?", true);
+	temp = 19;
+	doYesNo(confirmHistory, menuHistory);
+}
+private function chooseHistoryFortune():void {
+	outputText("You always feel lucky when it comes to fortune.  Because of that, you have always managed to save up gems until whatever's needed and how to make the most out it (+15% gems on victory).  Is this your history?", true);
+	temp = 20;
+	doYesNo(confirmHistory, menuHistory);
+}
+
+private function confirmHistory():void {
+	outputText("", true)
+	var historyPerk:*
+	if(temp == 11) historyPerk = PerkLib.HistoryAlchemist;
+	else if (temp == 12) historyPerk = PerkLib.HistoryFighter;
+	else if (temp == 13) historyPerk = PerkLib.HistoryHealer;
+	else if (temp == 14) historyPerk = PerkLib.HistoryReligious;
+	else if (temp == 15) historyPerk = PerkLib.HistoryScholar;
+	else if (temp == 16) historyPerk = PerkLib.HistorySlacker;
+	else if (temp == 17) historyPerk = PerkLib.HistorySmith;
+	//Slut or whore? Start as non-virgin!
+	else if (temp == 18) {
+		outputText("Because of your history perk, you will start out as a non-virgin. \n\n", true);
+		historyPerk = PerkLib.HistorySlut;
+		if (player.hasVagina()) {
+			player.vaginas[0].virgin = false;
+			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
+		}
+		player.ass.analLooseness = 1;
+	}
+	else if (temp == 19) {
+		outputText("Because of your history perk, you will start out as a non-virgin. At least you'll start with some gems.\n\n", true);
+		historyPerk = PerkLib.HistoryWhore;
+		player.gems += 50;
+		if (player.hasVagina()) {
+			player.vaginas[0].virgin = false;
+			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
+		}
+		player.ass.analLooseness = 1;
+	}
+	else if (temp == 20) {
+		outputText("Because of your history perk, you will start out with some gems.\n\n", true);
+		historyPerk = PerkLib.HistoryFortune;
+		player.gems += 250;
+	}
+	player.createPerk(historyPerk,0,0,0,0);
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
+	}
+	else {
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
+		eventParser(1);
+	}
+	chooseGameModes();
+}
+
+//-----------------
+//-- CONFIRM NAME
+//-----------------
+private function confirmName():void {
+	if (kGAMECLASS.testingBlockExiting)
+	{
+		// We're running under the testing script.
+		// Stuff a name in the box and go go go
+		mainView.nameBox.text = "Derpy"
+	}
+	else if(mainView.nameBox.text == "")
+	{
+		//If part of newgame+, don't fully wipe.
+		if(player.XP > 0 && player.explored == 0) {
+			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+			if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
+			while(player.level > 1) {
+				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
+				player.level--;
+			}
+			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
+		}
+		newGameGo();
+		outputText("\n\n\n<b>You must select a name.</b>", false);
 		return;
 	}
-	//Whore
-	if(eventNo == 10047) {
-		outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  Is this your history?", true);
-		temp = 10047;
-		doYesNo(10044,10036);
+	else if(customName(mainView.nameBox.text)) {
+		clearOutput();
+		outputText("This name, like you, is special.  Do you live up to your name or continue on, assuming it to be coincidence?");
+		mainView.nameBox.visible = false;
+		menu();
+		addButton(0,"SpecialName",useCustomProfile);
+		addButton(1,"Continue On",noCustomProfile);
 		return;
 	}
-	if(eventNo == 10048) {
-
-		return;
+	player.short = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
+	if(unlockedHerm == true){
+		outputText("\n\n\n\nAre you a man or a woman? \n\nOr a hermaphrodite as you've unlocked hermaphrodite option!", true);
+		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "Herm", chooseHerm, "", 0, "", 0);
 	}
-	if(eventNo == 10049) {
-
-		return;
+	else{
+		outputText("\n\n\n\nAre you a man or a woman?", true);
+		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "", 0, "", 0, "", 0);			
 	}
-	if(eventNo == 10050) {
+}
 
-		return;
+public function newGamePlus():void {
+	flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+	if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
+	while (player.level > 1) {
+		player.level--;
+		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 	}
+	flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
+	newGameGo();
+}
 
+//No longer used.
+public function doCreation(eventNo:Number):void {
+	var e:MouseEvent;
+	var historyPerk:PerkType;
 }
 
 private function startTheGame():void {
@@ -928,7 +1062,7 @@ public function useCustomProfile():void {
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");
 		outputText("\n\n\n\nAre you a man or a woman?", true);
-		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);
+		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "", 0, "", 0, "", 0);
 	}
 }
 
@@ -940,10 +1074,10 @@ public function noCustomProfile():void {
 	outputText("Your name carries little significance beyond it being your name.  What is your gender?");
 	if(unlockedHerm == true){
 		outputText("\n\nHermaphrodite option is already unlocked.");
-		simpleChoices("Male", 10000, "Woman", 10001, "Herm", 10101, "", 0, "", 0);
+		simpleChoices("Male", chooseMale, "Woman", chooseFemale, "Herm", chooseHerm, "", 0, "", 0);
 	}
 	else{
-		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);			
+		simpleChoices("Male", chooseMale, "Female", chooseFemale, "", 0, "", 0, "", 0);			
 	}
 }
 

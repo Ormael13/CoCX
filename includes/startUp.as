@@ -132,20 +132,22 @@ public function settingsScreen():void
 {
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );
+	outputText("", true)
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 	
-	outputText("<b>Settings toggles:</b>\n", true);
+	outputText("<b>Settings toggles:</b>\n");
 
 	if(debug)
 		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
 		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.");
-
+	
 	outputText("\n\n");
 
 	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
+		outputText("Sprites enabled: <b>Yes</b>\n	You like to look at pretty pictures.");
 	else
-		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
+		outputText("Sprites enabled: <b>No</b>\n	There are only words. Nothing else.");
 
 	outputText("\n\n");
 
@@ -195,6 +197,18 @@ public function settingsScreen():void
 			"Silly Toggle", toggleSillyFlag,
 			"Smaller Font", decFontSize,
 			"Back", mainMenu);
+	//Disables cheats on hardcore mode.
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
+	{
+		removeButton(0);
+		removeButton(2);
+		removeButton(5);
+		removeButton(6);
+		debug = false;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.HYPER_HAPPY] = 0;
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
+	}
 }
 
 public function incFontSize():void

@@ -2,7 +2,9 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Camp.CabinProgress;
 	import classes.Scenes.NPCs.*;
+	import classes.Scenes.Places.Boat.MaraeScene;
 
 	import coc.view.MainView;
 
@@ -37,7 +39,9 @@
 		public function Camp()
 		{
 		}
-
+		
+		public var cabinProgress:CabinProgress = new CabinProgress;
+		
 //  SLEEP_WITH:int = 701;
 
 public function doCamp():void {
@@ -422,6 +426,7 @@ public function doCamp():void {
 	var lovers:* = 0;
 	var slaves:* = 0;
 	var storage:* = 0;
+	var canCampStuff:* = 0;
 	if(stash()) storage = initiateStash;
 	if(places(false)) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
@@ -441,9 +446,12 @@ public function doCamp():void {
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if(player.XP >= (player.level) * 100 || player.perkPoints > 0) {
-		if(player.XP < player.level * 100)
-			mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+	if(player.XP >= (player.level) * 100 || player.perkPoints > 0 || player.statPoints > 0) {
+		if (player.XP < player.level * 100)
+			{
+				if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
+				else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+			}
 		else
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
 		mainView.showMenuButton( MainView.MENU_LEVEL );
@@ -466,23 +474,26 @@ public function doCamp():void {
 
 
 	if(isabellaFollower()) {
-		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.", false);
-		if(model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ", false);
 	}
 	//Live in-ness
 	else {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
+		if(model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
+		if(model.time.days >= 20) 
 		{
-			if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
-			else if(model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
-			else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+			if (!isabellaFollower()) outputText("Your new home is as comfy as a camp site can be. ", false);
+			outputText("The fire-pit ", false);
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("is ", false);
+			else outputText("and tent are both ", false);
+			outputText("set up perfectly, and in good repair.", false);
 		}
 	}
-	//Cabin! Requires at least 20 days passed.
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
-	{
-		outputText("Your new home is as comfy as a camp site can be.  Your cabin is situated near the edge of your camp and the fire-pit is set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter. ", false);
-	}
+	if(model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("\n\nThere's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("\n\nThere's an unfinished cabin. It's currently missing window and door.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("\n\nThere's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12) outputText("\n\nYour cabin is situated near the edge of camp.\n\n", false)
 	if(flags[kFLAGS.CLARA_IMPRISONED] > 0) 
 	{
 		marblePurification.claraCampAddition();
@@ -520,7 +531,7 @@ public function doCamp():void {
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 20) {
 			outputText("  A towering harpy rookery has risen up at the fringes of your camp, filled with all of your harpy brood.  It's at least three stories tall at this point, and it has actually begun to resemble a secure structure.  These harpies are always rebuilding and adding onto it.");
 		}
-		//Massive (31-50 mature daughters)
+		//Massive (21-50 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 50) {
 			outputText("  A massive harpy rookery towers over the edges of your camp.  It's almost entirely built out of stones that are fit seamlessly into each other, with many ledges and overhangs for nests.  There's a constant hum of activity over there day or night.");
 		}
@@ -617,8 +628,11 @@ public function doCamp():void {
 	//if rathazul has joined the camp
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] <= 1) {
-			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
+			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  ", false);
+			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.", false);
+			else outputText("The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  <b>He's finished with the task you gave him!</b>", false);
+			
 			outputText("\n\n", false);
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
@@ -666,7 +680,10 @@ public function doCamp():void {
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 	//Pure Jojo
-	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("There is a small bedroll for Jojo near your own", false);
+	if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
+	else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
+	
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover.  It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric.  Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.  ", false);
@@ -719,7 +736,8 @@ public function doCamp():void {
 	var baitText:String = "Masturbate";
 	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
 	//Initialize companions/followers
-	if(model.time.hours > 4 && model.time.hours < 23) {
+	if (model.time.hours > 4 && model.time.hours < 23) {
+		canCampStuff = campActions;
 		if(followersCount() > 0) 
 			followers = 74;
 		if(slavesCount() > 0) 
@@ -732,7 +750,10 @@ public function doCamp():void {
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
-		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n", false);
+		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
+		if (!(model.time.hours > 4 && model.time.hours < 23)) {
+			outputText("Your camp is silent as your companions are sleeping right now.\n", false)
+		}
 		restName = "Sleep";
 		restEvent = 41;
 		explore = 0;
@@ -740,7 +761,10 @@ public function doCamp():void {
 	}
 	//Day Time!
 	else {
+		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
+		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
+		
 		if(player.fatigue > 40 || player.HP/player.maxHP() <= .9) {
 			restName = "Rest";
 			restEvent = 11;
@@ -757,20 +781,48 @@ public function doCamp():void {
 		}
 	}
 	
+	//Unlock cabin.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 30)
+	{
+		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
+		outputText("You realize that you have spent a month sleeping in tent every night. You think of something so you can sleep nicely and comfortably.", true)
+		doNext(1);
+		return;
+	}
+	
 	//Menu
-	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
-	//Bad end
+	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
+
+	//Hunger Bad end
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 0)
 	{
 		//Bad end at 0 HP!
-		if (player.HP <= 0 && (player.str + player.tou) < 20 )
+		if (player.HP <= 0 && (player.str + player.tou) < 30 )
 		{
-			outputText("Too weak to be able to stand up, you slump down on the ground. Your vision blurs as the world around you finally fades to black. \n\nYou are dead.", true);
+			outputText("Too weak to be able to stand up, you slump down on the ground. Your vision blurs as the world around you finally fades to black.", true);
+			if (hasCompanions == true) {
+				if (companionsCount() > 1) {
+					outputText("\n\nYour companions gather to mourn over your passing.", false);
+				}
+				else {
+					outputText("\n\nYour fellow companion mourns over your passing.", false);
+				}
+			}
 			player.HP = 0;
 			eventParser(5035);
 		}
 	}
+	//Min Lust Bad End (Must not have any removable/temporary min lust.)
+	if (player.minLust() >= 100 && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
+	{
+		outputText("[Placeholder] You are trapped in orgasm. You keep masturbating furiously but you are unable to stop. Your minimum lust is too high. No matter how hard you try, you cannot even satisfy your desires.", true);
+		eventParser(5035);
+	}
 }
+
+//-----------------
+//-- STORAGE
+//-----------------
 public function initiateStash():void {
 	trace("Initiating stash");
 	stash(false);
@@ -874,9 +926,17 @@ public function stash(exists:Boolean = true):Boolean {
 	//Jewelry Box
 	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 		outputText("Your jewelry box is located ", false);
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
 		{
-			outputText("on your nightstand next to your bed inside your cabin.", false);
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER])
+			{
+				outputText("on your dresser inside your cabin.", false);
+			}
+			else
+			{
+				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND]) outputText("on your nightstand inside your cabin.", false);
+				else  outputText("under your bed inside your cabin.", false);
+			}
 		}
 		else
 		{
@@ -954,6 +1014,10 @@ public function loversCount():Number {
 	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
+
+//-----------------
+//-- COMPANIONS 
+//-----------------
 public function campLoversMenu():void {
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
@@ -1228,8 +1292,178 @@ public function campFollowers():void {
 	addButton(6,"Valeria",valeria2);
 	addButton(9,"Back",eventParser,1);
 }
+//-----------------
+//-- CAMP ACTIONS 
+//-----------------
+private function campActions():void {
+	menu();
+	outputText("What would you like to do?", true)
+	addButton(0, "SwimInStream", swimInStream);
+	//addButton(1, "ExaminePortal", examinePortal); //Examine portal.
+	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin); //Enter cabin for furnish.
+
+	addButton(9, "Back", eventParser, 1);
+}
+
+private function swimInStream():void {
+	var prankChooser:Number = rand(3);
+	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ", true);
+	if (player.armorName == "slutty swimwear") outputText("you are going to swim while wearing just your swimwear. ", false);
+	else outputText("you strip off your [armor] until you are completely naked. ", false);
+	outputText("You step into the flowing waters. You shiver at first but you step in deeper. Incredibly, it's not too deep. ", false);
+	if (player.tallness < 60) outputText("Your feet aren't even touching the riverbed. ", false);
+	if (player.tallness >= 60 && player.tallness < 72) outputText("Your feet are touching the riverbed and your head is barely above the water. ", false);
+	if (player.tallness >= 72) outputText("Your feet are touching touching the riverbed and your head is above water. You bend down a bit so you're at the right height. ", false);
+	outputText("\n\nYou begin to swim around and relax. ", false);
+	//Izma!
+	if (camp.izmaFollower())
+	{
+		outputText("\n\nYour tiger-shark beta, Izma, joins you. You are frightened at first when you saw the fin protruding from the water and the fin approaches you! ", false);
+		outputText("As the fin appoaches you, the familiar figure comes up. It's your tiger-shark lover, Izma! \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.", false);
+	}
+	//Helia!
+	if (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
+	{
+		outputText("\n\nHelia, your salamander lover, joins in for a swim. \"<i>Hey, lover mine!</i>\" she says. As she enters the waters, the water seems to become warmer until it begins to steam like a sauna.", false);
+	}
+	//Marble!
+	if (camp.marbleFollower())
+	{
+		outputText("'n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
+	}
+	//Pranks!
+	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
+	{
+		outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?", false)
+		doYesNo(swimInStreamPrank1, swimInStreamFinish);
+	}
+	/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
+	{
+		outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?", false)
+		doYesNo(swimInStreamPrank2, swimInStreamFinish);
+	}*/
+	else doNext(swimInStreamFinish);
+	
+}
+
+private function swimInStreamPrank1():void {
+	var pranked:Boolean = false;
+	var prankRoll:Number = 1;
+	//How many people joined!
+	if (camp.izmaFollower()) prankRoll++;
+	if (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) prankRoll++;
+	if (camp.marbleFollower()) prankRoll++;
+	if (camp.amilyFollower()) prankRoll++
+	//Play joke on them!
+	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.", true)
+	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false)
+	{
+		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible. ", false);
+		pranked = true;
+	}
+	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false)
+	{
+		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty indeed,</i>\" she says. ", false);
+		pranked = true;
+	}
+	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false)
+	{
+		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
+		pranked = true;
+	}
+	if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
+	{
+		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
+		pranked = true;
+	}
+	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming. ", false);
+	else outputText("You feel accomplished from the prank and resume swimming. ", false);
+	doNext(swimInStreamFinish);
+}
+
+private function swimInStreamFinish():void {
+	outputText("", true);
+	//Blown up factory? Corruption gains.
+	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) 
+	{
+		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n", false);
+		dynStats("cor", 0.5);
+		dynStats("lust", 15, "resisted", true);
+	}
+	outputText("Eventually, you swim back to the riverbank and dry yourself off", false);
+	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName, false);
+	outputText(".", false)
+	doNext(13);
+}
+
+private function examinePortal():void {
+	outputText("Coming soon! \n\n", true)
+	doNext(13);
+}
+
+private function watchSunset():void {
+	var randText:Number = rand(3);
+	outputText("You pick a location where the sun is clearly visible from that particular spot and sit down. The sun is just above the horizon, ready to set. It's such a beautiful view. \n\n", true)
+	//Childhood nostalgia GO!
+	if (randText == 0)
+	{
+		if (player.cor < 33) 
+		{
+			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood.", false);
+			dynStats("cor", -1, "lib", -1, "lust", -30, "resisted", false);
+		}
+		if (player.cor >= 33 && player.cor < 66) 
+		{
+			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories are somewhat twisted from some of the perverted moments. You shake your head and just relax.", false);
+			dynStats("cor", -0.5, "lib", -1, "lust", -20, "resisted", false);
+		}
+		if (player.cor >= 66) 
+		{
+			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you suddenly shake your head and focus on relaxing.", false);
+			dynStats("cor", 0, "lib", -1, "lust", -10, "resisted", false);
+		}
+	}
+	//Greatest moments GO!
+	if (randText == 1)
+	{
+		if (player.cor < 33) 
+		{
+			outputText("You reflect back on your greatest adventures and how curiosity got the best of you. You remember some of the greatest places you discovered.", false);
+			dynStats("lust", -30, "resisted", false);
+		}
+		if (player.cor >= 33 && player.cor < 66) 
+		{
+			outputText("You reflect back on your greatest adventures. Of course, some of them involved fucking and getting fucked by the denizens of Mareth. You suddenly open your eyes from the memory and just relax, wondering why you thought of that in the first place.", false);
+			dynStats("lust", -20, "resisted", false);
+		}
+		if (player.cor >= 66) 
+		{
+			outputText("You reflect back on your greatest adventures. You chuckle at the moments you were dominating and the moments you were submitting. You suddenly open your eyes from the memory and just relax.", false);
+			dynStats("lust", -10, "resisted", false);
+		}
+	}
+	//Greatest moments GO!
+	if (randText >= 2)
+	{
+		outputText("You think of what you'd like to ", false);
+		if (rand(2) == 0) outputText("do", false);
+		else outputText("accomplish", false);
+		outputText(" before you went through the portal. You felt a bit sad that you didn't get to achieve your old goals.", false);
+		dynStats("lust", -30, "resisted", false);
+
+	}
+	outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.", false)
+	doNext(13);
+}
 
 
+
+
+//-----------------
+//-- REST
+//-----------------
 public function rest():void {
 	campQ = true;
 	outputText("", true);
@@ -1251,11 +1485,14 @@ public function rest():void {
 	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if (timeQ == 0) {
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0)
 		{
-			outputText("You head inside your cabin to rest. ", false);
+			outputText("You head into your cabin to rest. You lie down on your bed to rest for four hours.", false);
 		}
-		outputText("You lie down to rest for four hours.\n", false);
+		else 
+		{
+			outputText("You lie down to rest for four hours.\n", false);
+		}
 		timeQ = 4;
 		//Hungry
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0)
@@ -1287,6 +1524,9 @@ public function rest():void {
 	}
 	goNext(timeQ,true);
 }
+//-----------------
+//-- WAIT
+//-----------------
 public function doWait():void {
 	campQ = true;
 	outputText("", true);
@@ -1316,7 +1556,9 @@ public function doWait():void {
 	}
 	goNext(timeQ,true);
 }
-
+//-----------------
+//-- SLEEP
+//-----------------
 public function doSleep(clrScreen:Boolean = true):void {
 	if(flags[kFLAGS.URTA_INCUBATION] >= 384 && model.time.hours >= 20 && model.time.hours < 2) {
 		urtaPregs.preggoUrtaGivingBirth();
@@ -1372,7 +1614,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 		{
 			outputText("You head inside your cabin to turn yourself in for the night. ")
 		}
@@ -1457,7 +1699,7 @@ public function sleepWrapper():void {
 
 public function sleepRecovery(display:Boolean = false):void {
 	var multiplier:Number = 1.0;
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 	{
 		multiplier += 0.5;
 	}
@@ -1634,7 +1876,10 @@ public function nightSuccubiRepeat():void {
 	player.orgasm();
 	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
 }
-//Places menu
+
+//-----------------
+//-- PLACES MENU
+//-----------------
 public function places(display:Boolean):Boolean {
 	var farmBarn:* = 0;
 	var farmHouse:* = 0;
@@ -1697,7 +1942,8 @@ private function placesPage2():void
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0,"TownRuins",eventParser,2371);
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "Town Ruins", eventParser, 2371);
+	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
 	addButton(4,"Previous",placesToPage1);
 	addButton(9,"Back",eventParser,1);
 }
@@ -1709,11 +1955,12 @@ private function placesToPage1():void
 
 private function dungeons():void {
 	menu();
-	//Turn on d2
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
-	//Turn on dungeon
-	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1,"Factory",eventParser,11057);
-	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
+	//Turn on dungeon 1
+	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(0,"Factory",eventParser,11057);
+	//Turn on dungeon 2
+	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1,"Deep Cave",eventParser,11076);
+	//Side dungeon
+	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
 	addButton(9,"Back",eventParser,71);
 }
 

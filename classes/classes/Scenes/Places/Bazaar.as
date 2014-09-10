@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Plains.BazaarGatekeeper;
 	import classes.Scenes.Places.Bazaar.*;
 
 	public class Bazaar extends BaseContent {
@@ -41,16 +42,31 @@ public function findBazaar():void {
 	doYesNo(approachBazaarGuard,13);
 }
 
+
+
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
 private function approachBazaarGuard():void {
 	outputText("", true);
 	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>", false);
-	if(player.cor < 33) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
+	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",13);
+	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard,"",0,"",0,"",0,"Leave",13);
 	else simpleChoices("Enter",2855,"",0,"",0,"",0,"Leave",13);
 }
+
+//Pure? You'll have to fight!
+public function initiateFightGuard():void {
+	outputText("You ready your " + player.weaponName + " and assume a combat stance! He grabs his dual scimitars! It's a fight!", true);
+	startCombat(new BazaarGatekeeper());
+}	
+
+public function winAgainstGuard():void {
+	outputText("", true);
+	cleanupAfterCombat();
+	outputText("\n\nWith the gatekeeper defeated, you walk right past the unconscious guard and enter...", false);
+	doNext(enterTheBazaarAndMenu);
+}	
 
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {

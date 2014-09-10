@@ -4,6 +4,7 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 
 import coc.view.MainView;
 import classes.Saves;
+import classes.CharCreation;
 
 import flash.net.SharedObject;
 
@@ -438,8 +439,8 @@ public function doCombat(eventNum:Number):void
 		if (!this.testingBlockExiting)
 		{
 				outputText("<b>GAME OVER</b>", true);
-				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "CHEAT", 1);
-				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "CHEAT", 1);
+				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
 				mainView.showMenuButton(MainView.MENU_DATA);
 				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 				mainView.hideMenuButton(MainView.MENU_LEVEL);
@@ -457,38 +458,41 @@ public function doCombat(eventNum:Number):void
 	}
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
-
-			if (!this.testingBlockExiting) {
-				outputText("\n\n<b>GAME OVER</b>", false);
-				
-				//Delete save on hardcore.
-				if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-					outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
-					flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
-					var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-					if (test.data.exists)
-					{
-						trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-						test.clear();
-					}
+		var textChoices:Number = rand(4);
+		if (!this.testingBlockExiting) {
+			if (textChoices == 0) outputText("\n\n<b>GAME OVER</b>", false);
+			if (textChoices == 1) outputText("\n\n<b>Game over, man! Game over!</b>", false);
+			if (textChoices == 2) outputText("\n\n<b>You just got Bad Ended!</b>", false);
+			if (textChoices == 3) outputText("\n\n<b>Your adventures have came to an end...</b>", false);
+			
+			//Delete save on hardcore.
+			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+				outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+				flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
+				var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+				if (test.data.exists)
+				{
+					trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+					test.clear();
 				}
-				
-				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "Debug Cheat", 1);
-				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-				mainView.showMenuButton(MainView.MENU_NEW_MAIN);
-				mainView.showMenuButton(MainView.MENU_DATA);
-				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-				mainView.hideMenuButton(MainView.MENU_LEVEL);
-				mainView.hideMenuButton(MainView.MENU_PERKS);
-				
-				gameState = 0;
 			}
-			else {
-				// Prevent ChaosMonkah instances from getting stuck
-				gameState = 0;
-				doNext(13);
-			}
-			inDungeon = false;
+			
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
+			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+			mainView.showMenuButton(MainView.MENU_DATA);
+			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+			mainView.hideMenuButton(MainView.MENU_LEVEL);
+			mainView.hideMenuButton(MainView.MENU_PERKS);
+			
+			gameState = 0;
+		}
+		else {
+			// Prevent ChaosMonkah instances from getting stuck
+			gameState = 0;
+			doNext(13);
+		}
+		inDungeon = false;
 	}
 	//Sand which(lol) end Pt 1
 	if(eventNum == 5026)
@@ -1872,6 +1876,7 @@ public function awardPlayer():void
 		monster.gems += bonusGems;
 		//trace( "to: " + monster.gems )
 	}
+	if (player.findPerk(PerkLib.HistoryFortune) >= 0) monster.gems *= 1.15;
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if(!inDungeon) doNext(13);
 	else doNext(1);
@@ -4976,6 +4981,12 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Attempt texts!
+	if(monster.short == "Marae") {
+		outputText("Your boat is blocked by tentacles! ");
+		if(!player.canFly()) outputText("You may not be able to swim fast enough.");
+		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your " + player.legs() + " and pull you down.");
+		outputText("It looks like you cannot escape.");
+	}
 	if(monster.short == "Ember") {
 		outputText("You take off");
 		if(!player.canFly()) outputText(" running");

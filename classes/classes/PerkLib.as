@@ -20,6 +20,8 @@ package classes
 				"");
 
 		// Player creation perks
+		public static const Pervert:PerkType = mk("Pervert", "Pervert",
+				"Gains corruption 25% faster.");
 		public static const Fast:PerkType = mk("Fast", "Fast",
 				"Gains speed 25% faster.");
 		public static const Lusty:PerkType = mk("Lusty", "Lusty",
@@ -66,6 +68,8 @@ package classes
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 10%.");
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
+		public static const HistoryFortune:PerkType = mk("History: Fortune", "History: Fortune",
+				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.");
 
 		// Ordinary (levelup) perks
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",

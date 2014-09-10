@@ -89,12 +89,15 @@ public function HPChange(changeNum:Number, display:Boolean):void
 		if(player.HP + changeNum <= 0) {
 			if(display) outputText("You take " + int(changeNum*-1) + " damage, dropping your HP to 0.\n", false);
 			player.HP = 0;
+			mainView.statsView.showStatDown( 'hp' );
 		}
 		else {
 			if(display) outputText("You take " + int(changeNum*-1) + " damage.\n", false);
 			player.HP += changeNum;
+			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
+	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow..
 	statScreenRefresh();
 }
 		
@@ -257,6 +260,190 @@ public function doubleAttackOff():void {
 	doubleAttackOptions();
 }
 
+//Allocate attributes
+private function addStr():void {
+	if (player.statPoints > 0)
+	{
+		player.tempStr++;
+		player.statPoints--;
+	}
+	attributeMenu();
+}
+private function addTou():void {
+	if (player.statPoints > 0)
+	{
+		player.tempTou++
+		player.statPoints--;
+	}
+	attributeMenu();
+}
+private function addSpe():void {
+	if (player.statPoints > 0)
+	{
+		player.tempSpe++
+		player.statPoints--;
+	}
+	attributeMenu();
+}
+private function addInt():void {
+	if (player.statPoints > 0)
+	{
+		player.tempInt++
+		player.statPoints--;
+	}
+	attributeMenu();
+}
+
+private function subStr():void {
+	if (player.tempStr > 0)
+	{
+		player.tempStr--;
+		player.statPoints++;
+	}
+	attributeMenu();
+}
+private function subTou():void {
+	if (player.tempTou > 0)
+	{
+		player.tempTou--;
+		player.statPoints++;
+	}
+	attributeMenu();
+}
+private function subSpe():void {
+	if (player.tempSpe > 0)
+	{
+		player.tempSpe--
+		player.statPoints++;
+	}
+	attributeMenu();
+}
+private function subInt():void {
+	if (player.tempInt > 0)
+	{
+		player.tempInt--
+		player.statPoints++;
+	}
+	attributeMenu();
+}
+
+private function finishAttributes():void {
+	outputText("", true)
+	if (player.tempStr > 0)
+	{
+		if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n", false);
+		else outputText("Your muscles feel slightly stronger from your time adventuring.\n", false);
+	}
+	if (player.tempTou > 0)
+	{
+		if (player.tempTou >= 3) outputText("You feel tougher from all the fights you have endured.\n", false);
+		else outputText("You feel slightly tougher from all the fights you have endured.\n", false);
+	}
+	if (player.tempSpe > 0)
+	{
+		if (player.tempSpe >= 3) outputText("Your time in combat has driven you to move faster.\n", false);
+		else outputText("Your time in combat has driven you to move slightly faster.\n", false);
+	}
+	if (player.tempInt > 0)
+	{
+		if (player.tempInt >= 3) outputText("Your time spent fighting the creatures of this realm has sharpened your wit.\n", false);
+		else outputText("Your time spent fighting the creatures of this realm has sharpened your wit by a bit.\n", false);
+	}
+	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt <= 0 || player.statPoints > 0)
+	{
+		outputText("\nYou may allocate your remaining stat points later.", false);
+	}
+	dynStats("str", player.tempStr);
+	dynStats("tou", player.tempTou);
+	dynStats("spe", player.tempSpe);
+	dynStats("int", player.tempInt);
+	player.tempStr = 0;
+	player.tempTou = 0;
+	player.tempSpe = 0;
+	player.tempInt = 0;
+	if (player.perkPoints > 0) doNext(perkBuyMenu);
+	else simpleChoices("Next", 115, "", 0, "", 0, "", 0, "", 0);
+	
+}
+
+private function resetAttributes():void {
+	while (player.tempStr > 0)
+	{
+		player.statPoints++
+		player.tempStr--;
+	}
+	while (player.tempTou > 0)
+	{
+		player.statPoints++
+		player.tempTou--;
+	}
+	while (player.tempSpe > 0)
+	{
+		player.statPoints++
+		player.tempSpe--;
+	}
+	while (player.tempInt > 0)
+	{
+		player.statPoints++
+		player.tempInt--;
+	}
+	attributeMenu();
+}
+
+private function attributeMenu():void {
+	outputText("You have " + (player.statPoints) + " left to spend.\n\n", true)
+	
+	outputText("Strength: ", false)
+	if (player.str < 100) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n", false)
+	else outputText("" + Math.floor(player.str) + " (Maximum)\n", false)
+	
+	outputText("Toughness: ", false)
+	if (player.tou < 100) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n", false)
+	else outputText("" + Math.floor(player.tou) + " (Maximum)\n", false)
+	
+	outputText("Speed: ", false)
+	if (player.spe < 100) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n", false)
+	else outputText("" + Math.floor(player.spe) + " (Maximum)\n", false)
+	
+	outputText("Intelligence: ", false)
+	if (player.inte < 100) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n", false)
+	else outputText("" + Math.floor(player.inte) + " (Maximum)\n", false)
+
+	choices("Add Strength", addStr, "Add Tough", addTou, "Add Speed", addSpe, "Add Intel", addInt, "Reset", resetAttributes, "Sub Strength", subStr, "Sub Tough", subTou, "Sub Speed", subSpe, "Sub Intel", subInt, "Done", finishAttributes); 
+	if ((player.str + player.tempStr) >= 100 || player.statPoints <= 0)
+	{
+		removeButton(0);
+	}
+	if ((player.tou + player.tempTou) >= 100 || player.statPoints <= 0)
+	{
+		removeButton(1);
+	}
+	if ((player.spe + player.tempSpe) >= 100 || player.statPoints <= 0)
+	{
+		removeButton(2);
+	}
+	if ((player.inte + player.tempInt) >= 100 || player.statPoints <= 0)
+	{
+		removeButton(3);
+	}
+	if (player.tempStr <= 0)
+	{
+		removeButton(5);
+	}
+	if (player.tempTou <= 0)
+	{
+		removeButton(6);
+	}
+	if (player.tempSpe <= 0)
+	{
+		removeButton(7);
+	}
+	if (player.tempInt <= 0)
+	{
+		removeButton(8);
+	}
+}
+
 public function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
@@ -264,9 +451,13 @@ public function levelUpGo(e:MouseEvent = null):void {
 	if(player.XP >= (player.level) * 100) {
 		player.level++;
 		player.perkPoints++;
-		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
+		player.statPoints += 5;
+		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!", true);
 		player.XP -= (player.level-1) * 100;
-		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);                
+		doNext(attributeMenu);
+	}
+	else if(player.statPoints > 0) {
+		attributeMenu();
 	}
 	//Spend perk points
 	else if(player.perkPoints > 0) {
@@ -541,7 +732,7 @@ public function buttonText(buttonName:String):String {
 
 
 // Returns a string or undefined.
-public function getButtonToolTipText( buttonText :String ) :String
+public function getButtonToolTipText(buttonText:String):String
 {
 	var toolTipText :String;
 
@@ -562,36 +753,66 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if (itype != null) toolTipText = itype.description;
 	itype = ItemType.lookupItemByShort(buttonText);
 	if (itype != null) toolTipText = itype.description;
-	if(buttonText.indexOf("Tail Whip") != -1) {
-		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
-	}
-	if(buttonText.indexOf("Dual Belt") != -1) {
-		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
-	}
-	if(buttonText.indexOf("C. Pole") != -1) {
-		toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
-	}
-	if(buttonText.indexOf("Fake Mare") != -1) {
-		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
-	}
-	//Combat
-	//COMBAT
-	//combat
-	//wombat
+
+
+	//-----------
+	//-- COMBAT 
+	//-----------
+	//Combat Menu
 	if (buttonText == "Attack") {
 		if (gameState != 1) toolTipText = "";
 		else toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
-	}
-	if(buttonText == "Kiss") {                        
-		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
 	if(buttonText == "Tease") {
 		if (gameState != 1) toolTipText = "";
 		else toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
-	if(buttonText == "Kick") {                        
-		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
+	if(buttonText.indexOf("Spells") != -1) {                        
+		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
+	}	
+	if(buttonText.indexOf("Items") != -1) {                
+		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
+	if(buttonText.indexOf("P. Specials") != -1) {                        
+		toolTipText = "Physical special attack menu.";
+	}
+	if(buttonText.indexOf("M. Specials") != -1) {                        
+		toolTipText = "Mental and supernatural special attack menu.";
+	}
+	if(buttonText.indexOf("Fantasize") != -1) {                        
+		toolTipText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
+	}
+	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
+		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
+	}
+	if(buttonText == "Run") {                        
+		toolTipText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
+	}
+	if(buttonText.indexOf("Defend") != -1) {                        
+		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
+	}
+	//Spells
+	if(buttonText.indexOf("Charge W.") != -1) {                        
+		toolTipText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
+	}
+	if(buttonText.indexOf("Blind") != -1) {                        
+		toolTipText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
+	}
+	if(buttonText.indexOf("Whitefire") != -1) {                        
+		toolTipText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
+	}
+	if(buttonText.indexOf("Arouse") != -1) {                        
+		if (gameState != 1) toolTipText = "";
+		else toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
+	}
+	if(buttonText == "Heal") {                        
+		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
+	}
+	if(buttonText.indexOf("Might") != -1) {                        
+		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
+	}
+	
+	//Urta's specials
 	if(buttonText == "Combo") {                        
 		toolTipText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
 	}
@@ -610,20 +831,9 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText == "SecondWind") {                        
 		toolTipText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
 	}
+	//P. Special attacks
 	if(buttonText.indexOf("AnemoneSting") != -1) {                        
 		toolTipText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
-	}
-	if(buttonText.indexOf("P. Specials") != -1) {                        
-		toolTipText = "Physical special attack menu.";
-	}
-	if(buttonText.indexOf("M. Specials") != -1) {                        
-		toolTipText = "Mental and supernatural special attack menu.";
-	}
-	if(buttonText == "Berzerk") {                        
-		toolTipText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
-	}
-	if(buttonText.indexOf("Possess") != -1) {                        
-		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
 	if(buttonText.indexOf("Constrict") != -1) {                        
 		toolTipText = "Attempt to bind an enemy in your long snake-tail.";
@@ -631,84 +841,42 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Gore") != -1) {                        
 		toolTipText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
 	}
-	if(buttonText.indexOf("Fantasize") != -1) {                        
-		toolTipText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
-	}
-	if(buttonText.indexOf("Charge W.") != -1) {                        
-		toolTipText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
-	}
-	if(buttonText.indexOf("Blind") != -1) {                        
-		toolTipText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
-	}
-	if(buttonText.indexOf("Whitefire") != -1) {                        
-		toolTipText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
-	}
-	if(buttonText.indexOf("Aroused") != -1) {
-	}
-	if(buttonText.indexOf("Arouse") != -1) {                        
-		if (gameState != 1) toolTipText = "";
-		else toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
-	}
-	if(buttonText == "Heal") {                        
-		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
-	}
-	if(buttonText.indexOf("Might") != -1) {                        
-		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
-	}
-	//Wait
-	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
-		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
-	}
-	//Sting
-	if(buttonText.length == 5 && buttonText.indexOf("Sting") != -1) {                        
-		toolTipText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
-	}
-	//Web
-	if(buttonText.indexOf("Web") != -1) {                        
-		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
-	}
 	if(buttonText.indexOf("Infest") != -1) {
 		toolTipText = "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms.";
 	}
-	if(buttonText.indexOf("Spells") != -1) {                        
-		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
+	if(buttonText == "Kick") {                        
+		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
 	}
-	if(buttonText.indexOf("Defend") != -1) {                        
-		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
+	if(buttonText == "Kiss") {                        
+		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
-	if(buttonText == "Run") {                        
-		toolTipText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
+	if(buttonText.length == 5 && buttonText.indexOf("Sting") != -1) {                        
+		toolTipText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
 	}
-	if(buttonText.indexOf("Inventory") != -1) {                
-		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
+	if(buttonText.indexOf("Tail Whip") != -1) {
+		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
 	}
-	if(buttonText.indexOf("Items") != -1) {                
-		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
+	if(buttonText.indexOf("Web") != -1) {                        
+		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
 	}
-	if(buttonText.indexOf("AutoSav") != -1) {                
-		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
-		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
-		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
+
+	//M. Special attacks
+	if(buttonText == "Berserk") {                        
+		toolTipText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
+	}	
+	if(buttonText.indexOf("Possess") != -1) {                        
+		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
-	if(buttonText.indexOf("Retrieve") != -1) {                
-		toolTipText = "Retrieve allows you to take an item from one of the reserve stacks in your camp's additional storage.";
-	}
-	if(buttonText.indexOf("Storage") != -1) {                
-		toolTipText = "Storage will allow you to dump a stack of items from your inventory into your storage chest.";
-	}
+	
+	//Salon
 	if(buttonText.indexOf("Sand Facial") != -1) {                
 		toolTipText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
 	}
 	if(buttonText.indexOf("Mud Facial") != -1) {                
 		toolTipText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
 	}
+	
 	//Masturbation Toys
-	if(buttonText == "Masturbate") {
-		toolTipText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
-	}
-	if(buttonText == "Meditate") {
-		toolTipText = "Selecting this option will attempt to meditate in order to reduce lust and corruption.";
-	}
 	if(buttonText.indexOf("AN Stim-Belt") != -1) {
 		toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
 	}
@@ -724,12 +892,14 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Onahole") != -1) {
 		toolTipText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
 	}
-	if(buttonText == "Jojo") {
-		if(monk >= 5) toolTipText = "Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.";
-		else toolTipText = "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.";
+	if(buttonText.indexOf("Dual Belt") != -1) {
+		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
 	}
-	if(buttonText == "Marble") {
-		toolTipText = "Go to Marble the cowgirl for talk and companionship.";
+	if(buttonText.indexOf("C. Pole") != -1) {
+		toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
+	}
+	if(buttonText.indexOf("Fake Mare") != -1) {
+		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
 	//Books
 	if(buttonText.indexOf("Dangerous Plants") != -1) {
@@ -744,21 +914,158 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Hentai Comic") != -1) {
 		toolTipText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
 	}
-	//CAMP STUFF
+	//---------
+	//-- CAMP 
+	//---------
+	//MENUS
+	if(buttonText.indexOf("Explore") != -1) {                
+		toolTipText = "Explore to find new regions and visit any discovered regions.";
+	}
+	if(buttonText.indexOf("Places") != -1) {                
+		toolTipText = "Visit any places you have discovered so far.";
+	}
+	if(buttonText.indexOf("Inventory") != -1) {                
+		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
+	}
+	if(buttonText.indexOf("Stash") != -1) {                
+		toolTipText = "The stash allows you to store your items safely until you need it later.";
+	}
 	if(buttonText.indexOf("Followers") != -1) {
 		toolTipText = "Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.";
 	}
-	//Marble
-	if(buttonText.indexOf("Marble (Sex)") != -1) {
-		toolTipText = "Get with marble for a quick cuddle and some sex.";
+	if(buttonText.indexOf("Lovers") != -1) {
+		toolTipText = "Check up on any lovers you have invited so far to your camp and interact with them.";
 	}
+	if(buttonText.indexOf("Slaves") != -1) {
+		toolTipText = "Check up on any slaves you have received and interact with them.";
+	}
+	if(buttonText == "Masturbate") {
+		toolTipText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
+	}
+	if(buttonText == "Meditate") {
+		toolTipText = "Selecting this option will attempt to meditate in order to reduce lust and corruption.";
+	}
+	//EXPLORE MENU
+	if(buttonText.indexOf("Desert") != -1) {
+		toolTipText = "Visit the dry desert. \n\nRecommended level: 2";
+	}
+	if(buttonText.indexOf("Forest") != -1) {
+		toolTipText = "Visit the lush forest. \n\nRecommended level: 1";
+	}
+	if(buttonText.indexOf("Lake") != -1) {
+		toolTipText = "Visit the lake and explore the beach. \n\nRecommended level: 2";
+	}
+	if(buttonText.indexOf("Plains") != -1) {
+		toolTipText = "Visit the plains. \n\nRecommended level: 10";
+	}
+	if(buttonText.indexOf("Swamp") != -1) {
+		toolTipText = "Visit the wet swamplands. \n\nRecommended level: 12";
+	}
+	if(buttonText.indexOf("Deepwoods") != -1) {
+		toolTipText = "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5";
+	}
+	if(buttonText.indexOf("Mountain") != -1) {
+		toolTipText = "Visit the mountain. \n\nRecommended level: 5";
+	}
+	if(buttonText.indexOf("High Mountain") != -1) {
+		toolTipText = "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 10";
+	}
+	if(buttonText.indexOf("Bog") != -1) {
+		toolTipText = "Visit the dark bog. \n\nRecommended level: 14";
+	}
+	//PLACE MENU
+	if(buttonText.indexOf("Bazaar") != -1) {
+		toolTipText = "Visit the Bizarre Bazaar where the demons and corrupted beings hang out.";
+	}
+	if(buttonText.indexOf("Boat") != -1) {
+		toolTipText = "Get on the boat and explore the lake. \n\nRecommended level: 4";
+	}
+	if (buttonText.indexOf("Cathedral") != -1) {
+		if (flags[kFLAGS.GAR_NAME] != 0) toolTipText = "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.";
+		else toolTipText = "Visit the ruined cathedral you recently discovered.";
+	}
+	if(buttonText.indexOf("Dungeons") != -1) {
+		toolTipText = "Delve into dungeons.";
+	}
+	if(buttonText.indexOf("Farm") != -1) {
+		toolTipText = "Visit Whitney's farm.";
+	}
+	if(buttonText.indexOf("Owca") != -1) {
+		toolTipText = "Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.";
+	}
+	if(buttonText.indexOf("Salon") != -1) {
+		toolTipText = "Visit the salon for hair services.";
+	}
+	if(buttonText.indexOf("Tel'Adre") != -1) {
+		toolTipText = "Visit the city of Tel'Adre in desert, easily recognized by the massive tower.";
+	}
+	if(buttonText.indexOf("Town Ruins") != -1) {
+		toolTipText = "Visit the village ruins.";
+	}
+	if(buttonText.indexOf("Oasis Tower") != -1) {
+		toolTipText = "Visit the ruined tower in the high mountains where Minerva resides.";
+	}
+	//DUNGEONS
+	if(buttonText.indexOf("Factory") != -1) {
+		toolTipText = "Visit the demonic factory in the mountains.";
+	}
+	if(buttonText.indexOf("Deep Cave") != -1) {
+		toolTipText = "Visit the cave you've found in the Deepwoods.";
+	}
+	if(buttonText.indexOf("Desert Cave") != -1) {
+		toolTipText = "Visit the cave you've found in the desert.";
+	}
+	//FOLLOWERS
 	//Rathazul
 	if(buttonText.indexOf("Rathazul") != -1) {
 		toolTipText = "Visit with Rathazul to see what alchemical supplies and services he has available at the moment.";
 	}
-	//Title screen
-	if(buttonText.indexOf("Toggle Debug") != -1) {                        
-		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
+	//Jojo
+	if(buttonText == "Jojo") {
+		if(monk >= 5) toolTipText = "Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.";
+		else toolTipText = "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.";
+	}
+	//Marble
+	if(buttonText == "Marble") {
+		toolTipText = "Go to Marble the cowgirl for talk and companionship.";
+	}
+	if(buttonText.indexOf("Marble (Sex)") != -1) {
+		toolTipText = "Get with marble for a quick cuddle and some sex.";
+	}
+	//-----------------
+	//-- LEVEL UP SCREEN 
+	//-----------------
+	if(buttonText == "Add Strength") {
+		toolTipText = "Add 1 to strength.";
+	}	
+	if(buttonText == "Sub Strength") {
+		toolTipText = "Subtract 1 from strength.";
+	}	
+	if(buttonText == "Add Tough") {
+		toolTipText = "Add 1 to toughness.";
+	}	
+	if(buttonText == "Sub Tough") {
+		toolTipText = "Subtract 1 from toughness.";
+	}	
+	if(buttonText == "Add Speed") {
+		toolTipText = "Add 1 to speed.";
+	}	
+	if(buttonText == "Sub Speed") {
+		toolTipText = "Subtract 1 from speed.";
+	}	
+	if(buttonText == "Add Intel") {
+		toolTipText = "Add 1 to intelligence.";
+	}	
+	if(buttonText == "Sub Intel") {
+		toolTipText = "Subtract 1 from intelligence.";
+	}	
+
+	//-----------------
+	//-- TITLE SCREEN 
+	//-----------------
+	//Main menu
+	if(buttonText.indexOf("New Game") != -1) {                        
+		toolTipText = "Start your new adventure.";
 	}
 	if(buttonText.indexOf("Credits") != -1) {                        
 		toolTipText = "See a list of all the cool people who have contributed to content for this game!";
@@ -771,6 +1078,18 @@ public function getButtonToolTipText( buttonText :String ) :String
 	}
 	if(buttonText.indexOf("ASPLODE") != -1) {                        
 		toolTipText = "MAKE SHIT ASPLODE";
+	}
+	//Settings
+	if(buttonText.indexOf("Toggle Debug") != -1) {                        
+		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
+	}
+	if(buttonText.indexOf("Silly Toggle") != -1) {                        
+		toolTipText = "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.";
+	}
+	if(buttonText.indexOf("AutoSav") != -1) {                
+		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
+		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
+		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
 	return toolTipText;
 }
@@ -888,7 +1207,6 @@ public function createCallBackFunction2(func:Function,...args):Function
 		return func.apply(null,args);
 	}
 }
-
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
 	if (func1==null) return;
@@ -1419,12 +1737,13 @@ public function displayStats(e:MouseEvent = null):void
 	{
 		outputText("<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + "/100 (");
 		if (flags[kFLAGS.PC_HUNGER] <= 0) outputText("<font color=\"#ff0000\">Dying</font>");
-		if (flags[kFLAGS.PC_HUNGER] >= 1 && flags[kFLAGS.PC_HUNGER] < 10) outputText("<font color=\"#660000\">Starving</font>");
-		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) outputText("Very hungry");
+		if (flags[kFLAGS.PC_HUNGER] > 0 && flags[kFLAGS.PC_HUNGER] < 10) outputText("<font color=\"#C00000\">Starving</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) outputText("<font color=\"#7F0000\">Very hungry</font>");
 		if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50) outputText("Hungry");
 		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) outputText("Not hungry");
-		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) outputText("Satiated");
-		if (flags[kFLAGS.PC_HUNGER] >= 90) outputText("Full");
+		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) outputText("<font color=\"#007F00\">Satiated</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 90 && flags[kFLAGS.PC_HUNGER] < 100) outputText("<font color=\"#00C000\">Full</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 100) outputText("<font color=\"#00FF00\">Very full</font>");
 		outputText(")\n", false);
 	}
 	outputText("<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n");
@@ -1533,6 +1852,8 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.inRut) outputText("Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining.\n", false);
 	if (player.statusAffectv1(StatusAffects.Luststick) > 0) outputText("Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining.\n", false);
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) outputText("Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining.  Lust resistance 20% lower, physical resistance 25% higher.\n");
+	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) outputText("Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining.  Speed temporarily lowered.\n");
+	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) outputText("Uma's Massage - " + player.statusAffectv1(StatusAffects.UmasMassage) + " hours remaining.\n");
 
 	outputText("\n<b><u>Miscellaneous Stats</u></b>\n");
 	outputText("<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n");
@@ -1803,6 +2124,32 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 		{
 			player.spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
 		}
+	}
+	
+	//Realistic mode!
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	{
+		//Balls
+		var tempSpeedCap:Number = 100;
+		if (player.ballSize > 3)
+		{
+			tempSpeedCap -= (player.ballSize - 3);
+		}
+		//Breasts
+		if (player.hasBreasts())
+		{	
+			if (player.biggestTitSize() > 15) 
+			{
+				tempSpeedCap -= (player.biggestTitSize() / 4);
+			}
+		}
+		//Cocks
+		if (player.biggestCockArea() > 24)
+		{
+			tempSpeedCap -= ((player.biggestCockArea() - 24) / 6)
+		}
+		if (tempSpeedCap < 50) tempSpeedCap = 50;
+		if (player.spe > tempSpeedCap) player.spe = tempSpeedCap
 	}
 	
 	//Keep stats in bounds

@@ -1322,15 +1322,33 @@ private function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 	outputText("\n\nKiha gives you an incredulous look, but takes a tentative sip anyway.  Her eyes brighten as she takes a second, and then a third gulp, soon shovelling it in greedily.  \"<i>Told ya, doofus!</i>\" she gloats, putting down the empty bowl.  \"<i>Nothing beats aunt Kiha's special recipe!</i>\"");
 	
 	outputText("\n\nYou just shake your head and grab a bowl, sitting down with the scaly ladies as you enjoy your lunch, trying to ignore the little shit-eating grin " + flags[kFLAGS.HELSPAWN_NAME] + "'s sporting all the while.");
+	player.refillHunger(25);
 	doNext(13);
 }
 private function umYum():void {
 	clearOutput();
 	outputText("Um, yum?");
-	
-	outputText("\n\nCringing, you set the offered bowl back down, squeaking out that it's delicious, thank you very much, but you have something to take care of right now; maybe you can have more later.  Kiha rolls her eyes and shoos you off before she and " + flags[kFLAGS.HELSPAWN_NAME] + " spoon out their lunch.");
-	
-	outputText("\n\nAs you're wandering off looking for somewhere to hurl, you hear the tell-tale groans and gagging of a pair of scaly ladies who've just realized what kind of abomination they've created.");
+	if (flags[kFLAGS.PC_HUNGER] > 25)
+	{
+		outputText("\n\nCringing, you set the offered bowl back down, squeaking out that it's delicious, thank you very much, but you have something to take care of right now; maybe you can have more later.  Kiha rolls her eyes and shoos you off before she and " + flags[kFLAGS.HELSPAWN_NAME] + " spoon out their lunch. \n\nAs you're wandering off looking for somewhere to hurl, ");
+		player.refillHunger(5);
+	}
+	else
+	{
+		outputText("\n\nCringing, you are about to set the offered bowl back down but you are reminded by your growling stomach. You have no choice but to cover your nose and just gulp down the contents of the stew.", false)
+		player.refillHunger(25);
+		outputText("\nYou feel a bit nauseous. That stew surely is strange.", false)
+		if (rand(3) == 0)
+		{
+			//Player vomits. Poor player. Damages hunger by 20-30.
+			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and ", false)
+			player.takeDamage(player.maxHP() / 4);
+			flags[kFLAGS.PC_HUNGER] -= (rand(10) + 20);
+			dynStats("lib", -10);
+			dynStats("lust", -100, "resisted", false);
+		}
+	}
+	outputText("you hear the tell-tale groans and gagging of a pair of scaly ladies who've just realized what kind of abomination they've created.");
 	
 	outputText("\n\nMaybe you ought to start doing the cooking around here...");
 	doNext(13);

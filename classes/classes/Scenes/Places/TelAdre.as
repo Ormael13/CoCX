@@ -30,7 +30,10 @@
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
 		public var umasShop:UmasShop = new UmasShop();
-
+		
+		public var nails:Number = 0;
+		public var wood:Number = 0;
+		
 		public function TelAdre()
 		{
 			
@@ -224,7 +227,10 @@ private function armorShops():void {
 	{
 		addButton(5, "Clinic", umasShop.enterClinic);
 	}
-
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4)
+	{
+		addButton(6, "Carpenter", carpentryShopEntry);
+	}
 	addButton(9,"Back",telAdreMenu);
 }
 
@@ -1338,6 +1344,9 @@ private function oldbarTelAdre():void {
 	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta2,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
 
+//-----------------
+//-- TAILOR SHOPPE
+//-----------------
 public function tailorShoppe():void {
 	outputText("", true);
 	spriteSelect(61);
@@ -1398,7 +1407,9 @@ private function debitClothes(itype:ItemType):void {
 	inventory.takeItem(itype);
 }
 
-//Armor Shop
+//-----------------
+//-- ARMOUR SHOP
+//-----------------
 public function armorShop():void {
 	outputText("", true);
 	spriteSelect(64);
@@ -1446,7 +1457,10 @@ private function debitArmor(itype:ItemType):void {
 	menuLoc = 9;
 	inventory.takeItem(itype);
 }
-//Weapon Shop
+
+//-----------------
+//-- WEAPON SHOP
+//-----------------
 public function weaponShop():void {
 	outputText("", true);
 	spriteSelect(80);
@@ -1486,7 +1500,9 @@ private function debitWeapon(itype:ItemType):void {
 	inventory.takeItem(itype);
 }
 
-//Jewellery shop
+//-----------------
+//-- JEWELLERY SHOP
+//-----------------
 public function jewelShopEntry():void {
 	outputText("", true);
 	outputText("You enter the jewellery store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
@@ -1522,8 +1538,8 @@ public function jewelShopPageI():void {
 	choices(jewelries.SILVRNG.shortName, createCallBackFunction(jewelBuy, jewelries.SILVRNG),
 			jewelries.GOLDRNG.shortName, createCallBackFunction(jewelBuy, jewelries.GOLDRNG),
 			jewelries.PLATRNG.shortName, createCallBackFunction(jewelBuy, jewelries.PLATRNG),
+			jewelries.DIAMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.DIAMRNG),
 			jewelries.LTHCRNG.shortName, createCallBackFunction(jewelBuy, jewelries.LTHCRNG),
-			"", 0,
 			"", 0,
 			"", 0,
 			"", 0,
@@ -1547,7 +1563,7 @@ public function jewelShopBuyBox():void {
 	outputText("", true);
 	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)
 	{
-		outputText("<b>You already own a jewelry box!</b>")
+		outputText("<b>You already own a jewelry box!</b>", true)
 		doNext(jewelShopInside);
 		return;
 	}
@@ -1581,8 +1597,6 @@ public function jewelShopBuyBoxNo():void {
 	doNext(jewelShopInside);
 }	
 
-
-
 private function jewelBuy(itype:ItemType):void {
 	outputText("", true);
 	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"", false);
@@ -1602,6 +1616,180 @@ private function debitJewel(itype:ItemType):void {
 	menuLoc = 34;
 	inventory.takeItem(itype);
 }
+
+//-----------------
+//-- CARPENTRY SHOP
+//-----------------
+public function carpentryShopEntry():void {
+	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A human shopkeeper stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n", true);
+	outputText("\"<i>Welcome to my hardware shop. Feel free to look around,</i>\" the shopkeeper says. \n\n", false);
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopInside():void {
+	outputText("", true);
+	outputText("<i>So what will it be?</i>", false);
+	choices("Toolbox", carpentryShopBuySet,
+			"Nails", carpentryShopBuyNails,
+			"Wood", carpentryShopBuyWood,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"", 0,
+			"Leave", telAdreMenu)
+}
+//Buy toolbox
+public function carpentryShopBuySet():void {
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
+	{
+		outputText("<b>You already own a set of carpentry tools!</b>", true)
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! Just wht you need to build your cabin. There's even a compartment for nails.\n\n", true);
+	outputText("Do you buy it?", false);
+	if (player.gems >= 200)
+	{
+		doYesNo(carpentryShopBuySetYes, carpentryShopBuySetNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuySetYes():void {
+	player.gems -= 200;
+	outputText("You hand over two hundred gems to the shopkeeper. ", true);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building something. \n\n", false);
+	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
+	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuySetNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the box of tools back where it was.", false);
+	doNext(carpentryShopInside);
+}	
+//Buy nails
+public function carpentryShopBuyNails():void {
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
+	{
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of four gems per nail.</i>\" \n\n", true);
+		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false)
+		else outputText("Nails: " + 0 + "/200", false)
+		simpleChoices("Buy 10", carpentryShopBuyNailsA, "Buy 25", carpentryShopBuyNailsB, "Buy 50", carpentryShopBuyNailsC, "Buy 75", carpentryShopBuyNailsD, "Buy 100", carpentryShopBuyNailsE)
+		addButton(9, "Back", carpentryShopInside)
+	}
+	else
+	{
+		outputText("You ask him if he has nails for sale. He replies \"<i>I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
+		doNext(carpentryShopInside);
+	}
+}	
+
+private function carpentryShopBuyNailsA():void {
+	nails = 10;
+	outputText("You ask him for 10 nails. He replies \"<i>That'll be 40 gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+private function carpentryShopBuyNailsB():void {
+	nails = 25;
+	outputText("You ask him for 25 nails. He replies \"<i>That'll be 100 gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+private function carpentryShopBuyNailsC():void {
+	nails = 50;
+	outputText("You ask him for 50 nails. He replies \"<i>That'll be 200 gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+private function carpentryShopBuyNailsD():void {
+	nails = 75;
+	outputText("You ask him for 75 nails. He replies \"<i>That'll be 300 gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+private function carpentryShopBuyNailsE():void {
+	nails = 100;
+	outputText("You ask him for 100 nails. He replies \"<i>That'll be 400 gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+
+private function carpentryShopBuyNailsYes():void {
+	if (player.gems >= (nails * 4))
+	{
+		player.gems -= (nails * 4);
+		player.addKeyValue("Carpenter's Toolbox", 1, nails);
+		outputText("You hand over " + (nails * 4) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n", true);
+		if (player.keyItemv1("Carpenter's Toolbox") > 200)
+		{
+			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n", false);
+			player.gems += ((player.keyItemv1("Carpenter's Toolbox") - 200) * 4);
+			player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - 200));
+		}
+		outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200");
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopBuyNails);
+}
+
+//Buy wood
+public function carpentryShopBuyWood():void {
+	outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 25 gems per wood plank.</i>\" \n\n", true);
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false)
+	simpleChoices("Buy 10", carpentryShopBuyWoodA, "Buy 20", carpentryShopBuyWoodB, "Buy 30", carpentryShopBuyWoodC, "Buy 40", carpentryShopBuyWoodD, "Buy 50", carpentryShopBuyWoodE)
+	addButton(9, "Back", carpentryShopInside)
+}	
+
+private function carpentryShopBuyWoodA():void {
+	wood = 10;
+	outputText("You ask him for 10 wood planks. He replies \"<i>That'll be 250 gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+private function carpentryShopBuyWoodB():void {
+	wood = 20;
+	outputText("You ask him for 20 wood planks. He replies \"<i>That'll be 500 gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+private function carpentryShopBuyWoodC():void {
+	wood = 30;
+	outputText("You ask him for 30 wood planks. He replies \"<i>That'll be 750 gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+private function carpentryShopBuyWoodD():void {
+	wood = 40;
+	outputText("You ask him for 40 wood planks. He replies \"<i>That'll be 1000 gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+private function carpentryShopBuyWoodE():void {
+	wood = 50;
+	outputText("You ask him for 50 wood planks. He replies \"<i>That'll be 1250 gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+
+private function carpentryShopBuyWoodYes():void {
+	if (player.gems >= (wood * 25))
+	{
+		player.gems -= (wood * 25);
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+		outputText("You hand over " + (wood * 25) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 100)
+		{
+			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100) * 25);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100);
+		}
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopBuyWood);
+}
+
 
 
 private function urtaIsABadass():void {

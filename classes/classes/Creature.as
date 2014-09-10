@@ -1898,10 +1898,15 @@ package classes
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
 			//Fertite ring bonus!
-			if (jewelryName == "fertite ring")
-				percent += 0.1;
+			if (jewelryEffectId == 3)
+				percent += (jewelryEffectMagnitude / 100);
+			if (jewelryEffectId == 4)
+				percent -= (jewelryEffectMagnitude / 100);
+				
 			if (percent > 1)
 				percent = 1;
+			if (percent < 0)
+				percent = 0;
 
 			return percent;
 		}
@@ -1954,6 +1959,8 @@ package classes
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
+			if (quantity > 2147483647)
+				quantity = 2147483647;
 			return quantity;
 		}
 		
@@ -2286,6 +2293,7 @@ package classes
 			return false;
 		}
 		
+		//GENDER IDENTITIES
 		public function manWoman(caps:Boolean = false):String
 		{
 			//Dicks?
@@ -2332,17 +2340,37 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "Girl";
+					if (biggestTitSize() > 0)
+					{
+						if (caps)
+							return "Girl";
+						else
+							return "girl";
+					}
 					else
-						return "girl";
+					{
+						if (caps)
+							return "Maleherm";
+						else
+							return "maleherm";	
+					}
 				}
 				else
 				{
-					if (caps)
-						return "Guy";
+					if (biggestTitSize() < 2)
+					{
+						if (caps)
+							return "Guy";
+						else
+							return "guy";
+					}
 					else
-						return "guy";
+					{
+						if (caps)
+							return "Dickgirl";
+						else
+							return "dickgirl";						
+					}
 				}
 			}
 			else
@@ -2385,9 +2413,11 @@ package classes
 			if (totalCocks() > 0)
 			{
 				if (hasVagina())
-					return female;
-				else
-					return male;
+				{
+					if (biggestTitSize() > 0) return female;	
+					else return male;
+				}
+				else return male;
 			}
 			else
 			{
@@ -2395,10 +2425,8 @@ package classes
 					return female;
 				else
 				{
-					if (biggestTitSize() >= 3)
-						return female;
-					else
-						return male;
+					if (biggestTitSize() >= 3) return female;
+					else return male;
 				}
 			}
 		}
@@ -2410,10 +2438,20 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "Girl";
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Girl";
+						else
+							return "girl";
+					}
 					else
-						return "girl";
+					{
+						if (caps)
+							return "Boy";
+						else
+							return "boy";						
+					}
 				}
 				else
 				{
@@ -2456,10 +2494,20 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "She";
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "She";
+						else
+							return "she";
+					}
 					else
-						return "she";
+					{
+						if (caps)
+							return "He";
+						else
+							return "he";
+					}					
 				}
 				else
 				{
@@ -2502,10 +2550,20 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "Her";
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Her";
+						else
+							return "her";
+					}
 					else
-						return "her";
+					{
+						if (caps)
+							return "Him";
+						else
+							return "him";
+					}
 				}
 				else
 				{
@@ -2548,10 +2606,20 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "Female";
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Female";
+						else
+							return "female";
+					}
 					else
-						return "female";
+					{
+						if (caps)
+							return "Male";
+						else
+							return "male";
+					}
 				}
 				else
 				{
@@ -2587,6 +2655,62 @@ package classes
 			}
 		}
 		
+		public function maleFemaleHerm(caps:Boolean = false):String
+		{
+			//Dicks?
+			if (totalCocks() > 0)
+			{
+				if (hasVagina())
+				{
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Hermaphrodite";
+						else
+							return "hermaphrodite";
+					}
+					else
+					{
+						if (caps)
+							return "Maleherm";
+						else
+							return "maleherm";
+					}
+				}
+				else
+				{
+					if (caps)
+						return "Male";
+					else
+						return "male";
+				}
+			}
+			else
+			{
+				if (hasVagina())
+				{
+					if (caps)
+						return "Female";
+					else
+						return "female";
+				}
+				else
+				{
+					if (biggestTitSize() >= 3)
+					{
+						if (caps)
+							return "Fem-genderless";
+						else
+							return "fem-genderless";
+					}
+					if (caps)
+						return "Genderless";
+					else
+						return "genderless";
+				}
+			}
+		}
+		
 		public function hisHer(caps:Boolean = false):String
 		{
 			//Dicks?
@@ -2594,10 +2718,20 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (caps)
-						return "Her";
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Her";
+						else
+							return "her";
+					}
 					else
-						return "her";
+					{
+						if (caps)
+							return "Him";
+						else
+							return "him";
+					}
 				}
 				else
 				{

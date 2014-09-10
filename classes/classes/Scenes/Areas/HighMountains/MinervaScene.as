@@ -193,7 +193,7 @@ private function leaveMinervasFirstEncounter():void {
 }
 
 //1-2 Repeat Encounter 1.  Use any time.
-private function repeatEncounterMinerva():void {
+public function repeatEncounterMinerva():void {
 	clearOutput();
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
@@ -221,6 +221,10 @@ private function minervaThirdPlusEncounter():void {
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
 	outputText("You make your way back up the mountain, passing the usual harpy nests as you go, looking for the oasis tower that you know has to be around here somewhere in the thick mountain mists.  After a tedious amount of time spent searching, you finally locate the path and start your journey toward the oasis.  The promise of a respite from your climb, along with food and company, compels you to continue until you finally reach the oasis tower.  Thankfully, you don't have to search long before you promptly catch sight of the crumbling tower.  Panting from your long trek, you enter the tower through a rusted, creaky door.");
+	if (flags[kFLAGS.MET_MINERVA] == 4)
+	{
+		outputText("\n\n<b>You have visited her enough times to be able to remember where to go. Unlocked Oasis Tower! (Page 2 in Places menu)</b>", false);
+	}
 	outputText("\n\nSurprisingly, you don't see Minerva anywhere.  The shark-harpy isn't lounging in the water, or doing her usual calming exercises.  After a moment, though, a familiar shadow passes over you, and the siren in question lands nearby, smiling at you, looking blissfully happy to finally have some company.");
 	//No romance:
 	if(!minervaRomanced()) outputText("  \"<i>Welcome back, [name]!  It's good to see you again.  Have you come to give me some company, or would you like to partake in some of the fruit?  Or are you maybe here to sate your thirst?</i>\"");
@@ -1347,6 +1351,7 @@ private function getADrinkYouBitch():void {
 	//[Drink]
 	outputText("\n\nApproaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");
 	dynStats("lus", -25, "cor", -.5, "resisted", false);
+	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
 	doNext(13);

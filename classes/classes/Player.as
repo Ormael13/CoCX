@@ -37,7 +37,12 @@ use namespace kGAMECLASS;
 
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
-
+		public var statPoints:Number = 0;
+		
+		public var tempStr:Number = 0;
+		public var tempTou:Number = 0;
+		public var tempSpe:Number = 0;
+		public var tempInt:Number = 0;
 		//Number of times explored for new areas
 		public var explored:Number = 0;
 		public var exploredForest:Number = 0;
@@ -353,13 +358,14 @@ use namespace kGAMECLASS;
 			return damage;
 		}
 
-		public function takeDamage(damage:Number):Number{
+		public function takeDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				HP -= damage;
+				game.HPChange(-damage, display);
+				//game.dynStats("HP", -damage);
 				game.mainView.statsView.showStatDown('hp');
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					game.dynStats("lus", int(damage / 2));
@@ -1230,6 +1236,8 @@ use namespace kGAMECLASS;
 			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1(StatusAffects.LactationEndurance) * totalBreasts();
 			if (statusAffectv1(StatusAffects.LactationReduction) >= 48)
 				total = total * 1.5;
+			if (total > 2147483647)
+				total = 2147483647;
 			return total;
 		}
 		
@@ -1294,25 +1302,29 @@ use namespace kGAMECLASS;
 					flags[kFLAGS.PC_HUNGER] = 100;
 				}
 				//Messages
-				if (flags[kFLAGS.PC_HUNGER] < 25)
+				if (flags[kFLAGS.PC_HUNGER] < 10)
 				{
-					outputText("\n<b>You are no longer starving but you still need to eat more.</b>")
+					outputText("\n<b>You still need to eat more. </b>")
+				}
+				if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25)
+				{
+					outputText("\n<b>You are no longer starving but you still need to eat more. </b>")
 				}
 				if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50)
 				{
-					outputText("\n<b>The growling sound in your stomach seems to quiet down.</b>")
+					outputText("\n<b>The growling sound in your stomach seems to quiet down. </b>")
 				}
 				if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75)
 				{
-					outputText("\n<b>Your stomach no longer growls.</b>")
+					outputText("\n<b>Your stomach no longer growls. </b>")
 				}
 				if (flags[kFLAGS.PC_HUNGER] > 75 && flags[kFLAGS.PC_HUNGER] <= 90)
 				{
-					outputText("\n<b>You feel so satisfied.</b>")
+					outputText("\n<b>You feel so satisfied. </b>")
 				}
 				if (flags[kFLAGS.PC_HUNGER] > 90)
 				{
-					outputText("\n<b>You stomach feels so full.</b>")
+					outputText("\n<b>You stomach feels so full. </b>")
 				}			
 			}
 		}
@@ -1685,8 +1697,8 @@ use namespace kGAMECLASS;
 					min = (100 - jewelryEffectMagnitude);
 				}
 			}
+			if (min < 30 && armorName == "lusty maiden's armor") min = 30;
 			
-		if(min < 30 && armorName == "lusty maiden's armor") min = 30;
 			return min;
 		}
 
