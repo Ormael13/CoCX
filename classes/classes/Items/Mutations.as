@@ -2207,6 +2207,7 @@
 			outputText("", true);
 			if (player.cocks.length > 0) {
 				outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.", false);
+				player.refillHunger(20);
 				if (player.cocks[0].cockLength < 12) {
 					temp = player.increaseCock(0, rand(2) + 2);
 					outputText("\n\n", false);
@@ -2249,7 +2250,6 @@
 				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!", false);
 				player.tallness -= 1 + rand(3);
 			}
-			player.refillHunger(20);
 		}
 
 		public function pureHoney(pure:Boolean, player:Player):void

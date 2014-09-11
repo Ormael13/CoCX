@@ -1791,16 +1791,16 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		outputText("<b>Hunger:</b> " + bodyStats += Math.round(flags[kFLAGS.PC_HUNGER]) + "/100 (");
+		bodyStats += "<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + "/100 (";
 		if (flags[kFLAGS.PC_HUNGER] <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
-		if (flags[kFLAGS.PC_HUNGER] > 0 && flags[kFLAGS.PC_HUNGER] < 10) bodyStats += "<font color=\"#C00000\">Starving</font>\n";
-		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>\n";
-		if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50) bodyStats += "Hungry"\n;
-		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) bodyStats += "Not hungry"\n;
-		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>"\n;
-		if (flags[kFLAGS.PC_HUNGER] >= 90 && flags[kFLAGS.PC_HUNGER] < 100) bodyStats += "<font color=\"#00C000\">Full</font>"\n;
+		if (flags[kFLAGS.PC_HUNGER] > 0 && flags[kFLAGS.PC_HUNGER] < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
+		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>";
+		if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50) bodyStats += "Hungry";
+		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) bodyStats += "Not hungry";
+		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>";
+		if (flags[kFLAGS.PC_HUNGER] >= 90 && flags[kFLAGS.PC_HUNGER] < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
 		if (flags[kFLAGS.PC_HUNGER] >= 100) outputText("<font color=\"#00FF00\">Very full</font>");
-		outputText(")\n", false);
+		bodyStats += ")\n";
 	}
 
 	bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
