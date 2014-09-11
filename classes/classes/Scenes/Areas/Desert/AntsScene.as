@@ -622,7 +622,7 @@ package classes.Scenes.Areas.Desert
 			//PC is a Female/Herm Drider:
 			if (player.canOvipositSpider()) {
 				outputText("\n\nThis overwhelming maternal feeling brings forth an interesting idea!  Turning to Phylla, you tell her that you can help to make her desire come true.  She looks at you a bit taken back, as if what you already did wasn't enough already.");
-				outputText("\n\nYou go on to explain, telling her that your body is chock full of eggs that eagerly await a willing host to gestate in.  If she wants to birth as many children as possible, your union can grant her wishes; albeit, she will will birthing both Ant and Spider children.");
+				outputText("\n\nYou go on to explain, telling her that your body is chock full of eggs that eagerly await a willing host to gestate in.  If she wants to birth as many children as possible, your union can grant her wishes; albeit, she will be birthing both Ant and Spider children.");
 				//Persuade Phylla: Random chance of failing, affected by INT level and whether she's already housing eggs in her vagina.
 				if (player.inte / 20 + rand(20) + 1 < 16) {
 					//Persuasion failure:

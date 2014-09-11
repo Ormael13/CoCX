@@ -38,7 +38,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Egg chooser
-			if (rand(100) < 25 && player.pregnancyIncubation > 1 && player.pregnancyType == 5) {
+			if (rand(100) < 25 && player.pregnancyIncubation > 1 && player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
 				outputText("While wandering along the lakeshore, you spy beautiful colored lights swirling under the surface.  You lean over cautiously, and leap back as they flash free of the lake's liquid without making a splash.  The colored lights spin in a circle, surrounding you.  You wonder how you are to fight light, but they stop moving and hover in place around you.  There are numerous colors: Blue, Pink, White, Black, Purple, and Brown.  They appear to be waiting for something; perhaps you could touch one of them?", true);
 				//Blue, Pink, White, Black, Purple, and Brown
 				choices("Blue", 1045, "Pink", 1046, "White", 1051, "Black", 1047, "Purple", 1048, "Brown", 1049, "", 0, "", 0, "", 0, "Escape", 1050);

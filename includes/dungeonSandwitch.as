@@ -128,7 +128,7 @@ public function getMockedForSmallDongBySammitchMob():void {
 	else if(player.balls > 0) outputText("  She even cups your tender [balls] and lightly massages them.");
 	else if(player.hasVagina()) outputText("  She even lightly caresses the lips of your pussy.");
 	
-	outputText("\n\nYou cum a hot shot down the sand-witch's throat.  She swallows the seed and opens her mouth, but not to show you how how good of a slut she is.  No, she does it to show her \"<i>friends</i>\" she did their dare.  The girls cheer at the cock sucking whore as she stands with the smell of cum on her breath and joins them in spectating.");
+	outputText("\n\nYou cum a hot shot down the sand-witch's throat.  She swallows the seed and opens her mouth, but not to show you how good of a slut she is.  No, she does it to show her \"<i>friends</i>\" she did their dare.  The girls cheer at the cock sucking whore as she stands with the smell of cum on her breath and joins them in spectating.");
 	
 	outputText("\n\nThe sand witches keep taking turns humiliating you by making your little cock shoot and leak out cum, draining of you of all your seed until you finally black-out from dehydration.");
 	
@@ -484,7 +484,7 @@ public function forceCunnilingusRimjobClitAndNipple():void {
 	else if(player.isDrider()) outputText("clatter");
 	else outputText("stride");
 	outputText(" up to the nearest one and grab her amber tresses in your hand, pulling her face into your [vagina], her nose squishing partway into your cleft as you grind on her pretty, young mouth.  Oh, that's the stuff.  Her tongue flutters out almost immediately to lap at your moisture.  You'd swear she absolutely loved it if it wasn't for the angry cast of her eyebrows.  No matter.");
-	outputText("\n\nLike the director of a play, you begin to direct the rest of the girls.  First, you want this bitch to enjoy herself like a proper sapphic slave, so you command two of her sisters to eat her out.  They seem reluctant, but they dig into the moist quims all the same.  Oh gods, the difference is night and day.  The tanned sorceress's eyes drift closed, lulled into complacency by the lapping licks her sisters are giving giving her.  Boldly stroking across your folds, her tongue is eagerly attending to your needs, stirring your body to secrete more of your sticky love-juice, a treat she consumes with gusto.  You pat her head as she settles into a rhythm and try your best to focus on standing upright.");
+	outputText("\n\nLike the director of a play, you begin to direct the rest of the girls.  First, you want this bitch to enjoy herself like a proper sapphic slave, so you command two of her sisters to eat her out.  They seem reluctant, but they dig into the moist quims all the same.  Oh gods, the difference is night and day.  The tanned sorceress's eyes drift closed, lulled into complacency by the lapping licks her sisters are giving her.  Boldly stroking across your folds, her tongue is eagerly attending to your needs, stirring your body to secrete more of your sticky love-juice, a treat she consumes with gusto.  You pat her head as she settles into a rhythm and try your best to focus on standing upright.");
 	outputText("\n\nThere's still quite a few of them left, so you spread them around in similar fashion - two mouths per witch crotch in an ever-widening pyramid of cunnilingual ecstasy.  You save the lustiest of the pack for last; they're turned on enough to savage their own aching boxes with their fingers while they munch on clam, no stimulation necessary.  Two of them make the twat-centric pyramid look off-balance, so you call them back to you.");
 	outputText("\n\nThe shortest one is going to get the most humiliating job today.  Putting your hands on your [butt], you pull your cheeks apart and command, \"<i>Lick it.</i>\"");
 	outputText("\n\nShuddering, the witch plaintively asks, \"<i>Do I have to?</i>\"");
@@ -1343,7 +1343,7 @@ public function menFuckUpSomeCumWitch():void {
 		outputText("\n\nRising slowly, you withdraw yourself from the goo-glazed pussy beneath you and try to ignore the matching river of white that pours out from betwixt your thighs.  You make sure to lean over your onyx lover, salting her with her own dripping seed until the flow slows to a trickle.  She meekly protests at first, then gives up with a lusty sigh, smearing her skin with pristine white as her mind slides back into the gutter.  You make sure to admire your work while you get dressed.");
 		//(cum, then +5 lust){preg check for sammitches}
 		//sand witch preg
-		player.knockUp(22,360,90);
+		player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 		player.orgasm();
 		dynStats("lus", 5);
 	}
@@ -1476,7 +1476,7 @@ public function ladyVictorySex():void {
 	
 	outputText("\n\nYou recover after a few minutes and rise up, legs shaking at the overpowering sensation of the witch's withdrawing phallus, but you make it up with spunk pouring from your [vagina].  What a victory!");
 	
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 	player.orgasm();
 	if(inDungeon) {
 		if(inCombat()) cleanupAfterCombat();
@@ -1591,7 +1591,7 @@ public function resistSavinStuff():void {
 	dynStats("sen", 2);
 	cleanupAfterCombat();
 	//knock up hurrrr
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 }
 //Do Nothing
 public function doNotResistSavin():void {
@@ -1609,7 +1609,7 @@ public function doNotResistSavin():void {
 	dynStats("sen", 2);
 	cleanupAfterCombat();
 	//knock up hurrrr
-	player.knockUp(22,360,90);
+	player.knockUp(player.PREGNANCY_SAND_WITCH, player.INCUBATION_SAND_WITCH, 90);
 }
 
 	

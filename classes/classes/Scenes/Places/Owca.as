@@ -512,7 +512,7 @@ private function rapeZeVapula():void {
 		player.orgasm();
 		dynStats("str", 1,"tou", 1, "lib", -4, "cor", 4);
 		player.slimeFeed();
-		player.knockUp(1,432);
+		player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
 	model.time.hours = 7;

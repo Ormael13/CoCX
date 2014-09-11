@@ -2271,7 +2271,7 @@ private function marbleCampSexNew():void {
 		clearOutput();
 		outputText("You approach Marble and ask her if she can help you get some sexual release.  Marble smiles at you and says, \"<i>Well, my slithering sweetie, I think I can.</i>\"  She motions for you to lie on your back and stretch out your long body on the warm, cracked earth.  Then she moves to the base of your tail and sits herself down on the ground.");
 		outputText("\n\n\"<i>It's a long journey to your special place, sweetie; I hope you enjoy the trip,</i>\" she says as she runs her fingers down your tail, gently playing with the end.  \"<i>Look at this cute little candy, just for me.</i>\"  She lifts your tail up to her mouth, then sticks out her inhumanly long tongue and starts to run it around the tip.  The feel of it sends tingles up your spine.  \"<i>Aww, did I make you shiver with pleasure, sweetie?</i>\"  Marble teases, and sets your tail back down.");
-		outputText("\n\n\"<i>Now sweetie, how about a nice tail massage?</i>\" she says, putting her hands on the exposed underside of your tail and starting to rub the soft scales.  You sigh softly as she gently moves up your length, massaging your tail with shallow downward strokes.  \"<i>Enjoying yourself?  Let me make this even better for you,</i>\" she gently intones as she she gets close to your groin.  She removes her top, and lowers her large breasts to your serpentine length.  Marble grins at you, then turns around and, pushing her breasts down on your tail, starts to slither herself back down your length, giving you an enticing view of her rump.  All the while, her fingers continue to play with the sensitive underside of your tail just ahead of her soft body.");
+		outputText("\n\n\"<i>Now sweetie, how about a nice tail massage?</i>\" she says, putting her hands on the exposed underside of your tail and starting to rub the soft scales.  You sigh softly as she gently moves up your length, massaging your tail with shallow downward strokes.  \"<i>Enjoying yourself?  Let me make this even better for you,</i>\" she gently intones as she gets close to your groin.  She removes her top, and lowers her large breasts to your serpentine length.  Marble grins at you, then turns around and, pushing her breasts down on your tail, starts to slither herself back down your length, giving you an enticing view of her rump.  All the while, her fingers continue to play with the sensitive underside of your tail just ahead of her soft body.");
 		if(player.lib >= 50) outputText("  Quietly, you reach down and hook your fingers into the hem of her clothing, allowing her to pull it half off with her next shift and expose her pussy");
 		if(flags[kFLAGS.MARBLE_DICK_LENGTH] > 0) outputText(" and " + marbleCock());
 		outputText(".  \"<i>Why, you shameless " + player.mf("pervert","hussy") + "!</i>\" the cow-girl says in mock-offense, winking at you.");
@@ -2711,7 +2711,7 @@ public function marblePoopsBaybees():void {
 public function marbleNightSleepFlavor():Boolean {
 	spriteSelect(41);
 	//If player is marble-preggo, she builds nursery
-	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == 8 && (player.pregnancyIncubation <= 128)) {
+	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == player.PREGNANCY_MARBLE && (player.pregnancyIncubation <= 128)) {
 		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n", false);
 		flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 	}
@@ -2810,7 +2810,7 @@ public function marbleNightSleepFlavor():Boolean {
 }
 
 private function pcPregWithMarblesKids():Boolean {
-	return player.pregnancyType == 8 && player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 280;
+	return player.pregnancyType == player.PREGNANCY_MARBLE && player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 280;
 
 }
 private function marblePregWithPCKids():Boolean {
@@ -3102,7 +3102,7 @@ private function marbleNightSexChicks():void {
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
 		//Pregnancy chance for PC, ¼ their fertility
-		player.knockUp(8,368,150);
+		player.knockUp(player.PREGNANCY_MARBLE, player.INCUBATION_MARBLE, 150);
 		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
 	}
 	marbleSexFinish();
@@ -3502,7 +3502,7 @@ private function milkMarbleCunnilingling():void
 	outputText( "[pg]In order to get the show on the road, you " );
 	if( player.isBiped() ) outputText( "get down on your knees, and slowly crawl forward" );
 	else outputText( "lower your body close to the ground, and slowly inch forward" );
-	outputText( " like an animal who's found something they want.  When you get close to to her, your lover runs a finger up the inside of her thigh as her tail sneaks its way up around her waist and drapes itself over your prize." );
+	outputText( " like an animal who's found something they want.  When you get close to her, your lover runs a finger up the inside of her thigh as her tail sneaks its way up around her waist and drapes itself over your prize." );
 	
 	outputText( "[pg]Arriving at a hard brown hoof, you wrap your arm about her coarsely furred leg and rest your head against the bestial appendage.  You stroke and run your fingers through her fur to a soft giggle above you while the machine continues to pump and whirl.  You tease her a bit more before raising yourself up, bit by bit, until you're at eye level with her tail-covered opening. A small tuft of hair decorated with a pink bow is all that hides your goal.  No, it's a present, gift wrapped for you." );
 	
@@ -3630,7 +3630,7 @@ private function milkMarbleFuckDatCowPussy():void
 		
 		outputText( "[pg]\"<i>Next time, please try to be a bit gentler on the equipment, if ya don't mind.  I'd rather not have to do fix it every time you two get frisky.</i>\"  There is a slam of metal on metal as Whitney finishes working on the broken milker and it whirls back to life." );
 		
-		outputText( "[pg]You and Marble each look each other in the eye and burst out laughing.  You then help her reattach the cups and and excuse yourself.  Just as you're leaving, Marble blows you a kiss and says, \"<i>We should definitely do this again sometime.  Let's just give Whitney a break first.</i>\"" );
+		outputText( "[pg]You and Marble each look each other in the eye and burst out laughing.  You then help her reattach the cups and excuse yourself.  Just as you're leaving, Marble blows you a kiss and says, \"<i>We should definitely do this again sometime.  Let's just give Whitney a break first.</i>\"" );
 		
 		player.orgasm();
 		flags[kFLAGS.MARBLE_LUST] = 5;

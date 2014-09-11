@@ -414,9 +414,9 @@ private function soberUrtaSatingPCHeat():void {
 	else {
 		outputText("\n\n\"<i>Ahhh, [name], you might get pregnant!</i>\"  She kneels in front of you, kissing you on the forehead. \"<i>I don't think all the contraceptives in the world could stop that...</i>\"");
 		if(flags[kFLAGS.URTA_FERTILE] == 1) {
-			player.knockUp(21,515,25);
-			player.knockUp(21,515,25);
-			player.knockUp(21,515,25);
+			player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
+			player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
+			player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
 		}
 	}
 
@@ -488,7 +488,7 @@ private function sateRutWithSoberUrta():void {
 	urta.urtaSprite();
 	outputText("Urta observes your approaching package with a hungry, eager expression. Without taking her eyes off of it, she flips up her skirt, her huge horse-cock whipping up to slap between her breasts, pre already dribbling down the tip.");
 
-	outputText("\n\nThe sight makes you halt your advance.  Not out of disgust with Urta's body - how could you be, when you have have sex to her before now?  No, the problem is that you can't figure out how to approach her - those apple-sized balls of hers are in the way.");
+	outputText("\n\nThe sight makes you halt your advance.  Not out of disgust with Urta's body - how could you be, when you've had sex to her before now?  No, the problem is that you can't figure out how to approach her - those apple-sized balls of hers are in the way.");
 
 	outputText("\n\nUrta looks at you, and then starts to push herself up off of the wall, obviously intending to turn herself around and present her rear to you for ease of access.  As the realisation comes in, you suddenly move, pinning her back against the boards.  She looks at you, askance, and opens her mouth to speak, when you interrupt her by kissing her.  As your tongues tangle inside her mouth, you reach down and grab her balls.  They are too big to be palmed in one hand, and you jiggle them accidentally.  Urta moans and whimpers at the stimulation and for several long moments you stroke and caress her cum-swollen testicles, pre starting to pour from her flared cock-tip, smearing her beautiful big DD-cup breasts and your own [chest] alike.  You can feel her nipples rubbing against yours, sparks of electricity surging through you both at the contact.  Finally, though, you manage to awkwardly hoist up her balls, allowing your " + cockDescript(x) + " access to her drooling black netherlips.");
 
@@ -614,9 +614,9 @@ private function drunkenUrtaFucksPCInHeat():void {
 	outputText("\n\nThe walk back to camp is quite painful, but you'll live.  That which doesn't kill you makes you stronger, and all that...");
 
 	if(flags[kFLAGS.URTA_FERTILE] == 1) {
-		player.knockUp(21,515,25);
-		player.knockUp(21,515,25);
-		player.knockUp(21,515,25);
+		player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
+		player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
+		player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
 	}
 	//player returns to camp and loses 4 hours//
 	dynStats("lib",2,"sen",-4,"lust=",0);

@@ -3556,7 +3556,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE2():void
 		
 		outputText("\n\n\"<i>[name], stop,</i>\" she laughs.");
 		
-		outputText("\n\nYou look up at her and and ask if she'd care to put off leaving for a bit.  She looks a little fatigued, but allows herself to be pulled down until she's seated next to you.  \"<i>I'm still stuffed...</i>\" she sighs.  \"<i>I don't think I have it in me right now.</i>\"");
+		outputText("\n\nYou look up at her and ask if she'd care to put off leaving for a bit.  She looks a little fatigued, but allows herself to be pulled down until she's seated next to you.  \"<i>I'm still stuffed...</i>\" she sighs.  \"<i>I don't think I have it in me right now.</i>\"");
 		
 		outputText("\n\n\"<i>Well,</i>\" you answer, \"<i>perhaps that's why it's called 'making' love.</i>\"  Sheila doesn't answer, but smiles shyly.");
 		
@@ -4566,7 +4566,7 @@ private function sheilaAnalHateFuckAGoGo():void {
 	clearOutput();
 	outputText("Your [cockFit 56] gets hard in your [armor] as you watch her diddle her pussy, but you set your jaw to resist giving her what she wants - a better idea is taking shape in your head.  \"<i>Turn around,</i>\" you demand.");
 	
-	outputText("\n\nSheila bites her lip and blushes, then turns her back to you, pressing her chest into the ground and waving her ass in the air, twin tails bobbing over her round cheeks and drooling, eager cunt.  \"<i>Heehee, I'm ready for you, mate... look how wet I am!</i>\"  You strip, releasing your " + multiCockDescriptLight() + ", and approach.  She hums in anticipation as you rub against her smooth labia, smearing her moisture onto your [cockHeadFit 56].  \"<i>Come on; time to put it it already!  Don't tease me!</i>\"");
+	outputText("\n\nSheila bites her lip and blushes, then turns her back to you, pressing her chest into the ground and waving her ass in the air, twin tails bobbing over her round cheeks and drooling, eager cunt.  \"<i>Heehee, I'm ready for you, mate... look how wet I am!</i>\"  You strip, releasing your " + multiCockDescriptLight() + ", and approach.  She hums in anticipation as you rub against her smooth labia, smearing her moisture onto your [cockHeadFit 56].  \"<i>Come on; time to put it in already!  Don't tease me!</i>\"");
 	
 	outputText("\n\nYour smile widens, unseen, as you silently agree.  ");
 	if(!player.isTaur()) outputText("Slipping one hand around your [cockFit 32]");

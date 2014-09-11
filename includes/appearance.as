@@ -652,9 +652,9 @@
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
 	}
 	//Pregnancy Shiiiiiitz
-	if((player.buttPregnancyType == 23 && player.buttPregnancyIncubation > 0) || (player.buttPregnancyType == 19 && player.buttPregnancyIncubation > 0) || (player.pregnancyType > 0 && player.pregnancyIncubation > 0)) 
+	if((player.buttPregnancyType == player.PREGNANCY_FROG_GIRL && player.buttPregnancyIncubation > 0) || (player.buttPregnancyType == player.PREGNANCY_SATYR && player.buttPregnancyIncubation > 0) || (player.pregnancyType > 0 && player.pregnancyIncubation > 0)) 
 	{
-		if(player.pregnancyType == 5) 
+		if(player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) 
 		{
 			outputText("<b>", false);
 			//Compute size
@@ -683,7 +683,7 @@
 			temp = 0;
 		}
 		//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
-		else if((player.buttPregnancyType == 19 && player.buttPregnancyIncubation > 0) && (player.pregnancyIncubation == 0 || player.buttPregnancyIncubation > player.pregnancyIncubation)) 
+		else if((player.buttPregnancyType == player.PREGNANCY_SATYR && player.buttPregnancyIncubation > 0) && (player.pregnancyIncubation == 0 || player.buttPregnancyIncubation > player.pregnancyIncubation)) 
 		{
 			if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75) 
 			{
@@ -698,16 +698,16 @@
 				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>", false);
 			}
 			else 
-			{
-				if(player.pregnancyType == 12 || player.pregnancyType == 4 || player.pregnancyType == 11 || player.pregnancyType == 17 || player.pregnancyType == 21) 
+			{ //Surely Benoit and Cotton deserve their place in this list
+				if(player.pregnancyType == player.PREGNANCY_IZMA || player.pregnancyType == player.PREGNANCY_MOUSE || player.pregnancyType == player.PREGNANCY_AMILY || player.pregnancyType == player.PREGNANCY_EMBER || player.pregnancyType == player.PREGNANCY_BENOIT || player.pregnancyType == player.PREGNANCY_COTTON || player.pregnancyType == player.PREGNANCY_URTA) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
-				else if(player.pregnancyType != 8) 
+				else if(player.pregnancyType != player.PREGNANCY_MARBLE) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>", false);
 				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>", false);
 			}
 		}
 		//URTA PREG
-		else if(player.pregnancyType == 21) 
+		else if(player.pregnancyType == player.PREGNANCY_URTA) 
 		{
 			if(player.pregnancyIncubation <= 432 && player.pregnancyIncubation > 360)
 			{
@@ -738,9 +738,9 @@
 				outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
 			}
 		}
-		else if(player.buttPregnancyType == 23) 
+		else if(player.buttPregnancyType == player.PREGNANCY_FROG_GIRL) 
 		{
-			if(player.buttPregnancyType >= 8) 
+			if(player.buttPregnancyIncubation >= 8) 
 				outputText("<b>Your stomach is so full of frog eggs that you look about to birth at any moment, your belly wobbling and shaking with every step you take, packed with frog ovum.</b>");
 			else outputText("<b>You're stuffed so full with eggs that your belly looks obscenely distended, huge and weighted with the gargantuan eggs crowding your gut. They make your gait a waddle and your gravid tummy wobble obscenely.</b>");
 		}
@@ -779,10 +779,10 @@
 				outputText("<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>", false);
 			}
 			if(player.pregnancyIncubation <= 48) 
-			{
-				if(player.pregnancyType == 12 || player.pregnancyType == 4 || player.pregnancyType == 11 || player.pregnancyType == 17 || player.pregnancyType == 21) 
+			{ //Surely Benoit and Cotton deserve their place in this list
+				if(player.pregnancyType == player.PREGNANCY_IZMA || player.pregnancyType == player.PREGNANCY_MOUSE || player.pregnancyType == player.PREGNANCY_AMILY || player.pregnancyType == player.PREGNANCY_EMBER || player.pregnancyType == player.PREGNANCY_BENOIT || player.pregnancyType == player.PREGNANCY_COTTON || player.pregnancyType == player.PREGNANCY_URTA) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
-				else if(player.pregnancyType != 8) 
+				else if(player.pregnancyType != player.PREGNANCY_MARBLE) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>", false);
 				else outputText("\n<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>", false);
 			}

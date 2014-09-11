@@ -183,7 +183,7 @@ public function processJackFrostEvent():void {
 		}
 		//Corrupt
 		else {
-			outputText("Out in the outskirts of of the camp you notice your pet mouse-slut Jojo, casually fucking a small mound of snow like an animal.  You laugh to yourself, now, now... doesn't he know that there are many more better things to fuck than a pitiful mound of snow on the ground...");
+			outputText("Out in the outskirts of the camp you notice your pet mouse-slut Jojo, casually fucking a small mound of snow like an animal.  You laugh to yourself, now, now... doesn't he know that there are better things to fuck than a pitiful mound of snow on the ground...");
 			outputText("\n\nYou casually approach him from behind, stripping off your [armor].  Once behind his heart-shaped ass, you pull on his tail and reach down to grope at his shaft and balls.  Silly slut, you tell him.  This is not how one fucks in the snow... if he doesn't know how to do it right, you'll be happy to demonstrate.");
 			//(How should you demonstrate?)
 			//[Pen Ass] [Ride Cock] [Spank and Finger Ass]
@@ -361,7 +361,7 @@ public function processJackFrostEvent():void {
 		}
 		//Without kids
 		else {
-			outputText("You find Marble simply staring into the sky, a look of wonder covering her face.  She lifts up her hand, then takes a step forward as you approach.  It looks like she is about to catch a flake in her hands, only to instead suddenly slip on the frozen ground under her hoofs, and fall down onto her backside with a cry of surprise.  \"<i>Oww...</i>\" she grumbles, giving her backside a rub as you come up in front of her her.  You tell her to be careful, that stuff can be slippery while extending your hand to help her up.  \"<i>Yeah, thanks sweetie, I noticed,</i>\" she sighs and accepts your hand.");
+			outputText("You find Marble simply staring into the sky, a look of wonder covering her face.  She lifts up her hand, then takes a step forward as you approach.  It looks like she is about to catch a flake in her hands, only to instead suddenly slip on the frozen ground under her hoofs, and fall down onto her backside with a cry of surprise.  \"<i>Oww...</i>\" she grumbles, giving her backside a rub as you come up in front of her.  You tell her to be careful, that stuff can be slippery while extending your hand to help her up.  \"<i>Yeah, thanks sweetie, I noticed,</i>\" she sighs and accepts your hand.");
 			outputText("\n\n\"<i>" + player.short + ", do you know what this is?</i>\" your lover asks while raising her arms in the air and looking around in amazement once more.  \"<i>How can stuff fall from the sky?</i>\"  You laugh, and say that it's snow, or frozen rain.  The cow-girl looks at you in confusion once more and asks what rain is.  Now it is your turn to be surprised, she has never seen it rain before in her life?  It has never gotten cloudy and water has fallen from the sky?  Marble shakes her head no, \"<i>Sweetie, I'm not sure what a cloud is either.  Every day of my life has always been sunny and warm.  This is something I've never experienced before....</i>\"");
 			
 			outputText("\n\nYou're left at a loss for words once more, and the two of you turn back to look at the snow once more.  You feel Marble gently take a hold of your hand as you two simply watch the flakes fall to the ground.");
@@ -688,7 +688,7 @@ public function rideCorruptJojoCock():void {
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
 	//Preggers chance!
-	player.knockUp(4,432);
+	player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 }
 
 //[=Spank and Finger Ass=]

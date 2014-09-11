@@ -67,7 +67,7 @@ private function wandererStayHuman():void {
 	else outputText("She", false);
 	outputText(" is right, my soul is immortal and not to be sacrificed so lightly.  Why don't we stick to our original agreement another decade and mull it over then?</i>\"\n\n", false);
 	outputText("Lucia pouts, nearly on the verge of tears, \"<i>Fine!  But don't expect me to be happy about it.</i>\"  She pats his swollen balls roughly, smirking down at him, \"<i>and I'm going to let these swell up nice and tight before I take my next meal!</i>\"  ", false);
-	outputText("Marcus sighs, though you think you spy the hint of a smile on his lips, \"<i>As you wish...thanks for your guidance traveler, and may you find what you seek in this strange land.</i>\"\n\nAs they turn to leave, Lucia scowls at you over her shoulder...", false);
+	outputText("Marcus sighs, though you think you spy the hint of a smile on his lips, \"<i>As you wish... thanks for your guidance traveler, and may you find what you seek in this strange land.</i>\"\n\nAs they turn to leave, Lucia scowls at you over her shoulder...", false);
 	dynStats("lib", -1, "lus", 1, "cor", -5);
 	player.createStatusAffect(StatusAffects.WandererHuman,0,0,0,0);
 	doNext(13);

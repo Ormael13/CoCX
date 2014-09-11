@@ -314,7 +314,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("Holding on to the top portion of the drider's thick member, you squeeze her in between your upper legs, pressing the demonic dong against your labia and inner thighs, both hot with desire.  Sliding upwards, you begin to bounce on top of the drider in a cowgirl-like position, grinding against her length while your " + buttDescript() + " slaps against her soaking pussy with every downward thrust.  The arachnid-morph convulses and moans along with your movements, unable to handle the feeling of your warmth against her heated member and the expertise of your hands fondling her tip, your fingers soaked with her leaking pre.  Riding your new pet victoriously, you make sure that the spider-woman can't escape the confines of your " + hipDescript() + ".\n\n", false);
 
-			outputText("The drider's shaft begins to grow underneath your fingers, the slick head pulsing with the need to release into your palms.  You decide to lay still, driving your pet insane as as she tries to thrust in between your thighs for a chance to ejaculate.  Before she can, however, you grab the base of her studded cock and squeeze firmly, a gasp of both pain and pleasure escaping from the arachnid's lips.  You inform the trembling plaything that if she wants an opportunity to release she'll have to make you do so first, otherwise - you grip harder - you'll beat her down again.  The busty spidertaur nods timidly, to which you respond with an eager grin.  She eyes you up as you position yourself above her bulbous member, giving it one last playful slap before slamming yourself down and taking as much of it as you can.\n\n", false);
+			outputText("The drider's shaft begins to grow underneath your fingers, the slick head pulsing with the need to release into your palms.  You decide to lay still, driving your pet insane as she tries to thrust in between your thighs for a chance to ejaculate.  Before she can, however, you grab the base of her studded cock and squeeze firmly, a gasp of both pain and pleasure escaping from the arachnid's lips.  You inform the trembling plaything that if she wants an opportunity to release she'll have to make you do so first, otherwise - you grip harder - you'll beat her down again.  The busty spidertaur nods timidly, to which you respond with an eager grin.  She eyes you up as you position yourself above her bulbous member, giving it one last playful slap before slamming yourself down and taking as much of it as you can.\n\n", false);
 
 			outputText("A moan escapes your lips as her nine-inch pleasure-rod ", false);
 			if (player.vaginalCapacity() < monster.cockArea(0)) outputText("bottoms out", false);
@@ -332,7 +332,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You begin to feel yourself coming to a climax, increasing your movements and forcing the drider-woman to pump faster inside of you.  Lurching back, you drive yourself into the arachnid's crotch, her fat, demonic cock squeezing itself against your gripping walls.  Unable to take the pressure, your plaything explodes inside of you, hot white seed splattering against your inner walls and slowly oozing outside with every thrust.  You grind yourself against the spunk-machine forced inside, your orgasm causing you to shudder in pleasure along with her.  In the fullness of your vagina and time, you lay flat against her exhausted figure, your hips still squeezing the last few remaining drops of spooge left drooling from the spider's tip.  You figure it wouldn't hurt to lay still for another few hours, comfortable against the soft, plush curves of your new mate.", false);
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(15, 400, 151);
+			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
@@ -403,7 +403,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You watch her for a time, until her orgasms finally die down.  By that point, you've recovered enough to get dressed.  You walk away a little bow-legged, with a new, heavy weight in your belly, just waiting to be born.", false);
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(15, 200, 10);
+			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
@@ -508,8 +508,8 @@ package classes.Scenes.Areas.Swamp
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
 			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = 3;
-				player.buttPregnancyIncubation = 200;
+				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
+				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
 				trace("PC BUTT IMPREGNATED BY DRIDER");
 			}
 			player.slimeFeed();
@@ -623,8 +623,8 @@ package classes.Scenes.Areas.Swamp
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
 			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = 3;
-				player.buttPregnancyIncubation = 200;
+				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
+				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
 				trace("PC BUTT IMPREGNATED BY DRIDER");
 			}
 			//(slimefeed, set lust to 100?)
@@ -721,7 +721,7 @@ package classes.Scenes.Areas.Swamp
 			//(+ corruption and set lust to 100, slimefeed)
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(15, 200, 10);
+			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
 			dynStats("lib", 1, "lus=", 100, "cor", 1);
 			player.slimeFeed();
 			cleanupAfterCombat();
@@ -777,8 +777,8 @@ package classes.Scenes.Areas.Swamp
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
 			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = 3;
-				player.buttPregnancyIncubation = 200;
+				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
+				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
 				trace("PC BUTT IMPREGNATED BY DRIDER");
 			}
 			player.orgasm();

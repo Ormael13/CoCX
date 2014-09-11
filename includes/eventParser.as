@@ -761,7 +761,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Fixing Egg Preg Preglocked Glitch
-		if(player.pregnancyIncubation <= 0 && player.pregnancyType == 5) {
+		if(player.pregnancyIncubation <= 0 && player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
 			player.pregnancyType = 0;
 			player.pregnancyIncubation = 0;
 		}
@@ -1279,7 +1279,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.removePerk(PerkLib.Oviposition);
 			}
 			else if(player.bunnyScore() < 3 && player.findPerk(PerkLib.BunnyEggs) >= 0) {
-				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
+				outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n", false);
 				needNext = true;
 				player.removePerk(PerkLib.BunnyEggs);
 			}
@@ -1291,7 +1291,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(player.totalFertility() > 50 && model.time.days % 15 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
-						player.knockUp(5,50,1,1);
+						player.knockUp(player.PREGNANCY_OVIELIXIR_EGGS, player.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						//v1 = egg type.
 						//v2 = size - 0 for normal, 1 for large
 						//v3 = quantity
@@ -1301,7 +1301,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					else if(model.time.days % 30 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
-						player.knockUp(5,50,1,1);
+						player.knockUp(player.PREGNANCY_OVIELIXIR_EGGS, player.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						//v1 = egg type.
 						//v2 = size - 0 for normal, 1 for large
 						//v3 = quantity
@@ -2963,6 +2963,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			inventory.takeItem(itype);
 			return true;
 		}
+		// Benoit preggers update
+		if (flags[kFLAGS.FEMOIT_EGGS] > 0) flags[kFLAGS.FEMOIT_INCUBATION]--; // We're not capping it, we're going to use negative values to figure out diff events
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...

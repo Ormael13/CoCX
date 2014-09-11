@@ -58,7 +58,7 @@ package classes.Scenes.NPCs
 
 		private function anemonePreg():void
 		{
-			player.knockUp(10, 256, 101);
+			player.knockUp(player.PREGNANCY_ANEMONE, player.INCUBATION_ANEMONE, 101);
 		}
 
 		public function kidAXP(diff:Number = 0):Number
@@ -152,7 +152,7 @@ package classes.Scenes.NPCs
 			else if (player.hasVagina()) {
 				outputText("  You lift one hand up to your " + vaginaDescript(0) + " and begin jilling yourself off.  This works to satisfy you for a while, but eventually you want more and grab a brace of tentacles floating in the water beside you, shoving them into your greedy pussy and smearing them around. This provokes a lusty moan from you and a giggle from your lover.", false);
 			}
-			outputText("  And as you work your " + assholeDescript() + " on the tool, something happens to push your peak closer at a startling pace...\n\n", false);
+			outputText("  As you work your " + assholeDescript() + " on the tool, something happens to push your peak closer at a startling pace...\n\n", false);
 
 			outputText("Your blue lover, restless now and uncontent to simply lie there anymore, begins to use her own hands and hips to pump in time with you, doubling the pace of the fuck.  The fervid intensity of her strokes doesn't leave any time for the venom to disperse before the next thrust arrives, making it feel as though your " + assholeDescript() + " is filled with one huge, hot cock that nevertheless slides in and out even as it remains motionless.  The sensation pushes you to orgasm quickly, your " + assholeDescript() + " clamping down on the anemone's penis", false);
 			if (player.cockTotal() > 0) {
@@ -209,7 +209,7 @@ package classes.Scenes.NPCs
 				outputText("The fuck begins in earnest as you demonstrate all the techniques you know or can imagine; the anemone seems to be more impressed as you go on, cooing and moaning to goad you further while wrapping her hands and hair around your hips for chemical encouragement.  Her small tits bounce a little", false);
 				//[(if PC boobs > A)
 				if (player.biggestTitSize() >= 1) outputText(" in time with your own", false);
-				outputText("; here and there one of the bounces will brush her gills away, giving you a tantalizing view of nipple.", false);
+				outputText("; here and there one of the bounces brush her gills away, giving you a tantalizing view of nipple.", false);
 				//[(if balls)
 				if (player.balls > 0) outputText("  As your thrusts get faster your " + sackDescript() + " starts to slap into the tickly and quite-venomous feelers fringing her pussy, getting hotter and hotter as the aphrodisiac builds in your " + ballsDescriptLight() + ".  Your body answers with swelling, causing your sack to feel bigger and tighter with every slap.", false);
 				//[(if noballs and clit > 6")
@@ -303,7 +303,7 @@ package classes.Scenes.NPCs
 			if (player.biggestTitSize() > 2) outputText("  You give special attention to the presentation of your " + breastDescript(0) + ", removing your top with tantalizing slowness, letting each breast slip out and hang between you like fruit ripe to be taken, then making sure to rub them seductively to arouse the both of you further.", false);
 			//(hipsize=girly or better)
 			if (player.hipRating > 6) outputText("  You make good use of your " + hipDescript() + ", too, giving a little shimmy to show off your pronounced curves.", false);
-			outputText("  The anemone's crotch, by the time you're finished, glistens with fluid from both her sexes; it's probably as wet as it was when she was underwater.  You lean into the anemone and give her a deep kiss, ", false);
+			outputText("  By the time you're finished, the anemone's crotch glistens with fluid from both her sexes; it's probably as wet as it was when she was underwater.  You lean into the anemone and give her a deep kiss, ", false);
 			//[(breast0>C)
 			if (player.biggestTitSize() > 2) outputText("making sure to let your " + player.allBreastsDescript() + " rub up against hers, ", false);
 			outputText("then pull apart from her and ", false);
@@ -494,7 +494,9 @@ package classes.Scenes.NPCs
 					if (player.balls > 0) outputText(" and your " + sackDescript() + " tightens up", false);
 					outputText(".  This doesn't escape your blue lover's notice, and she quickly stops pumping.  Left at the edge of orgasm, you panic and look over your shoulder at her.  Judging by her grinning demeanour, she seems to be up to something diabolical.  You stare at her confusedly until you feel a new heat at the base of your " + multiCockDescriptLight() + ". Glancing down, you see that her tentacle-hair has wrapped around " + sMultiCockDesc() + " and is squeezing tightly!  Pleased with the arrangement, the anemone begins pumping and rubbing your prostate again, spreading new warmth through your " + assholeDescript() + ".  Your delayed climax finally arrives, but the <i>de facto</i> cockring", false);
 					if (player.cockTotal() > 1) outputText("s", false);
-					outputText(" prevent any semen from escaping!  The sensations swell and fade as your orgasm passes fruitlessly, your blue partner fucking away as merrily as ever.\n\n", false);
+					outputText(" prevent");
+					if (player.cockTotal() == 1) outputText("s");
+					outputText(" any semen from escaping!  The sensations swell and fade as your orgasm passes fruitlessly, your blue partner fucking away as merrily as ever.\n\n", false);
 
 					outputText("For nearly an hour the anemone continues her performance, even going so far as to caress your swollen " + multiCockDescriptLight() + " with her unoccupied tentacles.  Several more orgasms arrive and desert you without bringing any relief from the pressure on your ", false);
 					//[(if balls)
@@ -511,7 +513,7 @@ package classes.Scenes.NPCs
 					else outputText("gouts", false);
 					outputText(" of jism ", false);
 					//[(height <4' and non-horse)
-					if (player.tallness < 48 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("fly over your head, and turning behind you, you see the anemone trying to catch them with open mouth and tongue out.", false);
+					if (player.tallness < 48 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("fly over your head, and turning behind you, you see the anemone trying to catch them with an open mouth and her tongue out.", false);
 					else if (player.tallness < 84 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("catch the air and rain down on both your faces, splashing quietly where they hit water.", false);
 					else {
 						outputText(" land right on your", false);
@@ -581,7 +583,7 @@ package classes.Scenes.NPCs
 			}
 			//(PC addicted but in withdrawal)
 			else {
-				outputText("Oh, hell NO are you going to give that bottle away when you haven't even gotten your own fix yet! You raise your " + player.weaponName + " and advance on the girl with a wild look in your eyes. She shivers a bit at your expression and drops the bottle with a splash, then recovers her composure and backs up a few steps. You grab the floating bottle, and the rest of your stuff, quickly.", false);
+				outputText("Oh hell no, you're not going to give that bottle away when you haven't even gotten your own fix yet! You raise your " + player.weaponName + " and advance on the girl with a wild look in your eyes. She shivers a bit at your expression and drops the bottle with a splash, then recovers her composure and backs up a few steps. You grab the floating bottle, and the rest of your stuff, quickly.", false);
 				//(gain lust, temp lose spd/str; if in withdrawal then proceed to fight, otherwise present choices 'Give' and 'Don't Give')
 				var anemone:Anemone = new Anemone();
 				startCombat(anemone);
@@ -653,7 +655,7 @@ package classes.Scenes.NPCs
 				outputText(" as y");
 			}
 			else outputText("Y");
-			outputText("ou circle around behind her.  The anemone looks over her shoulder at you as you size her up.  But there... that's what you wanted to see.  Tilting the girl forward with a hand on her shoulder, you lower yourself to get a better look at her backside.");
+			outputText("ou circle around behind her.  The anemone looks over her shoulder at you as you size her up.  There... that's what you wanted to see.  Tilting the girl forward with a hand on her shoulder, you lower yourself to get a better look at her backside.");
 
 			outputText("\n\nThe rounded blue cheeks stick out as you slide your hand up her back and press gently to lean her over further.  You rub your other hand over them, giving a squeeze and, eventually, a smack.  She lets out a cute yelp at the blow and shakes her backside at you, as if to tempt you further.  It works; ");
 			if (player.hasCock() && player.cockThatFits(48) >= 0) {
@@ -749,7 +751,7 @@ package classes.Scenes.NPCs
 			outputText(" suddenly, stroking vigorously even as it smears a burning wave of arousal along your length.  \"<i>F-fuck,</i>\" you moan, pushed beyond your control by the coup.");
 			if (dick) {
 				outputText("  Your [cockFit 48] begins to ejaculate, filling the blue girl's mouth with your seed; she sucks it down greedily, swallowing every drop.");
-				if (player.cumQ() >= 1000) outputText("  So much cum do you push into her that her belly actually rounds from the volume, transforming into a sleek, flat midriff into a barely-contained ball of sloshing liquid");
+				if (player.cumQ() >= 1000) outputText("  You push so much cum into her that her belly actually rounds from the volume, transforming from a sleek, flat midriff into a barely-contained ball of sloshing liquid");
 				if (player.cumQ() >= 2000) outputText("; even when her stomach skin can stretch no further, your body won't stop filling her, and the bulge expands up her esophagus, pushing out her chest and throat until she's full to the brim and rather reminiscent of a big, blue pear");
 				if (player.cumQ() >= 1000) outputText(".");
 
@@ -792,7 +794,7 @@ package classes.Scenes.NPCs
 			outputText("Well... it's the spirit of the thing that counts, right?  That blue butt still does look pretty tempting.  You force the anemone forward again and squeeze them together; she giggles and tries once more to push her vagina toward you, but you push it down again and jam your ");
 			if (dick) outputText("[cockFit 48]");
 			else outputText("[clit]");
-			outputText(" between her small, round cheeks, seizing one in each hand and forcing them to sleeve as much of your length as possible.  The girl looks back at you, face a picture of confusion, but you do not even care.  Her cool ass feels otherworldly as you thrust through it, poking your tip out of the crack and then pulling back again; ");
+			outputText(" between her small, round cheeks, seizing one in each hand and forcing them to sleeve as much of your length as possible.  The girl looks back at you, her face a picture of confusion, but you do not even care.  Her cool ass feels otherworldly as you thrust through it, poking your tip out of the crack and then pulling back again; ");
 			if (dick) outputText("pre-cum");
 			else outputText("your juice");
 			outputText(" drools onto her at one end of your motion, filling your little canyon of fun with a river of hot lubrication that you smear liberally throughout.");
@@ -874,7 +876,7 @@ package classes.Scenes.NPCs
 			if (silly()) outputText("duck ");
 			outputText("face,</i>\" you reply.");
 
-			outputText("\n\nThe anemone looks quizzical, but wraps a hand around your egg-laying organ, pulling it closer.  You allow her to draw you in and press the black, wet tip to her mouth, and she raises her other hand to it and begins to stroke.  You shiver in pleasure as another gob of honey forms, and the anemone, watching your reaction, smiles slyly.  She slides two of her tentacles into each palm, adding the caressing, sticky sensation of her stingers to the handjob!  Your [legs] wobble as your blood vessels loosen and your ovipositor fills with warm, fluttering heat; you don't even notice when it begins oozing your nectar constantly, so fuzzy does it feel.  You do notice, however, when she lifts your prong to her lips and brashly sticks her tongue right down the hole!");
+			outputText("\n\nThe anemone looks quizzical, but wraps a hand around your egg-laying organ, pulling it closer.  You allow her to draw you in and press the black, wet tip to her mouth, and she raises her other hand to it and begins to stroke.  You shiver in pleasure as another gob of honey forms, and the anemone, watching your reaction, smiles slyly.  She slides two of her tentacles into each palm, adding the caressing, sticky sensation of her stingers to the handjob!  Your [legs] wobble as your blood vessels loosen and your ovipositor fills with warm, fluttering heat; it feels so fuzzy that you don\'t even notice when it begins oozing your nectar constantly.  You do notice, however, when she lifts your prong to her lips and brashly sticks her tongue right down the hole!");
 
 			outputText("\n\nA wordless groan drops from your mouth as the girl's small, cool muscle probes the inside of your ovipositor.  She strokes the base eagerly, forcing more of your honey to the end to be lapped up; every time a glob rises to the top, her tongue greedily scoops it up, tracking a tingling, ticklish trail along the nerves on the inside of your black bee-prick.  Fuck, there's no way you can hold back... the first of your eggs is pushed from you, forcing the anemone's lips apart as it enters her mouth.");
 

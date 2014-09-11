@@ -237,7 +237,7 @@ package classes.Scenes.Areas.Lake
 				outputText("When the girl begins sliding back out, it's all you can do not to vocalize your disappointment with a feeble moan. Splashing in an expanding puddle, the girl gradually molds her features back into a humanoid shape, but you notice she's smaller than before. Touching your belly, you can feel a jiggling orb still inside of you. You nearly bite your tongue when the straggler presses up against your cervix and forces its way into your womb with wriggling suction. Your body clenches in orgasm, but the slime's fluid body works past your sphincter-tight barrier and distends your gut with its occupancy. You shake in the squirting throes of your climax and the reduced woman rubs her cheek against your goo-slick breasts affectionately. Dimly, you notice that her heart-shaped core has been split right down the center, the other half, presumably, inside your body. With a wave goodbye, she plunges back into the lake, leaving you hot, wet, and pregnant- or what passes for pregnancy in asexual creatures.", false);
 				if (player.pregnancyIncubation >= 1) outputText("  Everything she pumped into you runs back out after.  For some reason or another, it didn't take.", false);
 				else {
-					player.knockUp(16, 85, 1, 1);
+					player.knockUp(player.PREGNANCY_GOO_GIRL, player.INCUBATION_GOO_GIRL, 1, 1);
 				}
 			}
 			player.orgasm();

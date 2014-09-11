@@ -16,7 +16,6 @@ public function customPCSetup():void {
 		player.cocks[0].cockThickness = 1;
 		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 		player.cocks[0].knotMultiplier = 1.5;
-		
 	
 		player.clitLength = 0.5;
 		player.fertility = 50;
@@ -113,11 +112,12 @@ public function customPCSetup():void {
 		player.gems += 30000;
 		outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		
-		inventory.takeItem(consumables.F_DRAFT);
-		inventory.takeItem(consumables.F_DRAFT);
-		inventory.takeItem(consumables.F_DRAFT);
-		inventory.takeItem(consumables.F_DRAFT);
-		inventory.takeItem(consumables.F_DRAFT);
+		player.itemSlot4.unlocked = true;
+		player.itemSlot5.unlocked = true;
+		player.itemSlot1.setItemAndQty(consumables.P_S_MLK, 2);
+		player.itemSlot2.setItemAndQty(consumables.L_PNKEG, 1);
+		player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
+		player.itemSlot4.setItemAndQty(consumables.REPTLUM, 1);
 		
 		player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
 		//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
@@ -172,6 +172,9 @@ public function customPCSetup():void {
 		//flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
 		flags[kFLAGS.RUBI_AFFECTION] = 75;
 		flags[kFLAGS.RUBI_INTRODUCED] = 1;
+		
+		// Bazaar
+		flags[kFLAGS.BAZAAR_ENTERED] = 1;
 	}
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();

@@ -679,7 +679,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 
 			dynStats("sen", -2, "cor", .25);
-			player.knockUp(1, 400, 61);
+			player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00290] == 0) {
 				outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?", false);
 				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", 0, "", 0, "", 0, "Leave", 13);
@@ -837,7 +837,7 @@ package classes.Scenes.NPCs
 			dynStats("lib", -1, "sen", -2, "cor", 2);
 			//Preggers chance!
 			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
-				player.knockUp(1, 432);
+				player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}
 			doNext(13);
@@ -1250,7 +1250,7 @@ package classes.Scenes.NPCs
 
 				outputText("\"<i>P-please,</i>\" she stammers out, even as her asshole clenches around you.  Though it was easy to force yourself into Dominika's puckered button, you're impressed at how well her colon squeezes your shaft.  There's no blown-out anal whore here, just a petite fucktunnel the perfect size to be broken by your " + cockDescript(0) + ".  You part aside her bunghole, claiming her ass in your name – colonizing her colon.  The entire reason those cheeks exist is cushioning for your crotch as you pound away at her, the juices her cunt left on your cock squirting out as your prick dominates every inch of those fleshy walls.  \"<i>Please,</i>\" she gets out again, \"<i>I've held out... so long...</i>\" She turns her head to look at you.  Tucked just behind the part of her hair, two small horns push from her skull.  A moment of confusion takes you, before it is replaced by a knowing smirk.  Jeering at the corrupted sorceress, you mock her inability to defend herself.  Without her chastity belt to protect her from the pleasure of the demon realm, it is free to feed upon her body and devour what purity remained, leaving behind just another succubus.  \"<i>Don't... make me cum,</i>\" she gasps.\n\n", false);
 
-				outputText("Under most circumstances you would have no opposition to denying a slut like her an orgasm, but considering the precipice she dangles over, you don't feel bad giving her a push.  Your " + cockDescript(0) + " continues its obscene assault on her backside, splitting her juicy cheeks to either side as you bend her guts to your dick's will.  Dominika lets out a moan that seems as though she may have intended it to be a a scream of frustration, but her body is too far gone into pleasure to protest.  Like ink running through paper a deep dark purple begins to spread from her tattoos.  The color runs into itself and grows larger, leaving behind no lines where it joins.  The tan of her skin begins to disappear under the corruption.  \"<i>You " + player.mf("bastard", "bitch") + ",</i>\" she pants, shuddering as the horns grow larger.  \"<i>You would destroy my humanity... just for your pleasure?</i>\"\n\n", false);
+				outputText("Under most circumstances you would have no opposition to denying a slut like her an orgasm, but considering the precipice she dangles over, you don't feel bad giving her a push.  Your " + cockDescript(0) + " continues its obscene assault on her backside, splitting her juicy cheeks to either side as you bend her guts to your dick's will.  Dominika lets out a moan that seems as though she may have intended it to be a scream of frustration, but her body is too far gone into pleasure to protest.  Like ink running through paper a deep dark purple begins to spread from her tattoos.  The color runs into itself and grows larger, leaving behind no lines where it joins.  The tan of her skin begins to disappear under the corruption.  \"<i>You " + player.mf("bastard", "bitch") + ",</i>\" she pants, shuddering as the horns grow larger.  \"<i>You would destroy my humanity... just for your pleasure?</i>\"\n\n", false);
 
 				outputText("\"<i>Yes,</i>\" you answer calmly.\n\n", false);
 
@@ -1866,7 +1866,7 @@ package classes.Scenes.NPCs
 			else outputText("tantalize and tease your clit");
 			outputText(", and you give up another grunt of pleasure while your hips press harder against your owner's.");
 
-			outputText("\n\nCeraph's hands fall on either side of your waist.  She reassures, \"<i>I treat my pets well, [name].</i>\"  Her hips pull out, the nubby, textured tool bouncing and grinding all along your insides as she continues.  \"<i>I make them happy to be pets...</i>\"  That thick, demonic dick pushes back in a little harder, pushing your arms down so that your face is pressed into the dirt.  \"<i>...Happy to be owned, because obedience IS pleasure.</i>\"  Ceraph adjusts the angle so the blunted tip of of her erection ");
+			outputText("\n\nCeraph's hands fall on either side of your waist.  She reassures, \"<i>I treat my pets well, [name].</i>\"  Her hips pull out, the nubby, textured tool bouncing and grinding all along your insides as she continues.  \"<i>I make them happy to be pets...</i>\"  That thick, demonic dick pushes back in a little harder, pushing your arms down so that your face is pressed into the dirt.  \"<i>...Happy to be owned, because obedience IS pleasure.</i>\"  Ceraph adjusts the angle so the blunted tip of her erection ");
 			if (player.hasCock()) outputText("rams straight into your inner, cock-milk reserve");
 			else outputText("rubs against your quivering vaginal walls, stimulating you from the inside out");
 			outputText(", and fireworks start to go off inside your brain.");

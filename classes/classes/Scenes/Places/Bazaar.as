@@ -84,13 +84,20 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	var tent:Function;
 	var benoit2:Function = null;
 	var benoitT:String = "MarketStall";
-	if(model.time.hours >= 9 && model.time.hours <= 17) {
-		if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
-		else {
-			outputText("\n\n" + benoit.benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
-			benoitT = "Benoit";
+	if (model.time.hours >= 9 && model.time.hours <= 17) {
+		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
+		{
+			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) 
+			{
+				outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
+			}
+			else 
+			{
+				outputText("\n\n" + benoit.benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
+				benoitT = benoit.benoitMF("Benoit","Benoite");
+			}
+			benoit2 = benoit.benoitIntro;
 		}
-		benoit2 = benoit.benoitIntro;
 	}
 	tent = fapArena.fapArenaGOOOO;
 	fapArena.fapAppearance();

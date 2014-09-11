@@ -1754,7 +1754,7 @@ private function pickKidSceneHere():void {
 	clearOutput();
 	//ANNOUNCE BEHBIES
 	//Once per pregnancy?
-	if((flags[kFLAGS.URTA_INCUBATION] > 0 || (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 300 && player.pregnancyType == 21)) && flags[kFLAGS.NEW_BABY_ANNOUNCED] == 0) {
+	if((flags[kFLAGS.URTA_INCUBATION] > 0 || (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 300 && player.pregnancyType == player.PREGNANCY_URTA)) && flags[kFLAGS.NEW_BABY_ANNOUNCED] == 0) {
 		newBabyComing();
 	}
 	//Only possible between 12-14 hours.
@@ -1798,11 +1798,11 @@ private function newBabyComing():void {
 		outputText(" a loving smile.");
 		
 		//Both Preg:
-		if(flags[kFLAGS.URTA_INCUBATION] > 0 && player.pregnancyIncubation > 0 && player.pregnancyType == 21) {
+		if(flags[kFLAGS.URTA_INCUBATION] > 0 && player.pregnancyIncubation > 0 && player.pregnancyType == player.PREGNANCY_URTA) {
 			outputText("\n\n\"<i>Your mommies are both going to give you a little brother or a little sister soon,</i>\" Urta says, giving you a comforting hug whilst still managing to pat your belly, even as she gently drums her fingers on her own.");
 		}
 		//One person preg:
-		else if(flags[kFLAGS.URTA_INCUBATION] > 0 || (player.pregnancyIncubation > 0 && player.pregnancyType == 21))
+		else if(flags[kFLAGS.URTA_INCUBATION] > 0 || (player.pregnancyIncubation > 0 && player.pregnancyType == player.PREGNANCY_URTA))
 		{
 			outputText("\n\n\"<i>You're going to have a little brother or sister soon!</i>\" she says, beaming with delight as she pats ");
 			if(flags[kFLAGS.URTA_INCUBATION] > 0) outputText("her");
@@ -2098,7 +2098,7 @@ private function giveTheKidsABath():void {
 	else outputText("his");
 	outputText(" hair and start to massage it... now, just how do you shampoo somebody covered from head to toe in fur...?");
 
-	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks, \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
+	outputText("\n\nLuckily Lianna arrives, carrying the folded clothes and naked... very naked.  She sits beside you and gently asks, \"<i>How's it going?  " + urtaKidsText("He","She","They") + " didn't try to splash you, did " + urtaKidsText("he","she","they") + "?</i>\"  Just as she finishes posing the question, your ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("daughter");
 	else outputText("son");
 	outputText(" flicks ");

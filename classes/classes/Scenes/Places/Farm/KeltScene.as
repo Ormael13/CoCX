@@ -533,11 +533,9 @@ private function keltMainEncounter3():void {
 			//(+5 Submissive)
 			player.addStatusValue(StatusAffects.Kelt,2,5);
 			//(Pregnancy Chance)
-			if((player.totalFertility()) >= rand(50) && player.pregnancyIncubation == 0) {
-				player.pregnancyType = 7;
-				player.pregnancyIncubation = 420;
-				trace("PLAYER GOT KNOCKED UP BY KELT");
-			}
+			player.knockUp(player.PREGNANCY_CENTAUR, player.INCUBATION_CENTAUR, 50);
+				//Should be equivalent to the old way, but now Kelt does all the usual things like checking for contraceptives and fertilizing eggs if PC can oviposit
+			if (player.pregnancyType == player.PREGNANCY_CENTAUR) trace("PLAYER GOT KNOCKED UP BY KELT");
 			doNext(13);
 			return;
 		}

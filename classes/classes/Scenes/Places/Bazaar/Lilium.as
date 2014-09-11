@@ -138,9 +138,9 @@ private function buttFuckTongueJeorb():void {
 
 	outputText("Panting, Lilium grabs your hands and moves them around her waist, holding them against her stomach.  ", false);
 	//(If naga body)
-	if(player.isNaga()) outputText("As you both stand there, reeling in the wake of your ecstasy, she leans back against against you causing you to flop onto your " + buttDescript() + " with the demon girl on top of you; you haven't the strength to remain standing.", false);
+	if(player.isNaga()) outputText("As you both stand there, reeling in the wake of your ecstasy, she leans back against you causing you to flop onto your " + buttDescript() + " with the demon girl on top of you; you haven't the strength to remain standing.", false);
 	//(else) 
-	else outputText("As you both stand there, reeling in the wake of your ecstasy, she leans back against against you causing you to flop onto your " + buttDescript() + " with the demon girl on top of you; your wobbling legs have temporarily lost the strength to keep you both upright.", false);
+	else outputText("As you both stand there, reeling in the wake of your ecstasy, she leans back against you causing you to flop onto your " + buttDescript() + " with the demon girl on top of you; your wobbling legs have temporarily lost the strength to keep you both upright.", false);
 	outputText("  Lilium lets out a laugh and soon you find yourself laughing with her.\n\n", false);
 	
 	outputText("After you both recover, you get up to don your " + player.armorName + ", thanking Lilium and beginning the trip back to camp.  Maybe you'll take a bath too...", false);
@@ -202,7 +202,7 @@ private function liliumDickRidah():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)
-	player.knockUp(1,418);
+	player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
 	doNext(13);
 }
 
