@@ -474,26 +474,26 @@ public function doCamp():void {
 
 
 	if(isabellaFollower()) {
-		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ", false);
+		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  \n\n", false);
 	}
 	//Live in-ness
 	else {
-		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.", false);
-		if(model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.", false);
+		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well. \n\n", false);
+		if(model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks. \n\n", false);
 		if(model.time.days >= 20) 
 		{
 			if (!isabellaFollower()) outputText("Your new home is as comfy as a camp site can be. ", false);
 			outputText("The fire-pit ", false);
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("is ", false);
 			else outputText("and tent are both ", false);
-			outputText("set up perfectly, and in good repair.", false);
+			outputText("set up perfectly, and in good repair.\n\n", false);
 		}
 	}
 	if(model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("\n\nThere's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("\n\nThere's an unfinished cabin. It's currently missing window and door.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("\n\nThere's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12) outputText("\n\nYour cabin is situated near the edge of camp.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("There's an unfinished cabin. It's currently missing window and door.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12) outputText("Your cabin is situated near the edge of camp.\n\n", false)
 	if(flags[kFLAGS.CLARA_IMPRISONED] > 0) 
 	{
 		marblePurification.claraCampAddition();
@@ -680,9 +680,11 @@ public function doCamp():void {
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if(campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n", false);
 	//Pure Jojo
-	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("There is a small bedroll for Jojo near your own", false);
-	if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
-	else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+		outputText("There is a small bedroll for Jojo near your own", false);
+		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
+		else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
+	}
 	
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {

@@ -1876,7 +1876,10 @@ public function awardPlayer():void
 		monster.gems += bonusGems;
 		//trace( "to: " + monster.gems )
 	}
-	if (player.findPerk(PerkLib.HistoryFortune) >= 0) monster.gems *= 1.15;
+	if (player.findPerk(PerkLib.HistoryFortune) >= 0) {
+		var bonusGems2:int = monster.gems * 0.15;
+		monster.gems += bonusGems2;
+	}
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if(!inDungeon) doNext(13);
 	else doNext(1);

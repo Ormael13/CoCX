@@ -519,6 +519,9 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		else {
 			if(display) outputText("You approach Hel as she's pacing around camp.  She's clad in her normal field attire: a simple scale bikini top and leather thong which supports her scimitar's scabbard.  Her cloak is loosely thrown over her shoulders, giving her a slight measure of protection from the mountain's harsh environs.");
 			if(display) outputText("\n\n\"<i>Heya, [name]! Ready to hit the road?</i>\"");
+			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+				if (display) outputText("\n\n<b>You are in Hardcore Mode. Are you sure you want to embark on the quest? You cannot return until you defeat the opponents and if you get defeated, your save file is permanently deleted.</b>");
+			}
 			//(Display Options: [Dungeon] [Not Yet])
 			simpleChoices("Dungeon",kGAMECLASS.goToHeliaDungeon,"",0,"",0,"",0,"Not Yet",kGAMECLASS.notYet);
 		}
