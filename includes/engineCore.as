@@ -1887,6 +1887,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.SPELLS_CAST] > 0)
 		miscStats += "<b>Spells Cast:</b> " + flags[kFLAGS.SPELLS_CAST] + "\n";
 		
+	if (flags[kFLAGS.TIMES_ORGASMED] > 0)
+		miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
+		
 	if (miscStats != "")
 		outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 	// End Misc Stats

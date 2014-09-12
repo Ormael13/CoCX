@@ -338,8 +338,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15_mod_0.5.1";
-			version = ver + " (<b>Mod Updated</b>)";
+			ver = "0.8.15_mod_0.5.2";
+			version = ver + " (<b>Mod Bug Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
