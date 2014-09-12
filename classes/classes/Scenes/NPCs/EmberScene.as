@@ -3740,7 +3740,7 @@ package classes.Scenes.NPCs
 				}
 				outputText(", before telling her that she's beautiful too, and your daughters will certainly hatch and grow up to be just as gorgeous as she.");
 
-				outputText("\n\nEmber just smiles at you and hooks her tail around your waist, pulling towards her.  \"<i>Come here.</i>\"  You don't resist and allow her to pull you into her embrace, snuggling up against her.  Ember strokes your head, gently rubbing the back of your neck as she pulls you closer against her.  \"<i>You know, there's something else you have to do for me.</i>\"");
+				outputText("\n\nEmber just smiles at you and hooks her tail around your waist, pulling you towards her.  \"<i>Come here.</i>\"  You don't resist and allow her to pull you into her embrace, snuggling up against her.  Ember strokes your head, gently rubbing the back of your neck as she pulls you closer against her.  \"<i>You know, there's something else you have to do for me.</i>\"");
 				outputText("\n\nYou ask her what that is.  Ember takes one of her swollen breasts in her hand, gently squeezing a droplet of milk from her perky nipples.  \"<i>These need to be drained,</i>\" she says, looking at you expectantly.");
 
 				outputText("\n\nYou give her a knowing look and a smile, then nuzzle up to her and start to suckle.  \"<i>Hmm... there's no need to rush, they aren't going anywhere,</i>\" Ember says, sighing in pleasure and relief.  Her arms encircle you, holding you close, and her tail loops around your midriff, gently guiding your body to lay atop hers.");
