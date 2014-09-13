@@ -7511,7 +7511,7 @@ package classes.Scenes.NPCs
 				else outputText("their loads ");
 				outputText("over her middle.");
 			}
-			outputText("  The heat flowing inside her sets of a second orgasm");
+			outputText("  The heat flowing inside her sets off a second orgasm");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", and she climaxes all over again, spraying the underside of her " + amilyTits() + " and your [chest] with milky mouse seed");
 			outputText(".  Her channel soon drips with your mixed sexual fluids");
 			if(player.cumQ() > 250) {
