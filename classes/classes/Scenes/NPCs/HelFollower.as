@@ -1,4 +1,4 @@
-﻿package classes.Scenes.NPCs
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;

@@ -3443,7 +3443,7 @@ private function milkMarble():void
 	clearOutput();
 	if( flags[kFLAGS.MARBLE_MILKED_BEFORE] < 1 )
 	{
-		outputText( "With an unusually bright look in her eye, Marble comes up to you and asks, \"<i>Hey sweetie, I was just about to go get milked when I realized that you've never actually been with me for it.  How would you feel like getting a tour of the setup that Whitney has for me?</i>\"  Then a mischievous look crosses her face, \"<i>Maybe we could even do something a little... intimate too?</i>\"" );
+		outputText( "With an unusually bright look in her eye, Marble comes up to you and asks, \"<i>Hey sweetie, I was just about to go get milked when I realized that you've never actually been with me for it.  How would you feel about getting a tour of the setup that Whitney has for me?</i>\"  Then a mischievous look crosses her face, \"<i>Maybe we could even do something a little... intimate too?</i>\"" );
 		
 		outputText( "[pg]There is no harm in checking out her stall, at least.  You agree to go with her." );
 		
@@ -3536,7 +3536,7 @@ private function milkMarbleCunnilingling():void
 	
 	outputText( "[pg]You then tie her bow back up on her tail and say you'll save the rest for later." );
 	
-	outputText( "[pg]\"<i>Oh, I'll be looking forward to it.  See you later sweetie!</i>\"  She gives you a slightly awkward peck on the cheek around the milking tubes, and sends you in a blissful state." );
+	outputText( "[pg]\"<i>Oh, I'll be looking forward to it.  See you later sweetie!</i>\"  She gives you a slightly awkward peck on the cheek around the milking tubes, that sends you into a blissful state." );
 	
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	var pLust:int = int( 20 + ((player.lib + player.cor) / 10) );
