@@ -397,17 +397,13 @@ private function willinglyBoneSatyr():void {
 //Pregnancy Stuff (Z)
 private function satyrPreggo():void {
 	if (player.hasVagina()) {
-		if (player.pregnancyIncubation == 0 && player.pregnancyType == 0) {
-			player.knockUp(player.PREGNANCY_SATYR, player.INCUBATION_SATYR);
-		}
+		player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR); //Satyrs can now fertilize eggs for ovipositing players
 	}
 	else {
-		if (player.buttPregnancyIncubation == 0 && player.buttPregnancyType == 0) {
-			player.buttPregnancyType = player.PREGNANCY_SATYR;
-			player.buttPregnancyIncubation = player.INCUBATION_SATYR;
-		}
+		player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 1, 1);
 	}
 }
+
 //Birthing (Z)
 //Baby is always male.
 public function satyrBirth(vag:Boolean):void {

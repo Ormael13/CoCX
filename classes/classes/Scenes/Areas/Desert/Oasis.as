@@ -130,7 +130,7 @@ internal function oasisSexing():void {
 		//IZ OVER! NEWLINE BITCH
 		outputText("\n\n", false);
 		//Preggers chance!
-		player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP, 90);
+		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
 	}
 	//Buttbutt buuuuuttt
 	if(player.gender > 0) outputText("However, the demons are interested in every part of you, not just your crotch.  ");

@@ -3,11 +3,8 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class Urta extends NPCAwareContent {
+	public class Urta extends NPCAwareContent implements TimeAwareInterface {
 
-		public function Urta()
-		{
-		}
 //Urta variables
 //flags[kFLAGS.TIMES_FUCKED_URTA] = times fucked
 //flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = urtas horsecock comfort level
@@ -48,6 +45,56 @@
 //const MET_OLIVIA:int = 822;
 //const URTA_PETPLAY_DONE:int = 857;
 
+		public var pregnancy:PregnancyStore;
+
+		public function Urta()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.URTA_PREGNANCY_TYPE, kFLAGS.URTA_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 334, 288, 240, 192, 144, 96, 48);
+												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,   6,  7,  8,  9 (< 48)
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			pregnancy.pregnancyAdvance();
+			trace("\nUrta time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) urtaPregs.getUrtaLetter(); //Urta Letters
+			if (pregnancy.incubation == 0 && (pregnancy.type == PregnancyStore.PREGNANCY_BEE_EGGS || PregnancyStore.PREGNANCY_DRIDER_EGGS)) {
+				pregnancy.knockUpForce(); //Silently clear Urta's egg pregnancy
+				flags[kFLAGS.URTA_EGGS] = 0;
+				flags[kFLAGS.URTA_FERTILE_EGGS] = 0;
+			}
+			if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0) flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME]--; //Count down timer for urta's lust
+			if (flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0) flags[kFLAGS.URTA_EGG_FORCE_EVENT]--; //Countdown to urta freakout
+			//Urta egg freak out
+			if (flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0 && model.time.hours > 6 && model.time.hours < 18 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] < 12) {
+				outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
+				urtaChewsOutPC(false);
+				needNext = true;
+			}
+			if (flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 1) {
+				flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN]--;
+				if (flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1) flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] = 1;
+			}
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
+				else flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
+				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
+					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .5;
+					if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
+				}
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 public function urtaSprite():void {
 	if(urtaDrunk()) spriteSelect(84);
 	else spriteSelect(1);
@@ -81,11 +128,10 @@ override public function urtaLove(love:Number = 0):Boolean {
 }
 public function urtaDrunk():Boolean {
 	//Preg = no drinking!
-	if(flags[kFLAGS.URTA_EGG_INCUBATION] > 0) return false;
-	if(flags[kFLAGS.URTA_INCUBATION] > 0) return false;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1) return false;
-	if(model.time.hours > 12 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
-	if(model.time.hours > 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
+	if (pregnancy.isPregnant) return false;
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1) return false;
+	if (model.time.hours > 12 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
+	if (model.time.hours > 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
 	else return false;
 }
 private function urtaOpenAboutEdryn():Boolean {
@@ -134,25 +180,25 @@ public function urtaBarDescript():Boolean {
 		return true;
 	}
 	//PREGNANT URTA
-	if(flags[kFLAGS.URTA_INCUBATION] > 0) {
-		urtaPregs.urtaPregAppearance();
-		return true;
-	}
-	//Egg-Stuffed Urta:
-	//This replaces the normal "display" for Urta in the Wet Bitch screen
-	///This scene lasts for the duration of Urta's egg pregnancy, whatever that is
-	if(flags[kFLAGS.URTA_EGG_INCUBATION] > 0) {
-		//Egg Level 1:
-		if(flags[kFLAGS.URTA_EGGS] < 20) outputText("Urta is sitting quietly at her usual seat, sipping a mug of some non-alcoholic beer.  Though her clothes are still in place, you can just make out the bulging midriff stretching them taut, a consequence of all the eggs in her womb.");
-		else if(flags[kFLAGS.URTA_EGGS] < 40) outputText("Urta is sitting rather uncomfortably at her usual seat.  Her swollen stomach is so large it keeps her from wearing her usual outfit, instead forcing her into a mini-shirt and a skirt bottom, allowing her midriff to be bare.  She occasionally runs a hand over the expanse, as if she can't believe it's actually there.");
-		//Egg Level 3:
-		else outputText("Urta's bloated belly forces her to sit side-saddle at her usual table, the lumpy, egg-stuffed mass ballooning out in front of her.  Forced into a midriff-baring ensemble, she frequently touches it, occasionally seeming to trace an egg through the taut skin.");
+	if (pregnancy.isPregnant) {
+		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
+			urtaPregs.urtaPregAppearance();
+		}
+		else { //Egg-Stuffed Urta:
+			//This replaces the normal "display" for Urta in the Wet Bitch screen
+			///This scene lasts for the duration of Urta's egg pregnancy, whatever that is
+			//Egg Level 1:
+			if (flags[kFLAGS.URTA_EGGS] < 20) outputText("Urta is sitting quietly at her usual seat, sipping a mug of some non-alcoholic beer.  Though her clothes are still in place, you can just make out the bulging midriff stretching them taut, a consequence of all the eggs in her womb.");
+			else if (flags[kFLAGS.URTA_EGGS] < 40) outputText("Urta is sitting rather uncomfortably at her usual seat.  Her swollen stomach is so large it keeps her from wearing her usual outfit, instead forcing her into a mini-shirt and a skirt bottom, allowing her midriff to be bare.  She occasionally runs a hand over the expanse, as if she can't believe it's actually there.");
+			//Egg Level 3:
+			else outputText("Urta's bloated belly forces her to sit side-saddle at her usual table, the lumpy, egg-stuffed mass ballooning out in front of her.  Forced into a midriff-baring ensemble, she frequently touches it, occasionally seeming to trace an egg through the taut skin.");
+		}
 		return true;
 	}
 	//Eggs Laid:
 	//This replaces the normal "display" for Urta in the Wet Bitch Screen
 	//This scene only appears once, after Urta's "pregnancy" is over
-	if(flags[kFLAGS.URTA_TIMES_EGG_PREGGED] > 0 && flags[kFLAGS.URTA_EGG_INCUBATION] == 0 && flags[kFLAGS.URTA_FLATBELLY_NOTICE] == 0) {
+	if (flags[kFLAGS.URTA_TIMES_EGG_PREGGED] > 0 && !pregnancy.isPregnant && flags[kFLAGS.URTA_FLATBELLY_NOTICE] == 0) {
 		outputText("Urta is seated at her usual spot in her usual dress, eagerly chugging down mug after mug of booze; her belly is washboard-flat again, and she's clearly making up for lost time after having given up alcohol for her 'pregnancy'.");
 		flags[kFLAGS.URTA_FLATBELLY_NOTICE] = 1;
 		return true;
@@ -249,7 +295,7 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//PREGNANT URTA
-	if(flags[kFLAGS.URTA_INCUBATION] > 0) {
+	if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 		urtaPregs.urtaPreggoApproached();
 		return;
 	}
@@ -2797,7 +2843,7 @@ private function urtaDiscussAlcoholDrinkMore():void {
 	clearOutput();
 	urtaSprite();
 	outputText("You blush a little bit and ask why she thinks you want her to drink LESS.  She stares at you quizzically and your blush deepens as you explain that when she gets drunk, lets her guard down, and gets so aggressive, you... well, you like it.  A lot.  Her ears perk up at your words, though her expression is a little uncertain while you explain it.  By the time you finish, something warm brushes by your leg and gently 'thunks' the table.  Clearly, she's as into the idea of encouraging her unrestrained, carefree self as you are.");
-	if(flags[kFLAGS.URTA_INCUBATION] > 0) {
+	if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 		outputText("\n\nUrta smiles, gently at first, though it carries a bit of a predatory glint by the time she waves down a waitress and orders a full bottle of non-alcholic beer.  You give her a rueful smile, a stroke under the table, and a kiss just bursting with tongue before you conclude the conversation.  Urta's chuckles, \"<i>After the baby I'll be sure to have a little liquid motivation on hand.</i>\"");
 	}
 	else {
@@ -2814,7 +2860,7 @@ private function urtaDiscussAlcoholDrinkLess():void {
 	clearOutput();
 	urtaSprite();
 	outputText("You sigh and explain that her alcoholism isn't helping anyone – not her and certainly not her relationships with others.  You're not going to hold what she does when she's that drunk against her, but you really don't think it's healthy for her to get like that.  You promise her you'll try and be more supportive as well.  She nods, her expression knowing and somber, and she promises you that she'll cut back - enough that you won't see her get drunk like she used to anymore. She does warn you again that she doesn't intend to stop entirely - a few cold brews from time to time won't hurt anyone");
-	if(flags[kFLAGS.URTA_INCUBATION] > 0) {
+	if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 		outputText(", once she's not pregnant anymore, of course");
 	}
 	outputText(".  Her eyes glitter with steely resolve, and she leans over the table to kiss you on the lips.  The two of you wrap up the conversation, with you hoping that you've seen the last of drunken Urta.");
@@ -2931,7 +2977,7 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	//Appropriate sex scene options are given; Hidden Blowjob and Urta's Place for regular Urta and Urta's Place, Suck Off and Eat Out for lover mode Urta
 	if(!urtaLove()) simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"",0);
 	else {
-		if(flags[kFLAGS.URTA_INCUBATION] > 0) simpleChoices("Her Place",goBackToUrtasForLuvinz,"",0,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
+		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) simpleChoices("Her Place",goBackToUrtasForLuvinz,"",0,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
 		else simpleChoices("Her Place",goBackToUrtasForLuvinz,"Suck Off",blowUrtaUnderTheTableLuv,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
 	}
 	dynStats("lus", 25);
@@ -3370,7 +3416,10 @@ private function giveTheFoxSomeEggs():void {
 	flags[kFLAGS.URTA_EGGS] = player.eggs();
 	flags[kFLAGS.URTA_FERTILE_EGGS] = player.fertilizedEggs();
 	flags[kFLAGS.URTA_TIMES_EGG_PREGGED]++;
-	flags[kFLAGS.URTA_EGG_INCUBATION] = 72;
+	if (player.findPerk(PerkLib.BeeOvipositor) >= 0)
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 72);
+	else
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
 	flags[kFLAGS.URTA_FLATBELLY_NOTICE] = 0;
 	//First time, tag for triggering freakout!
 	if(flags[kFLAGS.URTA_EGG_FORCE_EVENT] == 0) flags[kFLAGS.URTA_EGG_FORCE_EVENT] = 48;
@@ -3508,7 +3557,10 @@ private function repeatUrtaEgging():void {
 	flags[kFLAGS.URTA_EGGS] = player.eggs();
 	flags[kFLAGS.URTA_FERTILE_EGGS] = player.fertilizedEggs();
 	flags[kFLAGS.URTA_TIMES_EGG_PREGGED]++;
-	flags[kFLAGS.URTA_EGG_INCUBATION] = 72;
+	if (player.findPerk(PerkLib.BeeOvipositor) >= 0)
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 72);
+	else
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
 	flags[kFLAGS.URTA_FLATBELLY_NOTICE] = 0;
 	player.dumpEggs();
 	player.orgasm();
@@ -3755,7 +3807,7 @@ private function fillMeUpPleaseUrta():void {
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	player.slimeFeed();
-	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(player.PREGNANCY_URTA, player.INCUBATION_URTA, 25);
+	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
 	player.orgasm();
 	dynStats("lib", .2, "sen", -3);
 }
@@ -4310,10 +4362,11 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	outputText("\n\nYour mind reels, how many times have you gone through this?  Twelve?  Fifteen?  Hours upon hours lost within these two balls.  Anything either of you try to do simply doesn't work.  Urta's tried masturbating with either hand, then both.  She's tried it in the shower, and though the warm water felt good running over your cage, it was no more useful.  She's tried every possible position, every possible method...");
 
 	outputText("\n\nThere's a knock at the door and you hear a ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("set of hoofsteps");
+	var edrynAvailable:Boolean = !kGAMECLASS.telAdre.edryn.pregnancy.isPregnant;
+	if (edrynAvailable) outputText("set of hoofsteps");
 	else outputText("pair of footsteps");
 	outputText(" enter whatever room you're in. \"<i>Hey, Urta, you haven't shown up for your shift today so...  Great googily moogily!  What happened to you?!</i>\" a voice you ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("recognize as Edryn's");
+	if (edrynAvailable) outputText("recognize as Edryn's");
 	else {
 		if(flags[kFLAGS.MET_OLIVIA] == 0) outputText("recognize as Olivia's");
 		else outputText("don't recognize");
@@ -4321,23 +4374,23 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	outputText(" shouts.");
 
 	outputText("\n\nWait a second...  That's something you haven't tried yet.  You've tried every masturbation technique known to man, but not actual sex!  While Urta's explaining her predicament to her fellow guardsman, you start churning, sloshing this way and that trying to get her as excited as possible.  She gives you a soft slap mid-sentence, then gasps and says, \"<i>Ohhh, I get what you're trying to tell me now.  ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(", I'm going to need your help with this particular problem.</i>\"");
 
 	outputText("\n\nThere's a moment of silence, and then, \"<i>");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("All right, but I'm still charging you for this one");
+	if (edrynAvailable) outputText("All right, but I'm still charging you for this one");
 	else outputText("Uhm, yes Captain, whatever you need");
 	outputText(".</i>\"  You hear armor falling to the ground while Urta rises from wherever she was sitting; you've been all over the house so many times it's hard to keep track of where you are.");
 
 	outputText("\n\nUrta wastes no time sinking her huge horsecock right into ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText("'s cunt, if that wet squelching noise is any indication.  She thrusts all the way in inside in one go, making ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn moan in pleasure");
+	if (edrynAvailable) outputText("Edryn moan in pleasure");
 	else outputText("Olivia shout with surprise");
 	outputText(".  Clearly, Urta's not messing around anymore.  She pulls out and thrusts back in, and with that thrust you sway, slapping into ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText("'s underside.  The contact is electric.  The rough slap would have sent shivers down your spine, if you'd had one.  It makes your body quake and convulse with gusto.");
 
@@ -4355,56 +4408,56 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	outputText("\n\nYou're pulled, whether you want to or not, back up through Urta's cock, no doubt making it bulge obscenely along the way.  It pulses and spasms while your mind reels from the sensations.  You can't tell how long it takes, Urta's cock remains stationary, jerking wildly, cumming you out.  Your perceptions shift ever-so-slightly as what is likely your head seems to be the last to go.  It's uncomfortable and strange, but at least you'll be free of those balls.");
 
 	outputText("\n\nThe last of your ooze-body spurts out with a moist popping sound, and with it comes relief.  Not orgasmic relief, unfortunately, as your body still seems to be in the throes of ecstasy, but relief of being free once again... Except, oh crap.  You forgot that Urta was balls-deep inside ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(".  Your eyes search around, seeing nothing but darkness once more.  You extend your gooey self, trying to tell where you are.  Wherever it is, it's tight... and there seems to be some sort of plug holding you in.");
 
 	outputText("\n\n<b>You're inside ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText("'s womb!</b>");
 
 	outputText("\n\nYou hear a muffled sigh of relief from Urta, followed by the sound of a couch creaking. \"<i>Oh thank Marae</i>\" she says thankfully.  \"<i>Oh damn. Are you going to be able to get out of there?</i>\"  You feel a pair of hands surrounding you, though this time the surge of pleasure you get is much smaller.  Perhaps the thicker walls are to blame.");
 
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(" voices her displeasure, \"<i>What the... I look like I'm pregnant!  With septuplets!</i>\"");
 
 	outputText("\n\nUrta lets out a nervous chuckle.  \"<i>Sorry about that.  But this should be easier to deal with.  ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("All you need to do is push, right?");
+	if (edrynAvailable) outputText("All you need to do is push, right?");
 	else outputText("Let's just sit you back, and then all you need to do is push.");
 	outputText("</i>\"  Your new host grunts in discomfort");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText(", but obliges, sitting back on something, perhaps a bed.  You feel yourself sloshing around oddly as she lies on her back");
+	if (edrynAvailable) outputText(", but obliges, sitting back on something, perhaps a bed.  You feel yourself sloshing around oddly as she lies on her back");
 	outputText(".  \"<i>Now push,</i>\" Urta says, encouragingly.");
 
 	outputText("\n\nYou feel a sudden tightness around you, tighter than even Urta's balls got.  It clenches you, reigniting the pleasurable spark within your body.  The tightness wavers, and with it you hear panting from above, and then it returns just as quickly as it went. Breathe, breathe, push, it goes.  You push yourself towards the exit as well, trying to hurry this along as much as you can.  It takes several minutes, but soon her cervix dialates and you're able to squeeze yourself out, towards a soft pinkish light.");
 
 	outputText("\n\nYou ooze out with every push from ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(".  The first thing out, thankfully is your head.  Bright light greets your eyes, almost stinging them.  You look around, seeing ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn clutching Urta's hand");
+	if (edrynAvailable) outputText("Edryn clutching Urta's hand");
 	else outputText("Olivia lying back on the bed, clutching Urta's hand");
 	outputText(", panting heavily.  You surge outwards, first your shoulders, followed by one arm, and then the next.  The rest of your body comes out like a flood with one last push from your former host, sending you splattering onto the ground beneath you.  An exasperated, but relieved, sigh comes from ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(", one that you share.");
 
 	outputText("\n\nYou take a minute to collect yourself, letting your ooze-like body reform.  Slowly it comes back, naturally returning to its original state.  You twist your neck, spine and joints, relief washing over you.");
 
 	outputText("\n\n\"<i>Look, ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(", it's a ");
 	if(player.gender == 0) outputText("...THING");
 	else outputText(player.mf("boy","girl"));
 	outputText("!</i>\" Urta says with a laugh, clapping her companion on the shoulder.  You chuckle with her, though ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("Olivia");
 	outputText(" doesn't seem to find it as funny.");
 
 	//First time seeing Olivia?)
-	if(flags[kFLAGS.MET_OLIVIA] == 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] != 0) {
+	if(flags[kFLAGS.MET_OLIVIA] == 0 && !edrynAvailable) {
 		outputText("You turn your attentions to your new \"mother,\" sitting panting on the bed.  You've never seen her before, but the armor that sits nearby is similar to Urta's.  You figure she must be Urta's temporary partner while Edryn is on maternity leave.  Olivia's a canine morph, though only slightly.  Her legs end in wolf-like paws, a long fluffy tail sticks out from under her, and a pair of ears perch on top of her head.  As you look at her, she blushes bright scarlet and moves to retrieve her gear, obviously embarrassed to be seen in such a compromising position.");
 		flags[kFLAGS.MET_OLIVIA]++;
 	}
@@ -4415,7 +4468,7 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 		player.cumMultiplier += 10;
 	}
 	outputText("\n\nUrta and ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) outputText("Edryn");
+	if (edrynAvailable) outputText("Edryn");
 	else outputText("a newly dressed Olivia");
 	outputText(" collapse onto the couch, exhausted.  \"<i>Gimme ten minutes, then we'll go on patrol,</i>\"  Urta says waving a hand tiredly.  You grin and take your leave, slipping out the front door and heading back to camp.  The sun blazes high in the sky, around noon, so you've lost about a day stuck inside one person or another.");
 	player.orgasm();

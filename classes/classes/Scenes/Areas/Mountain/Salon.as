@@ -2,11 +2,33 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Salon extends BaseContent{
+	public class Salon extends BaseContent implements TimeAwareInterface {
 
-	public function Salon()
-	{
-	}
+		public function Salon()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			flags[kFLAGS.SALON_PAID] = 0;
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.LYNNETTE_CARRYING_COUNT] == 0 || flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] != 4)
+				{
+					flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE]++;
+				}
+				if (flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] == 7) {
+					flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] = 0;
+				}
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 //const SALON_PAID:int = 441;
 public function hairDresser():void {
@@ -459,7 +481,7 @@ private function minotaurCumBukkakeInSalon():void {
 	outputText(".\n\n", false);
 	//ADD PREG CHECK
 	//Preggers chance!
-	player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR, 70);
+	player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 70);
 
 	outputText("Giggling, you stagger over to the next cock in line and turn around, possessed with the idea of taking its spooge in the most direct way possible – anally.   You pull your butt-cheeks apart and lean back, surprising one of the horny beasts with the warmth of your " + assholeDescript() + " as you slowly relax, spreading over his flare.  He actually squirts ropes of something inside of you, but you've been around minotaurs enough to know that it can't be cum, at least not yet.  The slippery gouts of preseed make it nice and easy to rock back and spear yourself on the first few inches, ", false);
 	if(player.analCapacity() < 80) {

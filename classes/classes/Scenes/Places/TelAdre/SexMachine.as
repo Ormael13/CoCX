@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.TelAdre{
 	import classes.GlobalFlags.kFLAGS;
+	import classes.*;
 
 	public class SexMachine extends TelAdreAbstractContent{
 
@@ -241,16 +242,16 @@ private function useTheSexMachine():void {
 		temp = rand(6);
 		switch(temp) {
 			case 0:
-				player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
+				player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 				break;
 			case 1:
-				player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE);
+				player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 				break;
 			case 2:
-				player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
+				player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 				break;
 			default:
-				player.knockUp(player.PREGNANCY_CENTAUR, player.INCUBATION_CENTAUR);
+				player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
 				break;
 		}
 	}

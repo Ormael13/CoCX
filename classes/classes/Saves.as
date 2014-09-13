@@ -1378,10 +1378,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.clitLength = saveFile.data.clitLength;
 		
 		//Preggo stuff
-		player.pregnancyIncubation = saveFile.data.pregnancyIncubation;
-		player.pregnancyType = saveFile.data.pregnancyType;
-		player.buttPregnancyIncubation = saveFile.data.buttPregnancyIncubation;
-		player.buttPregnancyType = saveFile.data.buttPregnancyType;
+		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation);
+		player.buttKnockUpForce(saveFile.data.buttPregnancyType, saveFile.data.buttPregnancyIncubation);
 		
 		var hasViridianCockSock:Boolean = false;
 
@@ -1832,9 +1830,101 @@ public function unFuckSave():void
 		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
 
+	//Older saves don't have pregnancy types for all impregnable NPCs. Have to correct this.
+	if (flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_PREGNANCY_TYPE] == 0) flags[kFLAGS.AMILY_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
 
+	if (flags[kFLAGS.COTTON_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.COTTON_PREGNANCY_TYPE] == 0) flags[kFLAGS.COTTON_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
 
+	if (flags[kFLAGS.EDRYN_PREGNANCY_TYPE] > 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] == 0) {
+		//EDRYN_PREGNANCY_TYPE was previously EDRYN_BIRF_COUNTDOWN - used when Edryn was pregnant with Taoth
+		if (flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) 
+		   flags[kFLAGS.URTA_FERTILE]            = PregnancyStore.PREGNANCY_PLAYER;          //These two variables are used to store information on the pregnancy Taoth
+		flags[kFLAGS.URTA_PREG_EVERYBODY]        = flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION]; //is overriding (if any), so they can later be restored.
+		flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] = flags[kFLAGS.EDRYN_PREGNANCY_TYPE];
+		flags[kFLAGS.EDRYN_PREGNANCY_TYPE]       = PregnancyStore.PREGNANCY_TAOTH;
+	}
+	else if (flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.EDRYN_PREGNANCY_TYPE] == 0) flags[kFLAGS.EDRYN_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
 
+	if (flags[kFLAGS.EMBER_INCUBATION] > 0 && flags[kFLAGS.EMBER_PREGNANCY_TYPE] == 0) flags[kFLAGS.EMBER_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+
+	if (flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] == 0)
+		flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+
+	if (flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.HELIA_PREGNANCY_TYPE] <= 3) { //HELIA_PREGNANCY_TYPE was previously HEL_PREGNANCY_NOTICES
+		//Since HelSpawn's father is already tracked separately we might as well just use PREGNANCY_PLAYER for all possible pregnancies
+		flags[kFLAGS.HELIA_PREGNANCY_TYPE] = (65536 * flags[kFLAGS.HELIA_PREGNANCY_TYPE]) + PregnancyStore.PREGNANCY_PLAYER;
+	}
+
+	if (flags[kFLAGS.KELLY_INCUBATION] > 0 && flags[kFLAGS.KELLY_PREGNANCY_TYPE] == 0) flags[kFLAGS.KELLY_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+
+	if (flags[kFLAGS.MARBLE_PREGNANCY_TYPE] == 1) flags[kFLAGS.MARBLE_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+	if (flags[kFLAGS.MARBLE_PREGNANCY_TYPE] == 2) flags[kFLAGS.MARBLE_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_OVIELIXIR_EGGS;
+
+	if (flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] > 0 && flags[kFLAGS.PHYLLA_VAGINAL_PREGNANCY_TYPE] == 0) {
+		flags[kFLAGS.PHYLLA_VAGINAL_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_DRIDER_EGGS;
+		flags[kFLAGS.PHYLLA_DRIDER_INCUBATION] *= 24; //Convert pregnancy to days
+	}
+
+	if (flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.SHEILA_PREGNANCY_TYPE] == 0) {
+		flags[kFLAGS.COTTON_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+		if (flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] >= 4)
+			flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] = 0; //Was ready to be born
+		else
+			flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] = 24 * (4 - flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION]); //Convert to hours and count down rather than up
+	}
+
+	if (flags[kFLAGS.SOPHIE_PREGNANCY_TYPE] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] == 0) { //She's in the wild and pregnant with an egg
+		flags[kFLAGS.SOPHIE_INCUBATION] = flags[kFLAGS.SOPHIE_PREGNANCY_TYPE]; //SOPHIE_PREGNANCY_TYPE was previously SOPHIE_WILD_EGG_COUNTDOWN_TIMER 
+		flags[kFLAGS.SOPHIE_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+	}
+	else if (flags[kFLAGS.SOPHIE_PREGNANCY_TYPE] == 0 && flags[kFLAGS.SOPHIE_INCUBATION] > 0) {
+		flags[kFLAGS.SOPHIE_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+	}
+
+	if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
+		flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_TYPE]   = PregnancyStore.PREGNANCY_PLAYER;
+		flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] *= 24; //Convert pregnancy to days
+		flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusAffectv3(StatusAffects.Tamani);
+	}
+
+	if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter)) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
+	if (player.findStatusAffect(StatusAffects.Tamani)) {
+		if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
+			flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
+			flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing
+		}
+		else flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = player.statusAffectv1(StatusAffects.Tamani) * 24; //Convert pregnancy to days
+		flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = player.statusAffectv2(StatusAffects.Tamani);
+		flags[kFLAGS.TAMANI_PREGNANCY_COUNT]     = player.statusAffectv3(StatusAffects.Tamani);
+		flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]   = player.statusAffectv4(StatusAffects.Tamani);
+		if (flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] > 0) flags[kFLAGS.TAMANI_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+		player.removeStatusAffect(StatusAffects.Tamani);
+	}
+
+	if (flags[kFLAGS.EGG_WITCH_TYPE] > 0) {
+		if (flags[kFLAGS.EGG_WITCH_TYPE] == 1)
+			flags[kFLAGS.EGG_WITCH_TYPE] = PregnancyStore.PREGNANCY_BEE_EGGS;
+		else
+			flags[kFLAGS.EGG_WITCH_TYPE] = PregnancyStore.PREGNANCY_DRIDER_EGGS;
+		flags[kFLAGS.EGG_WITCH_COUNTER] = 24 * (8 - flags[kFLAGS.EGG_WITCH_COUNTER]); //Reverse the count and change to hours rather than days
+	}
+
+	if (flags[kFLAGS.URTA_PREGNANCY_TYPE] > 0) { //URTA_PREGNANCY_TYPE was previously URTA_EGG_INCUBATION
+		flags[kFLAGS.URTA_INCUBATION] = flags[kFLAGS.URTA_PREGNANCY_TYPE];
+		if (player.findPerk(PerkLib.SpiderOvipositor) >= 0)
+			flags[kFLAGS.URTA_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_DRIDER_EGGS;
+		else
+			flags[kFLAGS.URTA_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_BEE_EGGS;
+	}
+	else if (flags[kFLAGS.URTA_INCUBATION] > 0) {
+		flags[kFLAGS.URTA_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
+		flags[kFLAGS.URTA_INCUBATION] = 384 - flags[kFLAGS.URTA_INCUBATION]; //Reverse the pregnancy counter since it now counts down rather than up
+	}
+	
+	if (player.buttPregnancyType == 2) player.buttKnockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, player.buttPregnancyIncubation);
+	if (player.buttPregnancyType == 3) player.buttKnockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, player.buttPregnancyIncubation);
+	if (player.buttPregnancyType == 4) player.buttKnockUpForce(PregnancyStore.PREGNANCY_SANDTRAP_FERTILE, player.buttPregnancyIncubation);
+	if (player.buttPregnancyType == 5) player.buttKnockUpForce(PregnancyStore.PREGNANCY_SANDTRAP, player.buttPregnancyIncubation);	
 }
 
 //This is just the save/load code - from it you can get 

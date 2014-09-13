@@ -6,9 +6,11 @@
 	
 	public class SophieFollowerScene extends NPCAwareContent {
 
-	public function SophieFollowerScene()
-	{
-	}
+		public function SophieFollowerScene()
+		{
+		}
+
+		private function get pregnancy():PregnancyStore { return kGAMECLASS.sophieScene.pregnancy; } //Quick way to access sophie's pregnancyStore
 
 //Make Sophie \"smart\" again: Doing the Deed
 //Visit Rathazul and he bitches.

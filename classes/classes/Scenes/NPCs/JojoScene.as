@@ -1,16 +1,43 @@
 ﻿package classes.Scenes.NPCs{
-import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
-import classes.CockTypesEnum;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.StatusAffects;
-import classes.PerkLib;
+	import classes.GlobalFlags.*;
+	import classes.*;
 
-public class JojoScene extends NPCAwareContent {
+	public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
-	public function JojoScene()
-	{
-	}
+		public var pregnancy:PregnancyStore;
+
+		public function JojoScene()
+		{
+			pregnancy = new PregnancyStore(0, 0, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
+			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
+			if (model.time.hours > 23 && player.statusAffectv1(StatusAffects.Meditated) > 0) {
+				player.removeStatusAffect(StatusAffects.Meditated);
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] == 0) {
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102]++;
+					while (player.findStatusAffect(StatusAffects.Meditated) >= 0) {
+						player.removeStatusAffect(StatusAffects.Meditated);
+					}
+				}
+			}
+			if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
+				jojoLaysEggs();
+				return true;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 	protected function set monk(value:Number):void{
 		kGAMECLASS.monk = value;
@@ -147,7 +174,7 @@ public function corruptCampJojo():void {
 	var eggs:Function = null;
 	if(player.canOvipositBee()) eggs = beeEggsInCorruptJojo;
 	if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00332] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
+		if(flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
 		//First time:
 		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] != 0) {
 			milkHim = repeatMilkJojo;
@@ -590,7 +617,7 @@ public function useTentacleJojo():void {
 //Jojo milk payments
 private function jojoMilkPay(tentacle:Boolean = false):void {
 	jojoSprite();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00332] = 4;
+	flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] = 4;
 	outputText("A loud 'ding' chimes and a panel displays ", false);
 
 	//Set temp to liter amount produced.
@@ -1102,7 +1129,7 @@ public function jojoRape():void {
 			}
 			player.cuntChange(3, true);
 			//Preggers chance!
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			//The end
 			if(player.lib > 50 && player.cor > 80) {
 				outputText("\n\n<b>You feel a familiar power growing within you and decide to unleash it.</b>  You grab the prayer beads from his outfit and spit on them, making them slick and wet.  Holding them below his flagging cock, you focus on the demonic visions in your mind, slowly but constantly milking larger and larger dollops of cum onto the once holy beads.  Jojo moans as he comes to understand your intent, and turns around, shaking his lithe mouse-bum at you.  You lean over him, whispering into his ear, \"<i>Each defiled bead I push into you is going to make you more of a willing slut.  More of a willing receptacle for demon cum.  More of a fountain of desire waiting to be tapped by Succubi.  More my toy.</i>\"\n\n", false);
@@ -1189,7 +1216,7 @@ public function jojoRape():void {
 			}
 			outputText("", false);
 			//Preggers chance!
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		if(player.gender == 3) {
 			outputText("You spread your legs and crook your finger, beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling, his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
@@ -1225,7 +1252,7 @@ public function jojoRape():void {
 			}
 			outputText("", false);
 			//Preggers chance!
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		outputText("", false);
 	}
@@ -1255,7 +1282,7 @@ public function jojoRape():void {
 			if(player.cockTotal() == 3) outputText("A multitude of thick cum-streams splatter over Jojo from head to waist as your " + multiCockDescriptLight() + " hose him down.  ", false);
 			outputText("\n\nSatisfied at last, you pull yourself away from the dazed mouse.  His shaft is still swollen with need, his hands irresistibly stroking it, eyes vacant.  You're going to corrupt him so much more next time.\n\n", false);
 			//Preggers chance!
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 	}
 	//First rape;
@@ -1326,7 +1353,7 @@ public function jojoRape():void {
 			monk+=1;
 			
 			//Preggers chance!
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		else if (player.gender == 3) 
 		{
@@ -1424,8 +1451,8 @@ private function beeEggsInCorruptJojo():void {
 	outputText("\n\nYou pull out with a self-satisfied smile, the ovipositor swiftly retracting into your body.  A trickle of golden honey pours from the mouse's abused anus to mix with his puddling spunk.  The relief you feel is palpable - you're light on your [feet] when you climb off him, and Jojo sighs, \"<i>Thank you for the orgasm!</i>\"");
 	
 	outputText("\n\nHe shambles off towards the woods when you dismiss him, his hard cock still dribbling mousey sperm the whole way.  You have to wonder if the eggs are sliding over his prostate with every step he takes?  Oh well, it's no concern of yours.");
-	if(player.fertilizedEggs() > 0 && flags[kFLAGS.JOJO_EGGCUBATE_COUNT] == 0) {
-		flags[kFLAGS.JOJO_EGGCUBATE_COUNT] = 80;
+	if (player.fertilizedEggs() > 0 && !pregnancy.isButtPregnant) {
+		pregnancy.buttKnockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 80);
 	}
 	flags[kFLAGS.TIMES_EGGED_JOJO]++;
 	player.dumpEggs();
@@ -1438,7 +1465,7 @@ public function jojoLaysEggs():void {
 	outputText("\n\nYou watch idly as the mouse gathers up the drizzling honey for lube and smears it over his cock, turning his twitching, orgasmic prick golden.  He pumps faster and faster, squeezing and jerking, moaning in lurid, unrestrained bliss.  Jojo is focused utterly on laying eggs and getting off, or maybe he's just getting off from the act of laying.  He's not even supporting his upper body - he just sits there, face down in the dirt, laying and cumming, laying and cumming.  His eggs are even drizzled with his wasted spunk, a testament to the debauchery of their surrogate 'mother'.");
 	outputText("\n\nThe mouse turns his head to meet your gaze and whimpers, \"<i>Did... did I do a good job?</i>\"");
 	outputText("\n\nYou start to answer, but the exhausted, anal-gaped slut slumps onto his side and starts snoring, exhausted and dripping both white and yellow.  The whole thing makes you feel a little hot under the collar, but there's nothing to do for now but head back to camp.\n");
-	flags[kFLAGS.JOJO_EGGCUBATE_COUNT] = 0;
+	pregnancy.buttKnockUpForce(); //Clear Butt Pregnancy
 }
 
 // JOJO: THE EXPANSIONING

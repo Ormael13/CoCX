@@ -393,7 +393,7 @@ import classes.PerkType;
 		//Someone call the grammar police!
 		//TODO: Move monster status effects into perks. Needs investigation though.
 		public var statusAffects:Array;
-		
+
 		//Constructor
 		public function Creature()
 		{
@@ -408,6 +408,7 @@ import classes.PerkType;
 			//keyItems = new Array();
 		}
 
+		//Functions			
 		public function orgasm():void
 		{
 			game.dynStats("lus=",0,"res",false);
@@ -422,7 +423,6 @@ import classes.PerkType;
 	}
 		}
 
-		//Functions			
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{

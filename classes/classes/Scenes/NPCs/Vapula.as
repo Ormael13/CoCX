@@ -4,11 +4,40 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class Vapula extends NPCAwareContent
+	public class Vapula extends NPCAwareContent implements TimeAwareInterface
 	{
 		public function Vapula()
 		{
+			CoC.timeAwareClassAdd(this);
 		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (model.time.hours > 23) {
+				if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
+					if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
+					else flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+				}
+				if (flags[kFLAGS.VAPULA_FOLLOWER] == .5 || flags[kFLAGS.VAPULA_FOLLOWER] == 1.5) flags[kFLAGS.VAPULA_FOLLOWER]++;
+				flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS]++;
+			}
+			if (vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
+				vapulaGivesPCAPresent();
+				return true;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
+				femaleVapulaRecruitmentPartII();
+				return true;
+			}
+			return false;
+		}
+		//End of Interface Implementation
+		
 		override public function vapulaSlave():Boolean {
 			return flags[kFLAGS.VAPULA_FOLLOWER] == 1;
 
@@ -127,7 +156,7 @@ package classes.Scenes.NPCs
 				//Enable village encounters
 				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 				//Change to plain mouse birth!
-				if (player.pregnancyType == player.PREGNANCY_AMILY) player.pregnancyType = player.PREGNANCY_MOUSE;
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 				//FLAG THAT THIS SHIT WENT DOWN
 				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 				//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.

@@ -106,6 +106,12 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		//Any classes that need to be aware of the passage of time can add themselves to this array using timeAwareAdd.
+		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
+		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
+	
+		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
+	
 		// /
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static

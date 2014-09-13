@@ -2,10 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Niamh extends TelAdreAbstractContent {
-public function Niamh(){
-
-}
+	public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
 //const MET_NIAMH:int = 446;
 //const GOT_NIAMH_BEER:int = 447;
 //const TALKED_NIAMH:int = 448;
@@ -15,6 +12,39 @@ public function Niamh(){
 //const NIAMH_STATUS:int = 450;
 //const NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER:int = 451;
 //const TIMES_NIAMH_BAZAAR_MET:int = 452;
+
+		public function Niamh()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			if (flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] > 1) flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER]--;
+			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] > 1) flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER]--;
+			if (player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) {
+				player.addStatusValue(StatusAffects.BimboChampagne,1,-1);
+				if (player.statusAffectv1(StatusAffects.BimboChampagne) <= 0) {
+					removeBimboChampagne();
+					needNext = true;
+				}
+			}
+			if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
+				player.addStatusValue(StatusAffects.BlackCatBeer,1,-1);
+				if (player.statusAffectv1(StatusAffects.BlackCatBeer) <= 0) {
+					blackCatBeerExpires();
+					needNext = true;
+				}
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 public function telAdreNiamh():void {
 	if(flags[kFLAGS.MET_NIAMH] == 0) {
@@ -863,16 +893,16 @@ private function barBeerOrgyTits():void {
 			temp = rand(6);
 			switch(temp) {
 				case 0:
-					player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
+					player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 					break;
 				case 1:
-					player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE);
+					player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 					break;
 				case 2:
-					player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
+					player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 					break;
 				default:
-					player.knockUp(player.PREGNANCY_CENTAUR, player.INCUBATION_CENTAUR);
+					player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
 					break;
 			}
 		}

@@ -199,10 +199,7 @@ package classes.Scenes.Areas.Forest
 				dynStats("int", -.5);
 				player.slimeFeed();
 				//Anal bee pregnancy!
-				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
-					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
-				}
+				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
 			}
 			//NON TAURS
@@ -224,10 +221,7 @@ package classes.Scenes.Areas.Forest
 				player.orgasm();
 				dynStats("int", -.5);
 				//Anal bee pregnancy!
-				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
-					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
-				}
+				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 			}
 			//non-dicked version
 			else {
@@ -276,10 +270,7 @@ package classes.Scenes.Areas.Forest
 				dynStats("int", -.5);
 				player.slimeFeed();
 				//Anal bee pregnancy!
-				if (rand(3) == 0 && player.buttPregnancyType == 0) {
-					player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
-					player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
-				}
+				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
 			}
 			doNext(15);
@@ -555,10 +546,7 @@ package classes.Scenes.Areas.Forest
 					}
 					dynStats("int", -.5, "lus=", 100);
 					//Anal bee pregnancy!
-					if (player.totalFertility() > rand(100) && player.buttPregnancyType == 0) {
-						player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
-						player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
-					}
+					player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				}
 				player.slimeFeed();
 				cleanupAfterCombat();
@@ -595,10 +583,7 @@ package classes.Scenes.Areas.Forest
 					player.orgasm();
 					dynStats("int", -.5);
 					//Anal bee pregnancy!
-					if (rand(3) == 0 && player.buttPregnancyType == 0) {
-						player.buttPregnancyIncubation = player.INCUBATION_BUTT_BEE;
-						player.buttPregnancyType = player.PREGNANCY_BUTT_BEE;
-					}
+					if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 					player.buttChange(25, true, true, false);
 
 					cleanupAfterCombat();

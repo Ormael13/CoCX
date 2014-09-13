@@ -4,13 +4,10 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.*;
 
-	public class EmberScene extends NPCAwareContent
+	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
-		public function EmberScene()
-		{
-		}
 
 //import flash.media.Video;
 
@@ -59,7 +56,85 @@ package classes.Scenes.NPCs
 
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
+		public var pregnancy:PregnancyStore;
 
+		public function EmberScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.EMBER_PREGNANCY_TYPE, kFLAGS.EMBER_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 270, 200, 180, 100, 75, 48, 15);
+												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6,  7,  8 (< 15)
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			pregnancy.pregnancyAdvance();
+			trace("\nEmber time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (pregnancy.isPregnant) {
+				if (emberPregUpdate()) needNext = true;
+				if (pregnancy.incubation == 0) {
+					emberGivesBirth();
+					pregnancy.knockUpForce(); //Clear Pregnancy
+					needNext = true;
+				}
+			}
+			//Ember fuck cooldown
+			if (player.statusAffectv1(StatusAffects.EmberFuckCooldown) > 0) {
+				player.addStatusValue(StatusAffects.EmberFuckCooldown,1,-1);
+				if (player.statusAffectv1(StatusAffects.EmberFuckCooldown) < 1) player.removeStatusAffect(StatusAffects.EmberFuckCooldown);
+			}
+			//Ember napping
+			if (player.findStatusAffect(StatusAffects.EmberNapping) >= 0) {
+				player.addStatusValue(StatusAffects.EmberNapping,1,-1);
+				if (player.statusAffectv1(StatusAffects.EmberNapping) <= 0) player.removeStatusAffect(StatusAffects.EmberNapping);
+			}
+			if (followerEmber() && player.findStatusAffect(StatusAffects.EmberNapping) < 0) {
+				//Mino cum freakout - PC partly addicted!
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
+					minotaurJizzFreakout();
+					needNext = true;
+				}
+				//Ember is freaking out about addiction, but PC no longer addicted!
+				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
+					emberGetOverFreakingOutAboutMinoJizz();
+					needNext = true;
+				}
+				//At max lust, count up - if ten hours lusty, ember yells at ya!
+				if (player.lust >= 100 && player.gender > 0) {
+					flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
+					if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
+						emberBitchesAtYouAboutLustiness();
+						needNext = true;
+					}
+				}
+				//Reset lust counter if not max lust'ed
+				else flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] = 0;
+			}
+			if (model.time.hours > 23) {
+				if (!player.isPregnant()) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
+				flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 0;
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (player.findStatusAffect(StatusAffects.EmberNapping) < 0 && followerEmber() && player.findStatusAffect(StatusAffects.EmberFuckCooldown) < 0) {
+				//Ember get's a whiff of fuckscent and knocks up PC!
+				if (player.hasVagina() && player.inHeat && player.pregnancyIncubation == 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
+					emberRapesYourHeatness();
+					return true;
+				}
+				else if (player.hasCock() && player.inRut && !pregnancy.isPregnant && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
+					emberRapesYourHeatness();
+					return true;
+				}
+			}
+			return false;
+		}
+		//End of Interface Implementation
+		
 		public function emberAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.EMBER_AFFECTION] += changes;
@@ -133,7 +208,7 @@ package classes.Scenes.NPCs
 			 Spar (fight Ember)*/
 			var egg:Function =null;
 			var milk:Function =null;
-			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0 && flags[kFLAGS.EMBER_GENDER] >= 2 && flags[kFLAGS.EMBER_INCUBATION] == 0) egg = emberIsAnEggFactory;
+			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0 && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
 			if (flags[kFLAGS.EMBER_MILK] > 0) milk = getMilkFromEmber;
 			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
 		}
@@ -873,11 +948,29 @@ package classes.Scenes.NPCs
 				outputText("\n\nA long, scaly, flexible tail lashes behind " + emberMF("him", "her") + ", its final third adorned with small bumps that can extend into vicious-looking spikes.  " + emberMF("His", "Her") + " legs appear humanoid until the feet, where they end in powerful, taloned reptilian claws meant for gripping at the ground.");
 
 				outputText("\n\nEmber is covered from head to toe in shield-shaped scales.  " + emberMF("His", "Her") + " dorsal scales are silver and reflect the light well, while " + emberMF("His", "Her") + " underbelly is a rich golden color that stands in stark contrast.  These metallic-colored scales are large and prominent on Ember's back and the exterior of " + emberMF("his", "her") + " limbs, but, on " + emberMF("his", "her") + " face, the interior of " + emberMF("his", "her") + " limbs and the front of " + emberMF("his", "her") + " body, they are very small and fine, giving them a smooth and silken texture.");
-
+				
 				outputText("  The ");
 				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText("little ");
 				outputText("exposed flesh of Ember's body is a light shade of pink; but flushes when " + emberMF("he", "she") + "'s aroused, drawing your eyes towards " + emberMF("his", "her") + " most sexual parts.");
 
+				switch (pregnancy.event) {
+					case 2: outputText("  At the moment there's a slight pudgyness to her golden belly.");
+							break;
+					case 3: outputText("  Her golden belly is a little larger and firmer than usual.");
+							break;
+					case 4:
+					case 5: outputText("  Her golden belly has grown quite a bit.  Ember often rests her hand on it, especially when she sees you looking at it.");
+							break;
+					case 6: outputText("  Her large pregnant belly has forced Ember to change her posture.  It looks like she has a big golden bullseye painted on her stomach.  Ember looks tired but happy.");
+							break;
+					case 7: outputText("  Her swollen belly is as large as that of any pregnant woman you can remember from Ingnam and you " + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "can easily make out the egg's outline under her golden skin" : "occasionally see movement as the baby shifts in Ember's womb") + ".");
+							break;
+					case 8:
+					case 9: outputText("  Ember's golden belly is stretched taut by the large " + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "egg" : "baby") + " in her womb.  You're sure she'll give birth very soon, there just isn't room for the " + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "egg" : "baby") + " to grow any larger.");
+							break;
+					default:
+				}
+				
 				//(Ember breast check)
 				outputText("\n\nSituated upon " + emberMF("his", "her") + " chest are a pair of ");
 				if (flags[kFLAGS.EMBER_MILK] > 0 || flags[kFLAGS.EMBER_GENDER] >= 2) outputText("F-cup soft, pillowy breasts");
@@ -941,22 +1034,22 @@ package classes.Scenes.NPCs
 		{
 			//Checks for special scenes go here!
 			//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
-			if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS) {
+			if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 				emberBitchesAboutPCBeingFullOfEggs();
 				doNext(13);
 				return;
 			}
-			if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200 && player.pregnancyType != player.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+			if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
 				manEmberBitchesAboutPCPregnancy();
 				doNext(13);
 				return;
 			}
-			if (player.pregnancyIncubation > 0 && player.pregnancyType == player.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
 				emberTalksToPCAboutPCDragoNPregnancy();
 				doNext(13);
 				return;
 			}
-			if (flags[kFLAGS.EMBER_INCUBATION] < 330 && flags[kFLAGS.EMBER_INCUBATION] > 0 && flags[kFLAGS.EMBER_PREGNANT_TALK] == 0) {
+			if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
 				emberIsPregnantFirstTimeTalkScene();
 				doNext(13);
 			}
@@ -1040,13 +1133,13 @@ package classes.Scenes.NPCs
 				if (subChoice == 0) outputText("a whole tribe of imps, just lounging around in a glade, jerking themselves off or squabbling over food.  Nasty little things, but easily dispatched.");
 				else if (subChoice == 1) outputText("a  goblin with a huge pregnant belly, laughing to herself and swilling down that ale they brew, slopping it all over herself.  Little hedonists.");
 				else if (subChoice == 2) outputText("this strange bee-woman creature... she made this, this music that started messing with my head.  I spat a tongue of flames at her and she flew away in fright, luckily.");
-				//(If player has not yet impregnated Tamani)
-				else if (subChoice == 3 && player.statusAffectv1(StatusAffects.Tamani) <= 0 && player.statusAffectv2(StatusAffects.Tamani) <= 0) outputText("one goblin being teased by a bunch of pregnant goblins for not being pregnant yet.  She just spat back that she wanted a 'better catch' to be her baby-maker than a mere imp and wandered off.");
 				//(If player has impregnated Tamani)
-				else if (subChoice == 3) {
+				else if (subChoice == 3 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) {
 					outputText("that green-skinned baby-making whore, Tamani.  She was letting some of her daughters suckle from her and grinning ear to ear as she named the 'prize catch' she got to father them, exhorting them to hunt him down.");
 					if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  You should have more pride than to let some brainless cunt like that have her way with you!");
 				}
+				//(If player has not yet impregnated Tamani)
+				else if (subChoice == 3 && !kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) outputText("one goblin being teased by a bunch of pregnant goblins for not being pregnant yet.  She just spat back that she wanted a 'better catch' to be her baby-maker than a mere imp and wandered off.");
 				//(If Jojo isn't in the camp & not corrupt)
 				else if (rand(2) == 0 && monk <= 1 && player.findStatusAffect(StatusAffects.PureCampJojo) < 0) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
 				else outputText("one glade I touched down in to catch myself a nice brace of plump coneys, when all of a sudden this... this thing made out of flailing vines and fruit attacks me.  It went up in a puff of smoke once I torched it, of course.");
@@ -2258,7 +2351,7 @@ package classes.Scenes.NPCs
 			outputText("  Bunching your muscles, you push up off the ground and against " + emberMF("him", "her") + ", trying to knock the dragon over onto " + emberMF("his", "her") + " back.  As lost in pleasure as " + emberMF("he", "she") + " is, Ember doesn't even try to fight back, going down with a heavy <i>thud</i>.  \"<i>Ah!  Going to take my little dragon for a ride?</i>\" " + emberMF("he", "she") + " gasps at you, too excited to care that " + emberMF("he", "she") + " isn't the one in charge anymore.");
 
 			outputText("\n\nWith a smirk you swivel in Ember's lap, shuddering in delight at the sensations of Ember's dick sliding round inside your depths, until you are face to face with the bucking, writhing dragon.  You reach out and pinch " + emberMF("his", "her") + " nipples, trailing your fingers enticingly down " + emberMF("his", "her") + " ");
-			if (flags[kFLAGS.EMBER_INCUBATION] > 0 && flags[kFLAGS.EMBER_INCUBATION] < 200) {
+			if (pregnancy.event > 3) {
 				if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) outputText("swollen ");
 				else outputText("egg-laden ");
 			}
@@ -2364,7 +2457,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText("scaly");
 			else outputText("soft-skinned");
 			outputText(" lower belly");
-			if (flags[kFLAGS.EMBER_INCUBATION] > 0 && flags[kFLAGS.EMBER_INCUBATION] < 200) outputText(", though the gravid orb resists you");
+			if (pregnancy.event > 3) outputText(", though the gravid orb resists you");
 			outputText(", and discover a surge of pride in you that you got all sixteen inches of it down.");
 
 			outputText("\n\nLooking up to see Ember's reaction, what greets your straining eyes is a slack-jawed, panting dragon, and " + emberMF("he", "she") + "'s looking straight at you.  \"<i>You don't know how sexy you look like this...</i>\"");
@@ -3255,7 +3348,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nSomehow you manage to avoid " + emberMF("his", "her") + " clinging claws and strip off to your undergarments, which Ember promptly bites into, nearly ripping them off your [legs].  Ember flops down on your bedroll, chewing on your undies.  " + emberMF("He", "She") + " spreads her legs invitingly and spits out your - now soaked - underpants.  \"<i>Let's do it on your bed!  It smells so much like you...  Did I say how good you smell?  C'mon, [name]; fuck me dammit!</i>\"");
 			outputText("\n\nYou can't take it anymore and throw yourself at " + emberMF("him", "her") + "; " + emberMF("he", "she") + " wants you so bad?  Well, you want " + emberMF("him", "her") + " just as bad; let's see what " + emberMF("he", "she") + "'ll do with you!");
 			//(if PC and Ember are herms AND not pregnant){
-			if (player.pregnancyIncubation == 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
+			if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
 				outputText("\n\n(Who should bear the kids?)");
 				//[Ember] [You]
 				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", 0, "", 0, "", 0);
@@ -3366,7 +3459,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
-			player.knockUp(player.PREGNANCY_EMBER, player.INCUBATION_EMBER, 1, 1);
+			player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 1, 1);
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));
 		}
@@ -3469,7 +3562,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nFiguring you'll still have some time before Ember's constricting nether lips feel like letting you go, you snuggle close to her for a quick nap of your own...");
 
 			//knock dat phat bitch up.
-			flags[kFLAGS.EMBER_INCUBATION] = 336;
+			pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EMBER);
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
 			player.removeStatusAffect(StatusAffects.Rut);
 			player.orgasm();
@@ -3530,105 +3623,67 @@ package classes.Scenes.NPCs
 			doNext(1);
 		}
 
-		public function emberPregUpdate():Boolean
+		private function emberPregUpdate():Boolean
 		{
 			//trace("EMBER PREG: " + flags[kFLAGS.EMBER_INCUBATION] + "EMBER AFF: " + emberAffection());
-			var pregText:String = "";
-			if (flags[kFLAGS.EMBER_INCUBATION] <= 0) return false;
-			else flags[kFLAGS.EMBER_INCUBATION]--;
-			//Ember's Pregnancy: Egg Laying
-			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
-				if (flags[kFLAGS.EMBER_INCUBATION] == 330) {
-					pregText = "\nEmber's belly seems to be swelling; it looks like your seed took after all. The dragon makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n";
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 270) {
-					pregText = "\nEmber's belly grows ever bigger, making her pregnancy noticeable. She looks very sexy knocked up like that...  You shake your stray thoughts away.\n";
-					dynStats("lus", (5 + player.lib / 10));
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 180) pregText = "\nEmber's grown a lot; anyone can tell she's pregnant with a single glance.  Ember notices you looking.  \"<i>W-what? Never seen a pregnant woman before?</i>\" she asks indignantly, although she can't hide her smile as you continue to look.\n";
-				if (flags[kFLAGS.EMBER_INCUBATION] == 100) pregText = "\nYou hear Ember groan, then sit down.  You rush to her side, asking if she's all right.  \"<i>Yes, I'm fine. Just a bit tired.</i>\"  She reassures you; then takes your hand and presses it against her belly.  You feel something hard and slightly round inside.  \"<i>Can you feel it?  This egg is already much larger than the others.  Proof that your seed took.</i>\" she says, smiling.  You smile back, then excuse yourself.\n";
-				if (flags[kFLAGS.EMBER_INCUBATION] == 75) pregText = "\nEmber just doesn't seem to stop growing.  You approach her and lay a hand on her belly, feeling the ever growing egg inside.  \"<i>This is going to be a pain to pass,</i>\" she says, dreading the task ahead.  \"<i>This is your fault... so I expect you to be here to help me.</i>\" Ember says.  \"<i>Now I need something to eat, I'm hungry.</i>\" Ember says, walking away to feed herself.\n";
-				if (flags[kFLAGS.EMBER_INCUBATION] == 48) pregText = "\nEmber looks very tired; you're surprised she's been so active thus far with such a heavy belly.  You approach her, asking her if she needs anything.  \"<i>Yes... Umm, could you...</i>\" she replies, blushing.  \"<i>Could you rub my belly?  It would help me relax,</i>\" Ember asks.\n\nYou smile and begin rubbing her belly; while doing so you can feel the egg's hard shell stretching Ember.  Ember gives a sigh of relief and begins purring. \"<i>Ah, this feels great,</i>\" she says, happily.  You continue rubbing her belly, until she closes her eyes and begins snoring lightly.  Upon realizing Ember fell asleep you stop and walk away.  Ember must've been really tired...\n";
-				if (flags[kFLAGS.EMBER_INCUBATION] == 15) {
-					pregText = "\n\"<i>[name],</i>\" Ember calls you, from inside her den, where she's laying right now.  You begin approaching her, noticing she looks quite uncomfortable.  As you get closer you notice the reason.";
-
-					//(If Ember lactates.)
-					if (flags[kFLAGS.EMBER_MILK] > 0) {
-						pregText += "\n\nHer breasts look bloated; you think you can see a stream of milk leaking from one of her perky nubs.  \"<i>Help me drain these.</i>\" she says, lifting her milky jugs and letting them fall, making them jiggle enticingly.";
-						pregText += "\n\nYou ask her if she'll have enough for the baby.  \"<i>Of course I will, it won't need any milk.  At least not until it hatches.  It'll take some time until then; and my breasts feel so uncomfortable, so don't question me, just drink it!</i>\" she demands";
-						if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) pregText += ", a blush forming on her cheeks at her request";
-						pregText += ".";
-
-						pregText += "\n\nYou nod and lay down beside her, gently taking one of her nubs inside your mouth, then you begin suckling.  \"<i>Ooooh, yes...  Keep going...  This feels so good,</i>\" she moans, in equal parts pleasure and relief.";
-						pregText += "\n\nYou're happy to oblige, and begin drinking without stopping.  Ember's nutritious milk fills you.  Her breasts have always been full, but this time there's an incredible amount coming out.  She must've been really uncomfortable, and each suckle earns you a jet of milk and a moan of relief from Ember.  You keep at it for a long time; until you've drained one of Ember's ripe tits.";
-						pregText += "\n\nThen you move to the other, intent on doing the same, however you feel very full already; you don't think you'll manage to empty this one.  Ember's moans of pleasure and relief push you on; and you keep drinking regardless, and before you realize it, her other breast has been drained.";
-						pregText += "\n\n\"<i>Ahhh, that feels much better.  I guess you're not too bad at making this feel good.</i>\" she admits";
-						if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) pregText += ",blush softly";
-						pregText += ". You stifle a burp and smile, then return to your duties.\n";
-					}
-					else {
-						pregText += "\n\nHer breasts look bloated, and you think you can see a drop of milk leaking from one of her perky nubs.  \"<i>Help me drain these,</i>\" she says, lifting her milky jugs and letting them fall, making them jiggle enticingly.";
-						pregText += "\n\nYou ask her if she'll have enough for the baby.  \"<i>Of course I will, it won't need any milk.  At least not until it hatches.  It'll take some time until then, and my breasts feel so uncomfortable.  So don't question me, just drink it!</i>\" she demands";
-						if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) pregText += ", a blush forming on her cheeks at her request";
-						pregText += ".";
-						pregText += "\n\nYou nod and lay down beside her, gently taking one of her nubs inside your mouth; then you begin suckling.  \"<i>Ooooh, yes...  Keep going...  This feels so good,</i>\" she moans in equal parts pleasure and relief.";
-
-						pregText += "\n\nYou're happy to oblige, and begin drinking without stopping.  Ember's nutritious milk fills you.  Soon, you've exhausted one of ther breasts, then you move to the other intent on doing the same; however all too soon she's drained and you're left wanting more.";
-						pregText += "\n\n\"<i>Ahhh, that feels much better.  Good job,</i>\" she comments.  You smile back, then return to your duties.\n";
-					}
-					fatigue(-25);
-				}
+			switch (pregnancy.eventTriggered()) {
+				case 1: //
+						outputText("\nEmber's belly seems to be swelling; it looks like your seed took after all.  The dragon makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n");
+						return true;
+				case 2: if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("\nEmber's belly grows ever bigger, making her pregnancy noticeable.  She looks very sexy knocked up like that...  You shake your stray thoughts away.\n");
+						}
+						else {
+							outputText("\nEmber's belly grows ever bigger, making her pregnancy noticeable.  Her swollen midriff suits her well; to be honest she looks pretty sexy like that.\n");
+						}
+						dynStats("lus", (5 + player.lib / 20));
+						return true;
+				case 4: outputText("\nEmber's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
+						if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("Ember notices you looking.  \"<i>W-what? Never seen a pregnant woman before?</i>\" she asks indignantly, although she can't hide her smile as you continue to look.\n");
+						}
+						else {
+							outputText("Ember catches you looking" + (flags[kFLAGS.EMBER_ROUNDFACE] == 1 ? " and blushes" : "") + ".  \"<i>W-what is it?</i>\"  You reply merely that she carries a baby bump very well; she looks good pregnant.  \"<i>Oh, uh...  Thanks I guess?</i>\" she replies, looking away and flicking her tongue out nervously.\n");
+						}
+						return true;
+				case 5: if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("\nYou hear Ember groan, then sit down.  You rush to her side, asking if she's all right.  \"<i>Yes, I'm fine. Just a bit tired.</i>\"  She reassures you; then takes your hand and presses it against her belly.  You feel something hard and slightly round inside.  \"<i>Can you feel it?  This egg is already much larger than the others.  Proof that your seed took.</i>\" she says, smiling.  You smile back, then excuse yourself.\n");
+						}
+						else {
+							outputText("\nEmber is sitting down with a smile, rubbing her belly; you approach and ask if she's feeling well.\n\n\"<i>Yes, both of us are.  I can already feel our baby starting to move.  Do you want to feel it too?</i>\"  You respond that you do, and gently approach her, reaching out to stroke her gravid stomach, feeling the " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "skin") + " already stretched taut over her burgeoning womb.\n\nYou feel what seems to be a small kick under your hand.  A faint hint of paternal pride fills you, and you can't resist rubbing the spot where the baby kicked.  Ember sighs and lets you rub her belly to your heart's content.  Unfortunately duty calls, so you bid Ember farewell and return to your duties.\n");
+						}
+						return true;
+				case 6: if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("\nEmber just doesn't seem to stop growing.  You approach her and lay a hand on her belly, feeling the ever growing egg inside.  \"<i>This is going to be a pain to pass,</i>\" she says, dreading the task ahead.  \"<i>This is your fault... so I expect you to be here to help me.</i>\" Ember says.  \"<i>Now I need something to eat, I'm hungry.</i>\" Ember says, walking away to feed herself.\n");
+						}
+						else {
+							outputText("\nEmber's been getting as moody as her belly is big lately.  She constantly growls at anyone and anything that may approach her, even harmless bugs.  You decide to watch your step around her - pregnant women were scary enough back in Ingnam, and they didn't have razor-sharp teeth or the ability to breathe fire.\n\n\"<i>Something wrong!?</i>\" Ember questions you, glaring at you.  Your point proven, you tell her it's nothing, you were merely thinking of your former home.\n\n\"<i>Well if you have enough time to be reminiscing your past, how about you get over here and give me a hand instead!?  You're responsible for this, after all.</i>\"\n\nYou hasten to help her with whatever minor tasks she thinks she needs you for, until she promptly dismisses you.\n");
+						}
+						return true;
+				case 7: if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("\nEmber looks very tired; you're surprised she's been so active thus far with such a heavy belly.  You approach her, asking her if she needs anything.  \"<i>Yes... Umm, could you...</i>\" she replies, blushing.  \"<i>Could you rub my belly?  It would help me relax,</i>\" Ember asks.\n\nYou smile and begin rubbing her belly; while doing so you can feel the egg's hard shell stretching Ember.  Ember gives a sigh of relief and begins purring. \"<i>Ah, this feels great,</i>\" she says, happily.  You continue rubbing her belly, until she closes her eyes and begins snoring lightly.  Upon realizing Ember fell asleep you stop and walk away.  Ember must've been really tired...\n");
+						}
+						else {
+							outputText("\nEmber's been much less active nowadays, and a single look at her heavily pregnant belly lets you know why.  She is huge!  You're surprised she can even move about with a belly as big as that.  Upon closer inspection you're pretty sure you can see it squirm as the little dragonling explores its limited territory.\n\n\"<i>Hey, [name]. Fetch me some water will you?</i>\"\n\nYou decide to be generous and fetch it for her - you wouldn't be surprised if she's too heavy to get to the stream by herself.  You promptly return with a full skin and present it to her so that she can slake her thirst.\n\nEmber swipes the skin off your hands and chugs it down unceremoniously, sighing in relief once she's done.  \"<i>Ahhh, that hit the spot, thanks.</i>\"  You check to see if there's anything else she needs, but when she confirms she's fine, you nod your head, sneak a quick caress of her swollen stomach, then leave her alone.\n");
+						}
+						return true;
+				case 8: if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
+							outputText("\n\nHer breasts look bloated, and you think you can see a drop of milk leaking from one of her perky nubs.  \"<i>Help me drain these,</i>\" she says, lifting her milky jugs and letting them fall, making them jiggle enticingly.\n\nYou ask her if she'll have enough for the baby.  \"<i>Of course I will, it won't need any milk.  At least not until it hatches.  It'll take some time until then, and my breasts feel so uncomfortable.  So don't question me, just drink it!</i>\" she demands" + (flags[kFLAGS.EMBER_ROUNDFACE] > 0 ? ", a blush forming on her cheeks at her request" : "") + ".\n\nYou nod and lay down beside her, gently taking one of her nubs inside your mouth; then you begin suckling.  \"<i>Ooooh, yes...  Keep going...  This feels so good,</i>\" she moans in equal parts pleasure and relief.\n\nYou're happy to oblige, and begin drinking without stopping.  Ember's nutritious milk fills you.  ");
+							if (flags[kFLAGS.EMBER_MILK] > 0) {
+								outputText("Her breasts have always been full, but this time there's an incredible amount coming out.  She must've been really uncomfortable, and each suckle earns you a jet of milk and a moan of relief from Ember.  You keep at it for a long time; until you've drained one of Ember's ripe tits.\n\nThen you move to the other, intent on doing the same, however you feel very full already; you don't think you'll manage to empty this one.  Ember's moans of pleasure and relief push you on. You keep drinking regardless, and before you realize it, her other breast has been drained.\n\n\"<i>Ahhh, that feels much better.  I guess you're not too bad at making this feel good.</i>\" she admits" + (flags[kFLAGS.EMBER_ROUNDFACE] > 0 ? ", blushing softly" : "") + ". You stifle a burp and smile, then return to your duties.\n");
+							}
+							else {
+								outputText("Soon, you've exhausted one of ther breasts, then you move to the other intent on doing the same; however all too soon she's drained and you're left wanting more.\n\n\"<i>Ahhh, that feels much better.  Good job,</i>\" she comments.  You smile back, then return to your duties.\n");
+							}
+						}
+						else {
+							outputText("\nYou decide to check up on Ember and see how she's been doing.  Once you're close enough she looks at you with tired eyes; clearly she hasn't been getting much sleep lately.  \"<i>[name], perfect timing!  I need you to help me drain my breasts, they're so heavy they hurt.</i>\"\n\nYou look at her breasts; they're so swollen they're at least a cup-size bigger than usual, maybe as much as two.  You can readily believe that she's in pain from carrying so much, and agree to help her out, then ask if she has any particular preferences.\n\n\"<i>Just take care of it... NOW!</i>\" Ember growls.\n\nWith a long-suffering sigh, you seat yourself down beside her, gently lift up one of her milk-bloated breasts, close your lips softly around the nipple, and start to suckle.  At once your efforts are rewarded with a long, strong gush of sweet, cool dragon-milk.  Ember sighs in relief and reaches out to hold your head against her breast.\n\nYou suckle gently, wondering how well Ember will take to nursing a real baby, but simply enjoying being so close to her.  You drink and drink, alternating between breasts, until finally you've vented the worst of the pressure, at the cost of visibly distending your own stomach with the amount of milk you've drunk.  You settle back on your [ass] and stifle a belch, looking at Ember and wondering what she thinks of your efforts to help.\n\nEmber yawns.  \"<i>Good... I feel much better, now I think I need a nap.</i>\"\n\nYou sigh softly, watch as she falls over on her side, belly visibly jiggling as she disturbs the unborn dragon in her womb, and is soon fast asleep.  You clamber back upright and leave her to get some rest; you've a feeling it won't be too long before she gives birth.\n");
+						}
+						fatigue(-25);
+						return true;
+				default:
 			}
-			//Ember's Pregnancy: Live Birth
-			else {
-				if (flags[kFLAGS.EMBER_INCUBATION] == 330) pregText = "\nEmber's belly seems to be swelling; it looks like your seed took after all.  The dragon makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n";
-				if (flags[kFLAGS.EMBER_INCUBATION] == 270) {
-					pregText = "\nEmber's belly grows ever bigger, making her pregnancy noticeable.  Her swollen midriff suits her well; to be honest she looks pretty sexy like that.\n";
-					dynStats("lus", (5 + player.lib / 20));
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 180) {
-					pregText = "\nEmber's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  Ember catches you looking";
-					if (flags[kFLAGS.EMBER_ROUNDFACE] == 1) pregText += " and blush";
-					pregText += ".  \"<i>W-what is it?</i>\"  You reply merely that she carries a baby bump very well; she looks good pregnant.  \"<i>Oh, uh...  Thanks I guess?</i>\" she replies, looking away and flicking her tongue out nervously.\n";
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 100) {
-					pregText += "\nEmber is sitting down with a smile, rubbing her belly; you approach and ask if she's feeling well.";
-					pregText += "\n\n\"<i>Yes, both of us are.  I can already feel our baby starting to move.  Do you want to feel it too?</i>\"  You respond that you do, and gently approach her, reaching out to stroke her gravid stomach, feeling the ";
-					if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) pregText += "scales";
-					else pregText += "skin";
-					pregText += " already stretched taut over her burgeoning womb.";
-
-					pregText += "\n\nYou feel what seems to be a small kick under your hand.  A faint hint of paternal pride fills you, and you can't resist rubbing the spot where the baby kicked.  Ember sighs and lets you rub her belly to your heart's content.  Unfortunately duty calls, so you bid Ember farewell and return to your duties.\n";
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 75) {
-					pregText = "\nEmber's been getting as moody as her belly is big lately.  She constantly growls at anyone and anything that may approach her, even harmless bugs.  You decide to watch your step around her - pregnant women were scary enough back in Ingnam, and they didn't have razor-sharp teeth or the ability to breathe fire.";
-
-					pregText += "\n\n\"<i>Something wrong!?</i>\" Ember questions you, glaring at you.  Your point proven, you tell her it's nothing, you were merely thinking of your former home.";
-					pregText += "\n\n\"<i>Well if you have enough time to be reminiscing your past, how about you get over here and give me a hand instead!?  You're responsible for this, after all.</i>\"";
-					pregText += "\n\nYou hasten to help her with whatever minor tasks she thinks she needs you for, until she promptly dismisses you.\n";
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 48) {
-					pregText = "\nEmber's been much less active nowadays, and a single look at her heavily pregnant belly lets you know why.  She is huge!  You're surprised she can even move about with a belly as big as that.  Upon closer inspection you're pretty sure you can see it squirm as the little dragonling explores its limited territory.";
-					pregText += "\n\n\"<i>Hey, [name]. Fetch me some water will you?</i>\"";
-					pregText += "\n\nYou decide to be generous and fetch it for her - you wouldn't be surprised if she's too heavy to get to the stream by herself.  You promptly return with a full skin and present it to her so that she can slake her thirst.";
-					pregText += "\n\nEmber swipes the skin off your hands and chugs it down unceremoniously, sighing in relief once she's done.  \"<i>Ahhh, that hit the spot, thanks.</i>\"  You check to see if there's anything else she needs, but when she confirms she's fine, you nod your head, sneak a quick caress of her swollen stomach, then leave her alone.\n";
-				}
-				if (flags[kFLAGS.EMBER_INCUBATION] == 15) {
-					pregText = "\nYou decide to check up on Ember and see how she's been doing.  Once you're close enough she looks at you with tired eyes; clearly she hasn't been getting much sleep lately.  \"<i>[name], perfect timing!  I need you to help me drain my breasts, they're so heavy they hurt.</i>\"";
-					pregText += "\n\nYou look at her breasts; they're so swollen they're at least a cup-size bigger than usual, maybe as much as two.  You can readily believe that she's in pain from carrying so much, and agree to help her out, then ask if she has any particular preferences.";
-					pregText += "\n\n\"<i>Just take care of it... NOW!</i>\" Ember growls.";
-					pregText += "\n\nWith a long-suffering sigh, you seat yourself down beside her, gently lift up one of her milk-bloated breasts, close your lips softly around the nipple, and start to suckle.  At once your efforts are rewarded with a long, strong gush of sweet, cool dragon-milk.  Ember sighs in relief and reaches out to hold your head against her breast.";
-					pregText += "\n\nYou suckle gently, wondering how well Ember will take to nursing a real baby, but simply enjoying being so close to her.  You drink and drink, alternating between breasts, until finally you've vented the worst of the pressure, at the cost of visibly distending your own stomach with the amount of milk you've drunk.  You settle back on your [ass] and stifle a belch, looking at Ember and wondering what she thinks of your efforts to help.";
-					pregText += "\n\nEmber yawns.  \"<i>Good... I feel much better, now I think I need a nap.</i>\"";
-					pregText += "\n\nYou sigh softly, watch as she falls over on her side, belly visibly jiggling as she disturbs the unborn dragon in her womb, and is soon fast asleep.  You clamber back upright and leave her to get some rest; you've a feeling it won't be too long before she gives birth.\n";
-					fatigue(-25);
-				}
-			}
-			if (pregText != "") {
-				outputText("" + pregText + "");
-				return true;
-			}
-			return false;
+			return false; //If there's no update then return false so needNext is not set to true
 		}
 
 
@@ -3751,7 +3806,6 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou wake up a short while later.  Ember's breasts are completely drained of their milk, and your belly is bulging a bit from the amount you've drank.  Ember sleeps softly under you.  Gently you extract yourself from Ember's embrace - a difficult task, considering Ember's tail is intent on holding you like a boa constrictor.  Eventually though, you manage to withdraw yourself from its insistent grip and slowly sneak out of the den.\n");
 				flags[kFLAGS.EMBER_EGGS]++;
 			}
-			flags[kFLAGS.EMBER_INCUBATION] = 0;
 			player.createStatusAffect(StatusAffects.EmberNapping, 12, 0, 0, 0);
 		}
 

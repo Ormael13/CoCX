@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.Bazaar{
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PregnancyStore;
 
 	public class Lilium extends BazaarAbstractContent{
 
@@ -202,7 +203,7 @@ private function liliumDickRidah():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)
-	player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
+	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
 	doNext(13);
 }
 
