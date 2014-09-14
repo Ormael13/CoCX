@@ -1242,9 +1242,16 @@ public function benoitFeminise():void
 	if (!player.hasItem(consumables.P_S_MLK, 2) || !player.hasItem(consumables.L_PNKEG) || !player.hasItem(consumables.OVIELIX) || !player.hasItem(consumables.REPTLUM))
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
+		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
+		this.getGame().flushOutputTextToGUI();
 	}
 	else
 	{
+		player.destroyItems(consumables.P_S_MLK, 2);
+		player.destroyItems(consumables.L_PNKEG, 1);
+		player.destroyItems(consumables.OVIELIX, 1);
+		player.destroyItems(consumables.REPTLUM, 1);
+		
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 
 		outputText("\n\n\"<i>I - what?</i>\" the basilisk says, bewildered.  \"<i>But... [name], zat was just fantasy!  I was not expecting you to...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You crack the egg against the bowl and then beat it into the milk; the goop takes on a pink cake-mix texture until you pour in the ovi-elixir, which thins it as well as filling the close market stall with a rather bad, sulfuric smell.  Carefully you drip in the reptilum whilst continuing to stir; eventually the liquid in front of you takes on a livid lime color.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  He slowly clasps his fingers around it, staring blindly into the concoction.");
