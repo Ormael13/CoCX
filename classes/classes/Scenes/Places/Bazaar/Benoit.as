@@ -64,36 +64,43 @@ private function benoitKnocksUpPCCheck():void {
 */
 public function benoitPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] > 0) return true;
 	return false;
 }
 
 public function benoitRegularPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 1 && flags[kFLAGS.FEMOIT_EGGS] <= 4) return true;
 	return false;
 }
 
 public function benoitHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 5 && flags[kFLAGS.FEMOIT_EGGS] <= 8) return true;
 	return false;
 }
 
 public function benoitVeryHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 9 && flags[kFLAGS.FEMOIT_EGGS] <= 12) return true;
 	return false;
 }
 
 public function benoitExtremePreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 13) return true;
 	return false;
 }
 
 public function benoitInClutch():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
+	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
 	var currDay:int = this.getGame().model.time.days;
@@ -268,18 +275,25 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0 && player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
 	{
 		suggest = femoitSexIntro;
 		suggestText = "Sex";
 	}
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS == 0]) womb = tryToConvertToBassyWomb;
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) womb = tryToConvertToBassyWomb;
 
 	var fem:Function;
 
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) fem = benoitFeminise;
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
+	{
+		// Only available if the player hasn't since fucked Benoit after unlocking the option.
+		if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0)
+		{
+			fem = benoitFeminise;
+		}
+	}
 
 	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,suggestText,suggest,"Basil. Womb",womb,"Feminise",fem,"",0,"",0,"",0,"Leave",2855);
 }
@@ -1444,7 +1458,7 @@ public function femoitSexIntro():void
 
 			outputText("\n\nIt's huge and heavy, solid like a rock, the scaly skin stretched so taut over the eggs inside you're certain you can actually feel them through her skin. There are too many of them jam-packed in there to actually move, though, signalling just how remarkably gravid Benoite is.  Your examinations are cut off when Benoite suddenly grinds her ass insistently against your crotch. \"<i>Ze snuggling is nice, lovair, but I am in ze mood for somesing a leetle more... active,</i>\" the basilisk comments, her tone light and airy.");
 
-			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [thighs]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
+			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [hips]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
 
 			outputText("\n\nOne hand continues to trace circles across her egg-laden womb, even as you move the other down to gently cup and squeeze her full bottom, rubbing the base of her tail before creeping down in between her legs. Dampness meets your probing fingers, letting you know your efforts have been reward, and you decide to give Benoite something a little more intense. Your [cock] begins to poke into the she-lizard's luscious ass, making her laugh that oh-so-filthy laugh of hers.  \"<i>And 'ere I sought zat you were just wanting to snuggle?  Well, come on z'en, my lovair; if you sink you know 'ow to use zat properly?</i>\"");
 

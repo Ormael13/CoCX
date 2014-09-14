@@ -373,6 +373,7 @@ private function RaphaelChooseFrisk():void {
 
 //[Accept]
 private function friskAcceptChoice():void {
+	flags[kFLAGS.FUCK_OFF_THEIVING_RAPHAEL] = 1;
 	outputText("", true);
 	outputText("\"<i>Come on then!</i>\" He proclaims before shooting up the wall, extending you his paw. \"<i>Join me! And together we shall paint the forest russet red!</i>\"\n\n", false);
 
@@ -480,9 +481,20 @@ private function RaphaelPicnicEnd():void {
 
 	outputText("He seems so hasty that you'd begin to question it, but your doubt is taken away as the fox takes the time to stare patiently at you from the forest's edge. \"<i>How could I resist, when you're dressed and made so gorgeously?</i>\" He smiles, referring to your elegant red suit.\n\n", false); 
 
-	outputText("A minute of silence follows and just when it has been long enough to reassure you, he throws you something and slips away and vanishes.\n\n", false);
+	if (flags[kFLAGS.FUCK_OFF_THEIVING_RAPHAEL] == 0)
+	{
+		outputText("A minute of silence follows and just when it has been long enough to reassure you, he throws you something and slips away and vanishes.\n\n", false);
 
-	outputText("You catch the object: he has returned the priceless ruby pendant. You recollect yourself and head back to camp.", false);
+		outputText("You catch the object: he has returned the priceless ruby pendant. You recollect yourself and head back to camp.", false);
+	}
+	else
+	{
+		flags[kFLAGS.FUCK_OFF_THEIVING_RAPHAEL] = 0;
+		
+		outputText("A minute of silence follows and just when it has been long enough to reassure you, he makes his excuses and sets about heading back to... whatever it is the sly fox spends his days doing.\n\n", false);
+
+		outputText("You recollect yourself and head back to camp.", false);	
+	}
 	doNext(1);
 }
 

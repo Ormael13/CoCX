@@ -1219,7 +1219,7 @@ public static const SHEILA_DISABLED:int                                         
 public static const SHEILA_PREGNANCY_TYPE:int                                       = 1211;
 public static const KELLY_PREGNANCY_TYPE:int                                        = 1212;
 public static const KELLY_KIDS_MALE:int                                             = 1213; //Tracks number of sons with Kelly. Total number of children is stored in KELLY_KIDS
-public static const UNKNOWN_FLAG_NUMBER_01214:int                                   = 1214;
+public static const FUCK_OFF_THEIVING_RAPHAEL:int                                   = 1214;
 public static const UNKNOWN_FLAG_NUMBER_01215:int                                   = 1215;
 public static const UNKNOWN_FLAG_NUMBER_01216:int                                   = 1216;
 public static const UNKNOWN_FLAG_NUMBER_01217:int                                   = 1217;
