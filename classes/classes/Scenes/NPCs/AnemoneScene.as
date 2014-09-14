@@ -1383,7 +1383,7 @@ package classes.Scenes.NPCs
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.RRAPIER.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.JRAPIER.id) {
 				outputText("\n\nThe rapier is light enough for the girl, but it takes a multitude of reminders before she handles the slender blade with the care and style it deserves.  She seems to regard it as little more than a tool for thwacking you in the butt that, coincidentally, has a pointy end.");
-				//(no effect, senorita)
+				//(no effect, señorita)
 			}
 			//[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id ||

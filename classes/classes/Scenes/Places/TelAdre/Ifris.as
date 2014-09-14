@@ -199,7 +199,7 @@ private function showOffForIfris():void {
 
 			outputText("The moment you lift the weight for the first time, she bends down, rubbing her smooth cheek against your half-turgid member", false);
 			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight(), false);
-			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on it's final steps to full hardness. She groans in desire as she takes your " + cockHead(0) + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
+			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + cockHead(0) + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
 
 			outputText("The sexy little dark-haired devil takes your dick to the ", false);
 			if(player.hasSheath()) outputText("sheath", false);
