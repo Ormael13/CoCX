@@ -35,6 +35,10 @@ package classes.Scenes.Areas.Swamp
 			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", 0, "", 0, "Leave", runFromFSpiderMorph);
 			//Incremement 'times encountered spider-girls'
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00270]++;
+			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
+			}
 		}
 
 		//Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.

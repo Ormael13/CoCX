@@ -22,6 +22,10 @@ package classes.Scenes.Areas.Mountain
 			else outputText("rattling your teeth", false);
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n", false);
 			outputText("Somehow you know this thing isn't going to let you just walk away.", false);
+			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
+			}
 			startCombat(new InfestedHellhound());
 			spriteSelect(27);
 		}

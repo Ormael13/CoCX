@@ -200,7 +200,10 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\n\"<i>Just... help me up,</i>\" a masculine voice asks, between coughs.");
 	
 	outputText("\n\nYou lean down and offer the stranger your shoulder, letting them place their arm across your neck before you stand upright, helping pull them to their feet.  Once the hooded figure is standing, the hood slides of [Arian eir] head, to reveal a reptilian muzzle that could only belong to some sort of lizard.  His scales are white, almost absurdly so, and he takes deep breaths, trying to calm down his coughing fit.");
-	
+	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
+	}	
 	outputText("\n\nOnce it seems like he's calmed down, he looks at you and you gaze at his auburn slitted eyes.  \"<i>Thank you very much.</i>\"  He politely nods at you.  \"<i>Would you mind helping me one more time though?  I'm trying to avoid some people and I'd really appreciate it if you could help me go to a park nearby.</i>\"");
 	
 	outputText("\n\nYou ask him if he's in some kind of trouble first.  \"<i>No, of course not.  My aides are just a tad overprotective, that's all,</i>\" he insists, coughing a bit.");
@@ -740,7 +743,7 @@ private function arianStoryDialogue1():void {
 	outputText("\n\nArian nods.  \"<i>I guess it isn't fair that I'm the only one that gets to hear your stories... but before we start....  How long ago do you think this whole demon trouble started?</i>\"");
 	outputText("\n\nYou shrug your shoulders; ");
 	//PC has met Marae: 
-	if(player.findStatusAffect(StatusAffects.MetMarae) >= 0) outputText("Marae herself told you they showed up about, what, 20-30 years ago?");
+	if(flags[kFLAGS.MET_MARAE] >= 1) outputText("Marae herself told you they showed up about, what, 20-30 years ago?");
 	else outputText("you'd guess a long while ago given the general mess they seem to have made of the world.");
 	
 	outputText("\n\nArian nods.  \"<i>Good guess....  And how old do I look?</i>\"");

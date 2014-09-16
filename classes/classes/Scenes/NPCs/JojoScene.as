@@ -1619,7 +1619,7 @@ public function talkMenu():void
 	addButton(2, "MonksFall", jojoTalkFallOfTheMonks);
 	addButton(3, "Forest", jojoTalkForestConvo);
 	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin);
-	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) addButton(5, "Factory", jojoTalkFactory);
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory);
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave);
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift);
 	addButton(9, "Back", eventParser, 2150);
@@ -1810,7 +1810,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 }
 
 //Dungeon Convo: Factory
-//Requirements: Completed Demon Factory -- player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0
+//Requirements: Completed Demon Factory -- flags[kFLAGS.FACTORY_SHUTDOWN] > 0
 public function jojoTalkFactory():void
 {
 	clearOutput();
@@ -1819,7 +1819,7 @@ public function jojoTalkFactory():void
 
 	outputText("You tell Jojo about your having successfully found and stopped the demonic factory.  You tell him how you found out the factory was there and how you defeated the demons inside. He seems impressed.\n\n");
 
-	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0)
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
 	{
 		outputText("His ears perk at the news as you continue, telling him that you destroyed the factory controls, which permanently shut down the factory - but released an enormous quantity of corrupted fluids into the environment.\n\n");
 

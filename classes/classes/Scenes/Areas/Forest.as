@@ -64,11 +64,8 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
-				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
-				outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
-				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", 13);
-				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ]++;
+			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
+				kGAMECLASS.dungeons.enterDeepCave();
 				return;
 			}
 			//Tamani 20% encounter rate
@@ -267,6 +264,10 @@ package classes.Scenes.Areas
 					else {
 						outputText("An imp leaps out of the bushes and attacks!", true);
 						startCombat(new Imp());
+						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+						}
 					}
 					spriteSelect(29);
 					return;
@@ -291,6 +292,10 @@ package classes.Scenes.Areas
 						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
 						outputText(".</i>\"", false);
 						startCombat(new Goblin());
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
 						spriteSelect(24);
 						return;
 					}
@@ -298,6 +303,10 @@ package classes.Scenes.Areas
 						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
 						outputText("</i>\"", false);
 						startCombat(new Goblin());
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
 						spriteSelect(24);
 						return;
 					}
@@ -590,7 +599,10 @@ package classes.Scenes.Areas
 			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n", false);
 
 			outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.\n\n", false);
-
+			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
+				outputText("<b>New codex entry unlocked: Satyrs!</b>\n\n")
+			}
 			//(Player lacks a penis:
 			if(!player.hasCock()) {
 				outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.", false);

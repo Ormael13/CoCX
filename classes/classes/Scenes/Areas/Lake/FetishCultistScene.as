@@ -25,6 +25,10 @@ package classes.Scenes.Areas.Lake
 		public function fetishCultistEncounter():void
 		{
 			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.", true);
+			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
+			}
 			startCombat(new FetishCultist());
 			spriteSelect(19);
 			doNext(1);

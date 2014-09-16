@@ -1,4 +1,5 @@
 ﻿import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.Items.Consumable;
 
@@ -81,7 +82,8 @@ public function doSystem(eventNo:Number):void {
 			plotFight = false;
 			if (inDungeon) {
 				menuLoc = 0;
-				dungeonRoom(dungeonLoc);
+				kGAMECLASS.dungeons.checkRoom();
+				//dungeonRoom(dungeonLoc);
 				return;
 			}
 			menuLoc = 0;

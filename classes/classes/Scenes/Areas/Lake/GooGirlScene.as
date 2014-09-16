@@ -35,11 +35,15 @@ package classes.Scenes.Areas.Lake
 			outputText("", true);
 			spriteSelect(69);
 			outputText("As you walk around the lake, you notice a pale red light pulsing in the ", false);
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) < 0) outputText("sapphire ", false);
+			if (!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("sapphire ", false);
 			else outputText("murky ", false);
 			outputText("waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ", false);
 			startCombat(new GooGirl());
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!", false);
+			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
+			}
 			doNext(1);
 		}
 

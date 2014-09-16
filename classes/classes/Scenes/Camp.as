@@ -4,7 +4,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Camp.CabinProgress;
 	import classes.Scenes.NPCs.*;
-	import classes.Scenes.Places.Boat.MaraeScene;
+	import classes.Scenes.Dungeons.*;
 
 	import coc.view.MainView;
 
@@ -40,13 +40,16 @@
 		{
 		}
 		
-		public var cabinProgress:CabinProgress = new CabinProgress;
+		public var cabinProgress:CabinProgress = new CabinProgress();
+		public var codex:Codex = new Codex();
+		public var dungeon1:Factory = new Factory();
+		public var dungeon2:DeepCave = new DeepCave();
 		
 //  SLEEP_WITH:int = 701;
 
 public function doCamp():void {
-	//Force autosave on HARDCORE MODE!
-	if (player.slotName != "VOID" && mainView.getButtonText( 0 ) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
+	//Force autosave on HARDCORE MODE! And level-up.
+	if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
 		trace("Autosaving to slot: " + player.slotName);
 		
@@ -79,6 +82,7 @@ public function doCamp():void {
 		fixHistory();
 		return;
 	}
+	fixFlags();
 	if(!marbleScene.marbleFollower())
 	{
 		if(flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
@@ -474,22 +478,22 @@ public function doCamp():void {
 
 
 	if(isabellaFollower()) {
-		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  \n\n", false);
+		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ", false);
 	}
 	//Live in-ness
 	else {
-		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well. \n\n", false);
-		if(model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks. \n\n", false);
+		if(model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.  ", false);
+		if(model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.  ", false);
 		if(model.time.days >= 20) 
 		{
 			if (!isabellaFollower()) outputText("Your new home is as comfy as a camp site can be. ", false);
 			outputText("The fire-pit ", false);
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("is ", false);
 			else outputText("and tent are both ", false);
-			outputText("set up perfectly, and in good repair.\n\n", false);
+			outputText("set up perfectly, and in good repair.  ", false);
 		}
 	}
-	if(model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
+	if(model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the camp's perimeter.\n\n", false);
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("There's an unfinished cabin. It's currently missing window and door.\n\n", false)
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
@@ -1305,7 +1309,7 @@ private function campActions():void {
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin); //Enter cabin for furnish.
-
+	addButton(8, "Read Codex", codex.accessCodexMenu);
 	addButton(9, "Back", eventParser, 1);
 }
 
@@ -1388,7 +1392,7 @@ private function swimInStreamPrank1():void {
 private function swimInStreamFinish():void {
 	outputText("", true);
 	//Blown up factory? Corruption gains.
-	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) 
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) 
 	{
 		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n", false);
 		dynStats("cor", 0.5);
@@ -1905,7 +1909,7 @@ public function places(display:Boolean):Boolean {
 		if (flags[kFLAGS.GAR_NAME] == 0) cathedral = kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork;
 		else cathedral = kGAMECLASS.gargoyle.returnToCathedral;
 	}
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
+	if(flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
 		dungeonsArg = dungeons;
 	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
 		owca = kGAMECLASS.owca.gangbangVillageStuff;
@@ -1920,7 +1924,7 @@ public function places(display:Boolean):Boolean {
 	
 	//Turn on main farm encounter!
 	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
-		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0))) farm = kGAMECLASS.farm.farmExploreEncounter;
+		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) farm = kGAMECLASS.farm.farmExploreEncounter;
 	}
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED])
 	{
@@ -1958,9 +1962,9 @@ private function placesToPage1():void
 private function dungeons():void {
 	menu();
 	//Turn on dungeon 1
-	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(0,"Factory",eventParser,11057);
+	if(flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon);
 	//Turn on dungeon 2
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1,"Deep Cave",eventParser,11076);
+	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1,"Deep Cave", dungeon2.enterDungeon);
 	//Side dungeon
 	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
 	addButton(9,"Back",eventParser,71);
@@ -1989,6 +1993,72 @@ private function exgartuanCampUpdate():void {
 		}		
 	}
 	doNext(1);
+}
+
+private function fixFlags():void {
+	//Marae
+	if (player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0)
+	{
+		flags[kFLAGS.MARAE_QUEST_START] = 1
+		player.removeStatusAffect(StatusAffects.MaraesQuestStart);
+	}
+	if (player.findStatusAffect(StatusAffects.MaraeComplete) >= 0)
+	{
+		flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1
+		player.removeStatusAffect(StatusAffects.MaraeComplete);		
+	}
+	if (player.findStatusAffect(StatusAffects.MaraesLethicite) >= 0)
+	{
+		flags[kFLAGS.MARAE_LETHICITE] = 3
+		player.removeStatusAffect(StatusAffects.MaraesLethicite);
+	}
+	//Factory Demons
+	if (player.findStatusAffect(StatusAffects.FactorySuccubusDefeated) >= 0)
+	{
+		flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
+		player.removeStatusAffect(StatusAffects.FactorySuccubusDefeated);
+	}
+	if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0)
+	{
+		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
+		player.removeStatusAffect(StatusAffects.FactoryIncubusDefeated);
+	}
+	if (player.findStatusAffect(StatusAffects.FactoryOmnibusDefeated) >= 0) 
+	{
+		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
+		player.removeStatusAffect(StatusAffects.FactoryOmnibusDefeated);
+	}
+	//Variables
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0)
+	{
+		flags[kFLAGS.FACTORY_FOUND] = 1;
+		player.removeStatusAffect(StatusAffects.FoundFactory);
+	}
+	if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0)
+	{
+		flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
+		player.removeStatusAffect(StatusAffects.IncubusBribed);
+	}
+	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0)
+	{
+		flags[kFLAGS.FACTORY_SHUTDOWN] = 1;
+		player.removeStatusAffect(StatusAffects.DungeonShutDown);
+	}
+	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0)
+	{
+		flags[kFLAGS.FACTORY_SHUTDOWN] = 2;
+		player.removeStatusAffect(StatusAffects.FactoryOverload);
+	}
+	if (player.findStatusAffect(StatusAffects.TakenLactaid) >= 0)
+	{
+		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusAffectv1(StatusAffects.TakenLactaid))
+		player.removeStatusAffect(StatusAffects.TakenLactaid);
+	}
+	if (player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0)
+	{
+		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusAffectv1(StatusAffects.TakenGroPlus))
+		player.removeStatusAffect(StatusAffects.TakenGroPlus);
+	}
 }
 
 private function fixHistory():void {

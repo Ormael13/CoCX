@@ -90,6 +90,10 @@ package classes.Scenes.Areas
 			//Generic harpy
 			if (chooser == 0) {
 				outputText("A harpy wings out of the sky and attacks!", true);
+				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
+				}
 				startCombat(new Harpy());
 				spriteSelect(26);
 				return;

@@ -37,6 +37,10 @@ public function meetIzmaAtLake():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] == 1) {
 		//(Check PC for worm infestation, if yes then suppress Izma encounter; if no then output:)
 		outputText("Izma sees you coming from a long way off and picks up her locker, moving toward the waterline.  \"<i>Hey...</i>\" she says, cautiously, as you get close.  \"<i>You don't smell like worms anymore... did you get rid of them?</i>\"  You nod, somewhat apologetically.  She looks relieved.  \"<i>That's good.  Truth be told, I missed your company a bit.  So, want to chat, or maybe look at my books?  Or... did you want to do the other thing?  I'm almost always in the mood for that, too,</i>\" Izma says, with a wink.", false);
+		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+		}
 		//(set Izmacounter to 5)
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 5;
 		//Clear 'worms' toggle
@@ -59,7 +63,10 @@ public function meetIzmaAtLake():void {
 		outputText("\"<i>I'm Izma, a tigershark,</i>\" she replies.\n\n", false);
 
 		outputText("\"<i>Tigershark?</i>\" you ask.\n\n", false);
-
+		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+		}
 		outputText("\"<i>It's a mutation among shark-people.  We're stronger, tougher, faster... and we have some other... err, 'qualities' our sisters lack,</i>\" she explains, with a glance to subtly discourage you from probing the matter further.  Instead, you follow up by asking her where she got her books.  \"<i>These?  Scavenged from around the place.  It's so hard to find recorded knowledge around here, and even some of this stuff isn't in great condition... you know?</i>\"  You agree; that meager pile of books in the chest is still the biggest library you've seen ", false);
 		if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("outside the safety of Tel'Adre", false);
 		else outputText("since you arrived", false);
@@ -82,7 +89,10 @@ public function meetIzmaAtLake():void {
 	//[After 3 encounters] (Izmacounter = 4)
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] == 4) {
 		outputText("Your exploration of the lakeshore has brought you to Izma's tiny camp once again.  You greet each other normally, but you can't help but notice Izma seems even more distracted than normal.  \"<i>Hey, uh... we're friends, right?</i>\" Izma asks eventually, winning a nod from you.  The tigershark has given you some good company, which you find a rarity in this world.  \"<i>Good, good.  I, uh, have this 'problem' and I need a friend to help me out with it.</i>\"  At first you surmise she's referring to some sort of errand too far from the lake to do on her own, but once she pulls her grass skirt open you understand full well what her 'problem' is.\n\n", false);
-
+		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+		}
 		outputText("A fifteen-inch-long, semi-erect shaft flops free from Izma's skirt, with a quartet of baseball-sized gonads swinging beneath it.  It seems roughly like a human's in appearance, though the red skin does make for a noticeable difference.  How Izma was hiding that is beyond you.  You can only guess at its girth once it's fully erect...\n\n", false);
 
 		outputText("\"<i>Don't get the wrong idea here, I'm not gonna jump you or anything, I'm just offering.  I mean I could easily catch myself another shark girl or a cultist if I wanted to.  Just... offering, is all,</i>\" Izma says, looking skyward and avoiding eye contact.\n\n", false);
@@ -102,7 +112,10 @@ public function meetIzmaAtLake():void {
 		//[[Encountering Izma after telling her to stay]
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == -1) {
 			outputText("As you stroll along the lake, you find yourself coming across a familiar looking sea-chest.  It looks like you've stumbled into the path of your tigershark lover, Izma, and sure enough, she promptly emerges dripping from the waters of the lake.  She smiles in delighted surprise at seeing you.\n\n", false);
-			
+			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+				outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+			}			
 			outputText("\"<i>" + player.short + "! It's so good to see you!</i>\" she greets, both of you exchanging a quick hug. She sits on a rock beside her trunk, grinning from ear to ear. \"<i>So, what do you want to do today?  Have you thought about bringing your beta with you?</i>\"\n\n", false);
 			//[Shop] [Sex] [Talk] [Camp] [Leave]
 			simpleChoices("Borrow",tradeWithFuckingSharkBitches,"Camp",acceptIzmaAsYourBitch,"Talk",talkToASharkCoochie,"Sex",izmaLakeTurnedDownCampSex,"Leave",leaveSumSharkPussyOnTheBeach);
@@ -284,12 +297,12 @@ private function talkToASharkCoochie():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00232] == 0) {
 		outputText("You sit down on the rocks beside Izma, and the two of you exchange bits of gossip and information. Izma then tells you a strange tale of a mysterious island she's seen on the horizon of the lake, along with a strange smoke-belching shape she's seen on the nearby mountain in the past.  ", false);
 		//(If player hasn't done the Demon Factory quest) 
-		if(player.findStatusAffect(StatusAffects.DungeonShutDown) < 0) outputText("You scratch your chin in thought, feeling that this matter warrants further investigation.", false);
+		if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("You scratch your chin in thought, feeling that this matter warrants further investigation.", false);
 		//(If the player has done the Demon Factory)
 		else outputText("You smile, and detail just what that factory is and what you went on to do in this factory.", false);
 	}
 	//(repeat: factory not cleared)
-	else if(player.findStatusAffect(StatusAffects.DungeonShutDown) < 0) {
+	else if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 		outputText("You sit with Izma and chat a bit more; naturally enough your conversation turns toward the billowy pink smoke from the mountain.  According to her, the smoke's been increasing suspiciously in volume the past few days.  She bemoans her inability to explore it further because of her aquatic nature; you commiserate as best you're able before taking your leave.", false);
 	}
 	//(repeat: factory cleared)
@@ -1570,7 +1583,10 @@ public function izmaFollowerMenu():void {
 
 		outputText("\n\n“<i>What can I do for you, Alpha?</i>”");
 	}
-	
+	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+	}	
 	//[Sex (If lust is 30+)] [Talk] [Appearance]
 	var sex:Function = null;
 	if(player.lust >= 33) sex = izmaSexMenu;

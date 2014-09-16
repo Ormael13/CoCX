@@ -49,7 +49,10 @@ public function encounterRogarSwamp():void {
 	spriteSelect(86);
 	if(flags[kFLAGS.ROGAR_PHASE] == 0) {
 		outputText("While wandering through the swamp you hit a patch of soft ground; struggling with your balance, you topple over and find yourself falling face-first into the sodden peat and breaking through.  With a dissatisfied grunt, you manage to squirm upright in the filth, your mud-covered head and arms breaking the surface of the heavy gunk again.  You can feel the wet seeping through your clothes, making the fabric stick to your form.  Before you can wipe the mess from your eyes, the sound of footsteps squelching through the muck draws near, and soon a rough, green hand grips you by the shoulder and pulls you from the bog.  You cough and sputter to get the filth from your mouth, and a large hand pats your back to help.  Through the coughing, you wipe your eyes enough to make out your 'rescuer'.  There stands a hulking figure with olive green skin; he must be easily over seven feet tall, his bald face eyeing you up and down with an expression of interest.  \"<i>Aww, look at'cha.  Didn't like suckin' dirt?</i>\"  The man teases you through a grin that shows off rows of sharp teeth, complete with small tusks that jut over his upper lip.  Despite the grin and hand patting your back, he is far more intimidating than charming.  His strong, large hands move to rest on his hips just above his ragged shorts, puffing his bare chest out proudly.  Your eyes drop from his grin to pass over the swell of his pectorals and clenched muscle-gut, his bulging abdominals like fat fish swimming beneath a sea of green skin.  Further you look, trailing down his body.  Even his bare legs are thick with muscle, and as your eyes pass over his calves the man's voice rumbles from deep within his chest.  \"<i>Ain't ya seen a orc a'fore?</i>\" Even the laugh following resounds with masculinity.  \"<i>I'm Ro'gar, an' I live in this here swamp.  I've lived here most've m'life.  I used ta wrestle gators 'fore they got harder to find.</i>\"\n\n", false);
- 
+ 		if (flags[kFLAGS.CODEX_ENTRY_ORCS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
+			outputText("<b>New codex entry unlocked: Orcs!</b>\n\n")
+		}	
 		//((Corruption less than 70))
 		if(player.cor < 70) outputText("You nod at him, wiping at the sludge on your body before frowning at yourself.  Ro'gar rumbles thoughtfully, eyeing you over again.  \"<i>My house's over yonder.  Ain't nobody but m'self 'round here, but I kin find ya somethin' to wipe yer face with.</i>\"  Ro'gar offers his friendly smile again, his formidable rows of teeth defeating the gesture.  Though vainly, you try to ignore the teeth and smile back at the generosity.  Ro'gar's thick finger points to the ground.  \"<i>Ya jus' wait right here an' I'll be back,</i>\" he says as he turns, trotting through the mud casually.  Should you really wait for him?\n\n", false);
  
@@ -352,7 +355,10 @@ public function rogarThirdPhase():void {
 	if((player.biggestTitSize() >= 2)) {
 		if(flags[kFLAGS.ROGAR_WARNING] == 0) {
 			outputText("Judging the patron's figure based on how imposingly filled out the cloak is, he or she is clearly very muscled.  You spy a green hand reach for a can and a spark of recognition hits you.  You're completely unsure how to break the ice, but tug on the hem of the cloak.  The figure turns toward you, and you're greeted with the green, toothy smile of Ro'gar, the orc from the swamp!  \"<i>H'lo, " + player.short + "!  I'm s'rprised to see ya here...</i>\"\n\n", false);
-	
+			if (flags[kFLAGS.CODEX_ENTRY_ORCS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
+				outputText("<b>New codex entry unlocked: Orcs!</b>\n\n")
+			}		
 			outputText("You greet him warmly, but he seems a bit nervous around you.  \"<i>Well... after all ya tol' me about yer adventures, I, ah, thought I'd hit the road m'self.  An' so ya find me here.  Good ta see ya again, but I'm just finishin' up my drink afore I head on out.</i>\"  With this, he tips back the contents of his can and flashes you his standard grin, then departs.  He seemed a bit uneasy around you.", false);
 			//set Ro'roh Raggy flag to 1
 			flags[kFLAGS.ROGAR_WARNING] = 1;
@@ -380,6 +386,10 @@ public function rogarThirdPhase():void {
 		else {
 			outputText("you gently tug on the figure's cloak, mentioning aloud that it seemed to have held up alright with your sewing job.  The figure's back straightens sharply and a deep snicker is heard.  \"<i>Ya did a mighty fine job, " + player.short + ".  Been waitin' for ya.</i>\"  Ro'gar turns and grins at you.\n\n", false);
 		}
+		if (flags[kFLAGS.CODEX_ENTRY_ORCS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
+			outputText("<b>New codex entry unlocked: Orcs!</b>\n\n")
+		}	
 		//((Paths combine here))
 		outputText("Returning the grin with your own, you take a seat next to Ro'gar.  \"<i>It was some trip hoofin' it all the way here, but I reckon it was worth it.</i>\"  His deep, familiar tone soothes your mind.  Ro'gar grips the can off the bar and drinks heavily before exhaling loudly, the container thudding as he rests it on the counter. \"<i>Would have dried up in that sun if not fer this here cloak.</i>\"  His head turns to flash a grin from under the hood.  You carefully reach a hand up to pull it back, wanting to see his face.  Ro'gar flushes lime green at that and turns his head away to scratch at his cheek with a calloused finger.", false);
 		//[(if playerskincolor = green)
@@ -434,6 +444,10 @@ public function rogarThirdPhase():void {
 }
 //((Phase four, repeatable; Ro'gar phase flag = 4. Once per day.)) (all edited)
 public function rogarPhaseFour():void {
+	if (flags[kFLAGS.CODEX_ENTRY_ORCS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
+		outputText("<b>New codex entry unlocked: Orcs!</b>\n\n")
+	}	
 	outputText("", true);
 	spriteSelect(86);
 	//(if high femininity or breasts <=B-cup and Ro'roh Raggy = 0)

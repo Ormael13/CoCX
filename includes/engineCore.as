@@ -2025,6 +2025,9 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
 		statEffects += "Uma's Massage - " + player.statusAffectv1(StatusAffects.UmasMassage) + " hours remaining.\n";
+		
+	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
+		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining.\n";
 
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);

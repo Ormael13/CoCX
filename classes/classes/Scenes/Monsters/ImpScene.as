@@ -4,6 +4,7 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Camp.ImpGang;
@@ -1465,6 +1466,10 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			startCombat(new ImpLord());
+			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+			}
 			doNext(1);
 		}
 		

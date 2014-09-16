@@ -28,6 +28,10 @@ package classes.Scenes.Areas.Mountain
 		public function hellhoundEncounter():void
 		{
 			outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out in front of you!", true);
+			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
+			}
 			doNext(1);
 			startCombat(new HellHound());
 			spriteSelect(27);
@@ -187,15 +191,15 @@ package classes.Scenes.Areas.Mountain
 			outputText("", true);
 			//Give a single piece of Lethicite, get hellfire
 			outputText("You produce the pink crystal and hand it to the master.  As the crystal touches his hand, he gives a low growl of pleasure and holds the crystal up to his eyes.  \"<i>Ah yes, excellent!  Thank you so much for this tasty treat of power.</i>\"\n\n", false);
-			//if (PC gave ⅔ Merae's crystal)
-			if (player.keyItemv2("Marae's Lethicite") == 1) {
+			//if (PC gave 2/3 Merae's crystal)
+			if (flags[kFLAGS.MARAE_LETHICITE] == 2) {
 				outputText("He looks at the crystal for a moment, before biting off half of it and giving the other half back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n", false);
-				//Replace ⅔ Merae's Lethicite with regular lethicite.
-				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
+				//Replace 2/3 Merae's Lethicite with regular lethicite.
+				flags[kFLAGS.MARAE_LETHICITE]--;
 			}
 			else {
 				//Remove 1 lethicite crystal from the PC
-				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
+				flags[kFLAGS.MARAE_LETHICITE]--;
 			}
 			outputText("He rolls the crystal around in his mouth for a few moments before swallowing the crystal.  In a moment, white flames rise up around his body, and he gives you a wicked grin.  \"<i>Now, let me give you the gift promised for this tribute.</i>\"\n\n", false);
 

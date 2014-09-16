@@ -60,6 +60,10 @@ package classes.Scenes.Areas.Forest
 				simpleChoices("Fight", 2060, "Talk", beeTalk, "Seduce", 0, "", 0, "Leave", 13);
 			}
 			else beeEncounterLevel3(false);
+			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
+			}
 		}
 
 		private function beeEncounterLevel3(clearScreen:Boolean=true):void

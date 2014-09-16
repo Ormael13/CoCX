@@ -2,29 +2,31 @@ package classes.Scenes.Dungeons.Factory
 {
 	import classes.*;
 	import classes.Scenes.Monsters.AbstractSuccubus;
+	import classes.Scenes.Dungeons.Factory;
 	import classes.internals.*;
 
-	public class SecretarialSuccubus extends AbstractSuccubus {
+	public class SecretarialSuccubus extends AbstractSuccubus 
+	{
+		public var factory:Factory = new Factory()
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.gender > 0){
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					game.dynStats("lus", 1);
-					var temp2:int = 0;
-					if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
-					game.simpleChoices("Yes", 11023, "Dildo Rape", temp2, "", 0, "", 0, "No", game.cleanupAfterCombat);
+					game.simpleChoices("Yes", factory.doRapeSuccubus, "", 0, "", 0, "", 0, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else if (player.lust>=33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
 					game.dynStats("lus", 1);
-					temp2 = 0;
-					if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
-					game.simpleChoices("Yes",11023,"Dildo Rape",temp2,"",0,"",0,"No",game.cleanupAfterCombat);
+					game.simpleChoices("Yes", factory.doRapeSuccubus, "", 0, "", 0, "", 0, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else {
-					game.finishCombat();
+					doNext(factory.doLeaveSuccubus);
 				}
 			} else {
-				game.finishCombat();
+				doNext(factory.doLeaveSuccubus);
 			}
 		}
 
@@ -34,7 +36,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.eventParser(11024);
+				doNext(factory.doLossSuccubus);
 			}
 		}
 

@@ -526,6 +526,10 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		if (rand(30) + player.inte / 5 > 18)
 		{
 			outputText("You spot a shadow moving and spin around to see a minotaur lumbering after you from the back of the cave!", false);
+			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Minotaurs!</b>")
+			}
 			startCombat(new Minotaur());
 			return;
 		}
@@ -871,7 +875,7 @@ private function minoAddictionBadEnd2():void {
 	
 	outputText("There's a whole village of minotaurs here!  Twenty or thirty cave openings are tunneled into the mountain, and an equal number of crude huts are built on the surrounding ledge.  You aren't looking at that way  – your eyes are riveted by what you see between the two sets of structures.  There are five of the shaggy beast-men gathered around a fire-pit, roasting some animal and relaxing.  Two of them are vigorously fucking tiny minotaur-like beings with feminine features, spearing their much shorter brethren on their mammoth shafts.  The look on the faces of the 'minitaurs' is one you know well, the pure ecstasy of indulging a potent addiction.\n\n", false);
 	
-	if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+	if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 		outputText("A third beast has a human-looking victim suspended by her ankles and is roughly fucking her throat.   Her eyes are rolled back, though whether from pleasure or lack of oxygen you're not sure.  A pair of beach-ball-sized breasts bounces on her chest, and a cock big enough to dwarf the minotaur's flops about weakly, dribbling a constant stream of liquid.  She must be one of the slaves that escaped from the factory, though it doesn't look like her life has improved much since her escape.\n\n", false);
 	}
 	

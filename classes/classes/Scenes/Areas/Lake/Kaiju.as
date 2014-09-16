@@ -27,7 +27,7 @@ public function kaijuMeeting():void {
 		addButton(1,"No",noMeetingKaijus);
 	}
 	else {
-		if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0 && !kaijuCock()) kaijuGrowsWangus();
+		if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && !kaijuCock()) kaijuGrowsWangus();
 		else if(flags[kFLAGS.KAIJU_BAD_END_COUNTER] >= 5) kaijuBadEndToyBOOSH();
 		else repeatKaijuEncounter();
 	}
@@ -50,7 +50,7 @@ private function meetDatKaijuYo():void {
 	clearOutput();
 	spriteSelect(103);
 	flags[kFLAGS.KAIJU_MEETINGS] = 1;
-	if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) flags[kFLAGS.KAIJU_COCK] = 1;
+	if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) flags[kFLAGS.KAIJU_COCK] = 1;
 	outputText("You step up onto the hill and slowly make your way to the top.  The rock seems to be unnaturally symmetrical, more like a large upside down oval.  Walking around, there seems to be little of interest to explore here.  You decide to head back for the boat when suddenly the island shifts and you are nearly knocked off your feet.  You look around, wondering if it was an earthquake or an attack when suddenly the island begins shaking violently.  You run for the boat, practically falling in as you almost lose your footing.  The island seems to be rising out of the water rapidly, until towering above you is a massive terrapin girl!  What you had mistaken for an island was really a large turtle shell!");
 	
 	outputText("\n\nShe takes in a tremendous gulp of air before stretching, arching her back as far her shell will let her while her green hands flutter near her monumental rack.  You take in the sight of the green giantess, from her wet yet curly red locks of hair, to her dark green, her almost black lips, her massive mammaries which she’s currently fondling quite lewdly, to the hard turtle shell, the front of which covers her belly yet supports her exposed breasts like some kind of perverse hard corset.  She pinches a pert nipple, cooing in pleasure before finally opening her eyes and taking notice of you.");
@@ -479,7 +479,7 @@ private function talkToKaiju():void {
 		
 		outputText("\n\nHer body seems to quiver in delight as she continues on.  \"<i>I'm not sure why they want to taint the waters or what it is they use, but I found the spot where the corruption enters the lake and is the strongest.  I go there daily to absorb the warmth and delicious taint of those chemicals.  It increased my lust, and over time my size.</i>\"");
 		//[If factory has been shut down and Marae was left uncorrupted]
-		if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.findStatusAffect(StatusAffects.FactoryOverload) < 0) outputText("  But the flow of yummy fluids seems to have been stopped.");
+		if(flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("  But the flow of yummy fluids seems to have been stopped.");
 		//[If the Factory was shut down and Marae corrupted]
 		else if(kaijuCock()) outputText("  But the pouring of liquids has been stopped for some reason, but not before there was one final, huge burst of tainted fluids. It was so strong and changed me even further, making me grow this,</i>\" she says as she rises further out of the lake's waters, revealing a large green cock.");
 		

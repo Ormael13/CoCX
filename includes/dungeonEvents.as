@@ -1,6 +1,7 @@
 ﻿//Dungeon events from 11000+
 public function doDungeon(eventNo:Number):void {
-	if(eventNo == 11000) dungeonLoc = 0;
+	//FACTORY
+	/*if(eventNo == 11000) dungeonLoc = 0;
 	if(eventNo == 11001) {
 		if(player.hasKeyItem("Iron Key") < 0) {
 			outputText("The door is locked with a key that is not in your possession.", true);
@@ -897,8 +898,9 @@ public function doDungeon(eventNo:Number):void {
 		startCombat(new SecretarialSuccubus(),true);
 		monster.armorDef -= 10;
 		return;
-	}
-	if(eventNo == 11066) dungeonLoc = 10;
+	}*/
+	//DUNGEON 2
+	/*if(eventNo == 11066) dungeonLoc = 10;
 	if(eventNo == 11067) dungeonLoc = 11;
 	if(eventNo == 11068) dungeonLoc = 12;
 	if(eventNo == 11069) dungeonLoc = 13;
@@ -964,7 +966,8 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11083) {
 		loseToThisShitPartII();
 		return;
-	}
+	}*/
+	
 	if(eventNo == 11084) dungeonLoc = 17;
 	if(eventNo == 11085) dungeonLoc = 18;
 	if(eventNo == 11086) dungeonLoc = 19;

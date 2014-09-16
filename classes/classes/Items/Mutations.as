@@ -7681,7 +7681,7 @@
 			//Increase HP by quite a bit!)
 			//(Slight chance at increasing Toughness?)
 			//(If lake has been tainted, +1 Corruption?)
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) dynStats("cor", 0.5);
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) dynStats("cor", 0.5);
 			dynStats("cor", 0.1);
 			HPChange(Math.round(player.maxHP() * .25), false);
 			player.refillHunger(30);

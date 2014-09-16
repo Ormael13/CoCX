@@ -56,6 +56,10 @@ package classes.Scenes.Monsters
 				//[Initiate combat encounter – goblin assassin]
 			}
 			flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN]++;
+			if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+			}
 			startCombat(new GoblinAssassin());
 		}
 

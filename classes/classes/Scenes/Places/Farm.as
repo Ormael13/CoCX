@@ -42,6 +42,13 @@ public function farmExploreEncounter():void {
 		doNext(13);
 		return;
 	}
+	if (flags[kFLAGS.FARM_DISABLED] == 2)
+	{
+		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.", true);
+		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Kelt you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
+		doNext(13);
+		return;
+	}	
 	
 	var temporary:Number = 0;
 	//Farm not yet discovered
@@ -63,7 +70,13 @@ public function farmExploreEncounter():void {
 	else {
 		spriteSelect(62);
 		
-		
+		if (flags[kFLAGS.KELT_KILLED] >= 1) {
+			outputText("As soon as you head to the farm, Whitney comes storming up to meet you.  \"<i>What the fuck have you done?!</i>\"", true);
+			outputText("\n\nYou hold your hands up, knowing full-well what the angry bitch is on about. She angrily says \"<i>You've fucking killed Kelt the centaur! He may be rude and I don't like him but still, what you've done is wrong. You're not welcome on my farm anymore! Leave. <b>Now.</b></i>\"");
+			flags[kFLAGS.FARM_DISABLED] = 2;
+			doNext(13);
+			return;
+		}
 		if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
 			clearOutput();
 			outputText("As soon as you head to the farm, Whitney comes storming up to meet you.  \"<i>What in tarnation do you think you're pulling?!</i>\"");
@@ -81,7 +94,7 @@ public function farmExploreEncounter():void {
 		var milkJojo:Number = 0;
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
-		if(player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0) {
+		if(player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0 && flags[kFLAGS.KELT_KILLED] <= 0) {
 			if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
 			else addButton(1,"Kelt",kelly.breakingKeltOptions);
 		}
@@ -224,7 +237,7 @@ private function talkWhitney():void {
 	}
 	
 	// Requires: PC cleared Factory
-	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && flags[kFLAGS.WHITNEY_TALK_DUNGEON] == 0 && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 1)
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.WHITNEY_TALK_DUNGEON] == 0 && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 1)
 	{
 		flags[kFLAGS.WHITNEY_TALK_DUNGEON] = 1;
 		
@@ -312,7 +325,7 @@ private function talkWhitney():void {
 	outputText("You tell her of your recent trials and tribulations ", false);
 	if(player.cor > 50) outputText("or at least the parts you think she would want to hear ", false);
 	outputText("and she listens attentively, chiming in with witty quips and comfort when appropriate.  When you finish she tells you ", false);
-	if(player.findStatusAffect(StatusAffects.FactoryOverload) < 0) outputText("how well the farm has been going", false);
+	if(!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("how well the farm has been going", false);
 	else outputText("how poorly the farm has been going since the lake became tainted.  She has to work three times as hard to keep her livestock and crops from succumbing to the taint, and the demons and monsters of the forest are many times more bold", false);
 	outputText(".  It feels good to get a chance to talk with another sane individual, but before long Whitney has to return to work, and you should check back on your camp.", false);
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.

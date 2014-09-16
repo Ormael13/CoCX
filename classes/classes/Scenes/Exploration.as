@@ -163,6 +163,10 @@ package classes.Scenes
 						}
 						else {
 							outputText("An imp wings out of the sky and attacks!", true);
+							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+							}
 							startCombat(new Imp());
 							spriteSelect(29);
 						}
@@ -176,15 +180,21 @@ package classes.Scenes
 							return;
 						}
 						if (player.gender > 0) {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
-							outputText(".</i>\"", false);
+							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
+							if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+							}
 							startCombat(new Goblin());
 							spriteSelect(24);
 							return;
 						}
 						else {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
-							outputText("</i>\"", false);
+							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
+							if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+							}
 							startCombat(new Goblin());
 							spriteSelect(24);
 							return;

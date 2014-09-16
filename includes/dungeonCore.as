@@ -34,7 +34,8 @@
 		mainView.statsView.showLevelUp();
 	}
 	//Entry Room
-	if(roomNo == 0) {
+	
+	/*if(roomNo == 0) {
 		outputText("<b><u>The Factory Foyer</u></b>\nThe door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", true);
 		choice1 = 11001;
 		text1 = "North";
@@ -287,10 +288,10 @@
 			text4 = "GroPlus";
 			choice4 = 11061;
 		}
-	}
+	}*/
 	//UNUSED room 9
 	//DUNGEON 2 START: ROOM 10
-	if(roomNo == 10) {
+	/*if(roomNo == 10) {
 		outputText("<b><u>The Cave Entrance</u></b>\n", true);
 		outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.", false);
 		
@@ -450,7 +451,7 @@
 			text2 = "East";
 			choice2 = 11071;
 		}
-	}
+	}*/
 	//HELIA DUNGEONNNNNOOOO 1
 	if(roomNo == 17) {
 		//ROOM 1: Guard Hall
@@ -1374,7 +1375,7 @@ public function omnibusVictoryEvent():void {
 		outputText("\"<i>Please, if you'll let me go I could use my magics to give you nearly anything you want!  Just please don't tell the other demons what happened here, I'd never live it down,</i>\" she begs.\n\n", false);
 	}
 	outputText("What do you do?  You could use her boon increase the size of your endowments or maybe regain some of your lost humanity!  Or you could play it safe and turn down her offer.  Although then you'd have to decide to let her go or kill her.", false);
-	choices("GrowBreasts",11048,"GrowDick",11049,"Normal-Face",11050,"Normal-Chest",11051,"Normal-Groin",11052,"Normal-Legs",11053,"",0,"",0,"No (Let go)",11054, "No (Kill Her)",11056);
+	choices("Grow Breasts",11048,"Grow Dick",11049,"Normal Face",11050,"Normal Chest",11051,"Normal Groin",11052,"Normal Legs",11053,"",0,"",0,"No (Let go)",11054, "No (Kill Her)",11056);
 }
 public function omnibusLossRape():void {
 	outputText("", true);

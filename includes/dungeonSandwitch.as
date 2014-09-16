@@ -1014,7 +1014,7 @@ public function beACumPumpPartII():void {
 public function cumPumpVolumeThree():void {
 	clearOutput();
 	outputText("With the champion brainwashed into a little more than a loyal cum-pump for the sand witches, they grow in number and strength with alarming speed.  In the space of eight years, the desert is transformed into a verdant forest.  For better or for worse, the witches finally rival the demons in power.  They spread their influence wider, eventually ");
-	if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) outputText("destroying");
+	if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("destroying");
 	else outputText("rescuing");
 	outputText(" Marae.  Their abilities, numbers, and familiarity at dealing with demons lend them great success at battling Lethice's growing hordes, and within the span of another decade, the demons are exterminated.  The witches are hailed as saviors, and young females of all races seek to join them.  You, of course, inseminate all of them.");
 	

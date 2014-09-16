@@ -13,6 +13,7 @@ package classes.Scenes
 	import classes.Items.ArmorLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.JewelryLib;
+	import classes.Scenes.Dungeons.DungeonEngine;
 	//import classes.Scenes.Camp;
 
 	use namespace kGAMECLASS;
@@ -43,6 +44,7 @@ package classes.Scenes
 		
 		
 public function doItems(eventNo:Number):void {
+	var exitDestination:* = 1;
 	var temp1:* = 0;
 	var temp2:* = 0;
 	var temp3:* = 0;
@@ -53,7 +55,12 @@ public function doItems(eventNo:Number):void {
 	var ember:* = 0;
 	var fuckPlant:* = 0;
 	var plantT:String = "Plant";
-	if(eventNo == 1000) {
+	if (inDungeon) {
+		var dungeons:DungeonEngine = new DungeonEngine();
+		exitDestination = dungeons.checkRoom;
+	}
+	if (eventNo == 1000) {
+	
 		itemSwapping = false;
 		hideUpDown();
 		if(itemSlot1.quantity > 0) temp1 = createCallBackFunction(useItemInInventory,itemSlot1);
@@ -101,7 +108,7 @@ public function doItems(eventNo:Number):void {
 		}
 		outputText("\nWhich item will you use?", false);
 		if(gameState == 1) choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 5000);
-		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "Unequip", manageEquipment, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
+		else choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.itype.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5, "Unequip", manageEquipment, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", exitDestination);
 		menuLoc = 1;
 	}
 	//Auburn Dyes
@@ -446,8 +453,9 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1060) {
 		spriteSelect(49);
 		outputText("Rathazul nods and produces a mallet and chisel from his robes.  With surprisingly steady hands for one so old, he holds the chisel against the crystal and taps it, easily cracking off a large shard.  Rathazul gathers it into his hands before slamming it down into the dirt, until only the smallest tip of the crystal is visible.  He produces vials of various substances from his robe, as if by magic, and begins pouring them over the crystal.  In a few seconds, he finishes, and runs back towards his equipment.\n\n\"<i>You may want to take a step back,</i>\" he warns, but before you have a chance to do anything, a thick trunk covered in thorny vines erupts from the ground.  Thousands of vine-like branches split off the main trunk as it reaches thirty feet in the air, radiating away from the trunk and intertwining with their neighbors as they curve back towards the ground.  In the span of a few minutes, your camp gained a thorn tree and a thick mesh of barbed vines preventing access from above.", true);
-		player.createStatusAffect(StatusAffects.DefenseCanopy,0,0,0,0);
-		player.addStatusValue(StatusAffects.MaraesLethicite,2,1);
+		player.createStatusAffect(StatusAffects.DefenseCanopy, 0, 0, 0, 0);
+		flags[kFLAGS.MARAE_LETHICITE]--;
+		//player.addStatusValue(StatusAffects.MaraesLethicite,2,1);
 		doNext(1);
 	}
 	//Refuse to use lethicite for thorns
@@ -691,7 +699,7 @@ public function doItems(eventNo:Number):void {
 				return;
 			}
 			if(menuLoc == 16) {
-				doNext(2642);
+				doNext(kGAMECLASS.dungeons.deepcave.incubusShop);
 				return;
 			}
 			if(menuLoc == 17) {
@@ -881,7 +889,7 @@ public function doItems(eventNo:Number):void {
 			}
 			else if (menuLoc == 16)
 			{
-				abandon =  2642;
+				abandon =  kGAMECLASS.dungeons.deepcave.incubusShop;
 			}
 			else if (menuLoc == 17)
 			{

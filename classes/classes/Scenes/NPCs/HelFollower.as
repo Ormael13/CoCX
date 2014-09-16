@@ -499,6 +499,10 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		//Threesomes
 		//Take a Bath
 		//Appearance
+		if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] <= 0) { //Force unlock for existing saves who still have Helia as lover.
+			flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] = 1;
+			outputText("\n\n<b>New codex entry unlocked: Salamanders!</b>")
+		}
 		addButton(0,"Appearance",helSpawnScene.heliasAppearanceScreen);
 		addButton(1,"Sex",heliaRoughSex);
 		addButton(2,"Threesomes",heliaThreesomes);

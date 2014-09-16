@@ -460,11 +460,12 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5035) {
 		var textChoices:Number = rand(4);
 		if (!this.testingBlockExiting) {
-			if (textChoices == 0) outputText("\n\n<b>GAME OVER</b>", false);
-			if (textChoices == 1) outputText("\n\n<b>Game over, man! Game over!</b>", false);
-			if (textChoices == 2) outputText("\n\n<b>You just got Bad Ended!</b>", false);
-			if (textChoices == 3) outputText("\n\n<b>Your adventures have came to an end...</b>", false);
-			
+			outputText("\n\n<font color=\"#7F0000\">", false)
+			if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
+			if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
+			if (textChoices == 2) outputText("<b>You just got Bad Ended!</b>", false);
+			if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>", false);
+			outputText("</font>", false)
 			//Delete save on hardcore.
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
@@ -1032,6 +1033,7 @@ public function doCombat(eventNum:Number):void
 			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.2;
 			damage = doDamage(damage);
 			monster.lust -= 20;
 			if (monster.lust < 0) monster.lust = 0;
@@ -5299,7 +5301,7 @@ public function physicalSpecials():void {
 		b2T = "Bite";
 	}
 	//Bow attack
-	if(player.hasKeyItem("Bow") >= 0) {
+	if(player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow")) {
 		butt3 = 5079;
 		b3T = "Bow";
 	}

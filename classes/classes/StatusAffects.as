@@ -40,7 +40,6 @@ package classes
 		public static const DogWarning:StatusAffectType = mk("dog warning");
 		public static const DragonBreathBoost:StatusAffectType = mk("Dragon Breath Boost");
 		public static const DragonBreathCooldown:StatusAffectType = mk("Dragon Breath Cooldown");
-		public static const DungeonShutDown:StatusAffectType = mk("DungeonShutDown");
 		public static const Dysfunction:StatusAffectType = mk("dysfunction");
 		public static const Edryn:StatusAffectType = mk("Edryn");
 		public static const Eggchest:StatusAffectType = mk("eggchest");
@@ -50,10 +49,6 @@ package classes
 		public static const EverRapedJojo:StatusAffectType = mk("Ever Raped Jojo");
 		public static const Exgartuan:StatusAffectType = mk("Exgartuan");
 		public static const ExploredDeepwoods:StatusAffectType = mk("exploredDeepwoods");
-		public static const FactoryOmnibusDefeated:StatusAffectType = mk("FactoryOmnibusDefeated");
-		public static const FactoryOverload:StatusAffectType = mk("FactoryOverload");
-		public static const FactoryIncubusDefeated:StatusAffectType = mk("FactoryIncubusDefeated");
-		public static const FactorySuccubusDefeated:StatusAffectType = mk("FactorySuccubusDefeated");
 		public static const FaerieFemFuck:StatusAffectType = mk("Faerie Fem Fuck");
 		public static const FaerieFucked:StatusAffectType = mk("Faerie Fucked");
 		public static const FappedGenderless:StatusAffectType = mk("fapped genderless");
@@ -102,9 +97,6 @@ package classes
 		public static const LustStickApplied:StatusAffectType = mk("Lust Stick Applied");
 		public static const LustyTongue:StatusAffectType = mk("LustyTongue");
 		public static const MalonVisitedPostAddiction:StatusAffectType = mk("Malon Visited Post Addiction");
-		public static const MaraeComplete:StatusAffectType = mk("Marae Complete");
-		public static const MaraesLethicite:StatusAffectType = mk("Marae's Lethicite");
-		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start");
 		public static const Marble:StatusAffectType = mk("Marble");
 		public static const MarbleHasItem:StatusAffectType = mk("MarbleHasItem");
 		public static const MarbleItemCooldown:StatusAffectType = mk("MarbleItemCooldown");
@@ -115,8 +107,6 @@ package classes
 		public static const Meditated:StatusAffectType = mk("Meditated");
 		public static const MeanToNaga:StatusAffectType = mk("MeanToNaga");
 		public static const MeetWanderer:StatusAffectType = mk("meet wanderer");
-		public static const MetCorruptMarae:StatusAffectType = mk("Met Corrupt Marae");
-		public static const MetMarae:StatusAffectType = mk("Met Marae");
 		public static const MetRathazul:StatusAffectType = mk("metRathazul");
 		public static const MetWorms:StatusAffectType = mk("metWorms");
 		public static const MetWhitney:StatusAffectType = mk("Met Whitney");
@@ -142,8 +132,6 @@ package classes
 		public static const SlimeCravingOutput:StatusAffectType = mk("Slime Craving Output");
 		public static const SuccubiFirst:StatusAffectType = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusAffectType = mk("succubiNight");
-		public static const TakenGroPlus:StatusAffectType = mk("TakenGro+");
-		public static const TakenLactaid:StatusAffectType = mk("TakenLactaid");
 		public static const Tamani:StatusAffectType = mk("Tamani");
 		public static const TamaniFemaleEncounter:StatusAffectType = mk("Tamani Female Encounter");
 		public static const TelAdre:StatusAffectType = mk("Tel'Adre");
@@ -152,6 +140,19 @@ package classes
 		public static const TensionReleased:StatusAffectType = mk("TensionReleased");
 		public static const TF2:StatusAffectType = mk("TF2");
 		public static const TookBlessedSword:StatusAffectType = mk("Took Blessed Sword");
+		//DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
+		public static const DungeonShutDown:StatusAffectType = mk("DungeonShutDown");
+		public static const FactoryOmnibusDefeated:StatusAffectType = mk("FactoryOmnibusDefeated");
+		public static const FactoryOverload:StatusAffectType = mk("FactoryOverload");
+		public static const FactoryIncubusDefeated:StatusAffectType = mk("FactoryIncubusDefeated");
+		public static const FactorySuccubusDefeated:StatusAffectType = mk("FactorySuccubusDefeated");		
+		public static const MaraeComplete:StatusAffectType = mk("Marae Complete");
+		public static const MaraesLethicite:StatusAffectType = mk("Marae's Lethicite");
+		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start");
+		public static const MetCorruptMarae:StatusAffectType = mk("Met Corrupt Marae");
+		public static const MetMarae:StatusAffectType = mk("Met Marae");
+		public static const TakenGroPlus:StatusAffectType = mk("TakenGro+");
+		public static const TakenLactaid:StatusAffectType = mk("TakenLactaid");		
 		/**
 		 * v1 = bonus index
 		 * v2 = bonus value

@@ -24,7 +24,7 @@ public function Lottie(){
 //[INITIAL INTRO – Requires Male/Herm, visits at 5pm – 7pm]
 public function lottieAppearance(display:Boolean = true):Number {
 	if(!player.hasCock()) return 0;
-	if(player.findStatusAffect(StatusAffects.MetMarae) < 0) return 0;
+	if(flags[kFLAGS.MET_MARAE] <= 0) return 0;
 	if(model.time.hours >= 15 && model.time.hours <= 23) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] == 0) {
 			if(display) outputText("\n\nA pale-skinned pig lady emerges from the pool nearby. Her small ears flop aimlessly on top of her pink-gray curls as she shakes any remaining water off of her pale, bikini-clad body - unintentionally jiggling her E-cup breasts and chubby ass in the process.", false);
@@ -1475,7 +1475,7 @@ public function giveLottieAnItem():void {
 	var gro:Number = 0;
 	var reducto:Number = 0;
 	if(player.hasItem(consumables.LABOVA_)) bova = 3135;
-	if(player.hasItem(consumables.GROPLUS) && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) gro = 3136;
+	if(player.hasItem(consumables.GROPLUS) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) gro = 3136;
 	if(player.hasItem(consumables.REDUCTO)) reducto = 3137;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00321] == 0) {
 		outputText("You tell Lottie you've been doing a little research on weight loss aides, discovering several items that could possibly have an effect on her figure if she's willing to try. Lottie nods, albeit rather hesitantly – she's mentioned her unsuccessful attempts at weight loss methods involving diets before, so you can't really blame her. However, you push the idea forward – it couldn't hurt to try some of them, and heck, she could be skinny before she knows it! Lottie easily falls for your flattery, and eagerly agrees to the idea. You look into your inventory – one of these things must have an effect, right?", false);

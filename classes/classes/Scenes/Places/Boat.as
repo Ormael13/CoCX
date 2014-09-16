@@ -32,7 +32,7 @@ package classes.Scenes.Places
 				return;
 			}
 			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ", true);
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				outputText("The water appears somewhat muddy and has a faint pungent odor.  ", false);
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 			}
@@ -43,18 +43,18 @@ package classes.Scenes.Places
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n", false);
 			//20% chance if not done with marae of meeting her.
-			if (rand(10) <= 2 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0) {
+			if (rand(10) <= 2 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) {
 				marae.encounterMarae();
 				return;
 			}
 			//10% chance of corrupt Marae followups
-			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) >= 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
+			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
 				marae.level2MaraeEncounter();
 				return;
 			}
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3];
-			if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.level > 2)
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2)
 				choice[choice.length] = 4;
 			choice[choice.length] = 5;
 			//MAKE YOUR CHOICE

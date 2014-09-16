@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Dungeons.DeepCave.ValaScene;
 	import classes.Scenes.Places.TelAdre.*;
 
 	/**
@@ -30,6 +31,8 @@
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
 		public var umasShop:UmasShop = new UmasShop();
+		
+		public var vala:ValaScene = new ValaScene();
 		
 		public var nails:Number = 0;
 		public var wood:Number = 0;
@@ -122,7 +125,7 @@ private function telAdreCrystal():void {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n", false);
 	}
 	//-25+ corruption or corrupted Marae
-	else if(player.cor >= 25 || player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
+	else if(player.cor >= 25 || flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("The crystal pendant twirls in place, glowing a dull red.  Edryn takes a small step back and murmers, \"<i>You've seen the darkness of this land first hand, but its hold on you is not deep.  You'll find sanctuary here.  The demons cannot find this place yet, and we promise you safe passage within the walls.</i>\"\n\n", false);
 	}
 	//-Low corruption/pure characters
@@ -1083,7 +1086,7 @@ public function barTelAdre():void {
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}
 	//Scylla - requires dungeon shut down
-	if(player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+	if(player.totalCocks() > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
@@ -1156,7 +1159,7 @@ public function barTelAdre():void {
 		}
 	}
 	//VALA
-	if(kGAMECLASS.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",kGAMECLASS.chooseValaInBar);
+	if(vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",vala.chooseValaInBar);
 
 	addButton(9,"Leave",telAdreMenu);
 }
@@ -1216,7 +1219,7 @@ private function oldbarTelAdre():void {
 		katherine.catMorphIntr();
 	}
 	//Scylla - requires dungeon shut down
-	if(player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+	if(player.totalCocks() > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
@@ -1272,11 +1275,11 @@ private function oldbarTelAdre():void {
 		hel = edryn.approachHelAtZeBitch;
 	}
 	//Everyone's favorite Vala!
-	var vala:Number = 0;
+	var valaChoose:Function = null;
 	//Backroom urta
 	var backroom:* = 0;
 	var backroomT:String = "Backrooms";
-	if(kGAMECLASS.purifiedFaerieBitchBar()) vala = 2621;
+	if(vala.purifiedFaerieBitchBar()) valaChoose = vala.chooseValaInBar;
 	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->

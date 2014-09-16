@@ -93,6 +93,10 @@ package classes.Scenes.NPCs
 				//(typical lust gain and temporary stat damage, start combat)
 			}
 			outputText("You are fighting an anemone!", false);
+			if (flags[kFLAGS.CODEX_ENTRY_ANEMONES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ANEMONES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Anemones!</b>")
+			}
 			var anemone:Anemone = new Anemone();
 			startCombat(anemone);
 			//(gain lust, temp lose spd/str)

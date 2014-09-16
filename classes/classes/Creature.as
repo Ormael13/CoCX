@@ -2414,7 +2414,7 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (biggestTitSize() > 0) return female;	
+					if (biggestTitSize() >= 2) return female;	
 					else return male;
 				}
 				else return male;

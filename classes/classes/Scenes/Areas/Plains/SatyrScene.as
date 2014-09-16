@@ -29,6 +29,10 @@ public function satyrEncounter(location:int = 0):void {
 		if(location == 0) outputText("grassy plains");
 		else outputText("sodden expanse of the swamp");
 		outputText(", you hear lewd bellowings and drunken curses.  From out of the expanse of green comes a humanoid figure with a set of goat-like horns curling from his head.  Seeing you, he lets out a randy bleat and charges, naked erection jabbing before him!");
+		if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
+			outputText("\n\n<b>New codex entry unlocked: Satyrs!</b>")
+		}
 		startCombat(new Satyr());
 	}
 	//Non-aggressive Encounter (Z)

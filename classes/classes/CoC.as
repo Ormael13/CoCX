@@ -3,6 +3,7 @@
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Dungeons.DungeonEngine;
 
 	import classes.CoC_Settings;
 
@@ -183,6 +184,7 @@
 		public var farm:Farm = new Farm();
 		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre = new TelAdre();
+		public var dungeons:DungeonEngine = new DungeonEngine();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
 
@@ -194,7 +196,7 @@
 		include "../../includes/april_fools.as";
 
 		include "../../includes/dreams.as";
-		include "../../includes/dungeon2Supplimental.as";
+		//include "../../includes/dungeon2Supplimental.as";
 		include "../../includes/dungeonCore.as";
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
@@ -338,8 +340,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15_mod_0.5.2";
-			version = ver + " (<b>Mod Bug Fixes</b>)";
+			ver = "0.8.15_mod_0.6_WIP";
+			version = ver + " (<b>Codex + Dungeon Refactor</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

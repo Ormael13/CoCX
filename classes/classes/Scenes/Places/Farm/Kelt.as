@@ -103,8 +103,17 @@ package classes.Scenes.Places.Farm
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
-			else game.farm.kelly.breakingKeltNumeroThree();
+			if (game.flags[kFLAGS.KELT_KILL_PLAN] == 1) {
+				if (hpVictory) {
+					game.farm.keltScene.fightToBeatKeltVictoryHP();
+				} else {
+					game.farm.keltScene.fightToBeatKeltVictoryLust();
+				}
+			}
+			else{
+				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
+				else game.farm.kelly.breakingKeltNumeroThree();
+			}
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void

@@ -41,7 +41,7 @@ package classes.Scenes.Monsters
 		 Carries bottles of aphrodisiacs and drugs.
 		 Dressed in leather straps that support her chest (in a lewd way) while leaving her pierced nipples exposed and slightly parting her ass to expose her pucker & femmy funbits.  Pierced pointed ears.
 		 */
-//RAEP TEXT 1
+		//RAEP TEXT 1
 		public function goblinRapesPlayer():void
 		{
 			spriteSelect(24);
@@ -194,7 +194,7 @@ package classes.Scenes.Monsters
 			}
 		}
 
-//[WIN RAEPZ]
+		//[WIN RAEPZ]
 		public function gobboRapeIntro():void
 		{
 			spriteSelect(24);

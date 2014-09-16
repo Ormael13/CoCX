@@ -1340,10 +1340,10 @@ private function umYum():void {
 		outputText("\nYou feel a bit nauseous. That stew surely is strange.", false)
 		if (rand(3) == 0)
 		{
-			//Player vomits. Poor player. Damages hunger by 20-30.
+			//Player vomits. Poor player. Damages hunger by 15-25.
 			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and ", false)
 			player.takeDamage(player.maxHP() / 4);
-			flags[kFLAGS.PC_HUNGER] -= (rand(10) + 20);
+			flags[kFLAGS.PC_HUNGER] -= (rand(10) + 15);
 			dynStats("lib", -10);
 			dynStats("lust", -100, "resisted", false);
 		}

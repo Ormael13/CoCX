@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 
@@ -31,6 +32,10 @@ package classes.Scenes.Areas.Swamp
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 				//[Fight] [Talk] [Leave]
 				simpleChoices("Fight", 2997, "Talk", talkToSpiderBoy, "", 0, "", 0, "Leave", 13);
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
 			}
 		}
 

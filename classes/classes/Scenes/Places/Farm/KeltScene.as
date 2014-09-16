@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.Farm {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class KeltScene extends AbstractFarmContent{
 
@@ -119,6 +120,43 @@ private function keltFirstTime():void {
 	outputText("He laughs again derisively, and trots off.  You bristle slightly... he is irritatingly arrogant.  But if he can teach you to use a weapon like that, it may be worth putting up with his company...", false);
 	doNext(13);
 }
+
+public function fightToBeatKeltVictoryHP():void {
+	outputText("Too weak to continue fighting, Kelt collapses.", true)
+	chooseToFinishKelt()
+}	
+public function fightToBeatKeltVictoryLust():void {
+	outputText("Overwhelmed by his desires, Kelt collapses.", true)
+	chooseToFinishKelt()
+}	
+
+private function chooseToFinishKelt():void {
+	cleanupAfterCombat();
+	outputText("\n\nYou step over to the defeated centaur, wondering what you should do.", false)
+	addButton(0, "Kill Him", youBadEndKeltForGood);
+	addButton(1, "Rape Him", fuckKeltsShitUp);
+	addButton(4, "Leave", leaveKelt4Good);
+}
+
+//Give Kelt the Bad End!
+private function youBadEndKeltForGood():void {
+	outputText("You suddenly grab Kelt by his neck. The centaur yells \"<i>Nooooo! Don't you do that, bitch!</i>\"\n\n", true);
+	outputText("With an abrupt twist, you snap his neck, ending his life. You grab the bow from Kelt. Seeing how it looks stronger than your flimsy bow, you snap the old bow and throw it onto the ground. You are proud of the newly-taken bow.\n\n", false);
+	outputText("<b>(You got Kelt's Bow!)</b>", false);
+	player.removeKeyItem("Bow");
+	player.createKeyItem("Kelt's Bow", 0, 0, 0, 0);
+	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
+	dynStats("cor", 10);
+	flags[kFLAGS.KELT_KILLED] = 1;
+	doNext(13);
+}
+
+private function leaveKelt4Good():void {
+	outputText("Determining he's not worth your time, you walk away. Somehow, you've got the feeling that you won't be seeing him again.", true);
+	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
+	doNext(13);
+}
+
 //Naked Requirement
 private function keltRequiresNakedness():void {
 	outputText("Once more, you encounter Kelt the centaur at Whitney's farm.  You approach him to ask for another archery lesson, but Kelt is already scowling at you as you draw near.\r\r", false);

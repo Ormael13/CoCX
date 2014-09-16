@@ -79,6 +79,10 @@ public function encounterMarbleInitially():void {
 	outputText("Whitney tells you that one of her barn's residents, a cow-girl named Marble, is sore from overusing the milk machines.  She asks you to go and give the cow-girl a gentler touch from a living being.\n\n", false);
 	//(description of barn may need to be edited, I don't know what it's supposed to look like)
 	outputText("You walk in to Whitney's barn and head over to a series of small rooms for the cow-girls.  You find Marble's room and knock on the door. A friendly earthy female voice calls out in response and invites you in.  Inside is a rather pleasant little room.  There are several shelves on the walls and a small sitting table in the corner with seating for two.  A large portion of the room is dominated by a large bed, the owner filling most of it.  Lastly, you notice a mini-dresser next to the bed.  The room's owner looks over at you and starts, \"<i>Oh, I've never met you before.</i>\"\n\nAs she gets up, you are given a chance to get a good look at her.  She is over six feet tall, with long brown hair tipped with two cow horns and a pair of cow ears in place of normal human ones.  Rounding out her relatively unchanged face are a pair of deep, brown eyes.  She is wearing only a short plain skirt, so you get a full frontal view of her two HH-cup assets. They look rather sore right now, with big red circles around her puffy nipples.  Her hands and arms appear mostly human save for thick-looking nails.  A soft 'clop' brings your eyes down to see that she is covered in thick, dark blond fur going from at least mid-way down her thighs to where a human's feet normally would be, in place of which are hooves.  A cow tail with a bow tied on it swings between her legs.\n\n", false);
+	if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+		outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
+	}
 	//(if player height is under 5 feet)
 	if(player.tallness < 60) {
 		outputText("She looks down at you with a smile and says \"<i>Aww, you're so cute!  Did you come for my milk?  I'm always happy to give it, but since I'm kinda sore right now, you'll have to be gentle. Okay little one?</i>\"  She moves towards you and tries to pick you up.", false);
@@ -443,7 +447,8 @@ private function drinkMarbleMilk():void {
 	marbleStatusChange(5,0);
 	//(apply Marble's Milk status effect)
 	applyMarblesMilk();
-	HPChange(10,false);
+	HPChange(10, false);
+	player.refillHunger(20);
 	fatigue(-20);
 	//(increase player lust by a 20 and libido, if player lust is over a threshold like 60 , trigger milk sex scene)
 	dynStats("lib", 1, "lus", 20);
@@ -1839,7 +1844,7 @@ private function talkWithMarbleAtCamp():void {
 	//earliest story event the player has not told Marble about since she joined the player at camp, alternatively, just the most recent event;
 	//ACTUALLY TALK ABOUT SHIT
 	//The player has met the Goddess Marae
-	if(player.findStatusAffect(StatusAffects.MetMarae) >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 1)
+	if(flags[kFLAGS.MET_MARAE] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 1)
 	{
 		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world...</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"",false);
 		//Level up!
@@ -1852,7 +1857,7 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 2;		
 	}
 	//The player has cleared the factory and shut it down
-	else if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 3)
+	else if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 3)
 	{
 		outputText("You tell Marble about what you found inside the factory.  She is horrified at what was being done to the other champions and assures you that no one should ever <i>belong</i> in a place like that. You continue and tell of the overseer and her fate. Marble reacts with surprise, ", false); 
 		if(player.findPerk(PerkLib.OmnibusGift) >= 0)
@@ -1863,25 +1868,24 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 3;
 	}
 	//The player has met Marae after doing a shutdown of the factory and smashing the controls
-	else if(player.findStatusAffect(StatusAffects.MaraeComplete) >= 0 && player.findStatusAffect(StatusAffects.FactoryOverload) < 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
+	else if(flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
 	{
 		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, the both of you will probably sleep a little easier tonight. ", false);
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 
 	}
 	//The player has met the corrupted Marae after blowing the storage tanks
-	else if(player.findStatusAffect(StatusAffects.MaraeComplete) >= 0 && player.findStatusAffect(StatusAffects.FactoryOverload) >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
+	else if(flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4)
 	{
 		outputText("Your story about what had happened to Marae seems to have shaken up Marble a little.  Though, you notice that she seems to be getting more and more aroused as you relate your story.  ", false);
 		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0)
-			outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.", false);
+			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.", false);
 		//[[EDITOR'S NOTE: The original said "I can't believe that tried that." I was unsure about the context, if it originally meant 'you tried that' or 'it tried that', so I went with the former. If I'm wrong here, my bad.]]
 		else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0)
-			outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>", false);
+			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>", false);
 		//increase the player's lust by 35 if they are under 50, so they can breed right away
 		if(player.lust<50) dynStats("lus", 35);
-		if(player.findPerk(PerkLib.MaraesGiftFertility) < 0 &&
-				player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		if(player.findPerk(PerkLib.MaraesGiftFertility) < 0 && player.findPerk(PerkLib.MaraesGiftStud) < 0) {
 			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.", false);
 		}
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
@@ -1910,20 +1914,20 @@ private function talkWithMarbleAtCamp():void {
 	//Comments on next course of action, only mentions main story events and quests the player is undergoing
 	outputText("The topic of conversation turns to your mission and you ask Marble what she thinks you should be doing next.  ", false);
 	//If (player has not yet met Marae)
-	if(player.findStatusAffect(StatusAffects.MetMarae) < 0) {
+	if(flags[kFLAGS.MET_MARAE] <= 0) {
 		outputText("\"<i>Well sweetie, I guess you should start with getting to know the place a little better.  Why don't you look some more around the lake outside the farm?  I think that's the safest place to start.</i>\"",false);
 	}
-	else if(player.findStatusAffect(StatusAffects.MetMarae) >= 0 && player.findStatusAffect(StatusAffects.FoundFactory) < 0)
+	else if(flags[kFLAGS.MET_MARAE] > 0 && flags[kFLAGS.FACTORY_FOUND] <= 0)
 	{
 		//check if the player is far too weak to go to the factory
 		if(player.level < 3) outputText("\"<i>I think we should help out Marae and shut down that factory she mentioned was in the mountains, but I don't think you're ready to go into the Mountains yet. They can be brutal - get a little more practice, and make sure you've got a good weapon.</i>\"", false);
 		else outputText("\"<i> I think we should help out Marae and shut down that factory she mentioned was in the mountains. I have no idea what will happen in there, though, so make sure you're as ready as you can be before you go.</i>\"\n\n", false);
 	}
 	//Player has found factory but not shut it down.
-	else if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) < 0)
+	else if(flags[kFLAGS.FACTORY_FOUND] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] <= 0)
 		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"", false);		
 	//(player has completed the factory but has not returned to Marae)
-	else if(player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0)
+	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1(StatusAffects.TelAdre) == 0)

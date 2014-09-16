@@ -1057,7 +1057,7 @@ public function useCustomProfile():void {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 		flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 		kGAMECLASS.customPCSetup();
-		doNext(startTheGame);
+		doNext(chooseGameModes);
 	}
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");

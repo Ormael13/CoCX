@@ -90,6 +90,10 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(50);
 		outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.", true);
+		if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] = 1;
+			outputText("\n\n<b>New codex entry unlocked: Sand Witches!</b>")
+		}
 		if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 		{
 			outputText("\n\nThe " + player.armorName + " covering your lower half hits the ground, as if yanked down by magic.  Your " + cockDescript(0) + " pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n", false);
@@ -2138,7 +2142,9 @@ public function doEvent(eventNo:Number):void
 	{
 		followerInteractions.BlameMarblezSweetVagoozle();
 	}
-	else if (eventNo == 2594)
+	
+	//DUNGEON 2
+	/*else if (eventNo == 2594)
 	{
 		freeValazLooseCoochie();
 	}
@@ -2236,7 +2242,8 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2653)
 	{
 		incubusBuy(weapons.SUCWHIP);
-	}
+	}*/
+	//
 	else if (eventNo == 2739)
 	{
 		telAdre.dominika.fellatrixBarApproach();
@@ -2457,10 +2464,10 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.lottie.lottiesThirtyMinutePigGasm();
 	}
-	else if (eventNo == 3449)
+	/*else if (eventNo == 3449)
 	{
 		valaCumBath();
-	}
+	}*/
 	else if (eventNo == 3457)
 	{
 		amilyScene.fuckIncestCunts();

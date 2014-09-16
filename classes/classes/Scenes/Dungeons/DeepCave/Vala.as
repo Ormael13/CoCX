@@ -84,7 +84,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.fightValaVictory();
+			game.dungeons.deepcave.fightValaVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -93,7 +93,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.loseToVala();
+				game.dungeons.deepcave.loseToVala();
 			}
 		}
 

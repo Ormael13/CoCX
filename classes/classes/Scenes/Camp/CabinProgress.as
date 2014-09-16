@@ -7,7 +7,7 @@ package classes.Scenes.Camp
 	import classes.Scenes.Camp;
 	
 	/**
-	 * NOT FINISHED YET. Scene currently inaccessible.
+	 * Core cabin content finished.
 	 * @author Kitteh6660
 	 */
 	public class CabinProgress extends BaseContent {
