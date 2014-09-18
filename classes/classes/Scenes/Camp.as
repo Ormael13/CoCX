@@ -44,6 +44,8 @@
 		public var codex:Codex = new Codex();
 		public var dungeon1:Factory = new Factory();
 		public var dungeon2:DeepCave = new DeepCave();
+		public var dungeonS:DesertCave = new DesertCave();
+		public var dungeonH:HelDungeon = new HelDungeon();
 		
 //  SLEEP_WITH:int = 701;
 
@@ -55,6 +57,7 @@ public function doCamp():void {
 		
 		getGame().saves.saveGame(player.slotName);
 	}
+	kGAMECLASS.tooltipLoc = "";
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
@@ -71,7 +74,7 @@ public function doCamp():void {
 	if(kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.dungeonRoom(kGAMECLASS.dungeonLoc);
+		kGAMECLASS.dungeons.checkRoom();
 		return;
 	}
 	//Clear out Izma's saved loot status
@@ -1324,31 +1327,42 @@ private function swimInStream():void {
 	if (player.tallness >= 72) outputText("Your feet are touching touching the riverbed and your head is above water. You bend down a bit so you're at the right height. ", false);
 	outputText("\n\nYou begin to swim around and relax. ", false);
 	//Izma!
-	if (camp.izmaFollower())
+	if (rand(2) == 0 && camp.izmaFollower())
 	{
 		outputText("\n\nYour tiger-shark beta, Izma, joins you. You are frightened at first when you saw the fin protruding from the water and the fin approaches you! ", false);
 		outputText("As the fin appoaches you, the familiar figure comes up. It's your tiger-shark lover, Izma! \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.", false);
 	}
 	//Helia!
-	if (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
+	if (rand(2) == 0 && camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
 	{
 		outputText("\n\nHelia, your salamander lover, joins in for a swim. \"<i>Hey, lover mine!</i>\" she says. As she enters the waters, the water seems to become warmer until it begins to steam like a sauna.", false);
 	}
 	//Marble!
-	if (camp.marbleFollower())
+	if (rand(2) == 0 && camp.marbleFollower())
 	{
-		outputText("'n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
+		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
+	}
+	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
+	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
+	{
+		outputText("\n\n(PLACEHOLDER) Your mouse girl-lover Amily joins you.", true)
 	}
 	//Pranks!
-	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
+	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
 	{
 		outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?", false)
 		doYesNo(swimInStreamPrank1, swimInStreamFinish);
+		return;
 	}
 	/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
 	{
 		outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?", false)
 		doYesNo(swimInStreamPrank2, swimInStreamFinish);
+	}*/
+	/*if (prankChooser == 2 && player.lust >= 33) {
+		outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?", false)
+		doYesNo(swimInStreamFap, swimInStreamFinish);
+		return;
 	}*/
 	else doNext(swimInStreamFinish);
 	
@@ -1362,6 +1376,7 @@ private function swimInStreamPrank1():void {
 	if (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) prankRoll++;
 	if (camp.marbleFollower()) prankRoll++;
 	if (camp.amilyFollower()) prankRoll++
+	if (prankRoll > 4) prankRoll = 4;
 	//Play joke on them!
 	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.", true)
 	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false)
@@ -1371,7 +1386,7 @@ private function swimInStreamPrank1():void {
 	}
 	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false)
 	{
-		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty indeed,</i>\" she says. ", false);
+		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says. ", false);
 		pranked = true;
 	}
 	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false)
@@ -1381,12 +1396,16 @@ private function swimInStreamPrank1():void {
 	}
 	if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
 	{
-		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
+		outputText("", false);
 		pranked = true;
 	}
 	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming. ", false);
 	else outputText("You feel accomplished from the prank and resume swimming. ", false);
 	doNext(swimInStreamFinish);
+}
+
+private function swimInStreamFap():void {
+	outputText("", true)
 }
 
 private function swimInStreamFinish():void {
@@ -1595,7 +1614,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		//HEL SLEEPIES!
 		if(helFollower.helAffection() >= 70 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 && flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 0) {
-			getGame().heliaDiscovery();
+			getGame().dungeons.heltower.heliaDiscovery();
 			sleepRecovery(false);
 			return;
 		}
@@ -1962,11 +1981,13 @@ private function placesToPage1():void
 private function dungeons():void {
 	menu();
 	//Turn on dungeon 1
-	if(flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon);
+	if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon);
 	//Turn on dungeon 2
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1,"Deep Cave", dungeon2.enterDungeon);
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon);
 	//Side dungeon
-	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
+	//DEBUG STUFF
+	//addButton(6, "Phoenix Tower", dungeonH.goToHeliaDungeon2);
 	addButton(9,"Back",eventParser,71);
 }
 
@@ -2028,7 +2049,7 @@ private function fixFlags():void {
 		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 		player.removeStatusAffect(StatusAffects.FactoryOmnibusDefeated);
 	}
-	//Variables
+	//Factory Variables
 	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0)
 	{
 		flags[kFLAGS.FACTORY_FOUND] = 1;

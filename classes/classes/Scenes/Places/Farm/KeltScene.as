@@ -4,6 +4,8 @@
 
 	public class KeltScene extends AbstractFarmContent{
 
+		public var kelly:Kelly = new Kelly();
+		
 	public function KeltScene()
 	{
 	}
@@ -76,8 +78,16 @@ public function keltEncounter():void {
 			return;
 		}
 		//Bad Ends
-		if(player.statusAffectv2(StatusAffects.Kelt) >= 130) {
-			keltSubmissiveBadEnd();
+		if (player.statusAffectv2(StatusAffects.Kelt) >= 130) {
+			if (((player.lib + player.lust) < 30 && player.inte >= 50) || player.findStatusAffect(StatusAffects.KeltBadEndWarning) < 0)
+			{
+				player.createStatusAffect(StatusAffects.KeltBadEndWarning, 0, 0, 0, 0);
+				outputText("You race towards the farm, only one thought on your mind.  Kelt... your master, your love, your hunger.  Your head is filled with thoughts of his cock, and you fancifully dream of how he will use it on you today.  Once, you had a mission of some kind... an important duty.  The stray thought vanishes almost instantly, though.  Of course you have a duty!  To be fucked by Kelt, whenever he wants to!\r\r")
+				outputText("Suddenly, another thought crosses your mind. You have a feeling that if you meet him, it could be the end of your adventures. Do you give in to your thoughts and submit to Kelt for the final time or resist?")
+				doYesNo(keltSubmissiveBadEnd, defySubmission);
+				addButton(4, "FIGHT!", defySubmissionAndFight);
+			}
+			else keltSubmissiveBadEnd();
 			return;
 		}
 		//Centaur bad end
@@ -121,6 +131,15 @@ private function keltFirstTime():void {
 	doNext(13);
 }
 
+private function defySubmission():void {
+	outputText("In defiance to your submissiveness to Kelt, you suddenly shake your head and return to your camp.", true)
+	doNext(13);
+}
+private function defySubmissionAndFight():void {
+	outputText("In defiance to your submissiveness to Kelt, you suddenly shake your head and you finally decide. That's it. That centaur must be punished! It's time you turn the tables against him.", true)
+	doNext(kelly.fightToBeatKelt);
+}
+
 public function fightToBeatKeltVictoryHP():void {
 	outputText("Too weak to continue fighting, Kelt collapses.", true)
 	chooseToFinishKelt()
@@ -145,6 +164,7 @@ private function youBadEndKeltForGood():void {
 	outputText("<b>(You got Kelt's Bow!)</b>", false);
 	player.removeKeyItem("Bow");
 	player.createKeyItem("Kelt's Bow", 0, 0, 0, 0);
+	player.removeStatusAffect(StatusAffects.Kelt);
 	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
 	dynStats("cor", 10);
 	flags[kFLAGS.KELT_KILLED] = 1;
@@ -319,12 +339,12 @@ private function keltRequiresBlowjobs():void {
 		doNext(keltBlowjobRequirementEagerly);
 		return;
 	}
+	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", 0, "FIGHT!", kelly.fightToBeatKelt);
 	//Never!			Shamefully			Eagerly
 	if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Fight Back",keltResistance,"",0,"Never!",keltBlowjobRequirementNever);
+		addButton(3, "Fight Back", keltResistance);
 	}
-	else simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Resist",0,"",0,"Never!",keltBlowjobRequirementNever);
 }
 
 //Blowjob Requirement, Never
@@ -360,8 +380,9 @@ private function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 	outputText("\"<i>Ahhh, yeah... fuck, bitch, you sure feel pretty good.  I could get used to this.  How about you, huh?  You like the taste of my cock, little whore?</i>\"\r\r", false);
 	outputText("It hurts to admit it, but you do.  It tastes wonderful, and every so often, a hot little splurt of precum slides down your throat.  His heavy testicles, each easily the size of a cantelope, sway back and forth enticingly below him, right before your eyes.  You imagine how full those nuts must be, building up jet after jet of spunk just for you; ready to explode and seed your belly full of his cum.  Your last resistance crumbles, and you redouble your efforts, desperate to bring relief to your great master.\r\r", false);
 	outputText("Your diligence is soon rewarded.  With a grunt of need, Kelt shoves forward one last time, burying almost half of his nearly three-foot length deep inside your throat as his cock tenses, then explodes.  You are paralyzed, split open by the massive cock as it begins unloading thick blasts of salty cream deep straight into your stomach.  Your throat is spread so tightly you can feel every splurt pulse down the length of his erection, again and again, ceaselessly.  Your stomach is bloated moments later, but still his orgasm continues, your belly visibly bulging periodically as another stream of seed is planted deep inside you.\r\r", false);
-	outputText("By the time he finishes, the last few spurts are almost painful to your poor distended stomach, stretching visibly outwards from your clothes.  As the centaur's cock softens, it slides out of your abused throat easily, a slimy trail of goo coating the member.  Released, you collapse to your knees, coughing as the massive load begins settling in your stomach.  The only taste in your mouth is the musky scent of Kelt's cock, and the salty cum that trailed after it.\r\r", false);
-	outputText("Kelt moves aside, looking down at you with a smug look of satisfaction.  You weakly wave him off, embarrassed by what you just did, and he laughs nastily.\r\r", false);
+	outputText("By the time he finishes, the last few spurts are almost painful to your poor distended stomach, stretching visibly outwards from your clothes.  As the centaur's cock softens, it slides out of your abused throat easily, a slimy trail of goo coating the member.  Released, you collapse to your knees, coughing as the massive load begins settling in your stomach.  The only taste in your mouth is the musky scent of Kelt's cock, and the salty cum that trailed after it.", false);
+	player.refillHunger(50);
+	outputText("\r\rKelt moves aside, looking down at you with a smug look of satisfaction.  You weakly wave him off, embarrassed by what you just did, and he laughs nastily.\r\r", false);
 	outputText("\"<i>Get used to it, bitch.  Gotta say, you took that pretty well.  Barely a drop lost.  Good.  Because if you tried to spit up my cum, I'd have to make sure to deposit a second load.</i>\"\r\r", false);
 	outputText("\"<i>Here's the rule.  You want archery lessons?  Fine.  I'll keep teaching you, stupid bitch that you are.  But when I say so, you kneel and take your turn.  If I have to teach an ugly slut like you, the least you can do is choke one down.  Lesson's over.  See you tomorrow, bitch.</i>\"\r\r", false);
 	outputText("He leaves, obviously quite pleased with himself, as you lie, exhausted, in a small pool of his cum.  The smell of it clings to you, even after you push yourself upright and begin hobbling back to camp, arms clutched around your swollen stomach.  Part of you is humiliated, and never wants to see Kelt again.  The other part?  Well, the other part is anxiously hoping that he'll be feeling horny enough again next time to give you another chance to suck his cock.\r\r", false);
@@ -389,8 +410,9 @@ private function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	outputText("His insulting words cause a feeling of deep-seated happiness to well up inside you.  How could you have known, before?  You thought yourself a hero, a Champion... but this is what feels right.  A slutty, cocksucking whore... that's what you were meant to be!  You open wider, leaning forward and trying to suck in more glorious cock.  Your master obliges you with a thrust of the hips, and his head pushes crudely into the recesses of your throat.  You gag for air, wincing as your throat is spread wide, but Kelt lets out a groan of satisfaction, pumping his hips steadily in an attempt to bury more of his member down your gullet.\r\r", false);
 	outputText("\"<i>Ahhh, yeah... fuck, bitch, you sure feel pretty good.  I could get used to this.  How about you, huh?  You like the taste of my cock, little whore?</i>\"\r\r", false);
 	outputText("You barely hear the words, so enflamed are your senses.  His cock tastes wonderful, and every so often, a hot little splurt of precum slides down your throat.  His heavy testicles, each easily the size of a cantelope, sway back and forth enticingly below him, right before your eyes.  You imagine how full those nuts must be, building up jet after jet of spunk just for you; ready to explode, to seed your belly full of his cum.  Your last bit of self worth crumbles, and you redouble your efforts, desperate to bring relief to your great master; desperate to be fucked, at any cost.\r\r", false);
-	outputText("Your dilligence is soon rewarded.  With a grunt of need, Kelt shoves forward one last time, burying almost half of his nearly three-foot length deep inside your throat as his cock tenses, then explodes.  You are paralyzed with ecstasy, split open by the massive cock as it begins unloading thick blasts of salty cream deep into your stomach.  Your throat is spread so tightly you can feel every splurt pulse down the length of his erection, again and again, ceaselessly.  Your stomach is bloated moments later, but still his orgasm continues, your belly visibly bulging periodically as another stream of seed is planted deep inside you.\r\r", false);
-	outputText("By the time he finishes, the last few splurts are almost painful to your poor distended stomach, stretching visibly outwards from your clothes.  As the centaur's cock softens, it begins sliding out of your abused throat easily, a slimy trail of goo coating the member.  Wanting more despite your swollen stomach, you desperately suckle on the length of it, trying to get every drop you can.  The only taste in your mouth is the musky scent of Kelt's cock, and the salty cum that trailed after it.\r\r", false);
+	outputText("Your dilligence is soon rewarded.  With a grunt of need, Kelt shoves forward one last time, burying almost half of his nearly three-foot length deep inside your throat as his cock tenses, then explodes.  You are paralyzed with ecstasy, split open by the massive cock as it begins unloading thick blasts of salty cream deep into your stomach.  Your throat is spread so tightly you can feel every splurt pulse down the length of his erection, again and again, ceaselessly.  Your stomach is bloated moments later, but still his orgasm continues, your belly visibly bulging periodically as another stream of seed is planted deep inside you.", false);
+	player.refillHunger(50);
+	outputText("\r\rBy the time he finishes, the last few splurts are almost painful to your poor distended stomach, stretching visibly outwards from your clothes.  As the centaur's cock softens, it begins sliding out of your abused throat easily, a slimy trail of goo coating the member.  Wanting more despite your swollen stomach, you desperately suckle on the length of it, trying to get every drop you can.  The only taste in your mouth is the musky scent of Kelt's cock, and the salty cum that trailed after it.\r\r", false);
 	outputText("In time, Kelt moves aside, and you release his cock in accordance with his unspoken wishes, feeling lousy.  If only you had been a little faster, sexier... maybe he would have become erect again, and given you more!  Even so, he looks down at you with a smug look of satisfaction that fills you with contentment.  Weakly, moving around your bloated stomach gingerly, you raise your ass into the air, looking back at him hopefully.  Kelt laughs out loud, cruel and spiteful.\r\r", false);
 	outputText("\"<i>Still horny, bitch?  Hah!  I knew you were a slut, but who would have guessed you would be this needy?  Sit down, you stupid bitch.  I'll fuck you when I say so, not when you ask.  But this wasn't too bad.  For being such an ugly whore, at least you make a good cumdump.  So if you want more lessons, here's the rule.  Before you fire a single shot, you swallow a load of my cum.  If I have to work with a total slut, I may as well see your belly full of my spunk.  Got it, slag?  Next time you wanna shoot, get down on your knees first, and open wide.</i>\"\r\r", false);
 	outputText("He leaves, obviously quite pleased with himself, and your legs give out from under you, weak from your experience.  Even so, you frantically masturbate, knowing true bliss as you lie within a small pool of his spunk.  The smell of it clings to you, even after you push yourself upright and begin hobbling back to camp, arms clutched around your swollen stomach.  This is what happiness feels like... used and full of sperm.\r\r", false);
@@ -455,12 +477,11 @@ private function keltMainEncounterAfterNakedReq():void {
 				outputText("\r\rYou're not certain you want to practice naked again... particularly with the way Kelt is looking at you, his arrogant smirk plastered on his face.  Do you agree to his terms?", false);
 				//(Yes[+5 Submissive]			No[Never event])
 				//Link this to reluctant && never
-				
+				simpleChoices("Yes",keltReluctantlyGetNaked,"No",keltRefuseNakedness,"",0,"",0,"FIGHT!", kelly.fightToBeatKelt);
 				if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-					simpleChoices("Yes",keltReluctantlyGetNaked,"No",keltRefuseNakedness,"Fight Back",keltResistance,"",0,"",0);
+					addButton(2, "Fight Back",keltResistance);
 				}
-				else doYesNo(keltReluctantlyGetNaked,keltRefuseNakedness);
 				return;
 			}
 		}
@@ -525,7 +546,8 @@ private function keltMainEncounter3():void {
 			else outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r", false);
 		}
 		//player.addStatusValue(StatusAffects.Kelt,1,5+rand(4));
-		bowSkill(5+rand(4));
+		if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(5+rand(4));
+		else bowSkill(1);
 	}
 	//NAKERS
 	else {
@@ -589,7 +611,8 @@ private function keltMainEncounter3():void {
 			else outputText("Of course, Kelt's words only distract you even more from hitting the target.  Not because you are angry... but because you are aroused.  Somehow, his lewd comments and crude jibes make you shiver with anticipation.  He's just so powerful, so masculine.  Kelt seems well aware of the effect he has on you, and once reaches out to slap your ass heartily.  By the end of the training, you feel intensely horny.", false);
 			dynStats("lus", 10);
 			//player.addStatusValue(StatusAffects.Kelt,1,4);
-			bowSkill(4);
+			if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(4);
+			else bowSkill(1);
 			doNext(13);
 			return;
 		}
@@ -626,7 +649,8 @@ private function keltMainEncounter3():void {
 			//(+5 Submissive)
 			player.addStatusValue(StatusAffects.Kelt,2,5);
 			//player.addStatusValue(StatusAffects.Kelt,1,4);
-			bowSkill(4);
+			if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(4);
+			else bowSkill(1);
 			return;
 		}
 		//(Naked, 20% Chance)
@@ -646,7 +670,8 @@ private function keltMainEncounter3():void {
 			dynStats("lus", 15);
 			player.addStatusValue(StatusAffects.Kelt,2,5);
 			//player.addStatusValue(StatusAffects.Kelt,1,4);
-			bowSkill(4);
+			if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(4);
+			else bowSkill(1);
 			doNext(13);
 			return;
 		}
@@ -737,7 +762,7 @@ private function keltMainEncounterPostBlowjob():void {
 		else {
 			outputText("Despite the need, despite the desire, you are still in control of yourself enough to make a choice.  Do you submit to the centaur's will, and your own hunger?  Or will you somehow find the strength to walk away?", false);
 			//Submit				Resist!
-			simpleChoices("Submit",keltSubmitGivingBJ,"Resist",keltResistGivingBJ,"",0,"",0,"",0);
+			simpleChoices("Submit",keltSubmitGivingBJ,"Resist",keltResistGivingBJ,"",0,"",0,"FIGHT!", kelly.fightToBeatKelt);
 			return;
 		}
 	}
@@ -784,8 +809,9 @@ private function keltReluctantGivingBJ():void {
 	outputText("Kelt immediately moves over you, grinding his cock forcefully into your face.  He seems to enjoy teasing you with it above anything else as you wait anxiously for his command, nuzzling his cock but unable to do more until he allows it.  The musky scent of it fills you with a desire you don't dare admit to... but is present all the same.\r\r", false);
 	outputText("\"<i>Alright, bitch.  Swallow my cock.</i>\"\r\r", false);
 	outputText("Nothing could give you more pleasure.  You try to restrain yourself, forcing yourself to stroke the shaft experimentally a few times... but your hunger will not be contained.  Flushed with need, you open wide enough to slurp the head of his member in greedily, savoring the glorious taste of that wonderful precum.  Grunting to himself with satisfaction, Kelt pushes his hips forward insistantly.  Without even thinking about it, you open your throat to him, gagging slightly as his cock pushes past your tonsils and once more splits open your throat.  Those swollen testicles hang teasingly out of reach, and thoughts of his cum warming your belly urge you on further to swallow more and more wondrous cock.\r\r", false);
-	outputText("Kelt does not hesitate, and does more than his fair share.  Whenever you are reluctant, he firmly shoves forward, coaxing more out of your throat than you were willing to give.  Though he lasts some time, it is still too short before he groans aloud and begins spewing thick seed into your stomach.  You can feel the gooey wads warm your insides and slide into your stuffed belly, and shudder with satisfaction despite yourself.  His thick loads belong inside of you, his hungry, needy little cumdump.  By the time he is finished, your stomach is so full it aches... but the feeling of contentment at being full of his seed once more is far more cruelly satisfying to your bruised ego.  You almost feel incomplete as his slimy cock softens and withdraws from your aching throat... but you resist the need to lick it clean.\r\r", false);
-	outputText("\"<i>Pretty good, slut.  I knew there was a reason I kept you around.  Come back next time, and maybe I'll actually teach you something.  Or, who knows?  Maybe I'll just give you another snack, huh?  Ha!</i>\"\r\r", false);
+	outputText("Kelt does not hesitate, and does more than his fair share.  Whenever you are reluctant, he firmly shoves forward, coaxing more out of your throat than you were willing to give.  Though he lasts some time, it is still too short before he groans aloud and begins spewing thick seed into your stomach.  You can feel the gooey wads warm your insides and slide into your stuffed belly, and shudder with satisfaction despite yourself.  His thick loads belong inside of you, his hungry, needy little cumdump.  By the time he is finished, your stomach is so full it aches... but the feeling of contentment at being full of his seed once more is far more cruelly satisfying to your bruised ego.  You almost feel incomplete as his slimy cock softens and withdraws from your aching throat... but you resist the need to lick it clean.", false);
+	player.refillHunger(50);
+	outputText("\r\r\"<i>Pretty good, slut.  I knew there was a reason I kept you around.  Come back next time, and maybe I'll actually teach you something.  Or, who knows?  Maybe I'll just give you another snack, huh?  Ha!</i>\"\r\r", false);
 	outputText("Meekly you nod, humiliated and full of cum.  The worst part, by far, is how happy you are on the inside.  You try to tell yourself that this is wrong, that Kelt is an arrogant, cruel creature, and that this is the last time.  But you don't really believe that.  Despite the lies you tell yourself, you look forward to the next time he decides to use you.\r\r", false);	
 	dynStats("lus", 5);
 	//(+5 Submissiveness)*/

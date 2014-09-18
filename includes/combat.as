@@ -111,6 +111,7 @@ public function doCombat(eventNum:Number):void
 			mainView.hideMenuButton(MainView.MENU_DATA);
 			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 			mainView.hideMenuButton(MainView.MENU_PERKS);
+			mainView.hideMenuButton(MainView.MENU_STATS);
 			mainView.setButton(0, "Attack");
 			var waitT:String = "Wait";
 			if (monster.findStatusAffect(StatusAffects.Level) >= 0) waitT = "Climb";
@@ -445,7 +446,7 @@ public function doCombat(eventNum:Number):void
 				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 				mainView.hideMenuButton(MainView.MENU_LEVEL);
 				mainView.hideMenuButton(MainView.MENU_PERKS);
-
+				mainView.hideMenuButton(MainView.MENU_STATS);
 				gameState = 0;
 
 				// Prevent ChaosMonkah instances from getting stuck
@@ -791,7 +792,7 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			else if (monster.findStatusAffect(StatusAffects.QueenBind) >= 0) {
-				ropeStruggles(true);
+				(monster as HarpyQueen).ropeStruggles(true);
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.GooBind) >= 0) {
@@ -807,7 +808,7 @@ public function doCombat(eventNum:Number):void
 				player.addStatusValue(StatusAffects.GooArmorBind, 1, 1);
 				if (player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
 					if (monster.findStatusAffect(StatusAffects.Spar) >= 0) valeria.pcWinsValeriaSparDefeat();
-					else gooArmorBeatsUpPC();
+					else dungeons.heltower.gooArmorBeatsUpPC();
 					return;
 				}
 				combatRoundOver();
@@ -872,7 +873,7 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			else if (monster.findStatusAffect(StatusAffects.QueenBind) >= 0) {
-				ropeStruggles();
+				(monster as HarpyQueen).ropeStruggles();
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.GooBind) >= 0) {
@@ -891,11 +892,11 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.HarpyBind) >= 0) {
-				harpyHordeGangBangStruggle();
+				(monster as HarpyMob).harpyHordeGangBangStruggle();
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) {
-				struggleAtGooBind();
+				(monster as GooArmor).struggleAtGooBind();
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.UBERWEB) >= 0) {
@@ -2225,6 +2226,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
 	mainView.hideMenuButton( MainView.MENU_PERKS );
+	mainView.hideMenuButton( MainView.MENU_STATS );
 	//Flag the game as being "in combat"
 	gameState = 1;
 	monster = monster_;

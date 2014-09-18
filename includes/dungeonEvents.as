@@ -1,5 +1,6 @@
-﻿//Dungeon events from 11000+
-public function doDungeon(eventNo:Number):void {
+﻿//TO BE REMOVED
+//Dungeon events from 11000+
+//public function doDungeon(eventNo:Number):void {
 	//FACTORY
 	/*if(eventNo == 11000) dungeonLoc = 0;
 	if(eventNo == 11001) {
@@ -967,7 +968,7 @@ public function doDungeon(eventNo:Number):void {
 		loseToThisShitPartII();
 		return;
 	}*/
-	
+	/*
 	if(eventNo == 11084) dungeonLoc = 17;
 	if(eventNo == 11085) dungeonLoc = 18;
 	if(eventNo == 11086) dungeonLoc = 19;
@@ -1140,8 +1141,8 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11132) {
 		takeQueensStaff();
 		return;
-	}
-	if(eventNo == 11133) dungeonLoc = 23;
+	}*/
+	/*if(eventNo == 11133) dungeonLoc = 23;
 	if(eventNo == 11134) dungeonLoc = 24;
 	if(eventNo == 11135) dungeonLoc = 25;
 	if(eventNo == 11136) dungeonLoc = 26;
@@ -1212,8 +1213,8 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11163) {
 		fuckDatSphinx();
 		return;
-	}
-	eventParser(1);
-}
+	}*/
+//	eventParser(1);
+//}
 
 //BLAH!

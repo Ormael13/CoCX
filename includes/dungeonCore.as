@@ -23,6 +23,7 @@
 	//Display Proper Buttons
 	mainView.showMenuButton( MainView.MENU_APPEARANCE );
 	mainView.showMenuButton( MainView.MENU_PERKS );
+	mainView.showMenuButton( MainView.MENU_STATS );
 	mainView.hideMenuButton( MainView.MENU_DATA );
 
 	
@@ -453,7 +454,7 @@
 		}
 	}*/
 	//HELIA DUNGEONNNNNOOOO 1
-	if(roomNo == 17) {
+	/*if(roomNo == 17) {
 		//ROOM 1: Guard Hall
 		outputText("<b><u>Guard Hall</u></b>\n", true);
 		//Room Description:
@@ -637,8 +638,8 @@
 				choice5 = 11132;
 			}
 		}
-	}
-	if(roomNo == 23) {
+	}*/
+	/*if(roomNo == 23) {
 		clearOutput();
 		outputText("<b><u>Strange Gateway in the Sands</u></b>\n");
 		if(flags[kFLAGS.SANURA_DISABLED] > 0) {
@@ -924,7 +925,7 @@
 		choice3 = 11155;
 		text7 = "South";
 		choice7 = 11147;
-	}
+	}*/
 	
 	
 	

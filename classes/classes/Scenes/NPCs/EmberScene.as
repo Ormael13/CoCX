@@ -2063,7 +2063,9 @@ package classes.Scenes.NPCs
 			doNext(13);
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
-			fatigue(-50);
+			fatigue( -50);
+			player.refillHunger(75);
+			player.slimeFeed();
 			HPChange(player.maxHP() * .33, false);
 		}
 
@@ -2386,7 +2388,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nFinally, Ember's hands move to your cheeks, rubbing along them as " + emberMF("he", "she") + " feels every contour, every little curve on your face, and declares, \"<i>Can't hold back!</i>\"  " + emberMF("He", "She") + " takes hold of your head and begins forcing you up and down " + emberMF("his", "her") + " length.  You go limp and allow " + emberMF("him", "her") + " to use you like a living onahole, feeling the dragon piston you back and forth across the cock, struggling to constrict your throat to a properly pussy-like tightness.");
 
 			outputText("\n\n" + emberMF("He", "She") + " thrusts with ever-increasing force, bucking and groaning loudly as " + emberMF("his", "her") + " tongue lolls down across " + emberMF("his", "her") + " chest.  \"<i>Oh!  Oh!  Gonna... gonna...!</i>\"  " + emberMF("He", "She") + " lets out a full-throated bellow and discharges an explosive gout of cum into you.  With " + emberMF("his", "her") + " cock buried fully into you, you have no choice but to swallow - or, more accurately, let " + emberMF("him", "her") + " discharge stream after stream of jizz directly into your belly.");
-
+			player.refillHunger(50);
 			outputText("\n\nGushes of spooge flow into your midriff, which you can feel growing heavier and heavier with the accumulation, your skin stretching into a pregnancy-mocking bulge.  Suddenly Ember pulls you away from " + emberMF("him", "her") + ", giving you a mouthful of cum; you do your best to swallow, but can't help but let some of it escape.  Not that it would matter much anyway, because shortly after Ember extracts " + emberMF("his", "her") + " spewing member from your mouth and paints your face with the last few jets of jism.");
 
 			outputText("\n\nYou simply kneel there and take it, too full and out of breath to do anything about the cum-bath you're getting.  Finally, though, the dragon's overstimulated dick belches its last few blasts of frothy spunk, which land on your face as Ember slumps into " + emberMF("his", "her") + " seat, panting with exhaustion.  You heave and gasp for air, cum escaping your mouth, sighing in relief as you finally fill your lungs, then cradle your gurgling, sloshing belly, a grimace of discomfort crossing your face at the pressure before you expel a spunk-scented belch.  That feels better.");

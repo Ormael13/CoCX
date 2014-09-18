@@ -138,30 +138,30 @@ public function settingsScreen():void
 	outputText("<b>Settings toggles:</b>\n");
 
 	if(debug)
-		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
-		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.");
+		outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
 	
 	outputText("\n\n");
 
 	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-		outputText("Sprites enabled: <b>Yes</b>\n	You like to look at pretty pictures.");
+		outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
 	else
-		outputText("Sprites enabled: <b>No</b>\n	There are only words. Nothing else.");
+		outputText("Sprites: <font color=\"#800000\"><b>OFF</b></font>\n There are only words. Nothing else.");
 
 	outputText("\n\n");
 
 	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.");
+		outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is easier.");
 	else
-		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.");
+		outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is challenging.");
 
 	outputText("\n\n");
 
 	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.");
+		outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
-		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.");
+		outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
 
 	outputText("\n\n");
 	outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
@@ -170,32 +170,32 @@ public function settingsScreen():void
 
 	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 	{
-		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.");
-		outputText("\n	(Not gender preferences though. You still need the right hole.)");
+		outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
+		outputText("\n (Not gender preferences though. You still need the right hole.)");
 	}
 	else
-		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.");
+		outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
 
 
 	outputText("\n\n");
 
 	if(flags[kFLAGS.HYPER_HAPPY])
 	{
-		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.");
-		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
+		outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
+		outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 	}
 	else
-		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.");
+		outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
 
 	choices("Toggle Debug", toggleDebug,
 			"Sprite Toggle", toggleSpritesFlag,
 			"EZ Mode", toggleEasyModeFlag,
-			"Larger Font", incFontSize,
+			"Font Size", fontSettingsMenu,
 			"Controls", displayControls,
 			"Hyper Happy", toggleHyperHappy,
 			"Low Standards", toggleStandards,
 			"Silly Toggle", toggleSillyFlag,
-			"Smaller Font", decFontSize,
+			"Enable Real", enableRealisticPrompt,
 			"Back", mainMenu);
 	//Disables cheats on hardcore mode.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
@@ -209,6 +209,19 @@ public function settingsScreen():void
 		flags[kFLAGS.HYPER_HAPPY] = 0;
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 	}
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	{
+		removeButton(8);
+	}
+}
+
+public function fontSettingsMenu():void {
+	menu();
+	simpleChoices("Smaller Font", decFontSize,
+		"Larger Font", incFontSize,
+		"Reset Size", resetFontSize,
+		"", 0,
+		"Back", settingsScreen);
 }
 
 public function incFontSize():void
@@ -239,6 +252,14 @@ public function decFontSize():void
 	trace("Font size set to: " + (fmt.size as Number));
 	mainView.mainText.setTextFormat(fmt);
 	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
+}
+
+public function resetFontSize():void {
+	var fmt:TextFormat = mainView.mainText.getTextFormat();
+	if (fmt.size == null) fmt.size = 20;
+	fmt.size = 20;
+	mainView.mainText.setTextFormat(fmt);
+	flags[kFLAGS.CUSTOM_FONT_SIZE] = 0;
 }
 
 public function toggleStandards():void
@@ -310,6 +331,17 @@ public function toggleSillyFlag():void
 
 }
 
+public function enableRealisticPrompt():void {
+	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableRealisticForReal, settingsScreen);
+}
+
+public function enableRealisticForReal():void {
+	outputText("Realistic mode is now enabled.", true)
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	doNext(settingsScreen);
+}
 
 public function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);

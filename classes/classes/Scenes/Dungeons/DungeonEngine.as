@@ -11,6 +11,8 @@ package classes.Scenes.Dungeons
 	{
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
+		public var desertcave:DesertCave = new DesertCave;
+		public var heltower:HelDungeon = new HelDungeon;
 		
 		public function DungeonEngine() 
 		{
@@ -29,7 +31,7 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 6) factory.roomForemanOffice();
 			if (kGAMECLASS.dungeonLoc == 7) factory.roomControlRoom();
 			if (kGAMECLASS.dungeonLoc == 8) factory.roomPremiumStorage();
-			//if (kGAMECLASS.dungeonLoc == 9) factory.roomBathroom();
+			if (kGAMECLASS.dungeonLoc == 9) factory.roomBathroom();
 			//Deep Cave
 			if (kGAMECLASS.dungeonLoc == 10) deepcave.roomEntrance();
 			if (kGAMECLASS.dungeonLoc == 11) deepcave.roomTunnel();
@@ -38,10 +40,29 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 14) deepcave.roomTortureRoom();
 			if (kGAMECLASS.dungeonLoc == 15) deepcave.roomSecretPassage();
 			if (kGAMECLASS.dungeonLoc == 16) deepcave.roomZetazChamber();
+			//Tower of the Phoenix (Helia's Quest)
+			if (kGAMECLASS.dungeonLoc == 17) heltower.roomGuardHall();
+			if (kGAMECLASS.dungeonLoc == 18) heltower.roomCellar();
+			if (kGAMECLASS.dungeonLoc == 19) heltower.roomStairwell();
+			if (kGAMECLASS.dungeonLoc == 20) heltower.roomDungeon();
+			if (kGAMECLASS.dungeonLoc == 21) heltower.roomMezzanine();
+			if (kGAMECLASS.dungeonLoc == 22) heltower.roomThroneRoom();
 			//Desert Cave
-			
-			//Tower of the Phoenix
-			
+			if (kGAMECLASS.dungeonLoc == 23) desertcave.roomEntrance();
+			if (kGAMECLASS.dungeonLoc == 24) desertcave.roomCaveCommons();
+			if (kGAMECLASS.dungeonLoc == 25) desertcave.roomWestHall1();
+			if (kGAMECLASS.dungeonLoc == 26) desertcave.roomPlayRoom();
+			if (kGAMECLASS.dungeonLoc == 27) desertcave.roomLustRoom();
+			if (kGAMECLASS.dungeonLoc == 28) desertcave.roomWestHall2();
+			if (kGAMECLASS.dungeonLoc == 29) desertcave.roomNursery();
+			if (kGAMECLASS.dungeonLoc == 30) desertcave.roomPharmacy();
+			if (kGAMECLASS.dungeonLoc == 31) desertcave.roomEastHall1();
+			if (kGAMECLASS.dungeonLoc == 32) desertcave.roomSleepingChamber();
+			if (kGAMECLASS.dungeonLoc == 33) desertcave.roomBathroom();
+			if (kGAMECLASS.dungeonLoc == 34) desertcave.roomEastHall2();
+			if (kGAMECLASS.dungeonLoc == 35) desertcave.roomCumWitchBedroom();
+			if (kGAMECLASS.dungeonLoc == 36) desertcave.roomCumWitchOffice();
+			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSandMotherThrone();
 		}
 		
 		public function enterFactory():void {

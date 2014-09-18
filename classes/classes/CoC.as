@@ -197,10 +197,10 @@
 
 		include "../../includes/dreams.as";
 		//include "../../includes/dungeon2Supplimental.as";
-		include "../../includes/dungeonCore.as";
-		include "../../includes/dungeonEvents.as";
-		include "../../includes/dungeonHelSupplimental.as";
-		include "../../includes/dungeonSandwitch.as";
+		//include "../../includes/dungeonCore.as";
+		//include "../../includes/dungeonEvents.as";
+		//include "../../includes/dungeonHelSupplimental.as";
+		//include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 		include "../../includes/masturbation.as";
 		include "../../includes/pregnancy.as";
@@ -340,8 +340,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15_mod_0.6_WIP";
-			version = ver + " (<b>Codex + Dungeon Refactor</b>)";
+			ver = "0.8.15_mod_0.6";
+			version = ver + " (<b>Codex, Dungeon Refactor, and much more!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

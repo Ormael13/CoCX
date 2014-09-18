@@ -243,6 +243,7 @@ package classes
 
 		// Piercing perks
 		public static const PiercedCrimstone:PiercedCrimstonePerk = new PiercedCrimstonePerk();
+		public static const PiercedIcestone:PiercedIcestonePerk = new PiercedIcestonePerk();
 		public static const PiercedFertite:PiercedFertitePerk = new PiercedFertitePerk();
 		public static const PiercedFurrite:PerkType = mk("Pierced: Furrite", "Pierced: Furrite",
 				"Increases chances of encountering 'furry' foes.");

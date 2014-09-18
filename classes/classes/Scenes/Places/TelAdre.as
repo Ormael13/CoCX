@@ -497,6 +497,10 @@ private function chooseCrimstone():void {
 	piercingMat = 12;
 	areYouSure();
 }
+private function chooseIcestone():void {
+	piercingMat = 13;
+	areYouSure();
+}
 
 private function areYouSure():void {
 	spriteSelect(63);
@@ -515,8 +519,10 @@ private function chooseAdvancedMaterials():void {
 	outputText("\n2. Fertite - A green gem sometimes fished up from the bottom of Mareth's great lake, it is said to enhance the fertility of both genders.", false);
 	outputText("\n3. Furrite - This beautiful purple gem is actually crystalized from materials used in hunting lures.  It is said to enhance the wearer's appeal to beast-people.", false);
 	outputText("\n4. Crimstone - Crimstone is said to be formed from volcanic fires, and to keep the fires of one's desires burning brightly.", false);
+	outputText("\n5. Icestone - Found from the Glacial Rift, this rare gem is said to counter the effects of Crimstone and quell ever-burning desires. This will annihilate some of crimstone magic. Due to its rarity, this costs 2000 gems instead.", false);
 	outputText("\n\n<b>DISCLAIMER</b>: Yara's Piercing Studio is not responsible if the piercee's body absorbs any residual magic of these stones, and is not required to resolve any issues if the effects persist beyond removal.</b>", false);
-	simpleChoices("Lethite",chooseLethite,"Fertite",chooseFertite,"Furrite",chooseFurrite,"Crimstone",chooseCrimstone,"Back",chooseMaterials);
+	choices("Lethite", chooseLethite, "Fertite", chooseFertite, "Furrite", chooseFurrite, "Crimstone", chooseCrimstone, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", chooseMaterials);
+	if (player.gems >= 2000) addButton(4, "Icestone", chooseIcestone);
 }
 
 private function normalPierceAssemble():void {
@@ -534,12 +540,13 @@ private function normalPierceAssemble():void {
 	//10. Fertite (Fertility Booster)
 	//11. Furrite (Attracts Furries)
 	//12. Crimsonite (+Min Lust)
-	//13.
+	//13. Icestone (-Min Lust)
 	//var piercingMat:Number = 0;
 	var shortP:String = "";
 	var longP:String = "";
 	player.gems -= 100;
-	if(piercingMat > 8) player.gems -= 900;
+	if (piercingMat > 8) player.gems -= 900;
+	if (piercingMat == 13) player.gems -= 1000;
 	statScreenRefresh();
 	//set up material description
 	switch(piercingMat) {
@@ -601,9 +608,27 @@ private function normalPierceAssemble():void {
 			break;
 		case 12:
 			shortP += "crimstone ";
-			if(player.findPerk(PerkLib.PiercedCrimstone) < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
-			else player.addPerkValue(PerkLib.PiercedCrimstone,1,5);
+			if (player.findPerk(PerkLib.PiercedIcestone) >= 0) {
+				player.addPerkValue(PerkLib.PiercedIcestone, 1, -5);
+				if (player.perkv1(PerkLib.PiercedIcestone) <= 0) player.removePerk(PerkLib.PiercedIcestone);
+			}
+			else {
+				if (player.findPerk(PerkLib.PiercedCrimstone) <= 0) player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
+				else player.addPerkValue(PerkLib.PiercedCrimstone, 1, 5);
+			}
 			longP += "Crimstone ";
+			break;
+		case 13:
+			shortP += "icestone ";
+			if (player.findPerk(PerkLib.PiercedCrimstone) >= 0) {
+				player.addPerkValue(PerkLib.PiercedCrimstone, 1, -5);
+				if (player.perkv1(PerkLib.PiercedCrimstone) <= 0) player.removePerk(PerkLib.PiercedCrimstone);
+			}
+			else {
+				if (player.findPerk(PerkLib.PiercedIcestone) <= 0) player.createPerk(PerkLib.PiercedIcestone, 5, 0, 0, 0);
+				else player.addPerkValue(PerkLib.PiercedIcestone, 1, 5);
+			}
+			longP += "Icestone ";
 			break;
 	}
 	switch(piercingLoc) {

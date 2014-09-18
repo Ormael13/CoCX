@@ -95,7 +95,7 @@ package classes.Scenes.Areas
 				args[args.length] = 2005;
 			}
 			if (flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0) {
-				choices[choices.length] = kGAMECLASS.fightCumWitch;
+				choices[choices.length] = kGAMECLASS.dungeons.desertcave.fightCumWitch;
 				args[args.length] = -8008;
 			}
 			//Encounter Marcus

@@ -4,22 +4,63 @@ package classes.Scenes.Dungeons.HelDungeon
 
 	public class PhoenixPlatoon extends Monster
 	{
+		//ATTACK ONE: SPARTAN RUSH
+		public function phoenixPlatoonRush():void {
+			outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
+			//(Effect: Multiple medium-damage attacks)
+			//(Effect: Multiple light attacks)
+			createStatusAffect(StatusAffects.Attacks,2+rand(3),0,0,0);
+			eAttack();
+			combatRoundOver();
+		}
 
+		//ATTACK TWO: FIRE BREATH
+		public function phoenixPlatoonFireBreath():void {
+			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.");
+			//(Effect: One heavy-damage attack)
+			var damage:Number = 100 + rand(50);
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			combatRoundOver();
+		}
+		//ATTACK THREE: LUSTBANG GRENADE
+		public function phoenixPlatoonLustbang():void {
+			outputText("\"<i>LUSTBANG OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  A large glass sphere rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
+			//(Effect: Large lust increase)
+			game.dynStats("lus", 40);
+			combatRoundOver();
+		}
+
+		public function phoenixPlatoonAI():void {
+			if(findStatusAffect(StatusAffects.Platoon) < 0) {
+				phoenixPlatoonRush();
+				createStatusAffect(StatusAffects.Platoon,0,0,0,0);
+			}
+			else if(statusAffectv1(StatusAffects.Platoon) == 0) {
+				phoenixPlatoonFireBreath();
+				addStatusValue(StatusAffects.Platoon,1,1);
+			}
+			else {
+				phoenixPlatoonLustbang()
+				removeStatusAffect(StatusAffects.Platoon);
+			}
+		}
+		
 		override protected function performCombatAction():void
 		{
-			game.phoenixPlatoonAI();
+			phoenixPlatoonAI();
 		}
-
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.phoenixPlatoonLosesToPC();
+			game.dungeons.heltower.phoenixPlatoonLosesToPC();
 		}
-
+		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.phoenixPlatoonMurdersPC();
+			game.dungeons.heltower.phoenixPlatoonMurdersPC();
 		}
-
+		
 		public function PhoenixPlatoon()
 		{
 			this.a = "the ";

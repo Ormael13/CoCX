@@ -1107,6 +1107,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
 	var game:CoC = getGame();
 	game.dungeonLoc = 0;
+	game.tooltipLoc = "";
 	game.inDungeon = false;
 
 	//Autosave stuff

@@ -4,20 +4,69 @@ package classes.Scenes.Dungeons.HelDungeon
 
 	public class HarpyQueen extends Monster
 	{
+		public function harpyQueenAI():void {
+			if(rand(4) == 0) eldritchRopes();
+			else if(rand(2) == 0) lustSpikeAttack();
+			else windSlamAttack();
+		}
+		//ATTACK ONE: ELDRITCH ROPES
+		public function eldritchRopes():void {
+			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
+			//(Effect: Grab + Physical Damage)
+			var damage:int = 25 + rand(10);
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			createStatusAffect(StatusAffects.QueenBind,0,0,0,0);
+			combatRoundOver();
+		}
 
+		public function ropeStruggles(wait:Boolean = false):void {
+			clearOutput();
+			//Struggle Fail: 
+			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
+				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
+				var damage:int = 25 + rand(10);
+				damage = player.takeDamage(damage);
+				outputText(" (" + damage + ")");
+			}
+			else {
+				outputText("With supreme effort, you pull free of the magic ropes, causing the queen to tumble to her hands and knees.");
+				removeStatusAffect(StatusAffects.QueenBind);
+			}
+			combatRoundOver();
+		}
+
+		//ATTACK TWO: LUST SPIKE
+		public function lustSpikeAttack():void {
+			outputText("The Harpy Queen draws a strange arcane circle in the air, lines of magic remaining wherever the tip of her staff goes.  You try to rush her, but the circle seems to have created some kind of barrier around her.  You can only try to force it open - but too late!  A great pink bolt shoots out of the circle, slamming into your chest.  You suddenly feel light-headed and so very, very horny...");
+			//(Effect: Heavy Lust Damage)
+			game.dynStats("lus", 40);
+			combatRoundOver();
+		}
+
+		//ATTACK THREE: Wind Slam!
+		public function windSlamAttack():void {
+			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
+			//(Effect; Heavy Damage)
+			var damage:Number = 100 + rand(50);
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			combatRoundOver();
+		}
+		
 		override protected function performCombatAction():void
 		{
-			game.harpyQueenAI();
+			harpyQueenAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.harpyQueenDefeatedByPC();
+			game.dungeons.heltower.harpyQueenDefeatedByPC();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.harpyQueenBeatsUpPCBadEnd();
+			game.dungeons.heltower.harpyQueenBeatsUpPCBadEnd();
 		}
 
 		public function HarpyQueen()

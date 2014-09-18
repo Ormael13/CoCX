@@ -77,7 +77,7 @@ public function HPChange(changeNum:Number, display:Boolean):void
 		}
 		else
 		{
-			if(display) outputText("You gain " + int(changeNum) + " HP.\n", false);
+			if(display) outputText("You gain <font color=\"#008000\">" + int(changeNum) + "</font> HP.\n", false);
 			player.HP += int(changeNum);
 			mainView.statsView.showStatUp( 'hp' );
 			// hpUp.visible = true;
@@ -87,17 +87,17 @@ public function HPChange(changeNum:Number, display:Boolean):void
 	else
 	{
 		if(player.HP + changeNum <= 0) {
-			if(display) outputText("You take " + int(changeNum*-1) + " damage, dropping your HP to 0.\n", false);
+			if(display) outputText("You take <font color=\"#800000\">" + int(changeNum*-1) + "</font> damage, dropping your HP to 0.\n", false);
 			player.HP = 0;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 		else {
-			if(display) outputText("You take " + int(changeNum*-1) + " damage.\n", false);
+			if(display) outputText("You take <font color=\"#800000\">" + int(changeNum*-1) + "</font> damage.\n", false);
 			player.HP += changeNum;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow..
+	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
 	statScreenRefresh();
 }
 		
@@ -939,6 +939,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Slaves") != -1) {
 		toolTipText = "Check up on any slaves you have received and interact with them.";
 	}
+	if(buttonText.indexOf("Camp Actions") != -1) {
+		toolTipText = "Interact with the camp surroundings and also read codex.";
+	}
 	if(buttonText == "Masturbate") {
 		toolTipText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
 	}
@@ -1032,6 +1035,97 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Marble (Sex)") != -1) {
 		toolTipText = "Get with marble for a quick cuddle and some sex.";
 	}
+	//CAMP ACTIONS
+	if(buttonText == "SwimInStream") {
+		toolTipText = "Swim in stream and relax to pass time.";
+	}	
+	if(buttonText == "Watch Sunset") {
+		toolTipText = "Watch the sunset and relax.";
+	}	
+	if(buttonText == "Build Cabin") {
+		toolTipText = "Work on your cabin.";
+	}	
+	if(buttonText == "Enter Cabin") {
+		toolTipText = "Enter your cabin.";
+	}	
+	if(buttonText == "Read Codex") {
+		toolTipText = "Read any codex entries you have unlocked.";
+	}	
+	//-----------------
+	//-- DUNGEON INTERACTIONS
+	//-----------------
+	if(buttonText == "Iron Key") {
+		toolTipText = "Pick up the iron key. It looks like it might unlock the door in this factory.";
+	}		
+	if(buttonText == "Coffee") {
+		toolTipText = "Drink some coffee.";
+	}
+	if(buttonText == "Desk") {
+		toolTipText = "Check the desk for something.";
+	}
+	if(buttonText == "Valves") {
+		toolTipText = "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.";
+	}
+	if(buttonText == "Shutdown") {
+		toolTipText = "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.";
+	}
+	if (kGAMECLASS.tooltipLoc == "IncubusMechanic") {
+		if (buttonText == "Orally" || buttonText == "Service Him") {
+			if (player.hasCock()) toolTipText = "Service the incubus orally.";
+		}
+		if (buttonText == "Rape") {
+			if (player.hasCock()) toolTipText = "Fuck his butt.";
+			else toolTipText = "Ride him vaginally.";			
+		}
+		if (buttonText == "Anally" || buttonText == "Anal") {
+			toolTipText = "Ride him anally.";
+		}
+	}
+	if (kGAMECLASS.tooltipLoc == "OmnibusOverseer") {
+		if (buttonText == "Grow Breasts") {
+			if (player.hasCock()) toolTipText = "Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.";
+		}
+		if (buttonText == "Grow Dick") {
+			if (player.hasCock()) toolTipText = "Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.";
+		}
+		if (buttonText == "Normal Face") {
+			if (player.hasCock()) toolTipText = "Normalize your face. This will also change your ears back to human ears! \n\nAnd receive something else.";
+		}
+		if (buttonText == "Normal Chest") {
+			if (player.hasCock()) toolTipText = "Normalize your chest. This will shrink your oversized breasts to a modest size, if you have it. \n\nAnd receive something else.";
+		}
+		if (buttonText == "Normal Groin") {
+			if (player.hasCock()) toolTipText = "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. \n\nAnd receive something else.";
+		}
+		if (buttonText == "Normal Legs") {
+			if (player.hasCock()) toolTipText = "Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.";
+		}
+		if (buttonText == "No (Let go)") {
+			if (player.hasCock()) toolTipText = "Refuse the offer and let the demon go.";
+		}
+		if (buttonText == "No (Kill Her)") {
+			if (player.hasCock()) toolTipText = "Refuse the offer and kill the demon instead.";
+		}
+	}
+	if (kGAMECLASS.tooltipLoc == "Zetaz") {
+		if (buttonText == "Sexual") {
+			if (player.hasCock()) toolTipText = "Chain the imp up and sexually interrogate him.";
+		}
+		if (buttonText == "End Him") {
+			if (player.hasCock()) toolTipText = "Kill the imp. After all, he deserves to be bad-ended.";
+		}
+		if (buttonText == "Safety") {
+			if (player.hasCock()) toolTipText = "Release the imp after you get the information you need.";
+		}
+		
+		if (buttonText == "'Release'") {
+			if (player.hasCock()) toolTipText = "Release the imp from the bonds.";
+		}
+		if (buttonText == "Tighten") {
+			if (player.hasCock()) toolTipText = "Tighten the straps.";
+		}
+	}
+	
 	//-----------------
 	//-- LEVEL UP SCREEN 
 	//-----------------
@@ -1085,6 +1179,12 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Silly Toggle") != -1) {                        
 		toolTipText = "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.";
+	}
+	if(buttonText.indexOf("EZ Mode") != -1) {                        
+		toolTipText = "Toggles easy mode. If enabled, enemy damage is halved and bad-ends can be ignored.";
+	}
+	if(buttonText.indexOf("Sprite Toggle") != -1) {                        
+		toolTipText = "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.";
 	}
 	if(buttonText.indexOf("AutoSav") != -1) {                
 		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
@@ -1702,10 +1802,13 @@ public function displayStats(e:MouseEvent = null):void
 	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
 	
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
-		combatStats += "<b>Rapier Skill (Out of 4):</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "\n";
+		combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "/4\n";
 	
-	combatStats += "<b>Tease Skill (Out of 5):</b>  " + player.teaseLevel + "\n";
-	
+	if (player.teaseLevel < 5)
+		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + "/5 (Exp: " + player.teaseXP + "/"+ (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1))+ ")\n";
+	else
+		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + "/5 (Exp: MAX)\n";	
+		
 	if (combatStats != "")
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
 	// End Combat Stats
@@ -1954,11 +2057,12 @@ public function displayStats(e:MouseEvent = null):void
 			interpersonStats += "100%\n";
 	}
 	
-	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
+	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
 		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 		else
-			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt)/130*100) + "%\n";
+			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt) / 130 * 100) + "%\n";
+			
 	}
 	
 	if (flags[kFLAGS.ANEMONE_KID] > 0)

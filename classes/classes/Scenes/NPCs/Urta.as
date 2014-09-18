@@ -1574,8 +1574,9 @@ private function drinkUrtasCumGlass():void {
 	//(+Bonus luv)
 	urtaLove(1);
 	outputText("", true);
-	outputText("You give her a good look at the full glass and tip it back, gulping down her thick goop, letting it run out of the corners of your mouth.  Urta looks on, dumbfounded while you guzzle her remaining seed from the cup.  You set it down and burp, leaning over to give her a wet kiss, letting her taste both her sexes on your tongue.  She breaks the kiss and says, \"<i>Oh by Marae, I love you " + player.short + ".  Thank you so much.</i>\"\n\n", false);
-	outputText("You smile knowingly and leave, intent on cleaning up a little back at camp.", false);
+	outputText("You give her a good look at the full glass and tip it back, gulping down her thick goop, letting it run out of the corners of your mouth.  Urta looks on, dumbfounded while you guzzle her remaining seed from the cup.  You set it down and burp, leaning over to give her a wet kiss, letting her taste both her sexes on your tongue.  She breaks the kiss and says, \"<i>Oh by Marae, I love you " + player.short + ".  Thank you so much.</i>\"", false);
+	player.refillHunger(30);
+	outputText("\n\nYou smile knowingly and leave, intent on cleaning up a little back at camp.", false);
 	dynStats("sen", 1, "lus", 20);
 	doNext(13);
 }

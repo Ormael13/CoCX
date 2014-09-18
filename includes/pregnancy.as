@@ -42,7 +42,7 @@ public function updatePregnancy():Boolean {
 			displayedUpdate = bog.phoukaScene.phoukaPregUpdate();
 		}
 		if(player.pregnancyType == player.PREGNANCY_SAND_WITCH) {
-			displayedUpdate = sandPregUpdate();
+			displayedUpdate = dungeons.desertcave.sandPregUpdate();
 		}
 		if(player.pregnancyType == player.PREGNANCY_URTA) {
 			displayedUpdate = urtaPregs.urtaPregooUpdates();
@@ -1329,7 +1329,7 @@ public function updatePregnancy():Boolean {
 	}
 	if(player.pregnancyType == player.PREGNANCY_SAND_WITCH && player.pregnancyIncubation == 1) {
 		displayedUpdate = true;
-		birthAWitch();
+		dungeons.desertcave.birthAWitch();
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 	}

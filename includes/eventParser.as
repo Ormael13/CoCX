@@ -35,6 +35,7 @@ public function eventParser(eventNo:*):void {
 			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
 			mainView.hideMenuButton( MainView.MENU_PERKS );
+			mainView.hideMenuButton( MainView.MENU_STATS );
 		}
 		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
@@ -50,7 +51,7 @@ public function eventParser(eventNo:*):void {
 		if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
 		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
 		if(eventNo >= 10000 && eventNo < 10999) charCreation.doCreation(eventNo);
-		if(eventNo >= 11000) doDungeon(eventNo);
+		//if(eventNo >= 11000) doDungeon(eventNo);
 	}
 
 	else
@@ -2214,7 +2215,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;   
 		}
 		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6) {
-			morningAfterHeliaDungeonAgreements();
+			kGAMECLASS.dungeons.heltower.morningAfterHeliaDungeonAgreements();
 			return true;
 		}
 		//Helspawn night smex!

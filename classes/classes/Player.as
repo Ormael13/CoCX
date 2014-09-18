@@ -1669,6 +1669,8 @@ use namespace kGAMECLASS;
 			}
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
+			//Subtract points for Icestone!
+			min -= perkv1(PerkLib.PiercedIcestone);
 			min += perkv1(PerkLib.PentUp);
 			//Harpy Lipstick status forces minimum lust to be at least 50.
 			if(min < 50 && findStatusAffect(StatusAffects.Luststick) >= 0) min = 50;

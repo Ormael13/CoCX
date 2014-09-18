@@ -4,12 +4,12 @@ package classes.Scenes.Dungeons.DeepCave
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.ShouldraFollower;
-	/**
-	 * ...
-	 * @author Kitteh6660
-	 */
+
 	public class ValaScene extends BaseContent
 	{
+		// VALA_CUMBATH_TIMES:int = 433;
+		// TIMES_VALA_CONSENSUAL_BIG:int = 767;
+		// TIMES_VAPULA_AND_GIANT_VALA:int = 768;
 		
 		public function ValaScene() 
 		{

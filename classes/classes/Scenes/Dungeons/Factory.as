@@ -629,6 +629,7 @@ package classes.Scenes.Dungeons
 				if(player.biggestLactation() > 1) outputText("splattering milk and pre everywhere.\n\n", false);
 				else outputText("splattering your tits with escaped sexual fluids.\n\n", false);
 				outputText("The demon tenses, pulling your head forwards and burying your nose against his belly.  The dick in your mouth slides down your throat, hanging just above your belly as it begins to fill your gut with bursts of demonic warmth.  Black cum erupts from your nipples as his orgasm overwhelms their meager storage capacity, soaking your tits in his corruptive essence as the pleasure finally breaks your mind.  Your eyes roll back into your head as you begin cumming... and cumming... and cumming. The orgasm drags on and on as more and more cum pours into your body.  Like a passenger in a car you see what's happening but have no control.  Your body is used and abused for hours before you finally drift off to sleep.", false);
+				player.refillHunger(100);
 				player.orgasm();
 				dynStats("cor", 20);
 				if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
@@ -675,6 +676,7 @@ package classes.Scenes.Dungeons
 					player.cuntChange(player.vaginalCapacity()*.8, true);
 					if(player.cor >= 80) outputText("You cum more times than you are able to count, each time causing a tightening of your fuckholes, which increases the rubbing against the demonic nodules and sends another wave of pleasure to your dazed brain.  You begin to drool freely, reveling in this most unholy mating.  ", false);
 					outputText("The prick in your mouth surges forward, sliding deep into your throat.  The coils around your neck tighten in response, choking your neck into a tight cock-sleeve as you feel bulges of cum moving along its length.  In moments you feel your belly starting to grow full, sloshing with cum as you become desperate to breathe.  The tentacles lodged in your " + assholeDescript() + " and " + vaginaDescript(0) + " react in similar fashion, stretching you wide as they begin pumping your body full of vast quantities of spunk.  A few free tentacles begin spurting gobs of the white stuff onto your " + player.skinDesc + ", soaking you in the stuff as you black out from a combination of oxygen deprivation and pleasure.", false);
+					player.refillHunger(100);
 					player.orgasm();
 					dynStats("cor", 25);
 					player.buttChange(monster.cockArea(0), true);
@@ -707,6 +709,7 @@ package classes.Scenes.Dungeons
 					}
 					outputText("The feeling is so intense that your " + hipDescript() + " twitch and move of their own volition while your eyes roll back in pleasure.\n\n", false);
 					outputText("You black out just as you feel the cock-tentacle in your throat retracting. You dully feel your body drop to the ground, your pregnant-looking belly sloshing with demon jizz.", false);
+					player.refillHunger(100);
 					player.buttChange(monster.cockArea(0), true);
 					player.orgasm();
 					dynStats("cor", 25);
@@ -1453,9 +1456,10 @@ package classes.Scenes.Dungeons
 		public function roomLobby():void {
 			kGAMECLASS.dungeonLoc = 0;
 			outputText("<b><u>The Factory Foyer</u></b>\n", true);
-			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
-			dungeons.setDungeonButtons(true, checkDoor1, false, null, false, null, true, roomBreakRoom);
+			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
+			dungeons.setDungeonButtons(true, checkDoor1, false, null, true, roomBathroom, true, roomBreakRoom);
 			addButton(5, "Leave", exitDungeon);
+			addButton(6, "Bathroom Door", roomBathroom);
 		}
 		
 		public function roomBreakRoom():void {
@@ -1531,6 +1535,7 @@ package classes.Scenes.Dungeons
 		
 		public function roomFurnaceRoom():void {
 			kGAMECLASS.dungeonLoc = 3;
+			kGAMECLASS.tooltipLoc = "IncubusMechanic";
 			outputText("<b><u>Furnace Room</u></b>\n", true)
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				outputText("The air inside this room is hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ", false);
@@ -1600,6 +1605,7 @@ package classes.Scenes.Dungeons
 		
 		public function roomForemanOffice():void {
 			kGAMECLASS.dungeonLoc = 6;
+			kGAMECLASS.tooltipLoc = "OmnibusOverseer"
 			//Foreman's Office
 			outputText("<b><u>Foreman's Office</u></b>\n", true);
 			outputText("This office provides an excellent view of the 'factory floor' through a glass wall along the north side.  Towards the south side of the room is a simple desk with an even simpler chair behind it.  The desk's surface is clear of any paperwork, and only has a small inkwell and quill on top of it.  There are a few statues of women and men posted at the corners of the room.  All are nude and appear to be trapped in mid-orgasm.  You wonder if they're statues or perhaps some kind of perverted petrified art.  The north has a glass door leading back to the factory.  There are two other doors, both made of very solid looking metal.  One is on the east wall and another is on the south, behind the desk.  The one behind the desk is marked 'Premium Storage' (though it appears to be locked).", false);
@@ -1672,8 +1678,13 @@ package classes.Scenes.Dungeons
 			}
 		}
 		
-		/*public function roomBathroom():void {
-			
-		}*/
+		public function roomBathroom():void {
+			kGAMECLASS.dungeonLoc = 9;
+			outputText("<b><u>Washroom</u></b>\n", true);
+			outputText("This room is fairly clean. At one of the walls, there is a row of four sinks. Opposite side, there are few bathroom stalls. Three urinals are mounted against one of the walls. You'd guess even the demons need to use the bathroom.", false);
+			dungeons.setDungeonButtons(false, null, false, null, false, null, true, roomLobby);
+			//outputText("Do you use?")
+			//addButton(2, "Use", useBathroom);
+		}
 	}
 }

@@ -812,10 +812,7 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(23);
 		outputText("Giacomo holds up the item and says, \"<i>Ah, yes! The quintessential elixir for all travelers, this little bottle of distilled livelihood will aid you in restoring your energy on your journey and, should you be hurt or injured, will aid the body's ability to heal itself. Yes ", true);
-		if (player.gender == 1)
-			outputText("sir, ", false);
-		if (player.gender == 2 || player.gender == 3)
-			outputText("madam, ", false);
+		player.mf("sir, ", "madam, ")
 		outputText("this is liquid gold for pilgrim and adventurer alike. Interested? It is <b>15 gems</b></i>.\"  ", false);
 		doYesNo(2020, 2016);
 	}
@@ -1121,6 +1118,7 @@ public function doEvent(eventNo:Number):void
 			outputText("You peruse the erotic book. The story is one of a group of sisters who are all impossibly heavy-chested and equally horny getting into constant misadventures trying to satisfy their lust. While the comic was entertaining and erotic to the highest degree, you cannot help but laugh at how over-the-top the story and all of the characters are. Were the world as it was in the book, nothing would get done as humanity would be fucking like jackrabbits in heat for the rest of their lives. While certainly a tempting proposition, everyone gets worn out sometime. You place the book in your sack, well entertained and with a head filled with wilder perversions than what you woke up with this morning.", true);
 			doNext(2017);
 			player.gems -= 10;
+			dynStats("lib", 4, "lust", 10 + (player.lib / 3));
 			player.createKeyItem("Hentai Comic", 0, 0, 0, 0);
 			statScreenRefresh();
 		}
@@ -1988,10 +1986,10 @@ public function doEvent(eventNo:Number):void
 		doNext(13);
 	}
 	//Bad end for going full demon
-	else if (eventNo == 2191)
+	/*else if (eventNo == 2191)
 	{
 		demonBadEnd();
-	}
+	}*/
 	
 	else if (eventNo == 2203)
 	{
