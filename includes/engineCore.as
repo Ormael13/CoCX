@@ -1173,6 +1173,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("ASPLODE") != -1) {                        
 		toolTipText = "MAKE SHIT ASPLODE";
 	}
+	if(buttonText.indexOf("NewGamePlus") != -1) {                        
+		toolTipText = "Start a new game with your equipment, experience, and gems carried over.";
+	}
 	//Settings
 	if(buttonText.indexOf("Toggle Debug") != -1) {                        
 		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
@@ -1180,7 +1183,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Silly Toggle") != -1) {                        
 		toolTipText = "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.";
 	}
-	if(buttonText.indexOf("EZ Mode") != -1) {                        
+	if(buttonText.indexOf("Easy Mode") != -1) {                        
 		toolTipText = "Toggles easy mode. If enabled, enemy damage is halved and bad-ends can be ignored.";
 	}
 	if(buttonText.indexOf("Sprite Toggle") != -1) {                        
@@ -1792,7 +1795,7 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Combat Stats
 	var combatStats:String = "";
 	
-	if (player.hasKeyItem("Bow") >= 0)
+	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0)
 		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n";
 		
 	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";

@@ -3101,25 +3101,25 @@
 
 		public function reducto(player:Player):void
 		{
-			var ballsEvent:Number = 0;
-			if (player.balls > 0 && player.ballSize > 1) ballsEvent = 1054;
-			var clitEvent:Number = 0;
-			if (player.vaginas.length > 0 && player.clitLength > .25) clitEvent = 1056;
-			var breastEvent:Number = 0;
-			if (player.breastRows.length > 0 && player.biggestTitSize() > 0) breastEvent = 1055;
-			var cockEvent:Number = 0;
-			if (player.cockTotal() > 0 && player.biggestCockArea() > 6) cockEvent = 1057;
-			var nippleEvent:Number = 0;
-			if (player.nippleLength > .25) nippleEvent = 1062;
-			var buttEvent:Number = 0;
-			if (player.buttRating > 1) buttEvent = 1071;
-			var hipEvent:int = 0;
-			if (player.hipRating > 2) hipEvent = 1122;
+			menu();
+			if (player.cockTotal() > 0 && player.biggestCockArea() > 6) addButton(0, "Cock", eventParser, 1057)
+			if (player.balls > 0 && player.ballSize > 1) addButton(1, "Balls", eventParser, 1054);
+			if (player.breastRows.length > 0 && player.biggestTitSize() > 0) addButton(2, "Breasts", eventParser, 1055);
+			if (player.nippleLength > .25) addButton(3, "Nipples", eventParser, 1062);
+			if (player.vaginas.length > 0 && player.clitLength > .25) addButton(4, "Clit", eventParser, 1056); 
+			if (player.buttRating > 1) addButton(5, "Butt", eventParser, 1071);
+			if (player.hipRating > 2) addButton(6, "Hips", eventParser, 1122);
+			if (player.hornType != HORNS_NONE && player.horns > 2) addButton(7, "Horns", shrinkHorns, player);
 			kGAMECLASS.itemSubMenu = true;
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?", true);
-			choices("Balls", ballsEvent, "Breasts", breastEvent, "Butt", buttEvent, "Clit", clitEvent, "Cock", cockEvent, "Hips", hipEvent, "Nipples", nippleEvent, "", 0, "", 0, "Nevermind", 1053);
+			addButton(9, "Nevermind", eventParser, 1053);
 		}
-
+		public function shrinkHorns(player:Player):void {
+			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n", true)
+			outputText("Incredibly, it works and you can feel your horns receding by an inch.")
+			player.horns -= 1;
+			inventory.itemGoNext();
+		}
 
 		public function lactaid(player:Player):void
 		{

@@ -837,7 +837,7 @@ internal function takeUrtaInTheButtPublically():void {
 	urtaSprite();
 	outputText("", true);
 	var tooBig:Boolean = false;
-	if(player.cor < 30 && flags[kFLAGS.PC_FETISH] == 0) {
+	if(player.cor < 30 && flags[kFLAGS.PC_FETISH] == 0 && flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {
 		outputText("No way!  You're not going to do that in front of EVERYONE.", false);
 		doNext(telAdre.barTelAdre);
 		return;
@@ -4729,8 +4729,8 @@ private function getAPetReward():void {
 	outputText(" a little twirl with a soft, padded toe.  You can't help but moan into the bowl as you go, your legs shivering and stomach twisting with desire.  You continue to lap at the bowl eagerly downing mouthful after mouthful and being rewarded with more pleasure.  Even when you've licked the bowl clean, you find yourself lowering your head further and slurping away the remnants that splattered onto the floor.  Urta seems to find this satisfactory, as she picks up the pace, ");
 	if(player.hasCock()) outputText("jerking off your cock between two toes");
 	else outputText("rubbing your little love button like mad with one soft toe");
-	outputText(", until you just can't handle any more.");
-
+	outputText(", until you just can't handle any more. ");
+	player.refillHunger(75);
 	outputText("\n\nYou cry out and bite the side of the bed as a powerful orgasm washes over you.  It feels like a tidal wave of intense pleasure, centered in your groin and rippling outwards with the force of a hurricane.  Your arms and legs all wobble with instability while your muscles tense and relax, spasming uncontrollably.  ");
 	if(player.hasCock()) outputText("The cock between your legs, meanwhile, stiffens, briefly becoming harder than you've ever felt before, before blasting the floor with jet after jet of silky white cum.");
 	else outputText("Meanwhile, your vagina clamps on nothing, achingly, painfully empty.  Juices spray out onto Urta's foot and down your thighs, soaking the floor beneath you in yet more slippery femcum.");

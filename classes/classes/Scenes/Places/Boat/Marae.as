@@ -29,16 +29,16 @@ package classes.Scenes.Places.Boat
 		
 		public function tentacleRape():void {
 			
-			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin!", false);
+			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin! ", false);
 			if (rand(100) < 20 + (player.spe/2)) 
 			{
-				outputText("You manage to successfully run from her tentacles!", false);
+				outputText("You manage to successfully run from her tentacles! ", false);
 			}
 			else
 			{
-				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me! </i>\" Marae giggles.", false);
-				var lustDmg:Number = 20 + rand(player.cor / 10) + rand(10);
-				game.dynStats("lust", lustDmg);
+				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me! </i>\" Marae giggles. ", false);
+				var lustDmg:Number = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
+				game.dynStats("lust", lustDmg, "resisted", false);
 				outputText("(+" + lustDmg + " lust)");
 				
 			}
@@ -78,7 +78,7 @@ package classes.Scenes.Places.Boat
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "green";
 			this.hairLength = 36;
-			initStrTouSpeInte(150, 150, 60, 110);
+			initStrTouSpeInte(150, 150, 70, 110);
 			initLibSensCor(60, 25, 100);
 			this.weaponName = "tentacles";
 			this.weaponVerb="slap";
@@ -87,7 +87,7 @@ package classes.Scenes.Places.Boat
 			this.weaponValue = 25;
 			this.armorName = "bark";
 			this.armorDef = 30;
-			this.bonusHP = 3750;
+			this.bonusHP = 3500;
 			this.lust = 30;
 			this.lustVuln = .02;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -97,6 +97,8 @@ package classes.Scenes.Places.Boat
 			this.gems = 1000;
 			this.special1 = tentacleAttack;
 			this.special2 = tentacleRape;
+			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

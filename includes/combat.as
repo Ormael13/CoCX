@@ -4990,9 +4990,11 @@ public function runAway(callHook:Boolean = true):void {
 	//Attempt texts!
 	if(monster.short == "Marae") {
 		outputText("Your boat is blocked by tentacles! ");
-		if(!player.canFly()) outputText("You may not be able to swim fast enough.");
-		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your " + player.legs() + " and pull you down.");
-		outputText("It looks like you cannot escape.");
+		if(!player.canFly()) outputText("You may not be able to swim fast enough. ");
+		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your " + player.legs() + " and pull you down. ");
+		outputText("It looks like you cannot escape. ");
+		enemyAI();
+		return;
 	}
 	if(monster.short == "Ember") {
 		outputText("You take off");

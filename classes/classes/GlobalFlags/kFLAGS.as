@@ -1230,7 +1230,7 @@ public static const FACTORY_TAKEN_GROPLUS:int                                   
 public static const FACTORY_MILKER_BUILT:int                                   		= 1222;
 public static const KELT_KILL_PLAN:int                                   			= 1223;
 public static const KELT_KILLED:int                                   				= 1224;
-public static const UNKNOWN_FLAG_NUMBER_01225:int                                   = 1225;
+public static const WHITNEY_GONE:int                                   				= 1225;
 public static const CODEX_CURRENT_ENTRY:int                                   		= 1226;
 public static const CODEX_PAGE_RACES:int                                   			= 1227;
 public static const CODEX_PAGE_ITEMS:int                                   			= 1228;
@@ -1255,8 +1255,8 @@ public static const CODEX_ENTRY_SANDWITCHES:int                                 
 public static const CODEX_ENTRY_SATYRS:int                                   		= 1247;
 public static const CODEX_ENTRY_SHARKGIRLS:int                                   	= 1248;
 public static const CODEX_ENTRY_SUCCUBUS:int                                   		= 1249;
-public static const UNKNOWN_FLAG_NUMBER_01250:int                                   = 1250;
-public static const UNKNOWN_FLAG_NUMBER_01251:int                                   = 1251;
+public static const PIG_SLUT_DISABLED:int                                   		= 1250;
+public static const MARBLE_CORRUPT_MARAE_STORY:int                                  = 1251;
 public static const UNKNOWN_FLAG_NUMBER_01252:int                                   = 1252;
 public static const UNKNOWN_FLAG_NUMBER_01253:int                                   = 1253;
 public static const UNKNOWN_FLAG_NUMBER_01254:int                                   = 1254;

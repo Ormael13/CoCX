@@ -81,6 +81,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",urta.slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",urta.blowUrtaUnderTheTableLuv);
 			addButton(2,"Eat Out",urta.eatUrtaOutNomNomPussy);
+			addButton(4,"Leave",telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {

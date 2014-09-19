@@ -173,7 +173,7 @@ public function winAgainstMarae():void {
 	if (player.str < 40) outputText("You scream as your hand hits the chitin. Maybe it's because you're not strong enough? ")
 	if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ")
 	if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ")
-	outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentalces in it.");
+	outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
 	outputText("\n<b>(Key Item Gained: Divine Bark Plates!)</b>", false)
 	player.createKeyItem("Tentacled Bark Plates", 0, 0, 0, 0);
 	outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)

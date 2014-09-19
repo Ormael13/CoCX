@@ -2,7 +2,11 @@
 //const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
 public function isHalloween():Boolean {
-	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
+	if (flags[kFLAGS.ITS_EVERY_DAY] <= 0)
+	{
+		return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
+	}
+	else return true;
 }
 
 
@@ -31,7 +35,14 @@ public function pumpkinFuckEncounter():void {
 		outputText("\n\nOdd as it is, it doesn't seem to react as you look it over.  You avoid it, for now.");
 		doNext(13);
 	}
-	simpleChoices("Fuck It",fuck,"Mount It",mount,"",0,"",0,"No Way",13);
+	simpleChoices("Fuck It", fuck, "Mount It", mount, "", 0, "", 0, "No Way", 13);
+	//addButton(3, "Smash It", pumpkinSmash);
+}
+
+public function pumpkinSmash():void {
+	outputText("You have no idea but to be safe, you pick up the pumpkin and throw the pumpkin at the tree, shattering the pumpkins into several pieces.\n\n", true);
+	outputText("As you walk away, you are interrupted by someone.", false);
+	doNext(pumpkinFuckPartII);
 }
 
 //[HOLY SHIT YOU BE FUCKING A PUMPKIN]

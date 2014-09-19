@@ -1307,11 +1307,12 @@ public function campFollowers():void {
 private function campActions():void {
 	menu();
 	outputText("What would you like to do?", true)
-	addButton(0, "SwimInStream", swimInStream);
-	//addButton(1, "ExaminePortal", examinePortal); //Examine portal.
+	//addButton(0, "SwimInStream", swimInStream);
+	addButton(1, "ExaminePortal", examinePortal); //Examine portal.
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin); //Enter cabin for furnish.
+	//addButton(4, "Marae", kGAMECLASS.boat.marae.initiateFightMarae);
 	addButton(8, "Read Codex", codex.accessCodexMenu);
 	addButton(9, "Back", eventParser, 1);
 }
@@ -1345,7 +1346,7 @@ private function swimInStream():void {
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
 	{
-		outputText("\n\n(PLACEHOLDER) Your mouse girl-lover Amily joins you.", true)
+		outputText("\n\n(PLACEHOLDER) Your mouse girl-lover Amily joins you.", false)
 	}
 	//Pranks!
 	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
@@ -1394,13 +1395,13 @@ private function swimInStreamPrank1():void {
 		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
 		pranked = true;
 	}
-	if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
+	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
 	{
 		outputText("", false);
 		pranked = true;
-	}
-	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming. ", false);
-	else outputText("You feel accomplished from the prank and resume swimming. ", false);
+	}*/
+	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.", false);
+	else outputText(" You feel accomplished from the prank and resume swimming. ", false);
 	doNext(swimInStreamFinish);
 }
 
@@ -2018,6 +2019,11 @@ private function exgartuanCampUpdate():void {
 
 private function fixFlags():void {
 	//Marae
+	if (player.findStatusAffect(StatusAffects.MetMarae) >= 0)
+	{
+		flags[kFLAGS.MET_MARAE] = 1
+		player.removeStatusAffect(StatusAffects.MetMarae);		
+	}
 	if (player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0)
 	{
 		flags[kFLAGS.MARAE_QUEST_START] = 1

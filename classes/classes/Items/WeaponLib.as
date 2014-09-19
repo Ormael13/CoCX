@@ -23,6 +23,7 @@ package classes.Items
 		public const L_DAGGR:Weapon = mk("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,150,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it. \n\nType: Weapon (Dagger) \nAttack: 3 \nBase value: 150 \nInflicts lust damage on strike.","Aphrodisiac Weapon");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
 		public const PIPE   :Weapon = mk("Pipe   ","Pipe","pipe","a pipe","smash",5,25,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool. \n\nType: Weapon \nAttack: 5 \nBase value: 25");
+		public const PTCHFRK:Weapon = mk("PtchFrk","Pitckfork","pitchfork","a pitchfork","stab",10,200,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon. \n\nType: Weapon \nAttack: 10 \nBase value: 200");
 		public const RIDINGC:Weapon = mk("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,50,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  \n\nType: Weapon (Whip) \nAttack: 5 \nBase value: 50");
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
 		public const S_BLADE:Spellblade = new Spellblade();

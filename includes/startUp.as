@@ -189,7 +189,7 @@ public function settingsScreen():void
 
 	choices("Toggle Debug", toggleDebug,
 			"Sprite Toggle", toggleSpritesFlag,
-			"EZ Mode", toggleEasyModeFlag,
+			"Easy Mode", toggleEasyModeFlag,
 			"Font Size", fontSettingsMenu,
 			"Controls", displayControls,
 			"Hyper Happy", toggleHyperHappy,

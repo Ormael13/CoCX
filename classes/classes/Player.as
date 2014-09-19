@@ -1700,7 +1700,7 @@ use namespace kGAMECLASS;
 				}
 			}
 			if (min < 30 && armorName == "lusty maiden's armor") min = 30;
-			
+			if (min < 20 && armorName == "tentacled bark armor") min = 20;
 			return min;
 		}
 

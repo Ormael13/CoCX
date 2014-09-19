@@ -23,7 +23,11 @@ Note on progression:
 //const TURKEY_FUCK_YEAR_DONE:int = 566;
 
 public function isThanksgiving():Boolean {
-	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));
+	if (flags[kFLAGS.ITS_EVERY_DAY] <= 0)
+	{
+		return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));
+	}
+	else return true;
 }
    
 //Introduction: -McGirt
@@ -501,9 +505,16 @@ public function pigSlutRoastingGreet():void {
 	dynStats("lus", 5);
 	menu();
 	if(player.gems >= 1) addButton(0,"Throw gem",getARoastPiggueOinkOinkOinkMotherfucker);
-	addButton(1,"Nah",telAdre.barTelAdre);
+	addButton(1, "Nah", telAdre.barTelAdre);
+	addButton(2, "Never", disablePigSlut);
 }
 //[ In For A Gem... ] [ Not My Style ]
+
+public function disablePigSlut():void {
+	outputText("Pig sluts are not really your thing. You tell her that you have no interest in her. She seems to be a bit heartbroken.", true)
+	flags[kFLAGS.PIG_SLUT_DISABLED] = 1;
+	doNext(telAdre.barTelAdre);
+}
 
 //{Return to The Wet Bitch menu}
 //Ham Roast -> In For A Gem

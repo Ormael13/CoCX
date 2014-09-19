@@ -1905,6 +1905,15 @@ private function talkWithMarbleAtCamp():void {
 		outputText("You tell Marble about your run-in with an old foe in the forest cave.  She tenses up at first, but the obvious fact that you've made it out of there alright relaxes her.  Marble admits that for some reason she felt like you were in great danger, but couldn't figure out why she felt that.  \"<i>Anyway, I'm glad that you managed to take care of your old nemesis... that map sounds interesting, too.  Think it really leads to the demon lord's lair?  It is a bit overwhelming, sweetie, to think that you might actually defeat the demon lord!  Part of me wants to beg you not to go, but I know how driven you are, and I won't stop you from going to fulfill your mission.  Just promise me that you'll make absolutely sure you're ready before you follow that map, okay?</i>\"");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 6;
 	}
+	else if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 && flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] == 0) {
+		outputText("You tell Marble about how you've managed to slay Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to kill a goddess, didn't you?</i>\" You tell her that you did manage to defeat the corrupted goddess for real. She then replies \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n")
+		if (player.armorName == "tentacled bark armor")
+		{
+			outputText("You tell her about how you've brought the bark platings infested with tentacles and got Rathazul to shape it into armor. The cowgirl takes a glance at your bizarre armour. \"<i>That armour you're wearing... There are tentacles in there. Are you okay with having tentacles, sweetie?</i>\" she says. ")
+			outputText("You assure her that it's entirely up to you. \"<i>Thanks for telling me the story, sweetie,</i>\" she says.")
+		}
+		flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] = 1;
+	}
 	//If talked about nothing!
 	else outputText("You have no new stories to share with Marble, so you chat for a bit about inconsequential things.", false);
 	//New PG for next stuff
@@ -1927,7 +1936,7 @@ private function talkWithMarbleAtCamp():void {
 	else if(flags[kFLAGS.FACTORY_FOUND] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] <= 0)
 		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"", false);		
 	//(player has completed the factory but has not returned to Marae)
-	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0)
+	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1(StatusAffects.TelAdre) == 0)

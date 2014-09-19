@@ -340,8 +340,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15_mod_0.6";
-			version = ver + " (<b>Codex, Dungeon Refactor, and much more!</b>)";
+			ver = "0.8.15_mod_0.6.1";
+			version = ver + " (<b>Mod bug fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

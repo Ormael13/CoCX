@@ -114,7 +114,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) player.createStatusAffect(StatusAffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70) {
+	if((player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n", false);
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.", false);
 		doNext(13);
@@ -1015,7 +1015,7 @@ private function anotherButton(button:int,nam:String,func:*,arg:* = -9000):int {
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving()) kGAMECLASS.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) kGAMECLASS.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 public function barTelAdre():void {
