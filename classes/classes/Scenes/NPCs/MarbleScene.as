@@ -1936,7 +1936,7 @@ private function talkWithMarbleAtCamp():void {
 	else if(flags[kFLAGS.FACTORY_FOUND] >= 1 && flags[kFLAGS.FACTORY_SHUTDOWN] <= 0)
 		outputText("\"<i>You still haven't shut down the factory yet, have you?</i>\"  You shake your head.  \"<i>Well then go do it!</i>\"", false);		
 	//(player has completed the factory but has not returned to Marae)
-	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0)
+	else if(flags[kFLAGS.FACTORY_SHUTDOWN] >= 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1(StatusAffects.TelAdre) == 0)

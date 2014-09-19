@@ -1307,7 +1307,7 @@ public function campFollowers():void {
 private function campActions():void {
 	menu();
 	outputText("What would you like to do?", true)
-	//addButton(0, "SwimInStream", swimInStream);
+	addButton(0, "SwimInStream", swimInStream);
 	addButton(1, "ExaminePortal", examinePortal); //Examine portal.
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.

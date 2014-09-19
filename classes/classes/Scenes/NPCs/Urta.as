@@ -299,7 +299,8 @@ public function urtaBarApproach():void {
 			addButton(0,"Her Place",goBackToUrtasForLuvinz);
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv);
-			addButton(2,"Eat Out",eatUrtaOutNomNomPussy);
+			addButton(2, "Eat Out", eatUrtaOutNomNomPussy);
+			addButton(4, "Leave", telAdre.barTelAdre);
 			return;
 		}
 		//[Horny Urta Talk – Drunk]
@@ -2933,7 +2934,8 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	if(!urtaLove()) simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"",0);
 	else {
 		if(flags[kFLAGS.URTA_INCUBATION] > 0) simpleChoices("Her Place",goBackToUrtasForLuvinz,"",0,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
-		else simpleChoices("Her Place",goBackToUrtasForLuvinz,"Suck Off",blowUrtaUnderTheTableLuv,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
+		else simpleChoices("Her Place", goBackToUrtasForLuvinz, "Suck Off", blowUrtaUnderTheTableLuv, "Eat Out", eatUrtaOutNomNomPussy, "", 0, "", 0);
+		addButton(4, "Leave", telAdre.barTelAdre);
 	}
 	dynStats("lus", 25);
 }
