@@ -7159,14 +7159,14 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			outputText("You take a hearty swig of mead, savoring the honeyed taste on your tongue.  Emboldened by the first drink, you chug the remainder of the horn's contents in no time flat.  You wipe your lips, satisfied, and let off a small belch as you toss the empty horn aside.");
+			outputText("You take a hearty swig of mead, savoring the honeyed taste on your tongue.  Emboldened by the first drink, you chug the remainder of the horn's contents in no time flat.  You wipe your lips, satisfied, and let off a small belch as you toss the empty horn aside.  ");
 
 			//Libido: No desc., always increases.
 			//Corruption: No desc., always decreases.
 			dynStats("lib", 1, "cor", -1);
 			//Health/HP(Large increase; always occurs):
-			outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
-			HPChange(Math.round(player.maxHP() * .33), false);
+			outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious! ");
+			HPChange(Math.round(player.maxHP() * .33), true);
 			if (rand(3) == 0) {
 				outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 				if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
@@ -7191,6 +7191,26 @@
 			fatigue(-30);
 			dynStats("lib", -.25, "lus", -10, "cor", -0.5);
 			player.refillHunger(20);
+		}
+
+		public function springWater(player:Player):void
+		{
+			player.slimeFeed();
+			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ", true);
+			//-30 fatigue, -2 libido, -10 lust]
+			fatigue(-10);
+			dynStats("lus", -25, "cor", (-3 - rand(2)), "resisted", false);
+			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
+			player.refillHunger(10);
+			if(player.cor > 50) dynStats("cor", -1);
+			if(player.cor > 75) dynStats("cor", -1);
+		}
+		
+		public function calmMint(player:Player):void
+		{
+			outputText("Eating the sprig of raw mint is a bit of a stretch, but you manage to gulp it down.  As the strong minty flavor overwhelms your taste buds, your mind feels calmer, and a relaxed sensation spreads through your body.", true);
+			dynStats("lib", -1, "lust", -10, "inte", 0.5, "resisted", false);
+			player.refillHunger(5);
 		}
 
 //Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
@@ -7650,7 +7670,7 @@
 		public function deBimbo(player:Player):void
 		{
 			clearOutput();
-			if (player.findPerk(PerkLib.BimboBrains) < 0 && player.findPerk(PerkLib.FutaFaculties) < 0) {
+			if (player.findPerk(PerkLib.BimboBrains) < 0 && player.findPerk(PerkLib.FutaFaculties) < 0 && player.findPerk(PerkLib.BroBrains) < 0) {
 				outputText("You can't use this right now, and it's too expensive to waste!\n\n");
 				if (debug) {}
 				else {
@@ -7667,6 +7687,10 @@
 			else if (player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Futa Faculties - Your intelligence and speech patterns are no longer limited to that of a futanari bimbo.</b>)");
 				player.removePerk(PerkLib.FutaFaculties);
+			}			
+			else if (player.findPerk(PerkLib.BroBrains) >= 0) {
+				outputText("\n\n(<b>Perk Removed:  Bro Brains - Your intelligence gains are no longer hampered. You now gain intelligence at a normal pace.</b>)");
+				player.removePerk(PerkLib.BroBrains);
 			}
 		}
 
@@ -7674,16 +7698,16 @@
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
-			if (!inCombat()) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
+			if (!inCombat()) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.  ");
 			//(In combat?)
-			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.");
+			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
 
 			//Increase HP by quite a bit!)
 			//(Slight chance at increasing Toughness?)
 			//(If lake has been tainted, +1 Corruption?)
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) dynStats("cor", 0.5);
 			dynStats("cor", 0.1);
-			HPChange(Math.round(player.maxHP() * .25), false);
+			HPChange(Math.round(player.maxHP() * .25), true);
 			player.refillHunger(30);
 		}
 
@@ -7962,9 +7986,9 @@
 		public function purityPeach(player:Player):void
 		{
 			clearOutput();
-			outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.");
+			outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
 			fatigue(-15);
-			HPChange(Math.round(player.maxHP() * 0.25), false);
+			HPChange(Math.round(player.maxHP() * 0.25), true);
 			player.refillHunger(25);
 		}
 

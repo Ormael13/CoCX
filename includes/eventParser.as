@@ -489,7 +489,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if (flags[kFLAGS.PC_HUNGER] <= 0)
 			{
 				//Lose HP and makes fatigue go up. Lose body weight and muscles.
-				takeDamage(maxHP() / 50);
+				takeDamage(maxHP() / 25);
 				fatigue(2);
 				player.modThickness(1, 1);
 				player.modTone(1, 1);
@@ -554,6 +554,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Goo fuck stuff
 		if (player.statusAffectv1(StatusAffects.GooStuffed) > 0) {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			{
+				if (flags[kFLAGS.PC_HUNGER] < 25) flags[kFLAGS.PC_HUNGER] = 25;
+			}
 			player.addStatusValue(StatusAffects.GooStuffed,1,-1);
 			if (player.statusAffectv1(StatusAffects.GooStuffed) <= 0)
 			{

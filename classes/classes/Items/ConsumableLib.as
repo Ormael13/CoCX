@@ -77,6 +77,7 @@ package classes.Items
 		public const P_WHSKY:PhoukaWhiskey    = new PhoukaWhiskey();
 		public const PURPEAC:SimpleConsumable = mk("PurPeac","PurPeac", "a pure peach", m.purityPeach, "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it. \n\nType: Food & Beverages \nBase value: 10", 10);
 		public const SHEEPMK:SimpleConsumable = mk("SheepMk","SheepMk", "a bottle of sheep milk", m.sheepMilk,"This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful. \n\nType: Food & Beverages");
+		public const S_WATER:SimpleConsumable = mk("S.Water","SpringWtr", "a waterskin filled with spring water", m.springWater,"A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink. \n\nType: Food & Beverages");
 
 		//GROWERS/SHRINKERS
 		public const GROPLUS:SimpleConsumable = mk("GroPlus","GroPlus", "a needle filled with Gro+", m.growPlus, "This is a small needle with a resevoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious. \n\nType: Size changer", 50);
@@ -112,6 +113,7 @@ package classes.Items
 		public const TSCROLL:SimpleConsumable = mk("TScroll","TScroll", "a tattered scroll", m.tatteredScroll, "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it. \n\nType: Consumable");
 		public const VITAL_T:SimpleConsumable = mk("Vital T", "Vitality T.", "a vitality tincture", m.vitalityTincture, "This potent tea is supposedly good for the strengthening the body. \n\nType: Consumable");
 		public const W_STICK:WingStick = new WingStick();
+		public const C__MINT:SimpleConsumable = mk("C. Mint","C. Mint", "a waterskin filled with spring water", m.calmMint,"This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful. \n\nType: Consumable");
 		
 		//TRANSFORMATIVE ITEMS
 		public const B_GOSSR:SimpleConsumable = mk("B.Gossr","B.Gossr", "a bundle of black, gossamer webbing", curry(m.sweetGossamer, 1), "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you? \n\nType: Transformative item");

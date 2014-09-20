@@ -198,6 +198,10 @@ public function repeatEncounterMinerva():void {
 	spriteSelect(95);
 	flags[kFLAGS.MET_MINERVA]++;
 	outputText("You make your way up the mountain, looking for the oasis tower that you know has to be around here somewhere in the thick mist.  With a bit of searching, you locate the right path and head for the oasis, finally reaching it.  Panting from your long trek, you enter the tower through its crumbling doorway, wondering if Minerva will be home.");
+	if (flags[kFLAGS.MET_MINERVA] == 4)
+	{
+		outputText("\n\n<b>You have visited her enough times to be able to remember where to go. Unlocked Oasis Tower! (Page 2 in Places menu)</b>", false);
+	}
 	outputText("\n\nUpon entering the humble home, you assess the state of the oasis.  The usual fruit trees and the clean pond are still here. Upon taking a closer look, you spot Minerva in the spring as she floats out from behind the cover of a tree.  The shark-like harpy is relaxing in the pure waters like she normally does.");
 	outputText("\n\nAs you approach the pond, she catches sight of you and twists in the water, swimming to the shore and wading out to greet you.  Her smooth sharkskin is glossy and dripping wet from her recent swim, the rolling moisture accentuating her well-defined curves.");
 	//No romance: 
@@ -211,7 +215,8 @@ public function repeatEncounterMinerva():void {
 	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
+	addButton(5, "Spar", fightMinerva);
+	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	addButton(9,"Leave",eventParser,13);	
 }
 
@@ -239,6 +244,7 @@ private function minervaThirdPlusEncounter():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
+	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	addButton(9,"Leave",eventParser,13);
 }
 
@@ -385,6 +391,7 @@ private function repeatableMinervaRomanceScene():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
+	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	addButton(9,"Leave",eventParser,13);
 }
 
@@ -712,6 +719,7 @@ private function minervaSexMenu(display:Boolean = true):void
 	addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
 	if (player.hasCock())
 		addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
+	//addButton(btnIndx++, "Anal Catch", getButtFuckedYouSlut);
 	addButton(9, "Leave", repeatEncounterMinerva);
 }
 
@@ -1326,13 +1334,30 @@ internal function beatUpDatSharpie():void {
 private function eatSomethingYouCunt():void {
 	clearOutput();
 	spriteSelect(95);
-	//Acquiring: 
+	outputText("You take a good look at Minerva's \"garden\". Fruit trees surround the spring, each bearing what appears to be a fruit. Strange herbs grow around the spring. You ponder over what you would like to take.");
+	menu();
+	addButton(0, "PurPeac", getPurePeach);
+	addButton(1, "C. Mint", getMint);
+	addButton(4, "Nevermind", eventParser, 13);
+
+}
+private function getPurePeach():void {
+	clearOutput();
+	spriteSelect(95);
 	outputText("You walk over to the fruit trees surrounding the spring, examining the strange treats.  You decide that one ripe fruit, one resembling a peach, is the best choice, and pluck it from the tree.  Thanking Minerva for letting you have it, you stow it away safely and head back to camp.\n\n");
 	menuLoc = 2;
-	inventory.takeItem(consumables.PURPEAC);
+	inventory.takeItem(consumables.PURPEAC);	
+}
+private function getMint():void {
+	clearOutput();
+	spriteSelect(95);
+	outputText("There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.", true)
+	menuLoc = 2;
+	inventory.takeItem(consumables.C__MINT);
 }
 
-/*
+
+/* IMPLEMENTED AT LAST!
 Calming Mint
 Acquiring: There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.
 C. Mint - Inventory
@@ -1349,14 +1374,78 @@ private function getADrinkYouBitch():void {
 	outputText("You ask Minerva if she's okay with allowing you to drink from her spring.  She replies with a nod, a smile and a casual wave towards the pool.  Making it quite clear that you can drink your fill.");
 	//[Bottle] [Drink]
 	//[Drink]
+	menu();
+	addButton(0, "Drink", drinkDirectly);
+	addButton(1, "Bottle", drinkDirectly);
+
+}
+private function drinkDirectly():void {
 	outputText("\n\nApproaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");
 	dynStats("lus", -25, "cor", -.5, "resisted", false);
 	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
+	doNext(13);	
+}
+private function getBottle():void {
+	outputText("Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack.")
+	menuLoc = 2;
+	inventory.takeItem(consumables.S_WATER);
+}
+
+private function sleepWithMinerva():void {
+	spriteSelect(95);
+	outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Oh, really? You want to sleep with me?</i>\" she says. You nod.\n\n", true);
+	outputText("Minerva guides you to the most comfortable spot.  She takes off her tube top, exposing her breasts completely.\n\n", false);
+	if (player.armorName != "comfortable underclothes" && player.armorName != "goo armor") outputText("You take your time to get your " + player.armorName + " off until you're completely naked. ", false)
+	if (player.armorName == "goo armor") outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you.", false)
+	outputText("You lay next to Minerva while you rest your head on her soft breasts. ", false)
+	if (player.armorName == "goo armor") outputText("Valeria, your goo-girl companion, envelopes you and Minerva, helping to keep you and Minerva warm. ", false)
+	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.", false)
+	doNext(sleepWithMinervaII)
+}
+private function sleepWithMinervaII():void {
+	outputText("<b>Ten hours pass...</b>\n\n", true)
+	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n", false)
+	if (player.armorName != "comfortable underclothes" && player.armorName != "goo armor") outputText("You get re-dressed in your " + player.armorName + "", false)
+	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up. ", false)
+	outputText(" and leave the tower to return to your camp. \n\n", false)
+	//Regain HP and Fatigue while sleeping with Minerva. Li'l bonus if you're wearing goo armor.
+	var timeToPass:Number = 10;
+	var gainHP:Number = 0;
+	gainHP += (timeToPass * 25)
+	if (player.findPerk(PerkLib.Regeneration) >= 0 && (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
+	if (player.findPerk(PerkLib.Regeneration2) >= 0 && (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
+	if (player.findPerk(PerkLib.LustyRegeneration) >= 0) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
+	if (player.armorName == "goo armor") gainHP += (timeToPass * (player.maxHP() / 100) * 3);
+	HPChange(gainHP, true);
+	fatigue(-100);
+	if (player.findPerk(PerkLib.WellAdjusted)) dynStats("lust", (timeToPass * player.lib * 0.02), "resisted", false);
+	else dynStats("lust", (timeToPass * player.lib * 0.04), "resisted", false);
+	//Pass time!
+	while (timeToPass > 0) {
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+			if (flags[kFLAGS.PC_HUNGER] > 50)
+			{
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+			if (flags[kFLAGS.PC_HUNGER] > 25)
+			{
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+			if (flags[kFLAGS.PC_HUNGER] > 0 && player.armorName != "goo armor")
+			{
+				flags[kFLAGS.PC_HUNGER] -= 0.5;
+			}
+		}
+		cheatTime(1);
+		timeToPass -= 1;
+	}
 	doNext(13);
 }
-/*
+
+
+/* IMPLEMENTED AT LAST!
 [Bottle] Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack
 Spring Water - Inventory
 A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.

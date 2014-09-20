@@ -22,7 +22,7 @@ package classes.Items.Armors
 
 		public function ComfortableUnderclothes()
 		{
-			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, "comfortable underclothes", "");
+			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, "comfortable underclothes", "light");
 		}
 	}
 }

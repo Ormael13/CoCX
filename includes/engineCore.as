@@ -1040,7 +1040,7 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Swim in stream and relax to pass time.";
 	}	
 	if(buttonText == "ExaminePortal") {
-		toolTipText = "Examine the portal. This scene is coming soon!";
+		toolTipText = "Examine the portal. This scene is placeholder.";
 	}	
 	if(buttonText == "Watch Sunset") {
 		toolTipText = "Watch the sunset and relax.";

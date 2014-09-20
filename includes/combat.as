@@ -2194,10 +2194,10 @@ public function regeneration(combat:Boolean = true):void {
 	if(combat) {
 		//Regeneration
 		healingPercent = 0;
-		if (flags[kFLAGS.PC_HUNGER] > 0 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
-			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
+			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
 		}
 		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
 		if(player.armorName == "goo armor") healingPercent += 2;
@@ -2208,10 +2208,10 @@ public function regeneration(combat:Boolean = true):void {
 	else {
 		//Regeneration
 		healingPercent = 0;
-		if (flags[kFLAGS.PC_HUNGER] > 0 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 2;
-			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 4;
+			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
 		}
 		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
 		if(player.armorName == "goo armor") healingPercent += 3;

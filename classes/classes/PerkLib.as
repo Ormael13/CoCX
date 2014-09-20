@@ -167,10 +167,10 @@ package classes
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
 		public static const Regeneration:PerkType = mk("Regeneration", "Regeneration",
 				"Regenerates 2% of max HP/hour and 1% of max HP/round.",
-				"You choose the 'Regeneration' perk, allowing you to heal 2% of max HP every hour and 1% of max HP every round of combat!");
+				"You choose the 'Regeneration' perk, allowing you to heal 1% of max HP every round of combat and 2% of max HP every hour!");
 		public static const Regeneration2:PerkType = mk("Regeneration 2", "Regeneration 2",
-				"Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.",
-				"You choose the 'Regeneration 2' perk, giving you an additional 2% of max HP per turn in combat and 4% of max HP per hour.");
+				"Regenerates further 2% of max HP/hour and 1% of max HP/round.",
+				"You choose the 'Regeneration 2' perk, giving you an additional 1% of max HP per turn in combat and 2% of max HP per hour.");
 		public static const Resistance:PerkType = mk("Resistance", "Resistance",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.");

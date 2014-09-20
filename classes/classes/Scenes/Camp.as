@@ -1312,7 +1312,6 @@ private function campActions():void {
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin); //Enter cabin for furnish.
-	//addButton(4, "Marae", kGAMECLASS.boat.marae.initiateFightMarae);
 	addButton(8, "Read Codex", codex.accessCodexMenu);
 	addButton(9, "Back", eventParser, 1);
 }
@@ -1407,6 +1406,7 @@ private function swimInStreamPrank1():void {
 
 private function swimInStreamFap():void {
 	outputText("", true)
+	doNext(swimInStreamFinish);
 }
 
 private function swimInStreamFinish():void {
@@ -1425,8 +1425,14 @@ private function swimInStreamFinish():void {
 }
 
 private function examinePortal():void {
-	outputText("Coming soon! \n\n", true)
-	doNext(13);
+	if (flags[kFLAGS.CAMP_PORTAL_PROGRESS] <= 0) {
+		outputText("You walk over to the portal. You are reminded by how you came. You begin to wonder if you can go back. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
+		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1
+		doNext(13);
+		return;
+	}
+	else outputText("You walk over to the portal. You are reminded by how you came. You let out a sigh, knowing you can't return to Ingnam.", true)
+	doNext(1);
 }
 
 private function watchSunset():void {
