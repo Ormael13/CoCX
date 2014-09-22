@@ -300,7 +300,7 @@ public function urtaBarApproach():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv);
 			addButton(2, "Eat Out", eatUrtaOutNomNomPussy);
-			addButton(4, "Leave", telAdre.barTelAdre);
+			addButton(9, "Leave", telAdre.barTelAdre);
 			return;
 		}
 		//[Horny Urta Talk – Drunk]
@@ -820,9 +820,9 @@ internal function blowUrtaUnderTable():void {
 
 	outputText("Without warning, Urta's legs wrap around your back, squeezing with her soft fur as she vices them closed.  You're forced to take her even more deeply, until the folds of her sheath are bumping your nose and chin and filling your nostrils with her heady musk.  You can't even breathe with such a massive intruder blocking your throat, but you do your best to get her off, knowing it's the quickest way to end it.  You suck hard and squeeze her balls, gurgling noisily around the sweaty shaft as you feel Urta give in.\n\n", false);
 
-	outputText("A wave-like motion passes through your throat obstruction, stretching you wider than ever before.  It passes, leaving behind a feeling of warm fullness.  You feel another working its way into your mouth, and realize Urta is cumming, filling your belly with direct injections of horsey fox-seed. You desperately need to breathe, but you're trapped on your lover's maleness, and with nothing else to do, you give her twitching balls a squeeze, feeling her body twitch in response as she dumps a particularly heavy batch of spunk into you.  Happy that you could at least control how hard she came, you begin blacking out, barely noticing as Urta's orgasmic contractions die off.\n\n", false);
+	outputText("A wave-like motion passes through your throat obstruction, stretching you wider than ever before.  It passes, leaving behind a feeling of warm fullness.  You feel another working its way into your mouth, and realize Urta is cumming, filling your belly with direct injections of horsey fox-seed. You desperately need to breathe, but you're trapped on your lover's maleness, and with nothing else to do, you give her twitching balls a squeeze, feeling her body twitch in response as she dumps a particularly heavy batch of spunk into you.  Happy that you could at least control how hard she came, you begin blacking out, barely noticing as Urta's orgasmic contractions die off.", false);
 	player.refillHunger(30);
-	outputText("Thumping down on your back, you're blissfully aware of the sweet air filling your lungs.  In a moment of reflection, you realize you can taste the salty flavor of Urta's seed on your lips and mouth, and the retracting horse-cock is ", false);
+	outputText("\n\nThumping down on your back, you're blissfully aware of the sweet air filling your lungs.  In a moment of reflection, you realize you can taste the salty flavor of Urta's seed on your lips and mouth, and the retracting horse-cock is ", false);
 	if(player.biggestTitSize() >= 2) outputText("dragging between your " + allBreastsDescript(), false);
 	else outputText("dragging across your chest", false);
 	outputText(" as it begins to soften.  You wipe as much of her leavings from your " + player.face() + " as you can, licking the slippery glaze from your lips.  Before you get up, you make sure to give Urta's member a firm squeeze, punishment for forcing you to take her so deep.\n\n", false);
@@ -1618,9 +1618,9 @@ internal function blowUrtaUnderTheTableLuv():void {
 
 	outputText("Without warning, Urta's legs wrap around your back, squeezing with her soft fur as she vices them closed.  You're forced to take her even more deeply, until the folds of her sheath are bumping your nose and chin and filling your nostrils with her heady musk.  You can't even breathe with such a massive intruder blocking your throat, but you do your best to get her off, knowing it's the quickest way to end it.  You suck hard and squeeze her balls, gurgling noisily around the sweaty-shaft as you feel Urta give in.\n\n", false);
 
-	outputText("A wave-like motion passes through your throat-obstruction, stretching you wider than ever before.  It passes, leaving behind a feeling of warm fullness.  You feel another working its way into your mouth, and realize Urta is cumming, filling your belly with direct injections of horsey fox-seed. You desperately need to breathe, but you're trapped on your lover's maleness, and with nothing else to do, you give her twitching balls a squeeze, feeling her body twitch in response as she dumps a particularly heavy batch of spunk into you.  Happy that you could at least control how hard she came, you begin blacking out, barely noticing as Urta's orgasmic contractions die off.\n\n", false);
-
-	outputText("Thumping down on your back, you're blissfully aware of the sweet air filling your lungs.  In a moment of reflection, you realize you can taste the salty flavor of Urta's seed on your lips and mouth, and the retracting horse-cock is ", false);
+	outputText("A wave-like motion passes through your throat-obstruction, stretching you wider than ever before.  It passes, leaving behind a feeling of warm fullness.  You feel another working its way into your mouth, and realize Urta is cumming, filling your belly with direct injections of horsey fox-seed. You desperately need to breathe, but you're trapped on your lover's maleness, and with nothing else to do, you give her twitching balls a squeeze, feeling her body twitch in response as she dumps a particularly heavy batch of spunk into you.  Happy that you could at least control how hard she came, you begin blacking out, barely noticing as Urta's orgasmic contractions die off.", false);
+	player.refillHunger(75);
+	outputText("\n\nThumping down on your back, you're blissfully aware of the sweet air filling your lungs.  In a moment of reflection, you realize you can taste the salty flavor of Urta's seed on your lips and mouth, and the retracting horse-cock is ", false);
 	if(player.biggestTitSize() >= 1) outputText("dragging between your " + allBreastsDescript(), false);
 	else outputText("dragging across your chest", false);
 	outputText(" as it begins to soften.  You wipe as much of her leavings from your " + player.face() + " as you can, licking the slippery glaze from your lips.  Before you get up, you make sure to give Urta's member a firm squeeze, scolding it for its forceful treatment of your mouth.\n\n", false);
@@ -2623,7 +2623,7 @@ public function urtaDialogueMenu():void {
 		addButton(4,"Visit Kids",urtaPregs.visitKidsFirstTime);
 	else
 		if(flags[kFLAGS.FIRST_TIME_AT_URTA_HOUSE] > 0) addButton(4,"Her House",urtaPregs.talkToUrtaAboutHerHouse);
-			addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",eventParser,13);
 }
 
 //[=Urta=]
@@ -2744,7 +2744,7 @@ private function urtaDiscussesTheWatch():void {
 	if(!urtaLove()) outputText("\n\nUrta perks up at that, her spine stiffening with obvious pride as she takes a hearty swig of her drink.  \"<i>What do you want to know?</i>\" she asks happily.");
 	else outputText("\n\nUrta stiffens proudly, unintentionally thrusting her chest forward before realizing the show she's making of her own cleavage.  She colors and asks, \"<i>What do ya wanna know?</i>\"");
 	//[Membership] [Role in the city] [Crime & Punishment] [Reach of the Watch] [Interesting Cases]
-	choices("Membership",urtaDiscussesWatchMembership,"Role",urtaDiscussesWatchRole,"Crime",urtaDiscussesCrimeAndPunishment,"Reach",urtaDiscussesTheWatchsReach,"",0,"",0,"",0,"",0,"",0,"Back",urtaDialogueMenu);
+	simpleChoices("Membership",urtaDiscussesWatchMembership,"Role",urtaDiscussesWatchRole,"Crime",urtaDiscussesCrimeAndPunishment,"Reach",urtaDiscussesTheWatchsReach,"Back",urtaDialogueMenu);
 }
 
 //[=Alcoholism=]
@@ -2931,12 +2931,13 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	outputText("\n\nThe table suddenly jolts visibly as Urta's erection slams into it, the engorged flesh audibly crashing against the wood.  She gives you a flat look.  \"<i>Now look what you've gone and done,</i>\" she says, trying to sound stern, but coming off as a little amused.  \"<i>I hope you're going to take responsibility for this...</i>\"");
 	urtaLove(1);
 	//Appropriate sex scene options are given; Hidden Blowjob and Urta's Place for regular Urta and Urta's Place, Suck Off and Eat Out for lover mode Urta
+	menu()
 	if(!urtaLove()) simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"",0);
-	else {
+	else {		
 		if(flags[kFLAGS.URTA_INCUBATION] > 0) simpleChoices("Her Place",goBackToUrtasForLuvinz,"",0,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
 		else simpleChoices("Her Place", goBackToUrtasForLuvinz, "Suck Off", blowUrtaUnderTheTableLuv, "Eat Out", eatUrtaOutNomNomPussy, "", 0, "", 0);
-		addButton(4, "Leave", telAdre.barTelAdre);
 	}
+	addButton(4, "Leave", telAdre.barTelAdre);
 	dynStats("lus", 25);
 }
 //[=Employment=]

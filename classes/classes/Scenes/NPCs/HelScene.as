@@ -121,6 +121,12 @@ internal function loseToSalamander():void {
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) outputText(", lying just a few paces from the defeated Gnoll.\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a shaved cunt already glistening with lubricant.  For the first time, she speaks.  \"<i>All right!</i>\" she exclaims, grinning, \"<i>You're not bad with your " + player.weaponName + ", you know. Damn, but it's hard to find someone worth my time around here,</i>\" she nods to the defeated Gnoll \"<i>... And you're not bad looking, either.  You know, there's nothing better after a fight than a good fuck, huh? Whadda ya say?</i>\"  Taken aback by the reckless berzerker's sudden calm, friendly attitude, you try to open your mouth to answer her, but she quickly plants a scaled heel on your chest.  Getting the idea, you shut up; you don't have much choice here, so you might as well enjoy it.\n\n", false);
 	else outputText(".\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a glistening cunt.  \"<i>You're a worthy opponent, you know that?  C'mon, there's no shame in losing,</i>\" she says, offering a hand up.  Shakily, you take it – and she pulls you right into a rough kiss.\n\n\"<i>But, to the victor go the spoils,</i>\" she says, pushing her chest into you.  Well, you might as well enjoy yourself...", false);
 	var x:Number = 0;
+	if (rand(4) == 0 && player.gender > 0) {
+		trace("Peg scene GO!")
+		menu();
+		addButton(0, "Next", helTailPegging, true);
+		return;
+	}
 	//TO ZE RAPES!
 	//Player Loss – Rape – Male =< 85 cockarea
 	if(player.hasCock() && (player.gender == 1 || rand(4) < 3) && player.cockThatFits(85) >= 0) {
@@ -170,8 +176,10 @@ internal function loseToSalamander():void {
 		//(Genderless) 
 		if(player.gender == 0) outputText("\"<i>Hmm, what do we have here,</i>\" the salamander asks, yanking your " + player.armorName + " off to reveal your genderless crotch.  \"<i>Well, that's... Different.  Well, your loss, I suppose...</i>\" she trails off, stepping up and pushing her cunt into your face.  \"<i>Now lick, and maybe I'll think up a way to get you off, too</i>\".\n\n", false);
 		//(Cock(s) too big to fit) 
-		else outputText("\"<i>Hot damn.  That's impressive, but even I'm not tough enough to handle that.  But maybe I can still get you off by... other means,</i>\" she says with a wink.\n\n", false);
-
+		else if (player.hasCock()) outputText("\"<i>Hot damn.  That's impressive, but even I'm not tough enough to handle that.  But maybe I can still get you off by... other means,</i>\" she says with a wink.\n\n", false);
+		//25% chance to proc even if not genderless.
+		else outputText("\"<i>I have some other means.  Meet the bad boy.  But first, now lick!</i>\" she says with a wink as she holds her tail.\n\n", false);
+		
 		outputText("Obediently, you lift your face between her legs and give the lips of her drooling cunt an experimental lick.  You recoil suddenly, feeling like your tongue is on fire.  Seemingly as reassurance, the salamander makes an uncharacteristicly gentle gesture and runs her scaled fingers through your " + hairDescript() + ", her sharp claws only just brushing your scalp.  \"<i>C'mon, c'mon,</i>\" she insists, pushing your face back up toward her.  You steel yourself for another burn, but when you give her another lick, you find her lips to be cooler the second time.  Without further ado, you begin your oral ministrations, probing into her welcoming cunt with measured skill.  She gasps with pleasure and again strokes your head encouragingly, even as her other cups her tits and begins to play with her nipples.\n\n", false);
 
 		outputText("After a few minutes of this, your fiery lover has begun to buck her hips in time with your licks, kisses, and gentle bites.  Her breath is coming more raggedly now, and her hands have both gone to your tits, savaging your nipples in reward for your service.  You can feel her orgasm building, and redouble your efforts, bringing her closer and closer to climax...\n\n", false);
@@ -529,11 +537,11 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 }
 
 //Player Win – Tail Pegging (Anal) (edited)
-internal function helTailPegging():void {
+internal function helTailPegging(loss:Boolean = false):void {
 	spriteSelect(68);
 	outputText("", true);
-	outputText("You agree to her proposition and, after a moment of thought, strip out of your " + player.armorName + " and ask her if she could fuck you with that long, prehensile tail.  \"<i>Oh, now that's an idea I can get behind!</i>\"  She laughs at her own wit.  \"<i>Well, go on then.  Get on your hands and knees, and spread those ass cheeks.</i>\"\n\n", false);
-
+	if (!loss) outputText("You agree to her proposition and, after a moment of thought, strip out of your " + player.armorName + " and ask her if she could fuck you with that long, prehensile tail.  \"<i>Oh, now that's an idea I can get behind!</i>\"  She laughs at her own wit.  \"<i>Well, go on then.  Get on your hands and knees, and spread those ass cheeks.</i>\"\n\n", false);
+	else outputText("\"<i>Get on your hands and knees, and spread those ass cheeks,</i>\" she says.\n\n")
 	outputText("You do as she asks, getting on all fours and giving her a good views of your vulnerable " + buttDescript() + ".  Looking over your shoulder, you can see her smile wolfishly as she brings her tail to bear, now doused of its previous flames, and gives its tip a little suckle, moistening it up as she straddles your hips to fuck you doggy style.  Her tail slips down from her mouth and winds between her legs like a cock as she lines herself up with your " + assholeDescript() + ".\n\n", false);
 
 	outputText("You grit your teeth and clench your fists in preparation for the coming fucking.  Soon, you feel the tip of her tail pressing against your backdoor, looking for entrance.  You do your best to relax yourself, but she only needs a second to force herself inside you, eliciting a gasp of pain and pleasure from you as inches of her tail sink in, widening and stretching your hole.", false);

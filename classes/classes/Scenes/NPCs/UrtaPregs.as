@@ -529,7 +529,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 	outputText("\n\nYou take Urta's nipple into your mouth and begin gently suckling, careful to not let your teeth graze the sensitive flesh, it takes only a moment before you're rewarded with a slow, but steady, trickle of vixen milk.  She growls with pleasure, reaching around your neck to cuddle you closer to her body.  You close your eyes and just enjoy the closeness, as well as the nutritious milk.  All too soon the trickle begins waning, and you know Urta must not have much left... yet you don't stop your nursing... even when she actually runs out of milk.  \"<i>Mmm... that feels nice, [name], but we both know you're just teasing me now... and that mightn't be such a good idea, unless you want to try some of my other milk..</i>.\"");
 	
 	outputText("\n\nYou feel the tip of Urta's shaft jabbing you, and notice the tip seems to be gathering some pre.  Perhaps it is time to call it quits.  You let go of Urta's breast with some disappointment, smiling at her.  \"<i>Full now, [name]?</i>\"  She asks you.  When you reply that you are, she grins and then suddenly grabs you in a hug, putting your head over her shoulder.  \"<i>Time to get burped, then!</i>\"  She giggles, one hand rhythmically thumping into the small of your back.  You can't resist and eventually you let out a small burp, then step away, smiling sheepishly.");
-	
+	player.refillHunger(20);
 	outputText("\n\nShe laughs and pats your cheek.  \"<i>Take care out there, [name]; we have ");
 	if(urtaKids() == 1) outputText("a child");
 	else outputText("children");
@@ -2581,8 +2581,8 @@ private function sexWithLianna():void {
 		outputText("\n\nYou look down at the floor as you point out that you're kind of lacking in the equipment to provide any sort of donation for Lianna.");
 		outputText("\n\n\"<i>That's no problem; I have another experiment that'll fix that problem.</i>\"  Lianna replies brightly.  \"<i>This mixture of mine is guaranteed to turn you from neuter to gendered, without corruption... the only problem is that it's a little unstable.  By which I mean there's no way of predicting what gender you'll become,</i>\" she hastens to add.");
 		menu();
-		addButton(0,"Accept",eventParser,9999);
-		addButton(1,"Decline",eventParser,9999);
+		addButton(0,"Accept",acceptARandomGenderFromASkunk);
+		addButton(1,"Decline",refuseGenderlessInjection);
 		return;
 	}
 	

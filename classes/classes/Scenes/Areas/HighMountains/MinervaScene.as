@@ -375,6 +375,18 @@ private function fightMinerva():void {
 	eventParser(1);
 }
 
+private function genericMenu():void {
+	outputText("\"<i>So what will it be then?</i>\"")
+	addButton(0,"Appearance",minervaAppearance);
+	addButton(1,"Talk",minervaTalkSelect);
+	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
+	addButton(3,"Eat",eatSomethingYouCunt);
+	addButton(4,"Drink",getADrinkYouBitch);
+	addButton(5, "Spar", fightMinerva);
+	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+	addButton(9, "Leave", eventParser, 13);	
+}
+
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
 private function repeatableMinervaRomanceScene():void {
 	clearOutput();
@@ -1338,8 +1350,7 @@ private function eatSomethingYouCunt():void {
 	menu();
 	addButton(0, "PurPeac", getPurePeach);
 	addButton(1, "C. Mint", getMint);
-	addButton(4, "Nevermind", eventParser, 13);
-
+	addButton(4, "Back", genericMenu);
 }
 private function getPurePeach():void {
 	clearOutput();
@@ -1376,8 +1387,8 @@ private function getADrinkYouBitch():void {
 	//[Drink]
 	menu();
 	addButton(0, "Drink", drinkDirectly);
-	addButton(1, "Bottle", drinkDirectly);
-
+	addButton(1, "Bottle", getBottle);
+	addButton(4, "Back", genericMenu);
 }
 private function drinkDirectly():void {
 	outputText("\n\nApproaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");

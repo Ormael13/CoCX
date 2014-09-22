@@ -113,7 +113,7 @@ package classes.Items
 		public const TSCROLL:SimpleConsumable = mk("TScroll","TScroll", "a tattered scroll", m.tatteredScroll, "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it. \n\nType: Consumable");
 		public const VITAL_T:SimpleConsumable = mk("Vital T", "Vitality T.", "a vitality tincture", m.vitalityTincture, "This potent tea is supposedly good for the strengthening the body. \n\nType: Consumable");
 		public const W_STICK:WingStick = new WingStick();
-		public const C__MINT:SimpleConsumable = mk("C. Mint","C. Mint", "a waterskin filled with spring water", m.calmMint,"This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful. \n\nType: Consumable");
+		public const C__MINT:SimpleConsumable = mk("C. Mint","C. Mint", "a calm mint", m.calmMint,"This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful. \n\nType: Consumable");
 		
 		//TRANSFORMATIVE ITEMS
 		public const B_GOSSR:SimpleConsumable = mk("B.Gossr","B.Gossr", "a bundle of black, gossamer webbing", curry(m.sweetGossamer, 1), "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you? \n\nType: Transformative item");
