@@ -14,7 +14,7 @@ package classes.Items.Armors
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
 			if(output) {
-				outputText("\n\nYou strip yourself naked before you proceed to put on the armor.. ");
+				outputText("\n\nYou strip yourself naked before you proceed to put on the armor. ");
 				if (player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");
 				if (player.cor >= 33 && player.cor < 66) outputText("You are not sure about the idea of armor that is infested with tentacles. ");
 				if (player.cor >= 66) outputText("You are eager with the idea of wearing tentacle-infested armor. ");
@@ -23,7 +23,7 @@ package classes.Items.Armors
 				if (player.isBiped()) //Some variants.
 				{
 					if (player.lowerBody == 0) outputText("Then you put your feet into your boots. With the boots fully equipped, you move on to the next piece. ");
-					else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You let out a sigh and instead move on to the next piece. ");
+					else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You have to modify the boots to fit and when you do put on your boots, your feet are exposed. ");
 				}
 				outputText("Next, you put on your reinforced bark bracers to protect your arms.\n\n")
 				if (!player.isTaur() && !player.isDrider()) outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Rathazul for that and you know that you easily have access to your ");

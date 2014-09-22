@@ -45,8 +45,8 @@ package classes.Scenes.Quests.UrtaQuest
 //Success:
 			if (findStatusAffect(StatusAffects.DrankMinoCum) < 0 || findStatusAffect(StatusAffects.DrankMinoCum2) < 0) {
 				outputText("\n\nSmiling triumphantly, she takes the bottle and opens it with a pop, drinking the contents with glee.  When done, she throws the bottle away and smacks her lips.  \"<i>Nothing like a bottle of minotaur cum to get you back on your feet, right?</i>\"  She grins, her pussy dripping with more juices.");
+				addHP(400);
 				lust += 25;
-				HP += 400;
 				if (findStatusAffect(StatusAffects.DrankMinoCum) < 0) createStatusAffect(StatusAffects.DrankMinoCum, 0, 0, 0, 0);
 				else createStatusAffect(StatusAffects.DrankMinoCum2, 0, 0, 0, 0);
 			}
@@ -82,7 +82,7 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText(capitalA + short + " smiles, rubbing her hands across herself as she watches your display.  She does not seem greatly affected by your show - at least in the sense of increasing arousal.  She does seem oddly more... vital, as if she drew strength from the very display you put on.");
 			str += 5;
-			HP += 50;
+			addHP(50);
 			applyTease(lustDelta);
 		}
 
@@ -98,7 +98,7 @@ package classes.Scenes.Quests.UrtaQuest
 			createBreastRow(Appearance.breastCupInverse("G"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
-			this.tallness = rand(9) + 60;
+			this.tallness = 84;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_LARGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;

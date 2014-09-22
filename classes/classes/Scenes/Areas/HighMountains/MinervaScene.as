@@ -1397,8 +1397,8 @@ private function sleepWithMinerva():void {
 	spriteSelect(95);
 	outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Oh, really? You want to sleep with me?</i>\" she says. You nod.\n\n", true);
 	outputText("Minerva guides you to the most comfortable spot.  She takes off her tube top, exposing her breasts completely.\n\n", false);
-	if (player.armorName != "comfortable underclothes" && player.armorName != "goo armor") outputText("You take your time to get your " + player.armorName + " off until you're completely naked. ", false)
 	if (player.armorName == "goo armor") outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you.", false)
+	else outputText("You take your time to get your " + player.armorName + " off until you're completely naked. ", false)
 	outputText("You lay next to Minerva while you rest your head on her soft breasts. ", false)
 	if (player.armorName == "goo armor") outputText("Valeria, your goo-girl companion, envelopes you and Minerva, helping to keep you and Minerva warm. ", false)
 	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.", false)
@@ -1407,9 +1407,9 @@ private function sleepWithMinerva():void {
 private function sleepWithMinervaII():void {
 	outputText("<b>Ten hours pass...</b>\n\n", true)
 	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n", false)
-	if (player.armorName != "comfortable underclothes" && player.armorName != "goo armor") outputText("You get re-dressed in your " + player.armorName + "", false)
-	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up. ", false)
-	outputText(" and leave the tower to return to your camp. \n\n", false)
+	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up ", false)
+	else outputText("You get re-dressed in your " + player.armorName + " ", false)
+	outputText("and you leave the tower to return to your camp. \n\n", false)
 	//Regain HP and Fatigue while sleeping with Minerva. Li'l bonus if you're wearing goo armor.
 	var timeToPass:Number = 10;
 	var gainHP:Number = 0;

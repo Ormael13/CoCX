@@ -802,14 +802,14 @@ public function doCamp():void {
 	//Menu
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 
-	//Hunger Bad end
+	//Hunger Bad End
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 0)
 	{
 		//Bad end at 0 HP!
 		if (player.HP <= 0 && (player.str + player.tou) < 30 )
 		{
 			outputText("Too weak to be able to stand up, you slump down on the ground. Your vision blurs as the world around you finally fades to black.", true);
-			if (hasCompanions == true) {
+			if (companionsCount() > 0) {
 				if (companionsCount() > 1) {
 					outputText("\n\nYour companions gather to mourn over your passing.", false);
 				}
@@ -824,7 +824,7 @@ public function doCamp():void {
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
 	if (player.minLust() >= 100 && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
 	{
-		outputText("[Placeholder] You are trapped in orgasm. You keep masturbating furiously but you are unable to stop. Your minimum lust is too high. No matter how hard you try, you cannot even satisfy your desires.", true);
+		outputText("(Placeholder) You are trapped in orgasm. You keep masturbating furiously but you are unable to stop. Your minimum lust is too high. No matter how hard you try, you cannot even satisfy your desires.", true);
 		eventParser(5035);
 	}
 }

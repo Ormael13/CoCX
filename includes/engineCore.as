@@ -1808,12 +1808,12 @@ public function displayStats(e:MouseEvent = null):void
 	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
 	
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
-		combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + "/4\n";
+		combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 	
 	if (player.teaseLevel < 5)
-		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + "/5 (Exp: " + player.teaseXP + "/"+ (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1))+ ")\n";
+		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: " + player.teaseXP + " / "+ (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1))+ ")\n";
 	else
-		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + "/5 (Exp: MAX)\n";	
+		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";	
 		
 	if (combatStats != "")
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
@@ -1900,7 +1900,7 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		bodyStats += "<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + "/100 (";
+		bodyStats += "<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + " / 100 (";
 		if (flags[kFLAGS.PC_HUNGER] <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
 		if (flags[kFLAGS.PC_HUNGER] > 0 && flags[kFLAGS.PC_HUNGER] < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
 		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>";
@@ -1908,7 +1908,7 @@ public function displayStats(e:MouseEvent = null):void
 		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) bodyStats += "Not hungry";
 		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>";
 		if (flags[kFLAGS.PC_HUNGER] >= 90 && flags[kFLAGS.PC_HUNGER] < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
-		if (flags[kFLAGS.PC_HUNGER] >= 100) outputText("<font color=\"#00FF00\">Very full</font>");
+		if (flags[kFLAGS.PC_HUNGER] >= 100) bodyStats += "<font color=\"#00ff00\">Very full</font>";
 		bodyStats += ")\n";
 	}
 
@@ -2101,8 +2101,11 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-		if (urta.urtaLove())
-			interpersonStats += "<b>Urta Status:</b> Lover\n";
+		if (urta.urtaLove()) {
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#080000\">Gone</font>\n";
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
+		}
 		else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
 			interpersonStats += "<b>Urta Status:</b> Ashamed\n";
 		else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30)

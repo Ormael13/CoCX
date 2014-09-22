@@ -727,7 +727,7 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
 
-//Put Urta dick in girl PC's vag(C)* (Tweaked to support maleherms)
+//Put Urta dick in girl PC's vag(C)* (Tweaked to support maleherms. Also hermaphrodite PC now cums!)
 private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	clearOutput();
 	outputText("You push " + player2.short + " down on " + player2.mf("his","her") + " back, a task made all the more difficult by your growing arousal.  Thankfully, " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " usual " + player2.armorName + ".  Instead, " + player2.mf("his","her") + " form is bared to your probing fingertips, pliant and exposed.  You cannot help but dip a finger into " + player2.mf("his","her") + " moist delta, parting the oozing veil to enjoy the view of " + player2.mf("his","her") + " ");
@@ -745,7 +745,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 
 	outputText("\n\n" + player2.short + " gently rests " + player2.mf("his","her") + " finger across your nose and lips, commanding, \"<i>Hold on a second.</i>\"  You look at " + player2.mf("him","her") + " and pant, your tongue dangling freely, dripping with frothy saliva as you try to contain yourself.  Your erection, painfully hard, twitches when " + player2.mf("he","she") + " finally stops teasing it, already missing the pleasant touches.  Thankfully, " + player2.mf("he","she") + " begins to remove your armor for you, smoothly undoing one strap at a time.   You sigh in exquisite relief when your chest bounces free, released from the binding leather bondage.  " + player2.short + " tosses the armor aside before rounding back to your skirt.  A quick twist of the clasps, and it joins the rest of the ensemble, leaving you naked and exposed.");
 
-	outputText("\n\n\"<i>Was that what you wanted?</i>\" " + player2.mf("he","she") + " asks.  You shut " + player2.mf("him","her") + " up by kissing " + player2.mf("him","her") + ", mashing your tits into " + player2.mf("his","her") + " chest so hard that they bulge out obscenely, pressed down painfully.  Your tongue twines with " + player2.short + "'s, twisting into a double helix of lusty licks and slippery, oral caresses.  Pleasantly, your monstrous equine dong is dripping pre all over " + player2.mf("his","her") + " middle, right up onto the bottom of " + player2.mf("his","her") + " chest.  She has to force you back up off " + player2.mf("him","her") + " with both hands, just to be able to talk.  Breathily, " + player2.mf("he","she") + " whispers, \"<i>I hope you didn't come all this way just to make out all night.</i>\"");
+	outputText("\n\n\"<i>Was that what you wanted?</i>\" " + player2.mf("he","she") + " asks.  You shut " + player2.mf("him","her") + " up by kissing " + player2.mf("him","her") + ", mashing your tits into " + player2.mf("his","her") + " chest so hard that they bulge out obscenely, pressed down painfully.  Your tongue twines with " + player2.short + "'s, twisting into a double helix of lusty licks and slippery, oral caresses.  Pleasantly, your monstrous equine dong is dripping pre all over " + player2.mf("his","her") + " middle, right up onto the bottom of " + player2.mf("his","her") + " chest.  " + player2.mf("He","She") + " has to force you back up off " + player2.mf("him","her") + " with both hands, just to be able to talk.  Breathily, " + player2.mf("he","she") + " whispers, \"<i>I hope you didn't come all this way just to make out all night.</i>\"");
 
 	outputText("\n\nYou answer with a feral, lusty snarl ");
 	//{fork centaurs/nagas/goo here}
@@ -753,11 +753,11 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	if(player2.isTaur())
 	{
 		outputText("and climb off the 'taur-" + player2.mf("man","woman") + ".  " + player2.mf("He","She") + " smirks up at you, until you bid " + player2.mf("him","her") + " to rise, telling " + player2.mf("him","her") + " that you plan to mount " + player2.mf("him","her") + " like the fertile filly " + player2.mf("he","her") + " is. Reluctantly, " + player2.short + " clatters up onto " + player2.mf("his","her") + " hooves.");
-		if(player2.tailType > TAIL_TYPE_NONE) outputText("  You stroke her tail as you shift it aside");
+		if(player2.tailType > TAIL_TYPE_NONE) outputText("  You stroke " + player2.mf("his","her") + " tail as you shift it aside");
 		else outputText("  You stroke " + player2.mf("his","her") + " swollen sex as you admire it");
 		outputText(", making sure you've got the perfect view of " + player2.mf("his","her") + " lube-slimed horse-cunt.  Unbidden, your cock thickens, disgorging a potent trail of animal-pre down its underside in anticipation.");
-		if(player2.wetness() >= 4) outputText("  Fuck, " + player2.mf("he","she") + "'s wetter than Edryn!  Just look at those heavy trails of slick moisture as they run down her rump and hindlegs.");
-		else if(player2.wetness() >= 2) outputText("  Fuck, " + player2.mf("he","she") + "'s as wet as Edryn!  Beads of moisture are forming on her clit, ready to drop to the ground.");
+		if(player2.wetness() >= 4) outputText("  Fuck, " + player2.mf("he","she") + "'s wetter than Edryn!  Just look at those heavy trails of slick moisture as they run down " + player2.mf("his","her") + " rump and hindlegs.");
+		else if(player2.wetness() >= 2) outputText("  Fuck, " + player2.mf("he","she") + "'s as wet as Edryn!  Beads of moisture are forming on " + player2.mf("his","her") + " clit, ready to drop to the ground.");
 		else outputText("  Fuck, " + player2.mf("he","she") + "'s almost as wet as Edryn!  Just getting a sniff of " + player2.mf("his","her") + " horny horse-snatch has your head swimming!");
 		outputText("  You give it a lick and shudder, taking in a few deep lungfuls of " + player2.mf("his","her") + " scent.");
 		if(player2.tallness >= 84) outputText("  Before you know what you're doing, you've pulled " + player2.mf("his","her") + " back to a rock and climbed atop it, bringing your cock level with that heavenly hole.");
@@ -778,7 +778,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	}
 	//{biped}
 	else {
-		outputText("and roll " + player2.mf("him","her") + " over on her hands and knees, lifting that sweet butt up in the air where you can admire it.  You kneel behind her and, pressing your nose into her fragrant quim, you extend your tongue, letting the smooth oral muscle taste " + player2.mf("his","her") + " juices and tease at " + player2.mf("his","her") + " engorging clit.  " + player2.short + " moans and presses back into you, crying out like a true bitch in heat, one in need of a thorough rutting.  The thought hits your cock like a lightning bolt, and it fills out to painful proportions, every vein and bulge standing out in stark relief, thumping obscenely to the tune of your insatiable lust.  You moan into " + player2.mf("his","her") + " lovely-tasting snatch, gulping down ");
+		outputText("and roll " + player2.mf("him","her") + " over on " + player2.mf("his","her") + " hands and knees, lifting that sweet butt up in the air where you can admire it.  You kneel behind " + player2.mf("his","her") + " and, pressing your nose into " + player2.mf("his","her") + " fragrant quim, you extend your tongue, letting the smooth oral muscle taste " + player2.mf("his","her") + " juices and tease at " + player2.mf("his","her") + " engorging clit.  " + player2.short + " moans and presses back into you, crying out like a true bitch in heat, one in need of a thorough rutting.  The thought hits your cock like a lightning bolt, and it fills out to painful proportions, every vein and bulge standing out in stark relief, thumping obscenely to the tune of your insatiable lust.  You moan into " + player2.mf("his","her") + " lovely-tasting snatch, gulping down ");
 		if(player2.wetness() < 3) outputText("every drop of nectar that " + player2.mf("he","she") + " gives up");
 		else if(player2.wetness() < 4) outputText("the copious drops of nectar " + player2.mf("he","she") + " gives up");
 		else if(player2.wetness() < 5) outputText("the drizzling moisture that oozes from " + player2.mf("his","her") + " twat");
@@ -786,7 +786,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 		outputText(".  You sniff in great lungfuls of " + player2.mf("his","her") + ", your head swimming with need, and before you know it, you've risen behind " + player2.mf("him","her") + ", your oozing flare just inches from that delectable opening.");
 	}
 
-	outputText("\n\nGrabbing hold of " + player2.short + " by " + player2.mf("his","her") + " waist, you level your phallus up against " + player2.mf("his","her") + " lips and press forward, hard.  " + player2.mf("His","Her") + " velvet curtains part slowly under your relentless pressure, a hanging veil of lubricants sheathing your head as it batters its way inside her in pliant depths.  " + player2.mf("He","She") + " fits you like a glove, a soft, squishy, velvet-lined glove that squeezes back against you oh-so-perfectly.  You groan in delight, but " + player2.mf("he","she") + "'s only taken a few inches - there's at least fifteen more, throbbing bigger in excitement.  " + player2.short + " grunts out loud, pushing back against you, stretching " + player2.mf("him","her") + "self around you to take a little bit more.  " + player2.mf("His","Her") + " lips cling to your girth, welcoming ever greater lengths of your iron shaft into the swelteringly pleasant embrace of her needy hole.  When your medial ring catches " + player2.mf("his","her") + " clit, " + player2.mf("he","she") + " moans, shaking " + player2.mf("his","her") + " asscheeks at you.");
+	outputText("\n\nGrabbing hold of " + player2.short + " by " + player2.mf("his","her") + " waist, you level your phallus up against " + player2.mf("his","her") + " lips and press forward, hard.  " + player2.mf("His","Her") + " velvet curtains part slowly under your relentless pressure, a hanging veil of lubricants sheathing your head as it batters its way inside " + player2.mf("him","her") + " in pliant depths.  " + player2.mf("He","She") + " fits you like a glove, a soft, squishy, velvet-lined glove that squeezes back against you oh-so-perfectly.  You groan in delight, but " + player2.mf("he","she") + "'s only taken a few inches - there's at least fifteen more, throbbing bigger in excitement.  " + player2.short + " grunts out loud, pushing back against you, stretching " + player2.mf("him","her") + "self around you to take a little bit more.  " + player2.mf("His","Her") + " lips cling to your girth, welcoming ever greater lengths of your iron shaft into the swelteringly pleasant embrace of " + player2.mf("his","her") + " needy hole.  When your medial ring catches " + player2.mf("his","her") + " clit, " + player2.mf("he","she") + " moans, shaking " + player2.mf("his","her") + " asscheeks at you.");
 
 	outputText("\n\nYou smack " + player2.short + " on the ass, and " + player2.mf("he","she") + " wiggles again, this time slower, and more sensually.  " + player2.mf("His","Her") + " cunt feels sinfully tight around you");
 	if(player2.vaginalCapacity() >= 200) outputText(", though you know " + player2.mf("he","she") + " can handle cocks with Edryn's ease");
@@ -801,13 +801,15 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText(" from your prodigious deposit.  The illusion of knocking " + player2.mf("him","her") + " up takes hold of you, and your orgasm redoubles, fresh waves of horse-cum pouring out of you unceasingly.  " + player2.short + " moans, rubbing " + player2.mf("him","her") + " taut");
 	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" pregnant");
 	outputText(" dome, until at last you finally spend the last of your spunk.");
+	
+	//Hermaphrodite cums!
 	if (player2.hasCock()) {
 		outputText("\n\nYour lover suddenly achieves orgasm at last.  ")
-		if (player2.cumQ() < 50) outputText("Ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("him", "her") + " prick.  After a few shots of cum, " + player2.mf("his", "her") + " cock stops leaking at once.")
-		else if (player2.cumQ() < 250) outputText("Thick ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("him", "her") + " prick.  " + player2.mf("He", "She") + " definitely made a bit of mess. ")
-		else if (player2.cumQ() < 1000) outputText("Thick ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("him", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
-		else if (player2.cumQ() < 2500) outputText("Torrents of cum blast from " + player2.mf("him", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
-		else outputText("Torrents of cum blast from " + player2.mf("him", "her") + " prick.  This continues for a few minutes and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a huge puddle of cum.")
+		if (player2.cumQ() < 50) outputText("Ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("his", "her") + " prick.  After a few shots of cum, " + player2.mf("his", "her") + " cock stops leaking at once.")
+		else if (player2.cumQ() < 250) outputText("Thick ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("his", "her") + " prick.  " + player2.mf("He", "She") + " definitely made a bit of mess. ")
+		else if (player2.cumQ() < 1000) outputText("Thick ropes of " + player2.mf("his", "her") + " seed shoot from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
+		else if (player2.cumQ() < 2500) outputText("Torrents of cum blast from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
+		else outputText("Torrents of cum blast from " + player2.mf("his", "her") + " prick.  This continues for a few minutes and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a huge puddle of cum.")
 	}
 	
 	outputText("\n\nYou lay down on " + player2.mf("his","her") + " back, exhausted, and " + player2.mf("he","she") + " rolls onto " + player2.mf("his","her") + " side, taking you with " + player2.mf("his","her") + ".  Snuggled together, genitals still locked and dripping, the two of your doze off together, whispering sweet nothings into the still, night air.");
@@ -2555,7 +2557,7 @@ private function fuckTheCowCubi():void {
 	outputText("\n\n...Not a chance, you think to yourself.  But, from that familiar warmth burning in your dick and the clenching of your balls, things are about to finish, one way or another... You cry out as you cum for the second time, flooding the demon's loose cunt with your jizz.  \"<i>Ahh!  Fox milk!  Give me all your seed!  Make me pop a new litter of imps!</i>\" she screams, her cunt quivering with an orgasm of her own, milking your shaft as well as it can after being ruined by her pet minotaur.");
 
 	outputText("\n\nYou empty the bulk of your cum into the demonic slut, then pull out, spraying her ass and legs with the last few spurts of jizz.  \"<i>Hah!  Is that it?</i>\"  The demon crows, but gets no further; you grab your halberd and bring it crashing down, blunt-end first, into the back of her skull, leaving her unconscious.");
-
+	player.orgasm();
 	outputText("\n\nYou look at her, sprawled there, and your face falls, shame burning in your belly.  What kind of woman are you?  Bad enough to sleep around on your lover, but with a demon?  Are you really that incapable of controlling yourself?  Feeling miserable, trying to justify your actions and vowing that Taoth will be removed from you if it's the last thing you do, you pull your clothes back on and start heading into the shrine, anxious to be free of him at last.");
 	menu();
 	addButton(0,"Move On",enteringTaothsShrine);
@@ -2684,6 +2686,7 @@ private function deadGodsDreaming():void {
 	outputText("\n\nThen you awake with a start, still kneeling before the unmoving statue.  Was it all a dream?  You don't know...  Your head is throbbing like mad, and you can't think clearly.  But even as the pain dims, you become aware of another, more pressing matter.  Lust.  That familiar yearning burns inside your arm-length prick like a raging inferno, the tower of equine fuckmeat thrusting boldly before you and steadily gushing precum onto the ground.  Naked, hungry NEED screams and claws and gibbers behind your eyes... " + player2.short + ", you must have " + player2.short + "!");
 
 	outputText("\n\nAbsently licking drool from your lips, you stagger upright and, using your halberd for support, start loping home from the shrine.  In your wake you leave a slug-like trail of sexual lubricants, too focused on finding and fucking your lover to care about the glistening slime caking your dick and plastering your inner thighs.");
+	dynStats("lus=", 100, "resisted", false);
 	//Revert to PC control and change page to Urta Arrives At Camp
 	menu();
 	addButton(0,"Next",urtaArrivesAtCampForFukks);

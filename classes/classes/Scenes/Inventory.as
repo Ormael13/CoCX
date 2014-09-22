@@ -1200,24 +1200,39 @@ public function doItems(eventNo:Number):void {
 		public function unequipWeapon():void {
 			if (player.weaponName != "fists")
 			{
+				//Removes perks so it doesn't become stuck.
+				while (player.findPerk(PerkLib.WizardsFocus) >= 0)
+				{
+					player.removePerk(PerkLib.WizardsFocus);
+				}
 				menuLoc = 37;
 				outputText("You unequip your " + player.weaponName + ". ", true);
 				var temp:ItemType = player.weapon;
 				player.setWeaponHiddenField(WeaponLib.FISTS);
 				takeItem(temp);
 				//doNext(manageEquipment);
-				
 			}
 		}
 		public function unequipArmor():void {
-			if (player.armorName != "comfortable underclothes")
+			if (player.armorName != "goo armor") //Valeria belongs in the camp, not in your inventory!
 			{
+				//Removes perks so it doesn't become stuck.
+				while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);
+				while (player.findPerk(PerkLib.WizardsEndurance) >= 0) player.removePerk(PerkLib.WizardsEndurance);
+				while (player.findPerk(PerkLib.SluttySeduction) >= 0) player.removePerk(PerkLib.SluttySeduction);
 				menuLoc = 37;
 				outputText("You unequip your " + player.armorName + ". ", true);
 				var temp:ItemType = player.armor;
 				player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
 				takeItem(temp);				
 				//doNext(manageEquipment);
+			}
+			else 
+			{	
+				clearOutput();
+				player.armor.unequip(player, false, true);
+				player.armor.unequipEffect(player, true);
+				doNext(returnToItems);
 			}
 		}
 		public function unequipJewel():void {
@@ -1423,115 +1438,17 @@ public function doItems(eventNo:Number):void {
 			placeInRacks(5, 2);
 		}
 		
-		//For now until we find better solution. (Retrieve items)
-		private function retrieveFromWeaponRackSlot0():void {
-			if (gearStorage[00].quantity > 0) retrieveFromRacks(0, 0);
+		//For now until we find better solution.
+		private function retrieveFromWeaponRackSlot(slot:Number):void {
+			if (gearStorage[slot].quantity > 0) retrieveFromRacks(slot, 0);
 			else return;
 		}
-		private function retrieveFromWeaponRackSlot1():void {
-			if (gearStorage[01].quantity > 0) retrieveFromRacks(1, 0);
+		private function retrieveFromArmorRackSlot(slot:Number):void {
+			if (gearStorage[slot+9].quantity > 0) retrieveFromRacks(slot, 1);
 			else return;
 		}
-		private function retrieveFromWeaponRackSlot2():void {
-			if (gearStorage[02].quantity > 0) retrieveFromRacks(2, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot3():void {
-			if (gearStorage[03].quantity > 0) retrieveFromRacks(3, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot4():void {
-			if (gearStorage[04].quantity > 0) retrieveFromRacks(4, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot5():void {
-			if (gearStorage[05].quantity > 0) retrieveFromRacks(5, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot6():void {
-			if (gearStorage[06].quantity > 0) retrieveFromRacks(6, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot7():void {
-			if (gearStorage[07].quantity > 0) retrieveFromRacks(7, 0);
-			else return;
-		}
-		private function retrieveFromWeaponRackSlot8():void {
-			if (gearStorage[08].quantity > 0) retrieveFromRacks(8, 0);
-			else return;
-		}
-		
-		private function retrieveFromArmorRackSlot0():void {
-			if (gearStorage[09].quantity > 0) retrieveFromRacks(0, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot1():void {
-			if (gearStorage[10].quantity > 0) retrieveFromRacks(1, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot2():void {
-			if (gearStorage[11].quantity > 0) retrieveFromRacks(2, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot3():void {
-			if (gearStorage[12].quantity > 0) retrieveFromRacks(3, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot4():void {
-			if (gearStorage[13].quantity > 0) retrieveFromRacks(4, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot5():void {
-			if (gearStorage[14].quantity > 0) retrieveFromRacks(5, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot6():void {
-			if (gearStorage[15].quantity > 0) retrieveFromRacks(6, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot7():void {
-			if (gearStorage[16].quantity > 0) retrieveFromRacks(7, 1);
-			else return;
-		}
-		private function retrieveFromArmorRackSlot8():void {
-			if (gearStorage[17].quantity > 0) retrieveFromRacks(8, 1);
-			else return;
-		}
-		
-		private function retrieveFromJewelryBoxSlot0():void {
-			if (gearStorage[18].quantity > 0) retrieveFromRacks(0, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot1():void {
-			if (gearStorage[19].quantity > 0) retrieveFromRacks(1, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot2():void {
-			if (gearStorage[20].quantity > 0) retrieveFromRacks(2, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot3():void {
-			if (gearStorage[21].quantity > 0) retrieveFromRacks(3, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot4():void {
-			if (gearStorage[22].quantity > 0) retrieveFromRacks(4, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot5():void {
-			if (gearStorage[23].quantity > 0) retrieveFromRacks(5, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot6():void {
-			if (gearStorage[24].quantity > 0) retrieveFromRacks(6, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot7():void {
-			if (gearStorage[25].quantity > 0) retrieveFromRacks(7, 2);
-			else return;
-		}
-		private function retrieveFromJewelryBoxSlot8():void {
-			if (gearStorage[26].quantity > 0) retrieveFromRacks(8, 2);
+		private function retrieveFromJewelryBoxSlot(slot:Number):void {
+			if (gearStorage[slot+18].quantity > 0) retrieveFromRacks(slot, 2);
 			else return;
 		}
 		
@@ -1554,9 +1471,9 @@ public function doItems(eventNo:Number):void {
 				{
 					items++;
 					slotDescs[temp - offset] = (gearStorage[temp].itype.shortName + " x" + gearStorage[temp].quantity);
-					if (type == 0) addButton((temp - offset), slotDescs[temp - offset], this["retrieveFromWeaponRackSlot" + (temp-offset)]);
-					if (type == 1) addButton((temp - offset), slotDescs[temp - offset], this["retrieveFromArmorRackSlot" + (temp-offset)]);
-					if (type == 2) addButton((temp - offset), slotDescs[temp - offset], this["retrieveFromJewelryBoxSlot" + (temp - offset)]);
+					if (type == 0) addButton((temp - offset), slotDescs[temp - offset], retrieveFromWeaponRackSlot, temp-offset);
+					if (type == 1) addButton((temp - offset), slotDescs[temp - offset], retrieveFromArmorRackSlot, temp-offset);
+					if (type == 2) addButton((temp - offset), slotDescs[temp - offset], retrieveFromJewelryBoxSlot, temp-offset);
 				}
 				temp++;
 			}

@@ -18,7 +18,7 @@ package classes.Items.Armors
 				if (player.isBiped()) //Some variants.
 				{
 					if (player.lowerBody == 0) outputText("Then you put your feet into your boots. With the boots fully equipped, you move on to the next piece. ");
-					else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You let out a sigh and instead move on to the next piece. ");
+					else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You have to modify the boots to fit and when you do put on your boots, your feet are exposed. ");
 				}
 				outputText("Next, you put on your chitinous bracers to protect your arms.\n\n")
 				if (!player.isTaur() && !player.isDrider()) outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Rathazul for that and you know that you easily have access to your ");

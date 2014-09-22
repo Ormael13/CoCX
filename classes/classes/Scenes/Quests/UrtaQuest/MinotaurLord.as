@@ -137,7 +137,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
 			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
-			this.tallness = rand(37) + 84;
+			this.tallness = 132;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
