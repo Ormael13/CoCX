@@ -50,7 +50,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Find Owca
-			if (player.level >= 8 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
+			if ((player.level >= 8 || flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 50) && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
 				kGAMECLASS.owca.gangbangVillageStuff();
 				return;
 			}

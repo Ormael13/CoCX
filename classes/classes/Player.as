@@ -1324,7 +1324,7 @@ use namespace kGAMECLASS;
 				}
 				if (flags[kFLAGS.PC_HUNGER] > 90)
 				{
-					outputText("\n<b>You stomach feels so full. </b>")
+					outputText("\n<b>Your stomach feels so full. </b>")
 				}			
 			}
 		}

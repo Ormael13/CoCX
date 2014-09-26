@@ -1258,8 +1258,8 @@ public static const CODEX_ENTRY_SUCCUBUS:int                                   	
 public static const PIG_SLUT_DISABLED:int                                   		= 1250;
 public static const MARBLE_CORRUPT_MARAE_STORY:int                                  = 1251;
 public static const CAMP_PORTAL_PROGRESS:int                                   		= 1252;
-public static const UNKNOWN_FLAG_NUMBER_01253:int                                   = 1253;
-public static const UNKNOWN_FLAG_NUMBER_01254:int                                   = 1254;
+public static const GLACIAL_RIFT_DISCOVERED:int                                     = 1253;
+public static const VOLCANO_CRAG_DISCOVERED:int                                     = 1254;
 public static const UNKNOWN_FLAG_NUMBER_01255:int                                   = 1255;
 public static const UNKNOWN_FLAG_NUMBER_01256:int                                   = 1256;
 public static const UNKNOWN_FLAG_NUMBER_01257:int                                   = 1257;

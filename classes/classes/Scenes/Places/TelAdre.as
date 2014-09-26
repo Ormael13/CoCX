@@ -170,7 +170,7 @@ public function telAdreMenu():void {
 		else katherine.repeatAmbushKatherineRecruitMent();
 		return;
 	}
-	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0) {
+	if(flags[kFLAGS.ARIAN_PARK] == 0 && rand(10) == 0) {
 		kGAMECLASS.arianScene.meetArian();
 		return;
 	}

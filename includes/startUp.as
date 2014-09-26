@@ -64,7 +64,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 			"Instructions", howToPlay,
 			"Debug Info", debugPane,
 			"", 0,
-			"", 0,
+			"Achievements", 0,
 			"Settings", settingsScreen,
 			"Resume", resume);
 
@@ -91,6 +91,8 @@ Edited By:<br>
 
 Open-source contributions by:<br>
 &nbsp; &nbsp; &nbsp; aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al
+
+Game Mod by: Kitteh6660
 
 Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
 

@@ -1243,8 +1243,8 @@
 	if(player.gems == 1) 
 		outputText("\n\n<b>You have " + player.gems + " shining gem, collected in your travels.", false);
 	mainView.setOutputText( currentText );
-	//menu();
-	//addButton(0,"Next",camp);
+	menu();
+	doNext(1);
 	flushOutputTextToGUI();
 }
 

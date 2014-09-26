@@ -1067,6 +1067,8 @@ public function postAddictionFarmMornings():void {
 	outputText("", true);
 	outputText("You hurry over to the farm to get your daily dose of Marble's milk.  It takes an hour of your day, but your body is satisfied.", false);
 	//(increase player corr by 2 if corr is under 30, otherwise increase corr by 1 up to a max of 40)
+	player.refillHunger(20);
+	player.slimeFeed();
 	if(player.cor < 40) {
 		if(player.cor < 30) dynStats("cor", 1);
 		dynStats("cor", 1);
@@ -1243,7 +1245,8 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 		if(player.cor < 30) dynStats("cor", 1);
 		dynStats("cor", 1);
 	}
-	if(player.lib < 40) dynStats("lib", .1);
+	if (player.lib < 40) dynStats("lib", .1);
+	player.refillHunger(20)
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)

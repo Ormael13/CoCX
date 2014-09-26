@@ -940,7 +940,7 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Check up on any slaves you have received and interact with them.";
 	}
 	if(buttonText.indexOf("Camp Actions") != -1) {
-		toolTipText = "Interact with the camp surroundings and also read codex.";
+		toolTipText = "Interact with the camp surroundings and also read your codex.";
 	}
 	if(buttonText == "Masturbate") {
 		toolTipText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
@@ -985,7 +985,7 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if (buttonText.indexOf("Cathedral") != -1) {
 		if (flags[kFLAGS.GAR_NAME] != 0) toolTipText = "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.";
-		else toolTipText = "Visit the ruined cathedral you recently discovered.";
+		else toolTipText = "Visit the ruined cathedral you've recently discovered.";
 	}
 	if(buttonText.indexOf("Dungeons") != -1) {
 		toolTipText = "Delve into dungeons.";
@@ -1057,9 +1057,10 @@ public function getButtonToolTipText(buttonText:String):String
 	//-----------------
 	//-- DUNGEON INTERACTIONS
 	//-----------------
+	//Factory
 	if(buttonText == "Iron Key") {
 		toolTipText = "Pick up the iron key. It looks like it might unlock the door in this factory.";
-	}		
+	}
 	if(buttonText == "Coffee") {
 		toolTipText = "Drink some coffee.";
 	}
@@ -1110,6 +1111,7 @@ public function getButtonToolTipText(buttonText:String):String
 			if (player.hasCock()) toolTipText = "Refuse the offer and kill the demon instead.";
 		}
 	}
+	//Deep cave
 	if (kGAMECLASS.tooltipLoc == "Zetaz") {
 		if (buttonText == "Sexual") {
 			if (player.hasCock()) toolTipText = "Chain the imp up and sexually interrogate him.";
@@ -1178,6 +1180,9 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("NewGamePlus") != -1) {                        
 		toolTipText = "Start a new game with your equipment, experience, and gems carried over.";
+	}
+	if(buttonText.indexOf("Game Over") != -1) {                        
+		toolTipText = "Your game has ended. Please load a saved file or start a new game.";
 	}
 	//Settings
 	if(buttonText.indexOf("Toggle Debug") != -1) {                        

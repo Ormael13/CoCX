@@ -1623,7 +1623,7 @@ private function urtaRaepsJoo():void {
 private function partTwoOfUrtaBoning():void {
 	clearOutput();
 	outputText("You open your eyes and gaze at the smiling face of Urta.  \"<i>Good morning, lover.  Sleep well?</i>\"  She playfully teases you.  You smile at her, stretching yourself and finally becoming aware of the rest of your body.  You wince in pain as your abused ass screams a protest at your motions, a strange weight emanating from your midriff.  Your belly is visibly rounded out, filled with what you imagine is the result of many loads from your foxy lover.  Urta gives your belly a gentle rub and seems to seriously study your bulging gut and hers.  \"<i>I think mine is still bigger,</i>\" she says, with a slightly embarrassed giggle.");
-	
+	player.refillHunger(100);
 	if(player.cockTotal() > 1) {
 		outputText("\n\n[EachCock] is fully erect, painfully pointing at Urta's opening.");
 		if(!player.isTaur()) outputText("  So close that you can almost feel its heat against your [cockHead].");
