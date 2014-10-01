@@ -49,6 +49,7 @@ package classes.Items
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
 		public const SCALEML:Armor = mk("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,170,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection. \n\nType: Heavy armor \nDefense: 12 \nBase value: 170");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
+		public const SEDUCTU:SeductiveArmorUntrapped = new SeductiveArmorUntrapped();
 		public const SS_ROBE:ArmorWithPerk = mk2("SS.Robe","SS.Robes","spider-silk robes","a spider-silk robes",6,950,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood. \n\nType: Clothing \nDefense: 6 \nBase value: 950 \nSpecial: Wizard's Endurance (-30% spell cost)","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const SSARMOR:Armor = mk("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,950,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off. \n\nType: Heavy armor \nDefense: 25 \nBase value: 950");

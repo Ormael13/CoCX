@@ -25,7 +25,7 @@ package classes.Scenes.Areas.HighMountains
 			this.skinTone = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
-			initStrTouSpeInte(90, 90, 90, 80);
+			initStrTouSpeInte(120, 90, 90, 80);
 			initLibSensCor(30, 25, 15);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
@@ -164,10 +164,9 @@ package classes.Scenes.Areas.HighMountains
 				outputText("  Her fist connects with your chin with a mighty crack, sending you sailing across the cave.  Izumi smirks at you as you");
 				if (player.isNaga()) outputText(" raise back up onto your [legs]");
 				else outputText(" stand");
-				outputText(" and dust yourself off.");
+				outputText(" and dust yourself off. ");
 				
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -238,7 +237,7 @@ package classes.Scenes.Areas.HighMountains
 				else outputText(" impressive"); 
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
 				
-				player.takeDamage(75 + rand(15));
+				player.takeDamage(75 + rand(15), true);
 				doAI();
 			}
 		}
@@ -249,7 +248,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			
 			outputText("Your feet dangle uselessly in the air as Izumi holds you aloft.  Why bother resisting?  She's just so <i>strong</i>, her fingers wrapped so completely around your neck...");
-			player.takeDamage(75 + rand(15));
+			player.takeDamage(75 + rand(15), true);
 			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
@@ -271,9 +270,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
-			player.takeDamage(damage);
-			
-			outputText("(" + damage + ")");
+			player.takeDamage(damage, true);
 			
 			combatRoundOver();
 		}
@@ -281,6 +278,7 @@ package classes.Scenes.Areas.HighMountains
 		// Player escapes from the chokeslam attack
 		public function chokeSlamEscape():void
 		{
+			var damage:Number = 50 + rand(player.str);
 			if (combatDebug) trace("Escaping from Chokeslam!");
 			
 			outputText("Scrabbling desperately against her wrist, you narrow your eyes at the Oni woman’s superior expression,");
@@ -290,10 +288,10 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow !”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
-			
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
 			cleanupChokeslam();
 			
-			this.HP -= 50 + rand(player.str);
+			this.HP -= damage;
 			
 			combatRoundOver();
 		}
@@ -452,10 +450,12 @@ package classes.Scenes.Areas.HighMountains
 				outputText("  Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
 
-			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...”");
+			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...” ");
 
 			cleanupTitsmother();
-			this.HP -= (15 + rand(player.str));
+			var damage:Number = (15 + rand(player.str));
+			this.HP -= damage;
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			combatRoundOver();
 		}
 		

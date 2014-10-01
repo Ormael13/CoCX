@@ -3142,6 +3142,7 @@ private function marblePreggoChance(preggerMult:Number):void {
 	if(preggerOdds > 20) preggerOdds = 20;
 	//Fertility+ perk bumps odds to 25.
 	if(player.findPerk(PerkLib.FertilityPlus) >= 0) preggerOdds += 5;
+	if(player.findPerk(PerkLib.FertilityMinus) >= 0 && player.lib < 25) preggerOdds -= 5;
 	//If has 'stud perk' almost always get her pregnant
 	if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) preggerOdds += 25;
 	preggerOdds *= preggerMult;

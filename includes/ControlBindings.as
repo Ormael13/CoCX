@@ -480,6 +480,72 @@ inputManager.AddBindableControl(
 	},
 	InputManager.CHEATCONTROL);
 
+inputManager.AddBindableControl(
+	"Cheat! Access debug menu",
+	"Cheat code to access debug menu and spawn ANY items or change stats.",
+	function(keyCode:int):void {
+		if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 0)
+		{
+			if (keyCode == 68)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 1)
+		{
+			if (keyCode == 69)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 2)
+		{
+			if (keyCode == 66)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 3)
+		{
+			if (keyCode == 85)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4)
+		{
+			if (keyCode == 71)
+			{
+				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1)
+				{
+					kGAMECLASS.debugMenu.accessDebugMenu();
+				}
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+	},
+	InputManager.CHEATCONTROL);
+
+	
 // Insert the default bindings
 inputManager.BindKeyToControl(83, "Show Stats");
 inputManager.BindKeyToControl(76, "Level Up");

@@ -204,8 +204,9 @@
 			this.level = 6;
 			this.gems = 15;
 			this.drop = new WeightedDrop().
-					add(consumables.INCUBID,6).
+					add(consumables.INCUBID,4).
 					add(consumables.W_FRUIT,3).
+					add(consumables.AKBALSL,2).
 					add(weapons.PIPE,1);
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;

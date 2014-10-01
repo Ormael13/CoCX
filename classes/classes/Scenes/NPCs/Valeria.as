@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Lake.GooGirl;
 
 	public class Valeria extends NPCAwareContent {
@@ -13,6 +14,7 @@
 
 //Camp Menu -- [Followers] -- [Valeria]
 public function valeriaFollower():void {
+	kGAMECLASS.tooltipLoc = "Valeria"
 	spriteSelect(79);
 	clearOutput();
 	outputText("You walk over to Valeria.  Seeing you approach, the armor-goo turns a slightly brighter shade of blue beneath her plates and grins.");
@@ -192,6 +194,7 @@ private function valeriaGetFucked():void {
 		//if PC has nipplecunts)
 		else outputText("  The goo-girl, still grinning, picks her feet up off your chest. You can only watch as both her dainty feet swirl and bend, reconstituting themselves as a pair of massive flared horsecocks.  You barely have time to yelp before she plunges both of her bestial shafts deep into your [chest].  You moan like a whore as the goo-girl triple-penetrates you, ramming her three cocks into your stretched cunt and the holes on your chest.");
 		//(end if)
+		player.cuntChange(10,true,true,false);
 		outputText("\n\nUnder Valeria's triple attacks on your [vagina] and [nipples], you cannot last very long.  Gasping with pleasure, you feel your climax rising.  But not one to be outdone, your gooey lover lets out her own long, loud moan and rams her cock");
 		if(player.hasFuckableNipples()) outputText("s");
 		outputText(" deeper inside you than ever before.  You feel streaks of goo pouring into you as she cums, pouring her essence into your womb ");
@@ -253,6 +256,7 @@ private function gooFlation(clearText:Boolean = true):void {
 	player.buttChange(30,true,true,false);
 	outputText("\n\nYou grunt and gasp as the last of her toe-tentacles pierces your sphincter and joins its sisters inside your ass.  As she pours more and more of her cock-toe-tendrils into you, you begin to see Valeria's body shrinking and deflating... Oh, god...");
 	outputText("\n\nHer gut becomes concave, then her face, until she's pouring off your body and around your waist.  You try and struggle, but it's too late.  She surges up your rectum, utterly filling you with herself.  You can only sit and watch as your stomach begins to expand, pushing dangerously out from your ribs as the last little bits of Valeria suck up your ass.");
+	player.refillHunger(50);
 	outputText("\n\n\"<i>VALERIA!</i>\" you shout, poking your stomach.  Your flesh quivers, shaking like a great big bowl of goo.");
 	outputText("\n\n\"<i>Hey there, partner,</i>\" you hear a laugh from inside you.  Before you can say anything else to the goo-girl inside you, your stomach rumbles.  You double over, half in pleasure half in pain as something lurches inside you.  You feel a rush going out your colon, and just squat in time for Val to explode out of your ass in one massive thrust.  You cum, an anal orgasm rocking your body as Valeria pops out your bum, pouring out of your well-stretched sphincter.");
 	//(All Genders Reconvene) 

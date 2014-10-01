@@ -16,7 +16,7 @@ package classes.Items.Consumables
 			if (game.player.findPerk(PerkLib.BimboBrains) >= 0 || game.player.findPerk(PerkLib.FutaFaculties) >= 0)
 				return "This should totally like, fix your brain and stuff.  You don't really think anything is wrong with your head - it feels all pink and giggly all the time.";
 			else
-				return "This draft is concocted from five scholar's teas and who knows what else.  Supposedly it will correct the stupifying effects of Bimbo Liqueur.";
+				return "This draft is concocted from five scholar's teas and who knows what else.  Supposedly it will correct the stupifying effects of Bimbo Liqueur. \n\nType: Consumable";
 		}
 
 

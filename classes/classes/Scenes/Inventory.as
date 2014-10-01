@@ -207,20 +207,44 @@ public function doItems(eventNo:Number):void {
 		}
 	}
 	//Gro+ Ballzzzz
-	else if(eventNo == 1039) {
+	else if (eventNo == 1039) {
+		var multiplier:Number = 1;
 		player.slimeFeed();
 		outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n", true);
+		//Apply diminishing returns in realistic mode. The bigger your balls, the harder it is to grow your balls further.
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+			if (player.ballSize >= 6) multiplier -= 0.25;
+			if (player.ballSize >= 12) multiplier -= 0.25;
+			if (player.ballSize >= 24) multiplier -= 0.25;
+			if (player.ballSize >= 36) multiplier -= 0.10;
+			if (player.ballSize >= 48) multiplier -= 0.05;
+			if (player.ballSize > 36 && rand(2) == 0) {
+				outputText("It seems to have no effect on your " + ballsDescriptLight() + ".")
+				return;
+			}
+			if (player.ballSize >= 60) {
+				outputText("It seems to have no effect on your " + ballsDescriptLight() + ". You may have reached the upper limit of Gro+.")
+				return;
+			}			
+		}
 		//1 in 4 BIG growth.
 		if(rand(4) == 0) {
 			outputText("You feel a trembling in your " + ballsDescriptLight() + " as the chemicals start to go to work.  You can tell they're going to be VERY effective.\n", false);
-			player.ballSize += 2 + rand(4);
+			player.ballSize += ((2 + rand(4)) * multiplier);
 			outputText("They shift, stretching your " + sackDescript() + " tight as they gain inches of size.  You step to steady yourself as your center of balance shifts due to your newly enlarged " + ballsDescriptLight() + ".  ", false);
 		}
 		else {
-			player.ballSize += 1 + rand(2);
+			player.ballSize += ((1 + rand(2)) * multiplier);
 			outputText("You feel your testicles shift, pulling the skin of your " + sackDescript() + " a little bit as they grow to " + ballsDescriptLight() + ".  ", false);
 		}
-		if(player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.", false);
+		if (player.ballSize > 10) {
+			outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.  ", false);
+			dynStats("spe", (-1 - rand(2)))
+		}
+		if (player.ballSize > 36 && flags[kFLAGS.HUNGER_ENABLED] > 0) {
+			outputText("Your monster-sized balls are weighing you down. You'll have hard time carrying them.", false);
+			dynStats("spe", (-1 - rand(2)))
+		}		
 		dynStats("lus", 10);
 		itemGoNext();
 	}
@@ -1218,6 +1242,7 @@ public function doItems(eventNo:Number):void {
 			{
 				//Removes perks so it doesn't become stuck.
 				while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);
+				while(player.findPerk(PerkLib.BloodMage) >= 0) player.removePerk(PerkLib.BloodMage);
 				while (player.findPerk(PerkLib.WizardsEndurance) >= 0) player.removePerk(PerkLib.WizardsEndurance);
 				while (player.findPerk(PerkLib.SluttySeduction) >= 0) player.removePerk(PerkLib.SluttySeduction);
 				menuLoc = 37;

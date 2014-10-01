@@ -103,6 +103,7 @@ public function cupcakeBuy(arg:int = 1):void
 	//200
 	if(arg == 20) player.gems -= 200;
 	frostyPoints(arg);
+	player.refillHunger(5 * arg);
 	menu();
 	addButton(0,"Next",approachFrosty);
 }

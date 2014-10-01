@@ -12,7 +12,7 @@
 	public class CharCreation extends BaseContent{
 
 	//Hacky solution
-	var unlockedHerm:Boolean = false;
+	public var unlockedHerm:Boolean = false;
 	
 public function newGameGo(e:MouseEvent = null):void {
 	funcs = [];

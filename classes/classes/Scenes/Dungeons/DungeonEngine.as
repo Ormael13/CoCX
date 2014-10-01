@@ -13,6 +13,7 @@ package classes.Scenes.Dungeons
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
+		public var cabin:YourCabin = new YourCabin;
 		
 		public function DungeonEngine() 
 		{
@@ -21,6 +22,8 @@ package classes.Scenes.Dungeons
 		
 		public function checkRoom():void
 		{
+			//Cabin
+			if (kGAMECLASS.dungeonLoc == -10) cabin.enterCabin();
 			//Factory
 			if (kGAMECLASS.dungeonLoc == 0) factory.roomLobby();
 			if (kGAMECLASS.dungeonLoc == 1) factory.roomBreakRoom();
@@ -100,7 +103,7 @@ package classes.Scenes.Dungeons
 			if (west == true) addButton(5, "West", westFunction);
 			if (east == true) addButton(1, "East", eastFunction);
 			addButton(8, "Inventory", eventParser, 1000);
-			addButton(9, "Masturbate", eventParser, 10);
+			if (player.lust >= 30) addButton(9, "Masturbate", eventParser, 10);
 		}
 		
 	}

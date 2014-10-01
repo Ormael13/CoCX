@@ -364,9 +364,14 @@ use namespace kGAMECLASS;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				game.HPChange(-damage, display);
-				//game.dynStats("HP", -damage);
+				//game.HPChange(-damage, display);
+				HP -= damage
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+					else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
+				}
 				game.mainView.statsView.showStatDown('hp');
+				game.dynStats("lus", 0); //Force display arrow.
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					game.dynStats("lus", int(damage / 2));
 				}
@@ -1221,7 +1226,7 @@ use namespace kGAMECLASS;
 			}
 			return mutantCounter--;
 		}
-
+		
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)
@@ -1631,6 +1636,7 @@ use namespace kGAMECLASS;
 		public function minLust():Number
 		{
 			var min:Number = 0;
+			var minCap:Number = 100;
 			//Bimbo body boosts minimum lust by 40
 			if(findStatusAffect(StatusAffects.BimboChampagne) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
 				if(min > 40) min += 10;
@@ -1672,6 +1678,14 @@ use namespace kGAMECLASS;
 			//Subtract points for Icestone!
 			min -= perkv1(PerkLib.PiercedIcestone);
 			min += perkv1(PerkLib.PentUp);
+			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings. This effectively caps minimum lust at 80.
+			if (findPerk(PerkLib.ColdBlooded) > 0) {
+				if (min >= 20) {
+					if (min <= 40) min -= (min - 20);
+					else min -= 20;
+				}
+				minCap -= 20;
+			}
 			//Harpy Lipstick status forces minimum lust to be at least 50.
 			if(min < 50 && findStatusAffect(StatusAffects.Luststick) >= 0) min = 50;
 			//SHOULDRA BOOSTS
@@ -1694,13 +1708,14 @@ use namespace kGAMECLASS;
 			if (jewelryEffectId == 2)
 			{
 				min -= jewelryEffectMagnitude;
-				if (min > (100 - jewelryEffectMagnitude))
+				if (min > (minCap - jewelryEffectMagnitude))
 				{
-					min = (100 - jewelryEffectMagnitude);
+					minCap = (minCap - jewelryEffectMagnitude);
 				}
 			}
 			if (min < 30 && armorName == "lusty maiden's armor") min = 30;
 			if (min < 20 && armorName == "tentacled bark armor") min = 20;
+			if (min > minCap) min = minCap;
 			return min;
 		}
 
@@ -1847,6 +1862,12 @@ use namespace kGAMECLASS;
 				// speUp.visible = true;
 				// speDown.visible = false;
 				removeStatusAffect(StatusAffects.BasiliskSlow);
+			}
+			if (findStatusAffect(StatusAffects.GiantGrabbed) >= 0) removeStatusAffect(StatusAffects.GiantGrabbed);
+			if (findStatusAffect(StatusAffects.GiantBoulder) >= 0) removeStatusAffect(StatusAffects.GiantBoulder);
+			if (findStatusAffect(StatusAffects.GiantStrLoss) >= 0) {
+				str += statusAffectv1(StatusAffects.GiantStrLoss);
+				removeStatusAffect(StatusAffects.GiantStrLoss);
 			}
 			while(findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
 		}

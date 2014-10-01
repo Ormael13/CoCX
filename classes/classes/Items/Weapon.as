@@ -19,7 +19,7 @@ package classes.Items
 			if (canUse(player,output)){
 				var oldWeapon:Weapon = player.weapon;
 				if (output) {
-					outputText("You equip your " + longName + ".  ");
+					outputText("You equip your " + name + ".  ");
 				}
 				oldWeapon.unequip(player, returnOldItem, output);
 				player.setWeaponHiddenField(this);

@@ -1,4 +1,6 @@
-﻿import flash.text.TextFormat;
+﻿import classes.perkClass;
+import classes.PerkClass;
+import flash.text.TextFormat;
 // // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
@@ -637,11 +639,18 @@ public function buildPerkList():Array {
 	}
 	//LIBIDO PERKZ
 	//slot 5 - libido perks
+	//Slot 5 - Fertility- decreases cum production and fertility.
+	if (player.lib < 25) {
+			_add(new PerkClass(PerkLib.FertilityMinus, 15, 0.7, 0, 0));
+	}
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
 	if(player.lib >= 25) {
 			_add(new PerkClass(PerkLib.FertilityPlus,15,1.75,0,0));
 	}
 	//Slot 5 - minimum libido
+	if(player.minLust() >= 20) {
+			_add(new PerkClass(PerkLib.ColdBlooded,20,0,0,0));
+	}
 	if(player.lib >= 50) {
 			_add(new PerkClass(PerkLib.HotBlooded,20,0,0,0));
 	}
@@ -686,6 +695,7 @@ public function buildPerkList():Array {
 	//Tier 1 Misc Perks
 	if(player.level >= 6) {
 		_add(new PerkClass(PerkLib.Resistance));
+		_add(new PerkClass(PerkLib.Survivalist));
 	}
 	// FILTER PERKS
 	perkList = perkList.filter(
@@ -810,6 +820,9 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Might") != -1) {                        
 		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
+	}
+	if(buttonText.indexOf("C.Palm") != -1) {                        
+		toolTipText = "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  (Fatigue Cost: " + spellCost(30) + ")";
 	}
 	
 	//Urta's specials
@@ -976,6 +989,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Bog") != -1) {
 		toolTipText = "Visit the dark bog. \n\nRecommended level: 14";
 	}
+	if(buttonText.indexOf("Glacial Rift") != -1) {
+		toolTipText = "Visit the chilly glacial rift. \n\nRecommended level: 16";
+	}
 	//PLACE MENU
 	if(buttonText.indexOf("Bazaar") != -1) {
 		toolTipText = "Visit the Bizarre Bazaar where the demons and corrupted beings hang out.";
@@ -1055,6 +1071,58 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Read any codex entries you have unlocked.";
 	}	
 	//-----------------
+	//-- FOLLOWER INTERACTIONS
+	//-----------------
+	//Valeria
+	if (kGAMECLASS.tooltipLoc == "Valeria") {
+		//Menu
+		if (buttonText == "Appearance") {
+			toolTipText = "Examine Valeria's appearance.";
+		}
+		if (buttonText == "Spar") {
+			toolTipText = "Do a quick battle with Valeria!";
+		}
+		if (buttonText == "Sex") {
+			toolTipText = "Initiate sexy time with the armor-goo.";
+		}
+		if (buttonText == "Talk") {
+			toolTipText = "Discuss with Valeria.";
+		}
+		if (buttonText == "Take") {
+			toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nBase value: 1 \nSpecial: Regeneration + Increased Fantasize";
+		}
+		//Sex
+		if (buttonText == "PenetrateHer") {
+			toolTipText = "Fuck the goo girl with your penis!";
+		}
+		if (buttonText == "Get Fucked") {
+			if (player.hasVagina()) toolTipText = "Have her penetrate you vaginally.";
+			else toolTipText = "Have her penetrate you anally.";
+		}
+		if (buttonText == "Gooflation") {
+			toolTipText = "Have her stuff your stomach through your ass!";
+		}
+		if (buttonText == "GetDominated") {
+			toolTipText = "Submit to the armor-goo and have her take charge.";
+		}
+		if (buttonText == "Grow Dick") {
+			toolTipText = "Ask her to grow a gooey cock.";
+		}
+		if (buttonText == "Lose Dick") {
+			toolTipText = "Ask her to hide that gooey cock of hers.";
+		}
+		//Talk
+		if (buttonText == "Flirt") {
+			toolTipText = "Flirt with her and initiate sex with her.";
+		}
+		if (buttonText == "Accept") {
+			toolTipText = "Tell her that you're okay with her special needs.";
+		}
+		if (buttonText == "Gross") {
+			toolTipText = "Decline her special needs.";
+		}
+	}
+	//-----------------
 	//-- DUNGEON INTERACTIONS
 	//-----------------
 	//Factory
@@ -1124,13 +1192,14 @@ public function getButtonToolTipText(buttonText:String):String
 		}
 		
 		if (buttonText == "'Release'") {
-			if (player.hasCock()) toolTipText = "Release the imp from the bonds.";
+			if (player.hasCock()) toolTipText = "Let the imp cum and release him from the bonds.";
 		}
 		if (buttonText == "Tighten") {
 			if (player.hasCock()) toolTipText = "Tighten the straps.";
 		}
 	}
-	
+	//Desert Cave
+	//Tower of the Phoenix
 	//-----------------
 	//-- LEVEL UP SCREEN 
 	//-----------------
@@ -1202,6 +1271,13 @@ public function getButtonToolTipText(buttonText:String):String
 		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
 		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
+	//Cheat menu
+	if(buttonText.indexOf("Spawn Items") != -1) {                        
+		toolTipText = "Spawn any items of your choice, including items usually not obtainable through gameplay.";
+	}
+	if(buttonText.indexOf("Change Stats") != -1) {                        
+		toolTipText = "Change your core stats.";
+	}	
 	return toolTipText;
 }
 
@@ -1263,7 +1339,7 @@ public function getFunctionName(f:Function):String
 }
 
 
-private function logFunctionInfo(func:Function, arg:* = null):void
+private function logFunctionInfo(func:Function, arg:* = null, arg2:* = null, arg3:* = null):void
 {
 	var logStr:String = "";
 	if (arg is Function)
@@ -1280,7 +1356,7 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 
 
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
-public function createCallBackFunction(func:Function, arg:*):Function
+public function createCallBackFunction(func:Function, arg:*, arg2:* = null, arg3:* = null):Function
 {
 	if (func == null) {
 		CoC_Settings.error("createCallBackFunction(null," + arg + ")");
@@ -1299,12 +1375,36 @@ public function createCallBackFunction(func:Function, arg:*):Function
 	}
 	else
 	{
-		return function ():*
-		{ 
-			if (CoC_Settings.haltOnErrors) 
-				logFunctionInfo(func, arg);
-			return func( arg ); 
-		};
+		if (arg2 == -9000 || arg2 == null)
+		{
+			return function ():*
+			{ 
+				if (CoC_Settings.haltOnErrors) 
+					logFunctionInfo(func, arg);
+				return func( arg ); 
+			};
+		}
+		else 
+		{
+			if (arg3 == -9000 || arg3 == null)
+			{
+				return function ():*
+				{ 
+					if (CoC_Settings.haltOnErrors) 
+						logFunctionInfo(func, arg, arg2);
+					return func(arg, arg2); 
+				};
+			}
+			else 
+			{
+				return function ():*
+				{ 
+					if (CoC_Settings.haltOnErrors) 
+						logFunctionInfo(func, arg, arg2, arg3);
+					return func(arg, arg2, arg3); 
+				};
+			}
+		}
 	}
 }
 public function createCallBackFunction2(func:Function,...args):Function
@@ -1319,7 +1419,7 @@ public function createCallBackFunction2(func:Function,...args):Function
 	}
 }
 
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000):void {
 	if (func1==null) return;
 	var callback :Function,
 	toolTipText :String;
@@ -1329,7 +1429,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 		return;
 	}
 
-	callback = createCallBackFunction(func1, arg1);
+	callback = createCallBackFunction(func1, arg1, arg2, arg3);
 	
 
 	toolTipText = getButtonToolTipText( text );
@@ -1924,7 +2024,8 @@ public function displayStats(e:MouseEvent = null):void
 	bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 	
 	if (player.cumQ() > 0)
-		bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n";
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + " / " + Math.round(player.cumCapacity()) + "mL (" + Math.floor(((player.lust + 50) / 5) + ((player.hoursSinceCum + 10) / 2)) + "%) \n";
+		else bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n";
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n";
 	

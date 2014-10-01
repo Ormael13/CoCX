@@ -7212,10 +7212,36 @@
 			dynStats("lib", -1, "lust", -10, "inte", 0.5, "resisted", false);
 			player.refillHunger(5);
 		}
-
-//Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
-//Itemdescription - "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches."
-
+		
+		public function iceShard(player:Player):void
+		{
+			outputText("You give the icicle a tentative lick, careful not to stick your tongue to it. It tastes refreshing, like cool, clear glacier water.  The ice readily dissolves against the heat of your mouth as you continue to lick away at it.  Before long, the icicle has dwindled into a sliver small enough to pop into your mouth.  As the pinprick of ice melts you slide your chilled tongue around your mouth, savoring the crisp feeling.\n\n", true)
+			if (rand(2) == 0 && (player.str < 75 || player.tou < 75)) {
+				outputText("The rush of cold tenses your muscles and fortifies your body, making you feel hardier than ever.  ", false)
+				if (player.str < 75) dynStats("str", ((1 + rand(5)) / 5))
+				if (player.tou < 75) dynStats("tou", ((1 + rand(5)) / 5))
+			}
+			if (rand(2) == 0 && (player.spe > 25)) {
+				outputText("You feel a chill spread through you; when it passes, you feel more slothful and sluggish.  ", false)
+				if (player.spe > 25) dynStats("spe", -((1 + rand(5)) / 5))
+			}
+			if (rand(2) == 0) {
+				outputText("You also feel a little numb all over, in more ways than one...  ")
+				dynStats("lib", -((1 + rand(2)) / 2))
+				dynStats("sen", -((1 + rand(2)) / 2))
+			}
+			player.refillHunger(5);
+		}
+		
+		public function akbalSaliva(player:Player):void
+		{
+			outputText("You uncork the vial and chug down the saliva.  ");
+			HPChange((player.maxHP() / 4), true);
+			player.refillHunger(5);
+		}
+		
+		//Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
+		//Itemdescription - "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches."
 		public function eatEmberEgg(player:Player):void
 		{
 			clearOutput();

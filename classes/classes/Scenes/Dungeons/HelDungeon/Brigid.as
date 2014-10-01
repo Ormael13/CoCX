@@ -11,8 +11,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			//(Effect: Heavy Damage)
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if(damage < 30) damage = 30;
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			game.combatRoundOver();
 		}
 
@@ -21,8 +20,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance.");
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
-			damage = player.takeDamage(5);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			game.combatRoundOver();

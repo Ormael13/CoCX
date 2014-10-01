@@ -249,9 +249,14 @@
 			kGAMECLASS.doYesNo(eventYes,eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000):void
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1);
+			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3);
+		}
+		
+		protected function removeButton(arg:*):void
+		{
+			kGAMECLASS.removeButton(arg);
 		}
 
 		protected function hasButton(arg:*):Boolean

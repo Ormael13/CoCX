@@ -50,7 +50,7 @@ package classes.Items.Armors
 
 		public function SluttySwimwear()
 		{
-			super("S.Swmwr","S.Swmwr","slutty swimwear","a skimpy black bikini",0,ArmorLib.DEFAULT_VALUE,"An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.","Light",
+			super("S.Swmwr","S.Swmwr","slutty swimwear","a skimpy black bikini",0,ArmorLib.DEFAULT_VALUE,"An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually. \n\nType: Clothing \nDefense: 0 \nBase value: 6 \nSpecial: Slutty Seduction (Seduce)","Light",
 					PerkLib.SluttySeduction,6,0,0,0);
 		}
 	}

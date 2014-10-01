@@ -626,22 +626,24 @@
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 			}
-			else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+			else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
 			else if (damage < 11) {
 				outputText(capitalA + short + " wound");
 				if (!plural) outputText("s");
-				outputText(" you! (" + damage + ")", false);
+				outputText(" you! ", false);
 			}
 			else if (damage < 21) {
 				outputText(capitalA + short + " stagger");
 				if (!plural) outputText("s");
-				outputText(" you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+				outputText(" you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 			}
 			else if (damage > 20) {
 				outputText(capitalA + short + " <b>mutilate", false);
 				if (!plural) outputText("s", false);
-				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 			}
+			if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+			else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 		}
 
 		/**

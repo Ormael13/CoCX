@@ -178,17 +178,19 @@
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ", false);
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! (" + damage + ")", false);
+					outputText(capitalA + short + " wounds you! ", false);
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 			}
 			game.statScreenRefresh();
 			outputText("\n", false);
@@ -223,18 +225,19 @@
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ", false);
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! (" + damage + ")", false);
+					outputText(capitalA + short + " wounds you! ", false);
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
-
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 			}
 			game.statScreenRefresh();
 			outputText("\n", false);

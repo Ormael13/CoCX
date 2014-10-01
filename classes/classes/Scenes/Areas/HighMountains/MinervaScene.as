@@ -1296,6 +1296,14 @@ private function pcGetsEatenOutByMinerva():void {
 	else doNext(13);
 }
 
+private function getButtFuckedYouSlut():void {
+	outputText("Not in the game yet.", true);
+	player.buttChange(48, true);
+	dynStats("sen", 2);
+	player.orgasm();
+	if(inCombat()) cleanupAfterCombat();
+	else doNext(13);	
+}
 
 internal function loseToMinerva():void {
 	clearOutput();

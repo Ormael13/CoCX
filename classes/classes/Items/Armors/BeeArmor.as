@@ -5,10 +5,6 @@ package classes.Items.Armors
 	import classes.Items.Armor;
 	import classes.Player;
 
-	/**
-	 * ...
-	 * @author Kitteh6660
-	 */
 	public class BeeArmor extends Armor
 	{
 		override public function equipEffect(player:Player, output:Boolean):void

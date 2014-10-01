@@ -217,6 +217,7 @@ package classes
 		public static const Platoon:StatusAffectType = mk("platoon");
 		public static const QueenBind:StatusAffectType = mk("QueenBind");
 		// @aimozg HA HA HA
+		public static const GiantBoulder:StatusAffectType = mk("Giant Boulder");
 		public static const Round:StatusAffectType = mk("Round");
 		public static const round:StatusAffectType = mk("round");
 		public static const RunDisabled:StatusAffectType = mk("Run Disabled");
@@ -254,6 +255,8 @@ package classes
 		public static const Disarmed:CombatStatusAffect = mk2("Disarmed");
 		public static const DriderKiss:CombatStatusAffect = mk2("Drider Kiss");
 		public static const FirstAttack:CombatStatusAffect = mk2("FirstAttack");
+		public static const GiantGrabbed:CombatStatusAffect = mk2("Giant Grabbed");
+		public static const GiantStrLoss:CombatStatusAffect = mk2("GiantStrLoss");
 		public static const GnollSpear:CombatStatusAffect = mk2("Gnoll Spear");
 		public static const GooArmorBind:CombatStatusAffect = mk2("GooArmorBind");
 		public static const GooArmorSilence:CombatStatusAffect = mk2("GooArmorSilence");

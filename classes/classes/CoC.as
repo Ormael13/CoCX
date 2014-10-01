@@ -129,6 +129,7 @@
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
 		public var forest:Forest = new Forest();
+		public var glacialRift:GlacialRift = new GlacialRift();
 		public var highMountains:HighMountains = new HighMountains();
 		public var lake:Lake = new Lake();
 		public var mountain:Mountain = new Mountain();
@@ -187,7 +188,9 @@
 		public var dungeons:DungeonEngine = new DungeonEngine();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
-
+		
+		public var debugMenu:DebugMenu = new DebugMenu();
+		
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
 
@@ -340,8 +343,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.15_mod_0.6.6";
-			version = ver + " (<b>Even More Fixes</b>)";
+			ver = "0.8.15_mod_0.7";
+			version = ver + " (<b>Glacial Rift + More Realism!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

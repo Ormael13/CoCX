@@ -20,12 +20,12 @@ package classes
 				"");
 
 		// Player creation perks
-		public static const Pervert:PerkType = mk("Pervert", "Pervert",
-				"Gains corruption 25% faster.");
 		public static const Fast:PerkType = mk("Fast", "Fast",
 				"Gains speed 25% faster.");
 		public static const Lusty:PerkType = mk("Lusty", "Lusty",
 				"Gains lust 25% faster.");
+		public static const Pervert:PerkType = mk("Pervert", "Pervert",
+				"Gains corruption 25% faster.");
 		public static const Sensitive:PerkType = mk("Sensitive", "Sensitive",
 				"Gains sensitivity 25% faster.");
 		public static const Smart:PerkType = mk("Smart", "Smart",
@@ -54,6 +54,8 @@ package classes
 				"Alchemical experience makes items more reactive to your body.");
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
 				"A Past full of conflict increases physical damage dealt by 10%.");
+		public static const HistoryFortune:PerkType = mk("History: Fortune", "History: Fortune",
+				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.");
 		public static const HistoryHealer:PerkType = mk("History: Healer", "History: Healer",
 				"Healing experience increases HP gains by 20%.");
 		public static const HistoryReligious:PerkType = mk("History: Religious", "History: Religious",
@@ -68,8 +70,6 @@ package classes
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 10%.");
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
-		public static const HistoryFortune:PerkType = mk("History: Fortune", "History: Fortune",
-				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.");
 
 		// Ordinary (levelup) perks
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
@@ -105,6 +105,9 @@ package classes
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"Increases base spell strength by 50%.",
 				"You choose the 'Channeling' perk, boosting the strength of your spellcasting!");
+		public static const ColdBlooded:PerkType = mk("Cold Blooded", "Cold Blooded",
+				"Reduces minimum lust by up to 20, down to min of 20. Caps min lust at 80.",
+				"You choose the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced! (Caps minimum lust at 80. Won't reduce minimum lust below 20 though.)");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -120,6 +123,9 @@ package classes
 		public static const Evade:PerkType = mk("Evade", "Evade",
 				"Increases chances of evading enemy attacks.",
 				"You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!");
+		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
+				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
+				"You choose the 'Fertility-' perk, making it harder to get pregnant.  It also decreases your cum volume by up to 30% (if appropriate)!");
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
@@ -196,6 +202,9 @@ package classes
 		public static const Spellpower:PerkType = mk("Spellpower", "Spellpower",
 				"Increases base spell strength by 50%.",
 				"You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 50%.");
+		public static const Survivalist:PerkType = mk("Survivalist", "Survivalist",
+				"Slows hunger rate by 20%.",
+				"You choose the 'Survivalist' perk.  With this perk, your hunger rate is reduced by 20%.");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables fourth item slot.",
 				"You choose the 'Strong Back' perk, enabling a fourth item slot.");

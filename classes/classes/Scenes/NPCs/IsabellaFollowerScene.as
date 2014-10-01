@@ -198,6 +198,7 @@ public function callForFollowerIsabella():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(5, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	//if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] >= 100) addButton(0, "Accent Uncoach", isabellaAccentUncoaching);
 }
 
 private function sendToFarm():void
@@ -344,6 +345,14 @@ private function isabellasAccentCoaching():void {
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] = 4 + rand(13);
 	doNext(13);
 }
+
+//Reverse Isabella's accent back to her normal accent.
+private function isabellaAccentUncoaching():void {
+	outputText("You tell Isabella that she can go back to her old accent however she likes.\n\n", true)
+	outputText("<b>Isabella's accent is now reverted. You'll have to coach her all over again if you change your mind.</b>", false)
+	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 0;
+	doNext(13);
+}	
 
 //Morning Wakeup Call 
 public function isabellaMorningWakeupCall():void {

@@ -191,7 +191,7 @@ import classes.Appearance;
 
 		public function BimboLiqueur()
 		{
-			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", bimboLiquer, 1000,"This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care. Item type: Rare Item \nBase value: 1,000");
+			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", bimboLiquer, 1000,"This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care. \n\nType: Rare Item \nBase value: 1,000");
 		}
 	}
 }

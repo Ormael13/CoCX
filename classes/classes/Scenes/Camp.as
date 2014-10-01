@@ -760,7 +760,7 @@ public function doCamp():void {
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
 		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
-		if (!(model.time.hours > 4 && model.time.hours < 23)) {
+		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 			outputText("Your camp is silent as your companions are sleeping right now.\n", false)
 		}
 		restName = "Sleep";
@@ -780,16 +780,6 @@ public function doCamp():void {
 		}
 	}
 	
-	//Unlock something in character creation.
-	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
-	{
-		if (player.gender == 3)
-		{
-			(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1)
-			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>")
-		}
-	}
-	
 	//Unlock cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 30)
 	{
@@ -799,33 +789,35 @@ public function doCamp():void {
 		return;
 	}
 	
+	//Unlock something in character creation.
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
+	{
+		if (player.gender == 3)
+		{
+			(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1)
+			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>")
+		}
+	}
 	//Menu
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 
+	//Massive Balls Bad End (Realistic Mode only)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.ballSize > (18 + (player.str / 2))) {
+		badEndGIANTBALLZ();
+	}
 	//Hunger Bad End
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 0)
 	{
 		//Bad end at 0 HP!
-		if (player.HP <= 0 && (player.str + player.tou) < 30 )
+		if (player.HP <= 0 && (player.str + player.tou) < 30)
 		{
-			outputText("Too weak to be able to stand up, you slump down on the ground. Your vision blurs as the world around you finally fades to black.", true);
-			if (companionsCount() > 0) {
-				if (companionsCount() > 1) {
-					outputText("\n\nYour companions gather to mourn over your passing.", false);
-				}
-				else {
-					outputText("\n\nYour fellow companion mourns over your passing.", false);
-				}
-			}
-			player.HP = 0;
-			eventParser(5035);
+			badEndHunger();
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
 	if (player.minLust() >= 100 && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
 	{
-		outputText("(Placeholder) You are trapped in orgasm. You keep masturbating furiously but you are unable to stop. Your minimum lust is too high. No matter how hard you try, you cannot even satisfy your desires.", true);
-		eventParser(5035);
+		badEndMinLust();
 	}
 }
 
@@ -872,7 +864,10 @@ public function stash(exists:Boolean = true):Boolean {
 		barrel = anemoneScene.approachAnemoneBarrel;
 		if(model.time.hours < 6) barrel = 0;
 	}
-	if(player.hasKeyItem("Camp - Chest") >= 0) outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);
+	if (player.hasKeyItem("Camp - Chest") >= 0) {
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("You have a large wood and iron chest to help store excess items located in front of your bed inside your cabin.\n\n", false);
+		else outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);
+	}
 	var weaponNames:Array = [];
 	//Weapon rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
@@ -1028,6 +1023,8 @@ public function loversCount():Number {
 //-- COMPANIONS 
 //-----------------
 public function campLoversMenu():void {
+	kGAMECLASS.tooltipLoc = ""
+	spriteSelect(-1);
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
 	var izmaEvent:Function = null;
@@ -1186,6 +1183,8 @@ public function campLoversMenu():void {
 	addButton(9,"Back",eventParser,1);
 }
 public function campSlavesMenu():void {
+	kGAMECLASS.tooltipLoc = ""
+	spriteSelect(-1);
 	clearOutput();
 	var vapula2:Function = null;
 	var amilyEvent:Function = null;
@@ -1330,7 +1329,7 @@ private function swimInStream():void {
 	if (rand(2) == 0 && camp.izmaFollower())
 	{
 		outputText("\n\nYour tiger-shark beta, Izma, joins you. You are frightened at first when you saw the fin protruding from the water and the fin approaches you! ", false);
-		outputText("As the fin appoaches you, the familiar figure comes up. It's your tiger-shark lover, Izma! \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.", false);
+		outputText("As the fin appoaches you, the familiar figure comes up. \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.", false);
 	}
 	//Helia!
 	if (rand(2) == 0 && camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
@@ -1345,7 +1344,9 @@ private function swimInStream():void {
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
 	{
-		outputText("\n\n(PLACEHOLDER) Your mouse girl-lover Amily joins you.", false)
+		outputText("\n\nYour mouse girl-lover Amily is standing at the riverbank. She looks flattering in her bikini.  ", false)
+		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Especially when her penis is exposed.  ", false)
+		outputText("She walks into the waters and swims.  ", false)
 	}
 	//Pranks!
 	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
@@ -1378,20 +1379,20 @@ private function swimInStreamPrank1():void {
 	if (camp.amilyFollower()) prankRoll++
 	if (prankRoll > 4) prankRoll = 4;
 	//Play joke on them!
-	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.", true)
+	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ", true)
 	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false)
 	{
-		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible. ", false);
+		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.  ", false);
 		pranked = true;
 	}
 	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false)
 	{
-		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says. ", false);
+		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.  ", false);
 		pranked = true;
 	}
 	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false)
 	{
-		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
+		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"  ", false);
 		pranked = true;
 	}
 	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
@@ -1400,7 +1401,7 @@ private function swimInStreamPrank1():void {
 		pranked = true;
 	}*/
 	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.", false);
-	else outputText(" You feel accomplished from the prank and resume swimming. ", false);
+	else outputText("You feel accomplished from the prank and resume swimming. ", false);
 	doNext(swimInStreamFinish);
 }
 
@@ -1412,7 +1413,7 @@ private function swimInStreamFap():void {
 private function swimInStreamFinish():void {
 	outputText("", true);
 	//Blown up factory? Corruption gains.
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) 
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && player.cor < 50) 
 	{
 		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n", false);
 		dynStats("cor", 0.5);
@@ -1767,6 +1768,67 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 }
 
+//Bad End if your balls are too big. Only happens in Realistic Mode.
+public function badEndGIANTBALLZ():void {
+	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads through your mind and your heart races.\n\n", true)
+	outputText("You know that you can't move and you're aware that you're going to eventually starve to death.", false)
+	menu();
+	if (player.hasItem(consumables.REDUCTO, 1)) {
+		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!", false)
+		addButton(1, "Reducto", applyReductoAndEscapeBadEnd);
+	}
+	else if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
+		outputText("\n\nYou could call for Rathazul to help you.", false)
+		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
+	}
+	else eventParser(5035);
+}
+private function applyReductoAndEscapeBadEnd():void {
+	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
+	player.ballSize -= (4 + rand(6));
+	if (player.ballSize < 1) player.ballSize = 1;
+	if (player.ballSize > 18 + (player.str/2)) player.ballSize = 17 + (player.str/2)
+	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
+	dynStats("lib", -2, "lus", -10);
+	player.consumeItem(consumables.REDUCTO, 1);
+	doNext(13);
+}
+private function callRathazulAndEscapeBadEnd():void {
+	outputText("You shout as loud as you can to call Rathazul.  Your call is answered as the alchemist walks up to you.\n\n", true);
+	outputText("\"<i>My, my... Look at yourself! Don't worry, I can help, </i>\" he says.  He rushes to his alchemy equipment and mixes ingredients.  He returns to you with a Reducto.\n\n", false)
+	outputText("He rubs the paste all over your massive balls. It's incredibly effective. \n\n", false)
+	player.ballSize -= (4 + rand(6));
+	if (player.ballSize < 1) player.ballSize = 1;
+	if (player.ballSize > 18 + (player.str/2)) player.ballSize = 17 + (player.str/2)
+	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
+	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto, </i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
+	doNext(13);
+}
+
+//Bad End if you starved to death.
+public function badEndHunger():void {
+	flags[kFLAGS.PC_HUNGER] = 1; //For Easy Mode/Debug Mode.
+	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. \n\n", true);
+	if (companionsCount() > 0) {
+		if (companionsCount() > 1) {
+			outputText("Your companions gather to mourn over your passing.", false);
+		}
+		else {
+			outputText("Your fellow companion mourns over your passing.", false);
+		}
+	}
+	player.HP = 0;
+	eventParser(5035);
+}
+//Bad End if you have 100 min lust.
+public function badEndMinLust():void {
+	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.\n\n", true);
+	outputText("You spend the rest of your life masturbating, unable to stop.", false)
+	player.orgasm();
+	eventParser(5035);	
+}
 
 public function nightSuccubiRepeat():void {
 	spriteSelect(8);

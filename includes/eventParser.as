@@ -305,6 +305,7 @@ public function doSystem(eventNo:Number):void {
 		case 74:
 			//Camp followers screen
 			doNext(1);
+			kGAMECLASS.tooltipLoc = ""
 			camp.campFollowers();
 			return;
 
@@ -466,20 +467,21 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-
+			var multiplier:Number = 1.0
+			if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 			//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
 			if (flags[kFLAGS.PC_HUNGER] > 50)
 			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
+				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
 			}
 			if (flags[kFLAGS.PC_HUNGER] > 25)
 			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
+				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
 			}
 			if (flags[kFLAGS.PC_HUNGER] > 0 && player.armorName != "goo armor")
 			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
+				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
 			}
 			//Caps hunger at 100. Occurs after hunger tick so you'll be able to see hunger showing 100/100.
 			if (flags[kFLAGS.PC_HUNGER] > 100)

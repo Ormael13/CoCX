@@ -802,7 +802,7 @@ public function genderlessMasturbate():void {
 //Non-shitty masturbation
 public function masturbateGo():void {
 	outputText("", true);
-	if(inDungeon) {
+	if(inDungeon && dungeonLoc != -10) {
 		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.", false);
 		doNext(1);
 		return;		

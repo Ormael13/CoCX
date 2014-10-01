@@ -1888,6 +1888,8 @@ package classes
 				percent += 0.05;
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				percent += 0.03;
+			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+				percent -= 0.03;
 			if (findPerk(PerkLib.PiercedFertite) >= 0)
 				percent += 0.03;
 			if (findPerk(PerkLib.OneTrackMind) >= 0)
@@ -1922,7 +1924,19 @@ package classes
 			//lust - 50% = normal output.  0 = half output. 100 = +50% output.
 			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
 			var lustCoefficient:Number = (lust + 50) / 10;
-			//Pilgrim's bounty maxxes lust coefficient
+			//If realistic mode is enabled, limits cum to capacity.
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			{
+				lustCoefficient = (lust + 50) / 5;
+				var percent:Number = 0
+				percent = lustCoefficient + ((hoursSinceCum + 10) / 2)
+				if (percent > 100)
+					percent = 100
+				if (quantity > cumCapacity()) 
+					quantity = cumCapacity();
+				return (percent / 100) * cumCapacity();
+			}
+			//Pilgrim's bounty maxes lust coefficient
 			if (findPerk(PerkLib.PilgrimsBounty) >= 0)
 				lustCoefficient = 150 / 10;
 			if (balls == 0)
@@ -1933,6 +1947,8 @@ package classes
 				quantity *= 1.3;
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				quantity *= 1.5;
+			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+				quantity *= 0.7;
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				quantity *= 1.5;
 			if (findPerk(PerkLib.OneTrackMind) >= 0)
@@ -1963,6 +1979,40 @@ package classes
 				quantity = 2147483647;
 			return quantity;
 		}
+		
+		//Limits how much cum you can produce. Can be altered with perks, ball size, and multiplier. Only applies to realistic mode.
+		public function cumCapacity():Number 
+		{
+			if (!hasCock()) return 0;
+			var cumCap:Number = 0;
+			//Alter capacity by balls.
+			if (balls > 0) cumCap += Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls * cumMultiplier
+			else cumCap +=  Math.pow(((4 / 3) * Math.PI * 1.25), 3) * 2 * cumMultiplier
+			//Alter capacity by perks.
+			if (findPerk(PerkLib.BroBody) >= 0) cumCap *= 1.3;
+			if (findPerk(PerkLib.FertilityPlus) >= 0) cumCap *= 1.5;
+			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25) cumCap *= 0.7;
+			if (findPerk(PerkLib.MessyOrgasms) >= 0) cumCap *= 1.5;
+			if (findPerk(PerkLib.OneTrackMind) >= 0) cumCap *= 1.1;
+			if (findPerk(PerkLib.MaraesGiftStud) >= 0) cumCap += 350;
+			if (findPerk(PerkLib.FerasBoonAlpha) >= 0) cumCap += 200;
+			if (findPerk(PerkLib.MagicalVirility) >= 0) cumCap += 200;
+			if (findPerk(PerkLib.FerasBoonSeeder) >= 0) cumCap += 1000;
+			cumCap += perkv1(PerkLib.ElvenBounty);
+			if (findPerk(PerkLib.BroBody) >= 0) cumCap += 200;
+			cumCap += statusAffectv1(StatusAffects.Rut);
+			cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+			//Alter capacity by accessories.
+			if (jewelryEffectId == 3) cumCap *= (1 + (jewelryEffectMagnitude / 100));
+			if (jewelryEffectId == 4) cumCap *= (1 - (jewelryEffectMagnitude / 100));
+				
+			cumCap *= cumMultiplier
+			cumCap == Math.round(cumCap);
+			if (cumCap > 2147483647) 
+				cumCap = 2147483647;
+			return cumCap;
+		}
+		
 		
 		//How many tentaclecocks?
 		public function tentacleCocks():Number
@@ -3082,6 +3132,8 @@ package classes
 				counter += statusAffectv1(StatusAffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
+			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+				counter -= 15;
 			if (findPerk(PerkLib.MaraesGiftFertility) >= 0)
 				counter += 50;
 			if (findPerk(PerkLib.FerasBoonBreedingBitch) >= 0)

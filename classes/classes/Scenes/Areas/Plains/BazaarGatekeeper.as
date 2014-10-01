@@ -10,19 +10,32 @@ package classes.Scenes.Areas.Plains
 	public class BazaarGatekeeper  extends Monster 
 	{
 		
+		public function scimitarSpecial():void {
+			if (rand(4) == 0) scimitarCrossAttack();
+			else scimitarAttack();
+		}
+		
 		public function scimitarAttack():void {
 			
 			outputText("The gatekeeper raises his scimitars! You attempt to dodge your way out ", false);
-			if ((player.spe - spe) + rand(30) > 20) 
+			if (combatEvade())
 			{
-				outputText("and you successfully dodged his scimitars!", false);
+				outputText("and you successfully dodged his scimitars thanks to your superior evasion! ", false);
+			}
+			else if (combatFlexibility())
+			{
+				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
+			}
+			else if (combatMiss()) 
+			{
+				outputText("and you successfully dodged his scimitars! ", false);
 			}
 			else
 			{
 				outputText("but you fail and get hit instead! ", false);
-				var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
-				player.takeDamage(damage);
-				outputText("(" + damage + ")");
+				var damage:int = int(str + 100);
+				damage = player.reduceDamage(damage);
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -30,16 +43,24 @@ package classes.Scenes.Areas.Plains
 		public function scimitarCrossAttack():void {
 			
 			outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, he is going to cross-slash you! You attempt to dodge ", false);
-			if ((player.spe - spe) + rand(30) > 10) 
+			if (combatEvade())
 			{
-				outputText("and you successfully dodged his scimitars!", false);
+				outputText("and you successfully dodged his scimitars thanks to your superior evasion! ", false);
+			}
+			else if (combatFlexibility())
+			{
+				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
+			}
+			else if (combatMiss()) 
+			{
+				outputText("and you successfully dodged his scimitars! ", false);
 			}
 			else
 			{
 				outputText("but you fail and you get hit instead! You are in a lot of pain. ", false);
-				var damage:int = int((str + 250) - rand(player.tou) - player.armorDef);
-				player.takeDamage(damage);
-				outputText("(" + damage + ")");
+				var damage:int = int(str + 250);
+				damage = player.reduceDamage(damage);
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -79,7 +100,7 @@ package classes.Scenes.Areas.Plains
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "black";
 			this.hairLength = 8;
-			initStrTouSpeInte(100, 100, 75, 70);
+			initStrTouSpeInte(100, 100, 80, 70);
 			initLibSensCor(15, 10, 55);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
@@ -96,8 +117,7 @@ package classes.Scenes.Areas.Plains
 			this.additionalXP = 300;
 			this.drop = NO_DROP;
 			this.gems = 250;
-			this.special1 = scimitarAttack;
-			this.special2 = scimitarCrossAttack;
+			this.special1 = scimitarSpecial;
 			checkMonster();
 		}
 	}

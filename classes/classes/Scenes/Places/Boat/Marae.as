@@ -12,17 +12,21 @@ package classes.Scenes.Places.Boat
 		public function tentacleAttack():void {
 			
 			outputText("You spot barrage of tentacles coming your way! You attempt to dodge your way out ", false);
-			if (rand(100) < 20 + (player.spe/2)) 
+			if (combatEvade() || combatFlexibility() || combatMisdirect())
+			{
+				outputText("and you successfully dodge her tentacles thanks to your superior evasion!", false);
+			}
+			else if (combatMiss())
 			{
 				outputText("and you successfully dodge her tentacles!", false);
 			}
 			else
 			{
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ", false);
-				var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
+				var damage:int = ((str + 100) + rand(50))
 				game.dynStats("lust", rand(5) + 5);
+				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
-				
 			}
 			combatRoundOver();
 		}
@@ -30,7 +34,11 @@ package classes.Scenes.Places.Boat
 		public function tentacleRape():void {
 			
 			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin! ", false);
-			if (rand(100) < 20 + (player.spe/2)) 
+			if (combatEvade() || combatFlexibility() || combatMisdirect())
+			{
+				outputText("You manage to avoid her tentacles thanks to your superior evasion!", false);
+			}
+			else if (combatMiss())
 			{
 				outputText("You manage to successfully run from her tentacles! ", false);
 			}

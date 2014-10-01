@@ -2651,7 +2651,15 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 					//([horsecock]
 					var dickDesc:String = (flags[kFLAGS.AMILY_NOT_FURRY] == 0) ? "naked and hairless and pink and throbbing":"pink and throbbing";
-					outputText("She has a " + flags[kFLAGS.AMILY_WANG_LENGTH] + "-inch penis growing from her crotch, replacing the clitoris that would normally jut from her vulva. It is surprisingly human looking, "+dickDesc+" - it even has a foreskin, not a sheath.\n\n", false);
+					outputText("She has a " + flags[kFLAGS.AMILY_WANG_LENGTH] + "-inch penis growing from her crotch, replacing the clitoris that would normally jut from her vulva. It is surprisingly human looking, " + dickDesc + "", false);
+					if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] == 0) outputText(" - it even has a foreskin, not a sheath.\n\n", false);
+					else outputText(", though it does have a" + ((flags[kFLAGS.AMILY_NOT_FURRY] == 1) ? " little sheath.":" fuzzy little sheath.") + "\n\n", false);
+					outputText("\n\n", false)
+				}
+				if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] > 0) {
+					outputText("She has " + amilyBalls() + " dangling ", false);
+					if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("underneath her shaft", false);
+					else outputText("from her groin.", false);
 				}
 				outputText("Amily has a little pink pussy in between her legs; "+stopSayingNetherlipsFuck+".", false);
 			}

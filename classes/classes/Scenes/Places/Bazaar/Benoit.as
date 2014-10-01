@@ -97,7 +97,7 @@ public function benoitInClutch():Boolean
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
 	var currDay:int = this.getGame().model.time.days;
-	var diffDays = (currDay - startDay) % 28;
+	var diffDays:Number = (currDay - startDay) % 28;
 
 	if (diffDays >= 21) return true;
 	return false;
@@ -129,7 +129,7 @@ public function benoitKnockUp():Boolean
 	var stud:Boolean = (player.findPerk(PerkLib.MaraesGiftStud) >= 0) ? true : false;
 	var alpha:Boolean = (player.findPerk(PerkLib.FerasBoonAlpha) >= 0) ? true : false;
 
-	var eggMod = 0;
+	var eggMod:int = 0;
 	if (bounty) eggMod += 1;
 	if (stud) eggMod += 2;
 	if (alpha) eggMod += 1;

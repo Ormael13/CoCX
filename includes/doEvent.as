@@ -1467,7 +1467,7 @@ public function doEvent(eventNo:Number):void
 		outputText("\"<i>You have to realize that I AM a merchant, after all.</i>\", he calmly replies. \"<i>Hell for you is heaven for someone else. This bugger will easily fetch 10,000 gems to some noble looking for a quick buzz. Don't WE know better!</i>\"\n\n", false);
 		outputText("The merchant puts away his prize and comes back to help you up. \"<i>Here.</i>\", he says as he shoves a couple of bottles into your hand. \"<i>This is on the house. You probably need it after the shock of getting those things out.</i>\"\n\n", false);
 		//Add 1 tincture of vitality to inventory
-		//Infestation purged. Hit Points reduced to 10% of MAX. Corruption -20.
+		//Infestation purged. Hit Points reduced to 15% of MAX. Corruption -20.
 		if (player.HP > int(maxHP() * .15))
 			player.HP = int(maxHP() * .15);
 		//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
@@ -1766,6 +1766,7 @@ public function doEvent(eventNo:Number):void
 	//Jojo in camp
 	else if (eventNo == 2150)
 	{
+		kGAMECLASS.tooltipLoc = "Jojo"
 		clearOutput();
 		jojoScene.jojoSprite();
 		//Amily meets Jojo:

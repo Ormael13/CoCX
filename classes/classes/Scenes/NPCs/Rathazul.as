@@ -202,7 +202,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("\"<i>Oooh, is that some webbing from a giant spider or spider-morph?  Most excellent!  With a little bit of alchemical treatment, it is possible I could loosen the fibers enough to weave them into something truly magnificent - armor, or even a marvelous robe,</i>\" offers Rathazul.\n\n", false);
 	}
 	//Vines
-	if(player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
+	if(player.hasKeyItem("Marae's Lethicite") >= 0 && flags[kFLAGS.MARAE_LETHICITE] > 0 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n", false);
 		totalOffers++;
 		spoken = true;

@@ -2,7 +2,7 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.WeightedDrop;
+	import classes.internals.*;
 
 	public class BeeGirl extends Monster
 	{
@@ -76,7 +76,10 @@
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 4;
 			this.gems = rand(15) + 1;
-			this.drop = new WeightedDrop().add(consumables.BEEHONY,4).addMany(1,consumables.OVIELIX,consumables.W__BOOK,useables.B_CHITN,null);
+			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 10)
+					.add(consumables.W__BOOK, 1 / 10)
+					.add(consumables.BEEHONY, 1 / 2)
+					.elseDrop(useables.B_CHITN);
 			this.antennae = ANTENNAE_BEE;
 			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;

@@ -1,5 +1,6 @@
 ﻿import classes.Monster;
 import classes.Scenes.Areas.HighMountains.Izumi;
+import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Mountain.Minotaur;
 
 import coc.view.MainView;
@@ -173,6 +174,9 @@ public function doCombat(eventNum:Number):void
 					choices("Struggle", (monster as Izumi).chokeSlamStruggle, "Wait", (monster as Izumi).chokeSlamWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				} else if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) {
 					choices("Struggle", (monster as Izumi).titSmotherStruggle, "Wait", (monster as Izumi).titSmotherWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+				} else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
+					outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
+					choices("Struggle", 5077, "Wait", 5071, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
 				//REGULAR MENU
@@ -461,7 +465,7 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5035) {
 		var textChoices:Number = rand(4);
 		if (!this.testingBlockExiting) {
-			outputText("\n\n<font color=\"#7F0000\">", false)
+			outputText("\n\n<font color=\"#800000\">", false)
 			if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
 			if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
 			if (textChoices == 2) outputText("<b>You just got Bad Ended!</b>", false);
@@ -661,21 +665,23 @@ public function doCombat(eventNum:Number):void
 			if (temp > 0) temp = takeDamage(temp);
 			if (temp <= 0) {
 				temp = 0;
-				if (!monster.plural) outputText("You deflect and block every " + monster.weaponVerb + " " + monster.a + monster.short + " throw at you.", false);
-				else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ".");
+				if (!monster.plural) outputText("You deflect and block every " + monster.weaponVerb + " " + monster.a + monster.short + " throw at you. ", false);
+				else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ". ");
 			}
 			if (temp > 0 && temp < 6) {
-				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! (" + temp + ")", false);
+				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! ", false);
 			}
 			if (temp > 5 && temp < 11) {
-				outputText(monster.capitalA + monster.short + " wound you! (" + temp + ")", false);
+				outputText(monster.capitalA + monster.short + " wound you! ", false);
 			}
 			if (temp > 10 && temp < 21) {
-				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! (" + temp + ")", false);
+				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! ", false);
 			}
 			if (temp > 20) {
-				outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! (" + temp + ")", false);
+				outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ", false);
 			}
+			if (temp > 0) outputText("<b>(<font color=\"#800000\">" + temp + "</font>)</b>", false)
+			else outputText("<b>(<font color=\"#000080\">" + temp + "</font>)</b>", false)
 			statScreenRefresh();
 			outputText("\n", false);
 			combatRoundOver();
@@ -897,6 +903,10 @@ public function doCombat(eventNum:Number):void
 			}
 			else if (player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) {
 				(monster as GooArmor).struggleAtGooBind();
+				return;
+			}			
+			else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
+				(monster as FrostGiant).giantGrabStruggle();
 				return;
 			}
 			else if (player.findStatusAffect(StatusAffects.UBERWEB) >= 0) {
@@ -1169,6 +1179,12 @@ public function doCombat(eventNum:Number):void
 public function fantasize():void {
 	var temp2:Number = 0;
 	outputText("", true);
+	if (monster.short == "frost giant") {
+		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
+		dynStats("lus", temp2, "resisted", false);
+		(monster as FrostGiant).giantBoulderFantasize();
+		return;
+	}
 	if(player.armorName == "goo armor") {
 		outputText("As you fantasize, you feel Valeria rubbing her gooey body all across your sensitive skin");
 		if(player.gender > 0) outputText(" and genitals");
@@ -1254,20 +1270,22 @@ public function bite():void {
 	
 	if(damage <= 0) {
 		damage = 0;
-		outputText("Your bite is deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your bite is deflected or blocked by " + monster.a + monster.short + ". ", false);
 	}
 	if(damage > 0 && damage < 10) {
-		outputText("You bite doesn't do much damage to " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You bite doesn't do much damage to " + monster.a + monster.short + "! ", false);
 	}
 	if(damage >= 10 && damage < 20) {
-		outputText("You seriously wound " + monster.a + monster.short + " with your bite! (" + damage + ")", false);
+		outputText("You seriously wound " + monster.a + monster.short + " with your bite! ", false);
 	}
 	if(damage >= 20 && damage < 30) {
-		outputText("Your bite staggers " + monster.a + monster.short + " with its force. (" + damage + ")", false);
+		outputText("Your bite staggers " + monster.a + monster.short + " with its force. ", false);
 	}
 	if(damage >= 30) {
-		outputText("Your powerful bite <b>mutilates</b> " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("Your powerful bite <b>mutilates</b> " + monster.a + monster.short + "! ", false);
 	}
+	if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+	else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 	outputText("\n\n", false);
 	//Kick back to main if no damage occured!
 	if(monster.HP > 0 && monster.lust < 100) {
@@ -1354,7 +1372,7 @@ public function attack():void {
 		if(rand(100) + player.inte/3 >= 50) {
 			temp = int(player.str/5 - rand(5));
 			if(temp == 0) temp = 1;
-			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + temp + " damage.\n\n", false);
+			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n", false);
 			monster.HP -= temp;
 			if(monster.HP <= 0) {
 				doNext(endHpVictory);
@@ -1497,8 +1515,10 @@ public function attack():void {
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
-		if(crit) outputText(" <b>*CRIT*</b>");
+		outputText("You hit " + monster.a + monster.short + "! ", false);
+		if(crit) outputText(" <b>Critical hit! </b>");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+		
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
@@ -2270,18 +2290,17 @@ public function display():void {
 	outputText(monster.a + monster.short + ":</b> \n");
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) outputText("It's impossible to see anything!\n");
 	else {
-		outputText(monster.long + "\n", false);
+		outputText(monster.long + "\n\n", false);
 		//Bonus sand trap stuff
 		if(monster.findStatusAffect(StatusAffects.Level) >= 0) {
 			temp = monster.statusAffectv1(StatusAffects.Level);
 			//[(new PG for PC height levels)PC level 4: 
-			outputText("\n");
 			if(temp == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
 			else if(temp == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
 			else outputText("The dunes tower above you and the hissing of sand fills your ears.  <b>The leering sandtrap is almost on top of you!</b>");
 			//no new PG)
 			outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
-			outputText("\n");
+			outputText("\n\n");
 		}
 		if(monster.plural) {
 			if(math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ", false);
@@ -4019,7 +4038,7 @@ public function spellHeal():void {
 	else {
 		temp = int((player.inte/(2 + rand(3)) * spellMod()) * (maxHP()/150));
 		if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		outputText("You flush with success as your wounds begin to knit (+" + temp + ").", false);
+		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + ")</font></b>.", false);
 		HPChange(temp,false);
 	}
 	outputText("\n\n", false);
@@ -4163,7 +4182,7 @@ public function spellWhitefire():void {
 	temp = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	//High damage to goes.
 	if(monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-	outputText(monster.capitalA + monster.short + " takes " + temp + " damage.", false);
+	outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
 	//Using fire attacks on the goo]
 	if(monster.short == "goo-girl") {
 		outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
@@ -4222,7 +4241,7 @@ public function spellCleansingPalm():void
 		else outputText((monster as Monster).mfn(" him", " her", " it"));
 		outputText(" back a few feet.\n\n");
 		
-		outputText(monster.capitalA + monster.short + " takes " + temp + " damage.\n\n");
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
 	}
 	else
 	{
@@ -5027,6 +5046,7 @@ public function runAway(callHook:Boolean = true):void {
 	if(debug) escapeMod -= 300;
 	if(player.canFly()) escapeMod -= 20;
 	if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) escapeMod -= 25;
+	if(monster.findStatusAffect(StatusAffects.Stunned) >= 0) escapeMod -= 50;
 	
 	//Big tits doesn't matter as much if ya can fly!
 	else {
