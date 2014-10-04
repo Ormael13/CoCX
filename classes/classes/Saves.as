@@ -407,7 +407,7 @@ public function purgeTheMutant():void
 {
 	var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
 	trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-	var blah:Array = ["been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found"];
+	var blah:Array = ["been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found", "been deleted"];
 	
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
@@ -616,6 +616,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.lust = player.lust;
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
+		saveFile.data.hunger = player.hunger;
 		//LEVEL STATS
 		saveFile.data.XP = player.XP;
 		saveFile.data.level = player.level;
@@ -1241,7 +1242,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.teaseLevel = 0;
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
-		
+		if (saveFile.data.hunger == undefined)
+			player.hunger = 50;
+		else
+			player.hunger = saveFile.data.hunger;
 		//LEVEL STATS
 		player.XP = saveFile.data.XP;
 		player.level = saveFile.data.level;

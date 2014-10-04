@@ -721,7 +721,7 @@ public function doCamp():void {
 	}
 	
 	//Hunger check!
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 25)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 25)
 	{
 		outputText("<b>Your stomach is growling loudly. You have to eat something.</b>\n\n", false);
 	}
@@ -806,7 +806,7 @@ public function doCamp():void {
 		badEndGIANTBALLZ();
 	}
 	//Hunger Bad End
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.PC_HUNGER] <= 0)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0)
 	{
 		//Bad end at 0 HP!
 		if (player.HP <= 0 && (player.str + player.tou) < 30)
@@ -1508,7 +1508,7 @@ public function rest():void {
 	}
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		if (flags[kFLAGS.PC_HUNGER] < 25)
+		if (player.hunger < 25)
 		{
 			multiplier *= 0.5
 		}
@@ -1530,7 +1530,7 @@ public function rest():void {
 		//Hungry
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 		{
-			if (flags[kFLAGS.PC_HUNGER] < 25)
+			if (player.hunger < 25)
 			{
 				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
 			}
@@ -1738,7 +1738,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		if (flags[kFLAGS.PC_HUNGER] < 25)
+		if (player.hunger < 25)
 		{
 			outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n", false);
 			multiplier *= 0.5;
@@ -1809,7 +1809,7 @@ private function callRathazulAndEscapeBadEnd():void {
 
 //Bad End if you starved to death.
 public function badEndHunger():void {
-	flags[kFLAGS.PC_HUNGER] = 1; //For Easy Mode/Debug Mode.
+	player.hunger = 1; //For Easy Mode/Debug Mode.
 	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. \n\n", true);
 	if (companionsCount() > 0) {
 		if (companionsCount() > 1) {
@@ -2153,6 +2153,11 @@ private function fixFlags():void {
 	{
 		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusAffectv1(StatusAffects.TakenGroPlus))
 		player.removeStatusAffect(StatusAffects.TakenGroPlus);
+	}
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] > 0)
+	{
+		player.hunger = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994];
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] = 0;
 	}
 }
 

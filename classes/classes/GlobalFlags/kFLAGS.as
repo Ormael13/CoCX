@@ -1264,7 +1264,7 @@ public static const MET_YETI_FIRST_TIME:int                                   		
 public static const VALERIA_FOUND_IN_GLACIAL_RIFT:int                               = 1256;
 public static const SHEILA_LETHICITE_FORGE_DAY:int                                  = 1257;//Scarred Blade forge progress.
 public static const CHEAT_ENTERING_COUNTER_2:int                             		= 1258;//Debug menu
-public static const UNKNOWN_FLAG_NUMBER_01259:int                                   = 1259;
+public static const USE_OLD_INTERFACE:int                                   		= 1259;//1 if old interface is used.
 public static const UNKNOWN_FLAG_NUMBER_01260:int                                   = 1260;
 public static const UNKNOWN_FLAG_NUMBER_01261:int                                   = 1261;
 public static const UNKNOWN_FLAG_NUMBER_01262:int                                   = 1262;
@@ -2999,7 +2999,7 @@ public static const GAME_DIFFICULTY:int  			                                = 29
 public static const HARDCORE_MODE:int       				                        = 2991; // 0 is disabled, 1 is enabled. Forces save and causes deletion of save file on bad end.
 public static const HARDCORE_SLOT:int         			 	                        = 2992; //
 public static const HUNGER_ENABLED:int               				                = 2993; // Determines if hunger is enabled. 1 is enabled.
-public static const PC_HUNGER:int                                                   = 2994; // Goes from 0 to 100. 100 is full, 0 is starving.
+public static const UNKNOWN_FLAG_NUMBER_02994:int                                   = 2994; // Goes from 0 to 100. 100 is full, 0 is starving.
 public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // disables corruption requirement for certain buttfuck scenes.
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;

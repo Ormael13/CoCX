@@ -1421,7 +1421,7 @@ private function sleepWithMinerva():void {
 	outputText("You lay next to Minerva while you rest your head on her soft breasts.  ", false)
 	if (player.armorName == "goo armor") outputText("Valeria, your goo-girl companion, envelopes you and Minerva, helping to keep you and Minerva warm.  ", false)
 	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.  ", false)
-	doNext(sleepWithMinervaII)
+	doNext(sleepWithMinervaProcess);
 }
 private function sleepWithMinervaII():void {
 	outputText("<b>Ten hours pass...</b>\n\n", true)
@@ -1429,40 +1429,20 @@ private function sleepWithMinervaII():void {
 	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up ", false)
 	else outputText("You get re-dressed in your " + player.armorName + " ", false)
 	outputText("and you leave the tower to return to your camp. \n\n", false)
-	//Regain HP and Fatigue while sleeping with Minerva. Li'l bonus if you're wearing goo armor.
-	var timeToPass:Number = 10;
-	var gainHP:Number = 0;
-	gainHP += (timeToPass * 25)
-	if (player.findPerk(PerkLib.Regeneration) >= 0 && (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
-	if (player.findPerk(PerkLib.Regeneration2) >= 0 && (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
-	if (player.findPerk(PerkLib.LustyRegeneration) >= 0) gainHP += (timeToPass * (player.maxHP() / 100) * 2);
-	if (player.armorName == "goo armor") gainHP += (timeToPass * (player.maxHP() / 100) * 3);
-	HPChange(gainHP, true);
-	fatigue(-100);
-	if (player.findPerk(PerkLib.WellAdjusted)) dynStats("lust", (timeToPass * player.lib * 0.02), "resisted", false);
-	else dynStats("lust", (timeToPass * player.lib * 0.04), "resisted", false);
-	//Pass time!
-	while (timeToPass > 0) {
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-			if (flags[kFLAGS.PC_HUNGER] > 50)
-			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
-			}
-			if (flags[kFLAGS.PC_HUNGER] > 25)
-			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
-			}
-			if (flags[kFLAGS.PC_HUNGER] > 0 && player.armorName != "goo armor")
-			{
-				flags[kFLAGS.PC_HUNGER] -= 0.5;
-			}
-		}
-		cheatTime(1);
-		timeToPass -= 1;
-	}
+	sleepWithMinervaHeal();
 	doNext(13);
 }
-
+private function sleepWithMinervaProcess():void {
+	clearOutput();
+	kGAMECLASS.timeQ = 10;
+	goNext(timeQ, true);
+	sleepWithMinervaII();
+}
+private function sleepWithMinervaHeal():void {
+	kGAMECLASS.timeQ = 10;
+	camp.sleepRecovery(true);
+	kGAMECLASS.timeQ = 0;	
+}
 
 /* IMPLEMENTED AT LAST!
 [Bottle] Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack

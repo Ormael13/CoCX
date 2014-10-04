@@ -471,24 +471,24 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 			//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
-			if (flags[kFLAGS.PC_HUNGER] > 50)
+			if (player.hunger > 50)
 			{
-				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
+				player.hunger -= (0.5 * multiplier);
 			}
-			if (flags[kFLAGS.PC_HUNGER] > 25)
+			if (player.hunger > 25)
 			{
-				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
+				player.hunger -= (0.5 * multiplier);
 			}
-			if (flags[kFLAGS.PC_HUNGER] > 0 && player.armorName != "goo armor")
+			if (player.hunger > 0 && player.armorName != "goo armor")
 			{
-				flags[kFLAGS.PC_HUNGER] -= (0.5 * multiplier);
+				player.hunger -= (0.5 * multiplier);
 			}
 			//Caps hunger at 100. Occurs after hunger tick so you'll be able to see hunger showing 100/100.
-			if (flags[kFLAGS.PC_HUNGER] > 100)
+			if (player.hunger > 100)
 			{
-				flags[kFLAGS.PC_HUNGER] = 100;
+				player.hunger = 100;
 			}
-			if (flags[kFLAGS.PC_HUNGER] <= 0)
+			if (player.hunger <= 0)
 			{
 				//Lose HP and makes fatigue go up. Lose body weight and muscles.
 				takeDamage(maxHP() / 25);
@@ -503,9 +503,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Goo armor prevents starvation completely!
 			if (player.armorName == "goo armor")
 			{
-				if (flags[kFLAGS.PC_HUNGER] < 10)
+				if (player.hunger < 10)
 				{
-					flags[kFLAGS.PC_HUNGER] = 25;
+					player.hunger = 25;
 					outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
 				}
 			}
@@ -558,7 +558,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if (player.statusAffectv1(StatusAffects.GooStuffed) > 0) {
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
-				if (flags[kFLAGS.PC_HUNGER] < 25) flags[kFLAGS.PC_HUNGER] = 25;
+				if (player.hunger < 25) player.hunger = 25;
 			}
 			player.addStatusValue(StatusAffects.GooStuffed,1,-1);
 			if (player.statusAffectv1(StatusAffects.GooStuffed) <= 0)

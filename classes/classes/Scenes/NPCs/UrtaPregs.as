@@ -444,6 +444,7 @@ private function wakeUpWithUrtaAfterStaying():void {
 	statScreenRefresh();
 	player.orgasm();
 	camp.sleepRecovery(false);
+	HPChange(player.maxHP(), true);
 	//PC Wakes with Urta
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
 	if(flags[kFLAGS.URTA_KIDS_MALES] == 1) outputText("son");

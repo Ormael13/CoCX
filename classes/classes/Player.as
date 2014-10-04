@@ -34,7 +34,9 @@ use namespace kGAMECLASS;
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
-
+		
+		public var hunger:Number = 0;
+		
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
@@ -1301,37 +1303,44 @@ use namespace kGAMECLASS;
 		public function refillHunger(amnt:Number = 0):void {
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
-				flags[kFLAGS.PC_HUNGER] += amnt;
-				if (flags[kFLAGS.PC_HUNGER] > 100)
+				hunger += amnt;
+				if (hunger > 100)
 				{
-					flags[kFLAGS.PC_HUNGER] = 100;
+					hunger = 100;
 				}
 				//Messages
-				if (flags[kFLAGS.PC_HUNGER] < 10)
+				if (hunger < 10)
 				{
 					outputText("\n<b>You still need to eat more. </b>")
 				}
-				if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25)
+				if (hunger >= 10 && hunger < 25)
 				{
 					outputText("\n<b>You are no longer starving but you still need to eat more. </b>")
 				}
-				if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50)
+				if (hunger >= 25 && hunger < 50)
 				{
 					outputText("\n<b>The growling sound in your stomach seems to quiet down. </b>")
 				}
-				if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75)
+				if (hunger >= 50 && hunger < 75)
 				{
 					outputText("\n<b>Your stomach no longer growls. </b>")
 				}
-				if (flags[kFLAGS.PC_HUNGER] > 75 && flags[kFLAGS.PC_HUNGER] <= 90)
+				if (hunger > 75 && hunger <= 90)
 				{
 					outputText("\n<b>You feel so satisfied. </b>")
 				}
-				if (flags[kFLAGS.PC_HUNGER] > 90)
+				if (hunger > 90)
 				{
 					outputText("\n<b>Your stomach feels so full. </b>")
-				}			
+				}
+				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
+				kGAMECLASS.statScreenRefresh();
 			}
+		}
+		
+		public function damageHunger(amnt:Number = 0):void {
+			hunger -= amnt;
+			if (hunger < 0) hunger = 0;
 		}
 		
 		public function slimeFeed():void{

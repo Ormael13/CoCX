@@ -3,9 +3,11 @@ package classes.Scenes
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.MainViewHack;
 	
 	public class DebugMenu extends BaseContent
 	{
+		public var mainHack:MainViewHack = new MainViewHack()
 		/*
 			addButton(0, "Item1", giveItem, consumables.ITEM);
 			addButton(1, "Item2", giveItem, consumables.ITEM);
@@ -23,11 +25,12 @@ package classes.Scenes
 		
 		public function accessDebugMenu():void {
 			kGAMECLASS.tooltipLoc = ""
-			if (debug && flags[kFLAGS.HARDCORE_MODE] <= 0 && !inCombat()) {
+			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !inCombat()) {
 				outputText("Welcome to the super secret debug menu!", true);
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu);
 				addButton(1, "Change Stats", statChangeMenu);
+				addButton(2, "HACK STUFFZ", styleHackMenu);
 				addButton(9, "Exit", eventParser, 1);
 			}
 		}
@@ -469,7 +472,14 @@ package classes.Scenes
 			dynStats(stats, increment);
 			statScreenRefresh();
 			statChangeAttributeMenu(stats);
-		}		
+		}
+		
+		private function styleHackMenu():void {
+			menu()
+			outputText("TEST STUFFZ", true);
+			addButton(0, "HackSideBar", mainHack.refreshStats);
+			addButton(9, "Back", accessDebugMenu);
+		}
 	}
 
 }

@@ -17,6 +17,7 @@ package classes.Scenes.Areas.GlacialRift
 					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\"");
 					damage = ((str + 50) + rand(100))
 					damage = player.reduceDamage(damage);
+					if (damage < 40) damage = 40;
 					player.takeDamage(damage, true);
 				}
 				else {
@@ -53,33 +54,35 @@ package classes.Scenes.Areas.GlacialRift
 			if (rand(100) >= player.str || rand(10) == 0) giantGrabFail();
 			else giantGrabSuccess();
 		}
-		public function giantGrabFail():void {
+		public function giantGrabFail(struggle:Boolean = true):void {
 			clearOutput();
 			var damage:int = 0
-			if (player.str >= 80) {
-				outputText("You push and pull and squeeze and worm with all your might, but all that does is  make the giant's grip harder. ");
-			}
-			if (player.str >= 60 && player.str < 80) {
-				outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-				game.dynStats("str", -1);
-				player.addStatusValue(StatusAffects.GiantStrLoss, 1, 1);
-			}
-			if (player.str >= 40 && player.str < 60) {
-				outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-				game.dynStats("str", -2);
-				player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
-			}
-			if (player.str >= 20 && player.str < 40) {
-				outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-				player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
-				damage = 10 + rand(str * 0.5);
-				player.takeDamage(damage, true);
-			}
-			if (player.str < 20) {
-				outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-				player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
-				damage = 20 + rand(str * 0.75);
-				player.takeDamage(damage, true);
+			if (struggle) {
+				if (player.str >= 80) {
+					outputText("You push and pull and squeeze and worm with all your might, but all that does is make the giant's grip harder. ");
+				}
+				if (player.str >= 60 && player.str < 80) {
+					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
+					game.dynStats("str", -1);
+					player.addStatusValue(StatusAffects.GiantStrLoss, 1, 1);
+				}
+				if (player.str >= 40 && player.str < 60) {
+					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
+					game.dynStats("str", -2);
+					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
+				}
+				if (player.str >= 20 && player.str < 40) {
+					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
+					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
+					damage = 10 + rand(str * 0.5);
+					player.takeDamage(damage, true);
+				}
+				if (player.str < 20) {
+					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
+					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
+					damage = 20 + rand(str * 0.75);
+					player.takeDamage(damage, true);
+				}
 			}
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("The thought of being constricted turns you on a bit.")
@@ -110,6 +113,7 @@ package classes.Scenes.Areas.GlacialRift
 				player.removeStatusAffect(StatusAffects.GiantGrabbed);
 				player.createStatusAffect(StatusAffects.Stunned, 1 + rand(2), 0, 0, 0);
 				damage = 150 + rand(str * 2);
+				if (damage < 80) damage = 80;
 				player.takeDamage(damage, true);
 				combatRoundOver();
 				return;
@@ -160,6 +164,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) player.removeStatusAffect(StatusAffects.GiantBoulder);
 			var damage:int = (str * 2) + 100 + rand(250);
 			damage = player.reduceDamage(damage);
+			if (damage < 200) damage = 200;
 			player.takeDamage(damage, true);
 			combatRoundOver();
 		}
@@ -175,6 +180,15 @@ package classes.Scenes.Areas.GlacialRift
 		
 		public function giantAI():void
 		{
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				removeStatusAffect(StatusAffects.Stunned);
+				combatRoundOver();
+				return;
+			}
+			if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) { 
+				giantGrabFail(false);
+				return;
+			}
 			var chooser:Number = 0;
 			chooser = rand(10);
 			if (chooser < 6) giantAttackPunch(); //60% chance

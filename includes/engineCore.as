@@ -1,6 +1,7 @@
 ﻿import classes.perkClass;
 import classes.PerkClass;
 import flash.text.TextFormat;
+import classes.MainViewHack;
 // // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
@@ -27,6 +28,8 @@ import flash.text.TextFormat;
 // oldStats.oldLust = 0;
 // 
 // model.maxHP = maxHP;
+
+public var styleHack:MainViewHack = new MainViewHack();
 
 public function maxHP():Number {
 	return player.maxHP();
@@ -79,7 +82,7 @@ public function HPChange(changeNum:Number, display:Boolean):void
 		}
 		else
 		{
-			if(display) outputText("You gain <font color=\"#008000\">" + int(changeNum) + "</font> HP.\n", false);
+			if(display) outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
 			player.HP += int(changeNum);
 			mainView.statsView.showStatUp( 'hp' );
 			// hpUp.visible = true;
@@ -89,12 +92,12 @@ public function HPChange(changeNum:Number, display:Boolean):void
 	else
 	{
 		if(player.HP + changeNum <= 0) {
-			if(display) outputText("You take <font color=\"#800000\">" + int(changeNum*-1) + "</font> damage, dropping your HP to 0.\n", false);
+			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
 			player.HP = 0;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 		else {
-			if(display) outputText("You take <font color=\"#800000\">" + int(changeNum*-1) + "</font> damage.\n", false);
+			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
 			player.HP += changeNum;
 			mainView.statsView.showStatDown( 'hp' );
 		}
@@ -695,7 +698,7 @@ public function buildPerkList():Array {
 	//Tier 1 Misc Perks
 	if(player.level >= 6) {
 		_add(new PerkClass(PerkLib.Resistance));
-		_add(new PerkClass(PerkLib.Survivalist));
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist));
 	}
 	// FILTER PERKS
 	perkList = perkList.filter(
@@ -1271,6 +1274,9 @@ public function getButtonToolTipText(buttonText:String):String
 		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
 		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
+	if(buttonText.indexOf("Old Side Bar") != -1) {                
+		toolTipText = "Switch between old and new stats bar.\n\nNOTE: At the moment, you'll have to restart the game to see the old stats panel.\n\nSave the game after switching to old then restart the game. Then load the game.";
+	}
 	//Cheat menu
 	if(buttonText.indexOf("Spawn Items") != -1) {                        
 		toolTipText = "Spawn any items of your choice, including items usually not obtainable through gameplay.";
@@ -1784,10 +1790,12 @@ public function invertGo():void{
 //Used to update the display of statistics
 public function statScreenRefresh():void {
 	mainView.statsView.show(); // show() method refreshes.
+	styleHack.refreshStats();
 }
 
 public function showStats():void {
 	mainView.statsView.show();
+	styleHack.refreshStats();
 }
 
 public function hideStats():void {
@@ -1801,7 +1809,7 @@ public function hideMenus():void {
 //Hide the up/down indicators
 public function hideUpDown():void {
 	mainView.statsView.hideUpDown();
-
+	
 	//Clear storage values so up/down arrows can be properly displayed
 	oldStats.oldStr = 0;
 	oldStats.oldTou = 0;
@@ -2005,15 +2013,15 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		bodyStats += "<b>Hunger:</b> " + Math.round(flags[kFLAGS.PC_HUNGER]) + " / 100 (";
-		if (flags[kFLAGS.PC_HUNGER] <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
-		if (flags[kFLAGS.PC_HUNGER] > 0 && flags[kFLAGS.PC_HUNGER] < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
-		if (flags[kFLAGS.PC_HUNGER] >= 10 && flags[kFLAGS.PC_HUNGER] < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>";
-		if (flags[kFLAGS.PC_HUNGER] >= 25 && flags[kFLAGS.PC_HUNGER] < 50) bodyStats += "Hungry";
-		if (flags[kFLAGS.PC_HUNGER] >= 50 && flags[kFLAGS.PC_HUNGER] < 75) bodyStats += "Not hungry";
-		if (flags[kFLAGS.PC_HUNGER] >= 75 && flags[kFLAGS.PC_HUNGER] < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>";
-		if (flags[kFLAGS.PC_HUNGER] >= 90 && flags[kFLAGS.PC_HUNGER] < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
-		if (flags[kFLAGS.PC_HUNGER] >= 100) bodyStats += "<font color=\"#00ff00\">Very full</font>";
+		bodyStats += "<b>Hunger:</b> " + Math.round(player.hunger) + " / 100 (";
+		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
+		if (player.hunger > 0 && player.hunger < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
+		if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>";
+		if (player.hunger >= 25 && player.hunger < 50) bodyStats += "Hungry";
+		if (player.hunger >= 50 && player.hunger < 75) bodyStats += "Not hungry";
+		if (player.hunger >= 75 && player.hunger < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>";
+		if (player.hunger >= 90 && player.hunger < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
+		if (player.hunger >= 100) bodyStats += "<font color=\"#00ff00\">Very full</font>";
 		bodyStats += ")\n";
 	}
 

@@ -1328,7 +1328,7 @@ private function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 private function umYum():void {
 	clearOutput();
 	outputText("Um, yum?");
-	if (flags[kFLAGS.PC_HUNGER] > 25)
+	if (player.hunger > 25)
 	{
 		outputText("\n\nCringing, you set the offered bowl back down, squeaking out that it's delicious, thank you very much, but you have something to take care of right now; maybe you can have more later.  Kiha rolls her eyes and shoos you off before she and " + flags[kFLAGS.HELSPAWN_NAME] + " spoon out their lunch. \n\nAs you're wandering off looking for somewhere to hurl, ");
 		player.refillHunger(5);
@@ -1343,7 +1343,7 @@ private function umYum():void {
 			//Player vomits. Poor player. Damages hunger by 15-25.
 			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and you get up. ", false)
 			player.takeDamage(player.maxHP() / 4);
-			flags[kFLAGS.PC_HUNGER] -= (rand(10) + 15);
+			player.damageHunger(rand(10) + 15);
 			dynStats("lib", -10);
 			dynStats("lust", -100, "resisted", false);
 		}

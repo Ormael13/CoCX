@@ -65,7 +65,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 			"Debug Info", debugPane,
 			"", 0,
 			"Achievements", 0,
-			"Settings", settingsScreen,
+			"Settings", settingsScreenI,
 			"Resume", resume);
 
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
@@ -105,8 +105,9 @@ Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/
 <br>- **Try to keep your keyboard clean.  Think of the children!**
 
 
-For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
-
+For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. 
+Don't forget to try out Trials in Tainted Space made by the creator of this game!
+	
 Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
 
 	]]>, false, true);
@@ -130,7 +131,7 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 }
 
-public function settingsScreen():void
+public function settingsScreen():void 
 {
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );
@@ -178,7 +179,6 @@ public function settingsScreen():void
 	else
 		outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
 
-
 	outputText("\n\n");
 
 	if(flags[kFLAGS.HYPER_HAPPY])
@@ -188,18 +188,33 @@ public function settingsScreen():void
 	}
 	else
 		outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
+		
+	outputText("\n\n");
+	
+	if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1)
+	{
+		outputText("Stats Pane Style: <b>Old</b>\n Old stats panel will be used. (Please restart the game. Yeah, I want to fix that.)");
+	}
+	else 
+		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
+}
 
-	choices("Toggle Debug", toggleDebug,
-			"Sprite Toggle", toggleSpritesFlag,
-			"Easy Mode", toggleEasyModeFlag,
-			"Font Size", fontSettingsMenu,
-			"Controls", displayControls,
-			"Hyper Happy", toggleHyperHappy,
-			"Low Standards", toggleStandards,
-			"Silly Toggle", toggleSillyFlag,
-			"Enable Real", enableRealisticPrompt,
-			"Back", mainMenu);
-	//Disables cheats on hardcore mode.
+public function settingsScreenI():void
+{
+	settingsScreen();
+	addButton(0, "Toggle Debug", toggleDebug);
+	addButton(1, "Sprite Toggle", toggleSpritesFlag);
+	addButton(2, "Easy Mode", toggleEasyModeFlag);
+	addButton(3, "Font Size", fontSettingsMenu);
+	
+	addButton(5, "Hyper Happy", toggleHyperHappy);
+	addButton(6, "Low Standards", toggleStandards);
+	addButton(7, "Silly Toggle", toggleSillyFlag);
+	addButton(8, "Controls", displayControls);
+	
+	addButton(4, "Next", settingsScreenII);
+	addButton(9, "Back", mainMenu);
+
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
 		removeButton(0);
@@ -211,11 +226,46 @@ public function settingsScreen():void
 		flags[kFLAGS.HYPER_HAPPY] = 0;
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 	}
+}
+
+//Page 2
+public function settingsScreenII():void {
+	menu();
+	settingsScreen();
+	addButton(0, "Old Side Bar", toggleInterface);
+	addButton(1, "Background", cycleBackground);
+	addButton(5, "Enable Real", enableRealisticPrompt);
+	
+	addButton(4, "Previous", settingsScreenI);
+	addButton(9, "Back", mainMenu);
+	
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		removeButton(8);
+		removeButton(5);
 	}
 }
+
+public function toggleInterface():void {
+	if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
+	else flags[kFLAGS.USE_OLD_INTERFACE] = 0;
+	settingsScreenII();
+}
+
+public function cycleBackground():void {
+	if (!mainView.textBGWhite.visible)
+	{
+		mainView.textBGWhite.visible = true;
+	}
+	else if (!mainView.textBGTan.visible)
+	{
+		mainView.textBGTan.visible = true;
+	}
+	else
+	{
+		mainView.textBGWhite.visible = false;
+		mainView.textBGTan.visible = false;
+	}		
+};
 
 public function fontSettingsMenu():void {
 	menu();
@@ -342,7 +392,7 @@ public function enableRealisticPrompt():void {
 public function enableRealisticForReal():void {
 	outputText("Realistic mode is now enabled.", true)
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
-	doNext(settingsScreen);
+	doNext(settingsScreenII);
 }
 
 public function creditsScreen():void {

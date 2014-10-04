@@ -36,7 +36,7 @@ package classes.Scenes.Areas
 			//Wild Valkyrie appears!
 			if (chooser == 0) {
 				outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n", true)
-				outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weaponName] for a fight!")
+				outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your " + player.weaponName + " for a fight!")
 				startCombat(new Valkyrie());
 				return;
 			}
@@ -80,10 +80,10 @@ package classes.Scenes.Areas
 				}
 			}
 			//Find item!
-			if (chooser >= 3) {
-				//50/50 chance.
+			if (chooser >= 4) {
+				//25% chance to find an item. When you do find an item, there is 50/50 chance.
 				var itemChooser:Number;
-				itemChooser = rand(4);
+				itemChooser = rand(8);
 				if (itemChooser == 0) {
 					outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag.", true)
 					menuLoc = 2;

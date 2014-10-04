@@ -1179,13 +1179,13 @@ public function doCombat(eventNum:Number):void
 public function fantasize():void {
 	var temp2:Number = 0;
 	outputText("", true);
-	if (monster.short == "frost giant") {
+	if (monster.short == "frost giant" && (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0)) {
 		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
 		dynStats("lus", temp2, "resisted", false);
 		(monster as FrostGiant).giantBoulderFantasize();
 		return;
 	}
-	if(player.armorName == "goo armor") {
+	else if(player.armorName == "goo armor") {
 		outputText("As you fantasize, you feel Valeria rubbing her gooey body all across your sensitive skin");
 		if(player.gender > 0) outputText(" and genitals");
 		outputText(", arousing you even further.\n");
@@ -2214,7 +2214,7 @@ public function regeneration(combat:Boolean = true):void {
 	if(combat) {
 		//Regeneration
 		healingPercent = 0;
-		if (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (player.hunger >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
@@ -2228,7 +2228,7 @@ public function regeneration(combat:Boolean = true):void {
 	else {
 		//Regeneration
 		healingPercent = 0;
-		if (flags[kFLAGS.PC_HUNGER] >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (player.hunger >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 2;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
@@ -4038,7 +4038,7 @@ public function spellHeal():void {
 	else {
 		temp = int((player.inte/(2 + rand(3)) * spellMod()) * (maxHP()/150));
 		if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + ")</font></b>.", false);
+		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 		HPChange(temp,false);
 	}
 	outputText("\n\n", false);

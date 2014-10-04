@@ -283,7 +283,7 @@ private function chooseModeRealistic():void {
 	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically.", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
-	flags[kFLAGS.PC_HUNGER] = 80;
+	player.hunger = 80;
 	doNext(startTheGame);
 }	
 
@@ -291,7 +291,7 @@ private function chooseModeHardcore():void {
 	outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. ", true)
 	flags[kFLAGS.HARDCORE_MODE] = 1;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
-	flags[kFLAGS.PC_HUNGER] = 80;
+	player.hunger = 80;
 	choices("Slot 1", chooseSlotHardcore1,
 			"Slot 2", chooseSlotHardcore2,
 			"Slot 3", chooseSlotHardcore3,
