@@ -109,7 +109,7 @@ private function keepDrinking():void {
 	//[hymen check]
 	if(player.hasVagina()) player.cuntChange(25,true,true,false);
 	else player.buttChange(25,true,true,false);
-	outputText("\n\nYou wake up you don't know how many hours later, head spinning in pain at the heavy drinking you did earlier.  Come to think of it... all the bottles and dishes of food seem to be gone.  The only thing left are puddles of warm cum all around you and on you.  You get up, dazed, only to feel a strange feeling inside your [vagOrAss]; you double over as pain explodes from your [vagOrAss] and gasps as a flood of semen dribbles from your used ");
+	outputText("\n\nYou wake up you don't know how many hours later, head spinning in pain at the heavy drinking you did earlier.  Come to think of it... all the bottles and dishes of food seem to be gone.  The only thing left are puddles of warm cum all around you and on you.  You get up, dazed, only to feel a strange feeling inside your [vagOrAss]; you double over as pain explodes from your [vagOrAss] and gasp as a flood of semen dribbles from your used ");
 	if(player.hasVagina()) outputText("vagina");
 	else outputText("ass");
 	outputText(".  This must be the work of that satyr!  Mentally, you remind yourself to watch out for him next time.  You clean yourself up as best as you can and redress, then wobble your way towards your camp, trying to stifle the pain, in your head and elsewhere, along the way.");
@@ -401,17 +401,13 @@ private function willinglyBoneSatyr():void {
 //Pregnancy Stuff (Z)
 private function satyrPreggo():void {
 	if (player.hasVagina()) {
-		if (player.pregnancyIncubation == 0 && player.pregnancyType == 0) {
-			player.knockUp(player.PREGNANCY_SATYR, player.INCUBATION_SATYR);
-		}
+		player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR); //Satyrs can now fertilize eggs for ovipositing players
 	}
 	else {
-		if (player.buttPregnancyIncubation == 0 && player.buttPregnancyType == 0) {
-			player.buttPregnancyType = player.PREGNANCY_SATYR;
-			player.buttPregnancyIncubation = player.INCUBATION_SATYR;
-		}
+		player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 1, 1);
 	}
 }
+
 //Birthing (Z)
 //Baby is always male.
 public function satyrBirth(vag:Boolean):void {
@@ -435,7 +431,7 @@ public function satyrBirth(vag:Boolean):void {
 	else player.buttChange(40,true,false,true);
 	outputText("Long minutes pass as your body recovers from the strain, bouncing back with unnatural vitality from the exhaustion and pain of giving birth, but finally you are ready to look at it.");
 	
-	outputText("\n\nIt looks like a cute little goat-man; the proof of such hangs between his legs, far larger than it should be on any infant.  He bleats at you meekly, and then begins to grow on his own!  His horns extend into curling, extravagant loops of bone, bending over his head; his soft flesh becomes tougher as his muscles develop, giving him a nice athletic build.  Finally his cock and balls grow to an impressive size, not only because of his natural - or unnatural - growth, but because it  hardens with each passing moment; despite having been born only moments ago, your new son seems to be sexually aware.  Moments later he unbends and you get to take a good look at your newborn, and grown up, satyr.");
+	outputText("\n\nIt looks like a cute little goat-man; the proof of such hangs between his legs, far larger than it should be on any infant.  He bleats at you meekly, and then begins to grow on his own!  His horns extend into curling, extravagant loops of bone, bending over his head; his soft flesh becomes tougher as his muscles develop, giving him a nice athletic build.  Finally his cock and balls grow to an impressive size, not only because of his natural - or unnatural - growth, but because it hardens with each passing moment; despite having been born only moments ago, your new son seems to be sexually aware.  Moments later he unbends and you get to take a good look at your newborn, and grown up, satyr.");
 	
 	outputText("\n\nHe strokes his small beard and gives you a wicked grin, thrusting his hips at you and spattering you with a few drops of pre-cum, then turns and bounds off.  Exhausted");
 	if(player.cor < 33) outputText(" and more than a bit disgusted");

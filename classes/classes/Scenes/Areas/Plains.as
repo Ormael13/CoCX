@@ -88,7 +88,7 @@ package classes.Scenes.Areas
 			}
 			choices[choices.length] = satyrScene.satyrEncounter;
 			choices[choices.length] = satyrScene.satyrEncounter;
-			if (flags[kFLAGS.SHEILA_CLOCK] >= 0) {
+			if (flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0) { //Aparently Sheila was supposed to be disabled after certain events - now fixed
 				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
 				choices[choices.length] = kGAMECLASS.sheilaScene.sheilaEncounterRouter;
 			}

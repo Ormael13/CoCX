@@ -7,7 +7,7 @@ package classes.Scenes.Areas.Bog
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class PhoukaScene extends BaseContent {
+	public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
 		internal static var phoukaForm:int = 0; //This keeps track of the form of the phouka across different scenes and through combat
 		internal static const PHOUKA_FORM_FAERIE:int = 0;
@@ -15,8 +15,29 @@ package classes.Scenes.Areas.Bog
 		internal static const PHOUKA_FORM_GOAT:int = 2;
 		internal static const PHOUKA_FORM_HORSE:int = 3;
 
-		public function PhoukaScene() {}
+		public function PhoukaScene() 
+		{
+			CoC.timeAwareClassAdd(this);
+		}
 
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) > 0) {
+				player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 1, -1); //Count down hours until player is not drunk
+				if (player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) <= 0) {
+					kGAMECLASS.consumables.P_WHSKY.phoukaWhiskeyExpires(player);
+					return true;
+				}
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 		public function phoukaNameText(known:String, unknown:String):String
 		{ //Helper function, For any text that depends on whether or not the player knows what to call a phouka
 			return (flags[kFLAGS.PHOUKA_LORE] == 0 ? unknown : known);
@@ -795,7 +816,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nYou just feel constant pressure building inside your belly.  In moments you look nine months pregnant.  An unwholesome feeling of saccharine sweetness seems to permeate your whole body.  Your teeth feel like they're rotting from the root out.  The " + phoukaName() + " shows no signs of slowing down and the pressure continues to build.  Finally your womb can hold no more and the stallion seed leaks back out of your violated cervix.\n\nThe winded horse morph [if (isTaur = true)rubs the side of his head against your mane and asks you, <i>“Are ye ready to be my breeding mare? Cause I stuffed yer twat with enough seed fer a dozen babies.”</i>][if (isTaur = false)says, <i>“Well slut, I hope ye liked the feel of a real stallion cock.”</i> Then he whispers, <i>“The big question is how fertile is that spacious womb o' yours?”</i>]"); //Horse
 			else
 				outputText("\n\nGallons of warm cum force past your cervix and into your womb.  You start to feel sick to your stomach, like you've eaten way too much candy.  Your belly begins to expand and you feel the " + phoukaName() + "'s fingers running across the tightening flesh.  As your belly button pops out he laughs and asks you, <i>“What do ya think my chances are, slut?  How fertile is that big womb o' yours?”</i>");
-			player.knockUp(player.PREGNANCY_FAERIE, player.INCUBATION_FAERIE);
+			player.knockUp(PregnancyStore.PREGNANCY_FAERIE, PregnancyStore.INCUBATION_FAERIE);
 			if (phoukaForm == PHOUKA_FORM_FAERIE) {
 				outputText(" The " + phoukaName() + " may have cum, but his cock is still rock solid.  You ignore his comments and start rocking your hips faster, determined to get more enjoyment out of him than this. <i>“Yes missy, yes. That's right - cum fer me an drop an egg or two.”</i>\n\nYou can feel the cum sloshing around inside your womb, you can feel the sweet taste in the back of your throat, but you need more!  Finally you close your eyes and your whole body shudders as you cum.[if (hasCock = true)  [EachCock] fires long strands of cum into the bog and all over your faerie partner.]\n\nYour [vagina] goes to work milking the " + phoukaName() + "'s prick and you hear a moan of pleasure from the little monster.  You feel even greater pressure building inside your womb.  The clenching of your love tunnel has driven him over the edge and the " + phoukaName() + " is cumming again.  You try to [if (isTaur = true)pull away from][if (isTaur = false)lift yourself off] him, but another of your own orgasms hits.  When it’s over, you're left with a distended belly that wouldn't look out of place on a woman giving birth.  You roll onto your side and the enlarged faerie slides out of your box.  You hope most of that mess will leak out.  Instead you see only a few dribbles of thick grey cum ooze out of your pussy.");				
 			}

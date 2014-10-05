@@ -161,7 +161,7 @@ public function telAdreMenu():void {
 		urtaIsABadass();
 		return;
 	}
-	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.URTA_INCUBATION] >= 192 && rand(30) == 0) {
+	if (!kGAMECLASS.urtaQuest.urtaBusy() && kGAMECLASS.urta.pregnancy.event > 5 && rand(30) == 0) {
 		kGAMECLASS.urtaPregs.urtaIsAPregnantCopScene();
 	   return;
 	}
@@ -180,7 +180,7 @@ public function telAdreMenu():void {
 	//Must have Urta's Key.
 	//Urta must be pregnant to trigger this scene.
 	//Play this scene upon entering Tel'Adre.
-	if(flags[kFLAGS.URTA_INCUBATION] > 50 && rand(4) == 0 && flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] == 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) {
+	if (kGAMECLASS.urta.pregnancy.event > 2 && rand(4) == 0 && flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] == 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) {
 		kGAMECLASS.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
@@ -1044,27 +1044,26 @@ public function barTelAdre():void {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
-	if(flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] == 0) {
-		if(edryn.edrynBar()) {
-			//Edryn panic appearance!
-			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) {
-				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
-				doNext(edryn.findOutEdrynIsPregnant);
-				flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
-				return;
-			}
-			//Edryn re-preggers appearance!
-			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
-				flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
-				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
+	if (edryn.pregnancy.type != PregnancyStore.PREGNANCY_TAOTH) { //Edryn is unavailable while pregnant with Taoth
+		if (edryn.edrynBar()) {
+			if (edryn.pregnancy.isPregnant) {
+				if (flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] == 0) {
+					if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) { //Edryn panic appearance! (First time mom)
+						outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
+						doNext(edryn.findOutEdrynIsPregnant);
+					}
+					else { //Edryn re-preggers appearance!
+						outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);				
+					}
+					flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] = 1;
+				}
+				else { //Mid-pregnancy appearance
+					outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false);
+				}
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[kFLAGS.EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
+			else if (flags[kFLAGS.EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
-			}
-			//Mid-pregnancy appearance
-			else if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) {
-				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false);
 			}
 			//Appearance changes if has had kids
 			else if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
@@ -1175,8 +1174,8 @@ public function barTelAdre():void {
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
 			button = anotherButton(button,"Back Room",kGAMECLASS.urta.scyllaAndUrtaSittingInATree);
 		}
-		else if(kGAMECLASS.urta.urtaBarDescript()) {
-			if(flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && flags[kFLAGS.URTA_INCUBATION] > 0) {
+		else if (kGAMECLASS.urta.urtaBarDescript()) {
+			if (flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && kGAMECLASS.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				kGAMECLASS.urtaPregs.urtaIsHappyAboutPregnancyAtTheBar();
 				return;
 			}
@@ -1189,6 +1188,7 @@ public function barTelAdre():void {
 	addButton(9,"Leave",telAdreMenu);
 }
 
+/*
 private function oldbarTelAdre():void {
 	hideUpDown();
 	var edryn2:Number = 0;
@@ -1371,6 +1371,7 @@ private function oldbarTelAdre():void {
 	var kath:Number = 0;
 	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta2,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
+*/
 
 //-----------------
 //-- TAILOR SHOPPE
@@ -1883,7 +1884,7 @@ private function watchUrtaBeABadass():void {
 
 public function gymDesc():void {
 	//PREGGO ALERT!
-	if(flags[kFLAGS.PC_IS_A_GOOD_COTTON_DAD] + flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && flags[kFLAGS.COTTON_PREGNANCY_INCUBATION] > 0) {
+	if (flags[kFLAGS.PC_IS_A_GOOD_COTTON_DAD] + flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.pregnancy.isPregnant) {
 		cotton.cottonPregnantAlert();
 		return;
 	}

@@ -7,7 +7,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class AmilyScene extends NPCAwareContent
+	public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
 		/*Amily the Mousegirl Breeder
 		 * Plus human stuff
@@ -90,6 +90,65 @@ package classes.Scenes.NPCs
 		//  AMILY_X_IZMA_POTION_3SOME:int = 771;
 		//  GIVEN_AMILY_NURSE_OUTFIT:int = 775;
 
+		public var pregnancy:PregnancyStore;
+
+		public function AmilyScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.AMILY_PREGNANCY_TYPE, kFLAGS.AMILY_INCUBATION, kFLAGS.AMILY_BUTT_PREGNANCY_TYPE, kFLAGS.AMILY_OVIPOSITED_COUNTDOWN);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 100, 96, 90, 72, 48);
+												//Event: 0 (= not pregnant),  1,   2,   3,  4,  5,  6,  7,  8 (< 48)
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			pregnancy.pregnancyAdvance();
+			trace("\nAmily time change: Time is " + model.time.hours + ", type: " + pregnancy.type + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			trace("\nAmily time change: butt type: " + pregnancy.buttType + ", butt incubation: " + pregnancy.buttIncubation + ", butt event: " + pregnancy.buttEvent);
+			if (flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] > 0) flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO]--;
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] > 0 && flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] < 30 * 24) flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+				if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+					outputText("\n", false);
+					amilyPopsOutKidsInCamp();
+					pregnancy.knockUpForce(); //Clear Pregnancy
+					outputText("\n", false);
+					needNext = true;
+				}
+				if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
+					amilyLaysEggsLikeABitch();
+					pregnancy.buttKnockUpForce(); //Clear Pregnancy
+					needNext = true;
+				}
+			}
+			if (model.time.hours == 6) {
+				//Pure amily flips her shit and moves out!
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
+					amilyScene.farewellNote();
+					needNext = true;
+				}
+				//Amily moves back in once uncorrupt.
+				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
+					amilyScene.amilyReturns();
+					needNext = true;
+				}
+			}
+			else if (model.time.hours > 23) {
+				if (flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] > 0) flags[kFLAGS.AMILY_X_JOJO_COOLDOWN]--;
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
+				kGAMECLASS.followerInteractions.amilyUrtaMorningAfter();
+				return true;
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 		// NEW EVENTS:
 		// 3172 = Ask to defur Amily
@@ -220,9 +279,9 @@ package classes.Scenes.NPCs
 			}
 			amilySprite();
 			//Preggo birthing!
-			if(flags[kFLAGS.AMILY_INCUBATION] == 1) {
+			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				fuckingMouseBitchPopsShitOut();
-				flags[kFLAGS.AMILY_INCUBATION] = 0;
+				pregnancy.knockUpForce(); //Clear Pregnancy
 				return;
 			}
 			if(amilyCanHaveTFNow())
@@ -540,56 +599,60 @@ package classes.Scenes.NPCs
 			}
 			
 			outputText("Curious on how Amily is holding up, you head back into the ruined village. This time you don't bother trying to hide your presence, hoping to attract Amily's attention quicker. After all, she did say that the place is basically empty of anyone except her, and you can otherwise handle a measly Imp or Goblin.\n\n", false);
-			//[Amily is not pregnant]
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
-				outputText("It doesn't take long for Amily to materialize out of the ruins. Her blowpipe and dagger are both thrust into her belt, and she's still wearing the same tattered clothes as before.\n\n", false);
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) {
-					if(flags[kFLAGS.AMILY_MET_AS] == 2 && player.gender == 2) outputText("She crosses her arms and smiles at you. \"<i>So you came back huh?  Did you want to chat with little old me?</i>\" she asks.\n\n", false);
-					else outputText("She crosses her arms and taps her fingers on her shoulder. \"<i>So, why are you here? What do you want?</i>\" she asks.\n\n", false);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She smiles softly upon seeing you. \"<i>It's always good to see somebody else who hasn't given in to corruption. Did you have something on your mind?</i>\"\n\n", false);
-				}
-				//[High Affection]
-				else {
-					outputText("She grins at you with open delight. \"<i>Hey there, " + player.short + "! It's great to see you again... ", false);
-					if(player.hasCock()) {
-						outputText("Have you come to knock me up?", false);
-						if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText(" Or have you come to get knocked up?", false);
+			switch (pregnancy.event) {
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5: //Amily is slightly pregnant
+						outputText("Amily materializes out of the ruins somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly rubs it with one hand, as if confirming its presence to herself.\n\n", false);
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("\"<i>Well, I guess despite whatever other faults you may have, you can get the job done.</i>\" She says, not looking directly at you.\n\n", false);
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Thank you. With your help, my people will soon live again.</i>\" She strokes her belly, grinning happily. \"<i>Is there something you want to talk about?</i>\"\n\n", false);
+						//[High Affection]
+						else outputText("\"<i>Thank you, thank you! I couldn't have done this without you!</i>\" She exclaims. \"<i>You've done a wonderful, noble thing, and I'm glad I found you to be their father. So, not that it isn't great to see you again, but why did you come to visit?</i>\"\n\n", false);
+						break;
+				case 6:
+				case 7:
+				case 8: //Amily is heavily pregnant
+						outputText("It takes several minutes before Amily appears, but when you see her, you marvel at how she got to you as quickly as she did. Her stomach is hugely swollen; one of her hands actually cradles underneath its rounded expanse, as if trying to hold it up. She is pants-less, evidently no longer able to fit into them. Her shirt drapes loosely, barely managing to cover the upper half of her firm orb of a belly. The belt where she hangs her blowpipe and dagger has been tied around her upper chest like a sash – between her breasts and her bulge – so she can still carry her weapons effectively.\n\n", false);
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("She seems to be paying more attention to her gravid midriff than to you, and it's several long moments before she finally speaks. \"<i>These children will be born soon. I guess I owe you my thanks for being willing to father them.</i>\"\n\n", false);
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("She groans softly. \"<i>This isn't an easy task, you know. But I still want to thank you. Maybe, when these ones are born, you'll be willing to help me make some more?</i>\" She asks, her tail gently waving behind her.\n\n", false);
+						//[High Affection]
+						else outputText("\"<i>I should have known you were coming; they always start kicking up a storm when you're here – did you know that?</i>\" She smiles beatifically. \"<i>They know their daddy already, they do. With your help, a new generation of my people will have a chance to grow up free from the taint of demons. Was there something on your mind?</i>\"\n\n", false);
+						break;
+				default: //Amily is not pregnant
+					outputText("It doesn't take long for Amily to materialize out of the ruins. Her blowpipe and dagger are both thrust into her belt, and she's still wearing the same tattered clothes as before.\n\n", false);
+					//[Low Affection]
+					if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) {
+						if (flags[kFLAGS.AMILY_MET_AS] == 2 && player.gender == 2) outputText("She crosses her arms and smiles at you. \"<i>So you came back huh?  Did you want to chat with little old me?</i>\" she asks.\n\n", false);
+						else outputText("She crosses her arms and taps her fingers on her shoulder. \"<i>So, why are you here? What do you want?</i>\" she asks.\n\n", false);
 					}
-					else if(player.hasVagina()) {
-						if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText("Have you come back so I could stuff another bun in your oven?", false);
-						else outputText("Did you come back for a little 'quality time' with me?", false);
+					//[Medium Affection]
+					else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+						outputText("She smiles softly upon seeing you. \"<i>It's always good to see somebody else who hasn't given in to corruption. Did you have something on your mind?</i>\"\n\n", false);
 					}
-					outputText("</i>\" she teases, but her body language ", false);
-					if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
-						outputText("and the erection tenting her pants ", false);
-						dynStats("lus", 5);
+					//[High Affection]
+					else {
+						outputText("She grins at you with open delight. \"<i>Hey there, " + player.short + "! It's great to see you again... ", false);
+						if (player.hasCock()) {
+							outputText("Have you come to knock me up?", false);
+							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText(" Or have you come to get knocked up?", false);
+						}
+						else if (player.hasVagina()) {
+							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText("Have you come back so I could stuff another bun in your oven?", false);
+							else outputText("Did you come back for a little 'quality time' with me?", false);
+						}
+						outputText("</i>\" she teases, but her body language ", false);
+						if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
+							outputText("and the erection tenting her pants ", false);
+							dynStats("lus", 5);
+						}
+						outputText("suggests that it's no joking matter.\n\n", false);
 					}
-					outputText("suggests that it's no joking matter.\n\n", false);
-				}
-			}
-			//[Amily is slightly pregnant]
-			else if(flags[kFLAGS.AMILY_INCUBATION] >= 90) {
-				outputText("Amily materializes out of the ruins somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly rubs it with one hand, as if confirming its presence to herself.\n\n", false);
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("\"<i>Well, I guess despite whatever other faults you may have, you can get the job done.</i>\" She says, not looking directly at you.\n\n", false);
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Thank you. With your help, my people will soon live again.</i>\" She strokes her belly, grinning happily. \"<i>Is there something you want to talk about?</i>\"\n\n", false);
-				//[High Affection]
-				else outputText("\"<i>Thank you, thank you! I couldn't have done this without you!</i>\" She exclaims. \"<i>You've done a wonderful, noble thing, and I'm glad I found you to be their father. So, not that it isn't great to see you again, but why did you come to visit?</i>\"\n\n", false);
-			}
-			//[Amily is heavily pregnant]
-			else {
-				outputText("It takes several minutes before Amily appears, but when you see her, you marvel at how she got to you as quickly as she did. Her stomach is hugely swollen; one of her hands actually cradles underneath its rounded expanse, as if trying to hold it up. She is pants-less, evidently no longer able to fit into them. Her shirt drapes loosely, barely managing to cover the upper half of her firm orb of a belly. The belt where she hangs her blowpipe and dagger has been tied around her upper chest like a sash – between her breasts and her bulge – so she can still carry her weapons effectively.\n\n", false);
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("She seems to be paying more attention to her gravid midriff than to you, and it's several long moments before she finally speaks. \"<i>These children will be born soon. I guess I owe you my thanks for being willing to father them.</i>\"\n\n", false);
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("She groans softly. \"<i>This isn't an easy task, you know. But I still want to thank you. Maybe, when these ones are born, you'll be willing to help me make some more?</i>\" She asks, her tail gently waving behind her.\n\n", false);
-				//[High Affection]
-				else outputText("\"<i>I should have known you were coming; they always start kicking up a storm when you're here – did you know that?</i>\" She smiles beatifically. \"<i>They know their daddy already, they do. With your help, a new generation of my people will have a chance to grow up free from the taint of demons. Was there something on your mind?</i>\"\n\n", false);
 			}
 			//Sex / Talk / Talk then sex
 			var efficiency:Number = 0;
@@ -621,7 +684,7 @@ package classes.Scenes.NPCs
 				//Futa amily!
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 					//If not pregnant, always get fucked!
-					if(flags[kFLAGS.AMILY_INCUBATION] == 0) sex = 2757;
+					if (!pregnancy.isPregnant) sex = 2757;
 					//else 50/50
 					else {
 						if(rand(2) == 0) sex = 2756;
@@ -636,9 +699,9 @@ package classes.Scenes.NPCs
 				//Amily is herm too!
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 					//If Amily is not pregnant
-					if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
+					if (!pregnancy.isPregnant) {
 						//If PC is also not pregnant, 50/50 odds
-						if(player.pregnancyIncubation == 0) {
+						if (!player.isPregnant()) {
 							//Herm Amily knocks up PC
 							if(rand(2) == 0) sex = 2757;
 							//PC uses dick on amily
@@ -657,7 +720,7 @@ package classes.Scenes.NPCs
 					//Amily is preg
 					else {
 						//Pc is not
-						if(player.pregnancyIncubation == 0) sex = 2757;
+						if (!player.isPregnant()) sex = 2757;
 						//PC is preg too!
 						else {
 							//Herm Amily knocks up PC
@@ -673,7 +736,7 @@ package classes.Scenes.NPCs
 				//Amily still girl!
 				else {
 					//Not pregnant? KNOCK THAT SHIT UP
-					if(flags[kFLAGS.AMILY_INCUBATION] == 0) sex = 2382;
+					if (!pregnancy.isPregnant) sex = 2382;
 					//Pregnant?  Random tribbing!
 					else {
 						//Lesbogrind
@@ -854,89 +917,84 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("You tell Amily that you came here because you wanted to have sex with her.\n\n", false);
 
-			//[Amily is not pregnant]
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("\"<i>Of course you did. Well, come on, I guess I can oblige you. It's the only way I'm going to get pregnant.</i>\"\n\n", false);
-					outputText("She sets off, clearly leading the way as you follow her.\n\n", false);
-					//[/ Go to [Low Affection Sex]]
-					doNext(amilySexHappens);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("\"<i>Well, I guess you'll do. I mean, I still need to get pregnant,</i>\" she teases you, tail waving merrily. \"<i>Follow me.</i>\"\n\n", false);
-
-					outputText("You have to push yourself to keep up with her, but she's clearly just playing with you by moving so quickly rather than seriously trying to escape you.\n\n", false);
-					//[/ Go to [Low Affection Sex]]
-					doNext(amilySexHappens);
-				}
-				//[High Affection]
-				else {
-					outputText("Amily doesn't bother to say anything; she just grins like the cat that ate the canary (well, the mouse that ate the cheesecake, anyway). She grabs hold of your hand and does her best to pull you as fast as she can towards her closest bolt-hole.\n\n", false);
-					//[/ Go to [Low Affection Sex]]
-					doNext(amilySexHappens);
-				}
-			}
-			//[Amily is slightly pregnant]
-			else if(flags[kFLAGS.AMILY_INCUBATION] >= 90) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("She stares at you, puzzled. \"<i>Why? I'm already pregnant,</i>\" she tells you. \"<i>...Forget it. You can have sex when I need to get pregnant again. Go find a goblin if you want to fuck some brainless baby-stuffed whore!</i>\"\n\n", false);
-
-					outputText("Amily can still move quickly despite her pregnancy, and you are very promptly left all alone. Perhaps it would be better not to broach the subject that bluntly with her while she's in this state.\n\n", false);
-					//Reduce affection. DERP
-					flags[kFLAGS.AMILY_AFFECTION] -= 3;
-					doNext(13);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She is clearly surprised, putting a hand to her swelling midriff. But then she shrugs and says, \"<i>Well, I guess I do owe you that much for helping me.</i>\"\n\n", false);
-
-					outputText("Though she does set off and indicate for you to follow, you realize that she's not too happy about your reason for being here.\n\n", false);
-					//[/ Go to [Medium Affection Sex]]
-					doNext(amilySexHappens);
-				}
-				//[High Affection]
-				else {
-					outputText("\"<i>You still want me, even though I'm already pregnant?</i>\" she asks – not angry or disappointed, but sounding rather pleased. \"<i>Well, how can I say no to you?</i>\" She smiles broadly and begins to walk away, doing her best to give you a sexy wiggle of her hips as an invitation for you to follow her.\n\n", false);
-					//[/ Go to [High Affection Sex]]
-					doNext(amilySexHappens);
-				}
-			}
-			//[Amily is heavily pregnant]
-			else {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("Her disbelief is quite obvious. She stares at her belly, then at you, then at your crotch, then back at her belly again. She shakes her head, clearly looking disgusted. \"<i>What kind of sicko are you? Look at the state of me – I'm in no shape to have sex! Come back after I've given birth, if that's all I mean to you!</i>\"\n\n", false);
-
-					outputText("Annoyed, she turns and waddles off. You do not give chase; you can tell that you've offended her.\n\n", false);
-					//Reduce affection
-					flags[kFLAGS.AMILY_AFFECTION] -= 3;
-					doNext(13);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She boggles as if she can't believe you. \"<i>You can't be that desperate you'd want somebody as fat and knocked up as I am!</i>\" she protests.\n\n", false);
-
-					outputText("You insist to her that you're not joking – you really do think she's sexy enough to make love to.\n\n", false);
-
-					outputText("\"<i>...Well, I guess I'm flattered, but... do you have the faintest idea how to make love to a woman who is pregnant? Especially one as far along as I am?</i>\"\n\n", false);
-
-					outputText("You are forced to concede that, actually, you don't.\n\n", false);
-
-					outputText("\"<i>It's not that I don't like you, " + player.short + ", it's just... well, I don't feel comfortable doing that,</i>\" she explains apologetically.\n\n", false);
-
-					outputText("You apologize back for confronting her with something she's uncomfortable with, and leave for your own camp, lest you insult her seriously.", false);
-					flags[kFLAGS.AMILY_AFFECTION] -= 3;
-					doNext(13);
-				}
-				//[High Affection]
-				else {
-					outputText("She looks a little puzzled by the request, but then smiles with sincere pleasure. \"<i>I'm game if you are, dear.</i>\" She winks and offers her hand to you. You take it, and let her lead you to her chosen nesting site.\n\n", false);
-					//[/ Go to [High Affection - Heavily Pregnant Sex]]
-					doNext(amilySexHappens);
-				}
+			switch (pregnancy.event) {
+				case 1: 
+				case 2: 
+				case 3: 
+				case 4: 
+				case 5: //Amily is slightly pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("She stares at you, puzzled. \"<i>Why? I'm already pregnant,</i>\" she tells you. \"<i>...Forget it. You can have sex when I need to get pregnant again. Go find a goblin if you want to fuck some brainless baby-stuffed whore!</i>\"\n\n", false);
+							outputText("Amily can still move quickly despite her pregnancy, and you are very promptly left all alone. Perhaps it would be better not to broach the subject that bluntly with her while she's in this state.\n\n", false);
+							//Reduce affection. DERP
+							flags[kFLAGS.AMILY_AFFECTION] -= 3;
+							doNext(13);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("She is clearly surprised, putting a hand to her swelling midriff. But then she shrugs and says, \"<i>Well, I guess I do owe you that much for helping me.</i>\"\n\n", false);
+							outputText("Though she does set off and indicate for you to follow, you realize that she's not too happy about your reason for being here.\n\n", false);
+							//[/ Go to [Medium Affection Sex]]
+							doNext(amilySexHappens);
+						}
+						//[High Affection]
+						else {
+							outputText("\"<i>You still want me, even though I'm already pregnant?</i>\" she asks – not angry or disappointed, but sounding rather pleased. \"<i>Well, how can I say no to you?</i>\" She smiles broadly and begins to walk away, doing her best to give you a sexy wiggle of her hips as an invitation for you to follow her.\n\n", false);
+							//[/ Go to [High Affection Sex]]
+							doNext(amilySexHappens);
+						}
+						break;
+				case 6: 
+				case 7: 
+				case 8: //Amily is heavily pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("Her disbelief is quite obvious. She stares at her belly, then at you, then at your crotch, then back at her belly again. She shakes her head, clearly looking disgusted. \"<i>What kind of sicko are you? Look at the state of me – I'm in no shape to have sex! Come back after I've given birth, if that's all I mean to you!</i>\"\n\n", false);
+							outputText("Annoyed, she turns and waddles off. You do not give chase; you can tell that you've offended her.\n\n", false);
+							//Reduce affection
+							flags[kFLAGS.AMILY_AFFECTION] -= 3;
+							doNext(13);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("She boggles as if she can't believe you. \"<i>You can't be that desperate you'd want somebody as fat and knocked up as I am!</i>\" she protests.\n\n", false);
+							outputText("You insist to her that you're not joking – you really do think she's sexy enough to make love to.\n\n", false);
+							outputText("\"<i>...Well, I guess I'm flattered, but... do you have the faintest idea how to make love to a woman who is pregnant? Especially one as far along as I am?</i>\"\n\n", false);
+							outputText("You are forced to concede that, actually, you don't.\n\n", false);
+							outputText("\"<i>It's not that I don't like you, " + player.short + ", it's just... well, I don't feel comfortable doing that,</i>\" she explains apologetically.\n\n", false);
+							outputText("You apologize back for confronting her with something she's uncomfortable with, and leave for your own camp, lest you insult her seriously.", false);
+							flags[kFLAGS.AMILY_AFFECTION] -= 3;
+							doNext(13);
+						}
+						//[High Affection]
+						else {
+							outputText("She looks a little puzzled by the request, but then smiles with sincere pleasure. \"<i>I'm game if you are, dear.</i>\" She winks and offers her hand to you. You take it, and let her lead you to her chosen nesting site.\n\n", false);
+							//[/ Go to [High Affection - Heavily Pregnant Sex]]
+							doNext(amilySexHappens);
+						}
+						break;
+				default: //Amily is not pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("\"<i>Of course you did. Well, come on, I guess I can oblige you. It's the only way I'm going to get pregnant.</i>\"\n\n", false);
+							outputText("She sets off, clearly leading the way as you follow her.\n\n", false);
+							//[/ Go to [Low Affection Sex]]
+							doNext(amilySexHappens);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("\"<i>Well, I guess you'll do. I mean, I still need to get pregnant,</i>\" she teases you, tail waving merrily. \"<i>Follow me.</i>\"\n\n", false);
+							outputText("You have to push yourself to keep up with her, but she's clearly just playing with you by moving so quickly rather than seriously trying to escape you.\n\n", false);
+							//[/ Go to [Low Affection Sex]]
+							doNext(amilySexHappens);
+						}
+						//[High Affection]
+						else {
+							outputText("Amily doesn't bother to say anything; she just grins like the cat that ate the canary (well, the mouse that ate the cheesecake, anyway). She grabs hold of your hand and does her best to pull you as fast as she can towards her closest bolt-hole.\n\n", false);
+							//[/ Go to [Low Affection Sex]]
+							doNext(amilySexHappens);
+						}
 			}
 		}
 
@@ -948,23 +1006,27 @@ package classes.Scenes.NPCs
 			else outputText("You tell Amily that you came here because you wanted to talk with her, and you have no desire to approach her sexually on this encounter.\n\n", false);
 
 			//[Low Affection]
-			if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-				//[Amily is not pregnant]
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
-					if(flags[kFLAGS.AMILY_MET_AS] == 2 && player.gender == 2) outputText("\"<i>A chat would be lovely,</i>\" she says, clearly enjoying herself.  \"<i>I... I hardly ever get a chance to find someone to chat with.  Sometimes it seems like everyone in Mareth just wants to breed non-stop...</i>\" she murmers to herself.  \"<i>Well, what shall we talk about?</i>\" she asks, seemingly quite happy with your presence.\n\n", false);
-					else outputText("\"<i>You want to talk? No sex?</i>\" she asks, clearly having a hard time believing it. \"<i>I... I haven't had the chance to talk to anyone in years. It's been so long...</i>\" she murmurs to herself, and you think you see the start of a tear glinting in her eye. \"<i>Well, what do you want to talk about?</i>\" she asks, seemingly quite happy that's what you're here for.\n\n", false);
-				}
-				//[Amily is slightly pregnant]
-				else if(flags[kFLAGS.AMILY_INCUBATION] >= 90) {
-					outputText("\"<i>I could use someone to talk to, I suppose,</i>\" she says plainly, but you can clearly see that she's very happy that's what you want to do.\n\n", false);
-				}
-				//[Amily is heavily pregnant]
-				else {
-					outputText("\"<i>Oh, NOW you want to get to know me,</i>\" she complains, but her tone is gentle – amused even, and she clearly isn't as unhappy as her words may imply. Heavily, she sits herself down unceremoniously. \"<i>But... there are things weighing on my mind. I really could use somebody to talk to.</i>\"\n\n", false);
+			if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+				switch (pregnancy.event) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5: //Amily is slightly pregnant
+							outputText("\"<i>I could use someone to talk to, I suppose,</i>\" she says plainly, but you can clearly see that she's very happy that's what you want to do.\n\n", false);
+							break;
+					case 6:
+					case 7:
+					case 8: //Amily is heavily pregnant
+							outputText("\"<i>Oh, NOW you want to get to know me,</i>\" she complains, but her tone is gentle – amused even, and she clearly isn't as unhappy as her words may imply. Heavily, she sits herself down unceremoniously. \"<i>But... there are things weighing on my mind. I really could use somebody to talk to.</i>\"\n\n", false);
+							break;
+					default: //Amily is not pregnant
+							if (flags[kFLAGS.AMILY_MET_AS] == 2 && player.gender == 2) outputText("\"<i>A chat would be lovely,</i>\" she says, clearly enjoying herself.  \"<i>I... I hardly ever get a chance to find someone to chat with.  Sometimes it seems like everyone in Mareth just wants to breed non-stop...</i>\" she murmers to herself.  \"<i>Well, what shall we talk about?</i>\" she asks, seemingly quite happy with your presence.\n\n", false);
+							else outputText("\"<i>You want to talk? No sex?</i>\" she asks, clearly having a hard time believing it. \"<i>I... I haven't had the chance to talk to anyone in years. It's been so long...</i>\" she murmurs to herself, and you think you see the start of a tear glinting in her eye. \"<i>Well, what do you want to talk about?</i>\" she asks, seemingly quite happy that's what you're here for.\n\n", false);
 				}
 			}
 			//[Medium Affection]
-			else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
+			else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
 				outputText("\"<i>Of course, " + player.short + ", I always enjoy our talks.  What shall we discuss this time?</i>\" she asks happily.\n\n", false);
 			}
 			//[High Affection]
@@ -980,87 +1042,81 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			amilySprite();
 			outputText("You tell Amily that you came here because you wanted to talk with her.  If she feels like having sex when you are done, though, you would be happy to oblige.\n\n", false);
-			//outputText("You tell Amily that you came here because you wanted to have sex with her.
-			//[Amily is not pregnant]
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("\"<i>...Well, maybe you're not like everyone else in this world after all,</i>\" she finally answers. Though she walks away without a second word, she seems rather pleased by your answer.\n\n", false);
-
-					outputText("\"<i>Hey, hurry up!</i>\" she calls back over her shoulder. You snap out of your musings and follow her.\n\n", false);
-					//[/ Go to random [Conversation], then to [Low Affection Sex]]
-					doNext(2400);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She smiles at you. \"<i>Well... I was feeling a little tired, a little lonely, and... maybe a little horny. Why not?</i>\"\n\n", false);
-
-					outputText("She crooks a finger at you as a gesture to follow her.\n\n", false);
-					//[/ Go to random [Conversation], then to [Medium Affection Sex]]
-					doNext(2400);
-				}
-				//[High Affection]
-				else {
-					outputText("\"<i>Conversation with a wonderful friend, and a wonderful bout of lovemaking afterwards... Well, I guess that's what passes for true romance in this crazy, messed up world these days,</i>\" Amily notes. She tries to sound lighthearted, but you know her well enough to sense the tinge of pain and loss in her words. Undaunted, she starts to walk off, gesturing you to follow. \"<i>Come on; I can talk and walk at the same time, surely you can do the same?</i>\"\n\n", false);
-					doNext(2400);
-					//[/ Go to random [Conversation], then to [High Affection Sex]]
-				}
-			}
-			//[Amily is slightly pregnant]
-			else if(flags[kFLAGS.AMILY_INCUBATION] >= 90) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("She rubs her belly thoughtfully. \"<i>I guess a bit of conversation would be nice, after all this time. Sex, though? Maybe if you're lucky.</i>\" She's already heading off, encouraging you to follow her.\n\n", false);
-					//[/ Go to random [Conversation], then small chance of [Low Affection Sex]]
-					doNext(2399);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("\"<i>Talking to you is always nice... and, why the hell not? I'm not that big yet, I don't think?</i>\"\n\n", false);
-
-					outputText("You assure her that she still looks trim and lean to you.\n\n", false);
-
-					outputText("\"<i>Flatterer. Come on, I have something to eat back in my den.</i>\"\n\n", false);
-					//[/ Go to random [Conversation], then to [Medium Affection Sex]]
-					doNext(2400);
-				}
-				//[High Affection]
-				else {
-					outputText("\"<i>Well, I could maybe do without the sex part...</i>\" Amily muses, rubbing her chin. Then she grins. \"<i>We'll see how things work out, all right?</i>\"\n\n", false);
-
-					outputText("You assure her that's fine, and the two of you find a relatively comfortable patch to sit down on so you can talk.\n\n", false);
-					//[/ Go to random [Conversation], then to [High Affection Sex]]
-					doNext(2400);
-				}
-			}
-			//[Amily is heavily pregnant]
-			else {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("She stares at you, then smiles faintly. \"<i>Talk? Talk is good... it's so quiet here; I spent so many years without anybody to talk to. But sex? In my condition? No, I don't think so.</i>\"\n\n", false);
-
-					outputText("Despite her refusing the prospect of sex, she happily takes a seat on a toppled column and invites you to join her.\n\n", false);
-					//[/ Go to random [Conversation]]
-					doNext(2399);
-				}
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
-					outputText("She blinks in surprise. \"<i>The talk would be wonderful... but do you really want to have sex with me when I look like this? It gets kind of lonely around here without you, but isn't this,</i>\" she loudly claps her hand against her belly and continues, \"<i>Something of an obstacle? I mean, I don't know how we'd actually make it work.</i>\"\n\n", false);
-
-					outputText("You are forced to concede that you don't have any real ideas how sex between you would work with her in her current state.\n\n", false);
-
-					outputText("Amily smiles and pulls up a seat on a mound of leaf litter. \"<i>That's all right; you meant well. And even if we can't have sex, we can still talk. Anything on your mind in particular?</i>\"\n\n", false);
-					//[/ Go to random [Conversation]]
-					doNext(2399);
-				}
-				//[High Affection]
-				else {
-					outputText("She grins at you playfully. \"<i>It's just wonderful to finally have somebody to talk to after all these years. And maybe I'll let you make love to me afterwards, if you're a good listener.</i>\"\n\n", false);
-
-					outputText("She waddles over to something that – in the distant past – might have been a stone seat for public convenience, and seats herself upon it heavily. \"<i>So, what do you want to talk about?</i>\" she asks.\n\n", false);
-					//[/ Go to random [Conversation], then to [High Affection Sex – Heavily Pregnant Sex]]
-					doNext(2400);
-				}
+			switch (pregnancy.event) {
+				case 1: 
+				case 2: 
+				case 3: 
+				case 4: 
+				case 5: //Amily is slightly pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("She rubs her belly thoughtfully. \"<i>I guess a bit of conversation would be nice, after all this time. Sex, though? Maybe if you're lucky.</i>\" She's already heading off, encouraging you to follow her.\n\n", false);
+							//[/ Go to random [Conversation], then small chance of [Low Affection Sex]]
+							doNext(2399);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("\"<i>Talking to you is always nice... and, why the hell not? I'm not that big yet, I don't think?</i>\"\n\n", false);
+							outputText("You assure her that she still looks trim and lean to you.\n\n", false);
+							outputText("\"<i>Flatterer. Come on, I have something to eat back in my den.</i>\"\n\n", false);
+							//[/ Go to random [Conversation], then to [Medium Affection Sex]]
+							doNext(2400);
+						}
+						//[High Affection]
+						else {
+							outputText("\"<i>Well, I could maybe do without the sex part...</i>\" Amily muses, rubbing her chin. Then she grins. \"<i>We'll see how things work out, all right?</i>\"\n\n", false);
+							outputText("You assure her that's fine, and the two of you find a relatively comfortable patch to sit down on so you can talk.\n\n", false);
+							//[/ Go to random [Conversation], then to [High Affection Sex]]
+							doNext(2400);
+						}
+						break;
+				case 6:
+				case 7:
+				case 8: //Amily is heavily pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("She stares at you, then smiles faintly. \"<i>Talk? Talk is good... it's so quiet here; I spent so many years without anybody to talk to. But sex? In my condition? No, I don't think so.</i>\"\n\n", false);
+							outputText("Despite her refusing the prospect of sex, she happily takes a seat on a toppled column and invites you to join her.\n\n", false);
+							//[/ Go to random [Conversation]]
+							doNext(2399);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("She blinks in surprise. \"<i>The talk would be wonderful... but do you really want to have sex with me when I look like this? It gets kind of lonely around here without you, but isn't this,</i>\" she loudly claps her hand against her belly and continues, \"<i>Something of an obstacle? I mean, I don't know how we'd actually make it work.</i>\"\n\n", false);
+							outputText("You are forced to concede that you don't have any real ideas how sex between you would work with her in her current state.\n\n", false);
+							outputText("Amily smiles and pulls up a seat on a mound of leaf litter. \"<i>That's all right; you meant well. And even if we can't have sex, we can still talk. Anything on your mind in particular?</i>\"\n\n", false);
+							//[/ Go to random [Conversation]]
+							doNext(2399);
+						}
+						//[High Affection]
+						else {
+							outputText("She grins at you playfully. \"<i>It's just wonderful to finally have somebody to talk to after all these years. And maybe I'll let you make love to me afterwards, if you're a good listener.</i>\"\n\n", false);
+							outputText("She waddles over to something that – in the distant past – might have been a stone seat for public convenience, and seats herself upon it heavily. \"<i>So, what do you want to talk about?</i>\" she asks.\n\n", false);
+							//[/ Go to random [Conversation], then to [High Affection Sex – Heavily Pregnant Sex]]
+							doNext(2400);
+						}
+						break;
+				default: //Amily is not pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) {
+							outputText("\"<i>...Well, maybe you're not like everyone else in this world after all,</i>\" she finally answers. Though she walks away without a second word, she seems rather pleased by your answer.\n\n", false);
+							outputText("\"<i>Hey, hurry up!</i>\" she calls back over her shoulder. You snap out of your musings and follow her.\n\n", false);
+							//[/ Go to random [Conversation], then to [Low Affection Sex]]
+							doNext(2400);
+						}
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+							outputText("She smiles at you. \"<i>Well... I was feeling a little tired, a little lonely, and... maybe a little horny. Why not?</i>\"\n\n", false);
+							outputText("She crooks a finger at you as a gesture to follow her.\n\n", false);
+							//[/ Go to random [Conversation], then to [Medium Affection Sex]]
+							doNext(2400);
+						}
+						//[High Affection]
+						else {
+							outputText("\"<i>Conversation with a wonderful friend, and a wonderful bout of lovemaking afterwards... Well, I guess that's what passes for true romance in this crazy, messed up world these days,</i>\" Amily notes. She tries to sound lighthearted, but you know her well enough to sense the tinge of pain and loss in her words. Undaunted, she starts to walk off, gesturing you to follow. \"<i>Come on; I can talk and walk at the same time, surely you can do the same?</i>\"\n\n", false);
+							//[/ Go to random [Conversation], then to [High Affection Sex]]
+							doNext(2400);
+						}
 			}
 		}
 
@@ -1070,32 +1126,36 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("Reasoning that it's best not to scare someone like Amily, you clear your throat nosily. Amily whirls around to face you and immediately draws her knife into a defensive position. When she sees that it's you, she blinks a few times.\n\n", false);
 
-			//[Amily is not pregnant]
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>How on earth did you get here? Nobody's ever been able to track me!</i>\" she protests. Then she shakes her head. \"<i>Ah well, I guess if it's you, it's no matter. So, whaddya want?</i>\"\n\n", false);
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Hmm... I'll have to work on that; I can't let just any bozo trail me,</i>\" she proclaims, smiling mischievously. \"<i>What's up?</i>\"\n\n", false);
-				//[High Affection]
-				else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n", false);
-			}
-			//[Amily is slightly pregnant]
-			else if(flags[kFLAGS.AMILY_INCUBATION] > 90) {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>I guess maybe I'm starting to slow down with this hanging off of me,</i>\" she grumbles. \"<i>Something you wanted?</i>\"\n\n", false);
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Be honest – did this make me easier to find?</i>\" she asks, pushing out her belly for emphasis. Then, seemingly uncaring about the answer, she changes the subject. \"<i>Is there a reason you wanted to see me?</i>\"\n\n", false);
-				//High Affection
-				else outputText("\"<i>I may be pregnant, but I didn't make this any easier on you now, did I?</i>\" She smirks. \"<i>It takes great skill to find me... but what is your reason?</i>\"\n\n", false);
-			}
-			//[Amily is heavily pregnant]
-			else {
-				//[Low Affection]
-				if(flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>The only reason you could possibly find me is because this huge belly makes me too slow to move quickly and too big to hide. You know that, don't you?</i>\" she proclaims defensively, before changing her tone and asking curiously, \"<i>...Why are you here, anyway?</i>\"\n\n", false);
-				//[Medium Affection]
-				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>I guess it's not as easy for me to hide as it once was. So, why are you here?</i>\"\n\n", false);
-				//[High Affection]
-				else outputText("\"<i>It's not easy for me to run and hide anymore, these days. I'm glad you decided to do the guardian angel act. So, how can I thank you for coming to check on me?</i>\"\n\n", false);
+			switch (pregnancy.event) {
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5: //Amily is slightly pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>I guess maybe I'm starting to slow down with this hanging off of me,</i>\" she grumbles. \"<i>Something you wanted?</i>\"\n\n", false);
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Be honest – did this make me easier to find?</i>\" she asks, pushing out her belly for emphasis. Then, seemingly uncaring about the answer, she changes the subject. \"<i>Is there a reason you wanted to see me?</i>\"\n\n", false);
+						//High Affection
+						else outputText("\"<i>I may be pregnant, but I didn't make this any easier on you now, did I?</i>\" She smirks. \"<i>It takes great skill to find me... but what is your reason?</i>\"\n\n", false);
+						break;
+				case 6:
+				case 7:
+				case 8: //Amily is heavily pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>The only reason you could possibly find me is because this huge belly makes me too slow to move quickly and too big to hide. You know that, don't you?</i>\" she proclaims defensively, before changing her tone and asking curiously, \"<i>...Why are you here, anyway?</i>\"\n\n", false);
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>I guess it's not as easy for me to hide as it once was. So, why are you here?</i>\"\n\n", false);
+						//[High Affection]
+						else outputText("\"<i>It's not easy for me to run and hide anymore, these days. I'm glad you decided to do the guardian angel act. So, how can I thank you for coming to check on me?</i>\"\n\n", false);
+						break;
+				default: //Amily is not pregnant
+						//[Low Affection]
+						if (flags[kFLAGS.AMILY_AFFECTION] < 15) outputText("\"<i>How on earth did you get here? Nobody's ever been able to track me!</i>\" she protests. Then she shakes her head. \"<i>Ah well, I guess if it's you, it's no matter. So, whaddya want?</i>\"\n\n", false);
+						//[Medium Affection]
+						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Hmm... I'll have to work on that; I can't let just any bozo trail me,</i>\" she proclaims, smiling mischievously. \"<i>What's up?</i>\"\n\n", false);
+						//[High Affection]
+						else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n", false);
 			}
 			//Sex / Talk / Talk then sex
 			if(player.lust >= 33) simpleChoices("Sex",sexWithAmily,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
@@ -1128,7 +1188,7 @@ package classes.Scenes.NPCs
 				else {
 					outputText("\"<i>You idiot! You moron! You-you-you!</i>\" she trails off incoherently, even as she practically bowls you over in her desperation to check your wound. Her touches are gentle, and she looks relieved to see it's only a flesh wound. Reaching into a pouch you hadn't noticed before, she quickly begins to bind it. \"<i>It's only a minor injury; you'll be okay... but don't you ever startle me like that again!</i>\" she squeaks loudly. \"<i>I could have hurt you - did you even think about that? About what would happen if I actually hurt you?</i>\"", false);
 					//[If Amily is pregnant]
-					if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  \"<i>Do you want our children to grow up without their father?</i>\" she asks softly, touching her bulging belly with one hand.\n\n", false);
+					if (pregnancy.isPregnant) outputText("  \"<i>Do you want our children to grow up without their father?</i>\" she asks softly, touching her bulging belly with one hand.\n\n", false);
 					outputText("\n\n", false);
 
 					outputText("You apologize for your foolishness, and promise it won't happen again.\n\n", false);
@@ -2027,18 +2087,19 @@ package classes.Scenes.NPCs
 				simpleChoices("Business",amilySexBusiness,"Playtime 1st",amilySexPlaytimeFirst,"",0,"",0,"",0);
 			}
 			//Moderate Affection Sex:
-			else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
+			else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
+				var pregEvent:int = pregnancy.event;
 				outputText("Amily leads you to her nest as quickly as ever, but things are a little different this time. You can tell Amily has what can only be described as a 'spring in her step'. She moves just a little bit quicker, she seems more enthusiastic about the prospect - her tail even waves slowly from side to side, a bit of body language you haven't seen from her before. And you're certain there's a bit of a seductive wiggle to her hips - which you definitely haven't seen from her before.", false);
 				//(If Amily is Slightly Pregnant:
-				if(flags[kFLAGS.AMILY_INCUBATION] >= 90) outputText("  However, she does sometimes touch the swell signifying the litter growing inside her, and when she does her attitude becomes uncertain and nervous.", false);
+				if (pregEvent >= 1 && pregEvent <= 5) outputText("  However, she does sometimes touch the swell signifying the litter growing inside her, and when she does her attitude becomes uncertain and nervous.", false);
 				outputText("\n\n", false);
 
 				outputText("Once you are inside, Amily gently tries to push you onto the bedding where you will be mating. Once you are seated, she smiles at you with a teasing expression and begins to slowly strip herself off, clearly trying to make the act seem as erotic as possible.", false);
-				if(flags[kFLAGS.AMILY_INCUBATION] > 90) outputText("  However, her confidence visibly slips when she has to fully bare the bulging belly that marks her pregnant state, but she musters the confidence and starts to show it off for you as well.", false);
+				if (pregEvent >= 6) outputText("  However, her confidence visibly slips when she has to fully bare the bulging belly that marks her pregnant state, but she musters the confidence and starts to show it off for you as well.", false);
 				simpleChoices("Step In",amilyStepTheFuckIn,"Watch Show",amilyEnjoyShow,"",0,"",0,"",0);
 			}
 			else {
-				if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] < 90) fuckAmilyPreg();
+				if (pregnancy.event >= 6) fuckAmilyPreg();
 				else amilyHighAffectionSecks();
 			}
 
@@ -2160,7 +2221,7 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			amilySprite();
 			outputText("Surprised, curious and aroused in equal measures, you decide to sit back and watch the show. Amily seems very happy to perform for you, and does her best to make it as intriguing as possible.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 90) outputText("  Even though she was clearly a little nervous about her gravid state in the beginning, as she continues, she grows in confidence to the point it seems she has almost forgotten about it.", false);
+			if (pregnancy.event >= 6) outputText("  Even though she was clearly a little nervous about her gravid state in the beginning, as she continues, she grows in confidence to the point it seems she has almost forgotten about it.", false);
 			outputText("\n\n", false);
 			AmilyMidSexLevel2();
 		}
@@ -2261,11 +2322,11 @@ package classes.Scenes.NPCs
 			amilySprite();
 			var x:Number = player.cockThatFits(61);
 			outputText("Amily really didn't waste any time getting to her hidden bedroom, sprinting as fast as she could with you in tow.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  Even in a slightly pregnant state, she goes surprisingly fast, though she's also rather cautious of her small bump.", false);
+			if (pregnancy.isPregnant) outputText("  Even in a slightly pregnant state, she goes surprisingly fast, though she's also rather cautious of her small bump.", false);
 			outputText("\n\n", false);
 
 			outputText("Once inside, the two of you get to work undoing each others clothes, tossing the garments across the room with little care for them. Amily bites her lower lip as she examines your naked form again, before practically jumping you. She wraps her small hands around your stiff " + Appearance.cockNoun(player.cocks[x].cockType) + " in an almost painful fashion, rubbing and teasing it, and presses her mouth against yours, her tongue exploring every inch of your mouth that it can reach, and you quickly respond by doing the same favor for Amily.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  Really it seems the only thing between you two now is Amily's small stomach bulge.", false);
+			if (pregnancy.isPregnant) outputText("  Really it seems the only thing between you two now is Amily's small stomach bulge.", false);
 			//(If Amily is herm:
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  You can feel her erection, hot and solid, pressed between your two bodies.", false);
 			outputText("\n\n", false);
@@ -2276,33 +2337,33 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] == 0) outputText("sucking on her sensitive clit", false);
 			else outputText("licking and kissing her human-like cock", false);
 			outputText(" to stimulate her further. In response, Amily moans loudly and spreads her legs further apart, an invitation to continue. You happily oblige your lover, burying two fingers into her wet cunt while you move to other parts of her body.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  As you move your head across her beautiful form, you stop at her growing baby bump and give it a small kiss.", false);
+			if (pregnancy.isPregnant) outputText("  As you move your head across her beautiful form, you stop at her growing baby bump and give it a small kiss.", false);
 			outputText("  Your head hovers at her breasts", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText(", which seem to have grown from the pregnancy,", false);
+			if (pregnancy.isPregnant) outputText(", which seem to have grown from the pregnancy,", false);
 			outputText(" and get to work licking and suckling her nipples, rubbing the sensitive mounds.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  When you get a dribble of milk in your mouth it surprises you, but you certainly don't stop.  \"<i>Hah...You're going to have to teach the children how that's done,</i>\" Amily says, in between fevered breaths.", false);
+			if (pregnancy.isPregnant) outputText("  When you get a dribble of milk in your mouth it surprises you, but you certainly don't stop.  \"<i>Hah...You're going to have to teach the children how that's done,</i>\" Amily says, in between fevered breaths.", false);
 			outputText("\n\n", false);
 
 			outputText("By the time you start teasing her neck and collarbone, Amily's hands are clinging onto your back and she's impatiently grinding against your raging erection.  \"<i>Please don't tease me anymore,</i>\" Amily whispers into your ear, making you almost feel a little bad for teasing your love in such a way.\n\n", false);
 
 			outputText("As an apology you quickly push your " + cockDescript(x) + " past her dampened nether-lips, and set to work thrusting in and out of your mousegirl lover.", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  You are of course mindful of her baby bump, not going too fast and making sure you're in a position that's comfortable for the two of you, not wanting to harm your future offspring with the lovely mouse maiden.", false);
+			if (pregnancy.isPregnant) outputText("  You are of course mindful of her baby bump, not going too fast and making sure you're in a position that's comfortable for the two of you, not wanting to harm your future offspring with the lovely mouse maiden.", false);
 			outputText("  It's not too long before you're going at a regular pace, stuffing Amily's fuckhole with your familiar manhood.\n\n", false);
 
 			outputText("Amily moans from the pleasure and raises her hips up to meet your thrusts, desperate for more of your loving.  She whispers a few dirty things to you between shallow breaths, \"<i>", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("Fill me up with everything you have... I want to be a mother for your children, just as much as I want to be a mother of my own people,", false);
+			if (!pregnancy.isPregnant) outputText("Fill me up with everything you have... I want to be a mother for your children, just as much as I want to be a mother of my own people,", false);
 			else outputText("No need to hold back, pump as much cum into me as you can,", false);
 			outputText("</i>\" she whispers in a sultry tone, and her words are enough to send you over the edge. You grunt loudly, feeling as if your cock is about to explode from the exertion, blasting Amily so full of your cum that it starts to ooze out. Amily gives a cute little cry, and her vaginal walls clamp down on your sensitive member with enough force to make you wince as girlcum sprays out onto your thighs", false);
 			//(if Amily is herm:
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(" and cum spurts into the air between you, splattering on you both", false);
 			outputText(".\n\n", false);
 
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("\"<i>If that didn't knock me up... I don't care as much as you'd think. It was magnificent either way,", false);
+			if (!pregnancy.isPregnant) outputText("\"<i>If that didn't knock me up... I don't care as much as you'd think. It was magnificent either way,", false);
 			else outputText("\"<i>Hmm...My kids are pretty lucky that their father is such a virile specimen,", false);
 			outputText("</i>\" Amily says as she catches her breath, reaching up to ruffle your hair. You give her a bashful smile, glad to see you've made her so happy.\n\n", false);
 
 			outputText("The two of you lie together for some time, and it's with great regret that you tell her that you need to check in on your own camp. Amily seems disappointed, not wanting you to leave, but understands why you need to go. \"<i>", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("Okay... Well, I'm sure you'll be back. I will need your help again if this doesn't set,", false);
+			if (!pregnancy.isPregnant) outputText("Okay... Well, I'm sure you'll be back. I will need your help again if this doesn't set,", false);
 			else outputText("Okay dear...But you better come back some time. You don't want your children to have abandonment issues, do you?", false);
 			outputText("</i>\" Amily says while rubbing her stomach. You smile at her and nod, promising you'll come back, before setting off for your own camp.", false);
 			/*OLD
@@ -2409,14 +2470,14 @@ package classes.Scenes.NPCs
 			}
 			
 			//Cant repreg if already preg!
-			if (flags[kFLAGS.AMILY_INCUBATION] > 0) return;
+			if (pregnancy.isPregnant) return;
 			
 			// Cant preg if at the farm
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) return;
 			
 			//25% + gradually increasing cumQ bonus
-			if(rand(4) == 0 || player.cumQ() > rand(1000)) {
-				flags[kFLAGS.AMILY_INCUBATION] = 168;
+			if (rand(4) == 0 || player.cumQ() > rand(1000)) {
+				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily completes her pregnancies much faster than a regular player
 			}
 		}
 
@@ -2431,7 +2492,7 @@ package classes.Scenes.NPCs
 				amilyEggStuff();
 				return;
 			}
-			if(flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] == 30 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
 				amilyIncest();
 				return;
 			}
@@ -2445,10 +2506,10 @@ package classes.Scenes.NPCs
 			//Clear warning if PC is good!
 			if(player.cor < 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
 			//Preggo birthing!
-			if(flags[kFLAGS.AMILY_INCUBATION] == 1 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+			if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				outputText("", true);
 				amilyPopsOutKidsInCamp();
-				flags[kFLAGS.AMILY_INCUBATION] = 0;
+				pregnancy.knockUpForce(); //Clear Pregnancy
 				doNext(13);
 				return;
 			}
@@ -2495,40 +2556,30 @@ package classes.Scenes.NPCs
 					}
 				}
 			}
-
-			//NOT PREG
-			if(flags[kFLAGS.AMILY_INCUBATION] > 150) {}
-			//PREG
-			else {
-				//PURE
-				if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-					//Stage 1:
-					if(flags[kFLAGS.AMILY_INCUBATION] > 120) outputText("You notice that Amily seems to be ill. Of course, you at once go to her and ask her what's wrong, but she only smiles at you and says that it's all right. Your incomprehension must show on your face, since Amily giggles, puts her arms around you and kisses you. \"<i>Silly " + player.mf("boy","girl") + "... You're going to be a father... again...</i>\"\n\n", false);
-					//Stage 2:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 96) outputText("Amily's belly is starting to protrude a little. She's unquestionably pregnant.\n\n", false);
-					//Stage 3:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 72) outputText("Amily's belly has gotten very big. She must be carrying more than one child.\n\n", false);
-					//Stage 4:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 48) outputText("Amily's swollen stomach moves on occasion, warranting an unthinking pat from her to calm the restless children within.\n\n", false);
-					//Stage 5:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 1) outputText("Amily's bulge frequently wriggles and squirms, though this doesn't seem to bother her. The children mustn't have too much longer until they are born.\n\n", false);
-				}
-				//CORRUPT
-				else {
-					//Stage 1:
-					if(flags[kFLAGS.AMILY_INCUBATION] > 120)
-						outputText("You notice that Amily seems to be ill. Despite that, she seems to be happy about something. You wonder what could be going on, and decide to ask; Amily grins at you. \"<i>Oh, " + player.mf("master", "mistress") + "! You did it! You're going to be a father... I can't wait to birth many more mouse-sluts for you, " + player.mf("master", "mistress") + ".</i>\"\n\n", false);
-					//Stage 2:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 96)
-						outputText("Amily's belly is starting to protrude a little. She's unquestionably pregnant.\n\n", false);
-					//Stage 3:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 72)
-						outputText("Amily's belly has gotten very big. She must be carrying more than one child.\n\n", false);
-					//Stage 4:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 48) outputText("Amily's swollen stomach moves on occasion, warranting a stroke from her to urge the restless children within to come out soon.\n\n", false);
-					//Stage 5:
-					else if(flags[kFLAGS.AMILY_INCUBATION] > 1) outputText("Amily's bulge frequently wriggles and squirms, though this doesn't seem to bother her. She smiles with glee, the children mustn't have too much longer until they are born.\n\n", false);
-				}
+			
+			switch (pregnancy.event) {
+				case 2: if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
+							outputText("You notice that Amily seems to be ill. Of course, you at once go to her and ask her what's wrong, but she only smiles at you and says that it's all right. Your incomprehension must show on your face, since Amily giggles, puts her arms around you and kisses you. \"<i>Silly " + player.mf("boy", "girl") + "... You're going to be a father... again...</i>\"\n\n", false);
+						}
+						else { //Corrupt
+							outputText("You notice that Amily seems to be ill. Despite that, she seems to be happy about something. You wonder what could be going on, and decide to ask; Amily grins at you. \"<i>Oh, " + player.mf("master", "mistress") + "! You did it! You're going to be a father... I can't wait to birth many more mouse-sluts for you, " + player.mf("master", "mistress") + ".</i>\"\n\n", false);
+						}
+						break;
+				case 3:
+				case 4: outputText("Amily's belly is starting to protrude a little. She's unquestionably pregnant.\n\n", false);
+						break;
+				case 5:
+				case 6: outputText("Amily's belly has gotten very big. She must be carrying more than one child.\n\n", false);
+						break;
+				case 7: if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
+							outputText("Amily's swollen stomach moves on occasion, warranting an unthinking pat from her to calm the restless children within.\n\n", false);
+						}
+						else { //Corrupt
+							outputText("Amily's swollen stomach moves on occasion, warranting a stroke from her to urge the restless children within to come out soon.\n\n", false);
+						}
+						break;
+				case 8: outputText("Amily's bulge frequently wriggles and squirms, though this doesn't seem to bother her. " + (flags[kFLAGS.AMILY_FOLLOWER] == 1 ? "T" : "She smiles with glee, t") + "he children mustn't have too much longer until they are born.\n\n", false);
+				default:
 			}
 			amilyMenu(true);
 		}
@@ -2557,7 +2608,7 @@ package classes.Scenes.NPCs
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
 				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur, "", 0, "", 0, "", 0, "", 0, "Back", camp.campSlavesMenu);
 				
-				if (flags[kFLAGS.AMILY_INCUBATION] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
+				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm);
 				}
@@ -2760,7 +2811,7 @@ package classes.Scenes.NPCs
 					bText = "MakeBabies";
 					babies = 2775;
 					//Send make babies to an appropriate override
-					if(izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
+					if (izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && !izmaScene.pregnancy.isPregnant && !pregnancy.isPregnant) {
 						babies = 3989;
 					}
 				}
@@ -3008,7 +3059,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Flatterer.</i>\" Is all that she says, but she's smiling happily, even as you both clean up and go your seperate ways again.", false);
 			//PREGGO CHECK HERE
 			if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-				player.knockUp(player.PREGNANCY_AMILY, player.INCUBATION_MOUSE);
+				player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			doNext(13);
 			player.orgasm();
@@ -3177,7 +3228,7 @@ package classes.Scenes.NPCs
 				outputText("Slowly, she raises her head and pecks you affectionately on the lips. \"<i>Thank you,</i>\" is all she says, continuing to lay there with you for a while. Then she picks herself up and walks away, and you do the same.", false);
 				//PREGGO CHECK HERE
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-					player.knockUp(player.PREGNANCY_AMILY, player.INCUBATION_MOUSE);
+					player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 				}
 				player.orgasm();
 				dynStats("sen", -1);
@@ -4417,7 +4468,7 @@ package classes.Scenes.NPCs
 
 			outputText("You tell Amily to spread her legs and begin undressing, peeling off your " + player.armorName + " piece by piece. Amily doesn't even bother to speak to you; she simply grins in delight, moisture already beginning to flow from her gaping pink vagina.\n\n", false);
 			//(If pregnant:
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] < 100) outputText("  Her gravid state doesn't faze her; indeed, she thrusts her bump forward proudly, a visible sign of your mastery over her.", false);
+			if (pregnancy.event >= 3) outputText("  Her gravid state doesn't faze her; indeed, she thrusts her bump forward proudly, a visible sign of your mastery over her.", false);
 			outputText("  She flops down onto her " + amilyButt() + " and rolls backwards, spreading her legs out eagerly for you to have access and waving them like hungry, groping limbs, reaching for you in her impatience to start.  You grin in delight, but decide to tease the slutty "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mousette":"succubus")+" by staying just out of the reach of her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"foot-claws":"shapely feet")+".  \"<i>If you want it, then tell me just how much you want it slut,</i>\" you tease her mockingly, stroking your " + cockDescript(0) + " into erection. "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?" Just watch the heels, and don't dare injure your master.":""), false);
 			//[(if PC has a vagina)
 			if(player.hasVagina()) outputText("  Your other hand probes your moist fuck-hole for lube to help with your stroking.", false);
@@ -4425,7 +4476,7 @@ package classes.Scenes.NPCs
 
 			outputText("Amily doesn't even roll her eyes, she is that much of a helplessly loyal slut for you. \"<i>I want it, " + player.mf("master","mistress") + "! I want it more than anything else! I'm a cum-dumpster, a baby factory - I need cum in my hungry pussy, or I'll just fade away! Please, " + player.mf("master","mistress") + ", pump me full of your hot, salty, gooey cum!", false);
 			//(If not pregnant:
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("  I want you to fuck me full of cum, bloat me with seed until I'm a ball of skin over spooge with a head and limbs sticking out! I need to be full and round with the very stuff of life; fucking cum into me, " + player.mf("master","mistress") + "!", false);
+			if (!pregnancy.isPregnant) outputText("  I want you to fuck me full of cum, bloat me with seed until I'm a ball of skin over spooge with a head and limbs sticking out! I need to be full and round with the very stuff of life; fucking cum into me, " + player.mf("master","mistress") + "!", false);
 			//(If pregnant:
 			else outputText("  The babies need their cum, " + player.mf("Master","Mistress") + ". They won't grow strong and healthy and slutty if you don't flood their womb with your hot baby-making juice! Please, cum and fill me with cum, for their sake?", false);
 			outputText("</i>\"\n\n", false);
@@ -4465,7 +4516,7 @@ package classes.Scenes.NPCs
 
 			outputText("You feel it's time to end this. With one last vicious thrust, you cause Amily to dig slightly into the floor and cum. Painting her walls all the way to her womb, you unload.  Even her cervix is unable to stop the torrent you unleash upon her.", false);
 			//[(If Amily is pregnant)
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  You wonder if your unborn children will appreciate their bath. Their mother certainly does.", false);
+			if (pregnancy.isPregnant) outputText("  You wonder if your unborn children will appreciate their bath. Their mother certainly does.", false);
 			//(If not squirter:
 			if(flags[kFLAGS.AMILY_VAGINAL_WETNESS] < 5) outputText("  Her fluids slop wetly over your crotch, painting between your legs with her lubricant.", false);
 			//(If squirter:
@@ -4478,7 +4529,7 @@ package classes.Scenes.NPCs
 			//[(if PC has large cum amount)
 			if(player.cumQ() >= 1000) {
 				//(if Amily is not pregnant)
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("  Amily's womb is so full of cum that it's bloated as if she was carrying a full litter of mousy sluts ready to birth.", false);
+				if (!pregnancy.isPregnant) outputText("  Amily's womb is so full of cum that it's bloated as if she was carrying a full litter of mousy sluts ready to birth.", false);
 				//(else)
 				else outputText("  Amily's belly looks ready to explode; besides the litter she's carrying, you've also filled her with enough cum to feed the little mousy sluts for week.", false);
 			}
@@ -4487,7 +4538,7 @@ package classes.Scenes.NPCs
 			if(player.hasVagina()) outputText("  Despite being neglected during the act, your " + vaginaDescript() + " leaks fluids to join Amily's on the floor.", false);
 			outputText("  Amily pants loudly and sighs in satisfaction. Hesitantly, one hand dares to reach out and stroke your " + player.face() + ". \"<i>Mmm... You are the light of my world, " + player.mf("master","mistress") + ".", false);
 			//(if not pregnant:
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("  I can only hope you've knocked me up, so I can do what I was made for,", false);
+			if (!pregnancy.isPregnant) outputText("  I can only hope you've knocked me up, so I can do what I was made for,", false);
 			else outputText("  I almost wish I wasn't pregnant, just so I could have the pleasure of knowing you've knocked me up,", false);
 			outputText("</i>\" she tells you softly.\n\n", false);
 
@@ -4566,7 +4617,7 @@ package classes.Scenes.NPCs
 			else outputText("  If she did, you'll just have to tie her up and get someone to return the favor...", false);
 
 			//Preg chanceeee
-			player.knockUp(player.PREGNANCY_MOUSE, player.INCUBATION_MOUSE);
+			player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 			player.orgasm();
 			dynStats("sen", -2, "cor", 2);
 
@@ -4774,12 +4825,12 @@ package classes.Scenes.NPCs
 
 			outputText("You smile and reach up to stroke her cheek. She smiles back and reaches down to pat you on your belly.", false);
 			//(If player is preg
-			if (player.pregnancyType == player.PREGNANCY_AMILY && player.pregnancyIncubation > 0) outputText("\"<i>Boy, this is weird. I'm a woman and I'm going to be a dad.", false);
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) outputText("\"<i>Boy, this is weird. I'm a woman and I'm going to be a dad.", false);
 			//not preg yet!
 			else {
 				outputText("\"<i>Let's see if you'll be a mommy from this load... If not, well, I guess we'll have to try again.", false);
 				//PREGGO CHECK HERE
-				player.knockUp(player.PREGNANCY_AMILY, player.INCUBATION_MOUSE);
+				player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			outputText("</i>\"  Chuckling softly, you lay there and embrace your lover for a time and then, reluctantly, you get dressed and leave.", false);
 			player.orgasm();
@@ -5400,14 +5451,22 @@ package classes.Scenes.NPCs
 
 			outputText("Curious about how Amily is holding up, you head back into the ruined village. This time, you don't bother making any secret of your presence, hoping to attract Amily's attention quicker. After all, she did say that the place is basically empty of anyone except her, and you can handle a measly Imp or Goblin.\n\n", false);
 
-			//(If Amily is not pregnant:)
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("It doesn't take long for Amily to materialize out of the ruins. Her blowpipe and dagger are both thrust into her belt, and she's still wearing the same tattered clothes as before.\n\n", false);
-
-			//(If Amily is slightly pregnant:)
-			else if(flags[kFLAGS.AMILY_INCUBATION] > 90) outputText("Amily materializes out of the ruins, somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly strokes it with one hand, as if confirming its presence to herself.\n\n", false);
-
-			//(If Amily is heavily pregnant:)
-			else outputText("It takes several minutes before Amily appears - but when you can see her, you marvel that she got to you as quickly as she did. Her stomach is hugely swollen, and one of her hands actually cradles underneath its rounded expanse as if trying to hold it up. She is pantsless, evidently no longer able to fit into them with this firm orb of a belly, and her shirt drapes loosely, barely managing to cover its upper half. Her belt, where she hangs her blowpipe and dagger, has been tied around her upper chest, between her breasts and her bulge, so she can still carry them effectively.\n\n", false);
+			switch (pregnancy.event) {
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5: //Amily is slightly pregnant
+						outputText("Amily materializes out of the ruins, somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly strokes it with one hand, as if confirming its presence to herself.\n\n", false);
+						break;
+				case 6:
+				case 7:
+				case 8: //Amily is heavily pregnant
+						outputText("It takes several minutes before Amily appears - but when you can see her, you marvel that she got to you as quickly as she did. Her stomach is hugely swollen, and one of her hands actually cradles underneath its rounded expanse as if trying to hold it up. She is pantsless, evidently no longer able to fit into them with this firm orb of a belly, and her shirt drapes loosely, barely managing to cover its upper half. Her belt, where she hangs her blowpipe and dagger, has been tied around her upper chest, between her breasts and her bulge, so she can still carry them effectively.\n\n", false);
+						break;
+				default: //Amily is not pregnant
+					outputText("It doesn't take long for Amily to materialize out of the ruins. Her blowpipe and dagger are both thrust into her belt, and she's still wearing the same tattered clothes as before.\n\n", false);
+			}
 
 			outputText("\"<i>Hey there, " + player.short + ", how... are you?</i>\" She trails off with a troubled expression. \"<i>You seem different...</i>\" She murmurs, studying you intently, and then she obviously comes to a sudden realization. \"<i>Have you had contact with demons!? You... This feeling... You're corrupted!</i>\" You take a step towards her, causing her to leap back. \"<i>N-No! Stay away!</i>\" She yells, hand darting towards her blowpipe. She spits a dart right at you!\n\n", false);
 
@@ -5822,7 +5881,7 @@ package classes.Scenes.NPCs
 
 				outputText("She looks to you pleadingly and says, \"<i>I love getting knocked up too, " + player.mf("master","mistress") + ". I could birth you many mice to worship you like you deserve; and then we could all fuck. Oh, " + player.mf("master","mistress") + "!", false);
 				//[(if Amily's pregnant)
-				if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  I can't wait to give birth to this batch of mice, just so I can get pregnant again.", false);
+				if (pregnancy.isPregnant) outputText("  I can't wait to give birth to this batch of mice, just so I can get pregnant again.", false);
 				//(else)
 				else outputText("  Can you please knock me up? I don't care how, just order me to fuck until I get pregnant.", false);
 				outputText("</i>\"\n\n", false);
@@ -6494,9 +6553,9 @@ package classes.Scenes.NPCs
 			//Add corrupted amily flag here
 			flags[kFLAGS.AMILY_FOLLOWER] = 2;
 			//Switch to less lovey pregnancy!
-			if (player.pregnancyType == player.PREGNANCY_AMILY) player.pregnancyType = player.PREGNANCY_MOUSE;
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 			//Make babies disappear
-			flags[kFLAGS.AMILY_INCUBATION] = 0;
+			//pregnancyStore.knockUpForce(); //Clear Pregnancy - though this seems unneccessary to me. Maybe it was needed in an older version of the code?
 			//Set other flags if Amily is moving in for the first time
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] == 0) {
 				flags[kFLAGS.AMILY_CUP_SIZE] = 5;
@@ -6704,7 +6763,7 @@ package classes.Scenes.NPCs
 			//Enable village encounters
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 			//Change to plain mouse birth!
-			if (player.pregnancyType == player.PREGNANCY_AMILY) player.pregnancyType = player.PREGNANCY_MOUSE;
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 		}
 
 		//Amily's Return:
@@ -6843,7 +6902,7 @@ package classes.Scenes.NPCs
 		public function dateNightFirstTime():void {
 			outputText("", true);
 			outputText("Sitting Amily down, you ask her what she'd think about taking a \"<i>little trip</i>\" with you into town.\n\n", false);
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) {
+			if (pregnancy.isPregnant) {
 				outputText("\"<i>Perhaps once I'm no longer pregnant.  I wouldn't want to hurt the little ones,</i>\" Amily answers.");
 				doNext(amilyFollowerEncounter);
 				return;
@@ -7314,7 +7373,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>I suppose I could be persuaded, you <b>do</b> look like you need a little attention...</i>\"  You feel a hand slipping down into your [armor] as she cranes her neck, moaning quietly as her searching fingers find their way to your [if (hasCock = true) stiffening shaft][if (isHerm = true)  and ][if (hasVagina = true) slick snatch]");
 			if(player.gender == 0) outputText("blank groin");
 			outputText(", teasing you into unconsciously humping against her slender digits.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  \"<i>But try to remember that I'm already carrying.  I don't want it getting too cramped in there; so make sure you don't miss, alright?</i>\"");
+			if (pregnancy.isPregnant) outputText("  \"<i>But try to remember that I'm already carrying.  I don't want it getting too cramped in there; so make sure you don't miss, alright?</i>\"");
 			outputText("\n\nYour try to clear your mind as the pleasure starts to overwhelm you, ovipositor extending fully whilst you attempt to focus and decide how to proceed.");
 			//[Anal]
 			doNext(layEggsInAmilysCorruptedHole);
@@ -7398,8 +7457,13 @@ package classes.Scenes.NPCs
 			outputText("penis, a rush of eggs engorges your shaft, leaving your abdomen feeling as light as air.  Amily moans as egg after egg pushes past her ring, still playing with her rear whilst you finish filling her with your clutch, her stomach pressing gently against yours as it bulges with her new load.  Before long the last egg slips out of the tip of your ovipositor and it begins to withdraw reflexively, slipping from its tight confines far more easily that it entered due to the impossible amount of slime that lines Amily's passage.  It cascades from her once you fully withdraw, covering you with a thick layer of the stuff as you both lie there, slowly drifting off to sleep.");
 			//[Next]
 			player.orgasm();
-			if(player.fertilizedEggs() > 0) {
-				flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] = 96;
+			if (player.fertilizedEggs() > 0) {
+				if (player.canOvipositSpider()) {
+					pregnancy.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 304); //(96)
+				}
+				else if (player.canOvipositBee()) {
+					pregnancy.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE + 48); //(96)
+				}
 				flags[kFLAGS.AMILY_OVIPOSITED_COUNT] = player.eggs();
 			}
 			player.dumpEggs();
@@ -7420,17 +7484,16 @@ package classes.Scenes.NPCs
 			else outputText("squeezes her shaft");
 			outputText(" with one hand, the other catching your eye as it moves beneath her top, apparently caressing her breasts.");
 			outputText("\n\nThe sight surprises you so much that it takes a few moments of dumbstruck staring to notice the small pile of glistening orbs gathering between Amily's thighs.  Realisation quickly hits you as another slime-covered sphere joins them, easing its way out of the girl's tight ass to a chorus of soft moans.  It looks as though she's been at this for a while, though you doubt she's anywhere close to being finished yet.");
-			outputText("\n\nAnother egg flows from her, still covered with the thick goo that you left in her when you made your 'deposit'.  Amily tenses at the way it spreads her ring, ");
+			outputText("\n\nAnother " + (pregnancy.buttType == PregnancyStore.PREGNANCY_DRIDER_EGGS ? "spider" : "bee") + " egg flows from her, still covered with the thick goo that you left in her when you made your 'deposit'.  Amily tenses at the way it spreads her ring, ");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] == 0) outputText("pussy visibly quivering");
 			else outputText("member oozing a thick glob of pre-cum");
 			outputText(" as her body shudders with pleasure.");
 
 			outputText("\n\nYou decide to leave the girl to her ministrations, ");
 			//if abdomen
-			if(player.canOviposit()) outputText("though the sight has certainly gotten you thinking about what you'll be  doing with your next clutch.\n");
+			if (player.canOviposit()) outputText("though the sight has certainly gotten you thinking about what you'll be doing with your next clutch.\n");
 			else outputText("though a distinct heat in your nethers leaves you wishing you had another clutch to unload right now\n");
 			dynStats("lus", (5+player.lib/10), "resisted", false);
-			flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] = 0;
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNT] = 0;
 		}
 
@@ -7508,7 +7571,7 @@ package classes.Scenes.NPCs
 			else outputText("  S");
 			outputText("he comes up for a kiss.  Slender lips meet your own, her narrow, skillful tongue slipping into your mouth.");
 			outputText("\n\nBurning with desire, you walk out of the water with your lover speared on your shaft, and as soon as you're on solid ground, you begin to fuck her.  Your hands pull her up, almost off your " + cockHead(x) + " before you let gravity pull her back down, slightly inclining your [hips] to speed the pleasurable friction along. Amily squeaks when she hits rock bottom, breaking the kiss before she plants it again with renewed vigor.");
-			outputText("\n\nThe two of you fuck like horny animals at their favorite watering hole, and every chance you get, you make sure to let a stray hand touch her " + amilyNipples() + ", " + amilyTits() + ", or " + amilyButt() + ".  The soaked girl is soon twitching and squirming atop you, wordlessly riding out an epic climax.  Her sweet cavity caresses your " + cockDescript(x) + " throughout, wringing you tumescent dick with insistent female pleasure, as if that could somehow milk your cum from you.");
+			outputText("\n\nThe two of you fuck like horny animals at their favorite watering hole, and every chance you get, you make sure to let a stray hand touch her " + amilyNipples() + ", " + amilyTits() + ", or " + amilyButt() + ".  The soaked girl is soon twitching and squirming atop you, wordlessly riding out an epic climax.  Her sweet cavity caresses your " + cockDescript(x) + " throughout, wringing your tumescent dick with insistent female pleasure, as if that could somehow milk your cum from you.");
 			outputText("\n\n\"<i>Gods,</i>\" Amily gasps, \"<i>You're incredible!</i>\"  She looks at you through heavy eyelids and kisses you again, though her muscles spasm wildly when you resume your quick, wet fuck.  You pound her hard and fast, rutting her hot hole hard enough to make her whole body bounce in your arms.  Amily is little more than a pile of quivering female flesh, snug around your " + cockDescript(x) + " and just waiting to be impregnated.  Shoving her down, you throw back your head and cum at last, pumping thick seed into her.");
 			if(player.cockTotal() > 1) {
 				outputText("  Your untended erection");
@@ -7519,7 +7582,7 @@ package classes.Scenes.NPCs
 				else outputText("their loads ");
 				outputText("over her middle.");
 			}
-			outputText("  The heat flowing inside her sets of a second orgasm");
+			outputText("  The heat flowing inside her sets off a second orgasm");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", and she climaxes all over again, spraying the underside of her " + amilyTits() + " and your [chest] with milky mouse seed");
 			outputText(".  Her channel soon drips with your mixed sexual fluids");
 			if(player.cumQ() > 250) {
@@ -7593,19 +7656,19 @@ package classes.Scenes.NPCs
 				outputText("You ask Amily if she's made up any more of that potion that you, her, and Izma had so much fun with before.");
 				outputText("\n\nAmily laughs, \"<i>You want to do that again?</i>\" with a wisp of a sheepish smile curling at the corners of her petite mouth.");
 				outputText("\n\nWhen you nod, her smile becomes excited, and she begins sorting a few bottles out of her gear.  You note that there's one blue one and two pink ones, though the girly drafts are portioned out to have half as much as their more masculine counterpart.  \"<i>It worked really, really well last time, so I didn't think it would be a good idea to adjust the dosages at all.  I'm not even sure I could handle a full course after being that sore...");
-				if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  At least I can't get any more pregnant!");
+				if (pregnancy.isPregnant) outputText("  At least I can't get any more pregnant!");
 				outputText("</i>\"");
 				outputText("\n\nYou smirk and raise an eyebrow, asking, \"<i>Izma?</i>\"");
 				outputText("\n\nAmily nods.  \"<i>Izmaaaaaaaa!</i>\"");
 				outputText("\n\nThe pretty tigershark-girl comes sashaying around the rocks, putting a bookmark in her reading material as she answers the high-pitched call.  She glances between the two of you and huffs, \"<i>Oh, couldn't think of having a little fun without me?</i>\" with a wry grin.  Her skirt rustles slightly as she closes the intervening distance");
 				if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText(", barely concealing the half-swollen bulge beneath");
 				outputText(".  Izma says, \"<i>What the hell, I ");
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("suppose I can do it for fun, since I'm already pregnant.");
+				if (izmaScene.pregnancy.isPregnant) outputText("suppose I can do it for fun, since I'm already pregnant.");
 				else outputText("suppose we can have another kid.");
 				outputText("</i>\"");
 				outputText("\n\nThe potions are passed around, and the three of you quickly get to drinking them.  The girls finish their half-filled bottles first, leaving them with nothing to do but slowly undress you while you try to devour the last of the sweet, lust-inducing stuff.  It's very hard to focus on swallowing your part of the equation with four hands roaming across your body, and you nearly choke on it when the two girls start hugging you from each side, mismatched hands diving into your crotch to fondle [oneCock] with eager grasps.  The artificial warmth that's gathering in your midsection slowly spreads throughout your body, though it seems like the bulk of it winds up in [eachCock] where it can be properly stimulated by the needy females' pleasant fingers.");
 				outputText("\n\nAmily nuzzles under your arm, her nose against the side of your [chest] as she inhales, murmurring, \"<i>Such a " + player.mf("strong, potent male...","beautiful, potent breeder...") + "  You're going to ");
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("give me lots of babies");
+				if (!pregnancy.isPregnant) outputText("give me lots of babies");
 				else outputText("put even more babies inside me");
 				outputText(", right?  No need to bother with her...</i>\"");
 				outputText("\n\nIzma matches the mouse-girl's demure posture, glaring daggers at her from the other side, hand fixating on [oneCock] just behind Amily's.  \"<i>Alpha, that rodent could never handle you in bed.  Come on, use me.</i>\"");
@@ -7618,7 +7681,6 @@ package classes.Scenes.NPCs
 		}
 
 		//Start Ze Fucking!
-		//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250]
 		private function izmaAmilyDrugThreeWaySex():void {
 			clearOutput();
 			outputText("The amorous embrace's effects on you are more than telling.  [EachCock] has swollen up, long and proud, as thick with arousal as ");
@@ -7628,8 +7690,8 @@ package classes.Scenes.NPCs
 			if(player.balls > 0) outputText(", one that has your [sack] swelling slightly, the skin growing smooth and glossy as it fills with the heavy, comfortable weight of your sloshing seed");
 			else outputText(", one that has you feeling comfortably swollen with pent-up seed just waiting to erupt");
 			outputText(".  Droplets of pre-cum slowly trickle from [eachCock] onto the busy ladies' hands and forearms, turning their fondles into strokes so wet and lubricated that you could almost mistake them for a succubus's twat.  There's something wonderfully right about being served by these docile woman");
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(", with their hungry wombs just waiting to be impregnated at your leisure");
-			else if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) outputText(", with their ripe wombs stuffed full of your offspring already");
+			if (!pregnancy.isPregnant && !izmaScene.pregnancy.isPregnant) outputText(", with their hungry wombs just waiting to be impregnated at your leisure");
+			else if (pregnancy.isPregnant && izmaScene.pregnancy.isPregnant) outputText(", with their ripe wombs stuffed full of your offspring already");
 			else outputText(", with at least one of their wombs already ripe with your offspring");
 			outputText(".");
 
@@ -7664,20 +7726,20 @@ package classes.Scenes.NPCs
 			outputText(".  The sapphic kiss is shattered by your slit-moistening hardness, and Amily looks back at you, disentangling her tail from Izma's to caress you as she asks, \"<i>You aren't going to waste it outside, are you?  Please, cum in me!</i>\"");
 
 			outputText("\n\n\"<i>No, give it to me!  ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("My pussy is the obvious, stronger choice.");
+			if (izmaScene.pregnancy.isPregnant) outputText("My pussy is the obvious, stronger choice.");
 			else outputText("I'm the stronger, obvious breeding choice.  Knock me up and you'll have fitter, better offspring.");
 			outputText("  Besides, can't you feel how wet my cunt is, and how those little tentacles inside are going to feel around you when you give me your cum?  That is your job as Alpha after all, to dominate my pussy and fill it full of you...  Ooooh...</i>\" Izma moans, pleading her own case as she starts to finger Amily's asshole.  \"<i>Besides, this little - ohgods - thing couldn't handle your babies, [name].</i>\"");
 			outputText("\n\nAmily squeaks in surprise at the sudden intrusion before stabbing her tail tip into the shark's rectum as well, turning Izma's demands into a lewd moan.  \"<i>Come on, [name].  I'm the one that figured out-ooouuuhhhh... uh, how to make the potion.  ");
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("Give me your babies...  Mmmm, we'll make such smart babies.  ");
+			if (!pregnancy.isPregnant) outputText("Give me your babies...  Mmmm, we'll make such smart babies.  ");
 			outputText("Just, ahhh... put it inside me and cum, cum in me again and again and fuck me till I'm pregnant with your spunk!</i>\"  She's ");
 			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) outputText("actually blushing so hard that you can see it through her fur, a crimson tint that looks even better on her with the way her tongue is hanging out");
 			else outputText("blushing so hard her whole face is almost beet-red, a fine look on her with her tongue dangling so erotically out of her gasping mouth");
 			outputText(".");
 			outputText("\n\nYou push and pull on the two girls, fucking both sets of mons without care for who eventually gets jizz inside them.  You're definitely going to flood a ");
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("womb");
+			if (!pregnancy.isPregnant || !izmaScene.pregnancy.isPregnant) outputText("womb");
 			else outputText("cunt");
 			outputText(", judging by how full your genitals are feeling, but it doesn't matter greatly one way or the other.  There's a calm, confident surety in the back of your mind that keeps reminding you that you're in charge here, and that both these women WILL be ");
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("pregnant");
+			if (!pregnancy.isPregnant || !izmaScene.pregnancy.isPregnant) outputText("pregnant");
 			else outputText("squirting");
 			outputText(" for you.  Each time you slam your ");
 			if(player.cockTotal() > 1) outputText("doubled dicks");
@@ -7692,7 +7754,7 @@ package classes.Scenes.NPCs
 			else outputText("straight into Amily's juicy slit");
 			outputText(".  Izma's finger rubs up against you through the mouse-girl's inner walls, providing an extra layer of stimulation on top of the pleasure her glove-tight cunt is doling out.  Lady-spunk gushes over you from [cockHead biggest] all the way to your [sheath], and it drips on to Izma's dick-deprived snatch as you fuck the pregnancy-fetishizing mouse-girl.  The predatory slut sighs, but her finger begins to wiggle faster and faster within the confines of the mouse's ass, vibrating through the climaxing rodent-pussy to shroud you in ecstasy.  You bottom out inside the heavenly cunt and release, the pleasure of cumming stronger than normal, propelled by a biological imperative to ensure that every drop of semen is deposited as deeply into a willing female as possible.");
 			outputText("\n\nAmily stops suckling the shark-tit as she screeches out her excitement for the whole of your camp to hear.  Her " + amilyHips() + " buck wildly against you and the shark, splattering you both with the proof of her pleasure as instinct takes over.  With her efforts so focused on her nether-lips, her face slumps against Izma's pillow-like breast, and she begins to drool stupidly in between gasps and groans, too drunk on orgasm to care.  The sense of relief is as palpable as it is intense, growing with each thick, sticky bulge that launches out of your urethra.  Amily's pussy is splattered with cock-cream, quickly filling, the walls of her well-used canal entirely soaked in white.");
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("  Her belly begins to puff up from the thorough insemination, at first going a little pudgy, but then turning large and bulbous.  Her empty womb is somehow taking more and more of your virile seed inside.  It's almost like her cervix is sucking down the yogurt-thick load like a one-way valve, and soon Amily's middle is positively jiggly with spunk, bulging out to either side of her from her body weight.");
+			if (!pregnancy.isPregnant) outputText("  Her belly begins to puff up from the thorough insemination, at first going a little pudgy, but then turning large and bulbous.  Her empty womb is somehow taking more and more of your virile seed inside.  It's almost like her cervix is sucking down the yogurt-thick load like a one-way valve, and soon Amily's middle is positively jiggly with spunk, bulging out to either side of her from her body weight.");
 			else {
 				outputText("  With her womb already occupied by your offspring, Amily's cervix stays steadfastly closed.  There's so much jizz pumping out of you that the tight canal can't even begin to hold all of it");
 				if(player.hasKnot(player.biggestCockIndex())) outputText(", but your knot traps it inside anyway.  You cum and cum until the pressure is almost painful, but even your magnificent knot can't hold it all back");
@@ -7706,12 +7768,12 @@ package classes.Scenes.NPCs
 		private function izmaAmilyDrugThreeWaySex2():void {
 			clearOutput();
 			outputText("Time goes hazy, for a bit, but the cool air on your sopping boner is enough to rouse you back to full consciousness.  The scene is unreal.  Amily rolled off of Izma at some point and is laying flat on her back, cradling her ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("cum-");
+			if (!izmaScene.pregnancy.isPregnant) outputText("cum-");
 			outputText("pregnant belly and murmuring, \"<i>Babies,</i>\" while her fingers mindlessly diddle her alabaster-painted cunt.  She shudders as aftershocks of pleasure torture her lust-wracked brain, keeping her in a horny, docile state.");
 			outputText("\n\nIzma seems to have taken advantage of your lapse in consciousness - you're on your back, and she's straddling your chest");
 			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText(", dick and balls flopping lamely on top of you");
 			outputText(".  She pants, \"<i>Dunno why I didn't just fuck ya while you were out of it...  Didn't seem right.</i>\"  Rubbing her breast one-handed, the shark-girl begs, \"<i>Can I have it now?  Can you cum in me like you did her, [name]?  Please, I'm so... so wet for you, I'll make you feel so good.</i>\"  She keeps scooting back and forth just above your [hips], the hard lump of her clit pressing into you as she awaits permission to ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("be inseminated");
+			if (!izmaScene.pregnancy.isPregnant) outputText("be inseminated");
 			else outputText("have her pregnant-pussy packed full again");
 			outputText(".");
 
@@ -7746,18 +7808,18 @@ package classes.Scenes.NPCs
 			if(player.cockTotal() == 2) outputText(", taking a hand away from your extra dick to support herself,");
 			if(player.cockTotal() > 2) outputText(", taking a hand away from one of your extra dicks to support herself,");
 			outputText(" and kisses you passionately.  The fervent kiss is as short as it is frenzied, but as you're recovering from it, Izma starts to talk, \"<i>You like that, Alpha?  You like having my cunt suckling on your dick?</i>\"  She swivels her hips with her words, the inner tentacles all pulling on you in concerted waves, actually lifting your penis to press deeper inside her, right up against her ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("closed");
+			if (izmaScene.pregnancy.isPregnant) outputText("closed");
 			else outputText("dilated");
 			outputText(" cervix.  \"<i>");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("I know I'm pregnant, but I want you to cum as deeply inside me as possible, okay?  I just... I have to have your cum. I NEED to feel that warmth flooding inside me.  It'll... ohh, yes... it'll make me feel so good, so loved.");
+			if (izmaScene.pregnancy.isPregnant) outputText("I know I'm pregnant, but I want you to cum as deeply inside me as possible, okay?  I just... I have to have your cum. I NEED to feel that warmth flooding inside me.  It'll... ohh, yes... it'll make me feel so good, so loved.");
 			else outputText("I don't know how, but I just know that you're going to make me pregnant when you cum inside me.  It's going to get me oh-ohhhhh... so heavy with your child, and it'll be perfect and blissful.  You're going to fucking flood me with jizz, aren't you, Alpha?");
 			outputText("</i>\"  Izma's eyes twinkle with a mixture of obscene hunger and overbearing affection.  She whispers, \"<i>Will you please");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(" make me your gravid, jizz-slurping beta-wife?");
+			if (!izmaScene.pregnancy.isPregnant) outputText(" make me your gravid, jizz-slurping beta-wife?");
 			else outputText(" cum in your pregnant, jizz-hungry wife?");
 			outputText("</i>\"");
 
 			outputText("\n\nFuck, it's like she's telling you to do exactly what you want to do!  There's nothing hotter than ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("watching a bitch's belly bloat as it's packed to a full, fertile dome");
+			if (!izmaScene.pregnancy.isPregnant) outputText("watching a bitch's belly bloat as it's packed to a full, fertile dome");
 			else outputText("stuffing a cunt so full she'll never stop dripping your seed");
 			outputText(".  Getting to lie back and watch her cum her brains out while you do it?  That's just icing on the cake.  Izma's feelers flutter erotically about you, spastically stroking with uncoordinated, individual slithers that remind you of a hundred tiny tongues.  She gets infinitely wetter, something you didn't think possible, and her whole body begins to go scarlet, coloring as she climaxes.");
 			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("  Her four balls quake atop you, and you watch her urethra bulge, ready to splatter your [chest] with her own, lesser climax.");
@@ -7765,7 +7827,7 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("  The smell of her hot, inferior seed hits your nostrils, exciting you even further as it rolls off of you in thick globs.");
 
 			outputText("\n\nYou feel like an over-pressurized tank that's just been tapped.  One moment, there's indescribable force all bottled up inside you, and the next you're letting it spray out in long waves, each one guided through your urethra by contractions so violent they cause your whole body to shake each time.  You pump long lances of seed into the shark-girl's ready snatch.  She screams, \"<i>Yes!  Give it to me!  Ohhh, gods, YES!</i>\" as you fill her.");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 0) {
+			if (izmaScene.pregnancy.isPregnant) {
 				outputText("  Her womb remains steadfastly closed, already seeded to capacity, so your salty deposit quickly floods the smaller canal.  The tendrils go lax as they're dipped in your baby-batter, each limp in the heady flow.");
 				if(player.hasKnot(player.biggestCockIndex())) outputText("  Your knot balloons explosively inside her, but the seal on her womb is tighter.");
 				outputText("  Jism rushes out around your cock in a river.  The nest was already soaked with liquid lust from your last tryst, moments ago, but now it's soaked completely white.  After a while, Izma's actually forced off you by the incredible potency of your eruptions, falling flat on her back.");
@@ -7778,7 +7840,7 @@ package classes.Scenes.NPCs
 				outputText(".");
 			}
 			outputText("\n\nIzma pants, \"<i>Ung... mmm... so much,</i>\" and cradles her ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] == 0) outputText("jizz-bloated");
+			if (!pregnancy.isPregnant) outputText("jizz-bloated");
 			else outputText("child-bearing");
 			outputText(" middle.  You're still going, still spurting, but without a tight hole to fill, there's just no pleasure on it.  You start to push yourself up - you need to impregnate something, but Amily is there in a flash, still jilling her pussy as she stuffs her ass with your squirting cock.  It slides on in with ease thanks to its copious spurting and the double-dose of cunt-juice that wreathes it.");
 
@@ -7805,16 +7867,16 @@ package classes.Scenes.NPCs
 			dynStats("sen", -3);
 			outputText("<b>Some time later...</b>\n");
 			outputText("You come to in a daze.  You're soaked in sexual juices of all kinds from the waist down, though for once, [eachCock] has gone soft.  Izma is snuggled up under your left arm and Amily under your right.  They're still asleep, but they're even more soaked than you, and hugging each other across your body.  The potion may have worked a little differently than Amily designed it to, but you can't really complain about the results.");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 || flags[kFLAGS.AMILY_INCUBATION] == 0) {
+			if (!izmaScene.pregnancy.isPregnant || !pregnancy.isPregnant) {
 				outputText("\n\n(<b>");
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
+				if (!pregnancy.isPregnant) {
 					outputText("Amily");
-					flags[kFLAGS.AMILY_INCUBATION] = 168;
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(" and ");
+					pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily carries babies to term way faster than a regular player
+					if (!izmaScene.pregnancy.isPregnant) outputText(" and ");
 				}
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) {
+				if (!izmaScene.pregnancy.isPregnant) {
 					outputText("Izma");
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
+					izmaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
 				}
 				outputText(" definitely got pregnant.</b>)");
 			}
@@ -7861,10 +7923,19 @@ package classes.Scenes.NPCs
 			clearOutput();
 			var x:int = player.cockThatFits(61);
 			outputText("You step in to Amily's office, as it were.  It's really just a cluster of boulders, but with the way the mouse-girl is looking about imperiously and gesturing for you to sit on a flat rock, you really do feel like you're back at the village doctor, getting checked on to make sure you're okay.  As for Amily, she's looking fine... mighty fine indeed.  Her " + amilyTits() + " nicely fill the tight, cleavage exposing top, while her ");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] <= 72) outputText("pregnancy-bloated belly bulges out beneath it");
-			else if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] <= 95) outputText("pregnancy-swollen tummy rounds out beneath it");
-			else if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] <= 120) outputText("slightly-protruding pregnancy is exposed beneath it");
-			else outputText("taut midriff is fully on display");
+			switch (pregnancy.event) {
+				case 2: 
+				case 3: outputText("slightly-protruding pregnancy is exposed beneath it");
+						break;
+				case 4: 
+				case 5: outputText("pregnancy-swollen tummy rounds out beneath it");
+						break;
+				case 6: 
+				case 7: 
+				case 8: outputText("pregnancy-bloated belly bulges out beneath it");
+						break;
+				default: outputText("taut midriff is fully on display");
+			}
 			outputText(".  The clingy bottom is little more than a micro-skirt, short enough that it nearly exposes her vagina to your roaming eyes.");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  It bulges out lewdly in a sheer outline of her " + amilyCock() + ", which is curled over to remain inside the stretchy skirt.");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 9) outputText("  The effort is a failure, as her immense cock is simply too big for such a slinky covering, and the fat tip curves down to dangle below the hem, pulsing dangerously.");
@@ -7928,12 +7999,12 @@ package classes.Scenes.NPCs
 			outputText("\n\nThe petite woman's skillful cock-manipulations have you squirming uncomfortably under her on the cusp of a blissful explosion for what seems like hours.  She whines, \"<i>Give it to me, [name]!  Fuck your naughty, nasty nurse!  Screw her silly! Yesssssss-!</i>\"  Her voice loses cohesion as she cums, and her pussy begins to assault you with sensuous, milking ripples all along your length.  [EachCock] squirts in response, accompanied by a clenching spasm of pleasure that crashes through the very fibres of your being.  Your [hips] lurch upward, hard enough to bounce the mouse into the air as you inseminate her.");
 			if(player.cumQ() >= 500) {
 				outputText("  The steady rhythm of your spurts goes on unabated for well over thirty seconds, ");
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("slowly filling Amily's womb to capacity");
+				if (!pregnancy.isPregnant) outputText("slowly filling Amily's womb to capacity");
 				else outputText("slowly forcing trails of semen out of her entrance");
 				outputText(".");
 				if(player.cumQ() >= 2000) {
 					outputText("  Amily hangs on for dear life as ");
-					if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("she's filled to capacity, her stretchy, mallaeble mibble bulging lewdly with spunky jizz, sloshing with each fresh injection.");
+					if (!pregnancy.isPregnant) outputText("she's filled to capacity, her stretchy, mallaeble middle bulging lewdly with spunky jizz, sloshing with each fresh injection.");
 					else outputText("torrents of the stuff spray out of her entrance, her canal too filled to hold even a drop more and your penis continuing to push the pressure higher.");
 				}
 				if(player.cumQ() >= 500) outputText("  It turns your crotch into a sticky mess.");
@@ -7953,10 +8024,6 @@ package classes.Scenes.NPCs
 			dynStats("sen", -2);
 			amilyPreggoChance();
 			doNext(13);
-		}
-
-		public function AmilyScene()
-		{
 		}
 	}
 }

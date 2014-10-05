@@ -86,11 +86,30 @@ Naga TF
 Corruption Path (Arian's body is drastically altered, but [Arian eir] personality only suffers minor alterations.)
 (Unlikely) Boon and Laika
 */
-public class ArianScene extends NPCAwareContent
-{
-	public function ArianScene(){
+	public class ArianScene extends NPCAwareContent implements TimeAwareInterface
+	{
+		public function ArianScene()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
 
-	}
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
+			if (model.time.hours > 23) {
+				if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
+				flags[kFLAGS.ARIAN_LESSONS] = 0;
+				flags[kFLAGS.ARIAN_TREATMENT] = 0;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+
 private function arianCockSize():Number {
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] < 0 || flags[kFLAGS.ARIAN_COCK_SIZE] > 3) return 0;
 	else if(flags[kFLAGS.ARIAN_COCK_SIZE] == 1) return 9;

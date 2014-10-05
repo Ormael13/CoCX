@@ -2,11 +2,33 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Salon extends BaseContent{
+	public class Salon extends BaseContent implements TimeAwareInterface {
 
-	public function Salon()
-	{
-	}
+		public function Salon()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			flags[kFLAGS.SALON_PAID] = 0;
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.LYNNETTE_CARRYING_COUNT] == 0 || flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] != 4)
+				{
+					flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE]++;
+				}
+				if (flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] == 7) {
+					flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] = 0;
+				}
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 //const SALON_PAID:int = 441;
 public function hairDresser():void {
@@ -122,7 +144,7 @@ private function hairDresserGreeting():void {
 	outputText("\n\nThere are a few chairs along the wall and goblins with latex dresses and gloves looking bored.  At the sight of you they perk up and clamor around you excitedly, until one with a gravity-defying chest pushes them apart and greets you.", false);
 	outputText("   \"<i>I apologize for my daughters,</i>\" she says as she presses herself against you.  \"<i>They're a bunch of brainless hussies for the most part.  My name is Lynnette, and welcome to my salon!  You want your hair cut or lengthened?  We've got you covered, and we don't ask for much - just a shot of cum.", false);
 	if(player.cockTotal() == 0) {
-		outputText("  You look like you don't got any of your own, but we've got glory holes in the back if you need to get some.  Just don't swallow too much ok?</i>\"\n\nShe shows you to the back of the cave, which is boarded-up.  There are about 20 holes in boards, and most are empty.  While you watch, a few new dicks slide in, and just as quickly the goblin's daughters commence sucking and fucking them.  There are only a few you could take a crack at - do you blow one (and if so which one)?", false);
+		outputText("  You look like you don't got any of your own, but we've got glory holes in the back if you need to get some.  Just don't swallow too much, ok?</i>\"\n\nShe shows you to the back of the cave, which is boarded-up.  There are about 20 holes in boards, and most are empty.  While you watch, a few new dicks slide in, and just as quickly the goblin's daughters commence sucking and fucking them.  There are only a few you could take a crack at - do you blow one (and if so which one)?", false);
 	}
 	else {
 		outputText("  I'll even do you the favor of letting you blow it in my mouth, I've already got a bun in the oven.  So what do you say?  Want a spooge and a haircut?  Or would you rather go get your payment from one of the gloryholes in the back, you " + player.mf("kinky boy","naughty girl") + "?</i>\"\n\n", false);
@@ -231,7 +253,7 @@ private function hairDresserRepeatGreeting():void {
 private function gloryholeImp():void {
 	player.slimeFeed();
 	outputText("", true);
-	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbling up it down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
+	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbing up and down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
 	if(player.cor < 33) {
 		outputText("You struggle to force your mouth onto the abomination in front of you, wondering why you chose to do such a thing.  Your head bobs up and down, trying to match the motions of the thick demonic tool as you grab hold and guide it into your mouth.  It's hot, hotter than you'd expect, and dripping with sickly sweet pre-cum that makes you tingle.  You throw yourself into the wretched task, intent on finishing it as quickly as possible.  You circle your tongue over the nodules, holding on as it swells in your mouth, unloading a sticky batch of spooge into your throat.  You cough and sputter, swallowing most of it, but you manage to hang on to enough for your pay.\n\n", false);
 		dynStats("lus", 15, "cor", .5);
@@ -440,7 +462,7 @@ private function minotaurCumBukkakeInSalon():void {
 	
 	outputText("You start moaning in drug-induced bliss, but your vocalized pleasure is interrupted by the squelching slurp of the softening shaft being pulled from your dick-puckered lips.  It drips a rope of cum over your mouth and chin as it pulls free from the wall, leaving behind one vacancy among the swarm of ready minotaur dicks.  You lick up your stud's leavings and purr in bliss, reaching through the hole to cup the departing minotaur's balls teasingly.  He grunts and walks out of your grip – sated for now.  You curl your fingers into a come-hither gesture, retract your arm through the sweat-lubricated glory-hole, and wait for one of the other minotaurs to come over.\n\n", false);
 	
-	outputText("The beast who kept your left hand so busy repositions himself at the now-vacant opening, and you decide to reward him for moving so quickly.  You lick the last of the salty crème from your lips and muse that he isn't the only one getting a reward, but the monstrous cow-man doesn't need to know that.", false);
+	outputText("The beast who kept your left hand so busy repositions himself at the now-vacant opening, and you decide to reward him for moving so quickly.  You lick the last of the salty cream from your lips and muse that he isn't the only one getting a reward, but the monstrous cow-man doesn't need to know that.", false);
 	if(player.biggestTitSize() >= 2) {
 		outputText("  You wrap the pillowy flesh of your " + allBreastsDescript() + " around the new member, pleasantly surprised by its girth and wide, already-flared tip.  Maybe you could have gotten him off with your hands after all?  ", false);
 		if(player.biggestTitSize() < 6) outputText("Even so, you can't quite get your breasts the entire way around him, so you make up for it by pressing it harder into you with your busy hands.  ", false);
@@ -463,7 +485,7 @@ private function minotaurCumBukkakeInSalon():void {
 	outputText(".\n\n", false);
 	//ADD PREG CHECK
 	//Preggers chance!
-	player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR, 70);
+	player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 70);
 
 	outputText("Giggling, you stagger over to the next cock in line and turn around, possessed with the idea of taking its spooge in the most direct way possible – anally.   You pull your butt-cheeks apart and lean back, surprising one of the horny beasts with the warmth of your " + assholeDescript() + " as you slowly relax, spreading over his flare.  He actually squirts ropes of something inside of you, but you've been around minotaurs enough to know that it can't be cum, at least not yet.  The slippery gouts of preseed make it nice and easy to rock back and spear yourself on the first few inches, ", false);
 	if(player.analCapacity() < 80) {

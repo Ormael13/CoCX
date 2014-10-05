@@ -54,7 +54,7 @@ package classes.Scenes.Areas
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] < 3) {
 					trace("CHANCE AT HELLHOUND GAO");
 					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-					if (player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == player.PREGNANCY_HELL_HOUND && player.pregnancyIncubation > 0)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
+					if (player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 						trace("PASS BODYCHECK");
 						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
 							hellHoundScene.HellHoundMasterEncounter();
@@ -412,7 +412,7 @@ package classes.Scenes.Areas
 			}
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
-			player.knockUp(player.PREGNANCY_MINOTAUR, player.INCUBATION_MINOTAUR);
+			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 				//You've now been milked, reset the timer for that
 				player.addStatusValue(StatusAffects.Feeder, 1, 1);

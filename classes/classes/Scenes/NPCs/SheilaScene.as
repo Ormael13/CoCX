@@ -2,11 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class SheilaScene extends NPCAwareContent {
-
-	public function SheilaScene()
-	{
-	}
+	public class SheilaScene extends NPCAwareContent implements TimeAwareInterface {
 
 //const SHEILA_CORRUPTION:int = 760;
 //const SHEILA_XP:int = 761
@@ -77,19 +73,40 @@
 //-joeycount: counts number of PC's children with Sheila, both for determining her attitude toward pregnancy and for the More Stats page; may be better suited as a status affect
 //-sheilaforge: counts up 1 per day once PC has turned Sheila's lethicite over to the T'A weaponsmith, modifies [Weapons] button outputs in that city's menu if sheilacite = 3
 
+		public var pregnancy:PregnancyStore;
+
+		public function SheilaScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.SHEILA_PREGNANCY_TYPE, kFLAGS.SHEILA_PREGNANCY_INCUBATION, 0, 0);
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
+			}
+			trace("\nShiela time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 private function sheilaPreg():void {
 	//CHANCE OF PREGGERS, GAO
-	if(flags[kFLAGS.SHEILA_PREG] == 0) {
-		var chance:Number = 5;
-		chance += player.cumQ()/66;
-		if(chance > 20) chance = 20;
-		chance += player.virilityQ() * 100;
-		if(chance > 75) chance = 75;
-		if(rand(100) <= chance) {
-			flags[kFLAGS.SHEILA_PREG] = 1;
-		}
-	}
+	if (pregnancy.isPregnant) return;
+	var chance:Number = 5;
+	chance += player.cumQ() / 66;
+	if (chance > 20) chance = 20;
+	chance += player.virilityQ() * 100;
+	if (chance > 75) chance = 75;
+	if (rand(100) <= chance) 
+	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
 }
 
 public function sheilaCorruption(arg:Number = 0):Number {
@@ -158,7 +175,7 @@ internal function sheilaCup():String {
 
 public function sheilaEncounterRouter():void {
 	trace("Sheila Encounter:");
-	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREG] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
+	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
 	//UNFUCK FLAGS
 	if(flags[kFLAGS.SHEILA_CLOCK] > 0)
 		flags[kFLAGS.SHEILA_CLOCK] = 0
@@ -170,8 +187,8 @@ public function sheilaEncounterRouter():void {
 	//ACTUALLY PICK ENCOUNTER!
 	if(flags[kFLAGS.SHEILA_DEMON] == 0) {
 		//PREG SHIT
-		if(flags[kFLAGS.SHEILA_PREG] >= 4 && flags[kFLAGS.SHEILA_XP] >= -2) {
-			if(flags[kFLAGS.SHEILA_JOEYS] == 0) normalSheilaPregNotifNumberOne();
+		if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.SHEILA_XP] >= -2) {
+			if (flags[kFLAGS.SHEILA_JOEYS] == 0) normalSheilaPregNotifNumberOne();
 			else normalSheilaPregNotifREPEATEDED();
 			return;
 		}
@@ -198,7 +215,7 @@ public function sheilaEncounterRouter():void {
 	else {
 		//Post-demon pregnancy notif (demon sheila = 1 and sheilapreg = 4)
 		//increment imp children counter?
-		if(flags[kFLAGS.SHEILA_PREG] >= 4) demonImpChildren();
+		if (pregnancy.isPregnant && pregnancy.incubation == 0) demonImpChildren();
 		//Demon Sheila encounter (demon sheila = 1 and sheilapreg < 4)
 		else demonSheilaEncounter();
 
@@ -398,7 +415,7 @@ private function apologyAvoidSheila():void {
 	outputText("You shake your head at the leery girl, and tell her you'd be just as happy as she would if you never saw each other again.");
 	outputText("\n\n\"<i>Well... I expect I could arrange that if you'll play along,</i>\" she says, ears twitching in irritation.  \"<i>Take care of yourself, mate.</i>\"  She resets the trap and lays down in her spot in the tall grass again, pointedly turning over on her side to show you her back.");
 	//set sheilapreg = -1
-	flags[kFLAGS.SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_DISABLED] = 1;
 	doNext(13);
 }
 
@@ -476,7 +493,7 @@ private function sheilaIsSorryButLeaveMeAlone():void {
 	clearOutput();
 	outputText("You shake your head and turn away, dismissing Sheila with a pointed gesture.  \"<i>H-hey!</i>\" the girl calls angrily from behind you.  \"<i>Dammit, I said I was sorry, you bastard!  Screw you!  See if I talk to you again!</i>\"");
 	//set sheilapreg = -1
-	flags[kFLAGS.SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_DISABLED] = 1;
 	doNext(13);
 }
 //[XP-2 - Forgive]
@@ -3163,7 +3180,7 @@ private function sheilaForcedOralGeneric():void {
 //output at next sheila encounter if conditions are met, suppressing any normal output (this also includes the sheila xp = -2 or -1 apology outputs)
 //set sheilapreg = 0
 private function normalSheilaPregNotifNumberOne():void {
-	flags[kFLAGS.SHEILA_PREG] = 0;
+	pregnancy.knockUpForce(); //Clear Pregnancy
 	clearOutput();
 	outputText("Traipsing through the grass, you can see Sheila sitting under the shade of a low tree from a long way off.  The reverse is also true, as she waves to you from her seat, beckoning you over.  You make your way to her curiously.");
 	outputText("\n\n\"<i>G'day, [name],</i>\" she opens, slightly nervous.  \"<i>I needta tell you something.  Sit down?</i>\"");
@@ -3191,7 +3208,7 @@ private function normalSheilaPregNotifNumberOneYepIssue():void {
 
 	outputText("\n\nShe stands up suddenly and starts walking away.  \"<i>Nice knowing you, mate.  You won't see me again - I'll make sure of that.</i>\"  Within seconds of speaking, she's broken into a fast, bounding run, beyond any hope of catching.");
 	//set sheilapreg = -1, and set joeycount + 1 if you plan to track that stat even after Sheila's disabled
-	flags[kFLAGS.SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_DISABLED] = 2;
 	flags[kFLAGS.SHEILA_JOEYS]++;
 	doNext(13);
 }
@@ -3237,8 +3254,8 @@ private function normalSheilaPregNotifREPEATEDED():void {
 	if(player.cor < 40) outputText(", and you give it a squeeze");
 	outputText(".  \"<i>I just wanted to tell you about your baby.  Can't stay... have to catch up to quota still.</i>\"  She drags to her feet and turns to go, tail listlessly hanging.  Even her ears are drooping; this girl is tired.");
 	
+	pregnancy.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.SHEILA_JOEYS]++;
-	flags[kFLAGS.SHEILA_PREG] = 0;
 	if(sheilaCorruption() > 80) flags[kFLAGS.SHEILA_CORRUPTION] = 80;
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
@@ -3934,8 +3951,8 @@ private function demonImpChildren():void {
 		else outputText("with her split tail while she cradles her massive tits to make sure you see the open invitation");
 		outputText(".  Impatiently, she rubs her stubby, drooling, phallic spade against the hole, accentuating the imagery.  You can feel the blood rushing to your groin as she gives herself shallow, teasing strokes.");
 	}
+	pregnancy.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.SHEILA_IMPS]++;
-	flags[kFLAGS.SHEILA_PREG] = 0;
 	//plus lust if PC has cock
 	if(player.hasCock()) dynStats("lus", 10+player.lib/10, "resisted", false);
 	//[Other Sex][Knock Up(cock only)][Leave]
@@ -4105,7 +4122,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		
 		outputText("\n\n\"<i>I don't think I've ever felt so full in my life...</i>\" Sheila says, dreamily holding her stomach as an avalanche of cum-clumps rolls slowly out of her cunt.  You fall flat and are already passed out by the time she stops rubbing her midriff, imagining the child she'll mother.  She leans down.  \"<i>Falling asleep after coming... for shame, mate.  I didn't even get to tell you I love you.</i>\"  The demon plants a kiss on your cheek, squeezes your scrotum once more, and walks away, bottom half completely stained white.  Your swollen nuts slowly deflate as you doze, though they don't shrink down quite as far as their original size.");
 		//end scene, reduce lust, increment sheilapreg by 1 (in other words, 100% preg chance), increase ball size by ~10% and increase cum multiplier very slightly, reduce sheila corruption by 10 and increase PC corr by 10
-		flags[kFLAGS.SHEILA_PREG]++;
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
 		player.ballSize++;
 		if(player.ballSize < 10) player.ballSize++;
 		player.cumMultiplier++;
@@ -4664,7 +4681,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	player.orgasm();
 	dynStats("cor", 10);
 	dynStats("lus", player.lib/5);
-	flags[kFLAGS.SHEILA_PREG] = -2;
+	flags[kFLAGS.SHEILA_DISABLED] = 3;
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -4773,7 +4790,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
 	dynStats("lus=", 100, "cor", 10, "resisted", false);
-	flags[kFLAGS.SHEILA_PREG] = -3;
+	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);

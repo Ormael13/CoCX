@@ -655,8 +655,8 @@ private function tentacleBoneFollowerIzzy():void {
 	//[if wings]
 	if(player.canFly() && player.str >= 90) {
 		outputText("\"<i>Time for a wild ride, sweetheart.</i>\"  You flap your " + player.wingDesc + " wings, mobilizing all your muscles in order to lift yourself off.  The weight you are burdened with is absurdly heavy, and you groan and pant in your attempts at taking off; eventually, you manage to part from the possessive surface little by little, grunting in triumph as you see your redoubled effort paying off; soon you're way up in the sky and Isabella's dickflesh prison is wobbling back and forth as you drag her under you. If it weren't for your colossal tentacle strength, the poor cow-girl would probably crash to the earth in a matter of seconds.  You keep ascending until Isabella realizes how high you both are and shrieks.  \"<i>", false);
-		if(isabellaAccent()) outputText("But...but vait!  I'm going to fall- I'm going to...</i>\"\n\n", false);
-		else outputText("But...but wait!  I'm going to fall- I'm going to...</i>\"\n\n", false);
+		if(isabellaAccent()) outputText("But... but vait!  I'm going to fall- I'm going to...</i>\"\n\n", false);
+		else outputText("But... but wait!  I'm going to fall- I'm going to...</i>\"\n\n", false);
 		
 		outputText("You firmly assure that you're holding her all right, that you're never going to let her down and she should be ashamed to doubt your steadfast tentacle peckers.  You fly left and right, doing aimless zigzags and alternatively swooping down and rising up as you gain more and more momentum; this cocktail of insane speed, near-danger, and sexual teasing is sending shudders down your spine.  You laugh in exhilaration, flying everywhere and marvelling at the sight of Mareth lying below while you savagely grope your partner.\n\n", false);
 	}
@@ -898,7 +898,7 @@ public function angryMurble():void {
 	outputText("", true);
 	outputText("You come to Isabella's part of the camp with Marble in tow, supposing now is as good a time as ever to introduce the two.  Marble greats Isabella warmly but immediately starts bombarding her with questions about her origin.  From her persistence, it seems she is interested in meeting another cow-girl.  Though a little overwhelmed, Isabella recovers quickly, explaining her origins and the impurity of her cow-girl nature.  Marble is visibly disappointed.\n\n", false);
 	
-	outputText("\"<i>Topic of conversation gradually shifts to the reason why Marble has come to the camp.  Marble seems to be happy to meet your friend, and is eager to spend some more time with her in the future.  Isabella, on the other hand, seems a little off-put regarding Marble's actions.  Only time will tell how the two take to each other.", false);
+	outputText("\"<i>The topic of conversation gradually shifts to the reason why Marble has come to the camp.  Marble seems to be happy to meet your friend, and is eager to spend some more time with her in the future.  Isabella, on the other hand, seems a little off-put regarding Marble's actions.  Only time will tell how the two take to each other.", false);
 	flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 2;
 	doNext(1);
 }
@@ -1454,7 +1454,7 @@ private function isabellaBarnFuckPartII():void {
 	else {
 		outputText("  Isabella bites her lip as your oversized prick stretches her wide, whimpering that you'll tear her apart as your [cock smallest] pushes into her womb, her cervical lips clamping hard around your first inches of thick cockflesh.  \"<i>Aaaaahhhhhh, ");
 		if(isabellaAccent()) outputText("It iz sehr too big, zo huge?</i>\"");
-		else outputText("God it's so huge, I...  its tearing me apart!</i>\"");
+		else outputText("God it's so huge, I... it's tearing me apart!</i>\"");
 	}
 	outputText("\n\nOnce you're as far into Isabella as you can go, she relaxes her death grip on your [ass], and you start to move your hips, slowly rocking yourself back and dragging inches of thick cockmeat slowly, tantalizingly out of her.  Isabella moans lewdly, arching her back as you leave her box empty, her inner depths left gaping as you withdraw...  before plunging back in.  She cries out in ecstasy as you hammer back in with a single thrust, throwing yourself ");
 	if(player.smallestCockArea() <= 164) outputText("in up to the hilt, smearing her wildly contracting walls with thick smears of leaking pre");

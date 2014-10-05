@@ -1437,7 +1437,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//16 (has any of Marae's gift perks)
 	if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftProfractory) >= 0 || player.findPerk(PerkLib.MaraesGiftButtslut) >= 0) choices[choices.length] = 16;
 	//17 (has had children with Izma)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) choices[choices.length] = 17;
+	if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) choices[choices.length] = 17;
 	//18 (has Incorporeality perk)
 	if(player.findPerk(PerkLib.Incorporeality) >= 0) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
@@ -1564,7 +1564,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		//(has had children with Izma)
 		case 17:
 			outputText("\"<i>");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] == 1) outputText("That shark daughter of yours is");
+			if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] == 1) outputText("That shark daughter of yours is");
 			else outputText("Those shark daughters of yours are");
 			outputText(" pretty cute you know,</i>\"  Shouldra blurts seemingly from nowhere.  Looks as though she's helping herself to your head.  \"<i>I'd love to get to meet them sometime, Champ.  Put some otherworldly fright in 'em so they grow up right!</i>\"  You doubt Izma would be too onboard with this visit.");
 			break;

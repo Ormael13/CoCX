@@ -1,4 +1,4 @@
-﻿package classes.Scenes.NPCs
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -507,10 +507,10 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		addButton(1,"Sex",heliaRoughSex);
 		addButton(2,"Threesomes",heliaThreesomes);
 		addButton(4,"Talk",heliaOptions);
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot);
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot);
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
-		if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] == 0) addButton(6,"Box",boxWithInCampHel);
-		if(flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel);
+		if (flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
 			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 &&
 					!helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",helSpawnScene.haveAKid);
 		}
@@ -533,11 +533,11 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 }
 
 private function heliaOptions():void {
-	if(flags[kFLAGS.HEL_PREGNANCY_INCUBATION] <= 200 && flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
+	if (kGAMECLASS.helScene.pregnancy.event >= 3 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
 		helSpawnScene.heliaTalkSeven();
 		return;
 	}
-	if(flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HEL_TALK_EIGHT] == 0) {
+	if (flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HEL_TALK_EIGHT] == 0) {
 		helSpawnScene.heliaTalkEight();
 		return;
 	}
@@ -2021,11 +2021,11 @@ private function goWithHelia():void {
 	if(flags[kFLAGS.URTA_MET_HEL] == 1) outputText("From the quick look she and the salamander exchange, you get the feeling they've met before. Weird. Still, ");
 	outputText("Urta gives you a small nod as Hel leads you into town, past the half-empty guard post and into the bustling main street.  The market way's particularly busy in the late afternoon, bustling with activity as merchants hawk their wares and the first of the street-walkers start to come out, standing in seductive poses in the shade of the alleys.  More than a few send catcalls your way, a few even offering discounts for couples.");
 	
-	outputText("\n\nHel grins at the attention, suggesting that when your visit with her folks is over, maybe you'd like to \"swing back and pick up a little fun for the night.\"  You consider her suggestion a moment, but before you can give answer, feel the heat of her body pressing tightly to you");
+	outputText("\n\nHel grins at the attention, suggesting that when your visit with her folks is over, maybe you'd like to \"swing back and pick up a little fun for the night.\"  You consider her suggestion a moment, but before you can give answer, you feel the heat of her body pressing tightly to you");
 	if(player.tallness <= 72) outputText(", her head resting on your shoulder");
 	outputText(".  \"<i>Hey, thanks for coming, [name],</i>\" she says quietly, squeezing your arm, \"<i>Kiri's done nothing but talk about you since the tower.  I think someone has a crush...</i>\"");
 	
-	outputText("\n\nHel stifles a laugh as you push your way through the crowd, teasing and laughing together until you see the hermaphroditic centauress looming over the Wet Bitch's doors.  Which are, rather oddly, closed.  You stop a pace back, looking around for any sign of the usual horde of bar crawlers and tavern dwellers, but the Bitch seems dead empty, and deathly quiet inside.  You exchange a look with your lover before giving the door a sharp rap.  The door creaks open on its own onto the darkened bar, and you have just enough time to see a \"Reserved\" signed flutter past you before Helia takes a step inside.");
+	outputText("\n\nHel stifles a laugh as you push your way through the crowd, teasing and laughing together until you see the hermaphroditic centauress looming over the Wet Bitch's doors... which are, rather oddly, closed.  You stop a pace back, looking around for any sign of the usual horde of bar crawlers and tavern dwellers, but the Bitch seems dead empty, and deathly quiet inside.  You exchange a look with your lover before giving the door a sharp rap.  The door creaks open on its own onto the darkened bar, and you have just enough time to see a \"Reserved\" signed flutter past you before Helia takes a step inside.");
 	
 	outputText("\n\nYour heart just about skips a beat when the lamps suddenly fire up and a chorus of voices cry out, \"<i>SURPRISE!</i>\"");
 	
@@ -2081,7 +2081,7 @@ private function heliaDrinks():void {
 	outputText("You saunter up to the bar, where the staff have laid out more than enough beers for the entire party.  Edryn and a handful of phoenixes are milling around, exchanging tips for swordsmanship: Edryn advocating charging in with a greatweapon swinging, as the phoenixes try and explain their shield-wall tactics.  You knock back a drink and listen in, watching with interest as the phoenix girls get progressively more and more flustered");
 	//if PC is male:
 	if(player.hasCock() && player.hasVagina()) outputText(" just as you do");
-	outputText(" in the presence of the steadily mounting pheromone cloud around the lusty centauress.  Before you've finished your drink, all the half-harpies are sporting sizable tents in their britches and are subtely sniffing around, trying to figure out what's happening to them... just before Edryn grabs the lead phoenix by the arm and leads her off into one of the back rooms, shooting the others a wink and a flicking tail over her drooling horse-sex.  The others are quick to follow.");
+	outputText(" in the presence of the steadily mounting pheromone cloud around the lusty centauress.  Before you've finished your drink, all the half-harpies are sporting sizable tents in their britches and are subtly sniffing around, trying to figure out what's happening to them... just before Edryn grabs the lead phoenix by the arm and leads her off into one of the back rooms, shooting the others a wink and a flicking tail over her drooling horse-sex.  The others are quick to follow.");
 	flags[kFLAGS.HELIA_BDAY_DRINKS] = 1;
 	helPartyMenu();
 }
@@ -2094,7 +2094,7 @@ private function heliaHakonAndKiri():void {
 	outputText("\n\n\"<i>How're you holding up, " + player.mf("son","kid") + "?</i>\" Hakon says, clapping you on the shoulder and passing you another beer.  \"<i>Hel tells me you're quite a handful.  Treating my girl right, I hope?</i>\"");
 	
 	outputText("\n\nYou falter at that, not quite sure how to address your lover's father in that regard, but the old salamander just laughs and gives you another rough shoulder-clap.  \"<i>Just teasing, " + player.mf("boy","girl"));
-	outputText(".  We salamanders are a bit more open about that sort of thing, though, if you haven't noticed.  Helia's regaled us with more than a few of her 'stories,' let me tell you. Isn't that right, sweetheart.</i>\"");
+	outputText(".  We salamanders are a bit more open about that sort of thing, though, if you haven't noticed.  Helia's regaled us with more than a few of her 'stories,' let me tell you. Isn't that right, sweetheart?</i>\"");
 	
 	outputText("\n\nKiri blushes, casting a bashful glance toward you and her sister in the heart of the bar. Poor thing. You ruffle her hair and step away.");
 	flags[kFLAGS.HELIA_BDAY_HAKON_AND_KIRI] = 1;
@@ -2108,10 +2108,10 @@ private function heliaPhoenixes():void {
 	
 	outputText("\n\n\"<i>Evening, [name],</i>\" their leader says, snapping you a crisp salute.  \"<i>Fine party we've got here.</i>\"");
 	
-	outputText("\n\nYou ask what they're doing here, exactly.  Last time you saw them, after all, they were the foot soldiers of a rapey queen.  The troops exchange a glance, \"<i>I'm surprised the town guard let us in, but Sergeant Edryn put in a word for us. Father - Hakon - invited us.  Said that, even with what happened in the Tower, there's no reason for us to be stranger.  BECAUSE of what happened, even.  With father free and mother ");
+	outputText("\n\nYou ask what they're doing here, exactly.  Last time you saw them, after all, they were the foot soldiers of a rapey queen.  The troops exchange a glance, \"<i>I'm surprised the town guard let us in, but Sergeant Edryn put in a word for us. Father - Hakon - invited us.  Said that, even with what happened in the Tower, there's no reason for us to be strangers.  BECAUSE of what happened, even.  With father free and mother ");
 	if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("dead");
 	else outputText("deposed");
-	outputText(", he thought it would be good to try and at least... know eachother.  I'm not complaining.  Things like this party... never would have seen anything like this under Queen Calais.  It's nice to see new things, meet new people.</i>\"");
+	outputText(", he thought it would be good to try and at least... know each other.  I'm not complaining.  Things like this party... never would have seen anything like this under Queen Calais.  It's nice to see new things, meet new people.</i>\"");
 	
 	outputText("\n\nYou see a few glances going toward Edryn and the fox twins");
 	if(followerKiha() && isabellaFollower()) outputText(", then to the fiery dragoness and the ultra-busty cowgirl talking in the corner");
@@ -2157,7 +2157,7 @@ private function leaveWithGirls():void {
 	clearOutput();
 	outputText("You decide you've had about enough of the party for now.  You slip over to Hel and tell her you're ready to head out when she is.");
 	
-	outputText("\n\n\"<i>Alright, lover.  Not that I ever get tired of tits in my face, but... well, I think I know who I want to spend the rest of my evening with.... and with some bare tits and cocks in my face.  Can't ask for more in life!</i>\"");
+	outputText("\n\n\"<i>Alright, lover.  Not that I ever get tired of tits in my face, but... well, I think I know who I want to spend the rest of my evening with... and with some bare tits and cocks in my face.  Can't ask for more in life!</i>\"");
 	
 	outputText("\n\nShe stands and, turning toward the crowd, announces: \"<i>Thank you all so very, very much for coming out.  I can't even begin to tell you how much it means to me to see you all... I honestly didn't know anybody would come.  I hardly remembered myself. I love you all, and thanks again.</i>\"");
 	

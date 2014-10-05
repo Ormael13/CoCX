@@ -804,6 +804,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Defend") != -1) {                        
 		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 	}
+	if(buttonText.indexOf("Fantasize") != -1) {                        
+		toolTipText = "Fantasize about your opponent in a sexual way.  It's probably a pretty bad idea to do this unless you want to end up getting raped.";
+	}
 	//Spells
 	if(buttonText.indexOf("Charge W.") != -1) {                        
 		toolTipText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
@@ -816,7 +819,7 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Arouse") != -1) {                        
 		if (gameState != 1) toolTipText = "";
-		else toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
+		else toolTipText = "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
 	if(buttonText == "Heal") {                        
 		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
@@ -826,6 +829,9 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("C.Palm") != -1) {                        
 		toolTipText = "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  (Fatigue Cost: " + spellCost(30) + ")";
+	//Wait
+	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
+		toolTipText = "Take no action for this round.  Why would you do this?  This is a terrible idea.";
 	}
 	
 	//Urta's specials
@@ -893,6 +899,12 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	
 	//Masturbation Toys
+	if(buttonText == "Masturbate") {
+		toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
+	}
+	if(buttonText == "Meditate") {
+		toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
+	}
 	if(buttonText.indexOf("AN Stim-Belt") != -1) {
 		toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
 	}
@@ -900,7 +912,7 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
 	}
 	if(buttonText.indexOf("AN Onahole") != -1) {
-		toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Never-the-less, the slick orifice it presents looks very inviting.";
+		toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Nevertheless, the slick orifice it presents looks very inviting.";
 	}
 	if(buttonText.indexOf("D Onahole") != -1) {
 		toolTipText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
@@ -1960,8 +1972,17 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 		
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0)
-		childStats += "<b>Children With Izma:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + "\n";
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
+		childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
+		
+	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
+		childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
+		
+	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
+		
+	if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 		
 	if (mountain.salon.lynnetteApproval() != 0)
 		childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
@@ -1994,8 +2015,8 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0)
 		childStats += "<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n";
 		
-	if (player.statusAffectv2(StatusAffects.Tamani) > 0)
-		childStats += "<b>Children With Tamani:</b> " + player.statusAffectv2(StatusAffects.Tamani) + " (after all forms of natural selection)\n";
+	if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
+		childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
 		
 	if (urtaPregs.urtaKids() > 0)
 		childStats += "<b>Children With Urta:</b> " + urtaPregs.urtaKids() + "\n";
@@ -2631,7 +2652,7 @@ public function range(min:Number, max:Number, round:Boolean = false):Number
 public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	//Virginity check
 	if(player.vaginas[vIndex].virgin) {
-		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses it's virginity!", false);
+		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses its virginity!", false);
 		player.vaginas[vIndex].virgin = false;
 	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
@@ -2643,7 +2664,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " looses its virgin-like tightness.</b>  ", false);
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
@@ -2657,7 +2678,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " looses its virgin-like tightness.</b>  ", false);
+				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}

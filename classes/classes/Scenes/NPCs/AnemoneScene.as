@@ -9,11 +9,8 @@ package classes.Scenes.NPCs
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Weapon;
 
-	public class AnemoneScene extends BaseContent
+	public class AnemoneScene extends BaseContent implements TimeAwareInterface
 	{
-		public function AnemoneScene()
-		{
-		}
 
 		//Encountered via Boat (unless a new Under-Lake area is
 		//unlocked)
@@ -56,9 +53,48 @@ package classes.Scenes.NPCs
 		//  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
 		//  HAD_KID_A_DREAM:int = 758;
 
+		public function AnemoneScene()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			if (flags[kFLAGS.ANEMONE_KID] > 0) {
+				if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
+				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+					kidABabysitsCows();
+					needNext = true;
+				}
+				if (flags[kFLAGS.KID_SITTER] == 1 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+					flags[kFLAGS.KID_SITTER] = 2;
+				}
+				else if (flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
+			}
+			if (player.findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
+				if (player.pregnancyIncubation > 1) {
+					player.removeStatusAffect(StatusAffects.AnemoneArousal);
+					outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You stick a finger inside yourself and marvel in wonder - it's gone!  You aren't sure if it slipped out or your body somehow consumed it, but it's nice to have a clearer head.</b>\n", false);
+				}
+				else if(!player.hasVagina()) {
+					player.removeStatusAffect(StatusAffects.AnemoneArousal);
+					outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You aren't sure if it was somehow consumed by the removal of your vagina or if it escaped during the process, but it's nice to have a clear head for a change.</b>\n", false);
+				}
+				needNext = true;
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+
 		private function anemonePreg():void
 		{
-			player.knockUp(player.PREGNANCY_ANEMONE, player.INCUBATION_ANEMONE, 101);
+			player.knockUp(PregnancyStore.PREGNANCY_ANEMONE, PregnancyStore.INCUBATION_ANEMONE, 101);
 		}
 
 		public function kidAXP(diff:Number = 0):Number
@@ -1351,7 +1387,7 @@ package classes.Scenes.NPCs
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.RRAPIER.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.JRAPIER.id) {
 				outputText("\n\nThe rapier is light enough for the girl, but it takes a multitude of reminders before she handles the slender blade with the care and style it deserves.  She seems to regard it as little more than a tool for thwacking you in the butt that, coincidentally, has a pointy end.");
-				//(no effect, senorita)
+				//(no effect, señorita)
 			}
 			//[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id ||

@@ -44,17 +44,17 @@ public function benoitAffection(changes:Number = 0):Number {
 
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
-	if(player.pregnancyType == player.PREGNANCY_BASILISK && player.findPerk(PerkLib.BasiliskWomb) >= 0) player.pregnancyType = player.PREGNANCY_BENOIT;
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.findPerk(PerkLib.BasiliskWomb) >= 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	//Knock up chances:
-	if((player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS)) {
-		if(player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
-			if (player.pregnancyType != player.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
-				player.knockUp(player.PREGNANCY_BENOIT, player.INCUBATION_BASILISK);
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+		if (player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
+			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
+				player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
-			if(player.pregnancyIncubation > 0) player.pregnancyType = player.PREGNANCY_BENOIT;
+			if (player.pregnancyIncubation > 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 		}
 		else {
-			player.knockUp(player.PREGNANCY_BASILISK, player.INCUBATION_BASILISK);
+			player.knockUp(PregnancyStore.PREGNANCY_BASILISK, PregnancyStore.INCUBATION_BASILISK);
 		}
 	}
 }
@@ -64,40 +64,47 @@ private function benoitKnocksUpPCCheck():void {
 */
 public function benoitPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] > 0) return true;
 	return false;
 }
 
 public function benoitRegularPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 1 && flags[kFLAGS.FEMOIT_EGGS] <= 4) return true;
 	return false;
 }
 
 public function benoitHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 5 && flags[kFLAGS.FEMOIT_EGGS] <= 8) return true;
 	return false;
 }
 
 public function benoitVeryHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 9 && flags[kFLAGS.FEMOIT_EGGS] <= 12) return true;
 	return false;
 }
 
 public function benoitExtremePreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 13) return true;
 	return false;
 }
 
 public function benoitInClutch():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
+	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
 	var currDay:int = this.getGame().model.time.days;
-	var diffDays:Number = (currDay - startDay) % 28;
+	var diffDays:int = (currDay - startDay) % 28;
 
 	if (diffDays >= 21) return true;
 	return false;
@@ -171,7 +178,7 @@ public function benoitIntro():void {
 		
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls his claws protectively into what appears to be a pile of robes sitting next to him, which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && flags[kFLAGS.BENOIT_STATUS] == 0) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && flags[kFLAGS.BENOIT_STATUS] == 0) {
 		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
 		suggestText = "Suggest";
@@ -268,18 +275,25 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0 && player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
 	{
 		suggest = femoitSexIntro;
 		suggestText = "Sex";
 	}
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS == 0]) womb = tryToConvertToBassyWomb;
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) womb = tryToConvertToBassyWomb;
 
 	var fem:Function;
 
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) fem = benoitFeminise;
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
+	{
+		// Only available if the player hasn't since fucked Benoit after unlocking the option.
+		if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0)
+		{
+			fem = benoitFeminise;
+		}
+	}
 
 	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,suggestText,suggest,"Basil. Womb",womb,"Feminise",fem,"",0,"",0,"",0,"Leave",2855);
 }
@@ -822,7 +836,7 @@ private function eggySuggest():void {
 	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" Benoit says after he's managed to catch his breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at his slightly shell-shocked expression, and the light, happy sound seems to bring him around a bit.  He brushes your shoulder as he walks past you, feeling around the stock room until he finds a chest of drawers.  He opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" he says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.orgasm();
-	if((player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == player.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
 	}
@@ -1119,7 +1133,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}
-	if (player.pregnancyType == player.PREGNANCY_BASILISK) player.pregnancyType = player.PREGNANCY_BENOIT;
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	doNext(13);
 	player.orgasm();
 	dynStats("sen", -2);
@@ -1174,8 +1188,7 @@ public function popOutBenoitEggs():void {
 		outputText("\n\nBenoit smiles proudly.  \"<i>I cannot zank you enough for zis.  Do not worry, I shall keep zem as safe as I ave ze ozzeir clutches.</i>\"\n");
 	}
 	player.orgasm();
-	player.pregnancyIncubation = 0;
-	player.pregnancyType = 0;
+	player.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
 	//doNext(1);
 }
@@ -1229,9 +1242,16 @@ public function benoitFeminise():void
 	if (!player.hasItem(consumables.P_S_MLK, 2) || !player.hasItem(consumables.L_PNKEG) || !player.hasItem(consumables.OVIELIX) || !player.hasItem(consumables.REPTLUM))
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
+		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
+		this.getGame().flushOutputTextToGUI();
 	}
 	else
 	{
+		player.destroyItems(consumables.P_S_MLK, 2);
+		player.destroyItems(consumables.L_PNKEG, 1);
+		player.destroyItems(consumables.OVIELIX, 1);
+		player.destroyItems(consumables.REPTLUM, 1);
+		
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 
 		outputText("\n\n\"<i>I - what?</i>\" the basilisk says, bewildered.  \"<i>But... [name], zat was just fantasy!  I was not expecting you to...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You crack the egg against the bowl and then beat it into the milk; the goop takes on a pink cake-mix texture until you pour in the ovi-elixir, which thins it as well as filling the close market stall with a rather bad, sulfuric smell.  Carefully you drip in the reptilum whilst continuing to stir; eventually the liquid in front of you takes on a livid lime color.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  He slowly clasps his fingers around it, staring blindly into the concoction.");
@@ -1445,7 +1465,7 @@ public function femoitSexIntro():void
 
 			outputText("\n\nIt's huge and heavy, solid like a rock, the scaly skin stretched so taut over the eggs inside you're certain you can actually feel them through her skin. There are too many of them jam-packed in there to actually move, though, signalling just how remarkably gravid Benoite is.  Your examinations are cut off when Benoite suddenly grinds her ass insistently against your crotch. \"<i>Ze snuggling is nice, lovair, but I am in ze mood for somesing a leetle more... active,</i>\" the basilisk comments, her tone light and airy.");
 
-			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [thighs]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
+			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [hips]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
 
 			outputText("\n\nOne hand continues to trace circles across her egg-laden womb, even as you move the other down to gently cup and squeeze her full bottom, rubbing the base of her tail before creeping down in between her legs. Dampness meets your probing fingers, letting you know your efforts have been reward, and you decide to give Benoite something a little more intense. Your [cock] begins to poke into the she-lizard's luscious ass, making her laugh that oh-so-filthy laugh of hers.  \"<i>And 'ere I sought zat you were just wanting to snuggle?  Well, come on z'en, my lovair; if you sink you know 'ow to use zat properly?</i>\"");
 

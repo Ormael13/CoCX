@@ -466,6 +466,7 @@ public function creditsScreen():void {
 	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
 	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");
 	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
+	outputText("<li> IxFa (Dildo Scene, Virgin Scene for Deluxe Dildo, Naga Tail Masturbation)</li>");
 	outputText("<li> Bob (Additional Izma)</li>");
 	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
 	outputText("<li> Dextersinister (Gnoll girl in the plains)</li>");

@@ -5,6 +5,7 @@ package classes.Items.Consumables
 {
 	import classes.GlobalFlags.kFLAGS;
     import classes.Player;
+	import classes.PregnancyStore;
 	import classes.StatusAffects;
     import classes.internals.Utils;
 
@@ -37,17 +38,17 @@ package classes.Items.Consumables
 			//			-1 = No (single pregnancy, womb), -2 = No (single pregnancy, colon), -3 = No (double pregnancy, both not OK), -4 = No (double pregnancy, one OK, one not)
 			if (player.pregnancyIncubation == 0) {				
 				if (player.buttPregnancyIncubation == 0) return 0; //No baby. Simplest, most common case
-				if (player.buttPregnancyType == player.PREGNANCY_SATYR) return 2;
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) return 2;
 				return -2;
 			}
 			if (player.buttPregnancyIncubation == 0) { //Single pregnancy, carried in the womb
-				if (player.pregnancyType == player.PREGNANCY_SATYR) return 1;
-				if (player.pregnancyType == player.PREGNANCY_FAERIE) return 1;
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR) return 1;
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) return 1;
 				return -1;
 			}
 			//Double pregnancy
-			var wombBabyLikesAlcohol:Boolean = (player.pregnancyType == player.PREGNANCY_SATYR) || (player.pregnancyType == player.PREGNANCY_FAERIE);
-			var colonBabyLikesAlcohol:Boolean = (player.buttPregnancyType == player.PREGNANCY_SATYR);
+			var wombBabyLikesAlcohol:Boolean = (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR) || (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE);
+			var colonBabyLikesAlcohol:Boolean = (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR);
 			if (wombBabyLikesAlcohol && colonBabyLikesAlcohol) return 3;
 			if (!wombBabyLikesAlcohol && !colonBabyLikesAlcohol) return -3;
 			return -4;
@@ -58,7 +59,7 @@ package classes.Items.Consumables
 			//Returns:	0 = Player is not pregnant, 1 = Player is pregnant with a satyr or phouka, 2 = Player is pregnant with a faerie that will become a phouka with this drink,
 			//			3 = Player is pregnant with a faerie that will remain a faerie after this drink
 			if ((player.pregnancyIncubation == 0) && (player.buttPregnancyIncubation == 0)) return 0;
-			if (player.pregnancyType == player.PREGNANCY_FAERIE) {
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) {
 				if (game.flags[kFLAGS.PREGNANCY_CORRUPTION] == 0) return 2;
 				if (game.flags[kFLAGS.PREGNANCY_CORRUPTION] < 0) return 3;
 			}

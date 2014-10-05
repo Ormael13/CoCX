@@ -516,7 +516,7 @@ private function rapeZeVapula():void {
 		player.orgasm();
 		dynStats("str", 1,"tou", 1, "lib", -4, "cor", 4);
 		player.slimeFeed();
-		player.knockUp(player.PREGNANCY_IMP, player.INCUBATION_IMP);
+		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
 	model.time.hours = 7;
@@ -798,14 +798,14 @@ private function fightZeVillagers():void {
 //Defeat Villagers (only displayed if corruption >= 60ish) (Z)
 public function beatUpOwca():void {
 	clearOutput();
-	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled upas she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
+	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
 	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
-	simpleChoices("Rape Rebbecc",rape,"Torch Village",torch,"",0,"",0,"Leave",leaveOwcaAfterWhupping);
+	simpleChoices("Rape Rebecc",rape,"Torch Village",torch,"",0,"",0,"Leave",leaveOwcaAfterWhupping);
 }
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
 private function leaveOwcaAfterWhupping():void {

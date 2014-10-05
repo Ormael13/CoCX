@@ -48,7 +48,7 @@ public var urtaQItems4:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems5:ItemSlotClass = new ItemSlotClass();
 
 public function urtaBusy():Boolean {
-	return (flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] > 0 || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
+	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
 }
 public function isUrta():Boolean {
 	if(flags[kFLAGS.URTA_QUEST_STATUS] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] < 1) {
@@ -2818,7 +2818,7 @@ private function preggedUrtaWithGodChildEpilogue():void {
 private function getKnockedUpWithGodChild():void {
 	clearOutput();
 	outputText("Smiling coyly, you remove your [armor] and crawl into your bed, beckoning for the lust-crazed fox to follow.  You trust her, and you're more than willing to let her put a nice little bun in your");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText(" already filled");
+	if (player.isPregnant() && player.pregnancyIncubation < 150) outputText(" already filled");
 	outputText(" oven.  Her green eyes bulge obscenely at the sight of your naked flesh, locked tight to every curve of your shape.  The vixen takes one shuffling step after another.  It's clear from her crazed panting and trembling fingertips that she's trying to keep herself from jumping you with limited success.  She's like an addict eyeing a cornucopia stuffed with her favorite drugs, knowing that she must take it slow but helpless against her desire to gluttonously gorge.");
 
 	outputText("\n\nYou toss a little fuel on the fire by spreading your legs");
@@ -2989,7 +2989,9 @@ private function urtaAndEdrynGodChild():void {
 	clearOutput();
 	outputText("Urta shudders from head to toe, barely able to restrain herself around you.  \"<i>Oooooh... uh... okay, then.  I'll come back... when... when it's time, okay?</i>\" she titters, almost drunkenly, already prancing off towards the desert.  The lusty vixen looks over her shoulder at you as she jogs off, a trail of lubricant spattering in her wake, her tongue lolling wildly as her eye-humps you.  After a long moment, she looks away, perhaps unable to bear gazing on you any longer.  You hope everything turns out okay...");
 	//[Urta and Edryn disabled until birth event]
-	flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] = 24;
+	flags[kFLAGS.URTA_FERTILE]        = telAdre.edryn.pregnancy.type;       //Use these two flags to store the pregnancy that Taoth is overriding.
+	flags[kFLAGS.URTA_PREG_EVERYBODY] = telAdre.edryn.pregnancy.incubation; //Since they can't be in use prior to Taoth being born this is fine.
+	telAdre.edryn.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_TAOTH, 24);
 	gameState = 0;
 	doNext(13);
 }
@@ -3016,9 +3018,9 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	//{pre-pregnant }
 
 	outputText("horse-girl.");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
+	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
 	outputText("  Urta leads you around a bend, squeezing your hand for comfort.  \"<i>Thank you for everything, " + player.short + ", most of all being so understanding.</i>\"  The gray-furred fox pushes past the sixth pair of guards you've seen since entering the tower, just inside to see Edryn splayed on the floor, groaning and heaving, her ");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("massively ");
+	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("massively ");
 	outputText("pregnant flanks rippling with muscular contractions.   Something is bulging against her nether-lips, stretching the massive horse-cunt wider and wider with each passing moment.");
 
 	outputText("\n\nSlick with birthing fluids, a ball of fur, skin, and bones rolls out onto a mat placed there a moment before by a nearby centaur.  You squint at it, wondering just what everybody is so excited about - it looks little and messy, like any other newborn.");
@@ -3028,7 +3030,7 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\n<i>I live.</i>");
 
 	outputText("\n\nThe voice isn't spoken aloud but inside, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving Edryn's ass a familiar pat.");
-	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
+	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
 	outputText("  Edryn's eyes immediately close, sinking into a deep, restful sleep.");
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It strides confidently forward, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You step back, reluctantly");
 	if(player.cor > 66) outputText(", what do you care, anyway?");

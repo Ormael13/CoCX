@@ -132,8 +132,10 @@ package classes
 		public static const SlimeCravingOutput:StatusAffectType = mk("Slime Craving Output");
 		public static const SuccubiFirst:StatusAffectType = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusAffectType = mk("succubiNight");
-		public static const Tamani:StatusAffectType = mk("Tamani");
-		public static const TamaniFemaleEncounter:StatusAffectType = mk("Tamani Female Encounter");
+		public static const TakenGroPlus:StatusAffectType = mk("TakenGro+");
+		public static const TakenLactaid:StatusAffectType = mk("TakenLactaid");
+		public static const Tamani:StatusAffectType = mk("Tamani");									//Used only for compatibility with old save files, otherwise no longer in use
+		public static const TamaniFemaleEncounter:StatusAffectType = mk("Tamani Female Encounter");	//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TelAdre:StatusAffectType = mk("Tel'Adre");
 		public static const TentacleBadEndCounter:StatusAffectType = mk("TentacleBadEndCounter");
 		public static const TentacleJojo:StatusAffectType = mk("Tentacle Jojo");

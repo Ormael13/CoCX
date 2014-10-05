@@ -3,11 +3,8 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class IzmaScene extends NPCAwareContent
+	public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 	{
-		public function IzmaScene()
-		{
-		}
 
 //const IZMA_NO_COCK:int = 439;
 //const ASKED_IZMA_ABOUT_WANG_REMOVAL:int = 440;
@@ -21,6 +18,43 @@
   //girl at least once. (add code to shark girl encounter that 
   //creates Izmacounter and sets value to 1 if it doesn't exist)
   
+		public var pregnancy:PregnancyStore;
+
+		public function IzmaScene()
+		{
+			pregnancy = new PregnancyStore(kFLAGS.IZMA_PREGNANCY_TYPE, kFLAGS.IZMA_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 250, 200, 150, 100, 50);
+												//Event: 0 (= not pregnant),  1,   2,   3,   4,  5,  6 (< 50)
+			CoC.timeAwareClassAdd(this);
+		}
+
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			pregnancy.pregnancyAdvance();
+			trace("\nIzma time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] > 0) flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE]--; //BOOKURYUUUU COUNTAH For IZMA
+			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) {
+				flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
+			}
+			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] = 0;
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+				flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
+				sophieBimbo.sophieAndIzmaPlay();
+				return true;
+			}
+			if (izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+				izmaDomsLatexy();
+				return true;
+			}
+			return false;
+		}
+		//End of Interface Implementation
+		
 override public function izmaFollower():Boolean {
 	return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1;
 }
@@ -827,7 +861,7 @@ private function dontEatIzamsLeafAfterRape():void {
 	outputText("Izma cringes.  \"<i>Sorry!  I just don't want to go fathering children with someone who's not my mate!  Please, please take it!</i>\"\n\n", false);
 	
 	outputText("You slap the leaf out of her hand.  \"<i>Try getting stronger before you impose your decisions on others!</i>\" you bark.  \"<i>Whether I decide to have your kids or not is none of your business; you should be grateful at the chance to father them with someone tougher than you!</i>\"  She shivers and nods meekly, and you turn about and pick your way back to camp.\n\n", false);
-	player.knockUp(player.PREGNANCY_IZMA, player.INCUBATION_IZMA);
+	player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	cleanupAfterCombat();
 	//(Izmafight +1)
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
@@ -1551,30 +1585,30 @@ public function izmaFollowerMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
 	{
 	//Izma pops 'em out!
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 1) {
+		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 			IzmaPoopsBabies();
+			pregnancy.knockUpForce(); //Clear Pregnancy
 			return;
 		}
 		outputText("You call for Izma and she approaches, asking, \"<i>What can I do for my Alpha?</i>\"\n\n", false);
 		//Izma Pregnancy Stages:
-		//300 hours long
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 250) {}
-		//200-250
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 200) outputText("You can't help noticing that Izma seems very nauseous this morning; she's literally green around the gills.  When you investigate, though, she waves you off, insisting that she's fine; she just has a bit of a stomach bug.", false);
-		//150-200
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 150) outputText("Izma comes up to you, looking concerned.  \"<i>" + player.short + ", do you think I've gained weight?</i>\" she asks.  Looking at her, particularly at the stomach she's holding her hands over, you have to confess that it is starting to bulge out in a noticeable paunch.  At her crestfallen look, you suggest that maybe she's pregnant.  At that, she looks delighted.  \"<i>You really think so?</i>\" she asks, hopefully.  You assure her that you're certain of it; after all, she's very good at watching her weight.  Pleased, she kisses you and then heads off for a swim.", false);
-		//100-150
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 100) outputText("There is no doubt about it now; Izma's pregnant.  She's grown gravid more rapidly than any of the expecting mothers you remember seeing back in your village, but she seems to be having all of the same aches and pains.  She's grown lethargic and irritable, and complains about not being able to fit into her old clothes.  Still, despite that, she seems happy; she's always rubbing her belly with unmistakable pride.  You also think you've noticed her casting you \"<i>come hither</i>\" looks more frequently than before.", false);
-		//50-100
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 50) outputText("Izma's started to go around completely naked now.  She insists that she's grown too big to fit into her clothes, but you're kind of skeptical about that; she's as big as the women in your village got when they were near the end, but they managed to fit into their clothes, and theirs were a lot more restrictive than a bikini and grass skirt combo.  Still, you're not objecting to the view it provides, and she definitely seems to enjoy that; you never knew a shark tail could be wiggled in an enticing manner over shapely buttocks until you came to this world...", false);
-		//1-50
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] >= 1) {
-			outputText("Izma's certain the baby will come soon.  You're inclined to believe her; she's huge now.  She still wears no clothing, but there's definitely a practical reason for it");
-			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("- you don't think her skirt would be able to cope with how often she gets erect now, her huge cock rubbing along");
-			else outputText(", her juices staining");
-			outputText(" the underside of her swollen belly...  Izma spends much of her time in the water, now; she says it's to soothe her skin.  Given you've seen her explosively cum all over herself from ");
-			if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("the friction of her cock against her bulge, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
-			else outputText("the friction of her thighs as she moves, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+		switch (pregnancy.event) {
+			case 2: outputText("You can't help noticing that Izma seems very nauseous this morning; she's literally green around the gills.  When you investigate, though, she waves you off, insisting that she's fine; she just has a bit of a stomach bug.", false);
+					break;
+			case 3: outputText("Izma comes up to you, looking concerned.  \"<i>" + player.short + ", do you think I've gained weight?</i>\" she asks.  Looking at her, particularly at the stomach she's holding her hands over, you have to confess that it is starting to bulge out in a noticeable paunch.  At her crestfallen look, you suggest that maybe she's pregnant.  At that, she looks delighted.  \"<i>You really think so?</i>\" she asks, hopefully.  You assure her that you're certain of it; after all, she's very good at watching her weight.  Pleased, she kisses you and then heads off for a swim.", false);
+					break;
+			case 4: outputText("There is no doubt about it now; Izma's pregnant.  She's grown gravid more rapidly than any of the expecting mothers you remember seeing back in your village, but she seems to be having all of the same aches and pains.  She's grown lethargic and irritable, and complains about not being able to fit into her old clothes.  Still, despite that, she seems happy; she's always rubbing her belly with unmistakable pride.  You also think you've noticed her casting you \"<i>come hither</i>\" looks more frequently than before.", false);
+					break;
+			case 5: outputText("Izma's started to go around completely naked now.  She insists that she's grown too big to fit into her clothes, but you're kind of skeptical about that; she's as big as the women in your village got when they were near the end, but they managed to fit into their clothes, and theirs were a lot more restrictive than a bikini and grass skirt combo.  Still, you're not objecting to the view it provides, and she definitely seems to enjoy that; you never knew a shark tail could be wiggled in an enticing manner over shapely buttocks until you came to this world...", false);
+					break;
+			case 6: outputText("Izma's certain the baby will come soon.  You're inclined to believe her; she's huge now.  She still wears no clothing, but there's definitely a practical reason for it");
+					if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("- you don't think her skirt would be able to cope with how often she gets erect now, her huge cock rubbing along");
+					else outputText(", her juices staining");
+					outputText(" the underside of her swollen belly...  Izma spends much of her time in the water, now; she says it's to soothe her skin.  Given you've seen her explosively cum all over herself from ");
+					if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("the friction of her cock against her bulge, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+					else outputText("the friction of her thighs as she moves, you think it has more to do with avoiding being splattered in sexual juices all day long.", false);
+					break;
+			default:
 		}
 	}
 	else
@@ -1591,7 +1625,7 @@ public function izmaFollowerMenu():void {
 	var sex:Function = null;
 	if(player.lust >= 33) sex = izmaSexMenu;
 	var kids:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) kids = izmaKidsPlaytime;
+	if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) kids = izmaKidsPlaytime;
 	var deDickT:String = "";
 	var deDickB:Function = null;
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) {
@@ -1607,7 +1641,7 @@ public function izmaFollowerMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(1, "", null);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(2, "", null);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0) addButton(6, "Farm Work", sendToFarm);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && !pregnancy.isPregnant) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(6, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
@@ -1794,8 +1828,8 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 private function izmaPreg():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) return;
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
 	}
 }
 
@@ -1816,9 +1850,7 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 	}
 	outputText("; you were just as eager to release as she was.\n\n", false);
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
-	}
+	izmaPreg();
 	//(Standard cum protozoan) 
 	if(player.cumQ() < 500) outputText("You can feel Izma's womb fill with your cum, and she shudders from the sheer pleasure.", false);
 	//(High cum production) 
@@ -2025,9 +2057,7 @@ private function followerIzmaTakesItInVagoo():void {
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("She giggles and runs her tongue over the mess she's made; her tongue lingers on your lips for a few moments before she gives you another long kiss and lets you go.", false);
 	 else outputText("She giggles and runs her tongue over your lips, her tongue lingering for a few moments before she gives you another long kiss and lets you go.", false);
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
-	}
+	izmaPreg();
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(13);
@@ -2082,9 +2112,7 @@ private function facialWhereItGoesRadarIzmaXpack():void {
 
 	outputText("She giggles and runs her tongue over the mess she's made; her tongue lingers on your lips for a few moments before she gives you another long kiss and lets you go.", false);
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
-	}
+	izmaPreg();
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(13);
@@ -2114,9 +2142,7 @@ private function RadarIzmaCumInYourChest():void {
 
 	outputText("\n\nWhen she concludes with cleaning her Alpha, she takes a few moments to show you her appreciation for mating with her, kissing your chest and working her way up to your neck.");
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
-	}
+	izmaPreg();
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(13);
@@ -2134,9 +2160,7 @@ private function IzmaSelfFacialWheeRadar():void {
 	outputText("\n\nThe two of you roll apart, panting and gasping for breath.  She giggles and runs her tongue over the mess she's made; her tongue lingers on [oneCock].  \"<i>Mmm, that was amazing,</i>\" Izma says, \"<i>Come fill me whenever you need to.</i>\"  You grin at Izma and order her to eat up every drop.\n\n", false);
 	outputText("When she concludes with cleaning her Alpha, she takes a few moments to show you her appreciation for mating with her, kissing your chest and working her way up to your neck.");
 	//PREGGO CHANCES
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
-	}
+	izmaPreg();
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(13);
@@ -2384,7 +2408,7 @@ private function childToggle():void {
 	else {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] = 1;
 		//Make kids and has said yes before.
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) {
+		if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) {
 			outputText("You tell Izma that you're ready to start trying for children again.  She grins with delight and suddenly pounces at you, giving you a kiss that leaves you breathless.  Then, while you're recovering from that, she races off and drinks down a slug of that potion - you figure it must be some kind of 'antidote' to the contraceptives already in her system.  From the gleam in her eye as she stalks back towards you, it looks like she intends to start making babies right now...\n\n", false);
 		}
 		else {
@@ -2440,14 +2464,12 @@ private function IzmaPoopsBabies():void {
 	outputText("Quickly you take hold of its hand, then help Izma take it up into her arms once she's regained her strength.  You are now the proud parents of a baby ", false);
 	if(rand(100) <= 59) {
 		outputText("shark-girl", false);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]++;
+		flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 	}
 	else {
 		outputText("tigershark", false);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]++;
+		flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
 	}
-	//Reset izma preg
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 0;
 	outputText(", which nuzzles affectionately against its mother before latching onto her nipple and starting to drink.  As it drinks, it grows; by the time it empties Izma's first breast, it's easily the size of a five year old.  When it's finished its meal and belches loudly in satisfaction, it's the size of a pre-teen.  Izma takes its rapid development in stride, mother and daughter happily embracing each other.\n\n", false);
  
 	outputText("You help Izma climb back onto shore with your new baby, then lay them both down to rest.  Once they're settled down comfortably, cuddling up against each other, you turn and head back to camp, looking to dry yourself off and catch a quick nap.", false);
@@ -2517,12 +2539,12 @@ public function pcPopsOutASharkTot():void {
 		if(rand(100) <= 59) {
 			outputText("grey", false);
 			type = 0;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]++;
+			flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 		}
 		else {
 			outputText("black-striped orange", false);
 			type = 1;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]++;
+			flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
 		}
 		outputText(" skin, it's obvious she's a baby ", false);
 		if(type == 0) outputText("shark-girl", false);
@@ -2554,12 +2576,12 @@ private function izmaKidsPlaytime():void {
 	outputText("", true);
 	var choices:Array = [];
 	//Build an array of the possible scenes
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) {
+	if(flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) {
 		//NEITHER GOOD
 		//choices[choices.length] = 1;
 		//choices[choices.length] = 2;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] >= 2) choices[choices.length] = 3; 
+	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] >= 2) choices[choices.length] = 3; 
 	//if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] > 1) choices[choices.length] = 6;
 	choices[choices.length] = 4;
 	choices[choices.length] = 5;
@@ -2572,16 +2594,16 @@ private function izmaKidsPlaytime():void {
 	
 	
 	outputText("Izma shows you to an isolated bend in the stream; this is where your children have chosen to settle themselves.  Though they have the physiques and minds of pre-teens already, it will still be several years before they are fully grown and ready to leave you and Izma.  ", false);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] == 1) outputText("There is ", false);
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] == 1) outputText("There is ", false);
 	else outputText("There are ", false);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] > 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 1) outputText("one shark-girl", false);
-		else outputText(num2Text(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]) + " shark-girls", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText(" and ", false);
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0) {
+		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("one shark-girl", false);
+		else outputText(num2Text(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]) + " shark-girls", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) outputText(" and ", false);
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] == 1) outputText("one tigershark", false);
-		else outputText(num2Text(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252]) + " tigersharks", false);
+	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) {
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] == 1) outputText("one tigershark", false);
+		else outputText(num2Text(flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + " tigersharks", false);
 	}
 	outputText(" living here; the fruits of your love with Izma.\n\n", false);
 	//The above is the default scene, that plays whenever the player selects the "Children" option when interacting with Izma./
@@ -2590,20 +2612,20 @@ private function izmaKidsPlaytime():void {
 	//#1 (Requires 1 Tigershark: 
 	//NOPE
 	if(choice == 1) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] == 1) outputText("Your lone tigershark daughter is off by herself, experimentally stroking and fondling her already-impressive cock.  It doesn't look like it'll be long before she cums; her face is already screwed up in an expression of curious pleasure, gasping softly at the sensations.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] == 1) outputText("Your lone tigershark daughter is off by herself, experimentally stroking and fondling her already-impressive cock.  It doesn't look like it'll be long before she cums; her face is already screwed up in an expression of curious pleasure, gasping softly at the sensations.", false);
 		//(Requires 2-3 Tigersharks: 
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] < 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("Your tigershark daughters are seated together, each experimentally stroking and fondling her sizable erection.  It looks like they're competing to see who will cum first.", false);
+		else if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] < 4 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) outputText("Your tigershark daughters are seated together, each experimentally stroking and fondling her sizable erection.  It looks like they're competing to see who will cum first.", false);
 		//(Requires 4+ Tigersharks:
-		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("Your tigershark daughters are seated together, each experimentally jerking off either her own cock or one of her sisters.  Some look to be competing to see who can jerk themselves off first, others are evidently seeing who's better at handjobs.", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("  Izma blushes and explains that your children have strong libidos, so it's natural for them to experiment like this.  She assures you that they won't do any real sexual penetration with a family member.\n\n", false);
+		else if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) outputText("Your tigershark daughters are seated together, each experimentally jerking off either her own cock or one of her sisters.  Some look to be competing to see who can jerk themselves off first, others are evidently seeing who's better at handjobs.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) outputText("  Izma blushes and explains that your children have strong libidos, so it's natural for them to experiment like this.  She assures you that they won't do any real sexual penetration with a family member.\n\n", false);
 	}
 	//#2: (Requires at least 1 Tigershark)
 	//NOPE
 	else if(choice == 2) {
 		outputText("You see your daughter has caught a goblin who managed to find her way to this nook.  It doesn't look like either of them mind, though; she's roughly but eagerly stuffing herself into the squealing green-skinned slut's pussy, much to the goblin's pleasure.  She sees you and gives you a lewd wink.  \"<i>You've got a fine-ass daughter here; don't worry, I'll give you plenty of grandkids,</i>\" she jeers, then gives a lusty moan as your daughter finally reaches her limit and cums inside her, bloating the goblin's belly with spunk.", false);
 		//Other children:
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] > 2) outputText("  Your other kids are gathered around, watching with amusement and a little envy as one of your tigershark offspring plows an excited goblin.  \"<i>Oh, yeah, baby, now you folks know how to live!</i>\" she cheers.", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] > 2) outputText("  \"<i>Don't worry; you'll get a chance to use a beautiful big cock on me, too - just wait your turn!</i>\" she laughs looking around the circle.  Your other daughters look like they can't wait.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 2) outputText("  Your other kids are gathered around, watching with amusement and a little envy as one of your tigershark offspring plows an excited goblin.  \"<i>Oh, yeah, baby, now you folks know how to live!</i>\" she cheers.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 2) outputText("  \"<i>Don't worry; you'll get a chance to use a beautiful big cock on me, too - just wait your turn!</i>\" she laughs looking around the circle.  Your other daughters look like they can't wait.", false);
 		outputText("\n\nYou look at Izma, who gives you a shrug, obviously indifferent.  \"<i>Kids gotta be allowed to make their own mistakes sometimes.  I read that somewhere.</i>\"\n\n", false);
 	}
  	//#3: (Requires at least 2 children)
@@ -2615,12 +2637,12 @@ private function izmaKidsPlaytime():void {
 	//YUS
 	if(choice == 4) {
 		outputText("As you look around, a sudden violent splashing erupts from the lake.  You ready yourself to fight, but it turns out to be ", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 1) outputText("your daughter", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("your daughter", false);
 		else outputText("one of your daughters", false);
 		outputText(", who is evidently struggling with something. She finally manages to hurl herself onto the shore and, with a flurry of curses that have you looking at your sheepish tigershark lover, she hauls something up onto the bank with her. It turns out to be a huge catfish, nearly as long as she is tall, and she looks at you, baring her shark teeth in the fiercest, proudest grin.", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 1) outputText("  She immediately goes to sink her fangs into the still-flopping creature's skull, but Izma coughs pointedly.  Looking chastened, your daughter sits on a nearby rock and waits for the catch to die and be still, then carefully pulls off the sharp fins before dining.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("  She immediately goes to sink her fangs into the still-flopping creature's skull, but Izma coughs pointedly.  Looking chastened, your daughter sits on a nearby rock and waits for the catch to die and be still, then carefully pulls off the sharp fins before dining.", false);
 		else{
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 2) outputText("  Your other child runs up to her, which makes the triumphant fisher snarl a warning to stay back. It's obeyed, with some resistance, until the fish expires and stops thrashing. Only after the proprietor inspects it, pulls off the fins, and takes the choicest morsels for herself, does she share in the eating of the remaining still-raw fish; the girls snapping and shoving at each other to do so in a way that looks more violent than it actually is.", false);
+			if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 2) outputText("  Your other child runs up to her, which makes the triumphant fisher snarl a warning to stay back. It's obeyed, with some resistance, until the fish expires and stops thrashing. Only after the proprietor inspects it, pulls off the fins, and takes the choicest morsels for herself, does she share in the eating of the remaining still-raw fish; the girls snapping and shoving at each other to do so in a way that looks more violent than it actually is.", false);
 			else outputText("  Your other children run to surround her, which makes the triumphant fisher snarl a warning to stay back. It's obeyed, with some resistance, until the fish expires and stops thrashing. Only after the proprietor inspects it, pulls off the fins, and takes the choicest morsels for herself does share in eating of the remaining still-raw fish; the girls snapping and shoving at each other to do so in a way that looks more violent than it actually is.", false);
 		}
 	}
@@ -2628,10 +2650,10 @@ private function izmaKidsPlaytime():void {
 	//YUS
 	if(choice == 5) {
 		outputText("Your ", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 1) outputText("child perks up to see Izma and comes running over to her, throwing herself into her arms", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("child perks up to see Izma and comes running over to her, throwing herself into her arms", false);
 		else outputText("children perk up to see Izma and come running over to her, throwing themselves into her arms", false);
 		outputText(".  She laughs in delight and sits down on the bank, reaching for a book she has in a bag at her side.  Your offspring ", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00252] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251] == 1) outputText("cries out in joy at the prospect of storytime and eagerly seats herself in front of her, listening as she starts to read.", false);
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("cries out in joy at the prospect of storytime and eagerly seats herself in front of her, listening as she starts to read.", false);
 		else outputText("cry out in joy at the prospect of storytime and eagerly seat themselves in front of her, listening as she starts to read.", false);
  		outputText("  You remain there for a while, listening, but eventually you think of your duties as champion and you have to take your leave of them.", false);
 	}
@@ -2724,7 +2746,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
  
 	outputText("Izma waves at you and smirks as you go to leave, and you have to wonder if Izma was only acting helpless in order to get off...", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] > 0) {
-		player.knockUp(player.PREGNANCY_IZMA, player.INCUBATION_IZMA);
+		player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	}
 	player.slimeFeed();
 	doNext(13);
@@ -2735,7 +2757,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 private function IzmaCampBooks():void {
 	spriteSelect(32);
 	outputText("", true);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00253] > 0) {
+	if(flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] > 0) {
 		tooSoonExecutus();
 		return;
 	}
@@ -2753,7 +2775,7 @@ private function campCuntManual():void {
 	spriteSelect(32);
 	outputText("", true);
 	outputText("You ask Izma if she'd like to read one of the many issues of the 'Combat Manual' with you.  She gives a snigger and grabs a random issue. \"<i>Of course.  But I honestly never thought someone as good as you would need any more tips in combat,</i>\" she teases, getting comfy on a rock.  You sit beside her to read, and retort that, if anything, you're using the chance to give her combat tips.  Izma shoots you a half-hearted dirty look in response, but you think she knows you're teasing her.\n\n", false);
- 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00253] = 11;
+ 	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
 	//(Usual random stat increase from the combat Manual)
  	//(One of the following random effects happens)
 	var choice:Number = rand(3);
@@ -2780,7 +2802,7 @@ private function entropyGuideByStephenHawking():void {
 	spriteSelect(32);
 	outputText("", true);
 	outputText("You point to Izma's many copies of the 'Etiquette Guide' series and ask her if she'd like to read one of those. Izma shrugs in response and picks up one issue.  \"<i>Yeah, I suppose.  You certainly need to learn how to be mannerly,</i>\" she teases, opening up on the table of contents.  You lightly consider whether that makes her a hypocrite before giving it up and starting to read with her.  That way lies madness.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00253] = 11;
+	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
 	//(Usual random stat increase from the E.Guide)
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n", false);
 	//(-2 Libido, -2 Corruption)
@@ -2796,7 +2818,7 @@ private function stephenHawkingPorn():void {
 	outputText("A wicked smirk crosses your face and you point to the small bundle of porn that Izma has in her trunk. Izma looks nervous and pulls out one stack of the illustrations. \"<i>Ah-hah... really?</i>\" she asks, her face a rictus of embarrassment.  You nod in response and sit down on a rock, gesturing for Izma to join you.  She has some color on her face, though whether it be more or less than usual you can't decide, not knowing enough about her biology yet, and she sits down and starts to examine the porn with you, bumping your legs with hers as she adjusts her posture ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("continuously to keep the beast in her skirt pinned down.\n\n", false);
 	else outputText("nervously in an effort to keep from moistening it.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00253] = 11;
+	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
 	outputText("By the time you're done reading, Izma certainly seems turned on.  She tries to hide it and sit primly - ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("but that's not exactly possible for someone who just had over a foot of dick slip from between her thighs and stick into the air.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.", false);
 	else outputText("but that's not exactly possible for someone who keeps squirming, creating lewd squishes from below the waist.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.", false);
@@ -2831,7 +2853,7 @@ private function findLostIzmaKidsII():void {
 	outputText("You embrace your daughter, both of you half-laughing half-crying into each other's shoulders.  After a few moments of this, you pull away a little and blurt out a few urgent questions about her well-being and mental health.  She in turn inquires about you and her \"father.\"\n\n", false);
 	outputText("This sparks off a happy chain of thoughts in your mind, and you inform your wayward daughter that Izma is now living with you (and there's room for another).  She squeaks happily at the news, and tells you that she'll meet you at camp.  She pecks you on the cheek, then runs into the shallows and disappears.  You walk away, beaming at the thought of seeing a new face in camp.", false);
 	//(+1 Izma children.)
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00251]++;
+	flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 	doNext(13);
 }
 
@@ -2975,7 +2997,7 @@ private function fuckIzmasPussyDominate():void {
 	outputText(" turns and shoots a flirty smile at you, her demeanor suggesting that she may know what you want as she obeys your orders, stopping at the stump and waiting for you to show her what you have in mind.  Izma cocks her head ever-so-slightly, turning it so you can see her lips move as she speaks.  \"<i>So... is this where you tell me to lie down on the stump?</i>\"  Izma asks, \"<i>Where you take me with y-</i>\" Izma doesn't get to finish her sentence as you ");
 
 	//(If Izma is not pregnant: 
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] > 250) outputText("shove her forcefully down onto the withered stump.  She lands stomach first and lets out a loud \"<i>unf</i>\" as the stub of wood cushions her impact.  It only takes her a brief moment to recover her senses, but that's more than enough time to grab her tail and move it out of the way, giving you the angle to penetrate her pussy with your [cock " + y + "].");
+	if (pregnancy.event <= 1) outputText("shove her forcefully down onto the withered stump.  She lands stomach first and lets out a loud \"<i>unf</i>\" as the stub of wood cushions her impact.  It only takes her a brief moment to recover her senses, but that's more than enough time to grab her tail and move it out of the way, giving you the angle to penetrate her pussy with your [cock " + y + "].");
 	//(If Izma is has one in the oven: 
 	else outputText("forcefully lower her down to the stump, careful to not injure your unborn child in the process.  With slutty abandon, the tigershark lifts her tail, giving you a good angle to penetrate her slathering wet pussy with your [cock " + y + "].");
 

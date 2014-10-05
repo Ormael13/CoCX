@@ -6,7 +6,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
 	 * @author Yoffy
 	 */
-	public class Character extends Creature 
+	public class Character extends Creature
 	{
 		private var _femininity:Number = 50;
 
@@ -59,69 +59,19 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		//Body tone i.e. Lithe, stocky, etc
 		public var tone:Number = 0;
 		
-		//Pregancy types. Both butt and normal.
-		public const PREGNANCY_IMP:int                   =   1;
-		public const PREGNANCY_MINOTAUR:int              =   2;
-		public const PREGNANCY_MOUSE:int                 =   4;
-		public const PREGNANCY_OVIELIXIR_EGGS:int        =   5; //Also caused by Phoenixes apparently
-		public const PREGNANCY_HELL_HOUND:int            =   6;
-		public const PREGNANCY_CENTAUR:int               =   7;
-		public const PREGNANCY_MARBLE:int                =   8;
-		public const PREGNANCY_BUNNY:int                 =   9;
-		public const PREGNANCY_ANEMONE:int               =  10;
-		public const PREGNANCY_AMILY:int                 =  11;
-		public const PREGNANCY_IZMA:int                  =  12;
-		public const PREGNANCY_SPIDER:int                =  13;
-		public const PREGNANCY_BASILISK:int              =  14;
-		public const PREGNANCY_DRIDER:int                =  15;
-		public const PREGNANCY_GOO_GIRL:int              =  16;
-		public const PREGNANCY_EMBER:int                 =  17;
-		public const PREGNANCY_BENOIT:int                =  18;
-		public const PREGNANCY_SATYR:int                 =  19;
-		public const PREGNANCY_COTTON:int                =  20;
-		public const PREGNANCY_URTA:int                  =  21;
-		public const PREGNANCY_SAND_WITCH:int            =  22;
-		public const PREGNANCY_FROG_GIRL:int             =  23;
-		public const PREGNANCY_FAERIE:int                =  24; //Indicates you are carrying either a phouka or faerie baby. Which one is determined by the PREGNANCY_CORRUPTION flag
+		private var _pregnancyType:int = 0;
+		public function get pregnancyType():int { return _pregnancyType; }
 
-		public const PREGNANCY_BUTT_BEE:int              =   2;
-		public const PREGNANCY_BUTT_DRIDER:int           =   3;
-		public const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
-		public const PREGNANCY_BUTT_SANDTRAP:int         =   5; //Sandtrap did not have fertilized eggs
+		private var _pregnancyIncubation:int = 0;
+		public function get pregnancyIncubation():int { return _pregnancyIncubation; }
 
-		public const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
-		public const INCUBATION_MINOTAUR:int             = 432;
-		public const INCUBATION_MOUSE:int                = 350;
-		public const INCUBATION_OVIELIXIR_EGGS:int       =  50;
-		public const INCUBATION_HELL_HOUND:int           = 352;
-		public const INCUBATION_CENTAUR:int              = 420;
-		public const INCUBATION_MARBLE:int               = 368;
-		public const INCUBATION_BUNNY_BABY:int           = 200;
-		public const INCUBATION_BUNNY_EGGS:int           = 808; //High time indicates neon egg pregnancy
-		public const INCUBATION_ANEMONE:int              = 256;
-		public const INCUBATION_IZMA:int                 = 300;
-		public const INCUBATION_SPIDER:int               = 400;
-		public const INCUBATION_BASILISK:int             = 250;
-		public const INCUBATION_DRIDER:int               = 400;
-		public const INCUBATION_GOO_GIRL:int             =  85;
-		public const INCUBATION_EMBER:int                = 336;
-		public const INCUBATION_SATYR:int                = 160;
-		public const INCUBATION_COTTON:int               = 350;
-		public const INCUBATION_URTA:int                 = 515;
-		public const INCUBATION_SAND_WITCH:int           = 360;
-		public const INCUBATION_FROG_GIRL:int            =  30;
-		public const INCUBATION_FAERIE:int               = 200;
-		
-		public const INCUBATION_BUTT_BEE:int             =  48;
-		public const INCUBATION_BUTT_DRIDER:int          = 200;
-		public const INCUBATION_BUTT_SANDTRAP:int        =  42;
+		private var _buttPregnancyType:int = 0;
+		public function get buttPregnancyType():int { return _buttPregnancyType; }
 
-		public var pregnancyType:Number = 0;
-		public var pregnancyIncubation:Number = 0;
-		
-		//2 = bee
-		public var buttPregnancyType:Number = 0;
-		public var buttPregnancyIncubation:Number = 0;
+		private var _buttPregnancyIncubation:int = 0;
+		public function get buttPregnancyIncubation():int { return _buttPregnancyIncubation; }
+
+
 		
 		//Key items
 		public var keyItems:Array;
@@ -489,18 +439,18 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			return false;
 		}
 
-		public function isPregnant():Boolean {
-			return pregnancyIncubation != 0;
+		public function isPregnant():Boolean { return _pregnancyType != 0; }
 
-		}
+		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
+	
 		//fertility must be >= random(0-beat)
+		//If arg == 1 then override any contraceptives and guarantee fertilization
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
 			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
 				return;
-			if (findStatusAffect(StatusAffects.GooStuffed) >= 0)
-				return;
+//			if (findStatusAffect(StatusAffects.GooStuffed) >= 0) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
 			if (arg >= 1)
@@ -508,14 +458,13 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (arg <= -1)
 				bonus = -9000;
 			//If unpregnant and fertility wins out:
-			if ((arg == 2 || (pregnancyIncubation == 0)) && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
+			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
 			{
-				pregnancyType = type;
-				pregnancyIncubation = incubation;
+				knockUpForce(type, incubation);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
 			}
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
-			if (type != 1 && type != 5 && type != 10)
+			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)
 			{
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0 || findPerk(PerkLib.BeeOvipositor) >= 0)
 				{
@@ -526,7 +475,15 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 				}
 			}
 		}
-		
+
+		//The more complex knockUp function used by the player is defined above
+		//The player doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore
+		public function knockUpForce(type:int = 0, incubation:int = 0):void
+		{
+			_pregnancyType = type;
+			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+		}
+	
 		//fertility must be >= random(0-beat)
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
@@ -540,13 +497,29 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (arg <= -1)
 				bonus = -9000;
 			//If unpregnant and fertility wins out:
-			if ((arg == 2 || (buttPregnancyIncubation == 0)) && totalFertility() + bonus > Math.floor(Math.random() * beat))
+			if (buttPregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * beat))
 			{
-				buttPregnancyType = type;
-				buttPregnancyIncubation = incubation;
-				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				buttKnockUpForce(type, incubation);
+				trace("PC Butt Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
 			}
 		}
+
+		//The more complex buttKnockUp function used by the player is defined in Character.as
+		public function buttKnockUpForce(type:int = 0, incubation:int = 0):void
+		{
+			_buttPregnancyType = type;
+			_buttPregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+		}
+
+		public function pregnancyAdvance():Boolean {
+			if (_pregnancyIncubation > 0) _pregnancyIncubation--;
+			if (_pregnancyIncubation < 0) _pregnancyIncubation = 0;
+			if (_buttPregnancyIncubation > 0) _buttPregnancyIncubation--;
+			if (_buttPregnancyIncubation < 0) _buttPregnancyIncubation = 0;
+			return pregnancyUpdate();
+		}
+
+		public function pregnancyUpdate():Boolean { return false; }
 
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void

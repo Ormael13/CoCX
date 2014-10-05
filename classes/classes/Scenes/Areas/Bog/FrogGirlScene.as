@@ -71,7 +71,7 @@ private function getFrogButtFilled():void {
 	outputText("\n\nWrapping your arms under your heavy belly, you clamber out of the pool.  Water sluices down your naked body, leaving the last of the slime behind you in the no-longer pristine water.");
 	outputText("\n\nYou don your [armor] with some difficulty over your massive stomach, and venture back towards your camp, a little sore, but wiser for the ordeal.");
 	dynStats("int", 1);
-	player.buttKnockUp(player.PREGNANCY_FROG_GIRL, player.INCUBATION_FROG_GIRL, 1, 1);
+	player.buttKnockUp(PregnancyStore.PREGNANCY_FROG_GIRL, PregnancyStore.INCUBATION_FROG_GIRL, 1, 1);
 	doNext(14);
 }
 
@@ -162,7 +162,7 @@ private function voluntarilyGetEggedEpilogue():void {
 	outputText("\n\nWrapping your arms under your heavy belly, you clamber out of the pool.  Water sluices down your naked body, leaving the last of the slime behind you in the no-longer pristine water.");
 	outputText("\n\nYou don your [armor] with some difficulty over your massive stomach, and venture back towards your camp, feeling a little sore, but proud of yourself for helping out a mother in need.");
 	//[Anal stretch +1/Anal Moistness +1, sensitivity +1, corruption -1]
-	player.buttKnockUp(player.PREGNANCY_FROG_GIRL, player.INCUBATION_FROG_GIRL, 1, 1);
+	player.buttKnockUp(PregnancyStore.PREGNANCY_FROG_GIRL, PregnancyStore.INCUBATION_FROG_GIRL, 1, 1);
 	dynStats("sen", 1, "cor", -1);
 	doNext(13);
 }
@@ -229,7 +229,7 @@ private function superBonusFrogEggsInYerCooch():void {
 	//[Vaginal wetness +1, Sensitivity +1]
 	player.orgasm();
 	dynStats("sen", 1);
-	player.knockUp(player.PREGNANCY_FROG_GIRL, player.INCUBATION_FROG_GIRL, 1, 1);
+	player.knockUp(PregnancyStore.PREGNANCY_FROG_GIRL, PregnancyStore.INCUBATION_FROG_GIRL, 1, 1);
 	doNext(13);
 }
 

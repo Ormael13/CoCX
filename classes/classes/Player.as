@@ -52,6 +52,11 @@ use namespace kGAMECLASS;
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
+		//Player pregnancy variables and functions
+		override public function pregnancyUpdate():Boolean {
+			return game.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
+		}
+
 		// Inventory
 		public var itemSlot1:ItemSlotClass;
 		public var itemSlot2:ItemSlotClass;
@@ -2010,14 +2015,14 @@ use namespace kGAMECLASS;
 				}
 				if(cocks[0].cockLength >= 12 && cocks[0].cockLength-temp2 < 12) {
 					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " is so long it nearly swings to your knee at its full length.</b>", false);
-					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " are so long they nearly reach your knee when at full length.</b>", false);
+					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " are so long they nearly reach your knees when at full length.</b>", false);
 				}
 				if(cocks[0].cockLength >= 16 && cocks[0].cockLength-temp2 < 16) {
 					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " would look more at home on a large horse than you.</b>", false);
 					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " would look more at home on a large horse than on your body.</b>", false);
 					if(gender == 3){
-						if(cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give the self-titty-fuck of a lifetime.", false);
-						if(cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the tittyfuck of a lifetime.", false);
+						if(cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give yourself the titty-fuck of a lifetime.", false);
+						if(cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.", false);
 					}
 					if(gender == 1){
 						if(cocks.length == 1) outputText("  Your " + cockDescript(0) + " is so long it easily reaches your chest.  The possibility of autofellatio is now a foregone conclusion.", false);

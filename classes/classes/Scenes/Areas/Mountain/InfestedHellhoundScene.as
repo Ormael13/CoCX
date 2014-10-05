@@ -150,6 +150,7 @@ package classes.Scenes.Areas.Mountain
 					player.addStatusValue(StatusAffects.WormPlugged, 1, 1 + rand(5));
 				else
 					player.createStatusAffect(StatusAffects.WormPlugged, 1 + rand(5), 0, 0, 0);
+				player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusAffectv1(StatusAffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
 				player.orgasm();
 				dynStats("lib", 1, "cor", 1);
 				cleanupAfterCombat();

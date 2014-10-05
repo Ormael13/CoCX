@@ -2,16 +2,38 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Rathazul extends NPCAwareContent {
+	public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 
-		public function Rathazul()
-		{
-		}
 //const RATHAZUL_DEBIMBO_OFFERED:int = 744;
 
 	//Rathazul the Alchemist
 	//Encounter, random text for potential uses, choices.
 	//After he has crafted 3 things for the player, option to move into camp.
+		public function Rathazul()
+		{
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] > 1) {
+				flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN]--;
+				if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] < 1) flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 1;
+				if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] > 300) flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 24;
+			}
+			if (flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] > 0) {
+				flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN]--;
+				if (flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] < 0) flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 0;
+			}
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 public function encounterRathazul():void {
 	spriteSelect(49);
 
@@ -56,7 +78,7 @@ public function campRathazul():void {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+	if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return;
 	}
@@ -195,7 +217,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//SPOIDAH
 	var silk:Number = 0;
-	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 5;
 		spoken = true;
 		totalOffers++;
@@ -331,7 +353,7 @@ public function RathazulArmorMenu():void {
 	if(player.hasItem(useables.B_CHITN, 5)) {
 		addButton(1, "BeeArmor", craftCarapace);
 	}
-	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
@@ -393,8 +415,8 @@ public function chooseArmorOrRobes():void {
 	}
 	outputText(", wondering if the old rodent will actually deliver the wondrous item that he's promised you.", false);
 	doNext(13);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 24;
-	trace("274: " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274]);
+	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 24;
+	trace("274: " + flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN]);
 }
 private function collectRathazulArmor():void {
 	spriteSelect(49);
@@ -420,7 +442,7 @@ private function collectRathazulArmor():void {
 	}
 	//Reset counters
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 0;
+	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
 	menuLoc = 2;
 	inventory.takeItem(itype);
 }

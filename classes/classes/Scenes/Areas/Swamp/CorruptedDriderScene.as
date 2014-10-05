@@ -336,7 +336,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You begin to feel yourself coming to a climax, increasing your movements and forcing the drider-woman to pump faster inside of you.  Lurching back, you drive yourself into the arachnid's crotch, her fat, demonic cock squeezing itself against your gripping walls.  Unable to take the pressure, your plaything explodes inside of you, hot white seed splattering against your inner walls and slowly oozing outside with every thrust.  You grind yourself against the spunk-machine forced inside, your orgasm causing you to shudder in pleasure along with her.  In the fullness of your vagina and time, you lay flat against her exhausted figure, your hips still squeezing the last few remaining drops of spooge left drooling from the spider's tip.  You figure it wouldn't hurt to lay still for another few hours, comfortable against the soft, plush curves of your new mate.", false);
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
+			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
@@ -407,7 +407,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You watch her for a time, until her orgasms finally die down.  By that point, you've recovered enough to get dressed.  You walk away a little bow-legged, with a new, heavy weight in your belly, just waiting to be born.", false);
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
+			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
@@ -510,12 +510,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("By the time you finish getting dressed, she's fallen into a fitful slumber.  What an ordeal!", false);
 			//GET KNOCKED UP
-			//Pregnancy Goes Here
-			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
-				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
-				trace("PC BUTT IMPREGNATED BY DRIDER");
-			}
+			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
@@ -625,12 +620,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("...\n\n", false);
 			outputText("A few hours later and you wake up to the sound of loud croaking and the smell of the bog.  You try moving your limbs, finding that your bindings had partially dissolved since the encounter. Painfully removing yourself from the ground, you begin your journey back to camp - carrying a bit more than you were before.", false);
 			//GET KNOCKED UP
-			//Pregnancy Goes Here
-			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
-				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
-				trace("PC BUTT IMPREGNATED BY DRIDER");
-			}
+			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			//(slimefeed, set lust to 100?)
 			player.slimeFeed();
 			dynStats("sen", 1, "lus", 800, "cor", 1);
@@ -725,7 +715,7 @@ package classes.Scenes.Areas.Swamp
 			//(+ corruption and set lust to 100, slimefeed)
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(player.PREGNANCY_DRIDER, player.INCUBATION_DRIDER, 151);
+			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			dynStats("lib", 1, "lus=", 100, "cor", 1);
 			player.slimeFeed();
 			cleanupAfterCombat();
@@ -779,12 +769,7 @@ package classes.Scenes.Areas.Swamp
 			//(slimefeed)
 			player.slimeFeed();
 			//GET KNOCKED UP
-			//Pregnancy Goes Here
-			if (player.totalFertility() >= rand(10) && player.buttPregnancyIncubation == 0) {
-				player.buttPregnancyType = player.PREGNANCY_BUTT_DRIDER;
-				player.buttPregnancyIncubation = player.INCUBATION_BUTT_DRIDER;
-				trace("PC BUTT IMPREGNATED BY DRIDER");
-			}
+			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1, "cor", .5);
 			cleanupAfterCombat();
