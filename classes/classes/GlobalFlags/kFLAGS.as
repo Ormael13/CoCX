@@ -2006,7 +2006,7 @@ public static const UNKNOWN_FLAG_NUMBER_01997:int                               
 public static const UNKNOWN_FLAG_NUMBER_01998:int                                   = 1998;
 public static const UNKNOWN_FLAG_NUMBER_01999:int                                   = 1999;
 public static const UNKNOWN_FLAG_NUMBER_02000:int                                   = 2000;
-public static const TIMES_ORGASMED:int                                  			= 2001;
+public static const TIMES_ORGASMED:int                                  			= 2001; //The reason flags are moved down there is to provide room when CoC ever gets updated and flags gets added. This is to avoid screwing up saves.
 public static const CORRUPTED_MARAE_KILLED:int                                   	= 2002;
 public static const CAMP_BUILT_CABIN:int                                		    = 2003;
 public static const CAMP_CABIN_PROGRESS:int                               			= 2004;
@@ -2071,7 +2071,7 @@ public static const VALERIA_FOUND_IN_GLACIAL_RIFT:int                           
 public static const SHEILA_LETHICITE_FORGE_DAY:int                                  = 2063;//Scarred Blade forge progress.
 public static const CHEAT_ENTERING_COUNTER_2:int                             		= 2064;//Debug menu
 public static const USE_OLD_INTERFACE:int                                   		= 2065;//1 if old interface is used.
-public static const UNKNOWN_FLAG_NUMBER_02066:int                                   = 2066;
+public static const MOD_SAVE_VERSION:int                                   			= 2066;
 public static const UNKNOWN_FLAG_NUMBER_02067:int                                   = 2067;
 public static const UNKNOWN_FLAG_NUMBER_02068:int                                   = 2068;
 public static const UNKNOWN_FLAG_NUMBER_02069:int                                   = 2069;

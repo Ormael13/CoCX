@@ -780,31 +780,31 @@ public function getButtonToolTipText(buttonText:String):String
 		if (gameState != 1) toolTipText = "";
 		else toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
-	if(buttonText.indexOf("Spells") != -1) {                        
+	if(buttonText.indexOf("Spells") != -1) {
 		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
 	}	
-	if(buttonText.indexOf("Items") != -1) {                
+	if(buttonText.indexOf("Items") != -1) {
 		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
-	if(buttonText.indexOf("P. Specials") != -1) {                        
+	if(buttonText.indexOf("P. Specials") != -1) {
 		toolTipText = "Physical special attack menu.";
 	}
-	if(buttonText.indexOf("M. Specials") != -1) {                        
+	if(buttonText.indexOf("M. Specials") != -1) {
 		toolTipText = "Mental and supernatural special attack menu.";
 	}
-	if(buttonText.indexOf("Fantasize") != -1) {                        
+	if(buttonText.indexOf("Fantasize") != -1) {
 		toolTipText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
 	}
 	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
 		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
 	}
-	if(buttonText == "Run") {                        
+	if(buttonText == "Run") {
 		toolTipText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
 	}
-	if(buttonText.indexOf("Defend") != -1) {                        
+	if(buttonText.indexOf("Defend") != -1) {
 		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 	}
-	if(buttonText.indexOf("Fantasize") != -1) {                        
+	if(buttonText.indexOf("Fantasize") != -1) {
 		toolTipText = "Fantasize about your opponent in a sexual way.  It's probably a pretty bad idea to do this unless you want to end up getting raped.";
 	}
 	//Spells
@@ -829,47 +829,48 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("C.Palm") != -1) {                        
 		toolTipText = "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  (Fatigue Cost: " + spellCost(30) + ")";
+	}
 	//Wait
 	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
 		toolTipText = "Take no action for this round.  Why would you do this?  This is a terrible idea.";
 	}
 	
 	//Urta's specials
-	if(buttonText == "Combo") {                        
+	if(buttonText == "Combo") {
 		toolTipText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
 	}
-	if(buttonText == "Vault") {                        
+	if(buttonText == "Vault") {
 		toolTipText = "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes.  (20 Fatigue)";
 	}
-	if(buttonText == "Sidewinder") {                        
+	if(buttonText == "Sidewinder") {
 		toolTipText = "An attack that hits for reduced damage but has a high chance of stunning. (10 Fatigue)";
 	}
-	if(buttonText == "Dirt Kick") {                        
+	if(buttonText == "Dirt Kick") {
 		toolTipText = "Attempt to blind your foe with a spray of kicked dirt. (5 Fatigue)";
 	}
-	if(buttonText == "Metabolize") {                        
+	if(buttonText == "Metabolize") {
 		toolTipText = "Convert 10% of your maximum HP into fatigue.";
 	}
-	if(buttonText == "SecondWind") {                        
+	if(buttonText == "SecondWind") {
 		toolTipText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
 	}
 	//P. Special attacks
-	if(buttonText.indexOf("AnemoneSting") != -1) {                        
+	if(buttonText.indexOf("AnemoneSting") != -1) {
 		toolTipText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
 	}
-	if(buttonText.indexOf("Constrict") != -1) {                        
+	if(buttonText.indexOf("Constrict") != -1) {
 		toolTipText = "Attempt to bind an enemy in your long snake-tail.";
 	}
-	if(buttonText.indexOf("Gore") != -1) {                        
+	if(buttonText.indexOf("Gore") != -1) {
 		toolTipText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
 	}
 	if(buttonText.indexOf("Infest") != -1) {
 		toolTipText = "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms.";
 	}
-	if(buttonText == "Kick") {                        
+	if(buttonText == "Kick") {
 		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
 	}
-	if(buttonText == "Kiss") {                        
+	if(buttonText == "Kiss") {
 		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
 	if(buttonText.length == 5 && buttonText.indexOf("Sting") != -1) {                        
@@ -878,23 +879,23 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Tail Whip") != -1) {
 		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
 	}
-	if(buttonText.indexOf("Web") != -1) {                        
+	if(buttonText.indexOf("Web") != -1) {
 		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
 	}
 
 	//M. Special attacks
-	if(buttonText == "Berserk") {                        
+	if(buttonText == "Berserk") {
 		toolTipText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
-	}	
+	}
 	if(buttonText.indexOf("Possess") != -1) {                        
 		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
 	
 	//Salon
-	if(buttonText.indexOf("Sand Facial") != -1) {                
+	if(buttonText.indexOf("Sand Facial") != -1) {
 		toolTipText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
 	}
-	if(buttonText.indexOf("Mud Facial") != -1) {                
+	if(buttonText.indexOf("Mud Facial") != -1) {
 		toolTipText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
 	}
 	
@@ -1241,7 +1242,7 @@ public function getButtonToolTipText(buttonText:String):String
 	}	
 	if(buttonText == "Sub Intel") {
 		toolTipText = "Subtract 1 from intelligence.";
-	}	
+	}
 
 	//-----------------
 	//-- TITLE SCREEN 
@@ -1295,7 +1296,7 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Change Stats") != -1) {                        
 		toolTipText = "Change your core stats.";
-	}	
+	}
 	return toolTipText;
 }
 
@@ -2032,7 +2033,7 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Body Stats
 	var bodyStats:String = "";
 
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	/*if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
 		bodyStats += "<b>Hunger:</b> " + Math.round(player.hunger) + " / 100 (";
 		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
@@ -2044,7 +2045,7 @@ public function displayStats(e:MouseEvent = null):void
 		if (player.hunger >= 90 && player.hunger < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
 		if (player.hunger >= 100) bodyStats += "<font color=\"#00ff00\">Very full</font>";
 		bodyStats += ")\n";
-	}
+	}*/
 
 	bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 	bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";

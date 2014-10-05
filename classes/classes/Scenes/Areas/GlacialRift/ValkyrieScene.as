@@ -92,7 +92,6 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Then suddenly, the valkyrie spreads her wings and flies, pulling up with so little room to spare that you can feel your cheek brush the snow. Panting, she flaps her wings one last time before setting the two of you down on the coast, overlooking the glacial drop into the frigid water.\n\n");
 			outputText("You shudder, reeling from the orgasm and near - death experience at the same time. No less exhausted, the valkyrie collapses onto you, her head coming to rest on your lap. It seems you made a good impression on the valkyrie as she drifts off to sleep, your cum and hers pooling between her legs. You fish a blanket (and a few gems) out of her pack, cover her up as best you can, and stumble on back to camp.\n\n");
 			cleanupAfterCombat();
-			doNext(13);
 		}
 		//Anal Fuck
 		private function valkyrieAnalFuck():void {
@@ -108,7 +107,6 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("You withdraw with a wet “POP!”, and watch with a grin as your seed trickles out of her now-gaping anus, pooling with her own juices beneath her. You give her bruised, bright-red butt a gentle pat as you sheathe your cock back in your armor and head on back to camp, leaving your insensate lover in a cun-soaked heap on the ice.\n\n")
 			player.orgasm();
 			cleanupAfterCombat();
-			doNext(13);
 		}
 		//Get Licked
 		private function valkyrieLicksYou():void {
@@ -123,7 +121,6 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Utterly satisfied, you let the valkyrie go. She collapses, dragging her finger and tongue out of you before she face-plants in the snow. You giggle, giving her a pat on her cum-soaked head before grabbing a few of your gems and heading back to camp.\n\n");
 			player.orgasm();
 			cleanupAfterCombat();
-			doNext(13);
 		}
 		//Scissor
 		private function valkyrieScissor():void {
@@ -135,13 +132,11 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Exhausted from the playful sex, the valkyrie collapses on her back, utterly spent. You give her a pat on the cheek and a quick kiss before grabbing a few gems and heading on back to camp. ")
 			player.orgasm();
 			cleanupAfterCombat();
-			doNext(13);
 		}
 		
 		private function exitValkyrie():void {
 			menu();
 			cleanupAfterCombat();
-			doNext(13);
 		}
 	}
 

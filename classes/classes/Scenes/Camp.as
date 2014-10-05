@@ -49,6 +49,13 @@
 		
 //  SLEEP_WITH:int = 701;
 
+	//Used to determine scenes if you choose to play joke on them. Should the variables be moved to flags?
+	protected var izmaJoinsStream:Boolean;
+	protected var marbleJoinsStream:Boolean;
+	protected var heliaJoinsStream:Boolean;
+	protected var amilyJoinsStream:Boolean;
+
+	
 public function doCamp():void {
 	//Force autosave on HARDCORE MODE! And level-up.
 	if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
@@ -634,7 +641,7 @@ public function doCamp():void {
 	//if rathazul has joined the camp
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
-			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
+			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  ", false);
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.", false);
 			else outputText("The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
 			if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  <b>He's finished with the task you gave him!</b>", false);
@@ -644,7 +651,7 @@ public function doCamp():void {
 	}
 	else
 	{
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1)
+		if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1)
 		{
 			outputText("There is a note on your ", false);
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
@@ -799,6 +806,10 @@ public function doCamp():void {
 	//Menu
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 
+	if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
+		updateSaveFlags();
+	}
+	
 	//Massive Balls Bad End (Realistic Mode only)
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.ballSize > (18 + (player.str / 2))) {
 		badEndGIANTBALLZ();
@@ -1314,6 +1325,11 @@ private function campActions():void {
 }
 
 private function swimInStream():void {
+	izmaJoinsStream = false;
+	marbleJoinsStream = false;
+	heliaJoinsStream = false;
+	amilyJoinsStream = false;
+	
 	var prankChooser:Number = rand(3);
 	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ", true);
 	if (player.armorName == "slutty swimwear") outputText("you are going to swim while wearing just your swimwear. ", false);
@@ -1328,16 +1344,19 @@ private function swimInStream():void {
 	{
 		outputText("\n\nYour tiger-shark beta, Izma, joins you. You are frightened at first when you saw the fin protruding from the water and the fin approaches you! ", false);
 		outputText("As the fin appoaches you, the familiar figure comes up. \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.", false);
+		izmaJoinsStream = true;
 	}
 	//Helia!
 	if (rand(2) == 0 && camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
 	{
 		outputText("\n\nHelia, your salamander lover, joins in for a swim. \"<i>Hey, lover mine!</i>\" she says. As she enters the waters, the water seems to become warmer until it begins to steam like a sauna.", false);
+		heliaJoinsStream = true;
 	}
 	//Marble!
 	if (rand(2) == 0 && camp.marbleFollower())
 	{
 		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
+		marbleJoinsStream = true;
 	}
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
@@ -1345,6 +1364,7 @@ private function swimInStream():void {
 		outputText("\n\nYour mouse girl-lover Amily is standing at the riverbank. She looks flattering in her bikini.  ", false)
 		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Especially when her penis is exposed.  ", false)
 		outputText("She walks into the waters and swims.  ", false)
+		amilyJoinsStream = true;
 	}
 	//Pranks!
 	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
@@ -1371,35 +1391,35 @@ private function swimInStreamPrank1():void {
 	var pranked:Boolean = false;
 	var prankRoll:Number = 1;
 	//How many people joined!
-	if (camp.izmaFollower()) prankRoll++;
-	if (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) prankRoll++;
-	if (camp.marbleFollower()) prankRoll++;
-	if (camp.amilyFollower()) prankRoll++
+	if (izmaJoinsStream) prankRoll++;
+	if (marbleJoinsStream) prankRoll++;
+	if (heliaJoinsStream) prankRoll++;
+	if (amilyJoinsStream) prankRoll++
 	if (prankRoll > 4) prankRoll = 4;
 	//Play joke on them!
 	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ", true)
-	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false)
+	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true)
 	{
-		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.  ", false);
+		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.", false);
 		pranked = true;
 	}
-	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false)
+	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true)
 	{
-		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.  ", false);
+		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.", false);
 		pranked = true;
 	}
-	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false)
+	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true)
 	{
-		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"  ", false);
+		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
 		pranked = true;
 	}
-	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false)
+	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
 	{
 		outputText("", false);
 		pranked = true;
 	}*/
-	if (pranked == false) outputText("No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.", false);
-	else outputText("You feel accomplished from the prank and resume swimming. ", false);
+	if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.", false);
+	else outputText("  You feel accomplished from the prank and resume swimming. ", false);
 	doNext(swimInStreamFinish);
 }
 
@@ -2157,6 +2177,36 @@ private function fixFlags():void {
 		player.hunger = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994];
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] = 0;
 	}
+}
+//Updates save. Done to ensure your save doesn't get screwed up.
+private function updateSaveFlags():void {
+	flags[kFLAGS.MOD_SAVE_VERSION] = 2;
+	var startOldIds:int = 1195;
+	var startNewIds:int = 2001;
+	var current:int = 0;
+	var target:int = 65;
+	while (current < target) {
+		trace(flags[startOldIds + current])
+		if (flags[startOldIds + current] != 0) {
+			flags[startNewIds + current] = flags[startOldIds + current];
+			trace(flags[startNewIds + current])
+			flags[startOldIds + current] = 0;
+		}
+		else trace("Skipped")
+		current++;
+	}
+	outputText("Your save file has been updated by changing the variables used in this mod from old flag position to new flag position.\n\n", true)
+	outputText("As you know, the base game update tends to change flags and that may screw up saves when mod gets updated.\n\n", false)
+	outputText("Unfortunately, I can't guarantee if every flags are retained. You may have lost some furniture or may have lost cabin. I'm sorry if this happens. Your codex entries are still unlocked, don't worry. And if your cabin is built, don't worry, it's still intact and you can re-construct furniture again.\n\n", false)
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
+		outputText("As a compensation, here's 50 wood and 150 nails to re-construct your furniture.\n\n", false)
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 50;
+		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
+			player.addKeyValue("Carpenter's Toolbox", 1, 150);
+		}
+	}
+	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!", false)
+	doNext(doCamp);
 }
 
 private function fixHistory():void {

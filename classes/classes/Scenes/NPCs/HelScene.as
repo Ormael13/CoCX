@@ -42,7 +42,7 @@ package classes.Scenes.NPCs{
 				return true;   
 			}
 			if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6) {
-				kGAMECLASS.morningAfterHeliaDungeonAgreements();
+				kGAMECLASS.dungeons.heltower.morningAfterHeliaDungeonAgreements();
 				return true;
 			}
 			//Helspawn night smex!

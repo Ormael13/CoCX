@@ -81,18 +81,20 @@ internal function pcWinsValeriaSpar():void {
 }
 
 //[Valeria] -- [Spar] -- PC Defeated
-public function pcWinsValeriaSparDefeat():void {
+public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 	clearOutput();
 	spriteSelect(79);
-	outputText("You collapse, ");
-	if(player.HP < 1) outputText("in too much pain");
-	else outputText("too turned on");
-	outputText(" to fight any longer.  Valeria's on you in a heartbeat, her gooey greatsword pressed to your throat.");
+	if (!offCamp) {
+		outputText("You collapse, ");
+		if(player.HP < 1) outputText("in too much pain");
+		else outputText("too turned on");
+		outputText(" to fight any longer.  Valeria's on you in a heartbeat, her gooey greatsword pressed to your throat.");
+	}
 	outputText("\n\n\"<i>Do you yield?</i>\" she asks, not unlike a knight.");
 	outputText("\n\nYou nod emphatically.");
 	outputText("\n\n\"<i>Tsk,</i>\" she sighs, shaking her head.  \"<i>Only reason I tagged along with you is I thought you might actually have a chance, Champion.  If you can't beat little old me... Oh, whatever am I going to do with you?</i>\" she chuckles");
 	//[if PC lost via HP or has no gender: 
-	if(player.HP < 1 || player.gender == 0) {
+	if((player.HP < 1 || player.gender == 0) && !offCamp) {
 		outputText(", offering you a hand up.");
 		outputText("\n\n\"<i>C'mon, let's get back to camp.</i>\"");
 		//(Return to main Camp menu)
@@ -172,7 +174,7 @@ private function valeriaDickToggle():void {
 }
 
 //Valeria -- [Sex] -- [Get Fucked]
-private function valeriaGetFucked():void {
+public function valeriaGetFucked():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You disrobe and, ");
@@ -260,7 +262,7 @@ private function valeriaGetFucked():void {
 	doNext(13);
 }
 
-private function gooFlation(clearText:Boolean = true):void {
+public function gooFlation(clearText:Boolean = true):void {
 	spriteSelect(79);
 	if(clearText) {
 		clearOutput();
@@ -292,7 +294,7 @@ private function gooFlation(clearText:Boolean = true):void {
 }
 
 //Valeria -- [Sex] -- [Penetrate Her] (Dickwielders only)
-private function penetrateValeria():void {
+public function penetrateValeria():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("\"<i>Mmm, that's a tasty-looking cock,</i>\" Valeria says as you disrobe, letting your " + cockDescript(0) + " flop free.  \"<i>I just might have to get a sample,</i>\" she chuckles, squatting down before you and taking your shaft in hand.  Rather than giving you a simple handy, however, the goo-girl places her palm against the head of your cock and presses forward.");
@@ -316,7 +318,7 @@ private function penetrateValeria():void {
 }
 
 //[Valeria] -- [Sex] -- [Get Dominated]
-private function valeriaSexDominated():void {
+public function valeriaSexDominated(offCamp:Boolean = false):void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("Making a show of playing hesitant and nervous, you tell Valeria you'd like her to take charge.  A wide grin quickly spreads across her girlish features.  \"<i>Mmm, feeling subby today, partner?  Good, good... You just let Valeria take good care of you, " + player.mf("handsome","cutie") + ".</i>\"");
@@ -374,7 +376,7 @@ private function valeriaSexDominated():void {
 	HPChange(25,false);
 	player.orgasm();
 	dynStats("sen", 1);
-	if(!inCombat()) doNext(13);
+	if(offCamp || !inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }
 

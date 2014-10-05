@@ -153,8 +153,6 @@ package classes
 		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start");
 		public static const MetCorruptMarae:StatusAffectType = mk("Met Corrupt Marae");
 		public static const MetMarae:StatusAffectType = mk("Met Marae");
-		public static const TakenGroPlus:StatusAffectType = mk("TakenGro+");
-		public static const TakenLactaid:StatusAffectType = mk("TakenLactaid");		
 		/**
 		 * v1 = bonus index
 		 * v2 = bonus value

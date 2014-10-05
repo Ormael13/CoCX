@@ -169,7 +169,7 @@ package classes
 			var basePos2:Number = 360;
 			var baseHeight:Number = 26;
 			var baseWidth:Number = 170;
-			var universalAlpha:Number = 0.5;
+			var universalAlpha:Number = 0.4;
 			var gapDiff:Number = 30;
 			
 			if (!reassigned){
@@ -181,63 +181,63 @@ package classes
 			mainView.strBar.width = (player.str * (baseWidth / 100));
 			mainView.strBar.height = baseHeight;
 			mainView.strBar.y = basePos + (gapDiff * 1) - posOffset;
-			mainView.strBar.alpha = 0.5;
+			mainView.strBar.alpha = universalAlpha;
 			mainView.touBar.width = (player.tou * (baseWidth / 100));
 			mainView.touBar.height = baseHeight;
 			mainView.touBar.y = basePos + (gapDiff * 2) - posOffset;
-			mainView.touBar.alpha = 0.5;
+			mainView.touBar.alpha = universalAlpha;
 			mainView.speBar.width = (player.spe * (baseWidth / 100));
 			mainView.speBar.height = baseHeight;
 			mainView.speBar.y = basePos + (gapDiff * 3) - posOffset;
-			mainView.speBar.alpha = 0.5;
+			mainView.speBar.alpha = universalAlpha;
 			mainView.inteBar.width = (player.inte * (baseWidth / 100));
 			mainView.inteBar.height = baseHeight;
 			mainView.inteBar.y = basePos + (gapDiff * 4) - posOffset;
-			mainView.inteBar.alpha = 0.5;
+			mainView.inteBar.alpha = universalAlpha;
 			mainView.libBar.width = (player.lib * (baseWidth / 100));
 			mainView.libBar.height = baseHeight;
 			mainView.libBar.y = basePos + (gapDiff * 5) - posOffset;
-			mainView.libBar.alpha = 0.5;
+			mainView.libBar.alpha = universalAlpha;
 			mainView.sensBar.width = (player.sens * (baseWidth / 100));
 			mainView.sensBar.height = baseHeight;
 			mainView.sensBar.y = basePos + (gapDiff * 6) - posOffset;
-			mainView.sensBar.alpha = 0.5;
+			mainView.sensBar.alpha = universalAlpha;
 			mainView.corBar.width = (player.cor * (baseWidth / 100));
 			mainView.corBar.height = baseHeight;
 			mainView.corBar.y = basePos + (gapDiff * 7) - posOffset;
-			mainView.corBar.alpha = 0.5;
+			mainView.corBar.alpha = universalAlpha;
 
 			mainView.HPBar.width = (((player.HP / player.maxHP()) * 100) * (baseWidth / 100));
 			mainView.HPBar.height = baseHeight;
 			mainView.HPBar.y = basePos2 + (gapDiff * 1) - posOffset;
-			mainView.HPBar.alpha = 0.5;
+			mainView.HPBar.alpha = universalAlpha;
 			mainView.lustBar.width = (player.lust * (baseWidth / 100));
 			mainView.lustBar.height = baseHeight;
 			mainView.lustBar.y = basePos2 + (gapDiff * 2) - posOffset;
-			mainView.lustBar.alpha = 0.5;
+			mainView.lustBar.alpha = universalAlpha;
 			mainView.fatigueBar.width = (player.fatigue * (baseWidth / 100));
 			mainView.fatigueBar.height = baseHeight;
 			mainView.fatigueBar.y = basePos2 + (gapDiff * 3) - posOffset;
-			mainView.fatigueBar.alpha = 0.5;
+			mainView.fatigueBar.alpha = universalAlpha;
 			//Minimum lust bar
 			if (mainView.statsView.getChildByName("esteemBar") != null) {
 				mainView.esteemBar.x = mainView.lustBar.x;
 				mainView.esteemBar.y = mainView.lustBar.y;
 				mainView.esteemBar.height = mainView.lustBar.height;
 				mainView.esteemBar.width = (player.minLust() * (baseWidth / 100));
-				mainView.esteemBar.alpha = 0.5;
+				mainView.esteemBar.alpha = universalAlpha;
 			}
 			//Hunger bar
 			mainView.hungerBar.x = 6;
 			mainView.hungerBar.y = basePos2 + (gapDiff * 5) - posOffset;
 			mainView.hungerBar.width = (player.hunger * (baseWidth / 100));
 			mainView.hungerBar.height = baseHeight;
-			mainView.hungerBar.alpha = 0.5;			
+			mainView.hungerBar.alpha = universalAlpha;			
 			
 			//Experience bar.
 			mainView.obeyBar.x = 6;
 			mainView.obeyBar.y = 608 - posOffset;
-			mainView.obeyBar.alpha = 0.5;
+			mainView.obeyBar.alpha = universalAlpha;
 			mainView.obeyBar.height = baseHeight;
 			mainView.obeyBar.width = (((player.XP / (player.level * 100)) * 100) * (baseWidth / 100));
 			if (player.XP >= player.level * 100) mainView.obeyBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
@@ -365,6 +365,8 @@ package classes
 			mainView.xpText.width = 60;
 			mainView.gemsText.text = "Gems:";
 			mainView.gemsText.width = 60;
+			
+			mainView.hungerText.width = 70;
 			
 			mainView.coreStatsText.htmlText = "Name: " + player.short + "\nCore Stats";
 			mainView.combatStatsText.y = basePos2 - posTextOffset;

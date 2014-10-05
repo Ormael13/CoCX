@@ -130,7 +130,7 @@ private function rathazulWorkOffer():Boolean {
 	var debimbo:int = 0;
 	var lethiciteDefense:Number = 0;
 	var dyes:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+	if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return true;
 	}

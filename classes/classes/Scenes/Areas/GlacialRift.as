@@ -23,6 +23,7 @@ package classes.Scenes.Areas
 	{
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var yetiScene:YetiScene = new YetiScene();
+		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		
 		public function GlacialRift() 
 		{
@@ -68,15 +69,19 @@ package classes.Scenes.Areas
 			}
 			//Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 			if (chooser == 3) {
-				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0 && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armorName != "goo armor") {
+				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armorName != "goo armor") {
+					spriteSelect(79);
 					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 					outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n", true)
 					outputText("\"<i>This is my territory!</i>\" she shouts, bringing her two-handed sword to bare. \"<i>You’ll give me your fluids, or I’ll take them.</i>\"")
-					startCombat(new GooArmor());
+					addButton(0, "Fight", fightValeria);
+					addButton(1, "Submit", kGAMECLASS.valeria.pcWinsValeriaSparDefeat, true);
+					return;
 				}
 				else {
 					outputText("You spend an hour exploring the frigid glaciers but you don't find anything interesting.", true);
 					doNext(13);
+					return;
 				}
 			}
 			//Find item!
@@ -105,6 +110,11 @@ package classes.Scenes.Areas
 			}
 		}
 		
+		private function fightValeria():void {
+			outputText("You ready your " + player.weaponName + " for a fight!", true)
+			startCombat(new GooArmor());
+		}
 	}
+	
 
 }
