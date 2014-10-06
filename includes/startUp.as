@@ -203,7 +203,7 @@ public function settingsScreenI():void
 {
 	settingsScreen();
 	addButton(0, "Toggle Debug", toggleDebug);
-	addButton(1, "Sprite Toggle", toggleSpritesFlag);
+	addButton(1, "Toggle Sprites", toggleSpritesFlag);
 	addButton(2, "Easy Mode", toggleEasyModeFlag);
 	addButton(3, "Font Size", fontSettingsMenu);
 	
@@ -234,6 +234,8 @@ public function settingsScreenII():void {
 	settingsScreen();
 	addButton(0, "Old Side Bar", toggleInterface);
 	addButton(1, "Background", cycleBackground);
+	//addButton(2, "SFW Toggle", eventParser, 9999); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
+	
 	addButton(5, "Enable Real", enableRealisticPrompt);
 	
 	addButton(4, "Previous", settingsScreenI);
@@ -273,7 +275,7 @@ public function fontSettingsMenu():void {
 		"Larger Font", incFontSize,
 		"Reset Size", resetFontSize,
 		"", 0,
-		"Back", settingsScreen);
+		"Back", settingsScreenI);
 }
 
 public function incFontSize():void
@@ -321,7 +323,7 @@ public function toggleStandards():void
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
 	else
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
-	settingsScreen();
+	settingsScreenI();
 	return;
 }
 
@@ -332,7 +334,7 @@ public function toggleHyperHappy():void
 		flags[kFLAGS.HYPER_HAPPY] = false;
 	else
 		flags[kFLAGS.HYPER_HAPPY] = true;
-	settingsScreen();
+	settingsScreenI();
 	return;
 }
 
@@ -345,7 +347,7 @@ public function toggleDebug():void
 		debug = true;
 		
 	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreen();
+	settingsScreenI();
 	return;
 }
 
@@ -355,9 +357,9 @@ public function toggleEasyModeFlag():void
 		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 	else
 		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-	settingsScreen();
+	settingsScreenI();
 	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreen();
+	settingsScreenI();
 	return;
 }
 
@@ -367,7 +369,7 @@ public function toggleSpritesFlag():void
 		flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
 	else
 		flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
-	settingsScreen();
+	settingsScreenI();
 	return;
 }
 
@@ -378,7 +380,7 @@ public function toggleSillyFlag():void
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
 	else
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
-	settingsScreen();
+	settingsScreenI();
 	return;
 
 }
@@ -386,7 +388,7 @@ public function toggleSillyFlag():void
 public function enableRealisticPrompt():void {
 	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
 	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
-	doYesNo(enableRealisticForReal, settingsScreen);
+	doYesNo(enableRealisticForReal, settingsScreenI);
 }
 
 public function enableRealisticForReal():void {

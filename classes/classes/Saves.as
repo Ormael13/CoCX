@@ -352,6 +352,9 @@ public function saveLoad(e:MouseEvent = null):void
 					"",               0, 
 					"Back",           1);
 	}
+	if (flags[kFLAGS.HARDCORE_MODE] >= 1) {
+		removeButton(5); //Disable "Save to File" in Hardcore Mode.
+	}
 }
 
 public function deleteScreen():void

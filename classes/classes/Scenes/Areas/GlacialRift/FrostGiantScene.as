@@ -21,7 +21,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.\n\n", true);
 			menu();
 			if (player.lust >= 33) {
-				if (player.hasCock()) addButton(0, "Nosejob", noseJob);
+				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 			}
@@ -33,11 +33,11 @@ package classes.Scenes.Areas.GlacialRift
 		//Males and hermaphrodites
 		private function noseJob():void {
 			clearOutput();
-			outputText("Looking at the fallen giant, only one option immediately springs to mind: Nosejob. You toy with the thought until you approach the giant's nose, which does in fact have nostrils of the proper size to shove your large, but not too large, penis(es) into. \n\n");
+			outputText("Looking at the fallen giant, only one option immediately springs to mind: Nosejob. You toy with the thought until you approach the giant's nose, which does in fact have nostrils of the proper size to shove your " + player.multiCockDescript() + " into. \n\n");
 			outputText("You test a nostril with your hand warily, this dangerous proximity being close enough to the giant's mouth he could just as easily swallow you in an instant. The giant's breath, surprisingly, comes out warm enough that this could maybe work... \n\n");
 			outputText("You reach into your " + player.armorName + " and whip out your cock");
 			if (player.cocks.length > 1) outputText("s");
-			outputText(". The cold air nearly instantly makes them soft, but the giant's breath eases them back to erection. You contemplate what you're about to do one more time, allowing your cock(s) to surge to full hardness. Taking a breath, you plunge into the depths. While not quite like a vagina, the giant is breathing hard to make up for the blockage you’re providing. ");
+			outputText(". The cold air nearly instantly makes them soft, but the giant's breath eases them back to erection. You contemplate what you're about to do one more time, allowing your " + player.multiCockDescriptLight() + " to surge to full hardness. Taking a breath, you plunge into the depths. While not quite like a vagina, the giant is breathing hard to make up for the blockage you’re providing. ");
 			//Multi-cock check
 			if (player.cocks.length == 1) outputText("His contracting nostril massages your prick enough to get you going.");
 			else outputText("His contracting nostrils massage your pricks enough to get you going.");

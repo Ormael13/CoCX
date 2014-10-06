@@ -1361,7 +1361,7 @@ private function swimInStream():void {
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
 	{
-		outputText("\n\nYour mouse girl-lover Amily is standing at the riverbank. She looks flattering in her bikini.  ", false)
+		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini.  ", false)
 		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Especially when her penis is exposed.  ", false)
 		outputText("She walks into the waters and swims.  ", false)
 		amilyJoinsStream = true;
