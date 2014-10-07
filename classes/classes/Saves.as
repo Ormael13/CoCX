@@ -1887,8 +1887,8 @@ public function unFuckSave():void
 		flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusAffectv3(StatusAffects.Tamani);
 	}
 
-	if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter)) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
-	if (player.findStatusAffect(StatusAffects.Tamani)) {
+	if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter) >= 0) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
+	if (player.findStatusAffect(StatusAffects.Tamani) >= 0) {
 		if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 			flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 			flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing
