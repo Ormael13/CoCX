@@ -1850,7 +1850,10 @@ public function unFuckSave():void
 	if (flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] == 0)
 		flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
 
-	if (flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.HELIA_PREGNANCY_TYPE] <= 3) { //HELIA_PREGNANCY_TYPE was previously HEL_PREGNANCY_NOTICES
+	if (flags[kFLAGS.HELSPAWN_AGE > 0) {
+		kGAMECLASS.helScene.pregnancy.knockUpForce(); //Clear Pregnancy
+	}
+	else if (flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.HELIA_PREGNANCY_TYPE] <= 3) { //HELIA_PREGNANCY_TYPE was previously HEL_PREGNANCY_NOTICES
 		//Since HelSpawn's father is already tracked separately we might as well just use PREGNANCY_PLAYER for all possible pregnancies
 		flags[kFLAGS.HELIA_PREGNANCY_TYPE] = (65536 * flags[kFLAGS.HELIA_PREGNANCY_TYPE]) + PregnancyStore.PREGNANCY_PLAYER;
 	}
@@ -1887,8 +1890,8 @@ public function unFuckSave():void
 		flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusAffectv3(StatusAffects.Tamani);
 	}
 
-	if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter)) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
-	if (player.findStatusAffect(StatusAffects.Tamani)) {
+	if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter) >= 0) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
+	if (player.findStatusAffect(StatusAffects.Tamani) >= 0) {
 		if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 			flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 			flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing
