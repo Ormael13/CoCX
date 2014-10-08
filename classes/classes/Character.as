@@ -50,6 +50,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		}
 
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
+		//Kitteh6660: I want a beard! I'll code in obtainable beard.
 		public var beardLength:Number = 0;
 		public var beardStyle:Number = 0;
 		
@@ -285,12 +286,12 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 				if (femininity < 30)
 				{
 					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					if (hasBeard())
+					/*if (hasBeard())
 					{
 						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
 						beardLength = 0;
 						beardStyle = 0;
-					}
+					}*/
 					output += "</b>\n";
 					femininity = 30;
 				}

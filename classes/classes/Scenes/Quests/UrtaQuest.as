@@ -251,6 +251,7 @@ public function startUrtaQuest():void {
 	player.sens = 50;
 	player.cor = 30;
 	player.lust = 55;
+	player.hunger = 100;
 	player.gems = 183;
 	player.level = 15;
 	player.teaseLevel = 4;

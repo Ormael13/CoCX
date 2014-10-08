@@ -24,6 +24,9 @@ public var date:Date = new Date();
  
 //if ( ApplicationDomain.currentDomain.hasDefinition("Creature")) trace("Class exists");
 
+//Mod save version.
+public var modSaveVersion:Number = 2;
+
 //dungeoneering variables
 public var inDungeon:Boolean = false;
 public var dungeonLoc:Number = 0;

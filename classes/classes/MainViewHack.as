@@ -275,7 +275,7 @@ package classes
 			mainView.fatigueNum.y = basePos2 + (gapDiff * 3) - posTextOffset;
 			mainView.fatigueText.y = basePos2 + (gapDiff * 3) - posTextOffset;
 			
-			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
 				showHungerBar();
 				mainView.hungerNum.x = 31;
 				mainView.hungerNum.width = 140;

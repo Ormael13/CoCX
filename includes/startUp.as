@@ -234,7 +234,8 @@ public function settingsScreenII():void {
 	settingsScreen();
 	addButton(0, "Old Side Bar", toggleInterface);
 	addButton(1, "Background", cycleBackground);
-	//addButton(2, "SFW Toggle", eventParser, 9999); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
+	//addButton(2, "Old Sprites", eventParser, 9999); //If I can re-add old sprites, that is.
+	//addButton(3, "SFW Toggle", eventParser, 9999); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
 	
 	addButton(5, "Enable Real", enableRealisticPrompt);
 	

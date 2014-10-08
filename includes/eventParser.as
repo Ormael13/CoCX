@@ -486,6 +486,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			{
 				player.hunger = 100;
 			}
+			if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 			if (player.hunger <= 0)
 			{
 				//Lose HP and makes fatigue go up. Lose body weight and muscles.

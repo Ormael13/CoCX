@@ -1305,7 +1305,7 @@ use namespace kGAMECLASS;
 			return stretched;
 		}
 
-		public function refillHunger(amnt:Number = 0):void {
+		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
 				hunger += amnt;
@@ -1313,31 +1313,15 @@ use namespace kGAMECLASS;
 				{
 					hunger = 100;
 				}
+				if (nl) outputText("\n");
 				//Messages
-				if (hunger < 10)
-				{
-					outputText("\n<b>You still need to eat more. </b>")
-				}
-				if (hunger >= 10 && hunger < 25)
-				{
-					outputText("\n<b>You are no longer starving but you still need to eat more. </b>")
-				}
-				if (hunger >= 25 && hunger < 50)
-				{
-					outputText("\n<b>The growling sound in your stomach seems to quiet down. </b>")
-				}
-				if (hunger >= 50 && hunger < 75)
-				{
-					outputText("\n<b>Your stomach no longer growls. </b>")
-				}
-				if (hunger > 75 && hunger <= 90)
-				{
-					outputText("\n<b>You feel so satisfied. </b>")
-				}
-				if (hunger > 90)
-				{
-					outputText("\n<b>Your stomach feels so full. </b>")
-				}
+				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
+				else if (hunger >= 10 && hunger < 25) outputText("<b>You are no longer starving but you still need to eat more. </b>");
+				else if (hunger >= 25 && hunger < 50) outputText("<b>The growling sound in your stomach seems to quiet down. </b>");
+				else if (hunger >= 50 && hunger < 75) outputText("<b>Your stomach no longer growls. </b>");
+				else if (hunger > 75 && hunger <= 90) outputText("<b>You feel so satisfied. </b>");
+				else if (hunger > 90) outputText("<b>Your stomach feels so full. </b>");
+				
 				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				kGAMECLASS.statScreenRefresh();
 			}

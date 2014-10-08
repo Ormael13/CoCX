@@ -620,6 +620,7 @@ private function valeriaGooRapeII():void {
 	else outputText(".");
 	
 	outputText("\n\nYou stagger up on your [legs] and wobble off back towards camp, wondering how long you're going to be travelling for two...");
+	player.refillHunger(100);
 	//Increase ball size if has balls and cock
 	//Increase breast size by 3-6 steps.
 	//Add some faux pregnancy descriptors to the appearance screen

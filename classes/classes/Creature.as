@@ -1929,7 +1929,7 @@ package classes
 			{
 				lustCoefficient = (lust + 50) / 5;
 				var percent:Number = 0
-				percent = lustCoefficient + ((hoursSinceCum + 10) / 2)
+				percent = lustCoefficient + (hoursSinceCum + 10)
 				if (percent > 100)
 					percent = 100
 				if (quantity > cumCapacity()) 

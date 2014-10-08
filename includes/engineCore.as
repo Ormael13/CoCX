@@ -1904,6 +1904,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		// fatigueDown.visible = true;
 		// fatigueUp.visible = false;
 	}
+	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
 	if(player.fatigue > 100) player.fatigue = 100;
 	if(player.fatigue < 0) player.fatigue = 0;
 	statScreenRefresh();
@@ -1925,7 +1926,7 @@ public function displayStats(e:MouseEvent = null):void
 	var combatStats:String = "";
 	
 	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0)
-		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n";
+		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
 		
 	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";
 	
@@ -1969,21 +1970,25 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n";
 	if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 		childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
-			
+	if (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
+		childStats += "<b>Total Children with Ember:</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
+	
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 		
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
 		childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
-		
 	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 		childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
+		childStats += "<b>Total Children with Izma:</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
-		
 	if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
+	if (flags[kFLAGS.KELLY_KIDS] > 0)
+		childStats += "<b>Total Children with Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
 		
 	if (mountain.salon.lynnetteApproval() != 0)
 		childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
@@ -1991,17 +1996,22 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.MARBLE_KIDS] > 0)
 		childStats += "<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n";
 		
+	//if (flags[kFLAGS.MINERVA_KIDS] > 0)
+	//	childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_KIDS] + "\n";
+		
 	if (flags[kFLAGS.ANT_KIDS] > 0)
 		childStats += "<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n";
-		
 	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
 		childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
+	if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
+		childStats += "<b>Total Children with Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
 		
 	if (flags[kFLAGS.SHEILA_JOEYS] > 0)
 		childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
-		
 	if (flags[kFLAGS.SHEILA_IMPS] > 0)
 		childStats += "<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
+	if (flags[kFLAGS.SHEILA_JOEYS] > 0 && flags[kFLAGS.SHEILA_IMPS] > 0)
+		childStats += "<b>Total Children With Sheila:</b> " + flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS] + "\n";
 		
 	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
 	{
@@ -2033,19 +2043,19 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Body Stats
 	var bodyStats:String = "";
 
-	/*if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
-		bodyStats += "<b>Hunger:</b> " + Math.round(player.hunger) + " / 100 (";
+		bodyStats += "<b>Hunger:</b> " + Math.floor(player.hunger) + " / 100 (";
 		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
 		if (player.hunger > 0 && player.hunger < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
-		if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#7F0000\">Very hungry</font>";
+		if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#800000\">Very hungry</font>";
 		if (player.hunger >= 25 && player.hunger < 50) bodyStats += "Hungry";
 		if (player.hunger >= 50 && player.hunger < 75) bodyStats += "Not hungry";
-		if (player.hunger >= 75 && player.hunger < 90) bodyStats += "<font color=\"#007F00\">Satiated</font>";
+		if (player.hunger >= 75 && player.hunger < 90) bodyStats += "<font color=\"#008000\">Satiated</font>";
 		if (player.hunger >= 90 && player.hunger < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
-		if (player.hunger >= 100) bodyStats += "<font color=\"#00ff00\">Very full</font>";
+		if (player.hunger >= 100) bodyStats += "<font color=\"#00C000\">Very full</font>";
 		bodyStats += ")\n";
-	}*/
+	}
 
 	bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 	bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
@@ -2054,7 +2064,7 @@ public function displayStats(e:MouseEvent = null):void
 	bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 	
 	if (player.cumQ() > 0)
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + " / " + Math.round(player.cumCapacity()) + "mL (" + Math.floor(((player.lust + 50) / 5) + ((player.hoursSinceCum + 10) / 2)) + "%) \n";
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + " / " + Math.round(player.cumCapacity()) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
 		else bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n";
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n";
@@ -2135,6 +2145,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 		miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
 		
+	if (camp.getCampPopulation() > 0)
+		miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
+	
 	if (miscStats != "")
 		outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 	// End Misc Stats
@@ -2238,7 +2251,7 @@ public function displayStats(e:MouseEvent = null):void
 	
 	if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if (urta.urtaLove()) {
-			if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#080000\">Gone</font>\n";
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
 		}

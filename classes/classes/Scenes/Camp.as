@@ -753,7 +753,7 @@ public function doCamp():void {
 	if (model.time.hours > 4 && model.time.hours < 23) {
 		canCampStuff = campActions;
 		if(followersCount() > 0) 
-			followers = 74;
+			followers = campFollowers;
 		if(slavesCount() > 0) 
 			slaves = campSlavesMenu;
 		if(loversCount() > 0) 
@@ -806,7 +806,7 @@ public function doCamp():void {
 	//Menu
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 
-	if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
 		updateSaveFlags();
 	}
 	
@@ -1243,6 +1243,7 @@ public function campSlavesMenu():void {
 }
 
 public function campFollowers():void {
+	kGAMECLASS.tooltipLoc = "";
 	var rathazulEvent:Number = 0;
 	var jojoEvent:Number = 0;
 	var valeria2:Function = null;
@@ -2103,6 +2104,28 @@ private function exgartuanCampUpdate():void {
 	doNext(1);
 }
 
+//Camp population!
+public function getCampPopulation():int {
+	var pop:int = 1; //Start at 1 because of YOU! You count toward the population!
+	pop += companionsCount()
+	//Misc check!
+	if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
+	if (player.armorName == "goo armor") pop++; //Include Valeria if you're wearing her.
+	if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
+	if (flags[kFLAGS.ANEMONE_KID] > 0) pop++;
+	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) pop++;
+	//Children check!
+	if (sophieFollower() && flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
+	if (sophieFollower() && flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+	
+	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 || flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) pop += flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS];
+	if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
+	if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
+	if (flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0 || flags[kFLAGS.EMBER_CHILDREN_MALES] > 0 || flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0) pop+= flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS]
+	//Return number!
+	return pop;
+}
+
 private function fixFlags():void {
 	//Marae
 	if (player.findStatusAffect(StatusAffects.MetMarae) >= 0)
@@ -2180,7 +2203,7 @@ private function fixFlags():void {
 }
 //Updates save. Done to ensure your save doesn't get screwed up.
 private function updateSaveFlags():void {
-	flags[kFLAGS.MOD_SAVE_VERSION] = 2;
+	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 	var startOldIds:int = 1195;
 	var startNewIds:int = 2001;
 	var current:int = 0;

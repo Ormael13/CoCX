@@ -68,7 +68,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Reset autosave
 	player.slotName = "VOID";
 	player.autoSave = false;
-	//RESET DUNGEOn
+	//RESET DUNGEON
 	kGAMECLASS.inDungeon = false;
 	kGAMECLASS.dungeonLoc = 0;
 	//Hold onto old data for NG+
@@ -82,7 +82,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.inte = 15;
 	player.sens = 15;
 	player.lib = 15;
-	player.cor = 0;
+	player.cor = 0; //Will be changed to 15 in mod version 0.8.
 	kGAMECLASS.notes = "No Notes Available.";
 	player.lust = 15;
 	player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
@@ -230,43 +230,10 @@ public function newGameGo(e:MouseEvent = null):void {
 	inventory.initializeGearStorage();
 }
 
-
-//For now
-private function chooseSlotHardcore1():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_1";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore2():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_2";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore3():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_3";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore4():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_4";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore5():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_5";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore6():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_6";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore7():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_7";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore8():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_8";
-	doNext(startTheGame);
-}	
-private function chooseSlotHardcore9():void {
-	flags[kFLAGS.HARDCORE_SLOT] = "CoC_9";
-	doNext(startTheGame);
+//Choose Hardcore slot.
+private function chooseSlotHardcore(num:int):void {
+	flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
+	startTheGame();
 }	
 
 //-----------------
@@ -292,16 +259,17 @@ private function chooseModeHardcore():void {
 	flags[kFLAGS.HARDCORE_MODE] = 1;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
 	player.hunger = 80;
-	choices("Slot 1", chooseSlotHardcore1,
-			"Slot 2", chooseSlotHardcore2,
-			"Slot 3", chooseSlotHardcore3,
-			"Slot 4", chooseSlotHardcore4,
-			"Slot 5", chooseSlotHardcore5,
-			"Slot 6", chooseSlotHardcore6,
-			"Slot 7", chooseSlotHardcore7,
-			"Slot 8", chooseSlotHardcore8,
-			"Slot 9", chooseSlotHardcore9,
-			"Back", chooseGameModes)
+	menu()
+	addButton(0, "Slot 1", chooseSlotHardcore, 1);
+	addButton(1, "Slot 2", chooseSlotHardcore, 2);
+	addButton(2, "Slot 3", chooseSlotHardcore, 3);
+	addButton(3, "Slot 4", chooseSlotHardcore, 4);
+	addButton(4, "Slot 5", chooseSlotHardcore, 5);
+	addButton(5, "Slot 6", chooseSlotHardcore, 6);
+	addButton(6, "Slot 7", chooseSlotHardcore, 7);
+	addButton(7, "Slot 8", chooseSlotHardcore, 8);
+	addButton(8, "Slot 9", chooseSlotHardcore, 9);
+	addButton(9, "Back", chooseGameModes);
 }	
 
 //Choose the game mode when called!
@@ -1033,6 +1001,7 @@ private function startTheGame():void {
 	{
 		flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 	}
+	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 	statScreenRefresh();
 	model.time.hours = 11;
 	outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
