@@ -1850,7 +1850,7 @@ public function unFuckSave():void
 	if (flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] == 0)
 		flags[kFLAGS.FEMALE_SPIDERMORPH_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
 
-	if (flags[kFLAGS.HELSPAWN_AGE > 0) {
+	if (flags[kFLAGS.HELSPAWN_AGE] > 0) {
 		kGAMECLASS.helScene.pregnancy.knockUpForce(); //Clear Pregnancy
 	}
 	else if (flags[kFLAGS.HEL_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.HELIA_PREGNANCY_TYPE] <= 3) { //HELIA_PREGNANCY_TYPE was previously HEL_PREGNANCY_NOTICES
