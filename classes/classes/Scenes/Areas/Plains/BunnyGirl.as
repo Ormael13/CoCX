@@ -72,7 +72,7 @@ public function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("Your vagina",DickInV,"Her Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"Your ass",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
+		choices("Your Vagina",DickInV,"Her Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"Your Ass",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
 	}
 }
 //[Talk]
@@ -111,7 +111,7 @@ private function talkToBunnyBunBun():void {
 	outputText("  Her dick in your ass?)", false);
 	//var Ass:Number = 0;
 	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-	simpleChoices("Your vagina",DickInV,"Your ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",13);
+	simpleChoices("Your Vagina",DickInV,"Your Ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",13);
 	dynStats("lus", 5+player.lib/20);
 }
 //[Rape Her]
@@ -155,7 +155,7 @@ private function rapeBunBun():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+		simpleChoices("Your Vagina",DickInV,"Your Ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",13);
 
 	}
 }
