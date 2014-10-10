@@ -72,7 +72,7 @@ public function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("DickInVag",DickInV,"Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"BeAssFucked",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
+		choices("Your vagina",DickInV,"Her Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"Your ass",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
 	}
 }
 //[Talk]
@@ -111,7 +111,7 @@ private function talkToBunnyBunBun():void {
 	outputText("  Her dick in your ass?)", false);
 	//var Ass:Number = 0;
 	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-	simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+	simpleChoices("Your vagina",DickInV,"Your ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",13);
 	dynStats("lus", 5+player.lib/20);
 }
 //[Rape Her]
