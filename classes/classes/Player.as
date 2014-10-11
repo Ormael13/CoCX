@@ -170,13 +170,12 @@ use namespace kGAMECLASS;
 			//Skin armor perk
 			if(findPerk(PerkLib.ThickSkin) >= 0) {
 				armorDef += 2;
-				if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
+				//if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
 			}
-			//If no skin armor perk scales rock
-			else {
-				if(skinType == SKIN_TYPE_FUR) armorDef += 1;
-				if(skinType == SKIN_TYPE_SCALES) armorDef += 3;
-			}
+			
+			//Stacks on top of Thick Skin perk.
+			if(skinType == SKIN_TYPE_FUR) armorDef += 1;
+			if(skinType == SKIN_TYPE_SCALES) armorDef += 3;
 			//'Thick' dermis descriptor adds 1!
 			if(skinAdj == "smooth") armorDef += 1;
 			//Agility boosts armor ratings!
@@ -1716,7 +1715,61 @@ use namespace kGAMECLASS;
 			if (min > minCap) min = minCap;
 			return min;
 		}
-
+		
+		public function getMaxStats(stats:String):int {
+			var maxStr:int = 100;
+			var maxTou:int = 100;
+			var maxSpe:int = 100;
+			var maxInt:int = 100;
+			
+			//Alter max stats depending on race
+			if (minoScore() >= 4) {
+				maxStr += 20;
+				maxTou += 10;
+				maxInt -= 10;
+			}
+			if (lizardScore() >= 4) {
+				maxInt += 10;
+			}
+			if (dragonScore() >= 4) {
+				maxStr += 5;
+				maxTou += 10;
+				maxInt += 10;
+			}
+			if (dogScore() >= 4 || foxScore() >= 4) {
+				maxSpe += 10;
+				maxInt -= 5;
+			}
+			if (catScore() >= 4) {
+				maxSpe += 5;
+				maxInt += 5;
+			}
+			if (raccoonScore() >= 4) {
+				maxSpe += 15;
+			}
+			if (horseScore() >= 4 && !isTaur() && !isNaga()) {
+				maxSpe += 15;
+				maxInt -= 10;
+			}
+			if (gooScore() >= 3) {
+				maxSpe -= 10;
+			}
+			if (isNaga()) maxSpe += 10;
+			if (isTaur()) maxSpe += 20;
+			
+			
+			if (findStatusAffect(StatusAffects.Might) >= 0) {
+				maxStr += statusAffectv1(StatusAffects.Might);
+				maxTou += statusAffectv2(StatusAffects.Might);
+			}
+			
+			if (stats == "str" || stats == "strength") return maxStr;
+			else if (stats == "tou" || stats == "toughness") return maxTou;
+			else if (stats == "spe" || stats == "speed") return maxSpe;
+			else if (stats == "inte" || stats == "intelligence") return maxInt;
+			else return 100;
+		}
+		
 		public function minotaurAddicted():Boolean {
 			return findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
 		}

@@ -130,7 +130,7 @@
 			this.weaponAttack = 1;
 			this.armorName = "rubbery skin";
 			this.armorDef = 1;
-			this.bonusHP = 350;
+			this.bonusHP = 150;
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

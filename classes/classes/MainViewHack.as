@@ -178,19 +178,19 @@ package classes
 				reassigned = true;
 			}
 			//Set bars
-			mainView.strBar.width = (player.str * (baseWidth / 100));
+			mainView.strBar.width = (player.str * (baseWidth / player.getMaxStats("str")));
 			mainView.strBar.height = baseHeight;
 			mainView.strBar.y = basePos + (gapDiff * 1) - posOffset;
 			mainView.strBar.alpha = universalAlpha;
-			mainView.touBar.width = (player.tou * (baseWidth / 100));
+			mainView.touBar.width = (player.tou * (baseWidth / player.getMaxStats("tou")));
 			mainView.touBar.height = baseHeight;
 			mainView.touBar.y = basePos + (gapDiff * 2) - posOffset;
 			mainView.touBar.alpha = universalAlpha;
-			mainView.speBar.width = (player.spe * (baseWidth / 100));
+			mainView.speBar.width = (player.spe * (baseWidth / player.getMaxStats("spe")));
 			mainView.speBar.height = baseHeight;
 			mainView.speBar.y = basePos + (gapDiff * 3) - posOffset;
 			mainView.speBar.alpha = universalAlpha;
-			mainView.inteBar.width = (player.inte * (baseWidth / 100));
+			mainView.inteBar.width = (player.inte * (baseWidth / player.getMaxStats("inte")));
 			mainView.inteBar.height = baseHeight;
 			mainView.inteBar.y = basePos + (gapDiff * 4) - posOffset;
 			mainView.inteBar.alpha = universalAlpha;

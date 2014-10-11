@@ -82,7 +82,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.inte = 15;
 	player.sens = 15;
 	player.lib = 15;
-	player.cor = 0; //Will be changed to 15 in mod version 0.8.
+	player.cor = 15; 
 	kGAMECLASS.notes = "No Notes Available.";
 	player.lust = 15;
 	player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
@@ -880,7 +880,10 @@ private function confirmHistory():void {
 	if(temp == 11) historyPerk = PerkLib.HistoryAlchemist;
 	else if (temp == 12) historyPerk = PerkLib.HistoryFighter;
 	else if (temp == 13) historyPerk = PerkLib.HistoryHealer;
-	else if (temp == 14) historyPerk = PerkLib.HistoryReligious;
+	else if (temp == 14) {
+		historyPerk = PerkLib.HistoryReligious;
+		player.cor = 0;
+	}
 	else if (temp == 15) historyPerk = PerkLib.HistoryScholar;
 	else if (temp == 16) historyPerk = PerkLib.HistorySlacker;
 	else if (temp == 17) historyPerk = PerkLib.HistorySmith;

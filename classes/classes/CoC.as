@@ -3,6 +3,7 @@
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Dungeons.DungeonEngine;
 
 	import classes.CoC_Settings;
@@ -283,6 +284,7 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
+		public var kACHIEVEMENTS_REF:*;
 
 		public function rand(max:int):int
 		{
@@ -301,6 +303,7 @@
 			kGAMECLASS = this;
 			
 			this.kFLAGS_REF = kFLAGS; 
+			this.kACHIEVEMENTS_REF = kACHIEVEMENTS; 
 			// cheat for the parser to be able to find kFLAGS
 			// If you're not the parser, DON'T USE THIS
 
@@ -349,8 +352,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.16_mod_0.7.3";
-			version = ver + " (<b>Mod Bug Fixes #2</b>)";
+			ver = "0.8.16_mod_0.7.4";
+			version = ver + " (<b>Tweaks!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

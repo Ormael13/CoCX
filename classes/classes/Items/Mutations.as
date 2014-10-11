@@ -2609,6 +2609,11 @@
 			outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
 		}
 
+		public function examineCondom(player:Player):void
+		{
+			outputText("You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.  ", true);
+		}
+
 		//Oviposition Elixer!
 		/*
 		 v1 = egg type.

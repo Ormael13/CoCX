@@ -47,10 +47,10 @@ package classes.Scenes.Areas.HighMountains
 
 		//Special 3: basilisk tail swipe (Small physical damage):
 		private function basiliskTailSwipe():void {
+			outputText("The basilisk suddenly whips its tail at you, swiping your " + player.feet() + " from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision.  ", false);
+			if(damage == 0) outputText("The fall didn't harm you at all.  ", false);
 			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
-			damage = player.takeDamage(damage);
-			outputText("The basilisk suddenly whips its tail at you, swiping your " + player.feet() + " from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision. (" + damage + ")", false);
-			if(damage == 0) outputText("  The fall didn't harm you at all.", false);
+			damage = player.takeDamage(damage, true);			
 			game.combatRoundOver();
 		}
 

@@ -931,7 +931,7 @@
 		protected function applyTease(lustDelta:Number):void{
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
-			outputText(" (" + lustDelta + ")", false);
+			outputText(" <b>(<font color=\"#ff00ff\">" + lustDelta + "</font>)</b>", false);
 		}
 
 		public function generateDebugDescription():String{
