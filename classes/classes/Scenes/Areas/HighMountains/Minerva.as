@@ -156,7 +156,7 @@ package classes.Scenes.Areas.HighMountains
 				//No wait - insta loss:
 				else {
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
-					player.lust = 100;
+					game.dynStats("lus=", 100);
 				}
 				removeStatusAffect(StatusAffects.SirenSong);
 			}

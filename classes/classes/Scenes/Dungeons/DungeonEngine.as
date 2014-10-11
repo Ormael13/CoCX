@@ -28,7 +28,7 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 0) factory.roomLobby();
 			if (kGAMECLASS.dungeonLoc == 1) factory.roomBreakRoom();
 			if (kGAMECLASS.dungeonLoc == 2) factory.roomPumpRoom();
-			if (kGAMECLASS.dungeonLoc == 3) factory.roomBreakRoom();
+			if (kGAMECLASS.dungeonLoc == 3) factory.roomFurnaceRoom();
 			if (kGAMECLASS.dungeonLoc == 4) factory.roomRepairCloset();
 			if (kGAMECLASS.dungeonLoc == 5) factory.roomMainChamber();
 			if (kGAMECLASS.dungeonLoc == 6) factory.roomForemanOffice();

@@ -104,7 +104,6 @@ Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/
 <br>- **Please be 18 or the legal age to view porn before playing.**
 <br>- **Try to keep your keyboard clean.  Think of the children!**
 
-
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. 
 Don't forget to try out Trials in Tainted Space made by the creator of this game!
 	
@@ -129,6 +128,15 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 	if(helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
+}
+
+public function achievementsScreen():void {
+	outputText("COMING SOON!", true)
+	outputText("\n\n")
+	if (flags[kACHIEVEMENTS.STORY_NEWCOMER] > 0) outputText("Newcomer - Enter the portal");
+	else outputText("LOCKED");
+	menu();
+	addButton(9, "Back", mainMenu);
 }
 
 public function settingsScreen():void 
@@ -197,6 +205,25 @@ public function settingsScreen():void
 	}
 	else 
 		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
+		
+	outputText("\n\n");
+		
+	/*if (flags[kFLAGS.SFW_MODE] >= 1)
+	{
+		outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are censored.");
+		flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+	}
+	else 
+		outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
+		
+	outputText("\n\n");
+		
+	if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && flags[kFLAGS.SFW_MODE] <= 0)
+	{
+		outputText("Watersports: <font color=\"#008000\"><b>Enabled</b></font>\n Watersports scenes are enabled. (You kinky person)");
+	}
+	else 
+		outputText("Watersports: <font color=\"#800000\"><b>Disabled</b></font>\n Watersports scenes are disabled.");*/
 }
 
 public function settingsScreenI():void
@@ -235,9 +262,10 @@ public function settingsScreenII():void {
 	addButton(0, "Old Side Bar", toggleInterface);
 	addButton(1, "Background", cycleBackground);
 	//addButton(2, "Old Sprites", eventParser, 9999); //If I can re-add old sprites, that is.
-	//addButton(3, "SFW Toggle", eventParser, 9999); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
+	//addButton(3, "SFW Toggle", toggleSFW); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
 	
-	addButton(5, "Enable Real", enableRealisticPrompt);
+	//addButton(5, "Watersports", toggleWatersports); //Enables watersports.
+	addButton(8, "Enable Real", enableRealisticPrompt);
 	
 	addButton(4, "Previous", settingsScreenI);
 	addButton(9, "Back", mainMenu);
@@ -251,6 +279,18 @@ public function settingsScreenII():void {
 public function toggleInterface():void {
 	if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
 	else flags[kFLAGS.USE_OLD_INTERFACE] = 0;
+	settingsScreenII();
+}
+
+public function toggleWatersports():void {
+	if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
+	else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+	settingsScreenII();
+}
+
+public function toggleSFW():void {
+	if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
+	else flags[kFLAGS.SFW_MODE] = 0;
 	settingsScreenII();
 }
 

@@ -210,6 +210,7 @@ package classes.Scenes
 			
 			addButton(5, "NPnkEgg", giveItem, consumables.NPNKEGG);
 			addButton(6, "DrgnEgg", giveItem, consumables.DRGNEGG);
+			addButton(7, "Condom", giveItem, useables.CONDOM_);
 			
 			addButton(4, "Page 5/7", itemSpawnConsumablesMenuVI);
 			addButton(9, "Back", itemSpawnMenu);
@@ -478,6 +479,7 @@ package classes.Scenes
 			menu()
 			outputText("TEST STUFFZ", true);
 			addButton(0, "HackSideBar", mainHack.refreshStats);
+			addButton(1, "ASPLODE", styleHackMenu);
 			addButton(9, "Back", accessDebugMenu);
 		}
 	}

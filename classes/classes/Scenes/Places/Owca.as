@@ -373,7 +373,7 @@ public function defeetVapulasHorde():void {
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even has hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
 	//[(requires genitals and and corr >60)
-	if(player.cor > 60 && player.gender > 0) {
+	if((player.cor > 60 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) && player.gender > 0) {
 		outputText("\n\nDo you take advantage of them?");
 		doYesNo(rapeZeVapula,noVapulaSex);
 	}
@@ -955,9 +955,9 @@ private function subdueVapula():void {
 	outputText("\n\nBy now, you've completely broken the back of the rapacious demon horde.  Their leader is starting to get used to her repeated defeats; it's time for you to make a decision... what do you do?");
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
 	var fuck:Function = null;
-	if(player.gender > 0 && player.lust >= 33) fuck = rapeZeVapula;
+	if(player.gender > 0 && (player.lust >= 33 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) fuck = rapeZeVapula;
 	var enslave:Function = null;
-	if(player.gender > 0 && player.cor >= 66) enslave = enslaveVapulaWithYourWang;
+	if(player.gender > 0 && (player.cor >= 66 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) enslave = enslaveVapulaWithYourWang;
 	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",cleanupAfterCombat);
 }
 //Option: Disband (Z)

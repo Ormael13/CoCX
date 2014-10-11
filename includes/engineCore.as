@@ -361,7 +361,7 @@ private function finishAttributes():void {
 	dynStats("str", player.tempStr);
 	dynStats("tou", player.tempTou);
 	dynStats("spe", player.tempSpe);
-	dynStats("int", player.tempInt);
+	dynStats("int", player.tempInt, "noBimbo", true); //Ignores bro/bimbo perks.
 	player.tempStr = 0;
 	player.tempTou = 0;
 	player.tempSpe = 0;
@@ -1279,7 +1279,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Easy Mode") != -1) {                        
 		toolTipText = "Toggles easy mode. If enabled, enemy damage is halved and bad-ends can be ignored.";
 	}
-	if(buttonText.indexOf("Sprite Toggle") != -1) {                        
+	if(buttonText.indexOf("Toggle Sprites") != -1) {                        
 		toolTipText = "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.";
 	}
 	if(buttonText.indexOf("AutoSav") != -1) {                
@@ -1289,6 +1289,9 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Old Side Bar") != -1) {                
 		toolTipText = "Switch between old and new stats bar.\n\nNOTE: At the moment, you'll have to restart the game to see the old stats panel.\n\nSave the game after switching to old then restart the game. Then load the game.";
+	}
+	if(buttonText.indexOf("SFW Toggle") != -1) {                        
+		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored.";
 	}
 	//Cheat menu
 	if(buttonText.indexOf("Spawn Items") != -1) {                        
@@ -2288,7 +2291,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
 		statEffects += "Uma's Massage - " + player.statusAffectv1(StatusAffects.UmasMassage) + " hours remaining.\n";
 		
-	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
+	if (player.statusAffectv1(StatusAffects.Dysfunction) > 0) 
 		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining.\n";
 
 	if (statEffects != "")
@@ -2587,17 +2590,16 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 		if (tempSpeedCap < 50) tempSpeedCap = 50;
 		if (player.spe > tempSpeedCap) player.spe = tempSpeedCap
 	}
-	
 	//Keep stats in bounds
 	if(player.cor < 0) player.cor = 0;
 	if(player.cor > 100) player.cor= 100;
-	if(player.str > 100) player.str = 100;
+	if(player.str > player.getMaxStats("str")) player.str = player.getMaxStats("str");
 	if(player.str < 1) player.str = 1;
-	if(player.tou > 100) player.tou = 100;
+	if(player.tou > player.getMaxStats("tou")) player.tou = player.getMaxStats("tou");
 	if(player.tou < 1) player.tou = 1;
-	if(player.spe > 100) player.spe = 100;
+	if(player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
 	if(player.spe < 1) player.spe = 1;
-	if(player.inte > 100) player.inte= 100;
+	if(player.inte > player.getMaxStats("inte")) player.inte= player.getMaxStats("inte");
 	if(player.inte < 1) player.inte = 1;
 	if(player.lib > 100) player.lib = 100;
 	if(player.lib < 0) player.lib = 0;

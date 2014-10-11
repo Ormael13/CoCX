@@ -438,7 +438,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 1);
 			cleanupAfterCombat();
-			doNext(roomBreakRoom);
+			//doNext(roomBreakRoom);
 		}
 		public function doForcefeedSuccubus():void {
 			outputText("", true);
@@ -487,7 +487,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 			dynStats("lus", -50);
 			cleanupAfterCombat();
-			doNext(roomBreakRoom);
+			//doNext(roomBreakRoom);
 		}
 		public function dildoSuccubus():void {
 			outputText("", true);
@@ -504,7 +504,7 @@ package classes.Scenes.Dungeons
 			outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...", false);
 			dynStats("lus", (20 + (player.lib/5) + (player.cor/10)));
 			cleanupAfterCombat();
-			doNext(roomBreakRoom);
+			//doNext(roomBreakRoom);
 		}
 		public function doLossSuccubus():void {
 			outputText("", true);
@@ -570,7 +570,7 @@ package classes.Scenes.Dungeons
 		}
 		public function doLeaveSuccubus():void {
 			cleanupAfterCombat();
-			doNext(roomBreakRoom);			
+			//doNext(roomBreakRoom);			
 		}
 		
 		//Incubus Mechanic
@@ -729,7 +729,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 2);
 			cleanupAfterCombat();
-			doNext(roomFurnaceRoom);
+			//doNext(roomFurnaceRoom);
 		}
 		public function doRapeIncubus():void {
 			outputText("", true);
@@ -767,7 +767,7 @@ package classes.Scenes.Dungeons
 				outputText("ou fall back, the fluid of your orgasm dripping from your " + cockDescript(0) + " and the gaping asshole of your latest conquest.\n\nYou turn to gather your " + player.armorName + ", and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.", false);
 				player.orgasm();
 				cleanupAfterCombat();
-				doNext(roomFurnaceRoom);
+				//doNext(roomFurnaceRoom);
 			}
 			//(VAGINAL - Requires Vagina)
 			else {
@@ -796,7 +796,7 @@ package classes.Scenes.Dungeons
 				player.orgasm();
 				dynStats("cor", 2);
 				cleanupAfterCombat();
-				doNext(roomFurnaceRoom);
+				//doNext(roomFurnaceRoom);
 			}
 		}
 		public function doOralIncubus():void {
@@ -812,11 +812,11 @@ package classes.Scenes.Dungeons
 			outputText("\n\n", false);
 			outputText("You push the exhausted demon down and idly collect the cum from your face with your fingers, slowly licking each clean.  Feeling rather sensual and sated, you decide to resume exploring the factory.\n\nAfter redressing you turn about, and see the demon is gone, leaving only a small pool of cum in his wake.", false);
 			cleanupAfterCombat();
-			doNext(roomFurnaceRoom);
+			//doNext(roomFurnaceRoom);
 		}
 		public function doLeaveIncubus():void {
 			cleanupAfterCombat();
-			doNext(roomFurnaceRoom);
+			//doNext(roomFurnaceRoom);
 		}
 		
 		//Omnibus Overseer
@@ -1111,20 +1111,20 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 2);
 			cleanupAfterCombat();
-			doNext(roomForemanOffice);
+			//doNext(roomForemanOffice);
 		}
 		
 		private function letGoOmnibus():void {
 			spriteSelect(16);
 			outputText("You refuse to fall for her ploy, and decide not to take her up on her offer.  However, being that she is so thoroughly defeated, you allow her to escape, promising her far worse should she ever oppose you in the future.\n\n\"<i>Thank you, merciful hero!</i>\" she says and she sprints out the door.  Wings unfurl from her back and she takes flight, disappearing out a skylight above the main factory floor.", true);
 			cleanupAfterCombat();
-			doNext(roomForemanOffice);
+			//doNext(roomForemanOffice);
 		}
 		private function killOmnibus():void {
 			spriteSelect(16);
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
 			cleanupAfterCombat();
-			doNext(roomForemanOffice);
+			//doNext(roomForemanOffice);
 		}
 		
 		//Factory finale
@@ -1572,11 +1572,11 @@ package classes.Scenes.Dungeons
 					outputText("You realize there are enough pieces here to put together a breast-milking pump or a cock-milker.  ", false);
 					if(player.hasKeyItem("Cock Milker") >= 0) outputText("\nYou already have a cock milker.\n", false);
 					else {
-						addButton(3, "Cock Milker", eventParser, 11029);
+						addButton(3, "Cock Milker", buildCockMilker);
 					}
 					if(player.hasKeyItem("Breast Milker") >= 0) outputText("\nYou already have a breast milker.\n", false);
 					else {
-						addButton(2, "Breast Milker", eventParser, 11030);
+						addButton(2, "Breast Milker", buildBreastMilker);
 					}
 				}
 			}
@@ -1587,7 +1587,6 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 5;
 			outputText("<b><u>Main Chamber</u></b>\n", true);
 			dungeons.setDungeonButtons(false, null, true, roomForemanOffice, false, null, true, roomPumpRoom);
-			addButton(6, "South (Up)", roomForemanOffice)
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				outputText("This cavernous chamber is filled with a cacophony of sexual moans.  Rows of harnesses are spaced evenly throughout this room, nearly all of them filled with delirious-looking humans.  Each is over-endowed with huge breasts and a penis of elephantine proportions.  The source of their delirium hangs down from the ceiling - groups of hoses that end with needles buried deep into the poor 'girls' flesh, pumping them full of demonic chemicals.  Constant sucking and slurping noises emanate from nipple and cock pumps as they keep the victims in a state of near-constant orgasm.  ", false);
 				if(player.cor < 50) outputText("You wish you could free them, but it would take the better part of a day to get them all free.  It'd be better to find the control room and shut down the infernal machinery.  ", false);
@@ -1600,6 +1599,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nOne of the leather-clad ladies steps over and offers, 'Would you like a dose?  You look like you need to relieve some tension...", false);
 				addButton(2, "Tension", doTensionRelease);
 			}
+			addButton(6, "South (Up)", roomForemanOffice)
 		}
 		
 		public function roomForemanOffice():void {

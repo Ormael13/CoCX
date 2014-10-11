@@ -1980,12 +1980,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	//Drop axe if too short!
-	if(player.tallness < 78 && player.weapon == weapons.L__AXE) {
+	if((player.tallness < 78 && player.str < 90) && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);
 		player.weapon.unequip(player,true,true);
 		return true;
 	}
-	if(player.weapon == weapons.L_HAMMR && player.tallness < 60) {
+	if(player.weapon == weapons.L_HAMMR && (player.tallness < 60 && player.str < 70)) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n", true);
 		player.weapon.unequip(player,true,true);
 		return true;

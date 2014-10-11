@@ -8,6 +8,10 @@ public function masturbateMenu():void {
 	if(fappingItems(false)) {
 		addButton(8,"Items",fappingItems);
 	}
+	if (flags[kFLAGS.SFW_MODE] >= 1) {
+		meditate();
+		return;
+	}
 	
 	//FAP BUTTON GOAADFADHAKDADK
 	if((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
@@ -247,6 +251,34 @@ public function fappingItems(menus:Boolean = true):Boolean {
 	//Otherwise give choices
 	else choices(masturbText, masturbate, beltText, dualBelt, stimbeltText, stimBelt,"AN Stim-Belt",ANStimBelt,dildoText,deluxDildo,"Lick",lick,"Onahole",onaHole,"D Onahole",dOnahole,"AN Onahole",ANOnahole,"Back",1);
 */
+
+//Generic stripping check.
+public function doStripCheck():void 
+{
+	if (player.cor < 15) {
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your " + player.armorName + ".\n\n", false);
+		else outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. You then proceed to remove your " + player.armorName + ".\n\n", false);
+	}
+	if (player.cor >= 15 && player.cor < 30) {
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
+		else outputText("You enter your cabin and close the door, forgetting to close the shutters. You then proceed to remove your " + player.armorName + ".\n\n", false);
+	}
+	if (player.cor >= 30 && player.cor < 60) {
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
+		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
+	}
+	if (player.cor >= 60 && player.cor < 80) {
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
+		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
+	}	
+	if (player.cor >= 80) {
+		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
+			if (player.hasCock() || player.hasVagina()) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
+			else outputText("You strip naked, casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
+		}
+		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
+	}
+}
 
 //onaHole use - game should already have checked if player has a cock! CHECK BEFORE CALLING
 public function onaholeUse():void
@@ -710,29 +742,7 @@ public function genderlessMasturbate():void {
 	//first time as a genderless person - 
 	outputText("", true);
 	//Early prep
-	if (player.cor < 15) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n", false);
-		else outputText("You enter your cabin and make sure to close the cabin door and shutters of your window. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 15 && player.cor < 30) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
-		else outputText("You enter your cabin, forgetting to close the shutters. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 30 && player.cor < 60) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 60 && player.cor < 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
-	}	
-	if (player.cor >= 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
-			if (player.hasCock() || player.hasVagina()) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
-			else outputText("You strip naked, casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
-		}
-		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
-	}
+	doStripCheck();
 	//Tit foreplay
 	titForeplay();
 	if(player.findStatusAffect(StatusAffects.FappedGenderless) < 0) {
@@ -839,26 +849,7 @@ public function masturbateGo():void {
 	var hermtastic:Boolean = false;
 	var nippleFuck:Boolean = false;
 	//Early prep
-	if (player.cor < 15) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n", false);
-		else outputText("You enter your cabin and make sure to close the cabin door and shutters of your window. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 15 && player.cor < 30) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
-		else outputText("You enter your cabin, forgetting to close the shutters. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 30 && player.cor < 60) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 60 && player.cor < 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
-	}
+	doStripCheck();
 	//Tit foreplay
 	titForeplay();
 	//Touch our various junks
@@ -2789,26 +2780,7 @@ public function tentacleSelfFuck():void {
 		return;
 	}
 	clearOutput();
-	if (player.cor < 15) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n", false);
-		else outputText("You enter your cabin and make sure to close the cabin door and shutters of your window. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 15 && player.cor < 30) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
-		else outputText("You enter your cabin, forgetting to close the shutters. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 30 && player.cor < 60) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 60 && player.cor < 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
-	}
+	doStripCheck();
 	
 	outputText("Almost immediately, your " + cockDescript(x) + " perks up like a pet expecting to be fed, and you have to admit that you plan to give that squirming tentacle exactly what it desires - a hot, slippery slit to nestle inside of.  Already, your [vagina] has grown ");
 	if(player.wetness() <= 2) outputText("moist");
@@ -2964,26 +2936,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	}
 	clearOutput();
 	//[Standard text for stripping off goes here]
-	if (player.cor < 15) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n", false);
-		else outputText("You enter your cabin and make sure to close the cabin door and shutters of your window. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 15 && player.cor < 30) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
-		else outputText("You enter your cabin, forgetting to close the shutters. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 30 && player.cor < 60) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 60 && player.cor < 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
-	}
-	if (player.cor >= 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
-	}
+	doStripCheck();
 	outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + cockDescript(x)+ " to your back, pointing it toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + cockDescript(x) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + cockDescript(x) + " at full force inside your colon.");
 	//[anal tightness check]
 	player.buttChange(player.cockArea(x),true,true,false);

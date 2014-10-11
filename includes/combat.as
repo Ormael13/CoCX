@@ -1366,6 +1366,9 @@ public function attack():void {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your " + player.weaponName + " up at an oblique angle; the basilisk doesn't anticipate this attack!  ", false);
 		}
 	}
+	if (monster.short == "frost giant" && monster.findStatusAffect(StatusAffects.GiantBoulder)) {
+		(monster as FrostGiant).giantBoulderHit(0);
+	}
 	//Worms are special
 	if(monster.short == "worms") {
 		//50% chance of hit (int boost)
@@ -1822,7 +1825,7 @@ public function dropItem(monster:Monster):void {
 				//50% breakage!
 				if(rand(2) == 0) {
 					itype = weapons.L__AXE;
-					if(player.tallness < 78) {
+					if(player.tallness < 78 && player.str < 90) {
 						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ", false);
 						if(rand(2) == 0) itype = null;
 						else itype = consumables.SDELITE;
@@ -3974,7 +3977,8 @@ public function spellArouse():void {
 		enemyAI();
 		return;
 	}
-	monster.lust += monster.lustVuln * (player.inte/5*spellMod() + rand(monster.lib - monster.inte*2 + monster.cor)/5);
+	var lustDmg:Number = monster.lustVuln * (player.inte/5*spellMod() + rand(monster.lib - monster.inte*2 + monster.cor)/5);
+	monster.lust += lustDmg;
 	if(monster.lust < 30) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
 	if(monster.lust >= 30 && monster.lust < 60) {
 		if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
@@ -4006,6 +4010,7 @@ public function spellArouse():void {
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " instantly soaks her groin.  ", false);
 		}
 	}
+	outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
 	outputText("\n\n", false);
 	doNext(1);
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -4079,11 +4084,11 @@ public function spellMight():void {
 	else {
 		outputText("The rush of success and power flows through your body.  You feel like you can do anything!", false);
 		player.createStatusAffect(StatusAffects.Might,0,0,0,0);
-		temp = 5 * spellMod();
+		temp = 10 * spellMod();
 		tempStr = temp;
 		tempTou = temp;
-		if(player.str + temp > 100) tempStr = 100 - player.str;
-		if(player.tou + temp > 100) tempTou = 100 - player.tou;
+		//if(player.str + temp > 100) tempStr = 100 - player.str;
+		//if(player.tou + temp > 100) tempTou = 100 - player.tou;
 		player.changeStatusValue(StatusAffects.Might,1,tempStr);
 		player.changeStatusValue(StatusAffects.Might,2,tempTou);
 		if(player.str < 100) {

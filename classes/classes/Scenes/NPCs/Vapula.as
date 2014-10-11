@@ -137,42 +137,60 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>But...but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
 			outputText("\n\nYou try your best to explain that Vapula is a renegade, that she fears Lethice.");
 			outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
-			//[if libido >=50]
-			if (player.lib >= 50) outputText("\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
-			outputText("\n\n\"<i>That's it!</i>\"  The ");
-			if (jojo && amily) outputText("mice are");
-			else outputText("mouse is");
-			outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
-			if (jojo) {
-				outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
-				flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
-				player.removeStatusAffect(StatusAffects.JojoNightWatch);
-				player.removeStatusAffect(StatusAffects.PureCampJojo);
+			if (player.inte < 90 || player.cor >= 50) {
+				//[if libido >=50]
+				if (player.lib >= 50) outputText("\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
+				outputText("\n\n\"<i>That's it!</i>\"  The ");
+				if (jojo && amily) outputText("mice are");
+				else outputText("mouse is");
+				outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
+				if (jojo) {
+					outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
+					flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
+					player.removeStatusAffect(StatusAffects.JojoNightWatch);
+					player.removeStatusAffect(StatusAffects.PureCampJojo);
+				}
+				if (amily) {
+					outputText("\n\nAmily shakes her head.  \"<i>Goodbye, [name].  You've changed.  What you did is pure folly.</i>\"");
+					//Set - amily flipped her shit
+					flags[kFLAGS.AMILY_FOLLOWER] = 0;
+					//Enable village encounters
+					flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+					//Change to plain mouse birth!
+					if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+					//FLAG THAT THIS SHIT WENT DOWN
+					flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+					//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+				}
+				//[(if PC corr > 70)
+				if (player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
+				outputText("\n\n");
+				if (jojo) outputText("Jojo");
+				if (amily && jojo) outputText(" and ");
+				if (amily) outputText("Amily");
+				if (amily && jojo) outputText(" have ");
+				else outputText(" has ");
+				outputText("moved out.");
+				outputText("\n\nMaybe it's past time you brought them around to way your way of thinking?");
+				//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
 			}
-			if (amily) {
-				outputText("\n\nAmily shakes her head.  \"<i>Goodbye, [name].  You've changed.  What you did is pure folly.</i>\"");
-				//Set - amily flipped her shit
-				flags[kFLAGS.AMILY_FOLLOWER] = 0;
-				//Enable village encounters
-				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-				//Change to plain mouse birth!
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
-				//FLAG THAT THIS SHIT WENT DOWN
-				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-				//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+			else {
+				outputText("\n\nYou assure them that you'll do your best to keep her away from ");
+				if (amily) outputText("Amily");
+				if (amily && jojo) outputText(" and ");
+				if (jojo) outputText("Jojo");
+				outputText(" and make sure she doesn't come close.");
+				if (jojo) {
+					outputText("\n\n\"<i>Fine. But I'll keep close watch from now on,<i>\" Jojo says.");
+					flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] = 1;
+				}
+				if (amily) {
+					outputText("\n\n\"<i>Fine! Don't come near me if you're corrupted. I'll stay away from her,<i>\" Amily warns.");
+					flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] = 1;
+				}
+				
 			}
-			//[(if PC corr > 70)
-			if (player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
-			outputText("\n\n");
-			if (jojo) outputText("Jojo");
-			if (amily && jojo) outputText(" and ");
-			if (amily) outputText("Amily");
-			if (amily && jojo) outputText(" have ");
-			else outputText(" has ");
-			outputText("moved out.");
-			outputText("\n\nMaybe it's past time you brought them around to way your way of thinking?");
-			//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
 			doNext(1);
 		}
 

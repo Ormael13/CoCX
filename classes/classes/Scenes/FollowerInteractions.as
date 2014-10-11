@@ -413,15 +413,18 @@ private function beAPimpMarbleLovesIt():void {
 private function srslyPimpinGuyz():void {
 	outputText("", true);
 	outputText("\"<i>Yes I'm serious.  What, you don't think I can take both of you?</i>\" you say while putting your hands on your hips and swinging them around.  The two of them almost scream as one before descending upon you.  In an instant you're hit with a dart from Amily, causing your body to lock up, just before Marble brings her hammer down onto your head in a massive overhead swing and everything goes black.\n\n", false);
-	
-	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  All that is left is a suit of comfortable clothes that you put on.  You also find a note in a rough script that says: <i>This is what you get for being an asshole.</i>  Those damn bitches.", false);
-	player.gems = 0;
+	player.takeDamage(player.HP - 1);
+	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  ")
+	if (player.armorName != "goo armor") outputText("All that is left is a suit of comfortable clothes that you put on.  ");
+	else outputText("\"<i>Are you all right,</i>\" the armor-goo asks.  You insist her that you have a terrible headache.  ");
+	outputText("You also find a note in a rough script that says: <i>This is what you get for being an asshole.</i>  Those damn bitches.", false);
+	player.gems *= 0;
 	player.itemSlot1.quantity = 0;
 	player.itemSlot2.quantity = 0;
 	player.itemSlot3.quantity = 0;
 	player.itemSlot4.quantity = 0;
 	player.itemSlot5.quantity = 0;
-	player.armor = armors.C_CLOTH;
+	if (player.armorName != "goo armor") player.armor = armors.C_CLOTH;
 	player.weapon.unequip(player,false,true);
 	player.removeStatusAffect(StatusAffects.CampMarble);
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
