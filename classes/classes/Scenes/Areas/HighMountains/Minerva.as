@@ -62,9 +62,8 @@ package classes.Scenes.Areas.HighMountains
 			else {
 				outputText("  Her shark tail whacks you, knocking you to the ground.  You quickly struggle back into position");
 				if (player.armorDef > 0) outputText(", but your defense has been reduced");
-				outputText("!");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("! ");
+				player.takeDamage(damage, true);
 				if (findStatusAffect(StatusAffects.TailWhip) >= 0) addStatusValue(StatusAffects.TailWhip, 1, 10);
 				else createStatusAffect(StatusAffects.TailWhip, 10, 0, 0, 0);
 			}
@@ -85,8 +84,7 @@ package classes.Scenes.Areas.HighMountains
 			//[if attack lands]
 			else {
 				outputText("  She pierces you right in the shoulder!  You wince in pain and step back, out of her reach again.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -105,8 +103,7 @@ package classes.Scenes.Areas.HighMountains
 			//[if attack lands]
 			else {
 				outputText("  You don't have time to avoid the downward chop and the axe head lands right in your shoulder blade!  You cry out in pain, but you can still move your arm despite the brutal blow.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -114,10 +111,9 @@ package classes.Scenes.Areas.HighMountains
 //White Fire
 		private function kiteFire():void
 		{
-			outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that!");
+			outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that! ");
 			var damage:int = int(10 + (inte / 3 + rand(inte / 2)) * 1.5);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -125,7 +121,7 @@ package classes.Scenes.Areas.HighMountains
 //Booty-shorts
 		private function bootyShortInYoFaceSon():void
 		{
-			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did.");
+			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
 			game.dynStats("lus", 20 + player.lib / 10 + rand(5));
 			combatRoundOver();
 		}
@@ -134,7 +130,7 @@ package classes.Scenes.Areas.HighMountains
 //Pole licking
 		private function lickDatPole():void
 		{
-			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\"");
+			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
 			game.dynStats("lus", 20 + player.lib / 10 + rand(5));
 			combatRoundOver();
 		}
@@ -156,7 +152,7 @@ package classes.Scenes.Areas.HighMountains
 				//No wait - insta loss:
 				else {
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
-					game.dynStats("lus=", 100);
+					game.dynStats("lus", 999);
 				}
 				removeStatusAffect(StatusAffects.SirenSong);
 			}

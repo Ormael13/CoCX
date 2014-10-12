@@ -2153,13 +2153,13 @@ package classes.Scenes.NPCs
 				}
 			}
 			emberAffection(1);
-			doNext(13);
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
 			fatigue( -50);
 			player.refillHunger(75);
 			player.slimeFeed();
 			HPChange(player.maxHP() * .33, false);
+			doNext(13);
 		}
 
 //Sparring text outputs (Z) (FENCODED TO HERE)

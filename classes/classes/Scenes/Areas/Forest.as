@@ -39,6 +39,7 @@ package classes.Scenes.Areas
 			
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) chooser = rand(5);
 			
+			if (chooser == 1 && player.level < 2) chooser++;
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
 				//If Fera isn't free yet...

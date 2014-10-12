@@ -662,8 +662,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.lust += 20;
 				if(player.lust > 100) player.lust = 100;
 			}
-			if(player.statusAffectv1(StatusAffects.Luststick) <= 0) {
+			if (player.statusAffectv1(StatusAffects.Luststick) <= 0) {
 				player.removeStatusAffect(StatusAffects.Luststick);
+				dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 				outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>", false);
 				needNext = true;
 			}

@@ -220,10 +220,8 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	}
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
-	if(sacrifice) simpleChoices("Submit",loseOrSubmitToVapula,
-			"Fight",createCallBackFunction(fightZeDemons,true),"",0,"",0,"",0);
-	else simpleChoices("Submit",loseOrSubmitToVapula,
-			"Fight",createCallBackFunction(fightZeDemons,false),"",0,"",0,"",0);
+	if(sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula,"",0,"",0,"",0);
+	else simpleChoices("Fight",createCallBackFunction(fightZeDemons,false),"Submit",loseOrSubmitToVapula,"",0,"",0,"",0);
 }
 //Submit/Fight
 private function fightZeDemons(sacrifice:Boolean = true):void {

@@ -752,6 +752,7 @@ private function postSophieSexSnuggle():void {
 	else outputText("give her a kiss on the cheek, knowing all-too-well the dangers of her lips.  She quips, \"<i>Ohh, too bad.  I wanted to stroke you to sleep.</i>\"\n\n", false);
 	//Remove luststick
 	player.removeStatusAffect(StatusAffects.Luststick);
+	dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
 	
@@ -901,7 +902,10 @@ public function luststickApplication(hours:Number = 4):void {
 		}
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
-	else player.createStatusAffect(StatusAffects.Luststick,hours,0,0,0);
+	else {
+		flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL] = player.lib 
+		player.createStatusAffect(StatusAffects.Luststick, hours, 0, 0, 0);
+	}
 }
 
 internal function sophieLostCombat():void {

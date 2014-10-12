@@ -849,6 +849,12 @@ public function doCombat(eventNum:Number):void
 			else if (player.findStatusAffect(StatusAffects.Confusion) >= 0) {
 				player.removeStatusAffect(StatusAffects.Confusion);
 				outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n", true);
+			}			
+			else if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+				player.removeStatusAffect(StatusAffects.GiantBoulder);
+				(monster as FrostGiant).giantBoulderMiss(0);
+				enemyAI()
+				return;
 			}
 			else outputText("You decide not to take any action this round.\n\n", true);
 			enemyAI();
@@ -1044,18 +1050,19 @@ public function doCombat(eventNum:Number):void
 			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.2;
-			damage = doDamage(damage);
+			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.2; //Kelt's Bow does more damage.
+			damage = Math.round(damage);
+			doDamage(damage);
 			monster.lust -= 20;
 			if (monster.lust < 0) monster.lust = 0;
 			if (monster.HP <= 0) {
-				if (monster.short == "pod") outputText(". (" + String(damage) + ")\n\n", false);
-				else if (monster.plural) outputText(" and stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
-				else outputText(" and staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
+				if (monster.short == "pod") outputText(". <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+				else if (monster.plural) outputText(" and stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ".  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+				else outputText(" and staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ".  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 				doNext(endHpVictory);
 				return;
 			}
-			else outputText(".  It's clearly very painful. (" + String(damage) + ")\n\n", false);
+			else outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 			enemyAI();
 			return;
 	}
@@ -1183,6 +1190,7 @@ public function fantasize():void {
 		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
 		dynStats("lus", temp2, "resisted", false);
 		(monster as FrostGiant).giantBoulderFantasize();
+		enemyAI();
 		return;
 	}
 	else if(player.armorName == "goo armor") {
@@ -1366,8 +1374,10 @@ public function attack():void {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your " + player.weaponName + " up at an oblique angle; the basilisk doesn't anticipate this attack!  ", false);
 		}
 	}
-	if (monster.short == "frost giant" && monster.findStatusAffect(StatusAffects.GiantBoulder)) {
+	if (monster.short == "frost giant" && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
 		(monster as FrostGiant).giantBoulderHit(0);
+		enemyAI();
+		return;
 	}
 	//Worms are special
 	if(monster.short == "worms") {
@@ -1709,8 +1719,8 @@ public function playerStinger():void {
 	}
 	//Sting successful!
 	outputText("Searing pain lances through " + monster.a + monster.short + " as you manage to sting " + monster.pronoun2 + "!  ", false);
-	if(monster.plural) outputText("You watch as " + monster.pronoun1 + " stagger back a step and nearly trip, flushing hotly.", false);
-	else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, flushing hotly.", false);
+	if(monster.plural) outputText("You watch as " + monster.pronoun1 + " stagger back a step and nearly trip, flushing hotly.  ", false);
+	else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, flushing hotly.  ", false);
 	//Tabulate damage!
 	var damage:Number = 35 + rand(player.lib/10);
 	//Level adds more damage up to a point (level 20)
@@ -1718,6 +1728,7 @@ public function playerStinger():void {
 	else if(player.level < 20) damage += 30 + (player.level-10) * 2;
 	else damage += 50;
 	monster.lust += monster.lustVuln * damage;
+	outputText("<b>(<font color=\"#ff00ff\">" + monster.lustVuln * damage + "</font>)</b>")
 	if(monster.findStatusAffect(StatusAffects.lustvenom) < 0) monster.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
 	/* IT used to paralyze 50% of the time, this is no longer the case!
 	Paralise the other 50%!
@@ -4184,9 +4195,10 @@ public function spellWhitefire():void {
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
-	temp = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	temp = int(10+(player.inte/4 + rand(player.inte/3)) * spellMod());
 	//High damage to goes.
-	if(monster.short == "goo-girl") temp = Math.round(temp * 1.5);
+	if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
+	if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
 	outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
 	//Using fire attacks on the goo]
 	if(monster.short == "goo-girl") {
@@ -4333,7 +4345,7 @@ public function hellFire():void {
 		if(monster.inte < 10) {
 			outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.", false);
 			damage = int(damage);
-			outputText("(" + damage + ")\n", false);
+			outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n", false);
 			monster.HP -= damage;
 		}
 		else {
@@ -4724,7 +4736,7 @@ public function dragonBreath():void {
 		damage = Math.round(damage * 1.5);
 		damage = doDamage(damage);
 		monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
-		outputText("(" + damage + ")\n\n", false);
+		outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n\n", false);
 	}
 	else {
 		if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -4738,7 +4750,7 @@ public function dragonBreath():void {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}
 		damage = doDamage(damage);
-		outputText(" (" + damage + ")");
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 	}
 	outputText("\n\n");
 	if(monster.short == "Holli" && monster.findStatusAffect(StatusAffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
@@ -4802,7 +4814,7 @@ public function fireballuuuuu():void {
 			outputText("You use your flexibility to barely fold your body out of the way!", false);
 		}
 		else {
-			outputText("Your own fire smacks into your face! (" + damage + ")", false);
+			outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			takeDamage(damage);
 		}
 		outputText("\n\n", false);
@@ -4818,7 +4830,7 @@ public function fireballuuuuu():void {
 			outputText("<b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>  ");
 			damage = Math.round(0.2 * damage);
 		}
-		outputText("(" + damage + ")\n\n", false);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 		monster.HP -= damage;
 		if(monster.short == "Holli" && monster.findStatusAffect(StatusAffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
 	}
@@ -5243,7 +5255,7 @@ public function anemoneSting():void {
 		monster.lust += damage;
 		//Clean up down to 1 decimal point
 		damage = Math.round(damage*10)/10;		
-		outputText(" (" + damage + ")", false);
+		outputText(" <b>(<font color=\"#ff00ff\">" + damage + "</font>)</b>", false);
 	}
 	//New lines and moving on!
 	outputText("\n\n", false);
@@ -5414,7 +5426,7 @@ public function corruptedFoxFire():void {
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 	outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
 
-	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	var dmg:int = int(10+(player.inte/2.5 + rand(player.inte/1.5)) * spellMod());
 	if(monster.cor >= 66) dmg = Math.round(dmg * .66);
 	else if(monster.cor >= 50) dmg = Math.round(dmg * .8);
 	//High damage to goes.
@@ -5425,7 +5437,7 @@ public function corruptedFoxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  (" + dmg + ")\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">+" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
@@ -5452,7 +5464,7 @@ public function foxFire():void {
 	}
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against corrupted targets.
 	outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.");
-	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	var dmg:int = int(10+(player.inte/2.5 + rand(player.inte/1.5)) * spellMod());
 	if(monster.cor < 33) dmg = Math.round(dmg * .66);
 	else if(monster.cor < 50) dmg = Math.round(dmg * .8);
 	//High damage to goes.
@@ -5463,7 +5475,7 @@ public function foxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  (" + dmg + ")\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">+" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();

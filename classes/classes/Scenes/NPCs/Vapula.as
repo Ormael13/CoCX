@@ -137,7 +137,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>But...but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
 			outputText("\n\nYou try your best to explain that Vapula is a renegade, that she fears Lethice.");
 			outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
-			if (player.inte < 90 || player.cor >= 50) {
+			if (player.inte < (60 + (player.cor/2))) {
 				//[if libido >=50]
 				if (player.lib >= 50) outputText("\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
 				outputText("\n\n\"<i>That's it!</i>\"  The ");

@@ -882,6 +882,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Web") != -1) {
 		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
 	}
+	if(gameState == 1 && buttonText.indexOf("Bow") != -1) {
+		toolTipText = "Use a bow to fire an arrow at your opponent.";
+	}
 
 	//M. Special attacks
 	if(buttonText == "Berserk") {
@@ -890,7 +893,10 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Possess") != -1) {                        
 		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
-	
+	if(buttonText.indexOf("Dragonfire") != -1) {                        
+		toolTipText = "Unleash fire from your mouth.";
+	}
+
 	//Salon
 	if(buttonText.indexOf("Sand Facial") != -1) {
 		toolTipText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
@@ -2344,6 +2350,11 @@ public function lustPercent():Number {
 	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	
+	if (player.jewelryEffectId == 7)
+	{
+		lust *= 1 - (player.jewelryEffectMagnitude / 100);
+	}	
+	
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
@@ -2605,14 +2616,10 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.lib < 0) player.lib = 0;
 	//Minimum libido. Rewritten.
 	var minLib:Number = 0;
-	if (player.gender > 0) 
-	{
-		minLib = 15;
-	} 
-	else 
-	{
-		minLib = 10;
-	}
+	
+	if (player.gender > 0) minLib = 15;
+	else minLib = 10;
+	
 	if (player.armorName == "lusty maiden's armor") {
 		if (minLib < 50)
 		{

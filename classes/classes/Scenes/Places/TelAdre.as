@@ -225,7 +225,7 @@ private function armorShops():void {
 	addButton(1, "Piercing", piercingStudio);
 	addButton(2, "Tailor", tailorShoppe);
 	addButton(3, "Weapons", weaponShop);
-	addButton(4, "Jewellery", jewelShopEntry);
+	addButton(4, "Jewelry", jewelShopEntry);
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
 		addButton(5, "Clinic", umasShop.enterClinic);
@@ -1563,12 +1563,12 @@ private function forgeScarredBladeEnd():void {
 }
 
 //-----------------
-//-- JEWELLERY SHOP
+//-- JEWELRY STORE
 //-----------------
 public function jewelShopEntry():void {
 	outputText("", true);
-	outputText("You enter the jewellery store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
-	outputText("<i>\"Welcome to my jewellery store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
+	outputText("You enter the jewelry store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
+	outputText("<i>\"Welcome to my jewelry store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
 
 	choices("Next", jewelShopInside,
 			"", 0,
