@@ -670,7 +670,7 @@
 				// 25 per undo?
 				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]);
 			}
-			
+			if (baseCost > 1000) baseCost = 1000;
 			return baseCost;
 		}
 		

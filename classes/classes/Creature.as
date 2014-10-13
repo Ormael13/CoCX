@@ -1986,8 +1986,8 @@ package classes
 			if (!hasCock()) return 0;
 			var cumCap:Number = 0;
 			//Alter capacity by balls.
-			if (balls > 0) cumCap += Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls * cumMultiplier
-			else cumCap +=  Math.pow(((4 / 3) * Math.PI * 1.25), 3) * 2 * cumMultiplier
+			if (balls > 0) cumCap += Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls// * cumMultiplier
+			else cumCap +=  Math.pow(((4 / 3) * Math.PI * 1.25), 3) * 2// * cumMultiplier
 			//Alter capacity by perks.
 			if (findPerk(PerkLib.BroBody) >= 0) cumCap *= 1.3;
 			if (findPerk(PerkLib.FertilityPlus) >= 0) cumCap *= 1.5;

@@ -989,9 +989,11 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Forest") != -1) {
 		toolTipText = "Visit the lush forest. \n\nRecommended level: 1";
+		if (player.level < 6) toolTipText += "\n\nBeware of Tentacle Beasts!"
 	}
 	if(buttonText.indexOf("Lake") != -1) {
-		toolTipText = "Visit the lake and explore the beach. \n\nRecommended level: 2";
+		toolTipText = "Visit the lake and explore the beach. \n\nRecommended level: 1";
+		if (player.level < 2) toolTipText += "\n\nNo goo-girl and slime encounters until level 2.";
 	}
 	if(buttonText.indexOf("Plains") != -1) {
 		toolTipText = "Visit the plains. \n\nRecommended level: 10";
@@ -1056,6 +1058,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
 	}
+	if(buttonText.indexOf("Phoenix Tower") != -1) {
+		toolTipText = "Re-visit the tower you went there as part of Helia's quest.";
+	}
 	//FOLLOWERS
 	//Rathazul
 	if(buttonText.indexOf("Rathazul") != -1) {
@@ -1065,6 +1070,10 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText == "Jojo") {
 		if(monk >= 5) toolTipText = "Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.";
 		else toolTipText = "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.";
+	}
+	//Valeria
+	if(buttonText == "Valeria") {
+		toolTipText = "Visit Valeria the goo-girl.";
 	}
 	//Marble
 	if(buttonText == "Marble") {
@@ -1095,6 +1104,74 @@ public function getButtonToolTipText(buttonText:String):String
 	//-----------------
 	//-- FOLLOWER INTERACTIONS
 	//-----------------
+	//Rathazul
+	if (kGAMECLASS.tooltipLoc == "Rathazul") {
+		if (buttonText == "Armor") {
+			toolTipText = "Ask Rathazul to make an armour for you.";
+		}
+		if (buttonText == "Debimbo") {
+			toolTipText = "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems and 5 Scholar Teas.";
+		}
+		if (buttonText == "Buy Dye") {
+			toolTipText = "Ask him to make a dye for you. \n\nCost: 50 Gems.";
+		}
+		if (buttonText == "Purify") {
+			toolTipText = "Ask him to purify any tainted potions. \n\nCost: 20 Gems.";
+		}
+		if (buttonText == "Lethicite") {
+			toolTipText = "Ask him if he can make use of that lethicite you've obtained from Marae.";
+		}
+	}
+	//Jojo
+	if (kGAMECLASS.tooltipLoc == "Jojo") {
+		if (buttonText == "Appearance") {
+			toolTipText = "Examine Jojo's appearance.";
+		}		
+		if (buttonText == "Talk") {
+			toolTipText = "Discuss with him about topics.";
+		}		
+		if (buttonText == "Rape") {
+			toolTipText = "Rape the poor monk mouse-morph.";
+			if (player.cor < 20) toolTipText += "  Why would you do that?";
+		}		
+		if (buttonText == "Train") {
+			toolTipText = "Join him in a training session.";
+		}		
+		if (buttonText == "N.Watch:On") {
+			toolTipText = "Request him to stop guarding the camp.";
+		}		
+		if (buttonText == "N.Watch:Off") {
+			toolTipText = "Request him to guard the camp at night.";
+		}
+		if (buttonText == "Purge") {
+			toolTipText = "Request him to purge the worms from your body.";
+		}
+		//Talk
+		if (buttonText == "Village") {
+			toolTipText = "Ask him about the village he was raised in.";
+		}
+		if (buttonText == "Monks") {
+			toolTipText = "Ask him about how and why he became a monk.";
+		}
+		if (buttonText == "MonksFall") {
+			toolTipText = "Ask him about the demise of the monks.";
+		}
+		if (buttonText == "Forest") {
+			toolTipText = "Ask him about how he ended up in the forest.";
+		}
+		if (buttonText == "You") {
+			toolTipText = "Tell him about Ingnam and your history.";
+		}
+		if (buttonText == "Factory") {
+			toolTipText = "Tell him about how you've shut down the factory.";
+		}
+		if (buttonText == "SandCave") {
+			toolTipText = "Tell him about your encounter in the Sand Cave in the desert.";
+		}
+		if (buttonText == "Training") {
+			toolTipText = "Ask him if he's willing to train you.";
+		}
+	}
 	//Valeria
 	if (kGAMECLASS.tooltipLoc == "Valeria") {
 		//Menu
@@ -2560,8 +2637,8 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.findPerk(PerkLib.Lusty) >= 0 && libi >= 0) player.lib+=libi*player.perk(player.findPerk(PerkLib.Lusty)).value1;
 	if (player.findPerk(PerkLib.Sensitive) >= 0 && sens >= 0) player.sens += sens * player.perk(player.findPerk(PerkLib.Sensitive)).value1;
 
-	// Uma's Str Cap from Perks
-	if (player.findPerk(PerkLib.ChiReflowSpeed) >= 0)
+	// Uma's Str Cap from Perks (Moved to max stats)
+	/*if (player.findPerk(PerkLib.ChiReflowSpeed) >= 0)
 	{
 		if (player.str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
 		{
@@ -2574,33 +2651,8 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 		{
 			player.spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
 		}
-	}
+	}*/
 	
-	//Realistic mode!
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
-	{
-		//Balls
-		var tempSpeedCap:Number = 100;
-		if (player.ballSize > 3)
-		{
-			tempSpeedCap -= (player.ballSize - 3);
-		}
-		//Breasts
-		if (player.hasBreasts())
-		{	
-			if (player.biggestTitSize() > 15) 
-			{
-				tempSpeedCap -= (player.biggestTitSize() / 4);
-			}
-		}
-		//Cocks
-		if (player.biggestCockArea() > 24)
-		{
-			tempSpeedCap -= ((player.biggestCockArea() - 24) / 6)
-		}
-		if (tempSpeedCap < 50) tempSpeedCap = 50;
-		if (player.spe > tempSpeedCap) player.spe = tempSpeedCap
-	}
 	//Keep stats in bounds
 	if(player.cor < 0) player.cor = 0;
 	if(player.cor > 100) player.cor= 100;

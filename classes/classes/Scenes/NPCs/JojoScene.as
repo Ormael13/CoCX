@@ -1537,6 +1537,7 @@ public function refuseJojosApology():void
 //Intro
 public function lowCorruptionIntro():void
 {
+	kGAMECLASS.tooltipLoc = "Jojo";
 	outputText("He extends a hand, which you gladly shake. “<i>My name is Jojo, pleased to meet you.</i>” You introduce yourself in kind.\n\n");
 
 	outputText("Now that you have the opportunity to take a good look at him, you notice that he is dressed in simple garbs reminiscent of a monk. A light-blue robe covers his flat chest, tied with a simple sash around his waist. His pants, similar to his robes, fit him snugly as well.\n\n");
@@ -1575,6 +1576,7 @@ public function set doClear(v:Boolean):void
 //[Yes]
 public function acceptOfferOfHelp():void
 {
+	kGAMECLASS.tooltipLoc = "Jojo";
 	clearOutput();
 	jojoSprite();
 
@@ -1587,6 +1589,7 @@ public function acceptOfferOfHelp():void
 //[No]
 public function refuseOfferOfHelp():void
 {
+	kGAMECLASS.tooltipLoc = "Jojo";
 	clearOutput();
 	jojoSprite();
 

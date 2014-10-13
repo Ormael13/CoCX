@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<Images>
 		<ImageList>
+			<ImageSet id="coc-logo">
+				<ImageFile>./img/coc-logo</ImageFile>
+				<ImageFile>./img/coc-logo_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="akbal-deepwoods-bigbuttanaled">
 				<ImageFile>./img/akbal-deepwoods-bigbuttanaled</ImageFile>
 				<ImageFile>./img/akbal-deepwoods-bigbuttanaled_1</ImageFile>

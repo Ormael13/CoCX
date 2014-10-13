@@ -809,7 +809,7 @@ public function doCamp():void {
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
-		updateSaveFlags();
+		promptSaveUpdate();
 	}
 	
 	//Massive Balls Bad End (Realistic Mode only)
@@ -2203,6 +2203,17 @@ private function fixFlags():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] = 0;
 	}
 }
+private function promptSaveUpdate():void {
+	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+	outputText("It appears that you are importing your save from vanilla CoC or older version of this mod.", true);
+	outputText("\n\nIs your file last saved in vanilla CoC or pre-version 0.7.1 of the mod?");
+	outputText("\n\nI'm only asking because older versions of the mod conflicted with flags. This is now fixed but I can't guarantee if your save is okay.");
+	outputText("\n\nPlease select the correct button. Choosing the mod will update the flags, this is necessary for saves from mod to avoid screwing up.");
+	menu();
+	addButton(0, "Vanilla", doCamp);
+	addButton(1, "Pre-0.7.1 mod", updateSaveFlags);
+}
+
 //Updates save. Done to ensure your save doesn't get screwed up.
 private function updateSaveFlags():void {
 	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;

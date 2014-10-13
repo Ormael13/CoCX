@@ -285,6 +285,10 @@ public function saveLoad(e:MouseEvent = null):void
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
 	mainView.nameBox.visible = false;
+	var autoSaveSuffix:String = ""
+	if (player.autoSave) autoSaveSuffix = "ON";
+	else autoSaveSuffix = "OFF";
+	
 	outputText("", true);
 	outputText("<b>Where are my saves located?</b>\n", false);
 	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): <pre>Users/{username}/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/{GIBBERISH}/</pre>\n\n", false);
@@ -301,56 +305,41 @@ public function saveLoad(e:MouseEvent = null):void
 		temp = 777;
 		mainView.setButtonText( 0, "save/load" );
 	}
-	if (temp == 777)
-	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 5025);
+	
+	menu();
+	//addButton(0, "Save", saveScreen);
+	addButton(1, "Load", loadScreen);
+	addButton(2, "Delete", deleteScreen);
+	//addButton(5, "Save to File", eventParser, -20);
+	addButton(6, "Load File", eventParser, -21);
+	//addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, -65);
+	addButton(9, "Back", eventParser, 5025);
+	
+	
+	if (temp == 777) {
+		addButton(9, "Back", eventParser, 5025);
 		return;
 	}
-	if (player.str == 0)
-	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", kGAMECLASS.mainMenu);
+	if (player.str == 0) {
+		addButton(9, "Back", kGAMECLASS.mainMenu);
 		return;
 	}
-	if (inDungeon)
-	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 1);
+	if (inDungeon) {
+		addButton(9, "Back", eventParser, 1);
 		return;
 	}
-	if (gameState == 3)
-		choices("Save",            saveScreen, 
-				"Load",            loadScreen, 
-				"Load File",      -21, 
-				"Delete",          deleteScreen, 
-				"Back",            0, 
-				"Save to File",   -20, 
-				"Load File",      -21, 
-				"",                0, 
-				"",                0, 
-				"",                0);
+	if (gameState == 3) {
+		addButton(0, "Save", saveScreen);
+		addButton(5, "Save to File", eventParser, -20);
+		addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, 65);
+		addButton(9, "Back", kGAMECLASS.mainMenu);
+	}
 	else
 	{
-		if (player.autoSave)
-			choices("Save",           saveScreen, 
-					"Load",           loadScreen, 
-					"AutoSav: ON",    65, 
-					"Delete",         deleteScreen, 
-					"",               0, 
-					"Save to File",  -20, 
-					"Load File",     -21, 
-					"",               0, 
-					"",               0, 
-					"Back",           1);
-		else
-			choices("Save",           saveScreen, 
-					"Load",           loadScreen, 
-					"AutoSav: OFF",   65, 
-					"Delete",         deleteScreen, 
-					"",               0, 
-					"Save to File",  -20, 
-					"Load File",     -21, 
-					"",               0, 
-					"",               0, 
-					"Back",           1);
+		addButton(0, "Save", saveScreen);
+		addButton(5, "Save to File", eventParser, -20);
+		addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, 65);
+		addButton(9, "Back", eventParser, 1);
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] >= 1) {
 		removeButton(5); //Disable "Save to File" in Hardcore Mode.

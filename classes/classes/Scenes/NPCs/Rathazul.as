@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 
@@ -250,7 +251,8 @@ private function rathazulWorkOffer():Boolean {
 		doNext(13);
 		return true;
 	}
-	if(totalOffers > 0) {
+	if (totalOffers > 0) {
+		kGAMECLASS.tooltipLoc = "Rathazul";
 		var armor:Function = null;
 		if(beeArmor != null || gelArmor != null || silk > 0 || player.hasKeyItem("Tentacled Bark Plates") >= 0) armor = RathazulArmorMenu;
 		outputText("Will you take him up on an offer or leave?", false);
@@ -441,6 +443,7 @@ private function collectRathazulArmor():void {
 		itype = armors.SSARMOR;
 	}
 	//Reset counters
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
 	menuLoc = 2;

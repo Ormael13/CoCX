@@ -2078,7 +2078,7 @@ public static const KEPT_PURE_AMILY_OVER_VAPULA:int                             
 public static const WATERSPORTS_ENABLED:int                                   		= 2070;
 public static const LUSTSTICK_LIBIDO_INITIAL:int                                    = 2071;
 public static const LUSTSTICK_LIBIDO_MOD:int                                   		= 2072;
-public static const UNKNOWN_FLAG_NUMBER_02073:int                                   = 2073;
+public static const IMAGEPACK_OFF:int                                   			= 2073;
 public static const UNKNOWN_FLAG_NUMBER_02074:int                                   = 2074;
 public static const UNKNOWN_FLAG_NUMBER_02075:int                                   = 2075;
 public static const UNKNOWN_FLAG_NUMBER_02076:int                                   = 2076;

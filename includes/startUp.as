@@ -34,9 +34,9 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.showMenuButton( MainView.MENU_DATA );
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
-
-
-	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
+	outputText("", true);
+	outputText(images.showImage("coc-logo"), false);
+	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
 	
 	if (CoC_Settings.debugBuild)
 		outputText(" Debug Build.");
@@ -46,7 +46,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	//doThatTestingThang();
 
 	startupScreenBody();
-
+	
 	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
@@ -207,6 +207,15 @@ public function settingsScreen():void
 		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
 		
 	outputText("\n\n");
+	
+	if (flags[kFLAGS.IMAGEPACK_OFF] < 1)
+	{
+		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
+	}
+	else
+		outputText("Image Pack: <font color=\"#800000\"><b>OFF</b></font>\n Image pack is disabled.");
+		
+	outputText("\n\n");
 		
 	/*if (flags[kFLAGS.SFW_MODE] >= 1)
 	{
@@ -261,6 +270,7 @@ public function settingsScreenII():void {
 	settingsScreen();
 	addButton(0, "Old Side Bar", toggleInterface);
 	addButton(1, "Background", cycleBackground);
+	addButton(2, "Toggle Images", toggleImages);
 	//addButton(2, "Old Sprites", eventParser, 9999); //If I can re-add old sprites, that is.
 	//addButton(3, "SFW Toggle", toggleSFW); //SFW mode in a NSFW RPG? Sure, why not? But that'll take effort.
 	
@@ -279,6 +289,12 @@ public function settingsScreenII():void {
 public function toggleInterface():void {
 	if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
 	else flags[kFLAGS.USE_OLD_INTERFACE] = 0;
+	settingsScreenII();
+}
+
+public function toggleImages():void {
+	if (flags[kFLAGS.IMAGEPACK_OFF] < 1) flags[kFLAGS.IMAGEPACK_OFF] = 1;
+	else flags[kFLAGS.IMAGEPACK_OFF] = 0;
 	settingsScreenII();
 }
 
@@ -443,15 +459,16 @@ public function creditsScreen():void {
 	outputText("<ul>");
 	outputText("<li> Fenoxo</li>\n");
 	outputText("</ul>");
+	outputText("<b>Game Mod</b>\n");
+	outputText("<ul>");
+	outputText("<li> Kitteh6660 (Mod Creator)</li>");
+	outputText("<li> Wastarce (Bug Reporting)</li>");
+	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");
 	outputText("<ul>");
 	outputText("<li> SoS</li>");
 	outputText("<li> Prisoner416</li>");
 	outputText("<li> Chibodee</li>");
-	outputText("<b>Modifications</b>\n");
-	outputText("<ul>");
-	outputText("<li> Kitteh6660</li>");
-	outputText("</ul>");
 	outputText("");
 	outputText("<b>Graphical Prettiness:</b>")
 	outputText("<ul>");;

@@ -4195,7 +4195,7 @@ public function spellWhitefire():void {
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
-	temp = int(10+(player.inte/4 + rand(player.inte/3)) * spellMod());
+	temp = int(10+(player.inte/3.5 + rand(player.inte/2.5)) * spellMod());
 	//High damage to goes.
 	if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 	if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
@@ -4725,7 +4725,7 @@ public function dragonBreath():void {
 		}
 		else {
 			damage = takeDamage(damage);
-			outputText("Your own fire smacks into your face! (" + damage + ")", false);
+			outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 		}
 		outputText("\n\n", false);
 	}
@@ -4736,7 +4736,7 @@ public function dragonBreath():void {
 		damage = Math.round(damage * 1.5);
 		damage = doDamage(damage);
 		monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
-		outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n\n", false);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 	}
 	else {
 		if(monster.findPerk(PerkLib.Resolute) < 0) {
@@ -5437,7 +5437,7 @@ public function corruptedFoxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  <b>(<font color=\"#800000\">+" + dmg + "</font>)</b>\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
@@ -5475,7 +5475,7 @@ public function foxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  <b>(<font color=\"#800000\">+" + dmg + "</font>)</b>\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();

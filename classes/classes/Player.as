@@ -1722,6 +1722,41 @@ use namespace kGAMECLASS;
 			var maxSpe:int = 100;
 			var maxInt:int = 100;
 			
+			//Alter max speed if you have oversized parts. (Realistic mode)
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			{
+				//Balls
+				var tempSpeedCap:Number = 100;
+				if (ballSize > 3) maxSpe -= (ballSize - 3);
+				//Breasts
+				if (hasBreasts())
+				{	
+					if (biggestTitSize() > 15) maxSpe -= (biggestTitSize() / 4);
+				}
+				//Cocks
+				if (biggestCockArea() > 24) maxSpe -= ((biggestCockArea() - 24) / 6)
+				//Min-cap
+				if (maxSpe < 50) maxSpe = 50;
+			}
+			
+			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
+			//Caps strength from Uma's needlework. 
+			if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
+			{
+				if (maxStr > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
+				{
+					maxStr = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
+				}
+			}
+			//Caps speed from Uma's needlework.
+			if (findPerk(PerkLib.ChiReflowDefense) >= 0)
+			{
+				if (maxSpe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
+				{
+					maxSpe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
+				}
+			}
+			
 			//Alter max stats depending on race
 			if (minoScore() >= 4) {
 				maxStr += 20;
@@ -1752,6 +1787,7 @@ use namespace kGAMECLASS;
 				maxInt -= 10;
 			}
 			if (gooScore() >= 3) {
+				maxTou += 10;
 				maxSpe -= 10;
 			}
 			if (isNaga()) maxSpe += 10;

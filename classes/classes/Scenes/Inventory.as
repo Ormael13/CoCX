@@ -212,19 +212,19 @@ public function doItems(eventNo:Number):void {
 		player.slimeFeed();
 		outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n", true);
 		//Apply diminishing returns in realistic mode. The bigger your balls, the harder it is to grow your balls further.
+		var oldBallSize:Number = player.ballSize
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 			if (player.ballSize >= 6) multiplier -= 0.25;
 			if (player.ballSize >= 12) multiplier -= 0.25;
 			if (player.ballSize >= 24) multiplier -= 0.25;
 			if (player.ballSize >= 36) multiplier -= 0.10;
 			if (player.ballSize >= 48) multiplier -= 0.05;
+			if (player.ballSize >= 60) multiplier -= 0.10; //Upper limit
 			if (player.ballSize > 36 && rand(2) == 0) {
-				outputText("It seems to have no effect on your " + ballsDescriptLight() + ".")
-				return;
+				outputText("It seems to have no effect on your " + ballsDescriptLight() + ".  ")
 			}
 			if (player.ballSize >= 60) {
-				outputText("It seems to have no effect on your " + ballsDescriptLight() + ". You may have reached the upper limit of Gro+.")
-				return;
+				outputText("You may have reached the upper limit of Gro+.  ")
 			}			
 		}
 		//1 in 4 BIG growth.
@@ -239,11 +239,11 @@ public function doItems(eventNo:Number):void {
 		}
 		if (player.ballSize > 10) {
 			outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.  ", false);
-			dynStats("spe", (-1 - rand(2)))
+			dynStats("spe", oldBallSize - player.ballSize)
 		}
 		if (player.ballSize > 36 && flags[kFLAGS.HUNGER_ENABLED] > 0) {
 			outputText("Your monster-sized balls are weighing you down. You'll have hard time carrying them.", false);
-			dynStats("spe", (-1 - rand(2)))
+			//dynStats("spe", oldBallSize - player.ballSize)
 		}		
 		dynStats("lus", 10);
 		itemGoNext();
@@ -396,11 +396,18 @@ public function doItems(eventNo:Number):void {
 	//Reducto Ballzzzz
 	else if(eventNo == 1054) {
 		outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
+		var oldBallSize:Number = player.ballSize
+		var decideSpeed:Boolean = false;
+		if (player.ballSize > 10) decideSpeed = true;
 		player.ballSize -= (2 + rand(4));
-		if(player.ballSize < 1) player.ballSize = 1;
+		if (player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.", false);
 		dynStats("lib", -2, "lus", -10);
+		if (player.ballSize > 10) dynStats("spe", oldBallSize - player.ballSize);
+		else {
+			if (decideSpeed) dynStats("spe", oldBallSize - player.ballSize);
+		}
 		itemGoNext();
 	}
 	//Reducto Breasts

@@ -1040,7 +1040,7 @@ package classes.Scenes.NPCs
 				doNext(13);
 				return;
 			}
-			if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+			if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && player.pregnancyType > 0 && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
 				manEmberBitchesAboutPCPregnancy();
 				doNext(13);
 				return;

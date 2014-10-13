@@ -1,5 +1,9 @@
 ﻿package classes
 {
+	import classes.Image;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	
 	import fl.controls.UIScrollBar;
 	import flash.display.Loader;
 	import flash.display.Stage;
@@ -7,7 +11,6 @@
 	import flash.errors.IOError;
 	import flash.net.*;
 	import flash.events.*;
-	import classes.Image;
 
 	import flash.system.Security;
 	import flash.text.TextField;
@@ -201,7 +204,11 @@
 		public function showImage(imageID:String, align:String = "left"):String
 		{
 			var imageString:String = "";
-
+			
+			if (kGAMECLASS.flags[kFLAGS.IMAGEPACK_OFF] > 0) {
+				return "";
+			}
+			
 			if (logErrors) trace("showing imageID - ", imageID);
 			var imageIndex:int = 0;
 			var image:Image = null;
