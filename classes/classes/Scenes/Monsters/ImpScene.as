@@ -587,14 +587,28 @@ package classes.Scenes.Monsters
 			cleanupAfterCombat();
 		}
 		
-		public function impGangabangaEXPLOSIONS():void {
+		public function impGangGetsWhooped():void {
+			clearOutput();
+			outputText("With the imps defeated, you check their bodies for any gems before you go back to sleep.")
+			cleanupAfterCombat();
+			//goNext(timeQ, false);
+		}
+		
+		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {
 			player.slimeFeed();
 			spriteSelect(18);
 			//Set imp monster values
 			//Clear arrays in preparation
 			monster = new ImpGang();
 			outputText("\n", false);
-			outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a  + "</b>!\n\n", false);
+			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a + monster.short + "</b>!\n\n", false);
+			if (Math.sqrt(player.inte + player.spe) >= rand(16) && !loss) {
+				outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + eCockDescript(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + eCockDescript(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n", false);
+				outputText("You quickly get up in time to ready your " + player.weaponName + "! It's a fight!")
+				startCombat(monster, true);
+				return;
+			}
+			if (loss) clearOutput();
 			//CENTAUR
 			if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 				if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
@@ -1254,6 +1268,7 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
+			if (inCombat()) cleanupAfterCombat();
 		}
 		public function impRapesYou():void {
 			outputText("", true);

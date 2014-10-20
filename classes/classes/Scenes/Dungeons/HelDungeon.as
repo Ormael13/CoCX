@@ -4,6 +4,7 @@ package classes.Scenes.Dungeons
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonEngine;
@@ -178,7 +179,24 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.inDungeon = true;
 			doNext(1);
 		}
-
+		
+		//For when you want to visit the tower again.
+		public function returnToHeliaDungeon():void {
+			clearOutput()
+			outputText("You make your way back to the high mountains. You hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
+			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
+			kGAMECLASS.dungeonLoc = 17;
+			kGAMECLASS.inDungeon = true;
+			doNext(1);
+		}
+		public function exitHelTower():void {
+			clearOutput()
+			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
+			kGAMECLASS.dungeonLoc = -1;
+			kGAMECLASS.inDungeon = false;
+			doNext(13);			
+		}
+		
 		public function takeGodMead():void {
 			inventory.takeItem(consumables.GODMEAD);
 			flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
@@ -802,8 +820,7 @@ package classes.Scenes.Dungeons
 
 		//HARPY QUEEN -- PC DEFEATED
 		public function harpyQueenBeatsUpPCBadEnd():void {
-			//if(clearS) clearOutput();
-			outputText("", true);
+			clearOutput();
 			//(Go to \"<i>Harpy Breeding Slut</i>\" Bad End)
 			//HARPY BREEDING SLUT BAD END
 			outputText("You collapse in front of the Harpy Queen, sitting upon her throne.  She isn't particularly tall or menacing looking, but her hips are truly inhuman, thrice as wide as she is at the least, and her pillowy ass, seated upon her cushions, seems canyon-like in her nudity, the type of butt you could lose yourself in forever.  The harpy matron wields a tall whitewood staff, held in the crook of her arm.");
@@ -921,8 +938,9 @@ package classes.Scenes.Dungeons
 				outputText("\n\nThe harpies beat their wings and croon happily, eager to be away from you.  As the Harpy Queen is ready to take off, she gives you an appreciative nod, with what might have even been a smile.  It looks as though you've made a friend tod-- OH FUCK!");
 				outputText("\n\nYou try and yell out, but too late. Hel has lunged forward and, grabbing the broodmother by the neck, spins around.  The sound of neck bones snapping echoes through the tower as the queen falls, hitting the floor with a wet thump.");
 				outputText("\n\n\"<i>Bullshit,</i>\" Hel snaps, wringing the dead queen's neck under her arm.  The other harpies around you shriek in outrage, pain, and fear.  \"<i>Do you have ANY IDEA what this bitch did?  To my father--to me?  There was no fucking way I was going to just let her walk off.  No, [name]. No way.</i>\"");
+				awardAchievement("Accomplice", kACHIEVEMENTS.DUNGEON_ACCOMPLICE, true, true);
 				//(Display Options: [Forgive] [Berate])
-				simpleChoices("Forgive",harpyQueenLetHerGoForgive,"Berate",harpyQueenLetHerGoBerate,"",0,"",0,"",0);
+				simpleChoices("Forgive", harpyQueenLetHerGoForgive, "Berate", harpyQueenLetHerGoBerate, "", 0, "", 0, "", 0);
 				flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 			}
 			//[Else; did not tell about Hakon]
@@ -1135,6 +1153,7 @@ package classes.Scenes.Dungeons
 			}
 			//(PC returns to Camp)
 			//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
+			flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 			kGAMECLASS.inDungeon = false;
 			doNext(14);
 		}
@@ -1147,11 +1166,18 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(true, roomStairwell, false, null, false, null, false, null);
 			//[If Armor has not been taken/fought with: 
 			if(flags[kFLAGS.WON_GOO_ARMOR_FIGHT] + flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] == 0) {
-				outputText("  However, a suit of half-plate armor has been left up against the eastern wall, hanging loosely on a rack; it seems to be in usable shape.");
-				addButton(3, "Armor", takeGooArmor);
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) {
+					outputText("  However, a suit of half-plate armor has been left up against the eastern wall, hanging loosely on a rack; it seems to be in usable shape.");
+					addButton(3, "Armor", takeGooArmor);
+				}
+				else outputText("  You recall there was a suit of half-plate armor.  The rack appears to be empty.");
 			}
 			outputText("  You see a pair of heavy iron doors leading northward, though they seem so rusty and heavy that opening them is sure to alert anyone nearby, and a small trapdoor leading down.");
 			//(Display Options: [North Door] [Trapdoor] [Armor])
+			if (flags[kFLAGS.CLEARED_HEL_TOWER] > 0) {
+				outputText("\n\nYou have already cleared this tower. You can leave if you like to.");
+				addButton(5, "Leave", exitHelTower);
+			}
 			addButton(7, "Trapdoor", roomCellar);
 
 		}
@@ -1216,17 +1242,22 @@ package classes.Scenes.Dungeons
 				return;
 			}
 			else {
-				outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and a table sits in the middle of the room, ");
-				if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
-					outputText("on which the salamander prisoner lies");
-					addButton(3, "Prisoner", helDungeonPrisonerTalk)
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) {
+					outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and a table sits in the middle of the room, ");
+					if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
+						outputText("on which the salamander prisoner lies");
+						addButton(3, "Prisoner", helDungeonPrisonerTalk)
+					}
+					else {
+						outputText("on which Hakon lies");
+						addButton(3, "Hakon", helDungeonPrisonerTalk)
+					}
+					outputText(".");
+					if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner, but you may want to make sure you have everything from this place that you want before you make your escape.  You doubt you'll be able to return in the future.</b>");
 				}
 				else {
-					outputText("on which Hakon lies");
-					addButton(3, "Hakon", helDungeonPrisonerTalk)
+					outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and an empty table sits in the middle of the room.");
 				}
-				outputText(".");
-				if(player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner, but you may want to make sure you have everything from this place that you want before you make your escape.  You doubt you'll be able to return in the future.</b>");
 				//(Display Options: [Go Upstairs](Back to Stairwell & Kiri) [Prisoner] [Torture Gear]
 				addButton(2, "Upstairs", roomStairwell);
 				addButton(4, "Torture Gear", tortureGear)
@@ -1245,11 +1276,12 @@ package classes.Scenes.Dungeons
 				return;
 			}
 			else {
-				outputText("You're standing in the Mezzanine of the tower, a small terrace with a magnificent view of the High Mountains and the valleys below.  There are stairs leading up and down from here, as well as a pile of defeated phoenixes that don't look like they'll be recovering for a bit.");
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) outputText("You're standing in the Mezzanine of the tower, a small terrace with a magnificent view of the High Mountains and the valleys below.  There are stairs leading up and down from here, as well as a pile of defeated phoenixes that don't look like they'll be recovering for a bit.");
+				else outputText("You're standing in the Mezzanine of the tower, a small terrace with a magnificent view of the High Mountains and the valleys below.  There are stairs leading up and down from here.");
 				//(Display Options: [Go Upstairs] [Go Downstairs] [Phoenixes])
 				addButton(2, "Upstairs", roomThroneRoom);
 				addButton(7, "Downstairs", roomStairwell);
-				addButton(3, "Phoenixes", checkOutDemBirdBitches);
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) addButton(3, "Phoenixes", checkOutDemBirdBitches);
 				//(Go Downstairs returns you to the Stairwell; Go Up takes you to the throne room)
 			}
 		}
@@ -1288,7 +1320,8 @@ package classes.Scenes.Dungeons
 			}
 			else {
 				//Room Description:
-				outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  A number of harpies cower in the shadows, afraid to oppose you further now that their mighty leader is defeated.");
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  A number of harpies cower in the shadows, afraid to oppose you further now that their mighty leader is defeated.");
+				else outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  ");
 				//[if PC hasn't executed the queen: 
 				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
 					outputText("  The Harpy Queen slumps in her throne, insensate.");

@@ -18,6 +18,8 @@ package classes
 				"");
 		public static const LastStrike:PerkType = mk("Last Strike", "Last Strike",
 				"");
+		public static const AnalFertility:PerkType = mk("Anal Fertility", "Anal Fertility",
+				"Unlocks the ability to get anally pregnant other than Satyrs.");
 
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",
@@ -59,7 +61,7 @@ package classes
 		public static const HistoryHealer:PerkType = mk("History: Healer", "History: Healer",
 				"Healing experience increases HP gains by 20%.");
 		public static const HistoryReligious:PerkType = mk("History: Religious", "History: Religious",
-				"Replaces masturbate with meditate when corruption less than or equal to 66.");
+				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.");
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
 				"Time spent focusing your mind makes spellcasting 20% less fatiguing.");
 		public static const HistorySlacker:PerkType = mk("History: Slacker", "History: Slacker",
@@ -139,6 +141,9 @@ package classes
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
 						"]",
 				"You choose the 'Immovable Object' perk, granting 20% physical damage reduction.</b>");
+		public static const IronFists:PerkType = mk("Iron Fists", "Iron Fists",
+				"Hardens your fists to increase attack rating by 5.",
+				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power by 5.");
 		public static const IronMan:PerkType = mk("Iron Man", "Iron Man",
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
@@ -205,6 +210,9 @@ package classes
 		public static const Survivalist:PerkType = mk("Survivalist", "Survivalist",
 				"Slows hunger rate by 20%.",
 				"You choose the 'Survivalist' perk.  With this perk, your hunger rate is reduced by 20%.");
+		public static const Survivalist2:PerkType = mk("Survivalist 2", "Survivalist 2",
+				"Slows hunger rate by further 20%.",
+				"You choose the 'Survivalist 2' perk.  With this perk, your hunger rate is reduced by another 20%.");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables fourth item slot.",
 				"You choose the 'Strong Back' perk, enabling a fourth item slot.");
@@ -220,7 +228,7 @@ package classes
 				"You choose the 'Tactician' perk, increasing critical hit chance by up to 10% (Intelligence-based).");
 		public static const Tank:PerkType = mk("Tank", "Tank",
 				"Raises max HP by 50.",
-				"You choose the 'Tank' perk, giving you an additional 50 hp!");
+				"You choose the 'Tank' perk, giving you an additional 50 HP!");
 		public static const Tank2:PerkType = mk("Tank 2", "Tank 2",
 				"+1 extra HP per point of toughness.",
 				"You choose the 'Tank 2' perk, granting an extra maximum HP for each point of toughness.");
@@ -326,7 +334,7 @@ package classes
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
-				"Reduces the rate at which your corruption, libido, and lust increase.");
+				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",

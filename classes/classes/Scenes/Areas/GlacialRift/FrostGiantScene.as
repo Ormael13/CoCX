@@ -3,6 +3,7 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	
 	public class FrostGiantScene extends BaseContent
 	{
@@ -25,7 +26,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 			}
-			else outputText("<b>You aren't horny enough to victory-rape him.</b>");
+			else outputText("<b>You aren't horny enough to victory-rape him.</b>\n");
+			if (player.weaponName == "fists" && player.armorName == "comfortable underclothes" && player.jewelryName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			//addButton(3, "Suck Him Off", suckHimOff);
 			addButton(4, "Leave", exitGiant);
 		}

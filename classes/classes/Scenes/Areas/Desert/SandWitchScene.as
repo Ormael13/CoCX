@@ -190,6 +190,7 @@ private function sandwitchBewbs():void {
 	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy; you realize too late that she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ", false);
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...", false);
 	player.slimeFeed();
+	player.refillHunger(35);
 	dynStats("lus", 25);
 	cleanupAfterCombat();
 	outputText("\n", false);

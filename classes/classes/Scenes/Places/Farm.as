@@ -69,9 +69,9 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	//Repeat Offender
 	else {
 		spriteSelect(62);
-		
+		player.addStatusValue(StatusAffects.MetWhitney,1,1); //Used for progress towards achievement.
 		if (flags[kFLAGS.KELT_KILLED] >= 1) {
-			outputText("As soon as you head to the farm, Whitney comes storming up to meet you.  \"<i>What the fuck have you done?!</i>\"", true);
+			outputText("As soon as you approach the farm, Whitney comes storming up to meet you.  \"<i>What the fuck have you done?!</i>\"", true);
 			outputText("\n\nYou hold your hands up, knowing full-well what the angry bitch is on about. She angrily says \"<i>You've fucking killed Kelt the centaur! He may be rude and I don't like him but still, what you've done is wrong. You're not welcome on my farm anymore! Leave. <b>Now.</b></i>\"");
 			flags[kFLAGS.FARM_DISABLED] = 2;
 			doNext(13);

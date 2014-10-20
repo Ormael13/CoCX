@@ -4,6 +4,7 @@ package classes.Scenes
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	
 	/**
 	 * ...
@@ -136,7 +137,8 @@ package classes.Scenes
 			//Others
 			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
 				num++;
-			}			
+			}
+			if (num >= 20) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		

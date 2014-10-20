@@ -232,8 +232,8 @@ public function saveScreen():void
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
 	{
-		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", false);
 		saveGame(flags[kFLAGS.HARDCORE_SLOT])
+		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", true);
 		return;
 	}
 	
@@ -486,6 +486,66 @@ public function loadGame(slot:String):void
 	}
 }
 
+//Used for tracking achievements.
+public function savePermObject(isFile:Boolean):void {
+	//Initialize the save file
+	var saveFile:*;
+	var backup:SharedObject;
+	if (isFile)
+	{
+		saveFile = {};
+		
+		saveFile.data = {};
+	}
+	else
+	{
+		saveFile = SharedObject.getLocal("CoC_Main", "/");
+	}
+	
+	saveFile.data.exists = true;
+	saveFile.data.version = ver;
+	
+	var processingError:Boolean = false;
+	var dataError:Error;
+	
+	try {
+		//achievements
+		saveFile.data.achievements = [];
+		for (var i:int = 0; i < achievements.length; i++)
+		{
+			// Don't save unset/default flags
+			if (achievements[i] != 0)
+			{
+				saveFile.data.achievements[i] = achievements[i];
+			}
+		}
+	}
+	catch (error:Error)
+	{
+		processingError = true;
+		dataError = error;
+		trace(error.message);
+	}
+	trace("done saving achievements");
+}
+
+public function loadPermObject():void {
+	var saveFile:* = SharedObject.getLocal("CoC_Main", "/");
+	trace("Loading achievements!")
+	//Initialize the save file
+	//var saveFile:Object = loader.data.readObject();
+	if (saveFile.data.exists)
+	{
+		//achievements, will check if achievement exists.
+		if (saveFile.data.achievements) {
+			for (var i:int = 0; i < achievements.length; i++)
+			{
+				if (saveFile.data.achievements[i] != undefined)
+					achievements[i] = saveFile.data.achievements[i];
+			}
+		}
+	}
+}
 
 /*
 
@@ -558,7 +618,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 				saveFile.data.flags[i] = flags[i];
 			}
 		}
-		
+				
 		//CLOTHING/ARMOR
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
@@ -1128,7 +1188,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		game.notes = saveFile.data.notes;
 		
 		//flags
-		
 		for (var i:int = 0; i < flags.length; i++)
 		{
 			if (saveFile.data.flags[i] != undefined)

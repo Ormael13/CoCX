@@ -1,6 +1,7 @@
 ﻿package classes.Scenes{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Camp.CabinProgress;
 	import classes.Scenes.NPCs.*;
@@ -443,7 +444,7 @@ public function doCamp():void {
 	var storage:* = 0;
 	var canCampStuff:* = 0;
 	if(stash()) storage = initiateStash;
-	if(places(false)) placesNum = 71; 
+	if(placesCount() > 0) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
@@ -463,10 +464,10 @@ public function doCamp():void {
 	//Level junk
 	if(player.XP >= (player.level) * 100 || player.perkPoints > 0 || player.statPoints > 0) {
 		if (player.XP < player.level * 100)
-			{
-				if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
-				else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
-			}
+		{
+			if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
+			else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+		}
 		else
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
 		mainView.showMenuButton( MainView.MENU_LEVEL );
@@ -477,12 +478,15 @@ public function doCamp():void {
 		mainView.statsView.hideLevelUp();
 	}
 	//Build main menu
+	
+	
 	var masturbate:* = 0;
 	var rest:* = 0;
 	var explore:* = 2;
 	if(player.fatigue > 50) rest = 11;	
 	if(player.lust > 30) masturbate = 42;
 	outputText("", true);
+	updateAchievements();
 	
 	outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
@@ -864,7 +868,7 @@ public function stash(exists:Boolean = true):Boolean {
 	outputText("", true);
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
 		//(morning)
-		if(model.time.hours < 6) outputText("Kid A is sleeping in her barrel right now.");
+		if(model.time.hours < 6 || model.time.hours > 22) outputText("Kid A is sleeping in her barrel right now.");
 		else if(model.time.hours <= 10) outputText("Kid A stands next to her barrel, refilling it from one of your waterskins.  A second full skin is slung over her shoulder.  She gives you a grin.\n\n");
 		else if(flags[kFLAGS.KID_SITTER] > 1) outputText("Kid A is absent from her barrel right now, dragooned into babysitting again.\n\n");
 		//(midday)
@@ -1423,6 +1427,7 @@ private function swimInStreamPrank1():void {
 	}*/
 	if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.", false);
 	else outputText("  You feel accomplished from the prank and resume swimming. ", false);
+	awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
 	doNext(swimInStreamFinish);
 }
 
@@ -1995,61 +2000,50 @@ public function nightSuccubiRepeat():void {
 //-----------------
 //-- PLACES MENU
 //-----------------
-public function places(display:Boolean):Boolean {
-	var farmBarn:* = 0;
-	var farmHouse:* = 0;
-	var farm:* = 0;
-	var _boat:Function = null;
-	var barber:* = 0;
-	var telAdre2:* = 0;
-	var ruins:* = 0;
-	var bazaar:* = 0;
-	var owca:* = 0;
-	var dungeonsArg:* = 0;
-	var cathedral:* = 0;
+public function placesCount():int {
+	var places:int = 0;
+	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
+	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) places++;
+	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
+	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
+	if (player.findStatusAffect(StatusAffects.MetWhitney) > 0 || flags[kFLAGS.FARM_CORRUPTION_STARTED]) places++; 
+	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) places++;
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) places++;
+	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) places++;
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) places++;
+	if (flags[kFLAGS.MET_MINERVA] >= 4) places++;
+	return places;
+}
 
-	if(flags[kFLAGS.PLACES_PAGE] != 0 && display)
+//All cleaned up!
+public function places():void {
+	clearOutput();
+	outputText("Which place would you like to visit?");
+	if(flags[kFLAGS.PLACES_PAGE] != 0)
 	{
 		placesPage2();
-		return true;
+		return;
 	}
-	if(flags[kFLAGS.FOUND_CATHEDRAL] == 1) 
+	//Build menu
+	menu();
+	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(0, "Bazaar", eventParser, 2855);
+	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) addButton(1, "Boat", kGAMECLASS.boat.boatExplore);
+	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) 
 	{
-		if (flags[kFLAGS.GAR_NAME] == 0) cathedral = kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork;
-		else cathedral = kGAMECLASS.gargoyle.returnToCathedral;
+		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork);
+		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral);
 	}
-	if(flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
-		dungeonsArg = dungeons;
-	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
-		owca = kGAMECLASS.owca.gangbangVillageStuff;
-	
-	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
-	//turn on teladre
-	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
-	//turn on boat
-	if(player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) _boat = kGAMECLASS.boat.boatExplore;
-	
-	//Turn on main farm encounter!
-	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
-		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) farm = kGAMECLASS.farm.farmExploreEncounter;
-	}
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED])
+	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(3, "Dungeons", dungeons);
+	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) 
 	{
-		farm = kGAMECLASS.farm.farmExploreEncounter;
+		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
 	}
-	
-	
-	//Turn on bazaar encounter
-	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
-	//Return if there is anything enabled in places
-	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED] || cathedral;
-	}
-	//Make choices
-	choices("Bazaar",bazaar,"Boat",_boat,"Cathedral",cathedral,"Dungeons",dungeonsArg,"Next",placesPage2,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2,"Back",1);
-	return true;
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
+	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", kGAMECLASS.owca.gangbangVillageStuff);
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", kGAMECLASS.mountain.salon.salonGreeting);
+	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu);
+	addButton(4, "Next", placesPage2);
+	addButton(9, "Back", eventParser, 1);
 }
 
 private function placesPage2():void
@@ -2057,7 +2051,7 @@ private function placesPage2():void
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	//turn on ruins
-	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "Town Ruins", eventParser, 2371);
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
 	addButton(4,"Previous",placesToPage1);
 	addButton(9,"Back",eventParser,1);
@@ -2065,7 +2059,7 @@ private function placesPage2():void
 private function placesToPage1():void
 {
 	flags[kFLAGS.PLACES_PAGE] = 0;
-	places(true);
+	places();
 }
 
 private function dungeons():void {
@@ -2074,10 +2068,9 @@ private function dungeons():void {
 	if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon);
 	//Turn on dungeon 2
 	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon);
-	//Side dungeon
+	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
-	//DEBUG STUFF
-	//addButton(6, "Phoenix Tower", dungeonH.goToHeliaDungeon2);
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon);
 	addButton(9,"Back",eventParser,71);
 }
 
@@ -2094,6 +2087,7 @@ private function exgartuanCampUpdate():void {
 			if(player.hasCock()) outputText("  Perhaps you got too small for Exgartuan to handle?</b>\n", false);
 			else outputText("  It looks like the demon didn't want to stick around without your manhood.</b>\n", false);
 			player.removeStatusAffect(StatusAffects.Exgartuan);
+			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true);
 		}
 		//Tit removal
 		else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
@@ -2202,16 +2196,32 @@ private function fixFlags():void {
 		player.hunger = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994];
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] = 0;
 	}
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 }
 private function promptSaveUpdate():void {
-	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
-	outputText("It appears that you are importing your save from vanilla CoC or older version of this mod.", true);
-	outputText("\n\nIs your file last saved in vanilla CoC or pre-version 0.7.1 of the mod?");
-	outputText("\n\nI'm only asking because older versions of the mod conflicted with flags. This is now fixed but I can't guarantee if your save is okay.");
-	outputText("\n\nPlease select the correct button. Choosing the mod will update the flags, this is necessary for saves from mod to avoid screwing up.");
-	menu();
-	addButton(0, "Vanilla", doCamp);
-	addButton(1, "Pre-0.7.1 mod", updateSaveFlags);
+	clearOutput();
+	if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
+		outputText("It appears that you are importing your save from vanilla CoC or older version of this mod.", true);
+		outputText("\n\nIs your file last saved in vanilla CoC or pre-version 0.7.1 of the mod?");
+		outputText("\n\nI'm only asking because older versions of the mod conflicted with flags. This is now fixed but I can't guarantee if your save is okay.");
+		outputText("\n\nPlease select the correct button. Choosing the mod will update the flags, this is necessary for saves from mod to avoid screwing up.");
+		menu();
+		addButton(0, "Vanilla", doCamp);
+		addButton(1, "Pre-0.7.1 mod", updateSaveFlags);
+		flags[kFLAGS.MOD_SAVE_VERSION] = 2;
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
+		outputText("Starting in version 0.8 of this mod, achievements are now awarded. To ensure that you don't have to go through scenes again on new savefile, achievements will be awarded depending on flags.");
+		outputText("\n\nSome achievements, however, will require you to do it again.");
+		updateAchievements();
+		outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile.");
+		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see! It's permanent.");
+		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		menu();
+		doNext(1);
+		return;
+	}
 }
 
 //Updates save. Done to ensure your save doesn't get screwed up.
@@ -2243,6 +2253,141 @@ private function updateSaveFlags():void {
 	}
 	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!", false)
 	doNext(doCamp);
+}
+
+private function updateAchievements():void {
+	//Story
+	awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER);
+	if (flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0) awardAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR);
+	if (player.hasKeyItem("Zetaz's Map") >= 0) awardAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE);
+	
+	//Zones
+	if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
+	if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
+	if (player.explored >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
+	if (player.exploredDesert >= 100) awardAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED);
+	if (player.exploredForest >= 100) awardAchievement("Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER);
+	if (player.exploredLake >= 100) awardAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER);
+	if (player.exploredMountain >= 100) awardAchievement("Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER);
+	if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] >= 100) awardAchievement("Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] >= 100) awardAchievement("Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER);
+	if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) >= 100) awardAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER);
+	if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100) awardAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED);
+	if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
+	if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
+	
+	if (player.statusAffectv1(StatusAffects.BoatDiscovery) >= 15) awardAchievement("Sea Legs", kACHIEVEMENTS.ZONE_SEA_LEGS);
+	if (player.statusAffectv1(StatusAffects.MetWhitney) >= 30) awardAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER);
+	if (flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15) awardAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST);
+	
+	//Levels
+	if (player.level >= 2) awardAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP);
+	if (player.level >= 5) awardAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE);
+	if (player.level >= 10) awardAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE);
+	if (player.level >= 15) awardAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN);
+	if (player.level >= 20) awardAchievement("Expert", kACHIEVEMENTS.LEVEL_EXPERT);
+	if (player.level >= 30) awardAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER);
+	if (player.level >= 40) awardAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER);
+	//if (player.level >= 50) awardAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS);
+	//if (player.level >= 60) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
+	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
+	
+	//Population
+	if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
+	if (getCampPopulation() >= 5) awardAchievement("Hamlet", kACHIEVEMENTS.POPULATION_HAMLET);
+	if (getCampPopulation() >= 10) awardAchievement("Village", kACHIEVEMENTS.POPULATION_VILLAGE);
+	if (getCampPopulation() >= 25) awardAchievement("Town", kACHIEVEMENTS.POPULATION_TOWN);
+	if (getCampPopulation() >= 100) awardAchievement("City", kACHIEVEMENTS.POPULATION_CITY);
+	if (getCampPopulation() >= 500) awardAchievement("Metropolis", kACHIEVEMENTS.POPULATION_METROPOLIS);
+	
+	//Time
+	if (model.time.days >= 30) awardAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH);
+	if (model.time.days >= 180) awardAchievement("Half-year", kACHIEVEMENTS.TIME_HALF_YEAR);
+	if (model.time.days >= 365) awardAchievement("Annual", kACHIEVEMENTS.TIME_ANNUAL);
+	if (model.time.days >= 730) awardAchievement("Biennial", kACHIEVEMENTS.TIME_BIENNIAL);
+	if (model.time.days >= 1095) awardAchievement("Triennial", kACHIEVEMENTS.TIME_TRIENNIAL);
+	if (model.time.days >= 1825) awardAchievement("In for the long haul", kACHIEVEMENTS.TIME_LONG_HAUL);
+	if (model.time.days >= 3650) awardAchievement("Decade", kACHIEVEMENTS.TIME_DECADE);
+	if (model.time.days >= 36500) awardAchievement("Century", kACHIEVEMENTS.TIME_CENTURY);
+	
+	//Dungeon
+	var dungeonsCleared:int = 0;
+	if (kGAMECLASS.dungeons.checkFactoryClear()) {
+		awardAchievement("Shut Down Everything", kACHIEVEMENTS.DUNGEON_SHUT_DOWN_EVERYTHING); 
+		dungeonsCleared++;
+	}
+	if (kGAMECLASS.dungeons.checkDeepCaveClear()) {
+		awardAchievement("You're in Deep", kACHIEVEMENTS.DUNGEON_YOURE_IN_DEEP);
+		dungeonsCleared++;
+	}
+	if (kGAMECLASS.dungeons.checkSandCaveClear()) {
+		awardAchievement("Friend of the Sand Witches", kACHIEVEMENTS.DUNGEON_SAND_WITCH_FRIEND);
+		dungeonsCleared++;
+	}
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) {
+		awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
+		dungeonsCleared++;
+		//if (flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+	}
+	if (dungeonsCleared >= 3) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
+	if (dungeonsCleared >= 5) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
+	
+	//Fashion
+	if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
+	if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
+	if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
+	
+	//Wealth
+	if (player.gems >= 1000) awardAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH);
+	if (player.gems >= 10000) awardAchievement("Hoarder", kACHIEVEMENTS.WEALTH_HOARDER);
+	if (player.gems >= 100000) awardAchievement("Gem Vault", kACHIEVEMENTS.WEALTH_GEM_VAULT);
+	if (player.gems >= 1000000) awardAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE);
+	
+	//Combat
+	if (player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.findStatusAffect(StatusAffects.KnowsBlind) >= 0 && player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0 && player.findStatusAffect(StatusAffects.KnowsHeal) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 ) awardAchievement("Wizard", kACHIEVEMENTS.COMBAT_WIZARD);
+	
+	//Realistic
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING)
+	
+	//General
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
+	
+	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
+	if (flags[kFLAGS.FACTORY_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.KELT_KILLED] > 0 || flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) NPCsBadEnds++;
+	if (flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2) NPCsBadEnds++;
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) NPCsBadEnds++;
+	if (NPCsBadEnds >= 3) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
+
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1) awardAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 10) awardAchievement("Transformer", kACHIEVEMENTS.GENERAL_TRANSFORMER);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25) awardAchievement("Shapeshifty", kACHIEVEMENTS.GENERAL_SHAPESHIFTY);
+	if (flags[kFLAGS.TIMES_MASTURBATED] >= 1) awardAchievement("Fapfapfap", kACHIEVEMENTS.GENERAL_FAPFAPFAP);
+	if (flags[kFLAGS.TIMES_MASTURBATED] >= 10) awardAchievement("Faptastic", kACHIEVEMENTS.GENERAL_FAPTASTIC);
+	if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Fapster", kACHIEVEMENTS.GENERAL_FAPSTER);
+	
+	if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
+	if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
+	if (followersCount() >= 7) awardAchievement("Follow the Leader", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);
+	if (loversCount() >= 8) awardAchievement("Gotta Love 'Em All", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL);
+	if (slavesCount() >= 4) awardAchievement("Meet Your " + player.mf("Master", "Mistress") , kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
+	if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
+	if (flags[kFLAGS.MANSION_VISITED] >= 3) awardAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER);
+	if (player.perks.length >= 20) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
+	if (player.perks.length >= 35) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
+	if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
+	if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] >= 4) awardAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] >= 2) awardAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] >= 100) awardAchievement("Deforester", kACHIEVEMENTS.GENERAL_DEFORESTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] >= 200) awardAchievement("Nail Scavenger", kACHIEVEMENTS.GENERAL_NAIL_SCAVENGER);
+	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) awardAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME);
 }
 
 private function fixHistory():void {

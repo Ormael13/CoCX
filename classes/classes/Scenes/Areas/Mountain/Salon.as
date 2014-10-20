@@ -133,6 +133,7 @@ public function salonPurchaseMenu():void {
 	addButton(3,"Lengthen",lengthening);
 	addButton(4,"Buy Products",dyeMenu);
 	addButton(5,"Buy MinoCum",minoCum);
+	addButton(6,"Beard Options",beardMenu);
 	addButton(7,"Mud Facial",mudFacial2);
 	addButton(8,"Sand Facial",sandFacial2);
 	addButton(9,"Leave",eventParser,13);
@@ -421,7 +422,79 @@ private function dyeMenu():void {
 			"Ext.Serum",createCallBackFunction(buyDye,consumables.EXTSERM),"",0,"",0,"",0,"Back",hairDressingMainMenu);
 }
 
+private function beardMenu():void {
+	outputText("\<i>I can help you with your beard-related needs,</i>\" Lynnette says.", true)
+	menu();
+	if (player.hasBeard() && player.beardLength > 0.5) addButton(0, "Cut Beard", cutBeard);
+	if (player.hasBeard() && player.beardLength < 6) addButton(1, "Lengthen Beard", growBeard, 0);
+	if (!player.hasBeard()) addButton(1, "Grow Beard", growBeard, 1);
+	if (player.hasBeard()) addButton(2, "Beard Style", changeBeardStyle);
+	addButton(9, "Back", hairDressingMainMenu);
+}
 
+private function cutBeard():void {
+	if(player.hairType == 4) {
+		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n", false);
+		beardMenu();
+		return;
+	}
+	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + beardDescript() + ".  When they've finished, you're left with ", true);
+	player.beardLength = 0.2;
+	outputText(beardDescript() + ".", false);
+}
+
+private function growBeard(mode:int = 0):void {
+	//Grow beard if you don't have.
+	if (mode == 1){
+		if (player.mf("m", "f") == "f") {
+			outputText("Lynnette stares at you. \"<i>Don't you think you'll look strange being a bearded lady?</i>\" she asks.\n\n", false);
+			outputText("You insist her that you really want a beard, whether you're a man or a woman.\n\n");
+			outputText("\"<i>Well... I'll get started now,</i>\" she says.");
+		}
+		else {
+			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order your new beard sprouts! ", false);
+			player.beardLength = 0.2;
+			if (temp >= 2) outputText("es");
+			outputText(" of " + player.hairColor + " beard.\n\n", false);
+			outputText("\"<i>I'll let you choose your style before you leave,</i>\" she says.\n\n");
+			changeBeardStyle();
+			return;
+		}
+	}
+	//Grow existing beard.
+	else {
+			if(player.hairType == 4) {
+				outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not beard.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n", false);
+				beardMenu();
+				return;
+			}
+			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ", true);		
+			temp = 5 + rand(5);
+			temp /= 5
+			player.beardLength += temp;
+			outputText(num2Text(temp) + " more inch");
+			if (temp >= 2) outputText("es");
+			outputText(" of " + player.hairColor + " beard.", false);	
+	}
+	doNext(13);
+}
+
+private function changeBeardStyle():void {
+	outputText("What beard style would you like?");
+	addButton(0, "Normal", chooseBeardStyleFinalize, 0);
+	addButton(1, "Goatee", chooseBeardStyleFinalize, 1);
+	addButton(2, "Clean-cut", chooseBeardStyleFinalize, 2);
+	addButton(3, "Mountainman", chooseBeardStyleFinalize, 3);
+	addButton(4, "Back", beardMenu);
+}
+
+private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
+	outputText("You tell Lynnette that you'd like to have your beard style changed to what you've indicated.\n\n", true)
+	outputText("Lynnette and her daughters begin to mess with your beard with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
+	player.beardStyle = choiceStyle;
+	outputText("After a while, you now have " + player.beardDescript() + "!");
+	doNext(13);
+}
 
 private function minotaurCumBukkakeInSalon():void {
 	outputText("", true);

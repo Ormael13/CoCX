@@ -4,6 +4,7 @@
 package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
@@ -24,6 +25,7 @@ package classes.Items.Armors
 				if(player.gender == 0) outputText("groin");
 				outputText(", encasing your loins in case you need a little mid-battle release, she says.");
 				outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
+				game.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 			}
 			if(game.flags[kFLAGS.MET_VALERIA] == 0) {
 				if (output) outputText("  As you ready yourself for the dungeon ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");

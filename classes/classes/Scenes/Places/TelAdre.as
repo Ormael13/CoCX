@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Dungeons.DeepCave.ValaScene;
 	import classes.Scenes.Places.TelAdre.*;
 
@@ -1710,7 +1711,8 @@ public function carpentryShopBuySet():void {
 		doNext(carpentryShopInside);
 		return;
 	}
-	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! Just wht you need to build your cabin. There's even a compartment for nails.\n\n", true);
+	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n", true);
+	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
 	outputText("Do you buy it?", false);
 	if (player.gems >= 200)
 	{
@@ -1726,7 +1728,7 @@ public function carpentryShopBuySet():void {
 public function carpentryShopBuySetYes():void {
 	player.gems -= 200;
 	outputText("You hand over two hundred gems to the shopkeeper. ", true);
-	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building something. \n\n", false);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
 	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
 	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
 	doNext(carpentryShopInside);
@@ -1781,11 +1783,14 @@ private function carpentryShopBuyNailsE():void {
 }
 
 private function carpentryShopBuyNailsYes():void {
+	clearOutput();
 	if (player.gems >= (nails * 4))
 	{
 		player.gems -= (nails * 4);
+		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
+		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 		player.addKeyValue("Carpenter's Toolbox", 1, nails);
-		outputText("You hand over " + (nails * 4) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n", true);
+		outputText("You hand over " + (nails * 4) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
 		if (player.keyItemv1("Carpenter's Toolbox") > 200)
 		{
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n", false);
@@ -1837,6 +1842,8 @@ private function carpentryShopBuyWoodYes():void {
 	if (player.gems >= (wood * 25))
 	{
 		player.gems -= (wood * 25);
+		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
+		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 		outputText("You hand over " + (wood * 25) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 100)

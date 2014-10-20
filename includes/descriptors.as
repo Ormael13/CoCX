@@ -141,12 +141,27 @@ public function num2Text2(number:int):String {
 public function Num2Text(number:int):String {
 	return num2TextBest(number, true);
 }
+public function addComma(num:uint):String{
+    var str:String = "";
+	if (num <= 0) return "0";
+    while (num>0){
+        var tmp:uint = num % 1000;
+        str = ( num > 999 ?"," + (tmp < 100 ? ( tmp < 10 ? "00": "0"): ""): "") + tmp + str;
+        num = num / 1000;
+    }
+    return str;
+}
+
 public function nippleDescript(rowNum:Number):String {
 	return Appearance.nippleDescription(player, rowNum);
 }
 
 public function hairDescript():String {
 	return Appearance.hairDescription(player);
+}
+
+public function beardDescript():String {
+	return Appearance.beardDescription(player);
 }
 
 public function hairOrFur():String {

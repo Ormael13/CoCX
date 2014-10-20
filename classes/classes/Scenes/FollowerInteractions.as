@@ -200,7 +200,7 @@ public function stopJojoDeathInTheNameOfLove():void {
 		//(-80 lust)
 		dynStats("lus", -99);
 		//(You suck and Jojo died.)
-		flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;		
+		flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;		
 	}
 
 	//(SMART)
@@ -222,7 +222,7 @@ public function whyWouldDoThis():void {
 	//(-99 lust)
 	dynStats("lus", -99);
 	//(You suck and Jojo died.)
-	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;	
+	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;	
 	doNext(13);
 }
 

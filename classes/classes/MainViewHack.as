@@ -294,7 +294,7 @@ package classes
 			
 			mainView.gemsNum.x = 31;
 			mainView.gemsNum.width = 140;
-			mainView.gemsNum.text = Math.floor(player.gems) + "";
+			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
 			
 			//Re-position arrows
 			mainView.strUp.x = mainView.strNum.x + mainView.strNum.width + arrowXOffset;

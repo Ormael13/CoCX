@@ -144,7 +144,7 @@ package classes.Scenes.Camp
 				outputText("You are carrying a large axe with you.", false) 
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
-			if (player.hasKeyItem("Carpenter's Toolbox")) 
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) 
 			{
 				outputText("You are carrying carpenter's box with you. It contains an axe.\n", false) 
 				addButton(0, "Axe", cutTreeTIMBER);
@@ -174,6 +174,7 @@ package classes.Scenes.Camp
 			outputText("You shrug and pick up the wood block when suddenly, you hear crashing sound as the tree falls over and splits into many wooden blocks! Surprisingly, they clump together into one bunch. You pick the bunch of wood, noting how easy it is to carry. You return to your camp. \n\n", false);
 			outputText("<b>+10 wood!</b>", false)
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 10;
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
 			{
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
@@ -189,6 +190,7 @@ package classes.Scenes.Camp
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n", false);
 			outputText("<b>+10 wood!</b>", false)
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 10;
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
 			{
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
@@ -228,6 +230,7 @@ package classes.Scenes.Camp
 			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n", false);
 			outputText("<b>+20 wood!</b>", false)
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 20;
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 20;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
 			{
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;

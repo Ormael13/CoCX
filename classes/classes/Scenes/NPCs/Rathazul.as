@@ -135,6 +135,10 @@ private function rathazulWorkOffer():Boolean {
 		collectRathazulArmor();
 		return true;
 	}
+	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1) {
+		purificationByRathazulBegin();
+		return true;
+	}
 	if(player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
 		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
@@ -246,6 +250,11 @@ private function rathazulWorkOffer():Boolean {
 			else outputText("  You need more gems to afford that, though.");
 			outputText("\n\n");			
 		}
+		//Purification potion for Minerva
+		if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10 && player.hasKeyItem("Rathazul's Purity Potion") < 0) {
+			outputText("The rodent alchemist suddenly looks at you in a questioning manner. \"<i>Have you had any luck finding those items? I need pure honey and at least two samples of other purifiers; your friend’s spring may grow the items you need.</i>\"");
+			outputText("\n\n");	
+		}
 	}
 	if(totalOffers == 0 && spoken) {
 		doNext(13);
@@ -261,8 +270,11 @@ private function rathazulWorkOffer():Boolean {
 		addButton(0,"Armor",armor);
 		if(debimbo > 0) addButton(1,"Debimbo",makeADeBimboDraft);
 		addButton(2,"Buy Dye",dyes);
-		if(lethiciteDefense > 0) addButton(3,"Lethicite",eventParser,lethiciteDefense);
+		if (lethiciteDefense > 0) addButton(3, "Lethicite", eventParser, lethiciteDefense);
 		addButton(4,"Purify",purify);
+		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
+			addButton(5, "Pure Potion", rathazulMakesPurifyPotion);
+		}
 		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			addButton(9,"Leave",eventParser,74);
@@ -299,6 +311,36 @@ private function purifySomething():void {
 	addButton(4,"Back",rathazulWorkOffer);
 }
 
+//For Minerva purification.
+public function purificationByRathazulBegin():void {
+	outputText("Hoping the rodent-morph alchemist can assist you, you waste no time in approaching him. Rathazul looks up when he sees you, raising an eye curiously. \"<i>Is something the matter, " + player.short + "?</i>\"");
+	outputText("\n\nYou nod, and ask him if he knows anything about either killing pests or purifying the corruption from people as well as objects. At his bemused expression, you explain about Minerva and her conditions, repeating your query if he could possibly help you. Rathazul looks downcast and shakes his head.");
+
+	outputText("\n\n\"<i>I am afraid that I have never truly succeeded in my efforts to create a potion to purify the corrupted themselves.</i>\" The rat alchemist explains sadly. \"<i>The problem is there is very little, if anything, in this world that is capable of removing corruption from a consumer... But, I do have a theoretical recipe. If you can just find me some foodstuffs that would lower corruption and soothe the libido, and bring them to me, then I might be able to complete it. I can suggest pure giant bee honey as one, but I need at least two other items that can perform at least one of those effects. You said that the spring was able to keep your friend's corruption in check? Maybe some of the plants that grow there would be viable; bring me some samples, and a fresh dose of pure honey, and we’ll see what I can do.</i>\" He proclaims, managing to shake off his old depression and sound determined.");
+
+	outputText("\n\nWith that in mind, you walk away from him; gathering the items that could cure Minerva is your responsibility.");
+	flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 2;
+	doNext(13);
+}
+
+private function rathazulMakesPurifyPotion():void {
+	clearOutput();
+	player.destroyItems(consumables.PURHONY, 1);
+	player.destroyItems(consumables.C__MINT, 1);
+	player.destroyItems(consumables.PURPEAC, 1);
+	outputText("You hurry over to Rathazul, and tell him you have the items you think he needs. His eyes widen in shock as you show them to him, and he immediately snatches them from you without a word, hurrying over to his alchemical equipment. You watch, uncertain of what he’s doing, as he messes around with it, but within minutes he has produced a strange-looking potion that he brings back to you.");
+
+	outputText("\n\n\"<i>Have her swallow this, and it should kill the parasite within her at the very least.</i>\"");
+
+	outputText("\n\nYou take it gratefully, but can’t help asking what he means by ‘should’.");
+
+	outputText("\n\nRathazul shrugs helplessly. \"<i>This formula is untested; its effects are unpredictable... But, surely it cannot make things worse?</i>\"");
+
+	outputText("\n\nYou concede he has a point and take the potion; all you need to do now is give it to Minerva and hope for the best.");
+	player.createKeyItem("Rathazul's Purity Potion", 0, 0, 0, 0);
+	menu();
+	addButton(0,"Next",campRathazul);
+}
 
 private function rathazulDebimboOffer():void {
 	spriteSelect(49);

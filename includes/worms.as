@@ -235,6 +235,7 @@ public function playerInfest():void {
 	else {
 		outputText("While your fluids bathe the " + monster.short + " in your salty lust, the worms take no interest in your foe and scurry off.\n", true);
 	}
+	awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
 	dynStats("lus", -20);
 	enemyAI();
 }

@@ -1231,15 +1231,10 @@ public function doItems(eventNo:Number):void {
 		public function unequipWeapon():void {
 			if (player.weaponName != "fists")
 			{
-				//Removes perks so it doesn't become stuck.
-				while (player.findPerk(PerkLib.WizardsFocus) >= 0)
-				{
-					player.removePerk(PerkLib.WizardsFocus);
-				}
-				menuLoc = 37;
-				outputText("You unequip your " + player.weaponName + ". ", true);
 				var temp:ItemType = player.weapon;
-				player.setWeaponHiddenField(WeaponLib.FISTS);
+				outputText("You unequip your " + player.weaponName + ". ", true);
+				player.weapon.unequip(player, false, false);
+				menuLoc = 37;
 				takeItem(temp);
 				//doNext(manageEquipment);
 			}
@@ -1247,15 +1242,10 @@ public function doItems(eventNo:Number):void {
 		public function unequipArmor():void {
 			if (player.armorName != "goo armor") //Valeria belongs in the camp, not in your inventory!
 			{
-				//Removes perks so it doesn't become stuck.
-				while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);
-				while(player.findPerk(PerkLib.BloodMage) >= 0) player.removePerk(PerkLib.BloodMage);
-				while (player.findPerk(PerkLib.WizardsEndurance) >= 0) player.removePerk(PerkLib.WizardsEndurance);
-				while (player.findPerk(PerkLib.SluttySeduction) >= 0) player.removePerk(PerkLib.SluttySeduction);
-				menuLoc = 37;
-				outputText("You unequip your " + player.armorName + ". ", true);
 				var temp:ItemType = player.armor;
-				player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+				outputText("You unequip your " + player.armorName + ". ", true);
+				player.armor.unequip(player, false, false);
+				menuLoc = 37;
 				takeItem(temp);				
 				//doNext(manageEquipment);
 			}
@@ -1270,12 +1260,11 @@ public function doItems(eventNo:Number):void {
 		public function unequipJewel():void {
 			if (player.jewelryName != "nothing")
 			{
-				menuLoc = 37;
-				outputText("You unequip your " + player.jewelryName + ". ", true);
 				var temp:ItemType = player.jewelry;
-				player.setJewelryHiddenField(JewelryLib.NOTHING);
+				outputText("You unequip your " + player.jewelryName + ". ", true);
+				player.jewelry.unequip(player, false, false);
+				menuLoc = 37;
 				takeItem(temp);	
-				//doNext(manageEquipment);
 			}
 		}
 		public function returnToItems():void {

@@ -545,6 +545,8 @@ public function buildPerkList():Array {
 		}
 		if(player.str >= 75)
 			_add(new PerkClass(PerkLib.BrutalBlows));
+		if(player.str >= 50)
+			_add(new PerkClass(PerkLib.IronFists));
 	}
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
@@ -699,6 +701,9 @@ public function buildPerkList():Array {
 	if(player.level >= 6) {
 		_add(new PerkClass(PerkLib.Resistance));
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist));
+	}
+	if(player.level >= 12 && player.findPerk(PerkLib.Survivalist) > 0) {
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist2));
 	}
 	// FILTER PERKS
 	perkList = perkList.filter(
@@ -986,35 +991,45 @@ public function getButtonToolTipText(buttonText:String):String
 	//EXPLORE MENU
 	if(buttonText.indexOf("Desert") != -1) {
 		toolTipText = "Visit the dry desert. \n\nRecommended level: 2";
+		if (debug) toolTipText += "\n\nTimes explored: " + player.exploredDesert;
 	}
 	if(buttonText.indexOf("Forest") != -1) {
 		toolTipText = "Visit the lush forest. \n\nRecommended level: 1";
 		if (player.level < 6) toolTipText += "\n\nBeware of Tentacle Beasts!"
+		if (debug) toolTipText += "\n\nTimes explored: " + player.exploredForest;
 	}
 	if(buttonText.indexOf("Lake") != -1) {
 		toolTipText = "Visit the lake and explore the beach. \n\nRecommended level: 1";
 		if (player.level < 2) toolTipText += "\n\nNo goo-girl and slime encounters until level 2.";
+		if (debug) toolTipText += "\n\nTimes explored: " + player.exploredLake;
 	}
 	if(buttonText.indexOf("Plains") != -1) {
 		toolTipText = "Visit the plains. \n\nRecommended level: 10";
+		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS];
 	}
 	if(buttonText.indexOf("Swamp") != -1) {
 		toolTipText = "Visit the wet swamplands. \n\nRecommended level: 12";
+		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272];
 	}
 	if(buttonText.indexOf("Deepwoods") != -1) {
 		toolTipText = "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5";
+		if (debug) toolTipText += "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods);
 	}
 	if(buttonText.indexOf("Mountain") != -1) {
 		toolTipText = "Visit the mountain. \n\nRecommended level: 5";
+		if (debug) toolTipText += "\n\nTimes explored: " + player.exploredMountain;
 	}
 	if(buttonText.indexOf("High Mountain") != -1) {
 		toolTipText = "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 10";
+		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN];
 	}
 	if(buttonText.indexOf("Bog") != -1) {
 		toolTipText = "Visit the dark bog. \n\nRecommended level: 14";
+		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED];
 	}
 	if(buttonText.indexOf("Glacial Rift") != -1) {
 		toolTipText = "Visit the chilly glacial rift. \n\nRecommended level: 16";
+		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT];
 	}
 	//PLACE MENU
 	if(buttonText.indexOf("Bazaar") != -1) {
@@ -1051,15 +1066,19 @@ public function getButtonToolTipText(buttonText:String):String
 	//DUNGEONS
 	if(buttonText.indexOf("Factory") != -1) {
 		toolTipText = "Visit the demonic factory in the mountains.";
+		if (dungeons.checkFactoryClear()) toolTipText += "\n\nYou've managed to shut down the factory. \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Deep Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the Deepwoods.";
+		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nZetaz lived in the cave until you've defeated him. \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
+		if (dungeons.checkSandCaveClear()) toolTipText += "\n\nFrom what you've known, this is the source of the Sand Witches. \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Phoenix Tower") != -1) {
 		toolTipText = "Re-visit the tower you went there as part of Helia's quest.";
+		if (dungeons.checkPhoenixTowerClear()) toolTipText += "\n\nYou've helped Helia in the quest. \n\nCLEARED";
 	}
 	//FOLLOWERS
 	//Rathazul
@@ -1118,6 +1137,9 @@ public function getButtonToolTipText(buttonText:String):String
 		if (buttonText == "Purify") {
 			toolTipText = "Ask him to purify any tainted potions. \n\nCost: 20 Gems.";
 		}
+		if (buttonText == "Pure Potion") {
+			toolTipText = "Ask him to brew a purification potion for Minerva.";
+		}
 		if (buttonText == "Lethicite") {
 			toolTipText = "Ask him if he can make use of that lethicite you've obtained from Marae.";
 		}
@@ -1170,6 +1192,9 @@ public function getButtonToolTipText(buttonText:String):String
 		}
 		if (buttonText == "Training") {
 			toolTipText = "Ask him if he's willing to train you.";
+		}
+		if (buttonText == "Purification") {
+			toolTipText = "Ask him if he can exorcise the demonic parasite infesting Minerva.";
 		}
 	}
 	//Valeria
@@ -1339,6 +1364,9 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Instructions") != -1) {                        
 		toolTipText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
+	}
+	if(buttonText.indexOf("Achievements") != -1) {                        
+		toolTipText = "View all achievements you have unlocked so far.";
 	}
 	if(buttonText.indexOf("Settings") != -1) {                        
 		toolTipText = "Configure game settings and enable cheats.";
@@ -2057,7 +2085,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 		childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
 	if (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
-		childStats += "<b>Total Children with Ember:</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
+		childStats += "<b>Total Children with Ember:</b> " + (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS]) + "\n";
 	
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
@@ -2082,22 +2110,22 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.MARBLE_KIDS] > 0)
 		childStats += "<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n";
 		
-	//if (flags[kFLAGS.MINERVA_KIDS] > 0)
-	//	childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_KIDS] + "\n";
+	if (flags[kFLAGS.MINERVA_CHILDREN] > 0)
+		childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_CHILDREN] + "\n";
 		
 	if (flags[kFLAGS.ANT_KIDS] > 0)
 		childStats += "<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n";
 	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
 		childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
 	if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
-		childStats += "<b>Total Children with Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
+		childStats += "<b>Total Children with Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
 		
 	if (flags[kFLAGS.SHEILA_JOEYS] > 0)
 		childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
 	if (flags[kFLAGS.SHEILA_IMPS] > 0)
 		childStats += "<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
 	if (flags[kFLAGS.SHEILA_JOEYS] > 0 && flags[kFLAGS.SHEILA_IMPS] > 0)
-		childStats += "<b>Total Children With Sheila:</b> " + flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS] + "\n";
+		childStats += "<b>Total Children With Sheila:</b> " + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + "\n";
 		
 	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
 	{
@@ -2150,10 +2178,10 @@ public function displayStats(e:MouseEvent = null):void
 	bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 	
 	if (player.cumQ() > 0)
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + " / " + Math.round(player.cumCapacity()) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
-		else bodyStats += "<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n";
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
+		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
 	if (player.lactationQ() > 0)
-		bodyStats += "<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n";
+		bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 	
 	if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusAffectv2(StatusAffects.Feeder);
@@ -2365,23 +2393,38 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
 		statEffects += "Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining\n";
 		
+	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
+		statEffects += "Luststick Application - " + Math.round(player.statusAffectv1(StatusAffects.LustStickApplied)) + " hours remaining\n";
+		
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
 		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
 
 	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) 
-		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining.  Speed temporarily lowered.\n";
+		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
 	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
 		statEffects += "Uma's Massage - " + player.statusAffectv1(StatusAffects.UmasMassage) + " hours remaining.\n";
 		
 	if (player.statusAffectv1(StatusAffects.Dysfunction) > 0) 
-		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining.\n";
+		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
 	// End Ongoing Stat Effects
 	
 	doNext(1);
+}
+
+public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void {
+	if (achievements[achievement] != null) {
+		if (achievements[achievement] <= 0) {
+			achievements[achievement] = 1;
+			if (nl && display) outputText("\n");
+			if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>\n");
+			kGAMECLASS.saves.savePermObject(false); //Only save if the achivement hasn't been previously awarded.
+		}
+	}
+	else outputText("\n<b>ERROR: Invalid achievement!</b>");
 }
 
 public function lustPercent():Number {
@@ -2685,6 +2728,12 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.jewelryEffectId == 7)
 	{
 		minLib -= player.jewelryEffectMagnitude;
+	}
+	if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
+		minLib -= 2;
+	}
+	if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
+		minLib -= 2;
 	}
 	//Applies minimum libido.
 	if (player.lib < minLib)

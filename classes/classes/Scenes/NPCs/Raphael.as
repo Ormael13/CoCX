@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class Raphael extends NPCAwareContent {
 
@@ -83,7 +84,7 @@ private function meetRaphaelPtII():void {
 		
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
-	simpleChoices("Talk",RaphaelFirstMeetingTALK,"Slap",RaphaelFirstMeetingSLAP,"Swoon",RaphaelFirstMeetingSWOON,"",0,"",0);
+	simpleChoices("Talk",RaphaelFirstMeetingTALK,"Slap",RaphaelFirstMeetingSLAP,"Swoon",RaphaelFirstMeetingSWOON,"Rape",0,"",0);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -640,6 +641,7 @@ private function RaphaelPicnicSkill():void {
 
 		outputText("What do you do?", false);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
+		awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
 		//[Fence] [Discuss]
 		simpleChoices("Fence",fenceRaphaelSexily,"Discus",fenceOfferChangeToDiscuss,"",0,"",0,"",0);
 		return;

@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class ImpLord extends Imp
 	{
@@ -60,6 +61,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			game.impScene.defeatImpLord();
 		}
 

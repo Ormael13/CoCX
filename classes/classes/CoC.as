@@ -255,6 +255,7 @@
 		public var monster:Monster;
 		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
+		public var achievements:DefaultDict;
 		public var gameState:Number;
 		public var menuLoc:Number;
 		public var itemSubMenu:Boolean;
@@ -352,8 +353,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.16_mod_0.7.6";
-			version = ver + " (<b>Bug fixes #4</b>)";
+			ver = "0.8.16_mod_0.8";
+			version = ver + " (<b>Achievements!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -398,7 +399,9 @@
 			//or state information to do with the game. 
 			flags = new DefaultDict();
 			model.flags = flags;
-
+			
+			achievements = new DefaultDict();
+			model.achievements = achievements;
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables

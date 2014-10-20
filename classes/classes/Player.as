@@ -2,6 +2,7 @@
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Weapon;
@@ -215,6 +216,9 @@ use namespace kGAMECLASS;
 				attack *= 2;
 			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && weaponPerk != "Large") {
 				attack += Math.round((spe - 50) / 3);
+			}
+			if(findPerk(PerkLib.IronFists) >= 0 && str >= 50 && weaponName == "fists") {
+				attack += 5;
 			}
 			if(findStatusAffect(StatusAffects.Berzerking) >= 0) attack += 30;
 			attack += statusAffectv1(StatusAffects.ChargeWeapon);
@@ -1307,9 +1311,17 @@ use namespace kGAMECLASS;
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
+				kGAMECLASS.awardAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
+				var oldHunger:Number = hunger;
+				if (hunger >= 90) kGAMECLASS.awardAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				hunger += amnt;
 				if (hunger > 100)
 				{
+					while (hunger > 100) {
+						modThickness(100, 1);
+						modTone(100, 1);
+						hunger -= 10;
+					}
 					hunger = 100;
 				}
 				if (nl) outputText("\n");
@@ -1320,7 +1332,7 @@ use namespace kGAMECLASS;
 				else if (hunger >= 50 && hunger < 75) outputText("<b>Your stomach no longer growls. </b>");
 				else if (hunger > 75 && hunger <= 90) outputText("<b>You feel so satisfied. </b>");
 				else if (hunger > 90) outputText("<b>Your stomach feels so full. </b>");
-				
+				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				kGAMECLASS.statScreenRefresh();
 			}
@@ -1393,6 +1405,11 @@ use namespace kGAMECLASS;
 		public function hairDescript():String
 		{
 			return Appearance.hairDescription(this);
+		}
+
+		public function beardDescript():String
+		{
+			return Appearance.beardDescription(this);
 		}
 
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
@@ -1676,7 +1693,7 @@ use namespace kGAMECLASS;
 			min -= perkv1(PerkLib.PiercedIcestone);
 			min += perkv1(PerkLib.PentUp);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings. This effectively caps minimum lust at 80.
-			if (findPerk(PerkLib.ColdBlooded) > 0) {
+			if (findPerk(PerkLib.ColdBlooded) >= 0) {
 				if (min >= 20) {
 					if (min <= 40) min -= (min - 20);
 					else min -= 20;

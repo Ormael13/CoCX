@@ -2430,6 +2430,7 @@
 				changes++;
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function succubisDelight(tainted:Boolean,player:Player):void
@@ -3749,7 +3750,7 @@
 			}
 			if (player.lust > 100) player.lust = 100;
 			outputText("\n\n", false);
-			player.refillHunger(15);
+			player.refillHunger(5);
 		}
 
 		public function goblinAle(player:Player):void
@@ -4815,6 +4816,7 @@
 				else outputText(player.modFem(85, 2), false);
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function reptilum(player:Player):void
@@ -5087,6 +5089,13 @@
 				changes++;
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 			}
+			//Remove beard!
+			if (player.hasBeard() ){
+				outputText("\n\nYour " + beardDescript() + " feels looser and looser until finally, your beard falls out.  ");
+				outputText("(<b>You no longer have a beard!</b>)");
+				player.beardLength = 0;
+				player.beardStyle = 0;
+			}
 			//Big physical changes:
 			//-Legs – Draconic, clawed feet
 			if (player.lowerBody != LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
@@ -5190,6 +5199,7 @@
 				dynStats("lus", 3);
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 
@@ -5689,7 +5699,7 @@
 			//-Shrink tits if above DDs.
 			//Cannot happen at same time as row removal
 			else if (changes < changeLimit && player.breastRows.length == 1 && rand(3) == 0 && player.breastRows[0].breastRating >= 7 && !flags[kFLAGS.HYPER_HAPPY])
-{
+			{
 				changes++;
 				//(Use standard breast shrinking mechanism if breasts are under 'h')
 				if (player.breastRows[0].breastRating < 19)
@@ -5867,6 +5877,7 @@
 			}
 			if (changes == 0) outputText("\n\nAside from being a tasty treat, it doesn't seem to do anything to you this time.", false);
 			player.refillHunger(10);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		/*
@@ -6108,6 +6119,7 @@
 				fatigue(-40);
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //[Giant Chocolate Cupcake] – 500 gems
@@ -6386,6 +6398,7 @@
 				fatigue(-33);
 			}
 			player.refillHunger(5);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function applyLustStick(player:Player):void
@@ -6468,6 +6481,7 @@
 				outputText("You crack open the can and guzzle it in a hurry.  Goddamn, this shit is the best.  As you crush the can against your forehead, you wonder if you can find a six-pack of it somewhere?\n\n", false);
 				fatigue(-33);
 				HPChange(100, true);
+				player.refillHunger(30);
 				return;
 			}
 			outputText("Well, maybe this will give you the musculature that you need to accomplish your goals.  You pull on the tab at the top and hear the distinctive snap-hiss of venting, carbonating pressure.  A smoky haze wafts from the opened container, smelling of hops and alcohol.  You lift it to your lips, the cold, metallic taste of the can coming to your tongue before the first amber drops of beer roll into your waiting mouth.  It tingles, but it's very, very good.  You feel compelled to finish it as rapidly as possible, and you begin to chug it.  You finish the entire container in seconds.\n\n", false);
@@ -6660,6 +6674,7 @@
 			//Sample possession text (>79 int, perhaps?):  With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.
 			//Failure:  With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function isabellaMilk(player:Player):void
@@ -6758,6 +6773,7 @@
 				changes++;
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //ITEMS START
@@ -7167,6 +7183,7 @@
 				fatigue(-5);
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function godMead(player:Player):void
@@ -7192,7 +7209,11 @@
 				dynStats("tou", 1);
 			}
 			//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
-			//[If player already has beard] A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.
+			if (rand(6) == 0 && player.beardLength < 4) {
+				if (player.beardLength <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine " + player.hairColor + " beard!</b>");
+				else outputText("\n\nA sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.");
+				player.beardLength += 0.5;
+			}
 			//Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 			player.refillHunger(20);
 		}
@@ -7538,6 +7559,7 @@
 			if (changes == 0) {
 				outputText("\n\nOdd.  You don't feel any different.");
 			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //Kitsune's Gift
@@ -8020,6 +8042,7 @@
 				outputText("\n\nWell... that didn't amount to much.");
 				player.wingDesc = "giant dragonfly";
 			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //PurPeac
@@ -8228,6 +8251,7 @@
 				fatigue(5);
 			}
 			player.refillHunger(30);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //MouseCo
@@ -8411,6 +8435,7 @@
 				changes++;
 			}
 			player.refillHunger(10);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //special attack - bite?
@@ -8436,6 +8461,7 @@
 				else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
 				dynStats("cor", 4);
 				player.tailType = TAIL_TYPE_DEMONIC;
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//grow horns!
 			if (player.horns == 0 || (rand(player.horns + 3) == 0)) {
@@ -8458,11 +8484,13 @@
 					player.hornType = HORNS_DEMON;
 					dynStats("cor", 3);
 				}
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Nipples Turn Back:
 			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				player.removeStatusAffect(StatusAffects.BlackNipples);
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//remove fur
 			if ((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && rand(3) == 0) {
@@ -8480,16 +8508,18 @@
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
 				}
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Demon tongue
 			if (player.tongueType == TONUGE_SNAKE && rand(3) == 0) {
 				outputText("\n\nYour snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>", false);
 				player.tongueType = TONUGE_DEMONIC;
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//foot changes - requires furless
 			if (player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) {
 				//Males/genderless get clawed feet
-				if (player.gender <= 1) {
+				if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 					if (player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {
 						outputText("\n\n", false);
 						outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
@@ -8502,6 +8532,7 @@
 					outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);
 					player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 				}
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Grow demon wings
 			if (player.wingType != WING_TYPE_BAT_LIKE_LARGE && rand(8) == 0 && player.cor >= 50) {
@@ -8542,7 +8573,7 @@
 					player.wingType = WING_TYPE_BAT_LIKE_TINY;
 					player.wingDesc = "tiny, bat-like";
 				}
-
+				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 		}
 		
@@ -8867,6 +8898,7 @@
 				fatigue(-10);
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	}
 }

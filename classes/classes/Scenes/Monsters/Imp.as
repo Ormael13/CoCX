@@ -2,11 +2,13 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Imp extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			if (findStatusAffect(StatusAffects.KitsuneFight) >= 0) {
 				game.forest.kitsuneScene.winKitsuneImpFight();
 			} else {

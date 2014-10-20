@@ -96,6 +96,17 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 	//Not actually in combat
 	else doNext(nextFunc);
 }
+
+public function checkAchievementDamage(damage:Number):void
+{
+	flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] += damage;
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) kGAMECLASS.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
+	if (damage >= 50) kGAMECLASS.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
+	if (damage >= 100) kGAMECLASS.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
+	if (damage >= 250) kGAMECLASS.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
+	if (damage >= 500) kGAMECLASS.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+}
+
 //5000 6999
 public function doCombat(eventNum:Number):void
 {
@@ -482,7 +493,7 @@ public function doCombat(eventNum:Number):void
 					test.clear();
 				}
 			}
-			
+			awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
 			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
 			mainView.showMenuButton(MainView.MENU_NEW_MAIN);
@@ -1063,6 +1074,7 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			else outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
+			checkAchievementDamage(damage);
 			enemyAI();
 			return;
 	}
@@ -1295,6 +1307,7 @@ public function bite():void {
 	if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 	else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 	outputText("\n\n", false);
+	checkAchievementDamage(damage);
 	//Kick back to main if no damage occured!
 	if(monster.HP > 0 && monster.lust < 100) {
 		enemyAI();
@@ -1531,7 +1544,6 @@ public function attack():void {
 		outputText("You hit " + monster.a + monster.short + "! ", false);
 		if(crit) outputText(" <b>Critical hit! </b>");
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
-		
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
@@ -1584,6 +1596,7 @@ public function attack():void {
 		
 	}
 	outputText("\n", false);
+	checkAchievementDamage(damage);
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
@@ -1685,6 +1698,7 @@ public function goreAttack():void {
 	}
 	//New line before monster attack
 	outputText("\n\n", false);
+	checkAchievementDamage(damage);
 	//Victory ORRRRR enemy turn.
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else {
@@ -4206,6 +4220,7 @@ public function spellWhitefire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	outputText("\n\n", false);
+	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	monster.HP -= temp;
@@ -4484,6 +4499,7 @@ public function kick():void {
 		}
 	}
 	outputText("\n\n", false);
+	checkAchievementDamage(damage);
 	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
 	else enemyAI();
 }
@@ -4529,6 +4545,7 @@ public function PCWebAttack():void {
 		if(monster.spe < 0) monster.spe = 0;
 	}
 	outputText("\n\n", false);
+	awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
 	else enemyAI();
 }
@@ -4753,6 +4770,7 @@ public function dragonBreath():void {
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 	}
 	outputText("\n\n");
+	checkAchievementDamage(damage);
 	if(monster.short == "Holli" && monster.findStatusAffect(StatusAffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
 	combatRoundOver();
 }
@@ -4834,6 +4852,7 @@ public function fireballuuuuu():void {
 		monster.HP -= damage;
 		if(monster.short == "Holli" && monster.findStatusAffect(StatusAffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
 	}
+	checkAchievementDamage(damage);
 	if(monster.HP < 1) {
 		doNext(endHpVictory);
 	}
@@ -5438,6 +5457,7 @@ public function corruptedFoxFire():void {
 	}
 	dmg = doDamage(dmg);
 	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+	checkAchievementDamage(dmg);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
@@ -5476,6 +5496,7 @@ public function foxFire():void {
 	}
 	dmg = doDamage(dmg);
 	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+	checkAchievementDamage(dmg);
 	statScreenRefresh();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();

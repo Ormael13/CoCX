@@ -182,11 +182,11 @@ package classes.Scenes.NPCs
 				if (jojo) outputText("Jojo");
 				outputText(" and make sure she doesn't come close.");
 				if (jojo) {
-					outputText("\n\n\"<i>Fine. But I'll keep close watch from now on,<i>\" Jojo says.");
+					outputText("\n\n\"<i>Fine. But I'll keep close watch from now on,</i>\" Jojo says.");
 					flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] = 1;
 				}
 				if (amily) {
-					outputText("\n\n\"<i>Fine! Don't come near me if you're corrupted. I'll stay away from her,<i>\" Amily warns.");
+					outputText("\n\n\"<i>Fine! Don't come near me if you're corrupted. I'll stay away from her,</i>\" Amily warns.");
 					flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] = 1;
 				}
 				

@@ -101,6 +101,59 @@
 
 			return description;
 		}
+		
+		public static function beardDescription(i_creature:Creature):String
+		{
+			var description:String = "";
+			var options:Array;
+			//
+			// LENGTH ADJECTIVE!
+			//
+			if (i_creature.beardLength == 0) {
+				options = ["shaved",
+					"bald",
+					"smooth",
+					"hairless",
+					"glabrous"];
+				description = randomChoice(options) + " chin and cheeks";
+				return description;
+			}
+			if (i_creature.beardLength < 0.2) {
+				options = ["close-cropped, ",
+					"trim, ",
+					"very short, "];
+				description += randomChoice(options);
+			}
+			if (i_creature.beardLength >= 0.2 && i_creature.beardLength < 0.5) description += "short, ";
+			if (i_creature.beardLength >= 0.5 && i_creature.beardLength < 1.5) description += "medium, ";
+			if (i_creature.beardLength >= 1.5 && i_creature.beardLength < 3) description += "moderately long, ";
+			if (i_creature.beardLength >= 3 && i_creature.beardLength < 6) {
+				if (rand(2) == 0) description += "long, ";
+				else description += "neck-length, ";
+			}
+			if (i_creature.beardLength >= 6) {
+				if (rand(2) == 0) description += "very long, ";
+				description += "chest-length, ";
+			}
+			//
+			// COLORS
+			//
+			description += i_creature.hairColor + " ";
+			//
+			// BEARD WORDS
+			// Follows hair type.
+			if (i_creature.hairType == 1) description += "";
+			else if (i_creature.hairType == 2) description += "transparent ";
+			else if (i_creature.hairType == 3) description += "gooey ";
+			else if (i_creature.hairType == 4) description += "tentacley ";
+			
+			if (i_creature.beardStyle == 0) description += "beard"
+			else if (i_creature.beardStyle == 1) description += "goatee"
+			else if (i_creature.beardStyle == 2) description += "clean-cut beard"
+			else if (i_creature.beardStyle == 3) description += "mountain-man beard"
+
+			return description;
+		}
 
 		/**
 		 * Describe tongue. Monsters don't have tongues, apparently.
@@ -2129,6 +2182,14 @@
 					[HAIR_GHOST, "transparent"],
 					[HAIR_GOO, "goopy"],
 					[HAIR_ANEMONE, "tentacle"]
+				]
+		);
+		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
+				[
+					[BEARD_NORMAL, "normal"],
+					[BEARD_GOATEE, "goatee"],
+					[BEARD_CLEANCUT, "clean-cut"],
+					[BEARD_MOUNTAINMAN, "mountain-man"]
 				]
 		);
 		public static const DEFAULT_FACE_NAMES:Object = createMapFromPairs(

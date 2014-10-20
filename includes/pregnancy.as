@@ -1825,6 +1825,20 @@ public function updatePregnancy():Boolean {
 		}
 		outputText("\n", false);
 	}
+	//Give birth to sirens.
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA && player.pregnancyIncubation == 1) {
+		if(player.vaginas.length == 0) {
+			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
+			player.createVagina();
+			genderCheck();
+		}
+		kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+		if(player.hipRating < 10) {
+			player.hipRating++;
+			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
+		}
+		player.knockUpForce(); //Clear Pregnancy
+	}
 	//Egg status messages
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && player.pregnancyIncubation > 0) {
 		if(player.vaginas.length == 0) {

@@ -297,7 +297,7 @@ public function doSystem(eventNo:Number):void {
 
 		case 71:
 			//Places menu
-			camp.places(true);
+			camp.places();
 			return;
 
 
@@ -467,6 +467,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 			var multiplier:Number = 1.0
 			if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
+			if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
 			//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 			//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
 			if (player.hunger > 50)
@@ -498,16 +499,35 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if (rand(3) == 0) player.hipRating--;
 				dynStats("str", -0.5);
 				dynStats("tou", -0.5);
+				player.hunger = 0; //Prevents negative
 			}
+			if (player.hunger < 25) {
+				if (player.hunger > 0) flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING]++;
+				else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
+			}
+			else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
 			//Goo armor prevents starvation completely!
 			if (player.armorName == "goo armor")
 			{
-				if (player.hunger < 10)
+				if (player.hunger < 20)
 				{
 					player.hunger = 25;
 					outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
 				}
 			}
+		}
+		//Corruption check for achievement.
+		if (player.cor >= 80) {
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] == 0 || flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] == 2) flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA]++
+		}
+		if (player.cor <= 20) {
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] == 1 || flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] == 3) flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA]++
+		}
+		if (player.cor >= 100) {
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] == 0) flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE]++
+		}
+		if (player.cor <= 0) {
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] == 1) flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE]++
 		}
 		genderCheck();
 		if(player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
@@ -1509,6 +1529,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 				if(!needNext) needNext = growHair(.1);
 				else growHair(.1);
+				if (player.beardLength > 0 && player.beardLength < 12) growBeard(0.02);
 			}
 			//Lower bonus score for drinking contest - Now handled in Roxanne
 			//Clear dragon breath cooldown!
@@ -1668,14 +1689,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(temp > 7) temp = 7;
 		if(player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 		if(player.inHeat) temp += 2;
-		if(vapula.vapulaSlave()) temp += 7;
+		if (vapula.vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
 				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
 			else if(temp > rand(100) && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0) {
-				if(player.gender > 0 && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
+				if(player.gender > 0 && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == ""))) {
 					impScene.impGangabangaEXPLOSIONS();
 					doNext(1);
 					return true;
@@ -1698,6 +1719,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				else if(flags[kFLAGS.ANEMONE_WATCH] > 0) {
 					outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
+					needNext = true;
+				}
+				else if(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
+					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
 					needNext = true;
 				}
 			}
@@ -2119,5 +2144,39 @@ public function growHair(amount:Number = .1):Boolean {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
+	return false;
+}
+
+public function growBeard(amount:Number = .1):Boolean {
+	//Grow beard!
+
+	var tempBeard:Number = player.beardLength;
+	player.beardLength += amount;
+
+	if(player.beardLength > 0 && tempBeard == 0) {
+		outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>", false);
+		return true;
+	}
+	else if(player.beardLength >= 0.2 && tempBeard < 0.2) {
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		return true;
+	}
+	else if(player.beardLength >= 0.5 && tempBeard < 0.5) {
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		return true;
+	}
+	else if(player.beardLength >= 1.5 && tempBeard < 1.5) {
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		return true;
+	}
+	else if(player.beardLength >= 3 && tempBeard < 3) {
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		return true;
+	}
+	else if(player.beardLength >= 6 && tempBeard < 6) {
+		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+		return true;
+	}
+
 	return false;
 }

@@ -206,7 +206,7 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//If Jojo lives in camp, never encounter him
-			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] == 1) {
+			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] >= 1) {
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4) chooser = rand(3)
 				else chooser = rand(4)
 				if (chooser >= 1) chooser++;

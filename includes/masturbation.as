@@ -821,7 +821,8 @@ public function masturbateGo():void {
 		return;		
 	}
 	if(player.isTaur()) {
-		if(centaurMasturbation()) {
+		if (centaurMasturbation()) {
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			doNext(13);
 			return;
 		}
@@ -895,7 +896,7 @@ public function masturbateGo():void {
 	/*******************************
 	||       MASTURBATION CORE    ||
 	\\*****************************/
-
+	
 	//Cock masturbation!
 	if(player.cocks.length == 1) {
 		//New lines for masturbation!
@@ -1302,6 +1303,7 @@ public function masturbateGo():void {
 			outputText("You sigh and drift off to sleep.", false);
 		}
 	}
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 
@@ -2209,6 +2211,7 @@ public function centaurMasturbation():Boolean {
 	}
 	//Failsafe - you suck.
 	else {
+		flags[kFLAGS.TIMES_MASTURBATED]--;
 		if(flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0) {
 			outputText("No matter how you twist and turn, you can't reach anywhere close to your ", false);
 			if(player.hasCock() || player.hasVagina()) outputText("genitalia", false);
@@ -2255,6 +2258,7 @@ public function lickYerGirlParts():void {
 	//Stats & next event
 	//DONE!
 	player.orgasm();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	dynStats("sen", (-0.5));
 	doNext(13);
 }
@@ -2358,6 +2362,7 @@ public function catAutoLick():void {
 	//Stats & next event
 	//DONE!
 	player.orgasm();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	dynStats("sen", (-0.5));
 	doNext(13);
 }
@@ -2421,6 +2426,7 @@ public function centaurDudesGetHorseAids():void {
 
 	player.orgasm();
 	dynStats("sen", -2);
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 	player.addKeyValue("Fake Mare",1,1);
 }
@@ -2451,6 +2457,7 @@ public function centaurGirlsGetHorseAids():void {
 	outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + buttDescript() + ".  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.\n\n", false);
 	player.orgasm();
 	dynStats("sen", -2);
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 	player.addKeyValue("Centaur Pole",1,1);
 	trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
@@ -2745,6 +2752,7 @@ public function layEggsInYerTits():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	player.dumpEggs();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 
@@ -2981,6 +2989,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2);
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 
@@ -3015,6 +3024,7 @@ public function gildedCockTurbate():void {
 	player.gems += gems;
 	flags[kFLAGS.GILDED_JERKED]++
 	statScreenRefresh();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 
@@ -3060,6 +3070,7 @@ public function stickADildoInYourVagooSlut():void {
 	player.orgasm();
 	dynStats("sen", -1.5);
 	statScreenRefresh();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 
@@ -3091,6 +3102,7 @@ public function dildoButts():void
 	player.orgasm();
 	dynStats("sen", 0.5);
 	statScreenRefresh();
+	flags[kFLAGS.TIMES_MASTURBATED]++;
 	doNext(13);
 }
 

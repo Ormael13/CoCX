@@ -1,4 +1,4 @@
-//Dungeon 1: Factory (Recently refactored, may be riddled with bugs.)
+//Dungeon 1: Factory
 package classes.Scenes.Dungeons 
 {
 	import classes.*;
@@ -1123,6 +1123,7 @@ package classes.Scenes.Dungeons
 		private function killOmnibus():void {
 			spriteSelect(16);
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
+			flags[kFLAGS.FACTORY_OMNIBUS_KILLED] = 1;
 			cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}

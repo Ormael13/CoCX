@@ -13,6 +13,7 @@ package classes.Scenes.Dungeons
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
+		public var lethicecastle:LethiceCastle = new LethiceCastle;
 		public var cabin:YourCabin = new YourCabin;
 		
 		public function DungeonEngine() 
@@ -66,6 +67,19 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 35) desertcave.roomCumWitchBedroom();
 			if (kGAMECLASS.dungeonLoc == 36) desertcave.roomCumWitchOffice();
 			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSandMotherThrone();
+		}
+		
+		public function checkFactoryClear():Boolean {
+			return (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0 && flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0);
+		}
+		public function checkDeepCaveClear():Boolean {
+			return (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] > 0 && flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] > 0 && flags[kFLAGS.FREED_VALA] == 1 && player.hasKeyItem("Zetaz's Map") >= 0);
+		}
+		public function checkSandCaveClear():Boolean {
+			return (flags[kFLAGS.CUM_WITCH_DEFEATED] > 0 && (flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] > 0 || flags[kFLAGS.MET_ESSY] == 0) && flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0);
+		}
+		public function checkPhoenixTowerClear():Boolean {
+			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0&& flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
 		}
 		
 		public function enterFactory():void {

@@ -1,4 +1,5 @@
-﻿import coc.view.CoCButton;
+﻿import classes.Scenes.Achievements;
+import coc.view.CoCButton;
 import coc.view.MainView;
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -27,6 +28,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
+	kGAMECLASS.saves.loadPermObject();
 	//Reset newgame buttons
 	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
 	mainView.hideAllMenuButtons();
@@ -51,6 +53,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 
+	var achievements:Achievements = new Achievements();
 
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
@@ -64,7 +67,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 			"Instructions", howToPlay,
 			"Debug Info", debugPane,
 			"", 0,
-			"Achievements", 0,
+			"Achievements", achievements.achievementsScreen,
 			"Settings", settingsScreenI,
 			"Resume", resume);
 
@@ -128,15 +131,6 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 	if(helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
-}
-
-public function achievementsScreen():void {
-	outputText("COMING SOON!", true)
-	outputText("\n\n")
-	if (flags[kACHIEVEMENTS.STORY_NEWCOMER] > 0) outputText("Newcomer - Enter the portal");
-	else outputText("LOCKED");
-	menu();
-	addButton(9, "Back", mainMenu);
 }
 
 public function settingsScreen():void 

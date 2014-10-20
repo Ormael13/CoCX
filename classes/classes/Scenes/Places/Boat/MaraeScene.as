@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.Boat{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class MaraeScene extends AbstractBoatContent{
 
@@ -177,6 +178,7 @@ public function winAgainstMarae():void {
 	outputText("\n<b>(Key Item Gained: Divine Bark Plates!)</b>", false)
 	player.createKeyItem("Tentacled Bark Plates", 0, 0, 0, 0);
 	outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)
+	awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
 	flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
 	cleanupAfterCombat();
 	doNext(13);
@@ -590,6 +592,25 @@ private function MaraePt2RoundIIIPrizes():void {
 		}
 	}
 	doNext(14);
+}
+
+public function talkToMaraeAboutMinervaPurification():void {
+	spriteSelect(40);
+	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
+
+	outputText("\n\n\"<i>You return to my island, champion? What brings you here? Is there something troubling you?</i>\" the deity gently asks you.");
+
+	outputText("\n\nMaking whatever gesture of respect feels most appropriate to you, you explain to her about Minerva and her condition, elaborating that you have come to ask Marae if she can possibly help you to cure her.");
+
+	outputText("\n\nAt this, Marae’s expression falls. \"<i>I am sorry, champion, but I cannot do what you ask.</i>\" When you demand to know why, she quickly explains herself. \"<i>It is not that I am ungrateful or unwilling, it is that I am unable. Though you have stopped the assault on my soul by the demon factory, my powers are still vastly diminished from what they were. I fear I would not be able to help her...</i>\" Marae suddenly trails off, looking thoughtful, then gives you an intent expression. \"<i>Explain to me again, the ruins in which you say your friend has been living?</i>\" she requests.");
+
+	outputText("\n\nPuzzled, you repeat your description, watching with bemusement as Marae’s face lights up. \"<i>I hadn’t dared to hope... a nexus! An untainted nexus, still hidden from the demons! Yes, yes I can help your friend, and you both can help me at the same time!</i>\" she declares joyfully. \"<i>Your friend’s home is a nexus, a place of concentrated holy energies. If I can connect myself to it, I can increase my own powers and help heal her.</i>\" Focusing, she holds her hands only slightly apart from each other as a strange green light begins forming between them. It swells in intensity until you are forced to look away, shielding your eyes. When it fades and you can look back without blinding yourself, you see a gently glowing seed resting between her hands. \"<i>Take this seed, champion, and plant it in the fertile soil at the spring you speak of. Do so and I will be able to help your friend overcome her affliction.</i>\"");
+
+	outputText("\n\nYou thank Marae for her assistance and gently accept the glowing seed. Stowing it safely in your personal belongings, you return to your boat and, from there, to camp.");
+	player.createKeyItem("Marae's Seed", 0, 0, 0, 0);
+	flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 3;
+	flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 2;
+	doNext(13);
 }
 
 private function MaraeIIFlyAway():void {

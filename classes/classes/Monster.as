@@ -958,6 +958,12 @@
 			} else {
 				result += "no hair.\n";
 			}
+			result += Hehas;
+			if (beardLength>0){
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+(Appearance.DEFAULT_BEARD_NAMES[beardStyle]||("beardType#"+beardStyle))+".\n";
+			} else {
+				result += "no beard.\n";
+			}
 			result += Hehas
 					+(Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType))+" face, "
 					+(Appearance.DEFAULT_EARS_NAMES[earType]||("earType#"+earType))+" ears, "

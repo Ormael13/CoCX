@@ -33,6 +33,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	var silly:Boolean = false;
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
+	var oldUI:Boolean = false;
 	//If at initial title
 	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
 		sprite = true;
@@ -40,6 +41,10 @@ public function newGameGo(e:MouseEvent = null):void {
 		easy = true;
 	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		silly = true;
+	if(flags[kFLAGS.USE_OLD_INTERFACE])
+		oldUI = true;
+	if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM])
+		unlockedHerm = true;
 	mainView.setButtonText( 0, "Newgame" ); // b1Text.text = "Newgame";
 	flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 	
@@ -116,6 +121,11 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.tailRecharge = 0;
 	player.wingType = WING_TYPE_NONE;
 	player.wingDesc = "non-existant";
+	//Default
+	player.skinTone = "light";
+	player.hairColor = "brown";
+	player.beardLength = 0;
+	player.beardStyle = 0;
 	//Exploration
 	player.explored = 0;
 	player.exploredForest = 0;
@@ -198,6 +208,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	if(sprite) flags[kFLAGS.SHOW_SPRITES_FLAG] = 1;
 	if(easy) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 	if(silly) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = 1;
+	if(oldUI) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
 	//Set that jojo debug doesn't need to run
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
@@ -276,7 +287,7 @@ private function chooseModeHardcore():void {
 private function chooseGameModes():void {
 	outputText("Choose a game mode.\n\n", true);
 	outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n", false);
-	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. Currently not fully baked yet.\n", false);
+	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. \n", false);
 	outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
 	
 	simpleChoices("Normal", chooseModeNormal, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0, "", 0);
@@ -293,7 +304,8 @@ private function chooseMale():void {
 	//Body attributes
 	player.tallness = 71;
 	player.tone = 60;
-	player.hairLength=1;
+	player.hairLength = 1;
+	player.beardLength = 0.2;
 	//Genetalia
 	player.balls = 2;
 	player.ballSize = 1;
@@ -380,7 +392,7 @@ private function chooseBodyTypeLean():void {
 	//Attribute modifiers
 	player.str -= 1;
 	player.spe += 1;
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseBodyTypeAverage():void {
 	//Average b-type
@@ -396,7 +408,7 @@ private function chooseBodyTypeAverage():void {
 		player.buttRating = 6;
 		player.femininity = 70;
 	}
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseBodyTypeThick():void {
 	if (player.gender == 1) {
@@ -423,7 +435,7 @@ private function chooseBodyTypeThick():void {
 		player.str += 1;
 		player.tou += 1;
 	}
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseBodyTypeGirlyOrTomboyish():void {
 	if (player.gender == 1) {
@@ -445,7 +457,7 @@ private function chooseBodyTypeGirlyOrTomboyish():void {
 		player.tone = 50;
 		player.breastRows[0].breastRating = 2;
 	}
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseBodyTypeDickgirlOrCuntboy():void {
 	if (player.gender == 1) {
@@ -470,7 +482,7 @@ private function chooseBodyTypeDickgirlOrCuntboy():void {
 		//Attribute modifiers
 		player.str += 1;
 	}
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseAndrogynousHerm():void {
 		player.femininity = 50;
@@ -479,7 +491,7 @@ private function chooseAndrogynousHerm():void {
 		player.hairLength = 5;
 		player.tone = 50;
 		player.breastRows[0].breastRating = 1;
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseMasculineHerm():void {
 		player.femininity = 30;
@@ -488,7 +500,7 @@ private function chooseMasculineHerm():void {
 		player.hairLength = 1;
 		player.tone = 50;
 		player.breastRows[0].breastRating = 0;
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
 }
 private function chooseFeminineHerm():void {
 		player.femininity = 70;
@@ -497,7 +509,30 @@ private function chooseFeminineHerm():void {
 		player.hairLength = 10;
 		player.tone = 50;
 		player.breastRows[0].breastRating = 3;
-	menuSkinComplexion();
+	genericStyleCustomizeMenu();
+}
+
+//-----------------
+//-- GENERAL STYLE
+//-----------------
+private function genericStyleCustomizeMenu():void {
+	clearOutput();
+	mainView.nameBox.visible = false;
+	outputText("Choose a skin complexion, hair color, and set your height before you proceed.\n\n");
+	outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
+	outputText("Skin tone: " + player.skinTone + "\n");
+	outputText("Hair color: " + player.hairColor + "\n");
+	menu();
+	addButton(0, "Complexion", menuSkinComplexion);
+	addButton(1, "Hair Color", menuHairColor);
+	if (player.mf("m", "f") == "m") {
+		if (player.hasBeard()) {
+			outputText("Beard: " + player.beardDescript() + "\n");
+		}
+		addButton(2, "Beard Style", menuBeardSettings);
+	}
+	addButton(3, "Set Height", setHeight);
+	addButton(9, "Done", menuPerk);
 }
 
 //-----------------
@@ -505,64 +540,103 @@ private function chooseFeminineHerm():void {
 //-----------------
 private function menuSkinComplexion():void {
 	outputText("What is your complexion?", true);
-	choices("Light", chooseComplexionLight, "Olive", chooseComplexionOlive, "Dark", chooseComplexionDark, "Ebony", chooseComplexionEbony, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", 0);	
+	choices("Light", chooseComplexionLight, "Olive", chooseComplexionOlive, "Dark", chooseComplexionDark, "Ebony", chooseComplexionEbony, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", genericStyleCustomizeMenu);	
 }	
 
 private function chooseComplexionLight():void {
 	player.skinTone = "light";
-	menuHairColor();
+	genericStyleCustomizeMenu();
 }
 private function chooseComplexionOlive():void {
 	player.skinTone = "olive";
-	menuHairColor();
+	genericStyleCustomizeMenu();
 }
 private function chooseComplexionDark():void {
 	player.skinTone = "dark";
-	menuHairColor();
+	genericStyleCustomizeMenu();
 }	
 private function chooseComplexionEbony():void {
 	player.skinTone = "ebony";
-	menuHairColor();
+	genericStyleCustomizeMenu();
 }	
 
 //-----------------
 //-- HAIR COLOURS
 //-----------------
 private function menuHairColor():void {
-	mainView.nameBox.visible = false;
-	outputText("You selected a " + player.skinTone + " complexion.\n\nWhat color is your hair?", true);
-	choices("Blonde", chooseHairBlonde, "Brown", chooseHairBrown, "Black", chooseHairBlack, "Red", chooseHairRed, "Gray", chooseHairGray, "White", chooseHairWhite, "Auburn", chooseHairAuburn, "", 0, "", 0, "Back", menuSkinComplexion);
+	outputText("What is your hair color?", true);
+	choices("Blonde", chooseHairBlonde, "Brown", chooseHairBrown, "Black", chooseHairBlack, "Red", chooseHairRed, "Gray", chooseHairGray, "White", chooseHairWhite, "Auburn", chooseHairAuburn, "", 0, "", 0, "Back", genericStyleCustomizeMenu);
 }	
 
 private function chooseHairBlonde():void {
 	player.hairColor = "blonde";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairBrown():void {
 	player.hairColor = "brown";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairBlack():void {
 	player.hairColor = "black";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairRed():void {
 	player.hairColor = "red";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairGray():void {
 	player.hairColor = "gray";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairWhite():void {
 	player.hairColor = "white";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 private function chooseHairAuburn():void {
 	player.hairColor = "auburn";
-	setHeight();
+	genericStyleCustomizeMenu();
 }
 
+//-----------------
+//-- BEARD STYLE
+//-----------------
+private function menuBeardSettings():void {
+	outputText("You can choose your beard length and style.\n\n", true)
+	outputText("Beard: " + player.beardDescript())
+	menu()
+	addButton(0, "Style", menuBeardStyle);
+	addButton(1, "Length", menuBeardLength);
+	addButton(4, "Back", genericStyleCustomizeMenu);
+}
+private function menuBeardStyle():void {
+	outputText("What beard style would you like?", true);
+	menu();
+	addButton(0, "Normal", chooseBeardStyle, 0);
+	addButton(1, "Goatee", chooseBeardStyle, 1);
+	addButton(2, "Clean-cut", chooseBeardStyle, 2);
+	addButton(3, "Mountainman", chooseBeardStyle, 3);
+	addButton(9, "Back", menuBeardSettings);
+}
+private function chooseBeardStyle(choiceStyle:int = 0):void {
+	player.beardStyle = choiceStyle;
+	menuBeardSettings();
+}
+private function menuBeardLength():void {
+	outputText("How long would you like your beard be? (Note: Beard will slowly grow over time, just like in the real world. Unless you have no beard.)", true);
+	menu();
+	addButton(0, "No Beard", chooseBeardLength, 0);
+	addButton(1, "Trim", chooseBeardLength, 0.1);
+	addButton(2, "Short", chooseBeardLength, 0.2);
+	addButton(3, "Medium", chooseBeardLength, 0.5);
+	addButton(4, "Mod. Long", chooseBeardLength, 1.5);
+	addButton(5, "Long", chooseBeardLength, 3);
+	addButton(6, "Very Long", chooseBeardLength, 6);
+	addButton(9, "Back", chooseBeardLength);
+}
+private function chooseBeardLength(choiceLength:Number = 0):void {
+	player.beardLength = choiceLength;
+	menuBeardSettings();
+}
 //-----------------
 //-- HEIGHT
 //-----------------
@@ -574,7 +648,6 @@ private function setHeight():void {
 		// Stuff a number in the box and go go go
 		mainView.nameBox.text = "69";
 	}
-	outputText("You have " + hairDescript() + ".", true);
 	outputText("\n\nSet your height in inches.", false)
 	outputText("\nYou can choose any height between 4 feet (48 inches) and 8 feet (96 inches).", false)
 	mainView.nameBox.visible = true;
@@ -627,7 +700,7 @@ private function confirmHeight():void {
 	mainView.nameBox.maxChars = 16;
 	mainView.nameBox.restrict = null;
 	outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)
-	doYesNo(menuPerk, setHeight);
+	doYesNo(genericStyleCustomizeMenu, setHeight);
 }	
 
 //-----------------

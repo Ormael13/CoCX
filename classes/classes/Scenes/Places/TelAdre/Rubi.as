@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
@@ -529,6 +530,7 @@ public function buyRubiMilk():void {
 	}
 	player.gems -= 3;
  	rubiAffection(3);
+	player.refillHunger(7);
 	player.modThickness(100,1);
 	if(rubiAffection() >= 30 && flags[kFLAGS.RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
@@ -556,6 +558,7 @@ public function getTeaFromRubi():void {
 	}
 	player.gems -= 6;
 	rubiAffection(5);
+	player.refillHunger(7);
 	fatigue(-25);
 	if(rubiAffection() >= 30 && flags[kFLAGS.RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
@@ -3316,7 +3319,8 @@ private function pickAnItemToFeedRubi():void {
 	}
 	else {
 		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
-		if(silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
 		outputText("\n\n");
 	}
 

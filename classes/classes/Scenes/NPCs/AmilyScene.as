@@ -198,6 +198,7 @@ package classes.Scenes.NPCs
 
 		//[Exploring the Ruined Village]
 		public function exploreVillageRuin():void {
+			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			outputText("", true);
 			//50% chance of ghost-girl
 			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {

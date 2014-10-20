@@ -1,4 +1,4 @@
-//Dungeon 2: Deep Cave (Recently refactored, may be riddled with bugs.)
+//Dungeon 2: Deep Cave
 package classes.Scenes.Dungeons 
 {
 	import classes.*;

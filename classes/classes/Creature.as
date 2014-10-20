@@ -116,6 +116,14 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
+		/*Beardstyle
+		0- normal
+		1- goatee
+		2- clean-cut
+		3- mountain-man*/
+		public var beardStyle:Number = BEARD_NORMAL;
+		public var beardLength:Number = 0;
+				
 		/*Skintype
 		0 - skin
 		1 - furry

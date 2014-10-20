@@ -40,7 +40,7 @@ package classes
 																	   //form of pregnancy from taking hold. Does not respond to ovielixirs.
 		public static const PREGNANCY_WORM_STUFFED:int          =  33; //Used to fill the player's vagina when the worms take up residence. This prevents any other form of
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
-
+		public static const PREGNANCY_MINERVA:int				=  34;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_BEE:int              =   2;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_DRIDER:int           =   3;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
@@ -73,6 +73,7 @@ package classes
 		public static const INCUBATION_HARPY:int                = 168;
 		public static const INCUBATION_SHIELA:int               =  72;
 		public static const INCUBATION_SALAMANDER:int           = 336;
+		public static const INCUBATION_MINERVA:int           	= 216; 
 
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types

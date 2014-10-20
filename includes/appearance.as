@@ -294,6 +294,21 @@
 			else outputText("  Floppy antennae also grow from just behind your hairline, bouncing and swaying in the breeze.", false);
 		}
 	}
+	
+	//Beards!
+	if (player.beardLength > 0) {
+		outputText("  You have a " + beardDescript() + " ");
+		if (player.beardStyle != BEARD_GOATEE) {
+			outputText("covering your ");
+			if (rand(2) == 0) outputText("jaw");
+			else outputText("chin and cheeks")
+		}
+		else {
+			outputText("protruding from your chin");
+		}
+		outputText(".");
+	}
+	
 	//Tongue
 	if(player.tongueType == TONUGE_SNAKE) 
 		outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.", false);
@@ -1239,9 +1254,9 @@
 	if(player.gems == 0) 
 		outputText("\n\n<b>Your money-purse is devoid of any currency.", false);
 	if(player.gems > 1) 
-		outputText("\n\n<b>You have " + player.gems + " shining gems, collected in your travels.", false);
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gems, collected in your travels.", false);
 	if(player.gems == 1) 
-		outputText("\n\n<b>You have " + player.gems + " shining gem, collected in your travels.", false);
+		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.", false);
 	mainView.setOutputText( currentText );
 	menu();
 	doNext(1);

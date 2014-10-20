@@ -26,6 +26,7 @@ package classes.Scenes.Places
 		}
 		public function boatExplore():void
 		{
+			player.addStatusValue(StatusAffects.BoatDiscovery, 1, 1);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -45,6 +46,10 @@ package classes.Scenes.Places
 			//20% chance if not done with marae of meeting her.
 			if (rand(10) <= 2 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) {
 				marae.encounterMarae();
+				return;
+			}
+			if (rand(10) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) {
+				marae.talkToMaraeAboutMinervaPurification();
 				return;
 			}
 			//10% chance of corrupt Marae followups

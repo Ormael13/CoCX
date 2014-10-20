@@ -44,9 +44,14 @@
 		{
 			return kGAMECLASS.Num2Text(number);
 		}
-		protected  function num2Text2(number:int):String
+		protected function num2Text2(number:int):String
 		{
 			return kGAMECLASS.num2Text2(number);
+		}
+		
+		protected function addComma(number:uint):String
+		{
+			return kGAMECLASS.addComma(number);
 		}
 
 		protected function get camp():Camp {
@@ -57,7 +62,12 @@
 		{
 			return kGAMECLASS.goNext(time,defNext);
 		}
-
+		
+		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void
+		{
+			return kGAMECLASS.awardAchievement(title, achievement, display, nl);
+		}
+		
 		protected function isHalloween():Boolean
 		{
 			return kGAMECLASS.isHalloween();
@@ -465,6 +475,11 @@
 			return kGAMECLASS.hairDescript();
 		}
 		
+		protected function beardDescript():String
+		{
+			return kGAMECLASS.beardDescript();
+		}
+		
 		protected function hairOrFur():String
 		{
 			return kGAMECLASS.hairOrFur();
@@ -739,6 +754,16 @@
 		protected function set flags(val:DefaultDict):void
 		{
 			kGAMECLASS.flags = val;
+		}
+		
+		protected function get achievements():DefaultDict
+		{
+			return kGAMECLASS.achievements;
+		}
+		
+		protected function set achievements(val:DefaultDict):void
+		{
+			kGAMECLASS.achievements = val;
 		}
 		
 		protected function showStatDown(arg:String):void
