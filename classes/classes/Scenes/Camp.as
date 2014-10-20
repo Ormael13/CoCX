@@ -1129,7 +1129,7 @@ public function rest():void {
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-			HPChange(timeQ * 510, true);
+			HPChange(timeQ * 5, true);
 			dynStats("tou", -.1, "int", -.1);
 			//fatigue
 			fatigue(-2*timeQ);

@@ -275,6 +275,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
+	
 	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
 	{
 		suggest = femoitSexIntro;
@@ -282,6 +283,7 @@ public function benoitIntro():void {
 	}
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
+	
 	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) womb = tryToConvertToBassyWomb;
 
 	var fem:Function;
