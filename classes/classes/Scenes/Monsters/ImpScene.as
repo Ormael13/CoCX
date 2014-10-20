@@ -1811,7 +1811,10 @@ package classes.Scenes.Monsters
 				outputText("\n\nThe imp roughly forces his tongue into your [vagina] making you gasp in pleasure.  Your [vagina] clenches around the demonic tongue, squirting some of your girl juices around the wet flesh as it delves deeper into you.  You writhe and squirm trying to fight against the forced pleasure.");
 			}
 			
-			outputText("\n\nYou mewl pitifully as the imp removes his tongue. He smirks at your [vagina] and kneels between your legs, draping his " + eCockDescript(0) + " across your wet crotch.  You groan, and unintentionally thrust against the magnificent tool between your legs.  The imp chuckles evilly as you coat his " + eCockDescript(0) + " in your girl juice, but he doesn't wait long before he slowly presses his head down against your [vagina].  His head slowly spreads your lips; the pleasure is unmistakable, and forces a loud moan from your lips.");
+			outputText("\n\nYou mewl pitifully as the imp removes his tongue. He smirks at your [vagina] and kneels"); 
+			if (player.isBiped()) outputText(" between your legs");
+			else outputText(" before you");
+			outputText(", draping his " + eCockDescript(0) + " across your wet crotch.  You groan, and unintentionally thrust against the magnificent tool between your legs.  The imp chuckles evilly as you coat his " + eCockDescript(0) + " in your girl juice, but he doesn't wait long before he slowly presses his head down against your [vagina].  His head slowly spreads your lips; the pleasure is unmistakable, and forces a loud moan from your lips.");
 			
 			outputText("\n\nWith a soft pop, the " + eCockDescript(0) + " pops into your [vagina], and both of you moan in unison, the demon beginning to thrust wildly into you.  His hips pumps back and forth into you.  The loud slapping sound of flesh on flesh echoes around you, drowning out the grunts of the vicious demon above you.");
 			player.cuntChange(monster.cockArea(0),true,true,false);

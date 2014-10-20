@@ -1925,7 +1925,10 @@ private function followerIzmaTakesItInPooper():void {
 	player.buttChange(30,true,true,false);
 	outputText("\n\n", false);
 
-	outputText("With her hips securely pressed against yours, she leans over you to grab your wrists and hold them to the ground, her elbows hooked behind your knees to immobilize you with your ass in the air.  Her cock feels warm inside of you, and you could swear she's making it throb deliberately, just to feel you twitch in response.\n\n", false);
+	outputText("With her hips securely pressed against yours, she leans over you to grab your wrists and hold them to the ground, her elbows hooked");
+	if (player.isBiped()) outputText(" behind your knees to immobilize you");
+	else outputText(" around your [legs] to immobilize you");
+	outputText(" with your ass in the air.  Her cock feels warm inside of you, and you could swear she's making it throb deliberately, just to feel you twitch in response.\n\n", false);
 
 	outputText("She starts to screw you deliberately, pulling out just short of all the way before thrusting back in with practiced expertise.  You're lost in the pleasure of being used so roughly, and can't remotely keep track of how long she screws you.", false);
 	//[if player has penis: 
