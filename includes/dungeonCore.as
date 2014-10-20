@@ -1329,7 +1329,7 @@ public function incubusVictoryRapeSex():void {
 			outputText(vaginaDescript(0), false);
 		}
 		outputText(".  Striding forwards with hunger in your eyes, you give your left hand free access to your groin and slip your fingers between the moist folds of your " + vaginaDescript(0) + ".  As you undulate into the incubus' personal space, a swift thrust of your " + hipDescript() + " buries your fingers up to the knuckles and knocks the demon onto his well-muscled back.\n\n", false); 
-		outputText("He looks up at you with a practiced eye, adjusting his demon-tool's size to better fill your  " + vaginaDescript(0) + ".  ", false);
+		outputText("He looks up at you with a practiced eye, adjusting his demon-tool's size to better fill your " + vaginaDescript(0) + ".  ", false);
 		//(set cocksize = to 80% vaginalCapacity).
 		
 		outputText("Thankful for the gesture, you sink down onto him, letting the nubs of his crown stimulate your lips and the underside of your " + clitDescript() + ".  ", false);

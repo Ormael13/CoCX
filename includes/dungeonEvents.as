@@ -37,7 +37,7 @@ public function doDungeon(eventNo:Number):void {
 	//Drink Coffee
 	if(eventNo == 11011) {
 		spriteSelect(96);
-		outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.", true);
+		outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or is a victim of this place's dark master.", true);
 		dynStats("lus", 1);
 		HPChange(35, false);
 		doNext(1);
@@ -141,7 +141,7 @@ public function doDungeon(eventNo:Number):void {
 		}
 		outputText("At first there is only a gentle suction, you assume in order to keep them in place.  Unfinished, your captor places something large and hollow against your backdoor", false);
 		if(player.vaginas.length == 0) outputText(".", false);
-		else outputText(" and an ever larger dildo against your " + vaginaDescript(0) + ".  It seems to pulse and wiggle with a life of its own rubbing the bumps of it's lumpy head against your lips.", false);
+		else outputText(" and an ever larger dildo against your " + vaginaDescript(0) + ".  It seems to pulse and wiggle with a life of its own, rubbing the bumps of its lumpy head against your lips.", false);
 		outputText("  You swoon as you hear the solid click of a button being pushed, and all at once all devices attached to you leap to life.", false);
 		doNext(11019);
 		return;
@@ -149,7 +149,7 @@ public function doDungeon(eventNo:Number):void {
 	//Succubus voluntary bad end round 3. 
 	if(eventNo == 11019) {
 		spriteSelect(55);
-		outputText("The beautiful seductress that bound you giggles and says, \"<i>Oh it only gets better baby,</i>\" as she pushes another button.  You see a number of needles lower from the equipment above.  Two pause at chest height.  Faded parchment labels on the tubes mark them as \"Gro+\".  You spot the same markings on at least some the hoses gathering around your groin.  A few are marked with different labels, but you cannot make out the demonic script.  As one, the hoses rear back, then plunge forward, burying themselves into your supple flesh and injecting their drugged payload into your body.  It hurts at first, but the drugs fog your mind, blocking the pain with pulsing waves of desire.   You begin cumming as your body erupts with artificial pleasure.\n\n", true); 
+		outputText("The beautiful seductress that bound you giggles and says, \"<i>Oh it only gets better baby,</i>\" as she pushes another button.  You see a number of needles lower from the equipment above.  Two pause at chest height.  Faded parchment labels on the tubes mark them as \"Gro+\".  You spot the same markings on at least some of the hoses gathering around your groin.  A few are marked with different labels, but you cannot make out the demonic script.  As one, the hoses rear back, then plunge forward, burying themselves into your supple flesh and injecting their drugged payload into your body.  It hurts at first, but the drugs fog your mind, blocking the pain with pulsing waves of desire.   You begin cumming as your body erupts with artificial pleasure.\n\n", true); 
 		//Nipples
 		outputText("The suction pulls squirt after squirt of milk from your breasts as your " + allBreastsDescript() + " start to grow, swelling heavier as they enlarge to produce more milk.  You squeal with delight as your nipples turn black, tainted by corruptive chemicals that are slowly dripped into you.  ", false);
 		//Dick  
@@ -160,10 +160,10 @@ public function doDungeon(eventNo:Number):void {
 			//else
 			else outputText("the suction and drugs make it so easy to just keep cumming and cumming.  ", false);
 			//either or:
-			outputText("Dimly, you feel a needle lodged in your taint, pumping your prostate full of something.  Your " + cockDescript(0) + " begins growing mid-orgasm, the skin turning a deep purple even as small nodule-like bumps form all over it, rapidly becoming a bloated parody of it's demonic counterparts.  ", false);
+			outputText("Dimly, you feel a needle lodged in your taint, pumping your prostate full of something.  Your " + cockDescript(0) + " begins growing mid-orgasm, the skin turning a deep purple even as small nodule-like bumps form all over it, rapidly becoming a bloated parody of its demonic counterparts.  ", false);
 		}
 		//Puss Orgasmz
-		if(player.vaginas.length > 0) outputText("Clenching tightly, your " + vaginaDescript(0) + " squeezes tightly on it's intruder as it's repeatedly violated by the machines.  ", false);
+		if(player.vaginas.length > 0) outputText("Clenching tightly, your " + vaginaDescript(0) + " squeezes tightly on its intruder as its repeatedly violated by the machines.  ", false);
 		//End
 		outputText("\n\nThe world around you disappears, leaving you alone with the drug-enhanced sensations assaulting your body.  In truth, you don't want it to end.  You find yourself wishing it would never end, and no doubt the equipment you're hooked in to will see to that.\n\n", false);
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) {
@@ -247,11 +247,11 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11032) {
 		spriteSelect(30);
 		if(player.hasKeyItem("Hentai Comic") >= 0) {
-			outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"", true);
+			outputText("The incubus speaks to you with a calm, deep voice, \"<i>And so the insect, heedless of its path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"", true);
 			simpleChoices("Fight",11031,"Trade",11034,"Submit",11033,"",0,"",0);
 		}
 		else {
-			outputText("The incubus speaks to you with calm, deep voice, \"<i>And so the insect, unaware of its path, stumbles directly into the spider's web.  Tiny insect, you have little to offer me, but everything to offer our facility.  Why don't you come along quietly?</i>\"", true);
+			outputText("The incubus speaks to you with a calm, deep voice, \"<i>And so the insect, unaware of its path, stumbles directly into the spider's web.  Tiny insect, you have little to offer me, but everything to offer our facility.  Why don't you come along quietly?</i>\"", true);
 			simpleChoices("Fight",11031,"Submit",11033,"",0,"",0,"",0);
 		}
 		return;
@@ -273,7 +273,7 @@ public function doDungeon(eventNo:Number):void {
 	//Trade Hentai Comic for Safety
 	if(eventNo == 11034) {
 		spriteSelect(30);
-		outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mits he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.", true);
+		outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mitts he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.", true);
 		player.removeKeyItem("Hentai Comic");
 		player.createStatusAffect(StatusAffects.IncubusBribed,0,0,0,0);
 		doNext(1);
@@ -283,11 +283,11 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11035) {
 		//Blind dodge change
 		if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
-			outputText(monster.capitalA + monster.short + " suddenly grows its dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!!", false);
+			outputText(monster.capitalA + monster.short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!", false);
 			combatRoundOver();
 			return;
 		}
-		outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + buttDescript() + " and pull your  " + player.legs() + " out from under you.", false);
+		outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + buttDescript() + " and pull your " + player.legs() + " out from under you.", false);
 		if((player.spe-30) > rand(60)) {
 			outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.", false);
 		}
@@ -319,7 +319,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11036) {
 		//Blind dodge change
 		if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
-			outputText(monster.capitalA + monster.short + " pumps his thrust lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.", false);
+			outputText(monster.capitalA + monster.short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.", false);
 			combatRoundOver();
 			return;
 		}
@@ -428,10 +428,10 @@ public function doDungeon(eventNo:Number):void {
 				if(player.cocks.length > 0) outputText("and " + multiCockDescript(), false);
 				outputText(" become rock hard, leaking fluids constantly.  ", false);
 				//MALE
-				if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all participants in this infernal orgy.  ", false);
+				if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all the participants in this infernal orgy.  ", false);
 				//FEMALE
 				if(player.vaginas.length > 0 && player.cocks.length == 0) {
-					outputText("As you enter the sex-crazed crowd, you notice several \"girls\" with demonic cocks bloated by the use of drugs, getting drawn to you by the scent of your dripping wet " + vaginaDescript(0) + ". Sitting on the floor, you spread your legs wide, facing the nearest one with an inviting lewd moan, while you hungrily grab another cum-covered cock, that just filled up an obscenely wide gaping vagina, to suck it.  You are soon penetrated and fucked hard and deep, one huge infernal dick after another, as they all cum into you in turn. ", false);
+					outputText("As you enter the sex-crazed crowd, you notice several \"girls\" with demonic cocks bloated by the use of drugs, getting drawn to you by the scent of your dripping wet " + vaginaDescript(0) + ". Sitting on the floor, you spread your legs wide, facing the nearest one with an inviting lewd moan, while you hungrily grab another cum-covered cock, (one that just finished filling up an obscenely wide gaping vagina), to suck it.  You are soon penetrated and fucked hard and deep, one huge infernal dick after another, as they all cum into you in turn. ", false);
 					player.cuntChange(150, true);
 				}
 				//HERM
@@ -445,7 +445,7 @@ public function doDungeon(eventNo:Number):void {
 			}
 			//Third time
 			else {
-				outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them increase the dosage again.   Desire burns through your veins as the cocktail surges through them", false);
+				outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them to increase the dosage again.   Desire burns through your veins as the cocktail surges through them", false);
 				if(player.cocks.length > 0) {
 					outputText(", filling your " + multiCockDescriptLight(), false);
 					outputText(" with sensation", false);
@@ -465,7 +465,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("In time you wake, your body aching both from the exertion and a desire for more.  On one hand you had a mission here, but why fight and struggle with danger and loneliness when you could be high on sex and cumming near-constantly?  You cuddle up to an exhausted girl and decide to wait for the drug-mistresses to give you another turn in the pile.  One of them turns, as if noticing your train of thought, and wheels over a breast-pump.  She hooks it up to your still-leaking nipples and you ", false);
 				if(player.biggestLactation() >= 3) outputText("moo", false);
 				else outputText("moo", false);
-				outputText(" with happiness, promising another dose to you if you are a good cow for her.", false);
+				outputText(" with happiness.  She grins, promising another dose to you if you are a good cow for her.", false);
 				doNext(5035);
 				return;
 			}
@@ -492,7 +492,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11043) {
 		outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.", false);
 		if(monster.findStatusAffect(StatusAffects.LustAura) >= 0) {
-			outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms it's way into you.  The intense aura quickly subsides, but it's already done its job.", false);
+			outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.", false);
 			dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
 		}
 		else {
@@ -565,18 +565,18 @@ public function doDungeon(eventNo:Number):void {
 			player.breastRows[0].breastRating += 3;
 			if(player.nippleLength < .75) {
 				player.nippleLength += .5;
-				outputText("Your " + nippleDescript(0) + "s grow hard and sensitive, becoming much more noticable inside your " + player.armorName + ".  It appears your nipples are have grown larger to match.", false);
+				outputText("Your " + nippleDescript(0) + "s grow hard and sensitive, becoming much more noticeable inside your " + player.armorName + ".  It appears your nipples have grown larger to match.", false);
 			}
 		}
 		//Multiple Rows...
 		else {
 			//Top row + 3, all other rows brought up to par.
-			outputText("Your top " + breastDescript(0) + " tingle pleasantly as the magic takes effect.  You watch with fascination as they begin to swell up, like sponges exposed to water.  The top of your " + player.armorName + " is pulled tight by change, until you're chest seems ready to burst free.  <b>You've gained 4 cup sizes!</b>  ", false);
+			outputText("Your top " + breastDescript(0) + " tingle pleasantly as the magic takes effect.  You watch with fascination as they begin to swell up, like sponges exposed to water.  The top of your " + player.armorName + " is pulled tight by change, until your chest seems ready to burst free.  <b>You've gained 4 cup sizes!</b>  ", false);
 			player.breastRows[0].breastRating += 4;
 			outputText("The next row of " + breastDescript(1) + " jiggle and tingle with even more pleasure than the first.  They pulsate for a few seconds, shrinking and growing rapidly until they settle at a size just below your top " + breastDescript(0) + ".  ", false);
 			player.breastRows[1].breastRating = player.breastRows[0].breastRating-1;
 			if(player.breastRows.length >= 3) {
-				outputText("Your third group of " + breastDescript(2) + " seem to follow their sister's example, and settle tingle briefly before settling at a size just below the breasts above.  ", false);
+				outputText("Your third group of " + breastDescript(2) + " seem to follow their sister's example, tingling briefly before settling at a size just below the breasts above.  ", false);
 				player.breastRows[2].breastRating = player.breastRows[1].breastRating-1;
 			}
 			if(player.breastRows.length >= 4) {
@@ -722,7 +722,7 @@ public function doDungeon(eventNo:Number):void {
 		}
 		//Normal chest, normal nips
 		if(player.skinType != SKIN_TYPE_PLAIN) {
-			outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
+			outputText("The skin on your body itches intensely as it sheds its " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
 			player.skinDesc = "skin";
 			player.skinType = SKIN_TYPE_PLAIN;
 			temp++;

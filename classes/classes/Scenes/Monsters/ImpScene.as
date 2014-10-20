@@ -793,7 +793,7 @@ package classes.Scenes.Monsters
 					//(If the player has a SINGLE cock)
 					if(player.cockTotal() == 1) outputText("An imp ducks under your body and grabs your " + cockDescript(0) + ". His nimble tongue flicks over your cock-head while he pricks the shaft with his tiny claws.  ", false);
 					//(If the player has a MULTI cock)
-					if(player.cockTotal() > 1) outputText("Two imps duck under your body and seize your  " + multiCockDescriptLight() + ", licking the tips with their inhumanly flexible tongues while they stroke the shafts.  ", false);
+					if(player.cockTotal() > 1) outputText("Two imps duck under your body and seize your " + multiCockDescriptLight() + ", licking the tips with their inhumanly flexible tongues while they stroke the shafts.  ", false);
 					//(Low Corruption)
 					if(player.cor < 50) outputText("You fight to free your hind legs and buck the imps off your back, while sweaty hands slide over your crotch. You whine through clenched teeth as sharp claws jab at your sensitive flesh.\n\n", false);
 					//(High Corruption)
@@ -887,7 +887,7 @@ package classes.Scenes.Monsters
 					else outputText(assholeDescript(), false);
 					outputText(" spasms on the steaming pole that impales it. Another imp shoves his cock in your mouth as you scream, throat convulsing around his cock-head.", false);
 					//(If the player has a cock)
-					if(player.cockTotal() > 0) outputText("  Your  " + multiCockDescriptLight() + " shoots cum across the ground and into the waiting mouths of the imps licking your crotch.", false);
+					if(player.cockTotal() > 0) outputText("  Your " + multiCockDescriptLight() + " shoots cum across the ground and into the waiting mouths of the imps licking your crotch.", false);
 					outputText("\n\n", false);
 					
 					outputText("Another imp-cock spasms in your throat as its owner rams deep into you. He floods your already swollen stomach with inhuman amounts of cum. Again you feel yourself about to black out as the demon pumps jism into you. He pulls out and again you orgasm as you wheeze for air. Another imp forces his cock down your throat as you moan and gasp. Your body shakes in pleasure on the big imp's " + Appearance.cockNoun(CockTypesEnum.DOG) + ".  Tightening his grip on your " + hipDescript() + " the master imp howls and slams his shaft into your ", false);
@@ -1179,7 +1179,7 @@ package classes.Scenes.Monsters
 					else outputText(assholeDescript(), false);
 					outputText(" spasms on the steaming pole that impales it. Another imp shoves his cock in your mouth as you scream, throat convulsing around his cock-head.", false);
 					//(If the player has a cock)
-					if(player.cockTotal() > 0) outputText("  Your  " + multiCockDescriptLight() + " shoots cum across your belly and into the waiting mouths of the imps licking your crotch.", false);
+					if(player.cockTotal() > 0) outputText("  Your " + multiCockDescriptLight() + " shoots cum across your belly and into the waiting mouths of the imps licking your crotch.", false);
 					outputText("\n\n", false);
 					//(If the character has breasts)
 					if(player.biggestTitSize() > 0) {
