@@ -593,7 +593,7 @@ private function mindGargoyleRitual():void {
 	outputText("\n\n\"<i>Blessed is " + player.mf("he","she") + " who seeks purity,</i>\" she says, closing her eyes and bowing her head, \"<i>Blessed is " + player.mf("he","she") + " who seeks wisdom; and blessed is " + player.mf("he","she") + " who lusts after holiness and virtue before pleasures of the flesh.</i>\"");
 	outputText("  " + flags[kFLAGS.GAR_NAME] + " brings the invocation to a quiet close, and rests the bowl back upon the altar. \"<i>Drink of this, Master,</i>\" she says, offering you the bowl, \"<i>and be healed of mind.</i>\"");
 	
-	outputText("\n\nYou do so, taking a long drought of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
+	outputText("\n\nYou do so, taking a long draught of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
 	dynStats("lus", -10, "cor", -.5);
 	//player.takeDamage(Math.round(player.maxHP()/2));
 	fatigue(50);

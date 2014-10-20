@@ -1335,7 +1335,7 @@ package classes.Scenes.NPCs
 			outputText("The anemone obediently climbs out of her barrel, ");
 			//[(KidXP < 33)]
 			if (kidAXP() < 33) {
-				outputText("holding her " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " protectively across her chest.");
+				outputText("holding " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " protectively across her chest.");
 			}
 			else outputText("taking up an attentive stance with " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " in her hands.");
 

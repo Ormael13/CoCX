@@ -1595,7 +1595,7 @@ public function acceptOfferOfHelp():void
 	clearOutput();
 	jojoSprite();
 
-	outputText("“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,</i>” he says before the two of you get to it.\n\n");
+	outputText("<i>“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,”</i> he says before the two of you get to it.\n\n");
 
 	this.doClear = false;
 	eventParser(2151);
