@@ -62,6 +62,10 @@ public function edrynBarTalk():void {
 	//If no cocks fit, set to primary
 	if(x < 0) x = 0;
 
+	if (telAdre.katherineEmployment.canTalkToEdryn()) { //Katherine training discussion
+		telAdre.katherineEmployment.talkToEdryn();
+		return;
+	}
 	//Talk about latest birth
 	if(flags[kFLAGS.EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
 		var kidGender:Number = rand(2);
@@ -354,7 +358,7 @@ private function edrynOffer():void {
 	}
 }
 
-private function edrynSexSelecter():void {
+public function edrynSexSelecter():void {
 	spriteSelect(14);
 	var cost:Number = 0;
 	switch(player.statusAffectv1(StatusAffects.Edryn)) {
@@ -514,6 +518,20 @@ Scene proc's the first time the PC visits the Wet Bitch after all requirements a
 
 //Introduction -- Hel x Edryn -- Wet Bitch Entrance
 //(PC goes to the Wet Bitch during Edryn's hours)
+
+private var edrynHeliaLastThreesomeCheck:int;
+
+public function edrynHeliaThreesomePossible():Boolean {
+	if (model.time.totalTime == edrynHeliaLastThreesomeCheck || model.time.totalTime == -edrynHeliaLastThreesomeCheck) //Only choose action once per visit to the bar
+		return edrynHeliaLastThreesomeCheck > 0;
+	edrynHeliaLastThreesomeCheck = model.time.totalTime;
+	if (player.gender == 0 || model.time.hours < 14 || model.time.hours >= 20 || rand(2) == 0 || (flags[kFLAGS.HEL_FUCKBUDDY] == 0 && !kGAMECLASS.helFollower.followerHel())
+	|| (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0)) {
+		edrynHeliaLastThreesomeCheck = -edrynHeliaLastThreesomeCheck; //Make the saved time negative to indicate Helia is not at the bar right now
+		return false;
+	}
+	return true;
+}
 
 public function helAppearance():void {
 	outputText("\n\nTo your surprise, you see Hel the salamander sitting in a corner table, a pair of foxy fox-morph girls sitting on her lap.  When she sees you enter, the pretty reptile lifts her tankard and shouts, \"<i>Hey! " + player.short + "! Over here!</i>\" over the loud noises of the bar.", false);
@@ -789,13 +807,13 @@ private function pregdrynOffer(cs:Boolean = true):void {
 		outputText("\n\nHow do you want to handle this?  ");
 		menu();
 		outputText("You could have some great, pregnant taur sex.");
-		addButton(0,"Preg. Fuck",eventParser,2495);
+		addButton(0,"Preg. Fuck", fuckPregEdryn);
 		if(player.biggestCockArea() >= 300) {
 			outputText("  Since at least part of you isn't acceptable to her, you could eat her out until you get off from her pheromones alone.");
-			addButton(1,"NoFitEating",jizzFromEatingPregdrynOut);
+			addButton(1,"NoFitEating", jizzFromEatingPregdrynOut);
 		}
 		outputText("  Or, you could go down on her until you're in a frenzy, then fuck her wildly.");
-		addButton(2,"Eat,Rut,Fuck",eatEdrynPussyLikeABawss);
+		addButton(2,"Eat,Rut,Fuck", eatEdrynPussyLikeABawss);
 		return;
 	}
 	//(PC TOO BIG)
@@ -1072,7 +1090,7 @@ private function edrynFucktroduction():void {
 }
 
 //Eat Her Out Till Shit Goes Crazy
-private function eatEdrynPussyLikeABawss():void {
+public function eatEdrynPussyLikeABawss():void {
 	clearOutput();
 	outputText(images.showImage("edryn-eat-her-out"));
 	var x:int = player.cockThatFits(300);

@@ -323,8 +323,8 @@ public function creditsScreen():void {
 	outputText("<li> Adjatha (Scylla the Cum Addicted Nun, Vala, Goo-girls, Bimbo Sophie Eggs, Ceraph Urta Roleplay, Gnoll with Balls Scene, Kiha futa scene, Goblin Web Fuck Scene, and 69 Bunny Scene)</li>");
 	outputText("<li> ComfyCushion (Muff Wrangler)</li>");
 	outputText("<li> B (Brooke)</li>");
-	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
-	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment, Phouka)</li>");
+	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Part of Katherine Employment Expansion, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
+	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment, Part of Katherine Employment Expansion, Phouka)</li>");
 	outputText("<li> Schpadoinkle (Victoria Sex)</li>");
 	outputText("<li> Donto (Ro'gar the Orc, Polar Pete)</li>");
 	outputText("<li> Angel (Additional Amily Scenes)</li>");

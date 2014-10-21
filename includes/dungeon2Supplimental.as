@@ -1339,26 +1339,22 @@ public function wakeMeUpBeforeValaGoGosPtII():void {
 	doNext(1);
 }
 
+//Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
+public function isValaAtBar():Boolean {	return (flags[kFLAGS.FREED_VALA] != 0 && model.time.hours >= 12 && model.time.hours <= 21); }
+
 //Purified Fairy
 public function purifiedFaerieBitchBar():Boolean {
-	//Is Vala freed?  If not boot out
-	if(flags[kFLAGS.FREED_VALA] == 0) return false;
-	//(Entering the Wet Bitch for the first time after Healing her)
-	//[Entering the bar description]
-	//(Works from 12:00 to 21:00)
-	if(model.time.hours >= 12 && model.time.hours <= 21) {
-		//[Vala] (After sex encounter for the day)
-		if(flags[kFLAGS.FUCKED_VALA_AT_BAR_TODAY] > 0) {
-			outputText("\n\nThe fluttering fairy drops a complimentary drink off at your table with a sly wink. You can't help but notice that she's leaving a clear trail of girl cum as she flies past, the cummy trail leaking from between her legs. Lingering testimony of the break you took with her, no doubt. She seems a bit busy right now, but maybe if you checked back tomorrow, she'd be able to take the time to thank you again, tomorrow.", false);
-			return false;
-		}
-		outputText("\n\nA short figure flutters around the bar, a tray of drinks suspended awkwardly by both arms, carefully moving from table to table, dispensing liquor and taking orders for the bartender. The barmaid appears to be Vala, the fairy you rescued from Zetaz's dungeon. It seems like she's found a home in Tel'Adre.", false);
-		if(player.gender > 0) {
-			outputText("  You could speak with her if you wished to.", false);
-			return true;
-		}
-		else outputText("  Speaking to her might be better after you get a gender...", false);
+	if (!isValaAtBar()) return false;
+	if (flags[kFLAGS.FUCKED_VALA_AT_BAR_TODAY] > 0) {
+		outputText("\n\nThe fluttering fairy drops a complimentary drink off at your table with a sly wink.  You can't help but notice that she's leaving a clear trail of girl cum as she flies past, the cummy trail leaking from between her legs.  Lingering testimony of the break you took with her, no doubt.  She seems a bit busy right now, but maybe if you checked back tomorrow, she'd be able to take the time to thank you again, tomorrow.");
+		return false;
 	}
+	outputText("\n\nA short figure flutters around the bar, a tray of drinks suspended awkwardly by both arms, carefully moving from table to table, dispensing liquor and taking orders for the bartender.  The barmaid appears to be Vala, the fairy you rescued from Zetaz's dungeon.  It seems like she's found a home in Tel'Adre.");
+	if (player.gender > 0) {
+		outputText("  You could speak with her if you wished to.");
+		return true;
+	}
+	outputText("  Speaking to her might be better after you get a gender...");
 	return false;
 }
 
@@ -1486,6 +1482,7 @@ public function cleansedValaFuckHerBrainsOut():void {
 	}
 	doNext(cleansedValaFuckHerBrainsOutPtII);
 	player.orgasm();
+	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 }
 
 //Part 2
@@ -1568,6 +1565,7 @@ public function faerieOrgyFuck():void {
 
 	outputText("You thank Vala for introducing you, but you've really got to be going, you claim. Demons to defeat, maidens to rescue, all that. The large fairy chuckles and gives you a squeeze. \"<i>You're so cute when you're flustered. Don't worry, we're not going to all jump you at once- you'd probably end up like I did! No, I asked my sisters here to help me with a little forest magic. Don't you want to see how fairies masturbate?</i>\" You're a little taken aback by the question, but you nod all the same. \"<i>All right girls, the petals please.</i>\" The cloud of fairies in front of you disperses, each winged vixen scattering to different corners of the room to retrieve hidden flower petals. Each blossom, you note, matches the hair color of the fairy holding it, creating a dizzying array of  hues as they form circles around the two of you. Vala guides you to the bed and gently removes your " + player.armorName + " before instructing you to lie down.\n\n", false);
 	flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 6;
+	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 	//[Herm]
 	if(player.gender == 3) {
 		outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
@@ -2323,6 +2321,7 @@ public function valaCumBath2():void {
 	player.cumMultiplier += 2;
 	if(player.balls > 0) player.ballSize += .3;
 	flags[kFLAGS.VALA_CUMBATH_TIMES]++;
+	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 	player.orgasm();
 	dynStats("lib", -1.5);
 	doNext(13);
@@ -2332,6 +2331,7 @@ public function valaCumBath2():void {
 public function valaBigYou():void {
 	clearOutput();
 	flags[kFLAGS.TIMES_VALA_CONSENSUAL_BIG]++;
+	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 	//{FIRST TIME}
 	if(flags[kFLAGS.TIMES_VALA_CONSENSUAL_BIG] == 1) {
 		outputText("Tilting your head, eyes glowing with ethereal power, you answer, \"<i>I want you... big.</i>\"");
@@ -2645,6 +2645,7 @@ public function kinathisValaStuff():void {
 	
 	outputText("\n\nThe sweet relief of your orgasm washes over you, the blissful afterglow turning your arms and [legs] to jelly as you settle over your small panting lover.  Vala’s body is sweaty and hot from the passionate sex.  Her arms wrap around you, hugging her body against yours as she whispers to you and snuggles against you.  \"<i>Ohhh... that was... you are amazing...</i>\" she says blissfully as she nuzzles her face against your body, her cunt clenching hard around you as she cuddles up against you.  As you lay there holding her, you can hear her whisper softly to herself, muttering sweet nothings into the air to you.  Her fingers run over your [chest], drawing little shapes and hearts over your skin as she hums.  Smiling to yourself, you stroke her head and hold onto her, cuddling up with your tender fairy.  Leaning in, you plant a tender kiss in her hair before you settle in for the night with the oversized fairy.");
 	player.orgasm();
+	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 	dynStats("lib", -1, "sen", -2);
 	menu();
 	addButton(0,"Next",valaPartIIWaifuLove)

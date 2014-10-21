@@ -1370,7 +1370,6 @@ public function displayStats(e:MouseEvent = null):void
 	
 	// Begin Combat Stats
 	var combatStats:String = "";
-	
 	if (player.hasKeyItem("Bow") >= 0)
 		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + "\n";
 		
@@ -1625,6 +1624,10 @@ public function displayStats(e:MouseEvent = null):void
 			interpersonStats += "100%\n";
 	}
 	
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
+		interpersonStats += "<b>Katherine Submissiveness:</b> " + telAdre.katherine.submissiveness() + "\n";
+	}
+
 	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";

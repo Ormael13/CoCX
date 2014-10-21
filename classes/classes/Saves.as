@@ -2,6 +2,7 @@
 {
 
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Places.TelAdre.Katherine;
 
 	CONFIG::AIR 
 	{
@@ -503,6 +504,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 	var backupAborted:Boolean = false;
 	
+	CoC.saveAllAwareClasses(); //Informs each saveAwareClass that it must save its values in the flags array
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
@@ -1783,6 +1785,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
 		
+		CoC.loadAllAwareClasses(); //Informs each saveAwareClass that it must load its values from the flags array
 		doNext(1);
 	}
 }
@@ -1925,6 +1928,14 @@ public function unFuckSave():void
 	if (player.buttPregnancyType == 3) player.buttKnockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, player.buttPregnancyIncubation);
 	if (player.buttPregnancyType == 4) player.buttKnockUpForce(PregnancyStore.PREGNANCY_SANDTRAP_FERTILE, player.buttPregnancyIncubation);
 	if (player.buttPregnancyType == 5) player.buttKnockUpForce(PregnancyStore.PREGNANCY_SANDTRAP, player.buttPregnancyIncubation);	
+
+	//If dick length zero then player has never met Kath, no need to set flags. If her breast size is zero then set values for flags introduced with the employment expansion
+	if (flags[kFLAGS.KATHERINE_DICK_LENGTH] != 0 && flags[kFLAGS.KATHERINE_BREAST_SIZE] == 0) { 
+		flags[kFLAGS.KATHERINE_BREAST_SIZE]		= BREAST_CUP_B;
+		flags[kFLAGS.KATHERINE_BALL_SIZE]		= 1;
+		flags[kFLAGS.KATHERINE_HAIR_COLOR]		= "neon pink";
+		flags[kFLAGS.KATHERINE_HOURS_SINCE_CUM] = 200; //Give her maxed out cum for that first time
+	}
 }
 
 //This is just the save/load code - from it you can get 

@@ -106,6 +106,18 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		//Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
+		//	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
+		private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
+	
+		//Called by the saveGameObject function in Saves
+		public static function saveAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateBeforeSave(); }
+
+		//Called by the loadGameObject function in Saves
+		public static function loadAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateAfterLoad(); }
+
+		public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void { _saveAwareClassList.push(newEntry); }
+	
 		//Any classes that need to be aware of the passage of time can add themselves to this array using timeAwareAdd.
 		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
 		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
