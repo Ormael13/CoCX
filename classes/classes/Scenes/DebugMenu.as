@@ -30,7 +30,8 @@ package classes.Scenes
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu);
 				addButton(1, "Change Stats", statChangeMenu);
-				addButton(2, "HACK STUFFZ", styleHackMenu);
+				//addButton(2, "HACK STUFFZ", styleHackMenu);
+				//addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(9, "Exit", eventParser, 1);
 			}
 		}
@@ -480,6 +481,15 @@ package classes.Scenes
 			outputText("TEST STUFFZ", true);
 			addButton(0, "HackSideBar", mainHack.refreshStats);
 			addButton(1, "ASPLODE", styleHackMenu);
+			addButton(9, "Back", accessDebugMenu);
+		}
+		
+		private function eventTriggerMenu():void {
+			menu();
+			addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
+			addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
+			addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
+			
 			addButton(9, "Back", accessDebugMenu);
 		}
 	}
