@@ -138,7 +138,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			clearOutput();
 
-			outputText("You decide discretion is the better part of valour and choose not to barge into the strange womans cave again, opting to slip away before she notices you hanging around outside her home.");
+			outputText("You decide discretion is the better part of valour and choose not to barge into the strange woman's cave again, opting to slip away before she notices you hanging around outside her home.");
 			doNext(13);
 		}
 

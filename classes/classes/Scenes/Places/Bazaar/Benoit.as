@@ -64,36 +64,43 @@ private function benoitKnocksUpPCCheck():void {
 */
 public function benoitPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] > 0) return true;
 	return false;
 }
 
 public function benoitRegularPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 1 && flags[kFLAGS.FEMOIT_EGGS] <= 4) return true;
 	return false;
 }
 
 public function benoitHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 5 && flags[kFLAGS.FEMOIT_EGGS] <= 8) return true;
 	return false;
 }
 
 public function benoitVeryHeavyPreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 9 && flags[kFLAGS.FEMOIT_EGGS] <= 12) return true;
 	return false;
 }
 
 public function benoitExtremePreggers():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	if (flags[kFLAGS.FEMOIT_EGGS] >= 13) return true;
 	return false;
 }
 
 public function benoitInClutch():Boolean
 {
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
+	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
 	var currDay:int = this.getGame().model.time.days;
@@ -135,7 +142,9 @@ public function benoitKnockUp():Boolean
 	if (alpha) eggMod += 1;
 
 	var numEggs:int = cumQ / 200;
+	var minEggs:int = 1 + eggMod;
 	if (numEggs > 12) numEggs = 12;
+	if (numEggs < minEggs) numEggs = minEggs;
 
 	numEggs += eggMod;
 
@@ -178,15 +187,15 @@ public function benoitIntro():void {
 	{
 		femoitNextDayEvent();
 	}
-	else if (benoitInClutch() && flags[kFLAGS.FEMOIT_READY_FOR_EGGS] == 0)
+	else if (benoitInClutch() && flags[kFLAGS.FEMOIT_READY_FOR_EGGS] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2))
 	{
 		flags[kFLAGS.FEMOIT_READY_FOR_EGGS]++;
 		
 		outputText("As you enter the stall Benoite looks up; though her blind, milky eyes make her harder to read, she looks excited. \"<i>Ah! [name]; it iz good you are here... I had hope zat you would come for a vizit today.</i>\"");
 
-		outputText("She stands up somewhat nervously, and you realise that her stomach is visibly bulging, her typical outfit straining slightly to cover the bulk of her midriff. She pats it with a timid sense of pride. \"<i>I am wiz clutch. My womb, it haz created eggz, and zey are ready to be fertilised. I... I could be a mother now. I-if I could find myzelf a willing partner...</i>\" She trembles, despite herself; it's clear that the idea of going from lone male to expectant mother in the space of a few days is a bit much for the basilisk.");
+		outputText("\n\nShe stands up somewhat nervously, and you realise that her stomach is visibly bulging, her typical outfit straining slightly to cover the bulk of her midriff. She pats it with a timid sense of pride. \"<i>I am wiz clutch. My womb, it haz created eggz, and zey are ready to be fertilised. I... I could be a mother now. I-if I could find myzelf a willing partner...</i>\" She trembles, despite herself; it's clear that the idea of going from lone male to expectant mother in the space of a few days is a bit much for the basilisk.");
 
-		outputText("You ask if she's sure she's ready for this. Benoite stiffens her spine and draws herself up proudly. \"<i>I am ready. If it is your nerve zat is weak, well... I will be with eggs for anozer few days. After that, I won't be wizzem again for zome weeks. I can wait until you are ready, if you need.</i>\"");
+		outputText("\n\nYou ask if she's sure she's ready for this. Benoite stiffens her spine and draws herself up proudly. \"<i>I am ready. If it is your nerve zat is weak, well... I will be with eggs for anozer few days. After that, I won't be wizzem again for zome weeks. I can wait until you are ready, if you need.</i>\"");
 	}
 	else if (benoitPreggers() && flags[kFLAGS.FEMOIT_INCUBATION] < 0)
 	{
@@ -210,7 +219,7 @@ public function benoitIntro():void {
 			return;
 		}
 	}
-	else if (!benoitInClutch() && !benoitPreggers() && (this.getGame().model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30))
+	else if (!benoitInClutch() && !benoitPreggers() && (this.getGame().model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0))
 	{
 		if (flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED] == 0)
 		{
@@ -266,18 +275,27 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0 && player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
+	
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
 	{
 		suggest = femoitSexIntro;
 		suggestText = "Sex";
 	}
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS == 0]) womb = tryToConvertToBassyWomb;
+	
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) womb = tryToConvertToBassyWomb;
 
 	var fem:Function;
 
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) fem = benoitFeminise;
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
+	{
+		// Only available if the player hasn't since fucked Benoit after unlocking the option.
+		if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0)
+		{
+			fem = benoitFeminise;
+		}
+	}
 
 	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,suggestText,suggest,"Basil. Womb",womb,"Feminise",fem,"",0,"",0,"",0,"Leave",2855);
 }
@@ -507,10 +525,13 @@ private function talkToBenoit():void {
 
 		outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
 
-		if (!player.hasCock()) outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
+		if (!player.hasCock())
+		{
+			outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
+		}
 		else
 		{
-			outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>” Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. “I ‘ave a purpose now.”\"<i>");
+			outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>” Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. “<i>I ‘ave a purpose now.</i>");
 
 			menu();
 			doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
@@ -1223,9 +1244,16 @@ public function benoitFeminise():void
 	if (!player.hasItem(consumables.P_S_MLK, 2) || !player.hasItem(consumables.L_PNKEG) || !player.hasItem(consumables.OVIELIX) || !player.hasItem(consumables.REPTLUM))
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
+		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
+		this.getGame().flushOutputTextToGUI();
 	}
 	else
 	{
+		player.destroyItems(consumables.P_S_MLK, 2);
+		player.destroyItems(consumables.L_PNKEG, 1);
+		player.destroyItems(consumables.OVIELIX, 1);
+		player.destroyItems(consumables.REPTLUM, 1);
+		
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of Benoit, telling him that you've got what he needs.  Pierre barks excitedly at the noise.");
 
 		outputText("\n\n\"<i>I - what?</i>\" the basilisk says, bewildered.  \"<i>But... [name], zat was just fantasy!  I was not expecting you to...</i>\"  He lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You crack the egg against the bowl and then beat it into the milk; the goop takes on a pink cake-mix texture until you pour in the ovi-elixir, which thins it as well as filling the close market stall with a rather bad, sulfuric smell.  Carefully you drip in the reptilum whilst continuing to stir; eventually the liquid in front of you takes on a livid lime color.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  He slowly clasps his fingers around it, staring blindly into the concoction.");
@@ -1236,9 +1264,9 @@ public function benoitFeminise():void
 
 		outputText("\n\n\"<i>Well...not ze worst sing I have ever tasted,</i>\" he says. \"<i>It could 'ave used more alcoh-hol zo.  Uh.  Uhhhhhhh...</i>\"  He clenches the desk as a tremendous gurgling sound emanates from his gut.  Pierre whines, and unconsciously both you and the dog back away from the basilisk as he begins to twitch and spasm.  There is a grinding noise as his bones begin to shift; although he is holding onto the counter as hard as he can, he cannot stop knocking bottles and trinkets onto the floor as his flesh begins to move.  His torso sucks in, a great deal of mass moving downwards; the sound of long johns giving at the seams trades with an unpleasant cracking and popping sound as his shoulders shift inwards.  There is a sprouting sound as iridescent red feathers emerge upon his crown; below his clenched teeth and eyes, his jaw line softens and moves upwards.  The basilisk's now slighter front bulges faintly, and with that the transformation stops, or at least the transformation you can readily observe.  Judging by the way his gut continues to groan and the way he continues to clutch the wooden surface hard enough to leave yet more claw marks, something fairly significant is happening in the ruins of Benoit's long johns.");
 
-		outputText("\n\n\"<i>Zut.  Fucking.  Alors,</i>\" the basilisk manages at last.  The creature's voice has gone up by several octaves; although it is still deep, it now sounds rather... husky.  \"<i>Zat was almost as bad as zat time I tried goblin food.  Is...is zat me?</i>\" Benoit puts a claw to his... no, her throat in a panic.  Her hands then roam downwards and upwards, each new protuberance and crevice discovered amplifying her disquiet.  \"<i>Zis...zis can't be real,</i>\" she mutters.  \"<i>Zis can't actually 'ave 'appened...</i>\"  She turns as if to try and shake herself out of a dream, and knocks over a pile of books with her behind.  Your one salient thought as you watch is that whatever else you've managed to do to the blind basilisk, she certainly has it going on now.  She stands in the fairly impressive mess the two of you have created wringing her hands, apparently unwilling to move her new physique around for fear of knocking over even more of the stock.");
+		outputText("\n\n\"<i>Zut.  Fucking.  Alors,</i>\" the basilisk manages at last.  The creature's voice has gone up by several octaves; although it is still deep, it now sounds rather... husky.  \"<i>Zat was almost as bad as zat time I tried goblin food.  Is... is zat me?</i>\" Benoit puts a claw to his... no, her throat in a panic.  Her hands then roam downwards and upwards, each new protuberance and crevice discovered amplifying her disquiet.  \"<i>Zis... zis can't be real,</i>\" she mutters.  \"<i>Zis can't actually 'ave 'appened...</i>\"  She turns as if to try and shake herself out of a dream, and knocks over a pile of books with her behind.  Your one salient thought as you watch is that whatever else you've managed to do to the blind basilisk, she certainly has it going on now.  She stands in the fairly impressive mess the two of you have created wringing her hands, apparently unwilling to move her new physique around for fear of knocking over even more of the stock.");
 
-		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says Benoit unevenly.  \"<i>Zis is...I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
+		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says Benoit unevenly.  \"<i>Zis is... I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
 		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days + 1;
 		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
@@ -1401,7 +1429,7 @@ public function femoitSexIntro():void
 
 		outputText("\n\nNow it is your turn to slump down in a spent state, though you retain enough control to avoid adding any more weight to your already heavy lover.  The two of you remain there in the backgroom, gathering up your strength, letting the musk of your carnal pleasure roll over your still forms.");
 
-		outputText("\n\nBenoite stirs first.  \"<i>Mmm...I guess being so pregnant is not such a bad sing if it means we can have sex like zis...</i>\" she murmurs, though it's quite obvious she intends for you to hear her. With a groan of effort, she heaves herself back upright.  \"<i>Come back and see me any time, lover-"+ player.mf("boy","girl") +",</i>\" she tells you.  \"<i>But don't sink zat you need me to be pregnant to give me a good time, okay?</i>\"  Benoite smirks, striding across the floor and giving you a hand up before delicately flicking her tongue across your lips in a reptilian kiss.");
+		outputText("\n\nBenoite stirs first.  \"<i>Mmm... I guess being so pregnant is not such a bad sing if it means we can have sex like zis...</i>\" she murmurs, though it's quite obvious she intends for you to hear her. With a groan of effort, she heaves herself back upright.  \"<i>Come back and see me any time, lover-"+ player.mf("boy","girl") +",</i>\" she tells you.  \"<i>But don't sink zat you need me to be pregnant to give me a good time, okay?</i>\"  Benoite smirks, striding across the floor and giving you a hand up before delicately flicking her tongue across your lips in a reptilian kiss.");
 
 		outputText("\n\nYou redress yourself, give the trader a hand getting back to the front of the shop without knocking anything over - she may be familiar with her shop, but her distended belly still gives her problems - and then head back to camp.");
 		player.orgasm();
@@ -1439,7 +1467,7 @@ public function femoitSexIntro():void
 
 			outputText("\n\nIt's huge and heavy, solid like a rock, the scaly skin stretched so taut over the eggs inside you're certain you can actually feel them through her skin. There are too many of them jam-packed in there to actually move, though, signalling just how remarkably gravid Benoite is.  Your examinations are cut off when Benoite suddenly grinds her ass insistently against your crotch. \"<i>Ze snuggling is nice, lovair, but I am in ze mood for somesing a leetle more... active,</i>\" the basilisk comments, her tone light and airy.");
 
-			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [thighs]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
+			outputText("\n\nYou feign offence, asking if it's so wrong for you to take such pride in having such an wonderfully, majestically fertile lover, caressing her distended belly with gentle sweeping strokes, sliding your fingers across her sensitive skin.  The basilisk moans softly, shivering with pleasure at the sensation, her tail sliding up to caress your [hips]. \"<i>You are such a flatterer,</i>\" she tells you.  \"<i>Mmm... but I must confess zat zis is quite nice also...</i>\" she emphasizes her point by wriggling back against you, doing her best to nestle against your body.");
 
 			outputText("\n\nOne hand continues to trace circles across her egg-laden womb, even as you move the other down to gently cup and squeeze her full bottom, rubbing the base of her tail before creeping down in between her legs. Dampness meets your probing fingers, letting you know your efforts have been reward, and you decide to give Benoite something a little more intense. Your [cock] begins to poke into the she-lizard's luscious ass, making her laugh that oh-so-filthy laugh of hers.  \"<i>And 'ere I sought zat you were just wanting to snuggle?  Well, come on z'en, my lovair; if you sink you know 'ow to use zat properly?</i>\"");
 

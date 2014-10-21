@@ -7337,6 +7337,7 @@
 				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
 				dynStats("lib", 2, "lus", 10, "cor", 10);
 				player.tailVenom = 9;
+				changes++;
 			}
 
 			//[Grow Fox Ears]

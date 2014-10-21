@@ -48,7 +48,7 @@ internal function sandwitchRape():void {
 		}
 		player.orgasm();
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n", true);
-		if(player.hairColor == "sandy blonde") {
+		if(player.hairColor.indexOf("sandy blonde") != -1) {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n", false); 
 			if(player.breastRows.length == 0 || player.biggestTitSize() == 0) {
 				outputText("You grow a perfectly rounded pair of C-cup breasts!  ", false);

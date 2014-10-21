@@ -54,7 +54,7 @@ private function cinnabarGreeting():void {
 			//Multicocks if the PC has 2 big enough
 			if(player.cockTotal() > 1 && player.biggestCockArea2() >= 75) outputText("those things", false);
 			else outputText("that thing", false);
-			outputText(" inside me...The name's Cinnabar, but I'd rather you plug me and call me whatever you want.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
+			outputText(" inside me... the name's Cinnabar, but I'd rather you plug me and call me whatever you want.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
 			//[Fuck] [Leave]
 			if(player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
 				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"Multi-Fuck",cinnabarMultiCockPortalFuckFest,"",0,"",0,"Leave",2855);
@@ -186,7 +186,7 @@ private function cinnabarNonHugeDickings():void {
 		outputText("  She licks your " + clitDescript() + ", and your " + vaginaDescript(0) + " convulses around the intruding digits, making you shiver and moan.  Not wanting to be left out, your " + assholeDescript() + " clamps and puckers with it, wringing the rat's ", false);
 		if(player.vaginalCapacity() < 30) outputText("fingers", false);
 		else outputText("hand", false);
-		outputText(" in it's hungry embrace.", false);
+		outputText(" in its hungry embrace.", false);
 	}
 	//(No dick/cunt:
 	if(player.gender == 0) outputText("  Her soft pads rub your " + assholeDescript() + " just right, setting off your climax with professional skill.  You grunt and squeeze, wringing her fingers inside your hungry hole as if you could milk cum from them.", false);
@@ -329,7 +329,7 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	else outputText(", save for her ", false);
 	outputText("huge, slightly parted pussy-lips.  Chances are she'll have those back to normal before long anyway.  You get dressed and turn to leave, but before you do a tail taps your shoulder, the length curling to squeeze your neck.  It stops you cold while the hooker's voice whispers, \"<i>Don't wait too long to come back.</i>\"\n\n", false);
 	
-	outputText("Once she lets you go, you leave, and you find yourself milling over her statement about empathy for some time.", false);
+	outputText("Once she lets you go, you leave, and you find yourself mulling over her statement about empathy for some time.", false);
 	//(-2 corruption!)
 	player.orgasm();
 	dynStats("sen", 3, "cor", -2);

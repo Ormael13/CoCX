@@ -10,12 +10,7 @@ public function customPCSetup():void {
 		player.createBreastRow();
 		player.createVagina();
 		player.breastRows[0].breastRating = 5;
-		
-		player.createCock();
-		player.cocks[0].cockLength = 4;
-		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
-		player.cocks[0].knotMultiplier = 1.5;
+		player.breastRows[0].lactationMultiplier = 2;
 	
 		player.clitLength = 0.5;
 		player.fertility = 50;
@@ -114,7 +109,7 @@ public function customPCSetup():void {
 		
 		player.itemSlot4.unlocked = true;
 		player.itemSlot5.unlocked = true;
-		player.itemSlot1.setItemAndQty(consumables.P_S_MLK, 2);
+		player.itemSlot1.setItemAndQty(consumables.P_LBOVA, 5);
 		player.itemSlot2.setItemAndQty(consumables.L_PNKEG, 1);
 		player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
 		player.itemSlot4.setItemAndQty(consumables.REPTLUM, 1);

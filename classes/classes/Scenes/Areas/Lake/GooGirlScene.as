@@ -47,7 +47,7 @@ package classes.Scenes.Areas.Lake
 		private function coreDropChance():void
 		{
 			if (rand(4) == 0 && player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4) {
-				outputText("\n\nAs the goo-girl slithers away, into the lake's placid waves, you notice she seems to have left behind a small blob. Investigating, it appears to be a tiny, ruby heart, encased in a slimy " + gooColor8() + " membrane. As you reach to pick it up, the jelly ball quivers and pulses with a warm, cheerful light. Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
+				outputText("\n\nAs the goo-girl slithers away, into the lake's placid waves, you notice she seems to have left behind a small blob. Upon investigation, it appears to be a tiny, ruby heart, encased in a slimy " + gooColor8() + " membrane. As you reach to pick it up, the jelly ball quivers and pulses with a warm, cheerful light. Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
 
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes. The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences. There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n\n", false);
 				//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -199,7 +199,7 @@ package classes.Scenes.Areas.Lake
 
 			//[If the player is pregnant]
 			if (player.pregnancyIncubation <= 280 && player.pregnancyIncubation >= 1) {
-				outputText("The goo-girl squishes her lurid " + gooColor() + " body against yours, yielding membrane rippling across your flesh in anticipation. She leans in, inches from your face, when her expression turns quizzical. She seems surprised by something and studies you carefully. Her head craned to one side, as if listening to something. Her face lights up in cheerful glee and she lowers her head to your belly, feeling the vibrations from within. By way of demonstration, she strokes her belly and it bloats to a sloshing pudge, making her appear to be in a state of advanced pregnancy. Nodding vigorously, she points to her breast and you notice that what you took for a single slime core, is actually two hearts pressed against one another! With happy bounces of excitement, she embraces you in a motherly hug.\n\n", false);
+				outputText("The goo-girl squishes her lurid " + gooColor() + " body against yours, yielding membrane rippling across your flesh in anticipation. She leans in, inches from your face, when her expression turns quizzical. She seems surprised by something and studies you carefully. Her head cranes to one side, as if listening to something. Her face lights up in cheerful glee and she lowers her head to your belly, feeling the vibrations from within. By way of demonstration, she strokes her belly and it bloats to a sloshing pudge, making her appear to be in a state of advanced pregnancy. Nodding vigorously, she points to her breast and you notice that what you took for a single slime core, is actually two hearts pressed against one another! With happy bounces of excitement, she embraces you in a motherly hug.\n\n", false);
 			}
 			//	[If the player is not obviously pregnant/small breasts/not lactating]
 			else {

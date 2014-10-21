@@ -688,7 +688,7 @@ private function rapeKihaWithWORDS():void {
 		
 		outputText("You sigh, which surprisingly gets a response.  \"<i>I... don't remember okay?  The first thing I remember is waking up like this in Lethice's base.  There were a few of us, and the demons taught us, schooled us to be like them... I guess they planned for us to be the next level of demons.  A few of us broke out and went our separate ways.</i>\"\n\n", false);
 			
-		outputText("The dragonic woman looks very much like a young, nervous girl in that moment.  Her cheeks blush and she leaps up, flying away before you can ask her any more.", false);
+		outputText("The draconic woman looks very much like a young, nervous girl in that moment.  Her cheeks blush and she leaps up, flying away before you can ask her any more.", false);
 	}
 	//Conversation Level 4: Requires Low Corruption, Repeating for now (Zed)
 	else {

@@ -1204,7 +1204,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.buttPregnancyIncubation == 20) {
 				//end eggpreg here if unfertilized
-				outputText("\nSomething oily drips from your sphincter, staining the ground.  You suppose you should feel worried about this, but the overriding emotion which simmers in your gut is one of sensual, yielding calm.  The pressure in your bowels which has been building over the last few days feels right somehow, and the fact that your back passage is dribbling lubricant makes you incredibly, perversely hot.  As you stand there and savour the wet, soothing sensation a fantasy pushes itself into your mind, one of being on your hands and knees and letting any number of beings use your ass, of being bred over and over by beautiful, irrepressible insect creatures.  With some effort you suppress these alien emotions and carry on, trying to ignore the oil which occasionally beads out of your " + assholeDescript() + " and stains your [armor].\n");
+				outputText("\nSomething oily drips from your sphincter, staining the ground.  You suppose you should feel worried about this, but the overriding emotion which simmers in your gut is one of sensual, yielding calm.  The pressure in your bowels which has been building over the last few days feels right somehow, and the fact that your back passage is dribbling lubricant makes you incredibly, perversely hot.  As you stand there and savor the wet, soothing sensation a fantasy pushes itself into your mind, one of being on your hands and knees and letting any number of beings use your ass, of being bred over and over by beautiful, irrepressible insect creatures.  With some effort you suppress these alien emotions and carry on, trying to ignore the oil which occasionally beads out of your " + assholeDescript() + " and stains your [armor].\n");
 				dynStats("int", -.5, "lus", 500);
 				displayedUpdate = true;
 			}
@@ -1281,7 +1281,7 @@ public function updatePregnancy():Boolean {
 	//Give birth (if it's time) to beeeeeeez
 	if (player.buttPregnancyIncubation == 1 && player.buttPregnancyType == PregnancyStore.PREGNANCY_BEE_EGGS) {
 		outputText("\n", false);
-		outputText("There is a sudden gush of honey-colored fluids from your ass.  Before panic can set in, that wonderful scent overtakes you, making everything ok.  ", false);
+		outputText("There is a sudden gush of honey-colored fluids from your ass.  Before panic can set in, a wonderful scent overtakes you, making everything ok.  ", false);
 		if(player.cockTotal() > 0) outputText("The muzzy feeling that fills your head seems to seep downwards, making your equipment hard and tight.  ", false);
 		if(player.vaginas.length > 0) outputText("Your " + vaginaDescript(0) + " becomes engorged and sensitive.  ", false);
 		outputText("Your hand darts down to the amber, scooping up a handful of the sticky stuff.  You wonder what your hand is doing as it brings it up to your mouth, which instinctively opens.  You shudder in revulsion as you swallow the sweet-tasting stuff, your mind briefly wondering why it would do that.  The stuff seems to radiate warmth, quickly pushing those nagging thoughts away as you scoop up more.\n\n", false);
@@ -1394,7 +1394,7 @@ public function updatePregnancy():Boolean {
 			player.createVagina();
 			genderCheck();
 		}
-		outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your " + player.legs() + " wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + buttDescript() + ", grunting and groaning.  At first it goes slow – there' just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n", false);
+		outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your " + player.legs() + " wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n", false);
 		
 		outputText("You heave and push, instinctively driven to flex muscles you didn't even know you had to speed the super human labor you've entered into.  ", false);
 		if(player.vaginalCapacity() < 60) outputText("It hurts a little as your cervix starts to stretch wide", false);
@@ -1527,7 +1527,7 @@ public function updatePregnancy():Boolean {
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n\nWhen you wake you find a large number of tiny imp tracks... and a spattering of cum on your clothes and body.  They must be born fully-formed.", false);
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("  And your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
+			outputText("  Your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(.5);
 		}
 		//Lactate if large && not lactating
@@ -1649,7 +1649,7 @@ public function updatePregnancy():Boolean {
 		outputText("He suckles and suckles and suckles, leaving you to wonder just how much milk you were actually holding, but even as you wonder this, your eyes grow wide as the newborn minotaur begins to grow. He gains inches at a time, his horns starting to grow from his skull, his muscles rippling and thickening, his cock lengthening, his balls swelling. He reaches four feet tall, but keeps growing, soon then five feet tall, starting to resemble more and more the monster who sired him. Finally, he pulls off your breasts, and finishes his milk-inspired growth spurt at six feet tall, looking practically full grown. His one gesture of gratitude for being brought into the world is a slobbery lick at your cheek, then he turns and runs off towards the mountain, leaving you to recover from the ordeal.  You swiftly pass out.\n\n", false);
 		player.knockUpForce(); //Clear Pregnancy
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
+			outputText("Your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(1);
 		}
 		player.cuntChange(120, true,true,false);
@@ -1719,7 +1719,7 @@ public function updatePregnancy():Boolean {
 		outputText("Two emerge, then four, eight... you lose track. They swarm your body, scrambling for your chest, and take turns suckling at your nipples. Milk does their bodies good, making them grow rapidly, defining their genders as the girls grow cute little breasts and get broader hips and the boys develop their little mouse cocks and feel their balls swell. Each stops suckling when they reach two feet tall, and once every last one of them has departed your sore, abused cunt and drunk their fill of your milk, they give you a few grateful nuzzles, then run off towards the forest, leaving you alone to recover.\n", false);
 		player.knockUpForce(); //Clear Pregnancy
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
+			outputText("Your breasts won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(.5);
 		}
 		player.cuntChange(60, true,true,false);
@@ -1760,7 +1760,7 @@ public function updatePregnancy():Boolean {
 		outputText("By the time she is finished, the centaur girl is obviously stronger, able to stand and move about on her own. She explores her new body, jumping and prancing happily, while you lay back and watch, too exhausted to join her. Suddenly, though, her ears perk up, as she looks towards the horizon urgently. She hesitates just long enough to plant a sweet kiss on your cheek, then dashes off, smiling broadly. Exhausted, you are unable to follow... but that comforting sensation returns.  Somehow, you sense she will be all right.", false);
 		player.knockUpForce(); //Clear Pregnancy
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("  And your " + allBreastsDescript() + " won't seem to stop dribbling milk, lactating more heavily than before.", false);
+			outputText("  Your " + allBreastsDescript() + " won't seem to stop dribbling milk, lactating more heavily than before.", false);
 			player.boostLactation(.5);
 		}
 		outputText("  ", false);
@@ -1801,7 +1801,7 @@ public function updatePregnancy():Boolean {
 		//Main Text here
 		player.knockUpForce(); //Clear Pregnancy
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("And your breasts won't seem to stop dribbling milk, lactating more heavily than before.  ", false);
+			outputText("Your breasts won't seem to stop dribbling milk, lactating more heavily than before.  ", false);
 			player.boostLactation(.5);
 		}
 		player.cuntChange(60, true);
@@ -1855,7 +1855,7 @@ public function updatePregnancy():Boolean {
 					outputText("A strange desire overwhelms your sensibilities, forcing you to shed your " + player.armorName + " and drop to your hands and knees.   You manage to roll over and prop yourself up against a smooth rock, looking down over your pregnant-looking belly as green fluids leak from you, soaking into the ground.   A powerful contraction rips through you and your legs spread instinctively, opening your " + vaginaDescript(0) + " to better deposit your precious cargo.   You see the rounded surface of an egg peek through your lips, mottled with strange colors.   You push hard and it drops free with an abrupt violent motion.  The friction and slimy fluids begin to arouse you, flooding your groin with heat as you feel the second egg pushing down.  It slips free with greater ease than the first, arousing you further as you bleat out a moan from the unexpected pleasure.  Before it stops rolling on the ground, you feel the next egg sliding down your slime-slicked passage, rubbing you perfectly as it slides free.  You lose count of the eggs and begin to masturbate, ", false);
 					if(player.clitLength > 5) outputText("jerking on your huge clitty as if it were a cock, moaning and panting as each egg slides free of your diminishing belly.  You lubricate it with a mix of your juices and the slime until ", false);
 					if(player.clitLength > 2 && player.clitLength <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ", false);
-					if(player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as your spread the slime around, vigorously frigging yourself until ", false); 
+					if(player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself until ", false); 
 					outputText("you quiver in orgasm, popping out the last of your eggs as your body twitches nervelessly on the ground.   In total you lay " + eggDescript() + ".", false);
 					player.orgasm();
 					dynStats("resisted", false);
@@ -1868,7 +1868,7 @@ public function updatePregnancy():Boolean {
 				if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING_WIDE) outputText("temporarily stretching your cunt-lips wide-open ", false);
 				if(player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_GAPING_WIDE) outputText("parting your already gaping lips wide ", false);
 				outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ", false);
-				if(player.clitLength > 5) outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, it's sensitive surface overloading your fragile mind with pleasure.  ", false);
+				if(player.clitLength > 5) outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ", false);
 				if(player.clitLength > 2 && player.clitLength <= 5) outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ", false);
 				if(player.clitLength <= 2) outputText("your " + vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ", false);
 				outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ", false);

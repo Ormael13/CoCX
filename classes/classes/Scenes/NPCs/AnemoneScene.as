@@ -1249,7 +1249,7 @@ package classes.Scenes.NPCs
 				temp4 = createCallBackFunction(placeInAnemone,4);
 			if (player.itemSlot5.unlocked && giveableToAnemone(player.itemSlot5))
 				temp5 = createCallBackFunction(placeInAnemone,5);
-			if (temp1 != null || temp2 != null || temp3 != null || temp4 != null || temp5 != null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
+			if (temp1 == null && temp2 == null && temp3 == null && temp4 == null && temp5 == null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
 			choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 		}
 
@@ -1335,7 +1335,7 @@ package classes.Scenes.NPCs
 			outputText("The anemone obediently climbs out of her barrel, ");
 			//[(KidXP < 33)]
 			if (kidAXP() < 33) {
-				outputText("holding her " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " protectively across her chest.");
+				outputText("holding " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " protectively across her chest.");
 			}
 			else outputText("taking up an attentive stance with " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " in her hands.");
 
@@ -1383,7 +1383,7 @@ package classes.Scenes.NPCs
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.RRAPIER.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.JRAPIER.id) {
 				outputText("\n\nThe rapier is light enough for the girl, but it takes a multitude of reminders before she handles the slender blade with the care and style it deserves.  She seems to regard it as little more than a tool for thwacking you in the butt that, coincidentally, has a pointy end.");
-				//(no effect, senorita)
+				//(no effect, señorita)
 			}
 			//[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id ||
