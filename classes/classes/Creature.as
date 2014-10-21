@@ -2260,7 +2260,19 @@ import classes.PerkType;
 				return vaginas[0].virgin;
 			return false;
 		}
-		
+
+		public function genderText(male:String = "man", female:String = "woman", futa:String = "herm", eunuch:String = "eunuch"):String
+		{
+			if (vaginas.length > 0) {
+				if (cocks.length > 0) return futa;
+				return female;
+			}
+			else if (cocks.length > 0) {
+				return male;
+			}
+			return eunuch;
+		}
+
 		public function manWoman(caps:Boolean = false):String
 		{
 			//Dicks?
@@ -3376,6 +3388,9 @@ import classes.PerkType;
 
 		public function breastCup(rowNum:Number):String
 		{
+			return kGAMECLASS.breastCup(breastRows[rowNum].breastRating);
+//Should change this to make use of Appearance			return BreastStore.cupSize(breastRows[rowNum].breastRating);
+			/*
 			if (breastRows[rowNum].breastRating < 1)
 				return "flat, manly breast";
 			else if (breastRows[rowNum].breastRating < 2)
@@ -3576,10 +3591,10 @@ import classes.PerkType;
 				return "ZZZ-cup";
 			else if (breastRows[rowNum].breastRating < 100)
 				return "large ZZZ-cup";
-			/*else if(breastRows[rowNum].breastRating < 20) return "watermelon-sized cup";
-			 else if(breastRows[rowNum].breastRating < 35) return "tent-sized cup";
-			 else if(breastRows[rowNum].breastRating < 60) return "truck-sized cup";
-			 else if(breastRows[rowNum].breastRating < 100) return "parachute-sized cup";*/
+			// else if(breastRows[rowNum].breastRating < 20) return "watermelon-sized cup";
+			// else if(breastRows[rowNum].breastRating < 35) return "tent-sized cup";
+			// else if(breastRows[rowNum].breastRating < 60) return "truck-sized cup";
+			// else if(breastRows[rowNum].breastRating < 100) return "parachute-sized cup";
 			else
 				return "game-breaking cup";
 			return "Error-Cup (breastSize Error Number: " + breastRows[rowNum].breastRating;
@@ -3595,6 +3610,7 @@ import classes.PerkType;
 			//continent-sized
 			//planet-sized
 			//WTFISTHISWHYISNTITGAMEOVER?
+			*/
 		}
 
 		public function bRows():Number

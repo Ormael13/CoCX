@@ -49,27 +49,6 @@ URTA_LATESTBORN_COCKTYPE
 public function urtaKids():int {
 	return flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS];
 }
-internal function knockUpUrtaChance():void {
-	//GTFO IF PREGGO
-	if (pregnancy.isPregnant) return;
-	//GTFO IF NOT FERTILE
-	if(flags[kFLAGS.URTA_FERTILE] != 1) return;
-	//10% + up to 40% @ 1000mLs of cum, with bonus virility!
-	var chance:Number = 10;
-	temp = player.cumQ() / 25;
-	if(temp > 40) temp = 40;
-	chance += temp;
-	//Bonus virility time!
-	temp = player.virilityQ() * 100;
-	if(temp > 50) temp = 50;
-	chance += temp;
-	//FINAL ROLL!
-	if (chance > rand(100)) {
-		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 384);
-		flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
-	}
-}
-
 
 private function urtaSexMenu():void {
 	var spank:Function = null;

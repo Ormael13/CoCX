@@ -525,9 +525,9 @@ private function sateRutWithSoberUrta():void {
 		outputText("\n\nYou ask Urta what she's going to do; you didn't have the chance to use a condom.");
 		if(flags[kFLAGS.URTA_FERTILE] == 1) outputText("\n\n\"<i>We'll just have to hope then, won't we, [name]?</i>\"");
 		else outputText("\n\n\"<i>I'm not likely to get pregnant with all the birth control I'm on right now, even with all that cum in me.</i>\"\n\nFeeling relieved, you turn and head out into the streets of the city.");
-		urtaPregs.knockUpUrtaChance();
-		urtaPregs.knockUpUrtaChance();
-		urtaPregs.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
 	}
 	else {
 		outputText("\n\nShe saunters over you and waves a finger under your nose in playful mockery.  ");
@@ -860,9 +860,9 @@ private function drunkUrtaRidesARutPCsCock():void {
 		if(flags[kFLAGS.URTA_FERTILE] != 1) outputText("\n\n\"<i>Don't worry love, I'm on enough contraceptives that we shouldn't have to worry,</i>\" Urta admits.");
 		else outputText("\n\n\"<i>We did, didn't we?  It would be nice, wouldn't it?  If every time you got in a rutting mood you could just drill another baby into me...  I really wanted it, [name]!  I love you!</i>\"");
 		outputText("\n\nYou nod and tell her you understand.");
-		urtaPregs.knockUpUrtaChance();
-		urtaPregs.knockUpUrtaChance();
-		urtaPregs.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
+		urta.knockUpUrtaChance();
 	}
 	outputText("\n\nShe ");
 	if(!urtaLove()) outputText("winks at you as you get ready to leave.  I hope I'll get to play with you again soon.</i>\"");

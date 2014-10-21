@@ -2,12 +2,25 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Scylla extends TelAdreAbstractContent{
+	public class Scylla extends TelAdreAbstractContent {
+
+	public static const SCYLLA_NOT_PRESENT:int			= 0;
+	public static const SCYLLA_ACTION_FIRST_TALK:int	= 1;
+	public static const SCYLLA_ACTION_ROUND_TWO:int		= 2;
+	public static const SCYLLA_ACTION_ROUND_THREE:int	= 3;
+	public static const SCYLLA_ACTION_ROUND_FOUR:int	= 4;
+	public static const SCYLLA_ACTION_MEET_CATS:int		= 5;
+	public static const SCYLLA_ACTION_ADICTS_ANON:int	= 6;
+	public static const SCYLLA_ACTION_FLYING_SOLO:int	= 7;
+	public static const SCYLLA_ACTION_FUCKING_URTA:int	= 8;
 
 	public function Scylla()
 	{
 	}
 
+	private var scyllaAction:int;
+	private var scyllaLastActionSelectionTime:int;
+	public function get action():int { return scyllaAction; }
 //const TIMES_SOLO_FED_NUN:int = 778;
 //const FED_SCYLLA_TODAY:int = 779;
 
@@ -16,6 +29,58 @@
 private function scyllaSprite():void {
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 3) spriteSelect(82);
 	else spriteSelect(51);
+}
+
+public function scyllaBarSelectAction():void {
+	//This allows Scylla's activity at the bar to be determined before any description of what Kath and Urta be doing.
+	//Required because Scylla's behaviour in the bar is partly random, so you can't just check flags to see what she's up to.
+	if (model.time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
+	scyllaLastActionSelectionTime = model.time.totalTime;
+	scyllaAction = SCYLLA_NOT_PRESENT;
+	if (player.cocks.length > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+		if (player.longestCockLength() >= 12) {
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
+				scyllaAction = SCYLLA_ACTION_FIRST_TALK;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
+				scyllaAction = SCYLLA_ACTION_ROUND_TWO;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
+				scyllaAction = SCYLLA_ACTION_ROUND_THREE;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
+				scyllaAction = SCYLLA_ACTION_ROUND_FOUR;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
+				scyllaAction = SCYLLA_ACTION_MEET_CATS;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
+				scyllaAction = SCYLLA_ACTION_ADICTS_ANON;
+				return;
+			}
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
+				scyllaAction = SCYLLA_ACTION_FLYING_SOLO;
+				return;
+			}
+		}
+		//All the following conditions are needed to see if she's fucking Urta
+		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 3) return; //Minimum Scylla meetings for Urta to fuck her
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 1) return; //Together these are the 'No more Scylla' flag
+		if (!getGame().urta.urtaAtBar() || flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 0) return;
+		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] >= 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
+			//She only fucks Scylla if she's horny and you've fucked her enough to make her comfortable
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) { //Never fucked Scylla before
+			if (!getGame().urta.urtaDrunk()) return; //So she has to be drunk
+		}
+		else if (getGame().urta.urtaDrunk() && player.balls == 0) return; //Otherwise she has to be sober and you need to have balls (I'm not sure why, but it is so)
+		if (telAdre.katherine.needIntroductionFromScylla()) return;
+		if (rand(3) == 0) scyllaAction = SCYLLA_ACTION_FUCKING_URTA; //And after all that there's still just a 1/3 chance it will happen
+	}
 }
 
 //The rain is pouring by the time you get to The Wet Bitch and the bar's roaring hearth is a welcome sight for your cold, shivering form.  You order some hot soup and look around at the other patrons. The miserable weather seems to have driven most of the regulars away, but
@@ -89,7 +154,7 @@ public function scyllaRoundII():void {
 	scyllaSprite();
 	flags[kFLAGS.FED_SCYLLA_TODAY] = 1;
 	flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA]++;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("scylla-help-round-two"), false);
 	outputText("The Wet Bitch is particularly busy today and you're obliged to sit at the bar after shouldering your way through the crowd. Before you can even place an order, the bartender slides you a note. Curious, you unfold the crisp, white parchment. The note is written in such a light hand that you have to strain to read it in the dim bar. The flowing, graceful message reads: \"<i>Dear " + player.short + ", I am sorry to impose upon you once more, but if you don't mind, could you maybe help me one more time? I am in one of the rooms upstairs, could you come up and see me?  In your debt, Scylla.</i>\"\n\n", false);
 
@@ -157,7 +222,7 @@ private function scyllaRoundIIPartIII():void {
 
 public function scyllaRoundThreeCUM():void {
 	scyllaSprite();
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("scylla-help-round-two-jizz"), false);
 	flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA]++;
 	//Standard
