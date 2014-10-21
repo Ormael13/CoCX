@@ -1208,15 +1208,20 @@ use namespace kGAMECLASS;
 			var stretched:Boolean = buttChangeNoDisplay(cArea);
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
 			if(stretched && display) {
-				if(spacingsF) outputText("  ");
-				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
-				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
-				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
-				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
-				if(ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
-				if(spacingsB) outputText("  ");
+				if (spacingsF) outputText("  ");
+				buttChangeDisplay();
+				if (spacingsB) outputText("  ");
 			}
 			return stretched;
+		}
+
+		public function buttChangeDisplay():void
+		{	//Allows the test for stretching and the text output to be separated
+			if (ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
+			if (ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
+			if (ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
+			if (ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
+			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
 		}
 
 		public function slimeFeed():void{

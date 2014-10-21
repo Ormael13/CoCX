@@ -41,6 +41,16 @@ package classes
 		public static const PREGNANCY_WORM_STUFFED:int          =  33; //Used to fill the player's vagina when the worms take up residence. This prevents any other form of
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
 
+		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
+		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
+		public static const PREG_NO_SIGNS_KNOWN:int             =   2; //NPC is in the first trimester, knows she’s pregnant
+		public static const PREG_START_BULGE:int                =   3; //NPC is in the first trimester, belly is just starting to bulge
+		public static const PREG_SWOLLEN:int                    =   4; //NPC is in the second trimester, belly is small but definitely swollen
+		public static const PREG_SIZEABLE:int                   =   5; //NPC is in the second trimester, belly is now sizable
+		public static const PREG_BLATANT:int                    =   6; //NPC is in the third trimester, belly is blatantly bulging
+		public static const PREG_FULL_TERM:int                  =   7; //NPC is in the third trimester, belly is big as it will get for a normal pregnancy
+		public static const PREG_OVERDUE:int                    =   8; //NPC is overdue. Usually means a centaur baby, twins or some similar condition. Effectively looks 10 months pregnant
+		public static const PREG_VERY_OVERDUE:int               =   9; //NPC is very overdue. Probably triplets or more. Effectively looks 11 months pregnant
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_BEE:int              =   2;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_DRIDER:int           =   3;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
@@ -233,6 +243,12 @@ package classes
 			kGAMECLASS.flags[_buttPregnancyTypeFlag] = (kGAMECLASS.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
 				//Strip off the old noticed value by ANDing with PREG_TYPE_MASK
 			return currentStage;
+		}
+
+		public function get size():int {
+			//This function exists to provide consistency across different NPC's pregnancies. This is most useful when trying to write descriptions of different belly sizes
+			//in threesomes, where the author might not be familiar with how the different pregnancy events relate to belly size.
+			return PREG_NOT_PREGANT;
 		}
 	}
 }

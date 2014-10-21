@@ -1050,10 +1050,10 @@ package classes.Scenes.NPCs
 					doNext(13);
 					return;
 				}
-				if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
-					emberIsPregnantFirstTimeTalkScene();
-					doNext(13);
-				}
+			}
+			if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
+				emberIsPregnantFirstTimeTalkScene();
+				doNext(13);
 			}
 			clearOutput();
 			outputText("What will you talk about?");
