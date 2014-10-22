@@ -1243,7 +1243,7 @@ public static const KATHERINE_URTA_TIMES_SEX:int                                
 public static const KATHERINE_VALA_AFFECTION:int                                    = 1235;
 public static const KATHERINE_VALA_DATE:int                                         = 1236;
 public static const KATHERINE_VALA_TIMES_SEX:int                                    = 1237;
-public static const UNKNOWN_FLAG_NUMBER_01238:int                                   = 1238;
+public static const SAVE_FILE_INTEGER_FORMAT_VERSION:int                            = 1238;
 public static const UNKNOWN_FLAG_NUMBER_01239:int                                   = 1239;
 public static const UNKNOWN_FLAG_NUMBER_01240:int                                   = 1240;
 public static const UNKNOWN_FLAG_NUMBER_01241:int                                   = 1241;
