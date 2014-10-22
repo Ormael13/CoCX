@@ -1838,7 +1838,7 @@ public function unFuckSave():void
 		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
 
-	if (flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] <= 816) {
+	if (flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] < 816) {
 		//Older saves don't have pregnancy types for all impregnable NPCs. Have to correct this.
 		//If anything is detected that proves this is a new format save then we can return immediately as all further checks are redundant.
 		if (flags[kFLAGS.AMILY_INCUBATION] > 0) {
