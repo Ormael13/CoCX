@@ -13,7 +13,7 @@ package classes.Scenes.Areas.HighMountains
 		public function MinervaPurification() 
 		{
 			pregnancy = new PregnancyStore(kFLAGS.MINERVA_PREGNANCY_TYPE, kFLAGS.MINERVA_PREGNANCY_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 100);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 216, 144, 72);
 			CoC.timeAwareClassAdd(this);
 		}
 		
@@ -753,7 +753,7 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText("Marae told me that its some kind of old nexus of pure energies, like a bright lantern glowing in a pitch black room.  ");
 			else outputText("Jojo told me what he knew about it, He said it's some kind of wellspring of holy power, one of the few untainted places left in this world.  ");
 			outputText("I do know that it has special properties: that over time it can strip the corruption from something, make soil very fertile and make plants grow quickly, it can even bless a weapon with special properties, like how my own weapon wounds those that are corrupt. </i>\" She says before smiling and tugging on you gently");
-			outputText("\n\n\"<i>I\m afraid I that even though I\ve been purified I still don't know much about it, I do know that and its feels really nice to swim in it!</i>\" she says with a grin before looking back at you. \"<i>Hey, you know, would you want to go for a swim with me? It'll be fun I promise!</i>\" she says with a playful grin before bumping her wide fertile thigh against you to tease you");
+			outputText("\n\n\"<i>I\m afraid I that even though I've been purified I still don't know much about it, I do know that and its feels really nice to swim in it!</i>\" she says with a grin before looking back at you. \"<i>Hey, you know, would you want to go for a swim with me? It'll be fun I promise!</i>\" she says with a playful grin before bumping her wide fertile thigh against you to tease you");
 			outputText("\n\nThinking about it your decide there would be nothing wrong with going for a dip with the curvaceous golden siren. Getting up from the ground you quickly strip off your " + player.armorName + " and jump into the pool. Seeing how eager you are brings a bring toothy smile to Minerva's slightly angular face, the purified herm jumping up and eagerly stripping as well, freeing her big bountiful breasts, before hopping into the water with a energetic splash.");
 			outputText("\n\nThough the water isn't all that deep, only about four feet deep you splash around and swim with the shark-like harpy. Minerva playfully splashing water at you with her tail, laughing as you play and swim, you can't help but look the very curvy siren over, your eyes instinctively falling on her big G-cup breasts, her wide broodmother hips and ass as well as her thick tentacled dick.");
 			outputText("\n\nMinerva's womanly body drenched with water, her ample toned features growing much more defined with all the water clinging to her body. Seeing your stares gives Minerva a kinky thrill, grinning she spins in the water and turns away from you, striking a pose for you and pushing her luscious round ass out, the water beading down her naked body as she looks back at you and gives you her usual sharky grin. \"<i>See anything you like darling?</i>\"");
@@ -774,7 +774,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Informing Minerva that you want to sit down and talk with her seems to surprise her but a gentle smile quickly dawns on her face and she leads you over to a soft patch of moss. \"<i>Really, you want to talk to me? I thought we knew each other pretty well but if you wanted to talk I'd be happy to talk to you. What would you like to know, my love?</i>\" remembering your past conversations with Minerva you remember her mentioning her mentioning that she had birthed a shark girl daughter at one point in her life, it seemed like a sensitive topic with her though. Really wanting to know more you ask to know more about this daughter of Minerva's");
 			outputText("\n\nThe golden siren's eyes widening when she hears you want to talk about her firstborn daughter, biting her lip she decides there is no harm in going into deeper detail about her shark-girl daughter \"<i>Well... alight, I don't see anything wrong with telling you. Ahhh...she was a sweet girl, so lively and playful, I remember the day she was born, the day I first held that little sweetie in my arms. She was much bigger than that anemone creature I birthed, you should have seen her, big red eyes, so bright with wonder as I held her in my arms, red and white hair, little fingers that reached out for her mama. I had never seen such a cute little girl, even though she was a shark-girl, that didn't matter; to me she was just my adorable baby girl.</i>\" Minerva says with a bright smile as she remembers her daughter. Hearing her describe it like this, you can't help but smile at the tender scenes the siren tells you about.");
 			
-			outputText("\n\n\"<i>I\m sure you\ve noticed ");
+			outputText("\n\n\"<i>I\m sure you've noticed ");
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText("by how our own sweet little daughters grow up");
 			outputText(", that things grow up quickly here, and so did she, when I nursed her for the first time she grew up right there in my arms, not stopping until she was about a preteen, maybe a very young teenager. Even then she was just so cute, she would follow me everywhere, the adorable little sweetheart always holding onto my tail so would never lose her mommy hehehe</i>\" Minerva giggles and grins and bright sharky grin at the thought, and you have to admit, it would be an adorable thing to see.");
 			
@@ -1016,6 +1016,7 @@ package classes.Scenes.Areas.HighMountains
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
 			if (rand(100) <= chance) {
+				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}
 			dynStats("lus", 20);
@@ -1093,6 +1094,7 @@ package classes.Scenes.Areas.HighMountains
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
 			if (rand(100) <= chance) {
+				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}
 			dynStats("lus", 20);
@@ -1190,7 +1192,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//Romanced:
 			else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
-			if (rand(100) <= player.totalFertility() || (debug)) { //Birthing scene not implemented yet.
+			if (rand(100) <= player.totalFertility() || (debug)) {
 				player.knockUpForce(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
 			}
 			player.slimeFeed();
@@ -1660,13 +1662,14 @@ package classes.Scenes.Areas.HighMountains
 		
 		//Player gives birth!
 		public function playerGivesBirth():void {
+			spriteSelect(95);
 			outputText("A pain develops in your abdomen. You realize it's time to give birth to the sirens! You set foot on the high mountains path and hurry to the tower.");
 			outputText("\n\n\"<i>It's coming!</i>\" you announce. Minerva rushes to you to get you to the birthing spot");
 			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText(" under the giant oak tree");
 			outputText(". \n\n\"<i>You'll be okay. Just take a deep breath,</i>\" she instructs. You do as she requested, taking deep breaths.  She slowly removes the bottom half of your " + player.armorName +" so that your groin is exposed. ");
 			if (player.hasCock()) {
-				outputText("She lifts your cock");
-				if (player.balls > 0) outputText("and balls");
+				outputText("She lifts your cock ");
+				if (player.balls > 0) outputText("and balls ");
 				outputText("to reveal your " + vaginaDescript() + ".");
 			}
 			outputText("\n\nYou wait. Time goes by and you talk about various topics with her. Finally, the water breaks. She gasps. \"<i>Just push. I'll catch whatever's coming out,</i>\" she assures.  ");

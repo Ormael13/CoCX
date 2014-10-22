@@ -14,41 +14,41 @@ package classes.Scenes.Dungeons.Factory
 		public function cocktripAttack():void {
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0) {
-				outputText(capitalA + short + " suddenly grows his dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!", false);
+				outputText(capitalA + short + " suddenly grows his dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
 				combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + player.buttDescript() + " and pull your  " + player.legs() + " out from under you.", false);
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + player.buttDescript() + " and pull your  " + player.legs() + " out from under you.");
 			if((player.spe-30) > rand(60)) {
 				outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.", false);
 			}
 			//Fall down go boom
 			else {
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.", false);
+				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
 				if(player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.", false);
+					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
 					game.dynStats("lus", 13, "cor", 1);
 				}
 				else {
 					if(player.lust >= 50 || player.cor >= 50) {
-						outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.", false);
+						outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
 						game.dynStats("lus", 8 + player.cor/20);
 						
 					}
 					else {
-						outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".", false);
+						outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".");
 						game.dynStats("lus", 5 + player.cor/20);
 					}
 				}
 				var damage:Number = 5;
-				outputText(" (" + damage + ")", false)
-				game.takeDamage(damage);
+				player.takeDamage(damage, true);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.", false);
 			combatRoundOver();
 		}
 		
 		public function cumCannon():void {
+			trace("Cum cannon");
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText(capitalA + short + " pumps his thrust lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.", false);
@@ -172,7 +172,7 @@ package classes.Scenes.Dungeons.Factory
 			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.special1 = cocktripAttack;
-			this.special2 = 11036;
+			this.special2 = cumCannon;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";

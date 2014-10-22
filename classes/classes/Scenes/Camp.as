@@ -45,6 +45,7 @@
 		public var codex:Codex = new Codex();
 		public var dungeon1:Factory = new Factory();
 		public var dungeon2:DeepCave = new DeepCave();
+		public var dungeon3:LethiceCastle = new LethiceCastle();
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
 		
