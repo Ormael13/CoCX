@@ -1690,6 +1690,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 		if(player.inHeat) temp += 2;
 		if (vapula.vapulaSlave()) temp += 7;
+		if (debug) temp += 100;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
 				anemoneScene.goblinNightAnemone();

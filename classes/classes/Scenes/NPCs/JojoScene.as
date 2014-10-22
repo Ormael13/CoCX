@@ -1829,6 +1829,10 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	{
 		outputText("You tell Jojo about how you spent a lot of your time... making money.  When the naive little monk asks how, you just smile as you fondly remember the older whore, Poison, showing you the ropes and teaching the tricks of the trade.  Regardless of how it made people think of you, it was certainly good money.  In an attempt to hide some of the messier details of your past from the monk, you explain how you accepted... odd jobs for people, important work that not many others in the village would be willing to accept.  He seems confused but shrugs it off.\n\n");
 	}
+	else if (player.findPerk(PerkLib.HistoryFortune) >= 0)
+	{
+		outputText("You tell Jojo about how you're lucky and you've made quite a bit of money.  When the monk asks how, you shrug and tell him it's just plain luck.\n\n");
+	}
 	else
 	{
 		outputText("Somehow, you don’t seem to have a defined history perk... <b>Please report a bug!</b>\n\n");

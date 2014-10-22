@@ -24,7 +24,7 @@ package classes.Scenes.Camp
 		{
 			this.a = "a ";
 			this.short = "mob of imps";
-			this.skinTone = "imp mob";
+			this.plural = true;
 			this.removeStatuses();
 			this.removePerks();
 			this.removeCock(0, this.cocks.length);
@@ -41,10 +41,11 @@ package classes.Scenes.Camp
 			this.tallness = 36;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.wingType = WING_TYPE_IMP;
+			this.skinTone = "green";
 			this.createStatusAffect(StatusAffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + cockDescript(0) + " as long and thick as a man's arm, far oversized for their bodies."
 			this.pronoun1 = "they";
-			this.pronoun2 = "they";
+			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			initStrTouSpeInte(70, 40, 75, 42);
 			initLibSensCor(55, 35, 100);

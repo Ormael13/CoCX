@@ -475,9 +475,11 @@ private function chooseBodyTypeDickgirlOrCuntboy():void {
 		//Body modifiers
 		player.hipRating = 2;
 		player.buttRating = 0;
-		player.femininity = 30;
+		player.femininity = 35;
 		player.thickness = 30;
 		player.hairLength = 2;
+		player.breastRows[0].breastRating = 0;
+		player.nippleLength = 0.2
 		player.tone += 5;
 		//Attribute modifiers
 		player.str += 1;
@@ -622,7 +624,7 @@ private function chooseBeardStyle(choiceStyle:int = 0):void {
 	menuBeardSettings();
 }
 private function menuBeardLength():void {
-	outputText("How long would you like your beard be? (Note: Beard will slowly grow over time, just like in the real world. Unless you have no beard.)", true);
+	outputText("How long would you like your beard be? \n\nNote: Beard will slowly grow over time, just like in the real world. Unless you have no beard. You can change your beard style later in th game.", true);
 	menu();
 	addButton(0, "No Beard", chooseBeardLength, 0);
 	addButton(1, "Trim", chooseBeardLength, 0.1);
@@ -669,7 +671,7 @@ private function setHeight():void {
 	{
 		mainView.nameBox.text = "69";
 	}	
-	choices("OK", confirmHeight, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", menuHairColor);
+	choices("OK", confirmHeight, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", genericStyleCustomizeMenu);
 	mainView.nameBox.x = mainView.mainText.x + 5;
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
@@ -719,7 +721,7 @@ private function menuPerk():void {
 	addButton(7, "Perversion", choosePerkCorruptionYouMonster);
 
 	addButton(4, "Next", menuPerkII);
-	addButton(9, "Back", setHeight);
+	addButton(9, "Back", genericStyleCustomizeMenu);
 }	
 
 private function menuPerkII():void {

@@ -234,6 +234,7 @@ public function saveScreen():void
 	{
 		saveGame(flags[kFLAGS.HARDCORE_SLOT])
 		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", true);
+		doNext(1);
 		return;
 	}
 	

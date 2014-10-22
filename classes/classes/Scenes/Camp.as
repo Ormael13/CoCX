@@ -845,11 +845,11 @@ public function initiateStash():void {
 }	
 
 public function stash(exists:Boolean = true):Boolean {
-	
 	//Use to know if to show/hide stash.
 	if(exists) {
 		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
 	}
+	hideMenus();
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
@@ -1038,7 +1038,8 @@ public function loversCount():Number {
 //-- COMPANIONS 
 //-----------------
 public function campLoversMenu():void {
-	kGAMECLASS.tooltipLoc = ""
+	hideMenus();
+	kGAMECLASS.tooltipLoc = "";
 	spriteSelect(-1);
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
@@ -1198,7 +1199,8 @@ public function campLoversMenu():void {
 	addButton(9,"Back",eventParser,1);
 }
 public function campSlavesMenu():void {
-	kGAMECLASS.tooltipLoc = ""
+	hideMenus();
+	kGAMECLASS.tooltipLoc = "";
 	spriteSelect(-1);
 	clearOutput();
 	var vapula2:Function = null;
@@ -1249,7 +1251,9 @@ public function campSlavesMenu():void {
 }
 
 public function campFollowers():void {
+	hideMenus();
 	kGAMECLASS.tooltipLoc = "";
+	spriteSelect(-1);
 	var rathazulEvent:Number = 0;
 	var jojoEvent:Number = 0;
 	var valeria2:Function = null;
@@ -1320,6 +1324,7 @@ public function campFollowers():void {
 //-- CAMP ACTIONS 
 //-----------------
 private function campActions():void {
+	hideMenus();
 	menu();
 	outputText("What would you like to do?", true)
 	addButton(0, "SwimInStream", swimInStream);
@@ -2241,6 +2246,7 @@ private function updateSaveFlags():void {
 		else trace("Skipped")
 		current++;
 	}
+	if (player.ass.analLooseness > 0 && flags[kFLAGS.TIMES_ORGASMED] <= 0) flags[kFLAGS.TIMES_ORGASMED] = 1;
 	outputText("Your save file has been updated by changing the variables used in this mod from old flag position to new flag position.\n\n", true)
 	outputText("As you know, the base game update tends to change flags and that may screw up saves when mod gets updated.\n\n", false)
 	outputText("Unfortunately, I can't guarantee if every flags are retained. You may have lost some furniture or may have lost cabin. I'm sorry if this happens. Your codex entries are still unlocked, don't worry. And if your cabin is built, don't worry, it's still intact and you can re-construct furniture again.\n\n", false)
@@ -2327,7 +2333,7 @@ private function updateAchievements():void {
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) {
 		awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 		dungeonsCleared++;
-		//if (flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+		if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == kGAMECLASS.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 	}
 	if (dungeonsCleared >= 3) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 	if (dungeonsCleared >= 5) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);

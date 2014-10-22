@@ -3151,9 +3151,9 @@ package classes
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
 			if (jewelryEffectId == 3)
-				counter *= (1 + (jewelryEffectMagnitude / 100))
+				counter += jewelryEffectMagnitude
 			if (jewelryEffectId == 4)
-				counter *= (1 - (jewelryEffectMagnitude / 100))
+				counter -= jewelryEffectMagnitude
 			return counter;
 		}
 

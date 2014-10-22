@@ -190,8 +190,8 @@ package classes.GlobalFlags
 		public static const GENERAL_MINERVA_PURIFICATION:int	= 161; //Shadow achievement
 		public static const GENERAL_FENCER:int					= 162; //Shadow achievement
 		public static const GENERAL_GAME_BREAKER:int			= 163; //Might be awarded for breaking the game.
-		public static const UNKNOWN_ACHIEVEMENT_164:int			= 164;
-		public static const UNKNOWN_ACHIEVEMENT_165:int			= 165;
+		public static const GENERAL_FUCK_WITH_PORTALS:int		= 164;
+		public static const GENERAL_GETTING_WOOD:int			= 165; //Minecraft reference
 		public static const UNKNOWN_ACHIEVEMENT_166:int			= 166;
 		public static const UNKNOWN_ACHIEVEMENT_167:int			= 167;
 		public static const UNKNOWN_ACHIEVEMENT_168:int			= 168;

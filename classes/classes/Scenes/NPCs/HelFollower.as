@@ -3,6 +3,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class HelFollower extends NPCAwareContent
 	{
@@ -1981,6 +1982,7 @@ private function stayHomeFromHeliaParty():void {
 }
 
 private function helPartyMenu():void {
+	awardAchievement("Happy Birthday, Helia!", kACHIEVEMENTS.HOLIDAY_HELIA_BIRTHDAY);
 	menu();
 	//heliaDrinks
 	if(flags[kFLAGS.HELIA_BDAY_DRINKS] == 0) addButton(0,"Drinks",heliaDrinks);

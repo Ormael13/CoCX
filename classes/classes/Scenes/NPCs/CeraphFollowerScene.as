@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class CeraphFollowerScene extends NPCAwareContent
 	{
@@ -1696,6 +1697,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou stand up and stretch, your cock still lodged tight in Ceraph's cooch.  Alas, all good things must come to an end, and with one slow tug, you remove the ring from your [cock " + y + "] (and your maleness from her cunt).  You toss the borrowed item back to her, letting it fall on your slave's heaving bosom as she tries to recover, a fucked-out mess in the dirt.  You turn to get dressed, and when you glance back, Ceraph is gone, until the next time you call for her.");
 			player.orgasm();
 			dynStats("cor", 1);
+			awardAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, true, true);
 			flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
 			doNext(13);
 		}

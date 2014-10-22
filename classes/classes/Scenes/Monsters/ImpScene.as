@@ -589,9 +589,9 @@ package classes.Scenes.Monsters
 		
 		public function impGangGetsWhooped():void {
 			clearOutput();
-			outputText("With the imps defeated, you check their bodies for any gems before you go back to sleep.")
+			outputText("With the imps defeated, you check their bodies for any gems before you go back to sleep.");
 			cleanupAfterCombat();
-			//goNext(timeQ, false);
+			goNext(timeQ, false);
 		}
 		
 		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {

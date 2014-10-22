@@ -136,7 +136,7 @@ package classes.Scenes
 			addAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, "Meet the Piggy-Slut (Thanksgiving)", "", true);
 			addAchievement("Gobble Gobble", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_II, "Meet the Cockgobbler (Thanksgiving)", "", true);
 			addAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I, "Find the pumpkin (Halloween)", "", true);
-			addAchievement("Fera's Wonderland", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_II, "Free Fera (Halloween)", "", true);
+			addAchievement("Fera's Wonderland", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_II, "Free Fera/Visit her wonderland (Halloween)", "", true);
 			addAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I, "Meet the X-mas Elf (Christmas)", "", true);
 			addAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II, "Complete Carol's mini-quest (Christmas)", "", true);
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
@@ -190,6 +190,8 @@ package classes.Scenes
 			addAchievement("My Tent's (not) Better Than Yours", kACHIEVEMENTS.GENERAL_MY_TENT_NOT_BETTER, "Sleep in Arian's tent.");
 			addAchievement("Divine Intervention", kACHIEVEMENTS.GENERAL_MINERVA_PURIFICATION, "Complete Minerva's purification process.", "", true);
 			addAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER, "Complete rapier training from Raphael.", "", true);
+			addAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, "Engage in portal sex with Ceraph.", "", true);
+			addAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, "Punch a tree until wood falls out... Wait, what?", "", true);
 			
 			menu();
 			addButton(8, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", eventParser, 9999);

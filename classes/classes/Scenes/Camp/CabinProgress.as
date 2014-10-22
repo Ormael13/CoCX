@@ -3,6 +3,7 @@ package classes.Scenes.Camp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.BaseContent;
 	
 	import classes.Scenes.NPCs.*;
@@ -180,6 +181,7 @@ package classes.Scenes.Camp
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
 				outputText(" Your wood capacity is full.", false)
 			}
+			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, true, true);
 			fatigue(50);
 			doNext(13);
 		}
@@ -234,7 +236,7 @@ package classes.Scenes.Camp
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
 			{
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
-				outputText(" Your wood capacity is full..", false)
+				outputText(" Your wood capacity is full.", false)
 			}
 			fatigue(50);
 			doNext(14);
