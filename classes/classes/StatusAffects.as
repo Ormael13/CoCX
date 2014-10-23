@@ -288,6 +288,9 @@ package classes
 		public static const Web:CombatStatusAffect = mk2("Web");
 		public static const WebSilence:CombatStatusAffect = mk2("Web-Silence");
 		public static const Whispered:CombatStatusAffect = mk2("Whispered");
+		
+		public static const RemovedArmor:CombatStatusAffect = mk2("Removed Armor");
+		public static const JCLustLevel:CombatStatusAffect = mk2("JC Lust Level");
 
 		/**
 		 * Creates non-combat status affect

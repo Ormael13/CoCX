@@ -28,6 +28,11 @@ package classes.Scenes.Areas
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(1);
 			
+			if (kGAMECLASS.d3.discoverD3() == true)
+			{
+				return;
+			}
+			
 			var chooser:Number = rand(4);
 			//Boosts mino and hellhound rates!
 			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {

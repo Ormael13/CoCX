@@ -3,6 +3,7 @@
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Dungeons.D3.D3;
 
 	import classes.CoC_Settings;
 
@@ -152,6 +153,7 @@
 		public var swamp:Swamp = new Swamp();
 		// Scenes/Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
+		public var d3:D3 = new D3();
 		// Scenes/Explore/
 		public var gargoyle:Gargoyle = new Gargoyle();
 		public var lumi:Lumi = new Lumi();

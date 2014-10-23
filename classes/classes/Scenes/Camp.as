@@ -1500,7 +1500,7 @@ public function places(display:Boolean):Boolean {
 		if (flags[kFLAGS.GAR_NAME] == 0) cathedral = kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork;
 		else cathedral = kGAMECLASS.gargoyle.returnToCathedral;
 	}
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0)
+	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.D3_DISCOVERED] > 0)
 		dungeonsArg = dungeons;
 	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
 		owca = kGAMECLASS.owca.gangbangVillageStuff;

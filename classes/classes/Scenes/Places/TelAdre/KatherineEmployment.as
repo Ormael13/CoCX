@@ -298,7 +298,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("Kath tips the contents of the sack on the ground.  Then she lies down and pulls the sack itself over her body.  You hope she’s just playing, but when you try explain that the sack hardly qualifies as decent shelter you hear a wet ‘schlick’ noise.\n\n");
 			outputText("You’re in the desert, so there are only so many things that could sound so wet.  You rip the sack off her and are treated to a view of Kath with her hands jammed down her pants.\n\n");
-			outputText("She sits up, embarrassed despite the fact there’s no one else within a mile.  “<i>Come on " + player.short + " - You had me walking all over the place.  My cock" + katherine.cockMultiple("", "s") + "kept rubbing against my pants.  I need to do this to even think straight.</i>”\n\n");
+			outputText("She sits up, embarrassed despite the fact there’s no one else within a mile.  “<i>Come on " + player.short + " - You had me walking all over the place.  My cock" + katherine.cockMultiple("", "s") + " kept rubbing against my pants.  I need to do this to even think straight.</i>”\n\n");
 			outputText("You realize there is no way you’re going to get Kath to do anything useful out here.  On the other hand it’s a nice day and your girlfriend is very, very horny.  Might as well make the most of this trip.");
 			flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_DESERT; //Makes sure the scene happens out in the dunes
 			simpleChoices("Oral", katherine.giveKatOralPenisWingWang, "Handjob", katherine.handjobbiesFurrDemCatFurries, "", null, "", null, "", null);

@@ -1,6 +1,7 @@
 ﻿import classes.Monster;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Dungeons.D3.JeanClaude;
 
 import coc.view.MainView;
 
@@ -1463,6 +1464,32 @@ public function attack():void {
 			}
 			else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.", false);
 		}
+	}
+	
+	if (monster is JeanClaude)
+	{
+		if (player.lust <= 30)
+		{
+			outputText("Jean-Claude doesn’t even budge when you wade into him with your [weapon].");
+
+			outputText("\n\n“<i>Why are you attacking me, slave?</i>” he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. “<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>” That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.\n");
+		}
+		else if (player.lust <= 50)
+		{
+			outputText("Again your [weapon] thumps into Jean-Claude. Again it feels wrong. Again it sends an aching chime through you, that you are doing something that revolts your nature.");
+
+			outputText("\n\n“<i>Why are you fighting your master, slave?</i>” he says. He is bigger than he was before. Or maybe you are smaller. “<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>” He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.\n");
+		}
+		else if (player.lust <= 80)
+		{
+			outputText("\n\n“<i>Do you think I will be angry at you?</i>” growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  “<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>”\n");
+		}
+		else
+		{
+			outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...\n");
+		}
+		
+		player.lust += rand(3) + 5;
 	}
 	if(damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
@@ -3739,8 +3766,9 @@ public function tease(justText:Boolean = false):void {
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
-		damage = (damage + rand(bonusDamage))*monster.lustVuln;
-		if (!justText) monster.teased(damage);
+		damage = (damage + rand(bonusDamage)) * monster.lustVuln;
+		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
+		else if (!justText) monster.teased(damage);
 		
 		
 		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
@@ -3756,7 +3784,9 @@ public function tease(justText:Boolean = false):void {
 	//Nuttin honey
 	else {
 		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
-		if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
+		
+		if (monster is JeanClaude) (Monster as JeanClaude).handleTease(0, false);
+		else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);
 }
@@ -4075,6 +4105,35 @@ public function spellBlind():void {
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
+		return;
+	}
+	if (monster is JeanClaude)
+	{
+		outputText("Jean-Claude howls, reeling backwards before turning back to you, rage clenching his dragon-like face and enflaming his eyes. Your spell seemed to cause him physical pain, but did nothing to blind his lidless sight.");
+
+		outputText("\n\n“<i>You think your hedge magic will work on me, intrus?</i>” he snarls. “<i>Here- let me show you how it’s really done.</i>” The light of anger in his eyes intensifies, burning a retina-frying white as it demands you stare into it...");
+		
+		if (rand(player.spe) >= 50 || rand(player.inte >= 50))
+		{
+			outputText("\n\nThe light sears into your eyes, but with the discipline of conscious effort you escape the hypnotic pull before it can mesmerize you, before Jean-Claude can blind you.");
+
+			outputText("\n\n“<i>You fight dirty,</i>” the monster snaps. He sounds genuinely outraged. “<i>I was told the interloper was a dangerous warrior, not a little [boy] who accepts duels of honour and then throws sand into his opponent’s eyes. Look into my eyes, little [boy]. Fair is fair.</i>”");
+			
+			monster.HP -= int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+		}
+		else
+		{
+			outputText("\n\nThe light sears into your eyes and mind as you stare into it. It’s so powerful, so infinite, so exquisitely painful that you wonder why you’d ever want to look at anything else, at anything at- with a mighty effort, you tear yourself away from it, gasping. All you can see is the afterimages, blaring white and yellow across your vision. You swipe around you blindly as you hear Jean-Claude bark with laughter, trying to keep the monster at arm’s length.");
+
+			outputText("\n\n“<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>”");
+			
+			player.createStatusAffect(StatusAffects.Blind, rand(4) + 1, 0, 0, 0);
+		}
+		
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		if(monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 		return;
 	}
 	outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n", true);
