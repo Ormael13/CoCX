@@ -215,7 +215,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function discoverD3():Boolean
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && player.level > 10 rand(10) == 0)
+			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && player.level > 10 && rand(10) == 0)
 			{
 				flags[kFLAGS.D3_DISCOVERED] = 1;
 				
@@ -351,7 +351,41 @@ package classes.Scenes.Dungeons.D3
 			outputText("The metal door opens soundlessly onto a fairly large, unlit room, shabby and grey with disuse. It is cluttered with a great quantity of mirrors. Round hand mirrors are stacked on shelves, square wall mirrors are leant against walls, a large,"); 
 			if (flags[kFLAGS.D3_MIRRORS_SHATTERED] == 1) outputText(" now shattered,");
 			outputText(" ornate standing mirror dominates the centre of the room, and a number of broken, jagged specimens are stacked near the back. They reflect the dull trappings of this place back at you emptily. You guess as self - centred a race as the demons probably has quite a large use for these.");
+			
+			if (player.hasKeyItem("Laybans"))
+			{
+				outputText("\n\nThe place feels hollow and creepy, even after the ad hoc exorcism you performed here. There is no reason to linger.");
+			}
+			else
+			{
+				outputText("\n\nNear the back, next to the broken stack is a white stand, displaying what appear to be a number of dark shades.");
+				if (flags[kFLAGS.D3_ENTERED_MAGPIEHALL] == 1) outputText("  Your spirits rise. They look like they may very well be made of the same material as the screen in the basilisk hall.");
+				if (player.inte >= 70 || player.sens >= 70) outputText("  Disquiet edges down your spine. Something about this place doesn’t feel right. The room seems faded at the corners, as if it’s not quite there.");
+				
+				addButton(2, "Glasses", getDemGlasses);
+			}
+			
 			return false;
+		}
+		
+		private function getDemGlasses():void
+		{
+			clearOutput();
+			outputText("You step into the room and move across to the optician stand. The metal door clicks shut behind you. A feeling of unease grows in your gut as you walk further into the room; the place seems gloomier and larger than it did from the door. You almost jump out of your skin as somebody suddenly emerges to your right- but of course it’s just you, reflected in the intricately decorated, oval-shaped mirror which centers the room. You smile at your own silliness, before watching your expression change to a frown. You seem very sharply focused in it; the room behind you barely seems there at all. Some kind of enchantment to refine a demon’s appearance, you guess.");
+
+			outputText("\n\nYou turn away and head over to the upright display of dark shades, pulling a pair out of their indents. They are completely reflective on the side facing away from your eyes, and the word 'Laybans' is engraved down one arm. Whatever they are used for, you know one thing for certain: you are going to look ice cool wearing them. Pleased, you turn back towards the door- and get a start. Was the standing mirror facing this way when you came in here? Maybe it is double sided, but... you grin uneasily at your own reflection. It grins back. It looks a great deal more confident than you think your smile should look, given the circumstances. You find it difficult to look away now you are confronted with a clear, full length image of what you look like; for so long now you’ve relied on the vague, faltering surface of the stream near your camp it’s almost startling to be given such a clear picture of yourself.");
+			if (player.humanScore() > 4)  outputText("  It is honestly surprising, given everything you have encountered since you stepped through that portal what seems years ago, that you are still recognizably human. You wonder if your parents would be able to recognize the battle-hardened " + player.mf("man", "woman") +" clad in " + player.mf("his", "her") +" [armor] standing in front of you to be the wide-eyed youth they bade their heartfelt goodbyes to all that time ago, though.");
+			else outputText("  The last time you looked into such a sharp reflection you were human; a pang of regret steals through you as you consider probably not even your parents would be able to recognize the strange "+ player.race() +" clad in "+ player.mf("his", "her") +" [armor] standing in front of you now.");
+
+			outputText("\n\nYou continue to stare at yourself, transfixed. The image is so vivid, and yet you cannot shake the feeling that it isn’t really you - the more you look, the more you pick out details which don’t seem right. It has to be you, right? But do you really look that intense? Where did that wild look in your eye come from? Unreality washes over you as the mirror and the room seem to swim. Everything is vague except your image in the mirror, still staring back at you, seeming to move independently of you, perspective causing it to bend and distort bizarrely. When the image’s mouth splits into a grin, opens and speaks whilst yours remains shut, it is no longer surprising. It is not you.");
+
+			outputText("\n\n“<i>I was expecting an imp,</i>” it says. The voice sounds like it is coming from some distance away, but a cold sensation spreads itself over your shoulders as you recognize it. It’s what you would sound like to someone standing a couple of rooms away from you. It looks down and clenches your... <i>" player.mf("his", "her") + "</i> fists with an expression of wild wonder, before turning "+ player.mf("his", "her") +" eyes back to you. “<i>That would be the fitting thing, wouldn’t it? Robbed of my form by Lethice, bound to a glass prison for a decade, forced to seize and use the first thing stupid enough to be transfixed by it. It would have to be an imp, wouldn’t it? But this...</i>” The doppelganger walks slowly towards you, "+ player.mf("his", "her") +" voice, your voice heard through a bottleneck of madness, getting louder all the time. As "+ player.mf("he", "she") +" comes "+ player.mf("he", "she") +" stretches "+ player.mf("his", "her") +" limbs luxuriously, examining the form "+ player.mf("he", "she") +" has stolen, running "+ player.mf("his", "her") +" hands down your trunk to touch the top of your [hips], marvelling. You feel violated in a way you never thought possible. “<i>... This, I could get used to. This, I could use. Who are you?</i>”");
+
+			outputText("\n\nRight at the front of the mirror now, "+ player.mf("he", "she") +" flicks "+ player.mf("his", "her") +" borrowed fingers at the air, as if coaxing the answer out of it. As "+ player.mf("he", "she") +" does so, "+ player.mf("he", "she") +" casually steps through the surface of the mirror, as if it were an open window. The feeling of unreality intensifies; you can’t shake the sensation of being mired in vagueness, at how vivid the mirror demon looks in comparison to how you feel.");
+
+			outputText("\n\n“<i>[Name]. There we go. Not what I would choose to describe this business...</i>” " + player.mf("he", "she") +" pats " + player.mf("his", "her") +" [butt] mockingly, “<i>but then I’m not you, right? Not yet, anyway.</i>” " + player.mf("He", "She") +" laughs, suddenly, madly, and you cringe inwardly. It is what you would sound like if you were completely, utterly insane. “<i>Do you know what it is like to spend ten years without a form? To spend ten years imitating an empty room? Well, don’t worry, [name]. When I have taken your place and bound you to this thing I’ll make sure to put it somewhere nice and busy, so you will never have to know that torment!</i>” " + player.mf("He", "She") +" draws the mirror image of your [weapon] and advances upon you, your own features hiked into a rictus of madness. You must fight yourself!");
+			
+			// 9999 doppleganger fight
 		}
 		
 		private function magpiehallsRoomFunc():Boolean
@@ -360,6 +394,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (flags[kFLAGS.D3_ENTERED_MAGPIEHALL] == 0)
 				{
+					flags[kFLAGS.D3_ENTERED_MAGPIEHALL] = 1;
 					outputText("You creep through the archway. The sound of movement and bustle is closer here; it seems to be coming from directly below you. Ahead is the screen, a large window made from tinted glass. Cautiously you peer through it. You have entered a vast hall, near the very top of it; this seems to be some sort of observation booth set high in the stone wall. It’s designed in the grand, classical tradition, fluted balustrades flanking the walls, each decorated at the top by a carved magpie in flight. Below is - well. You blink, trying to take it all in.");
 
 					outputText("\n\nMany feet below the hall swarms with activity: tall, thin, grey-green reptiles sliding sinuously around each other and the long tables that run the length of the room. There must be hundreds, no, at least a thousand basilisks down there, carrying, analyzing, sorting the vast amount of junk the tables are heaped with.");
