@@ -1243,12 +1243,13 @@ public static const KATHERINE_URTA_TIMES_SEX:int                                
 public static const KATHERINE_VALA_AFFECTION:int                                    = 1235;
 public static const KATHERINE_VALA_DATE:int                                         = 1236;
 public static const KATHERINE_VALA_TIMES_SEX:int                                    = 1237;
-public static const D3_DISCOVERED:int                                   = 1238;
-public static const D3_ENTERED_MAGPIEHALL:int                                   = 1239;
-public static const D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL:int                                   = 1240;
-public static const D3_MIRRORS_SHATTERED:int                                   = 1241;
-public static const D3_JEAN_CLAUDE_DEFEATED:int                                   = 1242;
-public static const UNKNOWN_FLAG_NUMBER_01243:int                                   = 1243;
+public static const SAVE_FILE_INTEGER_FORMAT_VERSION:int                            = 1238;
+public static const D3_DISCOVERED:int                                   = 1239;
+public static const D3_ENTERED_MAGPIEHALL:int                                   = 1240;
+public static const D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL:int                                   = 1241;
+public static const D3_MIRRORS_SHATTERED:int                                   = 1242;
+public static const D3_JEAN_CLAUDE_DEFEATED:int                                   = 1243;
+
 public static const UNKNOWN_FLAG_NUMBER_01244:int                                   = 1244;
 public static const UNKNOWN_FLAG_NUMBER_01245:int                                   = 1245;
 public static const UNKNOWN_FLAG_NUMBER_01246:int                                   = 1246;

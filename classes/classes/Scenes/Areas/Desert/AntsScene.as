@@ -64,12 +64,10 @@ package classes.Scenes.Areas.Desert
 		{
 			pregnancy.pregnancyAdvance();
 			trace("\nPhylla time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && rand(5) == 0 && flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS]++;
 			if (model.time.hours > 23) {
-				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) {
-					//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
-					if (rand(5) == 0 && flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS]++;
-					if (model.time.hours == 24) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
-				}
+				//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
+				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 				if (flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
 				if (phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
 			}
