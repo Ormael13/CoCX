@@ -353,7 +353,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.16_mod_0.8.3";
+			ver = "0.8.16_mod_0.8.3b";
 			version = ver + " (<b>Minerva pregnancy fixes</b>)";
 
 			//Indicates if building for mobile?

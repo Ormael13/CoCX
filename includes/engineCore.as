@@ -702,6 +702,7 @@ public function buildPerkList():Array {
 		_add(new PerkClass(PerkLib.Resistance));
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist));
 	}
+	//Tier 2 Misc Perks
 	if(player.level >= 12 && player.findPerk(PerkLib.Survivalist) > 0) {
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist2));
 	}

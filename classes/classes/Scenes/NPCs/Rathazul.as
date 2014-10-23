@@ -135,7 +135,7 @@ private function rathazulWorkOffer():Boolean {
 		collectRathazulArmor();
 		return true;
 	}
-	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1) {
+	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
 		purificationByRathazulBegin();
 		return true;
 	}
