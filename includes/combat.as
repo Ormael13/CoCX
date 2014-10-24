@@ -1,6 +1,7 @@
 ﻿import classes.Monster;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
 
 import coc.view.MainView;
@@ -1489,19 +1490,31 @@ public function attack():void {
 			outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...\n");
 		}
 		
-		player.lust += rand(3) + 5;
+		dynStats("lus", 3 + rand(5));
 	}
+
+	// Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
+	if (monster is Doppleganger)
+	{
+		if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (damage > 0) damage = doDamage(damage, false);
+		
+		(monster as Doppleganger).mirrorAttack(damage);
+		return;
+	}
+	
 	if(damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = doDamage(damage);
 	}
+	
 	if(damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
-		if(crit) outputText(" <b>*CRIT*</b>");
+		if (crit) outputText(" <b>*CRIT*</b>");
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
@@ -1515,6 +1528,7 @@ public function attack():void {
 			//(gain lust, temp lose str/spd)
 			(monster as Anemone).applyVenom((1+rand(2)));
 		}
+		
 		//Lust raising weapon bonuses
 		if(monster.lustVuln > 0) {
 			if(player.weaponPerk == "Aphrodisiac Weapon") {
@@ -1736,7 +1750,7 @@ public function combatMisdirect():Boolean {
 }
 
 //DEAL DAMAGE
-public function doDamage(damage:Number):Number {
+public function doDamage(damage:Number, apply:Boolean = true; ):Number {
 	if(player.findPerk(PerkLib.Sadist) >= 0) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -1759,7 +1773,7 @@ public function doDamage(damage:Number):Number {
 	damage = Math.round(damage);
 	
 	if(damage < 0) damage = 1;
-	monster.HP -= damage;
+	if (apply) monster.HP -= damage;
 	//Isabella gets mad
 	if(monster.short == "Isabella") {
 		flags[kFLAGS.ISABELLA_AFFECTION]--;
@@ -3768,7 +3782,8 @@ public function tease(justText:Boolean = false):void {
 		if(monster.plural) damage *= 1.3;
 		damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-		else if (!justText) monster.teased(damage);
+		if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(damage, true);
+		else if (!justText && (!monster is Doppleganger)) monster.teased(damage);
 		
 		
 		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
@@ -3785,7 +3800,8 @@ public function tease(justText:Boolean = false):void {
 	else {
 		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
 		
-		if (monster is JeanClaude) (Monster as JeanClaude).handleTease(0, false);
+		if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
+		if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
 		else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);
@@ -4173,6 +4189,13 @@ public function spellWhitefire():void {
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
+		return;
+	}
+	if (monster is Doppleganger)
+	{
+		(monster as Doppleganger).handleSpellResistance("whitefire");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
@@ -4766,6 +4789,13 @@ public function fireballuuuuu():void {
 		changeFatigue(10);
 		takeDamage(10+rand(20));
 		enemyAI();
+		return;
+	}
+	if (monster is Doppleganger)
+	{
+		(monster as Doppleganger).handleSpellResistance("fireball");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
 		return;
 	}
 	var damage:Number;

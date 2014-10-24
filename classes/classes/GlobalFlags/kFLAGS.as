@@ -1250,7 +1250,7 @@ public static const D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL:int                   
 public static const D3_MIRRORS_SHATTERED:int                                   = 1242;
 public static const D3_JEAN_CLAUDE_DEFEATED:int                                   = 1243;
 
-public static const UNKNOWN_FLAG_NUMBER_01244:int                                   = 1244;
+public static const D3_DOPPLEGANGER_DEFEATED:int                                   = 1244;
 public static const UNKNOWN_FLAG_NUMBER_01245:int                                   = 1245;
 public static const UNKNOWN_FLAG_NUMBER_01246:int                                   = 1246;
 public static const UNKNOWN_FLAG_NUMBER_01247:int                                   = 1247;

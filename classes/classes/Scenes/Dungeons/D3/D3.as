@@ -14,6 +14,7 @@ package classes.Scenes.Dungeons.D3
 		private var _currentRoom:String; // I don't think we'll need to save/load this, as we're not gonna allow saving in the dungeon, and it'll be overwritten by calling enterD3();
 		
 		public var jeanClaude:JeanClaudeScenes = new JeanClaudeScenes();
+		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
 		
 		public function D3() 
 		{
