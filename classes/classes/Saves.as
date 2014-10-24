@@ -1764,7 +1764,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		//Set gear slot array
-		if (saveFile.data.gearStorage == undefined || saveFile.data.gearStorage.length < 27)
+		if (saveFile.data.gearStorage == undefined)
 		{
 			//trace("OLD SAVES DO NOT CONTAIN ITEM STORAGE ARRAY - Creating new!");
 			inventory.initializeGearStorage();

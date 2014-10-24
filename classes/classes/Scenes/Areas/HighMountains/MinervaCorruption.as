@@ -7,7 +7,7 @@ package classes.Scenes.Areas.HighMountains
 	
 	public class MinervaCorruption 
 	{
-		
+		//I might not work on this, unfortunately.
 		public function MinervaCorruption() 
 		{
 			
