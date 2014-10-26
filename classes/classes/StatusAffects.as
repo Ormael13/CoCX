@@ -292,6 +292,7 @@ package classes
 		public static const RemovedArmor:CombatStatusAffect = mk2("Removed Armor");
 		public static const JCLustLevel:CombatStatusAffect = mk2("JC Lust Level");
 		public static const MirroredAttack:CombatStatusAffect = mk2("Mirrored Attack");
+		public static const KnockedBack:CombatStatusAffect = mk2("Knocked Back");
 
 		/**
 		 * Creates non-combat status affect

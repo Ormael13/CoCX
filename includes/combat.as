@@ -3,6 +3,8 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
+import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.D3.LivingStatueScenes;
 
 import coc.view.MainView;
 
@@ -93,6 +95,15 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 	//Not actually in combat
 	else doNext(nextFunc);
 }
+
+public function approachAfterKnockback():void
+{
+	outputText("You close the distance between you and " + monster.the + monster.short + " as quickly as possible.");
+	player.removeStatusAffect(StatusAffects.KnockedBack);
+	enemyAI();
+	return;
+}
+
 //5000 6999
 public function doCombat(eventNum:Number):void
 {
@@ -129,6 +140,19 @@ public function doCombat(eventNum:Number):void
 			if (player.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
 				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
 				attacks = 0;
+			}
+			if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+			{
+				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!<b>");
+				menu();
+				addButton(0, "Approach", );
+				addButton(1, "Tease", 5005);
+				addButton(2, "Spells", temp2);
+				addButton(3, "Items", 1000);
+				addButton(4, "Run", runAway);
+				addButton(6, "M. Specials", 5160);
+				addButton(7, waitT, 5071);
+				addButton(8, "Fantasize", 5086);
 			}
 			if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
 				outputText("<b>  Even physical special attacks are out of the question.</b>");
@@ -1559,10 +1583,18 @@ public function attack():void {
 				monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			}
 			//50% Bleed chance
-			if(player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) {
-				monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+			if (player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) 
+			{
+				if (monster is LivingStatue)
+				{
+					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
+				}
+				else
+				{
+					monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
+					if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+					else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+				}
 			}
 		}
 		
@@ -4153,7 +4185,11 @@ public function spellBlind():void {
 		return;
 	}
 	outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n", true);
-	if(rand(3) != 0) {
+	if (monster is LivingStatue)
+	{
+		// noop
+	}
+	else if(rand(3) != 0) {
 		outputText(" <b>" + monster.capitalA + monster.short + " ", false);
 		if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>", false);
 		else outputText("is blinded!</b>", false);
@@ -4248,6 +4284,15 @@ public function spellCleansingPalm():void
 			return;
 		}
 	}
+	
+	if (monster is LivingStatue)
+	{
+		outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		enemyAI();
+		return;
+	}
 		
 	var corruptionMulti:Number = (monster.cor - 20) / 25;
 	if (corruptionMulti > 1.5) corruptionMulti = 1.5;
@@ -4307,6 +4352,12 @@ public function hellFire():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 		enemyAI();
 		return;
 	}
@@ -4550,6 +4601,12 @@ public function nagaBiteAttack():void {
 		enemyAI();
 		return;
 	}
+	if (monster is LivingStatue)
+	{
+		outputText("Your fangs can't even penetrate the giant's flesh.");
+		enemyAI();
+		return;
+	}
 	//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
     if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
 		//(if monster = demons)
@@ -4587,6 +4644,12 @@ public function spiderBiteAttack():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("Your fangs can't even penetrate the giant's flesh.");
 		enemyAI();
 		return;
 	}
@@ -4634,6 +4697,13 @@ public function superWhisperAttack():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
+		changeFatigue(1);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("There is nothing inside the golem to whisper to.");
 		changeFatigue(1);
 		enemyAI();
 		return;
@@ -4704,6 +4774,12 @@ public function dragonBreath():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 		enemyAI();
 		return;
 	}
@@ -4779,6 +4855,12 @@ public function fireballuuuuu():void {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 		enemyAI();
 		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+		enemyAI();
+		return true;
 	}
 	//[Failure]
 	//(high damage to self, +20 fatigue)
@@ -4953,6 +5035,10 @@ public function possess():void {
 	outputText("", true);
 	if(monster.short == "plain girl" || monster.findPerk(PerkLib.Incorporeality) >= 0) {
 		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.", false);
+	}
+	else if (monster is LivingStatue)
+	{
+		outputText("There is nothing to possess inside the golem.");
 	}
 	//Sample possession text (>79 int, perhaps?):
 	else if((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > 100) {

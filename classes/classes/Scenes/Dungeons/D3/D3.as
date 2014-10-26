@@ -15,6 +15,8 @@ package classes.Scenes.Dungeons.D3
 		
 		public var jeanClaude:JeanClaudeScenes = new JeanClaudeScenes();
 		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
+		public var incubusMechanic:IncubusMechanicScenes = new IncubusMechanicScenes();
+		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
 		
 		public function D3() 
 		{
@@ -701,23 +703,26 @@ package classes.Scenes.Dungeons.D3
 			return false;
 		}
 		
+		// 9999 - Check this
 		private function courtyardsquareRoomFunc():Boolean
 		{
-			//Statue exploded
-			if (9999 == 0)
+			//Statue not exploded - mossy - 30’ high
+			outputText("A circle of polished stone wraps around a colossus here in the center of the courtyard, ringed by cushioned benches that would be a delight to sit on were they not stained with bodily fluids of all colors and sexes. You didn’t think pink cum was possible, but the demons’ endless sexual creativity doesn’t seem to be bound by such notions. You can leave east and west from here.");
+
+			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0)
 			{
-				outputText("Two disembodied, marble feet and a field of rubble are all that remains of the once proud statue that stood in the center of the courtyard. You dealt with the animated monstrosity but can’t help but feel a little shame at the destruction you’ve so openly wrought. Many of the bushes are torn in half by two ton slabs, and the path is scarred in a dozen places by chips and smashed divots. You can go east and west from here, if you move carefully around the more jagged pieces of stone.");
+				outputText("\n\nWait... what’s that?");
+
+				menu();
+				addButton(0, "Next", livingStatue.encounter);
+				return true;
 			}
-			else
-			{
-				//Statue not exploded - mossy - 30’ high
-				outputText("A circle of polished stone wraps around a colossus here in the center of the courtyard, ringed by cushioned benches that would be a delight to sit on were they not stained with bodily fluids of all colors and sexes. You didn’t think pink cum was possible, but the demons’ endless sexual creativity doesn’t seem to be bound by such notions. You can leave east and west from here.");
-				if (9999 == 0) outputText("{ Wait... what’s that?//TO STATUE SPAWN!}");
-			}
+
+			outputText("Two disembodied, marble feet and a field of rubble are all that remains of the once proud statue that stood in the center of the courtyard. You dealt with the animated monstrosity but can’t help but feel a little shame at the destruction you’ve so openly wrought. Many of the bushes are torn in half by two ton slabs, and the path is scarred in a dozen places by chips and smashed divots. You can go east and west from here, if you move carefully around the more jagged pieces of stone.");
 			
 			return false;
 		}
-		
+
 		private function greatliftRoomFunc():Boolean
 		{
 			outputText("Intricate stonework supports this precarious platform as it juts from the side of Lethice's fortress, hanging over a sheer cliff that must go down for hundreds of feet. The harpies appear to have moved away from the area immediately below, whether by choice or by demonic action, though you can still spot a few of their nests in other places on the mountainside. A complicated looking machine sits on the side of the platform, attached to a cage that dangles over the edge, supported by a lowly metal cable. It must be some kind of mechanical lift - a way to come and go as one would please.");
