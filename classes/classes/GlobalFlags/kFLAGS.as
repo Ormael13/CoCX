@@ -1251,9 +1251,9 @@ public static const D3_MIRRORS_SHATTERED:int                                   =
 public static const D3_JEAN_CLAUDE_DEFEATED:int                                   = 1243;
 
 public static const D3_DOPPLEGANGER_DEFEATED:int                                   = 1244;
-public static const UNKNOWN_FLAG_NUMBER_01245:int                                   = 1245;
-public static const UNKNOWN_FLAG_NUMBER_01246:int                                   = 1246;
-public static const UNKNOWN_FLAG_NUMBER_01247:int                                   = 1247;
+public static const D3_MECHANIC_LAST_GREET:int                                   = 1245;
+public static const D3_MECHANIC_FIGHT_RESULT:int                                   = 1246;
+public static const D3_MECHANIC_COCK_TYPE_SELECTION:int                                   = 1247; // This is the kinda shit that sounds like it might get referenced in future (HAHAHA YEAH RIGHT?)
 public static const UNKNOWN_FLAG_NUMBER_01248:int                                   = 1248;
 public static const UNKNOWN_FLAG_NUMBER_01249:int                                   = 1249;
 public static const UNKNOWN_FLAG_NUMBER_01250:int                                   = 1250;

@@ -3,10 +3,23 @@ package classes.Scenes.Dungeons.Factory
 	import classes.*;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class IncubusMechanic extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void
+		{
+			if (flags[kFLAGS.D3_DISCOVERED] == 0)
+			{
+				defeatedInDungeon1(hpVictory);
+			}
+			else
+			{
+				defeatedInDungeon3(hpVictory);
+			}
+		}
+		
+		private function defeatedInDungeon1(hpVictory:Boolean):void
 		{
 			if(player.gender == 0) {
 				if (hpVictory){
@@ -30,8 +43,25 @@ package classes.Scenes.Dungeons.Factory
 				}
 			}
 		}
+		
+		private function defeatedInDungeon3(hpVictory:Boolean):void
+		{
+			game.d3.beatDaMechanic(hpVictory);
+		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (flags[kFLAGS.D3_DISCOVERED] == 0)
+			{
+				wonInDungeon1(hpVictory, pcCameWorms);
+			}
+			else
+			{
+				wonInDungeon3(hpVictory, pcCameWorms);
+			}
+		}
+		
+		private function wonInDungeon1(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -39,6 +69,11 @@ package classes.Scenes.Dungeons.Factory
 			} else {
 				game.eventParser(11038);
 			}
+		}
+		
+		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.d3.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 
 		public function IncubusMechanic() {

@@ -140,7 +140,8 @@
 			outputText("<b><u>Furnace Room</u></b>\nDespite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ", true);			
 		}
 
-		if(player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0) {
+		// If the players found D3, hide him entirely to avoid two-places-at-once syndrome.
+		if(player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0 || flags[kFLAGS.D3_DISCOVERED] == 1) {
 			text6 = "West";
 			choice6 = 11001;
 		}
