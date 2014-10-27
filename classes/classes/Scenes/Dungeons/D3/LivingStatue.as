@@ -3,6 +3,8 @@ package classes.Scenes.Dungeons.D3
 	import classes.Monster;
 	import classes.StatusAffects;
 	import classes.PerkLib;
+	import classes.GlobalFlags.kFLAGS;
+	
 	
 	/**
 	 * ...
@@ -12,6 +14,7 @@ package classes.Scenes.Dungeons.D3
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
+			flags[kFLAGS.D3_STATUE_DEFEATED] = 1;
 			game.d3.livingStatue.beatUpDaStatue(hpVictory);
 		}
 		
@@ -108,6 +111,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" It chits you square in the chest. The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b>");
 				
 				player.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0);
+				this.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
 				damage = player.takeDamage(damage);
 				
 				outputText(" (" + damage + ")");
@@ -141,6 +145,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" Your equipment flies off into the bushes! You'll have to fight another way.");
 				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
+				this.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
 				player.weapon.unequip(player,false,true);
@@ -151,15 +156,43 @@ package classes.Scenes.Dungeons.D3
 		{
 			//Difficult to avoid, moderate damage.
 			outputText("Twisting back, the giant abruptly launches into a circular spin. It's hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
-//Avoid
-By the grace of the gods, you somehow avoid the spinning hammer.
-//Hit
-You're squarely struck by the spinning hammer.
+
+			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			//Avoid
+			if (damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
+			else
+			{
+				//Hit
+				outputText(" You're squarely struck by the spinning hammer.");
+				damage = player.takeDamage(damage);
+				outputText(" (" + damage + ")");
+			}
 		}
 		
 		override protected function performCombatAction():void
 		{
+			if (this.HPRatio() < 0.6 && this.findStatusAffect(StatusAffects.KnockedBack) < 0)
+			{
+				this.backhand();
+			}
+			else if (this.HPRatio() < 0.4 && this.findStatusAffect(StatusAffects.Disarmed) < 0)
+			{
+				this.disarm();
+			}
+			else
+			{
+				var opts:Array = [];
+				
+				if (player.findStatusAffect(StatusAffects.Blind) < 0) opts.push(dirtKick);
+				opts.push(concussiveBlow);
+				opts.push(cycloneStrike);
+				opts.push(cycloneStrike);
+				opts.push(overhandSmash);
+				
+				opts[rand(opts.length)]();
+			}
 			
+			combatRoundOver();
 		}
 		
 	}

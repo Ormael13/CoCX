@@ -25,12 +25,39 @@ package classes.Scenes.Dungeons.D3
 		
 		public function beatUpDaStatue(hpVictory:Boolean):void
 		{
+			clearOutput();
+			outputText("Cracks spiderweb out from the point of your last strike, spreading like wildfire across the surface of the stone giant. It groans in pain as its face slowly freezes, locked in a grimace of inhuman suffering before the whole of it comes apart. Chunks of marble fall, kicking up a cloud of white dust and dirt. When it clears, there's nothing left but two marble feet, amputated at the ankle, standing amidst a field of rubble.");
+			outputText("\n\nA gleaming, purple stone in the center catches your eye.");
 			
+			menu();
+			addButton(0, "Take Stone", takeTheStone);
+		}
+		
+		private function takeTheStone():void
+		{
+			clearOutput();
+			
+			outputText("You carefully step through the cratered rubble to claim your prize. It's a chunk of lethicite,");
+			
+			// 9999 dis shit.
+			if (player.hasKeyItem("Marae's Lethicite")) outputText(" easily as big as Marae's.");
+			else outputText(" like the purple crystals in the factory, only this one is three times as big.");
+			outputText("\n\n<b>Lethicite acquired!</b>");
+			
+			player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
+
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		public function fuckinMarbleOP(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			clearOutput();
+			outputText("You slump to your knees, overwhelmed and unable to see the shadow of the falling hammer. Your last thoughts are of regret.");
+
+			outputText("\n\n<b>GAME OVER</b>");
 			
+			menu();
+			doNext(9999);
 		}
 	}
 

@@ -647,7 +647,7 @@ package classes.Scenes.Dungeons.D3
 		private function westwalkRoomFunc():Boolean
 		{
 			outputText("Pollen clings to you, released by the many flowering bushes in the area. They only grow thicker to the south, too. To the east, you can");
-			if (9999 == 0) outputText(" see a massive statue with an immense hammer");
+			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" see a massive statue with an immense hammer");
 			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew");
 			outputText(". The warm, sandstone bricks underfoot fork in a T-intersection, leading north, east, and south. The thick castle walls prevent passage to the west.");
 			
