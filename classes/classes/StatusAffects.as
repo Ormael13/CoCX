@@ -293,6 +293,8 @@ package classes
 		public static const JCLustLevel:CombatStatusAffect = mk2("JC Lust Level");
 		public static const MirroredAttack:CombatStatusAffect = mk2("Mirrored Attack");
 		public static const KnockedBack:CombatStatusAffect = mk2("Knocked Back");
+		public static const Tentagrappled:CombatStatusAffect = mk2("Tentagrappled");
+		public static const TentagrappleCooldown:CombatStatusAffect = mk2("Tentagrapple Cooldown");
 
 		/**
 		 * Creates non-combat status affect
