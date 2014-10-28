@@ -295,6 +295,9 @@ package classes
 		public static const KnockedBack:CombatStatusAffect = mk2("Knocked Back");
 		public static const Tentagrappled:CombatStatusAffect = mk2("Tentagrappled");
 		public static const TentagrappleCooldown:CombatStatusAffect = mk2("Tentagrapple Cooldown");
+		public static const ShowerDotEffect:CombatStatusAffect = mk2("Shower Dot Effect");
+		public static const GardnerSapSpeed:CombatStatusAffect = mk2("Sap Speed");
+		public static const VineHealUsed:CombatStatusAffect = mk2("Vine Heal Used");
 
 		/**
 		 * Creates non-combat status affect

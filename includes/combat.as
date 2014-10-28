@@ -5,6 +5,7 @@ import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.D3.LivingStatueScenes;
+import classes.Scenes.Dungeons.D3.SuccubusGardner;
 
 import coc.view.MainView;
 
@@ -194,6 +195,10 @@ public function doCombat(eventNum:Number):void
 					choices("Struggle", (monster as Izumi).chokeSlamStruggle, "Wait", (monster as Izumi).chokeSlamWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				} else if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) {
 					choices("Struggle", (monster as Izumi).titSmotherStruggle, "Wait", (monster as Izumi).titSmotherWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+				}
+				else if (player.findStatusAffect(StatusAffects.Tentagrapple) >= 0)
+				{
+					choices ("Struggle", (monster as SuccubusGardner).grappleStrugge, "Wait", (monster as SuccubusGardner).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
 				//REGULAR MENU

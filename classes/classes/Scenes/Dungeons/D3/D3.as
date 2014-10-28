@@ -648,6 +648,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nThe slick foilage parts just ahead, revealing a lissom leg clad in green hosiery that resembles the spiderwork patterns of leafy veins more than any garment. It's owner follows but a moment later, so perfectly, wonderfully shapely that you freeze in place, compelled by biology to take notice. Her expansive bosom, womanly hips, and gentle, soft curves invite you to fall into her embrace. Her lips, full and pouting, beckon for you to taste them. Her hair's lustrous shine glitters like an angler fish's lure, just out of reach and oh so foolish to pursue. The smooth, twists of her ram-like horns keep her coiffure stylish while simultaneously jolting you out of your reverie.");
 				
 				outputText("\n\nYou shake your head to regain your focus. This is a demon, and you won't fall for her tricks this easily");
+				
 				if (9999 == 0) // I'm not sure what this variation was supposed to point at specifically.
 				{
 					outputText("!");

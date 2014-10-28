@@ -1724,7 +1724,13 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
-			while(findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
+			while (findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
+			if (findStatusAffect(StatusAffects.GardnerSapSpeed) >= 0)
+			{
+				spe += statusAffectv1(StatusAffects.GardnerSapSpeed);
+				kGAMECLASS.mainView.statsView.showStatUp('spe');
+				removeStatusAffect(StatusAffects.GardnerSapSpeed);
+			}
 		}
 
 		public function consumeItem(itype:ItemType, amount:int=1):Boolean
