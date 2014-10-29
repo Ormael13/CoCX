@@ -18,6 +18,7 @@ package classes.Scenes.Dungeons.D3
 		public var incubusMechanic:IncubusMechanicScenes = new IncubusMechanicScenes();
 		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
 		public var succubusGardner:SuccubusGardnerScenes = new SuccubusGardnerScenes();
+		public var hermCentaur:HermCentaurScenes = new HermCentaurScenes();
 		
 		public function D3() 
 		{
