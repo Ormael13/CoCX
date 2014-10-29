@@ -15,7 +15,7 @@ public function fellatrixBarAppearance():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] != -1) outputText("\n\nYou notice Dominika speaking to a city guard at one of the tables. You can't hear the conversation, but the guard leaves shortly after you arrive, and Dominika rests her chin on her hand, staring into the distance.", false);
 }
-private function fellatrixSucked():Boolean {
+public function fellatrixSucked():Boolean {
 	return timesFellatrixSucked() > 0;
 }
 private function timesFellatrixSucked():Number {

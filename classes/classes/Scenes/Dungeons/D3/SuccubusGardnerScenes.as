@@ -16,6 +16,162 @@ package classes.Scenes.Dungeons.D3
 			
 		}
 		
+		private const GARDENER_LEFT:int = 1;
+		private const GARDENER_FUCKED:int = 2;
+		private const GARDENER_KILLED:int = 3;
+
+		public function gardenerDefeated():Boolean
+		{
+			if (flags[kFLAGS.D3_GARDNER_DEFEATED] > 0) return true;
+			return false;
+		}
+
+		public function gardenerKilled():Boolean
+		{
+			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 3) return true;
+			return false;
+		}
+
+		public function gardenerFucked():Boolean
+		{
+			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 2) return true;
+			return false;
+		}
+
+		public function gardenerLeft():Boolean
+		{
+			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 1) return true;
+			return false;
+		}
+
+		public function fuckUpTheGardener(hpVictory:Boolean):void
+		{
+			clearOutput();
+			outputText("The succubus drops to her knees, grabbing a tentacle and thrusting it into wanton sex forcefully enough to make you wince. She doesn't seem to mind, in fact, her lips spread into a wordless 'o' of pleasure as she begins rocking back and forth atop, lost to her own lusts. She's in no state to stop you from moving on. Hell, she's probably going to be busy with the tentacles for a long, long time. You suppose you could try and put her mouth to use, but there are a LOT of tentacles awfully close. It might be best to move on or end her quickly.");
+
+			menu();
+
+
+			addButton(8, "End Her", endHer);
+			addButton(9, "Leave", leaveHer);
+			
+		}
+
+		private function tentaFail():void
+		{
+			clearOutput();
+			//Start setting up to fuck the succubus -> surprise tentacle grape, idiot.
+			outputText("There's no way you're going to pass up an opportunity to put a succubus's lips to use. Pillowy");
+			if (player.hasVagina()) outputText(" cunt-kissers");
+			else outputText(" cock-suckers");
+			outputText(" like those are one in a million.");
+			
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) outputText(" Perhaps Scylla's ruby mouth could give her a run for her money, but there's only one way to be sure.");
+			else if (getGame().telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
+			outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
+			if (player.hasCock()) outputText(" [oneCock]");
+			else if (player.hasVagina()) outputText(" your [pc.vagina]");
+			else outputText(" the sensitive skin of your groin");
+			outputText(". She eagerly goes to work, moaning from the attentions of the tentacle down below, and licking with such fervor that you'd think this is what she wanted all along.");
+
+			outputText("\n\nRocking your [hips] to the pace of her short, frenzied lips, you lose yourself in the moment. Here in the garden with a succubus to serve your every whim, it's easy to just stop and enjoy the little things in life. Lethice can sit on her throne for the few minutes it will take you to");
+			if (player.hasCock()) outputText(" blow a wad down this slut's throat");
+			else if (player.hasVagina()) outputText(" cream yourself on this slut's face");
+			else outputText(" teach this bitch how to pleasure an asshole");
+			outputText(". None-too-quiet slurps hang in the steamy air, accompanied by your own " + player.mf("grunts","coos") + " of enjoyment. You reach down to cup one of her breasts, ignorant of the shadows creeping nearer.");
+
+			outputText("\n\nA flash of green obscures your vision for a moment. Before you can react, it has looped around your neck as strongly as a bar of iron and is pulling back, dragging you to the ground while your muscles are still focused on limply thrusting forward. It presses you flat, and in spite of your struggles, a dozen similarly powerful tendrils emerge. They wrap your limbs up in pale green cocoons of squirming plant life. The only parts of you remaining exposed are your crotch and your face, but even the latter has narrow bands encircling it, holding you still.");
+
+			outputText("\n\nThe lusty demoness, still fucking one of her pets, looks dumbly in your directly, her gaze somewhat vacant and her jaw slackened. You can see the tentacle in her sopping wet cunt pulsating, and rivulets of sappy moisture are running from her over-engorged looks. She doesn't seem to be in any state to take advantage of you, but then again, she doesn't need to. A large, orange tentacle is hovering above you.");
+			if (!player.hasCock()) outputText(" Its outline is clearly phallic, but how could such a huge thing ever fit inside you, let alone anyone?");
+			else
+			{
+				outputText(" Its tip oozes lubricants, but the gaping pussy at its tip is big enough to hold six minotaurs' monster-cocks.");
+				if (player.biggestCockLength() < 36) outputText(" How could you ever hope to fill it?");
+				else outputText(" How long were they preparing this for you?");
+			}
+
+			var createdVag:Boolean = false;
+			if (!player.hasCock() && !player.hasVagina())
+			{
+				//Genderless
+				outputText("\n\nInterestingly, the new arrival descends towards your featureless cross, dripping neon orange goo as it goes. Where the stuff lands on you, your flesh alights with tingles of raw, pure sensation, somewhere stuck between pain and pleasure and yet neither. Then, that column of pulsating, phallic meat is pressing down against you, ramming itself into you, and there is not you nor your flesh can do but yield to its touches. You gasp, opening... no, <i>blossoming</i>, revealing sensitive lips and folds.");
+
+				outputText("\n\n<b>This thing is turning you into woman!</b>");
+
+				player.createVagina();
+				createdVag = true;
+			}
+			else if (player.hasVagina() && !player.hasCock())
+			{
+				//Cooches only
+				outputText("\n\nThe new arrival descends towards your already well-lubricated pussy, dripping neon orange goo as it goes. Where the stuff lands on you, you alight with raw, deviously pleasurable sensation, particularly on your pussy lips. They burn with raw, unfiltered sensation, both pleasure and pain all in one. Then, that column of pulsating, phallic meat presses down against you, too fat for any normal pussy to take, and yet somehow, it's ramming itself into you. You spread to accept it... and then spread some more, blossoming.");
+
+			}
+
+			//Merge Genderless & Coochies
+			if (!player.hasCock()) // 100% gonna have a cooch by this point
+			{
+				outputText("\n\nYou can feel your");
+				if (createdVag) outputText(" new");
+				outputText(" entrance giving around the girthy monstrosity with each passing second. Wider and wider, your flesh opens up. It feels so big that you wonder if you're going to rip in half, but there is no discomfort, only the pleasure of accepting it's tumescent, inhuman length. You groan as your own fluids make themselves known, soaking your gaped lips in girlish cum. There's no way that you should be able to take this, let alone enjoy it, but you are. Oh gods, how you are!");
+
+				outputText("\n\nYou can feel your belly moving, stretching around the thick intruder. You wish you could look down, to see it outlined in your body, but your head is held fast. It pushes deeper, and finally, you feel as if you're reaching your limit. Somehow, that huge tentacle must know, because it stops right there and reverses direction. It yanks out far faster than it thrusted in, and you're left ultimately and completely empty. The feeling of cool air inside you is alien... uncomfortable, even. You don't like it. In dawning horror, you realize just how empty you feel, and how badly you need that tentacle inside you.");
+
+				outputText("\n\nYou cum when it thrusts back in, loosening you further, moulding your twat into the perfectly shaped receptacle for its unending, monstrous needs. Gushing, your pussy gratefully clings to its massive, orange-colored master, getting more and more elastic with every second. Your eyes roll back around your third cunt-clenching climax. You miss the sky vanishing behind clouds of green, writhing stalks, but at least you'll never miss that feeling of <i>fullness</i> ever again.");
+			}
+			//Dicks
+			else
+			{
+				outputText("\n\nThat monstrous, hungry-looking pussy wastes no time in descending towards your " + multiCockDescriptLight() + ".");
+				if (player.biggestCockLength() <= 12) outputText(" The ease with which you slide inside is no surprise, given the disparity in size.");
+				else if (player.biggestCockLength() <= 30) outputText(" The ease with which you enter is no real surprise, given that even your bloated length"+ ((player.cocks.length > 1) ? "s are" : " is") +" small by comparison.");
+				else if (player.biggestCockLength() <= 48) outputText(" You slide in with ease, perfectly matched to the hungry fuck-tunnel in size.");
+				else outputText(" Sliding in must take quite the effort. The orange-hued twat is drooling around you, slowly working down an inch at a time. It takes all of you, even if it has to stretch beyond all reason to do so.");
+				outputText(" It feels good, better");
+				if (player.biggestCockLength() <= 12) outputText(" than a giant that looks that loose should. You'd swear it was tight little twat from how firmly it's squeezing you!");
+				else if (player.biggestCockLength() <= 30) outputText(" than you had thought at a glance. Not only is it the perfect size, but it seems to hug and touch every part of your maleness" + ((player.cocks.length > 1) ? "es" : "") + " just right.");
+				else if (player.biggestCockLength() > 48) outputText(" than you would expect given how tightly-stretched it looks. You'd think it'd be pressing down painfully, but it feels tailor made to take you instead.");
+
+				//Dicks need to grow
+				if (player.biggestCockLength() <= 30)
+				{
+					outputText("\n\nGlowing orange goo leaks from the oversized slit in thick beads. You briefly wonder what purpose the odd coloration could serve when the feeling of your cock"+ ((player.cocks.length > 1) ? "s" : "") +" stretching answers. It's making you grow bigger, somehow! The sensation is akin to stretching long-dormant muscles... an subtle flexing of unrealized potential that makes you aware of just how much you can do, or in this case, how big you can get. Your vision swims as your body works to keep up with the sudden change, and you close your eyes to keep from sicking up.");
+
+The tentacle starts sliding up and down. At first, it's motions are slow and languid, giving you plenty of time to feel the supple slickness of its interior texture against you, but as your mass increases, so too does the speed of its up-and-down pumping motion. Even when it's pushing down, it somehow maintains a gentle suction that the velvety walls are tight against you, allowing you to subsume yourself in slippery cunt. The bigger you get, the better it feels. You aren't sure whether you're simply feeling more and more pussy at once or if you're somehow getting more sensitive, but it's enough to make your eyes roll back and your " + multiCockDescriptLight() + " practically piss pre-cum.
+Whimpering from more ecstasy than you know what to do with, you feel yourself surge in size again. It's impossible to tell just how big you've gotten with your view forced to look straight ahead. All you can be sure of is that it's getting bigger, and you're feeling a LOT of pussy. By comparison, the dozens of other tentacles surrounding you are barely there. It's like your cock{s are/ is} the only part of you worth feeling, and the rest of you is just floating in a void - a sensation that strengthens with every inch of length and girth that you gain.
+Cumming almost comes as a surprise to you, but there's only so much pleasure a body can receive before it helplessly and completely cumming, spraying thick wads of jism into the tentacle's hungry folds with instinctive convulsions. Every squirt leaves you a few inches longer and a good deal thicker. Only after emptying every ounce of cum from your [balls] does the feverish expansion finally halt.
+Unfortunately, the sensations don't. Even though the tentacle has stopped moving to digest its meal, you're still hyper-aware of the feeling of its slick folds against you. There's enough sensitivity in your enhanced package that unmoving pressure is giving your nervous system more feedback than your old dick's most vigorous fuck. The glowing, orange goo wasn't just making you bigger! It was stimulating nerve growth in your " + multiCockDescriptLight() + ", making you so sensitive that you can't help but stay hard, even after cumming.
+A few seconds later, the tentacle starts its slow, up-and-down stroking. You moan, giving a nearby vine the opening it needs to force itself into your mouth. It's tough to notice or care compared to the cacophony of signals coming from your crotch. Even your vision seems wasted and useless, the tactile resolution of your dickskin many times greater than your eyes' meager output.
+			}
+//Next
+You're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.
+GAME OVER.
+
+		}
+
+		private function endHer():void
+		{
+			clearOutput();
+			outputText("You circle behind her an put and end to her evil while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
+
+			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_KILLED;
+
+			menu();
+			cleanupAfterCombat(getGame().d3.resumeAfterCombat);
+		}
+
+		private function leaveHer():void
+		{
+			clearOutput();
+			outputText("Figuring that the succubus's pets can keep her busy indefinitely, you turn away. A shriek of pleasure draws your attention back, and you turn in time to see dozens of coiling, leafy masses encircling her every limb, bodily carrying her into a wall of twisting, leaking cocks and pussies. Her orifices are stuffed with pumping lengths that froth with spit and girlcum, and her eyes, equal parts alarmed and aroused, widen before disappearing into the forest of green.");
+
+			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_LEFT;
+
+			menu();
+			cleanupAfterCombat(getGame().d3.resumeAfterCombat);
+		}
+
 		public function surrenderToTheGardner(hpVictory:Boolean):void
 		{
 			// Male
@@ -30,11 +186,18 @@ package classes.Scenes.Dungeons.D3
 				femGenderlessLoss(hpVictory);
 			}
 			
-			// Herms/fems
-			if (player.hasVagina())
+			// Fems
+			if (player.hasVagina() && !player.hasCock())
 			{
 				femGenderlessLoss(hpVictory);
-			}			
+			}
+
+			// Herms can have either!
+			if (player.hasVagina() && player.hasCock())
+			{
+				if (rand(2) == 0) femGenderlessLoss(hpVictory);
+				else maleLoss(hpVictory);
+			}
 		}
 		
 		private function femGenderlessLoss(hpVictory:Boolean):void
