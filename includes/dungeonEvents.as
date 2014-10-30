@@ -830,6 +830,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11056) {
 		spriteSelect(16);
 		outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
+		flags[kFLAGS.D1_OMNIBUS_KILLED] = 1;
 		cleanupAfterCombat();
 		return;
 	}
