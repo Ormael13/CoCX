@@ -20,7 +20,7 @@ package classes.Scenes.Dungeons.D3
 		public function punchYourselfInTheBalls():void
 		{
 			flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED] = 1;
-			player.createKeyItem("Laybans");
+			player.createKeyItem("Laybans", 0, 0, 0, 0);
 			
 			clearOutput();
 			outputText("The doppelganger falls to the floor, sobbing and broken. For one long moment you feel the nagging pull to exactly replicate [his] actions... and then it’s gone. The world comes back sharply into focus. You have won.");
@@ -208,8 +208,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nYou quickly go completely insane, just like your bodysnatcher did, although not in a way [he] ever knew. You will never be able to express that insanity though. Every hour there is a new scene of complete depravity for you to reflect, personify and act out. A demon’s dearest wish - an eternity of constantly changing, mind-boggling sex - is your final fate.");
 
-			menu();
-			addButton(0, "Game Over", 9999);
+			eventParser(9999);
 		}
 	}
 

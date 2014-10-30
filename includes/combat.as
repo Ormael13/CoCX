@@ -99,7 +99,7 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 
 public function approachAfterKnockback():void
 {
-	outputText("You close the distance between you and " + monster.the + monster.short + " as quickly as possible.");
+	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.");
 	player.removeStatusAffect(StatusAffects.KnockedBack);
 	enemyAI();
 	return;
@@ -146,14 +146,14 @@ public function doCombat(eventNum:Number):void
 			{
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!<b>");
 				menu();
-				addButton(0, "Approach", );
-				addButton(1, "Tease", 5005);
+				addButton(0, "Approach", approachAfterKnockback);
+				addButton(1, "Tease", eventParser, 5005);
 				addButton(2, "Spells", temp2);
-				addButton(3, "Items", 1000);
+				addButton(3, "Items", eventParser, 1000);
 				addButton(4, "Run", runAway);
-				addButton(6, "M. Specials", 5160);
-				addButton(7, waitT, 5071);
-				addButton(8, "Fantasize", 5086);
+				addButton(6, "M. Specials", eventParser, 5160);
+				addButton(7, waitT, eventParser, 5071);
+				addButton(8, "Fantasize", eventParser, 5086);
 			}
 			if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
 				outputText("<b>  Even physical special attacks are out of the question.</b>");
@@ -196,9 +196,9 @@ public function doCombat(eventNum:Number):void
 				} else if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) {
 					choices("Struggle", (monster as Izumi).titSmotherStruggle, "Wait", (monster as Izumi).titSmotherWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
-				else if (player.findStatusAffect(StatusAffects.Tentagrapple) >= 0)
+				else if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
 				{
-					choices ("Struggle", (monster as SuccubusGardner).grappleStrugge, "Wait", (monster as SuccubusGardner).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+					choices ("Struggle", (monster as SuccubusGardner).grappleStruggle, "Wait", (monster as SuccubusGardner).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
 				//REGULAR MENU
@@ -1787,7 +1787,7 @@ public function combatMisdirect():Boolean {
 }
 
 //DEAL DAMAGE
-public function doDamage(damage:Number, apply:Boolean = true; ):Number {
+public function doDamage(damage:Number, apply:Boolean = true):Number {
 	if(player.findPerk(PerkLib.Sadist) >= 0) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4166,7 +4166,7 @@ public function spellBlind():void {
 
 		outputText("\n\n“<i>You think your hedge magic will work on me, intrus?</i>” he snarls. “<i>Here- let me show you how it’s really done.</i>” The light of anger in his eyes intensifies, burning a retina-frying white as it demands you stare into it...");
 		
-		if (rand(player.spe) >= 50 || rand(player.inte >= 50))
+		if (rand(player.spe) >= 50 || rand(player.inte) >= 50)
 		{
 			outputText("\n\nThe light sears into your eyes, but with the discipline of conscious effort you escape the hypnotic pull before it can mesmerize you, before Jean-Claude can blind you.");
 
@@ -4865,7 +4865,7 @@ public function fireballuuuuu():void {
 	{
 		outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 		enemyAI();
-		return true;
+		return;
 	}
 	//[Failure]
 	//(high damage to self, +20 fatigue)

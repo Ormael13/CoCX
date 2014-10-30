@@ -102,6 +102,10 @@
 		{
 			return kGAMECLASS.inDungeon;
 		}
+		protected function set inDungeon(v:Boolean):void
+		{
+			kGAMECLASS.inDungeon = v;
+		}
 		protected function get itemSubMenu():Boolean
 		{
 			return kGAMECLASS.itemSubMenu;

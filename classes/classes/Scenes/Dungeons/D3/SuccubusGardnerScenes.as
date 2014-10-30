@@ -2,7 +2,8 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.BaseContent;
 	import classes.StatusAffects;
-	
+	import classes.GlobalFlags.kFLAGS;
+	import classes.CockTypesEnum;
 	
 	/**
 	 * ...
@@ -119,7 +120,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nYou cum when it thrusts back in, loosening you further, moulding your twat into the perfectly shaped receptacle for its unending, monstrous needs. Gushing, your pussy gratefully clings to its massive, orange-colored master, getting more and more elastic with every second. Your eyes roll back around your third cunt-clenching climax. You miss the sky vanishing behind clouds of green, writhing stalks, but at least you'll never miss that feeling of <i>fullness</i> ever again.");
 
 				menu();
-				goNext(tentaFailII);
+				addButton(0, "Next", tentaFailII);
 			}
 			//Dicks
 			else
@@ -150,7 +151,7 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\nA few seconds later, the tentacle starts its slow, up-and-down stroking. You moan, giving a nearby vine the opening it needs to force itself into your mouth. It's tough to notice or care compared to the cacophony of signals coming from your crotch. Even your vision seems wasted and useless, the tactile resolution of your dickskin many times greater than your eyes' meager output.");
 
 					menu();
-					goNext(tentaFailII);
+					addButton(0, "Next", tentaFailII);
 					return;
 				}
 				// Dicks big enough
@@ -168,8 +169,7 @@ package classes.Scenes.Dungeons.D3
 
 					outputText("\n\n<b>GAME OVER</b>");
 
-					menu();
-					goNext(9999);
+					eventParser(9999);
 				}
 			}
 		}
@@ -179,8 +179,8 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
 			outputText("\n\n<b>GAME OVER</b>");
-			menu();
-			goNext(9999);
+			
+			eventParser(9999);
 		}
 
 		private function endHer():void
@@ -191,7 +191,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeAfterCombat);
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function leaveHer():void
@@ -202,7 +202,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_LEFT;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeAfterCombat);
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		public function surrenderToTheGardner(hpVictory:Boolean):void
@@ -347,8 +347,8 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nAnother, larger tentacle takes its place, sealing most of the first's load inside. There's no waiting, only fucking and climbing to one orgasm after another. The space between climaxes narrows with each one until your world becomes a constant, irresistible tide of bliss.");
 			outputText("\n\n<b>GAME OVER</b>");
-			menu();
-			goNext(9999);
+			
+			eventParser(9999);
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -391,7 +391,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nA high-pitched whine of agreement automatically slips off your tongue - anything to get her to continue her ministrations on your crotch. You hold your hands up like paws and splay your [legs] for easier access, humping the 'v' between her big and index toes, rubbing yourself off on the bottom of her foot, knowing full well that's the best the demon is likely to give you.");
 			
-			outputText("\n\n<i>\"Goood " + pc.mf("boy", "girl") + ",\"</i> she coos, twisting her foot to rub her heel against your [sheath biggest]. <i>\"You're just so eager to cum that you'll do anything, won't you?\"</i>");
+			outputText("\n\n<i>\"Goood " + player.mf("boy", "girl") + ",\"</i> she coos, twisting her foot to rub her heel against your [sheath biggest]. <i>\"You're just so eager to cum that you'll do anything, won't you?\"</i>");
 			
 			outputText("\n\n<i>\"Yessss,\"</i> you hiss, forgetting your role in the heat of the moment.");
 			
@@ -516,7 +516,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\n<i>\"Who's a good doggie?\"</i>");
 
-			outputText("\n\nYou bark and cum at the same time, shooting ropes all over your belly. Mistress is so nice; she keeps stroking while you shoot, encouraging her pet to shoot every drop of " + pc.mf("his","her") + " sperm out. You must have been really good! Lances of white goop splatter off your chest, still somewhat human in shape, and tag your chin.");
+			outputText("\n\nYou bark and cum at the same time, shooting ropes all over your belly. Mistress is so nice; she keeps stroking while you shoot, encouraging her pet to shoot every drop of " + player.mf("his","her") + " sperm out. You must have been really good! Lances of white goop splatter off your chest, still somewhat human in shape, and tag your chin.");
 			if (player.cumQ() >= 2500) outputText(" A few thick ropes shoot past your head to cream the wall, eliciting a pleased giggle from your owner as she squeezes yet more from your length.");
 			outputText(" You yip with glee as you cream for Mistress' fingers, but eventually, your climax trails off into a dribbly white mess, some of which clings to the demoness' nails like beads of ivory dew.");
 
@@ -530,11 +530,10 @@ package classes.Scenes.Dungeons.D3
 		private function maleLossPetIII():void
 		{
 			clearOutput();
-			outputText("The champion, more canine than [man], became little more than one mutt among many that the demons had tamed, used for everything from breeding to hunting escaped slaves, and " + pc.mf("he","she") + " loved it, delighted in it even. Eventually, " + pc.mf("his","her") + " owner bred her numerous times, creating a bloodline of strong, loyal servants that eventually helped keep all of Mareth under the demon's heels.");
+			outputText("The champion, more canine than [man], became little more than one mutt among many that the demons had tamed, used for everything from breeding to hunting escaped slaves, and " + player.mf("he","she") + " loved it, delighted in it even. Eventually, " + player.mf("his","her") + " owner bred her numerous times, creating a bloodline of strong, loyal servants that eventually helped keep all of Mareth under the demon's heels.");
 
 			outputText("\n\n<b>GAME OVER!</b>");
-			menu();
-			goNext(9999);
+			eventParser(9999);
 		}
 		
 		private function maleLossFeeder():void
@@ -545,7 +544,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThe succubus's lips curl cruelly. <i>\"Oh. You still think you'll get a chance to escape, don't you?\"</i> She throws her head back and laughs. <i>\"How wrong you are, Champion. How wrong you are...\"</i> Turning to the botanical wall, the enchanting gardener at you, giving you quite the view of her well-formed backside.");
 
 			outputText("\n\nSomething slick and smooth wraps around your [leg], moving slowly and patiently but with great strength. You can feel the firmness of its grip tightening while a second latches on. The twinned tentacles circle up your body in alternating corkscrew patterns, gliding across your [skinFurScales] with self-lubricated ease. You try to scrabble away, but the tendrils merely lift you aloft like a child would a toy. Meanwhile, the succubus merely flicks");
-			if (pc.cocks.length > 1) outputText(" [oneCock].");
+			if (player.cocks.length > 1) outputText(" [oneCock].");
 			else outputText(" your dick.");
 
 			outputText("\n\n<i>\"It's funny that you seem to think you'll have any agency over your life at this point.\"</i> She laughs. <i>\"This next part will go easier if you relax.\"</i>");
@@ -617,7 +616,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" rapidly devours your plus-sized length");
 				if (player.cocks.length > 1) outputText("s");
 			}
-			else if (player.buggestCockLength() < 24)
+			else if (player.biggestCockLength() < 24)
 			{
 				outputText(" devours your immense offering");
 				if (player.cocks.length > 1) outputText("s");
@@ -663,8 +662,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
 			outputText("\n\n<b>GAME OVER</b>");
-			menu();
-			goNext(9999);
+			eventParser(9999);
 		}
 		
 		public function fightTheGardner():void

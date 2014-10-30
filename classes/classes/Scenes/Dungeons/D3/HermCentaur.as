@@ -15,8 +15,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function HermCentaur() 
 		{
-			this.a = "";
-			this.capitalA = "";
+			this.a = "the ";
 			this.short = "herm centaur";
 			this.long = "Standing tall and proud just a few feet away is a massive demon unlike any others you've seen.  She's every bit a centaur - horse body, hooves, fur, and everything, but she's also massive in proportion - about nine feet tall and equally well endowed.  Heaving, jiggly E-cups jut proudly from her chest, unrestrained and bare to the world, thick nipples capping them like majestic, sexual crowns.  Under her belly, a thick equine cock slaps wetly against her fur with every step, heavy balls dangling behind.  A solid black horn juts from her forehead, a testament to the demonic corruption flowing through this monstrous woman's veins.  Still, without the horn, you'd never have guessed she was a demon.  Her gleaming fire-orange hair and pale, freckled skin look like something you would see on an innocent maid, not a bestial altar of corrupted decadence.";
 			
@@ -103,14 +102,14 @@ package classes.Scenes.Dungeons.D3
 				else outputText(" your anus until it puckers, craving something to fill it - anything.");
 			}
 			
-			dynStats("lus+", 3 + rand(3));
+			game.dynStats("lus+", 3 + rand(3));
 		}
 		
 		private function aphrodisiacSquirt():void
 		{
 			outputText("The centaur grabs her heavy tits and casually squeezes the prodding, hard nipples that cap them.  A trickle of rose moisture trickles out, dripping down the underside of her bust to glisten wetly in the light.  Spellbound for the moment, you look on in wonder at the display of demonic lactations.  A faint sweetness lingers in the air, and you lick your lips without meaning to.  Then, she squeezes down to spray a torrent of pink-tinged breastmilk directly at you, splitting into so many forks of fluid that you have no hope to dodge.");
 			
-			dynStats("lus+", 3 + rand(3));
+			game.dynStats("lus+", 3 + rand(3));
 
 	if (player.lust < 30) outputText("\n\nYou close your mouth tight and endure the shimmering shower, trying your damnedest to resist the effects of this insidious liquid.  Wherever it strikes you, it vanishes soon after, absorbed directly into your body.");
 	else if (player.lust < 40) outputText("\n\nYour heart beats faster.");
@@ -168,7 +167,7 @@ package classes.Scenes.Dungeons.D3
 				//(OH SHIT YOU GUNNA GET FUKKED)
 				outputText("The chanting reaches a crescendo before you can stop it, and as the nine-foot woman points at you, you barely have time to enunciate a single curse.  Her spell is upon you.  There's a flash of crimson light, seemingly as bright as the sun, and then you're hit with a wave of lust so strong it might as well be a physical force.  It slaps you hard enough to send you reeling, even while your heart pumps every spare drop of blood south.  You cry out at the forced arousal, blubbering wildly as the pleasure mounts and images of you and your foe locked together in every sexual position imaginable flood your consciousness.");
 				
-				dynStats("lus+", 5 + rand(7));
+				game.dynStats("lus+", 5 + rand(7));
 			}
 		}
 		
@@ -193,7 +192,7 @@ package classes.Scenes.Dungeons.D3
 			// Resistance-esque check, idk I threw this terrible shit together
 			if (player.inte * (2 / _hypnoCockUses) > rand((player.lib / 3) + (player.sens / 3) + (player.cor / 3)))
 			{
-				dynStats("lus+", 2 + rand((player.lib / 20) + (player.sens / 20)));
+				game.dynStats("lus+", 2 + rand((player.lib / 20) + (player.sens / 20)));
 				
 				if (player.lust <= 33) outputText("\n\nA warning thought jars you out of the cock-induced reverie with a start - this demon was going to hypnotize you, likely trying to seduce you into submission.  Not this time!  You tear yourself away and look her in the eye triumphantly.");
 				else if (player.lust <= 66) outputText("\n\nA quiet voice pipes up somewhere inside you and warns that something is amiss.  It's enough to stir you from your stupor, kindling your willpower to wrest your view from your foe's gently bobbing fuck-log.  You look her in the eye triumphantly.");
@@ -201,7 +200,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				dynStats("lus+", 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.sens / 10)));
+				game.dynStats("lus+", 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.sens / 10)));
 				
 				outputText("Down it bobs, slowly hanging lower and lower... SMACK!  Up it goes, taking your bedazzled eyes along for the ride.  \"<i>That's a good " + player.mf("boy", "girl") + ",</i>\" the dick's director whispers, \"<i>Just follow the tempo and let it fill your mind, oozing inside you with each thump.</i>\"");
 				outputText("\n\nFuck!  She's right, it's getting awfully hard to think about anything else.  You fixate further on the cock, unwilling or unable to look away.");

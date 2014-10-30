@@ -1,6 +1,9 @@
 package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Appearance;
+	
 	/**
 	 * ...
 	 * @author Gedan
@@ -25,7 +28,7 @@ package classes.Scenes.Dungeons.D3
 		}
 		
 		private const CENTAUR_KILLED:int = 1;
-		private cosnt CENTAUR_RELEASED:int = 2;
+		private const CENTAUR_RELEASED:int = 2;
 		private const CENTAUR_FUCKED:int = 3;
 
 		public function beatThePony(hpVictory:Boolean):void
@@ -52,7 +55,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeAfterFight);
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function letHerGo():void
@@ -62,7 +65,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeAfterFight);
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function maleFuckHer():void
@@ -74,7 +77,7 @@ package classes.Scenes.Dungeons.D3
 			if (y <= 0) y = player.smallestCockIndex();
 
 			clearOutput();
-			outputText("You shrug out of your [armor] as you close with the defeated beast-woman.  Looking at her like this, she almost seems more animal than woman.  Her hundreds of pounds of muscular equine flesh twist and contort as you approach, shifting her bulk to allow you unimpeded access to either of her trembling, moist genitals.  Glancing up to her pale, freckled face, you trap her green eyes with your own and say, \"<i>" + ((player.cor > 50) ? : "I'm gonna wreck it!" : "We do this my way.") + "</i>\"");
+			outputText("You shrug out of your [armor] as you close with the defeated beast-woman.  Looking at her like this, she almost seems more animal than woman.  Her hundreds of pounds of muscular equine flesh twist and contort as you approach, shifting her bulk to allow you unimpeded access to either of her trembling, moist genitals.  Glancing up to her pale, freckled face, you trap her green eyes with your own and say, \"<i>" + ((player.cor > 50) ? "I'm gonna wreck it!" : "We do this my way.") + "</i>\"");
 
 			outputText("\n\nReduced a whimpering mare, the demon-taur can do naught but eagerly nod and lift her tail at the sight of your encroaching erection");
 			if (player.cocks.length > 1) outputText("s");
@@ -110,7 +113,7 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeAfterFight)
+			cleanupAfterCombat(getGame().d3.resumeFromFight)
 		}
 
 		private const HORZGOG:int = 0;
@@ -239,20 +242,20 @@ package classes.Scenes.Dungeons.D3
 			dynStats("cor+", 5);
 			// 9999 - try imp preggers?
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeAfterFight);
+			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.hasCock() && player.hasVagina())
 			{
-				if (rand(2) == 0) maleLoss();
-				else femLoss();
+				if (rand(2) == 0) maleLoss(hpVictory);
+				else femLoss(hpVictory);
 			}
 
-			if (player.hasCock() && !player.hasVagina()) maleLoss();
-			else if (player.hasVagina() && !player.hasCock()) femLoss();
-			else if (!player.hasVagina() && !player.hasCock()) femLoss();
+			if (player.hasCock() && !player.hasVagina()) maleLoss(hpVictory);
+			else if (player.hasVagina() && !player.hasCock()) femLoss(hpVictory);
+			else if (!player.hasVagina() && !player.hasCock()) femLoss(hpVictory);
 		}
 		
 		private function femLoss(hpVictory:Boolean):void
@@ -331,7 +334,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nDarkness takes you while you shiver in knocked-up bliss.");
 
 			menu();
-			goNext(femLossII);
+			addButton(0, "Next", femLossII);
 		}
 
 		private function femLossII():void
@@ -344,7 +347,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou slump down as you're dragged through dirt, over carpets, and through halls.  Various demons leer at you as you pass, snickering at the fallen champion, now little more than a willing mare.  The humiliation makes your cheeks go red but your [vagina] drool. Some part of you is clearly enjoying it, though you aren't sure if it's a natural enjoyment or something this creature has done to you.  You sigh and shrug, raising your hands to fondle your breasts as you're dragged to your new home.  You may as well enjoy yourself.");
 
 			menu();
-			goNext(femLossIII);
+			addButton(0, "Next", femLossIII);
 		}
 
 		private function femLossIII():void
@@ -358,8 +361,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\n<b>GAME OVER</b>");
 
-			menu();
-			goNext(9999);
+			eventParser(9999);
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -405,7 +407,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.balls > 0) outputText(" [balls] feel fit to burst!");
 			else outputText(" manhood feels swollen to bursting!");
 			outputText("  Realizing the only way out will be with your tongue, you open wide");
-			if (player.tongueType != TONGUE_TYPE_HUMAN) outputText(" and uncoil your inhuman length to spear");
+			if (player.tongueType != 0) outputText(" and uncoil your inhuman length to spear");
 			else outputText(" and begin to lap");
 			outputText(" at her inhuman entrance.  She whinnies in delight, grinding her clydesdale-sized bulk back and forth on your face as you start to get into her eating her out.");
 
@@ -434,7 +436,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText(" head");
 			outputText(" and sidles forward, ramming her glans into your mouth and down the back of your throat.  You can feel her glans pulsing deep inside you, and as soon as the herm starts moaning, the centaur starts trotting forward again.  Amazingly, having her holding you up makes it easy to maintain your position and keep your dick bouncing in that hot twat. Fuck it! You're too horny to care anymore.");
 
-			outputText("\n\nSlurping hard, you lick and suck the dick in your throat, so busy tending to the omnibus that you barely the notice the throbbing ache in your loins.  You cast lusty, inviting eyes around at every feminine form you see during journey to the stables, located in some backwater, seemingly forgotten part of the fortress.  You quiver with need and explode in passion, moaning into the Omnibus's cock as your " + cockDescript(x) + " spends it's lust into the oozing horse-pussy, wasting your champion-seed to father nothing more than a batch of shiftless imps.");
+			outputText("\n\nSlurping hard, you lick and suck the dick in your throat, so busy tending to the omnibus that you barely the notice the throbbing ache in your loins.  You cast lusty, inviting eyes around at every feminine form you see during journey to the stables, located in some backwater, seemingly forgotten part of the fortress.  You quiver with need and explode in passion, moaning into the Omnibus's cock as your " + cockDescript(y) + " spends it's lust into the oozing horse-pussy, wasting your champion-seed to father nothing more than a batch of shiftless imps.");
 
 			outputText("\n\nThe vibrations of your moans of pleasure set the omnibus alight with delight, and her dick surges deeper down your throat, releasing a thick batch of creamy seed to fill your belly.  Shuddering in bliss, you swallow and cum over and over, spunking up the equine cunt happily while swallowing an equal measure orally.  Locked in cunt and on cock and finally allowed orgasm after an endlessly long tease, you feel as if you're atop an orgasmic wave, riding the spooge all the way into shore.  The hot vice around your dick quivers and squirts thanks to your donation.");
 
@@ -445,15 +447,16 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nAt the same time, your centaur mate steps away, still joined to you by webs of sexual fluid that gradually snap.  As she departs, you realize you're bound up in a stall, tied to a wall, and you swear you can see lines of hooves waiting their turn from under the wood frame.  An albino woman with ivory horns clops in next.  She pivots, and you're given your first glimpse of your second 'wife'.  You've got a lot of demons to inseminate.");
 
 			menu();
-			goNext(maleLossII);
+			addButton(0, "Next", maleLossII);
 		}
 
 		private function maleLossII():void
 		{
 			clearOutput();
 			outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");
-			menu();
-			goNext(9999);
+			outputText("\n\n<b>GAME OVER</b>");
+			
+			eventParser(9999);
 		}
 		
 	}

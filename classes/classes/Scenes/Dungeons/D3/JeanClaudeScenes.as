@@ -20,7 +20,7 @@ package classes.Scenes.Dungeons.D3
 		public function beatDaFuckhugeBasilisk(hpVictory:Boolean):void
 		{
 			clearOutput();
-			flags[kFLAGS.JEAN_CLAUDE_DEFEATED] = 1;
+			flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1;
 			
 			if (hpVictory)
 			{
@@ -68,7 +68,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL] = 1;
 			
 			menu();
-			addButton(0, "Next", d3.returnFromFight);
+			addButton(0, "Next", d3.resumeFromFight);
 			
 		}
 		

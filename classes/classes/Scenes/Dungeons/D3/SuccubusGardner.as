@@ -15,7 +15,6 @@ package classes.Scenes.Dungeons.D3
 		public function SuccubusGardner() 
 		{
 			this.a = "the ";
-			this.capitalA = "The ";
 			this.short = "succubus gardner";
 			this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.\n\nBehind her, the shrubbery itself has come to life, revealing corded vines with inhuman strength, some capped with oozing, phallus-like tips. A few are as thick as your arm and tipped with gasping, swollen lips or violet, blooming pussies. Others still bear no ornamentation at all. There is little rhyme or reason to the mass of vegetation: only a theme of rampant, overgrown sexuality encouraged to an obscene degree.";
 			
@@ -179,7 +178,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				//Do not dodddddddggggeee
 				outputText(" You twist to the side, but one snags you by the wrist. Another loops around your [leg], and an avalanche of slime-oozing tentacles falls across the rest of you, wrapping you up in snug coils. Their grip is equal parts iron grip and lover's caress. You'd better struggle free before they really start to work on you!");
-				player.createStatusAffect(StatusAffects.Tentagrapple, 0, 0, 0, 0);
+				player.createStatusAffect(StatusAffects.Tentagrappled, 0, 0, 0, 0);
 			}
 		}
 		
@@ -355,11 +354,11 @@ package classes.Scenes.Dungeons.D3
 			if (this.findStatusAffect(StatusAffects.LustAura) >= 0) 
 			{
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.", false);
-				dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
+				game.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
 			}
 			else 
 			{
-				monster.createStatusAffect(StatusAffects.LustAura,0,0,0,0);
+				createStatusAffect(StatusAffects.LustAura,0,0,0,0);
 			}
 		}
 		
@@ -376,7 +375,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nIt hangs there for a moment while the succubus yanks your mouth open, just in time to receive the undoubtedly drugged jism. It practically sizzles on your tongue, tasting of almonds and walnuts with a distinctly fruity aftertaste. Your mouth gulps it down automatically, and with slow-dawning comprehension, you understand how the succubus could be so obsessed with these plants. Your groin heats eagerly as the plant spunk absorbs into your system. Your pupils dilate. Gods, it feels good!");
 				
 				outputText("\n\nYou barely even realize that the temptress has stepped away. How can you fight this?");
-				dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)), "cor+", 5);
+				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)), "cor+", 5);
 			}
 			else
 			{

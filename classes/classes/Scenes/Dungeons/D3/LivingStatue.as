@@ -39,13 +39,13 @@ package classes.Scenes.Dungeons.D3
 			
 		}
 		
-		override public function handleStun():Boolean
+		override protected function handleStun():Boolean
 		{
 			game.outputText("The stone giant's unforgiving flesh seems incapable of being stunned.");
 			return true;
 		}
 		
-		override public function handleFear():Boolean
+		override protected function handleFear():Boolean
 		{
 			game.outputText("The stone giant cares little for your attempted intimidation.");
 			return true;

@@ -76,7 +76,7 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\n“<i>This, though... this I like, [player].</i>” [He] closes [his] eyes and");
 					if (player.hasCock()) outputText(" strokes [his] [cock]");
 					else if (player.hasVagina()) outputText(" slides two fingers into [his] [vagina] and gently frigs [himself]");
-					else output(" slips a hand ");
+					else outputText(" slips a hand ");
 					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. “<i> Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>” It’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined. This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.");
 					break;
 					
@@ -132,8 +132,6 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
-
-			
 			_roundCount++;
 			combatRoundOver();
 		}
@@ -141,7 +139,6 @@ package classes.Scenes.Dungeons.D3
 		public function Doppleganger() 
 		{
 			this.a = "the ";
-			this.capitalA = "The ";
 			this.short = "doppleganger";
 			this.imageName = "doppleganger";
 			this.plural = false;
@@ -210,7 +207,7 @@ package classes.Scenes.Dungeons.D3
 			var str:String = "";
 			
 			str += "You are fighting the doppelganger. " + player.mf("He", "She") +" is a ";
-			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall";
+			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall");
 			str += player.race() + ", with " + player.bodyType() + ".";
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ", which is";
@@ -268,7 +265,7 @@ package classes.Scenes.Dungeons.D3
 			str += " " + player.mf("He", "She") + " moves around on " + player.mf("his", "her") +" " + player.legs() + " with a twitchy jerkiness, " + player.mf("his", "her") + " " + game.hipDescript() + " swinging and tightening.";
 			if (player.tailType != 0) str += " " + player.mf("His", "Her") + " tail flicks this way and that.";
 			str += " " + player.mf("He", "She") + " wields the exact same " + player.weaponName + " you do, and is dressed in the mirror image of your " + player.armorName +  ". ";
-			if (player.biggestTitSize() >= 2) str += "It’s difficult not to notice the way the mirror image of your " + player.breastDescript(player.biggestTitRow) + " ebbs and heaves within it.";
+			if (player.biggestTitSize() >= 2) str += "It’s difficult not to notice the way the mirror image of your " + player.breastDescript(player.biggestTitRow()) + " ebbs and heaves within it.";
 			
 			return str;
 		}
