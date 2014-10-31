@@ -2284,6 +2284,12 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	}
 	doNext(1);
 }
+public function startCombatImmediate(monster:Monster, _plotFight:Boolean):void
+{
+	startCombat(monster, _plotFight);
+	menu();
+	eventParser(1);
+}
 public function display():void {
 	if (!monster.checkCalled){
 		outputText("<B>/!\\BUG! Monster.checkMonster() is not called! Calling it now...</B>\n");

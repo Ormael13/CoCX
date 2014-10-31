@@ -46,7 +46,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function defeatedInDungeon3(hpVictory:Boolean):void
 		{
-			game.d3.beatDaMechanic(hpVictory);
+			game.d3.incubusMechanic.beatDaMechanic(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -73,7 +73,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 
 		public function IncubusMechanic() {
