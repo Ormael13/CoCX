@@ -1725,11 +1725,11 @@ use namespace kGAMECLASS;
 				removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
 			while (findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
-			if (findStatusAffect(StatusAffects.GardnerSapSpeed) >= 0)
+			if (findStatusAffect(StatusAffects.GardenerSapSpeed) >= 0)
 			{
-				spe += statusAffectv1(StatusAffects.GardnerSapSpeed);
+				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
 				kGAMECLASS.mainView.statsView.showStatUp('spe');
-				removeStatusAffect(StatusAffects.GardnerSapSpeed);
+				removeStatusAffect(StatusAffects.GardenerSapSpeed);
 			}
 		}
 

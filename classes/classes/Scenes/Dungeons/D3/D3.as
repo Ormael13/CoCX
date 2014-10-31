@@ -22,7 +22,7 @@ package classes.Scenes.Dungeons.D3
 		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
 		public var incubusMechanic:IncubusMechanicScenes = new IncubusMechanicScenes();
 		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
-		public var succubusGardner:SuccubusGardnerScenes = new SuccubusGardnerScenes();
+		public var succubusGardener:SuccubusGardenerScenes = new SuccubusGardenerScenes();
 		public var hermCentaur:HermCentaurScenes = new HermCentaurScenes();
 		
 		public function D3() 
@@ -668,8 +668,8 @@ package classes.Scenes.Dungeons.D3
 				
 				//[Surrender] [Fight]
 				menu();
-				addButton(0, "Surrender", succubusGardner.surrenderToTheGardner);
-				addButton(1, "Fight", succubusGardner.fightTheGardner);
+				addButton(0, "Surrender", succubusGardener.surrenderToTheGardener);
+				addButton(1, "Fight", startCombatImmediate, new SuccubusGardener());
 	
 				return true;
 			}

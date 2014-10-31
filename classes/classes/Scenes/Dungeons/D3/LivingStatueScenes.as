@@ -19,8 +19,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nStriding towards you, the behemoth raises its hammer overhead. Dust cascades from its seamless joints, and it's only as it closes distance that you spot a pockmarks and near-invisible surface cracks, the hallmarks of its age. You'll have to fight this alabaster destroyer if you want to live!");
 
-			menu();
-			addButton(0, "Fight!", startCombat, new LivingStatue())
+			startCombat(new LivingStatue());
 		}
 		
 		public function beatUpDaStatue(hpVictory:Boolean):void

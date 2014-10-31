@@ -9,13 +9,13 @@ package classes.Scenes.Dungeons.D3
 	 * ...
 	 * @author Gedan
 	 */
-	public class SuccubusGardner extends Monster
+	public class SuccubusGardener extends Monster
 	{
 		
-		public function SuccubusGardner() 
+		public function SuccubusGardener() 
 		{
 			this.a = "the ";
-			this.short = "succubus gardner";
+			this.short = "succubus gardener";
 			this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.\n\nBehind her, the shrubbery itself has come to life, revealing corded vines with inhuman strength, some capped with oozing, phallus-like tips. A few are as thick as your arm and tipped with gasping, swollen lips or violet, blooming pussies. Others still bear no ornamentation at all. There is little rhyme or reason to the mass of vegetation: only a theme of rampant, overgrown sexuality encouraged to an obscene degree.";
 			
 			this.createVagina();
@@ -27,6 +27,11 @@ package classes.Scenes.Dungeons.D3
 			this.tallness = 7 * 12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_TIGHT;
+			
+			this.weaponName = "tentacles";
+			this.weaponVerb = "lash";
+			this.weaponAttack = 22;
+			this.armorName = "tentaclothes";
 			
 			initStrTouSpeInte(85, 60, 85, 100);
 			initLibSensCor(85, 60, 100);
@@ -40,17 +45,19 @@ package classes.Scenes.Dungeons.D3
 			
 			this.drop = NO_DROP;
 			
+			checkMonster();
+			
 			createStatusAffect(StatusAffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.succubusGardner.fuckUpTheGardener(hpVictory);
+			game.d3.succubusGardener.fuckUpTheGardener(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.succubusGardner.surrenderToTheGardner(hpVictory);
+			game.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		
 		override protected function performCombatAction():void
@@ -85,7 +92,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				tentagrapple();
 			}
-			else if (player.findStatusAffect(StatusAffects.GardnerSapSpeed) < 0 && this.findStatusAffect(StatusAffects.VineHealUsed) >= 0)
+			else if (player.findStatusAffect(StatusAffects.GardenerSapSpeed) < 0 && this.findStatusAffect(StatusAffects.VineHealUsed) >= 0)
 			{
 				sapSpeed();
 			}
@@ -344,7 +351,7 @@ package classes.Scenes.Dungeons.D3
 			// 20%?
 			var speedSapped:Number = player.spe * 0.2;
 			player.spe -= speedSapped;
-			player.createStatusAffect(StatusAffects.GardnerSapSpeed, speedSapped, 0, 0, 0);
+			player.createStatusAffect(StatusAffects.GardenerSapSpeed, speedSapped, 0, 0, 0);
 			kGAMECLASS.mainView.statsView.showStatDown( 'spe' );
 		}
 		

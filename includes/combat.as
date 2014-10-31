@@ -5,7 +5,7 @@ import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.D3.LivingStatueScenes;
-import classes.Scenes.Dungeons.D3.SuccubusGardner;
+import classes.Scenes.Dungeons.D3.SuccubusGardener;
 
 import coc.view.MainView;
 
@@ -198,7 +198,7 @@ public function doCombat(eventNum:Number):void
 				}
 				else if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
 				{
-					choices ("Struggle", (monster as SuccubusGardner).grappleStruggle, "Wait", (monster as SuccubusGardner).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+					choices ("Struggle", (monster as SuccubusGardener).grappleStruggle, "Wait", (monster as SuccubusGardener).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
 				//REGULAR MENU

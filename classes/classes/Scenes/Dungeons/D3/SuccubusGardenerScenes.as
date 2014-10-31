@@ -9,10 +9,10 @@ package classes.Scenes.Dungeons.D3
 	 * ...
 	 * @author Gedan
 	 */
-	public class SuccubusGardnerScenes extends BaseContent
+	public class SuccubusGardenerScenes extends BaseContent
 	{
 		
-		public function SuccubusGardnerScenes() 
+		public function SuccubusGardenerScenes() 
 		{
 			
 		}
@@ -205,7 +205,7 @@ package classes.Scenes.Dungeons.D3
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
-		public function surrenderToTheGardner(hpVictory:Boolean):void
+		public function surrenderToTheGardener(hpVictory:Boolean):void
 		{
 			// Male
 			if (player.hasCock() && !player.hasVagina())
@@ -662,10 +662,10 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
 			outputText("\n\n<b>GAME OVER</b>");
-			eventParser(9999);
+			eventParser(5035);
 		}
 		
-		public function fightTheGardner():void
+		public function fightTheGardener():void
 		{
 			
 		}
