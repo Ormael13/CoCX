@@ -24,7 +24,7 @@ package classes.Scenes.Dungeons.D3
 			// We'll use this as our primary failure to hit, and then mix in a bit of random.
 			if (damage > 0 && rand(8) < 6)
 			{
-				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. <b>(" + damage + ")</b>");
+				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. (" + damage + ")");
 				this.HP -= damage;
 			}
 			else
@@ -55,7 +55,7 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\n“<i>What’s the matter, [name]?</i>” " + player.mf("he", "she") +" breathes, staring lustfully into your eyes as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. “<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>”");
 				
-				game.dynStats("lus", 3 + rand(5));
+				game.dynStats("lus", damage + (rand(7) - 3));
 			}
 			addTalkShit();
 		}
@@ -73,11 +73,11 @@ package classes.Scenes.Dungeons.D3
 					break;
 					
 				case 2:
-					outputText("\n\n“<i>This, though... this I like, [player].</i>” [He] closes [his] eyes and");
+					outputText("\n\n“<i>This, though... this I like, [name].</i>” [He] closes [his] eyes and");
 					if (player.hasCock()) outputText(" strokes [his] [cock]");
 					else if (player.hasVagina()) outputText(" slides two fingers into [his] [vagina] and gently frigs [himself]");
 					else outputText(" slips a hand ");
-					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. “<i> Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>” It’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined. This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.");
+					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. “<i>Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>” It’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined. This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.");
 					break;
 					
 				case 3:
@@ -85,14 +85,13 @@ package classes.Scenes.Dungeons.D3
 					break;
 					
 				case 4:
-					outputText("“<i>Did you really think you could defeat Lethice, peasant?</i>” [name]- the doppelganger roars. [He] moves and speaks with confidence now, [his] old twitchiness gone, revelling and growing into [his] new form. You don’t dare open your mouth to hear what pale imitation of that voice comes out. “<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>” [He] screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass. You have time and strength for one last gambit...");
+					outputText("“\n\n<i>Did you really think you could defeat Lethice, peasant?</i>” [name]- the doppelganger roars. [He] moves and speaks with confidence now, [his] old twitchiness gone, revelling and growing into [his] new form. You don’t dare open your mouth to hear what pale imitation of that voice comes out. “<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>” [He] screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass. You have time and strength for one last gambit...");
 					break;
 				
 				case 5:
-					if (9999 == 0)
-					{
-						player.lust = 100;
-					}
+					outputText("\n\nThe shimmering intensifies for a moment as something... shifts....");
+					
+					game.dynStats("lus+", 1000);
 					
 					break;
 					
@@ -140,11 +139,13 @@ package classes.Scenes.Dungeons.D3
 		{
 			this.a = "the ";
 			this.short = "doppleganger";
+			this.long = ""; // Needs to be set to supress validation errors, but is handled by an accessor override.
 			this.imageName = "doppleganger";
 			this.plural = false;
 			
 			this.tallness = player.tallness;
 			this.balls = player.balls;
+			this.ballSize = player.ballSize;
 			this.hoursSinceCum = player.hoursSinceCum;
 			
 			hipRating = player.hipRating;
@@ -199,6 +200,8 @@ package classes.Scenes.Dungeons.D3
 				tbr.nipplesPerBreast = sbr.nipplesPerBreast;
 			}
 			
+			this.drop = NO_DROP;
+			
 			checkMonster();
 		}
 		
@@ -207,8 +210,8 @@ package classes.Scenes.Dungeons.D3
 			var str:String = "";
 			
 			str += "You are fighting the doppelganger. " + player.mf("He", "She") +" is a ";
-			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall");
-			str += player.race() + ", with " + player.bodyType() + ".";
+			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall ");
+			str += player.race() + ", with " + player.bodyType() + ". ";
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ", which is";
 			

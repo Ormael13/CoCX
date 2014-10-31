@@ -25,7 +25,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("The doppelganger falls to the floor, sobbing and broken. For one long moment you feel the nagging pull to exactly replicate [his] actions... and then it’s gone. The world comes back sharply into focus. You have won.");
 
-			outputText("\n\n“<i>No…</i>” your mirror image snivels in front of you. “<i>Ten years, ten years I waited for this. You can’t put me back in there, you can’t!</i>” You gaze down at what you look like when you are defeated: mouth open, eyes glazed, " + player.hairDescript() + " muddled, your flesh trembling and clenching, the very picture of a bitch awaiting further subjugation. No wonder 90% of Mareth is so keen on wanting to make this sight happen. The doppelganger chances a look up, catches your expression, and freezes. “<i>You... you wouldn’t.</i>”");
+			outputText("\n\n“<i>No...</i>” your mirror image snivels in front of you. “<i>Ten years, ten years I waited for this. You can’t put me back in there, you can’t!</i>” You gaze down at what you look like when you are defeated: mouth open, eyes glazed, " + player.hairDescript() + " muddled, your flesh trembling and clenching, the very picture of a bitch awaiting further subjugation. No wonder 90% of Mareth is so keen on wanting to make this sight happen. The doppelganger chances a look up, catches your expression, and freezes. “<i>You... you wouldn’t.</i>”");
 			
 			menu();
 			if (!player.isTaur() && (player.hasCock() || player.hasVagina())) addButton(0, "Oh Really?", fuckYourself);
@@ -157,11 +157,10 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nThere is an emphatic shattering sound behind you, the high noise mingling with the demon’s defeated wail, climbing together to an unbearable pitch. You squeeze your eyes shut as you thrust one last time into your defeated slut- and then jerk forward, the flesh you’re clenched into parting like smoke, almost falling straight into the mess you forced the doppelganger to create. Except that’s not there anymore, either- all that you are suddenly left with is you, your oozing, gently aching [vagina], and a great deal of broken glass. You slowly get to your feet and gaze at the shattered mirror. It’s difficult to believe looking at it now that it could in any way be an object of dread- indeed, standing here naked in this shabby storage room, you feel faintly ridiculous. Was this all just a really weird fugue? There’s no mistaking the warm fuzz of deep satisfaction at least. Shaking your head, you redress, make sure the protective glasses you came in here for are still in your pocket before heading to the door and leaving.");
 			
+			outputText("\n\n<b>(Key Item Acquired: Laybans!)</b>");
+			
 			player.orgasm();
-			d3.resumeFromFight();
-			cleanupAfterCombat();
-			menu();
-			doNext(d3.resumeFromFight);
+			cleanupAfterCombat(d3.resumeFromFight);
 		}
 		
 		public function killYourself():void
@@ -180,7 +179,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("Everything feels so vague, so inconstent; your body and mind shimmer like a lake hit by rain, incapable of focusing, incapable of holding onto a shape, a slave to any force that wants to form you. Who are you? It is obvious, isn’t it. Your image floats in front of you, the only clear thing you can perceive. It grins triumphantly, and you grin back: it is all you can do. Its movements define you, dominate you utterly, within and without. When it steps forward and puts its hand out, it isn’t by choice you mimic the action - it is all you can do. Your fingers stretch out to meet their mirror image, but before they meet they touch a cold, invisible barrier. Glass. True understanding of your situation permeates you like spreading oil, but you cannot gasp, scream in horror, pull at your hair. You slowly pull away from the mirror’s surface, your grin widening, because that is what the demon who has taken your form is doing.");
 
-			outputText("\n\n“<i>Beautiful,</i>” you and [he] breathe. “<i>I will do great things with this body, [playerName], things you couldn’t have imagined, poor soulful innocent that you were. I will take my revenge with it, but first...</i>” [He] stares at [his] reflection smoulderingly as [he] raises [his] hands to [his] armor. [He] forces you to take off your clothes with [him], and you feel it just as clearly as if you were controlling the actions; the way your underclothes whisper off you, the way your naked flesh goose bumps in the coolness of the room");
+			outputText("\n\n“<i>Beautiful,</i>” you and [he] breathe. “<i>I will do great things with this body, [name], things you couldn’t have imagined, poor soulful innocent that you were. I will take my revenge with it, but first...</i>” [He] stares at [his] reflection smoulderingly as [he] raises [his] hands to [his] armor. [He] forces you to take off your clothes with [him], and you feel it just as clearly as if you were controlling the actions; the way your underclothes whisper off you, the way your naked flesh goose bumps in the coolness of the room");
 			if (player.hasCock()) outputText(", the way your turgid [cock] feels when you grasp it at the base.");
 			else if (player.hasVagina()) outputText(", the way your [vagina] feels when you slide your fingers along its lips.");
 
@@ -200,15 +199,15 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			// Fuck Genderless
-			// 9999 == 0
+			// 9999
 
-			outputText("\n\n“<i>Ahh…</i>” your mouth says finally, as you step back from the mirror, your eyes half-lidded with contentment. “<i>I </i>really<i> needed that.</i>” [Name] turns away from the surface you now embody to put [his] [armor] back on and you follow suit, gazing dumbly at the reflection of the room behind you. You want to shout and scream at [him] now, begging [him] to give you your body back, for [him] not to do what you know comes next, but you can’t- you can’t stop turning back around, you can’t stop yourself touching the surface of your mirror one last time and, smirking, stride out of the room. You mimic your body exiting out of sight of the mirror’s edge, and then... then you mimic a grey, empty room. Staring back at you hollowly, inert and empty. Listening to a metal door shutting behind you with a terrible finality.");
+			outputText("\n\n“<i>Ahh...</i>” your mouth says finally, as you step back from the mirror, your eyes half-lidded with contentment. “<i>I really needed that.</i>” [Name] turns away from the surface you now embody to put [his] [armor] back on and you follow suit, gazing dumbly at the reflection of the room behind you. You want to shout and scream at [him] now, begging [him] to give you your body back, for [him] not to do what you know comes next, but you can’t- you can’t stop turning back around, you can’t stop yourself touching the surface of your mirror one last time and, smirking, stride out of the room. You mimic your body exiting out of sight of the mirror’s edge, and then... then you mimic a grey, empty room. Staring back at you hollowly, inert and empty. Listening to a metal door shutting behind you with a terrible finality.");
 
 		outputText("\n\nWith your body and brain full of memory of how to defeat demons, coupled with [his] own knowledge and thirst for revenge, your impostor surprises Lethice and manages to destroy her, taking her place and ruling the mountains and beyond with a mania born of horizons and insanity she never knew. You know all this because [Name] is true to [his] promise not to inflict the same suffering [he] endured upon you, and you don’t have to stand in the mirror room for very long (although being a deserted storage chamber, you quickly learn, makes a mockery of concepts like “very long”). [He] has your glass prison brought to [his] lavish inner chambers and installs you there- nailed to the ceiling above [his] bed, specifically. From your vantage point you mimic [his] orgies, each more deranged than the last. You experience sensation even the doppelganger [him]self never knows, because you are forced to embody everything in the room. Not just every slave girl, boy and favored demon there, every bulging prick and tight, eager hole, not just your old body bucking, slithering and glorying in it all, but every dildo, butt-plug, whip, bead, chain, every satin sheet upon which soft flesh is urgently pressed. You encompass everyone’s thoughts, the slavering succulence of total submission, the coursing power and glory of [Name]’s maddened domineering, every mind-wiping orgasm and sensation bordering between screaming pain and ecstatic pleasure is yours to endure. ");
 
 			outputText("\n\nYou quickly go completely insane, just like your bodysnatcher did, although not in a way [he] ever knew. You will never be able to express that insanity though. Every hour there is a new scene of complete depravity for you to reflect, personify and act out. A demon’s dearest wish - an eternity of constantly changing, mind-boggling sex - is your final fate.");
 
-			eventParser(9999);
+			eventParser(5035);
 		}
 	}
 

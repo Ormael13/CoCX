@@ -358,7 +358,7 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.D3_MIRRORS_SHATTERED] == 1) outputText(" now shattered,");
 			outputText(" ornate standing mirror dominates the centre of the room, and a number of broken, jagged specimens are stacked near the back. They reflect the dull trappings of this place back at you emptily. You guess as self - centred a race as the demons probably has quite a large use for these.");
 			
-			if (player.hasKeyItem("Laybans"))
+			if (player.hasKeyItem("Laybans") >= 0)
 			{
 				outputText("\n\nThe place feels hollow and creepy, even after the ad hoc exorcism you performed here. There is no reason to linger.");
 			}
@@ -391,7 +391,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\n“<i>[Name]. There we go. Not what I would choose to describe this business...</i>” " + player.mf("he", "she") +" pats " + player.mf("his", "her") +" [butt] mockingly, “<i>but then I’m not you, right? Not yet, anyway.</i>” " + player.mf("He", "She") +" laughs, suddenly, madly, and you cringe inwardly. It is what you would sound like if you were completely, utterly insane. “<i>Do you know what it is like to spend ten years without a form? To spend ten years imitating an empty room? Well, don’t worry, [name]. When I have taken your place and bound you to this thing I’ll make sure to put it somewhere nice and busy, so you will never have to know that torment!</i>” " + player.mf("He", "She") +" draws the mirror image of your [weapon] and advances upon you, your own features hiked into a rictus of madness. You must fight yourself!");
 			
-			// 9999 doppleganger fight
+			startCombat(new Doppleganger());
 		}
 		
 		private function magpiehallsRoomFunc():Boolean
