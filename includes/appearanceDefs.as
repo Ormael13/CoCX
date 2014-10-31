@@ -43,7 +43,7 @@ public static const FACE_RACCOON:int                                            
 public static const FACE_BUCKTEETH:int                                              =   15;
 public static const FACE_MOUSE:int                                                  =   16;
 public static const FACE_FERRET_MASK:int                                            =   17;
-public static const FACE_FERRET:int                                            =   18;
+public static const FACE_FERRET:int                                            		=   18;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;

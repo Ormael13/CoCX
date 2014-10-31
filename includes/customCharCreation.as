@@ -63,7 +63,10 @@ public function customPCSetup():void {
 		player.hairType = 4;
 		//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 		player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
-		player.createKeyItem("Bow",0,0,0,0);
+		player.createKeyItem("Bow", 0, 0, 0, 0);
+		
+		player.createKeyItem("Zetaz's Map", 0, 0, 0, 0);
+		
 		inventory.createStorage();
 		inventory.createStorage();
 		inventory.createStorage();

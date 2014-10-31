@@ -83,6 +83,12 @@ public function doSystem(eventNo:Number):void {
 				dungeonRoom(dungeonLoc);
 				return;
 			}
+			else if (inRoomedDungeon)
+			{
+				menuLoc = 0;
+				if (inRoomedDungeonResume != null) inRoomedDungeonResume();
+				return;
+			}
 			menuLoc = 0;
 			flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
 			camp.doCamp();

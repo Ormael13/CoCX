@@ -1555,7 +1555,8 @@ private function dungeons():void {
 	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
 	//Turn on dungeon
 	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1,"Factory",eventParser,11057);
-	if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2,"Desert Cave",kGAMECLASS.enterBoobsDungeon);
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2, "Desert Cave", kGAMECLASS.enterBoobsDungeon);
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", kGAMECLASS.d3.enterD3);
 	addButton(9,"Back",eventParser,71);
 }
 

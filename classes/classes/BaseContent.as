@@ -106,6 +106,25 @@
 		{
 			kGAMECLASS.inDungeon = v;
 		}
+		
+		protected function get inRoomedDungeon():Boolean
+		{
+			return kGAMECLASS.inRoomedDungeon;
+		}
+		protected function set inRoomedDungeon(v:Boolean):void
+		{
+			kGAMECLASS.inRoomedDungeon = v;
+		}
+		
+		protected function get inRoomedDungeonResume():Function
+		{
+			return kGAMECLASS.inRoomedDungeonResume;
+		}
+		protected function set inRoomedDungeonResume(v:Function):void
+		{
+			kGAMECLASS.inRoomedDungeonResume = v;
+		}
+		
 		protected function get itemSubMenu():Boolean
 		{
 			return kGAMECLASS.itemSubMenu;

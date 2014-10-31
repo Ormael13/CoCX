@@ -63,7 +63,7 @@ public function doItems(eventNo:Number):void {
 			outputText(player.keyItems[temp].keyName + "\n", false);
 			temp++
 		}
-		if(!inCombat() && inDungeon == 0) {
+		if(!inCombat() && inDungeon == false && inRoomedDungeon == false) {
 			if(player.hasKeyItem("Dragon Egg") >= 0) {
 				kGAMECLASS.emberScene.emberCampDesc();
 				ember = kGAMECLASS.emberScene.emberEggInteraction;

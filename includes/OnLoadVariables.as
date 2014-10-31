@@ -28,6 +28,10 @@ public var date:Date = new Date();
 public var inDungeon:Boolean = false;
 public var dungeonLoc:Number = 0;
 
+// To save shitting up a lot of code...
+public var inRoomedDungeon:Boolean = false;
+public var inRoomedDungeonResume:Function = null;
+
 //Used to restrict random drops from overlapping uniques
 public var plotFight:Boolean = false;
 public var timeQ:Number = 0;
