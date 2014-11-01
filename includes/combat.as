@@ -99,6 +99,7 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 
 public function approachAfterKnockback():void
 {
+	clearOutput();
 	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.");
 	player.removeStatusAffect(StatusAffects.KnockedBack);
 	enemyAI();
@@ -144,7 +145,7 @@ public function doCombat(eventNum:Number):void
 			}
 			if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
 			{
-				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!<b>");
+				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
 				menu();
 				addButton(0, "Approach", approachAfterKnockback);
 				addButton(1, "Tease", eventParser, 5005);
@@ -155,7 +156,7 @@ public function doCombat(eventNum:Number):void
 				addButton(7, waitT, eventParser, 5071);
 				addButton(8, "Fantasize", eventParser, 5086);
 			}
-			if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
+			else if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
 				outputText("<b>  Even physical special attacks are out of the question.</b>");
 				pSpecials = 0;
 			}

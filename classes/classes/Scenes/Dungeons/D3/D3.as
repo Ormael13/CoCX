@@ -173,16 +173,16 @@ package classes.Scenes.Dungeons.D3
 			
 			// North East Walk
 			tRoom = new room();
-			tRoom.RoomName = "norteastwalk";
+			tRoom.RoomName = "northeastwalk";
 			tRoom.NorthExit = "northeastcourtyard";
 			tRoom.SouthExit = "eastwalk";
-			tRoom.RoomFunction = norteastwalkRoomFunc;
+			tRoom.RoomFunction = northeastwalkRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
 			
 			// East Walk
 			tRoom = new room();
 			tRoom.RoomName = "eastwalk";
-			tRoom.NorthExit = "norteastwalk";
+			tRoom.NorthExit = "northeastwalk";
 			tRoom.SouthExit = "southeastwalk";
 			tRoom.WestExit = "courtyardsquare";
 			tRoom.RoomFunction = eastwalkRoomFunc;
@@ -556,7 +556,7 @@ package classes.Scenes.Dungeons.D3
 			return false;
 		}
 		
-		private function norteastwalkRoomFunc():Boolean
+		private function northeastwalkRoomFunc():Boolean
 		{
 			outputText("The air is pleasant and free here. Not even the corrupt nature of this place can stop you from enjoying this moment in the demon queen’s garden. Still, there is an aura of lingering danger here. The flowers smell pleasant but somehow off, and every now and again the breezes carry the sounds of whorish moans. An entryway in the east wall leads towards the barracks and mess, identified by a simple sign to the left of the imposing iron door frame. Fortunately, the door is barred and sealed. It seems you’ve come at a time when Lethice’s fortress is near empy. How fortunate for you.");
 			return false;

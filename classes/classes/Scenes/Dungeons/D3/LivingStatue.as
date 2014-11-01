@@ -35,8 +35,23 @@ package classes.Scenes.Dungeons.D3
 			
 			this.lustVuln = 0;
 			
+			this.tallness = 16 * 12;
+			this.createBreastRow(0, 1);
+			initGenderless();
+			
+			this.drop = NO_DROP;
+			
+			this.level = 22;
+			this.bonusHP = 1000;
+			
+			this.weaponName = "stone greathammer";
+			this.weaponVerb = "smash";
+			this.weaponAttack = 25;
+			this.armorName = "cracked stone";
+			
 			createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			
+			checkMonster();
 		}
 		
 		override protected function handleStun():Boolean
@@ -171,11 +186,11 @@ package classes.Scenes.Dungeons.D3
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.6 && this.findStatusAffect(StatusAffects.KnockedBack) < 0)
+			if (this.HPRatio() < 0.7 && this.findStatusAffect(StatusAffects.KnockedBack) < 0)
 			{
 				this.backhand();
 			}
-			else if (this.HPRatio() < 0.4 && this.findStatusAffect(StatusAffects.Disarmed) < 0)
+			else if (this.HPRatio() < 0.4 && this.findStatusAffect(StatusAffects.Disarmed) < 0 && player.weaponName != "fists")
 			{
 				this.disarm();
 			}
@@ -183,8 +198,8 @@ package classes.Scenes.Dungeons.D3
 			{
 				var opts:Array = [];
 				
-				if (player.findStatusAffect(StatusAffects.Blind) < 0) opts.push(dirtKick);
-				opts.push(concussiveBlow);
+				if (player.findStatusAffect(StatusAffects.Blind) < 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) opts.push(dirtKick);
+				if (player.findStatusAffect(StatusAffects.Blind) < 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) opts.push(concussiveBlow);
 				opts.push(cycloneStrike);
 				opts.push(cycloneStrike);
 				opts.push(overhandSmash);
