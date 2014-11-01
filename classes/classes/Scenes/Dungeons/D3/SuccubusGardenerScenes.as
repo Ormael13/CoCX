@@ -69,7 +69,7 @@ package classes.Scenes.Dungeons.D3
 			else if (getGame().telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
 			outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
 			if (player.hasCock()) outputText(" [oneCock]");
-			else if (player.hasVagina()) outputText(" your [pc.vagina]");
+			else if (player.hasVagina()) outputText(" your [vagina]");
 			else outputText(" the sensitive skin of your groin");
 			outputText(". She eagerly goes to work, moaning from the attentions of the tentacle down below, and licking with such fervor that you'd think this is what she wanted all along.");
 
@@ -315,7 +315,7 @@ package classes.Scenes.Dungeons.D3
 			player.cuntChange(player.vaginalCapacity() * 1.25, true, true, false);
 			outputText(" The change from complete emptiness to total fullness rocks the very foundations of you world. There's something so very right about stuffed with cock, crammed full of dick, that you can't imagine existing any other way. Throat bobbing while you swallow, you happily gurgle and relax. Muscles that were coiled tighter than steel springs go slack. There's no need to take action; your gushing hole is finally filled, and the whole of your body is cradled by your inhuman lover's seemingly infinite arms.");
 			
-			outputText("\n\nYour [pc.vagina] clinges tightly to the girthy intruder. The size of the glistening, girlspunk-stained stalk seems perfectly suited to keeping your lips your comfortably stretched. Perhaps it's all the aphrodisiac-laced spooge you're guzzling, but you don't feel an ounce of pain. Your pussy is incandescent with ecstasy. Letting your eyes drift closed, you voluntarily abandon you other senses in order to focus on the rhythmic strumming of your vaginal nerves. The pleasure is so right... so perfect, that you feel compelled to play your tongue along the tentacle in your mouth and work forgotten, vaginal muscles, trying to say thank you in the only way you're capable of.");
+			outputText("\n\nYour [vagina] clinges tightly to the girthy intruder. The size of the glistening, girlspunk-stained stalk seems perfectly suited to keeping your lips your comfortably stretched. Perhaps it's all the aphrodisiac-laced spooge you're guzzling, but you don't feel an ounce of pain. Your pussy is incandescent with ecstasy. Letting your eyes drift closed, you voluntarily abandon you other senses in order to focus on the rhythmic strumming of your vaginal nerves. The pleasure is so right... so perfect, that you feel compelled to play your tongue along the tentacle in your mouth and work forgotten, vaginal muscles, trying to say thank you in the only way you're capable of.");
 			
 			//Dicks
 			if (player.hasCock())
