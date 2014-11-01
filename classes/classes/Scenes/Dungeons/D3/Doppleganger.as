@@ -127,6 +127,14 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText("<b>(" + player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2))) + ")</b>");
 			}
+			
+			addTalkShit();
+		}
+		
+		public function handlePlayerWait():void
+		{
+			outputText("Your doppleganger similarly opts to take a momentary break from the ebb and flow of combat.");
+			addTalkShit();
 		}
 		
 		override public function doAI():void

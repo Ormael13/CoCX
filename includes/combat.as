@@ -855,6 +855,11 @@ public function doCombat(eventNum:Number):void
 				player.removeStatusAffect(StatusAffects.Confusion);
 				outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n", true);
 			}
+			else if (monster is Doppleganger)
+			{
+				outputText("You decide not to take any action this round.\n\n", true);
+				(monster as Doppleganger).handlePlayerWait();
+			}
 			else outputText("You decide not to take any action this round.\n\n", true);
 			enemyAI();
 			return;
