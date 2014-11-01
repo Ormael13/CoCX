@@ -54,11 +54,8 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("You slump to your knees, overwhelmed and unable to see the shadow of the falling hammer. Your last thoughts are of regret.");
-
-			outputText("\n\n<b>GAME OVER</b>");
 			
-			menu();
-			doNext(9999);
+			eventParser(5035);
 		}
 	}
 

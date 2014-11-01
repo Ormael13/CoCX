@@ -77,7 +77,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground.");
 
 			//Light magic-type damage!
-			var damage:Number = (50 * (inte/player.inte)) - player.armorDef - (player.tou/5);
+			var damage:Number = (100 * ((inte/player.inte) / 4));
 			damage = player.takeDamage(damage);
 			
 			//Stun success
@@ -138,8 +138,8 @@ package classes.Scenes.Dungeons.D3
 			//High damage, lowish accuracy.
 			outputText("Raising its hammer high overhead, the giant swiftly brings its hammer down in a punishing strike!");
 			
-			var damage:Number = 200 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (damage <= 0 || (combatMiss() && combatMiss()) || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You're able to sidestep it just in time.");
+			var damage:Number = 175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			if (damage <= 0 || rand(100) < 25 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You're able to sidestep it just in time.");
 			else
 			{
 				//Hit
@@ -158,7 +158,7 @@ package classes.Scenes.Dungeons.D3
 			//Oh noes!
 			else
 			{
-				outputText(" Your equipment flies off into the bushes! You'll have to fight another way.");
+				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. (" + player.takeDamage(str + weaponAttack) + ")");
 				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				this.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
@@ -172,7 +172,7 @@ package classes.Scenes.Dungeons.D3
 			//Difficult to avoid, moderate damage.
 			outputText("Twisting back, the giant abruptly launches into a circular spin. It's hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
 
-			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			var damage:Number = (175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(3) + 2);
 			//Avoid
 			if (damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
 			else

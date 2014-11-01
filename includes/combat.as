@@ -100,7 +100,7 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 public function approachAfterKnockback():void
 {
 	clearOutput();
-	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.");
+	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
 	player.removeStatusAffect(StatusAffects.KnockedBack);
 	enemyAI();
 	return;
