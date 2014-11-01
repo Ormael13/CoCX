@@ -166,7 +166,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			this.HP = this.eMaxHP();
-			this.lustVuln += 0.15;
+			this.lustVuln += 0.3;
 		}
 		
 		private function tentagrapple():void
