@@ -182,7 +182,7 @@ package classes.Scenes.Dungeons.D3
 			// East Walk
 			tRoom = new room();
 			tRoom.RoomName = "eastwalk";
-			tRoom.NorthExit = "northeastwalk";
+			tRoom.NorthExit = "norteastwalk";
 			tRoom.SouthExit = "southeastwalk";
 			tRoom.WestExit = "courtyardsquare";
 			tRoom.RoomFunction = eastwalkRoomFunc;
@@ -307,11 +307,15 @@ package classes.Scenes.Dungeons.D3
 		
 		public function move(roomName:String):void
 		{
+			trace("Entering room", roomName);
+			
 			clearOutput();
 			
 			if (rooms[roomName] == undefined)
 			{
+				clearOutput();
 				outputText("Error: Couldn't find the room indexed as: " + roomName);
+				menu();
 				return;
 			}
 			
@@ -542,6 +546,13 @@ package classes.Scenes.Dungeons.D3
 		private function northeastcourtyardRoomFunc():Boolean
 		{
 			outputText("This particular corner of the courtyard feels remarkably cramped, even a little claustrophobic. To the north, a stone wall rises, dwarfing the smaller one to the east, and to make matters worse, the hedges to the southwest are high and square, virtually a wall in their own right. The only avenues of travel available are to the south or west, following the red sandstone bricks as they bend around the corner.");
+			
+			if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 0)
+			{
+				hermCentaur.encounterThePony();
+				return true;
+			}
+			
 			return false;
 		}
 		

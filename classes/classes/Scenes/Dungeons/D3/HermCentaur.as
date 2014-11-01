@@ -21,9 +21,13 @@ package classes.Scenes.Dungeons.D3
 			
 			this.tallness = 12 * 9;
 			
+			// THIS SHIT IS RETARDED.
+			// Rather than doing something smart, like usiing the mf() function to set the gender prounouns in checkMonster, instead, each create<x> function sets them to something. So if you createVag then createCock, you get male pronouns. Fuck off.
 			this.createBreastRow(Appearance.breastCupInverse("E"));
-			this.createVagina(false, 4, 5);
 			this.createCock(36, 5, CockTypesEnum.HORSE);
+			this.createVagina(false, 4, 5); 
+			
+			
 			this.balls = 2;
 			this.ballSize = 3;
 			
@@ -33,14 +37,21 @@ package classes.Scenes.Dungeons.D3
 			initStrTouSpeInte(100, 100, 65, 65);
 			initLibSensCor(85, 40, 100);
 			
+			this.weaponName = "fists";
+			this.weaponAttack = 1;
+			this.weaponVerb = "punch";
+			this.armorName = "wraps";
+			
 			this.bonusHP = 800;
 			
 			this.gems = 75 + rand(50);
 			this.level = 22;
 			
-			this.lustVuln = 1.0;
+			this.lustVuln = 0.6;
 			
 			this.drop = NO_DROP;
+			
+			this.checkMonster();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -76,7 +87,7 @@ package classes.Scenes.Dungeons.D3
 			if (_chargingArouse) arouseSpellCast();
 			else if (this.lust >= 60 && !_usedGottaCum) gottaCum();
 			else if (this.HPRatio() <= 0.5 && !_usedHeal) healUp();
-			else if (rand(100) >= lust) this.hypnoCock();
+			else if (rand(lust) >= 40) this.hypnoCock();
 			else
 			{	
 				// Selections
@@ -93,7 +104,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("Turning about, the demonic centauress lifts her tail to reveal the slimy, lubricated lips of her puffy, black horse-cunt.  She arches her human body back to lie on her back, an incredible show of flexibility, allowing you to view the silhouette of her jutting nipples her tail lazily fans her corruption-enhanced pheromones in your direction.  The air temperature seems to spike by a few degrees as the fan of biological lust washes over you.  Fragrant female moisture seems to seep into your very pores, and in spite of your desire to win out, ");
 			
-			if (player.lust <= 50) outputText(" your " + player.skin + " grows feverishly hot.");
+			if (player.lust <= 50) outputText(" your " + player.skin() + " grows feverishly hot.");
 			else 
 			{
 				outputText(" blood rushes to your loins, invigorating");
@@ -102,14 +113,14 @@ package classes.Scenes.Dungeons.D3
 				else outputText(" your anus until it puckers, craving something to fill it - anything.");
 			}
 			
-			game.dynStats("lus+", 3 + rand(3));
+			game.dynStats("lus+", 8 + (player.lib / 10) + (player.sens / 10));
 		}
 		
 		private function aphrodisiacSquirt():void
 		{
 			outputText("The centaur grabs her heavy tits and casually squeezes the prodding, hard nipples that cap them.  A trickle of rose moisture trickles out, dripping down the underside of her bust to glisten wetly in the light.  Spellbound for the moment, you look on in wonder at the display of demonic lactations.  A faint sweetness lingers in the air, and you lick your lips without meaning to.  Then, she squeezes down to spray a torrent of pink-tinged breastmilk directly at you, splitting into so many forks of fluid that you have no hope to dodge.");
 			
-			game.dynStats("lus+", 3 + rand(3));
+			game.dynStats("lus+", 8 + (player.lib / 10) + (player.sens / 10));
 
 	if (player.lust < 30) outputText("\n\nYou close your mouth tight and endure the shimmering shower, trying your damnedest to resist the effects of this insidious liquid.  Wherever it strikes you, it vanishes soon after, absorbed directly into your body.");
 	else if (player.lust < 40) outputText("\n\nYour heart beats faster.");
@@ -167,7 +178,7 @@ package classes.Scenes.Dungeons.D3
 				//(OH SHIT YOU GUNNA GET FUKKED)
 				outputText("The chanting reaches a crescendo before you can stop it, and as the nine-foot woman points at you, you barely have time to enunciate a single curse.  Her spell is upon you.  There's a flash of crimson light, seemingly as bright as the sun, and then you're hit with a wave of lust so strong it might as well be a physical force.  It slaps you hard enough to send you reeling, even while your heart pumps every spare drop of blood south.  You cry out at the forced arousal, blubbering wildly as the pleasure mounts and images of you and your foe locked together in every sexual position imaginable flood your consciousness.");
 				
-				game.dynStats("lus+", 5 + rand(7));
+				game.dynStats("lus+", 20 + (player.lib / 6) + (player.sens / 6));
 			}
 		}
 		
@@ -200,7 +211,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				game.dynStats("lus+", 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.sens / 10)));
+				game.dynStats("lus+", 20 + 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.sens / 10)));
 				
 				outputText("Down it bobs, slowly hanging lower and lower... SMACK!  Up it goes, taking your bedazzled eyes along for the ride.  \"<i>That's a good " + player.mf("boy", "girl") + ",</i>\" the dick's director whispers, \"<i>Just follow the tempo and let it fill your mind, oozing inside you with each thump.</i>\"");
 				outputText("\n\nFuck!  She's right, it's getting awfully hard to think about anything else.  You fixate further on the cock, unwilling or unable to look away.");
@@ -232,6 +243,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nFlushing, the demoness whimpers, \"<i>...don't think I can do that again, but I don't think you'll be able to turn me on like that twice!</i>\"");
 			
 			this.lust = 0;
+			game.dynStats("lus", 15);
 		}
 		
 		private function healUp():void

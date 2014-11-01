@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Appearance;
+	import classes.PregnancyStore;
 	
 	/**
 	 * ...
@@ -23,8 +24,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.vaginalCapacity() < 100 || player.analCapacity() < 100) outputText("\n\nNot prepared to take that beast perhaps, but certainly prepared to take this over-grown abomination down!");
 			else outputText("\n\nNope!  You could probably handle her elephantine she-cock, but you've no plans on losing this fight!");
 			
-			menu();
-			addButton(0, "Fight", startCombat, new HermCentaur());
+			startCombat(new HermCentaur());
 		}
 		
 		private const CENTAUR_KILLED:int = 1;
@@ -34,7 +34,13 @@ package classes.Scenes.Dungeons.D3
 		public function beatThePony(hpVictory:Boolean):void
 		{
 			clearOutput();
-			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully {as she tries to rise/as she tries to stretch for her pulsating, cum-dripping member}, but it's a futile gesture.  She doesn't have the power to face you on her own terms anymore, and she watches you with a {resigned glare/lustful glare} once she realizes she's utterly spent.");
+			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully")
+			if (hpVictory) outputText(" as she tries to rise");
+			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
+			outputText(", but it's a futile gesture.  She doesn't have the power to face you on her own terms anymore, and she watches you with a");
+			if (hpVictory) outputText(" resigned glare");
+			else outputText(" lustful glare");
+			outputText(" once she realizes she's utterly spent.");
 
 			if (player.lust >= 33) outputText("\n\nAfter her cock-teasing, she's sitting right there with two very large, alluring sexes presented to you.  Do you sate yourself on them?");
 
@@ -171,11 +177,11 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\nYou wake to the feel of your body landing hard in the grass, coughing up huge gobs of thick sperm as you cradle your distended belly reflexively.  Blinking the cum from your eyes, you watch the three green shafts twining together into one, slowly darkening to a black, equine tool.  The centauress gets up while you catch your breath and takes off running, calling over her shoulder, \"<i>You won the battle but lost the war!  Thanks for the fuck, but if you don't mind, I'll come back once Lethice has you bent over her knee.</i>\"");
 
-				outputText("\n\nIt takes a few minutes for enouch to cum to drain from your sore orifices to let you stand, and when you do, your belly gurgles uncomfortably.  It was undignified, but gods are you satisfied!");
+				outputText("\n\nIt takes a few minutes for enough cum to drain from your sore orifices to let you stand, and when you do, your belly gurgles uncomfortably.  It was undignified, but gods are you satisfied!");
 			}
-			else if (cockType = DOGGECOCK)
+			else if (cockType == DOGGECOCK)
 			{
-				outputText("\n\nYou give her throbbing maleness an affection pat and proclaim, \"<i>Make it a dog-cock, one that will fit knot properly.  Then we can fuck.</i>\"");
+				outputText("You give her throbbing maleness an affection pat and proclaim, \"<i>Make it a dog-cock, one that fit to knot properly.  Then we can fuck.</i>\"");
 
 				outputText("\n\nThe light in the room seems to dim, drawn into the demon's onyx-black horn, accompanied by the sound of flesh shifting, creaking and thrumming as it takes on new shape.  You feel something pointy and hot brush your [foot], and as the light returns, you're treated to the sight of a swollen dog-cock leaking it's thick pre-creme onto you.  Where once an equine cock jutted from a horse-like sheath, now there is the rounded bulb of a distinctly canine cock.  Above the deliciously thick knot, the rest of the shaft is blessedly thick, tapering only near the very tip.  Best of all, it looks able to be faced in any direction, so taking it should be no problem.");
 
@@ -209,7 +215,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				outputText("\n\nYou give her throbbing maleness an affection pat and proclaim, \"<i>Keep it equine, the flare looks delicious.  Just make sure that it will fit, and then we can fuck.</i>\"");
+				outputText("You give her throbbing maleness an affection pat and proclaim, \"<i>Keep it equine, the flare looks delicious.  Just make sure that it will fit, and then we can fuck.</i>\"");
 
 				outputText("\n\nThe light in the room seems to dim, drawn into the demon's onyx-black horn, accompanied by the sound of flesh slithering and shaping.  A warm, slick presence brushes you, spongy cock-flesh brushing against you as it dribbles a rope of pre-cum onto your [leg].  As the light returns, you get to see the changes, noting that now the demon's member is perfectly sized for your penetration, though the head looks like it could be a bit challenging to take.");
 
@@ -240,7 +246,7 @@ package classes.Scenes.Dungeons.D3
 
 			player.orgasm();
 			dynStats("cor+", 5);
-			// 9999 - try imp preggers?
+			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
@@ -359,9 +365,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
-			outputText("\n\n<b>GAME OVER</b>");
-
-			eventParser(9999);
+			eventParser(5035);
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -454,9 +458,8 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");
-			outputText("\n\n<b>GAME OVER</b>");
 			
-			eventParser(9999);
+			eventParser(5035);
 		}
 		
 	}
