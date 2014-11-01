@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
+	import classes.Items.Consumables.SimpleConsumable;
 	import classes.room;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
@@ -413,12 +414,75 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("You are back in the southern end of the Magpie Hall.  Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
-			if (9999 == 0)
+			if (eggsAvailable() > 0)
 			{
-				// Eggstuff
+				addButton(2, "Eggs", goToEggPile);
 			}
 			
 			return false;
+		}
+		
+		private const BLACK:int = 1 << 0;
+		private const BLUE:int = 1 << 1;
+		private const WHITE:int = 1 << 2;
+		private const PINK:int = 1 << 3;
+		private const BROWN:int = 1 << 4;
+		private const PURPLE:int = 1 << 5;
+		
+		private function eggsAvailable():int
+		{
+			var flagNum:int = flags[kFLAGS.D3_EGGS_AVAILABLE];
+			
+			var eggs:int = 0;
+			
+			if (!(flagNum & BLACK)) eggs++;
+			if (!(flagNum & BLUE)) eggs++;
+			if (!(flagNum & WHITE)) eggs++;
+			if (!(flagNum & PINK)) eggs++;
+			if (!(flagNum & BROWN)) eggs++;
+			if (!(flagNum & PURPLE)) eggs++;
+			
+			return eggs;
+		}
+		
+		private function goToEggPile():void
+		{
+			clearOutput();
+			outputText("You head down the stairs into the hall proper to inspect the ramble hoard of eggs the basilisks collected. They’re mostly unfertilised harpy ovum, but you quickly pick out a number of differently coloured transformative eggs stolen from Gods know who.");
+			
+			menu();
+			
+			var flagNum:int = flags[kFLAGS.D3_EGGS_AVAILABLE];
+			
+			if (!(flagNum & BLACK)) addButton(0, "Black", takeEgg, BLACK);
+			if (!(flagNum & BLUE)) addButton(1, "Blue", takeEgg, BLUE);
+			if (!(flagNum & WHITE)) addButton(2, "White", takeEgg, WHITE);
+			if (!(flagNum & PINK)) addButton(3, "Pink", takeEgg, PINK);
+			if (!(flagNum & BROWN)) addButton(4, "Brown", takeEgg, BROWN);
+			if (!(flagNum & PURPLE)) addButton(5, "Purple", takeEgg, PURPLE);
+			
+			addButton(9, "Back", resumeFromFight);
+		}
+		
+		private function takeEgg(eggMask:int):void
+		{
+			var item:SimpleConsumable;
+			
+			if (eggMask == BLACK) item = consumables.L_BLKEG;
+			if (eggMask == BLUE) item = consumables.L_BLUEG;
+			if (eggMask == WHITE) item = consumables.L_WHTEG;
+			if (eggMask == PINK) item = consumables.L_PNKEG;
+			if (eggMask == BROWN) item = consumables.L_BRNEG;
+			if (eggMask == PURPLE) item = consumables.L_PRPEG;
+			
+			menuLoc = 9999;
+			// Should actually be handled by the fallthrough of doNext(1) in the takeItem shit
+			
+			clearOutput();
+			outputText("You pluck out " + item.longName + " ");			
+			
+			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
+			inventory.takeItem(item);
 		}
 		
 		private function fallbackFromMagpieHallS():void
@@ -447,6 +511,12 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			outputText("You are back in the northern end of the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
+			
+			if (eggsAvailable() > 0)
+			{
+				addButton(2, "Eggs", goToEggPile);
+			}
+			
 			return false;
 		}
 		
