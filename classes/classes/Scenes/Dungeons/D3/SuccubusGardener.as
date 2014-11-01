@@ -24,7 +24,7 @@ package classes.Scenes.Dungeons.D3
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			
-			this.tallness = 7 * 12;
+			this.tallness = 8 * 12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_TIGHT;
 			
@@ -71,7 +71,7 @@ package classes.Scenes.Dungeons.D3
 			if (findStatusAffect(StatusAffects.TentagrappleCooldown) >= 0)
 			{
 				addStatusValue(StatusAffects.TentagrappleCooldown, 1, -1);
-				if (statusAffectv1(StatusAffects.TentacleCoolDown) <= 0)
+				if (statusAffectv1(StatusAffects.TentagrappleCooldown) <= 0)
 				{
 					removeStatusAffect(StatusAffects.TentagrappleCooldown);
 				}
@@ -100,13 +100,13 @@ package classes.Scenes.Dungeons.D3
 			{
 				var opts:Array = [sicem, corruptiveShower, lustAuraCast];
 				
-				if (this.lust <= 15) opts.push(taunt);
-				if (this.lust >= 75) opts.push(motorboat);
+				if (this.lust <  40) opts.push(taunt);
+				if (this.lust >= 40) opts.push(motorboat);
 				if (this.lust >= 40) opts.push(tasteTheEcstasy);
 				
 				opts[rand(opts.length)]();
 			}
-			
+			statScreenRefresh();
 			combatRoundOver();
 		}
 		
@@ -191,9 +191,11 @@ package classes.Scenes.Dungeons.D3
 		
 		public function grappleStruggle():void
 		{
+			clearOutput();
+			
 			var numRounds:int = player.statusAffectv1(StatusAffects.Tentagrappled);
 			
-			if (rand(player.str) > this.str / (1 + (numRounds / 4)))
+			if (rand(player.str) > this.str / (1 + (numRounds / 2)))
 			{
 				outputText("You scrabble desperately against the tentacles enveloping your body, pulling against the cast-iron grip around your limbs. You tug against them again and again, and with one final mighty heave, you slip free of their grasp!");
 				
@@ -203,12 +205,28 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				squeeze();
+				outputText("You scrabble desperately against the tentacles enveloping your body, pulling against the cast-iron grip around your limbs. You tug against them again and again");
+				
+				if (rand(2) == 0)
+				{
+					outputText(", but the vines encircling you squeeze you tighter, twisting and sliding across your [skinFurScales] as they press more tightly around you. It gets hard to breathe, but at the same time, some of them are inside your [armor], gliding across your most sensitive places with oiled ease that's made all the more arousing by the force behind it.");	
+				}
+				else
+				{
+					outputText(". You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
+				}
+				
+				player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
+				player.takeDamage(75 + rand(15));
+				game.dynStats("lus+", 3 + rand(3));
+				combatRoundOver();
 			}
 		}
 		
 		public function grappleWait():void
 		{
+			clearOutput();
+			
 			squeeze();
 		}
 		
@@ -216,11 +234,11 @@ package classes.Scenes.Dungeons.D3
 		{
 			if (rand(2) == 0)
 			{
-				outputText("\n\nThe vines encircling you squeeze you tighter, twisting and sliding across your [skinFurScales] as they press more tightly around you. It gets hard to breathe, but at the same time, some of them are inside your [armor], gliding across your most sensitive places with oiled ease that's made all the more arousing by the force behind it.");
+				outputText("The vines encircling you squeeze you tighter, twisting and sliding across your [skinFurScales] as they press more tightly around you. It gets hard to breathe, but at the same time, some of them are inside your [armor], gliding across your most sensitive places with oiled ease that's made all the more arousing by the force behind it.");
 			}
 			else
 			{
-				outputText("\n\nYou're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
+				outputText("You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 			}
 	
 			player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
@@ -231,8 +249,9 @@ package classes.Scenes.Dungeons.D3
 		
 		private function sicem():void
 		{
-			outputText("Jiggling oh so pleasantly, the gardener twirls and points in your direction. <i>\"Sic 'em, pets!\"</i> There is no time for a retort, only a wave of unrelenting greenery lashing in your direction!");
+			outputText("Jiggling oh so pleasantly, the gardener twirls and points in your direction. <i>“Sic 'em, pets!”</i> There is no time for a retort, only a wave of unrelenting greenery lashing in your direction!");
 			//Ten very low damage attacks.
+			// Geddynote- opted to convert to a lust-inducing attack, because LITERALLY EVERYTHING ELSE she does is lust-based.
 			
 			var damage:Number = 0;
 			
@@ -240,14 +259,16 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (!(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))
 				{
-					damage += 10 + rand(this.str) - (rand(player.tou)) - player.armorDef;
+					damage += 2 + rand(1 + player.lib / 20) + rand(1 + player.sens / 20);
 				}
 			}
 			
 			if (damage >= 0)
 			{
-				damage = player.takeDamage(damage);
-				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! (" + damage + ")");
+				var sL:Number = player.lust;
+				game.dynStats("lus+", damage);
+				var sL = player.lust - sL;
+				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
 			else
 			{
@@ -257,7 +278,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function corruptiveShower():void
 		{
-			outputText("The succubus lifts her hands up in the air, saying, <i>\"Why not taste a sampling of the pleasures I offer?\"</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
+			outputText("The succubus lifts her hands up in the air, saying, <i>“Why not taste a sampling of the pleasures I offer?”</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
 	
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
 			{
@@ -286,7 +307,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.lust < 50) outputText("The tentacles' sex-juices are still covering you - still slowly arousing you. You've got a good handle on it for now.\n\n");
 			else if (player.lust < 60) 
 			{
-				outputText("You try to wipe some of the fragrant seed from your palm, but all you succeed in doing is smearing it into your [pc.hips].");
+				outputText("You try to wipe some of the fragrant seed from your palm, but all you succeed in doing is smearing it into your [hips].");
 				if (player.cor < 50) outputText(" You're ashamed to admit");
 				else outputText(" You're a little irritated to admit"); 
 				outputText(" that it's starting to feel really good.\n\n");
@@ -305,7 +326,16 @@ package classes.Scenes.Dungeons.D3
 			}
 			else if (player.lust < 100)
 			{
-				outputText("Ohhhh, you're close now. You can feel the need hammering inside of you, soaking in through your [skinFurScales] to stoke the fires between your [legs] into a blazing inferno, one you couldn't resist even if you wanted to. Then... then you'll be free to cum. You shake your head. Gotta hold it together{, even while your {rigid cock{s are/ is} drizzling ropes of pre unimpeded./soaked twat threatens to {drown/further soak} your [legs].}/.}\n\n");
+				outputText("Ohhhh, you're close now. You can feel the need hammering inside of you, soaking in through your [skinFurScales] to stoke the fires between your [legs] into a blazing inferno, one you couldn't resist even if you wanted to. Then... then you'll be free to cum. You shake your head. Gotta hold it together");
+				if (player.hasCock())
+				{
+					outputText(", even while your rigid cock" + ((player.cocks.length > 1) ? "s are":" is") + " drizzling ropes of pre unimpeded.");
+				}
+				else if (player.hasVagina())
+				{
+					outputText(" soaked twat threatens to " + ((player.wetness() == 4) ? "drown" : "further soak") + " your [legs].");
+				}
+				else outputText(".");
 			}
 			else
 			{
@@ -324,12 +354,12 @@ package classes.Scenes.Dungeons.D3
 		
 		private function taunt():void
 		{
-			outputText("<i>\"How do you expect to defeat me, [name],\"</i> the green-thumbed temptress asks with a quirk of her head. <i>\"You are buit one, and we are many. You have the frailties and weaknesses of a soul. I have power and experience beyond your comprehension. What is there for you to do but willingly submit?\"</i> She purses her puffy lips, thinking. <i>\"If you submit willingly, I'll allow you to lay your head between my breasts while my plants feed on you. It'll be quite the experience.\"</i>");
+			outputText("<i>“How do you expect to defeat me, [name],”</i> the green-thumbed temptress asks with a quirk of her head. <i>“You are but one, and we are many. You have the frailties and weaknesses of a soul. I have power and experience beyond your comprehension. What is there for you to do but willingly submit?”</i> She purses her puffy lips, thinking. <i>“If you submit willingly, I'll allow you to lay your head between my breasts while my plants feed on you. It'll be quite the experience.”</i>");
 		}
 		
 		private function motorboat():void
 		{
-			outputText("<i>\"Oh fuck it,\"</i> the demoness growls, stalking forward. <i>\"We both need this, don't we, pet?\"</i> She slips inside your guard, pressing her pendulous melons against your face");
+			outputText("<i>“Oh fuck it,”</i> the demoness growls, stalking forward. <i>“We both need this, don't we, pet?”</i> She slips inside your guard, pressing her pendulous melons against your face");
 			
 			if (player.tallness <= this.tallness - 6) outputText(", somehow short enough in spite of the height differences.");
 			else if (player.tallness >= this.tallness + 6) outputText(", somehow tall enough in spite of the height differences.");
@@ -344,9 +374,9 @@ package classes.Scenes.Dungeons.D3
 			//Used once after first orgasm
 			// 9999 wot orgasm -- gonna assume it's used the heal at least once
 			
-			outputText("Cupping her breasts under the cover of her tentacular minions, the gardening succubus coos, <i>\"Slow down a little and enjoy the sights, why don't you?\"</i> She squeezes, and arcs of glittering milk (or is that sap?) erupt from her elongated nipples, spraying out in continuous streams towards your [feet]. You try to evade at the last second, but the streams follow you every which way, eventually coating you in a layer amber milk-sap.");
+			outputText("Cupping her breasts under the cover of her tentacular minions, the gardening succubus coos, <i>“Slow down a little and enjoy the sights, why don't you?”</i> She squeezes, and arcs of glittering milk (or is that sap?) erupt from her elongated nipples, spraying out in continuous streams towards your [feet]. You try to evade at the last second, but the streams follow you every which way, eventually coating you in a layer amber milk-sap.");
 			
-			outputText("\n\nThe lactic adhesive effectively slows your movements. You won't be dodging around quite so nimbly anymore, but at least you get to watch the succubus moan and twist, kneading the last few golden droplets from her engorged tits. She licks a stray strand from her finger while watching you, smiling. <i>\"Ready to give up yet?\"</i>");
+			outputText("\n\nThe lactic adhesive effectively slows your movements. You won't be dodging around quite so nimbly anymore, but at least you get to watch the succubus moan and twist, kneading the last few golden droplets from her engorged tits. She licks a stray strand from her finger while watching you, smiling. <i>“Ready to give up yet?”</i>");
 			
 			// 20%?
 			var speedSapped:Number = player.spe * 0.2;
@@ -372,7 +402,7 @@ package classes.Scenes.Dungeons.D3
 		private function tasteTheEcstasy():void
 		{
 			//Strength check based lust damage, used when aroused only.
-			outputText("Three tentacles stab out at you like organic spears, but you easily evade them... directly into the succubus' arms! Too late, you realize that the offensive was a feint! Her tremendous tits are pressing into your back, and you feel a trickle of wetness leaking down your [leg] as she grinds against you. At the same time, she whispers into your ear, <i>\"Just have a taste... sample the ecstasy. You'll see that indulging is the best thing you could possibly do.\"</i>");
+			outputText("Three tentacles stab out at you like organic spears, but you easily evade them... directly into the succubus' arms! Too late, you realize that the offensive was a feint! Her tremendous tits are pressing into your back, and you feel a trickle of wetness leaking down your [leg] as she grinds against you. At the same time, she whispers into your ear, <i>“Just have a taste... sample the ecstasy. You'll see that indulging is the best thing you could possibly do.”</i>");
 			
 			outputText("\n\nOne of those tentacles is above you now, and it points down, its phallic shape clear. The slit at the end spreads open, and a blob of whitish goo appears. ");
 			
@@ -388,7 +418,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				//Succeed strength check
 				outputText("\n\nThat's all the warning you need to redouble your efforts. Riding high on a surge of adrenaline, you tear your way out of the temptress' bonds before she can feed you any more corruption.");
-				outputText("\n\nShe pouts. <i>\" Come on, just a taste !\"</i>");
+				outputText("\n\nShe pouts. <i>“Come on, just a taste!”</i>");
 			}
 		}
 		

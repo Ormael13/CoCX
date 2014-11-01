@@ -501,8 +501,8 @@ package classes.Scenes.Dungeons.D3
 				
 				//[Surrender] [Fight]
 				menu();
-				addButton(0, "Surrender", succubusGardener.surrenderToTheGardener);
-				addButton(1, "Fight", startCombatImmediate, new SuccubusGardener());
+				addButton(0, "Fight", startCombatImmediate, new SuccubusGardener());
+				addButton(1, "Surrender", succubusGardener.surrenderToTheGardener);
 	
 				return true;
 			}

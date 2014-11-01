@@ -198,6 +198,7 @@ public function doCombat(eventNum:Number):void
 				}
 				else if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
 				{
+					outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
 					choices ("Struggle", (monster as SuccubusGardener).grappleStruggle, "Wait", (monster as SuccubusGardener).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
@@ -3834,10 +3835,10 @@ public function tease(justText:Boolean = false):void {
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
 		damage = (damage + rand(bonusDamage)) * monster.lustVuln;
-		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-		if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(damage, true);
-		else if (!justText && (!monster is Doppleganger)) monster.teased(damage);
 		
+		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
+		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(damage, true);
+		else if (!justText) monster.teased(damage);
 		
 		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
 		{
@@ -3854,7 +3855,7 @@ public function tease(justText:Boolean = false):void {
 		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
 		
 		if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
-		if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
+		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
 		else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);

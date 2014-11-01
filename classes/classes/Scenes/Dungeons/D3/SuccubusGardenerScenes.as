@@ -656,13 +656,6 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
 			eventParser(5035);
-		}
-		
-		public function fightTheGardener():void
-		{
-			
-		}
-		
+		}		
 	}
-
 }
