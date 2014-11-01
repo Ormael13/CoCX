@@ -68,7 +68,7 @@ package classes.Scenes.Dungeons.D3
 			// Magpie Hall S
 			tRoom = new room();
 			tRoom.RoomName = "magpiehalls";
-			tRoom.NorthExit = "magpiehalln";
+			tRoom.NorthExit = "tunnel2";
 			tRoom.SouthExit = "antechamber";
 			tRoom.RoomFunction = magpiehallsRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
@@ -77,7 +77,7 @@ package classes.Scenes.Dungeons.D3
 			tRoom = new room();
 			tRoom.RoomName = "magpiehalln";
 			tRoom.NorthExit = "tunnel2";
-			tRoom.SouthExit = "magpiehalls";
+			tRoom.SouthExit = "antechamber";
 			tRoom.RoomFunction = magpiehallnRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
 			

@@ -167,9 +167,7 @@ package classes.Scenes.Dungeons.D3
 
 					outputText("\n\nSometime later, you come to in between orgasms, surrounded in green, but there is so much sensory data coming from your crotch that your eyes might as well be blind by comparison. You marvel at this new life and wonder if you'll ever tire of admiring the texture of these walls. The next orgasm blasts those thoughts away, answering the question for you. Raw, unfiltered pleasure. That's what matters to you now.");
 
-					outputText("\n\n<b>GAME OVER</b>");
-
-					eventParser(9999);
+					eventParser(5035);
 				}
 			}
 		}
@@ -178,9 +176,8 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
-			outputText("\n\n<b>GAME OVER</b>");
 			
-			eventParser(9999);
+			eventParser(5035);
 		}
 
 		private function endHer():void
@@ -205,7 +202,7 @@ package classes.Scenes.Dungeons.D3
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
-		public function surrenderToTheGardener(hpVictory:Boolean):void
+		public function surrenderToTheGardener(hpVictory:Boolean = false):void
 		{
 			// Male
 			if (player.hasCock() && !player.hasVagina())
@@ -346,9 +343,8 @@ package classes.Scenes.Dungeons.D3
 			outputText(" You're a fountain of wetness now, fit only for cumming and taking cum in. The thought triggers a second orgasm on the back of the first while the spent tentacle exits.");
 			
 			outputText("\n\nAnother, larger tentacle takes its place, sealing most of the first's load inside. There's no waiting, only fucking and climbing to one orgasm after another. The space between climaxes narrows with each one until your world becomes a constant, irresistible tide of bliss.");
-			outputText("\n\n<b>GAME OVER</b>");
 			
-			eventParser(9999);
+			eventParser(5035);
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -531,9 +527,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("The champion, more canine than [man], became little more than one mutt among many that the demons had tamed, used for everything from breeding to hunting escaped slaves, and " + player.mf("he","she") + " loved it, delighted in it even. Eventually, " + player.mf("his","her") + " owner bred her numerous times, creating a bloodline of strong, loyal servants that eventually helped keep all of Mareth under the demon's heels.");
-
-			outputText("\n\n<b>GAME OVER!</b>");
-			eventParser(9999);
+			eventParser(5035);
 		}
 		
 		private function maleLossFeeder():void
@@ -661,7 +655,6 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
-			outputText("\n\n<b>GAME OVER</b>");
 			eventParser(5035);
 		}
 		
