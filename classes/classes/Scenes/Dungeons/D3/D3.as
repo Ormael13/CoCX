@@ -305,7 +305,7 @@ package classes.Scenes.Dungeons.D3
 			addButton(9, "Masturbate", eventParser, 10);
 		}
 		
-		private function move(roomName:String):void
+		public function move(roomName:String):void
 		{
 			clearOutput();
 			
@@ -401,13 +401,13 @@ package classes.Scenes.Dungeons.D3
 				}
 				
 				menu();
-				addButton(0, "Go!", gogoFuckTheseBasilisks);
+				addButton(0, "Go!", jeanClaude.gogoFuckTheseBasilisks);
 				addButton(1, "Fall Back", fallbackFromMagpieHallS);
 					
 				return true;
 			}
 			
-			outputText("You are back in the Magpie Hall.  Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
+			outputText("You are back in the southern end of the Magpie Hall.  Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
 			if (9999 == 0)
 			{
@@ -428,144 +428,6 @@ package classes.Scenes.Dungeons.D3
 			addButton(1, "Next", move, "antechamber");
 		}
 		
-		private function gogoFuckTheseBasilisks():void
-		{
-			clearOutput();
-			
-			if (!player.hasKeyItem("Laybans"))
-			{
-				outputText("You breathe deep, steel yourself, and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
-				if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
-				outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
-
-				outputText("\n\nYou try and not look down as you proceed, back straight and as aloof as you can.");
-				if (player.isNaga()) outputText("  You’re probably imagining things but the passage of your sinuous form over the wire surface seems absurdly loud, an endless rubbing of sandpaper which seems to fill the hall.");
-				else if (player.isGoo()) outputText("  Godsdamn this form... you try not to think as you slide across the wire surface, intensely aware of the slimy sound you make as you go, of the steady drip of your fluids through the mesh, trying not to think of it splashing down on curious, blunt heads.");
-				else outputText("  Clack, clack, clack. You are intensely aware of the sound of your [feet] on the wire surface. You close your eyes and tell yourself you’re only imagining that it’s loud, that it echoes around the hall, that the basilisks would have to be deaf not to hear you.");
-
-				outputText("\n\nYou are almost half of the way there when the hush descends. You keep your eyes fixed determinedly upon the exit, trying to wish away the spreading silence, the meadow of deathly grey flowers which has gradually blossomed below you.");
-
-				outputText("\n\n<i>“C’est l’intrus!”</i>");
-
-				outputText("\n\n<i>“Attrapez-les!”</i>");
-
-				outputText("\n\nImmediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it. The booth is in reach... a sickle claw catches you in the thigh, and you stagger. Growling, you frantically right yourself- only to find yourself staring directly into the face of a basilisk. You punch that one in the nose, wildly tearing your eyes away... to another. And another. They surround you as horrible leaden weights settle on your bones, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the basilisks press into you, grabbing your hands and [thighs], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter....");
-
-				// [go to Captured]
-				menu();
-				addButton(0, "Next", capturedByBasilisks);
-				
-				return;
-			}
-			else
-			{
-				outputText("You breathe deep, steel yourself, put your shades on and stride out onto the gantry. The plan is simple- you’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
-				if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
-				outputText("  If or when the lizards realise who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
-
-				outputText("\n\nYou try and not look down as you proceed, back straight and as aloof as you can.");
-				if (player.isNaga()) outputText("  You’re probably imagining things but the passage of your sinuous form over the wire surface seems absurdly loud, an endless rubbing of sandpaper which seems to fill the hall.");
-				else if (player.isGoo()) outputText("  Godsdamn this form... you try not to think as you slide across the wire surface, intensely aware of the slimy sound you make as you go, of the steady drip of your fluids through the mesh, trying not to think of it splashing down on curious, blunt heads.");
-				else outputText("  Clack, clack, clack. You are intensely aware of the sound of your [feet] on the wire surface. You close your eyes and tell yourself you’re only imagining that it’s loud, that it echoes around the hall, that the basilisks would have to be deaf not to hear you.");
-
-				outputText("\n\nYou are almost half of the way there when the hush descends. You keep your eyes fixed determinedly upon the exit, trying to wish away the spreading silence, the meadow of deathly grey flowers which has gradually blossomed below you.");
-
-				outputText("\n\n“<i>C’est l’intrus!</i>”");
-
-				outputText("\n\n“<i>Attrapez-les!</i>” Immediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it.");
- 
-				if (player.spe < 90)
-				{
-					outputText("\n\nThe booth is in reach... a sickle claw catches you in the thigh, and you stagger. Growling, you frantically right yourself- only to find yourself staring directly into the face of a basilisk. You punch that one in the nose, wildly tearing your eyes away... to another. And another. They surround you and though you wheel around, desperately pushing and elbowing them away from you, you cannot stop one deftly hooking your Laybans off with his sickle claw. A horrible leaden weight settles itself upon your bones as your naked gaze is trapped by a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [thighs], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
-
-					//[go to Captured]
-					menu();
-					addButton(0, "Next", capturedByBasilisks);	
-					
-					return;
-				}
-				else
-				{
-					outputText("\n\nThe booth is in reach... your panic unlocks a final reserve in your straining muscles and you");
-					if (!player.canFly()) outputText(" almost");
-					else outputText(" literally");
-					outputText(" fly towards the door. A solitary basilisk manages to clamber onto the catwalk ahead of you- and you simply bull-rush straight through him, his deathly eyes useless against your screened vision. You think you feel the passage of sickle claws scything fruitlessly through the air inches away from your back as you bundle through the exit and into the empty observation booth. In an ecstasy of terror you fumble with the door and manage to slam it shut, just as several heavy bodies thud into the other side. You breathe a huge sigh of relief as your hands find a deadbolt and slide it across, sealing the basilisks off from you. They hammer at it for a while longer, shouting and hissing angrily, but eventually, whilst you’re still gathering your breath, they get fed up with it and leave.");
-					
-					outputText("\n\nYou’re free to continue- but you will have to find an alternative route if you want to go back, unless you’re crazy enough to unlock the door and try the catwalk dash again.");
-					
-					menu();
-					addButton(0, "Next", move, "magpiehalln");
-				}
-			}
-		}
-		
-		private function capturedByBasilisks():void
-		{
-			clearOutput();
-			outputText("Down. You’re staring up at the ceiling of the magpie hall, from your position upon your back. Your limbs are seized up, are not responding to any of your brain’s frantic demands, and you can only see what is in the corner of your frozen gaze, which is lots and lots of basilisks standing over you staring back.");
-
-			outputText("\n\n“<i>Que devrions-nous faire?</i>” says one.");
-
-			outputText("\n\n“<i>Chercher le Roi Grossier,</i>” says another, after a heavy pause. A murmur ripples through the hall at that. You have no idea what they’re saying in their raspy, fluid tongue, but you can’t imagine it’s anything good. One in the corner of your vision darts out of sight, and you are left to wait, a statue frozen in the stance of a running struggle. You feel dense apprehension weigh steadily more and more upon you as a heavy footstep thuds towards you.");
-
-			outputText("\n\n“<i>J'espère que vous m'avez dérangé pour une bonne raison, soldat, ou je vais vous la peau vivante et baise ta cadavre tremblement. Mes dieux! C'est vrai!</i>” Dry, smooth hands grip you and winch you up so you may see the owner of the thick, rich voice. It’s a basilisk- but bigger, at least a foot taller than those that surround him, heavier built, and obviously simmering deep in corruption. Purple scales slather his shoulders and back like an imperial cloak, and he is clad in a military tunic and ornate brass cuirass. The former does absolutely nothing to disguise his two thick, purple pricks, which unlike those of his brethren swing freely and imposingly between his muscled legs. His long, tapering face gives him a toothy sneer of epic proportions, and his proud head is crowned with a helmet, resplendent with a long, black ponytail. His eyes... you renew your frantic efforts to look away. Leering, the basilisk rex steps closer to you, bathing you in their hungry glare. They are a seething yellow, pupil-less, two eternal, burning suns of depthless corruption.");
-
-			outputText("\n\n“<i>Pouvez-vous me comprendre, intrus? Non? Sprechen de Gnollen? How about now? Ah, yes. Human. The language of masters... and slaves.</i>” His widening sneer leaves you in no doubt which camp he considers you as belonging to. “<i>I am Jean-Claude, the Rude King, if you please. You are the interloper, if you please. Ah, yes! Yes you are! Do not try to deny it!</i>” He laughs richly, his slow, velvety voice rolling around you as he goes on. “<i>You have beat up enough of my scouts that you have left, eh, an impression, shall we say? We do not need orders from the demons to watch out for such a rough player as you!</i>” He moves as fast as a snake, belying his size and frame, to grab you tight around the jaw. His claws dig into your skin as he stares deep into your eyes, encompassing you in their rich, bottomless glow. It glows like your blood glows, rising to the surface of your skin, coursing inexorably to your groin,");
-			if (player.hasCock()) outputText(" [eachCock] stiffening");
-			if (player.hasCock() && player.hasVagina()) outputText(" and");
-			if (player.hasVagina()) outputText(" your [vagina] beading with excitement");
-			if (!player.hasCock() && !player.hasVagina()) outputText(" your loins aflame with excitement");
-			outputText(" as you sink further into the yellow warmth, immersing yourself in it, so small and pliant and willing to be shaped by that fathomless, over-arching will, this huge masculine creature with a body of carved strength, with his feral, demanding smell surrounding you, with his big, luscious cocks....  The other basilisk’s spell is fading from your limbs, allowing you to move, but it is no respite at all- the more you stare into the eyes in front of you now, the weaker you feel, the more you want to puddle onto the floor and supplicate yourself before their power.");
-
-			outputText("\n\n“<i>But now the ball is in the basilisk court, is it not, interloper?</i>” Jean-Claude growls softly, holding your face close, pulling you deeper and deeper into his glow, bathing you in heat. “<i>And the only question now is how I am going to serve you.</i>”");
-
-			if (player.inte >= 80)
-			{
-				outputText("\n\nThe last of the petrifying curse slips from your limbs and a thought leaps lightning fast through your mind, cutting through the warm haze for a moment. It tells you that you have to act now - with your body free of the grey and your mind still resisting the gold. What do you do in this one, free, desperate moment?");
-				
-				menu();
-				addButton(0, "Taunt", capturedbyBasilisksTaunt);
-				addButton(1, "Run", capturedByBasilisksRun);
-			}
-			else
-			{
-				menu();
-				addButton(0, "Next", jeanClaude.basiliskBadEnds);
-			}
-		}
-		
-		private function capturedByBasilisksRun():void
-		{
-			clearOutput();
-			outputText("With all your willpower you tear away from the monster’s lidless gaze. His sharp claws graze your cheeks as you throw yourself backwards, turn and charge with a defiant cry into the ranks of reptiles which surround you. You have your [weapon] loose, and you swing it this way and that, adrenaline and desperation lending you strength as you send basilisks flying... but there are hundreds of them, and one of you, and too many places not to look. You strike, you punch, you scratch, you bite, but eventually your limbs tire; they seize up as you tear yourself away from one grey gaze only to find another, and the basilisks simply have to surround you, pack you tight with their bodies while one of them stares deep into your eyes, flooding your mind with a blaring, hypnotic wash. There’s a sound coming from somewhere: a strange, staccato bark. It’s only when the lizards return you frozen to the feet of their king that you realize what it is. The Rude King is laughing, sat on a table and doubled up with gulping mirth.");
-
-			outputText("\n\n“<i>You’re fast, interloper! And you fight good! But not so bright, eh? I think you think fast, but a stupid thought is a stupid thought, whether it takes a second or an hour to arrive.</i>” He reaches forward and almost tenderly takes you by the cheek again, rubbing the lines he left there with his smooth thumb, forcing you to look back into his eyes. “<i>See? All you managed was to damage yourself. That’s no good to anyone, is it?</i>” It occurs to you that since you were captured none of the basilisks have used their claws or teeth against you, and you realize why that is- they want you whole. You groan deep in your still throat as the hot, yellow glow of Jean-Claude’s eyes encompasses you.");
-
-			// [go to bad ends]
-			menu();
-			addButton(0, "Next", jeanClaude.basiliskBadEnds);
-		}
-		
-		private function capturedbyBasilisksTaunt():void
-		{
-			clearOutput();
-			outputText("You stare into the yellow, hypnotic eyes and for a moment see beyond them, see them as part of this being rather than the whole, see the arrogance that sits behind them, see, perhaps, a way out of this. With all your willpower you force your mouth to open, work your vocal chords- and make a 'pfft' noise.");
-
-			outputText("\n\n“<i>Some king you are,</i>” you manage. Jean-Claude draws back, looking slightly surprised, and emboldened you press on. “<i>Your servants did all the hard work- you just came out to claim all the credit at the end. Is that how it works for basilisks? You get the day-glo eyes for sucking demon dick, and then sit on your ass whilst everybody else does the thinking and fighting for you?</i>”");
-
-			outputText("\n\n“<i>You dare...</i>” the rex whispers, deep in his throat. His eyes have turned a yellowish white. You raise your voice, so every basilisk in the hall can hear.");
-
-			outputText("\n\n“<i>I haven’t been here five minutes and I can already tell what kind of ruler you are. Doesn’t matter how many extra inches you’ve given yourself by kissing imp ass- you’re the smallest lizard in this room. Your kind will fight and die for you whilst you, with your fancy armour, will cower in the corner and wait for it to be over. You think you frighten me, that you impress me? You wouldn’t dare fight me, and everybody here knows it!</i>” A deathly silence ensues. Jean-Claude stares at you, fury clenching his long face, and for a moment you think he might just bite your head off. Then he looks up, blinks, and roars with laughter.");
-
-			outputText("\n\n“<i>Ahahaha! I like it interloper, I like it a lot. Being rude to the Rude King! You think to make me angry so I make a mistake, yes? Even when it is all over for you, you are being clever, you are fighting.</i>” He turns away, snorting. The monstrous basilisk might be affecting bonhomie, but in the fractious swish of his tail and the whiteness of his eyes, you see that you have succeeded- you’ve pissed him off. He barks something to one of his brethren. The others murmur, and there’s a hushed sound as they fall back, forming a ring around the two of you. Something is thrown to Jean-Claude; he catches it and swishes it thoughtfully, before turning back to you.");
-
-			outputText("\n\n<i>“Here’s the problem, interloper,”</i> he says, sneering at you as he points the huge, bronze cutlass down. <i>“I don’t make mistakes. You can. By the end, you will appreciate just how serious a mistake it was to fight me. How much better it would have been to simply accept your fate.”</i>");
-
-			outputText("\n\nYou scramble to your feet, draw your weapon and set your jaw. You’ve gotten your one shot, and you can’t waste it.");
-			
-			startCombat(new JeanClaude());
-		}
-		
 		private function magpiehallnRoomFunc():Boolean
 		{
 			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0)
@@ -574,23 +436,14 @@ package classes.Scenes.Dungeons.D3
 				
 				menu();
 				
-				addButton(0, "Go!", gogoFuckTheseBasilisksNorth);
+				addButton(0, "Go!", jeanClaude.gogoFuckTheseBasilisksNorth);
 				addButton(1, "Stronghold", move, "tunnel2");
 				
 				return true;
 			}
 			
-			outputText("You are back in the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
+			outputText("You are back in the northern end of the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			return false;
-		}
-		
-		private function gogoFuckTheseBasilisksNorth():void
-		{
-			clearOutput();
-			outputText("You put your Laybans back on, carefully unlock the door and then, as quietly as you can, creep back out onto the wire gantry. The throng of greyish green below seems oblivious. It’s only when you get halfway across that you realise that you’ve been had. As soon as you are as far away from one exit as the other, two big groups of the lizards near the stairs immediately jump up and climb upwards determinedly. You speed as fast as you can to the door ahead, but the team of basilisks are ready and plough into you, grabbing your body as they reach for your shades. You desperately push and elbow them away from you but you cannot stop one from deftly hooking your Laybans off with his sickle claw. A horrible leaden weight settles upon your bones as your naked eyes gaze into a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [thighs], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
-			
-			menu();
-			addButton(0, "Next", capturedByBasilisks);
 		}
 		
 		private function tunnel2RoomFunc():Boolean

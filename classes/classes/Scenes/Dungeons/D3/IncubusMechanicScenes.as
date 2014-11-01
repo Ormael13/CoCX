@@ -204,7 +204,7 @@ package classes.Scenes.Dungeons.D3
 			dynStats("lib+", 5, "cor+", 5, "lus+", 100);
 
 			menu();
-			doNext(13);
+			addButton(0, "Next", getGame().d3.exitD3);
 		}
 		
 		public function beatDaMechanic(hpVictory:Boolean):void

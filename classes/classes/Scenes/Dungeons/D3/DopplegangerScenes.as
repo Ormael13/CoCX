@@ -111,7 +111,7 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch even are you?</i>“");
 
-				outputText("\n\n“<i>Oh, shut up,</i>” you reply breezily. “<i>You’re the one who wouldn’t shut up about how much you wanted this body. I’m giving you exactly what you wished for.</i>” You roll her [thighs], her cock");
+				outputText("\n\n“<i>Oh, shut up,</i>” you reply breezily. “<i>You’re the one who wouldn’t shut up about how much you wanted this body. I’m giving you exactly what you wished for.</i>” You roll her [hips], her cock");
 				if (player.cocks.length > 1) outputText("s");
 				outputText(" batting back into her stomach as you expose her [vagina], ");
 				if (player.averageVaginalWetness() < 3) outputText(" gleaming invitingly");

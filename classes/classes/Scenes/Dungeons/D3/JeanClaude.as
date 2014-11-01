@@ -36,9 +36,9 @@ package classes.Scenes.Dungeons.D3
 		{
 			if (player.findStatusAffect(StatusAffects.RemovedArmor) < 0)
 			{
-				outputText("Jean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
+				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 
-				outputText("\n\n“<i>This is the legendary Champion of Ignam?</i>” he husks. “<i>Flaunting themselves like the most amateur of Lethice’s strippers?</i>” His eyes glow orange. “<i>If that was your intent all along, interloper, you should not do it so half- assedly. You should take off all your clothes, embrace what you truly are, show me what you are really made of.</i>” The hypnotic compulsion presses upon you, commanding you to raise your hands to your [armor]’s clasps...");
+				outputText("\n\n“<i>This is the legendary Champion of Ignam?</i>” he husks. “<i>Flaunting themselves like the most amateur of Lethice’s strippers?</i>” His eyes glow orange. “<i>If that was your intent all along, interloper, you should not do it so half-assedly. You should take off all your clothes, embrace what you truly are, show me what you are really made of.</i>” The hypnotic compulsion presses upon you, commanding you to raise your hands to your [armor]’s clasps...");
 				
 				if (!successful)
 				{
@@ -56,6 +56,7 @@ package classes.Scenes.Dungeons.D3
 					if (this.findStatusAffect(StatusAffects.JCLustLevel) < 0)
 					{
 						this.createStatusAffect(StatusAffects.JCLustLevel, 1, 0, 0, 0);
+						lustVuln += 0.1;
 					}
 					else
 					{
@@ -63,13 +64,15 @@ package classes.Scenes.Dungeons.D3
 					}
 					
 					applyTease(lustDelta);
+					game.dynStats("lus+", 20);
 				}
 			}
 			else
 			{
-				outputText("“<i>Even when made the fool, still you try it, still you think you can entice me with things I have seen a thousand times before,</i>” Jean-Claude sighs. “<i>Why not give up, interloper? You do these things because they arouse YOU, not because you hope they arouse me. Give up, and embrace the life you were born to lead.</i>” Despite these words his hungry eyes remain on your body. Perhaps he can’t help it. You can only hope...");
+				outputText("\n\n“<i>Even when made the fool, still you try it, still you think you can entice me with things I have seen a thousand times before,</i>” Jean-Claude sighs. “<i>Why not give up, interloper? You do these things because they arouse YOU, not because you hope they arouse me. Give up, and embrace the life you were born to lead.</i>” Despite these words his hungry eyes remain on your body. Perhaps he can’t help it. You can only hope...");
 				
 				if (successful) applyTease(lustDelta);
+				game.dynStats("lus+", 20);
 			}
 		}
 		
@@ -95,19 +98,24 @@ package classes.Scenes.Dungeons.D3
 			buttRating = BUTT_RATING_AVERAGE;
 			lowerBody = LOWER_BODY_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
-			initStrTouSpeInte(80, 80, 80, 60);
+			initStrTouSpeInte(80, 100, 80, 60);
 			initLibSensCor(40, 40, 80);
 			faceType = FACE_LIZARD;
 			
 			weaponName = "cutlass";
 			weaponVerb = "slash";
+			weaponAttack = 20;
+			
+			this.bonusHP = 400;
 			
 			armorName = "leather tunic";
 			lustVuln = 0.6;
-			armorDef = 12;
+			armorDef = 20;
 			lust = 5;
-			level = 15;
+			level = 20;
 			gems = 300 + rand(55);
+			
+			this.drop = NO_DROP;
 			
 			checkMonster();
 		}
