@@ -18,10 +18,11 @@ package classes.Scenes.Dungeons.D3
 		{
 			this.createStatusAffect(StatusAffects.MirroredAttack, 0, 0, 0, 0);
 			
-			outputText("As you swing your weapon at the doppleganger, " + player.mf("he", "she") + " smiles mockingly, and mirrors your move exactly, lunging forward with " + player.mf("his", "her") + " duplicate " + weaponName + ".");
+			outputText("As you swing your [weapon] at the doppleganger, " + player.mf("he", "she") + " smiles mockingly, and mirrors your move exactly, lunging forward with " + player.mf("his", "her") + " duplicate " + weaponName + ".");
 			
 			// Cribbing from combat mechanics - if the number we got here is <= 0, it was deflected, blocked or otherwise missed.
 			// We'll use this as our primary failure to hit, and then mix in a bit of random.
+			// tl;dr this avoids a bunch of weapon effects and perks, but given the specific means of attack, I think it actually makes sense overall. (Basically having to pull back from what you would normally do mid-attack to successfully land any kind of hit).
 			if (damage > 0 && rand(8) < 6)
 			{
 				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. (" + damage + ")");
@@ -29,7 +30,10 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				outputText("  Your [weapon]s meet with a bone-jarring impact, and you are sent staggering backwards by a force exactly equal to your own.");
+				outputText("  Your");
+				if (player.weaponName == "fists") outputText(" [weapon]");
+				else outputText(" [weapon]s");
+				outputText(" meet with a bone-jarring impact, and you are sent staggering backwards by a force exactly equal to your own.");
 
 				outputText("\n\n“<i>Try again, [name],</i>” the doppelganger sneers, derisively miming your falter. “<i>C’mon. Really test yourself.</i>”");
 			}
@@ -62,10 +66,39 @@ package classes.Scenes.Dungeons.D3
 		
 		private function addTalkShit():void
 		{
+			statScreenRefresh();
+			
+			if (HP < 1)
+			{
+				doNext(game.endHpVictory);
+				return;
+			}
+			
+			if (lust > 99)
+			{
+				doNext(game.endLustVictory);
+				return;
+			}
+			
+			if (player.HP < 1)
+			{
+				doNext(game.endHpLoss);
+				return;
+			}
+			
+			if (player.lust > 99)
+			{
+				doNext(game.endLustLoss);
+				return;
+			}
+			
 			switch (_roundCount)
 			{
 				case 0:
-					outputText("\n\n“<i>You feel it, don’t you?</i>” The doppelganger whispers, crooking your mouth into a vicious grin. “<i>The transfer. The mirror is a vacuum without a being inside it; it reaches out for someone to complete it. Your being, to be exact. Mine wants to be free a lot more than yours. Ten years more, to be exact.</i>” [He] goes on in a dull croon as [he] continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. “<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>” A weird fluttering feeling runs up your arm, and with a cold chill you look down to see it shimmer slightly, as if you were looking at it through running water. You need to finish this as fast as you can.");
+					outputText("\n\n“<i>You feel it, don’t you?</i>” The doppelganger whispers, crooking your mouth into a vicious grin. “<i>The transfer. The mirror is a vacuum without a being inside it; it reaches out for someone to complete it. Your being, to be exact. Mine wants to be free a lot more than yours. Ten years more, to be exact.</i>”");
+					outputText("\n\n[He] goes on in a dull croon as [he] continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. “<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>”");
+					outputText("\n\nA weird fluttering feeling runs up your arm, and with a cold chill you look down to see it shimmer slightly, as if you were looking at it through running water.");
+					outputText("\n\n<b>You need to finish this as fast as you can.</b>");
 					break
 					
 				case 1:
@@ -77,15 +110,20 @@ package classes.Scenes.Dungeons.D3
 					if (player.hasCock()) outputText(" strokes [his] [cock]");
 					else if (player.hasVagina()) outputText(" slides two fingers into [his] [vagina] and gently frigs [himself]");
 					else outputText(" slips a hand ");
-					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. “<i>Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>” It’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined. This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.");
+					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. “<i>Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>”");
+					outputText("\n\nIt’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined.");
+					outputText("\n\n<b>This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.</b>");
 					break;
 					
 				case 3:
-					outputText("\n\n“<i>Your memories flow to me [name], as you fade like a memory. I can taste them...</i>” You struggle to stay focused, try and force your body and mind not to blur like a fingerprint on a windowpane as the doppelganger sighs beatifically. “<i>Not bad, not bad. You led quite an interesting life for an Ingnam peasant, didn’t you? Got around. Not enough sex, though. Nowhere near enough sex. Don’t worry- I’ll correct that mistake, in due course.</i>”");
+					outputText("\n\n“<i>Your memories flow to me [name], as you fade like a memory. I can taste them...</i>” You struggle to stay focused, try and force your body and mind not to blur like a fingerprint on a windowpane as the doppelganger sighs beatifically.");
+					outputText("\n\n“<i>Not bad, not bad. You led quite an interesting life for an Ingnam peasant, didn’t you? Got around. Not enough sex, though. Nowhere near enough sex. Don’t worry- I’ll correct that mistake, in due course.</i>”");
 					break;
 					
 				case 4:
-					outputText("\n\n“<i>Did you really think you could defeat Lethice, peasant?</i>” the doppelganger roars. [He] moves and speaks with confidence now, [his] old twitchiness gone, revelling and growing into [his] new form. You don’t dare open your mouth to hear what pale imitation of that voice comes out. “<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>” [He] screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass. You have time and strength for one last gambit...");
+					outputText("\n\n“<i>Did you really think you could defeat Lethice, peasant?</i>” the doppelganger roars. [He] moves and speaks with confidence now, [his] old twitchiness gone, revelling and growing into [his] new form.");
+					outputText("\n\nYou don’t dare open your mouth to hear what pale imitation of that voice comes out. “<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>” [He] screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass.");
+					outputText("\n\n<b>You have time and strength for one last gambit...</b>");
 					break;
 				
 				case 5:
@@ -117,15 +155,15 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over [him].");
 
-			outputText("\n\n“<i>Picked up a few things since you’ve been here, then?</i>” [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black colour. “<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>” [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at him.");
+			outputText("\n\n“<i>Picked up a few things since you’ve been here, then?</i>” [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black colour. “<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>” [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at [him].");
 			
 			if (spell == "fireball")
 			{
-				outputText("<b>(" + player.takeDamage(player.level * 10 + 45 + rand(10)) + ")</b>");
+				outputText(" (" + player.takeDamage(player.level * 10 + 45 + rand(10)) + ")");
 			}
 			else if (spell == "whitefire")
 			{
-				outputText("<b>(" + player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2))) + ")</b>");
+				outputText(" (" + player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2))) + ")");
 			}
 			
 			addTalkShit();
@@ -139,8 +177,8 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
-			_roundCount++;
-			combatRoundOver();
+			outputText("Your duplicate chuckles in the face of your attacks.");
+			addTalkShit();
 		}
 		
 		public function Doppleganger() 
@@ -164,6 +202,8 @@ package classes.Scenes.Dungeons.D3
 			initLibSensCor(player.lib, player.sens, player.cor);
 			faceType = player.faceType;
 			skinType = player.skinType;
+			
+			this.bonusHP = 250;
 			
 			this.weaponName = player.weaponName;
 			this.weaponAttack = player.weaponAttack;
