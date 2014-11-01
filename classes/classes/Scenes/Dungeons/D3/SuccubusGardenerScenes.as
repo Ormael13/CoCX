@@ -23,25 +23,25 @@ package classes.Scenes.Dungeons.D3
 
 		public function gardenerDefeated():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDNER_DEFEATED] > 0) return true;
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0) return true;
 			return false;
 		}
 
 		public function gardenerKilled():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 3) return true;
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) return true;
 			return false;
 		}
 
 		public function gardenerFucked():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 2) return true;
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 2) return true;
 			return false;
 		}
 
 		public function gardenerLeft():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDNER_DEFEATED] == 1) return true;
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 1) return true;
 			return false;
 		}
 
@@ -185,7 +185,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("You circle behind her an put and end to her evil while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
 
-			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_KILLED;
+			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 
 			menu();
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
@@ -196,7 +196,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("Figuring that the succubus's pets can keep her busy indefinitely, you turn away. A shriek of pleasure draws your attention back, and you turn in time to see dozens of coiling, leafy masses encircling her every limb, bodily carrying her into a wall of twisting, leaking cocks and pussies. Her orifices are stuffed with pumping lengths that froth with spit and girlcum, and her eyes, equal parts alarmed and aroused, widen before disappearing into the forest of green.");
 
-			flags[kFLAGS.D3_GARDNER_DEFEATED] = GARDENER_LEFT;
+			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
 
 			menu();
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
