@@ -31,7 +31,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			
-			if (!player.hasKeyItem("Laybans"))
+			if (player.hasKeyItem("Laybans") < 0)
 			{
 				outputText("You breathe deep, steel yourself, and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
 				if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
