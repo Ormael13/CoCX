@@ -13,8 +13,8 @@ package classes.Scenes.Dungeons.DeepCave
 		
 		public function ValaScene() 
 		{
-			
 		}
+		
 		//Vala
 		public function useVala():void {
 			spriteSelect(85);

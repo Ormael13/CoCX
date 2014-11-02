@@ -213,10 +213,10 @@
 			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
 
-		protected function doBadEnd():void{
+		protected function doBadEnd():void {
 			kGAMECLASS.doBadEnd();
 		}
-		
+
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
 			kGAMECLASS.startCombatImmediate(monster, _plotFight);

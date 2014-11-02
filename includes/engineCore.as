@@ -1080,8 +1080,8 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Visit the cave you've found in the Deepwoods.";
 		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nZetaz lived in the cave until you've defeated him. \n\nCLEARED";
 	}
-	if(buttonText.indexOf("Lethice Castle") != -1) {
-		toolTipText = "Visit the castle in the high mountains that belongs to Lethice, the demon queen. Currently a placeholder.";
+	if(buttonText.indexOf("Stronghold") != -1) {
+		toolTipText = "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen.";
 		//if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the game! \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
@@ -1395,6 +1395,9 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Game Over") != -1) {                        
 		toolTipText = "Your game has ended. Please load a saved file or start a new game.";
 	}
+	if(buttonText.indexOf("Wake Up") != -1) {                        
+		toolTipText = "It's all just a dream.  Wake up.";
+	}
 	//Settings
 	if(buttonText.indexOf("Toggle Debug") != -1) {                        
 		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
@@ -1417,7 +1420,10 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Switch between old and new stats bar.\n\nNOTE: As of mod version 0.9, you no longer have to restart the game.";
 	}
 	if(buttonText.indexOf("SFW Toggle") != -1) {                        
-		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored.";
+		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes.";
+	}
+	if(buttonText.indexOf("Watersports") != -1) {                        
+		toolTipText = "Toggles watersports scenes. (Scenes related to urine fetish)";
 	}
 	if(buttonText.indexOf("Time Format") != -1) {                        
 		toolTipText = "Toggles between 12-hour and 24-hour format.";
@@ -1581,7 +1587,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	}
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
-		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1 || (tooltipLoc == "Sophie" && text == "Special")) {
+		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1 || (tooltipLoc == "Sophie" && text == "Special")) {
 			trace("Button removed due to SFW mode.");
 			return;
 		}
@@ -2867,7 +2873,7 @@ public function doBadEnd():void {
 		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 		menu();
 		addButton(0, "Game Over", eventParser, 9999);
-		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Quick Reload", eventParser, 9999);
+		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Wake Up", camp.wakeFromBadEnd);
 		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(3, "Retry", eventParser, 9999);
 		addButton(2, "NewGamePlus", charCreation.newGamePlus);
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", eventParser, 1);

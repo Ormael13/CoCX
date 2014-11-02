@@ -320,7 +320,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(", it disappears into the depths forever. Your mind is a blank canvas of pure, submissive pleasure and it, like your limitless future, is golden.");
 			
 			menu();
-			eventParser(5035);
+			doBadEnd();
 		}
 		
 		private function bwombBadEnd():void
@@ -368,7 +368,7 @@ package classes.Scenes.Dungeons.D3
 			//THE END
 			// 9999
 			menu();
-			eventParser(5035);
+			doBadEnd();
 		}
 		
 	}

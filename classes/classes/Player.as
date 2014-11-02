@@ -1982,7 +1982,6 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
-<<<<<<< HEAD
 			if (findStatusAffect(StatusAffects.GiantGrabbed) >= 0) removeStatusAffect(StatusAffects.GiantGrabbed);
 			if (findStatusAffect(StatusAffects.GiantBoulder) >= 0) removeStatusAffect(StatusAffects.GiantBoulder);
 			if (findStatusAffect(StatusAffects.GiantStrLoss) >= 0) {
@@ -1996,8 +1995,6 @@ use namespace kGAMECLASS;
 				sens -= statusAffectv4(StatusAffects.LizanBlowpipe);
 				removeStatusAffect(StatusAffects.LizanBlowpipe);
 			}
-			while(findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
-=======
 			while (findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
 			if (findStatusAffect(StatusAffects.GardenerSapSpeed) >= 0)
 			{
@@ -2005,7 +2002,6 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp('spe');
 				removeStatusAffect(StatusAffects.GardenerSapSpeed);
 			}
->>>>>>> b12b2abd7e7dce9336c1217a7d41b6e0cbe24838
 		}
 
 		public function consumeItem(itype:ItemType, amount:int=1):Boolean

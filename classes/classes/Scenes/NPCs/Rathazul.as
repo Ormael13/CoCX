@@ -285,7 +285,7 @@ private function rathazulWorkOffer():Boolean {
 			addButton(5, "Pure Potion", rathazulMakesPurifyPotion);
 		}
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
-			addButton(6, "Milk Potion", rathazulMakesMilkPotion);
+			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion);
 		}
 		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)

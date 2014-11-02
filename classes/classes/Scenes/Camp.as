@@ -45,7 +45,7 @@
 		public var codex:Codex = new Codex();
 		public var dungeon1:Factory = new Factory();
 		public var dungeon2:DeepCave = new DeepCave();
-		public var dungeon3:LethiceCastle = new LethiceCastle();
+		//public var dungeon3:LethiceCastle = new LethiceCastle();
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
 		
@@ -2109,6 +2109,29 @@ private function exgartuanCampUpdate():void {
 		}		
 	}
 	doNext(1);
+}
+
+//Wake up from a bad end.
+public function wakeFromBadEnd():void {
+	clearOutput();
+	trace("Escaping bad end!");
+	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
+	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
+	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
+		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end. Why is it that each time I get a bad-end, I wake up?</i>\"");
+	}
+	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine, you've just had a nightmare.");
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
+		outputText("\n\nYou realize the consequences of having oversized balls. You need to shrink it right away. Reducto will do.");
+		player.ballSize = (15 + (player.str / 2));
+	}
+	model.time.days += 1;
+	model.time.hours = 6;
+	kGAMECLASS.inDungeon = false;
+	player.HP = player.maxHP();
+	menu();
+	addButton(0, "Next", eventParser, 1);
 }
 
 //Camp population!

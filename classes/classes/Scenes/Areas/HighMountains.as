@@ -49,15 +49,6 @@ package classes.Scenes.Areas
 				kGAMECLASS.gatsSpectacularRouter();
 				return;
 			}
-			//Find Lethice's castle - Dummied out
-			/*if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 15 == 0 && rand(2) == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] <= 0) {
-				flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] = 1;
-				outputText("During your exploration, you come across a familiar looking patch of ground. In fact... you pull out Zetaz’s map, your eyes widening as they realize what you’ve just found: Lethice's Keep. You follow a concealed trail past several harpy nests directly to an almost invisible cave entrance. You never would've found it without the map.\n\n");
-				outputText("<b>You've discovered a hidden entrance to Lethice's lair. It can be accessed from the Dungeons submenu in the future.</b>\n\n");
-				outputText("Do you step inside, or wait until you’re better prepared?");
-				doYesNo(kGAMECLASS.dungeons.lethicecastle.enterDungeon, 13);
-				return;
-			}*/
 			//Minerva
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
 				if (flags[kFLAGS.MET_MINERVA] < 4)

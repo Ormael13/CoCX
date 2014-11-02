@@ -247,7 +247,9 @@ package classes.Scenes.Dungeons.D3
 				tbr.milkFullness = sbr.milkFullness;
 				tbr.nipplesPerBreast = sbr.nipplesPerBreast;
 			}
-			
+			this.pronoun1 = "[he]";
+			this.pronoun2 = "[him]";
+			this.pronoun3 = "[his]";
 			this.drop = NO_DROP;
 			
 			checkMonster();

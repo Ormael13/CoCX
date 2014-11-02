@@ -13,7 +13,7 @@ package classes.Scenes.Dungeons
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
-		public var lethicecastle:LethiceCastle = new LethiceCastle;
+		//public var lethicecastle:LethiceCastle = new LethiceCastle;
 		public var cabin:YourCabin = new YourCabin;
 		
 		public function DungeonEngine() 
@@ -68,7 +68,7 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 36) desertcave.roomCumWitchOffice();
 			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSandMotherThrone();
 			//Lethice's Castle
-			if (kGAMECLASS.dungeonLoc == 38) lethicecastle.roomEntrance();
+			/*if (kGAMECLASS.dungeonLoc == 38) lethicecastle.roomEntrance();
 			if (kGAMECLASS.dungeonLoc == 39) lethicecastle.roomTunnel1();
 			if (kGAMECLASS.dungeonLoc == 40) lethicecastle.roomTunnel2();
 			if (kGAMECLASS.dungeonLoc == 41) lethicecastle.roomKeepEdge();
@@ -86,7 +86,7 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 53) lethicecastle.roomNorthEastWalk();
 			if (kGAMECLASS.dungeonLoc == 54) lethicecastle.roomEastWalk();
 			if (kGAMECLASS.dungeonLoc == 55) lethicecastle.roomSouthEastWalk();
-			if (kGAMECLASS.dungeonLoc == 56) lethicecastle.roomCourtyardSquare();
+			if (kGAMECLASS.dungeonLoc == 56) lethicecastle.roomCourtyardSquare();*/
 			
 		}
 		

@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -87,7 +88,11 @@
 		{
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		//Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
+		public function isValaAtBar():Boolean {
+			return (flags[kFLAGS.FREED_VALA] != 0 && model.time.hours >= 12 && model.time.hours <= 21); 
+		}
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -651,7 +656,7 @@ public function katherineAtUrtas():void {
 				break;
 			default:
 				outputText("house.  You step inside and find Kath sitting on the floor with ");
-				var kids:int = getGame().urtaPregs.urtaKids();
+				var kids:int = kGAMECLASS.urtaPregs.urtaKids();
 				if (kids == 1)
 					outputText("your child.  " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "He" : "She") + "'s sitting in Katherine's lap, head mashed against her breasts like " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "he" : "she") + " hasn't got a care in the world.\n\n");
 				else outputText((kids > 5 ? "a few of your kids" : "a pile of your children") + ".  They're lying all over Kath, playing with her ears and tail while she scratches their heads and gives them little kisses.");
@@ -680,7 +685,7 @@ private function urtaPlusKathCuddle():void {
 	if (player.spe > 75) {
 		outputText("\n\nYou creep over to the bed and stroke Kath's tail.  She and Urta both nearly jump out of their skin.  Urta gives you a good smack in the shoulder as soon as she realizes who you are and what you just did.  “<i>" + player.short + "!  Are you a frigging ghost or something?  Ow, gods, you just made Kath yank her knot right out of me.</i>”\n\n");
 		outputText("Kath looks sheepish and says, “<i>Sorry, sorry, I thought it was ");
-		if (getGame().urtaPregs.urtaKids() == 1) 
+		if (kGAMECLASS.urtaPregs.urtaKids() == 1) 
 			outputText(flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "your son" : "your daughter");
 		else outputText("one of your kids");
 		outputText(",</i>” while gently stroking Urta's ears.\n\n");
@@ -1290,8 +1295,8 @@ private function playerLovers():int {
 	if (flags[kFLAGS.AMILY_FOLLOWER] == 1) loverSet |= KBIT_LOVER_AMILY; //Not > 0; probably don’t want to admit having corrupt Amily follower to Katherine
 	if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2) loverSet |= KBIT_LOVER_COTTON;
 	if ((flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0) && (player.statusAffectv1(StatusAffects.Edryn) > 3)) loverSet |= KBIT_LOVER_EDRYN;
-	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && getGame().helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
-	if (getGame().urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
+	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && kGAMECLASS.helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
+	if (kGAMECLASS.urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
 	if (flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX] > 0) loverSet |= KBIT_LOVER_VALA;
 	return loverSet;
 }
@@ -1396,7 +1401,7 @@ private function talkLoversHelia():void {
 private function talkLoversUrta():void {
 	clearOutput();
 	if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 0) { //She doesn’t know about you and Urta
-		var urtaKids:int = getGame().urtaPregs.urtaKids();
+		var urtaKids:int = kGAMECLASS.urtaPregs.urtaKids();
 		outputText("You decide to tell Katherine about Urta.  It’s amazing it hasn’t come up since they work together.  After you explain things Katherine " + (knownLovers() > 2 ? "laughs and says, “<i>You took Urta as a lover too?  You are one busy champion.  Don’t worry about it, I’m certainly not going to leave you.</i>”" : "gives you a worried look and asks what this means for the two of you.  When you tell her you have no intention of leaving she jumps into your arms and squeezes most of the air out of your lungs.") + "\n\n");
 		outputText("You tell Kath the story of how Urta met you coming into Tel’Adre that first day and how later on the two of you ‘met’ in the alley behind this bar.  Once she’s heard the story Kath says, “<i>I know how she felt.  It really hurts when you think no one wants you.</i>”");
 		if (urtaKids > 0)
@@ -1452,7 +1457,7 @@ private function talkLoversVala():void {
 		if (isAt(KLOC_KATHS_APT))
 			outputText("lies back on her bed and stares off into space for a while");
 		else
-			outputText("takes another sip of her drink and looks to see if Vala’s around somewhere" + (getGame().isValaAtBar() ? ".  Vala catches her looking and comes over to see if Kath needs another drink.  Kath, embarrassed at getting caught, orders another one" : "") );
+			outputText("takes another sip of her drink and looks to see if Vala’s around somewhere" + (isValaAtBar() ? ".  Vala catches her looking and comes over to see if Kath needs another drink.  Kath, embarrassed at getting caught, orders another one" : "") );
 		outputText(".\n\nAfter a long silence Kath says, “<i>So she’s new to town, she’s dealing with all sorts of issues and she probably doesn’t know many people here.  It’s a good thing no one took advantage of her.</i>”\n\n");
 		if (flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0) outputText("You decide it would be best not to mention " + (flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] == 1 ? "that time" : "those times") + " you took advantage of Vala, back when she was mindfucked and tied up.\n\n");
 		if (isAt(KLOC_KATHS_APT))
@@ -2020,7 +2025,7 @@ private function giveKatAOverlyLargePepper():void {
 	else if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
 		outputText("She looks at the pepper eagerly, then visibly reins herself in.  “<i>I'm sorry...  I really would like to eat it, but I have to be practical.  I'm nearly a foot and a half long already!  Momma didn't raise me to be a size queen, and I’m almost as long as Urta.  I mean I like Urta, I just don’t think I need a cock quite that big,</i>” she says.\n\n");
 		outputText("“<i>It is nice to know you’re thinking of me,</i>” she adds, quickly trying to make nice with you.");
-		if (getGame().urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
+		if (kGAMECLASS.urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
 		katherineMenu();
 	}
 	else {
@@ -2657,16 +2662,16 @@ private function katSexMenu():void {
 		var seeVala:Function = null;
 		var backOpt:Function = katherineMenu;
 		if (isAt(KLOC_BAR)) { //Check to see if her partners are comfortable fucking her sober
-			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar()) seeUrta = katherineSeeUrta;
-			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && kGAMECLASS.urta.urtaAtBar()) seeUrta = katherineSeeUrta;
+			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) seeVala = katherineSeeVala;
 		}
 		else if (isAt(KLOC_BAR_DRUNK)) {
-			if (getGame().urta.urtaAtBar()) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			if (kGAMECLASS.urta.urtaAtBar()) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
+			if (isValaAtBar()) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
-			if (getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			if (isValaAtBar()) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		choices("Penetration", penetrate, "Oral", oralKatherineChoices, "Handjob", handjobbiesFurrDemCatFurries, "See Urta", seeUrta, "See Vala", seeVala,
@@ -2679,7 +2684,7 @@ private function katherineDrunkSeeUrta():void {
 	outputText("Now that you’ve lowered Kath’s inhibitions you suggest the two of you should go and talk to Urta.\n\n");
 	outputText("“<i>Yeah, the captain looks like she could use some company.</i>”\n\n");
 	outputText("You have to help Katherine get to Urta’s table, but once there Kath plops down into the seat next to Urta and gives her a big hug.\n\n");
-	if (getGame().urta.urtaDrunk()) {
+	if (kGAMECLASS.urta.urtaDrunk()) {
 		outputText("Urta hugs Kath back and says, “<i>hey there cutie,</i>” before groping Kath’s behind.\n\n");
 		outputText("Kath purrs and buries her head in Urta’s bosom.\n\n");
 		outputText("You get the feeling you are going to have to intervene quickly if you don’t want them to fuck right here and now.");
@@ -2701,7 +2706,7 @@ private function katherineDrunkSeeUrta():void {
 	else { //Not willing to bang Kath (while sober) just yet
 		outputText("Urta pushes Kath back gently.  “<i>Whoa - " + player.short + " I think someone’s had a bit much.</i>”\n\n");
 		outputText("Kath smiles and her eyes wander downward, clearly checking out Urta’s chest and then her cock.  Her voice slightly slurred Kath says, “<i>I like you cap'n,</i>” before Urta can lift her up, haul her back to her booth and dump Katherine in her usual seat.\n\n");
-		outputText("Urta turns to you and whispers, “<i>You’d better do something about her.  She’s going to start humping a table leg if you don’t give her some relief.  It’s a real shame, cause I could go for some relief from you too.</i>”" + (getGame().urta.pregnancy.isPregnant ? "  She rubs her pregnant belly absentmindedly as she stares at you and Kath." : "") + "\n\n");
+		outputText("Urta turns to you and whispers, “<i>You’d better do something about her.  She’s going to start humping a table leg if you don’t give her some relief.  It’s a real shame, cause I could go for some relief from you too.</i>”" + (kGAMECLASS.urta.pregnancy.isPregnant ? "  She rubs her pregnant belly absentmindedly as she stares at you and Kath." : "") + "\n\n");
 		outputText("As she walks away Kath props her head up on her hands and looks at you dreamily.");
 		flags[kFLAGS.KATHERINE_LOCATION] = KLOC_BAR_URTA_REFUSED; //Shows the same options as when you get her drunk, except no option to see Urta
 		katSexMenu();
@@ -2710,7 +2715,7 @@ private function katherineDrunkSeeUrta():void {
 
 private function katherineSeeUrta():void {
 	clearOutput();
-	if (getGame().urta.urtaDrunk()) {
+	if (kGAMECLASS.urta.urtaDrunk()) {
 		outputText("Katherine looks over at Urta’s table and sees that the captain is obviously sloshed.  She finishes off her drink and whispers, “<i>Now " + playerText() + ", I think we both know that if I go over there Urta is going to pound me into the floor.</i>”\n\n");
 		outputText("You smile and say, “<i>Only if you ask nicely.</i>”\n\n");
 		outputText("Kath stands up and offers you her hand.  “<i>I guess I’d better bring you along.  I might need help and besides, you always have some fun ideas.</i>”\n\n");
@@ -5079,7 +5084,7 @@ private function drunkFuck():void {
 
 			outputText("She looks back, perhaps wondering if you’re about to tell her you were just kidding.  Instead you explain, “<i>Give them a show, strip like you’re doing this for money.</i>”\n\n");
 
-			outputText("Kath gulps but turns back to the crowd and " + clothesChoice("starts unbuttoning her blouse slowly", "starts unlacing her bodysuit", "starts unlacing her long dress", "starts untying the knot of her robe", "starts running her fingers under the bottom edge of her tube top", "pulls the front of her nurse’s top open again") + ".  The crowd loves it and Kath, perhaps feeling a little bold thanks to the booze still in her system, starts to get into it and starts to sway back and forth, her cat-like flexibility allowing her hips to move through a hypnotic pattern that silences the crowd." + (getGame().isValaAtBar() ? "  You even see a certain faerie waitress paused mid-flight with a tray of drinks.  You see her eyes following every move that Kath’s hips make." : ""));
+			outputText("Kath gulps but turns back to the crowd and " + clothesChoice("starts unbuttoning her blouse slowly", "starts unlacing her bodysuit", "starts unlacing her long dress", "starts untying the knot of her robe", "starts running her fingers under the bottom edge of her tube top", "pulls the front of her nurse’s top open again") + ".  The crowd loves it and Kath, perhaps feeling a little bold thanks to the booze still in her system, starts to get into it and starts to sway back and forth, her cat-like flexibility allowing her hips to move through a hypnotic pattern that silences the crowd." + (isValaAtBar() ? "  You even see a certain faerie waitress paused mid-flight with a tray of drinks.  You see her eyes following every move that Kath’s hips make." : ""));
 
 			outputText("\n\nYou have to smile watching Katherine dancing in front of all these people.  This is something she would never have done before you met her.  As her hips gyrate Kath " + clothesChoice("pulls off her blouse and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well", "pulls her shoulders out of the unlaced top of her bodysuit.  Without missing a beat she gets her arms free and pushes the silky fabric down until the bodysuit covers only her legs, ass and belly", "finishes unlacing the dress and pulls her arms free, letting the top of the dress fall away.  She starts to play with her breasts and after a few cheers and cries of “<i>More!</i>” she removes the bra as well", "undoes the knot and opens the front of her robe, giving the audience a lovely view of her bra and panties", "pulls the tube top over her head and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well", "slips out of the nurse’s top and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well") + ".\n\n");
 
@@ -5088,7 +5093,7 @@ private function drunkFuck():void {
 			outputText("With Katherine nude and distracted you sneak up behind her and grab " + cockMultiple("her cock with both hands", "both her cocks") + ".  She lets out a surprised meow as you fondle her member" + (hasBalls() ? ", her balls" : "") + " and her dripping pussy.\n\n");
 
 			outputText("The crowd starts to cheer as you smear Kath’s cock" + cockMultiple("", "s") + " with her own pussy juice.");
-			if (getGame().isValaAtBar())
+			if (isValaAtBar())
 				outputText("   You notice Vala has put down her tray.  One of her hands is under her skirt and she has a zoned out happy look on her face as she watches you molest your " + catGirl("cat girl.", "feline lover."));
 			outputText("  Katherine starts playing with her own breasts and grins at her audience.  Then she closes her eyes and leans back against you, losing herself in the feeling of her fingers and yours as they pleasure the most sensitive areas of her body.\n\n");
 
@@ -5096,7 +5101,7 @@ private function drunkFuck():void {
 
 			outputText("You’re sure everyone in the bar appreciated that show but you don’t intend to leave a naked and near comatose Katherine in their hands.  You step out of the room and tell Kath you’ll see her later.  She makes a happy gurgling noise that you assume was an “<i>Okay!</i>” and then you close the door, making sure to slam it so the locking bar drops down on the inside.\n\n");
 
-			outputText("You stride out of the bar" + (getGame().isValaAtBar() ? ", pausing only to pull Vala into your arms to quickly kiss her and grope her ass. She sighs, winks and tells you to come back later. You" : " and") + " head for home, knowing you’ve " + (doneSubmissive(KBIT_SUB_PUBLIC_EXHIBITION) ? "once again helped Kath see how much fun showing off can be." : "opened Kath up to some new possibilities."));
+			outputText("You stride out of the bar" + (isValaAtBar() ? ", pausing only to pull Vala into your arms to quickly kiss her and grope her ass. She sighs, winks and tells you to come back later. You" : " and") + " head for home, knowing you’ve " + (doneSubmissive(KBIT_SUB_PUBLIC_EXHIBITION) ? "once again helped Kath see how much fun showing off can be." : "opened Kath up to some new possibilities."));
 			addSubmissive(KBIT_SUB_PUBLIC_EXHIBITION);
 		}
 	}
