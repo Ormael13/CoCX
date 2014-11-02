@@ -191,6 +191,11 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 		pCounter++;
 	}
+	if(player.hasItem(consumables.MINOCUM)) {
+		purify = purifySomething;
+		totalOffers++;
+		pCounter++;
+	}
 	//Single Offer
 	if(pCounter == 1) {
 		outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n", false);
@@ -255,6 +260,10 @@ private function rathazulWorkOffer():Boolean {
 			outputText("The rodent alchemist suddenly looks at you in a questioning manner. \"<i>Have you had any luck finding those items? I need pure honey and at least two samples of other purifiers; your friend’s spring may grow the items you need.</i>\"");
 			outputText("\n\n");	
 		}
+		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
+			outputText("The rodent sniffs your possessions. \"<i>You know, I could make something with five bottles of Lactaid and two bottles of purified LaBova. I'll also need 250 gems.</i>\"");
+			outputText("\n\n");
+		}
 	}
 	if(totalOffers == 0 && spoken) {
 		doNext(13);
@@ -274,6 +283,9 @@ private function rathazulWorkOffer():Boolean {
 		addButton(4,"Purify",purify);
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 			addButton(5, "Pure Potion", rathazulMakesPurifyPotion);
+		}
+		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
+			addButton(6, "Milk Potion", rathazulMakesMilkPotion);
 		}
 		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
@@ -308,7 +320,11 @@ private function purifySomething():void {
 		//laBovaPurify = 2145;
 		addButton(3,"LaBova",eventParser,2145);
 	}
-	addButton(4,"Back",rathazulWorkOffer);
+	if(player.hasItem(consumables.MINOCUM)) {
+		//laBovaPurify = 2145;
+		addButton(4,"MinoCum",purifyMinoCum);
+	}
+	addButton(9,"Back",rathazulWorkOffer);
 }
 
 //For Minerva purification.
@@ -340,6 +356,26 @@ private function rathazulMakesPurifyPotion():void {
 	player.createKeyItem("Rathazul's Purity Potion", 0, 0, 0, 0);
 	menu();
 	addButton(0,"Next",campRathazul);
+}
+
+private function rathazulMakesMilkPotion():void {
+	clearOutput();
+	if (player.gems < 250) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
+		doNext(2070);
+		return;
+	}
+	else 
+	player.destroyItems(consumables.LACTAID, 5);
+	player.destroyItems(consumables.P_LBOVA, 2);
+	player.gems -= 250;
+	statScreenRefresh();
+	outputText("You hand over the ingredients and 250 gems.");
+	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
+	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
+	inventory.takeItem(consumables.MILKPTN);
+	//menu();
+	//addButton(0,"Next",campRathazul);
 }
 
 private function rathazulDebimboOffer():void {
@@ -380,7 +416,23 @@ private function makeADeBimboDraft():void {
 	inventory.takeItem(consumables.DEBIMBO);
 }
 
+//PURIFICATION
+private function purifyMinoCum():void{
+	if (player.gems < 20)
+	{
+		outputText("Rathazul says, \"<i>You do not have enough gems for that service.</i>\"", true);
+		doNext(2070);
+		return;
+	}
+	outputText("", true);
+	if (!debug) player.destroyItems(consumables.MINOCUM, 1);
+	inventory.takeItem(consumables.P_M_CUM);
+	player.gems -= 20;
+	statScreenRefresh();
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+}
 
+//ARMOR MENU
 public function RathazulArmorMenu():void {
 	menu();
 	spriteSelect(49);

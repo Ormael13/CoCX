@@ -208,8 +208,8 @@ package classes.Scenes.NPCs
 			 Spar (fight Ember)*/
 			var egg:Function =null;
 			var milk:Function =null;
-			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0 && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
-			if (flags[kFLAGS.EMBER_MILK] > 0) milk = getMilkFromEmber;
+			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || player.hasItem(consumables.OVIELIX, 1)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
+			if (flags[kFLAGS.EMBER_MILK] > 0 /* || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 50)*/) milk = getMilkFromEmber;
 			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
 		}
 
@@ -1918,9 +1918,16 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			outputText(images.showImage("ember-drink-her-milk"));
-			outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
-			if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText(", scaly");
-			outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk.");
+			if (flags[kFLAGS.EMBER_MILK] > 0) {
+				outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
+				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText(", scaly");
+				outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk.");
+			}
+			else {
+				outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
+				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText(", scaly");
+				outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk if you give her a Lactaid.");
+			}
 			//Summary:
 			//Usable only through Follower menu
 			//Restore Health and Fatigue

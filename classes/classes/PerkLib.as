@@ -20,7 +20,7 @@ package classes
 				"");
 		public static const AnalFertility:PerkType = mk("Anal Fertility", "Anal Fertility",
 				"Unlocks the ability to get anally pregnant other than Satyrs.");
-
+				
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",
 				"Gains speed 25% faster.");
@@ -329,6 +329,7 @@ package classes
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
+		public static const MilkMaid:MilkMaidPerk = new MilkMaidPerk();
 		public static const MinotaurCumAddict:PerkType = mk("Minotaur Cum Addict", "Minotaur Cum Addict",
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",

@@ -17,6 +17,7 @@ package classes.Scenes.Areas
 		public var minervaScene:MinervaScene = new MinervaScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
+		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		
 		public function HighMountains()
 		{
@@ -43,6 +44,15 @@ package classes.Scenes.Areas
 				kGAMECLASS.gatsSpectacularRouter();
 				return;
 			}
+			//Find Lethice's castle - Dummied out
+			/*if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 15 == 0 && rand(2) == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] <= 0) {
+				flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] = 1;
+				outputText("During your exploration, you come across a familiar looking patch of ground. In fact... you pull out Zetaz’s map, your eyes widening as they realize what you’ve just found: Lethice's Keep. You follow a concealed trail past several harpy nests directly to an almost invisible cave entrance. You never would've found it without the map.\n\n");
+				outputText("<b>You've discovered a hidden entrance to Lethice's lair. It can be accessed from the Dungeons submenu in the future.</b>\n\n");
+				outputText("Do you step inside, or wait until you’re better prepared?");
+				doYesNo(kGAMECLASS.dungeons.lethicecastle.enterDungeon, 13);
+				return;
+			}*/
 			//Minerva
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
 				if (flags[kFLAGS.MET_MINERVA] < 4)
@@ -58,7 +68,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Harpy odds!
-			if (player.hasItem(consumables.OVIELIX)) {
+			if (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) {
 				if (player.hasItem(consumables.OVIELIX, 2)) {
 					if (rand(4) == 0) {
 						chickenHarpy();
@@ -71,6 +81,10 @@ package classes.Scenes.Areas
 						return;
 					}
 				}
+			}
+			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && rand(4) == 0) {
+				phoenixScene.encounterPhoenix();
+				return;
 			}
 			//10% chance to mino encounter rate if addicted
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {

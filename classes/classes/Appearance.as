@@ -1,5 +1,6 @@
 ﻿package classes
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Player;
 	import classes.Monster;
@@ -703,7 +704,6 @@
 					"shaft"];
 				description += randomChoice(options);
 			}
-
 			//trace("Correct Appearance.cockNoun - Produced noun descriptor - ", descript);
 			return description;
 		}
@@ -1462,7 +1462,16 @@
 
 			if (description != "")
 				description += " ";
-			options = ["vagina",
+				
+			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) { //Removes something that might offend sensitive people.
+				options = ["vagina",
+				"pussy",
+				"cooter",
+				"snatch",
+				"muff"];
+			}
+			else {
+				options = ["vagina",
 				"pussy",
 				"cooter",
 				"twat",
@@ -1470,10 +1479,11 @@
 				"snatch",
 				"fuck-hole",
 				"muff"];
+			}
 			description += randomChoice(options);
 			//Something that would be nice to have but needs a variable in Creature or Character.
 			//if(i_creature.bunnyScore() >= 3) description += "rabbit hole";
-
+			
 			return description;
 		}
 
@@ -1569,6 +1579,9 @@
 				"clit",
 				"clit",
 				"button"];
+			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+				options = ["bump", "button"];
+			}
 			description += randomChoice(options);
 
 			return description;
@@ -1991,13 +2004,18 @@
 			}
 			
 			//asshole descriptor
+			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+			description += randomChoice("rear end",
+					"backdoor");
+			} 
+			else {
 			description += randomChoice("ass",
 					"anus",
 					"pucker",
 					"backdoor",
 					"asshole",
 					"butthole");
-
+			}
 			return description;
 		}
 		

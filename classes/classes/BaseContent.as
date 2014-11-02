@@ -31,9 +31,9 @@
 			return kGAMECLASS;
 		}
 
-		protected function cheatTime(time:Number):void
+		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
-			kGAMECLASS.cheatTime(time);
+			kGAMECLASS.cheatTime(time, needNext);
 		}
 		protected function get timeQ():Number
 		{
@@ -183,6 +183,10 @@
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
 			kGAMECLASS.startCombat(monster_,plotFight_);
+		}
+		
+		protected function doBadEnd():void{
+			kGAMECLASS.doBadEnd();
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets

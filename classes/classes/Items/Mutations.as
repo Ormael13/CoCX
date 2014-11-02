@@ -340,25 +340,30 @@
 			}
 		}
 
-		public function minotaurCum(player:Player):void
+		public function minotaurCum(purified:Boolean, player:Player):void
 		{
 			player.slimeFeed();
-			//Minotaur cum addiction
-			player.minoCumAddiction(7);
 			outputText("", true);
+			//Minotaur cum addiction
+			if (!purified) player.minoCumAddiction(7);
 			outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
 			else outputText("heavenly scent fills your nostrils.", false);
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
-			else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
+			if (!purified) {
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
+				else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
+			}
+			else outputText("  You know that the bottle is purified and you're positive you won't get any addictiction from this bottle.");
 			outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 			//-Raises lust by 10.
 			//-Raises sensitivity
 			dynStats("sen", 1, "lus", 10);
 			//-Raises corruption by 1 to 50, then by .5 to 75, then by .25 to 100.
-			if (player.cor < 50) dynStats("cor", 1);
-			else if (player.cor < 75) dynStats("cor", .5);
-			else dynStats("cor", .25);
+			if (!purified) {
+				if (player.cor < 50) dynStats("cor", 1);
+				else if (player.cor < 75) dynStats("cor", .5);
+				else dynStats("cor", .25);
+			}
 			outputText("\n\nIntermittent waves of numbness wash through your body, turning into a warm tingling that makes you feel sensitive all over.  The warmth flows through you, converging in your loins and bubbling up into lust.", false);
 			if (player.cocks.length > 0) {
 				outputText("  ", false);
@@ -376,7 +381,7 @@
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.", false);
 			}
 			//(Minotaur fantasy)
-			if (gameState == 0 && rand(10) == 1) {
+			if (gameState == 0 && rand(10) == 1 && !purified) {
 				outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
 				dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
 			}
@@ -386,7 +391,7 @@
 				HPChange(int(player.maxHP() / 4), false);
 			}
 			//Uber-addicted status!
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0) {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0 && !purified) {
 				flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
 				outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 			}
@@ -865,7 +870,7 @@
 								if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n", false);
 								if (player.gender == 3) outputText("You are somewhat confused as you can see a bulge near her thighs but also huge boobs jiggling as she walks, and you can't say if she's a male or female.\n\n", false);
 								outputText("As soon as you lay eyes on the creature, a wave of nostalgia overtakes you. Somehow, looking at that creature makes you sad, as if you forgot something important.\n\n\"<i>How strange to see a horse here all alone,</i>\" the creature muses, \"<i>In any case, you're still the least bizarre creature I've met here.  Not to mention the only one that hasn't tried to rape me,</i>\" it says with a sigh.\n\nYou answer with an interrogative whinny.\n\n\"<i>Hey, I've got an idea. I'll take you back to the camp. I'll feed you and in return you can help me complete my quest. What do you say?</i>\"\n\nInstinctively, you utter a happy and approving whinny.\n\nYou failed in your quest, losing your focus and more importantly, losing yourself.  But, even so, you found a new meaning to your life, and have a new chance to succeed where you once failed.", false);
-								eventParser(5035);
+								doBadEnd();
 								return;
 							}
 						}
@@ -881,7 +886,7 @@
 							if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n", false);
 							if (player.gender == 3) outputText("You are somewhat confused as you can see a bulge near her thighs but also huge boobs jiggling as she walks, and you can't say if she's a male or female.\n\n", false);
 							outputText("As soon as you lay eyes on the creature, a wave of nostalgia overtakes you. Somehow, looking at that creature makes you sad, as if you forgot something important.\n\n\"<i>How strange to see a horse here all alone,</i>\" the creature muses, \"<i>In any case, you're still the least bizarre creature I've met here.  Not to mention the only one that hasn't tried to rape me,</i>\" it says with a sigh.\n\nYou answer with an interrogative whinny.\n\n\"<i>Hey, I've got an idea. I'll take you back to the camp. I'll feed you and in return you can help me to complete my quest. What do you say?</i>\"\n\nInstictively, you utter a happy and approving whinny.\n\nYou failed in your quest, losing you focus and more importantly, losing yourself.  But, even so, you found a new meaning to your life, and have a new chance to achieve what you once failed.", false);
-							eventParser(5035);
+							doBadEnd();
 							return;
 						}
 					}
@@ -1577,7 +1582,7 @@
 					else outputText("All you know is that there is a scent on the wind, and it is time to hunt.", false);
 				}
 				if (temp == 1) outputText("\n\nYou devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a " + player.hairColor + " coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.", false);
-				eventParser(5035);
+				doBadEnd();
 				return;
 			}
 			//WARNING, overdose VERY close!
@@ -3168,6 +3173,45 @@
 				outputText(player.modFem(95, 1), false);
 			}
 		}
+		public function milkPotion(player:Player):void
+		{
+			player.slimeFeed();
+			var i:Number = 0;
+			outputText("You drink the milk potion.  It tastes like milk.", true);
+			//Player doesn't lactate
+			if (player.biggestLactation() < 1) {
+				outputText("\n\n", false);
+				outputText("You feel your " + nippleDescript(0) + "s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>", false);
+				for (i = 0; i < player.breastRows.length; i++) {
+					player.breastRows[i].lactationMultiplier += 5;
+				}
+			}
+			//Boost lactation
+			else {
+				outputText("\n\n", false);
+				outputText("Milk leaks from your " + nippleDescript(0) + "s in thick streams.  You're lactating even more!", false);
+				for (i = 0; i < player.breastRows.length; i++) {
+					player.breastRows[i].lactationMultiplier += 2 + rand(30) / 10;
+				}
+			}
+			//Grant perk or rank it up
+			if (rand(1) == 0 && player.findPerk(PerkLib.MilkMaid) < 0) {
+				outputText("\n\n", false);
+				outputText("You can feel something inside your " + player.chestDesc() + " as they feel more dense. Your entire body tingles with a strange feel. Somehow, you know you won't be able to stop lactating.\n");
+				outputText("<b>Gained Perk: Milk Maid! (Your milk production is increased by 200mL and you won't stop lactating.)</b>");
+				player.createPerk(PerkLib.MilkMaid, 1, 0, 0, 0);
+			}
+			else if (rand(player.perkv1(PerkLib.MilkMaid)) == 0 && player.perkv1(PerkLib.MilkMaid) < 10) {
+				outputText("\n\n", false);
+				outputText("You can feel something inside your " + player.chestDesc() + " as they feel even more dense. Your entire body tingles with a strange feel. Seems like you're going to lactate more milk.\n");
+				outputText("<b>Perk Ranked Up: Milk Maid! (Your milk production is increased by additional 100mL.)</b>");
+				player.addPerkValue(PerkLib.MilkMaid, 1, 1);
+			}
+			else if (player.perkv1(PerkLib.MilkMaid) >= 10) {
+				outputText("\n\n", false);
+				outputText("You can feel something tingling inside your " + player.chestDesc() + " but nothing special happens. <b>Maybe you've already maxed out your permanent boost to lactation?</b>\n");
+			}
+		}
 
 		public function useMarbleMilk(player:Player):void
 		{
@@ -4244,6 +4288,7 @@
 				outputText("\n\nNothing happened.  Weird.", false);
 			}
 			player.refillHunger(5);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 
@@ -4389,7 +4434,7 @@
 			if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 		}
 
-		public function Hummus(player:Player):void
+		public function superHummus(player:Player):void
 		{
 			outputText("", true);
 			if (debug) {
@@ -4398,6 +4443,7 @@
 				return;
 			}
 			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
+			player.refillHunger(100);
 			player.str = 30;
 			player.spe = 30;
 			player.tou = 30;
@@ -4484,6 +4530,260 @@
 			player.removeStatusAffect(StatusAffects.Uniball);
 			player.removeStatusAffect(StatusAffects.BlackNipples);
 			player.vaginaType(0);
+		}		
+		
+		//Normal hummus
+		public function Hummus(player:Player):void
+		{
+			player.slimeFeed();
+			outputText("", true);
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			outputText("", true);
+			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
+			player.refillHunger(20);
+			if (player.humanScore() > 4) {
+				outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?", false);
+			}
+			else {
+				outputText("\n\nYou cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?", false);
+			}
+			//-----------------------
+			// MAJOR TRANSFORMATIONS
+			//-----------------------
+			//1st priority: Change lower body to bipedal.
+			//(Centaurs -> Normal Human Legs) (copy from elsewhere)
+			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				changes++;
+			}
+			//(Goo -> Normal Human Legs) (copy from elsewhere)
+			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				changes++;
+			}
+			//(Naga -> Normal Human Legs) (copy from elsewhere)
+			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				changes++;
+			}
+			//-Skin color change – tan, olive, dark, light
+			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && changes < changeLimit && rand(5) == 0) {
+				changes++;
+				outputText("\n\nIt takes a while for you to notice, but <b>", false);
+				if (player.skinType == SKIN_TYPE_FUR) outputText("the skin under your " + player.hairColor + " " + player.skinDesc, false);
+				else outputText("your " + player.skinDesc, false);
+				outputText(" has changed to become ", false);
+				temp = rand(4);
+				if (temp == 0) player.skinTone = "tan";
+				else if (temp == 1) player.skinTone = "olive";
+				else if (temp == 2) player.skinTone = "dark";
+				else if (temp == 3) player.skinTone = "light";
+				outputText(player.skinTone + " colored.</b>", false);
+			}
+			//Change skin to normal
+			if (player.skinType != SKIN_TYPE_PLAIN && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
+				if (player.skinType == SKIN_TYPE_SCALES) outputText("are", false);
+				else outputText("is", false);
+				outputText(" falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>", false);
+
+				player.skinType = SKIN_TYPE_PLAIN;
+				player.skinDesc = "skin";
+				changes++;
+			}
+			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
+			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
+				player.armType = ARM_TYPE_HUMAN;
+				changes++;
+			}
+			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
+			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
+				player.armType = ARM_TYPE_HUMAN;
+				changes++;
+			}
+			//-----------------------
+			// MINOR TRANSFORMATIONS
+			//-----------------------
+			//-Human face
+			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
+				player.faceType = FACE_HUMAN;
+				changes++;
+			}
+			//-Human tongue
+			if (player.tongueType != TONUGE_HUMAN && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>", false);
+				player.tongueType = TONUGE_HUMAN;
+				changes++;
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
+				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
+					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
+				}
+				else {
+					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
+					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
+					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
+				}
+				player.eyeType = EYES_HUMAN;
+				changes++;
+			}
+			//-Gain human ears
+			if ((player.earType != EARS_HUMAN) && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
+				player.earType = EARS_HUMAN;
+				changes++;
+			}
+			//Removes gills
+			if (rand(4) == 0 && player.gills && changes < changeLimit) {
+				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
+				player.gills = false;
+				changes++;
+			}
+			//Nipples Turn Back:
+			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+				changes++;
+				player.removeStatusAffect(StatusAffects.BlackNipples);
+			}
+			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
+			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
+				//(long):
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
+				//(short)
+				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
+				changes++;
+				player.hairType = 0;
+			}
+			//-----------------------
+			// EXTRA PARTS REMOVAL
+			//-----------------------
+			//Removes antennae
+			if (player.antennae > ANTENNAE_NONE && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae have vanished!", false);
+				player.antennae = ANTENNAE_NONE;
+				changes++;
+			}
+			//Removes horns
+			if (changes < changeLimit && player.horns > 0 && rand(3) == 0) {
+				player.horns = 0;
+				player.hornType = HORNS_NONE;
+				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.", false);
+				changes++;
+			}
+			//Removes wings
+			if (player.wingType > WING_TYPE_NONE && rand(3) == 0 && changes < changeLimit) {
+				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!", false);
+				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!", false);
+				player.wingType = WING_TYPE_NONE;
+				changes++;
+			}
+			//Removes tail
+			if(player.tailType > TAIL_TYPE_NONE && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>", false);
+				player.tailType = TAIL_TYPE_NONE;
+				player.tailVenom = 0;
+				player.tailRecharge = 5;
+				changes++;
+			}
+			//-----------------------
+			// SEXUAL TRANSFORMATIONS
+			//-----------------------
+			//Remove additional cocks
+			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+				player.killCocks(1);
+				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
+				player.genderCheck()
+				changes++;
+			}
+			//Remove additional balls
+			if (player.balls > 2 && rand(3) == 0 && changes < changeLimit) {
+				if (player.ballSize > 5) {
+					player.ballSize -= 1 + rand(3);
+					outputText("Your scrotum slowly shrinks, settling down at a smaller size.  <b>Your " + ballsDescriptLight() + " are smaller now.</b>\n\n", false);
+				}
+				else {
+					player.balls = 2;
+					outputText("Your scrotum slowly shrinks until they seem to have reached a normal size. <b>You can feel as if your extra balls fused together, leaving you with a pair of balls.</b>\n\n", false);
+				}
+				changes++;
+			}
+			//Change cock back to normal
+			if (player.hasCock() && changes < changeLimit) {
+				if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
+					outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your " + player.armorName + " to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
+					player.cocks[0].cockType = CockTypesEnum.HUMAN;
+					changes++;
+				}
+			}
+			//Shrink oversized cocks
+			//Remove additional breasts
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				changes++;
+				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
+				if (player.breastRows.length >= 3) outputText("abdomen", false);
+				else outputText("chest", false);
+				outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ", false);
+				if (player.skinType == SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
+				else outputText(player.skinTone + " " + player.skinDesc, false);
+				outputText(" remains. <b>You've lost a row of breasts!</b>", false);
+				dynStats("sen", -5);
+				player.removeBreastRow(player.breastRows.length - 1, 1);
+				changes++;
+			}
+			//Shrink tits!
+			if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 6)
+			{
+				player.shrinkTits();
+				changes++;
+			}
+			//Change vagina back to normal
+			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
+				player.vaginaType(0);
+				changes++;
+			}
+			//Fertility Decrease:
+			if (player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nThe vague numbness in your skin sinks slowly downwards, and you put a hand on your lower stomach as the sensation centers itself there.  ");
+				dynStats("sen", -2);
+				//High fertility:
+				if (player.fertility >= 30) outputText("It feels like your overcharged reproductive organs have simmered down a bit.");
+				//Average fertility:
+				else if (player.fertility >= 10) outputText("You feel like you have dried up a bit inside; you are left feeling oddly tranquil.");
+				//[Low/No fertility:
+				else {
+					outputText("Although the numbness makes you feel serene, the hummus has no effect upon your ");
+					if (player.fertility > 0) outputText("mostly ");
+					outputText("sterile system.");
+					if (player.cor > 70) outputText("  For some reason the fact that you cannot function as nature intended makes you feel helpless and submissive.  Perhaps the only way to be a useful creature now is to find a dominant, fertile being willing to plow you full of eggs? You shake the alien, yet oddly alluring thought away.");
+				}
+				player.fertility -= 1 + rand(3);
+				if (player.fertility < 10 && player.gender >= 2) player.fertility = 10;
+				if (player.fertility < 5) player.fertility = 5;
+				changes++;
+			}
+			//Cum Multiplier Decrease:
+			if (player.hasCock() && player.cumMultiplier > 5 && rand(3) == 0 && changes < changeLimit) {
+				outputText("You feel a strange tingling sensation in your ");
+				if (player.balls > 0) outputText("balls");
+				else outputText("groin");
+				outputText(" as you can feel the density reducing. <b>You have a feeling you're going to produce less cum now.</b>");
+				player.cumMultiplier -= (1 + (rand(20) / 10));
+				if (player.cumMultiplier < 1) player.cumMultiplier = 1;
+				changes++;
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 
@@ -5207,7 +5507,7 @@
 		{
 			outputText("You toss a wingstick at your foe!  It flies straight and true, almost as if it has a mind of its own as it arcs towards " + monster.a + monster.short + "!\n", true);
 			//1% dodge for each point of speed over 80
-			if (monster.spe - 80 > rand(100) + 1) {
+			if (monster.spe - 80 > rand(100) + 1 || monster.short == "lizan rogue") {
 				outputText("Somehow " + monster.a + monster.short + "'", false);
 				if (!monster.plural) outputText("s", false);
 				outputText(" incredible speed allows " + monster.pronoun2 + " to avoid the spinning blades!  The deadly device shatters when it impacts something in the distance.", false);
@@ -5218,6 +5518,9 @@
 				outputText(monster.capitalA + monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + monster.pronoun2 + ". (" + damage + ")", false);
 				monster.HP -= damage;
 				if (monster.HP < 0) monster.HP = 0;
+			}
+			if (monster.short == "lizan rogue") {
+				outputText("You fling the wingstick with all your might and its aim is true. The moment it nears the lizan, though, he catches it with a flick of his wrist.  It appears he is too fast and well trained for normal projectile attacks.");
 			}
 		}
 
@@ -5925,7 +6228,7 @@
 					outputText("\n\nStill hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...", false);
 					outputText("\n\nLosing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.", false);
 					//[GAME OVER]
-					eventParser(5035);
+					doBadEnd();
 					return;
 				}
 				outputText("\n\nWhile chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>", false);
@@ -6882,7 +7185,7 @@
 					if (player.tailVenom > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
 					outputText("\n\nA sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
 					outputText("\n\nYou roll over and crawl free of the " + player.armorName + " covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
-					eventParser(5035);
+					doBadEnd();
 					return;
 				}
 			}
@@ -8643,7 +8946,7 @@
 				{
 					//-If you fail to heed the warning, it’s game over:
 					outputText("\n\nAs you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
-					eventParser(5035);
+					doBadEnd();
 					return;
 				}
 			}

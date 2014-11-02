@@ -1304,7 +1304,8 @@ public function masturbateGo():void {
 		}
 	}
 	flags[kFLAGS.TIMES_MASTURBATED]++;
-	doNext(13);
+	cheatTime((45 - (player.sens / 4)) / 60, true);
+	doNext(1);
 }
 
 public function titForeplay()  : void
@@ -1848,7 +1849,8 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 				if(player.cumQ() < 25) outputText("You manage to swallow most of your cum as it bursts from your loins, the pleasure of orgasm goading you into compulsively swallowing.  ", false);
 				if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure.  Cum splatters on you from the rest of your equipment, making you a slimy mess.", false);
 				if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("Pulse after pulse of cum erupts from your " + cockDescript(0) + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your " + cockDescript(0) + " to pool on you as your orgasm drags on.  Jizz rains over you the entire time from the rest of your \"equipment\".", false);
-				if(player.cumQ() >= 500) outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + cockDescript(0) + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.", false);
+				if (player.cumQ() >= 500) outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + cockDescript(0) + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.", false);
+				player.refillHunger(player.cumQ() / 20);
 			}
 			//These seem like they should always be displayed regardless of other factors.		
 			if(player.cumQ() < 5) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);

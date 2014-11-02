@@ -546,8 +546,9 @@ private function heliaOptions():void {
 	addButton(0,"Discuss",talkToHel);
 	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail);
 	else addButton(2,"Hug",hugASmokeyTail);
-	if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE,1)) addButton(3,"Anal Train",heliaGapeSceneChoices);
-	addButton(5,"Bathe",takeABath);
+	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE, 1)) addButton(3, "Anal Train", heliaGapeSceneChoices);
+	//addButton(4, "Futafication", talkAboutFuta);
+	addButton(5, "Bathe", takeABath);
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid);
 	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle);
 	else addButton(8,"NoGuarding",helGuardToggle);
@@ -948,6 +949,11 @@ private function hugASmokeyTail():void {
 	doNext(13);
 }
 
+//Talk about futafication, requires 75+ Helia Bonus Points. 
+private function talkAboutFuta():void {
+	clearOutput();
+
+}
 
 //What a horrible night to have a canyon vagina
 //Hel Has a Nightmare (Play 10% of the time you Cuddle Hel)

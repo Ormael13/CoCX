@@ -225,6 +225,9 @@ public function playerInfest():void {
 			monster.lust+=5;
 		}
 	}
+	else if (monster.short == "lizan rogue") {
+		outputText("The lizan makes no attempt to dodge your worm-infused attack. The worms hit him with a fierce clash and slide down his body, disappearing into the ground without even attempting to infect the lizan. Maybe they prefer mammals...");
+	}
 	else if(monster.short == "anemone") {
 		//Infest vs. anemone:
 		outputText("The white mess takes the anemone square in the torso, and the worms nearest her blue shaft waste no time in heading for it.  You both watch curiously as the lead worms ascend her dick, only to run headlong into the tentacles and slip off, stunned.  Eyes twinkling, the girl scoops up a handful of the squirming load still on her stomach and slurps it down greedily.  She smacks her lips and says, \"<i>Chewy!</i>\"\n", false);

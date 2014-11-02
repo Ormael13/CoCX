@@ -1032,6 +1032,12 @@ public function getButtonToolTipText(buttonText:String):String
 		toolTipText = "Visit the chilly glacial rift. \n\nRecommended level: 16";
 		if (debug) toolTipText += "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT];
 	}
+	if(buttonText.indexOf("Volcanic Crag") != -1) {
+		toolTipText = "Visit the volcanic crag. \n\nRecommended level: 20";
+	}
+	if(buttonText.indexOf("Savannah") != -1) {
+		toolTipText = "Visit the savannah. \n\nRecommended level: 14";
+	}
 	//PLACE MENU
 	if(buttonText.indexOf("Bazaar") != -1) {
 		toolTipText = "Visit the Bizarre Bazaar where the demons and corrupted beings hang out.";
@@ -1067,11 +1073,16 @@ public function getButtonToolTipText(buttonText:String):String
 	//DUNGEONS
 	if(buttonText.indexOf("Factory") != -1) {
 		toolTipText = "Visit the demonic factory in the mountains.";
-		if (dungeons.checkFactoryClear()) toolTipText += "\n\nYou've managed to shut down the factory. \n\nCLEARED";
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) toolTipText += "\n\nYou've managed to shut down the factory.";
+		if (dungeons.checkFactoryClear()) toolTipText += " \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Deep Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the Deepwoods.";
 		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nZetaz lived in the cave until you've defeated him. \n\nCLEARED";
+	}
+	if(buttonText.indexOf("Lethice Castle") != -1) {
+		toolTipText = "Visit the castle in the high mountains that belongs to Lethice, the demon queen. Currently a placeholder.";
+		//if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the game! \n\nCLEARED";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
@@ -1140,6 +1151,9 @@ public function getButtonToolTipText(buttonText:String):String
 		}
 		if (buttonText == "Pure Potion") {
 			toolTipText = "Ask him to brew a purification potion for Minerva.";
+		}
+		if (buttonText == "Milk Potion") {
+			toolTipText = "Ask him to brew a milk potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.";
 		}
 		if (buttonText == "Lethicite") {
 			toolTipText = "Ask him if he can make use of that lethicite you've obtained from Marae.";
@@ -1214,7 +1228,7 @@ public function getButtonToolTipText(buttonText:String):String
 			toolTipText = "Discuss with Valeria.";
 		}
 		if (buttonText == "Take") {
-			toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nBase value: 1 \nSpecial: Regeneration + Increased Fantasize";
+			toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nSpecial: Regeneration and Increased Fantasize";
 		}
 		//Sex
 		if (buttonText == "PenetrateHer") {
@@ -1400,13 +1414,16 @@ public function getButtonToolTipText(buttonText:String):String
 		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
 	if(buttonText.indexOf("Old Side Bar") != -1) {                
-		toolTipText = "Switch between old and new stats bar.\n\nNOTE: At the moment, you'll have to restart the game to see the old stats panel.\n\nSave the game after switching to old then restart the game. Then load the game.";
+		toolTipText = "Switch between old and new stats bar.\n\nNOTE: As of mod version 0.9, you no longer have to restart the game.";
 	}
 	if(buttonText.indexOf("SFW Toggle") != -1) {                        
 		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored.";
 	}
+	if(buttonText.indexOf("Time Format") != -1) {                        
+		toolTipText = "Toggles between 12-hour and 24-hour format.";
+	}
 	//Cheat menu
-	if(buttonText.indexOf("Spawn Items") != -1) {                        
+	if(buttonText.indexOf("Spawn Items") != -1) {
 		toolTipText = "Spawn any items of your choice, including items usually not obtainable through gameplay.";
 	}
 	if(buttonText.indexOf("Change Stats") != -1) {                        
@@ -1562,7 +1579,13 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 		trace("INVALID BUTTON");
 		return;
 	}
-
+	//Removes sex-related button in SFW mode.
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1 || (tooltipLoc == "Sophie" && text == "Special")) {
+			trace("Button removed due to SFW mode.");
+			return;
+		}
+	}
 	callback = createCallBackFunction(func1, arg1, arg2, arg3);
 	
 
@@ -1705,7 +1728,7 @@ public function choices(text1:String, butt1:*,
 	var tmpJ:int;
 
 	// iterate over the button options, and only enable the ones which have a corresponding event number
-
+	menu();
 	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
 		if(buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
@@ -1713,13 +1736,15 @@ public function choices(text1:String, butt1:*,
 		}
 		else {
 			if (buttonEvents[tmpJ] is Number) {
-				callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
+				addButton(tmpJ, textLabels[tmpJ], eventParser, buttonEvents[tmpJ]);
+				//callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
 			} else {
-				callback = createCallBackFunction(buttonEvents[tmpJ], null);
+				addButton(tmpJ, textLabels[tmpJ], buttonEvents[tmpJ]);
+				//callback = createCallBackFunction(buttonEvents[tmpJ], null);
 			}
 			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
 
-			mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
+			//mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
 		}
 
 	}
@@ -2179,7 +2204,7 @@ public function displayStats(e:MouseEvent = null):void
 	bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 	
 	if (player.cumQ() > 0)
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
 		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
@@ -2422,7 +2447,7 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 			achievements[achievement] = 1;
 			if (nl && display) outputText("\n");
 			if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>\n");
-			kGAMECLASS.saves.savePermObject(false); //Only save if the achivement hasn't been previously awarded.
+			kGAMECLASS.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
 		}
 	}
 	else outputText("\n<b>ERROR: Invalid achievement!</b>");
@@ -2431,7 +2456,11 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 public function lustPercent():Number {
 	var lust:Number = 100;
 	//2.5% lust resistance per level - max 75.
-	if(player.level < 21) lust -= (player.level - 1) * 3;
+	if (player.level < 31) {
+		if (player.level <= 11) lust -= (player.level - 1) * 3;
+		else if (player.level > 11 && player.level <= 21) lust -= (30 + (player.level - 11) * 2);
+		else if (player.level > 21 && player.level <= 31) lust -= (50 + (player.level - 21) * 1);
+	}
 	else lust = 40;
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2808,6 +2837,52 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
 	}
+}
+
+public function doBadEnd():void {
+	var textChoices:Number = rand(4);
+	if (!this.testingBlockExiting) {
+		outputText("\n\n<font color=\"#800000\">", false)
+		if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
+		if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
+		if (textChoices == 2) outputText("<b>You just got Bad-Ended!</b>", false);
+		if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>", false);
+		outputText("</font>", false);
+		//Delete save on hardcore.
+		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+			outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+			flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
+			var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+			if (test.data.exists)
+			{
+				trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+				test.clear();
+			}
+		}
+		flags[kFLAGS.TIMES_BAD_ENDED]++;
+		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
+		menu();
+		addButton(0, "Game Over", eventParser, 9999);
+		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Quick Reload", eventParser, 9999);
+		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(3, "Retry", eventParser, 9999);
+		addButton(2, "NewGamePlus", charCreation.newGamePlus);
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", eventParser, 1);
+		mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
+		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+		mainView.showMenuButton(MainView.MENU_DATA);
+		mainView.hideMenuButton(MainView.MENU_STATS);
+		mainView.hideMenuButton(MainView.MENU_LEVEL);
+		mainView.hideMenuButton(MainView.MENU_PERKS);
+		mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+		
+		gameState = 0;
+	}
+	else {
+		// Prevent ChaosMonkah instances from getting stuck
+		gameState = 0;
+		doNext(13);
+	}
+	inDungeon = false;
 }
 
 public function spriteSelect(choice:Number = 0):void {

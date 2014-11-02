@@ -903,7 +903,7 @@ private function keltBadEndEpilogue():void {
 	outputText("The centaur noticed her looking, and grinned.  \"<i>You like what you see?  Maybe I could teach you a few things.  If you're not as stupid as that slut, of course.</i>\"\r\r", false);
 	outputText("He waved confidently at the mare, still nursing her young with a rapturous look on her face.  Cum slowly oozed out of her pussy, pooling on the ground beneath her, and the heroine felt a little envious for a moment.  Most horses had harems, the virile male satisfying many women at once.  How many times a day was this mare fucked?\r\r", false);
 	outputText("The centaur grinned, knowingly.  His musk was heavy on the air, a thick, animalistic scent of masculinity.  \"<i>Well, I could do with a little distraction anyway.  Stupid whore may be a good fuck, but a man needs to... spread out a little.  Come back tomorrow, and maybe I can knock some fucking sense into that empty head of yours.  My name's Kelt.</i>\"\r\r", false);
-	eventParser(5035);
+	doBadEnd();
 }
 //Requires 40+ int & 70+ corruption to resist his 'aura'.
 private function keltResistance():void {

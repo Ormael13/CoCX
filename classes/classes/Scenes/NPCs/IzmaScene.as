@@ -745,7 +745,7 @@ private function IzmaBadEnd():void {
 
 	outputText("Izma seems to pause for a moment, distracted by something; you whine slightly in protest.  \"<i>Shut up for a second,</i>\" she orders.  You turn your head and narrow your eyes in a bid to see what Izma is looking at, and eventually pick out a figure drawing closer along the sands.  A human girl, from what you can see.  The sight manages to bring back a few memories of a more confused time, before you met your alpha. Izma grins at the sight and licks her lips.  \"<i>Well, wouldja look at that.  Hm... I suppose I could do with a harem...</i>\"", false);
 	//GAME OVERYUUUUU
-	eventParser(5035);
+	doBadEnd();
 }
 
 

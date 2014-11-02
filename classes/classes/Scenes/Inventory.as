@@ -213,7 +213,7 @@ public function doItems(eventNo:Number):void {
 		outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n", true);
 		//Apply diminishing returns in realistic mode. The bigger your balls, the harder it is to grow your balls further.
 		var oldBallSize:Number = player.ballSize
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 			if (player.ballSize >= 6) multiplier -= 0.25;
 			if (player.ballSize >= 12) multiplier -= 0.25;
 			if (player.ballSize >= 24) multiplier -= 0.25;
@@ -222,6 +222,7 @@ public function doItems(eventNo:Number):void {
 			if (player.ballSize >= 60) multiplier -= 0.10; //Upper limit
 			if (player.ballSize > 36 && rand(2) == 0) {
 				outputText("It seems to have no effect on your " + ballsDescriptLight() + ".  ")
+				multiplier = 0;
 			}
 			if (player.ballSize >= 60) {
 				outputText("You may have reached the upper limit of Gro+.  ")
@@ -249,18 +250,36 @@ public function doItems(eventNo:Number):void {
 		itemGoNext();
 	}
 	//Gro+ Breasts
-	else if(eventNo == 1040) {
+	else if (eventNo == 1040) {
+		var multiplier:Number = 1;
 		player.slimeFeed();
 		outputText("You sink the needle into the flesh of your " + allBreastsDescript() + " injecting each with a portion of the needle.\n\n", true);
+		//Apply diminishing returns in realistic mode
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+			if (player.averageBreastSize() >= 10) multiplier -= 0.20;
+			if (player.averageBreastSize() >= 20) multiplier -= 0.20;
+			if (player.averageBreastSize() >= 30) multiplier -= 0.20;
+			if (player.averageBreastSize() >= 40) multiplier -= 0.15;
+			if (player.averageBreastSize() >= 55) multiplier -= 0.10;
+			if (player.averageBreastSize() >= 70) multiplier -= 0.05;
+			if (player.averageBreastSize() >= 90) multiplier -= 0.10; //Upper limit
+			if (player.averageBreastSize() > 55 && rand(2) == 0) {
+				outputText("It seems to have no effect on your " + allBreastsDescript() + ".  ")
+				multiplier = 0;
+			}
+			if (player.averageBreastSize() >= 90) {
+				outputText("You may have reached the upper limit of Gro+.  ")
+			}			
+		}
 		if(player.breastRows.length == 1)
-			player.growTits((1+rand(5)),1,true,1);
+			player.growTits((1 + rand(5)) * multiplier, 1, true, 1);
 		else
-			player.growTits(1+rand(2),player.breastRows.length,true,1);
+			player.growTits((1 + rand(2)) * multiplier, player.breastRows.length, true, 1);
 		dynStats("lus", 10);
 		itemGoNext();
 	}
 	//Clit
-	else if(eventNo == 1041) {
+	else if (eventNo == 1041) {
 		player.slimeFeed();
 		outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n", true);
 		player.clitLength++;
@@ -269,15 +288,31 @@ public function doItems(eventNo:Number):void {
 		itemGoNext();
 	}
 	//COCK!
-	else if(eventNo == 1042) {
+	else if (eventNo == 1042) {
+		var multiplier:Number = 1;
 		player.slimeFeed();
 		outputText("You sink the needle into the base of your " + multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n", true);
+		//Apply diminishing returns in realistic mode
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+			if (player.biggestCockArea() >= 72) multiplier -= 0.25;
+			if (player.biggestCockArea() >= 120) multiplier -= 0.25;
+			if (player.biggestCockArea() >= 168) multiplier -= 0.25;
+			if (player.biggestCockArea() >= 216) multiplier -= 0.10;
+			if (player.biggestCockArea() >= 288) multiplier -= 0.05;
+			if (player.biggestCockArea() >= 360) multiplier -= 0.10; //Upper limit
+			if (player.biggestCockArea() > 216 && rand(2) == 0) {
+				outputText("It seems to have no effect on your " + multiCockDescriptLight() + ".  ")
+			}
+			if (player.biggestCockArea() >= 360) {
+				outputText("You may have reached the upper limit of Gro+.  ")
+			}			
+		}
 		if(player.cocks.length == 1) {
 			outputText("Your " + cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ", false);
 			
-			player.increaseCock(0, 4);
-			player.cocks[0].cockLength += 1; // This was forcing "what was said" to match "what actually happened" no matter what increase/growCock /actually/ did.
-			player.cocks[0].cockThickness += 0.5; // And growCock never actually touched thickness. Nor does the new version. Thickness mod was stripped out entirely.
+			player.increaseCock(0, 4 * multiplier);
+			player.cocks[0].cockLength += 1 * multiplier; // This was forcing "what was said" to match "what actually happened" no matter what increase/growCock /actually/ did.
+			player.cocks[0].cockThickness += 0.5 * multiplier; // And growCock never actually touched thickness. Nor does the new version. Thickness mod was stripped out entirely.
 		}
 		//MULTI
 		else {
@@ -285,9 +320,9 @@ public function doItems(eventNo:Number):void {
 			
 			for (var i:int = 0; i < player.cocks.length; i++)
 			{
-				player.increaseCock(i, 2);
-				player.cocks[i].cockLength += 1;
-				player.cocks[i].cockThickness += 0.5;
+				player.increaseCock(i, 2 * multiplier);
+				player.cocks[i].cockLength += 1 * multiplier;
+				player.cocks[i].cockThickness += 0.5 * multiplier;
 			}
 		}
 		
@@ -396,7 +431,7 @@ public function doItems(eventNo:Number):void {
 	//Reducto Ballzzzz
 	else if(eventNo == 1054) {
 		outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
-		var oldBallSize:Number = player.ballSize
+		var oldBallSize2:Number = player.ballSize
 		var decideSpeed:Boolean = false;
 		if (player.ballSize > 10) decideSpeed = true;
 		player.ballSize -= (2 + rand(4));
@@ -404,9 +439,9 @@ public function doItems(eventNo:Number):void {
 		outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.", false);
 		dynStats("lib", -2, "lus", -10);
-		if (player.ballSize > 10) dynStats("spe", oldBallSize - player.ballSize);
+		if (player.ballSize > 10) dynStats("spe", oldBallSize2 - player.ballSize);
 		else {
-			if (decideSpeed) dynStats("spe", oldBallSize - player.ballSize);
+			if (decideSpeed) dynStats("spe", oldBallSize2 - player.ballSize);
 		}
 		itemGoNext();
 	}
@@ -1583,18 +1618,18 @@ public function doItems(eventNo:Number):void {
 			outputText("\n\nFilled with new-found vigor, the slime travels up the beach, still holding its captive trapped inside it.  Its body shifts as a half-remembered humanoid form grows out from the blob's surface.  The new body is a parody of its former self, with sexually distorted features and jiggling, globe-like breasts.  It presses the captive's lips against a nipple, allowing him to suckle down a bit of her essence.  He does so instinctively – his parched body seeking relief from the orgasm-induced dehydration afflicting him.", false);
 			outputText("\n\nIn a few hours he awakens, still entirely trapped by the wet-dream of a slime-girl.  His belly is full of her nutritious and corruptive slime, and his cock feels bigger and more sensitive than ever inside her tight embrace.  She squeezes and milks it, gurgling happily.  He cums for her.  Again and again he cums for her.  He can't stop or resist the feeling she gives him as he helplessly orgasms over and over.  She milks him forever, growing stronger, feeding him slime, and gathering incubi drafts and succubi's delight to satiate her ever-growing needs.", false);
 			outputText("\n\nEvery year thereafter the new champion is greeted with a slippery prison, forced to orgasm and feed the slime-queen for the rest of their natural life.  Most of them stop minding by the second day, too drunk on her breast-milk and all the drugs she's mixed into it.", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 		public function giveHumanizer():void {
 			if (!flags[kFLAGS.HARDCORE_MODE] > 0)
 			{
 				if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
 					outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
-					eventParser(5035);
+					doBadEnd();
 					return;
 				}
 				outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
-				inventory.takeItem(consumables.HUMMUS_);
+				inventory.takeItem(consumables.HUMMUS2);
 				flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 			}
 		}

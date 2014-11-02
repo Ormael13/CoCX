@@ -295,7 +295,7 @@ package classes.Scenes.Areas.Mountain
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better then being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.", false);
 
-			eventParser(5035);
+			doBadEnd();
 		}
 
 		public function hellHoundPropahRape():void

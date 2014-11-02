@@ -66,7 +66,8 @@ package classes.Scenes.Areas.GlacialRift
 		{
 			var chooser:Number = 0;
 			chooser = rand(10);
-			if (chooser < 4) yetiClawAndPunch(); //40% chance
+			if (chooser < 2) eAttack();
+			if (chooser >= 2 && chooser < 4) yetiClawAndPunch(); //40% chance
 			if (chooser >= 4 && chooser < 7) yetiTackleTumble(); //30% chance
 			if (chooser >= 7 && chooser < 9) yetiTease(); //20% chance
 			if (chooser >= 9) yetiSnowball(); //10% chance

@@ -1043,7 +1043,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Feeder checks
 		if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 			//Go away if pure
-			if(player.cor <= 20) {
+			if(player.cor <= 20 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n", false);
 				player.removeStatusAffect(StatusAffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
@@ -2093,7 +2093,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	return false;
 }
 
-public function cheatTime(time:Number):void {
+public function cheatTime(time:Number, needNext:Boolean = false):void {
+	//Advance minutes
+	var minutesToPass:Number = (time -= Math.floor(time)) * 60;
+	minutesToPass = Math.round(minutesToPass)
+	model.time.minutes += minutesToPass;
+	if (model.time.minutes > 59) {
+		timeQ = 1;
+		goNext(timeQ, needNext);
+		model.time.minutes -= 60;
+	}
+	time = Math.floor(time);
+	//Advance hours
 	while(time > 0) {
 		time--;
 		model.time.hours++;

@@ -156,7 +156,7 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					eventParser(2015);
+					kGAMECLASS.giacomoShop.encounterGiacomo();
 					return;
 				}
 				else if (choosey == 1) {
@@ -197,6 +197,16 @@ package classes.Scenes
 						//50% of the time, goblin assassin!
 						if (player.level >= 10 && rand(2) == 0) {
 							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+							return;
+						}
+						//Goblin warrior!
+						if (player.level >= 12 && rand(2) == 0) {
+							kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+							return;
+						}
+						//Goblin shaman!
+						if (player.level >= 12 && rand(2) == 0) {
+							kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
 							return;
 						}
 						if (player.gender > 0) {

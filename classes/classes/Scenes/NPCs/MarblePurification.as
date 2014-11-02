@@ -831,7 +831,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nFinally Clara turns to look at you.  Brimming with satisfaction, she opens up her dress and commands you to drink of her breast.  Satisfying your need goes much the same way it has every day.  <i>Milk, sweet delicious milk, need, need, need.  Must serve mistress.</i>  You can’t really control yourself, you <i>NEED!  Service, am I doing things right?  I will please you</i> damn slavedriver.  <i>Most wonderful lady!  Please forgive my insolent thoughts.  Need, need, NEED!</i>");
 	 	outputText("\n\nOnce you’ve finished drinking, mistress directs you to lie down on her bed.  She wants to use you for her pleasure.  As always, you’re happy to comply.  Just as things have been for so long, she mounts your custom prepared equipment: a kitty cock, 9 by 1.6 inches.  You are just happy that you can serve as her sex toy so well.  It fills you with such joy to watch the body of the most beautiful woman in the world bounce on top of yours, in that fine dress with her chest still exposed and tumbling around above you.");
 	 	outputText("\n\nThis is your life now.  Reduced to the milk addicted slave of a Lacta Bovine, you have abandoned your mission just to serve and be used for the rest of your life.");
-		eventParser(5035);
+		doBadEnd();
 		//game over
 	}
 

@@ -938,7 +938,7 @@ private function slaveToVapulaBadEnd():void {
 	outputText("\n\nThese spontaneous, dirty words make the imp fucking you from behind instantly cum; with a powerful last push, he blasts you with his seed, filling and soaking your backside with thick white goo.  You reach for Vapula, helplessly hugging her tits and suckling her nipples as you sob in pleasure-induced humiliation.");
 	outputText("\n\n\"<i>Very well, slut.  Your former life as a villager is over.  It's time to move on to your new life; and trust me, it's going to be much more exciting.  Actually, I don't think you'll be willing to ever leave this place...</i>\"");
 	outputText("\n\nYou furiously nod in approval.");
-	eventParser(5035);
+	doBadEnd();
 }
 
 //Subdue Vapula Scene - begins Vapula Follower Content(Z)

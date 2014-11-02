@@ -147,10 +147,13 @@
 		// Scenes/Explore/
 		public var gargoyle:Gargoyle = new Gargoyle();
 		public var lumi:Lumi = new Lumi();
+		public var giacomoShop:Giacomo = new Giacomo();
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
 		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
+		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
+		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
@@ -271,7 +274,7 @@
 		public var whitney:Number;
 		public var monk:Number;
 		public var sand:Number;
-		public var giacomo:Number;
+		public var giacomo:Number; //Deprecated
 		public var beeProgress:Number;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
@@ -353,8 +356,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.16_mod_0.8.4";
-			version = ver + " (<b>Stash import fix</b>)";
+			ver = "0.8.16_mod_0.9";
+			version = ver + " (<b>The MASSIVE update</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

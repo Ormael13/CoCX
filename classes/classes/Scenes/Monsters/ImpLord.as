@@ -9,10 +9,10 @@
 		//Special Attack 1
 		protected function impFire():void
 		{
-			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin.");
+			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin. ");
 			//[-HP // +Lust(minor)]
 			var damage:int = 40 + rand(10);
-			player.takeDamage(damage);
+			player.takeDamage(damage, true);
 			game.dynStats("lus", 20 + player.cor / 10);
 			combatRoundOver();
 		}
@@ -26,8 +26,7 @@
 			else if (damage <= 0) outputText(" but the attack proves ineffectual.");
 			else {
 				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
-				damage = player.takeDamage(damage);
-				outputText("(" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -44,10 +43,9 @@
 		//Lust and Light Attack
 		protected function impLordLustAttack2():void
 		{
-			outputText("Reaching into his satchel the devilish creature pulls out a leather riding crop.  He quickly rushes forward, but somehow manages to get behind you.  Before you can react the imp lashes out, striking your [butt] twice with the riding crop.  The strikes leave a slight burning feeling, as well as a strange sense of arousal.");
+			outputText("Reaching into his satchel the devilish creature pulls out a leather riding crop.  He quickly rushes forward, but somehow manages to get behind you.  Before you can react the imp lashes out, striking your [butt] twice with the riding crop.  The strikes leave a slight burning feeling, as well as a strange sense of arousal. ");
 			var damage:int = 3 + rand(10);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			game.dynStats("lus", 5 + player.sens / 4 + player.cor / 10);
 			combatRoundOver();
@@ -86,6 +84,7 @@
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
+			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] >= 10) this.createVagina();
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;

@@ -1094,7 +1094,7 @@ private function minotaurGangBadEnd2():void {
 	player.orgasm();
 	dynStats("lib", 100, "sen", 100);
 	//[GAME OVER]
-	eventParser(5035);
+	doBadEnd();
 }
 	
 

@@ -67,6 +67,27 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 35) desertcave.roomCumWitchBedroom();
 			if (kGAMECLASS.dungeonLoc == 36) desertcave.roomCumWitchOffice();
 			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSandMotherThrone();
+			//Lethice's Castle
+			if (kGAMECLASS.dungeonLoc == 38) lethicecastle.roomEntrance();
+			if (kGAMECLASS.dungeonLoc == 39) lethicecastle.roomTunnel1();
+			if (kGAMECLASS.dungeonLoc == 40) lethicecastle.roomTunnel2();
+			if (kGAMECLASS.dungeonLoc == 41) lethicecastle.roomKeepEdge();
+			if (kGAMECLASS.dungeonLoc == 42) lethicecastle.roomEntryway();
+			if (kGAMECLASS.dungeonLoc == 43) lethicecastle.roomSouthCourtyard();
+			if (kGAMECLASS.dungeonLoc == 44) lethicecastle.roomSouthEastCourtyard();
+			if (kGAMECLASS.dungeonLoc == 45) lethicecastle.roomGreatLift();
+			if (kGAMECLASS.dungeonLoc == 46) lethicecastle.roomSouthWestCourtyard();
+			if (kGAMECLASS.dungeonLoc == 47) lethicecastle.roomSouthWestWalk();
+			if (kGAMECLASS.dungeonLoc == 48) lethicecastle.roomWestWalk();
+			if (kGAMECLASS.dungeonLoc == 49) lethicecastle.roomNorthWestWalk();
+			if (kGAMECLASS.dungeonLoc == 50) lethicecastle.roomNorthWestCourtyard();
+			if (kGAMECLASS.dungeonLoc == 51) lethicecastle.roomNorthCourtyard();
+			if (kGAMECLASS.dungeonLoc == 52) lethicecastle.roomNorthEastCourtyard();
+			if (kGAMECLASS.dungeonLoc == 53) lethicecastle.roomNorthEastWalk();
+			if (kGAMECLASS.dungeonLoc == 54) lethicecastle.roomEastWalk();
+			if (kGAMECLASS.dungeonLoc == 55) lethicecastle.roomSouthEastWalk();
+			if (kGAMECLASS.dungeonLoc == 56) lethicecastle.roomCourtyardSquare();
+			
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -89,6 +110,11 @@ package classes.Scenes.Dungeons
 			deepcave.enterDungeon();
 		}
 		
+		public function navigateToRoom(room:Function = null, timeToPass:Number = 1/12):void {
+			cheatTime(timeToPass);
+			room();
+		}
+		
 		/**
 		 * Set the buttons for use in dungeons.
 		 * @param	north
@@ -100,7 +126,7 @@ package classes.Scenes.Dungeons
 		 * @param	east
 		 * @param	eastFunction
 		 */
-		public function setDungeonButtons(north:Boolean = false, northFunction:Function = null, south:Boolean = false, southFunction:Function = null, west:Boolean = false, westFunction:Function = null, east:Boolean = false, eastFunction:Function = null):void {
+		public function setDungeonButtons(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
 			hideUpDown();
 			spriteSelect(-1);
 			menu();
@@ -112,10 +138,10 @@ package classes.Scenes.Dungeons
 				mainView.showMenuButton( MainView.MENU_LEVEL );
 				mainView.statsView.showLevelUp();
 			}
-			if (north == true) addButton(0, "North", northFunction);
-			if (south == true) addButton(6, "South", southFunction);
-			if (west == true) addButton(5, "West", westFunction);
-			if (east == true) addButton(1, "East", eastFunction);
+			if (northFunction != null) addButton(0, "North", navigateToRoom, northFunction);
+			if (southFunction != null) addButton(6, "South", navigateToRoom, southFunction);
+			if (westFunction != null) addButton(5, "West", navigateToRoom, westFunction);
+			if (eastFunction != null) addButton(1, "East", navigateToRoom, eastFunction);
 			addButton(8, "Inventory", eventParser, 1000);
 			if (player.lust >= 30) addButton(9, "Masturbate", eventParser, 10);
 		}

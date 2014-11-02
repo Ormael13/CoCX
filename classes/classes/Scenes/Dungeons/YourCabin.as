@@ -71,7 +71,7 @@ package classes.Scenes.Dungeons
 			}
 			outputText("What would you like to do?", false);
 
-			dungeons.setDungeonButtons(false, null, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(null, null, null, null);
 			//Build menu
 			addButton(2, "Furniture", menuFurniture);
 			//addButton(1, "Read Books", eventParser, 0);

@@ -1176,7 +1176,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("<b>This kind of treatment continues for a few days, until sucking, fucking and getting fucked is the only thing you desire. As your mind is now broken, injections are no longer necessary to keep you in a perfect pleasure state. After a month, they even untie you, since you are now their complete cum-puppet, eager only to please and obey.</b>", false);
 			//The style on this part wasn't up to par with the rest, so I rewrote some of it, while keeping the meaning
-			eventParser(5035);
+			doBadEnd();
 		}
 		
 		public function doBadEndSuccubusPart1():void {
@@ -1264,7 +1264,7 @@ package classes.Scenes.Dungeons
 			else outputText("Later on, in a moment of clarity, you look around and realize you aren't alone.  ", false);		
 			outputText("In rows alongside you are a large number of other captives, every single one endowed with freakishly sized breasts, and nearly all gifted with throbbing demonic dicks.  Some small analytical part of you notes that the farther down the line they are, the older and larger they have become.   You look down and see your own massive tits, shiny tainted nipples still pumping out streams of milk.  The huge throbbing demon-cock between your legs begins to get hard as the machines crank back up, filling you full of happy horniness.", false);
 			if(player.statusAffectv3(StatusAffects.Marble) == 1 || player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("  With Marble here too, you'll be around for a long time.", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 		
 		private function doBadEndOmnibusPart1():void {
@@ -1331,7 +1331,7 @@ package classes.Scenes.Dungeons
 				else outputText("Your mistress looks down with approval and speaks, \"<i>Very good.  ", false);
 				outputText("I want you to stay here and cum 'til morning.  My pet needs lots of nutrition to recharge, and I have plans for new ways to teach you to obey tomorrow.</i>\"\n\n", false);
 				outputText("Happy to have such a wonderful task, you spend the next day being bathed in drugged aphrodisiacs, cumming over and over and over.  Every morning the creature flashes you into obedience while the voice teaches you more and more about how to think.  After a week you're the perfect pet.  By the end of your first month of servitude, any memories of your past life are gone.  You spend the rest of your days feeding your mistress and her pet, and helping her refine and breed her pets in order to teach others the way.", false);
-				eventParser(5035);
+				doBadEnd();
 				return;
 			}
 			//Dick version
@@ -1369,7 +1369,7 @@ package classes.Scenes.Dungeons
 				outputText("Your mistress pats your head and whispers commands in your ear while the now-sated slave-making creature devours your cum, turning it into more 'reward'.  You don't pay attention to her words, what's important is serving mistress and cumming for your panty-toy as often as possible.  You don't need to worry, she will tell you what to think.  She's just so perfect and amazing, you don't know why anyone would want to harm her or her wonderful creations.  'Gods it feels good to obey' is the last thought your mind ever thinks for itself.\n\n", false);
 				outputText("In the days to come, you spend your time being teased by your new mistress until you feel as if you'll burst, then being brought to sudden explosive orgasms that fill your panty-prison to capacity.  After every session you black out, but each time you mind less and less.  You wanted to be here, having these wonderful orgasms and obeying your beautiful mistress.\n\n", false);
 				outputText("After a month she starts letting you live without your favorite panties.  You beg her to put them back on you, but she often makes you crawl around the factory, pooling pre-cum everywhere from your swollen prick as you beg her to be put back into the pleasure-panties.  Sometimes, if you're lucky, she'll fuck you, or send you out to catch another adventurer.  There is nothing you love more than cumming into your tentacle-panties while another one of your mistress' creations teaches a slut how to embrace her true nature.", false);
-				eventParser(5035);
+				doBadEnd();
 				return;
 			}
 			//(Female) 
@@ -1414,7 +1414,7 @@ package classes.Scenes.Dungeons
 				outputText("You blink a few times, and sit up, finding yourself back in the chair.  Your pink panty-creature has closed back up, trapping the demon's cum inside you.  The corrupted seed is so potent you can actually feel it tainting your body further as it spreads into your core.  You stretch languidly as you try to recover from the best orgasm of your life.  Perhaps you can escape?  No, you can't leave, the panties are already massaging your aching cunt and toying with your still-hard " + clitDescript() + ".  You squirm as it effects you, ramping your body's desires back up to the max.  Maybe if you take a load in the front AND back at the same time it'll sate the creature long enough for you to escape....\n\n", false);
 				outputText("You set off into the factory, looking for the Omnibus and an Incubus to help.\n\n", false);
 				outputText("<b>One month later:</b>\nYou lick the demonic jism from your lips and stretch, happy your mistress provided you with your fifth orgasm of the morning.  Normally she only lets her favorite slut get her off three or four times before lunch.  You squirm as your panties go to work, taking you back to that wonderful plateau of pleasure that only your masters and mistresses can bring you down from.  Thinking back, this really is the best way for things to end.  You thank your mistress and ask if you can see if any of the imps want to knock you up again.  She smiles condescendingly and nods, making your cunt squeeze with happiness.  Imps have such great cum!", false);
-				eventParser(5035);
+				doBadEnd();
 				return;
 			}
 		}
@@ -1442,7 +1442,7 @@ package classes.Scenes.Dungeons
 			else outputText("moo", false);
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.", false);
 			dynStats("int", -100, "lib", 100, "cor", 2);
-			eventParser(5035);			
+			doBadEnd();			
 		}
 		
 		private function doBadEndDemon():void {
@@ -1450,7 +1450,7 @@ package classes.Scenes.Dungeons
 			if(player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.", false);
 			else if(player.gender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...", false);
 			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 		
 		//ROOMS
@@ -1458,7 +1458,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 0;
 			outputText("<b><u>The Factory Foyer</u></b>\n", true);
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
-			dungeons.setDungeonButtons(true, checkDoor1, false, null, true, roomBathroom, true, roomBreakRoom);
+			dungeons.setDungeonButtons(checkDoor1, null, roomBathroom, roomBreakRoom);
 			addButton(6, "South (Exit)", exitDungeon);
 		}
 		
@@ -1466,7 +1466,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 1;
 			outputText("<b><u>Break Room</u></b>\n", true);
 			outputText("Stepping through the dark red doorway, you wander into an expansive break room. Tables surrounded by crude wooden chairs fill most of the floor space. Along the far eastern wall sits a small counter, complete with a strange ebony sculpture of a busty woman with 'Mrs. Coffee' printed on the side. Below the sculpture is a pot of steaming hot coffee, giving off an invigoratingly rich smell.", false);
-			dungeons.setDungeonButtons(false, null, false, null, true, roomLobby, false, null);
+			dungeons.setDungeonButtons(null, null, roomLobby, null);
 			if(flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0) {
 				if(player.hasKeyItem("Iron Key") < 0) {
 					outputText("  It seems your opponent dropped a small iron key as she fled.", false);
@@ -1530,7 +1530,7 @@ package classes.Scenes.Dungeons
 				outputText("As you step through the iron door, a cacophony of thrumming mechanical noise assaults your ears.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The constant thrum-thrum-thrum of concealed pumps and mechanisms makes it difficult to hear anything, but you swear you can make out the faint sounds of sexual pleasure emanating from the northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  The vibrations of all the machinery are strongest along the east walls, indicating the possible site of this hellish place's power-plant. There is a door on the east wall and a door on the north.  To the south is a solid iron door that leads back to the lobby.", false);
 			}
 			else outputText("As you step through the iron door, silence is the only noise you hear.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The near-complete silence of the place unnerves you, but allows you to make out the faint sounds of sexual pleasure emanating from northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  There are two other doors, one along the east wall and one on the north.  To the south is a solid iron door that leads back to the lobby.", false);
-			dungeons.setDungeonButtons(true, roomRepairCloset, true, roomLobby, true, roomMainChamber, true, roomFurnaceRoom);	
+			dungeons.setDungeonButtons(roomRepairCloset, roomLobby, roomMainChamber, roomFurnaceRoom);	
 		}
 		
 		public function roomFurnaceRoom():void {
@@ -1543,7 +1543,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("Despite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ", false);			
 			}
-			dungeons.setDungeonButtons(false, null, false, null, true, roomPumpRoom, false, null);	
+			dungeons.setDungeonButtons(null, null, roomPumpRoom, null);	
 			
 			//Incubus is ALLLLIVE
 			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) {
@@ -1565,7 +1565,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 4;
 			outputText("<b><u>Repair Closet</u></b>\n", true);
 			outputText("As you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ", false)
-			dungeons.setDungeonButtons(false, null, true, roomPumpRoom, false, null, false, null);	
+			dungeons.setDungeonButtons(null, roomPumpRoom, null, null);	
 			if(flags[kFLAGS.FACTORY_MILKER_BUILT] > 0) outputText("The shelves are empty.  ", false);
 			else {
 				outputText("The shelves of the cabinet hold various pieces of pump machinery, probably used to repair complete machines further into the factory.  ", false);
@@ -1587,7 +1587,7 @@ package classes.Scenes.Dungeons
 		public function roomMainChamber():void {
 			kGAMECLASS.dungeonLoc = 5;
 			outputText("<b><u>Main Chamber</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, true, roomForemanOffice, false, null, true, roomPumpRoom);
+			dungeons.setDungeonButtons(null, roomForemanOffice, null, roomPumpRoom);
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				outputText("This cavernous chamber is filled with a cacophony of sexual moans.  Rows of harnesses are spaced evenly throughout this room, nearly all of them filled with delirious-looking humans.  Each is over-endowed with huge breasts and a penis of elephantine proportions.  The source of their delirium hangs down from the ceiling - groups of hoses that end with needles buried deep into the poor 'girls' flesh, pumping them full of demonic chemicals.  Constant sucking and slurping noises emanate from nipple and cock pumps as they keep the victims in a state of near-constant orgasm.  ", false);
 				if(player.cor < 50) outputText("You wish you could free them, but it would take the better part of a day to get them all free.  It'd be better to find the control room and shut down the infernal machinery.  ", false);
@@ -1609,7 +1609,7 @@ package classes.Scenes.Dungeons
 			//Foreman's Office
 			outputText("<b><u>Foreman's Office</u></b>\n", true);
 			outputText("This office provides an excellent view of the 'factory floor' through a glass wall along the north side.  Towards the south side of the room is a simple desk with an even simpler chair behind it.  The desk's surface is clear of any paperwork, and only has a small inkwell and quill on top of it.  There are a few statues of women and men posted at the corners of the room.  All are nude and appear to be trapped in mid-orgasm.  You wonder if they're statues or perhaps some kind of perverted petrified art.  The north has a glass door leading back to the factory.  There are two other doors, both made of very solid looking metal.  One is on the east wall and another is on the south, behind the desk.  The one behind the desk is marked 'Premium Storage' (though it appears to be locked).", false);
-			dungeons.setDungeonButtons(true, roomMainChamber, true, checkDoor2, false, null, true, roomControlRoom);
+			dungeons.setDungeonButtons(roomMainChamber, checkDoor2, null, roomControlRoom);
 			addButton(0, "North (Down)", roomMainChamber)
 			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] <= 0) {
 				menu();
@@ -1644,7 +1644,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("The controls are now inoperable due to the damage your actions have caused.", false);
 			}
-			dungeons.setDungeonButtons(false, null, false, null, true, roomForemanOffice, false, null);
+			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				addButton(3, "Valves", factoryOverload);
 				addButton(4, "Shutdown", factoryShutdown);
@@ -1655,7 +1655,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 8;
 			outputText("<b><u>Premium Products</u></b>\n", true);
 			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n", false);
-			dungeons.setDungeonButtons(true, roomForemanOffice, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(roomForemanOffice, null, null, null);
 			if(flags[kFLAGS.FACTORY_TAKEN_LACTAID] > 0) {
 				if(flags[kFLAGS.FACTORY_TAKEN_LACTAID] < 5) {
 					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_LACTAID]) + " bottles of something called 'Lactaid' inside.\n\n", false);
@@ -1682,7 +1682,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 9;
 			outputText("<b><u>Washroom</u></b>\n", true);
 			outputText("This room is fairly clean. At one of the walls, there is a row of four sinks. Opposite side, there are few bathroom stalls. Three urinals are mounted against one of the walls. You'd guess even the demons need to use the bathroom.", false);
-			dungeons.setDungeonButtons(false, null, false, null, false, null, true, roomLobby);
+			dungeons.setDungeonButtons(null, null, null, roomLobby);
 			//outputText("Do you use?")
 			//addButton(2, "Use", useBathroom);
 		}

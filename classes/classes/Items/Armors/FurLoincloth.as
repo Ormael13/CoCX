@@ -12,7 +12,7 @@ package classes.Items.Armors
 
 		override public function get description():String
 		{
-			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ".  Typically worn by people named 'Conan'."
+			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ".  Typically worn by people named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100"
 		}
 
 		public function FurLoincloth()

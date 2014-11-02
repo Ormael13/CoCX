@@ -1351,7 +1351,7 @@ private function holliPlaysWithPenisesBadEnd():void {
 	outputText("\n\n\"<i>Simple-minded fool,</i>\" Holli spits at the distant, retreating back of the newest Champion, stroking the erect shaft of her partner.  \"<i>I'm eager to see where and when she will take root.  Though, I wonder if your seed will impregnate her before mine can absorb it all?</i>\"");
 	
 	//--[Game Over], man! [Game Over]!--
-	eventParser(5035);
+	doBadEnd();
 }
 
 private function girlsGetANiceManToBadEnd():void {
@@ -1479,7 +1479,7 @@ private function girlsGetANiceManToBadEnd():void {
 	outputText("\n\nHolli watches him until he's out of sight.  \"<i>When something seems too good to be true... it probably is.  Stupid imbecile.</i>\"  She turns to the figure in the tree, who is frowning deeply.  \"<i>Oh my... I was just lying before, but <b>do</b> you actually like him?  Well, you'll meet him again - when he sprouts and joins with Marae's roots.  In the meanwhile, I'm eager to see what the child of a pure human man and a once-human dryad like you will be.  I wonder if its tree will be more interesting than those of the imp- and beast-spawns you've given birth to already?</i>\"");
 	
 	//--Oh shit, it's already... [Game Over]--
-	eventParser(5035);
+	doBadEnd();
 }
 
 private function holliAndGenderlessSittingInATree():void {
@@ -1518,7 +1518,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("...");
 	
 	//--Dante's Purgatorio is an epic poem about [Game Over]--
-	eventParser(5035);
+	doBadEnd();
 }
 
 public function amilyComesBack():void {

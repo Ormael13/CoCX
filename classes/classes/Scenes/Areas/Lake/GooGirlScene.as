@@ -104,7 +104,7 @@ package classes.Scenes.Areas.Lake
 			outputText("You slide your nucleus down to the champion and she wraps her " + gooColor3() + " arms around it, kissing the heat of your core. Your gargantuan form ripples in shivering glee as a small piece of your heart splits off, sliding between your new daughter's lips, resting firmly between her gooey tits in a tiny, crimson ruby. Climaxing from the birth of a new goo-girl, your body convulses and clenches, squeezing the former champion back into the lake with a gushing, " + gooColor2() + " splash. Your daughter bows her head in reverence and embraces her sisters happily. The largest girl, a former minotaur, gives her a bear hug that nearly splits the smaller slime in two. The purple girl, who used to be a succubus before you showed her the error of her polluting ways, is more reserved, merely nodding and smiling. All the same, they stroke each other fondly, enjoying each other's rippling bodies.\n\n", false);
 
 			outputText("Radiating heat and vibrating the water between the four of you, you communicate your will to the girls. Hundreds of your sisters have already expanded the lake's shores to the mountains and others have nearly reached the forest. Deep in your memory, however, there remains a city in the desert filled with your friends. It seems like such a long time since you've seen them. Once your children flood the desert, you'll be able to pay a visit and show them what you've become. Maybe they'll even want to be reborn themselves. Yes, you decide, they will definitely want to join you.", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 
 //===============

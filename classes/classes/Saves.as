@@ -475,14 +475,14 @@ public function loadGame(slot:String):void
 		loadGameObject(saveFile, slot);
 		outputText("Game Loaded");
 		temp = 0;
-		statScreenRefresh();
 		
 		if (player.slotName == "VOID")
 		{
 			trace("Setting in-use save slot to: " + slot);
 			player.slotName = slot;
 		}
-		
+		loadPermObject();
+		statScreenRefresh();
 		doNext(1);
 	}
 }
@@ -510,9 +510,28 @@ public function savePermObject(isFile:Boolean):void {
 	var dataError:Error;
 	
 	try {
+		var i:int
+		//flag settings
+		saveFile.data.flags = [];
+		for (i = 0; i < achievements.length; i++) {
+			if (flags[i] != 0)
+			{
+				saveFile.data.flags[i] = 0;
+			}			
+		}
+		saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
+		
+		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
+		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+		
+		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
+		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
+		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
+		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
+		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		//achievements
 		saveFile.data.achievements = [];
-		for (var i:int = 0; i < achievements.length; i++)
+		for (i = 0; i < achievements.length; i++)
 		{
 			// Don't save unset/default flags
 			if (achievements[i] != 0)
@@ -537,6 +556,19 @@ public function loadPermObject():void {
 	//var saveFile:Object = loader.data.readObject();
 	if (saveFile.data.exists)
 	{
+		//Load saved flags.
+		if (saveFile.data.flags) {
+			if (saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] != undefined) flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
+			
+			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
+			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+			
+			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
+			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
+			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];
+			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
+			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
+		}
 		//achievements, will check if achievement exists.
 		if (saveFile.data.achievements) {
 			for (var i:int = 0; i < achievements.length; i++)
@@ -889,6 +921,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.gameState = gameState;
 		
 		//Time and Items
+		saveFile.data.minutes = model.time.minutes;
 		saveFile.data.hours = model.time.hours;
 		saveFile.data.days = model.time.days;
 		saveFile.data.autoSave = player.autoSave;
@@ -1809,6 +1842,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Days
 		//Time and Items
+		model.time.minutes = saveFile.data.minutes;
 		model.time.hours = saveFile.data.hours;
 		model.time.days = saveFile.data.days;
 		if (saveFile.data.autoSave == undefined)
@@ -1888,6 +1922,9 @@ public function unFuckSave():void
 		}
 	}
 
+	if (isNaN(model.time.minutes)) model.time.minutes = 0;
+	if (isNaN(model.time.hours)) model.time.hours = 0;
+	if (isNaN(model.time.days)) model.time.days = 0;
 
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
 		

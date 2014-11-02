@@ -205,6 +205,7 @@ package classes.Scenes.NPCs
 			this.gems = 10 + rand(5);
 			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
+					add(weapons.SCIMITR,1/20).
 					add(consumables.REPTLUM,0.7);
 			this.tailType = TAIL_TYPE_LIZARD;
 			this.tailRecharge = 0;

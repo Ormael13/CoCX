@@ -807,7 +807,8 @@ public function doCamp():void {
 		if (player.gender == 3)
 		{
 			(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1)
-			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>")
+			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>");
+			kGAMECLASS.saves.savePermObject(false);
 		}
 	}
 	//Menu
@@ -818,7 +819,7 @@ public function doCamp():void {
 	}
 	
 	//Massive Balls Bad End (Realistic Mode only)
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.ballSize > (18 + (player.str / 2))) {
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
 		badEndGIANTBALLZ();
 	}
 	//Hunger Bad End
@@ -1813,7 +1814,7 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nYou could call for Rathazul to help you.", false)
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
 	}
-	else eventParser(5035);
+	else doBadEnd();
 }
 private function applyReductoAndEscapeBadEnd():void {
 	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
@@ -1852,14 +1853,14 @@ public function badEndHunger():void {
 		}
 	}
 	player.HP = 0;
-	eventParser(5035);
+	doBadEnd();
 }
 //Bad End if you have 100 min lust.
 public function badEndMinLust():void {
 	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.\n\n", true);
 	outputText("You spend the rest of your life masturbating, unable to stop.", false)
 	player.orgasm();
-	eventParser(5035);	
+	doBadEnd();	
 }
 
 public function nightSuccubiRepeat():void {
@@ -1975,7 +1976,7 @@ public function nightSuccubiRepeat():void {
 			outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n", false);
 
 			outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.", false);
-			eventParser(5035);
+			doBadEnd();
 			return;
 		}
 		else {
@@ -2074,6 +2075,8 @@ private function dungeons():void {
 	if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon);
 	//Turn on dungeon 2
 	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon);
+	//Turn on dungeon 3
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] > 0) addButton(2, "Lethice Castle", dungeon3.enterDungeon);
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon);
@@ -2197,11 +2200,11 @@ private function fixFlags():void {
 		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusAffectv1(StatusAffects.TakenGroPlus))
 		player.removeStatusAffect(StatusAffects.TakenGroPlus);
 	}
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] > 0)
+	/*if (flags[kFLAGS.USE_12_HOURS] > 0)
 	{
-		player.hunger = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994];
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02994] = 0;
-	}
+		player.hunger = flags[kFLAGS.USE_12_HOURS];
+		flags[kFLAGS.USE_12_HOURS] = 0;
+	}*/
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 }
 private function promptSaveUpdate():void {
@@ -2223,9 +2226,20 @@ private function promptSaveUpdate():void {
 		updateAchievements();
 		outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile.");
 		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see! It's permanent.");
-		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		flags[kFLAGS.MOD_SAVE_VERSION] = 3;
 		menu();
 		doNext(1);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 3) {
+		//Reclaim flags for future use.
+		flags[kFLAGS.GIACOMO_MET] = 0;
+		flags[kFLAGS.GIACOMO_NOTICES_WORMS] = 0;
+		flags[kFLAGS.PHOENIX_ENCOUNTERED] = 0;
+		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
+		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
+		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		eventParser(1);
 		return;
 	}
 }

@@ -17,7 +17,7 @@ private function minotaurNeed():Boolean {
 	return player.minotaurNeed();
 }
  */
-internal function minoVictoryRapeChoices():void {
+public function minoVictoryRapeChoices():void {
 	spriteSelect(44);
 	//Determine if PC can rape with a dick!
 	var x:Number = player.cockThatFits(monster.analCapacity());
@@ -846,7 +846,7 @@ public function minoAddictionBadEndEncounter():void {
 	outputText("While exploring the mountains you catch a strong whiff of your favorite scent.  Tipping your head to the side, you take in a few deep lungfuls and sigh.   Judging by the strength of the smell, there must be MANY minotaurs gathered together.   Immediate visions of being surrounded by the muscly monsters fill your mind.   In your fantasy your holes are plugged and you're soaked in their wondrous stuff.  You desperately want it to be a reality, and all you need to do is follow your nose...\n\n", false);
 
 	//(Withdrawal) 
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && player.inte < 60) {
 		outputText("So great is your need that you don't even think about it, you just start following.", false);
 		doNext(minoAddictionBadEnd2);
 	}
@@ -899,7 +899,7 @@ private function minoCumAddictBadEnd3():void {
 	outputText("Days and weeks pass in a half-remembered haze.  You're violated countless time, and after the first day they don't even bother to keep you on a leash.  Why would they need to restrain such an eager slave?  You're tossed to the side whenever you're not needed as a cum-dump, but as soon as you start to come out of your daze, you crawl back, gaping, dripping, and ready for another dose.  For their part, your new masters seem happy to take care of your needs.  The only time you aren't drugged is when the minotaurs are sleeping, but the minitaurs seem all too happy to let you suckle the pre from their tiny horse-cocks in the huddled slave-pile.\n\n", false);
 	
 	outputText("You are no longer the Champion of your village.  The only thing you're a champion of is cum-guzzling.  You take immense pride in showing the other cum-sluts just how many thick loads you can coax from your horny masters every day.  Life couldn't be any better.", false);
-	eventParser(5035);
+	doBadEnd();
 	dynStats("int", -1, "lib", 5, "sen", 30, "lus=", 100, "cor", 20);
 }
 

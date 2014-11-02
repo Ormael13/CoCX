@@ -138,7 +138,7 @@ private function futaTentacleEpilogue():void {
 	outputText("", true);
 	spriteSelect(100);
 	//[Met Giacomo at least once]
-	if(kGAMECLASS.giacomo > 0) {
+	if(flags[kFLAGS.GIACOMO_MET] > 0) {
 		outputText("\"<i>Well, well, well. You aren't a total loss, I see.</i>\", says a sharp, masculine voice.\n\n", false);
 		outputText("While the fog of your brain has yet to lift completely, you recognize the voice to be the seedy merchant, Giacomo.\n\n", false);
 		outputText("\"<i>It is a good thing I happened to be out and about today.</i>\", Giacomo says. \"<i>I was testing out a new weapon to sell and I happened to see one of those nasty tentacle beasties. I had no idea they captured prey! Hell, you must have spent a few months inside that thing feeding it!</i>\"\n\n", false);
@@ -148,15 +148,15 @@ private function futaTentacleEpilogue():void {
 	}
 	//[Never met Giacomo]
 	else {
-		outputText("\"<i>Will she live?</i>\", says a soft and feminine voice.\n\n", false);
-		outputText("\"<i>Yes, doctor. She will live.</i>\", replies a gruff and clearly masculine voice.\n\n", false);
+		outputText("\"<i>Will " + player.mf("he", "she") + " live?</i>\", says a soft and feminine voice.\n\n", false);
+		outputText("\"<i>Yes, doctor. " + player.mf("He", "She") + " will live.</i>\", replies a gruff and clearly masculine voice.\n\n", false);
 		outputText("\"<i>Is the beast dead</i>\", queries the doctor.\n\n", false);
 		outputText("\"<i>Dead several times over, madam.</i>\", answers the man.\n\n", false);
-		outputText("\"<i>We cannot leave this unfortunate woman out in the wild like this. Load her onto the wagon. We will take her back to the village. I am certain I can help this woman recover.</i>\", the doctor states flatly.\n\n", false);
+		outputText("\"<i>We cannot leave this unfortunate " + player.mf("man", "woman") + " out in the wild like this. Load " + player.mf("him", "her") + " onto the wagon. We will take " + player.mf("him", "her") + " back to the village. I am certain I can help this " + player.mf("man", "woman") + " recover.</i>\", the doctor states flatly.\n\n", false);
 		outputText("Strong masculine hands easily lift your atrophied body and place you on a wooden slab. You feel the shaking of a cart as its movement assaults your stunted senses. After a while you notice the cart stops as it arrives at its destination. A cacophony of voices talk over one another as you feel a half a dozen people move you to what can only be a clinic. Many of the voices talk constantly as you are examined and various medicines are applied to you exhausted body. Your vision returns in a day or so, revealing that you are in a hospital and laborious effort from the staff allowed for your revival.\n\n", false);
 		outputText("Your recovery takes the better part of the year. The healers and apothecaries purge you of all of your corruptions, save your transgendered status. However, the sheer stress on your body has effectively ended your adventuring lifestyle and you resign yourself to settle down to a comparatively mundane existence, broken by the occasional tryst with a villager curious about your genitalia, which you are more than happy to display.", false);
 	}
-	doNext(5035);
+	doBadEnd();
 }
 
 public function tentacleLossRape():void {

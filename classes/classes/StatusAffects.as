@@ -267,6 +267,7 @@ package classes
 		public static const IsabellaStunned:CombatStatusAffect = mk2("Isabella Stunned");
 		public static const IzmaBleed:CombatStatusAffect = mk2("Izma Bleed");
 		public static const KissOfDeath:CombatStatusAffect = mk2("Kiss of Death");
+		public static const LizanBlowpipe:CombatStatusAffect = mk2("Lizan Blowpipe");
 		public static const LustStones:CombatStatusAffect = mk2("lust stones");
 		public static const lustvenom:CombatStatusAffect = mk2("lust venom");
 		public static const Might:CombatStatusAffect = mk2("Might");

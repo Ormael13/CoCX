@@ -33,6 +33,12 @@ package classes.Scenes.Areas
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++
 			doNext(1);
 			
+			//Helia monogamy fucks
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
+				kGAMECLASS.helScene.helSexualAmbush();
+				return;
+			}
+			
 			var chooser:Number = rand(5);
 			//Wild Valkyrie appears!
 			if (chooser == 0) {

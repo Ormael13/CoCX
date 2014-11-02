@@ -618,7 +618,7 @@ package classes.Scenes.Areas.Lake
 			}
 			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n", false);
 			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you where, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 
 		public function fetishCultistHasAMilkFetish():void

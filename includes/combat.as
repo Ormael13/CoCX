@@ -493,6 +493,7 @@ public function doCombat(eventNum:Number):void
 					test.clear();
 				}
 			}
+			flags[kFLAGS.TIMES_BAD_ENDED]++;
 			awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
 			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
@@ -537,7 +538,7 @@ public function doCombat(eventNum:Number):void
 				outputText("No sooner have you spoken than a huge torrent of milk spurts from each of your nipples. Between the sudden alleviation of your pain and the sensitivity of your nipples, you orgasm almost instantly with a huge groan of relief. When you can focus your eyes again, you see that the Sand Witch... your new Mistress... is bathing languidly in the basin, relaxing in a pool of your fresh breastmilk.\n\n", false);
 				outputText("The dusky-skinned witch catches your eye and smiles, this time more warmly than before. \"<i>See? You'll enjoy yourself more if you obey your Mistress. After all, I <b>ALWAYS</b> get what I want...</i>\"\n\nAs much as you hate to admit it, you realize that she's right. You're trapped here on top of your bloated bust, at the mercy of this perverse spellcaster. She has all the time in the world to train you, and between the pain of overfilled breasts and the orgasmic joy of being drained, it won't take her long to turn you into a perfectly obedient, even eager, milk-slave...", false);
 			}
-			doNext(5025);
+			doBadEnd();
 	}
 			//Rape minotaur
 	if(eventNum == 5030) {
@@ -878,7 +879,7 @@ public function doCombat(eventNum:Number):void
 				if (player.str / 9 + rand(20) + 1 >= 15) {
 					outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!");
 					monster.removeStatusAffect(StatusAffects.MinotaurEntangled);
-					outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
+					if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
 					combatRoundOver();
 				}
 				//Struggle Free Fail*
@@ -1043,6 +1044,11 @@ public function doCombat(eventNum:Number):void
 			//Miss chance 10% based on speed + 10% based on int + 20% based on skill
 			if (monster.short != "pod" && player.spe / 10 + player.inte / 10 + player.statusAffectv1(StatusAffects.Kelt) / 5 + 60 < rand(101)) {
 				outputText("The arrow goes wide, disappearing behind your foe.\n\n", false);
+				enemyAI();
+				return;
+			}
+			if (monster.short == "lizan rogue") {
+				outputText("You fire off an arrow with a loud twang from your bow. As the archaic missile flies at the lizan he rolls off to the side. His long tongue lashes out as he does, snapping the arrow in two with a leisurely strike.  It appears he is too fast and well trained for normal projectile attacks.");
 				enemyAI();
 				return;
 			}
@@ -4519,6 +4525,11 @@ public function PCWebAttack():void {
 		enemyAI();
 		return;
 	}
+	if (monster.short == "lizan rogue") {
+		outputText("As your webbing flies at him the lizan flips back, slashing at the adhesive strands with the claws on his hands and feet with practiced ease.  It appears he's used to countering this tactic.");
+		enemyAI();
+		return;
+	}
 	//Blind
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
@@ -5062,6 +5073,13 @@ public function runAway(callHook:Boolean = true):void {
 		if(!player.canFly()) outputText(" running");
 		else outputText(", flapping as hard as you can");
 		outputText(", and Ember, caught up in the moment, gives chase.  ");
+	}
+	if (monster.short == "lizan rogue") {
+		outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back to see if he's still there you find nothing but the empty bog around you.");
+		gameState = 0;
+		clearStatuses(false);
+		doNext(13);
+		return;
 	}
 	else if(player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ", false);	
 	//Nonflying PCs

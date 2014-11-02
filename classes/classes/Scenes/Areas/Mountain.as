@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 	use namespace kGAMECLASS;
 
@@ -139,6 +140,16 @@ package classes.Scenes.Areas
 						kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 						return;
 					}
+					//Goblin warrior!
+					if (player.level >= 12 && rand(2) == 0) {
+						kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+						return;
+					}
+					//Goblin shaman!
+					if (player.level >= 12 && rand(2) == 0) {
+						kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+						return;
+					}
 					if (player.gender > 0) {
 						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
 						outputText(".</i>\"", false);
@@ -237,13 +248,19 @@ package classes.Scenes.Areas
 					minotaurScene.minoAddictionFuck();
 					return;
 				}
+				//Rare Minotaur Lord
+				if (rand(5) == 0 && player.level >= 10) {
+					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!", true);
+					startCombat(new MinotaurLord());
+					return;
+				}
 				eventParser(2008);
 				spriteSelect(44);
 			}
 			//Worms
 			if (chooser == 2) {
 				//If worms are on and not infested.
-				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && player.findStatusAffect(StatusAffects.Infested) < 0) {
+				if ((player.findStatusAffect(StatusAffects.WormsOn) >= 0 || (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && rand(10) == 0)) && player.findStatusAffect(StatusAffects.Infested) < 0) {
 					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);

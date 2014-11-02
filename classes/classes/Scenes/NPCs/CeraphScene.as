@@ -444,7 +444,7 @@ package classes.Scenes.NPCs
 			outputText(".  Two weeks of drug and bondage induced edging nearly broke pet's mind, but Mistress was nice and let " + player.mf("him", "her") + " cum over and over after getting a new piercing and worshiping her feet for a few hours.\n\n", false);
 
 			outputText("The champion that left Ingnam so long ago is totally unrecognizable, body and soul.  The spirit that once burned bright with the desire to save the innocents of the village has been warped and twisted beyond repair.  The once-champion known only as 'pet', not even worthy of a proper name, spends all " + player.mf("his", "her") + " time lusting after Mistress Ceraph, taking part in her depraved orgies and willingly submitting to any kinks or debaucheries that are presented to " + player.mf("him", "her") + ".  Pet's life of individuality and choice is over, all that remains is pleasure and pain.", false);
-			eventParser(5035);
+			doBadEnd();
 		}
 
 //[Initial Meeting Text]

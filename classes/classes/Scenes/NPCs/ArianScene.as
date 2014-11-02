@@ -1328,7 +1328,9 @@ private function takeYerLizardHomePartII():void {
 	clearOutput();
 	outputText("Upon arriving at the camp, the first thing Arian notices is the shimmering portal.  \"<i>Is this... where you came from?</i>\" Arian asks.");
 	outputText("\n\nYou nod your head and confirm that, yes, this was your doorway from your world into Mareth.");
-	outputText("\n\n\"<i>I heard that sometimes people from other worlds wandered into Mareth through portals, but I have never seen one up close before.</i>\"  Arian stares deeply at the portal.  \"<i>It's beautiful... and menacing, too.</i>\"  Shaking [Arian em]self out of [Arian eir] reverie, Arian takes an open spot close to your tent.");
+	outputText("\n\n\"<i>I heard that sometimes people from other worlds wandered into Mareth through portals, but I have never seen one up close before.</i>\"  Arian stares deeply at the portal.  \"<i>It's beautiful... and menacing, too.</i>\"  Shaking [Arian em]self out of [Arian eir] reverie, Arian takes an open spot close to your ");
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("cabin.  \"<i>That's some nice cabin you've got here,</i>\" Arian says.  You thank him for the appreciation.");
+	else outputText("tent.");
 	outputText("\n\n[Arian Ey] sets [Arian eir] overfull bag down and asks, \"<i>Is it okay if I stay here?</i>\"");
 	outputText("\n\nYou tell the reptilian wizard that should be fine.  But surely even someone with [Arian eir] scaly hide can't just sleep out in the open on bare earth?");
 	outputText("\n\nArian laughs.  \"<i>Of course not, silly.  I'm going to set up my own tent here.</i>\"");
@@ -1347,8 +1349,12 @@ private function takeYerLizardHomePartII():void {
 	outputText(".");
 	
 	outputText("\n\n\"<i>So what do you think?  Cozy?</i>\" Arian asks.");
-	outputText("\n\nYou tell [Arian em] it looks very cozy indeed.  In fact, you jest, you just might bring your sleeping roll in here and sleep with the lizan instead of in your own tent.  Arian averts [Arian eir] eyes and then smiles at you nervously.  \"<i>T-there's no need for you to bring your sleeping bag.... If you want to stay in here I'd be happy to share my bed with you.</i>\"");
-	outputText("\n\nYou tell the lizan it was just a jest... still, you drawl, you'll keep that in mind. Maybe you will drop by some night.");
+	outputText("\n\nYou tell [Arian em] it looks very cozy indeed.  ");
+	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] <= 0) outputText("In fact, you jest, you just might bring your sleeping roll in here and sleep with the lizan instead of in your own tent.  Arian averts [Arian eir] eyes and then smiles at you nervously.  \"<i>T-there's no need for you to bring your sleeping bag.... </i>");
+	else outputText("\"");
+	outputText("<i>If you want to stay in here I'd be happy to share my bed with you.</i>\" ");
+	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] <= 0) outputText("\n\nYou tell the lizan it was just a jest... still, you drawl, you'll keep that in mind. ");
+	outputText("Maybe you will drop by some night.");
 	
 	outputText("\n\nArian nods.  \"<i>You're always welcome here whenever you want.</i>\"");
 	
@@ -1823,8 +1829,8 @@ private function penetrateArian():void {
 
 	outputText(images.showImage("arianfemale-home-penetrate"));
 	outputText("You admire the transgendered lizan's body, from [Arian eir] feminized features, down past [Arian eir] [arian chest], all the way to [Arian eir] shapely thighs.  You tell Arian that the change looks very good on [Arian em]; few boys would really be so naturally pretty when turned into a ");
-	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("dick");
-	outputText("girl.");
+	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText(arianMF("maleherm.", "dickgirl."));
+	else outputText("girl.");
 	
 	outputText("\n\nArian smiles and averts [Arian eir] eyes, rubbing one arm.  \"<i>You really think so?</i>\"  [Arian Ey] bites [Arian eir] lower lip in nervousness.");
 	
@@ -1877,7 +1883,7 @@ private function penetrateArian():void {
 	
 	outputText("\n\nArian moans appreciatively and grinds [Arian eir] hips against you.  \"<i>I'm so happy to hear you say that; you really know how to make a girl feel appreciated.</i>\"  You note that it feels a little strange to hear Arian so easily referring to \"<i>herself</i>\" as a girl.  Arian fidgets and averts [Arian eir] eyes.  \"<i>I-I can't help it.  When you're buried in my pussy I just... feel girly - pretty.</i>\"  That might be because [Arian ey] is so very pretty, you can't resist saying, even as you continue to thrust into [Arian eir].  \"<i>Oh [name]... F-fuck me.  Make me feel beautiful!  Make me cum!  I want you to fuck me as hard as you can.  Please....</i>\"");
 
-	outputText("\n\nYou promise [Arian eir] you will, but with [Arian eir] on top, you can't really exert that much control.  Swinging [Arian eir] tail to the side along with [Arian eir] body, Arian quickly rolls over, never breaking contact, nor stopping bucking against you, even as [Arian eir] legs close behind you and [Arian ey] loops [Arian eir] arms around your neck.  [Arian Ey] looks up at you, panting, with half-lidded eyes, then [Arian ey] smiles.  \"<i>What about now?</i>\"");
+	outputText("\n\nYou promise [Arian em] you will, but with [Arian eir] on top, you can't really exert that much control.  Swinging [Arian eir] tail to the side along with [Arian eir] body, Arian quickly rolls over, never breaking contact, nor stopping bucking against you, even as [Arian eir] legs close behind you and [Arian ey] loops [Arian eir] arms around your neck.  [Arian Ey] looks up at you, panting, with half-lidded eyes, then [Arian ey] smiles.  \"<i>What about now?</i>\"");
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 		outputText("  [Arian Eir] cock");
 		if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s twitch as they spurt ");

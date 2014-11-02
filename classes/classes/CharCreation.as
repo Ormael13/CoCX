@@ -257,8 +257,16 @@ private function chooseModeNormal():void {
 	doNext(startTheGame);
 }	
 
+private function chooseModeSurvival():void {
+	outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled.", true)
+	flags[kFLAGS.HARDCORE_MODE] = 0;
+	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+	player.hunger = 80;
+	doNext(startTheGame);
+}	
+
 private function chooseModeRealistic():void {
-	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically.", true)
+	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down.", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
 	player.hunger = 80;
@@ -287,10 +295,11 @@ private function chooseModeHardcore():void {
 private function chooseGameModes():void {
 	outputText("Choose a game mode.\n\n", true);
 	outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n", false);
-	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. \n", false);
+	outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n", false);
+	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n", false);
 	outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
 	
-	simpleChoices("Normal", chooseModeNormal, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0, "", 0);
+	simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0);
 }	
 
 //-----------------
@@ -502,6 +511,8 @@ private function chooseMasculineHerm():void {
 		player.hairLength = 1;
 		player.tone = 50;
 		player.breastRows[0].breastRating = 0;
+		player.balls = 2;
+		player.ballSize = 1;
 	genericStyleCustomizeMenu();
 }
 private function chooseFeminineHerm():void {

@@ -1102,7 +1102,7 @@ internal function goBackToUrtasForLuvinzII():void {
 	outputText("The journey is blessedly brief, and within minutes you arrive at Urta's house.  She fiddles with the lock anxiously for a moment before finally getting a -CLICK- and unlocking it.  You sweep inside behind your host and look around, mildly shocked at the spartan surroundings.  Urta's apartment is tiny, cramped, and nearly devoid of possessions beyond weapons, armor, and sex-toys.", false);
 	if(flags[kFLAGS.PC_SEEN_URTA_SEX_TOYS] == 0) {
 		outputText("  The last group is the most numerous of those three.", false);
-		if(kGAMECLASS.giacomo > 0) outputText("  You recognize some of the toys as Giacomo's wares, though there are a fair number that seem to be custom made, and others that are clearly living creatures.", false);
+		if(flags[kFLAGS.GIACOMO_MET] > 0) outputText("  You recognize some of the toys as Giacomo's wares, though there are a fair number that seem to be custom made, and others that are clearly living creatures.", false);
 		outputText("  Looking over the things she had to use before she met you, it dawns on you just how lonely the poor fox has been.", false);
 	}
 	else outputText("  While the last group used to be the most numerous, it looks like Urta has cleaned house and only has a few of the toys left.  It seems that since meeting you she hasn't had to turn to her massive device collection like she used to.  It dawns on you just what a difference you've made in Urta's life, and it brings a loving smile to your face.", false);

@@ -173,12 +173,14 @@ use namespace kGAMECLASS;
 				armorDef += 2;
 				//if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
 			}
-			
 			//Stacks on top of Thick Skin perk.
 			if(skinType == SKIN_TYPE_FUR) armorDef += 1;
 			if(skinType == SKIN_TYPE_SCALES) armorDef += 3;
 			//'Thick' dermis descriptor adds 1!
-			if(skinAdj == "smooth") armorDef += 1;
+			if (skinAdj == "smooth") armorDef += 1;
+			//Bonus defense
+			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
+			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) armorDef += 2
 			//Agility boosts armor ratings!
 			if(findPerk(PerkLib.Agility) >= 0) {
 				if(armorPerk == "Light") armorDef += Math.round(spe/8);
@@ -331,6 +333,10 @@ use namespace kGAMECLASS;
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			//Difficulty modifier flags.
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 3) damage *= 1.5;
 			if (findStatusAffect(StatusAffects.Shielding) >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
@@ -534,8 +540,10 @@ use namespace kGAMECLASS;
 		{
 			//Determine race type:
 			var race:String = "human";
-			if (lowerBody == 4)
-				race = "centaur";
+			if (lowerBody == 4) {
+				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
+				else race = "centaur";
+			}
 			if (lowerBody == 11)
 				race = "pony-kin";
 			if (catScore() >= 4)
@@ -1249,6 +1257,8 @@ use namespace kGAMECLASS;
 			if (findStatusAffect(StatusAffects.LactationEndurance) < 0)
 				createStatusAffect(StatusAffects.LactationEndurance, 1, 0, 0, 0);
 			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1(StatusAffects.LactationEndurance) * totalBreasts();
+			if (findPerk(PerkLib.MilkMaid) >= 0)
+				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
 			if (statusAffectv1(StatusAffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > 2147483647)
@@ -1704,7 +1714,7 @@ use namespace kGAMECLASS;
 			if(min < 50 && findStatusAffect(StatusAffects.Luststick) >= 0) min = 50;
 			//SHOULDRA BOOSTS
 			//+20
-			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168) {
+			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
 				min += 20;
 				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
 					min += 30;
@@ -1972,6 +1982,13 @@ use namespace kGAMECLASS;
 			if (findStatusAffect(StatusAffects.GiantStrLoss) >= 0) {
 				str += statusAffectv1(StatusAffects.GiantStrLoss);
 				removeStatusAffect(StatusAffects.GiantStrLoss);
+			}
+			if (findStatusAffect(StatusAffects.LizanBlowpipe) >= 0) {
+				str += statusAffectv1(StatusAffects.LizanBlowpipe);
+				tou += statusAffectv2(StatusAffects.LizanBlowpipe);
+				spe += statusAffectv3(StatusAffects.LizanBlowpipe);
+				sens -= statusAffectv4(StatusAffects.LizanBlowpipe);
+				removeStatusAffect(StatusAffects.LizanBlowpipe);
 			}
 			while(findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
 		}

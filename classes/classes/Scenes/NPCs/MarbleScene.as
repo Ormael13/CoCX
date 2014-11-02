@@ -2957,7 +2957,7 @@ public function marbleBadEndFollowup():void {
 	//wrap things up
 	outputText("\n\n", false);
 	outputText("You've abandoned your quest due to your inability to refuse Marble, thanks to the effect her milk has on you.  However, you may have a chance to help the next one complete his quest, or maybe you won't.  As it stands now, this is where your story ends.", false);
-	eventParser(5035);
+	doBadEnd();
 }
 
 //BIRTHING OVERWRITES SECKS

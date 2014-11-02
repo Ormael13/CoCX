@@ -40,8 +40,8 @@ package classes.Scenes
 			achievementsEarned = 0;
 			achievementsTotal = 0;
 			clearOutput();
-			outputText("<font size=\"36\" face=\"Georgia\">Achievements</font>", false)
-			outputText("\nNote: Some achievements are contradictory and may require multiple playthroughs to obtain every achievement.\n");
+			outputText("<font size=\"36\" face=\"Georgia\">Achievements</font>\n", false)
+			outputText("Note: Some achievements are contradictory and may require multiple playthroughs to obtain every achievement.\n");
 			titleAchievementSection("Storyline"); //4 achievements
 			addAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, "Enter the realm of Mareth.");
 			addAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, "Complete Marae's quest.");

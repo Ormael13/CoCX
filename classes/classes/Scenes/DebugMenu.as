@@ -30,7 +30,7 @@ package classes.Scenes
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu);
 				addButton(1, "Change Stats", statChangeMenu);
-				//addButton(2, "HACK STUFFZ", styleHackMenu);
+				addButton(2, "HACK STUFFZ", styleHackMenu);
 				//addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(9, "Exit", eventParser, 1);
 			}
@@ -76,67 +76,68 @@ package classes.Scenes
 			
 			addButton(5, "GoldenSeed", giveItem, consumables.GLDSEED);
 			addButton(6, "Gob.Ale", giveItem, consumables.GOB_ALE);
-			addButton(7, "ImpFood", giveItem, consumables.IMPFOOD);
-			addButton(8, "IncubiD", giveItem, consumables.INCUBID);
+			addButton(7, "Hummus", giveItem, consumables.HUMMUS_);
+			addButton(8, "ImpFood", giveItem, consumables.IMPFOOD);
 			
 			addButton(4, "Page 2/6", itemSpawnTransformativesMenuIII);
 			addButton(9, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuIII():void {
 			menu();
-			addButton(0, "KangaFruit", giveItem, consumables.KANGAFT);
-			addButton(1, "KnottyP", giveItem, consumables.KNOTTYP);
-			addButton(2, "La Bova", giveItem, consumables.LABOVA_);
-			addButton(3, "LargePp", giveItem, consumables.LARGEPP);
+			addButton(0, "IncubiD", giveItem, consumables.INCUBID);
+			addButton(1, "KangaFruit", giveItem, consumables.KANGAFT);
+			addButton(2, "KnottyP", giveItem, consumables.KNOTTYP);
+			addButton(3, "La Bova", giveItem, consumables.LABOVA_);
 			
-			addButton(5, "MagSeed", giveItem, consumables.MAGSEED);
-			addButton(6, "MghtyVg", giveItem, consumables.MGHTYVG);
-			addButton(7, "MouseCo", giveItem, consumables.MOUSECO);
-			addButton(8, "MinoBlo", giveItem, consumables.MINOBLO);
+			addButton(5, "LargePp", giveItem, consumables.LARGEPP);
+			addButton(6, "MagSeed", giveItem, consumables.MAGSEED);
+			addButton(7, "MghtyVg", giveItem, consumables.MGHTYVG);
+			addButton(8, "MouseCo", giveItem, consumables.MOUSECO);
 			
 			addButton(4, "Page 3/6", itemSpawnTransformativesMenuIV);
 			addButton(9, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuIV():void {
 			menu();
-			addButton(0, "MystJwl", giveItem, consumables.MYSTJWL);
-			addButton(1, "P.LBova", giveItem, consumables.P_LBOVA);
-			addButton(2, "PrFruit", giveItem, consumables.PRFRUIT);
-			addButton(3, "ProBova", giveItem, consumables.PROBOVA);
+			addButton(0, "MinoBlo", giveItem, consumables.MINOBLO);
+			addButton(1, "MystJwl", giveItem, consumables.MYSTJWL);
+			addButton(2, "P.LBova", giveItem, consumables.P_LBOVA);
+			addButton(3, "PrFruit", giveItem, consumables.PRFRUIT);
 			
-			addButton(5, "P.Draft", giveItem, consumables.P_DRAFT);
-			addButton(6, "P.S.Mlk", giveItem, consumables.P_S_MLK);
-			addButton(7, "PSDelit", giveItem, consumables.PSDELIT);
-			addButton(8, "PurHony", giveItem, consumables.PURHONY);
+			addButton(5, "ProBova", giveItem, consumables.PROBOVA);
+			addButton(6, "P.Draft", giveItem, consumables.P_DRAFT);
+			addButton(7, "P.S.Mlk", giveItem, consumables.P_S_MLK);
+			addButton(8, "PSDelit", giveItem, consumables.PSDELIT);
 			
 			addButton(4, "Page 4/6", itemSpawnTransformativesMenuV);
 			addButton(9, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuV():void {
 			menu();
-			addButton(0, "S.Delite", giveItem, consumables.SDELITE);
-			addButton(1, "S.Dream", giveItem, consumables.S_DREAM);
-			addButton(2, "SucMilk", giveItem, consumables.SUCMILK);
-			addButton(3, "Reptilum", giveItem, consumables.REPTLUM);
+			addButton(0, "PurHony", giveItem, consumables.PURHONY);
+			addButton(1, "S.Delite", giveItem, consumables.SDELITE);
+			addButton(2, "S.Dream", giveItem, consumables.S_DREAM);
+			addButton(3, "SucMilk", giveItem, consumables.SUCMILK);
 			
-			addButton(5, "RingFig", giveItem, consumables.RINGFIG);
-			addButton(6, "Rizza Root", giveItem, consumables.RIZZART);
-			addButton(7, "S.Gossr", giveItem, consumables.S_GOSSR);
-			addButton(8, "Shark.T", giveItem, consumables.SHARK_T);
+			addButton(5, "Reptilum", giveItem, consumables.REPTLUM);
+			addButton(6, "RingFig", giveItem, consumables.RINGFIG);
+			addButton(7, "Rizza Root", giveItem, consumables.RIZZART);
+			addButton(8, "S.Gossr", giveItem, consumables.S_GOSSR);
 			
 			addButton(4, "Page 5/6", itemSpawnTransformativesMenuVI);
 			addButton(9, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuVI():void {
 			menu();
-			addButton(0, "SnakOil", giveItem, consumables.SNAKOIL);
-			addButton(1, "TrapOil", giveItem, consumables.TRAPOIL);
-			addButton(2, "TScroll", giveItem, consumables.TSCROLL);
-			addButton(3, "TSTooth", giveItem, consumables.TSTOOTH);
+			addButton(0, "Shark.T", giveItem, consumables.SHARK_T);
+			addButton(1, "SnakOil", giveItem, consumables.SNAKOIL);
+			addButton(2, "TrapOil", giveItem, consumables.TRAPOIL);
+			addButton(3, "TScroll", giveItem, consumables.TSCROLL);
 			
-			addButton(5, "VixVigr", giveItem, consumables.VIXVIGR);
-			addButton(6, "W.Fruit", giveItem, consumables.W_FRUIT);
-			addButton(7, "WetClth", giveItem, consumables.WETCLTH);
+			addButton(5, "TSTooth", giveItem, consumables.TSTOOTH);
+			addButton(6, "VixVigr", giveItem, consumables.VIXVIGR);
+			addButton(7, "W.Fruit", giveItem, consumables.W_FRUIT);
+			addButton(8, "WetClth", giveItem, consumables.WETCLTH);
 			
 			addButton(4, "Page 6/6", itemSpawnTransformativesMenuI);
 			addButton(9, "Back", itemSpawnMenu);			
@@ -212,6 +213,7 @@ package classes.Scenes
 			addButton(5, "NPnkEgg", giveItem, consumables.NPNKEGG);
 			addButton(6, "DrgnEgg", giveItem, consumables.DRGNEGG);
 			addButton(7, "Condom", giveItem, useables.CONDOM_);
+			addButton(8, "MilkPtn", giveItem, consumables.MILKPTN);
 			
 			addButton(4, "Page 5/7", itemSpawnConsumablesMenuVI);
 			addButton(9, "Back", itemSpawnMenu);
@@ -284,7 +286,7 @@ package classes.Scenes
 			addButton(0, "BimboLq", giveItem, consumables.BIMBOLQ);
 			addButton(1, "BroBrew", giveItem, consumables.BROBREW);
 			addButton(2, "GldStat", giveItem, useables.GLDSTAT);
-			addButton(3, "Hummus", giveItem, consumables.HUMMUS_);
+			addButton(3, "S.Hummus", giveItem, consumables.HUMMUS2);
 			
 			addButton(5, "P.Pearl", giveItem, consumables.P_PEARL);
 			
@@ -326,12 +328,13 @@ package classes.Scenes
 			menu();
 			addButton(0, "S.Gauntlet", giveItem, weapons.S_GAUNT);
 			addButton(1, "ScarBlade", giveItem, weapons.SCARBLD);
-			addButton(2, "Spear", giveItem, weapons.SPEAR);
-			addButton(3, "SucWhip", giveItem, weapons.SUCWHIP);
+			addButton(2, "Scimitar", giveItem, weapons.SCIMITR);
+			addButton(3, "Spear", giveItem, weapons.SPEAR);
 			
-			addButton(5, "W.Staff", giveItem, weapons.W_STAFF);
-			addButton(6, "Warhammer", giveItem, weapons.WARHAMR);
-			addButton(7, "Whip", giveItem, weapons.WHIP);
+			addButton(5, "SucWhip", giveItem, weapons.SUCWHIP);
+			addButton(6, "W.Staff", giveItem, weapons.W_STAFF);
+			addButton(7, "Warhammer", giveItem, weapons.WARHAMR);
+			addButton(8, "Whip", giveItem, weapons.WHIP);
 			
 			
 			addButton(4, "Page 3/3", itemSpawnWeaponsMenuI);
@@ -481,6 +484,7 @@ package classes.Scenes
 			outputText("TEST STUFFZ", true);
 			addButton(0, "HackSideBar", mainHack.refreshStats);
 			addButton(1, "ASPLODE", styleHackMenu);
+			addButton(2, "Advance Minute", cheatTime, 0.25);
 			addButton(9, "Back", accessDebugMenu);
 		}
 		

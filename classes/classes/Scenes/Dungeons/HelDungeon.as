@@ -425,6 +425,15 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>Anyway, Miss Helia asked me to help you any way I can, so... I guess, just ask me if you need anything.</i>\"");
 			cleanupAfterCombat();
 		}
+		
+		//Kiri Interactions
+		public function kiriInteraction():void {
+			menu()
+			addButton(0, "Talk", talkToKiri);
+			addButton(1, "Sex", kiriSexIntro);
+			addButton(4, "Back", roomStairwell);
+		}
+		
 		//Kiri -- [Talk]
 		public function talkToKiri():void {
 			clearOutput();
@@ -520,6 +529,7 @@ package classes.Scenes.Dungeons
 
 			outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
 			player.orgasm();
+			cheatTime(1/3, true);
 			doNext(1);
 		}
 
@@ -535,6 +545,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou cannot resist her skillful tongue-fuck for long.  Grabbing Kiri's head, you force her face into your crotch, getting every last bit of her tongue inside you as you can as you climax, spraying your fem-cum all across her face.");
 			outputText("\n\nUtterly satisfied, you stagger back from Kiri, letting her whip her head around to flick off your fem-cum.  You clean yourself off and suit up again.");
 			player.orgasm();
+			cheatTime(1/3, true);
 			doNext(1);
 		}
 
@@ -811,13 +822,6 @@ package classes.Scenes.Dungeons
 			doNext(1);
 		}
 
-		public function kiriInteraction():void {
-			menu()
-			addButton(0, "Talk", talkToKiri);
-			addButton(1, "Sex", kiriSexIntro);
-			addButton(4, "Back", roomStairwell);
-		}
-
 		//HARPY QUEEN -- PC DEFEATED
 		public function harpyQueenBeatsUpPCBadEnd():void {
 			clearOutput();
@@ -842,7 +846,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nThe Harpy Queen stretches her wings wide as she steps away from Hel, now already being mounted by one of the Queen's daughters, and saunters over to you, salamander seed still freely leaking from her gaping egg-hole. She cups your cheek, sliding her long fingers across your sensitive, thoroughly drugged skin. Your entire body tingles as she smiles upon you, barely aware of the half-dozen sluts slurping at your spent seed as one of her daughters forces herself onto your enhanced member.");
 			outputText("\n\n\"<i>You've been a good stud since you came to me, [name],</i>\" the Queen laughs airily, patting your swollen nuts.  \"<i>The size of my brood has quadrupled since you and Hel 'volunteered' to help us.  Mmm, a free Mareth will surely have you to thank for the army that will liberate it from the demons.  You might even be something of a hero, if you want. The Champion of Free Mareth, if you will.  That wouldn't be so bad, would it?  After all, that's why you came here...</i>\"");
 			outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
-			eventParser(5035);
+			doBadEnd();
 		}
 
 		//HARPY QUEEN -- PC VICTORIOUS
@@ -1054,6 +1058,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nSpent, you pull out of the broodmother's now-gaping asshole.  Her huge asscheeks, however, bottle up your load inside her, preventing it from pooling out.  Laughing, you squeeze her squishy ass one last time before Hel rolls her over and pins her again.");
 			//(Return to normal room menu)
 			player.orgasm();
+			cheatTime(1/3, true);
 			doNext(1);
 		}
 
@@ -1087,6 +1092,7 @@ package classes.Scenes.Dungeons
 			}
 			outputText("\n\nAfter a fuck like that, the broodmother will be laying a clutch of your eggs in no time.");
 			player.orgasm();
+			cheatTime(1/3, true);
 			doNext(1);
 		}
 
@@ -1163,7 +1169,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.tooltipLoc = "Valeria"
 			outputText("<b><u>Guard Hall</u></b>\n", true);
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
-			dungeons.setDungeonButtons(true, roomStairwell, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(roomStairwell, null, null, null);
 			//[If Armor has not been taken/fought with: 
 			if(flags[kFLAGS.WON_GOO_ARMOR_FIGHT] + flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] == 0) {
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) {
@@ -1184,7 +1190,7 @@ package classes.Scenes.Dungeons
 		public function roomCellar():void {
 			kGAMECLASS.dungeonLoc = 18;
 			outputText("<b><u>Wine Cellar</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(null, null, null, null);
 			//(Accessed from the Trapdoor button)
 			outputText("You've dropped down into a small underground hidey-hole, with ");
 			if(player.tallness < 60) outputText("just enough room to stand up in");
@@ -1202,7 +1208,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.tooltipLoc = "Harpies";
 			clearOutput();
 			outputText("<b><u>Stair Well</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, true, roomGuardHall, false, null, false, null);
+			dungeons.setDungeonButtons(null, roomGuardHall, null, null);
 			if(flags[kFLAGS.HEL_HARPIES_DEFEATED] == 0) {
 				outputText("You open the heavy double doors and cringe as a loud \"<i>SCREECH!</i>\" echoes out and up the next room - a wide open stairwell, it seems, with minimal cover.  The perfect place for a harpy to fight... Oh, shit!");
 				outputText("\n\nYou ready your [weapon] as a wing of harpies looks up from eating at a small table in the center of the stone stairwell, all staring at you with wide, astonished eyes.  Another few harpies peer down from above, poking their heads down the stairs to get a look at the intruder.  Almost in unison, they jump to their feet and bare their claws.");
@@ -1230,7 +1236,7 @@ package classes.Scenes.Dungeons
 		public function roomDungeon():void {
 			kGAMECLASS.dungeonLoc = 20;
 			outputText("<b><u>Dungeon</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro -- Before Fight)
 			if(flags[kFLAGS.HEL_BRIGID_DEFEATED] == 0) {
 				outputText("You make your way downstairs into a small, smoky stone room.  A thick smell of steam and burnt meat hangs over the room, making you cough as you descend the stairs.  As you make your way into the tower's little dungeon, you quickly notice the salamander chained to a table.  He's a great big man, nearly eight feet tall and covered in scars.  He has short, spiky red hair, the same color as his tail and limb scales, and a black eyepatch covers his left socket.  He looks like hell, emaciated and exhausted, covered in thick cum-stains from being used an untold number of times by the harpies of the tower.");
@@ -1266,7 +1272,7 @@ package classes.Scenes.Dungeons
 		public function roomMezzanine():void {
 			kGAMECLASS.dungeonLoc = 21;
 			outputText("<b><u>Mezzanine</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro; Before Battle)
 			if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
 				outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
@@ -1289,7 +1295,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 22;
 			kGAMECLASS.tooltipLoc = "HarpyQueen";
 			outputText("<b><u>Throne Room</u></b>\n", true);
-			dungeons.setDungeonButtons(false, null, false, null, false, null, false, null);
+			dungeons.setDungeonButtons(null, null, null, null);
 			//Throne Room Descript (Before Combat!)
 			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
 				outputText("Ascending the stairs, you are stopped by a pair of heavy double doors.  They're covered with rotting, chipped purple paint and laurels that look years old.  The sharp, screeching sounds of metal on metal ring out in the next room - the sounds of a fight!  You kick the door open, and charge into what must be some kind of throne room; a large carpet dominates your view, leading up to a towering throne surrounded by pillows and cushions, currently vacant.");

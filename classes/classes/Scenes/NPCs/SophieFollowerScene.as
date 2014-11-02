@@ -246,6 +246,7 @@ public function sophieDaughterDebimboUpdate():void {
 
 //BimboBody Sophie Follower, Main Screen
 public function followerSophieMainScreen():void {
+	kGAMECLASS.tooltipLoc = "Sophie";
 	clearOutput();
 	sophieBimbo.sophieSprite();
 	//Sophie is in season
@@ -258,6 +259,7 @@ public function followerSophieMainScreen():void {
 		else outputText("she's quite skilled at it");
 		outputText(".  \"<i>Ohhh, come on, [name]!  Just give it to me like a good " + player.mf("boy","girl") + ", would you?  I could even give you a special treat.  <b>Just give. It. To. Me.</b></i>\"");
 		outputText("\n\nYou guess there's no way Sophie would really accept any non-impregnating kind of sex right now, but you could refuse... or pick that special treat over your usual sex.");
+		dynStats("lus", 20);
 		//[Vaginal][Special]
   		//[Vaginal] → Leads to the \"fertile\" variation of vaginal smex!
 		//[Special]

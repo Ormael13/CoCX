@@ -87,7 +87,7 @@ package classes.Scenes.Dungeons.HelDungeon
 
 				outputText("\n\nKiri frowns unhappily as she slips your cock from her pussy, then kisses you.  \"<i>Remember, [name]... just hold on!  And... save some of your seed for me!</i>\"  She lingers for a while, looking in your eyes affectionately, but Brigid grabs her by the hair and, swearing filthily, pulls her away.  A sadistic-looking phoenix takes her place, straddling you and slipping your sore prick into her cunt... the last thing you manage to do before your head is filled with the agony and ecstasy of having your raw shaft ridden again right after orgasm is to wonder exactly how long salamander-harpy half-breeds gestate...");
 				//[GAME THE FUCK OVER, SON; WHERE IS MY MONEY?]
-				eventParser(5035);
+				doBadEnd();
 			}
 			//(else if not visibly pregnant F or H)
 			else {
@@ -113,7 +113,7 @@ package classes.Scenes.Dungeons.HelDungeon
 				if(player.hasCock()) outputText(" as the phoenix's cunt slides onto your [cock smallest]");
 				outputText(".  Brigid makes her way up the stairs, leaving you and the others at the mercy of the assorted horde.  The harpy rides your mouth greedily, knocking your head into the hard stone floor, and the last thing you can see around her feathery thighs before you slip into unconsciousness again is Kiri being pulled roughly from her resting place atop Hel by a mean-looking, wide-hipped harpy matron who takes her place, sitting sideways and drawing her talons sadistically across Hel's vulnerable chest to smear Kiri's seed around...");
 				//[GAME OVER, MOTHERFUCKER]
-				eventParser(5035);
+				doBadEnd();
 			}
 		}
 

@@ -1,8 +1,10 @@
 package classes.Scenes.Dungeons.Factory
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Dungeons.Factory;
+	import classes.Scenes.Dungeons.LethiceCastle;
 	import classes.internals.*;
 	import flash.display.InteractiveObject;
 
@@ -24,20 +26,23 @@ package classes.Scenes.Dungeons.Factory
 			}
 			//Fall down go boom
 			else {
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
+				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids. ");
 				if(player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
+					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire. ");
 					game.dynStats("lus", 13, "cor", 1);
+					if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) game.dynStats("lus", 10);
 				}
 				else {
 					if(player.lust >= 50 || player.cor >= 50) {
-						outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-						game.dynStats("lus", 8 + player.cor/20);
+						outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like. ");
+						game.dynStats("lus", 8 + player.cor / 20);
+						if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) game.dynStats("lus", 15);
 						
 					}
 					else {
-						outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".");
-						game.dynStats("lus", 5 + player.cor/20);
+						outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ". ");
+						game.dynStats("lus", 5 + player.cor / 20);
+						if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) game.dynStats("lus", 15);
 					}
 				}
 				var damage:Number = 5;
@@ -77,6 +82,7 @@ package classes.Scenes.Dungeons.Factory
 				if(player.hasFuckableNipples()) {
 					outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 					game.dynStats("lus", 3);
+					if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) game.dynStats("lus", 15);
 					if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
 					else player.addStatusValue(StatusAffects.DemonSeed,1,8);
 					player.slimeFeed();
@@ -86,8 +92,9 @@ package classes.Scenes.Dungeons.Factory
 			//Crotch
 			if(temp == 2) {
 				if(player.vaginas.length > 0) {
-					outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
+					outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript() + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
 					game.dynStats("lus", 3);
+					if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) game.dynStats("lus", 15);
 					if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
 					else player.addStatusValue(StatusAffects.DemonSeed,1,8);
 					player.slimeFeed();
@@ -101,36 +108,47 @@ package classes.Scenes.Dungeons.Factory
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(player.gender == 0) {
-				if (hpVictory){
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
-				} else {
-					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
+			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] == 0) {
+				if(player.gender == 0) {
+					if (hpVictory){
+						outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
+					} 
+					else {
+						outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
+					}
+					game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
 				}
-				game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
+				else {
+					if (hpVictory) {
+						outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
+						game.dynStats("lus", 1);
+						game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
+					} 
+					else {
+						outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
+						var temp2:Function = null;
+						if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
+						game.dynStats("lus", 1);
+						game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
+					}
+				}
 			}
 			else {
-				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
-					game.dynStats("lus", 1);
-					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
-				} else {
-					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
-					var temp2:Function = null;
-					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
-					game.dynStats("lus", 1);
-					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
-				}
+				game.dungeons.lethicecastle.incubusMechanic.incubusDefeated();
 			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
-				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] == 0) {
+				if(pcCameWorms){
+					outputText("\n\nYour foe doesn't seem to care...");
+					doNext(game.endLustLoss);
+				} else {
+					factory.doLossIncubus();
+				}
 			} else {
-				factory.doLossIncubus();
+				game.dungeons.lethicecastle.incubusMechanic.loseToIncubus();
 			}
 		}
 
@@ -169,8 +187,19 @@ package classes.Scenes.Dungeons.Factory
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 8;
+			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) {
+				this.level = 20;
+				this.additionalXP = 150;
+				this.bonusHP = 750;
+				this.weaponAttack = 30;
+				initStrTouSpeInte(85, 60, 65, 105);
+				initLibSensCor(80, 70, 80);
+				this.drop = NO_DROP;
+			}
+			else {
+				this.drop = new WeightedDrop(consumables.GROPLUS, 1);
+			}
 			this.gems = rand(25)+10;
-			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.special1 = cocktripAttack;
 			this.special2 = cumCannon;
 			this.tailType = TAIL_TYPE_DEMONIC;

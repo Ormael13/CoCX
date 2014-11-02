@@ -4,6 +4,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.ArmorLib;
 	import classes.Items.ConsumableLib;
+	import classes.Items.JewelryLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
@@ -69,6 +70,9 @@
 		}
 		protected function get armors():ArmorLib{
 			return game.armors;
+		}
+		protected function get jewelries():JewelryLib{
+			return game.jewelries;
 		}
 		//For enemies
 		public var bonusHP:Number = 0;
@@ -138,7 +142,10 @@
 
 		public function eMaxHP():Number
 		{
-			return this.tou * 2 + 50 + this.bonusHP;
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) return this.tou * 2 + 50 + this.bonusHP;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) return this.tou * 2.5 + 75 + (this.bonusHP * 1.25);
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) return this.tou * 3 + 100 + (this.bonusHP * 1.5);
+			else  return this.tou * 4 + 200 + (this.bonusHP * 2);
 		}
 
 		public function addHP(hp:Number):void{

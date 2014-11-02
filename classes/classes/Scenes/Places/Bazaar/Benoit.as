@@ -460,7 +460,7 @@ public function updateBenoitInventory():void {
 	}
 	
 	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
-	temp = rand(7);
+	temp = rand(9);
 	if(temp == 0) flags[kFLAGS.BENOIT_2] = consumables.SUCMILK.id;
 	else if(temp == 1) flags[kFLAGS.BENOIT_2] = consumables.W_FRUIT.id;
 	else if(temp == 2) flags[kFLAGS.BENOIT_2] = consumables.WETCLTH.id;
@@ -468,6 +468,7 @@ public function updateBenoitInventory():void {
 	else if(temp == 4) flags[kFLAGS.BENOIT_2] = consumables.LABOVA_.id;
 	else if(temp == 5) flags[kFLAGS.BENOIT_2] = consumables.SNAKOIL.id;
 	else if(temp == 6) flags[kFLAGS.BENOIT_2] = consumables.S_GOSSR.id;
+	else if(temp == 7) flags[kFLAGS.BENOIT_2] = consumables.HUMMUS_.id;
 	else flags[kFLAGS.BENOIT_2] = consumables.B_GOSSR.id;
 	
 	//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.

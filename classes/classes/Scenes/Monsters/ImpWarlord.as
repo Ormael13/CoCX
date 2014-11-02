@@ -1,11 +1,24 @@
 package classes.Scenes.Monsters 
 {
-	/**
-	 * ...
-	 * @author Kitteh6660
-	 */
+	import classes.*;
+	import classes.internals.*;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
+	
 	public class ImpWarlord extends Imp
 	{
+		
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
+			game.impScene.defeatImpLord();
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.impScene.loseToAnImpLord();
+		}
 		
 		public function ImpWarlord() 
 		{
@@ -13,7 +26,7 @@ package classes.Scenes.Monsters
 			this.a = "the ";
 			this.short = "imp warlord";
 			this.imageName = "impwarlord";
-			this.long = "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has a black hair on his head and his eyes are deep black.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nUnlike most imps, he is wearing a metal chestplate for protection. He doesn't appear to be wearing anything other than his armor and loincloth.  He wields a sword in his right hand and he doesn't appear to wield anything in his left hand, suggesting that he also attacks with his claws.";
+			this.long = "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has a black hair on his head and his eyes are deep black.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller than the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nUnlike most imps, he is wearing a metal chestplate and bracers for protection. He doesn't appear to be wearing anything other than his armor and loincloth.  He wields a sword in his right hand and he doesn't appear to wield anything in his left hand, suggesting that he also attacks with his claws.";
 			// this.plural = false;
 			// Imps now only have demon dicks.
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
@@ -42,7 +55,7 @@ package classes.Scenes.Monsters
 			this.lust = 30;
 			this.lustVuln = .4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 14;
+			this.level = 16;
 			this.gems = rand(20) + 40;
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,1).

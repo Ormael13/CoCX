@@ -105,7 +105,6 @@ package classes
 			
 		}
 		
-		
 		//Hide hunger bar, necessary if either of the 2 conditions happen: We either switch to the old interface or we have hunger disabled.
 		public function hideHungerBar():void {
 			if (mainView.statsView.getChildByName("hungerBar") != null) {
@@ -151,17 +150,6 @@ package classes
 		}
 		
 		public function refreshStats():void {
-			if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1) {
-				hideHungerBar();
-				hideExperienceBar();
-				hideMinLustBar();
-				return;
-			}
-			else {
-				showHungerBar();
-				showExperienceBar();
-				showMinLustBar();			
-			}
 			var posOffset:Number = 14;
 			var posTextOffset:Number = 18;
 			var arrowXOffset:Number = 3;
@@ -172,11 +160,31 @@ package classes
 			var universalAlpha:Number = 0.4;
 			var gapDiff:Number = 30;
 			
+			if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1) {
+				posOffset = 10;
+				posTextOffset = 28;
+				basePos2 = 400;
+				baseWidth = 115;
+				baseHeight = 22;
+				universalAlpha = 1;
+				gapDiff = 40;
+				hideHungerBar();
+				hideExperienceBar();
+				hideMinLustBar();
+				//return;
+			}
+			else {
+				showHungerBar();
+				showExperienceBar();
+				showMinLustBar();			
+			}
+
 			if (!reassigned){
 				reassignParents();
 				reassignIndex();
 				reassigned = true;
 			}
+
 			//Set bars
 			mainView.strBar.width = (player.str * (baseWidth / player.getMaxStats("str")));
 			mainView.strBar.height = baseHeight;
@@ -257,28 +265,31 @@ package classes
 			mainView.corText.y = basePos + (gapDiff * 7) - posTextOffset;
 			mainView.corNum.y = basePos + (gapDiff * 7) - posTextOffset;
 			
-			mainView.HPNum.x = 31;
-			mainView.HPNum.width = 140;
-			mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(player.maxHP());
+			mainView.HPNum.x = 1;
+			mainView.HPNum.width = 170;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(player.maxHP());
+			else mainView.HPNum.text = "" + Math.floor(player.HP);
 			mainView.HPNum.y = basePos2 + (gapDiff * 1) - posTextOffset;
 			mainView.HPText.y = basePos2 + (gapDiff * 1) - posTextOffset;
 			
-			mainView.lustNum.x = 31;
-			mainView.lustNum.width = 140;
-			mainView.lustNum.text = Math.floor(player.lust) + "/" + 100;
+			mainView.lustNum.x = 1;
+			mainView.lustNum.width = 170;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.lustNum.text = Math.floor(player.lust) + "/" + 100;
+			else mainView.lustNum.text = "" + Math.floor(player.lust);
 			mainView.lustNum.y = basePos2 + (gapDiff * 2) - posTextOffset;
 			mainView.lustText.y = basePos2 + (gapDiff * 2) - posTextOffset;
 			
-			mainView.fatigueNum.x = 31;
-			mainView.fatigueNum.width = 140;
-			mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + 100;
+			mainView.fatigueNum.x = 1;
+			mainView.fatigueNum.width = 170;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + 100;
+			else Math.floor(player.fatigue);
 			mainView.fatigueNum.y = basePos2 + (gapDiff * 3) - posTextOffset;
 			mainView.fatigueText.y = basePos2 + (gapDiff * 3) - posTextOffset;
 			
-			if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75 && flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
 				showHungerBar();
-				mainView.hungerNum.x = 31;
-				mainView.hungerNum.width = 140;
+				mainView.hungerNum.x = 1;
+				mainView.hungerNum.width = 170;
 				mainView.hungerNum.text = Math.floor(player.hunger) + "/" + 100;
 				mainView.hungerNum.y = basePos2 + (gapDiff * 5) - posTextOffset;
 				mainView.hungerText.x = 6;
@@ -288,12 +299,12 @@ package classes
 				hideHungerBar();
 			}
 			
-			mainView.xpNum.x = 31;
-			mainView.xpNum.width = 140;
+			mainView.xpNum.x = 1;
+			mainView.xpNum.width = 170;
 			mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.level * 100);
 			
-			mainView.gemsNum.x = 31;
-			mainView.gemsNum.width = 140;
+			mainView.gemsNum.x = 1;
+			mainView.gemsNum.width = 170;
 			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
 			
 			//Re-position arrows
@@ -343,22 +354,43 @@ package classes
 			mainView.hungerDown.x = mainView.hungerNum.x + mainView.hungerNum.width + arrowXOffset;
 			mainView.hungerDown.y = mainView.hungerNum.y;
 			
-			//Get rid of the space before colon.
-			mainView.strText.text = "Strength:";
-			mainView.touText.text = "Toughness:";
-			mainView.speText.text = "Speed:";
-			mainView.inteText.text = "Intelligence:";
-			mainView.libText.text = "Libido:";
-			mainView.senText.text = "Sensitivity:";
-			mainView.corText.text = "Corruption:";
-			
-			mainView.HPText.text = "HP:";
-			mainView.HPText.width = 50;
-			mainView.lustText.text = "Lust:";
-			mainView.lustText.width = 50;
-			mainView.fatigueText.text = "Fatigue:";
-			mainView.fatigueText.width = 80;
-			
+			//Re-position time display
+			mainView.timeBG.x = 0;
+			mainView.timeBG.y = 654;
+			mainView.timeText.x = 4;
+			mainView.timeText.y = 654;
+
+			//Get rid of the space before colon. (For new)
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
+				mainView.strText.text = "Strength:";
+				mainView.touText.text = "Toughness:";
+				mainView.speText.text = "Speed:";
+				mainView.inteText.text = "Intelligence:";
+				mainView.libText.text = "Libido:";
+				mainView.senText.text = "Sensitivity:";
+				mainView.corText.text = "Corruption:";
+				mainView.HPText.text = "HP:";
+				mainView.HPText.width = 50;
+				mainView.lustText.text = "Lust:";
+				mainView.lustText.width = 50;
+				mainView.fatigueText.text = "Fatigue:";
+				mainView.fatigueText.width = 80;
+			} else {
+				mainView.strText.text = "Strength    :";
+				mainView.touText.text = "Toughness   :";
+				mainView.speText.text = "Speed       :";
+				mainView.inteText.text = "Intelligence:";
+				mainView.libText.text = "Libido      :";
+				mainView.senText.text = "Sensitivity :";
+				mainView.corText.text = "Corruption  :";
+				mainView.HPText.text = "HP          :";
+				mainView.HPText.width = 130;
+				mainView.lustText.text = "Lust        :";
+				mainView.lustText.width = 130;
+				mainView.fatigueText.text = "Fatigue     :";
+				mainView.fatigueText.width = 130;
+			}
+
 			mainView.levelText.text = "Level:"
 			mainView.levelText.width = 60;
 			mainView.xpText.text = "XP:"
@@ -369,11 +401,27 @@ package classes
 			mainView.hungerText.width = 70;
 			
 			mainView.coreStatsText.htmlText = "Name: " + player.short + "\nCore Stats";
-			mainView.combatStatsText.y = basePos2 - posTextOffset;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.combatStatsText.y = basePos2 - posTextOffset;
+			else mainView.combatStatsText.y = basePos2 - 8;
 			//Smoothes the text, currently inoperational and thus disabled.
 			//mainView.timeText.antiAliasType = AntiAliasType.NORMAL;
-			mainView.timeText.htmlText = "<u>Day#: " + model.time.days + "</u>\nTime: " + model.time.hours + ":00";
-			
+			var minutesDisplay:String = "";
+			if (model.time.minutes < 10) minutesDisplay = "0" + model.time.minutes;
+			else minutesDisplay = "" + model.time.minutes;
+			mainView.timeText.htmlText = "<u>Day#: " + model.time.days + "</u>\n";
+			if (flags[kFLAGS.USE_12_HOURS] == 0) {
+				mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "";
+			}
+			else {
+				if (model.time.hours < 12) {
+					if (model.time.hours == 0) mainView.timeText.htmlText += "Time: " + (model.time.hours + 12) + ":" + minutesDisplay + "am";
+					else mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "am";
+				}
+				else {
+					if (model.time.hours == 12) mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "pm";
+					else mainView.timeText.htmlText += "Time: " + (model.time.hours - 12) + ":" + minutesDisplay + "pm";
+				}
+			}
 		}
 	}
 }

@@ -291,6 +291,16 @@ package classes.Scenes.Areas
 						kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 						return;
 					}
+					//Goblin warrior!
+					if (player.level >= 12 && rand(2) == 0) {
+						kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+						return;
+					}
+					//Goblin shaman!
+					if (player.level >= 12 && rand(2) == 0) {
+						kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+						return;
+					}
 					if (player.gender > 0) {
 						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
 						outputText(".</i>\"", false);

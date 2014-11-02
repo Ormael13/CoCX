@@ -19,11 +19,16 @@ package classes.Scenes.Areas
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		public var phoukaScene:PhoukaScene = new PhoukaScene();
+		public var lizanScene:LizanRogueScene = new LizanRogueScene();
 		public function Bog()
 		{
 		}
 		public function exploreBog():void
 		{
+			var chooser:int = rand(5);
+			if (chooser == 0) {
+				if (player.buttPregnancyIncubation != 0) chooser++;
+			}
 			flags[kFLAGS.BOG_EXPLORED]++;
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
@@ -34,9 +39,18 @@ package classes.Scenes.Areas
 				phoukaScene.phoukaHalloween(); //Must have met them enough times to know what they're called, have some idea of their normal behaviour
 				return;
 			}
-			if (player.buttPregnancyIncubation == 0 && rand(3) == 0) frogGirlScene.findTheFrogGirl();
-            else if (rand(3) == 0) phoukaScene.phoukaEncounter();
-			else if (rand(2) == 0) chameleonGirlScene.encounterChameleon();
+			if (chooser == 0) {
+				frogGirlScene.findTheFrogGirl();
+			}
+			else if (chooser == 1) {
+				phoukaScene.phoukaEncounter();
+			}
+			else if (chooser == 2) {
+				chameleonGirlScene.encounterChameleon();
+			}
+			else if (chooser == 3) {
+				lizanScene.lizanIntro();
+			}
 			else {
 				clearOutput();
 				outputText("You wander around through the humid muck, but you don't run into anything interesting.");
